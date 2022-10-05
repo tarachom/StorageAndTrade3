@@ -1,2 +1,11 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using Gtk;
+
+class Program 
+{
+    public static void Main()
+    {
+        Application.Init();
+        new ConfigurationSelectionForm();
+        Application.Run();
+    }
+}
