@@ -5,6 +5,7 @@ using System.IO;
 class FormConfigurationSelection : Window
 {
     ListBox listBoxDataBase;
+    ScrolledWindow scrolledWindowListBox;
 
     public FormConfigurationSelection() : base("Зберігання та Торгівля для України | Вибір бази даних")
     {
@@ -14,7 +15,7 @@ class FormConfigurationSelection : Window
 
         Fixed fix = new Fixed();
 
-        ScrolledWindow scrolledWindowListBox = new ScrolledWindow();
+        scrolledWindowListBox = new ScrolledWindow();
         scrolledWindowListBox.SetSizeRequest(500, 300);
         scrolledWindowListBox.ShadowType = ShadowType.In;
         scrolledWindowListBox.SetPolicy(PolicyType.Never, PolicyType.Automatic);
@@ -103,6 +104,8 @@ class FormConfigurationSelection : Window
             ListBoxRow row = (ListBoxRow)listBoxDataBase.Children[0];
             listBoxDataBase.SelectRow(row);
         }
+
+        //scrolledWindowListBox.Vadjustment.Value = scrolledWindowListBox.Vadjustment.Upper;
     }
 
     void OnButtonOpenClicked(object? sender, EventArgs args)
@@ -112,11 +115,12 @@ class FormConfigurationSelection : Window
         if (selectedRows.Length != 0)
         {
             Hide();
-
+ 
             ConfigurationParamCollection.SelectConfigurationParam(selectedRows[0].Name);
             ConfigurationParamCollection.SaveConfigurationParamFromXML(ConfigurationParamCollection.PathToXML);
-            
+
             FormStorageAndTrade storageAndTrade = new FormStorageAndTrade();
+            storageAndTrade.OpenConfigurationParam = ConfigurationParamCollection.GetConfigurationParam(selectedRows[0].Name);
             storageAndTrade.Show();
         }
     }
