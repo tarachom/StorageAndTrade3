@@ -3727,7 +3727,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             if (BaseRead(uid))
             {
-                Назва = base.FieldValue["col_a1"].ToString();
+                Назва = base.FieldValue["col_a1"]?.ToString();
                 Код = base.FieldValue["col_a2"].ToString();
                 НазваПовна = base.FieldValue["col_a3"].ToString();
                 НазваСкорочена = base.FieldValue["col_a4"].ToString();

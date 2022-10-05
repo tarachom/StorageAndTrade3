@@ -243,7 +243,7 @@ ORDER BY Назва
 LIMIT 10
 ";
 
-        public static string ХарактеристикаНоменклатуриЗВідбором(Довідники.Номенклатура_Pointer Номенклатура = null)
+        public static string ХарактеристикаНоменклатуриЗВідбором(Довідники.Номенклатура_Pointer? Номенклатура = null)
         {
             string query = $@"
 SELECT 
