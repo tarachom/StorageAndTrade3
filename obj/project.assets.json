@@ -79,6 +79,18 @@
           "build/GtkSharp.targets": {}
         }
       },
+      "Npgsql/6.0.6": {
+        "type": "package",
+        "dependencies": {
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0"
+        },
+        "compile": {
+          "lib/net6.0/Npgsql.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/Npgsql.dll": {}
+        }
+      },
       "PangoSharp/3.24.24.38": {
         "type": "package",
         "dependencies": {
@@ -90,6 +102,31 @@
         },
         "runtime": {
           "lib/net6.0/PangoSharp.dll": {}
+        }
+      },
+      "System.Runtime.CompilerServices.Unsafe/6.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/System.Runtime.CompilerServices.Unsafe.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/System.Runtime.CompilerServices.Unsafe.dll": {}
+        },
+        "build": {
+          "buildTransitive/netcoreapp3.1/_._": {}
+        }
+      },
+      "AccountingSoftware/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "Npgsql": "6.0.6"
+        },
+        "compile": {
+          "bin/placeholder/AccountingSoftware.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/AccountingSoftware.dll": {}
         }
       }
     }
@@ -174,6 +211,29 @@
         "lib/netstandard2.0/GtkSharp.dll"
       ]
     },
+    "Npgsql/6.0.6": {
+      "sha512": "IIwnoJp0sFkhAydT/KKe/0NhlJKhYPIrXSE95AuU/2dqHNI9alxvjClJSGL+QE8NGqq1SFn+NenxVtm/JYsrJg==",
+      "type": "package",
+      "path": "npgsql/6.0.6",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "lib/net5.0/Npgsql.dll",
+        "lib/net5.0/Npgsql.xml",
+        "lib/net6.0/Npgsql.dll",
+        "lib/net6.0/Npgsql.xml",
+        "lib/netcoreapp3.1/Npgsql.dll",
+        "lib/netcoreapp3.1/Npgsql.xml",
+        "lib/netstandard2.0/Npgsql.dll",
+        "lib/netstandard2.0/Npgsql.xml",
+        "lib/netstandard2.1/Npgsql.dll",
+        "lib/netstandard2.1/Npgsql.xml",
+        "npgsql.6.0.6.nupkg.sha512",
+        "npgsql.nuspec",
+        "postgresql.png"
+      ]
+    },
     "PangoSharp/3.24.24.38": {
       "sha512": "NpTRGMOJvxJwRIEXV0hyAnFt26mLYwGu70TLCZecXwWgdQx87HWsAUWgzjL8atdExquebSBumKP6cZjkEAQuaA==",
       "type": "package",
@@ -186,10 +246,41 @@
         "pangosharp.3.24.24.38.nupkg.sha512",
         "pangosharp.nuspec"
       ]
+    },
+    "System.Runtime.CompilerServices.Unsafe/6.0.0": {
+      "sha512": "/iUeP3tq1S0XdNNoMz5C9twLSrM/TH+qElHkXWaPvuNOt+99G75NrV0OS2EqHx5wMN7popYjpc8oTjC1y16DLg==",
+      "type": "package",
+      "path": "system.runtime.compilerservices.unsafe/6.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "buildTransitive/netcoreapp2.0/System.Runtime.CompilerServices.Unsafe.targets",
+        "buildTransitive/netcoreapp3.1/_._",
+        "lib/net461/System.Runtime.CompilerServices.Unsafe.dll",
+        "lib/net461/System.Runtime.CompilerServices.Unsafe.xml",
+        "lib/net6.0/System.Runtime.CompilerServices.Unsafe.dll",
+        "lib/net6.0/System.Runtime.CompilerServices.Unsafe.xml",
+        "lib/netcoreapp3.1/System.Runtime.CompilerServices.Unsafe.dll",
+        "lib/netcoreapp3.1/System.Runtime.CompilerServices.Unsafe.xml",
+        "lib/netstandard2.0/System.Runtime.CompilerServices.Unsafe.dll",
+        "lib/netstandard2.0/System.Runtime.CompilerServices.Unsafe.xml",
+        "system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
+        "system.runtime.compilerservices.unsafe.nuspec",
+        "useSharedDesignerContext.txt"
+      ]
+    },
+    "AccountingSoftware/1.0.0": {
+      "type": "project",
+      "path": "../AccountingSoftwareLib/AccountingSoftware/AccountingSoftware.csproj",
+      "msbuildProject": "../AccountingSoftwareLib/AccountingSoftware/AccountingSoftware.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "AccountingSoftware >= 1.0.0",
       "GtkSharp >= 3.24.24.38"
     ]
   },
@@ -217,7 +308,11 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "/home/tarachom/Projects/AccountingSoftwareLib/AccountingSoftware/AccountingSoftware.csproj": {
+              "projectPath": "/home/tarachom/Projects/AccountingSoftwareLib/AccountingSoftware/AccountingSoftware.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
