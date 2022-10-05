@@ -5,7 +5,7 @@ class Program
     public static void Main()
     {
         Application.Init();
-        new ConfigurationSelectionForm();
+        new FormConfigurationSelection();
         Application.Run();
     }
 }

@@ -133,6 +133,15 @@ public class ConfigurationParamCollection
         }
         return false;
     }
+
+    public static void SelectConfigurationParam(string key)
+    {
+        if (ListConfigurationParam != null)
+        {
+            foreach (ConfigurationParam itemConfigurationParam in ListConfigurationParam)
+                itemConfigurationParam.Select = itemConfigurationParam.ConfigurationKey == key;
+        }
+    }
 }
 
 public class ConfigurationParam

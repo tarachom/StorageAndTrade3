@@ -2,11 +2,11 @@ using Gtk;
 using System;
 using System.IO;
 
-class ConfigurationSelectionForm : Window
+class FormConfigurationSelection : Window
 {
     ListBox listBoxDataBase;
 
-    public ConfigurationSelectionForm() : base("Зберігання та Торгівля для України")
+    public FormConfigurationSelection() : base("Зберігання та Торгівля для України | Вибір бази даних")
     {
         SetDefaultSize(660, 320);
         SetPosition(WindowPosition.Center);
@@ -68,7 +68,7 @@ class ConfigurationSelectionForm : Window
         ConfigurationParamCollection.LoadConfigurationParamFromXML(ConfigurationParamCollection.PathToXML);
     }
 
-    private void FillListBoxDataBase()
+    private void FillListBoxDataBase(string selectConfKey = "")
     {
         foreach (Widget child in listBoxDataBase.Children)
             listBoxDataBase.Remove(child);
@@ -83,9 +83,26 @@ class ConfigurationSelectionForm : Window
 
             row.Add(itemLabel);
             listBoxDataBase.Add(row);
+
+            if (!String.IsNullOrEmpty(selectConfKey))
+            {
+                if (itemConfigurationParam.ConfigurationKey == selectConfKey)
+                    listBoxDataBase.SelectRow(row);
+            }
+            else
+            {
+                if (itemConfigurationParam.Select)
+                    listBoxDataBase.SelectRow(row);
+            }
         }
 
         listBoxDataBase.ShowAll();
+
+        if (listBoxDataBase.Children.Length != 0 && listBoxDataBase.SelectedRow == null)
+        {
+            ListBoxRow row = (ListBoxRow)listBoxDataBase.Children[0];
+            listBoxDataBase.SelectRow(row);
+        }
     }
 
     void OnButtonOpenClicked(object? sender, EventArgs args)
@@ -94,7 +111,13 @@ class ConfigurationSelectionForm : Window
 
         if (selectedRows.Length != 0)
         {
-            //selectedRows[0].Name
+            Hide();
+
+            ConfigurationParamCollection.SelectConfigurationParam(selectedRows[0].Name);
+            ConfigurationParamCollection.SaveConfigurationParamFromXML(ConfigurationParamCollection.PathToXML);
+            
+            FormStorageAndTrade storageAndTrade = new FormStorageAndTrade();
+            storageAndTrade.Show();
         }
     }
 
@@ -114,7 +137,7 @@ class ConfigurationSelectionForm : Window
         ConfigurationParamCollection.ListConfigurationParam?.Add(itemConfigurationParam);
 
         ConfigurationParamCollection.SaveConfigurationParamFromXML(ConfigurationParamCollection.PathToXML);
-        FillListBoxDataBase();
+        FillListBoxDataBase(itemConfigurationParam.ConfigurationKey);
     }
 
     void OnButtonCopyClicked(object? sender, EventArgs args)
@@ -130,7 +153,7 @@ class ConfigurationSelectionForm : Window
                 ConfigurationParamCollection.ListConfigurationParam?.Add(copyConfigurationParam);
 
                 ConfigurationParamCollection.SaveConfigurationParamFromXML(ConfigurationParamCollection.PathToXML);
-                FillListBoxDataBase();
+                FillListBoxDataBase(itemConfigurationParam.ConfigurationKey);
             }
         }
     }
@@ -163,5 +186,5 @@ class ConfigurationSelectionForm : Window
         }
     }
 
-    
+
 }

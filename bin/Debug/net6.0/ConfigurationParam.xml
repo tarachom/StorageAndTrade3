@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <Configuration Select="True">
+  <Configuration Select="False">
     <Key>3f52e05f-e663-4049-a18e-a9188e93bd11</Key>
     <Name>Зберігання та Торгівля</Name>
     <Server>localhost</Server>
@@ -9,7 +9,7 @@
     <Password>1</Password>
     <BaseName>storage_and_trade</BaseName>
   </Configuration>
-  <Configuration Select="True">
+  <Configuration Select="False">
     <Key>3f52e05f-e663-4049-a18e-a9188e93bd12</Key>
     <Name>Зберігання та Торгівля 2</Name>
     <Server>localhost</Server>
@@ -72,7 +72,7 @@
     <Password>1</Password>
     <BaseName>storage_and_trade</BaseName>
   </Configuration>
-  <Configuration Select="False">
+  <Configuration Select="True">
     <Key>74e2a936-c26c-4ea5-bbfc-7265dec30997</Key>
     <Name>Зберігання та Торгівля 2 - Копія - Копія - Копія - Копія</Name>
     <Server>localhost</Server>
