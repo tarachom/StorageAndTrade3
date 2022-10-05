@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-
   <Configuration Select="True">
     <Key>3f52e05f-e663-4049-a18e-a9188e93bd11</Key>
     <Name>Зберігання та Торгівля</Name>
@@ -10,7 +9,6 @@
     <Password>1</Password>
     <BaseName>storage_and_trade</BaseName>
   </Configuration>
-
   <Configuration Select="True">
     <Key>3f52e05f-e663-4049-a18e-a9188e93bd12</Key>
     <Name>Зберігання та Торгівля 2</Name>
@@ -20,5 +18,67 @@
     <Password>1</Password>
     <BaseName>storage_and_trade</BaseName>
   </Configuration>
-
+  <Configuration Select="False">
+    <Key>96418f96-cbf3-4603-bae1-b2a2f8ce2042</Key>
+    <Name>Зберігання та Торгівля 2 - Копія</Name>
+    <Server>localhost</Server>
+    <Port>5432</Port>
+    <Login>postgres</Login>
+    <Password>1</Password>
+    <BaseName>storage_and_trade</BaseName>
+  </Configuration>
+  <Configuration Select="False">
+    <Key>cdcc95fc-4f68-40b1-b868-37204d1da167</Key>
+    <Name>Зберігання та Торгівля 2 - Копія - Копія - Копія</Name>
+    <Server>localhost</Server>
+    <Port>5432</Port>
+    <Login>postgres</Login>
+    <Password>1</Password>
+    <BaseName>storage_and_trade</BaseName>
+  </Configuration>
+  <Configuration Select="False">
+    <Key>022b2065-178e-4d83-b8de-4d23a2800f02</Key>
+    <Name>Зберігання та Торгівля 2 - Копія - Копія</Name>
+    <Server>localhost</Server>
+    <Port>5432</Port>
+    <Login>postgres</Login>
+    <Password>1</Password>
+    <BaseName>storage_and_trade</BaseName>
+  </Configuration>
+  <Configuration Select="False">
+    <Key>10bdf1dd-f7db-42db-917d-ca8e9f2f44fa</Key>
+    <Name>Зберігання та Торгівля 2 - Копія - Копія - Копія</Name>
+    <Server>localhost</Server>
+    <Port>5432</Port>
+    <Login>postgres</Login>
+    <Password>1</Password>
+    <BaseName>storage_and_trade</BaseName>
+  </Configuration>
+  <Configuration Select="False">
+    <Key>65ff83f4-da93-4de8-be92-fb2476411880</Key>
+    <Name>Зберігання та Торгівля 2 - Копія - Копія - Копія - Копія</Name>
+    <Server>localhost</Server>
+    <Port>5432</Port>
+    <Login>postgres</Login>
+    <Password>1</Password>
+    <BaseName>storage_and_trade</BaseName>
+  </Configuration>
+  <Configuration Select="False">
+    <Key>02922cce-b406-4b7f-995a-3e7d1551ce73</Key>
+    <Name>Зберігання та Торгівля 2 - Копія - Копія - Копія - Копія</Name>
+    <Server>localhost</Server>
+    <Port>5432</Port>
+    <Login>postgres</Login>
+    <Password>1</Password>
+    <BaseName>storage_and_trade</BaseName>
+  </Configuration>
+  <Configuration Select="False">
+    <Key>74e2a936-c26c-4ea5-bbfc-7265dec30997</Key>
+    <Name>Зберігання та Торгівля 2 - Копія - Копія - Копія - Копія</Name>
+    <Server>localhost</Server>
+    <Port>5432</Port>
+    <Login>postgres</Login>
+    <Password>1</Password>
+    <BaseName>storage_and_trade</BaseName>
+  </Configuration>
 </root>

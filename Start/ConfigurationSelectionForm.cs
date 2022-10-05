@@ -5,37 +5,73 @@ using System.IO;
 class ConfigurationSelectionForm : Window
 {
     ListBox listBoxDataBase;
-    Label label;
 
     public ConfigurationSelectionForm() : base("Зберігання та Торгівля для України")
     {
-        SetDefaultSize(650, 350);
+        SetDefaultSize(660, 320);
         SetPosition(WindowPosition.Center);
         DeleteEvent += delegate { Application.Quit(); };
 
         Fixed fix = new Fixed();
 
+        ScrolledWindow scrolledWindowListBox = new ScrolledWindow();
+        scrolledWindowListBox.SetSizeRequest(500, 300);
+        scrolledWindowListBox.ShadowType = ShadowType.In;
+        scrolledWindowListBox.SetPolicy(PolicyType.Never, PolicyType.Automatic);
+
         listBoxDataBase = new ListBox();
         listBoxDataBase.SetSizeRequest(500, 300);
         listBoxDataBase.SelectionMode = SelectionMode.Single;
-        listBoxDataBase.SelectedRowsChanged += OnChanged;
+        listBoxDataBase.SelectedRowsChanged += OnListBoxDataBaseChanged;
+        scrolledWindowListBox.Add(listBoxDataBase);
 
-        label = new Label();
+        Button buttonOpen = new Button("Відкрити");
+        buttonOpen.SetSizeRequest(130, 35);
+        buttonOpen.Clicked += OnButtonOpenClicked;
 
-        FillListBoxDataBase();
+        Button buttonConfigurator = new Button("Конфігуратор");
+        buttonConfigurator.SetSizeRequest(130, 35);
+        buttonConfigurator.Clicked += OnButtonConfiguratorClicked;
 
-        fix.Put(listBoxDataBase, 10, 10);
-        fix.Put(label, 10, 310);
+        Button buttonAdd = new Button("Додати");
+        buttonAdd.SetSizeRequest(130, 35);
+        buttonAdd.Clicked += OnButtonAddClicked;
+
+        Button buttonCopy = new Button("Копіювати");
+        buttonCopy.SetSizeRequest(130, 35);
+        buttonCopy.Clicked += OnButtonCopyClicked;
+
+        Button buttonDelete = new Button("Видалити");
+        buttonDelete.SetSizeRequest(130, 35);
+        buttonDelete.Clicked += OnButtonDeleteClicked;
+
+        int buttonAddVPosition = 180;
+        int buttonAddHPosition = scrolledWindowListBox.WidthRequest + 20;
+
+        fix.Put(scrolledWindowListBox, 10, 10);
+        fix.Put(buttonOpen, buttonAddHPosition, 10);
+        fix.Put(buttonConfigurator, buttonAddHPosition, buttonOpen.HeightRequest + 20);
+        fix.Put(buttonAdd, buttonAddHPosition, buttonAddVPosition);
+        fix.Put(buttonCopy, buttonAddHPosition, buttonAddVPosition += buttonAdd.HeightRequest + 10);
+        fix.Put(buttonDelete, buttonAddHPosition, buttonAddVPosition += buttonCopy.HeightRequest + 10);
         Add(fix);
 
         ShowAll();
+
+        LoadConfigurationParam();
+        FillListBoxDataBase();
+    }
+
+    private void LoadConfigurationParam()
+    {
+        ConfigurationParamCollection.PathToXML = System.IO.Path.Combine(AppContext.BaseDirectory, "ConfigurationParam.xml");
+        ConfigurationParamCollection.LoadConfigurationParamFromXML(ConfigurationParamCollection.PathToXML);
     }
 
     private void FillListBoxDataBase()
     {
-        string pathToXML = System.IO.Path.Combine(AppContext.BaseDirectory, "ConfigurationParam.xml");
-
-        ConfigurationParamCollection.LoadConfigurationParamFromXML(pathToXML);
+        foreach (Widget child in listBoxDataBase.Children)
+            listBoxDataBase.Remove(child);
 
         foreach (ConfigurationParam itemConfigurationParam in ConfigurationParamCollection.ListConfigurationParam!)
         {
@@ -48,9 +84,72 @@ class ConfigurationSelectionForm : Window
             row.Add(itemLabel);
             listBoxDataBase.Add(row);
         }
+
+        listBoxDataBase.ShowAll();
     }
 
-    void OnChanged(object? sender, EventArgs args)
+    void OnButtonOpenClicked(object? sender, EventArgs args)
+    {
+        ListBoxRow[] selectedRows = listBoxDataBase.SelectedRows;
+
+        if (selectedRows.Length != 0)
+        {
+            //selectedRows[0].Name
+        }
+    }
+
+    void OnButtonConfiguratorClicked(object? sender, EventArgs args)
+    {
+        ListBoxRow[] selectedRows = listBoxDataBase.SelectedRows;
+
+        if (selectedRows.Length != 0)
+        {
+            //selectedRows[0].Name
+        }
+    }
+
+    void OnButtonAddClicked(object? sender, EventArgs args)
+    {
+        ConfigurationParam itemConfigurationParam = ConfigurationParam.New();
+        ConfigurationParamCollection.ListConfigurationParam?.Add(itemConfigurationParam);
+
+        ConfigurationParamCollection.SaveConfigurationParamFromXML(ConfigurationParamCollection.PathToXML);
+        FillListBoxDataBase();
+    }
+
+    void OnButtonCopyClicked(object? sender, EventArgs args)
+    {
+        ListBoxRow[] selectedRows = listBoxDataBase.SelectedRows;
+
+        if (selectedRows.Length != 0)
+        {
+            ConfigurationParam? itemConfigurationParam = ConfigurationParamCollection.GetConfigurationParam(selectedRows[0].Name);
+            if (itemConfigurationParam != null)
+            {
+                ConfigurationParam copyConfigurationParam = itemConfigurationParam.Clone();
+                ConfigurationParamCollection.ListConfigurationParam?.Add(copyConfigurationParam);
+
+                ConfigurationParamCollection.SaveConfigurationParamFromXML(ConfigurationParamCollection.PathToXML);
+                FillListBoxDataBase();
+            }
+        }
+    }
+
+    void OnButtonDeleteClicked(object? sender, EventArgs args)
+    {
+        ListBoxRow[] selectedRows = listBoxDataBase.SelectedRows;
+
+        if (selectedRows.Length != 0)
+        {
+            if (ConfigurationParamCollection.RemoveConfigurationParam(selectedRows[0].Name))
+            {
+                ConfigurationParamCollection.SaveConfigurationParamFromXML(ConfigurationParamCollection.PathToXML);
+                FillListBoxDataBase();
+            }
+        }
+    }
+
+    void OnListBoxDataBaseChanged(object? sender, EventArgs args)
     {
         if (sender != null)
         {
@@ -59,8 +158,10 @@ class ConfigurationSelectionForm : Window
 
             if (selectedRows.Length != 0)
             {
-                label.Text = selectedRows[0].Name;
+                //label.Text = selectedRows[0].Name;
             }
         }
     }
+
+    
 }

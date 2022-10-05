@@ -6,6 +6,8 @@ public class ConfigurationParamCollection
 {
     public static List<ConfigurationParam>? ListConfigurationParam { get; set; }
 
+    public static string PathToXML { get; set; } = "";
+
     public static void Init()
     {
         ListConfigurationParam = new List<ConfigurationParam>();
@@ -95,6 +97,42 @@ public class ConfigurationParamCollection
 
         xmlConfParamDocument.Save(pathToXML);
     }
+
+    public static ConfigurationParam? GetConfigurationParam(string key)
+    {
+        ConfigurationParam? selectConfigurationParam = null;
+
+        if (ListConfigurationParam != null)
+        {
+            foreach (ConfigurationParam itemConfigurationParam in ListConfigurationParam)
+            {
+                if (itemConfigurationParam.ConfigurationKey == key)
+                {
+                    selectConfigurationParam = itemConfigurationParam;
+                    break;
+                }
+            }
+        }
+
+        return selectConfigurationParam;
+    }
+
+    public static bool RemoveConfigurationParam(string key)
+    {
+        if (ListConfigurationParam != null)
+        {
+            ConfigurationParam? selectConfigurationParam = GetConfigurationParam(key);
+
+            if (selectConfigurationParam != null)
+            {
+                ListConfigurationParam.Remove(selectConfigurationParam);
+                return true;
+            }
+            else
+                return false;
+        }
+        return false;
+    }
 }
 
 public class ConfigurationParam
@@ -132,11 +170,20 @@ public class ConfigurationParam
         return String.IsNullOrWhiteSpace(ConfigurationName) ? "<>" : ConfigurationName;
     }
 
+    public static ConfigurationParam New()
+    {
+        ConfigurationParam configurationParam = new ConfigurationParam();
+        configurationParam.ConfigurationKey = Guid.NewGuid().ToString();
+        configurationParam.ConfigurationName = "<Новий>";
+
+        return configurationParam;
+    }
+
     public ConfigurationParam Clone()
     {
         ConfigurationParam configurationParam = new ConfigurationParam();
         configurationParam.ConfigurationKey = Guid.NewGuid().ToString();
-        configurationParam.ConfigurationName = ConfigurationName + " - Копія"; 
+        configurationParam.ConfigurationName = ConfigurationName + " - Копія";
         configurationParam.DataBaseServer = DataBaseServer;
         configurationParam.DataBaseLogin = DataBaseLogin;
         configurationParam.DataBasePassword = DataBasePassword;
