@@ -142,6 +142,20 @@ public class ConfigurationParamCollection
                 itemConfigurationParam.Select = itemConfigurationParam.ConfigurationKey == key;
         }
     }
+
+    public static void UpdateConfigurationParam(ConfigurationParam configurationParam)
+    {
+        ConfigurationParam? itemConfigurationParam = GetConfigurationParam(configurationParam.ConfigurationKey);
+        if (itemConfigurationParam != null)
+        {
+            itemConfigurationParam.ConfigurationName = configurationParam.ConfigurationName;
+            itemConfigurationParam.DataBaseServer = configurationParam.DataBaseServer;
+            itemConfigurationParam.DataBaseLogin = configurationParam.DataBaseLogin;
+            itemConfigurationParam.DataBasePassword = configurationParam.DataBasePassword;
+            itemConfigurationParam.DataBasePort = configurationParam.DataBasePort;
+            itemConfigurationParam.DataBaseBaseName = configurationParam.DataBaseBaseName;
+        }
+    }
 }
 
 public class ConfigurationParam

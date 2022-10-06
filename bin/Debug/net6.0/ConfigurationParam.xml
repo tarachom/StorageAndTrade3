@@ -1,69 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <Configuration Select="False">
-    <Key>91dfb9d7-5891-4332-a81a-deb95e31336e</Key>
-    <Name>&lt;Новий&gt;</Name>
-    <Server>localhost</Server>
-    <Port>5432</Port>
-    <Login>postgres</Login>
-    <Password>
-    </Password>
-    <BaseName>
-    </BaseName>
-  </Configuration>
-  <Configuration Select="False">
-    <Key>d028daf8-71b5-4e93-a291-43906f4dfefe</Key>
-    <Name>&lt;Новий&gt;</Name>
-    <Server>localhost</Server>
-    <Port>5432</Port>
-    <Login>postgres</Login>
-    <Password>
-    </Password>
-    <BaseName>
-    </BaseName>
-  </Configuration>
   <Configuration Select="True">
     <Key>6b4ef58d-4b62-4885-8059-eb6f43c51c2d</Key>
-    <Name>&lt;Новий&gt;</Name>
+    <Name>Новий</Name>
     <Server>localhost</Server>
     <Port>5432</Port>
     <Login>postgres</Login>
-    <Password>
-    </Password>
-    <BaseName>
-    </BaseName>
-  </Configuration>
-  <Configuration Select="False">
-    <Key>d5f307be-96dc-4985-a555-7a522225945f</Key>
-    <Name>&lt;Новий&gt;</Name>
-    <Server>localhost</Server>
-    <Port>5432</Port>
-    <Login>postgres</Login>
-    <Password>
-    </Password>
-    <BaseName>
-    </BaseName>
-  </Configuration>
-  <Configuration Select="False">
-    <Key>d130844b-0ef9-44ea-8266-0eccb1d2e5e8</Key>
-    <Name>&lt;Новий&gt;</Name>
-    <Server>localhost</Server>
-    <Port>5432</Port>
-    <Login>postgres</Login>
-    <Password>
-    </Password>
-    <BaseName>
-    </BaseName>
-  </Configuration>
-  <Configuration Select="False">
-    <Key>ee320dfa-0ea6-4c04-8d75-6769e19ec3c4</Key>
-    <Name>&lt;Новий&gt;</Name>
-    <Server>localhost</Server>
-    <Port>5432</Port>
-    <Login>postgres</Login>
-    <Password>
-    </Password>
-    <BaseName>
-    </BaseName>
+    <Password>1</Password>
+    <BaseName>storage_and_trade</BaseName>
   </Configuration>
 </root>

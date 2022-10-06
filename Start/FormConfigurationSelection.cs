@@ -11,6 +11,8 @@ class FormConfigurationSelection : Window
     {
         SetDefaultSize(660, 320);
         SetPosition(WindowPosition.Center);
+        //SetIconFromFile("form.ico");
+
         DeleteEvent += delegate { Application.Quit(); };
 
         Fixed fix = new Fixed();
@@ -23,7 +25,6 @@ class FormConfigurationSelection : Window
         listBoxDataBase = new ListBox();
         listBoxDataBase.SetSizeRequest(500, 300);
         listBoxDataBase.SelectionMode = SelectionMode.Single;
-        listBoxDataBase.SelectedRowsChanged += OnListBoxDataBaseChanged;
         scrolledWindowListBox.Add(listBoxDataBase);
 
         Button buttonOpen = new Button("Відкрити");
@@ -38,6 +39,10 @@ class FormConfigurationSelection : Window
         buttonAdd.SetSizeRequest(130, 35);
         buttonAdd.Clicked += OnButtonAddClicked;
 
+        Button buttonEdit = new Button("Редагувати");
+        buttonEdit.SetSizeRequest(130, 35);
+        buttonEdit.Clicked += OnButtonEditClicked;
+
         Button buttonCopy = new Button("Копіювати");
         buttonCopy.SetSizeRequest(130, 35);
         buttonCopy.Clicked += OnButtonCopyClicked;
@@ -46,14 +51,15 @@ class FormConfigurationSelection : Window
         buttonDelete.SetSizeRequest(130, 35);
         buttonDelete.Clicked += OnButtonDeleteClicked;
 
-        int buttonAddVPosition = 180;
+        int buttonAddVPosition = 135;
         int buttonAddHPosition = scrolledWindowListBox.WidthRequest + 20;
 
         fix.Put(scrolledWindowListBox, 10, 10);
         fix.Put(buttonOpen, buttonAddHPosition, 10);
         fix.Put(buttonConfigurator, buttonAddHPosition, buttonOpen.HeightRequest + 20);
         fix.Put(buttonAdd, buttonAddHPosition, buttonAddVPosition);
-        fix.Put(buttonCopy, buttonAddHPosition, buttonAddVPosition += buttonAdd.HeightRequest + 10);
+        fix.Put(buttonEdit, buttonAddHPosition, buttonAddVPosition += buttonAdd.HeightRequest + 10);
+        fix.Put(buttonCopy, buttonAddHPosition, buttonAddVPosition += buttonEdit.HeightRequest + 10);
         fix.Put(buttonDelete, buttonAddHPosition, buttonAddVPosition += buttonCopy.HeightRequest + 10);
         Add(fix);
 
@@ -108,6 +114,13 @@ class FormConfigurationSelection : Window
         //scrolledWindowListBox.Vadjustment.Value = scrolledWindowListBox.Vadjustment.Upper;
     }
 
+    public void CallBackUpdate(ConfigurationParam itemConfigurationParam)
+    {
+        ConfigurationParamCollection.UpdateConfigurationParam(itemConfigurationParam);
+        ConfigurationParamCollection.SaveConfigurationParamFromXML(ConfigurationParamCollection.PathToXML);
+        FillListBoxDataBase(itemConfigurationParam.ConfigurationKey);
+    }
+
     void OnButtonOpenClicked(object? sender, EventArgs args)
     {
         ListBoxRow[] selectedRows = listBoxDataBase.SelectedRows;
@@ -115,7 +128,7 @@ class FormConfigurationSelection : Window
         if (selectedRows.Length != 0)
         {
             Hide();
- 
+
             ConfigurationParamCollection.SelectConfigurationParam(selectedRows[0].Name);
             ConfigurationParamCollection.SaveConfigurationParamFromXML(ConfigurationParamCollection.PathToXML);
 
@@ -176,17 +189,16 @@ class FormConfigurationSelection : Window
         }
     }
 
-    void OnListBoxDataBaseChanged(object? sender, EventArgs args)
+    void OnButtonEditClicked(object? sender, EventArgs args)
     {
-        if (sender != null)
-        {
-            ListBox lb = (ListBox)sender;
-            ListBoxRow[] selectedRows = lb.SelectedRows;
+        ListBoxRow[] selectedRows = listBoxDataBase.SelectedRows;
 
-            if (selectedRows.Length != 0)
-            {
-                //label.Text = selectedRows[0].Name;
-            }
+        if (selectedRows.Length != 0)
+        {
+            FormConfigurationSelectionParam configurationSelectionParam = new FormConfigurationSelectionParam();
+            configurationSelectionParam.OpenConfigurationParam = ConfigurationParamCollection.GetConfigurationParam(selectedRows[0].Name);
+            configurationSelectionParam.CallBackUpdate = CallBackUpdate;
+            configurationSelectionParam.Show();
         }
     }
 
