@@ -1,5 +1,4 @@
 using Gtk;
-using System;
 
 using AccountingSoftware;
 using Конфа = StorageAndTrade_1_0;
@@ -101,8 +100,9 @@ class FormConfigurationSelectionParam : Window
         int rezult;
         if (!int.TryParse(Port.Text, out rezult))
         {
-            MessageDialog md = new MessageDialog(this, DialogFlags.DestroyWithParent, MessageType.Info, ButtonsType.Close,
+            MessageDialog md = new MessageDialog(this, DialogFlags.DestroyWithParent, MessageType.Warning, ButtonsType.Close,
                 "Порт має бути цілим числом!");
+
             md.Run();
             md.Destroy();
             return false;
@@ -128,9 +128,7 @@ class FormConfigurationSelectionParam : Window
     void OnButtonSaveClicked(object? sender, EventArgs args)
     {
         if (SaveConfParam())
-        {
             Close();
-        }
     }
 
     void OnButtonCreateBaseClicked(object? sender, EventArgs args)
@@ -152,14 +150,16 @@ class FormConfigurationSelectionParam : Window
             if (flag)
             {
                 MessageDialog md = new MessageDialog(this, DialogFlags.DestroyWithParent, MessageType.Info, ButtonsType.Close,
-                "OK. База даних створена або вже існує");
+                    "OK.\n\nБаза даних створена або вже існує");
+
                 md.Run();
                 md.Destroy();
             }
             else
             {
-                MessageDialog md = new MessageDialog(this, DialogFlags.DestroyWithParent, MessageType.Info, ButtonsType.Close,
-                "Error: " + exception.Message);
+                MessageDialog md = new MessageDialog(this, DialogFlags.DestroyWithParent, MessageType.Warning, ButtonsType.Close,
+                    "Error: " + exception.Message);
+
                 md.Run();
                 md.Destroy();
             }

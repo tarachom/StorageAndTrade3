@@ -1,6 +1,8 @@
 using Gtk;
-using System;
 using System.IO;
+
+using AccountingSoftware;
+using Конфа = StorageAndTrade_1_0;
 
 class FormConfigurationSelection : Window
 {
@@ -127,14 +129,80 @@ class FormConfigurationSelection : Window
 
         if (selectedRows.Length != 0)
         {
-            Hide();
+            ConfigurationParam? OpenConfigurationParam = ConfigurationParamCollection.GetConfigurationParam(selectedRows[0].Name);
+
+            if (OpenConfigurationParam == null)
+                return;
 
             ConfigurationParamCollection.SelectConfigurationParam(selectedRows[0].Name);
             ConfigurationParamCollection.SaveConfigurationParamFromXML(ConfigurationParamCollection.PathToXML);
 
+            string PathToConfXML = System.IO.Path.Combine(AppContext.BaseDirectory, "Conf.xml");
+
+            Exception exception;
+
+            Конфа.Config.Kernel = new Kernel();
+            Конфа.Config.KernelBackgroundTask = new Kernel();
+            //Конфа.Config.KernelParalelWork = new Kernel();
+
+            //Підключення до бази даних та завантаження конфігурації
+            bool flagOpen = Конфа.Config.Kernel.Open(
+                    PathToConfXML,
+                    OpenConfigurationParam.DataBaseServer,
+                    OpenConfigurationParam.DataBaseLogin,
+                    OpenConfigurationParam.DataBasePassword,
+                    OpenConfigurationParam.DataBasePort,
+                    OpenConfigurationParam.DataBaseBaseName, out exception);
+
+            if (!flagOpen)
+            {
+                MessageDialog md = new MessageDialog(this, DialogFlags.DestroyWithParent, MessageType.Warning, ButtonsType.Close,
+                    "Error: " + exception.Message);
+
+                md.Run();
+                md.Destroy();
+                return;
+            }
+
+            //Підключення до бази даних для фонових завдань
+            bool flagOpenBackgroundTask = Конфа.Config.KernelBackgroundTask.OpenOnlyDataBase(
+                    OpenConfigurationParam.DataBaseServer,
+                    OpenConfigurationParam.DataBaseLogin,
+                    OpenConfigurationParam.DataBasePassword,
+                    OpenConfigurationParam.DataBasePort,
+                    OpenConfigurationParam.DataBaseBaseName, out exception);
+
+            if (!flagOpenBackgroundTask)
+            {
+                MessageDialog md = new MessageDialog(this, DialogFlags.DestroyWithParent, MessageType.Warning, ButtonsType.Close,
+                    "Error: " + exception.Message);
+
+                md.Run();
+                md.Destroy();
+                return;
+            }
+
+            //Підключення до бази даних для паралельної роботи
+            // bool flagOpenParalelWork = Конфа.Config.KernelParalelWork.OpenOnlyDataBase(
+            // 		OpenConfigurationParam.DataBaseServer,
+            // 		OpenConfigurationParam.DataBaseLogin,
+            // 		OpenConfigurationParam.DataBasePassword,
+            // 		OpenConfigurationParam.DataBasePort,
+            // 		OpenConfigurationParam.DataBaseBaseName, out exception);
+
+            // if (!flagOpenParalelWork)
+            // {
+            // 	//MessageBox.Show(exception.Message);
+            // 	return;
+            // }
+
+            //Конфа.Config.ReadAllConstants();
+
             FormStorageAndTrade storageAndTrade = new FormStorageAndTrade();
             storageAndTrade.OpenConfigurationParam = ConfigurationParamCollection.GetConfigurationParam(selectedRows[0].Name);
             storageAndTrade.Show();
+
+            Hide();
         }
     }
 
