@@ -10,7 +10,7 @@ class FormConfigurationSelectionParam : Window
     Entry password;
     Entry basename;
 
-    public FormConfigurationSelectionParam() : base("Параметри підключення")
+    public FormConfigurationSelectionParam() : base("Параметри підключення PostgreSQL")
     {
         SetDefaultSize(500, 320);
         SetPosition(WindowPosition.Center);
@@ -94,6 +94,15 @@ class FormConfigurationSelectionParam : Window
 
     void OnButtonSaveClicked(object? sender, EventArgs args)
     {
+        int rezult;
+        if (!int.TryParse(port.Text, out rezult))
+        {
+            MessageDialog md = new MessageDialog(this, DialogFlags.DestroyWithParent, MessageType.Info, ButtonsType.Close, "Порт має бути цілим числом!");
+            md.Run();
+            md.Destroy();
+            return;
+        }
+
         if (OpenConfigurationParam != null && CallBackUpdate != null)
         {
             OpenConfigurationParam.ConfigurationName = name.Text;

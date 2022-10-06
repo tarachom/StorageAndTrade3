@@ -85,7 +85,7 @@ class FormConfigurationSelection : Window
             ListBoxRow row = new ListBoxRow();
             row.Name = itemConfigurationParam.ConfigurationKey;
 
-            Label itemLabel = new Label(itemConfigurationParam.ConfigurationName);
+            Label itemLabel = new Label(!String.IsNullOrEmpty(itemConfigurationParam.ConfigurationName) ? itemConfigurationParam.ConfigurationName : "<>");
             itemLabel.Halign = Align.Start;
 
             row.Add(itemLabel);
