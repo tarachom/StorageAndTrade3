@@ -1,6 +1,9 @@
 using Gtk;
 using System;
 
+using AccountingSoftware;
+using Конфа = StorageAndTrade_1_0;
+
 class FormConfigurationSelectionParam : Window
 {
     Entry ConfName;
@@ -12,10 +15,10 @@ class FormConfigurationSelectionParam : Window
 
     public FormConfigurationSelectionParam() : base("Параметри підключення PostgreSQL")
     {
-        SetDefaultSize(500, 320);
+        SetDefaultSize(420, 0);
         SetPosition(WindowPosition.Center);
         SetDefaultIconFromFile("configuration.png");
-        BorderWidth = 10;
+        BorderWidth = 5;
 
         VBox vbox = new VBox(false, 2);
 
@@ -26,12 +29,12 @@ class FormConfigurationSelectionParam : Window
         Password = new Entry();
         Basename = new Entry();
 
-        AddNameAndField(vbox, "Назва:", ConfName);
-        AddNameAndField(vbox, "Сервер:", Server);
-        AddNameAndField(vbox, "Порт:", Port);
-        AddNameAndField(vbox, "Логін:", Login);
-        AddNameAndField(vbox, "Пароль:", Password);
-        AddNameAndField(vbox, "База даних:", Basename);
+        AddNameAndField(vbox, "Назва", ConfName);
+        AddNameAndField(vbox, "Сервер", Server);
+        AddNameAndField(vbox, "Порт", Port);
+        AddNameAndField(vbox, "Логін", Login);
+        AddNameAndField(vbox, "Пароль", Password);
+        AddNameAndField(vbox, "База даних", Basename);
 
         HBox hBoxButton = new HBox();
 
@@ -51,7 +54,7 @@ class FormConfigurationSelectionParam : Window
         hBoxButton.PackStart(buttonCreateBase, false, false, 5);
         hBoxButton.PackStart(buttonClose, false, false, 5);
 
-        vbox.PackStart(hBoxButton, false, false, 15);
+        vbox.PackStart(hBoxButton, false, false, 5);
 
         Add(vbox);
         ShowAll();
@@ -87,22 +90,22 @@ class FormConfigurationSelectionParam : Window
 
         field.SetSizeRequest(300, 0);
 
-        fix.Put(label, 10, 18);
-        fix.Put(field, 120, 10);
+        fix.Put(label, 5, 18);
+        fix.Put(field, 100, 10);
 
         vbox.PackStart(fix, false, false, 0);
     }
 
-    void OnButtonSaveClicked(object? sender, EventArgs args)
+    bool SaveConfParam()
     {
         int rezult;
         if (!int.TryParse(Port.Text, out rezult))
         {
-            MessageDialog md = new MessageDialog(this, DialogFlags.DestroyWithParent, MessageType.Info, ButtonsType.Close, 
+            MessageDialog md = new MessageDialog(this, DialogFlags.DestroyWithParent, MessageType.Info, ButtonsType.Close,
                 "Порт має бути цілим числом!");
             md.Run();
             md.Destroy();
-            return;
+            return false;
         }
 
         if (OpenConfigurationParam != null && CallBackUpdate != null)
@@ -116,13 +119,51 @@ class FormConfigurationSelectionParam : Window
 
             CallBackUpdate.Invoke(OpenConfigurationParam);
 
+            return true;
+        }
+        else
+            return false;
+    }
+
+    void OnButtonSaveClicked(object? sender, EventArgs args)
+    {
+        if (SaveConfParam())
+        {
             Close();
         }
     }
 
     void OnButtonCreateBaseClicked(object? sender, EventArgs args)
     {
+        if (SaveConfParam())
+        {
+            Конфа.Config.Kernel = new Kernel();
 
+            Exception exception;
+            bool IsExistsDatabase = false;
+
+            bool flag = Конфа.Config.Kernel.CreateDatabaseIfNotExist(
+                OpenConfigurationParam.DataBaseServer,
+                OpenConfigurationParam.DataBaseLogin,
+                OpenConfigurationParam.DataBasePassword,
+                OpenConfigurationParam.DataBasePort,
+                OpenConfigurationParam.DataBaseBaseName, out exception, out IsExistsDatabase);
+
+            if (flag)
+            {
+                MessageDialog md = new MessageDialog(this, DialogFlags.DestroyWithParent, MessageType.Info, ButtonsType.Close,
+                "OK. База даних створена або вже існує");
+                md.Run();
+                md.Destroy();
+            }
+            else
+            {
+                MessageDialog md = new MessageDialog(this, DialogFlags.DestroyWithParent, MessageType.Info, ButtonsType.Close,
+                "Error: " + exception.Message);
+                md.Run();
+                md.Destroy();
+            }
+        }
     }
 
     void OnButtonCloseClicked(object? sender, EventArgs args)
