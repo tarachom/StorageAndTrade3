@@ -13,7 +13,7 @@ class FormConfigurationSelection : Window
     {
         SetDefaultSize(660, 320);
         SetPosition(WindowPosition.Center);
-        SetDefaultIconFromFile("configuration.png");
+        SetDefaultIconFromFile("form.ico");
 
         DeleteEvent += delegate { Application.Quit(); };
 

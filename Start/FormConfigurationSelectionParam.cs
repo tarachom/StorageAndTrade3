@@ -16,7 +16,7 @@ class FormConfigurationSelectionParam : Window
     {
         SetDefaultSize(420, 0);
         SetPosition(WindowPosition.Center);
-        SetDefaultIconFromFile("configuration.png");
+        SetDefaultIconFromFile("form.ico");
         BorderWidth = 5;
 
         VBox vbox = new VBox(false, 2);

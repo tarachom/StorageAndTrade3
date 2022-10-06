@@ -10,7 +10,7 @@ class FormStorageAndTrade : Window
     {
         SetDefaultSize(800, 600);
         SetPosition(WindowPosition.Center);
-        SetDefaultIconFromFile("configuration.png");
+        SetDefaultIconFromFile("form.ico");
 
         DeleteEvent += delegate { Application.Quit(); };
 
