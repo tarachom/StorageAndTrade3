@@ -8,7 +8,7 @@ class FormStorageAndTrade : Window
 
     public FormStorageAndTrade() : base("Зберігання та Торгівля для України")
     {
-        SetDefaultSize(660, 320);
+        SetDefaultSize(800, 600);
         SetPosition(WindowPosition.Center);
         SetDefaultIconFromFile("configuration.png");
 

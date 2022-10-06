@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <Configuration Select="False">
+  <Configuration Select="True">
     <Key>6b4ef58d-4b62-4885-8059-eb6f43c51c2d</Key>
     <Name>Новий</Name>
     <Server>localhost</Server>
@@ -9,7 +9,7 @@
     <Password>1</Password>
     <BaseName>storage_and_trade</BaseName>
   </Configuration>
-  <Configuration Select="True">
+  <Configuration Select="False">
     <Key>0d58f634-30cd-467a-91ef-e155813cf105</Key>
     <Name>Новий - Копія</Name>
     <Server>localhost</Server>
