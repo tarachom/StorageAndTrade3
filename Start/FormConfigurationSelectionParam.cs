@@ -105,6 +105,7 @@ class FormConfigurationSelectionParam : Window
 
             md.Run();
             md.Destroy();
+            
             return false;
         }
 
@@ -133,6 +134,9 @@ class FormConfigurationSelectionParam : Window
 
     void OnButtonCreateBaseClicked(object? sender, EventArgs args)
     {
+        if (OpenConfigurationParam == null)
+            return;
+
         if (SaveConfParam())
         {
             Конфа.Config.Kernel = new Kernel();
