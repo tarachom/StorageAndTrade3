@@ -11,7 +11,7 @@ class FormConfigurationSelection : Window
     {
         SetDefaultSize(660, 320);
         SetPosition(WindowPosition.Center);
-        //SetIconFromFile("form.ico");
+        SetDefaultIconFromFile("configuration.png");
 
         DeleteEvent += delegate { Application.Quit(); };
 
@@ -85,7 +85,7 @@ class FormConfigurationSelection : Window
             ListBoxRow row = new ListBoxRow();
             row.Name = itemConfigurationParam.ConfigurationKey;
 
-            Label itemLabel = new Label(!String.IsNullOrEmpty(itemConfigurationParam.ConfigurationName) ? itemConfigurationParam.ConfigurationName : "<>");
+            Label itemLabel = new Label(itemConfigurationParam.ToString());
             itemLabel.Halign = Align.Start;
 
             row.Add(itemLabel);
@@ -201,6 +201,4 @@ class FormConfigurationSelection : Window
             configurationSelectionParam.Show();
         }
     }
-
-
 }

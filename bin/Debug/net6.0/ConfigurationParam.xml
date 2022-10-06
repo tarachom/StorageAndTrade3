@@ -9,7 +9,7 @@
     <Password>1</Password>
     <BaseName>storage_and_trade</BaseName>
   </Configuration>
-  <Configuration Select="False">
+  <Configuration Select="True">
     <Key>0d58f634-30cd-467a-91ef-e155813cf105</Key>
     <Name>Новий - Копія</Name>
     <Server>localhost</Server>
