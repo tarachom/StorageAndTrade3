@@ -1,5 +1,4 @@
 using Gtk;
-using System.IO;
 
 using AccountingSoftware;
 using Конфа = StorageAndTrade_1_0;
@@ -120,6 +119,7 @@ class FormConfigurationSelection : Window
     {
         ConfigurationParamCollection.UpdateConfigurationParam(itemConfigurationParam);
         ConfigurationParamCollection.SaveConfigurationParamFromXML(ConfigurationParamCollection.PathToXML);
+
         FillListBoxDataBase(itemConfigurationParam.ConfigurationKey);
     }
 
