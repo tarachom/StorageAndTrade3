@@ -18,8 +18,9 @@ class FirstPage : VBox
     public class Actress
     {
         public string Icon;
-        public bool Fixed;
+        
         public string Name;
+        public bool Fixed;
         public string Place;
         public int Year;
 
@@ -62,18 +63,18 @@ class FirstPage : VBox
     void AddColumns(TreeView treeView)
     {
         CellRendererPixbuf renderer = new CellRendererPixbuf();
-        TreeViewColumn column = new TreeViewColumn("ico", renderer, "pixbuf", Column.Icon);
+        TreeViewColumn column = new TreeViewColumn("", renderer, "pixbuf", Column.Icon);
         //column.SortColumnId = (int)Column.Icon;AppendColumn ("Icon", new Gtk.CellRendererPixbuf (), "pixbuf", 0);
         treeView.AppendColumn(column);
 
         CellRendererToggle rendererToggle = new CellRendererToggle();
         //rendererToggle.Toggled += RendererToggle_Toggled;
-        column = new TreeViewColumn("Fixed?", rendererToggle, "active", Column.Fixed);
+        column = new TreeViewColumn("Проведений", rendererToggle, "active", Column.Fixed);
         //column.SortColumnId = (int)Column.Fixed;
         treeView.AppendColumn(column);
 
         CellRendererText rendererText = new CellRendererText();
-        column = new TreeViewColumn("Name", rendererText, "text", Column.Name);
+        column = new TreeViewColumn("Назва", rendererText, "text", Column.Name);
         column.FixedWidth = 200;
         //column.SortColumnId = (int)Column.Name;
         treeView.AppendColumn(column);
@@ -85,7 +86,7 @@ class FirstPage : VBox
         treeView.AppendColumn(column);
 
         rendererText = new CellRendererText();
-        column = new TreeViewColumn("Year", rendererText, "text", Column.Year);
+        column = new TreeViewColumn("Рік", rendererText, "text", Column.Year);
         //column.SortColumnId = (int)Column.Year;
         treeView.AppendColumn(column);
 
