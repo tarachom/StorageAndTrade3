@@ -69,6 +69,7 @@ class Валюти : VBox
 
         ToolButton deleteButton = new ToolButton(Stock.Delete);
         deleteButton.IsImportant = true;
+        deleteButton.Clicked +=OnDeleteClick;
         toolbar.Add(deleteButton);
 
         ToolButton copyButton = new ToolButton(Stock.Copy);
@@ -123,13 +124,12 @@ class Валюти : VBox
     {
         if (ViewGrid.Selection.CountSelectedRows() != 0)
         {
-            MessageDialog md = new MessageDialog(null, DialogFlags.DestroyWithParent, MessageType.Question, ButtonsType.YesNo, "Копіювати?");
+            MessageDialog md = new MessageDialog(null, DialogFlags.DestroyWithParent, MessageType.Question, ButtonsType.YesNo, "Копіювати вибрані рядки?");
             ResponseType response = (ResponseType)md.Run();
             md.Destroy();
 
             if (response == ResponseType.Yes)
             {
-
                 TreePath[] selectionRows = ViewGrid.Selection.GetSelectedRows();
 
                 foreach (TreePath itemPath in selectionRows)
@@ -146,6 +146,46 @@ class Валюти : VBox
                         валюти_Objest_Новий.Назва = валюти_Objest_Новий.Назва + " - Копія";
                         валюти_Objest_Новий.Код = (++Константи.НумераціяДовідників.Валюти_Const).ToString("D6");
                         валюти_Objest_Новий.Save();
+                    }
+                    else
+                    {
+                        MessageDialog mdError = new MessageDialog(null, DialogFlags.DestroyWithParent, MessageType.Warning, ButtonsType.Close,
+                            "Не вдалось прочитати!");
+
+                        mdError.Run();
+                        mdError.Destroy();
+                        break;
+                    }
+                }
+
+                LoadRecords();
+            }
+        }
+    }
+
+    void OnDeleteClick(object? sender, EventArgs args)
+    {
+        if (ViewGrid.Selection.CountSelectedRows() != 0)
+        {
+            MessageDialog md = new MessageDialog(null, DialogFlags.DestroyWithParent, MessageType.Question, ButtonsType.YesNo, "Видалити вибрані рядки?");
+            ResponseType response = (ResponseType)md.Run();
+            md.Destroy();
+
+            if (response == ResponseType.Yes)
+            {
+                TreePath[] selectionRows = ViewGrid.Selection.GetSelectedRows();
+
+                foreach (TreePath itemPath in selectionRows)
+                {
+                    TreeIter iter;
+                    ViewGrid.Model.GetIter(out iter, itemPath);
+
+                    string uid = (string)ViewGrid.Model.GetValue(iter, 1);
+
+                    Довідники.Валюти_Objest валюти_Objest = new Довідники.Валюти_Objest();
+                    if (валюти_Objest.Read(new UnigueID(uid)))
+                    {
+                        валюти_Objest.Delete();
                     }
                     else
                     {
