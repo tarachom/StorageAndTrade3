@@ -6,7 +6,8 @@ class FormStorageAndTrade : Window
 {
     public ConfigurationParam? OpenConfigurationParam { get; set; }
 
-    private Notebook _notebook;
+    private Notebook topNotebook;
+    private Dictionary<int, VBox> topNotebookPageBox;
 
     public FormStorageAndTrade() : base("Зберігання та Торгівля для України")
     {
@@ -16,43 +17,58 @@ class FormStorageAndTrade : Window
 
         DeleteEvent += delegate { Application.Quit(); };
 
-        _notebook = new Notebook();
-        _notebook.TabPos = PositionType.Top;
+        topNotebook = new Notebook();
+        topNotebook.TabPos = PositionType.Top;
 
-        Crate("Журнал");
-        Crate("Поступлення товарів та послуг");
-        Crate("Реалізаці товарів та послуг");
-        Crate("Довідник Номенклатура");
-        Crate("Валюти");
-        Crate("Сервіс");
-        Crate("Константи");
+        topNotebookPageBox = new Dictionary<int, VBox>();
 
-        Add(_notebook);
+        CreateTopNotebookPages(new string[] { "Головна", "Довідники", "Журнали", "Документи", "Звіти", "Сервіс" });
+
+        Add(topNotebook);
 
         //Maximize();
         ShowAll();
 
-        Console.WriteLine(_notebook.Children.Length);
 
-        foreach (Widget page in _notebook.Children)
+
+        topNotebook.SwitchPage += OnTopNotebookSelectPage;
+    }
+
+    void OnTopNotebookSelectPage(object? sender, SwitchPageArgs args)
+    {
+        Console.WriteLine(topNotebook.CurrentPage);
+    }
+
+    void CreateTopNotebookPages(string[] names)
+    {
+        foreach (string name in names)
         {
-            Console.WriteLine(page.Name);
-            Console.WriteLine(_notebook.GetTabLabelText(page));
+            ScrolledWindow scroll = new ScrolledWindow();
+            VBox vbox = new VBox(false, 2);
+            vbox.Halign = Align.Start;
+            
+            scroll.Add(vbox);
 
-            //delete
-            //_notebook.DetachTab(page);
+            int pageNum = topNotebook.AppendPage(scroll, new Label { Text = name, Expand = true });
+            topNotebookPageBox.Add(pageNum, vbox);
+
+            HBox hBoxButton = new HBox();
+            Label l = new Label(name);
+            hBoxButton.Add(l);
+
+            vbox.PackStart(hBoxButton, false, false, 0);
         }
     }
-
-    void Crate(string name)
-    {
-        var scroll1 = new ScrolledWindow();
-        var vpanned = new VPaned();
-        vpanned.Position = 300;
-        scroll1.Child = vpanned;
-
-        _notebook.AppendPage(scroll1, new Label { Text = name, Expand = true });
-
-
-    }
 }
+
+
+// Console.WriteLine(_notebook.Children.Length);
+
+// foreach (Widget page in _notebook.Children)
+// {
+//     Console.WriteLine(page.Name);
+//     Console.WriteLine(_notebook.GetTabLabelText(page));
+
+//     //delete
+//     //_notebook.DetachTab(page);
+// } 
