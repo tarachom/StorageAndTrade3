@@ -235,10 +235,10 @@ class Валюти : VBox
             Store.AppendValues(new Записи
             {
                 ID = cur.UnigueID.ToString(),
-                Назва = cur.Fields[Довідники.Валюти_Const.Назва].ToString(),
-                КороткаНазва = cur.Fields[Довідники.Валюти_Const.КороткаНазва].ToString(),
-                Код = cur.Fields[Довідники.Валюти_Const.Код].ToString(),
-                Код_R030 = cur.Fields[Довідники.Валюти_Const.Код_R030].ToString()
+                Назва = cur.Fields?[Довідники.Валюти_Const.Назва].ToString() ?? "",
+                КороткаНазва = cur.Fields?[Довідники.Валюти_Const.КороткаНазва].ToString() ?? "",
+                Код = cur.Fields?[Довідники.Валюти_Const.Код].ToString() ?? "",
+                Код_R030 = cur.Fields?[Довідники.Валюти_Const.Код_R030].ToString() ?? ""
             }.ToArray());
         }
     }
