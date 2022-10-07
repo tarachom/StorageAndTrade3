@@ -42,7 +42,7 @@ class DirectoryPage : VBox
         LinkButton lb = new LinkButton("test");
         hbox.PackStart(lb, false, false, 5);
 
-        PackStart(hbox, false, false, 0);
+        PackStart(hbox, false, false, 5);
     }
 
     void OnButtonOkClicked(object? sender, EventArgs args)

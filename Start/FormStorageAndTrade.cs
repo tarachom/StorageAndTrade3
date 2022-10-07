@@ -74,6 +74,11 @@ class FormStorageAndTrade : Window
                         notebookPage.AddVBox(new DirectoryPage());
                         break;
                     }
+                case 2:
+                    {
+                        notebookPage.AddVBox(new JournalPage());
+                        break;
+                    }
             }
         }
     }
@@ -86,7 +91,7 @@ class FormStorageAndTrade : Window
             scroll.ShadowType = ShadowType.In;
             scroll.SetPolicy(PolicyType.Never, PolicyType.Automatic);
 
-            int numPage = TopNotebook.AppendPage(scroll, new Label { Text = name, Expand = true });
+            int numPage = TopNotebook.AppendPage(scroll, new Label { Text = name, Expand = false });
 
             TopNotebookPages.Add(numPage,
                 new NotebookPage
