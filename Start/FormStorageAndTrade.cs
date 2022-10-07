@@ -6,8 +6,26 @@ class FormStorageAndTrade : Window
 {
     public ConfigurationParam? OpenConfigurationParam { get; set; }
 
-    private Notebook topNotebook;
-    private Dictionary<int, VBox> topNotebookPageBox;
+    #region Notebook
+
+    private Notebook TopNotebook;
+    private readonly string[] MasPageNames = new string[] { "Головна", "Довідники", "Журнали", "Документи", "Звіти", "Сервіс" };
+    private Dictionary<int, NotebookPage> TopNotebookPages;
+    class NotebookPage
+    {
+        public NotebookPage()
+        {
+            NamePage = "";
+        }
+
+        public int NumPage { get; set; }
+        public string NamePage { get; set; }
+        public ScrolledWindow? ScrolledWindow { get; set; }
+        public VBox? VBox { get; set; }
+        public bool IsConstruct { get; set; }
+    }
+
+    #endregion
 
     public FormStorageAndTrade() : base("Зберігання та Торгівля для України")
     {
@@ -17,26 +35,37 @@ class FormStorageAndTrade : Window
 
         DeleteEvent += delegate { Application.Quit(); };
 
-        topNotebook = new Notebook();
-        topNotebook.TabPos = PositionType.Top;
+        TopNotebook = new Notebook();
+        TopNotebook.TabPos = PositionType.Top;
+        TopNotebookPages = new Dictionary<int, NotebookPage>();
 
-        topNotebookPageBox = new Dictionary<int, VBox>();
+        CreateTopNotebookPages(MasPageNames);
 
-        CreateTopNotebookPages(new string[] { "Головна", "Довідники", "Журнали", "Документи", "Звіти", "Сервіс" });
-
-        Add(topNotebook);
+        Add(TopNotebook);
 
         //Maximize();
         ShowAll();
 
-
-
-        topNotebook.SwitchPage += OnTopNotebookSelectPage;
+        TopNotebook.SwitchPage += OnTopNotebookSelectPage;
+        OnTopNotebookSelectPage(null, new SwitchPageArgs());
     }
 
     void OnTopNotebookSelectPage(object? sender, SwitchPageArgs args)
     {
-        Console.WriteLine(topNotebook.CurrentPage);
+        NotebookPage notebookPage = TopNotebookPages[TopNotebook.CurrentPage];
+        if (!notebookPage.IsConstruct)
+        {
+            switch (TopNotebook.CurrentPage)
+            {
+                case 0:
+                    {
+                        notebookPage.VBox = new FirstPage();
+                        notebookPage.ScrolledWindow?.Add(notebookPage.VBox);
+                        notebookPage.IsConstruct = true;
+                        break;
+                    }
+            }
+        }
     }
 
     void CreateTopNotebookPages(string[] names)
@@ -44,19 +73,16 @@ class FormStorageAndTrade : Window
         foreach (string name in names)
         {
             ScrolledWindow scroll = new ScrolledWindow();
-            VBox vbox = new VBox(false, 2);
-            vbox.Halign = Align.Start;
-            
-            scroll.Add(vbox);
 
-            int pageNum = topNotebook.AppendPage(scroll, new Label { Text = name, Expand = true });
-            topNotebookPageBox.Add(pageNum, vbox);
+            int numPage = TopNotebook.AppendPage(scroll, new Label { Text = name, Expand = true });
 
-            HBox hBoxButton = new HBox();
-            Label l = new Label(name);
-            hBoxButton.Add(l);
-
-            vbox.PackStart(hBoxButton, false, false, 0);
+            TopNotebookPages.Add(numPage,
+                new NotebookPage
+                {
+                    NumPage = numPage,
+                    NamePage = name,
+                    ScrolledWindow = scroll
+                });
         }
     }
 }
