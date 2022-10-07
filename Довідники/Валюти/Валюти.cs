@@ -41,7 +41,7 @@ class Валюти : VBox
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
 
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 2));
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 2) { FixedWidth = 300 });
             treeView.AppendColumn(new TreeViewColumn("КороткаНазва", new CellRendererText(), "text", 3));
 
             treeView.AppendColumn(new TreeViewColumn("R030", new CellRendererText(), "text", 4));
