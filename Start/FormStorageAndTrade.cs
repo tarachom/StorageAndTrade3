@@ -87,8 +87,7 @@ class FormStorageAndTrade : Window
     {
         foreach (string name in names)
         {
-            ScrolledWindow scroll = new ScrolledWindow();
-            scroll.ShadowType = ShadowType.In;
+            ScrolledWindow scroll = new ScrolledWindow() { ShadowType = ShadowType.In };
             scroll.SetPolicy(PolicyType.Never, PolicyType.Automatic);
 
             int numPage = TopNotebook.AppendPage(scroll, new Label { Text = name, Expand = false });

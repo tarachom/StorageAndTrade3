@@ -196,7 +196,7 @@ class FormConfigurationSelection : Window
             // 	return;
             // }
 
-            //Конфа.Config.ReadAllConstants();
+            Конфа.Config.ReadAllConstants();
 
             FormStorageAndTrade storageAndTrade = new FormStorageAndTrade();
             storageAndTrade.OpenConfigurationParam = ConfigurationParamCollection.GetConfigurationParam(selectedRows[0].Name);

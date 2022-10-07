@@ -4,42 +4,108 @@ using System.IO;
 
 class FirstPage : VBox
 {
-    Label label;
-    Entry entry;
+    ListStore store;
 
-    Button buttonOk;
+    enum Column
+    {
+        Icon,
+        Fixed,
+        Name,
+        Place,
+        Year
+    }
+
+    public class Actress
+    {
+        public string Icon;
+        public bool Fixed;
+        public string Name;
+        public string Place;
+        public int Year;
+
+        public Actress(string filename, bool fix, string name, string place, int year)
+        {
+            Icon = filename;
+            Fixed = fix;
+            Name = name;
+            Place = place;
+            Year = year;
+        }
+    }
+
+    Actress[] actresses =
+    {
+        new Actress( "doc_text_image.png", true, "Jessica Alba", "Pomona", 1981),
+        new Actress("doc_text_image.png",true,"Sigourney Weaver", "New York", 1949),
+        new Actress("doc_text_image.png",true,"Angelina Jolie", "Los Angeles", 1975),
+        new Actress("doc_text_image.png",true,"Natalie Portman", "Jerusalem", 1981),
+        new Actress("doc_text_image.png",true,"Rachel Weissz", "London", 1971),
+        new Actress("doc_text_image.png",true,"Scarlett Johansson", "New York", 1984),
+        new Actress("doc_text_image.png",true,"Scarlett Johansson", "New York", 1984)
+    };
 
     public FirstPage() : base()
     {
         new VBox(false, 0);
         BorderWidth = 10;
-        Halign = Align.Start;
 
-        HBox hbox = new HBox(false, 0);
-        hbox.Halign = Align.Start;
+        store = CreateModel();
 
-        label = new Label("Test");
-        hbox.PackStart(label, false, false, 5);
+        TreeView treeView = new TreeView(store);
+        PackStart(treeView, true, true, 5);
 
-        entry = new Entry();
-        hbox.PackStart(entry, false, false, 5);
-
-        buttonOk = new Button("OK");
-        buttonOk.Clicked += OnButtonOkClicked;
-        hbox.PackStart(buttonOk, false, false, 5);
-
-        LinkButton lb = new LinkButton("test");
-        hbox.PackStart(lb, false, false, 5);
-
-        PackStart(hbox, false, false, 0);
-
-
+        AddColumns(treeView);
 
         ShowAll();
     }
 
-    void OnButtonOkClicked(object? sender, EventArgs args)
+    void AddColumns(TreeView treeView)
     {
-        entry.Text = "OK";
+        CellRendererPixbuf renderer = new CellRendererPixbuf();
+        TreeViewColumn column = new TreeViewColumn("ico", renderer, "pixbuf", Column.Icon);
+        //column.SortColumnId = (int)Column.Icon;AppendColumn ("Icon", new Gtk.CellRendererPixbuf (), "pixbuf", 0);
+        treeView.AppendColumn(column);
+
+        CellRendererToggle rendererToggle = new CellRendererToggle();
+        //rendererToggle.Toggled += RendererToggle_Toggled;
+        column = new TreeViewColumn("Fixed?", rendererToggle, "active", Column.Fixed);
+        //column.SortColumnId = (int)Column.Fixed;
+        treeView.AppendColumn(column);
+
+        CellRendererText rendererText = new CellRendererText();
+        column = new TreeViewColumn("Name", rendererText, "text", Column.Name);
+        column.FixedWidth = 200;
+        //column.SortColumnId = (int)Column.Name;
+        treeView.AppendColumn(column);
+
+        rendererText = new CellRendererText();
+        column = new TreeViewColumn("Place", rendererText, "text", Column.Place);
+        column.FixedWidth = 300;
+        //column.SortColumnId = (int)Column.Place;
+        treeView.AppendColumn(column);
+
+        rendererText = new CellRendererText();
+        column = new TreeViewColumn("Year", rendererText, "text", Column.Year);
+        //column.SortColumnId = (int)Column.Year;
+        treeView.AppendColumn(column);
+
+
     }
+
+    ListStore CreateModel()
+    {
+        ListStore store = new ListStore(typeof(Gdk.Pixbuf), typeof(bool), typeof(string), typeof(string), typeof(int));
+
+        foreach (Actress act in actresses)
+        {
+            TreeIter iter = store.AppendValues(new Gdk.Pixbuf(act.Icon), act.Fixed, act.Name, act.Place, act.Year);
+            //store.SetValue(iter, (int)Column.Fixed, true);
+        }
+
+        return store;
+    }
+
+
+
+
 }
