@@ -23,6 +23,13 @@ class FormStorageAndTrade : Window
         public ScrolledWindow? ScrolledWindow { get; set; }
         public VBox? VBox { get; set; }
         public bool IsConstruct { get; set; }
+
+        public void AddVBox(VBox vBox)
+        {
+            VBox = vBox;
+            ScrolledWindow?.Add(vBox);
+            IsConstruct = true;
+        }
     }
 
     #endregion
@@ -59,9 +66,12 @@ class FormStorageAndTrade : Window
             {
                 case 0:
                     {
-                        notebookPage.VBox = new FirstPage();
-                        notebookPage.ScrolledWindow?.Add(notebookPage.VBox);
-                        notebookPage.IsConstruct = true;
+                        notebookPage.AddVBox(new FirstPage());
+                        break;
+                    }
+                case 1:
+                    {
+                        notebookPage.AddVBox(new DirectoryPage());
                         break;
                     }
             }
@@ -73,6 +83,8 @@ class FormStorageAndTrade : Window
         foreach (string name in names)
         {
             ScrolledWindow scroll = new ScrolledWindow();
+            scroll.ShadowType = ShadowType.In;
+            scroll.SetPolicy(PolicyType.Never, PolicyType.Automatic);
 
             int numPage = TopNotebook.AppendPage(scroll, new Label { Text = name, Expand = true });
 

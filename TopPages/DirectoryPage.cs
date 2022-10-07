@@ -2,19 +2,30 @@ using Gtk;
 using System;
 using System.IO;
 
-class FirstPage : VBox
+class DirectoryPage : VBox
 {
     Label label;
     Entry entry;
 
     Button buttonOk;
 
-    public FirstPage() : base()
+    public DirectoryPage() : base()
     {
         new VBox(false, 0);
         BorderWidth = 10;
         Halign = Align.Start;
 
+        AddTst();
+        AddTst();
+        AddTst();
+        AddTst();
+        AddTst();
+
+        ShowAll();
+    }
+
+    void AddTst()
+    {
         HBox hbox = new HBox(false, 0);
         hbox.Halign = Align.Start;
 
@@ -32,14 +43,10 @@ class FirstPage : VBox
         hbox.PackStart(lb, false, false, 5);
 
         PackStart(hbox, false, false, 0);
-
-
-
-        ShowAll();
     }
 
     void OnButtonOkClicked(object? sender, EventArgs args)
     {
-        entry.Text = "OK";
+        entry.Text = "OK dir";
     }
 }
