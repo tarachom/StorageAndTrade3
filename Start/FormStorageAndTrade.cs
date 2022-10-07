@@ -79,6 +79,13 @@ class FormStorageAndTrade : Window
                         notebookPage.AddVBox(new JournalPage());
                         break;
                     }
+                case 3:
+                    {
+                        Валюти валюти = new Валюти();
+                        //валюти.LoadRecords();
+                        notebookPage.AddVBox(валюти);
+                        break;
+                    }
             }
         }
     }
