@@ -35,6 +35,9 @@ class FormConfigurationSelectionParam : Window
         AddNameAndField(vbox, "Пароль", Password);
         AddNameAndField(vbox, "База даних", Basename);
 
+        Separator separator = new Separator(Orientation.Vertical);
+        vbox.PackStart(separator, false, false, 5);
+
         HBox hBoxButton = new HBox();
 
         Button buttonSave = new Button("Зберегти");
@@ -84,15 +87,14 @@ class FormConfigurationSelectionParam : Window
     private void AddNameAndField(VBox vbox, string name, Entry field)
     {
         Fixed fix = new Fixed();
-
         Label label = new Label(name);
 
         field.SetSizeRequest(300, 0);
 
-        fix.Put(label, 5, 18);
-        fix.Put(field, 100, 10);
+        fix.Put(label, 5, 8);
+        fix.Put(field, 100, 0);
 
-        vbox.PackStart(fix, false, false, 0);
+        vbox.PackStart(fix, false, false, 5);
     }
 
     bool SaveConfParam()
@@ -105,7 +107,7 @@ class FormConfigurationSelectionParam : Window
 
             md.Run();
             md.Destroy();
-            
+
             return false;
         }
 
@@ -175,4 +177,3 @@ class FormConfigurationSelectionParam : Window
         Close();
     }
 }
- 
