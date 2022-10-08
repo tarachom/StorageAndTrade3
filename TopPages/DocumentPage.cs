@@ -16,14 +16,6 @@ namespace StorageAndTrade
 
         #endregion
 
-        void OpenPageCallBack(int pageNum)
-        {
-            if (NotebookPagesDictionary.ContainsKey(pageNum))
-            {
-                DocumentNotebook.CurrentPage = pageNum;
-            }
-        }
-
         public DocumentPage() : base()
         {
             DocumentNotebook = new Notebook() { BorderWidth = 0, ShowBorder = false };
@@ -107,6 +99,14 @@ namespace StorageAndTrade
 
             if (!notebookPage.IsConstruct)
                 PageAndActionDictionary[DocumentNotebook.CurrentPage]?.Value?.Invoke(notebookPage);
+        }
+
+        void OpenPageCallBack(int pageNum)
+        {
+            if (NotebookPagesDictionary.ContainsKey(pageNum))
+            {
+                DocumentNotebook.CurrentPage = pageNum;
+            }
         }
     }
 }

@@ -45,7 +45,7 @@ namespace StorageAndTrade
         {
             /* Перший блок */
 
-            HBox hFirst = new HBox(false, 0);
+            HBox HFirst = new HBox(false, 0);
 
             VBox VFirst = new VBox(false, 0);
             AddCaption(VFirst, "Продажі");
@@ -54,42 +54,41 @@ namespace StorageAndTrade
             AddLinkButton(VFirst, "Акт виконаних робіт", "1");
             AddLinkButton(VFirst, "Реалізація товарі та послуг", "1");
             AddLinkButton(VFirst, "Повернення від клієнта", "1");
-            hFirst.PackStart(VFirst, false, false, 5);
+            HFirst.PackStart(VFirst, false, false, 5);
 
-            AddSeparator(hFirst);
+            AddSeparator(HFirst);
 
             VBox VToo = new VBox(false, 0);
             AddCaption(VToo, "Покупки");
             AddLinkButton(VToo, "Замовлення постачальнику", "2");
             AddLinkButton(VToo, "Поступлення товарів та послуг", "2");
             AddLinkButton(VToo, "Повернення постачальнику", "2");
-            hFirst.PackStart(VToo, false, false, 5);
+            HFirst.PackStart(VToo, false, false, 5);
 
-            PackStart(hFirst, false, false, 20);
+            PackStart(HFirst, false, false, 20);
 
             /* Другий блок */
 
-            HBox hToo = new HBox(false, 0);
+            HBox HToo = new HBox(false, 0);
 
             VBox VThree = new VBox(false, 0);
             AddCaption(VThree, "Склад");
             AddLinkButton(VThree, "Переміщення товарів", "3");
             AddLinkButton(VThree, "Внутрішнє споживання товарів", "3");
             AddLinkButton(VThree, "Псування товарі", "3");
-            hToo.PackStart(VThree, false, false, 5);
+            HToo.PackStart(VThree, false, false, 5);
 
-            AddSeparator(hToo);
+            AddSeparator(HToo);
 
             VBox VFour = new VBox(false, 0);
             AddCaption(VFour, "Каса");
             AddLinkButton(VFour, "Прихідний касовий ордер", "4");
             AddLinkButton(VFour, "Розхідний касовий ордер", "4");
-            hToo.PackStart(VFour, false, false, 5);
+            HToo.PackStart(VFour, false, false, 5);
 
-            PackStart(hToo, false, false, 20);
+            PackStart(HToo, false, false, 20);
 
             ShowAll();
         }
-
     }
 }
