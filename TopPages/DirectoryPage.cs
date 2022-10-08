@@ -28,7 +28,9 @@ namespace StorageAndTrade
 
             PageAndActionDictionary.Add(counter, new NameValue<Action<NotebookPage>>("Головна", (NotebookPage page) =>
                 {
-                    /**/
+                    DirectoryPageStart directoryPageStart = new DirectoryPageStart();
+                    directoryPageStart.OpenPageCallBack = OpenPageCallBack;
+                    page.AddVBox(directoryPageStart);
                 }
             ));
 
@@ -65,12 +67,6 @@ namespace StorageAndTrade
                 }
             ));
 
-            // PageAndActionDictionary.Add(++counter, new NameValue<Action<NotebookPage>>("Файли", (NotebookPage page) =>
-            //     {
-            //         /**/
-            //     }
-            // ));
-
             CreateTopNotebookPages();
 
             PackStart(DirectoryNotebook, true, true, 0);
@@ -106,6 +102,14 @@ namespace StorageAndTrade
 
             if (!notebookPage.IsConstruct)
                 PageAndActionDictionary[DirectoryNotebook.CurrentPage]?.Value?.Invoke(notebookPage);
+        }
+
+        void OpenPageCallBack(int pageNum)
+        {
+            if (NotebookPagesDictionary.ContainsKey(pageNum))
+            {
+                DirectoryNotebook.CurrentPage = pageNum;
+            }
         }
     }
 }
