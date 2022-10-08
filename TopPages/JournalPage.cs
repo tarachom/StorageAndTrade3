@@ -2,70 +2,101 @@ using Gtk;
 using System;
 using System.IO;
 
-class JournalPage : VBox
+using AccountingSoftware;
+
+namespace StorageAndTrade
 {
-    private Notebook JournalNotebook;
-
-    public JournalPage() : base()
+    class JournalPage : VBox
     {
-        JournalNotebook = new Notebook();
-        JournalNotebook.TabPos = PositionType.Left;
+        #region Notebook
 
-        CreateTopNotebookPages(new string[] { "Повний", "Продажі", "Закупки", "Склад", "Каса" });
+        private Notebook JournalNotebook;
+        private Dictionary<int, NotebookPage> NotebookPagesDictionary;
+        private Dictionary<int, NameValue<System.Action<NotebookPage>>> PageAndActionDictionary;
 
-        PackStart(JournalNotebook, true, true, 0);
+        #endregion
 
-
-
-        ShowAll();
-    }
-
-    void CreateTopNotebookPages(string[] names)
-    {
-        foreach (string name in names)
+        public JournalPage() : base()
         {
-            ScrolledWindow scroll = new ScrolledWindow();
-            //scroll.Expand = true;
-            scroll.ShadowType = ShadowType.In;
-            scroll.SetPolicy(PolicyType.Never, PolicyType.Automatic);
+            JournalNotebook = new Notebook();
+            JournalNotebook.TabPos = PositionType.Left;
 
-            int numPage = JournalNotebook.AppendPage(scroll, new Label { Text = name, Expand = false });
+            NotebookPagesDictionary = new Dictionary<int, NotebookPage>();
+            PageAndActionDictionary = new Dictionary<int, NameValue<Action<NotebookPage>>>();
 
-            VBox vbox = new VBox(false, 5);
-            scroll.Add(vbox);
+            int counter = 0;
 
-            AddTst(vbox);
-            AddTst(vbox);
-            AddTst(vbox);
-            AddTst(vbox);
-            AddTst(vbox);
-            AddTst(vbox);
+            PageAndActionDictionary.Add(counter, new NameValue<Action<NotebookPage>>("Головна", (NotebookPage page) =>
+                {
+                    /**/
+                }
+            ));
 
+            PageAndActionDictionary.Add(++counter, new NameValue<Action<NotebookPage>>("Повний", (NotebookPage page) =>
+                {
+                    /**/
+                }
+            ));
+
+            PageAndActionDictionary.Add(++counter, new NameValue<Action<NotebookPage>>("Продажі", (NotebookPage page) =>
+                {
+                    /**/
+                }
+            ));
+
+            PageAndActionDictionary.Add(++counter, new NameValue<Action<NotebookPage>>("Закупки", (NotebookPage page) =>
+                {
+                    /**/
+                }
+            ));
+
+            PageAndActionDictionary.Add(++counter, new NameValue<Action<NotebookPage>>("Склад", (NotebookPage page) =>
+                {
+                    /**/
+                }
+            ));
+
+            PageAndActionDictionary.Add(++counter, new NameValue<Action<NotebookPage>>("Фінанси", (NotebookPage page) =>
+                {
+                    /**/
+                }
+            ));
+
+            CreateTopNotebookPages();
+
+            PackStart(JournalNotebook, true, true, 0);
+
+            ShowAll();
+
+            JournalNotebook.SwitchPage += OnTopNotebookSelectPage;
+            OnTopNotebookSelectPage(null, new SwitchPageArgs());
         }
-    }
 
-    Label label;
-    Entry entry;
-    Button buttonOk;
+        void CreateTopNotebookPages()
+        {
+            foreach (NameValue<Action<NotebookPage>> page in PageAndActionDictionary.Values)
+            {
+                ScrolledWindow scroll = new ScrolledWindow() { ShadowType = ShadowType.In };
+                scroll.SetPolicy(PolicyType.Never, PolicyType.Automatic);
 
-    void AddTst(VBox vbox)
-    {
-        HBox hbox = new HBox(false, 0);
-        hbox.Halign = Align.Start;
+                int numPage = JournalNotebook.AppendPage(scroll, new Label { Text = page.Name, Expand = false, Halign = Align.End });
 
-        label = new Label("Test");
-        hbox.PackStart(label, false, false, 5);
+                NotebookPagesDictionary.Add(numPage,
+                    new NotebookPage
+                    {
+                        NumPage = numPage,
+                        NamePage = page.Name,
+                        ScrolledWindow = scroll
+                    });
+            }
+        }
 
-        entry = new Entry();
-        hbox.PackStart(entry, false, false, 5);
+        void OnTopNotebookSelectPage(object? sender, SwitchPageArgs args)
+        {
+            NotebookPage notebookPage = NotebookPagesDictionary[JournalNotebook.CurrentPage];
 
-        buttonOk = new Button("OK");
-        //buttonOk.Clicked += OnButtonOkClicked;
-        hbox.PackStart(buttonOk, false, false, 5);
-
-        LinkButton lb = new LinkButton("test");
-        hbox.PackStart(lb, false, false, 5);
-
-        vbox.PackStart(hbox, false, false, 5);
+            if (!notebookPage.IsConstruct)
+                PageAndActionDictionary[JournalNotebook.CurrentPage]?.Value?.Invoke(notebookPage);
+        }
     }
 }

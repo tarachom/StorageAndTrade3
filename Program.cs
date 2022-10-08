@@ -1,11 +1,14 @@
 ﻿using Gtk;
 
-class Program 
+namespace StorageAndTrade
 {
-    public static void Main()
+    class Program
     {
-        Application.Init();
-        new FormConfigurationSelection();
-        Application.Run();
+        public static void Main()
+        {
+            Application.Init();
+            new FormConfigurationSelection();
+            Application.Run();
+        }
     }
 }
