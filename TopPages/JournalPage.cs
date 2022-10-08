@@ -19,7 +19,7 @@ namespace StorageAndTrade
         public JournalPage() : base()
         {
             JournalNotebook = new Notebook();
-            JournalNotebook.TabPos = PositionType.Left;
+            JournalNotebook.TabPos = PositionType.Top;
 
             NotebookPagesDictionary = new Dictionary<int, NotebookPage>();
             PageAndActionDictionary = new Dictionary<int, NameValue<Action<NotebookPage>>>();
@@ -44,7 +44,7 @@ namespace StorageAndTrade
                 }
             ));
 
-            PageAndActionDictionary.Add(++counter, new NameValue<Action<NotebookPage>>("Закупки", (NotebookPage page) =>
+            PageAndActionDictionary.Add(++counter, new NameValue<Action<NotebookPage>>("Покупки", (NotebookPage page) =>
                 {
                     /**/
                 }

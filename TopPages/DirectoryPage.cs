@@ -19,7 +19,7 @@ namespace StorageAndTrade
         public DirectoryPage() : base()
         {
             DirectoryNotebook = new Notebook();
-            DirectoryNotebook.TabPos = PositionType.Left;
+            DirectoryNotebook.TabPos = PositionType.Top;
 
             NotebookPagesDictionary = new Dictionary<int, NotebookPage>();
             PageAndActionDictionary = new Dictionary<int, NameValue<Action<NotebookPage>>>();
@@ -65,11 +65,11 @@ namespace StorageAndTrade
                 }
             ));
 
-            PageAndActionDictionary.Add(++counter, new NameValue<Action<NotebookPage>>("Файли", (NotebookPage page) =>
-                {
-                    /**/
-                }
-            ));
+            // PageAndActionDictionary.Add(++counter, new NameValue<Action<NotebookPage>>("Файли", (NotebookPage page) =>
+            //     {
+            //         /**/
+            //     }
+            // ));
 
             CreateTopNotebookPages();
 

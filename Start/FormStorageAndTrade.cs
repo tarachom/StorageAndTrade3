@@ -26,32 +26,32 @@ namespace StorageAndTrade
 
             DeleteEvent += delegate { Application.Quit(); };
 
-            TopNotebook = new Notebook();
-            TopNotebook.TabPos = PositionType.Top;
+            TopNotebook = new Notebook() { BorderWidth = 0, ShowBorder = false };
+            TopNotebook.TabPos = PositionType.Left;
 
             TopNotebookPages = new Dictionary<int, NotebookPage>();
             PageAndActionDictionary = new Dictionary<int, NameValue<Action<NotebookPage>>>();
 
             int counter = 0;
 
-            PageAndActionDictionary.Add(counter, new NameValue<Action<NotebookPage>>("Головна", (NotebookPage page) =>
+            PageAndActionDictionary.Add(counter, new NameValue<Action<NotebookPage>>("Стартова", (NotebookPage page) =>
                 { page.AddVBox(new FirstPage()); }
-            ));
-
-            PageAndActionDictionary.Add(++counter, new NameValue<Action<NotebookPage>>("Довідники", (NotebookPage page) =>
-                { page.AddVBox(new DirectoryPage()); }
-            ));
-
-            PageAndActionDictionary.Add(++counter, new NameValue<Action<NotebookPage>>("Журнали", (NotebookPage page) =>
-                { page.AddVBox(new JournalPage()); }
             ));
 
             PageAndActionDictionary.Add(++counter, new NameValue<Action<NotebookPage>>("Документи", (NotebookPage page) =>
                 { page.AddVBox(new DocumentPage()); }
             ));
 
+            PageAndActionDictionary.Add(++counter, new NameValue<Action<NotebookPage>>("Журнали", (NotebookPage page) =>
+                { page.AddVBox(new JournalPage()); }
+            ));
+
             PageAndActionDictionary.Add(++counter, new NameValue<Action<NotebookPage>>("Звіти", (NotebookPage page) =>
                 { }
+            ));
+
+            PageAndActionDictionary.Add(++counter, new NameValue<Action<NotebookPage>>("Довідники", (NotebookPage page) =>
+                { page.AddVBox(new DirectoryPage()); }
             ));
 
             PageAndActionDictionary.Add(++counter, new NameValue<Action<NotebookPage>>("Сервіс", (NotebookPage page) =>
@@ -81,9 +81,9 @@ namespace StorageAndTrade
             foreach (NameValue<Action<NotebookPage>> page in PageAndActionDictionary.Values)
             {
                 ScrolledWindow scroll = new ScrolledWindow() { ShadowType = ShadowType.In };
-                scroll.SetPolicy(PolicyType.Never, PolicyType.Automatic);
+                scroll.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
 
-                int numPage = TopNotebook.AppendPage(scroll, new Label { Text = page.Name, Expand = false });
+                int numPage = TopNotebook.AppendPage(scroll, new Label { Text = page.Name, Expand = false, Halign = Align.End });
 
                 TopNotebookPages.Add(numPage,
                     new NotebookPage

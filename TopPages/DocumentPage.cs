@@ -18,8 +18,8 @@ namespace StorageAndTrade
 
         public DocumentPage() : base()
         {
-            DocumentNotebook = new Notebook();
-            DocumentNotebook.TabPos = PositionType.Left;
+            DocumentNotebook = new Notebook() { BorderWidth = 0, ShowBorder = false };
+            DocumentNotebook.TabPos = PositionType.Top;
 
             NotebookPagesDictionary = new Dictionary<int, NotebookPage>();
             PageAndActionDictionary = new Dictionary<int, NameValue<Action<NotebookPage>>>();
@@ -32,71 +32,71 @@ namespace StorageAndTrade
                 }
             ));
 
-            PageAndActionDictionary.Add(++counter, new NameValue<Action<NotebookPage>>("Замовлення клієнтів", (NotebookPage page) =>
+            PageAndActionDictionary.Add(++counter, new NameValue<Action<NotebookPage>>("Продажі", (NotebookPage page) =>
                 {
                     /**/
                 }
             ));
 
-            PageAndActionDictionary.Add(++counter, new NameValue<Action<NotebookPage>>("Рахунок фактура", (NotebookPage page) =>
+            // PageAndActionDictionary.Add(++counter, new NameValue<Action<NotebookPage>>("Рахунок", (NotebookPage page) =>
+            //     {
+            //         /**/
+            //     }
+            // ));
+
+            // PageAndActionDictionary.Add(++counter, new NameValue<Action<NotebookPage>>("Акт", (NotebookPage page) =>
+            //     {
+            //         /**/
+            //     }
+            // ));
+
+            // PageAndActionDictionary.Add(++counter, new NameValue<Action<NotebookPage>>("Реалізація", (NotebookPage page) =>
+            //     {
+            //         /**/
+            //     }
+            // ));
+
+            PageAndActionDictionary.Add(++counter, new NameValue<Action<NotebookPage>>("Покупки", (NotebookPage page) =>
                 {
                     /**/
                 }
             ));
 
-            PageAndActionDictionary.Add(++counter, new NameValue<Action<NotebookPage>>("Акт виконаних робіт", (NotebookPage page) =>
+            PageAndActionDictionary.Add(++counter, new NameValue<Action<NotebookPage>>("Каса", (NotebookPage page) =>
                 {
                     /**/
                 }
             ));
 
-            PageAndActionDictionary.Add(++counter, new NameValue<Action<NotebookPage>>("Реалізація товарів", (NotebookPage page) =>
+            PageAndActionDictionary.Add(++counter, new NameValue<Action<NotebookPage>>("Склад", (NotebookPage page) =>
                 {
                     /**/
                 }
             ));
 
-            PageAndActionDictionary.Add(++counter, new NameValue<Action<NotebookPage>>("Замовлення постач.", (NotebookPage page) =>
+            PageAndActionDictionary.Add(++counter, new NameValue<Action<NotebookPage>>("Внутрішні", (NotebookPage page) =>
                 {
                     /**/
                 }
             ));
 
-            PageAndActionDictionary.Add(++counter, new NameValue<Action<NotebookPage>>("Поступлення товарів", (NotebookPage page) =>
-                {
-                    /**/
-                }
-            ));
+            // PageAndActionDictionary.Add(++counter, new NameValue<Action<NotebookPage>>("Переміщення", (NotebookPage page) =>
+            //     {
+            //         /**/
+            //     }
+            // ));
 
-            PageAndActionDictionary.Add(++counter, new NameValue<Action<NotebookPage>>("Прихідний ордер", (NotebookPage page) =>
-                {
-                    /**/
-                }
-            ));
+            // PageAndActionDictionary.Add(++counter, new NameValue<Action<NotebookPage>>("Внутрінє", (NotebookPage page) =>
+            //     {
+            //         /**/
+            //     }
+            // ));
 
-            PageAndActionDictionary.Add(++counter, new NameValue<Action<NotebookPage>>("Розхідний ордер", (NotebookPage page) =>
-                {
-                    /**/
-                }
-            ));
-
-            PageAndActionDictionary.Add(++counter, new NameValue<Action<NotebookPage>>("Переміщення тов.", (NotebookPage page) =>
-                {
-                    /**/
-                }
-            ));
-
-            PageAndActionDictionary.Add(++counter, new NameValue<Action<NotebookPage>>("Внутрінє спож.", (NotebookPage page) =>
-                {
-                    /**/
-                }
-            ));
-
-            PageAndActionDictionary.Add(++counter, new NameValue<Action<NotebookPage>>("Псування товарів", (NotebookPage page) =>
-                {
-                    /**/
-                }
-            ));
+            // PageAndActionDictionary.Add(++counter, new NameValue<Action<NotebookPage>>("Псування", (NotebookPage page) =>
+            //     {
+            //         /**/
+            //     }
+            // ));
 
             CreateTopNotebookPages();
 
