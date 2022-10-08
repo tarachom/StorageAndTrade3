@@ -16,6 +16,14 @@ namespace StorageAndTrade
 
         #endregion
 
+        void OpenPageCallBack(int pageNum)
+        {
+            if (NotebookPagesDictionary.ContainsKey(pageNum))
+            {
+                DocumentNotebook.CurrentPage = pageNum;
+            }
+        }
+
         public DocumentPage() : base()
         {
             DocumentNotebook = new Notebook() { BorderWidth = 0, ShowBorder = false };
@@ -28,75 +36,39 @@ namespace StorageAndTrade
 
             PageAndActionDictionary.Add(counter, new NameValue<Action<NotebookPage>>("Головна", (NotebookPage page) =>
                 {
-                    /**/
+                    DocumentPageStart documentPageStart = new DocumentPageStart();
+                    documentPageStart.OpenPageCallBack = OpenPageCallBack;
+                    page.AddVBox(documentPageStart);
                 }
             ));
 
             PageAndActionDictionary.Add(++counter, new NameValue<Action<NotebookPage>>("Продажі", (NotebookPage page) =>
                 {
                     /**/
+                    Console.WriteLine(1);
                 }
             ));
-
-            // PageAndActionDictionary.Add(++counter, new NameValue<Action<NotebookPage>>("Рахунок", (NotebookPage page) =>
-            //     {
-            //         /**/
-            //     }
-            // ));
-
-            // PageAndActionDictionary.Add(++counter, new NameValue<Action<NotebookPage>>("Акт", (NotebookPage page) =>
-            //     {
-            //         /**/
-            //     }
-            // ));
-
-            // PageAndActionDictionary.Add(++counter, new NameValue<Action<NotebookPage>>("Реалізація", (NotebookPage page) =>
-            //     {
-            //         /**/
-            //     }
-            // ));
 
             PageAndActionDictionary.Add(++counter, new NameValue<Action<NotebookPage>>("Покупки", (NotebookPage page) =>
                 {
                     /**/
-                }
-            ));
-
-            PageAndActionDictionary.Add(++counter, new NameValue<Action<NotebookPage>>("Каса", (NotebookPage page) =>
-                {
-                    /**/
+                    Console.WriteLine(2);
                 }
             ));
 
             PageAndActionDictionary.Add(++counter, new NameValue<Action<NotebookPage>>("Склад", (NotebookPage page) =>
                 {
                     /**/
+                    Console.WriteLine(3);
                 }
             ));
 
-            PageAndActionDictionary.Add(++counter, new NameValue<Action<NotebookPage>>("Внутрішні", (NotebookPage page) =>
+            PageAndActionDictionary.Add(++counter, new NameValue<Action<NotebookPage>>("Каса", (NotebookPage page) =>
                 {
                     /**/
+                    Console.WriteLine(4);
                 }
             ));
-
-            // PageAndActionDictionary.Add(++counter, new NameValue<Action<NotebookPage>>("Переміщення", (NotebookPage page) =>
-            //     {
-            //         /**/
-            //     }
-            // ));
-
-            // PageAndActionDictionary.Add(++counter, new NameValue<Action<NotebookPage>>("Внутрінє", (NotebookPage page) =>
-            //     {
-            //         /**/
-            //     }
-            // ));
-
-            // PageAndActionDictionary.Add(++counter, new NameValue<Action<NotebookPage>>("Псування", (NotebookPage page) =>
-            //     {
-            //         /**/
-            //     }
-            // ));
 
             CreateTopNotebookPages();
 
