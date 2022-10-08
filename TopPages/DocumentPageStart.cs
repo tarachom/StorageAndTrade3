@@ -76,6 +76,7 @@ namespace StorageAndTrade
             AddLinkButton(VThree, "Переміщення товарів", "3");
             AddLinkButton(VThree, "Внутрішнє споживання товарів", "3");
             AddLinkButton(VThree, "Псування товарі", "3");
+            AddLinkButton(VThree, "Введення залишків", "3");
             HToo.PackStart(VThree, false, false, 5);
 
             AddSeparator(HToo);
