@@ -1,7 +1,6 @@
 using Gtk;
 
 using AccountingSoftware;
-using Конфа = StorageAndTrade_1_0;
 
 namespace StorageAndTrade
 {
@@ -143,12 +142,12 @@ namespace StorageAndTrade
 
             if (SaveConfParam())
             {
-                Конфа.Config.Kernel = new Kernel();
+                Kernel kernel = new Kernel();
 
                 Exception exception;
                 bool IsExistsDatabase = false;
 
-                bool flag = Конфа.Config.Kernel.CreateDatabaseIfNotExist(
+                bool flag = kernel.CreateDatabaseIfNotExist(
                     OpenConfigurationParam.DataBaseServer,
                     OpenConfigurationParam.DataBaseLogin,
                     OpenConfigurationParam.DataBasePassword,
