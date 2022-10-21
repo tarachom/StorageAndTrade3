@@ -1,7 +1,4 @@
 using Gtk;
-using System;
-using System.IO;
-using System.ComponentModel;
 
 using AccountingSoftware;
 using Константи = StorageAndTrade_1_0.Константи;
@@ -27,8 +24,7 @@ namespace StorageAndTrade
             {
                 return new object[] { new Gdk.Pixbuf(GetIconByte()),
                 ID, Назва, КороткаНазва,
-                Код_R030, Код
-            };
+                Код_R030, Код};
             }
 
             private byte[]? cashe_icon;
@@ -62,7 +58,7 @@ namespace StorageAndTrade
 
                 treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
                 treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Editable = true }, "text", 2) { FixedWidth = 300 });
-                treeView.AppendColumn(new TreeViewColumn("КороткаНазва", new CellRendererText(), "text", 3));
+                treeView.AppendColumn(new TreeViewColumn("Коротка назва", new CellRendererText(), "text", 3));
                 treeView.AppendColumn(new TreeViewColumn("R030", new CellRendererText(), "text", 4));
                 treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText(), "text", 5));
             }
@@ -237,10 +233,10 @@ namespace StorageAndTrade
             валюти_Select.QuerySelect.Field.AddRange(
                 new string[]
                 {
-                Довідники.Валюти_Const.Назва,
-                Довідники.Валюти_Const.Код_R030,
-                Довідники.Валюти_Const.Код,
-                Довідники.Валюти_Const.КороткаНазва
+                    Довідники.Валюти_Const.Назва,
+                    Довідники.Валюти_Const.Код_R030,
+                    Довідники.Валюти_Const.Код,
+                    Довідники.Валюти_Const.КороткаНазва
                 });
 
             //ORDER
@@ -249,16 +245,17 @@ namespace StorageAndTrade
             валюти_Select.Select();
             while (валюти_Select.MoveNext())
             {
-                Довідники.Валюти_Pointer cur = валюти_Select.Current;
+                Довідники.Валюти_Pointer? cur = валюти_Select.Current;
 
-                Store.AppendValues(new Записи
-                {
-                    ID = cur.UnigueID.ToString(),
-                    Назва = cur.Fields?[Довідники.Валюти_Const.Назва].ToString() ?? "",
-                    КороткаНазва = cur.Fields?[Довідники.Валюти_Const.КороткаНазва].ToString() ?? "",
-                    Код = cur.Fields?[Довідники.Валюти_Const.Код].ToString() ?? "",
-                    Код_R030 = cur.Fields?[Довідники.Валюти_Const.Код_R030].ToString() ?? ""
-                }.ToArray());
+                if (cur != null)
+                    Store.AppendValues(new Записи
+                    {
+                        ID = cur.UnigueID.ToString(),
+                        Назва = cur.Fields?[Довідники.Валюти_Const.Назва].ToString() ?? "",
+                        КороткаНазва = cur.Fields?[Довідники.Валюти_Const.КороткаНазва].ToString() ?? "",
+                        Код = cur.Fields?[Довідники.Валюти_Const.Код].ToString() ?? "",
+                        Код_R030 = cur.Fields?[Довідники.Валюти_Const.Код_R030].ToString() ?? ""
+                    }.ToArray());
             }
         }
 
