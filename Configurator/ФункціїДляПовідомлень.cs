@@ -65,7 +65,7 @@ namespace StorageAndTrade
 DELETE FROM {Системні.ПовідомленняТаПомилки_Помилки_TablePart.TABLE}
 ";
 
-            Конфа.Config.Kernel.DataBase.ExecuteSQL(query);
+            Конфа.Config.Kernel!.DataBase.ExecuteSQL(query);
         }
 
         public static string ПрочитатиПовідомленняПроПомилку()
@@ -88,7 +88,7 @@ ORDER BY Дата ASC
             string[] columnsName;
             List<Dictionary<string, object>> listRow;
 
-            Конфа.Config.Kernel.DataBase.SelectRequest(query, paramQuery, out columnsName, out listRow);
+            Конфа.Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listRow);
 
             string message = "";
 

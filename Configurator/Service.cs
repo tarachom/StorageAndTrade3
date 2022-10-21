@@ -79,13 +79,13 @@ namespace StorageAndTrade.Service
             string queryClear = $@"
 DELETE FROM {Системні.ФоновіЗадачі_ОбчисленняВіртуальнихЗалишків_TablePart.TABLE}
 ";
-            Config.KernelBackgroundTask.DataBase.ExecuteSQL(queryClear);
+            Config.KernelBackgroundTask!.DataBase.ExecuteSQL(queryClear);
         }
 
         public static void ПідключитиДодаток_UUID_OSSP()
         {
             string query = "CREATE EXTENSION IF NOT EXISTS \"uuid-ossp\"";
-            Config.KernelBackgroundTask.DataBase.ExecuteSQL(query);
+            Config.KernelBackgroundTask!.DataBase.ExecuteSQL(query);
 
             /*
             --CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
@@ -162,7 +162,7 @@ OR
        -Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Сума} END) != 0
 ";
 
-                        Config.KernelBackgroundTask.DataBase.ExecuteSQL(query);
+                        Config.KernelBackgroundTask!.DataBase.ExecuteSQL(query);
 
                         break;
                     }
@@ -209,7 +209,7 @@ OR
        -Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} END) != 0
 ";
 
-                        Config.KernelBackgroundTask.DataBase.ExecuteSQL(query);
+                        Config.KernelBackgroundTask!.DataBase.ExecuteSQL(query);
 
                         break;
                     }
@@ -260,7 +260,7 @@ OR
        -Рег_ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} END) != 0
 ";
 
-                        Config.KernelBackgroundTask.DataBase.ExecuteSQL(query);
+                        Config.KernelBackgroundTask!.DataBase.ExecuteSQL(query);
 
                         break;
                     }
@@ -295,7 +295,7 @@ HAVING
        -Рег_РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} END) != 0
 ";
 
-                        Config.KernelBackgroundTask.DataBase.ExecuteSQL(query);
+                        Config.KernelBackgroundTask!.DataBase.ExecuteSQL(query);
 
                         break;
                     }
@@ -330,7 +330,7 @@ HAVING
        -Рег_РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} END) != 0
 ";
 
-                        Config.KernelBackgroundTask.DataBase.ExecuteSQL(query);
+                        Config.KernelBackgroundTask!.DataBase.ExecuteSQL(query);
 
                         break;
                     }
@@ -367,7 +367,7 @@ HAVING
        -Рег_ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Замовлено} END) != 0
 ";
 
-                        Config.KernelBackgroundTask.DataBase.ExecuteSQL(query);
+                        Config.KernelBackgroundTask!.DataBase.ExecuteSQL(query);
 
                         break;
                     }
@@ -420,7 +420,7 @@ OR
        -Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіПідЗамовлення} END) != 0
 ";
 
-                        Config.KernelBackgroundTask.DataBase.ExecuteSQL(query);
+                        Config.KernelBackgroundTask!.DataBase.ExecuteSQL(query);
 
                         break;
                     }
@@ -457,7 +457,7 @@ HAVING
        -Рег_РухКоштів.{РухКоштів_Const.Сума} END) != 0
 ";
 
-                        Config.KernelBackgroundTask.DataBase.ExecuteSQL(query);
+                        Config.KernelBackgroundTask!.DataBase.ExecuteSQL(query);
 
                         break;
                     }
@@ -475,7 +475,7 @@ HAVING
 DELETE FROM {Системні.ФоновіЗадачі_АктуальністьВіртуальнихЗалишків_TablePart.TABLE}
 WHERE {Системні.ФоновіЗадачі_АктуальністьВіртуальнихЗалишків_TablePart.Регістр} = '{registerAccumulation}';
 ";
-            Config.KernelBackgroundTask.DataBase.ExecuteSQL(query);
+            Config.KernelBackgroundTask!.DataBase.ExecuteSQL(query);
 
             query = $@"
 INSERT INTO {Системні.ФоновіЗадачі_АктуальністьВіртуальнихЗалишків_TablePart.TABLE}
@@ -486,7 +486,7 @@ INSERT INTO {Системні.ФоновіЗадачі_Актуальність�
     {Системні.ФоновіЗадачі_АктуальністьВіртуальнихЗалишків_TablePart.Актуально}
 )";
             //Таблична частина День з конфігурації
-            ConfigurationObjectTablePart tablePartDay = Config.Kernel.Conf.ConstantsBlock["ВіртуальніТаблиціРегістрів"].Constants[registerAccumulation].TabularParts["День"];
+            ConfigurationObjectTablePart tablePartDay = Config.Kernel!.Conf.ConstantsBlock["ВіртуальніТаблиціРегістрів"].Constants[registerAccumulation].TabularParts["День"];
 
             string tableDay = tablePartDay.Table;
             string fieldDay = tablePartDay.Fields["Період"].NameInTable;
@@ -552,18 +552,18 @@ ORDER BY Дата ASC
             string[] columnsName;
             List<object[]> listRow;
 
-            Config.KernelBackgroundTask.DataBase.SelectRequest(querySelectTask, null, out columnsName, out listRow);
+            Config.KernelBackgroundTask!.DataBase.SelectRequest(querySelectTask, null, out columnsName, out listRow);
 
-            Config.KernelBackgroundTask.DataBase.BeginTransaction();
+            Config.KernelBackgroundTask!.DataBase.BeginTransaction();
 
             //Обробка задач
             foreach (object[] row in listRow)
             {
-                string uid = row[0].ToString();
-                string Дата = row[1].ToString();
-                string Документ = row[2].ToString();
-                string ТипДокументу = row[3].ToString();
-                string Період = row[4].ToString();
+                string uid = row[0].ToString()!;
+                string Дата = row[1].ToString()!;
+                string Документ = row[2].ToString()!;
+                string ТипДокументу = row[3].ToString()!;
+                string Період = row[4].ToString()!;
 
                 bool documentProcessed = false;
 
@@ -582,7 +582,7 @@ ORDER BY Дата ASC
                 if (!documentProcessed)
                 {
                     //Список регістрів доступних для документу
-                    List<string> allowRegisterAccumulation = Config.Kernel.Conf.Documents[ТипДокументу].AllowRegisterAccumulation;
+                    List<string> allowRegisterAccumulation = Config.Kernel!.Conf.Documents[ТипДокументу].AllowRegisterAccumulation;
 
                     foreach (string registerAccumulation in allowRegisterAccumulation)
                     {
@@ -972,7 +972,7 @@ WHERE uid = '{uid}'
                 foreach (string documentType in documentProcessed.Value)
                 {
                     //Список регістрів доступних для документу
-                    List<string> allowRegisterAccumulation = Config.Kernel.Conf.Documents[documentType].AllowRegisterAccumulation;
+                    List<string> allowRegisterAccumulation = Config.Kernel!.Conf.Documents[documentType].AllowRegisterAccumulation;
 
                     foreach (string registerAccumulation in allowRegisterAccumulation)
                     {
@@ -1010,7 +1010,7 @@ DELETE FROM {Системні.ФоновіЗадачі_Актуальність�
 WHERE date_trunc('month', '{period}'::timestamp) = {Системні.ФоновіЗадачі_АктуальністьВіртуальнихЗалишків_TablePart.Місяць} AND
     {Системні.ФоновіЗадачі_АктуальністьВіртуальнихЗалишків_TablePart.Регістр} IN({queryPartRegisterAccumulation})";
 
-            Config.KernelBackgroundTask.DataBase.ExecuteSQL(queryDelete);
+            Config.KernelBackgroundTask!.DataBase.ExecuteSQL(queryDelete);
 
             foreach (string registerAccumulation in allowRegisterAccumulation)
             {
@@ -1053,14 +1053,14 @@ ORDER BY Місяць ASC
             string[] columnsName;
             List<Dictionary<string, object>> listRow;
 
-            Config.KernelBackgroundTask.DataBase.SelectRequest(querySelect, null, out columnsName, out listRow);
+            Config.KernelBackgroundTask!.DataBase.SelectRequest(querySelect, null, out columnsName, out listRow);
 
             //Обробка
             foreach (Dictionary<string, object> row in listRow)
             {
-                string uid = row["uid"].ToString();
-                string Регістр = row["Регістр"].ToString();
-                string Місяць = row["Місяць"].ToString();
+                string uid = row["uid"].ToString()!;
+                string Регістр = row["Регістр"].ToString()!;
+                string Місяць = row["Місяць"].ToString()!;
 
                 switch (Регістр)
                 {

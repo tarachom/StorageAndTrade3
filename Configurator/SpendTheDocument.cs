@@ -153,7 +153,7 @@ UNION ALL
 			string[] columnsName;
 			List<Dictionary<string, object>> listNameRow;
 
-			Config.Kernel.DataBase.SelectRequest(query, paramQuery, out columnsName, out listNameRow);
+			Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listNameRow);
 
 			return listNameRow;
 		}
@@ -206,7 +206,7 @@ FROM
 			string[] columnsName;
 			List<Dictionary<string, object>> listNameRow;
 
-			Config.Kernel.DataBase.SelectRequest(query, paramQuery, out columnsName, out listNameRow);
+			Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listNameRow);
 
 			return listNameRow;
 		}
@@ -266,7 +266,7 @@ FROM
 			string[] columnsName;
 			List<Dictionary<string, object>> listNameRow;
 
-			Config.Kernel.DataBase.SelectRequest(query, paramQuery, out columnsName, out listNameRow);
+			Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listNameRow);
 
 			return listNameRow;
 		}
@@ -316,7 +316,7 @@ FROM
 			string[] columnsName;
 			List<Dictionary<string, object>> listNameRow;
 
-			Config.Kernel.DataBase.SelectRequest(query, paramQuery, out columnsName, out listNameRow);
+			Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listNameRow);
 
 			return listNameRow;
 		}
@@ -373,7 +373,7 @@ FROM
 			string[] columnsName;
 			List<Dictionary<string, object>> listNameRow;
 
-			Config.Kernel.DataBase.SelectRequest(query, paramQuery, out columnsName, out listNameRow);
+			Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listNameRow);
 
 			return listNameRow;
 		}
@@ -425,7 +425,7 @@ FROM
 			string[] columnsName;
 			List<Dictionary<string, object>> listNameRow;
 
-			Config.Kernel.DataBase.SelectRequest(query, paramQuery, out columnsName, out listNameRow);
+			Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listNameRow);
 
 			return listNameRow;
 		}
@@ -488,7 +488,7 @@ FROM
                     return false;
                 }
 
-				СписокНоменклатури.Add(ТовариРядок.НомерРядка, ТовариРядок.Номенклатура.GetDirectoryObject());
+				СписокНоменклатури.Add(ТовариРядок.НомерРядка, ТовариРядок.Номенклатура.GetDirectoryObject()!);
 
 				if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
 				{
@@ -615,7 +615,7 @@ FROM
                     return false;
                 }
 
-				СписокНоменклатури.Add(ТовариРядок.НомерРядка, ТовариРядок.Номенклатура.GetDirectoryObject());
+				СписокНоменклатури.Add(ТовариРядок.НомерРядка, ТовариРядок.Номенклатура.GetDirectoryObject()!);
 
 				if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
 				{
@@ -734,7 +734,7 @@ FROM
                     return false;
                 }
 
-				СписокНоменклатури.Add(ТовариРядок.НомерРядка, ТовариРядок.Номенклатура.GetDirectoryObject());
+				СписокНоменклатури.Add(ТовариРядок.НомерРядка, ТовариРядок.Номенклатура.GetDirectoryObject()!);
 				
 				if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
 				{
@@ -1249,7 +1249,7 @@ FROM
                     return false;
                 }
 
-				СписокНоменклатури.Add(ТовариРядок.НомерРядка, ТовариРядок.Номенклатура.GetDirectoryObject());
+				СписокНоменклатури.Add(ТовариРядок.НомерРядка, ТовариРядок.Номенклатура.GetDirectoryObject()!);
 
 				if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
 				{
@@ -1524,7 +1524,7 @@ FROM
                     return false;
                 }
 
-				СписокНоменклатури.Add(ТовариРядок.НомерРядка, ТовариРядок.Номенклатура.GetDirectoryObject());
+				СписокНоменклатури.Add(ТовариРядок.НомерРядка, ТовариРядок.Номенклатура.GetDirectoryObject()!);
 			}
 
 			#endregion
@@ -1611,7 +1611,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
 			string[] columnsName;
 			List<Dictionary<string, object>> listNameRow;
 
-			Config.Kernel.DataBase.SelectRequest(query, paramQuery, out columnsName, out listNameRow);
+			Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listNameRow);
 
 			return listNameRow;
 		}
@@ -1642,7 +1642,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                     return false;
                 }
 
-				СписокНоменклатури.Add(ТовариРядок.НомерРядка, ТовариРядок.Номенклатура.GetDirectoryObject());
+				СписокНоменклатури.Add(ТовариРядок.НомерРядка, ТовариРядок.Номенклатура.GetDirectoryObject()!);
 			}
 
 			#endregion
@@ -1856,7 +1856,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
 			string[] columnsName;
 			List<Dictionary<string, object>> listNameRow;
 
-			Config.Kernel.DataBase.SelectRequest(query, paramQuery, out columnsName, out listNameRow);
+			Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listNameRow);
 
 			return listNameRow;
 		}
@@ -1887,7 +1887,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                     return false;
                 }
 
-				СписокНоменклатури.Add(ТовариРядок.НомерРядка, ТовариРядок.Номенклатура.GetDirectoryObject());
+				СписокНоменклатури.Add(ТовариРядок.НомерРядка, ТовариРядок.Номенклатура.GetDirectoryObject()!);
 			}
 
 			#endregion
@@ -2317,7 +2317,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                     return false;
                 }
 
-				СписокНоменклатури.Add(ТовариРядок.НомерРядка, ТовариРядок.Номенклатура.GetDirectoryObject());
+				СписокНоменклатури.Add(ТовариРядок.НомерРядка, ТовариРядок.Номенклатура.GetDirectoryObject()!);
 
 				if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
 				{
@@ -2653,7 +2653,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                     return false;
                 }
 
-				СписокНоменклатури.Add(ТовариРядок.НомерРядка, ТовариРядок.Номенклатура.GetDirectoryObject());
+				СписокНоменклатури.Add(ТовариРядок.НомерРядка, ТовариРядок.Номенклатура.GetDirectoryObject()!);
 			}
 
 			#endregion
@@ -2756,7 +2756,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
 				рухКоштів_RecordsSet.Records.Add(record_Каса);
 
 				Валюти_Pointer валютаКаси =
-					!Каси_Record.Каса.IsEmpty() ? Каси_Record.Каса.GetDirectoryObject().Валюта : ДокументОбєкт.Валюта;
+					!Каси_Record.Каса.IsEmpty() ? Каси_Record.Каса.GetDirectoryObject()!.Валюта : ДокументОбєкт.Валюта;
 
 				record_Каса.Income = true;
 				record_Каса.Owner = ДокументОбєкт.UnigueID.UGuid;
@@ -2824,7 +2824,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                     return false;
                 }
 
-				СписокНоменклатури.Add(ТовариРядок.НомерРядка, ТовариРядок.Номенклатура.GetDirectoryObject());
+				СписокНоменклатури.Add(ТовариРядок.НомерРядка, ТовариРядок.Номенклатура.GetDirectoryObject()!);
 
 				if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
 				{
@@ -3068,7 +3068,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                     return false;
                 }
 
-				СписокНоменклатури.Add(ТовариРядок.НомерРядка, ТовариРядок.Номенклатура.GetDirectoryObject());
+				СписокНоменклатури.Add(ТовариРядок.НомерРядка, ТовариРядок.Номенклатура.GetDirectoryObject()!);
 
 				if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
 				{

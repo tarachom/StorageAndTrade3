@@ -103,7 +103,7 @@ namespace StorageAndTrade
             серіїНоменклатури_Select.QuerySelect.Where.Add(new Where(Довідники.СеріїНоменклатури_Const.Номер, Comparison.EQ, СерійнийНомер));
 
             if (серіїНоменклатури_Select.SelectSingle())
-                return серіїНоменклатури_Select.Current;
+                return серіїНоменклатури_Select.Current!;
             else
             {
                 Довідники.СеріїНоменклатури_Objest серіїНоменклатури_Objest = new Довідники.СеріїНоменклатури_Objest();

@@ -65,7 +65,7 @@ WHERE {Константи.ЗавантаженняДанихІзСайтів.З�
             Dictionary<string, object> paramQuery = new Dictionary<string, object>();
             paramQuery.Add("Дата", DateTime.Now.AddDays(-7));
 
-            Конфа.Config.Kernel.DataBase.ExecuteSQL(query, paramQuery);
+            Конфа.Config.Kernel!.DataBase.ExecuteSQL(query, paramQuery);
         }
 
         public static List<Dictionary<string, object>> ОтриматиЗаписиЗІсторіїЗавантаженняКурсуВалют(int КількістьЗаписів = 50)
@@ -91,7 +91,7 @@ LIMIT {КількістьЗаписів}
             string[] columnsName;
             List<Dictionary<string, object>> listRow;
 
-            Конфа.Config.Kernel.DataBase.SelectRequest(query, paramQuery, out columnsName, out listRow);
+            Конфа.Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listRow);
 
             return listRow;
         }
@@ -111,12 +111,12 @@ LIMIT 1
             string[] columnsName;
             List<Dictionary<string, object>> listRow;
 
-            Конфа.Config.Kernel.DataBase.SelectRequest(query, paramQuery, out columnsName, out listRow);
+            Конфа.Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listRow);
 
             if (listRow.Count == 1)
             {
                 Dictionary<string, object> Рядок = listRow[0];
-                return DateTime.Parse(Рядок["Дата"].ToString());
+                return DateTime.Parse(Рядок["Дата"]?.ToString() ?? DateTime.MinValue.ToString());
             }
             else
                 return null;

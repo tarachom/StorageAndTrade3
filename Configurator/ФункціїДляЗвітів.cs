@@ -65,10 +65,10 @@ namespace StorageAndTrade_1_0
         /// <param name="listRow">Список рядків</param>
         public static void DataToXML(XmlDocument xmlDoc, string blockName, string[] columnsName, List<object[]> listRow)
         {
-            XmlNode root = xmlDoc.SelectSingleNode("/root");
+            XmlNode? root = xmlDoc.SelectSingleNode("/root");
 
             XmlElement rootItemNode = xmlDoc.CreateElement(blockName);
-            root.AppendChild(rootItemNode);
+            root!.AppendChild(rootItemNode);
 
             foreach (object[] row in listRow)
             {
@@ -83,7 +83,7 @@ namespace StorageAndTrade_1_0
                     if (row[counter].GetType().Name == "UuidAndText")
                         node.InnerXml = ((UuidAndText)row[counter]).ToXml();
                     else
-                        node.InnerText = row[counter].ToString();
+                        node.InnerText = row[counter]?.ToString() ?? "";
                     nodeRow.AppendChild(node);
 
                     counter++;
@@ -99,10 +99,10 @@ namespace StorageAndTrade_1_0
         /// <param name="listRow">Список назва - значення</param>
         public static void DataHeadToXML(XmlDocument xmlDoc, string blockName, List<NameValue<string>> listRow)
         {
-            XmlNode root = xmlDoc.SelectSingleNode("/root");
+            XmlNode? root = xmlDoc.SelectSingleNode("/root");
 
             XmlElement rootItemNode = xmlDoc.CreateElement(blockName);
-            root.AppendChild(rootItemNode);
+            root!.AppendChild(rootItemNode);
 
             XmlElement nodeRow = xmlDoc.CreateElement("row");
             rootItemNode.AppendChild(nodeRow);
@@ -110,7 +110,7 @@ namespace StorageAndTrade_1_0
             foreach (NameValue<string> row in listRow)
             {
                 XmlElement node = xmlDoc.CreateElement(row.Name);
-                node.InnerText = row.Value;
+                node.InnerText = row.Value!;
                 nodeRow.AppendChild(node);
             }
         }
