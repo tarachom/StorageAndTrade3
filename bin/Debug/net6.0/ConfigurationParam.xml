@@ -8,5 +8,6 @@
     <Login>postgres</Login>
     <Password>1</Password>
     <BaseName>storage_and_trade</BaseName>
+    <OtherParam />
   </Configuration>
 </root>

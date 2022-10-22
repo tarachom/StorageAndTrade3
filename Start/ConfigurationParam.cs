@@ -6,18 +6,12 @@ namespace StorageAndTrade
 {
     public class ConfigurationParamCollection
     {
-        public static List<ConfigurationParam>? ListConfigurationParam { get; set; }
-
+        public static List<ConfigurationParam> ListConfigurationParam { get; set; } = new List<ConfigurationParam>();
         public static string PathToXML { get; set; } = "";
-
-        public static void Init()
-        {
-            ListConfigurationParam = new List<ConfigurationParam>();
-        }
 
         public static void LoadConfigurationParamFromXML(string pathToXML)
         {
-            Init();
+            ListConfigurationParam.Clear();
 
             if (File.Exists(pathToXML))
             {
@@ -29,7 +23,7 @@ namespace StorageAndTrade
                 {
                     ConfigurationParam ItemConfigurationParam = new ConfigurationParam();
 
-                    XPathNavigator? currentNode = ConfigurationParamNodes?.Current;
+                    XPathNavigator? currentNode = ConfigurationParamNodes.Current;
 
                     string SelectAttribute = currentNode?.GetAttribute("Select", "") ?? "";
                     if (!String.IsNullOrEmpty(SelectAttribute))
@@ -43,16 +37,26 @@ namespace StorageAndTrade
                     ItemConfigurationParam.DataBasePassword = currentNode?.SelectSingleNode("Password")?.Value ?? "";
                     ItemConfigurationParam.DataBaseBaseName = currentNode?.SelectSingleNode("BaseName")?.Value ?? "";
 
-                    ListConfigurationParam?.Add(ItemConfigurationParam);
+                    XPathNodeIterator? otherItemParamNodeList = currentNode?.Select("OtherParam/Param");
+
+                    if (otherItemParamNodeList != null)
+                        while (otherItemParamNodeList.MoveNext())
+                        {
+                            XPathNavigator? currentItemParamNode = otherItemParamNodeList.Current;
+                            string paramName = currentItemParamNode?.GetAttribute("name", "") ?? "";
+                            string paramValue = currentItemParamNode?.Value ?? "";
+
+                            if (!String.IsNullOrEmpty(paramName))
+                                ItemConfigurationParam.OtherParam.Add(paramName, paramValue);
+                        }
+
+                    ListConfigurationParam.Add(ItemConfigurationParam);
                 }
             }
         }
 
         public static void SaveConfigurationParamFromXML(string pathToXML)
         {
-            if (ListConfigurationParam == null)
-                throw new Exception("ListConfigurationParam null");
-
             XmlDocument xmlConfParamDocument = new XmlDocument();
             xmlConfParamDocument.AppendChild(xmlConfParamDocument.CreateXmlDeclaration("1.0", "utf-8", ""));
 
@@ -95,6 +99,17 @@ namespace StorageAndTrade
                 XmlElement nodeBaseName = xmlConfParamDocument.CreateElement("BaseName");
                 nodeBaseName.InnerText = ItemConfigurationParam.DataBaseBaseName;
                 configurationNode.AppendChild(nodeBaseName);
+
+                XmlElement nodeOtherParam = xmlConfParamDocument.CreateElement("OtherParam");
+                configurationNode.AppendChild(nodeOtherParam);
+
+                foreach (KeyValuePair<string, string> itemParam in ItemConfigurationParam.OtherParam)
+                {
+                    XmlElement nodeItemParam = xmlConfParamDocument.CreateElement("Param");
+                    nodeItemParam.SetAttribute("name", itemParam.Key);
+                    nodeItemParam.InnerText = itemParam.Value;
+                    nodeOtherParam.AppendChild(nodeItemParam);
+                }
             }
 
             xmlConfParamDocument.Save(pathToXML);
@@ -104,15 +119,12 @@ namespace StorageAndTrade
         {
             ConfigurationParam? selectConfigurationParam = null;
 
-            if (ListConfigurationParam != null)
+            foreach (ConfigurationParam itemConfigurationParam in ListConfigurationParam)
             {
-                foreach (ConfigurationParam itemConfigurationParam in ListConfigurationParam)
+                if (itemConfigurationParam.ConfigurationKey == key)
                 {
-                    if (itemConfigurationParam.ConfigurationKey == key)
-                    {
-                        selectConfigurationParam = itemConfigurationParam;
-                        break;
-                    }
+                    selectConfigurationParam = itemConfigurationParam;
+                    break;
                 }
             }
 
@@ -121,28 +133,21 @@ namespace StorageAndTrade
 
         public static bool RemoveConfigurationParam(string key)
         {
-            if (ListConfigurationParam != null)
-            {
-                ConfigurationParam? selectConfigurationParam = GetConfigurationParam(key);
+            ConfigurationParam? selectConfigurationParam = GetConfigurationParam(key);
 
-                if (selectConfigurationParam != null)
-                {
-                    ListConfigurationParam.Remove(selectConfigurationParam);
-                    return true;
-                }
-                else
-                    return false;
+            if (selectConfigurationParam != null)
+            {
+                ListConfigurationParam.Remove(selectConfigurationParam);
+                return true;
             }
-            return false;
+            else
+                return false;
         }
 
         public static void SelectConfigurationParam(string key)
         {
-            if (ListConfigurationParam != null)
-            {
-                foreach (ConfigurationParam itemConfigurationParam in ListConfigurationParam)
-                    itemConfigurationParam.Select = itemConfigurationParam.ConfigurationKey == key;
-            }
+            foreach (ConfigurationParam itemConfigurationParam in ListConfigurationParam)
+                itemConfigurationParam.Select = itemConfigurationParam.ConfigurationKey == key;
         }
 
         public static void UpdateConfigurationParam(ConfigurationParam configurationParam)
@@ -172,6 +177,7 @@ namespace StorageAndTrade
             DataBasePassword = "";
             DataBaseBaseName = "";
             Select = false;
+            OtherParam = new Dictionary<string, string>();
         }
 
         public string ConfigurationKey { get; set; }
@@ -190,16 +196,18 @@ namespace StorageAndTrade
 
         public bool Select { get; set; }
 
+        public Dictionary<string, string> OtherParam { get; set; }
+
         public override string ToString()
         {
-            return String.IsNullOrWhiteSpace(ConfigurationName) ? "<>" : ConfigurationName;
+            return String.IsNullOrWhiteSpace(ConfigurationName) ? "[]" : ConfigurationName;
         }
 
         public static ConfigurationParam New()
         {
             ConfigurationParam configurationParam = new ConfigurationParam();
             configurationParam.ConfigurationKey = Guid.NewGuid().ToString();
-            configurationParam.ConfigurationName = "<Новий>";
+            configurationParam.ConfigurationName = "Новий *";
 
             return configurationParam;
         }
@@ -214,6 +222,7 @@ namespace StorageAndTrade
             configurationParam.DataBasePassword = DataBasePassword;
             configurationParam.DataBaseBaseName = DataBaseBaseName;
             configurationParam.DataBasePort = DataBasePort;
+            configurationParam.OtherParam = OtherParam;
 
             return configurationParam;
         }

@@ -1,6 +1,4 @@
 using Gtk;
-using System;
-using System.IO;
 
 using AccountingSoftware;
 
@@ -8,15 +6,12 @@ namespace StorageAndTrade
 {
     class FormStorageAndTrade : Window
     {
+        readonly object loked = new Object();
         public ConfigurationParam? OpenConfigurationParam { get; set; }
 
-        #region Notebook
-
-        private Notebook TopNotebook;
-        private Dictionary<int, NotebookPage> TopNotebookPages;
-        private Dictionary<int, NameValue<System.Action<NotebookPage>>> PageAndActionDictionary;
-
-        #endregion
+        HPaned hPaned;
+        Notebook? topNotebook;
+        Statusbar statusBar;
 
         public FormStorageAndTrade() : base("Зберігання та Торгівля для України")
         {
@@ -26,73 +21,94 @@ namespace StorageAndTrade
 
             DeleteEvent += delegate { Application.Quit(); };
 
-            TopNotebook = new Notebook() { BorderWidth = 0, ShowBorder = false };
-            TopNotebook.TabPos = PositionType.Left;
+            VBox vbox = new VBox();
+            Add(vbox);
 
-            TopNotebookPages = new Dictionary<int, NotebookPage>();
-            PageAndActionDictionary = new Dictionary<int, NameValue<Action<NotebookPage>>>();
+            HBox hbox = new HBox();
+            vbox.PackStart(hbox, true, true, 0);
 
-            int counter = 0;
+            CreatePack1(hbox);
+            CreatePack2(hbox);
 
-            PageAndActionDictionary.Add(counter, new NameValue<Action<NotebookPage>>("Стартова", (NotebookPage page) =>
-                { page.AddVBox(new FirstPage()); }
-            ));
+            statusBar = new Statusbar();
+            vbox.PackStart(statusBar, false, false, 0);
 
-            PageAndActionDictionary.Add(++counter, new NameValue<Action<NotebookPage>>("Документи", (NotebookPage page) =>
-                { page.AddVBox(new DocumentPage()); }
-            ));
-
-            PageAndActionDictionary.Add(++counter, new NameValue<Action<NotebookPage>>("Журнали", (NotebookPage page) =>
-                { page.AddVBox(new JournalPage()); }
-            ));
-
-            PageAndActionDictionary.Add(++counter, new NameValue<Action<NotebookPage>>("Звіти", (NotebookPage page) =>
-                { }
-            ));
-
-            PageAndActionDictionary.Add(++counter, new NameValue<Action<NotebookPage>>("Довідники", (NotebookPage page) =>
-                { page.AddVBox(new DirectoryPage()); }
-            ));
-
-            PageAndActionDictionary.Add(++counter, new NameValue<Action<NotebookPage>>("Сервіс", (NotebookPage page) =>
-                { }
-            ));
-
-            CreateTopNotebookPages();
-
-            Add(TopNotebook);
-
-            //Maximize();
             ShowAll();
-
-            TopNotebook.SwitchPage += OnTopNotebookSelectPage;
-            OnTopNotebookSelectPage(null, new SwitchPageArgs());
         }
 
-        void OnTopNotebookSelectPage(object? sender, SwitchPageArgs args)
+        void CreatePack1(HBox hbox)
         {
-            NotebookPage notebookPage = TopNotebookPages[TopNotebook.CurrentPage];
-            if (!notebookPage.IsConstruct)
-                PageAndActionDictionary[TopNotebook.CurrentPage]?.Value?.Invoke(notebookPage);
+            ScrolledWindow scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In, WidthRequest = 250 };
+            scrollTree.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
+
+            VBox vbox = new VBox();
+            scrollTree.Add(vbox);
+
+            CreateItemPack1(vbox, "Продажі");
+            CreateItemPack1(vbox, "Закупки");
+            CreateItemPack1(vbox, "Налаштування");
+
+            hbox.PackStart(scrollTree, false, false, 0);
         }
 
-        void CreateTopNotebookPages()
+        void CreateItemPack1(VBox vBox, string name)
         {
-            foreach (NameValue<Action<NotebookPage>> page in PageAndActionDictionary.Values)
-            {
-                ScrolledWindow scroll = new ScrolledWindow() { ShadowType = ShadowType.In };
-                scroll.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
+            HBox hBox = new HBox() { BorderWidth = 1 };
+            vBox.PackStart(hBox, false, false, 5);
 
-                int numPage = TopNotebook.AppendPage(scroll, new Label { Text = page.Name, Expand = false, Halign = Align.End });
+            Image imageItem = new Image("form.ico");
+            hBox.PackStart(imageItem, false, false, 5);
 
-                TopNotebookPages.Add(numPage,
-                    new NotebookPage
-                    {
-                        NumPage = numPage,
-                        NamePage = page.Name,
-                        ScrolledWindow = scroll
-                    });
-            }
+            LinkButton lb = new LinkButton(name) { Halign = Align.Start };
+            hBox.PackStart(lb, false, false, 0);
         }
+
+        void CreatePack2(HBox hbox)
+        {
+            topNotebook = new Notebook() { Scrollable = true, EnablePopup = true, BorderWidth = 0, ShowBorder = false };
+            topNotebook.TabPos = PositionType.Top;
+
+
+
+            CreateNotebookPage("Оптимізація таблиць", () =>
+                       {
+                           Валюти валюти = new Валюти();
+                           валюти.LoadRecords();
+                           return валюти;
+                       });
+
+            hbox.PackStart(topNotebook, true, true, 0);
+
+
+        }
+
+        #region Notebook Page
+
+        public void CloseCurrentPageNotebook()
+        {
+            topNotebook.RemovePage(topNotebook.CurrentPage);
+        }
+
+        public void RenameCurrentPageNotebook(string name)
+        {
+            topNotebook.SetTabLabelText(topNotebook.CurrentPageWidget, name);
+        }
+
+        public void CreateNotebookPage(string tabName, System.Func<Widget>? pageWidget)
+        {
+            ScrolledWindow scroll = new ScrolledWindow() { ShadowType = ShadowType.In };
+            scroll.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
+
+            int numPage = topNotebook.AppendPage(scroll, new Label { Text = tabName, Expand = false, Halign = Align.Start });
+
+            if (pageWidget != null)
+                scroll.Add((Widget)pageWidget.Invoke());
+
+            topNotebook.ShowAll();
+
+            topNotebook.CurrentPage = numPage;
+        }
+
+        #endregion
     }
 }

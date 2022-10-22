@@ -28,6 +28,7 @@ namespace StorageAndTrade
             listBoxDataBase = new ListBox();
             listBoxDataBase.SetSizeRequest(500, 300);
             listBoxDataBase.SelectionMode = SelectionMode.Single;
+            listBoxDataBase.ButtonPressEvent += OnListBoxDataBaseButtonPress;
             scrolledWindowListBox.Add(listBoxDataBase);
 
             Button buttonOpen = new Button("Відкрити");
@@ -206,6 +207,12 @@ namespace StorageAndTrade
 
                 Hide();
             }
+        }
+
+        void OnListBoxDataBaseButtonPress(object? sender, ButtonPressEventArgs args)
+        {
+            if (args.Event.Type == Gdk.EventType.DoubleButtonPress)
+                OnButtonEditClicked(null, new EventArgs());
         }
 
         void OnButtonConfiguratorClicked(object? sender, EventArgs args)
