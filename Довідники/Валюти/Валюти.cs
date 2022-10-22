@@ -77,7 +77,7 @@ namespace StorageAndTrade
             toolbar.Add(upButton);
 
             ToolButton refreshButton = new ToolButton(Stock.Refresh) { Label = "Обновити", IsImportant = true };
-            //refreshButton.Clicked += OnRefreshClick;
+            refreshButton.Clicked += OnRefreshClick;
             toolbar.Add(refreshButton);
 
             ToolButton deleteButton = new ToolButton(Stock.Delete) { Label = "Видалити", IsImportant = true };
@@ -93,10 +93,10 @@ namespace StorageAndTrade
             ScrolledWindow scroll = new ScrolledWindow() { ShadowType = ShadowType.In };
             scroll.SetPolicy(PolicyType.Never, PolicyType.Automatic);
 
-            ViewGrid = new TreeView(Довідники.ТабличніСписки.Організації_Записи.Store);
+            ViewGrid = new TreeView(Довідники.ТабличніСписки.Номенклатура_Записи.Store);
             ViewGrid.Selection.Mode = SelectionMode.Multiple;
             //ViewGrid.RowActivated += OnRowActivated;
-            Довідники.ТабличніСписки.Організації_Записи.AddColumns(ViewGrid);
+            Довідники.ТабличніСписки.Номенклатура_Записи.AddColumns(ViewGrid);
 
             scroll.Add(ViewGrid);
 
@@ -109,12 +109,12 @@ namespace StorageAndTrade
 
         public void LoadRecords()
         {
-            Довідники.ТабличніСписки.Організації_Записи.LoadRecords();
+            Довідники.ТабличніСписки.Номенклатура_Записи.LoadRecords();
         }
 
         void OnRefreshClick(object? sender, EventArgs args)
         {
-            Довідники.ТабличніСписки.Організації_Записи.LoadRecords();
+            Довідники.ТабличніСписки.Номенклатура_Записи.LoadRecords();
         }
 
         //void OnAddClick(object? sender, EventArgs args)
