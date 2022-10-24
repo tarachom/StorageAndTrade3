@@ -26,32 +26,41 @@ namespace StorageAndTrade
             HBox hBoxList = new HBox(false, 0);
 
             VBox vLeft = new VBox(false, 0);
-            AddLink(vLeft, "Організації", "1", Організація);
-            AddLink(vLeft, "Номенклатура", "1", Номенклатура);
-            AddLink(vLeft, "Характеристики номенклатури", "1", ХарактеристикаНоменклатури);
-            AddLink(vLeft, "Контрагенти", "1", Контрагенти);
-            AddLink(vLeft, "Склади", "1", Склади);
-            AddLink(vLeft, "Валюти", "1", Валюти);
-            AddLink(vLeft, "Каси", "1", Каси);
-            AddLink(vLeft, "Користувачі", "1", Користувачі);
-            AddLink(vLeft, "Файли", "1", Файли);
+
+            AddCaption(vLeft, "Підприємство");
+            AddLink(vLeft, "Організації", Організація);
+            AddLink(vLeft, "Склади", Склади);
+            AddLink(vLeft, "Валюти", Валюти);
+            AddLink(vLeft, "Каси", Каси);
+            AddLink(vLeft, "Види цін", ВидиЦін);
+            AddLink(vLeft, "Банківські рахунки організацій", БанківськіРахункиОрганізацій);
+            AddLink(vLeft, "Структура підприємства", СтруктураПідприємства);
+
+            AddCaption(vLeft, "Додаткові");
+            AddLink(vLeft, "Користувачі", Користувачі);
+            AddLink(vLeft, "Фізичні особи", ФізичніОсоби);
+            AddLink(vLeft, "Файли", Файли);
 
             hBoxList.PackStart(vLeft, false, false, 5);
 
             AddSeparator(hBoxList);
 
             VBox vRight = new VBox(false, 0);
-            AddLink(vRight, "Види номенклатури", "2");
-            AddLink(vRight, "Банківські рахунки контрагентів", "2");
-            AddLink(vRight, "Банківські рахунки організацій", "2");
-            AddLink(vRight, "Види цін", "2");
-            AddLink(vRight, "Виробники", "2");
-            AddLink(vRight, "Договори контрагентів", "2");
-            AddLink(vRight, "Пакування одиниці виміру", "2");
-            AddLink(vRight, "Партії товарів", "2");
-            AddLink(vRight, "Серії номенклатури", "2");
-            AddLink(vRight, "Структура підприємства", "2");
-            AddLink(vRight, "Фізичні особи", "2");
+
+            AddCaption(vRight, "Партнери");
+            AddLink(vRight, "Контрагенти", Контрагенти);
+            AddLink(vRight, "Договори контрагентів", ДоговориКонтрагентів);
+            AddLink(vRight, "Банківські рахунки контрагентів", БанківськіРахункиКонтрагентів);
+
+            AddCaption(vRight, "Товари та послуги");
+            AddLink(vRight, "Номенклатура", Номенклатура);
+            AddLink(vRight, "Характеристики номенклатури", ХарактеристикаНоменклатури);
+            AddLink(vRight, "Пакування номенклатури", ПакуванняОдиниціВиміру);
+            AddLink(vRight, "Види номенклатури", ВидиНоменклатури);
+            AddLink(vRight, "Партії товарів", ПартіяТоварівКомпозит);
+            AddLink(vRight, "Серії номенклатури", СеріїНоменклатури);
+            AddLink(vRight, "Виробники", Виробники);
+
             hBoxList.PackStart(vRight, false, false, 5);
 
             PackStart(hBoxList, false, false, 10);
@@ -194,6 +203,171 @@ namespace StorageAndTrade
             });
         }
 
+        void ВидиЦін(object? sender, EventArgs args)
+        {
+            GeneralForm?.CreateNotebookPage("Довідник: Види цін", () =>
+            {
+                ВидиЦін page = new ВидиЦін
+                {
+                    GeneralForm = GeneralForm
+                };
+
+                page.LoadRecords();
+
+                return page;
+            });
+        }
+
+        void БанківськіРахункиОрганізацій(object? sender, EventArgs args)
+        {
+            GeneralForm?.CreateNotebookPage("Довідник: Банківські рахунки організацій", () =>
+            {
+                БанківськіРахункиОрганізацій page = new БанківськіРахункиОрганізацій
+                {
+                    GeneralForm = GeneralForm
+                };
+
+                page.LoadRecords();
+
+                return page;
+            });
+        }
+
+        void ФізичніОсоби(object? sender, EventArgs args)
+        {
+            GeneralForm?.CreateNotebookPage("Довідник: Фізичні особи", () =>
+            {
+                ФізичніОсоби page = new ФізичніОсоби
+                {
+                    GeneralForm = GeneralForm
+                };
+
+                page.LoadRecords();
+
+                return page;
+            });
+        }
+
+        void СтруктураПідприємства(object? sender, EventArgs args)
+        {
+            GeneralForm?.CreateNotebookPage("Довідник: Структура підприємства", () =>
+            {
+                СтруктураПідприємства page = new СтруктураПідприємства
+                {
+                    GeneralForm = GeneralForm
+                };
+
+                page.LoadRecords();
+
+                return page;
+            });
+        }
+
+        void ДоговориКонтрагентів(object? sender, EventArgs args)
+        {
+            GeneralForm?.CreateNotebookPage("Довідник: договори контрагентів", () =>
+            {
+                ДоговориКонтрагентів page = new ДоговориКонтрагентів
+                {
+                    GeneralForm = GeneralForm
+                };
+
+                page.LoadRecords();
+
+                return page;
+            });
+        }
+
+        void БанківськіРахункиКонтрагентів(object? sender, EventArgs args)
+        {
+            GeneralForm?.CreateNotebookPage("Довідник: Банківські рахунки контрагентів", () =>
+            {
+                БанківськіРахункиКонтрагентів page = new БанківськіРахункиКонтрагентів
+                {
+                    GeneralForm = GeneralForm
+                };
+
+                page.LoadRecords();
+
+                return page;
+            });
+        }
+
+        void ПакуванняОдиниціВиміру(object? sender, EventArgs args)
+        {
+            GeneralForm?.CreateNotebookPage("Довідник: Пакування номенклатури", () =>
+            {
+                ПакуванняОдиниціВиміру page = new ПакуванняОдиниціВиміру
+                {
+                    GeneralForm = GeneralForm
+                };
+
+                page.LoadRecords();
+
+                return page;
+            });
+        }
+
+        void ВидиНоменклатури(object? sender, EventArgs args)
+        {
+            GeneralForm?.CreateNotebookPage("Довідник: Види номенклатури", () =>
+            {
+                ВидиНоменклатури page = new ВидиНоменклатури
+                {
+                    GeneralForm = GeneralForm
+                };
+
+                page.LoadRecords();
+
+                return page;
+            });
+        }
+
+        void ПартіяТоварівКомпозит(object? sender, EventArgs args)
+        {
+            GeneralForm?.CreateNotebookPage("Довідник: Партія товарів", () =>
+            {
+                ПартіяТоварівКомпозит page = new ПартіяТоварівКомпозит
+                {
+                    GeneralForm = GeneralForm
+                };
+
+                page.LoadRecords();
+
+                return page;
+            });
+        }
+
+        void СеріїНоменклатури(object? sender, EventArgs args)
+        {
+            GeneralForm?.CreateNotebookPage("Довідник: Серії номенклатури", () =>
+            {
+                СеріїНоменклатури page = new СеріїНоменклатури
+                {
+                    GeneralForm = GeneralForm
+                };
+
+                page.LoadRecords();
+
+                return page;
+            });
+        }
+
+        void Виробники(object? sender, EventArgs args)
+        {
+            GeneralForm?.CreateNotebookPage("Довідник: Виробники", () =>
+            {
+                Виробники page = new Виробники
+                {
+                    GeneralForm = GeneralForm
+                };
+
+                page.LoadRecords();
+
+                return page;
+            });
+        }
+
 
         void AddCaption(VBox vBox, string name)
         {
@@ -207,9 +381,9 @@ namespace StorageAndTrade
             hbox.PackStart(separator, false, false, 5);
         }
 
-        void AddLink(VBox vbox, string uri, string name, EventHandler? clickAction = null)
+        void AddLink(VBox vbox, string uri, EventHandler? clickAction = null)
         {
-            LinkButton lb = new LinkButton(uri) { Name = name, Halign = Align.Start };
+            LinkButton lb = new LinkButton(uri) { Halign = Align.Start };
             vbox.PackStart(lb, false, false, 0);
 
             if (clickAction != null)
