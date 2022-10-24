@@ -2287,11 +2287,285 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
     #region DOCUMENT "ЗамовленняКлієнта"
     
       
+    public class ЗамовленняКлієнта_Записи
+    {
+        string Image = "doc.png";
+        string ID = "";
+        
+        string Назва = "";
+        string НомерДок = "";
+        string ДатаДок = "";
+        string Організація = "";
+        string Контрагент = "";
+        string Валюта = "";
+        string Каса = "";
+        string Склад = "";
+        string СумаДокументу = "";
+        string Коментар = "";
+
+        Array ToArray()
+        {
+            return new object[] { new Gdk.Pixbuf(Image), ID 
+            /* */ , Назва, НомерДок, ДатаДок, Організація, Контрагент, Валюта, Каса, Склад, СумаДокументу, Коментар };
+        }
+
+        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */
+            , typeof(string) /* Назва */
+            , typeof(string) /* НомерДок */
+            , typeof(string) /* ДатаДок */
+            , typeof(string) /* Організація */
+            , typeof(string) /* Контрагент */
+            , typeof(string) /* Валюта */
+            , typeof(string) /* Каса */
+            , typeof(string) /* Склад */
+            , typeof(string) /* СумаДокументу */
+            , typeof(string) /* Коментар */
+            );
+
+        public static void AddColumns(TreeView treeView)
+        {
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
+            /* */
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 2) { SortColumnId = 2 } );
+            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText(), "text", 3) { SortColumnId = 3 } );
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText(), "text", 4) { SortColumnId = 4 } );
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText(), "text", 5) { SortColumnId = 5 } );
+            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText(), "text", 6) { SortColumnId = 6 } );
+            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText(), "text", 7) { SortColumnId = 7 } );
+            treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText(), "text", 8) { SortColumnId = 8 } );
+            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText(), "text", 9) { SortColumnId = 9 } );
+            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText(), "text", 10) { SortColumnId = 10 } );
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText(), "text", 11) { SortColumnId = 11 } );
+            
+        }
+
+        public static void LoadRecords()
+        {
+            Store.Clear();
+
+            Документи.ЗамовленняКлієнта_Select ЗамовленняКлієнта_Select = new Документи.ЗамовленняКлієнта_Select();
+            ЗамовленняКлієнта_Select.QuerySelect.Field.AddRange(
+                new string[]
+                {
+                    Документи.ЗамовленняКлієнта_Const.Назва // [ pos = 1, type = string ]
+                    , Документи.ЗамовленняКлієнта_Const.НомерДок // [ pos = 2, type = string ]
+                    , Документи.ЗамовленняКлієнта_Const.ДатаДок // [ pos = 3, type = datetime ]
+                    /* , Документи.ЗамовленняКлієнта_Const.Організація */ // [ pos = 4, type = pointer ]
+                    /* , Документи.ЗамовленняКлієнта_Const.Контрагент */ // [ pos = 5, type = pointer ]
+                    /* , Документи.ЗамовленняКлієнта_Const.Валюта */ // [ pos = 6, type = pointer ]
+                    /* , Документи.ЗамовленняКлієнта_Const.Каса */ // [ pos = 7, type = pointer ]
+                    /* , Документи.ЗамовленняКлієнта_Const.Склад */ // [ pos = 8, type = pointer ]
+                    , Документи.ЗамовленняКлієнта_Const.СумаДокументу // [ pos = 9, type = numeric ]
+                    , Документи.ЗамовленняКлієнта_Const.Коментар // [ pos = 10, type = string ]
+                    
+                });
+
+            
+                  /* JOIN 4 */
+                  ЗамовленняКлієнта_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>(
+                      Довідники.Організації_Const.TABLE + "." + Довідники.Організації_Const.Назва, "join_4"));
+                  ЗамовленняКлієнта_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Організації_Const.TABLE, Документи.ЗамовленняКлієнта_Const.Організація, ЗамовленняКлієнта_Select.QuerySelect.Table));
+                
+                  /* JOIN 5 */
+                  ЗамовленняКлієнта_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>(
+                      Довідники.Контрагенти_Const.TABLE + "." + Довідники.Контрагенти_Const.Назва, "join_5"));
+                  ЗамовленняКлієнта_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Контрагенти_Const.TABLE, Документи.ЗамовленняКлієнта_Const.Контрагент, ЗамовленняКлієнта_Select.QuerySelect.Table));
+                
+                  /* JOIN 6 */
+                  ЗамовленняКлієнта_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>(
+                      Довідники.Валюти_Const.TABLE + "." + Довідники.Валюти_Const.Назва, "join_6"));
+                  ЗамовленняКлієнта_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Валюти_Const.TABLE, Документи.ЗамовленняКлієнта_Const.Валюта, ЗамовленняКлієнта_Select.QuerySelect.Table));
+                
+                  /* JOIN 7 */
+                  ЗамовленняКлієнта_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>(
+                      Довідники.Каси_Const.TABLE + "." + Довідники.Каси_Const.Назва, "join_7"));
+                  ЗамовленняКлієнта_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Каси_Const.TABLE, Документи.ЗамовленняКлієнта_Const.Каса, ЗамовленняКлієнта_Select.QuerySelect.Table));
+                
+                  /* JOIN 8 */
+                  ЗамовленняКлієнта_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>(
+                      Довідники.Склади_Const.TABLE + "." + Довідники.Склади_Const.Код, "join_8"));
+                  ЗамовленняКлієнта_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Склади_Const.TABLE, Документи.ЗамовленняКлієнта_Const.Склад, ЗамовленняКлієнта_Select.QuerySelect.Table));
+                
+
+            /* SELECT */
+            ЗамовленняКлієнта_Select.Select();
+            while (ЗамовленняКлієнта_Select.MoveNext())
+            {
+                Документи.ЗамовленняКлієнта_Pointer? cur = ЗамовленняКлієнта_Select.Current;
+
+                if (cur != null)
+                    Store.AppendValues(new ЗамовленняКлієнта_Записи
+                    {
+                        ID = cur.UnigueID.ToString(),
+                        Назва = cur.Fields?[ЗамовленняКлієнта_Const.Назва]?.ToString() ?? "", // [ pos = 1, type = string ]
+                        НомерДок = cur.Fields?[ЗамовленняКлієнта_Const.НомерДок]?.ToString() ?? "", // [ pos = 2, type = string ]
+                        ДатаДок = cur.Fields?[ЗамовленняКлієнта_Const.ДатаДок]?.ToString() ?? "", // [ pos = 3, type = datetime ]
+                        Організація = cur.Fields?["join_4"]?.ToString() ?? "", // [ pos = 4, type = pointer ]
+                        Контрагент = cur.Fields?["join_5"]?.ToString() ?? "", // [ pos = 5, type = pointer ]
+                        Валюта = cur.Fields?["join_6"]?.ToString() ?? "", // [ pos = 6, type = pointer ]
+                        Каса = cur.Fields?["join_7"]?.ToString() ?? "", // [ pos = 7, type = pointer ]
+                        Склад = cur.Fields?["join_8"]?.ToString() ?? "", // [ pos = 8, type = pointer ]
+                        СумаДокументу = cur.Fields?[ЗамовленняКлієнта_Const.СумаДокументу]?.ToString() ?? "", // [ pos = 9, type = numeric ]
+                        Коментар = cur.Fields?[ЗамовленняКлієнта_Const.Коментар]?.ToString() ?? "" // [ pos = 10, type = string ]
+                        
+                    }.ToArray());
+            }
+        }
+    }
+	    
     #endregion
     
     #region DOCUMENT "РеалізаціяТоварівТаПослуг"
     
       
+    public class РеалізаціяТоварівТаПослуг_Записи
+    {
+        string Image = "doc.png";
+        string ID = "";
+        
+        string Назва = "";
+        string НомерДок = "";
+        string ДатаДок = "";
+        string Організація = "";
+        string Контрагент = "";
+        string Валюта = "";
+        string Каса = "";
+        string Склад = "";
+        string СумаДокументу = "";
+        string Коментар = "";
+
+        Array ToArray()
+        {
+            return new object[] { new Gdk.Pixbuf(Image), ID 
+            /* */ , Назва, НомерДок, ДатаДок, Організація, Контрагент, Валюта, Каса, Склад, СумаДокументу, Коментар };
+        }
+
+        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */
+            , typeof(string) /* Назва */
+            , typeof(string) /* НомерДок */
+            , typeof(string) /* ДатаДок */
+            , typeof(string) /* Організація */
+            , typeof(string) /* Контрагент */
+            , typeof(string) /* Валюта */
+            , typeof(string) /* Каса */
+            , typeof(string) /* Склад */
+            , typeof(string) /* СумаДокументу */
+            , typeof(string) /* Коментар */
+            );
+
+        public static void AddColumns(TreeView treeView)
+        {
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
+            /* */
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 2) { SortColumnId = 2 } );
+            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText(), "text", 3) { SortColumnId = 3 } );
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText(), "text", 4) { SortColumnId = 4 } );
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText(), "text", 5) { SortColumnId = 5 } );
+            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText(), "text", 6) { SortColumnId = 6 } );
+            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText(), "text", 7) { SortColumnId = 7 } );
+            treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText(), "text", 8) { SortColumnId = 8 } );
+            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText(), "text", 9) { SortColumnId = 9 } );
+            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText(), "text", 10) { SortColumnId = 10 } );
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText(), "text", 11) { SortColumnId = 11 } );
+            
+        }
+
+        public static void LoadRecords()
+        {
+            Store.Clear();
+
+            Документи.РеалізаціяТоварівТаПослуг_Select РеалізаціяТоварівТаПослуг_Select = new Документи.РеалізаціяТоварівТаПослуг_Select();
+            РеалізаціяТоварівТаПослуг_Select.QuerySelect.Field.AddRange(
+                new string[]
+                {
+                    Документи.РеалізаціяТоварівТаПослуг_Const.Назва // [ pos = 1, type = string ]
+                    , Документи.РеалізаціяТоварівТаПослуг_Const.НомерДок // [ pos = 2, type = string ]
+                    , Документи.РеалізаціяТоварівТаПослуг_Const.ДатаДок // [ pos = 3, type = datetime ]
+                    /* , Документи.РеалізаціяТоварівТаПослуг_Const.Організація */ // [ pos = 4, type = pointer ]
+                    /* , Документи.РеалізаціяТоварівТаПослуг_Const.Контрагент */ // [ pos = 5, type = pointer ]
+                    /* , Документи.РеалізаціяТоварівТаПослуг_Const.Валюта */ // [ pos = 6, type = pointer ]
+                    /* , Документи.РеалізаціяТоварівТаПослуг_Const.Каса */ // [ pos = 7, type = pointer ]
+                    /* , Документи.РеалізаціяТоварівТаПослуг_Const.Склад */ // [ pos = 8, type = pointer ]
+                    , Документи.РеалізаціяТоварівТаПослуг_Const.СумаДокументу // [ pos = 9, type = numeric ]
+                    , Документи.РеалізаціяТоварівТаПослуг_Const.Коментар // [ pos = 10, type = string ]
+                    
+                });
+
+            
+                  /* JOIN 4 */
+                  РеалізаціяТоварівТаПослуг_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>(
+                      Довідники.Організації_Const.TABLE + "." + Довідники.Організації_Const.Назва, "join_4"));
+                  РеалізаціяТоварівТаПослуг_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Організації_Const.TABLE, Документи.РеалізаціяТоварівТаПослуг_Const.Організація, РеалізаціяТоварівТаПослуг_Select.QuerySelect.Table));
+                
+                  /* JOIN 5 */
+                  РеалізаціяТоварівТаПослуг_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>(
+                      Довідники.Контрагенти_Const.TABLE + "." + Довідники.Контрагенти_Const.Назва, "join_5"));
+                  РеалізаціяТоварівТаПослуг_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Контрагенти_Const.TABLE, Документи.РеалізаціяТоварівТаПослуг_Const.Контрагент, РеалізаціяТоварівТаПослуг_Select.QuerySelect.Table));
+                
+                  /* JOIN 6 */
+                  РеалізаціяТоварівТаПослуг_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>(
+                      Довідники.Валюти_Const.TABLE + "." + Довідники.Валюти_Const.Назва, "join_6"));
+                  РеалізаціяТоварівТаПослуг_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Валюти_Const.TABLE, Документи.РеалізаціяТоварівТаПослуг_Const.Валюта, РеалізаціяТоварівТаПослуг_Select.QuerySelect.Table));
+                
+                  /* JOIN 7 */
+                  РеалізаціяТоварівТаПослуг_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>(
+                      Довідники.Каси_Const.TABLE + "." + Довідники.Каси_Const.Назва, "join_7"));
+                  РеалізаціяТоварівТаПослуг_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Каси_Const.TABLE, Документи.РеалізаціяТоварівТаПослуг_Const.Каса, РеалізаціяТоварівТаПослуг_Select.QuerySelect.Table));
+                
+                  /* JOIN 8 */
+                  РеалізаціяТоварівТаПослуг_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>(
+                      Довідники.Склади_Const.TABLE + "." + Довідники.Склади_Const.Код, "join_8"));
+                  РеалізаціяТоварівТаПослуг_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Склади_Const.TABLE, Документи.РеалізаціяТоварівТаПослуг_Const.Склад, РеалізаціяТоварівТаПослуг_Select.QuerySelect.Table));
+                
+
+            /* SELECT */
+            РеалізаціяТоварівТаПослуг_Select.Select();
+            while (РеалізаціяТоварівТаПослуг_Select.MoveNext())
+            {
+                Документи.РеалізаціяТоварівТаПослуг_Pointer? cur = РеалізаціяТоварівТаПослуг_Select.Current;
+
+                if (cur != null)
+                    Store.AppendValues(new РеалізаціяТоварівТаПослуг_Записи
+                    {
+                        ID = cur.UnigueID.ToString(),
+                        Назва = cur.Fields?[РеалізаціяТоварівТаПослуг_Const.Назва]?.ToString() ?? "", // [ pos = 1, type = string ]
+                        НомерДок = cur.Fields?[РеалізаціяТоварівТаПослуг_Const.НомерДок]?.ToString() ?? "", // [ pos = 2, type = string ]
+                        ДатаДок = cur.Fields?[РеалізаціяТоварівТаПослуг_Const.ДатаДок]?.ToString() ?? "", // [ pos = 3, type = datetime ]
+                        Організація = cur.Fields?["join_4"]?.ToString() ?? "", // [ pos = 4, type = pointer ]
+                        Контрагент = cur.Fields?["join_5"]?.ToString() ?? "", // [ pos = 5, type = pointer ]
+                        Валюта = cur.Fields?["join_6"]?.ToString() ?? "", // [ pos = 6, type = pointer ]
+                        Каса = cur.Fields?["join_7"]?.ToString() ?? "", // [ pos = 7, type = pointer ]
+                        Склад = cur.Fields?["join_8"]?.ToString() ?? "", // [ pos = 8, type = pointer ]
+                        СумаДокументу = cur.Fields?[РеалізаціяТоварівТаПослуг_Const.СумаДокументу]?.ToString() ?? "", // [ pos = 9, type = numeric ]
+                        Коментар = cur.Fields?[РеалізаціяТоварівТаПослуг_Const.Коментар]?.ToString() ?? "" // [ pos = 10, type = string ]
+                        
+                    }.ToArray());
+            }
+        }
+    }
+	    
     #endregion
     
     #region DOCUMENT "ВстановленняЦінНоменклатури"

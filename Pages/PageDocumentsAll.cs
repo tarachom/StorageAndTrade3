@@ -25,8 +25,8 @@ namespace StorageAndTrade
 
             AddLink(vLeft, "Замовлення постачальнику", ЗамовленняПостачальнику);
             AddLink(vLeft, "Поступлення товарів та послуг", ПоступленняТоварівТаПослуг);
-            // AddLink(vLeft, "Валюти", Валюти);
-            // AddLink(vLeft, "Каси", Каси);
+            AddLink(vLeft, "Замовлення клієнта", ЗамовленняКлієнта);
+            AddLink(vLeft, "Реалізація товарів та послуг", РеалізаціяТоварівТаПослуг);
             // AddLink(vLeft, "Види цін", ВидиЦін);
             // AddLink(vLeft, "Банківські рахунки організацій", БанківськіРахункиОрганізацій);
             // AddLink(vLeft, "Структура підприємства", СтруктураПідприємства);
@@ -88,7 +88,35 @@ namespace StorageAndTrade
             });
         }
 
+        void ЗамовленняКлієнта(object? sender, EventArgs args)
+        {
+            GeneralForm?.CreateNotebookPage("Документи: Замовлення клієнта", () =>
+            {
+                ЗамовленняКлієнта page = new ЗамовленняКлієнта
+                {
+                    GeneralForm = GeneralForm
+                };
 
+                page.LoadRecords();
+
+                return page;
+            });
+        }
+
+        void РеалізаціяТоварівТаПослуг(object? sender, EventArgs args)
+        {
+            GeneralForm?.CreateNotebookPage("Документи: Реалізація товарів та послуг", () =>
+            {
+                РеалізаціяТоварівТаПослуг page = new РеалізаціяТоварівТаПослуг
+                {
+                    GeneralForm = GeneralForm
+                };
+
+                page.LoadRecords();
+
+                return page;
+            });
+        }
 
         void AddCaption(VBox vBox, string name)
         {
