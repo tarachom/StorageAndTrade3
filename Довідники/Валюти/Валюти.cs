@@ -67,7 +67,7 @@ namespace StorageAndTrade
 
         void OnRefreshClick(object? sender, EventArgs args)
         {
-            ТабличніСписки.Валюти_Записи.LoadRecords();
+            LoadRecords();
         }
 
         //void OnAddClick(object? sender, EventArgs args)

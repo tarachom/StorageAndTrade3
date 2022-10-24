@@ -67,7 +67,7 @@ namespace StorageAndTrade
 
         void OnRefreshClick(object? sender, EventArgs args)
         {
-            ТабличніСписки.ФізичніОсоби_Записи.LoadRecords();
+            LoadRecords();
         }
     }
 }

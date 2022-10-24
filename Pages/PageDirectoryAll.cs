@@ -1,8 +1,4 @@
 using Gtk;
-using System;
-using System.IO;
-
-using AccountingSoftware;
 
 namespace StorageAndTrade
 {
