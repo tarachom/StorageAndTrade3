@@ -26,11 +26,11 @@ namespace StorageAndTrade
             HBox hBoxList = new HBox(false, 0);
 
             VBox vLeft = new VBox(false, 0);
-            AddLink(vLeft, "Організації", "1");
+            AddLink(vLeft, "Організації", "1", Організація);
             AddLink(vLeft, "Номенклатура", "1", Номенклатура);
-            AddLink(vLeft, "Характеристики номенклатури", "1");
-            AddLink(vLeft, "Контрагенти", "1");
-            AddLink(vLeft, "Склади", "1");
+            AddLink(vLeft, "Характеристики номенклатури", "1", ХарактеристикаНоменклатури);
+            AddLink(vLeft, "Контрагенти", "1", Контрагенти);
+            AddLink(vLeft, "Склади", "1", Склади);
             AddLink(vLeft, "Валюти", "1", Валюти);
             AddLink(vLeft, "Каси", "1");
             AddLink(vLeft, "Користувачі", "1");
@@ -59,11 +59,71 @@ namespace StorageAndTrade
             ShowAll();
         }
 
+        void Організація(object? sender, EventArgs args)
+        {
+            GeneralForm?.CreateNotebookPage("Довідник: Організації", () =>
+            {
+                Організації page = new Організації
+                {
+                    GeneralForm = GeneralForm
+                };
+
+                page.LoadRecords();
+
+                return page;
+            });
+        }
+
         void Номенклатура(object? sender, EventArgs args)
         {
             GeneralForm?.CreateNotebookPage("Довідник: Номенклатура", () =>
             {
                 Номенклатура page = new Номенклатура
+                {
+                    GeneralForm = GeneralForm
+                };
+
+                page.LoadRecords();
+
+                return page;
+            });
+        }
+
+        void ХарактеристикаНоменклатури(object? sender, EventArgs args)
+        {
+            GeneralForm?.CreateNotebookPage("Довідник: Характеристики номенклатури", () =>
+            {
+                ХарактеристикиНоменклатури page = new ХарактеристикиНоменклатури
+                {
+                    GeneralForm = GeneralForm
+                };
+
+                page.LoadRecords();
+
+                return page;
+            });
+        }
+
+        void Контрагенти(object? sender, EventArgs args)
+        {
+            GeneralForm?.CreateNotebookPage("Довідник: Контрагенти", () =>
+            {
+                Контрагенти page = new Контрагенти
+                {
+                    GeneralForm = GeneralForm
+                };
+
+                page.LoadRecords();
+
+                return page;
+            });
+        }
+
+        void Склади(object? sender, EventArgs args)
+        {
+            GeneralForm?.CreateNotebookPage("Довідник: Склади", () =>
+            {
+                Склади page = new Склади
                 {
                     GeneralForm = GeneralForm
                 };
@@ -88,6 +148,7 @@ namespace StorageAndTrade
                 return page;
             });
         }
+
 
         void AddCaption(VBox vBox, string name)
         {

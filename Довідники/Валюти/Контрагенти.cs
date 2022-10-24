@@ -4,13 +4,13 @@ using ТабличніСписки = StorageAndTrade_1_0.Довідники.Та
 
 namespace StorageAndTrade
 {
-    class Номенклатура : VBox
+    class Контрагенти : VBox
     {
         public FormStorageAndTrade? GeneralForm { get; set; }
 
         TreeView TreeViewGrid;
 
-        public Номенклатура() : base()
+        public Контрагенти() : base()
         {
             new VBox(false, 0);
             BorderWidth = 0;
@@ -48,10 +48,10 @@ namespace StorageAndTrade
             ScrolledWindow scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In };
             scrollTree.SetPolicy(PolicyType.Never, PolicyType.Automatic);
 
-            TreeViewGrid = new TreeView(ТабличніСписки.Номенклатура_Записи.Store);
+            TreeViewGrid = new TreeView(ТабличніСписки.Контрагенти_Записи.Store);
             TreeViewGrid.Selection.Mode = SelectionMode.Multiple;
             //ViewGrid.RowActivated += OnRowActivated;
-            ТабличніСписки.Номенклатура_Записи.AddColumns(TreeViewGrid);
+            ТабличніСписки.Контрагенти_Записи.AddColumns(TreeViewGrid);
 
             scrollTree.Add(TreeViewGrid);
 
@@ -62,12 +62,12 @@ namespace StorageAndTrade
 
         public void LoadRecords()
         {
-            ТабличніСписки.Номенклатура_Записи.LoadRecords();
+            ТабличніСписки.Контрагенти_Записи.LoadRecords();
         }
 
         void OnRefreshClick(object? sender, EventArgs args)
         {
-            ТабличніСписки.Номенклатура_Записи.LoadRecords();
+            ТабличніСписки.Контрагенти_Записи.LoadRecords();
         }
     }
 }

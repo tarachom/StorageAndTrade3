@@ -1,7 +1,6 @@
 using Gtk;
 
-using AccountingSoftware;
-using Довідники = StorageAndTrade_1_0.Довідники;
+using ТабличніСписки = StorageAndTrade_1_0.Довідники.ТабличніСписки;
 
 namespace StorageAndTrade
 {
@@ -10,7 +9,7 @@ namespace StorageAndTrade
         public FormStorageAndTrade? GeneralForm { get; set; }
 
         TreeView ViewGrid;
-        
+
         public Валюти() : base()
         {
             new VBox(false, 0);
@@ -49,10 +48,10 @@ namespace StorageAndTrade
             ScrolledWindow scroll = new ScrolledWindow() { ShadowType = ShadowType.In };
             scroll.SetPolicy(PolicyType.Never, PolicyType.Automatic);
 
-            ViewGrid = new TreeView(Довідники.ТабличніСписки.Валюти_Записи.Store);
+            ViewGrid = new TreeView(ТабличніСписки.Валюти_Записи.Store);
             ViewGrid.Selection.Mode = SelectionMode.Multiple;
             //ViewGrid.RowActivated += OnRowActivated;
-            Довідники.ТабличніСписки.Валюти_Записи.AddColumns(ViewGrid);
+            ТабличніСписки.Валюти_Записи.AddColumns(ViewGrid);
 
             scroll.Add(ViewGrid);
 
@@ -63,12 +62,12 @@ namespace StorageAndTrade
 
         public void LoadRecords()
         {
-            Довідники.ТабличніСписки.Валюти_Записи.LoadRecords();
+            ТабличніСписки.Валюти_Записи.LoadRecords();
         }
 
         void OnRefreshClick(object? sender, EventArgs args)
         {
-            Довідники.ТабличніСписки.Валюти_Записи.LoadRecords();
+            ТабличніСписки.Валюти_Записи.LoadRecords();
         }
 
         //void OnAddClick(object? sender, EventArgs args)
