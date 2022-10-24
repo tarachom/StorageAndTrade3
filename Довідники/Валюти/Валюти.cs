@@ -88,15 +88,13 @@ namespace StorageAndTrade
             //copyButton.Clicked += OnCopyClick;
             toolbar.Add(copyButton);
 
-            //Store = Записи.CreateModel();
-
             ScrolledWindow scroll = new ScrolledWindow() { ShadowType = ShadowType.In };
             scroll.SetPolicy(PolicyType.Never, PolicyType.Automatic);
 
-            ViewGrid = new TreeView(Довідники.ТабличніСписки.Номенклатура_Записи.Store);
+            ViewGrid = new TreeView(Довідники.ТабличніСписки.Валюти_Записи.Store);
             ViewGrid.Selection.Mode = SelectionMode.Multiple;
             //ViewGrid.RowActivated += OnRowActivated;
-            Довідники.ТабличніСписки.Номенклатура_Записи.AddColumns(ViewGrid);
+            Довідники.ТабличніСписки.Валюти_Записи.AddColumns(ViewGrid);
 
             scroll.Add(ViewGrid);
 
@@ -109,12 +107,12 @@ namespace StorageAndTrade
 
         public void LoadRecords()
         {
-            Довідники.ТабличніСписки.Номенклатура_Записи.LoadRecords();
+            Довідники.ТабличніСписки.Валюти_Записи.LoadRecords();
         }
 
         void OnRefreshClick(object? sender, EventArgs args)
         {
-            Довідники.ТабличніСписки.Номенклатура_Записи.LoadRecords();
+            Довідники.ТабличніСписки.Валюти_Записи.LoadRecords();
         }
 
         //void OnAddClick(object? sender, EventArgs args)
