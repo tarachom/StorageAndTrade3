@@ -33,8 +33,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 2));
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 3));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 2) { SortColumnId = 2 } );
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 3) { SortColumnId = 3 } );
             
         }
 
@@ -81,18 +81,22 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         string Image = "doc.png";
         string ID = "";
         
-        string Назва = "";
         string Код = "";
+        string Назва = "";
+        string Опис = "";
+        string Виробник = "";
 
         Array ToArray()
         {
             return new object[] { new Gdk.Pixbuf(Image), ID 
-            /* */ , Назва, Код };
+            /* */ , Код, Назва, Опис, Виробник };
         }
 
         public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */
-            , typeof(string) /* Назва */
             , typeof(string) /* Код */
+            , typeof(string) /* Назва */
+            , typeof(string) /* Опис */
+            , typeof(string) /* Виробник */
             );
 
         public static void AddColumns(TreeView treeView)
@@ -100,8 +104,10 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Номенклатура", new CellRendererText(), "text", 2));
-            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText(), "text", 3));
+            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText(), "text", 2) { SortColumnId = 2, FixedWidth = 100 } );
+            treeView.AppendColumn(new TreeViewColumn("Номенклатура", new CellRendererText(), "text", 3) { SortColumnId = 3, FixedWidth = 200 } );
+            treeView.AppendColumn(new TreeViewColumn("Опис", new CellRendererText(), "text", 4) { SortColumnId = 4 } );
+            treeView.AppendColumn(new TreeViewColumn("Виробник", new CellRendererText(), "text", 5) { SortColumnId = 5 } );
             
         }
 
@@ -113,12 +119,21 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Номенклатура_Select.QuerySelect.Field.AddRange(
                 new string[]
                 {
-                    Довідники.Номенклатура_Const.Назва // [ pos = 1, type = string ]
-                    , Довідники.Номенклатура_Const.Код // [ pos = 2, type = string ]
+                    Довідники.Номенклатура_Const.Код // [ pos = 1, type = string ]
+                    , Довідники.Номенклатура_Const.Назва // [ pos = 2, type = string ]
+                    , Довідники.Номенклатура_Const.Опис // [ pos = 3, type = string ]
+                    /* , Довідники.Номенклатура_Const.Виробник */ // [ pos = 4, type = pointer ]
                     
                 });
 
             
+                  /* JOIN 4 */
+                  Номенклатура_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>(
+                      Довідники.Виробники_Const.TABLE + "." + Довідники.Виробники_Const.Назва, "join_4"));
+                  Номенклатура_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Виробники_Const.TABLE, Довідники.Номенклатура_Const.Виробник, Номенклатура_Select.QuerySelect.Table));
+                
 
             /* SELECT */
             Номенклатура_Select.Select();
@@ -130,8 +145,10 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     Store.AppendValues(new Номенклатура_Записи
                     {
                         ID = cur.UnigueID.ToString(),
-                        Назва = cur.Fields?[Номенклатура_Const.Назва]?.ToString() ?? "", // [ pos = 1, type = string ]
-                        Код = cur.Fields?[Номенклатура_Const.Код]?.ToString() ?? "" // [ pos = 2, type = string ]
+                        Код = cur.Fields?[Номенклатура_Const.Код]?.ToString() ?? "", // [ pos = 1, type = string ]
+                        Назва = cur.Fields?[Номенклатура_Const.Назва]?.ToString() ?? "", // [ pos = 2, type = string ]
+                        Опис = cur.Fields?[Номенклатура_Const.Опис]?.ToString() ?? "", // [ pos = 3, type = string ]
+                        Виробник = cur.Fields?["join_4"]?.ToString() ?? "" // [ pos = 4, type = pointer ]
                         
                     }.ToArray());
             }
@@ -167,8 +184,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 2));
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 3));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 2) { SortColumnId = 2 } );
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 3) { SortColumnId = 3 } );
             
         }
 
@@ -234,8 +251,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 2));
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 3));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 2) { SortColumnId = 2 } );
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 3) { SortColumnId = 3 } );
             
         }
 
@@ -301,8 +318,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 2));
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 3));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 2) { SortColumnId = 2 } );
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 3) { SortColumnId = 3 } );
             
         }
 
@@ -349,20 +366,20 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         string Image = "doc.png";
         string ID = "";
         
+        string Код = "";
         string Назва = "";
         string КороткаНазва = "";
-        string Код = "";
 
         Array ToArray()
         {
             return new object[] { new Gdk.Pixbuf(Image), ID 
-            /* */ , Назва, КороткаНазва, Код };
+            /* */ , Код, Назва, КороткаНазва };
         }
 
         public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */
+            , typeof(string) /* Код */
             , typeof(string) /* Назва */
             , typeof(string) /* КороткаНазва */
-            , typeof(string) /* Код */
             );
 
         public static void AddColumns(TreeView treeView)
@@ -370,9 +387,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 2));
-            treeView.AppendColumn(new TreeViewColumn("Коротка назва", new CellRendererText(), "text", 3));
-            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText(), "text", 4));
+            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText(), "text", 2) { SortColumnId = 2, FixedWidth = 100 } );
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 3) { SortColumnId = 3, FixedWidth = 500 } );
+            treeView.AppendColumn(new TreeViewColumn("Коротка назва", new CellRendererText(), "text", 4) { SortColumnId = 4 } );
             
         }
 
@@ -384,9 +401,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Валюти_Select.QuerySelect.Field.AddRange(
                 new string[]
                 {
-                    Довідники.Валюти_Const.Назва // [ pos = 1, type = string ]
-                    , Довідники.Валюти_Const.КороткаНазва // [ pos = 2, type = string ]
-                    , Довідники.Валюти_Const.Код // [ pos = 3, type = string ]
+                    Довідники.Валюти_Const.Код // [ pos = 1, type = string ]
+                    , Довідники.Валюти_Const.Назва // [ pos = 2, type = string ]
+                    , Довідники.Валюти_Const.КороткаНазва // [ pos = 3, type = string ]
                     
                 });
 
@@ -402,9 +419,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     Store.AppendValues(new Валюти_Записи
                     {
                         ID = cur.UnigueID.ToString(),
-                        Назва = cur.Fields?[Валюти_Const.Назва]?.ToString() ?? "", // [ pos = 1, type = string ]
-                        КороткаНазва = cur.Fields?[Валюти_Const.КороткаНазва]?.ToString() ?? "", // [ pos = 2, type = string ]
-                        Код = cur.Fields?[Валюти_Const.Код]?.ToString() ?? "" // [ pos = 3, type = string ]
+                        Код = cur.Fields?[Валюти_Const.Код]?.ToString() ?? "", // [ pos = 1, type = string ]
+                        Назва = cur.Fields?[Валюти_Const.Назва]?.ToString() ?? "", // [ pos = 2, type = string ]
+                        КороткаНазва = cur.Fields?[Валюти_Const.КороткаНазва]?.ToString() ?? "" // [ pos = 3, type = string ]
                         
                     }.ToArray());
             }
@@ -440,8 +457,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 2));
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 3));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 2) { SortColumnId = 2 } );
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 3) { SortColumnId = 3 } );
             
         }
 
@@ -507,8 +524,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 2));
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 3));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 2) { SortColumnId = 2 } );
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 3) { SortColumnId = 3 } );
             
         }
 
@@ -576,9 +593,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 2));
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 3));
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 4));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 2) { SortColumnId = 2 } );
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 3) { SortColumnId = 3 } );
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 4) { SortColumnId = 4 } );
             
         }
 
@@ -653,8 +670,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 2));
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 3));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 2) { SortColumnId = 2 } );
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 3) { SortColumnId = 3 } );
             
         }
 
@@ -720,8 +737,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 2));
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 3));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 2) { SortColumnId = 2 } );
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 3) { SortColumnId = 3 } );
             
         }
 
@@ -787,8 +804,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 2));
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 3));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 2) { SortColumnId = 2 } );
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 3) { SortColumnId = 3 } );
             
         }
 
@@ -854,8 +871,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 2));
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 3));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 2) { SortColumnId = 2 } );
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 3) { SortColumnId = 3 } );
             
         }
 
@@ -921,8 +938,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 2));
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 3));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 2) { SortColumnId = 2 } );
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 3) { SortColumnId = 3 } );
             
         }
 
@@ -994,11 +1011,11 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 2));
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 3));
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 4));
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 5));
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 6));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 2) { SortColumnId = 2 } );
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 3) { SortColumnId = 3 } );
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 4) { SortColumnId = 4 } );
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 5) { SortColumnId = 5 } );
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 6) { SortColumnId = 6 } );
             
         }
 
@@ -1072,9 +1089,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 2));
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 3));
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 4));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 2) { SortColumnId = 2 } );
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 3) { SortColumnId = 3 } );
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 4) { SortColumnId = 4 } );
             
         }
 
@@ -1125,68 +1142,6 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
     #region DIRECTORY "Номенклатура_Папки"
     
       
-    public class Номенклатура_Папки_Записи
-    {
-        string Image = "doc.png";
-        string ID = "";
-        
-        string Назва = "";
-        string Код = "";
-
-        Array ToArray()
-        {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
-            /* */ , Назва, Код };
-        }
-
-        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */
-            , typeof(string) /* Назва */
-            , typeof(string) /* Код */
-            );
-
-        public static void AddColumns(TreeView treeView)
-        {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
-            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 2));
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 3));
-            
-        }
-
-        public static void LoadRecords()
-        {
-            Store.Clear();
-
-            Довідники.Номенклатура_Папки_Select Номенклатура_Папки_Select = new Довідники.Номенклатура_Папки_Select();
-            Номенклатура_Папки_Select.QuerySelect.Field.AddRange(
-                new string[]
-                {
-                    Довідники.Номенклатура_Папки_Const.Назва // [ pos = 1, type = string ]
-                    , Довідники.Номенклатура_Папки_Const.Код // [ pos = 2, type = string ]
-                    
-                });
-
-            
-
-            /* SELECT */
-            Номенклатура_Папки_Select.Select();
-            while (Номенклатура_Папки_Select.MoveNext())
-            {
-                Довідники.Номенклатура_Папки_Pointer? cur = Номенклатура_Папки_Select.Current;
-
-                if (cur != null)
-                    Store.AppendValues(new Номенклатура_Папки_Записи
-                    {
-                        ID = cur.UnigueID.ToString(),
-                        Назва = cur.Fields?[Номенклатура_Папки_Const.Назва]?.ToString() ?? "", // [ pos = 1, type = string ]
-                        Код = cur.Fields?[Номенклатура_Папки_Const.Код]?.ToString() ?? "" // [ pos = 2, type = string ]
-                        
-                    }.ToArray());
-            }
-        }
-    }
-	    
     #endregion
     
     #region DIRECTORY "Контрагенти_Папки"
@@ -1197,68 +1152,6 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
     #region DIRECTORY "Склади_Папки"
     
       
-    public class Склади_Папки_Записи
-    {
-        string Image = "doc.png";
-        string ID = "";
-        
-        string Назва = "";
-        string Код = "";
-
-        Array ToArray()
-        {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
-            /* */ , Назва, Код };
-        }
-
-        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */
-            , typeof(string) /* Назва */
-            , typeof(string) /* Код */
-            );
-
-        public static void AddColumns(TreeView treeView)
-        {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
-            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 2));
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 3));
-            
-        }
-
-        public static void LoadRecords()
-        {
-            Store.Clear();
-
-            Довідники.Склади_Папки_Select Склади_Папки_Select = new Довідники.Склади_Папки_Select();
-            Склади_Папки_Select.QuerySelect.Field.AddRange(
-                new string[]
-                {
-                    Довідники.Склади_Папки_Const.Назва // [ pos = 1, type = string ]
-                    , Довідники.Склади_Папки_Const.Код // [ pos = 2, type = string ]
-                    
-                });
-
-            
-
-            /* SELECT */
-            Склади_Папки_Select.Select();
-            while (Склади_Папки_Select.MoveNext())
-            {
-                Довідники.Склади_Папки_Pointer? cur = Склади_Папки_Select.Current;
-
-                if (cur != null)
-                    Store.AppendValues(new Склади_Папки_Записи
-                    {
-                        ID = cur.UnigueID.ToString(),
-                        Назва = cur.Fields?[Склади_Папки_Const.Назва]?.ToString() ?? "", // [ pos = 1, type = string ]
-                        Код = cur.Fields?[Склади_Папки_Const.Код]?.ToString() ?? "" // [ pos = 2, type = string ]
-                        
-                    }.ToArray());
-            }
-        }
-    }
-	    
     #endregion
     
     #region DIRECTORY "Каси"
@@ -1290,9 +1183,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 2));
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 3));
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 4));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 2) { SortColumnId = 2 } );
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 3) { SortColumnId = 3 } );
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 4) { SortColumnId = 4 } );
             
         }
 
@@ -1371,10 +1264,10 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 2));
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 3));
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 4));
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 5));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 2) { SortColumnId = 2 } );
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 3) { SortColumnId = 3 } );
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 4) { SortColumnId = 4 } );
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 5) { SortColumnId = 5 } );
             
         }
 
@@ -1462,10 +1355,10 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 2));
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 3));
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 4));
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 5));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 2) { SortColumnId = 2 } );
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 3) { SortColumnId = 3 } );
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 4) { SortColumnId = 4 } );
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 5) { SortColumnId = 5 } );
             
         }
 
@@ -1542,8 +1435,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 2));
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 3));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 2) { SortColumnId = 2 } );
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 3) { SortColumnId = 3 } );
             
         }
 
@@ -1609,8 +1502,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 2));
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 3));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 2) { SortColumnId = 2 } );
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 3) { SortColumnId = 3 } );
             
         }
 
@@ -1678,9 +1571,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 2));
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 3));
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 4));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 2) { SortColumnId = 2 } );
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 3) { SortColumnId = 3 } );
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 4) { SortColumnId = 4 } );
             
         }
 
@@ -1754,11 +1647,11 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 2));
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 3));
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 4));
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 5));
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 6));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 2) { SortColumnId = 2 } );
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 3) { SortColumnId = 3 } );
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 4) { SortColumnId = 4 } );
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 5) { SortColumnId = 5 } );
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 6) { SortColumnId = 6 } );
             
         }
 
@@ -1842,7 +1735,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 2));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 2) { SortColumnId = 2 } );
             
         }
 
@@ -1904,7 +1797,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 2));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 2) { SortColumnId = 2 } );
             
         }
 
@@ -1966,7 +1859,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 2));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 2) { SortColumnId = 2 } );
             
         }
 
@@ -2028,7 +1921,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 2));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 2) { SortColumnId = 2 } );
             
         }
 
@@ -2090,7 +1983,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 2));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererText(), "text", 2) { SortColumnId = 2 } );
             
         }
 
