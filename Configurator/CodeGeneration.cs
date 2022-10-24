@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 22.10.2022 22:05:21
+ * Дата конфігурації: 24.10.2022 09:37:12
  *
  */
 
@@ -3804,13 +3804,14 @@ namespace StorageAndTrade_1_0.Довідники
         public const string КраїнаРеєстрації = "col_a6";
         public const string СвідоцтвоСеріяНомер = "col_a7";
         public const string СвідоцтвоДатаВидачі = "col_a8";
+        public const string Склад = "col_a9";
     }
 	
     
     public class Організації_Objest : DirectoryObject
     {
         public Організації_Objest() : base(Config.Kernel!, "tab_a01",
-             new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8" }) 
+             new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9" }) 
         {
             Назва = "";
             Код = "";
@@ -3820,6 +3821,7 @@ namespace StorageAndTrade_1_0.Довідники
             КраїнаРеєстрації = "";
             СвідоцтвоСеріяНомер = "";
             СвідоцтвоДатаВидачі = "";
+            Склад = new Довідники.Склади_Pointer();
             
             //Табличні частини
             Контакти_TablePart = new Організації_Контакти_TablePart(this);
@@ -3838,6 +3840,7 @@ namespace StorageAndTrade_1_0.Довідники
                 КраїнаРеєстрації = base.FieldValue["col_a6"]?.ToString() ?? "";
                 СвідоцтвоСеріяНомер = base.FieldValue["col_a7"]?.ToString() ?? "";
                 СвідоцтвоДатаВидачі = base.FieldValue["col_a8"]?.ToString() ?? "";
+                Склад = new Довідники.Склади_Pointer(base.FieldValue["col_a9"]);
                 
                 BaseClear();
                 return true;
@@ -3856,6 +3859,7 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_a6"] = КраїнаРеєстрації;
             base.FieldValue["col_a7"] = СвідоцтвоСеріяНомер;
             base.FieldValue["col_a8"] = СвідоцтвоДатаВидачі;
+            base.FieldValue["col_a9"] = Склад.UnigueID.UGuid;
             
             BaseSave();
 			
@@ -3873,6 +3877,7 @@ namespace StorageAndTrade_1_0.Довідники
 			copy.КраїнаРеєстрації = КраїнаРеєстрації;
 			copy.СвідоцтвоСеріяНомер = СвідоцтвоСеріяНомер;
 			copy.СвідоцтвоДатаВидачі = СвідоцтвоДатаВидачі;
+			copy.Склад = Склад;
 			
 			return copy;
         }
@@ -3897,6 +3902,7 @@ namespace StorageAndTrade_1_0.Довідники
         public string КраїнаРеєстрації { get; set; }
         public string СвідоцтвоСеріяНомер { get; set; }
         public string СвідоцтвоДатаВидачі { get; set; }
+        public Довідники.Склади_Pointer Склад { get; set; }
         
         //Табличні частини
         public Організації_Контакти_TablePart Контакти_TablePart { get; set; }
@@ -4095,13 +4101,14 @@ namespace StorageAndTrade_1_0.Довідники
         public const string ОдиницяВиміру = "col_a4";
         public const string Папка = "col_a5";
         public const string ОсновнаКартинкаФайл = "col_a7";
+        public const string Suma = "col_a6";
     }
 	
     
     public class Номенклатура_Objest : DirectoryObject
     {
         public Номенклатура_Objest() : base(Config.Kernel!, "tab_a03",
-             new string[] { "col_b1", "col_b2", "col_b4", "col_a1", "col_b3", "col_b5", "col_a2", "col_a3", "col_a4", "col_a5", "col_a7" }) 
+             new string[] { "col_b1", "col_b2", "col_b4", "col_a1", "col_b3", "col_b5", "col_a2", "col_a3", "col_a4", "col_a5", "col_a7", "col_a6" }) 
         {
             Назва = "";
             Код = "";
@@ -4114,6 +4121,7 @@ namespace StorageAndTrade_1_0.Довідники
             ОдиницяВиміру = new Довідники.ПакуванняОдиниціВиміру_Pointer();
             Папка = new Довідники.Номенклатура_Папки_Pointer();
             ОсновнаКартинкаФайл = new Довідники.Файли_Pointer();
+            Suma = 0;
             
             //Табличні частини
             Файли_TablePart = new Номенклатура_Файли_TablePart(this);
@@ -4135,6 +4143,7 @@ namespace StorageAndTrade_1_0.Довідники
                 ОдиницяВиміру = new Довідники.ПакуванняОдиниціВиміру_Pointer(base.FieldValue["col_a4"]);
                 Папка = new Довідники.Номенклатура_Папки_Pointer(base.FieldValue["col_a5"]);
                 ОсновнаКартинкаФайл = new Довідники.Файли_Pointer(base.FieldValue["col_a7"]);
+                Suma = (base.FieldValue["col_a6"] != DBNull.Value) ? (int)base.FieldValue["col_a6"] : 0;
                 
                 BaseClear();
                 return true;
@@ -4157,6 +4166,7 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_a4"] = ОдиницяВиміру.UnigueID.UGuid;
             base.FieldValue["col_a5"] = Папка.UnigueID.UGuid;
             base.FieldValue["col_a7"] = ОсновнаКартинкаФайл.UnigueID.UGuid;
+            base.FieldValue["col_a6"] = Suma;
             
             BaseSave();
 			Номенклатура_Triggers.AfterRecording(this);
@@ -4177,6 +4187,7 @@ namespace StorageAndTrade_1_0.Довідники
 			copy.ОдиницяВиміру = ОдиницяВиміру;
 			copy.Папка = Папка;
 			copy.ОсновнаКартинкаФайл = ОсновнаКартинкаФайл;
+			copy.Suma = Suma;
 			
 			return copy;
         }
@@ -4204,6 +4215,7 @@ namespace StorageAndTrade_1_0.Довідники
         public Довідники.ПакуванняОдиниціВиміру_Pointer ОдиницяВиміру { get; set; }
         public Довідники.Номенклатура_Папки_Pointer Папка { get; set; }
         public Довідники.Файли_Pointer ОсновнаКартинкаФайл { get; set; }
+        public int Suma { get; set; }
         
         //Табличні частини
         public Номенклатура_Файли_TablePart Файли_TablePart { get; set; }
@@ -5459,7 +5471,7 @@ namespace StorageAndTrade_1_0.Довідники
 		public string GetPresentation()
         {
 		    return base.BasePresentation(
-			    new string[] { "col_d9" }
+			    new string[] { "col_e1" }
 			);
         }
 		
