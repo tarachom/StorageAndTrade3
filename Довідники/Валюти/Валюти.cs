@@ -1,7 +1,6 @@
 using Gtk;
 
 using AccountingSoftware;
-using Константи = StorageAndTrade_1_0.Константи;
 using Довідники = StorageAndTrade_1_0.Довідники;
 
 namespace StorageAndTrade
@@ -99,8 +98,6 @@ namespace StorageAndTrade
             scroll.Add(ViewGrid);
 
             PackStart(scroll, true, true, 0);
-
-            //LoadRecords();
 
             ShowAll();
         }

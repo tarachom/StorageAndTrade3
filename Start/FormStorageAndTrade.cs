@@ -9,8 +9,7 @@ namespace StorageAndTrade
         readonly object loked = new Object();
         public ConfigurationParam? OpenConfigurationParam { get; set; }
 
-        HPaned hPaned;
-        Notebook? topNotebook;
+        Notebook topNotebook;
         Statusbar statusBar;
 
         public FormStorageAndTrade() : base("Зберігання та Торгівля для України")
@@ -27,8 +26,14 @@ namespace StorageAndTrade
             HBox hbox = new HBox();
             vbox.PackStart(hbox, true, true, 0);
 
-            CreatePack1(hbox);
-            CreatePack2(hbox);
+            CreateLeftMenu(hbox);
+
+            topNotebook = new Notebook() { Scrollable = true, EnablePopup = true, BorderWidth = 0, ShowBorder = false };
+            topNotebook.TabPos = PositionType.Top;
+
+            CreateNotebookPage("Стартова", null);
+
+            hbox.PackStart(topNotebook, true, true, 0);
 
             statusBar = new Statusbar();
             vbox.PackStart(statusBar, false, false, 0);
@@ -36,22 +41,24 @@ namespace StorageAndTrade
             ShowAll();
         }
 
-        void CreatePack1(HBox hbox)
+        #region LeftMenu
+
+        void CreateLeftMenu(HBox hbox)
         {
-            ScrolledWindow scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In, WidthRequest = 250 };
-            scrollTree.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
-
             VBox vbox = new VBox();
-            scrollTree.Add(vbox);
 
-            CreateItemPack1(vbox, "Продажі");
-            CreateItemPack1(vbox, "Закупки");
-            CreateItemPack1(vbox, "Налаштування");
+            ScrolledWindow scrolLeftMenu = new ScrolledWindow() { ShadowType = ShadowType.In, WidthRequest = 250 };
+            scrolLeftMenu.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
+            scrolLeftMenu.Add(vbox);
 
-            hbox.PackStart(scrollTree, false, false, 0);
+            CreateItemLeftMenu(vbox, "Продажі");
+            CreateItemLeftMenu(vbox, "Закупки");
+            CreateItemLeftMenu(vbox, "Налаштування");
+
+            hbox.PackStart(scrolLeftMenu, false, false, 0);
         }
 
-        void CreateItemPack1(VBox vBox, string name)
+        void CreateItemLeftMenu(VBox vBox, string name)
         {
             HBox hBox = new HBox() { BorderWidth = 1 };
             vBox.PackStart(hBox, false, false, 5);
@@ -63,21 +70,18 @@ namespace StorageAndTrade
             hBox.PackStart(lb, false, false, 0);
         }
 
+        #endregion
+
         void CreatePack2(HBox hbox)
         {
-            topNotebook = new Notebook() { Scrollable = true, EnablePopup = true, BorderWidth = 0, ShowBorder = false };
-            topNotebook.TabPos = PositionType.Top;
-
 
 
             CreateNotebookPage("Оптимізація таблиць", () =>
-                       {
-                           Валюти валюти = new Валюти();
-                           валюти.LoadRecords();
-                           return валюти;
-                       });
-
-            hbox.PackStart(topNotebook, true, true, 0);
+            {
+                Номенклатура номенклатура = new Номенклатура();
+                номенклатура.LoadRecords();
+                return номенклатура;
+            });
 
 
         }
