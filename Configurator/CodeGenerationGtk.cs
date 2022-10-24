@@ -369,17 +369,19 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         string Код = "";
         string Назва = "";
         string КороткаНазва = "";
+        string Dok = "";
 
         Array ToArray()
         {
             return new object[] { new Gdk.Pixbuf(Image), ID 
-            /* */ , Код, Назва, КороткаНазва };
+            /* */ , Код, Назва, КороткаНазва, Dok };
         }
 
         public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */
             , typeof(string) /* Код */
             , typeof(string) /* Назва */
             , typeof(string) /* КороткаНазва */
+            , typeof(string) /* Dok */
             );
 
         public static void AddColumns(TreeView treeView)
@@ -390,6 +392,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText(), "text", 2) { SortColumnId = 2, FixedWidth = 100 } );
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 3) { SortColumnId = 3, FixedWidth = 500 } );
             treeView.AppendColumn(new TreeViewColumn("Коротка назва", new CellRendererText(), "text", 4) { SortColumnId = 4 } );
+            treeView.AppendColumn(new TreeViewColumn("Dok", new CellRendererText(), "text", 5) { SortColumnId = 5 } );
             
         }
 
@@ -404,10 +407,18 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     Довідники.Валюти_Const.Код // [ pos = 1, type = string ]
                     , Довідники.Валюти_Const.Назва // [ pos = 2, type = string ]
                     , Довідники.Валюти_Const.КороткаНазва // [ pos = 3, type = string ]
+                    /* , Довідники.Валюти_Const.Dok */ // [ pos = 4, type = pointer ]
                     
                 });
 
             
+                  /* JOIN 4 */
+                  Валюти_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>(
+                      Документи.РозхіднийКасовийОрдер_Const.TABLE + "." + Документи.РозхіднийКасовийОрдер_Const.Назва, "join_4"));
+                  Валюти_Select.QuerySelect.Joins.Add(
+                    new Join( Документи.РозхіднийКасовийОрдер_Const.TABLE, Довідники.Валюти_Const.Dok, Валюти_Select.QuerySelect.Table));
+                
 
             /* SELECT */
             Валюти_Select.Select();
@@ -421,7 +432,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                         ID = cur.UnigueID.ToString(),
                         Код = cur.Fields?[Валюти_Const.Код]?.ToString() ?? "", // [ pos = 1, type = string ]
                         Назва = cur.Fields?[Валюти_Const.Назва]?.ToString() ?? "", // [ pos = 2, type = string ]
-                        КороткаНазва = cur.Fields?[Валюти_Const.КороткаНазва]?.ToString() ?? "" // [ pos = 3, type = string ]
+                        КороткаНазва = cur.Fields?[Валюти_Const.КороткаНазва]?.ToString() ?? "", // [ pos = 3, type = string ]
+                        Dok = cur.Fields?["join_4"]?.ToString() ?? "" // [ pos = 4, type = pointer ]
                         
                     }.ToArray());
             }

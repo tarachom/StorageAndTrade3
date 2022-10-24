@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 24.10.2022 15:18:23
+ * Дата конфігурації: 24.10.2022 15:29:40
  *
  */
 
@@ -4826,18 +4826,20 @@ namespace StorageAndTrade_1_0.Довідники
         public const string КороткаНазва = "col_a2";
         public const string Код = "col_c6";
         public const string Код_R030 = "col_a1";
+        public const string Dok = "col_a3";
     }
 	
     
     public class Валюти_Objest : DirectoryObject
     {
         public Валюти_Objest() : base(Config.Kernel!, "tab_a07",
-             new string[] { "col_c5", "col_a2", "col_c6", "col_a1" }) 
+             new string[] { "col_c5", "col_a2", "col_c6", "col_a1", "col_a3" }) 
         {
             Назва = "";
             КороткаНазва = "";
             Код = "";
             Код_R030 = "";
+            Dok = new Документи.РозхіднийКасовийОрдер_Pointer();
             
         }
         
@@ -4849,6 +4851,7 @@ namespace StorageAndTrade_1_0.Довідники
                 КороткаНазва = base.FieldValue["col_a2"]?.ToString() ?? "";
                 Код = base.FieldValue["col_c6"]?.ToString() ?? "";
                 Код_R030 = base.FieldValue["col_a1"]?.ToString() ?? "";
+                Dok = new Документи.РозхіднийКасовийОрдер_Pointer(base.FieldValue["col_a3"]);
                 
                 BaseClear();
                 return true;
@@ -4864,6 +4867,7 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_a2"] = КороткаНазва;
             base.FieldValue["col_c6"] = Код;
             base.FieldValue["col_a1"] = Код_R030;
+            base.FieldValue["col_a3"] = Dok.UnigueID.UGuid;
             
             BaseSave();
 			Валюти_Triggers.AfterRecording(this);
@@ -4877,6 +4881,7 @@ namespace StorageAndTrade_1_0.Довідники
 			copy.КороткаНазва = КороткаНазва;
 			copy.Код = Код;
 			copy.Код_R030 = Код_R030;
+			copy.Dok = Dok;
 			
 			return copy;
         }
@@ -4897,6 +4902,7 @@ namespace StorageAndTrade_1_0.Довідники
         public string КороткаНазва { get; set; }
         public string Код { get; set; }
         public string Код_R030 { get; set; }
+        public Документи.РозхіднийКасовийОрдер_Pointer Dok { get; set; }
         
     }
     
