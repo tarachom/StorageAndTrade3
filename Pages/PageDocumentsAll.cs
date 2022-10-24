@@ -30,31 +30,23 @@ namespace StorageAndTrade
             AddLink(vLeft, "Встановлення цін номенклатури", ВстановленняЦінНоменклатури);
             AddLink(vLeft, "Прихідний касовий ордер", ПрихіднийКасовийОрдер);
             AddLink(vLeft, "Розхідний касовий ордер", РозхіднийКасовийОрдер);
-            // AddLink(vLeft, "Встановлення цін номенклатури", ВстановленняЦінНоменклатури);
-            // AddLink(vLeft, "Прихідний касовий ордер", ПрихіднийКасовийОрдер);
-            // AddLink(vLeft, "Розхідний касовий ордер", РозхіднийКасовийОрдер);
+            AddLink(vLeft, "Переміщення товарів", ПереміщенняТоварів);
+            AddLink(vLeft, "Повернення товарів постачальнику", ПоверненняТоварівПостачальнику);
 
             hBoxList.PackStart(vLeft, false, false, 5);
 
-            // AddSeparator(hBoxList);
+            AddSeparator(hBoxList);
 
-            // VBox vRight = new VBox(false, 0);
+            VBox vRight = new VBox(false, 0);
 
-            // AddCaption(vRight, "Партнери");
-            // AddLink(vRight, "Контрагенти", Контрагенти);
-            // AddLink(vRight, "Договори контрагентів", ДоговориКонтрагентів);
-            // AddLink(vRight, "Банківські рахунки контрагентів", БанківськіРахункиКонтрагентів);
+            AddLink(vRight, "Повернення товарів від клієнта", ПоверненняТоварівВідКлієнта);
+            AddLink(vRight, "Акт виконаних робіт", АктВиконанихРобіт);
+            AddLink(vRight, "Введення залишків", ВведенняЗалишків);
+            AddLink(vRight, "Внутрішнє споживання товарів", ВнутрішнєСпоживанняТоварів);
+            AddLink(vRight, "Рахунок фактура", РахунокФактура);
+            // AddLink(vRight, "Введення залишків", ВведенняЗалишків);
 
-            // AddCaption(vRight, "Товари та послуги");
-            // AddLink(vRight, "Номенклатура", Номенклатура);
-            // AddLink(vRight, "Характеристики номенклатури", ХарактеристикаНоменклатури);
-            // AddLink(vRight, "Пакування номенклатури", ПакуванняОдиниціВиміру);
-            // AddLink(vRight, "Види номенклатури", ВидиНоменклатури);
-            // AddLink(vRight, "Партії товарів", ПартіяТоварівКомпозит);
-            // AddLink(vRight, "Серії номенклатури", СеріїНоменклатури);
-            // AddLink(vRight, "Виробники", Виробники);
-
-            // hBoxList.PackStart(vRight, false, false, 5);
+            hBoxList.PackStart(vRight, false, false, 5);
 
             PackStart(hBoxList, false, false, 10);
 
@@ -166,6 +158,110 @@ namespace StorageAndTrade
             });
         }
 
+        void ПереміщенняТоварів(object? sender, EventArgs args)
+        {
+            GeneralForm?.CreateNotebookPage("Документи: Переміщення товарів", () =>
+            {
+                ПереміщенняТоварів page = new ПереміщенняТоварів
+                {
+                    GeneralForm = GeneralForm
+                };
+
+                page.LoadRecords();
+
+                return page;
+            });
+        }
+
+        void ПоверненняТоварівПостачальнику(object? sender, EventArgs args)
+        {
+            GeneralForm?.CreateNotebookPage("Документи: Повернення товарів постачальнику", () =>
+            {
+                ПоверненняТоварівПостачальнику page = new ПоверненняТоварівПостачальнику
+                {
+                    GeneralForm = GeneralForm
+                };
+
+                page.LoadRecords();
+
+                return page;
+            });
+        }
+
+        void ПоверненняТоварівВідКлієнта(object? sender, EventArgs args)
+        {
+            GeneralForm?.CreateNotebookPage("Документи: Повернення товарів від клієнта", () =>
+            {
+                ПоверненняТоварівВідКлієнта page = new ПоверненняТоварівВідКлієнта
+                {
+                    GeneralForm = GeneralForm
+                };
+
+                page.LoadRecords();
+
+                return page;
+            });
+        }
+
+        void АктВиконанихРобіт(object? sender, EventArgs args)
+        {
+            GeneralForm?.CreateNotebookPage("Документи: Акт виконаних робіт", () =>
+            {
+                АктВиконанихРобіт page = new АктВиконанихРобіт
+                {
+                    GeneralForm = GeneralForm
+                };
+
+                page.LoadRecords();
+
+                return page;
+            });
+        }
+
+        void ВведенняЗалишків(object? sender, EventArgs args)
+        {
+            GeneralForm?.CreateNotebookPage("Документи: Введення залишків", () =>
+            {
+                ВведенняЗалишків page = new ВведенняЗалишків
+                {
+                    GeneralForm = GeneralForm
+                };
+
+                page.LoadRecords();
+
+                return page;
+            });
+        }
+
+        void ВнутрішнєСпоживанняТоварів(object? sender, EventArgs args)
+        {
+            GeneralForm?.CreateNotebookPage("Документи: Внутрішнє споживання товарів", () =>
+            {
+                ВнутрішнєСпоживанняТоварів page = new ВнутрішнєСпоживанняТоварів
+                {
+                    GeneralForm = GeneralForm
+                };
+
+                page.LoadRecords();
+
+                return page;
+            });
+        }
+
+        void РахунокФактура(object? sender, EventArgs args)
+        {
+            GeneralForm?.CreateNotebookPage("Документи: Рахунок фактура", () =>
+            {
+                РахунокФактура page = new РахунокФактура
+                {
+                    GeneralForm = GeneralForm
+                };
+
+                page.LoadRecords();
+
+                return page;
+            });
+        }
 
         void AddCaption(VBox vBox, string name)
         {
