@@ -2009,4 +2009,224 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
     
 }
 
+namespace StorageAndTrade_1_0.Документи.ТабличніСписки
+{
+    
+    #region DOCUMENT "ЗамовленняПостачальнику"
+    
+      
+    public class ЗамовленняПостачальнику_Записи
+    {
+        string Image = "doc.png";
+        string ID = "";
+        
+        string Назва = "";
+        string НомерДок = "";
+        string ДатаДок = "";
+        string Організація = "";
+        string Контрагент = "";
+        string Склад = "";
+        string Валюта = "";
+        string СумаДокументу = "";
+        string Коментар = "";
+
+        Array ToArray()
+        {
+            return new object[] { new Gdk.Pixbuf(Image), ID 
+            /* */ , Назва, НомерДок, ДатаДок, Організація, Контрагент, Склад, Валюта, СумаДокументу, Коментар };
+        }
+
+        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */
+            , typeof(string) /* Назва */
+            , typeof(string) /* НомерДок */
+            , typeof(string) /* ДатаДок */
+            , typeof(string) /* Організація */
+            , typeof(string) /* Контрагент */
+            , typeof(string) /* Склад */
+            , typeof(string) /* Валюта */
+            , typeof(string) /* СумаДокументу */
+            , typeof(string) /* Коментар */
+            );
+
+        public static void AddColumns(TreeView treeView)
+        {
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
+            /* */
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 2) { SortColumnId = 2 } );
+            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText(), "text", 3) { SortColumnId = 3 } );
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText(), "text", 4) { SortColumnId = 4 } );
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText(), "text", 5) { SortColumnId = 5 } );
+            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText(), "text", 6) { SortColumnId = 6 } );
+            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText(), "text", 7) { SortColumnId = 7 } );
+            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText(), "text", 8) { SortColumnId = 8 } );
+            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText(), "text", 9) { SortColumnId = 9 } );
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText(), "text", 10) { SortColumnId = 10 } );
+            
+        }
+
+        public static void LoadRecords()
+        {
+            Store.Clear();
+
+            Документи.ЗамовленняПостачальнику_Select ЗамовленняПостачальнику_Select = new Документи.ЗамовленняПостачальнику_Select();
+            ЗамовленняПостачальнику_Select.QuerySelect.Field.AddRange(
+                new string[]
+                {
+                    Документи.ЗамовленняПостачальнику_Const.Назва // [ pos = 1, type = string ]
+                    , Документи.ЗамовленняПостачальнику_Const.НомерДок // [ pos = 2, type = string ]
+                    , Документи.ЗамовленняПостачальнику_Const.ДатаДок // [ pos = 3, type = datetime ]
+                    /* , Документи.ЗамовленняПостачальнику_Const.Організація */ // [ pos = 4, type = pointer ]
+                    /* , Документи.ЗамовленняПостачальнику_Const.Контрагент */ // [ pos = 5, type = pointer ]
+                    /* , Документи.ЗамовленняПостачальнику_Const.Склад */ // [ pos = 6, type = pointer ]
+                    /* , Документи.ЗамовленняПостачальнику_Const.Валюта */ // [ pos = 7, type = pointer ]
+                    , Документи.ЗамовленняПостачальнику_Const.СумаДокументу // [ pos = 8, type = numeric ]
+                    , Документи.ЗамовленняПостачальнику_Const.Коментар // [ pos = 9, type = string ]
+                    
+                });
+
+            
+                  /* JOIN 4 */
+                  ЗамовленняПостачальнику_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>(
+                      Довідники.Організації_Const.TABLE + "." + Довідники.Організації_Const.Назва, "join_4"));
+                  ЗамовленняПостачальнику_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Організації_Const.TABLE, Документи.ЗамовленняПостачальнику_Const.Організація, ЗамовленняПостачальнику_Select.QuerySelect.Table));
+                
+                  /* JOIN 5 */
+                  ЗамовленняПостачальнику_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>(
+                      Довідники.Контрагенти_Const.TABLE + "." + Довідники.Контрагенти_Const.Назва, "join_5"));
+                  ЗамовленняПостачальнику_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Контрагенти_Const.TABLE, Документи.ЗамовленняПостачальнику_Const.Контрагент, ЗамовленняПостачальнику_Select.QuerySelect.Table));
+                
+                  /* JOIN 6 */
+                  ЗамовленняПостачальнику_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>(
+                      Довідники.Склади_Const.TABLE + "." + Довідники.Склади_Const.Код, "join_6"));
+                  ЗамовленняПостачальнику_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Склади_Const.TABLE, Документи.ЗамовленняПостачальнику_Const.Склад, ЗамовленняПостачальнику_Select.QuerySelect.Table));
+                
+                  /* JOIN 7 */
+                  ЗамовленняПостачальнику_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>(
+                      Довідники.Валюти_Const.TABLE + "." + Довідники.Валюти_Const.Назва, "join_7"));
+                  ЗамовленняПостачальнику_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Валюти_Const.TABLE, Документи.ЗамовленняПостачальнику_Const.Валюта, ЗамовленняПостачальнику_Select.QuerySelect.Table));
+                
+
+            /* SELECT */
+            ЗамовленняПостачальнику_Select.Select();
+            while (ЗамовленняПостачальнику_Select.MoveNext())
+            {
+                Документи.ЗамовленняПостачальнику_Pointer? cur = ЗамовленняПостачальнику_Select.Current;
+
+                if (cur != null)
+                    Store.AppendValues(new ЗамовленняПостачальнику_Записи
+                    {
+                        ID = cur.UnigueID.ToString(),
+                        Назва = cur.Fields?[ЗамовленняПостачальнику_Const.Назва]?.ToString() ?? "", // [ pos = 1, type = string ]
+                        НомерДок = cur.Fields?[ЗамовленняПостачальнику_Const.НомерДок]?.ToString() ?? "", // [ pos = 2, type = string ]
+                        ДатаДок = cur.Fields?[ЗамовленняПостачальнику_Const.ДатаДок]?.ToString() ?? "", // [ pos = 3, type = datetime ]
+                        Організація = cur.Fields?["join_4"]?.ToString() ?? "", // [ pos = 4, type = pointer ]
+                        Контрагент = cur.Fields?["join_5"]?.ToString() ?? "", // [ pos = 5, type = pointer ]
+                        Склад = cur.Fields?["join_6"]?.ToString() ?? "", // [ pos = 6, type = pointer ]
+                        Валюта = cur.Fields?["join_7"]?.ToString() ?? "", // [ pos = 7, type = pointer ]
+                        СумаДокументу = cur.Fields?[ЗамовленняПостачальнику_Const.СумаДокументу]?.ToString() ?? "", // [ pos = 8, type = numeric ]
+                        Коментар = cur.Fields?[ЗамовленняПостачальнику_Const.Коментар]?.ToString() ?? "" // [ pos = 9, type = string ]
+                        
+                    }.ToArray());
+            }
+        }
+    }
+	    
+    #endregion
+    
+    #region DOCUMENT "ПоступленняТоварівТаПослуг"
+    
+      
+    #endregion
+    
+    #region DOCUMENT "ЗамовленняКлієнта"
+    
+      
+    #endregion
+    
+    #region DOCUMENT "РеалізаціяТоварівТаПослуг"
+    
+      
+    #endregion
+    
+    #region DOCUMENT "ВстановленняЦінНоменклатури"
+    
+      
+    #endregion
+    
+    #region DOCUMENT "ПрихіднийКасовийОрдер"
+    
+      
+    #endregion
+    
+    #region DOCUMENT "РозхіднийКасовийОрдер"
+    
+      
+    #endregion
+    
+    #region DOCUMENT "ПереміщенняТоварів"
+    
+      
+    #endregion
+    
+    #region DOCUMENT "ПоверненняТоварівПостачальнику"
+    
+      
+    #endregion
+    
+    #region DOCUMENT "ПоверненняТоварівВідКлієнта"
+    
+      
+    #endregion
+    
+    #region DOCUMENT "АктВиконанихРобіт"
+    
+      
+    #endregion
+    
+    #region DOCUMENT "ВведенняЗалишків"
+    
+      
+    #endregion
+    
+    #region DOCUMENT "НадлишкиТоварів"
+    
+      
+    #endregion
+    
+    #region DOCUMENT "ПересортицяТоварів"
+    
+      
+    #endregion
+    
+    #region DOCUMENT "ПерерахунокТоварів"
+    
+      
+    #endregion
+    
+    #region DOCUMENT "ПсуванняТоварів"
+    
+      
+    #endregion
+    
+    #region DOCUMENT "ВнутрішнєСпоживанняТоварів"
+    
+      
+    #endregion
+    
+    #region DOCUMENT "РахунокФактура"
+    
+      
+    #endregion
+    
+}
+
   

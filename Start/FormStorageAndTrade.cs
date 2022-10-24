@@ -53,6 +53,7 @@ namespace StorageAndTrade
 
             CreateItemLeftMenu(vbox, "Продажі", OnClick_Продажі);
             CreateItemLeftMenu(vbox, "Закупки", OnClick_Закупки);
+            CreateItemLeftMenu(vbox, "Документи", OnClick_Документи);
             CreateItemLeftMenu(vbox, "Довідники", OnClick_Довідники);
             CreateItemLeftMenu(vbox, "Налаштування", OnClick_Налаштування);
 
@@ -80,6 +81,19 @@ namespace StorageAndTrade
         void OnClick_Закупки(object? sender, EventArgs args)
         {
 
+        }
+
+        void OnClick_Документи(object? sender, EventArgs args)
+        {
+            CreateNotebookPage("Документи", () =>
+            {
+                PageDocumentsAll page = new PageDocumentsAll
+                {
+                    GeneralForm = this
+                };
+
+                return page;
+            });
         }
 
         void OnClick_Довідники(object? sender, EventArgs args)
