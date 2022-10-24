@@ -2571,16 +2571,374 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
     #region DOCUMENT "ВстановленняЦінНоменклатури"
     
       
+    public class ВстановленняЦінНоменклатури_Записи
+    {
+        string Image = "doc.png";
+        string ID = "";
+        
+        string Назва = "";
+        string НомерДок = "";
+        string ДатаДок = "";
+        string Організація = "";
+        string Валюта = "";
+        string ВидЦіни = "";
+        string Коментар = "";
+
+        Array ToArray()
+        {
+            return new object[] { new Gdk.Pixbuf(Image), ID 
+            /* */ , Назва, НомерДок, ДатаДок, Організація, Валюта, ВидЦіни, Коментар };
+        }
+
+        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */
+            , typeof(string) /* Назва */
+            , typeof(string) /* НомерДок */
+            , typeof(string) /* ДатаДок */
+            , typeof(string) /* Організація */
+            , typeof(string) /* Валюта */
+            , typeof(string) /* ВидЦіни */
+            , typeof(string) /* Коментар */
+            );
+
+        public static void AddColumns(TreeView treeView)
+        {
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
+            /* */
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 2) { SortColumnId = 2 } );
+            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText(), "text", 3) { SortColumnId = 3 } );
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText(), "text", 4) { SortColumnId = 4 } );
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText(), "text", 5) { SortColumnId = 5 } );
+            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText(), "text", 6) { SortColumnId = 6 } );
+            treeView.AppendColumn(new TreeViewColumn("Вид ціни", new CellRendererText(), "text", 7) { SortColumnId = 7 } );
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText(), "text", 8) { SortColumnId = 8 } );
+            
+        }
+
+        public static void LoadRecords()
+        {
+            Store.Clear();
+
+            Документи.ВстановленняЦінНоменклатури_Select ВстановленняЦінНоменклатури_Select = new Документи.ВстановленняЦінНоменклатури_Select();
+            ВстановленняЦінНоменклатури_Select.QuerySelect.Field.AddRange(
+                new string[]
+                {
+                    Документи.ВстановленняЦінНоменклатури_Const.Назва // [ pos = 1, type = string ]
+                    , Документи.ВстановленняЦінНоменклатури_Const.НомерДок // [ pos = 2, type = string ]
+                    , Документи.ВстановленняЦінНоменклатури_Const.ДатаДок // [ pos = 3, type = datetime ]
+                    /* , Документи.ВстановленняЦінНоменклатури_Const.Організація */ // [ pos = 4, type = pointer ]
+                    /* , Документи.ВстановленняЦінНоменклатури_Const.Валюта */ // [ pos = 5, type = pointer ]
+                    /* , Документи.ВстановленняЦінНоменклатури_Const.ВидЦіни */ // [ pos = 6, type = pointer ]
+                    , Документи.ВстановленняЦінНоменклатури_Const.Коментар // [ pos = 7, type = string ]
+                    
+                });
+
+            
+                  /* JOIN 4 */
+                  ВстановленняЦінНоменклатури_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>(
+                      Довідники.Організації_Const.TABLE + "." + Довідники.Організації_Const.Назва, "join_4"));
+                  ВстановленняЦінНоменклатури_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Організації_Const.TABLE, Документи.ВстановленняЦінНоменклатури_Const.Організація, ВстановленняЦінНоменклатури_Select.QuerySelect.Table));
+                
+                  /* JOIN 5 */
+                  ВстановленняЦінНоменклатури_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>(
+                      Довідники.Валюти_Const.TABLE + "." + Довідники.Валюти_Const.Назва, "join_5"));
+                  ВстановленняЦінНоменклатури_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Валюти_Const.TABLE, Документи.ВстановленняЦінНоменклатури_Const.Валюта, ВстановленняЦінНоменклатури_Select.QuerySelect.Table));
+                
+                  /* JOIN 6 */
+                  ВстановленняЦінНоменклатури_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>(
+                      Довідники.ВидиЦін_Const.TABLE + "." + Довідники.ВидиЦін_Const.Назва, "join_6"));
+                  ВстановленняЦінНоменклатури_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.ВидиЦін_Const.TABLE, Документи.ВстановленняЦінНоменклатури_Const.ВидЦіни, ВстановленняЦінНоменклатури_Select.QuerySelect.Table));
+                
+
+            /* SELECT */
+            ВстановленняЦінНоменклатури_Select.Select();
+            while (ВстановленняЦінНоменклатури_Select.MoveNext())
+            {
+                Документи.ВстановленняЦінНоменклатури_Pointer? cur = ВстановленняЦінНоменклатури_Select.Current;
+
+                if (cur != null)
+                    Store.AppendValues(new ВстановленняЦінНоменклатури_Записи
+                    {
+                        ID = cur.UnigueID.ToString(),
+                        Назва = cur.Fields?[ВстановленняЦінНоменклатури_Const.Назва]?.ToString() ?? "", // [ pos = 1, type = string ]
+                        НомерДок = cur.Fields?[ВстановленняЦінНоменклатури_Const.НомерДок]?.ToString() ?? "", // [ pos = 2, type = string ]
+                        ДатаДок = cur.Fields?[ВстановленняЦінНоменклатури_Const.ДатаДок]?.ToString() ?? "", // [ pos = 3, type = datetime ]
+                        Організація = cur.Fields?["join_4"]?.ToString() ?? "", // [ pos = 4, type = pointer ]
+                        Валюта = cur.Fields?["join_5"]?.ToString() ?? "", // [ pos = 5, type = pointer ]
+                        ВидЦіни = cur.Fields?["join_6"]?.ToString() ?? "", // [ pos = 6, type = pointer ]
+                        Коментар = cur.Fields?[ВстановленняЦінНоменклатури_Const.Коментар]?.ToString() ?? "" // [ pos = 7, type = string ]
+                        
+                    }.ToArray());
+            }
+        }
+    }
+	    
     #endregion
     
     #region DOCUMENT "ПрихіднийКасовийОрдер"
     
       
+    public class ПрихіднийКасовийОрдер_Записи
+    {
+        string Image = "doc.png";
+        string ID = "";
+        
+        string Назва = "";
+        string НомерДок = "";
+        string ДатаДок = "";
+        string Організація = "";
+        string Валюта = "";
+        string Каса = "";
+        string Контрагент = "";
+        string СумаДокументу = "";
+        string Коментар = "";
+
+        Array ToArray()
+        {
+            return new object[] { new Gdk.Pixbuf(Image), ID 
+            /* */ , Назва, НомерДок, ДатаДок, Організація, Валюта, Каса, Контрагент, СумаДокументу, Коментар };
+        }
+
+        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */
+            , typeof(string) /* Назва */
+            , typeof(string) /* НомерДок */
+            , typeof(string) /* ДатаДок */
+            , typeof(string) /* Організація */
+            , typeof(string) /* Валюта */
+            , typeof(string) /* Каса */
+            , typeof(string) /* Контрагент */
+            , typeof(string) /* СумаДокументу */
+            , typeof(string) /* Коментар */
+            );
+
+        public static void AddColumns(TreeView treeView)
+        {
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
+            /* */
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 2) { SortColumnId = 2 } );
+            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText(), "text", 3) { SortColumnId = 3 } );
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText(), "text", 4) { SortColumnId = 4 } );
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText(), "text", 5) { SortColumnId = 5 } );
+            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText(), "text", 6) { SortColumnId = 6 } );
+            treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText(), "text", 7) { SortColumnId = 7 } );
+            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText(), "text", 8) { SortColumnId = 8 } );
+            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText(), "text", 9) { SortColumnId = 9 } );
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText(), "text", 10) { SortColumnId = 10 } );
+            
+        }
+
+        public static void LoadRecords()
+        {
+            Store.Clear();
+
+            Документи.ПрихіднийКасовийОрдер_Select ПрихіднийКасовийОрдер_Select = new Документи.ПрихіднийКасовийОрдер_Select();
+            ПрихіднийКасовийОрдер_Select.QuerySelect.Field.AddRange(
+                new string[]
+                {
+                    Документи.ПрихіднийКасовийОрдер_Const.Назва // [ pos = 1, type = string ]
+                    , Документи.ПрихіднийКасовийОрдер_Const.НомерДок // [ pos = 2, type = string ]
+                    , Документи.ПрихіднийКасовийОрдер_Const.ДатаДок // [ pos = 3, type = datetime ]
+                    /* , Документи.ПрихіднийКасовийОрдер_Const.Організація */ // [ pos = 4, type = pointer ]
+                    /* , Документи.ПрихіднийКасовийОрдер_Const.Валюта */ // [ pos = 5, type = pointer ]
+                    /* , Документи.ПрихіднийКасовийОрдер_Const.Каса */ // [ pos = 6, type = pointer ]
+                    /* , Документи.ПрихіднийКасовийОрдер_Const.Контрагент */ // [ pos = 7, type = pointer ]
+                    , Документи.ПрихіднийКасовийОрдер_Const.СумаДокументу // [ pos = 8, type = numeric ]
+                    , Документи.ПрихіднийКасовийОрдер_Const.Коментар // [ pos = 9, type = string ]
+                    
+                });
+
+            
+                  /* JOIN 4 */
+                  ПрихіднийКасовийОрдер_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>(
+                      Довідники.Організації_Const.TABLE + "." + Довідники.Організації_Const.Назва, "join_4"));
+                  ПрихіднийКасовийОрдер_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Організації_Const.TABLE, Документи.ПрихіднийКасовийОрдер_Const.Організація, ПрихіднийКасовийОрдер_Select.QuerySelect.Table));
+                
+                  /* JOIN 5 */
+                  ПрихіднийКасовийОрдер_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>(
+                      Довідники.Валюти_Const.TABLE + "." + Довідники.Валюти_Const.Назва, "join_5"));
+                  ПрихіднийКасовийОрдер_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Валюти_Const.TABLE, Документи.ПрихіднийКасовийОрдер_Const.Валюта, ПрихіднийКасовийОрдер_Select.QuerySelect.Table));
+                
+                  /* JOIN 6 */
+                  ПрихіднийКасовийОрдер_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>(
+                      Довідники.Каси_Const.TABLE + "." + Довідники.Каси_Const.Назва, "join_6"));
+                  ПрихіднийКасовийОрдер_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Каси_Const.TABLE, Документи.ПрихіднийКасовийОрдер_Const.Каса, ПрихіднийКасовийОрдер_Select.QuerySelect.Table));
+                
+                  /* JOIN 7 */
+                  ПрихіднийКасовийОрдер_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>(
+                      Довідники.Контрагенти_Const.TABLE + "." + Довідники.Контрагенти_Const.Назва, "join_7"));
+                  ПрихіднийКасовийОрдер_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Контрагенти_Const.TABLE, Документи.ПрихіднийКасовийОрдер_Const.Контрагент, ПрихіднийКасовийОрдер_Select.QuerySelect.Table));
+                
+
+            /* SELECT */
+            ПрихіднийКасовийОрдер_Select.Select();
+            while (ПрихіднийКасовийОрдер_Select.MoveNext())
+            {
+                Документи.ПрихіднийКасовийОрдер_Pointer? cur = ПрихіднийКасовийОрдер_Select.Current;
+
+                if (cur != null)
+                    Store.AppendValues(new ПрихіднийКасовийОрдер_Записи
+                    {
+                        ID = cur.UnigueID.ToString(),
+                        Назва = cur.Fields?[ПрихіднийКасовийОрдер_Const.Назва]?.ToString() ?? "", // [ pos = 1, type = string ]
+                        НомерДок = cur.Fields?[ПрихіднийКасовийОрдер_Const.НомерДок]?.ToString() ?? "", // [ pos = 2, type = string ]
+                        ДатаДок = cur.Fields?[ПрихіднийКасовийОрдер_Const.ДатаДок]?.ToString() ?? "", // [ pos = 3, type = datetime ]
+                        Організація = cur.Fields?["join_4"]?.ToString() ?? "", // [ pos = 4, type = pointer ]
+                        Валюта = cur.Fields?["join_5"]?.ToString() ?? "", // [ pos = 5, type = pointer ]
+                        Каса = cur.Fields?["join_6"]?.ToString() ?? "", // [ pos = 6, type = pointer ]
+                        Контрагент = cur.Fields?["join_7"]?.ToString() ?? "", // [ pos = 7, type = pointer ]
+                        СумаДокументу = cur.Fields?[ПрихіднийКасовийОрдер_Const.СумаДокументу]?.ToString() ?? "", // [ pos = 8, type = numeric ]
+                        Коментар = cur.Fields?[ПрихіднийКасовийОрдер_Const.Коментар]?.ToString() ?? "" // [ pos = 9, type = string ]
+                        
+                    }.ToArray());
+            }
+        }
+    }
+	    
     #endregion
     
     #region DOCUMENT "РозхіднийКасовийОрдер"
     
       
+    public class РозхіднийКасовийОрдер_Записи
+    {
+        string Image = "doc.png";
+        string ID = "";
+        
+        string Назва = "";
+        string НомерДок = "";
+        string ДатаДок = "";
+        string Організація = "";
+        string Контрагент = "";
+        string Валюта = "";
+        string Каса = "";
+        string СумаДокументу = "";
+        string Коментар = "";
+
+        Array ToArray()
+        {
+            return new object[] { new Gdk.Pixbuf(Image), ID 
+            /* */ , Назва, НомерДок, ДатаДок, Організація, Контрагент, Валюта, Каса, СумаДокументу, Коментар };
+        }
+
+        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */
+            , typeof(string) /* Назва */
+            , typeof(string) /* НомерДок */
+            , typeof(string) /* ДатаДок */
+            , typeof(string) /* Організація */
+            , typeof(string) /* Контрагент */
+            , typeof(string) /* Валюта */
+            , typeof(string) /* Каса */
+            , typeof(string) /* СумаДокументу */
+            , typeof(string) /* Коментар */
+            );
+
+        public static void AddColumns(TreeView treeView)
+        {
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
+            /* */
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 2) { SortColumnId = 2 } );
+            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText(), "text", 3) { SortColumnId = 3 } );
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText(), "text", 4) { SortColumnId = 4 } );
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText(), "text", 5) { SortColumnId = 5 } );
+            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText(), "text", 6) { SortColumnId = 6 } );
+            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText(), "text", 7) { SortColumnId = 7 } );
+            treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText(), "text", 8) { SortColumnId = 8 } );
+            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText(), "text", 9) { SortColumnId = 9 } );
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText(), "text", 10) { SortColumnId = 10 } );
+            
+        }
+
+        public static void LoadRecords()
+        {
+            Store.Clear();
+
+            Документи.РозхіднийКасовийОрдер_Select РозхіднийКасовийОрдер_Select = new Документи.РозхіднийКасовийОрдер_Select();
+            РозхіднийКасовийОрдер_Select.QuerySelect.Field.AddRange(
+                new string[]
+                {
+                    Документи.РозхіднийКасовийОрдер_Const.Назва // [ pos = 1, type = string ]
+                    , Документи.РозхіднийКасовийОрдер_Const.НомерДок // [ pos = 2, type = string ]
+                    , Документи.РозхіднийКасовийОрдер_Const.ДатаДок // [ pos = 3, type = datetime ]
+                    /* , Документи.РозхіднийКасовийОрдер_Const.Організація */ // [ pos = 4, type = pointer ]
+                    /* , Документи.РозхіднийКасовийОрдер_Const.Контрагент */ // [ pos = 5, type = pointer ]
+                    /* , Документи.РозхіднийКасовийОрдер_Const.Валюта */ // [ pos = 6, type = pointer ]
+                    /* , Документи.РозхіднийКасовийОрдер_Const.Каса */ // [ pos = 7, type = pointer ]
+                    , Документи.РозхіднийКасовийОрдер_Const.СумаДокументу // [ pos = 8, type = numeric ]
+                    , Документи.РозхіднийКасовийОрдер_Const.Коментар // [ pos = 9, type = string ]
+                    
+                });
+
+            
+                  /* JOIN 4 */
+                  РозхіднийКасовийОрдер_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>(
+                      Довідники.Організації_Const.TABLE + "." + Довідники.Організації_Const.Назва, "join_4"));
+                  РозхіднийКасовийОрдер_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Організації_Const.TABLE, Документи.РозхіднийКасовийОрдер_Const.Організація, РозхіднийКасовийОрдер_Select.QuerySelect.Table));
+                
+                  /* JOIN 5 */
+                  РозхіднийКасовийОрдер_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>(
+                      Довідники.Контрагенти_Const.TABLE + "." + Довідники.Контрагенти_Const.Назва, "join_5"));
+                  РозхіднийКасовийОрдер_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Контрагенти_Const.TABLE, Документи.РозхіднийКасовийОрдер_Const.Контрагент, РозхіднийКасовийОрдер_Select.QuerySelect.Table));
+                
+                  /* JOIN 6 */
+                  РозхіднийКасовийОрдер_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>(
+                      Довідники.Валюти_Const.TABLE + "." + Довідники.Валюти_Const.Назва, "join_6"));
+                  РозхіднийКасовийОрдер_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Валюти_Const.TABLE, Документи.РозхіднийКасовийОрдер_Const.Валюта, РозхіднийКасовийОрдер_Select.QuerySelect.Table));
+                
+                  /* JOIN 7 */
+                  РозхіднийКасовийОрдер_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>(
+                      Довідники.Каси_Const.TABLE + "." + Довідники.Каси_Const.Назва, "join_7"));
+                  РозхіднийКасовийОрдер_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Каси_Const.TABLE, Документи.РозхіднийКасовийОрдер_Const.Каса, РозхіднийКасовийОрдер_Select.QuerySelect.Table));
+                
+
+            /* SELECT */
+            РозхіднийКасовийОрдер_Select.Select();
+            while (РозхіднийКасовийОрдер_Select.MoveNext())
+            {
+                Документи.РозхіднийКасовийОрдер_Pointer? cur = РозхіднийКасовийОрдер_Select.Current;
+
+                if (cur != null)
+                    Store.AppendValues(new РозхіднийКасовийОрдер_Записи
+                    {
+                        ID = cur.UnigueID.ToString(),
+                        Назва = cur.Fields?[РозхіднийКасовийОрдер_Const.Назва]?.ToString() ?? "", // [ pos = 1, type = string ]
+                        НомерДок = cur.Fields?[РозхіднийКасовийОрдер_Const.НомерДок]?.ToString() ?? "", // [ pos = 2, type = string ]
+                        ДатаДок = cur.Fields?[РозхіднийКасовийОрдер_Const.ДатаДок]?.ToString() ?? "", // [ pos = 3, type = datetime ]
+                        Організація = cur.Fields?["join_4"]?.ToString() ?? "", // [ pos = 4, type = pointer ]
+                        Контрагент = cur.Fields?["join_5"]?.ToString() ?? "", // [ pos = 5, type = pointer ]
+                        Валюта = cur.Fields?["join_6"]?.ToString() ?? "", // [ pos = 6, type = pointer ]
+                        Каса = cur.Fields?["join_7"]?.ToString() ?? "", // [ pos = 7, type = pointer ]
+                        СумаДокументу = cur.Fields?[РозхіднийКасовийОрдер_Const.СумаДокументу]?.ToString() ?? "", // [ pos = 8, type = numeric ]
+                        Коментар = cur.Fields?[РозхіднийКасовийОрдер_Const.Коментар]?.ToString() ?? "" // [ pos = 9, type = string ]
+                        
+                    }.ToArray());
+            }
+        }
+    }
+	    
     #endregion
     
     #region DOCUMENT "ПереміщенняТоварів"

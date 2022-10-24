@@ -27,9 +27,12 @@ namespace StorageAndTrade
             AddLink(vLeft, "Поступлення товарів та послуг", ПоступленняТоварівТаПослуг);
             AddLink(vLeft, "Замовлення клієнта", ЗамовленняКлієнта);
             AddLink(vLeft, "Реалізація товарів та послуг", РеалізаціяТоварівТаПослуг);
-            // AddLink(vLeft, "Види цін", ВидиЦін);
-            // AddLink(vLeft, "Банківські рахунки організацій", БанківськіРахункиОрганізацій);
-            // AddLink(vLeft, "Структура підприємства", СтруктураПідприємства);
+            AddLink(vLeft, "Встановлення цін номенклатури", ВстановленняЦінНоменклатури);
+            AddLink(vLeft, "Прихідний касовий ордер", ПрихіднийКасовийОрдер);
+            AddLink(vLeft, "Розхідний касовий ордер", РозхіднийКасовийОрдер);
+            // AddLink(vLeft, "Встановлення цін номенклатури", ВстановленняЦінНоменклатури);
+            // AddLink(vLeft, "Прихідний касовий ордер", ПрихіднийКасовийОрдер);
+            // AddLink(vLeft, "Розхідний касовий ордер", РозхіднийКасовийОрдер);
 
             hBoxList.PackStart(vLeft, false, false, 5);
 
@@ -117,6 +120,52 @@ namespace StorageAndTrade
                 return page;
             });
         }
+
+        void ВстановленняЦінНоменклатури(object? sender, EventArgs args)
+        {
+            GeneralForm?.CreateNotebookPage("Документи: Встановлення цін номенклатури", () =>
+            {
+                ВстановленняЦінНоменклатури page = new ВстановленняЦінНоменклатури
+                {
+                    GeneralForm = GeneralForm
+                };
+
+                page.LoadRecords();
+
+                return page;
+            });
+        }
+
+        void ПрихіднийКасовийОрдер(object? sender, EventArgs args)
+        {
+            GeneralForm?.CreateNotebookPage("Документи: Прихідний касовий ордер", () =>
+            {
+                ПрихіднийКасовийОрдер page = new ПрихіднийКасовийОрдер
+                {
+                    GeneralForm = GeneralForm
+                };
+
+                page.LoadRecords();
+
+                return page;
+            });
+        }
+
+        void РозхіднийКасовийОрдер(object? sender, EventArgs args)
+        {
+            GeneralForm?.CreateNotebookPage("Документи: Розхідний касовий ордер", () =>
+            {
+                РозхіднийКасовийОрдер page = new РозхіднийКасовийОрдер
+                {
+                    GeneralForm = GeneralForm
+                };
+
+                page.LoadRecords();
+
+                return page;
+            });
+        }
+
 
         void AddCaption(VBox vBox, string name)
         {
