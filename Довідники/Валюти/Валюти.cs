@@ -7,67 +7,26 @@ namespace StorageAndTrade
 {
     class Валюти : VBox
     {
-        //ListStore Store;
+        public FormStorageAndTrade? GeneralForm { get; set; }
+
         TreeView ViewGrid;
-
-        private class Записи
-        {
-            public string Icon = "doc_text_image.png";
-            public string ID = "";
-            public string Назва = "";
-            public string КороткаНазва = "";
-            public string Код_R030 = "";
-            public string Код = "";
-
-            public Array ToArray()
-            {
-                return new object[] { new Gdk.Pixbuf(GetIconByte()),
-                ID, Назва, КороткаНазва,
-                Код_R030, Код};
-            }
-
-            private byte[]? cashe_icon;
-            private byte[] GetIconByte()
-            {
-                if (cashe_icon == null)
-                {
-                    string fileIco = "doc_text_image.png";
-                    if (File.Exists(fileIco))
-                        return File.ReadAllBytes(fileIco);
-                    else
-                        return new byte[] { };
-                }
-                else return cashe_icon;
-            }
-
-            public static ListStore CreateModel()
-            {
-                return new ListStore(typeof(Gdk.Pixbuf),
-                   typeof(string), //ID
-                   typeof(string), //Назва
-                   typeof(string), //КороткаНазва
-                   typeof(string), //R030
-                   typeof(string)  //Код
-                );
-            }
-
-            public static void AddColumns(TreeView treeView)
-            {
-                treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
-
-                treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-                treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Editable = true }, "text", 2) { FixedWidth = 300 });
-                treeView.AppendColumn(new TreeViewColumn("Коротка назва", new CellRendererText(), "text", 3));
-                treeView.AppendColumn(new TreeViewColumn("R030", new CellRendererText(), "text", 4));
-                treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText(), "text", 5));
-            }
-        }
-
+        
         public Валюти() : base()
         {
             new VBox(false, 0);
             BorderWidth = 0;
 
+            //Кнопки
+            HBox hBoxBotton = new HBox();
+
+            Button bClose = new Button("Закрити");
+            bClose.Clicked += (object? sender, EventArgs args) => { GeneralForm?.CloseCurrentPageNotebook(); };
+
+            hBoxBotton.PackStart(bClose, false, false, 10);
+
+            PackStart(hBoxBotton, false, false, 10);
+
+            //Список
             Toolbar toolbar = new Toolbar();
             PackStart(toolbar, false, false, 0);
 

@@ -51,14 +51,15 @@ namespace StorageAndTrade
             scrolLeftMenu.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
             scrolLeftMenu.Add(vbox);
 
-            CreateItemLeftMenu(vbox, "Продажі");
-            CreateItemLeftMenu(vbox, "Закупки");
-            CreateItemLeftMenu(vbox, "Налаштування");
+            CreateItemLeftMenu(vbox, "Продажі", OnClick_Продажі);
+            CreateItemLeftMenu(vbox, "Закупки", OnClick_Закупки);
+            CreateItemLeftMenu(vbox, "Довідники", OnClick_Довідники);
+            CreateItemLeftMenu(vbox, "Налаштування", OnClick_Налаштування);
 
             hbox.PackStart(scrolLeftMenu, false, false, 0);
         }
 
-        void CreateItemLeftMenu(VBox vBox, string name)
+        void CreateItemLeftMenu(VBox vBox, string name, EventHandler ClikAction)
         {
             HBox hBox = new HBox() { BorderWidth = 1 };
             vBox.PackStart(hBox, false, false, 5);
@@ -67,7 +68,36 @@ namespace StorageAndTrade
             hBox.PackStart(imageItem, false, false, 5);
 
             LinkButton lb = new LinkButton(name) { Halign = Align.Start };
+            lb.Clicked += ClikAction;
             hBox.PackStart(lb, false, false, 0);
+        }
+
+        void OnClick_Продажі(object? sender, EventArgs args)
+        {
+
+        }
+
+        void OnClick_Закупки(object? sender, EventArgs args)
+        {
+
+        }
+
+        void OnClick_Довідники(object? sender, EventArgs args)
+        {
+            CreateNotebookPage("Довідники", () =>
+            {
+                PageDirectoryAll page = new PageDirectoryAll
+                {
+                    GeneralForm = this
+                };
+
+                return page;
+            });
+        }
+
+        void OnClick_Налаштування(object? sender, EventArgs args)
+        {
+
         }
 
         #endregion

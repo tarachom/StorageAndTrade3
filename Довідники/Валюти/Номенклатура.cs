@@ -7,6 +7,8 @@ namespace StorageAndTrade
 {
     class Номенклатура : VBox
     {
+        public FormStorageAndTrade? GeneralForm { get; set; }
+
         TreeView TreeViewGrid;
 
         public Номенклатура() : base()
@@ -14,6 +16,17 @@ namespace StorageAndTrade
             new VBox(false, 0);
             BorderWidth = 0;
 
+            //Кнопки
+            HBox hBoxBotton = new HBox();
+
+            Button bClose = new Button("Закрити");
+            bClose.Clicked += (object? sender, EventArgs args) => { GeneralForm?.CloseCurrentPageNotebook(); };
+
+            hBoxBotton.PackStart(bClose, false, false, 10);
+
+            PackStart(hBoxBotton, false, false, 10);
+
+            //Список
             Toolbar toolbar = new Toolbar();
             PackStart(toolbar, false, false, 0);
 

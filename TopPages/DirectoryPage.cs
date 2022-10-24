@@ -28,9 +28,9 @@ namespace StorageAndTrade
 
             PageAndActionDictionary.Add(counter, new NameValue<Action<NotebookPage>>("Головна", (NotebookPage page) =>
                 {
-                    DirectoryPageStart directoryPageStart = new DirectoryPageStart();
-                    directoryPageStart.OpenPageCallBack = OpenPageCallBack;
-                    page.AddVBox(directoryPageStart);
+                    // DirectoryPageStart directoryPageStart = new DirectoryPageStart();
+                    // directoryPageStart.OpenPageCallBack = OpenPageCallBack;
+                    // page.AddVBox(directoryPageStart);
                 }
             ));
 

@@ -1,5 +1,7 @@
 using Gtk;
 
+// !!! delete
+
 namespace StorageAndTrade
 {
     public class NotebookPage
