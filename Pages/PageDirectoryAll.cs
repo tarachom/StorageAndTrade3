@@ -32,9 +32,9 @@ namespace StorageAndTrade
             AddLink(vLeft, "Контрагенти", "1", Контрагенти);
             AddLink(vLeft, "Склади", "1", Склади);
             AddLink(vLeft, "Валюти", "1", Валюти);
-            AddLink(vLeft, "Каси", "1");
-            AddLink(vLeft, "Користувачі", "1");
-            AddLink(vLeft, "Файли", "1");
+            AddLink(vLeft, "Каси", "1", Каси);
+            AddLink(vLeft, "Користувачі", "1", Користувачі);
+            AddLink(vLeft, "Файли", "1", Файли);
 
             hBoxList.PackStart(vLeft, false, false, 5);
 
@@ -139,6 +139,51 @@ namespace StorageAndTrade
             GeneralForm?.CreateNotebookPage("Довідник: Валюти", () =>
             {
                 Валюти page = new Валюти
+                {
+                    GeneralForm = GeneralForm
+                };
+
+                page.LoadRecords();
+
+                return page;
+            });
+        }
+
+        void Каси(object? sender, EventArgs args)
+        {
+            GeneralForm?.CreateNotebookPage("Довідник: Каси", () =>
+            {
+                Каси page = new Каси
+                {
+                    GeneralForm = GeneralForm
+                };
+
+                page.LoadRecords();
+
+                return page;
+            });
+        }
+
+        void Користувачі(object? sender, EventArgs args)
+        {
+            GeneralForm?.CreateNotebookPage("Довідник: Користувачі", () =>
+            {
+                Користувачі page = new Користувачі
+                {
+                    GeneralForm = GeneralForm
+                };
+
+                page.LoadRecords();
+
+                return page;
+            });
+        }
+
+        void Файли(object? sender, EventArgs args)
+        {
+            GeneralForm?.CreateNotebookPage("Довідник: Користувачі", () =>
+            {
+                Файли page = new Файли
                 {
                     GeneralForm = GeneralForm
                 };
