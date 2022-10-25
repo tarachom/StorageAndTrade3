@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 25.10.2022 12:45:46
+ * Дата конфігурації: 25.10.2022 13:57:47
  *
  */
 
@@ -4459,7 +4459,7 @@ namespace StorageAndTrade_1_0.Довідники
 		public string GetPresentation()
         {
 		    return base.BasePresentation(
-			    new string[] { "col_b6", "col_b7" }
+			    new string[] { "col_b6" }
 			);
         }
 		
