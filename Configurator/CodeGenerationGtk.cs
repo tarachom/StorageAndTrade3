@@ -46,8 +46,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Організації_Select.QuerySelect.Field.AddRange(
                 new string[]
                 {
-                    Довідники.Організації_Const.Код // [ pos = 1, type = string ]
-                    , Довідники.Організації_Const.Назва // [ pos = 2, type = string ]
+                    Довідники.Організації_Const.Код /* 1 */
+                    , Довідники.Організації_Const.Назва /* 2 */
                     
                 });
 
@@ -63,8 +63,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     Store.AppendValues(new Організації_Записи
                     {
                         ID = cur.UnigueID.ToString(),
-                        Код = cur.Fields?[Організації_Const.Код]?.ToString() ?? "", // [ pos = 1, type = string ]
-                        Назва = cur.Fields?[Організації_Const.Назва]?.ToString() ?? "" // [ pos = 2, type = string ]
+                        Код = cur.Fields?[Організації_Const.Код]?.ToString() ?? "", /**/
+                        Назва = cur.Fields?[Організації_Const.Назва]?.ToString() ?? "" /**/
                         
                     }.ToArray());
             }
@@ -125,36 +125,33 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Номенклатура_Select.QuerySelect.Field.AddRange(
                 new string[]
                 {
-                    Довідники.Номенклатура_Const.Код // [ pos = 1, type = string ]
-                    , Довідники.Номенклатура_Const.Назва // [ pos = 2, type = string ]
-                    /* , Довідники.Номенклатура_Const.ОдиницяВиміру */ // [ pos = 3, type = pointer ]
-                    /* , Довідники.Номенклатура_Const.Виробник */ // [ pos = 4, type = pointer ]
-                    , Довідники.Номенклатура_Const.ТипНоменклатури // [ pos = 5, type = enum ]
-                    /* , Довідники.Номенклатура_Const.ВидНоменклатури */ // [ pos = 6, type = pointer ]
+                    Довідники.Номенклатура_Const.Код /* 1 */
+                    , Довідники.Номенклатура_Const.Назва /* 2 */
+                    , Довідники.Номенклатура_Const.ТипНоменклатури /* 3 */
                     
                 });
 
-            
-                  /* JOIN 3 */
-                  Номенклатура_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.ПакуванняОдиниціВиміру_Const.TABLE + "." + Довідники.ПакуванняОдиниціВиміру_Const.Назва, "join_3"));
-                  Номенклатура_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.ПакуванняОдиниціВиміру_Const.TABLE, Довідники.Номенклатура_Const.ОдиницяВиміру, Номенклатура_Select.QuerySelect.Table));
-                
-                  /* JOIN 4 */
-                  Номенклатура_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Виробники_Const.TABLE + "." + Довідники.Виробники_Const.Назва, "join_4"));
-                  Номенклатура_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Виробники_Const.TABLE, Довідники.Номенклатура_Const.Виробник, Номенклатура_Select.QuerySelect.Table));
-                
-                  /* JOIN 6 */
-                  Номенклатура_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.ВидиНоменклатури_Const.TABLE + "." + Довідники.ВидиНоменклатури_Const.Назва, "join_6"));
-                  Номенклатура_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.ВидиНоменклатури_Const.TABLE, Довідники.Номенклатура_Const.ВидНоменклатури, Номенклатура_Select.QuerySelect.Table));
+            Номенклатура_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.ПакуванняОдиниціВиміру_Const.TABLE, Довідники.Номенклатура_Const.ОдиницяВиміру, Номенклатура_Select.QuerySelect.Table, "join_tab_1"));
+
+                Номенклатура_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_1." + Довідники.ПакуванняОдиниціВиміру_Const.Назва, "join_tab_1_field_1"));
+
+                Номенклатура_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Виробники_Const.TABLE, Довідники.Номенклатура_Const.Виробник, Номенклатура_Select.QuerySelect.Table, "join_tab_2"));
+
+                Номенклатура_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_2." + Довідники.Виробники_Const.Назва, "join_tab_2_field_1"));
+
+                Номенклатура_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_2." + Довідники.Виробники_Const.Код, "join_tab_2_field_2"));
+
+                Номенклатура_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.ВидиНоменклатури_Const.TABLE, Довідники.Номенклатура_Const.ВидНоменклатури, Номенклатура_Select.QuerySelect.Table, "join_tab_3"));
+
+                Номенклатура_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_3." + Довідники.ВидиНоменклатури_Const.Назва, "join_tab_3_field_1"));
+
                 
 
             /* SELECT */
@@ -167,12 +164,12 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     Store.AppendValues(new Номенклатура_Записи
                     {
                         ID = cur.UnigueID.ToString(),
-                        Код = cur.Fields?[Номенклатура_Const.Код]?.ToString() ?? "", // [ pos = 1, type = string ]
-                        Назва = cur.Fields?[Номенклатура_Const.Назва]?.ToString() ?? "", // [ pos = 2, type = string ]
-                        ОдиницяВиміру = cur.Fields?["join_3"]?.ToString() ?? "", // [ pos = 3, type = pointer ]
-                        Виробник = cur.Fields?["join_4"]?.ToString() ?? "", // [ pos = 4, type = pointer ]
-                        ТипНоменклатури = ((Перелічення.ТипиНоменклатури)int.Parse(cur.Fields?[Номенклатура_Const.ТипНоменклатури]?.ToString() ?? "0")).ToString(), // [ pos = 5, type = enum ]
-                        ВидНоменклатури = cur.Fields?["join_6"]?.ToString() ?? "" // [ pos = 6, type = pointer ]
+                        ОдиницяВиміру = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
+                        Виробник = cur.Fields?["join_tab_2_field_1"]?.ToString() + " " + cur.Fields?["join_tab_2_field_2"]?.ToString(), /**/
+                        ВидНоменклатури = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
+                        Код = cur.Fields?[Номенклатура_Const.Код]?.ToString() ?? "", /**/
+                        Назва = cur.Fields?[Номенклатура_Const.Назва]?.ToString() ?? "", /**/
+                        ТипНоменклатури = ((Перелічення.ТипиНоменклатури)int.Parse(cur.Fields?[Номенклатура_Const.ТипНоменклатури]?.ToString() ?? "0")).ToString() /**/
                         
                     }.ToArray());
             }
@@ -221,8 +218,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Виробники_Select.QuerySelect.Field.AddRange(
                 new string[]
                 {
-                    Довідники.Виробники_Const.Код // [ pos = 1, type = string ]
-                    , Довідники.Виробники_Const.Назва // [ pos = 2, type = string ]
+                    Довідники.Виробники_Const.Код /* 1 */
+                    , Довідники.Виробники_Const.Назва /* 2 */
                     
                 });
 
@@ -238,8 +235,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     Store.AppendValues(new Виробники_Записи
                     {
                         ID = cur.UnigueID.ToString(),
-                        Код = cur.Fields?[Виробники_Const.Код]?.ToString() ?? "", // [ pos = 1, type = string ]
-                        Назва = cur.Fields?[Виробники_Const.Назва]?.ToString() ?? "" // [ pos = 2, type = string ]
+                        Код = cur.Fields?[Виробники_Const.Код]?.ToString() ?? "", /**/
+                        Назва = cur.Fields?[Виробники_Const.Назва]?.ToString() ?? "" /**/
                         
                     }.ToArray());
             }
@@ -288,8 +285,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             ВидиНоменклатури_Select.QuerySelect.Field.AddRange(
                 new string[]
                 {
-                    Довідники.ВидиНоменклатури_Const.Код // [ pos = 1, type = string ]
-                    , Довідники.ВидиНоменклатури_Const.Назва // [ pos = 2, type = string ]
+                    Довідники.ВидиНоменклатури_Const.Код /* 1 */
+                    , Довідники.ВидиНоменклатури_Const.Назва /* 2 */
                     
                 });
 
@@ -305,8 +302,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     Store.AppendValues(new ВидиНоменклатури_Записи
                     {
                         ID = cur.UnigueID.ToString(),
-                        Код = cur.Fields?[ВидиНоменклатури_Const.Код]?.ToString() ?? "", // [ pos = 1, type = string ]
-                        Назва = cur.Fields?[ВидиНоменклатури_Const.Назва]?.ToString() ?? "" // [ pos = 2, type = string ]
+                        Код = cur.Fields?[ВидиНоменклатури_Const.Код]?.ToString() ?? "", /**/
+                        Назва = cur.Fields?[ВидиНоменклатури_Const.Назва]?.ToString() ?? "" /**/
                         
                     }.ToArray());
             }
@@ -355,8 +352,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             ПакуванняОдиниціВиміру_Select.QuerySelect.Field.AddRange(
                 new string[]
                 {
-                    Довідники.ПакуванняОдиниціВиміру_Const.Код // [ pos = 1, type = string ]
-                    , Довідники.ПакуванняОдиниціВиміру_Const.Назва // [ pos = 2, type = string ]
+                    Довідники.ПакуванняОдиниціВиміру_Const.Код /* 1 */
+                    , Довідники.ПакуванняОдиниціВиміру_Const.Назва /* 2 */
                     
                 });
 
@@ -372,8 +369,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     Store.AppendValues(new ПакуванняОдиниціВиміру_Записи
                     {
                         ID = cur.UnigueID.ToString(),
-                        Код = cur.Fields?[ПакуванняОдиниціВиміру_Const.Код]?.ToString() ?? "", // [ pos = 1, type = string ]
-                        Назва = cur.Fields?[ПакуванняОдиниціВиміру_Const.Назва]?.ToString() ?? "" // [ pos = 2, type = string ]
+                        Код = cur.Fields?[ПакуванняОдиниціВиміру_Const.Код]?.ToString() ?? "", /**/
+                        Назва = cur.Fields?[ПакуванняОдиниціВиміру_Const.Назва]?.ToString() ?? "" /**/
                         
                     }.ToArray());
             }
@@ -425,9 +422,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Валюти_Select.QuerySelect.Field.AddRange(
                 new string[]
                 {
-                    Довідники.Валюти_Const.Код // [ pos = 1, type = string ]
-                    , Довідники.Валюти_Const.Назва // [ pos = 2, type = string ]
-                    , Довідники.Валюти_Const.КороткаНазва // [ pos = 3, type = string ]
+                    Довідники.Валюти_Const.Код /* 1 */
+                    , Довідники.Валюти_Const.Назва /* 2 */
+                    , Довідники.Валюти_Const.КороткаНазва /* 3 */
                     
                 });
 
@@ -443,9 +440,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     Store.AppendValues(new Валюти_Записи
                     {
                         ID = cur.UnigueID.ToString(),
-                        Код = cur.Fields?[Валюти_Const.Код]?.ToString() ?? "", // [ pos = 1, type = string ]
-                        Назва = cur.Fields?[Валюти_Const.Назва]?.ToString() ?? "", // [ pos = 2, type = string ]
-                        КороткаНазва = cur.Fields?[Валюти_Const.КороткаНазва]?.ToString() ?? "" // [ pos = 3, type = string ]
+                        Код = cur.Fields?[Валюти_Const.Код]?.ToString() ?? "", /**/
+                        Назва = cur.Fields?[Валюти_Const.Назва]?.ToString() ?? "", /**/
+                        КороткаНазва = cur.Fields?[Валюти_Const.КороткаНазва]?.ToString() ?? "" /**/
                         
                     }.ToArray());
             }
@@ -494,8 +491,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Контрагенти_Select.QuerySelect.Field.AddRange(
                 new string[]
                 {
-                    Довідники.Контрагенти_Const.Код // [ pos = 1, type = string ]
-                    , Довідники.Контрагенти_Const.Назва // [ pos = 2, type = string ]
+                    Довідники.Контрагенти_Const.Код /* 1 */
+                    , Довідники.Контрагенти_Const.Назва /* 2 */
                     
                 });
 
@@ -511,8 +508,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     Store.AppendValues(new Контрагенти_Записи
                     {
                         ID = cur.UnigueID.ToString(),
-                        Код = cur.Fields?[Контрагенти_Const.Код]?.ToString() ?? "", // [ pos = 1, type = string ]
-                        Назва = cur.Fields?[Контрагенти_Const.Назва]?.ToString() ?? "" // [ pos = 2, type = string ]
+                        Код = cur.Fields?[Контрагенти_Const.Код]?.ToString() ?? "", /**/
+                        Назва = cur.Fields?[Контрагенти_Const.Назва]?.ToString() ?? "" /**/
                         
                     }.ToArray());
             }
@@ -561,8 +558,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Склади_Select.QuerySelect.Field.AddRange(
                 new string[]
                 {
-                    Довідники.Склади_Const.Код // [ pos = 1, type = string ]
-                    , Довідники.Склади_Const.Назва // [ pos = 2, type = string ]
+                    Довідники.Склади_Const.Код /* 1 */
+                    , Довідники.Склади_Const.Назва /* 2 */
                     
                 });
 
@@ -578,8 +575,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     Store.AppendValues(new Склади_Записи
                     {
                         ID = cur.UnigueID.ToString(),
-                        Код = cur.Fields?[Склади_Const.Код]?.ToString() ?? "", // [ pos = 1, type = string ]
-                        Назва = cur.Fields?[Склади_Const.Назва]?.ToString() ?? "" // [ pos = 2, type = string ]
+                        Код = cur.Fields?[Склади_Const.Код]?.ToString() ?? "", /**/
+                        Назва = cur.Fields?[Склади_Const.Назва]?.ToString() ?? "" /**/
                         
                     }.ToArray());
             }
@@ -631,19 +628,17 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             ВидиЦін_Select.QuerySelect.Field.AddRange(
                 new string[]
                 {
-                    Довідники.ВидиЦін_Const.Код // [ pos = 1, type = string ]
-                    , Довідники.ВидиЦін_Const.Назва // [ pos = 2, type = string ]
-                    /* , Довідники.ВидиЦін_Const.Валюта */ // [ pos = 3, type = pointer ]
+                    Довідники.ВидиЦін_Const.Код /* 1 */
+                    , Довідники.ВидиЦін_Const.Назва /* 2 */
                     
                 });
 
-            
-                  /* JOIN 3 */
-                  ВидиЦін_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Валюти_Const.TABLE + "." + Довідники.Валюти_Const.Назва, "join_3"));
-                  ВидиЦін_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Валюти_Const.TABLE, Довідники.ВидиЦін_Const.Валюта, ВидиЦін_Select.QuerySelect.Table));
+            ВидиЦін_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Валюти_Const.TABLE, Довідники.ВидиЦін_Const.Валюта, ВидиЦін_Select.QuerySelect.Table, "join_tab_1"));
+
+                ВидиЦін_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_1." + Довідники.Валюти_Const.Назва, "join_tab_1_field_1"));
+
                 
 
             /* SELECT */
@@ -656,9 +651,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     Store.AppendValues(new ВидиЦін_Записи
                     {
                         ID = cur.UnigueID.ToString(),
-                        Код = cur.Fields?[ВидиЦін_Const.Код]?.ToString() ?? "", // [ pos = 1, type = string ]
-                        Назва = cur.Fields?[ВидиЦін_Const.Назва]?.ToString() ?? "", // [ pos = 2, type = string ]
-                        Валюта = cur.Fields?["join_3"]?.ToString() ?? "" // [ pos = 3, type = pointer ]
+                        Валюта = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
+                        Код = cur.Fields?[ВидиЦін_Const.Код]?.ToString() ?? "", /**/
+                        Назва = cur.Fields?[ВидиЦін_Const.Назва]?.ToString() ?? "" /**/
                         
                     }.ToArray());
             }
@@ -707,8 +702,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             ВидиЦінПостачальників_Select.QuerySelect.Field.AddRange(
                 new string[]
                 {
-                    Довідники.ВидиЦінПостачальників_Const.Код // [ pos = 1, type = string ]
-                    , Довідники.ВидиЦінПостачальників_Const.Назва // [ pos = 2, type = string ]
+                    Довідники.ВидиЦінПостачальників_Const.Код /* 1 */
+                    , Довідники.ВидиЦінПостачальників_Const.Назва /* 2 */
                     
                 });
 
@@ -724,8 +719,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     Store.AppendValues(new ВидиЦінПостачальників_Записи
                     {
                         ID = cur.UnigueID.ToString(),
-                        Код = cur.Fields?[ВидиЦінПостачальників_Const.Код]?.ToString() ?? "", // [ pos = 1, type = string ]
-                        Назва = cur.Fields?[ВидиЦінПостачальників_Const.Назва]?.ToString() ?? "" // [ pos = 2, type = string ]
+                        Код = cur.Fields?[ВидиЦінПостачальників_Const.Код]?.ToString() ?? "", /**/
+                        Назва = cur.Fields?[ВидиЦінПостачальників_Const.Назва]?.ToString() ?? "" /**/
                         
                     }.ToArray());
             }
@@ -774,8 +769,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Користувачі_Select.QuerySelect.Field.AddRange(
                 new string[]
                 {
-                    Довідники.Користувачі_Const.Код // [ pos = 1, type = string ]
-                    , Довідники.Користувачі_Const.Назва // [ pos = 2, type = string ]
+                    Довідники.Користувачі_Const.Код /* 1 */
+                    , Довідники.Користувачі_Const.Назва /* 2 */
                     
                 });
 
@@ -791,8 +786,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     Store.AppendValues(new Користувачі_Записи
                     {
                         ID = cur.UnigueID.ToString(),
-                        Код = cur.Fields?[Користувачі_Const.Код]?.ToString() ?? "", // [ pos = 1, type = string ]
-                        Назва = cur.Fields?[Користувачі_Const.Назва]?.ToString() ?? "" // [ pos = 2, type = string ]
+                        Код = cur.Fields?[Користувачі_Const.Код]?.ToString() ?? "", /**/
+                        Назва = cur.Fields?[Користувачі_Const.Назва]?.ToString() ?? "" /**/
                         
                     }.ToArray());
             }
@@ -841,8 +836,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             ФізичніОсоби_Select.QuerySelect.Field.AddRange(
                 new string[]
                 {
-                    Довідники.ФізичніОсоби_Const.Код // [ pos = 1, type = string ]
-                    , Довідники.ФізичніОсоби_Const.Назва // [ pos = 2, type = string ]
+                    Довідники.ФізичніОсоби_Const.Код /* 1 */
+                    , Довідники.ФізичніОсоби_Const.Назва /* 2 */
                     
                 });
 
@@ -858,8 +853,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     Store.AppendValues(new ФізичніОсоби_Записи
                     {
                         ID = cur.UnigueID.ToString(),
-                        Код = cur.Fields?[ФізичніОсоби_Const.Код]?.ToString() ?? "", // [ pos = 1, type = string ]
-                        Назва = cur.Fields?[ФізичніОсоби_Const.Назва]?.ToString() ?? "" // [ pos = 2, type = string ]
+                        Код = cur.Fields?[ФізичніОсоби_Const.Код]?.ToString() ?? "", /**/
+                        Назва = cur.Fields?[ФізичніОсоби_Const.Назва]?.ToString() ?? "" /**/
                         
                     }.ToArray());
             }
@@ -908,8 +903,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             СтруктураПідприємства_Select.QuerySelect.Field.AddRange(
                 new string[]
                 {
-                    Довідники.СтруктураПідприємства_Const.Код // [ pos = 1, type = string ]
-                    , Довідники.СтруктураПідприємства_Const.Назва // [ pos = 2, type = string ]
+                    Довідники.СтруктураПідприємства_Const.Код /* 1 */
+                    , Довідники.СтруктураПідприємства_Const.Назва /* 2 */
                     
                 });
 
@@ -925,8 +920,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     Store.AppendValues(new СтруктураПідприємства_Записи
                     {
                         ID = cur.UnigueID.ToString(),
-                        Код = cur.Fields?[СтруктураПідприємства_Const.Код]?.ToString() ?? "", // [ pos = 1, type = string ]
-                        Назва = cur.Fields?[СтруктураПідприємства_Const.Назва]?.ToString() ?? "" // [ pos = 2, type = string ]
+                        Код = cur.Fields?[СтруктураПідприємства_Const.Код]?.ToString() ?? "", /**/
+                        Назва = cur.Fields?[СтруктураПідприємства_Const.Назва]?.ToString() ?? "" /**/
                         
                     }.ToArray());
             }
@@ -975,8 +970,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             КраїниСвіту_Select.QuerySelect.Field.AddRange(
                 new string[]
                 {
-                    Довідники.КраїниСвіту_Const.Код // [ pos = 1, type = string ]
-                    , Довідники.КраїниСвіту_Const.Назва // [ pos = 2, type = string ]
+                    Довідники.КраїниСвіту_Const.Код /* 1 */
+                    , Довідники.КраїниСвіту_Const.Назва /* 2 */
                     
                 });
 
@@ -992,8 +987,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     Store.AppendValues(new КраїниСвіту_Записи
                     {
                         ID = cur.UnigueID.ToString(),
-                        Код = cur.Fields?[КраїниСвіту_Const.Код]?.ToString() ?? "", // [ pos = 1, type = string ]
-                        Назва = cur.Fields?[КраїниСвіту_Const.Назва]?.ToString() ?? "" // [ pos = 2, type = string ]
+                        Код = cur.Fields?[КраїниСвіту_Const.Код]?.ToString() ?? "", /**/
+                        Назва = cur.Fields?[КраїниСвіту_Const.Назва]?.ToString() ?? "" /**/
                         
                     }.ToArray());
             }
@@ -1042,8 +1037,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Файли_Select.QuerySelect.Field.AddRange(
                 new string[]
                 {
-                    Довідники.Файли_Const.Код // [ pos = 1, type = string ]
-                    , Довідники.Файли_Const.Назва // [ pos = 2, type = string ]
+                    Довідники.Файли_Const.Код /* 1 */
+                    , Довідники.Файли_Const.Назва /* 2 */
                     
                 });
 
@@ -1059,8 +1054,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     Store.AppendValues(new Файли_Записи
                     {
                         ID = cur.UnigueID.ToString(),
-                        Код = cur.Fields?[Файли_Const.Код]?.ToString() ?? "", // [ pos = 1, type = string ]
-                        Назва = cur.Fields?[Файли_Const.Назва]?.ToString() ?? "" // [ pos = 2, type = string ]
+                        Код = cur.Fields?[Файли_Const.Код]?.ToString() ?? "", /**/
+                        Назва = cur.Fields?[Файли_Const.Назва]?.ToString() ?? "" /**/
                         
                     }.ToArray());
             }
@@ -1112,19 +1107,17 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             ХарактеристикиНоменклатури_Select.QuerySelect.Field.AddRange(
                 new string[]
                 {
-                    Довідники.ХарактеристикиНоменклатури_Const.Код // [ pos = 1, type = string ]
-                    , Довідники.ХарактеристикиНоменклатури_Const.Назва // [ pos = 2, type = string ]
-                    /* , Довідники.ХарактеристикиНоменклатури_Const.Номенклатура */ // [ pos = 3, type = pointer ]
+                    Довідники.ХарактеристикиНоменклатури_Const.Код /* 1 */
+                    , Довідники.ХарактеристикиНоменклатури_Const.Назва /* 2 */
                     
                 });
 
-            
-                  /* JOIN 3 */
-                  ХарактеристикиНоменклатури_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Номенклатура_Const.TABLE + "." + Довідники.Номенклатура_Const.Назва, "join_3"));
-                  ХарактеристикиНоменклатури_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Номенклатура_Const.TABLE, Довідники.ХарактеристикиНоменклатури_Const.Номенклатура, ХарактеристикиНоменклатури_Select.QuerySelect.Table));
+            ХарактеристикиНоменклатури_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Номенклатура_Const.TABLE, Довідники.ХарактеристикиНоменклатури_Const.Номенклатура, ХарактеристикиНоменклатури_Select.QuerySelect.Table, "join_tab_1"));
+
+                ХарактеристикиНоменклатури_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_1." + Довідники.Номенклатура_Const.Назва, "join_tab_1_field_1"));
+
                 
 
             /* SELECT */
@@ -1137,9 +1130,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     Store.AppendValues(new ХарактеристикиНоменклатури_Записи
                     {
                         ID = cur.UnigueID.ToString(),
-                        Код = cur.Fields?[ХарактеристикиНоменклатури_Const.Код]?.ToString() ?? "", // [ pos = 1, type = string ]
-                        Назва = cur.Fields?[ХарактеристикиНоменклатури_Const.Назва]?.ToString() ?? "", // [ pos = 2, type = string ]
-                        Номенклатура = cur.Fields?["join_3"]?.ToString() ?? "" // [ pos = 3, type = pointer ]
+                        Номенклатура = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
+                        Код = cur.Fields?[ХарактеристикиНоменклатури_Const.Код]?.ToString() ?? "", /**/
+                        Назва = cur.Fields?[ХарактеристикиНоменклатури_Const.Назва]?.ToString() ?? "" /**/
                         
                     }.ToArray());
             }
@@ -1206,19 +1199,17 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Каси_Select.QuerySelect.Field.AddRange(
                 new string[]
                 {
-                    Довідники.Каси_Const.Код // [ pos = 1, type = string ]
-                    , Довідники.Каси_Const.Назва // [ pos = 2, type = string ]
-                    /* , Довідники.Каси_Const.Валюта */ // [ pos = 3, type = pointer ]
+                    Довідники.Каси_Const.Код /* 1 */
+                    , Довідники.Каси_Const.Назва /* 2 */
                     
                 });
 
-            
-                  /* JOIN 3 */
-                  Каси_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Валюти_Const.TABLE + "." + Довідники.Валюти_Const.Назва, "join_3"));
-                  Каси_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Валюти_Const.TABLE, Довідники.Каси_Const.Валюта, Каси_Select.QuerySelect.Table));
+            Каси_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Валюти_Const.TABLE, Довідники.Каси_Const.Валюта, Каси_Select.QuerySelect.Table, "join_tab_1"));
+
+                Каси_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_1." + Довідники.Валюти_Const.Назва, "join_tab_1_field_1"));
+
                 
 
             /* SELECT */
@@ -1231,9 +1222,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     Store.AppendValues(new Каси_Записи
                     {
                         ID = cur.UnigueID.ToString(),
-                        Код = cur.Fields?[Каси_Const.Код]?.ToString() ?? "", // [ pos = 1, type = string ]
-                        Назва = cur.Fields?[Каси_Const.Назва]?.ToString() ?? "", // [ pos = 2, type = string ]
-                        Валюта = cur.Fields?["join_3"]?.ToString() ?? "" // [ pos = 3, type = pointer ]
+                        Валюта = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
+                        Код = cur.Fields?[Каси_Const.Код]?.ToString() ?? "", /**/
+                        Назва = cur.Fields?[Каси_Const.Назва]?.ToString() ?? "" /**/
                         
                     }.ToArray());
             }
@@ -1285,19 +1276,17 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             БанківськіРахункиОрганізацій_Select.QuerySelect.Field.AddRange(
                 new string[]
                 {
-                    Довідники.БанківськіРахункиОрганізацій_Const.Код // [ pos = 1, type = string ]
-                    , Довідники.БанківськіРахункиОрганізацій_Const.Назва // [ pos = 2, type = string ]
-                    /* , Довідники.БанківськіРахункиОрганізацій_Const.Валюта */ // [ pos = 3, type = pointer ]
+                    Довідники.БанківськіРахункиОрганізацій_Const.Код /* 1 */
+                    , Довідники.БанківськіРахункиОрганізацій_Const.Назва /* 2 */
                     
                 });
 
-            
-                  /* JOIN 3 */
-                  БанківськіРахункиОрганізацій_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Валюти_Const.TABLE + "." + Довідники.Валюти_Const.Назва, "join_3"));
-                  БанківськіРахункиОрганізацій_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Валюти_Const.TABLE, Довідники.БанківськіРахункиОрганізацій_Const.Валюта, БанківськіРахункиОрганізацій_Select.QuerySelect.Table));
+            БанківськіРахункиОрганізацій_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Валюти_Const.TABLE, Довідники.БанківськіРахункиОрганізацій_Const.Валюта, БанківськіРахункиОрганізацій_Select.QuerySelect.Table, "join_tab_1"));
+
+                БанківськіРахункиОрганізацій_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_1." + Довідники.Валюти_Const.Назва, "join_tab_1_field_1"));
+
                 
 
             /* SELECT */
@@ -1310,9 +1299,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     Store.AppendValues(new БанківськіРахункиОрганізацій_Записи
                     {
                         ID = cur.UnigueID.ToString(),
-                        Код = cur.Fields?[БанківськіРахункиОрганізацій_Const.Код]?.ToString() ?? "", // [ pos = 1, type = string ]
-                        Назва = cur.Fields?[БанківськіРахункиОрганізацій_Const.Назва]?.ToString() ?? "", // [ pos = 2, type = string ]
-                        Валюта = cur.Fields?["join_3"]?.ToString() ?? "" // [ pos = 3, type = pointer ]
+                        Валюта = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
+                        Код = cur.Fields?[БанківськіРахункиОрганізацій_Const.Код]?.ToString() ?? "", /**/
+                        Назва = cur.Fields?[БанківськіРахункиОрганізацій_Const.Назва]?.ToString() ?? "" /**/
                         
                     }.ToArray());
             }
@@ -1367,20 +1356,18 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             ДоговориКонтрагентів_Select.QuerySelect.Field.AddRange(
                 new string[]
                 {
-                    Довідники.ДоговориКонтрагентів_Const.Код // [ pos = 1, type = string ]
-                    , Довідники.ДоговориКонтрагентів_Const.Назва // [ pos = 2, type = string ]
-                    /* , Довідники.ДоговориКонтрагентів_Const.Контрагент */ // [ pos = 3, type = pointer ]
-                    , Довідники.ДоговориКонтрагентів_Const.ТипДоговору // [ pos = 4, type = enum ]
+                    Довідники.ДоговориКонтрагентів_Const.Код /* 1 */
+                    , Довідники.ДоговориКонтрагентів_Const.Назва /* 2 */
+                    , Довідники.ДоговориКонтрагентів_Const.ТипДоговору /* 3 */
                     
                 });
 
-            
-                  /* JOIN 3 */
-                  ДоговориКонтрагентів_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Контрагенти_Const.TABLE + "." + Довідники.Контрагенти_Const.Назва, "join_3"));
-                  ДоговориКонтрагентів_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Контрагенти_Const.TABLE, Довідники.ДоговориКонтрагентів_Const.Контрагент, ДоговориКонтрагентів_Select.QuerySelect.Table));
+            ДоговориКонтрагентів_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Контрагенти_Const.TABLE, Довідники.ДоговориКонтрагентів_Const.Контрагент, ДоговориКонтрагентів_Select.QuerySelect.Table, "join_tab_1"));
+
+                ДоговориКонтрагентів_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_1." + Довідники.Контрагенти_Const.Назва, "join_tab_1_field_1"));
+
                 
 
             /* SELECT */
@@ -1393,10 +1380,10 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     Store.AppendValues(new ДоговориКонтрагентів_Записи
                     {
                         ID = cur.UnigueID.ToString(),
-                        Код = cur.Fields?[ДоговориКонтрагентів_Const.Код]?.ToString() ?? "", // [ pos = 1, type = string ]
-                        Назва = cur.Fields?[ДоговориКонтрагентів_Const.Назва]?.ToString() ?? "", // [ pos = 2, type = string ]
-                        Контрагент = cur.Fields?["join_3"]?.ToString() ?? "", // [ pos = 3, type = pointer ]
-                        ТипДоговору = ((Перелічення.ТипДоговорів)int.Parse(cur.Fields?[ДоговориКонтрагентів_Const.ТипДоговору]?.ToString() ?? "0")).ToString() // [ pos = 4, type = enum ]
+                        Контрагент = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
+                        Код = cur.Fields?[ДоговориКонтрагентів_Const.Код]?.ToString() ?? "", /**/
+                        Назва = cur.Fields?[ДоговориКонтрагентів_Const.Назва]?.ToString() ?? "", /**/
+                        ТипДоговору = ((Перелічення.ТипДоговорів)int.Parse(cur.Fields?[ДоговориКонтрагентів_Const.ТипДоговору]?.ToString() ?? "0")).ToString() /**/
                         
                     }.ToArray());
             }
@@ -1445,8 +1432,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             БанківськіРахункиКонтрагентів_Select.QuerySelect.Field.AddRange(
                 new string[]
                 {
-                    Довідники.БанківськіРахункиКонтрагентів_Const.Код // [ pos = 1, type = string ]
-                    , Довідники.БанківськіРахункиКонтрагентів_Const.Назва // [ pos = 2, type = string ]
+                    Довідники.БанківськіРахункиКонтрагентів_Const.Код /* 1 */
+                    , Довідники.БанківськіРахункиКонтрагентів_Const.Назва /* 2 */
                     
                 });
 
@@ -1462,8 +1449,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     Store.AppendValues(new БанківськіРахункиКонтрагентів_Записи
                     {
                         ID = cur.UnigueID.ToString(),
-                        Код = cur.Fields?[БанківськіРахункиКонтрагентів_Const.Код]?.ToString() ?? "", // [ pos = 1, type = string ]
-                        Назва = cur.Fields?[БанківськіРахункиКонтрагентів_Const.Назва]?.ToString() ?? "" // [ pos = 2, type = string ]
+                        Код = cur.Fields?[БанківськіРахункиКонтрагентів_Const.Код]?.ToString() ?? "", /**/
+                        Назва = cur.Fields?[БанківськіРахункиКонтрагентів_Const.Назва]?.ToString() ?? "" /**/
                         
                     }.ToArray());
             }
@@ -1512,8 +1499,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             СтаттяРухуКоштів_Select.QuerySelect.Field.AddRange(
                 new string[]
                 {
-                    Довідники.СтаттяРухуКоштів_Const.Назва // [ pos = 1, type = string ]
-                    , Довідники.СтаттяРухуКоштів_Const.Код // [ pos = 2, type = string ]
+                    Довідники.СтаттяРухуКоштів_Const.Назва /* 1 */
+                    , Довідники.СтаттяРухуКоштів_Const.Код /* 2 */
                     
                 });
 
@@ -1529,8 +1516,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     Store.AppendValues(new СтаттяРухуКоштів_Записи
                     {
                         ID = cur.UnigueID.ToString(),
-                        Назва = cur.Fields?[СтаттяРухуКоштів_Const.Назва]?.ToString() ?? "", // [ pos = 1, type = string ]
-                        Код = cur.Fields?[СтаттяРухуКоштів_Const.Код]?.ToString() ?? "" // [ pos = 2, type = string ]
+                        Назва = cur.Fields?[СтаттяРухуКоштів_Const.Назва]?.ToString() ?? "", /**/
+                        Код = cur.Fields?[СтаттяРухуКоштів_Const.Код]?.ToString() ?? "" /**/
                         
                     }.ToArray());
             }
@@ -1576,7 +1563,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             СеріїНоменклатури_Select.QuerySelect.Field.AddRange(
                 new string[]
                 {
-                    Довідники.СеріїНоменклатури_Const.Номер // [ pos = 1, type = string ]
+                    Довідники.СеріїНоменклатури_Const.Номер /* 1 */
                     
                 });
 
@@ -1592,7 +1579,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     Store.AppendValues(new СеріїНоменклатури_Записи
                     {
                         ID = cur.UnigueID.ToString(),
-                        Номер = cur.Fields?[СеріїНоменклатури_Const.Номер]?.ToString() ?? "" // [ pos = 1, type = string ]
+                        Номер = cur.Fields?[СеріїНоменклатури_Const.Номер]?.ToString() ?? "" /**/
                         
                     }.ToArray());
             }
@@ -1650,28 +1637,24 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             ПартіяТоварівКомпозит_Select.QuerySelect.Field.AddRange(
                 new string[]
                 {
-                    Довідники.ПартіяТоварівКомпозит_Const.Назва // [ pos = 1, type = string ]
-                    , Довідники.ПартіяТоварівКомпозит_Const.Дата // [ pos = 2, type = datetime ]
-                    , Довідники.ПартіяТоварівКомпозит_Const.ТипДокументу // [ pos = 3, type = enum ]
-                    /* , Довідники.ПартіяТоварівКомпозит_Const.ПоступленняТоварівТаПослуг */ // [ pos = 4, type = pointer ]
-                    /* , Довідники.ПартіяТоварівКомпозит_Const.ВведенняЗалишків */ // [ pos = 5, type = pointer ]
+                    Довідники.ПартіяТоварівКомпозит_Const.Назва /* 1 */
+                    , Довідники.ПартіяТоварівКомпозит_Const.Дата /* 2 */
+                    , Довідники.ПартіяТоварівКомпозит_Const.ТипДокументу /* 3 */
                     
                 });
 
-            
-                  /* JOIN 4 */
-                  ПартіяТоварівКомпозит_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Документи.ПоступленняТоварівТаПослуг_Const.TABLE + "." + Документи.ПоступленняТоварівТаПослуг_Const.Назва, "join_4"));
-                  ПартіяТоварівКомпозит_Select.QuerySelect.Joins.Add(
-                    new Join(Документи.ПоступленняТоварівТаПослуг_Const.TABLE, Довідники.ПартіяТоварівКомпозит_Const.ПоступленняТоварівТаПослуг, ПартіяТоварівКомпозит_Select.QuerySelect.Table));
-                
-                  /* JOIN 5 */
-                  ПартіяТоварівКомпозит_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Документи.ВведенняЗалишків_Const.TABLE + "." + Документи.ВведенняЗалишків_Const.Назва, "join_5"));
-                  ПартіяТоварівКомпозит_Select.QuerySelect.Joins.Add(
-                    new Join(Документи.ВведенняЗалишків_Const.TABLE, Довідники.ПартіяТоварівКомпозит_Const.ВведенняЗалишків, ПартіяТоварівКомпозит_Select.QuerySelect.Table));
+            ПартіяТоварівКомпозит_Select.QuerySelect.Joins.Add(
+                    new Join(Документи.ПоступленняТоварівТаПослуг_Const.TABLE, Довідники.ПартіяТоварівКомпозит_Const.ПоступленняТоварівТаПослуг, ПартіяТоварівКомпозит_Select.QuerySelect.Table, "join_tab_1"));
+
+                ПартіяТоварівКомпозит_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_1." + Документи.ПоступленняТоварівТаПослуг_Const.Назва, "join_tab_1_field_1"));
+
+                ПартіяТоварівКомпозит_Select.QuerySelect.Joins.Add(
+                    new Join(Документи.ВведенняЗалишків_Const.TABLE, Довідники.ПартіяТоварівКомпозит_Const.ВведенняЗалишків, ПартіяТоварівКомпозит_Select.QuerySelect.Table, "join_tab_2"));
+
+                ПартіяТоварівКомпозит_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_2." + Документи.ВведенняЗалишків_Const.Назва, "join_tab_2_field_1"));
+
                 
 
             /* SELECT */
@@ -1684,11 +1667,11 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     Store.AppendValues(new ПартіяТоварівКомпозит_Записи
                     {
                         ID = cur.UnigueID.ToString(),
-                        Назва = cur.Fields?[ПартіяТоварівКомпозит_Const.Назва]?.ToString() ?? "", // [ pos = 1, type = string ]
-                        Дата = cur.Fields?[ПартіяТоварівКомпозит_Const.Дата]?.ToString() ?? "", // [ pos = 2, type = datetime ]
-                        ТипДокументу = ((Перелічення.ТипДокументуПартіяТоварівКомпозит)int.Parse(cur.Fields?[ПартіяТоварівКомпозит_Const.ТипДокументу]?.ToString() ?? "0")).ToString(), // [ pos = 3, type = enum ]
-                        ПоступленняТоварівТаПослуг = cur.Fields?["join_4"]?.ToString() ?? "", // [ pos = 4, type = pointer ]
-                        ВведенняЗалишків = cur.Fields?["join_5"]?.ToString() ?? "" // [ pos = 5, type = pointer ]
+                        ПоступленняТоварівТаПослуг = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
+                        ВведенняЗалишків = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
+                        Назва = cur.Fields?[ПартіяТоварівКомпозит_Const.Назва]?.ToString() ?? "", /**/
+                        Дата = cur.Fields?[ПартіяТоварівКомпозит_Const.Дата]?.ToString() ?? "", /**/
+                        ТипДокументу = ((Перелічення.ТипДокументуПартіяТоварівКомпозит)int.Parse(cur.Fields?[ПартіяТоварівКомпозит_Const.ТипДокументу]?.ToString() ?? "0")).ToString() /**/
                         
                     }.ToArray());
             }
@@ -1734,7 +1717,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             ВидиЗапасів_Select.QuerySelect.Field.AddRange(
                 new string[]
                 {
-                    Довідники.ВидиЗапасів_Const.Назва // [ pos = 1, type = string ]
+                    Довідники.ВидиЗапасів_Const.Назва /* 1 */
                     
                 });
 
@@ -1750,7 +1733,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     Store.AppendValues(new ВидиЗапасів_Записи
                     {
                         ID = cur.UnigueID.ToString(),
-                        Назва = cur.Fields?[ВидиЗапасів_Const.Назва]?.ToString() ?? "" // [ pos = 1, type = string ]
+                        Назва = cur.Fields?[ВидиЗапасів_Const.Назва]?.ToString() ?? "" /**/
                         
                     }.ToArray());
             }
@@ -1796,7 +1779,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             ПродажіДокументКомпозит_Select.QuerySelect.Field.AddRange(
                 new string[]
                 {
-                    Довідники.ПродажіДокументКомпозит_Const.Назва // [ pos = 1, type = string ]
+                    Довідники.ПродажіДокументКомпозит_Const.Назва /* 1 */
                     
                 });
 
@@ -1812,7 +1795,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     Store.AppendValues(new ПродажіДокументКомпозит_Записи
                     {
                         ID = cur.UnigueID.ToString(),
-                        Назва = cur.Fields?[ПродажіДокументКомпозит_Const.Назва]?.ToString() ?? "" // [ pos = 1, type = string ]
+                        Назва = cur.Fields?[ПродажіДокументКомпозит_Const.Назва]?.ToString() ?? "" /**/
                         
                     }.ToArray());
             }
@@ -1858,7 +1841,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             АналітикаНоменклатуриКомпозит_Select.QuerySelect.Field.AddRange(
                 new string[]
                 {
-                    Довідники.АналітикаНоменклатуриКомпозит_Const.Назва // [ pos = 1, type = string ]
+                    Довідники.АналітикаНоменклатуриКомпозит_Const.Назва /* 1 */
                     
                 });
 
@@ -1874,7 +1857,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     Store.AppendValues(new АналітикаНоменклатуриКомпозит_Записи
                     {
                         ID = cur.UnigueID.ToString(),
-                        Назва = cur.Fields?[АналітикаНоменклатуриКомпозит_Const.Назва]?.ToString() ?? "" // [ pos = 1, type = string ]
+                        Назва = cur.Fields?[АналітикаНоменклатуриКомпозит_Const.Назва]?.ToString() ?? "" /**/
                         
                     }.ToArray());
             }
@@ -1920,7 +1903,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             АналітикаКонтрагентівКомпозит_Select.QuerySelect.Field.AddRange(
                 new string[]
                 {
-                    Довідники.АналітикаКонтрагентівКомпозит_Const.Назва // [ pos = 1, type = string ]
+                    Довідники.АналітикаКонтрагентівКомпозит_Const.Назва /* 1 */
                     
                 });
 
@@ -1936,7 +1919,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     Store.AppendValues(new АналітикаКонтрагентівКомпозит_Записи
                     {
                         ID = cur.UnigueID.ToString(),
-                        Назва = cur.Fields?[АналітикаКонтрагентівКомпозит_Const.Назва]?.ToString() ?? "" // [ pos = 1, type = string ]
+                        Назва = cur.Fields?[АналітикаКонтрагентівКомпозит_Const.Назва]?.ToString() ?? "" /**/
                         
                     }.ToArray());
             }
@@ -1982,7 +1965,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             АналітикаПартійКомпозит_Select.QuerySelect.Field.AddRange(
                 new string[]
                 {
-                    Довідники.АналітикаПартійКомпозит_Const.Назва // [ pos = 1, type = string ]
+                    Довідники.АналітикаПартійКомпозит_Const.Назва /* 1 */
                     
                 });
 
@@ -1998,7 +1981,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     Store.AppendValues(new АналітикаПартійКомпозит_Записи
                     {
                         ID = cur.UnigueID.ToString(),
-                        Назва = cur.Fields?[АналітикаПартійКомпозит_Const.Назва]?.ToString() ?? "" // [ pos = 1, type = string ]
+                        Назва = cur.Fields?[АналітикаПартійКомпозит_Const.Назва]?.ToString() ?? "" /**/
                         
                     }.ToArray());
             }
@@ -2073,46 +2056,38 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             ЗамовленняПостачальнику_Select.QuerySelect.Field.AddRange(
                 new string[]
                 {
-                    Документи.ЗамовленняПостачальнику_Const.Назва // [ pos = 1, type = string ]
-                    , Документи.ЗамовленняПостачальнику_Const.НомерДок // [ pos = 2, type = string ]
-                    , Документи.ЗамовленняПостачальнику_Const.ДатаДок // [ pos = 3, type = datetime ]
-                    /* , Документи.ЗамовленняПостачальнику_Const.Організація */ // [ pos = 4, type = pointer ]
-                    /* , Документи.ЗамовленняПостачальнику_Const.Контрагент */ // [ pos = 5, type = pointer ]
-                    /* , Документи.ЗамовленняПостачальнику_Const.Склад */ // [ pos = 6, type = pointer ]
-                    /* , Документи.ЗамовленняПостачальнику_Const.Валюта */ // [ pos = 7, type = pointer ]
-                    , Документи.ЗамовленняПостачальнику_Const.СумаДокументу // [ pos = 8, type = numeric ]
-                    , Документи.ЗамовленняПостачальнику_Const.Коментар // [ pos = 9, type = string ]
+                    Документи.ЗамовленняПостачальнику_Const.Назва /* 1 */
+                    , Документи.ЗамовленняПостачальнику_Const.НомерДок /* 2 */
+                    , Документи.ЗамовленняПостачальнику_Const.ДатаДок /* 3 */
+                    , Документи.ЗамовленняПостачальнику_Const.СумаДокументу /* 4 */
+                    , Документи.ЗамовленняПостачальнику_Const.Коментар /* 5 */
                     
                 });
 
-            
-                  /* JOIN 4 */
-                  ЗамовленняПостачальнику_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Організації_Const.TABLE + "." + Довідники.Організації_Const.Назва, "join_4"));
-                  ЗамовленняПостачальнику_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Організації_Const.TABLE, Документи.ЗамовленняПостачальнику_Const.Організація, ЗамовленняПостачальнику_Select.QuerySelect.Table));
-                
-                  /* JOIN 5 */
-                  ЗамовленняПостачальнику_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Контрагенти_Const.TABLE + "." + Довідники.Контрагенти_Const.Назва, "join_5"));
-                  ЗамовленняПостачальнику_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Контрагенти_Const.TABLE, Документи.ЗамовленняПостачальнику_Const.Контрагент, ЗамовленняПостачальнику_Select.QuerySelect.Table));
-                
-                  /* JOIN 6 */
-                  ЗамовленняПостачальнику_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Склади_Const.TABLE + "." + Довідники.Склади_Const.Назва, "join_6"));
-                  ЗамовленняПостачальнику_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Склади_Const.TABLE, Документи.ЗамовленняПостачальнику_Const.Склад, ЗамовленняПостачальнику_Select.QuerySelect.Table));
-                
-                  /* JOIN 7 */
-                  ЗамовленняПостачальнику_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Валюти_Const.TABLE + "." + Довідники.Валюти_Const.Назва, "join_7"));
-                  ЗамовленняПостачальнику_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Валюти_Const.TABLE, Документи.ЗамовленняПостачальнику_Const.Валюта, ЗамовленняПостачальнику_Select.QuerySelect.Table));
+            ЗамовленняПостачальнику_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Організації_Const.TABLE, Документи.ЗамовленняПостачальнику_Const.Організація, ЗамовленняПостачальнику_Select.QuerySelect.Table, "join_tab_1"));
+
+                ЗамовленняПостачальнику_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_1." + Довідники.Організації_Const.Назва, "join_tab_1_field_1"));
+
+                ЗамовленняПостачальнику_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Контрагенти_Const.TABLE, Документи.ЗамовленняПостачальнику_Const.Контрагент, ЗамовленняПостачальнику_Select.QuerySelect.Table, "join_tab_2"));
+
+                ЗамовленняПостачальнику_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_2." + Довідники.Контрагенти_Const.Назва, "join_tab_2_field_1"));
+
+                ЗамовленняПостачальнику_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Склади_Const.TABLE, Документи.ЗамовленняПостачальнику_Const.Склад, ЗамовленняПостачальнику_Select.QuerySelect.Table, "join_tab_3"));
+
+                ЗамовленняПостачальнику_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_3." + Довідники.Склади_Const.Назва, "join_tab_3_field_1"));
+
+                ЗамовленняПостачальнику_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Валюти_Const.TABLE, Документи.ЗамовленняПостачальнику_Const.Валюта, ЗамовленняПостачальнику_Select.QuerySelect.Table, "join_tab_4"));
+
+                ЗамовленняПостачальнику_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_4." + Довідники.Валюти_Const.Назва, "join_tab_4_field_1"));
+
                 
 
             /* SELECT */
@@ -2125,15 +2100,15 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     Store.AppendValues(new ЗамовленняПостачальнику_Записи
                     {
                         ID = cur.UnigueID.ToString(),
-                        Назва = cur.Fields?[ЗамовленняПостачальнику_Const.Назва]?.ToString() ?? "", // [ pos = 1, type = string ]
-                        НомерДок = cur.Fields?[ЗамовленняПостачальнику_Const.НомерДок]?.ToString() ?? "", // [ pos = 2, type = string ]
-                        ДатаДок = cur.Fields?[ЗамовленняПостачальнику_Const.ДатаДок]?.ToString() ?? "", // [ pos = 3, type = datetime ]
-                        Організація = cur.Fields?["join_4"]?.ToString() ?? "", // [ pos = 4, type = pointer ]
-                        Контрагент = cur.Fields?["join_5"]?.ToString() ?? "", // [ pos = 5, type = pointer ]
-                        Склад = cur.Fields?["join_6"]?.ToString() ?? "", // [ pos = 6, type = pointer ]
-                        Валюта = cur.Fields?["join_7"]?.ToString() ?? "", // [ pos = 7, type = pointer ]
-                        СумаДокументу = cur.Fields?[ЗамовленняПостачальнику_Const.СумаДокументу]?.ToString() ?? "", // [ pos = 8, type = numeric ]
-                        Коментар = cur.Fields?[ЗамовленняПостачальнику_Const.Коментар]?.ToString() ?? "" // [ pos = 9, type = string ]
+                        Організація = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
+                        Контрагент = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
+                        Склад = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
+                        Валюта = cur.Fields?["join_tab_4_field_1"]?.ToString() ?? "", /**/
+                        Назва = cur.Fields?[ЗамовленняПостачальнику_Const.Назва]?.ToString() ?? "", /**/
+                        НомерДок = cur.Fields?[ЗамовленняПостачальнику_Const.НомерДок]?.ToString() ?? "", /**/
+                        ДатаДок = cur.Fields?[ЗамовленняПостачальнику_Const.ДатаДок]?.ToString() ?? "", /**/
+                        СумаДокументу = cur.Fields?[ЗамовленняПостачальнику_Const.СумаДокументу]?.ToString() ?? "", /**/
+                        Коментар = cur.Fields?[ЗамовленняПостачальнику_Const.Коментар]?.ToString() ?? "" /**/
                         
                     }.ToArray());
             }
@@ -2206,54 +2181,44 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             ПоступленняТоварівТаПослуг_Select.QuerySelect.Field.AddRange(
                 new string[]
                 {
-                    Документи.ПоступленняТоварівТаПослуг_Const.Назва // [ pos = 1, type = string ]
-                    , Документи.ПоступленняТоварівТаПослуг_Const.НомерДок // [ pos = 2, type = string ]
-                    , Документи.ПоступленняТоварівТаПослуг_Const.ДатаДок // [ pos = 3, type = datetime ]
-                    /* , Документи.ПоступленняТоварівТаПослуг_Const.Організація */ // [ pos = 4, type = pointer ]
-                    /* , Документи.ПоступленняТоварівТаПослуг_Const.Склад */ // [ pos = 5, type = pointer ]
-                    /* , Документи.ПоступленняТоварівТаПослуг_Const.Контрагент */ // [ pos = 6, type = pointer ]
-                    /* , Документи.ПоступленняТоварівТаПослуг_Const.Валюта */ // [ pos = 7, type = pointer ]
-                    /* , Документи.ПоступленняТоварівТаПослуг_Const.Каса */ // [ pos = 8, type = pointer ]
-                    , Документи.ПоступленняТоварівТаПослуг_Const.СумаДокументу // [ pos = 9, type = numeric ]
-                    , Документи.ПоступленняТоварівТаПослуг_Const.Коментар // [ pos = 10, type = string ]
+                    Документи.ПоступленняТоварівТаПослуг_Const.Назва /* 1 */
+                    , Документи.ПоступленняТоварівТаПослуг_Const.НомерДок /* 2 */
+                    , Документи.ПоступленняТоварівТаПослуг_Const.ДатаДок /* 3 */
+                    , Документи.ПоступленняТоварівТаПослуг_Const.СумаДокументу /* 4 */
+                    , Документи.ПоступленняТоварівТаПослуг_Const.Коментар /* 5 */
                     
                 });
 
-            
-                  /* JOIN 4 */
-                  ПоступленняТоварівТаПослуг_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Організації_Const.TABLE + "." + Довідники.Організації_Const.Назва, "join_4"));
-                  ПоступленняТоварівТаПослуг_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Організації_Const.TABLE, Документи.ПоступленняТоварівТаПослуг_Const.Організація, ПоступленняТоварівТаПослуг_Select.QuerySelect.Table));
-                
-                  /* JOIN 5 */
-                  ПоступленняТоварівТаПослуг_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Склади_Const.TABLE + "." + Довідники.Склади_Const.Назва, "join_5"));
-                  ПоступленняТоварівТаПослуг_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Склади_Const.TABLE, Документи.ПоступленняТоварівТаПослуг_Const.Склад, ПоступленняТоварівТаПослуг_Select.QuerySelect.Table));
-                
-                  /* JOIN 6 */
-                  ПоступленняТоварівТаПослуг_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Контрагенти_Const.TABLE + "." + Довідники.Контрагенти_Const.Назва, "join_6"));
-                  ПоступленняТоварівТаПослуг_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Контрагенти_Const.TABLE, Документи.ПоступленняТоварівТаПослуг_Const.Контрагент, ПоступленняТоварівТаПослуг_Select.QuerySelect.Table));
-                
-                  /* JOIN 7 */
-                  ПоступленняТоварівТаПослуг_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Валюти_Const.TABLE + "." + Довідники.Валюти_Const.Назва, "join_7"));
-                  ПоступленняТоварівТаПослуг_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Валюти_Const.TABLE, Документи.ПоступленняТоварівТаПослуг_Const.Валюта, ПоступленняТоварівТаПослуг_Select.QuerySelect.Table));
-                
-                  /* JOIN 8 */
-                  ПоступленняТоварівТаПослуг_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Каси_Const.TABLE + "." + Довідники.Каси_Const.Назва, "join_8"));
-                  ПоступленняТоварівТаПослуг_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Каси_Const.TABLE, Документи.ПоступленняТоварівТаПослуг_Const.Каса, ПоступленняТоварівТаПослуг_Select.QuerySelect.Table));
+            ПоступленняТоварівТаПослуг_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Організації_Const.TABLE, Документи.ПоступленняТоварівТаПослуг_Const.Організація, ПоступленняТоварівТаПослуг_Select.QuerySelect.Table, "join_tab_1"));
+
+                ПоступленняТоварівТаПослуг_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_1." + Довідники.Організації_Const.Назва, "join_tab_1_field_1"));
+
+                ПоступленняТоварівТаПослуг_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Склади_Const.TABLE, Документи.ПоступленняТоварівТаПослуг_Const.Склад, ПоступленняТоварівТаПослуг_Select.QuerySelect.Table, "join_tab_2"));
+
+                ПоступленняТоварівТаПослуг_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_2." + Довідники.Склади_Const.Назва, "join_tab_2_field_1"));
+
+                ПоступленняТоварівТаПослуг_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Контрагенти_Const.TABLE, Документи.ПоступленняТоварівТаПослуг_Const.Контрагент, ПоступленняТоварівТаПослуг_Select.QuerySelect.Table, "join_tab_3"));
+
+                ПоступленняТоварівТаПослуг_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_3." + Довідники.Контрагенти_Const.Назва, "join_tab_3_field_1"));
+
+                ПоступленняТоварівТаПослуг_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Валюти_Const.TABLE, Документи.ПоступленняТоварівТаПослуг_Const.Валюта, ПоступленняТоварівТаПослуг_Select.QuerySelect.Table, "join_tab_4"));
+
+                ПоступленняТоварівТаПослуг_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_4." + Довідники.Валюти_Const.Назва, "join_tab_4_field_1"));
+
+                ПоступленняТоварівТаПослуг_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Каси_Const.TABLE, Документи.ПоступленняТоварівТаПослуг_Const.Каса, ПоступленняТоварівТаПослуг_Select.QuerySelect.Table, "join_tab_5"));
+
+                ПоступленняТоварівТаПослуг_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_5." + Довідники.Каси_Const.Назва, "join_tab_5_field_1"));
+
                 
 
             /* SELECT */
@@ -2266,16 +2231,16 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     Store.AppendValues(new ПоступленняТоварівТаПослуг_Записи
                     {
                         ID = cur.UnigueID.ToString(),
-                        Назва = cur.Fields?[ПоступленняТоварівТаПослуг_Const.Назва]?.ToString() ?? "", // [ pos = 1, type = string ]
-                        НомерДок = cur.Fields?[ПоступленняТоварівТаПослуг_Const.НомерДок]?.ToString() ?? "", // [ pos = 2, type = string ]
-                        ДатаДок = cur.Fields?[ПоступленняТоварівТаПослуг_Const.ДатаДок]?.ToString() ?? "", // [ pos = 3, type = datetime ]
-                        Організація = cur.Fields?["join_4"]?.ToString() ?? "", // [ pos = 4, type = pointer ]
-                        Склад = cur.Fields?["join_5"]?.ToString() ?? "", // [ pos = 5, type = pointer ]
-                        Контрагент = cur.Fields?["join_6"]?.ToString() ?? "", // [ pos = 6, type = pointer ]
-                        Валюта = cur.Fields?["join_7"]?.ToString() ?? "", // [ pos = 7, type = pointer ]
-                        Каса = cur.Fields?["join_8"]?.ToString() ?? "", // [ pos = 8, type = pointer ]
-                        СумаДокументу = cur.Fields?[ПоступленняТоварівТаПослуг_Const.СумаДокументу]?.ToString() ?? "", // [ pos = 9, type = numeric ]
-                        Коментар = cur.Fields?[ПоступленняТоварівТаПослуг_Const.Коментар]?.ToString() ?? "" // [ pos = 10, type = string ]
+                        Організація = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
+                        Склад = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
+                        Контрагент = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
+                        Валюта = cur.Fields?["join_tab_4_field_1"]?.ToString() ?? "", /**/
+                        Каса = cur.Fields?["join_tab_5_field_1"]?.ToString() ?? "", /**/
+                        Назва = cur.Fields?[ПоступленняТоварівТаПослуг_Const.Назва]?.ToString() ?? "", /**/
+                        НомерДок = cur.Fields?[ПоступленняТоварівТаПослуг_Const.НомерДок]?.ToString() ?? "", /**/
+                        ДатаДок = cur.Fields?[ПоступленняТоварівТаПослуг_Const.ДатаДок]?.ToString() ?? "", /**/
+                        СумаДокументу = cur.Fields?[ПоступленняТоварівТаПослуг_Const.СумаДокументу]?.ToString() ?? "", /**/
+                        Коментар = cur.Fields?[ПоступленняТоварівТаПослуг_Const.Коментар]?.ToString() ?? "" /**/
                         
                     }.ToArray());
             }
@@ -2348,54 +2313,44 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             ЗамовленняКлієнта_Select.QuerySelect.Field.AddRange(
                 new string[]
                 {
-                    Документи.ЗамовленняКлієнта_Const.Назва // [ pos = 1, type = string ]
-                    , Документи.ЗамовленняКлієнта_Const.НомерДок // [ pos = 2, type = string ]
-                    , Документи.ЗамовленняКлієнта_Const.ДатаДок // [ pos = 3, type = datetime ]
-                    /* , Документи.ЗамовленняКлієнта_Const.Організація */ // [ pos = 4, type = pointer ]
-                    /* , Документи.ЗамовленняКлієнта_Const.Контрагент */ // [ pos = 5, type = pointer ]
-                    /* , Документи.ЗамовленняКлієнта_Const.Валюта */ // [ pos = 6, type = pointer ]
-                    /* , Документи.ЗамовленняКлієнта_Const.Каса */ // [ pos = 7, type = pointer ]
-                    /* , Документи.ЗамовленняКлієнта_Const.Склад */ // [ pos = 8, type = pointer ]
-                    , Документи.ЗамовленняКлієнта_Const.СумаДокументу // [ pos = 9, type = numeric ]
-                    , Документи.ЗамовленняКлієнта_Const.Коментар // [ pos = 10, type = string ]
+                    Документи.ЗамовленняКлієнта_Const.Назва /* 1 */
+                    , Документи.ЗамовленняКлієнта_Const.НомерДок /* 2 */
+                    , Документи.ЗамовленняКлієнта_Const.ДатаДок /* 3 */
+                    , Документи.ЗамовленняКлієнта_Const.СумаДокументу /* 4 */
+                    , Документи.ЗамовленняКлієнта_Const.Коментар /* 5 */
                     
                 });
 
-            
-                  /* JOIN 4 */
-                  ЗамовленняКлієнта_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Організації_Const.TABLE + "." + Довідники.Організації_Const.Назва, "join_4"));
-                  ЗамовленняКлієнта_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Організації_Const.TABLE, Документи.ЗамовленняКлієнта_Const.Організація, ЗамовленняКлієнта_Select.QuerySelect.Table));
-                
-                  /* JOIN 5 */
-                  ЗамовленняКлієнта_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Контрагенти_Const.TABLE + "." + Довідники.Контрагенти_Const.Назва, "join_5"));
-                  ЗамовленняКлієнта_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Контрагенти_Const.TABLE, Документи.ЗамовленняКлієнта_Const.Контрагент, ЗамовленняКлієнта_Select.QuerySelect.Table));
-                
-                  /* JOIN 6 */
-                  ЗамовленняКлієнта_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Валюти_Const.TABLE + "." + Довідники.Валюти_Const.Назва, "join_6"));
-                  ЗамовленняКлієнта_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Валюти_Const.TABLE, Документи.ЗамовленняКлієнта_Const.Валюта, ЗамовленняКлієнта_Select.QuerySelect.Table));
-                
-                  /* JOIN 7 */
-                  ЗамовленняКлієнта_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Каси_Const.TABLE + "." + Довідники.Каси_Const.Назва, "join_7"));
-                  ЗамовленняКлієнта_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Каси_Const.TABLE, Документи.ЗамовленняКлієнта_Const.Каса, ЗамовленняКлієнта_Select.QuerySelect.Table));
-                
-                  /* JOIN 8 */
-                  ЗамовленняКлієнта_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Склади_Const.TABLE + "." + Довідники.Склади_Const.Назва, "join_8"));
-                  ЗамовленняКлієнта_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Склади_Const.TABLE, Документи.ЗамовленняКлієнта_Const.Склад, ЗамовленняКлієнта_Select.QuerySelect.Table));
+            ЗамовленняКлієнта_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Організації_Const.TABLE, Документи.ЗамовленняКлієнта_Const.Організація, ЗамовленняКлієнта_Select.QuerySelect.Table, "join_tab_1"));
+
+                ЗамовленняКлієнта_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_1." + Довідники.Організації_Const.Назва, "join_tab_1_field_1"));
+
+                ЗамовленняКлієнта_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Контрагенти_Const.TABLE, Документи.ЗамовленняКлієнта_Const.Контрагент, ЗамовленняКлієнта_Select.QuerySelect.Table, "join_tab_2"));
+
+                ЗамовленняКлієнта_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_2." + Довідники.Контрагенти_Const.Назва, "join_tab_2_field_1"));
+
+                ЗамовленняКлієнта_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Валюти_Const.TABLE, Документи.ЗамовленняКлієнта_Const.Валюта, ЗамовленняКлієнта_Select.QuerySelect.Table, "join_tab_3"));
+
+                ЗамовленняКлієнта_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_3." + Довідники.Валюти_Const.Назва, "join_tab_3_field_1"));
+
+                ЗамовленняКлієнта_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Каси_Const.TABLE, Документи.ЗамовленняКлієнта_Const.Каса, ЗамовленняКлієнта_Select.QuerySelect.Table, "join_tab_4"));
+
+                ЗамовленняКлієнта_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_4." + Довідники.Каси_Const.Назва, "join_tab_4_field_1"));
+
+                ЗамовленняКлієнта_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Склади_Const.TABLE, Документи.ЗамовленняКлієнта_Const.Склад, ЗамовленняКлієнта_Select.QuerySelect.Table, "join_tab_5"));
+
+                ЗамовленняКлієнта_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_5." + Довідники.Склади_Const.Назва, "join_tab_5_field_1"));
+
                 
 
             /* SELECT */
@@ -2408,16 +2363,16 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     Store.AppendValues(new ЗамовленняКлієнта_Записи
                     {
                         ID = cur.UnigueID.ToString(),
-                        Назва = cur.Fields?[ЗамовленняКлієнта_Const.Назва]?.ToString() ?? "", // [ pos = 1, type = string ]
-                        НомерДок = cur.Fields?[ЗамовленняКлієнта_Const.НомерДок]?.ToString() ?? "", // [ pos = 2, type = string ]
-                        ДатаДок = cur.Fields?[ЗамовленняКлієнта_Const.ДатаДок]?.ToString() ?? "", // [ pos = 3, type = datetime ]
-                        Організація = cur.Fields?["join_4"]?.ToString() ?? "", // [ pos = 4, type = pointer ]
-                        Контрагент = cur.Fields?["join_5"]?.ToString() ?? "", // [ pos = 5, type = pointer ]
-                        Валюта = cur.Fields?["join_6"]?.ToString() ?? "", // [ pos = 6, type = pointer ]
-                        Каса = cur.Fields?["join_7"]?.ToString() ?? "", // [ pos = 7, type = pointer ]
-                        Склад = cur.Fields?["join_8"]?.ToString() ?? "", // [ pos = 8, type = pointer ]
-                        СумаДокументу = cur.Fields?[ЗамовленняКлієнта_Const.СумаДокументу]?.ToString() ?? "", // [ pos = 9, type = numeric ]
-                        Коментар = cur.Fields?[ЗамовленняКлієнта_Const.Коментар]?.ToString() ?? "" // [ pos = 10, type = string ]
+                        Організація = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
+                        Контрагент = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
+                        Валюта = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
+                        Каса = cur.Fields?["join_tab_4_field_1"]?.ToString() ?? "", /**/
+                        Склад = cur.Fields?["join_tab_5_field_1"]?.ToString() ?? "", /**/
+                        Назва = cur.Fields?[ЗамовленняКлієнта_Const.Назва]?.ToString() ?? "", /**/
+                        НомерДок = cur.Fields?[ЗамовленняКлієнта_Const.НомерДок]?.ToString() ?? "", /**/
+                        ДатаДок = cur.Fields?[ЗамовленняКлієнта_Const.ДатаДок]?.ToString() ?? "", /**/
+                        СумаДокументу = cur.Fields?[ЗамовленняКлієнта_Const.СумаДокументу]?.ToString() ?? "", /**/
+                        Коментар = cur.Fields?[ЗамовленняКлієнта_Const.Коментар]?.ToString() ?? "" /**/
                         
                     }.ToArray());
             }
@@ -2490,54 +2445,44 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             РеалізаціяТоварівТаПослуг_Select.QuerySelect.Field.AddRange(
                 new string[]
                 {
-                    Документи.РеалізаціяТоварівТаПослуг_Const.Назва // [ pos = 1, type = string ]
-                    , Документи.РеалізаціяТоварівТаПослуг_Const.НомерДок // [ pos = 2, type = string ]
-                    , Документи.РеалізаціяТоварівТаПослуг_Const.ДатаДок // [ pos = 3, type = datetime ]
-                    /* , Документи.РеалізаціяТоварівТаПослуг_Const.Організація */ // [ pos = 4, type = pointer ]
-                    /* , Документи.РеалізаціяТоварівТаПослуг_Const.Контрагент */ // [ pos = 5, type = pointer ]
-                    /* , Документи.РеалізаціяТоварівТаПослуг_Const.Валюта */ // [ pos = 6, type = pointer ]
-                    /* , Документи.РеалізаціяТоварівТаПослуг_Const.Каса */ // [ pos = 7, type = pointer ]
-                    /* , Документи.РеалізаціяТоварівТаПослуг_Const.Склад */ // [ pos = 8, type = pointer ]
-                    , Документи.РеалізаціяТоварівТаПослуг_Const.СумаДокументу // [ pos = 9, type = numeric ]
-                    , Документи.РеалізаціяТоварівТаПослуг_Const.Коментар // [ pos = 10, type = string ]
+                    Документи.РеалізаціяТоварівТаПослуг_Const.Назва /* 1 */
+                    , Документи.РеалізаціяТоварівТаПослуг_Const.НомерДок /* 2 */
+                    , Документи.РеалізаціяТоварівТаПослуг_Const.ДатаДок /* 3 */
+                    , Документи.РеалізаціяТоварівТаПослуг_Const.СумаДокументу /* 4 */
+                    , Документи.РеалізаціяТоварівТаПослуг_Const.Коментар /* 5 */
                     
                 });
 
-            
-                  /* JOIN 4 */
-                  РеалізаціяТоварівТаПослуг_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Організації_Const.TABLE + "." + Довідники.Організації_Const.Назва, "join_4"));
-                  РеалізаціяТоварівТаПослуг_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Організації_Const.TABLE, Документи.РеалізаціяТоварівТаПослуг_Const.Організація, РеалізаціяТоварівТаПослуг_Select.QuerySelect.Table));
-                
-                  /* JOIN 5 */
-                  РеалізаціяТоварівТаПослуг_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Контрагенти_Const.TABLE + "." + Довідники.Контрагенти_Const.Назва, "join_5"));
-                  РеалізаціяТоварівТаПослуг_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Контрагенти_Const.TABLE, Документи.РеалізаціяТоварівТаПослуг_Const.Контрагент, РеалізаціяТоварівТаПослуг_Select.QuerySelect.Table));
-                
-                  /* JOIN 6 */
-                  РеалізаціяТоварівТаПослуг_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Валюти_Const.TABLE + "." + Довідники.Валюти_Const.Назва, "join_6"));
-                  РеалізаціяТоварівТаПослуг_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Валюти_Const.TABLE, Документи.РеалізаціяТоварівТаПослуг_Const.Валюта, РеалізаціяТоварівТаПослуг_Select.QuerySelect.Table));
-                
-                  /* JOIN 7 */
-                  РеалізаціяТоварівТаПослуг_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Каси_Const.TABLE + "." + Довідники.Каси_Const.Назва, "join_7"));
-                  РеалізаціяТоварівТаПослуг_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Каси_Const.TABLE, Документи.РеалізаціяТоварівТаПослуг_Const.Каса, РеалізаціяТоварівТаПослуг_Select.QuerySelect.Table));
-                
-                  /* JOIN 8 */
-                  РеалізаціяТоварівТаПослуг_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Склади_Const.TABLE + "." + Довідники.Склади_Const.Назва, "join_8"));
-                  РеалізаціяТоварівТаПослуг_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Склади_Const.TABLE, Документи.РеалізаціяТоварівТаПослуг_Const.Склад, РеалізаціяТоварівТаПослуг_Select.QuerySelect.Table));
+            РеалізаціяТоварівТаПослуг_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Організації_Const.TABLE, Документи.РеалізаціяТоварівТаПослуг_Const.Організація, РеалізаціяТоварівТаПослуг_Select.QuerySelect.Table, "join_tab_1"));
+
+                РеалізаціяТоварівТаПослуг_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_1." + Довідники.Організації_Const.Назва, "join_tab_1_field_1"));
+
+                РеалізаціяТоварівТаПослуг_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Контрагенти_Const.TABLE, Документи.РеалізаціяТоварівТаПослуг_Const.Контрагент, РеалізаціяТоварівТаПослуг_Select.QuerySelect.Table, "join_tab_2"));
+
+                РеалізаціяТоварівТаПослуг_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_2." + Довідники.Контрагенти_Const.Назва, "join_tab_2_field_1"));
+
+                РеалізаціяТоварівТаПослуг_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Валюти_Const.TABLE, Документи.РеалізаціяТоварівТаПослуг_Const.Валюта, РеалізаціяТоварівТаПослуг_Select.QuerySelect.Table, "join_tab_3"));
+
+                РеалізаціяТоварівТаПослуг_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_3." + Довідники.Валюти_Const.Назва, "join_tab_3_field_1"));
+
+                РеалізаціяТоварівТаПослуг_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Каси_Const.TABLE, Документи.РеалізаціяТоварівТаПослуг_Const.Каса, РеалізаціяТоварівТаПослуг_Select.QuerySelect.Table, "join_tab_4"));
+
+                РеалізаціяТоварівТаПослуг_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_4." + Довідники.Каси_Const.Назва, "join_tab_4_field_1"));
+
+                РеалізаціяТоварівТаПослуг_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Склади_Const.TABLE, Документи.РеалізаціяТоварівТаПослуг_Const.Склад, РеалізаціяТоварівТаПослуг_Select.QuerySelect.Table, "join_tab_5"));
+
+                РеалізаціяТоварівТаПослуг_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_5." + Довідники.Склади_Const.Назва, "join_tab_5_field_1"));
+
                 
 
             /* SELECT */
@@ -2550,16 +2495,16 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     Store.AppendValues(new РеалізаціяТоварівТаПослуг_Записи
                     {
                         ID = cur.UnigueID.ToString(),
-                        Назва = cur.Fields?[РеалізаціяТоварівТаПослуг_Const.Назва]?.ToString() ?? "", // [ pos = 1, type = string ]
-                        НомерДок = cur.Fields?[РеалізаціяТоварівТаПослуг_Const.НомерДок]?.ToString() ?? "", // [ pos = 2, type = string ]
-                        ДатаДок = cur.Fields?[РеалізаціяТоварівТаПослуг_Const.ДатаДок]?.ToString() ?? "", // [ pos = 3, type = datetime ]
-                        Організація = cur.Fields?["join_4"]?.ToString() ?? "", // [ pos = 4, type = pointer ]
-                        Контрагент = cur.Fields?["join_5"]?.ToString() ?? "", // [ pos = 5, type = pointer ]
-                        Валюта = cur.Fields?["join_6"]?.ToString() ?? "", // [ pos = 6, type = pointer ]
-                        Каса = cur.Fields?["join_7"]?.ToString() ?? "", // [ pos = 7, type = pointer ]
-                        Склад = cur.Fields?["join_8"]?.ToString() ?? "", // [ pos = 8, type = pointer ]
-                        СумаДокументу = cur.Fields?[РеалізаціяТоварівТаПослуг_Const.СумаДокументу]?.ToString() ?? "", // [ pos = 9, type = numeric ]
-                        Коментар = cur.Fields?[РеалізаціяТоварівТаПослуг_Const.Коментар]?.ToString() ?? "" // [ pos = 10, type = string ]
+                        Організація = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
+                        Контрагент = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
+                        Валюта = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
+                        Каса = cur.Fields?["join_tab_4_field_1"]?.ToString() ?? "", /**/
+                        Склад = cur.Fields?["join_tab_5_field_1"]?.ToString() ?? "", /**/
+                        Назва = cur.Fields?[РеалізаціяТоварівТаПослуг_Const.Назва]?.ToString() ?? "", /**/
+                        НомерДок = cur.Fields?[РеалізаціяТоварівТаПослуг_Const.НомерДок]?.ToString() ?? "", /**/
+                        ДатаДок = cur.Fields?[РеалізаціяТоварівТаПослуг_Const.ДатаДок]?.ToString() ?? "", /**/
+                        СумаДокументу = cur.Fields?[РеалізаціяТоварівТаПослуг_Const.СумаДокументу]?.ToString() ?? "", /**/
+                        Коментар = cur.Fields?[РеалізаціяТоварівТаПослуг_Const.Коментар]?.ToString() ?? "" /**/
                         
                     }.ToArray());
             }
@@ -2623,37 +2568,31 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             ВстановленняЦінНоменклатури_Select.QuerySelect.Field.AddRange(
                 new string[]
                 {
-                    Документи.ВстановленняЦінНоменклатури_Const.Назва // [ pos = 1, type = string ]
-                    , Документи.ВстановленняЦінНоменклатури_Const.НомерДок // [ pos = 2, type = string ]
-                    , Документи.ВстановленняЦінНоменклатури_Const.ДатаДок // [ pos = 3, type = datetime ]
-                    /* , Документи.ВстановленняЦінНоменклатури_Const.Організація */ // [ pos = 4, type = pointer ]
-                    /* , Документи.ВстановленняЦінНоменклатури_Const.Валюта */ // [ pos = 5, type = pointer ]
-                    /* , Документи.ВстановленняЦінНоменклатури_Const.ВидЦіни */ // [ pos = 6, type = pointer ]
-                    , Документи.ВстановленняЦінНоменклатури_Const.Коментар // [ pos = 7, type = string ]
+                    Документи.ВстановленняЦінНоменклатури_Const.Назва /* 1 */
+                    , Документи.ВстановленняЦінНоменклатури_Const.НомерДок /* 2 */
+                    , Документи.ВстановленняЦінНоменклатури_Const.ДатаДок /* 3 */
+                    , Документи.ВстановленняЦінНоменклатури_Const.Коментар /* 4 */
                     
                 });
 
-            
-                  /* JOIN 4 */
-                  ВстановленняЦінНоменклатури_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Організації_Const.TABLE + "." + Довідники.Організації_Const.Назва, "join_4"));
-                  ВстановленняЦінНоменклатури_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Організації_Const.TABLE, Документи.ВстановленняЦінНоменклатури_Const.Організація, ВстановленняЦінНоменклатури_Select.QuerySelect.Table));
-                
-                  /* JOIN 5 */
-                  ВстановленняЦінНоменклатури_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Валюти_Const.TABLE + "." + Довідники.Валюти_Const.Назва, "join_5"));
-                  ВстановленняЦінНоменклатури_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Валюти_Const.TABLE, Документи.ВстановленняЦінНоменклатури_Const.Валюта, ВстановленняЦінНоменклатури_Select.QuerySelect.Table));
-                
-                  /* JOIN 6 */
-                  ВстановленняЦінНоменклатури_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.ВидиЦін_Const.TABLE + "." + Довідники.ВидиЦін_Const.Назва, "join_6"));
-                  ВстановленняЦінНоменклатури_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.ВидиЦін_Const.TABLE, Документи.ВстановленняЦінНоменклатури_Const.ВидЦіни, ВстановленняЦінНоменклатури_Select.QuerySelect.Table));
+            ВстановленняЦінНоменклатури_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Організації_Const.TABLE, Документи.ВстановленняЦінНоменклатури_Const.Організація, ВстановленняЦінНоменклатури_Select.QuerySelect.Table, "join_tab_1"));
+
+                ВстановленняЦінНоменклатури_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_1." + Довідники.Організації_Const.Назва, "join_tab_1_field_1"));
+
+                ВстановленняЦінНоменклатури_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Валюти_Const.TABLE, Документи.ВстановленняЦінНоменклатури_Const.Валюта, ВстановленняЦінНоменклатури_Select.QuerySelect.Table, "join_tab_2"));
+
+                ВстановленняЦінНоменклатури_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_2." + Довідники.Валюти_Const.Назва, "join_tab_2_field_1"));
+
+                ВстановленняЦінНоменклатури_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.ВидиЦін_Const.TABLE, Документи.ВстановленняЦінНоменклатури_Const.ВидЦіни, ВстановленняЦінНоменклатури_Select.QuerySelect.Table, "join_tab_3"));
+
+                ВстановленняЦінНоменклатури_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_3." + Довідники.ВидиЦін_Const.Назва, "join_tab_3_field_1"));
+
                 
 
             /* SELECT */
@@ -2666,13 +2605,13 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     Store.AppendValues(new ВстановленняЦінНоменклатури_Записи
                     {
                         ID = cur.UnigueID.ToString(),
-                        Назва = cur.Fields?[ВстановленняЦінНоменклатури_Const.Назва]?.ToString() ?? "", // [ pos = 1, type = string ]
-                        НомерДок = cur.Fields?[ВстановленняЦінНоменклатури_Const.НомерДок]?.ToString() ?? "", // [ pos = 2, type = string ]
-                        ДатаДок = cur.Fields?[ВстановленняЦінНоменклатури_Const.ДатаДок]?.ToString() ?? "", // [ pos = 3, type = datetime ]
-                        Організація = cur.Fields?["join_4"]?.ToString() ?? "", // [ pos = 4, type = pointer ]
-                        Валюта = cur.Fields?["join_5"]?.ToString() ?? "", // [ pos = 5, type = pointer ]
-                        ВидЦіни = cur.Fields?["join_6"]?.ToString() ?? "", // [ pos = 6, type = pointer ]
-                        Коментар = cur.Fields?[ВстановленняЦінНоменклатури_Const.Коментар]?.ToString() ?? "" // [ pos = 7, type = string ]
+                        Організація = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
+                        Валюта = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
+                        ВидЦіни = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
+                        Назва = cur.Fields?[ВстановленняЦінНоменклатури_Const.Назва]?.ToString() ?? "", /**/
+                        НомерДок = cur.Fields?[ВстановленняЦінНоменклатури_Const.НомерДок]?.ToString() ?? "", /**/
+                        ДатаДок = cur.Fields?[ВстановленняЦінНоменклатури_Const.ДатаДок]?.ToString() ?? "", /**/
+                        Коментар = cur.Fields?[ВстановленняЦінНоменклатури_Const.Коментар]?.ToString() ?? "" /**/
                         
                     }.ToArray());
             }
@@ -2742,46 +2681,38 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             ПрихіднийКасовийОрдер_Select.QuerySelect.Field.AddRange(
                 new string[]
                 {
-                    Документи.ПрихіднийКасовийОрдер_Const.Назва // [ pos = 1, type = string ]
-                    , Документи.ПрихіднийКасовийОрдер_Const.НомерДок // [ pos = 2, type = string ]
-                    , Документи.ПрихіднийКасовийОрдер_Const.ДатаДок // [ pos = 3, type = datetime ]
-                    /* , Документи.ПрихіднийКасовийОрдер_Const.Організація */ // [ pos = 4, type = pointer ]
-                    /* , Документи.ПрихіднийКасовийОрдер_Const.Валюта */ // [ pos = 5, type = pointer ]
-                    /* , Документи.ПрихіднийКасовийОрдер_Const.Каса */ // [ pos = 6, type = pointer ]
-                    /* , Документи.ПрихіднийКасовийОрдер_Const.Контрагент */ // [ pos = 7, type = pointer ]
-                    , Документи.ПрихіднийКасовийОрдер_Const.СумаДокументу // [ pos = 8, type = numeric ]
-                    , Документи.ПрихіднийКасовийОрдер_Const.Коментар // [ pos = 9, type = string ]
+                    Документи.ПрихіднийКасовийОрдер_Const.Назва /* 1 */
+                    , Документи.ПрихіднийКасовийОрдер_Const.НомерДок /* 2 */
+                    , Документи.ПрихіднийКасовийОрдер_Const.ДатаДок /* 3 */
+                    , Документи.ПрихіднийКасовийОрдер_Const.СумаДокументу /* 4 */
+                    , Документи.ПрихіднийКасовийОрдер_Const.Коментар /* 5 */
                     
                 });
 
-            
-                  /* JOIN 4 */
-                  ПрихіднийКасовийОрдер_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Організації_Const.TABLE + "." + Довідники.Організації_Const.Назва, "join_4"));
-                  ПрихіднийКасовийОрдер_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Організації_Const.TABLE, Документи.ПрихіднийКасовийОрдер_Const.Організація, ПрихіднийКасовийОрдер_Select.QuerySelect.Table));
-                
-                  /* JOIN 5 */
-                  ПрихіднийКасовийОрдер_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Валюти_Const.TABLE + "." + Довідники.Валюти_Const.Назва, "join_5"));
-                  ПрихіднийКасовийОрдер_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Валюти_Const.TABLE, Документи.ПрихіднийКасовийОрдер_Const.Валюта, ПрихіднийКасовийОрдер_Select.QuerySelect.Table));
-                
-                  /* JOIN 6 */
-                  ПрихіднийКасовийОрдер_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Каси_Const.TABLE + "." + Довідники.Каси_Const.Назва, "join_6"));
-                  ПрихіднийКасовийОрдер_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Каси_Const.TABLE, Документи.ПрихіднийКасовийОрдер_Const.Каса, ПрихіднийКасовийОрдер_Select.QuerySelect.Table));
-                
-                  /* JOIN 7 */
-                  ПрихіднийКасовийОрдер_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Контрагенти_Const.TABLE + "." + Довідники.Контрагенти_Const.Назва, "join_7"));
-                  ПрихіднийКасовийОрдер_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Контрагенти_Const.TABLE, Документи.ПрихіднийКасовийОрдер_Const.Контрагент, ПрихіднийКасовийОрдер_Select.QuerySelect.Table));
+            ПрихіднийКасовийОрдер_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Організації_Const.TABLE, Документи.ПрихіднийКасовийОрдер_Const.Організація, ПрихіднийКасовийОрдер_Select.QuerySelect.Table, "join_tab_1"));
+
+                ПрихіднийКасовийОрдер_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_1." + Довідники.Організації_Const.Назва, "join_tab_1_field_1"));
+
+                ПрихіднийКасовийОрдер_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Валюти_Const.TABLE, Документи.ПрихіднийКасовийОрдер_Const.Валюта, ПрихіднийКасовийОрдер_Select.QuerySelect.Table, "join_tab_2"));
+
+                ПрихіднийКасовийОрдер_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_2." + Довідники.Валюти_Const.Назва, "join_tab_2_field_1"));
+
+                ПрихіднийКасовийОрдер_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Каси_Const.TABLE, Документи.ПрихіднийКасовийОрдер_Const.Каса, ПрихіднийКасовийОрдер_Select.QuerySelect.Table, "join_tab_3"));
+
+                ПрихіднийКасовийОрдер_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_3." + Довідники.Каси_Const.Назва, "join_tab_3_field_1"));
+
+                ПрихіднийКасовийОрдер_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Контрагенти_Const.TABLE, Документи.ПрихіднийКасовийОрдер_Const.Контрагент, ПрихіднийКасовийОрдер_Select.QuerySelect.Table, "join_tab_4"));
+
+                ПрихіднийКасовийОрдер_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_4." + Довідники.Контрагенти_Const.Назва, "join_tab_4_field_1"));
+
                 
 
             /* SELECT */
@@ -2794,15 +2725,15 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     Store.AppendValues(new ПрихіднийКасовийОрдер_Записи
                     {
                         ID = cur.UnigueID.ToString(),
-                        Назва = cur.Fields?[ПрихіднийКасовийОрдер_Const.Назва]?.ToString() ?? "", // [ pos = 1, type = string ]
-                        НомерДок = cur.Fields?[ПрихіднийКасовийОрдер_Const.НомерДок]?.ToString() ?? "", // [ pos = 2, type = string ]
-                        ДатаДок = cur.Fields?[ПрихіднийКасовийОрдер_Const.ДатаДок]?.ToString() ?? "", // [ pos = 3, type = datetime ]
-                        Організація = cur.Fields?["join_4"]?.ToString() ?? "", // [ pos = 4, type = pointer ]
-                        Валюта = cur.Fields?["join_5"]?.ToString() ?? "", // [ pos = 5, type = pointer ]
-                        Каса = cur.Fields?["join_6"]?.ToString() ?? "", // [ pos = 6, type = pointer ]
-                        Контрагент = cur.Fields?["join_7"]?.ToString() ?? "", // [ pos = 7, type = pointer ]
-                        СумаДокументу = cur.Fields?[ПрихіднийКасовийОрдер_Const.СумаДокументу]?.ToString() ?? "", // [ pos = 8, type = numeric ]
-                        Коментар = cur.Fields?[ПрихіднийКасовийОрдер_Const.Коментар]?.ToString() ?? "" // [ pos = 9, type = string ]
+                        Організація = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
+                        Валюта = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
+                        Каса = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
+                        Контрагент = cur.Fields?["join_tab_4_field_1"]?.ToString() ?? "", /**/
+                        Назва = cur.Fields?[ПрихіднийКасовийОрдер_Const.Назва]?.ToString() ?? "", /**/
+                        НомерДок = cur.Fields?[ПрихіднийКасовийОрдер_Const.НомерДок]?.ToString() ?? "", /**/
+                        ДатаДок = cur.Fields?[ПрихіднийКасовийОрдер_Const.ДатаДок]?.ToString() ?? "", /**/
+                        СумаДокументу = cur.Fields?[ПрихіднийКасовийОрдер_Const.СумаДокументу]?.ToString() ?? "", /**/
+                        Коментар = cur.Fields?[ПрихіднийКасовийОрдер_Const.Коментар]?.ToString() ?? "" /**/
                         
                     }.ToArray());
             }
@@ -2872,46 +2803,38 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             РозхіднийКасовийОрдер_Select.QuerySelect.Field.AddRange(
                 new string[]
                 {
-                    Документи.РозхіднийКасовийОрдер_Const.Назва // [ pos = 1, type = string ]
-                    , Документи.РозхіднийКасовийОрдер_Const.НомерДок // [ pos = 2, type = string ]
-                    , Документи.РозхіднийКасовийОрдер_Const.ДатаДок // [ pos = 3, type = datetime ]
-                    /* , Документи.РозхіднийКасовийОрдер_Const.Організація */ // [ pos = 4, type = pointer ]
-                    /* , Документи.РозхіднийКасовийОрдер_Const.Контрагент */ // [ pos = 5, type = pointer ]
-                    /* , Документи.РозхіднийКасовийОрдер_Const.Валюта */ // [ pos = 6, type = pointer ]
-                    /* , Документи.РозхіднийКасовийОрдер_Const.Каса */ // [ pos = 7, type = pointer ]
-                    , Документи.РозхіднийКасовийОрдер_Const.СумаДокументу // [ pos = 8, type = numeric ]
-                    , Документи.РозхіднийКасовийОрдер_Const.Коментар // [ pos = 9, type = string ]
+                    Документи.РозхіднийКасовийОрдер_Const.Назва /* 1 */
+                    , Документи.РозхіднийКасовийОрдер_Const.НомерДок /* 2 */
+                    , Документи.РозхіднийКасовийОрдер_Const.ДатаДок /* 3 */
+                    , Документи.РозхіднийКасовийОрдер_Const.СумаДокументу /* 4 */
+                    , Документи.РозхіднийКасовийОрдер_Const.Коментар /* 5 */
                     
                 });
 
-            
-                  /* JOIN 4 */
-                  РозхіднийКасовийОрдер_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Організації_Const.TABLE + "." + Довідники.Організації_Const.Назва, "join_4"));
-                  РозхіднийКасовийОрдер_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Організації_Const.TABLE, Документи.РозхіднийКасовийОрдер_Const.Організація, РозхіднийКасовийОрдер_Select.QuerySelect.Table));
-                
-                  /* JOIN 5 */
-                  РозхіднийКасовийОрдер_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Контрагенти_Const.TABLE + "." + Довідники.Контрагенти_Const.Назва, "join_5"));
-                  РозхіднийКасовийОрдер_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Контрагенти_Const.TABLE, Документи.РозхіднийКасовийОрдер_Const.Контрагент, РозхіднийКасовийОрдер_Select.QuerySelect.Table));
-                
-                  /* JOIN 6 */
-                  РозхіднийКасовийОрдер_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Валюти_Const.TABLE + "." + Довідники.Валюти_Const.Назва, "join_6"));
-                  РозхіднийКасовийОрдер_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Валюти_Const.TABLE, Документи.РозхіднийКасовийОрдер_Const.Валюта, РозхіднийКасовийОрдер_Select.QuerySelect.Table));
-                
-                  /* JOIN 7 */
-                  РозхіднийКасовийОрдер_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Каси_Const.TABLE + "." + Довідники.Каси_Const.Назва, "join_7"));
-                  РозхіднийКасовийОрдер_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Каси_Const.TABLE, Документи.РозхіднийКасовийОрдер_Const.Каса, РозхіднийКасовийОрдер_Select.QuerySelect.Table));
+            РозхіднийКасовийОрдер_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Організації_Const.TABLE, Документи.РозхіднийКасовийОрдер_Const.Організація, РозхіднийКасовийОрдер_Select.QuerySelect.Table, "join_tab_1"));
+
+                РозхіднийКасовийОрдер_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_1." + Довідники.Організації_Const.Назва, "join_tab_1_field_1"));
+
+                РозхіднийКасовийОрдер_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Контрагенти_Const.TABLE, Документи.РозхіднийКасовийОрдер_Const.Контрагент, РозхіднийКасовийОрдер_Select.QuerySelect.Table, "join_tab_2"));
+
+                РозхіднийКасовийОрдер_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_2." + Довідники.Контрагенти_Const.Назва, "join_tab_2_field_1"));
+
+                РозхіднийКасовийОрдер_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Валюти_Const.TABLE, Документи.РозхіднийКасовийОрдер_Const.Валюта, РозхіднийКасовийОрдер_Select.QuerySelect.Table, "join_tab_3"));
+
+                РозхіднийКасовийОрдер_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_3." + Довідники.Валюти_Const.Назва, "join_tab_3_field_1"));
+
+                РозхіднийКасовийОрдер_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Каси_Const.TABLE, Документи.РозхіднийКасовийОрдер_Const.Каса, РозхіднийКасовийОрдер_Select.QuerySelect.Table, "join_tab_4"));
+
+                РозхіднийКасовийОрдер_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_4." + Довідники.Каси_Const.Назва, "join_tab_4_field_1"));
+
                 
 
             /* SELECT */
@@ -2924,15 +2847,15 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     Store.AppendValues(new РозхіднийКасовийОрдер_Записи
                     {
                         ID = cur.UnigueID.ToString(),
-                        Назва = cur.Fields?[РозхіднийКасовийОрдер_Const.Назва]?.ToString() ?? "", // [ pos = 1, type = string ]
-                        НомерДок = cur.Fields?[РозхіднийКасовийОрдер_Const.НомерДок]?.ToString() ?? "", // [ pos = 2, type = string ]
-                        ДатаДок = cur.Fields?[РозхіднийКасовийОрдер_Const.ДатаДок]?.ToString() ?? "", // [ pos = 3, type = datetime ]
-                        Організація = cur.Fields?["join_4"]?.ToString() ?? "", // [ pos = 4, type = pointer ]
-                        Контрагент = cur.Fields?["join_5"]?.ToString() ?? "", // [ pos = 5, type = pointer ]
-                        Валюта = cur.Fields?["join_6"]?.ToString() ?? "", // [ pos = 6, type = pointer ]
-                        Каса = cur.Fields?["join_7"]?.ToString() ?? "", // [ pos = 7, type = pointer ]
-                        СумаДокументу = cur.Fields?[РозхіднийКасовийОрдер_Const.СумаДокументу]?.ToString() ?? "", // [ pos = 8, type = numeric ]
-                        Коментар = cur.Fields?[РозхіднийКасовийОрдер_Const.Коментар]?.ToString() ?? "" // [ pos = 9, type = string ]
+                        Організація = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
+                        Контрагент = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
+                        Валюта = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
+                        Каса = cur.Fields?["join_tab_4_field_1"]?.ToString() ?? "", /**/
+                        Назва = cur.Fields?[РозхіднийКасовийОрдер_Const.Назва]?.ToString() ?? "", /**/
+                        НомерДок = cur.Fields?[РозхіднийКасовийОрдер_Const.НомерДок]?.ToString() ?? "", /**/
+                        ДатаДок = cur.Fields?[РозхіднийКасовийОрдер_Const.ДатаДок]?.ToString() ?? "", /**/
+                        СумаДокументу = cur.Fields?[РозхіднийКасовийОрдер_Const.СумаДокументу]?.ToString() ?? "", /**/
+                        Коментар = cur.Fields?[РозхіднийКасовийОрдер_Const.Коментар]?.ToString() ?? "" /**/
                         
                     }.ToArray());
             }
@@ -2993,29 +2916,25 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             ПереміщенняТоварів_Select.QuerySelect.Field.AddRange(
                 new string[]
                 {
-                    Документи.ПереміщенняТоварів_Const.Назва // [ pos = 1, type = string ]
-                    , Документи.ПереміщенняТоварів_Const.НомерДок // [ pos = 2, type = string ]
-                    , Документи.ПереміщенняТоварів_Const.ДатаДок // [ pos = 3, type = datetime ]
-                    /* , Документи.ПереміщенняТоварів_Const.Організація */ // [ pos = 4, type = pointer ]
-                    /* , Документи.ПереміщенняТоварів_Const.СкладВідправник */ // [ pos = 5, type = pointer ]
-                    , Документи.ПереміщенняТоварів_Const.Коментар // [ pos = 6, type = string ]
+                    Документи.ПереміщенняТоварів_Const.Назва /* 1 */
+                    , Документи.ПереміщенняТоварів_Const.НомерДок /* 2 */
+                    , Документи.ПереміщенняТоварів_Const.ДатаДок /* 3 */
+                    , Документи.ПереміщенняТоварів_Const.Коментар /* 4 */
                     
                 });
 
-            
-                  /* JOIN 4 */
-                  ПереміщенняТоварів_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Організації_Const.TABLE + "." + Довідники.Організації_Const.Назва, "join_4"));
-                  ПереміщенняТоварів_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Організації_Const.TABLE, Документи.ПереміщенняТоварів_Const.Організація, ПереміщенняТоварів_Select.QuerySelect.Table));
-                
-                  /* JOIN 5 */
-                  ПереміщенняТоварів_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Склади_Const.TABLE + "." + Довідники.Склади_Const.Назва, "join_5"));
-                  ПереміщенняТоварів_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Склади_Const.TABLE, Документи.ПереміщенняТоварів_Const.СкладВідправник, ПереміщенняТоварів_Select.QuerySelect.Table));
+            ПереміщенняТоварів_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Організації_Const.TABLE, Документи.ПереміщенняТоварів_Const.Організація, ПереміщенняТоварів_Select.QuerySelect.Table, "join_tab_1"));
+
+                ПереміщенняТоварів_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_1." + Довідники.Організації_Const.Назва, "join_tab_1_field_1"));
+
+                ПереміщенняТоварів_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Склади_Const.TABLE, Документи.ПереміщенняТоварів_Const.СкладВідправник, ПереміщенняТоварів_Select.QuerySelect.Table, "join_tab_2"));
+
+                ПереміщенняТоварів_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_2." + Довідники.Склади_Const.Назва, "join_tab_2_field_1"));
+
                 
 
             /* SELECT */
@@ -3028,12 +2947,12 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     Store.AppendValues(new ПереміщенняТоварів_Записи
                     {
                         ID = cur.UnigueID.ToString(),
-                        Назва = cur.Fields?[ПереміщенняТоварів_Const.Назва]?.ToString() ?? "", // [ pos = 1, type = string ]
-                        НомерДок = cur.Fields?[ПереміщенняТоварів_Const.НомерДок]?.ToString() ?? "", // [ pos = 2, type = string ]
-                        ДатаДок = cur.Fields?[ПереміщенняТоварів_Const.ДатаДок]?.ToString() ?? "", // [ pos = 3, type = datetime ]
-                        Організація = cur.Fields?["join_4"]?.ToString() ?? "", // [ pos = 4, type = pointer ]
-                        СкладВідправник = cur.Fields?["join_5"]?.ToString() ?? "", // [ pos = 5, type = pointer ]
-                        Коментар = cur.Fields?[ПереміщенняТоварів_Const.Коментар]?.ToString() ?? "" // [ pos = 6, type = string ]
+                        Організація = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
+                        СкладВідправник = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
+                        Назва = cur.Fields?[ПереміщенняТоварів_Const.Назва]?.ToString() ?? "", /**/
+                        НомерДок = cur.Fields?[ПереміщенняТоварів_Const.НомерДок]?.ToString() ?? "", /**/
+                        ДатаДок = cur.Fields?[ПереміщенняТоварів_Const.ДатаДок]?.ToString() ?? "", /**/
+                        Коментар = cur.Fields?[ПереміщенняТоварів_Const.Коментар]?.ToString() ?? "" /**/
                         
                     }.ToArray());
             }
@@ -3106,54 +3025,44 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             ПоверненняТоварівПостачальнику_Select.QuerySelect.Field.AddRange(
                 new string[]
                 {
-                    Документи.ПоверненняТоварівПостачальнику_Const.Назва // [ pos = 1, type = string ]
-                    , Документи.ПоверненняТоварівПостачальнику_Const.НомерДок // [ pos = 2, type = string ]
-                    , Документи.ПоверненняТоварівПостачальнику_Const.ДатаДок // [ pos = 3, type = datetime ]
-                    /* , Документи.ПоверненняТоварівПостачальнику_Const.Організація */ // [ pos = 4, type = pointer ]
-                    /* , Документи.ПоверненняТоварівПостачальнику_Const.Контрагент */ // [ pos = 5, type = pointer ]
-                    /* , Документи.ПоверненняТоварівПостачальнику_Const.Валюта */ // [ pos = 6, type = pointer ]
-                    /* , Документи.ПоверненняТоварівПостачальнику_Const.Каса */ // [ pos = 7, type = pointer ]
-                    /* , Документи.ПоверненняТоварівПостачальнику_Const.Склад */ // [ pos = 8, type = pointer ]
-                    , Документи.ПоверненняТоварівПостачальнику_Const.СумаДокументу // [ pos = 9, type = numeric ]
-                    , Документи.ПоверненняТоварівПостачальнику_Const.Коментар // [ pos = 10, type = string ]
+                    Документи.ПоверненняТоварівПостачальнику_Const.Назва /* 1 */
+                    , Документи.ПоверненняТоварівПостачальнику_Const.НомерДок /* 2 */
+                    , Документи.ПоверненняТоварівПостачальнику_Const.ДатаДок /* 3 */
+                    , Документи.ПоверненняТоварівПостачальнику_Const.СумаДокументу /* 4 */
+                    , Документи.ПоверненняТоварівПостачальнику_Const.Коментар /* 5 */
                     
                 });
 
-            
-                  /* JOIN 4 */
-                  ПоверненняТоварівПостачальнику_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Організації_Const.TABLE + "." + Довідники.Організації_Const.Назва, "join_4"));
-                  ПоверненняТоварівПостачальнику_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Організації_Const.TABLE, Документи.ПоверненняТоварівПостачальнику_Const.Організація, ПоверненняТоварівПостачальнику_Select.QuerySelect.Table));
-                
-                  /* JOIN 5 */
-                  ПоверненняТоварівПостачальнику_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Контрагенти_Const.TABLE + "." + Довідники.Контрагенти_Const.Назва, "join_5"));
-                  ПоверненняТоварівПостачальнику_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Контрагенти_Const.TABLE, Документи.ПоверненняТоварівПостачальнику_Const.Контрагент, ПоверненняТоварівПостачальнику_Select.QuerySelect.Table));
-                
-                  /* JOIN 6 */
-                  ПоверненняТоварівПостачальнику_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Валюти_Const.TABLE + "." + Довідники.Валюти_Const.Назва, "join_6"));
-                  ПоверненняТоварівПостачальнику_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Валюти_Const.TABLE, Документи.ПоверненняТоварівПостачальнику_Const.Валюта, ПоверненняТоварівПостачальнику_Select.QuerySelect.Table));
-                
-                  /* JOIN 7 */
-                  ПоверненняТоварівПостачальнику_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Каси_Const.TABLE + "." + Довідники.Каси_Const.Назва, "join_7"));
-                  ПоверненняТоварівПостачальнику_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Каси_Const.TABLE, Документи.ПоверненняТоварівПостачальнику_Const.Каса, ПоверненняТоварівПостачальнику_Select.QuerySelect.Table));
-                
-                  /* JOIN 8 */
-                  ПоверненняТоварівПостачальнику_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Склади_Const.TABLE + "." + Довідники.Склади_Const.Назва, "join_8"));
-                  ПоверненняТоварівПостачальнику_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Склади_Const.TABLE, Документи.ПоверненняТоварівПостачальнику_Const.Склад, ПоверненняТоварівПостачальнику_Select.QuerySelect.Table));
+            ПоверненняТоварівПостачальнику_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Організації_Const.TABLE, Документи.ПоверненняТоварівПостачальнику_Const.Організація, ПоверненняТоварівПостачальнику_Select.QuerySelect.Table, "join_tab_1"));
+
+                ПоверненняТоварівПостачальнику_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_1." + Довідники.Організації_Const.Назва, "join_tab_1_field_1"));
+
+                ПоверненняТоварівПостачальнику_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Контрагенти_Const.TABLE, Документи.ПоверненняТоварівПостачальнику_Const.Контрагент, ПоверненняТоварівПостачальнику_Select.QuerySelect.Table, "join_tab_2"));
+
+                ПоверненняТоварівПостачальнику_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_2." + Довідники.Контрагенти_Const.Назва, "join_tab_2_field_1"));
+
+                ПоверненняТоварівПостачальнику_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Валюти_Const.TABLE, Документи.ПоверненняТоварівПостачальнику_Const.Валюта, ПоверненняТоварівПостачальнику_Select.QuerySelect.Table, "join_tab_3"));
+
+                ПоверненняТоварівПостачальнику_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_3." + Довідники.Валюти_Const.Назва, "join_tab_3_field_1"));
+
+                ПоверненняТоварівПостачальнику_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Каси_Const.TABLE, Документи.ПоверненняТоварівПостачальнику_Const.Каса, ПоверненняТоварівПостачальнику_Select.QuerySelect.Table, "join_tab_4"));
+
+                ПоверненняТоварівПостачальнику_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_4." + Довідники.Каси_Const.Назва, "join_tab_4_field_1"));
+
+                ПоверненняТоварівПостачальнику_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Склади_Const.TABLE, Документи.ПоверненняТоварівПостачальнику_Const.Склад, ПоверненняТоварівПостачальнику_Select.QuerySelect.Table, "join_tab_5"));
+
+                ПоверненняТоварівПостачальнику_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_5." + Довідники.Склади_Const.Назва, "join_tab_5_field_1"));
+
                 
 
             /* SELECT */
@@ -3166,16 +3075,16 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     Store.AppendValues(new ПоверненняТоварівПостачальнику_Записи
                     {
                         ID = cur.UnigueID.ToString(),
-                        Назва = cur.Fields?[ПоверненняТоварівПостачальнику_Const.Назва]?.ToString() ?? "", // [ pos = 1, type = string ]
-                        НомерДок = cur.Fields?[ПоверненняТоварівПостачальнику_Const.НомерДок]?.ToString() ?? "", // [ pos = 2, type = string ]
-                        ДатаДок = cur.Fields?[ПоверненняТоварівПостачальнику_Const.ДатаДок]?.ToString() ?? "", // [ pos = 3, type = datetime ]
-                        Організація = cur.Fields?["join_4"]?.ToString() ?? "", // [ pos = 4, type = pointer ]
-                        Контрагент = cur.Fields?["join_5"]?.ToString() ?? "", // [ pos = 5, type = pointer ]
-                        Валюта = cur.Fields?["join_6"]?.ToString() ?? "", // [ pos = 6, type = pointer ]
-                        Каса = cur.Fields?["join_7"]?.ToString() ?? "", // [ pos = 7, type = pointer ]
-                        Склад = cur.Fields?["join_8"]?.ToString() ?? "", // [ pos = 8, type = pointer ]
-                        СумаДокументу = cur.Fields?[ПоверненняТоварівПостачальнику_Const.СумаДокументу]?.ToString() ?? "", // [ pos = 9, type = numeric ]
-                        Коментар = cur.Fields?[ПоверненняТоварівПостачальнику_Const.Коментар]?.ToString() ?? "" // [ pos = 10, type = string ]
+                        Організація = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
+                        Контрагент = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
+                        Валюта = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
+                        Каса = cur.Fields?["join_tab_4_field_1"]?.ToString() ?? "", /**/
+                        Склад = cur.Fields?["join_tab_5_field_1"]?.ToString() ?? "", /**/
+                        Назва = cur.Fields?[ПоверненняТоварівПостачальнику_Const.Назва]?.ToString() ?? "", /**/
+                        НомерДок = cur.Fields?[ПоверненняТоварівПостачальнику_Const.НомерДок]?.ToString() ?? "", /**/
+                        ДатаДок = cur.Fields?[ПоверненняТоварівПостачальнику_Const.ДатаДок]?.ToString() ?? "", /**/
+                        СумаДокументу = cur.Fields?[ПоверненняТоварівПостачальнику_Const.СумаДокументу]?.ToString() ?? "", /**/
+                        Коментар = cur.Fields?[ПоверненняТоварівПостачальнику_Const.Коментар]?.ToString() ?? "" /**/
                         
                     }.ToArray());
             }
@@ -3248,54 +3157,44 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             ПоверненняТоварівВідКлієнта_Select.QuerySelect.Field.AddRange(
                 new string[]
                 {
-                    Документи.ПоверненняТоварівВідКлієнта_Const.Назва // [ pos = 1, type = string ]
-                    , Документи.ПоверненняТоварівВідКлієнта_Const.НомерДок // [ pos = 2, type = string ]
-                    , Документи.ПоверненняТоварівВідКлієнта_Const.ДатаДок // [ pos = 3, type = datetime ]
-                    /* , Документи.ПоверненняТоварівВідКлієнта_Const.Організація */ // [ pos = 4, type = pointer ]
-                    /* , Документи.ПоверненняТоварівВідКлієнта_Const.Валюта */ // [ pos = 5, type = pointer ]
-                    /* , Документи.ПоверненняТоварівВідКлієнта_Const.Каса */ // [ pos = 6, type = pointer ]
-                    /* , Документи.ПоверненняТоварівВідКлієнта_Const.Контрагент */ // [ pos = 7, type = pointer ]
-                    /* , Документи.ПоверненняТоварівВідКлієнта_Const.Склад */ // [ pos = 8, type = pointer ]
-                    , Документи.ПоверненняТоварівВідКлієнта_Const.СумаДокументу // [ pos = 9, type = numeric ]
-                    , Документи.ПоверненняТоварівВідКлієнта_Const.Коментар // [ pos = 10, type = string ]
+                    Документи.ПоверненняТоварівВідКлієнта_Const.Назва /* 1 */
+                    , Документи.ПоверненняТоварівВідКлієнта_Const.НомерДок /* 2 */
+                    , Документи.ПоверненняТоварівВідКлієнта_Const.ДатаДок /* 3 */
+                    , Документи.ПоверненняТоварівВідКлієнта_Const.СумаДокументу /* 4 */
+                    , Документи.ПоверненняТоварівВідКлієнта_Const.Коментар /* 5 */
                     
                 });
 
-            
-                  /* JOIN 4 */
-                  ПоверненняТоварівВідКлієнта_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Організації_Const.TABLE + "." + Довідники.Організації_Const.Назва, "join_4"));
-                  ПоверненняТоварівВідКлієнта_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Організації_Const.TABLE, Документи.ПоверненняТоварівВідКлієнта_Const.Організація, ПоверненняТоварівВідКлієнта_Select.QuerySelect.Table));
-                
-                  /* JOIN 5 */
-                  ПоверненняТоварівВідКлієнта_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Валюти_Const.TABLE + "." + Довідники.Валюти_Const.Назва, "join_5"));
-                  ПоверненняТоварівВідКлієнта_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Валюти_Const.TABLE, Документи.ПоверненняТоварівВідКлієнта_Const.Валюта, ПоверненняТоварівВідКлієнта_Select.QuerySelect.Table));
-                
-                  /* JOIN 6 */
-                  ПоверненняТоварівВідКлієнта_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Каси_Const.TABLE + "." + Довідники.Каси_Const.Назва, "join_6"));
-                  ПоверненняТоварівВідКлієнта_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Каси_Const.TABLE, Документи.ПоверненняТоварівВідКлієнта_Const.Каса, ПоверненняТоварівВідКлієнта_Select.QuerySelect.Table));
-                
-                  /* JOIN 7 */
-                  ПоверненняТоварівВідКлієнта_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Контрагенти_Const.TABLE + "." + Довідники.Контрагенти_Const.Назва, "join_7"));
-                  ПоверненняТоварівВідКлієнта_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Контрагенти_Const.TABLE, Документи.ПоверненняТоварівВідКлієнта_Const.Контрагент, ПоверненняТоварівВідКлієнта_Select.QuerySelect.Table));
-                
-                  /* JOIN 8 */
-                  ПоверненняТоварівВідКлієнта_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Склади_Const.TABLE + "." + Довідники.Склади_Const.Назва, "join_8"));
-                  ПоверненняТоварівВідКлієнта_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Склади_Const.TABLE, Документи.ПоверненняТоварівВідКлієнта_Const.Склад, ПоверненняТоварівВідКлієнта_Select.QuerySelect.Table));
+            ПоверненняТоварівВідКлієнта_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Організації_Const.TABLE, Документи.ПоверненняТоварівВідКлієнта_Const.Організація, ПоверненняТоварівВідКлієнта_Select.QuerySelect.Table, "join_tab_1"));
+
+                ПоверненняТоварівВідКлієнта_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_1." + Довідники.Організації_Const.Назва, "join_tab_1_field_1"));
+
+                ПоверненняТоварівВідКлієнта_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Валюти_Const.TABLE, Документи.ПоверненняТоварівВідКлієнта_Const.Валюта, ПоверненняТоварівВідКлієнта_Select.QuerySelect.Table, "join_tab_2"));
+
+                ПоверненняТоварівВідКлієнта_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_2." + Довідники.Валюти_Const.Назва, "join_tab_2_field_1"));
+
+                ПоверненняТоварівВідКлієнта_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Каси_Const.TABLE, Документи.ПоверненняТоварівВідКлієнта_Const.Каса, ПоверненняТоварівВідКлієнта_Select.QuerySelect.Table, "join_tab_3"));
+
+                ПоверненняТоварівВідКлієнта_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_3." + Довідники.Каси_Const.Назва, "join_tab_3_field_1"));
+
+                ПоверненняТоварівВідКлієнта_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Контрагенти_Const.TABLE, Документи.ПоверненняТоварівВідКлієнта_Const.Контрагент, ПоверненняТоварівВідКлієнта_Select.QuerySelect.Table, "join_tab_4"));
+
+                ПоверненняТоварівВідКлієнта_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_4." + Довідники.Контрагенти_Const.Назва, "join_tab_4_field_1"));
+
+                ПоверненняТоварівВідКлієнта_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Склади_Const.TABLE, Документи.ПоверненняТоварівВідКлієнта_Const.Склад, ПоверненняТоварівВідКлієнта_Select.QuerySelect.Table, "join_tab_5"));
+
+                ПоверненняТоварівВідКлієнта_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_5." + Довідники.Склади_Const.Назва, "join_tab_5_field_1"));
+
                 
 
             /* SELECT */
@@ -3308,16 +3207,16 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     Store.AppendValues(new ПоверненняТоварівВідКлієнта_Записи
                     {
                         ID = cur.UnigueID.ToString(),
-                        Назва = cur.Fields?[ПоверненняТоварівВідКлієнта_Const.Назва]?.ToString() ?? "", // [ pos = 1, type = string ]
-                        НомерДок = cur.Fields?[ПоверненняТоварівВідКлієнта_Const.НомерДок]?.ToString() ?? "", // [ pos = 2, type = string ]
-                        ДатаДок = cur.Fields?[ПоверненняТоварівВідКлієнта_Const.ДатаДок]?.ToString() ?? "", // [ pos = 3, type = datetime ]
-                        Організація = cur.Fields?["join_4"]?.ToString() ?? "", // [ pos = 4, type = pointer ]
-                        Валюта = cur.Fields?["join_5"]?.ToString() ?? "", // [ pos = 5, type = pointer ]
-                        Каса = cur.Fields?["join_6"]?.ToString() ?? "", // [ pos = 6, type = pointer ]
-                        Контрагент = cur.Fields?["join_7"]?.ToString() ?? "", // [ pos = 7, type = pointer ]
-                        Склад = cur.Fields?["join_8"]?.ToString() ?? "", // [ pos = 8, type = pointer ]
-                        СумаДокументу = cur.Fields?[ПоверненняТоварівВідКлієнта_Const.СумаДокументу]?.ToString() ?? "", // [ pos = 9, type = numeric ]
-                        Коментар = cur.Fields?[ПоверненняТоварівВідКлієнта_Const.Коментар]?.ToString() ?? "" // [ pos = 10, type = string ]
+                        Організація = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
+                        Валюта = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
+                        Каса = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
+                        Контрагент = cur.Fields?["join_tab_4_field_1"]?.ToString() ?? "", /**/
+                        Склад = cur.Fields?["join_tab_5_field_1"]?.ToString() ?? "", /**/
+                        Назва = cur.Fields?[ПоверненняТоварівВідКлієнта_Const.Назва]?.ToString() ?? "", /**/
+                        НомерДок = cur.Fields?[ПоверненняТоварівВідКлієнта_Const.НомерДок]?.ToString() ?? "", /**/
+                        ДатаДок = cur.Fields?[ПоверненняТоварівВідКлієнта_Const.ДатаДок]?.ToString() ?? "", /**/
+                        СумаДокументу = cur.Fields?[ПоверненняТоварівВідКлієнта_Const.СумаДокументу]?.ToString() ?? "", /**/
+                        Коментар = cur.Fields?[ПоверненняТоварівВідКлієнта_Const.Коментар]?.ToString() ?? "" /**/
                         
                     }.ToArray());
             }
@@ -3387,46 +3286,38 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             АктВиконанихРобіт_Select.QuerySelect.Field.AddRange(
                 new string[]
                 {
-                    Документи.АктВиконанихРобіт_Const.Назва // [ pos = 1, type = string ]
-                    , Документи.АктВиконанихРобіт_Const.НомерДок // [ pos = 2, type = string ]
-                    , Документи.АктВиконанихРобіт_Const.ДатаДок // [ pos = 3, type = datetime ]
-                    /* , Документи.АктВиконанихРобіт_Const.Організація */ // [ pos = 4, type = pointer ]
-                    /* , Документи.АктВиконанихРобіт_Const.Валюта */ // [ pos = 5, type = pointer ]
-                    /* , Документи.АктВиконанихРобіт_Const.Каса */ // [ pos = 6, type = pointer ]
-                    /* , Документи.АктВиконанихРобіт_Const.Контрагент */ // [ pos = 7, type = pointer ]
-                    , Документи.АктВиконанихРобіт_Const.СумаДокументу // [ pos = 8, type = numeric ]
-                    , Документи.АктВиконанихРобіт_Const.Коментар // [ pos = 9, type = string ]
+                    Документи.АктВиконанихРобіт_Const.Назва /* 1 */
+                    , Документи.АктВиконанихРобіт_Const.НомерДок /* 2 */
+                    , Документи.АктВиконанихРобіт_Const.ДатаДок /* 3 */
+                    , Документи.АктВиконанихРобіт_Const.СумаДокументу /* 4 */
+                    , Документи.АктВиконанихРобіт_Const.Коментар /* 5 */
                     
                 });
 
-            
-                  /* JOIN 4 */
-                  АктВиконанихРобіт_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Організації_Const.TABLE + "." + Довідники.Організації_Const.Назва, "join_4"));
-                  АктВиконанихРобіт_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Організації_Const.TABLE, Документи.АктВиконанихРобіт_Const.Організація, АктВиконанихРобіт_Select.QuerySelect.Table));
-                
-                  /* JOIN 5 */
-                  АктВиконанихРобіт_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Валюти_Const.TABLE + "." + Довідники.Валюти_Const.Назва, "join_5"));
-                  АктВиконанихРобіт_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Валюти_Const.TABLE, Документи.АктВиконанихРобіт_Const.Валюта, АктВиконанихРобіт_Select.QuerySelect.Table));
-                
-                  /* JOIN 6 */
-                  АктВиконанихРобіт_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Каси_Const.TABLE + "." + Довідники.Каси_Const.Назва, "join_6"));
-                  АктВиконанихРобіт_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Каси_Const.TABLE, Документи.АктВиконанихРобіт_Const.Каса, АктВиконанихРобіт_Select.QuerySelect.Table));
-                
-                  /* JOIN 7 */
-                  АктВиконанихРобіт_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Контрагенти_Const.TABLE + "." + Довідники.Контрагенти_Const.Назва, "join_7"));
-                  АктВиконанихРобіт_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Контрагенти_Const.TABLE, Документи.АктВиконанихРобіт_Const.Контрагент, АктВиконанихРобіт_Select.QuerySelect.Table));
+            АктВиконанихРобіт_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Організації_Const.TABLE, Документи.АктВиконанихРобіт_Const.Організація, АктВиконанихРобіт_Select.QuerySelect.Table, "join_tab_1"));
+
+                АктВиконанихРобіт_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_1." + Довідники.Організації_Const.Назва, "join_tab_1_field_1"));
+
+                АктВиконанихРобіт_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Валюти_Const.TABLE, Документи.АктВиконанихРобіт_Const.Валюта, АктВиконанихРобіт_Select.QuerySelect.Table, "join_tab_2"));
+
+                АктВиконанихРобіт_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_2." + Довідники.Валюти_Const.Назва, "join_tab_2_field_1"));
+
+                АктВиконанихРобіт_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Каси_Const.TABLE, Документи.АктВиконанихРобіт_Const.Каса, АктВиконанихРобіт_Select.QuerySelect.Table, "join_tab_3"));
+
+                АктВиконанихРобіт_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_3." + Довідники.Каси_Const.Назва, "join_tab_3_field_1"));
+
+                АктВиконанихРобіт_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Контрагенти_Const.TABLE, Документи.АктВиконанихРобіт_Const.Контрагент, АктВиконанихРобіт_Select.QuerySelect.Table, "join_tab_4"));
+
+                АктВиконанихРобіт_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_4." + Довідники.Контрагенти_Const.Назва, "join_tab_4_field_1"));
+
                 
 
             /* SELECT */
@@ -3439,15 +3330,15 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     Store.AppendValues(new АктВиконанихРобіт_Записи
                     {
                         ID = cur.UnigueID.ToString(),
-                        Назва = cur.Fields?[АктВиконанихРобіт_Const.Назва]?.ToString() ?? "", // [ pos = 1, type = string ]
-                        НомерДок = cur.Fields?[АктВиконанихРобіт_Const.НомерДок]?.ToString() ?? "", // [ pos = 2, type = string ]
-                        ДатаДок = cur.Fields?[АктВиконанихРобіт_Const.ДатаДок]?.ToString() ?? "", // [ pos = 3, type = datetime ]
-                        Організація = cur.Fields?["join_4"]?.ToString() ?? "", // [ pos = 4, type = pointer ]
-                        Валюта = cur.Fields?["join_5"]?.ToString() ?? "", // [ pos = 5, type = pointer ]
-                        Каса = cur.Fields?["join_6"]?.ToString() ?? "", // [ pos = 6, type = pointer ]
-                        Контрагент = cur.Fields?["join_7"]?.ToString() ?? "", // [ pos = 7, type = pointer ]
-                        СумаДокументу = cur.Fields?[АктВиконанихРобіт_Const.СумаДокументу]?.ToString() ?? "", // [ pos = 8, type = numeric ]
-                        Коментар = cur.Fields?[АктВиконанихРобіт_Const.Коментар]?.ToString() ?? "" // [ pos = 9, type = string ]
+                        Організація = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
+                        Валюта = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
+                        Каса = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
+                        Контрагент = cur.Fields?["join_tab_4_field_1"]?.ToString() ?? "", /**/
+                        Назва = cur.Fields?[АктВиконанихРобіт_Const.Назва]?.ToString() ?? "", /**/
+                        НомерДок = cur.Fields?[АктВиконанихРобіт_Const.НомерДок]?.ToString() ?? "", /**/
+                        ДатаДок = cur.Fields?[АктВиконанихРобіт_Const.ДатаДок]?.ToString() ?? "", /**/
+                        СумаДокументу = cur.Fields?[АктВиконанихРобіт_Const.СумаДокументу]?.ToString() ?? "", /**/
+                        Коментар = cur.Fields?[АктВиконанихРобіт_Const.Коментар]?.ToString() ?? "" /**/
                         
                     }.ToArray());
             }
@@ -3514,45 +3405,37 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             ВведенняЗалишків_Select.QuerySelect.Field.AddRange(
                 new string[]
                 {
-                    Документи.ВведенняЗалишків_Const.Назва // [ pos = 1, type = string ]
-                    , Документи.ВведенняЗалишків_Const.НомерДок // [ pos = 2, type = string ]
-                    , Документи.ВведенняЗалишків_Const.ДатаДок // [ pos = 3, type = datetime ]
-                    /* , Документи.ВведенняЗалишків_Const.Організація */ // [ pos = 4, type = pointer ]
-                    /* , Документи.ВведенняЗалишків_Const.Склад */ // [ pos = 5, type = pointer ]
-                    /* , Документи.ВведенняЗалишків_Const.Контрагент */ // [ pos = 6, type = pointer ]
-                    /* , Документи.ВведенняЗалишків_Const.Валюта */ // [ pos = 7, type = pointer ]
-                    , Документи.ВведенняЗалишків_Const.Коментар // [ pos = 8, type = string ]
+                    Документи.ВведенняЗалишків_Const.Назва /* 1 */
+                    , Документи.ВведенняЗалишків_Const.НомерДок /* 2 */
+                    , Документи.ВведенняЗалишків_Const.ДатаДок /* 3 */
+                    , Документи.ВведенняЗалишків_Const.Коментар /* 4 */
                     
                 });
 
-            
-                  /* JOIN 4 */
-                  ВведенняЗалишків_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Організації_Const.TABLE + "." + Довідники.Організації_Const.Назва, "join_4"));
-                  ВведенняЗалишків_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Організації_Const.TABLE, Документи.ВведенняЗалишків_Const.Організація, ВведенняЗалишків_Select.QuerySelect.Table));
-                
-                  /* JOIN 5 */
-                  ВведенняЗалишків_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Склади_Const.TABLE + "." + Довідники.Склади_Const.Назва, "join_5"));
-                  ВведенняЗалишків_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Склади_Const.TABLE, Документи.ВведенняЗалишків_Const.Склад, ВведенняЗалишків_Select.QuerySelect.Table));
-                
-                  /* JOIN 6 */
-                  ВведенняЗалишків_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Контрагенти_Const.TABLE + "." + Довідники.Контрагенти_Const.Назва, "join_6"));
-                  ВведенняЗалишків_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Контрагенти_Const.TABLE, Документи.ВведенняЗалишків_Const.Контрагент, ВведенняЗалишків_Select.QuerySelect.Table));
-                
-                  /* JOIN 7 */
-                  ВведенняЗалишків_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Валюти_Const.TABLE + "." + Довідники.Валюти_Const.Назва, "join_7"));
-                  ВведенняЗалишків_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Валюти_Const.TABLE, Документи.ВведенняЗалишків_Const.Валюта, ВведенняЗалишків_Select.QuerySelect.Table));
+            ВведенняЗалишків_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Організації_Const.TABLE, Документи.ВведенняЗалишків_Const.Організація, ВведенняЗалишків_Select.QuerySelect.Table, "join_tab_1"));
+
+                ВведенняЗалишків_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_1." + Довідники.Організації_Const.Назва, "join_tab_1_field_1"));
+
+                ВведенняЗалишків_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Склади_Const.TABLE, Документи.ВведенняЗалишків_Const.Склад, ВведенняЗалишків_Select.QuerySelect.Table, "join_tab_2"));
+
+                ВведенняЗалишків_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_2." + Довідники.Склади_Const.Назва, "join_tab_2_field_1"));
+
+                ВведенняЗалишків_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Контрагенти_Const.TABLE, Документи.ВведенняЗалишків_Const.Контрагент, ВведенняЗалишків_Select.QuerySelect.Table, "join_tab_3"));
+
+                ВведенняЗалишків_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_3." + Довідники.Контрагенти_Const.Назва, "join_tab_3_field_1"));
+
+                ВведенняЗалишків_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Валюти_Const.TABLE, Документи.ВведенняЗалишків_Const.Валюта, ВведенняЗалишків_Select.QuerySelect.Table, "join_tab_4"));
+
+                ВведенняЗалишків_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_4." + Довідники.Валюти_Const.Назва, "join_tab_4_field_1"));
+
                 
 
             /* SELECT */
@@ -3565,14 +3448,14 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     Store.AppendValues(new ВведенняЗалишків_Записи
                     {
                         ID = cur.UnigueID.ToString(),
-                        Назва = cur.Fields?[ВведенняЗалишків_Const.Назва]?.ToString() ?? "", // [ pos = 1, type = string ]
-                        НомерДок = cur.Fields?[ВведенняЗалишків_Const.НомерДок]?.ToString() ?? "", // [ pos = 2, type = string ]
-                        ДатаДок = cur.Fields?[ВведенняЗалишків_Const.ДатаДок]?.ToString() ?? "", // [ pos = 3, type = datetime ]
-                        Організація = cur.Fields?["join_4"]?.ToString() ?? "", // [ pos = 4, type = pointer ]
-                        Склад = cur.Fields?["join_5"]?.ToString() ?? "", // [ pos = 5, type = pointer ]
-                        Контрагент = cur.Fields?["join_6"]?.ToString() ?? "", // [ pos = 6, type = pointer ]
-                        Валюта = cur.Fields?["join_7"]?.ToString() ?? "", // [ pos = 7, type = pointer ]
-                        Коментар = cur.Fields?[ВведенняЗалишків_Const.Коментар]?.ToString() ?? "" // [ pos = 8, type = string ]
+                        Організація = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
+                        Склад = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
+                        Контрагент = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
+                        Валюта = cur.Fields?["join_tab_4_field_1"]?.ToString() ?? "", /**/
+                        Назва = cur.Fields?[ВведенняЗалишків_Const.Назва]?.ToString() ?? "", /**/
+                        НомерДок = cur.Fields?[ВведенняЗалишків_Const.НомерДок]?.ToString() ?? "", /**/
+                        ДатаДок = cur.Fields?[ВведенняЗалишків_Const.ДатаДок]?.ToString() ?? "", /**/
+                        Коментар = cur.Fields?[ВведенняЗалишків_Const.Коментар]?.ToString() ?? "" /**/
                         
                     }.ToArray());
             }
@@ -3633,29 +3516,25 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             НадлишкиТоварів_Select.QuerySelect.Field.AddRange(
                 new string[]
                 {
-                    Документи.НадлишкиТоварів_Const.Назва // [ pos = 1, type = string ]
-                    , Документи.НадлишкиТоварів_Const.НомерДок // [ pos = 2, type = string ]
-                    , Документи.НадлишкиТоварів_Const.ДатаДок // [ pos = 3, type = datetime ]
-                    /* , Документи.НадлишкиТоварів_Const.Організація */ // [ pos = 4, type = pointer ]
-                    /* , Документи.НадлишкиТоварів_Const.Склад */ // [ pos = 5, type = pointer ]
-                    , Документи.НадлишкиТоварів_Const.Коментар // [ pos = 6, type = string ]
+                    Документи.НадлишкиТоварів_Const.Назва /* 1 */
+                    , Документи.НадлишкиТоварів_Const.НомерДок /* 2 */
+                    , Документи.НадлишкиТоварів_Const.ДатаДок /* 3 */
+                    , Документи.НадлишкиТоварів_Const.Коментар /* 4 */
                     
                 });
 
-            
-                  /* JOIN 4 */
-                  НадлишкиТоварів_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Організації_Const.TABLE + "." + Довідники.Організації_Const.Назва, "join_4"));
-                  НадлишкиТоварів_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Організації_Const.TABLE, Документи.НадлишкиТоварів_Const.Організація, НадлишкиТоварів_Select.QuerySelect.Table));
-                
-                  /* JOIN 5 */
-                  НадлишкиТоварів_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Склади_Const.TABLE + "." + Довідники.Склади_Const.Назва, "join_5"));
-                  НадлишкиТоварів_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Склади_Const.TABLE, Документи.НадлишкиТоварів_Const.Склад, НадлишкиТоварів_Select.QuerySelect.Table));
+            НадлишкиТоварів_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Організації_Const.TABLE, Документи.НадлишкиТоварів_Const.Організація, НадлишкиТоварів_Select.QuerySelect.Table, "join_tab_1"));
+
+                НадлишкиТоварів_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_1." + Довідники.Організації_Const.Назва, "join_tab_1_field_1"));
+
+                НадлишкиТоварів_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Склади_Const.TABLE, Документи.НадлишкиТоварів_Const.Склад, НадлишкиТоварів_Select.QuerySelect.Table, "join_tab_2"));
+
+                НадлишкиТоварів_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_2." + Довідники.Склади_Const.Назва, "join_tab_2_field_1"));
+
                 
 
             /* SELECT */
@@ -3668,12 +3547,12 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     Store.AppendValues(new НадлишкиТоварів_Записи
                     {
                         ID = cur.UnigueID.ToString(),
-                        Назва = cur.Fields?[НадлишкиТоварів_Const.Назва]?.ToString() ?? "", // [ pos = 1, type = string ]
-                        НомерДок = cur.Fields?[НадлишкиТоварів_Const.НомерДок]?.ToString() ?? "", // [ pos = 2, type = string ]
-                        ДатаДок = cur.Fields?[НадлишкиТоварів_Const.ДатаДок]?.ToString() ?? "", // [ pos = 3, type = datetime ]
-                        Організація = cur.Fields?["join_4"]?.ToString() ?? "", // [ pos = 4, type = pointer ]
-                        Склад = cur.Fields?["join_5"]?.ToString() ?? "", // [ pos = 5, type = pointer ]
-                        Коментар = cur.Fields?[НадлишкиТоварів_Const.Коментар]?.ToString() ?? "" // [ pos = 6, type = string ]
+                        Організація = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
+                        Склад = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
+                        Назва = cur.Fields?[НадлишкиТоварів_Const.Назва]?.ToString() ?? "", /**/
+                        НомерДок = cur.Fields?[НадлишкиТоварів_Const.НомерДок]?.ToString() ?? "", /**/
+                        ДатаДок = cur.Fields?[НадлишкиТоварів_Const.ДатаДок]?.ToString() ?? "", /**/
+                        Коментар = cur.Fields?[НадлишкиТоварів_Const.Коментар]?.ToString() ?? "" /**/
                         
                     }.ToArray());
             }
@@ -3734,29 +3613,25 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             ПересортицяТоварів_Select.QuerySelect.Field.AddRange(
                 new string[]
                 {
-                    Документи.ПересортицяТоварів_Const.Назва // [ pos = 1, type = string ]
-                    , Документи.ПересортицяТоварів_Const.НомерДок // [ pos = 2, type = string ]
-                    , Документи.ПересортицяТоварів_Const.ДатаДок // [ pos = 3, type = datetime ]
-                    /* , Документи.ПересортицяТоварів_Const.Організація */ // [ pos = 4, type = pointer ]
-                    /* , Документи.ПересортицяТоварів_Const.Склад */ // [ pos = 5, type = pointer ]
-                    , Документи.ПересортицяТоварів_Const.Коментар // [ pos = 6, type = string ]
+                    Документи.ПересортицяТоварів_Const.Назва /* 1 */
+                    , Документи.ПересортицяТоварів_Const.НомерДок /* 2 */
+                    , Документи.ПересортицяТоварів_Const.ДатаДок /* 3 */
+                    , Документи.ПересортицяТоварів_Const.Коментар /* 4 */
                     
                 });
 
-            
-                  /* JOIN 4 */
-                  ПересортицяТоварів_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Організації_Const.TABLE + "." + Довідники.Організації_Const.Назва, "join_4"));
-                  ПересортицяТоварів_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Організації_Const.TABLE, Документи.ПересортицяТоварів_Const.Організація, ПересортицяТоварів_Select.QuerySelect.Table));
-                
-                  /* JOIN 5 */
-                  ПересортицяТоварів_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Склади_Const.TABLE + "." + Довідники.Склади_Const.Назва, "join_5"));
-                  ПересортицяТоварів_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Склади_Const.TABLE, Документи.ПересортицяТоварів_Const.Склад, ПересортицяТоварів_Select.QuerySelect.Table));
+            ПересортицяТоварів_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Організації_Const.TABLE, Документи.ПересортицяТоварів_Const.Організація, ПересортицяТоварів_Select.QuerySelect.Table, "join_tab_1"));
+
+                ПересортицяТоварів_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_1." + Довідники.Організації_Const.Назва, "join_tab_1_field_1"));
+
+                ПересортицяТоварів_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Склади_Const.TABLE, Документи.ПересортицяТоварів_Const.Склад, ПересортицяТоварів_Select.QuerySelect.Table, "join_tab_2"));
+
+                ПересортицяТоварів_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_2." + Довідники.Склади_Const.Назва, "join_tab_2_field_1"));
+
                 
 
             /* SELECT */
@@ -3769,12 +3644,12 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     Store.AppendValues(new ПересортицяТоварів_Записи
                     {
                         ID = cur.UnigueID.ToString(),
-                        Назва = cur.Fields?[ПересортицяТоварів_Const.Назва]?.ToString() ?? "", // [ pos = 1, type = string ]
-                        НомерДок = cur.Fields?[ПересортицяТоварів_Const.НомерДок]?.ToString() ?? "", // [ pos = 2, type = string ]
-                        ДатаДок = cur.Fields?[ПересортицяТоварів_Const.ДатаДок]?.ToString() ?? "", // [ pos = 3, type = datetime ]
-                        Організація = cur.Fields?["join_4"]?.ToString() ?? "", // [ pos = 4, type = pointer ]
-                        Склад = cur.Fields?["join_5"]?.ToString() ?? "", // [ pos = 5, type = pointer ]
-                        Коментар = cur.Fields?[ПересортицяТоварів_Const.Коментар]?.ToString() ?? "" // [ pos = 6, type = string ]
+                        Організація = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
+                        Склад = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
+                        Назва = cur.Fields?[ПересортицяТоварів_Const.Назва]?.ToString() ?? "", /**/
+                        НомерДок = cur.Fields?[ПересортицяТоварів_Const.НомерДок]?.ToString() ?? "", /**/
+                        ДатаДок = cur.Fields?[ПересортицяТоварів_Const.ДатаДок]?.ToString() ?? "", /**/
+                        Коментар = cur.Fields?[ПересортицяТоварів_Const.Коментар]?.ToString() ?? "" /**/
                         
                     }.ToArray());
             }
@@ -3832,21 +3707,19 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             ПерерахунокТоварів_Select.QuerySelect.Field.AddRange(
                 new string[]
                 {
-                    Документи.ПерерахунокТоварів_Const.Назва // [ pos = 1, type = string ]
-                    , Документи.ПерерахунокТоварів_Const.НомерДок // [ pos = 2, type = string ]
-                    , Документи.ПерерахунокТоварів_Const.ДатаДок // [ pos = 3, type = datetime ]
-                    /* , Документи.ПерерахунокТоварів_Const.Склад */ // [ pos = 4, type = pointer ]
-                    , Документи.ПерерахунокТоварів_Const.Коментар // [ pos = 5, type = string ]
+                    Документи.ПерерахунокТоварів_Const.Назва /* 1 */
+                    , Документи.ПерерахунокТоварів_Const.НомерДок /* 2 */
+                    , Документи.ПерерахунокТоварів_Const.ДатаДок /* 3 */
+                    , Документи.ПерерахунокТоварів_Const.Коментар /* 4 */
                     
                 });
 
-            
-                  /* JOIN 4 */
-                  ПерерахунокТоварів_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Склади_Const.TABLE + "." + Довідники.Склади_Const.Назва, "join_4"));
-                  ПерерахунокТоварів_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Склади_Const.TABLE, Документи.ПерерахунокТоварів_Const.Склад, ПерерахунокТоварів_Select.QuerySelect.Table));
+            ПерерахунокТоварів_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Склади_Const.TABLE, Документи.ПерерахунокТоварів_Const.Склад, ПерерахунокТоварів_Select.QuerySelect.Table, "join_tab_1"));
+
+                ПерерахунокТоварів_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_1." + Довідники.Склади_Const.Назва, "join_tab_1_field_1"));
+
                 
 
             /* SELECT */
@@ -3859,11 +3732,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     Store.AppendValues(new ПерерахунокТоварів_Записи
                     {
                         ID = cur.UnigueID.ToString(),
-                        Назва = cur.Fields?[ПерерахунокТоварів_Const.Назва]?.ToString() ?? "", // [ pos = 1, type = string ]
-                        НомерДок = cur.Fields?[ПерерахунокТоварів_Const.НомерДок]?.ToString() ?? "", // [ pos = 2, type = string ]
-                        ДатаДок = cur.Fields?[ПерерахунокТоварів_Const.ДатаДок]?.ToString() ?? "", // [ pos = 3, type = datetime ]
-                        Склад = cur.Fields?["join_4"]?.ToString() ?? "", // [ pos = 4, type = pointer ]
-                        Коментар = cur.Fields?[ПерерахунокТоварів_Const.Коментар]?.ToString() ?? "" // [ pos = 5, type = string ]
+                        Склад = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
+                        Назва = cur.Fields?[ПерерахунокТоварів_Const.Назва]?.ToString() ?? "", /**/
+                        НомерДок = cur.Fields?[ПерерахунокТоварів_Const.НомерДок]?.ToString() ?? "", /**/
+                        ДатаДок = cur.Fields?[ПерерахунокТоварів_Const.ДатаДок]?.ToString() ?? "", /**/
+                        Коментар = cur.Fields?[ПерерахунокТоварів_Const.Коментар]?.ToString() ?? "" /**/
                         
                     }.ToArray());
             }
@@ -3927,30 +3800,26 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             ПсуванняТоварів_Select.QuerySelect.Field.AddRange(
                 new string[]
                 {
-                    Документи.ПсуванняТоварів_Const.Назва // [ pos = 1, type = string ]
-                    , Документи.ПсуванняТоварів_Const.НомерДок // [ pos = 2, type = string ]
-                    , Документи.ПсуванняТоварів_Const.ДатаДок // [ pos = 3, type = datetime ]
-                    /* , Документи.ПсуванняТоварів_Const.Організація */ // [ pos = 4, type = pointer ]
-                    /* , Документи.ПсуванняТоварів_Const.Склад */ // [ pos = 5, type = pointer ]
-                    , Документи.ПсуванняТоварів_Const.СумаДокументу // [ pos = 6, type = numeric ]
-                    , Документи.ПсуванняТоварів_Const.Коментар // [ pos = 7, type = string ]
+                    Документи.ПсуванняТоварів_Const.Назва /* 1 */
+                    , Документи.ПсуванняТоварів_Const.НомерДок /* 2 */
+                    , Документи.ПсуванняТоварів_Const.ДатаДок /* 3 */
+                    , Документи.ПсуванняТоварів_Const.СумаДокументу /* 4 */
+                    , Документи.ПсуванняТоварів_Const.Коментар /* 5 */
                     
                 });
 
-            
-                  /* JOIN 4 */
-                  ПсуванняТоварів_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Організації_Const.TABLE + "." + Довідники.Організації_Const.Назва, "join_4"));
-                  ПсуванняТоварів_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Організації_Const.TABLE, Документи.ПсуванняТоварів_Const.Організація, ПсуванняТоварів_Select.QuerySelect.Table));
-                
-                  /* JOIN 5 */
-                  ПсуванняТоварів_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Склади_Const.TABLE + "." + Довідники.Склади_Const.Назва, "join_5"));
-                  ПсуванняТоварів_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Склади_Const.TABLE, Документи.ПсуванняТоварів_Const.Склад, ПсуванняТоварів_Select.QuerySelect.Table));
+            ПсуванняТоварів_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Організації_Const.TABLE, Документи.ПсуванняТоварів_Const.Організація, ПсуванняТоварів_Select.QuerySelect.Table, "join_tab_1"));
+
+                ПсуванняТоварів_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_1." + Довідники.Організації_Const.Назва, "join_tab_1_field_1"));
+
+                ПсуванняТоварів_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Склади_Const.TABLE, Документи.ПсуванняТоварів_Const.Склад, ПсуванняТоварів_Select.QuerySelect.Table, "join_tab_2"));
+
+                ПсуванняТоварів_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_2." + Довідники.Склади_Const.Назва, "join_tab_2_field_1"));
+
                 
 
             /* SELECT */
@@ -3963,13 +3832,13 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     Store.AppendValues(new ПсуванняТоварів_Записи
                     {
                         ID = cur.UnigueID.ToString(),
-                        Назва = cur.Fields?[ПсуванняТоварів_Const.Назва]?.ToString() ?? "", // [ pos = 1, type = string ]
-                        НомерДок = cur.Fields?[ПсуванняТоварів_Const.НомерДок]?.ToString() ?? "", // [ pos = 2, type = string ]
-                        ДатаДок = cur.Fields?[ПсуванняТоварів_Const.ДатаДок]?.ToString() ?? "", // [ pos = 3, type = datetime ]
-                        Організація = cur.Fields?["join_4"]?.ToString() ?? "", // [ pos = 4, type = pointer ]
-                        Склад = cur.Fields?["join_5"]?.ToString() ?? "", // [ pos = 5, type = pointer ]
-                        СумаДокументу = cur.Fields?[ПсуванняТоварів_Const.СумаДокументу]?.ToString() ?? "", // [ pos = 6, type = numeric ]
-                        Коментар = cur.Fields?[ПсуванняТоварів_Const.Коментар]?.ToString() ?? "" // [ pos = 7, type = string ]
+                        Організація = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
+                        Склад = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
+                        Назва = cur.Fields?[ПсуванняТоварів_Const.Назва]?.ToString() ?? "", /**/
+                        НомерДок = cur.Fields?[ПсуванняТоварів_Const.НомерДок]?.ToString() ?? "", /**/
+                        ДатаДок = cur.Fields?[ПсуванняТоварів_Const.ДатаДок]?.ToString() ?? "", /**/
+                        СумаДокументу = cur.Fields?[ПсуванняТоварів_Const.СумаДокументу]?.ToString() ?? "", /**/
+                        Коментар = cur.Fields?[ПсуванняТоварів_Const.Коментар]?.ToString() ?? "" /**/
                         
                     }.ToArray());
             }
@@ -4036,38 +3905,32 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             ВнутрішнєСпоживанняТоварів_Select.QuerySelect.Field.AddRange(
                 new string[]
                 {
-                    Документи.ВнутрішнєСпоживанняТоварів_Const.Назва // [ pos = 1, type = string ]
-                    , Документи.ВнутрішнєСпоживанняТоварів_Const.НомерДок // [ pos = 2, type = string ]
-                    , Документи.ВнутрішнєСпоживанняТоварів_Const.ДатаДок // [ pos = 3, type = datetime ]
-                    /* , Документи.ВнутрішнєСпоживанняТоварів_Const.Організація */ // [ pos = 4, type = pointer ]
-                    /* , Документи.ВнутрішнєСпоживанняТоварів_Const.Склад */ // [ pos = 5, type = pointer ]
-                    /* , Документи.ВнутрішнєСпоживанняТоварів_Const.Валюта */ // [ pos = 6, type = pointer ]
-                    , Документи.ВнутрішнєСпоживанняТоварів_Const.СумаДокументу // [ pos = 7, type = numeric ]
-                    , Документи.ВнутрішнєСпоживанняТоварів_Const.Коментар // [ pos = 8, type = string ]
+                    Документи.ВнутрішнєСпоживанняТоварів_Const.Назва /* 1 */
+                    , Документи.ВнутрішнєСпоживанняТоварів_Const.НомерДок /* 2 */
+                    , Документи.ВнутрішнєСпоживанняТоварів_Const.ДатаДок /* 3 */
+                    , Документи.ВнутрішнєСпоживанняТоварів_Const.СумаДокументу /* 4 */
+                    , Документи.ВнутрішнєСпоживанняТоварів_Const.Коментар /* 5 */
                     
                 });
 
-            
-                  /* JOIN 4 */
-                  ВнутрішнєСпоживанняТоварів_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Організації_Const.TABLE + "." + Довідники.Організації_Const.Назва, "join_4"));
-                  ВнутрішнєСпоживанняТоварів_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Організації_Const.TABLE, Документи.ВнутрішнєСпоживанняТоварів_Const.Організація, ВнутрішнєСпоживанняТоварів_Select.QuerySelect.Table));
-                
-                  /* JOIN 5 */
-                  ВнутрішнєСпоживанняТоварів_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Склади_Const.TABLE + "." + Довідники.Склади_Const.Назва, "join_5"));
-                  ВнутрішнєСпоживанняТоварів_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Склади_Const.TABLE, Документи.ВнутрішнєСпоживанняТоварів_Const.Склад, ВнутрішнєСпоживанняТоварів_Select.QuerySelect.Table));
-                
-                  /* JOIN 6 */
-                  ВнутрішнєСпоживанняТоварів_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Валюти_Const.TABLE + "." + Довідники.Валюти_Const.Назва, "join_6"));
-                  ВнутрішнєСпоживанняТоварів_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Валюти_Const.TABLE, Документи.ВнутрішнєСпоживанняТоварів_Const.Валюта, ВнутрішнєСпоживанняТоварів_Select.QuerySelect.Table));
+            ВнутрішнєСпоживанняТоварів_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Організації_Const.TABLE, Документи.ВнутрішнєСпоживанняТоварів_Const.Організація, ВнутрішнєСпоживанняТоварів_Select.QuerySelect.Table, "join_tab_1"));
+
+                ВнутрішнєСпоживанняТоварів_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_1." + Довідники.Організації_Const.Назва, "join_tab_1_field_1"));
+
+                ВнутрішнєСпоживанняТоварів_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Склади_Const.TABLE, Документи.ВнутрішнєСпоживанняТоварів_Const.Склад, ВнутрішнєСпоживанняТоварів_Select.QuerySelect.Table, "join_tab_2"));
+
+                ВнутрішнєСпоживанняТоварів_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_2." + Довідники.Склади_Const.Назва, "join_tab_2_field_1"));
+
+                ВнутрішнєСпоживанняТоварів_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Валюти_Const.TABLE, Документи.ВнутрішнєСпоживанняТоварів_Const.Валюта, ВнутрішнєСпоживанняТоварів_Select.QuerySelect.Table, "join_tab_3"));
+
+                ВнутрішнєСпоживанняТоварів_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_3." + Довідники.Валюти_Const.Назва, "join_tab_3_field_1"));
+
                 
 
             /* SELECT */
@@ -4080,14 +3943,14 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     Store.AppendValues(new ВнутрішнєСпоживанняТоварів_Записи
                     {
                         ID = cur.UnigueID.ToString(),
-                        Назва = cur.Fields?[ВнутрішнєСпоживанняТоварів_Const.Назва]?.ToString() ?? "", // [ pos = 1, type = string ]
-                        НомерДок = cur.Fields?[ВнутрішнєСпоживанняТоварів_Const.НомерДок]?.ToString() ?? "", // [ pos = 2, type = string ]
-                        ДатаДок = cur.Fields?[ВнутрішнєСпоживанняТоварів_Const.ДатаДок]?.ToString() ?? "", // [ pos = 3, type = datetime ]
-                        Організація = cur.Fields?["join_4"]?.ToString() ?? "", // [ pos = 4, type = pointer ]
-                        Склад = cur.Fields?["join_5"]?.ToString() ?? "", // [ pos = 5, type = pointer ]
-                        Валюта = cur.Fields?["join_6"]?.ToString() ?? "", // [ pos = 6, type = pointer ]
-                        СумаДокументу = cur.Fields?[ВнутрішнєСпоживанняТоварів_Const.СумаДокументу]?.ToString() ?? "", // [ pos = 7, type = numeric ]
-                        Коментар = cur.Fields?[ВнутрішнєСпоживанняТоварів_Const.Коментар]?.ToString() ?? "" // [ pos = 8, type = string ]
+                        Організація = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
+                        Склад = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
+                        Валюта = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
+                        Назва = cur.Fields?[ВнутрішнєСпоживанняТоварів_Const.Назва]?.ToString() ?? "", /**/
+                        НомерДок = cur.Fields?[ВнутрішнєСпоживанняТоварів_Const.НомерДок]?.ToString() ?? "", /**/
+                        ДатаДок = cur.Fields?[ВнутрішнєСпоживанняТоварів_Const.ДатаДок]?.ToString() ?? "", /**/
+                        СумаДокументу = cur.Fields?[ВнутрішнєСпоживанняТоварів_Const.СумаДокументу]?.ToString() ?? "", /**/
+                        Коментар = cur.Fields?[ВнутрішнєСпоживанняТоварів_Const.Коментар]?.ToString() ?? "" /**/
                         
                     }.ToArray());
             }
@@ -4160,54 +4023,44 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             РахунокФактура_Select.QuerySelect.Field.AddRange(
                 new string[]
                 {
-                    Документи.РахунокФактура_Const.Назва // [ pos = 1, type = string ]
-                    , Документи.РахунокФактура_Const.НомерДок // [ pos = 2, type = string ]
-                    , Документи.РахунокФактура_Const.ДатаДок // [ pos = 3, type = datetime ]
-                    /* , Документи.РахунокФактура_Const.Організація */ // [ pos = 4, type = pointer ]
-                    /* , Документи.РахунокФактура_Const.Контрагент */ // [ pos = 5, type = pointer ]
-                    /* , Документи.РахунокФактура_Const.Валюта */ // [ pos = 6, type = pointer ]
-                    /* , Документи.РахунокФактура_Const.Каса */ // [ pos = 7, type = pointer ]
-                    /* , Документи.РахунокФактура_Const.Склад */ // [ pos = 8, type = pointer ]
-                    , Документи.РахунокФактура_Const.СумаДокументу // [ pos = 9, type = numeric ]
-                    , Документи.РахунокФактура_Const.Коментар // [ pos = 10, type = string ]
+                    Документи.РахунокФактура_Const.Назва /* 1 */
+                    , Документи.РахунокФактура_Const.НомерДок /* 2 */
+                    , Документи.РахунокФактура_Const.ДатаДок /* 3 */
+                    , Документи.РахунокФактура_Const.СумаДокументу /* 4 */
+                    , Документи.РахунокФактура_Const.Коментар /* 5 */
                     
                 });
 
-            
-                  /* JOIN 4 */
-                  РахунокФактура_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Організації_Const.TABLE + "." + Довідники.Організації_Const.Назва, "join_4"));
-                  РахунокФактура_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Організації_Const.TABLE, Документи.РахунокФактура_Const.Організація, РахунокФактура_Select.QuerySelect.Table));
-                
-                  /* JOIN 5 */
-                  РахунокФактура_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Контрагенти_Const.TABLE + "." + Довідники.Контрагенти_Const.Назва, "join_5"));
-                  РахунокФактура_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Контрагенти_Const.TABLE, Документи.РахунокФактура_Const.Контрагент, РахунокФактура_Select.QuerySelect.Table));
-                
-                  /* JOIN 6 */
-                  РахунокФактура_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Валюти_Const.TABLE + "." + Довідники.Валюти_Const.Назва, "join_6"));
-                  РахунокФактура_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Валюти_Const.TABLE, Документи.РахунокФактура_Const.Валюта, РахунокФактура_Select.QuerySelect.Table));
-                
-                  /* JOIN 7 */
-                  РахунокФактура_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Каси_Const.TABLE + "." + Довідники.Каси_Const.Назва, "join_7"));
-                  РахунокФактура_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Каси_Const.TABLE, Документи.РахунокФактура_Const.Каса, РахунокФактура_Select.QuerySelect.Table));
-                
-                  /* JOIN 8 */
-                  РахунокФактура_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>(
-                      Довідники.Склади_Const.TABLE + "." + Довідники.Склади_Const.Назва, "join_8"));
-                  РахунокФактура_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Склади_Const.TABLE, Документи.РахунокФактура_Const.Склад, РахунокФактура_Select.QuerySelect.Table));
+            РахунокФактура_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Організації_Const.TABLE, Документи.РахунокФактура_Const.Організація, РахунокФактура_Select.QuerySelect.Table, "join_tab_1"));
+
+                РахунокФактура_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_1." + Довідники.Організації_Const.Назва, "join_tab_1_field_1"));
+
+                РахунокФактура_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Контрагенти_Const.TABLE, Документи.РахунокФактура_Const.Контрагент, РахунокФактура_Select.QuerySelect.Table, "join_tab_2"));
+
+                РахунокФактура_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_2." + Довідники.Контрагенти_Const.Назва, "join_tab_2_field_1"));
+
+                РахунокФактура_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Валюти_Const.TABLE, Документи.РахунокФактура_Const.Валюта, РахунокФактура_Select.QuerySelect.Table, "join_tab_3"));
+
+                РахунокФактура_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_3." + Довідники.Валюти_Const.Назва, "join_tab_3_field_1"));
+
+                РахунокФактура_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Каси_Const.TABLE, Документи.РахунокФактура_Const.Каса, РахунокФактура_Select.QuerySelect.Table, "join_tab_4"));
+
+                РахунокФактура_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_4." + Довідники.Каси_Const.Назва, "join_tab_4_field_1"));
+
+                РахунокФактура_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Склади_Const.TABLE, Документи.РахунокФактура_Const.Склад, РахунокФактура_Select.QuerySelect.Table, "join_tab_5"));
+
+                РахунокФактура_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_5." + Довідники.Склади_Const.Назва, "join_tab_5_field_1"));
+
                 
 
             /* SELECT */
@@ -4220,16 +4073,16 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     Store.AppendValues(new РахунокФактура_Записи
                     {
                         ID = cur.UnigueID.ToString(),
-                        Назва = cur.Fields?[РахунокФактура_Const.Назва]?.ToString() ?? "", // [ pos = 1, type = string ]
-                        НомерДок = cur.Fields?[РахунокФактура_Const.НомерДок]?.ToString() ?? "", // [ pos = 2, type = string ]
-                        ДатаДок = cur.Fields?[РахунокФактура_Const.ДатаДок]?.ToString() ?? "", // [ pos = 3, type = datetime ]
-                        Організація = cur.Fields?["join_4"]?.ToString() ?? "", // [ pos = 4, type = pointer ]
-                        Контрагент = cur.Fields?["join_5"]?.ToString() ?? "", // [ pos = 5, type = pointer ]
-                        Валюта = cur.Fields?["join_6"]?.ToString() ?? "", // [ pos = 6, type = pointer ]
-                        Каса = cur.Fields?["join_7"]?.ToString() ?? "", // [ pos = 7, type = pointer ]
-                        Склад = cur.Fields?["join_8"]?.ToString() ?? "", // [ pos = 8, type = pointer ]
-                        СумаДокументу = cur.Fields?[РахунокФактура_Const.СумаДокументу]?.ToString() ?? "", // [ pos = 9, type = numeric ]
-                        Коментар = cur.Fields?[РахунокФактура_Const.Коментар]?.ToString() ?? "" // [ pos = 10, type = string ]
+                        Організація = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
+                        Контрагент = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
+                        Валюта = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
+                        Каса = cur.Fields?["join_tab_4_field_1"]?.ToString() ?? "", /**/
+                        Склад = cur.Fields?["join_tab_5_field_1"]?.ToString() ?? "", /**/
+                        Назва = cur.Fields?[РахунокФактура_Const.Назва]?.ToString() ?? "", /**/
+                        НомерДок = cur.Fields?[РахунокФактура_Const.НомерДок]?.ToString() ?? "", /**/
+                        ДатаДок = cur.Fields?[РахунокФактура_Const.ДатаДок]?.ToString() ?? "", /**/
+                        СумаДокументу = cur.Fields?[РахунокФактура_Const.СумаДокументу]?.ToString() ?? "", /**/
+                        Коментар = cur.Fields?[РахунокФактура_Const.Коментар]?.ToString() ?? "" /**/
                         
                     }.ToArray());
             }
