@@ -44,7 +44,7 @@ namespace StorageAndTrade
             AddLink(vRight, "Введення залишків", ВведенняЗалишків);
             AddLink(vRight, "Внутрішнє споживання товарів", ВнутрішнєСпоживанняТоварів);
             AddLink(vRight, "Рахунок фактура", РахунокФактура);
-            // AddLink(vRight, "Введення залишків", ВведенняЗалишків);
+            AddLink(vRight, "Введення залишків", ВведенняЗалишків);
 
             hBoxList.PackStart(vRight, false, false, 5);
 
