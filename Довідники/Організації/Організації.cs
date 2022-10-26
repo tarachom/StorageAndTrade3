@@ -41,7 +41,7 @@ namespace StorageAndTrade
             toolbar.Add(refreshButton);
 
             ToolButton deleteButton = new ToolButton(Stock.Delete) { Label = "Видалити", IsImportant = true };
-            //deleteButton.Clicked += OnDeleteClick;
+            deleteButton.Clicked += OnDeleteClick;
             toolbar.Add(deleteButton);
 
             ToolButton copyButton = new ToolButton(Stock.Copy) { Label = "Копіювати", IsImportant = true };
@@ -115,7 +115,8 @@ namespace StorageAndTrade
                         return page;
                     });
                 }
-
+                else
+                    Message.Error(GeneralForm, "Не вдалось прочитати!");
             }
         }
 
@@ -123,35 +124,22 @@ namespace StorageAndTrade
         {
             if (TreeViewGrid.Selection.CountSelectedRows() != 0)
             {
-                MessageDialog md = new MessageDialog(null, DialogFlags.DestroyWithParent, MessageType.Question, ButtonsType.YesNo, "Видалити вибрані рядки?");
-                ResponseType response = (ResponseType)md.Run();
-                md.Destroy();
-
-                if (response == ResponseType.Yes)
+                if (Message.Request(GeneralForm, "Видалити?") == ResponseType.Yes)
                 {
-                    TreePath[] selectionRows = ViewGrid.Selection.GetSelectedRows();
+                    TreePath[] selectionRows = TreeViewGrid.Selection.GetSelectedRows();
 
                     foreach (TreePath itemPath in selectionRows)
                     {
                         TreeIter iter;
-                        ViewGrid.Model.GetIter(out iter, itemPath);
+                        TreeViewGrid.Model.GetIter(out iter, itemPath);
 
-                        string uid = (string)ViewGrid.Model.GetValue(iter, 1);
+                        string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
 
-                        Довідники.Валюти_Objest валюти_Objest = new Довідники.Валюти_Objest();
-                        if (валюти_Objest.Read(new UnigueID(uid)))
-                        {
-                            валюти_Objest.Delete();
-                        }
+                        Організації_Objest Організації_Objest = new Організації_Objest();
+                        if (Організації_Objest.Read(new UnigueID(uid)))
+                            Організації_Objest.Delete();
                         else
-                        {
-                            MessageDialog mdError = new MessageDialog(null, DialogFlags.DestroyWithParent, MessageType.Warning, ButtonsType.Close,
-                                "Не вдалось прочитати!");
-
-                            mdError.Run();
-                            mdError.Destroy();
-                            break;
-                        }
+                            Message.Error(GeneralForm, "Не вдалось прочитати!");
                     }
 
                     LoadRecords();
