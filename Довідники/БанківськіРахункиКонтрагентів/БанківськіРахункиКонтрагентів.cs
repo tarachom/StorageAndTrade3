@@ -1,5 +1,10 @@
 using Gtk;
 
+using AccountingSoftware;
+
+using StorageAndTrade_1_0.Константи;
+using StorageAndTrade_1_0.Довідники;
+
 using ТабличніСписки = StorageAndTrade_1_0.Довідники.ТабличніСписки;
 
 namespace StorageAndTrade
@@ -25,32 +30,14 @@ namespace StorageAndTrade
 
             PackStart(hBoxBotton, false, false, 10);
 
-            //Список
-            Toolbar toolbar = new Toolbar();
-            PackStart(toolbar, false, false, 0);
-
-            ToolButton upButton = new ToolButton(Stock.Add) { Label = "Додати", IsImportant = true };
-            //upButton.Clicked += OnAddClick;
-            toolbar.Add(upButton);
-
-            ToolButton refreshButton = new ToolButton(Stock.Refresh) { Label = "Обновити", IsImportant = true };
-            refreshButton.Clicked += OnRefreshClick;
-            toolbar.Add(refreshButton);
-
-            ToolButton deleteButton = new ToolButton(Stock.Delete) { Label = "Видалити", IsImportant = true };
-            //deleteButton.Clicked += OnDeleteClick;
-            toolbar.Add(deleteButton);
-
-            ToolButton copyButton = new ToolButton(Stock.Copy) { Label = "Копіювати", IsImportant = true };
-            //copyButton.Clicked += OnCopyClick;
-            toolbar.Add(copyButton);
+            CreateToolbar();
 
             ScrolledWindow scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In };
             scrollTree.SetPolicy(PolicyType.Never, PolicyType.Automatic);
 
             TreeViewGrid = new TreeView(ТабличніСписки.БанківськіРахункиКонтрагентів_Записи.Store);
             TreeViewGrid.Selection.Mode = SelectionMode.Multiple;
-            //ViewGrid.RowActivated += OnRowActivated;
+            TreeViewGrid.RowActivated += OnRowActivated;
             ТабличніСписки.БанківськіРахункиКонтрагентів_Записи.AddColumns(TreeViewGrid);
 
             scrollTree.Add(TreeViewGrid);
@@ -60,14 +47,144 @@ namespace StorageAndTrade
             ShowAll();
         }
 
+        void CreateToolbar()
+        {
+            Toolbar toolbar = new Toolbar();
+            PackStart(toolbar, false, false, 0);
+
+            ToolButton upButton = new ToolButton(Stock.Add) { Label = "Додати", IsImportant = true };
+            upButton.Clicked += OnAddClick;
+            toolbar.Add(upButton);
+
+            ToolButton refreshButton = new ToolButton(Stock.Refresh) { Label = "Обновити", IsImportant = true };
+            refreshButton.Clicked += OnRefreshClick;
+            toolbar.Add(refreshButton);
+
+            ToolButton deleteButton = new ToolButton(Stock.Delete) { Label = "Видалити", IsImportant = true };
+            deleteButton.Clicked += OnDeleteClick;
+            toolbar.Add(deleteButton);
+
+            ToolButton copyButton = new ToolButton(Stock.Copy) { Label = "Копіювати", IsImportant = true };
+            copyButton.Clicked += OnCopyClick;
+            toolbar.Add(copyButton);
+        }
+
         public void LoadRecords()
         {
             ТабличніСписки.БанківськіРахункиКонтрагентів_Записи.LoadRecords();
+        }
+
+        void OnRowActivated(object sender, RowActivatedArgs args)
+        {
+            TreeIter iter;
+
+            if (TreeViewGrid.Model.GetIter(out iter, args.Path))
+            {
+                string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
+
+                БанківськіРахункиКонтрагентів_Objest БанківськіРахункиКонтрагентів_Objest = new БанківськіРахункиКонтрагентів_Objest();
+                if (БанківськіРахункиКонтрагентів_Objest.Read(new UnigueID(uid)))
+                {
+                    GeneralForm?.CreateNotebookPage($"Банківський рахунок контрагента: {БанківськіРахункиКонтрагентів_Objest.Назва}", () =>
+                    {
+                        БанківськіРахункиКонтрагентів_Елемент page = new БанківськіРахункиКонтрагентів_Елемент
+                        {
+                            GeneralForm = GeneralForm,
+                            CallBack_RefreshList = LoadRecords,
+                            IsNew = false,
+                            БанківськіРахункиКонтрагентів_Objest = БанківськіРахункиКонтрагентів_Objest
+                        };
+
+                        page.SetValue();
+
+                        return page;
+                    });
+                }
+                else
+                    Message.Error(GeneralForm, "Не вдалось прочитати!");
+            }
+        }
+
+        void OnAddClick(object? sender, EventArgs args)
+        {
+            GeneralForm?.CreateNotebookPage($"Банківський рахунок контрагента: *", () =>
+            {
+                БанківськіРахункиКонтрагентів_Елемент page = new БанківськіРахункиКонтрагентів_Елемент
+                {
+                    GeneralForm = GeneralForm,
+                    CallBack_RefreshList = LoadRecords,
+                    IsNew = true
+                };
+
+                page.SetValue();
+
+                return page;
+            });
         }
 
         void OnRefreshClick(object? sender, EventArgs args)
         {
             LoadRecords();
         }
+
+        void OnDeleteClick(object? sender, EventArgs args)
+        {
+            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
+            {
+                if (Message.Request(GeneralForm, "Видалити?") == ResponseType.Yes)
+                {
+                    TreePath[] selectionRows = TreeViewGrid.Selection.GetSelectedRows();
+
+                    foreach (TreePath itemPath in selectionRows)
+                    {
+                        TreeIter iter;
+                        TreeViewGrid.Model.GetIter(out iter, itemPath);
+
+                        string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
+
+                        БанківськіРахункиКонтрагентів_Objest БанківськіРахункиКонтрагентів_Objest = new БанківськіРахункиКонтрагентів_Objest();
+                        if (БанківськіРахункиКонтрагентів_Objest.Read(new UnigueID(uid)))
+                            БанківськіРахункиКонтрагентів_Objest.Delete();
+                        else
+                            Message.Error(GeneralForm, "Не вдалось прочитати!");
+                    }
+
+                    LoadRecords();
+                }
+            }
+        }
+
+        void OnCopyClick(object? sender, EventArgs args)
+        {
+            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
+            {
+                if (Message.Request(GeneralForm, "Копіювати?") == ResponseType.Yes)
+                {
+                    TreePath[] selectionRows = TreeViewGrid.Selection.GetSelectedRows();
+
+                    foreach (TreePath itemPath in selectionRows)
+                    {
+                        TreeIter iter;
+                        TreeViewGrid.Model.GetIter(out iter, itemPath);
+
+                        string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
+
+                        БанківськіРахункиКонтрагентів_Objest БанківськіРахункиКонтрагентів_Objest = new БанківськіРахункиКонтрагентів_Objest();
+                        if (БанківськіРахункиКонтрагентів_Objest.Read(new UnigueID(uid)))
+                        {
+                            БанківськіРахункиКонтрагентів_Objest БанківськіРахункиКонтрагентів_Objest_Новий = БанківськіРахункиКонтрагентів_Objest.Copy();
+                            БанківськіРахункиКонтрагентів_Objest_Новий.Назва += " - Копія";
+                            БанківськіРахункиКонтрагентів_Objest_Новий.Код = (++НумераціяДовідників.БанківськіРахункиКонтрагентів_Const).ToString("D6");
+                            БанківськіРахункиКонтрагентів_Objest_Новий.Save();
+                        }
+                        else
+                            Message.Error(GeneralForm, "Не вдалось прочитати!");
+                    }
+
+                    LoadRecords();
+                }
+            }
+        }
+
     }
 }
