@@ -17,6 +17,9 @@ namespace StorageAndTrade
         Entry Назва = new Entry() { WidthRequest = 500 };
         Entry НазваСкорочена = new Entry() { WidthRequest = 500 };
         Entry ДатаРеєстрації = new Entry() { WidthRequest = 500 };
+        Entry КраїнаРеєстрації = new Entry() { WidthRequest = 500 };
+        Entry СвідоцтвоСеріяНомер = new Entry() { WidthRequest = 500 };
+        Entry СвідоцтвоДатаВидачі = new Entry() { WidthRequest = 500 };
         TextView НазваПовна = new TextView();
 
         public Організації_Елемент() : base()
@@ -78,6 +81,27 @@ namespace StorageAndTrade
             hBoxDateRegister.PackStart(new Label("Дата реєстрації:"), false, false, 5);
             hBoxDateRegister.PackStart(ДатаРеєстрації, false, false, 5);
 
+            //ДатаРеєстрації
+            HBox hBoxCountryRegister = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxCountryRegister, false, false, 5);
+
+            hBoxCountryRegister.PackStart(new Label("Країна реєстрації:"), false, false, 5);
+            hBoxCountryRegister.PackStart(КраїнаРеєстрації, false, false, 5);
+
+            //СвідоцтвоСеріяНомер
+            HBox hBoxSvidotstvo = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxSvidotstvo, false, false, 5);
+
+            hBoxSvidotstvo.PackStart(new Label("Свідоцтво серія номер:"), false, false, 5);
+            hBoxSvidotstvo.PackStart(СвідоцтвоСеріяНомер, false, false, 5);
+
+            //СвідоцтвоДатаВидачі
+            HBox hBoxSvidotstvoData = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxSvidotstvoData, false, false, 5);
+
+            hBoxSvidotstvoData.PackStart(new Label("Свідоцтво дата видачі:"), false, false, 5);
+            hBoxSvidotstvoData.PackStart(СвідоцтвоДатаВидачі, false, false, 5);
+
             //НазваПовна
             HBox hBoxDesc = new HBox() { Halign = Align.End };
             vBox.PackStart(hBoxDesc, false, false, 5);
@@ -113,6 +137,9 @@ namespace StorageAndTrade
             Назва.Text = Організації_Objest.Назва;
             НазваСкорочена.Text = Організації_Objest.НазваСкорочена;
             ДатаРеєстрації.Text = Організації_Objest.ДатаРеєстрації.ToString();
+            КраїнаРеєстрації.Text = Організації_Objest.КраїнаРеєстрації;
+            СвідоцтвоСеріяНомер.Text = Організації_Objest.СвідоцтвоСеріяНомер;
+            СвідоцтвоДатаВидачі.Text = Організації_Objest.СвідоцтвоДатаВидачі;
             НазваПовна.Buffer.Text = Організації_Objest.НазваПовна;
         }
 
@@ -122,6 +149,9 @@ namespace StorageAndTrade
             Організації_Objest.Назва = Назва.Text;
             Організації_Objest.НазваСкорочена = НазваСкорочена.Text;
             Організації_Objest.ДатаРеєстрації = DateTime.Parse(ДатаРеєстрації.Text);
+            Організації_Objest.КраїнаРеєстрації = КраїнаРеєстрації.Text;
+            Організації_Objest.СвідоцтвоСеріяНомер = СвідоцтвоСеріяНомер.Text;
+            Організації_Objest.СвідоцтвоДатаВидачі = СвідоцтвоДатаВидачі.Text;
             Організації_Objest.НазваПовна = НазваПовна.Buffer.Text;
         }
 
