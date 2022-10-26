@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 25.10.2022 23:36:10
+ * Дата конфігурації: 26.10.2022 11:08:14
  *
  */
 
@@ -52,7 +52,6 @@ namespace StorageAndTrade_1_0
             Константи.ПартіїТоварів.ReadAll();
             Константи.ЗавантаженняДанихІзСайтів.ReadAll();
             Константи.ПриЗапускуПрограми.ReadAll();
-            Константи.erter.ReadAll();
             
         }
     }
@@ -3679,109 +3678,6 @@ namespace StorageAndTrade_1_0.Константи
             }
         }
              
-    }
-    #endregion
-    
-	#region CONSTANTS BLOCK "erter"
-    public static class erter
-    {
-        public static void ReadAll()
-        {
-            
-            Dictionary<string, object> fieldValue = new Dictionary<string, object>();
-            bool IsSelect = Config.Kernel!.DataBase.SelectAllConstants("tab_constants",
-                 new string[] { "col_h9" }, fieldValue);
-            
-            if (IsSelect)
-            {
-                m_erter_Const = fieldValue["col_h9"]?.ToString() ?? "";
-                
-            }
-			
-        }
-        
-        
-        static string m_erter_Const = "";
-        public static string erter_Const
-        {
-            get 
-            {
-                return m_erter_Const;
-            }
-            set
-            {
-                m_erter_Const = value;
-                Config.Kernel!.DataBase.SaveConstants("tab_constants", "col_h9", m_erter_Const);
-            }
-        }
-        
-        public class erter_erterterte_TablePart : ConstantsTablePart
-        {
-            public erter_erterterte_TablePart() : base(Config.Kernel!, "tab_b24",
-                 new string[] { "col_a1" }) 
-            {
-                Records = new List<Record>();
-            }
-            
-            public const string TABLE = "tab_b24";
-            
-            public const string erterter = "col_a1";
-            public List<Record> Records { get; set; }
-        
-            public void Read()
-            {
-                Records.Clear();
-                base.BaseRead();
-
-                foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
-                {
-                    Record record = new Record();
-                    record.UID = (Guid)fieldValue["uid"];
-                    
-                    record.erterter = fieldValue["col_a1"]?.ToString() ?? "";
-                    
-                    Records.Add(record);
-                }
-            
-                base.BaseClear();
-            }
-        
-            public void Save(bool clear_all_before_save /*= true*/) 
-            {
-                base.BaseBeginTransaction();
-                
-                if (clear_all_before_save)
-                    base.BaseDelete();
-
-                foreach (Record record in Records)
-                {
-                    Dictionary<string, object> fieldValue = new Dictionary<string, object>();
-
-                    fieldValue.Add("col_a1", record.erterter);
-                    
-                    base.BaseSave(record.UID, fieldValue);
-                }
-                
-                base.BaseCommitTransaction();
-            }
-        
-            public void Delete()
-            {
-                base.BaseDelete();
-            }
-            
-            public class Record : ConstantsTablePartRecord
-            {
-                public Record()
-                {
-                    erterter = "";
-                    
-                }
-                public string erterter { get; set; }
-                
-            }            
-        }
-               
     }
     #endregion
     
