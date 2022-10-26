@@ -1,5 +1,6 @@
 using Gtk;
 
+using StorageAndTrade_1_0.Константи;
 using StorageAndTrade_1_0.Довідники;
 
 namespace StorageAndTrade
@@ -12,6 +13,7 @@ namespace StorageAndTrade
 
         public Організації_Objest Організації_Objest { get; set; } = new Організації_Objest();
 
+        Entry entryCode = new Entry() { WidthRequest = 100 };
         Entry entryName = new Entry() { WidthRequest = 500 };
         TextView textViewDesc = new TextView();
 
@@ -46,6 +48,13 @@ namespace StorageAndTrade
         {
             VBox vBox = new VBox();
 
+            //Код
+            HBox hBoxCode = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxCode, false, false, 5);
+
+            hBoxCode.PackStart(new Label("Код:"), false, false, 5);
+            hBoxCode.PackStart(entryCode, false, false, 5);
+
             //Назва
             HBox hBoxName = new HBox() { Halign = Align.End };
             vBox.PackStart(hBoxName, false, false, 5);
@@ -72,12 +81,7 @@ namespace StorageAndTrade
         {
             VBox vBox = new VBox();
 
-            HBox hBox = new HBox() { Halign = Align.Fill };
-            vBox.PackStart(hBox, false, false, 5);
 
-            Label lb = new Label("Test");
-
-            hBox.PackStart(lb, false, false, 10);
 
             hPaned.Pack2(vBox, false, false);
         }
@@ -86,12 +90,17 @@ namespace StorageAndTrade
 
         public void SetValue()
         {
+            if (IsNew)
+                Організації_Objest.Код = (++НумераціяДовідників.Організації_Const).ToString("D6");
+
+            entryCode.Text = Організації_Objest.Код;
             entryName.Text = Організації_Objest.Назва;
             textViewDesc.Buffer.Text = Організації_Objest.НазваПовна;
         }
 
         void GetValue()
         {
+            Організації_Objest.Код = entryCode.Text;
             Організації_Objest.Назва = entryName.Text;
             Організації_Objest.НазваПовна = textViewDesc.Buffer.Text;
         }
