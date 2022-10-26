@@ -16,6 +16,7 @@ namespace StorageAndTrade
         Entry Код = new Entry() { WidthRequest = 100 };
         Entry Назва = new Entry() { WidthRequest = 500 };
         Entry НазваСкорочена = new Entry() { WidthRequest = 500 };
+        Entry ДатаРеєстрації = new Entry() { WidthRequest = 500 };
         TextView НазваПовна = new TextView();
 
         public Організації_Елемент() : base()
@@ -70,6 +71,13 @@ namespace StorageAndTrade
             hBoxSmallName.PackStart(new Label("Назва скорочена:"), false, false, 5);
             hBoxSmallName.PackStart(НазваСкорочена, false, false, 5);
 
+            //ДатаРеєстрації
+            HBox hBoxDateRegister = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxDateRegister, false, false, 5);
+
+            hBoxDateRegister.PackStart(new Label("Дата реєстрації:"), false, false, 5);
+            hBoxDateRegister.PackStart(ДатаРеєстрації, false, false, 5);
+
             //НазваПовна
             HBox hBoxDesc = new HBox() { Halign = Align.End };
             vBox.PackStart(hBoxDesc, false, false, 5);
@@ -104,6 +112,7 @@ namespace StorageAndTrade
             Код.Text = Організації_Objest.Код;
             Назва.Text = Організації_Objest.Назва;
             НазваСкорочена.Text = Організації_Objest.НазваСкорочена;
+            ДатаРеєстрації.Text = Організації_Objest.ДатаРеєстрації.ToString();
             НазваПовна.Buffer.Text = Організації_Objest.НазваПовна;
         }
 
@@ -112,6 +121,7 @@ namespace StorageAndTrade
             Організації_Objest.Код = Код.Text;
             Організації_Objest.Назва = Назва.Text;
             Організації_Objest.НазваСкорочена = НазваСкорочена.Text;
+            Організації_Objest.ДатаРеєстрації = DateTime.Parse(ДатаРеєстрації.Text);
             Організації_Objest.НазваПовна = НазваПовна.Buffer.Text;
         }
 
