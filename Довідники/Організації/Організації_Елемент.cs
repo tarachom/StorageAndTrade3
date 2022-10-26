@@ -16,11 +16,11 @@ namespace StorageAndTrade
         Entry Код = new Entry() { WidthRequest = 100 };
         Entry Назва = new Entry() { WidthRequest = 500 };
         Entry НазваСкорочена = new Entry() { WidthRequest = 500 };
-        Entry ДатаРеєстрації = new Entry() { WidthRequest = 500 };
-        Entry КраїнаРеєстрації = new Entry() { WidthRequest = 500 };
-        Entry СвідоцтвоСеріяНомер = new Entry() { WidthRequest = 500 };
-        Entry СвідоцтвоДатаВидачі = new Entry() { WidthRequest = 500 };
         TextView НазваПовна = new TextView();
+        Entry ДатаРеєстрації = new Entry() { WidthRequest = 300 };
+        Entry КраїнаРеєстрації = new Entry() { WidthRequest = 300 };
+        Entry СвідоцтвоСеріяНомер = new Entry() { WidthRequest = 300 };
+        Entry СвідоцтвоДатаВидачі = new Entry() { WidthRequest = 300 };
 
         public Організації_Елемент() : base()
         {
@@ -74,6 +74,18 @@ namespace StorageAndTrade
             hBoxSmallName.PackStart(new Label("Назва скорочена:"), false, false, 5);
             hBoxSmallName.PackStart(НазваСкорочена, false, false, 5);
 
+            //НазваПовна
+            HBox hBoxDesc = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxDesc, false, false, 5);
+
+            hBoxDesc.PackStart(new Label("Повна назва:") { Valign = Align.Start }, false, false, 5);
+
+            ScrolledWindow scrollTextView = new ScrolledWindow() { ShadowType = ShadowType.In, WidthRequest = 500, HeightRequest = 100 };
+            scrollTextView.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
+            scrollTextView.Add(НазваПовна);
+
+            hBoxDesc.PackStart(scrollTextView, false, false, 5);
+
             //ДатаРеєстрації
             HBox hBoxDateRegister = new HBox() { Halign = Align.End };
             vBox.PackStart(hBoxDateRegister, false, false, 5);
@@ -101,18 +113,6 @@ namespace StorageAndTrade
 
             hBoxSvidotstvoData.PackStart(new Label("Свідоцтво дата видачі:"), false, false, 5);
             hBoxSvidotstvoData.PackStart(СвідоцтвоДатаВидачі, false, false, 5);
-
-            //НазваПовна
-            HBox hBoxDesc = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxDesc, false, false, 5);
-
-            hBoxDesc.PackStart(new Label("Повна назва:") { Valign = Align.Start }, false, false, 5);
-
-            ScrolledWindow scrollTextView = new ScrolledWindow() { ShadowType = ShadowType.In, WidthRequest = 500, HeightRequest = 100 };
-            scrollTextView.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
-            scrollTextView.Add(НазваПовна);
-
-            hBoxDesc.PackStart(scrollTextView, false, false, 5);
 
             hPaned.Pack1(vBox, false, false);
         }
