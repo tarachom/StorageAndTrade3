@@ -13,9 +13,10 @@ namespace StorageAndTrade
 
         public Організації_Objest Організації_Objest { get; set; } = new Організації_Objest();
 
-        Entry entryCode = new Entry() { WidthRequest = 100 };
-        Entry entryName = new Entry() { WidthRequest = 500 };
-        TextView textViewDesc = new TextView();
+        Entry Код = new Entry() { WidthRequest = 100 };
+        Entry Назва = new Entry() { WidthRequest = 500 };
+        Entry НазваСкорочена = new Entry() { WidthRequest = 500 };
+        TextView НазваПовна = new TextView();
 
         public Організації_Елемент() : base()
         {
@@ -53,16 +54,23 @@ namespace StorageAndTrade
             vBox.PackStart(hBoxCode, false, false, 5);
 
             hBoxCode.PackStart(new Label("Код:"), false, false, 5);
-            hBoxCode.PackStart(entryCode, false, false, 5);
+            hBoxCode.PackStart(Код, false, false, 5);
 
             //Назва
             HBox hBoxName = new HBox() { Halign = Align.End };
             vBox.PackStart(hBoxName, false, false, 5);
 
             hBoxName.PackStart(new Label("Назва:"), false, false, 5);
-            hBoxName.PackStart(entryName, false, false, 5);
+            hBoxName.PackStart(Назва, false, false, 5);
 
-            //Опис
+            //НазваСкорочена
+            HBox hBoxSmallName = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxSmallName, false, false, 5);
+
+            hBoxSmallName.PackStart(new Label("Назва скорочена:"), false, false, 5);
+            hBoxSmallName.PackStart(НазваСкорочена, false, false, 5);
+
+            //НазваПовна
             HBox hBoxDesc = new HBox() { Halign = Align.End };
             vBox.PackStart(hBoxDesc, false, false, 5);
 
@@ -70,7 +78,7 @@ namespace StorageAndTrade
 
             ScrolledWindow scrollTextView = new ScrolledWindow() { ShadowType = ShadowType.In, WidthRequest = 500, HeightRequest = 100 };
             scrollTextView.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
-            scrollTextView.Add(textViewDesc);
+            scrollTextView.Add(НазваПовна);
 
             hBoxDesc.PackStart(scrollTextView, false, false, 5);
 
@@ -93,16 +101,18 @@ namespace StorageAndTrade
             if (IsNew)
                 Організації_Objest.Код = (++НумераціяДовідників.Організації_Const).ToString("D6");
 
-            entryCode.Text = Організації_Objest.Код;
-            entryName.Text = Організації_Objest.Назва;
-            textViewDesc.Buffer.Text = Організації_Objest.НазваПовна;
+            Код.Text = Організації_Objest.Код;
+            Назва.Text = Організації_Objest.Назва;
+            НазваСкорочена.Text = Організації_Objest.НазваСкорочена;
+            НазваПовна.Buffer.Text = Організації_Objest.НазваПовна;
         }
 
         void GetValue()
         {
-            Організації_Objest.Код = entryCode.Text;
-            Організації_Objest.Назва = entryName.Text;
-            Організації_Objest.НазваПовна = textViewDesc.Buffer.Text;
+            Організації_Objest.Код = Код.Text;
+            Організації_Objest.Назва = Назва.Text;
+            Організації_Objest.НазваСкорочена = НазваСкорочена.Text;
+            Організації_Objest.НазваПовна = НазваПовна.Buffer.Text;
         }
 
         #endregion
