@@ -63,6 +63,10 @@ namespace StorageAndTrade
         public void LoadRecords()
         {
             ТабличніСписки.ПоступленняТоварівТаПослуг_Записи.LoadRecords();
+
+            Console.WriteLine(TreeViewGrid.Model.);
+
+           
         }
 
         void OnRefreshClick(object? sender, EventArgs args)
