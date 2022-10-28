@@ -1,5 +1,35 @@
 ﻿
+/*
+Copyright (C) 2019-2022 TARAKHOMYN YURIY IVANOVYCH
+All rights reserved.
 
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
+/*
+Автор:    Тарахомин Юрій Іванович
+Адреса:   Україна, м. Львів
+Сайт:     accounting.org.ua
+*/
+  
+/*
+ *
+ * Конфігурації "Зберігання та Торгівля 3.0"
+ * Автор Тарахомин Юрій Іванович, accounting.org.ua
+ * Дата конфігурації: 28.10.2022 17:11:50
+ *
+ */
+ 
 using Gtk;
 using AccountingSoftware;
 
@@ -30,11 +60,11 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 5 }, "pixbuf", 0));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 4 }, "pixbuf", 0));
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 5 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 5 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
             
         }
 
@@ -108,15 +138,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 5 }, "pixbuf", 0));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 4 }, "pixbuf", 0));
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 5 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
-            treeView.AppendColumn(new TreeViewColumn("Номенклатура", new CellRendererText() { Xpad = 5 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
-            treeView.AppendColumn(new TreeViewColumn("Одиниця пакування", new CellRendererText() { Xpad = 5 }, "text", 4) { SortColumnId = 4 } ); /*ОдиницяВиміру*/
-            treeView.AppendColumn(new TreeViewColumn("Виробник", new CellRendererText() { Xpad = 5 }, "text", 5) { SortColumnId = 5 } ); /*Виробник*/
-            treeView.AppendColumn(new TreeViewColumn("Тип", new CellRendererText() { Xpad = 5 }, "text", 6) { SortColumnId = 6 } ); /*ТипНоменклатури*/
-            treeView.AppendColumn(new TreeViewColumn("Вид", new CellRendererText() { Xpad = 5 }, "text", 7) { SortColumnId = 7 } ); /*ВидНоменклатури*/
+            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
+            treeView.AppendColumn(new TreeViewColumn("Номенклатура", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Одиниця пакування", new CellRendererText() { Xpad = 4 }, "text", 4) { SortColumnId = 4 } ); /*ОдиницяВиміру*/
+            treeView.AppendColumn(new TreeViewColumn("Виробник", new CellRendererText() { Xpad = 4 }, "text", 5) { SortColumnId = 5 } ); /*Виробник*/
+            treeView.AppendColumn(new TreeViewColumn("Тип", new CellRendererText() { Xpad = 4 }, "text", 6) { SortColumnId = 6 } ); /*ТипНоменклатури*/
+            treeView.AppendColumn(new TreeViewColumn("Вид", new CellRendererText() { Xpad = 4 }, "text", 7) { SortColumnId = 7 } ); /*ВидНоменклатури*/
             
         }
 
@@ -211,11 +241,11 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 5 }, "pixbuf", 0));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 4 }, "pixbuf", 0));
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 5 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 5 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
             
         }
 
@@ -281,11 +311,11 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 5 }, "pixbuf", 0));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 4 }, "pixbuf", 0));
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 5 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 5 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
             
         }
 
@@ -351,11 +381,11 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 5 }, "pixbuf", 0));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 4 }, "pixbuf", 0));
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 5 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 5 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
             
         }
 
@@ -423,12 +453,12 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 5 }, "pixbuf", 0));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 4 }, "pixbuf", 0));
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 5 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 5 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
-            treeView.AppendColumn(new TreeViewColumn("Коротка назва", new CellRendererText() { Xpad = 5 }, "text", 4) { SortColumnId = 4 } ); /*КороткаНазва*/
+            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Коротка назва", new CellRendererText() { Xpad = 4 }, "text", 4) { SortColumnId = 4 } ); /*КороткаНазва*/
             
         }
 
@@ -496,11 +526,11 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 5 }, "pixbuf", 0));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 4 }, "pixbuf", 0));
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 5 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 5 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
             
         }
 
@@ -566,11 +596,11 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 5 }, "pixbuf", 0));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 4 }, "pixbuf", 0));
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 5 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 5 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
             
         }
 
@@ -638,12 +668,12 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 5 }, "pixbuf", 0));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 4 }, "pixbuf", 0));
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 5 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 5 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
-            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 5 }, "text", 4) { SortColumnId = 4 } ); /*Валюта*/
+            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 4) { SortColumnId = 4 } ); /*Валюта*/
             
         }
 
@@ -718,11 +748,11 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 5 }, "pixbuf", 0));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 4 }, "pixbuf", 0));
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 5 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 5 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
             
         }
 
@@ -788,11 +818,11 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 5 }, "pixbuf", 0));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 4 }, "pixbuf", 0));
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 5 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 5 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
             
         }
 
@@ -858,11 +888,11 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 5 }, "pixbuf", 0));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 4 }, "pixbuf", 0));
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 5 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 5 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
             
         }
 
@@ -928,11 +958,11 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 5 }, "pixbuf", 0));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 4 }, "pixbuf", 0));
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 5 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 5 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
             
         }
 
@@ -998,11 +1028,11 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 5 }, "pixbuf", 0));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 4 }, "pixbuf", 0));
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 5 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 5 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
             
         }
 
@@ -1068,11 +1098,11 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 5 }, "pixbuf", 0));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 4 }, "pixbuf", 0));
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 5 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 5 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
             
         }
 
@@ -1140,12 +1170,12 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 5 }, "pixbuf", 0));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 4 }, "pixbuf", 0));
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 5 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 5 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
-            treeView.AppendColumn(new TreeViewColumn("Номенклатура", new CellRendererText() { Xpad = 5 }, "text", 4) { SortColumnId = 4 } ); /*Номенклатура*/
+            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Номенклатура", new CellRendererText() { Xpad = 4 }, "text", 4) { SortColumnId = 4 } ); /*Номенклатура*/
             
         }
 
@@ -1237,12 +1267,12 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 5 }, "pixbuf", 0));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 4 }, "pixbuf", 0));
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 5 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 5 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
-            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 5 }, "text", 4) { SortColumnId = 4 } ); /*Валюта*/
+            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 4) { SortColumnId = 4 } ); /*Валюта*/
             
         }
 
@@ -1319,12 +1349,12 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 5 }, "pixbuf", 0));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 4 }, "pixbuf", 0));
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 5 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 5 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
-            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 5 }, "text", 4) { SortColumnId = 4 } ); /*Валюта*/
+            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 4) { SortColumnId = 4 } ); /*Валюта*/
             
         }
 
@@ -1403,13 +1433,13 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 5 }, "pixbuf", 0));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 4 }, "pixbuf", 0));
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 5 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 5 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
-            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 5 }, "text", 4) { SortColumnId = 4 } ); /*Контрагент*/
-            treeView.AppendColumn(new TreeViewColumn("ТипДоговору", new CellRendererText() { Xpad = 5 }, "text", 5) { SortColumnId = 5 } ); /*ТипДоговору*/
+            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 4 }, "text", 4) { SortColumnId = 4 } ); /*Контрагент*/
+            treeView.AppendColumn(new TreeViewColumn("ТипДоговору", new CellRendererText() { Xpad = 4 }, "text", 5) { SortColumnId = 5 } ); /*ТипДоговору*/
             
         }
 
@@ -1486,11 +1516,11 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 5 }, "pixbuf", 0));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 4 }, "pixbuf", 0));
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 5 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 5 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
             
         }
 
@@ -1556,11 +1586,11 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 5 }, "pixbuf", 0));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 4 }, "pixbuf", 0));
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 5 }, "text", 2) { SortColumnId = 2 } ); /*Назва*/
-            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 5 }, "text", 3) { SortColumnId = 3 } ); /*Код*/
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Код*/
             
         }
 
@@ -1624,10 +1654,10 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 5 }, "pixbuf", 0));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 4 }, "pixbuf", 0));
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 5 }, "text", 2) { SortColumnId = 2 } ); /*Номер*/
+            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Номер*/
             
         }
 
@@ -1697,14 +1727,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 5 }, "pixbuf", 0));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 4 }, "pixbuf", 0));
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 5 }, "text", 2) { SortColumnId = 2 } ); /*Назва*/
-            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 5 }, "text", 3) { SortColumnId = 3 } ); /*Дата*/
-            treeView.AppendColumn(new TreeViewColumn("ТипДокументу", new CellRendererText() { Xpad = 5 }, "text", 4) { SortColumnId = 4 } ); /*ТипДокументу*/
-            treeView.AppendColumn(new TreeViewColumn("ПоступленняТоварівТаПослуг", new CellRendererText() { Xpad = 5 }, "text", 5) { SortColumnId = 5 } ); /*ПоступленняТоварівТаПослуг*/
-            treeView.AppendColumn(new TreeViewColumn("ВведенняЗалишків", new CellRendererText() { Xpad = 5 }, "text", 6) { SortColumnId = 6 } ); /*ВведенняЗалишків*/
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Дата*/
+            treeView.AppendColumn(new TreeViewColumn("ТипДокументу", new CellRendererText() { Xpad = 4 }, "text", 4) { SortColumnId = 4 } ); /*ТипДокументу*/
+            treeView.AppendColumn(new TreeViewColumn("ПоступленняТоварівТаПослуг", new CellRendererText() { Xpad = 4 }, "text", 5) { SortColumnId = 5 } ); /*ПоступленняТоварівТаПослуг*/
+            treeView.AppendColumn(new TreeViewColumn("ВведенняЗалишків", new CellRendererText() { Xpad = 4 }, "text", 6) { SortColumnId = 6 } ); /*ВведенняЗалишків*/
             
         }
 
@@ -1788,10 +1818,10 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 5 }, "pixbuf", 0));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 4 }, "pixbuf", 0));
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 5 }, "text", 2) { SortColumnId = 2 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Назва*/
             
         }
 
@@ -1853,10 +1883,10 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 5 }, "pixbuf", 0));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 4 }, "pixbuf", 0));
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 5 }, "text", 2) { SortColumnId = 2 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Назва*/
             
         }
 
@@ -1918,10 +1948,10 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 5 }, "pixbuf", 0));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 4 }, "pixbuf", 0));
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 5 }, "text", 2) { SortColumnId = 2 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Назва*/
             
         }
 
@@ -1983,10 +2013,10 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 5 }, "pixbuf", 0));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 4 }, "pixbuf", 0));
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 5 }, "text", 2) { SortColumnId = 2 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Назва*/
             
         }
 
@@ -2048,10 +2078,10 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 5 }, "pixbuf", 0));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 4 }, "pixbuf", 0));
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 5 }, "text", 2) { SortColumnId = 2 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Назва*/
             
         }
 
@@ -2135,19 +2165,19 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 5 }, "pixbuf", 0)); /*Image*/
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 4 }, "pixbuf", 0)); /*Image*/
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false }); /*UID*/
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererToggle(), "active", 2)); /*Проведений документ*/
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 5 }, "text", 3) { FixedWidth = 420 } ); /*Назва*/
-            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 5 }, "text", 4) { FixedWidth = 100 } ); /*НомерДок*/
-            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 5 }, "text", 5) { FixedWidth = 160 } ); /*ДатаДок*/
-            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 5 }, "text", 6)); /*Організація*/
-            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 5 }, "text", 7)); /*Контрагент*/
-            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 5 }, "text", 8)); /*Склад*/
-            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 5 }, "text", 9)); /*Валюта*/
-            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 5 }, "text", 10)); /*СумаДокументу*/
-            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 5 }, "text", 11)); /*Коментар*/
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { FixedWidth = 420 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 4) { FixedWidth = 100 } ); /*НомерДок*/
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 5) { FixedWidth = 160 } ); /*ДатаДок*/
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Організація*/
+            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Контрагент*/
+            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Склад*/
+            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 9)); /*Валюта*/
+            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 10)); /*СумаДокументу*/
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 11)); /*Коментар*/
             
         }
 
@@ -2273,20 +2303,20 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 5 }, "pixbuf", 0)); /*Image*/
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 4 }, "pixbuf", 0)); /*Image*/
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false }); /*UID*/
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererToggle(), "active", 2)); /*Проведений документ*/
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 5 }, "text", 3)); /*Назва*/
-            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 5 }, "text", 4)); /*НомерДок*/
-            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 5 }, "text", 5)); /*ДатаДок*/
-            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 5 }, "text", 6)); /*Організація*/
-            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 5 }, "text", 7)); /*Склад*/
-            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 5 }, "text", 8)); /*Контрагент*/
-            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 5 }, "text", 9)); /*Валюта*/
-            treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText() { Xpad = 5 }, "text", 10)); /*Каса*/
-            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 5 }, "text", 11)); /*СумаДокументу*/
-            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 5 }, "text", 12)); /*Коментар*/
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3)); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 4)); /*НомерДок*/
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 5)); /*ДатаДок*/
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Організація*/
+            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Склад*/
+            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Контрагент*/
+            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 9)); /*Валюта*/
+            treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText() { Xpad = 4 }, "text", 10)); /*Каса*/
+            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 11)); /*СумаДокументу*/
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 12)); /*Коментар*/
             
         }
 
@@ -2421,20 +2451,20 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 5 }, "pixbuf", 0)); /*Image*/
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 4 }, "pixbuf", 0)); /*Image*/
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false }); /*UID*/
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererToggle(), "active", 2)); /*Проведений документ*/
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 5 }, "text", 3) { FixedWidth = 400 } ); /*Назва*/
-            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 5 }, "text", 4) { FixedWidth = 100 } ); /*НомерДок*/
-            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 5 }, "text", 5) { FixedWidth = 160 } ); /*ДатаДок*/
-            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 5 }, "text", 6)); /*Організація*/
-            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 5 }, "text", 7)); /*Контрагент*/
-            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 5 }, "text", 8)); /*Валюта*/
-            treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText() { Xpad = 5 }, "text", 9)); /*Каса*/
-            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 5 }, "text", 10)); /*Склад*/
-            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 5 }, "text", 11)); /*СумаДокументу*/
-            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 5 }, "text", 12)); /*Коментар*/
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { FixedWidth = 400 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 4) { FixedWidth = 100 } ); /*НомерДок*/
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 5) { FixedWidth = 160 } ); /*ДатаДок*/
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Організація*/
+            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Контрагент*/
+            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Валюта*/
+            treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText() { Xpad = 4 }, "text", 9)); /*Каса*/
+            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 10)); /*Склад*/
+            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 11)); /*СумаДокументу*/
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 12)); /*Коментар*/
             
         }
 
@@ -2569,20 +2599,20 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 5 }, "pixbuf", 0)); /*Image*/
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 4 }, "pixbuf", 0)); /*Image*/
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false }); /*UID*/
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererToggle(), "active", 2)); /*Проведений документ*/
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 5 }, "text", 3) { FixedWidth = 420 } ); /*Назва*/
-            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 5 }, "text", 4) { FixedWidth = 100 } ); /*НомерДок*/
-            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 5 }, "text", 5) { FixedWidth = 160 } ); /*ДатаДок*/
-            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 5 }, "text", 6)); /*Організація*/
-            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 5 }, "text", 7)); /*Контрагент*/
-            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 5 }, "text", 8)); /*Валюта*/
-            treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText() { Xpad = 5 }, "text", 9)); /*Каса*/
-            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 5 }, "text", 10)); /*Склад*/
-            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 5 }, "text", 11)); /*СумаДокументу*/
-            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 5 }, "text", 12)); /*Коментар*/
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { FixedWidth = 420 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 4) { FixedWidth = 100 } ); /*НомерДок*/
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 5) { FixedWidth = 160 } ); /*ДатаДок*/
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Організація*/
+            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Контрагент*/
+            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Валюта*/
+            treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText() { Xpad = 4 }, "text", 9)); /*Каса*/
+            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 10)); /*Склад*/
+            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 11)); /*СумаДокументу*/
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 12)); /*Коментар*/
             
         }
 
@@ -2711,17 +2741,17 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 5 }, "pixbuf", 0)); /*Image*/
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 4 }, "pixbuf", 0)); /*Image*/
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false }); /*UID*/
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererToggle(), "active", 2)); /*Проведений документ*/
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 5 }, "text", 3) { FixedWidth = 450 } ); /*Назва*/
-            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 5 }, "text", 4) { FixedWidth = 100 } ); /*НомерДок*/
-            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 5 }, "text", 5) { FixedWidth = 160 } ); /*ДатаДок*/
-            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 5 }, "text", 6)); /*Організація*/
-            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 5 }, "text", 7)); /*Валюта*/
-            treeView.AppendColumn(new TreeViewColumn("Вид ціни", new CellRendererText() { Xpad = 5 }, "text", 8)); /*ВидЦіни*/
-            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 5 }, "text", 9)); /*Коментар*/
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { FixedWidth = 450 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 4) { FixedWidth = 100 } ); /*НомерДок*/
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 5) { FixedWidth = 160 } ); /*ДатаДок*/
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Організація*/
+            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Валюта*/
+            treeView.AppendColumn(new TreeViewColumn("Вид ціни", new CellRendererText() { Xpad = 4 }, "text", 8)); /*ВидЦіни*/
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 9)); /*Коментар*/
             
         }
 
@@ -2836,20 +2866,20 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 5 }, "pixbuf", 0)); /*Image*/
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 4 }, "pixbuf", 0)); /*Image*/
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false }); /*UID*/
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererToggle(), "active", 2)); /*Проведений документ*/
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 5 }, "text", 3) { FixedWidth = 400 } ); /*Назва*/
-            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 5 }, "text", 4) { FixedWidth = 100 } ); /*НомерДок*/
-            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 5 }, "text", 5) { FixedWidth = 160 } ); /*ДатаДок*/
-            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 5 }, "text", 6)); /*Організація*/
-            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 5 }, "text", 7)); /*Валюта*/
-            treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText() { Xpad = 5 }, "text", 8)); /*Каса*/
-            treeView.AppendColumn(new TreeViewColumn("Каса відправник", new CellRendererText() { Xpad = 5 }, "text", 9)); /*КасаВідправник*/
-            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 5 }, "text", 10)); /*Контрагент*/
-            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 5 }, "text", 11)); /*СумаДокументу*/
-            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 5 }, "text", 12)); /*Коментар*/
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { FixedWidth = 400 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 4) { FixedWidth = 100 } ); /*НомерДок*/
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 5) { FixedWidth = 160 } ); /*ДатаДок*/
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Організація*/
+            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Валюта*/
+            treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Каса*/
+            treeView.AppendColumn(new TreeViewColumn("Каса відправник", new CellRendererText() { Xpad = 4 }, "text", 9)); /*КасаВідправник*/
+            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 4 }, "text", 10)); /*Контрагент*/
+            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 11)); /*СумаДокументу*/
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 12)); /*Коментар*/
             
         }
 
@@ -2984,20 +3014,20 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 5 }, "pixbuf", 0)); /*Image*/
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 4 }, "pixbuf", 0)); /*Image*/
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false }); /*UID*/
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererToggle(), "active", 2)); /*Проведений документ*/
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 5 }, "text", 3) { FixedWidth = 400 } ); /*Назва*/
-            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 5 }, "text", 4) { FixedWidth = 100 } ); /*НомерДок*/
-            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 5 }, "text", 5) { FixedWidth = 160 } ); /*ДатаДок*/
-            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 5 }, "text", 6)); /*Організація*/
-            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 5 }, "text", 7)); /*Контрагент*/
-            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 5 }, "text", 8)); /*Валюта*/
-            treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText() { Xpad = 5 }, "text", 9)); /*Каса*/
-            treeView.AppendColumn(new TreeViewColumn("Каса отримувач", new CellRendererText() { Xpad = 5 }, "text", 10)); /*КасаОтримувач*/
-            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 5 }, "text", 11)); /*СумаДокументу*/
-            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 5 }, "text", 12)); /*Коментар*/
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { FixedWidth = 400 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 4) { FixedWidth = 100 } ); /*НомерДок*/
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 5) { FixedWidth = 160 } ); /*ДатаДок*/
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Організація*/
+            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Контрагент*/
+            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Валюта*/
+            treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText() { Xpad = 4 }, "text", 9)); /*Каса*/
+            treeView.AppendColumn(new TreeViewColumn("Каса отримувач", new CellRendererText() { Xpad = 4 }, "text", 10)); /*КасаОтримувач*/
+            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 11)); /*СумаДокументу*/
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 12)); /*Коментар*/
             
         }
 
@@ -3126,17 +3156,17 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 5 }, "pixbuf", 0)); /*Image*/
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 4 }, "pixbuf", 0)); /*Image*/
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false }); /*UID*/
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererToggle(), "active", 2)); /*Проведений документ*/
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 5 }, "text", 3) { FixedWidth = 400 } ); /*Назва*/
-            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 5 }, "text", 4) { FixedWidth = 100 } ); /*НомерДок*/
-            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 5 }, "text", 5) { FixedWidth = 160 } ); /*ДатаДок*/
-            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 5 }, "text", 6)); /*Організація*/
-            treeView.AppendColumn(new TreeViewColumn("Склад відправник", new CellRendererText() { Xpad = 5 }, "text", 7)); /*СкладВідправник*/
-            treeView.AppendColumn(new TreeViewColumn("Склад отримувач", new CellRendererText() { Xpad = 5 }, "text", 8)); /*СкладОтримувач*/
-            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 5 }, "text", 9)); /*Коментар*/
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { FixedWidth = 400 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 4) { FixedWidth = 100 } ); /*НомерДок*/
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 5) { FixedWidth = 160 } ); /*ДатаДок*/
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Організація*/
+            treeView.AppendColumn(new TreeViewColumn("Склад відправник", new CellRendererText() { Xpad = 4 }, "text", 7)); /*СкладВідправник*/
+            treeView.AppendColumn(new TreeViewColumn("Склад отримувач", new CellRendererText() { Xpad = 4 }, "text", 8)); /*СкладОтримувач*/
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 9)); /*Коментар*/
             
         }
 
@@ -3251,20 +3281,20 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 5 }, "pixbuf", 0)); /*Image*/
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 4 }, "pixbuf", 0)); /*Image*/
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false }); /*UID*/
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererToggle(), "active", 2)); /*Проведений документ*/
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 5 }, "text", 3) { FixedWidth = 450 } ); /*Назва*/
-            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 5 }, "text", 4) { FixedWidth = 100 } ); /*НомерДок*/
-            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 5 }, "text", 5) { FixedWidth = 160 } ); /*ДатаДок*/
-            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 5 }, "text", 6)); /*Організація*/
-            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 5 }, "text", 7)); /*Контрагент*/
-            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 5 }, "text", 8)); /*Валюта*/
-            treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText() { Xpad = 5 }, "text", 9)); /*Каса*/
-            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 5 }, "text", 10)); /*Склад*/
-            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 5 }, "text", 11)); /*СумаДокументу*/
-            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 5 }, "text", 12)); /*Коментар*/
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { FixedWidth = 450 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 4) { FixedWidth = 100 } ); /*НомерДок*/
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 5) { FixedWidth = 160 } ); /*ДатаДок*/
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Організація*/
+            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Контрагент*/
+            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Валюта*/
+            treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText() { Xpad = 4 }, "text", 9)); /*Каса*/
+            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 10)); /*Склад*/
+            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 11)); /*СумаДокументу*/
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 12)); /*Коментар*/
             
         }
 
@@ -3399,20 +3429,20 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 5 }, "pixbuf", 0)); /*Image*/
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 4 }, "pixbuf", 0)); /*Image*/
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false }); /*UID*/
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererToggle(), "active", 2)); /*Проведений документ*/
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 5 }, "text", 3) { FixedWidth = 420 } ); /*Назва*/
-            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 5 }, "text", 4) { FixedWidth = 100 } ); /*НомерДок*/
-            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 5 }, "text", 5) { FixedWidth = 160 } ); /*ДатаДок*/
-            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 5 }, "text", 6)); /*Організація*/
-            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 5 }, "text", 7)); /*Валюта*/
-            treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText() { Xpad = 5 }, "text", 8)); /*Каса*/
-            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 5 }, "text", 9)); /*Контрагент*/
-            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 5 }, "text", 10)); /*Склад*/
-            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 5 }, "text", 11)); /*СумаДокументу*/
-            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 5 }, "text", 12)); /*Коментар*/
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { FixedWidth = 420 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 4) { FixedWidth = 100 } ); /*НомерДок*/
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 5) { FixedWidth = 160 } ); /*ДатаДок*/
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Організація*/
+            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Валюта*/
+            treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Каса*/
+            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 4 }, "text", 9)); /*Контрагент*/
+            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 10)); /*Склад*/
+            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 11)); /*СумаДокументу*/
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 12)); /*Коментар*/
             
         }
 
@@ -3545,19 +3575,19 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 5 }, "pixbuf", 0)); /*Image*/
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 4 }, "pixbuf", 0)); /*Image*/
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false }); /*UID*/
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererToggle(), "active", 2)); /*Проведений документ*/
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 5 }, "text", 3) { FixedWidth = 400 } ); /*Назва*/
-            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 5 }, "text", 4) { FixedWidth = 100 } ); /*НомерДок*/
-            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 5 }, "text", 5) { FixedWidth = 160 } ); /*ДатаДок*/
-            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 5 }, "text", 6)); /*Організація*/
-            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 5 }, "text", 7)); /*Валюта*/
-            treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText() { Xpad = 5 }, "text", 8)); /*Каса*/
-            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 5 }, "text", 9)); /*Контрагент*/
-            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 5 }, "text", 10)); /*СумаДокументу*/
-            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 5 }, "text", 11)); /*Коментар*/
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { FixedWidth = 400 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 4) { FixedWidth = 100 } ); /*НомерДок*/
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 5) { FixedWidth = 160 } ); /*ДатаДок*/
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Організація*/
+            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Валюта*/
+            treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Каса*/
+            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 4 }, "text", 9)); /*Контрагент*/
+            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 10)); /*СумаДокументу*/
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 11)); /*Коментар*/
             
         }
 
@@ -3679,18 +3709,18 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 5 }, "pixbuf", 0)); /*Image*/
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 4 }, "pixbuf", 0)); /*Image*/
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false }); /*UID*/
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererToggle(), "active", 2)); /*Проведений документ*/
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 5 }, "text", 3) { FixedWidth = 400 } ); /*Назва*/
-            treeView.AppendColumn(new TreeViewColumn("НомерДок", new CellRendererText() { Xpad = 5 }, "text", 4) { FixedWidth = 100 } ); /*НомерДок*/
-            treeView.AppendColumn(new TreeViewColumn("ДатаДок", new CellRendererText() { Xpad = 5 }, "text", 5) { FixedWidth = 160 } ); /*ДатаДок*/
-            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 5 }, "text", 6)); /*Організація*/
-            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 5 }, "text", 7)); /*Склад*/
-            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 5 }, "text", 8)); /*Контрагент*/
-            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 5 }, "text", 9)); /*Валюта*/
-            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 5 }, "text", 10)); /*Коментар*/
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { FixedWidth = 400 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("НомерДок", new CellRendererText() { Xpad = 4 }, "text", 4) { FixedWidth = 100 } ); /*НомерДок*/
+            treeView.AppendColumn(new TreeViewColumn("ДатаДок", new CellRendererText() { Xpad = 4 }, "text", 5) { FixedWidth = 160 } ); /*ДатаДок*/
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Організація*/
+            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Склад*/
+            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Контрагент*/
+            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 9)); /*Валюта*/
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 10)); /*Коментар*/
             
         }
 
@@ -3806,16 +3836,16 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 5 }, "pixbuf", 0)); /*Image*/
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 4 }, "pixbuf", 0)); /*Image*/
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false }); /*UID*/
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererToggle(), "active", 2)); /*Проведений документ*/
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 5 }, "text", 3) { FixedWidth = 400 } ); /*Назва*/
-            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 5 }, "text", 4) { FixedWidth = 100 } ); /*НомерДок*/
-            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 5 }, "text", 5) { FixedWidth = 160 } ); /*ДатаДок*/
-            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 5 }, "text", 6)); /*Організація*/
-            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 5 }, "text", 7)); /*Склад*/
-            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 5 }, "text", 8)); /*Коментар*/
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { FixedWidth = 400 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 4) { FixedWidth = 100 } ); /*НомерДок*/
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 5) { FixedWidth = 160 } ); /*ДатаДок*/
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Організація*/
+            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Склад*/
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Коментар*/
             
         }
 
@@ -3913,16 +3943,16 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 5 }, "pixbuf", 0)); /*Image*/
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 4 }, "pixbuf", 0)); /*Image*/
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false }); /*UID*/
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererToggle(), "active", 2)); /*Проведений документ*/
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 5 }, "text", 3) { FixedWidth = 400 } ); /*Назва*/
-            treeView.AppendColumn(new TreeViewColumn("НомерДок", new CellRendererText() { Xpad = 5 }, "text", 4) { FixedWidth = 100 } ); /*НомерДок*/
-            treeView.AppendColumn(new TreeViewColumn("ДатаДок", new CellRendererText() { Xpad = 5 }, "text", 5) { FixedWidth = 160 } ); /*ДатаДок*/
-            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 5 }, "text", 6)); /*Організація*/
-            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 5 }, "text", 7)); /*Склад*/
-            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 5 }, "text", 8)); /*Коментар*/
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { FixedWidth = 400 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("НомерДок", new CellRendererText() { Xpad = 4 }, "text", 4) { FixedWidth = 100 } ); /*НомерДок*/
+            treeView.AppendColumn(new TreeViewColumn("ДатаДок", new CellRendererText() { Xpad = 4 }, "text", 5) { FixedWidth = 160 } ); /*ДатаДок*/
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Організація*/
+            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Склад*/
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Коментар*/
             
         }
 
@@ -4018,15 +4048,15 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 5 }, "pixbuf", 0)); /*Image*/
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 4 }, "pixbuf", 0)); /*Image*/
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false }); /*UID*/
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererToggle(), "active", 2)); /*Проведений документ*/
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 5 }, "text", 3) { FixedWidth = 400 } ); /*Назва*/
-            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 5 }, "text", 4) { FixedWidth = 100 } ); /*НомерДок*/
-            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 5 }, "text", 5) { FixedWidth = 160 } ); /*ДатаДок*/
-            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 5 }, "text", 6)); /*Склад*/
-            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 5 }, "text", 7)); /*Коментар*/
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { FixedWidth = 400 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 4) { FixedWidth = 100 } ); /*НомерДок*/
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 5) { FixedWidth = 160 } ); /*ДатаДок*/
+            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Склад*/
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Коментар*/
             
         }
 
@@ -4117,17 +4147,17 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 5 }, "pixbuf", 0)); /*Image*/
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 4 }, "pixbuf", 0)); /*Image*/
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false }); /*UID*/
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererToggle(), "active", 2)); /*Проведений документ*/
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 5 }, "text", 3) { FixedWidth = 400 } ); /*Назва*/
-            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 5 }, "text", 4) { FixedWidth = 100 } ); /*НомерДок*/
-            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 5 }, "text", 5) { FixedWidth = 160 } ); /*ДатаДок*/
-            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 5 }, "text", 6)); /*Організація*/
-            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 5 }, "text", 7)); /*Склад*/
-            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 5 }, "text", 8)); /*СумаДокументу*/
-            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 5 }, "text", 9)); /*Коментар*/
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { FixedWidth = 400 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 4) { FixedWidth = 100 } ); /*НомерДок*/
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 5) { FixedWidth = 160 } ); /*ДатаДок*/
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Організація*/
+            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Склад*/
+            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 8)); /*СумаДокументу*/
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 9)); /*Коментар*/
             
         }
 
@@ -4231,18 +4261,18 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 5 }, "pixbuf", 0)); /*Image*/
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 4 }, "pixbuf", 0)); /*Image*/
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false }); /*UID*/
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererToggle(), "active", 2)); /*Проведений документ*/
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 5 }, "text", 3) { FixedWidth = 400 } ); /*Назва*/
-            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 5 }, "text", 4) { FixedWidth = 100 } ); /*НомерДок*/
-            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 5 }, "text", 5) { FixedWidth = 160 } ); /*ДатаДок*/
-            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 5 }, "text", 6)); /*Організація*/
-            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 5 }, "text", 7)); /*Склад*/
-            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 5 }, "text", 8)); /*Валюта*/
-            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 5 }, "text", 9)); /*СумаДокументу*/
-            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 5 }, "text", 10)); /*Коментар*/
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { FixedWidth = 400 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 4) { FixedWidth = 100 } ); /*НомерДок*/
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 5) { FixedWidth = 160 } ); /*ДатаДок*/
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Організація*/
+            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Склад*/
+            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Валюта*/
+            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 9)); /*СумаДокументу*/
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 10)); /*Коментар*/
             
         }
 
@@ -4359,20 +4389,20 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 5 }, "pixbuf", 0)); /*Image*/
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 4 }, "pixbuf", 0)); /*Image*/
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false }); /*UID*/
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererToggle(), "active", 2)); /*Проведений документ*/
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 5 }, "text", 3) { FixedWidth = 400 } ); /*Назва*/
-            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 5 }, "text", 4) { FixedWidth = 100 } ); /*НомерДок*/
-            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 5 }, "text", 5) { FixedWidth = 160 } ); /*ДатаДок*/
-            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 5 }, "text", 6)); /*Організація*/
-            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 5 }, "text", 7)); /*Контрагент*/
-            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 5 }, "text", 8)); /*Валюта*/
-            treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText() { Xpad = 5 }, "text", 9)); /*Каса*/
-            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 5 }, "text", 10)); /*Склад*/
-            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 5 }, "text", 11)); /*СумаДокументу*/
-            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 5 }, "text", 12)); /*Коментар*/
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { FixedWidth = 400 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 4) { FixedWidth = 100 } ); /*НомерДок*/
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 5) { FixedWidth = 160 } ); /*ДатаДок*/
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Організація*/
+            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Контрагент*/
+            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Валюта*/
+            treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText() { Xpad = 4 }, "text", 9)); /*Каса*/
+            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 10)); /*Склад*/
+            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 11)); /*СумаДокументу*/
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 12)); /*Коментар*/
             
         }
 
