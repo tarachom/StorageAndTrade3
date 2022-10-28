@@ -2102,6 +2102,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
     public class ЗамовленняПостачальнику_Записи
     {
         string Image = "doc.png";
+        bool Spend = false;
         string ID = "";
         
         string Назва = "";
@@ -2116,11 +2117,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID, Spend /*Проведений документ*/
             /* */ , Назва, НомерДок, ДатаДок, Організація, Контрагент, Склад, Валюта, СумаДокументу, Коментар };
         }
 
-        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */
+        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(bool) /* Spend Проведений документ*/
             , typeof(string) /* Назва */
             , typeof(string) /* НомерДок */
             , typeof(string) /* ДатаДок */
@@ -2134,18 +2135,19 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
-            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /*Image*/
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false }); /*UID*/
+            treeView.AppendColumn(new TreeViewColumn("П", new CellRendererToggle(), "active", 2)); /*Проведений документ*/
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 2) { FixedWidth = 420 } );
-            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText(), "text", 3) { FixedWidth = 100 } );
-            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText(), "text", 4) { FixedWidth = 160 } );
-            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText(), "text", 5));
-            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText(), "text", 6));
-            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText(), "text", 7));
-            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText(), "text", 8));
-            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText(), "text", 9));
-            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText(), "text", 10));
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 3) { FixedWidth = 420 } );
+            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText(), "text", 4) { FixedWidth = 100 } );
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText(), "text", 5) { FixedWidth = 160 } );
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText(), "text", 6));
+            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText(), "text", 7));
+            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText(), "text", 8));
+            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText(), "text", 9));
+            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText(), "text", 10));
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText(), "text", 11));
             
         }
 
@@ -2156,8 +2158,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Документи.ЗамовленняПостачальнику_Select ЗамовленняПостачальнику_Select = new Документи.ЗамовленняПостачальнику_Select();
             ЗамовленняПостачальнику_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Документи.ЗамовленняПостачальнику_Const.Назва /* 1 */
+                { "spend" /*Проведений документ*/
+                    , Документи.ЗамовленняПостачальнику_Const.Назва /* 1 */
                     , Документи.ЗамовленняПостачальнику_Const.НомерДок /* 2 */
                     , Документи.ЗамовленняПостачальнику_Const.ДатаДок /* 3 */
                     , Документи.ЗамовленняПостачальнику_Const.СумаДокументу /* 4 */
@@ -2212,6 +2214,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     Store.AppendValues(new ЗамовленняПостачальнику_Записи
                     {
                         ID = cur.UnigueID.ToString(),
+                        Spend = (bool)cur.Fields?["spend"]!, /*Проведений документ*/
                         Організація = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Контрагент = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
                         Склад = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
@@ -2235,6 +2238,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
     public class ПоступленняТоварівТаПослуг_Записи
     {
         string Image = "doc.png";
+        bool Spend = false;
         string ID = "";
         
         string Назва = "";
@@ -2250,11 +2254,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID, Spend /*Проведений документ*/
             /* */ , Назва, НомерДок, ДатаДок, Організація, Склад, Контрагент, Валюта, Каса, СумаДокументу, Коментар };
         }
 
-        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */
+        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(bool) /* Spend Проведений документ*/
             , typeof(string) /* Назва */
             , typeof(string) /* НомерДок */
             , typeof(string) /* ДатаДок */
@@ -2269,19 +2273,20 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
-            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /*Image*/
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false }); /*UID*/
+            treeView.AppendColumn(new TreeViewColumn("П", new CellRendererToggle(), "active", 2)); /*Проведений документ*/
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 2) { FixedWidth = 450 } );
-            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText(), "text", 3) { FixedWidth = 100 } );
-            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText(), "text", 4) { FixedWidth = 160 } );
-            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText(), "text", 5));
-            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText(), "text", 6));
-            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText(), "text", 7));
-            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText(), "text", 8));
-            treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText(), "text", 9));
-            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText(), "text", 10));
-            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText(), "text", 11));
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 3) { FixedWidth = 450 } );
+            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText(), "text", 4) { FixedWidth = 100 } );
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText(), "text", 5) { FixedWidth = 160 } );
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText(), "text", 6));
+            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText(), "text", 7));
+            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText(), "text", 8));
+            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText(), "text", 9));
+            treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText(), "text", 10));
+            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText(), "text", 11));
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText(), "text", 12));
             
         }
 
@@ -2292,8 +2297,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Документи.ПоступленняТоварівТаПослуг_Select ПоступленняТоварівТаПослуг_Select = new Документи.ПоступленняТоварівТаПослуг_Select();
             ПоступленняТоварівТаПослуг_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Документи.ПоступленняТоварівТаПослуг_Const.Назва /* 1 */
+                { "spend" /*Проведений документ*/
+                    , Документи.ПоступленняТоварівТаПослуг_Const.Назва /* 1 */
                     , Документи.ПоступленняТоварівТаПослуг_Const.НомерДок /* 2 */
                     , Документи.ПоступленняТоварівТаПослуг_Const.ДатаДок /* 3 */
                     , Документи.ПоступленняТоварівТаПослуг_Const.СумаДокументу /* 4 */
@@ -2356,6 +2361,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     Store.AppendValues(new ПоступленняТоварівТаПослуг_Записи
                     {
                         ID = cur.UnigueID.ToString(),
+                        Spend = (bool)cur.Fields?["spend"]!, /*Проведений документ*/
                         Організація = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Склад = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
                         Контрагент = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
@@ -2380,6 +2386,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
     public class ЗамовленняКлієнта_Записи
     {
         string Image = "doc.png";
+        bool Spend = false;
         string ID = "";
         
         string Назва = "";
@@ -2395,11 +2402,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID, Spend /*Проведений документ*/
             /* */ , Назва, НомерДок, ДатаДок, Організація, Контрагент, Валюта, Каса, Склад, СумаДокументу, Коментар };
         }
 
-        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */
+        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(bool) /* Spend Проведений документ*/
             , typeof(string) /* Назва */
             , typeof(string) /* НомерДок */
             , typeof(string) /* ДатаДок */
@@ -2414,19 +2421,20 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
-            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /*Image*/
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false }); /*UID*/
+            treeView.AppendColumn(new TreeViewColumn("П", new CellRendererToggle(), "active", 2)); /*Проведений документ*/
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 2) { FixedWidth = 400 } );
-            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText(), "text", 3) { FixedWidth = 100 } );
-            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText(), "text", 4) { FixedWidth = 160 } );
-            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText(), "text", 5));
-            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText(), "text", 6));
-            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText(), "text", 7));
-            treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText(), "text", 8));
-            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText(), "text", 9));
-            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText(), "text", 10));
-            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText(), "text", 11));
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 3) { FixedWidth = 400 } );
+            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText(), "text", 4) { FixedWidth = 100 } );
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText(), "text", 5) { FixedWidth = 160 } );
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText(), "text", 6));
+            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText(), "text", 7));
+            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText(), "text", 8));
+            treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText(), "text", 9));
+            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText(), "text", 10));
+            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText(), "text", 11));
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText(), "text", 12));
             
         }
 
@@ -2437,8 +2445,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Документи.ЗамовленняКлієнта_Select ЗамовленняКлієнта_Select = new Документи.ЗамовленняКлієнта_Select();
             ЗамовленняКлієнта_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Документи.ЗамовленняКлієнта_Const.Назва /* 1 */
+                { "spend" /*Проведений документ*/
+                    , Документи.ЗамовленняКлієнта_Const.Назва /* 1 */
                     , Документи.ЗамовленняКлієнта_Const.НомерДок /* 2 */
                     , Документи.ЗамовленняКлієнта_Const.ДатаДок /* 3 */
                     , Документи.ЗамовленняКлієнта_Const.СумаДокументу /* 4 */
@@ -2501,6 +2509,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     Store.AppendValues(new ЗамовленняКлієнта_Записи
                     {
                         ID = cur.UnigueID.ToString(),
+                        Spend = (bool)cur.Fields?["spend"]!, /*Проведений документ*/
                         Організація = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Контрагент = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
                         Валюта = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
@@ -2525,6 +2534,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
     public class РеалізаціяТоварівТаПослуг_Записи
     {
         string Image = "doc.png";
+        bool Spend = false;
         string ID = "";
         
         string Назва = "";
@@ -2540,11 +2550,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID, Spend /*Проведений документ*/
             /* */ , Назва, НомерДок, ДатаДок, Організація, Контрагент, Валюта, Каса, Склад, СумаДокументу, Коментар };
         }
 
-        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */
+        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(bool) /* Spend Проведений документ*/
             , typeof(string) /* Назва */
             , typeof(string) /* НомерДок */
             , typeof(string) /* ДатаДок */
@@ -2559,19 +2569,20 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
-            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /*Image*/
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false }); /*UID*/
+            treeView.AppendColumn(new TreeViewColumn("П", new CellRendererToggle(), "active", 2)); /*Проведений документ*/
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 2) { FixedWidth = 420 } );
-            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText(), "text", 3) { FixedWidth = 100 } );
-            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText(), "text", 4) { FixedWidth = 160 } );
-            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText(), "text", 5));
-            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText(), "text", 6));
-            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText(), "text", 7));
-            treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText(), "text", 8));
-            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText(), "text", 9));
-            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText(), "text", 10));
-            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText(), "text", 11));
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 3) { FixedWidth = 420 } );
+            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText(), "text", 4) { FixedWidth = 100 } );
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText(), "text", 5) { FixedWidth = 160 } );
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText(), "text", 6));
+            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText(), "text", 7));
+            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText(), "text", 8));
+            treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText(), "text", 9));
+            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText(), "text", 10));
+            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText(), "text", 11));
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText(), "text", 12));
             
         }
 
@@ -2582,8 +2593,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Документи.РеалізаціяТоварівТаПослуг_Select РеалізаціяТоварівТаПослуг_Select = new Документи.РеалізаціяТоварівТаПослуг_Select();
             РеалізаціяТоварівТаПослуг_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Документи.РеалізаціяТоварівТаПослуг_Const.Назва /* 1 */
+                { "spend" /*Проведений документ*/
+                    , Документи.РеалізаціяТоварівТаПослуг_Const.Назва /* 1 */
                     , Документи.РеалізаціяТоварівТаПослуг_Const.НомерДок /* 2 */
                     , Документи.РеалізаціяТоварівТаПослуг_Const.ДатаДок /* 3 */
                     , Документи.РеалізаціяТоварівТаПослуг_Const.СумаДокументу /* 4 */
@@ -2646,6 +2657,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     Store.AppendValues(new РеалізаціяТоварівТаПослуг_Записи
                     {
                         ID = cur.UnigueID.ToString(),
+                        Spend = (bool)cur.Fields?["spend"]!, /*Проведений документ*/
                         Організація = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Контрагент = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
                         Валюта = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
@@ -2670,6 +2682,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
     public class ВстановленняЦінНоменклатури_Записи
     {
         string Image = "doc.png";
+        bool Spend = false;
         string ID = "";
         
         string Назва = "";
@@ -2682,11 +2695,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID, Spend /*Проведений документ*/
             /* */ , Назва, НомерДок, ДатаДок, Організація, Валюта, ВидЦіни, Коментар };
         }
 
-        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */
+        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(bool) /* Spend Проведений документ*/
             , typeof(string) /* Назва */
             , typeof(string) /* НомерДок */
             , typeof(string) /* ДатаДок */
@@ -2698,16 +2711,17 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
-            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /*Image*/
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false }); /*UID*/
+            treeView.AppendColumn(new TreeViewColumn("П", new CellRendererToggle(), "active", 2)); /*Проведений документ*/
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 2) { FixedWidth = 450 } );
-            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText(), "text", 3) { FixedWidth = 100 } );
-            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText(), "text", 4) { FixedWidth = 160 } );
-            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText(), "text", 5));
-            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText(), "text", 6));
-            treeView.AppendColumn(new TreeViewColumn("Вид ціни", new CellRendererText(), "text", 7));
-            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText(), "text", 8));
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 3) { FixedWidth = 450 } );
+            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText(), "text", 4) { FixedWidth = 100 } );
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText(), "text", 5) { FixedWidth = 160 } );
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText(), "text", 6));
+            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText(), "text", 7));
+            treeView.AppendColumn(new TreeViewColumn("Вид ціни", new CellRendererText(), "text", 8));
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText(), "text", 9));
             
         }
 
@@ -2718,8 +2732,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Документи.ВстановленняЦінНоменклатури_Select ВстановленняЦінНоменклатури_Select = new Документи.ВстановленняЦінНоменклатури_Select();
             ВстановленняЦінНоменклатури_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Документи.ВстановленняЦінНоменклатури_Const.Назва /* 1 */
+                { "spend" /*Проведений документ*/
+                    , Документи.ВстановленняЦінНоменклатури_Const.Назва /* 1 */
                     , Документи.ВстановленняЦінНоменклатури_Const.НомерДок /* 2 */
                     , Документи.ВстановленняЦінНоменклатури_Const.ДатаДок /* 3 */
                     , Документи.ВстановленняЦінНоменклатури_Const.Коментар /* 4 */
@@ -2765,6 +2779,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     Store.AppendValues(new ВстановленняЦінНоменклатури_Записи
                     {
                         ID = cur.UnigueID.ToString(),
+                        Spend = (bool)cur.Fields?["spend"]!, /*Проведений документ*/
                         Організація = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Валюта = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
                         ВидЦіни = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
@@ -2786,6 +2801,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
     public class ПрихіднийКасовийОрдер_Записи
     {
         string Image = "doc.png";
+        bool Spend = false;
         string ID = "";
         
         string Назва = "";
@@ -2801,11 +2817,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID, Spend /*Проведений документ*/
             /* */ , Назва, НомерДок, ДатаДок, Організація, Валюта, Каса, КасаВідправник, Контрагент, СумаДокументу, Коментар };
         }
 
-        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */
+        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(bool) /* Spend Проведений документ*/
             , typeof(string) /* Назва */
             , typeof(string) /* НомерДок */
             , typeof(string) /* ДатаДок */
@@ -2820,19 +2836,20 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
-            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /*Image*/
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false }); /*UID*/
+            treeView.AppendColumn(new TreeViewColumn("П", new CellRendererToggle(), "active", 2)); /*Проведений документ*/
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 2) { FixedWidth = 400 } );
-            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText(), "text", 3) { FixedWidth = 100 } );
-            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText(), "text", 4) { FixedWidth = 160 } );
-            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText(), "text", 5));
-            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText(), "text", 6));
-            treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText(), "text", 7));
-            treeView.AppendColumn(new TreeViewColumn("Каса відправник", new CellRendererText(), "text", 8));
-            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText(), "text", 9));
-            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText(), "text", 10));
-            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText(), "text", 11));
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 3) { FixedWidth = 400 } );
+            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText(), "text", 4) { FixedWidth = 100 } );
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText(), "text", 5) { FixedWidth = 160 } );
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText(), "text", 6));
+            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText(), "text", 7));
+            treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText(), "text", 8));
+            treeView.AppendColumn(new TreeViewColumn("Каса відправник", new CellRendererText(), "text", 9));
+            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText(), "text", 10));
+            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText(), "text", 11));
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText(), "text", 12));
             
         }
 
@@ -2843,8 +2860,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Документи.ПрихіднийКасовийОрдер_Select ПрихіднийКасовийОрдер_Select = new Документи.ПрихіднийКасовийОрдер_Select();
             ПрихіднийКасовийОрдер_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Документи.ПрихіднийКасовийОрдер_Const.Назва /* 1 */
+                { "spend" /*Проведений документ*/
+                    , Документи.ПрихіднийКасовийОрдер_Const.Назва /* 1 */
                     , Документи.ПрихіднийКасовийОрдер_Const.НомерДок /* 2 */
                     , Документи.ПрихіднийКасовийОрдер_Const.ДатаДок /* 3 */
                     , Документи.ПрихіднийКасовийОрдер_Const.СумаДокументу /* 4 */
@@ -2907,6 +2924,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     Store.AppendValues(new ПрихіднийКасовийОрдер_Записи
                     {
                         ID = cur.UnigueID.ToString(),
+                        Spend = (bool)cur.Fields?["spend"]!, /*Проведений документ*/
                         Організація = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Валюта = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
                         Каса = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
@@ -2931,6 +2949,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
     public class РозхіднийКасовийОрдер_Записи
     {
         string Image = "doc.png";
+        bool Spend = false;
         string ID = "";
         
         string Назва = "";
@@ -2946,11 +2965,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID, Spend /*Проведений документ*/
             /* */ , Назва, НомерДок, ДатаДок, Організація, Контрагент, Валюта, Каса, КасаОтримувач, СумаДокументу, Коментар };
         }
 
-        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */
+        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(bool) /* Spend Проведений документ*/
             , typeof(string) /* Назва */
             , typeof(string) /* НомерДок */
             , typeof(string) /* ДатаДок */
@@ -2965,19 +2984,20 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
-            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /*Image*/
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false }); /*UID*/
+            treeView.AppendColumn(new TreeViewColumn("П", new CellRendererToggle(), "active", 2)); /*Проведений документ*/
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 2) { FixedWidth = 400 } );
-            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText(), "text", 3) { FixedWidth = 100 } );
-            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText(), "text", 4) { FixedWidth = 160 } );
-            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText(), "text", 5));
-            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText(), "text", 6));
-            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText(), "text", 7));
-            treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText(), "text", 8));
-            treeView.AppendColumn(new TreeViewColumn("Каса отримувач", new CellRendererText(), "text", 9));
-            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText(), "text", 10));
-            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText(), "text", 11));
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 3) { FixedWidth = 400 } );
+            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText(), "text", 4) { FixedWidth = 100 } );
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText(), "text", 5) { FixedWidth = 160 } );
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText(), "text", 6));
+            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText(), "text", 7));
+            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText(), "text", 8));
+            treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText(), "text", 9));
+            treeView.AppendColumn(new TreeViewColumn("Каса отримувач", new CellRendererText(), "text", 10));
+            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText(), "text", 11));
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText(), "text", 12));
             
         }
 
@@ -2988,8 +3008,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Документи.РозхіднийКасовийОрдер_Select РозхіднийКасовийОрдер_Select = new Документи.РозхіднийКасовийОрдер_Select();
             РозхіднийКасовийОрдер_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Документи.РозхіднийКасовийОрдер_Const.Назва /* 1 */
+                { "spend" /*Проведений документ*/
+                    , Документи.РозхіднийКасовийОрдер_Const.Назва /* 1 */
                     , Документи.РозхіднийКасовийОрдер_Const.НомерДок /* 2 */
                     , Документи.РозхіднийКасовийОрдер_Const.ДатаДок /* 3 */
                     , Документи.РозхіднийКасовийОрдер_Const.СумаДокументу /* 4 */
@@ -3052,6 +3072,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     Store.AppendValues(new РозхіднийКасовийОрдер_Записи
                     {
                         ID = cur.UnigueID.ToString(),
+                        Spend = (bool)cur.Fields?["spend"]!, /*Проведений документ*/
                         Організація = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Контрагент = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
                         Валюта = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
@@ -3076,6 +3097,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
     public class ПереміщенняТоварів_Записи
     {
         string Image = "doc.png";
+        bool Spend = false;
         string ID = "";
         
         string Назва = "";
@@ -3088,11 +3110,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID, Spend /*Проведений документ*/
             /* */ , Назва, НомерДок, ДатаДок, Організація, СкладВідправник, СкладОтримувач, Коментар };
         }
 
-        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */
+        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(bool) /* Spend Проведений документ*/
             , typeof(string) /* Назва */
             , typeof(string) /* НомерДок */
             , typeof(string) /* ДатаДок */
@@ -3104,16 +3126,17 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
-            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /*Image*/
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false }); /*UID*/
+            treeView.AppendColumn(new TreeViewColumn("П", new CellRendererToggle(), "active", 2)); /*Проведений документ*/
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 2) { FixedWidth = 400 } );
-            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText(), "text", 3) { FixedWidth = 100 } );
-            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText(), "text", 4) { FixedWidth = 160 } );
-            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText(), "text", 5));
-            treeView.AppendColumn(new TreeViewColumn("Склад відправник", new CellRendererText(), "text", 6));
-            treeView.AppendColumn(new TreeViewColumn("Склад отримувач", new CellRendererText(), "text", 7));
-            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText(), "text", 8));
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 3) { FixedWidth = 400 } );
+            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText(), "text", 4) { FixedWidth = 100 } );
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText(), "text", 5) { FixedWidth = 160 } );
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText(), "text", 6));
+            treeView.AppendColumn(new TreeViewColumn("Склад відправник", new CellRendererText(), "text", 7));
+            treeView.AppendColumn(new TreeViewColumn("Склад отримувач", new CellRendererText(), "text", 8));
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText(), "text", 9));
             
         }
 
@@ -3124,8 +3147,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Документи.ПереміщенняТоварів_Select ПереміщенняТоварів_Select = new Документи.ПереміщенняТоварів_Select();
             ПереміщенняТоварів_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Документи.ПереміщенняТоварів_Const.Назва /* 1 */
+                { "spend" /*Проведений документ*/
+                    , Документи.ПереміщенняТоварів_Const.Назва /* 1 */
                     , Документи.ПереміщенняТоварів_Const.НомерДок /* 2 */
                     , Документи.ПереміщенняТоварів_Const.ДатаДок /* 3 */
                     , Документи.ПереміщенняТоварів_Const.Коментар /* 4 */
@@ -3171,6 +3194,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     Store.AppendValues(new ПереміщенняТоварів_Записи
                     {
                         ID = cur.UnigueID.ToString(),
+                        Spend = (bool)cur.Fields?["spend"]!, /*Проведений документ*/
                         Організація = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         СкладВідправник = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
                         СкладОтримувач = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
@@ -3192,6 +3216,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
     public class ПоверненняТоварівПостачальнику_Записи
     {
         string Image = "doc.png";
+        bool Spend = false;
         string ID = "";
         
         string Назва = "";
@@ -3207,11 +3232,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID, Spend /*Проведений документ*/
             /* */ , Назва, НомерДок, ДатаДок, Організація, Контрагент, Валюта, Каса, Склад, СумаДокументу, Коментар };
         }
 
-        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */
+        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(bool) /* Spend Проведений документ*/
             , typeof(string) /* Назва */
             , typeof(string) /* НомерДок */
             , typeof(string) /* ДатаДок */
@@ -3226,19 +3251,20 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
-            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /*Image*/
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false }); /*UID*/
+            treeView.AppendColumn(new TreeViewColumn("П", new CellRendererToggle(), "active", 2)); /*Проведений документ*/
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 2) { FixedWidth = 450 } );
-            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText(), "text", 3) { FixedWidth = 100 } );
-            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText(), "text", 4) { FixedWidth = 160 } );
-            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText(), "text", 5));
-            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText(), "text", 6));
-            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText(), "text", 7));
-            treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText(), "text", 8));
-            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText(), "text", 9));
-            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText(), "text", 10));
-            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText(), "text", 11));
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 3) { FixedWidth = 450 } );
+            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText(), "text", 4) { FixedWidth = 100 } );
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText(), "text", 5) { FixedWidth = 160 } );
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText(), "text", 6));
+            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText(), "text", 7));
+            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText(), "text", 8));
+            treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText(), "text", 9));
+            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText(), "text", 10));
+            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText(), "text", 11));
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText(), "text", 12));
             
         }
 
@@ -3249,8 +3275,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Документи.ПоверненняТоварівПостачальнику_Select ПоверненняТоварівПостачальнику_Select = new Документи.ПоверненняТоварівПостачальнику_Select();
             ПоверненняТоварівПостачальнику_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Документи.ПоверненняТоварівПостачальнику_Const.Назва /* 1 */
+                { "spend" /*Проведений документ*/
+                    , Документи.ПоверненняТоварівПостачальнику_Const.Назва /* 1 */
                     , Документи.ПоверненняТоварівПостачальнику_Const.НомерДок /* 2 */
                     , Документи.ПоверненняТоварівПостачальнику_Const.ДатаДок /* 3 */
                     , Документи.ПоверненняТоварівПостачальнику_Const.СумаДокументу /* 4 */
@@ -3313,6 +3339,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     Store.AppendValues(new ПоверненняТоварівПостачальнику_Записи
                     {
                         ID = cur.UnigueID.ToString(),
+                        Spend = (bool)cur.Fields?["spend"]!, /*Проведений документ*/
                         Організація = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Контрагент = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
                         Валюта = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
@@ -3337,6 +3364,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
     public class ПоверненняТоварівВідКлієнта_Записи
     {
         string Image = "doc.png";
+        bool Spend = false;
         string ID = "";
         
         string Назва = "";
@@ -3352,11 +3380,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID, Spend /*Проведений документ*/
             /* */ , Назва, НомерДок, ДатаДок, Організація, Валюта, Каса, Контрагент, Склад, СумаДокументу, Коментар };
         }
 
-        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */
+        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(bool) /* Spend Проведений документ*/
             , typeof(string) /* Назва */
             , typeof(string) /* НомерДок */
             , typeof(string) /* ДатаДок */
@@ -3371,19 +3399,20 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
-            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /*Image*/
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false }); /*UID*/
+            treeView.AppendColumn(new TreeViewColumn("П", new CellRendererToggle(), "active", 2)); /*Проведений документ*/
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 2) { FixedWidth = 420 } );
-            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText(), "text", 3) { FixedWidth = 100 } );
-            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText(), "text", 4) { FixedWidth = 160 } );
-            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText(), "text", 5));
-            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText(), "text", 6));
-            treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText(), "text", 7));
-            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText(), "text", 8));
-            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText(), "text", 9));
-            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText(), "text", 10));
-            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText(), "text", 11));
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 3) { FixedWidth = 420 } );
+            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText(), "text", 4) { FixedWidth = 100 } );
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText(), "text", 5) { FixedWidth = 160 } );
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText(), "text", 6));
+            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText(), "text", 7));
+            treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText(), "text", 8));
+            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText(), "text", 9));
+            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText(), "text", 10));
+            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText(), "text", 11));
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText(), "text", 12));
             
         }
 
@@ -3394,8 +3423,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Документи.ПоверненняТоварівВідКлієнта_Select ПоверненняТоварівВідКлієнта_Select = new Документи.ПоверненняТоварівВідКлієнта_Select();
             ПоверненняТоварівВідКлієнта_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Документи.ПоверненняТоварівВідКлієнта_Const.Назва /* 1 */
+                { "spend" /*Проведений документ*/
+                    , Документи.ПоверненняТоварівВідКлієнта_Const.Назва /* 1 */
                     , Документи.ПоверненняТоварівВідКлієнта_Const.НомерДок /* 2 */
                     , Документи.ПоверненняТоварівВідКлієнта_Const.ДатаДок /* 3 */
                     , Документи.ПоверненняТоварівВідКлієнта_Const.СумаДокументу /* 4 */
@@ -3458,6 +3487,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     Store.AppendValues(new ПоверненняТоварівВідКлієнта_Записи
                     {
                         ID = cur.UnigueID.ToString(),
+                        Spend = (bool)cur.Fields?["spend"]!, /*Проведений документ*/
                         Організація = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Валюта = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
                         Каса = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
@@ -3482,6 +3512,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
     public class АктВиконанихРобіт_Записи
     {
         string Image = "doc.png";
+        bool Spend = false;
         string ID = "";
         
         string Назва = "";
@@ -3496,11 +3527,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID, Spend /*Проведений документ*/
             /* */ , Назва, НомерДок, ДатаДок, Організація, Валюта, Каса, Контрагент, СумаДокументу, Коментар };
         }
 
-        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */
+        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(bool) /* Spend Проведений документ*/
             , typeof(string) /* Назва */
             , typeof(string) /* НомерДок */
             , typeof(string) /* ДатаДок */
@@ -3514,18 +3545,19 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
-            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /*Image*/
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false }); /*UID*/
+            treeView.AppendColumn(new TreeViewColumn("П", new CellRendererToggle(), "active", 2)); /*Проведений документ*/
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 2) { FixedWidth = 400 } );
-            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText(), "text", 3) { FixedWidth = 100 } );
-            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText(), "text", 4) { FixedWidth = 160 } );
-            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText(), "text", 5));
-            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText(), "text", 6));
-            treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText(), "text", 7));
-            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText(), "text", 8));
-            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText(), "text", 9));
-            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText(), "text", 10));
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 3) { FixedWidth = 400 } );
+            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText(), "text", 4) { FixedWidth = 100 } );
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText(), "text", 5) { FixedWidth = 160 } );
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText(), "text", 6));
+            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText(), "text", 7));
+            treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText(), "text", 8));
+            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText(), "text", 9));
+            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText(), "text", 10));
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText(), "text", 11));
             
         }
 
@@ -3536,8 +3568,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Документи.АктВиконанихРобіт_Select АктВиконанихРобіт_Select = new Документи.АктВиконанихРобіт_Select();
             АктВиконанихРобіт_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Документи.АктВиконанихРобіт_Const.Назва /* 1 */
+                { "spend" /*Проведений документ*/
+                    , Документи.АктВиконанихРобіт_Const.Назва /* 1 */
                     , Документи.АктВиконанихРобіт_Const.НомерДок /* 2 */
                     , Документи.АктВиконанихРобіт_Const.ДатаДок /* 3 */
                     , Документи.АктВиконанихРобіт_Const.СумаДокументу /* 4 */
@@ -3592,6 +3624,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     Store.AppendValues(new АктВиконанихРобіт_Записи
                     {
                         ID = cur.UnigueID.ToString(),
+                        Spend = (bool)cur.Fields?["spend"]!, /*Проведений документ*/
                         Організація = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Валюта = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
                         Каса = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
@@ -3615,6 +3648,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
     public class ВведенняЗалишків_Записи
     {
         string Image = "doc.png";
+        bool Spend = false;
         string ID = "";
         
         string Назва = "";
@@ -3628,11 +3662,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID, Spend /*Проведений документ*/
             /* */ , Назва, НомерДок, ДатаДок, Організація, Склад, Контрагент, Валюта, Коментар };
         }
 
-        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */
+        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(bool) /* Spend Проведений документ*/
             , typeof(string) /* Назва */
             , typeof(string) /* НомерДок */
             , typeof(string) /* ДатаДок */
@@ -3645,17 +3679,18 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
-            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /*Image*/
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false }); /*UID*/
+            treeView.AppendColumn(new TreeViewColumn("П", new CellRendererToggle(), "active", 2)); /*Проведений документ*/
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 2) { FixedWidth = 400 } );
-            treeView.AppendColumn(new TreeViewColumn("НомерДок", new CellRendererText(), "text", 3) { FixedWidth = 100 } );
-            treeView.AppendColumn(new TreeViewColumn("ДатаДок", new CellRendererText(), "text", 4) { FixedWidth = 160 } );
-            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText(), "text", 5));
-            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText(), "text", 6));
-            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText(), "text", 7));
-            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText(), "text", 8));
-            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText(), "text", 9));
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 3) { FixedWidth = 400 } );
+            treeView.AppendColumn(new TreeViewColumn("НомерДок", new CellRendererText(), "text", 4) { FixedWidth = 100 } );
+            treeView.AppendColumn(new TreeViewColumn("ДатаДок", new CellRendererText(), "text", 5) { FixedWidth = 160 } );
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText(), "text", 6));
+            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText(), "text", 7));
+            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText(), "text", 8));
+            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText(), "text", 9));
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText(), "text", 10));
             
         }
 
@@ -3666,8 +3701,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Документи.ВведенняЗалишків_Select ВведенняЗалишків_Select = new Документи.ВведенняЗалишків_Select();
             ВведенняЗалишків_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Документи.ВведенняЗалишків_Const.Назва /* 1 */
+                { "spend" /*Проведений документ*/
+                    , Документи.ВведенняЗалишків_Const.Назва /* 1 */
                     , Документи.ВведенняЗалишків_Const.НомерДок /* 2 */
                     , Документи.ВведенняЗалишків_Const.ДатаДок /* 3 */
                     , Документи.ВведенняЗалишків_Const.Коментар /* 4 */
@@ -3721,6 +3756,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     Store.AppendValues(new ВведенняЗалишків_Записи
                     {
                         ID = cur.UnigueID.ToString(),
+                        Spend = (bool)cur.Fields?["spend"]!, /*Проведений документ*/
                         Організація = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Склад = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
                         Контрагент = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
@@ -3743,6 +3779,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
     public class НадлишкиТоварів_Записи
     {
         string Image = "doc.png";
+        bool Spend = false;
         string ID = "";
         
         string Назва = "";
@@ -3754,11 +3791,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID, Spend /*Проведений документ*/
             /* */ , Назва, НомерДок, ДатаДок, Організація, Склад, Коментар };
         }
 
-        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */
+        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(bool) /* Spend Проведений документ*/
             , typeof(string) /* Назва */
             , typeof(string) /* НомерДок */
             , typeof(string) /* ДатаДок */
@@ -3769,15 +3806,16 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
-            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /*Image*/
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false }); /*UID*/
+            treeView.AppendColumn(new TreeViewColumn("П", new CellRendererToggle(), "active", 2)); /*Проведений документ*/
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 2) { FixedWidth = 400 } );
-            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText(), "text", 3) { FixedWidth = 100 } );
-            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText(), "text", 4) { FixedWidth = 160 } );
-            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText(), "text", 5));
-            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText(), "text", 6));
-            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText(), "text", 7));
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 3) { FixedWidth = 400 } );
+            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText(), "text", 4) { FixedWidth = 100 } );
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText(), "text", 5) { FixedWidth = 160 } );
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText(), "text", 6));
+            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText(), "text", 7));
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText(), "text", 8));
             
         }
 
@@ -3788,8 +3826,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Документи.НадлишкиТоварів_Select НадлишкиТоварів_Select = new Документи.НадлишкиТоварів_Select();
             НадлишкиТоварів_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Документи.НадлишкиТоварів_Const.Назва /* 1 */
+                { "spend" /*Проведений документ*/
+                    , Документи.НадлишкиТоварів_Const.Назва /* 1 */
                     , Документи.НадлишкиТоварів_Const.НомерДок /* 2 */
                     , Документи.НадлишкиТоварів_Const.ДатаДок /* 3 */
                     , Документи.НадлишкиТоварів_Const.Коментар /* 4 */
@@ -3827,6 +3865,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     Store.AppendValues(new НадлишкиТоварів_Записи
                     {
                         ID = cur.UnigueID.ToString(),
+                        Spend = (bool)cur.Fields?["spend"]!, /*Проведений документ*/
                         Організація = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Склад = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[НадлишкиТоварів_Const.Назва]?.ToString() ?? "", /**/
@@ -3847,6 +3886,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
     public class ПересортицяТоварів_Записи
     {
         string Image = "doc.png";
+        bool Spend = false;
         string ID = "";
         
         string Назва = "";
@@ -3858,11 +3898,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID, Spend /*Проведений документ*/
             /* */ , Назва, НомерДок, ДатаДок, Організація, Склад, Коментар };
         }
 
-        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */
+        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(bool) /* Spend Проведений документ*/
             , typeof(string) /* Назва */
             , typeof(string) /* НомерДок */
             , typeof(string) /* ДатаДок */
@@ -3873,15 +3913,16 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
-            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /*Image*/
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false }); /*UID*/
+            treeView.AppendColumn(new TreeViewColumn("П", new CellRendererToggle(), "active", 2)); /*Проведений документ*/
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 2) { FixedWidth = 400 } );
-            treeView.AppendColumn(new TreeViewColumn("НомерДок", new CellRendererText(), "text", 3) { FixedWidth = 100 } );
-            treeView.AppendColumn(new TreeViewColumn("ДатаДок", new CellRendererText(), "text", 4) { FixedWidth = 160 } );
-            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText(), "text", 5));
-            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText(), "text", 6));
-            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText(), "text", 7));
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 3) { FixedWidth = 400 } );
+            treeView.AppendColumn(new TreeViewColumn("НомерДок", new CellRendererText(), "text", 4) { FixedWidth = 100 } );
+            treeView.AppendColumn(new TreeViewColumn("ДатаДок", new CellRendererText(), "text", 5) { FixedWidth = 160 } );
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText(), "text", 6));
+            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText(), "text", 7));
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText(), "text", 8));
             
         }
 
@@ -3892,8 +3933,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Документи.ПересортицяТоварів_Select ПересортицяТоварів_Select = new Документи.ПересортицяТоварів_Select();
             ПересортицяТоварів_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Документи.ПересортицяТоварів_Const.Назва /* 1 */
+                { "spend" /*Проведений документ*/
+                    , Документи.ПересортицяТоварів_Const.Назва /* 1 */
                     , Документи.ПересортицяТоварів_Const.НомерДок /* 2 */
                     , Документи.ПересортицяТоварів_Const.ДатаДок /* 3 */
                     , Документи.ПересортицяТоварів_Const.Коментар /* 4 */
@@ -3931,6 +3972,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     Store.AppendValues(new ПересортицяТоварів_Записи
                     {
                         ID = cur.UnigueID.ToString(),
+                        Spend = (bool)cur.Fields?["spend"]!, /*Проведений документ*/
                         Організація = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Склад = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[ПересортицяТоварів_Const.Назва]?.ToString() ?? "", /**/
@@ -3951,6 +3993,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
     public class ПерерахунокТоварів_Записи
     {
         string Image = "doc.png";
+        bool Spend = false;
         string ID = "";
         
         string Назва = "";
@@ -3961,11 +4004,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID, Spend /*Проведений документ*/
             /* */ , Назва, НомерДок, ДатаДок, Склад, Коментар };
         }
 
-        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */
+        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(bool) /* Spend Проведений документ*/
             , typeof(string) /* Назва */
             , typeof(string) /* НомерДок */
             , typeof(string) /* ДатаДок */
@@ -3975,14 +4018,15 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
-            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /*Image*/
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false }); /*UID*/
+            treeView.AppendColumn(new TreeViewColumn("П", new CellRendererToggle(), "active", 2)); /*Проведений документ*/
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 2) { FixedWidth = 400 } );
-            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText(), "text", 3) { FixedWidth = 100 } );
-            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText(), "text", 4) { FixedWidth = 160 } );
-            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText(), "text", 5));
-            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText(), "text", 6));
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 3) { FixedWidth = 400 } );
+            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText(), "text", 4) { FixedWidth = 100 } );
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText(), "text", 5) { FixedWidth = 160 } );
+            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText(), "text", 6));
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText(), "text", 7));
             
         }
 
@@ -3993,8 +4037,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Документи.ПерерахунокТоварів_Select ПерерахунокТоварів_Select = new Документи.ПерерахунокТоварів_Select();
             ПерерахунокТоварів_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Документи.ПерерахунокТоварів_Const.Назва /* 1 */
+                { "spend" /*Проведений документ*/
+                    , Документи.ПерерахунокТоварів_Const.Назва /* 1 */
                     , Документи.ПерерахунокТоварів_Const.НомерДок /* 2 */
                     , Документи.ПерерахунокТоварів_Const.ДатаДок /* 3 */
                     , Документи.ПерерахунокТоварів_Const.Коментар /* 4 */
@@ -4024,6 +4068,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     Store.AppendValues(new ПерерахунокТоварів_Записи
                     {
                         ID = cur.UnigueID.ToString(),
+                        Spend = (bool)cur.Fields?["spend"]!, /*Проведений документ*/
                         Склад = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[ПерерахунокТоварів_Const.Назва]?.ToString() ?? "", /**/
                         НомерДок = cur.Fields?[ПерерахунокТоварів_Const.НомерДок]?.ToString() ?? "", /**/
@@ -4043,6 +4088,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
     public class ПсуванняТоварів_Записи
     {
         string Image = "doc.png";
+        bool Spend = false;
         string ID = "";
         
         string Назва = "";
@@ -4055,11 +4101,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID, Spend /*Проведений документ*/
             /* */ , Назва, НомерДок, ДатаДок, Організація, Склад, СумаДокументу, Коментар };
         }
 
-        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */
+        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(bool) /* Spend Проведений документ*/
             , typeof(string) /* Назва */
             , typeof(string) /* НомерДок */
             , typeof(string) /* ДатаДок */
@@ -4071,16 +4117,17 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
-            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /*Image*/
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false }); /*UID*/
+            treeView.AppendColumn(new TreeViewColumn("П", new CellRendererToggle(), "active", 2)); /*Проведений документ*/
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 2) { FixedWidth = 400 } );
-            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText(), "text", 3) { FixedWidth = 100 } );
-            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText(), "text", 4) { FixedWidth = 160 } );
-            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText(), "text", 5));
-            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText(), "text", 6));
-            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText(), "text", 7));
-            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText(), "text", 8));
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 3) { FixedWidth = 400 } );
+            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText(), "text", 4) { FixedWidth = 100 } );
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText(), "text", 5) { FixedWidth = 160 } );
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText(), "text", 6));
+            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText(), "text", 7));
+            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText(), "text", 8));
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText(), "text", 9));
             
         }
 
@@ -4091,8 +4138,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Документи.ПсуванняТоварів_Select ПсуванняТоварів_Select = new Документи.ПсуванняТоварів_Select();
             ПсуванняТоварів_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Документи.ПсуванняТоварів_Const.Назва /* 1 */
+                { "spend" /*Проведений документ*/
+                    , Документи.ПсуванняТоварів_Const.Назва /* 1 */
                     , Документи.ПсуванняТоварів_Const.НомерДок /* 2 */
                     , Документи.ПсуванняТоварів_Const.ДатаДок /* 3 */
                     , Документи.ПсуванняТоварів_Const.СумаДокументу /* 4 */
@@ -4131,6 +4178,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     Store.AppendValues(new ПсуванняТоварів_Записи
                     {
                         ID = cur.UnigueID.ToString(),
+                        Spend = (bool)cur.Fields?["spend"]!, /*Проведений документ*/
                         Організація = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Склад = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[ПсуванняТоварів_Const.Назва]?.ToString() ?? "", /**/
@@ -4152,6 +4200,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
     public class ВнутрішнєСпоживанняТоварів_Записи
     {
         string Image = "doc.png";
+        bool Spend = false;
         string ID = "";
         
         string Назва = "";
@@ -4165,11 +4214,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID, Spend /*Проведений документ*/
             /* */ , Назва, НомерДок, ДатаДок, Організація, Склад, Валюта, СумаДокументу, Коментар };
         }
 
-        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */
+        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(bool) /* Spend Проведений документ*/
             , typeof(string) /* Назва */
             , typeof(string) /* НомерДок */
             , typeof(string) /* ДатаДок */
@@ -4182,17 +4231,18 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
-            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /*Image*/
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false }); /*UID*/
+            treeView.AppendColumn(new TreeViewColumn("П", new CellRendererToggle(), "active", 2)); /*Проведений документ*/
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 2) { FixedWidth = 400 } );
-            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText(), "text", 3) { FixedWidth = 100 } );
-            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText(), "text", 4) { FixedWidth = 160 } );
-            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText(), "text", 5));
-            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText(), "text", 6));
-            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText(), "text", 7));
-            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText(), "text", 8));
-            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText(), "text", 9));
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 3) { FixedWidth = 400 } );
+            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText(), "text", 4) { FixedWidth = 100 } );
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText(), "text", 5) { FixedWidth = 160 } );
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText(), "text", 6));
+            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText(), "text", 7));
+            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText(), "text", 8));
+            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText(), "text", 9));
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText(), "text", 10));
             
         }
 
@@ -4203,8 +4253,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Документи.ВнутрішнєСпоживанняТоварів_Select ВнутрішнєСпоживанняТоварів_Select = new Документи.ВнутрішнєСпоживанняТоварів_Select();
             ВнутрішнєСпоживанняТоварів_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Документи.ВнутрішнєСпоживанняТоварів_Const.Назва /* 1 */
+                { "spend" /*Проведений документ*/
+                    , Документи.ВнутрішнєСпоживанняТоварів_Const.Назва /* 1 */
                     , Документи.ВнутрішнєСпоживанняТоварів_Const.НомерДок /* 2 */
                     , Документи.ВнутрішнєСпоживанняТоварів_Const.ДатаДок /* 3 */
                     , Документи.ВнутрішнєСпоживанняТоварів_Const.СумаДокументу /* 4 */
@@ -4251,6 +4301,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     Store.AppendValues(new ВнутрішнєСпоживанняТоварів_Записи
                     {
                         ID = cur.UnigueID.ToString(),
+                        Spend = (bool)cur.Fields?["spend"]!, /*Проведений документ*/
                         Організація = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Склад = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
                         Валюта = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
@@ -4273,6 +4324,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
     public class РахунокФактура_Записи
     {
         string Image = "doc.png";
+        bool Spend = false;
         string ID = "";
         
         string Назва = "";
@@ -4288,11 +4340,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID, Spend /*Проведений документ*/
             /* */ , Назва, НомерДок, ДатаДок, Організація, Контрагент, Валюта, Каса, Склад, СумаДокументу, Коментар };
         }
 
-        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */
+        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(bool) /* Spend Проведений документ*/
             , typeof(string) /* Назва */
             , typeof(string) /* НомерДок */
             , typeof(string) /* ДатаДок */
@@ -4307,19 +4359,20 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
-            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /*Image*/
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false }); /*UID*/
+            treeView.AppendColumn(new TreeViewColumn("П", new CellRendererToggle(), "active", 2)); /*Проведений документ*/
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 2) { FixedWidth = 400 } );
-            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText(), "text", 3) { FixedWidth = 100 } );
-            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText(), "text", 4) { FixedWidth = 160 } );
-            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText(), "text", 5));
-            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText(), "text", 6));
-            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText(), "text", 7));
-            treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText(), "text", 8));
-            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText(), "text", 9));
-            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText(), "text", 10));
-            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText(), "text", 11));
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 3) { FixedWidth = 400 } );
+            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText(), "text", 4) { FixedWidth = 100 } );
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText(), "text", 5) { FixedWidth = 160 } );
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText(), "text", 6));
+            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText(), "text", 7));
+            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText(), "text", 8));
+            treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText(), "text", 9));
+            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText(), "text", 10));
+            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText(), "text", 11));
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText(), "text", 12));
             
         }
 
@@ -4330,8 +4383,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Документи.РахунокФактура_Select РахунокФактура_Select = new Документи.РахунокФактура_Select();
             РахунокФактура_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Документи.РахунокФактура_Const.Назва /* 1 */
+                { "spend" /*Проведений документ*/
+                    , Документи.РахунокФактура_Const.Назва /* 1 */
                     , Документи.РахунокФактура_Const.НомерДок /* 2 */
                     , Документи.РахунокФактура_Const.ДатаДок /* 3 */
                     , Документи.РахунокФактура_Const.СумаДокументу /* 4 */
@@ -4394,6 +4447,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     Store.AppendValues(new РахунокФактура_Записи
                     {
                         ID = cur.UnigueID.ToString(),
+                        Spend = (bool)cur.Fields?["spend"]!, /*Проведений документ*/
                         Організація = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Контрагент = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
                         Валюта = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
