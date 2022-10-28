@@ -47,38 +47,35 @@ namespace StorageAndTrade
         {
             VBox vbox = new VBox();
 
-            ScrolledWindow scrolLeftMenu = new ScrolledWindow() { ShadowType = ShadowType.In, WidthRequest = 250 };
+            ScrolledWindow scrolLeftMenu = new ScrolledWindow() { ShadowType = ShadowType.In, WidthRequest = 200 };
             scrolLeftMenu.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
             scrolLeftMenu.Add(vbox);
 
-            CreateItemLeftMenu(vbox, "Продажі", OnClick_Продажі);
-            CreateItemLeftMenu(vbox, "Закупки", OnClick_Закупки);
-            CreateItemLeftMenu(vbox, "Документи", OnClick_Документи);
-            CreateItemLeftMenu(vbox, "Довідники", OnClick_Довідники);
-            CreateItemLeftMenu(vbox, "Налаштування", OnClick_Налаштування);
+            CreateItemLeftMenu(vbox, "Документи", OnClick_Документи, "books.ico");
+            CreateItemLeftMenu(vbox, "Журнали", OnClick_Журнали, "fonts.ico");
+            CreateItemLeftMenu(vbox, "Довідники", OnClick_Довідники, "images.ico");
+            CreateItemLeftMenu(vbox, "Налаштування", OnClick_Налаштування, "photos.ico");
 
             hbox.PackStart(scrolLeftMenu, false, false, 0);
         }
 
-        void CreateItemLeftMenu(VBox vBox, string name, EventHandler ClikAction)
+        void CreateItemLeftMenu(VBox vBox, string name, EventHandler ClikAction, string ico)
         {
-            HBox hBox = new HBox() { BorderWidth = 1 };
-            vBox.PackStart(hBox, false, false, 5);
+            LinkButton lb = new LinkButton(" " + name)
+            {
+                Halign = Align.Start,
+                Image = new Image(ico),
+                AlwaysShowImage = true
+            };
 
-            Image imageItem = new Image("form.ico");
-            hBox.PackStart(imageItem, false, false, 5);
+            lb.Image.Valign = Align.End;
 
-            LinkButton lb = new LinkButton(name) { Halign = Align.Start };
             lb.Clicked += ClikAction;
-            hBox.PackStart(lb, false, false, 0);
+
+            vBox.PackStart(lb, false, false, 0);
         }
 
-        void OnClick_Продажі(object? sender, EventArgs args)
-        {
-
-        }
-
-        void OnClick_Закупки(object? sender, EventArgs args)
+        void OnClick_Журнали(object? sender, EventArgs args)
         {
 
         }
@@ -115,20 +112,6 @@ namespace StorageAndTrade
         }
 
         #endregion
-
-        void CreatePack2(HBox hbox)
-        {
-
-
-            CreateNotebookPage("Оптимізація таблиць", () =>
-            {
-                Номенклатура номенклатура = new Номенклатура();
-                номенклатура.LoadRecords();
-                return номенклатура;
-            });
-
-
-        }
 
         #region Notebook Page
 

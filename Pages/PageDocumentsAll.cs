@@ -23,14 +23,16 @@ namespace StorageAndTrade
 
             VBox vLeft = new VBox(false, 0);
 
+            AddCaption(vLeft, "Продажі");
+            AddLink(vLeft, "Замовлення клієнта", ЗамовленняКлієнта);
+            AddLink(vLeft, "Рахунок фактура", РахунокФактура);
+            AddLink(vLeft, "Реалізація товарів та послуг", РеалізаціяТоварівТаПослуг);
+            AddLink(vLeft, "Акт виконаних робіт", АктВиконанихРобіт);
+            AddLink(vLeft, "Повернення товарів від клієнта", ПоверненняТоварівВідКлієнта);
+
+            AddCaption(vLeft, "Закупки");
             AddLink(vLeft, "Замовлення постачальнику", ЗамовленняПостачальнику);
             AddLink(vLeft, "Поступлення товарів та послуг", ПоступленняТоварівТаПослуг);
-            AddLink(vLeft, "Замовлення клієнта", ЗамовленняКлієнта);
-            AddLink(vLeft, "Реалізація товарів та послуг", РеалізаціяТоварівТаПослуг);
-            AddLink(vLeft, "Встановлення цін номенклатури", ВстановленняЦінНоменклатури);
-            AddLink(vLeft, "Прихідний касовий ордер", ПрихіднийКасовийОрдер);
-            AddLink(vLeft, "Розхідний касовий ордер", РозхіднийКасовийОрдер);
-            AddLink(vLeft, "Переміщення товарів", ПереміщенняТоварів);
             AddLink(vLeft, "Повернення товарів постачальнику", ПоверненняТоварівПостачальнику);
 
             hBoxList.PackStart(vLeft, false, false, 5);
@@ -39,12 +41,15 @@ namespace StorageAndTrade
 
             VBox vRight = new VBox(false, 0);
 
-            AddLink(vRight, "Повернення товарів від клієнта", ПоверненняТоварівВідКлієнта);
-            AddLink(vRight, "Акт виконаних робіт", АктВиконанихРобіт);
+            AddCaption(vRight, "Каса");
+            AddLink(vRight, "Прихідний касовий ордер", ПрихіднийКасовийОрдер);
+            AddLink(vRight, "Розхідний касовий ордер", РозхіднийКасовийОрдер);
+
+            AddCaption(vRight, "Склад");
+            AddLink(vRight, "Переміщення товарів", ПереміщенняТоварів);
             AddLink(vRight, "Введення залишків", ВведенняЗалишків);
+            AddLink(vRight, "Встановлення цін номенклатури", ВстановленняЦінНоменклатури);
             AddLink(vRight, "Внутрішнє споживання товарів", ВнутрішнєСпоживанняТоварів);
-            AddLink(vRight, "Рахунок фактура", РахунокФактура);
-            AddLink(vRight, "Введення залишків", ВведенняЗалишків);
 
             hBoxList.PackStart(vRight, false, false, 5);
 
@@ -277,7 +282,7 @@ namespace StorageAndTrade
 
         void AddLink(VBox vbox, string uri, EventHandler? clickAction = null)
         {
-            LinkButton lb = new LinkButton(uri) { Halign = Align.Start };
+            LinkButton lb = new LinkButton(" " + uri) { Halign = Align.Start, Image = new Image("doc.png"), AlwaysShowImage = true };
             vbox.PackStart(lb, false, false, 0);
 
             if (clickAction != null)
