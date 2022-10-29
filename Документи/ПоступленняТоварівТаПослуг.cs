@@ -64,7 +64,7 @@ namespace StorageAndTrade
         {
             ТабличніСписки.ПоступленняТоварівТаПослуг_Записи.LoadRecords();
 
-            Console.WriteLine(TreeViewGrid.Model.);
+            //Console.WriteLine(TreeViewGrid.Model.);
 
            
         }
