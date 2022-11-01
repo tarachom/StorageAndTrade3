@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 01.11.2022 19:31:22
+ * Дата конфігурації: 01.11.2022 19:51:30
  *
  */
  
@@ -2300,14 +2300,14 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                 }
                 case Перелічення.ТипПеріодуДляЖурналівДокументів.Квартал:
                 {
-                    DateTime ДатаТриМісяціНазад = DateTime.Now.AddMonths(-3);
-                    Where.Add(new Where(fieldWhere, Comparison.QT_EQ, new DateTime(ДатаТриМісяціНазад.Year, ДатаТриМісяціНазад.Month, 1)));
+                    DateTime ДатаТриМісцяНазад = DateTime.Now.AddMonths(-3);
+                    Where.Add(new Where(fieldWhere, Comparison.QT_EQ, new DateTime(ДатаТриМісцяНазад.Year, ДатаТриМісцяНазад.Month, 1)));
                     break;
                 }
                 case Перелічення.ТипПеріодуДляЖурналівДокументів.ЗМинулогоМісяця:
                 {
-                    DateTime ДатаМісяцьНазад = DateTime.Now.AddMonths(-1);
-                    Where.Add(new Where(fieldWhere, Comparison.QT_EQ, new DateTime(ДатаМісяцьНазад.Year, ДатаМісяцьНазад.Month, 1)));
+                    DateTime ДатаМісцьНазад = DateTime.Now.AddMonths(-1);
+                    Where.Add(new Where(fieldWhere, Comparison.QT_EQ, new DateTime(ДатаМісцьНазад.Year, ДатаМісцьНазад.Month, 1)));
                     break;
                 }
                 case Перелічення.ТипПеріодуДляЖурналівДокументів.ЗПочаткуМісяця:

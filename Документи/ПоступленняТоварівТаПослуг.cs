@@ -1,6 +1,7 @@
 using Gtk;
 
 using ТабличніСписки = StorageAndTrade_1_0.Документи.ТабличніСписки;
+using StorageAndTrade_1_0.Константи;
 using StorageAndTrade_1_0.Перелічення;
 
 namespace StorageAndTrade
@@ -49,11 +50,14 @@ namespace StorageAndTrade
 
             ComboBoxPeriodWhere = ТабличніСписки.Інтерфейс.СписокВідбірПоПеріоду();
             ComboBoxPeriodWhere.Changed += OnComboBoxPeriodWhereChanged;
-            if (ComboBoxPeriodWhere.Active == -1)
-                ComboBoxPeriodWhere.Active = 0;
             ToolItem periodWhere = new ToolItem();
             periodWhere.Add(ComboBoxPeriodWhere);
             toolbar.Add(periodWhere);
+
+            if ((int)ЖурналиДокументів.ОсновнийТипПеріоду_Const != 0)
+                ComboBoxPeriodWhere.ActiveId = ЖурналиДокументів.ОсновнийТипПеріоду_Const.ToString();
+            else
+                ComboBoxPeriodWhere.Active = 0;
 
             ScrolledWindow scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In };
             scrollTree.SetPolicy(PolicyType.Never, PolicyType.Automatic);
