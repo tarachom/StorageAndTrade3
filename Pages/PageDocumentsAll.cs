@@ -66,9 +66,7 @@ namespace StorageAndTrade
                 {
                     GeneralForm = GeneralForm
                 };
-
-                page.LoadRecords();
-
+                
                 return page;
             });
         }
@@ -81,8 +79,6 @@ namespace StorageAndTrade
                 {
                     GeneralForm = GeneralForm
                 };
-
-                page.LoadRecords();
 
                 return page;
             });
@@ -97,8 +93,6 @@ namespace StorageAndTrade
                     GeneralForm = GeneralForm
                 };
 
-                page.LoadRecords();
-
                 return page;
             });
         }
@@ -111,8 +105,6 @@ namespace StorageAndTrade
                 {
                     GeneralForm = GeneralForm
                 };
-
-                page.LoadRecords();
 
                 return page;
             });
@@ -127,8 +119,6 @@ namespace StorageAndTrade
                     GeneralForm = GeneralForm
                 };
 
-                page.LoadRecords();
-
                 return page;
             });
         }
@@ -141,8 +131,6 @@ namespace StorageAndTrade
                 {
                     GeneralForm = GeneralForm
                 };
-
-                page.LoadRecords();
 
                 return page;
             });
@@ -157,8 +145,6 @@ namespace StorageAndTrade
                     GeneralForm = GeneralForm
                 };
 
-                page.LoadRecords();
-
                 return page;
             });
         }
@@ -171,8 +157,6 @@ namespace StorageAndTrade
                 {
                     GeneralForm = GeneralForm
                 };
-
-                page.LoadRecords();
 
                 return page;
             });
@@ -187,8 +171,6 @@ namespace StorageAndTrade
                     GeneralForm = GeneralForm
                 };
 
-                page.LoadRecords();
-
                 return page;
             });
         }
@@ -201,8 +183,6 @@ namespace StorageAndTrade
                 {
                     GeneralForm = GeneralForm
                 };
-
-                page.LoadRecords();
 
                 return page;
             });
@@ -217,8 +197,6 @@ namespace StorageAndTrade
                     GeneralForm = GeneralForm
                 };
 
-                page.LoadRecords();
-
                 return page;
             });
         }
@@ -231,8 +209,6 @@ namespace StorageAndTrade
                 {
                     GeneralForm = GeneralForm
                 };
-
-                page.LoadRecords();
 
                 return page;
             });
@@ -247,8 +223,6 @@ namespace StorageAndTrade
                     GeneralForm = GeneralForm
                 };
 
-                page.LoadRecords();
-
                 return page;
             });
         }
@@ -261,8 +235,6 @@ namespace StorageAndTrade
                 {
                     GeneralForm = GeneralForm
                 };
-
-                page.LoadRecords();
 
                 return page;
             });

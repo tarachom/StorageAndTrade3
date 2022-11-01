@@ -140,7 +140,7 @@ namespace StorageAndTrade
                 ConfigurationParamCollection.SelectConfigurationParam(selectedRows[0].Name);
                 ConfigurationParamCollection.SaveConfigurationParamFromXML(ConfigurationParamCollection.PathToXML);
 
-                string PathToConfXML = System.IO.Path.Combine(AppContext.BaseDirectory, "Conf.xml");
+                string PathToConfXML = System.IO.Path.Combine(AppContext.BaseDirectory, "Confa.xml");
 
                 Exception exception;
 

@@ -1,6 +1,7 @@
 using Gtk;
 
 using ТабличніСписки = StorageAndTrade_1_0.Документи.ТабличніСписки;
+using StorageAndTrade_1_0.Перелічення;
 
 namespace StorageAndTrade
 {
@@ -9,6 +10,7 @@ namespace StorageAndTrade
         public FormStorageAndTrade? GeneralForm { get; set; }
 
         TreeView TreeViewGrid;
+        ComboBoxText ComboBoxPeriodWhere;
 
         public ПоступленняТоварівТаПослуг() : base()
         {
@@ -45,6 +47,14 @@ namespace StorageAndTrade
             //copyButton.Clicked += OnCopyClick;
             toolbar.Add(copyButton);
 
+            ComboBoxPeriodWhere = ТабличніСписки.Інтерфейс.СписокВідбірПоПеріоду();
+            ComboBoxPeriodWhere.Changed += OnComboBoxPeriodWhereChanged;
+            if (ComboBoxPeriodWhere.Active == -1)
+                ComboBoxPeriodWhere.Active = 0;
+            ToolItem periodWhere = new ToolItem();
+            periodWhere.Add(ComboBoxPeriodWhere);
+            toolbar.Add(periodWhere);
+
             ScrolledWindow scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In };
             scrollTree.SetPolicy(PolicyType.Never, PolicyType.Automatic);
 
@@ -60,13 +70,16 @@ namespace StorageAndTrade
             ShowAll();
         }
 
+        void OnComboBoxPeriodWhereChanged(object? sender, EventArgs args)
+        {
+            ТипПеріодуДляЖурналівДокументів типПеріоду = Enum.Parse<ТипПеріодуДляЖурналівДокументів>(ComboBoxPeriodWhere.ActiveId);
+            ТабличніСписки.ПоступленняТоварівТаПослуг_Записи.ДодатиВідбірПоПеріоду(типПеріоду);
+            LoadRecords();
+        }
+
         public void LoadRecords()
         {
             ТабличніСписки.ПоступленняТоварівТаПослуг_Записи.LoadRecords();
-
-            //Console.WriteLine(TreeViewGrid.Model.);
-
-           
         }
 
         void OnRefreshClick(object? sender, EventArgs args)
