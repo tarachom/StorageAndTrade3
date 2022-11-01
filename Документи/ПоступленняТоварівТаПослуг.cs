@@ -11,7 +11,7 @@ namespace StorageAndTrade
         public FormStorageAndTrade? GeneralForm { get; set; }
 
         TreeView TreeViewGrid;
-        ComboBoxText ComboBoxPeriodWhere;
+        ComboBoxText ComboBoxPeriodWhere = new ComboBoxText();
 
         public ПоступленняТоварівТаПослуг() : base()
         {
@@ -28,7 +28,25 @@ namespace StorageAndTrade
 
             PackStart(hBoxBotton, false, false, 10);
 
-            //Список
+            CreateToolbar();
+
+            ScrolledWindow scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In };
+            scrollTree.SetPolicy(PolicyType.Never, PolicyType.Automatic);
+
+            TreeViewGrid = new TreeView(ТабличніСписки.ПоступленняТоварівТаПослуг_Записи.Store);
+            TreeViewGrid.Selection.Mode = SelectionMode.Multiple;
+            //ViewGrid.RowActivated += OnRowActivated;
+            ТабличніСписки.ПоступленняТоварівТаПослуг_Записи.AddColumns(TreeViewGrid);
+
+            scrollTree.Add(TreeViewGrid);
+
+            PackStart(scrollTree, true, true, 0);
+
+            ShowAll();
+        }
+
+        void CreateToolbar()
+        {
             Toolbar toolbar = new Toolbar();
             PackStart(toolbar, false, false, 0);
 
@@ -48,36 +66,32 @@ namespace StorageAndTrade
             //copyButton.Clicked += OnCopyClick;
             toolbar.Add(copyButton);
 
+            //Відбір
+            ToolItem seperatorOne = new ToolItem();
+            seperatorOne.Add(new Separator(Orientation.Vertical));
+            toolbar.Add(seperatorOne);
+
+            HBox hBoxPeriodWhere = new HBox();
+            hBoxPeriodWhere.PackStart(new Label("Період:"), false, false, 5);
+
             ComboBoxPeriodWhere = ТабличніСписки.Інтерфейс.СписокВідбірПоПеріоду();
             ComboBoxPeriodWhere.Changed += OnComboBoxPeriodWhereChanged;
-            ToolItem periodWhere = new ToolItem();
-            periodWhere.Add(ComboBoxPeriodWhere);
-            toolbar.Add(periodWhere);
 
             if ((int)ЖурналиДокументів.ОсновнийТипПеріоду_Const != 0)
                 ComboBoxPeriodWhere.ActiveId = ЖурналиДокументів.ОсновнийТипПеріоду_Const.ToString();
             else
                 ComboBoxPeriodWhere.Active = 0;
 
-            ScrolledWindow scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In };
-            scrollTree.SetPolicy(PolicyType.Never, PolicyType.Automatic);
+            hBoxPeriodWhere.PackStart(ComboBoxPeriodWhere, false, false, 0);
 
-            TreeViewGrid = new TreeView(ТабличніСписки.ПоступленняТоварівТаПослуг_Записи.Store);
-            TreeViewGrid.Selection.Mode = SelectionMode.Multiple;
-            //ViewGrid.RowActivated += OnRowActivated;
-            ТабличніСписки.ПоступленняТоварівТаПослуг_Записи.AddColumns(TreeViewGrid);
-
-            scrollTree.Add(TreeViewGrid);
-
-            PackStart(scrollTree, true, true, 0);
-
-            ShowAll();
+            ToolItem periodWhere = new ToolItem();
+            periodWhere.Add(hBoxPeriodWhere);
+            toolbar.Add(periodWhere);
         }
 
         void OnComboBoxPeriodWhereChanged(object? sender, EventArgs args)
         {
-            ТипПеріодуДляЖурналівДокументів типПеріоду = Enum.Parse<ТипПеріодуДляЖурналівДокументів>(ComboBoxPeriodWhere.ActiveId);
-            ТабличніСписки.ПоступленняТоварівТаПослуг_Записи.ДодатиВідбірПоПеріоду(типПеріоду);
+            ТабличніСписки.ПоступленняТоварівТаПослуг_Записи.ДодатиВідбірПоПеріоду(Enum.Parse<ТипПеріодуДляЖурналівДокументів>(ComboBoxPeriodWhere.ActiveId));
             LoadRecords();
         }
 
