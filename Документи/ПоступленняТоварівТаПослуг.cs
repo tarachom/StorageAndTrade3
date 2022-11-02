@@ -39,8 +39,9 @@ namespace StorageAndTrade
             ТабличніСписки.ПоступленняТоварівТаПослуг_Записи.AddColumns(TreeViewGrid);
 
             TreeViewGrid.Selection.Mode = SelectionMode.Multiple;
+            TreeViewGrid.ActivateOnSingleClick = true;
             TreeViewGrid.RowActivated += OnRowActivated;
-            TreeViewGrid.ButtonReleaseEvent += OnButtonReleaseEvent;
+            TreeViewGrid.ButtonPressEvent += OnButtonPressEvent;
             scrollTree.Add(TreeViewGrid);
 
             PackStart(scrollTree, true, true, 0);
@@ -109,11 +110,6 @@ namespace StorageAndTrade
 
         void OnRowActivated(object sender, RowActivatedArgs args)
         {
-            Console.WriteLine(args.Path);
-        }
-
-        void OnButtonReleaseEvent(object? sender, ButtonReleaseEventArgs args)
-        {
             if (TreeViewGrid.Selection.CountSelectedRows() != 0)
             {
                 TreeIter iter;
@@ -123,6 +119,14 @@ namespace StorageAndTrade
 
                 ТабличніСписки.ПоступленняТоварівТаПослуг_Записи.SelectPointerItem =
                     new StorageAndTrade_1_0.Документи.ПоступленняТоварівТаПослуг_Pointer(unigueID);
+            }
+        }
+
+        void OnButtonPressEvent(object? sender, ButtonPressEventArgs args)
+        {
+            if (args.Event.Type == Gdk.EventType.DoubleButtonPress)
+            {
+                Console.WriteLine(args.Event);
             }
         }
 
