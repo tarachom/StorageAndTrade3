@@ -2,40 +2,100 @@ using Gtk;
 
 using AccountingSoftware;
 
+using StorageAndTrade_1_0.Довідники;
+
 namespace StorageAndTrade
 {
-    class DirectoryControl : HBox
+    abstract class DirectoryControl : HBox
     {
-
+        Label labelCaption = new Label();
         Entry entryText = new Entry();
+
+        public FormStorageAndTrade? GeneralForm { get; set; }
 
         public DirectoryControl() : base()
         {
-            PackStart(entryText, false, false, 5);
+            PackStart(labelCaption, false, false, 5);
+            PackStart(entryText, false, false, 0);
 
-            Button bOpen = new Button("...");
-            //bOpen.Clicked += (object? sender, EventArgs args) => { GeneralForm?.CloseCurrentPageNotebook(); };
+            Button bOpen = new Button(new Image("find.png"));
+            bOpen.Clicked += OpenSelect;
+
+            PackStart(bOpen, false, false, 2);
         }
 
-        private DirectoryPointer? mDirectoryPointerItem;
-
-        /// <summary>
-        /// Вказівник на елемент довідника
-        /// </summary>
-        public DirectoryPointer? DirectoryPointerItem
+        void OpenSelect(object? sender, EventArgs args)
         {
-            get { return mDirectoryPointerItem; }
+            GeneralForm?.CreateNotebookPage("Вибір - Довідник: Організації", () =>
+            {
+                Організації page = new Організації
+                {
+                    GeneralForm = GeneralForm
+                };
 
+                page.LoadRecords();
+
+                return page;
+            });
+        }
+
+        public string Caption
+        {
+            get
+            {
+                return labelCaption.Text;
+            }
             set
             {
-                mDirectoryPointerItem = value;
+                labelCaption.Text = value;
+            }
+        }
 
-                if (mDirectoryPointerItem != null)
-                    {
-                        //ReadPresentation();
-                    }
+        public System.Action? Select { get; set; }
+
+        protected string Presentation
+        {
+            get
+            {
+                return entryText.Text;
+            }
+            set
+            {
+                entryText.Text = value;
+            }
+        }
+        DirectoryPointer? directoryPointerItem;
+
+        protected DirectoryPointer? DirectoryPointerItem
+        {
+            get
+            {
+                return directoryPointerItem;
+            }
+            set
+            {
+                directoryPointerItem = value;
+            }
+        }
+    }
+
+    class DirectoryControl2 : DirectoryControl
+    {
+        Номенклатура_Pointer? directoryPointer;
+        public Номенклатура_Pointer? DirectoryPointer
+        {
+            get
+            {
+                return directoryPointer;
+            }
+            set
+            {
+                directoryPointer = value;
+
+                if (directoryPointer != null)
+                    Presentation = directoryPointer.GetPresentation();
                 else
-                    entryText.Text = "";
+                    Presentation = "";
             }
         }
     }

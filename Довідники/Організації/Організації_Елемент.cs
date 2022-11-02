@@ -24,6 +24,8 @@ namespace StorageAndTrade
         Entry СвідоцтвоСеріяНомер = new Entry() { WidthRequest = 300 };
         Entry СвідоцтвоДатаВидачі = new Entry() { WidthRequest = 300 };
 
+        DirectoryControl2 dc = new DirectoryControl2() { Caption = "Control:", Halign = Align.End };
+
         public Організації_Елемент() : base()
         {
             new VBox();
@@ -54,6 +56,9 @@ namespace StorageAndTrade
         void CreatePack1(HPaned hPaned)
         {
             VBox vBox = new VBox();
+
+            //Код2
+            vBox.PackStart(dc, false, false, 5);
 
             //Код
             HBox hBoxCode = new HBox() { Halign = Align.End };
@@ -143,6 +148,8 @@ namespace StorageAndTrade
             СвідоцтвоСеріяНомер.Text = Організації_Objest.СвідоцтвоСеріяНомер;
             СвідоцтвоДатаВидачі.Text = Організації_Objest.СвідоцтвоДатаВидачі;
             НазваПовна.Buffer.Text = Організації_Objest.НазваПовна;
+
+            dc.GeneralForm = GeneralForm;
         }
 
         void GetValue()
