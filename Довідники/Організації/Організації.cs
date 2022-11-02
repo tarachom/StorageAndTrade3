@@ -78,8 +78,6 @@ namespace StorageAndTrade
 
             if (ТабличніСписки.Організації_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.Організації_Записи.SelectPath, TreeViewGrid.Columns[0], false);
-            else if (ТабличніСписки.Організації_Записи.CurrentPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.Організації_Записи.CurrentPath, TreeViewGrid.Columns[0], false);
         }
 
         #region TreeView

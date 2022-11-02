@@ -3,6 +3,8 @@ using Gtk;
 using StorageAndTrade_1_0.Константи;
 using StorageAndTrade_1_0.Довідники;
 
+using ТабличніСписки = StorageAndTrade_1_0.Довідники.ТабличніСписки;
+
 namespace StorageAndTrade
 {
     class БанківськіРахункиКонтрагентів_Елемент : VBox
@@ -104,7 +106,10 @@ namespace StorageAndTrade
             GeneralForm?.RenameCurrentPageNotebook($"Банківський рахунок контрагента: {БанківськіРахункиКонтрагентів_Objest.Назва}");
 
             if (CallBack_RefreshList != null)
+            {
+                ТабличніСписки.БанківськіРахункиКонтрагентів_Записи.SelectPointerItem = БанківськіРахункиКонтрагентів_Objest.GetDirectoryPointer();
                 CallBack_RefreshList.Invoke();
+            }
         }
     }
 }

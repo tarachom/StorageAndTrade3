@@ -36,9 +36,12 @@ namespace StorageAndTrade
             scrollTree.SetPolicy(PolicyType.Never, PolicyType.Automatic);
 
             TreeViewGrid = new TreeView(ТабличніСписки.БанківськіРахункиКонтрагентів_Записи.Store);
-            TreeViewGrid.Selection.Mode = SelectionMode.Multiple;
-            TreeViewGrid.RowActivated += OnRowActivated;
             ТабличніСписки.БанківськіРахункиКонтрагентів_Записи.AddColumns(TreeViewGrid);
+
+            TreeViewGrid.Selection.Mode = SelectionMode.Multiple;
+            TreeViewGrid.ActivateOnSingleClick = true;
+            TreeViewGrid.RowActivated += OnRowActivated;
+            TreeViewGrid.ButtonPressEvent += OnButtonPressEvent;
 
             scrollTree.Add(TreeViewGrid);
 
@@ -72,38 +75,64 @@ namespace StorageAndTrade
         public void LoadRecords()
         {
             ТабличніСписки.БанківськіРахункиКонтрагентів_Записи.LoadRecords();
+
+            if (ТабличніСписки.БанківськіРахункиКонтрагентів_Записи.SelectPath != null)
+                TreeViewGrid.SetCursor(ТабличніСписки.БанківськіРахункиКонтрагентів_Записи.SelectPath, TreeViewGrid.Columns[0], false);
         }
+
+        #region TreeView
 
         void OnRowActivated(object sender, RowActivatedArgs args)
         {
-            TreeIter iter;
-
-            if (TreeViewGrid.Model.GetIter(out iter, args.Path))
+            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
             {
-                string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
+                TreeIter iter;
+                TreeViewGrid.Model.GetIter(out iter, TreeViewGrid.Selection.GetSelectedRows()[0]);
 
-                БанківськіРахункиКонтрагентів_Objest БанківськіРахункиКонтрагентів_Objest = new БанківськіРахункиКонтрагентів_Objest();
-                if (БанківськіРахункиКонтрагентів_Objest.Read(new UnigueID(uid)))
-                {
-                    GeneralForm?.CreateNotebookPage($"Банківський рахунок контрагента: {БанківськіРахункиКонтрагентів_Objest.Назва}", () =>
-                    {
-                        БанківськіРахункиКонтрагентів_Елемент page = new БанківськіРахункиКонтрагентів_Елемент
-                        {
-                            GeneralForm = GeneralForm,
-                            CallBack_RefreshList = LoadRecords,
-                            IsNew = false,
-                            БанківськіРахункиКонтрагентів_Objest = БанківськіРахункиКонтрагентів_Objest
-                        };
+                UnigueID unigueID = new UnigueID((string)TreeViewGrid.Model.GetValue(iter, 1));
 
-                        page.SetValue();
-
-                        return page;
-                    });
-                }
-                else
-                    Message.Error(GeneralForm, "Не вдалось прочитати!");
+                ТабличніСписки.БанківськіРахункиКонтрагентів_Записи.SelectPointerItem =
+                    new StorageAndTrade_1_0.Довідники.БанківськіРахункиКонтрагентів_Pointer(unigueID);
             }
         }
+
+        void OnButtonPressEvent(object? sender, ButtonPressEventArgs args)
+        {
+            if (args.Event.Type == Gdk.EventType.DoubleButtonPress && TreeViewGrid.Selection.CountSelectedRows() != 0)
+            {
+                TreeIter iter;
+
+                if (TreeViewGrid.Model.GetIter(out iter, TreeViewGrid.Selection.GetSelectedRows()[0]))
+                {
+                    string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
+
+                    БанківськіРахункиКонтрагентів_Objest БанківськіРахункиКонтрагентів_Objest = new БанківськіРахункиКонтрагентів_Objest();
+                    if (БанківськіРахункиКонтрагентів_Objest.Read(new UnigueID(uid)))
+                    {
+                        GeneralForm?.CreateNotebookPage($"Банківський рахунок контрагента: {БанківськіРахункиКонтрагентів_Objest.Назва}", () =>
+                        {
+                            БанківськіРахункиКонтрагентів_Елемент page = new БанківськіРахункиКонтрагентів_Елемент
+                            {
+                                GeneralForm = GeneralForm,
+                                CallBack_RefreshList = LoadRecords,
+                                IsNew = false,
+                                БанківськіРахункиКонтрагентів_Objest = БанківськіРахункиКонтрагентів_Objest
+                            };
+
+                            page.SetValue();
+
+                            return page;
+                        });
+                    }
+                    else
+                        Message.Error(GeneralForm, "Не вдалось прочитати!");
+                }
+            }
+        }
+
+        #endregion
+
+        #region ToolBar
 
         void OnAddClick(object? sender, EventArgs args)
         {
@@ -185,6 +214,8 @@ namespace StorageAndTrade
                 }
             }
         }
+
+        #endregion
 
     }
 }

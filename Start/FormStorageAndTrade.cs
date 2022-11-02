@@ -52,8 +52,8 @@ namespace StorageAndTrade
             scrolLeftMenu.Add(vbox);
 
             CreateItemLeftMenu(vbox, "Документи", OnClick_Документи, "books.ico");
-            CreateItemLeftMenu(vbox, "Журнали", OnClick_Журнали, "fonts.ico");
             CreateItemLeftMenu(vbox, "Довідники", OnClick_Довідники, "images.ico");
+            CreateItemLeftMenu(vbox, "Журнали", OnClick_Журнали, "fonts.ico");
             CreateItemLeftMenu(vbox, "Налаштування", OnClick_Налаштування, "photos.ico");
 
             hbox.PackStart(scrolLeftMenu, false, false, 0);
