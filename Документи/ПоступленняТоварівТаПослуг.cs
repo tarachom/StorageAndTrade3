@@ -1,8 +1,10 @@
 using Gtk;
 
+using AccountingSoftware;
+
 using ТабличніСписки = StorageAndTrade_1_0.Документи.ТабличніСписки;
-using StorageAndTrade_1_0.Константи;
-using StorageAndTrade_1_0.Перелічення;
+using Константи = StorageAndTrade_1_0.Константи;
+using Перелічення = StorageAndTrade_1_0.Перелічення;
 
 namespace StorageAndTrade
 {
@@ -34,10 +36,11 @@ namespace StorageAndTrade
             scrollTree.SetPolicy(PolicyType.Never, PolicyType.Automatic);
 
             TreeViewGrid = new TreeView(ТабличніСписки.ПоступленняТоварівТаПослуг_Записи.Store);
-            TreeViewGrid.Selection.Mode = SelectionMode.Multiple;
-            //ViewGrid.RowActivated += OnRowActivated;
             ТабличніСписки.ПоступленняТоварівТаПослуг_Записи.AddColumns(TreeViewGrid);
 
+            TreeViewGrid.Selection.Mode = SelectionMode.Multiple;
+            TreeViewGrid.RowActivated += OnRowActivated;
+            TreeViewGrid.ButtonReleaseEvent += OnButtonReleaseEvent;
             scrollTree.Add(TreeViewGrid);
 
             PackStart(scrollTree, true, true, 0);
@@ -77,11 +80,6 @@ namespace StorageAndTrade
             ComboBoxPeriodWhere = ТабличніСписки.Інтерфейс.СписокВідбірПоПеріоду();
             ComboBoxPeriodWhere.Changed += OnComboBoxPeriodWhereChanged;
 
-            if ((int)ЖурналиДокументів.ОсновнийТипПеріоду_Const != 0)
-                ComboBoxPeriodWhere.ActiveId = ЖурналиДокументів.ОсновнийТипПеріоду_Const.ToString();
-            else
-                ComboBoxPeriodWhere.Active = 0;
-
             hBoxPeriodWhere.PackStart(ComboBoxPeriodWhere, false, false, 0);
 
             ToolItem periodWhere = new ToolItem();
@@ -89,20 +87,61 @@ namespace StorageAndTrade
             toolbar.Add(periodWhere);
         }
 
-        void OnComboBoxPeriodWhereChanged(object? sender, EventArgs args)
+        public void SetValue()
         {
-            ТабличніСписки.ПоступленняТоварівТаПослуг_Записи.ДодатиВідбірПоПеріоду(Enum.Parse<ТипПеріодуДляЖурналівДокументів>(ComboBoxPeriodWhere.ActiveId));
-            LoadRecords();
+            if ((int)Константи.ЖурналиДокументів.ОсновнийТипПеріоду_Const != 0)
+                ComboBoxPeriodWhere.ActiveId = Константи.ЖурналиДокументів.ОсновнийТипПеріоду_Const.ToString();
+            else
+                ComboBoxPeriodWhere.Active = 0;
         }
 
         public void LoadRecords()
         {
             ТабличніСписки.ПоступленняТоварівТаПослуг_Записи.LoadRecords();
+
+            if (ТабличніСписки.ПоступленняТоварівТаПослуг_Записи.SelectPath != null)
+                TreeViewGrid.SetCursor(ТабличніСписки.ПоступленняТоварівТаПослуг_Записи.SelectPath, TreeViewGrid.Columns[0], false);
+            else
+                TreeViewGrid.SetCursor(ТабличніСписки.ПоступленняТоварівТаПослуг_Записи.CurrentPath, TreeViewGrid.Columns[0], false);
         }
+
+        #region  TreeView
+
+        void OnRowActivated(object sender, RowActivatedArgs args)
+        {
+            Console.WriteLine(args.Path);
+        }
+
+        void OnButtonReleaseEvent(object? sender, ButtonReleaseEventArgs args)
+        {
+            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
+            {
+                TreeIter iter;
+                TreeViewGrid.Model.GetIter(out iter, TreeViewGrid.Selection.GetSelectedRows()[0]);
+
+                UnigueID unigueID = new UnigueID((string)TreeViewGrid.Model.GetValue(iter, 1));
+
+                ТабличніСписки.ПоступленняТоварівТаПослуг_Записи.SelectPointerItem =
+                    new StorageAndTrade_1_0.Документи.ПоступленняТоварівТаПослуг_Pointer(unigueID);
+            }
+        }
+
+        #endregion
+
+        #region ToolBar
 
         void OnRefreshClick(object? sender, EventArgs args)
         {
             LoadRecords();
         }
+
+        void OnComboBoxPeriodWhereChanged(object? sender, EventArgs args)
+        {
+            ТабличніСписки.ПоступленняТоварівТаПослуг_Записи.ДодатиВідбірПоПеріоду(Enum.Parse<Перелічення.ТипПеріодуДляЖурналівДокументів>(ComboBoxPeriodWhere.ActiveId));
+            LoadRecords();
+        }
+
+        #endregion
+
     }
 }

@@ -2546,9 +2546,10 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Інтерфейс.ДодатиВідбірПоПеріоду(Where, Документи.ПоступленняТоварівТаПослуг_Const.ДатаДок, типПеріоду);
         }
 
-        public static DocumentPointer? DocumentPointerItem { get; set; }
-        public static DocumentPointer? SelectPointerItem { get; set; }
-        public static TreeIter? SelectIter;
+        public static ПоступленняТоварівТаПослуг_Pointer? DocumentPointerItem { get; set; }
+        public static ПоступленняТоварівТаПослуг_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? SelectPath;
+        public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
@@ -2622,7 +2623,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
                 if (cur != null)
                 {
-                    TreeIter iter = Store.AppendValues(new ПоступленняТоварівТаПослуг_Записи
+                    ПоступленняТоварівТаПослуг_Записи Запис = new ПоступленняТоварівТаПослуг_Записи
                     {
                         ID = cur.UnigueID.ToString(),
                         Spend = (bool)cur.Fields?["spend"]!, /*Проведений документ*/
@@ -2637,9 +2638,18 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                         СумаДокументу = cur.Fields?[ПоступленняТоварівТаПослуг_Const.СумаДокументу]?.ToString() ?? "", /**/
                         Коментар = cur.Fields?[ПоступленняТоварівТаПослуг_Const.Коментар]?.ToString() ?? "" /**/
 
-                    }.ToArray());
+                    };
 
+                    TreeIter CurrentIter = Store.AppendValues(Запис.ToArray());
+                    CurrentPath = Store.GetPath(CurrentIter);
 
+                    if (DocumentPointerItem != null || SelectPointerItem != null)
+                    {
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DocumentPointerItem!.UnigueID.ToString();
+
+                        if (Запис.ID == UidSelect)
+                            SelectPath = CurrentPath;
+                    }
                 }
             }
         }

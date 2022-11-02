@@ -66,7 +66,7 @@ namespace StorageAndTrade
                 {
                     GeneralForm = GeneralForm
                 };
-                
+
                 return page;
             });
         }
@@ -79,6 +79,8 @@ namespace StorageAndTrade
                 {
                     GeneralForm = GeneralForm
                 };
+
+                page.SetValue();
 
                 return page;
             });
