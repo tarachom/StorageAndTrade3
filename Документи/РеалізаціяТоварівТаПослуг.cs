@@ -1,6 +1,10 @@
 using Gtk;
 
+using AccountingSoftware;
+
 using ТабличніСписки = StorageAndTrade_1_0.Документи.ТабличніСписки;
+using Константи = StorageAndTrade_1_0.Константи;
+using Перелічення = StorageAndTrade_1_0.Перелічення;
 
 namespace StorageAndTrade
 {
@@ -9,6 +13,7 @@ namespace StorageAndTrade
         public FormStorageAndTrade? GeneralForm { get; set; }
 
         TreeView TreeViewGrid;
+        ComboBoxText ComboBoxPeriodWhere = new ComboBoxText();
 
         public РеалізаціяТоварівТаПослуг() : base()
         {
@@ -25,7 +30,27 @@ namespace StorageAndTrade
 
             PackStart(hBoxBotton, false, false, 10);
 
-            //Список
+            CreateToolbar();
+
+            ScrolledWindow scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In };
+            scrollTree.SetPolicy(PolicyType.Never, PolicyType.Automatic);
+
+            TreeViewGrid = new TreeView(ТабличніСписки.РеалізаціяТоварівТаПослуг_Записи.Store);
+            ТабличніСписки.РеалізаціяТоварівТаПослуг_Записи.AddColumns(TreeViewGrid);
+
+            TreeViewGrid.Selection.Mode = SelectionMode.Multiple;
+            TreeViewGrid.ActivateOnSingleClick = true;
+            TreeViewGrid.RowActivated += OnRowActivated;
+            TreeViewGrid.ButtonPressEvent += OnButtonPressEvent;
+            scrollTree.Add(TreeViewGrid);
+
+            PackStart(scrollTree, true, true, 0);
+
+            ShowAll();
+        }
+
+        void CreateToolbar()
+        {
             Toolbar toolbar = new Toolbar();
             PackStart(toolbar, false, false, 0);
 
@@ -45,29 +70,82 @@ namespace StorageAndTrade
             //copyButton.Clicked += OnCopyClick;
             toolbar.Add(copyButton);
 
-            ScrolledWindow scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In };
-            scrollTree.SetPolicy(PolicyType.Never, PolicyType.Automatic);
+            //Відбір
+            ToolItem seperatorOne = new ToolItem();
+            seperatorOne.Add(new Separator(Orientation.Vertical));
+            toolbar.Add(seperatorOne);
 
-            TreeViewGrid = new TreeView(ТабличніСписки.РеалізаціяТоварівТаПослуг_Записи.Store);
-            TreeViewGrid.Selection.Mode = SelectionMode.Multiple;
-            //ViewGrid.RowActivated += OnRowActivated;
-            ТабличніСписки.РеалізаціяТоварівТаПослуг_Записи.AddColumns(TreeViewGrid);
+            HBox hBoxPeriodWhere = new HBox();
+            hBoxPeriodWhere.PackStart(new Label("Період:"), false, false, 5);
 
-            scrollTree.Add(TreeViewGrid);
+            ComboBoxPeriodWhere = ТабличніСписки.Інтерфейс.СписокВідбірПоПеріоду();
+            ComboBoxPeriodWhere.Changed += OnComboBoxPeriodWhereChanged;
 
-            PackStart(scrollTree, true, true, 0);
+            hBoxPeriodWhere.PackStart(ComboBoxPeriodWhere, false, false, 0);
 
-            ShowAll();
+            ToolItem periodWhere = new ToolItem();
+            periodWhere.Add(hBoxPeriodWhere);
+            toolbar.Add(periodWhere);
+        }
+
+        public void SetValue()
+        {
+            if ((int)Константи.ЖурналиДокументів.ОсновнийТипПеріоду_Const != 0)
+                ComboBoxPeriodWhere.ActiveId = Константи.ЖурналиДокументів.ОсновнийТипПеріоду_Const.ToString();
+            else
+                ComboBoxPeriodWhere.Active = 0;
         }
 
         public void LoadRecords()
         {
             ТабличніСписки.РеалізаціяТоварівТаПослуг_Записи.LoadRecords();
+
+            if (ТабличніСписки.РеалізаціяТоварівТаПослуг_Записи.SelectPath != null)
+                TreeViewGrid.SetCursor(ТабличніСписки.РеалізаціяТоварівТаПослуг_Записи.SelectPath, TreeViewGrid.Columns[0], false);
+            else
+                TreeViewGrid.SetCursor(ТабличніСписки.РеалізаціяТоварівТаПослуг_Записи.CurrentPath, TreeViewGrid.Columns[0], false);
         }
+
+        #region  TreeView
+
+        void OnRowActivated(object sender, RowActivatedArgs args)
+        {
+            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
+            {
+                TreeIter iter;
+                TreeViewGrid.Model.GetIter(out iter, TreeViewGrid.Selection.GetSelectedRows()[0]);
+
+                UnigueID unigueID = new UnigueID((string)TreeViewGrid.Model.GetValue(iter, 1));
+
+                ТабличніСписки.РеалізаціяТоварівТаПослуг_Записи.SelectPointerItem =
+                    new StorageAndTrade_1_0.Документи.РеалізаціяТоварівТаПослуг_Pointer(unigueID);
+            }
+        }
+
+        void OnButtonPressEvent(object? sender, ButtonPressEventArgs args)
+        {
+            if (args.Event.Type == Gdk.EventType.DoubleButtonPress)
+            {
+                Console.WriteLine(args.Event);
+            }
+        }
+
+        #endregion
+
+        #region ToolBar
 
         void OnRefreshClick(object? sender, EventArgs args)
         {
             LoadRecords();
         }
+
+        void OnComboBoxPeriodWhereChanged(object? sender, EventArgs args)
+        {
+            ТабличніСписки.РеалізаціяТоварівТаПослуг_Записи.ДодатиВідбірПоПеріоду(Enum.Parse<Перелічення.ТипПеріодуДляЖурналівДокументів>(ComboBoxPeriodWhere.ActiveId));
+            LoadRecords();
+        }
+
+        #endregion
+
     }
 }
