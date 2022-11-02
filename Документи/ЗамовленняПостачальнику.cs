@@ -102,7 +102,7 @@ namespace StorageAndTrade
 
             if (ТабличніСписки.ЗамовленняПостачальнику_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.ЗамовленняПостачальнику_Записи.SelectPath, TreeViewGrid.Columns[0], false);
-            else
+            else if (ТабличніСписки.ЗамовленняПостачальнику_Записи.CurrentPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.ЗамовленняПостачальнику_Записи.CurrentPath, TreeViewGrid.Columns[0], false);
         }
 
