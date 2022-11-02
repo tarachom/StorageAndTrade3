@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 02.11.2022 15:13:25
+ * Дата конфігурації: 02.11.2022 15:40:21
  *
  */
  
@@ -75,7 +75,12 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             
         }
 
-        public static List<Where> Where { get; set; } = new List<Where>(); 
+        public static List<Where> Where { get; set; } = new List<Where>();
+
+        public static Довідники.Організації_Pointer? DirectoryPointerItem { get; set; }
+        public static Довідники.Організації_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? SelectPath;
+        public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
@@ -105,13 +110,26 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                 Довідники.Організації_Pointer? cur = Організації_Select.Current;
 
                 if (cur != null)
-                    Store.AppendValues(new Організації_Записи
+                {
+                    Організації_Записи Record = new Організації_Записи
                     {
                         ID = cur.UnigueID.ToString(),
                         Код = cur.Fields?[Організації_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[Організації_Const.Назва]?.ToString() ?? "" /**/
                         
-                    }.ToArray());
+                    };
+
+                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                    CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (DirectoryPointerItem != null || SelectPointerItem != null)
+                    {
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+
+                        if (Record.ID == UidSelect)
+                            SelectPath = CurrentPath;
+                    }
+                }
             }
         }
     }
@@ -162,7 +180,12 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             
         }
 
-        public static List<Where> Where { get; set; } = new List<Where>(); 
+        public static List<Where> Where { get; set; } = new List<Where>();
+
+        public static Довідники.Номенклатура_Pointer? DirectoryPointerItem { get; set; }
+        public static Довідники.Номенклатура_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? SelectPath;
+        public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
@@ -217,7 +240,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                 Довідники.Номенклатура_Pointer? cur = Номенклатура_Select.Current;
 
                 if (cur != null)
-                    Store.AppendValues(new Номенклатура_Записи
+                {
+                    Номенклатура_Записи Record = new Номенклатура_Записи
                     {
                         ID = cur.UnigueID.ToString(),
                         ОдиницяВиміру = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
@@ -227,7 +251,19 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                         Назва = cur.Fields?[Номенклатура_Const.Назва]?.ToString() ?? "", /**/
                         ТипНоменклатури = ((Перелічення.ТипиНоменклатури)(cur.Fields?[Номенклатура_Const.ТипНоменклатури]!)).ToString() /**/
                         
-                    }.ToArray());
+                    };
+
+                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                    CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (DirectoryPointerItem != null || SelectPointerItem != null)
+                    {
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+
+                        if (Record.ID == UidSelect)
+                            SelectPath = CurrentPath;
+                    }
+                }
             }
         }
     }
@@ -266,7 +302,12 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             
         }
 
-        public static List<Where> Where { get; set; } = new List<Where>(); 
+        public static List<Where> Where { get; set; } = new List<Where>();
+
+        public static Довідники.Виробники_Pointer? DirectoryPointerItem { get; set; }
+        public static Довідники.Виробники_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? SelectPath;
+        public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
@@ -296,13 +337,26 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                 Довідники.Виробники_Pointer? cur = Виробники_Select.Current;
 
                 if (cur != null)
-                    Store.AppendValues(new Виробники_Записи
+                {
+                    Виробники_Записи Record = new Виробники_Записи
                     {
                         ID = cur.UnigueID.ToString(),
                         Код = cur.Fields?[Виробники_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[Виробники_Const.Назва]?.ToString() ?? "" /**/
                         
-                    }.ToArray());
+                    };
+
+                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                    CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (DirectoryPointerItem != null || SelectPointerItem != null)
+                    {
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+
+                        if (Record.ID == UidSelect)
+                            SelectPath = CurrentPath;
+                    }
+                }
             }
         }
     }
@@ -341,7 +395,12 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             
         }
 
-        public static List<Where> Where { get; set; } = new List<Where>(); 
+        public static List<Where> Where { get; set; } = new List<Where>();
+
+        public static Довідники.ВидиНоменклатури_Pointer? DirectoryPointerItem { get; set; }
+        public static Довідники.ВидиНоменклатури_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? SelectPath;
+        public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
@@ -371,13 +430,26 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                 Довідники.ВидиНоменклатури_Pointer? cur = ВидиНоменклатури_Select.Current;
 
                 if (cur != null)
-                    Store.AppendValues(new ВидиНоменклатури_Записи
+                {
+                    ВидиНоменклатури_Записи Record = new ВидиНоменклатури_Записи
                     {
                         ID = cur.UnigueID.ToString(),
                         Код = cur.Fields?[ВидиНоменклатури_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[ВидиНоменклатури_Const.Назва]?.ToString() ?? "" /**/
                         
-                    }.ToArray());
+                    };
+
+                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                    CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (DirectoryPointerItem != null || SelectPointerItem != null)
+                    {
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+
+                        if (Record.ID == UidSelect)
+                            SelectPath = CurrentPath;
+                    }
+                }
             }
         }
     }
@@ -416,7 +488,12 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             
         }
 
-        public static List<Where> Where { get; set; } = new List<Where>(); 
+        public static List<Where> Where { get; set; } = new List<Where>();
+
+        public static Довідники.ПакуванняОдиниціВиміру_Pointer? DirectoryPointerItem { get; set; }
+        public static Довідники.ПакуванняОдиниціВиміру_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? SelectPath;
+        public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
@@ -446,13 +523,26 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                 Довідники.ПакуванняОдиниціВиміру_Pointer? cur = ПакуванняОдиниціВиміру_Select.Current;
 
                 if (cur != null)
-                    Store.AppendValues(new ПакуванняОдиниціВиміру_Записи
+                {
+                    ПакуванняОдиниціВиміру_Записи Record = new ПакуванняОдиниціВиміру_Записи
                     {
                         ID = cur.UnigueID.ToString(),
                         Код = cur.Fields?[ПакуванняОдиниціВиміру_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[ПакуванняОдиниціВиміру_Const.Назва]?.ToString() ?? "" /**/
                         
-                    }.ToArray());
+                    };
+
+                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                    CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (DirectoryPointerItem != null || SelectPointerItem != null)
+                    {
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+
+                        if (Record.ID == UidSelect)
+                            SelectPath = CurrentPath;
+                    }
+                }
             }
         }
     }
@@ -494,7 +584,12 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             
         }
 
-        public static List<Where> Where { get; set; } = new List<Where>(); 
+        public static List<Where> Where { get; set; } = new List<Where>();
+
+        public static Довідники.Валюти_Pointer? DirectoryPointerItem { get; set; }
+        public static Довідники.Валюти_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? SelectPath;
+        public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
@@ -525,14 +620,27 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                 Довідники.Валюти_Pointer? cur = Валюти_Select.Current;
 
                 if (cur != null)
-                    Store.AppendValues(new Валюти_Записи
+                {
+                    Валюти_Записи Record = new Валюти_Записи
                     {
                         ID = cur.UnigueID.ToString(),
                         Код = cur.Fields?[Валюти_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[Валюти_Const.Назва]?.ToString() ?? "", /**/
                         КороткаНазва = cur.Fields?[Валюти_Const.КороткаНазва]?.ToString() ?? "" /**/
                         
-                    }.ToArray());
+                    };
+
+                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                    CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (DirectoryPointerItem != null || SelectPointerItem != null)
+                    {
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+
+                        if (Record.ID == UidSelect)
+                            SelectPath = CurrentPath;
+                    }
+                }
             }
         }
     }
@@ -571,7 +679,12 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             
         }
 
-        public static List<Where> Where { get; set; } = new List<Where>(); 
+        public static List<Where> Where { get; set; } = new List<Where>();
+
+        public static Довідники.Контрагенти_Pointer? DirectoryPointerItem { get; set; }
+        public static Довідники.Контрагенти_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? SelectPath;
+        public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
@@ -601,13 +714,26 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                 Довідники.Контрагенти_Pointer? cur = Контрагенти_Select.Current;
 
                 if (cur != null)
-                    Store.AppendValues(new Контрагенти_Записи
+                {
+                    Контрагенти_Записи Record = new Контрагенти_Записи
                     {
                         ID = cur.UnigueID.ToString(),
                         Код = cur.Fields?[Контрагенти_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[Контрагенти_Const.Назва]?.ToString() ?? "" /**/
                         
-                    }.ToArray());
+                    };
+
+                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                    CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (DirectoryPointerItem != null || SelectPointerItem != null)
+                    {
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+
+                        if (Record.ID == UidSelect)
+                            SelectPath = CurrentPath;
+                    }
+                }
             }
         }
     }
@@ -646,7 +772,12 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             
         }
 
-        public static List<Where> Where { get; set; } = new List<Where>(); 
+        public static List<Where> Where { get; set; } = new List<Where>();
+
+        public static Довідники.Склади_Pointer? DirectoryPointerItem { get; set; }
+        public static Довідники.Склади_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? SelectPath;
+        public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
@@ -676,13 +807,26 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                 Довідники.Склади_Pointer? cur = Склади_Select.Current;
 
                 if (cur != null)
-                    Store.AppendValues(new Склади_Записи
+                {
+                    Склади_Записи Record = new Склади_Записи
                     {
                         ID = cur.UnigueID.ToString(),
                         Код = cur.Fields?[Склади_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[Склади_Const.Назва]?.ToString() ?? "" /**/
                         
-                    }.ToArray());
+                    };
+
+                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                    CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (DirectoryPointerItem != null || SelectPointerItem != null)
+                    {
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+
+                        if (Record.ID == UidSelect)
+                            SelectPath = CurrentPath;
+                    }
+                }
             }
         }
     }
@@ -724,7 +868,12 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             
         }
 
-        public static List<Where> Where { get; set; } = new List<Where>(); 
+        public static List<Where> Where { get; set; } = new List<Where>();
+
+        public static Довідники.ВидиЦін_Pointer? DirectoryPointerItem { get; set; }
+        public static Довідники.ВидиЦін_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? SelectPath;
+        public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
@@ -762,14 +911,27 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                 Довідники.ВидиЦін_Pointer? cur = ВидиЦін_Select.Current;
 
                 if (cur != null)
-                    Store.AppendValues(new ВидиЦін_Записи
+                {
+                    ВидиЦін_Записи Record = new ВидиЦін_Записи
                     {
                         ID = cur.UnigueID.ToString(),
                         Валюта = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Код = cur.Fields?[ВидиЦін_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[ВидиЦін_Const.Назва]?.ToString() ?? "" /**/
                         
-                    }.ToArray());
+                    };
+
+                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                    CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (DirectoryPointerItem != null || SelectPointerItem != null)
+                    {
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+
+                        if (Record.ID == UidSelect)
+                            SelectPath = CurrentPath;
+                    }
+                }
             }
         }
     }
@@ -808,7 +970,12 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             
         }
 
-        public static List<Where> Where { get; set; } = new List<Where>(); 
+        public static List<Where> Where { get; set; } = new List<Where>();
+
+        public static Довідники.ВидиЦінПостачальників_Pointer? DirectoryPointerItem { get; set; }
+        public static Довідники.ВидиЦінПостачальників_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? SelectPath;
+        public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
@@ -838,13 +1005,26 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                 Довідники.ВидиЦінПостачальників_Pointer? cur = ВидиЦінПостачальників_Select.Current;
 
                 if (cur != null)
-                    Store.AppendValues(new ВидиЦінПостачальників_Записи
+                {
+                    ВидиЦінПостачальників_Записи Record = new ВидиЦінПостачальників_Записи
                     {
                         ID = cur.UnigueID.ToString(),
                         Код = cur.Fields?[ВидиЦінПостачальників_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[ВидиЦінПостачальників_Const.Назва]?.ToString() ?? "" /**/
                         
-                    }.ToArray());
+                    };
+
+                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                    CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (DirectoryPointerItem != null || SelectPointerItem != null)
+                    {
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+
+                        if (Record.ID == UidSelect)
+                            SelectPath = CurrentPath;
+                    }
+                }
             }
         }
     }
@@ -883,7 +1063,12 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             
         }
 
-        public static List<Where> Where { get; set; } = new List<Where>(); 
+        public static List<Where> Where { get; set; } = new List<Where>();
+
+        public static Довідники.Користувачі_Pointer? DirectoryPointerItem { get; set; }
+        public static Довідники.Користувачі_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? SelectPath;
+        public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
@@ -913,13 +1098,26 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                 Довідники.Користувачі_Pointer? cur = Користувачі_Select.Current;
 
                 if (cur != null)
-                    Store.AppendValues(new Користувачі_Записи
+                {
+                    Користувачі_Записи Record = new Користувачі_Записи
                     {
                         ID = cur.UnigueID.ToString(),
                         Код = cur.Fields?[Користувачі_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[Користувачі_Const.Назва]?.ToString() ?? "" /**/
                         
-                    }.ToArray());
+                    };
+
+                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                    CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (DirectoryPointerItem != null || SelectPointerItem != null)
+                    {
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+
+                        if (Record.ID == UidSelect)
+                            SelectPath = CurrentPath;
+                    }
+                }
             }
         }
     }
@@ -958,7 +1156,12 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             
         }
 
-        public static List<Where> Where { get; set; } = new List<Where>(); 
+        public static List<Where> Where { get; set; } = new List<Where>();
+
+        public static Довідники.ФізичніОсоби_Pointer? DirectoryPointerItem { get; set; }
+        public static Довідники.ФізичніОсоби_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? SelectPath;
+        public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
@@ -988,13 +1191,26 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                 Довідники.ФізичніОсоби_Pointer? cur = ФізичніОсоби_Select.Current;
 
                 if (cur != null)
-                    Store.AppendValues(new ФізичніОсоби_Записи
+                {
+                    ФізичніОсоби_Записи Record = new ФізичніОсоби_Записи
                     {
                         ID = cur.UnigueID.ToString(),
                         Код = cur.Fields?[ФізичніОсоби_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[ФізичніОсоби_Const.Назва]?.ToString() ?? "" /**/
                         
-                    }.ToArray());
+                    };
+
+                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                    CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (DirectoryPointerItem != null || SelectPointerItem != null)
+                    {
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+
+                        if (Record.ID == UidSelect)
+                            SelectPath = CurrentPath;
+                    }
+                }
             }
         }
     }
@@ -1033,7 +1249,12 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             
         }
 
-        public static List<Where> Where { get; set; } = new List<Where>(); 
+        public static List<Where> Where { get; set; } = new List<Where>();
+
+        public static Довідники.СтруктураПідприємства_Pointer? DirectoryPointerItem { get; set; }
+        public static Довідники.СтруктураПідприємства_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? SelectPath;
+        public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
@@ -1063,13 +1284,26 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                 Довідники.СтруктураПідприємства_Pointer? cur = СтруктураПідприємства_Select.Current;
 
                 if (cur != null)
-                    Store.AppendValues(new СтруктураПідприємства_Записи
+                {
+                    СтруктураПідприємства_Записи Record = new СтруктураПідприємства_Записи
                     {
                         ID = cur.UnigueID.ToString(),
                         Код = cur.Fields?[СтруктураПідприємства_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[СтруктураПідприємства_Const.Назва]?.ToString() ?? "" /**/
                         
-                    }.ToArray());
+                    };
+
+                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                    CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (DirectoryPointerItem != null || SelectPointerItem != null)
+                    {
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+
+                        if (Record.ID == UidSelect)
+                            SelectPath = CurrentPath;
+                    }
+                }
             }
         }
     }
@@ -1108,7 +1342,12 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             
         }
 
-        public static List<Where> Where { get; set; } = new List<Where>(); 
+        public static List<Where> Where { get; set; } = new List<Where>();
+
+        public static Довідники.КраїниСвіту_Pointer? DirectoryPointerItem { get; set; }
+        public static Довідники.КраїниСвіту_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? SelectPath;
+        public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
@@ -1138,13 +1377,26 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                 Довідники.КраїниСвіту_Pointer? cur = КраїниСвіту_Select.Current;
 
                 if (cur != null)
-                    Store.AppendValues(new КраїниСвіту_Записи
+                {
+                    КраїниСвіту_Записи Record = new КраїниСвіту_Записи
                     {
                         ID = cur.UnigueID.ToString(),
                         Код = cur.Fields?[КраїниСвіту_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[КраїниСвіту_Const.Назва]?.ToString() ?? "" /**/
                         
-                    }.ToArray());
+                    };
+
+                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                    CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (DirectoryPointerItem != null || SelectPointerItem != null)
+                    {
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+
+                        if (Record.ID == UidSelect)
+                            SelectPath = CurrentPath;
+                    }
+                }
             }
         }
     }
@@ -1183,7 +1435,12 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             
         }
 
-        public static List<Where> Where { get; set; } = new List<Where>(); 
+        public static List<Where> Where { get; set; } = new List<Where>();
+
+        public static Довідники.Файли_Pointer? DirectoryPointerItem { get; set; }
+        public static Довідники.Файли_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? SelectPath;
+        public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
@@ -1213,13 +1470,26 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                 Довідники.Файли_Pointer? cur = Файли_Select.Current;
 
                 if (cur != null)
-                    Store.AppendValues(new Файли_Записи
+                {
+                    Файли_Записи Record = new Файли_Записи
                     {
                         ID = cur.UnigueID.ToString(),
                         Код = cur.Fields?[Файли_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[Файли_Const.Назва]?.ToString() ?? "" /**/
                         
-                    }.ToArray());
+                    };
+
+                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                    CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (DirectoryPointerItem != null || SelectPointerItem != null)
+                    {
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+
+                        if (Record.ID == UidSelect)
+                            SelectPath = CurrentPath;
+                    }
+                }
             }
         }
     }
@@ -1261,7 +1531,12 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             
         }
 
-        public static List<Where> Where { get; set; } = new List<Where>(); 
+        public static List<Where> Where { get; set; } = new List<Where>();
+
+        public static Довідники.ХарактеристикиНоменклатури_Pointer? DirectoryPointerItem { get; set; }
+        public static Довідники.ХарактеристикиНоменклатури_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? SelectPath;
+        public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
@@ -1299,14 +1574,27 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                 Довідники.ХарактеристикиНоменклатури_Pointer? cur = ХарактеристикиНоменклатури_Select.Current;
 
                 if (cur != null)
-                    Store.AppendValues(new ХарактеристикиНоменклатури_Записи
+                {
+                    ХарактеристикиНоменклатури_Записи Record = new ХарактеристикиНоменклатури_Записи
                     {
                         ID = cur.UnigueID.ToString(),
                         Номенклатура = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Код = cur.Fields?[ХарактеристикиНоменклатури_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[ХарактеристикиНоменклатури_Const.Назва]?.ToString() ?? "" /**/
                         
-                    }.ToArray());
+                    };
+
+                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                    CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (DirectoryPointerItem != null || SelectPointerItem != null)
+                    {
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+
+                        if (Record.ID == UidSelect)
+                            SelectPath = CurrentPath;
+                    }
+                }
             }
         }
     }
@@ -1363,7 +1651,12 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             
         }
 
-        public static List<Where> Where { get; set; } = new List<Where>(); 
+        public static List<Where> Where { get; set; } = new List<Where>();
+
+        public static Довідники.Каси_Pointer? DirectoryPointerItem { get; set; }
+        public static Довідники.Каси_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? SelectPath;
+        public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
@@ -1401,14 +1694,27 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                 Довідники.Каси_Pointer? cur = Каси_Select.Current;
 
                 if (cur != null)
-                    Store.AppendValues(new Каси_Записи
+                {
+                    Каси_Записи Record = new Каси_Записи
                     {
                         ID = cur.UnigueID.ToString(),
                         Валюта = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Код = cur.Fields?[Каси_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[Каси_Const.Назва]?.ToString() ?? "" /**/
                         
-                    }.ToArray());
+                    };
+
+                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                    CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (DirectoryPointerItem != null || SelectPointerItem != null)
+                    {
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+
+                        if (Record.ID == UidSelect)
+                            SelectPath = CurrentPath;
+                    }
+                }
             }
         }
     }
@@ -1450,7 +1756,12 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             
         }
 
-        public static List<Where> Where { get; set; } = new List<Where>(); 
+        public static List<Where> Where { get; set; } = new List<Where>();
+
+        public static Довідники.БанківськіРахункиОрганізацій_Pointer? DirectoryPointerItem { get; set; }
+        public static Довідники.БанківськіРахункиОрганізацій_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? SelectPath;
+        public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
@@ -1488,14 +1799,27 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                 Довідники.БанківськіРахункиОрганізацій_Pointer? cur = БанківськіРахункиОрганізацій_Select.Current;
 
                 if (cur != null)
-                    Store.AppendValues(new БанківськіРахункиОрганізацій_Записи
+                {
+                    БанківськіРахункиОрганізацій_Записи Record = new БанківськіРахункиОрганізацій_Записи
                     {
                         ID = cur.UnigueID.ToString(),
                         Валюта = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Код = cur.Fields?[БанківськіРахункиОрганізацій_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[БанківськіРахункиОрганізацій_Const.Назва]?.ToString() ?? "" /**/
                         
-                    }.ToArray());
+                    };
+
+                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                    CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (DirectoryPointerItem != null || SelectPointerItem != null)
+                    {
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+
+                        if (Record.ID == UidSelect)
+                            SelectPath = CurrentPath;
+                    }
+                }
             }
         }
     }
@@ -1540,7 +1864,12 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             
         }
 
-        public static List<Where> Where { get; set; } = new List<Where>(); 
+        public static List<Where> Where { get; set; } = new List<Where>();
+
+        public static Довідники.ДоговориКонтрагентів_Pointer? DirectoryPointerItem { get; set; }
+        public static Довідники.ДоговориКонтрагентів_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? SelectPath;
+        public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
@@ -1579,7 +1908,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                 Довідники.ДоговориКонтрагентів_Pointer? cur = ДоговориКонтрагентів_Select.Current;
 
                 if (cur != null)
-                    Store.AppendValues(new ДоговориКонтрагентів_Записи
+                {
+                    ДоговориКонтрагентів_Записи Record = new ДоговориКонтрагентів_Записи
                     {
                         ID = cur.UnigueID.ToString(),
                         Контрагент = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
@@ -1587,7 +1917,19 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                         Назва = cur.Fields?[ДоговориКонтрагентів_Const.Назва]?.ToString() ?? "", /**/
                         ТипДоговору = ((Перелічення.ТипДоговорів)(cur.Fields?[ДоговориКонтрагентів_Const.ТипДоговору]!)).ToString() /**/
                         
-                    }.ToArray());
+                    };
+
+                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                    CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (DirectoryPointerItem != null || SelectPointerItem != null)
+                    {
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+
+                        if (Record.ID == UidSelect)
+                            SelectPath = CurrentPath;
+                    }
+                }
             }
         }
     }
@@ -1626,7 +1968,12 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             
         }
 
-        public static List<Where> Where { get; set; } = new List<Where>(); 
+        public static List<Where> Where { get; set; } = new List<Where>();
+
+        public static Довідники.БанківськіРахункиКонтрагентів_Pointer? DirectoryPointerItem { get; set; }
+        public static Довідники.БанківськіРахункиКонтрагентів_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? SelectPath;
+        public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
@@ -1656,13 +2003,26 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                 Довідники.БанківськіРахункиКонтрагентів_Pointer? cur = БанківськіРахункиКонтрагентів_Select.Current;
 
                 if (cur != null)
-                    Store.AppendValues(new БанківськіРахункиКонтрагентів_Записи
+                {
+                    БанківськіРахункиКонтрагентів_Записи Record = new БанківськіРахункиКонтрагентів_Записи
                     {
                         ID = cur.UnigueID.ToString(),
                         Код = cur.Fields?[БанківськіРахункиКонтрагентів_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[БанківськіРахункиКонтрагентів_Const.Назва]?.ToString() ?? "" /**/
                         
-                    }.ToArray());
+                    };
+
+                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                    CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (DirectoryPointerItem != null || SelectPointerItem != null)
+                    {
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+
+                        if (Record.ID == UidSelect)
+                            SelectPath = CurrentPath;
+                    }
+                }
             }
         }
     }
@@ -1701,7 +2061,12 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             
         }
 
-        public static List<Where> Where { get; set; } = new List<Where>(); 
+        public static List<Where> Where { get; set; } = new List<Where>();
+
+        public static Довідники.СтаттяРухуКоштів_Pointer? DirectoryPointerItem { get; set; }
+        public static Довідники.СтаттяРухуКоштів_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? SelectPath;
+        public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
@@ -1731,13 +2096,26 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                 Довідники.СтаттяРухуКоштів_Pointer? cur = СтаттяРухуКоштів_Select.Current;
 
                 if (cur != null)
-                    Store.AppendValues(new СтаттяРухуКоштів_Записи
+                {
+                    СтаттяРухуКоштів_Записи Record = new СтаттяРухуКоштів_Записи
                     {
                         ID = cur.UnigueID.ToString(),
                         Назва = cur.Fields?[СтаттяРухуКоштів_Const.Назва]?.ToString() ?? "", /**/
                         Код = cur.Fields?[СтаттяРухуКоштів_Const.Код]?.ToString() ?? "" /**/
                         
-                    }.ToArray());
+                    };
+
+                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                    CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (DirectoryPointerItem != null || SelectPointerItem != null)
+                    {
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+
+                        if (Record.ID == UidSelect)
+                            SelectPath = CurrentPath;
+                    }
+                }
             }
         }
     }
@@ -1773,7 +2151,12 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             
         }
 
-        public static List<Where> Where { get; set; } = new List<Where>(); 
+        public static List<Where> Where { get; set; } = new List<Where>();
+
+        public static Довідники.СеріїНоменклатури_Pointer? DirectoryPointerItem { get; set; }
+        public static Довідники.СеріїНоменклатури_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? SelectPath;
+        public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
@@ -1802,12 +2185,25 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                 Довідники.СеріїНоменклатури_Pointer? cur = СеріїНоменклатури_Select.Current;
 
                 if (cur != null)
-                    Store.AppendValues(new СеріїНоменклатури_Записи
+                {
+                    СеріїНоменклатури_Записи Record = new СеріїНоменклатури_Записи
                     {
                         ID = cur.UnigueID.ToString(),
                         Номер = cur.Fields?[СеріїНоменклатури_Const.Номер]?.ToString() ?? "" /**/
                         
-                    }.ToArray());
+                    };
+
+                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                    CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (DirectoryPointerItem != null || SelectPointerItem != null)
+                    {
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+
+                        if (Record.ID == UidSelect)
+                            SelectPath = CurrentPath;
+                    }
+                }
             }
         }
     }
@@ -1855,7 +2251,12 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             
         }
 
-        public static List<Where> Where { get; set; } = new List<Where>(); 
+        public static List<Where> Where { get; set; } = new List<Where>();
+
+        public static Довідники.ПартіяТоварівКомпозит_Pointer? DirectoryPointerItem { get; set; }
+        public static Довідники.ПартіяТоварівКомпозит_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? SelectPath;
+        public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
@@ -1902,7 +2303,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                 Довідники.ПартіяТоварівКомпозит_Pointer? cur = ПартіяТоварівКомпозит_Select.Current;
 
                 if (cur != null)
-                    Store.AppendValues(new ПартіяТоварівКомпозит_Записи
+                {
+                    ПартіяТоварівКомпозит_Записи Record = new ПартіяТоварівКомпозит_Записи
                     {
                         ID = cur.UnigueID.ToString(),
                         ПоступленняТоварівТаПослуг = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
@@ -1911,7 +2313,19 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                         Дата = cur.Fields?[ПартіяТоварівКомпозит_Const.Дата]?.ToString() ?? "", /**/
                         ТипДокументу = ((Перелічення.ТипДокументуПартіяТоварівКомпозит)(cur.Fields?[ПартіяТоварівКомпозит_Const.ТипДокументу]!)).ToString() /**/
                         
-                    }.ToArray());
+                    };
+
+                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                    CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (DirectoryPointerItem != null || SelectPointerItem != null)
+                    {
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+
+                        if (Record.ID == UidSelect)
+                            SelectPath = CurrentPath;
+                    }
+                }
             }
         }
     }
@@ -1947,7 +2361,12 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             
         }
 
-        public static List<Where> Where { get; set; } = new List<Where>(); 
+        public static List<Where> Where { get; set; } = new List<Where>();
+
+        public static Довідники.ВидиЗапасів_Pointer? DirectoryPointerItem { get; set; }
+        public static Довідники.ВидиЗапасів_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? SelectPath;
+        public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
@@ -1976,12 +2395,25 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                 Довідники.ВидиЗапасів_Pointer? cur = ВидиЗапасів_Select.Current;
 
                 if (cur != null)
-                    Store.AppendValues(new ВидиЗапасів_Записи
+                {
+                    ВидиЗапасів_Записи Record = new ВидиЗапасів_Записи
                     {
                         ID = cur.UnigueID.ToString(),
                         Назва = cur.Fields?[ВидиЗапасів_Const.Назва]?.ToString() ?? "" /**/
                         
-                    }.ToArray());
+                    };
+
+                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                    CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (DirectoryPointerItem != null || SelectPointerItem != null)
+                    {
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+
+                        if (Record.ID == UidSelect)
+                            SelectPath = CurrentPath;
+                    }
+                }
             }
         }
     }
@@ -2017,7 +2449,12 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             
         }
 
-        public static List<Where> Where { get; set; } = new List<Where>(); 
+        public static List<Where> Where { get; set; } = new List<Where>();
+
+        public static Довідники.ПродажіДокументКомпозит_Pointer? DirectoryPointerItem { get; set; }
+        public static Довідники.ПродажіДокументКомпозит_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? SelectPath;
+        public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
@@ -2046,12 +2483,25 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                 Довідники.ПродажіДокументКомпозит_Pointer? cur = ПродажіДокументКомпозит_Select.Current;
 
                 if (cur != null)
-                    Store.AppendValues(new ПродажіДокументКомпозит_Записи
+                {
+                    ПродажіДокументКомпозит_Записи Record = new ПродажіДокументКомпозит_Записи
                     {
                         ID = cur.UnigueID.ToString(),
                         Назва = cur.Fields?[ПродажіДокументКомпозит_Const.Назва]?.ToString() ?? "" /**/
                         
-                    }.ToArray());
+                    };
+
+                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                    CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (DirectoryPointerItem != null || SelectPointerItem != null)
+                    {
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+
+                        if (Record.ID == UidSelect)
+                            SelectPath = CurrentPath;
+                    }
+                }
             }
         }
     }
@@ -2087,7 +2537,12 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             
         }
 
-        public static List<Where> Where { get; set; } = new List<Where>(); 
+        public static List<Where> Where { get; set; } = new List<Where>();
+
+        public static Довідники.АналітикаНоменклатуриКомпозит_Pointer? DirectoryPointerItem { get; set; }
+        public static Довідники.АналітикаНоменклатуриКомпозит_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? SelectPath;
+        public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
@@ -2116,12 +2571,25 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                 Довідники.АналітикаНоменклатуриКомпозит_Pointer? cur = АналітикаНоменклатуриКомпозит_Select.Current;
 
                 if (cur != null)
-                    Store.AppendValues(new АналітикаНоменклатуриКомпозит_Записи
+                {
+                    АналітикаНоменклатуриКомпозит_Записи Record = new АналітикаНоменклатуриКомпозит_Записи
                     {
                         ID = cur.UnigueID.ToString(),
                         Назва = cur.Fields?[АналітикаНоменклатуриКомпозит_Const.Назва]?.ToString() ?? "" /**/
                         
-                    }.ToArray());
+                    };
+
+                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                    CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (DirectoryPointerItem != null || SelectPointerItem != null)
+                    {
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+
+                        if (Record.ID == UidSelect)
+                            SelectPath = CurrentPath;
+                    }
+                }
             }
         }
     }
@@ -2157,7 +2625,12 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             
         }
 
-        public static List<Where> Where { get; set; } = new List<Where>(); 
+        public static List<Where> Where { get; set; } = new List<Where>();
+
+        public static Довідники.АналітикаКонтрагентівКомпозит_Pointer? DirectoryPointerItem { get; set; }
+        public static Довідники.АналітикаКонтрагентівКомпозит_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? SelectPath;
+        public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
@@ -2186,12 +2659,25 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                 Довідники.АналітикаКонтрагентівКомпозит_Pointer? cur = АналітикаКонтрагентівКомпозит_Select.Current;
 
                 if (cur != null)
-                    Store.AppendValues(new АналітикаКонтрагентівКомпозит_Записи
+                {
+                    АналітикаКонтрагентівКомпозит_Записи Record = new АналітикаКонтрагентівКомпозит_Записи
                     {
                         ID = cur.UnigueID.ToString(),
                         Назва = cur.Fields?[АналітикаКонтрагентівКомпозит_Const.Назва]?.ToString() ?? "" /**/
                         
-                    }.ToArray());
+                    };
+
+                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                    CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (DirectoryPointerItem != null || SelectPointerItem != null)
+                    {
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+
+                        if (Record.ID == UidSelect)
+                            SelectPath = CurrentPath;
+                    }
+                }
             }
         }
     }
@@ -2227,7 +2713,12 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             
         }
 
-        public static List<Where> Where { get; set; } = new List<Where>(); 
+        public static List<Where> Where { get; set; } = new List<Where>();
+
+        public static Довідники.АналітикаПартійКомпозит_Pointer? DirectoryPointerItem { get; set; }
+        public static Довідники.АналітикаПартійКомпозит_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? SelectPath;
+        public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
@@ -2256,12 +2747,25 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                 Довідники.АналітикаПартійКомпозит_Pointer? cur = АналітикаПартійКомпозит_Select.Current;
 
                 if (cur != null)
-                    Store.AppendValues(new АналітикаПартійКомпозит_Записи
+                {
+                    АналітикаПартійКомпозит_Записи Record = new АналітикаПартійКомпозит_Записи
                     {
                         ID = cur.UnigueID.ToString(),
                         Назва = cur.Fields?[АналітикаПартійКомпозит_Const.Назва]?.ToString() ?? "" /**/
                         
-                    }.ToArray());
+                    };
+
+                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                    CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (DirectoryPointerItem != null || SelectPointerItem != null)
+                    {
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+
+                        if (Record.ID == UidSelect)
+                            SelectPath = CurrentPath;
+                    }
+                }
             }
         }
     }

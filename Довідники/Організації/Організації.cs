@@ -36,9 +36,12 @@ namespace StorageAndTrade
             scrollTree.SetPolicy(PolicyType.Never, PolicyType.Automatic);
 
             TreeViewGrid = new TreeView(ТабличніСписки.Організації_Записи.Store);
-            TreeViewGrid.Selection.Mode = SelectionMode.Multiple;
-            TreeViewGrid.RowActivated += OnRowActivated;
             ТабличніСписки.Організації_Записи.AddColumns(TreeViewGrid);
+
+            TreeViewGrid.Selection.Mode = SelectionMode.Multiple;
+            TreeViewGrid.ActivateOnSingleClick = true;
+            TreeViewGrid.RowActivated += OnRowActivated;
+            TreeViewGrid.ButtonPressEvent += OnButtonPressEvent;
 
             scrollTree.Add(TreeViewGrid);
 
@@ -72,38 +75,66 @@ namespace StorageAndTrade
         public void LoadRecords()
         {
             ТабличніСписки.Організації_Записи.LoadRecords();
+
+            if (ТабличніСписки.Організації_Записи.SelectPath != null)
+                TreeViewGrid.SetCursor(ТабличніСписки.Організації_Записи.SelectPath, TreeViewGrid.Columns[0], false);
+            else if (ТабличніСписки.Організації_Записи.CurrentPath != null)
+                TreeViewGrid.SetCursor(ТабличніСписки.Організації_Записи.CurrentPath, TreeViewGrid.Columns[0], false);
         }
+
+        #region TreeView
 
         void OnRowActivated(object sender, RowActivatedArgs args)
         {
-            TreeIter iter;
-
-            if (TreeViewGrid.Model.GetIter(out iter, args.Path))
+            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
             {
-                string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
+                TreeIter iter;
+                TreeViewGrid.Model.GetIter(out iter, TreeViewGrid.Selection.GetSelectedRows()[0]);
 
-                Організації_Objest Організації_Objest = new Організації_Objest();
-                if (Організації_Objest.Read(new UnigueID(uid)))
-                {
-                    GeneralForm?.CreateNotebookPage($"Організація: {Організації_Objest.Назва}", () =>
-                    {
-                        Організації_Елемент page = new Організації_Елемент
-                        {
-                            GeneralForm = GeneralForm,
-                            CallBack_RefreshList = LoadRecords,
-                            IsNew = false,
-                            Організації_Objest = Організації_Objest,
-                        };
+                UnigueID unigueID = new UnigueID((string)TreeViewGrid.Model.GetValue(iter, 1));
 
-                        page.SetValue();
-
-                        return page;
-                    });
-                }
-                else
-                    Message.Error(GeneralForm, "Не вдалось прочитати!");
+                ТабличніСписки.Організації_Записи.SelectPointerItem =
+                    new StorageAndTrade_1_0.Довідники.Організації_Pointer(unigueID);
             }
         }
+
+        void OnButtonPressEvent(object? sender, ButtonPressEventArgs args)
+        {
+            if (args.Event.Type == Gdk.EventType.DoubleButtonPress && TreeViewGrid.Selection.CountSelectedRows() != 0)
+            {
+                TreeIter iter;
+
+                if (TreeViewGrid.Model.GetIter(out iter, TreeViewGrid.Selection.GetSelectedRows()[0]))
+                {
+                    string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
+
+                    Організації_Objest Організації_Objest = new Організації_Objest();
+                    if (Організації_Objest.Read(new UnigueID(uid)))
+                    {
+                        GeneralForm?.CreateNotebookPage($"Організація: {Організації_Objest.Назва}", () =>
+                        {
+                            Організації_Елемент page = new Організації_Елемент
+                            {
+                                GeneralForm = GeneralForm,
+                                CallBack_RefreshList = LoadRecords,
+                                IsNew = false,
+                                Організації_Objest = Організації_Objest,
+                            };
+
+                            page.SetValue();
+
+                            return page;
+                        });
+                    }
+                    else
+                        Message.Error(GeneralForm, "Не вдалось прочитати!");
+                }
+            }
+        }
+
+        #endregion
+
+        #region ToolBar
 
         void OnAddClick(object? sender, EventArgs args)
         {
@@ -185,6 +216,8 @@ namespace StorageAndTrade
                 }
             }
         }
+
+        #endregion
 
     }
 }

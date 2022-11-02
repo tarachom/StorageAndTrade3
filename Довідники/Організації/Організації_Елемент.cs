@@ -3,6 +3,8 @@ using Gtk;
 using StorageAndTrade_1_0.Константи;
 using StorageAndTrade_1_0.Довідники;
 
+using ТабличніСписки = StorageAndTrade_1_0.Довідники.ТабличніСписки;
+
 namespace StorageAndTrade
 {
     class Організації_Елемент : VBox
@@ -169,7 +171,10 @@ namespace StorageAndTrade
             GeneralForm?.RenameCurrentPageNotebook($"Організація: {Організації_Objest.Назва}");
 
             if (CallBack_RefreshList != null)
+            {
+                ТабличніСписки.Організації_Записи.SelectPointerItem = Організації_Objest.GetDirectoryPointer();
                 CallBack_RefreshList.Invoke();
+            }
         }
     }
 }
