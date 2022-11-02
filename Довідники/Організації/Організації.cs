@@ -91,8 +91,7 @@ namespace StorageAndTrade
 
                 UnigueID unigueID = new UnigueID((string)TreeViewGrid.Model.GetValue(iter, 1));
 
-                ТабличніСписки.Організації_Записи.SelectPointerItem =
-                    new StorageAndTrade_1_0.Довідники.Організації_Pointer(unigueID);
+                ТабличніСписки.Організації_Записи.SelectPointerItem = new StorageAndTrade_1_0.Довідники.Організації_Pointer(unigueID);
             }
         }
 
@@ -205,6 +204,8 @@ namespace StorageAndTrade
                             Організації_Objest_Новий.Назва += " - Копія";
                             Організації_Objest_Новий.Код = (++НумераціяДовідників.Організації_Const).ToString("D6");
                             Організації_Objest_Новий.Save();
+
+                            ТабличніСписки.Організації_Записи.SelectPointerItem = Організації_Objest_Новий.GetDirectoryPointer();
                         }
                         else
                             Message.Error(GeneralForm, "Не вдалось прочитати!");
