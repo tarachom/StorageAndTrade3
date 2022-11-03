@@ -14,14 +14,29 @@ namespace StorageAndTrade
         TreeStore TreeStore = new TreeStore(typeof(string), typeof(string));
 
         public System.Action? CallBack_RowActivated { get; set; }
+        public Контрагенти_Папки_Pointer? DirectoryPointerItem { get; set; }
+        public System.Action<Контрагенти_Папки_Pointer>? CallBack_OnSelectPointer { get; set; }
         public Контрагенти_Папки_Pointer Parent_Pointer { get; set; } = new Контрагенти_Папки_Pointer();
 
         public string UidOpenFolder { get; set; } = "";
 
-        public Контрагенти_Папки_Дерево() : base()
+        public Контрагенти_Папки_Дерево(bool isVisibleClose = false) : base()
         {
             new VBox(false, 0);
             BorderWidth = 0;
+
+            if (isVisibleClose)
+            {
+                //Кнопки
+                HBox hBoxBotton = new HBox();
+
+                Button bClose = new Button("Закрити");
+                bClose.Clicked += (object? sender, EventArgs args) => { Program.GeneralForm?.CloseCurrentPageNotebook(); };
+
+                hBoxBotton.PackStart(bClose, false, false, 10);
+
+                PackStart(hBoxBotton, false, false, 10);
+            }
 
             CreateToolbar();
 
@@ -34,6 +49,7 @@ namespace StorageAndTrade
             TreeViewGrid.Selection.Mode = SelectionMode.Single;
             TreeViewGrid.ActivateOnSingleClick = true;
             TreeViewGrid.RowActivated += OnRowActivated;
+            TreeViewGrid.ButtonPressEvent += OnButtonPressEvent;
             TreeViewGrid.Model = TreeStore;
 
             scrollTree.Add(TreeViewGrid);
@@ -151,6 +167,9 @@ ORDER BY level ASC
             TreePath rootPath = TreeViewGrid.Model.GetPath(rootIter);
             TreeViewGrid.ExpandToPath(rootPath);
 
+            if (DirectoryPointerItem != null)
+                Parent_Pointer = DirectoryPointerItem;
+
             if (Parent_Pointer.IsEmpty())
             {
                 TreeViewGrid.SetCursor(rootPath, TreeViewGrid.Columns[0], false);
@@ -182,7 +201,6 @@ ORDER BY level ASC
                 TreeViewGrid.Model.GetIter(out iter, TreeViewGrid.Selection.GetSelectedRows()[0]);
 
                 UnigueID unigueID = new UnigueID((string)TreeViewGrid.Model.GetValue(iter, 0));
-                Console.WriteLine(unigueID.ToString());
 
                 if (!unigueID.IsEmpty())
                     Parent_Pointer = new Контрагенти_Папки_Pointer(unigueID);
@@ -191,6 +209,49 @@ ORDER BY level ASC
 
                 if (CallBack_RowActivated != null)
                     CallBack_RowActivated.Invoke();
+            }
+        }
+
+        void OnButtonPressEvent(object? sender, ButtonPressEventArgs args)
+        {
+            if (args.Event.Type == Gdk.EventType.DoubleButtonPress && TreeViewGrid.Selection.CountSelectedRows() != 0)
+            {
+                TreeIter iter;
+
+                if (TreeViewGrid.Model.GetIter(out iter, TreeViewGrid.Selection.GetSelectedRows()[0]))
+                {
+                    string uid = (string)TreeViewGrid.Model.GetValue(iter, 0);
+
+                    if (DirectoryPointerItem == null)
+                    {
+                        // Контрагенти_Objest Контрагенти_Objest = new Контрагенти_Objest();
+                        // if (Контрагенти_Objest.Read(new UnigueID(uid)))
+                        // {
+                        //     Program.GeneralForm?.CreateNotebookPage($"Організація: {Контрагенти_Objest.Назва}", () =>
+                        //     {
+                        //         Контрагенти_Елемент page = new Контрагенти_Елемент
+                        //         {
+                        //             PageList = this,
+                        //             IsNew = false,
+                        //             Контрагенти_Objest = Контрагенти_Objest,
+                        //         };
+
+                        //         page.SetValue();
+
+                        //         return page;
+                        //     });
+                        // }
+                        // else
+                        //     Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+                    }
+                    else
+                    {
+                        if (CallBack_OnSelectPointer != null)
+                            CallBack_OnSelectPointer.Invoke(new Контрагенти_Папки_Pointer(new UnigueID(uid)));
+
+                        Program.GeneralForm?.CloseCurrentPageNotebook();
+                    }
+                }
             }
         }
 

@@ -1,5 +1,7 @@
 using Gtk;
 
+using AccountingSoftware;
+
 using StorageAndTrade_1_0.Константи;
 using StorageAndTrade_1_0.Довідники;
 
@@ -13,6 +15,8 @@ namespace StorageAndTrade
 
         public bool IsNew { get; set; } = true;
 
+        public Контрагенти_Папки_Pointer РодичДляНового { get; set; } = new Контрагенти_Папки_Pointer();
+
         public Контрагенти_Objest Контрагенти_Objest { get; set; } = new Контрагенти_Objest();
 
         Entry Код = new Entry() { WidthRequest = 100 };
@@ -20,6 +24,7 @@ namespace StorageAndTrade
         TextView НазваПовна = new TextView();
         Entry РеєстраційнийНомер = new Entry() { WidthRequest = 300 };
         TextView Опис = new TextView();
+        Контрагенти_Папки_PointerControl Родич = new Контрагенти_Папки_PointerControl();
 
         public Контрагенти_Елемент() : base()
         {
@@ -65,6 +70,12 @@ namespace StorageAndTrade
 
             hBoxName.PackStart(new Label("Назва:"), false, false, 5);
             hBoxName.PackStart(Назва, false, false, 5);
+
+            //Родич
+            HBox hBoxParent = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxParent, false, false, 5);
+
+            hBoxParent.PackStart(Родич, false, false, 5);
 
             //НазваПовна
             HBox hBoxDesc = new HBox() { Halign = Align.End };
@@ -114,10 +125,14 @@ namespace StorageAndTrade
         public void SetValue()
         {
             if (IsNew)
+            {
                 Контрагенти_Objest.Код = (++НумераціяДовідників.Контрагенти_Const).ToString("D6");
+                Контрагенти_Objest.Папка = РодичДляНового; //new Контрагенти_Папки_Pointer(new UnigueID(ParentUid));
+            }
 
             Код.Text = Контрагенти_Objest.Код;
             Назва.Text = Контрагенти_Objest.Назва;
+            Родич.Pointer = Контрагенти_Objest.Папка;
             НазваПовна.Buffer.Text = Контрагенти_Objest.НазваПовна;
             РеєстраційнийНомер.Text = Контрагенти_Objest.РеєстраційнийНомер;
             Опис.Buffer.Text = Контрагенти_Objest.Опис;
@@ -127,6 +142,7 @@ namespace StorageAndTrade
         {
             Контрагенти_Objest.Код = Код.Text;
             Контрагенти_Objest.Назва = Назва.Text;
+            Контрагенти_Objest.Папка = Родич.Pointer;
             Контрагенти_Objest.НазваПовна = НазваПовна.Buffer.Text;
             Контрагенти_Objest.РеєстраційнийНомер = РеєстраційнийНомер.Text;
             Контрагенти_Objest.Опис = Опис.Buffer.Text;

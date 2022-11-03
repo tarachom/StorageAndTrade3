@@ -85,7 +85,14 @@ namespace StorageAndTrade
 
         public void LoadTree()
         {
-            ДеревоПапок.Parent_Pointer = new Контрагенти_Папки_Pointer(new UnigueID("dc4fd901-c498-4349-b72d-e6ea3a3cfe45"));
+            if (DirectoryPointerItem != null)
+			{
+                UnigueID unigueID = new UnigueID(DirectoryPointerItem.UnigueID.UGuid);
+				Контрагенти_Objest? контрагенти_Objest = new Контрагенти_Pointer(unigueID).GetDirectoryObject();
+				if (контрагенти_Objest != null)
+					ДеревоПапок.Parent_Pointer = контрагенти_Objest.Папка;
+			}
+
             ДеревоПапок.LoadTree();
         }
 
@@ -172,7 +179,8 @@ namespace StorageAndTrade
                 Контрагенти_Елемент page = new Контрагенти_Елемент
                 {
                     PageList = this,
-                    IsNew = true
+                    IsNew = true,
+                    РодичДляНового = ДеревоПапок.Parent_Pointer
                 };
 
                 page.SetValue();
