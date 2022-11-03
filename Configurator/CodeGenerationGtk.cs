@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 03.11.2022 16:11:00
+ * Дата конфігурації: 03.11.2022 20:37:35
  *
  */
  
@@ -680,16 +680,18 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         
         string Код = "";
         string Назва = "";
+        string Папка = "";
 
         Array ToArray()
         {
             return new object[] { new Gdk.Pixbuf(Image), ID 
-            /* */ , Код, Назва };
+            /* */ , Код, Назва, Папка };
         }
 
         public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */
             , typeof(string) /* Код */
             , typeof(string) /* Назва */
+            , typeof(string) /* Папка */
             );
 
         public static void AddColumns(TreeView treeView)
@@ -699,6 +701,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             /* */
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Папка", new CellRendererText() { Xpad = 4 }, "text", 4) { SortColumnId = 4 } ); /*Папка*/
             
         }
 
@@ -730,6 +733,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
               /* ORDER */
               Контрагенти_Select.QuerySelect.Order.Add(Довідники.Контрагенти_Const.Назва, SelectOrder.ASC);
             
+                /* Join Table */
+                Контрагенти_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Контрагенти_Папки_Const.TABLE, Довідники.Контрагенти_Const.Папка, Контрагенти_Select.QuerySelect.Table, "join_tab_1"));
+                
+                  /* Field */
+                  Контрагенти_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_1." + Довідники.Контрагенти_Папки_Const.Назва, "join_tab_1_field_1"));
+                  
 
             /* SELECT */
             Контрагенти_Select.Select();
@@ -742,6 +753,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     Контрагенти_Записи Record = new Контрагенти_Записи
                     {
                         ID = cur.UnigueID.ToString(),
+                        Папка = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Код = cur.Fields?[Контрагенти_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[Контрагенти_Const.Назва]?.ToString() ?? "" /**/
                         

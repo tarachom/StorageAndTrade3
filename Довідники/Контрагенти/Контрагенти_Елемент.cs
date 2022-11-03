@@ -24,7 +24,7 @@ namespace StorageAndTrade
         TextView НазваПовна = new TextView();
         Entry РеєстраційнийНомер = new Entry() { WidthRequest = 300 };
         TextView Опис = new TextView();
-        Контрагенти_Папки_PointerControl Родич = new Контрагенти_Папки_PointerControl();
+        Контрагенти_Папки_PointerControl Родич = new Контрагенти_Папки_PointerControl() { Caption = "Папка:" };
 
         public Контрагенти_Елемент() : base()
         {
@@ -127,7 +127,7 @@ namespace StorageAndTrade
             if (IsNew)
             {
                 Контрагенти_Objest.Код = (++НумераціяДовідників.Контрагенти_Const).ToString("D6");
-                Контрагенти_Objest.Папка = РодичДляНового; //new Контрагенти_Папки_Pointer(new UnigueID(ParentUid));
+                Контрагенти_Objest.Папка = РодичДляНового;
             }
 
             Код.Text = Контрагенти_Objest.Код;

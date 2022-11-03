@@ -17,6 +17,7 @@ namespace StorageAndTrade
 
         TreeView TreeViewGrid;
         Контрагенти_Папки_Дерево ДеревоПапок;
+        CheckButton checkButtonIsIerarchy = new CheckButton("Враховувати ієрархію");
 
         public Контрагенти() : base()
         {
@@ -30,6 +31,8 @@ namespace StorageAndTrade
             bClose.Clicked += (object? sender, EventArgs args) => { Program.GeneralForm?.CloseCurrentPageNotebook(); };
 
             hBoxBotton.PackStart(bClose, false, false, 10);
+
+            hBoxBotton.PackStart(checkButtonIsIerarchy, false, false, 10);
 
             PackStart(hBoxBotton, false, false, 10);
 
@@ -86,12 +89,12 @@ namespace StorageAndTrade
         public void LoadTree()
         {
             if (DirectoryPointerItem != null)
-			{
+            {
                 UnigueID unigueID = new UnigueID(DirectoryPointerItem.UnigueID.UGuid);
-				Контрагенти_Objest? контрагенти_Objest = new Контрагенти_Pointer(unigueID).GetDirectoryObject();
-				if (контрагенти_Objest != null)
-					ДеревоПапок.Parent_Pointer = контрагенти_Objest.Папка;
-			}
+                Контрагенти_Objest? контрагенти_Objest = new Контрагенти_Pointer(unigueID).GetDirectoryObject();
+                if (контрагенти_Objest != null)
+                    ДеревоПапок.Parent_Pointer = контрагенти_Objest.Папка;
+            }
 
             ДеревоПапок.LoadTree();
         }
@@ -102,7 +105,10 @@ namespace StorageAndTrade
             ТабличніСписки.Контрагенти_Записи.DirectoryPointerItem = DirectoryPointerItem;
 
             ТабличніСписки.Контрагенти_Записи.Where.Clear();
-            ТабличніСписки.Контрагенти_Записи.Where.Add(new Where(Контрагенти_Const.Папка, Comparison.EQ, ДеревоПапок.Parent_Pointer.UnigueID.UGuid));
+            if (checkButtonIsIerarchy.Active)
+            {
+                ТабличніСписки.Контрагенти_Записи.Where.Add(new Where(Контрагенти_Const.Папка, Comparison.EQ, ДеревоПапок.Parent_Pointer.UnigueID.UGuid));
+            }
 
             ТабличніСписки.Контрагенти_Записи.LoadRecords();
 
