@@ -24,20 +24,7 @@ namespace StorageAndTrade
             PackStart(bOpen, false, false, 2);
         }
 
-        void OpenSelect(object? sender, EventArgs args)
-        {
-            GeneralForm?.CreateNotebookPage("Вибір - Довідник: Організації", () =>
-            {
-                Організації page = new Організації
-                {
-                    GeneralForm = GeneralForm
-                };
-
-                page.LoadRecords();
-
-                return page;
-            });
-        }
+        protected virtual void OpenSelect(object? sender, EventArgs args) { }
 
         public string Caption
         {
@@ -81,8 +68,8 @@ namespace StorageAndTrade
 
     class DirectoryControl2 : DirectoryControl
     {
-        Номенклатура_Pointer? directoryPointer;
-        public Номенклатура_Pointer? DirectoryPointer
+        Організації_Pointer? directoryPointer;
+        public Організації_Pointer? DirectoryPointer
         {
             get
             {
@@ -97,6 +84,23 @@ namespace StorageAndTrade
                 else
                     Presentation = "";
             }
+        }
+
+        protected override void OpenSelect(object? sender, EventArgs args)
+        {
+            GeneralForm?.CreateNotebookPage("Вибір - Довідник: Організації", () =>
+            {
+                Організації page = new Організації
+                {
+                    GeneralForm = GeneralForm
+                };
+
+                page.DirectoryPointerItem = DirectoryPointer;
+
+                page.LoadRecords();
+
+                return page;
+            });
         }
     }
 }

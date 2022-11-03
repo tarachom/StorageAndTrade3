@@ -12,7 +12,8 @@ namespace StorageAndTrade
     class Організації : VBox
     {
         public FormStorageAndTrade? GeneralForm { get; set; }
-
+        public Організації_Pointer? DirectoryPointerItem { get; set; }
+        public System.Action? CallBack_OnSelectPointer { get; set; }
         TreeView TreeViewGrid;
 
         public Організації() : base()
@@ -74,6 +75,8 @@ namespace StorageAndTrade
 
         public void LoadRecords()
         {
+            ТабличніСписки.Організації_Записи.DirectoryPointerItem = DirectoryPointerItem;
+
             ТабличніСписки.Організації_Записи.LoadRecords();
 
             if (ТабличніСписки.Організації_Записи.SelectPath != null)
@@ -105,26 +108,38 @@ namespace StorageAndTrade
                 {
                     string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
 
-                    Організації_Objest Організації_Objest = new Організації_Objest();
-                    if (Організації_Objest.Read(new UnigueID(uid)))
+                    if (DirectoryPointerItem == null)
                     {
-                        GeneralForm?.CreateNotebookPage($"Організація: {Організації_Objest.Назва}", () =>
+                        Організації_Objest Організації_Objest = new Організації_Objest();
+                        if (Організації_Objest.Read(new UnigueID(uid)))
                         {
-                            Організації_Елемент page = new Організації_Елемент
+                            GeneralForm?.CreateNotebookPage($"Організація: {Організації_Objest.Назва}", () =>
                             {
-                                GeneralForm = GeneralForm,
-                                CallBack_RefreshList = LoadRecords,
-                                IsNew = false,
-                                Організації_Objest = Організації_Objest,
-                            };
+                                Організації_Елемент page = new Організації_Елемент
+                                {
+                                    GeneralForm = GeneralForm,
+                                    CallBack_RefreshList = LoadRecords,
+                                    IsNew = false,
+                                    Організації_Objest = Організації_Objest,
+                                };
 
-                            page.SetValue();
+                                page.SetValue();
 
-                            return page;
-                        });
+                                return page;
+                            });
+                        }
+                        else
+                            Message.Error(GeneralForm, "Не вдалось прочитати!");
                     }
                     else
-                        Message.Error(GeneralForm, "Не вдалось прочитати!");
+                    {
+                        ТабличніСписки.Організації_Записи.DirectoryPointerItem = new Організації_Pointer(new UnigueID(uid));
+
+                        if (CallBack_OnSelectPointer != null)
+                            CallBack_OnSelectPointer.Invoke();
+
+                        GeneralForm?.CloseCurrentPageNotebook();
+                    }
                 }
             }
         }

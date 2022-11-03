@@ -150,6 +150,7 @@ namespace StorageAndTrade
             НазваПовна.Buffer.Text = Організації_Objest.НазваПовна;
 
             dc.GeneralForm = GeneralForm;
+            dc.DirectoryPointer = Організації_Objest.GetDirectoryPointer();
         }
 
         void GetValue()
