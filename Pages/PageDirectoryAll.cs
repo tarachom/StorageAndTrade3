@@ -73,6 +73,8 @@ namespace StorageAndTrade
                     GeneralForm = GeneralForm
                 };
 
+                
+
                 page.LoadRecords();
 
                 return page;

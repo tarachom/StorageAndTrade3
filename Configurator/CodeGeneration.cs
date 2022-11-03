@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 02.11.2022 15:40:21
+ * Дата конфігурації: 03.11.2022 14:43:51
  *
  */
 
@@ -3700,13 +3700,14 @@ namespace StorageAndTrade_1_0.Довідники
         public const string КраїнаРеєстрації = "col_a6";
         public const string СвідоцтвоСеріяНомер = "col_a7";
         public const string СвідоцтвоДатаВидачі = "col_a8";
+        public const string Холдинг = "col_a9";
     }
 	
     
     public class Організації_Objest : DirectoryObject
     {
         public Організації_Objest() : base(Config.Kernel!, "tab_a01",
-             new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8" }) 
+             new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9" }) 
         {
             Назва = "";
             Код = "";
@@ -3716,6 +3717,7 @@ namespace StorageAndTrade_1_0.Довідники
             КраїнаРеєстрації = "";
             СвідоцтвоСеріяНомер = "";
             СвідоцтвоДатаВидачі = "";
+            Холдинг = new Довідники.Організації_Pointer();
             
             //Табличні частини
             Контакти_TablePart = new Організації_Контакти_TablePart(this);
@@ -3734,6 +3736,7 @@ namespace StorageAndTrade_1_0.Довідники
                 КраїнаРеєстрації = base.FieldValue["col_a6"]?.ToString() ?? "";
                 СвідоцтвоСеріяНомер = base.FieldValue["col_a7"]?.ToString() ?? "";
                 СвідоцтвоДатаВидачі = base.FieldValue["col_a8"]?.ToString() ?? "";
+                Холдинг = new Довідники.Організації_Pointer(base.FieldValue["col_a9"]);
                 
                 BaseClear();
                 return true;
@@ -3752,6 +3755,7 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_a6"] = КраїнаРеєстрації;
             base.FieldValue["col_a7"] = СвідоцтвоСеріяНомер;
             base.FieldValue["col_a8"] = СвідоцтвоДатаВидачі;
+            base.FieldValue["col_a9"] = Холдинг.UnigueID.UGuid;
             
             BaseSave();
 			
@@ -3769,6 +3773,7 @@ namespace StorageAndTrade_1_0.Довідники
 			copy.КраїнаРеєстрації = КраїнаРеєстрації;
 			copy.СвідоцтвоСеріяНомер = СвідоцтвоСеріяНомер;
 			copy.СвідоцтвоДатаВидачі = СвідоцтвоДатаВидачі;
+			copy.Холдинг = Холдинг;
 			
 			return copy;
         }
@@ -3793,6 +3798,7 @@ namespace StorageAndTrade_1_0.Довідники
         public string КраїнаРеєстрації { get; set; }
         public string СвідоцтвоСеріяНомер { get; set; }
         public string СвідоцтвоДатаВидачі { get; set; }
+        public Довідники.Організації_Pointer Холдинг { get; set; }
         
         //Табличні частини
         public Організації_Контакти_TablePart Контакти_TablePart { get; set; }

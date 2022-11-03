@@ -10,7 +10,8 @@ namespace StorageAndTrade
     class Організації_Елемент : VBox
     {
         public FormStorageAndTrade? GeneralForm { get; set; }
-        public System.Action? CallBack_RefreshList { get; set; }
+        public Організації? PageList { get; set; }
+
         public bool IsNew { get; set; } = true;
 
         public Організації_Objest Організації_Objest { get; set; } = new Організації_Objest();
@@ -24,7 +25,7 @@ namespace StorageAndTrade
         Entry СвідоцтвоСеріяНомер = new Entry() { WidthRequest = 300 };
         Entry СвідоцтвоДатаВидачі = new Entry() { WidthRequest = 300 };
 
-        DirectoryControl2 dc = new DirectoryControl2() { Caption = "Control:", Halign = Align.End };
+        Організації_Control Холдинг = new Організації_Control() { Caption = "Організація:", Halign = Align.End };
 
         public Організації_Елемент() : base()
         {
@@ -57,8 +58,8 @@ namespace StorageAndTrade
         {
             VBox vBox = new VBox();
 
-            //Код2
-            vBox.PackStart(dc, false, false, 5);
+            //Холдинг
+            vBox.PackStart(Холдинг, false, false, 5);
 
             //Код
             HBox hBoxCode = new HBox() { Halign = Align.End };
@@ -149,8 +150,8 @@ namespace StorageAndTrade
             СвідоцтвоДатаВидачі.Text = Організації_Objest.СвідоцтвоДатаВидачі;
             НазваПовна.Buffer.Text = Організації_Objest.НазваПовна;
 
-            dc.GeneralForm = GeneralForm;
-            dc.DirectoryPointer = Організації_Objest.GetDirectoryPointer();
+            Холдинг.GeneralForm = GeneralForm;
+            Холдинг.DirectoryPointer = Організації_Objest.Холдинг;
         }
 
         void GetValue()
@@ -163,6 +164,7 @@ namespace StorageAndTrade
             Організації_Objest.СвідоцтвоСеріяНомер = СвідоцтвоСеріяНомер.Text;
             Організації_Objest.СвідоцтвоДатаВидачі = СвідоцтвоДатаВидачі.Text;
             Організації_Objest.НазваПовна = НазваПовна.Buffer.Text;
+            Організації_Objest.Холдинг = Холдинг.DirectoryPointer;
         }
 
         #endregion
@@ -178,10 +180,10 @@ namespace StorageAndTrade
 
             GeneralForm?.RenameCurrentPageNotebook($"Організація: {Організації_Objest.Назва}");
 
-            if (CallBack_RefreshList != null)
+            if (PageList != null)
             {
-                ТабличніСписки.Організації_Записи.SelectPointerItem = Організації_Objest.GetDirectoryPointer();
-                CallBack_RefreshList.Invoke();
+                PageList.SelectPointerItem = Організації_Objest.GetDirectoryPointer();
+                PageList.LoadRecords();
             }
         }
     }

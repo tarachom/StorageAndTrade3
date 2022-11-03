@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 02.11.2022 15:40:21
+ * Дата конфігурації: 03.11.2022 14:43:51
  *
  */
  
@@ -53,16 +53,18 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         
         string Код = "";
         string Назва = "";
+        string Холдинг = "";
 
         Array ToArray()
         {
             return new object[] { new Gdk.Pixbuf(Image), ID 
-            /* */ , Код, Назва };
+            /* */ , Код, Назва, Холдинг };
         }
 
         public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */
             , typeof(string) /* Код */
             , typeof(string) /* Назва */
+            , typeof(string) /* Холдинг */
             );
 
         public static void AddColumns(TreeView treeView)
@@ -72,6 +74,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             /* */
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Холдинг", new CellRendererText() { Xpad = 4 }, "text", 4) { SortColumnId = 4 } ); /*Холдинг*/
             
         }
 
@@ -85,6 +88,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
+            SelectPath = null;
 
             Довідники.Організації_Select Організації_Select = new Довідники.Організації_Select();
             Організації_Select.QuerySelect.Field.AddRange(
@@ -102,6 +106,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
               /* ORDER */
               Організації_Select.QuerySelect.Order.Add(Довідники.Організації_Const.Назва, SelectOrder.ASC);
             
+                /* Join Table */
+                Організації_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Організації_Const.TABLE, Довідники.Організації_Const.Холдинг, Організації_Select.QuerySelect.Table, "join_tab_1"));
+                
+                  /* Field */
+                  Організації_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_1." + Довідники.Організації_Const.Назва, "join_tab_1_field_1"));
+                  
 
             /* SELECT */
             Організації_Select.Select();
@@ -114,6 +126,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     Організації_Записи Record = new Організації_Записи
                     {
                         ID = cur.UnigueID.ToString(),
+                        Холдинг = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Код = cur.Fields?[Організації_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[Організації_Const.Назва]?.ToString() ?? "" /**/
                         
@@ -190,6 +203,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
+            SelectPath = null;
 
             Довідники.Номенклатура_Select Номенклатура_Select = new Довідники.Номенклатура_Select();
             Номенклатура_Select.QuerySelect.Field.AddRange(
@@ -312,6 +326,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
+            SelectPath = null;
 
             Довідники.Виробники_Select Виробники_Select = new Довідники.Виробники_Select();
             Виробники_Select.QuerySelect.Field.AddRange(
@@ -405,6 +420,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
+            SelectPath = null;
 
             Довідники.ВидиНоменклатури_Select ВидиНоменклатури_Select = new Довідники.ВидиНоменклатури_Select();
             ВидиНоменклатури_Select.QuerySelect.Field.AddRange(
@@ -498,6 +514,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
+            SelectPath = null;
 
             Довідники.ПакуванняОдиниціВиміру_Select ПакуванняОдиниціВиміру_Select = new Довідники.ПакуванняОдиниціВиміру_Select();
             ПакуванняОдиниціВиміру_Select.QuerySelect.Field.AddRange(
@@ -594,6 +611,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
+            SelectPath = null;
 
             Довідники.Валюти_Select Валюти_Select = new Довідники.Валюти_Select();
             Валюти_Select.QuerySelect.Field.AddRange(
@@ -689,6 +707,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
+            SelectPath = null;
 
             Довідники.Контрагенти_Select Контрагенти_Select = new Довідники.Контрагенти_Select();
             Контрагенти_Select.QuerySelect.Field.AddRange(
@@ -782,6 +801,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
+            SelectPath = null;
 
             Довідники.Склади_Select Склади_Select = new Довідники.Склади_Select();
             Склади_Select.QuerySelect.Field.AddRange(
@@ -878,6 +898,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
+            SelectPath = null;
 
             Довідники.ВидиЦін_Select ВидиЦін_Select = new Довідники.ВидиЦін_Select();
             ВидиЦін_Select.QuerySelect.Field.AddRange(
@@ -980,6 +1001,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
+            SelectPath = null;
 
             Довідники.ВидиЦінПостачальників_Select ВидиЦінПостачальників_Select = new Довідники.ВидиЦінПостачальників_Select();
             ВидиЦінПостачальників_Select.QuerySelect.Field.AddRange(
@@ -1073,6 +1095,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
+            SelectPath = null;
 
             Довідники.Користувачі_Select Користувачі_Select = new Довідники.Користувачі_Select();
             Користувачі_Select.QuerySelect.Field.AddRange(
@@ -1166,6 +1189,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
+            SelectPath = null;
 
             Довідники.ФізичніОсоби_Select ФізичніОсоби_Select = new Довідники.ФізичніОсоби_Select();
             ФізичніОсоби_Select.QuerySelect.Field.AddRange(
@@ -1259,6 +1283,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
+            SelectPath = null;
 
             Довідники.СтруктураПідприємства_Select СтруктураПідприємства_Select = new Довідники.СтруктураПідприємства_Select();
             СтруктураПідприємства_Select.QuerySelect.Field.AddRange(
@@ -1352,6 +1377,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
+            SelectPath = null;
 
             Довідники.КраїниСвіту_Select КраїниСвіту_Select = new Довідники.КраїниСвіту_Select();
             КраїниСвіту_Select.QuerySelect.Field.AddRange(
@@ -1445,6 +1471,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
+            SelectPath = null;
 
             Довідники.Файли_Select Файли_Select = new Довідники.Файли_Select();
             Файли_Select.QuerySelect.Field.AddRange(
@@ -1541,6 +1568,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
+            SelectPath = null;
 
             Довідники.ХарактеристикиНоменклатури_Select ХарактеристикиНоменклатури_Select = new Довідники.ХарактеристикиНоменклатури_Select();
             ХарактеристикиНоменклатури_Select.QuerySelect.Field.AddRange(
@@ -1661,6 +1689,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
+            SelectPath = null;
 
             Довідники.Каси_Select Каси_Select = new Довідники.Каси_Select();
             Каси_Select.QuerySelect.Field.AddRange(
@@ -1766,6 +1795,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
+            SelectPath = null;
 
             Довідники.БанківськіРахункиОрганізацій_Select БанківськіРахункиОрганізацій_Select = new Довідники.БанківськіРахункиОрганізацій_Select();
             БанківськіРахункиОрганізацій_Select.QuerySelect.Field.AddRange(
@@ -1874,6 +1904,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
+            SelectPath = null;
 
             Довідники.ДоговориКонтрагентів_Select ДоговориКонтрагентів_Select = new Довідники.ДоговориКонтрагентів_Select();
             ДоговориКонтрагентів_Select.QuerySelect.Field.AddRange(
@@ -1978,6 +2009,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
+            SelectPath = null;
 
             Довідники.БанківськіРахункиКонтрагентів_Select БанківськіРахункиКонтрагентів_Select = new Довідники.БанківськіРахункиКонтрагентів_Select();
             БанківськіРахункиКонтрагентів_Select.QuerySelect.Field.AddRange(
@@ -2071,6 +2103,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
+            SelectPath = null;
 
             Довідники.СтаттяРухуКоштів_Select СтаттяРухуКоштів_Select = new Довідники.СтаттяРухуКоштів_Select();
             СтаттяРухуКоштів_Select.QuerySelect.Field.AddRange(
@@ -2161,6 +2194,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
+            SelectPath = null;
 
             Довідники.СеріїНоменклатури_Select СеріїНоменклатури_Select = new Довідники.СеріїНоменклатури_Select();
             СеріїНоменклатури_Select.QuerySelect.Field.AddRange(
@@ -2261,6 +2295,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
+            SelectPath = null;
 
             Довідники.ПартіяТоварівКомпозит_Select ПартіяТоварівКомпозит_Select = new Довідники.ПартіяТоварівКомпозит_Select();
             ПартіяТоварівКомпозит_Select.QuerySelect.Field.AddRange(
@@ -2371,6 +2406,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
+            SelectPath = null;
 
             Довідники.ВидиЗапасів_Select ВидиЗапасів_Select = new Довідники.ВидиЗапасів_Select();
             ВидиЗапасів_Select.QuerySelect.Field.AddRange(
@@ -2459,6 +2495,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
+            SelectPath = null;
 
             Довідники.ПродажіДокументКомпозит_Select ПродажіДокументКомпозит_Select = new Довідники.ПродажіДокументКомпозит_Select();
             ПродажіДокументКомпозит_Select.QuerySelect.Field.AddRange(
@@ -2547,6 +2584,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
+            SelectPath = null;
 
             Довідники.АналітикаНоменклатуриКомпозит_Select АналітикаНоменклатуриКомпозит_Select = new Довідники.АналітикаНоменклатуриКомпозит_Select();
             АналітикаНоменклатуриКомпозит_Select.QuerySelect.Field.AddRange(
@@ -2635,6 +2673,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
+            SelectPath = null;
 
             Довідники.АналітикаКонтрагентівКомпозит_Select АналітикаКонтрагентівКомпозит_Select = new Довідники.АналітикаКонтрагентівКомпозит_Select();
             АналітикаКонтрагентівКомпозит_Select.QuerySelect.Field.AddRange(
@@ -2723,6 +2762,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
+            SelectPath = null;
 
             Довідники.АналітикаПартійКомпозит_Select АналітикаПартійКомпозит_Select = new Довідники.АналітикаПартійКомпозит_Select();
             АналітикаПартійКомпозит_Select.QuerySelect.Field.AddRange(

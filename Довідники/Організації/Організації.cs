@@ -12,8 +12,11 @@ namespace StorageAndTrade
     class Організації : VBox
     {
         public FormStorageAndTrade? GeneralForm { get; set; }
+
+        public Організації_Pointer? SelectPointerItem { get; set; }
         public Організації_Pointer? DirectoryPointerItem { get; set; }
-        public System.Action? CallBack_OnSelectPointer { get; set; }
+        public System.Action<Організації_Pointer>? CallBack_OnSelectPointer { get; set; }
+
         TreeView TreeViewGrid;
 
         public Організації() : base()
@@ -75,6 +78,7 @@ namespace StorageAndTrade
 
         public void LoadRecords()
         {
+            ТабличніСписки.Організації_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.Організації_Записи.DirectoryPointerItem = DirectoryPointerItem;
 
             ТабличніСписки.Організації_Записи.LoadRecords();
@@ -94,7 +98,7 @@ namespace StorageAndTrade
 
                 UnigueID unigueID = new UnigueID((string)TreeViewGrid.Model.GetValue(iter, 1));
 
-                ТабличніСписки.Організації_Записи.SelectPointerItem = new StorageAndTrade_1_0.Довідники.Організації_Pointer(unigueID);
+                SelectPointerItem = new StorageAndTrade_1_0.Довідники.Організації_Pointer(unigueID);
             }
         }
 
@@ -118,7 +122,7 @@ namespace StorageAndTrade
                                 Організації_Елемент page = new Організації_Елемент
                                 {
                                     GeneralForm = GeneralForm,
-                                    CallBack_RefreshList = LoadRecords,
+                                    PageList = this,
                                     IsNew = false,
                                     Організації_Objest = Організації_Objest,
                                 };
@@ -133,10 +137,8 @@ namespace StorageAndTrade
                     }
                     else
                     {
-                        ТабличніСписки.Організації_Записи.DirectoryPointerItem = new Організації_Pointer(new UnigueID(uid));
-
                         if (CallBack_OnSelectPointer != null)
-                            CallBack_OnSelectPointer.Invoke();
+                            CallBack_OnSelectPointer.Invoke(new Організації_Pointer(new UnigueID(uid)));
 
                         GeneralForm?.CloseCurrentPageNotebook();
                     }
@@ -155,7 +157,7 @@ namespace StorageAndTrade
                 Організації_Елемент page = new Організації_Елемент
                 {
                     GeneralForm = GeneralForm,
-                    CallBack_RefreshList = LoadRecords,
+                    PageList = this,
                     IsNew = true
                 };
 
@@ -220,7 +222,7 @@ namespace StorageAndTrade
                             Організації_Objest_Новий.Код = (++НумераціяДовідників.Організації_Const).ToString("D6");
                             Організації_Objest_Новий.Save();
 
-                            ТабличніСписки.Організації_Записи.SelectPointerItem = Організації_Objest_Новий.GetDirectoryPointer();
+                            SelectPointerItem = Організації_Objest_Новий.GetDirectoryPointer();
                         }
                         else
                             Message.Error(GeneralForm, "Не вдалось прочитати!");

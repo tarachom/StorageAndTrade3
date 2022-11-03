@@ -66,41 +66,51 @@ namespace StorageAndTrade
         }
     }
 
-    class DirectoryControl2 : DirectoryControl
-    {
-        Організації_Pointer? directoryPointer;
-        public Організації_Pointer? DirectoryPointer
-        {
-            get
-            {
-                return directoryPointer;
-            }
-            set
-            {
-                directoryPointer = value;
+    // class DirectoryControl2 : DirectoryControl
+    // {
+    //     public DirectoryControl2()
+    //     {
+    //         DirectoryPointer = new Організації_Pointer();
+    //     }
 
-                if (directoryPointer != null)
-                    Presentation = directoryPointer.GetPresentation();
-                else
-                    Presentation = "";
-            }
-        }
+    //     Організації_Pointer? directoryPointer;
+    //     public Організації_Pointer? DirectoryPointer
+    //     {
+    //         get
+    //         {
+    //             return directoryPointer;
+    //         }
+    //         set
+    //         {
+    //             directoryPointer = value;
 
-        protected override void OpenSelect(object? sender, EventArgs args)
-        {
-            GeneralForm?.CreateNotebookPage("Вибір - Довідник: Організації", () =>
-            {
-                Організації page = new Організації
-                {
-                    GeneralForm = GeneralForm
-                };
+    //             if (directoryPointer != null)
+    //                 Presentation = directoryPointer.GetPresentation();
+    //             else
+    //                 Presentation = "";
+    //         }
+    //     }
 
-                page.DirectoryPointerItem = DirectoryPointer;
+    //     protected override void OpenSelect(object? sender, EventArgs args)
+    //     {
+    //         GeneralForm?.CreateNotebookPage("Вибір - Довідник: Організації", () =>
+    //         {
+    //             Організації page = new Організації
+    //             {
+    //                 GeneralForm = GeneralForm
+    //             };
 
-                page.LoadRecords();
+    //             page.DirectoryPointerItem = DirectoryPointer;
+                
+    //             page.CallBack_OnSelectPointer = (Організації_Pointer selectPointer) =>
+    //             {
+    //                 DirectoryPointer = selectPointer;
+    //             };
 
-                return page;
-            });
-        }
-    }
+    //             page.LoadRecords();
+
+    //             return page;
+    //         });
+    //     }
+    // }
 }
