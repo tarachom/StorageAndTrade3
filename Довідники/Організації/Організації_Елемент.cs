@@ -149,7 +149,7 @@ namespace StorageAndTrade
             СвідоцтвоДатаВидачі.Text = Організації_Objest.СвідоцтвоДатаВидачі;
             НазваПовна.Buffer.Text = Організації_Objest.НазваПовна;
 
-            Холдинг.DirectoryPointer = Організації_Objest.Холдинг;
+            Холдинг.Pointer = Організації_Objest.Холдинг;
         }
 
         void GetValue()
@@ -162,7 +162,7 @@ namespace StorageAndTrade
             Організації_Objest.СвідоцтвоСеріяНомер = СвідоцтвоСеріяНомер.Text;
             Організації_Objest.СвідоцтвоДатаВидачі = СвідоцтвоДатаВидачі.Text;
             Організації_Objest.НазваПовна = НазваПовна.Buffer.Text;
-            Організації_Objest.Холдинг = Холдинг.DirectoryPointer;
+            Організації_Objest.Холдинг = Холдинг.Pointer;
         }
 
         #endregion

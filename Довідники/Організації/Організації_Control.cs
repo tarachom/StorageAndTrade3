@@ -10,22 +10,22 @@ namespace StorageAndTrade
     {
         public Організації_Control()
         {
-            directoryPointer = new Організації_Pointer();
+            pointer = new Організації_Pointer();
         }
 
-        Організації_Pointer directoryPointer;
-        public Організації_Pointer DirectoryPointer
+        Організації_Pointer pointer;
+        public Організації_Pointer Pointer
         {
             get
             {
-                return directoryPointer;
+                return pointer;
             }
             set
             {
-                directoryPointer = value;
+                pointer = value;
 
-                if (directoryPointer != null)
-                    Presentation = directoryPointer.GetPresentation();
+                if (pointer != null)
+                    Presentation = pointer.GetPresentation();
                 else
                     Presentation = "";
             }
@@ -37,11 +37,10 @@ namespace StorageAndTrade
             {
                 Організації page = new Організації();
 
-                page.DirectoryPointerItem = DirectoryPointer;
-                
+                page.DirectoryPointerItem = Pointer;
                 page.CallBack_OnSelectPointer = (Організації_Pointer selectPointer) =>
                 {
-                    DirectoryPointer = selectPointer;
+                    Pointer = selectPointer;
                 };
 
                 page.LoadRecords();
