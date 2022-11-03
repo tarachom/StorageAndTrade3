@@ -11,8 +11,6 @@ namespace StorageAndTrade
 {
     class Організації : VBox
     {
-        public FormStorageAndTrade? GeneralForm { get; set; }
-
         public Організації_Pointer? SelectPointerItem { get; set; }
         public Організації_Pointer? DirectoryPointerItem { get; set; }
         public System.Action<Організації_Pointer>? CallBack_OnSelectPointer { get; set; }
@@ -28,7 +26,7 @@ namespace StorageAndTrade
             HBox hBoxBotton = new HBox();
 
             Button bClose = new Button("Закрити");
-            bClose.Clicked += (object? sender, EventArgs args) => { GeneralForm?.CloseCurrentPageNotebook(); };
+            bClose.Clicked += (object? sender, EventArgs args) => { Program.GeneralForm?.CloseCurrentPageNotebook(); };
 
             hBoxBotton.PackStart(bClose, false, false, 10);
 
@@ -117,11 +115,10 @@ namespace StorageAndTrade
                         Організації_Objest Організації_Objest = new Організації_Objest();
                         if (Організації_Objest.Read(new UnigueID(uid)))
                         {
-                            GeneralForm?.CreateNotebookPage($"Організація: {Організації_Objest.Назва}", () =>
+                            Program.GeneralForm?.CreateNotebookPage($"Організація: {Організації_Objest.Назва}", () =>
                             {
                                 Організації_Елемент page = new Організації_Елемент
                                 {
-                                    GeneralForm = GeneralForm,
                                     PageList = this,
                                     IsNew = false,
                                     Організації_Objest = Організації_Objest,
@@ -133,14 +130,14 @@ namespace StorageAndTrade
                             });
                         }
                         else
-                            Message.Error(GeneralForm, "Не вдалось прочитати!");
+                            Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                     }
                     else
                     {
                         if (CallBack_OnSelectPointer != null)
                             CallBack_OnSelectPointer.Invoke(new Організації_Pointer(new UnigueID(uid)));
 
-                        GeneralForm?.CloseCurrentPageNotebook();
+                        Program.GeneralForm?.CloseCurrentPageNotebook();
                     }
                 }
             }
@@ -152,11 +149,10 @@ namespace StorageAndTrade
 
         void OnAddClick(object? sender, EventArgs args)
         {
-            GeneralForm?.CreateNotebookPage($"Організація: *", () =>
+            Program.GeneralForm?.CreateNotebookPage($"Організація: *", () =>
             {
                 Організації_Елемент page = new Організації_Елемент
                 {
-                    GeneralForm = GeneralForm,
                     PageList = this,
                     IsNew = true
                 };
@@ -176,7 +172,7 @@ namespace StorageAndTrade
         {
             if (TreeViewGrid.Selection.CountSelectedRows() != 0)
             {
-                if (Message.Request(GeneralForm, "Видалити?") == ResponseType.Yes)
+                if (Message.Request(Program.GeneralForm, "Видалити?") == ResponseType.Yes)
                 {
                     TreePath[] selectionRows = TreeViewGrid.Selection.GetSelectedRows();
 
@@ -191,7 +187,7 @@ namespace StorageAndTrade
                         if (Організації_Objest.Read(new UnigueID(uid)))
                             Організації_Objest.Delete();
                         else
-                            Message.Error(GeneralForm, "Не вдалось прочитати!");
+                            Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                     }
 
                     LoadRecords();
@@ -203,7 +199,7 @@ namespace StorageAndTrade
         {
             if (TreeViewGrid.Selection.CountSelectedRows() != 0)
             {
-                if (Message.Request(GeneralForm, "Копіювати?") == ResponseType.Yes)
+                if (Message.Request(Program.GeneralForm, "Копіювати?") == ResponseType.Yes)
                 {
                     TreePath[] selectionRows = TreeViewGrid.Selection.GetSelectedRows();
 
@@ -225,7 +221,7 @@ namespace StorageAndTrade
                             SelectPointerItem = Організації_Objest_Новий.GetDirectoryPointer();
                         }
                         else
-                            Message.Error(GeneralForm, "Не вдалось прочитати!");
+                            Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                     }
 
                     LoadRecords();

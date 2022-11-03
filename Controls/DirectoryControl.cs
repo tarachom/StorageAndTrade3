@@ -11,8 +11,6 @@ namespace StorageAndTrade
         Label labelCaption = new Label();
         Entry entryText = new Entry();
 
-        public FormStorageAndTrade? GeneralForm { get; set; }
-
         public DirectoryControl() : base()
         {
             PackStart(labelCaption, false, false, 5);

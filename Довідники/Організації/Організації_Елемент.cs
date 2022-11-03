@@ -9,7 +9,6 @@ namespace StorageAndTrade
 {
     class Організації_Елемент : VBox
     {
-        public FormStorageAndTrade? GeneralForm { get; set; }
         public Організації? PageList { get; set; }
 
         public bool IsNew { get; set; } = true;
@@ -38,7 +37,7 @@ namespace StorageAndTrade
             hBox.PackStart(bSave, false, false, 10);
 
             Button bClose = new Button("Закрити");
-            bClose.Clicked += (object? sender, EventArgs args) => { GeneralForm?.CloseCurrentPageNotebook(); };
+            bClose.Clicked += (object? sender, EventArgs args) => { Program.GeneralForm?.CloseCurrentPageNotebook(); };
 
             hBox.PackStart(bClose, false, false, 10);
 
@@ -150,7 +149,6 @@ namespace StorageAndTrade
             СвідоцтвоДатаВидачі.Text = Організації_Objest.СвідоцтвоДатаВидачі;
             НазваПовна.Buffer.Text = Організації_Objest.НазваПовна;
 
-            Холдинг.GeneralForm = GeneralForm;
             Холдинг.DirectoryPointer = Організації_Objest.Холдинг;
         }
 
@@ -178,7 +176,7 @@ namespace StorageAndTrade
 
             Організації_Objest.Save();
 
-            GeneralForm?.RenameCurrentPageNotebook($"Організація: {Організації_Objest.Назва}");
+            Program.GeneralForm?.RenameCurrentPageNotebook($"Організація: {Організації_Objest.Назва}");
 
             if (PageList != null)
             {

@@ -68,12 +68,7 @@ namespace StorageAndTrade
         {
             GeneralForm?.CreateNotebookPage("Довідник: Організації", () =>
             {
-                Організації page = new Організації
-                {
-                    GeneralForm = GeneralForm
-                };
-
-                
+                Організації page = new Організації();
 
                 page.LoadRecords();
 

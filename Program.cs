@@ -10,5 +10,7 @@ namespace StorageAndTrade
             new FormConfigurationSelection();
             Application.Run();
         }
+
+        public static FormStorageAndTrade? GeneralForm { get; set; }
     }
 }

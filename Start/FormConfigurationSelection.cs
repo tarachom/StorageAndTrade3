@@ -201,9 +201,9 @@ namespace StorageAndTrade
 
                 Конфа.Config.ReadAllConstants();
 
-                FormStorageAndTrade storageAndTrade = new FormStorageAndTrade();
-                storageAndTrade.OpenConfigurationParam = ConfigurationParamCollection.GetConfigurationParam(selectedRows[0].Name);
-                storageAndTrade.Show();
+                Program.GeneralForm = new FormStorageAndTrade();
+                Program.GeneralForm.OpenConfigurationParam = ConfigurationParamCollection.GetConfigurationParam(selectedRows[0].Name);
+                Program.GeneralForm.Show();
 
                 Hide();
             }

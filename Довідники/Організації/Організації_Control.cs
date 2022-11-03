@@ -33,12 +33,9 @@ namespace StorageAndTrade
 
         protected override void OpenSelect(object? sender, EventArgs args)
         {
-            GeneralForm?.CreateNotebookPage("Вибір - Довідник: Організації", () =>
+            Program.GeneralForm?.CreateNotebookPage("Вибір - Довідник: Організації", () =>
             {
-                Організації page = new Організації
-                {
-                    GeneralForm = GeneralForm
-                };
+                Організації page = new Організації();
 
                 page.DirectoryPointerItem = DirectoryPointer;
                 
