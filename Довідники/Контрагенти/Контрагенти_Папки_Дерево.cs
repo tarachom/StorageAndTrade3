@@ -65,19 +65,19 @@ namespace StorageAndTrade
             PackStart(toolbar, false, false, 0);
 
             ToolButton upButton = new ToolButton(Stock.Add) { Label = "Додати", IsImportant = true };
-            //upButton.Clicked += OnAddClick;
+            upButton.Clicked += OnAddClick;
             toolbar.Add(upButton);
 
             ToolButton refreshButton = new ToolButton(Stock.Refresh) { Label = "Обновити", IsImportant = true };
-            //refreshButton.Clicked += OnRefreshClick;
+            refreshButton.Clicked += OnRefreshClick;
             toolbar.Add(refreshButton);
 
             ToolButton deleteButton = new ToolButton(Stock.Delete) { Label = "Видалити", IsImportant = true };
-            //deleteButton.Clicked += OnDeleteClick;
+            deleteButton.Clicked += OnDeleteClick;
             toolbar.Add(deleteButton);
 
             ToolButton copyButton = new ToolButton(Stock.Copy) { Label = "Копіювати", IsImportant = true };
-            //copyButton.Clicked += OnCopyClick;
+            copyButton.Clicked += OnCopyClick;
             toolbar.Add(copyButton);
         }
 
@@ -220,37 +220,130 @@ ORDER BY level ASC
 
                 if (TreeViewGrid.Model.GetIter(out iter, TreeViewGrid.Selection.GetSelectedRows()[0]))
                 {
-                    string uid = (string)TreeViewGrid.Model.GetValue(iter, 0);
+                    UnigueID unigueID = new UnigueID((string)TreeViewGrid.Model.GetValue(iter, 0));
 
                     if (DirectoryPointerItem == null)
                     {
-                        // Контрагенти_Objest Контрагенти_Objest = new Контрагенти_Objest();
-                        // if (Контрагенти_Objest.Read(new UnigueID(uid)))
-                        // {
-                        //     Program.GeneralForm?.CreateNotebookPage($"Організація: {Контрагенти_Objest.Назва}", () =>
-                        //     {
-                        //         Контрагенти_Елемент page = new Контрагенти_Елемент
-                        //         {
-                        //             PageList = this,
-                        //             IsNew = false,
-                        //             Контрагенти_Objest = Контрагенти_Objest,
-                        //         };
+                        if (unigueID.IsEmpty())
+                            return;
 
-                        //         page.SetValue();
+                        Контрагенти_Папки_Objest Контрагенти_Папки_Objest = new Контрагенти_Папки_Objest();
+                        if (Контрагенти_Папки_Objest.Read(unigueID))
+                        {
+                            Program.GeneralForm?.CreateNotebookPage($"Контрагент Папка: {Контрагенти_Папки_Objest.Назва}", () =>
+                            {
+                                Контрагенти_Папки_Елемент page = new Контрагенти_Папки_Елемент
+                                {
+                                    PageList = this,
+                                    IsNew = false,
+                                    Контрагенти_Папки_Objest = Контрагенти_Папки_Objest
+                                };
 
-                        //         return page;
-                        //     });
-                        // }
-                        // else
-                        //     Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+                                page.SetValue();
+
+                                return page;
+                            });
+                        }
+                        else
+                            Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                     }
                     else
                     {
                         if (CallBack_OnSelectPointer != null)
-                            CallBack_OnSelectPointer.Invoke(new Контрагенти_Папки_Pointer(new UnigueID(uid)));
+                            CallBack_OnSelectPointer.Invoke(new Контрагенти_Папки_Pointer(unigueID));
 
                         Program.GeneralForm?.CloseCurrentPageNotebook();
                     }
+                }
+            }
+        }
+
+        #endregion
+
+        #region ToolBar
+
+        void OnAddClick(object? sender, EventArgs args)
+        {
+            Program.GeneralForm?.CreateNotebookPage($"Контрагент Папка: *", () =>
+            {
+                Контрагенти_Папки_Елемент page = new Контрагенти_Папки_Елемент
+                {
+                    PageList = this,
+                    IsNew = true,
+                    РодичДляНового = Parent_Pointer
+                };
+
+                page.SetValue();
+
+                return page;
+            });
+        }
+
+        void OnRefreshClick(object? sender, EventArgs args)
+        {
+            LoadTree();
+        }
+
+        void OnDeleteClick(object? sender, EventArgs args)
+        {
+            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
+            {
+                TreePath selectionRow = TreeViewGrid.Selection.GetSelectedRows()[0];
+
+                TreeIter iter;
+                TreeViewGrid.Model.GetIter(out iter, selectionRow);
+
+                UnigueID unigueID = new UnigueID((string)TreeViewGrid.Model.GetValue(iter, 0));
+
+                if (unigueID.IsEmpty())
+                    return;
+
+                if (Message.Request(Program.GeneralForm, "Видалити?") == ResponseType.Yes)
+                {
+                    Контрагенти_Папки_Objest Контрагенти_Папки_Objest = new Контрагенти_Папки_Objest();
+                    if (Контрагенти_Папки_Objest.Read(unigueID))
+                    {
+                        Контрагенти_Папки_Objest.Delete();
+                        Parent_Pointer = new Контрагенти_Папки_Pointer();
+                    }
+                    else
+                        Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+
+                    LoadTree();
+                }
+            }
+        }
+
+        void OnCopyClick(object? sender, EventArgs args)
+        {
+            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
+            {
+                TreePath selectionRow = TreeViewGrid.Selection.GetSelectedRows()[0];
+
+                TreeIter iter;
+                TreeViewGrid.Model.GetIter(out iter, selectionRow);
+
+                UnigueID unigueID = new UnigueID((string)TreeViewGrid.Model.GetValue(iter, 0));
+
+                if (unigueID.IsEmpty())
+                    return;
+
+                if (Message.Request(Program.GeneralForm, "Копіювати?") == ResponseType.Yes)
+                {
+                    Контрагенти_Папки_Objest Контрагенти_Папки_Objest = new Контрагенти_Папки_Objest();
+                    if (Контрагенти_Папки_Objest.Read(unigueID))
+                    {
+                        Контрагенти_Папки_Objest Контрагенти_Папки_Objest_Новий = Контрагенти_Папки_Objest.Copy();
+                        Контрагенти_Папки_Objest_Новий.Назва += " - Копія";
+                        Контрагенти_Папки_Objest_Новий.Код = (++НумераціяДовідників.Контрагенти_Папки_Const).ToString("D6");
+                        Контрагенти_Папки_Objest_Новий.Save();
+
+                        Parent_Pointer = Контрагенти_Папки_Objest_Новий.GetDirectoryPointer();
+                    }
+                    else
+                        Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+
+                    LoadTree();
                 }
             }
         }

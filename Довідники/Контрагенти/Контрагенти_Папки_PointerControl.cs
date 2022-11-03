@@ -12,6 +12,8 @@ namespace StorageAndTrade
             Caption = "Родич:";
         }
 
+        public string UidOpenFolder { get; set; } = "";
+
         Контрагенти_Папки_Pointer pointer;
         public Контрагенти_Папки_Pointer Pointer
         {
@@ -37,6 +39,7 @@ namespace StorageAndTrade
                 Контрагенти_Папки_Дерево page = new Контрагенти_Папки_Дерево(true);
 
                 page.DirectoryPointerItem = Pointer;
+                page.UidOpenFolder = UidOpenFolder;
                 page.CallBack_OnSelectPointer = (Контрагенти_Папки_Pointer selectPointer) =>
                 {
                     Pointer = selectPointer;
