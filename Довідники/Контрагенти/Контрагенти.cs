@@ -16,6 +16,7 @@ namespace StorageAndTrade
         public System.Action<Контрагенти_Pointer>? CallBack_OnSelectPointer { get; set; }
 
         TreeView TreeViewGrid;
+        Контрагенти_Папки_Дерево ДеревоПапок;
 
         public Контрагенти() : base()
         {
@@ -34,8 +35,10 @@ namespace StorageAndTrade
 
             CreateToolbar();
 
+            HPaned hPaned = new HPaned();
+
             ScrolledWindow scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In };
-            scrollTree.SetPolicy(PolicyType.Never, PolicyType.Automatic);
+            scrollTree.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
 
             TreeViewGrid = new TreeView(ТабличніСписки.Контрагенти_Записи.Store);
             ТабличніСписки.Контрагенти_Записи.AddColumns(TreeViewGrid);
@@ -47,7 +50,13 @@ namespace StorageAndTrade
 
             scrollTree.Add(TreeViewGrid);
 
-            PackStart(scrollTree, true, true, 0);
+            hPaned.Pack1(scrollTree, true, true);
+
+            ДеревоПапок = new Контрагенти_Папки_Дерево() { WidthRequest = 500 };
+            ДеревоПапок.CallBack_RowActivated = LoadRecords;
+            hPaned.Pack2(ДеревоПапок, false, true);
+
+            PackStart(hPaned, true, true, 0);
 
             ShowAll();
         }
@@ -74,10 +83,19 @@ namespace StorageAndTrade
             toolbar.Add(copyButton);
         }
 
+        public void LoadTree()
+        {
+            ДеревоПапок.Parent_Pointer = new Контрагенти_Папки_Pointer(new UnigueID("dc4fd901-c498-4349-b72d-e6ea3a3cfe45"));
+            ДеревоПапок.LoadTree();
+        }
+
         public void LoadRecords()
         {
             ТабличніСписки.Контрагенти_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.Контрагенти_Записи.DirectoryPointerItem = DirectoryPointerItem;
+
+            ТабличніСписки.Контрагенти_Записи.Where.Clear();
+            ТабличніСписки.Контрагенти_Записи.Where.Add(new Where(Контрагенти_Const.Папка, Comparison.EQ, ДеревоПапок.Parent_Pointer.UnigueID.UGuid));
 
             ТабличніСписки.Контрагенти_Записи.LoadRecords();
 

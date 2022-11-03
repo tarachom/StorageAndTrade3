@@ -112,7 +112,7 @@ namespace StorageAndTrade
             {
                 Контрагенти page = new Контрагенти();
 
-                page.LoadRecords();
+                page.LoadTree();
 
                 return page;
             });
