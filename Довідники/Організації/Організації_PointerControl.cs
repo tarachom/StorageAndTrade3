@@ -6,11 +6,12 @@ using StorageAndTrade_1_0.Довідники;
 
 namespace StorageAndTrade
 {
-    class Організації_Control : DirectoryControl
+    class Організації_PointerControl : PointerControl
     {
-        public Організації_Control()
+        public Організації_PointerControl()
         {
             pointer = new Організації_Pointer();
+            WidthPresentation = 300;
         }
 
         Організації_Pointer pointer;

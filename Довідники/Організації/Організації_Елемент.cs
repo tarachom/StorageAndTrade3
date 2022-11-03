@@ -24,7 +24,7 @@ namespace StorageAndTrade
         Entry СвідоцтвоСеріяНомер = new Entry() { WidthRequest = 300 };
         Entry СвідоцтвоДатаВидачі = new Entry() { WidthRequest = 300 };
 
-        Організації_Control Холдинг = new Організації_Control() { Caption = "Організація:", Halign = Align.End };
+        Організації_PointerControl Холдинг = new Організації_PointerControl() { Caption = "Організація:" };
 
         public Організації_Елемент() : base()
         {

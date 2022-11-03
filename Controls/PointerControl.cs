@@ -6,13 +6,15 @@ using StorageAndTrade_1_0.Довідники;
 
 namespace StorageAndTrade
 {
-    abstract class DirectoryControl : HBox
+    abstract class PointerControl : HBox
     {
         Label labelCaption = new Label();
         Entry entryText = new Entry();
 
-        public DirectoryControl() : base()
+        public PointerControl() : base()
         {
+            Halign = Align.End;
+
             PackStart(labelCaption, false, false, 5);
             PackStart(entryText, false, false, 0);
 
@@ -33,6 +35,18 @@ namespace StorageAndTrade
             set
             {
                 labelCaption.Text = value;
+            }
+        }
+
+        public int WidthPresentation
+        {
+            get
+            {
+                return entryText.WidthRequest;
+            }
+            set
+            {
+                entryText.WidthRequest = value;
             }
         }
 
