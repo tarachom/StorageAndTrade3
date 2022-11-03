@@ -3,17 +3,17 @@ using StorageAndTrade_1_0.Довідники;
 
 namespace StorageAndTrade
 {
-    class Валюти_PointerControl : PointerControl
+    class Контрагенти_PointerControl : PointerControl
     {
-        public Валюти_PointerControl()
+        public Контрагенти_PointerControl()
         {
-            pointer = new Валюти_Pointer();
+            pointer = new Контрагенти_Pointer();
             WidthPresentation = 300;
-            Caption = "Валюта:";
+            Caption = "Контрагент:";
         }
 
-        Валюти_Pointer pointer;
-        public Валюти_Pointer Pointer
+        Контрагенти_Pointer pointer;
+        public Контрагенти_Pointer Pointer
         {
             get
             {
@@ -32,12 +32,12 @@ namespace StorageAndTrade
 
         protected override void OpenSelect(object? sender, EventArgs args)
         {
-            Program.GeneralForm?.CreateNotebookPage("Вибір - Довідник: Валюти", () =>
+            Program.GeneralForm?.CreateNotebookPage("Вибір - Довідник: Контрагенти", () =>
             {
-                Валюти page = new Валюти();
+                Контрагенти page = new Контрагенти();
 
                 page.DirectoryPointerItem = Pointer;
-                page.CallBack_OnSelectPointer = (Валюти_Pointer selectPointer) =>
+                page.CallBack_OnSelectPointer = (Контрагенти_Pointer selectPointer) =>
                 {
                     Pointer = selectPointer;
                 };

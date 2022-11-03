@@ -110,10 +110,7 @@ namespace StorageAndTrade
         {
             GeneralForm?.CreateNotebookPage("Довідник: Контрагенти", () =>
             {
-                Контрагенти page = new Контрагенти
-                {
-                    GeneralForm = GeneralForm
-                };
+                Контрагенти page = new Контрагенти();
 
                 page.LoadRecords();
 

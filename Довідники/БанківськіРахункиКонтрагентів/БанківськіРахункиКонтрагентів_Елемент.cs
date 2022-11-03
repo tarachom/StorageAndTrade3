@@ -18,6 +18,7 @@ namespace StorageAndTrade
         Entry Код = new Entry() { WidthRequest = 100 };
         Entry Назва = new Entry() { WidthRequest = 500 };
         Валюти_PointerControl Валюта = new Валюти_PointerControl();
+        Контрагенти_PointerControl Контрагент = new Контрагенти_PointerControl();
 
         public БанківськіРахункиКонтрагентів_Елемент() : base()
         {
@@ -70,6 +71,12 @@ namespace StorageAndTrade
 
             hBoxValuta.PackStart(Валюта, false, false, 5);
 
+            //Контрагент
+            HBox hBoxContragent = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxContragent, false, false, 5);
+
+            hBoxContragent.PackStart(Контрагент, false, false, 5);
+
             hPaned.Pack1(vBox, false, false);
         }
 
@@ -92,6 +99,7 @@ namespace StorageAndTrade
             Код.Text = БанківськіРахункиКонтрагентів_Objest.Код;
             Назва.Text = БанківськіРахункиКонтрагентів_Objest.Назва;
             Валюта.Pointer = БанківськіРахункиКонтрагентів_Objest.Валюта;
+            Контрагент.Pointer = БанківськіРахункиКонтрагентів_Objest.Контрагент;
         }
 
         void GetValue()
@@ -99,6 +107,7 @@ namespace StorageAndTrade
             БанківськіРахункиКонтрагентів_Objest.Код = Код.Text;
             БанківськіРахункиКонтрагентів_Objest.Назва = Назва.Text;
             БанківськіРахункиКонтрагентів_Objest.Валюта = Валюта.Pointer;
+            БанківськіРахункиКонтрагентів_Objest.Контрагент = Контрагент.Pointer;
         }
 
         #endregion
