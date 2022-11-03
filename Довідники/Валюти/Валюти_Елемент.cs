@@ -7,19 +7,20 @@ using ТабличніСписки = StorageAndTrade_1_0.Довідники.Та
 
 namespace StorageAndTrade
 {
-    class БанківськіРахункиКонтрагентів_Елемент : VBox
+    class Валюти_Елемент : VBox
     {
-        public БанківськіРахункиКонтрагентів? PageList { get; set; }
+        public Валюти? PageList { get; set; }
 
         public bool IsNew { get; set; } = true;
 
-        public БанківськіРахункиКонтрагентів_Objest БанківськіРахункиКонтрагентів_Objest { get; set; } = new БанківськіРахункиКонтрагентів_Objest();
+        public Валюти_Objest Валюти_Objest { get; set; } = new Валюти_Objest();
 
         Entry Код = new Entry() { WidthRequest = 100 };
         Entry Назва = new Entry() { WidthRequest = 500 };
-        Валюти_PointerControl Валюта = new Валюти_PointerControl();
+        Entry КороткаНазва = new Entry() { WidthRequest = 500 };
+        Entry Код_R030 = new Entry() { WidthRequest = 500 };
 
-        public БанківськіРахункиКонтрагентів_Елемент() : base()
+        public Валюти_Елемент() : base()
         {
             new VBox();
             HBox hBox = new HBox();
@@ -64,11 +65,19 @@ namespace StorageAndTrade
             hBoxName.PackStart(new Label("Назва:"), false, false, 5);
             hBoxName.PackStart(Назва, false, false, 5);
 
-            //Валюта
-            HBox hBoxValuta = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxValuta, false, false, 5);
+            //КороткаНазва
+            HBox hBoxSmallName = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxSmallName, false, false, 5);
 
-            hBoxValuta.PackStart(Валюта, false, false, 5);
+            hBoxSmallName.PackStart(new Label("Коротка назва:"), false, false, 5);
+            hBoxSmallName.PackStart(КороткаНазва, false, false, 5);
+
+            //Код_R030
+            HBox hBoxCodeR030 = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxCodeR030, false, false, 5);
+
+            hBoxCodeR030.PackStart(new Label("Код R030:"), false, false, 5);
+            hBoxCodeR030.PackStart(Код_R030, false, false, 5);
 
             hPaned.Pack1(vBox, false, false);
         }
@@ -87,18 +96,20 @@ namespace StorageAndTrade
         public void SetValue()
         {
             if (IsNew)
-                БанківськіРахункиКонтрагентів_Objest.Код = (++НумераціяДовідників.БанківськіРахункиКонтрагентів_Const).ToString("D6");
+                Валюти_Objest.Код = (++НумераціяДовідників.Валюти_Const).ToString("D6");
 
-            Код.Text = БанківськіРахункиКонтрагентів_Objest.Код;
-            Назва.Text = БанківськіРахункиКонтрагентів_Objest.Назва;
-            Валюта.Pointer = БанківськіРахункиКонтрагентів_Objest.Валюта;
+            Код.Text = Валюти_Objest.Код;
+            Назва.Text = Валюти_Objest.Назва;
+            КороткаНазва.Text = Валюти_Objest.КороткаНазва;
+            Код_R030.Text = Валюти_Objest.Код_R030;
         }
 
         void GetValue()
         {
-            БанківськіРахункиКонтрагентів_Objest.Код = Код.Text;
-            БанківськіРахункиКонтрагентів_Objest.Назва = Назва.Text;
-            БанківськіРахункиКонтрагентів_Objest.Валюта = Валюта.Pointer;
+            Валюти_Objest.Код = Код.Text;
+            Валюти_Objest.Назва = Назва.Text;
+            Валюти_Objest.КороткаНазва = КороткаНазва.Text;
+            Валюти_Objest.Код_R030 = Код_R030.Text;
         }
 
         #endregion
@@ -106,17 +117,17 @@ namespace StorageAndTrade
         void OnSaveClick(object? sender, EventArgs args)
         {
             if (IsNew)
-                БанківськіРахункиКонтрагентів_Objest.New();
+                Валюти_Objest.New();
 
             GetValue();
 
-            БанківськіРахункиКонтрагентів_Objest.Save();
+            Валюти_Objest.Save();
 
-            Program.GeneralForm?.RenameCurrentPageNotebook($"Банківський рахунок контрагента: {БанківськіРахункиКонтрагентів_Objest.Назва}");
+            Program.GeneralForm?.RenameCurrentPageNotebook($"Валюта: {Валюти_Objest.Назва}");
 
             if (PageList != null)
             {
-                PageList.SelectPointerItem = БанківськіРахункиКонтрагентів_Objest.GetDirectoryPointer();
+                PageList.SelectPointerItem = Валюти_Objest.GetDirectoryPointer();
                 PageList.LoadRecords();
             }
         }

@@ -23,8 +23,7 @@ namespace StorageAndTrade
         Entry КраїнаРеєстрації = new Entry() { WidthRequest = 300 };
         Entry СвідоцтвоСеріяНомер = new Entry() { WidthRequest = 300 };
         Entry СвідоцтвоДатаВидачі = new Entry() { WidthRequest = 300 };
-
-        Організації_PointerControl Холдинг = new Організації_PointerControl() { Caption = "Організація:" };
+        Організації_PointerControl Холдинг = new Організації_PointerControl();
 
         public Організації_Елемент() : base()
         {

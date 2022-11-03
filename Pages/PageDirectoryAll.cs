@@ -140,10 +140,7 @@ namespace StorageAndTrade
         {
             GeneralForm?.CreateNotebookPage("Довідник: Валюти", () =>
             {
-                Валюти page = new Валюти
-                {
-                    GeneralForm = GeneralForm
-                };
+                Валюти page = new Валюти();
 
                 page.LoadRecords();
 
@@ -275,10 +272,7 @@ namespace StorageAndTrade
         {
             GeneralForm?.CreateNotebookPage("Довідник: Банківські рахунки контрагентів", () =>
             {
-                БанківськіРахункиКонтрагентів page = new БанківськіРахункиКонтрагентів
-                {
-                    GeneralForm = GeneralForm
-                };
+                БанківськіРахункиКонтрагентів page = new БанківськіРахункиКонтрагентів();
 
                 page.LoadRecords();
 

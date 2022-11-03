@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 03.11.2022 14:43:51
+ * Дата конфігурації: 03.11.2022 16:11:00
  *
  */
  
@@ -577,17 +577,19 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         string Код = "";
         string Назва = "";
         string КороткаНазва = "";
+        string Код_R030 = "";
 
         Array ToArray()
         {
             return new object[] { new Gdk.Pixbuf(Image), ID 
-            /* */ , Код, Назва, КороткаНазва };
+            /* */ , Код, Назва, КороткаНазва, Код_R030 };
         }
 
         public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */
             , typeof(string) /* Код */
             , typeof(string) /* Назва */
             , typeof(string) /* КороткаНазва */
+            , typeof(string) /* Код_R030 */
             );
 
         public static void AddColumns(TreeView treeView)
@@ -598,6 +600,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
             treeView.AppendColumn(new TreeViewColumn("Коротка назва", new CellRendererText() { Xpad = 4 }, "text", 4) { SortColumnId = 4 } ); /*КороткаНазва*/
+            treeView.AppendColumn(new TreeViewColumn("R030", new CellRendererText() { Xpad = 4 }, "text", 5) { SortColumnId = 5 } ); /*Код_R030*/
             
         }
 
@@ -620,6 +623,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     Довідники.Валюти_Const.Код /* 1 */
                     , Довідники.Валюти_Const.Назва /* 2 */
                     , Довідники.Валюти_Const.КороткаНазва /* 3 */
+                    , Довідники.Валюти_Const.Код_R030 /* 4 */
                     
                 });
 
@@ -644,7 +648,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                         ID = cur.UnigueID.ToString(),
                         Код = cur.Fields?[Валюти_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[Валюти_Const.Назва]?.ToString() ?? "", /**/
-                        КороткаНазва = cur.Fields?[Валюти_Const.КороткаНазва]?.ToString() ?? "" /**/
+                        КороткаНазва = cur.Fields?[Валюти_Const.КороткаНазва]?.ToString() ?? "", /**/
+                        Код_R030 = cur.Fields?[Валюти_Const.Код_R030]?.ToString() ?? "" /**/
                         
                     };
 
@@ -1977,16 +1982,18 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         
         string Код = "";
         string Назва = "";
+        string Валюта = "";
 
         Array ToArray()
         {
             return new object[] { new Gdk.Pixbuf(Image), ID 
-            /* */ , Код, Назва };
+            /* */ , Код, Назва, Валюта };
         }
 
         public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */
             , typeof(string) /* Код */
             , typeof(string) /* Назва */
+            , typeof(string) /* Валюта */
             );
 
         public static void AddColumns(TreeView treeView)
@@ -1996,6 +2003,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             /* */
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 4) { SortColumnId = 4 } ); /*Валюта*/
             
         }
 
@@ -2027,6 +2035,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
               /* ORDER */
               БанківськіРахункиКонтрагентів_Select.QuerySelect.Order.Add(Довідники.БанківськіРахункиКонтрагентів_Const.Назва, SelectOrder.ASC);
             
+                /* Join Table */
+                БанківськіРахункиКонтрагентів_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Валюти_Const.TABLE, Довідники.БанківськіРахункиКонтрагентів_Const.Валюта, БанківськіРахункиКонтрагентів_Select.QuerySelect.Table, "join_tab_1"));
+                
+                  /* Field */
+                  БанківськіРахункиКонтрагентів_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_1." + Довідники.Валюти_Const.Назва, "join_tab_1_field_1"));
+                  
 
             /* SELECT */
             БанківськіРахункиКонтрагентів_Select.Select();
@@ -2039,6 +2055,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     БанківськіРахункиКонтрагентів_Записи Record = new БанківськіРахункиКонтрагентів_Записи
                     {
                         ID = cur.UnigueID.ToString(),
+                        Валюта = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Код = cur.Fields?[БанківськіРахункиКонтрагентів_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[БанківськіРахункиКонтрагентів_Const.Назва]?.ToString() ?? "" /**/
                         
