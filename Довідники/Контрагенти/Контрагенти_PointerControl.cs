@@ -42,7 +42,7 @@ namespace StorageAndTrade
                     Pointer = selectPointer;
                 };
 
-                page.LoadRecords();
+                page.LoadTree();
 
                 return page;
             });

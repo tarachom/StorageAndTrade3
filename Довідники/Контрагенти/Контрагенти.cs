@@ -17,7 +17,7 @@ namespace StorageAndTrade
 
         TreeView TreeViewGrid;
         Контрагенти_Папки_Дерево ДеревоПапок;
-        CheckButton checkButtonIsIerarchy = new CheckButton("Враховувати ієрархію");
+        CheckButton checkButtonIsIerarchy = new CheckButton("Враховувати ієрархію") { Active = true };
 
         public Контрагенти() : base()
         {
