@@ -5,18 +5,18 @@ using StorageAndTrade_1_0.Довідники;
 
 namespace StorageAndTrade
 {
-    class Виробники_Елемент : VBox
+    class ФізичніОсоби_Елемент : VBox
     {
-        public Виробники? PageList { get; set; }
+        public ФізичніОсоби? PageList { get; set; }
 
         public bool IsNew { get; set; } = true;
 
-        public Виробники_Objest Виробники_Objest { get; set; } = new Виробники_Objest();
+        public ФізичніОсоби_Objest ФізичніОсоби_Objest { get; set; } = new ФізичніОсоби_Objest();
 
         Entry Код = new Entry() { WidthRequest = 100 };
         Entry Назва = new Entry() { WidthRequest = 500 };
 
-        public Виробники_Елемент() : base()
+        public ФізичніОсоби_Елемент() : base()
         {
             new VBox();
             HBox hBox = new HBox();
@@ -78,16 +78,16 @@ namespace StorageAndTrade
         public void SetValue()
         {
             if (IsNew)
-                Виробники_Objest.Код = (++НумераціяДовідників.Виробники_Const).ToString("D6");
+                ФізичніОсоби_Objest.Код = (++НумераціяДовідників.ФізичніОсоби_Const).ToString("D6");
 
-            Код.Text = Виробники_Objest.Код;
-            Назва.Text = Виробники_Objest.Назва;
+            Код.Text = ФізичніОсоби_Objest.Код;
+            Назва.Text = ФізичніОсоби_Objest.Назва;
         }
 
         void GetValue()
         {
-            Виробники_Objest.Код = Код.Text;
-            Виробники_Objest.Назва = Назва.Text;
+            ФізичніОсоби_Objest.Код = Код.Text;
+            ФізичніОсоби_Objest.Назва = Назва.Text;
         }
 
         #endregion
@@ -95,17 +95,17 @@ namespace StorageAndTrade
         void OnSaveClick(object? sender, EventArgs args)
         {
             if (IsNew)
-                Виробники_Objest.New();
+                ФізичніОсоби_Objest.New();
 
             GetValue();
 
-            Виробники_Objest.Save();
+            ФізичніОсоби_Objest.Save();
 
-            Program.GeneralForm?.RenameCurrentPageNotebook($"Валюта: {Виробники_Objest.Назва}");
+            Program.GeneralForm?.RenameCurrentPageNotebook($"Фізичні особи: {ФізичніОсоби_Objest.Назва}");
 
             if (PageList != null)
             {
-                PageList.SelectPointerItem = Виробники_Objest.GetDirectoryPointer();
+                PageList.SelectPointerItem = ФізичніОсоби_Objest.GetDirectoryPointer();
                 PageList.LoadRecords();
             }
         }

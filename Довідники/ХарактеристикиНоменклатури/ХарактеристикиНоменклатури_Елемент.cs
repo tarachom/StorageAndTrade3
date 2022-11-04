@@ -5,18 +5,18 @@ using StorageAndTrade_1_0.Довідники;
 
 namespace StorageAndTrade
 {
-    class Виробники_Елемент : VBox
+    class ХарактеристикиНоменклатури_Елемент : VBox
     {
-        public Виробники? PageList { get; set; }
+        public ХарактеристикиНоменклатури? PageList { get; set; }
 
         public bool IsNew { get; set; } = true;
 
-        public Виробники_Objest Виробники_Objest { get; set; } = new Виробники_Objest();
+        public ХарактеристикиНоменклатури_Objest ХарактеристикиНоменклатури_Objest { get; set; } = new ХарактеристикиНоменклатури_Objest();
 
         Entry Код = new Entry() { WidthRequest = 100 };
         Entry Назва = new Entry() { WidthRequest = 500 };
 
-        public Виробники_Елемент() : base()
+        public ХарактеристикиНоменклатури_Елемент() : base()
         {
             new VBox();
             HBox hBox = new HBox();
@@ -78,16 +78,16 @@ namespace StorageAndTrade
         public void SetValue()
         {
             if (IsNew)
-                Виробники_Objest.Код = (++НумераціяДовідників.Виробники_Const).ToString("D6");
+                ХарактеристикиНоменклатури_Objest.Код = (++НумераціяДовідників.ХарактеристикиНоменклатури_Const).ToString("D6");
 
-            Код.Text = Виробники_Objest.Код;
-            Назва.Text = Виробники_Objest.Назва;
+            Код.Text = ХарактеристикиНоменклатури_Objest.Код;
+            Назва.Text = ХарактеристикиНоменклатури_Objest.Назва;
         }
 
         void GetValue()
         {
-            Виробники_Objest.Код = Код.Text;
-            Виробники_Objest.Назва = Назва.Text;
+            ХарактеристикиНоменклатури_Objest.Код = Код.Text;
+            ХарактеристикиНоменклатури_Objest.Назва = Назва.Text;
         }
 
         #endregion
@@ -95,17 +95,17 @@ namespace StorageAndTrade
         void OnSaveClick(object? sender, EventArgs args)
         {
             if (IsNew)
-                Виробники_Objest.New();
+                ХарактеристикиНоменклатури_Objest.New();
 
             GetValue();
 
-            Виробники_Objest.Save();
+            ХарактеристикиНоменклатури_Objest.Save();
 
-            Program.GeneralForm?.RenameCurrentPageNotebook($"Валюта: {Виробники_Objest.Назва}");
+            Program.GeneralForm?.RenameCurrentPageNotebook($"Характеристики: {ХарактеристикиНоменклатури_Objest.Назва}");
 
             if (PageList != null)
             {
-                PageList.SelectPointerItem = Виробники_Objest.GetDirectoryPointer();
+                PageList.SelectPointerItem = ХарактеристикиНоменклатури_Objest.GetDirectoryPointer();
                 PageList.LoadRecords();
             }
         }

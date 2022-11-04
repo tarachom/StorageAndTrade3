@@ -5,18 +5,18 @@ using StorageAndTrade_1_0.Довідники;
 
 namespace StorageAndTrade
 {
-    class Виробники_Елемент : VBox
+    class СтруктураПідприємства_Елемент : VBox
     {
-        public Виробники? PageList { get; set; }
+        public СтруктураПідприємства? PageList { get; set; }
 
         public bool IsNew { get; set; } = true;
 
-        public Виробники_Objest Виробники_Objest { get; set; } = new Виробники_Objest();
+        public СтруктураПідприємства_Objest СтруктураПідприємства_Objest { get; set; } = new СтруктураПідприємства_Objest();
 
         Entry Код = new Entry() { WidthRequest = 100 };
         Entry Назва = new Entry() { WidthRequest = 500 };
 
-        public Виробники_Елемент() : base()
+        public СтруктураПідприємства_Елемент() : base()
         {
             new VBox();
             HBox hBox = new HBox();
@@ -78,16 +78,16 @@ namespace StorageAndTrade
         public void SetValue()
         {
             if (IsNew)
-                Виробники_Objest.Код = (++НумераціяДовідників.Виробники_Const).ToString("D6");
+                СтруктураПідприємства_Objest.Код = (++НумераціяДовідників.СтруктураПідприємства_Const).ToString("D6");
 
-            Код.Text = Виробники_Objest.Код;
-            Назва.Text = Виробники_Objest.Назва;
+            Код.Text = СтруктураПідприємства_Objest.Код;
+            Назва.Text = СтруктураПідприємства_Objest.Назва;
         }
 
         void GetValue()
         {
-            Виробники_Objest.Код = Код.Text;
-            Виробники_Objest.Назва = Назва.Text;
+            СтруктураПідприємства_Objest.Код = Код.Text;
+            СтруктураПідприємства_Objest.Назва = Назва.Text;
         }
 
         #endregion
@@ -95,17 +95,17 @@ namespace StorageAndTrade
         void OnSaveClick(object? sender, EventArgs args)
         {
             if (IsNew)
-                Виробники_Objest.New();
+                СтруктураПідприємства_Objest.New();
 
             GetValue();
 
-            Виробники_Objest.Save();
+            СтруктураПідприємства_Objest.Save();
 
-            Program.GeneralForm?.RenameCurrentPageNotebook($"Валюта: {Виробники_Objest.Назва}");
+            Program.GeneralForm?.RenameCurrentPageNotebook($"Структура підприємства: {СтруктураПідприємства_Objest.Назва}");
 
             if (PageList != null)
             {
-                PageList.SelectPointerItem = Виробники_Objest.GetDirectoryPointer();
+                PageList.SelectPointerItem = СтруктураПідприємства_Objest.GetDirectoryPointer();
                 PageList.LoadRecords();
             }
         }

@@ -92,10 +92,7 @@ namespace StorageAndTrade
         {
             GeneralForm?.CreateNotebookPage("Довідник: Характеристики номенклатури", () =>
             {
-                ХарактеристикиНоменклатури page = new ХарактеристикиНоменклатури
-                {
-                    GeneralForm = GeneralForm
-                };
+                ХарактеристикиНоменклатури page = new ХарактеристикиНоменклатури();
 
                 page.LoadRecords();
 
@@ -155,10 +152,7 @@ namespace StorageAndTrade
         {
             GeneralForm?.CreateNotebookPage("Довідник: Користувачі", () =>
             {
-                Користувачі page = new Користувачі
-                {
-                    GeneralForm = GeneralForm
-                };
+                Користувачі page = new Користувачі();
 
                 page.LoadRecords();
 
@@ -170,10 +164,7 @@ namespace StorageAndTrade
         {
             GeneralForm?.CreateNotebookPage("Довідник: Користувачі", () =>
             {
-                Файли page = new Файли
-                {
-                    GeneralForm = GeneralForm
-                };
+                Файли page = new Файли();
 
                 page.LoadRecords();
 
@@ -209,10 +200,7 @@ namespace StorageAndTrade
         {
             GeneralForm?.CreateNotebookPage("Довідник: Фізичні особи", () =>
             {
-                ФізичніОсоби page = new ФізичніОсоби
-                {
-                    GeneralForm = GeneralForm
-                };
+                ФізичніОсоби page = new ФізичніОсоби();
 
                 page.LoadRecords();
 
@@ -224,10 +212,7 @@ namespace StorageAndTrade
         {
             GeneralForm?.CreateNotebookPage("Довідник: Структура підприємства", () =>
             {
-                СтруктураПідприємства page = new СтруктураПідприємства
-                {
-                    GeneralForm = GeneralForm
-                };
+                СтруктураПідприємства page = new СтруктураПідприємства();
 
                 page.LoadRecords();
 
@@ -239,10 +224,7 @@ namespace StorageAndTrade
         {
             GeneralForm?.CreateNotebookPage("Довідник: договори контрагентів", () =>
             {
-                ДоговориКонтрагентів page = new ДоговориКонтрагентів
-                {
-                    GeneralForm = GeneralForm
-                };
+                ДоговориКонтрагентів page = new ДоговориКонтрагентів();
 
                 page.LoadRecords();
 
@@ -290,10 +272,7 @@ namespace StorageAndTrade
         {
             GeneralForm?.CreateNotebookPage("Довідник: Партія товарів", () =>
             {
-                ПартіяТоварівКомпозит page = new ПартіяТоварівКомпозит
-                {
-                    GeneralForm = GeneralForm
-                };
+                ПартіяТоварівКомпозит page = new ПартіяТоварівКомпозит();
 
                 page.LoadRecords();
 
@@ -305,10 +284,7 @@ namespace StorageAndTrade
         {
             GeneralForm?.CreateNotebookPage("Довідник: Серії номенклатури", () =>
             {
-                СеріїНоменклатури page = new СеріїНоменклатури
-                {
-                    GeneralForm = GeneralForm
-                };
+                СеріїНоменклатури page = new СеріїНоменклатури();
 
                 page.LoadRecords();
 

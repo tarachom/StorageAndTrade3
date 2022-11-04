@@ -1,22 +1,20 @@
 using Gtk;
 
-using StorageAndTrade_1_0.Константи;
 using StorageAndTrade_1_0.Довідники;
 
 namespace StorageAndTrade
 {
-    class Виробники_Елемент : VBox
+    class ПартіяТоварівКомпозит_Елемент : VBox
     {
-        public Виробники? PageList { get; set; }
+        public ПартіяТоварівКомпозит? PageList { get; set; }
 
         public bool IsNew { get; set; } = true;
 
-        public Виробники_Objest Виробники_Objest { get; set; } = new Виробники_Objest();
+        public ПартіяТоварівКомпозит_Objest ПартіяТоварівКомпозит_Objest { get; set; } = new ПартіяТоварівКомпозит_Objest();
 
-        Entry Код = new Entry() { WidthRequest = 100 };
         Entry Назва = new Entry() { WidthRequest = 500 };
 
-        public Виробники_Елемент() : base()
+        public ПартіяТоварівКомпозит_Елемент() : base()
         {
             new VBox();
             HBox hBox = new HBox();
@@ -47,13 +45,6 @@ namespace StorageAndTrade
         {
             VBox vBox = new VBox();
 
-            //Код
-            HBox hBoxCode = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxCode, false, false, 5);
-
-            hBoxCode.PackStart(new Label("Код:"), false, false, 5);
-            hBoxCode.PackStart(Код, false, false, 5);
-
             //Назва
             HBox hBoxName = new HBox() { Halign = Align.End };
             vBox.PackStart(hBoxName, false, false, 5);
@@ -77,17 +68,12 @@ namespace StorageAndTrade
 
         public void SetValue()
         {
-            if (IsNew)
-                Виробники_Objest.Код = (++НумераціяДовідників.Виробники_Const).ToString("D6");
-
-            Код.Text = Виробники_Objest.Код;
-            Назва.Text = Виробники_Objest.Назва;
+            Назва.Text = ПартіяТоварівКомпозит_Objest.Назва;
         }
 
         void GetValue()
         {
-            Виробники_Objest.Код = Код.Text;
-            Виробники_Objest.Назва = Назва.Text;
+            ПартіяТоварівКомпозит_Objest.Назва = Назва.Text;
         }
 
         #endregion
@@ -95,17 +81,17 @@ namespace StorageAndTrade
         void OnSaveClick(object? sender, EventArgs args)
         {
             if (IsNew)
-                Виробники_Objest.New();
+                ПартіяТоварівКомпозит_Objest.New();
 
             GetValue();
 
-            Виробники_Objest.Save();
+            ПартіяТоварівКомпозит_Objest.Save();
 
-            Program.GeneralForm?.RenameCurrentPageNotebook($"Валюта: {Виробники_Objest.Назва}");
+            Program.GeneralForm?.RenameCurrentPageNotebook($"Партія: {ПартіяТоварівКомпозит_Objest.Назва}");
 
             if (PageList != null)
             {
-                PageList.SelectPointerItem = Виробники_Objest.GetDirectoryPointer();
+                PageList.SelectPointerItem = ПартіяТоварівКомпозит_Objest.GetDirectoryPointer();
                 PageList.LoadRecords();
             }
         }

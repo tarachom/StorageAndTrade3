@@ -15,8 +15,6 @@ namespace StorageAndTrade
 
         Entry Код = new Entry() { WidthRequest = 100 };
         Entry Назва = new Entry() { WidthRequest = 500 };
-        Entry КороткаНазва = new Entry() { WidthRequest = 500 };
-        Entry Код_R030 = new Entry() { WidthRequest = 500 };
 
         public ДоговориКонтрагентів_Елемент() : base()
         {

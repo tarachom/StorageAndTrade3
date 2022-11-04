@@ -5,18 +5,18 @@ using StorageAndTrade_1_0.Довідники;
 
 namespace StorageAndTrade
 {
-    class Виробники_Елемент : VBox
+    class Користувачі_Елемент : VBox
     {
-        public Виробники? PageList { get; set; }
+        public Користувачі? PageList { get; set; }
 
         public bool IsNew { get; set; } = true;
 
-        public Виробники_Objest Виробники_Objest { get; set; } = new Виробники_Objest();
+        public Користувачі_Objest Користувачі_Objest { get; set; } = new Користувачі_Objest();
 
         Entry Код = new Entry() { WidthRequest = 100 };
         Entry Назва = new Entry() { WidthRequest = 500 };
 
-        public Виробники_Елемент() : base()
+        public Користувачі_Елемент() : base()
         {
             new VBox();
             HBox hBox = new HBox();
@@ -78,16 +78,16 @@ namespace StorageAndTrade
         public void SetValue()
         {
             if (IsNew)
-                Виробники_Objest.Код = (++НумераціяДовідників.Виробники_Const).ToString("D6");
+                Користувачі_Objest.Код = (++НумераціяДовідників.Користувачі_Const).ToString("D6");
 
-            Код.Text = Виробники_Objest.Код;
-            Назва.Text = Виробники_Objest.Назва;
+            Код.Text = Користувачі_Objest.Код;
+            Назва.Text = Користувачі_Objest.Назва;
         }
 
         void GetValue()
         {
-            Виробники_Objest.Код = Код.Text;
-            Виробники_Objest.Назва = Назва.Text;
+            Користувачі_Objest.Код = Код.Text;
+            Користувачі_Objest.Назва = Назва.Text;
         }
 
         #endregion
@@ -95,17 +95,17 @@ namespace StorageAndTrade
         void OnSaveClick(object? sender, EventArgs args)
         {
             if (IsNew)
-                Виробники_Objest.New();
+                Користувачі_Objest.New();
 
             GetValue();
 
-            Виробники_Objest.Save();
+            Користувачі_Objest.Save();
 
-            Program.GeneralForm?.RenameCurrentPageNotebook($"Валюта: {Виробники_Objest.Назва}");
+            Program.GeneralForm?.RenameCurrentPageNotebook($"Користувач: {Користувачі_Objest.Назва}");
 
             if (PageList != null)
             {
-                PageList.SelectPointerItem = Виробники_Objest.GetDirectoryPointer();
+                PageList.SelectPointerItem = Користувачі_Objest.GetDirectoryPointer();
                 PageList.LoadRecords();
             }
         }
