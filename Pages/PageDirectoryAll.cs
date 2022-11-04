@@ -119,12 +119,9 @@ namespace StorageAndTrade
         {
             GeneralForm?.CreateNotebookPage("Довідник: Склади", () =>
             {
-                Склади page = new Склади
-                {
-                    GeneralForm = GeneralForm
-                };
+                Склади page = new Склади();
 
-                page.LoadRecords();
+                page.LoadTree();
 
                 return page;
             });
