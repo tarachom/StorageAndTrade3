@@ -5,19 +5,20 @@ using StorageAndTrade_1_0.Довідники;
 
 namespace StorageAndTrade
 {
-    class Каси_Елемент : VBox
+    class ДоговориКонтрагентів_Елемент : VBox
     {
-        public Каси? PageList { get; set; }
+        public ДоговориКонтрагентів? PageList { get; set; }
 
         public bool IsNew { get; set; } = true;
 
-        public Каси_Objest Каси_Objest { get; set; } = new Каси_Objest();
+        public ДоговориКонтрагентів_Objest ДоговориКонтрагентів_Objest { get; set; } = new ДоговориКонтрагентів_Objest();
 
         Entry Код = new Entry() { WidthRequest = 100 };
         Entry Назва = new Entry() { WidthRequest = 500 };
-        Валюти_PointerControl Валюта = new Валюти_PointerControl();
+        Entry КороткаНазва = new Entry() { WidthRequest = 500 };
+        Entry Код_R030 = new Entry() { WidthRequest = 500 };
 
-        public Каси_Елемент() : base()
+        public ДоговориКонтрагентів_Елемент() : base()
         {
             new VBox();
             HBox hBox = new HBox();
@@ -62,12 +63,6 @@ namespace StorageAndTrade
             hBoxName.PackStart(new Label("Назва:"), false, false, 5);
             hBoxName.PackStart(Назва, false, false, 5);
 
-            //Валюта
-            HBox hBoxValuta = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxValuta, false, false, 5);
-
-            hBoxValuta.PackStart(Валюта, false, false, 5);
-
             hPaned.Pack1(vBox, false, false);
         }
 
@@ -85,18 +80,16 @@ namespace StorageAndTrade
         public void SetValue()
         {
             if (IsNew)
-                Каси_Objest.Код = (++НумераціяДовідників.Каси_Const).ToString("D6");
+                ДоговориКонтрагентів_Objest.Код = (++НумераціяДовідників.ДоговориКонтрагентів_Const).ToString("D6");
 
-            Код.Text = Каси_Objest.Код;
-            Назва.Text = Каси_Objest.Назва;
-            Валюта.Pointer = Каси_Objest.Валюта;
+            Код.Text = ДоговориКонтрагентів_Objest.Код;
+            Назва.Text = ДоговориКонтрагентів_Objest.Назва;
         }
 
         void GetValue()
         {
-            Каси_Objest.Код = Код.Text;
-            Каси_Objest.Назва = Назва.Text;
-            Каси_Objest.Валюта = Валюта.Pointer;
+            ДоговориКонтрагентів_Objest.Код = Код.Text;
+            ДоговориКонтрагентів_Objest.Назва = Назва.Text;
         }
 
         #endregion
@@ -104,17 +97,17 @@ namespace StorageAndTrade
         void OnSaveClick(object? sender, EventArgs args)
         {
             if (IsNew)
-                Каси_Objest.New();
+                ДоговориКонтрагентів_Objest.New();
 
             GetValue();
 
-            Каси_Objest.Save();
+            ДоговориКонтрагентів_Objest.Save();
 
-            Program.GeneralForm?.RenameCurrentPageNotebook($"Каса: {Каси_Objest.Назва}");
+            Program.GeneralForm?.RenameCurrentPageNotebook($"Договір: {ДоговориКонтрагентів_Objest.Назва}");
 
             if (PageList != null)
             {
-                PageList.SelectPointerItem = Каси_Objest.GetDirectoryPointer();
+                PageList.SelectPointerItem = ДоговориКонтрагентів_Objest.GetDirectoryPointer();
                 PageList.LoadRecords();
             }
         }
