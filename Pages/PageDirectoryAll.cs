@@ -143,10 +143,7 @@ namespace StorageAndTrade
         {
             GeneralForm?.CreateNotebookPage("Довідник: Каси", () =>
             {
-                Каси page = new Каси
-                {
-                    GeneralForm = GeneralForm
-                };
+                Каси page = new Каси();
 
                 page.LoadRecords();
 
@@ -200,10 +197,7 @@ namespace StorageAndTrade
         {
             GeneralForm?.CreateNotebookPage("Довідник: Банківські рахунки організацій", () =>
             {
-                БанківськіРахункиОрганізацій page = new БанківськіРахункиОрганізацій
-                {
-                    GeneralForm = GeneralForm
-                };
+                БанківськіРахункиОрганізацій page = new БанківськіРахункиОрганізацій();
 
                 page.LoadRecords();
 
