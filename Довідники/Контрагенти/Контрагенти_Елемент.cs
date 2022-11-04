@@ -5,8 +5,6 @@ using AccountingSoftware;
 using StorageAndTrade_1_0.Константи;
 using StorageAndTrade_1_0.Довідники;
 
-using ТабличніСписки = StorageAndTrade_1_0.Довідники.ТабличніСписки;
-
 namespace StorageAndTrade
 {
     class Контрагенти_Елемент : VBox

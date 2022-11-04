@@ -176,10 +176,18 @@ ORDER BY level ASC
             }
             else
             {
-                TreeIter parentIter = NodeDictionary[Parent_Pointer.UnigueID.ToString()];
-                TreePath parentPath = TreeViewGrid.Model.GetPath(parentIter);
-                TreeViewGrid.ExpandToPath(parentPath);
-                TreeViewGrid.SetCursor(parentPath, TreeViewGrid.Columns[0], false);
+                if (NodeDictionary.ContainsKey(Parent_Pointer.UnigueID.ToString()))
+                {
+                    TreeIter parentIter = NodeDictionary[Parent_Pointer.UnigueID.ToString()];
+                    TreePath parentPath = TreeViewGrid.Model.GetPath(parentIter);
+                    TreeViewGrid.ExpandToPath(parentPath);
+                    TreeViewGrid.SetCursor(parentPath, TreeViewGrid.Columns[0], false);
+                }
+                else
+                {
+                    Parent_Pointer = new Контрагенти_Папки_Pointer();
+                    TreeViewGrid.SetCursor(rootPath, TreeViewGrid.Columns[0], false);
+                }
             }
 
             OnRowActivated(TreeViewGrid, new RowActivatedArgs());
