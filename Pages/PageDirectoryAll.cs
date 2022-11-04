@@ -272,10 +272,7 @@ namespace StorageAndTrade
         {
             GeneralForm?.CreateNotebookPage("Довідник: Пакування номенклатури", () =>
             {
-                ПакуванняОдиниціВиміру page = new ПакуванняОдиниціВиміру
-                {
-                    GeneralForm = GeneralForm
-                };
+                ПакуванняОдиниціВиміру page = new ПакуванняОдиниціВиміру();
 
                 page.LoadRecords();
 
@@ -287,10 +284,7 @@ namespace StorageAndTrade
         {
             GeneralForm?.CreateNotebookPage("Довідник: Види номенклатури", () =>
             {
-                ВидиНоменклатури page = new ВидиНоменклатури
-                {
-                    GeneralForm = GeneralForm
-                };
+                ВидиНоменклатури page = new ВидиНоменклатури();
 
                 page.LoadRecords();
 
