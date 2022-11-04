@@ -188,10 +188,7 @@ namespace StorageAndTrade
         {
             GeneralForm?.CreateNotebookPage("Довідник: Види цін", () =>
             {
-                ВидиЦін page = new ВидиЦін
-                {
-                    GeneralForm = GeneralForm
-                };
+                ВидиЦін page = new ВидиЦін();
 
                 page.LoadRecords();
 
@@ -335,10 +332,7 @@ namespace StorageAndTrade
         {
             GeneralForm?.CreateNotebookPage("Довідник: Виробники", () =>
             {
-                Виробники page = new Виробники
-                {
-                    GeneralForm = GeneralForm
-                };
+                Виробники page = new Виробники();
 
                 page.LoadRecords();
 
