@@ -80,12 +80,9 @@ namespace StorageAndTrade
         {
             GeneralForm?.CreateNotebookPage("Довідник: Номенклатура", () =>
             {
-                Номенклатура page = new Номенклатура
-                {
-                    GeneralForm = GeneralForm
-                };
+                Номенклатура page = new Номенклатура();
 
-                page.LoadRecords();
+                page.LoadTree();
 
                 return page;
             });

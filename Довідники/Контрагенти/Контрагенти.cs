@@ -17,7 +17,8 @@ namespace StorageAndTrade
 
         TreeView TreeViewGrid;
         Контрагенти_Папки_Дерево ДеревоПапок;
-        CheckButton checkButtonIsIerarchy = new CheckButton("Враховувати ієрархію") { Active = true };
+        CheckButton checkButtonIsHierarchy = new CheckButton("Враховувати ієрархію папок") { Active = true };
+        Entry entrySearch = new Entry() { PlaceholderText = "Пошук", WidthRequest = 300 };
 
         public Контрагенти() : base()
         {
@@ -32,9 +33,15 @@ namespace StorageAndTrade
 
             hBoxBotton.PackStart(bClose, false, false, 10);
 
-            hBoxBotton.PackStart(checkButtonIsIerarchy, false, false, 10);
+            //Враховувати ієрархію папок
+            checkButtonIsHierarchy.Clicked += OnCheckButtonIsHierarchyClicked;
+            hBoxBotton.PackStart(checkButtonIsHierarchy, false, false, 10);
 
             PackStart(hBoxBotton, false, false, 10);
+
+            //Пошук
+            entrySearch.KeyReleaseEvent += OnEntrySearchKeyRelease;
+            hBoxBotton.PackStart(entrySearch, false, false, 10);
 
             CreateToolbar();
 
@@ -105,7 +112,7 @@ namespace StorageAndTrade
             ТабличніСписки.Контрагенти_Записи.DirectoryPointerItem = DirectoryPointerItem;
 
             ТабличніСписки.Контрагенти_Записи.Where.Clear();
-            if (checkButtonIsIerarchy.Active)
+            if (checkButtonIsHierarchy.Active)
             {
                 ТабличніСписки.Контрагенти_Записи.Where.Add(new Where(Контрагенти_Const.Папка, Comparison.EQ, ДеревоПапок.Parent_Pointer.UnigueID.UGuid));
             }
@@ -146,7 +153,7 @@ namespace StorageAndTrade
                         Контрагенти_Objest Контрагенти_Objest = new Контрагенти_Objest();
                         if (Контрагенти_Objest.Read(new UnigueID(uid)))
                         {
-                            Program.GeneralForm?.CreateNotebookPage($"Організація: {Контрагенти_Objest.Назва}", () =>
+                            Program.GeneralForm?.CreateNotebookPage($"Контрагент: {Контрагенти_Objest.Назва}", () =>
                             {
                                 Контрагенти_Елемент page = new Контрагенти_Елемент
                                 {
@@ -180,7 +187,7 @@ namespace StorageAndTrade
 
         void OnAddClick(object? sender, EventArgs args)
         {
-            Program.GeneralForm?.CreateNotebookPage($"Організація: *", () =>
+            Program.GeneralForm?.CreateNotebookPage($"Контрагент: *", () =>
             {
                 Контрагенти_Елемент page = new Контрагенти_Елемент
                 {
@@ -263,5 +270,21 @@ namespace StorageAndTrade
 
         #endregion
 
+        #region Controls
+
+        void OnCheckButtonIsHierarchyClicked(object? sender, EventArgs args)
+        {
+            LoadRecords();
+        }
+
+        void OnEntrySearchKeyRelease(object? sender, KeyReleaseEventArgs args)
+        {
+            if (args.Event.Key == Gdk.Key.Return || args.Event.Key == Gdk.Key.KP_Enter)
+            {
+
+            }
+        }
+
+        #endregion
     }
 }
