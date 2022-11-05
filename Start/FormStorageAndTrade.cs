@@ -14,7 +14,7 @@ namespace StorageAndTrade
 
         public FormStorageAndTrade() : base("Зберігання та Торгівля для України")
         {
-            SetDefaultSize(1000, 600);
+            SetDefaultSize(1500, 900);
             SetPosition(WindowPosition.Center);
             SetDefaultIconFromFile("form.ico");
 
