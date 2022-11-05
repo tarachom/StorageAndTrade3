@@ -17,6 +17,8 @@ namespace StorageAndTrade
         {
             UID,
             Тип,
+            Значення,
+            Телефон,
             ЕлектроннаПошта,
             Країна,
             Область,
@@ -27,6 +29,8 @@ namespace StorageAndTrade
         ListStore Store = new ListStore(
             typeof(string), //UID
             typeof(string), //Тип
+            typeof(string), //Значення
+            typeof(string), //Телефон
             typeof(string), //ЕлектроннаПошта
             typeof(string), //Країна
             typeof(string), //Область
@@ -85,6 +89,8 @@ namespace StorageAndTrade
                     Store.AppendValues(
                         record.UID.ToString(),
                         record.Тип.ToString(),
+                        record.Значення,
+                        record.Телефон,
                         record.ЕлектроннаПошта,
                         record.Країна,
                         record.Область,
@@ -116,9 +122,9 @@ namespace StorageAndTrade
                         string type = (string)Store.GetValue(iter, (int)Columns.Тип);
                         record.Тип = Enum.Parse<ТипиКонтактноїІнформації>(type);
 
+                        record.Значення = (string)Store.GetValue(iter, (int)Columns.Значення);
+                        record.Телефон = (string)Store.GetValue(iter, (int)Columns.Телефон);
                         record.ЕлектроннаПошта = (string)Store.GetValue(iter, (int)Columns.ЕлектроннаПошта);
-                        Console.WriteLine(record.ЕлектроннаПошта);
-
                         record.Країна = (string)Store.GetValue(iter, (int)Columns.Країна);
                         record.Область = (string)Store.GetValue(iter, (int)Columns.Область);
                         record.Район = (string)Store.GetValue(iter, (int)Columns.Район);
@@ -151,6 +157,20 @@ namespace StorageAndTrade
             TypeInfo.Data.Add("Column", (int)Columns.Тип);
 
             TreeViewGrid.AppendColumn(new TreeViewColumn("Тип", TypeInfo, "text", (int)Columns.Тип) { MinWidth = 100 });
+
+            //Значення
+            CellRendererText Значення = new CellRendererText() { Editable = true };
+            Значення.Edited += TextChanged;
+            Значення.Data.Add("Column", (int)Columns.Значення);
+
+            TreeViewGrid.AppendColumn(new TreeViewColumn("Значення", Значення, "text", (int)Columns.Значення) { MinWidth = 200 });
+
+            //Телефон
+            CellRendererText Телефон = new CellRendererText() { Editable = true };
+            Телефон.Edited += TextChanged;
+            Телефон.Data.Add("Column", (int)Columns.Телефон);
+
+            TreeViewGrid.AppendColumn(new TreeViewColumn("Телефон", Телефон, "text", (int)Columns.Телефон) { MinWidth = 200 });
 
             //Email
             CellRendererText Email = new CellRendererText() { Editable = true };
