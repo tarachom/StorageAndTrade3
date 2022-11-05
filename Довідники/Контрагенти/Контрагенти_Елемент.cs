@@ -15,12 +15,17 @@ namespace StorageAndTrade
 
         public Контрагенти_Objest Контрагенти_Objest { get; set; } = new Контрагенти_Objest();
 
+        #region Field
+
         Entry Код = new Entry() { WidthRequest = 100 };
         Entry Назва = new Entry() { WidthRequest = 500 };
         TextView НазваПовна = new TextView();
         Entry РеєстраційнийНомер = new Entry() { WidthRequest = 300 };
         TextView Опис = new TextView();
         Контрагенти_Папки_PointerControl Родич = new Контрагенти_Папки_PointerControl() { Caption = "Папка:" };
+        Контрагенти_ТабличнаЧастина_Контакти Контакти = new Контрагенти_ТабличнаЧастина_Контакти();
+
+        #endregion
 
         public Контрагенти_Елемент() : base()
         {
@@ -111,8 +116,14 @@ namespace StorageAndTrade
         {
             VBox vBox = new VBox();
 
+            HBox hBox = new HBox();
+            hBox.PackStart(new Label("Контакти:"), false, false, 5);
+            vBox.PackStart(hBox, false, false, 5);
 
+            HBox hBoxContakty = new HBox();
+            hBoxContakty.PackStart(Контакти, true, true, 5);
 
+            vBox.PackStart(hBoxContakty, true, true, 0);
             hPaned.Pack2(vBox, false, false);
         }
 
@@ -132,6 +143,9 @@ namespace StorageAndTrade
             НазваПовна.Buffer.Text = Контрагенти_Objest.НазваПовна;
             РеєстраційнийНомер.Text = Контрагенти_Objest.РеєстраційнийНомер;
             Опис.Buffer.Text = Контрагенти_Objest.Опис;
+
+            Контакти.Контрагенти_Objest = Контрагенти_Objest;
+            Контакти.LoadRecords();
         }
 
         void GetValue()
@@ -154,6 +168,7 @@ namespace StorageAndTrade
             GetValue();
 
             Контрагенти_Objest.Save();
+            Контакти.SaveRecords();
 
             Program.GeneralForm?.RenameCurrentPageNotebook($"Контрагент: {Контрагенти_Objest.Назва}");
 

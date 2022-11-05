@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 05.11.2022 11:36:57
+ * Дата конфігурації: 05.11.2022 11:43:04
  *
  */
 
@@ -5053,7 +5053,7 @@ namespace StorageAndTrade_1_0.Довідники
     public class Контрагенти_Контакти_TablePart : DirectoryTablePart
     {
         public Контрагенти_Контакти_TablePart(Контрагенти_Objest owner) : base(Config.Kernel!, "tab_a09",
-             new string[] { "col_d2", "col_d8", "col_d7", "col_d3", "col_d5", "col_d4", "col_d6" }) 
+             new string[] { "col_d2", "col_d8", "col_d7", "col_d3", "col_d5", "col_d4", "col_d6", "col_a1" }) 
         {
             if (owner == null) throw new Exception("owner null");
             
@@ -5068,6 +5068,7 @@ namespace StorageAndTrade_1_0.Довідники
         public const string Область = "col_d5";
         public const string Район = "col_d4";
         public const string Місто = "col_d6";
+        public const string Значення = "col_a1";
 
         public Контрагенти_Objest Owner { get; private set; }
         
@@ -5090,6 +5091,7 @@ namespace StorageAndTrade_1_0.Довідники
                 record.Область = fieldValue["col_d5"]?.ToString() ?? "";
                 record.Район = fieldValue["col_d4"]?.ToString() ?? "";
                 record.Місто = fieldValue["col_d6"]?.ToString() ?? "";
+                record.Значення = fieldValue["col_a1"]?.ToString() ?? "";
                 
                 Records.Add(record);
             }
@@ -5115,6 +5117,7 @@ namespace StorageAndTrade_1_0.Довідники
                 fieldValue.Add("col_d5", record.Область);
                 fieldValue.Add("col_d4", record.Район);
                 fieldValue.Add("col_d6", record.Місто);
+                fieldValue.Add("col_a1", record.Значення);
                 
                 base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
@@ -5141,6 +5144,7 @@ namespace StorageAndTrade_1_0.Довідники
                 Область = "";
                 Район = "";
                 Місто = "";
+                Значення = "";
                 
             }
             public Перелічення.ТипиКонтактноїІнформації Тип { get; set; }
@@ -5150,6 +5154,7 @@ namespace StorageAndTrade_1_0.Довідники
             public string Область { get; set; }
             public string Район { get; set; }
             public string Місто { get; set; }
+            public string Значення { get; set; }
             
         }
     }

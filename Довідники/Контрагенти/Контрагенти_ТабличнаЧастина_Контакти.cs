@@ -8,9 +8,9 @@ using StorageAndTrade_1_0.Перелічення;
 
 namespace StorageAndTrade
 {
-    class Організації_ТабличнаЧастина_Контакти : VBox
+    class Контрагенти_ТабличнаЧастина_Контакти : VBox
     {
-        public Організації_Objest? Організації_Objest { get; set; }
+        public Контрагенти_Objest? Контрагенти_Objest { get; set; }
 
         enum Columns
         {
@@ -39,7 +39,7 @@ namespace StorageAndTrade
 
         TreeView TreeViewGrid;
 
-        public Організації_ТабличнаЧастина_Контакти() : base()
+        public Контрагенти_ТабличнаЧастина_Контакти() : base()
         {
             new VBox();
 
@@ -79,11 +79,11 @@ namespace StorageAndTrade
         {
             Store.Clear();
 
-            if (Організації_Objest != null)
+            if (Контрагенти_Objest != null)
             {
-                Організації_Objest.Контакти_TablePart.Read();
+                Контрагенти_Objest.Контакти_TablePart.Read();
 
-                foreach (Організації_Контакти_TablePart.Record record in Організації_Objest.Контакти_TablePart.Records)
+                foreach (Контрагенти_Контакти_TablePart.Record record in Контрагенти_Objest.Контакти_TablePart.Records)
                 {
                     Store.AppendValues(
                         record.UID.ToString(),
@@ -102,16 +102,16 @@ namespace StorageAndTrade
 
         public void SaveRecords()
         {
-            if (Організації_Objest != null)
+            if (Контрагенти_Objest != null)
             {
-                Організації_Objest.Контакти_TablePart.Records.Clear();
+                Контрагенти_Objest.Контакти_TablePart.Records.Clear();
 
                 TreeIter iter;
                 if (Store.GetIterFirst(out iter))
                     do
                     {
-                        Організації_Контакти_TablePart.Record record = new Організації_Контакти_TablePart.Record();
-                        Організації_Objest.Контакти_TablePart.Records.Add(record);
+                        Контрагенти_Контакти_TablePart.Record record = new Контрагенти_Контакти_TablePart.Record();
+                        Контрагенти_Objest.Контакти_TablePart.Records.Add(record);
 
                         string uid = (string)Store.GetValue(iter, (int)Columns.UID);
 
@@ -131,7 +131,7 @@ namespace StorageAndTrade
                     }
                     while (Store.IterNext(ref iter));
 
-                Організації_Objest.Контакти_TablePart.Save(true);
+                Контрагенти_Objest.Контакти_TablePart.Save(true);
             }
         }
 

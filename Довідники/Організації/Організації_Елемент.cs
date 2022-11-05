@@ -30,7 +30,6 @@ namespace StorageAndTrade
         #endregion
 
 
-
         public Організації_Елемент() : base()
         {
             new VBox();
