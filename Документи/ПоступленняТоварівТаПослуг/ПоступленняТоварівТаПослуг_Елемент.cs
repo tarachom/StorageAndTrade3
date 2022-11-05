@@ -34,12 +34,12 @@ namespace StorageAndTrade
 
             PackStart(hBox, false, false, 10);
 
-            HPaned hPaned = new HPaned() { Orientation = Orientation.Vertical, BorderWidth = 5, Position = 500 };
+            HPaned hPaned = new HPaned() { Orientation = Orientation.Vertical, BorderWidth = 5 };
 
             CreatePack1(hPaned);
             CreatePack2(hPaned);
 
-            PackStart(hPaned, false, false, 5);
+            PackStart(hPaned, true, true, 5);
 
             ShowAll();
         }
@@ -67,17 +67,7 @@ namespace StorageAndTrade
 
         void CreatePack2(HPaned hPaned)
         {
-            VBox vBox = new VBox();
-
-            HBox hBox = new HBox();
-            hBox.PackStart(new Label("Контакти:"), false, false, 5);
-            vBox.PackStart(hBox, false, false, 5);
-
-            HBox hBoxTovary = new HBox();
-            hBoxTovary.PackStart(Товари, true, true, 5);
-
-            vBox.PackStart(hBoxTovary, false, false, 0);
-            hPaned.Pack2(vBox, false, false);
+            hPaned.Pack2(Товари, true, false);
         }
 
         #region Присвоєння / зчитування значень
@@ -85,7 +75,10 @@ namespace StorageAndTrade
         public void SetValue()
         {
             if (IsNew)
+            {
                 ПоступленняТоварівТаПослуг_Objest.НомерДок = (++НумераціяДокументів.ПоступленняТоварівТаПослуг_Const).ToString("D6");
+                ПоступленняТоварівТаПослуг_Objest.ДатаДок = DateTime.Now;
+            }
 
             НомерДок.Text = ПоступленняТоварівТаПослуг_Objest.НомерДок;
             Назва.Text = ПоступленняТоварівТаПослуг_Objest.Назва;
@@ -97,7 +90,7 @@ namespace StorageAndTrade
         void GetValue()
         {
             ПоступленняТоварівТаПослуг_Objest.НомерДок = НомерДок.Text;
-            ПоступленняТоварівТаПослуг_Objest.Назва = Назва.Text;
+            ПоступленняТоварівТаПослуг_Objest.Назва = $"Поступлення товарів та послуг №{ПоступленняТоварівТаПослуг_Objest.НомерДок} від {ПоступленняТоварівТаПослуг_Objest.ДатаДок.ToShortDateString()}";
         }
 
         #endregion
@@ -116,6 +109,8 @@ namespace StorageAndTrade
 
             if (PageList != null)
             {
+                Товари.LoadRecords();
+                
                 PageList.SelectPointerItem = ПоступленняТоварівТаПослуг_Objest.GetDocumentPointer();
                 PageList.LoadRecords();
             }

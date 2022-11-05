@@ -26,10 +26,8 @@ namespace StorageAndTrade
         Організації_PointerControl Холдинг = new Організації_PointerControl();
 
         Організації_ТабличнаЧастина_Контакти Контакти = new Організації_ТабличнаЧастина_Контакти();
-        ПоступленняТоварівТаПослуг_ТабличнаЧастина_Товари Товари = new ПоступленняТоварівТаПослуг_ТабличнаЧастина_Товари();
 
         #endregion
-
 
         public Організації_Елемент() : base()
         {
@@ -143,11 +141,7 @@ namespace StorageAndTrade
             HBox hBoxContakty = new HBox();
             hBoxContakty.PackStart(Контакти, true, true, 5);
 
-            HBox hBoxTest = new HBox();
-            hBoxTest.PackStart(Товари, true, true, 5);
-
             vBox.PackStart(hBoxContakty, false, false, 0);
-            vBox.PackStart(hBoxTest, false, false, 0);
             hPaned.Pack2(vBox, false, false);
         }
 

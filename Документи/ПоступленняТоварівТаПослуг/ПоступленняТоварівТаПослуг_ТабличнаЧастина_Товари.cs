@@ -182,7 +182,7 @@ namespace StorageAndTrade
 
             CreateToolbar();
 
-            ScrolledWindow scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In, HeightRequest = 300 };
+            ScrolledWindow scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In };
             scrollTree.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
 
             TreeViewGrid = new TreeView(Store);
@@ -194,7 +194,7 @@ namespace StorageAndTrade
 
             scrollTree.Add(TreeViewGrid);
 
-            PackStart(scrollTree, true, false, 0);
+            Add(scrollTree);
 
             ShowAll();
         }
@@ -354,6 +354,7 @@ namespace StorageAndTrade
         public void LoadRecords()
         {
             Store.Clear();
+            Записи.Clear();
 
             if (ПоступленняТоварівТаПослуг_Objest != null)
             {

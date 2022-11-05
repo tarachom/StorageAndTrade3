@@ -58,7 +58,7 @@ namespace StorageAndTrade
             PackStart(toolbar, false, false, 0);
 
             ToolButton upButton = new ToolButton(Stock.Add) { Label = "Додати", IsImportant = true };
-            //upButton.Clicked += OnAddClick;
+            upButton.Clicked += OnAddClick;
             toolbar.Add(upButton);
 
             ToolButton refreshButton = new ToolButton(Stock.Refresh) { Label = "Обновити", IsImportant = true };
@@ -176,7 +176,7 @@ namespace StorageAndTrade
 
         void OnAddClick(object? sender, EventArgs args)
         {
-            Program.GeneralForm?.CreateNotebookPage($"Організація: *", () =>
+            Program.GeneralForm?.CreateNotebookPage($"Поступлення товарів та послуг: *", () =>
             {
                 ПоступленняТоварівТаПослуг_Елемент page = new ПоступленняТоварівТаПослуг_Елемент
                 {
