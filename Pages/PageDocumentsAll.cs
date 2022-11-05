@@ -77,10 +77,7 @@ namespace StorageAndTrade
         {
             GeneralForm?.CreateNotebookPage("Документи: Поступлення товарів та послуг", () =>
             {
-                ПоступленняТоварівТаПослуг page = new ПоступленняТоварівТаПослуг
-                {
-                    GeneralForm = GeneralForm
-                };
+                ПоступленняТоварівТаПослуг page = new ПоступленняТоварівТаПослуг();
 
                 page.SetValue();
 

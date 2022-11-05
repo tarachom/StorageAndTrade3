@@ -3,6 +3,7 @@ using Gtk;
 using AccountingSoftware;
 
 using ТабличніСписки = StorageAndTrade_1_0.Документи.ТабличніСписки;
+using StorageAndTrade_1_0.Документи;
 using Константи = StorageAndTrade_1_0.Константи;
 using Перелічення = StorageAndTrade_1_0.Перелічення;
 
@@ -10,7 +11,9 @@ namespace StorageAndTrade
 {
     class ПоступленняТоварівТаПослуг : VBox
     {
-        public FormStorageAndTrade? GeneralForm { get; set; }
+        public ПоступленняТоварівТаПослуг_Pointer? SelectPointerItem { get; set; }
+        public ПоступленняТоварівТаПослуг_Pointer? DocumentPointerItem { get; set; }
+        public System.Action<ПоступленняТоварівТаПослуг_Pointer>? CallBack_OnSelectPointer { get; set; }
 
         TreeView TreeViewGrid;
         ComboBoxText ComboBoxPeriodWhere = new ComboBoxText();
@@ -24,7 +27,7 @@ namespace StorageAndTrade
             HBox hBoxBotton = new HBox();
 
             Button bClose = new Button("Закрити");
-            bClose.Clicked += (object? sender, EventArgs args) => { GeneralForm?.CloseCurrentPageNotebook(); };
+            bClose.Clicked += (object? sender, EventArgs args) => { Program.GeneralForm?.CloseCurrentPageNotebook(); };
 
             hBoxBotton.PackStart(bClose, false, false, 10);
 
@@ -98,6 +101,9 @@ namespace StorageAndTrade
 
         public void LoadRecords()
         {
+            ТабличніСписки.ПоступленняТоварівТаПослуг_Записи.SelectPointerItem = SelectPointerItem;
+            ТабличніСписки.ПоступленняТоварівТаПослуг_Записи.DocumentPointerItem = DocumentPointerItem;
+
             ТабличніСписки.ПоступленняТоварівТаПослуг_Записи.LoadRecords();
 
             if (ТабличніСписки.ПоступленняТоварівТаПослуг_Записи.SelectPath != null)
@@ -117,22 +123,72 @@ namespace StorageAndTrade
 
                 UnigueID unigueID = new UnigueID((string)TreeViewGrid.Model.GetValue(iter, 1));
 
-                ТабличніСписки.ПоступленняТоварівТаПослуг_Записи.SelectPointerItem =
-                    new StorageAndTrade_1_0.Документи.ПоступленняТоварівТаПослуг_Pointer(unigueID);
+                SelectPointerItem = new ПоступленняТоварівТаПослуг_Pointer(unigueID);
             }
         }
 
         void OnButtonPressEvent(object? sender, ButtonPressEventArgs args)
         {
-            if (args.Event.Type == Gdk.EventType.DoubleButtonPress)
+            if (args.Event.Type == Gdk.EventType.DoubleButtonPress && TreeViewGrid.Selection.CountSelectedRows() != 0)
             {
-                Console.WriteLine(args.Event);
+                TreeIter iter;
+
+                if (TreeViewGrid.Model.GetIter(out iter, TreeViewGrid.Selection.GetSelectedRows()[0]))
+                {
+                    string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
+
+                    if (DocumentPointerItem == null)
+                    {
+                        ПоступленняТоварівТаПослуг_Objest ПоступленняТоварівТаПослуг_Objest = new ПоступленняТоварівТаПослуг_Objest();
+                        if (ПоступленняТоварівТаПослуг_Objest.Read(new UnigueID(uid)))
+                        {
+                            Program.GeneralForm?.CreateNotebookPage($"Поступлення товарів та послуг: {ПоступленняТоварівТаПослуг_Objest.Назва}", () =>
+                            {
+                                ПоступленняТоварівТаПослуг_Елемент page = new ПоступленняТоварівТаПослуг_Елемент
+                                {
+                                    PageList = this,
+                                    IsNew = false,
+                                    ПоступленняТоварівТаПослуг_Objest = ПоступленняТоварівТаПослуг_Objest,
+                                };
+
+                                page.SetValue();
+
+                                return page;
+                            });
+                        }
+                        else
+                            Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+                    }
+                    else
+                    {
+                        if (CallBack_OnSelectPointer != null)
+                            CallBack_OnSelectPointer.Invoke(new ПоступленняТоварівТаПослуг_Pointer(new UnigueID(uid)));
+
+                        Program.GeneralForm?.CloseCurrentPageNotebook();
+                    }
+                }
             }
         }
 
         #endregion
 
         #region ToolBar
+
+        void OnAddClick(object? sender, EventArgs args)
+        {
+            Program.GeneralForm?.CreateNotebookPage($"Організація: *", () =>
+            {
+                ПоступленняТоварівТаПослуг_Елемент page = new ПоступленняТоварівТаПослуг_Елемент
+                {
+                    PageList = this,
+                    IsNew = true
+                };
+
+                page.SetValue();
+
+                return page;
+            });
+        }
 
         void OnRefreshClick(object? sender, EventArgs args)
         {
