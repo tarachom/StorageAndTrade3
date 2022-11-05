@@ -5,7 +5,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>03.11.2022 14:43:51</DateTimeSave>
+  <DateTimeSave>05.11.2022 10:45:51</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -2853,6 +2853,16 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <Pointer>
               </Pointer>
             </Field>
+            <Field>
+              <Name>Код_R030</Name>
+              <Caption>R030</Caption>
+              <Size>0</Size>
+              <SortNum>4</SortNum>
+              <SortField>False</SortField>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
           </Fields>
         </TabularList>
       </TabularLists>
@@ -3030,6 +3040,24 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <Type>string</Type>
               <Pointer>
               </Pointer>
+            </Field>
+            <Field>
+              <Name>Папка</Name>
+              <Caption>Папка</Caption>
+              <Size>0</Size>
+              <SortNum>3</SortNum>
+              <SortField>False</SortField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Контрагенти_Папки</Pointer>
+              <Join>
+                <table>Довідники.Контрагенти_Папки_Const.TABLE</table>
+                <field>Папка</field>
+                <alias>join_tab_1</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_1</table>
+                <field>Довідники.Контрагенти_Папки_Const.Назва</field>
+              </FieldAndAlias>
             </Field>
           </Fields>
         </TabularList>
@@ -4841,6 +4869,24 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <Pointer>
               </Pointer>
             </Field>
+            <Field>
+              <Name>Валюта</Name>
+              <Caption>Валюта</Caption>
+              <Size>0</Size>
+              <SortNum>3</SortNum>
+              <SortField>False</SortField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Валюти</Pointer>
+              <Join>
+                <table>Довідники.Валюти_Const.TABLE</table>
+                <field>Валюта</field>
+                <alias>join_tab_1</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_1</table>
+                <field>Довідники.Валюти_Const.Назва</field>
+              </FieldAndAlias>
+            </Field>
           </Fields>
         </TabularList>
       </TabularLists>
@@ -5572,38 +5618,32 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
         <Field>
           <Name>Адрес</Name>
           <Value>1</Value>
-          <Desc>
-          </Desc>
+          <Desc>Адрес</Desc>
         </Field>
         <Field>
           <Name>Телефон</Name>
           <Value>2</Value>
-          <Desc>
-          </Desc>
+          <Desc>Телефон</Desc>
         </Field>
         <Field>
           <Name>ЕлектроннаПошта</Name>
           <Value>3</Value>
-          <Desc>
-          </Desc>
+          <Desc>Email</Desc>
         </Field>
         <Field>
           <Name>Сайт</Name>
           <Value>4</Value>
-          <Desc>
-          </Desc>
+          <Desc>Сайт</Desc>
         </Field>
         <Field>
           <Name>Skype</Name>
           <Value>5</Value>
-          <Desc>
-          </Desc>
+          <Desc>Skype</Desc>
         </Field>
         <Field>
           <Name>Інше</Name>
           <Value>6</Value>
-          <Desc>
-          </Desc>
+          <Desc>Інше</Desc>
         </Field>
       </Fields>
     </Enum>

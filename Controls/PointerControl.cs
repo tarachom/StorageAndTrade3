@@ -13,9 +13,7 @@ namespace StorageAndTrade
 
         public PointerControl() : base()
         {
-            Halign = Align.End;
-
-            PackStart(labelCaption, false, false, 5);
+            PackStart(labelCaption, false, false, 0);
             PackStart(entryText, false, false, 0);
 
             Button bOpen = new Button(new Image("find.png"));

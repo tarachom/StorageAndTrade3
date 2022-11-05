@@ -13,6 +13,8 @@ namespace StorageAndTrade
 
         public Організації_Objest Організації_Objest { get; set; } = new Організації_Objest();
 
+        #region Field
+
         Entry Код = new Entry() { WidthRequest = 100 };
         Entry Назва = new Entry() { WidthRequest = 500 };
         Entry НазваСкорочена = new Entry() { WidthRequest = 500 };
@@ -22,6 +24,12 @@ namespace StorageAndTrade
         Entry СвідоцтвоСеріяНомер = new Entry() { WidthRequest = 300 };
         Entry СвідоцтвоДатаВидачі = new Entry() { WidthRequest = 300 };
         Організації_PointerControl Холдинг = new Організації_PointerControl();
+
+        Організації_ТабличнаЧастина_Контакти Контакти = new Організації_ТабличнаЧастина_Контакти();
+
+        #endregion
+
+
 
         public Організації_Елемент() : base()
         {
@@ -55,7 +63,10 @@ namespace StorageAndTrade
             VBox vBox = new VBox();
 
             //Холдинг
-            vBox.PackStart(Холдинг, false, false, 5);
+            HBox hBoxHolding = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxHolding, false, false, 5);
+
+            hBoxHolding.PackStart(Холдинг, false, false, 3);
 
             //Код
             HBox hBoxCode = new HBox() { Halign = Align.End };
@@ -125,8 +136,14 @@ namespace StorageAndTrade
         {
             VBox vBox = new VBox();
 
+            HBox hBox = new HBox();
+            hBox.PackStart(new Label("Контакти:"), false, false, 5);
+            vBox.PackStart(hBox, false, false, 5);
 
+            HBox hBoxContakty = new HBox();
+            hBoxContakty.PackStart(Контакти, true, true, 5);
 
+            vBox.PackStart(hBoxContakty, true, true, 0);
             hPaned.Pack2(vBox, false, false);
         }
 
@@ -145,8 +162,10 @@ namespace StorageAndTrade
             СвідоцтвоСеріяНомер.Text = Організації_Objest.СвідоцтвоСеріяНомер;
             СвідоцтвоДатаВидачі.Text = Організації_Objest.СвідоцтвоДатаВидачі;
             НазваПовна.Buffer.Text = Організації_Objest.НазваПовна;
-
             Холдинг.Pointer = Організації_Objest.Холдинг;
+
+            Контакти.Організації_Objest = Організації_Objest;
+            Контакти.LoadRecords();
         }
 
         void GetValue()
@@ -172,6 +191,7 @@ namespace StorageAndTrade
             GetValue();
 
             Організації_Objest.Save();
+            Контакти.SaveRecords();
 
             Program.GeneralForm?.RenameCurrentPageNotebook($"Організація: {Організації_Objest.Назва}");
 
