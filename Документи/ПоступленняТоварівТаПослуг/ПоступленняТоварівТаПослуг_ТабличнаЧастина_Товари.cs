@@ -188,21 +188,20 @@ namespace StorageAndTrade
 
             if (args.Event.Type == Gdk.EventType.DoubleButtonPress)
             {
-                TreePath Path;
-                TreeViewColumn TreeColumn;
+                TreePath itemPath;
+                TreeViewColumn treeColumn;
 
-                TreeViewGrid.GetCursor(out Path, out TreeColumn);
+                TreeViewGrid.GetCursor(out itemPath, out treeColumn);
 
-                if (TreeColumn.Data.ContainsKey("Column"))
+                if (treeColumn.Data.ContainsKey("Column"))
                 {
                     TreeIter iter;
-                    TreeViewGrid.Model.GetIter(out iter, Path);
+                    TreeViewGrid.Model.GetIter(out iter, itemPath);
 
-                    int rowNumber = int.Parse(Path.ToString());
-
+                    int rowNumber = int.Parse(itemPath.ToString());
                     Запис запис = Записи[rowNumber];
 
-                    switch ((Columns)TreeColumn.Data["Column"]!)
+                    switch ((Columns)treeColumn.Data["Column"]!)
                     {
                         case Columns.НоменклатураНазва:
                             {
@@ -239,6 +238,10 @@ namespace StorageAndTrade
             ToolButton upButton = new ToolButton(Stock.Add) { Label = "Додати", IsImportant = true };
             upButton.Clicked += OnAddClick;
             toolbar.Add(upButton);
+
+            ToolButton copyButton = new ToolButton(Stock.Copy) { Label = "Копіювати", IsImportant = true };
+            copyButton.Clicked += OnCopyClick;
+            toolbar.Add(copyButton);
 
             ToolButton deleteButton = new ToolButton(Stock.Delete) { Label = "Видалити", IsImportant = true };
             deleteButton.Clicked += OnDeleteClick;
@@ -347,6 +350,28 @@ namespace StorageAndTrade
             Store.AppendValues(запис.ToArray());
         }
 
+        void OnCopyClick(object? sender, EventArgs args)
+        {
+            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
+            {
+                TreePath[] selectionRows = TreeViewGrid.Selection.GetSelectedRows();
+
+                foreach (TreePath itemPath in selectionRows)
+                {
+                    TreeIter iter;
+                    TreeViewGrid.Model.GetIter(out iter, itemPath);
+
+                    int rowNumber = int.Parse(itemPath.ToString());
+                    Запис запис = Записи[rowNumber];
+
+                    Запис записНовий = Запис.Clone(запис);
+                    
+                    Записи.Add(записНовий);
+                    Store.AppendValues(записНовий.ToArray());
+                }
+            }
+        }
+
         void OnDeleteClick(object? sender, EventArgs args)
         {
             if (TreeViewGrid.Selection.CountSelectedRows() != 0)
@@ -359,6 +384,10 @@ namespace StorageAndTrade
                     TreeIter iter;
                     TreeViewGrid.Model.GetIter(out iter, itemPath);
 
+                    int rowNumber = int.Parse(itemPath.ToString());
+                    Запис запис = Записи[rowNumber];
+
+                    Записи.Remove(запис);
                     Store.Remove(ref iter);
                 }
             }
