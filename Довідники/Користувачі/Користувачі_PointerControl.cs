@@ -47,5 +47,10 @@ namespace StorageAndTrade
                 return page;
             });
         }
+
+        protected override void OnClear(object? sender, EventArgs args)
+        {
+            Pointer = new Користувачі_Pointer();
+        }
     }
 }

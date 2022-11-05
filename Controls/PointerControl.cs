@@ -19,10 +19,15 @@ namespace StorageAndTrade
             Button bOpen = new Button(new Image("find.png"));
             bOpen.Clicked += OpenSelect;
 
+            Button bClear = new Button();
+            bClear.Clicked += OnClear;
+
             PackStart(bOpen, false, false, 2);
+            PackStart(bClear, false, false, 2);
         }
 
         protected virtual void OpenSelect(object? sender, EventArgs args) { }
+        protected virtual void OnClear(object? sender, EventArgs args) { }
 
         public string Caption
         {

@@ -50,5 +50,10 @@ namespace StorageAndTrade
                 return page;
             });
         }
+
+        protected override void OnClear(object? sender, EventArgs args)
+        {
+            Pointer = new Контрагенти_Папки_Pointer();
+        }
     }
 }
