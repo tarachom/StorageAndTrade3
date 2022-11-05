@@ -76,7 +76,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                ПоступленняТоварівТаПослуг_Objest.НомерДок = (++НумераціяДокументів.ПоступленняТоварівТаПослуг_Const).ToString("D6");
+                ПоступленняТоварівТаПослуг_Objest.НомерДок = (++НумераціяДокументів.ПоступленняТоварівТаПослуг_Const).ToString("D8");
                 ПоступленняТоварівТаПослуг_Objest.ДатаДок = DateTime.Now;
             }
 
@@ -110,7 +110,7 @@ namespace StorageAndTrade
             if (PageList != null)
             {
                 Товари.LoadRecords();
-                
+
                 PageList.SelectPointerItem = ПоступленняТоварівТаПослуг_Objest.GetDocumentPointer();
                 PageList.LoadRecords();
             }

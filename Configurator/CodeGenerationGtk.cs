@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 05.11.2022 19:51:23
+ * Дата конфігурації: 05.11.2022 21:32:22
  *
  */
  
@@ -2975,6 +2975,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
+            SelectPath = null;
 
             Документи.ЗамовленняПостачальнику_Select ЗамовленняПостачальнику_Select = new Документи.ЗамовленняПостачальнику_Select();
             ЗамовленняПостачальнику_Select.QuerySelect.Field.AddRange(
@@ -3143,6 +3144,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
+            SelectPath = null;
 
             Документи.ПоступленняТоварівТаПослуг_Select ПоступленняТоварівТаПослуг_Select = new Документи.ПоступленняТоварівТаПослуг_Select();
             ПоступленняТоварівТаПослуг_Select.QuerySelect.Field.AddRange(
@@ -3320,6 +3322,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
+            SelectPath = null;
 
             Документи.ЗамовленняКлієнта_Select ЗамовленняКлієнта_Select = new Документи.ЗамовленняКлієнта_Select();
             ЗамовленняКлієнта_Select.QuerySelect.Field.AddRange(
@@ -3497,6 +3500,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
+            SelectPath = null;
 
             Документи.РеалізаціяТоварівТаПослуг_Select РеалізаціяТоварівТаПослуг_Select = new Документи.РеалізаціяТоварівТаПослуг_Select();
             РеалізаціяТоварівТаПослуг_Select.QuerySelect.Field.AddRange(
@@ -3665,6 +3669,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
+            SelectPath = null;
 
             Документи.ВстановленняЦінНоменклатури_Select ВстановленняЦінНоменклатури_Select = new Документи.ВстановленняЦінНоменклатури_Select();
             ВстановленняЦінНоменклатури_Select.QuerySelect.Field.AddRange(
@@ -3822,6 +3827,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
+            SelectPath = null;
 
             Документи.ПрихіднийКасовийОрдер_Select ПрихіднийКасовийОрдер_Select = new Документи.ПрихіднийКасовийОрдер_Select();
             ПрихіднийКасовийОрдер_Select.QuerySelect.Field.AddRange(
@@ -3999,6 +4005,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
+            SelectPath = null;
 
             Документи.РозхіднийКасовийОрдер_Select РозхіднийКасовийОрдер_Select = new Документи.РозхіднийКасовийОрдер_Select();
             РозхіднийКасовийОрдер_Select.QuerySelect.Field.AddRange(
@@ -4167,6 +4174,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
+            SelectPath = null;
 
             Документи.ПереміщенняТоварів_Select ПереміщенняТоварів_Select = new Документи.ПереміщенняТоварів_Select();
             ПереміщенняТоварів_Select.QuerySelect.Field.AddRange(
@@ -4324,6 +4332,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
+            SelectPath = null;
 
             Документи.ПоверненняТоварівПостачальнику_Select ПоверненняТоварівПостачальнику_Select = new Документи.ПоверненняТоварівПостачальнику_Select();
             ПоверненняТоварівПостачальнику_Select.QuerySelect.Field.AddRange(
@@ -4501,6 +4510,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
+            SelectPath = null;
 
             Документи.ПоверненняТоварівВідКлієнта_Select ПоверненняТоварівВідКлієнта_Select = new Документи.ПоверненняТоварівВідКлієнта_Select();
             ПоверненняТоварівВідКлієнта_Select.QuerySelect.Field.AddRange(
@@ -4675,6 +4685,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
+            SelectPath = null;
 
             Документи.АктВиконанихРобіт_Select АктВиконанихРобіт_Select = new Документи.АктВиконанихРобіт_Select();
             АктВиконанихРобіт_Select.QuerySelect.Field.AddRange(
@@ -4837,6 +4848,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
+            SelectPath = null;
 
             Документи.ВведенняЗалишків_Select ВведенняЗалишків_Select = new Документи.ВведенняЗалишків_Select();
             ВведенняЗалишків_Select.QuerySelect.Field.AddRange(
@@ -4991,6 +5003,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
+            SelectPath = null;
 
             Документи.НадлишкиТоварів_Select НадлишкиТоварів_Select = new Документи.НадлишкиТоварів_Select();
             НадлишкиТоварів_Select.QuerySelect.Field.AddRange(
@@ -5127,6 +5140,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
+            SelectPath = null;
 
             Документи.ПересортицяТоварів_Select ПересортицяТоварів_Select = new Документи.ПересортицяТоварів_Select();
             ПересортицяТоварів_Select.QuerySelect.Field.AddRange(
@@ -5260,6 +5274,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
+            SelectPath = null;
 
             Документи.ПерерахунокТоварів_Select ПерерахунокТоварів_Select = new Документи.ПерерахунокТоварів_Select();
             ПерерахунокТоварів_Select.QuerySelect.Field.AddRange(
@@ -5390,6 +5405,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
+            SelectPath = null;
 
             Документи.ПсуванняТоварів_Select ПсуванняТоварів_Select = new Документи.ПсуванняТоварів_Select();
             ПсуванняТоварів_Select.QuerySelect.Field.AddRange(
@@ -5534,6 +5550,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
+            SelectPath = null;
 
             Документи.ВнутрішнєСпоживанняТоварів_Select ВнутрішнєСпоживанняТоварів_Select = new Документи.ВнутрішнєСпоживанняТоварів_Select();
             ВнутрішнєСпоживанняТоварів_Select.QuerySelect.Field.AddRange(
@@ -5693,6 +5710,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
+            SelectPath = null;
 
             Документи.РахунокФактура_Select РахунокФактура_Select = new Документи.РахунокФактура_Select();
             РахунокФактура_Select.QuerySelect.Field.AddRange(

@@ -66,11 +66,11 @@ namespace StorageAndTrade
             toolbar.Add(refreshButton);
 
             ToolButton deleteButton = new ToolButton(Stock.Delete) { Label = "Видалити", IsImportant = true };
-            //deleteButton.Clicked += OnDeleteClick;
+            deleteButton.Clicked += OnDeleteClick;
             toolbar.Add(deleteButton);
 
             ToolButton copyButton = new ToolButton(Stock.Copy) { Label = "Копіювати", IsImportant = true };
-            //copyButton.Clicked += OnCopyClick;
+            copyButton.Clicked += OnCopyClick;
             toolbar.Add(copyButton);
 
             //Відбір
@@ -193,6 +193,73 @@ namespace StorageAndTrade
         void OnRefreshClick(object? sender, EventArgs args)
         {
             LoadRecords();
+        }
+
+        void OnDeleteClick(object? sender, EventArgs args)
+        {
+            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
+            {
+                if (Message.Request(Program.GeneralForm, "Видалити?") == ResponseType.Yes)
+                {
+                    TreePath[] selectionRows = TreeViewGrid.Selection.GetSelectedRows();
+
+                    foreach (TreePath itemPath in selectionRows)
+                    {
+                        TreeIter iter;
+                        TreeViewGrid.Model.GetIter(out iter, itemPath);
+
+                        string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
+
+                        ПоступленняТоварівТаПослуг_Objest ПоступленняТоварівТаПослуг_Objest = new ПоступленняТоварівТаПослуг_Objest();
+                        if (ПоступленняТоварівТаПослуг_Objest.Read(new UnigueID(uid)))
+                            ПоступленняТоварівТаПослуг_Objest.Delete();
+                        else
+                            Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+                    }
+
+                    LoadRecords();
+                }
+            }
+        }
+
+        void OnCopyClick(object? sender, EventArgs args)
+        {
+            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
+            {
+                if (Message.Request(Program.GeneralForm, "Копіювати?") == ResponseType.Yes)
+                {
+                    TreePath[] selectionRows = TreeViewGrid.Selection.GetSelectedRows();
+
+                    foreach (TreePath itemPath in selectionRows)
+                    {
+                        TreeIter iter;
+                        TreeViewGrid.Model.GetIter(out iter, itemPath);
+
+                        string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
+
+                        ПоступленняТоварівТаПослуг_Objest ПоступленняТоварівТаПослуг_Objest = new ПоступленняТоварівТаПослуг_Objest();
+                        if (ПоступленняТоварівТаПослуг_Objest.Read(new UnigueID(uid)))
+                        {
+                            ПоступленняТоварівТаПослуг_Objest ПоступленняТоварівТаПослуг_Objest_Новий = ПоступленняТоварівТаПослуг_Objest.Copy();
+                            ПоступленняТоварівТаПослуг_Objest_Новий.Назва += " *";
+                            ПоступленняТоварівТаПослуг_Objest_Новий.ДатаДок = DateTime.Now;
+                            ПоступленняТоварівТаПослуг_Objest_Новий.НомерДок = (++Константи.НумераціяДокументів.ПоступленняТоварівТаПослуг_Const).ToString("D8");
+
+                            //Зчитати та скопіювати табличну частину Товари
+                            ПоступленняТоварівТаПослуг_Objest.Товари_TablePart.Read();
+                            ПоступленняТоварівТаПослуг_Objest_Новий.Товари_TablePart.Records = ПоступленняТоварівТаПослуг_Objest.Товари_TablePart.Copy();
+                            ПоступленняТоварівТаПослуг_Objest_Новий.Товари_TablePart.Save(true);
+                            ПоступленняТоварівТаПослуг_Objest_Новий.Save();
+
+                            SelectPointerItem = ПоступленняТоварівТаПослуг_Objest_Новий.GetDocumentPointer();
+                        }
+                        else
+                            Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+                    }
+
+                    LoadRecords();
+                }
+            }
         }
 
         void OnComboBoxPeriodWhereChanged(object? sender, EventArgs args)
