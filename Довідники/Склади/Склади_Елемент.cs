@@ -15,9 +15,14 @@ namespace StorageAndTrade
 
         public Склади_Objest Склади_Objest { get; set; } = new Склади_Objest();
 
+        #region Field
+
         Entry Код = new Entry() { WidthRequest = 100 };
         Entry Назва = new Entry() { WidthRequest = 500 };
         Склади_Папки_PointerControl Родич = new Склади_Папки_PointerControl() { Caption = "Папка:" };
+        Склади_ТабличнаЧастина_Контакти Контакти = new Склади_ТабличнаЧастина_Контакти();
+
+        #endregion
 
         public Склади_Елемент() : base()
         {
@@ -77,8 +82,14 @@ namespace StorageAndTrade
         {
             VBox vBox = new VBox();
 
+            HBox hBox = new HBox();
+            hBox.PackStart(new Label("Контакти:"), false, false, 5);
+            vBox.PackStart(hBox, false, false, 5);
 
+            HBox hBoxContakty = new HBox();
+            hBoxContakty.PackStart(Контакти, true, true, 5);
 
+            vBox.PackStart(hBoxContakty, false, false, 0);
             hPaned.Pack2(vBox, false, false);
         }
 
@@ -95,6 +106,9 @@ namespace StorageAndTrade
             Код.Text = Склади_Objest.Код;
             Назва.Text = Склади_Objest.Назва;
             Родич.Pointer = Склади_Objest.Папка;
+
+            Контакти.Склади_Objest = Склади_Objest;
+            Контакти.LoadRecords();
         }
 
         void GetValue()
@@ -114,8 +128,9 @@ namespace StorageAndTrade
             GetValue();
 
             Склади_Objest.Save();
+            Контакти.SaveRecords();
 
-            Program.GeneralForm?.RenameCurrentPageNotebook($"Контрагент: {Склади_Objest.Назва}");
+            Program.GeneralForm?.RenameCurrentPageNotebook($"Склад: {Склади_Objest.Назва}");
 
             if (PageList != null)
             {

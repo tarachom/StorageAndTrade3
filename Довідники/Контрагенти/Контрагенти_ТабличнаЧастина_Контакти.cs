@@ -45,7 +45,7 @@ namespace StorageAndTrade
 
             CreateToolbar();
 
-            ScrolledWindow scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In };
+            ScrolledWindow scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In, HeightRequest = 300 };
             scrollTree.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
 
             TreeViewGrid = new TreeView(Store);
@@ -56,7 +56,7 @@ namespace StorageAndTrade
 
             scrollTree.Add(TreeViewGrid);
 
-            PackStart(scrollTree, true, true, 0);
+            PackStart(scrollTree, true, false, 0);
 
             ShowAll();
         }

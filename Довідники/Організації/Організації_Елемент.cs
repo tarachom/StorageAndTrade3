@@ -142,7 +142,7 @@ namespace StorageAndTrade
             HBox hBoxContakty = new HBox();
             hBoxContakty.PackStart(Контакти, true, true, 5);
 
-            vBox.PackStart(hBoxContakty, true, true, 0);
+            vBox.PackStart(hBoxContakty, false, false, 0);
             hPaned.Pack2(vBox, false, false);
         }
 
