@@ -1,7 +1,11 @@
 using Gtk;
 
+using AccountingSoftware;
+
+using StorageAndTrade_1_0;
 using StorageAndTrade_1_0.Константи;
 using StorageAndTrade_1_0.Довідники;
+using StorageAndTrade_1_0.Перелічення;
 
 namespace StorageAndTrade
 {
@@ -12,14 +16,18 @@ namespace StorageAndTrade
         public bool IsNew { get; set; } = true;
 
         public Номенклатура_Папки_Pointer РодичДляНового { get; set; } = new Номенклатура_Папки_Pointer();
-
         public Номенклатура_Objest Номенклатура_Objest { get; set; } = new Номенклатура_Objest();
 
         Entry Код = new Entry() { WidthRequest = 100 };
         Entry Назва = new Entry() { WidthRequest = 500 };
         TextView НазваПовна = new TextView();
         TextView Опис = new TextView();
-        Номенклатура_Папки_PointerControl Родич = new Номенклатура_Папки_PointerControl() { Caption = "Папка:" };
+        ComboBoxText ТипНоменклатури = new ComboBoxText();
+        Entry Артикул = new Entry() { WidthRequest = 500 };
+        Виробники_PointerControl Виробник = new Виробники_PointerControl() { WidthPresentation = 420 };
+        Номенклатура_Папки_PointerControl Родич = new Номенклатура_Папки_PointerControl() { Caption = "Папка:", WidthPresentation = 420 };
+        ВидиНоменклатури_PointerControl ВидНоменклатури = new ВидиНоменклатури_PointerControl() { Caption = "Вид:", WidthPresentation = 420 };
+        ПакуванняОдиниціВиміру_PointerControl ОдиницяВиміру = new ПакуванняОдиниціВиміру_PointerControl() { WidthPresentation = 420 };
 
         public Номенклатура_Елемент() : base()
         {
@@ -66,23 +74,58 @@ namespace StorageAndTrade
             hBoxName.PackStart(new Label("Назва:"), false, false, 5);
             hBoxName.PackStart(Назва, false, false, 5);
 
-            //Родич
-            HBox hBoxParent = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxParent, false, false, 5);
-
-            hBoxParent.PackStart(Родич, false, false, 5);
-
             //НазваПовна
             HBox hBoxDesc = new HBox() { Halign = Align.End };
             vBox.PackStart(hBoxDesc, false, false, 5);
 
             hBoxDesc.PackStart(new Label("Повна назва:") { Valign = Align.Start }, false, false, 5);
 
-            ScrolledWindow scrollTextView = new ScrolledWindow() { ShadowType = ShadowType.In, WidthRequest = 500, HeightRequest = 100 };
+            ScrolledWindow scrollTextView = new ScrolledWindow() { ShadowType = ShadowType.In, WidthRequest = 500, HeightRequest = 50 };
             scrollTextView.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
             scrollTextView.Add(НазваПовна);
 
             hBoxDesc.PackStart(scrollTextView, false, false, 5);
+
+            //Родич
+            HBox hBoxParent = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxParent, false, false, 5);
+
+            hBoxParent.PackStart(Родич, false, false, 5);
+
+            //Артикул
+            HBox hBoxArtykul = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxArtykul, false, false, 5);
+
+            hBoxArtykul.PackStart(new Label("Артикул:"), false, false, 5);
+            hBoxArtykul.PackStart(Артикул, false, false, 5);
+
+            //Тип
+            HBox hBoxType = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxType, false, false, 5);
+
+            foreach (ConfigurationEnumField field in Config.Kernel!.Conf.Enums["ТипиНоменклатури"].Fields.Values)
+                ТипНоменклатури.Append(field.Name, field.Desc);
+
+            hBoxType.PackStart(new Label("Тип:"), false, false, 5);
+            hBoxType.PackStart(ТипНоменклатури, false, false, 5);
+
+            //ВидНоменклатури
+            HBox hBoxVidNumeklatury = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxVidNumeklatury, false, false, 5);
+
+            hBoxVidNumeklatury.PackStart(ВидНоменклатури, false, false, 5);
+
+            //Виробник
+            HBox hBoxVirobnyk = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxVirobnyk, false, false, 5);
+
+            hBoxVirobnyk.PackStart(Виробник, false, false, 5);
+
+            //ОдиницяВиміру
+            HBox hBoxOdynyca = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxOdynyca, false, false, 5);
+
+            hBoxOdynyca.PackStart(ОдиницяВиміру, false, false, 5);
 
             //Опис
             HBox hBoxOpys = new HBox() { Halign = Align.End };
@@ -90,7 +133,7 @@ namespace StorageAndTrade
 
             hBoxOpys.PackStart(new Label("Опис:") { Valign = Align.Start }, false, false, 5);
 
-            ScrolledWindow scrollTextViewOpys = new ScrolledWindow() { ShadowType = ShadowType.In, WidthRequest = 500, HeightRequest = 100 };
+            ScrolledWindow scrollTextViewOpys = new ScrolledWindow() { ShadowType = ShadowType.In, WidthRequest = 500, HeightRequest = 200 };
             scrollTextViewOpys.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
             scrollTextViewOpys.Add(Опис);
 
@@ -116,22 +159,36 @@ namespace StorageAndTrade
             {
                 Номенклатура_Objest.Код = (++НумераціяДовідників.Номенклатура_Const).ToString("D6");
                 Номенклатура_Objest.Папка = РодичДляНового;
+                Номенклатура_Objest.ТипНоменклатури = ТипиНоменклатури.Товар;
             }
 
             Код.Text = Номенклатура_Objest.Код;
             Назва.Text = Номенклатура_Objest.Назва;
+            Артикул.Text = Номенклатура_Objest.Артикул;
+            ТипНоменклатури.ActiveId = Номенклатура_Objest.ТипНоменклатури.ToString();
+            ВидНоменклатури.Pointer = Номенклатура_Objest.ВидНоменклатури;
             Родич.Pointer = Номенклатура_Objest.Папка;
             НазваПовна.Buffer.Text = Номенклатура_Objest.НазваПовна;
             Опис.Buffer.Text = Номенклатура_Objest.Опис;
+            Виробник.Pointer = Номенклатура_Objest.Виробник;
+            ОдиницяВиміру.Pointer = Номенклатура_Objest.ОдиницяВиміру;
+
+            if (ТипНоменклатури.Active == -1)
+                ТипНоменклатури.ActiveId = ТипиНоменклатури.Товар.ToString();
         }
 
         void GetValue()
         {
             Номенклатура_Objest.Код = Код.Text;
             Номенклатура_Objest.Назва = Назва.Text;
+            Номенклатура_Objest.Артикул = Артикул.Text;
+            Номенклатура_Objest.ТипНоменклатури = Enum.Parse<ТипиНоменклатури>(ТипНоменклатури.ActiveId);
+            Номенклатура_Objest.ВидНоменклатури = ВидНоменклатури.Pointer;
             Номенклатура_Objest.Папка = Родич.Pointer;
             Номенклатура_Objest.НазваПовна = НазваПовна.Buffer.Text;
             Номенклатура_Objest.Опис = Опис.Buffer.Text;
+            Номенклатура_Objest.Виробник = Виробник.Pointer;
+            Номенклатура_Objest.ОдиницяВиміру = ОдиницяВиміру.Pointer;
         }
 
         #endregion

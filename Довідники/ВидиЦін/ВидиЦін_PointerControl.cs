@@ -34,7 +34,7 @@ namespace StorageAndTrade
         {
             Program.GeneralForm?.CreateNotebookPage("Вибір - Довідник: Види цін", () =>
             {
-                ВидиЦін page = new ВидиЦін();
+                ВидиЦін page = new ВидиЦін(true);
 
                 page.DirectoryPointerItem = Pointer;
                 page.CallBack_OnSelectPointer = (ВидиЦін_Pointer selectPointer) =>

@@ -5,7 +5,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>05.11.2022 21:32:22</DateTimeSave>
+  <DateTimeSave>07.11.2022 17:17:05</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -4027,20 +4027,10 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               </Pointer>
             </Field>
             <Field>
-              <Name>Назва</Name>
-              <Caption>Назва</Caption>
-              <Size>0</Size>
-              <SortNum>2</SortNum>
-              <SortField>True</SortField>
-              <Type>string</Type>
-              <Pointer>
-              </Pointer>
-            </Field>
-            <Field>
               <Name>Номенклатура</Name>
               <Caption>Номенклатура</Caption>
               <Size>0</Size>
-              <SortNum>3</SortNum>
+              <SortNum>2</SortNum>
               <SortField>False</SortField>
               <Type>pointer</Type>
               <Pointer>Довідники.Номенклатура</Pointer>
@@ -4053,6 +4043,16 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
                 <table>join_tab_1</table>
                 <field>Довідники.Номенклатура_Const.Назва</field>
               </FieldAndAlias>
+            </Field>
+            <Field>
+              <Name>Назва</Name>
+              <Caption>Назва</Caption>
+              <Size>0</Size>
+              <SortNum>3</SortNum>
+              <SortField>True</SortField>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -5680,32 +5680,27 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
         <Field>
           <Name>Товар</Name>
           <Value>1</Value>
-          <Desc>
-          </Desc>
+          <Desc>Товар</Desc>
         </Field>
         <Field>
           <Name>Послуга</Name>
           <Value>2</Value>
-          <Desc>
-          </Desc>
+          <Desc>Послуга</Desc>
         </Field>
         <Field>
           <Name>Робота</Name>
           <Value>3</Value>
-          <Desc>
-          </Desc>
+          <Desc>Робота</Desc>
         </Field>
         <Field>
           <Name>Тара</Name>
           <Value>4</Value>
-          <Desc>
-          </Desc>
+          <Desc>Тара</Desc>
         </Field>
         <Field>
           <Name>Набір</Name>
           <Value>5</Value>
-          <Desc>
-          </Desc>
+          <Desc>Набір</Desc>
         </Field>
       </Fields>
     </Enum>

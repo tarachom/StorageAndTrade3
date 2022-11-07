@@ -9,7 +9,7 @@ namespace StorageAndTrade
         {
             pointer = new Виробники_Pointer();
             WidthPresentation = 300;
-            Caption = "Валюта:";
+            Caption = "Виробник:";
         }
 
         Виробники_Pointer pointer;
@@ -34,7 +34,7 @@ namespace StorageAndTrade
         {
             Program.GeneralForm?.CreateNotebookPage("Вибір - Довідник: Виробники", () =>
             {
-                Виробники page = new Виробники();
+                Виробники page = new Виробники(true);
 
                 page.DirectoryPointerItem = Pointer;
                 page.CallBack_OnSelectPointer = (Виробники_Pointer selectPointer) =>

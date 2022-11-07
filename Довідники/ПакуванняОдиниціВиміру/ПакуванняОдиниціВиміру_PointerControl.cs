@@ -34,7 +34,7 @@ namespace StorageAndTrade
         {
             Program.GeneralForm?.CreateNotebookPage("Вибір - Довідник: Пакування одиниці виміру", () =>
             {
-                ПакуванняОдиниціВиміру page = new ПакуванняОдиниціВиміру();
+                ПакуванняОдиниціВиміру page = new ПакуванняОдиниціВиміру(true);
 
                 page.DirectoryPointerItem = Pointer;
                 page.CallBack_OnSelectPointer = (ПакуванняОдиниціВиміру_Pointer selectPointer) =>

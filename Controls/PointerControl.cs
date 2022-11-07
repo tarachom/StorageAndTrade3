@@ -15,7 +15,7 @@ namespace StorageAndTrade
             Button bOpen = new Button(new Image("find.png"));
             bOpen.Clicked += OpenSelect;
 
-            Button bClear = new Button();
+            Button bClear = new Button(new Image("doc.png"));
             bClear.Clicked += OnClear;
 
             PackStart(bOpen, false, false, 2);
