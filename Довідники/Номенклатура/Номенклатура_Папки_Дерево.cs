@@ -20,12 +20,13 @@ namespace StorageAndTrade
 
         public string UidOpenFolder { get; set; } = "";
 
-        public Номенклатура_Папки_Дерево(bool isVisibleClose = false) : base()
+        public Номенклатура_Папки_Дерево(bool IsSelectPointer = false) : base()
         {
             new VBox(false, 0);
             BorderWidth = 0;
 
-            if (isVisibleClose)
+            //Як форма відкрита для вибору
+            if (IsSelectPointer)
             {
                 //Кнопки
                 HBox hBoxBotton = new HBox();
@@ -36,6 +37,17 @@ namespace StorageAndTrade
                 hBoxBotton.PackStart(bClose, false, false, 10);
 
                 PackStart(hBoxBotton, false, false, 10);
+
+                Button bEmptyPointer = new Button("Вибрати пустий елемент");
+                bEmptyPointer.Clicked += (object? sender, EventArgs args) =>
+                {
+                    if (CallBack_OnSelectPointer != null)
+                        CallBack_OnSelectPointer.Invoke(new Номенклатура_Папки_Pointer());
+
+                    Program.GeneralForm?.CloseCurrentPageNotebook();
+                };
+
+                hBoxBotton.PackStart(bEmptyPointer, false, false, 10);
             }
 
             CreateToolbar();
@@ -64,21 +76,25 @@ namespace StorageAndTrade
             Toolbar toolbar = new Toolbar();
             PackStart(toolbar, false, false, 0);
 
-            ToolButton upButton = new ToolButton(Stock.Add) { Label = "Додати", IsImportant = true };
-            upButton.Clicked += OnAddClick;
+            ToolButton addButton = new ToolButton(Stock.Add) { Label = "Додати", IsImportant = true };
+            addButton.Clicked += OnAddClick;
+            toolbar.Add(addButton);
+
+            ToolButton upButton = new ToolButton(Stock.Edit) { Label = "Редагувати", IsImportant = true };
+            upButton.Clicked += OnEditClick;
             toolbar.Add(upButton);
 
-            ToolButton refreshButton = new ToolButton(Stock.Refresh) { Label = "Обновити", IsImportant = true };
-            refreshButton.Clicked += OnRefreshClick;
-            toolbar.Add(refreshButton);
+            ToolButton copyButton = new ToolButton(Stock.Copy) { Label = "Копіювати", IsImportant = true };
+            copyButton.Clicked += OnCopyClick;
+            toolbar.Add(copyButton);
 
             ToolButton deleteButton = new ToolButton(Stock.Delete) { Label = "Видалити", IsImportant = true };
             deleteButton.Clicked += OnDeleteClick;
             toolbar.Add(deleteButton);
 
-            ToolButton copyButton = new ToolButton(Stock.Copy) { Label = "Копіювати", IsImportant = true };
-            copyButton.Clicked += OnCopyClick;
-            toolbar.Add(copyButton);
+            ToolButton refreshButton = new ToolButton(Stock.Refresh) { Label = "Обновити", IsImportant = true };
+            refreshButton.Clicked += OnRefreshClick;
+            toolbar.Add(refreshButton);
         }
 
         public void LoadTree()
@@ -193,6 +209,48 @@ ORDER BY level ASC
             OnRowActivated(TreeViewGrid, new RowActivatedArgs());
         }
 
+        void OpenPageElement(bool IsNew, string uid = "")
+        {
+            if (IsNew)
+            {
+                Program.GeneralForm?.CreateNotebookPage($"Номенклатура папка: *", () =>
+                {
+                    Номенклатура_Папки_Елемент page = new Номенклатура_Папки_Елемент
+                    {
+                        PageList = this,
+                        IsNew = true,
+                        РодичДляНового = Parent_Pointer
+                    };
+
+                    page.SetValue();
+
+                    return page;
+                });
+            }
+            else
+            {
+                Номенклатура_Папки_Objest Номенклатура_Папки_Objest = new Номенклатура_Папки_Objest();
+                if (Номенклатура_Папки_Objest.Read(new UnigueID(uid)))
+                {
+                    Program.GeneralForm?.CreateNotebookPage($"Номенклатура папка: {Номенклатура_Папки_Objest.Назва}", () =>
+                    {
+                        Номенклатура_Папки_Елемент page = new Номенклатура_Папки_Елемент
+                        {
+                            PageList = this,
+                            IsNew = false,
+                            Номенклатура_Папки_Objest = Номенклатура_Папки_Objest
+                        };
+
+                        page.SetValue();
+
+                        return page;
+                    });
+                }
+                else
+                    Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+            }
+        }
+
         #region TreeView
 
         void AddColumns()
@@ -228,37 +286,19 @@ ORDER BY level ASC
 
                 if (TreeViewGrid.Model.GetIter(out iter, TreeViewGrid.Selection.GetSelectedRows()[0]))
                 {
-                    UnigueID unigueID = new UnigueID((string)TreeViewGrid.Model.GetValue(iter, 0));
+                    string uid = (string)TreeViewGrid.Model.GetValue(iter, 0);
 
                     if (DirectoryPointerItem == null)
                     {
-                        if (unigueID.IsEmpty())
+                        if (new UnigueID(uid).IsEmpty())
                             return;
 
-                        Номенклатура_Папки_Objest Номенклатура_Папки_Objest = new Номенклатура_Папки_Objest();
-                        if (Номенклатура_Папки_Objest.Read(unigueID))
-                        {
-                            Program.GeneralForm?.CreateNotebookPage($"Контрагент Папка: {Номенклатура_Папки_Objest.Назва}", () =>
-                            {
-                                Номенклатура_Папки_Елемент page = new Номенклатура_Папки_Елемент
-                                {
-                                    PageList = this,
-                                    IsNew = false,
-                                    Номенклатура_Папки_Objest = Номенклатура_Папки_Objest
-                                };
-
-                                page.SetValue();
-
-                                return page;
-                            });
-                        }
-                        else
-                            Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+                        OpenPageElement(false, uid);
                     }
                     else
                     {
                         if (CallBack_OnSelectPointer != null)
-                            CallBack_OnSelectPointer.Invoke(new Номенклатура_Папки_Pointer(unigueID));
+                            CallBack_OnSelectPointer.Invoke(new Номенклатура_Папки_Pointer(new UnigueID(uid)));
 
                         Program.GeneralForm?.CloseCurrentPageNotebook();
                     }
@@ -272,19 +312,24 @@ ORDER BY level ASC
 
         void OnAddClick(object? sender, EventArgs args)
         {
-            Program.GeneralForm?.CreateNotebookPage($"Контрагент Папка: *", () =>
+            OpenPageElement(true);
+        }
+
+        void OnEditClick(object? sender, EventArgs args)
+        {
+            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
             {
-                Номенклатура_Папки_Елемент page = new Номенклатура_Папки_Елемент
+                TreeIter iter;
+                if (TreeViewGrid.Model.GetIter(out iter, TreeViewGrid.Selection.GetSelectedRows()[0]))
                 {
-                    PageList = this,
-                    IsNew = true,
-                    РодичДляНового = Parent_Pointer
-                };
+                    string uid = (string)TreeViewGrid.Model.GetValue(iter, 0);
 
-                page.SetValue();
+                    if (new UnigueID(uid).IsEmpty())
+                        return;
 
-                return page;
-            });
+                    OpenPageElement(false, uid);
+                }
+            }
         }
 
         void OnRefreshClick(object? sender, EventArgs args)

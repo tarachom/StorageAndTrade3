@@ -4,15 +4,13 @@ namespace StorageAndTrade
 {
     class PageDirectoryAll : VBox
     {
-        public FormStorageAndTrade? GeneralForm { get; set; }
-
         public PageDirectoryAll() : base()
         {
             //Кнопки
             HBox hBoxBotton = new HBox();
 
             Button bClose = new Button("Закрити");
-            bClose.Clicked += (object? sender, EventArgs args) => { GeneralForm?.CloseCurrentPageNotebook(); };
+            bClose.Clicked += (object? sender, EventArgs args) => { Program.GeneralForm?.CloseCurrentPageNotebook(); };
 
             hBoxBotton.PackStart(bClose, false, false, 10);
 
@@ -66,7 +64,7 @@ namespace StorageAndTrade
 
         void Організація(object? sender, EventArgs args)
         {
-            GeneralForm?.CreateNotebookPage("Довідник: Організації", () =>
+            Program.GeneralForm?.CreateNotebookPage("Довідник: Організації", () =>
             {
                 Організації page = new Організації();
 
@@ -78,7 +76,7 @@ namespace StorageAndTrade
 
         void Номенклатура(object? sender, EventArgs args)
         {
-            GeneralForm?.CreateNotebookPage("Довідник: Номенклатура", () =>
+            Program.GeneralForm?.CreateNotebookPage("Довідник: Номенклатура", () =>
             {
                 Номенклатура page = new Номенклатура();
 
@@ -90,7 +88,7 @@ namespace StorageAndTrade
 
         void ХарактеристикаНоменклатури(object? sender, EventArgs args)
         {
-            GeneralForm?.CreateNotebookPage("Довідник: Характеристики номенклатури", () =>
+            Program.GeneralForm?.CreateNotebookPage("Довідник: Характеристики номенклатури", () =>
             {
                 ХарактеристикиНоменклатури page = new ХарактеристикиНоменклатури();
 
@@ -102,7 +100,7 @@ namespace StorageAndTrade
 
         void Контрагенти(object? sender, EventArgs args)
         {
-            GeneralForm?.CreateNotebookPage("Довідник: Контрагенти", () =>
+            Program.GeneralForm?.CreateNotebookPage("Довідник: Контрагенти", () =>
             {
                 Контрагенти page = new Контрагенти();
 
@@ -114,7 +112,7 @@ namespace StorageAndTrade
 
         void Склади(object? sender, EventArgs args)
         {
-            GeneralForm?.CreateNotebookPage("Довідник: Склади", () =>
+            Program.GeneralForm?.CreateNotebookPage("Довідник: Склади", () =>
             {
                 Склади page = new Склади();
 
@@ -126,7 +124,7 @@ namespace StorageAndTrade
 
         void Валюти(object? sender, EventArgs args)
         {
-            GeneralForm?.CreateNotebookPage("Довідник: Валюти", () =>
+            Program.GeneralForm?.CreateNotebookPage("Довідник: Валюти", () =>
             {
                 Валюти page = new Валюти();
 
@@ -138,7 +136,7 @@ namespace StorageAndTrade
 
         void Каси(object? sender, EventArgs args)
         {
-            GeneralForm?.CreateNotebookPage("Довідник: Каси", () =>
+            Program.GeneralForm?.CreateNotebookPage("Довідник: Каси", () =>
             {
                 Каси page = new Каси();
 
@@ -150,7 +148,7 @@ namespace StorageAndTrade
 
         void Користувачі(object? sender, EventArgs args)
         {
-            GeneralForm?.CreateNotebookPage("Довідник: Користувачі", () =>
+            Program.GeneralForm?.CreateNotebookPage("Довідник: Користувачі", () =>
             {
                 Користувачі page = new Користувачі();
 
@@ -162,7 +160,7 @@ namespace StorageAndTrade
 
         void Файли(object? sender, EventArgs args)
         {
-            GeneralForm?.CreateNotebookPage("Довідник: Користувачі", () =>
+            Program.GeneralForm?.CreateNotebookPage("Довідник: Користувачі", () =>
             {
                 Файли page = new Файли();
 
@@ -174,7 +172,7 @@ namespace StorageAndTrade
 
         void ВидиЦін(object? sender, EventArgs args)
         {
-            GeneralForm?.CreateNotebookPage("Довідник: Види цін", () =>
+            Program.GeneralForm?.CreateNotebookPage("Довідник: Види цін", () =>
             {
                 ВидиЦін page = new ВидиЦін();
 
@@ -186,7 +184,7 @@ namespace StorageAndTrade
 
         void БанківськіРахункиОрганізацій(object? sender, EventArgs args)
         {
-            GeneralForm?.CreateNotebookPage("Довідник: Банківські рахунки організацій", () =>
+            Program.GeneralForm?.CreateNotebookPage("Довідник: Банківські рахунки організацій", () =>
             {
                 БанківськіРахункиОрганізацій page = new БанківськіРахункиОрганізацій();
 
@@ -198,7 +196,7 @@ namespace StorageAndTrade
 
         void ФізичніОсоби(object? sender, EventArgs args)
         {
-            GeneralForm?.CreateNotebookPage("Довідник: Фізичні особи", () =>
+            Program.GeneralForm?.CreateNotebookPage("Довідник: Фізичні особи", () =>
             {
                 ФізичніОсоби page = new ФізичніОсоби();
 
@@ -210,7 +208,7 @@ namespace StorageAndTrade
 
         void СтруктураПідприємства(object? sender, EventArgs args)
         {
-            GeneralForm?.CreateNotebookPage("Довідник: Структура підприємства", () =>
+            Program.GeneralForm?.CreateNotebookPage("Довідник: Структура підприємства", () =>
             {
                 СтруктураПідприємства page = new СтруктураПідприємства();
 
@@ -222,7 +220,7 @@ namespace StorageAndTrade
 
         void ДоговориКонтрагентів(object? sender, EventArgs args)
         {
-            GeneralForm?.CreateNotebookPage("Довідник: договори контрагентів", () =>
+            Program.GeneralForm?.CreateNotebookPage("Довідник: договори контрагентів", () =>
             {
                 ДоговориКонтрагентів page = new ДоговориКонтрагентів();
 
@@ -234,7 +232,7 @@ namespace StorageAndTrade
 
         void БанківськіРахункиКонтрагентів(object? sender, EventArgs args)
         {
-            GeneralForm?.CreateNotebookPage("Довідник: Банківські рахунки контрагентів", () =>
+            Program.GeneralForm?.CreateNotebookPage("Довідник: Банківські рахунки контрагентів", () =>
             {
                 БанківськіРахункиКонтрагентів page = new БанківськіРахункиКонтрагентів();
 
@@ -246,7 +244,7 @@ namespace StorageAndTrade
 
         void ПакуванняОдиниціВиміру(object? sender, EventArgs args)
         {
-            GeneralForm?.CreateNotebookPage("Довідник: Пакування номенклатури", () =>
+            Program.GeneralForm?.CreateNotebookPage("Довідник: Пакування номенклатури", () =>
             {
                 ПакуванняОдиниціВиміру page = new ПакуванняОдиниціВиміру();
 
@@ -258,7 +256,7 @@ namespace StorageAndTrade
 
         void ВидиНоменклатури(object? sender, EventArgs args)
         {
-            GeneralForm?.CreateNotebookPage("Довідник: Види номенклатури", () =>
+            Program.GeneralForm?.CreateNotebookPage("Довідник: Види номенклатури", () =>
             {
                 ВидиНоменклатури page = new ВидиНоменклатури();
 
@@ -270,7 +268,7 @@ namespace StorageAndTrade
 
         void ПартіяТоварівКомпозит(object? sender, EventArgs args)
         {
-            GeneralForm?.CreateNotebookPage("Довідник: Партія товарів", () =>
+            Program.GeneralForm?.CreateNotebookPage("Довідник: Партія товарів", () =>
             {
                 ПартіяТоварівКомпозит page = new ПартіяТоварівКомпозит();
 
@@ -282,7 +280,7 @@ namespace StorageAndTrade
 
         void СеріїНоменклатури(object? sender, EventArgs args)
         {
-            GeneralForm?.CreateNotebookPage("Довідник: Серії номенклатури", () =>
+            Program.GeneralForm?.CreateNotebookPage("Довідник: Серії номенклатури", () =>
             {
                 СеріїНоменклатури page = new СеріїНоменклатури();
 
@@ -294,7 +292,7 @@ namespace StorageAndTrade
 
         void Виробники(object? sender, EventArgs args)
         {
-            GeneralForm?.CreateNotebookPage("Довідник: Виробники", () =>
+            Program.GeneralForm?.CreateNotebookPage("Довідник: Виробники", () =>
             {
                 Виробники page = new Виробники();
 

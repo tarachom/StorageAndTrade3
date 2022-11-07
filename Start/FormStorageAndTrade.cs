@@ -97,11 +97,7 @@ namespace StorageAndTrade
         {
             CreateNotebookPage("Довідники", () =>
             {
-                PageDirectoryAll page = new PageDirectoryAll
-                {
-                    GeneralForm = this
-                };
-
+                PageDirectoryAll page = new PageDirectoryAll();
                 return page;
             });
         }

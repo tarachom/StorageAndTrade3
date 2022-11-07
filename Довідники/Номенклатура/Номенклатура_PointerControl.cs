@@ -9,7 +9,7 @@ namespace StorageAndTrade
         {
             pointer = new Номенклатура_Pointer();
             WidthPresentation = 300;
-            Caption = "Контрагент:";
+            Caption = "Номенклатура:";
         }
 
         Номенклатура_Pointer pointer;

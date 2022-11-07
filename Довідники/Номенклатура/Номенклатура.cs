@@ -63,6 +63,24 @@ namespace StorageAndTrade
                 LoadTree();
             };
 
+            //Характеристики
+            LinkButton linkButtonHar = new LinkButton(" Характеристики номеклатури") { Halign = Align.Start, Image = new Image("doc.png"), AlwaysShowImage = true };
+            linkButtonHar.Clicked += (object? sender, EventArgs args) =>
+            {
+                Program.GeneralForm?.CreateNotebookPage("Довідник: Характеристики номенклатури", () =>
+                {
+                    ХарактеристикиНоменклатури page = new ХарактеристикиНоменклатури();
+
+                    if (SelectPointerItem != null)
+                        page.НоменклатураВласник.Pointer = SelectPointerItem;
+
+                    page.LoadRecords();
+
+                    return page;
+                });
+            };
+            hBoxBotton.PackStart(linkButtonHar, false, false, 10);
+
             CreateToolbar();
 
             HPaned hPaned = new HPaned();
