@@ -18,7 +18,7 @@ namespace StorageAndTrade
         public Номенклатура_Папки_Pointer РодичДляНового { get; set; } = new Номенклатура_Папки_Pointer();
         public Номенклатура_Objest Номенклатура_Objest { get; set; } = new Номенклатура_Objest();
 
-        #region Field
+        #region Fields
 
         Entry Код = new Entry() { WidthRequest = 100 };
         Entry Назва = new Entry() { WidthRequest = 500 };
@@ -30,6 +30,7 @@ namespace StorageAndTrade
         Номенклатура_Папки_PointerControl Родич = new Номенклатура_Папки_PointerControl() { Caption = "Папка:", WidthPresentation = 420 };
         ВидиНоменклатури_PointerControl ВидНоменклатури = new ВидиНоменклатури_PointerControl() { Caption = "Вид:", WidthPresentation = 300 };
         ПакуванняОдиниціВиміру_PointerControl ОдиницяВиміру = new ПакуванняОдиниціВиміру_PointerControl() { WidthPresentation = 300 };
+        Файли_PointerControl ОсновнаКартинкаФайл = new Файли_PointerControl() { Caption = "Основна картинка:", WidthPresentation = 300 };
         Номенклатура_ТабличнаЧастина_Файли Файли = new Номенклатура_ТабличнаЧастина_Файли();
 
         #endregion
@@ -85,7 +86,7 @@ namespace StorageAndTrade
 
             hBoxDesc.PackStart(new Label("Повна назва:") { Valign = Align.Start }, false, false, 5);
 
-            ScrolledWindow scrollTextView = new ScrolledWindow() { ShadowType = ShadowType.In, WidthRequest = 500, HeightRequest = 50 };
+            ScrolledWindow scrollTextView = new ScrolledWindow() { ShadowType = ShadowType.In, WidthRequest = 500, HeightRequest = 60 };
             scrollTextView.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
             scrollTextView.Add(НазваПовна);
 
@@ -144,6 +145,25 @@ namespace StorageAndTrade
 
             hBoxOpys.PackStart(scrollTextViewOpys, false, false, 5);
 
+            //ОсновнаКартинкаФайл
+            HBox hBoxDefPicture = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxDefPicture, false, false, 5);
+
+            hBoxDefPicture.PackStart(ОсновнаКартинкаФайл, false, false, 5);
+
+            //Файли Заголовок
+            HBox hBoxFilesInfo = new HBox();
+
+            hBoxFilesInfo.PackStart(new Label("Файли:"), false, false, 5);
+            vBox.PackStart(hBoxFilesInfo, false, false, 5);
+
+            //Файли
+            HBox hBoxFiles = new HBox();
+            vBox.PackStart(hBoxFiles, false, false, 5);
+
+            hBoxFiles.PackStart(Файли, true, true, 5);
+
+
             hPaned.Pack1(vBox, false, false);
         }
 
@@ -151,15 +171,7 @@ namespace StorageAndTrade
         {
             VBox vBox = new VBox();
 
-            HBox hBox = new HBox();
 
-            hBox.PackStart(new Label("Файли:"), false, false, 5);
-            vBox.PackStart(hBox, false, false, 5);
-
-            HBox hBoxContakty = new HBox();
-            hBoxContakty.PackStart(Файли, true, true, 5);
-
-            vBox.PackStart(hBoxContakty, false, false, 0);
             hPaned.Pack2(vBox, false, false);
         }
 
@@ -184,9 +196,13 @@ namespace StorageAndTrade
             Опис.Buffer.Text = Номенклатура_Objest.Опис;
             Виробник.Pointer = Номенклатура_Objest.Виробник;
             ОдиницяВиміру.Pointer = Номенклатура_Objest.ОдиницяВиміру;
+            ОсновнаКартинкаФайл.Pointer = Номенклатура_Objest.ОсновнаКартинкаФайл;
 
             if (ТипНоменклатури.Active == -1)
                 ТипНоменклатури.ActiveId = ТипиНоменклатури.Товар.ToString();
+
+            Файли.Номенклатура_Objest = Номенклатура_Objest;
+            Файли.LoadRecords();
         }
 
         void GetValue()
@@ -201,6 +217,7 @@ namespace StorageAndTrade
             Номенклатура_Objest.Опис = Опис.Buffer.Text;
             Номенклатура_Objest.Виробник = Виробник.Pointer;
             Номенклатура_Objest.ОдиницяВиміру = ОдиницяВиміру.Pointer;
+            Номенклатура_Objest.ОсновнаКартинкаФайл = ОсновнаКартинкаФайл.Pointer;
         }
 
         #endregion
@@ -213,6 +230,7 @@ namespace StorageAndTrade
             GetValue();
 
             Номенклатура_Objest.Save();
+            Файли.SaveRecords();
 
             Program.GeneralForm?.RenameCurrentPageNotebook($"Контрагент: {Номенклатура_Objest.Назва}");
 

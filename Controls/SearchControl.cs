@@ -21,7 +21,7 @@ namespace StorageAndTrade
             entrySearch.Changed += OnEntrySearchChanged;
             PackStart(entrySearch, false, false, 2);
 
-            Button bClear = new Button();
+            Button bClear = new Button(new Image("doc.png"));
             bClear.Clicked += OnClear;
             PackStart(bClear, false, false, 2);
         }
