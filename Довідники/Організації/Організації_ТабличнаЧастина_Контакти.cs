@@ -152,6 +152,7 @@ namespace StorageAndTrade
             }
 
             CellRendererCombo TypeInfo = new CellRendererCombo() { Editable = true, Model = storeTypeInfo, TextColumn = 1 };
+            //TypeInfo.HasEntry = true;
             TypeInfo.Edited += TextChanged;
             TypeInfo.Data.Add("Column", (int)Columns.Тип);
 

@@ -37,7 +37,7 @@ namespace StorageAndTrade
 
             Program.GeneralForm?.CreateNotebookPage("Вибір - Довідник: Номенклатура", () =>
             {
-                Номенклатура page = new Номенклатура();
+                Номенклатура page = new Номенклатура(true);
 
                 page.DirectoryPointerItem = Pointer;
                 page.CallBack_OnSelectPointer = (Номенклатура_Pointer selectPointer) =>

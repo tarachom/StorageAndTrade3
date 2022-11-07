@@ -222,7 +222,7 @@ namespace StorageAndTrade
                             {
                                 Program.GeneralForm?.CreateNotebookPage("Вибір - Довідник: Номенклатура", () =>
                                 {
-                                    Номенклатура page = new Номенклатура();
+                                    Номенклатура page = new Номенклатура(true);
 
                                     page.DirectoryPointerItem = запис.Номенклатура;
                                     page.CallBack_OnSelectPointer = (Номенклатура_Pointer selectPointer) =>
@@ -244,10 +244,9 @@ namespace StorageAndTrade
                             {
                                 Program.GeneralForm?.CreateNotebookPage("Вибір - Довідник: Характеристика", () =>
                                 {
-                                    ХарактеристикиНоменклатури page = new ХарактеристикиНоменклатури();
+                                    ХарактеристикиНоменклатури page = new ХарактеристикиНоменклатури(true);
 
                                     page.НоменклатураВласник.Pointer = запис.Номенклатура;
-                                    
                                     page.DirectoryPointerItem = запис.Характеристика;
                                     page.CallBack_OnSelectPointer = (ХарактеристикиНоменклатури_Pointer selectPointer) =>
                                     {
@@ -471,6 +470,11 @@ namespace StorageAndTrade
         }
 
         #region TreeView
+
+        void НоменклатураClicked(object? sender, EventArgs args)
+        {
+            Console.WriteLine(1);
+        }
 
         void AddColumn()
         {

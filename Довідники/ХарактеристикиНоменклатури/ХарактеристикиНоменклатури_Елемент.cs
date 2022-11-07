@@ -12,9 +12,12 @@ namespace StorageAndTrade
         public bool IsNew { get; set; } = true;
 
         public ХарактеристикиНоменклатури_Objest ХарактеристикиНоменклатури_Objest { get; set; } = new ХарактеристикиНоменклатури_Objest();
+        public Номенклатура_Pointer НоменклатураДляНового { get; set; } = new Номенклатура_Pointer();
 
         Entry Код = new Entry() { WidthRequest = 100 };
         Entry Назва = new Entry() { WidthRequest = 500 };
+        TextView НазваПовна = new TextView();
+        Номенклатура_PointerControl Номенклатура = new Номенклатура_PointerControl();
 
         public ХарактеристикиНоменклатури_Елемент() : base()
         {
@@ -54,6 +57,12 @@ namespace StorageAndTrade
             hBoxCode.PackStart(new Label("Код:"), false, false, 5);
             hBoxCode.PackStart(Код, false, false, 5);
 
+            //Номенклатура
+            HBox hBoxNomenklatura = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxNomenklatura, false, false, 5);
+
+            hBoxNomenklatura.PackStart(Номенклатура, false, false, 5);
+
             //Назва
             HBox hBoxName = new HBox() { Halign = Align.End };
             vBox.PackStart(hBoxName, false, false, 5);
@@ -61,14 +70,24 @@ namespace StorageAndTrade
             hBoxName.PackStart(new Label("Назва:"), false, false, 5);
             hBoxName.PackStart(Назва, false, false, 5);
 
+            //НазваПовна
+            HBox hBoxDesc = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxDesc, false, false, 5);
+
+            hBoxDesc.PackStart(new Label("Повна назва:") { Valign = Align.Start }, false, false, 5);
+
+            ScrolledWindow scrollTextView = new ScrolledWindow() { ShadowType = ShadowType.In, WidthRequest = 500, HeightRequest = 100 };
+            scrollTextView.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
+            scrollTextView.Add(НазваПовна);
+
+            hBoxDesc.PackStart(scrollTextView, false, false, 5);
+
             hPaned.Pack1(vBox, false, false);
         }
 
         void CreatePack2(HPaned hPaned)
         {
             VBox vBox = new VBox();
-
-
 
             hPaned.Pack2(vBox, false, false);
         }
@@ -78,16 +97,23 @@ namespace StorageAndTrade
         public void SetValue()
         {
             if (IsNew)
+            {
                 ХарактеристикиНоменклатури_Objest.Код = (++НумераціяДовідників.ХарактеристикиНоменклатури_Const).ToString("D6");
+                ХарактеристикиНоменклатури_Objest.Номенклатура = НоменклатураДляНового;
+            }
 
             Код.Text = ХарактеристикиНоменклатури_Objest.Код;
             Назва.Text = ХарактеристикиНоменклатури_Objest.Назва;
+            НазваПовна.Buffer.Text = ХарактеристикиНоменклатури_Objest.НазваПовна;
+            Номенклатура.Pointer = ХарактеристикиНоменклатури_Objest.Номенклатура;
         }
 
         void GetValue()
         {
             ХарактеристикиНоменклатури_Objest.Код = Код.Text;
             ХарактеристикиНоменклатури_Objest.Назва = Назва.Text;
+            ХарактеристикиНоменклатури_Objest.НазваПовна = НазваПовна.Buffer.Text;
+            ХарактеристикиНоменклатури_Objest.Номенклатура = Номенклатура.Pointer;
         }
 
         #endregion

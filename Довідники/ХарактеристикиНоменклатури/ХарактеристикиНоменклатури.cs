@@ -18,7 +18,7 @@ namespace StorageAndTrade
         TreeView TreeViewGrid;
         public Номенклатура_PointerControl НоменклатураВласник = new Номенклатура_PointerControl();
 
-        public ХарактеристикиНоменклатури() : base()
+        public ХарактеристикиНоменклатури(bool IsSelectPointer = false) : base()
         {
             new VBox(false, 0);
             BorderWidth = 0;
@@ -28,13 +28,28 @@ namespace StorageAndTrade
 
             Button bClose = new Button("Закрити");
             bClose.Clicked += (object? sender, EventArgs args) => { Program.GeneralForm?.CloseCurrentPageNotebook(); };
-
             hBoxBotton.PackStart(bClose, false, false, 10);
+
+            //Форма відкрита для вибору
+            if (IsSelectPointer)
+            {
+                Button bEmptyPointer = new Button("Вибрати пустий елемент");
+                bEmptyPointer.Clicked += (object? sender, EventArgs args) =>
+                {
+                    if (CallBack_OnSelectPointer != null)
+                        CallBack_OnSelectPointer.Invoke(new ХарактеристикиНоменклатури_Pointer());
+
+                    Program.GeneralForm?.CloseCurrentPageNotebook();
+                };
+
+                hBoxBotton.PackStart(bEmptyPointer, false, false, 10);
+            }
 
             PackStart(hBoxBotton, false, false, 10);
 
             //Власник
             hBoxBotton.PackStart(НоменклатураВласник, false, false, 2);
+            НоменклатураВласник.Caption = "Контрагент власник:";
             НоменклатураВласник.AfterSelectFunc = () =>
             {
                 LoadRecords();
@@ -65,8 +80,12 @@ namespace StorageAndTrade
             Toolbar toolbar = new Toolbar();
             PackStart(toolbar, false, false, 0);
 
-            ToolButton upButton = new ToolButton(Stock.Add) { Label = "Додати", IsImportant = true };
-            upButton.Clicked += OnAddClick;
+            ToolButton addButton = new ToolButton(Stock.Add) { Label = "Додати", IsImportant = true };
+            addButton.Clicked += OnAddClick;
+            toolbar.Add(addButton);
+
+            ToolButton upButton = new ToolButton(Stock.Edit) { Label = "Редагувати", IsImportant = true };
+            upButton.Clicked += OnEditClick;
             toolbar.Add(upButton);
 
             ToolButton refreshButton = new ToolButton(Stock.Refresh) { Label = "Обновити", IsImportant = true };
@@ -100,6 +119,29 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.ХарактеристикиНоменклатури_Записи.SelectPath, TreeViewGrid.Columns[0], false);
         }
 
+        void OpenPageElement(string uid)
+        {
+            ХарактеристикиНоменклатури_Objest ХарактеристикиНоменклатури_Objest = new ХарактеристикиНоменклатури_Objest();
+            if (ХарактеристикиНоменклатури_Objest.Read(new UnigueID(uid)))
+            {
+                Program.GeneralForm?.CreateNotebookPage($"Характеристики: {ХарактеристикиНоменклатури_Objest.Назва}", () =>
+                {
+                    ХарактеристикиНоменклатури_Елемент page = new ХарактеристикиНоменклатури_Елемент
+                    {
+                        PageList = this,
+                        IsNew = false,
+                        ХарактеристикиНоменклатури_Objest = ХарактеристикиНоменклатури_Objest,
+                    };
+
+                    page.SetValue();
+
+                    return page;
+                });
+            }
+            else
+                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+        }
+
         #region TreeView
 
         void OnRowActivated(object sender, RowActivatedArgs args)
@@ -117,42 +159,24 @@ namespace StorageAndTrade
 
         void OnButtonPressEvent(object? sender, ButtonPressEventArgs args)
         {
-            if (args.Event.Type == Gdk.EventType.DoubleButtonPress && TreeViewGrid.Selection.CountSelectedRows() != 0)
+            if (args.Event.Type == Gdk.EventType.DoubleButtonPress)
             {
-                TreeIter iter;
-
-                if (TreeViewGrid.Model.GetIter(out iter, TreeViewGrid.Selection.GetSelectedRows()[0]))
+                if (TreeViewGrid.Selection.CountSelectedRows() != 0)
                 {
-                    string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
-
-                    if (DirectoryPointerItem == null)
+                    TreeIter iter;
+                    if (TreeViewGrid.Model.GetIter(out iter, TreeViewGrid.Selection.GetSelectedRows()[0]))
                     {
-                        ХарактеристикиНоменклатури_Objest ХарактеристикиНоменклатури_Objest = new ХарактеристикиНоменклатури_Objest();
-                        if (ХарактеристикиНоменклатури_Objest.Read(new UnigueID(uid)))
-                        {
-                            Program.GeneralForm?.CreateNotebookPage($"Характеристики: {ХарактеристикиНоменклатури_Objest.Назва}", () =>
-                            {
-                                ХарактеристикиНоменклатури_Елемент page = new ХарактеристикиНоменклатури_Елемент
-                                {
-                                    PageList = this,
-                                    IsNew = false,
-                                    ХарактеристикиНоменклатури_Objest = ХарактеристикиНоменклатури_Objest,
-                                };
+                        string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
 
-                                page.SetValue();
-
-                                return page;
-                            });
-                        }
+                        if (DirectoryPointerItem == null)
+                            OpenPageElement(uid);
                         else
-                            Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                    }
-                    else
-                    {
-                        if (CallBack_OnSelectPointer != null)
-                            CallBack_OnSelectPointer.Invoke(new ХарактеристикиНоменклатури_Pointer(new UnigueID(uid)));
+                        {
+                            if (CallBack_OnSelectPointer != null)
+                                CallBack_OnSelectPointer.Invoke(new ХарактеристикиНоменклатури_Pointer(new UnigueID(uid)));
 
-                        Program.GeneralForm?.CloseCurrentPageNotebook();
+                            Program.GeneralForm?.CloseCurrentPageNotebook();
+                        }
                     }
                 }
             }
@@ -169,13 +193,27 @@ namespace StorageAndTrade
                 ХарактеристикиНоменклатури_Елемент page = new ХарактеристикиНоменклатури_Елемент
                 {
                     PageList = this,
-                    IsNew = true
+                    IsNew = true,
+                    НоменклатураДляНового = НоменклатураВласник.Pointer
                 };
 
                 page.SetValue();
 
                 return page;
             });
+        }
+
+        void OnEditClick(object? sender, EventArgs args)
+        {
+            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
+            {
+                TreeIter iter;
+                if (TreeViewGrid.Model.GetIter(out iter, TreeViewGrid.Selection.GetSelectedRows()[0]))
+                {
+                    string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
+                    OpenPageElement(uid);
+                }
+            }
         }
 
         void OnRefreshClick(object? sender, EventArgs args)

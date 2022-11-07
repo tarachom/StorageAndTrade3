@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 05.11.2022 21:32:22
+ * Дата конфігурації: 07.11.2022 15:07:12
  *
  */
  
@@ -1549,19 +1549,19 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         string ID = "";
         
         string Код = "";
-        string Назва = "";
         string Номенклатура = "";
+        string Назва = "";
 
         Array ToArray()
         {
             return new object[] { new Gdk.Pixbuf(Image), ID 
-            /* */ , Код, Назва, Номенклатура };
+            /* */ , Код, Номенклатура, Назва };
         }
 
         public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */
             , typeof(string) /* Код */
-            , typeof(string) /* Назва */
             , typeof(string) /* Номенклатура */
+            , typeof(string) /* Назва */
             );
 
         public static void AddColumns(TreeView treeView)
@@ -1570,8 +1570,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
-            treeView.AppendColumn(new TreeViewColumn("Номенклатура", new CellRendererText() { Xpad = 4 }, "text", 4) { SortColumnId = 4 } ); /*Номенклатура*/
+            treeView.AppendColumn(new TreeViewColumn("Номенклатура", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Номенклатура*/
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 4) { SortColumnId = 4 } ); /*Назва*/
             
         }
 
