@@ -34,7 +34,7 @@ namespace StorageAndTrade
         {
             Program.GeneralForm?.CreateNotebookPage("Вибір - Довідник: Каси", () =>
             {
-                Каси page = new Каси();
+                Каси page = new Каси(true);
 
                 page.DirectoryPointerItem = Pointer;
                 page.CallBack_OnSelectPointer = (Каси_Pointer selectPointer) =>

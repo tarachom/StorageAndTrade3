@@ -34,7 +34,7 @@ namespace StorageAndTrade
         {
             Program.GeneralForm?.CreateNotebookPage("Вибір - Довідник: Користувачі", () =>
             {
-                Користувачі page = new Користувачі();
+                Користувачі page = new Користувачі(true);
 
                 page.DirectoryPointerItem = Pointer;
                 page.CallBack_OnSelectPointer = (Користувачі_Pointer selectPointer) =>

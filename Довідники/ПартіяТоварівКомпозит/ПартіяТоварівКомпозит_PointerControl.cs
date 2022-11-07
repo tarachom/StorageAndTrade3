@@ -34,7 +34,7 @@ namespace StorageAndTrade
         {
             Program.GeneralForm?.CreateNotebookPage("Вибір - Довідник: Партія", () =>
             {
-                ПартіяТоварівКомпозит page = new ПартіяТоварівКомпозит();
+                ПартіяТоварівКомпозит page = new ПартіяТоварівКомпозит(true);
 
                 page.DirectoryPointerItem = Pointer;
                 page.CallBack_OnSelectPointer = (ПартіяТоварівКомпозит_Pointer selectPointer) =>

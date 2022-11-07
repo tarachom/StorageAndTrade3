@@ -34,7 +34,7 @@ namespace StorageAndTrade
         {
             Program.GeneralForm?.CreateNotebookPage("Вибір - Довідник: Банківські рахунки контрагентів", () =>
             {
-                БанківськіРахункиКонтрагентів page = new БанківськіРахункиКонтрагентів();
+                БанківськіРахункиКонтрагентів page = new БанківськіРахункиКонтрагентів(true);
 
                 page.DirectoryPointerItem = Pointer;
                 page.CallBack_OnSelectPointer = (БанківськіРахункиКонтрагентів_Pointer selectPointer) =>

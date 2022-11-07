@@ -34,7 +34,7 @@ namespace StorageAndTrade
         {
             Program.GeneralForm?.CreateNotebookPage("Вибір - Довідник: Організації", () =>
             {
-                Організації page = new Організації();
+                Організації page = new Організації(true);
 
                 page.DirectoryPointerItem = Pointer;
                 page.CallBack_OnSelectPointer = (Організації_Pointer selectPointer) =>

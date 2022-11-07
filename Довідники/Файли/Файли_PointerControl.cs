@@ -34,7 +34,7 @@ namespace StorageAndTrade
         {
             Program.GeneralForm?.CreateNotebookPage("Вибір - Довідник: Файли", () =>
             {
-                Файли page = new Файли();
+                Файли page = new Файли(true);
 
                 page.DirectoryPointerItem = Pointer;
                 page.CallBack_OnSelectPointer = (Файли_Pointer selectPointer) =>

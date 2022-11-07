@@ -34,7 +34,7 @@ namespace StorageAndTrade
         {
             Program.GeneralForm?.CreateNotebookPage("Вибір - Довідник: Валюти", () =>
             {
-                Валюти page = new Валюти();
+                Валюти page = new Валюти(true);
 
                 page.DirectoryPointerItem = Pointer;
                 page.CallBack_OnSelectPointer = (Валюти_Pointer selectPointer) =>
