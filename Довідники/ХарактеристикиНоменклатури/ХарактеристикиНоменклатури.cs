@@ -30,7 +30,7 @@ namespace StorageAndTrade
             bClose.Clicked += (object? sender, EventArgs args) => { Program.GeneralForm?.CloseCurrentPageNotebook(); };
             hBoxBotton.PackStart(bClose, false, false, 10);
 
-            //Форма відкрита для вибору
+            //Як форма відкрита для вибору
             if (IsSelectPointer)
             {
                 Button bEmptyPointer = new Button("Вибрати пустий елемент");
@@ -49,7 +49,7 @@ namespace StorageAndTrade
 
             //Власник
             hBoxBotton.PackStart(НоменклатураВласник, false, false, 2);
-            НоменклатураВласник.Caption = "Контрагент власник:";
+            НоменклатураВласник.Caption = "Номенклатура власник:";
             НоменклатураВласник.AfterSelectFunc = () =>
             {
                 LoadRecords();
@@ -88,17 +88,17 @@ namespace StorageAndTrade
             upButton.Clicked += OnEditClick;
             toolbar.Add(upButton);
 
-            ToolButton refreshButton = new ToolButton(Stock.Refresh) { Label = "Обновити", IsImportant = true };
-            refreshButton.Clicked += OnRefreshClick;
-            toolbar.Add(refreshButton);
+            ToolButton copyButton = new ToolButton(Stock.Copy) { Label = "Копіювати", IsImportant = true };
+            copyButton.Clicked += OnCopyClick;
+            toolbar.Add(copyButton);
 
             ToolButton deleteButton = new ToolButton(Stock.Delete) { Label = "Видалити", IsImportant = true };
             deleteButton.Clicked += OnDeleteClick;
             toolbar.Add(deleteButton);
 
-            ToolButton copyButton = new ToolButton(Stock.Copy) { Label = "Копіювати", IsImportant = true };
-            copyButton.Clicked += OnCopyClick;
-            toolbar.Add(copyButton);
+            ToolButton refreshButton = new ToolButton(Stock.Refresh) { Label = "Обновити", IsImportant = true };
+            refreshButton.Clicked += OnRefreshClick;
+            toolbar.Add(refreshButton);
         }
 
         public void LoadRecords()
@@ -119,18 +119,17 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.ХарактеристикиНоменклатури_Записи.SelectPath, TreeViewGrid.Columns[0], false);
         }
 
-        void OpenPageElement(string uid)
+        void OpenPageElement(bool IsNew, string uid = "")
         {
-            ХарактеристикиНоменклатури_Objest ХарактеристикиНоменклатури_Objest = new ХарактеристикиНоменклатури_Objest();
-            if (ХарактеристикиНоменклатури_Objest.Read(new UnigueID(uid)))
+            if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"Характеристики: {ХарактеристикиНоменклатури_Objest.Назва}", () =>
+                Program.GeneralForm?.CreateNotebookPage($"Характеристики: *", () =>
                 {
                     ХарактеристикиНоменклатури_Елемент page = new ХарактеристикиНоменклатури_Елемент
                     {
                         PageList = this,
-                        IsNew = false,
-                        ХарактеристикиНоменклатури_Objest = ХарактеристикиНоменклатури_Objest,
+                        IsNew = true,
+                        НоменклатураДляНового = НоменклатураВласник.Pointer
                     };
 
                     page.SetValue();
@@ -139,7 +138,27 @@ namespace StorageAndTrade
                 });
             }
             else
-                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+            {
+                ХарактеристикиНоменклатури_Objest ХарактеристикиНоменклатури_Objest = new ХарактеристикиНоменклатури_Objest();
+                if (ХарактеристикиНоменклатури_Objest.Read(new UnigueID(uid)))
+                {
+                    Program.GeneralForm?.CreateNotebookPage($"Характеристики: {ХарактеристикиНоменклатури_Objest.Назва}", () =>
+                    {
+                        ХарактеристикиНоменклатури_Елемент page = new ХарактеристикиНоменклатури_Елемент
+                        {
+                            PageList = this,
+                            IsNew = false,
+                            ХарактеристикиНоменклатури_Objest = ХарактеристикиНоменклатури_Objest,
+                        };
+
+                        page.SetValue();
+
+                        return page;
+                    });
+                }
+                else
+                    Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+            }
         }
 
         #region TreeView
@@ -169,7 +188,7 @@ namespace StorageAndTrade
                         string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
 
                         if (DirectoryPointerItem == null)
-                            OpenPageElement(uid);
+                            OpenPageElement(false, uid);
                         else
                         {
                             if (CallBack_OnSelectPointer != null)
@@ -188,19 +207,7 @@ namespace StorageAndTrade
 
         void OnAddClick(object? sender, EventArgs args)
         {
-            Program.GeneralForm?.CreateNotebookPage($"Характеристики: *", () =>
-            {
-                ХарактеристикиНоменклатури_Елемент page = new ХарактеристикиНоменклатури_Елемент
-                {
-                    PageList = this,
-                    IsNew = true,
-                    НоменклатураДляНового = НоменклатураВласник.Pointer
-                };
-
-                page.SetValue();
-
-                return page;
-            });
+            OpenPageElement(true);
         }
 
         void OnEditClick(object? sender, EventArgs args)
@@ -211,7 +218,7 @@ namespace StorageAndTrade
                 if (TreeViewGrid.Model.GetIter(out iter, TreeViewGrid.Selection.GetSelectedRows()[0]))
                 {
                     string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
-                    OpenPageElement(uid);
+                    OpenPageElement(false, uid);
                 }
             }
         }
