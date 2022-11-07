@@ -180,7 +180,7 @@ FROM
 WHERE
     LOWER({Довідники.Номенклатура_Const.Назва}) LIKE @like_param
 ORDER BY Назва
-LIMIT 10
+LIMIT 25
 ";
 
         public static readonly string Склади_Папки = $@"

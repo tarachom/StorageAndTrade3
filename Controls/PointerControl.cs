@@ -1,9 +1,5 @@
 using Gtk;
 
-using AccountingSoftware;
-
-using StorageAndTrade_1_0.Довідники;
-
 namespace StorageAndTrade
 {
     abstract class PointerControl : HBox

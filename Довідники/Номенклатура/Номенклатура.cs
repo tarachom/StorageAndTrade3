@@ -2,6 +2,7 @@ using Gtk;
 
 using AccountingSoftware;
 
+using StorageAndTrade_1_0;
 using StorageAndTrade_1_0.Константи;
 using StorageAndTrade_1_0.Довідники;
 
@@ -18,7 +19,7 @@ namespace StorageAndTrade
         TreeView TreeViewGrid;
         Номенклатура_Папки_Дерево ДеревоПапок;
         CheckButton checkButtonIsHierarchy = new CheckButton("Враховувати ієрархію папок") { Active = true };
-        Entry entrySearch = new Entry() { PlaceholderText = "Пошук", WidthRequest = 300 };
+        SearchControl ПошукПоНазвіНоменклатури = new SearchControl();
 
         public Номенклатура() : base()
         {
@@ -40,8 +41,13 @@ namespace StorageAndTrade
             PackStart(hBoxBotton, false, false, 10);
 
             //Пошук
-            entrySearch.KeyReleaseEvent += OnEntrySearchKeyRelease;
-            hBoxBotton.PackStart(entrySearch, false, false, 10);
+            hBoxBotton.PackStart(ПошукПоНазвіНоменклатури, false, false, 2);
+            ПошукПоНазвіНоменклатури.QueryFind = ПошуковіЗапити.Номенклатура;
+            ПошукПоНазвіНоменклатури.Select = (UnigueID uid) =>
+            {
+                SelectPointerItem = new Номенклатура_Pointer(uid);
+                LoadTree();
+            };
 
             CreateToolbar();
 
@@ -95,9 +101,11 @@ namespace StorageAndTrade
 
         public void LoadTree()
         {
-            if (DirectoryPointerItem != null)
+            if (DirectoryPointerItem != null || SelectPointerItem != null)
             {
-                UnigueID unigueID = new UnigueID(DirectoryPointerItem.UnigueID.UGuid);
+                string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                UnigueID unigueID = new UnigueID(UidSelect);
+
                 Номенклатура_Objest? контрагенти_Objest = new Номенклатура_Pointer(unigueID).GetDirectoryObject();
                 if (контрагенти_Objest != null)
                     ДеревоПапок.Parent_Pointer = контрагенти_Objest.Папка;
@@ -275,14 +283,6 @@ namespace StorageAndTrade
         void OnCheckButtonIsHierarchyClicked(object? sender, EventArgs args)
         {
             LoadRecords();
-        }
-
-        void OnEntrySearchKeyRelease(object? sender, KeyReleaseEventArgs args)
-        {
-            if (args.Event.Key == Gdk.Key.Return || args.Event.Key == Gdk.Key.KP_Enter)
-            {
-
-            }
         }
 
         #endregion

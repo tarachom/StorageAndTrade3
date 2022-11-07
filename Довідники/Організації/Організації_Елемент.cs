@@ -135,6 +135,7 @@ namespace StorageAndTrade
             VBox vBox = new VBox();
 
             HBox hBox = new HBox();
+
             hBox.PackStart(new Label("Контакти:"), false, false, 5);
             vBox.PackStart(hBox, false, false, 5);
 
