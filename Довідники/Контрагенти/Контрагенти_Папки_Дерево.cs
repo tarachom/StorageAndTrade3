@@ -20,12 +20,12 @@ namespace StorageAndTrade
 
         public string UidOpenFolder { get; set; } = "";
 
-        public Контрагенти_Папки_Дерево(bool isVisibleClose = false) : base()
+        public Контрагенти_Папки_Дерево(bool IsSelectPointer = false) : base()
         {
             new VBox(false, 0);
             BorderWidth = 0;
 
-            if (isVisibleClose)
+            if (IsSelectPointer)
             {
                 //Кнопки
                 HBox hBoxBotton = new HBox();
@@ -34,6 +34,17 @@ namespace StorageAndTrade
                 bClose.Clicked += (object? sender, EventArgs args) => { Program.GeneralForm?.CloseCurrentPageNotebook(); };
 
                 hBoxBotton.PackStart(bClose, false, false, 10);
+
+                Button bEmptyPointer = new Button("Вибрати пустий елемент");
+                bEmptyPointer.Clicked += (object? sender, EventArgs args) =>
+                {
+                    if (CallBack_OnSelectPointer != null)
+                        CallBack_OnSelectPointer.Invoke(new Контрагенти_Папки_Pointer());
+
+                    Program.GeneralForm?.CloseCurrentPageNotebook();
+                };
+
+                hBoxBotton.PackStart(bEmptyPointer, false, false, 10);
 
                 PackStart(hBoxBotton, false, false, 10);
             }

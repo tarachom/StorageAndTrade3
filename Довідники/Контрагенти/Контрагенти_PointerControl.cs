@@ -34,7 +34,7 @@ namespace StorageAndTrade
         {
             Program.GeneralForm?.CreateNotebookPage("Вибір - Довідник: Контрагенти", () =>
             {
-                Контрагенти page = new Контрагенти();
+                Контрагенти page = new Контрагенти(true);
 
                 page.DirectoryPointerItem = Pointer;
                 page.CallBack_OnSelectPointer = (Контрагенти_Pointer selectPointer) =>

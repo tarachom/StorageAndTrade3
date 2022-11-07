@@ -24,6 +24,7 @@ namespace StorageAndTrade
         TextView Опис = new TextView();
         Контрагенти_Папки_PointerControl Родич = new Контрагенти_Папки_PointerControl() { Caption = "Папка:" };
         Контрагенти_ТабличнаЧастина_Контакти Контакти = new Контрагенти_ТабличнаЧастина_Контакти();
+        Контрагенти_ТабличнаЧастина_Файли Файли = new Контрагенти_ТабличнаЧастина_Файли();
 
         #endregion
 
@@ -84,7 +85,7 @@ namespace StorageAndTrade
 
             hBoxDesc.PackStart(new Label("Повна назва:") { Valign = Align.Start }, false, false, 5);
 
-            ScrolledWindow scrollTextView = new ScrolledWindow() { ShadowType = ShadowType.In, WidthRequest = 500, HeightRequest = 100 };
+            ScrolledWindow scrollTextView = new ScrolledWindow() { ShadowType = ShadowType.In, WidthRequest = 500, HeightRequest = 60 };
             scrollTextView.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
             scrollTextView.Add(НазваПовна);
 
@@ -103,7 +104,7 @@ namespace StorageAndTrade
 
             hBoxOpys.PackStart(new Label("Опис:") { Valign = Align.Start }, false, false, 5);
 
-            ScrolledWindow scrollTextViewOpys = new ScrolledWindow() { ShadowType = ShadowType.In, WidthRequest = 500, HeightRequest = 100 };
+            ScrolledWindow scrollTextViewOpys = new ScrolledWindow() { ShadowType = ShadowType.In, WidthRequest = 500, HeightRequest = 200 };
             scrollTextViewOpys.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
             scrollTextViewOpys.Add(Опис);
 
@@ -116,14 +117,26 @@ namespace StorageAndTrade
         {
             VBox vBox = new VBox();
 
-            HBox hBox = new HBox();
-            hBox.PackStart(new Label("Контакти:"), false, false, 5);
-            vBox.PackStart(hBox, false, false, 5);
+            //Контакти
+            HBox hBoxContaktyInfo = new HBox();
+            hBoxContaktyInfo.PackStart(new Label("Контакти:"), false, false, 5);
+            vBox.PackStart(hBoxContaktyInfo, false, false, 5);
 
             HBox hBoxContakty = new HBox();
             hBoxContakty.PackStart(Контакти, true, true, 5);
 
             vBox.PackStart(hBoxContakty, false, false, 0);
+
+            //Файли
+            HBox hBoxFilesInfo = new HBox();
+            hBoxFilesInfo.PackStart(new Label("Файли:"), false, false, 5);
+            vBox.PackStart(hBoxFilesInfo, false, false, 5);
+
+            HBox hBoxFiles = new HBox();
+            hBoxFiles.PackStart(Файли, true, true, 5);
+
+            vBox.PackStart(hBoxFiles, false, false, 0);
+
             hPaned.Pack2(vBox, false, false);
         }
 
@@ -146,6 +159,9 @@ namespace StorageAndTrade
 
             Контакти.Контрагенти_Objest = Контрагенти_Objest;
             Контакти.LoadRecords();
+
+            Файли.Контрагенти_Objest = Контрагенти_Objest;
+            Файли.LoadRecords();
         }
 
         void GetValue()
@@ -169,6 +185,7 @@ namespace StorageAndTrade
 
             Контрагенти_Objest.Save();
             Контакти.SaveRecords();
+            Файли.SaveRecords();
 
             Program.GeneralForm?.RenameCurrentPageNotebook($"Контрагент: {Контрагенти_Objest.Назва}");
 
