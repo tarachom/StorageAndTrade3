@@ -142,7 +142,7 @@ namespace StorageAndTrade
                         ПоступленняТоварівТаПослуг_Objest ПоступленняТоварівТаПослуг_Objest = new ПоступленняТоварівТаПослуг_Objest();
                         if (ПоступленняТоварівТаПослуг_Objest.Read(new UnigueID(uid)))
                         {
-                            Program.GeneralForm?.CreateNotebookPage($"Поступлення товарів та послуг: {ПоступленняТоварівТаПослуг_Objest.Назва}", () =>
+                            Program.GeneralForm?.CreateNotebookPage($"{ПоступленняТоварівТаПослуг_Objest.Назва}", () =>
                             {
                                 ПоступленняТоварівТаПослуг_Елемент page = new ПоступленняТоварівТаПослуг_Елемент
                                 {

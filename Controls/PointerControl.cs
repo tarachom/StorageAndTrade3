@@ -25,6 +25,16 @@ namespace StorageAndTrade
         protected virtual void OpenSelect(object? sender, EventArgs args) { }
         protected virtual void OnClear(object? sender, EventArgs args) { }
 
+        /// <summary>
+        /// Функція яка викликається перед відкриттям вибору
+        /// </summary>
+        public System.Action? BeforeClickOpenFunc { get; set; }
+
+        /// <summary>
+        /// Функція яка викликається після вибору.
+        /// </summary>
+        public System.Action? AfterSelectFunc { get; set; }
+
         public string Caption
         {
             get

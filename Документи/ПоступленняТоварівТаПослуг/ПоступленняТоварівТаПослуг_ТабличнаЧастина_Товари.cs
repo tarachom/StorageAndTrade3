@@ -246,6 +246,8 @@ namespace StorageAndTrade
                                 {
                                     ХарактеристикиНоменклатури page = new ХарактеристикиНоменклатури();
 
+                                    page.НоменклатураВласник.Pointer = запис.Номенклатура;
+                                    
                                     page.DirectoryPointerItem = запис.Характеристика;
                                     page.CallBack_OnSelectPointer = (ХарактеристикиНоменклатури_Pointer selectPointer) =>
                                     {

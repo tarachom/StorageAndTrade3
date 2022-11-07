@@ -18,7 +18,7 @@ namespace StorageAndTrade
         TreeView TreeViewGrid;
         Склади_Папки_Дерево ДеревоПапок;
         CheckButton checkButtonIsHierarchy = new CheckButton("Враховувати ієрархію папок") { Active = true };
-        Entry entrySearch = new Entry() { PlaceholderText = "Пошук", WidthRequest = 300 };
+        SearchControl ПошукПоНазві = new SearchControl();
 
         public Склади() : base()
         {
@@ -40,8 +40,13 @@ namespace StorageAndTrade
             PackStart(hBoxBotton, false, false, 10);
 
             //Пошук
-            entrySearch.KeyReleaseEvent += OnEntrySearchKeyRelease;
-            hBoxBotton.PackStart(entrySearch, false, false, 10);
+            hBoxBotton.PackStart(ПошукПоНазві, false, false, 2);
+            ПошукПоНазві.QueryFind = ПошуковіЗапити.Склади;
+            ПошукПоНазві.Select = (UnigueID uid) =>
+            {
+                SelectPointerItem = new Склади_Pointer(uid);
+                LoadTree();
+            };
 
             CreateToolbar();
 
@@ -95,9 +100,11 @@ namespace StorageAndTrade
 
         public void LoadTree()
         {
-            if (DirectoryPointerItem != null)
+            if (DirectoryPointerItem != null || SelectPointerItem != null)
             {
-                UnigueID unigueID = new UnigueID(DirectoryPointerItem.UnigueID.UGuid);
+                string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                UnigueID unigueID = new UnigueID(UidSelect);
+
                 Склади_Objest? контрагенти_Objest = new Склади_Pointer(unigueID).GetDirectoryObject();
                 if (контрагенти_Objest != null)
                     ДеревоПапок.Parent_Pointer = контрагенти_Objest.Папка;

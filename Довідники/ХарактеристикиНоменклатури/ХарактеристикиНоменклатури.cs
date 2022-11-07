@@ -16,6 +16,7 @@ namespace StorageAndTrade
         public System.Action<ХарактеристикиНоменклатури_Pointer>? CallBack_OnSelectPointer { get; set; }
 
         TreeView TreeViewGrid;
+        public Номенклатура_PointerControl НоменклатураВласник = new Номенклатура_PointerControl();
 
         public ХарактеристикиНоменклатури() : base()
         {
@@ -31,6 +32,13 @@ namespace StorageAndTrade
             hBoxBotton.PackStart(bClose, false, false, 10);
 
             PackStart(hBoxBotton, false, false, 10);
+
+            //Власник
+            hBoxBotton.PackStart(НоменклатураВласник, false, false, 2);
+            НоменклатураВласник.AfterSelectFunc = () =>
+            {
+                LoadRecords();
+            };
 
             CreateToolbar();
 
@@ -78,6 +86,13 @@ namespace StorageAndTrade
         {
             ТабличніСписки.ХарактеристикиНоменклатури_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.ХарактеристикиНоменклатури_Записи.DirectoryPointerItem = DirectoryPointerItem;
+
+            ТабличніСписки.ХарактеристикиНоменклатури_Записи.Where.Clear();
+            if (!НоменклатураВласник.Pointer.UnigueID.IsEmpty())
+            {
+                ТабличніСписки.ХарактеристикиНоменклатури_Записи.Where.Add(
+                    new Where(ХарактеристикиНоменклатури_Const.Номенклатура, Comparison.EQ, НоменклатураВласник.Pointer.UnigueID.UGuid));
+            }
 
             ТабличніСписки.ХарактеристикиНоменклатури_Записи.LoadRecords();
 

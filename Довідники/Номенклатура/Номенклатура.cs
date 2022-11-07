@@ -19,7 +19,7 @@ namespace StorageAndTrade
         TreeView TreeViewGrid;
         Номенклатура_Папки_Дерево ДеревоПапок;
         CheckButton checkButtonIsHierarchy = new CheckButton("Враховувати ієрархію папок") { Active = true };
-        SearchControl ПошукПоНазвіНоменклатури = new SearchControl();
+        SearchControl ПошукПоНазві = new SearchControl();
 
         public Номенклатура() : base()
         {
@@ -41,9 +41,9 @@ namespace StorageAndTrade
             PackStart(hBoxBotton, false, false, 10);
 
             //Пошук
-            hBoxBotton.PackStart(ПошукПоНазвіНоменклатури, false, false, 2);
-            ПошукПоНазвіНоменклатури.QueryFind = ПошуковіЗапити.Номенклатура;
-            ПошукПоНазвіНоменклатури.Select = (UnigueID uid) =>
+            hBoxBotton.PackStart(ПошукПоНазві, false, false, 2);
+            ПошукПоНазві.QueryFind = ПошуковіЗапити.Номенклатура;
+            ПошукПоНазві.Select = (UnigueID uid) =>
             {
                 SelectPointerItem = new Номенклатура_Pointer(uid);
                 LoadTree();

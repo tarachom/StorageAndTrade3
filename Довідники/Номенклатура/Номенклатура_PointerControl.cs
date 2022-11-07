@@ -32,6 +32,9 @@ namespace StorageAndTrade
 
         protected override void OpenSelect(object? sender, EventArgs args)
         {
+            if (BeforeClickOpenFunc != null)
+                BeforeClickOpenFunc.Invoke();
+
             Program.GeneralForm?.CreateNotebookPage("Вибір - Довідник: Номенклатура", () =>
             {
                 Номенклатура page = new Номенклатура();
@@ -40,6 +43,9 @@ namespace StorageAndTrade
                 page.CallBack_OnSelectPointer = (Номенклатура_Pointer selectPointer) =>
                 {
                     Pointer = selectPointer;
+
+                    if (AfterSelectFunc != null)
+                        AfterSelectFunc.Invoke();
                 };
 
                 page.LoadTree();
@@ -51,6 +57,9 @@ namespace StorageAndTrade
         protected override void OnClear(object? sender, EventArgs args)
         {
             Pointer = new Номенклатура_Pointer();
+
+            if (AfterSelectFunc != null)
+                AfterSelectFunc.Invoke();
         }
     }
 }
