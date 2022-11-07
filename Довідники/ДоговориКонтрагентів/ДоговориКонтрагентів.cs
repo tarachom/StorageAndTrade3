@@ -72,21 +72,25 @@ namespace StorageAndTrade
             Toolbar toolbar = new Toolbar();
             PackStart(toolbar, false, false, 0);
 
-            ToolButton upButton = new ToolButton(Stock.Add) { Label = "Додати", IsImportant = true };
-            upButton.Clicked += OnAddClick;
+            ToolButton addButton = new ToolButton(Stock.Add) { Label = "Додати", IsImportant = true };
+            addButton.Clicked += OnAddClick;
+            toolbar.Add(addButton);
+
+            ToolButton upButton = new ToolButton(Stock.Edit) { Label = "Редагувати", IsImportant = true };
+            upButton.Clicked += OnEditClick;
             toolbar.Add(upButton);
 
-            ToolButton refreshButton = new ToolButton(Stock.Refresh) { Label = "Обновити", IsImportant = true };
-            refreshButton.Clicked += OnRefreshClick;
-            toolbar.Add(refreshButton);
+            ToolButton copyButton = new ToolButton(Stock.Copy) { Label = "Копіювати", IsImportant = true };
+            copyButton.Clicked += OnCopyClick;
+            toolbar.Add(copyButton);
 
             ToolButton deleteButton = new ToolButton(Stock.Delete) { Label = "Видалити", IsImportant = true };
             deleteButton.Clicked += OnDeleteClick;
             toolbar.Add(deleteButton);
 
-            ToolButton copyButton = new ToolButton(Stock.Copy) { Label = "Копіювати", IsImportant = true };
-            copyButton.Clicked += OnCopyClick;
-            toolbar.Add(copyButton);
+            ToolButton refreshButton = new ToolButton(Stock.Refresh) { Label = "Обновити", IsImportant = true };
+            refreshButton.Clicked += OnRefreshClick;
+            toolbar.Add(refreshButton);
         }
 
         public void LoadRecords()
@@ -98,6 +102,47 @@ namespace StorageAndTrade
 
             if (ТабличніСписки.ДоговориКонтрагентів_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.ДоговориКонтрагентів_Записи.SelectPath, TreeViewGrid.Columns[0], false);
+        }
+
+        void OpenPageElement(bool IsNew, string uid = "")
+        {
+            if (IsNew)
+            {
+                Program.GeneralForm?.CreateNotebookPage($"Договір: *", () =>
+                {
+                    ДоговориКонтрагентів_Елемент page = new ДоговориКонтрагентів_Елемент
+                    {
+                        PageList = this,
+                        IsNew = true
+                    };
+
+                    page.SetValue();
+
+                    return page;
+                });
+            }
+            else
+            {
+                ДоговориКонтрагентів_Objest ДоговориКонтрагентів_Objest = new ДоговориКонтрагентів_Objest();
+                if (ДоговориКонтрагентів_Objest.Read(new UnigueID(uid)))
+                {
+                    Program.GeneralForm?.CreateNotebookPage($"Договір: {ДоговориКонтрагентів_Objest.Назва}", () =>
+                    {
+                        ДоговориКонтрагентів_Елемент page = new ДоговориКонтрагентів_Елемент
+                        {
+                            PageList = this,
+                            IsNew = false,
+                            ДоговориКонтрагентів_Objest = ДоговориКонтрагентів_Objest,
+                        };
+
+                        page.SetValue();
+
+                        return page;
+                    });
+                }
+                else
+                    Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+            }
         }
 
         #region TreeView
@@ -126,27 +171,7 @@ namespace StorageAndTrade
                     string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
 
                     if (DirectoryPointerItem == null)
-                    {
-                        ДоговориКонтрагентів_Objest ДоговориКонтрагентів_Objest = new ДоговориКонтрагентів_Objest();
-                        if (ДоговориКонтрагентів_Objest.Read(new UnigueID(uid)))
-                        {
-                            Program.GeneralForm?.CreateNotebookPage($"Договір: {ДоговориКонтрагентів_Objest.Назва}", () =>
-                            {
-                                ДоговориКонтрагентів_Елемент page = new ДоговориКонтрагентів_Елемент
-                                {
-                                    PageList = this,
-                                    IsNew = false,
-                                    ДоговориКонтрагентів_Objest = ДоговориКонтрагентів_Objest,
-                                };
-
-                                page.SetValue();
-
-                                return page;
-                            });
-                        }
-                        else
-                            Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                    }
+                        OpenPageElement(false, uid);
                     else
                     {
                         if (CallBack_OnSelectPointer != null)
@@ -164,18 +189,20 @@ namespace StorageAndTrade
 
         void OnAddClick(object? sender, EventArgs args)
         {
-            Program.GeneralForm?.CreateNotebookPage($"Договір: *", () =>
+            OpenPageElement(true);
+        }
+
+        void OnEditClick(object? sender, EventArgs args)
+        {
+            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
             {
-                ДоговориКонтрагентів_Елемент page = new ДоговориКонтрагентів_Елемент
+                TreeIter iter;
+                if (TreeViewGrid.Model.GetIter(out iter, TreeViewGrid.Selection.GetSelectedRows()[0]))
                 {
-                    PageList = this,
-                    IsNew = true
-                };
-
-                page.SetValue();
-
-                return page;
-            });
+                    string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
+                    OpenPageElement(false, uid);
+                }
+            }
         }
 
         void OnRefreshClick(object? sender, EventArgs args)

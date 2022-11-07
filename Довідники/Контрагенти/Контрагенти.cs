@@ -96,21 +96,25 @@ namespace StorageAndTrade
             Toolbar toolbar = new Toolbar();
             PackStart(toolbar, false, false, 0);
 
-            ToolButton upButton = new ToolButton(Stock.Add) { Label = "Додати", IsImportant = true };
-            upButton.Clicked += OnAddClick;
+            ToolButton addButton = new ToolButton(Stock.Add) { Label = "Додати", IsImportant = true };
+            addButton.Clicked += OnAddClick;
+            toolbar.Add(addButton);
+
+            ToolButton upButton = new ToolButton(Stock.Edit) { Label = "Редагувати", IsImportant = true };
+            upButton.Clicked += OnEditClick;
             toolbar.Add(upButton);
 
-            ToolButton refreshButton = new ToolButton(Stock.Refresh) { Label = "Обновити", IsImportant = true };
-            refreshButton.Clicked += OnRefreshClick;
-            toolbar.Add(refreshButton);
+            ToolButton copyButton = new ToolButton(Stock.Copy) { Label = "Копіювати", IsImportant = true };
+            copyButton.Clicked += OnCopyClick;
+            toolbar.Add(copyButton);
 
             ToolButton deleteButton = new ToolButton(Stock.Delete) { Label = "Видалити", IsImportant = true };
             deleteButton.Clicked += OnDeleteClick;
             toolbar.Add(deleteButton);
 
-            ToolButton copyButton = new ToolButton(Stock.Copy) { Label = "Копіювати", IsImportant = true };
-            copyButton.Clicked += OnCopyClick;
-            toolbar.Add(copyButton);
+            ToolButton refreshButton = new ToolButton(Stock.Refresh) { Label = "Обновити", IsImportant = true };
+            refreshButton.Clicked += OnRefreshClick;
+            toolbar.Add(refreshButton);
         }
 
         public void LoadTree()
@@ -145,6 +149,48 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.Контрагенти_Записи.SelectPath, TreeViewGrid.Columns[0], false);
         }
 
+        void OpenPageElement(bool IsNew, string uid = "")
+        {
+            if (IsNew)
+            {
+                Program.GeneralForm?.CreateNotebookPage($"Контрагент: *", () =>
+                {
+                    Контрагенти_Елемент page = new Контрагенти_Елемент
+                    {
+                        PageList = this,
+                        IsNew = true,
+                        РодичДляНового = ДеревоПапок.Parent_Pointer
+                    };
+
+                    page.SetValue();
+
+                    return page;
+                });
+            }
+            else
+            {
+                Контрагенти_Objest Контрагенти_Objest = new Контрагенти_Objest();
+                if (Контрагенти_Objest.Read(new UnigueID(uid)))
+                {
+                    Program.GeneralForm?.CreateNotebookPage($"Контрагент: {Контрагенти_Objest.Назва}", () =>
+                    {
+                        Контрагенти_Елемент page = new Контрагенти_Елемент
+                        {
+                            PageList = this,
+                            IsNew = false,
+                            Контрагенти_Objest = Контрагенти_Objest,
+                        };
+
+                        page.SetValue();
+
+                        return page;
+                    });
+                }
+                else
+                    Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+            }
+        }
+
         #region TreeView
 
         void OnRowActivated(object sender, RowActivatedArgs args)
@@ -171,27 +217,7 @@ namespace StorageAndTrade
                     string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
 
                     if (DirectoryPointerItem == null)
-                    {
-                        Контрагенти_Objest Контрагенти_Objest = new Контрагенти_Objest();
-                        if (Контрагенти_Objest.Read(new UnigueID(uid)))
-                        {
-                            Program.GeneralForm?.CreateNotebookPage($"Контрагент: {Контрагенти_Objest.Назва}", () =>
-                            {
-                                Контрагенти_Елемент page = new Контрагенти_Елемент
-                                {
-                                    PageList = this,
-                                    IsNew = false,
-                                    Контрагенти_Objest = Контрагенти_Objest,
-                                };
-
-                                page.SetValue();
-
-                                return page;
-                            });
-                        }
-                        else
-                            Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                    }
+                        OpenPageElement(false, uid);
                     else
                     {
                         if (CallBack_OnSelectPointer != null)
@@ -209,19 +235,20 @@ namespace StorageAndTrade
 
         void OnAddClick(object? sender, EventArgs args)
         {
-            Program.GeneralForm?.CreateNotebookPage($"Контрагент: *", () =>
+            OpenPageElement(true);
+        }
+
+        void OnEditClick(object? sender, EventArgs args)
+        {
+            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
             {
-                Контрагенти_Елемент page = new Контрагенти_Елемент
+                TreeIter iter;
+                if (TreeViewGrid.Model.GetIter(out iter, TreeViewGrid.Selection.GetSelectedRows()[0]))
                 {
-                    PageList = this,
-                    IsNew = true,
-                    РодичДляНового = ДеревоПапок.Parent_Pointer
-                };
-
-                page.SetValue();
-
-                return page;
-            });
+                    string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
+                    OpenPageElement(false, uid);
+                }
+            }
         }
 
         void OnRefreshClick(object? sender, EventArgs args)

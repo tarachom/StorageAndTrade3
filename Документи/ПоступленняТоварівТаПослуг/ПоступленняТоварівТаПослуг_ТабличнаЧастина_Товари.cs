@@ -267,7 +267,7 @@ namespace StorageAndTrade
                             {
                                 Program.GeneralForm?.CreateNotebookPage("Вибір - Довідник: Серія", () =>
                                 {
-                                    СеріїНоменклатури page = new СеріїНоменклатури();
+                                    СеріїНоменклатури page = new СеріїНоменклатури(true);
 
                                     page.DirectoryPointerItem = запис.Серія;
                                     page.CallBack_OnSelectPointer = (СеріїНоменклатури_Pointer selectPointer) =>
@@ -289,7 +289,7 @@ namespace StorageAndTrade
                             {
                                 Program.GeneralForm?.CreateNotebookPage("Вибір - Довідник: Пакування", () =>
                                 {
-                                    ПакуванняОдиниціВиміру page = new ПакуванняОдиниціВиміру();
+                                    ПакуванняОдиниціВиміру page = new ПакуванняОдиниціВиміру(true);
 
                                     page.DirectoryPointerItem = запис.Пакування;
                                     page.CallBack_OnSelectPointer = (ПакуванняОдиниціВиміру_Pointer selectPointer) =>
@@ -311,7 +311,7 @@ namespace StorageAndTrade
                             {
                                 Program.GeneralForm?.CreateNotebookPage("Вибір - Довідник: Склад", () =>
                                 {
-                                    Склади page = new Склади();
+                                    Склади page = new Склади(true);
 
                                     page.DirectoryPointerItem = запис.Склад;
                                     page.CallBack_OnSelectPointer = (Склади_Pointer selectPointer) =>

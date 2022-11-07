@@ -92,6 +92,32 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.ПартіяТоварівКомпозит_Записи.SelectPath, TreeViewGrid.Columns[0], false);
         }
 
+        void OpenPageElement(bool IsNew, string uid = "")
+        {
+            if (!IsNew)
+            {
+                ПартіяТоварівКомпозит_Objest ПартіяТоварівКомпозит_Objest = new ПартіяТоварівКомпозит_Objest();
+                if (ПартіяТоварівКомпозит_Objest.Read(new UnigueID(uid)))
+                {
+                    Program.GeneralForm?.CreateNotebookPage($"Партія: {ПартіяТоварівКомпозит_Objest.Назва}", () =>
+                    {
+                        ПартіяТоварівКомпозит_Елемент page = new ПартіяТоварівКомпозит_Елемент
+                        {
+                            PageList = this,
+                            IsNew = false,
+                            ПартіяТоварівКомпозит_Objest = ПартіяТоварівКомпозит_Objest,
+                        };
+
+                        page.SetValue();
+
+                        return page;
+                    });
+                }
+                else
+                    Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+            }
+        }
+
         #region TreeView
 
         void OnRowActivated(object sender, RowActivatedArgs args)
@@ -118,27 +144,7 @@ namespace StorageAndTrade
                     string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
 
                     if (DirectoryPointerItem == null)
-                    {
-                        ПартіяТоварівКомпозит_Objest ПартіяТоварівКомпозит_Objest = new ПартіяТоварівКомпозит_Objest();
-                        if (ПартіяТоварівКомпозит_Objest.Read(new UnigueID(uid)))
-                        {
-                            Program.GeneralForm?.CreateNotebookPage($"Партія: {ПартіяТоварівКомпозит_Objest.Назва}", () =>
-                            {
-                                ПартіяТоварівКомпозит_Елемент page = new ПартіяТоварівКомпозит_Елемент
-                                {
-                                    PageList = this,
-                                    IsNew = false,
-                                    ПартіяТоварівКомпозит_Objest = ПартіяТоварівКомпозит_Objest,
-                                };
-
-                                page.SetValue();
-
-                                return page;
-                            });
-                        }
-                        else
-                            Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                    }
+                        OpenPageElement(false, uid);
                     else
                     {
                         if (CallBack_OnSelectPointer != null)
