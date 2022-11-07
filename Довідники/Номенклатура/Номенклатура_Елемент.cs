@@ -18,16 +18,21 @@ namespace StorageAndTrade
         public Номенклатура_Папки_Pointer РодичДляНового { get; set; } = new Номенклатура_Папки_Pointer();
         public Номенклатура_Objest Номенклатура_Objest { get; set; } = new Номенклатура_Objest();
 
+        #region Field
+
         Entry Код = new Entry() { WidthRequest = 100 };
         Entry Назва = new Entry() { WidthRequest = 500 };
         TextView НазваПовна = new TextView();
         TextView Опис = new TextView();
         ComboBoxText ТипНоменклатури = new ComboBoxText();
         Entry Артикул = new Entry() { WidthRequest = 500 };
-        Виробники_PointerControl Виробник = new Виробники_PointerControl() { WidthPresentation = 420 };
+        Виробники_PointerControl Виробник = new Виробники_PointerControl() { WidthPresentation = 300 };
         Номенклатура_Папки_PointerControl Родич = new Номенклатура_Папки_PointerControl() { Caption = "Папка:", WidthPresentation = 420 };
-        ВидиНоменклатури_PointerControl ВидНоменклатури = new ВидиНоменклатури_PointerControl() { Caption = "Вид:", WidthPresentation = 420 };
-        ПакуванняОдиниціВиміру_PointerControl ОдиницяВиміру = new ПакуванняОдиниціВиміру_PointerControl() { WidthPresentation = 420 };
+        ВидиНоменклатури_PointerControl ВидНоменклатури = new ВидиНоменклатури_PointerControl() { Caption = "Вид:", WidthPresentation = 300 };
+        ПакуванняОдиниціВиміру_PointerControl ОдиницяВиміру = new ПакуванняОдиниціВиміру_PointerControl() { WidthPresentation = 300 };
+        Номенклатура_ТабличнаЧастина_Файли Файли = new Номенклатура_ТабличнаЧастина_Файли();
+
+        #endregion
 
         public Номенклатура_Елемент() : base()
         {
@@ -109,6 +114,12 @@ namespace StorageAndTrade
             hBoxType.PackStart(new Label("Тип:"), false, false, 5);
             hBoxType.PackStart(ТипНоменклатури, false, false, 5);
 
+            //ОдиницяВиміру
+            HBox hBoxOdynyca = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxOdynyca, false, false, 5);
+
+            hBoxOdynyca.PackStart(ОдиницяВиміру, false, false, 5);
+
             //ВидНоменклатури
             HBox hBoxVidNumeklatury = new HBox() { Halign = Align.End };
             vBox.PackStart(hBoxVidNumeklatury, false, false, 5);
@@ -120,12 +131,6 @@ namespace StorageAndTrade
             vBox.PackStart(hBoxVirobnyk, false, false, 5);
 
             hBoxVirobnyk.PackStart(Виробник, false, false, 5);
-
-            //ОдиницяВиміру
-            HBox hBoxOdynyca = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxOdynyca, false, false, 5);
-
-            hBoxOdynyca.PackStart(ОдиницяВиміру, false, false, 5);
 
             //Опис
             HBox hBoxOpys = new HBox() { Halign = Align.End };
@@ -146,8 +151,15 @@ namespace StorageAndTrade
         {
             VBox vBox = new VBox();
 
+            HBox hBox = new HBox();
 
+            hBox.PackStart(new Label("Файли:"), false, false, 5);
+            vBox.PackStart(hBox, false, false, 5);
 
+            HBox hBoxContakty = new HBox();
+            hBoxContakty.PackStart(Файли, true, true, 5);
+
+            vBox.PackStart(hBoxContakty, false, false, 0);
             hPaned.Pack2(vBox, false, false);
         }
 

@@ -471,11 +471,6 @@ namespace StorageAndTrade
 
         #region TreeView
 
-        void НоменклатураClicked(object? sender, EventArgs args)
-        {
-            Console.WriteLine(1);
-        }
-
         void AddColumn()
         {
             //НомерРядка
