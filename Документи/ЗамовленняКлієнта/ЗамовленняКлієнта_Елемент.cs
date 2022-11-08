@@ -5,19 +5,19 @@ using StorageAndTrade_1_0.Документи;
 
 namespace StorageAndTrade
 {
-    class ПоступленняТоварівТаПослуг_Елемент : VBox
+    class ЗамовленняКлієнта_Елемент : VBox
     {
-        public ПоступленняТоварівТаПослуг? PageList { get; set; }
+        public ЗамовленняКлієнта? PageList { get; set; }
 
         public bool IsNew { get; set; } = true;
 
-        public ПоступленняТоварівТаПослуг_Objest ПоступленняТоварівТаПослуг_Objest { get; set; } = new ПоступленняТоварівТаПослуг_Objest();
+        public ЗамовленняКлієнта_Objest ЗамовленняКлієнта_Objest { get; set; } = new ЗамовленняКлієнта_Objest();
 
         Entry НомерДок = new Entry() { WidthRequest = 100 };
         Entry Назва = new Entry() { WidthRequest = 500 };
-        ПоступленняТоварівТаПослуг_ТабличнаЧастина_Товари Товари = new ПоступленняТоварівТаПослуг_ТабличнаЧастина_Товари();
+        ЗамовленняКлієнта_ТабличнаЧастина_Товари Товари = new ЗамовленняКлієнта_ТабличнаЧастина_Товари();
 
-        public ПоступленняТоварівТаПослуг_Елемент() : base()
+        public ЗамовленняКлієнта_Елемент() : base()
         {
             new VBox();
             HBox hBox = new HBox();
@@ -80,21 +80,21 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                ПоступленняТоварівТаПослуг_Objest.НомерДок = (++НумераціяДокументів.ПоступленняТоварівТаПослуг_Const).ToString("D8");
-                ПоступленняТоварівТаПослуг_Objest.ДатаДок = DateTime.Now;
+                ЗамовленняКлієнта_Objest.НомерДок = (++НумераціяДокументів.ЗамовленняКлієнта_Const).ToString("D8");
+                ЗамовленняКлієнта_Objest.ДатаДок = DateTime.Now;
             }
 
-            НомерДок.Text = ПоступленняТоварівТаПослуг_Objest.НомерДок;
-            Назва.Text = ПоступленняТоварівТаПослуг_Objest.Назва;
+            НомерДок.Text = ЗамовленняКлієнта_Objest.НомерДок;
+            Назва.Text = ЗамовленняКлієнта_Objest.Назва;
 
-            Товари.ПоступленняТоварівТаПослуг_Objest = ПоступленняТоварівТаПослуг_Objest;
+            Товари.ЗамовленняКлієнта_Objest = ЗамовленняКлієнта_Objest;
             Товари.LoadRecords();
         }
 
         void GetValue()
         {
-            ПоступленняТоварівТаПослуг_Objest.НомерДок = НомерДок.Text;
-            ПоступленняТоварівТаПослуг_Objest.Назва = $"Поступлення товарів та послуг №{ПоступленняТоварівТаПослуг_Objest.НомерДок} від {ПоступленняТоварівТаПослуг_Objest.ДатаДок.ToShortDateString()}";
+            ЗамовленняКлієнта_Objest.НомерДок = НомерДок.Text;
+            ЗамовленняКлієнта_Objest.Назва = $"Замовлення клієнта №{ЗамовленняКлієнта_Objest.НомерДок} від {ЗамовленняКлієнта_Objest.ДатаДок.ToShortDateString()}";
         }
 
         #endregion
@@ -102,20 +102,20 @@ namespace StorageAndTrade
         void OnSaveClick(object? sender, EventArgs args)
         {
             if (IsNew)
-                ПоступленняТоварівТаПослуг_Objest.New();
+                ЗамовленняКлієнта_Objest.New();
 
             GetValue();
 
-            ПоступленняТоварівТаПослуг_Objest.Save();
+            ЗамовленняКлієнта_Objest.Save();
             Товари.SaveRecords();
 
-            Program.GeneralForm?.RenameCurrentPageNotebook($"{ПоступленняТоварівТаПослуг_Objest.Назва}");
+            Program.GeneralForm?.RenameCurrentPageNotebook($"{ЗамовленняКлієнта_Objest.Назва}");
 
             if (PageList != null)
             {
                 Товари.LoadRecords();
 
-                PageList.SelectPointerItem = ПоступленняТоварівТаПослуг_Objest.GetDocumentPointer();
+                PageList.SelectPointerItem = ЗамовленняКлієнта_Objest.GetDocumentPointer();
                 PageList.LoadRecords();
             }
         }
