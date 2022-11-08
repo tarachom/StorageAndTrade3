@@ -17,6 +17,8 @@ namespace StorageAndTrade
         Entry Назва = new Entry() { WidthRequest = 500 };
         ВведенняЗалишків_ТабличнаЧастина_Товари Товари = new ВведенняЗалишків_ТабличнаЧастина_Товари();
         ВведенняЗалишків_ТабличнаЧастина_Каси Каси = new ВведенняЗалишків_ТабличнаЧастина_Каси();
+        ВведенняЗалишків_ТабличнаЧастина_БанківськіРахунки БанківськіРахунки = new ВведенняЗалишків_ТабличнаЧастина_БанківськіРахунки();
+        ВведенняЗалишків_ТабличнаЧастина_РозрахункиЗКонтрагентами РозрахункиЗКонтрагентами = new ВведенняЗалишків_ТабличнаЧастина_РозрахункиЗКонтрагентами();
 
         public ВведенняЗалишків_Елемент() : base()
         {
@@ -72,6 +74,8 @@ namespace StorageAndTrade
             notebook.TabPos = PositionType.Top;
             notebook.AppendPage(Товари, new Label("Товари"));
             notebook.AppendPage(Каси, new Label("Каси"));
+            notebook.AppendPage(БанківськіРахунки, new Label("Банківські рахунки"));
+            notebook.AppendPage(РозрахункиЗКонтрагентами, new Label("Розрахунки з контрагентами"));
 
             hPaned.Pack2(notebook, true, false);
         }
@@ -94,6 +98,12 @@ namespace StorageAndTrade
 
             Каси.ВведенняЗалишків_Objest = ВведенняЗалишків_Objest;
             Каси.LoadRecords();
+
+            БанківськіРахунки.ВведенняЗалишків_Objest = ВведенняЗалишків_Objest;
+            БанківськіРахунки.LoadRecords();
+
+            РозрахункиЗКонтрагентами.ВведенняЗалишків_Objest = ВведенняЗалишків_Objest;
+            РозрахункиЗКонтрагентами.LoadRecords();
         }
 
         void GetValue()
@@ -114,6 +124,8 @@ namespace StorageAndTrade
             ВведенняЗалишків_Objest.Save();
             Товари.SaveRecords();
             Каси.SaveRecords();
+            БанківськіРахунки.SaveRecords();
+            РозрахункиЗКонтрагентами.SaveRecords();
 
             Program.GeneralForm?.RenameCurrentPageNotebook($"{ВведенняЗалишків_Objest.Назва}");
 
@@ -121,6 +133,8 @@ namespace StorageAndTrade
             {
                 Товари.LoadRecords();
                 Каси.LoadRecords();
+                БанківськіРахунки.LoadRecords();
+                РозрахункиЗКонтрагентами.LoadRecords();
 
                 PageList.SelectPointerItem = ВведенняЗалишків_Objest.GetDocumentPointer();
                 PageList.LoadRecords();
