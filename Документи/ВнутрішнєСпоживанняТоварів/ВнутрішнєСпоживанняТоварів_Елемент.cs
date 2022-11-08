@@ -5,19 +5,19 @@ using StorageAndTrade_1_0.Документи;
 
 namespace StorageAndTrade
 {
-    class ВведенняЗалишків_Елемент : VBox
+    class ВнутрішнєСпоживанняТоварів_Елемент : VBox
     {
-        public ВведенняЗалишків? PageList { get; set; }
+        public ВнутрішнєСпоживанняТоварів? PageList { get; set; }
 
         public bool IsNew { get; set; } = true;
 
-        public ВведенняЗалишків_Objest ВведенняЗалишків_Objest { get; set; } = new ВведенняЗалишків_Objest();
+        public ВнутрішнєСпоживанняТоварів_Objest ВнутрішнєСпоживанняТоварів_Objest { get; set; } = new ВнутрішнєСпоживанняТоварів_Objest();
 
         Entry НомерДок = new Entry() { WidthRequest = 100 };
         Entry Назва = new Entry() { WidthRequest = 500 };
-        ВведенняЗалишків_ТабличнаЧастина_Товари Товари = new ВведенняЗалишків_ТабличнаЧастина_Товари();
+        ВнутрішнєСпоживанняТоварів_ТабличнаЧастина_Товари Товари = new ВнутрішнєСпоживанняТоварів_ТабличнаЧастина_Товари();
 
-        public ВведенняЗалишків_Елемент() : base()
+        public ВнутрішнєСпоживанняТоварів_Елемент() : base()
         {
             new VBox();
             HBox hBox = new HBox();
@@ -76,21 +76,21 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                ВведенняЗалишків_Objest.НомерДок = (++НумераціяДокументів.ВведенняЗалишків_Const).ToString("D8");
-                ВведенняЗалишків_Objest.ДатаДок = DateTime.Now;
+                ВнутрішнєСпоживанняТоварів_Objest.НомерДок = (++НумераціяДокументів.ВнутрішнєСпоживанняТоварів_Const).ToString("D8");
+                ВнутрішнєСпоживанняТоварів_Objest.ДатаДок = DateTime.Now;
             }
 
-            НомерДок.Text = ВведенняЗалишків_Objest.НомерДок;
-            Назва.Text = ВведенняЗалишків_Objest.Назва;
+            НомерДок.Text = ВнутрішнєСпоживанняТоварів_Objest.НомерДок;
+            Назва.Text = ВнутрішнєСпоживанняТоварів_Objest.Назва;
 
-            Товари.ВведенняЗалишків_Objest = ВведенняЗалишків_Objest;
+            Товари.ВнутрішнєСпоживанняТоварів_Objest = ВнутрішнєСпоживанняТоварів_Objest;
             Товари.LoadRecords();
         }
 
         void GetValue()
         {
-            ВведенняЗалишків_Objest.НомерДок = НомерДок.Text;
-            ВведенняЗалишків_Objest.Назва = $"Введення залишків №{ВведенняЗалишків_Objest.НомерДок} від {ВведенняЗалишків_Objest.ДатаДок.ToShortDateString()}";
+            ВнутрішнєСпоживанняТоварів_Objest.НомерДок = НомерДок.Text;
+            ВнутрішнєСпоживанняТоварів_Objest.Назва = $"Внутрішнє споживання товарів №{ВнутрішнєСпоживанняТоварів_Objest.НомерДок} від {ВнутрішнєСпоживанняТоварів_Objest.ДатаДок.ToShortDateString()}";
         }
 
         #endregion
@@ -98,20 +98,20 @@ namespace StorageAndTrade
         void OnSaveClick(object? sender, EventArgs args)
         {
             if (IsNew)
-                ВведенняЗалишків_Objest.New();
+                ВнутрішнєСпоживанняТоварів_Objest.New();
 
             GetValue();
 
-            ВведенняЗалишків_Objest.Save();
+            ВнутрішнєСпоживанняТоварів_Objest.Save();
             Товари.SaveRecords();
 
-            Program.GeneralForm?.RenameCurrentPageNotebook($"{ВведенняЗалишків_Objest.Назва}");
+            Program.GeneralForm?.RenameCurrentPageNotebook($"{ВнутрішнєСпоживанняТоварів_Objest.Назва}");
 
             if (PageList != null)
             {
                 Товари.LoadRecords();
 
-                PageList.SelectPointerItem = ВведенняЗалишків_Objest.GetDocumentPointer();
+                PageList.SelectPointerItem = ВнутрішнєСпоживанняТоварів_Objest.GetDocumentPointer();
                 PageList.LoadRecords();
             }
         }

@@ -105,7 +105,7 @@ namespace StorageAndTrade
             АктВиконанихРобіт_Objest.Save();
             Послуги.SaveRecords();
 
-            Program.GeneralForm?.RenameCurrentPageNotebook($"АктВиконанихРобіт: {АктВиконанихРобіт_Objest.Назва}");
+            Program.GeneralForm?.RenameCurrentPageNotebook($"{АктВиконанихРобіт_Objest.Назва}");
 
             if (PageList != null)
             {
