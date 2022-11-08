@@ -519,7 +519,11 @@ namespace StorageAndTrade
             Ціна.Edited += TextChanged;
             Ціна.Data.Add("Column", (int)Columns.Ціна);
 
-            TreeViewGrid.AppendColumn(new TreeViewColumn("Ціна", Ціна, "text", (int)Columns.Ціна) { MinWidth = 100 });
+            TreeViewColumn Column_Ціна = new TreeViewColumn("Ціна", Ціна, "text", (int)Columns.Ціна) { MinWidth = 100 };
+            //Column_Ціна.SetCellDataFunc(Ціна, new TreeCellDataFunc(RenderArtistName));
+            Column_Ціна.SetCellDataFunc(Ціна, new CellLayoutDataFunc(RenderArtistName2));
+
+            TreeViewGrid.AppendColumn(Column_Ціна);
 
             //Сума
             CellRendererText Сума = new CellRendererText() { Editable = true };
@@ -541,6 +545,23 @@ namespace StorageAndTrade
 
             TreeViewGrid.AppendColumn(СкладНазва);
         }
+
+        void RenderArtistName2(ICellLayout cellLayout, CellRenderer cell, ITreeModel model, TreeIter iter)
+        {
+            CellRendererText cell2 = (CellRendererText)cell;
+
+                cell2.Text = MathF.Round(float.Parse(cell2.Text), 2).ToString("0.00");
+        }
+
+        // void RenderArtistName(TreeViewColumn column, CellRenderer cell, ITreeModel model, TreeIter iter)
+        // {
+        //     // model.GetValue(iter, 0);
+        //     // (cell as Gtk.CellRendererText).Text = song.Artist;
+
+        //     ((Gtk.CellRendererText)cell).Foreground = "red";
+
+        //     Console.WriteLine(((Gtk.CellRendererText)cell).Text);
+        // }
 
         void TextChanged(object sender, EditedArgs args)
         {

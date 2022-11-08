@@ -12,10 +12,10 @@ namespace StorageAndTrade
             PackStart(labelCaption, false, false, 5);
             PackStart(entryText, false, false, 0);
 
-            Button bOpen = new Button(new Image("find.png"));
+            Button bOpen = new Button(new Image("images/find.png"));
             bOpen.Clicked += OpenSelect;
 
-            Button bClear = new Button(new Image("doc.png"));
+            Button bClear = new Button(new Image("images/clean.png"));
             bClear.Clicked += OnClear;
 
             PackStart(bOpen, false, false, 2);

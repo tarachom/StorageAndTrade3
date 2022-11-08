@@ -64,7 +64,7 @@ namespace StorageAndTrade
             };
 
             //Характеристики
-            LinkButton linkButtonHar = new LinkButton(" Характеристики номеклатури") { Halign = Align.Start, Image = new Image("doc.png"), AlwaysShowImage = true };
+            LinkButton linkButtonHar = new LinkButton(" Характеристики номеклатури") { Halign = Align.Start, Image = new Image("images/doc.png"), AlwaysShowImage = true };
             linkButtonHar.Clicked += (object? sender, EventArgs args) =>
             {
                 Program.GeneralForm?.CreateNotebookPage("Довідник: Характеристики номенклатури", () =>

@@ -16,7 +16,7 @@ namespace StorageAndTrade
         {
             SetDefaultSize(1500, 900);
             SetPosition(WindowPosition.Center);
-            SetDefaultIconFromFile("form.ico");
+            SetDefaultIconFromFile("images/form.ico");
 
             DeleteEvent += delegate { Application.Quit(); };
 
@@ -46,15 +46,16 @@ namespace StorageAndTrade
         void CreateLeftMenu(HBox hbox)
         {
             VBox vbox = new VBox();
+            vbox.BorderWidth = 15;
 
-            ScrolledWindow scrolLeftMenu = new ScrolledWindow() { ShadowType = ShadowType.In, WidthRequest = 200 };
+            ScrolledWindow scrolLeftMenu = new ScrolledWindow() { ShadowType = ShadowType.In, WidthRequest = 210 };
             scrolLeftMenu.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
             scrolLeftMenu.Add(vbox);
 
-            CreateItemLeftMenu(vbox, "Документи", OnClick_Документи, "books.ico");
-            CreateItemLeftMenu(vbox, "Довідники", OnClick_Довідники, "images.ico");
-            CreateItemLeftMenu(vbox, "Журнали", OnClick_Журнали, "fonts.ico");
-            CreateItemLeftMenu(vbox, "Налаштування", OnClick_Налаштування, "photos.ico");
+            CreateItemLeftMenu(vbox, "Документи", OnClick_Документи, "images/documents.png");
+            CreateItemLeftMenu(vbox, "Довідники", OnClick_Довідники, "images/directory.png");
+            CreateItemLeftMenu(vbox, "Журнали", OnClick_Журнали, "images/journal.png");
+            CreateItemLeftMenu(vbox, "Налаштування", OnClick_Налаштування, "images/preferences.png");
 
             hbox.PackStart(scrolLeftMenu, false, false, 0);
         }

@@ -26,19 +26,12 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 07.11.2022 17:17:05
+ * Дата конфігурації: 08.11.2022 13:27:18
  *
  */
  
 using Gtk;
 using AccountingSoftware;
-
-/*
-namespace StorageAndTrade_1_0.ТабличніСписки
-{
-    //
-}
-*/
 
 namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 {
@@ -48,7 +41,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class Організації_Записи
     {
-        string Image = "doc.png";
+        string Image = "images/doc.png";
         string ID = "";
         
         string Код = "";
@@ -154,7 +147,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class Номенклатура_Записи
     {
-        string Image = "doc.png";
+        string Image = "images/doc.png";
         string ID = "";
         
         string Код = "";
@@ -289,7 +282,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class Виробники_Записи
     {
-        string Image = "doc.png";
+        string Image = "images/doc.png";
         string ID = "";
         
         string Код = "";
@@ -383,7 +376,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class ВидиНоменклатури_Записи
     {
-        string Image = "doc.png";
+        string Image = "images/doc.png";
         string ID = "";
         
         string Код = "";
@@ -477,7 +470,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class ПакуванняОдиниціВиміру_Записи
     {
-        string Image = "doc.png";
+        string Image = "images/doc.png";
         string ID = "";
         
         string Код = "";
@@ -571,7 +564,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class Валюти_Записи
     {
-        string Image = "doc.png";
+        string Image = "images/doc.png";
         string ID = "";
         
         string Код = "";
@@ -675,7 +668,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class Контрагенти_Записи
     {
-        string Image = "doc.png";
+        string Image = "images/doc.png";
         string ID = "";
         
         string Код = "";
@@ -781,7 +774,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class Склади_Записи
     {
-        string Image = "doc.png";
+        string Image = "images/doc.png";
         string ID = "";
         
         string Код = "";
@@ -875,7 +868,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class ВидиЦін_Записи
     {
-        string Image = "doc.png";
+        string Image = "images/doc.png";
         string ID = "";
         
         string Код = "";
@@ -981,7 +974,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class ВидиЦінПостачальників_Записи
     {
-        string Image = "doc.png";
+        string Image = "images/doc.png";
         string ID = "";
         
         string Код = "";
@@ -1075,7 +1068,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class Користувачі_Записи
     {
-        string Image = "doc.png";
+        string Image = "images/doc.png";
         string ID = "";
         
         string Код = "";
@@ -1169,7 +1162,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class ФізичніОсоби_Записи
     {
-        string Image = "doc.png";
+        string Image = "images/doc.png";
         string ID = "";
         
         string Код = "";
@@ -1263,7 +1256,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class СтруктураПідприємства_Записи
     {
-        string Image = "doc.png";
+        string Image = "images/doc.png";
         string ID = "";
         
         string Код = "";
@@ -1357,7 +1350,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class КраїниСвіту_Записи
     {
-        string Image = "doc.png";
+        string Image = "images/doc.png";
         string ID = "";
         
         string Код = "";
@@ -1451,7 +1444,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class Файли_Записи
     {
-        string Image = "doc.png";
+        string Image = "images/doc.png";
         string ID = "";
         
         string Код = "";
@@ -1545,7 +1538,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class ХарактеристикиНоменклатури_Записи
     {
-        string Image = "doc.png";
+        string Image = "images/doc.png";
         string ID = "";
         
         string Код = "";
@@ -1666,7 +1659,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class Каси_Записи
     {
-        string Image = "doc.png";
+        string Image = "images/doc.png";
         string ID = "";
         
         string Код = "";
@@ -1772,7 +1765,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class БанківськіРахункиОрганізацій_Записи
     {
-        string Image = "doc.png";
+        string Image = "images/doc.png";
         string ID = "";
         
         string Код = "";
@@ -1878,7 +1871,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class ДоговориКонтрагентів_Записи
     {
-        string Image = "doc.png";
+        string Image = "images/doc.png";
         string ID = "";
         
         string Код = "";
@@ -1989,7 +1982,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class БанківськіРахункиКонтрагентів_Записи
     {
-        string Image = "doc.png";
+        string Image = "images/doc.png";
         string ID = "";
         
         string Код = "";
@@ -2095,7 +2088,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class СтаттяРухуКоштів_Записи
     {
-        string Image = "doc.png";
+        string Image = "images/doc.png";
         string ID = "";
         
         string Назва = "";
@@ -2189,7 +2182,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class СеріїНоменклатури_Записи
     {
-        string Image = "doc.png";
+        string Image = "images/doc.png";
         string ID = "";
         
         string Номер = "";
@@ -2278,7 +2271,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class ПартіяТоварівКомпозит_Записи
     {
-        string Image = "doc.png";
+        string Image = "images/doc.png";
         string ID = "";
         
         string Назва = "";
@@ -2401,7 +2394,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class ВидиЗапасів_Записи
     {
-        string Image = "doc.png";
+        string Image = "images/doc.png";
         string ID = "";
         
         string Назва = "";
@@ -2490,7 +2483,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class ПродажіДокументКомпозит_Записи
     {
-        string Image = "doc.png";
+        string Image = "images/doc.png";
         string ID = "";
         
         string Назва = "";
@@ -2579,7 +2572,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class АналітикаНоменклатуриКомпозит_Записи
     {
-        string Image = "doc.png";
+        string Image = "images/doc.png";
         string ID = "";
         
         string Назва = "";
@@ -2668,7 +2661,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class АналітикаКонтрагентівКомпозит_Записи
     {
-        string Image = "doc.png";
+        string Image = "images/doc.png";
         string ID = "";
         
         string Назва = "";
@@ -2757,7 +2750,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class АналітикаПартійКомпозит_Записи
     {
-        string Image = "doc.png";
+        string Image = "images/doc.png";
         string ID = "";
         
         string Назва = "";
@@ -2909,7 +2902,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class ЗамовленняПостачальнику_Записи
     {
-        string Image = "doc.png";
+        string Image = "images/doc.png";
         bool Spend = false;
         string ID = "";
         
@@ -3075,7 +3068,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class ПоступленняТоварівТаПослуг_Записи
     {
-        string Image = "doc.png";
+        string Image = "images/doc.png";
         bool Spend = false;
         string ID = "";
         
@@ -3253,7 +3246,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class ЗамовленняКлієнта_Записи
     {
-        string Image = "doc.png";
+        string Image = "images/doc.png";
         bool Spend = false;
         string ID = "";
         
@@ -3431,7 +3424,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class РеалізаціяТоварівТаПослуг_Записи
     {
-        string Image = "doc.png";
+        string Image = "images/doc.png";
         bool Spend = false;
         string ID = "";
         
@@ -3609,7 +3602,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class ВстановленняЦінНоменклатури_Записи
     {
-        string Image = "doc.png";
+        string Image = "images/doc.png";
         bool Spend = false;
         string ID = "";
         
@@ -3758,7 +3751,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class ПрихіднийКасовийОрдер_Записи
     {
-        string Image = "doc.png";
+        string Image = "images/doc.png";
         bool Spend = false;
         string ID = "";
         
@@ -3936,7 +3929,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class РозхіднийКасовийОрдер_Записи
     {
-        string Image = "doc.png";
+        string Image = "images/doc.png";
         bool Spend = false;
         string ID = "";
         
@@ -4114,7 +4107,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class ПереміщенняТоварів_Записи
     {
-        string Image = "doc.png";
+        string Image = "images/doc.png";
         bool Spend = false;
         string ID = "";
         
@@ -4263,7 +4256,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class ПоверненняТоварівПостачальнику_Записи
     {
-        string Image = "doc.png";
+        string Image = "images/doc.png";
         bool Spend = false;
         string ID = "";
         
@@ -4441,7 +4434,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class ПоверненняТоварівВідКлієнта_Записи
     {
-        string Image = "doc.png";
+        string Image = "images/doc.png";
         bool Spend = false;
         string ID = "";
         
@@ -4619,7 +4612,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class АктВиконанихРобіт_Записи
     {
-        string Image = "doc.png";
+        string Image = "images/doc.png";
         bool Spend = false;
         string ID = "";
         
@@ -4785,7 +4778,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class ВведенняЗалишків_Записи
     {
-        string Image = "doc.png";
+        string Image = "images/doc.png";
         bool Spend = false;
         string ID = "";
         
@@ -4946,7 +4939,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class НадлишкиТоварів_Записи
     {
-        string Image = "doc.png";
+        string Image = "images/doc.png";
         bool Spend = false;
         string ID = "";
         
@@ -5083,7 +5076,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class ПересортицяТоварів_Записи
     {
-        string Image = "doc.png";
+        string Image = "images/doc.png";
         bool Spend = false;
         string ID = "";
         
@@ -5220,7 +5213,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class ПерерахунокТоварів_Записи
     {
-        string Image = "doc.png";
+        string Image = "images/doc.png";
         bool Spend = false;
         string ID = "";
         
@@ -5345,7 +5338,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class ПсуванняТоварів_Записи
     {
-        string Image = "doc.png";
+        string Image = "images/doc.png";
         bool Spend = false;
         string ID = "";
         
@@ -5487,7 +5480,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class ВнутрішнєСпоживанняТоварів_Записи
     {
-        string Image = "doc.png";
+        string Image = "images/doc.png";
         bool Spend = false;
         string ID = "";
         
@@ -5641,7 +5634,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class РахунокФактура_Записи
     {
-        string Image = "doc.png";
+        string Image = "images/doc.png";
         bool Spend = false;
         string ID = "";
         

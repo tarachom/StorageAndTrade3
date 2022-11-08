@@ -14,7 +14,7 @@ namespace StorageAndTrade
         {
             SetDefaultSize(660, 320);
             SetPosition(WindowPosition.Center);
-            SetDefaultIconFromFile("form.ico");
+            SetDefaultIconFromFile("images/form.ico");
 
             DeleteEvent += delegate { Application.Quit(); };
 
@@ -114,8 +114,6 @@ namespace StorageAndTrade
                 ListBoxRow row = (ListBoxRow)listBoxDataBase.Children[0];
                 listBoxDataBase.SelectRow(row);
             }
-
-            //scrolledWindowListBox.Vadjustment.Value = scrolledWindowListBox.Vadjustment.Upper;
         }
 
         public void CallBackUpdate(ConfigurationParam itemConfigurationParam)
