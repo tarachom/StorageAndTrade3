@@ -165,8 +165,7 @@ namespace StorageAndTrade
 
                 UnigueID unigueID = new UnigueID((string)TreeViewGrid.Model.GetValue(iter, 1));
 
-                ТабличніСписки.АктВиконанихРобіт_Записи.SelectPointerItem =
-                    new StorageAndTrade_1_0.Документи.АктВиконанихРобіт_Pointer(unigueID);
+                SelectPointerItem = new АктВиконанихРобіт_Pointer(unigueID);
             }
         }
 
@@ -269,12 +268,12 @@ namespace StorageAndTrade
                             АктВиконанихРобіт_Objest_Новий.Назва += " *";
                             АктВиконанихРобіт_Objest_Новий.ДатаДок = DateTime.Now;
                             АктВиконанихРобіт_Objest_Новий.НомерДок = (++Константи.НумераціяДокументів.АктВиконанихРобіт_Const).ToString("D8");
+                            АктВиконанихРобіт_Objest_Новий.Save();
 
                             //Зчитати та скопіювати табличну частину Товари
                             АктВиконанихРобіт_Objest.Послуги_TablePart.Read();
                             АктВиконанихРобіт_Objest_Новий.Послуги_TablePart.Records = АктВиконанихРобіт_Objest.Послуги_TablePart.Copy();
                             АктВиконанихРобіт_Objest_Новий.Послуги_TablePart.Save(true);
-                            АктВиконанихРобіт_Objest_Новий.Save();
 
                             SelectPointerItem = АктВиконанихРобіт_Objest_Новий.GetDocumentPointer();
                         }
