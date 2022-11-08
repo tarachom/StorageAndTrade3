@@ -4,15 +4,13 @@ namespace StorageAndTrade
 {
     class PageDocumentsAll : VBox
     {
-        public FormStorageAndTrade? GeneralForm { get; set; }
-
         public PageDocumentsAll() : base()
         {
             //Кнопки
             HBox hBoxBotton = new HBox();
 
             Button bClose = new Button("Закрити");
-            bClose.Clicked += (object? sender, EventArgs args) => { GeneralForm?.CloseCurrentPageNotebook(); };
+            bClose.Clicked += (object? sender, EventArgs args) => { Program.GeneralForm?.CloseCurrentPageNotebook(); };
 
             hBoxBotton.PackStart(bClose, false, false, 10);
 
@@ -60,12 +58,9 @@ namespace StorageAndTrade
 
         void ЗамовленняПостачальнику(object? sender, EventArgs args)
         {
-            GeneralForm?.CreateNotebookPage("Документи: Замовлення постачальнику", () =>
+            Program.GeneralForm?.CreateNotebookPage("Документи: Замовлення постачальнику", () =>
             {
-                ЗамовленняПостачальнику page = new ЗамовленняПостачальнику
-                {
-                    GeneralForm = GeneralForm
-                };
+                ЗамовленняПостачальнику page = new ЗамовленняПостачальнику();
 
                 page.SetValue();
 
@@ -75,7 +70,7 @@ namespace StorageAndTrade
 
         void ПоступленняТоварівТаПослуг(object? sender, EventArgs args)
         {
-            GeneralForm?.CreateNotebookPage("Документи: Поступлення товарів та послуг", () =>
+            Program.GeneralForm?.CreateNotebookPage("Документи: Поступлення товарів та послуг", () =>
             {
                 ПоступленняТоварівТаПослуг page = new ПоступленняТоварівТаПослуг();
 
@@ -87,12 +82,9 @@ namespace StorageAndTrade
 
         void ЗамовленняКлієнта(object? sender, EventArgs args)
         {
-            GeneralForm?.CreateNotebookPage("Документи: Замовлення клієнта", () =>
+            Program.GeneralForm?.CreateNotebookPage("Документи: Замовлення клієнта", () =>
             {
-                ЗамовленняКлієнта page = new ЗамовленняКлієнта
-                {
-                    GeneralForm = GeneralForm
-                };
+                ЗамовленняКлієнта page = new ЗамовленняКлієнта();
 
                 page.SetValue();
 
@@ -102,12 +94,9 @@ namespace StorageAndTrade
 
         void РеалізаціяТоварівТаПослуг(object? sender, EventArgs args)
         {
-            GeneralForm?.CreateNotebookPage("Документи: Реалізація товарів та послуг", () =>
+            Program.GeneralForm?.CreateNotebookPage("Документи: Реалізація товарів та послуг", () =>
             {
-                РеалізаціяТоварівТаПослуг page = new РеалізаціяТоварівТаПослуг
-                {
-                    GeneralForm = GeneralForm
-                };
+                РеалізаціяТоварівТаПослуг page = new РеалізаціяТоварівТаПослуг();
 
                 page.SetValue();
 
@@ -117,12 +106,9 @@ namespace StorageAndTrade
 
         void ВстановленняЦінНоменклатури(object? sender, EventArgs args)
         {
-            GeneralForm?.CreateNotebookPage("Документи: Встановлення цін номенклатури", () =>
+            Program.GeneralForm?.CreateNotebookPage("Документи: Встановлення цін номенклатури", () =>
             {
-                ВстановленняЦінНоменклатури page = new ВстановленняЦінНоменклатури
-                {
-                    GeneralForm = GeneralForm
-                };
+                ВстановленняЦінНоменклатури page = new ВстановленняЦінНоменклатури();
 
                 page.SetValue();
 
@@ -132,12 +118,9 @@ namespace StorageAndTrade
 
         void ПрихіднийКасовийОрдер(object? sender, EventArgs args)
         {
-            GeneralForm?.CreateNotebookPage("Документи: Прихідний касовий ордер", () =>
+            Program.GeneralForm?.CreateNotebookPage("Документи: Прихідний касовий ордер", () =>
             {
-                ПрихіднийКасовийОрдер page = new ПрихіднийКасовийОрдер
-                {
-                    GeneralForm = GeneralForm
-                };
+                ПрихіднийКасовийОрдер page = new ПрихіднийКасовийОрдер();
 
                 page.SetValue();
 
@@ -147,12 +130,9 @@ namespace StorageAndTrade
 
         void РозхіднийКасовийОрдер(object? sender, EventArgs args)
         {
-            GeneralForm?.CreateNotebookPage("Документи: Розхідний касовий ордер", () =>
+            Program.GeneralForm?.CreateNotebookPage("Документи: Розхідний касовий ордер", () =>
             {
-                РозхіднийКасовийОрдер page = new РозхіднийКасовийОрдер
-                {
-                    GeneralForm = GeneralForm
-                };
+                РозхіднийКасовийОрдер page = new РозхіднийКасовийОрдер();
 
                 page.SetValue();
 
@@ -162,12 +142,9 @@ namespace StorageAndTrade
 
         void ПереміщенняТоварів(object? sender, EventArgs args)
         {
-            GeneralForm?.CreateNotebookPage("Документи: Переміщення товарів", () =>
+            Program.GeneralForm?.CreateNotebookPage("Документи: Переміщення товарів", () =>
             {
-                ПереміщенняТоварів page = new ПереміщенняТоварів
-                {
-                    GeneralForm = GeneralForm
-                };
+                ПереміщенняТоварів page = new ПереміщенняТоварів();
 
                 page.SetValue();
 
@@ -177,12 +154,9 @@ namespace StorageAndTrade
 
         void ПоверненняТоварівПостачальнику(object? sender, EventArgs args)
         {
-            GeneralForm?.CreateNotebookPage("Документи: Повернення товарів постачальнику", () =>
+            Program.GeneralForm?.CreateNotebookPage("Документи: Повернення товарів постачальнику", () =>
             {
-                ПоверненняТоварівПостачальнику page = new ПоверненняТоварівПостачальнику
-                {
-                    GeneralForm = GeneralForm
-                };
+                ПоверненняТоварівПостачальнику page = new ПоверненняТоварівПостачальнику();
 
                 page.SetValue();
 
@@ -192,12 +166,9 @@ namespace StorageAndTrade
 
         void ПоверненняТоварівВідКлієнта(object? sender, EventArgs args)
         {
-            GeneralForm?.CreateNotebookPage("Документи: Повернення товарів від клієнта", () =>
+            Program.GeneralForm?.CreateNotebookPage("Документи: Повернення товарів від клієнта", () =>
             {
-                ПоверненняТоварівВідКлієнта page = new ПоверненняТоварівВідКлієнта
-                {
-                    GeneralForm = GeneralForm
-                };
+                ПоверненняТоварівВідКлієнта page = new ПоверненняТоварівВідКлієнта();
 
                 page.SetValue();
 
@@ -207,12 +178,9 @@ namespace StorageAndTrade
 
         void АктВиконанихРобіт(object? sender, EventArgs args)
         {
-            GeneralForm?.CreateNotebookPage("Документи: Акт виконаних робіт", () =>
+            Program.GeneralForm?.CreateNotebookPage("Документи: Акт виконаних робіт", () =>
             {
-                АктВиконанихРобіт page = new АктВиконанихРобіт
-                {
-                    GeneralForm = GeneralForm
-                };
+                АктВиконанихРобіт page = new АктВиконанихРобіт();
 
                 page.SetValue();
 
@@ -222,12 +190,9 @@ namespace StorageAndTrade
 
         void ВведенняЗалишків(object? sender, EventArgs args)
         {
-            GeneralForm?.CreateNotebookPage("Документи: Введення залишків", () =>
+            Program.GeneralForm?.CreateNotebookPage("Документи: Введення залишків", () =>
             {
-                ВведенняЗалишків page = new ВведенняЗалишків
-                {
-                    GeneralForm = GeneralForm
-                };
+                ВведенняЗалишків page = new ВведенняЗалишків();
 
                 page.SetValue();
 
@@ -237,12 +202,9 @@ namespace StorageAndTrade
 
         void ВнутрішнєСпоживанняТоварів(object? sender, EventArgs args)
         {
-            GeneralForm?.CreateNotebookPage("Документи: Внутрішнє споживання товарів", () =>
+            Program.GeneralForm?.CreateNotebookPage("Документи: Внутрішнє споживання товарів", () =>
             {
-                ВнутрішнєСпоживанняТоварів page = new ВнутрішнєСпоживанняТоварів
-                {
-                    GeneralForm = GeneralForm
-                };
+                ВнутрішнєСпоживанняТоварів page = new ВнутрішнєСпоживанняТоварів();
 
                 page.SetValue();
 
@@ -252,12 +214,9 @@ namespace StorageAndTrade
 
         void РахунокФактура(object? sender, EventArgs args)
         {
-            GeneralForm?.CreateNotebookPage("Документи: Рахунок фактура", () =>
+            Program.GeneralForm?.CreateNotebookPage("Документи: Рахунок фактура", () =>
             {
-                РахунокФактура page = new РахунокФактура
-                {
-                    GeneralForm = GeneralForm
-                };
+                РахунокФактура page = new РахунокФактура();
 
                 page.SetValue();
 

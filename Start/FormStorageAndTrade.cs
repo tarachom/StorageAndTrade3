@@ -85,10 +85,7 @@ namespace StorageAndTrade
         {
             CreateNotebookPage("Документи", () =>
             {
-                PageDocumentsAll page = new PageDocumentsAll
-                {
-                    GeneralForm = this
-                };
+                PageDocumentsAll page = new PageDocumentsAll();
 
                 return page;
             });
