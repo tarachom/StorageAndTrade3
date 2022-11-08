@@ -326,14 +326,6 @@ namespace StorageAndTrade
             LoadRecords();
         }
 
-        void OnEntrySearchKeyRelease(object? sender, KeyReleaseEventArgs args)
-        {
-            if (args.Event.Key == Gdk.Key.Return || args.Event.Key == Gdk.Key.KP_Enter)
-            {
-
-            }
-        }
-
         #endregion
     }
 }
