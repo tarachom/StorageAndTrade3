@@ -73,7 +73,7 @@ namespace StorageAndTrade
 
             lb.Clicked += ClikAction;
 
-            vBox.PackStart(lb, false, false, 0);
+            vBox.PackStart(lb, false, false, 10);
         }
 
         void OnClick_Журнали(object? sender, EventArgs args)
