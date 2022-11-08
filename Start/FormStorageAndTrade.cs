@@ -53,9 +53,11 @@ namespace StorageAndTrade
             scrolLeftMenu.Add(vbox);
 
             CreateItemLeftMenu(vbox, "Документи", OnClick_Документи, "images/documents.png");
-            CreateItemLeftMenu(vbox, "Довідники", OnClick_Довідники, "images/directory.png");
             CreateItemLeftMenu(vbox, "Журнали", OnClick_Журнали, "images/journal.png");
+            CreateItemLeftMenu(vbox, "Довідники", OnClick_Довідники, "images/directory.png");
+            CreateItemLeftMenu(vbox, "Звіти", OnClick_Довідники, "images/report.png");
             CreateItemLeftMenu(vbox, "Налаштування", OnClick_Налаштування, "images/preferences.png");
+            CreateItemLeftMenu(vbox, "Сервіс", OnClick_Налаштування, "images/service.png");
 
             hbox.PackStart(scrolLeftMenu, false, false, 0);
         }
