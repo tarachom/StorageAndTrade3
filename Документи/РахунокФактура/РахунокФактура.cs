@@ -3,6 +3,7 @@ using Gtk;
 using AccountingSoftware;
 
 using ТабличніСписки = StorageAndTrade_1_0.Документи.ТабличніСписки;
+using StorageAndTrade_1_0.Документи;
 using Константи = StorageAndTrade_1_0.Константи;
 using Перелічення = StorageAndTrade_1_0.Перелічення;
 
@@ -10,7 +11,9 @@ namespace StorageAndTrade
 {
     class РахунокФактура : VBox
     {
-        public FormStorageAndTrade? GeneralForm { get; set; }
+        public РахунокФактура_Pointer? SelectPointerItem { get; set; }
+        public РахунокФактура_Pointer? DocumentPointerItem { get; set; }
+        public System.Action<РахунокФактура_Pointer>? CallBack_OnSelectPointer { get; set; }
 
         TreeView TreeViewGrid;
         ComboBoxText ComboBoxPeriodWhere = new ComboBoxText();
@@ -24,7 +27,7 @@ namespace StorageAndTrade
             HBox hBoxBotton = new HBox();
 
             Button bClose = new Button("Закрити");
-            bClose.Clicked += (object? sender, EventArgs args) => { GeneralForm?.CloseCurrentPageNotebook(); };
+            bClose.Clicked += (object? sender, EventArgs args) => { Program.GeneralForm?.CloseCurrentPageNotebook(); };
 
             hBoxBotton.PackStart(bClose, false, false, 10);
 
@@ -54,21 +57,25 @@ namespace StorageAndTrade
             Toolbar toolbar = new Toolbar();
             PackStart(toolbar, false, false, 0);
 
-            ToolButton upButton = new ToolButton(Stock.Add) { Label = "Додати", IsImportant = true };
-            //upButton.Clicked += OnAddClick;
+            ToolButton addButton = new ToolButton(Stock.Add) { Label = "Додати", IsImportant = true };
+            addButton.Clicked += OnAddClick;
+            toolbar.Add(addButton);
+
+            ToolButton upButton = new ToolButton(Stock.Edit) { Label = "Редагувати", IsImportant = true };
+            upButton.Clicked += OnEditClick;
             toolbar.Add(upButton);
+
+            ToolButton copyButton = new ToolButton(Stock.Copy) { Label = "Копіювати", IsImportant = true };
+            copyButton.Clicked += OnCopyClick;
+            toolbar.Add(copyButton);
+
+            ToolButton deleteButton = new ToolButton(Stock.Delete) { Label = "Видалити", IsImportant = true };
+            deleteButton.Clicked += OnDeleteClick;
+            toolbar.Add(deleteButton);
 
             ToolButton refreshButton = new ToolButton(Stock.Refresh) { Label = "Обновити", IsImportant = true };
             refreshButton.Clicked += OnRefreshClick;
             toolbar.Add(refreshButton);
-
-            ToolButton deleteButton = new ToolButton(Stock.Delete) { Label = "Видалити", IsImportant = true };
-            //deleteButton.Clicked += OnDeleteClick;
-            toolbar.Add(deleteButton);
-
-            ToolButton copyButton = new ToolButton(Stock.Copy) { Label = "Копіювати", IsImportant = true };
-            //copyButton.Clicked += OnCopyClick;
-            toolbar.Add(copyButton);
 
             //Відбір
             ToolItem seperatorOne = new ToolItem();
@@ -98,12 +105,56 @@ namespace StorageAndTrade
 
         public void LoadRecords()
         {
+            ТабличніСписки.РахунокФактура_Записи.SelectPointerItem = SelectPointerItem;
+            ТабличніСписки.РахунокФактура_Записи.DocumentPointerItem = DocumentPointerItem;
+
             ТабличніСписки.РахунокФактура_Записи.LoadRecords();
 
             if (ТабличніСписки.РахунокФактура_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.РахунокФактура_Записи.SelectPath, TreeViewGrid.Columns[0], false);
             else if (ТабличніСписки.РахунокФактура_Записи.CurrentPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.РахунокФактура_Записи.CurrentPath, TreeViewGrid.Columns[0], false);
+        }
+
+        void OpenPageElement(bool IsNew, string uid = "")
+        {
+            if (IsNew)
+            {
+                Program.GeneralForm?.CreateNotebookPage($"Рахунок фактура: *", () =>
+                {
+                    РахунокФактура_Елемент page = new РахунокФактура_Елемент
+                    {
+                        PageList = this,
+                        IsNew = true
+                    };
+
+                    page.SetValue();
+
+                    return page;
+                });
+            }
+            else
+            {
+                РахунокФактура_Objest РахунокФактура_Objest = new РахунокФактура_Objest();
+                if (РахунокФактура_Objest.Read(new UnigueID(uid)))
+                {
+                    Program.GeneralForm?.CreateNotebookPage($"{РахунокФактура_Objest.Назва}", () =>
+                    {
+                        РахунокФактура_Елемент page = new РахунокФактура_Елемент
+                        {
+                            PageList = this,
+                            IsNew = false,
+                            РахунокФактура_Objest = РахунокФактура_Objest,
+                        };
+
+                        page.SetValue();
+
+                        return page;
+                    });
+                }
+                else
+                    Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+            }
         }
 
         #region  TreeView
@@ -117,16 +168,30 @@ namespace StorageAndTrade
 
                 UnigueID unigueID = new UnigueID((string)TreeViewGrid.Model.GetValue(iter, 1));
 
-                ТабличніСписки.РахунокФактура_Записи.SelectPointerItem =
-                    new StorageAndTrade_1_0.Документи.РахунокФактура_Pointer(unigueID);
+                SelectPointerItem = new РахунокФактура_Pointer(unigueID);
             }
         }
 
         void OnButtonPressEvent(object? sender, ButtonPressEventArgs args)
         {
-            if (args.Event.Type == Gdk.EventType.DoubleButtonPress)
+            if (args.Event.Type == Gdk.EventType.DoubleButtonPress && TreeViewGrid.Selection.CountSelectedRows() != 0)
             {
-                Console.WriteLine(args.Event);
+                TreeIter iter;
+
+                if (TreeViewGrid.Model.GetIter(out iter, TreeViewGrid.Selection.GetSelectedRows()[0]))
+                {
+                    string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
+
+                    if (DocumentPointerItem == null)
+                        OpenPageElement(false, uid);
+                    else
+                    {
+                        if (CallBack_OnSelectPointer != null)
+                            CallBack_OnSelectPointer.Invoke(new РахунокФактура_Pointer(new UnigueID(uid)));
+
+                        Program.GeneralForm?.CloseCurrentPageNotebook();
+                    }
+                }
             }
         }
 
@@ -134,9 +199,94 @@ namespace StorageAndTrade
 
         #region ToolBar
 
+        void OnAddClick(object? sender, EventArgs args)
+        {
+            OpenPageElement(true);
+        }
+
+        void OnEditClick(object? sender, EventArgs args)
+        {
+            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
+            {
+                TreeIter iter;
+                if (TreeViewGrid.Model.GetIter(out iter, TreeViewGrid.Selection.GetSelectedRows()[0]))
+                {
+                    string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
+                    OpenPageElement(false, uid);
+                }
+            }
+        }
+
         void OnRefreshClick(object? sender, EventArgs args)
         {
             LoadRecords();
+        }
+
+        void OnDeleteClick(object? sender, EventArgs args)
+        {
+            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
+            {
+                if (Message.Request(Program.GeneralForm, "Видалити?") == ResponseType.Yes)
+                {
+                    TreePath[] selectionRows = TreeViewGrid.Selection.GetSelectedRows();
+
+                    foreach (TreePath itemPath in selectionRows)
+                    {
+                        TreeIter iter;
+                        TreeViewGrid.Model.GetIter(out iter, itemPath);
+
+                        string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
+
+                        РахунокФактура_Objest РахунокФактура_Objest = new РахунокФактура_Objest();
+                        if (РахунокФактура_Objest.Read(new UnigueID(uid)))
+                            РахунокФактура_Objest.Delete();
+                        else
+                            Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+                    }
+
+                    LoadRecords();
+                }
+            }
+        }
+
+        void OnCopyClick(object? sender, EventArgs args)
+        {
+            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
+            {
+                if (Message.Request(Program.GeneralForm, "Копіювати?") == ResponseType.Yes)
+                {
+                    TreePath[] selectionRows = TreeViewGrid.Selection.GetSelectedRows();
+
+                    foreach (TreePath itemPath in selectionRows)
+                    {
+                        TreeIter iter;
+                        TreeViewGrid.Model.GetIter(out iter, itemPath);
+
+                        string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
+
+                        РахунокФактура_Objest РахунокФактура_Objest = new РахунокФактура_Objest();
+                        if (РахунокФактура_Objest.Read(new UnigueID(uid)))
+                        {
+                            РахунокФактура_Objest РахунокФактура_Objest_Новий = РахунокФактура_Objest.Copy();
+                            РахунокФактура_Objest_Новий.Назва += " *";
+                            РахунокФактура_Objest_Новий.ДатаДок = DateTime.Now;
+                            РахунокФактура_Objest_Новий.НомерДок = (++Константи.НумераціяДокументів.РахунокФактура_Const).ToString("D8");
+                            РахунокФактура_Objest_Новий.Save();
+
+                            //Зчитати та скопіювати табличну частину Товари
+                            РахунокФактура_Objest.Товари_TablePart.Read();
+                            РахунокФактура_Objest_Новий.Товари_TablePart.Records = РахунокФактура_Objest.Товари_TablePart.Copy();
+                            РахунокФактура_Objest_Новий.Товари_TablePart.Save(true);
+
+                            SelectPointerItem = РахунокФактура_Objest_Новий.GetDocumentPointer();
+                        }
+                        else
+                            Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+                    }
+
+                    LoadRecords();
+                }
+            }
         }
 
         void OnComboBoxPeriodWhereChanged(object? sender, EventArgs args)
