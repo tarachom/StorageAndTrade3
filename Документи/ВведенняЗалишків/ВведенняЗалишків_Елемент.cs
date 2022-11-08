@@ -16,6 +16,7 @@ namespace StorageAndTrade
         Entry НомерДок = new Entry() { WidthRequest = 100 };
         Entry Назва = new Entry() { WidthRequest = 500 };
         ВведенняЗалишків_ТабличнаЧастина_Товари Товари = new ВведенняЗалишків_ТабличнаЧастина_Товари();
+        ВведенняЗалишків_ТабличнаЧастина_Каси Каси = new ВведенняЗалишків_ТабличнаЧастина_Каси();
 
         public ВведенняЗалишків_Елемент() : base()
         {
@@ -67,7 +68,12 @@ namespace StorageAndTrade
 
         void CreatePack2(HPaned hPaned)
         {
-            hPaned.Pack2(Товари, true, false);
+            Notebook notebook = new Notebook() { Scrollable = true, EnablePopup = true, BorderWidth = 0, ShowBorder = false };
+            notebook.TabPos = PositionType.Top;
+            notebook.AppendPage(Товари, new Label("Товари"));
+            notebook.AppendPage(Каси, new Label("Каси"));
+
+            hPaned.Pack2(notebook, true, false);
         }
 
         #region Присвоєння / зчитування значень
@@ -85,6 +91,9 @@ namespace StorageAndTrade
 
             Товари.ВведенняЗалишків_Objest = ВведенняЗалишків_Objest;
             Товари.LoadRecords();
+
+            Каси.ВведенняЗалишків_Objest = ВведенняЗалишків_Objest;
+            Каси.LoadRecords();
         }
 
         void GetValue()
@@ -104,12 +113,14 @@ namespace StorageAndTrade
 
             ВведенняЗалишків_Objest.Save();
             Товари.SaveRecords();
+            Каси.SaveRecords();
 
             Program.GeneralForm?.RenameCurrentPageNotebook($"{ВведенняЗалишків_Objest.Назва}");
 
             if (PageList != null)
             {
                 Товари.LoadRecords();
+                Каси.LoadRecords();
 
                 PageList.SelectPointerItem = ВведенняЗалишків_Objest.GetDocumentPointer();
                 PageList.LoadRecords();

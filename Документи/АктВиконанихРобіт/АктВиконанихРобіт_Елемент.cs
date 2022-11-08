@@ -67,7 +67,11 @@ namespace StorageAndTrade
 
         void CreatePack2(HPaned hPaned)
         {
-            hPaned.Pack2(Послуги, true, false);
+            Notebook notebook = new Notebook() { Scrollable = true, EnablePopup = true, BorderWidth = 0, ShowBorder = false };
+            notebook.TabPos = PositionType.Top;
+            notebook.AppendPage(Послуги, new Label("Послуги"));
+
+            hPaned.Pack2(notebook, true, false);
         }
 
         #region Присвоєння / зчитування значень
