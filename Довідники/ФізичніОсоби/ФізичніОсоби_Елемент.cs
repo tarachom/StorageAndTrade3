@@ -95,7 +95,10 @@ namespace StorageAndTrade
         void OnSaveClick(object? sender, EventArgs args)
         {
             if (IsNew)
+            {
                 ФізичніОсоби_Objest.New();
+                IsNew = false;
+            }
 
             GetValue();
 

@@ -179,7 +179,10 @@ namespace StorageAndTrade
         void OnSaveClick(object? sender, EventArgs args)
         {
             if (IsNew)
+            {
                 Контрагенти_Objest.New();
+                IsNew = false;
+            }
 
             GetValue();
 

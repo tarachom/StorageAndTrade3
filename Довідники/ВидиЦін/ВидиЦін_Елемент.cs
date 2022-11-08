@@ -104,7 +104,10 @@ namespace StorageAndTrade
         void OnSaveClick(object? sender, EventArgs args)
         {
             if (IsNew)
+            {
                 ВидиЦін_Objest.New();
+                IsNew = false;
+            }
 
             GetValue();
 

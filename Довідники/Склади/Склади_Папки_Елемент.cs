@@ -111,7 +111,10 @@ namespace StorageAndTrade
         void OnSaveClick(object? sender, EventArgs args)
         {
             if (IsNew)
+            {
                 Склади_Папки_Objest.New();
+                IsNew = false;
+            }
 
             GetValue();
 

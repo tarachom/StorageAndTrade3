@@ -113,7 +113,10 @@ namespace StorageAndTrade
         void OnSaveClick(object? sender, EventArgs args)
         {
             if (IsNew)
+            {
                 БанківськіРахункиОрганізацій_Objest.New();
+                IsNew = false;
+            }
 
             GetValue();
 

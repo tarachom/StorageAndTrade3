@@ -105,6 +105,9 @@ namespace StorageAndTrade
 
         public void LoadRecords()
         {
+            ТабличніСписки.ВнутрішнєСпоживанняТоварів_Записи.SelectPointerItem = SelectPointerItem;
+            ТабличніСписки.ВнутрішнєСпоживанняТоварів_Записи.DocumentPointerItem = DocumentPointerItem;
+
             ТабличніСписки.ВнутрішнєСпоживанняТоварів_Записи.LoadRecords();
 
             if (ТабличніСписки.ВнутрішнєСпоживанняТоварів_Записи.SelectPath != null)

@@ -102,7 +102,10 @@ namespace StorageAndTrade
         void OnSaveClick(object? sender, EventArgs args)
         {
             if (IsNew)
+            {
                 ВнутрішнєСпоживанняТоварів_Objest.New();
+                IsNew = false;
+            }
 
             GetValue();
 

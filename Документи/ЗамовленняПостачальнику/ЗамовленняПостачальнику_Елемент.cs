@@ -5,19 +5,19 @@ using StorageAndTrade_1_0.Документи;
 
 namespace StorageAndTrade
 {
-    class АктВиконанихРобіт_Елемент : VBox
+    class ЗамовленняПостачальнику_Елемент : VBox
     {
-        public АктВиконанихРобіт? PageList { get; set; }
+        public ЗамовленняПостачальнику? PageList { get; set; }
 
         public bool IsNew { get; set; } = true;
 
-        public АктВиконанихРобіт_Objest АктВиконанихРобіт_Objest { get; set; } = new АктВиконанихРобіт_Objest();
+        public ЗамовленняПостачальнику_Objest ЗамовленняПостачальнику_Objest { get; set; } = new ЗамовленняПостачальнику_Objest();
 
         Entry НомерДок = new Entry() { WidthRequest = 100 };
         Entry Назва = new Entry() { WidthRequest = 500 };
-        АктВиконанихРобіт_ТабличнаЧастина_Послуги Послуги = new АктВиконанихРобіт_ТабличнаЧастина_Послуги();
+        ЗамовленняПостачальнику_ТабличнаЧастина_Товари Товари = new ЗамовленняПостачальнику_ТабличнаЧастина_Товари();
 
-        public АктВиконанихРобіт_Елемент() : base()
+        public ЗамовленняПостачальнику_Елемент() : base()
         {
             new VBox();
             HBox hBox = new HBox();
@@ -69,7 +69,7 @@ namespace StorageAndTrade
         {
             Notebook notebook = new Notebook() { Scrollable = true, EnablePopup = true, BorderWidth = 0, ShowBorder = false };
             notebook.TabPos = PositionType.Top;
-            notebook.AppendPage(Послуги, new Label("Послуги"));
+            notebook.AppendPage(Товари, new Label("Товари"));
 
             hPaned.Pack2(notebook, true, false);
         }
@@ -80,21 +80,21 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                АктВиконанихРобіт_Objest.НомерДок = (++НумераціяДокументів.АктВиконанихРобіт_Const).ToString("D8");
-                АктВиконанихРобіт_Objest.ДатаДок = DateTime.Now;
+                ЗамовленняПостачальнику_Objest.НомерДок = (++НумераціяДокументів.ЗамовленняПостачальнику_Const).ToString("D8");
+                ЗамовленняПостачальнику_Objest.ДатаДок = DateTime.Now;
             }
 
-            НомерДок.Text = АктВиконанихРобіт_Objest.НомерДок;
-            Назва.Text = АктВиконанихРобіт_Objest.Назва;
+            НомерДок.Text = ЗамовленняПостачальнику_Objest.НомерДок;
+            Назва.Text = ЗамовленняПостачальнику_Objest.Назва;
 
-            Послуги.АктВиконанихРобіт_Objest = АктВиконанихРобіт_Objest;
-            Послуги.LoadRecords();
+            Товари.ЗамовленняПостачальнику_Objest = ЗамовленняПостачальнику_Objest;
+            Товари.LoadRecords();
         }
 
         void GetValue()
         {
-            АктВиконанихРобіт_Objest.НомерДок = НомерДок.Text;
-            АктВиконанихРобіт_Objest.Назва = $"Акт виконаних робіт №{АктВиконанихРобіт_Objest.НомерДок} від {АктВиконанихРобіт_Objest.ДатаДок.ToShortDateString()}";
+            ЗамовленняПостачальнику_Objest.НомерДок = НомерДок.Text;
+            ЗамовленняПостачальнику_Objest.Назва = $"Замовлення постачальнику №{ЗамовленняПостачальнику_Objest.НомерДок} від {ЗамовленняПостачальнику_Objest.ДатаДок.ToShortDateString()}";
         }
 
         #endregion
@@ -103,22 +103,22 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                АктВиконанихРобіт_Objest.New();
+                ЗамовленняПостачальнику_Objest.New();
                 IsNew = false;
             }
 
             GetValue();
 
-            АктВиконанихРобіт_Objest.Save();
-            Послуги.SaveRecords();
+            ЗамовленняПостачальнику_Objest.Save();
+            Товари.SaveRecords();
 
-            Program.GeneralForm?.RenameCurrentPageNotebook($"{АктВиконанихРобіт_Objest.Назва}");
+            Program.GeneralForm?.RenameCurrentPageNotebook($"{ЗамовленняПостачальнику_Objest.Назва}");
 
             if (PageList != null)
             {
-                Послуги.LoadRecords();
+                Товари.LoadRecords();
 
-                PageList.SelectPointerItem = АктВиконанихРобіт_Objest.GetDocumentPointer();
+                PageList.SelectPointerItem = ЗамовленняПостачальнику_Objest.GetDocumentPointer();
                 PageList.LoadRecords();
             }
         }

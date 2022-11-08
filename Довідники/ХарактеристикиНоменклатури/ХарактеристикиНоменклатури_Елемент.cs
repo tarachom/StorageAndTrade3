@@ -121,7 +121,10 @@ namespace StorageAndTrade
         void OnSaveClick(object? sender, EventArgs args)
         {
             if (IsNew)
+            {
                 ХарактеристикиНоменклатури_Objest.New();
+                IsNew = false;
+            }
 
             GetValue();
 

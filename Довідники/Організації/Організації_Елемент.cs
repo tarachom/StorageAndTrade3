@@ -185,7 +185,10 @@ namespace StorageAndTrade
         void OnSaveClick(object? sender, EventArgs args)
         {
             if (IsNew)
+            {
                 Організації_Objest.New();
+                IsNew = false;
+            }
 
             GetValue();
 

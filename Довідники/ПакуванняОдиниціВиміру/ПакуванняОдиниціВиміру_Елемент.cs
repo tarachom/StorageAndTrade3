@@ -115,7 +115,10 @@ namespace StorageAndTrade
         void OnSaveClick(object? sender, EventArgs args)
         {
             if (IsNew)
+            {
                 ПакуванняОдиниціВиміру_Objest.New();
+                IsNew = false;
+            }
 
             GetValue();
 

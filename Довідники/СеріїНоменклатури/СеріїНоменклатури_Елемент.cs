@@ -82,7 +82,10 @@ namespace StorageAndTrade
         void OnSaveClick(object? sender, EventArgs args)
         {
             if (IsNew)
+            {
                 СеріїНоменклатури_Objest.New();
+                IsNew = false;
+            }
 
             GetValue();
 

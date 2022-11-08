@@ -117,7 +117,10 @@ namespace StorageAndTrade
         void OnSaveClick(object? sender, EventArgs args)
         {
             if (IsNew)
+            {
                 ВведенняЗалишків_Objest.New();
+                IsNew = false;
+            }
 
             GetValue();
 
