@@ -64,7 +64,7 @@ namespace StorageAndTrade
 
         void CreateItemLeftMenu(VBox vBox, string name, EventHandler ClikAction, string ico)
         {
-            LinkButton lb = new LinkButton(" " + name)
+            LinkButton lb = new LinkButton("#", " " + name)
             {
                 Halign = Align.Start,
                 Image = new Image(ico),
