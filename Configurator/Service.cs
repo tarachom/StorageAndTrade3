@@ -28,9 +28,6 @@ limitations under the License.
 
 */
 
-using System;
-using System.Collections.Generic;
-
 using AccountingSoftware;
 using StorageAndTrade_1_0;
 using StorageAndTrade_1_0.Константи;
@@ -1415,6 +1412,7 @@ WHERE uid = '{uid}'
 
     }
 
+/*
     class BlockedConfigurationObject
     {
 
@@ -1441,6 +1439,6 @@ WHERE uid = '{uid}'
 
             
         }
-    }
+    } */
 }
 

@@ -27,8 +27,6 @@ limitations under the License.
  
 */
 
-using System;
-using System.Collections.Generic;
 using AccountingSoftware;
 using StorageAndTrade.Service;
 using StorageAndTrade_1_0.Довідники;

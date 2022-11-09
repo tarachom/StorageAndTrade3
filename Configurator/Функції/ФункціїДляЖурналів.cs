@@ -27,9 +27,6 @@ limitations under the License.
 
 */
 
-using System;
-
-using AccountingSoftware;
 using Довідники = StorageAndTrade_1_0.Довідники;
 using Документи = StorageAndTrade_1_0.Документи;
 using Перелічення = StorageAndTrade_1_0.Перелічення;

@@ -27,10 +27,8 @@ limitations under the License.
 
 */
 
-using System.Collections.Generic;
 using AccountingSoftware;
 
-using System.IO;
 using System.Xml;
 using System.Xml.Xsl;
 

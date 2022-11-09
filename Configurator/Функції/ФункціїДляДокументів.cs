@@ -30,11 +30,6 @@ limitations under the License.
 
 */
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Drawing;
-
 using AccountingSoftware;
 using Конфа = StorageAndTrade_1_0;
 using Довідники = StorageAndTrade_1_0.Довідники;
@@ -114,115 +109,13 @@ namespace StorageAndTrade
 
         #endregion
 
-        #region Меню вибору та пошуку в документах
-
-        /// <summary>
-        /// Функція відкриває контекстне меню вибору в табличній частині документу
-        /// </summary>
-        /// <param name="gridView">DataGridView</param>
-        /// <param name="columnIndex">Індекс стовця</param>
-        /// <param name="rowIndex">Індекс рядка</param>
-        /// <param name="tag">Прикріплений обєкт для меню</param>
-        /// <param name="allowColumn">Стовці для яких доступне меню</param>
-        /// <param name="selectClick">Функція вибору</param>
-        /// <param name="findTextChanged">Функція пошуку</param>
-        /*
-        public static void ВідкритиМенюВибору(DataGridView gridView, int columnIndex, int rowIndex, object tag, string[] allowColumn,
-            EventHandler selectClick, EventHandler findTextChanged)
-        {
-            string columnName = gridView.Columns[columnIndex].Name;
-
-            if (!allowColumn.Contains(columnName))
-                return;
-
-            Rectangle rectangle = gridView.GetCellDisplayRectangle(columnIndex, rowIndex, true);
-            rectangle.Offset(0, 0);
-            Point point = gridView.PointToScreen(rectangle.Location);
-
-            ContextMenuStrip contextMenu = new ContextMenuStrip();
-
-            ToolStripMenuItem select = new ToolStripMenuItem("Відкрити список");
-            select.Image = Properties.Resources.data;
-            select.Name = columnName;
-            select.Tag = tag;
-            contextMenu.Items.Add(select);
-
-            ToolStripTextBox findTextBox = new ToolStripTextBox();
-            findTextBox.ToolTipText = "Пошук";
-            findTextBox.Size = new Size(rectangle.Width, 0);
-            findTextBox.Name = columnName;
-            findTextBox.Tag = tag;
-            contextMenu.Items.Add(findTextBox);
-
-            if (findTextChanged != null)
-                findTextBox.TextChanged += findTextChanged;
-
-            if (selectClick != null)
-                select.Click += selectClick;
-
-            contextMenu.Show(point);
-            findTextBox.Focus();
-        }
-*/
-        /// <summary>
-        /// Функція очищає контекстне меню від результатів пошуку
-        /// </summary>
-        /// <param name="parentMenu">Контекстне меню</param>
-/*
-        public static void ОчиститиМенюПошуку(ToolStrip parentMenu)
-        {
-            for (int counterMenu = parentMenu.Items.Count - 1; counterMenu > 1; counterMenu--)
-                parentMenu.Items.RemoveAt(counterMenu);
-        }
-*/
-        /// <summary>
-        /// Функція заповнює контекстне меню результатами пошуку
-        /// </summary>
-        /// <param name="parentMenu">Контекстне меню</param>
-        /// <param name="queryFind">Запит</param>
-        /// <param name="findText">Текст для пошуку</param>
-        /// <param name="name">Назва меню (стовпця)</param>
-        /// <param name="tag">Прикріплений обєкт</param>
-        /// <param name="findClick">Функція вибору результату пошуку</param>
-        /*
-        public static void ЗаповнитиМенюПошуку(ToolStrip parentMenu, string queryFind, string findText, string name, object tag,
-            EventHandler findClick)
-        {
-            Dictionary<string, object> paramQuery = new Dictionary<string, object>();
-            paramQuery.Add("like_param", "%" + findText.ToLower() + "%");
-
-            string[] columnsName;
-            List<Dictionary<string, object>> listRow;
-
-            Конфа.Config.Kernel.DataBase.SelectRequest(queryFind, paramQuery, out columnsName, out listRow);
-
-            if (listRow.Count > 0)
-            {
-                ToolStripItem[] mas = new ToolStripItem[listRow.Count];
-
-                int counter = 0;
-
-                foreach (Dictionary<string, object> row in listRow)
-                {
-                    mas[counter] = new ToolStripMenuItem(row["Назва"].ToString(), Properties.Resources.page_white_text, findClick, name);
-                    mas[counter].Tag = new NameValue<object>(row["uid"].ToString(), tag);
-                    counter++;
-                }
-
-                parentMenu.Items.AddRange(mas);
-            }
-        }
-*/
-        #endregion
-
         /// <summary>
         /// Функція повертає перший із списку договорів - договір контрагента
         /// </summary>
         /// <param name="Контрагент">Контрагент</param>
         /// <param name="ТипДоговору">Тип договору</param>
         /// <returns></returns>
-        /*
-        public static Довідники.ДоговориКонтрагентів_Pointer ОсновнийДоговірДляКонтрагента(
+        public static Довідники.ДоговориКонтрагентів_Pointer? ОсновнийДоговірДляКонтрагента(
             Довідники.Контрагенти_Pointer Контрагент, Перелічення.ТипДоговорів ТипДоговору = 0)
         {
             if (Контрагент == null || Контрагент.IsEmpty())
@@ -246,7 +139,6 @@ namespace StorageAndTrade
             else
                 return null;
         }
-*/
 
         /// <summary>
         /// Функція повертає курс валюти на дату

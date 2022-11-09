@@ -27,10 +27,6 @@ limitations under the License.
 
 */
 
-using System;
-using System.Collections.Generic;
-
-using AccountingSoftware;
 using Конфа = StorageAndTrade_1_0;
 using StorageAndTrade_1_0.Константи;
 
