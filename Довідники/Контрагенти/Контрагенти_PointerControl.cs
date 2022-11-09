@@ -32,6 +32,9 @@ namespace StorageAndTrade
 
         protected override void OpenSelect(object? sender, EventArgs args)
         {
+            if (BeforeClickOpenFunc != null)
+                BeforeClickOpenFunc.Invoke();
+
             Program.GeneralForm?.CreateNotebookPage("Вибір - Довідник: Контрагенти", () =>
             {
                 Контрагенти page = new Контрагенти(true);
@@ -40,6 +43,9 @@ namespace StorageAndTrade
                 page.CallBack_OnSelectPointer = (Контрагенти_Pointer selectPointer) =>
                 {
                     Pointer = selectPointer;
+
+                    if (AfterSelectFunc != null)
+                        AfterSelectFunc.Invoke();
                 };
 
                 page.LoadTree();
