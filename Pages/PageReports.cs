@@ -1,0 +1,100 @@
+using Gtk;
+
+namespace StorageAndTrade
+{
+    class PageReports : VBox
+    {
+        public PageReports() : base()
+        {
+            //Кнопки
+            HBox hBoxBotton = new HBox();
+
+            Button bClose = new Button("Закрити");
+            bClose.Clicked += (object? sender, EventArgs args) => { Program.GeneralForm?.CloseCurrentPageNotebook(); };
+
+            hBoxBotton.PackStart(bClose, false, false, 10);
+
+            PackStart(hBoxBotton, false, false, 10);
+
+            //Список
+            HBox hBoxList = new HBox(false, 0);
+
+            VBox vLeft = new VBox(false, 0);
+            hBoxList.PackStart(vLeft, false, false, 5);
+
+            AddLink(vLeft, "ВільніЗалишки", ВільніЗалишки);
+            AddLink(vLeft, "ЗамовленняКлієнтів", ЗамовленняКлієнтів);
+            AddLink(vLeft, "ЗамовленняПостачальникам", ЗамовленняПостачальникам);
+            AddLink(vLeft, "ПартіїТоварів", ПартіїТоварів);
+            AddLink(vLeft, "РозрахункиЗКлієнтами", РозрахункиЗКлієнтами);
+            AddLink(vLeft, "РозрахункиЗКонтрагентами", РозрахункиЗКонтрагентами);
+            AddLink(vLeft, "РозрахункиЗПостачальниками", РозрахункиЗПостачальниками);
+            AddLink(vLeft, "РухДокументівПоРегістрах", РухДокументівПоРегістрах);
+            AddLink(vLeft, "РухКоштів", РухКоштів);
+            AddLink(vLeft, "ТовариНаСкладах", ТовариНаСкладах);
+
+            PackStart(hBoxList, false, false, 10);
+
+            ShowAll();
+        }
+
+        void ВільніЗалишки(object? sender, EventArgs args)
+        {
+
+        }
+
+        void ЗамовленняКлієнтів(object? sender, EventArgs args)
+        {
+
+        }
+
+        void ЗамовленняПостачальникам(object? sender, EventArgs args)
+        {
+
+        }
+
+        void ПартіїТоварів(object? sender, EventArgs args)
+        {
+
+        }
+
+        void РозрахункиЗКлієнтами(object? sender, EventArgs args)
+        {
+
+        }
+       
+        void РозрахункиЗКонтрагентами(object? sender, EventArgs args)
+        {
+
+        }
+        
+        void РозрахункиЗПостачальниками(object? sender, EventArgs args)
+        {
+
+        }
+        
+        void РухДокументівПоРегістрах(object? sender, EventArgs args)
+        {
+
+        }
+        
+        void РухКоштів(object? sender, EventArgs args)
+        {
+
+        }
+        
+        void ТовариНаСкладах(object? sender, EventArgs args)
+        {
+
+        }
+
+        void AddLink(VBox vbox, string uri, EventHandler? clickAction = null)
+        {
+            LinkButton lb = new LinkButton("#", " " + uri) { Halign = Align.Start, Image = new Image("images/doc.png"), AlwaysShowImage = true };
+            vbox.PackStart(lb, false, false, 0);
+
+            if (clickAction != null)
+                lb.Clicked += clickAction;
+        }
+    }
+}

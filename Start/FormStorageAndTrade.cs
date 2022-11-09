@@ -54,10 +54,10 @@ namespace StorageAndTrade
 
             CreateItemLeftMenu(vbox, "Документи", OnClick_Документи, "images/documents.png");
             CreateItemLeftMenu(vbox, "Журнали", OnClick_Журнали, "images/journal.png");
+            CreateItemLeftMenu(vbox, "Звіти", OnClick_Звіти, "images/report.png");
             CreateItemLeftMenu(vbox, "Довідники", OnClick_Довідники, "images/directory.png");
-            CreateItemLeftMenu(vbox, "Звіти", OnClick_Довідники, "images/report.png");
             CreateItemLeftMenu(vbox, "Налаштування", OnClick_Налаштування, "images/preferences.png");
-            CreateItemLeftMenu(vbox, "Сервіс", OnClick_Налаштування, "images/service.png");
+            CreateItemLeftMenu(vbox, "Сервіс", OnClick_Сервіс, "images/service.png");
 
             hbox.PackStart(scrolLeftMenu, false, false, 0);
         }
@@ -78,17 +78,29 @@ namespace StorageAndTrade
             vBox.PackStart(lb, false, false, 10);
         }
 
-        void OnClick_Журнали(object? sender, EventArgs args)
-        {
-
-        }
-
         void OnClick_Документи(object? sender, EventArgs args)
         {
             CreateNotebookPage("Документи", () =>
             {
-                PageDocumentsAll page = new PageDocumentsAll();
+                PageDocuments page = new PageDocuments();
+                return page;
+            });
+        }
 
+        void OnClick_Журнали(object? sender, EventArgs args)
+        {
+            CreateNotebookPage("Журнали", () =>
+            {
+                PageJournals page = new PageJournals();
+                return page;
+            });
+        }
+
+        void OnClick_Звіти(object? sender, EventArgs args)
+        {
+            CreateNotebookPage("Звіти", () =>
+            {
+                PageReports page = new PageReports();
                 return page;
             });
         }
@@ -97,14 +109,30 @@ namespace StorageAndTrade
         {
             CreateNotebookPage("Довідники", () =>
             {
-                PageDirectoryAll page = new PageDirectoryAll();
+                PageDirectory page = new PageDirectory();
                 return page;
             });
         }
 
         void OnClick_Налаштування(object? sender, EventArgs args)
         {
+            CreateNotebookPage("Налаштування", () =>
+            {
+                PageSettings page = new PageSettings();
+                
+                page.SetValue();
 
+                return page;
+            });
+        }
+
+        void OnClick_Сервіс(object? sender, EventArgs args)
+        {
+            CreateNotebookPage("Сервіс", () =>
+            {
+                PageService page = new PageService();
+                return page;
+            });
         }
 
         #endregion

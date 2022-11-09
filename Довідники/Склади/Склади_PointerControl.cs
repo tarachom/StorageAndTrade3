@@ -9,7 +9,7 @@ namespace StorageAndTrade
         {
             pointer = new Склади_Pointer();
             WidthPresentation = 300;
-            Caption = "Контрагент:";
+            Caption = "Склад:";
         }
 
         Склади_Pointer pointer;

@@ -16,7 +16,13 @@ namespace StorageAndTrade
 
             PackStart(hBoxBotton, false, false, 10);
 
-            
+            VBox vBox = new VBox();
+
+            Expander expanderHelp = new Expander("Довідка");
+            expanderHelp.Add(vBox);
+
+            PackStart(vBox, false, false, 10);
+
         }
     }
 }

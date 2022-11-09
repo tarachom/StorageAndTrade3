@@ -2,9 +2,9 @@ using Gtk;
 
 namespace StorageAndTrade
 {
-    class PageDirectoryAll : VBox
+    class PageDirectory : VBox
     {
-        public PageDirectoryAll() : base()
+        public PageDirectory() : base()
         {
             //Кнопки
             HBox hBoxBotton = new HBox();
@@ -323,6 +323,5 @@ namespace StorageAndTrade
             if (clickAction != null)
                 lb.Clicked += clickAction;
         }
-
     }
 }

@@ -2,9 +2,9 @@ using Gtk;
 
 namespace StorageAndTrade
 {
-    class PageDocumentsAll : VBox
+    class PageDocuments : VBox
     {
-        public PageDocumentsAll() : base()
+        public PageDocuments() : base()
         {
             //Кнопки
             HBox hBoxBotton = new HBox();

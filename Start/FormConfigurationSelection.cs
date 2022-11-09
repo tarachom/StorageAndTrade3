@@ -157,11 +157,7 @@ namespace StorageAndTrade
 
                 if (!flagOpen)
                 {
-                    MessageDialog md = new MessageDialog(this, DialogFlags.DestroyWithParent, MessageType.Warning, ButtonsType.Close,
-                        "Error: " + exception.Message);
-
-                    md.Run();
-                    md.Destroy();
+                    Message.Error(this, "Error: " + exception.Message);
                     return;
                 }
 
@@ -175,11 +171,7 @@ namespace StorageAndTrade
 
                 if (!flagOpenBackgroundTask)
                 {
-                    MessageDialog md = new MessageDialog(this, DialogFlags.DestroyWithParent, MessageType.Warning, ButtonsType.Close,
-                        "Error: " + exception.Message);
-
-                    md.Run();
-                    md.Destroy();
+                    Message.Error(this, "Error: " + exception.Message);
                     return;
                 }
 
