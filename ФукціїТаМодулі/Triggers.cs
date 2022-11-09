@@ -35,10 +35,6 @@ using AccountingSoftware;
 using StorageAndTrade;
 using Конфа = StorageAndTrade_1_0;
 
-namespace StorageAndTrade_1_0.Константи
-{
-
-}
 
 namespace StorageAndTrade_1_0.Довідники
 {

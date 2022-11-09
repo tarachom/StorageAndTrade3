@@ -26,9 +26,6 @@ limitations under the License.
 
 */
 
-using System;
-using System.IO;
-
 using AccountingSoftware;
 using Конфа = StorageAndTrade_1_0;
 using Довідники = StorageAndTrade_1_0.Довідники;
