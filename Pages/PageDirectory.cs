@@ -34,6 +34,7 @@ namespace StorageAndTrade
             AddLink(vLeft, "Користувачі", Користувачі);
             AddLink(vLeft, "Фізичні особи", ФізичніОсоби);
             AddLink(vLeft, "Файли", Файли);
+            AddLink(vLeft, "Статті руху коштів", СтаттіРухуКоштів);
 
             hBoxList.PackStart(vLeft, false, false, 5);
 
@@ -302,6 +303,17 @@ namespace StorageAndTrade
             });
         }
 
+        void СтаттіРухуКоштів(object? sender, EventArgs args)
+        {
+            Program.GeneralForm?.CreateNotebookPage("Довідник: Статті руху коштів", () =>
+            {
+                СтаттяРухуКоштів page = new СтаттяРухуКоштів();
+
+                page.LoadRecords();
+
+                return page;
+            });
+        }
 
         void AddCaption(VBox vBox, string name)
         {

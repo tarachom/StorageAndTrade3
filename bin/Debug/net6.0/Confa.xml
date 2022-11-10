@@ -5,7 +5,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>09.11.2022 23:08:20</DateTimeSave>
+  <DateTimeSave>10.11.2022 12:55:27</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -5018,6 +5018,25 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <Pointer>
               </Pointer>
             </Field>
+            <Field>
+              <Name>КореспондуючийРахунок</Name>
+              <Caption>КореспондуючийРахунок</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>ВидРухуКоштів</Name>
+              <Caption>ВидРухуКоштів</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <Type>enum</Type>
+              <Pointer>Перелічення.ВидиРухуКоштів</Pointer>
+            </Field>
           </Fields>
         </TabularList>
       </TabularLists>
@@ -5927,32 +5946,27 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
         <Field>
           <Name>Самовивіз</Name>
           <Value>1</Value>
-          <Desc>
-          </Desc>
+          <Desc>Самовивіз</Desc>
         </Field>
         <Field>
           <Name>ДоКлієнта</Name>
           <Value>2</Value>
-          <Desc>
-          </Desc>
+          <Desc>ДоКлієнта</Desc>
         </Field>
         <Field>
           <Name>СиламиПеревізника</Name>
           <Value>3</Value>
-          <Desc>
-          </Desc>
+          <Desc>Силами перевізника</Desc>
         </Field>
         <Field>
           <Name>НашимиСиламиЗАдресиВідправника</Name>
           <Value>4</Value>
-          <Desc>
-          </Desc>
+          <Desc>Нашими силами</Desc>
         </Field>
         <Field>
           <Name>ПорученняЕкспедитору</Name>
           <Value>5</Value>
-          <Desc>
-          </Desc>
+          <Desc>Поручення експедитору</Desc>
         </Field>
       </Fields>
     </Enum>
@@ -6046,20 +6060,17 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
         <Field>
           <Name>ОплатаПраці</Name>
           <Value>1</Value>
-          <Desc>
-          </Desc>
+          <Desc>Оплата праці</Desc>
         </Field>
         <Field>
           <Name>ПодатокНаПрибуток</Name>
           <Value>2</Value>
-          <Desc>
-          </Desc>
+          <Desc>Податок на прибуток</Desc>
         </Field>
         <Field>
           <Name>ОплатаОборотнихАктивів</Name>
           <Value>3</Value>
-          <Desc>
-          </Desc>
+          <Desc>Оплата оборотних активів</Desc>
         </Field>
       </Fields>
     </Enum>

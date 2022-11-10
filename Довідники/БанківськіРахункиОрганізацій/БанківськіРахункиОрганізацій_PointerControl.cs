@@ -9,7 +9,7 @@ namespace StorageAndTrade
         {
             pointer = new БанківськіРахункиОрганізацій_Pointer();
             WidthPresentation = 300;
-            Caption = "Валюта:";
+            Caption = "Банківський рахунок:";
         }
 
         БанківськіРахункиОрганізацій_Pointer pointer;

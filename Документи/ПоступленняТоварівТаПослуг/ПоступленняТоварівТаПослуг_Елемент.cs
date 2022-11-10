@@ -30,6 +30,23 @@ namespace StorageAndTrade
         ДоговориКонтрагентів_PointerControl Договір = new ДоговориКонтрагентів_PointerControl();
         ComboBoxText ГосподарськаОперація = new ComboBoxText();
         ComboBoxText ФормаОплати = new ComboBoxText();
+        СтруктураПідприємства_PointerControl Підрозділ = new СтруктураПідприємства_PointerControl() { Caption = "Підрозділ" };
+        DateTimeControl ДатаОплати = new DateTimeControl();
+        CheckButton Узгоджений = new CheckButton("Узгоджений");
+        БанківськіРахункиОрганізацій_PointerControl БанківськийрахунокОрганізації = new БанківськіРахункиОрганізацій_PointerControl() { WidthPresentation = 200 };
+        БанківськіРахункиКонтрагентів_PointerControl БанківськийрахунокКонтрагента = new БанківськіРахункиКонтрагентів_PointerControl() { Caption = "Рахунок контрагента", WidthPresentation = 200 };
+        Entry НомерВхідногоДокументу = new Entry() { WidthRequest = 200 };
+        DateTimeControl ДатаВхідногоДокументу = new DateTimeControl();
+        Користувачі_PointerControl Автор = new Користувачі_PointerControl();
+        CheckButton ВернутиТару = new CheckButton("Вернути тару");
+        DateTimeControl ДатаПоверненняТари = new DateTimeControl();
+        ComboBoxText СпосібДоставки = new ComboBoxText();
+        NumericControl Курс = new NumericControl();
+        IntegerControl Кратність = new IntegerControl();
+        TimeControl ЧасДоставкиЗ = new TimeControl();
+        TimeControl ЧасДоставкиДо = new TimeControl();
+        Користувачі_PointerControl Менеджер = new Користувачі_PointerControl() { Caption = "Менеджер" };
+        СтаттяРухуКоштів_PointerControl СтаттяРухуКоштів = new СтаттяРухуКоштів_PointerControl();
         Entry Коментар = new Entry() { WidthRequest = 900 };
 
         ПоступленняТоварівТаПослуг_ТабличнаЧастина_Товари Товари = new ПоступленняТоварівТаПослуг_ТабличнаЧастина_Товари();
@@ -60,12 +77,41 @@ namespace StorageAndTrade
 
             HPaned hPaned = new HPaned() { Orientation = Orientation.Vertical, BorderWidth = 5 };
 
+            FillComboBoxes();
+
             CreatePack1(hPaned);
             CreatePack2(hPaned);
 
             PackStart(hPaned, true, true, 5);
 
             ShowAll();
+        }
+
+        void FillComboBoxes()
+        {
+            if (Config.Kernel != null)
+            {
+                //1
+                ConfigurationEnums Конфігурація_ГосподарськіОперації = Config.Kernel.Conf.Enums["ГосподарськіОперації"];
+
+                ГосподарськаОперація.Append(
+                    Перелічення.ГосподарськіОперації.ЗакупівляВПостачальника.ToString(),
+                    Конфігурація_ГосподарськіОперації.Fields["ЗакупівляВПостачальника"].Desc);
+
+                ГосподарськаОперація.Active = 0;
+
+                //2
+                foreach (ConfigurationEnumField field in Config.Kernel.Conf.Enums["ФормаОплати"].Fields.Values)
+                    ФормаОплати.Append(field.Name, field.Desc);
+
+                ФормаОплати.ActiveId = Перелічення.ФормаОплати.Готівка.ToString();
+
+                //3
+                foreach (ConfigurationEnumField field in Config.Kernel.Conf.Enums["СпособиДоставки"].Fields.Values)
+                    СпосібДоставки.Append(field.Name, field.Desc);
+
+                СпосібДоставки.ActiveId = Перелічення.СпособиДоставки.Самовивіз.ToString();
+            }
         }
 
         void CreatePack1(HPaned hPaned)
@@ -103,11 +149,15 @@ namespace StorageAndTrade
 
             CreateContainer1(vBoxContainer1);
 
+            hBoxContainer.PackStart(new Separator(Orientation.Vertical), false, false, 5);
+
             //Container2
             VBox vBoxContainer2 = new VBox() { WidthRequest = 500 };
             hBoxContainer.PackStart(vBoxContainer2, false, false, 5);
 
             CreateContainer2(vBoxContainer2);
+
+            hBoxContainer.PackStart(new Separator(Orientation.Vertical), false, false, 5);
             // <--
         }
 
@@ -158,22 +208,6 @@ namespace StorageAndTrade
 
         void CreateContainer2(VBox vBox)
         {
-            if (Config.Kernel != null)
-            {
-                ConfigurationEnums Конфігурація_ГосподарськіОперації = Config.Kernel.Conf.Enums["ГосподарськіОперації"];
-
-                ГосподарськаОперація.Append(
-                    Перелічення.ГосподарськіОперації.ЗакупівляВПостачальника.ToString(),
-                    Конфігурація_ГосподарськіОперації.Fields["ЗакупівляВПостачальника"].Desc);
-
-                ГосподарськаОперація.Active = 0;
-
-                foreach (ConfigurationEnumField field in Config.Kernel.Conf.Enums["ФормаОплати"].Fields.Values)
-                    ФормаОплати.Append(field.Name, field.Desc);
-
-                ФормаОплати.ActiveId = Перелічення.ФормаОплати.Готівка.ToString();
-            }
-
             //ГосподарськаОперація
             HBox hBoxOperation = new HBox() { Halign = Align.End };
             vBox.PackStart(hBoxOperation, false, false, 5);
@@ -195,11 +229,139 @@ namespace StorageAndTrade
             hBoxValuta.PackStart(Валюта, false, false, 5);
         }
 
+        void CreateContainer3(VBox vBox)
+        {
+            //Підрозділ
+            HBox hBoxPidrozdil = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxPidrozdil, false, false, 5);
+
+            hBoxPidrozdil.PackStart(Підрозділ, false, false, 5);
+
+            //ДатаОплати
+            HBox hBoxDataOplaty = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxDataOplaty, false, false, 5);
+
+            hBoxDataOplaty.PackStart(new Label("Дата оплати:"), false, false, 5);
+            hBoxDataOplaty.PackStart(ДатаОплати, false, false, 5);
+
+            //БанківськийрахунокКонтрагента
+            HBox hBoxBankRahunokKontragenta = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxBankRahunokKontragenta, false, false, 5);
+
+            hBoxBankRahunokKontragenta.PackStart(БанківськийрахунокКонтрагента, false, false, 5);
+
+            //Автор
+            HBox hBoxAutor = new HBox() { Halign = Align.Start };
+            vBox.PackStart(hBoxAutor, false, false, 5);
+
+            hBoxAutor.PackStart(Автор, false, false, 5);
+
+            //Менеджер
+            HBox hBoxMenedjer = new HBox() { Halign = Align.Start };
+            vBox.PackStart(hBoxMenedjer, false, false, 5);
+
+            hBoxMenedjer.PackStart(Менеджер, false, false, 5);
+
+            //СпосібДоставки
+            HBox hBoxSposibDostavky = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxSposibDostavky, false, false, 5);
+
+            hBoxSposibDostavky.PackStart(new Label("Спосіб доставки:"), false, false, 0);
+            hBoxSposibDostavky.PackStart(СпосібДоставки, false, false, 5);
+
+            //ЧасДоставки
+            HBox hBoxTchasDostavky = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxTchasDostavky, false, false, 5);
+
+            hBoxTchasDostavky.PackStart(new Label("Час доставки з"), false, false, 5);
+            hBoxTchasDostavky.PackStart(ЧасДоставкиЗ, false, false, 5);
+            hBoxTchasDostavky.PackStart(new Label("до"), false, false, 5);
+            hBoxTchasDostavky.PackStart(ЧасДоставкиДо, false, false, 5);
+        }
+
+        void CreateContainer4(VBox vBox)
+        {
+            //Узгоджений
+            HBox hBoxUzgodjenyi = new HBox() { Halign = Align.Start };
+            vBox.PackStart(hBoxUzgodjenyi, false, false, 5);
+
+            hBoxUzgodjenyi.PackStart(Узгоджений, false, false, 5);
+
+            //ВернутиТару
+            HBox hBoxVernutyTaru = new HBox() { Halign = Align.Start };
+            vBox.PackStart(hBoxVernutyTaru, false, false, 5);
+
+            hBoxVernutyTaru.PackStart(ВернутиТару, false, false, 5);
+
+            //БанківськийрахунокОрганізації
+            HBox hBoxBankRahunokOrganization = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxBankRahunokOrganization, false, false, 5);
+
+            hBoxBankRahunokOrganization.PackStart(БанківськийрахунокОрганізації, false, false, 5);
+
+            //НомерВхідногоДокументу
+            HBox hBoxNomerDocVhid = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxNomerDocVhid, false, false, 5);
+
+            hBoxNomerDocVhid.PackStart(new Label("Номер вхід. док.:"), false, false, 5);
+            hBoxNomerDocVhid.PackStart(НомерВхідногоДокументу, false, false, 5);
+
+            //ДатаВхідногоДокументу
+            HBox hBoxDataDocVhid = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxDataDocVhid, false, false, 5);
+
+            hBoxDataDocVhid.PackStart(new Label("Дата вхід. док.:"), false, false, 5);
+            hBoxDataDocVhid.PackStart(ДатаВхідногоДокументу, false, false, 5);
+
+            //ДатаПоверненняТари
+            HBox hBoxDataPovernenjaTary = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxDataPovernenjaTary, false, false, 5);
+
+            hBoxDataPovernenjaTary.PackStart(new Label("Дата повернення тари.:"), false, false, 5);
+            hBoxDataPovernenjaTary.PackStart(ДатаПоверненняТари, false, false, 5);
+
+            //Курс
+            HBox hBoxKurs = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxKurs, false, false, 5);
+
+            hBoxKurs.PackStart(new Label("Курс:"), false, false, 5);
+            hBoxKurs.PackStart(Курс, false, false, 5);
+
+            //Кратність
+            HBox hBoxKratnist = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxKratnist, false, false, 5);
+
+            hBoxKratnist.PackStart(new Label("Курс:"), false, false, 5);
+            hBoxKratnist.PackStart(Кратність, false, false, 5);
+
+            //СтаттяРухуКоштів
+            HBox hBoxStatjaRuhuKoshtiv = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxStatjaRuhuKoshtiv, false, false, 5);
+
+            hBoxStatjaRuhuKoshtiv.PackStart(СтаттяРухуКоштів, false, false, 5);
+        }
+
         void CreatePack2(HPaned hPaned)
         {
             Notebook notebook = new Notebook() { Scrollable = true, EnablePopup = true, BorderWidth = 0, ShowBorder = false };
             notebook.TabPos = PositionType.Top;
             notebook.AppendPage(Товари, new Label("Товари"));
+
+            VBox vBox = new VBox();
+            notebook.AppendPage(vBox, new Label("Додаткові реквізити"));
+
+            HBox hBoxContainer = new HBox();
+            vBox.PackStart(hBoxContainer, false, false, 5);
+
+            VBox vBoxContainer1 = new VBox() { WidthRequest = 500 };
+            hBoxContainer.PackStart(vBoxContainer1, false, false, 5);
+
+            CreateContainer3(vBoxContainer1);
+
+            VBox vBoxContainer2 = new VBox() { WidthRequest = 500 };
+            hBoxContainer.PackStart(vBoxContainer2, false, false, 5);
+
+            CreateContainer4(vBoxContainer2);
 
             hPaned.Pack2(notebook, true, false);
         }
@@ -217,6 +379,8 @@ namespace StorageAndTrade
                 ПоступленняТоварівТаПослуг_Objest.Каса = ЗначенняЗаЗамовчуванням.ОсновнаКаса_Const;
                 ПоступленняТоварівТаПослуг_Objest.Склад = ЗначенняЗаЗамовчуванням.ОснонийСклад_Const;
                 ПоступленняТоварівТаПослуг_Objest.Контрагент = ЗначенняЗаЗамовчуванням.ОсновнийПостачальник_Const;
+                ПоступленняТоварівТаПослуг_Objest.Підрозділ = ЗначенняЗаЗамовчуванням.ОсновнийПідрозділ_Const;
+                ПоступленняТоварівТаПослуг_Objest.БанківськийрахунокОрганізації = ЗначенняЗаЗамовчуванням.ОсновнийБанківськийРахунок_Const;
             }
 
             НомерДок.Text = ПоступленняТоварівТаПослуг_Objest.НомерДок;
@@ -230,7 +394,25 @@ namespace StorageAndTrade
             ГосподарськаОперація.ActiveId = ((Перелічення.ГосподарськіОперації)ПоступленняТоварівТаПослуг_Objest.ГосподарськаОперація).ToString();
             ФормаОплати.ActiveId = ((Перелічення.ФормаОплати)ПоступленняТоварівТаПослуг_Objest.ФормаОплати).ToString();
             Коментар.Text = ПоступленняТоварівТаПослуг_Objest.Коментар;
+            Підрозділ.Pointer = ПоступленняТоварівТаПослуг_Objest.Підрозділ;
+            ДатаОплати.Value = ПоступленняТоварівТаПослуг_Objest.ДатаОплати;
+            Узгоджений.Active = ПоступленняТоварівТаПослуг_Objest.Узгоджений;
+            БанківськийрахунокОрганізації.Pointer = ПоступленняТоварівТаПослуг_Objest.БанківськийрахунокОрганізації;
+            БанківськийрахунокКонтрагента.Pointer = ПоступленняТоварівТаПослуг_Objest.БанківськийрахунокКонтрагента;
+            НомерВхідногоДокументу.Text = ПоступленняТоварівТаПослуг_Objest.НомерВхідногоДокументу;
+            ДатаВхідногоДокументу.Value = ПоступленняТоварівТаПослуг_Objest.ДатаВхідногоДокументу;
+            Автор.Pointer = ПоступленняТоварівТаПослуг_Objest.Автор;
+            ВернутиТару.Active = ПоступленняТоварівТаПослуг_Objest.ВернутиТару;
+            ДатаПоверненняТари.Value = ПоступленняТоварівТаПослуг_Objest.ДатаПоверненняТари;
+            СпосібДоставки.ActiveId = ((Перелічення.СпособиДоставки)ПоступленняТоварівТаПослуг_Objest.СпосібДоставки).ToString();
+            Курс.Value = ПоступленняТоварівТаПослуг_Objest.Курс;
+            Кратність.Value = ПоступленняТоварівТаПослуг_Objest.Кратність;
+            ЧасДоставкиЗ.Value = ПоступленняТоварівТаПослуг_Objest.ЧасДоставкиЗ;
+            ЧасДоставкиДо.Value = ПоступленняТоварівТаПослуг_Objest.ЧасДоставкиДо;
+            Менеджер.Pointer = ПоступленняТоварівТаПослуг_Objest.Менеджер;
+            СтаттяРухуКоштів.Pointer = ПоступленняТоварівТаПослуг_Objest.СтаттяРухуКоштів;
 
+            //Таблична частина
             Товари.ПоступленняТоварівТаПослуг_Objest = ПоступленняТоварівТаПослуг_Objest;
             Товари.LoadRecords();
 
@@ -256,6 +438,23 @@ namespace StorageAndTrade
             ПоступленняТоварівТаПослуг_Objest.ГосподарськаОперація = Enum.Parse<Перелічення.ГосподарськіОперації>(ГосподарськаОперація.ActiveId);
             ПоступленняТоварівТаПослуг_Objest.ФормаОплати = Enum.Parse<Перелічення.ФормаОплати>(ФормаОплати.ActiveId);
             ПоступленняТоварівТаПослуг_Objest.Коментар = Коментар.Text;
+            ПоступленняТоварівТаПослуг_Objest.Підрозділ = Підрозділ.Pointer;
+            ПоступленняТоварівТаПослуг_Objest.ДатаОплати = ДатаОплати.Value;
+            ПоступленняТоварівТаПослуг_Objest.Узгоджений = Узгоджений.Active;
+            ПоступленняТоварівТаПослуг_Objest.БанківськийрахунокОрганізації = БанківськийрахунокОрганізації.Pointer;
+            ПоступленняТоварівТаПослуг_Objest.БанківськийрахунокКонтрагента = БанківськийрахунокКонтрагента.Pointer;
+            ПоступленняТоварівТаПослуг_Objest.НомерВхідногоДокументу = НомерВхідногоДокументу.Text;
+            ПоступленняТоварівТаПослуг_Objest.ДатаВхідногоДокументу = ДатаВхідногоДокументу.Value;
+            ПоступленняТоварівТаПослуг_Objest.Автор = Автор.Pointer;
+            ПоступленняТоварівТаПослуг_Objest.ВернутиТару = ВернутиТару.Active;
+            ПоступленняТоварівТаПослуг_Objest.ДатаПоверненняТари = ДатаПоверненняТари.Value;
+            ПоступленняТоварівТаПослуг_Objest.СпосібДоставки = Enum.Parse<Перелічення.СпособиДоставки>(СпосібДоставки.ActiveId);
+            ПоступленняТоварівТаПослуг_Objest.Курс = Курс.Value;
+            ПоступленняТоварівТаПослуг_Objest.Кратність = Кратність.Value;
+            ПоступленняТоварівТаПослуг_Objest.ЧасДоставкиЗ = ЧасДоставкиЗ.Value;
+            ПоступленняТоварівТаПослуг_Objest.ЧасДоставкиДо = ЧасДоставкиДо.Value;
+            ПоступленняТоварівТаПослуг_Objest.Менеджер = Менеджер.Pointer;
+            ПоступленняТоварівТаПослуг_Objest.СтаттяРухуКоштів = СтаттяРухуКоштів.Pointer;
         }
 
         #endregion

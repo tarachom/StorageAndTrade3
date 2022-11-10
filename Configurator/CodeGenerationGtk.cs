@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 09.11.2022 23:08:20
+ * Дата конфігурації: 10.11.2022 12:55:27
  *
  */
  
@@ -2093,16 +2093,20 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         
         string Назва = "";
         string Код = "";
+        string КореспондуючийРахунок = "";
+        string ВидРухуКоштів = "";
 
         Array ToArray()
         {
             return new object[] { new Gdk.Pixbuf(Image), ID 
-            /* */ , Назва, Код };
+            /* */ , Назва, Код, КореспондуючийРахунок, ВидРухуКоштів };
         }
 
         public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */
             , typeof(string) /* Назва */
             , typeof(string) /* Код */
+            , typeof(string) /* КореспондуючийРахунок */
+            , typeof(string) /* ВидРухуКоштів */
             );
 
         public static void AddColumns(TreeView treeView)
@@ -2112,6 +2116,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             /* */
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Назва*/
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Код*/
+            treeView.AppendColumn(new TreeViewColumn("КореспондуючийРахунок", new CellRendererText() { Xpad = 4 }, "text", 4) { SortColumnId = 4 } ); /*КореспондуючийРахунок*/
+            treeView.AppendColumn(new TreeViewColumn("ВидРухуКоштів", new CellRendererText() { Xpad = 4 }, "text", 5) { SortColumnId = 5 } ); /*ВидРухуКоштів*/
             
         }
 
@@ -2133,6 +2139,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                 {
                     Довідники.СтаттяРухуКоштів_Const.Назва /* 1 */
                     , Довідники.СтаттяРухуКоштів_Const.Код /* 2 */
+                    , Довідники.СтаттяРухуКоштів_Const.КореспондуючийРахунок /* 3 */
+                    , Довідники.СтаттяРухуКоштів_Const.ВидРухуКоштів /* 4 */
                     
                 });
 
@@ -2156,7 +2164,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     {
                         ID = cur.UnigueID.ToString(),
                         Назва = cur.Fields?[СтаттяРухуКоштів_Const.Назва]?.ToString() ?? "", /**/
-                        Код = cur.Fields?[СтаттяРухуКоштів_Const.Код]?.ToString() ?? "" /**/
+                        Код = cur.Fields?[СтаттяРухуКоштів_Const.Код]?.ToString() ?? "", /**/
+                        КореспондуючийРахунок = cur.Fields?[СтаттяРухуКоштів_Const.КореспондуючийРахунок]?.ToString() ?? "", /**/
+                        ВидРухуКоштів = ((Перелічення.ВидиРухуКоштів)(cur.Fields?[СтаттяРухуКоштів_Const.ВидРухуКоштів]!)).ToString() /**/
                         
                     };
 
