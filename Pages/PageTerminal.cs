@@ -16,6 +16,11 @@ namespace StorageAndTrade
 
             hBoxBotton.PackStart(bClose, false, false, 10);
 
+            Button bClear = new Button("Очистити");
+            bClear.Clicked += OnClear;
+
+            hBoxBotton.PackStart(bClear, false, false, 10);
+
             PackStart(hBoxBotton, false, false, 10);
 
             ScrolledWindow scroll = new ScrolledWindow() { ShadowType = ShadowType.In };
@@ -29,6 +34,9 @@ namespace StorageAndTrade
 
         public void LoadRecords()
         {
+            foreach (Widget Child in vBoxMessage.Children)
+                vBoxMessage.Remove(Child);
+
             List<Dictionary<string, object>> listRow = ФункціїДляПовідомлень.ПрочитатиПовідомленняПроПомилку();
 
             foreach (Dictionary<string, object> row in listRow)
@@ -67,5 +75,12 @@ namespace StorageAndTrade
 
             vBoxMessage.PackStart(new Separator(Orientation.Horizontal), false, false, 5);
         }
+
+        void OnClear(object? sender, EventArgs args)
+        {
+            ФункціїДляПовідомлень.ОчиститиПовідомлення();
+            LoadRecords();
+        }
+
     }
 }

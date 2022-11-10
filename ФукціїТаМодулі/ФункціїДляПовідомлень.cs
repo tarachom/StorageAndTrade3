@@ -91,7 +91,7 @@ ORDER BY Дата DESC
 
         public static void ВідкритиТермінал()
         {
-            Program.GeneralForm?.CreateNotebookPage("Термінал", () =>
+            Program.GeneralForm?.CreateNotebookPage("Повідомлення", () =>
             {
                 PageTerminal page = new PageTerminal();
 
