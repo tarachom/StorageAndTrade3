@@ -30,16 +30,25 @@ namespace StorageAndTrade
             }
         }
 
+        public Контрагенти_Pointer КонтрагентВласник { get; set; } = new Контрагенти_Pointer();
+
         protected override void OpenSelect(object? sender, EventArgs args)
         {
+            if (BeforeClickOpenFunc != null)
+                BeforeClickOpenFunc.Invoke();
+
             Program.GeneralForm?.CreateNotebookPage("Вибір - Довідник: Договори", () =>
             {
                 ДоговориКонтрагентів page = new ДоговориКонтрагентів(true);
 
                 page.DirectoryPointerItem = Pointer;
+                page.КонтрагентВласник.Pointer = КонтрагентВласник;
                 page.CallBack_OnSelectPointer = (ДоговориКонтрагентів_Pointer selectPointer) =>
                 {
                     Pointer = selectPointer;
+
+                    if (AfterSelectFunc != null)
+                        AfterSelectFunc.Invoke();
                 };
 
                 page.LoadRecords();

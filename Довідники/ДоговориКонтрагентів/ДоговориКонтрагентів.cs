@@ -16,6 +16,7 @@ namespace StorageAndTrade
         public System.Action<ДоговориКонтрагентів_Pointer>? CallBack_OnSelectPointer { get; set; }
 
         TreeView TreeViewGrid;
+        public Контрагенти_PointerControl КонтрагентВласник = new Контрагенти_PointerControl();
 
         public ДоговориКонтрагентів(bool IsSelectPointer = false) : base()
         {
@@ -29,8 +30,6 @@ namespace StorageAndTrade
             bClose.Clicked += (object? sender, EventArgs args) => { Program.GeneralForm?.CloseCurrentPageNotebook(); };
 
             hBoxBotton.PackStart(bClose, false, false, 10);
-
-            PackStart(hBoxBotton, false, false, 10);
 
             //Як форма відкрита для вибору
             if (IsSelectPointer)
@@ -46,6 +45,16 @@ namespace StorageAndTrade
 
                 hBoxBotton.PackStart(bEmptyPointer, false, false, 10);
             }
+
+            PackStart(hBoxBotton, false, false, 10);
+
+            //Власник
+            hBoxBotton.PackStart(КонтрагентВласник, false, false, 2);
+            КонтрагентВласник.Caption = "Контрагент власник:";
+            КонтрагентВласник.AfterSelectFunc = () =>
+            {
+                LoadRecords();
+            };
 
             CreateToolbar();
 
@@ -97,6 +106,13 @@ namespace StorageAndTrade
         {
             ТабличніСписки.ДоговориКонтрагентів_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.ДоговориКонтрагентів_Записи.DirectoryPointerItem = DirectoryPointerItem;
+
+            ТабличніСписки.ДоговориКонтрагентів_Записи.Where.Clear();
+            if (!КонтрагентВласник.Pointer.UnigueID.IsEmpty())
+            {
+                ТабличніСписки.ДоговориКонтрагентів_Записи.Where.Add(
+                    new Where(ДоговориКонтрагентів_Const.Контрагент, Comparison.EQ, КонтрагентВласник.Pointer.UnigueID.UGuid));
+            }
 
             ТабличніСписки.ДоговориКонтрагентів_Записи.LoadRecords();
 

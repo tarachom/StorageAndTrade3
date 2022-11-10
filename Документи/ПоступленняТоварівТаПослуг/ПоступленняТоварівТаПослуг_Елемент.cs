@@ -174,10 +174,30 @@ namespace StorageAndTrade
                 if (Договір.Pointer.IsEmpty())
                 {
                     ДоговориКонтрагентів_Pointer? договірКонтрагента =
-                        ФункціїДляДокументів.ОсновнийДоговірДляКонтрагента(Контрагент.Pointer, Перелічення.ТипДоговорів.ЗПостачальниками);
+                    ФункціїДляДокументів.ОсновнийДоговірДляКонтрагента(Контрагент.Pointer, Перелічення.ТипДоговорів.ЗПостачальниками);
 
                     if (договірКонтрагента != null)
                         Договір.Pointer = договірКонтрагента;
+                }
+                else
+                {
+                    if (Контрагент.Pointer.IsEmpty())
+                        Договір.Pointer = new ДоговориКонтрагентів_Pointer();
+                    else
+                    {
+                        //
+                        //Перевірити чи змінився контрагент
+                        //
+
+                        ДоговориКонтрагентів_Objest? договориКонтрагентів_Objest = Договір.Pointer.GetDirectoryObject();
+
+                        if (договориКонтрагентів_Objest != null)
+                            if (договориКонтрагентів_Objest.Контрагент != Контрагент.Pointer)
+                            {
+                                Договір.Pointer = new ДоговориКонтрагентів_Pointer();
+                                Контрагент.AfterSelectFunc!.Invoke();
+                            };
+                    }
                 }
             };
 
@@ -186,6 +206,11 @@ namespace StorageAndTrade
             //Договір
             HBox hBoxDogovir = new HBox() { Halign = Align.End };
             vBox.PackStart(hBoxDogovir, false, false, 5);
+
+            Договір.BeforeClickOpenFunc = () =>
+            {
+                Договір.КонтрагентВласник = Контрагент.Pointer;
+            };
 
             hBoxDogovir.PackStart(Договір, false, false, 5);
 
