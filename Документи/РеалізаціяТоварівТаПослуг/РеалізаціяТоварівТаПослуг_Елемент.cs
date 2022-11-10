@@ -268,13 +268,13 @@ namespace StorageAndTrade
             hBoxBankRahunokKontragenta.PackStart(БанківськийрахунокКонтрагента, false, false, 5);
 
             //Автор
-            HBox hBoxAutor = new HBox() { Halign = Align.Start };
+            HBox hBoxAutor = new HBox() { Halign = Align.End };
             vBox.PackStart(hBoxAutor, false, false, 5);
 
             hBoxAutor.PackStart(Автор, false, false, 5);
 
             //Менеджер
-            HBox hBoxMenedjer = new HBox() { Halign = Align.Start };
+            HBox hBoxMenedjer = new HBox() { Halign = Align.End };
             vBox.PackStart(hBoxMenedjer, false, false, 5);
 
             hBoxMenedjer.PackStart(Менеджер, false, false, 5);
@@ -334,7 +334,7 @@ namespace StorageAndTrade
             HBox hBoxKratnist = new HBox() { Halign = Align.End };
             vBox.PackStart(hBoxKratnist, false, false, 5);
 
-            hBoxKratnist.PackStart(new Label("Курс:"), false, false, 5);
+            hBoxKratnist.PackStart(new Label("Кратність:"), false, false, 5);
             hBoxKratnist.PackStart(Кратність, false, false, 5);
         }
 

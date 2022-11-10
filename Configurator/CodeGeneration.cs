@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 10.11.2022 16:56:27
+ * Дата конфігурації: 10.11.2022 21:12:47
  *
  */
 
@@ -239,7 +239,7 @@ namespace StorageAndTrade_1_0.Константи
             
             Dictionary<string, object> fieldValue = new Dictionary<string, object>();
             bool IsSelect = Config.Kernel!.DataBase.SelectAllConstants("tab_constants",
-                 new string[] { "col_a8", "col_a9", "col_g6", "col_g7", "col_h8" }, fieldValue);
+                 new string[] { "col_a8", "col_a9", "col_g6", "col_g7", "col_h8", "col_h9", "col_i1" }, fieldValue);
             
             if (IsSelect)
             {
@@ -248,6 +248,8 @@ namespace StorageAndTrade_1_0.Константи
                 m_ЗупинитиФоновіЗадачі_Const = (fieldValue["col_g6"] != DBNull.Value) ? bool.Parse(fieldValue["col_g6"]?.ToString() ?? "False") : false;
                 m_ЗаблокованіОбєкти_Const = fieldValue["col_g7"]?.ToString() ?? "";
                 m_ПовідомленняТаПомилки_Const = fieldValue["col_h8"]?.ToString() ?? "";
+                m_ВестиОблікПоСеріяхНоменклатури_Const = (fieldValue["col_h9"] != DBNull.Value) ? bool.Parse(fieldValue["col_h9"]?.ToString() ?? "False") : false;
+                m_ВестиОблікПоХарактеристикахНоменклатури_Const = (fieldValue["col_i1"] != DBNull.Value) ? bool.Parse(fieldValue["col_i1"]?.ToString() ?? "False") : false;
                 
             }
 			
@@ -321,6 +323,34 @@ namespace StorageAndTrade_1_0.Константи
             {
                 m_ПовідомленняТаПомилки_Const = value;
                 Config.Kernel!.DataBase.SaveConstants("tab_constants", "col_h8", m_ПовідомленняТаПомилки_Const);
+            }
+        }
+        
+        static bool m_ВестиОблікПоСеріяхНоменклатури_Const = false;
+        public static bool ВестиОблікПоСеріяхНоменклатури_Const
+        {
+            get 
+            {
+                return m_ВестиОблікПоСеріяхНоменклатури_Const;
+            }
+            set
+            {
+                m_ВестиОблікПоСеріяхНоменклатури_Const = value;
+                Config.Kernel!.DataBase.SaveConstants("tab_constants", "col_h9", m_ВестиОблікПоСеріяхНоменклатури_Const);
+            }
+        }
+        
+        static bool m_ВестиОблікПоХарактеристикахНоменклатури_Const = false;
+        public static bool ВестиОблікПоХарактеристикахНоменклатури_Const
+        {
+            get 
+            {
+                return m_ВестиОблікПоХарактеристикахНоменклатури_Const;
+            }
+            set
+            {
+                m_ВестиОблікПоХарактеристикахНоменклатури_Const = value;
+                Config.Kernel!.DataBase.SaveConstants("tab_constants", "col_i1", m_ВестиОблікПоХарактеристикахНоменклатури_Const);
             }
         }
         
@@ -10278,7 +10308,7 @@ namespace StorageAndTrade_1_0.Документи
         public const string БанківськийРахунокКонтрагента = "col_b8";
         public const string Договір = "col_b9";
         public const string Автор = "col_c1";
-        public const string ВернутиТару = "col_c2";
+        public const string ПовернутиТару = "col_c2";
         public const string ДатаПоверненняТари = "col_c3";
         public const string СпосібДоставки = "col_c4";
         public const string Організація = "col_c5";
@@ -10318,7 +10348,7 @@ namespace StorageAndTrade_1_0.Документи
             БанківськийРахунокКонтрагента = new Довідники.БанківськіРахункиКонтрагентів_Pointer();
             Договір = new Довідники.ДоговориКонтрагентів_Pointer();
             Автор = new Довідники.Користувачі_Pointer();
-            ВернутиТару = false;
+            ПовернутиТару = false;
             ДатаПоверненняТари = DateTime.MinValue;
             СпосібДоставки = 0;
             Організація = new Довідники.Організації_Pointer();
@@ -10360,7 +10390,7 @@ namespace StorageAndTrade_1_0.Документи
                 БанківськийРахунокКонтрагента = new Довідники.БанківськіРахункиКонтрагентів_Pointer(base.FieldValue["col_b8"]);
                 Договір = new Довідники.ДоговориКонтрагентів_Pointer(base.FieldValue["col_b9"]);
                 Автор = new Довідники.Користувачі_Pointer(base.FieldValue["col_c1"]);
-                ВернутиТару = (base.FieldValue["col_c2"] != DBNull.Value) ? bool.Parse(base.FieldValue["col_c2"]?.ToString() ?? "False") : false;
+                ПовернутиТару = (base.FieldValue["col_c2"] != DBNull.Value) ? bool.Parse(base.FieldValue["col_c2"]?.ToString() ?? "False") : false;
                 ДатаПоверненняТари = (base.FieldValue["col_c3"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["col_c3"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
                 СпосібДоставки = (base.FieldValue["col_c4"] != DBNull.Value) ? (Перелічення.СпособиДоставки)base.FieldValue["col_c4"] : 0;
                 Організація = new Довідники.Організації_Pointer(base.FieldValue["col_c5"]);
@@ -10403,7 +10433,7 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_b8"] = БанківськийРахунокКонтрагента.UnigueID.UGuid;
             base.FieldValue["col_b9"] = Договір.UnigueID.UGuid;
             base.FieldValue["col_c1"] = Автор.UnigueID.UGuid;
-            base.FieldValue["col_c2"] = ВернутиТару;
+            base.FieldValue["col_c2"] = ПовернутиТару;
             base.FieldValue["col_c3"] = ДатаПоверненняТари;
             base.FieldValue["col_c4"] = (int)СпосібДоставки;
             base.FieldValue["col_c5"] = Організація.UnigueID.UGuid;
@@ -10457,7 +10487,7 @@ namespace StorageAndTrade_1_0.Документи
 			copy.БанківськийРахунокКонтрагента = БанківськийРахунокКонтрагента;
 			copy.Договір = Договір;
 			copy.Автор = Автор;
-			copy.ВернутиТару = ВернутиТару;
+			copy.ПовернутиТару = ПовернутиТару;
 			copy.ДатаПоверненняТари = ДатаПоверненняТари;
 			copy.СпосібДоставки = СпосібДоставки;
 			copy.Організація = Організація;
@@ -10505,7 +10535,7 @@ namespace StorageAndTrade_1_0.Документи
         public Довідники.БанківськіРахункиКонтрагентів_Pointer БанківськийРахунокКонтрагента { get; set; }
         public Довідники.ДоговориКонтрагентів_Pointer Договір { get; set; }
         public Довідники.Користувачі_Pointer Автор { get; set; }
-        public bool ВернутиТару { get; set; }
+        public bool ПовернутиТару { get; set; }
         public DateTime ДатаПоверненняТари { get; set; }
         public Перелічення.СпособиДоставки СпосібДоставки { get; set; }
         public Довідники.Організації_Pointer Організація { get; set; }

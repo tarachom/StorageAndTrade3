@@ -5,7 +5,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>10.11.2022 16:56:27</DateTimeSave>
+  <DateTimeSave>10.11.2022 21:12:47</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -436,6 +436,22 @@ https://accounting.org.ua/storage_and_trade.html</Desc>
               </Fields>
             </TablePart>
           </TabularParts>
+        </Constant>
+        <Constant>
+          <Name>ВестиОблікПоСеріяхНоменклатури</Name>
+          <NameInTable>col_h9</NameInTable>
+          <Desc>
+          </Desc>
+          <Type>boolean</Type>
+          <TabularParts />
+        </Constant>
+        <Constant>
+          <Name>ВестиОблікПоХарактеристикахНоменклатури</Name>
+          <NameInTable>col_i1</NameInTable>
+          <Desc>
+          </Desc>
+          <Type>boolean</Type>
+          <TabularParts />
         </Constant>
       </Constants>
     </ConstantsBlock>
@@ -6952,7 +6968,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsIndex>0</IsIndex>
         </Field>
         <Field>
-          <Name>ВернутиТару</Name>
+          <Name>ПовернутиТару</Name>
           <NameInTable>col_c2</NameInTable>
           <Type>boolean</Type>
           <Desc>

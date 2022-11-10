@@ -38,7 +38,7 @@ namespace StorageAndTrade
         Entry НомерВхідногоДокументу = new Entry() { WidthRequest = 200 };
         DateTimeControl ДатаВхідногоДокументу = new DateTimeControl();
         Користувачі_PointerControl Автор = new Користувачі_PointerControl();
-        CheckButton ВернутиТару = new CheckButton("Вернути тару");
+        CheckButton ПовернутиТару = new CheckButton("Вернути тару");
         DateTimeControl ДатаПоверненняТари = new DateTimeControl();
         ComboBoxText СпосібДоставки = new ComboBoxText();
         NumericControl Курс = new NumericControl();
@@ -272,13 +272,13 @@ namespace StorageAndTrade
             hBoxBankRahunokKontragenta.PackStart(БанківськийрахунокКонтрагента, false, false, 5);
 
             //Автор
-            HBox hBoxAutor = new HBox() { Halign = Align.Start };
+            HBox hBoxAutor = new HBox() { Halign = Align.End };
             vBox.PackStart(hBoxAutor, false, false, 5);
 
             hBoxAutor.PackStart(Автор, false, false, 5);
 
             //Менеджер
-            HBox hBoxMenedjer = new HBox() { Halign = Align.Start };
+            HBox hBoxMenedjer = new HBox() { Halign = Align.End };
             vBox.PackStart(hBoxMenedjer, false, false, 5);
 
             hBoxMenedjer.PackStart(Менеджер, false, false, 5);
@@ -312,7 +312,7 @@ namespace StorageAndTrade
             HBox hBoxVernutyTaru = new HBox() { Halign = Align.Start };
             vBox.PackStart(hBoxVernutyTaru, false, false, 5);
 
-            hBoxVernutyTaru.PackStart(ВернутиТару, false, false, 5);
+            hBoxVernutyTaru.PackStart(ПовернутиТару, false, false, 5);
 
             //БанківськийрахунокОрганізації
             HBox hBoxBankRahunokOrganization = new HBox() { Halign = Align.End };
@@ -352,7 +352,7 @@ namespace StorageAndTrade
             HBox hBoxKratnist = new HBox() { Halign = Align.End };
             vBox.PackStart(hBoxKratnist, false, false, 5);
 
-            hBoxKratnist.PackStart(new Label("Курс:"), false, false, 5);
+            hBoxKratnist.PackStart(new Label("Кратність:"), false, false, 5);
             hBoxKratnist.PackStart(Кратність, false, false, 5);
 
             //СтаттяРухуКоштів
@@ -423,7 +423,7 @@ namespace StorageAndTrade
             НомерВхідногоДокументу.Text = ПоступленняТоварівТаПослуг_Objest.НомерВхідногоДокументу;
             ДатаВхідногоДокументу.Value = ПоступленняТоварівТаПослуг_Objest.ДатаВхідногоДокументу;
             Автор.Pointer = ПоступленняТоварівТаПослуг_Objest.Автор;
-            ВернутиТару.Active = ПоступленняТоварівТаПослуг_Objest.ВернутиТару;
+            ПовернутиТару.Active = ПоступленняТоварівТаПослуг_Objest.ПовернутиТару;
             ДатаПоверненняТари.Value = ПоступленняТоварівТаПослуг_Objest.ДатаПоверненняТари;
             СпосібДоставки.ActiveId = ((Перелічення.СпособиДоставки)ПоступленняТоварівТаПослуг_Objest.СпосібДоставки).ToString();
             Курс.Value = ПоступленняТоварівТаПослуг_Objest.Курс;
@@ -467,7 +467,7 @@ namespace StorageAndTrade
             ПоступленняТоварівТаПослуг_Objest.НомерВхідногоДокументу = НомерВхідногоДокументу.Text;
             ПоступленняТоварівТаПослуг_Objest.ДатаВхідногоДокументу = ДатаВхідногоДокументу.Value;
             ПоступленняТоварівТаПослуг_Objest.Автор = Автор.Pointer;
-            ПоступленняТоварівТаПослуг_Objest.ВернутиТару = ВернутиТару.Active;
+            ПоступленняТоварівТаПослуг_Objest.ПовернутиТару = ПовернутиТару.Active;
             ПоступленняТоварівТаПослуг_Objest.ДатаПоверненняТари = ДатаПоверненняТари.Value;
             ПоступленняТоварівТаПослуг_Objest.СпосібДоставки = Enum.Parse<Перелічення.СпособиДоставки>(СпосібДоставки.ActiveId);
             ПоступленняТоварівТаПослуг_Objest.Курс = Курс.Value;
