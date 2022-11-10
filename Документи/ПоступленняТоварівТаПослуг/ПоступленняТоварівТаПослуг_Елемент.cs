@@ -33,8 +33,8 @@ namespace StorageAndTrade
         СтруктураПідприємства_PointerControl Підрозділ = new СтруктураПідприємства_PointerControl() { Caption = "Підрозділ" };
         DateTimeControl ДатаОплати = new DateTimeControl();
         CheckButton Узгоджений = new CheckButton("Узгоджений");
-        БанківськіРахункиОрганізацій_PointerControl БанківськийрахунокОрганізації = new БанківськіРахункиОрганізацій_PointerControl() { WidthPresentation = 200 };
-        БанківськіРахункиКонтрагентів_PointerControl БанківськийрахунокКонтрагента = new БанківськіРахункиКонтрагентів_PointerControl() { Caption = "Рахунок контрагента", WidthPresentation = 200 };
+        БанківськіРахункиОрганізацій_PointerControl БанківськийРахунокОрганізації = new БанківськіРахункиОрганізацій_PointerControl() { WidthPresentation = 200 };
+        БанківськіРахункиКонтрагентів_PointerControl БанківськийРахунокКонтрагента = new БанківськіРахункиКонтрагентів_PointerControl() { Caption = "Рахунок контрагента", WidthPresentation = 200 };
         Entry НомерВхідногоДокументу = new Entry() { WidthRequest = 200 };
         DateTimeControl ДатаВхідногоДокументу = new DateTimeControl();
         Користувачі_PointerControl Автор = new Користувачі_PointerControl();
@@ -269,7 +269,7 @@ namespace StorageAndTrade
             HBox hBoxBankRahunokKontragenta = new HBox() { Halign = Align.End };
             vBox.PackStart(hBoxBankRahunokKontragenta, false, false, 5);
 
-            hBoxBankRahunokKontragenta.PackStart(БанківськийрахунокКонтрагента, false, false, 5);
+            hBoxBankRahunokKontragenta.PackStart(БанківськийРахунокКонтрагента, false, false, 5);
 
             //Автор
             HBox hBoxAutor = new HBox() { Halign = Align.End };
@@ -318,7 +318,7 @@ namespace StorageAndTrade
             HBox hBoxBankRahunokOrganization = new HBox() { Halign = Align.End };
             vBox.PackStart(hBoxBankRahunokOrganization, false, false, 5);
 
-            hBoxBankRahunokOrganization.PackStart(БанківськийрахунокОрганізації, false, false, 5);
+            hBoxBankRahunokOrganization.PackStart(БанківськийРахунокОрганізації, false, false, 5);
 
             //НомерВхідногоДокументу
             HBox hBoxNomerDocVhid = new HBox() { Halign = Align.End };
@@ -418,8 +418,8 @@ namespace StorageAndTrade
             Підрозділ.Pointer = ПоступленняТоварівТаПослуг_Objest.Підрозділ;
             ДатаОплати.Value = ПоступленняТоварівТаПослуг_Objest.ДатаОплати;
             Узгоджений.Active = ПоступленняТоварівТаПослуг_Objest.Узгоджений;
-            БанківськийрахунокОрганізації.Pointer = ПоступленняТоварівТаПослуг_Objest.БанківськийРахунокОрганізації;
-            БанківськийрахунокКонтрагента.Pointer = ПоступленняТоварівТаПослуг_Objest.БанківськийРахунокКонтрагента;
+            БанківськийРахунокОрганізації.Pointer = ПоступленняТоварівТаПослуг_Objest.БанківськийРахунокОрганізації;
+            БанківськийРахунокКонтрагента.Pointer = ПоступленняТоварівТаПослуг_Objest.БанківськийРахунокКонтрагента;
             НомерВхідногоДокументу.Text = ПоступленняТоварівТаПослуг_Objest.НомерВхідногоДокументу;
             ДатаВхідногоДокументу.Value = ПоступленняТоварівТаПослуг_Objest.ДатаВхідногоДокументу;
             Автор.Pointer = ПоступленняТоварівТаПослуг_Objest.Автор;
@@ -462,8 +462,8 @@ namespace StorageAndTrade
             ПоступленняТоварівТаПослуг_Objest.Підрозділ = Підрозділ.Pointer;
             ПоступленняТоварівТаПослуг_Objest.ДатаОплати = ДатаОплати.Value;
             ПоступленняТоварівТаПослуг_Objest.Узгоджений = Узгоджений.Active;
-            ПоступленняТоварівТаПослуг_Objest.БанківськийРахунокОрганізації = БанківськийрахунокОрганізації.Pointer;
-            ПоступленняТоварівТаПослуг_Objest.БанківськийРахунокКонтрагента = БанківськийрахунокКонтрагента.Pointer;
+            ПоступленняТоварівТаПослуг_Objest.БанківськийРахунокОрганізації = БанківськийРахунокОрганізації.Pointer;
+            ПоступленняТоварівТаПослуг_Objest.БанківськийРахунокКонтрагента = БанківськийРахунокКонтрагента.Pointer;
             ПоступленняТоварівТаПослуг_Objest.НомерВхідногоДокументу = НомерВхідногоДокументу.Text;
             ПоступленняТоварівТаПослуг_Objest.ДатаВхідногоДокументу = ДатаВхідногоДокументу.Value;
             ПоступленняТоварівТаПослуг_Objest.Автор = Автор.Pointer;
