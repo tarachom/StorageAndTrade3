@@ -469,6 +469,16 @@ namespace StorageAndTrade
             }
         }
 
+        public decimal СумаДокументу()
+        {
+            decimal Сума = 0;
+
+            foreach (Запис запис in Записи)
+                Сума += запис.Сума;
+
+            return Math.Round(Сума, 2);
+        }
+
         #region TreeView
 
         void AddColumn()
@@ -550,7 +560,7 @@ namespace StorageAndTrade
         {
             CellRendererText cell2 = (CellRendererText)cell;
 
-                cell2.Text = MathF.Round(float.Parse(cell2.Text), 2).ToString("0.00");
+            cell2.Text = MathF.Round(float.Parse(cell2.Text), 2).ToString("0.00");
         }
 
         // void RenderArtistName(TreeViewColumn column, CellRenderer cell, ITreeModel model, TreeIter iter)
