@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 10.11.2022 12:55:27
+ * Дата конфігурації: 10.11.2022 15:59:40
  *
  */
 
@@ -10272,10 +10272,10 @@ namespace StorageAndTrade_1_0.Документи
         public const string ДатаОплати = "col_b2";
         public const string ФормаОплати = "col_b3";
         public const string Узгоджений = "col_b4";
-        public const string БанківськийрахунокОрганізації = "col_b5";
+        public const string БанківськийРахунокОрганізації = "col_b5";
         public const string НомерВхідногоДокументу = "col_b6";
         public const string ДатаВхідногоДокументу = "col_b7";
-        public const string БанківськийрахунокКонтрагента = "col_b8";
+        public const string БанківськийРахунокКонтрагента = "col_b8";
         public const string Договір = "col_b9";
         public const string Автор = "col_c1";
         public const string ВернутиТару = "col_c2";
@@ -10312,10 +10312,10 @@ namespace StorageAndTrade_1_0.Документи
             ДатаОплати = DateTime.MinValue;
             ФормаОплати = 0;
             Узгоджений = false;
-            БанківськийрахунокОрганізації = new Довідники.БанківськіРахункиОрганізацій_Pointer();
+            БанківськийРахунокОрганізації = new Довідники.БанківськіРахункиОрганізацій_Pointer();
             НомерВхідногоДокументу = "";
             ДатаВхідногоДокументу = DateTime.MinValue;
-            БанківськийрахунокКонтрагента = new Довідники.БанківськіРахункиКонтрагентів_Pointer();
+            БанківськийРахунокКонтрагента = new Довідники.БанківськіРахункиКонтрагентів_Pointer();
             Договір = new Довідники.ДоговориКонтрагентів_Pointer();
             Автор = new Довідники.Користувачі_Pointer();
             ВернутиТару = false;
@@ -10354,10 +10354,10 @@ namespace StorageAndTrade_1_0.Документи
                 ДатаОплати = (base.FieldValue["col_b2"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["col_b2"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
                 ФормаОплати = (base.FieldValue["col_b3"] != DBNull.Value) ? (Перелічення.ФормаОплати)base.FieldValue["col_b3"] : 0;
                 Узгоджений = (base.FieldValue["col_b4"] != DBNull.Value) ? bool.Parse(base.FieldValue["col_b4"]?.ToString() ?? "False") : false;
-                БанківськийрахунокОрганізації = new Довідники.БанківськіРахункиОрганізацій_Pointer(base.FieldValue["col_b5"]);
+                БанківськийРахунокОрганізації = new Довідники.БанківськіРахункиОрганізацій_Pointer(base.FieldValue["col_b5"]);
                 НомерВхідногоДокументу = base.FieldValue["col_b6"]?.ToString() ?? "";
                 ДатаВхідногоДокументу = (base.FieldValue["col_b7"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["col_b7"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
-                БанківськийрахунокКонтрагента = new Довідники.БанківськіРахункиКонтрагентів_Pointer(base.FieldValue["col_b8"]);
+                БанківськийРахунокКонтрагента = new Довідники.БанківськіРахункиКонтрагентів_Pointer(base.FieldValue["col_b8"]);
                 Договір = new Довідники.ДоговориКонтрагентів_Pointer(base.FieldValue["col_b9"]);
                 Автор = new Довідники.Користувачі_Pointer(base.FieldValue["col_c1"]);
                 ВернутиТару = (base.FieldValue["col_c2"] != DBNull.Value) ? bool.Parse(base.FieldValue["col_c2"]?.ToString() ?? "False") : false;
@@ -10397,10 +10397,10 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_b2"] = ДатаОплати;
             base.FieldValue["col_b3"] = (int)ФормаОплати;
             base.FieldValue["col_b4"] = Узгоджений;
-            base.FieldValue["col_b5"] = БанківськийрахунокОрганізації.UnigueID.UGuid;
+            base.FieldValue["col_b5"] = БанківськийРахунокОрганізації.UnigueID.UGuid;
             base.FieldValue["col_b6"] = НомерВхідногоДокументу;
             base.FieldValue["col_b7"] = ДатаВхідногоДокументу;
-            base.FieldValue["col_b8"] = БанківськийрахунокКонтрагента.UnigueID.UGuid;
+            base.FieldValue["col_b8"] = БанківськийРахунокКонтрагента.UnigueID.UGuid;
             base.FieldValue["col_b9"] = Договір.UnigueID.UGuid;
             base.FieldValue["col_c1"] = Автор.UnigueID.UGuid;
             base.FieldValue["col_c2"] = ВернутиТару;
@@ -10451,10 +10451,10 @@ namespace StorageAndTrade_1_0.Документи
 			copy.ДатаОплати = ДатаОплати;
 			copy.ФормаОплати = ФормаОплати;
 			copy.Узгоджений = Узгоджений;
-			copy.БанківськийрахунокОрганізації = БанківськийрахунокОрганізації;
+			copy.БанківськийРахунокОрганізації = БанківськийРахунокОрганізації;
 			copy.НомерВхідногоДокументу = НомерВхідногоДокументу;
 			copy.ДатаВхідногоДокументу = ДатаВхідногоДокументу;
-			copy.БанківськийрахунокКонтрагента = БанківськийрахунокКонтрагента;
+			copy.БанківськийРахунокКонтрагента = БанківськийРахунокКонтрагента;
 			copy.Договір = Договір;
 			copy.Автор = Автор;
 			copy.ВернутиТару = ВернутиТару;
@@ -10499,10 +10499,10 @@ namespace StorageAndTrade_1_0.Документи
         public DateTime ДатаОплати { get; set; }
         public Перелічення.ФормаОплати ФормаОплати { get; set; }
         public bool Узгоджений { get; set; }
-        public Довідники.БанківськіРахункиОрганізацій_Pointer БанківськийрахунокОрганізації { get; set; }
+        public Довідники.БанківськіРахункиОрганізацій_Pointer БанківськийРахунокОрганізації { get; set; }
         public string НомерВхідногоДокументу { get; set; }
         public DateTime ДатаВхідногоДокументу { get; set; }
-        public Довідники.БанківськіРахункиКонтрагентів_Pointer БанківськийрахунокКонтрагента { get; set; }
+        public Довідники.БанківськіРахункиКонтрагентів_Pointer БанківськийРахунокКонтрагента { get; set; }
         public Довідники.ДоговориКонтрагентів_Pointer Договір { get; set; }
         public Довідники.Користувачі_Pointer Автор { get; set; }
         public bool ВернутиТару { get; set; }
@@ -11209,13 +11209,14 @@ namespace StorageAndTrade_1_0.Документи
         public const string Курс = "col_c8";
         public const string Кратність = "col_d2";
         public const string Коментар = "col_b2";
+        public const string Менеджер = "col_c9";
     }
 	
     
     public class РеалізаціяТоварівТаПослуг_Objest : DocumentObject
     {
         public РеалізаціяТоварівТаПослуг_Objest() : base(Config.Kernel!, "tab_a36", "РеалізаціяТоварівТаПослуг",
-             new string[] { "docname", "docnomer", "docdate", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b1", "col_b3", "col_b4", "col_b5", "col_b6", "col_b7", "col_b8", "col_b9", "col_c1", "col_c2", "col_c3", "col_c4", "col_c5", "col_c6", "col_c7", "col_c8", "col_d2", "col_b2" }) 
+             new string[] { "docname", "docnomer", "docdate", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b1", "col_b3", "col_b4", "col_b5", "col_b6", "col_b7", "col_b8", "col_b9", "col_c1", "col_c2", "col_c3", "col_c4", "col_c5", "col_c6", "col_c7", "col_c8", "col_d2", "col_b2", "col_c9" }) 
         {
             Назва = "";
             НомерДок = "";
@@ -11247,6 +11248,7 @@ namespace StorageAndTrade_1_0.Документи
             Курс = 0;
             Кратність = 0;
             Коментар = "";
+            Менеджер = new Довідники.Користувачі_Pointer();
             
             //Табличні частини
             Товари_TablePart = new РеалізаціяТоварівТаПослуг_Товари_TablePart(this);
@@ -11287,6 +11289,7 @@ namespace StorageAndTrade_1_0.Документи
                 Курс = (base.FieldValue["col_c8"] != DBNull.Value) ? (decimal)base.FieldValue["col_c8"] : 0;
                 Кратність = (base.FieldValue["col_d2"] != DBNull.Value) ? (int)base.FieldValue["col_d2"] : 0;
                 Коментар = base.FieldValue["col_b2"]?.ToString() ?? "";
+                Менеджер = new Довідники.Користувачі_Pointer(base.FieldValue["col_c9"]);
                 
                 BaseClear();
                 return true;
@@ -11328,6 +11331,7 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_c8"] = Курс;
             base.FieldValue["col_d2"] = Кратність;
             base.FieldValue["col_b2"] = Коментар;
+            base.FieldValue["col_c9"] = Менеджер.UnigueID.UGuid;
             
             BaseSave();
 			РеалізаціяТоварівТаПослуг_Triggers.AfterRecording(this);
@@ -11380,6 +11384,7 @@ namespace StorageAndTrade_1_0.Документи
 			copy.Курс = Курс;
 			copy.Кратність = Кратність;
 			copy.Коментар = Коментар;
+			copy.Менеджер = Менеджер;
 			
 			return copy;
         }
@@ -11426,6 +11431,7 @@ namespace StorageAndTrade_1_0.Документи
         public decimal Курс { get; set; }
         public int Кратність { get; set; }
         public string Коментар { get; set; }
+        public Довідники.Користувачі_Pointer Менеджер { get; set; }
         
         //Табличні частини
         public РеалізаціяТоварівТаПослуг_Товари_TablePart Товари_TablePart { get; set; }

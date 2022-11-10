@@ -45,32 +45,25 @@ namespace StorageAndTrade
 
         void CreateMessage(Dictionary<string, object> row)
         {
-            HBox hBox = new HBox();
-            vBoxMessage.PackStart(hBox, false, false, 10);
-
-            hBox.PackStart(new Image("images/error.png"), false, false, 25);
-
-            VBox vBoxInfo = new VBox();
-            hBox.PackStart(vBoxInfo, false, false, 10);
-
             //Дата
             HBox hBoxDate = new HBox();
-            hBoxDate.PackStart(new Label(row["Дата"].ToString()), false, false, 5);
-            vBoxInfo.PackStart(hBoxDate, false, false, 5);
 
-            //НазваОбєкту
-            HBox hBoxObject = new HBox();
-            hBoxObject.PackStart(new Label(row["НазваОбєкту"].ToString()), false, false, 5);
-            vBoxInfo.PackStart(hBoxObject, false, false, 5);
+            hBoxDate.PackStart(new Label(
+                row["Дата"].ToString() + "\t" + "[ " + row["НазваПроцесу"].ToString() + " ]\t" + row["НазваОбєкту"].ToString()), false, false, 5);
 
-            //НазваПроцесу
-            HBox hBoxProces = new HBox();
-            hBoxProces.PackStart(new Label(row["НазваПроцесу"].ToString()), false, false, 5);
-            vBoxInfo.PackStart(hBoxProces, false, false, 5);
+            vBoxMessage.PackStart(hBoxDate, false, false, 5);
+
+            HBox hBoxInfo = new HBox();
+            vBoxMessage.PackStart(hBoxInfo, false, false, 10);
+
+            hBoxInfo.PackStart(new Image("images/error.png"), false, false, 25);
+
+            VBox vBoxInfo = new VBox();
+            hBoxInfo.PackStart(vBoxInfo, false, false, 10);
 
             //Повідомлення
             HBox hBoxMessage = new HBox();
-            hBoxMessage.PackStart(new Label("\t" + row["Повідомлення"].ToString()) { Wrap = true }, false, false, 5);
+            hBoxMessage.PackStart(new Label("-> " + row["Повідомлення"].ToString()) { Wrap = true }, false, false, 5);
             vBoxInfo.PackStart(hBoxMessage, false, false, 5);
 
             vBoxMessage.PackStart(new Separator(Orientation.Horizontal), false, false, 5);
