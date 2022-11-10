@@ -70,7 +70,7 @@ namespace StorageAndTrade
 
             //Повідомлення
             HBox hBoxMessage = new HBox();
-            hBoxMessage.PackStart(new Label(" -> " + row["Повідомлення"].ToString()), false, false, 5);
+            hBoxMessage.PackStart(new Label("\t" + row["Повідомлення"].ToString()) { Wrap = true }, false, false, 5);
             vBoxInfo.PackStart(hBoxMessage, false, false, 5);
 
             vBoxMessage.PackStart(new Separator(Orientation.Horizontal), false, false, 5);
