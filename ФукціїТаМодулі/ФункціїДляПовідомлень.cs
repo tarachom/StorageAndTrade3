@@ -64,7 +64,7 @@ DELETE FROM {Системні.ПовідомленняТаПомилки_Пом�
             Конфа.Config.Kernel!.DataBase.ExecuteSQL(query);
         }
 
-        public static string ПрочитатиПовідомленняПроПомилку()
+        public static List<Dictionary<string, object>> ПрочитатиПовідомленняПроПомилку()
         {
             string query = $@"
 SELECT
@@ -76,7 +76,7 @@ SELECT
     Помилки.{Системні.ПовідомленняТаПомилки_Помилки_TablePart.Повідомлення} AS Повідомлення
 FROM
     {Системні.ПовідомленняТаПомилки_Помилки_TablePart.TABLE} AS Помилки
-ORDER BY Дата ASC
+ORDER BY Дата DESC
 ";
 
             Dictionary<string, object> paramQuery = new Dictionary<string, object>();
@@ -86,39 +86,19 @@ ORDER BY Дата ASC
 
             Конфа.Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listRow);
 
-            string message = "";
-
-            foreach (Dictionary<string, object> row in listRow)
-            {
-                message +=
-                    "\n----------------- ПОМИЛКА -----------------\n" +
-                    row["Дата"] + " " + row["НазваПроцесу"] + ": " + row["НазваОбєкту"] + "\n" +
-                    " --> " + row["Повідомлення"] + "\n\n";
-            }
-
-            return message;
+            return listRow;
         }
 
         public static void ВідкритиТермінал()
         {
-            /*
-            FormTerminal formTerminal = (FormTerminal)Application.OpenForms["FormTerminal"];
-            if (formTerminal != null)
-                formTerminal.LoadRecords();
-            else
+            Program.GeneralForm?.CreateNotebookPage("Термінал", () =>
             {
-                Form MdiParent = Application.OpenForms["FormStorageAndTrade"];
+                PageTerminal page = new PageTerminal();
 
-                formTerminal = new FormTerminal();
+                page.LoadRecords();
 
-                if (MdiParent != null)
-                    formTerminal.MdiParent = MdiParent;
-
-                formTerminal.Show();
-            }
-
-            formTerminal.Focus();
-            */
+                return page;
+            });
         }
     }
 }

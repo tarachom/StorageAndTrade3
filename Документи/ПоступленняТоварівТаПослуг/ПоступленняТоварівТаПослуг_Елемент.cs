@@ -471,6 +471,8 @@ namespace StorageAndTrade
 
             ПоступленняТоварівТаПослуг_Objest.Save();
             Товари.SaveRecords();
+
+            Program.GeneralForm?.RenameCurrentPageNotebook($"{ПоступленняТоварівТаПослуг_Objest.Назва}");
         }
 
         void SpendTheDocument(bool spendDoc)
@@ -497,8 +499,6 @@ namespace StorageAndTrade
 
         void ReloadList()
         {
-            Program.GeneralForm?.RenameCurrentPageNotebook($"{ПоступленняТоварівТаПослуг_Objest.Назва}");
-
             if (PageList != null)
             {
                 Товари.LoadRecords();
