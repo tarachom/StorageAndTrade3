@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 10.11.2022 21:12:47
+ * Дата конфігурації: 10.11.2022 21:43:03
  *
  */
 
@@ -13100,13 +13100,14 @@ namespace StorageAndTrade_1_0.Документи
         public const string Основа = "col_a2";
         public const string Коментар = "col_c8";
         public const string Автор = "col_a3";
+        public const string Менеджер = "col_a4";
     }
 	
     
     public class ПоверненняТоварівПостачальнику_Objest : DocumentObject
     {
         public ПоверненняТоварівПостачальнику_Objest() : base(Config.Kernel!, "tab_a51", "ПоверненняТоварівПостачальнику",
-             new string[] { "docname", "docnomer", "docdate", "col_c2", "col_c3", "col_c4", "col_c5", "col_c6", "col_c7", "col_c9", "col_d1", "col_d2", "col_d3", "col_d4", "col_d5", "col_d6", "col_d7", "col_a1", "col_a2", "col_c8", "col_a3" }) 
+             new string[] { "docname", "docnomer", "docdate", "col_c2", "col_c3", "col_c4", "col_c5", "col_c6", "col_c7", "col_c9", "col_d1", "col_d2", "col_d3", "col_d4", "col_d5", "col_d6", "col_d7", "col_a1", "col_a2", "col_c8", "col_a3", "col_a4" }) 
         {
             Назва = "";
             НомерДок = "";
@@ -13129,6 +13130,7 @@ namespace StorageAndTrade_1_0.Документи
             Основа = new UuidAndText();
             Коментар = "";
             Автор = new Довідники.Користувачі_Pointer();
+            Менеджер = new Довідники.Користувачі_Pointer();
             
             //Табличні частини
             Товари_TablePart = new ПоверненняТоварівПостачальнику_Товари_TablePart(this);
@@ -13160,6 +13162,7 @@ namespace StorageAndTrade_1_0.Документи
                 Основа = (base.FieldValue["col_a2"] != DBNull.Value) ? (UuidAndText)base.FieldValue["col_a2"] : new UuidAndText();
                 Коментар = base.FieldValue["col_c8"]?.ToString() ?? "";
                 Автор = new Довідники.Користувачі_Pointer(base.FieldValue["col_a3"]);
+                Менеджер = new Довідники.Користувачі_Pointer(base.FieldValue["col_a4"]);
                 
                 BaseClear();
                 return true;
@@ -13192,6 +13195,7 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a2"] = Основа;
             base.FieldValue["col_c8"] = Коментар;
             base.FieldValue["col_a3"] = Автор.UnigueID.UGuid;
+            base.FieldValue["col_a4"] = Менеджер.UnigueID.UGuid;
             
             BaseSave();
 			ПоверненняТоварівПостачальнику_Triggers.AfterRecording(this);
@@ -13235,6 +13239,7 @@ namespace StorageAndTrade_1_0.Документи
 			copy.Основа = Основа;
 			copy.Коментар = Коментар;
 			copy.Автор = Автор;
+			copy.Менеджер = Менеджер;
 			
 			return copy;
         }
@@ -13272,6 +13277,7 @@ namespace StorageAndTrade_1_0.Документи
         public UuidAndText Основа { get; set; }
         public string Коментар { get; set; }
         public Довідники.Користувачі_Pointer Автор { get; set; }
+        public Довідники.Користувачі_Pointer Менеджер { get; set; }
         
         //Табличні частини
         public ПоверненняТоварівПостачальнику_Товари_TablePart Товари_TablePart { get; set; }
@@ -13873,13 +13879,14 @@ namespace StorageAndTrade_1_0.Документи
         public const string ГосподарськаОперація = "col_a6";
         public const string Коментар = "col_a1";
         public const string Автор = "col_a7";
+        public const string Менеджер = "col_a8";
     }
 	
     
     public class АктВиконанихРобіт_Objest : DocumentObject
     {
         public АктВиконанихРобіт_Objest() : base(Config.Kernel!, "tab_a81", "АктВиконанихРобіт",
-             new string[] { "docname", "docnomer", "docdate", "col_b2", "col_b3", "col_b4", "col_b5", "col_b6", "col_a5", "col_a2", "col_a3", "col_a4", "col_a6", "col_a1", "col_a7" }) 
+             new string[] { "docname", "docnomer", "docdate", "col_b2", "col_b3", "col_b4", "col_b5", "col_b6", "col_a5", "col_a2", "col_a3", "col_a4", "col_a6", "col_a1", "col_a7", "col_a8" }) 
         {
             Назва = "";
             НомерДок = "";
@@ -13896,6 +13903,7 @@ namespace StorageAndTrade_1_0.Документи
             ГосподарськаОперація = 0;
             Коментар = "";
             Автор = new Довідники.Користувачі_Pointer();
+            Менеджер = new Довідники.Користувачі_Pointer();
             
             //Табличні частини
             Послуги_TablePart = new АктВиконанихРобіт_Послуги_TablePart(this);
@@ -13921,6 +13929,7 @@ namespace StorageAndTrade_1_0.Документи
                 ГосподарськаОперація = (base.FieldValue["col_a6"] != DBNull.Value) ? (Перелічення.ГосподарськіОперації)base.FieldValue["col_a6"] : 0;
                 Коментар = base.FieldValue["col_a1"]?.ToString() ?? "";
                 Автор = new Довідники.Користувачі_Pointer(base.FieldValue["col_a7"]);
+                Менеджер = new Довідники.Користувачі_Pointer(base.FieldValue["col_a8"]);
                 
                 BaseClear();
                 return true;
@@ -13947,6 +13956,7 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a6"] = (int)ГосподарськаОперація;
             base.FieldValue["col_a1"] = Коментар;
             base.FieldValue["col_a7"] = Автор.UnigueID.UGuid;
+            base.FieldValue["col_a8"] = Менеджер.UnigueID.UGuid;
             
             BaseSave();
 			АктВиконанихРобіт_Triggers.AfterRecording(this);
@@ -13984,6 +13994,7 @@ namespace StorageAndTrade_1_0.Документи
 			copy.ГосподарськаОперація = ГосподарськаОперація;
 			copy.Коментар = Коментар;
 			copy.Автор = Автор;
+			copy.Менеджер = Менеджер;
 			
 			return copy;
         }
@@ -14015,6 +14026,7 @@ namespace StorageAndTrade_1_0.Документи
         public Перелічення.ГосподарськіОперації ГосподарськаОперація { get; set; }
         public string Коментар { get; set; }
         public Довідники.Користувачі_Pointer Автор { get; set; }
+        public Довідники.Користувачі_Pointer Менеджер { get; set; }
         
         //Табличні частини
         public АктВиконанихРобіт_Послуги_TablePart Послуги_TablePart { get; set; }
