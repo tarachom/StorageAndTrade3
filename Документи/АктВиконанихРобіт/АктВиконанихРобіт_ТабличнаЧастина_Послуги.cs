@@ -280,6 +280,16 @@ namespace StorageAndTrade
             }
         }
 
+        public decimal СумаДокументу()
+        {
+            decimal Сума = 0;
+
+            foreach (Запис запис in Записи)
+                Сума += запис.Сума;
+
+            return Math.Round(Сума, 2);
+        }
+
         #region TreeView
 
         void AddColumn()
