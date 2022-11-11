@@ -9,6 +9,10 @@ namespace StorageAndTrade
 
         #region Const
 
+        //
+        //Значення за замовчуванням
+        //
+
         Організації_PointerControl ОсновнаОрганізація = new Організації_PointerControl();
         Склади_PointerControl ОсновнийСклад = new Склади_PointerControl();
         Валюти_PointerControl ОсновнаВалюта = new Валюти_PointerControl();
@@ -19,6 +23,14 @@ namespace StorageAndTrade
         СтруктураПідприємства_PointerControl ОсновнийПідрозділ = new СтруктураПідприємства_PointerControl() { Caption = "Підрозділ" };
         БанківськіРахункиОрганізацій_PointerControl ОсновнийБанківськийРахунок = new БанківськіРахункиОрганізацій_PointerControl();
         ВидиЦін_PointerControl ОсновнийВидЦіни = new ВидиЦін_PointerControl();
+
+        //
+        //Системні
+        //
+
+        //Узгоджений
+        CheckButton ВестиОблікПоСеріяхНоменклатури = new CheckButton("Вести облік по серіях номенклатури");
+        CheckButton ВестиОблікПоХарактеристикахНоменклатури = new CheckButton("Вести облік по характеристиках номенклатури");
 
         #endregion
 
@@ -57,7 +69,7 @@ namespace StorageAndTrade
             expanderConstDefault.Add(vBox);
 
             //Info
-            HBox hBoxInfo = new HBox() { Halign = Align.Center };
+            HBox hBoxInfo = new HBox() { Halign = Align.Start };
             vBox.PackStart(hBoxInfo, false, false, 15);
 
             hBoxInfo.PackStart(new Label("Для заповненння нових документів та довідників"), false, false, 5);
@@ -85,17 +97,34 @@ namespace StorageAndTrade
             hBox.PackStart(wgPointerControl, false, false, 5);
         }
 
+        void AddControl(VBox vBox, Widget wgControl)
+        {
+            HBox hBox = new HBox() { Halign = Align.Start };
+            vBox.PackStart(hBox, false, false, 5);
+
+            hBox.PackStart(wgControl, false, false, 5);
+        }
+
         void CreatePack2(HPaned hPaned)
         {
             VBox vBox = new VBox();
 
+            Expander expanderSystem = new Expander("Налаштування обліку") { Expanded = true };
+            expanderSystem.Add(vBox);
 
+            //Controls
+            AddControl(vBox, ВестиОблікПоСеріяхНоменклатури);
+            AddControl(vBox, ВестиОблікПоХарактеристикахНоменклатури);
 
-            hPaned.Pack2(vBox, false, false);
+            hPaned.Pack2(expanderSystem, false, false);
         }
 
         public void SetValue()
         {
+            //
+            //Значення за замовчуванням
+            //
+
             ОсновнаОрганізація.Pointer = Константи.ЗначенняЗаЗамовчуванням.ОсновнаОрганізація_Const;
             ОсновнийСклад.Pointer = Константи.ЗначенняЗаЗамовчуванням.ОснонийСклад_Const;
             ОсновнаВалюта.Pointer = Константи.ЗначенняЗаЗамовчуванням.ОсновнаВалюта_Const;
@@ -106,10 +135,21 @@ namespace StorageAndTrade
             ОсновнийПідрозділ.Pointer = Константи.ЗначенняЗаЗамовчуванням.ОсновнийПідрозділ_Const;
             ОсновнийБанківськийРахунок.Pointer = Константи.ЗначенняЗаЗамовчуванням.ОсновнийБанківськийРахунок_Const;
             ОсновнийВидЦіни.Pointer = Константи.ЗначенняЗаЗамовчуванням.ОсновнийВидЦіни_Const;
+
+            //
+            //Значення за замовчуванням
+            //
+
+            ВестиОблікПоСеріяхНоменклатури.Active = Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const;
+            ВестиОблікПоХарактеристикахНоменклатури.Active = Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const;
         }
 
         void GetValue()
         {
+            //
+            //Значення за замовчуванням
+            //
+
             Константи.ЗначенняЗаЗамовчуванням.ОсновнаОрганізація_Const = ОсновнаОрганізація.Pointer;
             Константи.ЗначенняЗаЗамовчуванням.ОснонийСклад_Const = ОсновнийСклад.Pointer;
             Константи.ЗначенняЗаЗамовчуванням.ОсновнаВалюта_Const = ОсновнаВалюта.Pointer;
@@ -120,6 +160,14 @@ namespace StorageAndTrade
             Константи.ЗначенняЗаЗамовчуванням.ОсновнийПідрозділ_Const = ОсновнийПідрозділ.Pointer;
             Константи.ЗначенняЗаЗамовчуванням.ОсновнийБанківськийРахунок_Const = ОсновнийБанківськийРахунок.Pointer;
             Константи.ЗначенняЗаЗамовчуванням.ОсновнийВидЦіни_Const = ОсновнийВидЦіни.Pointer;
+
+            //
+            //Значення за замовчуванням
+            //
+
+            Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const = ВестиОблікПоСеріяхНоменклатури.Active;
+            Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const = ВестиОблікПоХарактеристикахНоменклатури.Active;
+
         }
 
         void OnSaveClick(object? sender, EventArgs args)

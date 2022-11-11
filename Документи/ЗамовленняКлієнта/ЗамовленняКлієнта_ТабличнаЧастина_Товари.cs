@@ -2,6 +2,7 @@ using Gtk;
 
 using AccountingSoftware;
 
+using Константи = StorageAndTrade_1_0.Константи;
 using StorageAndTrade_1_0.Довідники;
 using StorageAndTrade_1_0.Документи;
 
@@ -435,6 +436,7 @@ namespace StorageAndTrade
 
             //ХарактеристикаНазва
             TreeViewColumn ХарактеристикаНазва = new TreeViewColumn("Характеристика", new CellRendererText(), "text", (int)Columns.ХарактеристикаНазва) { MinWidth = 300 };
+            ХарактеристикаНазва.Visible = Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const;
             ХарактеристикаНазва.Data.Add("Column", Columns.ХарактеристикаНазва);
 
             TreeViewGrid.AppendColumn(ХарактеристикаНазва);

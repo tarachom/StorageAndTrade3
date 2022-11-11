@@ -2,6 +2,7 @@ using Gtk;
 
 using AccountingSoftware;
 
+using Константи = StorageAndTrade_1_0.Константи;
 using StorageAndTrade_1_0.Довідники;
 using StorageAndTrade_1_0.Документи;
 
@@ -400,12 +401,14 @@ namespace StorageAndTrade
 
             //ХарактеристикаНазва
             TreeViewColumn ХарактеристикаНазва = new TreeViewColumn("Характеристика", new CellRendererText(), "text", (int)Columns.ХарактеристикаНазва) { MinWidth = 300 };
+            ХарактеристикаНазва.Visible = Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const;
             ХарактеристикаНазва.Data.Add("Column", Columns.ХарактеристикаНазва);
 
             TreeViewGrid.AppendColumn(ХарактеристикаНазва);
 
             //СеріяНазва
             TreeViewColumn СеріяНазва = new TreeViewColumn("Серія", new CellRendererText(), "text", (int)Columns.СеріяНазва) { MinWidth = 300 };
+            СеріяНазва.Visible = Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const;
             СеріяНазва.Data.Add("Column", Columns.СеріяНазва);
 
             TreeViewGrid.AppendColumn(СеріяНазва);
