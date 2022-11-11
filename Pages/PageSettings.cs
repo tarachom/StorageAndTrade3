@@ -29,8 +29,8 @@ namespace StorageAndTrade
         //
 
         //Узгоджений
-        CheckButton ВестиОблікПоСеріяхНоменклатури = new CheckButton("Вести облік по серіях номенклатури");
         CheckButton ВестиОблікПоХарактеристикахНоменклатури = new CheckButton("Вести облік по характеристиках номенклатури");
+        CheckButton ВестиОблікПоСеріяхНоменклатури = new CheckButton("Вести облік по серіях номенклатури");
 
         #endregion
 
@@ -112,9 +112,15 @@ namespace StorageAndTrade
             Expander expanderSystem = new Expander("Налаштування обліку") { Expanded = true };
             expanderSystem.Add(vBox);
 
+            //Info
+            HBox hBoxInfo = new HBox() { Halign = Align.Start };
+            vBox.PackStart(hBoxInfo, false, false, 15);
+
+            hBoxInfo.PackStart(new Label("Видимість колонок у документах і звітах"), false, false, 5);
+
             //Controls
-            AddControl(vBox, ВестиОблікПоСеріяхНоменклатури);
             AddControl(vBox, ВестиОблікПоХарактеристикахНоменклатури);
+            AddControl(vBox, ВестиОблікПоСеріяхНоменклатури);
 
             hPaned.Pack2(expanderSystem, false, false);
         }
@@ -167,7 +173,6 @@ namespace StorageAndTrade
 
             Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const = ВестиОблікПоСеріяхНоменклатури.Active;
             Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const = ВестиОблікПоХарактеристикахНоменклатури.Active;
-
         }
 
         void OnSaveClick(object? sender, EventArgs args)
