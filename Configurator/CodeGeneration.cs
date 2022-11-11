@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 10.11.2022 21:43:03
+ * Дата конфігурації: 11.11.2022 13:15:16
  *
  */
 
@@ -14221,7 +14221,6 @@ namespace StorageAndTrade_1_0.Документи
         public const string Договір = "col_d4";
         public const string ГосподарськаОперація = "col_a1";
         public const string Коментар = "col_d1";
-        public const string ПартіяТоварівКомпозит = "col_a2";
         public const string Автор = "col_a3";
     }
 	
@@ -14229,7 +14228,7 @@ namespace StorageAndTrade_1_0.Документи
     public class ВведенняЗалишків_Objest : DocumentObject
     {
         public ВведенняЗалишків_Objest() : base(Config.Kernel!, "tab_a83", "ВведенняЗалишків",
-             new string[] { "docname", "docnomer", "docdate", "col_c8", "col_d5", "col_c9", "col_d2", "col_d3", "col_d4", "col_a1", "col_d1", "col_a2", "col_a3" }) 
+             new string[] { "docname", "docnomer", "docdate", "col_c8", "col_d5", "col_c9", "col_d2", "col_d3", "col_d4", "col_a1", "col_d1", "col_a3" }) 
         {
             Назва = "";
             НомерДок = "";
@@ -14242,7 +14241,6 @@ namespace StorageAndTrade_1_0.Документи
             Договір = new Довідники.ДоговориКонтрагентів_Pointer();
             ГосподарськаОперація = 0;
             Коментар = "";
-            ПартіяТоварівКомпозит = new Довідники.ПартіяТоварівКомпозит_Pointer();
             Автор = new Довідники.Користувачі_Pointer();
             
             //Табличні частини
@@ -14268,7 +14266,6 @@ namespace StorageAndTrade_1_0.Документи
                 Договір = new Довідники.ДоговориКонтрагентів_Pointer(base.FieldValue["col_d4"]);
                 ГосподарськаОперація = (base.FieldValue["col_a1"] != DBNull.Value) ? (Перелічення.ГосподарськіОперації)base.FieldValue["col_a1"] : 0;
                 Коментар = base.FieldValue["col_d1"]?.ToString() ?? "";
-                ПартіяТоварівКомпозит = new Довідники.ПартіяТоварівКомпозит_Pointer(base.FieldValue["col_a2"]);
                 Автор = new Довідники.Користувачі_Pointer(base.FieldValue["col_a3"]);
                 
                 BaseClear();
@@ -14292,7 +14289,6 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_d4"] = Договір.UnigueID.UGuid;
             base.FieldValue["col_a1"] = (int)ГосподарськаОперація;
             base.FieldValue["col_d1"] = Коментар;
-            base.FieldValue["col_a2"] = ПартіяТоварівКомпозит.UnigueID.UGuid;
             base.FieldValue["col_a3"] = Автор.UnigueID.UGuid;
             
             BaseSave();
@@ -14327,7 +14323,6 @@ namespace StorageAndTrade_1_0.Документи
 			copy.Договір = Договір;
 			copy.ГосподарськаОперація = ГосподарськаОперація;
 			copy.Коментар = Коментар;
-			copy.ПартіяТоварівКомпозит = ПартіяТоварівКомпозит;
 			copy.Автор = Автор;
 			
 			return copy;
@@ -14356,7 +14351,6 @@ namespace StorageAndTrade_1_0.Документи
         public Довідники.ДоговориКонтрагентів_Pointer Договір { get; set; }
         public Перелічення.ГосподарськіОперації ГосподарськаОперація { get; set; }
         public string Коментар { get; set; }
-        public Довідники.ПартіяТоварівКомпозит_Pointer ПартіяТоварівКомпозит { get; set; }
         public Довідники.Користувачі_Pointer Автор { get; set; }
         
         //Табличні частини

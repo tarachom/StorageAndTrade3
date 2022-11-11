@@ -1,7 +1,12 @@
 using Gtk;
 
+using AccountingSoftware;
+
+using StorageAndTrade_1_0;
 using StorageAndTrade_1_0.Константи;
+using StorageAndTrade_1_0.Довідники;
 using StorageAndTrade_1_0.Документи;
+using Перелічення = StorageAndTrade_1_0.Перелічення;
 
 namespace StorageAndTrade
 {
@@ -12,13 +17,26 @@ namespace StorageAndTrade
         public bool IsNew { get; set; } = true;
 
         public ВведенняЗалишків_Objest ВведенняЗалишків_Objest { get; set; } = new ВведенняЗалишків_Objest();
+        #region Fields
 
         Entry НомерДок = new Entry() { WidthRequest = 100 };
-        Entry Назва = new Entry() { WidthRequest = 500 };
+        DateTimeControl ДатаДок = new DateTimeControl();
+        Організації_PointerControl Організація = new Організації_PointerControl();
+        Валюти_PointerControl Валюта = new Валюти_PointerControl();
+        Склади_PointerControl Склад = new Склади_PointerControl();
+        Контрагенти_PointerControl Контрагент = new Контрагенти_PointerControl();
+        ДоговориКонтрагентів_PointerControl Договір = new ДоговориКонтрагентів_PointerControl();
+        ComboBoxText ГосподарськаОперація = new ComboBoxText();
+        СтруктураПідприємства_PointerControl Підрозділ = new СтруктураПідприємства_PointerControl() { Caption = "Підрозділ" };
+        Користувачі_PointerControl Автор = new Користувачі_PointerControl();
+        Entry Коментар = new Entry() { WidthRequest = 900 };
+
         ВведенняЗалишків_ТабличнаЧастина_Товари Товари = new ВведенняЗалишків_ТабличнаЧастина_Товари();
         ВведенняЗалишків_ТабличнаЧастина_Каси Каси = new ВведенняЗалишків_ТабличнаЧастина_Каси();
         ВведенняЗалишків_ТабличнаЧастина_БанківськіРахунки БанківськіРахунки = new ВведенняЗалишків_ТабличнаЧастина_БанківськіРахунки();
         ВведенняЗалишків_ТабличнаЧастина_РозрахункиЗКонтрагентами РозрахункиЗКонтрагентами = new ВведенняЗалишків_ТабличнаЧастина_РозрахункиЗКонтрагентами();
+
+        #endregion
 
         public ВведенняЗалишків_Елемент() : base()
         {
@@ -30,6 +48,11 @@ namespace StorageAndTrade
 
             hBox.PackStart(bSave, false, false, 10);
 
+            Button bSpendTheDocument = new Button("Провести");
+            bSpendTheDocument.Clicked += OnSpendTheDocument;
+
+            hBox.PackStart(bSpendTheDocument, false, false, 10);
+
             Button bClose = new Button("Закрити");
             bClose.Clicked += (object? sender, EventArgs args) => { Program.GeneralForm?.CloseCurrentPageNotebook(); };
 
@@ -39,6 +62,8 @@ namespace StorageAndTrade
 
             HPaned hPaned = new HPaned() { Orientation = Orientation.Vertical, BorderWidth = 5 };
 
+            FillComboBoxes();
+
             CreatePack1(hPaned);
             CreatePack2(hPaned);
 
@@ -47,25 +72,162 @@ namespace StorageAndTrade
             ShowAll();
         }
 
+        void FillComboBoxes()
+        {
+            if (Config.Kernel != null)
+            {
+                //1
+                ConfigurationEnums Конфігурація_ГосподарськіОперації = Config.Kernel.Conf.Enums["ГосподарськіОперації"];
+
+                ГосподарськаОперація.Append(
+                    Перелічення.ГосподарськіОперації.ВведенняЗалишків.ToString(),
+                    Конфігурація_ГосподарськіОперації.Fields["ВведенняЗалишків"].Desc);
+
+                ГосподарськаОперація.Active = 0;
+            }
+        }
+
         void CreatePack1(HPaned hPaned)
         {
             VBox vBox = new VBox();
-
-            //НомерДок
-            HBox hBoxNumberDoc = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxNumberDoc, false, false, 5);
-
-            hBoxNumberDoc.PackStart(new Label("Номер:"), false, false, 5);
-            hBoxNumberDoc.PackStart(НомерДок, false, false, 5);
-
-            //Назва
-            HBox hBoxName = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxName, false, false, 5);
-
-            hBoxName.PackStart(new Label("Назва:"), false, false, 5);
-            hBoxName.PackStart(Назва, false, false, 5);
-
             hPaned.Pack1(vBox, false, false);
+
+            //НомерДок ДатаДок
+            HBox hBoxNumberDataDoc = new HBox() { Halign = Align.Start };
+            vBox.PackStart(hBoxNumberDataDoc, false, false, 5);
+
+            hBoxNumberDataDoc.PackStart(new Label("Введення залишків №:"), false, false, 5);
+            hBoxNumberDataDoc.PackStart(НомерДок, false, false, 5);
+            hBoxNumberDataDoc.PackStart(new Label("від:"), false, false, 5);
+            hBoxNumberDataDoc.PackStart(ДатаДок, false, false, 5);
+
+            //Коментар
+            HBox hBoxComment = new HBox() { Halign = Align.Start };
+            vBox.PackStart(hBoxComment, false, false, 5);
+
+            hBoxComment.PackStart(new Label("Коментар: "), false, false, 5);
+            hBoxComment.PackStart(Коментар, false, false, 5);
+
+            //Два блоки для полів -->
+            HBox hBoxContainer = new HBox();
+
+            Expander expanderHead = new Expander("Реквізити шапки") { Expanded = true };
+            expanderHead.Add(hBoxContainer);
+
+            vBox.PackStart(expanderHead, false, false, 5);
+
+            //Container1
+            VBox vBoxContainer1 = new VBox() { WidthRequest = 500 };
+            hBoxContainer.PackStart(vBoxContainer1, false, false, 5);
+
+            CreateContainer1(vBoxContainer1);
+
+            //Container2
+            VBox vBoxContainer2 = new VBox() { WidthRequest = 500 };
+            hBoxContainer.PackStart(vBoxContainer2, false, false, 5);
+
+            CreateContainer2(vBoxContainer2);
+            // <--
+        }
+
+        void CreateContainer1(VBox vBox)
+        {
+            //Організація
+            HBox hBoxOrganization = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxOrganization, false, false, 5);
+
+            hBoxOrganization.PackStart(Організація, false, false, 5);
+
+            //Контрагент
+            HBox hBoxKontragent = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxKontragent, false, false, 5);
+
+            Контрагент.AfterSelectFunc = () =>
+            {
+                if (Договір.Pointer.IsEmpty())
+                {
+                    ДоговориКонтрагентів_Pointer? договірКонтрагента =
+                    ФункціїДляДокументів.ОсновнийДоговірДляКонтрагента(Контрагент.Pointer, Перелічення.ТипДоговорів.ЗПостачальниками);
+
+                    if (договірКонтрагента != null)
+                        Договір.Pointer = договірКонтрагента;
+                }
+                else
+                {
+                    if (Контрагент.Pointer.IsEmpty())
+                        Договір.Pointer = new ДоговориКонтрагентів_Pointer();
+                    else
+                    {
+                        //
+                        //Перевірити чи змінився контрагент
+                        //
+
+                        ДоговориКонтрагентів_Objest? договориКонтрагентів_Objest = Договір.Pointer.GetDirectoryObject();
+
+                        if (договориКонтрагентів_Objest != null)
+                            if (договориКонтрагентів_Objest.Контрагент != Контрагент.Pointer)
+                            {
+                                Договір.Pointer = new ДоговориКонтрагентів_Pointer();
+                                Контрагент.AfterSelectFunc!.Invoke();
+                            };
+                    }
+                }
+            };
+
+            hBoxKontragent.PackStart(Контрагент, false, false, 5);
+
+            //Договір
+            HBox hBoxDogovir = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxDogovir, false, false, 5);
+
+            Договір.BeforeClickOpenFunc = () =>
+            {
+                Договір.КонтрагентВласник = Контрагент.Pointer;
+            };
+
+            hBoxDogovir.PackStart(Договір, false, false, 5);
+
+            //Склад
+            HBox hBoxSklad = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxSklad, false, false, 5);
+
+            hBoxSklad.PackStart(Склад, false, false, 5);
+        }
+
+        void CreateContainer2(VBox vBox)
+        {
+            //ГосподарськаОперація
+            HBox hBoxOperation = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxOperation, false, false, 5);
+
+            hBoxOperation.PackStart(new Label("Господарська операція: "), false, false, 0);
+            hBoxOperation.PackStart(ГосподарськаОперація, false, false, 5);
+
+            //Валюта
+            HBox hBoxValuta = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxValuta, false, false, 5);
+
+            hBoxValuta.PackStart(Валюта, false, false, 5);
+        }
+
+        void CreateContainer3(VBox vBox)
+        {
+            //Підрозділ
+            HBox hBoxPidrozdil = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxPidrozdil, false, false, 5);
+
+            hBoxPidrozdil.PackStart(Підрозділ, false, false, 5);
+
+            //Автор
+            HBox hBoxAutor = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxAutor, false, false, 5);
+
+            hBoxAutor.PackStart(Автор, false, false, 5);
+        }
+
+        void CreateContainer4(VBox vBox)
+        {
+
         }
 
         void CreatePack2(HPaned hPaned)
@@ -76,6 +238,22 @@ namespace StorageAndTrade
             notebook.AppendPage(Каси, new Label("Каси"));
             notebook.AppendPage(БанківськіРахунки, new Label("Банківські рахунки"));
             notebook.AppendPage(РозрахункиЗКонтрагентами, new Label("Розрахунки з контрагентами"));
+
+            VBox vBox = new VBox();
+            notebook.AppendPage(vBox, new Label("Додаткові реквізити"));
+
+            HBox hBoxContainer = new HBox();
+            vBox.PackStart(hBoxContainer, false, false, 5);
+
+            VBox vBoxContainer1 = new VBox() { WidthRequest = 500 };
+            hBoxContainer.PackStart(vBoxContainer1, false, false, 5);
+
+            CreateContainer3(vBoxContainer1);
+
+            VBox vBoxContainer2 = new VBox() { WidthRequest = 500 };
+            hBoxContainer.PackStart(vBoxContainer2, false, false, 5);
+
+            CreateContainer4(vBoxContainer2);
 
             hPaned.Pack2(notebook, true, false);
         }
@@ -88,10 +266,31 @@ namespace StorageAndTrade
             {
                 ВведенняЗалишків_Objest.НомерДок = (++НумераціяДокументів.ВведенняЗалишків_Const).ToString("D8");
                 ВведенняЗалишків_Objest.ДатаДок = DateTime.Now;
+                ВведенняЗалишків_Objest.Організація = ЗначенняЗаЗамовчуванням.ОсновнаОрганізація_Const;
+                ВведенняЗалишків_Objest.Валюта = ЗначенняЗаЗамовчуванням.ОсновнаВалюта_Const;
+                ВведенняЗалишків_Objest.Склад = ЗначенняЗаЗамовчуванням.ОснонийСклад_Const;
+                ВведенняЗалишків_Objest.Контрагент = ЗначенняЗаЗамовчуванням.ОсновнийПостачальник_Const;
+                ВведенняЗалишків_Objest.Підрозділ = ЗначенняЗаЗамовчуванням.ОсновнийПідрозділ_Const;
             }
 
             НомерДок.Text = ВведенняЗалишків_Objest.НомерДок;
-            Назва.Text = ВведенняЗалишків_Objest.Назва;
+            ДатаДок.Value = ВведенняЗалишків_Objest.ДатаДок;
+            Організація.Pointer = ВведенняЗалишків_Objest.Організація;
+            Валюта.Pointer = ВведенняЗалишків_Objest.Валюта;
+            Склад.Pointer = ВведенняЗалишків_Objest.Склад;
+            Контрагент.Pointer = ВведенняЗалишків_Objest.Контрагент;
+            Договір.Pointer = ВведенняЗалишків_Objest.Договір;
+            ГосподарськаОперація.ActiveId = ((Перелічення.ГосподарськіОперації)ВведенняЗалишків_Objest.ГосподарськаОперація).ToString();
+            Коментар.Text = ВведенняЗалишків_Objest.Коментар;
+            Підрозділ.Pointer = ВведенняЗалишків_Objest.Підрозділ;
+            Автор.Pointer = ВведенняЗалишків_Objest.Автор;
+
+            if (IsNew)
+            {
+                //Основний договір
+                if (Контрагент.AfterSelectFunc != null)
+                    Контрагент.AfterSelectFunc.Invoke();
+            }
 
             Товари.ВведенняЗалишків_Objest = ВведенняЗалишків_Objest;
             Товари.LoadRecords();
@@ -109,12 +308,22 @@ namespace StorageAndTrade
         void GetValue()
         {
             ВведенняЗалишків_Objest.НомерДок = НомерДок.Text;
+            ВведенняЗалишків_Objest.ДатаДок = ДатаДок.Value;
             ВведенняЗалишків_Objest.Назва = $"Введення залишків №{ВведенняЗалишків_Objest.НомерДок} від {ВведенняЗалишків_Objest.ДатаДок.ToShortDateString()}";
+            ВведенняЗалишків_Objest.Організація = Організація.Pointer;
+            ВведенняЗалишків_Objest.Валюта = Валюта.Pointer;
+            ВведенняЗалишків_Objest.Склад = Склад.Pointer;
+            ВведенняЗалишків_Objest.Контрагент = Контрагент.Pointer;
+            ВведенняЗалишків_Objest.Договір = Договір.Pointer;
+            ВведенняЗалишків_Objest.ГосподарськаОперація = Enum.Parse<Перелічення.ГосподарськіОперації>(ГосподарськаОперація.ActiveId);
+            ВведенняЗалишків_Objest.Коментар = Коментар.Text;
+            ВведенняЗалишків_Objest.Підрозділ = Підрозділ.Pointer;
+            ВведенняЗалишків_Objest.Автор = Автор.Pointer;
         }
 
         #endregion
 
-        void OnSaveClick(object? sender, EventArgs args)
+        void Save()
         {
             if (IsNew)
             {
@@ -131,7 +340,30 @@ namespace StorageAndTrade
             РозрахункиЗКонтрагентами.SaveRecords();
 
             Program.GeneralForm?.RenameCurrentPageNotebook($"{ВведенняЗалишків_Objest.Назва}");
+        }
 
+        void SpendTheDocument(bool spendDoc)
+        {
+            if (spendDoc)
+            {
+                try
+                {
+                    if (!ВведенняЗалишків_Objest.SpendTheDocument(ВведенняЗалишків_Objest.ДатаДок))
+                        ФункціїДляПовідомлень.ВідкритиТермінал();
+                }
+                catch (Exception exp)
+                {
+                    ВведенняЗалишків_Objest.ClearSpendTheDocument();
+                    Message.Error(Program.GeneralForm, exp.Message);
+                    return;
+                }
+            }
+            else
+                ВведенняЗалишків_Objest.ClearSpendTheDocument();
+        }
+
+        void ReloadList()
+        {
             if (PageList != null)
             {
                 Товари.LoadRecords();
@@ -142,6 +374,22 @@ namespace StorageAndTrade
                 PageList.SelectPointerItem = ВведенняЗалишків_Objest.GetDocumentPointer();
                 PageList.LoadRecords();
             }
+        }
+
+        void OnSaveClick(object? sender, EventArgs args)
+        {
+            Save();
+            SpendTheDocument(false);
+
+            ReloadList();
+        }
+
+        void OnSpendTheDocument(object? sender, EventArgs args)
+        {
+            Save();
+            SpendTheDocument(true);
+
+            ReloadList();
         }
     }
 }

@@ -5,7 +5,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>10.11.2022 21:43:03</DateTimeSave>
+  <DateTimeSave>11.11.2022 13:15:16</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -11373,16 +11373,6 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Type>string</Type>
           <Desc>
           </Desc>
-          <IsPresentation>0</IsPresentation>
-          <IsIndex>0</IsIndex>
-        </Field>
-        <Field>
-          <Name>ПартіяТоварівКомпозит</Name>
-          <NameInTable>col_a2</NameInTable>
-          <Type>pointer</Type>
-          <Pointer>Довідники.ПартіяТоварівКомпозит</Pointer>
-          <Desc>!!! Видалити
-ПартіяТоварівКомпозит це вказівник на композитний тип в який входить декілька документів</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
         </Field>
