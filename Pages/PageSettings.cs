@@ -28,9 +28,9 @@ namespace StorageAndTrade
         //Системні
         //
 
-        //Узгоджений
         CheckButton ВестиОблікПоХарактеристикахНоменклатури = new CheckButton("Вести облік по характеристиках номенклатури");
         CheckButton ВестиОблікПоСеріяхНоменклатури = new CheckButton("Вести облік по серіях номенклатури");
+        CheckButton ЗупинитиФоновіЗадачі = new CheckButton("Зупинити фонове обчислення віртуальних залишків");
 
         #endregion
 
@@ -109,20 +109,50 @@ namespace StorageAndTrade
         {
             VBox vBox = new VBox();
 
+            //
+            //Системні
+            //
+
+            //1
+            VBox vBoxSystem = new VBox();
+
             Expander expanderSystem = new Expander("Налаштування обліку") { Expanded = true };
-            expanderSystem.Add(vBox);
+            expanderSystem.Add(vBoxSystem);
 
             //Info
-            HBox hBoxInfo = new HBox() { Halign = Align.Start };
-            vBox.PackStart(hBoxInfo, false, false, 15);
+            HBox hBoxInfoSystem = new HBox() { Halign = Align.Start };
+            vBoxSystem.PackStart(hBoxInfoSystem, false, false, 15);
 
-            hBoxInfo.PackStart(new Label("Видимість колонок у документах і звітах"), false, false, 5);
+            hBoxInfoSystem.PackStart(new Label("Видимість колонок у документах і звітах"), false, false, 5);
 
             //Controls
-            AddControl(vBox, ВестиОблікПоХарактеристикахНоменклатури);
-            AddControl(vBox, ВестиОблікПоСеріяхНоменклатури);
+            AddControl(vBoxSystem, ВестиОблікПоХарактеристикахНоменклатури);
+            AddControl(vBoxSystem, ВестиОблікПоСеріяхНоменклатури);
 
-            hPaned.Pack2(expanderSystem, false, false);
+            vBox.PackStart(expanderSystem, false, false, 10);
+
+            //2
+            VBox vBoxBackgroundTask = new VBox();
+
+            Expander expanderBackgroundTask = new Expander("Фонові обчислення") { Expanded = true };
+            expanderBackgroundTask.Add(vBoxBackgroundTask);
+
+            //Info
+            HBox hBoxInfoBackgroundTask = new HBox() { Halign = Align.Start };
+            vBoxBackgroundTask.PackStart(hBoxInfoBackgroundTask, false, false, 15);
+
+            hBoxInfoBackgroundTask.PackStart(new Label(
+@"Обчислення згрупованих віртуальних залишків по регістрах відбувається автоматично після проведення будь-якого документу.
+Залишки групуються по Днях і по Місяцях відповідно.
+Це обчислення можна зупинити, але звіти будуть відображати неактуальну інформацію.
+Для відновлення актуальності можна запустити перерахунок всіх залишків в розділі Сервіс.") { Wrap = true }, false, false, 5);
+
+            //Controls
+            AddControl(vBoxBackgroundTask, ЗупинитиФоновіЗадачі);
+
+            vBox.PackStart(expanderBackgroundTask, false, false, 10);
+
+            hPaned.Pack2(vBox, false, false);
         }
 
         public void SetValue()
@@ -143,11 +173,12 @@ namespace StorageAndTrade
             ОсновнийВидЦіни.Pointer = Константи.ЗначенняЗаЗамовчуванням.ОсновнийВидЦіни_Const;
 
             //
-            //Значення за замовчуванням
+            //Системні
             //
 
             ВестиОблікПоСеріяхНоменклатури.Active = Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const;
             ВестиОблікПоХарактеристикахНоменклатури.Active = Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const;
+            ЗупинитиФоновіЗадачі.Active = Константи.Системні.ЗупинитиФоновіЗадачі_Const;
         }
 
         void GetValue()
@@ -168,11 +199,12 @@ namespace StorageAndTrade
             Константи.ЗначенняЗаЗамовчуванням.ОсновнийВидЦіни_Const = ОсновнийВидЦіни.Pointer;
 
             //
-            //Значення за замовчуванням
+            //Системні
             //
 
             Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const = ВестиОблікПоСеріяхНоменклатури.Active;
             Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const = ВестиОблікПоХарактеристикахНоменклатури.Active;
+            Константи.Системні.ЗупинитиФоновіЗадачі_Const = ЗупинитиФоновіЗадачі.Active;
         }
 
         void OnSaveClick(object? sender, EventArgs args)
