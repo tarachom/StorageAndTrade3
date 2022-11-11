@@ -18,7 +18,7 @@ namespace StorageAndTrade
             SetPosition(WindowPosition.Center);
             SetDefaultIconFromFile("images/form.ico");
 
-            DeleteEvent += delegate { Application.Quit(); };
+            DeleteEvent += delegate { Program.Quit(); };
 
             VBox vbox = new VBox();
             Add(vbox);
@@ -31,7 +31,12 @@ namespace StorageAndTrade
             topNotebook = new Notebook() { Scrollable = true, EnablePopup = true, BorderWidth = 0, ShowBorder = false };
             topNotebook.TabPos = PositionType.Top;
 
-            CreateNotebookPage("Стартова", null);
+            CreateNotebookPage("Стартова", () =>
+            {
+                PageHome page = new PageHome();
+                page.StartBackgroundTask();
+                return page;
+            });
 
             hbox.PackStart(topNotebook, true, true, 0);
 
@@ -119,7 +124,7 @@ namespace StorageAndTrade
             CreateNotebookPage("Налаштування", () =>
             {
                 PageSettings page = new PageSettings();
-                
+
                 page.SetValue();
 
                 return page;

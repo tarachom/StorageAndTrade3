@@ -1,11 +1,8 @@
 using Gtk;
 
 using System.Reflection;
-
 using AccountingSoftware;
-
 using Константи = StorageAndTrade_1_0.Константи;
-using Service = StorageAndTrade.Service;
 using Журнали = StorageAndTrade_1_0.Журнали;
 
 namespace StorageAndTrade
@@ -175,9 +172,7 @@ namespace StorageAndTrade
                                     string msg = "";
 
                                     foreach (Dictionary<string, object> row in listRow)
-                                    {
                                         msg += row["Повідомлення"].ToString();
-                                    }
 
                                     CreateMessage(TypeMessage.Error, msg);
 
@@ -187,9 +182,7 @@ namespace StorageAndTrade
                                     break;
                                 }
                                 else
-                                {
                                     CreateMessage(TypeMessage.Ok, journalSelect.Current.TypeDocument + " " + journalSelect.Current.SpendDate);
-                                }
                             }
                             catch (Exception ex)
                             {
