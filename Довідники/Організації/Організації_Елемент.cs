@@ -23,7 +23,7 @@ namespace StorageAndTrade
         Entry КраїнаРеєстрації = new Entry() { WidthRequest = 300 };
         Entry СвідоцтвоСеріяНомер = new Entry() { WidthRequest = 300 };
         Entry СвідоцтвоДатаВидачі = new Entry() { WidthRequest = 300 };
-        Організації_PointerControl Холдинг = new Організації_PointerControl();
+        Організації_PointerControl Холдинг = new Організації_PointerControl() { Caption = "Холдинг" };
 
         Організації_ТабличнаЧастина_Контакти Контакти = new Організації_ТабличнаЧастина_Контакти();
 
@@ -59,12 +59,6 @@ namespace StorageAndTrade
         void CreatePack1(HPaned hPaned)
         {
             VBox vBox = new VBox();
-
-            //Холдинг
-            HBox hBoxHolding = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxHolding, false, false, 5);
-
-            hBoxHolding.PackStart(Холдинг, false, false, 3);
 
             //Код
             HBox hBoxCode = new HBox() { Halign = Align.End };
@@ -128,6 +122,12 @@ namespace StorageAndTrade
             hBoxSvidotstvoData.PackStart(СвідоцтвоДатаВидачі, false, false, 5);
 
             hPaned.Pack1(vBox, false, false);
+
+            //Холдинг
+            HBox hBoxHolding = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxHolding, false, false, 5);
+
+            hBoxHolding.PackStart(Холдинг, false, false, 3);
         }
 
         void CreatePack2(HPaned hPaned)

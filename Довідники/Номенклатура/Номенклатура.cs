@@ -171,7 +171,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"Контрагент: *", () =>
+                Program.GeneralForm?.CreateNotebookPage($"Номенклатура: *", () =>
                 {
                     Номенклатура_Елемент page = new Номенклатура_Елемент
                     {
@@ -190,7 +190,7 @@ namespace StorageAndTrade
                 Номенклатура_Objest Номенклатура_Objest = new Номенклатура_Objest();
                 if (Номенклатура_Objest.Read(new UnigueID(uid)))
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"Контрагент: {Номенклатура_Objest.Назва}", () =>
+                    Program.GeneralForm?.CreateNotebookPage($"Номенклатура: {Номенклатура_Objest.Назва}", () =>
                     {
                         Номенклатура_Елемент page = new Номенклатура_Елемент
                         {
