@@ -41,8 +41,6 @@ namespace StorageAndTrade
                 counter++;
 
                 Thread.Sleep(1000);
-
-                Console.WriteLine(counter);
             }
         }
     }

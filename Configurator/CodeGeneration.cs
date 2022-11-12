@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 11.11.2022 16:37:32
+ * Дата конфігурації: 12.11.2022 22:05:48
  *
  */
 
@@ -73,7 +73,7 @@ namespace StorageAndTrade_1_0.Константи
             if (IsSelect)
             {
                 m_ОсновнаОрганізація_Const = new Довідники.Організації_Pointer(fieldValue["col_a1"]);
-                m_ОснонийСклад_Const = new Довідники.Склади_Pointer(fieldValue["col_a2"]);
+                m_ОсновнийСклад_Const = new Довідники.Склади_Pointer(fieldValue["col_a2"]);
                 m_ОсновнаВалюта_Const = new Довідники.Валюти_Pointer(fieldValue["col_a3"]);
                 m_ОсновнийПостачальник_Const = new Довідники.Контрагенти_Pointer(fieldValue["col_a4"]);
                 m_ОсновнийПокупець_Const = new Довідники.Контрагенти_Pointer(fieldValue["col_a5"]);
@@ -102,17 +102,17 @@ namespace StorageAndTrade_1_0.Константи
             }
         }
         
-        static Довідники.Склади_Pointer m_ОснонийСклад_Const = new Довідники.Склади_Pointer();
-        public static Довідники.Склади_Pointer ОснонийСклад_Const
+        static Довідники.Склади_Pointer m_ОсновнийСклад_Const = new Довідники.Склади_Pointer();
+        public static Довідники.Склади_Pointer ОсновнийСклад_Const
         {
             get 
             {
-                return m_ОснонийСклад_Const.GetNewDirectoryPointer();
+                return m_ОсновнийСклад_Const.GetNewDirectoryPointer();
             }
             set
             {
-                m_ОснонийСклад_Const = value;
-                Config.Kernel!.DataBase.SaveConstants("tab_constants", "col_a2", m_ОснонийСклад_Const.UnigueID.UGuid);
+                m_ОсновнийСклад_Const = value;
+                Config.Kernel!.DataBase.SaveConstants("tab_constants", "col_a2", m_ОсновнийСклад_Const.UnigueID.UGuid);
             }
         }
         

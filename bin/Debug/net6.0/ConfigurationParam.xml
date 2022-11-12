@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <Configuration Select="True">
+  <Configuration Select="False">
     <Key>6b4ef58d-4b62-4885-8059-eb6f43c51c2d</Key>
     <Name>Новий</Name>
     <Server>localhost</Server>
@@ -8,6 +8,16 @@
     <Login>postgres</Login>
     <Password>1</Password>
     <BaseName>storage_and_trade</BaseName>
+    <OtherParam />
+  </Configuration>
+  <Configuration Select="True">
+    <Key>acb607da-8cdf-42ed-a8ae-6afd14b773d3</Key>
+    <Name>Новий - Demo</Name>
+    <Server>localhost</Server>
+    <Port>5432</Port>
+    <Login>postgres</Login>
+    <Password>1</Password>
+    <BaseName>storage_and_trade_demo</BaseName>
     <OtherParam />
   </Configuration>
 </root>
