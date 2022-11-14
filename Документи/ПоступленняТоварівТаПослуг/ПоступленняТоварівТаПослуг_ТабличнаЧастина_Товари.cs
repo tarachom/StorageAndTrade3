@@ -493,8 +493,6 @@ namespace StorageAndTrade
 
             TreeViewGrid.AppendColumn(НоменклатураНазва);
 
-//using Константи = StorageAndTrade_1_0.Константи;
-
             //ХарактеристикаНазва
             TreeViewColumn ХарактеристикаНазва = new TreeViewColumn("Характеристика", new CellRendererText(), "text", (int)Columns.ХарактеристикаНазва) { MinWidth = 300 };
             ХарактеристикаНазва.Visible = Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const;
@@ -536,7 +534,7 @@ namespace StorageAndTrade
 
             TreeViewColumn Column_Ціна = new TreeViewColumn("Ціна", Ціна, "text", (int)Columns.Ціна) { MinWidth = 100 };
             //Column_Ціна.SetCellDataFunc(Ціна, new TreeCellDataFunc(RenderArtistName));
-            Column_Ціна.SetCellDataFunc(Ціна, new CellLayoutDataFunc(RenderArtistName2));
+            //Column_Ціна.SetCellDataFunc(Ціна, new CellLayoutDataFunc(RenderArtistName2));
 
             TreeViewGrid.AppendColumn(Column_Ціна);
 
@@ -561,12 +559,12 @@ namespace StorageAndTrade
             TreeViewGrid.AppendColumn(СкладНазва);
         }
 
-        void RenderArtistName2(ICellLayout cellLayout, CellRenderer cell, ITreeModel model, TreeIter iter)
-        {
-            CellRendererText cell2 = (CellRendererText)cell;
+        // void RenderArtistName2(ICellLayout cellLayout, CellRenderer cell, ITreeModel model, TreeIter iter)
+        // {
+        //     CellRendererText cell2 = (CellRendererText)cell;
 
-            cell2.Text = MathF.Round(float.Parse(cell2.Text), 2).ToString("0.00");
-        }
+        //     cell2.Text = MathF.Round(float.Parse(cell2.Text), 2).ToString("0.00");
+        // }
 
         // void RenderArtistName(TreeViewColumn column, CellRenderer cell, ITreeModel model, TreeIter iter)
         // {
