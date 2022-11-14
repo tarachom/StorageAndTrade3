@@ -92,6 +92,10 @@ namespace StorageAndTrade
             refreshButton.Clicked += OnRefreshClick;
             toolbar.Add(refreshButton);
 
+            ToolButton reportSpendTheDocumentButton = new ToolButton(Stock.Refresh) { Label = "Проводки", IsImportant = true };
+            reportSpendTheDocumentButton.Clicked += OnReportSpendTheDocumentClick;
+            toolbar.Add(reportSpendTheDocumentButton);
+
             //Відбір
             ToolItem seperatorOne = new ToolItem();
             seperatorOne.Add(new Separator(Orientation.Vertical));
@@ -323,6 +327,27 @@ namespace StorageAndTrade
         {
             ТабличніСписки.ВведенняЗалишків_Записи.ДодатиВідбірПоПеріоду(Enum.Parse<Перелічення.ТипПеріодуДляЖурналівДокументів>(ComboBoxPeriodWhere.ActiveId));
             LoadRecords();
+        }
+
+        void OnReportSpendTheDocumentClick(object? sender, EventArgs args)
+        {
+            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
+            {
+                TreeIter iter;
+                if (TreeViewGrid.Model.GetIter(out iter, TreeViewGrid.Selection.GetSelectedRows()[0]))
+                {
+                    string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
+
+                    Program.GeneralForm?.CreateNotebookPage($"Проводки", () =>
+                    {
+                        Звіт_РухДокументівПоРегістрах page = new Звіт_РухДокументівПоРегістрах();
+
+                        page.CreateReport(new ВведенняЗалишків_Pointer(new UnigueID(uid)));
+
+                        return page;
+                    });
+                }
+            }
         }
 
         #endregion
