@@ -2,6 +2,7 @@ using Gtk;
 
 using AccountingSoftware;
 using StorageAndTrade_1_0.Довідники;
+using StorageAndTrade_1_0.Документи;
 
 namespace StorageAndTrade
 {
@@ -41,6 +42,19 @@ namespace StorageAndTrade
 
                     switch (valueDataColumn.Name)
                     {
+                        case "Організація_Назва":
+                            {
+                                Program.GeneralForm?.CreateNotebookPage("Довідник: Організації", () =>
+                                {
+                                    Організації page = new Організації();
+                                    page.SelectPointerItem = new Організації_Pointer(unigueID);
+                                    page.LoadRecords();
+
+                                    return page;
+                                });
+
+                                break;
+                            }
                         case "Номенклатура_Назва":
                             {
                                 Program.GeneralForm?.CreateNotebookPage("Довідник: Номенклатура", () =>
@@ -80,6 +94,45 @@ namespace StorageAndTrade
 
                                 break;
                             }
+                        case "Контрагент_Назва":
+                            {
+                                Program.GeneralForm?.CreateNotebookPage("Довідник: Контрагенти", () =>
+                                {
+                                    Контрагенти page = new Контрагенти();
+                                    page.SelectPointerItem = new Контрагенти_Pointer(unigueID);
+                                    page.LoadTree();
+
+                                    return page;
+                                });
+
+                                break;
+                            }
+                        case "Валюта_Назва":
+                            {
+                                Program.GeneralForm?.CreateNotebookPage("Довідник: Валюти", () =>
+                                {
+                                    Валюти page = new Валюти();
+                                    page.SelectPointerItem = new Валюти_Pointer(unigueID);
+                                    page.LoadRecords();
+
+                                    return page;
+                                });
+
+                                break;
+                            }
+                        case "Каса_Назва":
+                            {
+                                Program.GeneralForm?.CreateNotebookPage("Довідник: Каси", () =>
+                                {
+                                    Каси page = new Каси();
+                                    page.SelectPointerItem = new Каси_Pointer(unigueID);
+                                    page.LoadRecords();
+
+                                    return page;
+                                });
+
+                                break;
+                            }
                         case "Склад_Назва":
                             {
                                 Program.GeneralForm?.CreateNotebookPage("Довідник: Склад", () =>
@@ -87,6 +140,45 @@ namespace StorageAndTrade
                                     Склади page = new Склади();
                                     page.SelectPointerItem = new Склади_Pointer(unigueID);
                                     page.LoadTree();
+
+                                    return page;
+                                });
+
+                                break;
+                            }
+                        case "ПартіяТоварівКомпозит_Назва":
+                            {
+                                Program.GeneralForm?.CreateNotebookPage("Довідник: ПартіяТоварівКомпозит", () =>
+                                {
+                                    ПартіяТоварівКомпозит page = new ПартіяТоварівКомпозит();
+                                    page.SelectPointerItem = new ПартіяТоварівКомпозит_Pointer(unigueID);
+                                    page.LoadRecords();
+
+                                    return page;
+                                });
+
+                                break;
+                            }
+                        case "ЗамовленняКлієнта_Назва":
+                            {
+                                Program.GeneralForm?.CreateNotebookPage("Документ: Замовлення клієнтів", () =>
+                                {
+                                    ЗамовленняКлієнта page = new ЗамовленняКлієнта();
+                                    page.SelectPointerItem = new ЗамовленняКлієнта_Pointer(unigueID);
+                                    page.LoadRecords();
+
+                                    return page;
+                                });
+
+                                break;
+                            }
+                        case "ЗамовленняПостачальнику_Назва":
+                            {
+                                Program.GeneralForm?.CreateNotebookPage("Документ: Замовлення постачальнику", () =>
+                                {
+                                    ЗамовленняПостачальнику page = new ЗамовленняПостачальнику();
+                                    page.SelectPointerItem = new ЗамовленняПостачальнику_Pointer(unigueID);
+                                    page.LoadRecords();
 
                                     return page;
                                 });
