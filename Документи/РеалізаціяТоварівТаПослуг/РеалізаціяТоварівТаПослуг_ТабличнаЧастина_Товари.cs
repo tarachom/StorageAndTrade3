@@ -315,7 +315,7 @@ namespace StorageAndTrade
                                         Store.SetValues(iter, запис.ToArray());
                                     };
 
-                                    page.LoadRecords();
+                                    page.LoadTree();
 
                                     return page;
                                 });

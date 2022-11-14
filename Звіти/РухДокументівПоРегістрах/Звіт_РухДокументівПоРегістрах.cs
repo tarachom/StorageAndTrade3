@@ -2,7 +2,6 @@ using Gtk;
 
 using AccountingSoftware;
 using StorageAndTrade_1_0;
-using StorageAndTrade_1_0.Довідники;
 
 namespace StorageAndTrade
 {
@@ -181,7 +180,7 @@ namespace StorageAndTrade
 
                     //Tree
                     TreeView treeView = new TreeView(store);
-                    treeView.ButtonPressEvent += OnButtonPressEvent;
+                    treeView.ButtonPressEvent += ФункціїДляЗвітів.OpenPageDirectoryOrDocument;
 
                     //Columns
                     for (int i = 0; i < columnsName.Length; i++)
@@ -245,135 +244,5 @@ namespace StorageAndTrade
             ShowAll();
         }
 
-        void OnButtonPressEvent(object sender, ButtonPressEventArgs args)
-        {
-            if (args.Event.Type == Gdk.EventType.DoubleButtonPress)
-            {
-                TreeView treeView = (TreeView)sender;
-
-                TreePath itemPath;
-                TreeViewColumn treeColumn;
-
-                treeView.GetCursor(out itemPath, out treeColumn);
-
-                if (treeColumn.Data.ContainsKey("Column"))
-                {
-                    TreeIter iter;
-                    treeView.Model.GetIter(out iter, itemPath);
-
-                    int rowNumber = int.Parse(itemPath.ToString());
-
-                    NameValue<int> valueDataColumn = (NameValue<int>)treeColumn.Data["Column"]!;
-                    string uid = treeView.Model.GetValue(iter, valueDataColumn.Value).ToString()!;
-
-                    switch (valueDataColumn.Name)
-                    {
-                        case "Номенклатура_Назва":
-                            {
-                                Program.GeneralForm?.CreateNotebookPage("Довідник: Номенклатура", () =>
-                                {
-                                    Номенклатура page = new Номенклатура(true);
-                                    page.SelectPointerItem = new Номенклатура_Pointer(new UnigueID(uid));
-                                    page.LoadTree();
-
-                                    return page;
-                                });
-
-                                break;
-                            }
-
-                            // case Columns.ХарактеристикаНазва:
-                            //     {
-                            //         Program.GeneralForm?.CreateNotebookPage("Вибір - Довідник: Характеристика", () =>
-                            //         {
-                            //             ХарактеристикиНоменклатури page = new ХарактеристикиНоменклатури(true);
-
-                            //             page.НоменклатураВласник.Pointer = запис.Номенклатура;
-                            //             page.DirectoryPointerItem = запис.Характеристика;
-                            //             page.CallBack_OnSelectPointer = (ХарактеристикиНоменклатури_Pointer selectPointer) =>
-                            //             {
-                            //                 запис.Характеристика = selectPointer;
-                            //                 Запис.ПісляЗміни_Характеристика(запис);
-
-                            //                 Store.SetValues(iter, запис.ToArray());
-                            //             };
-
-                            //             page.LoadRecords();
-
-                            //             return page;
-                            //         });
-
-                            //         break;
-                            //     }
-                            // case Columns.СеріяНазва:
-                            //     {
-                            //         Program.GeneralForm?.CreateNotebookPage("Вибір - Довідник: Серія", () =>
-                            //         {
-                            //             СеріїНоменклатури page = new СеріїНоменклатури(true);
-
-                            //             page.DirectoryPointerItem = запис.Серія;
-                            //             page.CallBack_OnSelectPointer = (СеріїНоменклатури_Pointer selectPointer) =>
-                            //             {
-                            //                 запис.Серія = selectPointer;
-                            //                 Запис.ПісляЗміни_Серія(запис);
-
-                            //                 Store.SetValues(iter, запис.ToArray());
-                            //             };
-
-                            //             page.LoadRecords();
-
-                            //             return page;
-                            //         });
-
-                            //         break;
-                            //     }
-                            // case Columns.ПакуванняНазва:
-                            //     {
-                            //         Program.GeneralForm?.CreateNotebookPage("Вибір - Довідник: Пакування", () =>
-                            //         {
-                            //             ПакуванняОдиниціВиміру page = new ПакуванняОдиниціВиміру(true);
-
-                            //             page.DirectoryPointerItem = запис.Пакування;
-                            //             page.CallBack_OnSelectPointer = (ПакуванняОдиниціВиміру_Pointer selectPointer) =>
-                            //             {
-                            //                 запис.Пакування = selectPointer;
-                            //                 Запис.ПісляЗміни_Пакування(запис);
-
-                            //                 Store.SetValues(iter, запис.ToArray());
-                            //             };
-
-                            //             page.LoadRecords();
-
-                            //             return page;
-                            //         });
-
-                            //         break;
-                            //     }
-                            // case Columns.СкладНазва:
-                            //     {
-                            //         Program.GeneralForm?.CreateNotebookPage("Вибір - Довідник: Склад", () =>
-                            //         {
-                            //             Склади page = new Склади(true);
-
-                            //             page.DirectoryPointerItem = запис.Склад;
-                            //             page.CallBack_OnSelectPointer = (Склади_Pointer selectPointer) =>
-                            //             {
-                            //                 запис.Склад = selectPointer;
-                            //                 Запис.ПісляЗміни_Склад(запис);
-
-                            //                 Store.SetValues(iter, запис.ToArray());
-                            //             };
-
-                            //             page.LoadRecords();
-
-                            //             return page;
-                            //         });
-
-                            //         break;
-                            //     }
-                    }
-                }
-            }
-        }
     }
 }
