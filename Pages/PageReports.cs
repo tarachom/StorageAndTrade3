@@ -62,30 +62,34 @@ namespace StorageAndTrade
         {
 
         }
-       
+
         void РозрахункиЗКонтрагентами(object? sender, EventArgs args)
         {
 
         }
-        
+
         void РозрахункиЗПостачальниками(object? sender, EventArgs args)
         {
 
         }
-        
+
         void РухДокументівПоРегістрах(object? sender, EventArgs args)
         {
 
         }
-        
+
         void РухКоштів(object? sender, EventArgs args)
         {
 
         }
-        
+
         void ТовариНаСкладах(object? sender, EventArgs args)
         {
-
+            Program.GeneralForm?.CreateNotebookPage("Звіт: Товари на складах", () =>
+            {
+                Звіт_ТовариНаСкладах page = new Звіт_ТовариНаСкладах();
+                return page;
+            });
         }
 
         void AddLink(VBox vbox, string uri, EventHandler? clickAction = null)
