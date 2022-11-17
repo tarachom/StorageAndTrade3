@@ -25,15 +25,15 @@ namespace StorageAndTrade
             AddLink(vLeft, "ТовариНаСкладах", ТовариНаСкладах);
             AddLink(vLeft, "ВільніЗалишки", ВільніЗалишки);
             AddLink(vLeft, "ПартіїТоварів", ПартіїТоварів);
+            AddLink(vLeft, "РухКоштів", РухКоштів);
+            AddLink(vLeft, "РозрахункиЗКонтрагентами", РозрахункиЗКонтрагентами);
 
             AddLink(vLeft, "ЗамовленняКлієнтів", ЗамовленняКлієнтів);
             AddLink(vLeft, "ЗамовленняПостачальникам", ЗамовленняПостачальникам);
             AddLink(vLeft, "РозрахункиЗКлієнтами", РозрахункиЗКлієнтами);
-            AddLink(vLeft, "РозрахункиЗКонтрагентами", РозрахункиЗКонтрагентами);
+
             AddLink(vLeft, "РозрахункиЗПостачальниками", РозрахункиЗПостачальниками);
             AddLink(vLeft, "РухДокументівПоРегістрах", РухДокументівПоРегістрах);
-            AddLink(vLeft, "РухКоштів", РухКоштів);
-
 
             PackStart(hBoxList, false, false, 10);
 
@@ -90,7 +90,11 @@ namespace StorageAndTrade
 
         void РухКоштів(object? sender, EventArgs args)
         {
-
+            Program.GeneralForm?.CreateNotebookPage("Звіт: Рух коштів", () =>
+            {
+                Звіт_РухКоштів page = new Звіт_РухКоштів();
+                return page;
+            });
         }
 
         void ТовариНаСкладах(object? sender, EventArgs args)
