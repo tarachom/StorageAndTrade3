@@ -9,7 +9,7 @@ namespace StorageAndTrade
         {
             pointer = new СеріїНоменклатури_Pointer();
             WidthPresentation = 300;
-            Caption = "Валюта:";
+            Caption = "Серія:";
         }
 
         СеріїНоменклатури_Pointer pointer;

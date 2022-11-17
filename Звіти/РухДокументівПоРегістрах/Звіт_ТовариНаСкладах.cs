@@ -133,6 +133,12 @@ namespace StorageAndTrade
             vBox.PackStart(hBoxSkaldPapka, false, false, 5);
 
             hBoxSkaldPapka.PackStart(Склад_Папка, false, false, 5);
+
+            //Серія
+            HBox hBoxSeria = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxSeria, false, false, 5);
+
+            hBoxSeria.PackStart(Серія, false, false, 5);
         }
 
         #endregion

@@ -22,6 +22,7 @@ namespace StorageAndTrade
             VBox vLeft = new VBox(false, 0);
             hBoxList.PackStart(vLeft, false, false, 5);
 
+            AddLink(vLeft, "ТовариНаСкладах", ТовариНаСкладах);
             AddLink(vLeft, "ВільніЗалишки", ВільніЗалишки);
             AddLink(vLeft, "ЗамовленняКлієнтів", ЗамовленняКлієнтів);
             AddLink(vLeft, "ЗамовленняПостачальникам", ЗамовленняПостачальникам);
@@ -31,7 +32,7 @@ namespace StorageAndTrade
             AddLink(vLeft, "РозрахункиЗПостачальниками", РозрахункиЗПостачальниками);
             AddLink(vLeft, "РухДокументівПоРегістрах", РухДокументівПоРегістрах);
             AddLink(vLeft, "РухКоштів", РухКоштів);
-            AddLink(vLeft, "ТовариНаСкладах", ТовариНаСкладах);
+
 
             PackStart(hBoxList, false, false, 10);
 
@@ -40,7 +41,11 @@ namespace StorageAndTrade
 
         void ВільніЗалишки(object? sender, EventArgs args)
         {
-
+            Program.GeneralForm?.CreateNotebookPage("Звіт: Вільні залишки", () =>
+            {
+                Звіт_ВільніЗалишки page = new Звіт_ВільніЗалишки();
+                return page;
+            });
         }
 
         void ЗамовленняКлієнтів(object? sender, EventArgs args)
