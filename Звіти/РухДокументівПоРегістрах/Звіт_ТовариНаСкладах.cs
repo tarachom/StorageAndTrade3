@@ -32,20 +32,29 @@ namespace StorageAndTrade
             //Кнопки
             HBox hBoxBotton = new HBox();
 
+            //1
             Button bClose = new Button("Закрити");
             bClose.Clicked += (object? sender, EventArgs args) => { Program.GeneralForm?.CloseCurrentPageNotebook(); };
 
             hBoxBotton.PackStart(bClose, false, false, 10);
 
+            //2
             Button bOstatok = new Button("Залишки");
             bOstatok.Clicked += OnReportOstatok;
 
             hBoxBotton.PackStart(bOstatok, false, false, 10);
 
-            Button bOborot = new Button("Обороти");
+            //3
+            Button bOborot = new Button("Залишки та обороти");
             bOborot.Clicked += OnReportOborot;
 
             hBoxBotton.PackStart(bOborot, false, false, 10);
+
+            //4
+            Button bDocuments = new Button("Документи");
+            bDocuments.Clicked += OnReportDocuments;
+
+            hBoxBotton.PackStart(bDocuments, false, false, 10);
 
             PackStart(hBoxBotton, false, false, 10);
 
@@ -62,18 +71,6 @@ namespace StorageAndTrade
 
         void CreateFilters()
         {
-            VBox vBoxPeriod = new VBox();
-
-            HBox hBoxPeriod = new HBox();
-            vBoxPeriod.PackStart(hBoxPeriod, false, false, 5);
-
-            hBoxPeriod.PackStart(new Label("Період з "), false, false, 5);
-            hBoxPeriod.PackStart(ДатаПочаткуПеріоду, false, false, 5);
-            hBoxPeriod.PackStart(new Label(" по "), false, false, 5);
-            hBoxPeriod.PackStart(ДатаКінцяПеріоду, false, false, 5);
-
-            PackStart(vBoxPeriod, false, false, 5);
-
             HBox hBoxContainer = new HBox();
 
             Expander expander = new Expander("Відбори") { Expanded = true };
@@ -96,6 +93,14 @@ namespace StorageAndTrade
 
         void CreateContainer1(VBox vBox)
         {
+            //Період
+            HBox hBoxPeriod = new HBox() { Halign = Align.End };
+            hBoxPeriod.PackStart(new Label("Період з "), false, false, 5);
+            hBoxPeriod.PackStart(ДатаПочаткуПеріоду, false, false, 5);
+            hBoxPeriod.PackStart(new Label(" по "), false, false, 5);
+            hBoxPeriod.PackStart(ДатаКінцяПеріоду, false, false, 5);
+            vBox.PackStart(hBoxPeriod, false, false, 5);
+
             //Номенклатура
             HBox hBoxNomenklatura = new HBox() { Halign = Align.End };
             vBox.PackStart(hBoxNomenklatura, false, false, 5);
@@ -606,10 +611,10 @@ ORDER BY Номенклатура_Назва, ХарактеристикаНом
             ВидиміКолонки.Add("ХарактеристикаНоменклатури_Назва", "Характеристика");
             ВидиміКолонки.Add("Склад_Назва", "Склад");
             ВидиміКолонки.Add("Серія_Номер", "Серія");
-            ВидиміКолонки.Add("ПочатковийЗалишок", "Початковий залишок");
+            ВидиміКолонки.Add("ПочатковийЗалишок", "На початок");
             ВидиміКолонки.Add("Прихід", "Прихід");
             ВидиміКолонки.Add("Розхід", "Розхід");
-            ВидиміКолонки.Add("КінцевийЗалишок", "Кінцевий залишок");
+            ВидиміКолонки.Add("КінцевийЗалишок", "На кінець");
 
             Dictionary<string, string> КолонкиДаних = new Dictionary<string, string>();
             КолонкиДаних.Add("Номенклатура_Назва", "Номенклатура");
@@ -643,10 +648,230 @@ ORDER BY Номенклатура_Назва, ХарактеристикаНом
             ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних);
             ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, columnsName, listRow);
 
-            CreateReportNotebookPage("Обороти", treeView);
+            CreateReportNotebookPage("Залишки та обороти", treeView);
         }
 
+        void OnReportDocuments(object? sender, EventArgs args)
+        {
+            #region SELECT
 
+            bool isExistParent = false;
+
+            string query = $@"
+WITH register AS
+(
+     SELECT 
+        ТовариНаСкладах.period AS period,
+        ТовариНаСкладах.owner AS owner,
+        ТовариНаСкладах.income AS income,
+        ТовариНаСкладах.{ТовариНаСкладах_Const.Номенклатура} AS Номенклатура,
+        ТовариНаСкладах.{ТовариНаСкладах_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
+        ТовариНаСкладах.{ТовариНаСкладах_Const.Склад} AS Склад,
+        ТовариНаСкладах.{ТовариНаСкладах_Const.Серія} AS Серія,
+        ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} AS ВНаявності
+    FROM
+        {ТовариНаСкладах_Const.TABLE} AS ТовариНаСкладах
+    WHERE
+        (ТовариНаСкладах.period >= @period_start AND ТовариНаСкладах.period <= @period_end)
+";
+
+            #region WHERE
+
+            isExistParent = true;
+
+            //Відбір по вибраному елементу Номенклатура
+            if (!Номенклатура.Pointer.IsEmpty())
+            {
+                query += isExistParent ? "AND" : "WHERE";
+                isExistParent = true;
+
+                query += $@"
+ТовариНаСкладах.{ТовариНаСкладах_Const.Номенклатура} = '{Номенклатура.Pointer.UnigueID}'
+";
+            }
+
+            //Відбір по вибраному елементу Характеристики Номенклатури
+            if (!ХарактеристикиНоменклатури.Pointer.IsEmpty())
+            {
+                query += isExistParent ? "AND" : "WHERE";
+                isExistParent = true;
+
+                query += $@"
+ТовариНаСкладах.{ТовариНаСкладах_Const.ХарактеристикаНоменклатури}= '{ХарактеристикиНоменклатури.Pointer.UnigueID}'
+";
+            }
+
+            //Відбір по вибраному елементу Склади
+            if (!Склад.Pointer.IsEmpty())
+            {
+                query += isExistParent ? "AND" : "WHERE";
+                isExistParent = true;
+
+                query += $@"
+ТовариНаСкладах.{ТовариНаСкладах_Const.Склад} = '{Склад.Pointer.UnigueID}'
+";
+            }
+
+            //Відбір по вибраному елементу Серії Номенклатури
+            if (!Серія.Pointer.IsEmpty())
+            {
+                query += isExistParent ? "AND" : "WHERE";
+                isExistParent = true;
+
+                query += $@"
+ТовариНаСкладах.{ТовариНаСкладах_Const.Серія} = '{Серія.Pointer.UnigueID}'
+";
+            }
+
+            #endregion
+
+            query += $@"
+),
+documents AS
+(";
+            int counter = 0;
+            foreach (string table in ТовариНаСкладах_Const.AllowDocumentSpendTable)
+            {
+                string docType = ТовариНаСкладах_Const.AllowDocumentSpendType[counter];
+
+                string union = (counter > 0 ? "UNION" : "");
+                query += $@"
+{union}
+SELECT 
+    '{docType}' AS doctype,
+    {table}.uid, 
+    {table}.docname, 
+    register.period, 
+    register.income, 
+    register.ВНаявності,
+    register.Номенклатура,
+    Довідник_Номенклатура.{Номенклатура_Const.Назва} AS Номенклатура_Назва,
+    register.ХарактеристикаНоменклатури,
+    Довідник_ХарактеристикиНоменклатури.{ХарактеристикиНоменклатури_Const.Назва} AS ХарактеристикаНоменклатури_Назва,
+    register.Склад,
+    Довідник_Склади.{Склади_Const.Назва} AS Склад_Назва,
+    register.Серія,
+    Довідник_СеріїНоменклатури.{СеріїНоменклатури_Const.Номер} AS Серія_Номер
+FROM register INNER JOIN {table} ON {table}.uid = register.owner
+    LEFT JOIN {Номенклатура_Const.TABLE} AS Довідник_Номенклатура ON Довідник_Номенклатура.uid = register.Номенклатура
+    LEFT JOIN {ХарактеристикиНоменклатури_Const.TABLE} AS Довідник_ХарактеристикиНоменклатури ON Довідник_ХарактеристикиНоменклатури.uid = register.ХарактеристикаНоменклатури
+    LEFT JOIN {Склади_Const.TABLE} AS Довідник_Склади ON Довідник_Склади.uid = register.Склад
+    LEFT JOIN {СеріїНоменклатури_Const.TABLE} AS Довідник_СеріїНоменклатури ON Довідник_СеріїНоменклатури.uid = register.Серія
+";
+
+                #region WHERE
+
+                isExistParent = false;
+
+                //Відбір по всіх вкладених папках вибраної папки Номенклатури
+                if (!Номенклатура_Папка.Pointer.IsEmpty())
+                {
+                    query += isExistParent ? "AND" : "WHERE";
+                    isExistParent = true;
+
+                    query += $@"
+Довідник_Номенклатура.{Номенклатура_Const.Папка} IN 
+    (
+        WITH RECURSIVE r AS 
+        (
+            SELECT uid
+            FROM {Номенклатура_Папки_Const.TABLE}
+            WHERE {Номенклатура_Папки_Const.TABLE}.uid = '{Номенклатура_Папка.Pointer.UnigueID}' 
+            UNION ALL
+            SELECT {Номенклатура_Папки_Const.TABLE}.uid
+            FROM {Номенклатура_Папки_Const.TABLE}
+                JOIN r ON {Номенклатура_Папки_Const.TABLE}.{Номенклатура_Папки_Const.Родич} = r.uid
+        ) SELECT uid FROM r
+    )
+";
+                }
+
+                //Відбір по всіх вкладених папках вибраної папки Склади
+                if (!Склад_Папка.Pointer.IsEmpty())
+                {
+                    query += isExistParent ? "AND" : "WHERE";
+                    isExistParent = true;
+
+                    query += $@"
+Довідник_Склади.{Склади_Const.Папка} IN 
+    (
+        WITH RECURSIVE r AS 
+        (
+            SELECT uid
+            FROM {Склади_Папки_Const.TABLE}
+            WHERE {Склади_Папки_Const.TABLE}.uid = '{Склад_Папка.Pointer.UnigueID}' 
+            UNION ALL
+            SELECT {Склади_Папки_Const.TABLE}.uid
+            FROM {Склади_Папки_Const.TABLE}
+                JOIN r ON {Склади_Папки_Const.TABLE}.{Склади_Папки_Const.Родич} = r.uid
+        ) SELECT uid FROM r
+    )
+";
+                }
+
+                #endregion
+
+                counter++;
+            }
+
+            query += $@"
+)
+SELECT 
+    doctype,
+    uid,
+    period,
+    (CASE WHEN income = true THEN '+' ELSE '-' END) AS income,
+    docname,  
+    Номенклатура,
+    Номенклатура_Назва,
+    ХарактеристикаНоменклатури,
+    ХарактеристикаНоменклатури_Назва,
+    Склад,
+    Склад_Назва,
+    Серія,
+    Серія_Номер,
+    ВНаявності
+FROM documents
+ORDER BY period ASC
+";
+
+            #endregion
+
+            Dictionary<string, string> ВидиміКолонки = new Dictionary<string, string>();
+            ВидиміКолонки.Add("income", "Рух");
+            ВидиміКолонки.Add("docname", "Документ");
+            ВидиміКолонки.Add("Номенклатура_Назва", "Номенклатура");
+            ВидиміКолонки.Add("ХарактеристикаНоменклатури_Назва", "Характеристика");
+            ВидиміКолонки.Add("Склад_Назва", "Склад");
+            ВидиміКолонки.Add("Серія_Номер", "Серія");
+            ВидиміКолонки.Add("ВНаявності", "В наявності");
+
+            Dictionary<string, string> КолонкиДаних = new Dictionary<string, string>();
+            КолонкиДаних.Add("Номенклатура_Назва", "Номенклатура");
+            КолонкиДаних.Add("ХарактеристикаНоменклатури_Назва", "ХарактеристикаНоменклатури");
+            КолонкиДаних.Add("Серія_Номер", "Серія");
+            КолонкиДаних.Add("Склад_Назва", "Склад");
+
+            Dictionary<string, object> paramQuery = new Dictionary<string, object>();
+            paramQuery.Add("period_start", DateTime.Parse($"{ДатаПочаткуПеріоду.Value.Day}.{ДатаПочаткуПеріоду.Value.Month}.{ДатаПочаткуПеріоду.Value.Year} 00:00:00"));
+            paramQuery.Add("period_end", DateTime.Parse($"{ДатаКінцяПеріоду.Value.Day}.{ДатаКінцяПеріоду.Value.Month}.{ДатаКінцяПеріоду.Value.Year} 23:59:59"));
+
+            string[] columnsName;
+            List<Dictionary<string, object>> listRow;
+
+            Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listRow);
+
+            ListStore listStore;
+            ФункціїДляЗвітів.СтворитиМодельДаних(out listStore, columnsName);
+
+            TreeView treeView = new TreeView(listStore);
+            treeView.ButtonPressEvent += ФункціїДляЗвітів.OpenPageDirectoryOrDocument;
+
+            ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних);
+            ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, columnsName, listRow);
+
+            CreateReportNotebookPage("Документи", treeView);
+        }
 
     }
 }
