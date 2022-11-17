@@ -27,13 +27,10 @@ namespace StorageAndTrade
             AddLink(vLeft, "ПартіїТоварів", ПартіїТоварів);
             AddLink(vLeft, "РухКоштів", РухКоштів);
             AddLink(vLeft, "РозрахункиЗКонтрагентами", РозрахункиЗКонтрагентами);
-
+            AddLink(vLeft, "РозрахункиЗКлієнтами", РозрахункиЗКлієнтами);
+            AddLink(vLeft, "РозрахункиЗПостачальниками", РозрахункиЗПостачальниками);
             AddLink(vLeft, "ЗамовленняКлієнтів", ЗамовленняКлієнтів);
             AddLink(vLeft, "ЗамовленняПостачальникам", ЗамовленняПостачальникам);
-            AddLink(vLeft, "РозрахункиЗКлієнтами", РозрахункиЗКлієнтами);
-
-            AddLink(vLeft, "РозрахункиЗПостачальниками", РозрахункиЗПостачальниками);
-            AddLink(vLeft, "РухДокументівПоРегістрах", РухДокументівПоРегістрах);
 
             PackStart(hBoxList, false, false, 10);
 
@@ -51,12 +48,20 @@ namespace StorageAndTrade
 
         void ЗамовленняКлієнтів(object? sender, EventArgs args)
         {
-
+            Program.GeneralForm?.CreateNotebookPage("Звіт: Замовлення клієнтів", () =>
+            {
+                Звіт_ЗамовленняКлієнтів page = new Звіт_ЗамовленняКлієнтів();
+                return page;
+            });
         }
 
         void ЗамовленняПостачальникам(object? sender, EventArgs args)
         {
-
+            Program.GeneralForm?.CreateNotebookPage("Звіт: Замовлення постачальникам", () =>
+            {
+                Звіт_ЗамовленняПостачальникам page = new Звіт_ЗамовленняПостачальникам();
+                return page;
+            });
         }
 
         void ПартіїТоварів(object? sender, EventArgs args)
@@ -70,22 +75,29 @@ namespace StorageAndTrade
 
         void РозрахункиЗКлієнтами(object? sender, EventArgs args)
         {
-
+            Program.GeneralForm?.CreateNotebookPage("Звіт: Розрахунки з клієнтами", () =>
+            {
+                Звіт_РозрахункиЗКлієнтами page = new Звіт_РозрахункиЗКлієнтами();
+                return page;
+            });
         }
 
         void РозрахункиЗКонтрагентами(object? sender, EventArgs args)
         {
-
+            Program.GeneralForm?.CreateNotebookPage("Звіт: Розрахунки з контрагентами", () =>
+            {
+                Звіт_РозрахункиЗКонтрагентами page = new Звіт_РозрахункиЗКонтрагентами();
+                return page;
+            });
         }
 
         void РозрахункиЗПостачальниками(object? sender, EventArgs args)
         {
-
-        }
-
-        void РухДокументівПоРегістрах(object? sender, EventArgs args)
-        {
-
+            Program.GeneralForm?.CreateNotebookPage("Звіт: Розрахунки з постачальниками", () =>
+            {
+                Звіт_РозрахункиЗПостачальниками page = new Звіт_РозрахункиЗПостачальниками();
+                return page;
+            });
         }
 
         void РухКоштів(object? sender, EventArgs args)
