@@ -24,9 +24,10 @@ namespace StorageAndTrade
 
             AddLink(vLeft, "ТовариНаСкладах", ТовариНаСкладах);
             AddLink(vLeft, "ВільніЗалишки", ВільніЗалишки);
+            AddLink(vLeft, "ПартіїТоварів", ПартіїТоварів);
+
             AddLink(vLeft, "ЗамовленняКлієнтів", ЗамовленняКлієнтів);
             AddLink(vLeft, "ЗамовленняПостачальникам", ЗамовленняПостачальникам);
-            AddLink(vLeft, "ПартіїТоварів", ПартіїТоварів);
             AddLink(vLeft, "РозрахункиЗКлієнтами", РозрахункиЗКлієнтами);
             AddLink(vLeft, "РозрахункиЗКонтрагентами", РозрахункиЗКонтрагентами);
             AddLink(vLeft, "РозрахункиЗПостачальниками", РозрахункиЗПостачальниками);
@@ -60,7 +61,11 @@ namespace StorageAndTrade
 
         void ПартіїТоварів(object? sender, EventArgs args)
         {
-
+            Program.GeneralForm?.CreateNotebookPage("Звіт: Партії товарів", () =>
+            {
+                Звіт_ПартіїТоварів page = new Звіт_ПартіїТоварів();
+                return page;
+            });
         }
 
         void РозрахункиЗКлієнтами(object? sender, EventArgs args)
