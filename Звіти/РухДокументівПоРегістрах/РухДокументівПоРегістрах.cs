@@ -14,7 +14,7 @@ namespace StorageAndTrade
         {
             Dictionary<string, string> columns = new Dictionary<string, string>();
 
-            columns.Add("income", "");
+            columns.Add("income", "Рух");
             columns.Add("period", "Період");
             columns.Add("Номенклатура_Назва", "Номенклатура");
             columns.Add("ХарактеристикаНоменклатури_Назва", "Характеристика");
@@ -40,7 +40,7 @@ namespace StorageAndTrade
 
         public static string ТовариНаСкладах_Запит = $@"
 SELECT 
-    Рег_ТовариНаСкладах.income,
+    (CASE WHEN Рег_ТовариНаСкладах.income = true THEN '+' ELSE '-' END) AS income,
     Рег_ТовариНаСкладах.period, 
     Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.Номенклатура} AS Номенклатура, 
     Довідник_Номенклатура.{Номенклатура_Const.Назва} AS Номенклатура_Назва, 
@@ -79,7 +79,7 @@ ORDER BY Номенклатура_Назва
         {
             Dictionary<string, string> columns = new Dictionary<string, string>();
 
-            columns.Add("income", "");
+            columns.Add("income", "Рух");
             columns.Add("period", "Період");
             columns.Add("Організація_Назва", "Організація");
             columns.Add("ПартіяТоварівКомпозит_Назва", "Партія");
@@ -110,7 +110,7 @@ ORDER BY Номенклатура_Назва
 
         public static string ПартіїТоварів_Запит = $@"
 SELECT 
-    Рег_ПартіїТоварів.income, 
+    (CASE WHEN Рег_ПартіїТоварів.income = true THEN '+' ELSE '-' END) AS income, 
     Рег_ПартіїТоварів.period,
     Рег_ПартіїТоварів.{ПартіїТоварів_Const.Організація} AS Організація, 
     Довідник_Організації.{Організації_Const.Назва} AS Організація_Назва,
@@ -160,7 +160,7 @@ ORDER BY Організація_Назва
         {
             Dictionary<string, string> columns = new Dictionary<string, string>();
 
-            columns.Add("income", "");
+            columns.Add("income", "Рух");
             columns.Add("period", "Період");
             columns.Add("Номенклатура_Назва", "Номенклатура");
             columns.Add("ХарактеристикаНоменклатури_Назва", "Характеристика");
@@ -183,7 +183,7 @@ ORDER BY Організація_Назва
 
         public static string РухТоварів_Запит = $@"
 SELECT 
-    Рег_РухТоварів.income,
+    (CASE WHEN Рег_РухТоварів.income = true THEN '+' ELSE '-' END) AS income,
     Рег_РухТоварів.period, 
     Рег_РухТоварів.{РухТоварів_Const.Номенклатура} AS Номенклатура, 
     Довідник_Номенклатура.{Номенклатура_Const.Назва} AS Номенклатура_Назва, 
@@ -216,7 +216,7 @@ ORDER BY Номенклатура_Назва
         {
             Dictionary<string, string> columns = new Dictionary<string, string>();
 
-            columns.Add("income", "");
+            columns.Add("income", "Рух");
             columns.Add("period", "Період");
             columns.Add("ЗамовленняКлієнта_Назва", "Замовлення");
             columns.Add("Номенклатура_Назва", "Номенклатура");
@@ -242,7 +242,7 @@ ORDER BY Номенклатура_Назва
 
         public static string ЗамовленняКлієнтів_Запит = $@"
 SELECT 
-    Рег_ЗамовленняКлієнтів.income,
+    (CASE WHEN Рег_ЗамовленняКлієнтів.income = true THEN '+' ELSE '-' END) AS income,
     Рег_ЗамовленняКлієнтів.period,
     Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.ЗамовленняКлієнта} AS ЗамовленняКлієнта, 
     Документ_ЗамовленняКлієнта.{ЗамовленняКлієнта_Const.Назва} AS ЗамовленняКлієнта_Назва, 
@@ -281,7 +281,7 @@ ORDER BY Номенклатура_Назва
         {
             Dictionary<string, string> columns = new Dictionary<string, string>();
 
-            columns.Add("income", "");
+            columns.Add("income", "Рух");
             columns.Add("period", "Період");
             columns.Add("Контрагент_Назва", "Контрагент");
             columns.Add("Валюта_Назва", "Валюта");
@@ -302,7 +302,7 @@ ORDER BY Номенклатура_Назва
 
         public static string РозрахункиЗКлієнтами_Запит = $@"
 SELECT 
-    Рег_РозрахункиЗКлієнтами.income,
+    (CASE WHEN Рег_РозрахункиЗКлієнтами.income = true THEN '+' ELSE '-' END) AS income,
     Рег_РозрахункиЗКлієнтами.period, 
     Рег_РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Контрагент} AS Контрагент, 
     Довідник_Контрагенти.{Контрагенти_Const.Назва} AS Контрагент_Назва,
@@ -329,7 +329,7 @@ WHERE
         {
             Dictionary<string, string> columns = new Dictionary<string, string>();
 
-            columns.Add("income", "");
+            columns.Add("income", "Рух");
             columns.Add("period", "Період");
             columns.Add("Номенклатура_Назва", "Номенклатура");
             columns.Add("ХарактеристикаНоменклатури_Назва", "Характеристика");
@@ -354,7 +354,7 @@ WHERE
 
         public static string ВільніЗалишки_Запит = $@"
 SELECT 
-    Рег_ВільніЗалишки.income, 
+    (CASE WHEN Рег_ВільніЗалишки.income = true THEN '+' ELSE '-' END) AS income, 
     Рег_ВільніЗалишки.period,
     Рег_ВільніЗалишки.{ВільніЗалишки_Const.Номенклатура} AS Номенклатура, 
     Довідник_Номенклатура.{Номенклатура_Const.Назва} AS Номенклатура_Назва, 
@@ -389,7 +389,7 @@ ORDER BY Номенклатура_Назва
         {
             Dictionary<string, string> columns = new Dictionary<string, string>();
 
-            columns.Add("income", "");
+            columns.Add("income", "Рух");
             columns.Add("period", "Період");
             columns.Add("ЗамовленняПостачальнику_Назва", "Замовлення");
             columns.Add("Номенклатура_Назва", "Номенклатура");
@@ -414,7 +414,7 @@ ORDER BY Номенклатура_Назва
 
         public static string ЗамовленняПостачальникам_Запит = $@"
 SELECT 
-    Рег_ЗамовленняПостачальникам.income, 
+    (CASE WHEN Рег_ЗамовленняПостачальникам.income = true THEN '+' ELSE '-' END) AS income, 
     Рег_ЗамовленняПостачальникам.period,
     Рег_ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.ЗамовленняПостачальнику} AS ЗамовленняПостачальнику, 
     Документ_ЗамовленняПостачальнику.{ЗамовленняПостачальнику_Const.Назва} AS ЗамовленняПостачальнику_Назва,
@@ -452,7 +452,7 @@ ORDER BY Номенклатура_Назва
         {
             Dictionary<string, string> columns = new Dictionary<string, string>();
 
-            columns.Add("income", "");
+            columns.Add("income", "Рух");
             columns.Add("period", "Період");
             columns.Add("Контрагент_Назва", "Контрагент");
             columns.Add("Валюта_Назва", "Валюта");
@@ -473,7 +473,7 @@ ORDER BY Номенклатура_Назва
 
         public static string РозрахункиЗПостачальниками_Запит = $@"
 SELECT 
-    Рег_РозрахункиЗПостачальниками.income, 
+    (CASE WHEN Рег_РозрахункиЗПостачальниками.income = true THEN '+' ELSE '-' END) AS income, 
     Рег_РозрахункиЗПостачальниками.period,
     Рег_РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Контрагент} AS Контрагент, 
     Довідник_Контрагенти.{Контрагенти_Const.Назва} AS Контрагент_Назва,
@@ -500,7 +500,7 @@ WHERE
         {
             Dictionary<string, string> columns = new Dictionary<string, string>();
 
-            columns.Add("income", "");
+            columns.Add("income", "Рух");
             columns.Add("period", "Період");
             columns.Add("Номенклатура_Назва", "Номенклатура");
             columns.Add("ХарактеристикаНоменклатури_Назва", "Характеристика");
@@ -524,7 +524,7 @@ WHERE
 
         public static string ТовариДоПоступлення_Запит = $@"
 SELECT 
-    Рег_ТовариДоПоступлення.income,
+    (CASE WHEN Рег_ТовариДоПоступлення.income = true THEN '+' ELSE '-' END) AS income,
     Рег_ТовариДоПоступлення.period,
     Рег_ТовариДоПоступлення.{ТовариДоПоступлення_Const.Номенклатура} AS Номенклатура, 
     Довідник_Номенклатура.{Номенклатура_Const.Назва} AS Номенклатура_Назва, 
@@ -557,7 +557,7 @@ ORDER BY Номенклатура_Назва
         {
             Dictionary<string, string> columns = new Dictionary<string, string>();
 
-            columns.Add("income", "");
+            columns.Add("income", "Рух");
             columns.Add("period", "Період");
             columns.Add("Організація_Назва", "Організація");
             columns.Add("Каса_Назва", "Каса");
@@ -580,7 +580,7 @@ ORDER BY Номенклатура_Назва
 
         public static string РухКоштів_Запит = $@"
 SELECT 
-    Рег_РухКоштів.income, 
+    (CASE WHEN Рег_РухКоштів.income = true THEN '+' ELSE '-' END) AS income, 
     Рег_РухКоштів.period,
     Рег_РухКоштів.{РухКоштів_Const.Організація} AS Організація, 
     Довідник_Організації.{Організації_Const.Назва} AS Організація_Назва, 

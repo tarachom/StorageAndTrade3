@@ -171,59 +171,14 @@ namespace StorageAndTrade
 
                 if (exist)
                 {
-                    //Store
-                    Type[] type = new Type[columnsName.Length];
-                    for (int i = 0; i < columnsName.Length; i++)
-                        type[i] = typeof(string);
+                    ListStore listStore;
+                    ФункціїДляЗвітів.СтворитиМодельДаних(out listStore, columnsName);
 
-                    ListStore store = new ListStore(type);
-
-                    //Tree
-                    TreeView treeView = new TreeView(store);
+                    TreeView treeView = new TreeView(listStore);
                     treeView.ButtonPressEvent += ФункціїДляЗвітів.OpenPageDirectoryOrDocument;
 
-                    //Columns
-                    for (int i = 0; i < columnsName.Length; i++)
-                    {
-                        string columnName = columnsName[i];
-                        bool isVisible = visibleColumn.ContainsKey(columnName);
-
-                        TreeViewColumn treeColumn = new TreeViewColumn(isVisible ? visibleColumn[columnName] : "", new CellRendererText() { Ypad = 4, Xpad = 8 }, "text", i);
-                        treeColumn.Visible = isVisible;
-
-                        if (dataColumn.ContainsKey(columnName))
-                        {
-                            string dataColumName = dataColumn[columnName];
-                            for (int j = 0; j < columnsName.Length; j++)
-                            {
-                                if (dataColumName == columnsName[j])
-                                {
-                                    treeColumn.Data.Add("Column", new NameValue<int>(columnName, j));
-                                    break;
-                                }
-                            }
-                        }
-
-                        treeView.AppendColumn(treeColumn);
-                    }
-
-                    //Data
-                    foreach (Dictionary<string, object> row in listRow)
-                    {
-                        string[] value = new string[columnsName.Length];
-
-                        for (int i = 0; i < columnsName.Length; i++)
-                        {
-                            string column = columnsName[i];
-
-                            if (column == "income")
-                                value[i] = (bool)row[column] ? "+" : "-";
-                            else
-                                value[i] = row[column]?.ToString() ?? "";
-                        }
-
-                        store.AppendValues(value);
-                    }
+                    ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, visibleColumn, dataColumn);
+                    ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, columnsName, listRow);
 
                     WriteBlock(blockCaption, treeView);
                 }
