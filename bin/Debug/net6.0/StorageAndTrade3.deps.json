@@ -83,14 +83,23 @@
           }
         }
       },
-      "Npgsql/6.0.6": {
+      "Microsoft.Extensions.Logging.Abstractions/6.0.0": {
+        "runtime": {
+          "lib/net6.0/Microsoft.Extensions.Logging.Abstractions.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.21.52210"
+          }
+        }
+      },
+      "Npgsql/7.0.0": {
         "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "6.0.0",
           "System.Runtime.CompilerServices.Unsafe": "6.0.0"
         },
         "runtime": {
           "lib/net6.0/Npgsql.dll": {
-            "assemblyVersion": "6.0.6.0",
-            "fileVersion": "6.0.6.0"
+            "assemblyVersion": "7.0.0.0",
+            "fileVersion": "7.0.0.0"
           }
         }
       },
@@ -109,7 +118,7 @@
       "System.Runtime.CompilerServices.Unsafe/6.0.0": {},
       "AccountingSoftware/1.0.0": {
         "dependencies": {
-          "Npgsql": "6.0.6"
+          "Npgsql": "7.0.0"
         },
         "runtime": {
           "AccountingSoftware.dll": {}
@@ -165,12 +174,19 @@
       "path": "gtksharp/3.24.24.38",
       "hashPath": "gtksharp.3.24.24.38.nupkg.sha512"
     },
-    "Npgsql/6.0.6": {
+    "Microsoft.Extensions.Logging.Abstractions/6.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-IIwnoJp0sFkhAydT/KKe/0NhlJKhYPIrXSE95AuU/2dqHNI9alxvjClJSGL+QE8NGqq1SFn+NenxVtm/JYsrJg==",
-      "path": "npgsql/6.0.6",
-      "hashPath": "npgsql.6.0.6.nupkg.sha512"
+      "sha512": "sha512-/HggWBbTwy8TgebGSX5DBZ24ndhzi93sHUBDvP1IxbZD7FDokYzdAr6+vbWGjw2XAfR2EJ1sfKUotpjHnFWPxA==",
+      "path": "microsoft.extensions.logging.abstractions/6.0.0",
+      "hashPath": "microsoft.extensions.logging.abstractions.6.0.0.nupkg.sha512"
+    },
+    "Npgsql/7.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-tOBFksJZ2MiEz8xtDUgS5IG19jVO3nSP15QDYWiiGpXHe0PsLoQBts2Sg3hHKrrLTuw+AjsJz9iKvvGNHyKDIg==",
+      "path": "npgsql/7.0.0",
+      "hashPath": "npgsql.7.0.0.nupkg.sha512"
     },
     "PangoSharp/3.24.24.38": {
       "type": "package",

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "2wvJRjWB1pZ0dyYtT8LsXf7TFCG2XzqgT734zgxlRz5ate4x1LiYbagiiGdkEPCEWLSh06Ag2pwFfvevU48uew==",
+  "dgSpecHash": "kkbMrzxMvlCJh443hRFe2x1wMeJ101PBJlj6E9hvYL50mEvmKRX+WO+HrcAo0qJ8mnt14NghKYECYx9BxoQNpQ==",
   "success": true,
   "projectFilePath": "/home/tarachom/Projects/StorageAndTrade3/StorageAndTrade3.csproj",
   "expectedPackageFiles": [
@@ -10,7 +10,8 @@
     "/home/tarachom/.nuget/packages/giosharp/3.24.24.38/giosharp.3.24.24.38.nupkg.sha512",
     "/home/tarachom/.nuget/packages/glibsharp/3.24.24.38/glibsharp.3.24.24.38.nupkg.sha512",
     "/home/tarachom/.nuget/packages/gtksharp/3.24.24.38/gtksharp.3.24.24.38.nupkg.sha512",
-    "/home/tarachom/.nuget/packages/npgsql/6.0.6/npgsql.6.0.6.nupkg.sha512",
+    "/home/tarachom/.nuget/packages/microsoft.extensions.logging.abstractions/6.0.0/microsoft.extensions.logging.abstractions.6.0.0.nupkg.sha512",
+    "/home/tarachom/.nuget/packages/npgsql/7.0.0/npgsql.7.0.0.nupkg.sha512",
     "/home/tarachom/.nuget/packages/pangosharp/3.24.24.38/pangosharp.3.24.24.38.nupkg.sha512",
     "/home/tarachom/.nuget/packages/system.runtime.compilerservices.unsafe/6.0.0/system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
   ],

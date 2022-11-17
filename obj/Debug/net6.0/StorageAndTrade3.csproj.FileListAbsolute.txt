@@ -24,3 +24,4 @@
 /home/tarachom/Projects/StorageAndTrade3/obj/Debug/net6.0/ref/StorageAndTrade3.dll
 /home/tarachom/Projects/StorageAndTrade3/obj/Debug/net6.0/StorageAndTrade3.pdb
 /home/tarachom/Projects/StorageAndTrade3/obj/Debug/net6.0/StorageAndTrade3.genruntimeconfig.cache
+/home/tarachom/Projects/StorageAndTrade3/bin/Debug/net6.0/Microsoft.Extensions.Logging.Abstractions.dll

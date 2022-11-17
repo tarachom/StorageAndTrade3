@@ -190,5 +190,61 @@ namespace StorageAndTrade
             }
         }
 
+        public static void СтворитиМодельДаних(out ListStore listStore, string[] columnsName)
+        {
+            Type[] type = new Type[columnsName.Length];
+            for (int i = 0; i < columnsName.Length; i++)
+                type[i] = typeof(string);
+
+            listStore = new ListStore(type);
+        }
+
+        public static void СтворитиКолонкиДляДерева(TreeView treeView,
+            string[] columnsName,
+            Dictionary<string, string> visibleColumns,
+            Dictionary<string, string> dataColumns)
+        {
+            for (int i = 0; i < columnsName.Length; i++)
+            {
+                string columnName = columnsName[i];
+
+                bool isVisibleColumn = visibleColumns.ContainsKey(columnName);
+
+                TreeViewColumn treeColumn = new TreeViewColumn(isVisibleColumn ? visibleColumns[columnName] : columnName, new CellRendererText(), "text", i) { Visible = isVisibleColumn };
+
+                if (dataColumns.ContainsKey(columnName))
+                {
+                    string dataColumName = dataColumns[columnName];
+
+                    for (int j = 0; j < columnsName.Length; j++)
+                    {
+                        if (dataColumName == columnsName[j])
+                        {
+                            treeColumn.Data.Add("Column", new NameValue<int>(columnName, j));
+                            break;
+                        }
+                    }
+                }
+
+                treeView.AppendColumn(treeColumn);
+            }
+        }
+
+        public static void ЗаповнитиМодельДаними(ListStore listStore, string[] columnsName, List<Dictionary<string, object>> listRow)
+        {
+            foreach (Dictionary<string, object> row in listRow)
+            {
+                string[] values = new string[columnsName.Length];
+
+                for (int i = 0; i < columnsName.Length; i++)
+                {
+                    string column = columnsName[i];
+                    values[i] = row[column]?.ToString() ?? "";
+                }
+
+                listStore.AppendValues(values);
+            }
+        }
+
     }
 }
