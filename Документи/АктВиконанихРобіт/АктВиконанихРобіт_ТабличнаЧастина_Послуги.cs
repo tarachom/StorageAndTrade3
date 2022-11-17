@@ -42,7 +42,7 @@ namespace StorageAndTrade
             public string НоменклатураНазва { get; set; } = "";
             public ХарактеристикиНоменклатури_Pointer Характеристика { get; set; } = new ХарактеристикиНоменклатури_Pointer();
             public string ХарактеристикаНазва { get; set; } = "";
-            public decimal Кількість { get; set; }
+            public decimal Кількість { get; set; } = 1;
             public decimal Ціна { get; set; }
             public decimal Сума { get; set; }
 

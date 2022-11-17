@@ -50,7 +50,7 @@ namespace StorageAndTrade
             public int КількістьУпаковок { get; set; } = 1;
             public ПакуванняОдиниціВиміру_Pointer Пакування { get; set; } = new ПакуванняОдиниціВиміру_Pointer();
             public string ПакуванняНазва { get; set; } = "";
-            public decimal Кількість { get; set; }
+            public decimal Кількість { get; set; } = 1;
 
             public object[] ToArray()
             {
