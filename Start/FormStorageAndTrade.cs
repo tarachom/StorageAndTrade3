@@ -6,7 +6,6 @@ namespace StorageAndTrade
 {
     class FormStorageAndTrade : Window
     {
-        readonly object loked = new Object();
         public ConfigurationParam? OpenConfigurationParam { get; set; }
 
         Notebook topNotebook;
@@ -53,26 +52,26 @@ namespace StorageAndTrade
             VBox vbox = new VBox();
             vbox.BorderWidth = 15;
 
-            ScrolledWindow scrolLeftMenu = new ScrolledWindow() { ShadowType = ShadowType.In, WidthRequest = 210 };
+            ScrolledWindow scrolLeftMenu = new ScrolledWindow() { ShadowType = ShadowType.In, WidthRequest = 200 };
             scrolLeftMenu.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
             scrolLeftMenu.Add(vbox);
 
-            CreateItemLeftMenu(vbox, "Документи", OnClick_Документи, "images/documents.png");
-            CreateItemLeftMenu(vbox, "Журнали", OnClick_Журнали, "images/journal.png");
-            CreateItemLeftMenu(vbox, "Звіти", OnClick_Звіти, "images/report.png");
-            CreateItemLeftMenu(vbox, "Довідники", OnClick_Довідники, "images/directory.png");
-            CreateItemLeftMenu(vbox, "Налаштування", OnClick_Налаштування, "images/preferences.png");
-            CreateItemLeftMenu(vbox, "Сервіс", OnClick_Сервіс, "images/service.png");
+            CreateItemLeftMenu(vbox, "Документи", Документи, "images/documents.png");
+            CreateItemLeftMenu(vbox, "Журнали", Журнали, "images/journal.png");
+            CreateItemLeftMenu(vbox, "Звіти", Звіти, "images/report.png");
+            CreateItemLeftMenu(vbox, "Довідники", Довідники, "images/directory.png");
+            CreateItemLeftMenu(vbox, "Налаштування", Налаштування, "images/preferences.png");
+            CreateItemLeftMenu(vbox, "Сервіс", Сервіс, "images/service.png");
 
             hbox.PackStart(scrolLeftMenu, false, false, 0);
         }
 
-        void CreateItemLeftMenu(VBox vBox, string name, EventHandler ClikAction, string ico)
+        void CreateItemLeftMenu(VBox vBox, string name, EventHandler ClikAction, string image)
         {
-            LinkButton lb = new LinkButton("#", " " + name)
+            LinkButton lb = new LinkButton(name, name)
             {
                 Halign = Align.Start,
-                Image = new Image(ico),
+                Image = new Image(image),
                 AlwaysShowImage = true
             };
 
@@ -83,7 +82,7 @@ namespace StorageAndTrade
             vBox.PackStart(lb, false, false, 10);
         }
 
-        void OnClick_Документи(object? sender, EventArgs args)
+        void Документи(object? sender, EventArgs args)
         {
             CreateNotebookPage("Документи", () =>
             {
@@ -92,7 +91,7 @@ namespace StorageAndTrade
             });
         }
 
-        void OnClick_Журнали(object? sender, EventArgs args)
+        void Журнали(object? sender, EventArgs args)
         {
             CreateNotebookPage("Журнали", () =>
             {
@@ -101,7 +100,7 @@ namespace StorageAndTrade
             });
         }
 
-        void OnClick_Звіти(object? sender, EventArgs args)
+        void Звіти(object? sender, EventArgs args)
         {
             CreateNotebookPage("Звіти", () =>
             {
@@ -110,7 +109,7 @@ namespace StorageAndTrade
             });
         }
 
-        void OnClick_Довідники(object? sender, EventArgs args)
+        void Довідники(object? sender, EventArgs args)
         {
             CreateNotebookPage("Довідники", () =>
             {
@@ -119,19 +118,17 @@ namespace StorageAndTrade
             });
         }
 
-        void OnClick_Налаштування(object? sender, EventArgs args)
+        void Налаштування(object? sender, EventArgs args)
         {
             CreateNotebookPage("Налаштування", () =>
             {
                 PageSettings page = new PageSettings();
-
                 page.SetValue();
-
                 return page;
             });
         }
 
-        void OnClick_Сервіс(object? sender, EventArgs args)
+        void Сервіс(object? sender, EventArgs args)
         {
             CreateNotebookPage("Сервіс", () =>
             {

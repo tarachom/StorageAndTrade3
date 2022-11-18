@@ -646,12 +646,12 @@ WITH register AS
 
             #region WHERE
 
-            isExistParent = true;
-
             //Відбір по вибраному елементу Контрагенти
             if (!Контрагент.Pointer.IsEmpty())
             {
                 query += isExistParent ? "AND" : "WHERE";
+                isExistParent = true;
+
                 query += $@"
 КлієнтиТаПостачальники.Контрагент = '{Контрагент.Pointer.UnigueID}'
 ";

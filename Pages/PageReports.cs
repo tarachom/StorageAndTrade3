@@ -39,7 +39,7 @@ namespace StorageAndTrade
 
         void ВільніЗалишки(object? sender, EventArgs args)
         {
-            Program.GeneralForm?.CreateNotebookPage("Звіт: Вільні залишки", () =>
+            Program.GeneralForm?.CreateNotebookPage("Звіт - Вільні залишки", () =>
             {
                 Звіт_ВільніЗалишки page = new Звіт_ВільніЗалишки();
                 return page;
@@ -48,7 +48,7 @@ namespace StorageAndTrade
 
         void ЗамовленняКлієнтів(object? sender, EventArgs args)
         {
-            Program.GeneralForm?.CreateNotebookPage("Звіт: Замовлення клієнтів", () =>
+            Program.GeneralForm?.CreateNotebookPage("Звіт - Замовлення клієнтів", () =>
             {
                 Звіт_ЗамовленняКлієнтів page = new Звіт_ЗамовленняКлієнтів();
                 return page;
@@ -57,7 +57,7 @@ namespace StorageAndTrade
 
         void ЗамовленняПостачальникам(object? sender, EventArgs args)
         {
-            Program.GeneralForm?.CreateNotebookPage("Звіт: Замовлення постачальникам", () =>
+            Program.GeneralForm?.CreateNotebookPage("Звіт - Замовлення постачальникам", () =>
             {
                 Звіт_ЗамовленняПостачальникам page = new Звіт_ЗамовленняПостачальникам();
                 return page;
@@ -66,7 +66,7 @@ namespace StorageAndTrade
 
         void ПартіїТоварів(object? sender, EventArgs args)
         {
-            Program.GeneralForm?.CreateNotebookPage("Звіт: Партії товарів", () =>
+            Program.GeneralForm?.CreateNotebookPage("Звіт - Партії товарів", () =>
             {
                 Звіт_ПартіїТоварів page = new Звіт_ПартіїТоварів();
                 return page;
@@ -75,7 +75,7 @@ namespace StorageAndTrade
 
         void РозрахункиЗКлієнтами(object? sender, EventArgs args)
         {
-            Program.GeneralForm?.CreateNotebookPage("Звіт: Розрахунки з клієнтами", () =>
+            Program.GeneralForm?.CreateNotebookPage("Звіт - Розрахунки з клієнтами", () =>
             {
                 Звіт_РозрахункиЗКлієнтами page = new Звіт_РозрахункиЗКлієнтами();
                 return page;
@@ -84,7 +84,7 @@ namespace StorageAndTrade
 
         void РозрахункиЗКонтрагентами(object? sender, EventArgs args)
         {
-            Program.GeneralForm?.CreateNotebookPage("Звіт: Розрахунки з контрагентами", () =>
+            Program.GeneralForm?.CreateNotebookPage("Звіт - Розрахунки з контрагентами", () =>
             {
                 Звіт_РозрахункиЗКонтрагентами page = new Звіт_РозрахункиЗКонтрагентами();
                 return page;
@@ -93,7 +93,7 @@ namespace StorageAndTrade
 
         void РозрахункиЗПостачальниками(object? sender, EventArgs args)
         {
-            Program.GeneralForm?.CreateNotebookPage("Звіт: Розрахунки з постачальниками", () =>
+            Program.GeneralForm?.CreateNotebookPage("Звіт - Розрахунки з постачальниками", () =>
             {
                 Звіт_РозрахункиЗПостачальниками page = new Звіт_РозрахункиЗПостачальниками();
                 return page;
@@ -102,7 +102,7 @@ namespace StorageAndTrade
 
         void РухКоштів(object? sender, EventArgs args)
         {
-            Program.GeneralForm?.CreateNotebookPage("Звіт: Рух коштів", () =>
+            Program.GeneralForm?.CreateNotebookPage("Звіт - Рух коштів", () =>
             {
                 Звіт_РухКоштів page = new Звіт_РухКоштів();
                 return page;
@@ -111,7 +111,7 @@ namespace StorageAndTrade
 
         void ТовариНаСкладах(object? sender, EventArgs args)
         {
-            Program.GeneralForm?.CreateNotebookPage("Звіт: Товари на складах", () =>
+            Program.GeneralForm?.CreateNotebookPage("Звіт - Товари на складах", () =>
             {
                 Звіт_ТовариНаСкладах page = new Звіт_ТовариНаСкладах();
                 return page;
@@ -120,7 +120,7 @@ namespace StorageAndTrade
 
         void AddLink(VBox vbox, string uri, EventHandler? clickAction = null)
         {
-            LinkButton lb = new LinkButton("#", " " + uri) { Halign = Align.Start, Image = new Image("images/doc.png"), AlwaysShowImage = true };
+            LinkButton lb = new LinkButton(uri, " " + uri) { Halign = Align.Start, Image = new Image("images/doc.png"), AlwaysShowImage = true };
             vbox.PackStart(lb, false, false, 0);
 
             if (clickAction != null)

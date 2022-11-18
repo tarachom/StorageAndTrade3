@@ -9,7 +9,7 @@ namespace StorageAndTrade
         {
             pointer = new Контрагенти_Папки_Pointer();
             WidthPresentation = 300;
-            Caption = "Родич:";
+            Caption = "Контрагент папка:";
         }
 
         public string UidOpenFolder { get; set; } = "";

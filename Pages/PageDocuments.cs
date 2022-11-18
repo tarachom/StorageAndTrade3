@@ -58,170 +58,100 @@ namespace StorageAndTrade
 
         void ЗамовленняПостачальнику(object? sender, EventArgs args)
         {
-            Program.GeneralForm?.CreateNotebookPage("Документи: Замовлення постачальнику", () =>
-            {
-                ЗамовленняПостачальнику page = new ЗамовленняПостачальнику();
-
-                page.SetValue();
-
-                return page;
-            });
+            ЗамовленняПостачальнику page = new ЗамовленняПостачальнику();
+            Program.GeneralForm?.CreateNotebookPage("Замовлення постачальнику", () => { return page; });
+            page.SetValue();
         }
 
         void ПоступленняТоварівТаПослуг(object? sender, EventArgs args)
         {
-            Program.GeneralForm?.CreateNotebookPage("Документи: Поступлення товарів та послуг", () =>
-            {
-                ПоступленняТоварівТаПослуг page = new ПоступленняТоварівТаПослуг();
-
-                page.SetValue();
-
-                return page;
-            });
+            ПоступленняТоварівТаПослуг page = new ПоступленняТоварівТаПослуг();
+            Program.GeneralForm?.CreateNotebookPage("Поступлення товарів та послуг", () => { return page; });
+            page.SetValue();
         }
 
         void ЗамовленняКлієнта(object? sender, EventArgs args)
         {
-            Program.GeneralForm?.CreateNotebookPage("Документи: Замовлення клієнта", () =>
-            {
-                ЗамовленняКлієнта page = new ЗамовленняКлієнта();
-
-                page.SetValue();
-
-                return page;
-            });
+            ЗамовленняКлієнта page = new ЗамовленняКлієнта();
+            Program.GeneralForm?.CreateNotebookPage("Замовлення клієнта", () => { return page; });
+            page.SetValue();
         }
 
         void РеалізаціяТоварівТаПослуг(object? sender, EventArgs args)
         {
-            Program.GeneralForm?.CreateNotebookPage("Документи: Реалізація товарів та послуг", () =>
-            {
-                РеалізаціяТоварівТаПослуг page = new РеалізаціяТоварівТаПослуг();
-
-                page.SetValue();
-
-                return page;
-            });
+            РеалізаціяТоварівТаПослуг page = new РеалізаціяТоварівТаПослуг();
+            Program.GeneralForm?.CreateNotebookPage("Реалізація товарів та послуг", () => { return page; });
+            page.SetValue();
         }
 
         void ВстановленняЦінНоменклатури(object? sender, EventArgs args)
         {
-            Program.GeneralForm?.CreateNotebookPage("Документи: Встановлення цін номенклатури", () =>
-            {
-                ВстановленняЦінНоменклатури page = new ВстановленняЦінНоменклатури();
-
-                page.SetValue();
-
-                return page;
-            });
+            ВстановленняЦінНоменклатури page = new ВстановленняЦінНоменклатури();
+            Program.GeneralForm?.CreateNotebookPage("Встановлення цін номенклатури", () => { return page; });
+            page.SetValue();
         }
 
         void ПрихіднийКасовийОрдер(object? sender, EventArgs args)
         {
-            Program.GeneralForm?.CreateNotebookPage("Документи: Прихідний касовий ордер", () =>
-            {
-                ПрихіднийКасовийОрдер page = new ПрихіднийКасовийОрдер();
-
-                page.SetValue();
-
-                return page;
-            });
+            ПрихіднийКасовийОрдер page = new ПрихіднийКасовийОрдер();
+            Program.GeneralForm?.CreateNotebookPage("Прихідний касовий ордер", () => { return page; });
+            page.SetValue();
         }
 
         void РозхіднийКасовийОрдер(object? sender, EventArgs args)
         {
-            Program.GeneralForm?.CreateNotebookPage("Документи: Розхідний касовий ордер", () =>
-            {
-                РозхіднийКасовийОрдер page = new РозхіднийКасовийОрдер();
-
-                page.SetValue();
-
-                return page;
-            });
+            РозхіднийКасовийОрдер page = new РозхіднийКасовийОрдер();
+            Program.GeneralForm?.CreateNotebookPage("Розхідний касовий ордер", () => { return page; });
+            page.SetValue();
         }
 
         void ПереміщенняТоварів(object? sender, EventArgs args)
         {
-            Program.GeneralForm?.CreateNotebookPage("Документи: Переміщення товарів", () =>
-            {
-                ПереміщенняТоварів page = new ПереміщенняТоварів();
-
-                page.SetValue();
-
-                return page;
-            });
+            ПереміщенняТоварів page = new ПереміщенняТоварів();
+            Program.GeneralForm?.CreateNotebookPage("Переміщення товарів", () => { return page; });
+            page.SetValue();
         }
 
         void ПоверненняТоварівПостачальнику(object? sender, EventArgs args)
         {
-            Program.GeneralForm?.CreateNotebookPage("Документи: Повернення товарів постачальнику", () =>
-            {
-                ПоверненняТоварівПостачальнику page = new ПоверненняТоварівПостачальнику();
-
-                page.SetValue();
-
-                return page;
-            });
+            ПоверненняТоварівПостачальнику page = new ПоверненняТоварівПостачальнику();
+            Program.GeneralForm?.CreateNotebookPage("Повернення товарів постачальнику", () => { return page; });
+            page.SetValue();
         }
 
         void ПоверненняТоварівВідКлієнта(object? sender, EventArgs args)
         {
-            Program.GeneralForm?.CreateNotebookPage("Документи: Повернення товарів від клієнта", () =>
-            {
-                ПоверненняТоварівВідКлієнта page = new ПоверненняТоварівВідКлієнта();
-
-                page.SetValue();
-
-                return page;
-            });
+            ПоверненняТоварівВідКлієнта page = new ПоверненняТоварівВідКлієнта();
+            Program.GeneralForm?.CreateNotebookPage("Повернення товарів від клієнта", () => { return page; });
+            page.SetValue();
         }
 
         void АктВиконанихРобіт(object? sender, EventArgs args)
         {
-            Program.GeneralForm?.CreateNotebookPage("Документи: Акт виконаних робіт", () =>
-            {
-                АктВиконанихРобіт page = new АктВиконанихРобіт();
-
-                page.SetValue();
-
-                return page;
-            });
+            АктВиконанихРобіт page = new АктВиконанихРобіт();
+            Program.GeneralForm?.CreateNotebookPage("Акт виконаних робіт", () => { return page; });
+            page.SetValue();
         }
 
         void ВведенняЗалишків(object? sender, EventArgs args)
         {
-            Program.GeneralForm?.CreateNotebookPage("Документи: Введення залишків", () =>
-            {
-                ВведенняЗалишків page = new ВведенняЗалишків();
-
-                page.SetValue();
-
-                return page;
-            });
+            ВведенняЗалишків page = new ВведенняЗалишків();
+            Program.GeneralForm?.CreateNotebookPage("Введення залишків", () => { return page; });
+            page.SetValue();
         }
 
         void ВнутрішнєСпоживанняТоварів(object? sender, EventArgs args)
         {
-            Program.GeneralForm?.CreateNotebookPage("Документи: Внутрішнє споживання товарів", () =>
-            {
-                ВнутрішнєСпоживанняТоварів page = new ВнутрішнєСпоживанняТоварів();
-
-                page.SetValue();
-
-                return page;
-            });
+            ВнутрішнєСпоживанняТоварів page = new ВнутрішнєСпоживанняТоварів();
+            Program.GeneralForm?.CreateNotebookPage("Внутрішнє споживання товарів", () => { return page; });
+            page.SetValue();
         }
 
         void РахунокФактура(object? sender, EventArgs args)
         {
-            Program.GeneralForm?.CreateNotebookPage("Документи: Рахунок фактура", () =>
-            {
-                РахунокФактура page = new РахунокФактура();
-
-                page.SetValue();
-
-                return page;
-            });
+            РахунокФактура page = new РахунокФактура();
+            Program.GeneralForm?.CreateNotebookPage("Рахунок фактура", () => { return page; });
+            page.SetValue();
         }
 
         void AddCaption(VBox vBox, string name)
@@ -238,7 +168,7 @@ namespace StorageAndTrade
 
         void AddLink(VBox vbox, string uri, EventHandler? clickAction = null)
         {
-            LinkButton lb = new LinkButton("#", " " + uri) { Halign = Align.Start, Image = new Image("images/doc.png"), AlwaysShowImage = true };
+            LinkButton lb = new LinkButton(uri, " " + uri) { Halign = Align.Start, Image = new Image("images/doc.png"), AlwaysShowImage = true };
             vbox.PackStart(lb, false, false, 0);
 
             if (clickAction != null)

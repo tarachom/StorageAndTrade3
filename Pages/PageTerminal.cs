@@ -12,7 +12,11 @@ namespace StorageAndTrade
             HBox hBoxBotton = new HBox();
 
             Button bClose = new Button("Закрити");
-            bClose.Clicked += (object? sender, EventArgs args) => { Program.GeneralForm?.CloseCurrentPageNotebook(); };
+            bClose.Clicked += (object? sender, EventArgs args) =>
+            {
+                ФункціїДляПовідомлень.ОчиститиПовідомлення();
+                Program.GeneralForm?.CloseCurrentPageNotebook();
+            };
 
             hBoxBotton.PackStart(bClose, false, false, 10);
 
