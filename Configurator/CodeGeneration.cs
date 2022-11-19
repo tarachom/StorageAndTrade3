@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 19.11.2022 10:38:14
+ * Дата конфігурації: 19.11.2022 13:43:08
  *
  */
 
@@ -68,7 +68,7 @@ namespace StorageAndTrade_1_0.Константи
             
             Dictionary<string, object> fieldValue = new Dictionary<string, object>();
             bool IsSelect = Config.Kernel!.DataBase.SelectAllConstants("tab_constants",
-                 new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_g4", "col_g5", "col_g9" }, fieldValue);
+                 new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_g4", "col_g5", "col_g9", "col_i2" }, fieldValue);
             
             if (IsSelect)
             {
@@ -82,6 +82,7 @@ namespace StorageAndTrade_1_0.Константи
                 m_ОсновнийПідрозділ_Const = new Довідники.СтруктураПідприємства_Pointer(fieldValue["col_g4"]);
                 m_ОсновнийБанківськийРахунок_Const = new Довідники.БанківськіРахункиОрганізацій_Pointer(fieldValue["col_g5"]);
                 m_ОсновнийВидЦіни_Const = new Довідники.ВидиЦін_Pointer(fieldValue["col_g9"]);
+                m_ОсновнийВидНоменклатури_Const = new Довідники.ВидиНоменклатури_Pointer(fieldValue["col_i2"]);
                 
             }
 			
@@ -225,6 +226,20 @@ namespace StorageAndTrade_1_0.Константи
             {
                 m_ОсновнийВидЦіни_Const = value;
                 Config.Kernel!.DataBase.SaveConstants("tab_constants", "col_g9", m_ОсновнийВидЦіни_Const.UnigueID.UGuid);
+            }
+        }
+        
+        static Довідники.ВидиНоменклатури_Pointer m_ОсновнийВидНоменклатури_Const = new Довідники.ВидиНоменклатури_Pointer();
+        public static Довідники.ВидиНоменклатури_Pointer ОсновнийВидНоменклатури_Const
+        {
+            get 
+            {
+                return m_ОсновнийВидНоменклатури_Const.GetNewDirectoryPointer();
+            }
+            set
+            {
+                m_ОсновнийВидНоменклатури_Const = value;
+                Config.Kernel!.DataBase.SaveConstants("tab_constants", "col_i2", m_ОсновнийВидНоменклатури_Const.UnigueID.UGuid);
             }
         }
              
