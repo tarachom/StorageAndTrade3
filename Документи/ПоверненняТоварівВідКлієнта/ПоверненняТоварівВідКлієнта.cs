@@ -30,16 +30,6 @@ namespace StorageAndTrade
 
             hBoxBotton.PackStart(bClose, false, false, 10);
 
-            //Відбір по періоду
-            hBoxBotton.PackStart(new Label("Період:"), false, false, 5);
-
-            ComboBoxPeriodWhere = ТабличніСписки.Інтерфейс.СписокВідбірПоПеріоду();
-            ComboBoxPeriodWhere.Changed += OnComboBoxPeriodWhereChanged;
-
-            hBoxBotton.PackStart(ComboBoxPeriodWhere, false, false, 0);
-
-            PackStart(hBoxBotton, false, false, 10);
-
             //Як форма відкрита для вибору
             if (IsSelectPointer)
             {
@@ -54,6 +44,16 @@ namespace StorageAndTrade
 
                 hBoxBotton.PackStart(bEmptyPointer, false, false, 10);
             }
+
+            //Відбір по періоду
+            hBoxBotton.PackStart(new Label("Період:"), false, false, 5);
+
+            ComboBoxPeriodWhere = ТабличніСписки.Інтерфейс.СписокВідбірПоПеріоду();
+            ComboBoxPeriodWhere.Changed += OnComboBoxPeriodWhereChanged;
+
+            hBoxBotton.PackStart(ComboBoxPeriodWhere, false, false, 0);
+
+            PackStart(hBoxBotton, false, false, 10);
 
             CreateToolbar();
 

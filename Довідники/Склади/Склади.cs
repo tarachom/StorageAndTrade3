@@ -33,10 +33,6 @@ namespace StorageAndTrade
 
             hBoxBotton.PackStart(bClose, false, false, 10);
 
-            //Враховувати ієрархію папок
-            checkButtonIsHierarchy.Clicked += OnCheckButtonIsHierarchyClicked;
-            hBoxBotton.PackStart(checkButtonIsHierarchy, false, false, 10);
-
             //Як форма відкрита для вибору
             if (IsSelectPointer)
             {
@@ -51,6 +47,10 @@ namespace StorageAndTrade
 
                 hBoxBotton.PackStart(bEmptyPointer, false, false, 10);
             }
+
+            //Враховувати ієрархію папок
+            checkButtonIsHierarchy.Clicked += OnCheckButtonIsHierarchyClicked;
+            hBoxBotton.PackStart(checkButtonIsHierarchy, false, false, 10);
 
             PackStart(hBoxBotton, false, false, 10);
 
