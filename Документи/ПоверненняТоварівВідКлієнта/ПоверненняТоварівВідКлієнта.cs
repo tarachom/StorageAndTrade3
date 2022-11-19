@@ -30,6 +30,14 @@ namespace StorageAndTrade
 
             hBoxBotton.PackStart(bClose, false, false, 10);
 
+            //Відбір по періоду
+            hBoxBotton.PackStart(new Label("Період:"), false, false, 5);
+
+            ComboBoxPeriodWhere = ТабличніСписки.Інтерфейс.СписокВідбірПоПеріоду();
+            ComboBoxPeriodWhere.Changed += OnComboBoxPeriodWhereChanged;
+
+            hBoxBotton.PackStart(ComboBoxPeriodWhere, false, false, 0);
+
             PackStart(hBoxBotton, false, false, 10);
 
             //Як форма відкрита для вибору
@@ -95,23 +103,6 @@ namespace StorageAndTrade
             provodkyButton.Clicked += OnReportSpendTheDocumentClick;
             provodkyButton.Menu = ToolbarProvodkySubMenu();
             toolbar.Add(provodkyButton);
-
-            //Відбір
-            ToolItem seperatorOne = new ToolItem();
-            seperatorOne.Add(new Separator(Orientation.Vertical));
-            toolbar.Add(seperatorOne);
-
-            HBox hBoxPeriodWhere = new HBox();
-            hBoxPeriodWhere.PackStart(new Label("Період:"), false, false, 5);
-
-            ComboBoxPeriodWhere = ТабличніСписки.Інтерфейс.СписокВідбірПоПеріоду();
-            ComboBoxPeriodWhere.Changed += OnComboBoxPeriodWhereChanged;
-
-            hBoxPeriodWhere.PackStart(ComboBoxPeriodWhere, false, false, 0);
-
-            ToolItem periodWhere = new ToolItem();
-            periodWhere.Add(hBoxPeriodWhere);
-            toolbar.Add(periodWhere);
         }
 
         Menu ToolbarProvodkySubMenu()
