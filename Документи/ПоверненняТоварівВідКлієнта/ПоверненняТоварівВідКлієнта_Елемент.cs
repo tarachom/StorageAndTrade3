@@ -43,20 +43,34 @@ namespace StorageAndTrade
             new VBox();
             HBox hBox = new HBox();
 
+            Button bSaveAndSpend = new Button("Зберегти і провести");
+            bSaveAndSpend.Clicked += OnSaveAndSpendClick;
+
+            hBox.PackStart(bSaveAndSpend, false, false, 10);
+
             Button bSave = new Button("Зберегти");
             bSave.Clicked += OnSaveClick;
 
             hBox.PackStart(bSave, false, false, 10);
 
-            Button bSpendTheDocument = new Button("Провести");
-            bSpendTheDocument.Clicked += OnSpendTheDocument;
-
-            hBox.PackStart(bSpendTheDocument, false, false, 10);
-
             Button bClose = new Button("Закрити");
             bClose.Clicked += (object? sender, EventArgs args) => { Program.GeneralForm?.CloseCurrentPageNotebook(); };
 
             hBox.PackStart(bClose, false, false, 10);
+
+            //Проводки
+            LinkButton linkButtonProvodky = new LinkButton("Проводки") { Halign = Align.Start };
+            linkButtonProvodky.Clicked += (object? sender, EventArgs args) =>
+            {
+                Program.GeneralForm?.CreateNotebookPage($"Проводки", () =>
+                {
+                    Звіт_РухДокументівПоРегістрах page = new Звіт_РухДокументівПоРегістрах();
+                    page.CreateReport(ПоверненняТоварівВідКлієнта_Objest.GetDocumentPointer());
+                    return page;
+                });
+            };
+
+            hBox.PackStart(linkButtonProvodky, false, false, 10);
 
             PackStart(hBox, false, false, 10);
 
@@ -378,6 +392,14 @@ namespace StorageAndTrade
             }
         }
 
+        void OnSaveAndSpendClick(object? sender, EventArgs args)
+        {
+            Save();
+            SpendTheDocument(true);
+
+            ReloadList();
+        }
+
         void OnSaveClick(object? sender, EventArgs args)
         {
             Save();
@@ -386,13 +408,5 @@ namespace StorageAndTrade
             ReloadList();
         }
 
-        void OnSpendTheDocument(object? sender, EventArgs args)
-        {
-            Save();
-            SpendTheDocument(true);
-
-            ReloadList();
-        }
-    
     }
 }

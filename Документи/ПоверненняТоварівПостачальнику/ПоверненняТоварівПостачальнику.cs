@@ -92,9 +92,10 @@ namespace StorageAndTrade
             refreshButton.Clicked += OnRefreshClick;
             toolbar.Add(refreshButton);
 
-            ToolButton reportSpendTheDocumentButton = new ToolButton(Stock.Refresh) { Label = "Проводки", IsImportant = true };
-            reportSpendTheDocumentButton.Clicked += OnReportSpendTheDocumentClick;
-            toolbar.Add(reportSpendTheDocumentButton);
+            MenuToolButton provodkyButton = new MenuToolButton(Stock.Find) { Label = "Проводки", IsImportant = true };
+            provodkyButton.Clicked += OnReportSpendTheDocumentClick;
+            provodkyButton.Menu = ToolbarProvodkySubMenu();
+            toolbar.Add(provodkyButton);
 
             //Відбір
             ToolItem seperatorOne = new ToolItem();
@@ -112,6 +113,23 @@ namespace StorageAndTrade
             ToolItem periodWhere = new ToolItem();
             periodWhere.Add(hBoxPeriodWhere);
             toolbar.Add(periodWhere);
+        }
+
+        Menu ToolbarProvodkySubMenu()
+        {
+            Menu Menu = new Menu();
+
+            MenuItem spendTheDocumentButton = new MenuItem("Провести документ");
+            spendTheDocumentButton.Activated += OnSpendTheDocument;
+            Menu.Append(spendTheDocumentButton);
+
+            MenuItem clearSpendButton = new MenuItem("Відмінити проведення");
+            clearSpendButton.Activated += OnClearSpend;
+            Menu.Append(clearSpendButton);
+
+            Menu.ShowAll();
+
+            return Menu;
         }
 
         public void SetValue()
@@ -332,6 +350,63 @@ namespace StorageAndTrade
 
                         return page;
                     });
+                }
+            }
+        }
+
+        void SpendTheDocument(string uid, bool spendDoc)
+        {
+            ПоверненняТоварівПостачальнику_Pointer ПоверненняТоварівПостачальнику_Pointer = new ПоверненняТоварівПостачальнику_Pointer(new UnigueID(uid));
+            ПоверненняТоварівПостачальнику_Objest ПоверненняТоварівПостачальнику_Objest = ПоверненняТоварівПостачальнику_Pointer.GetDocumentObject(true);
+
+            //Збереження для запуску тригерів
+            ПоверненняТоварівПостачальнику_Objest.Save();
+
+            if (spendDoc)
+            {
+                try
+                {
+                    if (!ПоверненняТоварівПостачальнику_Objest.SpendTheDocument(ПоверненняТоварівПостачальнику_Objest.ДатаДок))
+                    {
+                        ПоверненняТоварівПостачальнику_Objest.ClearSpendTheDocument();
+                        ФункціїДляПовідомлень.ВідкритиТермінал();
+                    }
+                }
+                catch (Exception exp)
+                {
+                    ПоверненняТоварівПостачальнику_Objest.ClearSpendTheDocument();
+                    Message.Error(Program.GeneralForm, exp.Message);
+                    return;
+                }
+            }
+            else
+                ПоверненняТоварівПостачальнику_Objest.ClearSpendTheDocument();
+        }
+
+        void OnSpendTheDocument(object? sender, EventArgs args)
+        {
+            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
+            {
+                TreeIter iter;
+                if (TreeViewGrid.Model.GetIter(out iter, TreeViewGrid.Selection.GetSelectedRows()[0]))
+                {
+                    string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
+                    SpendTheDocument(uid, true);
+                    LoadRecords();
+                }
+            }
+        }
+
+        void OnClearSpend(object? sender, EventArgs args)
+        {
+            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
+            {
+                TreeIter iter;
+                if (TreeViewGrid.Model.GetIter(out iter, TreeViewGrid.Selection.GetSelectedRows()[0]))
+                {
+                    string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
+                    SpendTheDocument(uid, false);
+                    LoadRecords();
                 }
             }
         }
