@@ -355,28 +355,28 @@ namespace StorageAndTrade
 
         void SpendTheDocument(string uid, bool spendDoc)
         {
-            ПоступленняТоварівТаПослуг_Pointer поступленняТоварівТаПослуг_Pointer = new ПоступленняТоварівТаПослуг_Pointer(new UnigueID(uid));
-            ПоступленняТоварівТаПослуг_Objest поступленняТоварівТаПослуг_Objest = поступленняТоварівТаПослуг_Pointer.GetDocumentObject(true);
+            ПоступленняТоварівТаПослуг_Pointer ПоступленняТоварівТаПослуг_Pointer = new ПоступленняТоварівТаПослуг_Pointer(new UnigueID(uid));
+            ПоступленняТоварівТаПослуг_Objest ПоступленняТоварівТаПослуг_Objest = ПоступленняТоварівТаПослуг_Pointer.GetDocumentObject(true);
 
             //Збереження для запуску тригерів
-            поступленняТоварівТаПослуг_Objest.Save();
+            ПоступленняТоварівТаПослуг_Objest.Save();
 
             if (spendDoc)
             {
                 try
                 {
-                    if (!поступленняТоварівТаПослуг_Objest.SpendTheDocument(поступленняТоварівТаПослуг_Objest.ДатаДок))
+                    if (!ПоступленняТоварівТаПослуг_Objest.SpendTheDocument(ПоступленняТоварівТаПослуг_Objest.ДатаДок))
                         ФункціїДляПовідомлень.ВідкритиТермінал();
                 }
                 catch (Exception exp)
                 {
-                    поступленняТоварівТаПослуг_Objest.ClearSpendTheDocument();
+                    ПоступленняТоварівТаПослуг_Objest.ClearSpendTheDocument();
                     Message.Error(Program.GeneralForm, exp.Message);
                     return;
                 }
             }
             else
-                поступленняТоварівТаПослуг_Objest.ClearSpendTheDocument();
+                ПоступленняТоварівТаПослуг_Objest.ClearSpendTheDocument();
         }
 
         void OnSpendTheDocument(object? sender, EventArgs args)
@@ -406,8 +406,7 @@ namespace StorageAndTrade
                 }
             }
         }
+
+        #endregion
     }
-
-    #endregion
-
 }
