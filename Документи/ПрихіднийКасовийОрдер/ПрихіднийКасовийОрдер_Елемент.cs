@@ -43,20 +43,34 @@ namespace StorageAndTrade
             new VBox();
             HBox hBox = new HBox();
 
+            Button bSaveAndSpend = new Button("Зберегти і провести");
+            bSaveAndSpend.Clicked += OnSaveAndSpendClick;
+
+            hBox.PackStart(bSaveAndSpend, false, false, 10);
+
             Button bSave = new Button("Зберегти");
             bSave.Clicked += OnSaveClick;
 
             hBox.PackStart(bSave, false, false, 10);
 
-            Button bSpendTheDocument = new Button("Провести");
-            bSpendTheDocument.Clicked += OnSpendTheDocument;
-
-            hBox.PackStart(bSpendTheDocument, false, false, 10);
-
             Button bClose = new Button("Закрити");
             bClose.Clicked += (object? sender, EventArgs args) => { Program.GeneralForm?.CloseCurrentPageNotebook(); };
 
             hBox.PackStart(bClose, false, false, 10);
+
+            //Проводки
+            LinkButton linkButtonProvodky = new LinkButton("Проводки") { Halign = Align.Start };
+            linkButtonProvodky.Clicked += (object? sender, EventArgs args) =>
+            {
+                Program.GeneralForm?.CreateNotebookPage($"Проводки", () =>
+                {
+                    Звіт_РухДокументівПоРегістрах page = new Звіт_РухДокументівПоРегістрах();
+                    page.CreateReport(ПрихіднийКасовийОрдер_Objest.GetDocumentPointer());
+                    return page;
+                });
+            };
+
+            hBox.PackStart(linkButtonProvodky, false, false, 10);
 
             PackStart(hBox, false, false, 10);
 
@@ -203,17 +217,11 @@ namespace StorageAndTrade
 
             hBoxDogovir.PackStart(Договір, false, false, 5);
 
-            //Каса
-            HBox hBoxKasa = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxKasa, false, false, 5);
+            //Валюта
+            HBox hBoxValuta = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxValuta, false, false, 5);
 
-            hBoxKasa.PackStart(Каса, false, false, 5);
-
-            //КасаВідправник
-            HBox hBoxKasaVidpravnyk = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxKasaVidpravnyk, false, false, 5);
-
-            hBoxKasaVidpravnyk.PackStart(КасаВідправник, false, false, 5);
+            hBoxValuta.PackStart(Валюта, false, false, 5);
         }
 
         void CreateContainer2(VBox vBox)
@@ -225,11 +233,17 @@ namespace StorageAndTrade
             hBoxOperation.PackStart(new Label("Господарська операція: "), false, false, 0);
             hBoxOperation.PackStart(ГосподарськаОперація, false, false, 5);
 
-            //Валюта
-            HBox hBoxValuta = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxValuta, false, false, 5);
+            //Каса
+            HBox hBoxKasa = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxKasa, false, false, 5);
 
-            hBoxValuta.PackStart(Валюта, false, false, 5);
+            hBoxKasa.PackStart(Каса, false, false, 5);
+
+            //КасаВідправник
+            HBox hBoxKasaVidpravnyk = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxKasaVidpravnyk, false, false, 5);
+
+            hBoxKasaVidpravnyk.PackStart(КасаВідправник, false, false, 5);
 
             //СумаДокументу
             HBox hBoxSuma = new HBox() { Halign = Align.End };
@@ -377,7 +391,10 @@ namespace StorageAndTrade
                 try
                 {
                     if (!ПрихіднийКасовийОрдер_Objest.SpendTheDocument(ПрихіднийКасовийОрдер_Objest.ДатаДок))
+                    {
+                        ПрихіднийКасовийОрдер_Objest.ClearSpendTheDocument();
                         ФункціїДляПовідомлень.ВідкритиТермінал();
+                    }
                 }
                 catch (Exception exp)
                 {
@@ -399,18 +416,18 @@ namespace StorageAndTrade
             }
         }
 
-        void OnSaveClick(object? sender, EventArgs args)
+        void OnSaveAndSpendClick(object? sender, EventArgs args)
         {
             Save();
-            SpendTheDocument(false);
+            SpendTheDocument(true);
 
             ReloadList();
         }
 
-        void OnSpendTheDocument(object? sender, EventArgs args)
+        void OnSaveClick(object? sender, EventArgs args)
         {
             Save();
-            SpendTheDocument(true);
+            SpendTheDocument(false);
 
             ReloadList();
         }

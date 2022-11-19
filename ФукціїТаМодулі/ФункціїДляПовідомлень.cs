@@ -94,9 +94,7 @@ ORDER BY Дата DESC
             Program.GeneralForm?.CreateNotebookPage("Повідомлення", () =>
             {
                 PageTerminal page = new PageTerminal();
-
                 page.LoadRecords();
-
                 return page;
             });
         }

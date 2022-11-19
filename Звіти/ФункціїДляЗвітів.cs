@@ -44,144 +44,122 @@ namespace StorageAndTrade
                     {
                         case "Організація_Назва":
                             {
-                                Program.GeneralForm?.CreateNotebookPage("Довідник: Організації", () =>
-                                {
-                                    Організації page = new Організації();
-                                    page.SelectPointerItem = new Організації_Pointer(unigueID);
-                                    page.LoadRecords();
+                                Організації page = new Організації();
+                                page.SelectPointerItem = new Організації_Pointer(unigueID);
 
-                                    return page;
-                                });
+                                Program.GeneralForm?.CreateNotebookPage("Організації", () => { return page; });
+
+                                page.LoadRecords();
 
                                 break;
                             }
                         case "Номенклатура_Назва":
                             {
-                                Program.GeneralForm?.CreateNotebookPage("Довідник: Номенклатура", () =>
-                                {
-                                    Номенклатура page = new Номенклатура();
-                                    page.SelectPointerItem = new Номенклатура_Pointer(unigueID);
-                                    page.LoadTree();
+                                Номенклатура page = new Номенклатура();
+                                page.SelectPointerItem = new Номенклатура_Pointer(unigueID);
 
-                                    return page;
-                                });
+                                Program.GeneralForm?.CreateNotebookPage("Номенклатура", () => { return page; });
+
+                                page.LoadTree();
 
                                 break;
                             }
                         case "ХарактеристикаНоменклатури_Назва":
                             {
-                                Program.GeneralForm?.CreateNotebookPage("Довідник: Характеристика", () =>
-                                {
-                                    ХарактеристикиНоменклатури page = new ХарактеристикиНоменклатури();
-                                    page.SelectPointerItem = new ХарактеристикиНоменклатури_Pointer(unigueID);
-                                    page.LoadRecords();
+                                ХарактеристикиНоменклатури page = new ХарактеристикиНоменклатури();
+                                page.SelectPointerItem = new ХарактеристикиНоменклатури_Pointer(unigueID);
 
-                                    return page;
-                                });
+                                Program.GeneralForm?.CreateNotebookPage("Характеристика", () => { return page; });
+
+                                page.LoadRecords();
 
                                 break;
                             }
                         case "Серія_Номер":
                             {
-                                Program.GeneralForm?.CreateNotebookPage("Довідник: Серія", () =>
-                                {
-                                    СеріїНоменклатури page = new СеріїНоменклатури();
-                                    page.SelectPointerItem = new СеріїНоменклатури_Pointer(unigueID);
-                                    page.LoadRecords();
+                                СеріїНоменклатури page = new СеріїНоменклатури();
+                                page.SelectPointerItem = new СеріїНоменклатури_Pointer(unigueID);
 
-                                    return page;
-                                });
+                                Program.GeneralForm?.CreateNotebookPage("Серія", () => { return page; });
+
+                                page.LoadRecords();
 
                                 break;
                             }
                         case "Контрагент_Назва":
                             {
-                                Program.GeneralForm?.CreateNotebookPage("Довідник: Контрагенти", () =>
-                                {
-                                    Контрагенти page = new Контрагенти();
-                                    page.SelectPointerItem = new Контрагенти_Pointer(unigueID);
-                                    page.LoadTree();
+                                Контрагенти page = new Контрагенти();
+                                page.SelectPointerItem = new Контрагенти_Pointer(unigueID);
 
-                                    return page;
-                                });
+                                Program.GeneralForm?.CreateNotebookPage("Контрагенти", () => { return page; });
+
+                                page.LoadTree();
 
                                 break;
                             }
                         case "Валюта_Назва":
                             {
-                                Program.GeneralForm?.CreateNotebookPage("Довідник: Валюти", () =>
-                                {
-                                    Валюти page = new Валюти();
-                                    page.SelectPointerItem = new Валюти_Pointer(unigueID);
-                                    page.LoadRecords();
+                                Валюти page = new Валюти();
+                                page.SelectPointerItem = new Валюти_Pointer(unigueID);
 
-                                    return page;
-                                });
+                                Program.GeneralForm?.CreateNotebookPage("Валюти", () => { return page; });
+
+                                page.LoadRecords();
 
                                 break;
                             }
                         case "Каса_Назва":
                             {
-                                Program.GeneralForm?.CreateNotebookPage("Довідник: Каси", () =>
-                                {
-                                    Каси page = new Каси();
-                                    page.SelectPointerItem = new Каси_Pointer(unigueID);
-                                    page.LoadRecords();
+                                Каси page = new Каси();
+                                page.SelectPointerItem = new Каси_Pointer(unigueID);
 
-                                    return page;
-                                });
+                                Program.GeneralForm?.CreateNotebookPage("Каси", () => { return page; });
+
+                                page.LoadRecords();
 
                                 break;
                             }
                         case "Склад_Назва":
                             {
-                                Program.GeneralForm?.CreateNotebookPage("Довідник: Склад", () =>
-                                {
-                                    Склади page = new Склади();
-                                    page.SelectPointerItem = new Склади_Pointer(unigueID);
-                                    page.LoadTree();
+                                Склади page = new Склади();
+                                page.SelectPointerItem = new Склади_Pointer(unigueID);
 
-                                    return page;
-                                });
+                                Program.GeneralForm?.CreateNotebookPage("Склад", () => { return page; });
+
+                                page.LoadTree();
 
                                 break;
                             }
                         case "ПартіяТоварівКомпозит_Назва":
                             {
-                                Program.GeneralForm?.CreateNotebookPage("Довідник: ПартіяТоварівКомпозит", () =>
-                                {
-                                    ПартіяТоварівКомпозит page = new ПартіяТоварівКомпозит();
-                                    page.SelectPointerItem = new ПартіяТоварівКомпозит_Pointer(unigueID);
-                                    page.LoadRecords();
+                                ПартіяТоварівКомпозит page = new ПартіяТоварівКомпозит();
+                                page.SelectPointerItem = new ПартіяТоварівКомпозит_Pointer(unigueID);
 
-                                    return page;
-                                });
+                                Program.GeneralForm?.CreateNotebookPage("ПартіяТоварівКомпозит", () => { return page; });
+
+                                page.LoadRecords();
 
                                 break;
                             }
                         case "ЗамовленняКлієнта_Назва":
                             {
-                                Program.GeneralForm?.CreateNotebookPage("Документ: Замовлення клієнтів", () =>
-                                {
-                                    ЗамовленняКлієнта page = new ЗамовленняКлієнта();
-                                    page.SelectPointerItem = new ЗамовленняКлієнта_Pointer(unigueID);
-                                    page.LoadRecords();
+                                ЗамовленняКлієнта page = new ЗамовленняКлієнта();
+                                page.SelectPointerItem = new ЗамовленняКлієнта_Pointer(unigueID);
 
-                                    return page;
-                                });
+                                Program.GeneralForm?.CreateNotebookPage("Замовлення клієнтів", () => { return page; });
+
+                                page.LoadRecords();
 
                                 break;
                             }
                         case "ЗамовленняПостачальнику_Назва":
                             {
-                                Program.GeneralForm?.CreateNotebookPage("Документ: Замовлення постачальнику", () =>
-                                {
-                                    ЗамовленняПостачальнику page = new ЗамовленняПостачальнику();
-                                    page.SelectPointerItem = new ЗамовленняПостачальнику_Pointer(unigueID);
-                                    page.LoadRecords();
+                                ЗамовленняПостачальнику page = new ЗамовленняПостачальнику();
+                                page.SelectPointerItem = new ЗамовленняПостачальнику_Pointer(unigueID);
 
-                                    return page;
-                                });
+                                Program.GeneralForm?.CreateNotebookPage("Замовлення постачальнику", () => { return page; });
+
+                                page.LoadRecords();
 
                                 break;
                             }
