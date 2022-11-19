@@ -32,20 +32,17 @@ namespace StorageAndTrade
 
         protected override void OpenSelect(object? sender, EventArgs args)
         {
-            Program.GeneralForm?.CreateNotebookPage("Вибір - Документи: Встановлення цін номенклатури", () =>
+            ВстановленняЦінНоменклатури page = new ВстановленняЦінНоменклатури(true);
+
+            page.DocumentPointerItem = Pointer;
+            page.CallBack_OnSelectPointer = (ВстановленняЦінНоменклатури_Pointer selectPointer) =>
             {
-                ВстановленняЦінНоменклатури page = new ВстановленняЦінНоменклатури(true);
+                Pointer = selectPointer;
+            };
 
-                page.DocumentPointerItem = Pointer;
-                page.CallBack_OnSelectPointer = (ВстановленняЦінНоменклатури_Pointer selectPointer) =>
-                {
-                    Pointer = selectPointer;
-                };
+            Program.GeneralForm?.CreateNotebookPage("Вибір - Встановлення цін номенклатури", () => { return page; });
 
-                page.LoadRecords();
-
-                return page;
-            });
+            page.LoadRecords();
         }
 
         protected override void OnClear(object? sender, EventArgs args)

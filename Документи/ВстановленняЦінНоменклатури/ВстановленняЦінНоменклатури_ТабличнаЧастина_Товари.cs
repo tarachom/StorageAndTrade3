@@ -176,90 +176,78 @@ namespace StorageAndTrade
                     {
                         case Columns.НоменклатураНазва:
                             {
-                                Program.GeneralForm?.CreateNotebookPage("Вибір - Довідник: Номенклатура", () =>
+                                Номенклатура page = new Номенклатура(true);
+
+                                page.DirectoryPointerItem = запис.Номенклатура;
+                                page.CallBack_OnSelectPointer = (Номенклатура_Pointer selectPointer) =>
                                 {
-                                    Номенклатура page = new Номенклатура(true);
+                                    запис.Номенклатура = selectPointer;
+                                    Запис.ПісляЗміни_Номенклатура(запис);
 
-                                    page.DirectoryPointerItem = запис.Номенклатура;
-                                    page.CallBack_OnSelectPointer = (Номенклатура_Pointer selectPointer) =>
-                                    {
-                                        запис.Номенклатура = selectPointer;
-                                        Запис.ПісляЗміни_Номенклатура(запис);
+                                    Store.SetValues(iter, запис.ToArray());
+                                };
 
-                                        Store.SetValues(iter, запис.ToArray());
-                                    };
+                                Program.GeneralForm?.CreateNotebookPage("Вибір - Номенклатура", () => { return page; });
 
-                                    page.LoadTree();
-
-                                    return page;
-                                });
+                                page.LoadTree();
 
                                 break;
                             }
                         case Columns.ХарактеристикаНазва:
                             {
-                                Program.GeneralForm?.CreateNotebookPage("Вибір - Довідник: Характеристика", () =>
+                                ХарактеристикиНоменклатури page = new ХарактеристикиНоменклатури(true);
+
+                                page.НоменклатураВласник.Pointer = запис.Номенклатура;
+                                page.DirectoryPointerItem = запис.Характеристика;
+                                page.CallBack_OnSelectPointer = (ХарактеристикиНоменклатури_Pointer selectPointer) =>
                                 {
-                                    ХарактеристикиНоменклатури page = new ХарактеристикиНоменклатури(true);
+                                    запис.Характеристика = selectPointer;
+                                    Запис.ПісляЗміни_Характеристика(запис);
 
-                                    page.НоменклатураВласник.Pointer = запис.Номенклатура;
-                                    page.DirectoryPointerItem = запис.Характеристика;
-                                    page.CallBack_OnSelectPointer = (ХарактеристикиНоменклатури_Pointer selectPointer) =>
-                                    {
-                                        запис.Характеристика = selectPointer;
-                                        Запис.ПісляЗміни_Характеристика(запис);
+                                    Store.SetValues(iter, запис.ToArray());
+                                };
 
-                                        Store.SetValues(iter, запис.ToArray());
-                                    };
+                                Program.GeneralForm?.CreateNotebookPage("Вибір - Характеристика", () => { return page; });
 
-                                    page.LoadRecords();
-
-                                    return page;
-                                });
+                                page.LoadRecords();
 
                                 break;
                             }
                         case Columns.ПакуванняНазва:
                             {
-                                Program.GeneralForm?.CreateNotebookPage("Вибір - Довідник: Пакування", () =>
+                                ПакуванняОдиниціВиміру page = new ПакуванняОдиниціВиміру(true);
+
+                                page.DirectoryPointerItem = запис.Пакування;
+                                page.CallBack_OnSelectPointer = (ПакуванняОдиниціВиміру_Pointer selectPointer) =>
                                 {
-                                    ПакуванняОдиниціВиміру page = new ПакуванняОдиниціВиміру(true);
+                                    запис.Пакування = selectPointer;
+                                    Запис.ПісляЗміни_Пакування(запис);
 
-                                    page.DirectoryPointerItem = запис.Пакування;
-                                    page.CallBack_OnSelectPointer = (ПакуванняОдиниціВиміру_Pointer selectPointer) =>
-                                    {
-                                        запис.Пакування = selectPointer;
-                                        Запис.ПісляЗміни_Пакування(запис);
+                                    Store.SetValues(iter, запис.ToArray());
+                                };
 
-                                        Store.SetValues(iter, запис.ToArray());
-                                    };
+                                Program.GeneralForm?.CreateNotebookPage("Вибір - Пакування", () => { return page; });
 
-                                    page.LoadRecords();
-
-                                    return page;
-                                });
+                                page.LoadRecords();
 
                                 break;
                             }
                         case Columns.ВидЦіниНазва:
                             {
-                                Program.GeneralForm?.CreateNotebookPage("Вибір - Довідник: Види цін", () =>
+                                ВидиЦін page = new ВидиЦін(true);
+
+                                page.DirectoryPointerItem = запис.ВидЦіни;
+                                page.CallBack_OnSelectPointer = (ВидиЦін_Pointer selectPointer) =>
                                 {
-                                    ВидиЦін page = new ВидиЦін(true);
+                                    запис.ВидЦіни = selectPointer;
+                                    Запис.ПісляЗміни_ВидЦіни(запис);
 
-                                    page.DirectoryPointerItem = запис.ВидЦіни;
-                                    page.CallBack_OnSelectPointer = (ВидиЦін_Pointer selectPointer) =>
-                                    {
-                                        запис.ВидЦіни = selectPointer;
-                                        Запис.ПісляЗміни_ВидЦіни(запис);
+                                    Store.SetValues(iter, запис.ToArray());
+                                };
 
-                                        Store.SetValues(iter, запис.ToArray());
-                                    };
+                                Program.GeneralForm?.CreateNotebookPage("Вибір - Види цін", () => { return page; });
 
-                                    page.LoadRecords();
-
-                                    return page;
-                                });
+                                page.LoadRecords();
 
                                 break;
                             }

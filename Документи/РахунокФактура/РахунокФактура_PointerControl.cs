@@ -32,20 +32,17 @@ namespace StorageAndTrade
 
         protected override void OpenSelect(object? sender, EventArgs args)
         {
-            Program.GeneralForm?.CreateNotebookPage("Вибір - Документи: Рахунок фактура", () =>
+            РахунокФактура page = new РахунокФактура(true);
+
+            page.DocumentPointerItem = Pointer;
+            page.CallBack_OnSelectPointer = (РахунокФактура_Pointer selectPointer) =>
             {
-                РахунокФактура page = new РахунокФактура(true);
+                Pointer = selectPointer;
+            };
 
-                page.DocumentPointerItem = Pointer;
-                page.CallBack_OnSelectPointer = (РахунокФактура_Pointer selectPointer) =>
-                {
-                    Pointer = selectPointer;
-                };
+            Program.GeneralForm?.CreateNotebookPage("Вибір - Рахунок фактура", () => { return page; });
 
-                page.LoadRecords();
-
-                return page;
-            });
+            page.LoadRecords();
         }
 
         protected override void OnClear(object? sender, EventArgs args)
