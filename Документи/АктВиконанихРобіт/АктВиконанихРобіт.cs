@@ -104,6 +104,10 @@ namespace StorageAndTrade
             provodkyButton.Clicked += OnReportSpendTheDocumentClick;
             provodkyButton.Menu = ToolbarProvodkySubMenu();
             toolbar.Add(provodkyButton);
+
+            MenuToolButton naOsnoviButton = new MenuToolButton(Stock.New) { Label = "Ввести на основі", IsImportant = true };
+            naOsnoviButton.Menu = ToolbarNaOsnoviSubMenu();
+            toolbar.Add(naOsnoviButton);
         }
 
         Menu ToolbarProvodkySubMenu()
@@ -117,6 +121,19 @@ namespace StorageAndTrade
             MenuItem clearSpendButton = new MenuItem("Відмінити проведення");
             clearSpendButton.Activated += OnClearSpend;
             Menu.Append(clearSpendButton);
+
+            Menu.ShowAll();
+
+            return Menu;
+        }
+
+        Menu ToolbarNaOsnoviSubMenu()
+        {
+            Menu Menu = new Menu();
+
+            MenuItem newDocKasovyiOrderButton = new MenuItem("Прихідний касовий ордер");
+            newDocKasovyiOrderButton.Activated += OnNewDocNaOsnovi_KasovyiOrder;
+            Menu.Append(newDocKasovyiOrderButton);
 
             Menu.ShowAll();
 
@@ -397,6 +414,56 @@ namespace StorageAndTrade
                     string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
                     SpendTheDocument(uid, false);
                     LoadRecords();
+                }
+            }
+        }
+
+        void OnNewDocNaOsnovi_KasovyiOrder(object? sender, EventArgs args)
+        {
+            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
+            {
+                TreePath[] selectionRows = TreeViewGrid.Selection.GetSelectedRows();
+
+                foreach (TreePath itemPath in selectionRows)
+                {
+                    TreeIter iter;
+                    TreeViewGrid.Model.GetIter(out iter, itemPath);
+
+                    string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
+
+                    АктВиконанихРобіт_Pointer актВиконанихРобіт_Pointer = new АктВиконанихРобіт_Pointer(new UnigueID(uid));
+                    АктВиконанихРобіт_Objest актВиконанихРобіт_Objest = актВиконанихРобіт_Pointer.GetDocumentObject(false);
+
+                    //
+                    //Новий документ
+                    //
+
+                    ПрихіднийКасовийОрдер_Objest прихіднийКасовийОрдер_Новий = new ПрихіднийКасовийОрдер_Objest();
+                    прихіднийКасовийОрдер_Новий.New();
+                    прихіднийКасовийОрдер_Новий.ДатаДок = DateTime.Now;
+                    прихіднийКасовийОрдер_Новий.НомерДок = (++Константи.НумераціяДокументів.ПрихіднийКасовийОрдер_Const).ToString("D8");
+                    прихіднийКасовийОрдер_Новий.Назва = $"Прихідний касовий ордер №{прихіднийКасовийОрдер_Новий.НомерДок} від {прихіднийКасовийОрдер_Новий.ДатаДок.ToString("dd.MM.yyyy")}";
+                    прихіднийКасовийОрдер_Новий.Організація = актВиконанихРобіт_Objest.Організація;
+                    прихіднийКасовийОрдер_Новий.Валюта = актВиконанихРобіт_Objest.Валюта;
+                    прихіднийКасовийОрдер_Новий.Каса = актВиконанихРобіт_Objest.Каса;
+                    прихіднийКасовийОрдер_Новий.Контрагент = актВиконанихРобіт_Objest.Контрагент;
+                    прихіднийКасовийОрдер_Новий.Договір = актВиконанихРобіт_Objest.Договір;
+                    прихіднийКасовийОрдер_Новий.Основа = new UuidAndText(актВиконанихРобіт_Objest.UnigueID.UGuid, актВиконанихРобіт_Objest.TypeDocument);
+                    прихіднийКасовийОрдер_Новий.СумаДокументу = актВиконанихРобіт_Objest.СумаДокументу;
+                    прихіднийКасовийОрдер_Новий.Save();
+
+                    Program.GeneralForm?.CreateNotebookPage($"{прихіднийКасовийОрдер_Новий.Назва}", () =>
+                    {
+                        ПрихіднийКасовийОрдер_Елемент page = new ПрихіднийКасовийОрдер_Елемент
+                        {
+                            IsNew = false,
+                            ПрихіднийКасовийОрдер_Objest = прихіднийКасовийОрдер_Новий,
+                        };
+
+                        page.SetValue();
+
+                        return page;
+                    });
                 }
             }
         }

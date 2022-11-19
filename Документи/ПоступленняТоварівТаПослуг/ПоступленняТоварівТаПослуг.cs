@@ -104,6 +104,10 @@ namespace StorageAndTrade
             provodkyButton.Clicked += OnReportSpendTheDocumentClick;
             provodkyButton.Menu = ToolbarProvodkySubMenu();
             toolbar.Add(provodkyButton);
+
+            MenuToolButton naOsnoviButton = new MenuToolButton(Stock.New) { Label = "Ввести на основі", IsImportant = true };
+            naOsnoviButton.Menu = ToolbarNaOsnoviSubMenu();
+            toolbar.Add(naOsnoviButton);
         }
 
         Menu ToolbarProvodkySubMenu()
@@ -117,6 +121,19 @@ namespace StorageAndTrade
             MenuItem clearSpendButton = new MenuItem("Відмінити проведення");
             clearSpendButton.Activated += OnClearSpend;
             Menu.Append(clearSpendButton);
+
+            Menu.ShowAll();
+
+            return Menu;
+        }
+
+        Menu ToolbarNaOsnoviSubMenu()
+        {
+            Menu Menu = new Menu();
+
+            MenuItem newDocKasovyiOrderButton = new MenuItem("Розхідний касовий ордер");
+            newDocKasovyiOrderButton.Activated += OnNewDocNaOsnovi_KasovyiOrder;
+            Menu.Append(newDocKasovyiOrderButton);
 
             Menu.ShowAll();
 
@@ -397,6 +414,56 @@ namespace StorageAndTrade
                     string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
                     SpendTheDocument(uid, false);
                     LoadRecords();
+                }
+            }
+        }
+
+        void OnNewDocNaOsnovi_KasovyiOrder(object? sender, EventArgs args)
+        {
+            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
+            {
+                TreePath[] selectionRows = TreeViewGrid.Selection.GetSelectedRows();
+
+                foreach (TreePath itemPath in selectionRows)
+                {
+                    TreeIter iter;
+                    TreeViewGrid.Model.GetIter(out iter, itemPath);
+
+                    string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
+
+                    ПоступленняТоварівТаПослуг_Pointer поступленняТоварівТаПослуг_Pointer = new ПоступленняТоварівТаПослуг_Pointer(new UnigueID(uid));
+                    ПоступленняТоварівТаПослуг_Objest поступленняТоварівТаПослуг_Objest = поступленняТоварівТаПослуг_Pointer.GetDocumentObject(false);
+
+                    //
+                    //Новий документ
+                    //
+
+                    РозхіднийКасовийОрдер_Objest розхіднийКасовийОрдер_Новий = new РозхіднийКасовийОрдер_Objest();
+                    розхіднийКасовийОрдер_Новий.New();
+                    розхіднийКасовийОрдер_Новий.ДатаДок = DateTime.Now;
+                    розхіднийКасовийОрдер_Новий.НомерДок = (++Константи.НумераціяДокументів.РозхіднийКасовийОрдер_Const).ToString("D8");
+                    розхіднийКасовийОрдер_Новий.Назва = $"Розхідний касовий ордер №{розхіднийКасовийОрдер_Новий.НомерДок} від {розхіднийКасовийОрдер_Новий.ДатаДок.ToString("dd.MM.yyyy")}";
+                    розхіднийКасовийОрдер_Новий.Організація = поступленняТоварівТаПослуг_Objest.Організація;
+                    розхіднийКасовийОрдер_Новий.Валюта = поступленняТоварівТаПослуг_Objest.Валюта;
+                    розхіднийКасовийОрдер_Новий.Каса = поступленняТоварівТаПослуг_Objest.Каса;
+                    розхіднийКасовийОрдер_Новий.Контрагент = поступленняТоварівТаПослуг_Objest.Контрагент;
+                    розхіднийКасовийОрдер_Новий.Договір = поступленняТоварівТаПослуг_Objest.Договір;
+                    розхіднийКасовийОрдер_Новий.СумаДокументу = поступленняТоварівТаПослуг_Objest.СумаДокументу;
+                    розхіднийКасовийОрдер_Новий.Основа = new UuidAndText(поступленняТоварівТаПослуг_Objest.UnigueID.UGuid, поступленняТоварівТаПослуг_Objest.TypeDocument);
+                    розхіднийКасовийОрдер_Новий.Save();
+
+                    Program.GeneralForm?.CreateNotebookPage($"{розхіднийКасовийОрдер_Новий.Назва}", () =>
+                    {
+                        РозхіднийКасовийОрдер_Елемент page = new РозхіднийКасовийОрдер_Елемент
+                        {
+                            IsNew = false,
+                            РозхіднийКасовийОрдер_Objest = розхіднийКасовийОрдер_Новий,
+                        };
+
+                        page.SetValue();
+
+                        return page;
+                    });
                 }
             }
         }
