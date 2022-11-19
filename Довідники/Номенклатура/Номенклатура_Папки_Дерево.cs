@@ -147,7 +147,7 @@ SELECT
     {Номенклатура_Папки_Const.Родич}, 
     level FROM r
 ORDER BY level ASC
-            ";
+";
 
             #endregion
 

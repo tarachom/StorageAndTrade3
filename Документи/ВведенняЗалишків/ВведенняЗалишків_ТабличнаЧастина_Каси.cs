@@ -111,23 +111,20 @@ namespace StorageAndTrade
                     {
                         case Columns.КасаНазва:
                             {
-                                Program.GeneralForm?.CreateNotebookPage("Вибір - Довідник: Каси", () =>
+                                Каси page = new Каси(true);
+
+                                page.DirectoryPointerItem = запис.Каса;
+                                page.CallBack_OnSelectPointer = (Каси_Pointer selectPointer) =>
                                 {
-                                    Каси page = new Каси(true);
+                                    запис.Каса = selectPointer;
+                                    Запис.ПісляЗміни_Каса(запис);
 
-                                    page.DirectoryPointerItem = запис.Каса;
-                                    page.CallBack_OnSelectPointer = (Каси_Pointer selectPointer) =>
-                                    {
-                                        запис.Каса = selectPointer;
-                                        Запис.ПісляЗміни_Каса(запис);
+                                    Store.SetValues(iter, запис.ToArray());
+                                };
 
-                                        Store.SetValues(iter, запис.ToArray());
-                                    };
+                                Program.GeneralForm?.CreateNotebookPage("Вибір - Каси", () => { return page; });
 
-                                    page.LoadRecords();
-
-                                    return page;
-                                });
+                                page.LoadRecords();
 
                                 break;
                             }

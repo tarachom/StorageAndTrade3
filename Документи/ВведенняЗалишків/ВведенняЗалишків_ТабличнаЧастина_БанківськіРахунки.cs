@@ -111,23 +111,20 @@ namespace StorageAndTrade
                     {
                         case Columns.БанківськийРахунокНазва:
                             {
-                                Program.GeneralForm?.CreateNotebookPage("Вибір - Довідник: Банківські рахунки", () =>
+                                БанківськіРахункиОрганізацій page = new БанківськіРахункиОрганізацій(true);
+
+                                page.DirectoryPointerItem = запис.БанківськийРахунок;
+                                page.CallBack_OnSelectPointer = (БанківськіРахункиОрганізацій_Pointer selectPointer) =>
                                 {
-                                    БанківськіРахункиОрганізацій page = new БанківськіРахункиОрганізацій(true);
+                                    запис.БанківськийРахунок = selectPointer;
+                                    Запис.ПісляЗміни_БанківськийРахунок(запис);
 
-                                    page.DirectoryPointerItem = запис.БанківськийРахунок;
-                                    page.CallBack_OnSelectPointer = (БанківськіРахункиОрганізацій_Pointer selectPointer) =>
-                                    {
-                                        запис.БанківськийРахунок = selectPointer;
-                                        Запис.ПісляЗміни_БанківськийРахунок(запис);
+                                    Store.SetValues(iter, запис.ToArray());
+                                };
 
-                                        Store.SetValues(iter, запис.ToArray());
-                                    };
+                                Program.GeneralForm?.CreateNotebookPage("Вибір - Довідник: Банківські рахунки", () => { return page; });
 
-                                    page.LoadRecords();
-
-                                    return page;
-                                });
+                                page.LoadRecords();
 
                                 break;
                             }

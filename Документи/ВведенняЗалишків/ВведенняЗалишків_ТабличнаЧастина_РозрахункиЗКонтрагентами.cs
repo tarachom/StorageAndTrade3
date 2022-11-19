@@ -122,45 +122,39 @@ namespace StorageAndTrade
                     {
                         case Columns.КонтрагентНазва:
                             {
-                                Program.GeneralForm?.CreateNotebookPage("Вибір - Довідник: Контрагенти", () =>
+                                Контрагенти page = new Контрагенти(true);
+
+                                page.DirectoryPointerItem = запис.Контрагент;
+                                page.CallBack_OnSelectPointer = (Контрагенти_Pointer selectPointer) =>
                                 {
-                                    Контрагенти page = new Контрагенти(true);
+                                    запис.Контрагент = selectPointer;
+                                    Запис.ПісляЗміни_Контрагент(запис);
 
-                                    page.DirectoryPointerItem = запис.Контрагент;
-                                    page.CallBack_OnSelectPointer = (Контрагенти_Pointer selectPointer) =>
-                                    {
-                                        запис.Контрагент = selectPointer;
-                                        Запис.ПісляЗміни_Контрагент(запис);
+                                    Store.SetValues(iter, запис.ToArray());
+                                };
 
-                                        Store.SetValues(iter, запис.ToArray());
-                                    };
+                                Program.GeneralForm?.CreateNotebookPage("Вибір - Контрагенти", () => { return page; });
 
-                                    page.LoadTree();
-
-                                    return page;
-                                });
+                                page.LoadTree();
 
                                 break;
                             }
                         case Columns.ВалютаНазва:
                             {
-                                Program.GeneralForm?.CreateNotebookPage("Вибір - Довідник: Валюти", () =>
+                                Валюти page = new Валюти(true);
+
+                                page.DirectoryPointerItem = запис.Валюта;
+                                page.CallBack_OnSelectPointer = (Валюти_Pointer selectPointer) =>
                                 {
-                                    Валюти page = new Валюти(true);
+                                    запис.Валюта = selectPointer;
+                                    Запис.ПісляЗміни_Валюта(запис);
 
-                                    page.DirectoryPointerItem = запис.Валюта;
-                                    page.CallBack_OnSelectPointer = (Валюти_Pointer selectPointer) =>
-                                    {
-                                        запис.Валюта = selectPointer;
-                                        Запис.ПісляЗміни_Валюта(запис);
+                                    Store.SetValues(iter, запис.ToArray());
+                                };
 
-                                        Store.SetValues(iter, запис.ToArray());
-                                    };
+                                Program.GeneralForm?.CreateNotebookPage("Вибір - Довідник: Валюти", () => { return page; });
 
-                                    page.LoadRecords();
-
-                                    return page;
-                                });
+                                page.LoadRecords();
 
                                 break;
                             }

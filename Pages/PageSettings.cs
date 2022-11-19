@@ -1,6 +1,9 @@
 using Gtk;
 
+using AccountingSoftware;
+using StorageAndTrade_1_0;
 using Константи = StorageAndTrade_1_0.Константи;
+using Перелічення = StorageAndTrade_1_0.Перелічення;
 
 namespace StorageAndTrade
 {
@@ -32,6 +35,12 @@ namespace StorageAndTrade
         CheckButton ВестиОблікПоСеріяхНоменклатури = new CheckButton("Вести облік по серіях номенклатури");
         CheckButton ЗупинитиФоновіЗадачі = new CheckButton("Зупинити фонове обчислення віртуальних залишків");
 
+        //
+        //ЖурналиДокументів
+        //
+
+        ComboBoxText ОсновнийТипПеріоду_ДляЖурналівДокументів = new ComboBoxText();
+
         #endregion
 
         public PageSettings() : base()
@@ -51,6 +60,8 @@ namespace StorageAndTrade
 
             PackStart(hBox, false, false, 10);
 
+            FillComboBoxes();
+
             HPaned hPaned = new HPaned() { BorderWidth = 5, Position = 500 };
 
             CreatePack1(hPaned);
@@ -61,48 +72,23 @@ namespace StorageAndTrade
             ShowAll();
         }
 
+        void FillComboBoxes()
+        {
+            foreach (ConfigurationEnumField field in Config.Kernel!.Conf.Enums["ТипПеріодуДляЖурналівДокументів"].Fields.Values)
+                ОсновнийТипПеріоду_ДляЖурналівДокументів.Append(field.Name, field.Desc);
+        }
+
         void CreatePack1(HPaned hPaned)
         {
             VBox vBox = new VBox();
 
-            Expander expanderConstDefault = new Expander("Значення за замовчуванням") { Expanded = true };
-            expanderConstDefault.Add(vBox);
+            CreateDefaultBlock(vBox);
 
-            //Info
-            HBox hBoxInfo = new HBox() { Halign = Align.Start };
-            vBox.PackStart(hBoxInfo, false, false, 15);
+            vBox.PackStart(new Separator(Orientation.Horizontal), false, false, 10);
 
-            hBoxInfo.PackStart(new Label("Для заповненння нових документів та довідників"), false, false, 5);
+            CreateJournalBlock(vBox);
 
-            //Controls
-            AddPointerControl(vBox, ОсновнаОрганізація);
-            AddPointerControl(vBox, ОсновнийСклад);
-            AddPointerControl(vBox, ОсновнаВалюта);
-            AddPointerControl(vBox, ОсновнийПостачальник);
-            AddPointerControl(vBox, ОсновнийПокупець);
-            AddPointerControl(vBox, ОсновнаКаса);
-            AddPointerControl(vBox, ОсновнаОдиницяПакування);
-            AddPointerControl(vBox, ОсновнийПідрозділ);
-            AddPointerControl(vBox, ОсновнийБанківськийРахунок);
-            AddPointerControl(vBox, ОсновнийВидЦіни);
-
-            hPaned.Pack1(expanderConstDefault, false, false);
-        }
-
-        void AddPointerControl(VBox vBox, Widget wgPointerControl)
-        {
-            HBox hBox = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBox, false, false, 5);
-
-            hBox.PackStart(wgPointerControl, false, false, 5);
-        }
-
-        void AddControl(VBox vBox, Widget wgControl)
-        {
-            HBox hBox = new HBox() { Halign = Align.Start };
-            vBox.PackStart(hBox, false, false, 5);
-
-            hBox.PackStart(wgControl, false, false, 5);
+            hPaned.Pack1(vBox, false, false);
         }
 
         void CreatePack2(HPaned hPaned)
@@ -145,7 +131,8 @@ namespace StorageAndTrade
 @"Обчислення згрупованих віртуальних залишків по регістрах відбувається автоматично після проведення будь-якого документу.
 Залишки групуються по Днях і по Місяцях відповідно.
 Це обчислення можна зупинити, але звіти будуть відображати неактуальну інформацію.
-Для відновлення актуальності можна запустити перерахунок всіх залишків в розділі Сервіс.") { Wrap = true }, false, false, 5);
+Для відновлення актуальності можна запустити перерахунок всіх залишків в розділі Сервіс.")
+            { Wrap = true }, false, false, 5);
 
             //Controls
             AddControl(vBoxBackgroundTask, ЗупинитиФоновіЗадачі);
@@ -153,6 +140,73 @@ namespace StorageAndTrade
             vBox.PackStart(expanderBackgroundTask, false, false, 10);
 
             hPaned.Pack2(vBox, false, false);
+        }
+
+        //Значення за замовчування
+        void CreateDefaultBlock(VBox vBoxTop)
+        {
+            VBox vBox = new VBox();
+
+            Expander expanderConstDefault = new Expander("Значення за замовчуванням") { Expanded = true };
+            expanderConstDefault.Add(vBox);
+
+            //Info
+            HBox hBoxInfo = new HBox() { Halign = Align.Start };
+            vBox.PackStart(hBoxInfo, false, false, 15);
+
+            hBoxInfo.PackStart(new Label("Для заповненння нових документів та довідників"), false, false, 5);
+
+            //Controls
+            AddPointerControl(vBox, ОсновнаОрганізація);
+            AddPointerControl(vBox, ОсновнийСклад);
+            AddPointerControl(vBox, ОсновнаВалюта);
+            AddPointerControl(vBox, ОсновнийПостачальник);
+            AddPointerControl(vBox, ОсновнийПокупець);
+            AddPointerControl(vBox, ОсновнаКаса);
+            AddPointerControl(vBox, ОсновнаОдиницяПакування);
+            AddPointerControl(vBox, ОсновнийПідрозділ);
+            AddPointerControl(vBox, ОсновнийБанківськийРахунок);
+            AddPointerControl(vBox, ОсновнийВидЦіни);
+
+            vBoxTop.PackStart(expanderConstDefault, false, false, 10);
+        }
+
+        void CreateJournalBlock(VBox vBoxTop)
+        {
+            VBox vBox = new VBox();
+
+            Expander expander = new Expander("Журнали документів") { Expanded = true };
+            expander.Add(vBox);
+
+            //Controls
+            AddCaptionAndControl(vBox, new Label("Період для журналів документів:"), ОсновнийТипПеріоду_ДляЖурналівДокументів);
+
+            vBoxTop.PackStart(expander, false, false, 10);
+        }
+
+        void AddPointerControl(VBox vBox, Widget wgPointerControl)
+        {
+            HBox hBox = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBox, false, false, 5);
+
+            hBox.PackStart(wgPointerControl, false, false, 5);
+        }
+
+        void AddCaptionAndControl(VBox vBox, Widget wgCaption, Widget wgControl)
+        {
+            HBox hBox = new HBox() { Halign = Align.Start };
+            vBox.PackStart(hBox, false, false, 5);
+
+            hBox.PackStart(wgCaption, false, false, 5);
+            hBox.PackStart(wgControl, false, false, 5);
+        }
+
+        void AddControl(VBox vBox, Widget wgControl)
+        {
+            HBox hBox = new HBox() { Halign = Align.Start };
+            vBox.PackStart(hBox, false, false, 5);
+
+            hBox.PackStart(wgControl, false, false, 5);
         }
 
         public void SetValue()
@@ -179,6 +233,15 @@ namespace StorageAndTrade
             ВестиОблікПоСеріяхНоменклатури.Active = Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const;
             ВестиОблікПоХарактеристикахНоменклатури.Active = Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const;
             ЗупинитиФоновіЗадачі.Active = Константи.Системні.ЗупинитиФоновіЗадачі_Const;
+
+            //
+            //ЖурналиДокументів
+            //
+
+            ОсновнийТипПеріоду_ДляЖурналівДокументів.ActiveId = Константи.ЖурналиДокументів.ОсновнийТипПеріоду_Const.ToString();
+
+            if (ОсновнийТипПеріоду_ДляЖурналівДокументів.Active == -1)
+                ОсновнийТипПеріоду_ДляЖурналівДокументів.ActiveId = Перелічення.ТипПеріодуДляЖурналівДокументів.ЗПочаткуМісяця.ToString();
         }
 
         void GetValue()
@@ -205,6 +268,12 @@ namespace StorageAndTrade
             Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const = ВестиОблікПоСеріяхНоменклатури.Active;
             Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const = ВестиОблікПоХарактеристикахНоменклатури.Active;
             Константи.Системні.ЗупинитиФоновіЗадачі_Const = ЗупинитиФоновіЗадачі.Active;
+
+            //
+            //ЖурналиДокументів
+            //
+
+            Константи.ЖурналиДокументів.ОсновнийТипПеріоду_Const = Enum.Parse<Перелічення.ТипПеріодуДляЖурналівДокументів>(ОсновнийТипПеріоду_ДляЖурналівДокументів.ActiveId);
         }
 
         void OnSaveClick(object? sender, EventArgs args)
