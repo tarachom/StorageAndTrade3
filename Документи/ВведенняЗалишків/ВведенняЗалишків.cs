@@ -381,7 +381,10 @@ namespace StorageAndTrade
                 try
                 {
                     if (!ВведенняЗалишків_Objest.SpendTheDocument(ВведенняЗалишків_Objest.ДатаДок))
+                    {
+                        ВведенняЗалишків_Objest.ClearSpendTheDocument();
                         ФункціїДляПовідомлень.ВідкритиТермінал();
+                    }
                 }
                 catch (Exception exp)
                 {

@@ -225,7 +225,7 @@ namespace StorageAndTrade
 
             hBoxOperation.PackStart(new Label("Господарська операція: "), false, false, 0);
             hBoxOperation.PackStart(ГосподарськаОперація, false, false, 5);
-            
+
             //Підрозділ
             HBox hBoxPidrozdil = new HBox() { Halign = Align.End };
             vBox.PackStart(hBoxPidrozdil, false, false, 5);
@@ -363,7 +363,10 @@ namespace StorageAndTrade
                 try
                 {
                     if (!ВведенняЗалишків_Objest.SpendTheDocument(ВведенняЗалишків_Objest.ДатаДок))
+                    {
+                        ВведенняЗалишків_Objest.ClearSpendTheDocument();
                         ФункціїДляПовідомлень.ВідкритиТермінал();
+                    }
                 }
                 catch (Exception exp)
                 {

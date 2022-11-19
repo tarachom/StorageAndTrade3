@@ -92,9 +92,10 @@ namespace StorageAndTrade
             refreshButton.Clicked += OnRefreshClick;
             toolbar.Add(refreshButton);
 
-            ToolButton reportSpendTheDocumentButton = new ToolButton(Stock.Refresh) { Label = "Проводки", IsImportant = true };
-            reportSpendTheDocumentButton.Clicked += OnReportSpendTheDocumentClick;
-            toolbar.Add(reportSpendTheDocumentButton);
+            MenuToolButton provodkyButton = new MenuToolButton(Stock.Find) { Label = "Проводки", IsImportant = true };
+            provodkyButton.Clicked += OnReportSpendTheDocumentClick;
+            provodkyButton.Menu = ToolbarProvodkySubMenu();
+            toolbar.Add(provodkyButton);
 
             //Відбір
             ToolItem seperatorOne = new ToolItem();
@@ -112,6 +113,23 @@ namespace StorageAndTrade
             ToolItem periodWhere = new ToolItem();
             periodWhere.Add(hBoxPeriodWhere);
             toolbar.Add(periodWhere);
+        }
+
+        Menu ToolbarProvodkySubMenu()
+        {
+            Menu Menu = new Menu();
+
+            MenuItem spendTheDocumentButton = new MenuItem("Провести документ");
+            spendTheDocumentButton.Activated += OnSpendTheDocument;
+            Menu.Append(spendTheDocumentButton);
+
+            MenuItem clearSpendButton = new MenuItem("Відмінити проведення");
+            clearSpendButton.Activated += OnClearSpend;
+            Menu.Append(clearSpendButton);
+
+            Menu.ShowAll();
+
+            return Menu;
         }
 
         public void SetValue()
@@ -335,7 +353,63 @@ namespace StorageAndTrade
             }
         }
 
-        #endregion
+        void SpendTheDocument(string uid, bool spendDoc)
+        {
+            ВстановленняЦінНоменклатури_Pointer ВстановленняЦінНоменклатури_Pointer = new ВстановленняЦінНоменклатури_Pointer(new UnigueID(uid));
+            ВстановленняЦінНоменклатури_Objest ВстановленняЦінНоменклатури_Objest = ВстановленняЦінНоменклатури_Pointer.GetDocumentObject(true);
 
+            //Збереження для запуску тригерів
+            ВстановленняЦінНоменклатури_Objest.Save();
+
+            if (spendDoc)
+            {
+                try
+                {
+                    if (!ВстановленняЦінНоменклатури_Objest.SpendTheDocument(ВстановленняЦінНоменклатури_Objest.ДатаДок))
+                    {
+                        ВстановленняЦінНоменклатури_Objest.ClearSpendTheDocument();
+                        ФункціїДляПовідомлень.ВідкритиТермінал();
+                    }
+                }
+                catch (Exception exp)
+                {
+                    ВстановленняЦінНоменклатури_Objest.ClearSpendTheDocument();
+                    Message.Error(Program.GeneralForm, exp.Message);
+                    return;
+                }
+            }
+            else
+                ВстановленняЦінНоменклатури_Objest.ClearSpendTheDocument();
+        }
+
+        void OnSpendTheDocument(object? sender, EventArgs args)
+        {
+            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
+            {
+                TreeIter iter;
+                if (TreeViewGrid.Model.GetIter(out iter, TreeViewGrid.Selection.GetSelectedRows()[0]))
+                {
+                    string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
+                    SpendTheDocument(uid, true);
+                    LoadRecords();
+                }
+            }
+        }
+
+        void OnClearSpend(object? sender, EventArgs args)
+        {
+            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
+            {
+                TreeIter iter;
+                if (TreeViewGrid.Model.GetIter(out iter, TreeViewGrid.Selection.GetSelectedRows()[0]))
+                {
+                    string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
+                    SpendTheDocument(uid, false);
+                    LoadRecords();
+                }
+            }
+        }
+
+        #endregion
     }
 }
