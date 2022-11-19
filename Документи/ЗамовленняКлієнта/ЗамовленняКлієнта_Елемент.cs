@@ -461,7 +461,10 @@ namespace StorageAndTrade
                 try
                 {
                     if (!ЗамовленняКлієнта_Objest.SpendTheDocument(ЗамовленняКлієнта_Objest.ДатаДок))
+                    {
+                        ЗамовленняКлієнта_Objest.ClearSpendTheDocument();
                         ФункціїДляПовідомлень.ВідкритиТермінал();
+                    }
                 }
                 catch (Exception exp)
                 {

@@ -237,7 +237,10 @@ namespace StorageAndTrade
                 try
                 {
                     if (!ВстановленняЦінНоменклатури_Objest.SpendTheDocument(ВстановленняЦінНоменклатури_Objest.ДатаДок))
+                    {
+                        ВстановленняЦінНоменклатури_Objest.ClearSpendTheDocument();
                         ФункціїДляПовідомлень.ВідкритиТермінал();
+                    }
                 }
                 catch (Exception exp)
                 {

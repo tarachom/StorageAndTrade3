@@ -442,7 +442,10 @@ namespace StorageAndTrade
                 try
                 {
                     if (!ЗамовленняПостачальнику_Objest.SpendTheDocument(ЗамовленняПостачальнику_Objest.ДатаДок))
+                    {
+                        ЗамовленняПостачальнику_Objest.ClearSpendTheDocument();
                         ФункціїДляПовідомлень.ВідкритиТермінал();
+                    }
                 }
                 catch (Exception exp)
                 {

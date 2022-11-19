@@ -368,7 +368,10 @@ namespace StorageAndTrade
                 try
                 {
                     if (!ПоверненняТоварівВідКлієнта_Objest.SpendTheDocument(ПоверненняТоварівВідКлієнта_Objest.ДатаДок))
+                    {
+                        ПоверненняТоварівВідКлієнта_Objest.ClearSpendTheDocument();
                         ФункціїДляПовідомлень.ВідкритиТермінал();
+                    }
                 }
                 catch (Exception exp)
                 {

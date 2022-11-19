@@ -323,7 +323,10 @@ namespace StorageAndTrade
                 try
                 {
                     if (!ПереміщенняТоварів_Objest.SpendTheDocument(ПереміщенняТоварів_Objest.ДатаДок))
+                    {
+                        ПереміщенняТоварів_Objest.ClearSpendTheDocument();
                         ФункціїДляПовідомлень.ВідкритиТермінал();
+                    }
                 }
                 catch (Exception exp)
                 {
