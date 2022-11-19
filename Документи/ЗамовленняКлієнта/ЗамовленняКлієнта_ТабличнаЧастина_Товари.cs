@@ -2,15 +2,18 @@ using Gtk;
 
 using AccountingSoftware;
 
+using StorageAndTrade_1_0;
 using Константи = StorageAndTrade_1_0.Константи;
 using StorageAndTrade_1_0.Довідники;
 using StorageAndTrade_1_0.Документи;
+using StorageAndTrade_1_0.РегістриВідомостей;
 
 namespace StorageAndTrade
 {
     class ЗамовленняКлієнта_ТабличнаЧастина_Товари : VBox
     {
         public ЗамовленняКлієнта_Objest? ЗамовленняКлієнта_Objest { get; set; }
+        public System.Action? ОбновитиЗначенняДокумента { get; set; }
 
         #region Записи
 
@@ -22,6 +25,7 @@ namespace StorageAndTrade
             КількістьУпаковок,
             ПакуванняНазва,
             Кількість,
+            ВидЦіниНазва,
             Ціна,
             Сума,
             Скидка,
@@ -35,6 +39,7 @@ namespace StorageAndTrade
             typeof(int),      //КількістьУпаковок
             typeof(string),   //ПакуванняНазва
             typeof(float),    //Кількість
+            typeof(string),   //ВидЦіниНазва
             typeof(float),    //Ціна
             typeof(float),    //Сума
             typeof(float),    //Скидка
@@ -55,6 +60,8 @@ namespace StorageAndTrade
             public ПакуванняОдиниціВиміру_Pointer Пакування { get; set; } = new ПакуванняОдиниціВиміру_Pointer();
             public string ПакуванняНазва { get; set; } = "";
             public decimal Кількість { get; set; } = 1;
+            public ВидиЦін_Pointer ВидЦіни { get; set; } = new ВидиЦін_Pointer();
+            public string ВидЦіниНазва { get; set; } = "";
             public decimal Ціна { get; set; }
             public decimal Сума { get; set; }
             public decimal Скидка { get; set; }
@@ -71,6 +78,7 @@ namespace StorageAndTrade
                     КількістьУпаковок,
                     ПакуванняНазва,
                     (float)Кількість,
+                    ВидЦіниНазва,
                     (float)Ціна,
                     (float)Сума,
                     (float)Скидка,
@@ -91,6 +99,8 @@ namespace StorageAndTrade
                     Пакування = запис.Пакування,
                     ПакуванняНазва = запис.ПакуванняНазва,
                     Кількість = запис.Кількість,
+                    ВидЦіни = запис.ВидЦіни,
+                    ВидЦіниНазва = запис.ВидЦіниНазва,
                     Ціна = запис.Ціна,
                     Сума = запис.Сума,
                     Скидка = запис.Скидка,
@@ -144,6 +154,10 @@ namespace StorageAndTrade
             {
                 запис.ПакуванняНазва = запис.Пакування.GetPresentation();
             }
+            public static void ПісляЗміни_ВидЦіни(Запис запис)
+            {
+                запис.ВидЦіниНазва = запис.ВидЦіни.GetPresentation();
+            }
             public static void ПісляЗміни_Склад(Запис запис)
             {
                 запис.СкладНазва = запис.Склад.GetPresentation();
@@ -151,6 +165,57 @@ namespace StorageAndTrade
             public static void ПісляЗміни_КількістьАбоЦіна(Запис запис)
             {
                 запис.Сума = запис.Кількість * запис.Ціна;
+            }
+            public static void ОтриматиЦіну(Запис запис, ЗамовленняКлієнта_Objest ДокументОбєкт)
+            {
+                if (запис.Номенклатура.IsEmpty())
+                    return;
+
+                if (запис.ВидЦіни.IsEmpty())
+                {
+                    if (ДокументОбєкт == null)
+                        return;
+                    else
+                    {
+                        Склади_Objest? cклади_Objest = ДокументОбєкт.Склад.GetDirectoryObject();
+                        if (cклади_Objest != null)
+                        {
+                            запис.ВидЦіни = cклади_Objest.ВидЦін;
+                            Запис.ПісляЗміни_ВидЦіни(запис);
+                        }
+                        else
+                            return;
+                    }
+                }
+
+                if (запис.Ціна == 0)
+                {
+                    string query = $@"
+SELECT
+    ЦіниНоменклатури.{ЦіниНоменклатури_Const.Ціна} AS Ціна
+FROM 
+    {ЦіниНоменклатури_Const.TABLE} AS ЦіниНоменклатури
+WHERE
+    ЦіниНоменклатури.{ЦіниНоменклатури_Const.ВидЦіни} = '{запис.ВидЦіни.UnigueID}' AND
+    ЦіниНоменклатури.{ЦіниНоменклатури_Const.Номенклатура} = '{запис.Номенклатура.UnigueID}'
+ORDER BY 
+    ЦіниНоменклатури.period DESC 
+LIMIT 1
+";
+                    Dictionary<string, object> paramQuery = new Dictionary<string, object>();
+
+                    string[] columnsName;
+                    List<Dictionary<string, object>> listRow;
+
+                    Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listRow);
+
+                    if (listRow.Count > 0)
+                        foreach (Dictionary<string, object> row in listRow)
+                        {
+                            запис.Ціна = (decimal)row["Ціна"];
+                            запис.Сума = запис.Кількість * запис.Ціна;
+                        }
+                }
             }
         }
 
@@ -210,6 +275,11 @@ namespace StorageAndTrade
                                     запис.Номенклатура = selectPointer;
                                     Запис.ПісляЗміни_Номенклатура(запис);
 
+                                    if (ОбновитиЗначенняДокумента != null)
+                                        ОбновитиЗначенняДокумента.Invoke();
+
+                                    Запис.ОтриматиЦіну(запис, ЗамовленняКлієнта_Objest!);
+
                                     Store.SetValues(iter, запис.ToArray());
                                 };
 
@@ -253,6 +323,30 @@ namespace StorageAndTrade
                                 };
 
                                 Program.GeneralForm?.CreateNotebookPage("Вибір - Пакування", () => { return page; });
+
+                                page.LoadRecords();
+
+                                break;
+                            }
+                        case Columns.ВидЦіниНазва:
+                            {
+                                ВидиЦін page = new ВидиЦін(true);
+
+                                page.DirectoryPointerItem = запис.ВидЦіни;
+                                page.CallBack_OnSelectPointer = (ВидиЦін_Pointer selectPointer) =>
+                                {
+                                    запис.ВидЦіни = selectPointer;
+                                    Запис.ПісляЗміни_ВидЦіни(запис);
+
+                                    if (ОбновитиЗначенняДокумента != null)
+                                        ОбновитиЗначенняДокумента.Invoke();
+
+                                    Запис.ОтриматиЦіну(запис, ЗамовленняКлієнта_Objest!);
+
+                                    Store.SetValues(iter, запис.ToArray());
+                                };
+
+                                Program.GeneralForm?.CreateNotebookPage("Вибір - Вид ціни", () => { return page; });
 
                                 page.LoadRecords();
 
@@ -330,6 +424,12 @@ namespace StorageAndTrade
 
                 //JOIN 4
                 querySelect.FieldAndAlias.Add(
+                    new NameValue<string>(ВидиЦін_Const.TABLE + "." + ВидиЦін_Const.Назва, "vidy_cen"));
+                querySelect.Joins.Add(
+                    new Join(ВидиЦін_Const.TABLE, ЗамовленняКлієнта_Товари_TablePart.ВидЦіни, querySelect.Table));
+
+                //JOIN 5
+                querySelect.FieldAndAlias.Add(
                     new NameValue<string>(Склади_Const.TABLE + "." + Склади_Const.Назва, "sklad_name"));
                 querySelect.Joins.Add(
                     new Join(Склади_Const.TABLE, ЗамовленняКлієнта_Товари_TablePart.Склад, querySelect.Table));
@@ -355,6 +455,8 @@ namespace StorageAndTrade
                         Пакування = record.Пакування,
                         ПакуванняНазва = join[record.UID.ToString()]["pak_name"],
                         Кількість = record.Кількість,
+                        ВидЦіни = record.ВидЦіни,
+                        ВидЦіниНазва = join[record.UID.ToString()]["vidy_cen"],
                         Ціна = Math.Round(record.Ціна, 2),
                         Сума = Math.Round(record.Сума, 2),
                         Скидка = Math.Round(record.Скидка, 2),
@@ -387,6 +489,7 @@ namespace StorageAndTrade
                     record.КількістьУпаковок = запис.КількістьУпаковок;
                     record.Пакування = запис.Пакування;
                     record.Кількість = запис.Кількість;
+                    record.ВидЦіни = запис.ВидЦіни;
                     record.Ціна = запис.Ціна;
                     record.Сума = запис.Сума;
                     record.Скидка = запис.Скидка;
@@ -448,6 +551,12 @@ namespace StorageAndTrade
             Кількість.Data.Add("Column", (int)Columns.Кількість);
 
             TreeViewGrid.AppendColumn(new TreeViewColumn("Кількість", Кількість, "text", (int)Columns.Кількість) { MinWidth = 100 });
+
+            //ВидЦіниНазва
+            TreeViewColumn ВидЦіниНазва = new TreeViewColumn("Вид ціни", new CellRendererText(), "text", (int)Columns.ВидЦіниНазва) { MinWidth = 100 };
+            ВидЦіниНазва.Data.Add("Column", Columns.ВидЦіниНазва);
+
+            TreeViewGrid.AppendColumn(ВидЦіниНазва);
 
             //Ціна
             CellRendererText Ціна = new CellRendererText() { Editable = true };
