@@ -67,18 +67,16 @@ namespace StorageAndTrade
             LinkButton linkButtonHar = new LinkButton(" Характеристики номеклатури") { Halign = Align.Start, Image = new Image("images/doc.png"), AlwaysShowImage = true };
             linkButtonHar.Clicked += (object? sender, EventArgs args) =>
             {
-                Program.GeneralForm?.CreateNotebookPage("Довідник: Характеристики номенклатури", () =>
-                {
-                    ХарактеристикиНоменклатури page = new ХарактеристикиНоменклатури();
+                ХарактеристикиНоменклатури page = new ХарактеристикиНоменклатури();
+                
+                if (SelectPointerItem != null)
+                    page.НоменклатураВласник.Pointer = SelectPointerItem;
 
-                    if (SelectPointerItem != null)
-                        page.НоменклатураВласник.Pointer = SelectPointerItem;
+                Program.GeneralForm?.CreateNotebookPage("Характеристики номенклатури", () => { return page; });
 
-                    page.LoadRecords();
-
-                    return page;
-                });
+                page.LoadRecords();
             };
+
             hBoxBotton.PackStart(linkButtonHar, false, false, 10);
 
             CreateToolbar();
