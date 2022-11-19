@@ -34,21 +34,18 @@ namespace StorageAndTrade
 
         protected override void OpenSelect(object? sender, EventArgs args)
         {
-            Program.GeneralForm?.CreateNotebookPage("Вибір - Довідник: Контрагенти Папки", () =>
+            Контрагенти_Папки_Дерево page = new Контрагенти_Папки_Дерево(true);
+
+            page.DirectoryPointerItem = Pointer;
+            page.UidOpenFolder = UidOpenFolder;
+            page.CallBack_OnSelectPointer = (Контрагенти_Папки_Pointer selectPointer) =>
             {
-                Контрагенти_Папки_Дерево page = new Контрагенти_Папки_Дерево(true);
+                Pointer = selectPointer;
+            };
 
-                page.DirectoryPointerItem = Pointer;
-                page.UidOpenFolder = UidOpenFolder;
-                page.CallBack_OnSelectPointer = (Контрагенти_Папки_Pointer selectPointer) =>
-                {
-                    Pointer = selectPointer;
-                };
+            Program.GeneralForm?.CreateNotebookPage("Вибір - Контрагенти Папки", () => { return page; });
 
-                page.LoadTree();
-
-                return page;
-            });
+            page.LoadTree();
         }
 
         protected override void OnClear(object? sender, EventArgs args)

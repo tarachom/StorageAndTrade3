@@ -32,20 +32,17 @@ namespace StorageAndTrade
 
         protected override void OpenSelect(object? sender, EventArgs args)
         {
-            Program.GeneralForm?.CreateNotebookPage("Вибір - Довідник: Банківські рахунки контрагентів", () =>
+            БанківськіРахункиОрганізацій page = new БанківськіРахункиОрганізацій(true);
+
+            page.DirectoryPointerItem = Pointer;
+            page.CallBack_OnSelectPointer = (БанківськіРахункиОрганізацій_Pointer selectPointer) =>
             {
-                БанківськіРахункиОрганізацій page = new БанківськіРахункиОрганізацій(true);
+                Pointer = selectPointer;
+            };
 
-                page.DirectoryPointerItem = Pointer;
-                page.CallBack_OnSelectPointer = (БанківськіРахункиОрганізацій_Pointer selectPointer) =>
-                {
-                    Pointer = selectPointer;
-                };
+            Program.GeneralForm?.CreateNotebookPage("Вибір - Банківські рахунки контрагентів", () => { return page; });
 
-                page.LoadRecords();
-
-                return page;
-            });
+            page.LoadRecords();
         }
 
         protected override void OnClear(object? sender, EventArgs args)

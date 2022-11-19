@@ -37,24 +37,21 @@ namespace StorageAndTrade
             if (BeforeClickOpenFunc != null)
                 BeforeClickOpenFunc.Invoke();
 
-            Program.GeneralForm?.CreateNotebookPage("Вибір - Довідник: Договори", () =>
+            ДоговориКонтрагентів page = new ДоговориКонтрагентів(true);
+
+            page.DirectoryPointerItem = Pointer;
+            page.КонтрагентВласник.Pointer = КонтрагентВласник;
+            page.CallBack_OnSelectPointer = (ДоговориКонтрагентів_Pointer selectPointer) =>
             {
-                ДоговориКонтрагентів page = new ДоговориКонтрагентів(true);
+                Pointer = selectPointer;
 
-                page.DirectoryPointerItem = Pointer;
-                page.КонтрагентВласник.Pointer = КонтрагентВласник;
-                page.CallBack_OnSelectPointer = (ДоговориКонтрагентів_Pointer selectPointer) =>
-                {
-                    Pointer = selectPointer;
+                if (AfterSelectFunc != null)
+                    AfterSelectFunc.Invoke();
+            };
 
-                    if (AfterSelectFunc != null)
-                        AfterSelectFunc.Invoke();
-                };
+            Program.GeneralForm?.CreateNotebookPage("Вибір - Договори", () => { return page; });
 
-                page.LoadRecords();
-
-                return page;
-            });
+            page.LoadRecords();
         }
 
         protected override void OnClear(object? sender, EventArgs args)
