@@ -5,7 +5,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>11.11.2022 16:37:32</DateTimeSave>
+  <DateTimeSave>21.11.2022 23:06:58</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -22,7 +22,7 @@ https://accounting.org.ua/storage_and_trade.html</Desc>
           <TabularParts />
         </Constant>
         <Constant>
-          <Name>ОснонийСклад</Name>
+          <Name>ОсновнийСклад</Name>
           <NameInTable>col_a2</NameInTable>
           <Desc>
           </Desc>
@@ -100,6 +100,15 @@ https://accounting.org.ua/storage_and_trade.html</Desc>
           </Desc>
           <Type>pointer</Type>
           <Pointer>Довідники.ВидиЦін</Pointer>
+          <TabularParts />
+        </Constant>
+        <Constant>
+          <Name>ОсновнийВидНоменклатури</Name>
+          <NameInTable>col_i2</NameInTable>
+          <Desc>
+          </Desc>
+          <Type>pointer</Type>
+          <Pointer>Довідники.ВидиНоменклатури</Pointer>
           <TabularParts />
         </Constant>
       </Constants>
@@ -13803,6 +13812,24 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
         <Name>ПсуванняТоварів</Name>
         <Name>ВнутрішнєСпоживанняТоварів</Name>
       </AllowDocumentSpend>
+      <TabularParts>
+        <TablePart>
+          <Name>one</Name>
+          <Table>tab_b24</Table>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>one</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>string</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+          </Fields>
+        </TablePart>
+      </TabularParts>
     </RegisterAccumulation>
     <RegisterAccumulation>
       <Name>ТовариОрганізацій</Name>
@@ -13857,6 +13884,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
         <Fields />
       </PropertyFields>
       <AllowDocumentSpend />
+      <TabularParts />
     </RegisterAccumulation>
     <RegisterAccumulation>
       <Name>РухТоварів</Name>
@@ -13911,6 +13939,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
         <Fields />
       </PropertyFields>
       <AllowDocumentSpend />
+      <TabularParts />
     </RegisterAccumulation>
     <RegisterAccumulation>
       <Name>ЗамовленняКлієнтів</Name>
@@ -13984,6 +14013,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
         <Name>ЗамовленняКлієнта</Name>
         <Name>РеалізаціяТоварівТаПослуг</Name>
       </AllowDocumentSpend>
+      <TabularParts />
     </RegisterAccumulation>
     <RegisterAccumulation>
       <Name>РозрахункиЗКлієнтами</Name>
@@ -14035,6 +14065,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
         <Name>ПоверненняТоварівВідКлієнта</Name>
         <Name>АктВиконанихРобіт</Name>
       </AllowDocumentSpend>
+      <TabularParts />
     </RegisterAccumulation>
     <RegisterAccumulation>
       <Name>Закупівлі</Name>
@@ -14114,6 +14145,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
         <Fields />
       </PropertyFields>
       <AllowDocumentSpend />
+      <TabularParts />
     </RegisterAccumulation>
     <RegisterAccumulation>
       <Name>ВільніЗалишки</Name>
@@ -14203,6 +14235,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
         <Name>ВнутрішнєСпоживанняТоварів</Name>
         <Name>РахунокФактура</Name>
       </AllowDocumentSpend>
+      <TabularParts />
     </RegisterAccumulation>
     <RegisterAccumulation>
       <Name>ЗамовленняПостачальникам</Name>
@@ -14269,6 +14302,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
         <Name>ЗамовленняПостачальнику</Name>
         <Name>ПоступленняТоварівТаПослуг</Name>
       </AllowDocumentSpend>
+      <TabularParts />
     </RegisterAccumulation>
     <RegisterAccumulation>
       <Name>РозрахункиЗПостачальниками</Name>
@@ -14319,6 +14353,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
         <Name>РозхіднийКасовийОрдер</Name>
         <Name>ПоверненняТоварівПостачальнику</Name>
       </AllowDocumentSpend>
+      <TabularParts />
     </RegisterAccumulation>
     <RegisterAccumulation>
       <Name>ТовариДоПоступлення</Name>
@@ -14373,6 +14408,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
         <Fields />
       </PropertyFields>
       <AllowDocumentSpend />
+      <TabularParts />
     </RegisterAccumulation>
     <RegisterAccumulation>
       <Name>РухКоштів</Name>
@@ -14431,6 +14467,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
         <Name>РозхіднийКасовийОрдер</Name>
         <Name>ВведенняЗалишків</Name>
       </AllowDocumentSpend>
+      <TabularParts />
     </RegisterAccumulation>
     <RegisterAccumulation>
       <Name>ПартіїТоварів</Name>
@@ -14537,6 +14574,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
         <Name>ПсуванняТоварів</Name>
         <Name>ВнутрішнєСпоживанняТоварів</Name>
       </AllowDocumentSpend>
+      <TabularParts />
     </RegisterAccumulation>
     <RegisterAccumulation>
       <Name>ТовариДоВідвантаження</Name>
@@ -14599,6 +14637,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
         <Fields />
       </PropertyFields>
       <AllowDocumentSpend />
+      <TabularParts />
     </RegisterAccumulation>
     <RegisterAccumulation>
       <Name>ДоходиТаСобівартістьПродажів</Name>
@@ -14732,6 +14771,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
         </Fields>
       </PropertyFields>
       <AllowDocumentSpend />
+      <TabularParts />
     </RegisterAccumulation>
   </RegistersAccumulation>
 </Configuration>

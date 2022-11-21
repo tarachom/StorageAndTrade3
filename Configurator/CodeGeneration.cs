@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 19.11.2022 13:43:08
+ * Дата конфігурації: 21.11.2022 23:26:56
  *
  */
 
@@ -17550,6 +17550,202 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         }
     }
     
+    
+    public class ТовариНаСкладах_День_TablePart : RegisterAccumulationTablePart
+    {
+        public ТовариНаСкладах_День_TablePart() : base(Config.Kernel!, "tab_b24",
+              new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7" }) 
+        {
+            Records = new List<Record>();
+        }
+        
+        public const string TABLE = "tab_b24";
+        
+        public const string Номенклатура = "col_a1";
+        public const string ХарактеристикаНоменклатури = "col_a2";
+        public const string Склад = "col_a3";
+        public const string Серія = "col_a4";
+        public const string Період = "col_a5";
+        public const string ВНаявності = "col_a6";
+        public const string ДоВідвантаження = "col_a7";
+        public List<Record> Records { get; set; }
+    
+        public void Read()
+        {
+            Records.Clear();
+            base.BaseRead();
+
+            foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
+            {
+                Record record = new Record();
+                record.UID = (Guid)fieldValue["uid"];
+                
+                record.Номенклатура = new Довідники.Номенклатура_Pointer(fieldValue["col_a1"]);
+                record.ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer(fieldValue["col_a2"]);
+                record.Склад = new Довідники.Склади_Pointer(fieldValue["col_a3"]);
+                record.Серія = new Довідники.СеріїНоменклатури_Pointer(fieldValue["col_a4"]);
+                record.Період = (fieldValue["col_a5"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a5"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                record.ВНаявності = (fieldValue["col_a6"] != DBNull.Value) ? (decimal)fieldValue["col_a6"] : 0;
+                record.ДоВідвантаження = (fieldValue["col_a7"] != DBNull.Value) ? (decimal)fieldValue["col_a7"] : 0;
+                
+                Records.Add(record);
+            }
+        
+            base.BaseClear();
+        }
+    
+        public void Save(bool clear_all_before_save /*= true*/) 
+        {
+            base.BaseBeginTransaction();
+            
+            if (clear_all_before_save)
+                base.BaseDelete();
+
+            foreach (Record record in Records)
+            {
+                Dictionary<string, object> fieldValue = new Dictionary<string, object>();
+
+                fieldValue.Add("col_a1", record.Номенклатура.UnigueID.UGuid);
+                fieldValue.Add("col_a2", record.ХарактеристикаНоменклатури.UnigueID.UGuid);
+                fieldValue.Add("col_a3", record.Склад.UnigueID.UGuid);
+                fieldValue.Add("col_a4", record.Серія.UnigueID.UGuid);
+                fieldValue.Add("col_a5", record.Період);
+                fieldValue.Add("col_a6", record.ВНаявності);
+                fieldValue.Add("col_a7", record.ДоВідвантаження);
+                
+                base.BaseSave(record.UID, fieldValue);
+            }
+            
+            base.BaseCommitTransaction();
+        }
+    
+        public void Delete()
+        {
+            base.BaseDelete();
+        }
+        
+        public class Record : RegisterAccumulationTablePartRecord
+        {
+            public Record()
+            {
+                Номенклатура = new Довідники.Номенклатура_Pointer();
+                ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer();
+                Склад = new Довідники.Склади_Pointer();
+                Серія = new Довідники.СеріїНоменклатури_Pointer();
+                Період = DateTime.MinValue;
+                ВНаявності = 0;
+                ДоВідвантаження = 0;
+                
+            }
+            public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
+            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; }
+            public Довідники.Склади_Pointer Склад { get; set; }
+            public Довідники.СеріїНоменклатури_Pointer Серія { get; set; }
+            public DateTime Період { get; set; }
+            public decimal ВНаявності { get; set; }
+            public decimal ДоВідвантаження { get; set; }
+            
+        }            
+    }
+        
+    public class ТовариНаСкладах_Місяць_TablePart : RegisterAccumulationTablePart
+    {
+        public ТовариНаСкладах_Місяць_TablePart() : base(Config.Kernel!, "tab_b25",
+              new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7" }) 
+        {
+            Records = new List<Record>();
+        }
+        
+        public const string TABLE = "tab_b25";
+        
+        public const string Номенклатура = "col_a1";
+        public const string ХарактеристикаНоменклатури = "col_a2";
+        public const string Склад = "col_a3";
+        public const string Серія = "col_a4";
+        public const string Період = "col_a5";
+        public const string ВНаявності = "col_a6";
+        public const string ДоВідвантаження = "col_a7";
+        public List<Record> Records { get; set; }
+    
+        public void Read()
+        {
+            Records.Clear();
+            base.BaseRead();
+
+            foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
+            {
+                Record record = new Record();
+                record.UID = (Guid)fieldValue["uid"];
+                
+                record.Номенклатура = new Довідники.Номенклатура_Pointer(fieldValue["col_a1"]);
+                record.ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer(fieldValue["col_a2"]);
+                record.Склад = new Довідники.Склади_Pointer(fieldValue["col_a3"]);
+                record.Серія = new Довідники.СеріїНоменклатури_Pointer(fieldValue["col_a4"]);
+                record.Період = (fieldValue["col_a5"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a5"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                record.ВНаявності = (fieldValue["col_a6"] != DBNull.Value) ? (decimal)fieldValue["col_a6"] : 0;
+                record.ДоВідвантаження = (fieldValue["col_a7"] != DBNull.Value) ? (decimal)fieldValue["col_a7"] : 0;
+                
+                Records.Add(record);
+            }
+        
+            base.BaseClear();
+        }
+    
+        public void Save(bool clear_all_before_save /*= true*/) 
+        {
+            base.BaseBeginTransaction();
+            
+            if (clear_all_before_save)
+                base.BaseDelete();
+
+            foreach (Record record in Records)
+            {
+                Dictionary<string, object> fieldValue = new Dictionary<string, object>();
+
+                fieldValue.Add("col_a1", record.Номенклатура.UnigueID.UGuid);
+                fieldValue.Add("col_a2", record.ХарактеристикаНоменклатури.UnigueID.UGuid);
+                fieldValue.Add("col_a3", record.Склад.UnigueID.UGuid);
+                fieldValue.Add("col_a4", record.Серія.UnigueID.UGuid);
+                fieldValue.Add("col_a5", record.Період);
+                fieldValue.Add("col_a6", record.ВНаявності);
+                fieldValue.Add("col_a7", record.ДоВідвантаження);
+                
+                base.BaseSave(record.UID, fieldValue);
+            }
+            
+            base.BaseCommitTransaction();
+        }
+    
+        public void Delete()
+        {
+            base.BaseDelete();
+        }
+        
+        public class Record : RegisterAccumulationTablePartRecord
+        {
+            public Record()
+            {
+                Номенклатура = new Довідники.Номенклатура_Pointer();
+                ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer();
+                Склад = new Довідники.Склади_Pointer();
+                Серія = new Довідники.СеріїНоменклатури_Pointer();
+                Період = DateTime.MinValue;
+                ВНаявності = 0;
+                ДоВідвантаження = 0;
+                
+            }
+            public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
+            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; }
+            public Довідники.Склади_Pointer Склад { get; set; }
+            public Довідники.СеріїНоменклатури_Pointer Серія { get; set; }
+            public DateTime Період { get; set; }
+            public decimal ВНаявності { get; set; }
+            public decimal ДоВідвантаження { get; set; }
+            
+        }            
+    }
+        
+
     #endregion
   
     #region REGISTER "ТовариОрганізацій"
@@ -17646,6 +17842,8 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         }
     }
     
+    
+
     #endregion
   
     #region REGISTER "РухТоварів"
@@ -17742,6 +17940,8 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         }
     }
     
+    
+
     #endregion
   
     #region REGISTER "ЗамовленняКлієнтів"
@@ -17848,6 +18048,8 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         }
     }
     
+    
+
     #endregion
   
     #region REGISTER "РозрахункиЗКлієнтами"
@@ -17939,6 +18141,8 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         }
     }
     
+    
+
     #endregion
   
     #region REGISTER "Закупівлі"
@@ -18050,6 +18254,8 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         }
     }
     
+    
+
     #endregion
   
     #region REGISTER "ВільніЗалишки"
@@ -18161,6 +18367,8 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         }
     }
     
+    
+
     #endregion
   
     #region REGISTER "ЗамовленняПостачальникам"
@@ -18262,6 +18470,8 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         }
     }
     
+    
+
     #endregion
   
     #region REGISTER "РозрахункиЗПостачальниками"
@@ -18353,6 +18563,8 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         }
     }
     
+    
+
     #endregion
   
     #region REGISTER "ТовариДоПоступлення"
@@ -18449,6 +18661,8 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         }
     }
     
+    
+
     #endregion
   
     #region REGISTER "РухКоштів"
@@ -18545,6 +18759,8 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         }
     }
     
+    
+
     #endregion
   
     #region REGISTER "ПартіїТоварів"
@@ -18666,6 +18882,8 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         }
     }
     
+    
+
     #endregion
   
     #region REGISTER "ТовариДоВідвантаження"
@@ -18767,6 +18985,8 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         }
     }
     
+    
+
     #endregion
   
     #region REGISTER "ДоходиТаСобівартістьПродажів"
@@ -18908,6 +19128,8 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         }
     }
     
+    
+
     #endregion
   
 }
