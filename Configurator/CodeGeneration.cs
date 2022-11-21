@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 21.11.2022 23:26:56
+ * Дата конфігурації: 21.11.2022 23:37:57
  *
  */
 
@@ -17741,6 +17741,93 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             public DateTime Період { get; set; }
             public decimal ВНаявності { get; set; }
             public decimal ДоВідвантаження { get; set; }
+            
+        }            
+    }
+        
+    public class ТовариНаСкладах_Підсумок_TablePart : RegisterAccumulationTablePart
+    {
+        public ТовариНаСкладах_Підсумок_TablePart() : base(Config.Kernel!, "tab_b30",
+              new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a6" }) 
+        {
+            Records = new List<Record>();
+        }
+        
+        public const string TABLE = "tab_b30";
+        
+        public const string Номенклатура = "col_a1";
+        public const string ХарактеристикаНоменклатури = "col_a2";
+        public const string Склад = "col_a3";
+        public const string Серія = "col_a4";
+        public const string ВНаявності = "col_a6";
+        public List<Record> Records { get; set; }
+    
+        public void Read()
+        {
+            Records.Clear();
+            base.BaseRead();
+
+            foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
+            {
+                Record record = new Record();
+                record.UID = (Guid)fieldValue["uid"];
+                
+                record.Номенклатура = new Довідники.Номенклатура_Pointer(fieldValue["col_a1"]);
+                record.ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer(fieldValue["col_a2"]);
+                record.Склад = new Довідники.Склади_Pointer(fieldValue["col_a3"]);
+                record.Серія = new Довідники.СеріїНоменклатури_Pointer(fieldValue["col_a4"]);
+                record.ВНаявності = (fieldValue["col_a6"] != DBNull.Value) ? (decimal)fieldValue["col_a6"] : 0;
+                
+                Records.Add(record);
+            }
+        
+            base.BaseClear();
+        }
+    
+        public void Save(bool clear_all_before_save /*= true*/) 
+        {
+            base.BaseBeginTransaction();
+            
+            if (clear_all_before_save)
+                base.BaseDelete();
+
+            foreach (Record record in Records)
+            {
+                Dictionary<string, object> fieldValue = new Dictionary<string, object>();
+
+                fieldValue.Add("col_a1", record.Номенклатура.UnigueID.UGuid);
+                fieldValue.Add("col_a2", record.ХарактеристикаНоменклатури.UnigueID.UGuid);
+                fieldValue.Add("col_a3", record.Склад.UnigueID.UGuid);
+                fieldValue.Add("col_a4", record.Серія.UnigueID.UGuid);
+                fieldValue.Add("col_a6", record.ВНаявності);
+                
+                base.BaseSave(record.UID, fieldValue);
+            }
+            
+            base.BaseCommitTransaction();
+        }
+    
+        public void Delete()
+        {
+            base.BaseDelete();
+        }
+        
+        public class Record : RegisterAccumulationTablePartRecord
+        {
+            public Record()
+            {
+                Номенклатура = new Довідники.Номенклатура_Pointer();
+                ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer();
+                Склад = new Довідники.Склади_Pointer();
+                Серія = new Довідники.СеріїНоменклатури_Pointer();
+                ВНаявності = 0;
+                
+            }
+            public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
+            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; }
+            public Довідники.Склади_Pointer Склад { get; set; }
+            public Довідники.СеріїНоменклатури_Pointer Серія { get; set; }
+            public decimal ВНаявності { get; set; }
             
         }            
     }
