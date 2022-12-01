@@ -143,51 +143,21 @@ namespace StorageAndTrade
                 Exception exception;
 
                 Конфа.Config.Kernel = new Kernel();
-                Конфа.Config.KernelBackgroundTask = new Kernel();
-                //Конфа.Config.KernelParalelWork = new Kernel();
 
                 //Підключення до бази даних та завантаження конфігурації
                 bool flagOpen = Конфа.Config.Kernel.Open(
-                        PathToConfXML,
-                        OpenConfigurationParam.DataBaseServer,
-                        OpenConfigurationParam.DataBaseLogin,
-                        OpenConfigurationParam.DataBasePassword,
-                        OpenConfigurationParam.DataBasePort,
-                        OpenConfigurationParam.DataBaseBaseName, out exception);
+                    PathToConfXML,
+                    OpenConfigurationParam.DataBaseServer,
+                    OpenConfigurationParam.DataBaseLogin,
+                    OpenConfigurationParam.DataBasePassword,
+                    OpenConfigurationParam.DataBasePort,
+                    OpenConfigurationParam.DataBaseBaseName, out exception);
 
                 if (!flagOpen)
                 {
                     Message.Error(this, "Error: " + exception.Message);
                     return;
                 }
-
-                //Підключення до бази даних для фонових завдань
-                bool flagOpenBackgroundTask = Конфа.Config.KernelBackgroundTask.OpenOnlyDataBase(
-                        OpenConfigurationParam.DataBaseServer,
-                        OpenConfigurationParam.DataBaseLogin,
-                        OpenConfigurationParam.DataBasePassword,
-                        OpenConfigurationParam.DataBasePort,
-                        OpenConfigurationParam.DataBaseBaseName, out exception);
-
-                if (!flagOpenBackgroundTask)
-                {
-                    Message.Error(this, "Error: " + exception.Message);
-                    return;
-                }
-
-                //Підключення до бази даних для паралельної роботи
-                // bool flagOpenParalelWork = Конфа.Config.KernelParalelWork.OpenOnlyDataBase(
-                // 		OpenConfigurationParam.DataBaseServer,
-                // 		OpenConfigurationParam.DataBaseLogin,
-                // 		OpenConfigurationParam.DataBasePassword,
-                // 		OpenConfigurationParam.DataBasePort,
-                // 		OpenConfigurationParam.DataBaseBaseName, out exception);
-
-                // if (!flagOpenParalelWork)
-                // {
-                // 	//MessageBox.Show(exception.Message);
-                // 	return;
-                // }
 
                 Конфа.Config.ReadAllConstants();
 

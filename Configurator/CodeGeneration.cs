@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 25.11.2022 20:51:25
+ * Дата конфігурації: 01.12.2022 20:07:16
  *
  */
 
@@ -38,8 +38,6 @@ namespace StorageAndTrade_1_0
     public static class Config
     {
         public static Kernel? Kernel { get; set; }
-        public static Kernel? KernelBackgroundTask { get; set; }
-        public static Kernel? KernelParalelWork { get; set; }
 		
         public static void ReadAllConstants()
         {
@@ -3995,9 +3993,7 @@ namespace StorageAndTrade_1_0.Довідники
         
         public void Delete()
         {
-            base.BaseBeginTransaction();
             base.BaseDelete(Owner.UnigueID);
-            base.BaseCommitTransaction();
         }
         
         
@@ -4289,9 +4285,7 @@ namespace StorageAndTrade_1_0.Довідники
         
         public void Delete()
         {
-            base.BaseBeginTransaction();
             base.BaseDelete(Owner.UnigueID);
-            base.BaseCommitTransaction();
         }
         
         
@@ -5172,9 +5166,7 @@ namespace StorageAndTrade_1_0.Довідники
         
         public void Delete()
         {
-            base.BaseBeginTransaction();
             base.BaseDelete(Owner.UnigueID);
-            base.BaseCommitTransaction();
         }
         
         
@@ -5260,9 +5252,7 @@ namespace StorageAndTrade_1_0.Довідники
         
         public void Delete()
         {
-            base.BaseBeginTransaction();
             base.BaseDelete(Owner.UnigueID);
-            base.BaseCommitTransaction();
         }
         
         
@@ -5533,9 +5523,7 @@ namespace StorageAndTrade_1_0.Довідники
         
         public void Delete()
         {
-            base.BaseBeginTransaction();
             base.BaseDelete(Owner.UnigueID);
-            base.BaseCommitTransaction();
         }
         
         
@@ -6095,9 +6083,7 @@ namespace StorageAndTrade_1_0.Довідники
         
         public void Delete()
         {
-            base.BaseBeginTransaction();
             base.BaseDelete(Owner.UnigueID);
-            base.BaseCommitTransaction();
         }
         
         
@@ -6365,9 +6351,7 @@ namespace StorageAndTrade_1_0.Довідники
         
         public void Delete()
         {
-            base.BaseBeginTransaction();
             base.BaseDelete(Owner.UnigueID);
-            base.BaseCommitTransaction();
         }
         
         
@@ -8510,9 +8494,7 @@ namespace StorageAndTrade_1_0.Довідники
         
         public void Delete()
         {
-            base.BaseBeginTransaction();
             base.BaseDelete(Owner.UnigueID);
-            base.BaseCommitTransaction();
         }
         
         
@@ -10245,9 +10227,7 @@ namespace StorageAndTrade_1_0.Документи
         
         public void Delete()
         {
-            base.BaseBeginTransaction();
             base.BaseDelete(Owner.UnigueID);
-            base.BaseCommitTransaction();
         }
 
         public List<Record> Copy()
@@ -10720,9 +10700,7 @@ namespace StorageAndTrade_1_0.Документи
         
         public void Delete()
         {
-            base.BaseBeginTransaction();
             base.BaseDelete(Owner.UnigueID);
-            base.BaseCommitTransaction();
         }
 
         public List<Record> Copy()
@@ -11173,9 +11151,7 @@ namespace StorageAndTrade_1_0.Документи
         
         public void Delete()
         {
-            base.BaseBeginTransaction();
             base.BaseDelete(Owner.UnigueID);
-            base.BaseCommitTransaction();
         }
 
         public List<Record> Copy()
@@ -11643,9 +11619,7 @@ namespace StorageAndTrade_1_0.Документи
         
         public void Delete()
         {
-            base.BaseBeginTransaction();
             base.BaseDelete(Owner.UnigueID);
-            base.BaseCommitTransaction();
         }
 
         public List<Record> Copy()
@@ -11957,9 +11931,7 @@ namespace StorageAndTrade_1_0.Документи
         
         public void Delete()
         {
-            base.BaseBeginTransaction();
             base.BaseDelete(Owner.UnigueID);
-            base.BaseCommitTransaction();
         }
 
         public List<Record> Copy()
@@ -12309,9 +12281,7 @@ namespace StorageAndTrade_1_0.Документи
         
         public void Delete()
         {
-            base.BaseBeginTransaction();
             base.BaseDelete(Owner.UnigueID);
-            base.BaseCommitTransaction();
         }
 
         public List<Record> Copy()
@@ -12676,9 +12646,7 @@ namespace StorageAndTrade_1_0.Документи
         
         public void Delete()
         {
-            base.BaseBeginTransaction();
             base.BaseDelete(Owner.UnigueID);
-            base.BaseCommitTransaction();
         }
 
         public List<Record> Copy()
@@ -13045,9 +13013,7 @@ namespace StorageAndTrade_1_0.Документи
         
         public void Delete()
         {
-            base.BaseBeginTransaction();
             base.BaseDelete(Owner.UnigueID);
-            base.BaseCommitTransaction();
         }
 
         public List<Record> Copy()
@@ -13441,9 +13407,7 @@ namespace StorageAndTrade_1_0.Документи
         
         public void Delete()
         {
-            base.BaseBeginTransaction();
             base.BaseDelete(Owner.UnigueID);
-            base.BaseCommitTransaction();
         }
 
         public List<Record> Copy()
@@ -13822,9 +13786,7 @@ namespace StorageAndTrade_1_0.Документи
         
         public void Delete()
         {
-            base.BaseBeginTransaction();
             base.BaseDelete(Owner.UnigueID);
-            base.BaseCommitTransaction();
         }
 
         public List<Record> Copy()
@@ -14178,9 +14140,7 @@ namespace StorageAndTrade_1_0.Документи
         
         public void Delete()
         {
-            base.BaseBeginTransaction();
             base.BaseDelete(Owner.UnigueID);
-            base.BaseCommitTransaction();
         }
 
         public List<Record> Copy()
@@ -14515,9 +14475,7 @@ namespace StorageAndTrade_1_0.Документи
         
         public void Delete()
         {
-            base.BaseBeginTransaction();
             base.BaseDelete(Owner.UnigueID);
-            base.BaseCommitTransaction();
         }
 
         public List<Record> Copy()
@@ -14621,9 +14579,7 @@ namespace StorageAndTrade_1_0.Документи
         
         public void Delete()
         {
-            base.BaseBeginTransaction();
             base.BaseDelete(Owner.UnigueID);
-            base.BaseCommitTransaction();
         }
 
         public List<Record> Copy()
@@ -14715,9 +14671,7 @@ namespace StorageAndTrade_1_0.Документи
         
         public void Delete()
         {
-            base.BaseBeginTransaction();
             base.BaseDelete(Owner.UnigueID);
-            base.BaseCommitTransaction();
         }
 
         public List<Record> Copy()
@@ -14812,9 +14766,7 @@ namespace StorageAndTrade_1_0.Документи
         
         public void Delete()
         {
-            base.BaseBeginTransaction();
             base.BaseDelete(Owner.UnigueID);
-            base.BaseCommitTransaction();
         }
 
         public List<Record> Copy()
@@ -15106,9 +15058,7 @@ namespace StorageAndTrade_1_0.Документи
         
         public void Delete()
         {
-            base.BaseBeginTransaction();
             base.BaseDelete(Owner.UnigueID);
-            base.BaseCommitTransaction();
         }
 
         public List<Record> Copy()
@@ -15402,9 +15352,7 @@ namespace StorageAndTrade_1_0.Документи
         
         public void Delete()
         {
-            base.BaseBeginTransaction();
             base.BaseDelete(Owner.UnigueID);
-            base.BaseCommitTransaction();
         }
 
         public List<Record> Copy()
@@ -15692,9 +15640,7 @@ namespace StorageAndTrade_1_0.Документи
         
         public void Delete()
         {
-            base.BaseBeginTransaction();
             base.BaseDelete(Owner.UnigueID);
-            base.BaseCommitTransaction();
         }
 
         public List<Record> Copy()
@@ -16019,9 +15965,7 @@ namespace StorageAndTrade_1_0.Документи
         
         public void Delete()
         {
-            base.BaseBeginTransaction();
             base.BaseDelete(Owner.UnigueID);
-            base.BaseCommitTransaction();
         }
 
         public List<Record> Copy()
@@ -16356,9 +16300,7 @@ namespace StorageAndTrade_1_0.Документи
         
         public void Delete()
         {
-            base.BaseBeginTransaction();
             base.BaseDelete(Owner.UnigueID);
-            base.BaseCommitTransaction();
         }
 
         public List<Record> Copy()
@@ -16741,9 +16683,7 @@ namespace StorageAndTrade_1_0.Документи
         
         public void Delete()
         {
-            base.BaseBeginTransaction();
             base.BaseDelete(Owner.UnigueID);
-            base.BaseCommitTransaction();
         }
 
         public List<Record> Copy()
@@ -16912,9 +16852,7 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
         
         public void Delete(Guid owner)
         {
-            base.BaseBeginTransaction();
             base.BaseDelete(owner);
-            base.BaseCommitTransaction();
         }
 
         
@@ -17078,9 +17016,7 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
         
         public void Delete(Guid owner)
         {
-            base.BaseBeginTransaction();
             base.BaseDelete(owner);
-            base.BaseCommitTransaction();
         }
 
         
@@ -17226,9 +17162,7 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
         
         public void Delete(Guid owner)
         {
-            base.BaseBeginTransaction();
             base.BaseDelete(owner);
-            base.BaseCommitTransaction();
         }
 
         
@@ -17372,9 +17306,7 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
         
         public void Delete(Guid owner)
         {
-            base.BaseBeginTransaction();
             base.BaseDelete(owner);
-            base.BaseCommitTransaction();
         }
 
         
@@ -17522,9 +17454,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
 
         public void Delete(Guid owner)
         {
-            base.BaseBeginTransaction();
             base.BaseDelete(owner);
-            base.BaseCommitTransaction();
         }
         
         
@@ -17677,7 +17607,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             
         }            
     }
-        
+    
     public class ТовариНаСкладах_Обороти_TablePart : RegisterAccumulationTablePart
     {
         public ТовариНаСкладах_Обороти_TablePart() : base(Config.Kernel!, "tab_b32",
@@ -17779,7 +17709,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             
         }            
     }
-        
+    
     public class ТовариНаСкладах_Залишки_TablePart : RegisterAccumulationTablePart
     {
         public ТовариНаСкладах_Залишки_TablePart() : base(Config.Kernel!, "tab_b31",
@@ -17876,7 +17806,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             
         }            
     }
-        
+    
 
     #endregion
   
@@ -17950,9 +17880,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
 
         public void Delete(Guid owner)
         {
-            base.BaseBeginTransaction();
             base.BaseDelete(owner);
-            base.BaseCommitTransaction();
         }
         
         
@@ -18048,9 +17976,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
 
         public void Delete(Guid owner)
         {
-            base.BaseBeginTransaction();
             base.BaseDelete(owner);
-            base.BaseCommitTransaction();
         }
         
         
@@ -18159,7 +18085,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             
         }            
     }
-        
+    
 
     #endregion
   
@@ -18239,9 +18165,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
 
         public void Delete(Guid owner)
         {
-            base.BaseBeginTransaction();
             base.BaseDelete(owner);
-            base.BaseCommitTransaction();
         }
         
         
@@ -18338,9 +18262,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
 
         public void Delete(Guid owner)
         {
-            base.BaseBeginTransaction();
             base.BaseDelete(owner);
-            base.BaseCommitTransaction();
         }
         
         
@@ -18443,9 +18365,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
 
         public void Delete(Guid owner)
         {
-            base.BaseBeginTransaction();
             base.BaseDelete(owner);
-            base.BaseCommitTransaction();
         }
         
         
@@ -18556,9 +18476,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
 
         public void Delete(Guid owner)
         {
-            base.BaseBeginTransaction();
             base.BaseDelete(owner);
-            base.BaseCommitTransaction();
         }
         
         
@@ -18683,7 +18601,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             
         }            
     }
-        
+    
     public class ВільніЗалишки_Обороти_TablePart : RegisterAccumulationTablePart
     {
         public ВільніЗалишки_Обороти_TablePart() : base(Config.Kernel!, "tab_b25",
@@ -18790,7 +18708,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             
         }            
     }
-        
+    
     public class ВільніЗалишки_ЗалишкиТаОбороти_TablePart : RegisterAccumulationTablePart
     {
         public ВільніЗалишки_ЗалишкиТаОбороти_TablePart() : base(Config.Kernel!, "tab_b30",
@@ -18932,7 +18850,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             
         }            
     }
-        
+    
 
     #endregion
   
@@ -19009,9 +18927,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
 
         public void Delete(Guid owner)
         {
-            base.BaseBeginTransaction();
             base.BaseDelete(owner);
-            base.BaseCommitTransaction();
         }
         
         
@@ -19106,9 +19022,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
 
         public void Delete(Guid owner)
         {
-            base.BaseBeginTransaction();
             base.BaseDelete(owner);
-            base.BaseCommitTransaction();
         }
         
         
@@ -19202,9 +19116,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
 
         public void Delete(Guid owner)
         {
-            base.BaseBeginTransaction();
             base.BaseDelete(owner);
-            base.BaseCommitTransaction();
         }
         
         
@@ -19300,9 +19212,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
 
         public void Delete(Guid owner)
         {
-            base.BaseBeginTransaction();
             base.BaseDelete(owner);
-            base.BaseCommitTransaction();
         }
         
         
@@ -19413,9 +19323,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
 
         public void Delete(Guid owner)
         {
-            base.BaseBeginTransaction();
             base.BaseDelete(owner);
-            base.BaseCommitTransaction();
         }
         
         
@@ -19524,9 +19432,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
 
         public void Delete(Guid owner)
         {
-            base.BaseBeginTransaction();
             base.BaseDelete(owner);
-            base.BaseCommitTransaction();
         }
         
         
@@ -19651,9 +19557,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
 
         public void Delete(Guid owner)
         {
-            base.BaseBeginTransaction();
             base.BaseDelete(owner);
-            base.BaseCommitTransaction();
         }
         
         
