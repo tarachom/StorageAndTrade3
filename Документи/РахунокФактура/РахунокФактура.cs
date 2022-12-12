@@ -59,7 +59,7 @@ namespace StorageAndTrade
             CreateToolbar();
 
             ScrolledWindow scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In };
-            scrollTree.SetPolicy(PolicyType.Never, PolicyType.Automatic);
+            scrollTree.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
 
             TreeViewGrid = new TreeView(ТабличніСписки.РахунокФактура_Записи.Store);
             ТабличніСписки.РахунокФактура_Записи.AddColumns(TreeViewGrid);

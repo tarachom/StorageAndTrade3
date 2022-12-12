@@ -269,7 +269,7 @@ namespace StorageAndTrade
             }
 
             if (!CancellationTokenThread.IsCancellationRequested)
-                CreateMessage(TypeMessage.None, "Готово!");
+                CreateMessage(TypeMessage.None, "Готово!\n\n\n\n\n");
         }
 
         #endregion
