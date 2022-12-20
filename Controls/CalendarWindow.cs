@@ -43,7 +43,10 @@ namespace StorageAndTrade
         void OnCalendarDaySelected(object? sender, EventArgs args)
         {
             if (Select != null)
-                Select.Invoke(new DateTime(calendar.Date.Year, calendar.Date.Month, calendar.Date.Day, Value.Hour, Value.Minute, Value.Second));
+                Select.Invoke(
+                    new DateTime(
+                        calendar.Date.Year, calendar.Date.Month, calendar.Date.Day,
+                        Value.Hour, Value.Minute, Value.Second));
 
             Close();
         }
