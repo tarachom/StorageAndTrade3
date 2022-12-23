@@ -11,6 +11,7 @@ namespace StorageAndTrade
             SetDefaultSize(300, 0);
             SetDefaultIconFromFile("images/form.ico");
             SetPosition(WindowPosition.Mouse);
+            
             Modal = true;
 
             VBox vbox = new VBox();
