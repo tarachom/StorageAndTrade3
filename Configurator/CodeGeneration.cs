@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 23.12.2022 20:39:04
+ * Дата конфігурації: 24.12.2022 14:06:39
  *
  */
 
@@ -17397,7 +17397,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
     
     public class ТовариНаСкладах_RecordsSet : RegisterAccumulationRecordsSet
     {
-        public ТовариНаСкладах_RecordsSet() : base(Config.Kernel!, "tab_a38",
+        public ТовариНаСкладах_RecordsSet() : base(Config.Kernel!, "tab_a38", "ТовариНаСкладах",
              new string[] { "col_e4", "col_e5", "col_e6", "col_a1", "col_e7", "col_e8" }) 
         {
             Records = new List<Record>();
@@ -17449,7 +17449,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
             }
-            base.BaseSpetialTableRegAccumTrigerAdd(period, owner, "ТовариНаСкладах");
+            base.BaseSpetialTableRegAccumTrigerAdd(period, owner);
             base.BaseCommitTransaction();
         }
 
@@ -17823,7 +17823,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
     
     public class ТовариОрганізацій_RecordsSet : RegisterAccumulationRecordsSet
     {
-        public ТовариОрганізацій_RecordsSet() : base(Config.Kernel!, "tab_a39",
+        public ТовариОрганізацій_RecordsSet() : base(Config.Kernel!, "tab_a39", "ТовариОрганізацій",
              new string[] { "col_e9", "col_f2", "col_f3", "col_f1" }) 
         {
             Records = new List<Record>();
@@ -17871,7 +17871,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
             }
-            base.BaseSpetialTableRegAccumTrigerAdd(period, owner, "ТовариОрганізацій");
+            base.BaseSpetialTableRegAccumTrigerAdd(period, owner);
             base.BaseCommitTransaction();
         }
 
@@ -17920,7 +17920,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
     
     public class РухТоварів_RecordsSet : RegisterAccumulationRecordsSet
     {
-        public РухТоварів_RecordsSet() : base(Config.Kernel!, "tab_a41",
+        public РухТоварів_RecordsSet() : base(Config.Kernel!, "tab_a41", "РухТоварів",
              new string[] { "col_g3", "col_g4", "col_g5", "col_g6" }) 
         {
             Records = new List<Record>();
@@ -17968,7 +17968,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
             }
-            base.BaseSpetialTableRegAccumTrigerAdd(period, owner, "РухТоварів");
+            base.BaseSpetialTableRegAccumTrigerAdd(period, owner);
             base.BaseCommitTransaction();
         }
 
@@ -18111,7 +18111,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
     
     public class ЗамовленняКлієнтів_RecordsSet : RegisterAccumulationRecordsSet
     {
-        public ЗамовленняКлієнтів_RecordsSet() : base(Config.Kernel!, "tab_a55",
+        public ЗамовленняКлієнтів_RecordsSet() : base(Config.Kernel!, "tab_a55", "ЗамовленняКлієнтів",
              new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6" }) 
         {
             Records = new List<Record>();
@@ -18163,7 +18163,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
             }
-            base.BaseSpetialTableRegAccumTrigerAdd(period, owner, "ЗамовленняКлієнтів");
+            base.BaseSpetialTableRegAccumTrigerAdd(period, owner);
             base.BaseCommitTransaction();
         }
 
@@ -18215,7 +18215,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
     
     public class РозрахункиЗКлієнтами_RecordsSet : RegisterAccumulationRecordsSet
     {
-        public РозрахункиЗКлієнтами_RecordsSet() : base(Config.Kernel!, "tab_a56",
+        public РозрахункиЗКлієнтами_RecordsSet() : base(Config.Kernel!, "tab_a56", "РозрахункиЗКлієнтами",
              new string[] { "col_a2", "col_a5", "col_a4" }) 
         {
             Records = new List<Record>();
@@ -18261,7 +18261,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
             }
-            base.BaseSpetialTableRegAccumTrigerAdd(period, owner, "РозрахункиЗКлієнтами");
+            base.BaseSpetialTableRegAccumTrigerAdd(period, owner);
             base.BaseCommitTransaction();
         }
 
@@ -18311,7 +18311,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
     
     public class Закупівлі_RecordsSet : RegisterAccumulationRecordsSet
     {
-        public Закупівлі_RecordsSet() : base(Config.Kernel!, "tab_a57",
+        public Закупівлі_RecordsSet() : base(Config.Kernel!, "tab_a57", "Закупівлі",
              new string[] { "col_a5", "col_a6", "col_a7", "col_b3", "col_a8", "col_b1", "col_b2" }) 
         {
             Records = new List<Record>();
@@ -18365,7 +18365,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
             }
-            base.BaseSpetialTableRegAccumTrigerAdd(period, owner, "Закупівлі");
+            base.BaseSpetialTableRegAccumTrigerAdd(period, owner);
             base.BaseCommitTransaction();
         }
 
@@ -18423,7 +18423,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
     
     public class ВільніЗалишки_RecordsSet : RegisterAccumulationRecordsSet
     {
-        public ВільніЗалишки_RecordsSet() : base(Config.Kernel!, "tab_a58",
+        public ВільніЗалишки_RecordsSet() : base(Config.Kernel!, "tab_a58", "ВільніЗалишки",
              new string[] { "col_a5", "col_a6", "col_a7", "col_a8", "col_b1", "col_b2", "col_a1" }) 
         {
             Records = new List<Record>();
@@ -18477,7 +18477,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
             }
-            base.BaseSpetialTableRegAccumTrigerAdd(period, owner, "ВільніЗалишки");
+            base.BaseSpetialTableRegAccumTrigerAdd(period, owner);
             base.BaseCommitTransaction();
         }
 
@@ -18533,7 +18533,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
     
     public class ЗамовленняПостачальникам_RecordsSet : RegisterAccumulationRecordsSet
     {
-        public ЗамовленняПостачальникам_RecordsSet() : base(Config.Kernel!, "tab_a60",
+        public ЗамовленняПостачальникам_RecordsSet() : base(Config.Kernel!, "tab_a60", "ЗамовленняПостачальникам",
              new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5" }) 
         {
             Records = new List<Record>();
@@ -18583,7 +18583,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
             }
-            base.BaseSpetialTableRegAccumTrigerAdd(period, owner, "ЗамовленняПостачальникам");
+            base.BaseSpetialTableRegAccumTrigerAdd(period, owner);
             base.BaseCommitTransaction();
         }
 
@@ -18633,7 +18633,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
     
     public class РозрахункиЗПостачальниками_RecordsSet : RegisterAccumulationRecordsSet
     {
-        public РозрахункиЗПостачальниками_RecordsSet() : base(Config.Kernel!, "tab_a61",
+        public РозрахункиЗПостачальниками_RecordsSet() : base(Config.Kernel!, "tab_a61", "РозрахункиЗПостачальниками",
              new string[] { "col_a6", "col_a7", "col_a8" }) 
         {
             Records = new List<Record>();
@@ -18679,7 +18679,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
             }
-            base.BaseSpetialTableRegAccumTrigerAdd(period, owner, "РозрахункиЗПостачальниками");
+            base.BaseSpetialTableRegAccumTrigerAdd(period, owner);
             base.BaseCommitTransaction();
         }
 
@@ -18726,7 +18726,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
     
     public class ТовариДоПоступлення_RecordsSet : RegisterAccumulationRecordsSet
     {
-        public ТовариДоПоступлення_RecordsSet() : base(Config.Kernel!, "tab_a62",
+        public ТовариДоПоступлення_RecordsSet() : base(Config.Kernel!, "tab_a62", "ТовариДоПоступлення",
              new string[] { "col_b2", "col_b3", "col_b4", "col_b5" }) 
         {
             Records = new List<Record>();
@@ -18774,7 +18774,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
             }
-            base.BaseSpetialTableRegAccumTrigerAdd(period, owner, "ТовариДоПоступлення");
+            base.BaseSpetialTableRegAccumTrigerAdd(period, owner);
             base.BaseCommitTransaction();
         }
 
@@ -18823,7 +18823,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
     
     public class РухКоштів_RecordsSet : RegisterAccumulationRecordsSet
     {
-        public РухКоштів_RecordsSet() : base(Config.Kernel!, "tab_a78",
+        public РухКоштів_RecordsSet() : base(Config.Kernel!, "tab_a78", "РухКоштів",
              new string[] { "col_a1", "col_a2", "col_a3", "col_a4" }) 
         {
             Records = new List<Record>();
@@ -18871,7 +18871,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
             }
-            base.BaseSpetialTableRegAccumTrigerAdd(period, owner, "РухКоштів");
+            base.BaseSpetialTableRegAccumTrigerAdd(period, owner);
             base.BaseCommitTransaction();
         }
 
@@ -18925,7 +18925,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
     
     public class ПартіїТоварів_RecordsSet : RegisterAccumulationRecordsSet
     {
-        public ПартіїТоварів_RecordsSet() : base(Config.Kernel!, "tab_a79",
+        public ПартіїТоварів_RecordsSet() : base(Config.Kernel!, "tab_a79", "ПартіїТоварів",
              new string[] { "col_a1", "col_a9", "col_a5", "col_a7", "col_a8", "col_a2", "col_a3", "col_a4", "col_b5" }) 
         {
             Records = new List<Record>();
@@ -18983,7 +18983,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
             }
-            base.BaseSpetialTableRegAccumTrigerAdd(period, owner, "ПартіїТоварів");
+            base.BaseSpetialTableRegAccumTrigerAdd(period, owner);
             base.BaseCommitTransaction();
         }
 
@@ -19043,7 +19043,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
     
     public class ТовариДоВідвантаження_RecordsSet : RegisterAccumulationRecordsSet
     {
-        public ТовариДоВідвантаження_RecordsSet() : base(Config.Kernel!, "tab_a80",
+        public ТовариДоВідвантаження_RecordsSet() : base(Config.Kernel!, "tab_a80", "ТовариДоВідвантаження",
              new string[] { "col_b2", "col_b3", "col_b4", "col_b5", "col_a2" }) 
         {
             Records = new List<Record>();
@@ -19093,7 +19093,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
             }
-            base.BaseSpetialTableRegAccumTrigerAdd(period, owner, "ТовариДоВідвантаження");
+            base.BaseSpetialTableRegAccumTrigerAdd(period, owner);
             base.BaseCommitTransaction();
         }
 
@@ -19153,7 +19153,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
     
     public class ДоходиТаСобівартістьПродажів_RecordsSet : RegisterAccumulationRecordsSet
     {
-        public ДоходиТаСобівартістьПродажів_RecordsSet() : base(Config.Kernel!, "tab_b12",
+        public ДоходиТаСобівартістьПродажів_RecordsSet() : base(Config.Kernel!, "tab_b12", "ДоходиТаСобівартістьПродажів",
              new string[] { "col_a1", "col_a2", "col_a4", "col_a5", "col_a6", "col_a7", "col_a9", "col_b4", "col_b6", "col_a8", "col_b2", "col_b3", "col_b5" }) 
         {
             Records = new List<Record>();
@@ -19219,7 +19219,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
             }
-            base.BaseSpetialTableRegAccumTrigerAdd(period, owner, "ДоходиТаСобівартістьПродажів");
+            base.BaseSpetialTableRegAccumTrigerAdd(period, owner);
             base.BaseCommitTransaction();
         }
 
