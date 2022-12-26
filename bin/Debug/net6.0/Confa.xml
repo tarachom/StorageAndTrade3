@@ -5,7 +5,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>26.12.2022 06:03:31</DateTimeSave>
+  <DateTimeSave>26.12.2022 19:56:05</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -14070,7 +14070,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
 DELETE FROM 
     {ТовариНаСкладах_Залишки_TablePart.TABLE}
 WHERE 
-    {ТовариНаСкладах_Залишки_TablePart.TABLE}.Період = @ПеріодДеньВідбір
+    {ТовариНаСкладах_Залишки_TablePart.TABLE}.{ТовариНаСкладах_Залишки_TablePart.Період} = @ПеріодДеньВідбір
 </Query>
           <Query position="1" key="SELECT">
 INSERT INTO 
@@ -14137,7 +14137,7 @@ HAVING
 DELETE FROM 
     {ТовариНаСкладах_Обороти_TablePart.TABLE}
 WHERE 
-    {ТовариНаСкладах_Обороти_TablePart.TABLE}.Період = @ПеріодДеньВідбір
+    {ТовариНаСкладах_Обороти_TablePart.TABLE}.{ТовариНаСкладах_Обороти_TablePart.Період} = @ПеріодДеньВідбір
 </Query>
           <Query position="1" key="SELECT">
 INSERT INTO 
@@ -14210,7 +14210,7 @@ HAVING
 DELETE FROM 
     {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.TABLE}
 WHERE 
-    {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.TABLE}.Період = @ПеріодДеньВідбір
+    {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.TABLE}.{ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.Період} = @ПеріодДеньВідбір
 </Query>
           <Query position="1" key="SELECT">
 INSERT INTO 
@@ -14402,123 +14402,8 @@ HAVING
         <Fields />
       </PropertyFields>
       <AllowDocumentSpend />
-      <TabularParts>
-        <TablePart>
-          <Name>Обороти</Name>
-          <Table>tab_b31</Table>
-          <Desc>Віртуальна таблиця</Desc>
-          <Fields>
-            <Field>
-              <Name>Період</Name>
-              <NameInTable>col_a1</NameInTable>
-              <Type>date</Type>
-              <Desc>
-              </Desc>
-              <IsIndex>1</IsIndex>
-            </Field>
-            <Field>
-              <Name>Номенклатура</Name>
-              <NameInTable>col_a2</NameInTable>
-              <Type>pointer</Type>
-              <Pointer>Довідники.Номенклатура</Pointer>
-              <Desc>
-              </Desc>
-              <IsIndex>1</IsIndex>
-            </Field>
-            <Field>
-              <Name>ХарактеристикаНоменклатури</Name>
-              <NameInTable>col_a3</NameInTable>
-              <Type>pointer</Type>
-              <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
-              <Desc>
-              </Desc>
-              <IsIndex>1</IsIndex>
-            </Field>
-            <Field>
-              <Name>Склад</Name>
-              <NameInTable>col_a4</NameInTable>
-              <Type>pointer</Type>
-              <Pointer>Довідники.Склади</Pointer>
-              <Desc>
-              </Desc>
-              <IsIndex>1</IsIndex>
-            </Field>
-            <Field>
-              <Name>КількістьПрихід</Name>
-              <NameInTable>col_a5</NameInTable>
-              <Type>numeric</Type>
-              <Desc>
-              </Desc>
-              <IsIndex>0</IsIndex>
-            </Field>
-            <Field>
-              <Name>КількістьРозхід</Name>
-              <NameInTable>col_a6</NameInTable>
-              <Type>numeric</Type>
-              <Desc>
-              </Desc>
-              <IsIndex>0</IsIndex>
-            </Field>
-          </Fields>
-        </TablePart>
-      </TabularParts>
-      <QueryBlockList>
-        <QueryBlock>
-          <Name>Обороти</Name>
-          <Query position="0" key="DELETE">
-DELETE FROM 
-    {РухТоварів_Обороти_TablePart.TABLE}
-WHERE 
-    {РухТоварів_Обороти_TablePart.TABLE}.Період = @ПеріодДеньВідбір
-</Query>
-          <Query position="1" key="SELECT">
-INSERT INTO 
-    {РухТоварів_Обороти_TablePart.TABLE} 
-(
-    uid,
-    {РухТоварів_Обороти_TablePart.Період},
-    {РухТоварів_Обороти_TablePart.Номенклатура},
-    {РухТоварів_Обороти_TablePart.ХарактеристикаНоменклатури},
-    {РухТоварів_Обороти_TablePart.Склад},
-    {РухТоварів_Обороти_TablePart.КількістьПрихід},
-    {РухТоварів_Обороти_TablePart.КількістьРозхід}
-)
-SELECT
-    uuid_generate_v4(),
-    date_trunc('day', Рег_РухТоварів.period::timestamp) AS Період,
-    Рег_РухТоварів.{РухТоварів_Const.Номенклатура} AS Номенклатура,
-    Рег_РухТоварів.{РухТоварів_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
-    Рег_РухТоварів.{РухТоварів_Const.Склад} AS Склад,
-
-    /* Кількість */
-    SUM(CASE WHEN Рег_РухТоварів.income = true THEN 
-        Рег_РухТоварів.{РухТоварів_Const.Кількість} ELSE 0 END) AS КількістьПрихід,
-    SUM(CASE WHEN Рег_РухТоварів.income = false THEN 
-        Рег_РухТоварів.{РухТоварів_Const.Кількість} ELSE 0 END) AS КількістьРозхід
-
-FROM
-    {РухТоварів_Const.TABLE} AS Рег_РухТоварів
-
-WHERE
-    date_trunc('day', Рег_РухТоварів.period::timestamp) = @ПеріодДеньВідбір
-
-GROUP BY
-    Період, Номенклатура, ХарактеристикаНоменклатури, Склад
-
-HAVING
-
-    /* Кількість */
-    SUM(CASE WHEN Рег_РухТоварів.income = true THEN 
-        Рег_РухТоварів.{РухТоварів_Const.Кількість} ELSE 0 END) != 0 OR 
-    SUM(CASE WHEN Рег_РухТоварів.income = false THEN 
-        Рег_РухТоварів.{РухТоварів_Const.Кількість} ELSE 0 END) != 0 
-
-
-
-
-</Query>
-        </QueryBlock>
-      </QueryBlockList>
+      <TabularParts />
+      <QueryBlockList />
     </RegisterAccumulation>
     <RegisterAccumulation>
       <Name>ЗамовленняКлієнтів</Name>

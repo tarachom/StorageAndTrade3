@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 26.12.2022 06:03:31
+ * Дата конфігурації: 26.12.2022 19:56:05
  *
  */
 
@@ -17377,6 +17377,47 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
 
 namespace StorageAndTrade_1_0.РегістриНакопичення
 {  
+    /*  */
+    public static class VirtualTablesСalculation
+    {
+        public static void Execute(DateTime period, string regAccumName)
+        {
+            Dictionary<string, object> paramQuery = new Dictionary<string, object>();
+            paramQuery.Add("ПеріодДеньВідбір", period);
+
+            byte transactionID = Config.Kernel!.DataBase.BeginTransaction();
+            switch(regAccumName)
+            {
+            
+                case "ТовариНаСкладах":
+                {
+                    
+                    /* QueryBlock: Залишки */
+                        
+                    Config.Kernel!.DataBase.ExecuteSQL($@"DELETE FROM {ТовариНаСкладах_Залишки_TablePart.TABLE} WHERE {ТовариНаСкладах_Залишки_TablePart.TABLE}.{ТовариНаСкладах_Залишки_TablePart.Період} = @ПеріодДеньВідбір", paramQuery, transactionID);
+                        
+                    Config.Kernel!.DataBase.ExecuteSQL($@"INSERT INTO {ТовариНаСкладах_Залишки_TablePart.TABLE} ( uid, {ТовариНаСкладах_Залишки_TablePart.Період}, {ТовариНаСкладах_Залишки_TablePart.Номенклатура}, {ТовариНаСкладах_Залишки_TablePart.ХарактеристикаНоменклатури}, {ТовариНаСкладах_Залишки_TablePart.Склад}, {ТовариНаСкладах_Залишки_TablePart.Серія}, {ТовариНаСкладах_Залишки_TablePart.ВНаявності}, {ТовариНаСкладах_Залишки_TablePart.ДоВідвантаження} ) SELECT uuid_generate_v4(), date_trunc('day', Рег_ТовариНаСкладах.period::timestamp) AS Період, Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.Номенклатура} AS Номенклатура, Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури, Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.Склад} AS Склад, Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.Серія} AS Серія, /* ВНаявності */ SUM(CASE WHEN Рег_ТовариНаСкладах.income = true THEN Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE -Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} END) AS ВНаявності, /* ДоВідвантаження */ SUM(CASE WHEN Рег_ТовариНаСкладах.income = true THEN Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE -Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} END) AS ДоВідвантаження FROM {ТовариНаСкладах_Const.TABLE} AS Рег_ТовариНаСкладах WHERE date_trunc('day', Рег_ТовариНаСкладах.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, Номенклатура, ХарактеристикаНоменклатури, Склад, Серія HAVING /* ВНаявності */ SUM(CASE WHEN Рег_ТовариНаСкладах.income = true THEN Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE -Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} END) != 0 OR /* ДоВідвантаження */ SUM(CASE WHEN Рег_ТовариНаСкладах.income = true THEN Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE -Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} END) != 0", paramQuery, transactionID);
+                        
+                    /* QueryBlock: Обороти */
+                        
+                    Config.Kernel!.DataBase.ExecuteSQL($@"DELETE FROM {ТовариНаСкладах_Обороти_TablePart.TABLE} WHERE {ТовариНаСкладах_Обороти_TablePart.TABLE}.{ТовариНаСкладах_Обороти_TablePart.Період} = @ПеріодДеньВідбір", paramQuery, transactionID);
+                        
+                    Config.Kernel!.DataBase.ExecuteSQL($@"INSERT INTO {ТовариНаСкладах_Обороти_TablePart.TABLE} ( uid, {ТовариНаСкладах_Обороти_TablePart.Період}, {ТовариНаСкладах_Обороти_TablePart.Номенклатура}, {ТовариНаСкладах_Обороти_TablePart.ХарактеристикаНоменклатури}, {ТовариНаСкладах_Обороти_TablePart.Склад}, {ТовариНаСкладах_Обороти_TablePart.Серія}, {ТовариНаСкладах_Обороти_TablePart.ВНаявностіПрихід}, {ТовариНаСкладах_Обороти_TablePart.ВНаявностіРозхід}, {ТовариНаСкладах_Обороти_TablePart.ДоВідвантаженняПрихід}, {ТовариНаСкладах_Обороти_TablePart.ДоВідвантаженняРозхід} ) SELECT uuid_generate_v4(), date_trunc('day', Рег_ТовариНаСкладах.period::timestamp) AS Період, Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.Номенклатура} AS Номенклатура, Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури, Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.Склад} AS Склад, Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.Серія} AS Серія, /* ВНаявності */ SUM(CASE WHEN Рег_ТовариНаСкладах.income = true THEN Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE 0 END) AS ВНаявностіПрихід, SUM(CASE WHEN Рег_ТовариНаСкладах.income = false THEN Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE 0 END) AS ВНаявностіРозхід, /* ДоВідвантаження */ SUM(CASE WHEN Рег_ТовариНаСкладах.income = true THEN Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE 0 END) AS ДоВідвантаженняПрихід, SUM(CASE WHEN Рег_ТовариНаСкладах.income = false THEN Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE 0 END) AS ДоВідвантаженняРозхід FROM {ТовариНаСкладах_Const.TABLE} AS Рег_ТовариНаСкладах WHERE date_trunc('day', Рег_ТовариНаСкладах.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, Номенклатура, ХарактеристикаНоменклатури, Склад, Серія HAVING /* ВНаявності */ SUM(CASE WHEN Рег_ТовариНаСкладах.income = true THEN Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE 0 END) != 0 OR SUM(CASE WHEN Рег_ТовариНаСкладах.income = false THEN Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE 0 END) != 0 OR /* ДоВідвантаження */ SUM(CASE WHEN Рег_ТовариНаСкладах.income = true THEN Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE 0 END) != 0 OR SUM(CASE WHEN Рег_ТовариНаСкладах.income = false THEN Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE 0 END) != 0", paramQuery, transactionID);
+                        
+                    /* QueryBlock: ЗалишкиТаОбороти */
+                        
+                    Config.Kernel!.DataBase.ExecuteSQL($@"DELETE FROM {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.TABLE} WHERE {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.TABLE}.{ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.Період} = @ПеріодДеньВідбір", paramQuery, transactionID);
+                        
+                    Config.Kernel!.DataBase.ExecuteSQL($@"INSERT INTO {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.TABLE} ( uid, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.Період}, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.Номенклатура}, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.ХарактеристикаНоменклатури}, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.Склад}, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.Серія}, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.ВНаявностіПрихід}, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.ВНаявностіРозхід}, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.ВНаявностіЗалишок}, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.ДоВідвантаженняПрихід}, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.ДоВідвантаженняРозхід}, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.ДоВідвантаженняЗалишок} ) SELECT uuid_generate_v4(), date_trunc('day', Рег_ТовариНаСкладах.period::timestamp) AS Період, Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.Номенклатура} AS Номенклатура, Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури, Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.Склад} AS Склад, Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.Серія} AS Серія, /* ВНаявності */ SUM(CASE WHEN Рег_ТовариНаСкладах.income = true THEN Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE 0 END) AS ВНаявностіПрихід, SUM(CASE WHEN Рег_ТовариНаСкладах.income = false THEN Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE 0 END) AS ВНаявностіРозхід, SUM(CASE WHEN Рег_ТовариНаСкладах.income = true THEN Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE -Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} END) AS ВНаявностіЗалишок, /* ДоВідвантаження */ SUM(CASE WHEN Рег_ТовариНаСкладах.income = true THEN Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE 0 END) AS ДоВідвантаженняПрихід, SUM(CASE WHEN Рег_ТовариНаСкладах.income = false THEN Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE 0 END) AS ДоВідвантаженняРозхід, SUM(CASE WHEN Рег_ТовариНаСкладах.income = true THEN Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE -Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} END) AS ДоВідвантаженняЗалишок FROM {ТовариНаСкладах_Const.TABLE} AS Рег_ТовариНаСкладах WHERE date_trunc('day', Рег_ТовариНаСкладах.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, Номенклатура, ХарактеристикаНоменклатури, Склад, Серія HAVING /* ВНаявності */ SUM(CASE WHEN Рег_ТовариНаСкладах.income = true THEN Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE 0 END) != 0 OR SUM(CASE WHEN Рег_ТовариНаСкладах.income = false THEN Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE 0 END) != 0 OR SUM(CASE WHEN Рег_ТовариНаСкладах.income = true THEN Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE -Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} END) != 0 OR /* ДоВідвантаження */ SUM(CASE WHEN Рег_ТовариНаСкладах.income = true THEN Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE 0 END) != 0 OR SUM(CASE WHEN Рег_ТовариНаСкладах.income = false THEN Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE 0 END) != 0 OR SUM(CASE WHEN Рег_ТовариНаСкладах.income = true THEN Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE -Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} END) != 0", paramQuery, transactionID);
+                        
+                    break;
+                }
+                
+            }
+            Config.Kernel!.DataBase.CommitTransaction(transactionID);
+        }
+    }
+
     
     #region REGISTER "ТовариНаСкладах"
     
@@ -17434,6 +17475,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public void Save(DateTime period, Guid owner) 
         {
             base.BaseBeginTransaction();
+            base.BaseSelectPeriodForOwner(owner, period);
             base.BaseDelete(owner);
             foreach (Record record in Records)
             {
@@ -17455,6 +17497,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
 
         public void Delete(Guid owner)
         {
+            base.BaseSelectPeriodForOwner(owner);
             base.BaseDelete(owner);
         }
         
@@ -17803,7 +17846,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         }            
     }
     
-
     #endregion
   
     #region REGISTER "ТовариОрганізацій"
@@ -17858,6 +17900,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public void Save(DateTime period, Guid owner) 
         {
             base.BaseBeginTransaction();
+            base.BaseSelectPeriodForOwner(owner, period);
             base.BaseDelete(owner);
             foreach (Record record in Records)
             {
@@ -17877,6 +17920,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
 
         public void Delete(Guid owner)
         {
+            base.BaseSelectPeriodForOwner(owner);
             base.BaseDelete(owner);
         }
         
@@ -17900,7 +17944,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
     }
     
     
-
     #endregion
   
     #region REGISTER "РухТоварів"
@@ -17955,6 +17998,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public void Save(DateTime period, Guid owner) 
         {
             base.BaseBeginTransaction();
+            base.BaseSelectPeriodForOwner(owner, period);
             base.BaseDelete(owner);
             foreach (Record record in Records)
             {
@@ -17974,6 +18018,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
 
         public void Delete(Guid owner)
         {
+            base.BaseSelectPeriodForOwner(owner);
             base.BaseDelete(owner);
         }
         
@@ -17997,99 +18042,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
     }
     
     
-    public class РухТоварів_Обороти_TablePart : RegisterAccumulationTablePart
-    {
-        public РухТоварів_Обороти_TablePart() : base(Config.Kernel!, "tab_b31",
-              new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6" }) 
-        {
-            Records = new List<Record>();
-        }
-        
-        public const string TABLE = "tab_b31";
-        
-        public const string Період = "col_a1";
-        public const string Номенклатура = "col_a2";
-        public const string ХарактеристикаНоменклатури = "col_a3";
-        public const string Склад = "col_a4";
-        public const string КількістьПрихід = "col_a5";
-        public const string КількістьРозхід = "col_a6";
-        public List<Record> Records { get; set; }
-    
-        public void Read()
-        {
-            Records.Clear();
-            base.BaseRead();
-
-            foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
-            {
-                Record record = new Record();
-                record.UID = (Guid)fieldValue["uid"];
-                
-                record.Період = (fieldValue["col_a1"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a1"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
-                record.Номенклатура = new Довідники.Номенклатура_Pointer(fieldValue["col_a2"]);
-                record.ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer(fieldValue["col_a3"]);
-                record.Склад = new Довідники.Склади_Pointer(fieldValue["col_a4"]);
-                record.КількістьПрихід = (fieldValue["col_a5"] != DBNull.Value) ? (decimal)fieldValue["col_a5"] : 0;
-                record.КількістьРозхід = (fieldValue["col_a6"] != DBNull.Value) ? (decimal)fieldValue["col_a6"] : 0;
-                
-                Records.Add(record);
-            }
-        
-            base.BaseClear();
-        }
-    
-        public void Save(bool clear_all_before_save /*= true*/) 
-        {
-            base.BaseBeginTransaction();
-            
-            if (clear_all_before_save)
-                base.BaseDelete();
-
-            foreach (Record record in Records)
-            {
-                Dictionary<string, object> fieldValue = new Dictionary<string, object>();
-
-                fieldValue.Add("col_a1", record.Період);
-                fieldValue.Add("col_a2", record.Номенклатура.UnigueID.UGuid);
-                fieldValue.Add("col_a3", record.ХарактеристикаНоменклатури.UnigueID.UGuid);
-                fieldValue.Add("col_a4", record.Склад.UnigueID.UGuid);
-                fieldValue.Add("col_a5", record.КількістьПрихід);
-                fieldValue.Add("col_a6", record.КількістьРозхід);
-                
-                base.BaseSave(record.UID, fieldValue);
-            }
-            
-            base.BaseCommitTransaction();
-        }
-    
-        public void Delete()
-        {
-            base.BaseDelete();
-        }
-        
-        public class Record : RegisterAccumulationTablePartRecord
-        {
-            public Record()
-            {
-                Період = DateTime.MinValue;
-                Номенклатура = new Довідники.Номенклатура_Pointer();
-                ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer();
-                Склад = new Довідники.Склади_Pointer();
-                КількістьПрихід = 0;
-                КількістьРозхід = 0;
-                
-            }
-            public DateTime Період { get; set; }
-            public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
-            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; }
-            public Довідники.Склади_Pointer Склад { get; set; }
-            public decimal КількістьПрихід { get; set; }
-            public decimal КількістьРозхід { get; set; }
-            
-        }            
-    }
-    
-
     #endregion
   
     #region REGISTER "ЗамовленняКлієнтів"
@@ -18148,6 +18100,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public void Save(DateTime period, Guid owner) 
         {
             base.BaseBeginTransaction();
+            base.BaseSelectPeriodForOwner(owner, period);
             base.BaseDelete(owner);
             foreach (Record record in Records)
             {
@@ -18169,6 +18122,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
 
         public void Delete(Guid owner)
         {
+            base.BaseSelectPeriodForOwner(owner);
             base.BaseDelete(owner);
         }
         
@@ -18196,7 +18150,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
     }
     
     
-
     #endregion
   
     #region REGISTER "РозрахункиЗКлієнтами"
@@ -18249,6 +18202,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public void Save(DateTime period, Guid owner) 
         {
             base.BaseBeginTransaction();
+            base.BaseSelectPeriodForOwner(owner, period);
             base.BaseDelete(owner);
             foreach (Record record in Records)
             {
@@ -18267,6 +18221,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
 
         public void Delete(Guid owner)
         {
+            base.BaseSelectPeriodForOwner(owner);
             base.BaseDelete(owner);
         }
         
@@ -18288,7 +18243,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
     }
     
     
-
     #endregion
   
     #region REGISTER "Закупівлі"
@@ -18349,6 +18303,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public void Save(DateTime period, Guid owner) 
         {
             base.BaseBeginTransaction();
+            base.BaseSelectPeriodForOwner(owner, period);
             base.BaseDelete(owner);
             foreach (Record record in Records)
             {
@@ -18371,6 +18326,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
 
         public void Delete(Guid owner)
         {
+            base.BaseSelectPeriodForOwner(owner);
             base.BaseDelete(owner);
         }
         
@@ -18400,7 +18356,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
     }
     
     
-
     #endregion
   
     #region REGISTER "ВільніЗалишки"
@@ -18461,6 +18416,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public void Save(DateTime period, Guid owner) 
         {
             base.BaseBeginTransaction();
+            base.BaseSelectPeriodForOwner(owner, period);
             base.BaseDelete(owner);
             foreach (Record record in Records)
             {
@@ -18483,6 +18439,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
 
         public void Delete(Guid owner)
         {
+            base.BaseSelectPeriodForOwner(owner);
             base.BaseDelete(owner);
         }
         
@@ -18512,7 +18469,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
     }
     
     
-
     #endregion
   
     #region REGISTER "ЗамовленняПостачальникам"
@@ -18569,6 +18525,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public void Save(DateTime period, Guid owner) 
         {
             base.BaseBeginTransaction();
+            base.BaseSelectPeriodForOwner(owner, period);
             base.BaseDelete(owner);
             foreach (Record record in Records)
             {
@@ -18589,6 +18546,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
 
         public void Delete(Guid owner)
         {
+            base.BaseSelectPeriodForOwner(owner);
             base.BaseDelete(owner);
         }
         
@@ -18614,7 +18572,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
     }
     
     
-
     #endregion
   
     #region REGISTER "РозрахункиЗПостачальниками"
@@ -18667,6 +18624,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public void Save(DateTime period, Guid owner) 
         {
             base.BaseBeginTransaction();
+            base.BaseSelectPeriodForOwner(owner, period);
             base.BaseDelete(owner);
             foreach (Record record in Records)
             {
@@ -18685,6 +18643,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
 
         public void Delete(Guid owner)
         {
+            base.BaseSelectPeriodForOwner(owner);
             base.BaseDelete(owner);
         }
         
@@ -18706,7 +18665,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
     }
     
     
-
     #endregion
   
     #region REGISTER "ТовариДоПоступлення"
@@ -18761,6 +18719,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public void Save(DateTime period, Guid owner) 
         {
             base.BaseBeginTransaction();
+            base.BaseSelectPeriodForOwner(owner, period);
             base.BaseDelete(owner);
             foreach (Record record in Records)
             {
@@ -18780,6 +18739,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
 
         public void Delete(Guid owner)
         {
+            base.BaseSelectPeriodForOwner(owner);
             base.BaseDelete(owner);
         }
         
@@ -18803,7 +18763,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
     }
     
     
-
     #endregion
   
     #region REGISTER "РухКоштів"
@@ -18858,6 +18817,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public void Save(DateTime period, Guid owner) 
         {
             base.BaseBeginTransaction();
+            base.BaseSelectPeriodForOwner(owner, period);
             base.BaseDelete(owner);
             foreach (Record record in Records)
             {
@@ -18877,6 +18837,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
 
         public void Delete(Guid owner)
         {
+            base.BaseSelectPeriodForOwner(owner);
             base.BaseDelete(owner);
         }
         
@@ -18900,7 +18861,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
     }
     
     
-
     #endregion
   
     #region REGISTER "ПартіїТоварів"
@@ -18965,6 +18925,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public void Save(DateTime period, Guid owner) 
         {
             base.BaseBeginTransaction();
+            base.BaseSelectPeriodForOwner(owner, period);
             base.BaseDelete(owner);
             foreach (Record record in Records)
             {
@@ -18989,6 +18950,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
 
         public void Delete(Guid owner)
         {
+            base.BaseSelectPeriodForOwner(owner);
             base.BaseDelete(owner);
         }
         
@@ -19022,7 +18984,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
     }
     
     
-
     #endregion
   
     #region REGISTER "ТовариДоВідвантаження"
@@ -19079,6 +19040,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public void Save(DateTime period, Guid owner) 
         {
             base.BaseBeginTransaction();
+            base.BaseSelectPeriodForOwner(owner, period);
             base.BaseDelete(owner);
             foreach (Record record in Records)
             {
@@ -19099,6 +19061,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
 
         public void Delete(Guid owner)
         {
+            base.BaseSelectPeriodForOwner(owner);
             base.BaseDelete(owner);
         }
         
@@ -19124,7 +19087,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
     }
     
     
-
     #endregion
   
     #region REGISTER "ДоходиТаСобівартістьПродажів"
@@ -19197,6 +19159,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public void Save(DateTime period, Guid owner) 
         {
             base.BaseBeginTransaction();
+            base.BaseSelectPeriodForOwner(owner, period);
             base.BaseDelete(owner);
             foreach (Record record in Records)
             {
@@ -19225,6 +19188,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
 
         public void Delete(Guid owner)
         {
+            base.BaseSelectPeriodForOwner(owner);
             base.BaseDelete(owner);
         }
         
@@ -19266,63 +19230,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
     }
     
     
-
     #endregion
   
-}
-
-namespace StorageAndTrade_1_0.РегістриНакопичення.Розрахунок
-{
-    public static class Service
-    {
-        public static void Execute(DateTime period, string regAccumName)
-        {
-            Dictionary<string, object> paramQuery = new Dictionary<string, object>();
-            paramQuery.Add("ПеріодДеньВідбір", period);
-
-            byte transactionID = Config.Kernel!.DataBase.BeginTransaction();
-            switch(regAccumName)
-            {
-            
-                case "ТовариНаСкладах":
-                {
-                    
-                    /* QueryBlock: Залишки */
-                        
-                    Config.Kernel!.DataBase.ExecuteSQL($@"DELETE FROM {ТовариНаСкладах_Залишки_TablePart.TABLE} WHERE {ТовариНаСкладах_Залишки_TablePart.TABLE}.Період = @ПеріодДеньВідбір", paramQuery);
-                        
-                    Config.Kernel!.DataBase.ExecuteSQL($@"INSERT INTO {ТовариНаСкладах_Залишки_TablePart.TABLE} ( uid, {ТовариНаСкладах_Залишки_TablePart.Період}, {ТовариНаСкладах_Залишки_TablePart.Номенклатура}, {ТовариНаСкладах_Залишки_TablePart.ХарактеристикаНоменклатури}, {ТовариНаСкладах_Залишки_TablePart.Склад}, {ТовариНаСкладах_Залишки_TablePart.Серія}, {ТовариНаСкладах_Залишки_TablePart.ВНаявності}, {ТовариНаСкладах_Залишки_TablePart.ДоВідвантаження} ) SELECT uuid_generate_v4(), date_trunc('day', Рег_ТовариНаСкладах.period::timestamp) AS Період, Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.Номенклатура} AS Номенклатура, Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури, Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.Склад} AS Склад, Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.Серія} AS Серія, /* ВНаявності */ SUM(CASE WHEN Рег_ТовариНаСкладах.income = true THEN Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE -Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} END) AS ВНаявності, /* ДоВідвантаження */ SUM(CASE WHEN Рег_ТовариНаСкладах.income = true THEN Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE -Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} END) AS ДоВідвантаження FROM {ТовариНаСкладах_Const.TABLE} AS Рег_ТовариНаСкладах WHERE date_trunc('day', Рег_ТовариНаСкладах.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, Номенклатура, ХарактеристикаНоменклатури, Склад, Серія HAVING /* ВНаявності */ SUM(CASE WHEN Рег_ТовариНаСкладах.income = true THEN Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE -Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} END) != 0 OR /* ДоВідвантаження */ SUM(CASE WHEN Рег_ТовариНаСкладах.income = true THEN Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE -Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} END) != 0", paramQuery);
-                        
-                    /* QueryBlock: Обороти */
-                        
-                    Config.Kernel!.DataBase.ExecuteSQL($@"DELETE FROM {ТовариНаСкладах_Обороти_TablePart.TABLE} WHERE {ТовариНаСкладах_Обороти_TablePart.TABLE}.Період = @ПеріодДеньВідбір", paramQuery);
-                        
-                    Config.Kernel!.DataBase.ExecuteSQL($@"INSERT INTO {ТовариНаСкладах_Обороти_TablePart.TABLE} ( uid, {ТовариНаСкладах_Обороти_TablePart.Період}, {ТовариНаСкладах_Обороти_TablePart.Номенклатура}, {ТовариНаСкладах_Обороти_TablePart.ХарактеристикаНоменклатури}, {ТовариНаСкладах_Обороти_TablePart.Склад}, {ТовариНаСкладах_Обороти_TablePart.Серія}, {ТовариНаСкладах_Обороти_TablePart.ВНаявностіПрихід}, {ТовариНаСкладах_Обороти_TablePart.ВНаявностіРозхід}, {ТовариНаСкладах_Обороти_TablePart.ДоВідвантаженняПрихід}, {ТовариНаСкладах_Обороти_TablePart.ДоВідвантаженняРозхід} ) SELECT uuid_generate_v4(), date_trunc('day', Рег_ТовариНаСкладах.period::timestamp) AS Період, Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.Номенклатура} AS Номенклатура, Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури, Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.Склад} AS Склад, Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.Серія} AS Серія, /* ВНаявності */ SUM(CASE WHEN Рег_ТовариНаСкладах.income = true THEN Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE 0 END) AS ВНаявностіПрихід, SUM(CASE WHEN Рег_ТовариНаСкладах.income = false THEN Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE 0 END) AS ВНаявностіРозхід, /* ДоВідвантаження */ SUM(CASE WHEN Рег_ТовариНаСкладах.income = true THEN Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE 0 END) AS ДоВідвантаженняПрихід, SUM(CASE WHEN Рег_ТовариНаСкладах.income = false THEN Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE 0 END) AS ДоВідвантаженняРозхід FROM {ТовариНаСкладах_Const.TABLE} AS Рег_ТовариНаСкладах WHERE date_trunc('day', Рег_ТовариНаСкладах.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, Номенклатура, ХарактеристикаНоменклатури, Склад, Серія HAVING /* ВНаявності */ SUM(CASE WHEN Рег_ТовариНаСкладах.income = true THEN Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE 0 END) != 0 OR SUM(CASE WHEN Рег_ТовариНаСкладах.income = false THEN Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE 0 END) != 0 OR /* ДоВідвантаження */ SUM(CASE WHEN Рег_ТовариНаСкладах.income = true THEN Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE 0 END) != 0 OR SUM(CASE WHEN Рег_ТовариНаСкладах.income = false THEN Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE 0 END) != 0", paramQuery);
-                        
-                    /* QueryBlock: ЗалишкиТаОбороти */
-                        
-                    Config.Kernel!.DataBase.ExecuteSQL($@"DELETE FROM {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.TABLE} WHERE {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.TABLE}.Період = @ПеріодДеньВідбір", paramQuery);
-                        
-                    Config.Kernel!.DataBase.ExecuteSQL($@"INSERT INTO {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.TABLE} ( uid, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.Період}, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.Номенклатура}, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.ХарактеристикаНоменклатури}, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.Склад}, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.Серія}, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.ВНаявностіПрихід}, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.ВНаявностіРозхід}, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.ВНаявностіЗалишок}, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.ДоВідвантаженняПрихід}, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.ДоВідвантаженняРозхід}, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.ДоВідвантаженняЗалишок} ) SELECT uuid_generate_v4(), date_trunc('day', Рег_ТовариНаСкладах.period::timestamp) AS Період, Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.Номенклатура} AS Номенклатура, Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури, Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.Склад} AS Склад, Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.Серія} AS Серія, /* ВНаявності */ SUM(CASE WHEN Рег_ТовариНаСкладах.income = true THEN Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE 0 END) AS ВНаявностіПрихід, SUM(CASE WHEN Рег_ТовариНаСкладах.income = false THEN Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE 0 END) AS ВНаявностіРозхід, SUM(CASE WHEN Рег_ТовариНаСкладах.income = true THEN Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE -Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} END) AS ВНаявностіЗалишок, /* ДоВідвантаження */ SUM(CASE WHEN Рег_ТовариНаСкладах.income = true THEN Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE 0 END) AS ДоВідвантаженняПрихід, SUM(CASE WHEN Рег_ТовариНаСкладах.income = false THEN Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE 0 END) AS ДоВідвантаженняРозхід, SUM(CASE WHEN Рег_ТовариНаСкладах.income = true THEN Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE -Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} END) AS ДоВідвантаженняЗалишок FROM {ТовариНаСкладах_Const.TABLE} AS Рег_ТовариНаСкладах WHERE date_trunc('day', Рег_ТовариНаСкладах.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, Номенклатура, ХарактеристикаНоменклатури, Склад, Серія HAVING /* ВНаявності */ SUM(CASE WHEN Рег_ТовариНаСкладах.income = true THEN Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE 0 END) != 0 OR SUM(CASE WHEN Рег_ТовариНаСкладах.income = false THEN Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE 0 END) != 0 OR SUM(CASE WHEN Рег_ТовариНаСкладах.income = true THEN Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE -Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} END) != 0 OR /* ДоВідвантаження */ SUM(CASE WHEN Рег_ТовариНаСкладах.income = true THEN Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE 0 END) != 0 OR SUM(CASE WHEN Рег_ТовариНаСкладах.income = false THEN Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE 0 END) != 0 OR SUM(CASE WHEN Рег_ТовариНаСкладах.income = true THEN Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE -Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} END) != 0", paramQuery);
-                        
-                    break;
-                }
-                
-                case "РухТоварів":
-                {
-                    
-                    /* QueryBlock: Обороти */
-                        
-                    Config.Kernel!.DataBase.ExecuteSQL($@"DELETE FROM {РухТоварів_Обороти_TablePart.TABLE} WHERE {РухТоварів_Обороти_TablePart.TABLE}.Період = @ПеріодДеньВідбір", paramQuery);
-                        
-                    Config.Kernel!.DataBase.ExecuteSQL($@"INSERT INTO {РухТоварів_Обороти_TablePart.TABLE} ( uid, {РухТоварів_Обороти_TablePart.Період}, {РухТоварів_Обороти_TablePart.Номенклатура}, {РухТоварів_Обороти_TablePart.ХарактеристикаНоменклатури}, {РухТоварів_Обороти_TablePart.Склад}, {РухТоварів_Обороти_TablePart.КількістьПрихід}, {РухТоварів_Обороти_TablePart.КількістьРозхід} ) SELECT uuid_generate_v4(), date_trunc('day', Рег_РухТоварів.period::timestamp) AS Період, Рег_РухТоварів.{РухТоварів_Const.Номенклатура} AS Номенклатура, Рег_РухТоварів.{РухТоварів_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури, Рег_РухТоварів.{РухТоварів_Const.Склад} AS Склад, /* Кількість */ SUM(CASE WHEN Рег_РухТоварів.income = true THEN Рег_РухТоварів.{РухТоварів_Const.Кількість} ELSE 0 END) AS КількістьПрихід, SUM(CASE WHEN Рег_РухТоварів.income = false THEN Рег_РухТоварів.{РухТоварів_Const.Кількість} ELSE 0 END) AS КількістьРозхід FROM {РухТоварів_Const.TABLE} AS Рег_РухТоварів WHERE date_trunc('day', Рег_РухТоварів.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, Номенклатура, ХарактеристикаНоменклатури, Склад HAVING /* Кількість */ SUM(CASE WHEN Рег_РухТоварів.income = true THEN Рег_РухТоварів.{РухТоварів_Const.Кількість} ELSE 0 END) != 0 OR SUM(CASE WHEN Рег_РухТоварів.income = false THEN Рег_РухТоварів.{РухТоварів_Const.Кількість} ELSE 0 END) != 0", paramQuery);
-                        
-                    break;
-                }
-                
-            }
-            Config.Kernel!.DataBase.CommitTransaction(transactionID);
-        }
-    }
 }
   
