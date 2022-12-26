@@ -25,7 +25,7 @@ namespace StorageAndTrade
         {
             int counter = 0;
 
-            Service.CalculationBalances.ПідключитиДодаток_UUID_OSSP();
+            //Service.CalculationBalances.ПідключитиДодаток_UUID_OSSP();
 
             while (!Program.CancellationTokenBackgroundTask!.IsCancellationRequested)
             {

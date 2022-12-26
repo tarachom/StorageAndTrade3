@@ -5,7 +5,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>26.12.2022 19:56:05</DateTimeSave>
+  <DateTimeSave>26.12.2022 20:50:24</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -14477,8 +14477,486 @@ HAVING
         <Name>ЗамовленняКлієнта</Name>
         <Name>РеалізаціяТоварівТаПослуг</Name>
       </AllowDocumentSpend>
-      <TabularParts />
-      <QueryBlockList />
+      <TabularParts>
+        <TablePart>
+          <Name>Залишки</Name>
+          <Table>tab_b31</Table>
+          <Desc>Віртуальна таблиця</Desc>
+          <Fields>
+            <Field>
+              <Name>Період</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>date</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>ЗамовленняКлієнта</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Документи.ЗамовленняКлієнта</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Номенклатура</Name>
+              <NameInTable>col_a3</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Номенклатура</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>ХарактеристикаНоменклатури</Name>
+              <NameInTable>col_a4</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Склад</Name>
+              <NameInTable>col_a5</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Склади</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Замовлено</Name>
+              <NameInTable>col_a6</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+            <Field>
+              <Name>Сума</Name>
+              <NameInTable>col_a7</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+          </Fields>
+        </TablePart>
+        <TablePart>
+          <Name>Обороти</Name>
+          <Table>tab_b32</Table>
+          <Desc>Віртуальна таблиця</Desc>
+          <Fields>
+            <Field>
+              <Name>Період</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>date</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>ЗамовленняКлієнта</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Документи.ЗамовленняКлієнта</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Номенклатура</Name>
+              <NameInTable>col_a3</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Номенклатура</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>ХарактеристикаНоменклатури</Name>
+              <NameInTable>col_a4</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Склад</Name>
+              <NameInTable>col_a5</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Склади</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>ЗамовленоПрихід</Name>
+              <NameInTable>col_a6</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+            <Field>
+              <Name>ЗамовленоРозхід</Name>
+              <NameInTable>col_a7</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+            <Field>
+              <Name>СумаПрихід</Name>
+              <NameInTable>col_a8</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+            <Field>
+              <Name>СумаРозхід</Name>
+              <NameInTable>col_a9</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+          </Fields>
+        </TablePart>
+        <TablePart>
+          <Name>ЗалишкиТаОбороти</Name>
+          <Table>tab_b33</Table>
+          <Desc>Віртуальна таблиця</Desc>
+          <Fields>
+            <Field>
+              <Name>Період</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>date</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>ЗамовленняКлієнта</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Документи.ЗамовленняКлієнта</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Номенклатура</Name>
+              <NameInTable>col_a3</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Номенклатура</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>ХарактеристикаНоменклатури</Name>
+              <NameInTable>col_a4</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Склад</Name>
+              <NameInTable>col_a5</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Склади</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>ЗамовленоПрихід</Name>
+              <NameInTable>col_a6</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+            <Field>
+              <Name>ЗамовленоРозхід</Name>
+              <NameInTable>col_a7</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+            <Field>
+              <Name>ЗамовленоЗалишок</Name>
+              <NameInTable>col_a8</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+            <Field>
+              <Name>СумаПрихід</Name>
+              <NameInTable>col_a9</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+            <Field>
+              <Name>СумаРозхід</Name>
+              <NameInTable>col_b1</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+            <Field>
+              <Name>СумаЗалишок</Name>
+              <NameInTable>col_b2</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+          </Fields>
+        </TablePart>
+      </TabularParts>
+      <QueryBlockList>
+        <QueryBlock>
+          <Name>Залишки</Name>
+          <Query position="0" key="DELETE">
+DELETE FROM 
+    {ЗамовленняКлієнтів_Залишки_TablePart.TABLE}
+WHERE 
+    {ЗамовленняКлієнтів_Залишки_TablePart.TABLE}.{ЗамовленняКлієнтів_Залишки_TablePart.Період} = @ПеріодДеньВідбір
+</Query>
+          <Query position="1" key="SELECT">
+INSERT INTO 
+    {ЗамовленняКлієнтів_Залишки_TablePart.TABLE} 
+(
+    uid,
+    {ЗамовленняКлієнтів_Залишки_TablePart.Період},
+    {ЗамовленняКлієнтів_Залишки_TablePart.ЗамовленняКлієнта},
+    {ЗамовленняКлієнтів_Залишки_TablePart.Номенклатура},
+    {ЗамовленняКлієнтів_Залишки_TablePart.ХарактеристикаНоменклатури},
+    {ЗамовленняКлієнтів_Залишки_TablePart.Склад},
+    {ЗамовленняКлієнтів_Залишки_TablePart.Замовлено},
+    {ЗамовленняКлієнтів_Залишки_TablePart.Сума}
+)
+SELECT
+    uuid_generate_v4(),
+    date_trunc('day', Рег_ЗамовленняКлієнтів.period::timestamp) AS Період,
+    Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.ЗамовленняКлієнта} AS ЗамовленняКлієнта,
+    Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Номенклатура} AS Номенклатура,
+    Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
+    Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Склад} AS Склад,
+
+    /* Замовлено */
+    SUM(CASE WHEN Рег_ЗамовленняКлієнтів.income = true THEN 
+        Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Замовлено} ELSE 
+        -Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Замовлено} END) AS Замовлено,
+
+    /* Сума */
+    SUM(CASE WHEN Рег_ЗамовленняКлієнтів.income = true THEN 
+        Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Сума} ELSE 
+        -Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Сума} END) AS Сума
+
+FROM
+    {ЗамовленняКлієнтів_Const.TABLE} AS Рег_ЗамовленняКлієнтів
+
+WHERE
+    date_trunc('day', Рег_ЗамовленняКлієнтів.period::timestamp) = @ПеріодДеньВідбір
+
+GROUP BY
+    Період, ЗамовленняКлієнта, Номенклатура, ХарактеристикаНоменклатури, Склад
+
+HAVING
+
+    /* Замовлено */
+    SUM(CASE WHEN Рег_ЗамовленняКлієнтів.income = true THEN 
+        Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Замовлено} ELSE 
+        -Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Замовлено} END) != 0 
+ OR 
+
+
+    /* Сума */
+    SUM(CASE WHEN Рег_ЗамовленняКлієнтів.income = true THEN 
+        Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Сума} ELSE 
+        -Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Сума} END) != 0 
+
+
+
+
+</Query>
+        </QueryBlock>
+        <QueryBlock>
+          <Name>Обороти</Name>
+          <Query position="0" key="DELETE">
+DELETE FROM 
+    {ЗамовленняКлієнтів_Обороти_TablePart.TABLE}
+WHERE 
+    {ЗамовленняКлієнтів_Обороти_TablePart.TABLE}.{ЗамовленняКлієнтів_Обороти_TablePart.Період} = @ПеріодДеньВідбір
+</Query>
+          <Query position="1" key="SELECT">
+INSERT INTO 
+    {ЗамовленняКлієнтів_Обороти_TablePart.TABLE} 
+(
+    uid,
+    {ЗамовленняКлієнтів_Обороти_TablePart.Період},
+    {ЗамовленняКлієнтів_Обороти_TablePart.ЗамовленняКлієнта},
+    {ЗамовленняКлієнтів_Обороти_TablePart.Номенклатура},
+    {ЗамовленняКлієнтів_Обороти_TablePart.ХарактеристикаНоменклатури},
+    {ЗамовленняКлієнтів_Обороти_TablePart.Склад},
+    {ЗамовленняКлієнтів_Обороти_TablePart.ЗамовленоПрихід},
+    {ЗамовленняКлієнтів_Обороти_TablePart.ЗамовленоРозхід},
+    {ЗамовленняКлієнтів_Обороти_TablePart.СумаПрихід},
+    {ЗамовленняКлієнтів_Обороти_TablePart.СумаРозхід}
+)
+SELECT
+    uuid_generate_v4(),
+    date_trunc('day', Рег_ЗамовленняКлієнтів.period::timestamp) AS Період,
+    Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.ЗамовленняКлієнта} AS ЗамовленняКлієнта,
+    Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Номенклатура} AS Номенклатура,
+    Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
+    Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Склад} AS Склад,
+
+    /* Замовлено */
+    SUM(CASE WHEN Рег_ЗамовленняКлієнтів.income = true THEN 
+        Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Замовлено} ELSE 0 END) AS ЗамовленоПрихід,
+    SUM(CASE WHEN Рег_ЗамовленняКлієнтів.income = false THEN 
+        Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Замовлено} ELSE 0 END) AS ЗамовленоРозхід,
+
+    /* Сума */
+    SUM(CASE WHEN Рег_ЗамовленняКлієнтів.income = true THEN 
+        Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Сума} ELSE 0 END) AS СумаПрихід,
+    SUM(CASE WHEN Рег_ЗамовленняКлієнтів.income = false THEN 
+        Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Сума} ELSE 0 END) AS СумаРозхід
+
+FROM
+    {ЗамовленняКлієнтів_Const.TABLE} AS Рег_ЗамовленняКлієнтів
+
+WHERE
+    date_trunc('day', Рег_ЗамовленняКлієнтів.period::timestamp) = @ПеріодДеньВідбір
+
+GROUP BY
+    Період, ЗамовленняКлієнта, Номенклатура, ХарактеристикаНоменклатури, Склад
+
+HAVING
+
+    /* Замовлено */
+    SUM(CASE WHEN Рег_ЗамовленняКлієнтів.income = true THEN 
+        Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Замовлено} ELSE 0 END) != 0 OR 
+    SUM(CASE WHEN Рег_ЗамовленняКлієнтів.income = false THEN 
+        Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Замовлено} ELSE 0 END) != 0 
+ OR 
+
+
+    /* Сума */
+    SUM(CASE WHEN Рег_ЗамовленняКлієнтів.income = true THEN 
+        Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Сума} ELSE 0 END) != 0 OR 
+    SUM(CASE WHEN Рег_ЗамовленняКлієнтів.income = false THEN 
+        Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Сума} ELSE 0 END) != 0 
+
+
+
+
+</Query>
+        </QueryBlock>
+        <QueryBlock>
+          <Name>ЗалишкиТаОбороти</Name>
+          <Query position="0" key="DELETE">
+DELETE FROM 
+    {ЗамовленняКлієнтів_ЗалишкиТаОбороти_TablePart.TABLE}
+WHERE 
+    {ЗамовленняКлієнтів_ЗалишкиТаОбороти_TablePart.TABLE}.{ЗамовленняКлієнтів_ЗалишкиТаОбороти_TablePart.Період} = @ПеріодДеньВідбір
+</Query>
+          <Query position="1" key="SELECT">
+INSERT INTO 
+    {ЗамовленняКлієнтів_ЗалишкиТаОбороти_TablePart.TABLE} 
+(
+    uid,
+    {ЗамовленняКлієнтів_ЗалишкиТаОбороти_TablePart.Період},
+    {ЗамовленняКлієнтів_ЗалишкиТаОбороти_TablePart.ЗамовленняКлієнта},
+    {ЗамовленняКлієнтів_ЗалишкиТаОбороти_TablePart.Номенклатура},
+    {ЗамовленняКлієнтів_ЗалишкиТаОбороти_TablePart.ХарактеристикаНоменклатури},
+    {ЗамовленняКлієнтів_ЗалишкиТаОбороти_TablePart.Склад},
+    {ЗамовленняКлієнтів_ЗалишкиТаОбороти_TablePart.ЗамовленоПрихід},
+    {ЗамовленняКлієнтів_ЗалишкиТаОбороти_TablePart.ЗамовленоРозхід},
+    {ЗамовленняКлієнтів_ЗалишкиТаОбороти_TablePart.ЗамовленоЗалишок},
+    {ЗамовленняКлієнтів_ЗалишкиТаОбороти_TablePart.СумаПрихід},
+    {ЗамовленняКлієнтів_ЗалишкиТаОбороти_TablePart.СумаРозхід},
+    {ЗамовленняКлієнтів_ЗалишкиТаОбороти_TablePart.СумаЗалишок}
+)
+SELECT
+    uuid_generate_v4(),
+    date_trunc('day', Рег_ЗамовленняКлієнтів.period::timestamp) AS Період,
+    Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.ЗамовленняКлієнта} AS ЗамовленняКлієнта,
+    Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Номенклатура} AS Номенклатура,
+    Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
+    Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Склад} AS Склад,
+
+    /* Замовлено */
+    SUM(CASE WHEN Рег_ЗамовленняКлієнтів.income = true THEN 
+        Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Замовлено} ELSE 0 END) AS ЗамовленоПрихід,
+    SUM(CASE WHEN Рег_ЗамовленняКлієнтів.income = false THEN 
+        Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Замовлено} ELSE 0 END) AS ЗамовленоРозхід,
+    SUM(CASE WHEN Рег_ЗамовленняКлієнтів.income = true THEN 
+        Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Замовлено} ELSE 
+        -Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Замовлено} END) AS ЗамовленоЗалишок,
+
+    /* Сума */
+    SUM(CASE WHEN Рег_ЗамовленняКлієнтів.income = true THEN 
+        Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Сума} ELSE 0 END) AS СумаПрихід,
+    SUM(CASE WHEN Рег_ЗамовленняКлієнтів.income = false THEN 
+        Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Сума} ELSE 0 END) AS СумаРозхід,
+    SUM(CASE WHEN Рег_ЗамовленняКлієнтів.income = true THEN 
+        Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Сума} ELSE 
+        -Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Сума} END) AS СумаЗалишок
+
+FROM
+    {ЗамовленняКлієнтів_Const.TABLE} AS Рег_ЗамовленняКлієнтів
+
+WHERE
+    date_trunc('day', Рег_ЗамовленняКлієнтів.period::timestamp) = @ПеріодДеньВідбір
+
+GROUP BY
+    Період, ЗамовленняКлієнта, Номенклатура, ХарактеристикаНоменклатури, Склад
+
+HAVING
+
+    /* Замовлено */
+    SUM(CASE WHEN Рег_ЗамовленняКлієнтів.income = true THEN 
+        Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Замовлено} ELSE 0 END) != 0 OR 
+    SUM(CASE WHEN Рег_ЗамовленняКлієнтів.income = false THEN 
+        Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Замовлено} ELSE 0 END) != 0 OR
+    SUM(CASE WHEN Рег_ЗамовленняКлієнтів.income = true THEN 
+        Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Замовлено} ELSE 
+        -Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Замовлено} END) != 0 
+ OR 
+
+
+    /* Сума */
+    SUM(CASE WHEN Рег_ЗамовленняКлієнтів.income = true THEN 
+        Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Сума} ELSE 0 END) != 0 OR 
+    SUM(CASE WHEN Рег_ЗамовленняКлієнтів.income = false THEN 
+        Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Сума} ELSE 0 END) != 0 OR
+    SUM(CASE WHEN Рег_ЗамовленняКлієнтів.income = true THEN 
+        Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Сума} ELSE 
+        -Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Сума} END) != 0 
+
+
+
+
+</Query>
+        </QueryBlock>
+      </QueryBlockList>
     </RegisterAccumulation>
     <RegisterAccumulation>
       <Name>РозрахункиЗКлієнтами</Name>
@@ -14530,8 +15008,320 @@ HAVING
         <Name>ПоверненняТоварівВідКлієнта</Name>
         <Name>АктВиконанихРобіт</Name>
       </AllowDocumentSpend>
-      <TabularParts />
-      <QueryBlockList />
+      <TabularParts>
+        <TablePart>
+          <Name>Залишки</Name>
+          <Table>tab_b34</Table>
+          <Desc>Віртуальна таблиця</Desc>
+          <Fields>
+            <Field>
+              <Name>Період</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>date</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Валюта</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Валюти</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Контрагент</Name>
+              <NameInTable>col_a3</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Контрагенти</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Сума</Name>
+              <NameInTable>col_a4</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+          </Fields>
+        </TablePart>
+        <TablePart>
+          <Name>Обороти</Name>
+          <Table>tab_b35</Table>
+          <Desc>Віртуальна таблиця</Desc>
+          <Fields>
+            <Field>
+              <Name>Період</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>date</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Валюта</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Валюти</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Контрагент</Name>
+              <NameInTable>col_a3</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Контрагенти</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>СумаПрихід</Name>
+              <NameInTable>col_a4</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+            <Field>
+              <Name>СумаРозхід</Name>
+              <NameInTable>col_a5</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+          </Fields>
+        </TablePart>
+        <TablePart>
+          <Name>ЗалишкиТаОбороти</Name>
+          <Table>tab_b36</Table>
+          <Desc>Віртуальна таблиця</Desc>
+          <Fields>
+            <Field>
+              <Name>Період</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>date</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Валюта</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Валюти</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Контрагент</Name>
+              <NameInTable>col_a3</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Контрагенти</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>СумаПрихід</Name>
+              <NameInTable>col_a4</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+            <Field>
+              <Name>СумаРозхід</Name>
+              <NameInTable>col_a5</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+            <Field>
+              <Name>СумаЗалишок</Name>
+              <NameInTable>col_a6</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+          </Fields>
+        </TablePart>
+      </TabularParts>
+      <QueryBlockList>
+        <QueryBlock>
+          <Name>Залишки</Name>
+          <Query position="0" key="DELETE">
+DELETE FROM 
+    {РозрахункиЗКлієнтами_Залишки_TablePart.TABLE}
+WHERE 
+    {РозрахункиЗКлієнтами_Залишки_TablePart.TABLE}.{РозрахункиЗКлієнтами_Залишки_TablePart.Період} = @ПеріодДеньВідбір
+</Query>
+          <Query position="1" key="SELECT">
+INSERT INTO 
+    {РозрахункиЗКлієнтами_Залишки_TablePart.TABLE} 
+(
+    uid,
+    {РозрахункиЗКлієнтами_Залишки_TablePart.Період},
+    {РозрахункиЗКлієнтами_Залишки_TablePart.Валюта},
+    {РозрахункиЗКлієнтами_Залишки_TablePart.Контрагент},
+    {РозрахункиЗКлієнтами_Залишки_TablePart.Сума}
+)
+SELECT
+    uuid_generate_v4(),
+    date_trunc('day', Рег_РозрахункиЗКлієнтами.period::timestamp) AS Період,
+    Рег_РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Валюта} AS Валюта,
+    Рег_РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Контрагент} AS Контрагент,
+
+    /* Сума */
+    SUM(CASE WHEN Рег_РозрахункиЗКлієнтами.income = true THEN 
+        Рег_РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} ELSE 
+        -Рег_РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} END) AS Сума
+
+FROM
+    {РозрахункиЗКлієнтами_Const.TABLE} AS Рег_РозрахункиЗКлієнтами
+
+WHERE
+    date_trunc('day', Рег_РозрахункиЗКлієнтами.period::timestamp) = @ПеріодДеньВідбір
+
+GROUP BY
+    Період, Валюта, Контрагент
+
+HAVING
+
+    /* Сума */
+    SUM(CASE WHEN Рег_РозрахункиЗКлієнтами.income = true THEN 
+        Рег_РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} ELSE 
+        -Рег_РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} END) != 0 
+
+
+
+
+</Query>
+        </QueryBlock>
+        <QueryBlock>
+          <Name>Обороти</Name>
+          <Query position="0" key="DELETE">
+DELETE FROM 
+    {РозрахункиЗКлієнтами_Обороти_TablePart.TABLE}
+WHERE 
+    {РозрахункиЗКлієнтами_Обороти_TablePart.TABLE}.{РозрахункиЗКлієнтами_Обороти_TablePart.Період} = @ПеріодДеньВідбір
+</Query>
+          <Query position="1" key="SELECT">
+INSERT INTO 
+    {РозрахункиЗКлієнтами_Обороти_TablePart.TABLE} 
+(
+    uid,
+    {РозрахункиЗКлієнтами_Обороти_TablePart.Період},
+    {РозрахункиЗКлієнтами_Обороти_TablePart.Валюта},
+    {РозрахункиЗКлієнтами_Обороти_TablePart.Контрагент},
+    {РозрахункиЗКлієнтами_Обороти_TablePart.СумаПрихід},
+    {РозрахункиЗКлієнтами_Обороти_TablePart.СумаРозхід}
+)
+SELECT
+    uuid_generate_v4(),
+    date_trunc('day', Рег_РозрахункиЗКлієнтами.period::timestamp) AS Період,
+    Рег_РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Валюта} AS Валюта,
+    Рег_РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Контрагент} AS Контрагент,
+
+    /* Сума */
+    SUM(CASE WHEN Рег_РозрахункиЗКлієнтами.income = true THEN 
+        Рег_РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} ELSE 0 END) AS СумаПрихід,
+    SUM(CASE WHEN Рег_РозрахункиЗКлієнтами.income = false THEN 
+        Рег_РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} ELSE 0 END) AS СумаРозхід
+
+FROM
+    {РозрахункиЗКлієнтами_Const.TABLE} AS Рег_РозрахункиЗКлієнтами
+
+WHERE
+    date_trunc('day', Рег_РозрахункиЗКлієнтами.period::timestamp) = @ПеріодДеньВідбір
+
+GROUP BY
+    Період, Валюта, Контрагент
+
+HAVING
+
+    /* Сума */
+    SUM(CASE WHEN Рег_РозрахункиЗКлієнтами.income = true THEN 
+        Рег_РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} ELSE 0 END) != 0 OR 
+    SUM(CASE WHEN Рег_РозрахункиЗКлієнтами.income = false THEN 
+        Рег_РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} ELSE 0 END) != 0 
+
+
+
+
+</Query>
+        </QueryBlock>
+        <QueryBlock>
+          <Name>ЗалишкиТаОбороти</Name>
+          <Query position="0" key="DELETE">
+DELETE FROM 
+    {РозрахункиЗКлієнтами_ЗалишкиТаОбороти_TablePart.TABLE}
+WHERE 
+    {РозрахункиЗКлієнтами_ЗалишкиТаОбороти_TablePart.TABLE}.{РозрахункиЗКлієнтами_ЗалишкиТаОбороти_TablePart.Період} = @ПеріодДеньВідбір
+</Query>
+          <Query position="1" key="SELECT">
+INSERT INTO 
+    {РозрахункиЗКлієнтами_ЗалишкиТаОбороти_TablePart.TABLE} 
+(
+    uid,
+    {РозрахункиЗКлієнтами_ЗалишкиТаОбороти_TablePart.Період},
+    {РозрахункиЗКлієнтами_ЗалишкиТаОбороти_TablePart.Валюта},
+    {РозрахункиЗКлієнтами_ЗалишкиТаОбороти_TablePart.Контрагент},
+    {РозрахункиЗКлієнтами_ЗалишкиТаОбороти_TablePart.СумаПрихід},
+    {РозрахункиЗКлієнтами_ЗалишкиТаОбороти_TablePart.СумаРозхід},
+    {РозрахункиЗКлієнтами_ЗалишкиТаОбороти_TablePart.СумаЗалишок}
+)
+SELECT
+    uuid_generate_v4(),
+    date_trunc('day', Рег_РозрахункиЗКлієнтами.period::timestamp) AS Період,
+    Рег_РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Валюта} AS Валюта,
+    Рег_РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Контрагент} AS Контрагент,
+
+    /* Сума */
+    SUM(CASE WHEN Рег_РозрахункиЗКлієнтами.income = true THEN 
+        Рег_РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} ELSE 0 END) AS СумаПрихід,
+    SUM(CASE WHEN Рег_РозрахункиЗКлієнтами.income = false THEN 
+        Рег_РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} ELSE 0 END) AS СумаРозхід,
+    SUM(CASE WHEN Рег_РозрахункиЗКлієнтами.income = true THEN 
+        Рег_РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} ELSE 
+        -Рег_РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} END) AS СумаЗалишок
+
+FROM
+    {РозрахункиЗКлієнтами_Const.TABLE} AS Рег_РозрахункиЗКлієнтами
+
+WHERE
+    date_trunc('day', Рег_РозрахункиЗКлієнтами.period::timestamp) = @ПеріодДеньВідбір
+
+GROUP BY
+    Період, Валюта, Контрагент
+
+HAVING
+
+    /* Сума */
+    SUM(CASE WHEN Рег_РозрахункиЗКлієнтами.income = true THEN 
+        Рег_РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} ELSE 0 END) != 0 OR 
+    SUM(CASE WHEN Рег_РозрахункиЗКлієнтами.income = false THEN 
+        Рег_РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} ELSE 0 END) != 0 OR
+    SUM(CASE WHEN Рег_РозрахункиЗКлієнтами.income = true THEN 
+        Рег_РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} ELSE 
+        -Рег_РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} END) != 0 
+
+
+
+
+</Query>
+        </QueryBlock>
+      </QueryBlockList>
     </RegisterAccumulation>
     <RegisterAccumulation>
       <Name>Закупівлі</Name>
@@ -14702,8 +15492,553 @@ HAVING
         <Name>ВнутрішнєСпоживанняТоварів</Name>
         <Name>РахунокФактура</Name>
       </AllowDocumentSpend>
-      <TabularParts />
-      <QueryBlockList />
+      <TabularParts>
+        <TablePart>
+          <Name>Залишки</Name>
+          <Table>tab_b37</Table>
+          <Desc>Віртуальна таблиця</Desc>
+          <Fields>
+            <Field>
+              <Name>Період</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>date</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Номенклатура</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Номенклатура</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>ХарактеристикаНоменклатури</Name>
+              <NameInTable>col_a3</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Склад</Name>
+              <NameInTable>col_a4</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Склади</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>ВНаявності</Name>
+              <NameInTable>col_a5</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+            <Field>
+              <Name>ВРезервіЗіСкладу</Name>
+              <NameInTable>col_a6</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+            <Field>
+              <Name>ВРезервіПідЗамовлення</Name>
+              <NameInTable>col_a7</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+          </Fields>
+        </TablePart>
+        <TablePart>
+          <Name>Обороти</Name>
+          <Table>tab_b38</Table>
+          <Desc>Віртуальна таблиця</Desc>
+          <Fields>
+            <Field>
+              <Name>Період</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>date</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Номенклатура</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Номенклатура</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>ХарактеристикаНоменклатури</Name>
+              <NameInTable>col_a3</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Склад</Name>
+              <NameInTable>col_a4</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Склади</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>ВНаявностіПрихід</Name>
+              <NameInTable>col_a5</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+            <Field>
+              <Name>ВНаявностіРозхід</Name>
+              <NameInTable>col_a6</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+            <Field>
+              <Name>ВРезервіЗіСкладуПрихід</Name>
+              <NameInTable>col_a7</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+            <Field>
+              <Name>ВРезервіЗіСкладуРозхід</Name>
+              <NameInTable>col_a8</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+            <Field>
+              <Name>ВРезервіПідЗамовленняПрихід</Name>
+              <NameInTable>col_a9</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+            <Field>
+              <Name>ВРезервіПідЗамовленняРозхід</Name>
+              <NameInTable>col_b1</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+          </Fields>
+        </TablePart>
+        <TablePart>
+          <Name>ЗалишкиТаОбороти</Name>
+          <Table>tab_b39</Table>
+          <Desc>Віртуальна таблиця</Desc>
+          <Fields>
+            <Field>
+              <Name>Період</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>date</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Номенклатура</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Номенклатура</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>ХарактеристикаНоменклатури</Name>
+              <NameInTable>col_a3</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Склад</Name>
+              <NameInTable>col_a4</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Склади</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>ВНаявностіПрихід</Name>
+              <NameInTable>col_a5</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+            <Field>
+              <Name>ВНаявностіРозхід</Name>
+              <NameInTable>col_a6</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+            <Field>
+              <Name>ВНаявностіЗалишок</Name>
+              <NameInTable>col_a7</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+            <Field>
+              <Name>ВРезервіЗіСкладуПрихід</Name>
+              <NameInTable>col_a8</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+            <Field>
+              <Name>ВРезервіЗіСкладуРозхід</Name>
+              <NameInTable>col_a9</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+            <Field>
+              <Name>ВРезервіЗіСкладуЗалишок</Name>
+              <NameInTable>col_b1</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+            <Field>
+              <Name>ВРезервіПідЗамовленняПрихід</Name>
+              <NameInTable>col_b2</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+            <Field>
+              <Name>ВРезервіПідЗамовленняРозхід</Name>
+              <NameInTable>col_b3</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+            <Field>
+              <Name>ВРезервіПідЗамовленняЗалишок</Name>
+              <NameInTable>col_b4</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+          </Fields>
+        </TablePart>
+      </TabularParts>
+      <QueryBlockList>
+        <QueryBlock>
+          <Name>Залишки</Name>
+          <Query position="0" key="DELETE">
+DELETE FROM 
+    {ВільніЗалишки_Залишки_TablePart.TABLE}
+WHERE 
+    {ВільніЗалишки_Залишки_TablePart.TABLE}.{ВільніЗалишки_Залишки_TablePart.Період} = @ПеріодДеньВідбір
+</Query>
+          <Query position="1" key="SELECT">
+INSERT INTO 
+    {ВільніЗалишки_Залишки_TablePart.TABLE} 
+(
+    uid,
+    {ВільніЗалишки_Залишки_TablePart.Період},
+    {ВільніЗалишки_Залишки_TablePart.Номенклатура},
+    {ВільніЗалишки_Залишки_TablePart.ХарактеристикаНоменклатури},
+    {ВільніЗалишки_Залишки_TablePart.Склад},
+    {ВільніЗалишки_Залишки_TablePart.ВНаявності},
+    {ВільніЗалишки_Залишки_TablePart.ВРезервіЗіСкладу},
+    {ВільніЗалишки_Залишки_TablePart.ВРезервіПідЗамовлення}
+)
+SELECT
+    uuid_generate_v4(),
+    date_trunc('day', Рег_ВільніЗалишки.period::timestamp) AS Період,
+    Рег_ВільніЗалишки.{ВільніЗалишки_Const.Номенклатура} AS Номенклатура,
+    Рег_ВільніЗалишки.{ВільніЗалишки_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
+    Рег_ВільніЗалишки.{ВільніЗалишки_Const.Склад} AS Склад,
+
+    /* ВНаявності */
+    SUM(CASE WHEN Рег_ВільніЗалишки.income = true THEN 
+        Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВНаявності} ELSE 
+        -Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВНаявності} END) AS ВНаявності,
+
+    /* ВРезервіЗіСкладу */
+    SUM(CASE WHEN Рег_ВільніЗалишки.income = true THEN 
+        Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіЗіСкладу} ELSE 
+        -Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіЗіСкладу} END) AS ВРезервіЗіСкладу,
+
+    /* ВРезервіПідЗамовлення */
+    SUM(CASE WHEN Рег_ВільніЗалишки.income = true THEN 
+        Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіПідЗамовлення} ELSE 
+        -Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіПідЗамовлення} END) AS ВРезервіПідЗамовлення
+
+FROM
+    {ВільніЗалишки_Const.TABLE} AS Рег_ВільніЗалишки
+
+WHERE
+    date_trunc('day', Рег_ВільніЗалишки.period::timestamp) = @ПеріодДеньВідбір
+
+GROUP BY
+    Період, Номенклатура, ХарактеристикаНоменклатури, Склад
+
+HAVING
+
+    /* ВНаявності */
+    SUM(CASE WHEN Рег_ВільніЗалишки.income = true THEN 
+        Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВНаявності} ELSE 
+        -Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВНаявності} END) != 0 
+ OR 
+
+
+    /* ВРезервіЗіСкладу */
+    SUM(CASE WHEN Рег_ВільніЗалишки.income = true THEN 
+        Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіЗіСкладу} ELSE 
+        -Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіЗіСкладу} END) != 0 
+ OR 
+
+
+    /* ВРезервіПідЗамовлення */
+    SUM(CASE WHEN Рег_ВільніЗалишки.income = true THEN 
+        Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіПідЗамовлення} ELSE 
+        -Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіПідЗамовлення} END) != 0 
+
+
+
+
+</Query>
+        </QueryBlock>
+        <QueryBlock>
+          <Name>Обороти</Name>
+          <Query position="0" key="DELETE">
+DELETE FROM 
+    {ВільніЗалишки_Обороти_TablePart.TABLE}
+WHERE 
+    {ВільніЗалишки_Обороти_TablePart.TABLE}.{ВільніЗалишки_Обороти_TablePart.Період} = @ПеріодДеньВідбір
+</Query>
+          <Query position="1" key="SELECT">
+INSERT INTO 
+    {ВільніЗалишки_Обороти_TablePart.TABLE} 
+(
+    uid,
+    {ВільніЗалишки_Обороти_TablePart.Період},
+    {ВільніЗалишки_Обороти_TablePart.Номенклатура},
+    {ВільніЗалишки_Обороти_TablePart.ХарактеристикаНоменклатури},
+    {ВільніЗалишки_Обороти_TablePart.Склад},
+    {ВільніЗалишки_Обороти_TablePart.ВНаявностіПрихід},
+    {ВільніЗалишки_Обороти_TablePart.ВНаявностіРозхід},
+    {ВільніЗалишки_Обороти_TablePart.ВРезервіЗіСкладуПрихід},
+    {ВільніЗалишки_Обороти_TablePart.ВРезервіЗіСкладуРозхід},
+    {ВільніЗалишки_Обороти_TablePart.ВРезервіПідЗамовленняПрихід},
+    {ВільніЗалишки_Обороти_TablePart.ВРезервіПідЗамовленняРозхід}
+)
+SELECT
+    uuid_generate_v4(),
+    date_trunc('day', Рег_ВільніЗалишки.period::timestamp) AS Період,
+    Рег_ВільніЗалишки.{ВільніЗалишки_Const.Номенклатура} AS Номенклатура,
+    Рег_ВільніЗалишки.{ВільніЗалишки_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
+    Рег_ВільніЗалишки.{ВільніЗалишки_Const.Склад} AS Склад,
+
+    /* ВНаявності */
+    SUM(CASE WHEN Рег_ВільніЗалишки.income = true THEN 
+        Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВНаявності} ELSE 0 END) AS ВНаявностіПрихід,
+    SUM(CASE WHEN Рег_ВільніЗалишки.income = false THEN 
+        Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВНаявності} ELSE 0 END) AS ВНаявностіРозхід,
+
+    /* ВРезервіЗіСкладу */
+    SUM(CASE WHEN Рег_ВільніЗалишки.income = true THEN 
+        Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіЗіСкладу} ELSE 0 END) AS ВРезервіЗіСкладуПрихід,
+    SUM(CASE WHEN Рег_ВільніЗалишки.income = false THEN 
+        Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіЗіСкладу} ELSE 0 END) AS ВРезервіЗіСкладуРозхід,
+
+    /* ВРезервіПідЗамовлення */
+    SUM(CASE WHEN Рег_ВільніЗалишки.income = true THEN 
+        Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіПідЗамовлення} ELSE 0 END) AS ВРезервіПідЗамовленняПрихід,
+    SUM(CASE WHEN Рег_ВільніЗалишки.income = false THEN 
+        Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіПідЗамовлення} ELSE 0 END) AS ВРезервіПідЗамовленняРозхід
+
+FROM
+    {ВільніЗалишки_Const.TABLE} AS Рег_ВільніЗалишки
+
+WHERE
+    date_trunc('day', Рег_ВільніЗалишки.period::timestamp) = @ПеріодДеньВідбір
+
+GROUP BY
+    Період, Номенклатура, ХарактеристикаНоменклатури, Склад
+
+HAVING
+
+    /* ВНаявності */
+    SUM(CASE WHEN Рег_ВільніЗалишки.income = true THEN 
+        Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВНаявності} ELSE 0 END) != 0 OR 
+    SUM(CASE WHEN Рег_ВільніЗалишки.income = false THEN 
+        Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВНаявності} ELSE 0 END) != 0 
+ OR 
+
+
+    /* ВРезервіЗіСкладу */
+    SUM(CASE WHEN Рег_ВільніЗалишки.income = true THEN 
+        Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіЗіСкладу} ELSE 0 END) != 0 OR 
+    SUM(CASE WHEN Рег_ВільніЗалишки.income = false THEN 
+        Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіЗіСкладу} ELSE 0 END) != 0 
+ OR 
+
+
+    /* ВРезервіПідЗамовлення */
+    SUM(CASE WHEN Рег_ВільніЗалишки.income = true THEN 
+        Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіПідЗамовлення} ELSE 0 END) != 0 OR 
+    SUM(CASE WHEN Рег_ВільніЗалишки.income = false THEN 
+        Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіПідЗамовлення} ELSE 0 END) != 0 
+
+
+
+
+</Query>
+        </QueryBlock>
+        <QueryBlock>
+          <Name>ЗалишкиТаОбороти</Name>
+          <Query position="0" key="DELETE">
+DELETE FROM 
+    {ВільніЗалишки_ЗалишкиТаОбороти_TablePart.TABLE}
+WHERE 
+    {ВільніЗалишки_ЗалишкиТаОбороти_TablePart.TABLE}.{ВільніЗалишки_ЗалишкиТаОбороти_TablePart.Період} = @ПеріодДеньВідбір
+</Query>
+          <Query position="1" key="SELECT">
+INSERT INTO 
+    {ВільніЗалишки_ЗалишкиТаОбороти_TablePart.TABLE} 
+(
+    uid,
+    {ВільніЗалишки_ЗалишкиТаОбороти_TablePart.Період},
+    {ВільніЗалишки_ЗалишкиТаОбороти_TablePart.Номенклатура},
+    {ВільніЗалишки_ЗалишкиТаОбороти_TablePart.ХарактеристикаНоменклатури},
+    {ВільніЗалишки_ЗалишкиТаОбороти_TablePart.Склад},
+    {ВільніЗалишки_ЗалишкиТаОбороти_TablePart.ВНаявностіПрихід},
+    {ВільніЗалишки_ЗалишкиТаОбороти_TablePart.ВНаявностіРозхід},
+    {ВільніЗалишки_ЗалишкиТаОбороти_TablePart.ВНаявностіЗалишок},
+    {ВільніЗалишки_ЗалишкиТаОбороти_TablePart.ВРезервіЗіСкладуПрихід},
+    {ВільніЗалишки_ЗалишкиТаОбороти_TablePart.ВРезервіЗіСкладуРозхід},
+    {ВільніЗалишки_ЗалишкиТаОбороти_TablePart.ВРезервіЗіСкладуЗалишок},
+    {ВільніЗалишки_ЗалишкиТаОбороти_TablePart.ВРезервіПідЗамовленняПрихід},
+    {ВільніЗалишки_ЗалишкиТаОбороти_TablePart.ВРезервіПідЗамовленняРозхід},
+    {ВільніЗалишки_ЗалишкиТаОбороти_TablePart.ВРезервіПідЗамовленняЗалишок}
+)
+SELECT
+    uuid_generate_v4(),
+    date_trunc('day', Рег_ВільніЗалишки.period::timestamp) AS Період,
+    Рег_ВільніЗалишки.{ВільніЗалишки_Const.Номенклатура} AS Номенклатура,
+    Рег_ВільніЗалишки.{ВільніЗалишки_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
+    Рег_ВільніЗалишки.{ВільніЗалишки_Const.Склад} AS Склад,
+
+    /* ВНаявності */
+    SUM(CASE WHEN Рег_ВільніЗалишки.income = true THEN 
+        Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВНаявності} ELSE 0 END) AS ВНаявностіПрихід,
+    SUM(CASE WHEN Рег_ВільніЗалишки.income = false THEN 
+        Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВНаявності} ELSE 0 END) AS ВНаявностіРозхід,
+    SUM(CASE WHEN Рег_ВільніЗалишки.income = true THEN 
+        Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВНаявності} ELSE 
+        -Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВНаявності} END) AS ВНаявностіЗалишок,
+
+    /* ВРезервіЗіСкладу */
+    SUM(CASE WHEN Рег_ВільніЗалишки.income = true THEN 
+        Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіЗіСкладу} ELSE 0 END) AS ВРезервіЗіСкладуПрихід,
+    SUM(CASE WHEN Рег_ВільніЗалишки.income = false THEN 
+        Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіЗіСкладу} ELSE 0 END) AS ВРезервіЗіСкладуРозхід,
+    SUM(CASE WHEN Рег_ВільніЗалишки.income = true THEN 
+        Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіЗіСкладу} ELSE 
+        -Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіЗіСкладу} END) AS ВРезервіЗіСкладуЗалишок,
+
+    /* ВРезервіПідЗамовлення */
+    SUM(CASE WHEN Рег_ВільніЗалишки.income = true THEN 
+        Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіПідЗамовлення} ELSE 0 END) AS ВРезервіПідЗамовленняПрихід,
+    SUM(CASE WHEN Рег_ВільніЗалишки.income = false THEN 
+        Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіПідЗамовлення} ELSE 0 END) AS ВРезервіПідЗамовленняРозхід,
+    SUM(CASE WHEN Рег_ВільніЗалишки.income = true THEN 
+        Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіПідЗамовлення} ELSE 
+        -Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіПідЗамовлення} END) AS ВРезервіПідЗамовленняЗалишок
+
+FROM
+    {ВільніЗалишки_Const.TABLE} AS Рег_ВільніЗалишки
+
+WHERE
+    date_trunc('day', Рег_ВільніЗалишки.period::timestamp) = @ПеріодДеньВідбір
+
+GROUP BY
+    Період, Номенклатура, ХарактеристикаНоменклатури, Склад
+
+HAVING
+
+    /* ВНаявності */
+    SUM(CASE WHEN Рег_ВільніЗалишки.income = true THEN 
+        Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВНаявності} ELSE 0 END) != 0 OR 
+    SUM(CASE WHEN Рег_ВільніЗалишки.income = false THEN 
+        Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВНаявності} ELSE 0 END) != 0 OR
+    SUM(CASE WHEN Рег_ВільніЗалишки.income = true THEN 
+        Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВНаявності} ELSE 
+        -Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВНаявності} END) != 0 
+ OR 
+
+
+    /* ВРезервіЗіСкладу */
+    SUM(CASE WHEN Рег_ВільніЗалишки.income = true THEN 
+        Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіЗіСкладу} ELSE 0 END) != 0 OR 
+    SUM(CASE WHEN Рег_ВільніЗалишки.income = false THEN 
+        Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіЗіСкладу} ELSE 0 END) != 0 OR
+    SUM(CASE WHEN Рег_ВільніЗалишки.income = true THEN 
+        Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіЗіСкладу} ELSE 
+        -Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіЗіСкладу} END) != 0 
+ OR 
+
+
+    /* ВРезервіПідЗамовлення */
+    SUM(CASE WHEN Рег_ВільніЗалишки.income = true THEN 
+        Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіПідЗамовлення} ELSE 0 END) != 0 OR 
+    SUM(CASE WHEN Рег_ВільніЗалишки.income = false THEN 
+        Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіПідЗамовлення} ELSE 0 END) != 0 OR
+    SUM(CASE WHEN Рег_ВільніЗалишки.income = true THEN 
+        Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіПідЗамовлення} ELSE 
+        -Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіПідЗамовлення} END) != 0 
+
+
+
+
+</Query>
+        </QueryBlock>
+      </QueryBlockList>
     </RegisterAccumulation>
     <RegisterAccumulation>
       <Name>ЗамовленняПостачальникам</Name>
@@ -14770,8 +16105,386 @@ HAVING
         <Name>ЗамовленняПостачальнику</Name>
         <Name>ПоступленняТоварівТаПослуг</Name>
       </AllowDocumentSpend>
-      <TabularParts />
-      <QueryBlockList />
+      <TabularParts>
+        <TablePart>
+          <Name>Залишки</Name>
+          <Table>tab_b40</Table>
+          <Desc>Віртуальна таблиця</Desc>
+          <Fields>
+            <Field>
+              <Name>Період</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>date</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>ЗамовленняПостачальнику</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Документи.ЗамовленняПостачальнику</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Номенклатура</Name>
+              <NameInTable>col_a3</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Номенклатура</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>ХарактеристикаНоменклатури</Name>
+              <NameInTable>col_a4</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Склад</Name>
+              <NameInTable>col_a5</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Склади</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Замовлено</Name>
+              <NameInTable>col_a6</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+          </Fields>
+        </TablePart>
+        <TablePart>
+          <Name>Обороти</Name>
+          <Table>tab_b41</Table>
+          <Desc>Віртуальна таблиця</Desc>
+          <Fields>
+            <Field>
+              <Name>Період</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>date</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>ЗамовленняПостачальнику</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Документи.ЗамовленняПостачальнику</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Номенклатура</Name>
+              <NameInTable>col_a3</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Номенклатура</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>ХарактеристикаНоменклатури</Name>
+              <NameInTable>col_a4</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Склад</Name>
+              <NameInTable>col_a5</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Склади</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>ЗамовленоПрихід</Name>
+              <NameInTable>col_a6</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+            <Field>
+              <Name>ЗамовленоРозхід</Name>
+              <NameInTable>col_a7</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+          </Fields>
+        </TablePart>
+        <TablePart>
+          <Name>ЗалишкиТаОбороти</Name>
+          <Table>tab_b42</Table>
+          <Desc>Віртуальна таблиця</Desc>
+          <Fields>
+            <Field>
+              <Name>Період</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>date</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>ЗамовленняПостачальнику</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Документи.ЗамовленняПостачальнику</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Номенклатура</Name>
+              <NameInTable>col_a3</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Номенклатура</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>ХарактеристикаНоменклатури</Name>
+              <NameInTable>col_a4</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Склад</Name>
+              <NameInTable>col_a5</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Склади</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>ЗамовленоПрихід</Name>
+              <NameInTable>col_a6</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+            <Field>
+              <Name>ЗамовленоРозхід</Name>
+              <NameInTable>col_a7</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+            <Field>
+              <Name>ЗамовленоЗалишок</Name>
+              <NameInTable>col_a8</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+          </Fields>
+        </TablePart>
+      </TabularParts>
+      <QueryBlockList>
+        <QueryBlock>
+          <Name>Залишки</Name>
+          <Query position="0" key="DELETE">
+DELETE FROM 
+    {ЗамовленняПостачальникам_Залишки_TablePart.TABLE}
+WHERE 
+    {ЗамовленняПостачальникам_Залишки_TablePart.TABLE}.{ЗамовленняПостачальникам_Залишки_TablePart.Період} = @ПеріодДеньВідбір
+</Query>
+          <Query position="1" key="SELECT">
+INSERT INTO 
+    {ЗамовленняПостачальникам_Залишки_TablePart.TABLE} 
+(
+    uid,
+    {ЗамовленняПостачальникам_Залишки_TablePart.Період},
+    {ЗамовленняПостачальникам_Залишки_TablePart.ЗамовленняПостачальнику},
+    {ЗамовленняПостачальникам_Залишки_TablePart.Номенклатура},
+    {ЗамовленняПостачальникам_Залишки_TablePart.ХарактеристикаНоменклатури},
+    {ЗамовленняПостачальникам_Залишки_TablePart.Склад},
+    {ЗамовленняПостачальникам_Залишки_TablePart.Замовлено}
+)
+SELECT
+    uuid_generate_v4(),
+    date_trunc('day', Рег_ЗамовленняПостачальникам.period::timestamp) AS Період,
+    Рег_ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.ЗамовленняПостачальнику} AS ЗамовленняПостачальнику,
+    Рег_ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Номенклатура} AS Номенклатура,
+    Рег_ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
+    Рег_ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Склад} AS Склад,
+
+    /* Замовлено */
+    SUM(CASE WHEN Рег_ЗамовленняПостачальникам.income = true THEN 
+        Рег_ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Замовлено} ELSE 
+        -Рег_ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Замовлено} END) AS Замовлено
+
+FROM
+    {ЗамовленняПостачальникам_Const.TABLE} AS Рег_ЗамовленняПостачальникам
+
+WHERE
+    date_trunc('day', Рег_ЗамовленняПостачальникам.period::timestamp) = @ПеріодДеньВідбір
+
+GROUP BY
+    Період, ЗамовленняПостачальнику, Номенклатура, ХарактеристикаНоменклатури, Склад
+
+HAVING
+
+    /* Замовлено */
+    SUM(CASE WHEN Рег_ЗамовленняПостачальникам.income = true THEN 
+        Рег_ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Замовлено} ELSE 
+        -Рег_ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Замовлено} END) != 0 
+
+
+
+
+</Query>
+        </QueryBlock>
+        <QueryBlock>
+          <Name>Обороти</Name>
+          <Query position="0" key="DELETE">
+DELETE FROM 
+    {ЗамовленняПостачальникам_Обороти_TablePart.TABLE}
+WHERE 
+    {ЗамовленняПостачальникам_Обороти_TablePart.TABLE}.{ЗамовленняПостачальникам_Обороти_TablePart.Період} = @ПеріодДеньВідбір
+</Query>
+          <Query position="1" key="SELECT">
+INSERT INTO 
+    {ЗамовленняПостачальникам_Обороти_TablePart.TABLE} 
+(
+    uid,
+    {ЗамовленняПостачальникам_Обороти_TablePart.Період},
+    {ЗамовленняПостачальникам_Обороти_TablePart.ЗамовленняПостачальнику},
+    {ЗамовленняПостачальникам_Обороти_TablePart.Номенклатура},
+    {ЗамовленняПостачальникам_Обороти_TablePart.ХарактеристикаНоменклатури},
+    {ЗамовленняПостачальникам_Обороти_TablePart.Склад},
+    {ЗамовленняПостачальникам_Обороти_TablePart.ЗамовленоПрихід},
+    {ЗамовленняПостачальникам_Обороти_TablePart.ЗамовленоРозхід}
+)
+SELECT
+    uuid_generate_v4(),
+    date_trunc('day', Рег_ЗамовленняПостачальникам.period::timestamp) AS Період,
+    Рег_ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.ЗамовленняПостачальнику} AS ЗамовленняПостачальнику,
+    Рег_ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Номенклатура} AS Номенклатура,
+    Рег_ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
+    Рег_ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Склад} AS Склад,
+
+    /* Замовлено */
+    SUM(CASE WHEN Рег_ЗамовленняПостачальникам.income = true THEN 
+        Рег_ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Замовлено} ELSE 0 END) AS ЗамовленоПрихід,
+    SUM(CASE WHEN Рег_ЗамовленняПостачальникам.income = false THEN 
+        Рег_ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Замовлено} ELSE 0 END) AS ЗамовленоРозхід
+
+FROM
+    {ЗамовленняПостачальникам_Const.TABLE} AS Рег_ЗамовленняПостачальникам
+
+WHERE
+    date_trunc('day', Рег_ЗамовленняПостачальникам.period::timestamp) = @ПеріодДеньВідбір
+
+GROUP BY
+    Період, ЗамовленняПостачальнику, Номенклатура, ХарактеристикаНоменклатури, Склад
+
+HAVING
+
+    /* Замовлено */
+    SUM(CASE WHEN Рег_ЗамовленняПостачальникам.income = true THEN 
+        Рег_ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Замовлено} ELSE 0 END) != 0 OR 
+    SUM(CASE WHEN Рег_ЗамовленняПостачальникам.income = false THEN 
+        Рег_ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Замовлено} ELSE 0 END) != 0 
+
+
+
+
+</Query>
+        </QueryBlock>
+        <QueryBlock>
+          <Name>ЗалишкиТаОбороти</Name>
+          <Query position="0" key="DELETE">
+DELETE FROM 
+    {ЗамовленняПостачальникам_ЗалишкиТаОбороти_TablePart.TABLE}
+WHERE 
+    {ЗамовленняПостачальникам_ЗалишкиТаОбороти_TablePart.TABLE}.{ЗамовленняПостачальникам_ЗалишкиТаОбороти_TablePart.Період} = @ПеріодДеньВідбір
+</Query>
+          <Query position="1" key="SELECT">
+INSERT INTO 
+    {ЗамовленняПостачальникам_ЗалишкиТаОбороти_TablePart.TABLE} 
+(
+    uid,
+    {ЗамовленняПостачальникам_ЗалишкиТаОбороти_TablePart.Період},
+    {ЗамовленняПостачальникам_ЗалишкиТаОбороти_TablePart.ЗамовленняПостачальнику},
+    {ЗамовленняПостачальникам_ЗалишкиТаОбороти_TablePart.Номенклатура},
+    {ЗамовленняПостачальникам_ЗалишкиТаОбороти_TablePart.ХарактеристикаНоменклатури},
+    {ЗамовленняПостачальникам_ЗалишкиТаОбороти_TablePart.Склад},
+    {ЗамовленняПостачальникам_ЗалишкиТаОбороти_TablePart.ЗамовленоПрихід},
+    {ЗамовленняПостачальникам_ЗалишкиТаОбороти_TablePart.ЗамовленоРозхід},
+    {ЗамовленняПостачальникам_ЗалишкиТаОбороти_TablePart.ЗамовленоЗалишок}
+)
+SELECT
+    uuid_generate_v4(),
+    date_trunc('day', Рег_ЗамовленняПостачальникам.period::timestamp) AS Період,
+    Рег_ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.ЗамовленняПостачальнику} AS ЗамовленняПостачальнику,
+    Рег_ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Номенклатура} AS Номенклатура,
+    Рег_ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
+    Рег_ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Склад} AS Склад,
+
+    /* Замовлено */
+    SUM(CASE WHEN Рег_ЗамовленняПостачальникам.income = true THEN 
+        Рег_ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Замовлено} ELSE 0 END) AS ЗамовленоПрихід,
+    SUM(CASE WHEN Рег_ЗамовленняПостачальникам.income = false THEN 
+        Рег_ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Замовлено} ELSE 0 END) AS ЗамовленоРозхід,
+    SUM(CASE WHEN Рег_ЗамовленняПостачальникам.income = true THEN 
+        Рег_ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Замовлено} ELSE 
+        -Рег_ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Замовлено} END) AS ЗамовленоЗалишок
+
+FROM
+    {ЗамовленняПостачальникам_Const.TABLE} AS Рег_ЗамовленняПостачальникам
+
+WHERE
+    date_trunc('day', Рег_ЗамовленняПостачальникам.period::timestamp) = @ПеріодДеньВідбір
+
+GROUP BY
+    Період, ЗамовленняПостачальнику, Номенклатура, ХарактеристикаНоменклатури, Склад
+
+HAVING
+
+    /* Замовлено */
+    SUM(CASE WHEN Рег_ЗамовленняПостачальникам.income = true THEN 
+        Рег_ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Замовлено} ELSE 0 END) != 0 OR 
+    SUM(CASE WHEN Рег_ЗамовленняПостачальникам.income = false THEN 
+        Рег_ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Замовлено} ELSE 0 END) != 0 OR
+    SUM(CASE WHEN Рег_ЗамовленняПостачальникам.income = true THEN 
+        Рег_ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Замовлено} ELSE 
+        -Рег_ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Замовлено} END) != 0 
+
+
+
+
+</Query>
+        </QueryBlock>
+      </QueryBlockList>
     </RegisterAccumulation>
     <RegisterAccumulation>
       <Name>РозрахункиЗПостачальниками</Name>
@@ -14822,8 +16535,320 @@ HAVING
         <Name>РозхіднийКасовийОрдер</Name>
         <Name>ПоверненняТоварівПостачальнику</Name>
       </AllowDocumentSpend>
-      <TabularParts />
-      <QueryBlockList />
+      <TabularParts>
+        <TablePart>
+          <Name>Залишки</Name>
+          <Table>tab_b43</Table>
+          <Desc>Віртуальна таблиця</Desc>
+          <Fields>
+            <Field>
+              <Name>Період</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>date</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Контрагент</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Контрагенти</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Валюта</Name>
+              <NameInTable>col_a3</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Валюти</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Сума</Name>
+              <NameInTable>col_a4</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+          </Fields>
+        </TablePart>
+        <TablePart>
+          <Name>Обороти</Name>
+          <Table>tab_b44</Table>
+          <Desc>Віртуальна таблиця</Desc>
+          <Fields>
+            <Field>
+              <Name>Період</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>date</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Контрагент</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Контрагенти</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Валюта</Name>
+              <NameInTable>col_a3</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Валюти</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>СумаПрихід</Name>
+              <NameInTable>col_a4</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+            <Field>
+              <Name>СумаРозхід</Name>
+              <NameInTable>col_a5</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+          </Fields>
+        </TablePart>
+        <TablePart>
+          <Name>ЗалишкиТаОбороти</Name>
+          <Table>tab_b45</Table>
+          <Desc>Віртуальна таблиця</Desc>
+          <Fields>
+            <Field>
+              <Name>Період</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>date</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Контрагент</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Контрагенти</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Валюта</Name>
+              <NameInTable>col_a3</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Валюти</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>СумаПрихід</Name>
+              <NameInTable>col_a4</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+            <Field>
+              <Name>СумаРозхід</Name>
+              <NameInTable>col_a5</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+            <Field>
+              <Name>СумаЗалишок</Name>
+              <NameInTable>col_a6</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+          </Fields>
+        </TablePart>
+      </TabularParts>
+      <QueryBlockList>
+        <QueryBlock>
+          <Name>Залишки</Name>
+          <Query position="0" key="DELETE">
+DELETE FROM 
+    {РозрахункиЗПостачальниками_Залишки_TablePart.TABLE}
+WHERE 
+    {РозрахункиЗПостачальниками_Залишки_TablePart.TABLE}.{РозрахункиЗПостачальниками_Залишки_TablePart.Період} = @ПеріодДеньВідбір
+</Query>
+          <Query position="1" key="SELECT">
+INSERT INTO 
+    {РозрахункиЗПостачальниками_Залишки_TablePart.TABLE} 
+(
+    uid,
+    {РозрахункиЗПостачальниками_Залишки_TablePart.Період},
+    {РозрахункиЗПостачальниками_Залишки_TablePart.Контрагент},
+    {РозрахункиЗПостачальниками_Залишки_TablePart.Валюта},
+    {РозрахункиЗПостачальниками_Залишки_TablePart.Сума}
+)
+SELECT
+    uuid_generate_v4(),
+    date_trunc('day', Рег_РозрахункиЗПостачальниками.period::timestamp) AS Період,
+    Рег_РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Контрагент} AS Контрагент,
+    Рег_РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Валюта} AS Валюта,
+
+    /* Сума */
+    SUM(CASE WHEN Рег_РозрахункиЗПостачальниками.income = true THEN 
+        Рег_РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} ELSE 
+        -Рег_РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} END) AS Сума
+
+FROM
+    {РозрахункиЗПостачальниками_Const.TABLE} AS Рег_РозрахункиЗПостачальниками
+
+WHERE
+    date_trunc('day', Рег_РозрахункиЗПостачальниками.period::timestamp) = @ПеріодДеньВідбір
+
+GROUP BY
+    Період, Контрагент, Валюта
+
+HAVING
+
+    /* Сума */
+    SUM(CASE WHEN Рег_РозрахункиЗПостачальниками.income = true THEN 
+        Рег_РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} ELSE 
+        -Рег_РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} END) != 0 
+
+
+
+
+</Query>
+        </QueryBlock>
+        <QueryBlock>
+          <Name>Обороти</Name>
+          <Query position="0" key="DELETE">
+DELETE FROM 
+    {РозрахункиЗПостачальниками_Обороти_TablePart.TABLE}
+WHERE 
+    {РозрахункиЗПостачальниками_Обороти_TablePart.TABLE}.{РозрахункиЗПостачальниками_Обороти_TablePart.Період} = @ПеріодДеньВідбір
+</Query>
+          <Query position="1" key="SELECT">
+INSERT INTO 
+    {РозрахункиЗПостачальниками_Обороти_TablePart.TABLE} 
+(
+    uid,
+    {РозрахункиЗПостачальниками_Обороти_TablePart.Період},
+    {РозрахункиЗПостачальниками_Обороти_TablePart.Контрагент},
+    {РозрахункиЗПостачальниками_Обороти_TablePart.Валюта},
+    {РозрахункиЗПостачальниками_Обороти_TablePart.СумаПрихід},
+    {РозрахункиЗПостачальниками_Обороти_TablePart.СумаРозхід}
+)
+SELECT
+    uuid_generate_v4(),
+    date_trunc('day', Рег_РозрахункиЗПостачальниками.period::timestamp) AS Період,
+    Рег_РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Контрагент} AS Контрагент,
+    Рег_РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Валюта} AS Валюта,
+
+    /* Сума */
+    SUM(CASE WHEN Рег_РозрахункиЗПостачальниками.income = true THEN 
+        Рег_РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} ELSE 0 END) AS СумаПрихід,
+    SUM(CASE WHEN Рег_РозрахункиЗПостачальниками.income = false THEN 
+        Рег_РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} ELSE 0 END) AS СумаРозхід
+
+FROM
+    {РозрахункиЗПостачальниками_Const.TABLE} AS Рег_РозрахункиЗПостачальниками
+
+WHERE
+    date_trunc('day', Рег_РозрахункиЗПостачальниками.period::timestamp) = @ПеріодДеньВідбір
+
+GROUP BY
+    Період, Контрагент, Валюта
+
+HAVING
+
+    /* Сума */
+    SUM(CASE WHEN Рег_РозрахункиЗПостачальниками.income = true THEN 
+        Рег_РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} ELSE 0 END) != 0 OR 
+    SUM(CASE WHEN Рег_РозрахункиЗПостачальниками.income = false THEN 
+        Рег_РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} ELSE 0 END) != 0 
+
+
+
+
+</Query>
+        </QueryBlock>
+        <QueryBlock>
+          <Name>ЗалишкиТаОбороти</Name>
+          <Query position="0" key="DELETE">
+DELETE FROM 
+    {РозрахункиЗПостачальниками_ЗалишкиТаОбороти_TablePart.TABLE}
+WHERE 
+    {РозрахункиЗПостачальниками_ЗалишкиТаОбороти_TablePart.TABLE}.{РозрахункиЗПостачальниками_ЗалишкиТаОбороти_TablePart.Період} = @ПеріодДеньВідбір
+</Query>
+          <Query position="1" key="SELECT">
+INSERT INTO 
+    {РозрахункиЗПостачальниками_ЗалишкиТаОбороти_TablePart.TABLE} 
+(
+    uid,
+    {РозрахункиЗПостачальниками_ЗалишкиТаОбороти_TablePart.Період},
+    {РозрахункиЗПостачальниками_ЗалишкиТаОбороти_TablePart.Контрагент},
+    {РозрахункиЗПостачальниками_ЗалишкиТаОбороти_TablePart.Валюта},
+    {РозрахункиЗПостачальниками_ЗалишкиТаОбороти_TablePart.СумаПрихід},
+    {РозрахункиЗПостачальниками_ЗалишкиТаОбороти_TablePart.СумаРозхід},
+    {РозрахункиЗПостачальниками_ЗалишкиТаОбороти_TablePart.СумаЗалишок}
+)
+SELECT
+    uuid_generate_v4(),
+    date_trunc('day', Рег_РозрахункиЗПостачальниками.period::timestamp) AS Період,
+    Рег_РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Контрагент} AS Контрагент,
+    Рег_РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Валюта} AS Валюта,
+
+    /* Сума */
+    SUM(CASE WHEN Рег_РозрахункиЗПостачальниками.income = true THEN 
+        Рег_РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} ELSE 0 END) AS СумаПрихід,
+    SUM(CASE WHEN Рег_РозрахункиЗПостачальниками.income = false THEN 
+        Рег_РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} ELSE 0 END) AS СумаРозхід,
+    SUM(CASE WHEN Рег_РозрахункиЗПостачальниками.income = true THEN 
+        Рег_РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} ELSE 
+        -Рег_РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} END) AS СумаЗалишок
+
+FROM
+    {РозрахункиЗПостачальниками_Const.TABLE} AS Рег_РозрахункиЗПостачальниками
+
+WHERE
+    date_trunc('day', Рег_РозрахункиЗПостачальниками.period::timestamp) = @ПеріодДеньВідбір
+
+GROUP BY
+    Період, Контрагент, Валюта
+
+HAVING
+
+    /* Сума */
+    SUM(CASE WHEN Рег_РозрахункиЗПостачальниками.income = true THEN 
+        Рег_РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} ELSE 0 END) != 0 OR 
+    SUM(CASE WHEN Рег_РозрахункиЗПостачальниками.income = false THEN 
+        Рег_РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} ELSE 0 END) != 0 OR
+    SUM(CASE WHEN Рег_РозрахункиЗПостачальниками.income = true THEN 
+        Рег_РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} ELSE 
+        -Рег_РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} END) != 0 
+
+
+
+
+</Query>
+        </QueryBlock>
+      </QueryBlockList>
     </RegisterAccumulation>
     <RegisterAccumulation>
       <Name>ТовариДоПоступлення</Name>
@@ -14938,8 +16963,353 @@ HAVING
         <Name>РозхіднийКасовийОрдер</Name>
         <Name>ВведенняЗалишків</Name>
       </AllowDocumentSpend>
-      <TabularParts />
-      <QueryBlockList />
+      <TabularParts>
+        <TablePart>
+          <Name>Залишки</Name>
+          <Table>tab_b46</Table>
+          <Desc>Віртуальна таблиця</Desc>
+          <Fields>
+            <Field>
+              <Name>Період</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>date</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Організація</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Організації</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Каса</Name>
+              <NameInTable>col_a3</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Каси</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Валюта</Name>
+              <NameInTable>col_a4</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Валюти</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Сума</Name>
+              <NameInTable>col_a5</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+          </Fields>
+        </TablePart>
+        <TablePart>
+          <Name>Обороти</Name>
+          <Table>tab_b47</Table>
+          <Desc>Віртуальна таблиця</Desc>
+          <Fields>
+            <Field>
+              <Name>Період</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>date</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Організація</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Організації</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Каса</Name>
+              <NameInTable>col_a3</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Каси</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Валюта</Name>
+              <NameInTable>col_a4</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Валюти</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>СумаПрихід</Name>
+              <NameInTable>col_a5</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+            <Field>
+              <Name>СумаРозхід</Name>
+              <NameInTable>col_a6</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+          </Fields>
+        </TablePart>
+        <TablePart>
+          <Name>ЗалишкиТаОбороти</Name>
+          <Table>tab_b48</Table>
+          <Desc>Віртуальна таблиця</Desc>
+          <Fields>
+            <Field>
+              <Name>Період</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>date</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Організація</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Організації</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Каса</Name>
+              <NameInTable>col_a3</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Каси</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Валюта</Name>
+              <NameInTable>col_a4</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Валюти</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>СумаПрихід</Name>
+              <NameInTable>col_a5</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+            <Field>
+              <Name>СумаРозхід</Name>
+              <NameInTable>col_a6</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+            <Field>
+              <Name>СумаЗалишок</Name>
+              <NameInTable>col_a7</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+          </Fields>
+        </TablePart>
+      </TabularParts>
+      <QueryBlockList>
+        <QueryBlock>
+          <Name>Залишки</Name>
+          <Query position="0" key="DELETE">
+DELETE FROM 
+    {РухКоштів_Залишки_TablePart.TABLE}
+WHERE 
+    {РухКоштів_Залишки_TablePart.TABLE}.{РухКоштів_Залишки_TablePart.Період} = @ПеріодДеньВідбір
+</Query>
+          <Query position="1" key="SELECT">
+INSERT INTO 
+    {РухКоштів_Залишки_TablePart.TABLE} 
+(
+    uid,
+    {РухКоштів_Залишки_TablePart.Період},
+    {РухКоштів_Залишки_TablePart.Організація},
+    {РухКоштів_Залишки_TablePart.Каса},
+    {РухКоштів_Залишки_TablePart.Валюта},
+    {РухКоштів_Залишки_TablePart.Сума}
+)
+SELECT
+    uuid_generate_v4(),
+    date_trunc('day', Рег_РухКоштів.period::timestamp) AS Період,
+    Рег_РухКоштів.{РухКоштів_Const.Організація} AS Організація,
+    Рег_РухКоштів.{РухКоштів_Const.Каса} AS Каса,
+    Рег_РухКоштів.{РухКоштів_Const.Валюта} AS Валюта,
+
+    /* Сума */
+    SUM(CASE WHEN Рег_РухКоштів.income = true THEN 
+        Рег_РухКоштів.{РухКоштів_Const.Сума} ELSE 
+        -Рег_РухКоштів.{РухКоштів_Const.Сума} END) AS Сума
+
+FROM
+    {РухКоштів_Const.TABLE} AS Рег_РухКоштів
+
+WHERE
+    date_trunc('day', Рег_РухКоштів.period::timestamp) = @ПеріодДеньВідбір
+
+GROUP BY
+    Період, Організація, Каса, Валюта
+
+HAVING
+
+    /* Сума */
+    SUM(CASE WHEN Рег_РухКоштів.income = true THEN 
+        Рег_РухКоштів.{РухКоштів_Const.Сума} ELSE 
+        -Рег_РухКоштів.{РухКоштів_Const.Сума} END) != 0 
+
+
+
+
+</Query>
+        </QueryBlock>
+        <QueryBlock>
+          <Name>Обороти</Name>
+          <Query position="0" key="DELETE">
+DELETE FROM 
+    {РухКоштів_Обороти_TablePart.TABLE}
+WHERE 
+    {РухКоштів_Обороти_TablePart.TABLE}.{РухКоштів_Обороти_TablePart.Період} = @ПеріодДеньВідбір
+</Query>
+          <Query position="1" key="SELECT">
+INSERT INTO 
+    {РухКоштів_Обороти_TablePart.TABLE} 
+(
+    uid,
+    {РухКоштів_Обороти_TablePart.Період},
+    {РухКоштів_Обороти_TablePart.Організація},
+    {РухКоштів_Обороти_TablePart.Каса},
+    {РухКоштів_Обороти_TablePart.Валюта},
+    {РухКоштів_Обороти_TablePart.СумаПрихід},
+    {РухКоштів_Обороти_TablePart.СумаРозхід}
+)
+SELECT
+    uuid_generate_v4(),
+    date_trunc('day', Рег_РухКоштів.period::timestamp) AS Період,
+    Рег_РухКоштів.{РухКоштів_Const.Організація} AS Організація,
+    Рег_РухКоштів.{РухКоштів_Const.Каса} AS Каса,
+    Рег_РухКоштів.{РухКоштів_Const.Валюта} AS Валюта,
+
+    /* Сума */
+    SUM(CASE WHEN Рег_РухКоштів.income = true THEN 
+        Рег_РухКоштів.{РухКоштів_Const.Сума} ELSE 0 END) AS СумаПрихід,
+    SUM(CASE WHEN Рег_РухКоштів.income = false THEN 
+        Рег_РухКоштів.{РухКоштів_Const.Сума} ELSE 0 END) AS СумаРозхід
+
+FROM
+    {РухКоштів_Const.TABLE} AS Рег_РухКоштів
+
+WHERE
+    date_trunc('day', Рег_РухКоштів.period::timestamp) = @ПеріодДеньВідбір
+
+GROUP BY
+    Період, Організація, Каса, Валюта
+
+HAVING
+
+    /* Сума */
+    SUM(CASE WHEN Рег_РухКоштів.income = true THEN 
+        Рег_РухКоштів.{РухКоштів_Const.Сума} ELSE 0 END) != 0 OR 
+    SUM(CASE WHEN Рег_РухКоштів.income = false THEN 
+        Рег_РухКоштів.{РухКоштів_Const.Сума} ELSE 0 END) != 0 
+
+
+
+
+</Query>
+        </QueryBlock>
+        <QueryBlock>
+          <Name>ЗалишкиТаОбороти</Name>
+          <Query position="0" key="DELETE">
+DELETE FROM 
+    {РухКоштів_ЗалишкиТаОбороти_TablePart.TABLE}
+WHERE 
+    {РухКоштів_ЗалишкиТаОбороти_TablePart.TABLE}.{РухКоштів_ЗалишкиТаОбороти_TablePart.Період} = @ПеріодДеньВідбір
+</Query>
+          <Query position="1" key="SELECT">
+INSERT INTO 
+    {РухКоштів_ЗалишкиТаОбороти_TablePart.TABLE} 
+(
+    uid,
+    {РухКоштів_ЗалишкиТаОбороти_TablePart.Період},
+    {РухКоштів_ЗалишкиТаОбороти_TablePart.Організація},
+    {РухКоштів_ЗалишкиТаОбороти_TablePart.Каса},
+    {РухКоштів_ЗалишкиТаОбороти_TablePart.Валюта},
+    {РухКоштів_ЗалишкиТаОбороти_TablePart.СумаПрихід},
+    {РухКоштів_ЗалишкиТаОбороти_TablePart.СумаРозхід},
+    {РухКоштів_ЗалишкиТаОбороти_TablePart.СумаЗалишок}
+)
+SELECT
+    uuid_generate_v4(),
+    date_trunc('day', Рег_РухКоштів.period::timestamp) AS Період,
+    Рег_РухКоштів.{РухКоштів_Const.Організація} AS Організація,
+    Рег_РухКоштів.{РухКоштів_Const.Каса} AS Каса,
+    Рег_РухКоштів.{РухКоштів_Const.Валюта} AS Валюта,
+
+    /* Сума */
+    SUM(CASE WHEN Рег_РухКоштів.income = true THEN 
+        Рег_РухКоштів.{РухКоштів_Const.Сума} ELSE 0 END) AS СумаПрихід,
+    SUM(CASE WHEN Рег_РухКоштів.income = false THEN 
+        Рег_РухКоштів.{РухКоштів_Const.Сума} ELSE 0 END) AS СумаРозхід,
+    SUM(CASE WHEN Рег_РухКоштів.income = true THEN 
+        Рег_РухКоштів.{РухКоштів_Const.Сума} ELSE 
+        -Рег_РухКоштів.{РухКоштів_Const.Сума} END) AS СумаЗалишок
+
+FROM
+    {РухКоштів_Const.TABLE} AS Рег_РухКоштів
+
+WHERE
+    date_trunc('day', Рег_РухКоштів.period::timestamp) = @ПеріодДеньВідбір
+
+GROUP BY
+    Період, Організація, Каса, Валюта
+
+HAVING
+
+    /* Сума */
+    SUM(CASE WHEN Рег_РухКоштів.income = true THEN 
+        Рег_РухКоштів.{РухКоштів_Const.Сума} ELSE 0 END) != 0 OR 
+    SUM(CASE WHEN Рег_РухКоштів.income = false THEN 
+        Рег_РухКоштів.{РухКоштів_Const.Сума} ELSE 0 END) != 0 OR
+    SUM(CASE WHEN Рег_РухКоштів.income = true THEN 
+        Рег_РухКоштів.{РухКоштів_Const.Сума} ELSE 
+        -Рег_РухКоштів.{РухКоштів_Const.Сума} END) != 0 
+
+
+
+
+</Query>
+        </QueryBlock>
+      </QueryBlockList>
     </RegisterAccumulation>
     <RegisterAccumulation>
       <Name>ПартіїТоварів</Name>
@@ -15046,8 +17416,552 @@ HAVING
         <Name>ПсуванняТоварів</Name>
         <Name>ВнутрішнєСпоживанняТоварів</Name>
       </AllowDocumentSpend>
-      <TabularParts />
-      <QueryBlockList />
+      <TabularParts>
+        <TablePart>
+          <Name>Залишки</Name>
+          <Table>tab_b49</Table>
+          <Desc>Віртуальна таблиця</Desc>
+          <Fields>
+            <Field>
+              <Name>Період</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>date</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Організація</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Організації</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>ПартіяТоварівКомпозит</Name>
+              <NameInTable>col_a3</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ПартіяТоварівКомпозит</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Номенклатура</Name>
+              <NameInTable>col_a4</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Номенклатура</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>ХарактеристикаНоменклатури</Name>
+              <NameInTable>col_a5</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Серія</Name>
+              <NameInTable>col_a6</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.СеріїНоменклатури</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Склад</Name>
+              <NameInTable>col_a7</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Склади</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Кількість</Name>
+              <NameInTable>col_a8</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+            <Field>
+              <Name>Собівартість</Name>
+              <NameInTable>col_a9</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+          </Fields>
+        </TablePart>
+        <TablePart>
+          <Name>Обороти</Name>
+          <Table>tab_b50</Table>
+          <Desc>Віртуальна таблиця</Desc>
+          <Fields>
+            <Field>
+              <Name>Період</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>date</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Організація</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Організації</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>ПартіяТоварівКомпозит</Name>
+              <NameInTable>col_a3</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ПартіяТоварівКомпозит</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Номенклатура</Name>
+              <NameInTable>col_a4</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Номенклатура</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>ХарактеристикаНоменклатури</Name>
+              <NameInTable>col_a5</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Серія</Name>
+              <NameInTable>col_a6</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.СеріїНоменклатури</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Склад</Name>
+              <NameInTable>col_a7</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Склади</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>КількістьПрихід</Name>
+              <NameInTable>col_a8</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+            <Field>
+              <Name>КількістьРозхід</Name>
+              <NameInTable>col_a9</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+            <Field>
+              <Name>СобівартістьПрихід</Name>
+              <NameInTable>col_b1</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+            <Field>
+              <Name>СобівартістьРозхід</Name>
+              <NameInTable>col_b2</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+          </Fields>
+        </TablePart>
+        <TablePart>
+          <Name>ЗалишкиТаОбороти</Name>
+          <Table>tab_b51</Table>
+          <Desc>Віртуальна таблиця</Desc>
+          <Fields>
+            <Field>
+              <Name>Період</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>date</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Організація</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Організації</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>ПартіяТоварівКомпозит</Name>
+              <NameInTable>col_a3</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ПартіяТоварівКомпозит</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Номенклатура</Name>
+              <NameInTable>col_a4</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Номенклатура</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>ХарактеристикаНоменклатури</Name>
+              <NameInTable>col_a5</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Серія</Name>
+              <NameInTable>col_a6</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.СеріїНоменклатури</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Склад</Name>
+              <NameInTable>col_a7</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Склади</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>КількістьПрихід</Name>
+              <NameInTable>col_a8</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+            <Field>
+              <Name>КількістьРозхід</Name>
+              <NameInTable>col_a9</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+            <Field>
+              <Name>КількістьЗалишок</Name>
+              <NameInTable>col_b1</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+            <Field>
+              <Name>СобівартістьПрихід</Name>
+              <NameInTable>col_b2</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+            <Field>
+              <Name>СобівартістьРозхід</Name>
+              <NameInTable>col_b3</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+            <Field>
+              <Name>СобівартістьЗалишок</Name>
+              <NameInTable>col_b4</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+          </Fields>
+        </TablePart>
+      </TabularParts>
+      <QueryBlockList>
+        <QueryBlock>
+          <Name>Залишки</Name>
+          <Query position="0" key="DELETE">
+DELETE FROM 
+    {ПартіїТоварів_Залишки_TablePart.TABLE}
+WHERE 
+    {ПартіїТоварів_Залишки_TablePart.TABLE}.{ПартіїТоварів_Залишки_TablePart.Період} = @ПеріодДеньВідбір
+</Query>
+          <Query position="1" key="SELECT">
+INSERT INTO 
+    {ПартіїТоварів_Залишки_TablePart.TABLE} 
+(
+    uid,
+    {ПартіїТоварів_Залишки_TablePart.Період},
+    {ПартіїТоварів_Залишки_TablePart.Організація},
+    {ПартіїТоварів_Залишки_TablePart.ПартіяТоварівКомпозит},
+    {ПартіїТоварів_Залишки_TablePart.Номенклатура},
+    {ПартіїТоварів_Залишки_TablePart.ХарактеристикаНоменклатури},
+    {ПартіїТоварів_Залишки_TablePart.Серія},
+    {ПартіїТоварів_Залишки_TablePart.Склад},
+    {ПартіїТоварів_Залишки_TablePart.Кількість},
+    {ПартіїТоварів_Залишки_TablePart.Собівартість}
+)
+SELECT
+    uuid_generate_v4(),
+    date_trunc('day', Рег_ПартіїТоварів.period::timestamp) AS Період,
+    Рег_ПартіїТоварів.{ПартіїТоварів_Const.Організація} AS Організація,
+    Рег_ПартіїТоварів.{ПартіїТоварів_Const.ПартіяТоварівКомпозит} AS ПартіяТоварівКомпозит,
+    Рег_ПартіїТоварів.{ПартіїТоварів_Const.Номенклатура} AS Номенклатура,
+    Рег_ПартіїТоварів.{ПартіїТоварів_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
+    Рег_ПартіїТоварів.{ПартіїТоварів_Const.Серія} AS Серія,
+    Рег_ПартіїТоварів.{ПартіїТоварів_Const.Склад} AS Склад,
+
+    /* Кількість */
+    SUM(CASE WHEN Рег_ПартіїТоварів.income = true THEN 
+        Рег_ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE 
+        -Рег_ПартіїТоварів.{ПартіїТоварів_Const.Кількість} END) AS Кількість,
+
+    /* Собівартість */
+    SUM(CASE WHEN Рег_ПартіїТоварів.income = true THEN 
+        Рег_ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE 
+        -Рег_ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} END) AS Собівартість
+
+FROM
+    {ПартіїТоварів_Const.TABLE} AS Рег_ПартіїТоварів
+
+WHERE
+    date_trunc('day', Рег_ПартіїТоварів.period::timestamp) = @ПеріодДеньВідбір
+
+GROUP BY
+    Період, Організація, ПартіяТоварівКомпозит, Номенклатура, ХарактеристикаНоменклатури, Серія, Склад
+
+HAVING
+
+    /* Кількість */
+    SUM(CASE WHEN Рег_ПартіїТоварів.income = true THEN 
+        Рег_ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE 
+        -Рег_ПартіїТоварів.{ПартіїТоварів_Const.Кількість} END) != 0 
+ OR 
+
+
+    /* Собівартість */
+    SUM(CASE WHEN Рег_ПартіїТоварів.income = true THEN 
+        Рег_ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE 
+        -Рег_ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} END) != 0 
+
+
+
+
+</Query>
+        </QueryBlock>
+        <QueryBlock>
+          <Name>Обороти</Name>
+          <Query position="0" key="DELETE">
+DELETE FROM 
+    {ПартіїТоварів_Обороти_TablePart.TABLE}
+WHERE 
+    {ПартіїТоварів_Обороти_TablePart.TABLE}.{ПартіїТоварів_Обороти_TablePart.Період} = @ПеріодДеньВідбір
+</Query>
+          <Query position="1" key="SELECT">
+INSERT INTO 
+    {ПартіїТоварів_Обороти_TablePart.TABLE} 
+(
+    uid,
+    {ПартіїТоварів_Обороти_TablePart.Період},
+    {ПартіїТоварів_Обороти_TablePart.Організація},
+    {ПартіїТоварів_Обороти_TablePart.ПартіяТоварівКомпозит},
+    {ПартіїТоварів_Обороти_TablePart.Номенклатура},
+    {ПартіїТоварів_Обороти_TablePart.ХарактеристикаНоменклатури},
+    {ПартіїТоварів_Обороти_TablePart.Серія},
+    {ПартіїТоварів_Обороти_TablePart.Склад},
+    {ПартіїТоварів_Обороти_TablePart.КількістьПрихід},
+    {ПартіїТоварів_Обороти_TablePart.КількістьРозхід},
+    {ПартіїТоварів_Обороти_TablePart.СобівартістьПрихід},
+    {ПартіїТоварів_Обороти_TablePart.СобівартістьРозхід}
+)
+SELECT
+    uuid_generate_v4(),
+    date_trunc('day', Рег_ПартіїТоварів.period::timestamp) AS Період,
+    Рег_ПартіїТоварів.{ПартіїТоварів_Const.Організація} AS Організація,
+    Рег_ПартіїТоварів.{ПартіїТоварів_Const.ПартіяТоварівКомпозит} AS ПартіяТоварівКомпозит,
+    Рег_ПартіїТоварів.{ПартіїТоварів_Const.Номенклатура} AS Номенклатура,
+    Рег_ПартіїТоварів.{ПартіїТоварів_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
+    Рег_ПартіїТоварів.{ПартіїТоварів_Const.Серія} AS Серія,
+    Рег_ПартіїТоварів.{ПартіїТоварів_Const.Склад} AS Склад,
+
+    /* Кількість */
+    SUM(CASE WHEN Рег_ПартіїТоварів.income = true THEN 
+        Рег_ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE 0 END) AS КількістьПрихід,
+    SUM(CASE WHEN Рег_ПартіїТоварів.income = false THEN 
+        Рег_ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE 0 END) AS КількістьРозхід,
+
+    /* Собівартість */
+    SUM(CASE WHEN Рег_ПартіїТоварів.income = true THEN 
+        Рег_ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE 0 END) AS СобівартістьПрихід,
+    SUM(CASE WHEN Рег_ПартіїТоварів.income = false THEN 
+        Рег_ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE 0 END) AS СобівартістьРозхід
+
+FROM
+    {ПартіїТоварів_Const.TABLE} AS Рег_ПартіїТоварів
+
+WHERE
+    date_trunc('day', Рег_ПартіїТоварів.period::timestamp) = @ПеріодДеньВідбір
+
+GROUP BY
+    Період, Організація, ПартіяТоварівКомпозит, Номенклатура, ХарактеристикаНоменклатури, Серія, Склад
+
+HAVING
+
+    /* Кількість */
+    SUM(CASE WHEN Рег_ПартіїТоварів.income = true THEN 
+        Рег_ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE 0 END) != 0 OR 
+    SUM(CASE WHEN Рег_ПартіїТоварів.income = false THEN 
+        Рег_ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE 0 END) != 0 
+ OR 
+
+
+    /* Собівартість */
+    SUM(CASE WHEN Рег_ПартіїТоварів.income = true THEN 
+        Рег_ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE 0 END) != 0 OR 
+    SUM(CASE WHEN Рег_ПартіїТоварів.income = false THEN 
+        Рег_ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE 0 END) != 0 
+
+
+
+
+</Query>
+        </QueryBlock>
+        <QueryBlock>
+          <Name>ЗалишкиТаОбороти</Name>
+          <Query position="0" key="DELETE">
+DELETE FROM 
+    {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.TABLE}
+WHERE 
+    {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.TABLE}.{ПартіїТоварів_ЗалишкиТаОбороти_TablePart.Період} = @ПеріодДеньВідбір
+</Query>
+          <Query position="1" key="SELECT">
+INSERT INTO 
+    {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.TABLE} 
+(
+    uid,
+    {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.Період},
+    {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.Організація},
+    {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.ПартіяТоварівКомпозит},
+    {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.Номенклатура},
+    {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.ХарактеристикаНоменклатури},
+    {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.Серія},
+    {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.Склад},
+    {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.КількістьПрихід},
+    {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.КількістьРозхід},
+    {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.КількістьЗалишок},
+    {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.СобівартістьПрихід},
+    {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.СобівартістьРозхід},
+    {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.СобівартістьЗалишок}
+)
+SELECT
+    uuid_generate_v4(),
+    date_trunc('day', Рег_ПартіїТоварів.period::timestamp) AS Період,
+    Рег_ПартіїТоварів.{ПартіїТоварів_Const.Організація} AS Організація,
+    Рег_ПартіїТоварів.{ПартіїТоварів_Const.ПартіяТоварівКомпозит} AS ПартіяТоварівКомпозит,
+    Рег_ПартіїТоварів.{ПартіїТоварів_Const.Номенклатура} AS Номенклатура,
+    Рег_ПартіїТоварів.{ПартіїТоварів_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
+    Рег_ПартіїТоварів.{ПартіїТоварів_Const.Серія} AS Серія,
+    Рег_ПартіїТоварів.{ПартіїТоварів_Const.Склад} AS Склад,
+
+    /* Кількість */
+    SUM(CASE WHEN Рег_ПартіїТоварів.income = true THEN 
+        Рег_ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE 0 END) AS КількістьПрихід,
+    SUM(CASE WHEN Рег_ПартіїТоварів.income = false THEN 
+        Рег_ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE 0 END) AS КількістьРозхід,
+    SUM(CASE WHEN Рег_ПартіїТоварів.income = true THEN 
+        Рег_ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE 
+        -Рег_ПартіїТоварів.{ПартіїТоварів_Const.Кількість} END) AS КількістьЗалишок,
+
+    /* Собівартість */
+    SUM(CASE WHEN Рег_ПартіїТоварів.income = true THEN 
+        Рег_ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE 0 END) AS СобівартістьПрихід,
+    SUM(CASE WHEN Рег_ПартіїТоварів.income = false THEN 
+        Рег_ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE 0 END) AS СобівартістьРозхід,
+    SUM(CASE WHEN Рег_ПартіїТоварів.income = true THEN 
+        Рег_ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE 
+        -Рег_ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} END) AS СобівартістьЗалишок
+
+FROM
+    {ПартіїТоварів_Const.TABLE} AS Рег_ПартіїТоварів
+
+WHERE
+    date_trunc('day', Рег_ПартіїТоварів.period::timestamp) = @ПеріодДеньВідбір
+
+GROUP BY
+    Період, Організація, ПартіяТоварівКомпозит, Номенклатура, ХарактеристикаНоменклатури, Серія, Склад
+
+HAVING
+
+    /* Кількість */
+    SUM(CASE WHEN Рег_ПартіїТоварів.income = true THEN 
+        Рег_ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE 0 END) != 0 OR 
+    SUM(CASE WHEN Рег_ПартіїТоварів.income = false THEN 
+        Рег_ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE 0 END) != 0 OR
+    SUM(CASE WHEN Рег_ПартіїТоварів.income = true THEN 
+        Рег_ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE 
+        -Рег_ПартіїТоварів.{ПартіїТоварів_Const.Кількість} END) != 0 
+ OR 
+
+
+    /* Собівартість */
+    SUM(CASE WHEN Рег_ПартіїТоварів.income = true THEN 
+        Рег_ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE 0 END) != 0 OR 
+    SUM(CASE WHEN Рег_ПартіїТоварів.income = false THEN 
+        Рег_ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE 0 END) != 0 OR
+    SUM(CASE WHEN Рег_ПартіїТоварів.income = true THEN 
+        Рег_ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE 
+        -Рег_ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} END) != 0 
+
+
+
+
+</Query>
+        </QueryBlock>
+      </QueryBlockList>
     </RegisterAccumulation>
     <RegisterAccumulation>
       <Name>ТовариДоВідвантаження</Name>
