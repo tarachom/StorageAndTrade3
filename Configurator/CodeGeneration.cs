@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 24.12.2022 15:35:18
+ * Дата конфігурації: 26.12.2022 06:03:31
  *
  */
 
@@ -17449,7 +17449,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
             }
-            base.BaseSpetialTableRegAccumTrigerAdd(period, owner);
+            base.BaseTrigerAdd(period, owner);
             base.BaseCommitTransaction();
         }
 
@@ -17871,7 +17871,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
             }
-            base.BaseSpetialTableRegAccumTrigerAdd(period, owner);
+            base.BaseTrigerAdd(period, owner);
             base.BaseCommitTransaction();
         }
 
@@ -17968,7 +17968,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
             }
-            base.BaseSpetialTableRegAccumTrigerAdd(period, owner);
+            base.BaseTrigerAdd(period, owner);
             base.BaseCommitTransaction();
         }
 
@@ -18163,7 +18163,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
             }
-            base.BaseSpetialTableRegAccumTrigerAdd(period, owner);
+            base.BaseTrigerAdd(period, owner);
             base.BaseCommitTransaction();
         }
 
@@ -18261,7 +18261,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
             }
-            base.BaseSpetialTableRegAccumTrigerAdd(period, owner);
+            base.BaseTrigerAdd(period, owner);
             base.BaseCommitTransaction();
         }
 
@@ -18365,7 +18365,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
             }
-            base.BaseSpetialTableRegAccumTrigerAdd(period, owner);
+            base.BaseTrigerAdd(period, owner);
             base.BaseCommitTransaction();
         }
 
@@ -18477,7 +18477,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
             }
-            base.BaseSpetialTableRegAccumTrigerAdd(period, owner);
+            base.BaseTrigerAdd(period, owner);
             base.BaseCommitTransaction();
         }
 
@@ -18583,7 +18583,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
             }
-            base.BaseSpetialTableRegAccumTrigerAdd(period, owner);
+            base.BaseTrigerAdd(period, owner);
             base.BaseCommitTransaction();
         }
 
@@ -18679,7 +18679,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
             }
-            base.BaseSpetialTableRegAccumTrigerAdd(period, owner);
+            base.BaseTrigerAdd(period, owner);
             base.BaseCommitTransaction();
         }
 
@@ -18774,7 +18774,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
             }
-            base.BaseSpetialTableRegAccumTrigerAdd(period, owner);
+            base.BaseTrigerAdd(period, owner);
             base.BaseCommitTransaction();
         }
 
@@ -18871,7 +18871,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
             }
-            base.BaseSpetialTableRegAccumTrigerAdd(period, owner);
+            base.BaseTrigerAdd(period, owner);
             base.BaseCommitTransaction();
         }
 
@@ -18983,7 +18983,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
             }
-            base.BaseSpetialTableRegAccumTrigerAdd(period, owner);
+            base.BaseTrigerAdd(period, owner);
             base.BaseCommitTransaction();
         }
 
@@ -19093,7 +19093,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
             }
-            base.BaseSpetialTableRegAccumTrigerAdd(period, owner);
+            base.BaseTrigerAdd(period, owner);
             base.BaseCommitTransaction();
         }
 
@@ -19219,7 +19219,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
             }
-            base.BaseSpetialTableRegAccumTrigerAdd(period, owner);
+            base.BaseTrigerAdd(period, owner);
             base.BaseCommitTransaction();
         }
 
