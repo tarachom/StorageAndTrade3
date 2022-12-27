@@ -5,7 +5,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>26.12.2022 20:50:24</DateTimeSave>
+  <DateTimeSave>27.12.2022 15:02:02</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -14402,8 +14402,123 @@ HAVING
         <Fields />
       </PropertyFields>
       <AllowDocumentSpend />
-      <TabularParts />
-      <QueryBlockList />
+      <TabularParts>
+        <TablePart>
+          <Name>Обороти</Name>
+          <Table>tab_b52</Table>
+          <Desc>Віртуальна таблиця</Desc>
+          <Fields>
+            <Field>
+              <Name>Період</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>date</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Номенклатура</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Номенклатура</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>ХарактеристикаНоменклатури</Name>
+              <NameInTable>col_a3</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Склад</Name>
+              <NameInTable>col_a4</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Склади</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>КількістьПрихід</Name>
+              <NameInTable>col_a5</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+            <Field>
+              <Name>КількістьРозхід</Name>
+              <NameInTable>col_a6</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+          </Fields>
+        </TablePart>
+      </TabularParts>
+      <QueryBlockList>
+        <QueryBlock>
+          <Name>Обороти</Name>
+          <Query position="0" key="DELETE">
+DELETE FROM 
+    {РухТоварів_Обороти_TablePart.TABLE}
+WHERE 
+    {РухТоварів_Обороти_TablePart.TABLE}.{РухТоварів_Обороти_TablePart.Період} = @ПеріодДеньВідбір
+</Query>
+          <Query position="1" key="SELECT">
+INSERT INTO 
+    {РухТоварів_Обороти_TablePart.TABLE} 
+(
+    uid,
+    {РухТоварів_Обороти_TablePart.Період},
+    {РухТоварів_Обороти_TablePart.Номенклатура},
+    {РухТоварів_Обороти_TablePart.ХарактеристикаНоменклатури},
+    {РухТоварів_Обороти_TablePart.Склад},
+    {РухТоварів_Обороти_TablePart.КількістьПрихід},
+    {РухТоварів_Обороти_TablePart.КількістьРозхід}
+)
+SELECT
+    uuid_generate_v4(),
+    date_trunc('day', Рег_РухТоварів.period::timestamp) AS Період,
+    Рег_РухТоварів.{РухТоварів_Const.Номенклатура} AS Номенклатура,
+    Рег_РухТоварів.{РухТоварів_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
+    Рег_РухТоварів.{РухТоварів_Const.Склад} AS Склад,
+
+    /* Кількість */
+    SUM(CASE WHEN Рег_РухТоварів.income = true THEN 
+        Рег_РухТоварів.{РухТоварів_Const.Кількість} ELSE 0 END) AS КількістьПрихід,
+    SUM(CASE WHEN Рег_РухТоварів.income = false THEN 
+        Рег_РухТоварів.{РухТоварів_Const.Кількість} ELSE 0 END) AS КількістьРозхід
+
+FROM
+    {РухТоварів_Const.TABLE} AS Рег_РухТоварів
+
+WHERE
+    date_trunc('day', Рег_РухТоварів.period::timestamp) = @ПеріодДеньВідбір
+
+GROUP BY
+    Період, Номенклатура, ХарактеристикаНоменклатури, Склад
+
+HAVING
+
+    /* Кількість */
+    SUM(CASE WHEN Рег_РухТоварів.income = true THEN 
+        Рег_РухТоварів.{РухТоварів_Const.Кількість} ELSE 0 END) != 0 OR 
+    SUM(CASE WHEN Рег_РухТоварів.income = false THEN 
+        Рег_РухТоварів.{РухТоварів_Const.Кількість} ELSE 0 END) != 0 
+
+
+
+
+</Query>
+        </QueryBlock>
+      </QueryBlockList>
     </RegisterAccumulation>
     <RegisterAccumulation>
       <Name>ЗамовленняКлієнтів</Name>
@@ -17502,224 +17617,6 @@ HAVING
             </Field>
           </Fields>
         </TablePart>
-        <TablePart>
-          <Name>Обороти</Name>
-          <Table>tab_b50</Table>
-          <Desc>Віртуальна таблиця</Desc>
-          <Fields>
-            <Field>
-              <Name>Період</Name>
-              <NameInTable>col_a1</NameInTable>
-              <Type>date</Type>
-              <Desc>
-              </Desc>
-              <IsIndex>1</IsIndex>
-            </Field>
-            <Field>
-              <Name>Організація</Name>
-              <NameInTable>col_a2</NameInTable>
-              <Type>pointer</Type>
-              <Pointer>Довідники.Організації</Pointer>
-              <Desc>
-              </Desc>
-              <IsIndex>1</IsIndex>
-            </Field>
-            <Field>
-              <Name>ПартіяТоварівКомпозит</Name>
-              <NameInTable>col_a3</NameInTable>
-              <Type>pointer</Type>
-              <Pointer>Довідники.ПартіяТоварівКомпозит</Pointer>
-              <Desc>
-              </Desc>
-              <IsIndex>1</IsIndex>
-            </Field>
-            <Field>
-              <Name>Номенклатура</Name>
-              <NameInTable>col_a4</NameInTable>
-              <Type>pointer</Type>
-              <Pointer>Довідники.Номенклатура</Pointer>
-              <Desc>
-              </Desc>
-              <IsIndex>1</IsIndex>
-            </Field>
-            <Field>
-              <Name>ХарактеристикаНоменклатури</Name>
-              <NameInTable>col_a5</NameInTable>
-              <Type>pointer</Type>
-              <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
-              <Desc>
-              </Desc>
-              <IsIndex>1</IsIndex>
-            </Field>
-            <Field>
-              <Name>Серія</Name>
-              <NameInTable>col_a6</NameInTable>
-              <Type>pointer</Type>
-              <Pointer>Довідники.СеріїНоменклатури</Pointer>
-              <Desc>
-              </Desc>
-              <IsIndex>1</IsIndex>
-            </Field>
-            <Field>
-              <Name>Склад</Name>
-              <NameInTable>col_a7</NameInTable>
-              <Type>pointer</Type>
-              <Pointer>Довідники.Склади</Pointer>
-              <Desc>
-              </Desc>
-              <IsIndex>1</IsIndex>
-            </Field>
-            <Field>
-              <Name>КількістьПрихід</Name>
-              <NameInTable>col_a8</NameInTable>
-              <Type>numeric</Type>
-              <Desc>
-              </Desc>
-              <IsIndex>0</IsIndex>
-            </Field>
-            <Field>
-              <Name>КількістьРозхід</Name>
-              <NameInTable>col_a9</NameInTable>
-              <Type>numeric</Type>
-              <Desc>
-              </Desc>
-              <IsIndex>0</IsIndex>
-            </Field>
-            <Field>
-              <Name>СобівартістьПрихід</Name>
-              <NameInTable>col_b1</NameInTable>
-              <Type>numeric</Type>
-              <Desc>
-              </Desc>
-              <IsIndex>0</IsIndex>
-            </Field>
-            <Field>
-              <Name>СобівартістьРозхід</Name>
-              <NameInTable>col_b2</NameInTable>
-              <Type>numeric</Type>
-              <Desc>
-              </Desc>
-              <IsIndex>0</IsIndex>
-            </Field>
-          </Fields>
-        </TablePart>
-        <TablePart>
-          <Name>ЗалишкиТаОбороти</Name>
-          <Table>tab_b51</Table>
-          <Desc>Віртуальна таблиця</Desc>
-          <Fields>
-            <Field>
-              <Name>Період</Name>
-              <NameInTable>col_a1</NameInTable>
-              <Type>date</Type>
-              <Desc>
-              </Desc>
-              <IsIndex>1</IsIndex>
-            </Field>
-            <Field>
-              <Name>Організація</Name>
-              <NameInTable>col_a2</NameInTable>
-              <Type>pointer</Type>
-              <Pointer>Довідники.Організації</Pointer>
-              <Desc>
-              </Desc>
-              <IsIndex>1</IsIndex>
-            </Field>
-            <Field>
-              <Name>ПартіяТоварівКомпозит</Name>
-              <NameInTable>col_a3</NameInTable>
-              <Type>pointer</Type>
-              <Pointer>Довідники.ПартіяТоварівКомпозит</Pointer>
-              <Desc>
-              </Desc>
-              <IsIndex>1</IsIndex>
-            </Field>
-            <Field>
-              <Name>Номенклатура</Name>
-              <NameInTable>col_a4</NameInTable>
-              <Type>pointer</Type>
-              <Pointer>Довідники.Номенклатура</Pointer>
-              <Desc>
-              </Desc>
-              <IsIndex>1</IsIndex>
-            </Field>
-            <Field>
-              <Name>ХарактеристикаНоменклатури</Name>
-              <NameInTable>col_a5</NameInTable>
-              <Type>pointer</Type>
-              <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
-              <Desc>
-              </Desc>
-              <IsIndex>1</IsIndex>
-            </Field>
-            <Field>
-              <Name>Серія</Name>
-              <NameInTable>col_a6</NameInTable>
-              <Type>pointer</Type>
-              <Pointer>Довідники.СеріїНоменклатури</Pointer>
-              <Desc>
-              </Desc>
-              <IsIndex>1</IsIndex>
-            </Field>
-            <Field>
-              <Name>Склад</Name>
-              <NameInTable>col_a7</NameInTable>
-              <Type>pointer</Type>
-              <Pointer>Довідники.Склади</Pointer>
-              <Desc>
-              </Desc>
-              <IsIndex>1</IsIndex>
-            </Field>
-            <Field>
-              <Name>КількістьПрихід</Name>
-              <NameInTable>col_a8</NameInTable>
-              <Type>numeric</Type>
-              <Desc>
-              </Desc>
-              <IsIndex>0</IsIndex>
-            </Field>
-            <Field>
-              <Name>КількістьРозхід</Name>
-              <NameInTable>col_a9</NameInTable>
-              <Type>numeric</Type>
-              <Desc>
-              </Desc>
-              <IsIndex>0</IsIndex>
-            </Field>
-            <Field>
-              <Name>КількістьЗалишок</Name>
-              <NameInTable>col_b1</NameInTable>
-              <Type>numeric</Type>
-              <Desc>
-              </Desc>
-              <IsIndex>0</IsIndex>
-            </Field>
-            <Field>
-              <Name>СобівартістьПрихід</Name>
-              <NameInTable>col_b2</NameInTable>
-              <Type>numeric</Type>
-              <Desc>
-              </Desc>
-              <IsIndex>0</IsIndex>
-            </Field>
-            <Field>
-              <Name>СобівартістьРозхід</Name>
-              <NameInTable>col_b3</NameInTable>
-              <Type>numeric</Type>
-              <Desc>
-              </Desc>
-              <IsIndex>0</IsIndex>
-            </Field>
-            <Field>
-              <Name>СобівартістьЗалишок</Name>
-              <NameInTable>col_b4</NameInTable>
-              <Type>numeric</Type>
-              <Desc>
-              </Desc>
-              <IsIndex>0</IsIndex>
-            </Field>
-          </Fields>
-        </TablePart>
       </TabularParts>
       <QueryBlockList>
         <QueryBlock>
@@ -17784,174 +17681,6 @@ HAVING
 
 
     /* Собівартість */
-    SUM(CASE WHEN Рег_ПартіїТоварів.income = true THEN 
-        Рег_ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE 
-        -Рег_ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} END) != 0 
-
-
-
-
-</Query>
-        </QueryBlock>
-        <QueryBlock>
-          <Name>Обороти</Name>
-          <Query position="0" key="DELETE">
-DELETE FROM 
-    {ПартіїТоварів_Обороти_TablePart.TABLE}
-WHERE 
-    {ПартіїТоварів_Обороти_TablePart.TABLE}.{ПартіїТоварів_Обороти_TablePart.Період} = @ПеріодДеньВідбір
-</Query>
-          <Query position="1" key="SELECT">
-INSERT INTO 
-    {ПартіїТоварів_Обороти_TablePart.TABLE} 
-(
-    uid,
-    {ПартіїТоварів_Обороти_TablePart.Період},
-    {ПартіїТоварів_Обороти_TablePart.Організація},
-    {ПартіїТоварів_Обороти_TablePart.ПартіяТоварівКомпозит},
-    {ПартіїТоварів_Обороти_TablePart.Номенклатура},
-    {ПартіїТоварів_Обороти_TablePart.ХарактеристикаНоменклатури},
-    {ПартіїТоварів_Обороти_TablePart.Серія},
-    {ПартіїТоварів_Обороти_TablePart.Склад},
-    {ПартіїТоварів_Обороти_TablePart.КількістьПрихід},
-    {ПартіїТоварів_Обороти_TablePart.КількістьРозхід},
-    {ПартіїТоварів_Обороти_TablePart.СобівартістьПрихід},
-    {ПартіїТоварів_Обороти_TablePart.СобівартістьРозхід}
-)
-SELECT
-    uuid_generate_v4(),
-    date_trunc('day', Рег_ПартіїТоварів.period::timestamp) AS Період,
-    Рег_ПартіїТоварів.{ПартіїТоварів_Const.Організація} AS Організація,
-    Рег_ПартіїТоварів.{ПартіїТоварів_Const.ПартіяТоварівКомпозит} AS ПартіяТоварівКомпозит,
-    Рег_ПартіїТоварів.{ПартіїТоварів_Const.Номенклатура} AS Номенклатура,
-    Рег_ПартіїТоварів.{ПартіїТоварів_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
-    Рег_ПартіїТоварів.{ПартіїТоварів_Const.Серія} AS Серія,
-    Рег_ПартіїТоварів.{ПартіїТоварів_Const.Склад} AS Склад,
-
-    /* Кількість */
-    SUM(CASE WHEN Рег_ПартіїТоварів.income = true THEN 
-        Рег_ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE 0 END) AS КількістьПрихід,
-    SUM(CASE WHEN Рег_ПартіїТоварів.income = false THEN 
-        Рег_ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE 0 END) AS КількістьРозхід,
-
-    /* Собівартість */
-    SUM(CASE WHEN Рег_ПартіїТоварів.income = true THEN 
-        Рег_ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE 0 END) AS СобівартістьПрихід,
-    SUM(CASE WHEN Рег_ПартіїТоварів.income = false THEN 
-        Рег_ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE 0 END) AS СобівартістьРозхід
-
-FROM
-    {ПартіїТоварів_Const.TABLE} AS Рег_ПартіїТоварів
-
-WHERE
-    date_trunc('day', Рег_ПартіїТоварів.period::timestamp) = @ПеріодДеньВідбір
-
-GROUP BY
-    Період, Організація, ПартіяТоварівКомпозит, Номенклатура, ХарактеристикаНоменклатури, Серія, Склад
-
-HAVING
-
-    /* Кількість */
-    SUM(CASE WHEN Рег_ПартіїТоварів.income = true THEN 
-        Рег_ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE 0 END) != 0 OR 
-    SUM(CASE WHEN Рег_ПартіїТоварів.income = false THEN 
-        Рег_ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE 0 END) != 0 
- OR 
-
-
-    /* Собівартість */
-    SUM(CASE WHEN Рег_ПартіїТоварів.income = true THEN 
-        Рег_ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE 0 END) != 0 OR 
-    SUM(CASE WHEN Рег_ПартіїТоварів.income = false THEN 
-        Рег_ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE 0 END) != 0 
-
-
-
-
-</Query>
-        </QueryBlock>
-        <QueryBlock>
-          <Name>ЗалишкиТаОбороти</Name>
-          <Query position="0" key="DELETE">
-DELETE FROM 
-    {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.TABLE}
-WHERE 
-    {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.TABLE}.{ПартіїТоварів_ЗалишкиТаОбороти_TablePart.Період} = @ПеріодДеньВідбір
-</Query>
-          <Query position="1" key="SELECT">
-INSERT INTO 
-    {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.TABLE} 
-(
-    uid,
-    {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.Період},
-    {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.Організація},
-    {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.ПартіяТоварівКомпозит},
-    {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.Номенклатура},
-    {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.ХарактеристикаНоменклатури},
-    {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.Серія},
-    {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.Склад},
-    {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.КількістьПрихід},
-    {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.КількістьРозхід},
-    {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.КількістьЗалишок},
-    {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.СобівартістьПрихід},
-    {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.СобівартістьРозхід},
-    {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.СобівартістьЗалишок}
-)
-SELECT
-    uuid_generate_v4(),
-    date_trunc('day', Рег_ПартіїТоварів.period::timestamp) AS Період,
-    Рег_ПартіїТоварів.{ПартіїТоварів_Const.Організація} AS Організація,
-    Рег_ПартіїТоварів.{ПартіїТоварів_Const.ПартіяТоварівКомпозит} AS ПартіяТоварівКомпозит,
-    Рег_ПартіїТоварів.{ПартіїТоварів_Const.Номенклатура} AS Номенклатура,
-    Рег_ПартіїТоварів.{ПартіїТоварів_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
-    Рег_ПартіїТоварів.{ПартіїТоварів_Const.Серія} AS Серія,
-    Рег_ПартіїТоварів.{ПартіїТоварів_Const.Склад} AS Склад,
-
-    /* Кількість */
-    SUM(CASE WHEN Рег_ПартіїТоварів.income = true THEN 
-        Рег_ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE 0 END) AS КількістьПрихід,
-    SUM(CASE WHEN Рег_ПартіїТоварів.income = false THEN 
-        Рег_ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE 0 END) AS КількістьРозхід,
-    SUM(CASE WHEN Рег_ПартіїТоварів.income = true THEN 
-        Рег_ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE 
-        -Рег_ПартіїТоварів.{ПартіїТоварів_Const.Кількість} END) AS КількістьЗалишок,
-
-    /* Собівартість */
-    SUM(CASE WHEN Рег_ПартіїТоварів.income = true THEN 
-        Рег_ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE 0 END) AS СобівартістьПрихід,
-    SUM(CASE WHEN Рег_ПартіїТоварів.income = false THEN 
-        Рег_ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE 0 END) AS СобівартістьРозхід,
-    SUM(CASE WHEN Рег_ПартіїТоварів.income = true THEN 
-        Рег_ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE 
-        -Рег_ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} END) AS СобівартістьЗалишок
-
-FROM
-    {ПартіїТоварів_Const.TABLE} AS Рег_ПартіїТоварів
-
-WHERE
-    date_trunc('day', Рег_ПартіїТоварів.period::timestamp) = @ПеріодДеньВідбір
-
-GROUP BY
-    Період, Організація, ПартіяТоварівКомпозит, Номенклатура, ХарактеристикаНоменклатури, Серія, Склад
-
-HAVING
-
-    /* Кількість */
-    SUM(CASE WHEN Рег_ПартіїТоварів.income = true THEN 
-        Рег_ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE 0 END) != 0 OR 
-    SUM(CASE WHEN Рег_ПартіїТоварів.income = false THEN 
-        Рег_ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE 0 END) != 0 OR
-    SUM(CASE WHEN Рег_ПартіїТоварів.income = true THEN 
-        Рег_ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE 
-        -Рег_ПартіїТоварів.{ПартіїТоварів_Const.Кількість} END) != 0 
- OR 
-
-
-    /* Собівартість */
-    SUM(CASE WHEN Рег_ПартіїТоварів.income = true THEN 
-        Рег_ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE 0 END) != 0 OR 
-    SUM(CASE WHEN Рег_ПартіїТоварів.income = false THEN 
-        Рег_ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE 0 END) != 0 OR
     SUM(CASE WHEN Рег_ПартіїТоварів.income = true THEN 
         Рег_ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE 
         -Рег_ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} END) != 0 

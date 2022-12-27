@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 26.12.2022 20:50:24
+ * Дата конфігурації: 27.12.2022 15:02:02
  *
  */
 
@@ -17376,10 +17376,10 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
 }
 
 namespace StorageAndTrade_1_0.РегістриНакопичення
-{  
-    /*  */
+{
     public static class VirtualTablesСalculation
     {
+        /* Функція для обчислення віртуальних таблиць  */
         public static void Execute(DateTime period, string regAccumName)
         {
             Dictionary<string, object> paramQuery = new Dictionary<string, object>();
@@ -17409,6 +17409,18 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                     Config.Kernel!.DataBase.ExecuteSQL($@"DELETE FROM {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.TABLE} WHERE {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.TABLE}.{ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.Період} = @ПеріодДеньВідбір", paramQuery, transactionID);
                         
                     Config.Kernel!.DataBase.ExecuteSQL($@"INSERT INTO {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.TABLE} ( uid, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.Період}, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.Номенклатура}, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.ХарактеристикаНоменклатури}, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.Склад}, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.Серія}, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.ВНаявностіПрихід}, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.ВНаявностіРозхід}, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.ВНаявностіЗалишок}, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.ДоВідвантаженняПрихід}, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.ДоВідвантаженняРозхід}, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.ДоВідвантаженняЗалишок} ) SELECT uuid_generate_v4(), date_trunc('day', Рег_ТовариНаСкладах.period::timestamp) AS Період, Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.Номенклатура} AS Номенклатура, Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури, Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.Склад} AS Склад, Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.Серія} AS Серія, /* ВНаявності */ SUM(CASE WHEN Рег_ТовариНаСкладах.income = true THEN Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE 0 END) AS ВНаявностіПрихід, SUM(CASE WHEN Рег_ТовариНаСкладах.income = false THEN Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE 0 END) AS ВНаявностіРозхід, SUM(CASE WHEN Рег_ТовариНаСкладах.income = true THEN Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE -Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} END) AS ВНаявностіЗалишок, /* ДоВідвантаження */ SUM(CASE WHEN Рег_ТовариНаСкладах.income = true THEN Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE 0 END) AS ДоВідвантаженняПрихід, SUM(CASE WHEN Рег_ТовариНаСкладах.income = false THEN Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE 0 END) AS ДоВідвантаженняРозхід, SUM(CASE WHEN Рег_ТовариНаСкладах.income = true THEN Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE -Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} END) AS ДоВідвантаженняЗалишок FROM {ТовариНаСкладах_Const.TABLE} AS Рег_ТовариНаСкладах WHERE date_trunc('day', Рег_ТовариНаСкладах.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, Номенклатура, ХарактеристикаНоменклатури, Склад, Серія HAVING /* ВНаявності */ SUM(CASE WHEN Рег_ТовариНаСкладах.income = true THEN Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE 0 END) != 0 OR SUM(CASE WHEN Рег_ТовариНаСкладах.income = false THEN Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE 0 END) != 0 OR SUM(CASE WHEN Рег_ТовариНаСкладах.income = true THEN Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE -Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} END) != 0 OR /* ДоВідвантаження */ SUM(CASE WHEN Рег_ТовариНаСкладах.income = true THEN Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE 0 END) != 0 OR SUM(CASE WHEN Рег_ТовариНаСкладах.income = false THEN Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE 0 END) != 0 OR SUM(CASE WHEN Рег_ТовариНаСкладах.income = true THEN Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE -Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} END) != 0", paramQuery, transactionID);
+                        
+                    break;
+                }
+                
+                case "РухТоварів":
+                {
+                    
+                    /* QueryBlock: Обороти */
+                        
+                    Config.Kernel!.DataBase.ExecuteSQL($@"DELETE FROM {РухТоварів_Обороти_TablePart.TABLE} WHERE {РухТоварів_Обороти_TablePart.TABLE}.{РухТоварів_Обороти_TablePart.Період} = @ПеріодДеньВідбір", paramQuery, transactionID);
+                        
+                    Config.Kernel!.DataBase.ExecuteSQL($@"INSERT INTO {РухТоварів_Обороти_TablePart.TABLE} ( uid, {РухТоварів_Обороти_TablePart.Період}, {РухТоварів_Обороти_TablePart.Номенклатура}, {РухТоварів_Обороти_TablePart.ХарактеристикаНоменклатури}, {РухТоварів_Обороти_TablePart.Склад}, {РухТоварів_Обороти_TablePart.КількістьПрихід}, {РухТоварів_Обороти_TablePart.КількістьРозхід} ) SELECT uuid_generate_v4(), date_trunc('day', Рег_РухТоварів.period::timestamp) AS Період, Рег_РухТоварів.{РухТоварів_Const.Номенклатура} AS Номенклатура, Рег_РухТоварів.{РухТоварів_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури, Рег_РухТоварів.{РухТоварів_Const.Склад} AS Склад, /* Кількість */ SUM(CASE WHEN Рег_РухТоварів.income = true THEN Рег_РухТоварів.{РухТоварів_Const.Кількість} ELSE 0 END) AS КількістьПрихід, SUM(CASE WHEN Рег_РухТоварів.income = false THEN Рег_РухТоварів.{РухТоварів_Const.Кількість} ELSE 0 END) AS КількістьРозхід FROM {РухТоварів_Const.TABLE} AS Рег_РухТоварів WHERE date_trunc('day', Рег_РухТоварів.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, Номенклатура, ХарактеристикаНоменклатури, Склад HAVING /* Кількість */ SUM(CASE WHEN Рег_РухТоварів.income = true THEN Рег_РухТоварів.{РухТоварів_Const.Кількість} ELSE 0 END) != 0 OR SUM(CASE WHEN Рег_РухТоварів.income = false THEN Рег_РухТоварів.{РухТоварів_Const.Кількість} ELSE 0 END) != 0", paramQuery, transactionID);
                         
                     break;
                 }
@@ -17565,18 +17577,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                     Config.Kernel!.DataBase.ExecuteSQL($@"DELETE FROM {ПартіїТоварів_Залишки_TablePart.TABLE} WHERE {ПартіїТоварів_Залишки_TablePart.TABLE}.{ПартіїТоварів_Залишки_TablePart.Період} = @ПеріодДеньВідбір", paramQuery, transactionID);
                         
                     Config.Kernel!.DataBase.ExecuteSQL($@"INSERT INTO {ПартіїТоварів_Залишки_TablePart.TABLE} ( uid, {ПартіїТоварів_Залишки_TablePart.Період}, {ПартіїТоварів_Залишки_TablePart.Організація}, {ПартіїТоварів_Залишки_TablePart.ПартіяТоварівКомпозит}, {ПартіїТоварів_Залишки_TablePart.Номенклатура}, {ПартіїТоварів_Залишки_TablePart.ХарактеристикаНоменклатури}, {ПартіїТоварів_Залишки_TablePart.Серія}, {ПартіїТоварів_Залишки_TablePart.Склад}, {ПартіїТоварів_Залишки_TablePart.Кількість}, {ПартіїТоварів_Залишки_TablePart.Собівартість} ) SELECT uuid_generate_v4(), date_trunc('day', Рег_ПартіїТоварів.period::timestamp) AS Період, Рег_ПартіїТоварів.{ПартіїТоварів_Const.Організація} AS Організація, Рег_ПартіїТоварів.{ПартіїТоварів_Const.ПартіяТоварівКомпозит} AS ПартіяТоварівКомпозит, Рег_ПартіїТоварів.{ПартіїТоварів_Const.Номенклатура} AS Номенклатура, Рег_ПартіїТоварів.{ПартіїТоварів_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури, Рег_ПартіїТоварів.{ПартіїТоварів_Const.Серія} AS Серія, Рег_ПартіїТоварів.{ПартіїТоварів_Const.Склад} AS Склад, /* Кількість */ SUM(CASE WHEN Рег_ПартіїТоварів.income = true THEN Рег_ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE -Рег_ПартіїТоварів.{ПартіїТоварів_Const.Кількість} END) AS Кількість, /* Собівартість */ SUM(CASE WHEN Рег_ПартіїТоварів.income = true THEN Рег_ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE -Рег_ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} END) AS Собівартість FROM {ПартіїТоварів_Const.TABLE} AS Рег_ПартіїТоварів WHERE date_trunc('day', Рег_ПартіїТоварів.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, Організація, ПартіяТоварівКомпозит, Номенклатура, ХарактеристикаНоменклатури, Серія, Склад HAVING /* Кількість */ SUM(CASE WHEN Рег_ПартіїТоварів.income = true THEN Рег_ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE -Рег_ПартіїТоварів.{ПартіїТоварів_Const.Кількість} END) != 0 OR /* Собівартість */ SUM(CASE WHEN Рег_ПартіїТоварів.income = true THEN Рег_ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE -Рег_ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} END) != 0", paramQuery, transactionID);
-                        
-                    /* QueryBlock: Обороти */
-                        
-                    Config.Kernel!.DataBase.ExecuteSQL($@"DELETE FROM {ПартіїТоварів_Обороти_TablePart.TABLE} WHERE {ПартіїТоварів_Обороти_TablePart.TABLE}.{ПартіїТоварів_Обороти_TablePart.Період} = @ПеріодДеньВідбір", paramQuery, transactionID);
-                        
-                    Config.Kernel!.DataBase.ExecuteSQL($@"INSERT INTO {ПартіїТоварів_Обороти_TablePart.TABLE} ( uid, {ПартіїТоварів_Обороти_TablePart.Період}, {ПартіїТоварів_Обороти_TablePart.Організація}, {ПартіїТоварів_Обороти_TablePart.ПартіяТоварівКомпозит}, {ПартіїТоварів_Обороти_TablePart.Номенклатура}, {ПартіїТоварів_Обороти_TablePart.ХарактеристикаНоменклатури}, {ПартіїТоварів_Обороти_TablePart.Серія}, {ПартіїТоварів_Обороти_TablePart.Склад}, {ПартіїТоварів_Обороти_TablePart.КількістьПрихід}, {ПартіїТоварів_Обороти_TablePart.КількістьРозхід}, {ПартіїТоварів_Обороти_TablePart.СобівартістьПрихід}, {ПартіїТоварів_Обороти_TablePart.СобівартістьРозхід} ) SELECT uuid_generate_v4(), date_trunc('day', Рег_ПартіїТоварів.period::timestamp) AS Період, Рег_ПартіїТоварів.{ПартіїТоварів_Const.Організація} AS Організація, Рег_ПартіїТоварів.{ПартіїТоварів_Const.ПартіяТоварівКомпозит} AS ПартіяТоварівКомпозит, Рег_ПартіїТоварів.{ПартіїТоварів_Const.Номенклатура} AS Номенклатура, Рег_ПартіїТоварів.{ПартіїТоварів_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури, Рег_ПартіїТоварів.{ПартіїТоварів_Const.Серія} AS Серія, Рег_ПартіїТоварів.{ПартіїТоварів_Const.Склад} AS Склад, /* Кількість */ SUM(CASE WHEN Рег_ПартіїТоварів.income = true THEN Рег_ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE 0 END) AS КількістьПрихід, SUM(CASE WHEN Рег_ПартіїТоварів.income = false THEN Рег_ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE 0 END) AS КількістьРозхід, /* Собівартість */ SUM(CASE WHEN Рег_ПартіїТоварів.income = true THEN Рег_ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE 0 END) AS СобівартістьПрихід, SUM(CASE WHEN Рег_ПартіїТоварів.income = false THEN Рег_ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE 0 END) AS СобівартістьРозхід FROM {ПартіїТоварів_Const.TABLE} AS Рег_ПартіїТоварів WHERE date_trunc('day', Рег_ПартіїТоварів.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, Організація, ПартіяТоварівКомпозит, Номенклатура, ХарактеристикаНоменклатури, Серія, Склад HAVING /* Кількість */ SUM(CASE WHEN Рег_ПартіїТоварів.income = true THEN Рег_ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE 0 END) != 0 OR SUM(CASE WHEN Рег_ПартіїТоварів.income = false THEN Рег_ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE 0 END) != 0 OR /* Собівартість */ SUM(CASE WHEN Рег_ПартіїТоварів.income = true THEN Рег_ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE 0 END) != 0 OR SUM(CASE WHEN Рег_ПартіїТоварів.income = false THEN Рег_ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE 0 END) != 0", paramQuery, transactionID);
-                        
-                    /* QueryBlock: ЗалишкиТаОбороти */
-                        
-                    Config.Kernel!.DataBase.ExecuteSQL($@"DELETE FROM {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.TABLE} WHERE {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.TABLE}.{ПартіїТоварів_ЗалишкиТаОбороти_TablePart.Період} = @ПеріодДеньВідбір", paramQuery, transactionID);
-                        
-                    Config.Kernel!.DataBase.ExecuteSQL($@"INSERT INTO {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.TABLE} ( uid, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.Період}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.Організація}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.ПартіяТоварівКомпозит}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.Номенклатура}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.ХарактеристикаНоменклатури}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.Серія}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.Склад}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.КількістьПрихід}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.КількістьРозхід}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.КількістьЗалишок}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.СобівартістьПрихід}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.СобівартістьРозхід}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.СобівартістьЗалишок} ) SELECT uuid_generate_v4(), date_trunc('day', Рег_ПартіїТоварів.period::timestamp) AS Період, Рег_ПартіїТоварів.{ПартіїТоварів_Const.Організація} AS Організація, Рег_ПартіїТоварів.{ПартіїТоварів_Const.ПартіяТоварівКомпозит} AS ПартіяТоварівКомпозит, Рег_ПартіїТоварів.{ПартіїТоварів_Const.Номенклатура} AS Номенклатура, Рег_ПартіїТоварів.{ПартіїТоварів_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури, Рег_ПартіїТоварів.{ПартіїТоварів_Const.Серія} AS Серія, Рег_ПартіїТоварів.{ПартіїТоварів_Const.Склад} AS Склад, /* Кількість */ SUM(CASE WHEN Рег_ПартіїТоварів.income = true THEN Рег_ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE 0 END) AS КількістьПрихід, SUM(CASE WHEN Рег_ПартіїТоварів.income = false THEN Рег_ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE 0 END) AS КількістьРозхід, SUM(CASE WHEN Рег_ПартіїТоварів.income = true THEN Рег_ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE -Рег_ПартіїТоварів.{ПартіїТоварів_Const.Кількість} END) AS КількістьЗалишок, /* Собівартість */ SUM(CASE WHEN Рег_ПартіїТоварів.income = true THEN Рег_ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE 0 END) AS СобівартістьПрихід, SUM(CASE WHEN Рег_ПартіїТоварів.income = false THEN Рег_ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE 0 END) AS СобівартістьРозхід, SUM(CASE WHEN Рег_ПартіїТоварів.income = true THEN Рег_ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE -Рег_ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} END) AS СобівартістьЗалишок FROM {ПартіїТоварів_Const.TABLE} AS Рег_ПартіїТоварів WHERE date_trunc('day', Рег_ПартіїТоварів.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, Організація, ПартіяТоварівКомпозит, Номенклатура, ХарактеристикаНоменклатури, Серія, Склад HAVING /* Кількість */ SUM(CASE WHEN Рег_ПартіїТоварів.income = true THEN Рег_ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE 0 END) != 0 OR SUM(CASE WHEN Рег_ПартіїТоварів.income = false THEN Рег_ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE 0 END) != 0 OR SUM(CASE WHEN Рег_ПартіїТоварів.income = true THEN Рег_ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE -Рег_ПартіїТоварів.{ПартіїТоварів_Const.Кількість} END) != 0 OR /* Собівартість */ SUM(CASE WHEN Рег_ПартіїТоварів.income = true THEN Рег_ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE 0 END) != 0 OR SUM(CASE WHEN Рег_ПартіїТоварів.income = false THEN Рег_ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE 0 END) != 0 OR SUM(CASE WHEN Рег_ПартіїТоварів.income = true THEN Рег_ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE -Рег_ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} END) != 0", paramQuery, transactionID);
                         
                     break;
                 }
@@ -18209,6 +18209,98 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         }
     }
     
+    
+    public class РухТоварів_Обороти_TablePart : RegisterAccumulationTablePart
+    {
+        public РухТоварів_Обороти_TablePart() : base(Config.Kernel!, "tab_b52",
+              new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6" }) 
+        {
+            Records = new List<Record>();
+        }
+        
+        public const string TABLE = "tab_b52";
+        
+        public const string Період = "col_a1";
+        public const string Номенклатура = "col_a2";
+        public const string ХарактеристикаНоменклатури = "col_a3";
+        public const string Склад = "col_a4";
+        public const string КількістьПрихід = "col_a5";
+        public const string КількістьРозхід = "col_a6";
+        public List<Record> Records { get; set; }
+    
+        public void Read()
+        {
+            Records.Clear();
+            base.BaseRead();
+
+            foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
+            {
+                Record record = new Record();
+                record.UID = (Guid)fieldValue["uid"];
+                
+                record.Період = (fieldValue["col_a1"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a1"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                record.Номенклатура = new Довідники.Номенклатура_Pointer(fieldValue["col_a2"]);
+                record.ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer(fieldValue["col_a3"]);
+                record.Склад = new Довідники.Склади_Pointer(fieldValue["col_a4"]);
+                record.КількістьПрихід = (fieldValue["col_a5"] != DBNull.Value) ? (decimal)fieldValue["col_a5"] : 0;
+                record.КількістьРозхід = (fieldValue["col_a6"] != DBNull.Value) ? (decimal)fieldValue["col_a6"] : 0;
+                
+                Records.Add(record);
+            }
+        
+            base.BaseClear();
+        }
+    
+        public void Save(bool clear_all_before_save /*= true*/) 
+        {
+            base.BaseBeginTransaction();
+            
+            if (clear_all_before_save)
+                base.BaseDelete();
+
+            foreach (Record record in Records)
+            {
+                Dictionary<string, object> fieldValue = new Dictionary<string, object>();
+
+                fieldValue.Add("col_a1", record.Період);
+                fieldValue.Add("col_a2", record.Номенклатура.UnigueID.UGuid);
+                fieldValue.Add("col_a3", record.ХарактеристикаНоменклатури.UnigueID.UGuid);
+                fieldValue.Add("col_a4", record.Склад.UnigueID.UGuid);
+                fieldValue.Add("col_a5", record.КількістьПрихід);
+                fieldValue.Add("col_a6", record.КількістьРозхід);
+                
+                base.BaseSave(record.UID, fieldValue);
+            }
+            
+            base.BaseCommitTransaction();
+        }
+    
+        public void Delete()
+        {
+            base.BaseDelete();
+        }
+        
+        public class Record : RegisterAccumulationTablePartRecord
+        {
+            public Record()
+            {
+                Період = DateTime.MinValue;
+                Номенклатура = new Довідники.Номенклатура_Pointer();
+                ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer();
+                Склад = new Довідники.Склади_Pointer();
+                КількістьПрихід = 0;
+                КількістьРозхід = 0;
+                
+            }
+            public DateTime Період { get; set; }
+            public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
+            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; }
+            public Довідники.Склади_Pointer Склад { get; set; }
+            public decimal КількістьПрихід { get; set; }
+            public decimal КількістьРозхід { get; set; }
+            
+        }            
+    }
     
     #endregion
   
@@ -21001,250 +21093,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             public Довідники.Склади_Pointer Склад { get; set; }
             public decimal Кількість { get; set; }
             public decimal Собівартість { get; set; }
-            
-        }            
-    }
-    
-    public class ПартіїТоварів_Обороти_TablePart : RegisterAccumulationTablePart
-    {
-        public ПартіїТоварів_Обороти_TablePart() : base(Config.Kernel!, "tab_b50",
-              new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b1", "col_b2" }) 
-        {
-            Records = new List<Record>();
-        }
-        
-        public const string TABLE = "tab_b50";
-        
-        public const string Період = "col_a1";
-        public const string Організація = "col_a2";
-        public const string ПартіяТоварівКомпозит = "col_a3";
-        public const string Номенклатура = "col_a4";
-        public const string ХарактеристикаНоменклатури = "col_a5";
-        public const string Серія = "col_a6";
-        public const string Склад = "col_a7";
-        public const string КількістьПрихід = "col_a8";
-        public const string КількістьРозхід = "col_a9";
-        public const string СобівартістьПрихід = "col_b1";
-        public const string СобівартістьРозхід = "col_b2";
-        public List<Record> Records { get; set; }
-    
-        public void Read()
-        {
-            Records.Clear();
-            base.BaseRead();
-
-            foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
-            {
-                Record record = new Record();
-                record.UID = (Guid)fieldValue["uid"];
-                
-                record.Період = (fieldValue["col_a1"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a1"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
-                record.Організація = new Довідники.Організації_Pointer(fieldValue["col_a2"]);
-                record.ПартіяТоварівКомпозит = new Довідники.ПартіяТоварівКомпозит_Pointer(fieldValue["col_a3"]);
-                record.Номенклатура = new Довідники.Номенклатура_Pointer(fieldValue["col_a4"]);
-                record.ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer(fieldValue["col_a5"]);
-                record.Серія = new Довідники.СеріїНоменклатури_Pointer(fieldValue["col_a6"]);
-                record.Склад = new Довідники.Склади_Pointer(fieldValue["col_a7"]);
-                record.КількістьПрихід = (fieldValue["col_a8"] != DBNull.Value) ? (decimal)fieldValue["col_a8"] : 0;
-                record.КількістьРозхід = (fieldValue["col_a9"] != DBNull.Value) ? (decimal)fieldValue["col_a9"] : 0;
-                record.СобівартістьПрихід = (fieldValue["col_b1"] != DBNull.Value) ? (decimal)fieldValue["col_b1"] : 0;
-                record.СобівартістьРозхід = (fieldValue["col_b2"] != DBNull.Value) ? (decimal)fieldValue["col_b2"] : 0;
-                
-                Records.Add(record);
-            }
-        
-            base.BaseClear();
-        }
-    
-        public void Save(bool clear_all_before_save /*= true*/) 
-        {
-            base.BaseBeginTransaction();
-            
-            if (clear_all_before_save)
-                base.BaseDelete();
-
-            foreach (Record record in Records)
-            {
-                Dictionary<string, object> fieldValue = new Dictionary<string, object>();
-
-                fieldValue.Add("col_a1", record.Період);
-                fieldValue.Add("col_a2", record.Організація.UnigueID.UGuid);
-                fieldValue.Add("col_a3", record.ПартіяТоварівКомпозит.UnigueID.UGuid);
-                fieldValue.Add("col_a4", record.Номенклатура.UnigueID.UGuid);
-                fieldValue.Add("col_a5", record.ХарактеристикаНоменклатури.UnigueID.UGuid);
-                fieldValue.Add("col_a6", record.Серія.UnigueID.UGuid);
-                fieldValue.Add("col_a7", record.Склад.UnigueID.UGuid);
-                fieldValue.Add("col_a8", record.КількістьПрихід);
-                fieldValue.Add("col_a9", record.КількістьРозхід);
-                fieldValue.Add("col_b1", record.СобівартістьПрихід);
-                fieldValue.Add("col_b2", record.СобівартістьРозхід);
-                
-                base.BaseSave(record.UID, fieldValue);
-            }
-            
-            base.BaseCommitTransaction();
-        }
-    
-        public void Delete()
-        {
-            base.BaseDelete();
-        }
-        
-        public class Record : RegisterAccumulationTablePartRecord
-        {
-            public Record()
-            {
-                Період = DateTime.MinValue;
-                Організація = new Довідники.Організації_Pointer();
-                ПартіяТоварівКомпозит = new Довідники.ПартіяТоварівКомпозит_Pointer();
-                Номенклатура = new Довідники.Номенклатура_Pointer();
-                ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer();
-                Серія = new Довідники.СеріїНоменклатури_Pointer();
-                Склад = new Довідники.Склади_Pointer();
-                КількістьПрихід = 0;
-                КількістьРозхід = 0;
-                СобівартістьПрихід = 0;
-                СобівартістьРозхід = 0;
-                
-            }
-            public DateTime Період { get; set; }
-            public Довідники.Організації_Pointer Організація { get; set; }
-            public Довідники.ПартіяТоварівКомпозит_Pointer ПартіяТоварівКомпозит { get; set; }
-            public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
-            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; }
-            public Довідники.СеріїНоменклатури_Pointer Серія { get; set; }
-            public Довідники.Склади_Pointer Склад { get; set; }
-            public decimal КількістьПрихід { get; set; }
-            public decimal КількістьРозхід { get; set; }
-            public decimal СобівартістьПрихід { get; set; }
-            public decimal СобівартістьРозхід { get; set; }
-            
-        }            
-    }
-    
-    public class ПартіїТоварів_ЗалишкиТаОбороти_TablePart : RegisterAccumulationTablePart
-    {
-        public ПартіїТоварів_ЗалишкиТаОбороти_TablePart() : base(Config.Kernel!, "tab_b51",
-              new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b1", "col_b2", "col_b3", "col_b4" }) 
-        {
-            Records = new List<Record>();
-        }
-        
-        public const string TABLE = "tab_b51";
-        
-        public const string Період = "col_a1";
-        public const string Організація = "col_a2";
-        public const string ПартіяТоварівКомпозит = "col_a3";
-        public const string Номенклатура = "col_a4";
-        public const string ХарактеристикаНоменклатури = "col_a5";
-        public const string Серія = "col_a6";
-        public const string Склад = "col_a7";
-        public const string КількістьПрихід = "col_a8";
-        public const string КількістьРозхід = "col_a9";
-        public const string КількістьЗалишок = "col_b1";
-        public const string СобівартістьПрихід = "col_b2";
-        public const string СобівартістьРозхід = "col_b3";
-        public const string СобівартістьЗалишок = "col_b4";
-        public List<Record> Records { get; set; }
-    
-        public void Read()
-        {
-            Records.Clear();
-            base.BaseRead();
-
-            foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
-            {
-                Record record = new Record();
-                record.UID = (Guid)fieldValue["uid"];
-                
-                record.Період = (fieldValue["col_a1"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a1"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
-                record.Організація = new Довідники.Організації_Pointer(fieldValue["col_a2"]);
-                record.ПартіяТоварівКомпозит = new Довідники.ПартіяТоварівКомпозит_Pointer(fieldValue["col_a3"]);
-                record.Номенклатура = new Довідники.Номенклатура_Pointer(fieldValue["col_a4"]);
-                record.ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer(fieldValue["col_a5"]);
-                record.Серія = new Довідники.СеріїНоменклатури_Pointer(fieldValue["col_a6"]);
-                record.Склад = new Довідники.Склади_Pointer(fieldValue["col_a7"]);
-                record.КількістьПрихід = (fieldValue["col_a8"] != DBNull.Value) ? (decimal)fieldValue["col_a8"] : 0;
-                record.КількістьРозхід = (fieldValue["col_a9"] != DBNull.Value) ? (decimal)fieldValue["col_a9"] : 0;
-                record.КількістьЗалишок = (fieldValue["col_b1"] != DBNull.Value) ? (decimal)fieldValue["col_b1"] : 0;
-                record.СобівартістьПрихід = (fieldValue["col_b2"] != DBNull.Value) ? (decimal)fieldValue["col_b2"] : 0;
-                record.СобівартістьРозхід = (fieldValue["col_b3"] != DBNull.Value) ? (decimal)fieldValue["col_b3"] : 0;
-                record.СобівартістьЗалишок = (fieldValue["col_b4"] != DBNull.Value) ? (decimal)fieldValue["col_b4"] : 0;
-                
-                Records.Add(record);
-            }
-        
-            base.BaseClear();
-        }
-    
-        public void Save(bool clear_all_before_save /*= true*/) 
-        {
-            base.BaseBeginTransaction();
-            
-            if (clear_all_before_save)
-                base.BaseDelete();
-
-            foreach (Record record in Records)
-            {
-                Dictionary<string, object> fieldValue = new Dictionary<string, object>();
-
-                fieldValue.Add("col_a1", record.Період);
-                fieldValue.Add("col_a2", record.Організація.UnigueID.UGuid);
-                fieldValue.Add("col_a3", record.ПартіяТоварівКомпозит.UnigueID.UGuid);
-                fieldValue.Add("col_a4", record.Номенклатура.UnigueID.UGuid);
-                fieldValue.Add("col_a5", record.ХарактеристикаНоменклатури.UnigueID.UGuid);
-                fieldValue.Add("col_a6", record.Серія.UnigueID.UGuid);
-                fieldValue.Add("col_a7", record.Склад.UnigueID.UGuid);
-                fieldValue.Add("col_a8", record.КількістьПрихід);
-                fieldValue.Add("col_a9", record.КількістьРозхід);
-                fieldValue.Add("col_b1", record.КількістьЗалишок);
-                fieldValue.Add("col_b2", record.СобівартістьПрихід);
-                fieldValue.Add("col_b3", record.СобівартістьРозхід);
-                fieldValue.Add("col_b4", record.СобівартістьЗалишок);
-                
-                base.BaseSave(record.UID, fieldValue);
-            }
-            
-            base.BaseCommitTransaction();
-        }
-    
-        public void Delete()
-        {
-            base.BaseDelete();
-        }
-        
-        public class Record : RegisterAccumulationTablePartRecord
-        {
-            public Record()
-            {
-                Період = DateTime.MinValue;
-                Організація = new Довідники.Організації_Pointer();
-                ПартіяТоварівКомпозит = new Довідники.ПартіяТоварівКомпозит_Pointer();
-                Номенклатура = new Довідники.Номенклатура_Pointer();
-                ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer();
-                Серія = new Довідники.СеріїНоменклатури_Pointer();
-                Склад = new Довідники.Склади_Pointer();
-                КількістьПрихід = 0;
-                КількістьРозхід = 0;
-                КількістьЗалишок = 0;
-                СобівартістьПрихід = 0;
-                СобівартістьРозхід = 0;
-                СобівартістьЗалишок = 0;
-                
-            }
-            public DateTime Період { get; set; }
-            public Довідники.Організації_Pointer Організація { get; set; }
-            public Довідники.ПартіяТоварівКомпозит_Pointer ПартіяТоварівКомпозит { get; set; }
-            public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
-            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; }
-            public Довідники.СеріїНоменклатури_Pointer Серія { get; set; }
-            public Довідники.Склади_Pointer Склад { get; set; }
-            public decimal КількістьПрихід { get; set; }
-            public decimal КількістьРозхід { get; set; }
-            public decimal КількістьЗалишок { get; set; }
-            public decimal СобівартістьПрихід { get; set; }
-            public decimal СобівартістьРозхід { get; set; }
-            public decimal СобівартістьЗалишок { get; set; }
             
         }            
     }
