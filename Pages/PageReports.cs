@@ -23,7 +23,6 @@ namespace StorageAndTrade
             hBoxList.PackStart(vLeft, false, false, 5);
 
             AddLink(vLeft, "ТовариНаСкладах", ТовариНаСкладах);
-            AddLink(vLeft, "ТовариНаСкладах2", ТовариНаСкладах2);
             AddLink(vLeft, "ВільніЗалишки", ВільніЗалишки);
             AddLink(vLeft, "ПартіїТоварів", ПартіїТоварів);
             AddLink(vLeft, "РухКоштів", РухКоштів);
@@ -115,15 +114,6 @@ namespace StorageAndTrade
             Program.GeneralForm?.CreateNotebookPage("Звіт - Товари на складах", () =>
             {
                 Звіт_ТовариНаСкладах page = new Звіт_ТовариНаСкладах();
-                return page;
-            });
-        }
-
-        void ТовариНаСкладах2(object? sender, EventArgs args)
-        {
-            Program.GeneralForm?.CreateNotebookPage("Звіт - Товари на складах2", () =>
-            {
-                Звіт_ТовариНаСкладах2 page = new Звіт_ТовариНаСкладах2();
                 return page;
             });
         }

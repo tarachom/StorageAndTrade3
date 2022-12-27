@@ -1,10 +1,7 @@
 using Gtk;
 
-using AccountingSoftware;
 using StorageAndTrade_1_0;
-using StorageAndTrade_1_0.Константи;
 using StorageAndTrade_1_0.Довідники;
-using StorageAndTrade_1_0.Документи;
 using StorageAndTrade_1_0.РегістриНакопичення;
 
 namespace StorageAndTrade
@@ -15,8 +12,8 @@ namespace StorageAndTrade
 
         #region Filters
 
-        DateTimeControl ДатаПочаткуПеріоду = new DateTimeControl() { Value = DateTime.Parse($"01.{DateTime.Now.Month}.{DateTime.Now.Year}") };
-        DateTimeControl ДатаКінцяПеріоду = new DateTimeControl() { Value = DateTime.Now };
+        DateTimeControl ДатаПочатокПеріоду = new DateTimeControl() { Value = DateTime.Parse($"01.{DateTime.Now.Month}.{DateTime.Now.Year}") };
+        DateTimeControl ДатаКінецьПеріоду = new DateTimeControl() { Value = DateTime.Now };
 
         Організації_PointerControl Організація = new Організації_PointerControl();
         Номенклатура_PointerControl Номенклатура = new Номенклатура_PointerControl();
@@ -41,13 +38,13 @@ namespace StorageAndTrade
 
             //2
             Button bOstatok = new Button("Залишки");
-            bOstatok.Clicked += OnReportOstatok;
+            bOstatok.Clicked += OnReport_Залишки;
 
             hBoxBotton.PackStart(bOstatok, false, false, 10);
 
             //3
             Button bDocuments = new Button("Документи");
-            bDocuments.Clicked += OnReportDocuments;
+            bDocuments.Clicked += OnReport_Документи;
 
             hBoxBotton.PackStart(bDocuments, false, false, 10);
 
@@ -91,9 +88,9 @@ namespace StorageAndTrade
             //Період
             HBox hBoxPeriod = new HBox() { Halign = Align.End };
             hBoxPeriod.PackStart(new Label("Період з "), false, false, 5);
-            hBoxPeriod.PackStart(ДатаПочаткуПеріоду, false, false, 5);
+            hBoxPeriod.PackStart(ДатаПочатокПеріоду, false, false, 5);
             hBoxPeriod.PackStart(new Label(" по "), false, false, 5);
-            hBoxPeriod.PackStart(ДатаКінцяПеріоду, false, false, 5);
+            hBoxPeriod.PackStart(ДатаКінецьПеріоду, false, false, 5);
             vBox.PackStart(hBoxPeriod, false, false, 5);
 
             //Організація
@@ -188,7 +185,7 @@ namespace StorageAndTrade
             CreateNotebookPage(caption, () => { return vBox; });
         }
 
-        void OnReportOstatok(object? sender, EventArgs args)
+        void OnReport_Залишки(object? sender, EventArgs args)
         {
             #region SELECT
 
@@ -196,35 +193,35 @@ namespace StorageAndTrade
 
             string query = $@"
 SELECT 
-    ПартіїТоварів_Місяць.{ВіртуальніТаблиціРегістрів.ПартіїТоварів_Місяць_TablePart.Організація} AS Організація, 
+    ПартіїТоварів.{ПартіїТоварів_Залишки_TablePart.Організація} AS Організація, 
     Довідник_Організації.{Організації_Const.Назва} AS Організація_Назва, 
-    ПартіїТоварів_Місяць.{ВіртуальніТаблиціРегістрів.ПартіїТоварів_Місяць_TablePart.ПартіяТоварівКомпозит} AS ПартіяТоварівКомпозит,
+    ПартіїТоварів.{ПартіїТоварів_Залишки_TablePart.ПартіяТоварівКомпозит} AS ПартіяТоварівКомпозит,
     Довідник_ПартіяТоварівКомпозит.{ПартіяТоварівКомпозит_Const.Назва} AS ПартіяТоварівКомпозит_Назва,
     Довідник_ПартіяТоварівКомпозит.{ПартіяТоварівКомпозит_Const.Дата} AS ПартіяТоварівКомпозит_Дата,
-    ПартіїТоварів_Місяць.{ВіртуальніТаблиціРегістрів.ПартіїТоварів_Місяць_TablePart.Номенклатура} AS Номенклатура, 
+    ПартіїТоварів.{ПартіїТоварів_Залишки_TablePart.Номенклатура} AS Номенклатура, 
     Довідник_Номенклатура.{Номенклатура_Const.Назва} AS Номенклатура_Назва, 
-    ПартіїТоварів_Місяць.{ВіртуальніТаблиціРегістрів.ПартіїТоварів_Місяць_TablePart.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
+    ПартіїТоварів.{ПартіїТоварів_Залишки_TablePart.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
     Довідник_ХарактеристикиНоменклатури.{ХарактеристикиНоменклатури_Const.Назва} AS ХарактеристикаНоменклатури_Назва,
-    ПартіїТоварів_Місяць.{ВіртуальніТаблиціРегістрів.ПартіїТоварів_Місяць_TablePart.Серія} AS Серія,
+    ПартіїТоварів.{ПартіїТоварів_Залишки_TablePart.Серія} AS Серія,
     Довідник_СеріїНоменклатури.{СеріїНоменклатури_Const.Номер} AS Серія_Номер,
-    ПартіїТоварів_Місяць.{ВіртуальніТаблиціРегістрів.ПартіїТоварів_Місяць_TablePart.Склад} AS Склад,
+    ПартіїТоварів.{ПартіїТоварів_Залишки_TablePart.Склад} AS Склад,
     Довідник_Склади.{Склади_Const.Назва} AS Склад_Назва,
-    ROUND(SUM(ПартіїТоварів_Місяць.{ВіртуальніТаблиціРегістрів.ПартіїТоварів_Місяць_TablePart.Кількість}), 2) AS Кількість,
-    ROUND(SUM(ПартіїТоварів_Місяць.{ВіртуальніТаблиціРегістрів.ПартіїТоварів_Місяць_TablePart.Собівартість}), 2) AS Собівартість
+    ROUND(SUM(ПартіїТоварів.{ПартіїТоварів_Залишки_TablePart.Кількість}), 2) AS Кількість,
+    ROUND(SUM(ПартіїТоварів.{ПартіїТоварів_Залишки_TablePart.Собівартість}), 2) AS Собівартість
 FROM 
-    {ВіртуальніТаблиціРегістрів.ПартіїТоварів_Місяць_TablePart.TABLE} AS ПартіїТоварів_Місяць
+    {ПартіїТоварів_Залишки_TablePart.TABLE} AS ПартіїТоварів
     LEFT JOIN {Організації_Const.TABLE} AS Довідник_Організації ON Довідник_Організації.uid = 
-        ПартіїТоварів_Місяць.{ВіртуальніТаблиціРегістрів.ПартіїТоварів_Місяць_TablePart.Організація}
+        ПартіїТоварів.{ПартіїТоварів_Залишки_TablePart.Організація}
     LEFT JOIN {ПартіяТоварівКомпозит_Const.TABLE} AS Довідник_ПартіяТоварівКомпозит ON Довідник_ПартіяТоварівКомпозит.uid = 
-        ПартіїТоварів_Місяць.{ВіртуальніТаблиціРегістрів.ПартіїТоварів_Місяць_TablePart.ПартіяТоварівКомпозит}
+        ПартіїТоварів.{ПартіїТоварів_Залишки_TablePart.ПартіяТоварівКомпозит}
     LEFT JOIN {Номенклатура_Const.TABLE} AS Довідник_Номенклатура ON Довідник_Номенклатура.uid = 
-        ПартіїТоварів_Місяць.{ВіртуальніТаблиціРегістрів.ПартіїТоварів_Місяць_TablePart.Номенклатура}
+        ПартіїТоварів.{ПартіїТоварів_Залишки_TablePart.Номенклатура}
     LEFT JOIN {ХарактеристикиНоменклатури_Const.TABLE} AS Довідник_ХарактеристикиНоменклатури ON Довідник_ХарактеристикиНоменклатури.uid = 
-        ПартіїТоварів_Місяць.{ВіртуальніТаблиціРегістрів.ПартіїТоварів_Місяць_TablePart.ХарактеристикаНоменклатури}
+        ПартіїТоварів.{ПартіїТоварів_Залишки_TablePart.ХарактеристикаНоменклатури}
     LEFT JOIN {СеріїНоменклатури_Const.TABLE} AS Довідник_СеріїНоменклатури ON Довідник_СеріїНоменклатури.uid = 
-        ПартіїТоварів_Місяць.{ВіртуальніТаблиціРегістрів.ПартіїТоварів_Місяць_TablePart.Серія}
+        ПартіїТоварів.{ПартіїТоварів_Залишки_TablePart.Серія}
     LEFT JOIN {Склади_Const.TABLE} AS Довідник_Склади ON Довідник_Склади.uid = 
-        ПартіїТоварів_Місяць.{ВіртуальніТаблиціРегістрів.ПартіїТоварів_Місяць_TablePart.Склад}
+        ПартіїТоварів.{ПартіїТоварів_Залишки_TablePart.Склад}
 ";
 
             #region WHERE
@@ -340,8 +337,8 @@ GROUP BY Організація, Організація_Назва,
          Серія, Серія_Номер,
          Склад, Склад_Назва
 HAVING
-    SUM(ПартіїТоварів_Місяць.{ВіртуальніТаблиціРегістрів.ПартіїТоварів_Місяць_TablePart.Кількість}) != 0 OR
-    SUM(ПартіїТоварів_Місяць.{ВіртуальніТаблиціРегістрів.ПартіїТоварів_Місяць_TablePart.Собівартість}) != 0   
+    SUM(ПартіїТоварів.{ПартіїТоварів_Залишки_TablePart.Кількість}) != 0 OR
+    SUM(ПартіїТоварів.{ПартіїТоварів_Залишки_TablePart.Собівартість}) != 0   
 ORDER BY Організація_Назва, ПартіяТоварівКомпозит_Дата ASC, Номенклатура_Назва, ХарактеристикаНоменклатури_Назва
 ";
 
@@ -384,7 +381,7 @@ ORDER BY Організація_Назва, ПартіяТоварівКомпо
             CreateReportNotebookPage("Залишки", treeView);
         }
 
-        void OnReportDocuments(object? sender, EventArgs args)
+        void OnReport_Документи(object? sender, EventArgs args)
         {
             #region SELECT
 
@@ -410,7 +407,7 @@ WITH register AS
     FROM
         {ПартіїТоварів_Const.TABLE} AS ПартіїТоварів
     WHERE
-        (ПартіїТоварів.period >= @period_start AND ПартіїТоварів.period <= @period_end)
+        (ПартіїТоварів.period >= @ПочатокПеріоду AND ПартіїТоварів.period <= @КінецьПеріоду)
 ";
 
             #region WHERE
@@ -570,7 +567,7 @@ FROM register INNER JOIN {table} ON {table}.uid = register.owner
                 counter++;
             }
 
- query += $@"
+            query += $@"
 )
 SELECT 
     doctype,
@@ -621,8 +618,8 @@ ORDER BY period ASC, Організація_Назва,
             КолонкиДаних.Add("Склад_Назва", "Склад");
 
             Dictionary<string, object> paramQuery = new Dictionary<string, object>();
-            paramQuery.Add("period_start", DateTime.Parse($"{ДатаПочаткуПеріоду.Value.Day}.{ДатаПочаткуПеріоду.Value.Month}.{ДатаПочаткуПеріоду.Value.Year} 00:00:00"));
-            paramQuery.Add("period_end", DateTime.Parse($"{ДатаКінцяПеріоду.Value.Day}.{ДатаКінцяПеріоду.Value.Month}.{ДатаКінцяПеріоду.Value.Year} 23:59:59"));
+            paramQuery.Add("ПочатокПеріоду", DateTime.Parse($"{ДатаПочатокПеріоду.Value.Day}.{ДатаПочатокПеріоду.Value.Month}.{ДатаПочатокПеріоду.Value.Year} 00:00:00"));
+            paramQuery.Add("КінецьПеріоду", DateTime.Parse($"{ДатаКінецьПеріоду.Value.Day}.{ДатаКінецьПеріоду.Value.Month}.{ДатаКінецьПеріоду.Value.Year} 23:59:59"));
 
             string[] columnsName;
             List<Dictionary<string, object>> listRow;

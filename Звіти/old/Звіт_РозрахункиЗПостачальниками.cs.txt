@@ -1,7 +1,10 @@
 using Gtk;
 
+using AccountingSoftware;
 using StorageAndTrade_1_0;
+using StorageAndTrade_1_0.Константи;
 using StorageAndTrade_1_0.Довідники;
+using StorageAndTrade_1_0.Документи;
 using StorageAndTrade_1_0.РегістриНакопичення;
 
 namespace StorageAndTrade
@@ -12,8 +15,8 @@ namespace StorageAndTrade
 
         #region Filters
 
-        DateTimeControl ДатаПочатокПеріоду = new DateTimeControl() { Value = DateTime.Parse($"01.{DateTime.Now.Month}.{DateTime.Now.Year}") };
-        DateTimeControl ДатаКінецьПеріоду = new DateTimeControl() { Value = DateTime.Now };
+        DateTimeControl ДатаПочаткуПеріоду = new DateTimeControl() { Value = DateTime.Parse($"01.{DateTime.Now.Month}.{DateTime.Now.Year}") };
+        DateTimeControl ДатаКінцяПеріоду = new DateTimeControl() { Value = DateTime.Now };
 
         Контрагенти_PointerControl Контрагент = new Контрагенти_PointerControl();
         Контрагенти_Папки_PointerControl Контрагент_Папка = new Контрагенти_Папки_PointerControl();
@@ -34,19 +37,19 @@ namespace StorageAndTrade
 
             //2
             Button bOstatok = new Button("Залишки");
-            bOstatok.Clicked += OnReport_Залишки;
+            bOstatok.Clicked += OnReportOstatok;
 
             hBoxBotton.PackStart(bOstatok, false, false, 10);
 
             //3
             Button bOborot = new Button("Залишки та обороти");
-            bOborot.Clicked += OnReport_ЗалишкиТаОбороти;
+            bOborot.Clicked += OnReportOborot;
 
             hBoxBotton.PackStart(bOborot, false, false, 10);
 
             //4
             Button bDocuments = new Button("Документи");
-            bDocuments.Clicked += OnReport_Документи;
+            bDocuments.Clicked += OnReportDocuments;
 
             hBoxBotton.PackStart(bDocuments, false, false, 10);
 
@@ -90,9 +93,9 @@ namespace StorageAndTrade
             //Період
             HBox hBoxPeriod = new HBox() { Halign = Align.End };
             hBoxPeriod.PackStart(new Label("Період з "), false, false, 5);
-            hBoxPeriod.PackStart(ДатаПочатокПеріоду, false, false, 5);
+            hBoxPeriod.PackStart(ДатаПочаткуПеріоду, false, false, 5);
             hBoxPeriod.PackStart(new Label(" по "), false, false, 5);
-            hBoxPeriod.PackStart(ДатаКінецьПеріоду, false, false, 5);
+            hBoxPeriod.PackStart(ДатаКінцяПеріоду, false, false, 5);
             vBox.PackStart(hBoxPeriod, false, false, 5);
 
             //Контрагент
@@ -163,7 +166,7 @@ namespace StorageAndTrade
             CreateNotebookPage(caption, () => { return vBox; });
         }
 
-        void OnReport_Залишки(object? sender, EventArgs args)
+        void OnReportOstatok(object? sender, EventArgs args)
         {
             #region SELECT
 
@@ -171,17 +174,17 @@ namespace StorageAndTrade
 
             string query = $@"
 SELECT 
-    РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Залишки_TablePart.Контрагент} AS Контрагент,
+    РозрахункиЗПостачальниками_Місяць.{ВіртуальніТаблиціРегістрів.РозрахункиЗПостачальниками_Місяць_TablePart.Контрагент} AS Контрагент,
     Довідник_Контрагенти.{Контрагенти_Const.Назва} AS Контрагент_Назва,
-    РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Залишки_TablePart.Валюта} AS Валюта, 
+    РозрахункиЗПостачальниками_Місяць.{ВіртуальніТаблиціРегістрів.РозрахункиЗПостачальниками_Місяць_TablePart.Валюта} AS Валюта, 
     Довідник_Валюти.{Валюти_Const.Назва} AS Валюта_Назва,
-    ROUND(SUM(РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Залишки_TablePart.Сума}), 2) AS Сума
+    ROUND(SUM(РозрахункиЗПостачальниками_Місяць.{ВіртуальніТаблиціРегістрів.РозрахункиЗПостачальниками_Місяць_TablePart.Сума}), 2) AS Сума
 FROM 
-    {РозрахункиЗПостачальниками_Залишки_TablePart.TABLE} AS РозрахункиЗПостачальниками
+    {ВіртуальніТаблиціРегістрів.РозрахункиЗПостачальниками_Місяць_TablePart.TABLE} AS РозрахункиЗПостачальниками_Місяць
     LEFT JOIN {Валюти_Const.TABLE} AS Довідник_Валюти ON Довідник_Валюти.uid = 
-        РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Залишки_TablePart.Валюта}
+        РозрахункиЗПостачальниками_Місяць.{ВіртуальніТаблиціРегістрів.РозрахункиЗПостачальниками_Місяць_TablePart.Валюта}
     LEFT JOIN {Контрагенти_Const.TABLE} AS Довідник_Контрагенти ON Довідник_Контрагенти.uid = 
-        РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Залишки_TablePart.Контрагент}
+        РозрахункиЗПостачальниками_Місяць.{ВіртуальніТаблиціРегістрів.РозрахункиЗПостачальниками_Місяць_TablePart.Контрагент}
 ";
 
             #region WHERE
@@ -237,7 +240,7 @@ FROM
 GROUP BY Контрагент, Контрагент_Назва, 
          Валюта, Валюта_Назва
 HAVING
-     SUM(РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Залишки_TablePart.Сума}) != 0
+     SUM(РозрахункиЗПостачальниками_Місяць.{ВіртуальніТаблиціРегістрів.РозрахункиЗПостачальниками_Місяць_TablePart.Сума}) != 0
 ORDER BY Контрагент_Назва
 ";
 
@@ -271,56 +274,97 @@ ORDER BY Контрагент_Назва
             CreateReportNotebookPage("Залишки", treeView);
         }
 
-        void OnReport_ЗалишкиТаОбороти(object? sender, EventArgs args)
+        void OnReportOborot(object? sender, EventArgs args)
         {
             #region SELECT
 
             bool isExistParent = false;
 
             string query = $@"
-WITH 
-ПочатковийЗалишок AS
+WITH ostatok_month AS
 (
     SELECT
-        РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Залишки_TablePart.Контрагент} AS Контрагент,
-        РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Залишки_TablePart.Валюта} AS Валюта,
-        SUM(РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Залишки_TablePart.Сума}) AS Сума
+        'month' AS block,
+        РозрахункиЗПостачальниками_Місяць.{ВіртуальніТаблиціРегістрів.РозрахункиЗПостачальниками_Місяць_TablePart.Контрагент} AS Контрагент,
+        РозрахункиЗПостачальниками_Місяць.{ВіртуальніТаблиціРегістрів.РозрахункиЗПостачальниками_Місяць_TablePart.Валюта} AS Валюта,
+        SUM(РозрахункиЗПостачальниками_Місяць.{ВіртуальніТаблиціРегістрів.РозрахункиЗПостачальниками_Місяць_TablePart.Сума}) AS Сума
     FROM 
-        {РозрахункиЗПостачальниками_Залишки_TablePart.TABLE} AS РозрахункиЗПостачальниками
+        {ВіртуальніТаблиціРегістрів.РозрахункиЗПостачальниками_Місяць_TablePart.TABLE} AS РозрахункиЗПостачальниками_Місяць
     WHERE
-        РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Залишки_TablePart.Період} < @ПочатокПеріоду
+        РозрахункиЗПостачальниками_Місяць.{ВіртуальніТаблиціРегістрів.РозрахункиЗПостачальниками_Місяць_TablePart.Період} < @period_month_end
     GROUP BY Контрагент, Валюта
-),
-ЗалишкиТаОборотиЗаПеріод AS
+), 
+ostatok_day AS
 (
-    SELECT 
-        РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_ЗалишкиТаОбороти_TablePart.Контрагент} AS Контрагент,
-        РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_ЗалишкиТаОбороти_TablePart.Валюта} AS Валюта,
-        SUM(РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_ЗалишкиТаОбороти_TablePart.СумаПрихід}) AS СумаПрихід,
-        SUM(РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_ЗалишкиТаОбороти_TablePart.СумаРозхід}) AS СумаРозхід,
-        SUM(РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_ЗалишкиТаОбороти_TablePart.СумаЗалишок}) AS СумаЗалишок
-    FROM 
-        {РозрахункиЗПостачальниками_ЗалишкиТаОбороти_TablePart.TABLE} AS РозрахункиЗПостачальниками
-    WHERE
-        РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_ЗалишкиТаОбороти_TablePart.Період} >= @ПочатокПеріоду AND
-        РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_ЗалишкиТаОбороти_TablePart.Період} <= @КінецьПеріоду
-    GROUP BY Контрагент, Валюта
-),
-КінцевийЗалишок AS
-(
-    SELECT 
-        Контрагент,
-        Валюта,
-        Сума
-    FROM ПочатковийЗалишок
-
-    UNION ALL
-
     SELECT
-        Контрагент,
-        Валюта,
-        СумаЗалишок
-    FROM ЗалишкиТаОборотиЗаПеріод
+        'day' AS block,
+        РозрахункиЗПостачальниками_День.{ВіртуальніТаблиціРегістрів.РозрахункиЗПостачальниками_День_TablePart.Контрагент} AS Контрагент,
+        РозрахункиЗПостачальниками_День.{ВіртуальніТаблиціРегістрів.РозрахункиЗПостачальниками_День_TablePart.Валюта} AS Валюта,
+        SUM(РозрахункиЗПостачальниками_День.{ВіртуальніТаблиціРегістрів.РозрахункиЗПостачальниками_День_TablePart.Сума}) AS Сума
+    FROM 
+        {ВіртуальніТаблиціРегістрів.РозрахункиЗПостачальниками_День_TablePart.TABLE} AS РозрахункиЗПостачальниками_День
+    WHERE
+        РозрахункиЗПостачальниками_День.{ВіртуальніТаблиціРегістрів.РозрахункиЗПостачальниками_День_TablePart.Період} >= @period_day_start AND
+        РозрахункиЗПостачальниками_День.{ВіртуальніТаблиціРегістрів.РозрахункиЗПостачальниками_День_TablePart.Період} < @period_day_end
+    GROUP BY Контрагент, Валюта
+), 
+ostatok_period AS
+(   
+    SELECT
+        'period' AS block,
+        РозрахункиЗПостачальниками_День.{ВіртуальніТаблиціРегістрів.РозрахункиЗПостачальниками_День_TablePart.Контрагент} AS Контрагент,
+        РозрахункиЗПостачальниками_День.{ВіртуальніТаблиціРегістрів.РозрахункиЗПостачальниками_День_TablePart.Валюта} AS Валюта,
+        SUM(РозрахункиЗПостачальниками_День.{ВіртуальніТаблиціРегістрів.РозрахункиЗПостачальниками_День_TablePart.Сума}) AS Сума
+    FROM 
+        {ВіртуальніТаблиціРегістрів.РозрахункиЗПостачальниками_День_TablePart.TABLE} AS РозрахункиЗПостачальниками_День
+    WHERE
+        РозрахункиЗПостачальниками_День.{ВіртуальніТаблиціРегістрів.РозрахункиЗПостачальниками_День_TablePart.Період} >= @period_ostatok_start AND
+        РозрахункиЗПостачальниками_День.{ВіртуальніТаблиціРегістрів.РозрахункиЗПостачальниками_День_TablePart.Період} <= @period_ostatok_end
+    GROUP BY Контрагент, Валюта
+),
+ostatok_na_potshatok_periodu AS
+(
+    SELECT
+       Контрагент,
+       Валюта,
+       SUM(Сума) AS Сума
+    FROM 
+    (
+        SELECT * FROM ostatok_month
+        UNION
+        SELECT * FROM ostatok_day
+    ) AS ostatok
+    GROUP BY Контрагент, Валюта
+),
+ostatok_na_kinec_periodu AS
+(
+    SELECT
+       Контрагент,
+       Валюта,
+       SUM(Сума) AS Сума
+    FROM 
+    (
+        SELECT * FROM ostatok_month
+        UNION
+        SELECT * FROM ostatok_day
+        UNION
+        SELECT * FROM ostatok_period
+    ) AS ostatok
+    GROUP BY Контрагент, Валюта
+),
+oborot AS
+(
+    SELECT 
+        РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Контрагент} AS Контрагент,
+        РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Валюта} AS Валюта,
+        SUM(CASE WHEN РозрахункиЗПостачальниками.income = true THEN РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} END) AS Прихід,
+        SUM(CASE WHEN РозрахункиЗПостачальниками.income = false THEN РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} END) AS Розхід
+    FROM
+        {РозрахункиЗПостачальниками_Const.TABLE} AS РозрахункиЗПостачальниками
+    WHERE
+        РозрахункиЗПостачальниками.period >= @period_oborot_start AND
+        РозрахункиЗПостачальниками.period <= @period_oborot_end
+    GROUP BY Контрагент, Валюта
 )
 SELECT 
     Контрагент,
@@ -340,21 +384,8 @@ FROM
         0 AS Прихід,
         0 AS Розхід,
         0 AS КінцевийЗалишок
-    FROM ПочатковийЗалишок
-
+    FROM ostatok_na_potshatok_periodu
     UNION ALL
-
-    SELECT
-        Контрагент,
-        Валюта,
-        0 AS ПочатковийЗалишок,
-        СумаПрихід AS Прихід,
-        СумаРозхід AS Розхід,
-        0 AS КінцевийЗалишок
-    FROM ЗалишкиТаОборотиЗаПеріод
-
-    UNION ALL
-
     SELECT
         Контрагент,
         Валюта,
@@ -362,7 +393,16 @@ FROM
         0 AS Прихід,
         0 AS Розхід,
         Сума AS КінцевийЗалишок
-    FROM КінцевийЗалишок
+    FROM ostatok_na_kinec_periodu
+    UNION ALL
+    SELECT
+        Контрагент,
+        Валюта,
+        0 AS ПочатковийЗалишок,
+        Прихід AS Прихід,
+        Розхід AS Розхід,
+        0 AS КінцевийЗалишок
+    FROM oborot
 ) AS ЗалишкиТаОбороти
 LEFT JOIN {Контрагенти_Const.TABLE} AS Довідник_Контрагенти ON Довідник_Контрагенти.uid = ЗалишкиТаОбороти.Контрагент
 LEFT JOIN {Валюти_Const.TABLE} AS Довідник_Валюти ON Довідник_Валюти.uid = ЗалишкиТаОбороти.Валюта
@@ -438,8 +478,16 @@ ORDER BY Контрагент_Назва, Валюта_Назва
             КолонкиДаних.Add("Валюта_Назва", "Валюта");
 
             Dictionary<string, object> paramQuery = new Dictionary<string, object>();
-            paramQuery.Add("ПочатокПеріоду", ДатаПочатокПеріоду.Value);
-            paramQuery.Add("КінецьПеріоду", ДатаКінецьПеріоду.Value);
+            paramQuery.Add("period_month_end", DateTime.Parse($"01.{ДатаПочаткуПеріоду.Value.Month}.{ДатаПочаткуПеріоду.Value.Year} 00:00:00"));
+
+            paramQuery.Add("period_day_start", DateTime.Parse($"01.{ДатаПочаткуПеріоду.Value.Month}.{ДатаПочаткуПеріоду.Value.Year} 00:00:00"));
+            paramQuery.Add("period_day_end", DateTime.Parse($"{ДатаПочаткуПеріоду.Value.Day}.{ДатаПочаткуПеріоду.Value.Month}.{ДатаПочаткуПеріоду.Value.Year} 00:00:00"));
+
+            paramQuery.Add("period_ostatok_start", DateTime.Parse($"{ДатаПочаткуПеріоду.Value.Day}.{ДатаПочаткуПеріоду.Value.Month}.{ДатаПочаткуПеріоду.Value.Year} 00:00:00"));
+            paramQuery.Add("period_ostatok_end", DateTime.Parse($"{ДатаКінцяПеріоду.Value.Day}.{ДатаКінцяПеріоду.Value.Month}.{ДатаКінцяПеріоду.Value.Year} 00:00:00"));
+
+            paramQuery.Add("period_oborot_start", DateTime.Parse($"{ДатаПочаткуПеріоду.Value.Day}.{ДатаПочаткуПеріоду.Value.Month}.{ДатаПочаткуПеріоду.Value.Year} 00:00:00"));
+            paramQuery.Add("period_oborot_end", DateTime.Parse($"{ДатаКінцяПеріоду.Value.Day}.{ДатаКінцяПеріоду.Value.Month}.{ДатаКінцяПеріоду.Value.Year} 23:59:59"));
 
             string[] columnsName;
             List<Dictionary<string, object>> listRow;
@@ -458,7 +506,7 @@ ORDER BY Контрагент_Назва, Валюта_Назва
             CreateReportNotebookPage("Залишки та обороти", treeView);
         }
 
-        void OnReport_Документи(object? sender, EventArgs args)
+        void OnReportDocuments(object? sender, EventArgs args)
         {
             #region SELECT
 
@@ -477,7 +525,7 @@ WITH register AS
     FROM
         {РозрахункиЗПостачальниками_Const.TABLE} AS РозрахункиЗПостачальниками
     WHERE
-        (РозрахункиЗПостачальниками.period >= @ПочатокПеріоду AND РозрахункиЗПостачальниками.period <= @КінецьПеріоду)
+        (РозрахункиЗПостачальниками.period >= @period_start AND РозрахункиЗПостачальниками.period <= @period_end)
 ";
 
             #region WHERE
@@ -597,8 +645,8 @@ ORDER BY period ASC
             КолонкиДаних.Add("Валюта_Назва", "Валюта");
 
             Dictionary<string, object> paramQuery = new Dictionary<string, object>();
-            paramQuery.Add("ПочатокПеріоду", DateTime.Parse($"{ДатаПочатокПеріоду.Value.Day}.{ДатаПочатокПеріоду.Value.Month}.{ДатаПочатокПеріоду.Value.Year} 00:00:00"));
-            paramQuery.Add("КінецьПеріоду", DateTime.Parse($"{ДатаКінецьПеріоду.Value.Day}.{ДатаКінецьПеріоду.Value.Month}.{ДатаКінецьПеріоду.Value.Year} 23:59:59"));
+            paramQuery.Add("period_start", DateTime.Parse($"{ДатаПочаткуПеріоду.Value.Day}.{ДатаПочаткуПеріоду.Value.Month}.{ДатаПочаткуПеріоду.Value.Year} 00:00:00"));
+            paramQuery.Add("period_end", DateTime.Parse($"{ДатаКінцяПеріоду.Value.Day}.{ДатаКінцяПеріоду.Value.Month}.{ДатаКінцяПеріоду.Value.Year} 23:59:59"));
 
             string[] columnsName;
             List<Dictionary<string, object>> listRow;

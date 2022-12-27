@@ -15,8 +15,8 @@ namespace StorageAndTrade
 
         #region Filters
 
-        DateTimeControl ДатаПочаткуПеріоду = new DateTimeControl() { Value = DateTime.Parse($"01.{DateTime.Now.Month}.{DateTime.Now.Year}") };
-        DateTimeControl ДатаКінцяПеріоду = new DateTimeControl() { Value = DateTime.Now };
+        DateTimeControl ДатаПочатокПеріоду = new DateTimeControl() { Value = DateTime.Parse($"01.{DateTime.Now.Month}.{DateTime.Now.Year}") };
+        DateTimeControl ДатаКінецьПеріоду = new DateTimeControl() { Value = DateTime.Now };
 
         Номенклатура_PointerControl Номенклатура = new Номенклатура_PointerControl();
         Номенклатура_Папки_PointerControl Номенклатура_Папка = new Номенклатура_Папки_PointerControl() { Caption = "Номенклатура папка:" };
@@ -39,13 +39,13 @@ namespace StorageAndTrade
 
             //2
             Button bOstatok = new Button("Залишки");
-            bOstatok.Clicked += OnReportOstatok;
+            bOstatok.Clicked += OnReport_Залишки;
 
             hBoxBotton.PackStart(bOstatok, false, false, 10);
 
             //3
             Button bDocuments = new Button("Документи");
-            bDocuments.Clicked += OnReportDocuments;
+            bDocuments.Clicked += OnReport_Документи;
 
             hBoxBotton.PackStart(bDocuments, false, false, 10);
 
@@ -89,9 +89,9 @@ namespace StorageAndTrade
             //Період
             HBox hBoxPeriod = new HBox() { Halign = Align.End };
             hBoxPeriod.PackStart(new Label("Період з "), false, false, 5);
-            hBoxPeriod.PackStart(ДатаПочаткуПеріоду, false, false, 5);
+            hBoxPeriod.PackStart(ДатаПочатокПеріоду, false, false, 5);
             hBoxPeriod.PackStart(new Label(" по "), false, false, 5);
-            hBoxPeriod.PackStart(ДатаКінцяПеріоду, false, false, 5);
+            hBoxPeriod.PackStart(ДатаКінецьПеріоду, false, false, 5);
             vBox.PackStart(hBoxPeriod, false, false, 5);
 
             //Номенклатура
@@ -174,7 +174,7 @@ namespace StorageAndTrade
             CreateNotebookPage(caption, () => { return vBox; });
         }
 
-        void OnReportOstatok(object? sender, EventArgs args)
+        void OnReport_Залишки(object? sender, EventArgs args)
         {
             #region SELECT
 
@@ -182,23 +182,21 @@ namespace StorageAndTrade
 
             string query = $@"
 SELECT 
-    Рег_ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Номенклатура} AS Номенклатура, 
+    ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Залишки_TablePart.Номенклатура} AS Номенклатура, 
     Довідник_Номенклатура.{Номенклатура_Const.Назва} AS Номенклатура_Назва, 
-    Рег_ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
+    ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Залишки_TablePart.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
     Довідник_ХарактеристикиНоменклатури.{ХарактеристикиНоменклатури_Const.Назва} AS ХарактеристикаНоменклатури_Назва,
-    Рег_ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Склад} AS Склад,
+    ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Залишки_TablePart.Склад} AS Склад,
     Довідник_Склади.{Склади_Const.Назва} AS Склад_Назва, 
-    SUM(CASE WHEN Рег_ЗамовленняПостачальникам.income = true THEN 
-        Рег_ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Замовлено} ELSE 
-       -Рег_ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Замовлено} END) AS Замовлено
+    SUM(ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Залишки_TablePart.Замовлено}) AS Замовлено
 FROM 
-    {ЗамовленняПостачальникам_Const.TABLE} AS Рег_ЗамовленняПостачальникам
+    {ЗамовленняПостачальникам_Залишки_TablePart.TABLE} AS ЗамовленняПостачальникам
     LEFT JOIN {Номенклатура_Const.TABLE} AS Довідник_Номенклатура ON Довідник_Номенклатура.uid = 
-        Рег_ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Номенклатура}
+        ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Залишки_TablePart.Номенклатура}
     LEFT JOIN {ХарактеристикиНоменклатури_Const.TABLE} AS Довідник_ХарактеристикиНоменклатури ON Довідник_ХарактеристикиНоменклатури.uid = 
-        Рег_ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.ХарактеристикаНоменклатури}
+        ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Залишки_TablePart.ХарактеристикаНоменклатури}
     LEFT JOIN {Склади_Const.TABLE} AS Довідник_Склади ON Довідник_Склади.uid = 
-        Рег_ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Склад}
+        ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Залишки_TablePart.Склад}
 ";
 
             #region WHERE
@@ -289,9 +287,7 @@ GROUP BY Номенклатура, Номенклатура_Назва,
          ХарактеристикаНоменклатури, ХарактеристикаНоменклатури_Назва,
          Склад, Склад_Назва
 HAVING
-     SUM(CASE WHEN Рег_ЗамовленняПостачальникам.income = true THEN 
-        Рег_ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Замовлено} ELSE 
-       -Рег_ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Замовлено} END) != 0 
+     SUM(ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Залишки_TablePart.Замовлено}) != 0 
 ORDER BY Номенклатура_Назва
 ";
             #endregion
@@ -326,7 +322,7 @@ ORDER BY Номенклатура_Назва
             CreateReportNotebookPage("Залишки", treeView);
         }
 
-        void OnReportDocuments(object? sender, EventArgs args)
+        void OnReport_Документи(object? sender, EventArgs args)
         {
             #region SELECT
 
@@ -347,7 +343,7 @@ WITH register AS
     FROM
         {ЗамовленняПостачальникам_Const.TABLE} AS ЗамовленняПостачальникам
     WHERE
-        (ЗамовленняПостачальникам.period >= @period_start AND ЗамовленняПостачальникам.period <= @period_end)
+        (ЗамовленняПостачальникам.period >= @ПочатокПеріоду AND ЗамовленняПостачальникам.period <= @КінецьПеріоду)
 ";
 
             #region WHERE
@@ -517,8 +513,8 @@ ORDER BY period ASC
             КолонкиДаних.Add("Склад_Назва", "Склад");
 
             Dictionary<string, object> paramQuery = new Dictionary<string, object>();
-            paramQuery.Add("period_start", DateTime.Parse($"{ДатаПочаткуПеріоду.Value.Day}.{ДатаПочаткуПеріоду.Value.Month}.{ДатаПочаткуПеріоду.Value.Year} 00:00:00"));
-            paramQuery.Add("period_end", DateTime.Parse($"{ДатаКінцяПеріоду.Value.Day}.{ДатаКінцяПеріоду.Value.Month}.{ДатаКінцяПеріоду.Value.Year} 23:59:59"));
+            paramQuery.Add("ПочатокПеріоду", DateTime.Parse($"{ДатаПочатокПеріоду.Value.Day}.{ДатаПочатокПеріоду.Value.Month}.{ДатаПочатокПеріоду.Value.Year} 00:00:00"));
+            paramQuery.Add("КінецьПеріоду", DateTime.Parse($"{ДатаКінецьПеріоду.Value.Day}.{ДатаКінецьПеріоду.Value.Month}.{ДатаКінецьПеріоду.Value.Year} 23:59:59"));
 
             string[] columnsName;
             List<Dictionary<string, object>> listRow;
@@ -536,6 +532,5 @@ ORDER BY period ASC
 
             CreateReportNotebookPage("Документи", treeView);
         }
-
     }
 }

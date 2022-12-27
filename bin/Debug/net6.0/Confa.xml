@@ -5,7 +5,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>27.12.2022 18:24:58</DateTimeSave>
+  <DateTimeSave>27.12.2022 20:30:18</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -13990,8 +13990,7 @@ WHERE
     {ТовариНаСкладах_Залишки_TablePart.TABLE}.{ТовариНаСкладах_Залишки_TablePart.Період} = @ПеріодДеньВідбір
 </Query>
           <Query position="1" key="SELECT">
-INSERT INTO 
-    {ТовариНаСкладах_Залишки_TablePart.TABLE} 
+INSERT INTO {ТовариНаСкладах_Залишки_TablePart.TABLE} 
 (
     uid,
     {ТовариНаСкладах_Залишки_TablePart.Період},
@@ -14004,27 +14003,27 @@ INSERT INTO
 )
 SELECT
     uuid_generate_v4(),
-    date_trunc('day', Рег_ТовариНаСкладах.period::timestamp) AS Період,
-    Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.Номенклатура} AS Номенклатура,
-    Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
-    Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.Склад} AS Склад,
-    Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.Серія} AS Серія,
+    date_trunc('day', ТовариНаСкладах.period::timestamp) AS Період,
+    ТовариНаСкладах.{ТовариНаСкладах_Const.Номенклатура} AS Номенклатура,
+    ТовариНаСкладах.{ТовариНаСкладах_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
+    ТовариНаСкладах.{ТовариНаСкладах_Const.Склад} AS Склад,
+    ТовариНаСкладах.{ТовариНаСкладах_Const.Серія} AS Серія,
 
     /* ВНаявності */
-    SUM(CASE WHEN Рег_ТовариНаСкладах.income = true THEN 
-        Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE 
-        -Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} END) AS ВНаявності,
+    SUM(CASE WHEN ТовариНаСкладах.income = true THEN 
+        ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE 
+        -ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} END) AS ВНаявності,
 
     /* ДоВідвантаження */
-    SUM(CASE WHEN Рег_ТовариНаСкладах.income = true THEN 
-        Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE 
-        -Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} END) AS ДоВідвантаження
+    SUM(CASE WHEN ТовариНаСкладах.income = true THEN 
+        ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE 
+        -ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} END) AS ДоВідвантаження
 
 FROM
-    {ТовариНаСкладах_Const.TABLE} AS Рег_ТовариНаСкладах
+    {ТовариНаСкладах_Const.TABLE} AS ТовариНаСкладах
 
 WHERE
-    date_trunc('day', Рег_ТовариНаСкладах.period::timestamp) = @ПеріодДеньВідбір
+    date_trunc('day', ТовариНаСкладах.period::timestamp) = @ПеріодДеньВідбір
 
 GROUP BY
     Період, Номенклатура, ХарактеристикаНоменклатури, Склад, Серія
@@ -14032,16 +14031,16 @@ GROUP BY
 HAVING
 
     /* ВНаявності */
-    SUM(CASE WHEN Рег_ТовариНаСкладах.income = true THEN 
-        Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE 
-        -Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} END) != 0 
+    SUM(CASE WHEN ТовариНаСкладах.income = true THEN 
+        ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE 
+        -ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} END) != 0 
  OR 
 
 
     /* ДоВідвантаження */
-    SUM(CASE WHEN Рег_ТовариНаСкладах.income = true THEN 
-        Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE 
-        -Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} END) != 0 
+    SUM(CASE WHEN ТовариНаСкладах.income = true THEN 
+        ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE 
+        -ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} END) != 0 
 
 
 
@@ -14057,8 +14056,7 @@ WHERE
     {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.TABLE}.{ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.Період} = @ПеріодДеньВідбір
 </Query>
           <Query position="1" key="SELECT">
-INSERT INTO 
-    {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.TABLE} 
+INSERT INTO {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.TABLE} 
 (
     uid,
     {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.Період},
@@ -14075,35 +14073,35 @@ INSERT INTO
 )
 SELECT
     uuid_generate_v4(),
-    date_trunc('day', Рег_ТовариНаСкладах.period::timestamp) AS Період,
-    Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.Номенклатура} AS Номенклатура,
-    Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
-    Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.Склад} AS Склад,
-    Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.Серія} AS Серія,
+    date_trunc('day', ТовариНаСкладах.period::timestamp) AS Період,
+    ТовариНаСкладах.{ТовариНаСкладах_Const.Номенклатура} AS Номенклатура,
+    ТовариНаСкладах.{ТовариНаСкладах_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
+    ТовариНаСкладах.{ТовариНаСкладах_Const.Склад} AS Склад,
+    ТовариНаСкладах.{ТовариНаСкладах_Const.Серія} AS Серія,
 
     /* ВНаявності */
-    SUM(CASE WHEN Рег_ТовариНаСкладах.income = true THEN 
-        Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE 0 END) AS ВНаявностіПрихід,
-    SUM(CASE WHEN Рег_ТовариНаСкладах.income = false THEN 
-        Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE 0 END) AS ВНаявностіРозхід,
-    SUM(CASE WHEN Рег_ТовариНаСкладах.income = true THEN 
-        Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE 
-        -Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} END) AS ВНаявностіЗалишок,
+    SUM(CASE WHEN ТовариНаСкладах.income = true THEN 
+        ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE 0 END) AS ВНаявностіПрихід,
+    SUM(CASE WHEN ТовариНаСкладах.income = false THEN 
+        ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE 0 END) AS ВНаявностіРозхід,
+    SUM(CASE WHEN ТовариНаСкладах.income = true THEN 
+        ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE 
+        -ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} END) AS ВНаявностіЗалишок,
 
     /* ДоВідвантаження */
-    SUM(CASE WHEN Рег_ТовариНаСкладах.income = true THEN 
-        Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE 0 END) AS ДоВідвантаженняПрихід,
-    SUM(CASE WHEN Рег_ТовариНаСкладах.income = false THEN 
-        Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE 0 END) AS ДоВідвантаженняРозхід,
-    SUM(CASE WHEN Рег_ТовариНаСкладах.income = true THEN 
-        Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE 
-        -Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} END) AS ДоВідвантаженняЗалишок
+    SUM(CASE WHEN ТовариНаСкладах.income = true THEN 
+        ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE 0 END) AS ДоВідвантаженняПрихід,
+    SUM(CASE WHEN ТовариНаСкладах.income = false THEN 
+        ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE 0 END) AS ДоВідвантаженняРозхід,
+    SUM(CASE WHEN ТовариНаСкладах.income = true THEN 
+        ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE 
+        -ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} END) AS ДоВідвантаженняЗалишок
 
 FROM
-    {ТовариНаСкладах_Const.TABLE} AS Рег_ТовариНаСкладах
+    {ТовариНаСкладах_Const.TABLE} AS ТовариНаСкладах
 
 WHERE
-    date_trunc('day', Рег_ТовариНаСкладах.period::timestamp) = @ПеріодДеньВідбір
+    date_trunc('day', ТовариНаСкладах.period::timestamp) = @ПеріодДеньВідбір
 
 GROUP BY
     Період, Номенклатура, ХарактеристикаНоменклатури, Склад, Серія
@@ -14111,24 +14109,24 @@ GROUP BY
 HAVING
 
     /* ВНаявності */
-    SUM(CASE WHEN Рег_ТовариНаСкладах.income = true THEN 
-        Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE 0 END) != 0 OR 
-    SUM(CASE WHEN Рег_ТовариНаСкладах.income = false THEN 
-        Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE 0 END) != 0 OR
-    SUM(CASE WHEN Рег_ТовариНаСкладах.income = true THEN 
-        Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE 
-        -Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} END) != 0 
+    SUM(CASE WHEN ТовариНаСкладах.income = true THEN 
+        ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE 0 END) != 0 OR 
+    SUM(CASE WHEN ТовариНаСкладах.income = false THEN 
+        ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE 0 END) != 0 OR
+    SUM(CASE WHEN ТовариНаСкладах.income = true THEN 
+        ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE 
+        -ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} END) != 0 
  OR 
 
 
     /* ДоВідвантаження */
-    SUM(CASE WHEN Рег_ТовариНаСкладах.income = true THEN 
-        Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE 0 END) != 0 OR 
-    SUM(CASE WHEN Рег_ТовариНаСкладах.income = false THEN 
-        Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE 0 END) != 0 OR
-    SUM(CASE WHEN Рег_ТовариНаСкладах.income = true THEN 
-        Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE 
-        -Рег_ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} END) != 0 
+    SUM(CASE WHEN ТовариНаСкладах.income = true THEN 
+        ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE 0 END) != 0 OR 
+    SUM(CASE WHEN ТовариНаСкладах.income = false THEN 
+        ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE 0 END) != 0 OR
+    SUM(CASE WHEN ТовариНаСкладах.income = true THEN 
+        ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE 
+        -ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} END) != 0 
 
 
 
@@ -14316,8 +14314,7 @@ WHERE
     {РухТоварів_Обороти_TablePart.TABLE}.{РухТоварів_Обороти_TablePart.Період} = @ПеріодДеньВідбір
 </Query>
           <Query position="1" key="SELECT">
-INSERT INTO 
-    {РухТоварів_Обороти_TablePart.TABLE} 
+INSERT INTO {РухТоварів_Обороти_TablePart.TABLE} 
 (
     uid,
     {РухТоварів_Обороти_TablePart.Період},
@@ -14329,22 +14326,22 @@ INSERT INTO
 )
 SELECT
     uuid_generate_v4(),
-    date_trunc('day', Рег_РухТоварів.period::timestamp) AS Період,
-    Рег_РухТоварів.{РухТоварів_Const.Номенклатура} AS Номенклатура,
-    Рег_РухТоварів.{РухТоварів_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
-    Рег_РухТоварів.{РухТоварів_Const.Склад} AS Склад,
+    date_trunc('day', РухТоварів.period::timestamp) AS Період,
+    РухТоварів.{РухТоварів_Const.Номенклатура} AS Номенклатура,
+    РухТоварів.{РухТоварів_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
+    РухТоварів.{РухТоварів_Const.Склад} AS Склад,
 
     /* Кількість */
-    SUM(CASE WHEN Рег_РухТоварів.income = true THEN 
-        Рег_РухТоварів.{РухТоварів_Const.Кількість} ELSE 0 END) AS КількістьПрихід,
-    SUM(CASE WHEN Рег_РухТоварів.income = false THEN 
-        Рег_РухТоварів.{РухТоварів_Const.Кількість} ELSE 0 END) AS КількістьРозхід
+    SUM(CASE WHEN РухТоварів.income = true THEN 
+        РухТоварів.{РухТоварів_Const.Кількість} ELSE 0 END) AS КількістьПрихід,
+    SUM(CASE WHEN РухТоварів.income = false THEN 
+        РухТоварів.{РухТоварів_Const.Кількість} ELSE 0 END) AS КількістьРозхід
 
 FROM
-    {РухТоварів_Const.TABLE} AS Рег_РухТоварів
+    {РухТоварів_Const.TABLE} AS РухТоварів
 
 WHERE
-    date_trunc('day', Рег_РухТоварів.period::timestamp) = @ПеріодДеньВідбір
+    date_trunc('day', РухТоварів.period::timestamp) = @ПеріодДеньВідбір
 
 GROUP BY
     Період, Номенклатура, ХарактеристикаНоменклатури, Склад
@@ -14352,10 +14349,10 @@ GROUP BY
 HAVING
 
     /* Кількість */
-    SUM(CASE WHEN Рег_РухТоварів.income = true THEN 
-        Рег_РухТоварів.{РухТоварів_Const.Кількість} ELSE 0 END) != 0 OR 
-    SUM(CASE WHEN Рег_РухТоварів.income = false THEN 
-        Рег_РухТоварів.{РухТоварів_Const.Кількість} ELSE 0 END) != 0 
+    SUM(CASE WHEN РухТоварів.income = true THEN 
+        РухТоварів.{РухТоварів_Const.Кількість} ELSE 0 END) != 0 OR 
+    SUM(CASE WHEN РухТоварів.income = false THEN 
+        РухТоварів.{РухТоварів_Const.Кількість} ELSE 0 END) != 0 
 
 
 
@@ -14504,105 +14501,6 @@ HAVING
             </Field>
           </Fields>
         </TablePart>
-        <TablePart>
-          <Name>ЗалишкиТаОбороти</Name>
-          <Table>tab_b33</Table>
-          <Desc>Віртуальна таблиця</Desc>
-          <Fields>
-            <Field>
-              <Name>Період</Name>
-              <NameInTable>col_a1</NameInTable>
-              <Type>date</Type>
-              <Desc>
-              </Desc>
-              <IsIndex>1</IsIndex>
-            </Field>
-            <Field>
-              <Name>ЗамовленняКлієнта</Name>
-              <NameInTable>col_a2</NameInTable>
-              <Type>pointer</Type>
-              <Pointer>Документи.ЗамовленняКлієнта</Pointer>
-              <Desc>
-              </Desc>
-              <IsIndex>1</IsIndex>
-            </Field>
-            <Field>
-              <Name>Номенклатура</Name>
-              <NameInTable>col_a3</NameInTable>
-              <Type>pointer</Type>
-              <Pointer>Довідники.Номенклатура</Pointer>
-              <Desc>
-              </Desc>
-              <IsIndex>1</IsIndex>
-            </Field>
-            <Field>
-              <Name>ХарактеристикаНоменклатури</Name>
-              <NameInTable>col_a4</NameInTable>
-              <Type>pointer</Type>
-              <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
-              <Desc>
-              </Desc>
-              <IsIndex>1</IsIndex>
-            </Field>
-            <Field>
-              <Name>Склад</Name>
-              <NameInTable>col_a5</NameInTable>
-              <Type>pointer</Type>
-              <Pointer>Довідники.Склади</Pointer>
-              <Desc>
-              </Desc>
-              <IsIndex>1</IsIndex>
-            </Field>
-            <Field>
-              <Name>ЗамовленоПрихід</Name>
-              <NameInTable>col_a6</NameInTable>
-              <Type>numeric</Type>
-              <Desc>
-              </Desc>
-              <IsIndex>0</IsIndex>
-            </Field>
-            <Field>
-              <Name>ЗамовленоРозхід</Name>
-              <NameInTable>col_a7</NameInTable>
-              <Type>numeric</Type>
-              <Desc>
-              </Desc>
-              <IsIndex>0</IsIndex>
-            </Field>
-            <Field>
-              <Name>ЗамовленоЗалишок</Name>
-              <NameInTable>col_a8</NameInTable>
-              <Type>numeric</Type>
-              <Desc>
-              </Desc>
-              <IsIndex>0</IsIndex>
-            </Field>
-            <Field>
-              <Name>СумаПрихід</Name>
-              <NameInTable>col_a9</NameInTable>
-              <Type>numeric</Type>
-              <Desc>
-              </Desc>
-              <IsIndex>0</IsIndex>
-            </Field>
-            <Field>
-              <Name>СумаРозхід</Name>
-              <NameInTable>col_b1</NameInTable>
-              <Type>numeric</Type>
-              <Desc>
-              </Desc>
-              <IsIndex>0</IsIndex>
-            </Field>
-            <Field>
-              <Name>СумаЗалишок</Name>
-              <NameInTable>col_b2</NameInTable>
-              <Type>numeric</Type>
-              <Desc>
-              </Desc>
-              <IsIndex>0</IsIndex>
-            </Field>
-          </Fields>
-        </TablePart>
       </TabularParts>
       <QueryBlockList>
         <QueryBlock>
@@ -14614,8 +14512,7 @@ WHERE
     {ЗамовленняКлієнтів_Залишки_TablePart.TABLE}.{ЗамовленняКлієнтів_Залишки_TablePart.Період} = @ПеріодДеньВідбір
 </Query>
           <Query position="1" key="SELECT">
-INSERT INTO 
-    {ЗамовленняКлієнтів_Залишки_TablePart.TABLE} 
+INSERT INTO {ЗамовленняКлієнтів_Залишки_TablePart.TABLE} 
 (
     uid,
     {ЗамовленняКлієнтів_Залишки_TablePart.Період},
@@ -14628,27 +14525,27 @@ INSERT INTO
 )
 SELECT
     uuid_generate_v4(),
-    date_trunc('day', Рег_ЗамовленняКлієнтів.period::timestamp) AS Період,
-    Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.ЗамовленняКлієнта} AS ЗамовленняКлієнта,
-    Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Номенклатура} AS Номенклатура,
-    Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
-    Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Склад} AS Склад,
+    date_trunc('day', ЗамовленняКлієнтів.period::timestamp) AS Період,
+    ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.ЗамовленняКлієнта} AS ЗамовленняКлієнта,
+    ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Номенклатура} AS Номенклатура,
+    ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
+    ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Склад} AS Склад,
 
     /* Замовлено */
-    SUM(CASE WHEN Рег_ЗамовленняКлієнтів.income = true THEN 
-        Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Замовлено} ELSE 
-        -Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Замовлено} END) AS Замовлено,
+    SUM(CASE WHEN ЗамовленняКлієнтів.income = true THEN 
+        ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Замовлено} ELSE 
+        -ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Замовлено} END) AS Замовлено,
 
     /* Сума */
-    SUM(CASE WHEN Рег_ЗамовленняКлієнтів.income = true THEN 
-        Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Сума} ELSE 
-        -Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Сума} END) AS Сума
+    SUM(CASE WHEN ЗамовленняКлієнтів.income = true THEN 
+        ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Сума} ELSE 
+        -ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Сума} END) AS Сума
 
 FROM
-    {ЗамовленняКлієнтів_Const.TABLE} AS Рег_ЗамовленняКлієнтів
+    {ЗамовленняКлієнтів_Const.TABLE} AS ЗамовленняКлієнтів
 
 WHERE
-    date_trunc('day', Рег_ЗамовленняКлієнтів.period::timestamp) = @ПеріодДеньВідбір
+    date_trunc('day', ЗамовленняКлієнтів.period::timestamp) = @ПеріодДеньВідбір
 
 GROUP BY
     Період, ЗамовленняКлієнта, Номенклатура, ХарактеристикаНоменклатури, Склад
@@ -14656,103 +14553,16 @@ GROUP BY
 HAVING
 
     /* Замовлено */
-    SUM(CASE WHEN Рег_ЗамовленняКлієнтів.income = true THEN 
-        Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Замовлено} ELSE 
-        -Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Замовлено} END) != 0 
+    SUM(CASE WHEN ЗамовленняКлієнтів.income = true THEN 
+        ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Замовлено} ELSE 
+        -ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Замовлено} END) != 0 
  OR 
 
 
     /* Сума */
-    SUM(CASE WHEN Рег_ЗамовленняКлієнтів.income = true THEN 
-        Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Сума} ELSE 
-        -Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Сума} END) != 0 
-
-
-
-
-</Query>
-        </QueryBlock>
-        <QueryBlock>
-          <Name>ЗалишкиТаОбороти</Name>
-          <Query position="0" key="DELETE">
-DELETE FROM 
-    {ЗамовленняКлієнтів_ЗалишкиТаОбороти_TablePart.TABLE}
-WHERE 
-    {ЗамовленняКлієнтів_ЗалишкиТаОбороти_TablePart.TABLE}.{ЗамовленняКлієнтів_ЗалишкиТаОбороти_TablePart.Період} = @ПеріодДеньВідбір
-</Query>
-          <Query position="1" key="SELECT">
-INSERT INTO 
-    {ЗамовленняКлієнтів_ЗалишкиТаОбороти_TablePart.TABLE} 
-(
-    uid,
-    {ЗамовленняКлієнтів_ЗалишкиТаОбороти_TablePart.Період},
-    {ЗамовленняКлієнтів_ЗалишкиТаОбороти_TablePart.ЗамовленняКлієнта},
-    {ЗамовленняКлієнтів_ЗалишкиТаОбороти_TablePart.Номенклатура},
-    {ЗамовленняКлієнтів_ЗалишкиТаОбороти_TablePart.ХарактеристикаНоменклатури},
-    {ЗамовленняКлієнтів_ЗалишкиТаОбороти_TablePart.Склад},
-    {ЗамовленняКлієнтів_ЗалишкиТаОбороти_TablePart.ЗамовленоПрихід},
-    {ЗамовленняКлієнтів_ЗалишкиТаОбороти_TablePart.ЗамовленоРозхід},
-    {ЗамовленняКлієнтів_ЗалишкиТаОбороти_TablePart.ЗамовленоЗалишок},
-    {ЗамовленняКлієнтів_ЗалишкиТаОбороти_TablePart.СумаПрихід},
-    {ЗамовленняКлієнтів_ЗалишкиТаОбороти_TablePart.СумаРозхід},
-    {ЗамовленняКлієнтів_ЗалишкиТаОбороти_TablePart.СумаЗалишок}
-)
-SELECT
-    uuid_generate_v4(),
-    date_trunc('day', Рег_ЗамовленняКлієнтів.period::timestamp) AS Період,
-    Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.ЗамовленняКлієнта} AS ЗамовленняКлієнта,
-    Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Номенклатура} AS Номенклатура,
-    Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
-    Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Склад} AS Склад,
-
-    /* Замовлено */
-    SUM(CASE WHEN Рег_ЗамовленняКлієнтів.income = true THEN 
-        Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Замовлено} ELSE 0 END) AS ЗамовленоПрихід,
-    SUM(CASE WHEN Рег_ЗамовленняКлієнтів.income = false THEN 
-        Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Замовлено} ELSE 0 END) AS ЗамовленоРозхід,
-    SUM(CASE WHEN Рег_ЗамовленняКлієнтів.income = true THEN 
-        Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Замовлено} ELSE 
-        -Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Замовлено} END) AS ЗамовленоЗалишок,
-
-    /* Сума */
-    SUM(CASE WHEN Рег_ЗамовленняКлієнтів.income = true THEN 
-        Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Сума} ELSE 0 END) AS СумаПрихід,
-    SUM(CASE WHEN Рег_ЗамовленняКлієнтів.income = false THEN 
-        Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Сума} ELSE 0 END) AS СумаРозхід,
-    SUM(CASE WHEN Рег_ЗамовленняКлієнтів.income = true THEN 
-        Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Сума} ELSE 
-        -Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Сума} END) AS СумаЗалишок
-
-FROM
-    {ЗамовленняКлієнтів_Const.TABLE} AS Рег_ЗамовленняКлієнтів
-
-WHERE
-    date_trunc('day', Рег_ЗамовленняКлієнтів.period::timestamp) = @ПеріодДеньВідбір
-
-GROUP BY
-    Період, ЗамовленняКлієнта, Номенклатура, ХарактеристикаНоменклатури, Склад
-
-HAVING
-
-    /* Замовлено */
-    SUM(CASE WHEN Рег_ЗамовленняКлієнтів.income = true THEN 
-        Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Замовлено} ELSE 0 END) != 0 OR 
-    SUM(CASE WHEN Рег_ЗамовленняКлієнтів.income = false THEN 
-        Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Замовлено} ELSE 0 END) != 0 OR
-    SUM(CASE WHEN Рег_ЗамовленняКлієнтів.income = true THEN 
-        Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Замовлено} ELSE 
-        -Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Замовлено} END) != 0 
- OR 
-
-
-    /* Сума */
-    SUM(CASE WHEN Рег_ЗамовленняКлієнтів.income = true THEN 
-        Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Сума} ELSE 0 END) != 0 OR 
-    SUM(CASE WHEN Рег_ЗамовленняКлієнтів.income = false THEN 
-        Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Сума} ELSE 0 END) != 0 OR
-    SUM(CASE WHEN Рег_ЗамовленняКлієнтів.income = true THEN 
-        Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Сума} ELSE 
-        -Рег_ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Сума} END) != 0 
+    SUM(CASE WHEN ЗамовленняКлієнтів.income = true THEN 
+        ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Сума} ELSE 
+        -ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Сума} END) != 0 
 
 
 
@@ -14921,8 +14731,7 @@ WHERE
     {РозрахункиЗКлієнтами_Залишки_TablePart.TABLE}.{РозрахункиЗКлієнтами_Залишки_TablePart.Період} = @ПеріодДеньВідбір
 </Query>
           <Query position="1" key="SELECT">
-INSERT INTO 
-    {РозрахункиЗКлієнтами_Залишки_TablePart.TABLE} 
+INSERT INTO {РозрахункиЗКлієнтами_Залишки_TablePart.TABLE} 
 (
     uid,
     {РозрахункиЗКлієнтами_Залишки_TablePart.Період},
@@ -14932,20 +14741,20 @@ INSERT INTO
 )
 SELECT
     uuid_generate_v4(),
-    date_trunc('day', Рег_РозрахункиЗКлієнтами.period::timestamp) AS Період,
-    Рег_РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Валюта} AS Валюта,
-    Рег_РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Контрагент} AS Контрагент,
+    date_trunc('day', РозрахункиЗКлієнтами.period::timestamp) AS Період,
+    РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Валюта} AS Валюта,
+    РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Контрагент} AS Контрагент,
 
     /* Сума */
-    SUM(CASE WHEN Рег_РозрахункиЗКлієнтами.income = true THEN 
-        Рег_РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} ELSE 
-        -Рег_РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} END) AS Сума
+    SUM(CASE WHEN РозрахункиЗКлієнтами.income = true THEN 
+        РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} ELSE 
+        -РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} END) AS Сума
 
 FROM
-    {РозрахункиЗКлієнтами_Const.TABLE} AS Рег_РозрахункиЗКлієнтами
+    {РозрахункиЗКлієнтами_Const.TABLE} AS РозрахункиЗКлієнтами
 
 WHERE
-    date_trunc('day', Рег_РозрахункиЗКлієнтами.period::timestamp) = @ПеріодДеньВідбір
+    date_trunc('day', РозрахункиЗКлієнтами.period::timestamp) = @ПеріодДеньВідбір
 
 GROUP BY
     Період, Валюта, Контрагент
@@ -14953,9 +14762,9 @@ GROUP BY
 HAVING
 
     /* Сума */
-    SUM(CASE WHEN Рег_РозрахункиЗКлієнтами.income = true THEN 
-        Рег_РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} ELSE 
-        -Рег_РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} END) != 0 
+    SUM(CASE WHEN РозрахункиЗКлієнтами.income = true THEN 
+        РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} ELSE 
+        -РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} END) != 0 
 
 
 
@@ -14971,8 +14780,7 @@ WHERE
     {РозрахункиЗКлієнтами_ЗалишкиТаОбороти_TablePart.TABLE}.{РозрахункиЗКлієнтами_ЗалишкиТаОбороти_TablePart.Період} = @ПеріодДеньВідбір
 </Query>
           <Query position="1" key="SELECT">
-INSERT INTO 
-    {РозрахункиЗКлієнтами_ЗалишкиТаОбороти_TablePart.TABLE} 
+INSERT INTO {РозрахункиЗКлієнтами_ЗалишкиТаОбороти_TablePart.TABLE} 
 (
     uid,
     {РозрахункиЗКлієнтами_ЗалишкиТаОбороти_TablePart.Період},
@@ -14984,24 +14792,24 @@ INSERT INTO
 )
 SELECT
     uuid_generate_v4(),
-    date_trunc('day', Рег_РозрахункиЗКлієнтами.period::timestamp) AS Період,
-    Рег_РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Валюта} AS Валюта,
-    Рег_РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Контрагент} AS Контрагент,
+    date_trunc('day', РозрахункиЗКлієнтами.period::timestamp) AS Період,
+    РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Валюта} AS Валюта,
+    РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Контрагент} AS Контрагент,
 
     /* Сума */
-    SUM(CASE WHEN Рег_РозрахункиЗКлієнтами.income = true THEN 
-        Рег_РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} ELSE 0 END) AS СумаПрихід,
-    SUM(CASE WHEN Рег_РозрахункиЗКлієнтами.income = false THEN 
-        Рег_РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} ELSE 0 END) AS СумаРозхід,
-    SUM(CASE WHEN Рег_РозрахункиЗКлієнтами.income = true THEN 
-        Рег_РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} ELSE 
-        -Рег_РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} END) AS СумаЗалишок
+    SUM(CASE WHEN РозрахункиЗКлієнтами.income = true THEN 
+        РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} ELSE 0 END) AS СумаПрихід,
+    SUM(CASE WHEN РозрахункиЗКлієнтами.income = false THEN 
+        РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} ELSE 0 END) AS СумаРозхід,
+    SUM(CASE WHEN РозрахункиЗКлієнтами.income = true THEN 
+        РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} ELSE 
+        -РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} END) AS СумаЗалишок
 
 FROM
-    {РозрахункиЗКлієнтами_Const.TABLE} AS Рег_РозрахункиЗКлієнтами
+    {РозрахункиЗКлієнтами_Const.TABLE} AS РозрахункиЗКлієнтами
 
 WHERE
-    date_trunc('day', Рег_РозрахункиЗКлієнтами.period::timestamp) = @ПеріодДеньВідбір
+    date_trunc('day', РозрахункиЗКлієнтами.period::timestamp) = @ПеріодДеньВідбір
 
 GROUP BY
     Період, Валюта, Контрагент
@@ -15009,13 +14817,13 @@ GROUP BY
 HAVING
 
     /* Сума */
-    SUM(CASE WHEN Рег_РозрахункиЗКлієнтами.income = true THEN 
-        Рег_РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} ELSE 0 END) != 0 OR 
-    SUM(CASE WHEN Рег_РозрахункиЗКлієнтами.income = false THEN 
-        Рег_РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} ELSE 0 END) != 0 OR
-    SUM(CASE WHEN Рег_РозрахункиЗКлієнтами.income = true THEN 
-        Рег_РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} ELSE 
-        -Рег_РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} END) != 0 
+    SUM(CASE WHEN РозрахункиЗКлієнтами.income = true THEN 
+        РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} ELSE 0 END) != 0 OR 
+    SUM(CASE WHEN РозрахункиЗКлієнтами.income = false THEN 
+        РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} ELSE 0 END) != 0 OR
+    SUM(CASE WHEN РозрахункиЗКлієнтами.income = true THEN 
+        РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} ELSE 
+        -РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} END) != 0 
 
 
 
@@ -15260,120 +15068,6 @@ HAVING
             </Field>
           </Fields>
         </TablePart>
-        <TablePart>
-          <Name>ЗалишкиТаОбороти</Name>
-          <Table>tab_b39</Table>
-          <Desc>Віртуальна таблиця</Desc>
-          <Fields>
-            <Field>
-              <Name>Період</Name>
-              <NameInTable>col_a1</NameInTable>
-              <Type>date</Type>
-              <Desc>
-              </Desc>
-              <IsIndex>1</IsIndex>
-            </Field>
-            <Field>
-              <Name>Номенклатура</Name>
-              <NameInTable>col_a2</NameInTable>
-              <Type>pointer</Type>
-              <Pointer>Довідники.Номенклатура</Pointer>
-              <Desc>
-              </Desc>
-              <IsIndex>1</IsIndex>
-            </Field>
-            <Field>
-              <Name>ХарактеристикаНоменклатури</Name>
-              <NameInTable>col_a3</NameInTable>
-              <Type>pointer</Type>
-              <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
-              <Desc>
-              </Desc>
-              <IsIndex>1</IsIndex>
-            </Field>
-            <Field>
-              <Name>Склад</Name>
-              <NameInTable>col_a4</NameInTable>
-              <Type>pointer</Type>
-              <Pointer>Довідники.Склади</Pointer>
-              <Desc>
-              </Desc>
-              <IsIndex>1</IsIndex>
-            </Field>
-            <Field>
-              <Name>ВНаявностіПрихід</Name>
-              <NameInTable>col_a5</NameInTable>
-              <Type>numeric</Type>
-              <Desc>
-              </Desc>
-              <IsIndex>0</IsIndex>
-            </Field>
-            <Field>
-              <Name>ВНаявностіРозхід</Name>
-              <NameInTable>col_a6</NameInTable>
-              <Type>numeric</Type>
-              <Desc>
-              </Desc>
-              <IsIndex>0</IsIndex>
-            </Field>
-            <Field>
-              <Name>ВНаявностіЗалишок</Name>
-              <NameInTable>col_a7</NameInTable>
-              <Type>numeric</Type>
-              <Desc>
-              </Desc>
-              <IsIndex>0</IsIndex>
-            </Field>
-            <Field>
-              <Name>ВРезервіЗіСкладуПрихід</Name>
-              <NameInTable>col_a8</NameInTable>
-              <Type>numeric</Type>
-              <Desc>
-              </Desc>
-              <IsIndex>0</IsIndex>
-            </Field>
-            <Field>
-              <Name>ВРезервіЗіСкладуРозхід</Name>
-              <NameInTable>col_a9</NameInTable>
-              <Type>numeric</Type>
-              <Desc>
-              </Desc>
-              <IsIndex>0</IsIndex>
-            </Field>
-            <Field>
-              <Name>ВРезервіЗіСкладуЗалишок</Name>
-              <NameInTable>col_b1</NameInTable>
-              <Type>numeric</Type>
-              <Desc>
-              </Desc>
-              <IsIndex>0</IsIndex>
-            </Field>
-            <Field>
-              <Name>ВРезервіПідЗамовленняПрихід</Name>
-              <NameInTable>col_b2</NameInTable>
-              <Type>numeric</Type>
-              <Desc>
-              </Desc>
-              <IsIndex>0</IsIndex>
-            </Field>
-            <Field>
-              <Name>ВРезервіПідЗамовленняРозхід</Name>
-              <NameInTable>col_b3</NameInTable>
-              <Type>numeric</Type>
-              <Desc>
-              </Desc>
-              <IsIndex>0</IsIndex>
-            </Field>
-            <Field>
-              <Name>ВРезервіПідЗамовленняЗалишок</Name>
-              <NameInTable>col_b4</NameInTable>
-              <Type>numeric</Type>
-              <Desc>
-              </Desc>
-              <IsIndex>0</IsIndex>
-            </Field>
-          </Fields>
-        </TablePart>
       </TabularParts>
       <QueryBlockList>
         <QueryBlock>
@@ -15385,8 +15079,7 @@ WHERE
     {ВільніЗалишки_Залишки_TablePart.TABLE}.{ВільніЗалишки_Залишки_TablePart.Період} = @ПеріодДеньВідбір
 </Query>
           <Query position="1" key="SELECT">
-INSERT INTO 
-    {ВільніЗалишки_Залишки_TablePart.TABLE} 
+INSERT INTO {ВільніЗалишки_Залишки_TablePart.TABLE} 
 (
     uid,
     {ВільніЗалишки_Залишки_TablePart.Період},
@@ -15399,31 +15092,31 @@ INSERT INTO
 )
 SELECT
     uuid_generate_v4(),
-    date_trunc('day', Рег_ВільніЗалишки.period::timestamp) AS Період,
-    Рег_ВільніЗалишки.{ВільніЗалишки_Const.Номенклатура} AS Номенклатура,
-    Рег_ВільніЗалишки.{ВільніЗалишки_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
-    Рег_ВільніЗалишки.{ВільніЗалишки_Const.Склад} AS Склад,
+    date_trunc('day', ВільніЗалишки.period::timestamp) AS Період,
+    ВільніЗалишки.{ВільніЗалишки_Const.Номенклатура} AS Номенклатура,
+    ВільніЗалишки.{ВільніЗалишки_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
+    ВільніЗалишки.{ВільніЗалишки_Const.Склад} AS Склад,
 
     /* ВНаявності */
-    SUM(CASE WHEN Рег_ВільніЗалишки.income = true THEN 
-        Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВНаявності} ELSE 
-        -Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВНаявності} END) AS ВНаявності,
+    SUM(CASE WHEN ВільніЗалишки.income = true THEN 
+        ВільніЗалишки.{ВільніЗалишки_Const.ВНаявності} ELSE 
+        -ВільніЗалишки.{ВільніЗалишки_Const.ВНаявності} END) AS ВНаявності,
 
     /* ВРезервіЗіСкладу */
-    SUM(CASE WHEN Рег_ВільніЗалишки.income = true THEN 
-        Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіЗіСкладу} ELSE 
-        -Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіЗіСкладу} END) AS ВРезервіЗіСкладу,
+    SUM(CASE WHEN ВільніЗалишки.income = true THEN 
+        ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіЗіСкладу} ELSE 
+        -ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіЗіСкладу} END) AS ВРезервіЗіСкладу,
 
     /* ВРезервіПідЗамовлення */
-    SUM(CASE WHEN Рег_ВільніЗалишки.income = true THEN 
-        Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіПідЗамовлення} ELSE 
-        -Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіПідЗамовлення} END) AS ВРезервіПідЗамовлення
+    SUM(CASE WHEN ВільніЗалишки.income = true THEN 
+        ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіПідЗамовлення} ELSE 
+        -ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіПідЗамовлення} END) AS ВРезервіПідЗамовлення
 
 FROM
-    {ВільніЗалишки_Const.TABLE} AS Рег_ВільніЗалишки
+    {ВільніЗалишки_Const.TABLE} AS ВільніЗалишки
 
 WHERE
-    date_trunc('day', Рег_ВільніЗалишки.period::timestamp) = @ПеріодДеньВідбір
+    date_trunc('day', ВільніЗалишки.period::timestamp) = @ПеріодДеньВідбір
 
 GROUP BY
     Період, Номенклатура, ХарактеристикаНоменклатури, Склад
@@ -15431,131 +15124,23 @@ GROUP BY
 HAVING
 
     /* ВНаявності */
-    SUM(CASE WHEN Рег_ВільніЗалишки.income = true THEN 
-        Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВНаявності} ELSE 
-        -Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВНаявності} END) != 0 
+    SUM(CASE WHEN ВільніЗалишки.income = true THEN 
+        ВільніЗалишки.{ВільніЗалишки_Const.ВНаявності} ELSE 
+        -ВільніЗалишки.{ВільніЗалишки_Const.ВНаявності} END) != 0 
  OR 
 
 
     /* ВРезервіЗіСкладу */
-    SUM(CASE WHEN Рег_ВільніЗалишки.income = true THEN 
-        Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіЗіСкладу} ELSE 
-        -Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіЗіСкладу} END) != 0 
+    SUM(CASE WHEN ВільніЗалишки.income = true THEN 
+        ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіЗіСкладу} ELSE 
+        -ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіЗіСкладу} END) != 0 
  OR 
 
 
     /* ВРезервіПідЗамовлення */
-    SUM(CASE WHEN Рег_ВільніЗалишки.income = true THEN 
-        Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіПідЗамовлення} ELSE 
-        -Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіПідЗамовлення} END) != 0 
-
-
-
-
-</Query>
-        </QueryBlock>
-        <QueryBlock>
-          <Name>ЗалишкиТаОбороти</Name>
-          <Query position="0" key="DELETE">
-DELETE FROM 
-    {ВільніЗалишки_ЗалишкиТаОбороти_TablePart.TABLE}
-WHERE 
-    {ВільніЗалишки_ЗалишкиТаОбороти_TablePart.TABLE}.{ВільніЗалишки_ЗалишкиТаОбороти_TablePart.Період} = @ПеріодДеньВідбір
-</Query>
-          <Query position="1" key="SELECT">
-INSERT INTO 
-    {ВільніЗалишки_ЗалишкиТаОбороти_TablePart.TABLE} 
-(
-    uid,
-    {ВільніЗалишки_ЗалишкиТаОбороти_TablePart.Період},
-    {ВільніЗалишки_ЗалишкиТаОбороти_TablePart.Номенклатура},
-    {ВільніЗалишки_ЗалишкиТаОбороти_TablePart.ХарактеристикаНоменклатури},
-    {ВільніЗалишки_ЗалишкиТаОбороти_TablePart.Склад},
-    {ВільніЗалишки_ЗалишкиТаОбороти_TablePart.ВНаявностіПрихід},
-    {ВільніЗалишки_ЗалишкиТаОбороти_TablePart.ВНаявностіРозхід},
-    {ВільніЗалишки_ЗалишкиТаОбороти_TablePart.ВНаявностіЗалишок},
-    {ВільніЗалишки_ЗалишкиТаОбороти_TablePart.ВРезервіЗіСкладуПрихід},
-    {ВільніЗалишки_ЗалишкиТаОбороти_TablePart.ВРезервіЗіСкладуРозхід},
-    {ВільніЗалишки_ЗалишкиТаОбороти_TablePart.ВРезервіЗіСкладуЗалишок},
-    {ВільніЗалишки_ЗалишкиТаОбороти_TablePart.ВРезервіПідЗамовленняПрихід},
-    {ВільніЗалишки_ЗалишкиТаОбороти_TablePart.ВРезервіПідЗамовленняРозхід},
-    {ВільніЗалишки_ЗалишкиТаОбороти_TablePart.ВРезервіПідЗамовленняЗалишок}
-)
-SELECT
-    uuid_generate_v4(),
-    date_trunc('day', Рег_ВільніЗалишки.period::timestamp) AS Період,
-    Рег_ВільніЗалишки.{ВільніЗалишки_Const.Номенклатура} AS Номенклатура,
-    Рег_ВільніЗалишки.{ВільніЗалишки_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
-    Рег_ВільніЗалишки.{ВільніЗалишки_Const.Склад} AS Склад,
-
-    /* ВНаявності */
-    SUM(CASE WHEN Рег_ВільніЗалишки.income = true THEN 
-        Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВНаявності} ELSE 0 END) AS ВНаявностіПрихід,
-    SUM(CASE WHEN Рег_ВільніЗалишки.income = false THEN 
-        Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВНаявності} ELSE 0 END) AS ВНаявностіРозхід,
-    SUM(CASE WHEN Рег_ВільніЗалишки.income = true THEN 
-        Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВНаявності} ELSE 
-        -Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВНаявності} END) AS ВНаявностіЗалишок,
-
-    /* ВРезервіЗіСкладу */
-    SUM(CASE WHEN Рег_ВільніЗалишки.income = true THEN 
-        Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіЗіСкладу} ELSE 0 END) AS ВРезервіЗіСкладуПрихід,
-    SUM(CASE WHEN Рег_ВільніЗалишки.income = false THEN 
-        Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіЗіСкладу} ELSE 0 END) AS ВРезервіЗіСкладуРозхід,
-    SUM(CASE WHEN Рег_ВільніЗалишки.income = true THEN 
-        Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіЗіСкладу} ELSE 
-        -Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіЗіСкладу} END) AS ВРезервіЗіСкладуЗалишок,
-
-    /* ВРезервіПідЗамовлення */
-    SUM(CASE WHEN Рег_ВільніЗалишки.income = true THEN 
-        Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіПідЗамовлення} ELSE 0 END) AS ВРезервіПідЗамовленняПрихід,
-    SUM(CASE WHEN Рег_ВільніЗалишки.income = false THEN 
-        Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіПідЗамовлення} ELSE 0 END) AS ВРезервіПідЗамовленняРозхід,
-    SUM(CASE WHEN Рег_ВільніЗалишки.income = true THEN 
-        Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіПідЗамовлення} ELSE 
-        -Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіПідЗамовлення} END) AS ВРезервіПідЗамовленняЗалишок
-
-FROM
-    {ВільніЗалишки_Const.TABLE} AS Рег_ВільніЗалишки
-
-WHERE
-    date_trunc('day', Рег_ВільніЗалишки.period::timestamp) = @ПеріодДеньВідбір
-
-GROUP BY
-    Період, Номенклатура, ХарактеристикаНоменклатури, Склад
-
-HAVING
-
-    /* ВНаявності */
-    SUM(CASE WHEN Рег_ВільніЗалишки.income = true THEN 
-        Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВНаявності} ELSE 0 END) != 0 OR 
-    SUM(CASE WHEN Рег_ВільніЗалишки.income = false THEN 
-        Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВНаявності} ELSE 0 END) != 0 OR
-    SUM(CASE WHEN Рег_ВільніЗалишки.income = true THEN 
-        Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВНаявності} ELSE 
-        -Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВНаявності} END) != 0 
- OR 
-
-
-    /* ВРезервіЗіСкладу */
-    SUM(CASE WHEN Рег_ВільніЗалишки.income = true THEN 
-        Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіЗіСкладу} ELSE 0 END) != 0 OR 
-    SUM(CASE WHEN Рег_ВільніЗалишки.income = false THEN 
-        Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіЗіСкладу} ELSE 0 END) != 0 OR
-    SUM(CASE WHEN Рег_ВільніЗалишки.income = true THEN 
-        Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіЗіСкладу} ELSE 
-        -Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіЗіСкладу} END) != 0 
- OR 
-
-
-    /* ВРезервіПідЗамовлення */
-    SUM(CASE WHEN Рег_ВільніЗалишки.income = true THEN 
-        Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіПідЗамовлення} ELSE 0 END) != 0 OR 
-    SUM(CASE WHEN Рег_ВільніЗалишки.income = false THEN 
-        Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіПідЗамовлення} ELSE 0 END) != 0 OR
-    SUM(CASE WHEN Рег_ВільніЗалишки.income = true THEN 
-        Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіПідЗамовлення} ELSE 
-        -Рег_ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіПідЗамовлення} END) != 0 
+    SUM(CASE WHEN ВільніЗалишки.income = true THEN 
+        ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіПідЗамовлення} ELSE 
+        -ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіПідЗамовлення} END) != 0 
 
 
 
@@ -15689,81 +15274,6 @@ HAVING
             </Field>
           </Fields>
         </TablePart>
-        <TablePart>
-          <Name>ЗалишкиТаОбороти</Name>
-          <Table>tab_b42</Table>
-          <Desc>Віртуальна таблиця</Desc>
-          <Fields>
-            <Field>
-              <Name>Період</Name>
-              <NameInTable>col_a1</NameInTable>
-              <Type>date</Type>
-              <Desc>
-              </Desc>
-              <IsIndex>1</IsIndex>
-            </Field>
-            <Field>
-              <Name>ЗамовленняПостачальнику</Name>
-              <NameInTable>col_a2</NameInTable>
-              <Type>pointer</Type>
-              <Pointer>Документи.ЗамовленняПостачальнику</Pointer>
-              <Desc>
-              </Desc>
-              <IsIndex>1</IsIndex>
-            </Field>
-            <Field>
-              <Name>Номенклатура</Name>
-              <NameInTable>col_a3</NameInTable>
-              <Type>pointer</Type>
-              <Pointer>Довідники.Номенклатура</Pointer>
-              <Desc>
-              </Desc>
-              <IsIndex>1</IsIndex>
-            </Field>
-            <Field>
-              <Name>ХарактеристикаНоменклатури</Name>
-              <NameInTable>col_a4</NameInTable>
-              <Type>pointer</Type>
-              <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
-              <Desc>
-              </Desc>
-              <IsIndex>1</IsIndex>
-            </Field>
-            <Field>
-              <Name>Склад</Name>
-              <NameInTable>col_a5</NameInTable>
-              <Type>pointer</Type>
-              <Pointer>Довідники.Склади</Pointer>
-              <Desc>
-              </Desc>
-              <IsIndex>1</IsIndex>
-            </Field>
-            <Field>
-              <Name>ЗамовленоПрихід</Name>
-              <NameInTable>col_a6</NameInTable>
-              <Type>numeric</Type>
-              <Desc>
-              </Desc>
-              <IsIndex>0</IsIndex>
-            </Field>
-            <Field>
-              <Name>ЗамовленоРозхід</Name>
-              <NameInTable>col_a7</NameInTable>
-              <Type>numeric</Type>
-              <Desc>
-              </Desc>
-              <IsIndex>0</IsIndex>
-            </Field>
-            <Field>
-              <Name>ЗамовленоЗалишок</Name>
-              <NameInTable>col_a8</NameInTable>
-              <Type>numeric</Type>
-              <Desc>
-              </Desc>
-              <IsIndex>0</IsIndex>
-            </Field>
-          </Fields>
-        </TablePart>
       </TabularParts>
       <QueryBlockList>
         <QueryBlock>
@@ -15775,8 +15285,7 @@ WHERE
     {ЗамовленняПостачальникам_Залишки_TablePart.TABLE}.{ЗамовленняПостачальникам_Залишки_TablePart.Період} = @ПеріодДеньВідбір
 </Query>
           <Query position="1" key="SELECT">
-INSERT INTO 
-    {ЗамовленняПостачальникам_Залишки_TablePart.TABLE} 
+INSERT INTO {ЗамовленняПостачальникам_Залишки_TablePart.TABLE} 
 (
     uid,
     {ЗамовленняПостачальникам_Залишки_TablePart.Період},
@@ -15788,22 +15297,22 @@ INSERT INTO
 )
 SELECT
     uuid_generate_v4(),
-    date_trunc('day', Рег_ЗамовленняПостачальникам.period::timestamp) AS Період,
-    Рег_ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.ЗамовленняПостачальнику} AS ЗамовленняПостачальнику,
-    Рег_ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Номенклатура} AS Номенклатура,
-    Рег_ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
-    Рег_ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Склад} AS Склад,
+    date_trunc('day', ЗамовленняПостачальникам.period::timestamp) AS Період,
+    ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.ЗамовленняПостачальнику} AS ЗамовленняПостачальнику,
+    ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Номенклатура} AS Номенклатура,
+    ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
+    ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Склад} AS Склад,
 
     /* Замовлено */
-    SUM(CASE WHEN Рег_ЗамовленняПостачальникам.income = true THEN 
-        Рег_ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Замовлено} ELSE 
-        -Рег_ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Замовлено} END) AS Замовлено
+    SUM(CASE WHEN ЗамовленняПостачальникам.income = true THEN 
+        ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Замовлено} ELSE 
+        -ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Замовлено} END) AS Замовлено
 
 FROM
-    {ЗамовленняПостачальникам_Const.TABLE} AS Рег_ЗамовленняПостачальникам
+    {ЗамовленняПостачальникам_Const.TABLE} AS ЗамовленняПостачальникам
 
 WHERE
-    date_trunc('day', Рег_ЗамовленняПостачальникам.period::timestamp) = @ПеріодДеньВідбір
+    date_trunc('day', ЗамовленняПостачальникам.period::timestamp) = @ПеріодДеньВідбір
 
 GROUP BY
     Період, ЗамовленняПостачальнику, Номенклатура, ХарактеристикаНоменклатури, Склад
@@ -15811,73 +15320,9 @@ GROUP BY
 HAVING
 
     /* Замовлено */
-    SUM(CASE WHEN Рег_ЗамовленняПостачальникам.income = true THEN 
-        Рег_ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Замовлено} ELSE 
-        -Рег_ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Замовлено} END) != 0 
-
-
-
-
-</Query>
-        </QueryBlock>
-        <QueryBlock>
-          <Name>ЗалишкиТаОбороти</Name>
-          <Query position="0" key="DELETE">
-DELETE FROM 
-    {ЗамовленняПостачальникам_ЗалишкиТаОбороти_TablePart.TABLE}
-WHERE 
-    {ЗамовленняПостачальникам_ЗалишкиТаОбороти_TablePart.TABLE}.{ЗамовленняПостачальникам_ЗалишкиТаОбороти_TablePart.Період} = @ПеріодДеньВідбір
-</Query>
-          <Query position="1" key="SELECT">
-INSERT INTO 
-    {ЗамовленняПостачальникам_ЗалишкиТаОбороти_TablePart.TABLE} 
-(
-    uid,
-    {ЗамовленняПостачальникам_ЗалишкиТаОбороти_TablePart.Період},
-    {ЗамовленняПостачальникам_ЗалишкиТаОбороти_TablePart.ЗамовленняПостачальнику},
-    {ЗамовленняПостачальникам_ЗалишкиТаОбороти_TablePart.Номенклатура},
-    {ЗамовленняПостачальникам_ЗалишкиТаОбороти_TablePart.ХарактеристикаНоменклатури},
-    {ЗамовленняПостачальникам_ЗалишкиТаОбороти_TablePart.Склад},
-    {ЗамовленняПостачальникам_ЗалишкиТаОбороти_TablePart.ЗамовленоПрихід},
-    {ЗамовленняПостачальникам_ЗалишкиТаОбороти_TablePart.ЗамовленоРозхід},
-    {ЗамовленняПостачальникам_ЗалишкиТаОбороти_TablePart.ЗамовленоЗалишок}
-)
-SELECT
-    uuid_generate_v4(),
-    date_trunc('day', Рег_ЗамовленняПостачальникам.period::timestamp) AS Період,
-    Рег_ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.ЗамовленняПостачальнику} AS ЗамовленняПостачальнику,
-    Рег_ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Номенклатура} AS Номенклатура,
-    Рег_ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
-    Рег_ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Склад} AS Склад,
-
-    /* Замовлено */
-    SUM(CASE WHEN Рег_ЗамовленняПостачальникам.income = true THEN 
-        Рег_ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Замовлено} ELSE 0 END) AS ЗамовленоПрихід,
-    SUM(CASE WHEN Рег_ЗамовленняПостачальникам.income = false THEN 
-        Рег_ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Замовлено} ELSE 0 END) AS ЗамовленоРозхід,
-    SUM(CASE WHEN Рег_ЗамовленняПостачальникам.income = true THEN 
-        Рег_ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Замовлено} ELSE 
-        -Рег_ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Замовлено} END) AS ЗамовленоЗалишок
-
-FROM
-    {ЗамовленняПостачальникам_Const.TABLE} AS Рег_ЗамовленняПостачальникам
-
-WHERE
-    date_trunc('day', Рег_ЗамовленняПостачальникам.period::timestamp) = @ПеріодДеньВідбір
-
-GROUP BY
-    Період, ЗамовленняПостачальнику, Номенклатура, ХарактеристикаНоменклатури, Склад
-
-HAVING
-
-    /* Замовлено */
-    SUM(CASE WHEN Рег_ЗамовленняПостачальникам.income = true THEN 
-        Рег_ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Замовлено} ELSE 0 END) != 0 OR 
-    SUM(CASE WHEN Рег_ЗамовленняПостачальникам.income = false THEN 
-        Рег_ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Замовлено} ELSE 0 END) != 0 OR
-    SUM(CASE WHEN Рег_ЗамовленняПостачальникам.income = true THEN 
-        Рег_ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Замовлено} ELSE 
-        -Рег_ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Замовлено} END) != 0 
+    SUM(CASE WHEN ЗамовленняПостачальникам.income = true THEN 
+        ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Замовлено} ELSE 
+        -ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Замовлено} END) != 0 
 
 
 
@@ -16045,8 +15490,7 @@ WHERE
     {РозрахункиЗПостачальниками_Залишки_TablePart.TABLE}.{РозрахункиЗПостачальниками_Залишки_TablePart.Період} = @ПеріодДеньВідбір
 </Query>
           <Query position="1" key="SELECT">
-INSERT INTO 
-    {РозрахункиЗПостачальниками_Залишки_TablePart.TABLE} 
+INSERT INTO {РозрахункиЗПостачальниками_Залишки_TablePart.TABLE} 
 (
     uid,
     {РозрахункиЗПостачальниками_Залишки_TablePart.Період},
@@ -16056,20 +15500,20 @@ INSERT INTO
 )
 SELECT
     uuid_generate_v4(),
-    date_trunc('day', Рег_РозрахункиЗПостачальниками.period::timestamp) AS Період,
-    Рег_РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Контрагент} AS Контрагент,
-    Рег_РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Валюта} AS Валюта,
+    date_trunc('day', РозрахункиЗПостачальниками.period::timestamp) AS Період,
+    РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Контрагент} AS Контрагент,
+    РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Валюта} AS Валюта,
 
     /* Сума */
-    SUM(CASE WHEN Рег_РозрахункиЗПостачальниками.income = true THEN 
-        Рег_РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} ELSE 
-        -Рег_РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} END) AS Сума
+    SUM(CASE WHEN РозрахункиЗПостачальниками.income = true THEN 
+        РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} ELSE 
+        -РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} END) AS Сума
 
 FROM
-    {РозрахункиЗПостачальниками_Const.TABLE} AS Рег_РозрахункиЗПостачальниками
+    {РозрахункиЗПостачальниками_Const.TABLE} AS РозрахункиЗПостачальниками
 
 WHERE
-    date_trunc('day', Рег_РозрахункиЗПостачальниками.period::timestamp) = @ПеріодДеньВідбір
+    date_trunc('day', РозрахункиЗПостачальниками.period::timestamp) = @ПеріодДеньВідбір
 
 GROUP BY
     Період, Контрагент, Валюта
@@ -16077,9 +15521,9 @@ GROUP BY
 HAVING
 
     /* Сума */
-    SUM(CASE WHEN Рег_РозрахункиЗПостачальниками.income = true THEN 
-        Рег_РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} ELSE 
-        -Рег_РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} END) != 0 
+    SUM(CASE WHEN РозрахункиЗПостачальниками.income = true THEN 
+        РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} ELSE 
+        -РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} END) != 0 
 
 
 
@@ -16095,8 +15539,7 @@ WHERE
     {РозрахункиЗПостачальниками_ЗалишкиТаОбороти_TablePart.TABLE}.{РозрахункиЗПостачальниками_ЗалишкиТаОбороти_TablePart.Період} = @ПеріодДеньВідбір
 </Query>
           <Query position="1" key="SELECT">
-INSERT INTO 
-    {РозрахункиЗПостачальниками_ЗалишкиТаОбороти_TablePart.TABLE} 
+INSERT INTO {РозрахункиЗПостачальниками_ЗалишкиТаОбороти_TablePart.TABLE} 
 (
     uid,
     {РозрахункиЗПостачальниками_ЗалишкиТаОбороти_TablePart.Період},
@@ -16108,24 +15551,24 @@ INSERT INTO
 )
 SELECT
     uuid_generate_v4(),
-    date_trunc('day', Рег_РозрахункиЗПостачальниками.period::timestamp) AS Період,
-    Рег_РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Контрагент} AS Контрагент,
-    Рег_РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Валюта} AS Валюта,
+    date_trunc('day', РозрахункиЗПостачальниками.period::timestamp) AS Період,
+    РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Контрагент} AS Контрагент,
+    РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Валюта} AS Валюта,
 
     /* Сума */
-    SUM(CASE WHEN Рег_РозрахункиЗПостачальниками.income = true THEN 
-        Рег_РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} ELSE 0 END) AS СумаПрихід,
-    SUM(CASE WHEN Рег_РозрахункиЗПостачальниками.income = false THEN 
-        Рег_РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} ELSE 0 END) AS СумаРозхід,
-    SUM(CASE WHEN Рег_РозрахункиЗПостачальниками.income = true THEN 
-        Рег_РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} ELSE 
-        -Рег_РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} END) AS СумаЗалишок
+    SUM(CASE WHEN РозрахункиЗПостачальниками.income = true THEN 
+        РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} ELSE 0 END) AS СумаПрихід,
+    SUM(CASE WHEN РозрахункиЗПостачальниками.income = false THEN 
+        РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} ELSE 0 END) AS СумаРозхід,
+    SUM(CASE WHEN РозрахункиЗПостачальниками.income = true THEN 
+        РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} ELSE 
+        -РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} END) AS СумаЗалишок
 
 FROM
-    {РозрахункиЗПостачальниками_Const.TABLE} AS Рег_РозрахункиЗПостачальниками
+    {РозрахункиЗПостачальниками_Const.TABLE} AS РозрахункиЗПостачальниками
 
 WHERE
-    date_trunc('day', Рег_РозрахункиЗПостачальниками.period::timestamp) = @ПеріодДеньВідбір
+    date_trunc('day', РозрахункиЗПостачальниками.period::timestamp) = @ПеріодДеньВідбір
 
 GROUP BY
     Період, Контрагент, Валюта
@@ -16133,13 +15576,13 @@ GROUP BY
 HAVING
 
     /* Сума */
-    SUM(CASE WHEN Рег_РозрахункиЗПостачальниками.income = true THEN 
-        Рег_РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} ELSE 0 END) != 0 OR 
-    SUM(CASE WHEN Рег_РозрахункиЗПостачальниками.income = false THEN 
-        Рег_РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} ELSE 0 END) != 0 OR
-    SUM(CASE WHEN Рег_РозрахункиЗПостачальниками.income = true THEN 
-        Рег_РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} ELSE 
-        -Рег_РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} END) != 0 
+    SUM(CASE WHEN РозрахункиЗПостачальниками.income = true THEN 
+        РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} ELSE 0 END) != 0 OR 
+    SUM(CASE WHEN РозрахункиЗПостачальниками.income = false THEN 
+        РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} ELSE 0 END) != 0 OR
+    SUM(CASE WHEN РозрахункиЗПостачальниками.income = true THEN 
+        РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} ELSE 
+        -РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} END) != 0 
 
 
 
@@ -16389,8 +15832,7 @@ WHERE
     {РухКоштів_Залишки_TablePart.TABLE}.{РухКоштів_Залишки_TablePart.Період} = @ПеріодДеньВідбір
 </Query>
           <Query position="1" key="SELECT">
-INSERT INTO 
-    {РухКоштів_Залишки_TablePart.TABLE} 
+INSERT INTO {РухКоштів_Залишки_TablePart.TABLE} 
 (
     uid,
     {РухКоштів_Залишки_TablePart.Період},
@@ -16401,21 +15843,21 @@ INSERT INTO
 )
 SELECT
     uuid_generate_v4(),
-    date_trunc('day', Рег_РухКоштів.period::timestamp) AS Період,
-    Рег_РухКоштів.{РухКоштів_Const.Організація} AS Організація,
-    Рег_РухКоштів.{РухКоштів_Const.Каса} AS Каса,
-    Рег_РухКоштів.{РухКоштів_Const.Валюта} AS Валюта,
+    date_trunc('day', РухКоштів.period::timestamp) AS Період,
+    РухКоштів.{РухКоштів_Const.Організація} AS Організація,
+    РухКоштів.{РухКоштів_Const.Каса} AS Каса,
+    РухКоштів.{РухКоштів_Const.Валюта} AS Валюта,
 
     /* Сума */
-    SUM(CASE WHEN Рег_РухКоштів.income = true THEN 
-        Рег_РухКоштів.{РухКоштів_Const.Сума} ELSE 
-        -Рег_РухКоштів.{РухКоштів_Const.Сума} END) AS Сума
+    SUM(CASE WHEN РухКоштів.income = true THEN 
+        РухКоштів.{РухКоштів_Const.Сума} ELSE 
+        -РухКоштів.{РухКоштів_Const.Сума} END) AS Сума
 
 FROM
-    {РухКоштів_Const.TABLE} AS Рег_РухКоштів
+    {РухКоштів_Const.TABLE} AS РухКоштів
 
 WHERE
-    date_trunc('day', Рег_РухКоштів.period::timestamp) = @ПеріодДеньВідбір
+    date_trunc('day', РухКоштів.period::timestamp) = @ПеріодДеньВідбір
 
 GROUP BY
     Період, Організація, Каса, Валюта
@@ -16423,9 +15865,9 @@ GROUP BY
 HAVING
 
     /* Сума */
-    SUM(CASE WHEN Рег_РухКоштів.income = true THEN 
-        Рег_РухКоштів.{РухКоштів_Const.Сума} ELSE 
-        -Рег_РухКоштів.{РухКоштів_Const.Сума} END) != 0 
+    SUM(CASE WHEN РухКоштів.income = true THEN 
+        РухКоштів.{РухКоштів_Const.Сума} ELSE 
+        -РухКоштів.{РухКоштів_Const.Сума} END) != 0 
 
 
 
@@ -16441,8 +15883,7 @@ WHERE
     {РухКоштів_ЗалишкиТаОбороти_TablePart.TABLE}.{РухКоштів_ЗалишкиТаОбороти_TablePart.Період} = @ПеріодДеньВідбір
 </Query>
           <Query position="1" key="SELECT">
-INSERT INTO 
-    {РухКоштів_ЗалишкиТаОбороти_TablePart.TABLE} 
+INSERT INTO {РухКоштів_ЗалишкиТаОбороти_TablePart.TABLE} 
 (
     uid,
     {РухКоштів_ЗалишкиТаОбороти_TablePart.Період},
@@ -16455,25 +15896,25 @@ INSERT INTO
 )
 SELECT
     uuid_generate_v4(),
-    date_trunc('day', Рег_РухКоштів.period::timestamp) AS Період,
-    Рег_РухКоштів.{РухКоштів_Const.Організація} AS Організація,
-    Рег_РухКоштів.{РухКоштів_Const.Каса} AS Каса,
-    Рег_РухКоштів.{РухКоштів_Const.Валюта} AS Валюта,
+    date_trunc('day', РухКоштів.period::timestamp) AS Період,
+    РухКоштів.{РухКоштів_Const.Організація} AS Організація,
+    РухКоштів.{РухКоштів_Const.Каса} AS Каса,
+    РухКоштів.{РухКоштів_Const.Валюта} AS Валюта,
 
     /* Сума */
-    SUM(CASE WHEN Рег_РухКоштів.income = true THEN 
-        Рег_РухКоштів.{РухКоштів_Const.Сума} ELSE 0 END) AS СумаПрихід,
-    SUM(CASE WHEN Рег_РухКоштів.income = false THEN 
-        Рег_РухКоштів.{РухКоштів_Const.Сума} ELSE 0 END) AS СумаРозхід,
-    SUM(CASE WHEN Рег_РухКоштів.income = true THEN 
-        Рег_РухКоштів.{РухКоштів_Const.Сума} ELSE 
-        -Рег_РухКоштів.{РухКоштів_Const.Сума} END) AS СумаЗалишок
+    SUM(CASE WHEN РухКоштів.income = true THEN 
+        РухКоштів.{РухКоштів_Const.Сума} ELSE 0 END) AS СумаПрихід,
+    SUM(CASE WHEN РухКоштів.income = false THEN 
+        РухКоштів.{РухКоштів_Const.Сума} ELSE 0 END) AS СумаРозхід,
+    SUM(CASE WHEN РухКоштів.income = true THEN 
+        РухКоштів.{РухКоштів_Const.Сума} ELSE 
+        -РухКоштів.{РухКоштів_Const.Сума} END) AS СумаЗалишок
 
 FROM
-    {РухКоштів_Const.TABLE} AS Рег_РухКоштів
+    {РухКоштів_Const.TABLE} AS РухКоштів
 
 WHERE
-    date_trunc('day', Рег_РухКоштів.period::timestamp) = @ПеріодДеньВідбір
+    date_trunc('day', РухКоштів.period::timestamp) = @ПеріодДеньВідбір
 
 GROUP BY
     Період, Організація, Каса, Валюта
@@ -16481,13 +15922,13 @@ GROUP BY
 HAVING
 
     /* Сума */
-    SUM(CASE WHEN Рег_РухКоштів.income = true THEN 
-        Рег_РухКоштів.{РухКоштів_Const.Сума} ELSE 0 END) != 0 OR 
-    SUM(CASE WHEN Рег_РухКоштів.income = false THEN 
-        Рег_РухКоштів.{РухКоштів_Const.Сума} ELSE 0 END) != 0 OR
-    SUM(CASE WHEN Рег_РухКоштів.income = true THEN 
-        Рег_РухКоштів.{РухКоштів_Const.Сума} ELSE 
-        -Рег_РухКоштів.{РухКоштів_Const.Сума} END) != 0 
+    SUM(CASE WHEN РухКоштів.income = true THEN 
+        РухКоштів.{РухКоштів_Const.Сума} ELSE 0 END) != 0 OR 
+    SUM(CASE WHEN РухКоштів.income = false THEN 
+        РухКоштів.{РухКоштів_Const.Сума} ELSE 0 END) != 0 OR
+    SUM(CASE WHEN РухКоштів.income = true THEN 
+        РухКоштів.{РухКоштів_Const.Сума} ELSE 
+        -РухКоштів.{РухКоштів_Const.Сума} END) != 0 
 
 
 
@@ -16698,8 +16139,7 @@ WHERE
     {ПартіїТоварів_Залишки_TablePart.TABLE}.{ПартіїТоварів_Залишки_TablePart.Період} = @ПеріодДеньВідбір
 </Query>
           <Query position="1" key="SELECT">
-INSERT INTO 
-    {ПартіїТоварів_Залишки_TablePart.TABLE} 
+INSERT INTO {ПартіїТоварів_Залишки_TablePart.TABLE} 
 (
     uid,
     {ПартіїТоварів_Залишки_TablePart.Період},
@@ -16714,29 +16154,29 @@ INSERT INTO
 )
 SELECT
     uuid_generate_v4(),
-    date_trunc('day', Рег_ПартіїТоварів.period::timestamp) AS Період,
-    Рег_ПартіїТоварів.{ПартіїТоварів_Const.Організація} AS Організація,
-    Рег_ПартіїТоварів.{ПартіїТоварів_Const.ПартіяТоварівКомпозит} AS ПартіяТоварівКомпозит,
-    Рег_ПартіїТоварів.{ПартіїТоварів_Const.Номенклатура} AS Номенклатура,
-    Рег_ПартіїТоварів.{ПартіїТоварів_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
-    Рег_ПартіїТоварів.{ПартіїТоварів_Const.Серія} AS Серія,
-    Рег_ПартіїТоварів.{ПартіїТоварів_Const.Склад} AS Склад,
+    date_trunc('day', ПартіїТоварів.period::timestamp) AS Період,
+    ПартіїТоварів.{ПартіїТоварів_Const.Організація} AS Організація,
+    ПартіїТоварів.{ПартіїТоварів_Const.ПартіяТоварівКомпозит} AS ПартіяТоварівКомпозит,
+    ПартіїТоварів.{ПартіїТоварів_Const.Номенклатура} AS Номенклатура,
+    ПартіїТоварів.{ПартіїТоварів_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
+    ПартіїТоварів.{ПартіїТоварів_Const.Серія} AS Серія,
+    ПартіїТоварів.{ПартіїТоварів_Const.Склад} AS Склад,
 
     /* Кількість */
-    SUM(CASE WHEN Рег_ПартіїТоварів.income = true THEN 
-        Рег_ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE 
-        -Рег_ПартіїТоварів.{ПартіїТоварів_Const.Кількість} END) AS Кількість,
+    SUM(CASE WHEN ПартіїТоварів.income = true THEN 
+        ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE 
+        -ПартіїТоварів.{ПартіїТоварів_Const.Кількість} END) AS Кількість,
 
     /* Собівартість */
-    SUM(CASE WHEN Рег_ПартіїТоварів.income = true THEN 
-        Рег_ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE 
-        -Рег_ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} END) AS Собівартість
+    SUM(CASE WHEN ПартіїТоварів.income = true THEN 
+        ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE 
+        -ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} END) AS Собівартість
 
 FROM
-    {ПартіїТоварів_Const.TABLE} AS Рег_ПартіїТоварів
+    {ПартіїТоварів_Const.TABLE} AS ПартіїТоварів
 
 WHERE
-    date_trunc('day', Рег_ПартіїТоварів.period::timestamp) = @ПеріодДеньВідбір
+    date_trunc('day', ПартіїТоварів.period::timestamp) = @ПеріодДеньВідбір
 
 GROUP BY
     Період, Організація, ПартіяТоварівКомпозит, Номенклатура, ХарактеристикаНоменклатури, Серія, Склад
@@ -16744,16 +16184,16 @@ GROUP BY
 HAVING
 
     /* Кількість */
-    SUM(CASE WHEN Рег_ПартіїТоварів.income = true THEN 
-        Рег_ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE 
-        -Рег_ПартіїТоварів.{ПартіїТоварів_Const.Кількість} END) != 0 
+    SUM(CASE WHEN ПартіїТоварів.income = true THEN 
+        ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE 
+        -ПартіїТоварів.{ПартіїТоварів_Const.Кількість} END) != 0 
  OR 
 
 
     /* Собівартість */
-    SUM(CASE WHEN Рег_ПартіїТоварів.income = true THEN 
-        Рег_ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE 
-        -Рег_ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} END) != 0 
+    SUM(CASE WHEN ПартіїТоварів.income = true THEN 
+        ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE 
+        -ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} END) != 0 
 
 
 
