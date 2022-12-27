@@ -1,10 +1,7 @@
 using Gtk;
 
-using AccountingSoftware;
 using StorageAndTrade_1_0;
-using StorageAndTrade_1_0.Константи;
 using StorageAndTrade_1_0.Довідники;
-using StorageAndTrade_1_0.Документи;
 using StorageAndTrade_1_0.РегістриНакопичення;
 
 namespace StorageAndTrade
@@ -15,8 +12,8 @@ namespace StorageAndTrade
 
         #region Filters
 
-        DateTimeControl ДатаПочаткуПеріоду = new DateTimeControl() { Value = DateTime.Parse($"01.{DateTime.Now.Month}.{DateTime.Now.Year}") };
-        DateTimeControl ДатаКінцяПеріоду = new DateTimeControl() { Value = DateTime.Now };
+        DateTimeControl ДатаПочатокПеріоду = new DateTimeControl() { Value = DateTime.Parse($"01.{DateTime.Now.Month}.{DateTime.Now.Year}") };
+        DateTimeControl ДатаКінецьПеріоду = new DateTimeControl() { Value = DateTime.Now };
 
         Номенклатура_PointerControl Номенклатура = new Номенклатура_PointerControl();
         Номенклатура_Папки_PointerControl Номенклатура_Папка = new Номенклатура_Папки_PointerControl() { Caption = "Номенклатура папка:" };
@@ -52,7 +49,7 @@ namespace StorageAndTrade
 
             //4
             Button bDocuments = new Button("Документи");
-            bDocuments.Clicked += OnReportDocuments;
+            bDocuments.Clicked += OnReport_Документи;
 
             hBoxBotton.PackStart(bDocuments, false, false, 10);
 
@@ -96,9 +93,9 @@ namespace StorageAndTrade
             //Період
             HBox hBoxPeriod = new HBox() { Halign = Align.End };
             hBoxPeriod.PackStart(new Label("Період з "), false, false, 5);
-            hBoxPeriod.PackStart(ДатаПочаткуПеріоду, false, false, 5);
+            hBoxPeriod.PackStart(ДатаПочатокПеріоду, false, false, 5);
             hBoxPeriod.PackStart(new Label(" по "), false, false, 5);
-            hBoxPeriod.PackStart(ДатаКінцяПеріоду, false, false, 5);
+            hBoxPeriod.PackStart(ДатаКінецьПеріоду, false, false, 5);
             vBox.PackStart(hBoxPeriod, false, false, 5);
 
             //Номенклатура
@@ -371,7 +368,7 @@ WITH
     FROM 
         {ТовариНаСкладах_Залишки_TablePart.TABLE} AS ТовариНаСкладах
     WHERE
-        ТовариНаСкладах.{ТовариНаСкладах_Залишки_TablePart.Період} < @Період_ПочатковийЗалишок
+        ТовариНаСкладах.{ТовариНаСкладах_Залишки_TablePart.Період} < @ПочатокПеріоду
     GROUP BY Номенклатура, ХарактеристикаНоменклатури, Склад, Серія
 ),
 ЗалишкиТаОборотиЗаПеріод AS
@@ -387,8 +384,8 @@ WITH
     FROM 
         {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.TABLE} AS ТовариНаСкладах
     WHERE
-        ТовариНаСкладах.{ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.Період} >= @Період_ЗалишкиТаОборотиЗаПеріод_Початок AND
-        ТовариНаСкладах.{ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.Період} <= @Період_ЗалишкиТаОборотиЗаПеріод_Кінець
+        ТовариНаСкладах.{ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.Період} >= @ПочатокПеріоду AND
+        ТовариНаСкладах.{ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.Період} <= @КінецьПеріоду
     GROUP BY Номенклатура, ХарактеристикаНоменклатури, Склад, Серія
 ),
 КінцевийЗалишок AS
@@ -569,7 +566,7 @@ HAVING SUM(Прихід) != 0 OR SUM(Розхід) != 0
 ORDER BY Номенклатура_Назва, ХарактеристикаНоменклатури_Назва, Склад_Назва
 ";
 
-Console.WriteLine(query);
+            Console.WriteLine(query);
 
             #endregion
 
@@ -590,9 +587,8 @@ Console.WriteLine(query);
             КолонкиДаних.Add("Склад_Назва", "Склад");
 
             Dictionary<string, object> paramQuery = new Dictionary<string, object>();
-            paramQuery.Add("Період_ПочатковийЗалишок", ДатаПочаткуПеріоду.Value);
-            paramQuery.Add("Період_ЗалишкиТаОборотиЗаПеріод_Початок", DateTime.Parse($"{ДатаПочаткуПеріоду.Value.Day}.{ДатаПочаткуПеріоду.Value.Month}.{ДатаПочаткуПеріоду.Value.Year} 00:00:00"));
-            paramQuery.Add("Період_ЗалишкиТаОборотиЗаПеріод_Кінець", DateTime.Parse($"{ДатаКінцяПеріоду.Value.Day}.{ДатаКінцяПеріоду.Value.Month}.{ДатаКінцяПеріоду.Value.Year} 23:59:59"));
+            paramQuery.Add("ПочатокПеріоду", ДатаПочатокПеріоду.Value);
+            paramQuery.Add("КінецьПеріоду", ДатаКінецьПеріоду.Value);
 
             string[] columnsName;
             List<Dictionary<string, object>> listRow;
@@ -611,7 +607,7 @@ Console.WriteLine(query);
             CreateReportNotebookPage("Залишки та обороти", treeView);
         }
 
-        void OnReportDocuments(object? sender, EventArgs args)
+        void OnReport_Документи(object? sender, EventArgs args)
         {
             #region SELECT
 
@@ -632,7 +628,7 @@ WITH register AS
     FROM
         {ТовариНаСкладах_Const.TABLE} AS ТовариНаСкладах
     WHERE
-        (ТовариНаСкладах.period >= @period_start AND ТовариНаСкладах.period <= @period_end)
+        (ТовариНаСкладах.period >= @ПочатокПеріоду AND ТовариНаСкладах.period <= @КінецьПеріоду)
 ";
 
             #region WHERE
@@ -813,8 +809,8 @@ ORDER BY period ASC
             КолонкиДаних.Add("Склад_Назва", "Склад");
 
             Dictionary<string, object> paramQuery = new Dictionary<string, object>();
-            paramQuery.Add("period_start", DateTime.Parse($"{ДатаПочаткуПеріоду.Value.Day}.{ДатаПочаткуПеріоду.Value.Month}.{ДатаПочаткуПеріоду.Value.Year} 00:00:00"));
-            paramQuery.Add("period_end", DateTime.Parse($"{ДатаКінцяПеріоду.Value.Day}.{ДатаКінцяПеріоду.Value.Month}.{ДатаКінцяПеріоду.Value.Year} 23:59:59"));
+            paramQuery.Add("ПочатокПеріоду", DateTime.Parse($"{ДатаПочатокПеріоду.Value.Day}.{ДатаПочатокПеріоду.Value.Month}.{ДатаПочатокПеріоду.Value.Year} 00:00:00"));
+            paramQuery.Add("КінецьПеріоду", DateTime.Parse($"{ДатаКінецьПеріоду.Value.Day}.{ДатаКінецьПеріоду.Value.Month}.{ДатаКінецьПеріоду.Value.Year} 23:59:59"));
 
             string[] columnsName;
             List<Dictionary<string, object>> listRow;
