@@ -28,7 +28,6 @@ limitations under the License.
 */
 
 using AccountingSoftware;
-using StorageAndTrade.Service;
 using StorageAndTrade_1_0.Довідники;
 using StorageAndTrade_1_0.РегістриНакопичення;
 using StorageAndTrade_1_0.РегістриВідомостей;
@@ -51,9 +50,13 @@ namespace StorageAndTrade_1_0.Документи
 		/// <param name="Кількість">Кількість яку потрібно списати</param>
 		/// <returns>Іменований список</returns>
 		public static List<Dictionary<string, object>> ОтриматиСписокНаявнихПартій(
-			Організації_Pointer Організація, Номенклатура_Pointer Номенклатура, ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури,
-			СеріїНоменклатури_Pointer Серія, Склади_Pointer Склад,
-			UnigueID Owner, DateTime OwnerDateDoc,
+			Організації_Pointer Організація, 
+			Номенклатура_Pointer Номенклатура, 
+			ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури,
+			СеріїНоменклатури_Pointer Серія, 
+			Склади_Pointer Склад,
+			UnigueID Owner, 
+			DateTime OwnerDateDoc,
 			decimal Кількість)
 		{
 			Перелічення.МетодиСписанняПартій МетодСписання;
@@ -428,21 +431,6 @@ FROM
 			return listNameRow;
 		}
 
-		/// <summary>
-		/// Перевірка дати проведення документу
-		/// </summary>
-		/// <param name="ДокументОбєкт">Документ</param>
-		/// <param name="ПоточнаДатаДокументу">Дата документу</param>
-		public static void ПеревіритиДатуПроведенняДокументу(DocumentObject ДокументОбєкт, DateTime ПоточнаДатаДокументу)
-		{
-			if (ДокументОбєкт.Spend)
-			{
-				//Якщо дата проведення відрізняється від дати документу
-				if (ПоточнаДатаДокументу.ToString("dd.MM.yyyy") != ДокументОбєкт.SpendDate.ToString("dd.MM.yyyy"))
-					CalculationBalances.AddTask(ДокументОбєкт.UnigueID.ToString(), ДокументОбєкт.TypeDocument, "Delete", ДокументОбєкт.SpendDate, "");
-			}
-		}
-
         /// <summary>
 		/// Перервати проведення документу
 		/// </summary>
@@ -508,8 +496,6 @@ FROM
 
 			#endregion
 
-			СпільніФункції.ПеревіритиДатуПроведенняДокументу(ДокументОбєкт, ДокументОбєкт.ДатаДок);
-
 			#region ЗамовленняКлієнтів
 
 			ЗамовленняКлієнтів_RecordsSet замовленняКлієнтів_RecordsSet = new ЗамовленняКлієнтів_RecordsSet();
@@ -569,8 +555,6 @@ FROM
 
 			#endregion
 
-			CalculationBalances.AddTask(ДокументОбєкт.UnigueID.ToString(), ДокументОбєкт.TypeDocument, "Add", ДокументОбєкт.ДатаДок, "");
-
 			return true;
 		}
 
@@ -581,8 +565,6 @@ FROM
 
 			ВільніЗалишки_RecordsSet вільніЗалишки_RecordsSet = new ВільніЗалишки_RecordsSet();
 			вільніЗалишки_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-
-			CalculationBalances.AddTask(ДокументОбєкт.UnigueID.ToString(), ДокументОбєкт.TypeDocument, "Delete", ДокументОбєкт.ДатаДок, "");
 		}
 	}
 
@@ -655,8 +637,6 @@ FROM
 			}
 			#endregion
 
-			СпільніФункції.ПеревіритиДатуПроведенняДокументу(ДокументОбєкт, ДокументОбєкт.ДатаДок);
-
 			#region ВільніЗалишки
 
 			ВільніЗалишки_RecordsSet вільніЗалишки_RecordsSet = new ВільніЗалишки_RecordsSet();
@@ -683,8 +663,6 @@ FROM
 
 			#endregion
 
-			CalculationBalances.AddTask(ДокументОбєкт.UnigueID.ToString(), ДокументОбєкт.TypeDocument, "Add", ДокументОбєкт.ДатаДок, "");
-
 			return true;
 		}
 
@@ -692,8 +670,6 @@ FROM
 		{
 			ВільніЗалишки_RecordsSet вільніЗалишки_RecordsSet = new ВільніЗалишки_RecordsSet();
 			вільніЗалишки_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-
-			CalculationBalances.AddTask(ДокументОбєкт.UnigueID.ToString(), ДокументОбєкт.TypeDocument, "Delete", ДокументОбєкт.ДатаДок, "");
 		}
 	}
 
@@ -883,8 +859,6 @@ FROM
 			}
 
             #endregion
-
-            СпільніФункції.ПеревіритиДатуПроведенняДокументу(ДокументОбєкт, ДокументОбєкт.ДатаДок);
 
 			#region ЗамовленняКлієнтів
 
@@ -1128,8 +1102,6 @@ FROM
 
 			#endregion
 
-			CalculationBalances.AddTask(ДокументОбєкт.UnigueID.ToString(), ДокументОбєкт.TypeDocument, "Add", ДокументОбєкт.ДатаДок, "");
-
 			return true;
 		}
 
@@ -1149,8 +1121,6 @@ FROM
 
 			РозрахункиЗКлієнтами_RecordsSet розрахункиЗКлієнтами_RecordsSet = new РозрахункиЗКлієнтами_RecordsSet();
 			розрахункиЗКлієнтами_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-
-			CalculationBalances.AddTask(ДокументОбєкт.UnigueID.ToString(), ДокументОбєкт.TypeDocument, "Delete", ДокументОбєкт.ДатаДок, "");
 		}
 	}
 
@@ -1183,8 +1153,6 @@ FROM
 
 			#endregion
 
-			СпільніФункції.ПеревіритиДатуПроведенняДокументу(ДокументОбєкт, ДокументОбєкт.ДатаДок);
-
 			#region Рух по регістрах
 
 			РозрахункиЗКлієнтами_RecordsSet розрахункиЗКлієнтами_RecordsSet = new РозрахункиЗКлієнтами_RecordsSet();
@@ -1203,8 +1171,6 @@ FROM
 
 			#endregion
 
-			CalculationBalances.AddTask(ДокументОбєкт.UnigueID.ToString(), ДокументОбєкт.TypeDocument, "Add", ДокументОбєкт.ДатаДок, "");
-
 			return true;
 		}
 
@@ -1212,8 +1178,6 @@ FROM
 		{
 			РозрахункиЗКлієнтами_RecordsSet розрахункиЗКлієнтами_RecordsSet = new РозрахункиЗКлієнтами_RecordsSet();
 			розрахункиЗКлієнтами_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-
-			CalculationBalances.AddTask(ДокументОбєкт.UnigueID.ToString(), ДокументОбєкт.TypeDocument, "Delete", ДокументОбєкт.ДатаДок, "");
 		}
 	}
 
@@ -1289,8 +1253,6 @@ FROM
 			}
 
 			#endregion
-
-			СпільніФункції.ПеревіритиДатуПроведенняДокументу(ДокументОбєкт, ДокументОбєкт.ДатаДок);
 
 			#region Замовлення постачальникам
 
@@ -1465,8 +1427,6 @@ FROM
 
 			#endregion
 
-			CalculationBalances.AddTask(ДокументОбєкт.UnigueID.ToString(), ДокументОбєкт.TypeDocument, "Add", ДокументОбєкт.ДатаДок, "");
-
 			return true;
 		}
 
@@ -1489,8 +1449,6 @@ FROM
 
 			РозрахункиЗПостачальниками_RecordsSet розрахункиЗПостачальниками_RecordsSet = new РозрахункиЗПостачальниками_RecordsSet();
 			розрахункиЗПостачальниками_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-
-			CalculationBalances.AddTask(ДокументОбєкт.UnigueID.ToString(), ДокументОбєкт.TypeDocument, "Delete", ДокументОбєкт.ДатаДок, "");
 		}
 	}
 
@@ -1527,8 +1485,6 @@ FROM
 
 			#endregion
 
-			СпільніФункції.ПеревіритиДатуПроведенняДокументу(ДокументОбєкт, ДокументОбєкт.ДатаДок);
-
 			#region Замовлення постачальникам
 
 			ЗамовленняПостачальникам_RecordsSet замовленняПостачальникам_RecordsSet = new ЗамовленняПостачальникам_RecordsSet();
@@ -1555,8 +1511,6 @@ FROM
 
 			#endregion
 
-			CalculationBalances.AddTask(ДокументОбєкт.UnigueID.ToString(), ДокументОбєкт.TypeDocument, "Add", ДокументОбєкт.ДатаДок, "");
-
 			return true;
 		}
 
@@ -1564,8 +1518,6 @@ FROM
 		{
 			ЗамовленняПостачальникам_RecordsSet замовленняПостачальникам_RecordsSet = new ЗамовленняПостачальникам_RecordsSet();
 			замовленняПостачальникам_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-
-			CalculationBalances.AddTask(ДокументОбєкт.UnigueID.ToString(), ДокументОбєкт.TypeDocument, "Delete", ДокументОбєкт.ДатаДок, "");
 		}
 	}
 
@@ -1644,8 +1596,6 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
 			}
 
 			#endregion
-
-			СпільніФункції.ПеревіритиДатуПроведенняДокументу(ДокументОбєкт, ДокументОбєкт.ДатаДок);
 
 			#region ВільніЗалишки
 
@@ -1792,8 +1742,6 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
 
 			#endregion
 
-			CalculationBalances.AddTask(ДокументОбєкт.UnigueID.ToString(), ДокументОбєкт.TypeDocument, "Add", ДокументОбєкт.ДатаДок, "");
-
 			return true;
 		}
 
@@ -1810,8 +1758,6 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
 
 			РозрахункиЗКлієнтами_RecordsSet розрахункиЗКлієнтами_RecordsSet = new РозрахункиЗКлієнтами_RecordsSet();
 			розрахункиЗКлієнтами_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-
-			CalculationBalances.AddTask(ДокументОбєкт.UnigueID.ToString(), ДокументОбєкт.TypeDocument, "Delete", ДокументОбєкт.ДатаДок, "");
 		}
 	}
 
@@ -1889,8 +1835,6 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
 			}
 
 			#endregion
-
-			СпільніФункції.ПеревіритиДатуПроведенняДокументу(ДокументОбєкт, ДокументОбєкт.ДатаДок);
 
 			#region Товари на складах
 
@@ -2032,8 +1976,6 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
 
 			#endregion
 
-			CalculationBalances.AddTask(ДокументОбєкт.UnigueID.ToString(), ДокументОбєкт.TypeDocument, "Add", ДокументОбєкт.ДатаДок, "");
-
 			return true;
 		}
 
@@ -2050,8 +1992,6 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
 
 			РозрахункиЗПостачальниками_RecordsSet розрахункиЗПостачальниками_RecordsSet = new РозрахункиЗПостачальниками_RecordsSet();
 			розрахункиЗПостачальниками_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-
-			CalculationBalances.AddTask(ДокументОбєкт.UnigueID.ToString(), ДокументОбєкт.TypeDocument, "Delete", ДокументОбєкт.ДатаДок, "");
 		}
 	}
 
@@ -2064,8 +2004,6 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
 
 
 			#endregion
-
-			СпільніФункції.ПеревіритиДатуПроведенняДокументу(ДокументОбєкт, ДокументОбєкт.ДатаДок);
 
 			#region РозрахункиЗКлієнтами
 
@@ -2150,8 +2088,6 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
 
 			#endregion
 
-			CalculationBalances.AddTask(ДокументОбєкт.UnigueID.ToString(), ДокументОбєкт.TypeDocument, "Add", ДокументОбєкт.ДатаДок, "");
-
 			return true;
 		}
 
@@ -2165,8 +2101,6 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
 
 			РухКоштів_RecordsSet рухКоштів_RecordsSet = new РухКоштів_RecordsSet();
 			рухКоштів_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-
-			CalculationBalances.AddTask(ДокументОбєкт.UnigueID.ToString(), ДокументОбєкт.TypeDocument, "Delete", ДокументОбєкт.ДатаДок, "");
 		}
 	}
 
@@ -2179,8 +2113,6 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
 
 
 			#endregion
-
-			СпільніФункції.ПеревіритиДатуПроведенняДокументу(ДокументОбєкт, ДокументОбєкт.ДатаДок);
 
 			#region РозрахункиЗКлієнтами
 
@@ -2265,8 +2197,6 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
 
 			#endregion
 
-			CalculationBalances.AddTask(ДокументОбєкт.UnigueID.ToString(), ДокументОбєкт.TypeDocument, "Add", ДокументОбєкт.ДатаДок, "");
-
 			return true;
 		}
 
@@ -2280,8 +2210,6 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
 
 			РухКоштів_RecordsSet рухКоштів_RecordsSet = new РухКоштів_RecordsSet();
 			рухКоштів_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-
-			CalculationBalances.AddTask(ДокументОбєкт.UnigueID.ToString(), ДокументОбєкт.TypeDocument, "Delete", ДокументОбєкт.ДатаДок, "");
 		}
 	}
 
@@ -2377,8 +2305,6 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
 			}
 
 			#endregion
-
-			СпільніФункції.ПеревіритиДатуПроведенняДокументу(ДокументОбєкт, ДокументОбєкт.ДатаДок);
 
 			#region Товари на складах
 
@@ -2564,8 +2490,6 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
 
 			#endregion
 
-			CalculationBalances.AddTask(ДокументОбєкт.UnigueID.ToString(), ДокументОбєкт.TypeDocument, "Add", ДокументОбєкт.ДатаДок, "");
-
 			return true;
 		}
 
@@ -2579,8 +2503,6 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
 
 			ПартіїТоварів_RecordsSet партіїТоварів_RecordsSet = new ПартіїТоварів_RecordsSet();
 			партіїТоварів_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-
-			CalculationBalances.AddTask(ДокументОбєкт.UnigueID.ToString(), ДокументОбєкт.TypeDocument, "Delete", ДокументОбєкт.ДатаДок, "");
 		}
 	}
 
@@ -2655,8 +2577,6 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
 			}
 
 			#endregion
-
-			СпільніФункції.ПеревіритиДатуПроведенняДокументу(ДокументОбєкт, ДокументОбєкт.ДатаДок);
 
 			#region Товари на складах
 
@@ -2769,8 +2689,6 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
 
 			#endregion
 
-			CalculationBalances.AddTask(ДокументОбєкт.UnigueID.ToString(), ДокументОбєкт.TypeDocument, "Add", ДокументОбєкт.ДатаДок, "");
-
 			return true;
 		}
 
@@ -2787,8 +2705,6 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
 
 			РухКоштів_RecordsSet рухКоштів_RecordsSet = new РухКоштів_RecordsSet();
 			рухКоштів_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-
-			CalculationBalances.AddTask(ДокументОбєкт.UnigueID.ToString(), ДокументОбєкт.TypeDocument, "Delete", ДокументОбєкт.ДатаДок, "");
 		}
 	}
 
@@ -2885,8 +2801,6 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
 
 			#endregion
 
-			СпільніФункції.ПеревіритиДатуПроведенняДокументу(ДокументОбєкт, ДокументОбєкт.ДатаДок);
-
 			#region ТовариНаСкладах
 
 			ТовариНаСкладах_RecordsSet товариНаСкладах_RecordsSet = new ТовариНаСкладах_RecordsSet();
@@ -3016,8 +2930,6 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
 
 			#endregion
 
-			CalculationBalances.AddTask(ДокументОбєкт.UnigueID.ToString(), ДокументОбєкт.TypeDocument, "Add", ДокументОбєкт.ДатаДок, "");
-
 			return true;
 		}
 
@@ -3031,8 +2943,6 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
 
 			ПартіїТоварів_RecordsSet партіїТоварів_RecordsSet = new ПартіїТоварів_RecordsSet();
 			партіїТоварів_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-
-			CalculationBalances.AddTask(ДокументОбєкт.UnigueID.ToString(), ДокументОбєкт.TypeDocument, "Delete", ДокументОбєкт.ДатаДок, "");
 		}
 	}
 
@@ -3129,8 +3039,6 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
 
 			#endregion
 
-			СпільніФункції.ПеревіритиДатуПроведенняДокументу(ДокументОбєкт, ДокументОбєкт.ДатаДок);
-
 			#region ТовариНаСкладах
 
 			ТовариНаСкладах_RecordsSet товариНаСкладах_RecordsSet = new ТовариНаСкладах_RecordsSet();
@@ -3260,8 +3168,6 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
 
 			#endregion
 
-			CalculationBalances.AddTask(ДокументОбєкт.UnigueID.ToString(), ДокументОбєкт.TypeDocument, "Add", ДокументОбєкт.ДатаДок, "");
-
 			return true;
 		}
 
@@ -3275,8 +3181,6 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
 
 			ПартіїТоварів_RecordsSet партіїТоварів_RecordsSet = new ПартіїТоварів_RecordsSet();
 			партіїТоварів_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-
-			CalculationBalances.AddTask(ДокументОбєкт.UnigueID.ToString(), ДокументОбєкт.TypeDocument, "Delete", ДокументОбєкт.ДатаДок, "");
 		}
 	}
 }

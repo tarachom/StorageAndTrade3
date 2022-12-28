@@ -231,6 +231,8 @@ namespace StorageAndTrade
 
         void CalculationBalancesFunc()
         {
+            /*
+            
             //Видалити всі задачі
             Service.CalculationBalances.ClearAllTask();
 
@@ -270,6 +272,8 @@ namespace StorageAndTrade
 
             if (!CancellationTokenThread.IsCancellationRequested)
                 CreateMessage(TypeMessage.None, "Готово!\n\n\n\n\n");
+            
+            */
         }
 
         #endregion
