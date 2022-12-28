@@ -569,8 +569,6 @@ HAVING SUM(Прихід) != 0 OR SUM(Розхід) != 0
 ORDER BY Номенклатура_Назва, ХарактеристикаНоменклатури_Назва, Склад_Назва
 ";
 
-            Console.WriteLine(query);
-
             #endregion
 
             Dictionary<string, string> ВидиміКолонки = new Dictionary<string, string>();
