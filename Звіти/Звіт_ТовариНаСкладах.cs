@@ -200,7 +200,7 @@ SELECT
     Довідник_Склади.{Склади_Const.Назва} AS Склад_Назва,
     ТовариНаСкладах.{ТовариНаСкладах_Залишки_TablePart.Серія} AS Серія,
     Довідник_СеріїНоменклатури.{СеріїНоменклатури_Const.Номер} AS Серія_Номер,
-    SUM(ТовариНаСкладах.{ТовариНаСкладах_Залишки_TablePart.ВНаявності}) AS ВНаявності
+    ROUND(SUM(ТовариНаСкладах.{ТовариНаСкладах_Залишки_TablePart.ВНаявності}), 2) AS ВНаявності
 FROM 
     {ТовариНаСкладах_Залишки_TablePart.TABLE} AS ТовариНаСкладах
     LEFT JOIN {Номенклатура_Const.TABLE} AS Довідник_Номенклатура ON Довідник_Номенклатура.uid = 
@@ -330,6 +330,9 @@ ORDER BY Номенклатура_Назва
             КолонкиДаних.Add("Серія_Номер", "Серія");
             КолонкиДаних.Add("Склад_Назва", "Склад");
 
+            Dictionary<string, float> ПозиціяТекстуВКолонці = new Dictionary<string, float>();
+            ПозиціяТекстуВКолонці.Add("ВНаявності", 1);
+
             Dictionary<string, object> paramQuery = new Dictionary<string, object>();
 
             string[] columnsName;
@@ -343,7 +346,7 @@ ORDER BY Номенклатура_Назва
             TreeView treeView = new TreeView(listStore);
             treeView.ButtonPressEvent += ФункціїДляЗвітів.OpenPageDirectoryOrDocument;
 
-            ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних);
+            ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних, ПозиціяТекстуВКолонці);
             ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, columnsName, listRow);
 
             CreateReportNotebookPage("Залишки", treeView);
@@ -417,10 +420,10 @@ SELECT
     Довідник_Склади.{Склади_Const.Назва} AS Склад_Назва,
     Серія,
     Довідник_СеріїНоменклатури.{СеріїНоменклатури_Const.Номер} AS Серія_Номер,
-    SUM(ПочатковийЗалишок) AS ПочатковийЗалишок,
-    SUM(Прихід) AS Прихід,
-    SUM(Розхід) AS Розхід,
-    SUM(КінцевийЗалишок) AS КінцевийЗалишок
+    ROUND(SUM(ПочатковийЗалишок), 2) AS ПочатковийЗалишок,
+    ROUND(SUM(Прихід), 2) AS Прихід,
+    ROUND(SUM(Розхід), 2) AS Розхід,
+    ROUND(SUM(КінцевийЗалишок), 2) AS КінцевийЗалишок
 FROM 
 (
     SELECT 
@@ -586,6 +589,12 @@ ORDER BY Номенклатура_Назва, ХарактеристикаНом
             КолонкиДаних.Add("Серія_Номер", "Серія");
             КолонкиДаних.Add("Склад_Назва", "Склад");
 
+            Dictionary<string, float> ПозиціяТекстуВКолонці = new Dictionary<string, float>();
+            ПозиціяТекстуВКолонці.Add("ПочатковийЗалишок", 1);
+            ПозиціяТекстуВКолонці.Add("Прихід", 1);
+            ПозиціяТекстуВКолонці.Add("Розхід", 1);
+            ПозиціяТекстуВКолонці.Add("КінцевийЗалишок", 1);
+
             Dictionary<string, object> paramQuery = new Dictionary<string, object>();
             paramQuery.Add("ПочатокПеріоду", ДатаПочатокПеріоду.Value);
             paramQuery.Add("КінецьПеріоду", ДатаКінецьПеріоду.Value);
@@ -601,7 +610,7 @@ ORDER BY Номенклатура_Назва, ХарактеристикаНом
             TreeView treeView = new TreeView(listStore);
             treeView.ButtonPressEvent += ФункціїДляЗвітів.OpenPageDirectoryOrDocument;
 
-            ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних);
+            ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних, ПозиціяТекстуВКолонці);
             ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, columnsName, listRow);
 
             CreateReportNotebookPage("Залишки та обороти", treeView);
@@ -808,6 +817,9 @@ ORDER BY period ASC
             КолонкиДаних.Add("Серія_Номер", "Серія");
             КолонкиДаних.Add("Склад_Назва", "Склад");
 
+            Dictionary<string, float> ПозиціяТекстуВКолонці = new Dictionary<string, float>();
+            ПозиціяТекстуВКолонці.Add("ВНаявності", 1);
+
             Dictionary<string, object> paramQuery = new Dictionary<string, object>();
             paramQuery.Add("ПочатокПеріоду", DateTime.Parse($"{ДатаПочатокПеріоду.Value.Day}.{ДатаПочатокПеріоду.Value.Month}.{ДатаПочатокПеріоду.Value.Year} 00:00:00"));
             paramQuery.Add("КінецьПеріоду", DateTime.Parse($"{ДатаКінецьПеріоду.Value.Day}.{ДатаКінецьПеріоду.Value.Month}.{ДатаКінецьПеріоду.Value.Year} 23:59:59"));
@@ -823,7 +835,7 @@ ORDER BY period ASC
             TreeView treeView = new TreeView(listStore);
             treeView.ButtonPressEvent += ФункціїДляЗвітів.OpenPageDirectoryOrDocument;
 
-            ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних);
+            ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних, ПозиціяТекстуВКолонці);
             ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, columnsName, listRow);
 
             CreateReportNotebookPage("Документи", treeView);

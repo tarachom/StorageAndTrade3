@@ -278,6 +278,9 @@ ORDER BY Контрагент_Назва
             КолонкиДаних.Add("Контрагент_Назва", "Контрагент");
             КолонкиДаних.Add("Валюта_Назва", "Валюта");
 
+            Dictionary<string, float> ПозиціяТекстуВКолонці = new Dictionary<string, float>();
+            ПозиціяТекстуВКолонці.Add("Сума", 1);
+
             Dictionary<string, object> paramQuery = new Dictionary<string, object>();
 
             string[] columnsName;
@@ -291,7 +294,7 @@ ORDER BY Контрагент_Назва
             TreeView treeView = new TreeView(listStore);
             treeView.ButtonPressEvent += ФункціїДляЗвітів.OpenPageDirectoryOrDocument;
 
-            ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних);
+            ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних, ПозиціяТекстуВКолонці);
             ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, columnsName, listRow);
 
             CreateReportNotebookPage("Залишки", treeView);
@@ -503,6 +506,12 @@ ORDER BY Контрагент_Назва, Валюта_Назва
             КолонкиДаних.Add("Контрагент_Назва", "Контрагент");
             КолонкиДаних.Add("Валюта_Назва", "Валюта");
 
+            Dictionary<string, float> ПозиціяТекстуВКолонці = new Dictionary<string, float>();
+            ПозиціяТекстуВКолонці.Add("ПочатковийЗалишок", 1);
+            ПозиціяТекстуВКолонці.Add("Прихід", 1);
+            ПозиціяТекстуВКолонці.Add("Розхід", 1);
+            ПозиціяТекстуВКолонці.Add("КінцевийЗалишок", 1);
+
             Dictionary<string, object> paramQuery = new Dictionary<string, object>();
             paramQuery.Add("ПочатокПеріоду", ДатаПочатокПеріоду.Value);
             paramQuery.Add("КінецьПеріоду", ДатаКінецьПеріоду.Value);
@@ -518,7 +527,7 @@ ORDER BY Контрагент_Назва, Валюта_Назва
             TreeView treeView = new TreeView(listStore);
             treeView.ButtonPressEvent += ФункціїДляЗвітів.OpenPageDirectoryOrDocument;
 
-            ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних);
+            ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних, ПозиціяТекстуВКолонці);
             ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, columnsName, listRow);
 
             CreateReportNotebookPage("Залишки та обороти", treeView);
@@ -704,6 +713,9 @@ ORDER BY period ASC
             КолонкиДаних.Add("Контрагент_Назва", "Контрагент");
             КолонкиДаних.Add("Валюта_Назва", "Валюта");
 
+            Dictionary<string, float> ПозиціяТекстуВКолонці = new Dictionary<string, float>();
+            ПозиціяТекстуВКолонці.Add("Сума", 1);
+
             Dictionary<string, object> paramQuery = new Dictionary<string, object>();
             paramQuery.Add("ПочатокПеріоду", DateTime.Parse($"{ДатаПочатокПеріоду.Value.Day}.{ДатаПочатокПеріоду.Value.Month}.{ДатаПочатокПеріоду.Value.Year} 00:00:00"));
             paramQuery.Add("КінецьПеріоду", DateTime.Parse($"{ДатаКінецьПеріоду.Value.Day}.{ДатаКінецьПеріоду.Value.Month}.{ДатаКінецьПеріоду.Value.Year} 23:59:59"));
@@ -719,7 +731,7 @@ ORDER BY period ASC
             TreeView treeView = new TreeView(listStore);
             treeView.ButtonPressEvent += ФункціїДляЗвітів.OpenPageDirectoryOrDocument;
 
-            ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних);
+            ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних, ПозиціяТекстуВКолонці);
             ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, columnsName, listRow);
 
             CreateReportNotebookPage("Документи", treeView);

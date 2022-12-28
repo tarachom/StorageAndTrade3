@@ -180,17 +180,26 @@ namespace StorageAndTrade
         public static void СтворитиКолонкиДляДерева(TreeView treeView,
             string[] columnsName,
             Dictionary<string, string> visibleColumns,
-            Dictionary<string, string> dataColumns)
+            Dictionary<string, string>? dataColumns = null,
+            Dictionary<string, float>? xalignColumns = null)
         {
             for (int i = 0; i < columnsName.Length; i++)
             {
                 string columnName = columnsName[i];
 
+                //Видимість колонки
                 bool isVisibleColumn = visibleColumns.ContainsKey(columnName);
 
-                TreeViewColumn treeColumn = new TreeViewColumn(isVisibleColumn ? visibleColumns[columnName] : columnName, new CellRendererText(), "text", i) { Visible = isVisibleColumn };
+                //Позиція тексту в колонці (0 .. 1)
+                float xalign = xalignColumns != null ?
+                    (xalignColumns.ContainsKey(columnName) ? xalignColumns[columnName] : 0) : 0;
 
-                if (dataColumns.ContainsKey(columnName))
+                TreeViewColumn treeColumn = new TreeViewColumn(
+                    isVisibleColumn ? visibleColumns[columnName] : columnName,
+                    new CellRendererText() { Xalign = xalign }, "text", i)
+                { Visible = isVisibleColumn, Alignment = xalign };
+
+                if (dataColumns != null && dataColumns.ContainsKey(columnName))
                 {
                     string dataColumName = dataColumns[columnName];
 
@@ -206,6 +215,9 @@ namespace StorageAndTrade
 
                 treeView.AppendColumn(treeColumn);
             }
+
+            //Додаткова колонка пустишка для заповнення простору
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
         public static void ЗаповнитиМодельДаними(ListStore listStore, string[] columnsName, List<Dictionary<string, object>> listRow)

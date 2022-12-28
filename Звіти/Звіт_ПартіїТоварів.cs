@@ -362,6 +362,10 @@ ORDER BY Організація_Назва, ПартіяТоварівКомпо
             КолонкиДаних.Add("Серія_Номер", "Серія");
             КолонкиДаних.Add("Склад_Назва", "Склад");
 
+            Dictionary<string, float> ПозиціяТекстуВКолонці = new Dictionary<string, float>();
+            ПозиціяТекстуВКолонці.Add("Кількість", 1);
+            ПозиціяТекстуВКолонці.Add("Собівартість", 1);
+
             Dictionary<string, object> paramQuery = new Dictionary<string, object>();
 
             string[] columnsName;
@@ -375,7 +379,7 @@ ORDER BY Організація_Назва, ПартіяТоварівКомпо
             TreeView treeView = new TreeView(listStore);
             treeView.ButtonPressEvent += ФункціїДляЗвітів.OpenPageDirectoryOrDocument;
 
-            ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних);
+            ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних, ПозиціяТекстуВКолонці);
             ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, columnsName, listRow);
 
             CreateReportNotebookPage("Залишки", treeView);
@@ -587,7 +591,7 @@ SELECT
     Серія_Номер,
     Склад,
     Склад_Назва,
-    Кількість, 
+    ROUND(Кількість, 2) AS Кількість, 
     ROUND(Собівартість, 2) AS Собівартість
 FROM documents
 ORDER BY period ASC, Організація_Назва, 
@@ -617,6 +621,10 @@ ORDER BY period ASC, Організація_Назва,
             КолонкиДаних.Add("Серія_Номер", "Серія");
             КолонкиДаних.Add("Склад_Назва", "Склад");
 
+            Dictionary<string, float> ПозиціяТекстуВКолонці = new Dictionary<string, float>();
+            ПозиціяТекстуВКолонці.Add("Кількість", 1);
+            ПозиціяТекстуВКолонці.Add("Собівартість", 1);
+
             Dictionary<string, object> paramQuery = new Dictionary<string, object>();
             paramQuery.Add("ПочатокПеріоду", DateTime.Parse($"{ДатаПочатокПеріоду.Value.Day}.{ДатаПочатокПеріоду.Value.Month}.{ДатаПочатокПеріоду.Value.Year} 00:00:00"));
             paramQuery.Add("КінецьПеріоду", DateTime.Parse($"{ДатаКінецьПеріоду.Value.Day}.{ДатаКінецьПеріоду.Value.Month}.{ДатаКінецьПеріоду.Value.Year} 23:59:59"));
@@ -632,7 +640,7 @@ ORDER BY period ASC, Організація_Назва,
             TreeView treeView = new TreeView(listStore);
             treeView.ButtonPressEvent += ФункціїДляЗвітів.OpenPageDirectoryOrDocument;
 
-            ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних);
+            ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних, ПозиціяТекстуВКолонці);
             ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, columnsName, listRow);
 
             CreateReportNotebookPage("Документи", treeView);
