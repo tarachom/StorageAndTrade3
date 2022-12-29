@@ -19,11 +19,11 @@ namespace StorageAndTrade
         Entry Назва = new Entry() { WidthRequest = 500 };
         Entry НазваСкорочена = new Entry() { WidthRequest = 500 };
         TextView НазваПовна = new TextView();
-        Entry ДатаРеєстрації = new Entry() { WidthRequest = 300 };
+        DateTimeControl ДатаРеєстрації = new DateTimeControl() { OnlyDate = true };
         Entry КраїнаРеєстрації = new Entry() { WidthRequest = 300 };
         Entry СвідоцтвоСеріяНомер = new Entry() { WidthRequest = 300 };
         Entry СвідоцтвоДатаВидачі = new Entry() { WidthRequest = 300 };
-        Організації_PointerControl Холдинг = new Організації_PointerControl() { Caption = "Холдинг" };
+        Організації_PointerControl Холдинг = new Організації_PointerControl() { Caption = "Холдинг:" };
 
         Організації_ТабличнаЧастина_Контакти Контакти = new Організації_ТабличнаЧастина_Контакти();
 
@@ -156,7 +156,7 @@ namespace StorageAndTrade
             Код.Text = Організації_Objest.Код;
             Назва.Text = Організації_Objest.Назва;
             НазваСкорочена.Text = Організації_Objest.НазваСкорочена;
-            ДатаРеєстрації.Text = Організації_Objest.ДатаРеєстрації.ToString();
+            ДатаРеєстрації.Value = Організації_Objest.ДатаРеєстрації;
             КраїнаРеєстрації.Text = Організації_Objest.КраїнаРеєстрації;
             СвідоцтвоСеріяНомер.Text = Організації_Objest.СвідоцтвоСеріяНомер;
             СвідоцтвоДатаВидачі.Text = Організації_Objest.СвідоцтвоДатаВидачі;
@@ -172,7 +172,7 @@ namespace StorageAndTrade
             Організації_Objest.Код = Код.Text;
             Організації_Objest.Назва = Назва.Text;
             Організації_Objest.НазваСкорочена = НазваСкорочена.Text;
-            Організації_Objest.ДатаРеєстрації = DateTime.Parse(ДатаРеєстрації.Text);
+            Організації_Objest.ДатаРеєстрації = ДатаРеєстрації.Value;
             Організації_Objest.КраїнаРеєстрації = КраїнаРеєстрації.Text;
             Організації_Objest.СвідоцтвоСеріяНомер = СвідоцтвоСеріяНомер.Text;
             Організації_Objest.СвідоцтвоДатаВидачі = СвідоцтвоДатаВидачі.Text;

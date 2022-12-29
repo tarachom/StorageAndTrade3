@@ -16,7 +16,7 @@ namespace StorageAndTrade
         Entry Код = new Entry() { WidthRequest = 100 };
         Entry Назва = new Entry() { WidthRequest = 500 };
         Entry НазваПовна = new Entry() { WidthRequest = 500 };
-        Entry КількістьУпаковок = new Entry() { WidthRequest = 100 };
+        IntegerControl КількістьУпаковок = new IntegerControl();
 
         public ПакуванняОдиниціВиміру_Елемент() : base()
         {
@@ -99,7 +99,7 @@ namespace StorageAndTrade
             Код.Text = ПакуванняОдиниціВиміру_Objest.Код;
             Назва.Text = ПакуванняОдиниціВиміру_Objest.Назва;
             НазваПовна.Text = ПакуванняОдиниціВиміру_Objest.НазваПовна;
-            КількістьУпаковок.Text = ПакуванняОдиниціВиміру_Objest.КількістьУпаковок.ToString();
+            КількістьУпаковок.Value = ПакуванняОдиниціВиміру_Objest.КількістьУпаковок;
         }
 
         void GetValue()
@@ -107,7 +107,7 @@ namespace StorageAndTrade
             ПакуванняОдиниціВиміру_Objest.Код = Код.Text;
             ПакуванняОдиниціВиміру_Objest.Назва = Назва.Text;
             ПакуванняОдиниціВиміру_Objest.НазваПовна = НазваПовна.Text;
-            ПакуванняОдиниціВиміру_Objest.КількістьУпаковок = int.Parse(КількістьУпаковок.Text);
+            ПакуванняОдиниціВиміру_Objest.КількістьУпаковок = КількістьУпаковок.Value;
         }
 
         #endregion

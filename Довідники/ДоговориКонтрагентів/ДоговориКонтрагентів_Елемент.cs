@@ -20,13 +20,13 @@ namespace StorageAndTrade
 
         Entry Код = new Entry() { WidthRequest = 100 };
         Entry Назва = new Entry() { WidthRequest = 500 };
-        DateTimeControl Дата = new DateTimeControl();
+        DateTimeControl Дата = new DateTimeControl() { OnlyDate = true };
         Entry Номер = new Entry() { WidthRequest = 100 };
         БанківськіРахункиОрганізацій_PointerControl БанківськийРахунок = new БанківськіРахункиОрганізацій_PointerControl();
         БанківськіРахункиКонтрагентів_PointerControl БанківськийРахунокКонтрагента = new БанківськіРахункиКонтрагентів_PointerControl();
         Валюти_PointerControl ВалютаВзаєморозрахунків = new Валюти_PointerControl();
-        DateTimeControl ДатаПочаткуДії = new DateTimeControl();
-        DateTimeControl ДатаЗакінченняДії = new DateTimeControl();
+        DateTimeControl ДатаПочаткуДії = new DateTimeControl() { OnlyDate = true };
+        DateTimeControl ДатаЗакінченняДії = new DateTimeControl() { OnlyDate = true };
         Організації_PointerControl Організація = new Організації_PointerControl();
         Контрагенти_PointerControl Контрагент = new Контрагенти_PointerControl();
         СтруктураПідприємства_PointerControl Підрозділ = new СтруктураПідприємства_PointerControl();
