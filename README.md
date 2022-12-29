@@ -1,11 +1,12 @@
 # "Зберігання та Торгівля" для України
  <img src="https://accounting.org.ua/images/storage_and_trade.ico?v=3" /> <b>Програма для обліку торгівлі, сладу та фінансів </b> | .net 6, Linux, Windows <br/>
  
-  
-  Детальніше про програму      https://accounting.org.ua/storage_and_trade.html <br/>
-  
-  Для роботи потрібна база даних PostgreSQL https://www.enterprisedb.com/downloads/postgres-postgresql-downloads <br/>
+  Детальніше про програму [accounting.org.ua](https://accounting.org.ua/storage_and_trade.html)
 
+  Середовище розробки [Visual Studio Code](https://code.visualstudio.com)
+
+  База даних [PostgreSQL](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads)
+  
  <b>Можливості:</b>
     
     Облік по багатьох організаціях
@@ -58,3 +59,22 @@
     Рух коштів
     Розрахунки з контрагентами
 
+<hr />
+    
+Для запуску на <b>Windows:</b>
+
+<ul>
+ <li>
+  Встановити .net 6 Runtime (https://dotnet.microsoft.com/en-us/download/dotnet/6.0/runtime)<br/>
+  Може бути "Run console apps" або "Run desktop apps"
+ </li>
+</ul>
+ 
+Для запуску на <b>Linux:</b>
+
+<ul>
+ <li>
+  Інструкція як встановити .net 6 в Ubuntu 22.04 (https://github.com/dotnet/core/issues/7699)<br/>
+  або Install .net on Linux (https://learn.microsoft.com/uk-ua/dotnet/core/install/linux)
+ </li>
+</ul>
