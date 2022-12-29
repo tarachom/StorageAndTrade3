@@ -47,7 +47,7 @@ namespace StorageAndTrade
             {
                 Select.Invoke(new DateTime(
                     calendar.Date.Year, calendar.Date.Month, calendar.Date.Day,
-                    Value.Hour, Value.Minute, Value.Second));
+                        Value.Hour, Value.Minute, Value.Second));
             }
 
             Close();
