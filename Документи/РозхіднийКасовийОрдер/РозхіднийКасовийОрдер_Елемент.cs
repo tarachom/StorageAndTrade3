@@ -370,6 +370,16 @@ namespace StorageAndTrade
 
         #endregion
 
+        bool IsValidValue()
+        {
+            if (!ДатаДок.IsValidValue() || !Курс.IsValidValue() || !СумаДокументу.IsValidValue())
+            {
+                Message.Error(Program.GeneralForm, "Перевірте правельність заповнення полів типу Дата та Число");
+                return false;
+            }
+            else return true;
+        }
+
         void Save()
         {
             if (IsNew)
@@ -419,6 +429,9 @@ namespace StorageAndTrade
 
         void OnSaveAndSpendClick(object? sender, EventArgs args)
         {
+            if (!IsValidValue())
+                return;
+
             Save();
             SpendTheDocument(true);
 
@@ -427,6 +440,9 @@ namespace StorageAndTrade
 
         void OnSaveClick(object? sender, EventArgs args)
         {
+            if (!IsValidValue())
+                return;
+
             Save();
             SpendTheDocument(false);
 

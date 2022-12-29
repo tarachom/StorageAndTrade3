@@ -334,7 +334,7 @@ namespace StorageAndTrade
             HBox hBoxDataPovernenjaTary = new HBox() { Halign = Align.End };
             vBox.PackStart(hBoxDataPovernenjaTary, false, false, 5);
 
-            hBoxDataPovernenjaTary.PackStart(new Label("Дата повернення тари.:"), false, false, 5);
+            hBoxDataPovernenjaTary.PackStart(new Label("Дата повернення тари:"), false, false, 5);
             hBoxDataPovernenjaTary.PackStart(ДатаПоверненняТари, false, false, 5);
 
             //Курс
@@ -468,6 +468,17 @@ namespace StorageAndTrade
 
         #endregion
 
+        bool IsValidValue()
+        {
+            if (!ДатаДок.IsValidValue() || !ДатаОплати.IsValidValue() || !ДатаПоверненняТари.IsValidValue() ||
+                !Курс.IsValidValue() || !Кратність.IsValidValue())
+            {
+                Message.Error(Program.GeneralForm, "Перевірте правельність заповнення полів типу Дата та Число");
+                return false;
+            }
+            else return true;
+        }
+
         void Save()
         {
             if (IsNew)
@@ -520,6 +531,9 @@ namespace StorageAndTrade
 
         void OnSaveAndSpendClick(object? sender, EventArgs args)
         {
+            if (!IsValidValue())
+                return;
+
             Save();
             SpendTheDocument(true);
 
@@ -528,6 +542,9 @@ namespace StorageAndTrade
 
         void OnSaveClick(object? sender, EventArgs args)
         {
+            if (!IsValidValue())
+                return;
+
             Save();
             SpendTheDocument(false);
 
