@@ -2,9 +2,7 @@
  <img src="https://accounting.org.ua/images/storage_and_trade.ico?v=3" /> <b>Програма для обліку торгівлі, сладу та фінансів </b> | .net 6, Linux, Windows <br/>
  
   Детальніше про програму [accounting.org.ua](https://accounting.org.ua/storage_and_trade.html)
-
   Середовище розробки [Visual Studio Code](https://code.visualstudio.com)
-
   База даних [PostgreSQL](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads)
   
  <b>Можливості:</b>
