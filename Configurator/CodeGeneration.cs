@@ -17382,6 +17382,8 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         /* Функція для обчислення віртуальних таблиць  */
         public static void Execute(DateTime period, string regAccumName)
         {
+Console.WriteLine(period + " " + regAccumName);
+
             Dictionary<string, object> paramQuery = new Dictionary<string, object>();
             paramQuery.Add("ПеріодДеньВідбір", period);
 

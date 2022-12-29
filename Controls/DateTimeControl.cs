@@ -5,22 +5,22 @@ namespace StorageAndTrade
     class DateTimeControl : HBox
     {
         Entry entryDateTimeValue = new Entry();
+        HBox hBoxInfoValid = new HBox() { WidthRequest = 16 };
 
         public DateTimeControl() : base()
         {
+            PackStart(hBoxInfoValid, false, false, 1);
+
             //Entry
             entryDateTimeValue.Changed += OnEntryDateTimeChanged;
-
-            PackStart(entryDateTimeValue, false, false, 2);
+            PackStart(entryDateTimeValue, false, false, 1);
 
             //Button
             Button openCalendarButton = new Button(new Image("images/find.png"));
             openCalendarButton.Clicked += OnOpenCalendar;
 
-            PackStart(openCalendarButton, false, false, 2);
+            PackStart(openCalendarButton, false, false, 1);
         }
-
-        bool disableChanged = false;
 
         DateTime mValue;
         public DateTime Value
@@ -32,10 +32,38 @@ namespace StorageAndTrade
             set
             {
                 mValue = value;
+                entryDateTimeValue.Text = OnlyDate ? mValue.ToShortDateString() : mValue.ToString();
+            }
+        }
 
-                disableChanged = true;
-                entryDateTimeValue.Text = mValue.ToString();
-                disableChanged = false;
+        public bool OnlyDate { get; set; } = false;
+
+        void ClearHBoxInfoValid()
+        {
+            foreach (Widget item in hBoxInfoValid.Children)
+                hBoxInfoValid.Remove(item);
+        }
+
+        public bool IsValidValue()
+        {
+            ClearHBoxInfoValid();
+
+            DateTime value;
+            if (DateTime.TryParse(entryDateTimeValue.Text, out value))
+            {
+                mValue = value;
+
+                hBoxInfoValid.Add(new Image("images/16/ok.png"));
+                hBoxInfoValid.ShowAll();
+
+                return true;
+            }
+            else
+            {
+                hBoxInfoValid.Add(new Image("images/16/error.png"));
+                hBoxInfoValid.ShowAll();
+
+                return false;
             }
         }
 
@@ -49,19 +77,7 @@ namespace StorageAndTrade
 
         void OnEntryDateTimeChanged(object? sender, EventArgs args)
         {
-            if (!disableChanged)
-            {
-                DateTime value;
-                if (DateTime.TryParse(entryDateTimeValue.Text, out value))
-                {
-                    mValue = value;
-                    Console.WriteLine(mValue);
-                }
-                else
-                {
-                    //
-                }
-            }
+            IsValidValue();
         }
     }
 }

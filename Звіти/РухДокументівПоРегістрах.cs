@@ -38,6 +38,16 @@ namespace StorageAndTrade
             return columns;
         }
 
+        public static Dictionary<string, float> ТовариНаСкладах_ПозиціяТекстуВКолонці()
+        {
+            Dictionary<string, float> columns = new Dictionary<string, float>();
+
+            columns.Add("ВНаявності", 1);
+            columns.Add("ДоВідвантаження", 1);
+
+            return columns;
+        }
+
         public static string ТовариНаСкладах_Запит = $@"
 SELECT 
     (CASE WHEN Рег_ТовариНаСкладах.income = true THEN '+' ELSE '-' END) AS income,
@@ -104,6 +114,17 @@ ORDER BY Номенклатура_Назва
             columns.Add("ХарактеристикаНоменклатури_Назва", "ХарактеристикаНоменклатури");
             columns.Add("Серія_Номер", "Серія");
             columns.Add("Склад_Назва", "Склад");
+
+            return columns;
+        }
+
+        public static Dictionary<string, float> ПартіїТоварів_ПозиціяТекстуВКолонці()
+        {
+            Dictionary<string, float> columns = new Dictionary<string, float>();
+
+            columns.Add("Кількість", 1);
+            columns.Add("Собівартість", 1);
+            columns.Add("СписанаСобівартість", 1);
 
             return columns;
         }
@@ -181,6 +202,15 @@ ORDER BY Організація_Назва
             return columns;
         }
 
+        public static Dictionary<string, float> РухТоварів_ПозиціяТекстуВКолонці()
+        {
+            Dictionary<string, float> columns = new Dictionary<string, float>();
+
+            columns.Add("Кількість", 1);
+
+            return columns;
+        }
+
         public static string РухТоварів_Запит = $@"
 SELECT 
     (CASE WHEN Рег_РухТоварів.income = true THEN '+' ELSE '-' END) AS income,
@@ -236,6 +266,16 @@ ORDER BY Номенклатура_Назва
             columns.Add("Номенклатура_Назва", "Номенклатура");
             columns.Add("ХарактеристикаНоменклатури_Назва", "ХарактеристикаНоменклатури");
             columns.Add("Склад_Назва", "Склад");
+
+            return columns;
+        }
+
+        public static Dictionary<string, float> ЗамовленняКлієнтів_ПозиціяТекстуВКолонці()
+        {
+            Dictionary<string, float> columns = new Dictionary<string, float>();
+
+            columns.Add("Замовлено", 1);
+            columns.Add("Сума", 1);
 
             return columns;
         }
@@ -300,6 +340,15 @@ ORDER BY Номенклатура_Назва
             return columns;
         }
 
+        public static Dictionary<string, float> РозрахункиЗКлієнтами_ПозиціяТекстуВКолонці()
+        {
+            Dictionary<string, float> columns = new Dictionary<string, float>();
+
+            columns.Add("Сума", 1);
+
+            return columns;
+        }
+
         public static string РозрахункиЗКлієнтами_Запит = $@"
 SELECT 
     (CASE WHEN Рег_РозрахункиЗКлієнтами.income = true THEN '+' ELSE '-' END) AS income,
@@ -348,6 +397,17 @@ WHERE
             columns.Add("Номенклатура_Назва", "Номенклатура");
             columns.Add("ХарактеристикаНоменклатури_Назва", "Характеристика");
             columns.Add("Склад_Назва", "Склад");
+
+            return columns;
+        }
+
+        public static Dictionary<string, float> ВільніЗалишки_ПозиціяТекстуВКолонці()
+        {
+            Dictionary<string, float> columns = new Dictionary<string, float>();
+
+            columns.Add("ВНаявності", 1);
+            columns.Add("ВРезервіЗіСкладу", 1);
+            columns.Add("ВРезервіПідЗамовлення", 1);
 
             return columns;
         }
@@ -412,6 +472,15 @@ ORDER BY Номенклатура_Назва
             return columns;
         }
 
+        public static Dictionary<string, float> ЗамовленняПостачальникам_ПозиціяТекстуВКолонці()
+        {
+            Dictionary<string, float> columns = new Dictionary<string, float>();
+
+            columns.Add("Замовлено", 1);
+
+            return columns;
+        }
+
         public static string ЗамовленняПостачальникам_Запит = $@"
 SELECT 
     (CASE WHEN Рег_ЗамовленняПостачальникам.income = true THEN '+' ELSE '-' END) AS income, 
@@ -471,6 +540,15 @@ ORDER BY Номенклатура_Назва
             return columns;
         }
 
+        public static Dictionary<string, float> РозрахункиЗПостачальниками_ПозиціяТекстуВКолонці()
+        {
+            Dictionary<string, float> columns = new Dictionary<string, float>();
+
+            columns.Add("Сума", 1);
+
+            return columns;
+        }
+
         public static string РозрахункиЗПостачальниками_Запит = $@"
 SELECT 
     (CASE WHEN Рег_РозрахункиЗПостачальниками.income = true THEN '+' ELSE '-' END) AS income, 
@@ -518,6 +596,16 @@ WHERE
             columns.Add("Номенклатура_Назва", "Номенклатура");
             columns.Add("ХарактеристикаНоменклатури_Назва", "Характеристика");
             columns.Add("Склад_Назва", "Склад");
+
+            return columns;
+        }
+
+        public static Dictionary<string, float> ТовариДоПоступлення_ПозиціяТекстуВКолонці()
+        {
+            Dictionary<string, float> columns = new Dictionary<string, float>();
+
+            columns.Add("ВНаявності", 1);
+            columns.Add("ДоПоступлення", 1);
 
             return columns;
         }
@@ -574,6 +662,15 @@ ORDER BY Номенклатура_Назва
             columns.Add("Організація_Назва", "Організація");
             columns.Add("Каса_Назва", "Каса");
             columns.Add("Валюта_Назва", "Валюта");
+
+            return columns;
+        }
+
+        public static Dictionary<string, float> РухКоштів_ПозиціяТекстуВКолонці()
+        {
+            Dictionary<string, float> columns = new Dictionary<string, float>();
+
+            columns.Add("Сума", 1);
 
             return columns;
         }

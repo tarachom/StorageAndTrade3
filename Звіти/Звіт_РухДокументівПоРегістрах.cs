@@ -38,7 +38,8 @@ namespace StorageAndTrade
                 List<Dictionary<string, object>> listRow = new List<Dictionary<string, object>>();
 
                 Dictionary<string, string> visibleColumn = new Dictionary<string, string>();
-                Dictionary<string, string> dataColumn = new Dictionary<string, string>();
+                Dictionary<string, string>? dataColumn = null;
+                Dictionary<string, float>? textAlignColumn = null;
 
                 switch (regAccumName)
                 {
@@ -49,6 +50,7 @@ namespace StorageAndTrade
 
                             visibleColumn = РухДокументівПоРегістрах.ТовариНаСкладах_ВидиміКолонки();
                             dataColumn = РухДокументівПоРегістрах.ТовариНаСкладах_КолонкиДаних();
+                            textAlignColumn = РухДокументівПоРегістрах.ТовариНаСкладах_ПозиціяТекстуВКолонці();
 
                             Config.Kernel.DataBase.SelectRequest(РухДокументівПоРегістрах.ТовариНаСкладах_Запит, paramQuery, out columnsName, out listRow);
 
@@ -61,6 +63,7 @@ namespace StorageAndTrade
 
                             visibleColumn = РухДокументівПоРегістрах.ПартіїТоварів_ВидиміКолонки();
                             dataColumn = РухДокументівПоРегістрах.ПартіїТоварів_КолонкиДаних();
+                            textAlignColumn = РухДокументівПоРегістрах.ПартіїТоварів_ПозиціяТекстуВКолонці();
 
                             Config.Kernel.DataBase.SelectRequest(РухДокументівПоРегістрах.ПартіїТоварів_Запит, paramQuery, out columnsName, out listRow);
 
@@ -73,6 +76,7 @@ namespace StorageAndTrade
 
                             visibleColumn = РухДокументівПоРегістрах.РухТоварів_ВидиміКолонки();
                             dataColumn = РухДокументівПоРегістрах.РухТоварів_КолонкиДаних();
+                            textAlignColumn = РухДокументівПоРегістрах.РухТоварів_ПозиціяТекстуВКолонці();
 
                             Config.Kernel.DataBase.SelectRequest(РухДокументівПоРегістрах.РухТоварів_Запит, paramQuery, out columnsName, out listRow);
 
@@ -85,6 +89,7 @@ namespace StorageAndTrade
 
                             visibleColumn = РухДокументівПоРегістрах.ЗамовленняКлієнтів_ВидиміКолонки();
                             dataColumn = РухДокументівПоРегістрах.ЗамовленняКлієнтів_КолонкиДаних();
+                            textAlignColumn = РухДокументівПоРегістрах.ЗамовленняКлієнтів_ПозиціяТекстуВКолонці();
 
                             Config.Kernel.DataBase.SelectRequest(РухДокументівПоРегістрах.ЗамовленняКлієнтів_Запит, paramQuery, out columnsName, out listRow);
 
@@ -97,6 +102,7 @@ namespace StorageAndTrade
 
                             visibleColumn = РухДокументівПоРегістрах.РозрахункиЗКлієнтами_ВидиміКолонки();
                             dataColumn = РухДокументівПоРегістрах.РозрахункиЗКлієнтами_КолонкиДаних();
+                            textAlignColumn = РухДокументівПоРегістрах.РозрахункиЗКлієнтами_ПозиціяТекстуВКолонці();
 
                             Config.Kernel.DataBase.SelectRequest(РухДокументівПоРегістрах.РозрахункиЗКлієнтами_Запит, paramQuery, out columnsName, out listRow);
 
@@ -109,6 +115,7 @@ namespace StorageAndTrade
 
                             visibleColumn = РухДокументівПоРегістрах.ВільніЗалишки_ВидиміКолонки();
                             dataColumn = РухДокументівПоРегістрах.ВільніЗалишки_КолонкиДаних();
+                            textAlignColumn = РухДокументівПоРегістрах.ВільніЗалишки_ПозиціяТекстуВКолонці();
 
                             Config.Kernel.DataBase.SelectRequest(РухДокументівПоРегістрах.ВільніЗалишки_Запит, paramQuery, out columnsName, out listRow);
 
@@ -121,6 +128,7 @@ namespace StorageAndTrade
 
                             visibleColumn = РухДокументівПоРегістрах.ЗамовленняПостачальникам_ВидиміКолонки();
                             dataColumn = РухДокументівПоРегістрах.ЗамовленняПостачальникам_КолонкиДаних();
+                            textAlignColumn = РухДокументівПоРегістрах.ЗамовленняПостачальникам_ПозиціяТекстуВКолонці();
 
                             Config.Kernel.DataBase.SelectRequest(РухДокументівПоРегістрах.ЗамовленняПостачальникам_Запит, paramQuery, out columnsName, out listRow);
 
@@ -133,6 +141,7 @@ namespace StorageAndTrade
 
                             visibleColumn = РухДокументівПоРегістрах.РозрахункиЗПостачальниками_ВидиміКолонки();
                             dataColumn = РухДокументівПоРегістрах.РозрахункиЗПостачальниками_КолонкиДаних();
+                            textAlignColumn = РухДокументівПоРегістрах.РозрахункиЗПостачальниками_ПозиціяТекстуВКолонці();
 
                             Config.Kernel.DataBase.SelectRequest(РухДокументівПоРегістрах.РозрахункиЗПостачальниками_Запит, paramQuery, out columnsName, out listRow);
 
@@ -145,6 +154,7 @@ namespace StorageAndTrade
 
                             visibleColumn = РухДокументівПоРегістрах.ТовариДоПоступлення_ВидиміКолонки();
                             dataColumn = РухДокументівПоРегістрах.ТовариДоПоступлення_КолонкиДаних();
+                            textAlignColumn = РухДокументівПоРегістрах.ТовариДоПоступлення_ПозиціяТекстуВКолонці();
 
                             Config.Kernel.DataBase.SelectRequest(РухДокументівПоРегістрах.ТовариДоПоступлення_Запит, paramQuery, out columnsName, out listRow);
 
@@ -157,6 +167,7 @@ namespace StorageAndTrade
 
                             visibleColumn = РухДокументівПоРегістрах.РухКоштів_ВидиміКолонки();
                             dataColumn = РухДокументівПоРегістрах.РухКоштів_КолонкиДаних();
+                            textAlignColumn = РухДокументівПоРегістрах.РухКоштів_ПозиціяТекстуВКолонці();
 
                             Config.Kernel.DataBase.SelectRequest(РухДокументівПоРегістрах.РухКоштів_Запит, paramQuery, out columnsName, out listRow);
 
@@ -177,7 +188,7 @@ namespace StorageAndTrade
                     TreeView treeView = new TreeView(listStore);
                     treeView.ButtonPressEvent += ФункціїДляЗвітів.OpenPageDirectoryOrDocument;
 
-                    ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, visibleColumn, dataColumn);
+                    ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, visibleColumn, dataColumn, textAlignColumn);
                     ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, columnsName, listRow);
 
                     WriteBlock(blockCaption, treeView);

@@ -15,8 +15,8 @@ namespace StorageAndTrade
 
         #region Filters
 
-        DateTimeControl ДатаПочатокПеріоду = new DateTimeControl() { Value = DateTime.Parse($"01.{DateTime.Now.Month}.{DateTime.Now.Year}") };
-        DateTimeControl ДатаКінецьПеріоду = new DateTimeControl() { Value = DateTime.Now };
+        DateTimeControl ДатаПочатокПеріоду = new DateTimeControl() { OnlyDate = true, Value = DateTime.Parse($"01.{DateTime.Now.Month}.{DateTime.Now.Year}") };
+        DateTimeControl ДатаКінецьПеріоду = new DateTimeControl() { OnlyDate = true, Value = DateTime.Now };
 
         Організації_PointerControl Організація = new Організації_PointerControl();
         Каси_PointerControl Каса = new Каси_PointerControl();
