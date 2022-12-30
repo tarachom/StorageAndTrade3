@@ -182,7 +182,7 @@ namespace StorageAndTrade
                         НомерРядка = record.НомерРядка,
                         Каса = record.Каса,
                         КасаНазва = join[record.UID.ToString()]["kasa_name"],
-                        Сума = Math.Round(record.Сума, 2)
+                        Сума = record.Сума
                     };
 
                     Записи.Add(запис);
@@ -223,19 +223,45 @@ namespace StorageAndTrade
             TreeViewGrid.AppendColumn(new TreeViewColumn("№", new CellRendererText(), "text", (int)Columns.НомерРядка) { MinWidth = 30 });
 
             //КасаНазва
-            TreeViewColumn КасаНазва = new TreeViewColumn("Каса", new CellRendererText(), "text", (int)Columns.КасаНазва) { MinWidth = 300 };
-            КасаНазва.Data.Add("Column", Columns.КасаНазва);
+            {
+                TreeViewColumn КасаНазва = new TreeViewColumn("Каса", new CellRendererText(), "text", (int)Columns.КасаНазва) { MinWidth = 300 };
+                КасаНазва.Data.Add("Column", Columns.КасаНазва);
 
-            TreeViewGrid.AppendColumn(КасаНазва);
+                TreeViewGrid.AppendColumn(КасаНазва);
+            }
 
             //Сума
-            CellRendererText Сума = new CellRendererText() { Editable = true };
-            Сума.Edited += TextChanged;
-            Сума.Data.Add("Column", (int)Columns.Сума);
+            {
+                CellRendererText Сума = new CellRendererText() { Editable = true };
+                Сума.Edited += TextChanged;
+                Сума.Data.Add("Column", (int)Columns.Сума);
 
-            TreeViewGrid.AppendColumn(new TreeViewColumn("Сума", Сума, "text", (int)Columns.Сума) { MinWidth = 100 });
+                TreeViewColumn Column = new TreeViewColumn("Сума", Сума, "text", (int)Columns.Сума) { MinWidth = 100 };
+                Column.SetCellDataFunc(Сума, new TreeCellDataFunc(NumericCellDataFunc));
+                TreeViewGrid.AppendColumn(Column);
+            }
         }
 
+        void NumericCellDataFunc(TreeViewColumn column, CellRenderer cell, ITreeModel model, TreeIter iter)
+        {
+            CellRendererText cellText = (CellRendererText)cell;
+            if (cellText.Data.Contains("Column"))
+            {
+                int rowNumber = int.Parse(Store.GetPath(iter).ToString());
+                Запис запис = Записи[rowNumber];
+
+                cellText.Foreground = "green";
+
+                switch ((Columns)cellText.Data["Column"]!)
+                {
+                    case Columns.Сума:
+                        {
+                            cellText.Text = запис.Сума.ToString();
+                            break;
+                        }
+                }
+            }
+        }
 
         void TextChanged(object sender, EditedArgs args)
         {
@@ -255,7 +281,10 @@ namespace StorageAndTrade
                 {
                     case Columns.Сума:
                         {
-                            запис.Сума = decimal.Parse(args.NewText);
+                            var (check, value) = Validate.IsDecimal(args.NewText);
+                            if (check)
+                                запис.Сума = value;
+
                             break;
                         }
                 }

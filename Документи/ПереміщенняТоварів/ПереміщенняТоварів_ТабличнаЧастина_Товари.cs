@@ -382,44 +382,86 @@ namespace StorageAndTrade
             TreeViewGrid.AppendColumn(new TreeViewColumn("№", new CellRendererText(), "text", (int)Columns.НомерРядка) { MinWidth = 30 });
 
             //НоменклатураНазва
-            TreeViewColumn НоменклатураНазва = new TreeViewColumn("Номенклатура", new CellRendererText(), "text", (int)Columns.НоменклатураНазва) { MinWidth = 300 };
-            НоменклатураНазва.Data.Add("Column", Columns.НоменклатураНазва);
+            {
+                TreeViewColumn НоменклатураНазва = new TreeViewColumn("Номенклатура", new CellRendererText(), "text", (int)Columns.НоменклатураНазва) { MinWidth = 300 };
+                НоменклатураНазва.Data.Add("Column", Columns.НоменклатураНазва);
 
-            TreeViewGrid.AppendColumn(НоменклатураНазва);
+                TreeViewGrid.AppendColumn(НоменклатураНазва);
+            }
 
             //ХарактеристикаНазва
-            TreeViewColumn ХарактеристикаНазва = new TreeViewColumn("Характеристика", new CellRendererText(), "text", (int)Columns.ХарактеристикаНазва) { MinWidth = 300 };
-            ХарактеристикаНазва.Visible = Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const;
-            ХарактеристикаНазва.Data.Add("Column", Columns.ХарактеристикаНазва);
+            {
+                TreeViewColumn ХарактеристикаНазва = new TreeViewColumn("Характеристика", new CellRendererText(), "text", (int)Columns.ХарактеристикаНазва) { MinWidth = 300 };
+                ХарактеристикаНазва.Visible = Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const;
+                ХарактеристикаНазва.Data.Add("Column", Columns.ХарактеристикаНазва);
 
-            TreeViewGrid.AppendColumn(ХарактеристикаНазва);
+                TreeViewGrid.AppendColumn(ХарактеристикаНазва);
+            }
 
             //СеріяНазва
-            TreeViewColumn СеріяНазва = new TreeViewColumn("Серія", new CellRendererText(), "text", (int)Columns.СеріяНазва) { MinWidth = 300 };
-            СеріяНазва.Visible = Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const;
-            СеріяНазва.Data.Add("Column", Columns.СеріяНазва);
+            {
+                TreeViewColumn СеріяНазва = new TreeViewColumn("Серія", new CellRendererText(), "text", (int)Columns.СеріяНазва) { MinWidth = 300 };
+                СеріяНазва.Visible = Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const;
+                СеріяНазва.Data.Add("Column", Columns.СеріяНазва);
 
-            TreeViewGrid.AppendColumn(СеріяНазва);
+                TreeViewGrid.AppendColumn(СеріяНазва);
+            }
 
             //КількістьУпаковок
-            CellRendererText КількістьУпаковок = new CellRendererText() { Editable = true };
-            КількістьУпаковок.Edited += TextChanged;
-            КількістьУпаковок.Data.Add("Column", (int)Columns.КількістьУпаковок);
+            {
+                CellRendererText КількістьУпаковок = new CellRendererText() { Editable = true };
+                КількістьУпаковок.Edited += TextChanged;
+                КількістьУпаковок.Data.Add("Column", (int)Columns.КількістьУпаковок);
 
-            TreeViewGrid.AppendColumn(new TreeViewColumn("Пак", КількістьУпаковок, "text", (int)Columns.КількістьУпаковок) { MinWidth = 50 });
+                TreeViewColumn Column = new TreeViewColumn("Пак", КількістьУпаковок, "text", (int)Columns.КількістьУпаковок) { MinWidth = 50 };
+                Column.SetCellDataFunc(КількістьУпаковок, new TreeCellDataFunc(NumericCellDataFunc));
+                TreeViewGrid.AppendColumn(Column);
+            }
 
             //ПакуванняНазва
-            TreeViewColumn ПакуванняНазва = new TreeViewColumn("Пакування", new CellRendererText(), "text", (int)Columns.ПакуванняНазва) { MinWidth = 100 };
-            ПакуванняНазва.Data.Add("Column", Columns.ПакуванняНазва);
+            {
+                TreeViewColumn ПакуванняНазва = new TreeViewColumn("Пакування", new CellRendererText(), "text", (int)Columns.ПакуванняНазва) { MinWidth = 100 };
+                ПакуванняНазва.Data.Add("Column", Columns.ПакуванняНазва);
 
-            TreeViewGrid.AppendColumn(ПакуванняНазва);
+                TreeViewGrid.AppendColumn(ПакуванняНазва);
+            }
 
             //Кількість
-            CellRendererText Кількість = new CellRendererText() { Editable = true };
-            Кількість.Edited += TextChanged;
-            Кількість.Data.Add("Column", (int)Columns.Кількість);
+            {
+                CellRendererText Кількість = new CellRendererText() { Editable = true };
+                Кількість.Edited += TextChanged;
+                Кількість.Data.Add("Column", (int)Columns.Кількість);
 
-            TreeViewGrid.AppendColumn(new TreeViewColumn("Кількість", Кількість, "text", (int)Columns.Кількість) { MinWidth = 100 });
+                TreeViewColumn Column = new TreeViewColumn("Кількість", Кількість, "text", (int)Columns.Кількість) { MinWidth = 100 };
+                Column.SetCellDataFunc(Кількість, new TreeCellDataFunc(NumericCellDataFunc));
+                TreeViewGrid.AppendColumn(Column);
+            }
+        }
+
+        void NumericCellDataFunc(TreeViewColumn column, CellRenderer cell, ITreeModel model, TreeIter iter)
+        {
+            CellRendererText cellText = (CellRendererText)cell;
+            if (cellText.Data.Contains("Column"))
+            {
+                int rowNumber = int.Parse(Store.GetPath(iter).ToString());
+                Запис запис = Записи[rowNumber];
+
+                cellText.Foreground = "green";
+
+                switch ((Columns)cellText.Data["Column"]!)
+                {
+                    case Columns.КількістьУпаковок:
+                        {
+                            cellText.Text = запис.КількістьУпаковок.ToString();
+                            break;
+                        }
+                    case Columns.Кількість:
+                        {
+                            cellText.Text = запис.Кількість.ToString();
+                            break;
+                        }
+                }
+            }
         }
 
         void TextChanged(object sender, EditedArgs args)
@@ -440,12 +482,18 @@ namespace StorageAndTrade
                 {
                     case Columns.КількістьУпаковок:
                         {
-                            запис.КількістьУпаковок = int.Parse(args.NewText);
+                            var (check, value) = Validate.IsInt(args.NewText);
+                            if (check)
+                                запис.КількістьУпаковок = value;
+
                             break;
                         }
                     case Columns.Кількість:
                         {
-                            запис.Кількість = decimal.Parse(args.NewText);
+                            var (check, value) = Validate.IsDecimal(args.NewText);
+                            if (check)
+                                запис.Кількість = value;
+
                             break;
                         }
                 }

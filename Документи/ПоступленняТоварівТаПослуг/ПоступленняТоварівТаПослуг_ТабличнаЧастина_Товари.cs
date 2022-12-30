@@ -407,9 +407,9 @@ namespace StorageAndTrade
                         Пакування = record.Пакування,
                         ПакуванняНазва = join[record.UID.ToString()]["pak_name"],
                         Кількість = record.Кількість,
-                        Ціна = Math.Round(record.Ціна, 2),
-                        Сума = Math.Round(record.Сума, 2),
-                        Скидка = Math.Round(record.Скидка, 2),
+                        Ціна = record.Ціна,
+                        Сума = record.Сума,
+                        Скидка = record.Скидка,
                         ЗамовленняПостачальнику = record.ЗамовленняПостачальнику,
                         ЗамовленняПостачальникуНазва = join[record.UID.ToString()]["sam_name"],
                         Склад = record.Склад,
@@ -473,84 +473,103 @@ namespace StorageAndTrade
             TreeViewGrid.AppendColumn(new TreeViewColumn("№", new CellRendererText(), "text", (int)Columns.НомерРядка) { MinWidth = 30 });
 
             //НоменклатураНазва
-            TreeViewColumn НоменклатураНазва = new TreeViewColumn("Номенклатура", new CellRendererText(), "text", (int)Columns.НоменклатураНазва) { MinWidth = 300 };
-            НоменклатураНазва.Data.Add("Column", Columns.НоменклатураНазва);
+            {
+                TreeViewColumn НоменклатураНазва = new TreeViewColumn("Номенклатура", new CellRendererText(), "text", (int)Columns.НоменклатураНазва) { MinWidth = 300 };
+                НоменклатураНазва.Data.Add("Column", Columns.НоменклатураНазва);
 
-            TreeViewGrid.AppendColumn(НоменклатураНазва);
+                TreeViewGrid.AppendColumn(НоменклатураНазва);
+            }
 
             //ХарактеристикаНазва
-            TreeViewColumn ХарактеристикаНазва = new TreeViewColumn("Характеристика", new CellRendererText(), "text", (int)Columns.ХарактеристикаНазва) { MinWidth = 300 };
-            ХарактеристикаНазва.Visible = Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const;
-            ХарактеристикаНазва.Data.Add("Column", Columns.ХарактеристикаНазва);
+            {
+                TreeViewColumn ХарактеристикаНазва = new TreeViewColumn("Характеристика", new CellRendererText(), "text", (int)Columns.ХарактеристикаНазва) { MinWidth = 300 };
+                ХарактеристикаНазва.Visible = Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const;
+                ХарактеристикаНазва.Data.Add("Column", Columns.ХарактеристикаНазва);
 
-            TreeViewGrid.AppendColumn(ХарактеристикаНазва);
+                TreeViewGrid.AppendColumn(ХарактеристикаНазва);
+            }
 
             //СеріяНазва
-            TreeViewColumn СеріяНазва = new TreeViewColumn("Серія", new CellRendererText(), "text", (int)Columns.СеріяНазва) { MinWidth = 300 };
-            СеріяНазва.Visible = Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const;
-            СеріяНазва.Data.Add("Column", Columns.СеріяНазва);
+            {
+                TreeViewColumn СеріяНазва = new TreeViewColumn("Серія", new CellRendererText(), "text", (int)Columns.СеріяНазва) { MinWidth = 300 };
+                СеріяНазва.Visible = Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const;
+                СеріяНазва.Data.Add("Column", Columns.СеріяНазва);
 
-            TreeViewGrid.AppendColumn(СеріяНазва);
+                TreeViewGrid.AppendColumn(СеріяНазва);
+            }
 
             //КількістьУпаковок
-            CellRendererText КількістьУпаковок = new CellRendererText() { Editable = true };
-            КількістьУпаковок.Edited += TextChanged;
-            КількістьУпаковок.Data.Add("Column", (int)Columns.КількістьУпаковок);
+            {
+                CellRendererText КількістьУпаковок = new CellRendererText() { Editable = true };
+                КількістьУпаковок.Edited += TextChanged;
+                КількістьУпаковок.Data.Add("Column", (int)Columns.КількістьУпаковок);
 
-            TreeViewColumn Column_КількістьУпаковок = new TreeViewColumn("Пак", КількістьУпаковок, "text", (int)Columns.КількістьУпаковок) { MinWidth = 50 };
-            TreeViewGrid.AppendColumn(Column_КількістьУпаковок);
-            Column_КількістьУпаковок.SetCellDataFunc(КількістьУпаковок, new TreeCellDataFunc(RoundCellDataFunc));
+                TreeViewColumn Column = new TreeViewColumn("Пак", КількістьУпаковок, "text", (int)Columns.КількістьУпаковок) { MinWidth = 50 };
+                Column.SetCellDataFunc(КількістьУпаковок, new TreeCellDataFunc(NumericCellDataFunc));
+                TreeViewGrid.AppendColumn(Column);
+            }
 
             //ПакуванняНазва
-            TreeViewColumn ПакуванняНазва = new TreeViewColumn("Пакування", new CellRendererText(), "text", (int)Columns.ПакуванняНазва) { MinWidth = 100 };
-            ПакуванняНазва.Data.Add("Column", Columns.ПакуванняНазва);
+            {
+                TreeViewColumn ПакуванняНазва = new TreeViewColumn("Пакування", new CellRendererText(), "text", (int)Columns.ПакуванняНазва) { MinWidth = 100 };
+                ПакуванняНазва.Data.Add("Column", Columns.ПакуванняНазва);
 
-            TreeViewGrid.AppendColumn(ПакуванняНазва);
+                TreeViewGrid.AppendColumn(ПакуванняНазва);
+            }
 
             //Кількість
-            CellRendererText Кількість = new CellRendererText() { Editable = true };
-            Кількість.Edited += TextChanged;
-            Кількість.Data.Add("Column", (int)Columns.Кількість);
+            {
+                CellRendererText Кількість = new CellRendererText() { Editable = true };
+                Кількість.Edited += TextChanged;
+                Кількість.Data.Add("Column", (int)Columns.Кількість);
 
-            TreeViewColumn Column_Кількість = new TreeViewColumn("Кількість", Кількість, "text", (int)Columns.Кількість) { MinWidth = 100 };
-            TreeViewGrid.AppendColumn(Column_Кількість);
-            Column_Кількість.SetCellDataFunc(Кількість, new TreeCellDataFunc(RoundCellDataFunc));
+                TreeViewColumn Column = new TreeViewColumn("Кількість", Кількість, "text", (int)Columns.Кількість) { MinWidth = 100 };
+                Column.SetCellDataFunc(Кількість, new TreeCellDataFunc(NumericCellDataFunc));
+                TreeViewGrid.AppendColumn(Column);
+            }
 
             //Ціна
-            CellRendererText Ціна = new CellRendererText() { Editable = true };
-            Ціна.Edited += TextChanged;
-            Ціна.Data.Add("Column", (int)Columns.Ціна);
+            {
+                CellRendererText Ціна = new CellRendererText() { Editable = true };
+                Ціна.Edited += TextChanged;
+                Ціна.Data.Add("Column", (int)Columns.Ціна);
 
-            TreeViewColumn Column_Ціна = new TreeViewColumn("Ціна", Ціна, "text", (int)Columns.Ціна) { MinWidth = 100 };
-            TreeViewGrid.AppendColumn(Column_Ціна);
-            Column_Ціна.SetCellDataFunc(Ціна, new TreeCellDataFunc(RoundCellDataFunc));
+                TreeViewColumn Column = new TreeViewColumn("Ціна", Ціна, "text", (int)Columns.Ціна) { MinWidth = 100 };
+                Column.SetCellDataFunc(Ціна, new TreeCellDataFunc(NumericCellDataFunc));
+                TreeViewGrid.AppendColumn(Column);
+            }
 
             //Сума
-            CellRendererText Сума = new CellRendererText() { Editable = true };
-            Сума.Edited += TextChanged;
-            Сума.Data.Add("Column", (int)Columns.Сума);
+            {
+                CellRendererText Сума = new CellRendererText() { Editable = true };
+                Сума.Edited += TextChanged;
+                Сума.Data.Add("Column", (int)Columns.Сума);
 
-            TreeViewColumn Column_Сума = new TreeViewColumn("Сума", Сума, "text", (int)Columns.Сума) { MinWidth = 100 };
-            TreeViewGrid.AppendColumn(Column_Сума);
-            Column_Сума.SetCellDataFunc(Сума, new TreeCellDataFunc(RoundCellDataFunc));
+                TreeViewColumn Column = new TreeViewColumn("Сума", Сума, "text", (int)Columns.Сума) { MinWidth = 100 };
+                Column.SetCellDataFunc(Сума, new TreeCellDataFunc(NumericCellDataFunc));
+                TreeViewGrid.AppendColumn(Column);
+            }
 
             //Скидка
-            CellRendererText Скидка = new CellRendererText() { Editable = true };
-            Скидка.Edited += TextChanged;
-            Скидка.Data.Add("Column", (int)Columns.Скидка);
+            {
+                CellRendererText Скидка = new CellRendererText() { Editable = true };
+                Скидка.Edited += TextChanged;
+                Скидка.Data.Add("Column", (int)Columns.Скидка);
 
-            TreeViewColumn Column_Скидка = new TreeViewColumn("Скидка", Скидка, "text", (int)Columns.Скидка) { MinWidth = 100 };
-            TreeViewGrid.AppendColumn(Column_Скидка);
-            Column_Скидка.SetCellDataFunc(Скидка, new TreeCellDataFunc(RoundCellDataFunc));
+                TreeViewColumn Column = new TreeViewColumn("Скидка", Скидка, "text", (int)Columns.Скидка) { MinWidth = 100 };
+                Column.SetCellDataFunc(Скидка, new TreeCellDataFunc(NumericCellDataFunc));
+                TreeViewGrid.AppendColumn(Column);
+            }
 
             //СкладНазва
-            TreeViewColumn СкладНазва = new TreeViewColumn("Склад", new CellRendererText(), "text", (int)Columns.СкладНазва) { MinWidth = 300 };
-            СкладНазва.Data.Add("Column", Columns.СкладНазва);
-
-            TreeViewGrid.AppendColumn(СкладНазва);
+            {
+                TreeViewColumn СкладНазва = new TreeViewColumn("Склад", new CellRendererText(), "text", (int)Columns.СкладНазва) { MinWidth = 300 };
+                СкладНазва.Data.Add("Column", Columns.СкладНазва);
+                TreeViewGrid.AppendColumn(СкладНазва);
+            }
         }
 
-        void RoundCellDataFunc(TreeViewColumn column, CellRenderer cell, ITreeModel model, TreeIter iter)
+        void NumericCellDataFunc(TreeViewColumn column, CellRenderer cell, ITreeModel model, TreeIter iter)
         {
             CellRendererText cellText = (CellRendererText)cell;
             if (cellText.Data.Contains("Column"))

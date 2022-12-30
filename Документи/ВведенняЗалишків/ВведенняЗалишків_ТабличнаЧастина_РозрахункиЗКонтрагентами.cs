@@ -220,7 +220,7 @@ namespace StorageAndTrade
                         КонтрагентНазва = join[record.UID.ToString()]["kontragent_name"],
                         Валюта = record.Валюта,
                         ВалютаНазва = join[record.UID.ToString()]["valuta_name"],
-                        Сума = Math.Round(record.Сума, 2)
+                        Сума = record.Сума
                     };
 
                     Записи.Add(запис);
@@ -262,25 +262,53 @@ namespace StorageAndTrade
             TreeViewGrid.AppendColumn(new TreeViewColumn("№", new CellRendererText(), "text", (int)Columns.НомерРядка) { MinWidth = 30 });
 
             //КонтрагентНазва
-            TreeViewColumn КонтрагентНазва = new TreeViewColumn("Контрагент", new CellRendererText(), "text", (int)Columns.КонтрагентНазва) { MinWidth = 300 };
-            КонтрагентНазва.Data.Add("Column", Columns.КонтрагентНазва);
+            {
+                TreeViewColumn КонтрагентНазва = new TreeViewColumn("Контрагент", new CellRendererText(), "text", (int)Columns.КонтрагентНазва) { MinWidth = 300 };
+                КонтрагентНазва.Data.Add("Column", Columns.КонтрагентНазва);
 
-            TreeViewGrid.AppendColumn(КонтрагентНазва);
+                TreeViewGrid.AppendColumn(КонтрагентНазва);
+            }
 
             //ВалютаНазва
-            TreeViewColumn ВалютаНазва = new TreeViewColumn("Валюта", new CellRendererText(), "text", (int)Columns.ВалютаНазва) { MinWidth = 300 };
-            ВалютаНазва.Data.Add("Column", Columns.ВалютаНазва);
+            {
+                TreeViewColumn ВалютаНазва = new TreeViewColumn("Валюта", new CellRendererText(), "text", (int)Columns.ВалютаНазва) { MinWidth = 300 };
+                ВалютаНазва.Data.Add("Column", Columns.ВалютаНазва);
 
-            TreeViewGrid.AppendColumn(ВалютаНазва);
+                TreeViewGrid.AppendColumn(ВалютаНазва);
+            }
 
             //Сума
-            CellRendererText Сума = new CellRendererText() { Editable = true };
-            Сума.Edited += TextChanged;
-            Сума.Data.Add("Column", (int)Columns.Сума);
+            {
+                CellRendererText Сума = new CellRendererText() { Editable = true };
+                Сума.Edited += TextChanged;
+                Сума.Data.Add("Column", (int)Columns.Сума);
 
-            TreeViewGrid.AppendColumn(new TreeViewColumn("Сума", Сума, "text", (int)Columns.Сума) { MinWidth = 100 });
+                TreeViewColumn Column = new TreeViewColumn("Сума", Сума, "text", (int)Columns.Сума) { MinWidth = 100 };
+                Column.SetCellDataFunc(Сума, new TreeCellDataFunc(NumericCellDataFunc));
+                TreeViewGrid.AppendColumn(Column);
+            }
         }
 
+        void NumericCellDataFunc(TreeViewColumn column, CellRenderer cell, ITreeModel model, TreeIter iter)
+        {
+            CellRendererText cellText = (CellRendererText)cell;
+            if (cellText.Data.Contains("Column"))
+            {
+                int rowNumber = int.Parse(Store.GetPath(iter).ToString());
+                Запис запис = Записи[rowNumber];
+
+                cellText.Foreground = "green";
+
+                switch ((Columns)cellText.Data["Column"]!)
+                {
+                    case Columns.Сума:
+                        {
+                            cellText.Text = запис.Сума.ToString();
+                            break;
+                        }
+                }
+            }
+        }
 
         void TextChanged(object sender, EditedArgs args)
         {
@@ -300,7 +328,10 @@ namespace StorageAndTrade
                 {
                     case Columns.Сума:
                         {
-                            запис.Сума = decimal.Parse(args.NewText);
+                            var (check, value) = Validate.IsDecimal(args.NewText);
+                            if (check)
+                                запис.Сума = value;
+
                             break;
                         }
                 }
