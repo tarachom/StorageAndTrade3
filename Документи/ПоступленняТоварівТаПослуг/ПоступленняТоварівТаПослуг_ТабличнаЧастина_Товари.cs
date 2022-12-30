@@ -567,6 +567,9 @@ namespace StorageAndTrade
                 СкладНазва.Data.Add("Column", Columns.СкладНазва);
                 TreeViewGrid.AppendColumn(СкладНазва);
             }
+
+            //Колонка пустишка для заповнення вільного простору
+            TreeViewGrid.AppendColumn(new TreeViewColumn());
         }
 
         void NumericCellDataFunc(TreeViewColumn column, CellRenderer cell, ITreeModel model, TreeIter iter)
