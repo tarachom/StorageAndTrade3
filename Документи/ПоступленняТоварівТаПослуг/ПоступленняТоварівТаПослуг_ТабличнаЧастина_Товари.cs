@@ -497,7 +497,9 @@ namespace StorageAndTrade
             КількістьУпаковок.Edited += TextChanged;
             КількістьУпаковок.Data.Add("Column", (int)Columns.КількістьУпаковок);
 
-            TreeViewGrid.AppendColumn(new TreeViewColumn("Пак", КількістьУпаковок, "text", (int)Columns.КількістьУпаковок) { MinWidth = 50 });
+            TreeViewColumn Column_КількістьУпаковок = new TreeViewColumn("Пак", КількістьУпаковок, "text", (int)Columns.КількістьУпаковок) { MinWidth = 50 };
+            TreeViewGrid.AppendColumn(Column_КількістьУпаковок);
+            Column_КількістьУпаковок.SetCellDataFunc(КількістьУпаковок, new TreeCellDataFunc(RoundCellDataFunc));
 
             //ПакуванняНазва
             TreeViewColumn ПакуванняНазва = new TreeViewColumn("Пакування", new CellRendererText(), "text", (int)Columns.ПакуванняНазва) { MinWidth = 100 };
@@ -510,7 +512,9 @@ namespace StorageAndTrade
             Кількість.Edited += TextChanged;
             Кількість.Data.Add("Column", (int)Columns.Кількість);
 
-            TreeViewGrid.AppendColumn(new TreeViewColumn("Кількість", Кількість, "text", (int)Columns.Кількість) { MinWidth = 100 });
+            TreeViewColumn Column_Кількість = new TreeViewColumn("Кількість", Кількість, "text", (int)Columns.Кількість) { MinWidth = 100 };
+            TreeViewGrid.AppendColumn(Column_Кількість);
+            Column_Кількість.SetCellDataFunc(Кількість, new TreeCellDataFunc(RoundCellDataFunc));
 
             //Ціна
             CellRendererText Ціна = new CellRendererText() { Editable = true };
@@ -518,24 +522,26 @@ namespace StorageAndTrade
             Ціна.Data.Add("Column", (int)Columns.Ціна);
 
             TreeViewColumn Column_Ціна = new TreeViewColumn("Ціна", Ціна, "text", (int)Columns.Ціна) { MinWidth = 100 };
-            //Column_Ціна.SetCellDataFunc(Ціна, new TreeCellDataFunc(RenderArtistName));
-            //Column_Ціна.SetCellDataFunc(Ціна, new CellLayoutDataFunc(RenderArtistName2));
-
             TreeViewGrid.AppendColumn(Column_Ціна);
+            Column_Ціна.SetCellDataFunc(Ціна, new TreeCellDataFunc(RoundCellDataFunc));
 
             //Сума
             CellRendererText Сума = new CellRendererText() { Editable = true };
             Сума.Edited += TextChanged;
             Сума.Data.Add("Column", (int)Columns.Сума);
 
-            TreeViewGrid.AppendColumn(new TreeViewColumn("Сума", Сума, "text", (int)Columns.Сума) { MinWidth = 100 });
+            TreeViewColumn Column_Сума = new TreeViewColumn("Сума", Сума, "text", (int)Columns.Сума) { MinWidth = 100 };
+            TreeViewGrid.AppendColumn(Column_Сума);
+            Column_Сума.SetCellDataFunc(Сума, new TreeCellDataFunc(RoundCellDataFunc));
 
             //Скидка
             CellRendererText Скидка = new CellRendererText() { Editable = true };
             Скидка.Edited += TextChanged;
             Скидка.Data.Add("Column", (int)Columns.Скидка);
 
-            TreeViewGrid.AppendColumn(new TreeViewColumn("Скидка", Скидка, "text", (int)Columns.Скидка) { MinWidth = 100 });
+            TreeViewColumn Column_Скидка = new TreeViewColumn("Скидка", Скидка, "text", (int)Columns.Скидка) { MinWidth = 100 };
+            TreeViewGrid.AppendColumn(Column_Скидка);
+            Column_Скидка.SetCellDataFunc(Скидка, new TreeCellDataFunc(RoundCellDataFunc));
 
             //СкладНазва
             TreeViewColumn СкладНазва = new TreeViewColumn("Склад", new CellRendererText(), "text", (int)Columns.СкладНазва) { MinWidth = 300 };
@@ -544,22 +550,46 @@ namespace StorageAndTrade
             TreeViewGrid.AppendColumn(СкладНазва);
         }
 
-        // void RenderArtistName2(ICellLayout cellLayout, CellRenderer cell, ITreeModel model, TreeIter iter)
-        // {
-        //     CellRendererText cell2 = (CellRendererText)cell;
+        void RoundCellDataFunc(TreeViewColumn column, CellRenderer cell, ITreeModel model, TreeIter iter)
+        {
+            CellRendererText cellText = (CellRendererText)cell;
+            if (cellText.Data.Contains("Column"))
+            {
+                int rowNumber = int.Parse(Store.GetPath(iter).ToString());
+                Запис запис = Записи[rowNumber];
 
-        //     cell2.Text = MathF.Round(float.Parse(cell2.Text), 2).ToString("0.00");
-        // }
+                cellText.Foreground = "green";
 
-        // void RenderArtistName(TreeViewColumn column, CellRenderer cell, ITreeModel model, TreeIter iter)
-        // {
-        //     // model.GetValue(iter, 0);
-        //     // (cell as Gtk.CellRendererText).Text = song.Artist;
-
-        //     ((Gtk.CellRendererText)cell).Foreground = "red";
-
-        //     Console.WriteLine(((Gtk.CellRendererText)cell).Text);
-        // }
+                switch ((Columns)cellText.Data["Column"]!)
+                {
+                    case Columns.КількістьУпаковок:
+                        {
+                            cellText.Text = запис.КількістьУпаковок.ToString();
+                            break;
+                        }
+                    case Columns.Кількість:
+                        {
+                            cellText.Text = запис.Кількість.ToString();
+                            break;
+                        }
+                    case Columns.Ціна:
+                        {
+                            cellText.Text = запис.Ціна.ToString();
+                            break;
+                        }
+                    case Columns.Сума:
+                        {
+                            cellText.Text = запис.Сума.ToString();
+                            break;
+                        }
+                    case Columns.Скидка:
+                        {
+                            cellText.Text = запис.Скидка.ToString();
+                            break;
+                        }
+                }
+            }
+        }
 
         void TextChanged(object sender, EditedArgs args)
         {
@@ -579,29 +609,48 @@ namespace StorageAndTrade
                 {
                     case Columns.КількістьУпаковок:
                         {
-                            запис.КількістьУпаковок = int.Parse(args.NewText);
+                            var (check, value) = Validate.IsInt(args.NewText);
+                            if (check)
+                                запис.КількістьУпаковок = value;
+
                             break;
                         }
                     case Columns.Кількість:
                         {
-                            запис.Кількість = decimal.Parse(args.NewText);
-                            Запис.ПісляЗміни_КількістьАбоЦіна(запис);
+                            var (check, value) = Validate.IsDecimal(args.NewText);
+                            if (check)
+                            {
+                                запис.Кількість = value;
+                                Запис.ПісляЗміни_КількістьАбоЦіна(запис);
+                            }
+
                             break;
                         }
                     case Columns.Ціна:
                         {
-                            запис.Ціна = decimal.Parse(args.NewText);
-                            Запис.ПісляЗміни_КількістьАбоЦіна(запис);
+                            var (check, value) = Validate.IsDecimal(args.NewText);
+                            if (check)
+                            {
+                                запис.Ціна = value;
+                                Запис.ПісляЗміни_КількістьАбоЦіна(запис);
+                            }
+
                             break;
                         }
                     case Columns.Сума:
                         {
-                            запис.Сума = decimal.Parse(args.NewText);
+                            var (check, value) = Validate.IsDecimal(args.NewText);
+                            if (check)
+                                запис.Сума = value;
+
                             break;
                         }
                     case Columns.Скидка:
                         {
-                            запис.Скидка = decimal.Parse(args.NewText);
+                            var (check, value) = Validate.IsDecimal(args.NewText);
+                            if (check)
+                                запис.Скидка = value;
+
                             break;
                         }
                 }
