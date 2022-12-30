@@ -32,7 +32,7 @@ namespace StorageAndTrade
         СтруктураПідприємства_PointerControl Підрозділ = new СтруктураПідприємства_PointerControl() { Caption = "Підрозділ" };
         Користувачі_PointerControl Автор = new Користувачі_PointerControl();
         Користувачі_PointerControl Менеджер = new Користувачі_PointerControl() { Caption = "Менеджер" };
-        Entry Коментар = new Entry() { WidthRequest = 900 };
+        Entry Коментар = new Entry() { WidthRequest = 920 };
 
         АктВиконанихРобіт_ТабличнаЧастина_Послуги Послуги = new АктВиконанихРобіт_ТабличнаЧастина_Послуги();
 
@@ -81,7 +81,7 @@ namespace StorageAndTrade
             CreatePack1(hPaned);
             CreatePack2(hPaned);
 
-            PackStart(hPaned, true, true, 5);
+            PackStart(hPaned, true, true, 0);
 
             ShowAll();
         }
@@ -121,13 +121,6 @@ namespace StorageAndTrade
             hBoxNumberDataDoc.PackStart(new Label("від:"), false, false, 5);
             hBoxNumberDataDoc.PackStart(ДатаДок, false, false, 5);
 
-            //Коментар
-            HBox hBoxComment = new HBox() { Halign = Align.Start };
-            vBox.PackStart(hBoxComment, false, false, 5);
-
-            hBoxComment.PackStart(new Label("Коментар: "), false, false, 5);
-            hBoxComment.PackStart(Коментар, false, false, 5);
-
             //Два блоки для полів -->
             HBox hBoxContainer = new HBox();
 
@@ -148,6 +141,13 @@ namespace StorageAndTrade
 
             CreateContainer2(vBoxContainer2);
             // <--
+
+            //Коментар
+            HBox hBoxComment = new HBox() { Halign = Align.Start };
+            vBox.PackStart(hBoxComment, false, false, 5);
+
+            hBoxComment.PackStart(new Label("Коментар: "), false, false, 5);
+            hBoxComment.PackStart(Коментар, false, false, 5);
         }
 
         void CreateContainer1(VBox vBox)

@@ -25,7 +25,7 @@ namespace StorageAndTrade
         Організації_PointerControl Організація = new Організації_PointerControl();
         Валюти_PointerControl Валюта = new Валюти_PointerControl();
         Каси_PointerControl Каса = new Каси_PointerControl();
-        Каси_PointerControl КасаВідправник = new Каси_PointerControl();
+        Каси_PointerControl КасаВідправник = new Каси_PointerControl(){Caption = "Каса відправник:"};
         NumericControl Курс = new NumericControl();
         NumericControl СумаДокументу = new NumericControl();
         Контрагенти_PointerControl Контрагент = new Контрагенти_PointerControl();
@@ -34,7 +34,7 @@ namespace StorageAndTrade
         БанківськіРахункиОрганізацій_PointerControl БанківськийРахунок = new БанківськіРахункиОрганізацій_PointerControl() { WidthPresentation = 200 };
         Користувачі_PointerControl Автор = new Користувачі_PointerControl();
         СтаттяРухуКоштів_PointerControl СтаттяРухуКоштів = new СтаттяРухуКоштів_PointerControl();
-        Entry Коментар = new Entry() { WidthRequest = 900 };
+        Entry Коментар = new Entry() { WidthRequest = 920 };
 
         #endregion
 
@@ -81,7 +81,7 @@ namespace StorageAndTrade
             CreatePack1(hPaned);
             CreatePack2(hPaned);
 
-            PackStart(hPaned, true, true, 5);
+            PackStart(hPaned, true, true, 0);
 
             ShowAll();
         }
@@ -131,13 +131,6 @@ namespace StorageAndTrade
             hBoxNumberDataDoc.PackStart(new Label("від:"), false, false, 5);
             hBoxNumberDataDoc.PackStart(ДатаДок, false, false, 5);
 
-            //Коментар
-            HBox hBoxComment = new HBox() { Halign = Align.Start };
-            vBox.PackStart(hBoxComment, false, false, 5);
-
-            hBoxComment.PackStart(new Label("Коментар: "), false, false, 5);
-            hBoxComment.PackStart(Коментар, false, false, 5);
-
             //Два блоки для полів -->
             HBox hBoxContainer = new HBox();
 
@@ -158,6 +151,13 @@ namespace StorageAndTrade
 
             CreateContainer2(vBoxContainer2);
             // <--
+
+            //Коментар
+            HBox hBoxComment = new HBox() { Halign = Align.Start };
+            vBox.PackStart(hBoxComment, false, false, 5);
+
+            hBoxComment.PackStart(new Label("Коментар: "), false, false, 5);
+            hBoxComment.PackStart(Коментар, false, false, 5);
         }
 
         void CreateContainer1(VBox vBox)
@@ -245,12 +245,15 @@ namespace StorageAndTrade
 
             hBoxKasaVidpravnyk.PackStart(КасаВідправник, false, false, 5);
 
-            //СумаДокументу
+            //СумаДокументу & Курс
             HBox hBoxSuma = new HBox() { Halign = Align.End };
             vBox.PackStart(hBoxSuma, false, false, 5);
 
             hBoxSuma.PackStart(new Label("Сума:"), false, false, 5);
             hBoxSuma.PackStart(СумаДокументу, false, false, 5);
+
+            hBoxSuma.PackStart(new Label("Курс:"), false, false, 5);
+            hBoxSuma.PackStart(Курс, false, false, 5);
         }
 
         void CreateContainer3(VBox vBox)
@@ -268,14 +271,7 @@ namespace StorageAndTrade
             HBox hBoxBankRahunokOrganization = new HBox() { Halign = Align.End };
             vBox.PackStart(hBoxBankRahunokOrganization, false, false, 5);
 
-            hBoxBankRahunokOrganization.PackStart(БанківськийРахунок, false, false, 5);
-
-            //Курс
-            HBox hBoxKurs = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxKurs, false, false, 5);
-
-            hBoxKurs.PackStart(new Label("Курс:"), false, false, 5);
-            hBoxKurs.PackStart(Курс, false, false, 5);
+            hBoxBankRahunokOrganization.PackStart(БанківськийРахунок, false, false, 5);            
 
             //СтаттяРухуКоштів
             HBox hBoxStatjaRuhuKoshtiv = new HBox() { Halign = Align.End };
