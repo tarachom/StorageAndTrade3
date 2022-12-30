@@ -253,25 +253,11 @@ namespace StorageAndTrade
             hBoxOperation.PackStart(new Label("Господарська операція: "), false, false, 0);
             hBoxOperation.PackStart(ГосподарськаОперація, false, false, 5);
 
-            //ФормаОплати
-            HBox hBoxFormaOplaty = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxFormaOplaty, false, false, 5);
-
-            hBoxFormaOplaty.PackStart(new Label("Форма оплати: "), false, false, 0);
-            hBoxFormaOplaty.PackStart(ФормаОплати, false, false, 5);
-
             //Підрозділ
             HBox hBoxPidrozdil = new HBox() { Halign = Align.End };
             vBox.PackStart(hBoxPidrozdil, false, false, 5);
 
             hBoxPidrozdil.PackStart(Підрозділ, false, false, 5);
-
-            //ДатаВідгрузки
-            HBox hBoxDataOplaty = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxDataOplaty, false, false, 5);
-
-            hBoxDataOplaty.PackStart(new Label("Дата оплати:"), false, false, 5);
-            hBoxDataOplaty.PackStart(ДатаВідгрузки, false, false, 5);
 
             //БанківськийрахунокКонтрагента
             HBox hBoxBankRahunokKontragenta = new HBox() { Halign = Align.End };
@@ -290,6 +276,16 @@ namespace StorageAndTrade
             vBox.PackStart(hBoxMenedjer, false, false, 5);
 
             hBoxMenedjer.PackStart(Менеджер, false, false, 5);
+        }
+
+        void CreateContainer4(VBox vBox)
+        {
+            //ФормаОплати
+            HBox hBoxFormaOplaty = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxFormaOplaty, false, false, 5);
+
+            hBoxFormaOplaty.PackStart(new Label("Форма оплати: "), false, false, 0);
+            hBoxFormaOplaty.PackStart(ФормаОплати, false, false, 5);
 
             //СпосібДоставки
             HBox hBoxSposibDostavky = new HBox() { Halign = Align.End };
@@ -297,6 +293,13 @@ namespace StorageAndTrade
 
             hBoxSposibDostavky.PackStart(new Label("Спосіб доставки:"), false, false, 0);
             hBoxSposibDostavky.PackStart(СпосібДоставки, false, false, 5);
+
+            //ДатаВідгрузки
+            HBox hBoxDataOplaty = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxDataOplaty, false, false, 5);
+
+            hBoxDataOplaty.PackStart(new Label("Дата відвантаження:"), false, false, 5);
+            hBoxDataOplaty.PackStart(ДатаВідгрузки, false, false, 5);
 
             //ЧасДоставки
             HBox hBoxTchasDostavky = new HBox() { Halign = Align.End };
@@ -306,30 +309,21 @@ namespace StorageAndTrade
             hBoxTchasDostavky.PackStart(ЧасДоставкиЗ, false, false, 5);
             hBoxTchasDostavky.PackStart(new Label("до"), false, false, 5);
             hBoxTchasDostavky.PackStart(ЧасДоставкиДо, false, false, 5);
-        }
 
-        void CreateContainer4(VBox vBox)
-        {
-            //Узгоджений
-            HBox hBoxUzgodjenyi = new HBox() { Halign = Align.Start };
+            //Узгоджений & ВернутиТару
+            HBox hBoxUzgodjenyi = new HBox() { Halign = Align.End };
             vBox.PackStart(hBoxUzgodjenyi, false, false, 5);
 
             hBoxUzgodjenyi.PackStart(Узгоджений, false, false, 5);
-
-            //ВернутиТару
-            HBox hBoxVernutyTaru = new HBox() { Halign = Align.Start };
-            vBox.PackStart(hBoxVernutyTaru, false, false, 5);
-
-            hBoxVernutyTaru.PackStart(ПовернутиТару, false, false, 5);
+            hBoxUzgodjenyi.PackStart(ПовернутиТару, false, false, 5);
 
             //ДатаПоверненняТари
             HBox hBoxDataPovernenjaTary = new HBox() { Halign = Align.End };
             vBox.PackStart(hBoxDataPovernenjaTary, false, false, 5);
 
-            hBoxDataPovernenjaTary.PackStart(new Label("Дата повернення тари.:"), false, false, 5);
+            hBoxDataPovernenjaTary.PackStart(new Label("Дата повернення тари:"), false, false, 5);
             hBoxDataPovernenjaTary.PackStart(ДатаПоверненняТари, false, false, 5);
         }
-
 
         void CreatePack2(HPaned hPaned)
         {
@@ -444,7 +438,7 @@ namespace StorageAndTrade
 
         bool IsValidValue()
         {
-            if (!ДатаДок.IsValidValue() || !ДатаПоверненняТари.IsValidValue())
+            if (!ДатаДок.IsValidValue())
             {
                 Message.Error(Program.GeneralForm, "Перевірте правельність заповнення полів");
                 return false;

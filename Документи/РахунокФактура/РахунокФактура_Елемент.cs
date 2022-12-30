@@ -30,11 +30,11 @@ namespace StorageAndTrade
         ДоговориКонтрагентів_PointerControl Договір = new ДоговориКонтрагентів_PointerControl();
         ComboBoxText ГосподарськаОперація = new ComboBoxText();
         ComboBoxText ФормаОплати = new ComboBoxText();
-        СтруктураПідприємства_PointerControl Підрозділ = new СтруктураПідприємства_PointerControl() { Caption = "Підрозділ" };
+        СтруктураПідприємства_PointerControl Підрозділ = new СтруктураПідприємства_PointerControl() { Caption = "Підрозділ:" };
         БанківськіРахункиОрганізацій_PointerControl БанківськийРахунок = new БанківськіРахункиОрганізацій_PointerControl() { WidthPresentation = 200 };
-        БанківськіРахункиКонтрагентів_PointerControl БанківськийРахунокКонтрагента = new БанківськіРахункиКонтрагентів_PointerControl() { Caption = "Рахунок контрагента", WidthPresentation = 200 };
+        БанківськіРахункиКонтрагентів_PointerControl БанківськийРахунокКонтрагента = new БанківськіРахункиКонтрагентів_PointerControl() { Caption = "Рахунок контрагента:", WidthPresentation = 200 };
         Користувачі_PointerControl Автор = new Користувачі_PointerControl();
-        Користувачі_PointerControl Менеджер = new Користувачі_PointerControl() { Caption = "Менеджер" };
+        Користувачі_PointerControl Менеджер = new Користувачі_PointerControl() { Caption = "Менеджер:" };
         Entry Коментар = new Entry() { WidthRequest = 920 };
 
         РахунокФактура_ТабличнаЧастина_Товари Товари = new РахунокФактура_ТабличнаЧастина_Товари();
@@ -241,24 +241,11 @@ namespace StorageAndTrade
             hBoxOperation.PackStart(new Label("Господарська операція: "), false, false, 0);
             hBoxOperation.PackStart(ГосподарськаОперація, false, false, 5);
 
-            //ФормаОплати
-            HBox hBoxFormaOplaty = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxFormaOplaty, false, false, 5);
-
-            hBoxFormaOplaty.PackStart(new Label("Форма оплати: "), false, false, 0);
-            hBoxFormaOplaty.PackStart(ФормаОплати, false, false, 5);
-
             //Підрозділ
             HBox hBoxPidrozdil = new HBox() { Halign = Align.End };
             vBox.PackStart(hBoxPidrozdil, false, false, 5);
 
             hBoxPidrozdil.PackStart(Підрозділ, false, false, 5);
-
-            //БанківськийрахунокКонтрагента
-            HBox hBoxBankRahunokKontragenta = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxBankRahunokKontragenta, false, false, 5);
-
-            hBoxBankRahunokKontragenta.PackStart(БанківськийРахунокКонтрагента, false, false, 5);
 
             //Автор
             HBox hBoxAutor = new HBox() { Halign = Align.End };
@@ -275,6 +262,19 @@ namespace StorageAndTrade
 
         void CreateContainer4(VBox vBox)
         {
+            //ФормаОплати
+            HBox hBoxFormaOplaty = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxFormaOplaty, false, false, 5);
+
+            hBoxFormaOplaty.PackStart(new Label("Форма оплати: "), false, false, 0);
+            hBoxFormaOplaty.PackStart(ФормаОплати, false, false, 5);
+
+            //БанківськийрахунокКонтрагента
+            HBox hBoxBankRahunokKontragenta = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxBankRahunokKontragenta, false, false, 5);
+
+            hBoxBankRahunokKontragenta.PackStart(БанківськийРахунокКонтрагента, false, false, 5);
+
             //БанківськийрахунокОрганізації
             HBox hBoxBankRahunokOrganization = new HBox() { Halign = Align.End };
             vBox.PackStart(hBoxBankRahunokOrganization, false, false, 5);

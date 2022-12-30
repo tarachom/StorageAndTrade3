@@ -34,7 +34,7 @@ namespace StorageAndTrade
         DateTimeControl ДатаПоступлення = new DateTimeControl();
         БанківськіРахункиОрганізацій_PointerControl БанківськийРахунок = new БанківськіРахункиОрганізацій_PointerControl() { WidthPresentation = 200 };
         Користувачі_PointerControl Автор = new Користувачі_PointerControl();
-        CheckButton ПовернутиТару = new CheckButton("Вернути тару");
+        CheckButton ПовернутиТару = new CheckButton("Повернути тару");
         ComboBoxText СпосібДоставки = new ComboBoxText();
         TimeControl ЧасДоставкиЗ = new TimeControl();
         TimeControl ЧасДоставкиДо = new TimeControl();
@@ -251,25 +251,17 @@ namespace StorageAndTrade
             hBoxOperation.PackStart(new Label("Господарська операція: "), false, false, 0);
             hBoxOperation.PackStart(ГосподарськаОперація, false, false, 5);
 
-            //ФормаОплати
-            HBox hBoxFormaOplaty = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxFormaOplaty, false, false, 5);
-
-            hBoxFormaOplaty.PackStart(new Label("Форма оплати: "), false, false, 0);
-            hBoxFormaOplaty.PackStart(ФормаОплати, false, false, 5);
-
             //Підрозділ
             HBox hBoxPidrozdil = new HBox() { Halign = Align.End };
             vBox.PackStart(hBoxPidrozdil, false, false, 5);
 
             hBoxPidrozdil.PackStart(Підрозділ, false, false, 5);
 
-            //ДатаПоступлення
-            HBox hBoxDataOplaty = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxDataOplaty, false, false, 5);
+            //БанківськийРахунок
+            HBox hBoxBankRahunokOrganization = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxBankRahunokOrganization, false, false, 5);
 
-            hBoxDataOplaty.PackStart(new Label("Дата оплати:"), false, false, 5);
-            hBoxDataOplaty.PackStart(ДатаПоступлення, false, false, 5);
+            hBoxBankRahunokOrganization.PackStart(БанківськийРахунок, false, false, 5);
 
             //Автор
             HBox hBoxAutor = new HBox() { Halign = Align.End };
@@ -282,6 +274,29 @@ namespace StorageAndTrade
             vBox.PackStart(hBoxMenedjer, false, false, 5);
 
             hBoxMenedjer.PackStart(Менеджер, false, false, 5);
+        }
+
+        void CreateContainer4(VBox vBox)
+        {
+            //ФормаОплати
+            HBox hBoxFormaOplaty = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxFormaOplaty, false, false, 5);
+
+            hBoxFormaOplaty.PackStart(new Label("Форма оплати: "), false, false, 0);
+            hBoxFormaOplaty.PackStart(ФормаОплати, false, false, 5);
+
+            //ВернутиТару
+            HBox hBoxVernutyTaru = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxVernutyTaru, false, false, 5);
+
+            hBoxVernutyTaru.PackStart(ПовернутиТару, false, false, 5);
+
+            //ДатаПоступлення
+            HBox hBoxDataOplaty = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxDataOplaty, false, false, 5);
+
+            hBoxDataOplaty.PackStart(new Label("Дата поступлення:"), false, false, 5);
+            hBoxDataOplaty.PackStart(ДатаПоступлення, false, false, 5);
 
             //СпосібДоставки
             HBox hBoxSposibDostavky = new HBox() { Halign = Align.End };
@@ -298,22 +313,6 @@ namespace StorageAndTrade
             hBoxTchasDostavky.PackStart(ЧасДоставкиЗ, false, false, 5);
             hBoxTchasDostavky.PackStart(new Label("до"), false, false, 5);
             hBoxTchasDostavky.PackStart(ЧасДоставкиДо, false, false, 5);
-        }
-
-        void CreateContainer4(VBox vBox)
-        {
-            //ВернутиТару
-            HBox hBoxVernutyTaru = new HBox() { Halign = Align.Start };
-            vBox.PackStart(hBoxVernutyTaru, false, false, 5);
-
-            hBoxVernutyTaru.PackStart(ПовернутиТару, false, false, 5);
-
-            //БанківськийРахунок
-            HBox hBoxBankRahunokOrganization = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxBankRahunokOrganization, false, false, 5);
-
-            hBoxBankRahunokOrganization.PackStart(БанківськийРахунок, false, false, 5);
-
         }
 
         void CreatePack2(HPaned hPaned)
