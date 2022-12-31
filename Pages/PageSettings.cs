@@ -34,6 +34,7 @@ namespace StorageAndTrade
 
         CheckButton ВестиОблікПоХарактеристикахНоменклатури = new CheckButton("Вести облік по характеристиках номенклатури");
         CheckButton ВестиОблікПоСеріяхНоменклатури = new CheckButton("Вести облік по серіях номенклатури");
+        ComboBoxText МетодиСписанняПартій = new ComboBoxText();
         CheckButton ЗупинитиФоновіЗадачі = new CheckButton("Зупинити фонове обчислення віртуальних залишків");
 
         //
@@ -77,6 +78,9 @@ namespace StorageAndTrade
         {
             foreach (ConfigurationEnumField field in Config.Kernel!.Conf.Enums["ТипПеріодуДляЖурналівДокументів"].Fields.Values)
                 ОсновнийТипПеріоду_ДляЖурналівДокументів.Append(field.Name, field.Desc);
+
+            foreach (ConfigurationEnumField field in Config.Kernel!.Conf.Enums["МетодиСписанняПартій"].Fields.Values)
+                МетодиСписанняПартій.Append(field.Name, field.Desc);
         }
 
         void CreatePack1(HPaned hPaned)
@@ -95,49 +99,69 @@ namespace StorageAndTrade
         void CreatePack2(HPaned hPaned)
         {
             VBox vBox = new VBox();
+            hPaned.Pack2(vBox, false, false);
 
             //
             //Системні
             //
 
             //1
-            VBox vBoxSystem = new VBox();
+            {
+                VBox vBoxSystem = new VBox();
 
-            Expander expanderSystem = new Expander("Налаштування обліку") { Expanded = true };
-            expanderSystem.Add(vBoxSystem);
+                Expander expanderSystem = new Expander("Налаштування обліку") { Expanded = true };
+                expanderSystem.Add(vBoxSystem);
 
-            //Info
-            HBox hBoxInfoSystem = new HBox() { Halign = Align.Start };
-            vBoxSystem.PackStart(hBoxInfoSystem, false, false, 15);
+                //Info
+                HBox hBoxInfoSystem = new HBox() { Halign = Align.Start };
+                vBoxSystem.PackStart(hBoxInfoSystem, false, false, 15);
 
-            hBoxInfoSystem.PackStart(new Label("Видимість колонок у документах і звітах"), false, false, 5);
+                hBoxInfoSystem.PackStart(new Label("Видимість колонок у документах і звітах"), false, false, 5);
 
-            //Controls
-            AddControl(vBoxSystem, ВестиОблікПоХарактеристикахНоменклатури);
-            AddControl(vBoxSystem, ВестиОблікПоСеріяхНоменклатури);
+                //Controls
+                AddControl(vBoxSystem, ВестиОблікПоХарактеристикахНоменклатури);
+                AddControl(vBoxSystem, ВестиОблікПоСеріяхНоменклатури);
 
-            vBox.PackStart(expanderSystem, false, false, 10);
+                vBox.PackStart(expanderSystem, false, false, 10);
+            }
 
             //2
-            VBox vBoxBackgroundTask = new VBox();
+            {
+                VBox vBoxBatch = new VBox();
 
-            Expander expanderBackgroundTask = new Expander("Фонові обчислення") { Expanded = true };
-            expanderBackgroundTask.Add(vBoxBackgroundTask);
+                Expander expanderBatch = new Expander("Партії товарів") { Expanded = true };
+                expanderBatch.Add(vBoxBatch);
 
-            //Info
-            HBox hBoxInfoBackgroundTask = new HBox() { Halign = Align.Start };
-            vBoxBackgroundTask.PackStart(hBoxInfoBackgroundTask, false, false, 15);
+                //Info
+                HBox hBoxBatch = new HBox() { Halign = Align.Start };
+                vBoxBatch.PackStart(hBoxBatch, false, false, 15);
 
-            hBoxInfoBackgroundTask.PackStart(new Label(
-@"Обчислення згрупованих віртуальних залишків по регістрах відбувається автоматично після проведення будь-якого документу.")
-            { Wrap = true }, false, false, 5);
+                hBoxBatch.PackStart(new Label("Метод списання партій товарів"), false, false, 5);
 
-            //Controls
-            AddControl(vBoxBackgroundTask, ЗупинитиФоновіЗадачі);
+                //Controls
+                AddControl(vBoxBatch, МетодиСписанняПартій);
 
-            vBox.PackStart(expanderBackgroundTask, false, false, 10);
+                vBox.PackStart(expanderBatch, false, false, 10);
+            }
 
-            hPaned.Pack2(vBox, false, false);
+            //3
+            {
+                VBox vBoxBackgroundTask = new VBox();
+
+                Expander expanderBackgroundTask = new Expander("Фонові обчислення") { Expanded = true };
+                expanderBackgroundTask.Add(vBoxBackgroundTask);
+
+                //Info
+                HBox hBoxInfoBackgroundTask = new HBox() { Halign = Align.Start };
+                vBoxBackgroundTask.PackStart(hBoxInfoBackgroundTask, false, false, 15);
+
+                hBoxInfoBackgroundTask.PackStart(new Label("Обчислення віртуальних залишків по регістрах накопичення") { Wrap = true }, false, false, 5);
+
+                //Controls
+                AddControl(vBoxBackgroundTask, ЗупинитиФоновіЗадачі);
+
+                vBox.PackStart(expanderBackgroundTask, false, false, 10);
+            }
         }
 
         //Значення за замовчування
@@ -232,16 +256,25 @@ namespace StorageAndTrade
 
             ВестиОблікПоСеріяхНоменклатури.Active = Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const;
             ВестиОблікПоХарактеристикахНоменклатури.Active = Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const;
+
+            //ПартіїТоварів
+            {
+                МетодиСписанняПартій.ActiveId = Константи.ПартіїТоварів.МетодСписанняПартій_Const.ToString();
+                if (МетодиСписанняПартій.Active == -1)
+                    МетодиСписанняПартій.ActiveId = Перелічення.МетодиСписанняПартій.FIFO.ToString();
+            }
+
             ЗупинитиФоновіЗадачі.Active = Константи.Системні.ЗупинитиФоновіЗадачі_Const;
 
             //
             //ЖурналиДокументів
             //
 
-            ОсновнийТипПеріоду_ДляЖурналівДокументів.ActiveId = Константи.ЖурналиДокументів.ОсновнийТипПеріоду_Const.ToString();
-
-            if (ОсновнийТипПеріоду_ДляЖурналівДокументів.Active == -1)
-                ОсновнийТипПеріоду_ДляЖурналівДокументів.ActiveId = Перелічення.ТипПеріодуДляЖурналівДокументів.ЗПочаткуМісяця.ToString();
+            {
+                ОсновнийТипПеріоду_ДляЖурналівДокументів.ActiveId = Константи.ЖурналиДокументів.ОсновнийТипПеріоду_Const.ToString();
+                if (ОсновнийТипПеріоду_ДляЖурналівДокументів.Active == -1)
+                    ОсновнийТипПеріоду_ДляЖурналівДокументів.ActiveId = Перелічення.ТипПеріодуДляЖурналівДокументів.ЗПочаткуМісяця.ToString();
+            }
         }
 
         void GetValue()
@@ -268,6 +301,7 @@ namespace StorageAndTrade
 
             Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const = ВестиОблікПоСеріяхНоменклатури.Active;
             Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const = ВестиОблікПоХарактеристикахНоменклатури.Active;
+            Константи.ПартіїТоварів.МетодСписанняПартій_Const = Enum.Parse<Перелічення.МетодиСписанняПартій>(МетодиСписанняПартій.ActiveId);
             Константи.Системні.ЗупинитиФоновіЗадачі_Const = ЗупинитиФоновіЗадачі.Active;
 
             //

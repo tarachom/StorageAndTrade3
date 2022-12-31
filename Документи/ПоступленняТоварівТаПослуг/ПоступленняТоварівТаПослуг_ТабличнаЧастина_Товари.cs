@@ -577,7 +577,7 @@ namespace StorageAndTrade
             CellRendererText cellText = (CellRendererText)cell;
             if (cellText.Data.Contains("Column"))
             {
-                int rowNumber = int.Parse(Store.GetPath(iter).ToString());
+                int rowNumber = int.Parse(model.GetPath(iter).ToString());
                 Запис запис = Записи[rowNumber];
 
                 cellText.Foreground = "green";
