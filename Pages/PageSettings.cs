@@ -24,7 +24,7 @@ namespace StorageAndTrade
         Каси_PointerControl ОсновнаКаса = new Каси_PointerControl();
         ПакуванняОдиниціВиміру_PointerControl ОсновнаОдиницяПакування = new ПакуванняОдиниціВиміру_PointerControl() { Caption = "Пакування:" };
         СтруктураПідприємства_PointerControl ОсновнийПідрозділ = new СтруктураПідприємства_PointerControl() { Caption = "Підрозділ:" };
-        БанківськіРахункиОрганізацій_PointerControl ОсновнийБанківськийРахунок = new БанківськіРахункиОрганізацій_PointerControl();
+        БанківськіРахункиОрганізацій_PointerControl ОсновнийБанківськийРахунок = new БанківськіРахункиОрганізацій_PointerControl() { Caption = "Банківський рахунок:" };
         ВидиЦін_PointerControl ОсновнийВидЦіни = new ВидиЦін_PointerControl();
         ВидиНоменклатури_PointerControl ОсновнийВидНоменклатури = new ВидиНоменклатури_PointerControl();
 
@@ -113,10 +113,9 @@ namespace StorageAndTrade
                 expanderSystem.Add(vBoxSystem);
 
                 //Info
-                HBox hBoxInfoSystem = new HBox() { Halign = Align.Start };
-                vBoxSystem.PackStart(hBoxInfoSystem, false, false, 15);
-
-                hBoxInfoSystem.PackStart(new Label("Видимість колонок у документах і звітах"), false, false, 5);
+                HBox hBoxInfo = new HBox() { Halign = Align.Start };
+                vBoxSystem.PackStart(hBoxInfo, false, false, 15);
+                hBoxInfo.PackStart(new Label("Видимість колонок у документах і звітах"), false, false, 5);
 
                 //Controls
                 AddControl(vBoxSystem, ВестиОблікПоХарактеристикахНоменклатури);
@@ -133,10 +132,9 @@ namespace StorageAndTrade
                 expanderBatch.Add(vBoxBatch);
 
                 //Info
-                HBox hBoxBatch = new HBox() { Halign = Align.Start };
-                vBoxBatch.PackStart(hBoxBatch, false, false, 15);
-
-                hBoxBatch.PackStart(new Label("Метод списання партій товарів"), false, false, 5);
+                HBox hBoxInfo = new HBox() { Halign = Align.Start };
+                vBoxBatch.PackStart(hBoxInfo, false, false, 15);
+                hBoxInfo.PackStart(new Label("Метод списання партій товарів"), false, false, 5);
 
                 //Controls
                 AddControl(vBoxBatch, МетодиСписанняПартій);
@@ -148,14 +146,13 @@ namespace StorageAndTrade
             {
                 VBox vBoxBackgroundTask = new VBox();
 
-                Expander expanderBackgroundTask = new Expander("Фонові обчислення") { Expanded = true };
+                Expander expanderBackgroundTask = new Expander("Фонові обчислення") { Expanded = false };
                 expanderBackgroundTask.Add(vBoxBackgroundTask);
 
                 //Info
-                HBox hBoxInfoBackgroundTask = new HBox() { Halign = Align.Start };
-                vBoxBackgroundTask.PackStart(hBoxInfoBackgroundTask, false, false, 15);
-
-                hBoxInfoBackgroundTask.PackStart(new Label("Обчислення віртуальних залишків по регістрах накопичення") { Wrap = true }, false, false, 5);
+                HBox hBoxInfo = new HBox() { Halign = Align.Start };
+                vBoxBackgroundTask.PackStart(hBoxInfo, false, false, 15);
+                hBoxInfo.PackStart(new Label("Обчислення віртуальних залишків по регістрах накопичення") { Wrap = true }, false, false, 5);
 
                 //Controls
                 AddControl(vBoxBackgroundTask, ЗупинитиФоновіЗадачі);
@@ -175,7 +172,6 @@ namespace StorageAndTrade
             //Info
             HBox hBoxInfo = new HBox() { Halign = Align.Start };
             vBox.PackStart(hBoxInfo, false, false, 15);
-
             hBoxInfo.PackStart(new Label("Для заповненння нових документів та довідників"), false, false, 5);
 
             //Controls

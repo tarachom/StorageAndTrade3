@@ -11,7 +11,6 @@ namespace StorageAndTrade
     {
         Button bClose;
         Button bSpendTheDocument;
-        Button bCalculationBalances;
         Button bStop;
         ScrolledWindow scrollMessage;
         VBox vBoxMessage = new VBox();
@@ -41,11 +40,6 @@ namespace StorageAndTrade
 
             hBoxBotton.PackStart(bSpendTheDocument, false, false, 10);
 
-            bCalculationBalances = new Button("Перерахувати залишки");
-            bCalculationBalances.Clicked += OnCalculationBalances;
-
-            hBoxBotton.PackStart(bCalculationBalances, false, false, 10);
-
             bStop = new Button("Зупинити") { Sensitive = false };
             bStop.Clicked += OnStopClick;
 
@@ -70,7 +64,6 @@ namespace StorageAndTrade
                 {
                     bClose.Sensitive = sensitive;
                     bSpendTheDocument.Sensitive = sensitive;
-                    bCalculationBalances.Sensitive = sensitive;
                     bStop.Sensitive = !sensitive;
                 }
             );
@@ -110,12 +103,17 @@ namespace StorageAndTrade
                     }
 
                     hBoxInfo.PackStart(new Label(message) { Wrap = true }, false, false, 0);
-
                     hBoxInfo.ShowAll();
 
                     scrollMessage.Vadjustment.Value = scrollMessage.Vadjustment.Upper;
                 }
             );
+        }
+
+        void OnShown(object? sender, EventArgs args)
+        {
+            scrollMessage.Vadjustment.Value = scrollMessage.Vadjustment.Upper;
+            Console.WriteLine(scrollMessage.Vadjustment.Value);
         }
 
         void ClearMessage()
@@ -143,6 +141,8 @@ namespace StorageAndTrade
 
             ФункціїДляПовідомлень.ОчиститиПовідомлення();
 
+            int counter = 0;
+
             Журнали.Journal_Select journalSelect = new Журнали.Journal_Select();
             journalSelect.Select(DateTime.Parse("01.01.2000 00:00:00"), DateTime.Now);
 
@@ -161,8 +161,10 @@ namespace StorageAndTrade
                         {
                             try
                             {
-                                object? obj = doc.GetType().InvokeMember("SpendTheDocument",
-                                     BindingFlags.InvokeMethod, null, doc, new object[] { journalSelect.Current.SpendDate });
+                                 object? obj = doc.GetType().InvokeMember("SpendTheDocument",
+                                      BindingFlags.InvokeMethod, null, doc, new object[] { journalSelect.Current.SpendDate });
+
+                                counter++;
 
                                 bool rezult = obj != null ? (bool)obj : false;
 
@@ -175,6 +177,7 @@ namespace StorageAndTrade
                                         msg += row["Повідомлення"].ToString();
 
                                     CreateMessage(TypeMessage.Error, msg);
+                                    CreateMessage(TypeMessage.Info, "\n\nПроведення документів перервано!\n\n");
 
                                     //Очистка проводок документу
                                     doc.GetType().InvokeMember("ClearSpendTheDocument", BindingFlags.InvokeMethod, null, doc, new object[] { });
@@ -196,84 +199,13 @@ namespace StorageAndTrade
                 }
             }
 
-            CreateMessage(TypeMessage.None, "Готово!");
-
-            CalculationBalancesFunc();
+            CreateMessage(TypeMessage.None, "Готово!\n\n\n");
+            CreateMessage(TypeMessage.Info, "Проведено документів: " + counter);
 
             Константи.Системні.ЗупинитиФоновіЗадачі_Const = false;
 
+            Thread.Sleep(500);
             ButtonSensitive(true);
-        }
-
-        #endregion
-
-        #region CalculationBalances
-
-        void OnCalculationBalances(object? sender, EventArgs args)
-        {
-            ClearMessage();
-
-            CancellationTokenThread = new CancellationTokenSource();
-            Thread thread = new Thread(new ThreadStart(CalculationBalances));
-            thread.Start();
-        }
-
-        void CalculationBalances()
-        {
-            ButtonSensitive(false);
-
-            Константи.Системні.ЗупинитиФоновіЗадачі_Const = true;
-            CalculationBalancesFunc();
-            Константи.Системні.ЗупинитиФоновіЗадачі_Const = false;
-
-            ButtonSensitive(true);
-        }
-
-        void CalculationBalancesFunc()
-        {
-            /*
-            
-            //Видалити всі задачі
-            Service.CalculationBalances.ClearAllTask();
-
-            if (!CancellationTokenThread!.IsCancellationRequested)
-            {
-                CreateMessage(TypeMessage.Info, "Перерахунок залишків");
-
-                CreateMessage(TypeMessage.Info, "Обчислення залишків з групуванням по днях");
-                foreach (string registerAccumulation in Service.CalculationBalances.СписокДоступнихВіртуальнихРегістрів)
-                {
-                    if (CancellationTokenThread.IsCancellationRequested)
-                        break;
-
-                    CreateMessage(TypeMessage.Ok, " --> регістер: " + registerAccumulation);
-                    Service.CalculationBalances.ОбчисленняВіртуальнихЗалишківПоВсіхДнях(registerAccumulation);
-                }
-            }
-
-            if (!CancellationTokenThread.IsCancellationRequested)
-            {
-                CreateMessage(TypeMessage.Info, "Обновлення актуальності:");
-                foreach (string registerAccumulation in Service.CalculationBalances.СписокДоступнихВіртуальнихРегістрів)
-                {
-                    if (CancellationTokenThread.IsCancellationRequested)
-                        break;
-
-                    CreateMessage(TypeMessage.Ok, " --> регістер: " + registerAccumulation);
-                    Service.CalculationBalances.СкинутиЗначенняАктуальностіВіртуальнихЗалишківПоВсіхМісяцях(registerAccumulation);
-                }
-            }
-
-            if (!CancellationTokenThread.IsCancellationRequested)
-            {
-                CreateMessage(TypeMessage.Info, "Обчислення залишків з групуванням по місяцях");
-                Service.CalculationBalances.ОбчисленняВіртуальнихЗалишківПоМісяцях();
-            }
-
-            if (!CancellationTokenThread.IsCancellationRequested)
-                CreateMessage(TypeMessage.None, "Готово!\n\n\n\n\n");
-            
-            */
         }
 
         #endregion
