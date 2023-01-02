@@ -120,6 +120,13 @@ namespace StorageAndTrade
                                     page.LoadRecords();
                                     break;
                                 }
+                            case "ПоверненняТоварівВідКлієнта":
+                                {
+                                    ПоверненняТоварівВідКлієнта page = new ПоверненняТоварівВідКлієнта() { SelectPointerItem = new ПоверненняТоварівВідКлієнта_Pointer(unigueID) };
+                                    Program.GeneralForm?.CreateNotebookPage("Повернення товарів від клієнта", () => { return page; });
+                                    page.LoadRecords();
+                                    break;
+                                }
                         }
                     }
                     else

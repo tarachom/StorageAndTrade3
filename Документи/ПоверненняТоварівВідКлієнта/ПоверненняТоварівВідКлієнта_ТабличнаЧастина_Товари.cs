@@ -24,7 +24,8 @@ namespace StorageAndTrade
             ПакуванняНазва,
             Кількість,
             Ціна,
-            Сума
+            Сума,
+            РеалізаціяТоварівТаПослугНазва
         }
 
         ListStore Store = new ListStore(
@@ -36,7 +37,8 @@ namespace StorageAndTrade
             typeof(string),   //ПакуванняНазва
             typeof(float),    //Кількість
             typeof(float),    //Ціна
-            typeof(float)     //Сума
+            typeof(float),    //Сума
+            typeof(string)    //РеалізаціяТоварівТаПослугНазва
         );
 
         List<Запис> Записи = new List<Запис>();
@@ -57,6 +59,8 @@ namespace StorageAndTrade
             public decimal Кількість { get; set; } = 1;
             public decimal Ціна { get; set; }
             public decimal Сума { get; set; }
+            public РеалізаціяТоварівТаПослуг_Pointer РеалізаціяТоварівТаПослуг { get; set; } = new РеалізаціяТоварівТаПослуг_Pointer();
+            public string РеалізаціяТоварівТаПослугНазва { get; set; } = "";
 
             public object[] ToArray()
             {
@@ -70,7 +74,8 @@ namespace StorageAndTrade
                     ПакуванняНазва,
                     (float)Кількість,
                     (float)Ціна,
-                    (float)Сума
+                    (float)Сума,
+                    РеалізаціяТоварівТаПослугНазва
                 };
             }
 
@@ -90,7 +95,9 @@ namespace StorageAndTrade
                     ПакуванняНазва = запис.ПакуванняНазва,
                     Кількість = запис.Кількість,
                     Ціна = запис.Ціна,
-                    Сума = запис.Сума
+                    Сума = запис.Сума,
+                    РеалізаціяТоварівТаПослуг = запис.РеалізаціяТоварівТаПослуг,
+                    РеалізаціяТоварівТаПослугНазва = запис.РеалізаціяТоварівТаПослугНазва
                 };
             }
 
@@ -146,6 +153,10 @@ namespace StorageAndTrade
             public static void ПісляЗміни_КількістьАбоЦіна(Запис запис)
             {
                 запис.Сума = запис.Кількість * запис.Ціна;
+            }
+            public static void ПісляЗміни_РеалізаціяТоварівТаПослуг(Запис запис)
+            {
+                запис.РеалізаціяТоварівТаПослугНазва = запис.РеалізаціяТоварівТаПослуг.GetPresentation();
             }
         }
 
@@ -272,6 +283,25 @@ namespace StorageAndTrade
 
                                 break;
                             }
+                        case Columns.РеалізаціяТоварівТаПослугНазва:
+                            {
+                                РеалізаціяТоварівТаПослуг page = new РеалізаціяТоварівТаПослуг(true);
+
+                                page.DocumentPointerItem = запис.РеалізаціяТоварівТаПослуг;
+                                page.CallBack_OnSelectPointer = (РеалізаціяТоварівТаПослуг_Pointer selectPointer) =>
+                                {
+                                    запис.РеалізаціяТоварівТаПослуг = selectPointer;
+                                    Запис.ПісляЗміни_РеалізаціяТоварівТаПослуг(запис);
+
+                                    Store.SetValues(iter, запис.ToArray());
+                                };
+
+                                Program.GeneralForm?.CreateNotebookPage("Вибір - Реалізація товарів та послуг", () => { return page; });
+
+                                page.LoadRecords();
+
+                                break;
+                            }
                     }
                 }
             }
@@ -329,6 +359,12 @@ namespace StorageAndTrade
                 querySelect.Joins.Add(
                     new Join(СеріїНоменклатури_Const.TABLE, ПоверненняТоварівВідКлієнта_Товари_TablePart.Серія, querySelect.Table));
 
+                //JOIN 5
+                querySelect.FieldAndAlias.Add(
+                    new NameValue<string>(РеалізаціяТоварівТаПослуг_Const.TABLE + "." + РеалізаціяТоварівТаПослуг_Const.Назва, "rn_doc_name"));
+                querySelect.Joins.Add(
+                    new Join(РеалізаціяТоварівТаПослуг_Const.TABLE, ПоверненняТоварівВідКлієнта_Товари_TablePart.ДокументРеалізації, querySelect.Table));
+
                 //ORDER
                 querySelect.Order.Add(ПоверненняТоварівВідКлієнта_Товари_TablePart.НомерРядка, SelectOrder.ASC);
 
@@ -353,7 +389,9 @@ namespace StorageAndTrade
                         ПакуванняНазва = join[record.UID.ToString()]["pak_name"],
                         Кількість = record.Кількість,
                         Ціна = record.Ціна,
-                        Сума = record.Сума
+                        Сума = record.Сума,
+                        РеалізаціяТоварівТаПослуг = record.ДокументРеалізації,
+                        РеалізаціяТоварівТаПослугНазва = join[record.UID.ToString()]["rn_doc_name"]
                     };
 
                     Записи.Add(запис);
@@ -384,6 +422,7 @@ namespace StorageAndTrade
                     record.Кількість = запис.Кількість;
                     record.Ціна = запис.Ціна;
                     record.Сума = запис.Сума;
+                    record.ДокументРеалізації = запис.РеалізаціяТоварівТаПослуг;
 
                     ПоверненняТоварівВідКлієнта_Objest.Товари_TablePart.Records.Add(record);
                 }
@@ -485,6 +524,14 @@ namespace StorageAndTrade
                 TreeViewColumn Column = new TreeViewColumn("Сума", Сума, "text", (int)Columns.Сума) { MinWidth = 100 };
                 Column.SetCellDataFunc(Сума, new TreeCellDataFunc(NumericCellDataFunc));
                 TreeViewGrid.AppendColumn(Column);
+            }
+
+            //РеалізаціяТоварівТаПослугНазва
+            {
+                TreeViewColumn РеалізаціяТоварівТаПослугНазва = new TreeViewColumn("Документ реалізації", new CellRendererText(), "text", (int)Columns.РеалізаціяТоварівТаПослугНазва) { MinWidth = 100 };
+                РеалізаціяТоварівТаПослугНазва.Data.Add("Column", Columns.РеалізаціяТоварівТаПослугНазва);
+
+                TreeViewGrid.AppendColumn(РеалізаціяТоварівТаПослугНазва);
             }
 
             //Колонка пустишка для заповнення вільного простору

@@ -135,6 +135,10 @@ namespace StorageAndTrade
             newDocKasovyiOrderButton.Activated += OnNewDocNaOsnovi_KasovyiOrder;
             Menu.Append(newDocKasovyiOrderButton);
 
+            MenuItem newDocPovernenjaVidKlientaButton = new MenuItem("Повернення товарів від клієнта");
+            newDocPovernenjaVidKlientaButton.Activated += OnNewDocNaOsnovi_ПоверненняТоварівВідКлієнта;
+            Menu.Append(newDocPovernenjaVidKlientaButton);
+
             Menu.ShowAll();
 
             return Menu;
@@ -458,6 +462,75 @@ namespace StorageAndTrade
                         {
                             IsNew = false,
                             ПрихіднийКасовийОрдер_Objest = прихіднийКасовийОрдер_Новий,
+                        };
+
+                        page.SetValue();
+
+                        return page;
+                    });
+                }
+            }
+        }
+
+        void OnNewDocNaOsnovi_ПоверненняТоварівВідКлієнта(object? sender, EventArgs args)
+        {
+            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
+            {
+                TreePath[] selectionRows = TreeViewGrid.Selection.GetSelectedRows();
+
+                foreach (TreePath itemPath in selectionRows)
+                {
+                    TreeIter iter;
+                    TreeViewGrid.Model.GetIter(out iter, itemPath);
+
+                    string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
+
+                    РеалізаціяТоварівТаПослуг_Pointer реалізаціяТоварівТаПослуг_Pointer = new РеалізаціяТоварівТаПослуг_Pointer(new UnigueID(uid));
+                    РеалізаціяТоварівТаПослуг_Objest реалізаціяТоварівТаПослуг_Objest = реалізаціяТоварівТаПослуг_Pointer.GetDocumentObject(true);
+
+                    //
+                    //Новий документ
+                    //
+
+                    ПоверненняТоварівВідКлієнта_Objest поверненняТоварівВідКлієнта_Objest = new ПоверненняТоварівВідКлієнта_Objest();
+                    поверненняТоварівВідКлієнта_Objest.New();
+                    поверненняТоварівВідКлієнта_Objest.ДатаДок = DateTime.Now;
+                    поверненняТоварівВідКлієнта_Objest.НомерДок = (++Константи.НумераціяДокументів.ПоверненняТоварівВідКлієнта_Const).ToString("D8");
+                    поверненняТоварівВідКлієнта_Objest.Назва = $"Повернення товарів від клієнта №{поверненняТоварівВідКлієнта_Objest.НомерДок} від {поверненняТоварівВідКлієнта_Objest.ДатаДок.ToString("dd.MM.yyyy")}";
+                    поверненняТоварівВідКлієнта_Objest.Організація = реалізаціяТоварівТаПослуг_Objest.Організація;
+                    поверненняТоварівВідКлієнта_Objest.Валюта = реалізаціяТоварівТаПослуг_Objest.Валюта;
+                    поверненняТоварівВідКлієнта_Objest.Каса = реалізаціяТоварівТаПослуг_Objest.Каса;
+                    поверненняТоварівВідКлієнта_Objest.Контрагент = реалізаціяТоварівТаПослуг_Objest.Контрагент;
+                    поверненняТоварівВідКлієнта_Objest.Договір = реалізаціяТоварівТаПослуг_Objest.Договір;
+                    поверненняТоварівВідКлієнта_Objest.Склад = реалізаціяТоварівТаПослуг_Objest.Склад;
+                    поверненняТоварівВідКлієнта_Objest.СумаДокументу = реалізаціяТоварівТаПослуг_Objest.СумаДокументу;
+                    поверненняТоварівВідКлієнта_Objest.Основа = new UuidAndText(реалізаціяТоварівТаПослуг_Objest.UnigueID.UGuid, реалізаціяТоварівТаПослуг_Objest.TypeDocument);
+                    поверненняТоварівВідКлієнта_Objest.Save();
+
+                    //Товари
+                    foreach (РеалізаціяТоварівТаПослуг_Товари_TablePart.Record record_реалізаціяТоварівТаПослуг in реалізаціяТоварівТаПослуг_Objest.Товари_TablePart.Records)
+                    {
+                        ПоверненняТоварівВідКлієнта_Товари_TablePart.Record record_повернення = new ПоверненняТоварівВідКлієнта_Товари_TablePart.Record();
+                        поверненняТоварівВідКлієнта_Objest.Товари_TablePart.Records.Add(record_повернення);
+
+                        record_повернення.Номенклатура = record_реалізаціяТоварівТаПослуг.Номенклатура;
+                        record_повернення.ХарактеристикаНоменклатури = record_реалізаціяТоварівТаПослуг.ХарактеристикаНоменклатури;
+                        record_повернення.Пакування = record_реалізаціяТоварівТаПослуг.Пакування;
+                        record_повернення.КількістьУпаковок = record_реалізаціяТоварівТаПослуг.КількістьУпаковок;
+                        record_повернення.Кількість = record_реалізаціяТоварівТаПослуг.Кількість;
+                        record_повернення.Ціна = record_реалізаціяТоварівТаПослуг.Ціна;
+                        record_повернення.Сума = record_реалізаціяТоварівТаПослуг.Сума;
+                        record_повернення.ДокументРеалізації = реалізаціяТоварівТаПослуг_Objest.GetDocumentPointer();
+                    }
+
+                    поверненняТоварівВідКлієнта_Objest.Товари_TablePart.Save(false);
+
+                    Program.GeneralForm?.CreateNotebookPage($"{поверненняТоварівВідКлієнта_Objest.Назва}", () =>
+                    {
+                        ПоверненняТоварівВідКлієнта_Елемент page = new ПоверненняТоварівВідКлієнта_Елемент
+                        {
+                            IsNew = false,
+                            ПоверненняТоварівВідКлієнта_Objest = поверненняТоварівВідКлієнта_Objest
                         };
 
                         page.SetValue();
