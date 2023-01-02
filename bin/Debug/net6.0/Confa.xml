@@ -5,7 +5,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>02.01.2023 11:03:24</DateTimeSave>
+  <DateTimeSave>02.01.2023 16:30:03</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -6158,14 +6158,12 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
         <Field>
           <Name>ПоступленняТоварівТаПослуг</Name>
           <Value>1</Value>
-          <Desc>
-          </Desc>
+          <Desc>Поступлення товарів та послуг</Desc>
         </Field>
         <Field>
           <Name>ВведенняЗалишків</Name>
           <Value>2</Value>
-          <Desc>
-          </Desc>
+          <Desc>Введення залишків</Desc>
         </Field>
       </Fields>
     </Enum>

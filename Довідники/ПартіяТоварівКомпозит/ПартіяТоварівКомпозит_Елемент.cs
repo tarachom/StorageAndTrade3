@@ -1,6 +1,10 @@
 using Gtk;
 
+using AccountingSoftware;
+
+using StorageAndTrade_1_0;
 using StorageAndTrade_1_0.Довідники;
+using Перелічення = StorageAndTrade_1_0.Перелічення;
 
 namespace StorageAndTrade
 {
@@ -13,6 +17,7 @@ namespace StorageAndTrade
         public ПартіяТоварівКомпозит_Objest ПартіяТоварівКомпозит_Objest { get; set; } = new ПартіяТоварівКомпозит_Objest();
 
         Entry Назва = new Entry() { WidthRequest = 500 };
+        ComboBoxText ТипДокументу = new ComboBoxText();
         ПоступленняТоварівТаПослуг_PointerControl ПоступленняТоварівТаПослуг = new ПоступленняТоварівТаПослуг_PointerControl() { UseWherePeriod = true };
         ВведенняЗалишків_PointerControl ВведенняЗалишків = new ВведенняЗалишків_PointerControl() { UseWherePeriod = true };
 
@@ -35,6 +40,8 @@ namespace StorageAndTrade
 
             HPaned hPaned = new HPaned() { BorderWidth = 5, Position = 500 };
 
+            FillComboBoxes();
+
             CreatePack1(hPaned);
             CreatePack2(hPaned);
 
@@ -53,6 +60,13 @@ namespace StorageAndTrade
 
             hBoxName.PackStart(new Label("Назва:"), false, false, 5);
             hBoxName.PackStart(Назва, false, false, 5);
+
+            //Тип
+            HBox hBoxTypeDoc = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxTypeDoc, false, false, 5);
+
+            hBoxTypeDoc.PackStart(new Label("Тип документу:"), false, false, 5);
+            hBoxTypeDoc.PackStart(ТипДокументу, false, false, 5);
 
             //ПоступленняТоварівТаПослуг
             HBox hBoxПоступленняТоварівТаПослуг = new HBox() { Halign = Align.End };
@@ -73,9 +87,24 @@ namespace StorageAndTrade
         {
             VBox vBox = new VBox();
 
+            HBox hBoxInfo = new HBox() { Halign = Align.Start };
+            vBox.PackStart(hBoxInfo, false, false, 5);
+
+            hBoxInfo.PackStart(new Label("Редагувати дозволено тільки назву"), false, false, 5);
 
 
             hPaned.Pack2(vBox, false, false);
+        }
+
+        void FillComboBoxes()
+        {
+            if (Config.Kernel != null)
+            {
+                foreach (ConfigurationEnumField field in Config.Kernel.Conf.Enums["ТипДокументуПартіяТоварівКомпозит"].Fields.Values)
+                    ТипДокументу.Append(field.Name, field.Desc);
+
+                ТипДокументу.ActiveId = Перелічення.ТипДокументуПартіяТоварівКомпозит.ПоступленняТоварівТаПослуг.ToString();
+            }
         }
 
         #region Присвоєння / зчитування значень
@@ -83,6 +112,7 @@ namespace StorageAndTrade
         public void SetValue()
         {
             Назва.Text = ПартіяТоварівКомпозит_Objest.Назва;
+            ТипДокументу.ActiveId = ПартіяТоварівКомпозит_Objest.ТипДокументу.ToString();
             ПоступленняТоварівТаПослуг.Pointer = ПартіяТоварівКомпозит_Objest.ПоступленняТоварівТаПослуг;
             ВведенняЗалишків.Pointer = ПартіяТоварівКомпозит_Objest.ВведенняЗалишків;
         }
@@ -94,6 +124,7 @@ namespace StorageAndTrade
             /*
             Редагування заборонено, тільки назва
 
+            ПартіяТоварівКомпозит_Objest.ТипДокументу = Enum.Parse<Перелічення.ТипДокументуПартіяТоварівКомпозит>(ТипДокументу.ActiveId);
             ПартіяТоварівКомпозит_Objest.ПоступленняТоварівТаПослуг = ПоступленняТоварівТаПослуг.Pointer;
             ПартіяТоварівКомпозит_Objest.ВведенняЗалишків = ВведенняЗалишків.Pointer;
             
