@@ -25,6 +25,7 @@ namespace StorageAndTrade
         Організації_PointerControl Організація = new Організації_PointerControl();
         Валюти_PointerControl Валюта = new Валюти_PointerControl();
         Користувачі_PointerControl Автор = new Користувачі_PointerControl();
+        ВидиЦін_PointerControl ВидЦіни = new ВидиЦін_PointerControl();
         Entry Коментар = new Entry() { WidthRequest = 920 };
 
         ВстановленняЦінНоменклатури_ТабличнаЧастина_Товари Товари = new ВстановленняЦінНоменклатури_ТабличнаЧастина_Товари();
@@ -137,6 +138,12 @@ namespace StorageAndTrade
             vBox.PackStart(hBoxValuta, false, false, 5);
 
             hBoxValuta.PackStart(Валюта, false, false, 5);
+
+            //ВидЦіни
+            HBox hBoxVidCeny = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxVidCeny, false, false, 5);
+
+            hBoxVidCeny.PackStart(ВидЦіни, false, false, 5);
         }
 
         void CreateContainer3(VBox vBox)
@@ -198,6 +205,10 @@ namespace StorageAndTrade
             Автор.Pointer = ВстановленняЦінНоменклатури_Objest.Автор;
 
             Товари.ВстановленняЦінНоменклатури_Objest = ВстановленняЦінНоменклатури_Objest;
+            Товари.ОбновитиЗначенняДокумента = () =>
+            {
+                ВстановленняЦінНоменклатури_Objest.ВидЦіни = ВидЦіни.Pointer;
+            };
             Товари.LoadRecords();
         }
 

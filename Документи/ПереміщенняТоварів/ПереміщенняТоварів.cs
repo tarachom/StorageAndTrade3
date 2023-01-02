@@ -373,32 +373,37 @@ namespace StorageAndTrade
                 ПереміщенняТоварів_Objest.ClearSpendTheDocument();
         }
 
-        void OnSpendTheDocument(object? sender, EventArgs args)
+        //
+        // Проведення або очищення проводок для вибраних документів
+        //
+
+        void SpendTheDocumentOrClear(bool spend)
         {
             if (TreeViewGrid.Selection.CountSelectedRows() != 0)
             {
-                TreeIter iter;
-                if (TreeViewGrid.Model.GetIter(out iter, TreeViewGrid.Selection.GetSelectedRows()[0]))
+                TreePath[] selectionRows = TreeViewGrid.Selection.GetSelectedRows();
+
+                foreach (TreePath itemPath in selectionRows)
                 {
+                    TreeIter iter;
+                    TreeViewGrid.Model.GetIter(out iter, itemPath);
+
                     string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
-                    SpendTheDocument(uid, true);
-                    LoadRecords();
+                    SpendTheDocument(uid, spend);
                 }
+
+                LoadRecords();
             }
+        }
+
+        void OnSpendTheDocument(object? sender, EventArgs args)
+        {
+            SpendTheDocumentOrClear(true);
         }
 
         void OnClearSpend(object? sender, EventArgs args)
         {
-            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
-            {
-                TreeIter iter;
-                if (TreeViewGrid.Model.GetIter(out iter, TreeViewGrid.Selection.GetSelectedRows()[0]))
-                {
-                    string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
-                    SpendTheDocument(uid, false);
-                    LoadRecords();
-                }
-            }
+            SpendTheDocumentOrClear(false);
         }
 
         #endregion

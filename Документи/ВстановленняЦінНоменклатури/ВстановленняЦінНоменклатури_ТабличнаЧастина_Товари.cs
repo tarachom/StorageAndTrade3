@@ -2,15 +2,19 @@ using Gtk;
 
 using AccountingSoftware;
 
+using StorageAndTrade_1_0;
 using Константи = StorageAndTrade_1_0.Константи;
+using Перелічення = StorageAndTrade_1_0.Перелічення;
 using StorageAndTrade_1_0.Довідники;
 using StorageAndTrade_1_0.Документи;
+using StorageAndTrade_1_0.РегістриВідомостей;
 
 namespace StorageAndTrade
 {
     class ВстановленняЦінНоменклатури_ТабличнаЧастина_Товари : VBox
     {
         public ВстановленняЦінНоменклатури_Objest? ВстановленняЦінНоменклатури_Objest { get; set; }
+        public System.Action? ОбновитиЗначенняДокумента { get; set; }
 
         #region Записи
 
@@ -29,7 +33,7 @@ namespace StorageAndTrade
             typeof(string),   //НоменклатураНазва
             typeof(string),   //ХарактеристикаНазва
             typeof(string),   //ПакуванняНазва
-            typeof(string),   //ВидЦіни
+            typeof(string),   //ВидЦіниНазва
             typeof(float)     //Ціна
         );
 
@@ -272,6 +276,18 @@ namespace StorageAndTrade
             ToolButton deleteButton = new ToolButton(Stock.Delete) { Label = "Видалити", IsImportant = true };
             deleteButton.Clicked += OnDeleteClick;
             toolbar.Add(deleteButton);
+
+            //
+            //
+            //
+
+            ToolButton fillDirectoryButton = new ToolButton(Stock.Add) { Label = "Заповнити товарами", IsImportant = true };
+            fillDirectoryButton.Clicked += OnFillDirectory;
+            toolbar.Add(fillDirectoryButton);
+
+            ToolButton fillRegisterButton = new ToolButton(Stock.Add) { Label = "Заповнити цінами", IsImportant = true };
+            fillRegisterButton.Clicked += OnFillRegister;
+            toolbar.Add(fillRegisterButton);
         }
 
         public void LoadRecords()
@@ -524,6 +540,185 @@ namespace StorageAndTrade
                     Store.Remove(ref iter);
                 }
             }
+        }
+
+        void OnFillDirectory(object? sender, EventArgs args)
+        {
+            if (ОбновитиЗначенняДокумента != null)
+                ОбновитиЗначенняДокумента.Invoke();
+
+            string query = $@"
+SELECT
+    Номенклатура.uid AS Номенклатура,
+    Номенклатура.{Номенклатура_Const.Назва} AS Номенклатура_Назва,
+    Номенклатура.{Номенклатура_Const.ОдиницяВиміру} AS Пакування,
+    Довідник_ПакуванняОдиниціВиміру.{ПакуванняОдиниціВиміру_Const.Назва} AS Пакування_Назва,
+    (
+        SELECT
+            {ЦіниНоменклатури_Const.Ціна}
+        FROM
+            {ЦіниНоменклатури_Const.TABLE} AS ЦіниНоменклатури
+        WHERE
+            ЦіниНоменклатури.{ЦіниНоменклатури_Const.Номенклатура} = Номенклатура.uid AND
+            ЦіниНоменклатури.{ЦіниНоменклатури_Const.ХарактеристикаНоменклатури} = '{Guid.Empty}' AND
+            ЦіниНоменклатури.{ЦіниНоменклатури_Const.Пакування} = Номенклатура.{Номенклатура_Const.ОдиницяВиміру} AND
+            ЦіниНоменклатури.{ЦіниНоменклатури_Const.ВидЦіни} = @vid_cen AND
+            ЦіниНоменклатури.{ЦіниНоменклатури_Const.Валюта} = @valuta
+        ORDER BY ЦіниНоменклатури.period DESC
+        LIMIT 1
+    ) AS Ціна
+FROM
+    {Номенклатура_Const.TABLE} AS Номенклатура
+    LEFT JOIN {ПакуванняОдиниціВиміру_Const.TABLE} AS Довідник_ПакуванняОдиниціВиміру ON 
+        Довідник_ПакуванняОдиниціВиміру.uid = Номенклатура.{Номенклатура_Const.ОдиницяВиміру}
+WHERE
+    Номенклатура.{Номенклатура_Const.ТипНоменклатури} = {(int)Перелічення.ТипиНоменклатури.Товар} OR
+    Номенклатура.{Номенклатура_Const.ТипНоменклатури} = {(int)Перелічення.ТипиНоменклатури.Послуга}
+ORDER BY Номенклатура_Назва, Пакування_Назва
+";
+            Store.Clear();
+            Записи.Clear();
+
+            if (ВстановленняЦінНоменклатури_Objest != null)
+            {
+                Dictionary<string, object> paramQuery = new Dictionary<string, object>();
+                paramQuery.Add("valuta", ВстановленняЦінНоменклатури_Objest.Валюта.UnigueID.UGuid);
+                paramQuery.Add("vid_cen", ВстановленняЦінНоменклатури_Objest.ВидЦіни.UnigueID.UGuid);
+
+                string[] columnsName;
+                List<Dictionary<string, object>> listRow;
+
+                Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listRow);
+
+                string ВидЦіниНазва = ВстановленняЦінНоменклатури_Objest.ВидЦіни.GetPresentation();
+
+                foreach (Dictionary<string, object> row in listRow)
+                {
+                    Запис запис = new Запис
+                    {
+                        ID = Guid.Empty,
+                        Номенклатура = new Номенклатура_Pointer(row["Номенклатура"]),
+                        НоменклатураНазва = row["Номенклатура_Назва"].ToString() ?? "",
+                        Характеристика = new ХарактеристикиНоменклатури_Pointer(),
+                        ХарактеристикаНазва = "",
+                        Пакування = new ПакуванняОдиниціВиміру_Pointer(row["Пакування"]),
+                        ПакуванняНазва = row["Пакування_Назва"].ToString() ?? "",
+                        ВидЦіни = ВстановленняЦінНоменклатури_Objest.ВидЦіни,
+                        ВидЦіниНазва = ВидЦіниНазва,
+                        Ціна = (row["Ціна"] != DBNull.Value ? (decimal)row["Ціна"] : 0)
+                    };
+
+                    Записи.Add(запис);
+                    Store.AppendValues(запис.ToArray());
+                }
+            }
+        }
+
+        void OnFillRegister(object? sender, EventArgs args)
+        {
+            if (ОбновитиЗначенняДокумента != null)
+                ОбновитиЗначенняДокумента.Invoke();
+
+            string query = $@"
+WITH register AS
+(
+    SELECT DISTINCT {ЦіниНоменклатури_Const.Номенклатура} AS Номенклатура,
+        {ЦіниНоменклатури_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
+        {ЦіниНоменклатури_Const.Пакування} AS Пакування,
+        {ЦіниНоменклатури_Const.ВидЦіни} AS ВидЦіни
+    FROM
+        {ЦіниНоменклатури_Const.TABLE}
+    WHERE
+        {ЦіниНоменклатури_Const.Валюта} = @valuta";
+
+            #region WHERE
+
+            if (ВстановленняЦінНоменклатури_Objest != null && !ВстановленняЦінНоменклатури_Objest.ВидЦіни.IsEmpty())
+            {
+                query += $@"
+AND {ЦіниНоменклатури_Const.ВидЦіни} = @vid_cen
+";
+            }
+
+            #endregion
+
+            query += $@"
+)
+SELECT
+    register.Номенклатура,
+    Довідник_Номенклатура.{Номенклатура_Const.Назва} AS Номенклатура_Назва,
+    register.ХарактеристикаНоменклатури,
+    Довідник_ХарактеристикиНоменклатури.{ХарактеристикиНоменклатури_Const.Назва} AS ХарактеристикаНоменклатури_Назва,
+    register.Пакування,
+    Довідник_ПакуванняОдиниціВиміру.{ПакуванняОдиниціВиміру_Const.Назва} AS Пакування_Назва,
+    register.ВидЦіни,
+    Довідник_ВидиЦін.{ВидиЦін_Const.Назва} AS ВидЦіни_Назва,
+    (
+        SELECT 
+            {ЦіниНоменклатури_Const.Ціна}
+        FROM 
+            {ЦіниНоменклатури_Const.TABLE} AS ЦіниНоменклатури
+        WHERE
+            ЦіниНоменклатури.{ЦіниНоменклатури_Const.Номенклатура} = register.Номенклатура AND
+            ЦіниНоменклатури.{ЦіниНоменклатури_Const.ХарактеристикаНоменклатури} = register.ХарактеристикаНоменклатури AND
+            ЦіниНоменклатури.{ЦіниНоменклатури_Const.Пакування} = register.Пакування AND
+            ЦіниНоменклатури.{ЦіниНоменклатури_Const.ВидЦіни} = register.ВидЦіни AND
+            ЦіниНоменклатури.{ЦіниНоменклатури_Const.Валюта} = @valuta
+        ORDER BY ЦіниНоменклатури.period DESC
+        LIMIT 1
+    ) AS Ціна
+FROM
+    register
+    
+    LEFT JOIN {Номенклатура_Const.TABLE} AS Довідник_Номенклатура ON 
+        Довідник_Номенклатура.uid = register.Номенклатура
+    LEFT JOIN {ХарактеристикиНоменклатури_Const.TABLE} AS Довідник_ХарактеристикиНоменклатури ON 
+        Довідник_ХарактеристикиНоменклатури.uid = register.ХарактеристикаНоменклатури
+    LEFT JOIN {ПакуванняОдиниціВиміру_Const.TABLE} AS Довідник_ПакуванняОдиниціВиміру ON 
+        Довідник_ПакуванняОдиниціВиміру.uid = register.Пакування
+    LEFT JOIN {ВидиЦін_Const.TABLE} AS Довідник_ВидиЦін ON 
+        Довідник_ВидиЦін.uid = register.ВидЦіни
+ORDER BY
+    Номенклатура_Назва, ХарактеристикаНоменклатури_Назва, Пакування_Назва, ВидЦіни_Назва
+";
+
+            Store.Clear();
+            Записи.Clear();
+
+            if (ВстановленняЦінНоменклатури_Objest != null)
+            {
+                Dictionary<string, object> paramQuery = new Dictionary<string, object>();
+                paramQuery.Add("valuta", ВстановленняЦінНоменклатури_Objest.Валюта.UnigueID.UGuid);
+                paramQuery.Add("vid_cen", ВстановленняЦінНоменклатури_Objest.ВидЦіни.UnigueID.UGuid);
+
+                string[] columnsName;
+                List<Dictionary<string, object>> listRow;
+
+                Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listRow);
+
+                string ВидЦіниНазва = ВстановленняЦінНоменклатури_Objest.ВидЦіни.GetPresentation();
+
+                foreach (Dictionary<string, object> row in listRow)
+                {
+                    Запис запис = new Запис
+                    {
+                        ID = Guid.Empty,
+                        Номенклатура = new Номенклатура_Pointer(row["Номенклатура"]),
+                        НоменклатураНазва = row["Номенклатура_Назва"].ToString() ?? "",
+                        Характеристика = new ХарактеристикиНоменклатури_Pointer(row["ХарактеристикаНоменклатури"]),
+                        ХарактеристикаНазва = row["ХарактеристикаНоменклатури_Назва"].ToString() ?? "",
+                        Пакування = new ПакуванняОдиниціВиміру_Pointer(row["Пакування"]),
+                        ПакуванняНазва = row["Пакування_Назва"].ToString() ?? "",
+                        ВидЦіни = new ВидиЦін_Pointer(row["ВидЦіни"]),
+                        ВидЦіниНазва = row["ВидЦіни_Назва"].ToString() ?? "",
+                        Ціна = (decimal)row["Ціна"]
+                    };
+
+                    Записи.Add(запис);
+                    Store.AppendValues(запис.ToArray());
+                }
+            }
+
         }
 
         #endregion
