@@ -215,6 +215,12 @@ namespace StorageAndTrade
 
         void CreateContainer2(VBox vBox)
         {
+            //Склад
+            HBox hBoxSklad = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxSklad, false, false, 5);
+
+            hBoxSklad.PackStart(Склад, false, false, 5);
+
             //Каса
             HBox hBoxKasa = new HBox() { Halign = Align.End };
             vBox.PackStart(hBoxKasa, false, false, 5);
@@ -226,12 +232,6 @@ namespace StorageAndTrade
             vBox.PackStart(hBoxValuta, false, false, 5);
 
             hBoxValuta.PackStart(Валюта, false, false, 5);
-
-            //Склад
-            HBox hBoxSklad = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxSklad, false, false, 5);
-
-            hBoxSklad.PackStart(Склад, false, false, 5);
         }
 
         void CreateContainer3(VBox vBox)

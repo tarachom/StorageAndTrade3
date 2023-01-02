@@ -135,6 +135,10 @@ namespace StorageAndTrade
             newDocKasovyiOrderButton.Activated += OnNewDocNaOsnovi_KasovyiOrder;
             Menu.Append(newDocKasovyiOrderButton);
 
+            MenuItem newDocPovernenjaPostachalnykuButton = new MenuItem("Повернення товарів постачальнику");
+            newDocPovernenjaPostachalnykuButton.Activated += OnNewDocNaOsnovi_ПоверненняТоварівПостачальнику;
+            Menu.Append(newDocPovernenjaPostachalnykuButton);
+
             Menu.ShowAll();
 
             return Menu;
@@ -468,6 +472,75 @@ namespace StorageAndTrade
             }
         }
 
+        void OnNewDocNaOsnovi_ПоверненняТоварівПостачальнику(object? sender, EventArgs args)
+        {
+            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
+            {
+                TreePath[] selectionRows = TreeViewGrid.Selection.GetSelectedRows();
+
+                foreach (TreePath itemPath in selectionRows)
+                {
+                    TreeIter iter;
+                    TreeViewGrid.Model.GetIter(out iter, itemPath);
+
+                    string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
+
+                    ПоступленняТоварівТаПослуг_Pointer поступленняТоварівТаПослуг_Pointer = new ПоступленняТоварівТаПослуг_Pointer(new UnigueID(uid));
+                    ПоступленняТоварівТаПослуг_Objest поступленняТоварівТаПослуг_Objest = поступленняТоварівТаПослуг_Pointer.GetDocumentObject(true);
+
+                    //
+                    //Новий документ
+                    //
+
+                    ПоверненняТоварівПостачальнику_Objest поверненняТоварівПостачальнику_Objest = new ПоверненняТоварівПостачальнику_Objest();
+                    поверненняТоварівПостачальнику_Objest.New();
+                    поверненняТоварівПостачальнику_Objest.ДатаДок = DateTime.Now;
+                    поверненняТоварівПостачальнику_Objest.НомерДок = (++Константи.НумераціяДокументів.ПоверненняТоварівПостачальнику_Const).ToString("D8");
+                    поверненняТоварівПостачальнику_Objest.Назва = $"Повернення товарів постачальнику №{поверненняТоварівПостачальнику_Objest.НомерДок} від {поверненняТоварівПостачальнику_Objest.ДатаДок.ToString("dd.MM.yyyy")}";
+                    поверненняТоварівПостачальнику_Objest.Організація = поступленняТоварівТаПослуг_Objest.Організація;
+                    поверненняТоварівПостачальнику_Objest.Валюта = поступленняТоварівТаПослуг_Objest.Валюта;
+                    поверненняТоварівПостачальнику_Objest.Каса = поступленняТоварівТаПослуг_Objest.Каса;
+                    поверненняТоварівПостачальнику_Objest.Контрагент = поступленняТоварівТаПослуг_Objest.Контрагент;
+                    поверненняТоварівПостачальнику_Objest.Договір = поступленняТоварівТаПослуг_Objest.Договір;
+                    поверненняТоварівПостачальнику_Objest.Склад = поступленняТоварівТаПослуг_Objest.Склад;
+                    поверненняТоварівПостачальнику_Objest.СумаДокументу = поступленняТоварівТаПослуг_Objest.СумаДокументу;
+                    поверненняТоварівПостачальнику_Objest.Основа = new UuidAndText(поступленняТоварівТаПослуг_Objest.UnigueID.UGuid, поступленняТоварівТаПослуг_Objest.TypeDocument);
+                    поверненняТоварівПостачальнику_Objest.Save();
+
+                    //Товари
+                    foreach (ПоступленняТоварівТаПослуг_Товари_TablePart.Record record_реалізаціяТоварівТаПослуг in поступленняТоварівТаПослуг_Objest.Товари_TablePart.Records)
+                    {
+                        ПоверненняТоварівПостачальнику_Товари_TablePart.Record record_повернення = new ПоверненняТоварівПостачальнику_Товари_TablePart.Record();
+                        поверненняТоварівПостачальнику_Objest.Товари_TablePart.Records.Add(record_повернення);
+
+                        record_повернення.Номенклатура = record_реалізаціяТоварівТаПослуг.Номенклатура;
+                        record_повернення.ХарактеристикаНоменклатури = record_реалізаціяТоварівТаПослуг.ХарактеристикаНоменклатури;
+                        record_повернення.Серія = record_реалізаціяТоварівТаПослуг.Серія;
+                        record_повернення.Пакування = record_реалізаціяТоварівТаПослуг.Пакування;
+                        record_повернення.КількістьУпаковок = record_реалізаціяТоварівТаПослуг.КількістьУпаковок;
+                        record_повернення.Кількість = record_реалізаціяТоварівТаПослуг.Кількість;
+                        record_повернення.Ціна = record_реалізаціяТоварівТаПослуг.Ціна;
+                        record_повернення.Сума = record_реалізаціяТоварівТаПослуг.Сума;
+                        record_повернення.ДокументПоступлення = поступленняТоварівТаПослуг_Objest.GetDocumentPointer();
+                    }
+
+                    поверненняТоварівПостачальнику_Objest.Товари_TablePart.Save(false);
+
+                    Program.GeneralForm?.CreateNotebookPage($"{поверненняТоварівПостачальнику_Objest.Назва}", () =>
+                    {
+                        ПоверненняТоварівПостачальнику_Елемент page = new ПоверненняТоварівПостачальнику_Елемент
+                        {
+                            IsNew = false,
+                            ПоверненняТоварівПостачальнику_Objest = поверненняТоварівПостачальнику_Objest
+                        };
+
+                        page.SetValue();
+
+                        return page;
+                    });
+                }
+            }
+        }
         #endregion
     }
 }

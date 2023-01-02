@@ -35,42 +35,42 @@ using StorageAndTrade;
 
 namespace StorageAndTrade_1_0.Документи
 {
-	class СпільніФункції
+    class СпільніФункції
     {
-		/// <summary>
-		/// Список наявних партій на дату документу не враховуючи сам документ
-		/// </summary>
-		/// <param name="Організація">Організація</param>
-		/// <param name="Номенклатура">Номенклатура</param>
-		/// <param name="ХарактеристикаНоменклатури">ХарактеристикаНоменклатури</param>
-		/// <param name="Серія">Серія</param>
-		/// <param name="Склад">Склад</param>
-		/// <param name="Owner">UID Документу який проводиться</param>
-		/// <param name="OwnerDateDoc">Дата документу який проводиться</param>
-		/// <param name="Кількість">Кількість яку потрібно списати</param>
-		/// <returns>Іменований список</returns>
-		public static List<Dictionary<string, object>> ОтриматиСписокНаявнихПартій(
-			Організації_Pointer Організація, 
-			Номенклатура_Pointer Номенклатура, 
-			ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури,
-			СеріїНоменклатури_Pointer Серія, 
-			Склади_Pointer Склад,
-			UnigueID Owner, 
-			DateTime OwnerDateDoc,
-			decimal Кількість)
-		{
-			Перелічення.МетодиСписанняПартій МетодСписання;
+        /// <summary>
+        /// Список наявних партій на дату документу не враховуючи сам документ
+        /// </summary>
+        /// <param name="Організація">Організація</param>
+        /// <param name="Номенклатура">Номенклатура</param>
+        /// <param name="ХарактеристикаНоменклатури">ХарактеристикаНоменклатури</param>
+        /// <param name="Серія">Серія</param>
+        /// <param name="Склад">Склад</param>
+        /// <param name="Owner">UID Документу який проводиться</param>
+        /// <param name="OwnerDateDoc">Дата документу який проводиться</param>
+        /// <param name="Кількість">Кількість яку потрібно списати</param>
+        /// <returns>Іменований список</returns>
+        public static List<Dictionary<string, object>> ОтриматиСписокНаявнихПартій(
+            Організації_Pointer Організація,
+            Номенклатура_Pointer Номенклатура,
+            ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури,
+            СеріїНоменклатури_Pointer Серія,
+            Склади_Pointer Склад,
+            UnigueID Owner,
+            DateTime OwnerDateDoc,
+            decimal Кількість)
+        {
+            Перелічення.МетодиСписанняПартій МетодСписання;
 
-			if (Константи.ПартіїТоварів.МетодСписанняПартій_Const == Перелічення.МетодиСписанняПартій.FIFO)
-				МетодСписання = Перелічення.МетодиСписанняПартій.FIFO;
-			else if (Константи.ПартіїТоварів.МетодСписанняПартій_Const == Перелічення.МетодиСписанняПартій.LIFO)
-				МетодСписання = Перелічення.МетодиСписанняПартій.LIFO;
-			else
-				МетодСписання = Перелічення.МетодиСписанняПартій.FIFO;
+            if (Константи.ПартіїТоварів.МетодСписанняПартій_Const == Перелічення.МетодиСписанняПартій.FIFO)
+                МетодСписання = Перелічення.МетодиСписанняПартій.FIFO;
+            else if (Константи.ПартіїТоварів.МетодСписанняПартій_Const == Перелічення.МетодиСписанняПартій.LIFO)
+                МетодСписання = Перелічення.МетодиСписанняПартій.LIFO;
+            else
+                МетодСписання = Перелічення.МетодиСписанняПартій.FIFO;
 
-			string МетодСортування = МетодСписання == Перелічення.МетодиСписанняПартій.FIFO ? "ASC" : "DESC";
+            string МетодСортування = МетодСписання == Перелічення.МетодиСписанняПартій.FIFO ? "ASC" : "DESC";
 
-			string query = $@"
+            string query = $@"
 WITH register AS
 (
 	SELECT 
@@ -100,12 +100,12 @@ WITH register AS
 			-ПартіїТоварів.{ПартіїТоварів_Const.Кількість} END) > 0
 )";
 
-			//
-			//ДостатняКількість обчислюється для того щоб вибирати тільки потрібні партії, а не всі наявні партії.
-			//ДостатняКількість = Накопичена кількість >= Потрібній кількості
-			//
+            //
+            //ДостатняКількість обчислюється для того щоб вибирати тільки потрібні партії, а не всі наявні партії.
+            //ДостатняКількість = Накопичена кількість >= Потрібній кількості
+            //
 
-			query += $@"
+            query += $@"
 , Обчислення AS
 (
 	SELECT
@@ -121,13 +121,13 @@ WITH register AS
 	ORDER BY ДатаПоступлення {МетодСортування}
 )";
 
-			//
-			//Вибираються дві групи
-			//1. Партії які мають кількість меншу потрібній кількості
-			//2. Одну партію яка закриває потрібну кількість
-			//
+            //
+            //Вибираються дві групи
+            //1. Партії які мають кількість меншу потрібній кількості
+            //2. Одну партію яка закриває потрібну кількість
+            //
 
-			query += $@"
+            query += $@"
 (
 	SELECT 
 		ПартіяТоварівКомпозит,
@@ -147,34 +147,34 @@ UNION ALL
 	LIMIT 1
 )
 ";
-			Dictionary<string, object> paramQuery = new Dictionary<string, object>();
-			paramQuery.Add("period_end", OwnerDateDoc);
-			paramQuery.Add("Кількість", Кількість);
+            Dictionary<string, object> paramQuery = new Dictionary<string, object>();
+            paramQuery.Add("period_end", OwnerDateDoc);
+            paramQuery.Add("Кількість", Кількість);
 
-			string[] columnsName;
-			List<Dictionary<string, object>> listNameRow;
+            string[] columnsName;
+            List<Dictionary<string, object>> listNameRow;
 
-			Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listNameRow);
+            Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listNameRow);
 
-			return listNameRow;
-		}
+            return listNameRow;
+        }
 
-		/// <summary>
-		/// Залишки товару на складі на дату документу не враховуючи сам документ
-		/// </summary>
-		/// <param name="Номенклатура">Номенклатура</param>
-		/// <param name="ХарактеристикаНоменклатури">ХарактеристикаНоменклатури</param>
-		/// <param name="Серія">Серія</param>
-		/// <param name="Склад">Склад</param>
-		/// <param name="Owner">UID Документу який проводиться</param>
-		/// <param name="OwnerDateDoc">Дата документу який проводиться</param>
-		/// <returns>Іменований список</returns>
-		public static List<Dictionary<string, object>> ОтриматиЗалишкиТоваруНаСкладі(
-			Номенклатура_Pointer Номенклатура, ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури,
-			СеріїНоменклатури_Pointer Серія, Склади_Pointer Склад,
-			UnigueID Owner, DateTime OwnerDateDoc)
-		{
-			string query = $@"
+        /// <summary>
+        /// Залишки товару на складі на дату документу не враховуючи сам документ
+        /// </summary>
+        /// <param name="Номенклатура">Номенклатура</param>
+        /// <param name="ХарактеристикаНоменклатури">ХарактеристикаНоменклатури</param>
+        /// <param name="Серія">Серія</param>
+        /// <param name="Склад">Склад</param>
+        /// <param name="Owner">UID Документу який проводиться</param>
+        /// <param name="OwnerDateDoc">Дата документу який проводиться</param>
+        /// <returns>Іменований список</returns>
+        public static List<Dictionary<string, object>> ОтриматиЗалишкиТоваруНаСкладі(
+            Номенклатура_Pointer Номенклатура, ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури,
+            СеріїНоменклатури_Pointer Серія, Склади_Pointer Склад,
+            UnigueID Owner, DateTime OwnerDateDoc)
+        {
+            string query = $@"
 WITH register AS
 (
 	SELECT 
@@ -200,32 +200,32 @@ FROM
     register
 ";
 
-			Dictionary<string, object> paramQuery = new Dictionary<string, object>();
+            Dictionary<string, object> paramQuery = new Dictionary<string, object>();
 
-			paramQuery.Add("period_end", OwnerDateDoc);
+            paramQuery.Add("period_end", OwnerDateDoc);
 
-			string[] columnsName;
-			List<Dictionary<string, object>> listNameRow;
+            string[] columnsName;
+            List<Dictionary<string, object>> listNameRow;
 
-			Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listNameRow);
+            Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listNameRow);
 
-			return listNameRow;
-		}
+            return listNameRow;
+        }
 
-		/// <summary>
-		/// Зарезервовані та наявні товари на складі на дату документу не враховуючи сам документ
-		/// </summary>
-		/// <param name="Номенклатура">Номенклатура</param>
-		/// <param name="ХарактеристикаНоменклатури">ХарактеристикаНоменклатури</param>
-		/// <param name="Склад">Склад</param>
-		/// <param name="Owner">UID Документу який проводиться</param>
-		/// <param name="OwnerDateDoc">Дата документу який проводиться</param>
-		/// <returns>Іменований список</returns>
-		public static List<Dictionary<string, object>> ОтриматиРезервТоваруНаСкладі(
-			Номенклатура_Pointer Номенклатура, ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури, Склади_Pointer Склад,
-			UnigueID Owner, DateTime OwnerDateDoc)
-		{
-			string query = $@"
+        /// <summary>
+        /// Зарезервовані та наявні товари на складі на дату документу не враховуючи сам документ
+        /// </summary>
+        /// <param name="Номенклатура">Номенклатура</param>
+        /// <param name="ХарактеристикаНоменклатури">ХарактеристикаНоменклатури</param>
+        /// <param name="Склад">Склад</param>
+        /// <param name="Owner">UID Документу який проводиться</param>
+        /// <param name="OwnerDateDoc">Дата документу який проводиться</param>
+        /// <returns>Іменований список</returns>
+        public static List<Dictionary<string, object>> ОтриматиРезервТоваруНаСкладі(
+            Номенклатура_Pointer Номенклатура, ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури, Склади_Pointer Склад,
+            UnigueID Owner, DateTime OwnerDateDoc)
+        {
+            string query = $@"
 WITH register AS
 (
 	SELECT 
@@ -261,30 +261,30 @@ FROM
     register
 ";
 
-			Dictionary<string, object> paramQuery = new Dictionary<string, object>();
-			paramQuery.Add("period_end", OwnerDateDoc);
+            Dictionary<string, object> paramQuery = new Dictionary<string, object>();
+            paramQuery.Add("period_end", OwnerDateDoc);
 
-			string[] columnsName;
-			List<Dictionary<string, object>> listNameRow;
+            string[] columnsName;
+            List<Dictionary<string, object>> listNameRow;
 
-			Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listNameRow);
+            Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listNameRow);
 
-			return listNameRow;
-		}
+            return listNameRow;
+        }
 
-		/// <summary>
-		/// Ортримати кількість зарезервованого товару конкретним документом
-		/// </summary>
-		/// <param name="Номенклатура">Номенклатура</param>
-		/// <param name="ХарактеристикаНоменклатури">ХарактеристикаНоменклатури</param>
-		/// <param name="Склад">Склад</param>
-		/// <param name="Owner">Документ</param>
-		/// <returns>Іменований список</returns>
-		public static List<Dictionary<string, object>> ОтриматиРезервТоваруПоДокументу(
-			Номенклатура_Pointer Номенклатура, ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури, Склади_Pointer Склад, 
-			UnigueID ДокументРезерву, UnigueID Owner, DateTime OwnerDateDoc)
-		{
-			string query = $@"
+        /// <summary>
+        /// Ортримати кількість зарезервованого товару конкретним документом
+        /// </summary>
+        /// <param name="Номенклатура">Номенклатура</param>
+        /// <param name="ХарактеристикаНоменклатури">ХарактеристикаНоменклатури</param>
+        /// <param name="Склад">Склад</param>
+        /// <param name="Owner">Документ</param>
+        /// <returns>Іменований список</returns>
+        public static List<Dictionary<string, object>> ОтриматиРезервТоваруПоДокументу(
+            Номенклатура_Pointer Номенклатура, ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури, Склади_Pointer Склад,
+            UnigueID ДокументРезерву, UnigueID Owner, DateTime OwnerDateDoc)
+        {
+            string query = $@"
 WITH register AS
 (
 	SELECT 
@@ -311,32 +311,32 @@ FROM
     register
 ";
 
-			Dictionary<string, object> paramQuery = new Dictionary<string, object>();
-			paramQuery.Add("period_end", OwnerDateDoc);
+            Dictionary<string, object> paramQuery = new Dictionary<string, object>();
+            paramQuery.Add("period_end", OwnerDateDoc);
 
-			string[] columnsName;
-			List<Dictionary<string, object>> listNameRow;
+            string[] columnsName;
+            List<Dictionary<string, object>> listNameRow;
 
-			Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listNameRow);
+            Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listNameRow);
 
-			return listNameRow;
-		}
+            return listNameRow;
+        }
 
-		/// <summary>
-		/// Замовлення клієнта для товару по документу
-		/// </summary>
-		/// <param name="Номенклатура">Номенклатура</param>
-		/// <param name="ХарактеристикаНоменклатури">ХарактеристикаНоменклатури</param>
-		/// <param name="Склад">Склад</param>
-		/// <param name="ЗамовленняКлієнта">ЗамовленняКлієнта</param>
-		/// <param name="Owner">Документ</param>
-		/// <param name="OwnerDateDoc">Дата документу</param>
-		/// <returns></returns>
-		public static List<Dictionary<string, object>> ОтриматиЗамовленняКлієнтаДляТоваруПоДокументу(
-			Номенклатура_Pointer Номенклатура, ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури, Склади_Pointer Склад, 
-			UnigueID ЗамовленняКлієнта, UnigueID Owner, DateTime OwnerDateDoc)
-		{
-			string query = $@"
+        /// <summary>
+        /// Замовлення клієнта для товару по документу
+        /// </summary>
+        /// <param name="Номенклатура">Номенклатура</param>
+        /// <param name="ХарактеристикаНоменклатури">ХарактеристикаНоменклатури</param>
+        /// <param name="Склад">Склад</param>
+        /// <param name="ЗамовленняКлієнта">ЗамовленняКлієнта</param>
+        /// <param name="Owner">Документ</param>
+        /// <param name="OwnerDateDoc">Дата документу</param>
+        /// <returns></returns>
+        public static List<Dictionary<string, object>> ОтриматиЗамовленняКлієнтаДляТоваруПоДокументу(
+            Номенклатура_Pointer Номенклатура, ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури, Склади_Pointer Склад,
+            UnigueID ЗамовленняКлієнта, UnigueID Owner, DateTime OwnerDateDoc)
+        {
+            string query = $@"
 WITH register AS
 (
 	SELECT 
@@ -368,32 +368,32 @@ FROM
     register
 ";
 
-			Dictionary<string, object> paramQuery = new Dictionary<string, object>();
-			paramQuery.Add("period_end", OwnerDateDoc);
+            Dictionary<string, object> paramQuery = new Dictionary<string, object>();
+            paramQuery.Add("period_end", OwnerDateDoc);
 
-			string[] columnsName;
-			List<Dictionary<string, object>> listNameRow;
+            string[] columnsName;
+            List<Dictionary<string, object>> listNameRow;
 
-			Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listNameRow);
+            Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listNameRow);
 
-			return listNameRow;
-		}
+            return listNameRow;
+        }
 
-		/// <summary>
-		/// Замовлення постачальника для товару по документу
-		/// </summary>
-		/// <param name="Номенклатура">Номенклатура</param>
-		/// <param name="ХарактеристикаНоменклатури">ХарактеристикаНоменклатури</param>
-		/// <param name="Склад">Склад</param>
-		/// <param name="ЗамовленняПостачальнику">ЗамовленняПостачальнику</param>
-		/// <param name="Owner">Документ</param>
-		/// <param name="OwnerDateDoc">Дата документу</param>
-		/// <returns></returns>
-		public static List<Dictionary<string, object>> ОтриматиЗамовленняПостачальникуДляТоваруПоДокументу(
-			Номенклатура_Pointer Номенклатура, ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури, Склади_Pointer Склад,
-			UnigueID ЗамовленняПостачальнику, UnigueID Owner, DateTime OwnerDateDoc)
-		{
-			string query = $@"
+        /// <summary>
+        /// Замовлення постачальника для товару по документу
+        /// </summary>
+        /// <param name="Номенклатура">Номенклатура</param>
+        /// <param name="ХарактеристикаНоменклатури">ХарактеристикаНоменклатури</param>
+        /// <param name="Склад">Склад</param>
+        /// <param name="ЗамовленняПостачальнику">ЗамовленняПостачальнику</param>
+        /// <param name="Owner">Документ</param>
+        /// <param name="OwnerDateDoc">Дата документу</param>
+        /// <returns></returns>
+        public static List<Dictionary<string, object>> ОтриматиЗамовленняПостачальникуДляТоваруПоДокументу(
+            Номенклатура_Pointer Номенклатура, ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури, Склади_Pointer Склад,
+            UnigueID ЗамовленняПостачальнику, UnigueID Owner, DateTime OwnerDateDoc)
+        {
+            string query = $@"
 WITH register AS
 (
 	SELECT 
@@ -420,16 +420,16 @@ FROM
     register
 ";
 
-			Dictionary<string, object> paramQuery = new Dictionary<string, object>();
-			paramQuery.Add("period_end", OwnerDateDoc);
+            Dictionary<string, object> paramQuery = new Dictionary<string, object>();
+            paramQuery.Add("period_end", OwnerDateDoc);
 
-			string[] columnsName;
-			List<Dictionary<string, object>> listNameRow;
+            string[] columnsName;
+            List<Dictionary<string, object>> listNameRow;
 
-			Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listNameRow);
+            Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listNameRow);
 
-			return listNameRow;
-		}
+            return listNameRow;
+        }
 
         /// <summary>
 		/// Перервати проведення документу
@@ -439,849 +439,538 @@ FROM
 		/// <param name="СписокПомилок">Список помилок</param>
         public static void ДокументНеПроводиться(DocumentObject ДокументОбєкт, string НазваДокументу, List<string> СписокПомилок)
         {
-			ФункціїДляПовідомлень.ДодатиПовідомленняПроПомилку(
-				DateTime.Now, "Проведення документу", ДокументОбєкт.UnigueID.UGuid, 
-				$"Документ.{ДокументОбєкт.TypeDocument}", НазваДокументу, 
-				string.Join("\n", СписокПомилок.ToArray()) + "\n\nДокумент [" + НазваДокументу + "] не проводиться!");
-		}
-	}
+            ФункціїДляПовідомлень.ДодатиПовідомленняПроПомилку(
+                DateTime.Now, "Проведення документу", ДокументОбєкт.UnigueID.UGuid,
+                $"Документ.{ДокументОбєкт.TypeDocument}", НазваДокументу,
+                string.Join("\n", СписокПомилок.ToArray()) + "\n\nДокумент [" + НазваДокументу + "] не проводиться!");
+        }
+    }
 
-	class ЗамовленняКлієнта_SpendTheDocument
-	{
-		public static bool Spend(ЗамовленняКлієнта_Objest ДокументОбєкт)
-		{
-			#region Підготовка
+    class ЗамовленняКлієнта_SpendTheDocument
+    {
+        public static bool Spend(ЗамовленняКлієнта_Objest ДокументОбєкт)
+        {
+            #region Підготовка
 
-			List<string> СписокПомилок = new List<string>();
-			Dictionary<int, Номенклатура_Objest> СписокНоменклатури = new Dictionary<int, Номенклатура_Objest>();
-			Dictionary<int, decimal> ВільнийЗалишокНоменклатури = new Dictionary<int, decimal>();
+            List<string> СписокПомилок = new List<string>();
+            Dictionary<int, Номенклатура_Objest> СписокНоменклатури = new Dictionary<int, Номенклатура_Objest>();
+            Dictionary<int, decimal> ВільнийЗалишокНоменклатури = new Dictionary<int, decimal>();
 
-			foreach (ЗамовленняКлієнта_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
-			{
-				if (ТовариРядок.Номенклатура.IsEmpty())
-				{
-					СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. Не заповнене поле Номенклатура");
-					СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
-
-					return false;
-				}
-
-				if (!(ТовариРядок.Кількість > 0))
-				{
-					СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. Кількість має бути більшою 0");
-					СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
+            foreach (ЗамовленняКлієнта_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
+            {
+                if (ТовариРядок.Номенклатура.IsEmpty())
+                {
+                    СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. Не заповнене поле Номенклатура");
+                    СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
 
                     return false;
                 }
 
-				СписокНоменклатури.Add(ТовариРядок.НомерРядка, ТовариРядок.Номенклатура.GetDirectoryObject()!);
-
-				if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
-				{
-					//
-					//Резерви та вільні залишки
-					//
-
-					List<Dictionary<string, object>> Резерв = СпільніФункції.ОтриматиРезервТоваруНаСкладі(
-						ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
-						!ТовариРядок.Склад.IsEmpty() ? ТовариРядок.Склад : ДокументОбєкт.Склад,
-						ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
-
-					if (Резерв.Count > 0)
-						ВільнийЗалишокНоменклатури.Add(ТовариРядок.НомерРядка, (decimal)Резерв[0]["ВНаявності"] - (decimal)Резерв[0]["ВРезервіЗіСкладу"]);
-					else
-						ВільнийЗалишокНоменклатури.Add(ТовариРядок.НомерРядка, 0);
-				}
-			}
-
-			#endregion
-
-			#region ЗамовленняКлієнтів
-
-			ЗамовленняКлієнтів_RecordsSet замовленняКлієнтів_RecordsSet = new ЗамовленняКлієнтів_RecordsSet();
-
-			ДокументОбєкт.Товари_TablePart.Read();
-
-			foreach (ЗамовленняКлієнта_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
-			{
-				if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
-				{
-					ЗамовленняКлієнтів_RecordsSet.Record record = new ЗамовленняКлієнтів_RecordsSet.Record();
-					замовленняКлієнтів_RecordsSet.Records.Add(record);
-
-					record.Income = true;
-					record.Owner = ДокументОбєкт.UnigueID.UGuid;
-
-					record.ЗамовленняКлієнта = ДокументОбєкт.GetDocumentPointer();
-					record.Номенклатура = ТовариРядок.Номенклатура;
-					record.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
-					record.Склад = !ТовариРядок.Склад.IsEmpty() ? ТовариРядок.Склад : ДокументОбєкт.Склад;
-					record.Замовлено = ТовариРядок.Кількість;
-					record.Сума = ТовариРядок.Сума;
-				}
-			}
-
-			замовленняКлієнтів_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
-
-			#endregion
-
-			#region ВільніЗалишки
-
-			ВільніЗалишки_RecordsSet вільніЗалишки_RecordsSet = new ВільніЗалишки_RecordsSet();
-
-			foreach (ЗамовленняКлієнта_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
-			{
-				if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
-				{
-					ВільніЗалишки_RecordsSet.Record record = new ВільніЗалишки_RecordsSet.Record();
-					вільніЗалишки_RecordsSet.Records.Add(record);
-
-					record.Income = true;
-					record.Owner = ДокументОбєкт.UnigueID.UGuid;
-
-					record.Номенклатура = ТовариРядок.Номенклатура;
-					record.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
-					record.Склад = !ТовариРядок.Склад.IsEmpty() ? ТовариРядок.Склад : ДокументОбєкт.Склад;
-					record.ВРезервіЗіСкладу = ВільнийЗалишокНоменклатури[ТовариРядок.НомерРядка];
-
-					if (ТовариРядок.Кількість - ВільнийЗалишокНоменклатури[ТовариРядок.НомерРядка] > 0)
-						record.ВРезервіПідЗамовлення = ТовариРядок.Кількість - ВільнийЗалишокНоменклатури[ТовариРядок.НомерРядка];
-
-					record.ДокументРезерву = ДокументОбєкт.UnigueID.UGuid;
-				}
-			}
-
-			вільніЗалишки_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
-
-			#endregion
-
-			return true;
-		}
-
-		public static void ClearSpend(ЗамовленняКлієнта_Objest ДокументОбєкт)
-		{
-			ЗамовленняКлієнтів_RecordsSet замовленняКлієнтів_RecordsSet = new ЗамовленняКлієнтів_RecordsSet();
-			замовленняКлієнтів_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-
-			ВільніЗалишки_RecordsSet вільніЗалишки_RecordsSet = new ВільніЗалишки_RecordsSet();
-			вільніЗалишки_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-		}
-	}
-
-	class РахунокФактура_SpendTheDocument
-	{
-		public static bool Spend(РахунокФактура_Objest ДокументОбєкт)
-		{
-			#region Підготовка
-
-			List<string> СписокПомилок = new List<string>();
-			Dictionary<int, Номенклатура_Objest> СписокНоменклатури = new Dictionary<int, Номенклатура_Objest>();
-
-			foreach (РахунокФактура_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
-			{
-				if (ТовариРядок.Номенклатура.IsEmpty())
-				{
-					СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. Не заповнене поле Номенклатура");
-					СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
+                if (!(ТовариРядок.Кількість > 0))
+                {
+                    СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. Кількість має бути більшою 0");
+                    СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
 
                     return false;
                 }
 
-				if (!(ТовариРядок.Кількість > 0))
-				{
-					СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. Кількість має бути більшою 0");
-					СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
+                СписокНоменклатури.Add(ТовариРядок.НомерРядка, ТовариРядок.Номенклатура.GetDirectoryObject()!);
 
-                    return false;
+                if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
+                {
+                    //
+                    //Резерви та вільні залишки
+                    //
+
+                    List<Dictionary<string, object>> Резерв = СпільніФункції.ОтриматиРезервТоваруНаСкладі(
+                        ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
+                        !ТовариРядок.Склад.IsEmpty() ? ТовариРядок.Склад : ДокументОбєкт.Склад,
+                        ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
+
+                    if (Резерв.Count > 0)
+                        ВільнийЗалишокНоменклатури.Add(ТовариРядок.НомерРядка, (decimal)Резерв[0]["ВНаявності"] - (decimal)Резерв[0]["ВРезервіЗіСкладу"]);
+                    else
+                        ВільнийЗалишокНоменклатури.Add(ТовариРядок.НомерРядка, 0);
                 }
-
-				СписокНоменклатури.Add(ТовариРядок.НомерРядка, ТовариРядок.Номенклатура.GetDirectoryObject()!);
-
-				if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
-				{
-					//
-					//Резерви та вільні залишки
-					//
-
-					List<Dictionary<string, object>> Резерв = СпільніФункції.ОтриматиРезервТоваруНаСкладі(
-						ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
-						!ТовариРядок.Склад.IsEmpty() ? ТовариРядок.Склад : ДокументОбєкт.Склад,
-						ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
-
-					if (Резерв.Count > 0)
-					{
-						decimal ВНаявності = (decimal)Резерв[0]["ВНаявності"];
-						decimal ВРезервіЗіСкладу = (decimal)Резерв[0]["ВРезервіЗіСкладу"];
-
-						if (ВНаявності - ВРезервіЗіСкладу < ТовариРядок.Кількість)
-						{
-							СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
-								$"В наявності {ВНаявності}, " +
-								$"в резерві {ВРезервіЗіСкладу}, " +
-								$"вільний залишок {ВНаявності - ВРезервіЗіСкладу}, " +
-								$"потрібно зарезервувати { ТовариРядок.Кількість}");
-							СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
-
-                            return false;
-                        }
-					}
-					else
-					{
-						СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
-						     $"Відсутній товар на залишку");
-						СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
-
-                        return false;
-                    }
-				}
-			}
-			#endregion
-
-			#region ВільніЗалишки
-
-			ВільніЗалишки_RecordsSet вільніЗалишки_RecordsSet = new ВільніЗалишки_RecordsSet();
-
-			foreach (РахунокФактура_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
-			{
-				if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
-				{
-					ВільніЗалишки_RecordsSet.Record record = new ВільніЗалишки_RecordsSet.Record();
-					вільніЗалишки_RecordsSet.Records.Add(record);
-
-					record.Income = true;
-					record.Owner = ДокументОбєкт.UnigueID.UGuid;
-
-					record.Номенклатура = ТовариРядок.Номенклатура;
-					record.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
-					record.Склад = !ТовариРядок.Склад.IsEmpty() ? ТовариРядок.Склад : ДокументОбєкт.Склад;
-					record.ВРезервіЗіСкладу = ТовариРядок.Кількість;
-					record.ДокументРезерву = ДокументОбєкт.UnigueID.UGuid;
-				}
-			}
-
-			вільніЗалишки_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
-
-			#endregion
-
-			return true;
-		}
-
-		public static void ClearSpend(РахунокФактура_Objest ДокументОбєкт)
-		{
-			ВільніЗалишки_RecordsSet вільніЗалишки_RecordsSet = new ВільніЗалишки_RecordsSet();
-			вільніЗалишки_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-		}
-	}
-
-	class РеалізаціяТоварівТаПослуг_SpendTheDocument
-	{
-		public static bool Spend(РеалізаціяТоварівТаПослуг_Objest ДокументОбєкт)
-		{
-			#region Підготовка
-
-			List<string> СписокПомилок = new List<string>();
-
-			Dictionary<int, Номенклатура_Objest> СписокНоменклатури = new Dictionary<int, Номенклатура_Objest>();
-			Dictionary<int, decimal> ЗалишокНоменклатури = new Dictionary<int, decimal>();
-			Dictionary<int, decimal> РезервНоменклатури = new Dictionary<int, decimal>();
-			Dictionary<int, decimal> РезервРахунку = new Dictionary<int, decimal>();
-			Dictionary<int, decimal> РезервЗамовлення = new Dictionary<int, decimal>();
-
-			Dictionary<int, decimal> ЗамволенняКлієнта = new Dictionary<int, decimal>();
-			Dictionary<int, decimal> ЗамволенняКлієнтаСума = new Dictionary<int, decimal>();
-
-			foreach (РеалізаціяТоварівТаПослуг_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
-			{
-				if (ТовариРядок.Номенклатура.IsEmpty())
-				{
-					СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. Не заповнене поле Номенклатура");
-					СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
-
-                    return false;
-                }
-
-				if (!(ТовариРядок.Кількість > 0))
-				{
-					СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. Кількість має бути більшою 0");
-					СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
-
-                    return false;
-                }
-
-				СписокНоменклатури.Add(ТовариРядок.НомерРядка, ТовариРядок.Номенклатура.GetDirectoryObject()!);
-				
-				if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
-				{
-					//
-					//Для товарів отримуємо залишки
-					//
-
-					List<Dictionary<string, object>> Залишок_Список = СпільніФункції.ОтриматиЗалишкиТоваруНаСкладі(
-						ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури, ТовариРядок.Серія, 
-						!ТовариРядок.Склад.IsEmpty() ? ТовариРядок.Склад : ДокументОбєкт.Склад,
-						ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
-
-					ЗалишокНоменклатури.Add(ТовариРядок.НомерРядка, Залишок_Список.Count > 0 ? (decimal)Залишок_Список[0]["ВНаявності"] : 0);
-
-					if (ЗалишокНоменклатури[ТовариРядок.НомерРядка] > 0)
-					{
-						if (ЗалишокНоменклатури[ТовариРядок.НомерРядка] < ТовариРядок.Кількість)
-						{
-							СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
-								$"Залишок товару {ЗалишокНоменклатури[ТовариРядок.НомерРядка]}, потрібно {ТовариРядок.Кількість}");
-							СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
-
-                            return false;
-                        }
-
-						//
-						// Рахуємо всі резерви
-						//
-
-						List<Dictionary<string, object>> Резерв_Список = СпільніФункції.ОтриматиРезервТоваруНаСкладі(
-						ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
-						!ТовариРядок.Склад.IsEmpty() ? ТовариРядок.Склад : ДокументОбєкт.Склад,
-						ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
-
-						РезервНоменклатури.Add(ТовариРядок.НомерРядка, Резерв_Список.Count > 0 ? (decimal)Резерв_Список[0]["ВРезервіЗіСкладу"] : 0);
-
-						//
-						// Перевірка резервів по документах
-						//
-
-						if (!ТовариРядок.ЗамовленняКлієнта.IsEmpty())
-						{
-							//
-							// Якщо заданий документ Замовлення Клієнта
-							// потрібно дізнатися скільки цей документ зарезервував товарів
-							//
-
-							List<Dictionary<string, object>> РезервЗамовленняКлієнта_Список = СпільніФункції.ОтриматиРезервТоваруПоДокументу(
-								ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
-								!ТовариРядок.Склад.IsEmpty() ? ТовариРядок.Склад : ДокументОбєкт.Склад,
-								ТовариРядок.ЗамовленняКлієнта.UnigueID, ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
-
-							if (РезервЗамовленняКлієнта_Список.Count > 0)
-								РезервЗамовлення.Add(ТовариРядок.НомерРядка, (decimal)РезервЗамовленняКлієнта_Список[0]["ВРезервіЗіСкладу"]);
-
-							//
-							// Перевірити замовлення
-							//
-
-							List<Dictionary<string, object>> Замовлення_Список = СпільніФункції.ОтриматиЗамовленняКлієнтаДляТоваруПоДокументу(
-								ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
-								!ТовариРядок.Склад.IsEmpty() ? ТовариРядок.Склад : ДокументОбєкт.Склад,
-								ТовариРядок.ЗамовленняКлієнта.UnigueID, ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
-
-							if (Замовлення_Список.Count > 0)
-							{
-								ЗамволенняКлієнта.Add(ТовариРядок.НомерРядка, (decimal)Замовлення_Список[0]["Замовлено"]);
-								ЗамволенняКлієнтаСума.Add(ТовариРядок.НомерРядка, (decimal)Замовлення_Список[0]["Сума"]);
-
-								if (!(ЗамволенняКлієнта[ТовариРядок.НомерРядка] > 0))
-                                {
-									СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
-										$"Залишок по документу Замовлення {ЗамволенняКлієнта[ТовариРядок.НомерРядка]}");
-									СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
-
-                                    return false;
-                                }
-							}
-							else
-							{
-								СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
-									$"Відсутнє замовлення для товару {СписокНоменклатури[ТовариРядок.НомерРядка].Назва} в документі Замовлення клієнта");
-								СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
-
-                                return false;
-                            }
-						}
-
-						if (!ТовариРядок.РахунокФактура.IsEmpty())
-						{
-							//
-							// Якщо заданий документ Рахунок фактура
-							// потрібно дізнатися скільки цей документ зарезервував товарів
-							//
-
-							List<Dictionary<string, object>> РезервРахункуФактури_Список = СпільніФункції.ОтриматиРезервТоваруПоДокументу(
-								ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
-								!ТовариРядок.Склад.IsEmpty() ? ТовариРядок.Склад : ДокументОбєкт.Склад,
-								ТовариРядок.РахунокФактура.UnigueID, ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
-
-							if (РезервРахункуФактури_Список.Count > 0)
-								РезервРахунку.Add(ТовариРядок.НомерРядка, (decimal)РезервРахункуФактури_Список[0]["ВРезервіЗіСкладу"]);
-							else
-							{
-								СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
-									$"Вказаний рахунок фактура, не зарезервував товар {СписокНоменклатури[ТовариРядок.НомерРядка].Назва}");
-								СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
-
-                                return false;
-                            }
-						}
-
-						if (РезервНоменклатури[ТовариРядок.НомерРядка] > 0)
-						{
-							decimal ВРезервіЗамовленняКлієнта = РезервЗамовлення.ContainsKey(ТовариРядок.НомерРядка) ? РезервЗамовлення[ТовариРядок.НомерРядка] : 0;
-							decimal ВРезервіРахунокФактура = РезервРахунку.ContainsKey(ТовариРядок.НомерРядка) ? РезервРахунку[ТовариРядок.НомерРядка] : 0;
-							decimal РезервДокументівСума = ВРезервіРахунокФактура + ВРезервіЗамовленняКлієнта;
-							decimal РезервЗагальний = РезервНоменклатури[ТовариРядок.НомерРядка] - РезервДокументівСума;
-
-							if (ЗалишокНоменклатури[ТовариРядок.НомерРядка] - РезервЗагальний < ТовариРядок.Кількість)
-							{
-								if (РезервДокументівСума == 0)
-									СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
-										$"Залишок товару {ЗалишокНоменклатури[ТовариРядок.НомерРядка]}, " +
-										$"в резерві {РезервЗагальний}, " +
-										$"потрібно {ТовариРядок.Кількість}");
-								else
-									СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
-										$"Залишок товару {ЗалишокНоменклатури[ТовариРядок.НомерРядка]}, " +
-										$"в резерві по вибраних документах (замовлення або рахунок) {РезервДокументівСума}, " +
-										$"потрібно {ТовариРядок.Кількість}");
-
-								СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
-
-                                return false;
-                            }
-						}
-					}
-					else
-					{
-						СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
-							$"Відсутній товар {СписокНоменклатури[ТовариРядок.НомерРядка].Назва}");
-						СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
-
-                        return false;
-                    }
-				}
-			}
+            }
 
             #endregion
 
-			#region ЗамовленняКлієнтів
-
-			ЗамовленняКлієнтів_RecordsSet замовленняКлієнтів_RecordsSet = new ЗамовленняКлієнтів_RecordsSet();
-
-			foreach (РеалізаціяТоварівТаПослуг_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
-			{
-				if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
-				{
-					if (!ТовариРядок.ЗамовленняКлієнта.IsEmpty())
-					{
-						decimal Замовлено = ЗамволенняКлієнта.ContainsKey(ТовариРядок.НомерРядка) ? ЗамволенняКлієнта[ТовариРядок.НомерРядка] : 0;
-						decimal ЗамовленняСума = ЗамволенняКлієнтаСума.ContainsKey(ТовариРядок.НомерРядка) ? ЗамволенняКлієнтаСума[ТовариРядок.НомерРядка] : 0;
+            #region ЗамовленняКлієнтів
 
-						ЗамовленняКлієнтів_RecordsSet.Record record = new ЗамовленняКлієнтів_RecordsSet.Record();
-						замовленняКлієнтів_RecordsSet.Records.Add(record);
+            ЗамовленняКлієнтів_RecordsSet замовленняКлієнтів_RecordsSet = new ЗамовленняКлієнтів_RecordsSet();
 
-						record.Income = false;
-						record.Owner = ДокументОбєкт.UnigueID.UGuid;
+            ДокументОбєкт.Товари_TablePart.Read();
 
-						record.ЗамовленняКлієнта = ТовариРядок.ЗамовленняКлієнта;
-						record.Номенклатура = ТовариРядок.Номенклатура;
-						record.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
-						record.Склад = !ТовариРядок.Склад.IsEmpty() ? ТовариРядок.Склад : ДокументОбєкт.Склад;
-						record.Замовлено = Замовлено > ТовариРядок.Кількість ? ТовариРядок.Кількість : Замовлено;
-						record.Сума = Замовлено > ТовариРядок.Кількість ? 0 : ЗамовленняСума;
-					}
-				}
-			}
+            foreach (ЗамовленняКлієнта_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
+            {
+                if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
+                {
+                    ЗамовленняКлієнтів_RecordsSet.Record record = new ЗамовленняКлієнтів_RecordsSet.Record();
+                    замовленняКлієнтів_RecordsSet.Records.Add(record);
 
-			замовленняКлієнтів_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                    record.Income = true;
+                    record.Owner = ДокументОбєкт.UnigueID.UGuid;
 
-			#endregion
+                    record.ЗамовленняКлієнта = ДокументОбєкт.GetDocumentPointer();
+                    record.Номенклатура = ТовариРядок.Номенклатура;
+                    record.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
+                    record.Склад = !ТовариРядок.Склад.IsEmpty() ? ТовариРядок.Склад : ДокументОбєкт.Склад;
+                    record.Замовлено = ТовариРядок.Кількість;
+                    record.Сума = ТовариРядок.Сума;
+                }
+            }
 
-			#region ВільніЗалишки
-
-			ВільніЗалишки_RecordsSet вільніЗалишки_RecordsSet = new ВільніЗалишки_RecordsSet();
+            замовленняКлієнтів_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
 
-			foreach (РеалізаціяТоварівТаПослуг_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
-			{
-				if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
-				{
-					decimal КількістьЯкуПотрібноРозприділити = ТовариРядок.Кількість;
+            #endregion
 
-					//
-					// Якщо є документи замовлення або рахунок
-					// кількість потрібно розприділии між документами.
-					// В першу чергу списується ЗамовленняКлієнта, потім Рахунок фактура
-					//
+            #region ВільніЗалишки
 
-					if (ТовариРядок.ЗамовленняКлієнта.IsEmpty() || ТовариРядок.РахунокФактура.IsEmpty())
-					{
-						decimal ВРезервіЗамовленняКлієнта = РезервЗамовлення.ContainsKey(ТовариРядок.НомерРядка) ? РезервЗамовлення[ТовариРядок.НомерРядка] : 0;
-						decimal ВРезервіРахунокФактура = РезервРахунку.ContainsKey(ТовариРядок.НомерРядка) ? РезервРахунку[ТовариРядок.НомерРядка] : 0;
+            ВільніЗалишки_RecordsSet вільніЗалишки_RecordsSet = new ВільніЗалишки_RecordsSet();
 
-						if (!ТовариРядок.ЗамовленняКлієнта.IsEmpty() && ВРезервіЗамовленняКлієнта > 0)
-						{
-							ВільніЗалишки_RecordsSet.Record record = new ВільніЗалишки_RecordsSet.Record();
-							вільніЗалишки_RecordsSet.Records.Add(record);
+            foreach (ЗамовленняКлієнта_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
+            {
+                if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
+                {
+                    ВільніЗалишки_RecordsSet.Record record = new ВільніЗалишки_RecordsSet.Record();
+                    вільніЗалишки_RecordsSet.Records.Add(record);
 
-							record.Income = false;
-							record.Owner = ДокументОбєкт.UnigueID.UGuid;
+                    record.Income = true;
+                    record.Owner = ДокументОбєкт.UnigueID.UGuid;
 
-							record.Номенклатура = ТовариРядок.Номенклатура;
-							record.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
-							record.Склад = !ТовариРядок.Склад.IsEmpty() ? ТовариРядок.Склад : ДокументОбєкт.Склад;
+                    record.Номенклатура = ТовариРядок.Номенклатура;
+                    record.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
+                    record.Склад = !ТовариРядок.Склад.IsEmpty() ? ТовариРядок.Склад : ДокументОбєкт.Склад;
+                    record.ВРезервіЗіСкладу = ВільнийЗалишокНоменклатури[ТовариРядок.НомерРядка];
 
-							record.ВНаявності = КількістьЯкуПотрібноРозприділити >= ВРезервіЗамовленняКлієнта ? ВРезервіЗамовленняКлієнта : КількістьЯкуПотрібноРозприділити;
-							record.ВРезервіЗіСкладу = record.ВНаявності;
-							record.ДокументРезерву = ТовариРядок.ЗамовленняКлієнта.UnigueID.UGuid;
+                    if (ТовариРядок.Кількість - ВільнийЗалишокНоменклатури[ТовариРядок.НомерРядка] > 0)
+                        record.ВРезервіПідЗамовлення = ТовариРядок.Кількість - ВільнийЗалишокНоменклатури[ТовариРядок.НомерРядка];
 
-							КількістьЯкуПотрібноРозприділити -= record.ВНаявності;
-						}
+                    record.ДокументРезерву = ДокументОбєкт.UnigueID.UGuid;
+                }
+            }
 
-						if (!ТовариРядок.РахунокФактура.IsEmpty() && КількістьЯкуПотрібноРозприділити > 0 && ВРезервіРахунокФактура > 0)
-						{
-							ВільніЗалишки_RecordsSet.Record record = new ВільніЗалишки_RecordsSet.Record();
-							вільніЗалишки_RecordsSet.Records.Add(record);
-
-							record.Income = false;
-							record.Owner = ДокументОбєкт.UnigueID.UGuid;
-
-							record.Номенклатура = ТовариРядок.Номенклатура;
-							record.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
-							record.Склад = !ТовариРядок.Склад.IsEmpty() ? ТовариРядок.Склад : ДокументОбєкт.Склад;
-
-							record.ВНаявності = КількістьЯкуПотрібноРозприділити >= ВРезервіРахунокФактура ? ВРезервіРахунокФактура : КількістьЯкуПотрібноРозприділити;
-							record.ВРезервіЗіСкладу = record.ВНаявності;
-							record.ДокументРезерву = ТовариРядок.РахунокФактура.UnigueID.UGuid;
-
-							КількістьЯкуПотрібноРозприділити -= record.ВНаявності;
-						}
-					}
-
-					if (КількістьЯкуПотрібноРозприділити > 0)
-					{
-						ВільніЗалишки_RecordsSet.Record record = new ВільніЗалишки_RecordsSet.Record();
-						вільніЗалишки_RecordsSet.Records.Add(record);
-
-						record.Income = false;
-						record.Owner = ДокументОбєкт.UnigueID.UGuid;
-
-						record.Номенклатура = ТовариРядок.Номенклатура;
-						record.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
-						record.Склад = !ТовариРядок.Склад.IsEmpty() ? ТовариРядок.Склад : ДокументОбєкт.Склад;
-
-						record.ВНаявності = КількістьЯкуПотрібноРозприділити;
-					}
-				}
-			}
-
-			вільніЗалишки_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
-
-			#endregion
-
-			#region Товари на складах
-
-			ТовариНаСкладах_RecordsSet товариНаСкладах_RecordsSet = new ТовариНаСкладах_RecordsSet();
-
-			foreach (РеалізаціяТоварівТаПослуг_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
-			{
-				if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
-				{
-					ТовариНаСкладах_RecordsSet.Record record = new ТовариНаСкладах_RecordsSet.Record();
-					товариНаСкладах_RecordsSet.Records.Add(record);
+            вільніЗалишки_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
 
-					record.Income = false;
-					record.Owner = ДокументОбєкт.UnigueID.UGuid;
+            #endregion
 
-					record.Номенклатура = ТовариРядок.Номенклатура;
-					record.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
-					record.Серія = ТовариРядок.Серія;
-					record.Склад = !ТовариРядок.Склад.IsEmpty() ? ТовариРядок.Склад : ДокументОбєкт.Склад;
-					record.ВНаявності = ТовариРядок.Кількість;
-				}
-			}
+            return true;
+        }
 
-			товариНаСкладах_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+        public static void ClearSpend(ЗамовленняКлієнта_Objest ДокументОбєкт)
+        {
+            ЗамовленняКлієнтів_RecordsSet замовленняКлієнтів_RecordsSet = new ЗамовленняКлієнтів_RecordsSet();
+            замовленняКлієнтів_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
 
-			#endregion
+            ВільніЗалишки_RecordsSet вільніЗалишки_RecordsSet = new ВільніЗалишки_RecordsSet();
+            вільніЗалишки_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+        }
+    }
 
-			#region Партії товарів
+    class РахунокФактура_SpendTheDocument
+    {
+        public static bool Spend(РахунокФактура_Objest ДокументОбєкт)
+        {
+            #region Підготовка
 
-			ПартіїТоварів_RecordsSet партіїТоварів_RecordsSet = new ПартіїТоварів_RecordsSet();
+            List<string> СписокПомилок = new List<string>();
+            Dictionary<int, Номенклатура_Objest> СписокНоменклатури = new Dictionary<int, Номенклатура_Objest>();
 
-			foreach (РеалізаціяТоварівТаПослуг_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
-			{
-				if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
-				{
-					List<Dictionary<string, object>> listNameRow = СпільніФункції.ОтриматиСписокНаявнихПартій(
-						ДокументОбєкт.Організація, ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
-						ТовариРядок.Серія, ДокументОбєкт.Склад, ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок, ТовариРядок.Кількість);
-
-					if (listNameRow.Count == 0)
-					{
-						СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
-							$"Немає доступних партій для товару {СписокНоменклатури[ТовариРядок.НомерРядка].Назва}");
-						СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
-
-                        return false;
-                    }
-
-					decimal КількістьЯкуПотрібноСписати = ТовариРядок.Кількість;
-
-					foreach (Dictionary<string, object> nameRow in listNameRow)
-					{
-						decimal КількістьВПартії = (decimal)nameRow["Кількість"];
-						decimal СобівартістьПартії = (decimal)nameRow["Собівартість"];
-						ПартіяТоварівКомпозит_Pointer ПартіяТоварівКомпозит = new ПартіяТоварівКомпозит_Pointer(nameRow["ПартіяТоварівКомпозит"]);
-
-						decimal КількістьЩоСписується = 0;
-						bool ЗакритиПартію = КількістьЯкуПотрібноСписати >= КількістьВПартії;
-
-						if (КількістьВПартії >= КількістьЯкуПотрібноСписати)
-						{
-							КількістьЩоСписується = КількістьЯкуПотрібноСписати;
-							КількістьЯкуПотрібноСписати = 0;
-						}
-						else
-						{
-							КількістьЩоСписується = КількістьВПартії;
-							КількістьЯкуПотрібноСписати -= КількістьВПартії;
-						}
-
-						ПартіїТоварів_RecordsSet.Record record = new ПартіїТоварів_RecordsSet.Record();
-						партіїТоварів_RecordsSet.Records.Add(record);
-
-						record.Income = false;
-						record.Owner = ДокументОбєкт.UnigueID.UGuid;
-
-						record.Організація = ДокументОбєкт.Організація;
-						record.ПартіяТоварівКомпозит = ПартіяТоварівКомпозит;
-						record.Кількість = КількістьЩоСписується;
-						record.Собівартість = (ЗакритиПартію ? СобівартістьПартії : 0);
-						record.СписанаСобівартість = СобівартістьПартії;
-						record.Номенклатура = ТовариРядок.Номенклатура;
-						record.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
-						record.Серія = ТовариРядок.Серія;
-						record.Склад = ДокументОбєкт.Склад;
-
-						if (КількістьЯкуПотрібноСписати == 0)
-							break;
-					}
-
-					if (КількістьЯкуПотрібноСписати > 0)
-					{
-						СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
-							$"Невистачило списати {КількістьЯкуПотрібноСписати} товарів");
-						СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
-
-                        return false;
-                    }
-				}
-			}
-
-			партіїТоварів_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
-
-			#endregion
-
-			#region РозрахункиЗКлієнтами
-
-			//??? Договір
-
-			//
-			//РозрахункиЗКлієнтами
-			//
-
-			РозрахункиЗКлієнтами_RecordsSet розрахункиЗКлієнтами_RecordsSet = new РозрахункиЗКлієнтами_RecordsSet();
-
-			РозрахункиЗКлієнтами_RecordsSet.Record розрахункиЗКлієнтами_Record = new РозрахункиЗКлієнтами_RecordsSet.Record();
-			розрахункиЗКлієнтами_RecordsSet.Records.Add(розрахункиЗКлієнтами_Record);
-
-			розрахункиЗКлієнтами_Record.Income = true;
-			розрахункиЗКлієнтами_Record.Owner = ДокументОбєкт.UnigueID.UGuid;
-
-			розрахункиЗКлієнтами_Record.Контрагент = ДокументОбєкт.Контрагент;
-			розрахункиЗКлієнтами_Record.Валюта = ДокументОбєкт.Валюта;
-			розрахункиЗКлієнтами_Record.Сума = ДокументОбєкт.СумаДокументу;
-
-			розрахункиЗКлієнтами_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
-
-			#endregion
-
-			return true;
-		}
-
-		public static void ClearSpend(РеалізаціяТоварівТаПослуг_Objest ДокументОбєкт)
-		{
-			ЗамовленняКлієнтів_RecordsSet замовленняКлієнтів_RecordsSet = new ЗамовленняКлієнтів_RecordsSet();
-			замовленняКлієнтів_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-
-			ВільніЗалишки_RecordsSet вільніЗалишки_RecordsSet = new ВільніЗалишки_RecordsSet();
-			вільніЗалишки_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-
-			ТовариНаСкладах_RecordsSet товариНаСкладах_RecordsSet = new ТовариНаСкладах_RecordsSet();
-			товариНаСкладах_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-
-			ПартіїТоварів_RecordsSet партіїТоварів_RecordsSet = new ПартіїТоварів_RecordsSet();
-			партіїТоварів_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-
-			РозрахункиЗКлієнтами_RecordsSet розрахункиЗКлієнтами_RecordsSet = new РозрахункиЗКлієнтами_RecordsSet();
-			розрахункиЗКлієнтами_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-		}
-	}
-
-	class АктВиконанихРобіт_SpendTheDocument
-	{
-		public static bool Spend(АктВиконанихРобіт_Objest ДокументОбєкт)
-		{
-			#region Підготовка
-
-			List<string> СписокПомилок = new List<string>();
-
-			foreach (АктВиконанихРобіт_Послуги_TablePart.Record ПослугиРядок in ДокументОбєкт.Послуги_TablePart.Records)
-			{
-				if (ПослугиРядок.Номенклатура.IsEmpty())
-				{
-					СписокПомилок.Add($"Рядок {ПослугиРядок.НомерРядка}. Не заповнене поле Номенклатура");
-					СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
+            foreach (РахунокФактура_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
+            {
+                if (ТовариРядок.Номенклатура.IsEmpty())
+                {
+                    СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. Не заповнене поле Номенклатура");
+                    СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
 
                     return false;
                 }
 
-				if (!(ПослугиРядок.Кількість > 0))
-				{
-					СписокПомилок.Add($"Рядок {ПослугиРядок.НомерРядка}. Кількість має бути більшою 0");
-					СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
-
-                    return false;
-                }
-			}
-
-			#endregion
-
-			#region Рух по регістрах
-
-			РозрахункиЗКлієнтами_RecordsSet розрахункиЗКлієнтами_RecordsSet = new РозрахункиЗКлієнтами_RecordsSet();
-
-			РозрахункиЗКлієнтами_RecordsSet.Record розрахункиЗКлієнтами_Record = new РозрахункиЗКлієнтами_RecordsSet.Record();
-			розрахункиЗКлієнтами_RecordsSet.Records.Add(розрахункиЗКлієнтами_Record);
-
-			розрахункиЗКлієнтами_Record.Income = true;
-			розрахункиЗКлієнтами_Record.Owner = ДокументОбєкт.UnigueID.UGuid;
-
-			розрахункиЗКлієнтами_Record.Контрагент = ДокументОбєкт.Контрагент;
-			розрахункиЗКлієнтами_Record.Валюта = ДокументОбєкт.Валюта;
-			розрахункиЗКлієнтами_Record.Сума = ДокументОбєкт.СумаДокументу;
-
-			розрахункиЗКлієнтами_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
-
-			#endregion
-
-			return true;
-		}
-
-		public static void ClearSpend(АктВиконанихРобіт_Objest ДокументОбєкт)
-		{
-			РозрахункиЗКлієнтами_RecordsSet розрахункиЗКлієнтами_RecordsSet = new РозрахункиЗКлієнтами_RecordsSet();
-			розрахункиЗКлієнтами_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-		}
-	}
-
-	class ПоступленняТоварівТаПослуг_SpendTheDocument
-	{
-		public static bool Spend(ПоступленняТоварівТаПослуг_Objest ДокументОбєкт)
-		{
-			#region Підготовка
-
-			List<string> СписокПомилок = new List<string>();
-
-			Dictionary<int, Номенклатура_Objest> СписокНоменклатури = new Dictionary<int, Номенклатура_Objest>();
-
-			Dictionary<int, decimal> ЗамовленняПостачальнику = new Dictionary<int, decimal>();
-
-			foreach (ПоступленняТоварівТаПослуг_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
-			{
-				if (ТовариРядок.Номенклатура.IsEmpty())
-				{
-					СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. Не заповнене поле Номенклатура");
-					СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
+                if (!(ТовариРядок.Кількість > 0))
+                {
+                    СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. Кількість має бути більшою 0");
+                    СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
 
                     return false;
                 }
 
-				if (!(ТовариРядок.Кількість > 0))
-				{
-					СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. Кількість має бути більшою 0");
-					СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
+                СписокНоменклатури.Add(ТовариРядок.НомерРядка, ТовариРядок.Номенклатура.GetDirectoryObject()!);
 
-                    return false;
-                }
+                if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
+                {
+                    //
+                    //Резерви та вільні залишки
+                    //
 
-				СписокНоменклатури.Add(ТовариРядок.НомерРядка, ТовариРядок.Номенклатура.GetDirectoryObject()!);
+                    List<Dictionary<string, object>> Резерв = СпільніФункції.ОтриматиРезервТоваруНаСкладі(
+                        ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
+                        !ТовариРядок.Склад.IsEmpty() ? ТовариРядок.Склад : ДокументОбєкт.Склад,
+                        ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
 
-				if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
-				{
-					if (!ТовариРядок.ЗамовленняПостачальнику.IsEmpty())
-					{
-						//
-						// Якщо заданий документ Замовлення Постачальнику
-						// Перевірити замовлення
-						//
+                    if (Резерв.Count > 0)
+                    {
+                        decimal ВНаявності = (decimal)Резерв[0]["ВНаявності"];
+                        decimal ВРезервіЗіСкладу = (decimal)Резерв[0]["ВРезервіЗіСкладу"];
 
-						List<Dictionary<string, object>> Замовлення_Список = СпільніФункції.ОтриматиЗамовленняПостачальникуДляТоваруПоДокументу(
-							ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
-							!ТовариРядок.Склад.IsEmpty() ? ТовариРядок.Склад : ДокументОбєкт.Склад,
-							ТовариРядок.ЗамовленняПостачальнику.UnigueID, ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
-
-						if (Замовлення_Список.Count > 0)
-						{
-							ЗамовленняПостачальнику.Add(ТовариРядок.НомерРядка, (decimal)Замовлення_Список[0]["Замовлено"]);
-
-							if (!(ЗамовленняПостачальнику[ТовариРядок.НомерРядка] > 0))
-							{
-								СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
-									$"Залишок по документу Замовлення {ЗамовленняПостачальнику[ТовариРядок.НомерРядка]}");
-								СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
-
-                                return false;
-                            }
-						}
-						else
-						{
-							СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
-								$"Відсутнє замовлення для товару {СписокНоменклатури[ТовариРядок.НомерРядка].Назва} в документі Замовлення постачальнику");
-							СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
+                        if (ВНаявності - ВРезервіЗіСкладу < ТовариРядок.Кількість)
+                        {
+                            СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
+                                $"В наявності {ВНаявності}, " +
+                                $"в резерві {ВРезервіЗіСкладу}, " +
+                                $"вільний залишок {ВНаявності - ВРезервіЗіСкладу}, " +
+                                $"потрібно зарезервувати {ТовариРядок.Кількість}");
+                            СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
 
                             return false;
                         }
-					}
-				}
-			}
+                    }
+                    else
+                    {
+                        СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
+                             $"Відсутній товар на залишку");
+                        СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
 
-			#endregion
+                        return false;
+                    }
+                }
+            }
+            #endregion
 
-			#region Замовлення постачальникам
+            #region ВільніЗалишки
 
-			ЗамовленняПостачальникам_RecordsSet замовленняПостачальникам_RecordsSet = new ЗамовленняПостачальникам_RecordsSet();
+            ВільніЗалишки_RecordsSet вільніЗалишки_RecordsSet = new ВільніЗалишки_RecordsSet();
 
-			foreach (ПоступленняТоварівТаПослуг_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
-			{
-				if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
-				{
-					if (!ТовариРядок.ЗамовленняПостачальнику.IsEmpty())
-					{
-						decimal Замовлено = ЗамовленняПостачальнику.ContainsKey(ТовариРядок.НомерРядка) ? ЗамовленняПостачальнику[ТовариРядок.НомерРядка] : 0;
+            foreach (РахунокФактура_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
+            {
+                if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
+                {
+                    ВільніЗалишки_RecordsSet.Record record = new ВільніЗалишки_RecordsSet.Record();
+                    вільніЗалишки_RecordsSet.Records.Add(record);
 
-						ЗамовленняПостачальникам_RecordsSet.Record record = new ЗамовленняПостачальникам_RecordsSet.Record();
-						замовленняПостачальникам_RecordsSet.Records.Add(record);
+                    record.Income = true;
+                    record.Owner = ДокументОбєкт.UnigueID.UGuid;
 
-						record.Income = false;
-						record.Owner = ДокументОбєкт.UnigueID.UGuid;
+                    record.Номенклатура = ТовариРядок.Номенклатура;
+                    record.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
+                    record.Склад = !ТовариРядок.Склад.IsEmpty() ? ТовариРядок.Склад : ДокументОбєкт.Склад;
+                    record.ВРезервіЗіСкладу = ТовариРядок.Кількість;
+                    record.ДокументРезерву = ДокументОбєкт.UnigueID.UGuid;
+                }
+            }
 
-						record.ЗамовленняПостачальнику = ТовариРядок.ЗамовленняПостачальнику;
-						record.Номенклатура = ТовариРядок.Номенклатура;
-						record.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
-						record.Склад = !ТовариРядок.Склад.IsEmpty() ? ТовариРядок.Склад : ДокументОбєкт.Склад;
-						record.Замовлено = Замовлено > ТовариРядок.Кількість ? ТовариРядок.Кількість : Замовлено;
-					}
-				}
-			}
+            вільніЗалишки_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
 
-			замовленняПостачальникам_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+            #endregion
+
+            return true;
+        }
+
+        public static void ClearSpend(РахунокФактура_Objest ДокументОбєкт)
+        {
+            ВільніЗалишки_RecordsSet вільніЗалишки_RecordsSet = new ВільніЗалишки_RecordsSet();
+            вільніЗалишки_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+        }
+    }
+
+    class РеалізаціяТоварівТаПослуг_SpendTheDocument
+    {
+        public static bool Spend(РеалізаціяТоварівТаПослуг_Objest ДокументОбєкт)
+        {
+            #region Підготовка
+
+            List<string> СписокПомилок = new List<string>();
+
+            Dictionary<int, Номенклатура_Objest> СписокНоменклатури = new Dictionary<int, Номенклатура_Objest>();
+            Dictionary<int, decimal> ЗалишокНоменклатури = new Dictionary<int, decimal>();
+            Dictionary<int, decimal> РезервНоменклатури = new Dictionary<int, decimal>();
+            Dictionary<int, decimal> РезервРахунку = new Dictionary<int, decimal>();
+            Dictionary<int, decimal> РезервЗамовлення = new Dictionary<int, decimal>();
+
+            Dictionary<int, decimal> ЗамволенняКлієнта = new Dictionary<int, decimal>();
+            Dictionary<int, decimal> ЗамволенняКлієнтаСума = new Dictionary<int, decimal>();
+
+            foreach (РеалізаціяТоварівТаПослуг_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
+            {
+                if (ТовариРядок.Номенклатура.IsEmpty())
+                {
+                    СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. Не заповнене поле Номенклатура");
+                    СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
+
+                    return false;
+                }
+
+                if (!(ТовариРядок.Кількість > 0))
+                {
+                    СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. Кількість має бути більшою 0");
+                    СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
+
+                    return false;
+                }
+
+                СписокНоменклатури.Add(ТовариРядок.НомерРядка, ТовариРядок.Номенклатура.GetDirectoryObject()!);
+
+                if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
+                {
+                    //
+                    //Для товарів отримуємо залишки
+                    //
+
+                    List<Dictionary<string, object>> Залишок_Список = СпільніФункції.ОтриматиЗалишкиТоваруНаСкладі(
+                        ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури, ТовариРядок.Серія,
+                        !ТовариРядок.Склад.IsEmpty() ? ТовариРядок.Склад : ДокументОбєкт.Склад,
+                        ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
+
+                    ЗалишокНоменклатури.Add(ТовариРядок.НомерРядка, Залишок_Список.Count > 0 ? (decimal)Залишок_Список[0]["ВНаявності"] : 0);
+
+                    if (ЗалишокНоменклатури[ТовариРядок.НомерРядка] > 0)
+                    {
+                        if (ЗалишокНоменклатури[ТовариРядок.НомерРядка] < ТовариРядок.Кількість)
+                        {
+                            СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
+                                $"Залишок товару {ЗалишокНоменклатури[ТовариРядок.НомерРядка]}, потрібно {ТовариРядок.Кількість}");
+                            СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
+
+                            return false;
+                        }
+
+                        //
+                        // Рахуємо всі резерви
+                        //
+
+                        List<Dictionary<string, object>> Резерв_Список = СпільніФункції.ОтриматиРезервТоваруНаСкладі(
+                        ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
+                        !ТовариРядок.Склад.IsEmpty() ? ТовариРядок.Склад : ДокументОбєкт.Склад,
+                        ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
+
+                        РезервНоменклатури.Add(ТовариРядок.НомерРядка, Резерв_Список.Count > 0 ? (decimal)Резерв_Список[0]["ВРезервіЗіСкладу"] : 0);
+
+                        //
+                        // Перевірка резервів по документах
+                        //
+
+                        if (!ТовариРядок.ЗамовленняКлієнта.IsEmpty())
+                        {
+                            //
+                            // Якщо заданий документ Замовлення Клієнта
+                            // потрібно дізнатися скільки цей документ зарезервував товарів
+                            //
+
+                            List<Dictionary<string, object>> РезервЗамовленняКлієнта_Список = СпільніФункції.ОтриматиРезервТоваруПоДокументу(
+                                ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
+                                !ТовариРядок.Склад.IsEmpty() ? ТовариРядок.Склад : ДокументОбєкт.Склад,
+                                ТовариРядок.ЗамовленняКлієнта.UnigueID, ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
+
+                            if (РезервЗамовленняКлієнта_Список.Count > 0)
+                                РезервЗамовлення.Add(ТовариРядок.НомерРядка, (decimal)РезервЗамовленняКлієнта_Список[0]["ВРезервіЗіСкладу"]);
+
+                            //
+                            // Перевірити замовлення
+                            //
+
+                            List<Dictionary<string, object>> Замовлення_Список = СпільніФункції.ОтриматиЗамовленняКлієнтаДляТоваруПоДокументу(
+                                ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
+                                !ТовариРядок.Склад.IsEmpty() ? ТовариРядок.Склад : ДокументОбєкт.Склад,
+                                ТовариРядок.ЗамовленняКлієнта.UnigueID, ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
+
+                            if (Замовлення_Список.Count > 0)
+                            {
+                                ЗамволенняКлієнта.Add(ТовариРядок.НомерРядка, (decimal)Замовлення_Список[0]["Замовлено"]);
+                                ЗамволенняКлієнтаСума.Add(ТовариРядок.НомерРядка, (decimal)Замовлення_Список[0]["Сума"]);
+
+                                if (!(ЗамволенняКлієнта[ТовариРядок.НомерРядка] > 0))
+                                {
+                                    СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
+                                        $"Залишок по документу Замовлення {ЗамволенняКлієнта[ТовариРядок.НомерРядка]}");
+                                    СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
+
+                                    return false;
+                                }
+                            }
+                            else
+                            {
+                                СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
+                                    $"Відсутнє замовлення для товару {СписокНоменклатури[ТовариРядок.НомерРядка].Назва} в документі Замовлення клієнта");
+                                СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
+
+                                return false;
+                            }
+                        }
+
+                        if (!ТовариРядок.РахунокФактура.IsEmpty())
+                        {
+                            //
+                            // Якщо заданий документ Рахунок фактура
+                            // потрібно дізнатися скільки цей документ зарезервував товарів
+                            //
+
+                            List<Dictionary<string, object>> РезервРахункуФактури_Список = СпільніФункції.ОтриматиРезервТоваруПоДокументу(
+                                ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
+                                !ТовариРядок.Склад.IsEmpty() ? ТовариРядок.Склад : ДокументОбєкт.Склад,
+                                ТовариРядок.РахунокФактура.UnigueID, ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
+
+                            if (РезервРахункуФактури_Список.Count > 0)
+                                РезервРахунку.Add(ТовариРядок.НомерРядка, (decimal)РезервРахункуФактури_Список[0]["ВРезервіЗіСкладу"]);
+                            else
+                            {
+                                СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
+                                    $"Вказаний рахунок фактура, не зарезервував товар {СписокНоменклатури[ТовариРядок.НомерРядка].Назва}");
+                                СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
+
+                                return false;
+                            }
+                        }
+
+                        if (РезервНоменклатури[ТовариРядок.НомерРядка] > 0)
+                        {
+                            decimal ВРезервіЗамовленняКлієнта = РезервЗамовлення.ContainsKey(ТовариРядок.НомерРядка) ? РезервЗамовлення[ТовариРядок.НомерРядка] : 0;
+                            decimal ВРезервіРахунокФактура = РезервРахунку.ContainsKey(ТовариРядок.НомерРядка) ? РезервРахунку[ТовариРядок.НомерРядка] : 0;
+                            decimal РезервДокументівСума = ВРезервіРахунокФактура + ВРезервіЗамовленняКлієнта;
+                            decimal РезервЗагальний = РезервНоменклатури[ТовариРядок.НомерРядка] - РезервДокументівСума;
+
+                            if (ЗалишокНоменклатури[ТовариРядок.НомерРядка] - РезервЗагальний < ТовариРядок.Кількість)
+                            {
+                                if (РезервДокументівСума == 0)
+                                    СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
+                                        $"Залишок товару {ЗалишокНоменклатури[ТовариРядок.НомерРядка]}, " +
+                                        $"в резерві {РезервЗагальний}, " +
+                                        $"потрібно {ТовариРядок.Кількість}");
+                                else
+                                    СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
+                                        $"Залишок товару {ЗалишокНоменклатури[ТовариРядок.НомерРядка]}, " +
+                                        $"в резерві по вибраних документах (замовлення або рахунок) {РезервДокументівСума}, " +
+                                        $"потрібно {ТовариРядок.Кількість}");
+
+                                СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
+
+                                return false;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
+                            $"Відсутній товар {СписокНоменклатури[ТовариРядок.НомерРядка].Назва}");
+                        СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
+
+                        return false;
+                    }
+                }
+            }
+
+            #endregion
+
+            #region ЗамовленняКлієнтів
+
+            ЗамовленняКлієнтів_RecordsSet замовленняКлієнтів_RecordsSet = new ЗамовленняКлієнтів_RecordsSet();
+
+            foreach (РеалізаціяТоварівТаПослуг_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
+            {
+                if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
+                {
+                    if (!ТовариРядок.ЗамовленняКлієнта.IsEmpty())
+                    {
+                        decimal Замовлено = ЗамволенняКлієнта.ContainsKey(ТовариРядок.НомерРядка) ? ЗамволенняКлієнта[ТовариРядок.НомерРядка] : 0;
+                        decimal ЗамовленняСума = ЗамволенняКлієнтаСума.ContainsKey(ТовариРядок.НомерРядка) ? ЗамволенняКлієнтаСума[ТовариРядок.НомерРядка] : 0;
+
+                        ЗамовленняКлієнтів_RecordsSet.Record record = new ЗамовленняКлієнтів_RecordsSet.Record();
+                        замовленняКлієнтів_RecordsSet.Records.Add(record);
+
+                        record.Income = false;
+                        record.Owner = ДокументОбєкт.UnigueID.UGuid;
+
+                        record.ЗамовленняКлієнта = ТовариРядок.ЗамовленняКлієнта;
+                        record.Номенклатура = ТовариРядок.Номенклатура;
+                        record.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
+                        record.Склад = !ТовариРядок.Склад.IsEmpty() ? ТовариРядок.Склад : ДокументОбєкт.Склад;
+                        record.Замовлено = Замовлено > ТовариРядок.Кількість ? ТовариРядок.Кількість : Замовлено;
+                        record.Сума = Замовлено > ТовариРядок.Кількість ? 0 : ЗамовленняСума;
+                    }
+                }
+            }
+
+            замовленняКлієнтів_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+
+            #endregion
+
+            #region ВільніЗалишки
+
+            ВільніЗалишки_RecordsSet вільніЗалишки_RecordsSet = new ВільніЗалишки_RecordsSet();
+
+            foreach (РеалізаціяТоварівТаПослуг_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
+            {
+                if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
+                {
+                    decimal КількістьЯкуПотрібноРозприділити = ТовариРядок.Кількість;
+
+                    //
+                    // Якщо є документи замовлення або рахунок
+                    // кількість потрібно розприділии між документами.
+                    // В першу чергу списується ЗамовленняКлієнта, потім Рахунок фактура
+                    //
+
+                    if (ТовариРядок.ЗамовленняКлієнта.IsEmpty() || ТовариРядок.РахунокФактура.IsEmpty())
+                    {
+                        decimal ВРезервіЗамовленняКлієнта = РезервЗамовлення.ContainsKey(ТовариРядок.НомерРядка) ? РезервЗамовлення[ТовариРядок.НомерРядка] : 0;
+                        decimal ВРезервіРахунокФактура = РезервРахунку.ContainsKey(ТовариРядок.НомерРядка) ? РезервРахунку[ТовариРядок.НомерРядка] : 0;
+
+                        if (!ТовариРядок.ЗамовленняКлієнта.IsEmpty() && ВРезервіЗамовленняКлієнта > 0)
+                        {
+                            ВільніЗалишки_RecordsSet.Record record = new ВільніЗалишки_RecordsSet.Record();
+                            вільніЗалишки_RecordsSet.Records.Add(record);
+
+                            record.Income = false;
+                            record.Owner = ДокументОбєкт.UnigueID.UGuid;
+
+                            record.Номенклатура = ТовариРядок.Номенклатура;
+                            record.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
+                            record.Склад = !ТовариРядок.Склад.IsEmpty() ? ТовариРядок.Склад : ДокументОбєкт.Склад;
+
+                            record.ВНаявності = КількістьЯкуПотрібноРозприділити >= ВРезервіЗамовленняКлієнта ? ВРезервіЗамовленняКлієнта : КількістьЯкуПотрібноРозприділити;
+                            record.ВРезервіЗіСкладу = record.ВНаявності;
+                            record.ДокументРезерву = ТовариРядок.ЗамовленняКлієнта.UnigueID.UGuid;
+
+                            КількістьЯкуПотрібноРозприділити -= record.ВНаявності;
+                        }
+
+                        if (!ТовариРядок.РахунокФактура.IsEmpty() && КількістьЯкуПотрібноРозприділити > 0 && ВРезервіРахунокФактура > 0)
+                        {
+                            ВільніЗалишки_RecordsSet.Record record = new ВільніЗалишки_RecordsSet.Record();
+                            вільніЗалишки_RecordsSet.Records.Add(record);
+
+                            record.Income = false;
+                            record.Owner = ДокументОбєкт.UnigueID.UGuid;
+
+                            record.Номенклатура = ТовариРядок.Номенклатура;
+                            record.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
+                            record.Склад = !ТовариРядок.Склад.IsEmpty() ? ТовариРядок.Склад : ДокументОбєкт.Склад;
+
+                            record.ВНаявності = КількістьЯкуПотрібноРозприділити >= ВРезервіРахунокФактура ? ВРезервіРахунокФактура : КількістьЯкуПотрібноРозприділити;
+                            record.ВРезервіЗіСкладу = record.ВНаявності;
+                            record.ДокументРезерву = ТовариРядок.РахунокФактура.UnigueID.UGuid;
+
+                            КількістьЯкуПотрібноРозприділити -= record.ВНаявності;
+                        }
+                    }
+
+                    if (КількістьЯкуПотрібноРозприділити > 0)
+                    {
+                        ВільніЗалишки_RecordsSet.Record record = new ВільніЗалишки_RecordsSet.Record();
+                        вільніЗалишки_RecordsSet.Records.Add(record);
+
+                        record.Income = false;
+                        record.Owner = ДокументОбєкт.UnigueID.UGuid;
+
+                        record.Номенклатура = ТовариРядок.Номенклатура;
+                        record.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
+                        record.Склад = !ТовариРядок.Склад.IsEmpty() ? ТовариРядок.Склад : ДокументОбєкт.Склад;
+
+                        record.ВНаявності = КількістьЯкуПотрібноРозприділити;
+                    }
+                }
+            }
+
+            вільніЗалишки_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
 
             #endregion
 
@@ -1289,244 +978,555 @@ FROM
 
             ТовариНаСкладах_RecordsSet товариНаСкладах_RecordsSet = new ТовариНаСкладах_RecordsSet();
 
-			foreach (ПоступленняТоварівТаПослуг_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
-			{
-				if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
-				{
-					ТовариНаСкладах_RecordsSet.Record record = new ТовариНаСкладах_RecordsSet.Record();
-					товариНаСкладах_RecordsSet.Records.Add(record);
+            foreach (РеалізаціяТоварівТаПослуг_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
+            {
+                if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
+                {
+                    ТовариНаСкладах_RecordsSet.Record record = new ТовариНаСкладах_RecordsSet.Record();
+                    товариНаСкладах_RecordsSet.Records.Add(record);
 
-					record.Income = true; 
-					record.Owner = ДокументОбєкт.UnigueID.UGuid;
+                    record.Income = false;
+                    record.Owner = ДокументОбєкт.UnigueID.UGuid;
 
-					record.Номенклатура = ТовариРядок.Номенклатура;
-					record.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
-					record.Склад = !ТовариРядок.Склад.IsEmpty() ? ТовариРядок.Склад : ДокументОбєкт.Склад;
-					record.Серія = ТовариРядок.Серія;
-					record.ВНаявності = ТовариРядок.Кількість;
-				}
-			}
-
-			товариНаСкладах_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
-
-			#endregion
-
-			#region Партії товарів
-
-			ПартіяТоварівКомпозит_Pointer ПартіяТоварівКомпозит = ФункціїДляДокументів.ОтриматиПартіюТоварівКомпозит(
-				 ДокументОбєкт.UnigueID.UGuid,
-				 Перелічення.ТипДокументуПартіяТоварівКомпозит.ПоступленняТоварівТаПослуг,
-				 ДокументОбєкт, null
-			);
-
-			ПартіїТоварів_RecordsSet партіїТоварів_RecordsSet = new ПартіїТоварів_RecordsSet();
-
-			foreach (ПоступленняТоварівТаПослуг_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
-			{
-				if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
-				{
-					ПартіїТоварів_RecordsSet.Record record = new ПартіїТоварів_RecordsSet.Record();
-					партіїТоварів_RecordsSet.Records.Add(record);
-
-					record.Income = true; 
-					record.Owner = ДокументОбєкт.UnigueID.UGuid;
-
-					record.Організація = ДокументОбєкт.Організація;
-					record.ПартіяТоварівКомпозит = ПартіяТоварівКомпозит;
-					record.Кількість = ТовариРядок.Кількість;
-					record.Собівартість = ТовариРядок.Ціна;
-					record.Номенклатура = ТовариРядок.Номенклатура;
-					record.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
-					record.Серія = ТовариРядок.Серія;
-					record.Склад = ДокументОбєкт.Склад;
-				}
-			}
-
-			партіїТоварів_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
-
-			#endregion
-
-			#region ВільніЗалишки
-
-			ВільніЗалишки_RecordsSet вільніЗалишки_RecordsSet = new ВільніЗалишки_RecordsSet();
-
-			foreach (ПоступленняТоварівТаПослуг_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
-			{
-				if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
-				{
-					ВільніЗалишки_RecordsSet.Record record = new ВільніЗалишки_RecordsSet.Record();
-					вільніЗалишки_RecordsSet.Records.Add(record);
-
-					record.Income = true; 
-					record.Owner = ДокументОбєкт.UnigueID.UGuid;
-
-					record.Номенклатура = ТовариРядок.Номенклатура;
-					record.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
-					record.Склад = !ТовариРядок.Склад.IsEmpty() ? ТовариРядок.Склад : ДокументОбєкт.Склад;
-					record.ВНаявності = ТовариРядок.Кількість;
-				}
-			}
-
-			вільніЗалишки_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
-
-			#endregion
-
-			#region ТовариДоПоступлення (не використовується) 
-			//
-			//ТовариДоПоступлення
-			//
-
-			//РегістриНакопичення.ТовариДоПоступлення_RecordsSet товариДоПоступлення_RecordsSet = new РегістриНакопичення.ТовариДоПоступлення_RecordsSet();
-
-			//foreach (ПоступленняТоварівТаПослуг_Товари_TablePart.Record Товари_Record in ДокументОбєкт.Товари_TablePart.Records)
-			//{
-			//    Довідники.Номенклатура_Objest номенклатура_Objest = Товари_Record.Номенклатура.GetDirectoryObject();
-
-			//    //Товар
-			//    if (номенклатура_Objest.ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
-			//    {
-			//        РегістриНакопичення.ТовариДоПоступлення_RecordsSet.Record record = new РегістриНакопичення.ТовариДоПоступлення_RecordsSet.Record();
-			//        товариДоПоступлення_RecordsSet.Records.Add(record);
-
-			//        record.Income = false; // -
-			//        record.Owner = ДокументОбєкт.UnigueID.UGuid;
-
-			//        record.Номенклатура = Товари_Record.Номенклатура;
-			//        record.ХарактеристикаНоменклатури = Товари_Record.ХарактеристикаНоменклатури;
-			//        record.Склад = (!Товари_Record.Склад.IsEmpty() ? Товари_Record.Склад : ДокументОбєкт.Склад);
-			//        record.ДоПоступлення = Товари_Record.Кількість;
-			//    }
-			//}
-
-			//товариДоПоступлення_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
-
-			//??? Договір
-			// !!! Замовлення постачальнику робить рухи по регістру РозрахункиЗПостачальниками
-			// значить ПрихНакладна не повинна ще раз робити ці рухи якщо є замовлення
-
-			#endregion
-
-			#region РозрахункиЗПостачальниками
-
-			РозрахункиЗПостачальниками_RecordsSet розрахункиЗПостачальниками_RecordsSet = new РозрахункиЗПостачальниками_RecordsSet();
-
-			if (ДокументОбєкт.ГосподарськаОперація == Перелічення.ГосподарськіОперації.ЗакупівляВПостачальника)
-			{
-				РозрахункиЗПостачальниками_RecordsSet.Record recordContragent = new РозрахункиЗПостачальниками_RecordsSet.Record();
-				розрахункиЗПостачальниками_RecordsSet.Records.Add(recordContragent);
-
-				recordContragent.Income = false;
-				recordContragent.Owner = ДокументОбєкт.UnigueID.UGuid;
-
-				recordContragent.Контрагент = ДокументОбєкт.Контрагент;
-				recordContragent.Валюта = ДокументОбєкт.Валюта;
-				recordContragent.Сума = ДокументОбєкт.СумаДокументу;
-			}
-
-			розрахункиЗПостачальниками_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
-
-			#endregion
-
-			return true;
-		}
-
-		public static void ClearSpend(ПоступленняТоварівТаПослуг_Objest ДокументОбєкт)
-		{
-			ЗамовленняПостачальникам_RecordsSet замовленняПостачальникам_RecordsSet = new ЗамовленняПостачальникам_RecordsSet();
-			замовленняПостачальникам_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-
-			ТовариНаСкладах_RecordsSet товариНаСкладах_RecordsSet = new ТовариНаСкладах_RecordsSet();
-			товариНаСкладах_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-
-			ПартіїТоварів_RecordsSet партіїТоварів_RecordsSet = new ПартіїТоварів_RecordsSet();
-			партіїТоварів_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-
-			ВільніЗалишки_RecordsSet вільніЗалишки_RecordsSet = new ВільніЗалишки_RecordsSet();
-			вільніЗалишки_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-
-			//ТовариДоПоступлення_RecordsSet товариДоПоступлення_RecordsSet = new ТовариДоПоступлення_RecordsSet();
-			//товариДоПоступлення_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-
-			РозрахункиЗПостачальниками_RecordsSet розрахункиЗПостачальниками_RecordsSet = new РозрахункиЗПостачальниками_RecordsSet();
-			розрахункиЗПостачальниками_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-		}
-	}
-
-	class ЗамовленняПостачальнику_SpendTheDocument
-	{
-		public static bool Spend(ЗамовленняПостачальнику_Objest ДокументОбєкт)
-		{
-			#region Підготовка
-
-			List<string> СписокПомилок = new List<string>();
-
-			Dictionary<int, Номенклатура_Objest> СписокНоменклатури = new Dictionary<int, Номенклатура_Objest>();
-
-			foreach (ЗамовленняПостачальнику_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
-			{
-				if (ТовариРядок.Номенклатура.IsEmpty())
-				{
-					СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. Не заповнене поле Номенклатура");
-					СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
-
-                    return false;
+                    record.Номенклатура = ТовариРядок.Номенклатура;
+                    record.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
+                    record.Серія = ТовариРядок.Серія;
+                    record.Склад = !ТовариРядок.Склад.IsEmpty() ? ТовариРядок.Склад : ДокументОбєкт.Склад;
+                    record.ВНаявності = ТовариРядок.Кількість;
                 }
+            }
 
-				if (!(ТовариРядок.Кількість > 0))
-				{
-					СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. Кількість має бути більшою 0");
-					СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
+            товариНаСкладах_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
 
-                    return false;
+            #endregion
+
+            #region Партії товарів
+
+            ПартіїТоварів_RecordsSet партіїТоварів_RecordsSet = new ПартіїТоварів_RecordsSet();
+
+            foreach (РеалізаціяТоварівТаПослуг_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
+            {
+                if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
+                {
+                    List<Dictionary<string, object>> listNameRow = СпільніФункції.ОтриматиСписокНаявнихПартій(
+                        ДокументОбєкт.Організація, ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
+                        ТовариРядок.Серія, ДокументОбєкт.Склад, ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок, ТовариРядок.Кількість);
+
+                    if (listNameRow.Count == 0)
+                    {
+                        СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
+                            $"Немає доступних партій для товару {СписокНоменклатури[ТовариРядок.НомерРядка].Назва}");
+                        СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
+
+                        return false;
+                    }
+
+                    decimal КількістьЯкуПотрібноСписати = ТовариРядок.Кількість;
+
+                    foreach (Dictionary<string, object> nameRow in listNameRow)
+                    {
+                        decimal КількістьВПартії = (decimal)nameRow["Кількість"];
+                        decimal СобівартістьПартії = (decimal)nameRow["Собівартість"];
+                        ПартіяТоварівКомпозит_Pointer ПартіяТоварівКомпозит = new ПартіяТоварівКомпозит_Pointer(nameRow["ПартіяТоварівКомпозит"]);
+
+                        decimal КількістьЩоСписується = 0;
+                        bool ЗакритиПартію = КількістьЯкуПотрібноСписати >= КількістьВПартії;
+
+                        if (КількістьВПартії >= КількістьЯкуПотрібноСписати)
+                        {
+                            КількістьЩоСписується = КількістьЯкуПотрібноСписати;
+                            КількістьЯкуПотрібноСписати = 0;
+                        }
+                        else
+                        {
+                            КількістьЩоСписується = КількістьВПартії;
+                            КількістьЯкуПотрібноСписати -= КількістьВПартії;
+                        }
+
+                        ПартіїТоварів_RecordsSet.Record record = new ПартіїТоварів_RecordsSet.Record();
+                        партіїТоварів_RecordsSet.Records.Add(record);
+
+                        record.Income = false;
+                        record.Owner = ДокументОбєкт.UnigueID.UGuid;
+
+                        record.Організація = ДокументОбєкт.Організація;
+                        record.ПартіяТоварівКомпозит = ПартіяТоварівКомпозит;
+                        record.Кількість = КількістьЩоСписується;
+                        record.Собівартість = (ЗакритиПартію ? СобівартістьПартії : 0);
+                        record.СписанаСобівартість = СобівартістьПартії;
+                        record.Номенклатура = ТовариРядок.Номенклатура;
+                        record.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
+                        record.Серія = ТовариРядок.Серія;
+                        record.Склад = ДокументОбєкт.Склад;
+
+                        if (КількістьЯкуПотрібноСписати == 0)
+                            break;
+                    }
+
+                    if (КількістьЯкуПотрібноСписати > 0)
+                    {
+                        СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
+                            $"Невистачило списати {КількістьЯкуПотрібноСписати} товарів");
+                        СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
+
+                        return false;
+                    }
                 }
+            }
 
-				СписокНоменклатури.Add(ТовариРядок.НомерРядка, ТовариРядок.Номенклатура.GetDirectoryObject()!);
-			}
+            партіїТоварів_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
 
-			#endregion
+            #endregion
 
-			#region Замовлення постачальникам
+            #region РозрахункиЗКлієнтами
 
-			ЗамовленняПостачальникам_RecordsSet замовленняПостачальникам_RecordsSet = new ЗамовленняПостачальникам_RecordsSet();
+            //??? Договір
 
-			foreach (ЗамовленняПостачальнику_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
-			{
-				if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
-				{
-					ЗамовленняПостачальникам_RecordsSet.Record record = new ЗамовленняПостачальникам_RecordsSet.Record();
-					замовленняПостачальникам_RecordsSet.Records.Add(record);
+            //
+            //РозрахункиЗКлієнтами
+            //
 
-					record.Income = true;
-					record.Owner = ДокументОбєкт.UnigueID.UGuid;
+            РозрахункиЗКлієнтами_RecordsSet розрахункиЗКлієнтами_RecordsSet = new РозрахункиЗКлієнтами_RecordsSet();
 
-					record.ЗамовленняПостачальнику = ДокументОбєкт.GetDocumentPointer();
-					record.Номенклатура = ТовариРядок.Номенклатура;
-					record.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
-					record.Склад = ДокументОбєкт.Склад;
-					record.Замовлено = ТовариРядок.Кількість;
-				}
-			}
+            РозрахункиЗКлієнтами_RecordsSet.Record розрахункиЗКлієнтами_Record = new РозрахункиЗКлієнтами_RecordsSet.Record();
+            розрахункиЗКлієнтами_RecordsSet.Records.Add(розрахункиЗКлієнтами_Record);
 
-			замовленняПостачальникам_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+            розрахункиЗКлієнтами_Record.Income = true;
+            розрахункиЗКлієнтами_Record.Owner = ДокументОбєкт.UnigueID.UGuid;
 
-			#endregion
+            розрахункиЗКлієнтами_Record.Контрагент = ДокументОбєкт.Контрагент;
+            розрахункиЗКлієнтами_Record.Валюта = ДокументОбєкт.Валюта;
+            розрахункиЗКлієнтами_Record.Сума = ДокументОбєкт.СумаДокументу;
 
-			return true;
-		}
+            розрахункиЗКлієнтами_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
 
-		public static void ClearSpend(ЗамовленняПостачальнику_Objest ДокументОбєкт)
-		{
-			ЗамовленняПостачальникам_RecordsSet замовленняПостачальникам_RecordsSet = new ЗамовленняПостачальникам_RecordsSet();
-			замовленняПостачальникам_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-		}
-	}
+            #endregion
 
-	class ПоверненняТоварівВідКлієнта_SpendTheDocument
-	{
-		private static List<Dictionary<string, object>> ОтриматиПартіїТоваруЗДокументуРеалізації(ПоверненняТоварівВідКлієнта_Objest ДокументОбєкт,
-			ПоверненняТоварівВідКлієнта_Товари_TablePart.Record ТовариРядок)
+            return true;
+        }
+
+        public static void ClearSpend(РеалізаціяТоварівТаПослуг_Objest ДокументОбєкт)
         {
-			string query = $@"
+            ЗамовленняКлієнтів_RecordsSet замовленняКлієнтів_RecordsSet = new ЗамовленняКлієнтів_RecordsSet();
+            замовленняКлієнтів_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+
+            ВільніЗалишки_RecordsSet вільніЗалишки_RecordsSet = new ВільніЗалишки_RecordsSet();
+            вільніЗалишки_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+
+            ТовариНаСкладах_RecordsSet товариНаСкладах_RecordsSet = new ТовариНаСкладах_RecordsSet();
+            товариНаСкладах_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+
+            ПартіїТоварів_RecordsSet партіїТоварів_RecordsSet = new ПартіїТоварів_RecordsSet();
+            партіїТоварів_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+
+            РозрахункиЗКлієнтами_RecordsSet розрахункиЗКлієнтами_RecordsSet = new РозрахункиЗКлієнтами_RecordsSet();
+            розрахункиЗКлієнтами_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+        }
+    }
+
+    class АктВиконанихРобіт_SpendTheDocument
+    {
+        public static bool Spend(АктВиконанихРобіт_Objest ДокументОбєкт)
+        {
+            #region Підготовка
+
+            List<string> СписокПомилок = new List<string>();
+
+            foreach (АктВиконанихРобіт_Послуги_TablePart.Record ПослугиРядок in ДокументОбєкт.Послуги_TablePart.Records)
+            {
+                if (ПослугиРядок.Номенклатура.IsEmpty())
+                {
+                    СписокПомилок.Add($"Рядок {ПослугиРядок.НомерРядка}. Не заповнене поле Номенклатура");
+                    СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
+
+                    return false;
+                }
+
+                if (!(ПослугиРядок.Кількість > 0))
+                {
+                    СписокПомилок.Add($"Рядок {ПослугиРядок.НомерРядка}. Кількість має бути більшою 0");
+                    СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
+
+                    return false;
+                }
+            }
+
+            #endregion
+
+            #region Рух по регістрах
+
+            РозрахункиЗКлієнтами_RecordsSet розрахункиЗКлієнтами_RecordsSet = new РозрахункиЗКлієнтами_RecordsSet();
+
+            РозрахункиЗКлієнтами_RecordsSet.Record розрахункиЗКлієнтами_Record = new РозрахункиЗКлієнтами_RecordsSet.Record();
+            розрахункиЗКлієнтами_RecordsSet.Records.Add(розрахункиЗКлієнтами_Record);
+
+            розрахункиЗКлієнтами_Record.Income = true;
+            розрахункиЗКлієнтами_Record.Owner = ДокументОбєкт.UnigueID.UGuid;
+
+            розрахункиЗКлієнтами_Record.Контрагент = ДокументОбєкт.Контрагент;
+            розрахункиЗКлієнтами_Record.Валюта = ДокументОбєкт.Валюта;
+            розрахункиЗКлієнтами_Record.Сума = ДокументОбєкт.СумаДокументу;
+
+            розрахункиЗКлієнтами_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+
+            #endregion
+
+            return true;
+        }
+
+        public static void ClearSpend(АктВиконанихРобіт_Objest ДокументОбєкт)
+        {
+            РозрахункиЗКлієнтами_RecordsSet розрахункиЗКлієнтами_RecordsSet = new РозрахункиЗКлієнтами_RecordsSet();
+            розрахункиЗКлієнтами_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+        }
+    }
+
+    class ПоступленняТоварівТаПослуг_SpendTheDocument
+    {
+        public static bool Spend(ПоступленняТоварівТаПослуг_Objest ДокументОбєкт)
+        {
+            #region Підготовка
+
+            List<string> СписокПомилок = new List<string>();
+
+            Dictionary<int, Номенклатура_Objest> СписокНоменклатури = new Dictionary<int, Номенклатура_Objest>();
+
+            Dictionary<int, decimal> ЗамовленняПостачальнику = new Dictionary<int, decimal>();
+
+            foreach (ПоступленняТоварівТаПослуг_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
+            {
+                if (ТовариРядок.Номенклатура.IsEmpty())
+                {
+                    СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. Не заповнене поле Номенклатура");
+                    СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
+
+                    return false;
+                }
+
+                if (!(ТовариРядок.Кількість > 0))
+                {
+                    СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. Кількість має бути більшою 0");
+                    СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
+
+                    return false;
+                }
+
+                СписокНоменклатури.Add(ТовариРядок.НомерРядка, ТовариРядок.Номенклатура.GetDirectoryObject()!);
+
+                if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
+                {
+                    if (!ТовариРядок.ЗамовленняПостачальнику.IsEmpty())
+                    {
+                        //
+                        // Якщо заданий документ Замовлення Постачальнику
+                        // Перевірити замовлення
+                        //
+
+                        List<Dictionary<string, object>> Замовлення_Список = СпільніФункції.ОтриматиЗамовленняПостачальникуДляТоваруПоДокументу(
+                            ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
+                            !ТовариРядок.Склад.IsEmpty() ? ТовариРядок.Склад : ДокументОбєкт.Склад,
+                            ТовариРядок.ЗамовленняПостачальнику.UnigueID, ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
+
+                        if (Замовлення_Список.Count > 0)
+                        {
+                            ЗамовленняПостачальнику.Add(ТовариРядок.НомерРядка, (decimal)Замовлення_Список[0]["Замовлено"]);
+
+                            if (!(ЗамовленняПостачальнику[ТовариРядок.НомерРядка] > 0))
+                            {
+                                СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
+                                    $"Залишок по документу Замовлення {ЗамовленняПостачальнику[ТовариРядок.НомерРядка]}");
+                                СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
+
+                                return false;
+                            }
+                        }
+                        else
+                        {
+                            СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
+                                $"Відсутнє замовлення для товару {СписокНоменклатури[ТовариРядок.НомерРядка].Назва} в документі Замовлення постачальнику");
+                            СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
+
+                            return false;
+                        }
+                    }
+                }
+            }
+
+            #endregion
+
+            #region Замовлення постачальникам
+
+            ЗамовленняПостачальникам_RecordsSet замовленняПостачальникам_RecordsSet = new ЗамовленняПостачальникам_RecordsSet();
+
+            foreach (ПоступленняТоварівТаПослуг_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
+            {
+                if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
+                {
+                    if (!ТовариРядок.ЗамовленняПостачальнику.IsEmpty())
+                    {
+                        decimal Замовлено = ЗамовленняПостачальнику.ContainsKey(ТовариРядок.НомерРядка) ? ЗамовленняПостачальнику[ТовариРядок.НомерРядка] : 0;
+
+                        ЗамовленняПостачальникам_RecordsSet.Record record = new ЗамовленняПостачальникам_RecordsSet.Record();
+                        замовленняПостачальникам_RecordsSet.Records.Add(record);
+
+                        record.Income = false;
+                        record.Owner = ДокументОбєкт.UnigueID.UGuid;
+
+                        record.ЗамовленняПостачальнику = ТовариРядок.ЗамовленняПостачальнику;
+                        record.Номенклатура = ТовариРядок.Номенклатура;
+                        record.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
+                        record.Склад = !ТовариРядок.Склад.IsEmpty() ? ТовариРядок.Склад : ДокументОбєкт.Склад;
+                        record.Замовлено = Замовлено > ТовариРядок.Кількість ? ТовариРядок.Кількість : Замовлено;
+                    }
+                }
+            }
+
+            замовленняПостачальникам_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+
+            #endregion
+
+            #region Товари на складах
+
+            ТовариНаСкладах_RecordsSet товариНаСкладах_RecordsSet = new ТовариНаСкладах_RecordsSet();
+
+            foreach (ПоступленняТоварівТаПослуг_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
+            {
+                if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
+                {
+                    ТовариНаСкладах_RecordsSet.Record record = new ТовариНаСкладах_RecordsSet.Record();
+                    товариНаСкладах_RecordsSet.Records.Add(record);
+
+                    record.Income = true;
+                    record.Owner = ДокументОбєкт.UnigueID.UGuid;
+
+                    record.Номенклатура = ТовариРядок.Номенклатура;
+                    record.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
+                    record.Склад = !ТовариРядок.Склад.IsEmpty() ? ТовариРядок.Склад : ДокументОбєкт.Склад;
+                    record.Серія = ТовариРядок.Серія;
+                    record.ВНаявності = ТовариРядок.Кількість;
+                }
+            }
+
+            товариНаСкладах_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+
+            #endregion
+
+            #region Партії товарів
+
+            ПартіяТоварівКомпозит_Pointer ПартіяТоварівКомпозит = ФункціїДляДокументів.ОтриматиПартіюТоварівКомпозит(
+                 ДокументОбєкт.UnigueID.UGuid,
+                 Перелічення.ТипДокументуПартіяТоварівКомпозит.ПоступленняТоварівТаПослуг,
+                 ДокументОбєкт, null
+            );
+
+            ПартіїТоварів_RecordsSet партіїТоварів_RecordsSet = new ПартіїТоварів_RecordsSet();
+
+            foreach (ПоступленняТоварівТаПослуг_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
+            {
+                if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
+                {
+                    ПартіїТоварів_RecordsSet.Record record = new ПартіїТоварів_RecordsSet.Record();
+                    партіїТоварів_RecordsSet.Records.Add(record);
+
+                    record.Income = true;
+                    record.Owner = ДокументОбєкт.UnigueID.UGuid;
+
+                    record.Організація = ДокументОбєкт.Організація;
+                    record.ПартіяТоварівКомпозит = ПартіяТоварівКомпозит;
+                    record.Кількість = ТовариРядок.Кількість;
+                    record.Собівартість = ТовариРядок.Ціна;
+                    record.Номенклатура = ТовариРядок.Номенклатура;
+                    record.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
+                    record.Серія = ТовариРядок.Серія;
+                    record.Склад = ДокументОбєкт.Склад;
+                }
+            }
+
+            партіїТоварів_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+
+            #endregion
+
+            #region ВільніЗалишки
+
+            ВільніЗалишки_RecordsSet вільніЗалишки_RecordsSet = new ВільніЗалишки_RecordsSet();
+
+            foreach (ПоступленняТоварівТаПослуг_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
+            {
+                if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
+                {
+                    ВільніЗалишки_RecordsSet.Record record = new ВільніЗалишки_RecordsSet.Record();
+                    вільніЗалишки_RecordsSet.Records.Add(record);
+
+                    record.Income = true;
+                    record.Owner = ДокументОбєкт.UnigueID.UGuid;
+
+                    record.Номенклатура = ТовариРядок.Номенклатура;
+                    record.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
+                    record.Склад = !ТовариРядок.Склад.IsEmpty() ? ТовариРядок.Склад : ДокументОбєкт.Склад;
+                    record.ВНаявності = ТовариРядок.Кількість;
+                }
+            }
+
+            вільніЗалишки_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+
+            #endregion
+
+            #region ТовариДоПоступлення (не використовується) 
+            //
+            //ТовариДоПоступлення
+            //
+
+            //РегістриНакопичення.ТовариДоПоступлення_RecordsSet товариДоПоступлення_RecordsSet = new РегістриНакопичення.ТовариДоПоступлення_RecordsSet();
+
+            //foreach (ПоступленняТоварівТаПослуг_Товари_TablePart.Record Товари_Record in ДокументОбєкт.Товари_TablePart.Records)
+            //{
+            //    Довідники.Номенклатура_Objest номенклатура_Objest = Товари_Record.Номенклатура.GetDirectoryObject();
+
+            //    //Товар
+            //    if (номенклатура_Objest.ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
+            //    {
+            //        РегістриНакопичення.ТовариДоПоступлення_RecordsSet.Record record = new РегістриНакопичення.ТовариДоПоступлення_RecordsSet.Record();
+            //        товариДоПоступлення_RecordsSet.Records.Add(record);
+
+            //        record.Income = false; // -
+            //        record.Owner = ДокументОбєкт.UnigueID.UGuid;
+
+            //        record.Номенклатура = Товари_Record.Номенклатура;
+            //        record.ХарактеристикаНоменклатури = Товари_Record.ХарактеристикаНоменклатури;
+            //        record.Склад = (!Товари_Record.Склад.IsEmpty() ? Товари_Record.Склад : ДокументОбєкт.Склад);
+            //        record.ДоПоступлення = Товари_Record.Кількість;
+            //    }
+            //}
+
+            //товариДоПоступлення_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+
+            //??? Договір
+            // !!! Замовлення постачальнику робить рухи по регістру РозрахункиЗПостачальниками
+            // значить ПрихНакладна не повинна ще раз робити ці рухи якщо є замовлення
+
+            #endregion
+
+            #region РозрахункиЗПостачальниками
+
+            РозрахункиЗПостачальниками_RecordsSet розрахункиЗПостачальниками_RecordsSet = new РозрахункиЗПостачальниками_RecordsSet();
+
+            if (ДокументОбєкт.ГосподарськаОперація == Перелічення.ГосподарськіОперації.ЗакупівляВПостачальника)
+            {
+                РозрахункиЗПостачальниками_RecordsSet.Record recordContragent = new РозрахункиЗПостачальниками_RecordsSet.Record();
+                розрахункиЗПостачальниками_RecordsSet.Records.Add(recordContragent);
+
+                recordContragent.Income = false;
+                recordContragent.Owner = ДокументОбєкт.UnigueID.UGuid;
+
+                recordContragent.Контрагент = ДокументОбєкт.Контрагент;
+                recordContragent.Валюта = ДокументОбєкт.Валюта;
+                recordContragent.Сума = ДокументОбєкт.СумаДокументу;
+            }
+
+            розрахункиЗПостачальниками_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+
+            #endregion
+
+            return true;
+        }
+
+        public static void ClearSpend(ПоступленняТоварівТаПослуг_Objest ДокументОбєкт)
+        {
+            ЗамовленняПостачальникам_RecordsSet замовленняПостачальникам_RecordsSet = new ЗамовленняПостачальникам_RecordsSet();
+            замовленняПостачальникам_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+
+            ТовариНаСкладах_RecordsSet товариНаСкладах_RecordsSet = new ТовариНаСкладах_RecordsSet();
+            товариНаСкладах_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+
+            ПартіїТоварів_RecordsSet партіїТоварів_RecordsSet = new ПартіїТоварів_RecordsSet();
+            партіїТоварів_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+
+            ВільніЗалишки_RecordsSet вільніЗалишки_RecordsSet = new ВільніЗалишки_RecordsSet();
+            вільніЗалишки_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+
+            //ТовариДоПоступлення_RecordsSet товариДоПоступлення_RecordsSet = new ТовариДоПоступлення_RecordsSet();
+            //товариДоПоступлення_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+
+            РозрахункиЗПостачальниками_RecordsSet розрахункиЗПостачальниками_RecordsSet = new РозрахункиЗПостачальниками_RecordsSet();
+            розрахункиЗПостачальниками_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+        }
+    }
+
+    class ЗамовленняПостачальнику_SpendTheDocument
+    {
+        public static bool Spend(ЗамовленняПостачальнику_Objest ДокументОбєкт)
+        {
+            #region Підготовка
+
+            List<string> СписокПомилок = new List<string>();
+
+            Dictionary<int, Номенклатура_Objest> СписокНоменклатури = new Dictionary<int, Номенклатура_Objest>();
+
+            foreach (ЗамовленняПостачальнику_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
+            {
+                if (ТовариРядок.Номенклатура.IsEmpty())
+                {
+                    СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. Не заповнене поле Номенклатура");
+                    СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
+
+                    return false;
+                }
+
+                if (!(ТовариРядок.Кількість > 0))
+                {
+                    СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. Кількість має бути більшою 0");
+                    СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
+
+                    return false;
+                }
+
+                СписокНоменклатури.Add(ТовариРядок.НомерРядка, ТовариРядок.Номенклатура.GetDirectoryObject()!);
+            }
+
+            #endregion
+
+            #region Замовлення постачальникам
+
+            ЗамовленняПостачальникам_RecordsSet замовленняПостачальникам_RecordsSet = new ЗамовленняПостачальникам_RecordsSet();
+
+            foreach (ЗамовленняПостачальнику_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
+            {
+                if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
+                {
+                    ЗамовленняПостачальникам_RecordsSet.Record record = new ЗамовленняПостачальникам_RecordsSet.Record();
+                    замовленняПостачальникам_RecordsSet.Records.Add(record);
+
+                    record.Income = true;
+                    record.Owner = ДокументОбєкт.UnigueID.UGuid;
+
+                    record.ЗамовленняПостачальнику = ДокументОбєкт.GetDocumentPointer();
+                    record.Номенклатура = ТовариРядок.Номенклатура;
+                    record.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
+                    record.Склад = ДокументОбєкт.Склад;
+                    record.Замовлено = ТовариРядок.Кількість;
+                }
+            }
+
+            замовленняПостачальникам_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+
+            #endregion
+
+            return true;
+        }
+
+        public static void ClearSpend(ЗамовленняПостачальнику_Objest ДокументОбєкт)
+        {
+            ЗамовленняПостачальникам_RecordsSet замовленняПостачальникам_RecordsSet = new ЗамовленняПостачальникам_RecordsSet();
+            замовленняПостачальникам_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+        }
+    }
+
+    class ПоверненняТоварівВідКлієнта_SpendTheDocument
+    {
+        private static List<Dictionary<string, object>> ОтриматиПартіїТоваруЗДокументуРеалізації(ПоверненняТоварівВідКлієнта_Objest ДокументОбєкт,
+            ПоверненняТоварівВідКлієнта_Товари_TablePart.Record ТовариРядок)
+        {
+            string query = $@"
 SELECT 
     Рег_ПартіїТоварів.{ПартіїТоварів_Const.ПартіяТоварівКомпозит} AS ПартіяТоварівКомпозит,
     Довідник_ПартіяТоварівКомпозит.{ПартіяТоварівКомпозит_Const.Дата} AS ПартіяТоварівКомпозит_Дата,
@@ -1550,223 +1550,223 @@ WHERE
 ORDER BY ПартіяТоварівКомпозит_Дата ASC
 ";
 
-			Dictionary<string, object> paramQuery = new Dictionary<string, object>();
-			paramQuery.Add("ДокументРеалізації", ТовариРядок.ДокументРеалізації.UnigueID.UGuid);
-			paramQuery.Add("Організація", ДокументОбєкт.Організація.UnigueID.UGuid); 
-			paramQuery.Add("Товар", ТовариРядок.Номенклатура.UnigueID.UGuid);
-			paramQuery.Add("Характеристика", ТовариРядок.ХарактеристикаНоменклатури.UnigueID.UGuid);
-			paramQuery.Add("Серія", ТовариРядок.Серія.UnigueID.UGuid);
-			paramQuery.Add("Склад", ДокументОбєкт.Склад.UnigueID.UGuid);
+            Dictionary<string, object> paramQuery = new Dictionary<string, object>();
+            paramQuery.Add("ДокументРеалізації", ТовариРядок.ДокументРеалізації.UnigueID.UGuid);
+            paramQuery.Add("Організація", ДокументОбєкт.Організація.UnigueID.UGuid);
+            paramQuery.Add("Товар", ТовариРядок.Номенклатура.UnigueID.UGuid);
+            paramQuery.Add("Характеристика", ТовариРядок.ХарактеристикаНоменклатури.UnigueID.UGuid);
+            paramQuery.Add("Серія", ТовариРядок.Серія.UnigueID.UGuid);
+            paramQuery.Add("Склад", ДокументОбєкт.Склад.UnigueID.UGuid);
 
-			string[] columnsName;
-			List<Dictionary<string, object>> listNameRow;
+            string[] columnsName;
+            List<Dictionary<string, object>> listNameRow;
 
-			Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listNameRow);
+            Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listNameRow);
 
-			return listNameRow;
-		}
+            return listNameRow;
+        }
 
-		public static bool Spend(ПоверненняТоварівВідКлієнта_Objest ДокументОбєкт)
-		{
-			#region Підготовка
+        public static bool Spend(ПоверненняТоварівВідКлієнта_Objest ДокументОбєкт)
+        {
+            #region Підготовка
 
-			List<string> СписокПомилок = new List<string>();
+            List<string> СписокПомилок = new List<string>();
 
-			Dictionary<int, Номенклатура_Objest> СписокНоменклатури = new Dictionary<int, Номенклатура_Objest>();
+            Dictionary<int, Номенклатура_Objest> СписокНоменклатури = new Dictionary<int, Номенклатура_Objest>();
 
-			foreach (ПоверненняТоварівВідКлієнта_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
-			{
-				if (ТовариРядок.Номенклатура.IsEmpty())
-				{
-					СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. Не заповнене поле Номенклатура");
-					СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
-
-                    return false;
-                }
-
-				if (!(ТовариРядок.Кількість > 0))
-				{
-					СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. Кількість має бути більшою 0");
-					СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
+            foreach (ПоверненняТоварівВідКлієнта_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
+            {
+                if (ТовариРядок.Номенклатура.IsEmpty())
+                {
+                    СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. Не заповнене поле Номенклатура");
+                    СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
 
                     return false;
                 }
 
-				СписокНоменклатури.Add(ТовариРядок.НомерРядка, ТовариРядок.Номенклатура.GetDirectoryObject()!);
-			}
+                if (!(ТовариРядок.Кількість > 0))
+                {
+                    СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. Кількість має бути більшою 0");
+                    СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
 
-			#endregion
+                    return false;
+                }
 
-			#region ВільніЗалишки
+                СписокНоменклатури.Add(ТовариРядок.НомерРядка, ТовариРядок.Номенклатура.GetDirectoryObject()!);
+            }
 
-			ВільніЗалишки_RecordsSet вільніЗалишки_RecordsSet = new ВільніЗалишки_RecordsSet();
+            #endregion
 
-			foreach (ПоверненняТоварівВідКлієнта_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
-			{
-				if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
-				{
-					ВільніЗалишки_RecordsSet.Record record = new ВільніЗалишки_RecordsSet.Record();
-					вільніЗалишки_RecordsSet.Records.Add(record);
+            #region ВільніЗалишки
 
-					record.Income = true;
-					record.Owner = ДокументОбєкт.UnigueID.UGuid;
+            ВільніЗалишки_RecordsSet вільніЗалишки_RecordsSet = new ВільніЗалишки_RecordsSet();
 
-					record.Номенклатура = ТовариРядок.Номенклатура;
-					record.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
-					record.Склад = ДокументОбєкт.Склад;
-					record.ВНаявності = ТовариРядок.Кількість;
-				}
-			}
+            foreach (ПоверненняТоварівВідКлієнта_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
+            {
+                if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
+                {
+                    ВільніЗалишки_RecordsSet.Record record = new ВільніЗалишки_RecordsSet.Record();
+                    вільніЗалишки_RecordsSet.Records.Add(record);
 
-			вільніЗалишки_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                    record.Income = true;
+                    record.Owner = ДокументОбєкт.UnigueID.UGuid;
 
-			#endregion
+                    record.Номенклатура = ТовариРядок.Номенклатура;
+                    record.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
+                    record.Склад = ДокументОбєкт.Склад;
+                    record.ВНаявності = ТовариРядок.Кількість;
+                }
+            }
 
-			#region Товари на складах
+            вільніЗалишки_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
 
-			ТовариНаСкладах_RecordsSet товариНаСкладах_RecordsSet = new ТовариНаСкладах_RecordsSet();
+            #endregion
 
-			foreach (ПоверненняТоварівВідКлієнта_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
-			{
-				if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
-				{
-					ТовариНаСкладах_RecordsSet.Record record = new ТовариНаСкладах_RecordsSet.Record();
-					товариНаСкладах_RecordsSet.Records.Add(record);
+            #region Товари на складах
 
-					record.Income = true;
-					record.Owner = ДокументОбєкт.UnigueID.UGuid;
+            ТовариНаСкладах_RecordsSet товариНаСкладах_RecordsSet = new ТовариНаСкладах_RecordsSet();
 
-					record.Номенклатура = ТовариРядок.Номенклатура;
-					record.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
-					record.Серія = ТовариРядок.Серія;
-					record.Склад = ДокументОбєкт.Склад;
-					record.ВНаявності = ТовариРядок.Кількість;
-				}
-			}
+            foreach (ПоверненняТоварівВідКлієнта_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
+            {
+                if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
+                {
+                    ТовариНаСкладах_RecordsSet.Record record = new ТовариНаСкладах_RecordsSet.Record();
+                    товариНаСкладах_RecordsSet.Records.Add(record);
 
-			товариНаСкладах_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                    record.Income = true;
+                    record.Owner = ДокументОбєкт.UnigueID.UGuid;
 
-			#endregion
+                    record.Номенклатура = ТовариРядок.Номенклатура;
+                    record.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
+                    record.Серія = ТовариРядок.Серія;
+                    record.Склад = ДокументОбєкт.Склад;
+                    record.ВНаявності = ТовариРядок.Кількість;
+                }
+            }
 
-			#region Партії товарів
+            товариНаСкладах_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
 
-			ПартіїТоварів_RecordsSet партіїТоварів_RecordsSet = new ПартіїТоварів_RecordsSet();
+            #endregion
 
-			foreach (ПоверненняТоварівВідКлієнта_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
-			{
-				if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
-				{
-					List<Dictionary<string, object>> listNameRow = ОтриматиПартіїТоваруЗДокументуРеалізації(ДокументОбєкт, ТовариРядок);
+            #region Партії товарів
 
-					if (listNameRow.Count == 0)
-					{
-						СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
-							$"Немає доступних партій для товару {СписокНоменклатури[ТовариРядок.НомерРядка].Назва}");
-						СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
+            ПартіїТоварів_RecordsSet партіїТоварів_RecordsSet = new ПартіїТоварів_RecordsSet();
 
-                        return false;
-                    }
+            foreach (ПоверненняТоварівВідКлієнта_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
+            {
+                if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
+                {
+                    List<Dictionary<string, object>> listNameRow = ОтриматиПартіїТоваруЗДокументуРеалізації(ДокументОбєкт, ТовариРядок);
 
-					decimal КількістьЯкуПотрібноПовернути = ТовариРядок.Кількість;
-
-					foreach (Dictionary<string, object> nameRow in listNameRow)
-					{
-						decimal КількістьВПартії = (decimal)nameRow["Кількість"];
-						decimal СобівартістьПартії = (decimal)nameRow["Собівартість"];
-						decimal СписанаСобівартістьПартії = (decimal)nameRow["СписанаСобівартість"];
-						ПартіяТоварівКомпозит_Pointer ПартіяТоварівКомпозит = new ПартіяТоварівКомпозит_Pointer(nameRow["ПартіяТоварівКомпозит"]);
-
-						decimal КількістьЩоПовертається = 0;
-
-						if (КількістьВПартії <= КількістьЯкуПотрібноПовернути)
-						{
-							КількістьЩоПовертається = КількістьВПартії;
-							КількістьЯкуПотрібноПовернути -= КількістьВПартії;
-						}
-						else
-						{
-							КількістьЩоПовертається = КількістьЯкуПотрібноПовернути;
-							КількістьЯкуПотрібноПовернути = 0;
-						}
-
-						ПартіїТоварів_RecordsSet.Record record = new ПартіїТоварів_RecordsSet.Record();
-						партіїТоварів_RecordsSet.Records.Add(record);
-
-						record.Income = true;
-						record.Owner = ДокументОбєкт.UnigueID.UGuid;
-
-						record.Організація = ДокументОбєкт.Організація;
-						record.ПартіяТоварівКомпозит = ПартіяТоварівКомпозит;
-						record.Кількість = КількістьЩоПовертається;
-						record.Собівартість = СобівартістьПартії;
-						record.СписанаСобівартість = СписанаСобівартістьПартії;
-						record.Номенклатура = ТовариРядок.Номенклатура;
-						record.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
-						record.Серія = ТовариРядок.Серія;
-						record.Склад = ДокументОбєкт.Склад;
-
-						if (КількістьЯкуПотрібноПовернути == 0)
-							break;
-					}
-
-					if (КількістьЯкуПотрібноПовернути > 0)
-					{
-						СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
-								$"Невистачило повернути {КількістьЯкуПотрібноПовернути} товарів");
-						СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
+                    if (listNameRow.Count == 0)
+                    {
+                        СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
+                            $"Немає доступних партій для товару {СписокНоменклатури[ТовариРядок.НомерРядка].Назва}");
+                        СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
 
                         return false;
                     }
-				}
-			}
 
-			партіїТоварів_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                    decimal КількістьЯкуПотрібноПовернути = ТовариРядок.Кількість;
 
-			#endregion
+                    foreach (Dictionary<string, object> nameRow in listNameRow)
+                    {
+                        decimal КількістьВПартії = (decimal)nameRow["Кількість"];
+                        decimal СобівартістьПартії = (decimal)nameRow["Собівартість"];
+                        decimal СписанаСобівартістьПартії = (decimal)nameRow["СписанаСобівартість"];
+                        ПартіяТоварівКомпозит_Pointer ПартіяТоварівКомпозит = new ПартіяТоварівКомпозит_Pointer(nameRow["ПартіяТоварівКомпозит"]);
 
-			#region РозрахункиЗКлієнтами
+                        decimal КількістьЩоПовертається = 0;
 
-			РозрахункиЗКлієнтами_RecordsSet розрахункиЗКлієнтами_RecordsSet = new РозрахункиЗКлієнтами_RecordsSet();
+                        if (КількістьВПартії <= КількістьЯкуПотрібноПовернути)
+                        {
+                            КількістьЩоПовертається = КількістьВПартії;
+                            КількістьЯкуПотрібноПовернути -= КількістьВПартії;
+                        }
+                        else
+                        {
+                            КількістьЩоПовертається = КількістьЯкуПотрібноПовернути;
+                            КількістьЯкуПотрібноПовернути = 0;
+                        }
 
-			РозрахункиЗКлієнтами_RecordsSet.Record розрахункиЗКлієнтами_Record = new РозрахункиЗКлієнтами_RecordsSet.Record();
-			розрахункиЗКлієнтами_RecordsSet.Records.Add(розрахункиЗКлієнтами_Record);
+                        ПартіїТоварів_RecordsSet.Record record = new ПартіїТоварів_RecordsSet.Record();
+                        партіїТоварів_RecordsSet.Records.Add(record);
 
-			розрахункиЗКлієнтами_Record.Income = false;
-			розрахункиЗКлієнтами_Record.Owner = ДокументОбєкт.UnigueID.UGuid;
+                        record.Income = true;
+                        record.Owner = ДокументОбєкт.UnigueID.UGuid;
 
-			розрахункиЗКлієнтами_Record.Контрагент = ДокументОбєкт.Контрагент;
-			розрахункиЗКлієнтами_Record.Валюта = ДокументОбєкт.Валюта;
-			розрахункиЗКлієнтами_Record.Сума = ДокументОбєкт.СумаДокументу;
+                        record.Організація = ДокументОбєкт.Організація;
+                        record.ПартіяТоварівКомпозит = ПартіяТоварівКомпозит;
+                        record.Кількість = КількістьЩоПовертається;
+                        record.Собівартість = СобівартістьПартії;
+                        record.СписанаСобівартість = СписанаСобівартістьПартії;
+                        record.Номенклатура = ТовариРядок.Номенклатура;
+                        record.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
+                        record.Серія = ТовариРядок.Серія;
+                        record.Склад = ДокументОбєкт.Склад;
 
-			розрахункиЗКлієнтами_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                        if (КількістьЯкуПотрібноПовернути == 0)
+                            break;
+                    }
 
-			#endregion
+                    if (КількістьЯкуПотрібноПовернути > 0)
+                    {
+                        СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
+                                $"Невистачило повернути {КількістьЯкуПотрібноПовернути} товарів");
+                        СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
 
-			return true;
-		}
+                        return false;
+                    }
+                }
+            }
 
-		public static void ClearSpend(ПоверненняТоварівВідКлієнта_Objest ДокументОбєкт)
-		{
-			ВільніЗалишки_RecordsSet вільніЗалишки_RecordsSet = new ВільніЗалишки_RecordsSet();
-			вільніЗалишки_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+            партіїТоварів_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
 
-			ТовариНаСкладах_RecordsSet товариНаСкладах_RecordsSet = new ТовариНаСкладах_RecordsSet();
-			товариНаСкладах_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+            #endregion
 
-			ПартіїТоварів_RecordsSet партіїТоварів_RecordsSet = new ПартіїТоварів_RecordsSet();
-			партіїТоварів_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+            #region РозрахункиЗКлієнтами
 
-			РозрахункиЗКлієнтами_RecordsSet розрахункиЗКлієнтами_RecordsSet = new РозрахункиЗКлієнтами_RecordsSet();
-			розрахункиЗКлієнтами_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-		}
-	}
+            РозрахункиЗКлієнтами_RecordsSet розрахункиЗКлієнтами_RecordsSet = new РозрахункиЗКлієнтами_RecordsSet();
 
-	class ПоверненняТоварівПостачальнику_SpendTheDocument
-	{
-		private static List<Dictionary<string, object>> ОтриматиПартіїТоваруЗДокументуПоступлення(ПоверненняТоварівПостачальнику_Objest ДокументОбєкт,
-			ПоверненняТоварівПостачальнику_Товари_TablePart.Record ТовариРядок)
-		{
-			string query = $@"
+            РозрахункиЗКлієнтами_RecordsSet.Record розрахункиЗКлієнтами_Record = new РозрахункиЗКлієнтами_RecordsSet.Record();
+            розрахункиЗКлієнтами_RecordsSet.Records.Add(розрахункиЗКлієнтами_Record);
+
+            розрахункиЗКлієнтами_Record.Income = false;
+            розрахункиЗКлієнтами_Record.Owner = ДокументОбєкт.UnigueID.UGuid;
+
+            розрахункиЗКлієнтами_Record.Контрагент = ДокументОбєкт.Контрагент;
+            розрахункиЗКлієнтами_Record.Валюта = ДокументОбєкт.Валюта;
+            розрахункиЗКлієнтами_Record.Сума = ДокументОбєкт.СумаДокументу;
+
+            розрахункиЗКлієнтами_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+
+            #endregion
+
+            return true;
+        }
+
+        public static void ClearSpend(ПоверненняТоварівВідКлієнта_Objest ДокументОбєкт)
+        {
+            ВільніЗалишки_RecordsSet вільніЗалишки_RecordsSet = new ВільніЗалишки_RecordsSet();
+            вільніЗалишки_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+
+            ТовариНаСкладах_RecordsSet товариНаСкладах_RecordsSet = new ТовариНаСкладах_RecordsSet();
+            товариНаСкладах_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+
+            ПартіїТоварів_RecordsSet партіїТоварів_RecordsSet = new ПартіїТоварів_RecordsSet();
+            партіїТоварів_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+
+            РозрахункиЗКлієнтами_RecordsSet розрахункиЗКлієнтами_RecordsSet = new РозрахункиЗКлієнтами_RecordsSet();
+            розрахункиЗКлієнтами_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+        }
+    }
+
+    class ПоверненняТоварівПостачальнику_SpendTheDocument
+    {
+        private static List<Dictionary<string, object>> ОтриматиПартіїТоваруЗДокументуПоступлення(ПоверненняТоварівПостачальнику_Objest ДокументОбєкт,
+            ПоверненняТоварівПостачальнику_Товари_TablePart.Record ТовариРядок)
+        {
+            string query = $@"
 SELECT 
     Рег_ПартіїТоварів.{ПартіїТоварів_Const.ПартіяТоварівКомпозит} AS ПартіяТоварівКомпозит,
     Довідник_ПартіяТоварівКомпозит.{ПартіяТоварівКомпозит_Const.Дата} AS ПартіяТоварівКомпозит_Дата,
@@ -1779,681 +1779,681 @@ FROM
         Рег_ПартіїТоварів.{ПартіїТоварів_Const.ПартіяТоварівКомпозит}
 
 WHERE
-    Рег_ПартіїТоварів.Owner = @ДокументРеалізації AND
+    Рег_ПартіїТоварів.Owner = @ДокументПоступлення AND
     Рег_ПартіїТоварів.{ПартіїТоварів_Const.Організація} = @Організація AND
     Рег_ПартіїТоварів.{ПартіїТоварів_Const.Номенклатура} = @Товар AND
     Рег_ПартіїТоварів.{ПартіїТоварів_Const.ХарактеристикаНоменклатури} = @Характеристика AND
     Рег_ПартіїТоварів.{ПартіїТоварів_Const.Серія} = @Серія AND
-    Рег_ПартіїТоварів.{ПартіїТоварів_Const.Серія} = @Склад
+    Рег_ПартіїТоварів.{ПартіїТоварів_Const.Склад} = @Склад
 
 ORDER BY ПартіяТоварівКомпозит_Дата ASC
 ";
 
-			Dictionary<string, object> paramQuery = new Dictionary<string, object>();
-			paramQuery.Add("ДокументРеалізації", ТовариРядок.ДокументПоступлення.UnigueID.UGuid);
-			paramQuery.Add("Організація", ДокументОбєкт.Організація.UnigueID.UGuid);
-			paramQuery.Add("Товар", ТовариРядок.Номенклатура.UnigueID.UGuid);
-			paramQuery.Add("Характеристика", ТовариРядок.ХарактеристикаНоменклатури.UnigueID.UGuid);
-			paramQuery.Add("Серія", ТовариРядок.Серія.UnigueID.UGuid);
-			paramQuery.Add("Склад", ДокументОбєкт.Склад.UnigueID.UGuid);
+            Dictionary<string, object> paramQuery = new Dictionary<string, object>();
+            paramQuery.Add("ДокументПоступлення", ТовариРядок.ДокументПоступлення.UnigueID.UGuid);
+            paramQuery.Add("Організація", ДокументОбєкт.Організація.UnigueID.UGuid);
+            paramQuery.Add("Товар", ТовариРядок.Номенклатура.UnigueID.UGuid);
+            paramQuery.Add("Характеристика", ТовариРядок.ХарактеристикаНоменклатури.UnigueID.UGuid);
+            paramQuery.Add("Серія", ТовариРядок.Серія.UnigueID.UGuid);
+            paramQuery.Add("Склад", ДокументОбєкт.Склад.UnigueID.UGuid);
 
-			string[] columnsName;
-			List<Dictionary<string, object>> listNameRow;
+            string[] columnsName;
+            List<Dictionary<string, object>> listNameRow;
 
-			Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listNameRow);
+            Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listNameRow);
 
-			return listNameRow;
-		}
+            return listNameRow;
+        }
 
-		public static bool Spend(ПоверненняТоварівПостачальнику_Objest ДокументОбєкт)
-		{
-			#region Підготовка
+        public static bool Spend(ПоверненняТоварівПостачальнику_Objest ДокументОбєкт)
+        {
+            #region Підготовка
 
-			List<string> СписокПомилок = new List<string>();
+            List<string> СписокПомилок = new List<string>();
 
-			Dictionary<int, Номенклатура_Objest> СписокНоменклатури = new Dictionary<int, Номенклатура_Objest>();
+            Dictionary<int, Номенклатура_Objest> СписокНоменклатури = new Dictionary<int, Номенклатура_Objest>();
 
-			foreach (ПоверненняТоварівПостачальнику_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
-			{
-				if (ТовариРядок.Номенклатура.IsEmpty())
-				{
-					СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. Не заповнене поле Номенклатура");
-					СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
-
-                    return false;
-                }
-
-				if (!(ТовариРядок.Кількість > 0))
-				{
-					СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. Кількість має бути більшою 0");
-					СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
+            foreach (ПоверненняТоварівПостачальнику_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
+            {
+                if (ТовариРядок.Номенклатура.IsEmpty())
+                {
+                    СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. Не заповнене поле Номенклатура");
+                    СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
 
                     return false;
                 }
 
-				СписокНоменклатури.Add(ТовариРядок.НомерРядка, ТовариРядок.Номенклатура.GetDirectoryObject()!);
-			}
+                if (!(ТовариРядок.Кількість > 0))
+                {
+                    СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. Кількість має бути більшою 0");
+                    СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
 
-			#endregion
+                    return false;
+                }
 
-			#region Товари на складах
+                СписокНоменклатури.Add(ТовариРядок.НомерРядка, ТовариРядок.Номенклатура.GetDirectoryObject()!);
+            }
 
-			ТовариНаСкладах_RecordsSet товариНаСкладах_RecordsSet = new ТовариНаСкладах_RecordsSet();
+            #endregion
 
-			foreach (ПоверненняТоварівПостачальнику_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
-			{
-				if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
-				{
-					ТовариНаСкладах_RecordsSet.Record record = new ТовариНаСкладах_RecordsSet.Record();
-					товариНаСкладах_RecordsSet.Records.Add(record);
+            #region Товари на складах
 
-					record.Income = false;
-					record.Owner = ДокументОбєкт.UnigueID.UGuid;
+            ТовариНаСкладах_RecordsSet товариНаСкладах_RecordsSet = new ТовариНаСкладах_RecordsSet();
 
-					record.Номенклатура = ТовариРядок.Номенклатура;
-					record.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
-					record.Серія = ТовариРядок.Серія;
-					record.Склад = ДокументОбєкт.Склад;
-					record.ВНаявності = ТовариРядок.Кількість;
-				}
-			}
+            foreach (ПоверненняТоварівПостачальнику_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
+            {
+                if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
+                {
+                    ТовариНаСкладах_RecordsSet.Record record = new ТовариНаСкладах_RecordsSet.Record();
+                    товариНаСкладах_RecordsSet.Records.Add(record);
 
-			товариНаСкладах_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                    record.Income = false;
+                    record.Owner = ДокументОбєкт.UnigueID.UGuid;
 
-			#endregion
+                    record.Номенклатура = ТовариРядок.Номенклатура;
+                    record.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
+                    record.Серія = ТовариРядок.Серія;
+                    record.Склад = ДокументОбєкт.Склад;
+                    record.ВНаявності = ТовариРядок.Кількість;
+                }
+            }
 
-			#region Партії товарів
+            товариНаСкладах_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
 
-			ПартіїТоварів_RecordsSet партіїТоварів_RecordsSet = new ПартіїТоварів_RecordsSet();
+            #endregion
 
-			foreach (ПоверненняТоварівПостачальнику_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
-			{
-				if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
-				{
-					List<Dictionary<string, object>> listNameRow = ОтриматиПартіїТоваруЗДокументуПоступлення(ДокументОбєкт, ТовариРядок);
+            #region Партії товарів
 
-					if (listNameRow.Count == 0)
-					{
-						СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
-							$"Немає доступних партій для товару {СписокНоменклатури[ТовариРядок.НомерРядка].Назва}");
-						СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
+            ПартіїТоварів_RecordsSet партіїТоварів_RecordsSet = new ПартіїТоварів_RecordsSet();
+
+            foreach (ПоверненняТоварівПостачальнику_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
+            {
+                if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
+                {
+                    List<Dictionary<string, object>> listNameRow = ОтриматиПартіїТоваруЗДокументуПоступлення(ДокументОбєкт, ТовариРядок);
+
+                    if (listNameRow.Count == 0)
+                    {
+                        СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
+                            $"Немає доступних партій для товару {СписокНоменклатури[ТовариРядок.НомерРядка].Назва}");
+                        СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
 
                         return false;
                     }
 
-					decimal КількістьЯкуПотрібноПовернути = ТовариРядок.Кількість;
+                    decimal КількістьЯкуПотрібноПовернути = ТовариРядок.Кількість;
 
-					if (listNameRow.Count > 0)
-					{
-						Dictionary<string, object> nameRow = listNameRow[0];
+                    if (listNameRow.Count > 0)
+                    {
+                        Dictionary<string, object> nameRow = listNameRow[0];
 
-						decimal КількістьВПартії = (decimal)nameRow["Кількість"];
-						decimal СобівартістьПартії = (decimal)nameRow["Собівартість"];
-						ПартіяТоварівКомпозит_Pointer ПартіяТоварівКомпозит = new ПартіяТоварівКомпозит_Pointer(nameRow["ПартіяТоварівКомпозит"]);
+                        decimal КількістьВПартії = (decimal)nameRow["Кількість"];
+                        decimal СобівартістьПартії = (decimal)nameRow["Собівартість"];
+                        ПартіяТоварівКомпозит_Pointer ПартіяТоварівКомпозит = new ПартіяТоварівКомпозит_Pointer(nameRow["ПартіяТоварівКомпозит"]);
 
-						if (КількістьЯкуПотрібноПовернути <= КількістьВПартії)
-						{
-							ПартіїТоварів_RecordsSet.Record record = new ПартіїТоварів_RecordsSet.Record();
-							партіїТоварів_RecordsSet.Records.Add(record);
+                        if (КількістьЯкуПотрібноПовернути <= КількістьВПартії)
+                        {
+                            ПартіїТоварів_RecordsSet.Record record = new ПартіїТоварів_RecordsSet.Record();
+                            партіїТоварів_RecordsSet.Records.Add(record);
 
-							record.Income = false;
-							record.Owner = ДокументОбєкт.UnigueID.UGuid;
+                            record.Income = false;
+                            record.Owner = ДокументОбєкт.UnigueID.UGuid;
 
-							record.Організація = ДокументОбєкт.Організація;
-							record.ПартіяТоварівКомпозит = ПартіяТоварівКомпозит;
-							record.Кількість = КількістьЯкуПотрібноПовернути;
-							record.Собівартість = (КількістьЯкуПотрібноПовернути == КількістьВПартії ? СобівартістьПартії : 0);
-							record.СписанаСобівартість = СобівартістьПартії;
-							record.Номенклатура = ТовариРядок.Номенклатура;
-							record.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
-							record.Серія = ТовариРядок.Серія;
-							record.Склад = ДокументОбєкт.Склад;
-						}
-						else
-						{
-							СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
-								$"Кількість в партії менша чим кількість яку повертають для товару {СписокНоменклатури[ТовариРядок.НомерРядка].Назва}");
-							СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
+                            record.Організація = ДокументОбєкт.Організація;
+                            record.ПартіяТоварівКомпозит = ПартіяТоварівКомпозит;
+                            record.Кількість = КількістьЯкуПотрібноПовернути;
+                            record.Собівартість = (КількістьЯкуПотрібноПовернути == КількістьВПартії ? СобівартістьПартії : 0);
+                            record.СписанаСобівартість = СобівартістьПартії;
+                            record.Номенклатура = ТовариРядок.Номенклатура;
+                            record.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
+                            record.Серія = ТовариРядок.Серія;
+                            record.Склад = ДокументОбєкт.Склад;
+                        }
+                        else
+                        {
+                            СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
+                                $"Кількість в партії менша чим кількість яку повертають для товару {СписокНоменклатури[ТовариРядок.НомерРядка].Назва}");
+                            СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
 
                             return false;
                         }
-					}
-					else
-					{
-						СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
-							 $"Не знайдені партії для товару {СписокНоменклатури[ТовариРядок.НомерРядка].Назва}");
-						СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
+                    }
+                    else
+                    {
+                        СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
+                             $"Не знайдені партії для товару {СписокНоменклатури[ТовариРядок.НомерРядка].Назва}");
+                        СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
 
                         return false;
                     }
-				}
-			}
+                }
+            }
 
-			партіїТоварів_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+            партіїТоварів_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
 
-			#endregion
+            #endregion
 
-			#region ВільніЗалишки
+            #region ВільніЗалишки
 
-			ВільніЗалишки_RecordsSet вільніЗалишки_RecordsSet = new ВільніЗалишки_RecordsSet();
+            ВільніЗалишки_RecordsSet вільніЗалишки_RecordsSet = new ВільніЗалишки_RecordsSet();
 
-			foreach (ПоверненняТоварівПостачальнику_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
-			{
-				if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
-				{
-					ВільніЗалишки_RecordsSet.Record record = new ВільніЗалишки_RecordsSet.Record();
-					вільніЗалишки_RecordsSet.Records.Add(record);
+            foreach (ПоверненняТоварівПостачальнику_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
+            {
+                if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
+                {
+                    ВільніЗалишки_RecordsSet.Record record = new ВільніЗалишки_RecordsSet.Record();
+                    вільніЗалишки_RecordsSet.Records.Add(record);
 
-					record.Income = false;
-					record.Owner = ДокументОбєкт.UnigueID.UGuid;
+                    record.Income = false;
+                    record.Owner = ДокументОбєкт.UnigueID.UGuid;
 
-					record.Номенклатура = ТовариРядок.Номенклатура;
-					record.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
-					record.Склад = ДокументОбєкт.Склад;
-					record.ВНаявності = ТовариРядок.Кількість;
-				}
-			}
+                    record.Номенклатура = ТовариРядок.Номенклатура;
+                    record.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
+                    record.Склад = ДокументОбєкт.Склад;
+                    record.ВНаявності = ТовариРядок.Кількість;
+                }
+            }
 
-			вільніЗалишки_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+            вільніЗалишки_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
 
-			#endregion
+            #endregion
 
-			#region РозрахункиЗПостачальниками
+            #region РозрахункиЗПостачальниками
 
-			РозрахункиЗПостачальниками_RecordsSet розрахункиЗПостачальниками_RecordsSet = new РозрахункиЗПостачальниками_RecordsSet();
+            РозрахункиЗПостачальниками_RecordsSet розрахункиЗПостачальниками_RecordsSet = new РозрахункиЗПостачальниками_RecordsSet();
 
-			РозрахункиЗПостачальниками_RecordsSet.Record розрахункиЗПостачальниками_Record = new РозрахункиЗПостачальниками_RecordsSet.Record();
-			розрахункиЗПостачальниками_RecordsSet.Records.Add(розрахункиЗПостачальниками_Record);
+            РозрахункиЗПостачальниками_RecordsSet.Record розрахункиЗПостачальниками_Record = new РозрахункиЗПостачальниками_RecordsSet.Record();
+            розрахункиЗПостачальниками_RecordsSet.Records.Add(розрахункиЗПостачальниками_Record);
 
-			розрахункиЗПостачальниками_Record.Income = false;
-			розрахункиЗПостачальниками_Record.Owner = ДокументОбєкт.UnigueID.UGuid;
+            розрахункиЗПостачальниками_Record.Income = false;
+            розрахункиЗПостачальниками_Record.Owner = ДокументОбєкт.UnigueID.UGuid;
 
-			розрахункиЗПостачальниками_Record.Контрагент = ДокументОбєкт.Контрагент;
-			розрахункиЗПостачальниками_Record.Валюта = ДокументОбєкт.Валюта;
-			розрахункиЗПостачальниками_Record.Сума = ДокументОбєкт.СумаДокументу;
+            розрахункиЗПостачальниками_Record.Контрагент = ДокументОбєкт.Контрагент;
+            розрахункиЗПостачальниками_Record.Валюта = ДокументОбєкт.Валюта;
+            розрахункиЗПостачальниками_Record.Сума = ДокументОбєкт.СумаДокументу;
 
-			розрахункиЗПостачальниками_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+            розрахункиЗПостачальниками_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
 
-			#endregion
+            #endregion
 
-			return true;
-		}
+            return true;
+        }
 
-		public static void ClearSpend(ПоверненняТоварівПостачальнику_Objest ДокументОбєкт)
-		{
-			ТовариНаСкладах_RecordsSet товариНаСкладах_RecordsSet = new ТовариНаСкладах_RecordsSet();
-			товариНаСкладах_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+        public static void ClearSpend(ПоверненняТоварівПостачальнику_Objest ДокументОбєкт)
+        {
+            ТовариНаСкладах_RecordsSet товариНаСкладах_RecordsSet = new ТовариНаСкладах_RecordsSet();
+            товариНаСкладах_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
 
-			ПартіїТоварів_RecordsSet партіїТоварів_RecordsSet = new ПартіїТоварів_RecordsSet();
-			партіїТоварів_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+            ПартіїТоварів_RecordsSet партіїТоварів_RecordsSet = new ПартіїТоварів_RecordsSet();
+            партіїТоварів_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
 
-			ВільніЗалишки_RecordsSet вільніЗалишки_RecordsSet = new ВільніЗалишки_RecordsSet();
-			вільніЗалишки_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+            ВільніЗалишки_RecordsSet вільніЗалишки_RecordsSet = new ВільніЗалишки_RecordsSet();
+            вільніЗалишки_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
 
-			РозрахункиЗПостачальниками_RecordsSet розрахункиЗПостачальниками_RecordsSet = new РозрахункиЗПостачальниками_RecordsSet();
-			розрахункиЗПостачальниками_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-		}
-	}
+            РозрахункиЗПостачальниками_RecordsSet розрахункиЗПостачальниками_RecordsSet = new РозрахункиЗПостачальниками_RecordsSet();
+            розрахункиЗПостачальниками_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+        }
+    }
 
-	class ПрихіднийКасовийОрдер_SpendTheDocument
-	{
-		public static bool Spend(ПрихіднийКасовийОрдер_Objest ДокументОбєкт)
-		{
-			#region Підготовка
+    class ПрихіднийКасовийОрдер_SpendTheDocument
+    {
+        public static bool Spend(ПрихіднийКасовийОрдер_Objest ДокументОбєкт)
+        {
+            #region Підготовка
 
 
 
-			#endregion
+            #endregion
 
-			#region РозрахункиЗКлієнтами
+            #region РозрахункиЗКлієнтами
 
-			РозрахункиЗКлієнтами_RecordsSet розрахункиЗКлієнтами_RecordsSet = new РозрахункиЗКлієнтами_RecordsSet();
+            РозрахункиЗКлієнтами_RecordsSet розрахункиЗКлієнтами_RecordsSet = new РозрахункиЗКлієнтами_RecordsSet();
 
-			if (ДокументОбєкт.ГосподарськаОперація == Перелічення.ГосподарськіОперації.ПоступленняОплатиВідКлієнта)
-			{
-				РозрахункиЗКлієнтами_RecordsSet.Record record_Клієнт = new РозрахункиЗКлієнтами_RecordsSet.Record();
-				розрахункиЗКлієнтами_RecordsSet.Records.Add(record_Клієнт);
+            if (ДокументОбєкт.ГосподарськаОперація == Перелічення.ГосподарськіОперації.ПоступленняОплатиВідКлієнта)
+            {
+                РозрахункиЗКлієнтами_RecordsSet.Record record_Клієнт = new РозрахункиЗКлієнтами_RecordsSet.Record();
+                розрахункиЗКлієнтами_RecordsSet.Records.Add(record_Клієнт);
 
-				record_Клієнт.Income = false;
-				record_Клієнт.Owner = ДокументОбєкт.UnigueID.UGuid;
+                record_Клієнт.Income = false;
+                record_Клієнт.Owner = ДокументОбєкт.UnigueID.UGuid;
 
-				record_Клієнт.Контрагент = ДокументОбєкт.Контрагент;
-				record_Клієнт.Валюта = ДокументОбєкт.Валюта;
-				record_Клієнт.Сума = ДокументОбєкт.СумаДокументу;
-			}
+                record_Клієнт.Контрагент = ДокументОбєкт.Контрагент;
+                record_Клієнт.Валюта = ДокументОбєкт.Валюта;
+                record_Клієнт.Сума = ДокументОбєкт.СумаДокументу;
+            }
 
-			розрахункиЗКлієнтами_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+            розрахункиЗКлієнтами_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
 
-			#endregion
+            #endregion
 
-			#region РозрахункиЗПостачальниками
+            #region РозрахункиЗПостачальниками
 
-			РозрахункиЗПостачальниками_RecordsSet розрахункиЗПостачальниками_RecordsSet = new РозрахункиЗПостачальниками_RecordsSet();
+            РозрахункиЗПостачальниками_RecordsSet розрахункиЗПостачальниками_RecordsSet = new РозрахункиЗПостачальниками_RecordsSet();
 
-			if (ДокументОбєкт.ГосподарськаОперація == Перелічення.ГосподарськіОперації.ПоверненняКоштівПостачальнику)
-			{
-				РозрахункиЗПостачальниками_RecordsSet.Record record_Постачальник = new РозрахункиЗПостачальниками_RecordsSet.Record();
-				розрахункиЗПостачальниками_RecordsSet.Records.Add(record_Постачальник);
+            if (ДокументОбєкт.ГосподарськаОперація == Перелічення.ГосподарськіОперації.ПоверненняКоштівПостачальнику)
+            {
+                РозрахункиЗПостачальниками_RecordsSet.Record record_Постачальник = new РозрахункиЗПостачальниками_RecordsSet.Record();
+                розрахункиЗПостачальниками_RecordsSet.Records.Add(record_Постачальник);
 
-				record_Постачальник.Income = false;
-				record_Постачальник.Owner = ДокументОбєкт.UnigueID.UGuid;
+                record_Постачальник.Income = false;
+                record_Постачальник.Owner = ДокументОбєкт.UnigueID.UGuid;
 
-				record_Постачальник.Контрагент = ДокументОбєкт.Контрагент;
-				record_Постачальник.Валюта = ДокументОбєкт.Валюта;
-				record_Постачальник.Сума = ДокументОбєкт.СумаДокументу;
-			}
+                record_Постачальник.Контрагент = ДокументОбєкт.Контрагент;
+                record_Постачальник.Валюта = ДокументОбєкт.Валюта;
+                record_Постачальник.Сума = ДокументОбєкт.СумаДокументу;
+            }
 
-			розрахункиЗПостачальниками_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+            розрахункиЗПостачальниками_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
 
-			#endregion
+            #endregion
 
-			#region РухКоштів
+            #region РухКоштів
 
-			РухКоштів_RecordsSet рухКоштів_RecordsSet = new РухКоштів_RecordsSet();
+            РухКоштів_RecordsSet рухКоштів_RecordsSet = new РухКоштів_RecordsSet();
 
-			//Списання коштів з КасаВідправник
-			if (ДокументОбєкт.ГосподарськаОперація == Перелічення.ГосподарськіОперації.ПоступленняКоштівЗІншоїКаси)
-			{
-				РухКоштів_RecordsSet.Record record_ІншаКаса = new РухКоштів_RecordsSet.Record();
-				рухКоштів_RecordsSet.Records.Add(record_ІншаКаса);
+            //Списання коштів з КасаВідправник
+            if (ДокументОбєкт.ГосподарськаОперація == Перелічення.ГосподарськіОперації.ПоступленняКоштівЗІншоїКаси)
+            {
+                РухКоштів_RecordsSet.Record record_ІншаКаса = new РухКоштів_RecordsSet.Record();
+                рухКоштів_RecordsSet.Records.Add(record_ІншаКаса);
 
-				record_ІншаКаса.Income = false;
-				record_ІншаКаса.Owner = ДокументОбєкт.UnigueID.UGuid;
+                record_ІншаКаса.Income = false;
+                record_ІншаКаса.Owner = ДокументОбєкт.UnigueID.UGuid;
 
-				record_ІншаКаса.Організація = ДокументОбєкт.Організація;
-				record_ІншаКаса.Каса = ДокументОбєкт.КасаВідправник;
-				record_ІншаКаса.Валюта = ДокументОбєкт.Валюта;
-				record_ІншаКаса.Сума = ДокументОбєкт.СумаДокументу;
-			}
+                record_ІншаКаса.Організація = ДокументОбєкт.Організація;
+                record_ІншаКаса.Каса = ДокументОбєкт.КасаВідправник;
+                record_ІншаКаса.Валюта = ДокументОбєкт.Валюта;
+                record_ІншаКаса.Сума = ДокументОбєкт.СумаДокументу;
+            }
 
-			//Списання коштів з банківського рахунку
-			if (ДокументОбєкт.ГосподарськаОперація == Перелічення.ГосподарськіОперації.ПоступленняКоштівЗБанку)
-			{
-				// ...
-			}
+            //Списання коштів з банківського рахунку
+            if (ДокументОбєкт.ГосподарськаОперація == Перелічення.ГосподарськіОперації.ПоступленняКоштівЗБанку)
+            {
+                // ...
+            }
 
-			//Поступлення коштів в касу
-			РухКоштів_RecordsSet.Record record_РухКоштів = new РухКоштів_RecordsSet.Record();
-			рухКоштів_RecordsSet.Records.Add(record_РухКоштів);
+            //Поступлення коштів в касу
+            РухКоштів_RecordsSet.Record record_РухКоштів = new РухКоштів_RecordsSet.Record();
+            рухКоштів_RecordsSet.Records.Add(record_РухКоштів);
 
-			record_РухКоштів.Income = true;
-			record_РухКоштів.Owner = ДокументОбєкт.UnigueID.UGuid;
+            record_РухКоштів.Income = true;
+            record_РухКоштів.Owner = ДокументОбєкт.UnigueID.UGuid;
 
-			record_РухКоштів.Організація = ДокументОбєкт.Організація;
-			record_РухКоштів.Каса = ДокументОбєкт.Каса;
-			record_РухКоштів.Валюта = ДокументОбєкт.Валюта;
-			record_РухКоштів.Сума = ДокументОбєкт.СумаДокументу;
+            record_РухКоштів.Організація = ДокументОбєкт.Організація;
+            record_РухКоштів.Каса = ДокументОбєкт.Каса;
+            record_РухКоштів.Валюта = ДокументОбєкт.Валюта;
+            record_РухКоштів.Сума = ДокументОбєкт.СумаДокументу;
 
-			рухКоштів_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+            рухКоштів_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
 
-			#endregion
+            #endregion
 
-			return true;
-		}
+            return true;
+        }
 
-		public static void ClearSpend(ПрихіднийКасовийОрдер_Objest ДокументОбєкт)
-		{
-			РозрахункиЗПостачальниками_RecordsSet розрахункиЗПостачальниками_RecordsSet = new РозрахункиЗПостачальниками_RecordsSet();
-			розрахункиЗПостачальниками_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+        public static void ClearSpend(ПрихіднийКасовийОрдер_Objest ДокументОбєкт)
+        {
+            РозрахункиЗПостачальниками_RecordsSet розрахункиЗПостачальниками_RecordsSet = new РозрахункиЗПостачальниками_RecordsSet();
+            розрахункиЗПостачальниками_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
 
-			РозрахункиЗКлієнтами_RecordsSet розрахункиЗКлієнтами_RecordsSet = new РозрахункиЗКлієнтами_RecordsSet();
-			розрахункиЗКлієнтами_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+            РозрахункиЗКлієнтами_RecordsSet розрахункиЗКлієнтами_RecordsSet = new РозрахункиЗКлієнтами_RecordsSet();
+            розрахункиЗКлієнтами_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
 
-			РухКоштів_RecordsSet рухКоштів_RecordsSet = new РухКоштів_RecordsSet();
-			рухКоштів_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-		}
-	}
+            РухКоштів_RecordsSet рухКоштів_RecordsSet = new РухКоштів_RecordsSet();
+            рухКоштів_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+        }
+    }
 
-	class РозхіднийКасовийОрдер_SpendTheDocument
-	{
-		public static bool Spend(РозхіднийКасовийОрдер_Objest ДокументОбєкт)
-		{
-			#region Підготовка
+    class РозхіднийКасовийОрдер_SpendTheDocument
+    {
+        public static bool Spend(РозхіднийКасовийОрдер_Objest ДокументОбєкт)
+        {
+            #region Підготовка
 
 
 
-			#endregion
+            #endregion
 
-			#region РозрахункиЗКлієнтами
+            #region РозрахункиЗКлієнтами
 
-			РозрахункиЗКлієнтами_RecordsSet розрахункиЗКлієнтами_RecordsSet = new РозрахункиЗКлієнтами_RecordsSet();
+            РозрахункиЗКлієнтами_RecordsSet розрахункиЗКлієнтами_RecordsSet = new РозрахункиЗКлієнтами_RecordsSet();
 
-			if (ДокументОбєкт.ГосподарськаОперація == Перелічення.ГосподарськіОперації.ПоверненняОплатиКлієнту)
-			{
-				РозрахункиЗКлієнтами_RecordsSet.Record record_Клієнт = new РозрахункиЗКлієнтами_RecordsSet.Record();
-				розрахункиЗКлієнтами_RecordsSet.Records.Add(record_Клієнт);
+            if (ДокументОбєкт.ГосподарськаОперація == Перелічення.ГосподарськіОперації.ПоверненняОплатиКлієнту)
+            {
+                РозрахункиЗКлієнтами_RecordsSet.Record record_Клієнт = new РозрахункиЗКлієнтами_RecordsSet.Record();
+                розрахункиЗКлієнтами_RecordsSet.Records.Add(record_Клієнт);
 
-				record_Клієнт.Income = false;
-				record_Клієнт.Owner = ДокументОбєкт.UnigueID.UGuid;
+                record_Клієнт.Income = false;
+                record_Клієнт.Owner = ДокументОбєкт.UnigueID.UGuid;
 
-				record_Клієнт.Контрагент = ДокументОбєкт.Контрагент;
-				record_Клієнт.Валюта = ДокументОбєкт.Валюта;
-				record_Клієнт.Сума = ДокументОбєкт.СумаДокументу;
-			}
+                record_Клієнт.Контрагент = ДокументОбєкт.Контрагент;
+                record_Клієнт.Валюта = ДокументОбєкт.Валюта;
+                record_Клієнт.Сума = ДокументОбєкт.СумаДокументу;
+            }
 
-			розрахункиЗКлієнтами_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+            розрахункиЗКлієнтами_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
 
-			#endregion
+            #endregion
 
-			#region РозрахункиЗПостачальниками
+            #region РозрахункиЗПостачальниками
 
-			РозрахункиЗПостачальниками_RecordsSet розрахункиЗПостачальниками_RecordsSet = new РозрахункиЗПостачальниками_RecordsSet();
+            РозрахункиЗПостачальниками_RecordsSet розрахункиЗПостачальниками_RecordsSet = new РозрахункиЗПостачальниками_RecordsSet();
 
-			if (ДокументОбєкт.ГосподарськаОперація == Перелічення.ГосподарськіОперації.ОплатаПостачальнику)
-			{
-				РозрахункиЗПостачальниками_RecordsSet.Record record_Постачальник = new РозрахункиЗПостачальниками_RecordsSet.Record();
-				розрахункиЗПостачальниками_RecordsSet.Records.Add(record_Постачальник);
+            if (ДокументОбєкт.ГосподарськаОперація == Перелічення.ГосподарськіОперації.ОплатаПостачальнику)
+            {
+                РозрахункиЗПостачальниками_RecordsSet.Record record_Постачальник = new РозрахункиЗПостачальниками_RecordsSet.Record();
+                розрахункиЗПостачальниками_RecordsSet.Records.Add(record_Постачальник);
 
-				record_Постачальник.Income = true;
-				record_Постачальник.Owner = ДокументОбєкт.UnigueID.UGuid;
+                record_Постачальник.Income = true;
+                record_Постачальник.Owner = ДокументОбєкт.UnigueID.UGuid;
 
-				record_Постачальник.Контрагент = ДокументОбєкт.Контрагент;
-				record_Постачальник.Валюта = ДокументОбєкт.Валюта;
-				record_Постачальник.Сума = ДокументОбєкт.СумаДокументу;
-			}
+                record_Постачальник.Контрагент = ДокументОбєкт.Контрагент;
+                record_Постачальник.Валюта = ДокументОбєкт.Валюта;
+                record_Постачальник.Сума = ДокументОбєкт.СумаДокументу;
+            }
 
-			розрахункиЗПостачальниками_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+            розрахункиЗПостачальниками_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
 
-			#endregion
+            #endregion
 
-			#region РухКоштів
+            #region РухКоштів
 
-			РухКоштів_RecordsSet рухКоштів_RecordsSet = new РухКоштів_RecordsSet();
+            РухКоштів_RecordsSet рухКоштів_RecordsSet = new РухКоштів_RecordsSet();
 
-			//Поступлення коштів в КасаОтримувач
-			if (ДокументОбєкт.ГосподарськаОперація == Перелічення.ГосподарськіОперації.ВидачаКоштівВІншуКасу)
-			{
-				РухКоштів_RecordsSet.Record record_ІншаКаса = new РухКоштів_RecordsSet.Record();
-				рухКоштів_RecordsSet.Records.Add(record_ІншаКаса);
+            //Поступлення коштів в КасаОтримувач
+            if (ДокументОбєкт.ГосподарськаОперація == Перелічення.ГосподарськіОперації.ВидачаКоштівВІншуКасу)
+            {
+                РухКоштів_RecordsSet.Record record_ІншаКаса = new РухКоштів_RecordsSet.Record();
+                рухКоштів_RecordsSet.Records.Add(record_ІншаКаса);
 
-				record_ІншаКаса.Income = true;
-				record_ІншаКаса.Owner = ДокументОбєкт.UnigueID.UGuid;
+                record_ІншаКаса.Income = true;
+                record_ІншаКаса.Owner = ДокументОбєкт.UnigueID.UGuid;
 
-				record_ІншаКаса.Організація = ДокументОбєкт.Організація;
-				record_ІншаКаса.Каса = ДокументОбєкт.КасаОтримувач;
-				record_ІншаКаса.Валюта = ДокументОбєкт.Валюта;
-				record_ІншаКаса.Сума = ДокументОбєкт.СумаДокументу;
-			}
+                record_ІншаКаса.Організація = ДокументОбєкт.Організація;
+                record_ІншаКаса.Каса = ДокументОбєкт.КасаОтримувач;
+                record_ІншаКаса.Валюта = ДокументОбєкт.Валюта;
+                record_ІншаКаса.Сума = ДокументОбєкт.СумаДокументу;
+            }
 
-			//Поступлення коштів на банківський рахунок
-			if (ДокументОбєкт.ГосподарськаОперація == Перелічення.ГосподарськіОперації.ЗдачаКоштівВБанк)
-			{
-				// ...
-			}
+            //Поступлення коштів на банківський рахунок
+            if (ДокументОбєкт.ГосподарськаОперація == Перелічення.ГосподарськіОперації.ЗдачаКоштівВБанк)
+            {
+                // ...
+            }
 
-			//Списання коштів з каси
-			РухКоштів_RecordsSet.Record record_РухКоштів = new РухКоштів_RecordsSet.Record();
-			рухКоштів_RecordsSet.Records.Add(record_РухКоштів);
+            //Списання коштів з каси
+            РухКоштів_RecordsSet.Record record_РухКоштів = new РухКоштів_RecordsSet.Record();
+            рухКоштів_RecordsSet.Records.Add(record_РухКоштів);
 
-			record_РухКоштів.Income = false;
-			record_РухКоштів.Owner = ДокументОбєкт.UnigueID.UGuid;
+            record_РухКоштів.Income = false;
+            record_РухКоштів.Owner = ДокументОбєкт.UnigueID.UGuid;
 
-			record_РухКоштів.Організація = ДокументОбєкт.Організація;
-			record_РухКоштів.Каса = ДокументОбєкт.Каса;
-			record_РухКоштів.Валюта = ДокументОбєкт.Валюта;
-			record_РухКоштів.Сума = ДокументОбєкт.СумаДокументу;
+            record_РухКоштів.Організація = ДокументОбєкт.Організація;
+            record_РухКоштів.Каса = ДокументОбєкт.Каса;
+            record_РухКоштів.Валюта = ДокументОбєкт.Валюта;
+            record_РухКоштів.Сума = ДокументОбєкт.СумаДокументу;
 
-			рухКоштів_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+            рухКоштів_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
 
-			#endregion
+            #endregion
 
-			return true;
-		}
+            return true;
+        }
 
-		public static void ClearSpend(РозхіднийКасовийОрдер_Objest ДокументОбєкт)
-		{
-			РозрахункиЗПостачальниками_RecordsSet розрахункиЗПостачальниками_RecordsSet = new РозрахункиЗПостачальниками_RecordsSet();
-			розрахункиЗПостачальниками_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+        public static void ClearSpend(РозхіднийКасовийОрдер_Objest ДокументОбєкт)
+        {
+            РозрахункиЗПостачальниками_RecordsSet розрахункиЗПостачальниками_RecordsSet = new РозрахункиЗПостачальниками_RecordsSet();
+            розрахункиЗПостачальниками_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
 
-			РозрахункиЗКлієнтами_RecordsSet розрахункиЗКлієнтами_RecordsSet = new РозрахункиЗКлієнтами_RecordsSet();
-			розрахункиЗКлієнтами_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+            РозрахункиЗКлієнтами_RecordsSet розрахункиЗКлієнтами_RecordsSet = new РозрахункиЗКлієнтами_RecordsSet();
+            розрахункиЗКлієнтами_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
 
-			РухКоштів_RecordsSet рухКоштів_RecordsSet = new РухКоштів_RecordsSet();
-			рухКоштів_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-		}
-	}
+            РухКоштів_RecordsSet рухКоштів_RecordsSet = new РухКоштів_RecordsSet();
+            рухКоштів_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+        }
+    }
 
-	class ПереміщенняТоварів_SpendTheDocument
-	{
-		public static bool Spend(ПереміщенняТоварів_Objest ДокументОбєкт)
-		{
-			#region Підготовка
+    class ПереміщенняТоварів_SpendTheDocument
+    {
+        public static bool Spend(ПереміщенняТоварів_Objest ДокументОбєкт)
+        {
+            #region Підготовка
 
-			List<string> СписокПомилок = new List<string>();
+            List<string> СписокПомилок = new List<string>();
 
-			Dictionary<int, Номенклатура_Objest> СписокНоменклатури = new Dictionary<int, Номенклатура_Objest>();
-			Dictionary<int, decimal> ЗалишокНоменклатури = new Dictionary<int, decimal>();
-			Dictionary<int, decimal> РезервНоменклатури = new Dictionary<int, decimal>();
+            Dictionary<int, Номенклатура_Objest> СписокНоменклатури = new Dictionary<int, Номенклатура_Objest>();
+            Dictionary<int, decimal> ЗалишокНоменклатури = new Dictionary<int, decimal>();
+            Dictionary<int, decimal> РезервНоменклатури = new Dictionary<int, decimal>();
 
-			foreach (ПереміщенняТоварів_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
-			{
-				if (ТовариРядок.Номенклатура.IsEmpty())
-				{
-					СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. Не заповнене поле Номенклатура");
-					СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
+            foreach (ПереміщенняТоварів_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
+            {
+                if (ТовариРядок.Номенклатура.IsEmpty())
+                {
+                    СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. Не заповнене поле Номенклатура");
+                    СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
 
                     return false;
                 }
 
-				if (!(ТовариРядок.Кількість > 0))
-				{
-					СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. Кількість має бути більшою 0");
-					СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
+                if (!(ТовариРядок.Кількість > 0))
+                {
+                    СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. Кількість має бути більшою 0");
+                    СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
 
                     return false;
                 }
 
-				СписокНоменклатури.Add(ТовариРядок.НомерРядка, ТовариРядок.Номенклатура.GetDirectoryObject()!);
+                СписокНоменклатури.Add(ТовариРядок.НомерРядка, ТовариРядок.Номенклатура.GetDirectoryObject()!);
 
-				if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
-				{
-					//
-					//Для товарів отримуємо залишки
-					//
+                if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
+                {
+                    //
+                    //Для товарів отримуємо залишки
+                    //
 
-					List<Dictionary<string, object>> Залишок_Список = СпільніФункції.ОтриматиЗалишкиТоваруНаСкладі(
-						ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури, ТовариРядок.Серія,
-						ДокументОбєкт.СкладВідправник, ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
+                    List<Dictionary<string, object>> Залишок_Список = СпільніФункції.ОтриматиЗалишкиТоваруНаСкладі(
+                        ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури, ТовариРядок.Серія,
+                        ДокументОбєкт.СкладВідправник, ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
 
-					ЗалишокНоменклатури.Add(ТовариРядок.НомерРядка, Залишок_Список.Count > 0 ? (decimal)Залишок_Список[0]["ВНаявності"] : 0);
+                    ЗалишокНоменклатури.Add(ТовариРядок.НомерРядка, Залишок_Список.Count > 0 ? (decimal)Залишок_Список[0]["ВНаявності"] : 0);
 
-					if (ЗалишокНоменклатури[ТовариРядок.НомерРядка] > 0)
-					{
-						if (ЗалишокНоменклатури[ТовариРядок.НомерРядка] < ТовариРядок.Кількість)
-						{
-							СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
-								$"Залишок товару {ЗалишокНоменклатури[ТовариРядок.НомерРядка]}, потрібно {ТовариРядок.Кількість}");
-							СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
+                    if (ЗалишокНоменклатури[ТовариРядок.НомерРядка] > 0)
+                    {
+                        if (ЗалишокНоменклатури[ТовариРядок.НомерРядка] < ТовариРядок.Кількість)
+                        {
+                            СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
+                                $"Залишок товару {ЗалишокНоменклатури[ТовариРядок.НомерРядка]}, потрібно {ТовариРядок.Кількість}");
+                            СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
 
                             return false;
                         }
 
-						//
-						// Рахуємо всі резерви
-						//
+                        //
+                        // Рахуємо всі резерви
+                        //
 
-						List<Dictionary<string, object>> Резерв_Список = СпільніФункції.ОтриматиРезервТоваруНаСкладі(
-						ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
-						ДокументОбєкт.СкладВідправник, ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
+                        List<Dictionary<string, object>> Резерв_Список = СпільніФункції.ОтриматиРезервТоваруНаСкладі(
+                        ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
+                        ДокументОбєкт.СкладВідправник, ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
 
-						РезервНоменклатури.Add(ТовариРядок.НомерРядка, Резерв_Список.Count > 0 ? (decimal)Резерв_Список[0]["ВРезервіЗіСкладу"] : 0);
+                        РезервНоменклатури.Add(ТовариРядок.НомерРядка, Резерв_Список.Count > 0 ? (decimal)Резерв_Список[0]["ВРезервіЗіСкладу"] : 0);
 
-						if (РезервНоменклатури[ТовариРядок.НомерРядка] > 0)
-						{
-							if (ЗалишокНоменклатури[ТовариРядок.НомерРядка] - РезервНоменклатури[ТовариРядок.НомерРядка] < ТовариРядок.Кількість)
-							{
-								СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
-									$"Залишок товару {ЗалишокНоменклатури[ТовариРядок.НомерРядка]}, " +
-									$"в резерві {РезервНоменклатури[ТовариРядок.НомерРядка]}, " +
-									$"потрібно {ТовариРядок.Кількість}");
+                        if (РезервНоменклатури[ТовариРядок.НомерРядка] > 0)
+                        {
+                            if (ЗалишокНоменклатури[ТовариРядок.НомерРядка] - РезервНоменклатури[ТовариРядок.НомерРядка] < ТовариРядок.Кількість)
+                            {
+                                СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
+                                    $"Залишок товару {ЗалишокНоменклатури[ТовариРядок.НомерРядка]}, " +
+                                    $"в резерві {РезервНоменклатури[ТовариРядок.НомерРядка]}, " +
+                                    $"потрібно {ТовариРядок.Кількість}");
 
-								СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
+                                СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
 
                                 return false;
                             }
-						}
-					}
-					else
-					{
-						СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
-							$"Відсутній товар {СписокНоменклатури[ТовариРядок.НомерРядка].Назва}");
-						СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
+                        }
+                    }
+                    else
+                    {
+                        СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
+                            $"Відсутній товар {СписокНоменклатури[ТовариРядок.НомерРядка].Назва}");
+                        СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
 
                         return false;
                     }
-				}
-			}
+                }
+            }
 
-			#endregion
+            #endregion
 
-			#region Товари на складах
+            #region Товари на складах
 
-			ТовариНаСкладах_RecordsSet товариНаСкладах_RecordsSet = new ТовариНаСкладах_RecordsSet();
+            ТовариНаСкладах_RecordsSet товариНаСкладах_RecordsSet = new ТовариНаСкладах_RecordsSet();
 
-			foreach (ПереміщенняТоварів_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
-			{
-				if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
-				{
-					//
-					//СкладВідправник
-					//
+            foreach (ПереміщенняТоварів_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
+            {
+                if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
+                {
+                    //
+                    //СкладВідправник
+                    //
 
-					ТовариНаСкладах_RecordsSet.Record record1 = new ТовариНаСкладах_RecordsSet.Record();
-					товариНаСкладах_RecordsSet.Records.Add(record1);
+                    ТовариНаСкладах_RecordsSet.Record record1 = new ТовариНаСкладах_RecordsSet.Record();
+                    товариНаСкладах_RecordsSet.Records.Add(record1);
 
-					record1.Income = false; 
-					record1.Owner = ДокументОбєкт.UnigueID.UGuid;
+                    record1.Income = false;
+                    record1.Owner = ДокументОбєкт.UnigueID.UGuid;
 
-					record1.Номенклатура = ТовариРядок.Номенклатура;
-					record1.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
-					record1.Склад = ДокументОбєкт.СкладВідправник;
-					record1.Серія = ТовариРядок.Серія;
-					record1.ВНаявності = ТовариРядок.Кількість;
+                    record1.Номенклатура = ТовариРядок.Номенклатура;
+                    record1.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
+                    record1.Склад = ДокументОбєкт.СкладВідправник;
+                    record1.Серія = ТовариРядок.Серія;
+                    record1.ВНаявності = ТовариРядок.Кількість;
 
-					//
-					//СкладОтримувач
-					//
+                    //
+                    //СкладОтримувач
+                    //
 
-					ТовариНаСкладах_RecordsSet.Record record2 = new ТовариНаСкладах_RecordsSet.Record();
-					товариНаСкладах_RecordsSet.Records.Add(record2);
+                    ТовариНаСкладах_RecordsSet.Record record2 = new ТовариНаСкладах_RecordsSet.Record();
+                    товариНаСкладах_RecordsSet.Records.Add(record2);
 
-					record2.Income = true; 
-					record2.Owner = ДокументОбєкт.UnigueID.UGuid;
+                    record2.Income = true;
+                    record2.Owner = ДокументОбєкт.UnigueID.UGuid;
 
-					record2.Номенклатура = ТовариРядок.Номенклатура;
-					record2.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
-					record2.Склад = ДокументОбєкт.СкладОтримувач;
-					record2.Серія = ТовариРядок.Серія;
-					record2.ВНаявності = ТовариРядок.Кількість;
-				}
-			}
+                    record2.Номенклатура = ТовариРядок.Номенклатура;
+                    record2.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
+                    record2.Склад = ДокументОбєкт.СкладОтримувач;
+                    record2.Серія = ТовариРядок.Серія;
+                    record2.ВНаявності = ТовариРядок.Кількість;
+                }
+            }
 
-			товариНаСкладах_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+            товариНаСкладах_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
 
-			#endregion
+            #endregion
 
-			#region ВільніЗалишки
+            #region ВільніЗалишки
 
-			ВільніЗалишки_RecordsSet вільніЗалишки_RecordsSet = new ВільніЗалишки_RecordsSet();
+            ВільніЗалишки_RecordsSet вільніЗалишки_RecordsSet = new ВільніЗалишки_RecordsSet();
 
-			foreach (ПереміщенняТоварів_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
-			{
-				if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
-				{
-					//
-					//СкладВідправник
-					//
+            foreach (ПереміщенняТоварів_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
+            {
+                if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
+                {
+                    //
+                    //СкладВідправник
+                    //
 
-					ВільніЗалишки_RecordsSet.Record record1 = new ВільніЗалишки_RecordsSet.Record();
-					вільніЗалишки_RecordsSet.Records.Add(record1);
+                    ВільніЗалишки_RecordsSet.Record record1 = new ВільніЗалишки_RecordsSet.Record();
+                    вільніЗалишки_RecordsSet.Records.Add(record1);
 
-					record1.Income = false;
-					record1.Owner = ДокументОбєкт.UnigueID.UGuid;
+                    record1.Income = false;
+                    record1.Owner = ДокументОбєкт.UnigueID.UGuid;
 
-					record1.Номенклатура = ТовариРядок.Номенклатура;
-					record1.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
-					record1.Склад = ДокументОбєкт.СкладВідправник;
-					record1.ВНаявності = ТовариРядок.Кількість;
+                    record1.Номенклатура = ТовариРядок.Номенклатура;
+                    record1.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
+                    record1.Склад = ДокументОбєкт.СкладВідправник;
+                    record1.ВНаявності = ТовариРядок.Кількість;
 
-					//
-					//СкладОтримувач
-					//
+                    //
+                    //СкладОтримувач
+                    //
 
-					ВільніЗалишки_RecordsSet.Record record2 = new ВільніЗалишки_RecordsSet.Record();
-					вільніЗалишки_RecordsSet.Records.Add(record2);
+                    ВільніЗалишки_RecordsSet.Record record2 = new ВільніЗалишки_RecordsSet.Record();
+                    вільніЗалишки_RecordsSet.Records.Add(record2);
 
-					record2.Income = true;
-					record2.Owner = ДокументОбєкт.UnigueID.UGuid;
+                    record2.Income = true;
+                    record2.Owner = ДокументОбєкт.UnigueID.UGuid;
 
-					record2.Номенклатура = ТовариРядок.Номенклатура;
-					record2.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
-					record2.Склад = ДокументОбєкт.СкладОтримувач;
-					record2.ВНаявності = ТовариРядок.Кількість;
-				}
-			}
+                    record2.Номенклатура = ТовариРядок.Номенклатура;
+                    record2.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
+                    record2.Склад = ДокументОбєкт.СкладОтримувач;
+                    record2.ВНаявності = ТовариРядок.Кількість;
+                }
+            }
 
-			вільніЗалишки_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+            вільніЗалишки_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
 
-			#endregion
+            #endregion
 
-			#region Партії товарів
+            #region Партії товарів
 
-			ПартіїТоварів_RecordsSet партіїТоварів_RecordsSet = new ПартіїТоварів_RecordsSet();
+            ПартіїТоварів_RecordsSet партіїТоварів_RecordsSet = new ПартіїТоварів_RecordsSet();
 
-			foreach (ПереміщенняТоварів_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
-			{
-				if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
-				{
-					List<Dictionary<string, object>> listNameRow = СпільніФункції.ОтриматиСписокНаявнихПартій(
-						ДокументОбєкт.Організація, ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
-						ТовариРядок.Серія, ДокументОбєкт.СкладВідправник, ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок, ТовариРядок.Кількість);
+            foreach (ПереміщенняТоварів_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
+            {
+                if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
+                {
+                    List<Dictionary<string, object>> listNameRow = СпільніФункції.ОтриматиСписокНаявнихПартій(
+                        ДокументОбєкт.Організація, ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
+                        ТовариРядок.Серія, ДокументОбєкт.СкладВідправник, ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок, ТовариРядок.Кількість);
 
-					if (listNameRow.Count == 0)
-					{
-						СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
-							$"Немає доступних партій для товару {СписокНоменклатури[ТовариРядок.НомерРядка].Назва}");
-						СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
+                    if (listNameRow.Count == 0)
+                    {
+                        СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
+                            $"Немає доступних партій для товару {СписокНоменклатури[ТовариРядок.НомерРядка].Назва}");
+                        СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
 
                         return false;
                     }
 
-					decimal КількістьЯкуПотрібноСписати = ТовариРядок.Кількість;
+                    decimal КількістьЯкуПотрібноСписати = ТовариРядок.Кількість;
 
-					foreach (Dictionary<string, object> nameRow in listNameRow)
-					{
-						decimal КількістьВПартії = (decimal)nameRow["Кількість"];
-						decimal СобівартістьПартії = (decimal)nameRow["Собівартість"];
-						ПартіяТоварівКомпозит_Pointer ПартіяТоварівКомпозит = new ПартіяТоварівКомпозит_Pointer(nameRow["ПартіяТоварівКомпозит"]);
+                    foreach (Dictionary<string, object> nameRow in listNameRow)
+                    {
+                        decimal КількістьВПартії = (decimal)nameRow["Кількість"];
+                        decimal СобівартістьПартії = (decimal)nameRow["Собівартість"];
+                        ПартіяТоварівКомпозит_Pointer ПартіяТоварівКомпозит = new ПартіяТоварівКомпозит_Pointer(nameRow["ПартіяТоварівКомпозит"]);
 
-						decimal КількістьЩоСписується = 0;
-						bool ЗакритиПартію = КількістьЯкуПотрібноСписати >= КількістьВПартії;
+                        decimal КількістьЩоСписується = 0;
+                        bool ЗакритиПартію = КількістьЯкуПотрібноСписати >= КількістьВПартії;
 
-						if (КількістьВПартії >= КількістьЯкуПотрібноСписати)
-						{
-							КількістьЩоСписується = КількістьЯкуПотрібноСписати;
-							КількістьЯкуПотрібноСписати = 0;
-						}
-						else
-						{
-							КількістьЩоСписується = КількістьВПартії;
-							КількістьЯкуПотрібноСписати -= КількістьВПартії;
-						}
+                        if (КількістьВПартії >= КількістьЯкуПотрібноСписати)
+                        {
+                            КількістьЩоСписується = КількістьЯкуПотрібноСписати;
+                            КількістьЯкуПотрібноСписати = 0;
+                        }
+                        else
+                        {
+                            КількістьЩоСписується = КількістьВПартії;
+                            КількістьЯкуПотрібноСписати -= КількістьВПартії;
+                        }
 
-						ПартіїТоварів_RecordsSet.Record record1 = new ПартіїТоварів_RecordsSet.Record();
-						партіїТоварів_RecordsSet.Records.Add(record1);
+                        ПартіїТоварів_RecordsSet.Record record1 = new ПартіїТоварів_RecordsSet.Record();
+                        партіїТоварів_RecordsSet.Records.Add(record1);
 
-						record1.Income = false;
-						record1.Owner = ДокументОбєкт.UnigueID.UGuid;
+                        record1.Income = false;
+                        record1.Owner = ДокументОбєкт.UnigueID.UGuid;
 
-						record1.Організація = ДокументОбєкт.Організація;
-						record1.ПартіяТоварівКомпозит = ПартіяТоварівКомпозит;
-						record1.Кількість = КількістьЩоСписується;
-						record1.Собівартість = ЗакритиПартію ? СобівартістьПартії : 0;
-						record1.СписанаСобівартість = СобівартістьПартії;
-						record1.Номенклатура = ТовариРядок.Номенклатура;
-						record1.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
-						record1.Серія = ТовариРядок.Серія;
-						record1.Склад = ДокументОбєкт.СкладВідправник;
+                        record1.Організація = ДокументОбєкт.Організація;
+                        record1.ПартіяТоварівКомпозит = ПартіяТоварівКомпозит;
+                        record1.Кількість = КількістьЩоСписується;
+                        record1.Собівартість = ЗакритиПартію ? СобівартістьПартії : 0;
+                        record1.СписанаСобівартість = СобівартістьПартії;
+                        record1.Номенклатура = ТовариРядок.Номенклатура;
+                        record1.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
+                        record1.Серія = ТовариРядок.Серія;
+                        record1.Склад = ДокументОбєкт.СкладВідправник;
 
                         ПартіїТоварів_RecordsSet.Record record2 = new ПартіїТоварів_RecordsSet.Record();
                         партіїТоварів_RecordsSet.Records.Add(record2);
@@ -2472,715 +2472,715 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                         record2.Склад = ДокументОбєкт.СкладОтримувач;
 
                         if (КількістьЯкуПотрібноСписати == 0)
-							break;
-					}
+                            break;
+                    }
 
-					if (КількістьЯкуПотрібноСписати > 0)
-					{
-						СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
-							$"Невистачило списати {КількістьЯкуПотрібноСписати} товарів");
-						СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
+                    if (КількістьЯкуПотрібноСписати > 0)
+                    {
+                        СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
+                            $"Невистачило списати {КількістьЯкуПотрібноСписати} товарів");
+                        СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
 
                         return false;
                     }
-				}
-			}
+                }
+            }
 
-			партіїТоварів_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+            партіїТоварів_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
 
-			#endregion
+            #endregion
 
-			return true;
-		}
+            return true;
+        }
 
-		public static void ClearSpend(ПереміщенняТоварів_Objest ДокументОбєкт)
-		{
-			ТовариНаСкладах_RecordsSet товариНаСкладах_RecordsSet = new ТовариНаСкладах_RecordsSet();
-			товариНаСкладах_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+        public static void ClearSpend(ПереміщенняТоварів_Objest ДокументОбєкт)
+        {
+            ТовариНаСкладах_RecordsSet товариНаСкладах_RecordsSet = new ТовариНаСкладах_RecordsSet();
+            товариНаСкладах_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
 
-			ВільніЗалишки_RecordsSet вільніЗалишки_RecordsSet = new ВільніЗалишки_RecordsSet();
-			вільніЗалишки_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+            ВільніЗалишки_RecordsSet вільніЗалишки_RecordsSet = new ВільніЗалишки_RecordsSet();
+            вільніЗалишки_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
 
-			ПартіїТоварів_RecordsSet партіїТоварів_RecordsSet = new ПартіїТоварів_RecordsSet();
-			партіїТоварів_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-		}
-	}
+            ПартіїТоварів_RecordsSet партіїТоварів_RecordsSet = new ПартіїТоварів_RecordsSet();
+            партіїТоварів_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+        }
+    }
 
-	class ВстановленняЦінНоменклатури_SpendTheDocument
-	{
-		public static bool Spend(ВстановленняЦінНоменклатури_Objest ДокументОбєкт)
-		{
-			#region Рух по регістрах
+    class ВстановленняЦінНоменклатури_SpendTheDocument
+    {
+        public static bool Spend(ВстановленняЦінНоменклатури_Objest ДокументОбєкт)
+        {
+            #region Рух по регістрах
 
-			ЦіниНоменклатури_RecordsSet ціниНоменклатури_RecordsSet = new ЦіниНоменклатури_RecordsSet();
+            ЦіниНоменклатури_RecordsSet ціниНоменклатури_RecordsSet = new ЦіниНоменклатури_RecordsSet();
 
             foreach (ВстановленняЦінНоменклатури_Товари_TablePart.Record Товари_Record in ДокументОбєкт.Товари_TablePart.Records)
             {
-				if (Товари_Record.Ціна > 0)
-				{
-					ЦіниНоменклатури_RecordsSet.Record record = new ЦіниНоменклатури_RecordsSet.Record();
-					ціниНоменклатури_RecordsSet.Records.Add(record);
+                if (Товари_Record.Ціна > 0)
+                {
+                    ЦіниНоменклатури_RecordsSet.Record record = new ЦіниНоменклатури_RecordsSet.Record();
+                    ціниНоменклатури_RecordsSet.Records.Add(record);
 
-					record.Номенклатура = Товари_Record.Номенклатура;
-					record.ХарактеристикаНоменклатури = Товари_Record.ХарактеристикаНоменклатури;
-					record.ВидЦіни = Товари_Record.ВидЦіни;
+                    record.Номенклатура = Товари_Record.Номенклатура;
+                    record.ХарактеристикаНоменклатури = Товари_Record.ХарактеристикаНоменклатури;
+                    record.ВидЦіни = Товари_Record.ВидЦіни;
 
-					record.Ціна = Товари_Record.Ціна;
-					record.Пакування = Товари_Record.Пакування;
-					record.Валюта = ДокументОбєкт.Валюта;
-				}
-			}
+                    record.Ціна = Товари_Record.Ціна;
+                    record.Пакування = Товари_Record.Пакування;
+                    record.Валюта = ДокументОбєкт.Валюта;
+                }
+            }
 
-			ціниНоменклатури_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+            ціниНоменклатури_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
 
-			#endregion
+            #endregion
 
-			return true;
-		}
+            return true;
+        }
 
-		public static void ClearSpend(ВстановленняЦінНоменклатури_Objest ДокументОбєкт)
-		{
-			ЦіниНоменклатури_RecordsSet ціниНоменклатури_RecordsSet = new ЦіниНоменклатури_RecordsSet();
-			ціниНоменклатури_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-		}
-	}
+        public static void ClearSpend(ВстановленняЦінНоменклатури_Objest ДокументОбєкт)
+        {
+            ЦіниНоменклатури_RecordsSet ціниНоменклатури_RecordsSet = new ЦіниНоменклатури_RecordsSet();
+            ціниНоменклатури_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+        }
+    }
 
-	class ВведенняЗалишків_SpendTheDocument
-	{
-		public static bool Spend(ВведенняЗалишків_Objest ДокументОбєкт)
-		{
-			#region Підготовка
+    class ВведенняЗалишків_SpendTheDocument
+    {
+        public static bool Spend(ВведенняЗалишків_Objest ДокументОбєкт)
+        {
+            #region Підготовка
 
-			List<string> СписокПомилок = new List<string>();
+            List<string> СписокПомилок = new List<string>();
 
-			Dictionary<int, Номенклатура_Objest> СписокНоменклатури = new Dictionary<int, Номенклатура_Objest>();
+            Dictionary<int, Номенклатура_Objest> СписокНоменклатури = new Dictionary<int, Номенклатура_Objest>();
 
-			foreach (ВведенняЗалишків_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
-			{
-				if (ТовариРядок.Номенклатура.IsEmpty())
-				{
-					СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. Не заповнене поле Номенклатура");
-					СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
+            foreach (ВведенняЗалишків_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
+            {
+                if (ТовариРядок.Номенклатура.IsEmpty())
+                {
+                    СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. Не заповнене поле Номенклатура");
+                    СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
 
                     return false;
                 }
 
-				if (!(ТовариРядок.Кількість > 0))
-				{
-					СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. Кількість має бути більшою 0");
-					СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
+                if (!(ТовариРядок.Кількість > 0))
+                {
+                    СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. Кількість має бути більшою 0");
+                    СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
 
                     return false;
                 }
 
-				СписокНоменклатури.Add(ТовариРядок.НомерРядка, ТовариРядок.Номенклатура.GetDirectoryObject()!);
-			}
+                СписокНоменклатури.Add(ТовариРядок.НомерРядка, ТовариРядок.Номенклатура.GetDirectoryObject()!);
+            }
 
-			#endregion
+            #endregion
 
-			#region Товари на складах
+            #region Товари на складах
 
-			ТовариНаСкладах_RecordsSet товариНаСкладах_RecordsSet = new ТовариНаСкладах_RecordsSet();
+            ТовариНаСкладах_RecordsSet товариНаСкладах_RecordsSet = new ТовариНаСкладах_RecordsSet();
 
-			foreach (ВведенняЗалишків_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
-			{
-				if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
-				{
-					ТовариНаСкладах_RecordsSet.Record record = new ТовариНаСкладах_RecordsSet.Record();
-					товариНаСкладах_RecordsSet.Records.Add(record);
+            foreach (ВведенняЗалишків_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
+            {
+                if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
+                {
+                    ТовариНаСкладах_RecordsSet.Record record = new ТовариНаСкладах_RecordsSet.Record();
+                    товариНаСкладах_RecordsSet.Records.Add(record);
 
-					record.Income = true; 
-					record.Owner = ДокументОбєкт.UnigueID.UGuid;
+                    record.Income = true;
+                    record.Owner = ДокументОбєкт.UnigueID.UGuid;
 
-					record.Номенклатура = ТовариРядок.Номенклатура;
-					record.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
-					record.Серія = ТовариРядок.Серія;
-					record.Склад = ДокументОбєкт.Склад;
-					record.ВНаявності = ТовариРядок.Кількість;
-				}
-			}
+                    record.Номенклатура = ТовариРядок.Номенклатура;
+                    record.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
+                    record.Серія = ТовариРядок.Серія;
+                    record.Склад = ДокументОбєкт.Склад;
+                    record.ВНаявності = ТовариРядок.Кількість;
+                }
+            }
 
-			товариНаСкладах_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+            товариНаСкладах_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
 
-			#endregion
+            #endregion
 
-			#region ВільніЗалишки
+            #region ВільніЗалишки
 
-			ВільніЗалишки_RecordsSet вільніЗалишки_RecordsSet = new ВільніЗалишки_RecordsSet();
+            ВільніЗалишки_RecordsSet вільніЗалишки_RecordsSet = new ВільніЗалишки_RecordsSet();
 
-			foreach (ВведенняЗалишків_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
-			{
-				if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
-				{
-					ВільніЗалишки_RecordsSet.Record record = new ВільніЗалишки_RecordsSet.Record();
-					вільніЗалишки_RecordsSet.Records.Add(record);
+            foreach (ВведенняЗалишків_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
+            {
+                if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
+                {
+                    ВільніЗалишки_RecordsSet.Record record = new ВільніЗалишки_RecordsSet.Record();
+                    вільніЗалишки_RecordsSet.Records.Add(record);
 
-					record.Income = true; 
-					record.Owner = ДокументОбєкт.UnigueID.UGuid;
+                    record.Income = true;
+                    record.Owner = ДокументОбєкт.UnigueID.UGuid;
 
-					record.Номенклатура = ТовариРядок.Номенклатура;
-					record.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
-					record.Склад = ДокументОбєкт.Склад;
-					record.ВНаявності = ТовариРядок.Кількість;
-				}
-			}
+                    record.Номенклатура = ТовариРядок.Номенклатура;
+                    record.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
+                    record.Склад = ДокументОбєкт.Склад;
+                    record.ВНаявності = ТовариРядок.Кількість;
+                }
+            }
 
-			вільніЗалишки_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+            вільніЗалишки_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
 
-			#endregion
+            #endregion
 
-			#region Партії товарів
+            #region Партії товарів
 
-			ПартіяТоварівКомпозит_Pointer ПартіяТоварівКомпозит = StorageAndTrade.ФункціїДляДокументів.ОтриматиПартіюТоварівКомпозит(
-				 ДокументОбєкт.UnigueID.UGuid,
-				 Перелічення.ТипДокументуПартіяТоварівКомпозит.ВведенняЗалишків,
-				 null, ДокументОбєкт
-			);
+            ПартіяТоварівКомпозит_Pointer ПартіяТоварівКомпозит = StorageAndTrade.ФункціїДляДокументів.ОтриматиПартіюТоварівКомпозит(
+                 ДокументОбєкт.UnigueID.UGuid,
+                 Перелічення.ТипДокументуПартіяТоварівКомпозит.ВведенняЗалишків,
+                 null, ДокументОбєкт
+            );
 
-			ПартіїТоварів_RecordsSet партіїТоварів_RecordsSet = new ПартіїТоварів_RecordsSet();
+            ПартіїТоварів_RecordsSet партіїТоварів_RecordsSet = new ПартіїТоварів_RecordsSet();
 
-			foreach (ВведенняЗалишків_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
-			{
-				if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
-				{
-					ПартіїТоварів_RecordsSet.Record record = new ПартіїТоварів_RecordsSet.Record();
-					партіїТоварів_RecordsSet.Records.Add(record);
+            foreach (ВведенняЗалишків_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
+            {
+                if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
+                {
+                    ПартіїТоварів_RecordsSet.Record record = new ПартіїТоварів_RecordsSet.Record();
+                    партіїТоварів_RecordsSet.Records.Add(record);
 
-					record.Income = true; 
-					record.Owner = ДокументОбєкт.UnigueID.UGuid;
+                    record.Income = true;
+                    record.Owner = ДокументОбєкт.UnigueID.UGuid;
 
-					record.Організація = ДокументОбєкт.Організація;
-					record.ПартіяТоварівКомпозит = ПартіяТоварівКомпозит;
-					record.Кількість = ТовариРядок.Кількість;
-					record.Собівартість = ТовариРядок.Ціна;
-					record.Номенклатура = ТовариРядок.Номенклатура;
-					record.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
-					record.Серія = ТовариРядок.Серія;
-					record.Склад = ДокументОбєкт.Склад;
-				}
-			}
+                    record.Організація = ДокументОбєкт.Організація;
+                    record.ПартіяТоварівКомпозит = ПартіяТоварівКомпозит;
+                    record.Кількість = ТовариРядок.Кількість;
+                    record.Собівартість = ТовариРядок.Ціна;
+                    record.Номенклатура = ТовариРядок.Номенклатура;
+                    record.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
+                    record.Серія = ТовариРядок.Серія;
+                    record.Склад = ДокументОбєкт.Склад;
+                }
+            }
 
-			партіїТоварів_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+            партіїТоварів_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
 
-			#endregion
+            #endregion
 
-			#region РухКоштів
+            #region РухКоштів
 
-			РухКоштів_RecordsSet рухКоштів_RecordsSet = new РухКоштів_RecordsSet();
+            РухКоштів_RecordsSet рухКоштів_RecordsSet = new РухКоштів_RecordsSet();
 
-			foreach (ВведенняЗалишків_Каси_TablePart.Record Каси_Record in ДокументОбєкт.Каси_TablePart.Records)
-			{
-				РухКоштів_RecordsSet.Record record_Каса = new РухКоштів_RecordsSet.Record();
-				рухКоштів_RecordsSet.Records.Add(record_Каса);
+            foreach (ВведенняЗалишків_Каси_TablePart.Record Каси_Record in ДокументОбєкт.Каси_TablePart.Records)
+            {
+                РухКоштів_RecordsSet.Record record_Каса = new РухКоштів_RecordsSet.Record();
+                рухКоштів_RecordsSet.Records.Add(record_Каса);
 
-				Валюти_Pointer валютаКаси =
-					!Каси_Record.Каса.IsEmpty() ? Каси_Record.Каса.GetDirectoryObject()!.Валюта : ДокументОбєкт.Валюта;
+                Валюти_Pointer валютаКаси =
+                    !Каси_Record.Каса.IsEmpty() ? Каси_Record.Каса.GetDirectoryObject()!.Валюта : ДокументОбєкт.Валюта;
 
-				record_Каса.Income = true;
-				record_Каса.Owner = ДокументОбєкт.UnigueID.UGuid;
+                record_Каса.Income = true;
+                record_Каса.Owner = ДокументОбєкт.UnigueID.UGuid;
 
-				record_Каса.Організація = ДокументОбєкт.Організація;
-				record_Каса.Каса = Каси_Record.Каса;
-				record_Каса.Валюта = валютаКаси;
-				record_Каса.Сума = Каси_Record.Сума;
-			}
+                record_Каса.Організація = ДокументОбєкт.Організація;
+                record_Каса.Каса = Каси_Record.Каса;
+                record_Каса.Валюта = валютаКаси;
+                record_Каса.Сума = Каси_Record.Сума;
+            }
 
-			рухКоштів_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+            рухКоштів_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
 
-			#endregion
+            #endregion
 
-			return true;
-		}
+            return true;
+        }
 
-		public static void ClearSpend(ВведенняЗалишків_Objest ДокументОбєкт)
-		{
-			ТовариНаСкладах_RecordsSet товариНаСкладах_RecordsSet = new ТовариНаСкладах_RecordsSet();
-			товариНаСкладах_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+        public static void ClearSpend(ВведенняЗалишків_Objest ДокументОбєкт)
+        {
+            ТовариНаСкладах_RecordsSet товариНаСкладах_RecordsSet = new ТовариНаСкладах_RecordsSet();
+            товариНаСкладах_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
 
-			ВільніЗалишки_RecordsSet вільніЗалишки_RecordsSet = new ВільніЗалишки_RecordsSet();
-			вільніЗалишки_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+            ВільніЗалишки_RecordsSet вільніЗалишки_RecordsSet = new ВільніЗалишки_RecordsSet();
+            вільніЗалишки_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
 
-			ПартіїТоварів_RecordsSet партіїТоварів_RecordsSet = new ПартіїТоварів_RecordsSet();
-			партіїТоварів_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+            ПартіїТоварів_RecordsSet партіїТоварів_RecordsSet = new ПартіїТоварів_RecordsSet();
+            партіїТоварів_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
 
-			РухКоштів_RecordsSet рухКоштів_RecordsSet = new РухКоштів_RecordsSet();
-			рухКоштів_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-		}
-	}
+            РухКоштів_RecordsSet рухКоштів_RecordsSet = new РухКоштів_RecordsSet();
+            рухКоштів_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+        }
+    }
 
-	class ВнутрішнєСпоживанняТоварів_SpendTheDocument
-	{
-		public static bool Spend(ВнутрішнєСпоживанняТоварів_Objest ДокументОбєкт)
-		{
-			#region Підготовка
+    class ВнутрішнєСпоживанняТоварів_SpendTheDocument
+    {
+        public static bool Spend(ВнутрішнєСпоживанняТоварів_Objest ДокументОбєкт)
+        {
+            #region Підготовка
 
-			List<string> СписокПомилок = new List<string>();
+            List<string> СписокПомилок = new List<string>();
 
-			Dictionary<int, Номенклатура_Objest> СписокНоменклатури = new Dictionary<int, Номенклатура_Objest>();
-			Dictionary<int, decimal> ЗалишокНоменклатури = new Dictionary<int, decimal>();
-			Dictionary<int, decimal> РезервНоменклатури = new Dictionary<int, decimal>();
+            Dictionary<int, Номенклатура_Objest> СписокНоменклатури = new Dictionary<int, Номенклатура_Objest>();
+            Dictionary<int, decimal> ЗалишокНоменклатури = new Dictionary<int, decimal>();
+            Dictionary<int, decimal> РезервНоменклатури = new Dictionary<int, decimal>();
 
-			foreach (ВнутрішнєСпоживанняТоварів_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
-			{
-				if (ТовариРядок.Номенклатура.IsEmpty())
-				{
-					СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. Не заповнене поле Номенклатура");
-					СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
+            foreach (ВнутрішнєСпоживанняТоварів_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
+            {
+                if (ТовариРядок.Номенклатура.IsEmpty())
+                {
+                    СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. Не заповнене поле Номенклатура");
+                    СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
 
                     return false;
                 }
 
-				if (!(ТовариРядок.Кількість > 0))
-				{
-					СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. Кількість має бути більшою 0");
-					СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
+                if (!(ТовариРядок.Кількість > 0))
+                {
+                    СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. Кількість має бути більшою 0");
+                    СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
 
                     return false;
                 }
 
-				СписокНоменклатури.Add(ТовариРядок.НомерРядка, ТовариРядок.Номенклатура.GetDirectoryObject()!);
+                СписокНоменклатури.Add(ТовариРядок.НомерРядка, ТовариРядок.Номенклатура.GetDirectoryObject()!);
 
-				if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
-				{
-					//
-					//Для товарів отримуємо залишки
-					//
+                if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
+                {
+                    //
+                    //Для товарів отримуємо залишки
+                    //
 
-					List<Dictionary<string, object>> Залишок_Список = СпільніФункції.ОтриматиЗалишкиТоваруНаСкладі(
-						ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури, ТовариРядок.Серія,
-						ДокументОбєкт.Склад, ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
+                    List<Dictionary<string, object>> Залишок_Список = СпільніФункції.ОтриматиЗалишкиТоваруНаСкладі(
+                        ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури, ТовариРядок.Серія,
+                        ДокументОбєкт.Склад, ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
 
-					ЗалишокНоменклатури.Add(ТовариРядок.НомерРядка, Залишок_Список.Count > 0 ? (decimal)Залишок_Список[0]["ВНаявності"] : 0);
+                    ЗалишокНоменклатури.Add(ТовариРядок.НомерРядка, Залишок_Список.Count > 0 ? (decimal)Залишок_Список[0]["ВНаявності"] : 0);
 
-					if (ЗалишокНоменклатури[ТовариРядок.НомерРядка] > 0)
-					{
-						if (ЗалишокНоменклатури[ТовариРядок.НомерРядка] < ТовариРядок.Кількість)
-						{
-							СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
-								$"Залишок товару {ЗалишокНоменклатури[ТовариРядок.НомерРядка]}, потрібно {ТовариРядок.Кількість}");
-							СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
+                    if (ЗалишокНоменклатури[ТовариРядок.НомерРядка] > 0)
+                    {
+                        if (ЗалишокНоменклатури[ТовариРядок.НомерРядка] < ТовариРядок.Кількість)
+                        {
+                            СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
+                                $"Залишок товару {ЗалишокНоменклатури[ТовариРядок.НомерРядка]}, потрібно {ТовариРядок.Кількість}");
+                            СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
 
                             return false;
                         }
 
-						//
-						// Рахуємо всі резерви
-						//
+                        //
+                        // Рахуємо всі резерви
+                        //
 
-						List<Dictionary<string, object>> Резерв_Список = СпільніФункції.ОтриматиРезервТоваруНаСкладі(
-						ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
-						ДокументОбєкт.Склад, ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
+                        List<Dictionary<string, object>> Резерв_Список = СпільніФункції.ОтриматиРезервТоваруНаСкладі(
+                        ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
+                        ДокументОбєкт.Склад, ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
 
-						РезервНоменклатури.Add(ТовариРядок.НомерРядка, Резерв_Список.Count > 0 ? (decimal)Резерв_Список[0]["ВРезервіЗіСкладу"] : 0);
+                        РезервНоменклатури.Add(ТовариРядок.НомерРядка, Резерв_Список.Count > 0 ? (decimal)Резерв_Список[0]["ВРезервіЗіСкладу"] : 0);
 
-						if (РезервНоменклатури[ТовариРядок.НомерРядка] > 0)
-						{
-							if (ЗалишокНоменклатури[ТовариРядок.НомерРядка] - РезервНоменклатури[ТовариРядок.НомерРядка] < ТовариРядок.Кількість)
-							{
-								СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
-									$"Залишок товару {ЗалишокНоменклатури[ТовариРядок.НомерРядка]}, " +
-									$"в резерві {РезервНоменклатури[ТовариРядок.НомерРядка]}, " +
-									$"потрібно {ТовариРядок.Кількість}");
+                        if (РезервНоменклатури[ТовариРядок.НомерРядка] > 0)
+                        {
+                            if (ЗалишокНоменклатури[ТовариРядок.НомерРядка] - РезервНоменклатури[ТовариРядок.НомерРядка] < ТовариРядок.Кількість)
+                            {
+                                СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
+                                    $"Залишок товару {ЗалишокНоменклатури[ТовариРядок.НомерРядка]}, " +
+                                    $"в резерві {РезервНоменклатури[ТовариРядок.НомерРядка]}, " +
+                                    $"потрібно {ТовариРядок.Кількість}");
 
-								СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
+                                СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
 
                                 return false;
                             }
-						}
-					}
-					else
-					{
-						СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
-							$"Відсутній товар {СписокНоменклатури[ТовариРядок.НомерРядка].Назва}");
-						СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
+                        }
+                    }
+                    else
+                    {
+                        СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
+                            $"Відсутній товар {СписокНоменклатури[ТовариРядок.НомерРядка].Назва}");
+                        СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
 
                         return false;
                     }
-				}
-			}
+                }
+            }
 
-			#endregion
+            #endregion
 
-			#region ТовариНаСкладах
+            #region ТовариНаСкладах
 
-			ТовариНаСкладах_RecordsSet товариНаСкладах_RecordsSet = new ТовариНаСкладах_RecordsSet();
+            ТовариНаСкладах_RecordsSet товариНаСкладах_RecordsSet = new ТовариНаСкладах_RecordsSet();
 
-			foreach (ВнутрішнєСпоживанняТоварів_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
-			{
-				if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
-				{
-					ТовариНаСкладах_RecordsSet.Record record = new ТовариНаСкладах_RecordsSet.Record();
-					товариНаСкладах_RecordsSet.Records.Add(record);
+            foreach (ВнутрішнєСпоживанняТоварів_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
+            {
+                if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
+                {
+                    ТовариНаСкладах_RecordsSet.Record record = new ТовариНаСкладах_RecordsSet.Record();
+                    товариНаСкладах_RecordsSet.Records.Add(record);
 
-					record.Income = false;
-					record.Owner = ДокументОбєкт.UnigueID.UGuid;
+                    record.Income = false;
+                    record.Owner = ДокументОбєкт.UnigueID.UGuid;
 
-					record.Номенклатура = ТовариРядок.Номенклатура;
-					record.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
-					record.Серія = ТовариРядок.Серія;
-					record.Склад = ДокументОбєкт.Склад;
-					record.ВНаявності = ТовариРядок.Кількість;
-				}
-			}
+                    record.Номенклатура = ТовариРядок.Номенклатура;
+                    record.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
+                    record.Серія = ТовариРядок.Серія;
+                    record.Склад = ДокументОбєкт.Склад;
+                    record.ВНаявності = ТовариРядок.Кількість;
+                }
+            }
 
-			товариНаСкладах_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+            товариНаСкладах_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
 
-			#endregion
+            #endregion
 
-			#region ВільніЗалишки
+            #region ВільніЗалишки
 
-			ВільніЗалишки_RecordsSet вільніЗалишки_RecordsSet = new ВільніЗалишки_RecordsSet();
+            ВільніЗалишки_RecordsSet вільніЗалишки_RecordsSet = new ВільніЗалишки_RecordsSet();
 
-			foreach (ВнутрішнєСпоживанняТоварів_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
-			{
-				if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
-				{
-					ВільніЗалишки_RecordsSet.Record record = new ВільніЗалишки_RecordsSet.Record();
-					вільніЗалишки_RecordsSet.Records.Add(record);
+            foreach (ВнутрішнєСпоживанняТоварів_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
+            {
+                if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
+                {
+                    ВільніЗалишки_RecordsSet.Record record = new ВільніЗалишки_RecordsSet.Record();
+                    вільніЗалишки_RecordsSet.Records.Add(record);
 
-					record.Income = false;
-					record.Owner = ДокументОбєкт.UnigueID.UGuid;
+                    record.Income = false;
+                    record.Owner = ДокументОбєкт.UnigueID.UGuid;
 
-					record.Номенклатура = ТовариРядок.Номенклатура;
-					record.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
-					record.Склад = ДокументОбєкт.Склад;
-					record.ВНаявності = ТовариРядок.Кількість;
-				}
-			}
+                    record.Номенклатура = ТовариРядок.Номенклатура;
+                    record.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
+                    record.Склад = ДокументОбєкт.Склад;
+                    record.ВНаявності = ТовариРядок.Кількість;
+                }
+            }
 
-			вільніЗалишки_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+            вільніЗалишки_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
 
-			#endregion
+            #endregion
 
-			#region Партії товарів
+            #region Партії товарів
 
-			ПартіїТоварів_RecordsSet партіїТоварів_RecordsSet = new ПартіїТоварів_RecordsSet();
+            ПартіїТоварів_RecordsSet партіїТоварів_RecordsSet = new ПартіїТоварів_RecordsSet();
 
-			foreach (ВнутрішнєСпоживанняТоварів_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
-			{
-				if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
-				{
-					List<Dictionary<string, object>> listNameRow = СпільніФункції.ОтриматиСписокНаявнихПартій(
-						ДокументОбєкт.Організація, ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
-						ТовариРядок.Серія, ДокументОбєкт.Склад, ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок, ТовариРядок.Кількість);
+            foreach (ВнутрішнєСпоживанняТоварів_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
+            {
+                if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
+                {
+                    List<Dictionary<string, object>> listNameRow = СпільніФункції.ОтриматиСписокНаявнихПартій(
+                        ДокументОбєкт.Організація, ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
+                        ТовариРядок.Серія, ДокументОбєкт.Склад, ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок, ТовариРядок.Кількість);
 
-					if (listNameRow.Count == 0)
-					{
-						СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
-							$"Немає доступних партій для товару {СписокНоменклатури[ТовариРядок.НомерРядка].Назва}");
-						СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
-
-                        return false;
-                    }
-
-					decimal КількістьЯкуПотрібноСписати = ТовариРядок.Кількість;
-
-					foreach (Dictionary<string, object> nameRow in listNameRow)
-					{
-						decimal КількістьВПартії = (decimal)nameRow["Кількість"];
-						decimal СобівартістьПартії = (decimal)nameRow["Собівартість"];
-						ПартіяТоварівКомпозит_Pointer ПартіяТоварівКомпозит = new ПартіяТоварівКомпозит_Pointer(nameRow["ПартіяТоварівКомпозит"]);
-
-						decimal КількістьЩоСписується = 0;
-						bool ЗакритиПартію = (КількістьЯкуПотрібноСписати >= КількістьВПартії);
-
-						if (КількістьВПартії >= КількістьЯкуПотрібноСписати)
-						{
-							КількістьЩоСписується = КількістьЯкуПотрібноСписати;
-							КількістьЯкуПотрібноСписати = 0;
-						}
-						else
-						{
-							КількістьЩоСписується = КількістьВПартії;
-							КількістьЯкуПотрібноСписати -= КількістьВПартії;
-						}
-
-						ПартіїТоварів_RecordsSet.Record record = new ПартіїТоварів_RecordsSet.Record();
-						партіїТоварів_RecordsSet.Records.Add(record);
-
-						record.Income = false;
-						record.Owner = ДокументОбєкт.UnigueID.UGuid;
-
-						record.Організація = ДокументОбєкт.Організація;
-						record.ПартіяТоварівКомпозит = ПартіяТоварівКомпозит;
-						record.Кількість = КількістьЩоСписується;
-						record.Собівартість = ЗакритиПартію ? СобівартістьПартії : 0;
-						record.СписанаСобівартість = СобівартістьПартії;
-						record.Номенклатура = ТовариРядок.Номенклатура;
-						record.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
-						record.Серія = ТовариРядок.Серія;
-						record.Склад = ДокументОбєкт.Склад;
-
-						if (КількістьЯкуПотрібноСписати == 0)
-							break;
-					}
-
-					if (КількістьЯкуПотрібноСписати > 0)
-					{
-						СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
-							$"Невистачило списати {КількістьЯкуПотрібноСписати} товарів");
-						СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
+                    if (listNameRow.Count == 0)
+                    {
+                        СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
+                            $"Немає доступних партій для товару {СписокНоменклатури[ТовариРядок.НомерРядка].Назва}");
+                        СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
 
                         return false;
                     }
-				}
-			}
 
-			партіїТоварів_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                    decimal КількістьЯкуПотрібноСписати = ТовариРядок.Кількість;
 
-			#endregion
+                    foreach (Dictionary<string, object> nameRow in listNameRow)
+                    {
+                        decimal КількістьВПартії = (decimal)nameRow["Кількість"];
+                        decimal СобівартістьПартії = (decimal)nameRow["Собівартість"];
+                        ПартіяТоварівКомпозит_Pointer ПартіяТоварівКомпозит = new ПартіяТоварівКомпозит_Pointer(nameRow["ПартіяТоварівКомпозит"]);
 
-			return true;
-		}
+                        decimal КількістьЩоСписується = 0;
+                        bool ЗакритиПартію = (КількістьЯкуПотрібноСписати >= КількістьВПартії);
 
-		public static void ClearSpend(ВнутрішнєСпоживанняТоварів_Objest ДокументОбєкт)
-		{
-			ТовариНаСкладах_RecordsSet товариНаСкладах_RecordsSet = new ТовариНаСкладах_RecordsSet();
-			товариНаСкладах_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+                        if (КількістьВПартії >= КількістьЯкуПотрібноСписати)
+                        {
+                            КількістьЩоСписується = КількістьЯкуПотрібноСписати;
+                            КількістьЯкуПотрібноСписати = 0;
+                        }
+                        else
+                        {
+                            КількістьЩоСписується = КількістьВПартії;
+                            КількістьЯкуПотрібноСписати -= КількістьВПартії;
+                        }
 
-			ВільніЗалишки_RecordsSet вільніЗалишки_RecordsSet = new ВільніЗалишки_RecordsSet();
-			вільніЗалишки_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+                        ПартіїТоварів_RecordsSet.Record record = new ПартіїТоварів_RecordsSet.Record();
+                        партіїТоварів_RecordsSet.Records.Add(record);
 
-			ПартіїТоварів_RecordsSet партіїТоварів_RecordsSet = new ПартіїТоварів_RecordsSet();
-			партіїТоварів_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-		}
-	}
+                        record.Income = false;
+                        record.Owner = ДокументОбєкт.UnigueID.UGuid;
 
-	class ПсуванняТоварів_SpendTheDocument
-	{
-		public static bool Spend(ПсуванняТоварів_Objest ДокументОбєкт)
-		{
-			#region Підготовка
+                        record.Організація = ДокументОбєкт.Організація;
+                        record.ПартіяТоварівКомпозит = ПартіяТоварівКомпозит;
+                        record.Кількість = КількістьЩоСписується;
+                        record.Собівартість = ЗакритиПартію ? СобівартістьПартії : 0;
+                        record.СписанаСобівартість = СобівартістьПартії;
+                        record.Номенклатура = ТовариРядок.Номенклатура;
+                        record.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
+                        record.Серія = ТовариРядок.Серія;
+                        record.Склад = ДокументОбєкт.Склад;
 
-			List<string> СписокПомилок = new List<string>();
+                        if (КількістьЯкуПотрібноСписати == 0)
+                            break;
+                    }
 
-			Dictionary<int, Номенклатура_Objest> СписокНоменклатури = new Dictionary<int, Номенклатура_Objest>();
-			Dictionary<int, decimal> ЗалишокНоменклатури = new Dictionary<int, decimal>();
-			Dictionary<int, decimal> РезервНоменклатури = new Dictionary<int, decimal>();
+                    if (КількістьЯкуПотрібноСписати > 0)
+                    {
+                        СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
+                            $"Невистачило списати {КількістьЯкуПотрібноСписати} товарів");
+                        СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
 
-			foreach (ПсуванняТоварів_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
-			{
-				if (ТовариРядок.Номенклатура.IsEmpty())
-				{
-					СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. Не заповнене поле Номенклатура");
-					СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
+                        return false;
+                    }
+                }
+            }
+
+            партіїТоварів_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+
+            #endregion
+
+            return true;
+        }
+
+        public static void ClearSpend(ВнутрішнєСпоживанняТоварів_Objest ДокументОбєкт)
+        {
+            ТовариНаСкладах_RecordsSet товариНаСкладах_RecordsSet = new ТовариНаСкладах_RecordsSet();
+            товариНаСкладах_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+
+            ВільніЗалишки_RecordsSet вільніЗалишки_RecordsSet = new ВільніЗалишки_RecordsSet();
+            вільніЗалишки_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+
+            ПартіїТоварів_RecordsSet партіїТоварів_RecordsSet = new ПартіїТоварів_RecordsSet();
+            партіїТоварів_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+        }
+    }
+
+    class ПсуванняТоварів_SpendTheDocument
+    {
+        public static bool Spend(ПсуванняТоварів_Objest ДокументОбєкт)
+        {
+            #region Підготовка
+
+            List<string> СписокПомилок = new List<string>();
+
+            Dictionary<int, Номенклатура_Objest> СписокНоменклатури = new Dictionary<int, Номенклатура_Objest>();
+            Dictionary<int, decimal> ЗалишокНоменклатури = new Dictionary<int, decimal>();
+            Dictionary<int, decimal> РезервНоменклатури = new Dictionary<int, decimal>();
+
+            foreach (ПсуванняТоварів_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
+            {
+                if (ТовариРядок.Номенклатура.IsEmpty())
+                {
+                    СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. Не заповнене поле Номенклатура");
+                    СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
 
                     return false;
                 }
 
-				if (!(ТовариРядок.Кількість > 0))
-				{
-					СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. Кількість має бути більшою 0");
-					СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
+                if (!(ТовариРядок.Кількість > 0))
+                {
+                    СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. Кількість має бути більшою 0");
+                    СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
 
                     return false;
                 }
 
-				СписокНоменклатури.Add(ТовариРядок.НомерРядка, ТовариРядок.Номенклатура.GetDirectoryObject()!);
+                СписокНоменклатури.Add(ТовариРядок.НомерРядка, ТовариРядок.Номенклатура.GetDirectoryObject()!);
 
-				if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
-				{
-					//
-					//Для товарів отримуємо залишки
-					//
+                if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
+                {
+                    //
+                    //Для товарів отримуємо залишки
+                    //
 
-					List<Dictionary<string, object>> Залишок_Список = СпільніФункції.ОтриматиЗалишкиТоваруНаСкладі(
-						ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури, ТовариРядок.Серія,
-						ДокументОбєкт.Склад, ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
+                    List<Dictionary<string, object>> Залишок_Список = СпільніФункції.ОтриматиЗалишкиТоваруНаСкладі(
+                        ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури, ТовариРядок.Серія,
+                        ДокументОбєкт.Склад, ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
 
-					ЗалишокНоменклатури.Add(ТовариРядок.НомерРядка, Залишок_Список.Count > 0 ? (decimal)Залишок_Список[0]["ВНаявності"] : 0);
+                    ЗалишокНоменклатури.Add(ТовариРядок.НомерРядка, Залишок_Список.Count > 0 ? (decimal)Залишок_Список[0]["ВНаявності"] : 0);
 
-					if (ЗалишокНоменклатури[ТовариРядок.НомерРядка] > 0)
-					{
-						if (ЗалишокНоменклатури[ТовариРядок.НомерРядка] < ТовариРядок.Кількість)
-						{
-							СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
-								$"Залишок товару {ЗалишокНоменклатури[ТовариРядок.НомерРядка]}, потрібно {ТовариРядок.Кількість}");
-							СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
+                    if (ЗалишокНоменклатури[ТовариРядок.НомерРядка] > 0)
+                    {
+                        if (ЗалишокНоменклатури[ТовариРядок.НомерРядка] < ТовариРядок.Кількість)
+                        {
+                            СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
+                                $"Залишок товару {ЗалишокНоменклатури[ТовариРядок.НомерРядка]}, потрібно {ТовариРядок.Кількість}");
+                            СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
 
                             return false;
                         }
 
-						//
-						// Рахуємо всі резерви
-						//
+                        //
+                        // Рахуємо всі резерви
+                        //
 
-						List<Dictionary<string, object>> Резерв_Список = СпільніФункції.ОтриматиРезервТоваруНаСкладі(
-						ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
-						ДокументОбєкт.Склад, ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
+                        List<Dictionary<string, object>> Резерв_Список = СпільніФункції.ОтриматиРезервТоваруНаСкладі(
+                        ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
+                        ДокументОбєкт.Склад, ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
 
-						РезервНоменклатури.Add(ТовариРядок.НомерРядка, Резерв_Список.Count > 0 ? (decimal)Резерв_Список[0]["ВРезервіЗіСкладу"] : 0);
+                        РезервНоменклатури.Add(ТовариРядок.НомерРядка, Резерв_Список.Count > 0 ? (decimal)Резерв_Список[0]["ВРезервіЗіСкладу"] : 0);
 
-						if (РезервНоменклатури[ТовариРядок.НомерРядка] > 0)
-						{
-							if (ЗалишокНоменклатури[ТовариРядок.НомерРядка] - РезервНоменклатури[ТовариРядок.НомерРядка] < ТовариРядок.Кількість)
-							{
-								СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
-									$"Залишок товару {ЗалишокНоменклатури[ТовариРядок.НомерРядка]}, " +
-									$"в резерві {РезервНоменклатури[ТовариРядок.НомерРядка]}, " +
-									$"потрібно {ТовариРядок.Кількість}");
+                        if (РезервНоменклатури[ТовариРядок.НомерРядка] > 0)
+                        {
+                            if (ЗалишокНоменклатури[ТовариРядок.НомерРядка] - РезервНоменклатури[ТовариРядок.НомерРядка] < ТовариРядок.Кількість)
+                            {
+                                СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
+                                    $"Залишок товару {ЗалишокНоменклатури[ТовариРядок.НомерРядка]}, " +
+                                    $"в резерві {РезервНоменклатури[ТовариРядок.НомерРядка]}, " +
+                                    $"потрібно {ТовариРядок.Кількість}");
 
-								СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
+                                СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
 
                                 return false;
                             }
-						}
-					}
-					else
-					{
-						СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
-							$"Відсутній товар {СписокНоменклатури[ТовариРядок.НомерРядка].Назва}");
-						СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
+                        }
+                    }
+                    else
+                    {
+                        СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
+                            $"Відсутній товар {СписокНоменклатури[ТовариРядок.НомерРядка].Назва}");
+                        СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
 
                         return false;
                     }
-				}
-			}
+                }
+            }
 
-			#endregion
+            #endregion
 
-			#region ТовариНаСкладах
+            #region ТовариНаСкладах
 
-			ТовариНаСкладах_RecordsSet товариНаСкладах_RecordsSet = new ТовариНаСкладах_RecordsSet();
+            ТовариНаСкладах_RecordsSet товариНаСкладах_RecordsSet = new ТовариНаСкладах_RecordsSet();
 
-			foreach (ПсуванняТоварів_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
-			{
-				if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
-				{
-					ТовариНаСкладах_RecordsSet.Record record = new ТовариНаСкладах_RecordsSet.Record();
-					товариНаСкладах_RecordsSet.Records.Add(record);
+            foreach (ПсуванняТоварів_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
+            {
+                if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
+                {
+                    ТовариНаСкладах_RecordsSet.Record record = new ТовариНаСкладах_RecordsSet.Record();
+                    товариНаСкладах_RecordsSet.Records.Add(record);
 
-					record.Income = false;
-					record.Owner = ДокументОбєкт.UnigueID.UGuid;
+                    record.Income = false;
+                    record.Owner = ДокументОбєкт.UnigueID.UGuid;
 
-					record.Номенклатура = ТовариРядок.Номенклатура;
-					record.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
-					record.Серія = ТовариРядок.Серія;
-					record.Склад = ДокументОбєкт.Склад;
-					record.ВНаявності = ТовариРядок.Кількість;
-				}
-			}
+                    record.Номенклатура = ТовариРядок.Номенклатура;
+                    record.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
+                    record.Серія = ТовариРядок.Серія;
+                    record.Склад = ДокументОбєкт.Склад;
+                    record.ВНаявності = ТовариРядок.Кількість;
+                }
+            }
 
-			товариНаСкладах_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+            товариНаСкладах_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
 
-			#endregion
+            #endregion
 
-			#region ВільніЗалишки
+            #region ВільніЗалишки
 
-			ВільніЗалишки_RecordsSet вільніЗалишки_RecordsSet = new ВільніЗалишки_RecordsSet();
+            ВільніЗалишки_RecordsSet вільніЗалишки_RecordsSet = new ВільніЗалишки_RecordsSet();
 
-			foreach (ПсуванняТоварів_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
-			{
-				if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
-				{
-					ВільніЗалишки_RecordsSet.Record record = new ВільніЗалишки_RecordsSet.Record();
-					вільніЗалишки_RecordsSet.Records.Add(record);
+            foreach (ПсуванняТоварів_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
+            {
+                if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
+                {
+                    ВільніЗалишки_RecordsSet.Record record = new ВільніЗалишки_RecordsSet.Record();
+                    вільніЗалишки_RecordsSet.Records.Add(record);
 
-					record.Income = false;
-					record.Owner = ДокументОбєкт.UnigueID.UGuid;
+                    record.Income = false;
+                    record.Owner = ДокументОбєкт.UnigueID.UGuid;
 
-					record.Номенклатура = ТовариРядок.Номенклатура;
-					record.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
-					record.Склад = ДокументОбєкт.Склад;
-					record.ВНаявності = ТовариРядок.Кількість;
-				}
-			}
+                    record.Номенклатура = ТовариРядок.Номенклатура;
+                    record.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
+                    record.Склад = ДокументОбєкт.Склад;
+                    record.ВНаявності = ТовариРядок.Кількість;
+                }
+            }
 
-			вільніЗалишки_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+            вільніЗалишки_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
 
-			#endregion
+            #endregion
 
-			#region Партії товарів
+            #region Партії товарів
 
-			ПартіїТоварів_RecordsSet партіїТоварів_RecordsSet = new ПартіїТоварів_RecordsSet();
+            ПартіїТоварів_RecordsSet партіїТоварів_RecordsSet = new ПартіїТоварів_RecordsSet();
 
-			foreach (ПсуванняТоварів_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
-			{
-				if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
-				{
-					List<Dictionary<string, object>> listNameRow = СпільніФункції.ОтриматиСписокНаявнихПартій(
-						ДокументОбєкт.Організація, ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
-						ТовариРядок.Серія, ДокументОбєкт.Склад, ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок, ТовариРядок.Кількість);
+            foreach (ПсуванняТоварів_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
+            {
+                if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
+                {
+                    List<Dictionary<string, object>> listNameRow = СпільніФункції.ОтриматиСписокНаявнихПартій(
+                        ДокументОбєкт.Організація, ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
+                        ТовариРядок.Серія, ДокументОбєкт.Склад, ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок, ТовариРядок.Кількість);
 
-					if (listNameRow.Count == 0)
-					{
-						СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
-							$"Немає доступних партій для товару {СписокНоменклатури[ТовариРядок.НомерРядка].Назва}");
-						СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
-
-                        return false;
-                    }
-
-					decimal КількістьЯкуПотрібноСписати = ТовариРядок.Кількість;
-
-					foreach (Dictionary<string, object> nameRow in listNameRow)
-					{
-						decimal КількістьВПартії = (decimal)nameRow["Кількість"];
-						decimal СобівартістьПартії = (decimal)nameRow["Собівартість"];
-						ПартіяТоварівКомпозит_Pointer ПартіяТоварівКомпозит = new ПартіяТоварівКомпозит_Pointer(nameRow["ПартіяТоварівКомпозит"]);
-
-						decimal КількістьЩоСписується = 0;
-						bool ЗакритиПартію = (КількістьЯкуПотрібноСписати >= КількістьВПартії);
-
-						if (КількістьВПартії >= КількістьЯкуПотрібноСписати)
-						{
-							КількістьЩоСписується = КількістьЯкуПотрібноСписати;
-							КількістьЯкуПотрібноСписати = 0;
-						}
-						else
-						{
-							КількістьЩоСписується = КількістьВПартії;
-							КількістьЯкуПотрібноСписати -= КількістьВПартії;
-						}
-
-						ПартіїТоварів_RecordsSet.Record record = new ПартіїТоварів_RecordsSet.Record();
-						партіїТоварів_RecordsSet.Records.Add(record);
-
-						record.Income = false;
-						record.Owner = ДокументОбєкт.UnigueID.UGuid;
-
-						record.Організація = ДокументОбєкт.Організація;
-						record.ПартіяТоварівКомпозит = ПартіяТоварівКомпозит;
-						record.Кількість = КількістьЩоСписується;
-						record.Собівартість = ЗакритиПартію ? СобівартістьПартії : 0;
-						record.СписанаСобівартість = СобівартістьПартії;
-						record.Номенклатура = ТовариРядок.Номенклатура;
-						record.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
-						record.Серія = ТовариРядок.Серія;
-						record.Склад = ДокументОбєкт.Склад;
-
-						if (КількістьЯкуПотрібноСписати == 0)
-							break;
-					}
-
-					if (КількістьЯкуПотрібноСписати > 0)
-					{
-						СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
-							$"Невистачило списати {КількістьЯкуПотрібноСписати} товарів");
-						СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
+                    if (listNameRow.Count == 0)
+                    {
+                        СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
+                            $"Немає доступних партій для товару {СписокНоменклатури[ТовариРядок.НомерРядка].Назва}");
+                        СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
 
                         return false;
                     }
-				}
-			}
 
-			партіїТоварів_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                    decimal КількістьЯкуПотрібноСписати = ТовариРядок.Кількість;
 
-			#endregion
+                    foreach (Dictionary<string, object> nameRow in listNameRow)
+                    {
+                        decimal КількістьВПартії = (decimal)nameRow["Кількість"];
+                        decimal СобівартістьПартії = (decimal)nameRow["Собівартість"];
+                        ПартіяТоварівКомпозит_Pointer ПартіяТоварівКомпозит = new ПартіяТоварівКомпозит_Pointer(nameRow["ПартіяТоварівКомпозит"]);
 
-			return true;
-		}
+                        decimal КількістьЩоСписується = 0;
+                        bool ЗакритиПартію = (КількістьЯкуПотрібноСписати >= КількістьВПартії);
 
-		public static void ClearSpend(ПсуванняТоварів_Objest ДокументОбєкт)
-		{
-			ТовариНаСкладах_RecordsSet товариНаСкладах_RecordsSet = new ТовариНаСкладах_RecordsSet();
-			товариНаСкладах_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+                        if (КількістьВПартії >= КількістьЯкуПотрібноСписати)
+                        {
+                            КількістьЩоСписується = КількістьЯкуПотрібноСписати;
+                            КількістьЯкуПотрібноСписати = 0;
+                        }
+                        else
+                        {
+                            КількістьЩоСписується = КількістьВПартії;
+                            КількістьЯкуПотрібноСписати -= КількістьВПартії;
+                        }
 
-			ВільніЗалишки_RecordsSet вільніЗалишки_RecordsSet = new ВільніЗалишки_RecordsSet();
-			вільніЗалишки_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+                        ПартіїТоварів_RecordsSet.Record record = new ПартіїТоварів_RecordsSet.Record();
+                        партіїТоварів_RecordsSet.Records.Add(record);
 
-			ПартіїТоварів_RecordsSet партіїТоварів_RecordsSet = new ПартіїТоварів_RecordsSet();
-			партіїТоварів_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-		}
-	}
+                        record.Income = false;
+                        record.Owner = ДокументОбєкт.UnigueID.UGuid;
+
+                        record.Організація = ДокументОбєкт.Організація;
+                        record.ПартіяТоварівКомпозит = ПартіяТоварівКомпозит;
+                        record.Кількість = КількістьЩоСписується;
+                        record.Собівартість = ЗакритиПартію ? СобівартістьПартії : 0;
+                        record.СписанаСобівартість = СобівартістьПартії;
+                        record.Номенклатура = ТовариРядок.Номенклатура;
+                        record.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
+                        record.Серія = ТовариРядок.Серія;
+                        record.Склад = ДокументОбєкт.Склад;
+
+                        if (КількістьЯкуПотрібноСписати == 0)
+                            break;
+                    }
+
+                    if (КількістьЯкуПотрібноСписати > 0)
+                    {
+                        СписокПомилок.Add($"Рядок {ТовариРядок.НомерРядка}. " +
+                            $"Невистачило списати {КількістьЯкуПотрібноСписати} товарів");
+                        СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, СписокПомилок);
+
+                        return false;
+                    }
+                }
+            }
+
+            партіїТоварів_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+
+            #endregion
+
+            return true;
+        }
+
+        public static void ClearSpend(ПсуванняТоварів_Objest ДокументОбєкт)
+        {
+            ТовариНаСкладах_RecordsSet товариНаСкладах_RecordsSet = new ТовариНаСкладах_RecordsSet();
+            товариНаСкладах_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+
+            ВільніЗалишки_RecordsSet вільніЗалишки_RecordsSet = new ВільніЗалишки_RecordsSet();
+            вільніЗалишки_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+
+            ПартіїТоварів_RecordsSet партіїТоварів_RecordsSet = new ПартіїТоварів_RecordsSet();
+            партіїТоварів_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+        }
+    }
 }

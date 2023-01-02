@@ -24,7 +24,8 @@ namespace StorageAndTrade
             ПакуванняНазва,
             Кількість,
             Ціна,
-            Сума
+            Сума,
+            ПоступленняТоварівТаПослугНазва
         }
 
         ListStore Store = new ListStore(
@@ -36,7 +37,8 @@ namespace StorageAndTrade
             typeof(string),   //ПакуванняНазва
             typeof(float),    //Кількість
             typeof(float),    //Ціна
-            typeof(float)     //Сума
+            typeof(float),    //Сума
+            typeof(string)    //ПоступленняТоварівТаПослугНазва
         );
 
         List<Запис> Записи = new List<Запис>();
@@ -57,6 +59,8 @@ namespace StorageAndTrade
             public decimal Кількість { get; set; } = 1;
             public decimal Ціна { get; set; }
             public decimal Сума { get; set; }
+            public ПоступленняТоварівТаПослуг_Pointer ПоступленняТоварівТаПослуг { get; set; } = new ПоступленняТоварівТаПослуг_Pointer();
+            public string ПоступленняТоварівТаПослугНазва { get; set; } = "";
 
             public object[] ToArray()
             {
@@ -70,7 +74,8 @@ namespace StorageAndTrade
                     ПакуванняНазва,
                     (float)Кількість,
                     (float)Ціна,
-                    (float)Сума
+                    (float)Сума,
+                    ПоступленняТоварівТаПослугНазва
                 };
             }
 
@@ -90,7 +95,9 @@ namespace StorageAndTrade
                     ПакуванняНазва = запис.ПакуванняНазва,
                     Кількість = запис.Кількість,
                     Ціна = запис.Ціна,
-                    Сума = запис.Сума
+                    Сума = запис.Сума,
+                    ПоступленняТоварівТаПослуг = запис.ПоступленняТоварівТаПослуг,
+                    ПоступленняТоварівТаПослугНазва = запис.ПоступленняТоварівТаПослугНазва
                 };
             }
 
@@ -146,6 +153,10 @@ namespace StorageAndTrade
             public static void ПісляЗміни_КількістьАбоЦіна(Запис запис)
             {
                 запис.Сума = запис.Кількість * запис.Ціна;
+            }
+            public static void ПісляЗміни_ПоступленняТоварівТаПослуг(Запис запис)
+            {
+                запис.ПоступленняТоварівТаПослугНазва = запис.ПоступленняТоварівТаПослуг.GetPresentation();
             }
         }
 
@@ -272,6 +283,25 @@ namespace StorageAndTrade
 
                                 break;
                             }
+                        case Columns.ПоступленняТоварівТаПослугНазва:
+                            {
+                                ПоступленняТоварівТаПослуг page = new ПоступленняТоварівТаПослуг(true);
+
+                                page.DocumentPointerItem = запис.ПоступленняТоварівТаПослуг;
+                                page.CallBack_OnSelectPointer = (ПоступленняТоварівТаПослуг_Pointer selectPointer) =>
+                                {
+                                    запис.ПоступленняТоварівТаПослуг = selectPointer;
+                                    Запис.ПісляЗміни_ПоступленняТоварівТаПослуг(запис);
+
+                                    Store.SetValues(iter, запис.ToArray());
+                                };
+
+                                Program.GeneralForm?.CreateNotebookPage("Вибір - Поступлення товарів та послуг", () => { return page; });
+
+                                page.LoadRecords();
+
+                                break;
+                            }
                     }
                 }
             }
@@ -329,6 +359,12 @@ namespace StorageAndTrade
                 querySelect.Joins.Add(
                     new Join(СеріїНоменклатури_Const.TABLE, ПоверненняТоварівПостачальнику_Товари_TablePart.Серія, querySelect.Table));
 
+                //JOIN 5
+                querySelect.FieldAndAlias.Add(
+                    new NameValue<string>(ПоступленняТоварівТаПослуг_Const.TABLE + "." + ПоступленняТоварівТаПослуг_Const.Назва, "pn_doc_name"));
+                querySelect.Joins.Add(
+                    new Join(ПоступленняТоварівТаПослуг_Const.TABLE, ПоверненняТоварівПостачальнику_Товари_TablePart.ДокументПоступлення, querySelect.Table));
+
                 //ORDER
                 querySelect.Order.Add(ПоверненняТоварівПостачальнику_Товари_TablePart.НомерРядка, SelectOrder.ASC);
 
@@ -353,7 +389,9 @@ namespace StorageAndTrade
                         ПакуванняНазва = join[record.UID.ToString()]["pak_name"],
                         Кількість = record.Кількість,
                         Ціна = record.Ціна,
-                        Сума = record.Сума
+                        Сума = record.Сума,
+                        ПоступленняТоварівТаПослуг = record.ДокументПоступлення,
+                        ПоступленняТоварівТаПослугНазва = join[record.UID.ToString()]["pn_doc_name"]
                     };
 
                     Записи.Add(запис);
@@ -384,6 +422,7 @@ namespace StorageAndTrade
                     record.Кількість = запис.Кількість;
                     record.Ціна = запис.Ціна;
                     record.Сума = запис.Сума;
+                    record.ДокументПоступлення = запис.ПоступленняТоварівТаПослуг;
 
                     ПоверненняТоварівПостачальнику_Objest.Товари_TablePart.Records.Add(record);
                 }
@@ -485,6 +524,14 @@ namespace StorageAndTrade
                 TreeViewColumn Column = new TreeViewColumn("Сума", Сума, "text", (int)Columns.Сума) { MinWidth = 100 };
                 Column.SetCellDataFunc(Сума, new TreeCellDataFunc(NumericCellDataFunc));
                 TreeViewGrid.AppendColumn(Column);
+            }
+
+            //ПакуванняНазва
+            {
+                TreeViewColumn ПоступленняТоварівТаПослугНазва = new TreeViewColumn("Документ поступлення", new CellRendererText(), "text", (int)Columns.ПоступленняТоварівТаПослугНазва) { MinWidth = 100 };
+                ПоступленняТоварівТаПослугНазва.Data.Add("Column", Columns.ПоступленняТоварівТаПослугНазва);
+
+                TreeViewGrid.AppendColumn(ПоступленняТоварівТаПослугНазва);
             }
 
             //Колонка пустишка для заповнення вільного простору
