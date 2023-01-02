@@ -149,7 +149,7 @@ namespace StorageAndTrade
             if ((int)Константи.ЖурналиДокументів.ОсновнийТипПеріоду_Const != 0)
                 ComboBoxPeriodWhere.ActiveId = Константи.ЖурналиДокументів.ОсновнийТипПеріоду_Const.ToString();
             else
-                ComboBoxPeriodWhere.Active = 0;
+                ComboBoxPeriodWhere.Active = 0;                
         }
 
         public void LoadRecords()

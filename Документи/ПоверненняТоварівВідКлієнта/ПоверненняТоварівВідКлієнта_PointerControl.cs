@@ -30,6 +30,9 @@ namespace StorageAndTrade
             }
         }
 
+        //Відбір по періоду в журналі
+        public bool UseWherePeriod { get; set; } = false;
+
         protected override void OpenSelect(object? sender, EventArgs args)
         {
             ПоверненняТоварівВідКлієнта page = new ПоверненняТоварівВідКлієнта(true);
@@ -42,7 +45,10 @@ namespace StorageAndTrade
 
             Program.GeneralForm?.CreateNotebookPage("Вибір - Повернення товарів від клієнта", () => { return page; });
 
-            page.LoadRecords();
+            if (UseWherePeriod)
+                page.SetValue();
+            else
+                page.LoadRecords();
         }
 
         protected override void OnClear(object? sender, EventArgs args)

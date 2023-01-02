@@ -13,6 +13,8 @@ namespace StorageAndTrade
         public ПартіяТоварівКомпозит_Objest ПартіяТоварівКомпозит_Objest { get; set; } = new ПартіяТоварівКомпозит_Objest();
 
         Entry Назва = new Entry() { WidthRequest = 500 };
+        ПоступленняТоварівТаПослуг_PointerControl ПоступленняТоварівТаПослуг = new ПоступленняТоварівТаПослуг_PointerControl() { UseWherePeriod = true };
+        ВведенняЗалишків_PointerControl ВведенняЗалишків = new ВведенняЗалишків_PointerControl() { UseWherePeriod = true };
 
         public ПартіяТоварівКомпозит_Елемент() : base()
         {
@@ -52,6 +54,18 @@ namespace StorageAndTrade
             hBoxName.PackStart(new Label("Назва:"), false, false, 5);
             hBoxName.PackStart(Назва, false, false, 5);
 
+            //ПоступленняТоварівТаПослуг
+            HBox hBoxПоступленняТоварівТаПослуг = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxПоступленняТоварівТаПослуг, false, false, 5);
+
+            hBoxПоступленняТоварівТаПослуг.PackStart(ПоступленняТоварівТаПослуг, false, false, 5);
+
+            //ВведенняЗалишків
+            HBox hBoxВведенняЗалишків = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxВведенняЗалишків, false, false, 5);
+
+            hBoxВведенняЗалишків.PackStart(ВведенняЗалишків, false, false, 5);
+
             hPaned.Pack1(vBox, false, false);
         }
 
@@ -69,11 +83,21 @@ namespace StorageAndTrade
         public void SetValue()
         {
             Назва.Text = ПартіяТоварівКомпозит_Objest.Назва;
+            ПоступленняТоварівТаПослуг.Pointer = ПартіяТоварівКомпозит_Objest.ПоступленняТоварівТаПослуг;
+            ВведенняЗалишків.Pointer = ПартіяТоварівКомпозит_Objest.ВведенняЗалишків;
         }
 
         void GetValue()
         {
             ПартіяТоварівКомпозит_Objest.Назва = Назва.Text;
+
+            /*
+            Редагування заборонено, тільки назва
+
+            ПартіяТоварівКомпозит_Objest.ПоступленняТоварівТаПослуг = ПоступленняТоварівТаПослуг.Pointer;
+            ПартіяТоварівКомпозит_Objest.ВведенняЗалишків = ВведенняЗалишків.Pointer;
+            
+            */
         }
 
         #endregion
