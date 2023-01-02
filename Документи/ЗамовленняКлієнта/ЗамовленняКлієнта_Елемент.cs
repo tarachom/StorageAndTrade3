@@ -30,17 +30,17 @@ namespace StorageAndTrade
         ДоговориКонтрагентів_PointerControl Договір = new ДоговориКонтрагентів_PointerControl();
         ComboBoxText ГосподарськаОперація = new ComboBoxText();
         ComboBoxText ФормаОплати = new ComboBoxText();
-        СтруктураПідприємства_PointerControl Підрозділ = new СтруктураПідприємства_PointerControl() { Caption = "Підрозділ" };
-        DateTimeControl ДатаВідгрузки = new DateTimeControl();
+        СтруктураПідприємства_PointerControl Підрозділ = new СтруктураПідприємства_PointerControl() { Caption = "Підрозділ:" };
+        DateTimeControl ДатаВідгрузки = new DateTimeControl() { OnlyDate = true };
         CheckButton Узгоджений = new CheckButton("Узгоджений");
-        БанківськіРахункиКонтрагентів_PointerControl БанківськийрахунокКонтрагента = new БанківськіРахункиКонтрагентів_PointerControl() { Caption = "Рахунок контрагента", WidthPresentation = 200 };
+        БанківськіРахункиКонтрагентів_PointerControl БанківськийрахунокКонтрагента = new БанківськіРахункиКонтрагентів_PointerControl() { Caption = "Рахунок контрагента:", WidthPresentation = 200 };
         Користувачі_PointerControl Автор = new Користувачі_PointerControl();
         CheckButton ПовернутиТару = new CheckButton("Вернути тару");
-        DateTimeControl ДатаПоверненняТари = new DateTimeControl();
+        DateTimeControl ДатаПоверненняТари = new DateTimeControl() { OnlyDate = true };
         ComboBoxText СпосібДоставки = new ComboBoxText();
         TimeControl ЧасДоставкиЗ = new TimeControl();
         TimeControl ЧасДоставкиДо = new TimeControl();
-        Користувачі_PointerControl Менеджер = new Користувачі_PointerControl() { Caption = "Менеджер" };
+        Користувачі_PointerControl Менеджер = new Користувачі_PointerControl() { Caption = "Менеджер:" };
         Entry Коментар = new Entry() { WidthRequest = 920 };
 
         ЗамовленняКлієнта_ТабличнаЧастина_Товари Товари = new ЗамовленняКлієнта_ТабличнаЧастина_Товари();

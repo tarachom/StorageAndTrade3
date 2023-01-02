@@ -558,11 +558,11 @@ FROM register INNER JOIN {table} ON {table}.uid = register.owner
             query += $@"
 )
 SELECT 
-    doctype,
+    CONCAT(uid, ':', doctype) AS uid_and_text,
     uid,
     period, 
     (CASE WHEN income = true THEN '+' ELSE '-' END) AS income,
-    docname,
+    docname AS Документ,
     Організація,
     Організація_Назва,
     Каса,
@@ -578,13 +578,14 @@ ORDER BY period ASC
 
             Dictionary<string, string> ВидиміКолонки = new Dictionary<string, string>();
             ВидиміКолонки.Add("income", "Рух");
-            ВидиміКолонки.Add("docname", "Документ");
+            ВидиміКолонки.Add("Документ", "Документ");
             ВидиміКолонки.Add("Організація_Назва", "Організація");
             ВидиміКолонки.Add("Каса_Назва", "Каса");
             ВидиміКолонки.Add("Валюта_Назва", "Валюта");
             ВидиміКолонки.Add("Сума", "Сума");
 
             Dictionary<string, string> КолонкиДаних = new Dictionary<string, string>();
+            КолонкиДаних.Add("Документ", "uid_and_text");
             КолонкиДаних.Add("Організація_Назва", "Організація");
             КолонкиДаних.Add("Каса_Назва", "Каса");
             КолонкиДаних.Add("Валюта_Назва", "Валюта");

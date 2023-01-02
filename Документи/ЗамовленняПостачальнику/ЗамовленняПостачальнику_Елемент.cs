@@ -30,15 +30,15 @@ namespace StorageAndTrade
         ДоговориКонтрагентів_PointerControl Договір = new ДоговориКонтрагентів_PointerControl();
         ComboBoxText ГосподарськаОперація = new ComboBoxText();
         ComboBoxText ФормаОплати = new ComboBoxText();
-        СтруктураПідприємства_PointerControl Підрозділ = new СтруктураПідприємства_PointerControl() { Caption = "Підрозділ" };
-        DateTimeControl ДатаПоступлення = new DateTimeControl();
+        СтруктураПідприємства_PointerControl Підрозділ = new СтруктураПідприємства_PointerControl() { Caption = "Підрозділ:" };
+        DateTimeControl ДатаПоступлення = new DateTimeControl() { OnlyDate = true };
         БанківськіРахункиОрганізацій_PointerControl БанківськийРахунок = new БанківськіРахункиОрганізацій_PointerControl() { WidthPresentation = 200 };
         Користувачі_PointerControl Автор = new Користувачі_PointerControl();
-        CheckButton ПовернутиТару = new CheckButton("Повернути тару");
+        CheckButton ПовернутиТару = new CheckButton("Повернути тару:");
         ComboBoxText СпосібДоставки = new ComboBoxText();
         TimeControl ЧасДоставкиЗ = new TimeControl();
         TimeControl ЧасДоставкиДо = new TimeControl();
-        Користувачі_PointerControl Менеджер = new Користувачі_PointerControl() { Caption = "Менеджер" };
+        Користувачі_PointerControl Менеджер = new Користувачі_PointerControl() { Caption = "Менеджер:" };
         Entry Коментар = new Entry() { WidthRequest = 920 };
 
         ЗамовленняПостачальнику_ТабличнаЧастина_Товари Товари = new ЗамовленняПостачальнику_ТабличнаЧастина_Товари();

@@ -13,7 +13,7 @@ namespace StorageAndTrade
         #region Filters
 
         DateTimeControl ДатаПочатокПеріоду = new DateTimeControl() { OnlyDate = true, Value = DateTime.Parse($"01.{DateTime.Now.Month}.{DateTime.Now.Year}") };
-        DateTimeControl ДатаКінецьПеріоду = new DateTimeControl() {OnlyDate = true,  Value = DateTime.Now };
+        DateTimeControl ДатаКінецьПеріоду = new DateTimeControl() { OnlyDate = true, Value = DateTime.Now };
 
         Контрагенти_PointerControl Контрагент = new Контрагенти_PointerControl();
         Контрагенти_Папки_PointerControl Контрагент_Папка = new Контрагенти_Папки_PointerControl();
@@ -578,11 +578,11 @@ FROM register INNER JOIN {table} ON {table}.uid = register.owner
             query += $@"
 )
 SELECT 
-    doctype,
+    CONCAT(uid, ':', doctype) AS uid_and_text,
     uid,
     period,
     (CASE WHEN income = true THEN '+' ELSE '-' END) AS income, 
-    docname, 
+    docname AS Документ, 
     Контрагент,
     Контрагент_Назва,
     Валюта,
@@ -596,12 +596,13 @@ ORDER BY period ASC
 
             Dictionary<string, string> ВидиміКолонки = new Dictionary<string, string>();
             ВидиміКолонки.Add("income", "Рух");
-            ВидиміКолонки.Add("docname", "Документ");
+            ВидиміКолонки.Add("Документ", "Документ");
             ВидиміКолонки.Add("Контрагент_Назва", "Контрагент");
             ВидиміКолонки.Add("Валюта_Назва", "Валюта");
             ВидиміКолонки.Add("Сума", "Сума");
 
             Dictionary<string, string> КолонкиДаних = new Dictionary<string, string>();
+            КолонкиДаних.Add("Документ", "uid_and_text");
             КолонкиДаних.Add("Контрагент_Назва", "Контрагент");
             КолонкиДаних.Add("Валюта_Назва", "Валюта");
 

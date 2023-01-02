@@ -28,24 +28,25 @@ namespace StorageAndTrade
         Каси_PointerControl Каса = new Каси_PointerControl();
         Контрагенти_PointerControl Контрагент = new Контрагенти_PointerControl();
         ДоговориКонтрагентів_PointerControl Договір = new ДоговориКонтрагентів_PointerControl();
+        ЗамовленняПостачальнику_PointerControl ЗамовленняПостачальнику = new ЗамовленняПостачальнику_PointerControl() { Caption = "Замовлення постачальнику:" };
         ComboBoxText ГосподарськаОперація = new ComboBoxText();
         ComboBoxText ФормаОплати = new ComboBoxText();
-        СтруктураПідприємства_PointerControl Підрозділ = new СтруктураПідприємства_PointerControl() { Caption = "Підрозділ" };
+        СтруктураПідприємства_PointerControl Підрозділ = new СтруктураПідприємства_PointerControl() { Caption = "Підрозділ:" };
         DateTimeControl ДатаОплати = new DateTimeControl() { OnlyDate = true };
         CheckButton Узгоджений = new CheckButton("Узгоджений");
         БанківськіРахункиОрганізацій_PointerControl БанківськийРахунокОрганізації = new БанківськіРахункиОрганізацій_PointerControl() { WidthPresentation = 200 };
-        БанківськіРахункиКонтрагентів_PointerControl БанківськийРахунокКонтрагента = new БанківськіРахункиКонтрагентів_PointerControl() { Caption = "Рахунок контрагента", WidthPresentation = 200 };
+        БанківськіРахункиКонтрагентів_PointerControl БанківськийРахунокКонтрагента = new БанківськіРахункиКонтрагентів_PointerControl() { Caption = "Рахунок контрагента:", WidthPresentation = 200 };
         Entry НомерВхідногоДокументу = new Entry() { WidthRequest = 200 };
         DateTimeControl ДатаВхідногоДокументу = new DateTimeControl() { OnlyDate = true };
         Користувачі_PointerControl Автор = new Користувачі_PointerControl();
-        CheckButton ПовернутиТару = new CheckButton("Вернути тару");
+        CheckButton ПовернутиТару = new CheckButton("Вернути тару:");
         DateTimeControl ДатаПоверненняТари = new DateTimeControl() { OnlyDate = true };
         ComboBoxText СпосібДоставки = new ComboBoxText();
         NumericControl Курс = new NumericControl();
         IntegerControl Кратність = new IntegerControl();
         TimeControl ЧасДоставкиЗ = new TimeControl();
         TimeControl ЧасДоставкиДо = new TimeControl();
-        Користувачі_PointerControl Менеджер = new Користувачі_PointerControl() { Caption = "Менеджер" };
+        Користувачі_PointerControl Менеджер = new Користувачі_PointerControl() { Caption = "Менеджер:" };
         СтаттяРухуКоштів_PointerControl СтаттяРухуКоштів = new СтаттяРухуКоштів_PointerControl();
         Entry Коментар = new Entry() { WidthRequest = 920 };
 
@@ -252,6 +253,12 @@ namespace StorageAndTrade
 
         void CreateContainer3(VBox vBox)
         {
+            //ЗамовленняПостачальнику
+            HBox hBoxSamovlenjaKlienta = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxSamovlenjaKlienta, false, false, 5);
+
+            hBoxSamovlenjaKlienta.PackStart(ЗамовленняПостачальнику, false, false, 5);
+
             //ГосподарськаОперація
             HBox hBoxOperation = new HBox() { Halign = Align.End };
             vBox.PackStart(hBoxOperation, false, false, 5);

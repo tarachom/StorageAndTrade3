@@ -26,7 +26,8 @@ namespace StorageAndTrade
             Ціна,
             Сума,
             Скидка,
-            СкладНазва
+            СкладНазва,
+            ЗамовленняПостачальникуНазва
         }
 
         ListStore Store = new ListStore(
@@ -40,7 +41,8 @@ namespace StorageAndTrade
             typeof(float),    //Ціна
             typeof(float),    //Сума
             typeof(float),    //Скидка
-            typeof(string)    //СкладНазва
+            typeof(string),   //СкладНазва
+            typeof(string)    //ЗамовленняПостачальникуНазва
         );
 
         List<Запис> Записи = new List<Запис>();
@@ -81,7 +83,8 @@ namespace StorageAndTrade
                     (float)Ціна,
                     (float)Сума,
                     (float)Скидка,
-                    СкладНазва
+                    СкладНазва,
+                    ЗамовленняПостачальникуНазва
                 };
             }
 
@@ -312,6 +315,25 @@ namespace StorageAndTrade
                                 Program.GeneralForm?.CreateNotebookPage("Вибір - Склад", () => { return page; });
 
                                 page.LoadTree();
+
+                                break;
+                            }
+                        case Columns.ЗамовленняПостачальникуНазва:
+                            {
+                                ЗамовленняПостачальнику page = new ЗамовленняПостачальнику(true);
+
+                                page.DocumentPointerItem = запис.ЗамовленняПостачальнику;
+                                page.CallBack_OnSelectPointer = (ЗамовленняПостачальнику_Pointer selectPointer) =>
+                                {
+                                    запис.ЗамовленняПостачальнику = selectPointer;
+                                    Запис.ПісляЗміни_ЗамовленняПостачальнику(запис);
+
+                                    Store.SetValues(iter, запис.ToArray());
+                                };
+
+                                Program.GeneralForm?.CreateNotebookPage("Вибір - Замовлення постачальнику", () => { return page; });
+
+                                page.LoadRecords();
 
                                 break;
                             }
@@ -566,6 +588,13 @@ namespace StorageAndTrade
                 TreeViewColumn СкладНазва = new TreeViewColumn("Склад", new CellRendererText(), "text", (int)Columns.СкладНазва) { MinWidth = 300 };
                 СкладНазва.Data.Add("Column", Columns.СкладНазва);
                 TreeViewGrid.AppendColumn(СкладНазва);
+            }
+
+            //ЗамовленняПостачальникуНазва
+            {
+                TreeViewColumn ЗамовленняПостачальникуНазва = new TreeViewColumn("Замовлення постачальнику", new CellRendererText(), "text", (int)Columns.ЗамовленняПостачальникуНазва) { MinWidth = 300 };
+                ЗамовленняПостачальникуНазва.Data.Add("Column", Columns.ЗамовленняПостачальникуНазва);
+                TreeViewGrid.AppendColumn(ЗамовленняПостачальникуНазва);
             }
 
             //Колонка пустишка для заповнення вільного простору
