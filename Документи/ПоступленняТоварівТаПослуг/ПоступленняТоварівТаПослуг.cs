@@ -434,7 +434,7 @@ namespace StorageAndTrade
 
         void OnNaOsnoviClick(object? sender, EventArgs arg)
         {
-            
+            //Відкрити меню ...
         }
 
         void OnNewDocNaOsnovi_KasovyiOrder(object? sender, EventArgs args)

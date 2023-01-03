@@ -1427,6 +1427,31 @@ FROM
 
             #endregion
 
+            #region Закупівлі
+
+            Закупівлі_RecordsSet закупівлі_RecordsSet = new Закупівлі_RecordsSet();
+
+            foreach (ПоступленняТоварівТаПослуг_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
+            {
+                Закупівлі_RecordsSet.Record record = new Закупівлі_RecordsSet.Record();
+                закупівлі_RecordsSet.Records.Add(record);
+
+                record.Owner = ДокументОбєкт.UnigueID.UGuid;
+                record.Організація = ДокументОбєкт.Організація;
+                record.Склад = !ТовариРядок.Склад.IsEmpty() ? ТовариРядок.Склад : ДокументОбєкт.Склад;
+                record.Контрагент = ДокументОбєкт.Контрагент;
+                record.Договір = ДокументОбєкт.Договір;
+                record.Номенклатура = ТовариРядок.Номенклатура;
+                record.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
+                record.Кількість = ТовариРядок.Кількість;
+                record.Сума = ТовариРядок.Сума;
+                record.Вартість = Math.Round(ТовариРядок.Сума / ТовариРядок.Кількість, 2);
+            }
+
+            закупівлі_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+
+            #endregion
+
             return true;
         }
 
@@ -1449,6 +1474,13 @@ FROM
 
             РозрахункиЗПостачальниками_RecordsSet розрахункиЗПостачальниками_RecordsSet = new РозрахункиЗПостачальниками_RecordsSet();
             розрахункиЗПостачальниками_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+
+            //
+            // Обороти
+            //
+
+            Закупівлі_RecordsSet закупівлі_RecordsSet = new Закупівлі_RecordsSet();
+            закупівлі_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
         }
     }
 
@@ -1976,6 +2008,31 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
 
             #endregion
 
+            #region Закупівлі
+
+            Закупівлі_RecordsSet закупівлі_RecordsSet = new Закупівлі_RecordsSet();
+
+            foreach (ПоверненняТоварівПостачальнику_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
+            {
+                Закупівлі_RecordsSet.Record record = new Закупівлі_RecordsSet.Record();
+                закупівлі_RecordsSet.Records.Add(record);
+
+                record.Owner = ДокументОбєкт.UnigueID.UGuid;
+                record.Організація = ДокументОбєкт.Організація;
+                record.Склад = ДокументОбєкт.Склад;
+                record.Контрагент = ДокументОбєкт.Контрагент;
+                record.Договір = ДокументОбєкт.Договір;
+                record.Номенклатура = ТовариРядок.Номенклатура;
+                record.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
+                record.Кількість = -ТовариРядок.Кількість;
+                record.Сума = -ТовариРядок.Сума;
+                record.Вартість = -Math.Round(ТовариРядок.Сума / ТовариРядок.Кількість, 2);
+            }
+
+            закупівлі_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+
+            #endregion
+
             return true;
         }
 
@@ -1992,6 +2049,13 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
 
             РозрахункиЗПостачальниками_RecordsSet розрахункиЗПостачальниками_RecordsSet = new РозрахункиЗПостачальниками_RecordsSet();
             розрахункиЗПостачальниками_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+
+            //
+            // Обороти
+            //
+
+            Закупівлі_RecordsSet закупівлі_RecordsSet = new Закупівлі_RecordsSet();
+            закупівлі_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
         }
     }
 
