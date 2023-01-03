@@ -5,7 +5,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>03.01.2023 17:22:02</DateTimeSave>
+  <DateTimeSave>03.01.2023 21:11:03</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -13688,18 +13688,19 @@ HAVING
             </Desc>
             <IsIndex>0</IsIndex>
           </Field>
+        </Fields>
+      </ResourcesFields>
+      <PropertyFields>
+        <Fields>
           <Field>
-            <Name>Вартість</Name>
-            <NameInTable>col_b2</NameInTable>
+            <Name>Собівартість</Name>
+            <NameInTable>col_a3</NameInTable>
             <Type>numeric</Type>
             <Desc>
             </Desc>
             <IsIndex>0</IsIndex>
           </Field>
         </Fields>
-      </ResourcesFields>
-      <PropertyFields>
-        <Fields />
       </PropertyFields>
       <AllowDocumentSpend>
         <Name>ПоступленняТоварівТаПослуг</Name>
@@ -13708,7 +13709,7 @@ HAVING
       <TabularParts>
         <TablePart>
           <Name>Обороти</Name>
-          <Table>tab_a66</Table>
+          <Table>tab_a63</Table>
           <Desc>Віртуальна таблиця</Desc>
           <Fields>
             <Field>
@@ -13790,7 +13791,7 @@ HAVING
               <IsIndex>0</IsIndex>
             </Field>
             <Field>
-              <Name>Вартість</Name>
+              <Name>Собівартість</Name>
               <NameInTable>col_b1</NameInTable>
               <Type>numeric</Type>
               <Desc>
@@ -13822,7 +13823,7 @@ INSERT INTO {Закупівлі_Обороти_TablePart.TABLE}
     {Закупівлі_Обороти_TablePart.ХарактеристикаНоменклатури},
     {Закупівлі_Обороти_TablePart.Кількість},
     {Закупівлі_Обороти_TablePart.Сума},
-    {Закупівлі_Обороти_TablePart.Вартість}
+    {Закупівлі_Обороти_TablePart.Собівартість}
 )
 SELECT
     uuid_generate_v4(),
@@ -13836,8 +13837,8 @@ SELECT
 
     SUM(Закупівлі.{Закупівлі_Const.Кількість}) AS Кількість,
     SUM(Закупівлі.{Закупівлі_Const.Сума}) AS Сума,
-    SUM(Закупівлі.{Закупівлі_Const.Вартість}) AS Вартість
 
+    Закупівлі.{Закупівлі_Const.Собівартість} AS Собівартість
 
 FROM
     {Закупівлі_Const.TABLE} AS Закупівлі
@@ -13847,12 +13848,11 @@ WHERE
 
 GROUP BY
     Період, Організація, Склад, Контрагент, Договір, Номенклатура, 
-ХарактеристикаНоменклатури
+ХарактеристикаНоменклатури, Собівартість
 
 HAVING
     SUM(Закупівлі.{Закупівлі_Const.Кількість}) != 0 OR
-    SUM(Закупівлі.{Закупівлі_Const.Сума}) != 0 OR
-    SUM(Закупівлі.{Закупівлі_Const.Вартість}) != 0 
+    SUM(Закупівлі.{Закупівлі_Const.Сума}) != 0 
 
 
 
@@ -15740,239 +15740,6 @@ WHERE
 GROUP BY
     Період, ДокументКомпозит, ТипЗапасів, ВидЗапасів, Склад, Договір, 
 ГосподарськаОперація, АналітикаНоменклатуриКомпозит, АналітикаКонтрагентівКомпозит, ПідрозділВалютаДокументу
-
-
-
-
-</Query>
-        </QueryBlock>
-      </QueryBlockList>
-    </RegisterAccumulation>
-    <RegisterAccumulation>
-      <Name>Продажі</Name>
-      <Table>tab_a63</Table>
-      <Type>Turnover</Type>
-      <Desc>
-      </Desc>
-      <DimensionFields>
-        <Fields>
-          <Field>
-            <Name>Організація</Name>
-            <NameInTable>col_a5</NameInTable>
-            <Type>pointer</Type>
-            <Pointer>Довідники.Організації</Pointer>
-            <Desc>
-            </Desc>
-            <IsIndex>1</IsIndex>
-          </Field>
-          <Field>
-            <Name>Склад</Name>
-            <NameInTable>col_a6</NameInTable>
-            <Type>pointer</Type>
-            <Pointer>Довідники.Склади</Pointer>
-            <Desc>
-            </Desc>
-            <IsIndex>1</IsIndex>
-          </Field>
-          <Field>
-            <Name>Контрагент</Name>
-            <NameInTable>col_a7</NameInTable>
-            <Type>pointer</Type>
-            <Pointer>Довідники.Контрагенти</Pointer>
-            <Desc>
-            </Desc>
-            <IsIndex>1</IsIndex>
-          </Field>
-          <Field>
-            <Name>Договір</Name>
-            <NameInTable>col_b3</NameInTable>
-            <Type>pointer</Type>
-            <Pointer>Довідники.ДоговориКонтрагентів</Pointer>
-            <Desc>
-            </Desc>
-            <IsIndex>1</IsIndex>
-          </Field>
-          <Field>
-            <Name>Номенклатура</Name>
-            <NameInTable>col_a1</NameInTable>
-            <Type>pointer</Type>
-            <Pointer>Довідники.Номенклатура</Pointer>
-            <Desc>
-            </Desc>
-            <IsIndex>1</IsIndex>
-          </Field>
-          <Field>
-            <Name>ХарактеристикаНоменклатури</Name>
-            <NameInTable>col_a2</NameInTable>
-            <Type>pointer</Type>
-            <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
-            <Desc>
-            </Desc>
-            <IsIndex>1</IsIndex>
-          </Field>
-        </Fields>
-      </DimensionFields>
-      <ResourcesFields>
-        <Fields>
-          <Field>
-            <Name>Кількість</Name>
-            <NameInTable>col_a8</NameInTable>
-            <Type>numeric</Type>
-            <Desc>
-            </Desc>
-            <IsIndex>0</IsIndex>
-          </Field>
-          <Field>
-            <Name>Сума</Name>
-            <NameInTable>col_b1</NameInTable>
-            <Type>numeric</Type>
-            <Desc>
-            </Desc>
-            <IsIndex>0</IsIndex>
-          </Field>
-        </Fields>
-      </ResourcesFields>
-      <PropertyFields>
-        <Fields />
-      </PropertyFields>
-      <AllowDocumentSpend />
-      <TabularParts>
-        <TablePart>
-          <Name>Обороти</Name>
-          <Table>tab_a68</Table>
-          <Desc>Віртуальна таблиця</Desc>
-          <Fields>
-            <Field>
-              <Name>Період</Name>
-              <NameInTable>col_a1</NameInTable>
-              <Type>date</Type>
-              <Desc>
-              </Desc>
-              <IsIndex>1</IsIndex>
-            </Field>
-            <Field>
-              <Name>Організація</Name>
-              <NameInTable>col_a2</NameInTable>
-              <Type>pointer</Type>
-              <Pointer>Довідники.Організації</Pointer>
-              <Desc>
-              </Desc>
-              <IsIndex>1</IsIndex>
-            </Field>
-            <Field>
-              <Name>Склад</Name>
-              <NameInTable>col_a3</NameInTable>
-              <Type>pointer</Type>
-              <Pointer>Довідники.Склади</Pointer>
-              <Desc>
-              </Desc>
-              <IsIndex>1</IsIndex>
-            </Field>
-            <Field>
-              <Name>Контрагент</Name>
-              <NameInTable>col_a4</NameInTable>
-              <Type>pointer</Type>
-              <Pointer>Довідники.Контрагенти</Pointer>
-              <Desc>
-              </Desc>
-              <IsIndex>1</IsIndex>
-            </Field>
-            <Field>
-              <Name>Договір</Name>
-              <NameInTable>col_a5</NameInTable>
-              <Type>pointer</Type>
-              <Pointer>Довідники.ДоговориКонтрагентів</Pointer>
-              <Desc>
-              </Desc>
-              <IsIndex>1</IsIndex>
-            </Field>
-            <Field>
-              <Name>Номенклатура</Name>
-              <NameInTable>col_a6</NameInTable>
-              <Type>pointer</Type>
-              <Pointer>Довідники.Номенклатура</Pointer>
-              <Desc>
-              </Desc>
-              <IsIndex>1</IsIndex>
-            </Field>
-            <Field>
-              <Name>ХарактеристикаНоменклатури</Name>
-              <NameInTable>col_a7</NameInTable>
-              <Type>pointer</Type>
-              <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
-              <Desc>
-              </Desc>
-              <IsIndex>1</IsIndex>
-            </Field>
-            <Field>
-              <Name>Кількість</Name>
-              <NameInTable>col_a8</NameInTable>
-              <Type>numeric</Type>
-              <Desc>
-              </Desc>
-              <IsIndex>0</IsIndex>
-            </Field>
-            <Field>
-              <Name>Сума</Name>
-              <NameInTable>col_a9</NameInTable>
-              <Type>numeric</Type>
-              <Desc>
-              </Desc>
-              <IsIndex>0</IsIndex>
-            </Field>
-          </Fields>
-        </TablePart>
-      </TabularParts>
-      <QueryBlockList>
-        <QueryBlock>
-          <Name>Обороти</Name>
-          <Query position="0" key="DELETE">
-DELETE FROM 
-    {Продажі_Обороти_TablePart.TABLE}
-WHERE 
-    {Продажі_Обороти_TablePart.TABLE}.{Продажі_Обороти_TablePart.Період} = @ПеріодДеньВідбір
-</Query>
-          <Query position="1" key="SELECT">
-INSERT INTO {Продажі_Обороти_TablePart.TABLE} 
-(
-    uid,
-    {Продажі_Обороти_TablePart.Період},
-    {Продажі_Обороти_TablePart.Організація},
-    {Продажі_Обороти_TablePart.Склад},
-    {Продажі_Обороти_TablePart.Контрагент},
-    {Продажі_Обороти_TablePart.Договір},
-    {Продажі_Обороти_TablePart.Номенклатура},
-    {Продажі_Обороти_TablePart.ХарактеристикаНоменклатури},
-    {Продажі_Обороти_TablePart.Кількість},
-    {Продажі_Обороти_TablePart.Сума}
-)
-SELECT
-    uuid_generate_v4(),
-    date_trunc('day', Продажі.period::timestamp) AS Період,
-    Продажі.{Продажі_Const.Організація} AS Організація,
-    Продажі.{Продажі_Const.Склад} AS Склад,
-    Продажі.{Продажі_Const.Контрагент} AS Контрагент,
-    Продажі.{Продажі_Const.Договір} AS Договір,
-    Продажі.{Продажі_Const.Номенклатура} AS Номенклатура,
-    Продажі.{Продажі_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
-
-    SUM(Продажі.{Продажі_Const.Кількість}) AS Кількість,
-    SUM(Продажі.{Продажі_Const.Сума}) AS Сума
-
-
-FROM
-    {Продажі_Const.TABLE} AS Продажі
-
-WHERE
-    date_trunc('day', Продажі.period::timestamp) = @ПеріодДеньВідбір
-
-GROUP BY
-    Період, Організація, Склад, Контрагент, Договір, Номенклатура, 
-ХарактеристикаНоменклатури
-
-HAVING
-    SUM(Продажі.{Продажі_Const.Кількість}) != 0 OR
-    SUM(Продажі.{Продажі_Const.Сума}) != 0 
 
 
 

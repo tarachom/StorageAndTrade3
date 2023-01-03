@@ -22,15 +22,16 @@ namespace StorageAndTrade
             VBox vLeft = new VBox(false, 0);
             hBoxList.PackStart(vLeft, false, false, 5);
 
-            AddLink(vLeft, "ТовариНаСкладах", ТовариНаСкладах);
-            AddLink(vLeft, "ВільніЗалишки", ВільніЗалишки);
-            AddLink(vLeft, "ПартіїТоварів", ПартіїТоварів);
-            AddLink(vLeft, "РухКоштів", РухКоштів);
-            AddLink(vLeft, "РозрахункиЗКонтрагентами", РозрахункиЗКонтрагентами);
-            AddLink(vLeft, "РозрахункиЗКлієнтами", РозрахункиЗКлієнтами);
-            AddLink(vLeft, "РозрахункиЗПостачальниками", РозрахункиЗПостачальниками);
-            AddLink(vLeft, "ЗамовленняКлієнтів", ЗамовленняКлієнтів);
-            AddLink(vLeft, "ЗамовленняПостачальникам", ЗамовленняПостачальникам);
+            AddLink(vLeft, "Товари на складах", ТовариНаСкладах);
+            AddLink(vLeft, "Вільні залишки", ВільніЗалишки);
+            AddLink(vLeft, "Партії товарів", ПартіїТоварів);
+            AddLink(vLeft, "Рух коштів", РухКоштів);
+            AddLink(vLeft, "Розрахунки з контрагентами", РозрахункиЗКонтрагентами);
+            AddLink(vLeft, "Розрахунки з клієнтами", РозрахункиЗКлієнтами);
+            AddLink(vLeft, "Розрахунки з постачальниками", РозрахункиЗПостачальниками);
+            AddLink(vLeft, "Замовлення клієнтів", ЗамовленняКлієнтів);
+            AddLink(vLeft, "Замовлення постачальникам", ЗамовленняПостачальникам);
+            AddLink(vLeft, "Закупівлі", Закупівлі);
 
             PackStart(hBoxList, false, false, 10);
 
@@ -114,6 +115,15 @@ namespace StorageAndTrade
             Program.GeneralForm?.CreateNotebookPage("Звіт - Товари на складах", () =>
             {
                 Звіт_ТовариНаСкладах page = new Звіт_ТовариНаСкладах();
+                return page;
+            });
+        }
+
+        void Закупівлі(object? sender, EventArgs args)
+        {
+            Program.GeneralForm?.CreateNotebookPage("Звіт - Закупівлі", () =>
+            {
+                Звіт_Закупівлі page = new Звіт_Закупівлі();
                 return page;
             });
         }

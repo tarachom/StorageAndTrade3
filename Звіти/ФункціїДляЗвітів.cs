@@ -195,6 +195,17 @@ namespace StorageAndTrade
 
                                     break;
                                 }
+                            case "Договір_Назва":
+                                {
+                                    ДоговориКонтрагентів page = new ДоговориКонтрагентів();
+                                    page.SelectPointerItem = new ДоговориКонтрагентів_Pointer(unigueID);
+
+                                    Program.GeneralForm?.CreateNotebookPage("Договори контрагентів", () => { return page; });
+
+                                    page.LoadRecords();
+
+                                    break;
+                                }
                             case "Валюта_Назва":
                                 {
                                     Валюти page = new Валюти();
