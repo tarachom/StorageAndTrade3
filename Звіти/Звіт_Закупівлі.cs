@@ -16,6 +16,7 @@ namespace StorageAndTrade
         DateTimeControl ДатаПочатокПеріоду = new DateTimeControl() { OnlyDate = true, Value = DateTime.Parse($"01.{DateTime.Now.Month}.{DateTime.Now.Year}") };
         DateTimeControl ДатаКінецьПеріоду = new DateTimeControl() { OnlyDate = true, Value = DateTime.Now };
         CheckButton ГрупуватиПоПеріоду = new CheckButton("Групувати по періоду (День)");
+        CheckButton СобівартістьЗакупки = new CheckButton("Собівартість закупки");
 
         Організації_PointerControl Організація = new Організації_PointerControl();
         Контрагенти_PointerControl Контрагент = new Контрагенти_PointerControl();
@@ -147,6 +148,12 @@ namespace StorageAndTrade
 
             hBoxGroupPeriod.PackStart(ГрупуватиПоПеріоду, false, false, 5);
 
+            //СобівартістьЗакупки
+            HBox hBoxSobivartyst = new HBox() { Halign = Align.Start };
+            vBox.PackStart(hBoxSobivartyst, false, false, 5);
+
+            hBoxSobivartyst.PackStart(СобівартістьЗакупки, false, false, 5);
+
             //Склад папка
             HBox hBoxSkaldPapka = new HBox() { Halign = Align.End };
             vBox.PackStart(hBoxSkaldPapka, false, false, 5);
@@ -220,15 +227,9 @@ namespace StorageAndTrade
 
             string query = $@"
 SELECT 
-";
-
-            if (ГрупуватиПоПеріоду.Active)
-                query += $@"
+" + (ГрупуватиПоПеріоду.Active ? $@"
     Закупівлі.{Закупівлі_Обороти_TablePart.Період} AS Період,
-    TO_CHAR(Закупівлі.{Закупівлі_Обороти_TablePart.Період}, 'dd.mm.yyyy') AS Період_Назва,
-";
-
-            query += $@" 
+    TO_CHAR(Закупівлі.{Закупівлі_Обороти_TablePart.Період}, 'dd.mm.yyyy') AS Період_Назва," : "") + $@" 
     Закупівлі.{Закупівлі_Обороти_TablePart.Організація} AS Організація,
     Довідник_Організації.{Організації_Const.Назва} AS Організація_Назва,
     Закупівлі.{Закупівлі_Обороти_TablePart.Склад} AS Склад,
@@ -243,8 +244,8 @@ SELECT
     Закупівлі.{Закупівлі_Обороти_TablePart.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
     Довідник_ХарактеристикиНоменклатури.{ХарактеристикиНоменклатури_Const.Назва} AS ХарактеристикаНоменклатури_Назва,
     ROUND(SUM(Закупівлі.{Закупівлі_Обороти_TablePart.Кількість}), 2) AS Кількість,
-    ROUND(SUM(Закупівлі.{Закупівлі_Обороти_TablePart.Сума}), 2) AS Сума,
-    Закупівлі.{Закупівлі_Обороти_TablePart.Собівартість} AS Собівартість
+    ROUND(SUM(Закупівлі.{Закупівлі_Обороти_TablePart.Сума}), 2) AS Сума" +
+    (СобівартістьЗакупки.Active ? $", Закупівлі.{Закупівлі_Обороти_TablePart.Собівартість} AS Собівартість" : "") + $@"
 FROM 
     {Закупівлі_Обороти_TablePart.TABLE} AS Закупівлі
 
@@ -264,6 +265,7 @@ WHERE
     Закупівлі.{Закупівлі_Обороти_TablePart.Період} >= @ПочатокПеріоду AND
     Закупівлі.{Закупівлі_Обороти_TablePart.Період} <= @КінецьПеріоду
 ";
+
             #region WHERE
 
             //Відбір по вибраному елементу Організація
@@ -403,35 +405,18 @@ WHERE
 
             #endregion
 
-            query += $@"
-GROUP BY
-";
-
-            if (ГрупуватиПоПеріоду.Active)
-                query += $@"
-    Період, Період_Назва,
-";
-
-            query += $@"
+            query += @"
+GROUP BY " +
+    (ГрупуватиПоПеріоду.Active ? "Період, Період_Назва, " : "") + @"
     Організація, Організація_Назва,
     Склад, Склад_Назва,
     Контрагент, Контрагент_Назва,
     Договір, Договір_Назва,
     Номенклатура, Номенклатура_Назва,
-    ХарактеристикаНоменклатури, ХарактеристикаНоменклатури_Назва,
-    Собівартість
-";
-
-            query += $@"
-ORDER BY
-";
-
-            if (ГрупуватиПоПеріоду.Active)
-                query += $@"
-    Період,
-";
-
-            query += $@"
+    ХарактеристикаНоменклатури, ХарактеристикаНоменклатури_Назва" +
+    (СобівартістьЗакупки.Active ? ", Собівартість" : "") + @"
+ORDER BY " +
+    (ГрупуватиПоПеріоду.Active ? "Період," : "") + @"
     Організація_Назва, Склад_Назва, Контрагент_Назва, Договір_Назва, Номенклатура_Назва, ХарактеристикаНоменклатури_Назва
 ";
             #endregion

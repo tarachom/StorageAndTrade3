@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 03.01.2023 21:11:03
+ * Дата конфігурації: 03.01.2023 22:05:46
  *
  */
 
@@ -15641,6 +15641,18 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                     break;
                 }
                 
+                case "Продажі":
+                {
+                    
+                    /* QueryBlock: Обороти */
+                        
+                    Config.Kernel!.DataBase.ExecuteSQL($@"DELETE FROM {Продажі_Обороти_TablePart.TABLE} WHERE {Продажі_Обороти_TablePart.TABLE}.{Продажі_Обороти_TablePart.Період} = @ПеріодДеньВідбір", paramQuery, transactionID);
+                        
+                    Config.Kernel!.DataBase.ExecuteSQL($@"INSERT INTO {Продажі_Обороти_TablePart.TABLE} ( uid, {Продажі_Обороти_TablePart.Період}, {Продажі_Обороти_TablePart.Організація}, {Продажі_Обороти_TablePart.Склад}, {Продажі_Обороти_TablePart.Контрагент}, {Продажі_Обороти_TablePart.Договір}, {Продажі_Обороти_TablePart.Номенклатура}, {Продажі_Обороти_TablePart.ХарактеристикаНоменклатури}, {Продажі_Обороти_TablePart.Кількість}, {Продажі_Обороти_TablePart.Сума}, {Продажі_Обороти_TablePart.Собівартість} ) SELECT uuid_generate_v4(), date_trunc('day', Продажі.period::timestamp) AS Період, Продажі.{Продажі_Const.Організація} AS Організація, Продажі.{Продажі_Const.Склад} AS Склад, Продажі.{Продажі_Const.Контрагент} AS Контрагент, Продажі.{Продажі_Const.Договір} AS Договір, Продажі.{Продажі_Const.Номенклатура} AS Номенклатура, Продажі.{Продажі_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури, SUM(Продажі.{Продажі_Const.Кількість}) AS Кількість, SUM(Продажі.{Продажі_Const.Сума}) AS Сума, Продажі.{Продажі_Const.Собівартість} AS Собівартість FROM {Продажі_Const.TABLE} AS Продажі WHERE date_trunc('day', Продажі.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, Організація, Склад, Контрагент, Договір, Номенклатура, ХарактеристикаНоменклатури, Собівартість HAVING SUM(Продажі.{Продажі_Const.Кількість}) != 0 OR SUM(Продажі.{Продажі_Const.Сума}) != 0", paramQuery, transactionID);
+                        
+                    break;
+                }
+                
             }
             Config.Kernel!.DataBase.CommitTransaction(transactionID);
         }
@@ -18740,6 +18752,241 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             public decimal СумаДоходу { get; set; }
             public decimal Собівартість { get; set; }
             public Довідники.Валюти_Pointer ВалютаДокументу { get; set; }
+            
+        }            
+    }
+    
+    #endregion
+  
+    #region REGISTER "Продажі"
+    
+    public static class Продажі_Const
+    {
+        public const string TABLE = "tab_a66";
+		public static readonly string[] AllowDocumentSpendTable = new string[] {  };
+		public static readonly string[] AllowDocumentSpendType = new string[] {  };
+        
+        public const string Організація = "col_a5";
+        public const string Склад = "col_a6";
+        public const string Контрагент = "col_a7";
+        public const string Договір = "col_b3";
+        public const string Номенклатура = "col_a1";
+        public const string ХарактеристикаНоменклатури = "col_a2";
+        public const string Кількість = "col_a8";
+        public const string Сума = "col_b1";
+        public const string Собівартість = "col_a3";
+    }
+	
+    
+    public class Продажі_RecordsSet : RegisterAccumulationRecordsSet
+    {
+        public Продажі_RecordsSet() : base(Config.Kernel!, "tab_a66", "Продажі",
+             new string[] { "col_a5", "col_a6", "col_a7", "col_b3", "col_a1", "col_a2", "col_a8", "col_b1", "col_a3" }) 
+        {
+            Records = new List<Record>();
+        }
+		
+        public List<Record> Records { get; set; }
+        
+        public void Read()
+        {
+            Records.Clear();
+            
+            base.BaseRead();
+            
+            foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
+            {
+                Record record = new Record();
+                record.UID = (Guid)fieldValue["uid"];
+                record.Period = DateTime.Parse(fieldValue["period"]?.ToString() ?? DateTime.MinValue.ToString());
+                record.Income = (bool)fieldValue["income"];
+                record.Owner = (Guid)fieldValue["owner"];
+                record.Організація = new Довідники.Організації_Pointer(fieldValue["col_a5"]);
+                record.Склад = new Довідники.Склади_Pointer(fieldValue["col_a6"]);
+                record.Контрагент = new Довідники.Контрагенти_Pointer(fieldValue["col_a7"]);
+                record.Договір = new Довідники.ДоговориКонтрагентів_Pointer(fieldValue["col_b3"]);
+                record.Номенклатура = new Довідники.Номенклатура_Pointer(fieldValue["col_a1"]);
+                record.ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer(fieldValue["col_a2"]);
+                record.Кількість = (fieldValue["col_a8"] != DBNull.Value) ? (decimal)fieldValue["col_a8"] : 0;
+                record.Сума = (fieldValue["col_b1"] != DBNull.Value) ? (decimal)fieldValue["col_b1"] : 0;
+                record.Собівартість = (fieldValue["col_a3"] != DBNull.Value) ? (decimal)fieldValue["col_a3"] : 0;
+                
+                Records.Add(record);
+            }
+            
+            base.BaseClear();
+        }
+        
+        public void Save(DateTime period, Guid owner) 
+        {
+            base.BaseBeginTransaction();
+            base.BaseSelectPeriodForOwner(owner, period);
+            base.BaseDelete(owner);
+            foreach (Record record in Records)
+            {
+                record.Period = period;
+                record.Owner = owner;
+                Dictionary<string, object> fieldValue = new Dictionary<string, object>();
+                fieldValue.Add("col_a5", record.Організація.UnigueID.UGuid);
+                fieldValue.Add("col_a6", record.Склад.UnigueID.UGuid);
+                fieldValue.Add("col_a7", record.Контрагент.UnigueID.UGuid);
+                fieldValue.Add("col_b3", record.Договір.UnigueID.UGuid);
+                fieldValue.Add("col_a1", record.Номенклатура.UnigueID.UGuid);
+                fieldValue.Add("col_a2", record.ХарактеристикаНоменклатури.UnigueID.UGuid);
+                fieldValue.Add("col_a8", record.Кількість);
+                fieldValue.Add("col_b1", record.Сума);
+                fieldValue.Add("col_a3", record.Собівартість);
+                
+                base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
+            }
+            base.BaseTrigerAdd(period, owner);
+            base.BaseCommitTransaction();
+        }
+
+        public void Delete(Guid owner)
+        {
+            base.BaseSelectPeriodForOwner(owner);
+            base.BaseDelete(owner);
+        }
+        
+        
+        public class Record : RegisterAccumulationRecord
+        {
+            public Record()
+            {
+                Організація = new Довідники.Організації_Pointer();
+                Склад = new Довідники.Склади_Pointer();
+                Контрагент = new Довідники.Контрагенти_Pointer();
+                Договір = new Довідники.ДоговориКонтрагентів_Pointer();
+                Номенклатура = new Довідники.Номенклатура_Pointer();
+                ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer();
+                Кількість = 0;
+                Сума = 0;
+                Собівартість = 0;
+                
+            }
+            public Довідники.Організації_Pointer Організація { get; set; }
+            public Довідники.Склади_Pointer Склад { get; set; }
+            public Довідники.Контрагенти_Pointer Контрагент { get; set; }
+            public Довідники.ДоговориКонтрагентів_Pointer Договір { get; set; }
+            public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
+            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; }
+            public decimal Кількість { get; set; }
+            public decimal Сума { get; set; }
+            public decimal Собівартість { get; set; }
+            
+        }
+    }
+    
+    
+    public class Продажі_Обороти_TablePart : RegisterAccumulationTablePart
+    {
+        public Продажі_Обороти_TablePart() : base(Config.Kernel!, "tab_a68",
+              new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b1" }) 
+        {
+            Records = new List<Record>();
+        }
+        
+        public const string TABLE = "tab_a68";
+        
+        public const string Період = "col_a1";
+        public const string Організація = "col_a2";
+        public const string Склад = "col_a3";
+        public const string Контрагент = "col_a4";
+        public const string Договір = "col_a5";
+        public const string Номенклатура = "col_a6";
+        public const string ХарактеристикаНоменклатури = "col_a7";
+        public const string Кількість = "col_a8";
+        public const string Сума = "col_a9";
+        public const string Собівартість = "col_b1";
+        public List<Record> Records { get; set; }
+    
+        public void Read()
+        {
+            Records.Clear();
+            base.BaseRead();
+
+            foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
+            {
+                Record record = new Record();
+                record.UID = (Guid)fieldValue["uid"];
+                
+                record.Період = (fieldValue["col_a1"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a1"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                record.Організація = new Довідники.Організації_Pointer(fieldValue["col_a2"]);
+                record.Склад = new Довідники.Склади_Pointer(fieldValue["col_a3"]);
+                record.Контрагент = new Довідники.Контрагенти_Pointer(fieldValue["col_a4"]);
+                record.Договір = new Довідники.ДоговориКонтрагентів_Pointer(fieldValue["col_a5"]);
+                record.Номенклатура = new Довідники.Номенклатура_Pointer(fieldValue["col_a6"]);
+                record.ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer(fieldValue["col_a7"]);
+                record.Кількість = (fieldValue["col_a8"] != DBNull.Value) ? (decimal)fieldValue["col_a8"] : 0;
+                record.Сума = (fieldValue["col_a9"] != DBNull.Value) ? (decimal)fieldValue["col_a9"] : 0;
+                record.Собівартість = (fieldValue["col_b1"] != DBNull.Value) ? (decimal)fieldValue["col_b1"] : 0;
+                
+                Records.Add(record);
+            }
+        
+            base.BaseClear();
+        }
+    
+        public void Save(bool clear_all_before_save /*= true*/) 
+        {
+            base.BaseBeginTransaction();
+            
+            if (clear_all_before_save)
+                base.BaseDelete();
+
+            foreach (Record record in Records)
+            {
+                Dictionary<string, object> fieldValue = new Dictionary<string, object>();
+
+                fieldValue.Add("col_a1", record.Період);
+                fieldValue.Add("col_a2", record.Організація.UnigueID.UGuid);
+                fieldValue.Add("col_a3", record.Склад.UnigueID.UGuid);
+                fieldValue.Add("col_a4", record.Контрагент.UnigueID.UGuid);
+                fieldValue.Add("col_a5", record.Договір.UnigueID.UGuid);
+                fieldValue.Add("col_a6", record.Номенклатура.UnigueID.UGuid);
+                fieldValue.Add("col_a7", record.ХарактеристикаНоменклатури.UnigueID.UGuid);
+                fieldValue.Add("col_a8", record.Кількість);
+                fieldValue.Add("col_a9", record.Сума);
+                fieldValue.Add("col_b1", record.Собівартість);
+                
+                base.BaseSave(record.UID, fieldValue);
+            }
+            
+            base.BaseCommitTransaction();
+        }
+    
+        public void Delete()
+        {
+            base.BaseDelete();
+        }
+        
+        public class Record : RegisterAccumulationTablePartRecord
+        {
+            public Record()
+            {
+                Період = DateTime.MinValue;
+                Організація = new Довідники.Організації_Pointer();
+                Склад = new Довідники.Склади_Pointer();
+                Контрагент = new Довідники.Контрагенти_Pointer();
+                Договір = new Довідники.ДоговориКонтрагентів_Pointer();
+                Номенклатура = new Довідники.Номенклатура_Pointer();
+                ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer();
+                Кількість = 0;
+                Сума = 0;
+                Собівартість = 0;
+                
+            }
+            public DateTime Період { get; set; }
+            public Довідники.Організації_Pointer Організація { get; set; }
+            public Довідники.Склади_Pointer Склад { get; set; }
+            public Довідники.Контрагенти_Pointer Контрагент { get; set; }
+            public Довідники.ДоговориКонтрагентів_Pointer Договір { get; set; }
+            public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
+            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; }
+            public decimal Кількість { get; set; }
+            public decimal Сума { get; set; }
+            public decimal Собівартість { get; set; }
             
         }            
     }
