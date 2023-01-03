@@ -26,7 +26,7 @@ namespace StorageAndTrade
         Організації_PointerControl ОрганізаціяОтримувач = new Організації_PointerControl();
         Валюти_PointerControl Валюта = new Валюти_PointerControl();
         Каси_PointerControl Каса = new Каси_PointerControl();
-        Каси_PointerControl КасаОтримувач = new Каси_PointerControl(){Caption = "Каса отримувач:"};
+        Каси_PointerControl КасаОтримувач = new Каси_PointerControl() { Caption = "Каса отримувач:" };
         NumericControl Курс = new NumericControl();
         NumericControl СумаДокументу = new NumericControl();
         Контрагенти_PointerControl Контрагент = new Контрагенти_PointerControl();

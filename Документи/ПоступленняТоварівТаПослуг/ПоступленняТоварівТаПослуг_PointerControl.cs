@@ -31,7 +31,7 @@ namespace StorageAndTrade
         }
 
         //Відбір по періоду в журналі
-        public bool UseWherePeriod { get; set; } = false;
+        public bool UseWherePeriod { get; set; } = true;
 
         protected override void OpenSelect(object? sender, EventArgs args)
         {

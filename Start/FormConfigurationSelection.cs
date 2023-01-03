@@ -10,7 +10,7 @@ namespace StorageAndTrade
         ListBox listBoxDataBase;
         ScrolledWindow scrolledWindowListBox;
 
-        public FormConfigurationSelection() : base("Зберігання та Торгівля для України | Вибір бази даних")
+        public FormConfigurationSelection() : base("\"Зберігання та Торгівля\" для України | Вибір бази даних")
         {
             SetDefaultSize(660, 320);
             SetPosition(WindowPosition.Center);

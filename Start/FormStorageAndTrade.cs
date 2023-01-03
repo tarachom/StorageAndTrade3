@@ -11,7 +11,7 @@ namespace StorageAndTrade
         Notebook topNotebook;
         Statusbar statusBar;
 
-        public FormStorageAndTrade() : base("Зберігання та Торгівля для України")
+        public FormStorageAndTrade() : base("\"Зберігання та Торгівля\" для України")
         {
             SetDefaultSize(1500, 900);
             SetPosition(WindowPosition.Center);
@@ -50,7 +50,7 @@ namespace StorageAndTrade
         void CreateLeftMenu(HBox hbox)
         {
             VBox vbox = new VBox();
-            vbox.BorderWidth = 15;
+            vbox.BorderWidth = 10;
 
             ScrolledWindow scrolLeftMenu = new ScrolledWindow() { ShadowType = ShadowType.In, WidthRequest = 200 };
             scrolLeftMenu.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);

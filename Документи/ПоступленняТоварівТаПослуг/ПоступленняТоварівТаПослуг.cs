@@ -106,6 +106,7 @@ namespace StorageAndTrade
             toolbar.Add(provodkyButton);
 
             MenuToolButton naOsnoviButton = new MenuToolButton(Stock.New) { Label = "Ввести на основі", IsImportant = true };
+            naOsnoviButton.Clicked += OnNaOsnoviClick;
             naOsnoviButton.Menu = ToolbarNaOsnoviSubMenu();
             toolbar.Add(naOsnoviButton);
         }
@@ -149,7 +150,7 @@ namespace StorageAndTrade
             if ((int)Константи.ЖурналиДокументів.ОсновнийТипПеріоду_Const != 0)
                 ComboBoxPeriodWhere.ActiveId = Константи.ЖурналиДокументів.ОсновнийТипПеріоду_Const.ToString();
             else
-                ComboBoxPeriodWhere.Active = 0;                
+                ComboBoxPeriodWhere.Active = 0;
         }
 
         public void LoadRecords()
@@ -430,6 +431,11 @@ namespace StorageAndTrade
         //
         // На основі
         //
+
+        void OnNaOsnoviClick(object? sender, EventArgs arg)
+        {
+            
+        }
 
         void OnNewDocNaOsnovi_KasovyiOrder(object? sender, EventArgs args)
         {
