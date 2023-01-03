@@ -2,32 +2,12 @@
 <root>
   <Configuration Select="True">
     <Key>6b4ef58d-4b62-4885-8059-eb6f43c51c2d</Key>
-    <Name>Новий</Name>
+    <Name>"Зберігання та Торгівля" для України</Name>
     <Server>localhost</Server>
     <Port>5432</Port>
     <Login>postgres</Login>
     <Password>1</Password>
     <BaseName>storage_and_trade</BaseName>
-    <OtherParam />
-  </Configuration>
-  <Configuration Select="False">
-    <Key>acb607da-8cdf-42ed-a8ae-6afd14b773d3</Key>
-    <Name>Новий - Demo</Name>
-    <Server>localhost</Server>
-    <Port>5432</Port>
-    <Login>postgres</Login>
-    <Password>1</Password>
-    <BaseName>storage_and_trade_demo</BaseName>
-    <OtherParam />
-  </Configuration>
-  <Configuration Select="False">
-    <Key>e9217a0c-9f92-4510-9f8e-ab3de3c016b0</Key>
-    <Name>Новий - test</Name>
-    <Server>localhost</Server>
-    <Port>5432</Port>
-    <Login>postgres</Login>
-    <Password>1</Password>
-    <BaseName>storage_and_trade_test</BaseName>
     <OtherParam />
   </Configuration>
 </root>
