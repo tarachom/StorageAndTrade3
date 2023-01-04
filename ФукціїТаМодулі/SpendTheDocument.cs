@@ -1183,7 +1183,7 @@ FROM
 
             #endregion
 
-            #region Рух по регістрах
+            #region РозрахункиЗКлієнтами
 
             РозрахункиЗКлієнтами_RecordsSet розрахункиЗКлієнтами_RecordsSet = new РозрахункиЗКлієнтами_RecordsSet();
 
@@ -1201,6 +1201,32 @@ FROM
 
             #endregion
 
+            #region Продажі
+
+            Продажі_RecordsSet продажі_RecordsSet = new Продажі_RecordsSet();
+
+            foreach (АктВиконанихРобіт_Послуги_TablePart.Record ТовариРядок in ДокументОбєкт.Послуги_TablePart.Records)
+            {
+                Продажі_RecordsSet.Record record = new Продажі_RecordsSet.Record();
+                продажі_RecordsSet.Records.Add(record);
+
+                record.Owner = ДокументОбєкт.UnigueID.UGuid;
+                record.Організація = ДокументОбєкт.Організація;
+                //record.Склад = ДокументОбєкт.Склад;
+                record.Контрагент = ДокументОбєкт.Контрагент;
+                record.Договір = ДокументОбєкт.Договір;
+                record.Номенклатура = ТовариРядок.Номенклатура;
+                record.ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури;
+                record.Кількість = ТовариРядок.Кількість;
+                record.Сума = ТовариРядок.Сума;
+                record.Дохід = ТовариРядок.Сума;
+                //record.Собівартість = 0;
+            }
+
+            продажі_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+
+            #endregion
+
             return true;
         }
 
@@ -1208,6 +1234,13 @@ FROM
         {
             РозрахункиЗКлієнтами_RecordsSet розрахункиЗКлієнтами_RecordsSet = new РозрахункиЗКлієнтами_RecordsSet();
             розрахункиЗКлієнтами_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+
+            //
+            // Обороти
+            //
+
+            Продажі_RecordsSet продажі_RecordsSet = new Продажі_RecordsSet();
+            продажі_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
         }
     }
 
