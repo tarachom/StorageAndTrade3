@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 03.01.2023 22:05:46
+ * Дата конфігурації: 04.01.2023 13:05:28
  *
  */
 
@@ -15648,7 +15648,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                         
                     Config.Kernel!.DataBase.ExecuteSQL($@"DELETE FROM {Продажі_Обороти_TablePart.TABLE} WHERE {Продажі_Обороти_TablePart.TABLE}.{Продажі_Обороти_TablePart.Період} = @ПеріодДеньВідбір", paramQuery, transactionID);
                         
-                    Config.Kernel!.DataBase.ExecuteSQL($@"INSERT INTO {Продажі_Обороти_TablePart.TABLE} ( uid, {Продажі_Обороти_TablePart.Період}, {Продажі_Обороти_TablePart.Організація}, {Продажі_Обороти_TablePart.Склад}, {Продажі_Обороти_TablePart.Контрагент}, {Продажі_Обороти_TablePart.Договір}, {Продажі_Обороти_TablePart.Номенклатура}, {Продажі_Обороти_TablePart.ХарактеристикаНоменклатури}, {Продажі_Обороти_TablePart.Кількість}, {Продажі_Обороти_TablePart.Сума}, {Продажі_Обороти_TablePart.Собівартість} ) SELECT uuid_generate_v4(), date_trunc('day', Продажі.period::timestamp) AS Період, Продажі.{Продажі_Const.Організація} AS Організація, Продажі.{Продажі_Const.Склад} AS Склад, Продажі.{Продажі_Const.Контрагент} AS Контрагент, Продажі.{Продажі_Const.Договір} AS Договір, Продажі.{Продажі_Const.Номенклатура} AS Номенклатура, Продажі.{Продажі_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури, SUM(Продажі.{Продажі_Const.Кількість}) AS Кількість, SUM(Продажі.{Продажі_Const.Сума}) AS Сума, Продажі.{Продажі_Const.Собівартість} AS Собівартість FROM {Продажі_Const.TABLE} AS Продажі WHERE date_trunc('day', Продажі.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, Організація, Склад, Контрагент, Договір, Номенклатура, ХарактеристикаНоменклатури, Собівартість HAVING SUM(Продажі.{Продажі_Const.Кількість}) != 0 OR SUM(Продажі.{Продажі_Const.Сума}) != 0", paramQuery, transactionID);
+                    Config.Kernel!.DataBase.ExecuteSQL($@"INSERT INTO {Продажі_Обороти_TablePart.TABLE} ( uid, {Продажі_Обороти_TablePart.Період}, {Продажі_Обороти_TablePart.Організація}, {Продажі_Обороти_TablePart.Склад}, {Продажі_Обороти_TablePart.Контрагент}, {Продажі_Обороти_TablePart.Договір}, {Продажі_Обороти_TablePart.Номенклатура}, {Продажі_Обороти_TablePart.ХарактеристикаНоменклатури}, {Продажі_Обороти_TablePart.Кількість}, {Продажі_Обороти_TablePart.Сума}, {Продажі_Обороти_TablePart.Дохід}, {Продажі_Обороти_TablePart.Собівартість} ) SELECT uuid_generate_v4(), date_trunc('day', Продажі.period::timestamp) AS Період, Продажі.{Продажі_Const.Організація} AS Організація, Продажі.{Продажі_Const.Склад} AS Склад, Продажі.{Продажі_Const.Контрагент} AS Контрагент, Продажі.{Продажі_Const.Договір} AS Договір, Продажі.{Продажі_Const.Номенклатура} AS Номенклатура, Продажі.{Продажі_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури, SUM(Продажі.{Продажі_Const.Кількість}) AS Кількість, SUM(Продажі.{Продажі_Const.Сума}) AS Сума, SUM(Продажі.{Продажі_Const.Дохід}) AS Дохід, Продажі.{Продажі_Const.Собівартість} AS Собівартість FROM {Продажі_Const.TABLE} AS Продажі WHERE date_trunc('day', Продажі.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, Організація, Склад, Контрагент, Договір, Номенклатура, ХарактеристикаНоменклатури, Собівартість HAVING SUM(Продажі.{Продажі_Const.Кількість}) != 0 OR SUM(Продажі.{Продажі_Const.Сума}) != 0 OR SUM(Продажі.{Продажі_Const.Дохід}) != 0", paramQuery, transactionID);
                         
                     break;
                 }
@@ -18774,6 +18774,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public const string ХарактеристикаНоменклатури = "col_a2";
         public const string Кількість = "col_a8";
         public const string Сума = "col_b1";
+        public const string Дохід = "col_a4";
         public const string Собівартість = "col_a3";
     }
 	
@@ -18781,7 +18782,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
     public class Продажі_RecordsSet : RegisterAccumulationRecordsSet
     {
         public Продажі_RecordsSet() : base(Config.Kernel!, "tab_a66", "Продажі",
-             new string[] { "col_a5", "col_a6", "col_a7", "col_b3", "col_a1", "col_a2", "col_a8", "col_b1", "col_a3" }) 
+             new string[] { "col_a5", "col_a6", "col_a7", "col_b3", "col_a1", "col_a2", "col_a8", "col_b1", "col_a4", "col_a3" }) 
         {
             Records = new List<Record>();
         }
@@ -18809,6 +18810,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 record.ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer(fieldValue["col_a2"]);
                 record.Кількість = (fieldValue["col_a8"] != DBNull.Value) ? (decimal)fieldValue["col_a8"] : 0;
                 record.Сума = (fieldValue["col_b1"] != DBNull.Value) ? (decimal)fieldValue["col_b1"] : 0;
+                record.Дохід = (fieldValue["col_a4"] != DBNull.Value) ? (decimal)fieldValue["col_a4"] : 0;
                 record.Собівартість = (fieldValue["col_a3"] != DBNull.Value) ? (decimal)fieldValue["col_a3"] : 0;
                 
                 Records.Add(record);
@@ -18835,6 +18837,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_a2", record.ХарактеристикаНоменклатури.UnigueID.UGuid);
                 fieldValue.Add("col_a8", record.Кількість);
                 fieldValue.Add("col_b1", record.Сума);
+                fieldValue.Add("col_a4", record.Дохід);
                 fieldValue.Add("col_a3", record.Собівартість);
                 
                 base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
@@ -18862,6 +18865,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer();
                 Кількість = 0;
                 Сума = 0;
+                Дохід = 0;
                 Собівартість = 0;
                 
             }
@@ -18873,6 +18877,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; }
             public decimal Кількість { get; set; }
             public decimal Сума { get; set; }
+            public decimal Дохід { get; set; }
             public decimal Собівартість { get; set; }
             
         }
@@ -18881,13 +18886,13 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
     
     public class Продажі_Обороти_TablePart : RegisterAccumulationTablePart
     {
-        public Продажі_Обороти_TablePart() : base(Config.Kernel!, "tab_a68",
-              new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b1" }) 
+        public Продажі_Обороти_TablePart() : base(Config.Kernel!, "tab_a70",
+              new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b1", "col_b2" }) 
         {
             Records = new List<Record>();
         }
         
-        public const string TABLE = "tab_a68";
+        public const string TABLE = "tab_a70";
         
         public const string Період = "col_a1";
         public const string Організація = "col_a2";
@@ -18898,7 +18903,8 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public const string ХарактеристикаНоменклатури = "col_a7";
         public const string Кількість = "col_a8";
         public const string Сума = "col_a9";
-        public const string Собівартість = "col_b1";
+        public const string Дохід = "col_b1";
+        public const string Собівартість = "col_b2";
         public List<Record> Records { get; set; }
     
         public void Read()
@@ -18920,7 +18926,8 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 record.ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer(fieldValue["col_a7"]);
                 record.Кількість = (fieldValue["col_a8"] != DBNull.Value) ? (decimal)fieldValue["col_a8"] : 0;
                 record.Сума = (fieldValue["col_a9"] != DBNull.Value) ? (decimal)fieldValue["col_a9"] : 0;
-                record.Собівартість = (fieldValue["col_b1"] != DBNull.Value) ? (decimal)fieldValue["col_b1"] : 0;
+                record.Дохід = (fieldValue["col_b1"] != DBNull.Value) ? (decimal)fieldValue["col_b1"] : 0;
+                record.Собівартість = (fieldValue["col_b2"] != DBNull.Value) ? (decimal)fieldValue["col_b2"] : 0;
                 
                 Records.Add(record);
             }
@@ -18948,7 +18955,8 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_a7", record.ХарактеристикаНоменклатури.UnigueID.UGuid);
                 fieldValue.Add("col_a8", record.Кількість);
                 fieldValue.Add("col_a9", record.Сума);
-                fieldValue.Add("col_b1", record.Собівартість);
+                fieldValue.Add("col_b1", record.Дохід);
+                fieldValue.Add("col_b2", record.Собівартість);
                 
                 base.BaseSave(record.UID, fieldValue);
             }
@@ -18974,6 +18982,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer();
                 Кількість = 0;
                 Сума = 0;
+                Дохід = 0;
                 Собівартість = 0;
                 
             }
@@ -18986,6 +18995,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; }
             public decimal Кількість { get; set; }
             public decimal Сума { get; set; }
+            public decimal Дохід { get; set; }
             public decimal Собівартість { get; set; }
             
         }            

@@ -5,7 +5,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>03.01.2023 22:05:46</DateTimeSave>
+  <DateTimeSave>04.01.2023 13:05:28</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -15830,6 +15830,14 @@ GROUP BY
             </Desc>
             <IsIndex>0</IsIndex>
           </Field>
+          <Field>
+            <Name>Дохід</Name>
+            <NameInTable>col_a4</NameInTable>
+            <Type>numeric</Type>
+            <Desc>
+            </Desc>
+            <IsIndex>0</IsIndex>
+          </Field>
         </Fields>
       </ResourcesFields>
       <PropertyFields>
@@ -15848,7 +15856,7 @@ GROUP BY
       <TabularParts>
         <TablePart>
           <Name>Обороти</Name>
-          <Table>tab_a68</Table>
+          <Table>tab_a70</Table>
           <Desc>Віртуальна таблиця</Desc>
           <Fields>
             <Field>
@@ -15930,8 +15938,16 @@ GROUP BY
               <IsIndex>0</IsIndex>
             </Field>
             <Field>
-              <Name>Собівартість</Name>
+              <Name>Дохід</Name>
               <NameInTable>col_b1</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+            <Field>
+              <Name>Собівартість</Name>
+              <NameInTable>col_b2</NameInTable>
               <Type>numeric</Type>
               <Desc>
               </Desc>
@@ -15962,6 +15978,7 @@ INSERT INTO {Продажі_Обороти_TablePart.TABLE}
     {Продажі_Обороти_TablePart.ХарактеристикаНоменклатури},
     {Продажі_Обороти_TablePart.Кількість},
     {Продажі_Обороти_TablePart.Сума},
+    {Продажі_Обороти_TablePart.Дохід},
     {Продажі_Обороти_TablePart.Собівартість}
 )
 SELECT
@@ -15976,6 +15993,7 @@ SELECT
 
     SUM(Продажі.{Продажі_Const.Кількість}) AS Кількість,
     SUM(Продажі.{Продажі_Const.Сума}) AS Сума,
+    SUM(Продажі.{Продажі_Const.Дохід}) AS Дохід,
 
     Продажі.{Продажі_Const.Собівартість} AS Собівартість
 
@@ -15991,7 +16009,8 @@ GROUP BY
 
 HAVING
     SUM(Продажі.{Продажі_Const.Кількість}) != 0 OR
-    SUM(Продажі.{Продажі_Const.Сума}) != 0 
+    SUM(Продажі.{Продажі_Const.Сума}) != 0 OR
+    SUM(Продажі.{Продажі_Const.Дохід}) != 0 
 
 
 
