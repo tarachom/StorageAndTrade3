@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 04.01.2023 13:10:52
+ * Дата конфігурації: 04.01.2023 13:49:36
  *
  */
 
@@ -15629,18 +15629,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                     break;
                 }
                 
-                case "ДоходиТаСобівартістьПродажів":
-                {
-                    
-                    /* QueryBlock: Обороти */
-                        
-                    Config.Kernel!.DataBase.ExecuteSQL($@"DELETE FROM {ДоходиТаСобівартістьПродажів_Обороти_TablePart.TABLE} WHERE {ДоходиТаСобівартістьПродажів_Обороти_TablePart.TABLE}.{ДоходиТаСобівартістьПродажів_Обороти_TablePart.Період} = @ПеріодДеньВідбір", paramQuery, transactionID);
-                        
-                    Config.Kernel!.DataBase.ExecuteSQL($@"INSERT INTO {ДоходиТаСобівартістьПродажів_Обороти_TablePart.TABLE} ( uid, {ДоходиТаСобівартістьПродажів_Обороти_TablePart.Період}, {ДоходиТаСобівартістьПродажів_Обороти_TablePart.ДокументКомпозит}, {ДоходиТаСобівартістьПродажів_Обороти_TablePart.ТипЗапасів}, {ДоходиТаСобівартістьПродажів_Обороти_TablePart.ВидЗапасів}, {ДоходиТаСобівартістьПродажів_Обороти_TablePart.Склад}, {ДоходиТаСобівартістьПродажів_Обороти_TablePart.Договір}, {ДоходиТаСобівартістьПродажів_Обороти_TablePart.ГосподарськаОперація}, {ДоходиТаСобівартістьПродажів_Обороти_TablePart.АналітикаНоменклатуриКомпозит}, {ДоходиТаСобівартістьПродажів_Обороти_TablePart.АналітикаКонтрагентівКомпозит}, {ДоходиТаСобівартістьПродажів_Обороти_TablePart.Підрозділ}, {ДоходиТаСобівартістьПродажів_Обороти_TablePart.Кількість}, {ДоходиТаСобівартістьПродажів_Обороти_TablePart.СумаДоходу}, {ДоходиТаСобівартістьПродажів_Обороти_TablePart.Собівартість}, {ДоходиТаСобівартістьПродажів_Обороти_TablePart.ВалютаДокументу} ) SELECT uuid_generate_v4(), date_trunc('day', ДоходиТаСобівартістьПродажів.period::timestamp) AS Період, ДоходиТаСобівартістьПродажів.{ДоходиТаСобівартістьПродажів_Const.ДокументКомпозит} AS ДокументКомпозит, ДоходиТаСобівартістьПродажів.{ДоходиТаСобівартістьПродажів_Const.ТипЗапасів} AS ТипЗапасів, ДоходиТаСобівартістьПродажів.{ДоходиТаСобівартістьПродажів_Const.ВидЗапасів} AS ВидЗапасів, ДоходиТаСобівартістьПродажів.{ДоходиТаСобівартістьПродажів_Const.Склад} AS Склад, ДоходиТаСобівартістьПродажів.{ДоходиТаСобівартістьПродажів_Const.Договір} AS Договір, ДоходиТаСобівартістьПродажів.{ДоходиТаСобівартістьПродажів_Const.ГосподарськаОперація} AS ГосподарськаОперація, ДоходиТаСобівартістьПродажів.{ДоходиТаСобівартістьПродажів_Const.АналітикаНоменклатуриКомпозит} AS АналітикаНоменклатуриКомпозит, ДоходиТаСобівартістьПродажів.{ДоходиТаСобівартістьПродажів_Const.АналітикаКонтрагентівКомпозит} AS АналітикаКонтрагентівКомпозит, ДоходиТаСобівартістьПродажів.{ДоходиТаСобівартістьПродажів_Const.Підрозділ} AS Підрозділ, SUM(ДоходиТаСобівартістьПродажів.{ДоходиТаСобівартістьПродажів_Const.Кількість}) AS Кількість, SUM(ДоходиТаСобівартістьПродажів.{ДоходиТаСобівартістьПродажів_Const.СумаДоходу}) AS СумаДоходу, SUM(ДоходиТаСобівартістьПродажів.{ДоходиТаСобівартістьПродажів_Const.Собівартість}) AS Собівартість, ДоходиТаСобівартістьПродажів.{ДоходиТаСобівартістьПродажів_Const.ВалютаДокументу} AS ВалютаДокументу FROM {ДоходиТаСобівартістьПродажів_Const.TABLE} AS ДоходиТаСобівартістьПродажів WHERE date_trunc('day', ДоходиТаСобівартістьПродажів.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, ДокументКомпозит, ТипЗапасів, ВидЗапасів, Склад, Договір, ГосподарськаОперація, АналітикаНоменклатуриКомпозит, АналітикаКонтрагентівКомпозит, ПідрозділВалютаДокументу", paramQuery, transactionID);
-                        
-                    break;
-                }
-                
                 case "Продажі":
                 {
                     
@@ -18623,138 +18611,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         }
     }
     
-    
-    public class ДоходиТаСобівартістьПродажів_Обороти_TablePart : RegisterAccumulationTablePart
-    {
-        public ДоходиТаСобівартістьПродажів_Обороти_TablePart() : base(Config.Kernel!, "tab_a64",
-              new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b1", "col_b2", "col_b3", "col_b4", "col_b5" }) 
-        {
-            Records = new List<Record>();
-        }
-        
-        public const string TABLE = "tab_a64";
-        
-        public const string Період = "col_a1";
-        public const string ДокументКомпозит = "col_a2";
-        public const string ТипЗапасів = "col_a3";
-        public const string ВидЗапасів = "col_a4";
-        public const string Склад = "col_a5";
-        public const string Договір = "col_a6";
-        public const string ГосподарськаОперація = "col_a7";
-        public const string АналітикаНоменклатуриКомпозит = "col_a8";
-        public const string АналітикаКонтрагентівКомпозит = "col_a9";
-        public const string Підрозділ = "col_b1";
-        public const string Кількість = "col_b2";
-        public const string СумаДоходу = "col_b3";
-        public const string Собівартість = "col_b4";
-        public const string ВалютаДокументу = "col_b5";
-        public List<Record> Records { get; set; }
-    
-        public void Read()
-        {
-            Records.Clear();
-            base.BaseRead();
-
-            foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
-            {
-                Record record = new Record();
-                record.UID = (Guid)fieldValue["uid"];
-                
-                record.Період = (fieldValue["col_a1"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a1"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
-                record.ДокументКомпозит = new Довідники.ПродажіДокументКомпозит_Pointer(fieldValue["col_a2"]);
-                record.ТипЗапасів = (fieldValue["col_a3"] != DBNull.Value) ? (Перелічення.ТипЗапасів)fieldValue["col_a3"] : 0;
-                record.ВидЗапасів = new Довідники.ВидиЗапасів_Pointer(fieldValue["col_a4"]);
-                record.Склад = new Довідники.Склади_Pointer(fieldValue["col_a5"]);
-                record.Договір = new Довідники.ДоговориКонтрагентів_Pointer(fieldValue["col_a6"]);
-                record.ГосподарськаОперація = (fieldValue["col_a7"] != DBNull.Value) ? (Перелічення.ГосподарськіОперації)fieldValue["col_a7"] : 0;
-                record.АналітикаНоменклатуриКомпозит = new Довідники.АналітикаНоменклатуриКомпозит_Pointer(fieldValue["col_a8"]);
-                record.АналітикаКонтрагентівКомпозит = new Довідники.АналітикаКонтрагентівКомпозит_Pointer(fieldValue["col_a9"]);
-                record.Підрозділ = new Довідники.СтруктураПідприємства_Pointer(fieldValue["col_b1"]);
-                record.Кількість = (fieldValue["col_b2"] != DBNull.Value) ? (decimal)fieldValue["col_b2"] : 0;
-                record.СумаДоходу = (fieldValue["col_b3"] != DBNull.Value) ? (decimal)fieldValue["col_b3"] : 0;
-                record.Собівартість = (fieldValue["col_b4"] != DBNull.Value) ? (decimal)fieldValue["col_b4"] : 0;
-                record.ВалютаДокументу = new Довідники.Валюти_Pointer(fieldValue["col_b5"]);
-                
-                Records.Add(record);
-            }
-        
-            base.BaseClear();
-        }
-    
-        public void Save(bool clear_all_before_save /*= true*/) 
-        {
-            base.BaseBeginTransaction();
-            
-            if (clear_all_before_save)
-                base.BaseDelete();
-
-            foreach (Record record in Records)
-            {
-                Dictionary<string, object> fieldValue = new Dictionary<string, object>();
-
-                fieldValue.Add("col_a1", record.Період);
-                fieldValue.Add("col_a2", record.ДокументКомпозит.UnigueID.UGuid);
-                fieldValue.Add("col_a3", (int)record.ТипЗапасів);
-                fieldValue.Add("col_a4", record.ВидЗапасів.UnigueID.UGuid);
-                fieldValue.Add("col_a5", record.Склад.UnigueID.UGuid);
-                fieldValue.Add("col_a6", record.Договір.UnigueID.UGuid);
-                fieldValue.Add("col_a7", (int)record.ГосподарськаОперація);
-                fieldValue.Add("col_a8", record.АналітикаНоменклатуриКомпозит.UnigueID.UGuid);
-                fieldValue.Add("col_a9", record.АналітикаКонтрагентівКомпозит.UnigueID.UGuid);
-                fieldValue.Add("col_b1", record.Підрозділ.UnigueID.UGuid);
-                fieldValue.Add("col_b2", record.Кількість);
-                fieldValue.Add("col_b3", record.СумаДоходу);
-                fieldValue.Add("col_b4", record.Собівартість);
-                fieldValue.Add("col_b5", record.ВалютаДокументу.UnigueID.UGuid);
-                
-                base.BaseSave(record.UID, fieldValue);
-            }
-            
-            base.BaseCommitTransaction();
-        }
-    
-        public void Delete()
-        {
-            base.BaseDelete();
-        }
-        
-        public class Record : RegisterAccumulationTablePartRecord
-        {
-            public Record()
-            {
-                Період = DateTime.MinValue;
-                ДокументКомпозит = new Довідники.ПродажіДокументКомпозит_Pointer();
-                ТипЗапасів = 0;
-                ВидЗапасів = new Довідники.ВидиЗапасів_Pointer();
-                Склад = new Довідники.Склади_Pointer();
-                Договір = new Довідники.ДоговориКонтрагентів_Pointer();
-                ГосподарськаОперація = 0;
-                АналітикаНоменклатуриКомпозит = new Довідники.АналітикаНоменклатуриКомпозит_Pointer();
-                АналітикаКонтрагентівКомпозит = new Довідники.АналітикаКонтрагентівКомпозит_Pointer();
-                Підрозділ = new Довідники.СтруктураПідприємства_Pointer();
-                Кількість = 0;
-                СумаДоходу = 0;
-                Собівартість = 0;
-                ВалютаДокументу = new Довідники.Валюти_Pointer();
-                
-            }
-            public DateTime Період { get; set; }
-            public Довідники.ПродажіДокументКомпозит_Pointer ДокументКомпозит { get; set; }
-            public Перелічення.ТипЗапасів ТипЗапасів { get; set; }
-            public Довідники.ВидиЗапасів_Pointer ВидЗапасів { get; set; }
-            public Довідники.Склади_Pointer Склад { get; set; }
-            public Довідники.ДоговориКонтрагентів_Pointer Договір { get; set; }
-            public Перелічення.ГосподарськіОперації ГосподарськаОперація { get; set; }
-            public Довідники.АналітикаНоменклатуриКомпозит_Pointer АналітикаНоменклатуриКомпозит { get; set; }
-            public Довідники.АналітикаКонтрагентівКомпозит_Pointer АналітикаКонтрагентівКомпозит { get; set; }
-            public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; }
-            public decimal Кількість { get; set; }
-            public decimal СумаДоходу { get; set; }
-            public decimal Собівартість { get; set; }
-            public Довідники.Валюти_Pointer ВалютаДокументу { get; set; }
-            
-        }            
-    }
     
     #endregion
   
