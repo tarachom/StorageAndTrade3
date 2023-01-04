@@ -68,6 +68,7 @@ namespace StorageAndTrade
             TreeViewGrid.ActivateOnSingleClick = true;
             TreeViewGrid.RowActivated += OnRowActivated;
             TreeViewGrid.ButtonPressEvent += OnButtonPressEvent;
+            TreeViewGrid.ButtonReleaseEvent += OnButtonReleaseEvent;
             scrollTree.Add(TreeViewGrid);
 
             PackStart(scrollTree, true, true, 0);
@@ -123,6 +124,23 @@ namespace StorageAndTrade
             return Menu;
         }
 
+        Menu PopUpContextMenu()
+        {
+            Menu Menu = new Menu();
+
+            MenuItem spendTheDocumentButton = new MenuItem("Провести документ");
+            spendTheDocumentButton.Activated += OnSpendTheDocument;
+            Menu.Append(spendTheDocumentButton);
+
+            MenuItem clearSpendButton = new MenuItem("Відмінити проведення");
+            clearSpendButton.Activated += OnClearSpend;
+            Menu.Append(clearSpendButton);
+
+            Menu.ShowAll();
+
+            return Menu;
+        }
+
         public void SetValue()
         {
             if ((int)Константи.ЖурналиДокументів.ОсновнийТипПеріоду_Const != 0)
@@ -157,6 +175,12 @@ namespace StorageAndTrade
 
                 SelectPointerItem = new РозхіднийКасовийОрдер_Pointer(unigueID);
             }
+        }
+
+        void OnButtonReleaseEvent(object? sender, ButtonReleaseEventArgs args)
+        {
+            if (args.Event.Button == 3 && TreeViewGrid.Selection.CountSelectedRows() != 0)
+                PopUpContextMenu().Popup();
         }
 
         void OnButtonPressEvent(object? sender, ButtonPressEventArgs args)

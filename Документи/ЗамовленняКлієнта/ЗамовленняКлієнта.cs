@@ -68,6 +68,7 @@ namespace StorageAndTrade
             TreeViewGrid.ActivateOnSingleClick = true;
             TreeViewGrid.RowActivated += OnRowActivated;
             TreeViewGrid.ButtonPressEvent += OnButtonPressEvent;
+            TreeViewGrid.ButtonReleaseEvent += OnButtonReleaseEvent;
             scrollTree.Add(TreeViewGrid);
 
             PackStart(scrollTree, true, true, 0);
@@ -106,6 +107,7 @@ namespace StorageAndTrade
             toolbar.Add(provodkyButton);
 
             MenuToolButton naOsnoviButton = new MenuToolButton(Stock.New) { Label = "Ввести на основі", IsImportant = true };
+            naOsnoviButton.Clicked += OnNaOsnoviClick;
             naOsnoviButton.Menu = ToolbarNaOsnoviSubMenu();
             toolbar.Add(naOsnoviButton);
         }
@@ -142,6 +144,23 @@ namespace StorageAndTrade
             MenuItem newDocPryhydnaNakladnaButton = new MenuItem("Поступлення товарів та послуг");
             newDocPryhydnaNakladnaButton.Activated += OnNewDocNaOsnovi_PryhydnaNakladna;
             Menu.Append(newDocPryhydnaNakladnaButton);
+
+            Menu.ShowAll();
+
+            return Menu;
+        }
+
+        Menu PopUpContextMenu()
+        {
+            Menu Menu = new Menu();
+
+            MenuItem spendTheDocumentButton = new MenuItem("Провести документ");
+            spendTheDocumentButton.Activated += OnSpendTheDocument;
+            Menu.Append(spendTheDocumentButton);
+
+            MenuItem clearSpendButton = new MenuItem("Відмінити проведення");
+            clearSpendButton.Activated += OnClearSpend;
+            Menu.Append(clearSpendButton);
 
             Menu.ShowAll();
 
@@ -223,6 +242,12 @@ namespace StorageAndTrade
 
                 SelectPointerItem = new ЗамовленняКлієнта_Pointer(unigueID);
             }
+        }
+
+        void OnButtonReleaseEvent(object? sender, ButtonReleaseEventArgs args)
+        {
+            if (args.Event.Button == 3 && TreeViewGrid.Selection.CountSelectedRows() != 0)
+                PopUpContextMenu().Popup();
         }
 
         void OnButtonPressEvent(object? sender, ButtonPressEventArgs args)
@@ -434,6 +459,16 @@ namespace StorageAndTrade
         //
         // На основі
         //
+
+        void OnNaOsnoviClick(object? sender, EventArgs arg)
+        {
+            if (sender != null)
+            {
+                MenuToolButton naOsnoviButton = (MenuToolButton)sender;
+                Menu Menu = (Menu)naOsnoviButton.Menu;
+                Menu.Popup();
+            }
+        }
 
         void OnNewDocNaOsnovi_RoshidnaNakladna(object? sender, EventArgs args)
         {
