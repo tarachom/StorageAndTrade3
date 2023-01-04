@@ -173,6 +173,32 @@ namespace StorageAndTrade
 
                             break;
                         }
+                    case "Закупівлі":
+                        {
+                            exist = true;
+                            blockCaption = "Закупівлі";
+
+                            visibleColumn = РухДокументівПоРегістрах.Закупівлі_ВидиміКолонки();
+                            dataColumn = РухДокументівПоРегістрах.Закупівлі_КолонкиДаних();
+                            textAlignColumn = РухДокументівПоРегістрах.Закупівлі_ПозиціяТекстуВКолонці();
+
+                            Config.Kernel.DataBase.SelectRequest(РухДокументівПоРегістрах.Закупівлі_Запит, paramQuery, out columnsName, out listRow);
+
+                            break;
+                        }
+                    case "Продажі":
+                        {
+                            exist = true;
+                            blockCaption = "Продажі";
+
+                            visibleColumn = РухДокументівПоРегістрах.Продажі_ВидиміКолонки();
+                            dataColumn = РухДокументівПоРегістрах.Продажі_КолонкиДаних();
+                            textAlignColumn = РухДокументівПоРегістрах.Продажі_ПозиціяТекстуВКолонці();
+
+                            Config.Kernel.DataBase.SelectRequest(РухДокументівПоРегістрах.Продажі_Запит, paramQuery, out columnsName, out listRow);
+
+                            break;
+                        }
                     default:
                         {
                             exist = false;
