@@ -76,6 +76,8 @@ namespace StorageAndTrade
             ShowAll();
         }
 
+        #region Toolbar & Menu
+
         void CreateToolbar()
         {
             Toolbar toolbar = new Toolbar();
@@ -162,6 +164,8 @@ namespace StorageAndTrade
 
             return Menu;
         }
+
+        #endregion
 
         public void SetValue()
         {
