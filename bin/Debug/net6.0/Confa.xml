@@ -5,7 +5,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>04.01.2023 13:05:28</DateTimeSave>
+  <DateTimeSave>04.01.2023 13:10:52</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -7311,6 +7311,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
         <Name>РозрахункиЗКлієнтами</Name>
         <Name>ВільніЗалишки</Name>
         <Name>ПартіїТоварів</Name>
+        <Name>Продажі</Name>
       </AllowRegisterAccumulation>
       <TriggerFunctions>
         <BeforeSave>РеалізаціяТоварівТаПослуг_Triggers.BeforeRecording</BeforeSave>
@@ -15852,7 +15853,9 @@ GROUP BY
           </Field>
         </Fields>
       </PropertyFields>
-      <AllowDocumentSpend />
+      <AllowDocumentSpend>
+        <Name>РеалізаціяТоварівТаПослуг</Name>
+      </AllowDocumentSpend>
       <TabularParts>
         <TablePart>
           <Name>Обороти</Name>

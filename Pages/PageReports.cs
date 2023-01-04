@@ -32,6 +32,7 @@ namespace StorageAndTrade
             AddLink(vLeft, "Замовлення клієнтів", ЗамовленняКлієнтів);
             AddLink(vLeft, "Замовлення постачальникам", ЗамовленняПостачальникам);
             AddLink(vLeft, "Закупівлі", Закупівлі);
+            AddLink(vLeft, "Продажі", Продажі);
 
             PackStart(hBoxList, false, false, 10);
 
@@ -124,6 +125,15 @@ namespace StorageAndTrade
             Program.GeneralForm?.CreateNotebookPage("Звіт - Закупівлі", () =>
             {
                 Звіт_Закупівлі page = new Звіт_Закупівлі();
+                return page;
+            });
+        }
+
+        void Продажі(object? sender, EventArgs args)
+        {
+            Program.GeneralForm?.CreateNotebookPage("Звіт - Продажі", () =>
+            {
+                Звіт_Продажі page = new Звіт_Продажі();
                 return page;
             });
         }

@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 04.01.2023 13:05:28
+ * Дата конфігурації: 04.01.2023 13:10:52
  *
  */
 
@@ -18763,8 +18763,8 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
     public static class Продажі_Const
     {
         public const string TABLE = "tab_a66";
-		public static readonly string[] AllowDocumentSpendTable = new string[] {  };
-		public static readonly string[] AllowDocumentSpendType = new string[] {  };
+		public static readonly string[] AllowDocumentSpendTable = new string[] { "tab_a36" };
+		public static readonly string[] AllowDocumentSpendType = new string[] { "РеалізаціяТоварівТаПослуг" };
         
         public const string Організація = "col_a5";
         public const string Склад = "col_a6";
