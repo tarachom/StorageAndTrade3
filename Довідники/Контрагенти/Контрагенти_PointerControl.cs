@@ -72,7 +72,7 @@ namespace StorageAndTrade
                     AfterSelectFunc.Invoke();
             };
 
-            Program.GeneralForm?.CreateNotebookPage("Вибір - Контрагенти", () => { return page; });
+            Program.GeneralForm?.CreateNotebookPage("Вибір - Контрагенти", () => { return page; }, true);
 
             page.LoadTree();
         }

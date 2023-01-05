@@ -160,7 +160,7 @@ namespace StorageAndTrade
                                     Store.SetValues(iter, запис.ToArray());
                                 };
 
-                                Program.GeneralForm?.CreateNotebookPage("Вибір - Контрагенти", () => { return page; });
+                                Program.GeneralForm?.CreateNotebookPage("Вибір - Контрагенти", () => { return page; }, true);
 
                                 page.LoadTree();
 
@@ -179,7 +179,7 @@ namespace StorageAndTrade
                                     Store.SetValues(iter, запис.ToArray());
                                 };
 
-                                Program.GeneralForm?.CreateNotebookPage("Вибір - Довідник: Валюти", () => { return page; });
+                                Program.GeneralForm?.CreateNotebookPage("Вибір - Довідник: Валюти", () => { return page; }, true);
 
                                 page.LoadRecords();
 

@@ -66,7 +66,7 @@ namespace StorageAndTrade
                 Pointer = selectPointer;
             };
 
-            Program.GeneralForm?.CreateNotebookPage("Вибір - Виробники", () => { return page; });
+            Program.GeneralForm?.CreateNotebookPage("Вибір - Виробники", () => { return page; }, true);
 
             page.LoadRecords();
         }

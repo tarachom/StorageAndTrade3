@@ -72,7 +72,7 @@ namespace StorageAndTrade
                     AfterSelectFunc.Invoke();
             };
 
-            Program.GeneralForm?.CreateNotebookPage("Вибір - Номенклатура", () => { return page; });
+            Program.GeneralForm?.CreateNotebookPage("Вибір - Номенклатура", () => { return page; }, true);
 
             page.LoadTree();
         }

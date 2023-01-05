@@ -69,7 +69,7 @@ namespace StorageAndTrade
                 Pointer = selectPointer;
             };
 
-            Program.GeneralForm?.CreateNotebookPage("Вибір - Замовлення клієнта", () => { return page; });
+            Program.GeneralForm?.CreateNotebookPage("Вибір - Замовлення клієнта", () => { return page; }, true);
 
             if (UseWherePeriod)
                 page.SetValue();

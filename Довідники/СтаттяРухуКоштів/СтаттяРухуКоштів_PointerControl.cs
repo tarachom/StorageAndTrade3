@@ -66,7 +66,7 @@ namespace StorageAndTrade
                 Pointer = selectPointer;
             };
 
-            Program.GeneralForm?.CreateNotebookPage("Вибір - Стаття руху коштів", () => { return page; });
+            Program.GeneralForm?.CreateNotebookPage("Вибір - Стаття руху коштів", () => { return page; }, true);
 
             page.LoadRecords();
 

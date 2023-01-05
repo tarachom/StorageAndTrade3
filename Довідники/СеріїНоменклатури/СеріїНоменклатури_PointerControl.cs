@@ -66,7 +66,7 @@ namespace StorageAndTrade
                 Pointer = selectPointer;
             };
 
-            Program.GeneralForm?.CreateNotebookPage("Вибір - СеріїНоменклатури", () => { return page; });
+            Program.GeneralForm?.CreateNotebookPage("Вибір - Серії номенклатури", () => { return page; }, true);
 
             page.LoadRecords();
         }

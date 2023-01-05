@@ -150,7 +150,7 @@ namespace StorageAndTrade
                                     page.LoadRecords();
 
                                     return page;
-                                });
+                                }, true);
 
                                 break;
                             }

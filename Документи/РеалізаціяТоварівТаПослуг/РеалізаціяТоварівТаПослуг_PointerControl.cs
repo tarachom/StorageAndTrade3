@@ -69,7 +69,7 @@ namespace StorageAndTrade
                 Pointer = selectPointer;
             };
 
-            Program.GeneralForm?.CreateNotebookPage("Вибір - Реалізація товарів та послуг", () => { return page; });
+            Program.GeneralForm?.CreateNotebookPage("Вибір - Реалізація товарів та послуг", () => { return page; }, true);
 
             if (UseWherePeriod)
                 page.SetValue();

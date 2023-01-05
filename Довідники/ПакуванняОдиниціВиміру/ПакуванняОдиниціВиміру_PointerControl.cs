@@ -66,7 +66,7 @@ namespace StorageAndTrade
                 Pointer = selectPointer;
             };
 
-            Program.GeneralForm?.CreateNotebookPage("Вибір - Пакування одиниці виміру", () => { return page; });
+            Program.GeneralForm?.CreateNotebookPage("Вибір - Пакування одиниці виміру", () => { return page; }, true);
 
             page.LoadRecords();
         }

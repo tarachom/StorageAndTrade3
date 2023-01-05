@@ -69,7 +69,7 @@ namespace StorageAndTrade
                 Pointer = selectPointer;
             };
 
-            Program.GeneralForm?.CreateNotebookPage("Вибір - Номенклатура Папки", () => { return page; });
+            Program.GeneralForm?.CreateNotebookPage("Вибір - Номенклатура папки", () => { return page; }, true);
 
             page.LoadTree();
         }

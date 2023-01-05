@@ -262,7 +262,7 @@ namespace StorageAndTrade
                                     Store.SetValues(iter, запис.ToArray());
                                 };
 
-                                Program.GeneralForm?.CreateNotebookPage("Вибір - Номенклатура", () => { return page; });
+                                Program.GeneralForm?.CreateNotebookPage("Вибір - Номенклатура", () => { return page; }, true);
 
                                 page.LoadTree();
 
@@ -282,7 +282,7 @@ namespace StorageAndTrade
                                     Store.SetValues(iter, запис.ToArray());
                                 };
 
-                                Program.GeneralForm?.CreateNotebookPage("Вибір - Характеристика", () => { return page; });
+                                Program.GeneralForm?.CreateNotebookPage("Вибір - Характеристика", () => { return page; }, true);
 
                                 page.LoadRecords();
 
@@ -301,7 +301,7 @@ namespace StorageAndTrade
                                     Store.SetValues(iter, запис.ToArray());
                                 };
 
-                                Program.GeneralForm?.CreateNotebookPage("Вибір - Серія", () => { return page; });
+                                Program.GeneralForm?.CreateNotebookPage("Вибір - Серія", () => { return page; }, true);
 
                                 page.LoadRecords();
 
@@ -320,7 +320,7 @@ namespace StorageAndTrade
                                     Store.SetValues(iter, запис.ToArray());
                                 };
 
-                                Program.GeneralForm?.CreateNotebookPage("Вибір - Пакування", () => { return page; });
+                                Program.GeneralForm?.CreateNotebookPage("Вибір - Пакування", () => { return page; }, true);
 
                                 page.LoadRecords();
 
@@ -339,7 +339,7 @@ namespace StorageAndTrade
                                     Store.SetValues(iter, запис.ToArray());
                                 };
 
-                                Program.GeneralForm?.CreateNotebookPage("Вибір - Склад", () => { return page; });
+                                Program.GeneralForm?.CreateNotebookPage("Вибір - Склад", () => { return page; }, true);
 
                                 page.LoadTree();
 
@@ -358,7 +358,7 @@ namespace StorageAndTrade
                                     Store.SetValues(iter, запис.ToArray());
                                 };
 
-                                Program.GeneralForm?.CreateNotebookPage("Вибір - Замовлення постачальнику", () => { return page; });
+                                Program.GeneralForm?.CreateNotebookPage("Вибір - Замовлення постачальнику", () => { return page; }, true);
 
                                 page.LoadRecords();
 

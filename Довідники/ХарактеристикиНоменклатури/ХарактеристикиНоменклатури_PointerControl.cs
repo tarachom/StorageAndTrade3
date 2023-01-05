@@ -66,7 +66,7 @@ namespace StorageAndTrade
                 Pointer = selectPointer;
             };
 
-            Program.GeneralForm?.CreateNotebookPage("Вибір - Характеристики", () => { return page; });
+            Program.GeneralForm?.CreateNotebookPage("Вибір - Характеристики", () => { return page; }, true);
 
             page.LoadRecords();
         }

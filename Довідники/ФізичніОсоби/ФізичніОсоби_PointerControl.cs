@@ -66,7 +66,7 @@ namespace StorageAndTrade
                 Pointer = selectPointer;
             };
 
-            Program.GeneralForm?.CreateNotebookPage("Вибір - Фізичні особи", () => { return page; });
+            Program.GeneralForm?.CreateNotebookPage("Вибір - Фізичні особи", () => { return page; }, true);
 
             page.LoadRecords();
         }

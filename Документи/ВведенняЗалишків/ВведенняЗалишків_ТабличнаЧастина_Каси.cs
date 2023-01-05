@@ -149,7 +149,7 @@ namespace StorageAndTrade
                                     Store.SetValues(iter, запис.ToArray());
                                 };
 
-                                Program.GeneralForm?.CreateNotebookPage("Вибір - Каси", () => { return page; });
+                                Program.GeneralForm?.CreateNotebookPage("Вибір - Каси", () => { return page; }, true);
 
                                 page.LoadRecords();
 

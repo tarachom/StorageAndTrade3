@@ -75,7 +75,7 @@ namespace StorageAndTrade
                     AfterSelectFunc.Invoke();
             };
 
-            Program.GeneralForm?.CreateNotebookPage("Вибір - Договори", () => { return page; });
+            Program.GeneralForm?.CreateNotebookPage("Вибір - Договори", () => { return page; }, true);
 
             page.LoadRecords();
         }

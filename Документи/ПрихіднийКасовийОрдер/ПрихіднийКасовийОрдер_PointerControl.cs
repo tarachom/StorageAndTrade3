@@ -69,7 +69,7 @@ namespace StorageAndTrade
                 Pointer = selectPointer;
             };
 
-            Program.GeneralForm?.CreateNotebookPage("Вибір - Прихідний касовий ордер", () => { return page; });
+            Program.GeneralForm?.CreateNotebookPage("Вибір - Прихідний касовий ордер", () => { return page; }, true);
 
             if (UseWherePeriod)
                 page.SetValue();

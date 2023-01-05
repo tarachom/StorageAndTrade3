@@ -66,7 +66,7 @@ namespace StorageAndTrade
                 Pointer = selectPointer;
             };
 
-            Program.GeneralForm?.CreateNotebookPage("Вибір - Структура підприємства", () => { return page; });
+            Program.GeneralForm?.CreateNotebookPage("Вибір - Структура підприємства", () => { return page; }, true);
 
             page.LoadRecords();
         }

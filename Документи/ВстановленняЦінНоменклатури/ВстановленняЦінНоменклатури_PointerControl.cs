@@ -69,7 +69,7 @@ namespace StorageAndTrade
                 Pointer = selectPointer;
             };
 
-            Program.GeneralForm?.CreateNotebookPage("Вибір - Встановлення цін номенклатури", () => { return page; });
+            Program.GeneralForm?.CreateNotebookPage("Вибір - Встановлення цін номенклатури", () => { return page; }, true);
 
             if (UseWherePeriod)
                 page.SetValue();

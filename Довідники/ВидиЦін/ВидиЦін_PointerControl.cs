@@ -66,7 +66,7 @@ namespace StorageAndTrade
                 Pointer = selectPointer;
             };
 
-            Program.GeneralForm?.CreateNotebookPage("Вибір - Види цін", () => { return page; });
+            Program.GeneralForm?.CreateNotebookPage("Вибір - Види цін", () => { return page; }, true);
 
             page.LoadRecords();
         }

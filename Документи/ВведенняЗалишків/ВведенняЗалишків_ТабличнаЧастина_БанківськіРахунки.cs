@@ -149,7 +149,7 @@ namespace StorageAndTrade
                                     Store.SetValues(iter, запис.ToArray());
                                 };
 
-                                Program.GeneralForm?.CreateNotebookPage("Вибір - Довідник: Банківські рахунки", () => { return page; });
+                                Program.GeneralForm?.CreateNotebookPage("Вибір - Банківські рахунки", () => { return page; }, true);
 
                                 page.LoadRecords();
 

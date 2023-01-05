@@ -69,7 +69,7 @@ namespace StorageAndTrade
                 Pointer = selectPointer;
             };
 
-            Program.GeneralForm?.CreateNotebookPage("Вибір - Контрагенти Папки", () => { return page; });
+            Program.GeneralForm?.CreateNotebookPage("Вибір - Контрагенти папки", () => { return page; }, true);
 
             page.LoadTree();
         }

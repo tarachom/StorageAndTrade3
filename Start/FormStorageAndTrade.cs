@@ -176,12 +176,18 @@ namespace StorageAndTrade
             topNotebook.SetTabLabelText(topNotebook.CurrentPageWidget, name);
         }
 
-        public void CreateNotebookPage(string tabName, System.Func<Widget>? pageWidget)
+        public void CreateNotebookPage(string tabName, System.Func<Widget>? pageWidget, bool insertPage = false)
         {
             ScrolledWindow scroll = new ScrolledWindow() { ShadowType = ShadowType.In };
             scroll.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
 
-            int numPage = topNotebook.AppendPage(scroll, new Label { Text = tabName, Expand = false, Halign = Align.Start });
+            int numPage;
+            Label label = new Label { Text = tabName, Expand = false, Halign = Align.Start };
+
+            if (insertPage)
+                numPage = topNotebook.InsertPage(scroll, label, topNotebook.CurrentPage);
+            else
+                numPage = topNotebook.AppendPage(scroll, label);
 
             if (pageWidget != null)
                 scroll.Add((Widget)pageWidget.Invoke());

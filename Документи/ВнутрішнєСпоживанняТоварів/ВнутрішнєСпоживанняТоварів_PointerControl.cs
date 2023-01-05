@@ -69,7 +69,7 @@ namespace StorageAndTrade
                 Pointer = selectPointer;
             };
 
-            Program.GeneralForm?.CreateNotebookPage("Вибір - Внутрішнє споживання товарів", () => { return page; });
+            Program.GeneralForm?.CreateNotebookPage("Вибір - Внутрішнє споживання товарів", () => { return page; }, true);
 
             if (UseWherePeriod)
                 page.SetValue();
