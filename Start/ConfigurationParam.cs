@@ -1,3 +1,5 @@
+#region Info
+
 /*
 Copyright (C) 2019-2023 TARAKHOMYN YURIY IVANOVYCH
 All rights reserved.
@@ -20,6 +22,8 @@ limitations under the License.
 Адреса:   Україна, м. Львів
 Сайт:     accounting.org.ua
 */
+
+#endregion
 
 using System.Xml;
 using System.Xml.XPath;
