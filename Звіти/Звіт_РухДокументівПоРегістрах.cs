@@ -256,7 +256,10 @@ namespace StorageAndTrade
             Expander expander = new Expander(blockName) { Expanded = true };
             expander.Add(vBox);
 
-            vBox.PackStart(treeView, false, false, 10);
+            HBox hBox = new HBox();
+            vBox.PackStart(hBox, false, false, 10);
+
+            hBox.PackStart(treeView, false, false, 10);
 
             PackStart(expander, false, false, 10);
 

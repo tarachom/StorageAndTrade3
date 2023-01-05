@@ -344,5 +344,51 @@ namespace StorageAndTrade
             }
         }
 
+        #region NotebookReport
+
+        public static void CloseCurrentPageNotebook(Notebook notebook)
+        {
+            notebook.RemovePage(notebook.CurrentPage);
+        }
+
+        public static void CreateNotebookPage(Notebook notebook, string tabName, System.Func<Widget>? pageWidget)
+        {
+            ScrolledWindow scroll = new ScrolledWindow() { ShadowType = ShadowType.In };
+            scroll.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
+
+            int numPage = notebook.AppendPage(scroll, new Label { Text = tabName, Expand = false, Halign = Align.Start });
+
+            if (pageWidget != null)
+                scroll.Add((Widget)pageWidget.Invoke());
+
+            notebook.ShowAll();
+            notebook.CurrentPage = numPage;
+        }
+
+        public static void CreateReportNotebookPage(Notebook notebook, string caption, Widget wgTree)
+        {
+            VBox vBox = new VBox();
+            HBox hBoxButton = new HBox();
+
+            Button bClose = new Button("Закрити");
+            bClose.Clicked += (object? sender, EventArgs args) => { CloseCurrentPageNotebook(notebook); };
+
+            hBoxButton.PackStart(bClose, false, false, 10);
+
+            vBox.PackStart(hBoxButton, false, false, 5);
+
+            ScrolledWindow scrol = new ScrolledWindow() { ShadowType = ShadowType.In };
+            scrol.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
+            scrol.Add(wgTree);
+
+            HBox hBox = new HBox();
+            hBox.PackStart(scrol, true, true, 5);
+
+            vBox.PackStart(hBox, true, true, 5);
+
+            CreateNotebookPage(notebook, caption, () => { return vBox; });
+        }
+
+        #endregion
     }
 }

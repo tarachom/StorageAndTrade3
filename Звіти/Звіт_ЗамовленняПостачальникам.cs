@@ -156,50 +156,6 @@ namespace StorageAndTrade
 
         #endregion
 
-        #region Notebook
-
-        void CloseCurrentPageNotebook()
-        {
-            reportNotebook.RemovePage(reportNotebook.CurrentPage);
-        }
-
-        void CreateNotebookPage(string tabName, System.Func<Widget>? pageWidget)
-        {
-            ScrolledWindow scroll = new ScrolledWindow() { ShadowType = ShadowType.In };
-            scroll.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
-
-            int numPage = reportNotebook.AppendPage(scroll, new Label { Text = tabName, Expand = false, Halign = Align.Start });
-
-            if (pageWidget != null)
-                scroll.Add((Widget)pageWidget.Invoke());
-
-            reportNotebook.ShowAll();
-            reportNotebook.CurrentPage = numPage;
-        }
-
-        #endregion
-
-        void CreateReportNotebookPage(string caption, Widget wgTree)
-        {
-            VBox vBox = new VBox();
-            HBox hBoxButton = new HBox();
-
-            Button bClose = new Button("Закрити");
-            bClose.Clicked += (object? sender, EventArgs args) => { CloseCurrentPageNotebook(); };
-
-            hBoxButton.PackStart(bClose, false, false, 10);
-
-            vBox.PackStart(hBoxButton, false, false, 10);
-
-            ScrolledWindow scrol = new ScrolledWindow() { ShadowType = ShadowType.In };
-            scrol.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
-            scrol.Add(wgTree);
-
-            vBox.PackStart(scrol, true, true, 0);
-
-            CreateNotebookPage(caption, () => { return vBox; });
-        }
-
         void OnReport_Залишки(object? sender, EventArgs args)
         {
             #region SELECT
@@ -348,7 +304,7 @@ ORDER BY Номенклатура_Назва
             ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних, ПозиціяТекстуВКолонці);
             ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, columnsName, listRow);
 
-            CreateReportNotebookPage("Залишки", treeView);
+            ФункціїДляЗвітів.CreateReportNotebookPage(reportNotebook, "Залишки", treeView);
         }
 
         void OnReport_Документи(object? sender, EventArgs args)
@@ -543,6 +499,7 @@ ORDER BY period ASC
             КолонкиДаних.Add("Склад_Назва", "Склад");
 
             Dictionary<string, float> ПозиціяТекстуВКолонці = new Dictionary<string, float>();
+            ПозиціяТекстуВКолонці.Add("income", 0.5f);
             ПозиціяТекстуВКолонці.Add("Замовлено", 1);
 
             Dictionary<string, object> paramQuery = new Dictionary<string, object>();
@@ -563,7 +520,7 @@ ORDER BY period ASC
             ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних, ПозиціяТекстуВКолонці);
             ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, columnsName, listRow);
 
-            CreateReportNotebookPage("Документи", treeView);
+            ФункціїДляЗвітів.CreateReportNotebookPage(reportNotebook, "Документи", treeView);
         }
     }
 }

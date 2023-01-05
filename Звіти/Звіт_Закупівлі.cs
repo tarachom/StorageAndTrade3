@@ -74,12 +74,6 @@ namespace StorageAndTrade
 
             hBoxBotton.PackStart(bOborot, false, false, 10);
 
-            //4 !!!
-            //Button bDocuments = new Button("Документи");
-            //bDocuments.Clicked += OnReport_Документи;
-
-            //hBoxBotton.PackStart(bDocuments, false, false, 10);
-
             PackStart(hBoxBotton, false, false, 10);
 
             CreateFilters();
@@ -201,50 +195,6 @@ namespace StorageAndTrade
         }
 
         #endregion
-
-        #region Notebook
-
-        void CloseCurrentPageNotebook()
-        {
-            reportNotebook.RemovePage(reportNotebook.CurrentPage);
-        }
-
-        void CreateNotebookPage(string tabName, System.Func<Widget>? pageWidget)
-        {
-            ScrolledWindow scroll = new ScrolledWindow() { ShadowType = ShadowType.In };
-            scroll.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
-
-            int numPage = reportNotebook.AppendPage(scroll, new Label { Text = tabName, Expand = false, Halign = Align.Start });
-
-            if (pageWidget != null)
-                scroll.Add((Widget)pageWidget.Invoke());
-
-            reportNotebook.ShowAll();
-            reportNotebook.CurrentPage = numPage;
-        }
-
-        #endregion
-
-        void CreateReportNotebookPage(string caption, Widget wgTree)
-        {
-            VBox vBox = new VBox();
-            HBox hBoxButton = new HBox();
-
-            Button bClose = new Button("Закрити");
-            bClose.Clicked += (object? sender, EventArgs args) => { CloseCurrentPageNotebook(); };
-
-            hBoxButton.PackStart(bClose, false, false, 10);
-
-            vBox.PackStart(hBoxButton, false, false, 10);
-
-            ScrolledWindow scrol = new ScrolledWindow() { ShadowType = ShadowType.In };
-            scrol.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
-            scrol.Add(wgTree);
-
-            vBox.PackStart(scrol, true, true, 0);
-
-            CreateNotebookPage(caption, () => { return vBox; });
-        }
 
         void OnReport_Обороти(object? sender, EventArgs args)
         {
@@ -496,7 +446,7 @@ ORDER BY " +
             ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних, ПозиціяТекстуВКолонці);
             ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, columnsName, listRow);
 
-            CreateReportNotebookPage("Обороти", treeView);
+            ФункціїДляЗвітів.CreateReportNotebookPage(reportNotebook, "Обороти", treeView);
         }
     }
 }
