@@ -16,11 +16,15 @@
 # Mono auto generated files
 mono_crash.*
 
+#Configurator3
 *.dll
 Comparison.xml
 ComparisonAllData.xml
 ComparisonAnalize.xml
 InformationSchema.xml
+
+#StorageAndTrade3
+StorageAndTrade3
 
 # Build results
 #[Dd]ebug/

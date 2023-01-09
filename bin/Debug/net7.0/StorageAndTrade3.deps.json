@@ -1,0 +1,211 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v7.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v7.0": {
+      "StorageAndTrade3/1.0.0": {
+        "dependencies": {
+          "AccountingSoftware": "1.0.0",
+          "GtkSharp": "3.24.24.38"
+        },
+        "runtime": {
+          "StorageAndTrade3.dll": {}
+        }
+      },
+      "AtkSharp/3.24.24.38": {
+        "dependencies": {
+          "GLibSharp": "3.24.24.38"
+        },
+        "runtime": {
+          "lib/net6.0/AtkSharp.dll": {
+            "assemblyVersion": "3.24.24.38",
+            "fileVersion": "3.24.24.38"
+          }
+        }
+      },
+      "CairoSharp/3.24.24.38": {
+        "runtime": {
+          "lib/net6.0/CairoSharp.dll": {
+            "assemblyVersion": "3.24.24.38",
+            "fileVersion": "3.24.24.38"
+          }
+        }
+      },
+      "GdkSharp/3.24.24.38": {
+        "dependencies": {
+          "CairoSharp": "3.24.24.38",
+          "GLibSharp": "3.24.24.38",
+          "GioSharp": "3.24.24.38",
+          "PangoSharp": "3.24.24.38"
+        },
+        "runtime": {
+          "lib/net6.0/GdkSharp.dll": {
+            "assemblyVersion": "3.24.24.38",
+            "fileVersion": "3.24.24.38"
+          }
+        }
+      },
+      "GioSharp/3.24.24.38": {
+        "dependencies": {
+          "GLibSharp": "3.24.24.38"
+        },
+        "runtime": {
+          "lib/net6.0/GioSharp.dll": {
+            "assemblyVersion": "3.24.24.38",
+            "fileVersion": "3.24.24.38"
+          }
+        }
+      },
+      "GLibSharp/3.24.24.38": {
+        "runtime": {
+          "lib/net6.0/GLibSharp.dll": {
+            "assemblyVersion": "3.24.24.38",
+            "fileVersion": "3.24.24.38"
+          }
+        }
+      },
+      "GtkSharp/3.24.24.38": {
+        "dependencies": {
+          "AtkSharp": "3.24.24.38",
+          "CairoSharp": "3.24.24.38",
+          "GLibSharp": "3.24.24.38",
+          "GdkSharp": "3.24.24.38",
+          "GioSharp": "3.24.24.38",
+          "PangoSharp": "3.24.24.38"
+        },
+        "runtime": {
+          "lib/net6.0/GtkSharp.dll": {
+            "assemblyVersion": "3.24.24.38",
+            "fileVersion": "3.24.24.38"
+          }
+        }
+      },
+      "Microsoft.Extensions.Logging.Abstractions/6.0.0": {
+        "runtime": {
+          "lib/net6.0/Microsoft.Extensions.Logging.Abstractions.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.21.52210"
+          }
+        }
+      },
+      "Npgsql/7.0.0": {
+        "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "6.0.0",
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0"
+        },
+        "runtime": {
+          "lib/net7.0/Npgsql.dll": {
+            "assemblyVersion": "7.0.0.0",
+            "fileVersion": "7.0.0.0"
+          }
+        }
+      },
+      "PangoSharp/3.24.24.38": {
+        "dependencies": {
+          "CairoSharp": "3.24.24.38",
+          "GLibSharp": "3.24.24.38"
+        },
+        "runtime": {
+          "lib/net6.0/PangoSharp.dll": {
+            "assemblyVersion": "3.24.24.38",
+            "fileVersion": "3.24.24.38"
+          }
+        }
+      },
+      "System.Runtime.CompilerServices.Unsafe/6.0.0": {},
+      "AccountingSoftware/1.0.0": {
+        "dependencies": {
+          "Npgsql": "7.0.0"
+        },
+        "runtime": {
+          "AccountingSoftware.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "StorageAndTrade3/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "AtkSharp/3.24.24.38": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Ds4FnipE+lLMF2K0GdXkI2wp3rIu+X6PaPwTFwGlbVVKO8/hKH15CGphpnQhr4w171ZKt01AmyZ+b3I2J8Wfsw==",
+      "path": "atksharp/3.24.24.38",
+      "hashPath": "atksharp.3.24.24.38.nupkg.sha512"
+    },
+    "CairoSharp/3.24.24.38": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Ai6NvehIuGzqTEvBBBxvnBWQlKv/2+p37UqXgWWoYxjQ8v2JqfmpYAenNSfgybi9NIad3aOttMk01xpAJlRT0Q==",
+      "path": "cairosharp/3.24.24.38",
+      "hashPath": "cairosharp.3.24.24.38.nupkg.sha512"
+    },
+    "GdkSharp/3.24.24.38": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Hzi/gebFcom/dRp8gqe8u7N8mCcj70C2MCz2lraWWB9iOLKFS8glfTfVesH0OhTwnKBnk7Cv3T32DTZHESZmKw==",
+      "path": "gdksharp/3.24.24.38",
+      "hashPath": "gdksharp.3.24.24.38.nupkg.sha512"
+    },
+    "GioSharp/3.24.24.38": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-5gK1cESosEezKNSvCECN/IzwB7lv0VXR+ejq5QDdiNM3qHwDtH6PDpY5qP0WkvENtQ1vGkfDlrNYWtf8OhDWaA==",
+      "path": "giosharp/3.24.24.38",
+      "hashPath": "giosharp.3.24.24.38.nupkg.sha512"
+    },
+    "GLibSharp/3.24.24.38": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-VahPnOxMae/gEFD5toh5Iw7PWcHaqGH8cmM77iMckWGzPv61c7oNM/mIYOSLCRdVv4i4LIxUHw8M4Zc0tud4Ig==",
+      "path": "glibsharp/3.24.24.38",
+      "hashPath": "glibsharp.3.24.24.38.nupkg.sha512"
+    },
+    "GtkSharp/3.24.24.38": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-tHuNB7Dde7VsZvGXCkZJye1ce6Jo/gvJj8EG//Z44/3mE8ebbUYgb1RsMakUhsXI+Y24H83mIf+ooTJ7Sg1Kcw==",
+      "path": "gtksharp/3.24.24.38",
+      "hashPath": "gtksharp.3.24.24.38.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Logging.Abstractions/6.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-/HggWBbTwy8TgebGSX5DBZ24ndhzi93sHUBDvP1IxbZD7FDokYzdAr6+vbWGjw2XAfR2EJ1sfKUotpjHnFWPxA==",
+      "path": "microsoft.extensions.logging.abstractions/6.0.0",
+      "hashPath": "microsoft.extensions.logging.abstractions.6.0.0.nupkg.sha512"
+    },
+    "Npgsql/7.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-tOBFksJZ2MiEz8xtDUgS5IG19jVO3nSP15QDYWiiGpXHe0PsLoQBts2Sg3hHKrrLTuw+AjsJz9iKvvGNHyKDIg==",
+      "path": "npgsql/7.0.0",
+      "hashPath": "npgsql.7.0.0.nupkg.sha512"
+    },
+    "PangoSharp/3.24.24.38": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-NpTRGMOJvxJwRIEXV0hyAnFt26mLYwGu70TLCZecXwWgdQx87HWsAUWgzjL8atdExquebSBumKP6cZjkEAQuaA==",
+      "path": "pangosharp/3.24.24.38",
+      "hashPath": "pangosharp.3.24.24.38.nupkg.sha512"
+    },
+    "System.Runtime.CompilerServices.Unsafe/6.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-/iUeP3tq1S0XdNNoMz5C9twLSrM/TH+qElHkXWaPvuNOt+99G75NrV0OS2EqHx5wMN7popYjpc8oTjC1y16DLg==",
+      "path": "system.runtime.compilerservices.unsafe/6.0.0",
+      "hashPath": "system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
+    },
+    "AccountingSoftware/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
