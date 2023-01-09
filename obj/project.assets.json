@@ -1,7 +1,7 @@
 {
   "version": 3,
   "targets": {
-    "net6.0": {
+    "net7.0": {
       "AtkSharp/3.24.24.38": {
         "type": "package",
         "dependencies": {
@@ -82,10 +82,14 @@
       "Microsoft.Extensions.Logging.Abstractions/6.0.0": {
         "type": "package",
         "compile": {
-          "lib/net6.0/Microsoft.Extensions.Logging.Abstractions.dll": {}
+          "lib/net6.0/Microsoft.Extensions.Logging.Abstractions.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net6.0/Microsoft.Extensions.Logging.Abstractions.dll": {}
+          "lib/net6.0/Microsoft.Extensions.Logging.Abstractions.dll": {
+            "related": ".xml"
+          }
         },
         "build": {
           "buildTransitive/netcoreapp3.1/_._": {}
@@ -98,10 +102,14 @@
           "System.Runtime.CompilerServices.Unsafe": "6.0.0"
         },
         "compile": {
-          "lib/net6.0/Npgsql.dll": {}
+          "lib/net7.0/Npgsql.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net6.0/Npgsql.dll": {}
+          "lib/net7.0/Npgsql.dll": {
+            "related": ".xml"
+          }
         }
       },
       "PangoSharp/3.24.24.38": {
@@ -120,10 +128,14 @@
       "System.Runtime.CompilerServices.Unsafe/6.0.0": {
         "type": "package",
         "compile": {
-          "lib/net6.0/System.Runtime.CompilerServices.Unsafe.dll": {}
+          "lib/net6.0/System.Runtime.CompilerServices.Unsafe.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net6.0/System.Runtime.CompilerServices.Unsafe.dll": {}
+          "lib/net6.0/System.Runtime.CompilerServices.Unsafe.dll": {
+            "related": ".xml"
+          }
         },
         "build": {
           "buildTransitive/netcoreapp3.1/_._": {}
@@ -131,7 +143,7 @@
       },
       "AccountingSoftware/1.0.0": {
         "type": "project",
-        "framework": ".NETCoreApp,Version=v6.0",
+        "framework": ".NETCoreApp,Version=v7.0",
         "dependencies": {
           "Npgsql": "7.0.0"
         },
@@ -346,7 +358,7 @@
     }
   },
   "projectFileDependencyGroups": {
-    "net6.0": [
+    "net7.0": [
       "AccountingSoftware >= 1.0.0",
       "GtkSharp >= 3.24.24.38"
     ]
@@ -367,14 +379,14 @@
         "/home/tarachom/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
-        "net6.0"
+        "net7.0"
       ],
       "sources": {
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
+        "net7.0": {
+          "targetAlias": "net7.0",
           "projectReferences": {
             "/home/tarachom/Projects/AccountingSoftwareLib/AccountingSoftware/AccountingSoftware.csproj": {
               "projectPath": "/home/tarachom/Projects/AccountingSoftwareLib/AccountingSoftware/AccountingSoftware.csproj"
@@ -389,8 +401,8 @@
       }
     },
     "frameworks": {
-      "net6.0": {
-        "targetAlias": "net6.0",
+      "net7.0": {
+        "targetAlias": "net7.0",
         "dependencies": {
           "GtkSharp": {
             "target": "Package",
@@ -403,7 +415,8 @@
           "net47",
           "net471",
           "net472",
-          "net48"
+          "net48",
+          "net481"
         ],
         "assetTargetFallback": true,
         "warn": true,
@@ -412,7 +425,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/6.0.111/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/7.0.101/RuntimeIdentifierGraph.json"
       }
     }
   }
