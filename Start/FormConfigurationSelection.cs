@@ -41,7 +41,11 @@ namespace StorageAndTrade
         {
             SetDefaultSize(660, 320);
             SetPosition(WindowPosition.Center);
-            SetDefaultIconFromFile("images/form.ico");
+
+            string ico_file_name = "images/form.ico";
+
+            if (File.Exists(ico_file_name))
+                SetDefaultIconFromFile(ico_file_name);
 
             DeleteEvent += delegate { Application.Quit(); };
 

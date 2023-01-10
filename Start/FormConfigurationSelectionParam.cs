@@ -44,7 +44,12 @@ namespace StorageAndTrade
         {
             SetDefaultSize(420, 0);
             SetPosition(WindowPosition.Center);
-            SetDefaultIconFromFile("images/form.ico");
+            
+            string ico_file_name = "images/form.ico";
+
+            if (File.Exists(ico_file_name))
+                SetDefaultIconFromFile(ico_file_name);
+
             BorderWidth = 5;
 
             VBox vbox = new VBox(false, 2);
