@@ -154,7 +154,10 @@ namespace StorageAndTrade
         void OnButtonSaveClicked(object? sender, EventArgs args)
         {
             if (SaveConfParam())
+            {
                 Close();
+                Dispose();
+            }
         }
 
         void OnButtonCreateBaseClicked(object? sender, EventArgs args)
@@ -186,6 +189,7 @@ namespace StorageAndTrade
         void OnButtonCloseClicked(object? sender, EventArgs args)
         {
             Close();
+            Dispose();
         }
     }
 }
