@@ -71,7 +71,7 @@ namespace StorageAndTrade
             Program.GeneralForm?.CreateNotebookPage("Звіт - Вільні залишки", () =>
             {
                 Звіт_ВільніЗалишки page = new Звіт_ВільніЗалишки();
-                return page;
+                return page;                
             });
         }
 
