@@ -168,6 +168,13 @@ namespace StorageAndTrade
                                     page.LoadRecords();
                                     break;
                                 }
+                            case "ВведенняЗалишків":
+                                {
+                                    ВведенняЗалишків page = new ВведенняЗалишків() { SelectPointerItem = new ВведенняЗалишків_Pointer(unigueID) };
+                                    Program.GeneralForm?.CreateNotebookPage("Введення залишків", () => { return page; }, true);
+                                    page.LoadRecords();
+                                    break;
+                                }
                         }
                     }
                     else

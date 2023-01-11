@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 09.01.2023 20:50:49
+ * Дата конфігурації: 11.01.2023 13:40:36
  *
  */
 
@@ -7929,6 +7929,15 @@ namespace StorageAndTrade_1_0.Перелічення
     }
     #endregion
     
+    #region ENUM "ТипиКонтрагентів"
+    
+    public enum ТипиКонтрагентів
+    {
+         Постачальник = 1,
+         Клієнт = 2
+    }
+    #endregion
+    
 }
 
 namespace StorageAndTrade_1_0.Документи
@@ -12794,7 +12803,7 @@ namespace StorageAndTrade_1_0.Документи
     public class ВведенняЗалишків_РозрахункиЗКонтрагентами_TablePart : DocumentTablePart
     {
         public ВведенняЗалишків_РозрахункиЗКонтрагентами_TablePart(ВведенняЗалишків_Objest owner) : base(Config.Kernel!, "tab_a87",
-             new string[] { "col_a1", "col_e9", "col_f1", "col_f2" }) 
+             new string[] { "col_a1", "col_e9", "col_f1", "col_f2", "col_a2" }) 
         {
             if (owner == null) throw new Exception("owner null");
             
@@ -12806,6 +12815,7 @@ namespace StorageAndTrade_1_0.Документи
         public const string Контрагент = "col_e9";
         public const string Валюта = "col_f1";
         public const string Сума = "col_f2";
+        public const string ТипКонтрагента = "col_a2";
 
         public ВведенняЗалишків_Objest Owner { get; private set; }
         
@@ -12825,6 +12835,7 @@ namespace StorageAndTrade_1_0.Документи
                 record.Контрагент = new Довідники.Контрагенти_Pointer(fieldValue["col_e9"]);
                 record.Валюта = new Довідники.Валюти_Pointer(fieldValue["col_f1"]);
                 record.Сума = (fieldValue["col_f2"] != DBNull.Value) ? (decimal)fieldValue["col_f2"] : 0;
+                record.ТипКонтрагента = (fieldValue["col_a2"] != DBNull.Value) ? (Перелічення.ТипиКонтрагентів)fieldValue["col_a2"] : 0;
                 
                 Records.Add(record);
             }
@@ -12847,6 +12858,7 @@ namespace StorageAndTrade_1_0.Документи
                 fieldValue.Add("col_e9", record.Контрагент.UnigueID.UGuid);
                 fieldValue.Add("col_f1", record.Валюта.UnigueID.UGuid);
                 fieldValue.Add("col_f2", record.Сума);
+                fieldValue.Add("col_a2", (int)record.ТипКонтрагента);
                 
                 base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
@@ -12878,12 +12890,14 @@ namespace StorageAndTrade_1_0.Документи
                 Контрагент = new Довідники.Контрагенти_Pointer();
                 Валюта = new Довідники.Валюти_Pointer();
                 Сума = 0;
+                ТипКонтрагента = 0;
                 
             }
             public int НомерРядка { get; set; }
             public Довідники.Контрагенти_Pointer Контрагент { get; set; }
             public Довідники.Валюти_Pointer Валюта { get; set; }
             public decimal Сума { get; set; }
+            public Перелічення.ТипиКонтрагентів ТипКонтрагента { get; set; }
             
         }
     }
@@ -16462,8 +16476,8 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
     public static class РозрахункиЗКлієнтами_Const
     {
         public const string TABLE = "tab_a56";
-		public static readonly string[] AllowDocumentSpendTable = new string[] { "tab_a36", "tab_a44", "tab_a48", "tab_a53", "tab_a81" };
-		public static readonly string[] AllowDocumentSpendType = new string[] { "РеалізаціяТоварівТаПослуг", "ПрихіднийКасовийОрдер", "РозхіднийКасовийОрдер", "ПоверненняТоварівВідКлієнта", "АктВиконанихРобіт" };
+		public static readonly string[] AllowDocumentSpendTable = new string[] { "tab_a36", "tab_a44", "tab_a48", "tab_a53", "tab_a81", "tab_a83" };
+		public static readonly string[] AllowDocumentSpendType = new string[] { "РеалізаціяТоварівТаПослуг", "ПрихіднийКасовийОрдер", "РозхіднийКасовийОрдер", "ПоверненняТоварівВідКлієнта", "АктВиконанихРобіт", "ВведенняЗалишків" };
         
         public const string Валюта = "col_a2";
         public const string Контрагент = "col_a5";
@@ -17369,8 +17383,8 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
     public static class РозрахункиЗПостачальниками_Const
     {
         public const string TABLE = "tab_a61";
-		public static readonly string[] AllowDocumentSpendTable = new string[] { "tab_a32", "tab_a44", "tab_a48", "tab_a51" };
-		public static readonly string[] AllowDocumentSpendType = new string[] { "ПоступленняТоварівТаПослуг", "ПрихіднийКасовийОрдер", "РозхіднийКасовийОрдер", "ПоверненняТоварівПостачальнику" };
+		public static readonly string[] AllowDocumentSpendTable = new string[] { "tab_a32", "tab_a44", "tab_a48", "tab_a51", "tab_a83" };
+		public static readonly string[] AllowDocumentSpendType = new string[] { "ПоступленняТоварівТаПослуг", "ПрихіднийКасовийОрдер", "РозхіднийКасовийОрдер", "ПоверненняТоварівПостачальнику", "ВведенняЗалишків" };
         
         public const string Контрагент = "col_a6";
         public const string Валюта = "col_a7";

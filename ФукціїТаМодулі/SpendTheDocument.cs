@@ -32,10 +32,11 @@ limitations under the License.
 */
 
 using AccountingSoftware;
+using StorageAndTrade;
+
 using StorageAndTrade_1_0.Довідники;
 using StorageAndTrade_1_0.РегістриНакопичення;
 using StorageAndTrade_1_0.РегістриВідомостей;
-using StorageAndTrade;
 
 namespace StorageAndTrade_1_0.Документи
 {
@@ -2866,6 +2867,45 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
 
             #endregion
 
+            #region РозрахункиЗКлієнтами та РозрахункиЗПостачальниками
+
+            РозрахункиЗКлієнтами_RecordsSet розрахункиЗКлієнтами_RecordsSet = new РозрахункиЗКлієнтами_RecordsSet();
+            РозрахункиЗПостачальниками_RecordsSet розрахункиЗПостачальниками_RecordsSet = new РозрахункиЗПостачальниками_RecordsSet();
+
+            foreach (ВведенняЗалишків_РозрахункиЗКонтрагентами_TablePart.Record РозрахункиЗКонтрагентами_Record in ДокументОбєкт.РозрахункиЗКонтрагентами_TablePart.Records)
+            {
+                if (РозрахункиЗКонтрагентами_Record.ТипКонтрагента == Перелічення.ТипиКонтрагентів.Клієнт)
+                {
+                    РозрахункиЗКлієнтами_RecordsSet.Record record_Клієнт = new РозрахункиЗКлієнтами_RecordsSet.Record();
+                    розрахункиЗКлієнтами_RecordsSet.Records.Add(record_Клієнт);
+
+                    record_Клієнт.Income = false;
+                    record_Клієнт.Owner = ДокументОбєкт.UnigueID.UGuid;
+
+                    record_Клієнт.Контрагент = РозрахункиЗКонтрагентами_Record.Контрагент;
+                    record_Клієнт.Валюта = РозрахункиЗКонтрагентами_Record.Валюта;
+                    record_Клієнт.Сума = РозрахункиЗКонтрагентами_Record.Сума;
+                }
+
+                if (РозрахункиЗКонтрагентами_Record.ТипКонтрагента == Перелічення.ТипиКонтрагентів.Постачальник)
+                {
+                    РозрахункиЗПостачальниками_RecordsSet.Record record_Постачальник = new РозрахункиЗПостачальниками_RecordsSet.Record();
+                    розрахункиЗПостачальниками_RecordsSet.Records.Add(record_Постачальник);
+
+                    record_Постачальник.Income = true;
+                    record_Постачальник.Owner = ДокументОбєкт.UnigueID.UGuid;
+
+                    record_Постачальник.Контрагент = РозрахункиЗКонтрагентами_Record.Контрагент;
+                    record_Постачальник.Валюта = РозрахункиЗКонтрагентами_Record.Валюта;
+                    record_Постачальник.Сума = РозрахункиЗКонтрагентами_Record.Сума;
+                }
+            }
+
+            розрахункиЗКлієнтами_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+            розрахункиЗПостачальниками_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+
+            #endregion
+
             return true;
         }
 
@@ -2882,6 +2922,12 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
 
             РухКоштів_RecordsSet рухКоштів_RecordsSet = new РухКоштів_RecordsSet();
             рухКоштів_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+
+            РозрахункиЗПостачальниками_RecordsSet розрахункиЗПостачальниками_RecordsSet = new РозрахункиЗПостачальниками_RecordsSet();
+            розрахункиЗПостачальниками_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+
+            РозрахункиЗКлієнтами_RecordsSet розрахункиЗКлієнтами_RecordsSet = new РозрахункиЗКлієнтами_RecordsSet();
+            розрахункиЗКлієнтами_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
         }
     }
 

@@ -5,7 +5,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>09.01.2023 20:50:49</DateTimeSave>
+  <DateTimeSave>11.01.2023 13:40:36</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -5064,6 +5064,23 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>LIFO</Name>
           <Value>2</Value>
           <Desc>LIFO (спочатку списуються партії які прийшли останніми)</Desc>
+        </Field>
+      </Fields>
+    </Enum>
+    <Enum>
+      <Name>ТипиКонтрагентів</Name>
+      <Desc>Типи контрагентів</Desc>
+      <SerialNumber>2</SerialNumber>
+      <Fields>
+        <Field>
+          <Name>Постачальник</Name>
+          <Value>1</Value>
+          <Desc>Постачальник</Desc>
+        </Field>
+        <Field>
+          <Name>Клієнт</Name>
+          <Value>2</Value>
+          <Desc>Клієнт</Desc>
         </Field>
       </Fields>
     </Enum>
@@ -10382,6 +10399,16 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               </Desc>
               <IsIndex>0</IsIndex>
             </Field>
+            <Field>
+              <Name>ТипКонтрагента</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>enum</Type>
+              <Pointer>Перелічення.ТипиКонтрагентів</Pointer>
+              <Desc>В залежності від типу контрагента будуть робитися рухи 
+по регістру розрахунки з клієнтами або по регістру розрахунки з 
+постачальниками</Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
           </Fields>
         </TablePart>
       </TabularParts>
@@ -10508,7 +10535,9 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       </TabularLists>
       <AllowRegisterAccumulation>
         <Name>ТовариНаСкладах</Name>
+        <Name>РозрахункиЗКлієнтами</Name>
         <Name>ВільніЗалишки</Name>
+        <Name>РозрахункиЗПостачальниками</Name>
         <Name>РухКоштів</Name>
         <Name>ПартіїТоварів</Name>
       </AllowRegisterAccumulation>
@@ -13397,6 +13426,7 @@ HAVING
         <Name>РозхіднийКасовийОрдер</Name>
         <Name>ПоверненняТоварівВідКлієнта</Name>
         <Name>АктВиконанихРобіт</Name>
+        <Name>ВведенняЗалишків</Name>
       </AllowDocumentSpend>
       <TabularParts>
         <TablePart>
@@ -14330,6 +14360,7 @@ HAVING
         <Name>ПрихіднийКасовийОрдер</Name>
         <Name>РозхіднийКасовийОрдер</Name>
         <Name>ПоверненняТоварівПостачальнику</Name>
+        <Name>ВведенняЗалишків</Name>
       </AllowDocumentSpend>
       <TabularParts>
         <TablePart>

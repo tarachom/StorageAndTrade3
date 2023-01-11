@@ -29,8 +29,10 @@ using Gtk;
 
 using AccountingSoftware;
 
+using StorageAndTrade_1_0;
 using StorageAndTrade_1_0.Довідники;
 using StorageAndTrade_1_0.Документи;
+using StorageAndTrade_1_0.Перелічення;
 
 namespace StorageAndTrade
 {
@@ -43,6 +45,7 @@ namespace StorageAndTrade
         enum Columns
         {
             НомерРядка,
+            ТипКонтрагента,
             КонтрагентНазва,
             ВалютаНазва,
             Сума
@@ -50,6 +53,7 @@ namespace StorageAndTrade
 
         ListStore Store = new ListStore(
             typeof(int),      //НомерРядка
+            typeof(string),   //ТипКонтрагента
             typeof(string),   //КонтрагентНазва
             typeof(string),   //ВалютаНазва
             typeof(float)     //Сума
@@ -66,12 +70,14 @@ namespace StorageAndTrade
             public Валюти_Pointer Валюта { get; set; } = new Валюти_Pointer();
             public string ВалютаНазва { get; set; } = "";
             public decimal Сума { get; set; }
+            public ТипиКонтрагентів ТипКонтрагента { get; set; } = ТипиКонтрагентів.Постачальник;
 
             public object[] ToArray()
             {
                 return new object[]
                 {
                     НомерРядка,
+                    ТипКонтрагента.ToString(),
                     КонтрагентНазва,
                     ВалютаНазва,
                     (float)Сума
@@ -87,7 +93,8 @@ namespace StorageAndTrade
                     КонтрагентНазва = запис.КонтрагентНазва,
                     Валюта = запис.Валюта,
                     ВалютаНазва = запис.ВалютаНазва,
-                    Сума = запис.Сума
+                    Сума = запис.Сума,
+                    ТипКонтрагента = запис.ТипКонтрагента
                 };
             }
 
@@ -247,7 +254,8 @@ namespace StorageAndTrade
                         КонтрагентНазва = join[record.UID.ToString()]["kontragent_name"],
                         Валюта = record.Валюта,
                         ВалютаНазва = join[record.UID.ToString()]["valuta_name"],
-                        Сума = record.Сума
+                        Сума = record.Сума,
+                        ТипКонтрагента = (ТипиКонтрагентів)record.ТипКонтрагента
                     };
 
                     Записи.Add(запис);
@@ -273,6 +281,7 @@ namespace StorageAndTrade
                     record.Контрагент = запис.Контрагент;
                     record.Валюта = запис.Валюта;
                     record.Сума = запис.Сума;
+                    record.ТипКонтрагента = запис.ТипКонтрагента;
 
                     ВведенняЗалишків_Objest.РозрахункиЗКонтрагентами_TablePart.Records.Add(record);
                 }
@@ -287,6 +296,25 @@ namespace StorageAndTrade
         {
             //НомерРядка
             TreeViewGrid.AppendColumn(new TreeViewColumn("№", new CellRendererText(), "text", (int)Columns.НомерРядка) { MinWidth = 30 });
+
+            //ТипКонтрагента
+            {
+                ListStore storeTypeContragent = new ListStore(typeof(string), typeof(string));
+
+                if (Config.Kernel != null)
+                {
+                    ConfigurationEnums ТипиКонтрагентів = Config.Kernel.Conf.Enums["ТипиКонтрагентів"];
+
+                    foreach (ConfigurationEnumField field in ТипиКонтрагентів.Fields.Values)
+                        storeTypeContragent.AppendValues(field.Name, field.Desc);
+                }
+
+                CellRendererCombo TypeContragent = new CellRendererCombo() { Editable = true, Model = storeTypeContragent, TextColumn = 1 };
+                TypeContragent.Edited += TextChanged;
+                TypeContragent.Data.Add("Column", (int)Columns.ТипКонтрагента);
+
+                TreeViewGrid.AppendColumn(new TreeViewColumn("Тип контрагента", TypeContragent, "text", (int)Columns.ТипКонтрагента) { MinWidth = 100 });
+            }
 
             //КонтрагентНазва
             {
@@ -361,6 +389,14 @@ namespace StorageAndTrade
                             var (check, value) = Validate.IsDecimal(args.NewText);
                             if (check)
                                 запис.Сума = value;
+
+                            break;
+                        }
+                    case Columns.ТипКонтрагента:
+                        {
+                            ТипиКонтрагентів result;
+                            if (Enum.TryParse<ТипиКонтрагентів>(args.NewText, true, out result))
+                                запис.ТипКонтрагента = result;
 
                             break;
                         }
