@@ -179,6 +179,39 @@ namespace StorageAndTrade
                         }
                 }
 
+                // Склади
+                {
+                    string name = "Склади";
+
+                    CreateMessage(TypeMessage.None, $"\n{name}\n");
+
+                    Склади_Select склади_Select = new Склади_Select();
+
+                    XPathNodeIterator? ДовідникЗаписи = rootДовідники?.Select("Склади/Запис");
+
+                    if (ДовідникЗаписи != null)
+                        while (ДовідникЗаписи.MoveNext())
+                        {
+                            XPathNavigator? currentNode = ДовідникЗаписи.Current;
+
+                            string Назва = currentNode?.SelectSingleNode("Назва")?.Value ?? "";
+
+                            Склади_Pointer склади_Pointer = склади_Select.FindByField(Склади_Const.Назва, Назва);
+                            if (склади_Pointer.IsEmpty())
+                            {
+                                Склади_Objest склади_Objest = new Склади_Objest();
+                                склади_Objest.New();
+                                склади_Objest.Код = (++Константи.НумераціяДовідників.Склади_Const).ToString("D6");
+                                склади_Objest.Назва = Назва;
+                                склади_Objest.Save();
+
+                                CreateMessage(TypeMessage.Ok, $"Додано новий елемент довідника {name}: {Назва}");
+                            }
+                            else
+                                CreateMessage(TypeMessage.Info, $"Знайдено елемент довідника {name}: {Назва}");
+                        }
+                }
+
                 // Контрагенти
                 {
                     string name = "Контрагенти";
