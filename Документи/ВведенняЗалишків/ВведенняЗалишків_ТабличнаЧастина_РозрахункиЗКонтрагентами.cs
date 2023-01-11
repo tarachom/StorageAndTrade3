@@ -250,12 +250,12 @@ namespace StorageAndTrade
                     {
                         ID = record.UID,
                         НомерРядка = record.НомерРядка,
+                        ТипКонтрагента = (ТипиКонтрагентів)record.ТипКонтрагента,
                         Контрагент = record.Контрагент,
                         КонтрагентНазва = join[record.UID.ToString()]["kontragent_name"],
                         Валюта = record.Валюта,
                         ВалютаНазва = join[record.UID.ToString()]["valuta_name"],
-                        Сума = record.Сума,
-                        ТипКонтрагента = (ТипиКонтрагентів)record.ТипКонтрагента
+                        Сума = record.Сума
                     };
 
                     Записи.Add(запис);
@@ -278,10 +278,10 @@ namespace StorageAndTrade
 
                     record.UID = запис.ID;
                     record.НомерРядка = ++sequenceNumber;
+                    record.ТипКонтрагента = запис.ТипКонтрагента;
                     record.Контрагент = запис.Контрагент;
                     record.Валюта = запис.Валюта;
                     record.Сума = запис.Сума;
-                    record.ТипКонтрагента = запис.ТипКонтрагента;
 
                     ВведенняЗалишків_Objest.РозрахункиЗКонтрагентами_TablePart.Records.Add(record);
                 }

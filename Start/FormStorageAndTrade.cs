@@ -27,24 +27,23 @@ limitations under the License.
 
 using Gtk;
 
+using Константи = StorageAndTrade_1_0.Константи;
+
 namespace StorageAndTrade
 {
     class FormStorageAndTrade : Window
     {
         public ConfigurationParam? OpenConfigurationParam { get; set; }
 
-        Notebook topNotebook;
-        Statusbar statusBar;
+        Notebook topNotebook = new Notebook() { Scrollable = true, EnablePopup = true, BorderWidth = 0, ShowBorder = false, TabPos = PositionType.Top };
+        Statusbar statusBar = new Statusbar();
+        //uint previousNotebookCurrentPage = 0;
 
         public FormStorageAndTrade() : base("\"Зберігання та Торгівля\" для України")
         {
             SetDefaultSize(1200, 900);
             SetPosition(WindowPosition.Center);
-
-            string ico_file_name = "images/form.ico";
-
-            if (File.Exists(ico_file_name))
-                SetDefaultIconFromFile(ico_file_name);
+            if (File.Exists(Program.IcoFileName)) SetDefaultIconFromFile(Program.IcoFileName);
 
             DeleteEvent += delegate { Program.Quit(); };
 
@@ -56,8 +55,9 @@ namespace StorageAndTrade
 
             CreateLeftMenu(hbox);
 
-            topNotebook = new Notebook() { Scrollable = true, EnablePopup = true, BorderWidth = 0, ShowBorder = false };
-            topNotebook.TabPos = PositionType.Top;
+            topNotebook.SwitchPage += OnNotebookSwitchPage;
+            topNotebook.PageRemoved += OnNotebookPageRemoved;
+            hbox.PackStart(topNotebook, true, true, 0);
 
             CreateNotebookPage("Стартова", () =>
             {
@@ -66,12 +66,20 @@ namespace StorageAndTrade
                 return page;
             });
 
-            hbox.PackStart(topNotebook, true, true, 0);
-
-            statusBar = new Statusbar();
             vbox.PackStart(statusBar, false, false, 0);
 
             ShowAll();
+        }
+
+        public void CheckValueConstant()
+        {
+            if (!Константи.ПриЗапускуПрограми.ПрограмаЗаповненаПочатковимиДаними_Const)
+            {
+                CreateNotebookPage("Початкове заповнення", () =>
+                {
+                    return new PageInitialFilling();
+                });
+            }
         }
 
         #region LeftMenu
@@ -169,6 +177,17 @@ namespace StorageAndTrade
         #endregion
 
         #region Notebook Page
+
+        void OnNotebookSwitchPage(object? sender, SwitchPageArgs args)
+        {
+            // previousNotebookCurrentPage = args.PageNum;
+            // Console.WriteLine("OnSwitchPage " + args.PageNum);
+        }
+
+        void OnNotebookPageRemoved(object? sender, PageRemovedArgs args)
+        {
+            // Console.WriteLine("OnPageRemoved " + args.PageNum);
+        }
 
         public void CloseCurrentPageNotebook()
         {

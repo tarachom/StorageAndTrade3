@@ -21,6 +21,14 @@ namespace StorageAndTrade
             Application.Quit();
         }
 
+        //Основна форма
         public static FormStorageAndTrade? GeneralForm { get; set; }
+
+        #region Const
+
+        //Шлях до іконки
+        public const string IcoFileName = "images/form.ico";
+
+        #endregion
     }
 }

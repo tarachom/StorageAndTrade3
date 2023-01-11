@@ -41,11 +41,7 @@ namespace StorageAndTrade
         {
             SetDefaultSize(660, 320);
             SetPosition(WindowPosition.Center);
-
-            string ico_file_name = "images/form.ico";
-
-            if (File.Exists(ico_file_name))
-                SetDefaultIconFromFile(ico_file_name);
+            if (File.Exists(Program.IcoFileName)) SetDefaultIconFromFile(Program.IcoFileName);
 
             DeleteEvent += delegate { Application.Quit(); };
 
@@ -195,6 +191,8 @@ namespace StorageAndTrade
                 Program.GeneralForm = new FormStorageAndTrade();
                 Program.GeneralForm.OpenConfigurationParam = ConfigurationParamCollection.GetConfigurationParam(selectedRows[0].Name);
                 Program.GeneralForm.Show();
+
+                Program.GeneralForm.CheckValueConstant();
 
                 Hide();
             }

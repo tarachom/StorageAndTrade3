@@ -44,11 +44,7 @@ namespace StorageAndTrade
         {
             SetDefaultSize(420, 0);
             SetPosition(WindowPosition.Center);
-            
-            string ico_file_name = "images/form.ico";
-
-            if (File.Exists(ico_file_name))
-                SetDefaultIconFromFile(ico_file_name);
+            if (File.Exists(Program.IcoFileName)) SetDefaultIconFromFile(Program.IcoFileName);
 
             BorderWidth = 5;
 

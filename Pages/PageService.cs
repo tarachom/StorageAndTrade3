@@ -137,11 +137,11 @@ namespace StorageAndTrade
             );
         }
 
-        void OnShown(object? sender, EventArgs args)
-        {
-            scrollMessage.Vadjustment.Value = scrollMessage.Vadjustment.Upper;
-            Console.WriteLine(scrollMessage.Vadjustment.Value);
-        }
+        // void OnShown(object? sender, EventArgs args)
+        // {
+        //     scrollMessage.Vadjustment.Value = scrollMessage.Vadjustment.Upper;
+        //     Console.WriteLine(scrollMessage.Vadjustment.Value);
+        // }
 
         void ClearMessage()
         {
