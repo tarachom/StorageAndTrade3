@@ -120,6 +120,10 @@ namespace StorageAndTrade
 
             CreateJournalBlock(vBox);
 
+            vBox.PackStart(new Separator(Orientation.Horizontal), false, false, 10);
+
+            CreateLinkBlock(vBox);
+
             hPaned.Pack1(vBox, false, false);
         }
 
@@ -230,6 +234,24 @@ namespace StorageAndTrade
             vBoxTop.PackStart(expander, false, false, 10);
         }
 
+        void CreateLinkBlock(VBox vBoxTop)
+        {
+            VBox vBox = new VBox();
+
+            Expander expander = new Expander("Додатково") { Expanded = true };
+            expander.Add(vBox);
+
+            AddLink(vBox, "Заповнення початковими даними", (object? sender, EventArgs args) =>
+            {
+                Program.GeneralForm?.CreateNotebookPage("Початкове заповнення", () =>
+                {
+                    return new PageInitialFilling();
+                });
+            });
+
+            vBoxTop.PackStart(expander, false, false, 10);
+        }
+
         void AddPointerControl(VBox vBox, Widget wgPointerControl)
         {
             HBox hBox = new HBox() { Halign = Align.End };
@@ -253,6 +275,15 @@ namespace StorageAndTrade
             vBox.PackStart(hBox, false, false, 5);
 
             hBox.PackStart(wgControl, false, false, 5);
+        }
+
+        void AddLink(VBox vbox, string uri, EventHandler? clickAction = null)
+        {
+            LinkButton lb = new LinkButton(uri, " " + uri) { Halign = Align.Start, Image = new Image("images/doc.png"), AlwaysShowImage = true };
+            vbox.PackStart(lb, false, false, 10);
+
+            if (clickAction != null)
+                lb.Clicked += clickAction;
         }
 
         public void SetValue()

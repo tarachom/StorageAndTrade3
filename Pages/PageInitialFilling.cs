@@ -42,6 +42,7 @@ namespace StorageAndTrade
         Button bClose;
         Button bFilling;
         Button bStop;
+        Switch visibleOnSart;
         ScrolledWindow scrollMessage;
         VBox vBoxMessage;
         CancellationTokenSource? CancellationTokenThread { get; set; }
@@ -75,6 +76,15 @@ namespace StorageAndTrade
             bStop.Clicked += OnStopClick;
 
             hBoxBotton.PackStart(bStop, false, false, 10);
+
+            //Показувати при запуску
+            visibleOnSart = new Switch() { HeightRequest = 20 };
+            visibleOnSart.ButtonReleaseEvent += (object? sender, ButtonReleaseEventArgs args) => { Константи.ПриЗапускуПрограми.ПрограмаЗаповненаПочатковимиДаними_Const = visibleOnSart.Active; };
+            visibleOnSart.Active = !Константи.ПриЗапускуПрограми.ПрограмаЗаповненаПочатковимиДаними_Const;
+
+            hBoxBotton.PackEnd(new Label("Показувати при запуску"), false, false, 10);
+            hBoxBotton.PackEnd(visibleOnSart, false, false, 10);
+
 
             PackStart(hBoxBotton, false, false, 10);
 
