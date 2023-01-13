@@ -27,8 +27,12 @@ limitations under the License.
 
 using Gtk;
 
+using AccountingSoftware;
+
+using StorageAndTrade_1_0;
 using StorageAndTrade_1_0.Константи;
 using StorageAndTrade_1_0.Довідники;
+using Перелічення = StorageAndTrade_1_0.Перелічення;
 
 namespace StorageAndTrade
 {
@@ -47,6 +51,8 @@ namespace StorageAndTrade
         Entry Код = new Entry() { WidthRequest = 100 };
         Entry Назва = new Entry() { WidthRequest = 500 };
         Склади_Папки_PointerControl Родич = new Склади_Папки_PointerControl() { Caption = "Папка:" };
+        ComboBoxText ТипСкладу = new ComboBoxText();
+        ComboBoxText НалаштуванняАдресногоЗберігання = new ComboBoxText();
         Склади_ТабличнаЧастина_Контакти Контакти = new Склади_ТабличнаЧастина_Контакти();
 
         #endregion
@@ -103,6 +109,26 @@ namespace StorageAndTrade
             hBoxParent.PackStart(Родич, false, false, 5);
 
             hPaned.Pack1(vBox, false, false);
+
+            //Тип складу
+            HBox hBoxType = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxType, false, false, 5);
+
+            foreach (ConfigurationEnumField field in Config.Kernel!.Conf.Enums["ТипиСкладів"].Fields.Values)
+                ТипСкладу.Append(field.Name, field.Desc);
+
+            hBoxType.PackStart(new Label("Тип складу:"), false, false, 5);
+            hBoxType.PackStart(ТипСкладу, false, false, 5);
+
+            //НалаштуванняАдресногоЗберігання
+            HBox hBoxAdressSave = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxAdressSave, false, false, 5);
+
+            foreach (ConfigurationEnumField field in Config.Kernel!.Conf.Enums["НалаштуванняАдресногоЗберігання"].Fields.Values)
+                НалаштуванняАдресногоЗберігання.Append(field.Name, field.Desc);
+
+            hBoxAdressSave.PackStart(new Label("Адресне зберігання:"), false, false, 5);
+            hBoxAdressSave.PackStart(НалаштуванняАдресногоЗберігання, false, false, 5);
         }
 
         void CreatePack2(HPaned hPaned)
@@ -133,6 +159,14 @@ namespace StorageAndTrade
             Код.Text = Склади_Objest.Код;
             Назва.Text = Склади_Objest.Назва;
             Родич.Pointer = Склади_Objest.Папка;
+            ТипСкладу.ActiveId = Склади_Objest.ТипСкладу.ToString();
+            НалаштуванняАдресногоЗберігання.ActiveId = Склади_Objest.НалаштуванняАдресногоЗберігання.ToString();
+
+            if (ТипСкладу.Active == -1)
+                ТипСкладу.ActiveId = Перелічення.ТипиСкладів.Гуртовий.ToString();
+
+            if (НалаштуванняАдресногоЗберігання.Active == -1)
+                НалаштуванняАдресногоЗберігання.ActiveId = Перелічення.НалаштуванняАдресногоЗберігання.НеВикористовувати.ToString();
 
             Контакти.Склади_Objest = Склади_Objest;
             Контакти.LoadRecords();
@@ -143,6 +177,8 @@ namespace StorageAndTrade
             Склади_Objest.Код = Код.Text;
             Склади_Objest.Назва = Назва.Text;
             Склади_Objest.Папка = Родич.Pointer;
+            Склади_Objest.ТипСкладу = Enum.Parse<Перелічення.ТипиСкладів>(ТипСкладу.ActiveId);
+            Склади_Objest.НалаштуванняАдресногоЗберігання = Enum.Parse<Перелічення.НалаштуванняАдресногоЗберігання>(НалаштуванняАдресногоЗберігання.ActiveId);
         }
 
         #endregion

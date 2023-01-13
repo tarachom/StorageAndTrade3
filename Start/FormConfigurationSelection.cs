@@ -186,15 +186,24 @@ namespace StorageAndTrade
                     return;
                 }
 
-                Конфа.Config.ReadAllConstants();
+                if (Конфа.Config.Kernel.DataBase.IfExistsTable("tab_constants"))
+                {
+                    Конфа.Config.ReadAllConstants();
 
-                Program.GeneralForm = new FormStorageAndTrade();
-                Program.GeneralForm.OpenConfigurationParam = ConfigurationParamCollection.GetConfigurationParam(selectedRows[0].Name);
-                Program.GeneralForm.Show();
+                    Program.GeneralForm = new FormStorageAndTrade();
+                    Program.GeneralForm.OpenConfigurationParam = ConfigurationParamCollection.GetConfigurationParam(selectedRows[0].Name);
+                    Program.GeneralForm.Show();
 
-                Program.GeneralForm.CheckValueConstant();
+                    Program.GeneralForm.CheckValueConstant();
 
-                Hide();
+                    Hide();
+                }
+                else
+                {
+                    Message.Error(this, @"Error: Відсутня таблиця tab_constants. Потрібно відкрити Конфігуратор і зберегти конфігурацію -  
+                    (Меню: Конфігурація/Зберегти конфігурацію - дальше Збереження змін. Крок 1, Збереження змін. Крок 2)");
+                    return;
+                }
             }
         }
 

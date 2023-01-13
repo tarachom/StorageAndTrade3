@@ -5,7 +5,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>11.01.2023 13:40:36</DateTimeSave>
+  <DateTimeSave>13.01.2023 16:41:16</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -1972,6 +1972,16 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>1</IsIndex>
         </Field>
+        <Field>
+          <Name>НалаштуванняАдресногоЗберігання</Name>
+          <NameInTable>col_a6</NameInTable>
+          <Type>enum</Type>
+          <Pointer>Перелічення.НалаштуванняАдресногоЗберігання</Pointer>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+        </Field>
       </Fields>
       <TabularParts>
         <TablePart>
@@ -2073,6 +2083,24 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <Type>string</Type>
               <Pointer>
               </Pointer>
+            </Field>
+            <Field>
+              <Name>ТипСкладу</Name>
+              <Caption>Тип cкладу</Caption>
+              <Size>0</Size>
+              <SortNum>3</SortNum>
+              <SortField>False</SortField>
+              <Type>enum</Type>
+              <Pointer>Перелічення.ТипиСкладів</Pointer>
+            </Field>
+            <Field>
+              <Name>НалаштуванняАдресногоЗберігання</Name>
+              <Caption>Адресне зберігання</Caption>
+              <Size>0</Size>
+              <SortNum>4</SortNum>
+              <SortField>False</SortField>
+              <Type>enum</Type>
+              <Pointer>Перелічення.НалаштуванняАдресногоЗберігання</Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -2920,8 +2948,10 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       <TriggerFunctions>
         <BeforeSave>
         </BeforeSave>
-        <AfterSave>Номенклатура_Папки_Triggers.AfterRecording</AfterSave>
-        <BeforeDelete>Номенклатура_Папки_Triggers.BeforeDelete</BeforeDelete>
+        <AfterSave>
+        </AfterSave>
+        <BeforeDelete>
+        </BeforeDelete>
       </TriggerFunctions>
     </Directory>
     <Directory>
@@ -4467,6 +4497,706 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
         </BeforeDelete>
       </TriggerFunctions>
     </Directory>
+    <Directory>
+      <Name>СкладськіПриміщення</Name>
+      <Table>tab_a71</Table>
+      <Desc>
+      </Desc>
+      <Fields>
+        <Field>
+          <Name>Назва</Name>
+          <NameInTable>col_a2</NameInTable>
+          <Type>string</Type>
+          <Desc>Назва</Desc>
+          <IsPresentation>1</IsPresentation>
+          <IsIndex>0</IsIndex>
+        </Field>
+        <Field>
+          <Name>НалаштуванняАдресногоЗберігання</Name>
+          <NameInTable>col_a3</NameInTable>
+          <Type>enum</Type>
+          <Pointer>Перелічення.НалаштуванняАдресногоЗберігання</Pointer>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+        </Field>
+      </Fields>
+      <TabularParts />
+      <TabularLists>
+        <TabularList>
+          <Name>Записи</Name>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>Назва</Name>
+              <Caption>Назва</Caption>
+              <Size>0</Size>
+              <SortNum>1</SortNum>
+              <SortField>True</SortField>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>НалаштуванняАдресногоЗберігання</Name>
+              <Caption>Налаштування</Caption>
+              <Size>0</Size>
+              <SortNum>2</SortNum>
+              <SortField>False</SortField>
+              <Type>enum</Type>
+              <Pointer>Перелічення.НалаштуванняАдресногоЗберігання</Pointer>
+            </Field>
+          </Fields>
+        </TabularList>
+      </TabularLists>
+      <TriggerFunctions>
+        <BeforeSave>
+        </BeforeSave>
+        <AfterSave>
+        </AfterSave>
+        <BeforeDelete>
+        </BeforeDelete>
+      </TriggerFunctions>
+    </Directory>
+    <Directory>
+      <Name>СкладськіКомірки</Name>
+      <Table>tab_a72</Table>
+      <Desc>
+      </Desc>
+      <Fields>
+        <Field>
+          <Name>Код</Name>
+          <NameInTable>col_a1</NameInTable>
+          <Type>string</Type>
+          <Desc>Код</Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+        </Field>
+        <Field>
+          <Name>Назва</Name>
+          <NameInTable>col_a2</NameInTable>
+          <Type>string</Type>
+          <Desc>Назва</Desc>
+          <IsPresentation>1</IsPresentation>
+          <IsIndex>0</IsIndex>
+        </Field>
+        <Field>
+          <Name>ОбластьЗберігання</Name>
+          <NameInTable>col_a3</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Довідники.ОбластьЗберігання</Pointer>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+        </Field>
+        <Field>
+          <Name>Лінія</Name>
+          <NameInTable>col_a4</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+        </Field>
+        <Field>
+          <Name>Позиція</Name>
+          <NameInTable>col_a5</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+        </Field>
+        <Field>
+          <Name>Приміщення</Name>
+          <NameInTable>col_a6</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Довідники.СкладськіПриміщення</Pointer>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+        </Field>
+        <Field>
+          <Name>Стелаж</Name>
+          <NameInTable>col_a7</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+        </Field>
+        <Field>
+          <Name>Ярус</Name>
+          <NameInTable>col_a8</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+        </Field>
+        <Field>
+          <Name>ТипСкладськоїКомірки</Name>
+          <NameInTable>col_a9</NameInTable>
+          <Type>enum</Type>
+          <Pointer>Перелічення.ТипиСкладськихКомірок</Pointer>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+        </Field>
+        <Field>
+          <Name>Типорозмір</Name>
+          <NameInTable>col_b1</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Довідники.ТипорозміриКомірок</Pointer>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+        </Field>
+      </Fields>
+      <TabularParts />
+      <TabularLists>
+        <TabularList>
+          <Name>Записи</Name>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>Код</Name>
+              <Caption>Код</Caption>
+              <Size>0</Size>
+              <SortNum>1</SortNum>
+              <SortField>False</SortField>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>Назва</Name>
+              <Caption>Назва</Caption>
+              <Size>0</Size>
+              <SortNum>2</SortNum>
+              <SortField>True</SortField>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>ОбластьЗберігання</Name>
+              <Caption>Область зберігання</Caption>
+              <Size>0</Size>
+              <SortNum>3</SortNum>
+              <SortField>False</SortField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ОбластьЗберігання</Pointer>
+              <Join>
+                <table>Довідники.ОбластьЗберігання_Const.TABLE</table>
+                <field>ОбластьЗберігання</field>
+                <alias>join_tab_1</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_1</table>
+                <field>Довідники.ОбластьЗберігання_Const.Назва</field>
+              </FieldAndAlias>
+            </Field>
+            <Field>
+              <Name>Лінія</Name>
+              <Caption>Лінія</Caption>
+              <Size>0</Size>
+              <SortNum>4</SortNum>
+              <SortField>False</SortField>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>Позиція</Name>
+              <Caption>Позиція</Caption>
+              <Size>0</Size>
+              <SortNum>5</SortNum>
+              <SortField>False</SortField>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>Приміщення</Name>
+              <Caption>Приміщення</Caption>
+              <Size>0</Size>
+              <SortNum>6</SortNum>
+              <SortField>False</SortField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.СкладськіПриміщення</Pointer>
+              <Join>
+                <table>Довідники.СкладськіПриміщення_Const.TABLE</table>
+                <field>Приміщення</field>
+                <alias>join_tab_2</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_2</table>
+                <field>Довідники.СкладськіПриміщення_Const.Назва</field>
+              </FieldAndAlias>
+            </Field>
+            <Field>
+              <Name>Стелаж</Name>
+              <Caption>Стелаж</Caption>
+              <Size>0</Size>
+              <SortNum>7</SortNum>
+              <SortField>False</SortField>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>Ярус</Name>
+              <Caption>Ярус</Caption>
+              <Size>0</Size>
+              <SortNum>8</SortNum>
+              <SortField>False</SortField>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>ТипСкладськоїКомірки</Name>
+              <Caption>Тип комірки</Caption>
+              <Size>0</Size>
+              <SortNum>9</SortNum>
+              <SortField>False</SortField>
+              <Type>enum</Type>
+              <Pointer>Перелічення.ТипиСкладськихКомірок</Pointer>
+            </Field>
+            <Field>
+              <Name>Типорозмір</Name>
+              <Caption>Типорозмір</Caption>
+              <Size>0</Size>
+              <SortNum>10</SortNum>
+              <SortField>False</SortField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ТипорозміриКомірок</Pointer>
+              <Join>
+                <table>Довідники.ТипорозміриКомірок_Const.TABLE</table>
+                <field>Типорозмір</field>
+                <alias>join_tab_3</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_3</table>
+                <field>Довідники.ТипорозміриКомірок_Const.Назва</field>
+              </FieldAndAlias>
+            </Field>
+          </Fields>
+        </TabularList>
+      </TabularLists>
+      <TriggerFunctions>
+        <BeforeSave>
+        </BeforeSave>
+        <AfterSave>
+        </AfterSave>
+        <BeforeDelete>
+        </BeforeDelete>
+      </TriggerFunctions>
+    </Directory>
+    <Directory>
+      <Name>ОбластьЗберігання</Name>
+      <Table>tab_a73</Table>
+      <Desc>
+      </Desc>
+      <Fields>
+        <Field>
+          <Name>Назва</Name>
+          <NameInTable>col_a2</NameInTable>
+          <Type>string</Type>
+          <Desc>Назва</Desc>
+          <IsPresentation>1</IsPresentation>
+          <IsIndex>0</IsIndex>
+        </Field>
+        <Field>
+          <Name>Опис</Name>
+          <NameInTable>col_a3</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+        </Field>
+        <Field>
+          <Name>Приміщення</Name>
+          <NameInTable>col_a4</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Довідники.СкладськіПриміщення</Pointer>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+        </Field>
+      </Fields>
+      <TabularParts />
+      <TabularLists>
+        <TabularList>
+          <Name>Записи</Name>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>Назва</Name>
+              <Caption>Назва</Caption>
+              <Size>0</Size>
+              <SortNum>1</SortNum>
+              <SortField>True</SortField>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>Приміщення</Name>
+              <Caption>Приміщення</Caption>
+              <Size>0</Size>
+              <SortNum>2</SortNum>
+              <SortField>False</SortField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.СкладськіПриміщення</Pointer>
+              <Join>
+                <table>Довідники.СкладськіПриміщення_Const.TABLE</table>
+                <field>Приміщення</field>
+                <alias>join_tab_1</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_1</table>
+                <field>Довідники.СкладськіПриміщення_Const.Назва</field>
+              </FieldAndAlias>
+            </Field>
+          </Fields>
+        </TabularList>
+      </TabularLists>
+      <TriggerFunctions>
+        <BeforeSave>
+        </BeforeSave>
+        <AfterSave>
+        </AfterSave>
+        <BeforeDelete>
+        </BeforeDelete>
+      </TriggerFunctions>
+    </Directory>
+    <Directory>
+      <Name>ТипорозміриКомірок</Name>
+      <Table>tab_a75</Table>
+      <Desc>
+      </Desc>
+      <Fields>
+        <Field>
+          <Name>Висота</Name>
+          <NameInTable>col_a1</NameInTable>
+          <Type>numeric</Type>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+        </Field>
+        <Field>
+          <Name>Назва</Name>
+          <NameInTable>col_a2</NameInTable>
+          <Type>string</Type>
+          <Desc>Назва</Desc>
+          <IsPresentation>1</IsPresentation>
+          <IsIndex>0</IsIndex>
+        </Field>
+        <Field>
+          <Name>Глибина</Name>
+          <NameInTable>col_a3</NameInTable>
+          <Type>numeric</Type>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+        </Field>
+        <Field>
+          <Name>Вантажопідйомність</Name>
+          <NameInTable>col_a4</NameInTable>
+          <Type>numeric</Type>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+        </Field>
+        <Field>
+          <Name>Обєм</Name>
+          <NameInTable>col_a5</NameInTable>
+          <Type>numeric</Type>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+        </Field>
+        <Field>
+          <Name>Ширина</Name>
+          <NameInTable>col_a6</NameInTable>
+          <Type>numeric</Type>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+        </Field>
+      </Fields>
+      <TabularParts />
+      <TabularLists>
+        <TabularList>
+          <Name>Записи</Name>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>Назва</Name>
+              <Caption>Назва</Caption>
+              <Size>0</Size>
+              <SortNum>1</SortNum>
+              <SortField>True</SortField>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>Висота</Name>
+              <Caption>Висота</Caption>
+              <Size>0</Size>
+              <SortNum>2</SortNum>
+              <SortField>False</SortField>
+              <Type>numeric</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>Глибина</Name>
+              <Caption>Глибина</Caption>
+              <Size>0</Size>
+              <SortNum>3</SortNum>
+              <SortField>False</SortField>
+              <Type>numeric</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>Вантажопідйомність</Name>
+              <Caption>Вантажопідйомність</Caption>
+              <Size>0</Size>
+              <SortNum>4</SortNum>
+              <SortField>False</SortField>
+              <Type>numeric</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>Обєм</Name>
+              <Caption>Обєм</Caption>
+              <Size>0</Size>
+              <SortNum>5</SortNum>
+              <SortField>False</SortField>
+              <Type>numeric</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>Ширина</Name>
+              <Caption>Ширина</Caption>
+              <Size>0</Size>
+              <SortNum>6</SortNum>
+              <SortField>False</SortField>
+              <Type>numeric</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+          </Fields>
+        </TabularList>
+      </TabularLists>
+      <TriggerFunctions>
+        <BeforeSave>
+        </BeforeSave>
+        <AfterSave>
+        </AfterSave>
+        <BeforeDelete>
+        </BeforeDelete>
+      </TriggerFunctions>
+    </Directory>
+    <Directory>
+      <Name>СкладськіКомірки_Папки</Name>
+      <Table>tab_a76</Table>
+      <Desc>
+      </Desc>
+      <Fields>
+        <Field>
+          <Name>Назва</Name>
+          <NameInTable>col_j1</NameInTable>
+          <Type>string</Type>
+          <Desc>Назва</Desc>
+          <IsPresentation>1</IsPresentation>
+          <IsIndex>0</IsIndex>
+        </Field>
+        <Field>
+          <Name>Код</Name>
+          <NameInTable>col_j2</NameInTable>
+          <Type>string</Type>
+          <Desc>Код</Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+        </Field>
+        <Field>
+          <Name>Родич</Name>
+          <NameInTable>col_j3</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Довідники.СкладськіКомірки_Папки</Pointer>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>1</IsIndex>
+        </Field>
+      </Fields>
+      <TabularParts />
+      <TabularLists />
+      <TriggerFunctions>
+        <BeforeSave>
+        </BeforeSave>
+        <AfterSave>
+        </AfterSave>
+        <BeforeDelete>
+        </BeforeDelete>
+      </TriggerFunctions>
+    </Directory>
+    <Directory>
+      <Name>СкладськіПриміщення_Папки</Name>
+      <Table>tab_a97</Table>
+      <Desc>
+      </Desc>
+      <Fields>
+        <Field>
+          <Name>Назва</Name>
+          <NameInTable>col_j1</NameInTable>
+          <Type>string</Type>
+          <Desc>Назва</Desc>
+          <IsPresentation>1</IsPresentation>
+          <IsIndex>0</IsIndex>
+        </Field>
+        <Field>
+          <Name>Код</Name>
+          <NameInTable>col_j2</NameInTable>
+          <Type>string</Type>
+          <Desc>Код</Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+        </Field>
+        <Field>
+          <Name>Родич</Name>
+          <NameInTable>col_j3</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Довідники.СкладськіПриміщення_Папки</Pointer>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>1</IsIndex>
+        </Field>
+      </Fields>
+      <TabularParts />
+      <TabularLists />
+      <TriggerFunctions>
+        <BeforeSave>
+        </BeforeSave>
+        <AfterSave>
+        </AfterSave>
+        <BeforeDelete>
+        </BeforeDelete>
+      </TriggerFunctions>
+    </Directory>
+    <Directory>
+      <Name>ТипорозміриКомірок_Папки</Name>
+      <Table>tab_a98</Table>
+      <Desc>
+      </Desc>
+      <Fields>
+        <Field>
+          <Name>Назва</Name>
+          <NameInTable>col_j1</NameInTable>
+          <Type>string</Type>
+          <Desc>Назва</Desc>
+          <IsPresentation>1</IsPresentation>
+          <IsIndex>0</IsIndex>
+        </Field>
+        <Field>
+          <Name>Код</Name>
+          <NameInTable>col_j2</NameInTable>
+          <Type>string</Type>
+          <Desc>Код</Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+        </Field>
+        <Field>
+          <Name>Родич</Name>
+          <NameInTable>col_j3</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Довідники.ТипорозміриКомірок_Папки</Pointer>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>1</IsIndex>
+        </Field>
+      </Fields>
+      <TabularParts />
+      <TabularLists />
+      <TriggerFunctions>
+        <BeforeSave>
+        </BeforeSave>
+        <AfterSave>
+        </AfterSave>
+        <BeforeDelete>
+        </BeforeDelete>
+      </TriggerFunctions>
+    </Directory>
+    <Directory>
+      <Name>ОбластьЗберігання_Папки</Name>
+      <Table>tab_a99</Table>
+      <Desc>
+      </Desc>
+      <Fields>
+        <Field>
+          <Name>Назва</Name>
+          <NameInTable>col_j1</NameInTable>
+          <Type>string</Type>
+          <Desc>Назва</Desc>
+          <IsPresentation>1</IsPresentation>
+          <IsIndex>0</IsIndex>
+        </Field>
+        <Field>
+          <Name>Код</Name>
+          <NameInTable>col_j2</NameInTable>
+          <Type>string</Type>
+          <Desc>Код</Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+        </Field>
+        <Field>
+          <Name>Родич</Name>
+          <NameInTable>col_j3</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Довідники.ОбластьЗберігання_Папки</Pointer>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>1</IsIndex>
+        </Field>
+      </Fields>
+      <TabularParts />
+      <TabularLists />
+      <TriggerFunctions>
+        <BeforeSave>
+        </BeforeSave>
+        <AfterSave>
+        </AfterSave>
+        <BeforeDelete>
+        </BeforeDelete>
+      </TriggerFunctions>
+    </Directory>
   </Directories>
   <Enums>
     <Enum>
@@ -4549,14 +5279,12 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
         <Field>
           <Name>Гуртовий</Name>
           <Value>1</Value>
-          <Desc>
-          </Desc>
+          <Desc>Гуртовий</Desc>
         </Field>
         <Field>
           <Name>Роздрібний</Name>
           <Value>2</Value>
-          <Desc>
-          </Desc>
+          <Desc>Роздрібний</Desc>
         </Field>
       </Fields>
     </Enum>
@@ -5081,6 +5809,50 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>Клієнт</Name>
           <Value>2</Value>
           <Desc>Клієнт</Desc>
+        </Field>
+      </Fields>
+    </Enum>
+    <Enum>
+      <Name>НалаштуванняАдресногоЗберігання</Name>
+      <Desc>
+      </Desc>
+      <SerialNumber>2</SerialNumber>
+      <Fields>
+        <Field>
+          <Name>НеВикористовувати</Name>
+          <Value>1</Value>
+          <Desc>Не використовувати</Desc>
+        </Field>
+        <Field>
+          <Name>КоміркаДовідково</Name>
+          <Value>2</Value>
+          <Desc>Комірка довідково</Desc>
+        </Field>
+      </Fields>
+    </Enum>
+    <Enum>
+      <Name>ТипиСкладськихКомірок</Name>
+      <Desc>
+      </Desc>
+      <SerialNumber>3</SerialNumber>
+      <Fields>
+        <Field>
+          <Name>Приймання</Name>
+          <Value>1</Value>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Відвантаження</Name>
+          <Value>2</Value>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Зберігання</Name>
+          <Value>3</Value>
+          <Desc>
+          </Desc>
         </Field>
       </Fields>
     </Enum>
@@ -12557,6 +13329,58 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
         <Fields />
       </PropertyFields>
     </RegisterInformation>
+    <RegisterInformation>
+      <Name>РозміщенняНоменклатуриПоСкладськимКоміркам</Name>
+      <Table>tab_a74</Table>
+      <Desc>
+      </Desc>
+      <DimensionFields>
+        <Fields>
+          <Field>
+            <Name>Номенклатура</Name>
+            <NameInTable>col_a1</NameInTable>
+            <Type>pointer</Type>
+            <Pointer>Довідники.Номенклатура</Pointer>
+            <Desc>
+            </Desc>
+            <IsIndex>1</IsIndex>
+          </Field>
+          <Field>
+            <Name>Склад</Name>
+            <NameInTable>col_a2</NameInTable>
+            <Type>pointer</Type>
+            <Pointer>Довідники.Склади</Pointer>
+            <Desc>
+            </Desc>
+            <IsIndex>1</IsIndex>
+          </Field>
+          <Field>
+            <Name>Приміщення</Name>
+            <NameInTable>col_a3</NameInTable>
+            <Type>pointer</Type>
+            <Pointer>Довідники.СкладськіПриміщення</Pointer>
+            <Desc>
+            </Desc>
+            <IsIndex>1</IsIndex>
+          </Field>
+          <Field>
+            <Name>Комірка</Name>
+            <NameInTable>col_a4</NameInTable>
+            <Type>pointer</Type>
+            <Pointer>Довідники.СкладськіКомірки</Pointer>
+            <Desc>
+            </Desc>
+            <IsIndex>1</IsIndex>
+          </Field>
+        </Fields>
+      </DimensionFields>
+      <ResourcesFields>
+        <Fields />
+      </ResourcesFields>
+      <PropertyFields>
+        <Fields />
+      </PropertyFields>
+    </RegisterInformation>
   </RegistersInformation>
   <RegistersAccumulation>
     <RegisterAccumulation>
@@ -15857,6 +16681,354 @@ HAVING
     SUM(Продажі.{Продажі_Const.Кількість}) != 0 OR
     SUM(Продажі.{Продажі_Const.Сума}) != 0 OR
     SUM(Продажі.{Продажі_Const.Дохід}) != 0 
+
+
+
+
+</Query>
+        </QueryBlock>
+      </QueryBlockList>
+    </RegisterAccumulation>
+    <RegisterAccumulation>
+      <Name>ТовариВКомірках</Name>
+      <Table>tab_b01</Table>
+      <Type>Residues</Type>
+      <Desc>
+      </Desc>
+      <DimensionFields>
+        <Fields>
+          <Field>
+            <Name>Номенклатура</Name>
+            <NameInTable>col_a1</NameInTable>
+            <Type>pointer</Type>
+            <Pointer>Довідники.Номенклатура</Pointer>
+            <Desc>
+            </Desc>
+            <IsIndex>1</IsIndex>
+          </Field>
+          <Field>
+            <Name>ХарактеристикаНоменклатури</Name>
+            <NameInTable>col_a2</NameInTable>
+            <Type>pointer</Type>
+            <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
+            <Desc>
+            </Desc>
+            <IsIndex>1</IsIndex>
+          </Field>
+          <Field>
+            <Name>Пакування</Name>
+            <NameInTable>col_a3</NameInTable>
+            <Type>pointer</Type>
+            <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
+            <Desc>
+            </Desc>
+            <IsIndex>1</IsIndex>
+          </Field>
+          <Field>
+            <Name>Комірка</Name>
+            <NameInTable>col_a4</NameInTable>
+            <Type>pointer</Type>
+            <Pointer>Довідники.СкладськіКомірки</Pointer>
+            <Desc>
+            </Desc>
+            <IsIndex>1</IsIndex>
+          </Field>
+          <Field>
+            <Name>Серія</Name>
+            <NameInTable>col_a5</NameInTable>
+            <Type>pointer</Type>
+            <Pointer>Довідники.СеріїНоменклатури</Pointer>
+            <Desc>
+            </Desc>
+            <IsIndex>1</IsIndex>
+          </Field>
+        </Fields>
+      </DimensionFields>
+      <ResourcesFields>
+        <Fields>
+          <Field>
+            <Name>ВНаявності</Name>
+            <NameInTable>col_a6</NameInTable>
+            <Type>numeric</Type>
+            <Desc>
+            </Desc>
+            <IsIndex>0</IsIndex>
+          </Field>
+        </Fields>
+      </ResourcesFields>
+      <PropertyFields>
+        <Fields />
+      </PropertyFields>
+      <AllowDocumentSpend />
+      <TabularParts>
+        <TablePart>
+          <Name>Залишки</Name>
+          <Table>tab_b04</Table>
+          <Desc>Віртуальна таблиця</Desc>
+          <Fields>
+            <Field>
+              <Name>Період</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>date</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Номенклатура</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Номенклатура</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>ХарактеристикаНоменклатури</Name>
+              <NameInTable>col_a3</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Пакування</Name>
+              <NameInTable>col_a4</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Комірка</Name>
+              <NameInTable>col_a5</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.СкладськіКомірки</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Серія</Name>
+              <NameInTable>col_a6</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.СеріїНоменклатури</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>ВНаявності</Name>
+              <NameInTable>col_a7</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+          </Fields>
+        </TablePart>
+        <TablePart>
+          <Name>ЗалишкиТаОбороти</Name>
+          <Table>tab_b05</Table>
+          <Desc>Віртуальна таблиця</Desc>
+          <Fields>
+            <Field>
+              <Name>Період</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>date</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Номенклатура</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Номенклатура</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>ХарактеристикаНоменклатури</Name>
+              <NameInTable>col_a3</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Пакування</Name>
+              <NameInTable>col_a4</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Комірка</Name>
+              <NameInTable>col_a5</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.СкладськіКомірки</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Серія</Name>
+              <NameInTable>col_a6</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.СеріїНоменклатури</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>ВНаявностіПрихід</Name>
+              <NameInTable>col_a7</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+            <Field>
+              <Name>ВНаявностіРозхід</Name>
+              <NameInTable>col_a8</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+            <Field>
+              <Name>ВНаявностіЗалишок</Name>
+              <NameInTable>col_a9</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+          </Fields>
+        </TablePart>
+      </TabularParts>
+      <QueryBlockList>
+        <QueryBlock>
+          <Name>Залишки</Name>
+          <Query position="0" key="DELETE">
+DELETE FROM 
+    {ТовариВКомірках_Залишки_TablePart.TABLE}
+WHERE 
+    {ТовариВКомірках_Залишки_TablePart.TABLE}.{ТовариВКомірках_Залишки_TablePart.Період} = @ПеріодДеньВідбір
+</Query>
+          <Query position="1" key="SELECT">
+INSERT INTO {ТовариВКомірках_Залишки_TablePart.TABLE} 
+(
+    uid,
+    {ТовариВКомірках_Залишки_TablePart.Період},
+    {ТовариВКомірках_Залишки_TablePart.Номенклатура},
+    {ТовариВКомірках_Залишки_TablePart.ХарактеристикаНоменклатури},
+    {ТовариВКомірках_Залишки_TablePart.Пакування},
+    {ТовариВКомірках_Залишки_TablePart.Комірка},
+    {ТовариВКомірках_Залишки_TablePart.Серія},
+    {ТовариВКомірках_Залишки_TablePart.ВНаявності}
+)
+SELECT
+    uuid_generate_v4(),
+    date_trunc('day', ТовариВКомірках.period::timestamp) AS Період,
+    ТовариВКомірках.{ТовариВКомірках_Const.Номенклатура} AS Номенклатура,
+    ТовариВКомірках.{ТовариВКомірках_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
+    ТовариВКомірках.{ТовариВКомірках_Const.Пакування} AS Пакування,
+    ТовариВКомірках.{ТовариВКомірках_Const.Комірка} AS Комірка,
+    ТовариВКомірках.{ТовариВКомірках_Const.Серія} AS Серія,
+
+    /* ВНаявності */
+    SUM(CASE WHEN ТовариВКомірках.income = true THEN 
+        ТовариВКомірках.{ТовариВКомірках_Const.ВНаявності} ELSE 
+        -ТовариВКомірках.{ТовариВКомірках_Const.ВНаявності} END) AS ВНаявності
+
+FROM
+    {ТовариВКомірках_Const.TABLE} AS ТовариВКомірках
+
+WHERE
+    date_trunc('day', ТовариВКомірках.period::timestamp) = @ПеріодДеньВідбір
+
+GROUP BY
+    Період, Номенклатура, ХарактеристикаНоменклатури, Пакування, Комірка, Серія
+
+HAVING
+
+    /* ВНаявності */
+    SUM(CASE WHEN ТовариВКомірках.income = true THEN 
+        ТовариВКомірках.{ТовариВКомірках_Const.ВНаявності} ELSE 
+        -ТовариВКомірках.{ТовариВКомірках_Const.ВНаявності} END) != 0 
+
+
+
+
+</Query>
+        </QueryBlock>
+        <QueryBlock>
+          <Name>ЗалишкиТаОбороти</Name>
+          <Query position="0" key="DELETE">
+DELETE FROM 
+    {ТовариВКомірках_ЗалишкиТаОбороти_TablePart.TABLE}
+WHERE 
+    {ТовариВКомірках_ЗалишкиТаОбороти_TablePart.TABLE}.{ТовариВКомірках_ЗалишкиТаОбороти_TablePart.Період} = @ПеріодДеньВідбір
+</Query>
+          <Query position="1" key="SELECT">
+INSERT INTO {ТовариВКомірках_ЗалишкиТаОбороти_TablePart.TABLE} 
+(
+    uid,
+    {ТовариВКомірках_ЗалишкиТаОбороти_TablePart.Період},
+    {ТовариВКомірках_ЗалишкиТаОбороти_TablePart.Номенклатура},
+    {ТовариВКомірках_ЗалишкиТаОбороти_TablePart.ХарактеристикаНоменклатури},
+    {ТовариВКомірках_ЗалишкиТаОбороти_TablePart.Пакування},
+    {ТовариВКомірках_ЗалишкиТаОбороти_TablePart.Комірка},
+    {ТовариВКомірках_ЗалишкиТаОбороти_TablePart.Серія},
+    {ТовариВКомірках_ЗалишкиТаОбороти_TablePart.ВНаявностіПрихід},
+    {ТовариВКомірках_ЗалишкиТаОбороти_TablePart.ВНаявностіРозхід},
+    {ТовариВКомірках_ЗалишкиТаОбороти_TablePart.ВНаявностіЗалишок}
+)
+SELECT
+    uuid_generate_v4(),
+    date_trunc('day', ТовариВКомірках.period::timestamp) AS Період,
+    ТовариВКомірках.{ТовариВКомірках_Const.Номенклатура} AS Номенклатура,
+    ТовариВКомірках.{ТовариВКомірках_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
+    ТовариВКомірках.{ТовариВКомірках_Const.Пакування} AS Пакування,
+    ТовариВКомірках.{ТовариВКомірках_Const.Комірка} AS Комірка,
+    ТовариВКомірках.{ТовариВКомірках_Const.Серія} AS Серія,
+
+    /* ВНаявності */
+    SUM(CASE WHEN ТовариВКомірках.income = true THEN 
+        ТовариВКомірках.{ТовариВКомірках_Const.ВНаявності} ELSE 0 END) AS ВНаявностіПрихід,
+    SUM(CASE WHEN ТовариВКомірках.income = false THEN 
+        ТовариВКомірках.{ТовариВКомірках_Const.ВНаявності} ELSE 0 END) AS ВНаявностіРозхід,
+    SUM(CASE WHEN ТовариВКомірках.income = true THEN 
+        ТовариВКомірках.{ТовариВКомірках_Const.ВНаявності} ELSE 
+        -ТовариВКомірках.{ТовариВКомірках_Const.ВНаявності} END) AS ВНаявностіЗалишок
+
+FROM
+    {ТовариВКомірках_Const.TABLE} AS ТовариВКомірках
+
+WHERE
+    date_trunc('day', ТовариВКомірках.period::timestamp) = @ПеріодДеньВідбір
+
+GROUP BY
+    Період, Номенклатура, ХарактеристикаНоменклатури, Пакування, Комірка, Серія
+
+HAVING
+
+    /* ВНаявності */
+    SUM(CASE WHEN ТовариВКомірках.income = true THEN 
+        ТовариВКомірках.{ТовариВКомірках_Const.ВНаявності} ELSE 0 END) != 0 OR 
+    SUM(CASE WHEN ТовариВКомірках.income = false THEN 
+        ТовариВКомірках.{ТовариВКомірках_Const.ВНаявності} ELSE 0 END) != 0 OR
+    SUM(CASE WHEN ТовариВКомірках.income = true THEN 
+        ТовариВКомірках.{ТовариВКомірках_Const.ВНаявності} ELSE 
+        -ТовариВКомірках.{ТовариВКомірках_Const.ВНаявності} END) != 0 
 
 
 
