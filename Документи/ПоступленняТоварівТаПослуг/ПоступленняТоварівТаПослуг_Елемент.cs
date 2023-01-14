@@ -523,9 +523,7 @@ namespace StorageAndTrade
 
         bool IsValidValue()
         {
-            if (!ДатаДок.IsValidValue() || !ДатаОплати.IsValidValue() ||
-                !ДатаВхідногоДокументу.IsValidValue() || !ДатаПоверненняТари.IsValidValue() ||
-                !Курс.IsValidValue() || !Кратність.IsValidValue())
+            if (!ДатаДок.IsValidValue())
             {
                 Message.Error(Program.GeneralForm, "Перевірте правельність заповнення полів типу Дата та Число");
                 return false;

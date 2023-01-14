@@ -100,7 +100,7 @@ ORDER BY Дата DESC
                 PageTerminal page = new PageTerminal();
                 page.LoadRecords();
                 return page;
-            });
+            }, true);
         }
     }
 }
