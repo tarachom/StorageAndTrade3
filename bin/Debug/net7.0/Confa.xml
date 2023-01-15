@@ -5,7 +5,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>15.01.2023 20:34:00</DateTimeSave>
+  <DateTimeSave>15.01.2023 23:07:06</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -5875,9 +5875,9 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Desc>Не використовувати</Desc>
         </Field>
         <Field>
-          <Name>КоміркаДовідково</Name>
+          <Name>Комірка</Name>
           <Value>2</Value>
-          <Desc>Комірка довідково</Desc>
+          <Desc>Комірка</Desc>
         </Field>
       </Fields>
     </Enum>
@@ -8166,8 +8166,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
     <Document>
       <Name>ВстановленняЦінНоменклатури</Name>
       <Table>tab_a42</Table>
-      <Desc>
-      </Desc>
+      <Desc>Встановлення цін для номенклатури</Desc>
       <Fields>
         <Field>
           <Name>Назва</Name>
@@ -8413,18 +8412,13 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       </TabularLists>
       <AllowRegisterAccumulation />
       <TriggerFunctions>
-        <BeforeSave>
-        </BeforeSave>
-        <AfterSave>
-        </AfterSave>
-        <BeforeDelete>
-        </BeforeDelete>
+        <BeforeSave>ВстановленняЦінНоменклатури_Triggers.BeforeRecording</BeforeSave>
+        <AfterSave>ВстановленняЦінНоменклатури_Triggers.AfterRecording</AfterSave>
+        <BeforeDelete>ВстановленняЦінНоменклатури_Triggers.BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <SpendFunctions>
-        <Spend>
-        </Spend>
-        <ClearSpend>
-        </ClearSpend>
+        <Spend>ВстановленняЦінНоменклатури_SpendTheDocument.Spend</Spend>
+        <ClearSpend>ВстановленняЦінНоменклатури_SpendTheDocument.ClearSpend</ClearSpend>
       </SpendFunctions>
     </Document>
     <Document>

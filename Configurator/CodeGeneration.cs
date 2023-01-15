@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 15.01.2023 20:34:00
+ * Дата конфігурації: 15.01.2023 23:07:06
  *
  */
 
@@ -9205,7 +9205,7 @@ namespace StorageAndTrade_1_0.Перелічення
     public enum НалаштуванняАдресногоЗберігання
     {
          НеВикористовувати = 1,
-         КоміркаДовідково = 2
+         Комірка = 2
     }
     #endregion
     
@@ -11112,7 +11112,8 @@ namespace StorageAndTrade_1_0.Документи
         
         public void Save()
         {
-            base.FieldValue["docname"] = Назва;
+            ВстановленняЦінНоменклатури_Triggers.BeforeRecording(this);
+			base.FieldValue["docname"] = Назва;
             base.FieldValue["docnomer"] = НомерДок;
             base.FieldValue["docdate"] = ДатаДок;
             base.FieldValue["col_a2"] = Організація.UnigueID.UGuid;
@@ -11122,18 +11123,20 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a4"] = Автор.UnigueID.UGuid;
             
             BaseSave();
-			
+			ВстановленняЦінНоменклатури_Triggers.AfterRecording(this);
 		}
 
 		public bool SpendTheDocument(DateTime spendDate)
 		{
-            BaseSpend(false, DateTime.MinValue);
-		    return false;
+            bool rezult = ВстановленняЦінНоменклатури_SpendTheDocument.Spend(this);
+		    BaseSpend(rezult, spendDate);
+		    return rezult;
 		}
 
 		public void ClearSpendTheDocument()
 		{
-            BaseSpend(false, DateTime.MinValue);
+            ВстановленняЦінНоменклатури_SpendTheDocument.ClearSpend(this);
+			BaseSpend(false, DateTime.MinValue);
 		}
 
 		public ВстановленняЦінНоменклатури_Objest Copy()
@@ -11154,7 +11157,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public void Delete()
         {
-		    
+		    ВстановленняЦінНоменклатури_Triggers.BeforeDelete(this);
             base.BaseDelete(new string[] { "tab_a43" });
         }
         
