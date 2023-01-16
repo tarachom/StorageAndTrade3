@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 16.01.2023 23:52:34
+ * Дата конфігурації: 17.01.2023 00:03:56
  *
  */
 
@@ -16085,7 +16085,8 @@ namespace StorageAndTrade_1_0.Документи
         
         public void Save()
         {
-            base.FieldValue["docname"] = Назва;
+            ПереміщенняТоварівНаСкладі_Triggers.BeforeRecording(this);
+			base.FieldValue["docname"] = Назва;
             base.FieldValue["docdate"] = ДатаДок;
             base.FieldValue["docnomer"] = НомерДок;
             base.FieldValue["col_a1"] = Коментар;
@@ -16096,18 +16097,20 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a6"] = Підрозділ.UnigueID.UGuid;
             
             BaseSave();
-			
+			ПереміщенняТоварівНаСкладі_Triggers.AfterRecording(this);
 		}
 
 		public bool SpendTheDocument(DateTime spendDate)
 		{
-            BaseSpend(false, DateTime.MinValue);
-		    return false;
+            bool rezult = ПереміщенняТоварівНаСкладі_SpendTheDocument.Spend(this);
+		    BaseSpend(rezult, spendDate);
+		    return rezult;
 		}
 
 		public void ClearSpendTheDocument()
 		{
-            BaseSpend(false, DateTime.MinValue);
+            ПереміщенняТоварівНаСкладі_SpendTheDocument.ClearSpend(this);
+			BaseSpend(false, DateTime.MinValue);
 		}
 
 		public ПереміщенняТоварівНаСкладі_Objest Copy()
@@ -16129,7 +16132,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public void Delete()
         {
-		    
+		    ПереміщенняТоварівНаСкладі_Triggers.BeforeDelete(this);
             base.BaseDelete(new string[] { "tab_b26" });
         }
         
