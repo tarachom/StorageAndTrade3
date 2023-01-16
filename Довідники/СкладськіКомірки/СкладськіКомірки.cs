@@ -42,6 +42,7 @@ namespace StorageAndTrade
 
         TreeView TreeViewGrid;
         СкладськіКомірки_Папки_Дерево ДеревоПапок;
+        CheckButton checkButtonIsHierarchy = new CheckButton("Враховувати ієрархію папок") { Active = true };
         public СкладськіПриміщення_PointerControl СкладПриміщенняВласник = new СкладськіПриміщення_PointerControl();
 
         public СкладськіКомірки(bool IsSelectPointer = false) : base()
@@ -73,9 +74,15 @@ namespace StorageAndTrade
 
             PackStart(hBoxBotton, false, false, 10);
 
+            //Враховувати ієрархію папок
+            checkButtonIsHierarchy.Clicked += OnCheckButtonIsHierarchyClicked;
+            hBoxBotton.PackStart(checkButtonIsHierarchy, false, false, 10);
+
+            PackStart(hBoxBotton, false, false, 10);
+
             //Власник
             hBoxBotton.PackStart(СкладПриміщенняВласник, false, false, 2);
-            СкладПриміщенняВласник.Caption = "Склад приміщення власник:";
+            СкладПриміщенняВласник.Caption = "Складське приміщення власник:";
             СкладПриміщенняВласник.AfterSelectFunc = () =>
             {
                 LoadTree();
@@ -157,10 +164,17 @@ namespace StorageAndTrade
             ТабличніСписки.СкладськіКомірки_Записи.DirectoryPointerItem = DirectoryPointerItem;
 
             ТабличніСписки.СкладськіКомірки_Записи.Where.Clear();
+
+            if (checkButtonIsHierarchy.Active)
+                ТабличніСписки.СкладськіКомірки_Записи.Where.Add(
+                    new Where(СкладськіКомірки_Const.Папка, Comparison.EQ, ДеревоПапок.Parent_Pointer.UnigueID.UGuid));
+
             if (!СкладПриміщенняВласник.Pointer.UnigueID.IsEmpty())
             {
+                Comparison comparison = ТабличніСписки.СкладськіКомірки_Записи.Where.Count != 0 ? Comparison.AND : Comparison.Empty;
+
                 ТабличніСписки.СкладськіКомірки_Записи.Where.Add(
-                    new Where(СкладськіКомірки_Const.Приміщення, Comparison.EQ, СкладПриміщенняВласник.Pointer.UnigueID.UGuid));
+                            new Where(comparison, СкладськіКомірки_Const.Приміщення, Comparison.EQ, СкладПриміщенняВласник.Pointer.UnigueID.UGuid));
             }
 
             ТабличніСписки.СкладськіКомірки_Записи.LoadRecords();
@@ -340,5 +354,13 @@ namespace StorageAndTrade
 
         #endregion
 
+        #region Controls
+
+        void OnCheckButtonIsHierarchyClicked(object? sender, EventArgs args)
+        {
+            LoadRecords();
+        }
+
+        #endregion
     }
 }

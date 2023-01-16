@@ -35,7 +35,7 @@ namespace StorageAndTrade
         {
             pointer = new СкладськіПриміщення_Pointer();
             WidthPresentation = 300;
-            Caption = "Склад приміщення:";
+            Caption = "Складське приміщення:";
         }
 
         СкладськіПриміщення_Pointer pointer;

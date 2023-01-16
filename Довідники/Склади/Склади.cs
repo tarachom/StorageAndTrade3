@@ -91,7 +91,7 @@ namespace StorageAndTrade
             };
 
             //Склади приміщення
-            LinkButton linkButtonHar = new LinkButton(" Склади приміщення") { Halign = Align.Start, Image = new Image("images/doc.png"), AlwaysShowImage = true };
+            LinkButton linkButtonHar = new LinkButton(" Складські приміщення") { Halign = Align.Start, Image = new Image("images/doc.png"), AlwaysShowImage = true };
             linkButtonHar.Clicked += (object? sender, EventArgs args) =>
             {
                 СкладськіПриміщення page = new СкладськіПриміщення();
@@ -99,7 +99,7 @@ namespace StorageAndTrade
                 if (SelectPointerItem != null)
                     page.СкладВласник.Pointer = SelectPointerItem;
 
-                Program.GeneralForm?.CreateNotebookPage("Склади приміщення", () => { return page; });
+                Program.GeneralForm?.CreateNotebookPage("Складські приміщення", () => { return page; });
 
                 page.LoadRecords();
             };

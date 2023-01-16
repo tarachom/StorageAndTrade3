@@ -150,7 +150,7 @@ namespace StorageAndTrade
 
             СкладськіПриміщення_Objest.Save();
 
-            Program.GeneralForm?.RenameCurrentPageNotebook($"Склади приміщення: {СкладськіПриміщення_Objest.Назва}");
+            Program.GeneralForm?.RenameCurrentPageNotebook($"Складські приміщення: {СкладськіПриміщення_Objest.Назва}");
 
             if (PageList != null)
             {
