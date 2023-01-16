@@ -75,6 +75,8 @@ namespace StorageAndTrade
             AddLink(vRight, "Введення залишків", ВведенняЗалишків);
             AddLink(vRight, "Встановлення цін номенклатури", ВстановленняЦінНоменклатури);
             AddLink(vRight, "Внутрішнє споживання товарів", ВнутрішнєСпоживанняТоварів);
+            AddLink(vRight, "Розміщення товарів на складі", РозміщенняТоварівНаСкладі);
+
 
             hBoxList.PackStart(vRight, false, false, 5);
 
@@ -180,6 +182,14 @@ namespace StorageAndTrade
             Program.GeneralForm?.CreateNotebookPage("Рахунок фактура", () => { return page; });
             page.SetValue();
         }
+
+        void РозміщенняТоварівНаСкладі(object? sender, EventArgs args)
+        {
+            РозміщенняТоварівНаСкладі page = new РозміщенняТоварівНаСкладі();
+            Program.GeneralForm?.CreateNotebookPage("Розміщення товарів на складі", () => { return page; });
+            page.SetValue();
+        }
+
 
         void AddCaption(VBox vBox, string name)
         {

@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 16.01.2023 18:13:53
+ * Дата конфігурації: 16.01.2023 18:51:01
  *
  */
 
@@ -909,7 +909,7 @@ namespace StorageAndTrade_1_0.Константи
             
             Dictionary<string, object> fieldValue = new Dictionary<string, object>();
             bool IsSelect = Config.Kernel!.DataBase.SelectAllConstants("tab_constants",
-                 new string[] { "col_b7", "col_b9", "col_c1", "col_c2", "col_c4", "col_c5", "col_c6", "col_c7", "col_c8", "col_c9", "col_f6", "col_f7", "col_f8", "col_f9", "col_g1", "col_g2", "col_h1", "col_h2" }, fieldValue);
+                 new string[] { "col_b7", "col_b9", "col_c1", "col_c2", "col_c4", "col_c5", "col_c6", "col_c7", "col_c8", "col_c9", "col_f6", "col_f7", "col_f8", "col_f9", "col_g1", "col_g2", "col_h1", "col_h2", "col_b2" }, fieldValue);
             
             if (IsSelect)
             {
@@ -931,6 +931,7 @@ namespace StorageAndTrade_1_0.Константи
                 m_ПсуванняТоварів_Const = (fieldValue["col_g2"] != DBNull.Value) ? (int)fieldValue["col_g2"] : 0;
                 m_ВнутрішнєСпоживанняТоварів_Const = (fieldValue["col_h1"] != DBNull.Value) ? (int)fieldValue["col_h1"] : 0;
                 m_РахунокФактура_Const = (fieldValue["col_h2"] != DBNull.Value) ? (int)fieldValue["col_h2"] : 0;
+                m_РозміщенняТоварівНаСкладі_Const = (fieldValue["col_b2"] != DBNull.Value) ? (int)fieldValue["col_b2"] : 0;
                 
             }
 			
@@ -1186,6 +1187,20 @@ namespace StorageAndTrade_1_0.Константи
             {
                 m_РахунокФактура_Const = value;
                 Config.Kernel!.DataBase.SaveConstants("tab_constants", "col_h2", m_РахунокФактура_Const);
+            }
+        }
+        
+        static int m_РозміщенняТоварівНаСкладі_Const = 0;
+        public static int РозміщенняТоварівНаСкладі_Const
+        {
+            get 
+            {
+                return m_РозміщенняТоварівНаСкладі_Const;
+            }
+            set
+            {
+                m_РозміщенняТоварівНаСкладі_Const = value;
+                Config.Kernel!.DataBase.SaveConstants("tab_constants", "col_b2", m_РозміщенняТоварівНаСкладі_Const);
             }
         }
              
@@ -15743,7 +15758,8 @@ namespace StorageAndTrade_1_0.Документи
         
         public void Save()
         {
-            base.FieldValue["docname"] = Назва;
+            РозміщенняТоварівНаСкладі_Triggers.BeforeRecording(this);
+			base.FieldValue["docname"] = Назва;
             base.FieldValue["docdate"] = ДатаДок;
             base.FieldValue["docnomer"] = НомерДок;
             base.FieldValue["col_a1"] = Коментар;
@@ -15754,18 +15770,20 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a6"] = Підрозділ.UnigueID.UGuid;
             
             BaseSave();
-			
+			РозміщенняТоварівНаСкладі_Triggers.AfterRecording(this);
 		}
 
 		public bool SpendTheDocument(DateTime spendDate)
 		{
-            BaseSpend(false, DateTime.MinValue);
-		    return false;
+            bool rezult = РозміщенняТоварівНаСкладі_SpendTheDocument.Spend(this);
+		    BaseSpend(rezult, spendDate);
+		    return rezult;
 		}
 
 		public void ClearSpendTheDocument()
 		{
-            BaseSpend(false, DateTime.MinValue);
+            РозміщенняТоварівНаСкладі_SpendTheDocument.ClearSpend(this);
+			BaseSpend(false, DateTime.MinValue);
 		}
 
 		public РозміщенняТоварівНаСкладі_Objest Copy()
@@ -15787,7 +15805,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public void Delete()
         {
-		    
+		    РозміщенняТоварівНаСкладі_Triggers.BeforeDelete(this);
             base.BaseDelete(new string[] { "tab_a68" });
         }
         

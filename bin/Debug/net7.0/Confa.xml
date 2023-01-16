@@ -5,7 +5,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>16.01.2023 18:13:53</DateTimeSave>
+  <DateTimeSave>16.01.2023 18:51:01</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -606,6 +606,14 @@ https://accounting.org.ua/storage_and_trade.html</Desc>
         <Constant>
           <Name>РахунокФактура</Name>
           <NameInTable>col_h2</NameInTable>
+          <Desc>
+          </Desc>
+          <Type>integer</Type>
+          <TabularParts />
+        </Constant>
+        <Constant>
+          <Name>РозміщенняТоварівНаСкладі</Name>
+          <NameInTable>col_b2</NameInTable>
           <Desc>
           </Desc>
           <Type>integer</Type>
@@ -4817,7 +4825,6 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       <Name>ОбластьЗберігання</Name>
       <Table>tab_a73</Table>
       <Desc>Область зберігання - це певна область чи зона в приміщенні
-
 Підпорядковужться приміщенню
 --------------------------
 Не використовується </Desc>
@@ -13281,18 +13288,13 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
         <Name>ТовариВКомірках</Name>
       </AllowRegisterAccumulation>
       <TriggerFunctions>
-        <BeforeSave>
-        </BeforeSave>
-        <AfterSave>
-        </AfterSave>
-        <BeforeDelete>
-        </BeforeDelete>
+        <BeforeSave>РозміщенняТоварівНаСкладі_Triggers.BeforeRecording</BeforeSave>
+        <AfterSave>РозміщенняТоварівНаСкладі_Triggers.AfterRecording</AfterSave>
+        <BeforeDelete>РозміщенняТоварівНаСкладі_Triggers.BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <SpendFunctions>
-        <Spend>
-        </Spend>
-        <ClearSpend>
-        </ClearSpend>
+        <Spend>РозміщенняТоварівНаСкладі_SpendTheDocument.Spend</Spend>
+        <ClearSpend>РозміщенняТоварівНаСкладі_SpendTheDocument.ClearSpend</ClearSpend>
       </SpendFunctions>
     </Document>
     <Document>
