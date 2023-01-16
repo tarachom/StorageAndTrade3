@@ -277,6 +277,22 @@ namespace StorageAndTrade
 
                                     break;
                                 }
+                            case "Пакування_Назва":
+                                {
+                                    ПакуванняОдиниціВиміру page = new ПакуванняОдиниціВиміру() { SelectPointerItem = new ПакуванняОдиниціВиміру_Pointer(unigueID) };
+                                    Program.GeneralForm?.CreateNotebookPage("Пакування", () => { return page; }, true);
+                                    page.LoadRecords();
+
+                                    break;
+                                }
+                            case "Комірка_Назва":
+                                {
+                                    СкладськіКомірки page = new СкладськіКомірки() { SelectPointerItem = new СкладськіКомірки_Pointer(unigueID) };
+                                    Program.GeneralForm?.CreateNotebookPage("Складські комірки", () => { return page; }, true);
+                                    page.LoadTree();
+
+                                    break;
+                                }
                         }
                     }
                 }

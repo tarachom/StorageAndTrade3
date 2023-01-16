@@ -171,7 +171,7 @@ namespace StorageAndTrade
         }
 
         #endregion
-        
+
         public void SetValue()
         {
             if ((int)Константи.ЖурналиДокументів.ОсновнийТипПеріоду_Const != 0)

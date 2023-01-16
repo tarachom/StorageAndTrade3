@@ -298,10 +298,10 @@ namespace StorageAndTrade
 
         void ReloadList()
         {
+            Товари.LoadRecords();
+            
             if (PageList != null)
             {
-                Товари.LoadRecords();
-
                 PageList.SelectPointerItem = ВстановленняЦінНоменклатури_Objest.GetDocumentPointer();
                 PageList.LoadRecords();
             }

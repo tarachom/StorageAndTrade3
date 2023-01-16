@@ -572,10 +572,10 @@ namespace StorageAndTrade
 
         void ReloadList()
         {
+            Товари.LoadRecords();
+            
             if (PageList != null)
             {
-                Товари.LoadRecords();
-
                 PageList.SelectPointerItem = ПоступленняТоварівТаПослуг_Objest.GetDocumentPointer();
                 PageList.LoadRecords();
             }

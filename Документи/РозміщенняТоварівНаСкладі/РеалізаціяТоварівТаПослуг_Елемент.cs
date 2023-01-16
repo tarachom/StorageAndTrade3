@@ -27,13 +27,8 @@ limitations under the License.
 
 using Gtk;
 
-using AccountingSoftware;
-
-using StorageAndTrade_1_0;
 using StorageAndTrade_1_0.Константи;
-using StorageAndTrade_1_0.Довідники;
 using StorageAndTrade_1_0.Документи;
-using Перелічення = StorageAndTrade_1_0.Перелічення;
 
 namespace StorageAndTrade
 {
@@ -216,7 +211,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                РозміщенняТоварівНаСкладі_Objest.НомерДок = (++НумераціяДокументів.ПоступленняТоварівТаПослуг_Const).ToString("D8");
+                РозміщенняТоварівНаСкладі_Objest.НомерДок = (++НумераціяДокументів.РозміщенняТоварівНаСкладі_Const).ToString("D8");
                 РозміщенняТоварівНаСкладі_Objest.ДатаДок = DateTime.Now;
                 РозміщенняТоварівНаСкладі_Objest.Організація = ЗначенняЗаЗамовчуванням.ОсновнаОрганізація_Const;
                 РозміщенняТоварівНаСкладі_Objest.Склад = ЗначенняЗаЗамовчуванням.ОсновнийСклад_Const;
@@ -305,10 +300,10 @@ namespace StorageAndTrade
 
         void ReloadList()
         {
+            Товари.LoadRecords();
+
             if (PageList != null)
             {
-                Товари.LoadRecords();
-
                 PageList.SelectPointerItem = РозміщенняТоварівНаСкладі_Objest.GetDocumentPointer();
                 PageList.LoadRecords();
             }

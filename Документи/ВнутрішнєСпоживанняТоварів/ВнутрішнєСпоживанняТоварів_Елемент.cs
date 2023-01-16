@@ -340,10 +340,10 @@ namespace StorageAndTrade
 
         void ReloadList()
         {
+            Товари.LoadRecords();
+            
             if (PageList != null)
             {
-                Товари.LoadRecords();
-
                 PageList.SelectPointerItem = ВнутрішнєСпоживанняТоварів_Objest.GetDocumentPointer();
                 PageList.LoadRecords();
             }

@@ -460,10 +460,10 @@ namespace StorageAndTrade
 
         void ReloadList()
         {
+            Товари.LoadRecords();
+            
             if (PageList != null)
             {
-                Товари.LoadRecords();
-
                 PageList.SelectPointerItem = РахунокФактура_Objest.GetDocumentPointer();
                 PageList.LoadRecords();
             }

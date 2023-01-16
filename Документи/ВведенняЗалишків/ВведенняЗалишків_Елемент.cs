@@ -418,13 +418,13 @@ namespace StorageAndTrade
 
         void ReloadList()
         {
+            Товари.LoadRecords();
+            Каси.LoadRecords();
+            БанківськіРахунки.LoadRecords();
+            РозрахункиЗКонтрагентами.LoadRecords();
+            
             if (PageList != null)
             {
-                Товари.LoadRecords();
-                Каси.LoadRecords();
-                БанківськіРахунки.LoadRecords();
-                РозрахункиЗКонтрагентами.LoadRecords();
-
                 PageList.SelectPointerItem = ВведенняЗалишків_Objest.GetDocumentPointer();
                 PageList.LoadRecords();
             }

@@ -226,6 +226,19 @@ namespace StorageAndTrade
 
                             break;
                         }
+                    case "ТовариВКомірках":
+                        {
+                            exist = true;
+                            blockCaption = "ТовариВКомірках";
+
+                            visibleColumn = РухДокументівПоРегістрах.ТовариВКомірках_ВидиміКолонки();
+                            dataColumn = РухДокументівПоРегістрах.ТовариВКомірках_КолонкиДаних();
+                            textAlignColumn = РухДокументівПоРегістрах.ТовариВКомірках_ПозиціяТекстуВКолонці();
+
+                            Config.Kernel.DataBase.SelectRequest(РухДокументівПоРегістрах.ТовариВКомірках_Запит, paramQuery, out columnsName, out listRow);
+
+                            break;
+                        }
                     default:
                         {
                             exist = false;

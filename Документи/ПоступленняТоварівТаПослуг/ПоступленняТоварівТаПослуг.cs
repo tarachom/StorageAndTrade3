@@ -170,6 +170,10 @@ namespace StorageAndTrade
             newDocPovernenjaPostachalnykuButton.Activated += OnNewDocNaOsnovi_ПоверненняТоварівПостачальнику;
             Menu.Append(newDocPovernenjaPostachalnykuButton);
 
+            MenuItem newDocRozmisctenjaNaSkaldyButton = new MenuItem("Розміщення товарів на складі");
+            newDocRozmisctenjaNaSkaldyButton.Activated += OnNewDocNaOsnovi_РозміщенняТоварівНаСкладі;
+            Menu.Append(newDocRozmisctenjaNaSkaldyButton);
+
             Menu.ShowAll();
 
             return Menu;
@@ -616,6 +620,71 @@ namespace StorageAndTrade
                 }
             }
         }
+
+        void OnNewDocNaOsnovi_РозміщенняТоварівНаСкладі(object? sender, EventArgs args)
+        {
+            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
+            {
+                TreePath[] selectionRows = TreeViewGrid.Selection.GetSelectedRows();
+
+                foreach (TreePath itemPath in selectionRows)
+                {
+                    TreeIter iter;
+                    TreeViewGrid.Model.GetIter(out iter, itemPath);
+
+                    string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
+
+                    ПоступленняТоварівТаПослуг_Pointer поступленняТоварівТаПослуг_Pointer = new ПоступленняТоварівТаПослуг_Pointer(new UnigueID(uid));
+                    ПоступленняТоварівТаПослуг_Objest поступленняТоварівТаПослуг_Objest = поступленняТоварівТаПослуг_Pointer.GetDocumentObject(true);
+
+                    //
+                    //Новий документ
+                    //
+
+                    РозміщенняТоварівНаСкладі_Objest розміщенняТоварівНаСкладі_Objest = new РозміщенняТоварівНаСкладі_Objest();
+                    розміщенняТоварівНаСкладі_Objest.New();
+                    розміщенняТоварівНаСкладі_Objest.ДатаДок = DateTime.Now;
+                    розміщенняТоварівНаСкладі_Objest.НомерДок = (++Константи.НумераціяДокументів.РозміщенняТоварівНаСкладі_Const).ToString("D8");
+                    розміщенняТоварівНаСкладі_Objest.Назва = $"Розміщення товарів на складі №{розміщенняТоварівНаСкладі_Objest.НомерДок} від {розміщенняТоварівНаСкладі_Objest.ДатаДок.ToString("dd.MM.yyyy")}";
+                    розміщенняТоварівНаСкладі_Objest.Організація = поступленняТоварівТаПослуг_Objest.Організація;
+                    розміщенняТоварівНаСкладі_Objest.Склад = поступленняТоварівТаПослуг_Objest.Склад;
+                    розміщенняТоварівНаСкладі_Objest.Автор = поступленняТоварівТаПослуг_Objest.Автор;
+                    розміщенняТоварівНаСкладі_Objest.Підрозділ = поступленняТоварівТаПослуг_Objest.Підрозділ;
+                    розміщенняТоварівНаСкладі_Objest.Основа = new UuidAndText(поступленняТоварівТаПослуг_Objest.UnigueID.UGuid, поступленняТоварівТаПослуг_Objest.TypeDocument);
+                    розміщенняТоварівНаСкладі_Objest.Save();
+
+                    //Товари
+                    foreach (ПоступленняТоварівТаПослуг_Товари_TablePart.Record record_реалізаціяТоварівТаПослуг in поступленняТоварівТаПослуг_Objest.Товари_TablePart.Records)
+                    {
+                        РозміщенняТоварівНаСкладі_Товари_TablePart.Record record = new РозміщенняТоварівНаСкладі_Товари_TablePart.Record();
+                        розміщенняТоварівНаСкладі_Objest.Товари_TablePart.Records.Add(record);
+
+                        record.Номенклатура = record_реалізаціяТоварівТаПослуг.Номенклатура;
+                        record.ХарактеристикаНоменклатури = record_реалізаціяТоварівТаПослуг.ХарактеристикаНоменклатури;
+                        record.Серія = record_реалізаціяТоварівТаПослуг.Серія;
+                        record.Пакування = record_реалізаціяТоварівТаПослуг.Пакування;
+                        record.КількістьУпаковок = record_реалізаціяТоварівТаПослуг.КількістьУпаковок;
+                        record.Кількість = record_реалізаціяТоварівТаПослуг.Кількість;
+                    }
+
+                    розміщенняТоварівНаСкладі_Objest.Товари_TablePart.Save(true);
+
+                    Program.GeneralForm?.CreateNotebookPage($"{розміщенняТоварівНаСкладі_Objest.Назва}", () =>
+                    {
+                        РозміщенняТоварівНаСкладі_Елемент page = new РозміщенняТоварівНаСкладі_Елемент
+                        {
+                            IsNew = false,
+                            РозміщенняТоварівНаСкладі_Objest = розміщенняТоварівНаСкладі_Objest
+                        };
+
+                        page.SetValue();
+
+                        return page;
+                    });
+                }
+            }
+        }
+
         #endregion
     }
 }
