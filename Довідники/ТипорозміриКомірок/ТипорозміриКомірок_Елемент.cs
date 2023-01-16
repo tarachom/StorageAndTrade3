@@ -39,7 +39,7 @@ namespace StorageAndTrade
 
         public ТипорозміриКомірок_Objest ТипорозміриКомірок_Objest { get; set; } = new ТипорозміриКомірок_Objest();
 
-        Entry Назва = new Entry() { WidthRequest = 100 };
+        Entry Назва = new Entry() { WidthRequest = 250 };
         Entry Висота = new Entry() { WidthRequest = 100 };
         Entry Ширина = new Entry() { WidthRequest = 100 };
         Entry Глибина = new Entry() { WidthRequest = 100 };

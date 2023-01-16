@@ -130,7 +130,7 @@ namespace StorageAndTrade
         {
             TreeStore.Clear();
 
-            TreeIter rootIter = TreeStore.AppendValues(Guid.Empty.ToString(), " СкладськіКомірки ");
+            TreeIter rootIter = TreeStore.AppendValues(Guid.Empty.ToString(), " Складські комірки ");
 
             #region SQL
 

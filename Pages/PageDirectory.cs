@@ -63,6 +63,11 @@ namespace StorageAndTrade
             AddLink(vLeft, "Файли", Файли);
             AddLink(vLeft, "Статті руху коштів", СтаттіРухуКоштів);
 
+            AddCaption(vLeft, "Адресне зберігання");
+            AddLink(vLeft, "Складські приміщення", СкладськіПриміщення);
+            AddLink(vLeft, "Складські комірки", СкладськіКомірки);
+            AddLink(vLeft, "Типорозміри комірок", ТипорозміриКомірок);
+
             hBoxList.PackStart(vLeft, false, false, 5);
 
             AddSeparator(hBoxList);
@@ -295,6 +300,36 @@ namespace StorageAndTrade
             Program.GeneralForm?.CreateNotebookPage("Статті руху коштів", () =>
             {
                 СтаттяРухуКоштів page = new СтаттяРухуКоштів();
+                page.LoadRecords();
+                return page;
+            });
+        }
+
+        void СкладськіПриміщення(object? sender, EventArgs args)
+        {
+            Program.GeneralForm?.CreateNotebookPage("Складські приміщення", () =>
+            {
+                СкладськіПриміщення page = new СкладськіПриміщення();
+                page.LoadRecords();
+                return page;
+            });
+        }
+
+        void СкладськіКомірки(object? sender, EventArgs args)
+        {
+            Program.GeneralForm?.CreateNotebookPage("Складські комірки", () =>
+            {
+                СкладськіКомірки page = new СкладськіКомірки();
+                page.LoadTree();
+                return page;
+            });
+        }
+
+        void ТипорозміриКомірок(object? sender, EventArgs args)
+        {
+            Program.GeneralForm?.CreateNotebookPage("Типорозміри комірок", () =>
+            {
+                ТипорозміриКомірок page = new ТипорозміриКомірок();
                 page.LoadRecords();
                 return page;
             });
