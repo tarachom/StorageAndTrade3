@@ -29,17 +29,17 @@ using StorageAndTrade_1_0.Документи;
 
 namespace StorageAndTrade
 {
-    class РозміщенняТоварівНаСкладі_PointerControl : PointerControl
+    class ПереміщенняТоварівНаСкладі_PointerControl : PointerControl
     {
-        public РозміщенняТоварівНаСкладі_PointerControl()
+        public ПереміщенняТоварівНаСкладі_PointerControl()
         {
-            pointer = new РозміщенняТоварівНаСкладі_Pointer();
+            pointer = new ПереміщенняТоварівНаСкладі_Pointer();
             WidthPresentation = 300;
-            Caption = "Розміщення товарів на складі:";
+            Caption = "Переміщення товарів на складі:";
         }
 
-        РозміщенняТоварівНаСкладі_Pointer pointer;
-        public РозміщенняТоварівНаСкладі_Pointer Pointer
+        ПереміщенняТоварівНаСкладі_Pointer pointer;
+        public ПереміщенняТоварівНаСкладі_Pointer Pointer
         {
             get
             {
@@ -61,10 +61,10 @@ namespace StorageAndTrade
 
         protected override void OpenSelect(object? sender, EventArgs args)
         {
-            РозміщенняТоварівНаСкладі page = new РозміщенняТоварівНаСкладі(true);
+            ПереміщенняТоварівНаСкладі page = new ПереміщенняТоварівНаСкладі(true);
 
             page.DocumentPointerItem = Pointer;
-            page.CallBack_OnSelectPointer = (РозміщенняТоварівНаСкладі_Pointer selectPointer) =>
+            page.CallBack_OnSelectPointer = (ПереміщенняТоварівНаСкладі_Pointer selectPointer) =>
             {
                 Pointer = selectPointer;
             };
@@ -79,7 +79,7 @@ namespace StorageAndTrade
 
         protected override void OnClear(object? sender, EventArgs args)
         {
-            Pointer = new РозміщенняТоварівНаСкладі_Pointer();
+            Pointer = new ПереміщенняТоварівНаСкладі_Pointer();
         }
     }
 }

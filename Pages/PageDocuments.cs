@@ -76,7 +76,7 @@ namespace StorageAndTrade
             AddLink(vRight, "Встановлення цін номенклатури", ВстановленняЦінНоменклатури);
             AddLink(vRight, "Внутрішнє споживання товарів", ВнутрішнєСпоживанняТоварів);
             AddLink(vRight, "Розміщення товарів на складі", РозміщенняТоварівНаСкладі);
-
+            AddLink(vRight, "Переміщення товарів на складі", ПереміщенняТоварівНаСкладі);
 
             hBoxList.PackStart(vRight, false, false, 5);
 
@@ -187,6 +187,13 @@ namespace StorageAndTrade
         {
             РозміщенняТоварівНаСкладі page = new РозміщенняТоварівНаСкладі();
             Program.GeneralForm?.CreateNotebookPage("Розміщення товарів на складі", () => { return page; });
+            page.SetValue();
+        }
+
+        void ПереміщенняТоварівНаСкладі(object? sender, EventArgs args)
+        {
+            ПереміщенняТоварівНаСкладі page = new ПереміщенняТоварівНаСкладі();
+            Program.GeneralForm?.CreateNotebookPage("Переміщення товарів на складі", () => { return page; });
             page.SetValue();
         }
 

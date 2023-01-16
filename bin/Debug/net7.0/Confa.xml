@@ -5,7 +5,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>16.01.2023 21:24:52</DateTimeSave>
+  <DateTimeSave>16.01.2023 23:52:34</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -614,6 +614,14 @@ https://accounting.org.ua/storage_and_trade.html</Desc>
         <Constant>
           <Name>РозміщенняТоварівНаСкладі</Name>
           <NameInTable>col_b2</NameInTable>
+          <Desc>
+          </Desc>
+          <Type>integer</Type>
+          <TabularParts />
+        </Constant>
+        <Constant>
+          <Name>ПереміщенняТоварівНаСкладі</Name>
+          <NameInTable>col_b3</NameInTable>
           <Desc>
           </Desc>
           <Type>integer</Type>
@@ -13481,7 +13489,8 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
             <Field>
               <Name>КоміркаОтримувач</Name>
               <NameInTable>col_a9</NameInTable>
-              <Type>string</Type>
+              <Type>pointer</Type>
+              <Pointer>Довідники.СкладськіКомірки</Pointer>
               <Desc>
               </Desc>
               <IsIndex>0</IsIndex>

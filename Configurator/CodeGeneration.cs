@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 16.01.2023 21:24:52
+ * Дата конфігурації: 16.01.2023 23:52:34
  *
  */
 
@@ -909,7 +909,7 @@ namespace StorageAndTrade_1_0.Константи
             
             Dictionary<string, object> fieldValue = new Dictionary<string, object>();
             bool IsSelect = Config.Kernel!.DataBase.SelectAllConstants("tab_constants",
-                 new string[] { "col_b7", "col_b9", "col_c1", "col_c2", "col_c4", "col_c5", "col_c6", "col_c7", "col_c8", "col_c9", "col_f6", "col_f7", "col_f8", "col_f9", "col_g1", "col_g2", "col_h1", "col_h2", "col_b2" }, fieldValue);
+                 new string[] { "col_b7", "col_b9", "col_c1", "col_c2", "col_c4", "col_c5", "col_c6", "col_c7", "col_c8", "col_c9", "col_f6", "col_f7", "col_f8", "col_f9", "col_g1", "col_g2", "col_h1", "col_h2", "col_b2", "col_b3" }, fieldValue);
             
             if (IsSelect)
             {
@@ -932,6 +932,7 @@ namespace StorageAndTrade_1_0.Константи
                 m_ВнутрішнєСпоживанняТоварів_Const = (fieldValue["col_h1"] != DBNull.Value) ? (int)fieldValue["col_h1"] : 0;
                 m_РахунокФактура_Const = (fieldValue["col_h2"] != DBNull.Value) ? (int)fieldValue["col_h2"] : 0;
                 m_РозміщенняТоварівНаСкладі_Const = (fieldValue["col_b2"] != DBNull.Value) ? (int)fieldValue["col_b2"] : 0;
+                m_ПереміщенняТоварівНаСкладі_Const = (fieldValue["col_b3"] != DBNull.Value) ? (int)fieldValue["col_b3"] : 0;
                 
             }
 			
@@ -1201,6 +1202,20 @@ namespace StorageAndTrade_1_0.Константи
             {
                 m_РозміщенняТоварівНаСкладі_Const = value;
                 Config.Kernel!.DataBase.SaveConstants("tab_constants", "col_b2", m_РозміщенняТоварівНаСкладі_Const);
+            }
+        }
+        
+        static int m_ПереміщенняТоварівНаСкладі_Const = 0;
+        public static int ПереміщенняТоварівНаСкладі_Const
+        {
+            get 
+            {
+                return m_ПереміщенняТоварівНаСкладі_Const;
+            }
+            set
+            {
+                m_ПереміщенняТоварівНаСкладі_Const = value;
+                Config.Kernel!.DataBase.SaveConstants("tab_constants", "col_b3", m_ПереміщенняТоварівНаСкладі_Const);
             }
         }
              
@@ -16241,7 +16256,7 @@ namespace StorageAndTrade_1_0.Документи
                 record.КількістьУпаковок = (fieldValue["col_a6"] != DBNull.Value) ? (int)fieldValue["col_a6"] : 0;
                 record.Кількість = (fieldValue["col_a7"] != DBNull.Value) ? (decimal)fieldValue["col_a7"] : 0;
                 record.КоміркаВідправник = new Довідники.СкладськіКомірки_Pointer(fieldValue["col_a8"]);
-                record.КоміркаОтримувач = fieldValue["col_a9"]?.ToString() ?? "";
+                record.КоміркаОтримувач = new Довідники.СкладськіКомірки_Pointer(fieldValue["col_a9"]);
                 
                 Records.Add(record);
             }
@@ -16268,7 +16283,7 @@ namespace StorageAndTrade_1_0.Документи
                 fieldValue.Add("col_a6", record.КількістьУпаковок);
                 fieldValue.Add("col_a7", record.Кількість);
                 fieldValue.Add("col_a8", record.КоміркаВідправник.UnigueID.UGuid);
-                fieldValue.Add("col_a9", record.КоміркаОтримувач);
+                fieldValue.Add("col_a9", record.КоміркаОтримувач.UnigueID.UGuid);
                 
                 base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
@@ -16304,7 +16319,7 @@ namespace StorageAndTrade_1_0.Документи
                 КількістьУпаковок = 0;
                 Кількість = 0;
                 КоміркаВідправник = new Довідники.СкладськіКомірки_Pointer();
-                КоміркаОтримувач = "";
+                КоміркаОтримувач = new Довідники.СкладськіКомірки_Pointer();
                 
             }
             public int НомерРядка { get; set; }
@@ -16315,7 +16330,7 @@ namespace StorageAndTrade_1_0.Документи
             public int КількістьУпаковок { get; set; }
             public decimal Кількість { get; set; }
             public Довідники.СкладськіКомірки_Pointer КоміркаВідправник { get; set; }
-            public string КоміркаОтримувач { get; set; }
+            public Довідники.СкладськіКомірки_Pointer КоміркаОтримувач { get; set; }
             
         }
     }
