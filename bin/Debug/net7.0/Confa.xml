@@ -5,7 +5,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>16.01.2023 10:55:31</DateTimeSave>
+  <DateTimeSave>16.01.2023 18:13:53</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -4628,8 +4628,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <NameInTable>col_a3</NameInTable>
           <Type>pointer</Type>
           <Pointer>Довідники.ОбластьЗберігання</Pointer>
-          <Desc>
-          </Desc>
+          <Desc>Не використовується </Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
         </Field>
@@ -4718,28 +4717,28 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               </Pointer>
             </Field>
             <Field>
-              <Name>ОбластьЗберігання</Name>
-              <Caption>Область зберігання</Caption>
+              <Name>Приміщення</Name>
+              <Caption>Приміщення</Caption>
               <Size>0</Size>
-              <SortNum>3</SortNum>
+              <SortNum>2</SortNum>
               <SortField>False</SortField>
               <Type>pointer</Type>
-              <Pointer>Довідники.ОбластьЗберігання</Pointer>
+              <Pointer>Довідники.СкладськіПриміщення</Pointer>
               <Join>
-                <table>Довідники.ОбластьЗберігання_Const.TABLE</table>
-                <field>ОбластьЗберігання</field>
+                <table>Довідники.СкладськіПриміщення_Const.TABLE</table>
+                <field>Приміщення</field>
                 <alias>join_tab_1</alias>
               </Join>
               <FieldAndAlias>
                 <table>join_tab_1</table>
-                <field>Довідники.ОбластьЗберігання_Const.Назва</field>
+                <field>Довідники.СкладськіПриміщення_Const.Назва</field>
               </FieldAndAlias>
             </Field>
             <Field>
               <Name>Лінія</Name>
               <Caption>Лінія</Caption>
               <Size>0</Size>
-              <SortNum>4</SortNum>
+              <SortNum>3</SortNum>
               <SortField>False</SortField>
               <Type>string</Type>
               <Pointer>
@@ -4749,35 +4748,17 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <Name>Позиція</Name>
               <Caption>Позиція</Caption>
               <Size>0</Size>
-              <SortNum>5</SortNum>
+              <SortNum>4</SortNum>
               <SortField>False</SortField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
             </Field>
             <Field>
-              <Name>Приміщення</Name>
-              <Caption>Приміщення</Caption>
-              <Size>0</Size>
-              <SortNum>6</SortNum>
-              <SortField>False</SortField>
-              <Type>pointer</Type>
-              <Pointer>Довідники.СкладськіПриміщення</Pointer>
-              <Join>
-                <table>Довідники.СкладськіПриміщення_Const.TABLE</table>
-                <field>Приміщення</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.СкладськіПриміщення_Const.Назва</field>
-              </FieldAndAlias>
-            </Field>
-            <Field>
               <Name>Стелаж</Name>
               <Caption>Стелаж</Caption>
               <Size>0</Size>
-              <SortNum>7</SortNum>
+              <SortNum>5</SortNum>
               <SortField>False</SortField>
               <Type>string</Type>
               <Pointer>
@@ -4787,7 +4768,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <Name>Ярус</Name>
               <Caption>Ярус</Caption>
               <Size>0</Size>
-              <SortNum>8</SortNum>
+              <SortNum>6</SortNum>
               <SortField>False</SortField>
               <Type>string</Type>
               <Pointer>
@@ -4797,7 +4778,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <Name>ТипСкладськоїКомірки</Name>
               <Caption>Тип комірки</Caption>
               <Size>0</Size>
-              <SortNum>9</SortNum>
+              <SortNum>7</SortNum>
               <SortField>False</SortField>
               <Type>enum</Type>
               <Pointer>Перелічення.ТипиСкладськихКомірок</Pointer>
@@ -4806,17 +4787,17 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <Name>Типорозмір</Name>
               <Caption>Типорозмір</Caption>
               <Size>0</Size>
-              <SortNum>10</SortNum>
+              <SortNum>8</SortNum>
               <SortField>False</SortField>
               <Type>pointer</Type>
               <Pointer>Довідники.ТипорозміриКомірок</Pointer>
               <Join>
                 <table>Довідники.ТипорозміриКомірок_Const.TABLE</table>
                 <field>Типорозмір</field>
-                <alias>join_tab_3</alias>
+                <alias>join_tab_2</alias>
               </Join>
               <FieldAndAlias>
-                <table>join_tab_3</table>
+                <table>join_tab_2</table>
                 <field>Довідники.ТипорозміриКомірок_Const.Назва</field>
               </FieldAndAlias>
             </Field>
@@ -4837,7 +4818,9 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       <Table>tab_a73</Table>
       <Desc>Область зберігання - це певна область чи зона в приміщенні
 
-Підпорядковужться приміщенню</Desc>
+Підпорядковужться приміщенню
+--------------------------
+Не використовується </Desc>
       <Fields>
         <Field>
           <Name>Назва</Name>
@@ -4922,7 +4905,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
         <Field>
           <Name>Висота</Name>
           <NameInTable>col_a1</NameInTable>
-          <Type>numeric</Type>
+          <Type>string</Type>
           <Desc>
           </Desc>
           <IsPresentation>0</IsPresentation>
@@ -4939,7 +4922,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
         <Field>
           <Name>Глибина</Name>
           <NameInTable>col_a3</NameInTable>
-          <Type>numeric</Type>
+          <Type>string</Type>
           <Desc>
           </Desc>
           <IsPresentation>0</IsPresentation>
@@ -4948,7 +4931,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
         <Field>
           <Name>Вантажопідйомність</Name>
           <NameInTable>col_a4</NameInTable>
-          <Type>numeric</Type>
+          <Type>string</Type>
           <Desc>
           </Desc>
           <IsPresentation>0</IsPresentation>
@@ -4957,7 +4940,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
         <Field>
           <Name>Обєм</Name>
           <NameInTable>col_a5</NameInTable>
-          <Type>numeric</Type>
+          <Type>string</Type>
           <Desc>
           </Desc>
           <IsPresentation>0</IsPresentation>
@@ -4966,7 +4949,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
         <Field>
           <Name>Ширина</Name>
           <NameInTable>col_a6</NameInTable>
-          <Type>numeric</Type>
+          <Type>string</Type>
           <Desc>
           </Desc>
           <IsPresentation>0</IsPresentation>
@@ -4996,7 +4979,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <Size>0</Size>
               <SortNum>2</SortNum>
               <SortField>False</SortField>
-              <Type>numeric</Type>
+              <Type>string</Type>
               <Pointer>
               </Pointer>
             </Field>
@@ -5006,7 +4989,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <Size>0</Size>
               <SortNum>3</SortNum>
               <SortField>False</SortField>
-              <Type>numeric</Type>
+              <Type>string</Type>
               <Pointer>
               </Pointer>
             </Field>
@@ -5016,7 +4999,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <Size>0</Size>
               <SortNum>4</SortNum>
               <SortField>False</SortField>
-              <Type>numeric</Type>
+              <Type>string</Type>
               <Pointer>
               </Pointer>
             </Field>
@@ -5026,7 +5009,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <Size>0</Size>
               <SortNum>5</SortNum>
               <SortField>False</SortField>
-              <Type>numeric</Type>
+              <Type>string</Type>
               <Pointer>
               </Pointer>
             </Field>
@@ -5036,7 +5019,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <Size>0</Size>
               <SortNum>6</SortNum>
               <SortField>False</SortField>
-              <Type>numeric</Type>
+              <Type>string</Type>
               <Pointer>
               </Pointer>
             </Field>
@@ -5089,94 +5072,6 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <NameInTable>col_a1</NameInTable>
           <Type>pointer</Type>
           <Pointer>Довідники.СкладськіПриміщення</Pointer>
-          <Desc>
-          </Desc>
-          <IsPresentation>0</IsPresentation>
-          <IsIndex>1</IsIndex>
-        </Field>
-      </Fields>
-      <TabularParts />
-      <TabularLists />
-      <TriggerFunctions>
-        <BeforeSave>
-        </BeforeSave>
-        <AfterSave>
-        </AfterSave>
-        <BeforeDelete>
-        </BeforeDelete>
-      </TriggerFunctions>
-    </Directory>
-    <Directory>
-      <Name>ТипорозміриКомірок_Папки</Name>
-      <Table>tab_a98</Table>
-      <Desc>
-      </Desc>
-      <Fields>
-        <Field>
-          <Name>Назва</Name>
-          <NameInTable>col_j1</NameInTable>
-          <Type>string</Type>
-          <Desc>Назва</Desc>
-          <IsPresentation>1</IsPresentation>
-          <IsIndex>0</IsIndex>
-        </Field>
-        <Field>
-          <Name>Код</Name>
-          <NameInTable>col_j2</NameInTable>
-          <Type>string</Type>
-          <Desc>Код</Desc>
-          <IsPresentation>0</IsPresentation>
-          <IsIndex>0</IsIndex>
-        </Field>
-        <Field>
-          <Name>Родич</Name>
-          <NameInTable>col_j3</NameInTable>
-          <Type>pointer</Type>
-          <Pointer>Довідники.ТипорозміриКомірок_Папки</Pointer>
-          <Desc>
-          </Desc>
-          <IsPresentation>0</IsPresentation>
-          <IsIndex>1</IsIndex>
-        </Field>
-      </Fields>
-      <TabularParts />
-      <TabularLists />
-      <TriggerFunctions>
-        <BeforeSave>
-        </BeforeSave>
-        <AfterSave>
-        </AfterSave>
-        <BeforeDelete>
-        </BeforeDelete>
-      </TriggerFunctions>
-    </Directory>
-    <Directory>
-      <Name>ОбластьЗберігання_Папки</Name>
-      <Table>tab_a99</Table>
-      <Desc>
-      </Desc>
-      <Fields>
-        <Field>
-          <Name>Назва</Name>
-          <NameInTable>col_j1</NameInTable>
-          <Type>string</Type>
-          <Desc>Назва</Desc>
-          <IsPresentation>1</IsPresentation>
-          <IsIndex>0</IsIndex>
-        </Field>
-        <Field>
-          <Name>Код</Name>
-          <NameInTable>col_j2</NameInTable>
-          <Type>string</Type>
-          <Desc>Код</Desc>
-          <IsPresentation>0</IsPresentation>
-          <IsIndex>0</IsIndex>
-        </Field>
-        <Field>
-          <Name>Родич</Name>
-          <NameInTable>col_j3</NameInTable>
-          <Type>pointer</Type>
-          <Pointer>Довідники.ОбластьЗберігання_Папки</Pointer>
           <Desc>
           </Desc>
           <IsPresentation>0</IsPresentation>
@@ -5836,20 +5731,17 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
         <Field>
           <Name>Приймання</Name>
           <Value>1</Value>
-          <Desc>
-          </Desc>
+          <Desc>Приймання</Desc>
         </Field>
         <Field>
           <Name>Відвантаження</Name>
           <Value>2</Value>
-          <Desc>
-          </Desc>
+          <Desc>Відвантаження</Desc>
         </Field>
         <Field>
           <Name>Зберігання</Name>
           <Value>3</Value>
-          <Desc>
-          </Desc>
+          <Desc>Зберігання</Desc>
         </Field>
       </Fields>
     </Enum>

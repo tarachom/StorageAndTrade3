@@ -48,6 +48,12 @@ namespace StorageAndTrade
         Entry Назва = new Entry() { WidthRequest = 500 };
         СкладськіПриміщення_PointerControl СкладськеПриміщення = new СкладськіПриміщення_PointerControl();
         СкладськіКомірки_Папки_PointerControl Родич = new СкладськіКомірки_Папки_PointerControl() { Caption = "Папка:" };
+        Entry Лінія = new Entry() { WidthRequest = 200 };
+        Entry Стелаж = new Entry() { WidthRequest = 200 };
+        Entry Позиція = new Entry() { WidthRequest = 200 };
+        Entry Ярус = new Entry() { WidthRequest = 200 };
+        ComboBoxText ТипСкладськоїКомірки = new ComboBoxText();
+        ТипорозміриКомірок_PointerControl Типорозмір = new ТипорозміриКомірок_PointerControl();
 
         public СкладськіКомірки_Елемент() : base()
         {
@@ -80,12 +86,6 @@ namespace StorageAndTrade
         {
             VBox vBox = new VBox();
 
-            //СкладськеПриміщення
-            HBox hBoxSkaldPrem = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxSkaldPrem, false, false, 5);
-
-            hBoxSkaldPrem.PackStart(СкладськеПриміщення, false, false, 5);
-
             //Назва
             HBox hBoxName = new HBox() { Halign = Align.End };
             vBox.PackStart(hBoxName, false, false, 5);
@@ -94,6 +94,12 @@ namespace StorageAndTrade
             hBoxName.PackStart(Назва, false, false, 5);
 
             hPaned.Pack1(vBox, false, false);
+
+            //СкладськеПриміщення
+            HBox hBoxSkaldPrem = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxSkaldPrem, false, false, 5);
+
+            hBoxSkaldPrem.PackStart(СкладськеПриміщення, false, false, 5);
 
             //Родич
             HBox hBoxParent = new HBox() { Halign = Align.End };
@@ -106,12 +112,59 @@ namespace StorageAndTrade
 
             hBoxParent.PackStart(Родич, false, false, 5);
 
+            //ТипСкладськоїКомірки
+            HBox hBoxTypeCell = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxTypeCell, false, false, 5);
+
+            foreach (ConfigurationEnumField field in Config.Kernel!.Conf.Enums["ТипиСкладськихКомірок"].Fields.Values)
+                ТипСкладськоїКомірки.Append(field.Name, field.Desc);
+
+            hBoxTypeCell.PackStart(new Label("Тип комірки:"), false, false, 5);
+            hBoxTypeCell.PackStart(ТипСкладськоїКомірки, false, false, 5);
+
+            // Типорозмір
+            HBox hBoxType = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxType, false, false, 5);
+
+            hBoxType.PackStart(Типорозмір, false, false, 5);
+
             hPaned.Pack1(vBox, false, false);
         }
 
         void CreatePack2(HPaned hPaned)
         {
             VBox vBox = new VBox();
+
+            VBox vBoxContainer = new VBox() { WidthRequest = 300, Halign = Align.Start };
+            vBox.PackStart(vBoxContainer, false, false, 0);
+
+            // Лінія
+            HBox hBoxLine = new HBox() { Halign = Align.End };
+            vBoxContainer.PackStart(hBoxLine, false, false, 5);
+
+            hBoxLine.PackStart(new Label("Лінія:"), false, false, 5);
+            hBoxLine.PackStart(Лінія, false, false, 5);
+
+            // Стелаж
+            HBox hBoxStelaj = new HBox() { Halign = Align.End };
+            vBoxContainer.PackStart(hBoxStelaj, false, false, 5);
+
+            hBoxStelaj.PackStart(new Label("Стелаж:"), false, false, 5);
+            hBoxStelaj.PackStart(Стелаж, false, false, 5);
+
+            // Позиція
+            HBox hBoxPosition = new HBox() { Halign = Align.End };
+            vBoxContainer.PackStart(hBoxPosition, false, false, 5);
+
+            hBoxPosition.PackStart(new Label("Позиція:"), false, false, 5);
+            hBoxPosition.PackStart(Позиція, false, false, 5);
+
+            // Ярус
+            HBox hBoxYarus = new HBox() { Halign = Align.End };
+            vBoxContainer.PackStart(hBoxYarus, false, false, 5);
+
+            hBoxYarus.PackStart(new Label("Ярус:"), false, false, 5);
+            hBoxYarus.PackStart(Ярус, false, false, 5);
 
             hPaned.Pack2(vBox, false, false);
         }
@@ -129,6 +182,18 @@ namespace StorageAndTrade
             Назва.Text = СкладськіКомірки_Objest.Назва;
             СкладськеПриміщення.Pointer = СкладськіКомірки_Objest.Приміщення;
             Родич.Pointer = СкладськіКомірки_Objest.Папка;
+
+            ТипСкладськоїКомірки.ActiveId = СкладськіКомірки_Objest.ТипСкладськоїКомірки.ToString();
+
+            if (ТипСкладськоїКомірки.Active == -1)
+                ТипСкладськоїКомірки.ActiveId = Перелічення.ТипиСкладськихКомірок.Зберігання.ToString();
+
+            Лінія.Text = СкладськіКомірки_Objest.Лінія;
+            Стелаж.Text = СкладськіКомірки_Objest.Стелаж;
+            Позиція.Text = СкладськіКомірки_Objest.Позиція;
+            Ярус.Text = СкладськіКомірки_Objest.Ярус;
+
+            Типорозмір.Pointer = СкладськіКомірки_Objest.Типорозмір;
         }
 
         void GetValue()
@@ -136,6 +201,15 @@ namespace StorageAndTrade
             СкладськіКомірки_Objest.Назва = Назва.Text;
             СкладськіКомірки_Objest.Приміщення = СкладськеПриміщення.Pointer;
             СкладськіКомірки_Objest.Папка = Родич.Pointer;
+
+            СкладськіКомірки_Objest.ТипСкладськоїКомірки = Enum.Parse<Перелічення.ТипиСкладськихКомірок>(ТипСкладськоїКомірки.ActiveId);
+
+            СкладськіКомірки_Objest.Лінія = Лінія.Text;
+            СкладськіКомірки_Objest.Стелаж = Стелаж.Text;
+            СкладськіКомірки_Objest.Позиція = Позиція.Text;
+            СкладськіКомірки_Objest.Ярус = Ярус.Text;
+
+            СкладськіКомірки_Objest.Типорозмір = Типорозмір.Pointer;
         }
 
         #endregion

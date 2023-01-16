@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 16.01.2023 10:55:31
+ * Дата конфігурації: 16.01.2023 18:13:53
  *
  */
 
@@ -8233,12 +8233,12 @@ namespace StorageAndTrade_1_0.Довідники
         public ТипорозміриКомірок_Objest() : base(Config.Kernel!, "tab_a75",
              new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6" }) 
         {
-            Висота = 0;
+            Висота = "";
             Назва = "";
-            Глибина = 0;
-            Вантажопідйомність = 0;
-            Обєм = 0;
-            Ширина = 0;
+            Глибина = "";
+            Вантажопідйомність = "";
+            Обєм = "";
+            Ширина = "";
             
         }
         
@@ -8246,12 +8246,12 @@ namespace StorageAndTrade_1_0.Довідники
         {
             if (BaseRead(uid))
             {
-                Висота = (base.FieldValue["col_a1"] != DBNull.Value) ? (decimal)base.FieldValue["col_a1"] : 0;
+                Висота = base.FieldValue["col_a1"]?.ToString() ?? "";
                 Назва = base.FieldValue["col_a2"]?.ToString() ?? "";
-                Глибина = (base.FieldValue["col_a3"] != DBNull.Value) ? (decimal)base.FieldValue["col_a3"] : 0;
-                Вантажопідйомність = (base.FieldValue["col_a4"] != DBNull.Value) ? (decimal)base.FieldValue["col_a4"] : 0;
-                Обєм = (base.FieldValue["col_a5"] != DBNull.Value) ? (decimal)base.FieldValue["col_a5"] : 0;
-                Ширина = (base.FieldValue["col_a6"] != DBNull.Value) ? (decimal)base.FieldValue["col_a6"] : 0;
+                Глибина = base.FieldValue["col_a3"]?.ToString() ?? "";
+                Вантажопідйомність = base.FieldValue["col_a4"]?.ToString() ?? "";
+                Обєм = base.FieldValue["col_a5"]?.ToString() ?? "";
+                Ширина = base.FieldValue["col_a6"]?.ToString() ?? "";
                 
                 BaseClear();
                 return true;
@@ -8299,12 +8299,12 @@ namespace StorageAndTrade_1_0.Довідники
             return directoryPointer;
         }
         
-        public decimal Висота { get; set; }
+        public string Висота { get; set; }
         public string Назва { get; set; }
-        public decimal Глибина { get; set; }
-        public decimal Вантажопідйомність { get; set; }
-        public decimal Обєм { get; set; }
-        public decimal Ширина { get; set; }
+        public string Глибина { get; set; }
+        public string Вантажопідйомність { get; set; }
+        public string Обєм { get; set; }
+        public string Ширина { get; set; }
         
     }
     
@@ -8525,302 +8525,6 @@ namespace StorageAndTrade_1_0.Довідники
             List<СкладськіКомірки_Папки_Pointer> directoryPointerList = new List<СкладськіКомірки_Папки_Pointer>();
             foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(name, value, limit, offset)) 
                 directoryPointerList.Add(new СкладськіКомірки_Папки_Pointer(directoryPointer.UnigueID));
-            return directoryPointerList;
-        }
-    }
-    
-      
-   
-    #endregion
-    
-    #region DIRECTORY "ТипорозміриКомірок_Папки"
-    
-    public static class ТипорозміриКомірок_Папки_Const
-    {
-        public const string TABLE = "tab_a98";
-        
-        public const string Назва = "col_j1";
-        public const string Код = "col_j2";
-        public const string Родич = "col_j3";
-    }
-	
-    
-    public class ТипорозміриКомірок_Папки_Objest : DirectoryObject
-    {
-        public ТипорозміриКомірок_Папки_Objest() : base(Config.Kernel!, "tab_a98",
-             new string[] { "col_j1", "col_j2", "col_j3" }) 
-        {
-            Назва = "";
-            Код = "";
-            Родич = new Довідники.ТипорозміриКомірок_Папки_Pointer();
-            
-        }
-        
-        public bool Read(UnigueID uid)
-        {
-            if (BaseRead(uid))
-            {
-                Назва = base.FieldValue["col_j1"]?.ToString() ?? "";
-                Код = base.FieldValue["col_j2"]?.ToString() ?? "";
-                Родич = new Довідники.ТипорозміриКомірок_Папки_Pointer(base.FieldValue["col_j3"]);
-                
-                BaseClear();
-                return true;
-            }
-            else
-                return false;
-        }
-        
-        public void Save()
-        {
-		    base.FieldValue["col_j1"] = Назва;
-            base.FieldValue["col_j2"] = Код;
-            base.FieldValue["col_j3"] = Родич.UnigueID.UGuid;
-            
-            BaseSave();
-			
-        }
-		
-        public ТипорозміриКомірок_Папки_Objest Copy()
-        {
-            ТипорозміриКомірок_Папки_Objest copy = new ТипорозміриКомірок_Папки_Objest();
-			copy.New();
-            copy.Назва = Назва;
-			copy.Код = Код;
-			copy.Родич = Родич;
-			
-			return copy;
-        }
-
-        public void Delete()
-        {
-            
-			base.BaseDelete(new string[] {  });
-        }
-        
-        public ТипорозміриКомірок_Папки_Pointer GetDirectoryPointer()
-        {
-            ТипорозміриКомірок_Папки_Pointer directoryPointer = new ТипорозміриКомірок_Папки_Pointer(UnigueID.UGuid);
-            return directoryPointer;
-        }
-        
-        public string Назва { get; set; }
-        public string Код { get; set; }
-        public Довідники.ТипорозміриКомірок_Папки_Pointer Родич { get; set; }
-        
-    }
-    
-    
-    public class ТипорозміриКомірок_Папки_Pointer : DirectoryPointer
-    {
-        public ТипорозміриКомірок_Папки_Pointer(object? uid = null) : base(Config.Kernel!, "tab_a98")
-        {
-            base.Init(new UnigueID(uid), null);
-        }
-        
-        public ТипорозміриКомірок_Папки_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel!, "tab_a98")
-        {
-            base.Init(uid, fields);
-        }
-        
-        public ТипорозміриКомірок_Папки_Objest? GetDirectoryObject()
-        {
-            if (this.IsEmpty()) return null;
-            ТипорозміриКомірок_Папки_Objest ТипорозміриКомірок_ПапкиObjestItem = new ТипорозміриКомірок_Папки_Objest();
-            return ТипорозміриКомірок_ПапкиObjestItem.Read(base.UnigueID) ? ТипорозміриКомірок_ПапкиObjestItem : null;
-        }
-		
-        public ТипорозміриКомірок_Папки_Pointer GetNewDirectoryPointer()
-        {
-            return new ТипорозміриКомірок_Папки_Pointer(base.UnigueID);
-        }
-		
-		public string GetPresentation()
-        {
-		    return base.BasePresentation(
-			    new string[] { "col_j1" }
-			);
-        }
-		
-        public ТипорозміриКомірок_Папки_Pointer GetEmptyPointer()
-        {
-            return new ТипорозміриКомірок_Папки_Pointer();
-        }
-    }
-    
-    
-    public class ТипорозміриКомірок_Папки_Select : DirectorySelect
-    {
-        public ТипорозміриКомірок_Папки_Select() : base(Config.Kernel!, "tab_a98") { }        
-        public bool Select() { return base.BaseSelect(); }
-        
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new ТипорозміриКомірок_Папки_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
-
-        public ТипорозміриКомірок_Папки_Pointer? Current { get; private set; }
-        
-        public ТипорозміриКомірок_Папки_Pointer FindByField(string name, object value)
-        {
-            ТипорозміриКомірок_Папки_Pointer itemPointer = new ТипорозміриКомірок_Папки_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(name, value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
-        }
-        
-        public List<ТипорозміриКомірок_Папки_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
-        {
-            List<ТипорозміриКомірок_Папки_Pointer> directoryPointerList = new List<ТипорозміриКомірок_Папки_Pointer>();
-            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new ТипорозміриКомірок_Папки_Pointer(directoryPointer.UnigueID));
-            return directoryPointerList;
-        }
-    }
-    
-      
-   
-    #endregion
-    
-    #region DIRECTORY "ОбластьЗберігання_Папки"
-    
-    public static class ОбластьЗберігання_Папки_Const
-    {
-        public const string TABLE = "tab_a99";
-        
-        public const string Назва = "col_j1";
-        public const string Код = "col_j2";
-        public const string Родич = "col_j3";
-    }
-	
-    
-    public class ОбластьЗберігання_Папки_Objest : DirectoryObject
-    {
-        public ОбластьЗберігання_Папки_Objest() : base(Config.Kernel!, "tab_a99",
-             new string[] { "col_j1", "col_j2", "col_j3" }) 
-        {
-            Назва = "";
-            Код = "";
-            Родич = new Довідники.ОбластьЗберігання_Папки_Pointer();
-            
-        }
-        
-        public bool Read(UnigueID uid)
-        {
-            if (BaseRead(uid))
-            {
-                Назва = base.FieldValue["col_j1"]?.ToString() ?? "";
-                Код = base.FieldValue["col_j2"]?.ToString() ?? "";
-                Родич = new Довідники.ОбластьЗберігання_Папки_Pointer(base.FieldValue["col_j3"]);
-                
-                BaseClear();
-                return true;
-            }
-            else
-                return false;
-        }
-        
-        public void Save()
-        {
-		    base.FieldValue["col_j1"] = Назва;
-            base.FieldValue["col_j2"] = Код;
-            base.FieldValue["col_j3"] = Родич.UnigueID.UGuid;
-            
-            BaseSave();
-			
-        }
-		
-        public ОбластьЗберігання_Папки_Objest Copy()
-        {
-            ОбластьЗберігання_Папки_Objest copy = new ОбластьЗберігання_Папки_Objest();
-			copy.New();
-            copy.Назва = Назва;
-			copy.Код = Код;
-			copy.Родич = Родич;
-			
-			return copy;
-        }
-
-        public void Delete()
-        {
-            
-			base.BaseDelete(new string[] {  });
-        }
-        
-        public ОбластьЗберігання_Папки_Pointer GetDirectoryPointer()
-        {
-            ОбластьЗберігання_Папки_Pointer directoryPointer = new ОбластьЗберігання_Папки_Pointer(UnigueID.UGuid);
-            return directoryPointer;
-        }
-        
-        public string Назва { get; set; }
-        public string Код { get; set; }
-        public Довідники.ОбластьЗберігання_Папки_Pointer Родич { get; set; }
-        
-    }
-    
-    
-    public class ОбластьЗберігання_Папки_Pointer : DirectoryPointer
-    {
-        public ОбластьЗберігання_Папки_Pointer(object? uid = null) : base(Config.Kernel!, "tab_a99")
-        {
-            base.Init(new UnigueID(uid), null);
-        }
-        
-        public ОбластьЗберігання_Папки_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel!, "tab_a99")
-        {
-            base.Init(uid, fields);
-        }
-        
-        public ОбластьЗберігання_Папки_Objest? GetDirectoryObject()
-        {
-            if (this.IsEmpty()) return null;
-            ОбластьЗберігання_Папки_Objest ОбластьЗберігання_ПапкиObjestItem = new ОбластьЗберігання_Папки_Objest();
-            return ОбластьЗберігання_ПапкиObjestItem.Read(base.UnigueID) ? ОбластьЗберігання_ПапкиObjestItem : null;
-        }
-		
-        public ОбластьЗберігання_Папки_Pointer GetNewDirectoryPointer()
-        {
-            return new ОбластьЗберігання_Папки_Pointer(base.UnigueID);
-        }
-		
-		public string GetPresentation()
-        {
-		    return base.BasePresentation(
-			    new string[] { "col_j1" }
-			);
-        }
-		
-        public ОбластьЗберігання_Папки_Pointer GetEmptyPointer()
-        {
-            return new ОбластьЗберігання_Папки_Pointer();
-        }
-    }
-    
-    
-    public class ОбластьЗберігання_Папки_Select : DirectorySelect
-    {
-        public ОбластьЗберігання_Папки_Select() : base(Config.Kernel!, "tab_a99") { }        
-        public bool Select() { return base.BaseSelect(); }
-        
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new ОбластьЗберігання_Папки_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
-
-        public ОбластьЗберігання_Папки_Pointer? Current { get; private set; }
-        
-        public ОбластьЗберігання_Папки_Pointer FindByField(string name, object value)
-        {
-            ОбластьЗберігання_Папки_Pointer itemPointer = new ОбластьЗберігання_Папки_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(name, value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
-        }
-        
-        public List<ОбластьЗберігання_Папки_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
-        {
-            List<ОбластьЗберігання_Папки_Pointer> directoryPointerList = new List<ОбластьЗберігання_Папки_Pointer>();
-            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new ОбластьЗберігання_Папки_Pointer(directoryPointer.UnigueID));
             return directoryPointerList;
         }
     }

@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 16.01.2023 10:55:31
+ * Дата конфігурації: 16.01.2023 18:13:53
  *
  */
  
@@ -2969,10 +2969,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         string ID = "";
         
         string Назва = "";
-        string ОбластьЗберігання = "";
+        string Приміщення = "";
         string Лінія = "";
         string Позиція = "";
-        string Приміщення = "";
         string Стелаж = "";
         string Ярус = "";
         string ТипСкладськоїКомірки = "";
@@ -2981,15 +2980,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         Array ToArray()
         {
             return new object[] { new Gdk.Pixbuf(Image), ID 
-            /* */ , Назва, ОбластьЗберігання, Лінія, Позиція, Приміщення, Стелаж, Ярус, ТипСкладськоїКомірки, Типорозмір };
+            /* */ , Назва, Приміщення, Лінія, Позиція, Стелаж, Ярус, ТипСкладськоїКомірки, Типорозмір };
         }
 
         public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */
             , typeof(string) /* Назва */
-            , typeof(string) /* ОбластьЗберігання */
+            , typeof(string) /* Приміщення */
             , typeof(string) /* Лінія */
             , typeof(string) /* Позиція */
-            , typeof(string) /* Приміщення */
             , typeof(string) /* Стелаж */
             , typeof(string) /* Ярус */
             , typeof(string) /* ТипСкладськоїКомірки */
@@ -3002,14 +3000,13 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Назва*/
-            treeView.AppendColumn(new TreeViewColumn("Область зберігання", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*ОбластьЗберігання*/
+            treeView.AppendColumn(new TreeViewColumn("Приміщення", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Приміщення*/
             treeView.AppendColumn(new TreeViewColumn("Лінія", new CellRendererText() { Xpad = 4 }, "text", 4) { SortColumnId = 4 } ); /*Лінія*/
             treeView.AppendColumn(new TreeViewColumn("Позиція", new CellRendererText() { Xpad = 4 }, "text", 5) { SortColumnId = 5 } ); /*Позиція*/
-            treeView.AppendColumn(new TreeViewColumn("Приміщення", new CellRendererText() { Xpad = 4 }, "text", 6) { SortColumnId = 6 } ); /*Приміщення*/
-            treeView.AppendColumn(new TreeViewColumn("Стелаж", new CellRendererText() { Xpad = 4 }, "text", 7) { SortColumnId = 7 } ); /*Стелаж*/
-            treeView.AppendColumn(new TreeViewColumn("Ярус", new CellRendererText() { Xpad = 4 }, "text", 8) { SortColumnId = 8 } ); /*Ярус*/
-            treeView.AppendColumn(new TreeViewColumn("Тип комірки", new CellRendererText() { Xpad = 4 }, "text", 9) { SortColumnId = 9 } ); /*ТипСкладськоїКомірки*/
-            treeView.AppendColumn(new TreeViewColumn("Типорозмір", new CellRendererText() { Xpad = 4 }, "text", 10) { SortColumnId = 10 } ); /*Типорозмір*/
+            treeView.AppendColumn(new TreeViewColumn("Стелаж", new CellRendererText() { Xpad = 4 }, "text", 6) { SortColumnId = 6 } ); /*Стелаж*/
+            treeView.AppendColumn(new TreeViewColumn("Ярус", new CellRendererText() { Xpad = 4 }, "text", 7) { SortColumnId = 7 } ); /*Ярус*/
+            treeView.AppendColumn(new TreeViewColumn("Тип комірки", new CellRendererText() { Xpad = 4 }, "text", 8) { SortColumnId = 8 } ); /*ТипСкладськоїКомірки*/
+            treeView.AppendColumn(new TreeViewColumn("Типорозмір", new CellRendererText() { Xpad = 4 }, "text", 9) { SortColumnId = 9 } ); /*Типорозмір*/
             
         }
 
@@ -3047,27 +3044,19 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             
                 /* Join Table */
                 СкладськіКомірки_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.ОбластьЗберігання_Const.TABLE, Довідники.СкладськіКомірки_Const.ОбластьЗберігання, СкладськіКомірки_Select.QuerySelect.Table, "join_tab_1"));
+                    new Join(Довідники.СкладськіПриміщення_Const.TABLE, Довідники.СкладськіКомірки_Const.Приміщення, СкладськіКомірки_Select.QuerySelect.Table, "join_tab_1"));
                 
                   /* Field */
                   СкладськіКомірки_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>("join_tab_1." + Довідники.ОбластьЗберігання_Const.Назва, "join_tab_1_field_1"));
+                    new NameValue<string>("join_tab_1." + Довідники.СкладськіПриміщення_Const.Назва, "join_tab_1_field_1"));
                   
                 /* Join Table */
                 СкладськіКомірки_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.СкладськіПриміщення_Const.TABLE, Довідники.СкладськіКомірки_Const.Приміщення, СкладськіКомірки_Select.QuerySelect.Table, "join_tab_2"));
+                    new Join(Довідники.ТипорозміриКомірок_Const.TABLE, Довідники.СкладськіКомірки_Const.Типорозмір, СкладськіКомірки_Select.QuerySelect.Table, "join_tab_2"));
                 
                   /* Field */
                   СкладськіКомірки_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>("join_tab_2." + Довідники.СкладськіПриміщення_Const.Назва, "join_tab_2_field_1"));
-                  
-                /* Join Table */
-                СкладськіКомірки_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.ТипорозміриКомірок_Const.TABLE, Довідники.СкладськіКомірки_Const.Типорозмір, СкладськіКомірки_Select.QuerySelect.Table, "join_tab_3"));
-                
-                  /* Field */
-                  СкладськіКомірки_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>("join_tab_3." + Довідники.ТипорозміриКомірок_Const.Назва, "join_tab_3_field_1"));
+                    new NameValue<string>("join_tab_2." + Довідники.ТипорозміриКомірок_Const.Назва, "join_tab_2_field_1"));
                   
 
             /* SELECT */
@@ -3081,9 +3070,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     СкладськіКомірки_Записи Record = new СкладськіКомірки_Записи
                     {
                         ID = cur.UnigueID.ToString(),
-                        ОбластьЗберігання = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
-                        Приміщення = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
-                        Типорозмір = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
+                        Приміщення = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
+                        Типорозмір = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[СкладськіКомірки_Const.Назва]?.ToString() ?? "", /**/
                         Лінія = cur.Fields?[СкладськіКомірки_Const.Лінія]?.ToString() ?? "", /**/
                         Позиція = cur.Fields?[СкладськіКомірки_Const.Позиція]?.ToString() ?? "", /**/
@@ -3326,16 +3314,6 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
     #endregion
     
     #region DIRECTORY "СкладськіКомірки_Папки"
-    
-      
-    #endregion
-    
-    #region DIRECTORY "ТипорозміриКомірок_Папки"
-    
-      
-    #endregion
-    
-    #region DIRECTORY "ОбластьЗберігання_Папки"
     
       
     #endregion
