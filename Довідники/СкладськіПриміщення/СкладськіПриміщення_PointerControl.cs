@@ -64,6 +64,9 @@ namespace StorageAndTrade
             page.CallBack_OnSelectPointer = (СкладськіПриміщення_Pointer selectPointer) =>
             {
                 Pointer = selectPointer;
+
+                if (AfterSelectFunc != null)
+                    AfterSelectFunc.Invoke();
             };
 
             Program.GeneralForm?.CreateNotebookPage("Вибір - Склади приміщення", () => { return page; }, true);
@@ -74,6 +77,9 @@ namespace StorageAndTrade
         protected override void OnClear(object? sender, EventArgs args)
         {
             Pointer = new СкладськіПриміщення_Pointer();
+
+            if (AfterSelectFunc != null)
+                AfterSelectFunc.Invoke();
         }
     }
 }

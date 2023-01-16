@@ -43,9 +43,11 @@ namespace StorageAndTrade
 
         public СкладськіКомірки_Objest СкладськіКомірки_Objest { get; set; } = new СкладськіКомірки_Objest();
         public СкладськіПриміщення_Pointer СкладськеПриміщенняДляНового { get; set; } = new СкладськіПриміщення_Pointer();
+        public СкладськіКомірки_Папки_Pointer РодичДляНового { get; set; } = new СкладськіКомірки_Папки_Pointer();
 
         Entry Назва = new Entry() { WidthRequest = 500 };
         СкладськіПриміщення_PointerControl СкладськеПриміщення = new СкладськіПриміщення_PointerControl();
+        СкладськіКомірки_Папки_PointerControl Родич = new СкладськіКомірки_Папки_PointerControl() { Caption = "Папка:" };
 
         public СкладськіКомірки_Елемент() : base()
         {
@@ -92,6 +94,19 @@ namespace StorageAndTrade
             hBoxName.PackStart(Назва, false, false, 5);
 
             hPaned.Pack1(vBox, false, false);
+
+            //Родич
+            HBox hBoxParent = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxParent, false, false, 5);
+
+            Родич.BeforeClickOpenFunc = () =>
+            {
+                Родич.СкладПриміщенняВласник = СкладськеПриміщення.Pointer;
+            };
+
+            hBoxParent.PackStart(Родич, false, false, 5);
+
+            hPaned.Pack1(vBox, false, false);
         }
 
         void CreatePack2(HPaned hPaned)
@@ -108,16 +123,19 @@ namespace StorageAndTrade
             if (IsNew)
             {
                 СкладськіКомірки_Objest.Приміщення = СкладськеПриміщенняДляНового;
+                СкладськіКомірки_Objest.Папка = РодичДляНового;
             }
 
             Назва.Text = СкладськіКомірки_Objest.Назва;
             СкладськеПриміщення.Pointer = СкладськіКомірки_Objest.Приміщення;
+            Родич.Pointer = СкладськіКомірки_Objest.Папка;
         }
 
         void GetValue()
         {
             СкладськіКомірки_Objest.Назва = Назва.Text;
             СкладськіКомірки_Objest.Приміщення = СкладськеПриміщення.Pointer;
+            СкладськіКомірки_Objest.Папка = Родич.Pointer;
         }
 
         #endregion

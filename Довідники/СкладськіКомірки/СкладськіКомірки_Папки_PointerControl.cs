@@ -58,12 +58,18 @@ namespace StorageAndTrade
             }
         }
 
+        public СкладськіПриміщення_Pointer СкладПриміщенняВласник { get; set; } = new СкладськіПриміщення_Pointer();
+
         protected override void OpenSelect(object? sender, EventArgs args)
         {
+            if (BeforeClickOpenFunc != null)
+                BeforeClickOpenFunc.Invoke();
+                
             СкладськіКомірки_Папки_Дерево page = new СкладськіКомірки_Папки_Дерево(true);
 
             page.DirectoryPointerItem = Pointer;
             page.UidOpenFolder = UidOpenFolder;
+            page.СкладПриміщенняВласник = СкладПриміщенняВласник;
             page.CallBack_OnSelectPointer = (СкладськіКомірки_Папки_Pointer selectPointer) =>
             {
                 Pointer = selectPointer;

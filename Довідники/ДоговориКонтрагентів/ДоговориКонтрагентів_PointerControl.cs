@@ -83,6 +83,9 @@ namespace StorageAndTrade
         protected override void OnClear(object? sender, EventArgs args)
         {
             Pointer = new ДоговориКонтрагентів_Pointer();
+
+            if (AfterSelectFunc != null)
+                AfterSelectFunc.Invoke();
         }
     }
 }

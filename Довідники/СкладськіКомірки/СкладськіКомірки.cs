@@ -78,8 +78,6 @@ namespace StorageAndTrade
             checkButtonIsHierarchy.Clicked += OnCheckButtonIsHierarchyClicked;
             hBoxBotton.PackStart(checkButtonIsHierarchy, false, false, 10);
 
-            PackStart(hBoxBotton, false, false, 10);
-
             //Власник
             hBoxBotton.PackStart(СкладПриміщенняВласник, false, false, 2);
             СкладПриміщенняВласник.Caption = "Складське приміщення власник:";
@@ -167,14 +165,12 @@ namespace StorageAndTrade
 
             if (checkButtonIsHierarchy.Active)
                 ТабличніСписки.СкладськіКомірки_Записи.Where.Add(
-                    new Where(СкладськіКомірки_Const.Папка, Comparison.EQ, ДеревоПапок.Parent_Pointer.UnigueID.UGuid));
+                    new Where(СкладськіКомірки_Const.Папка, Comparison.EQ, ДеревоПапок.Parent_Pointer.UnigueID.UGuid, false, Comparison.AND));
 
             if (!СкладПриміщенняВласник.Pointer.UnigueID.IsEmpty())
             {
-                Comparison comparison = ТабличніСписки.СкладськіКомірки_Записи.Where.Count != 0 ? Comparison.AND : Comparison.Empty;
-
                 ТабличніСписки.СкладськіКомірки_Записи.Where.Add(
-                            new Where(comparison, СкладськіКомірки_Const.Приміщення, Comparison.EQ, СкладПриміщенняВласник.Pointer.UnigueID.UGuid));
+                    new Where(СкладськіКомірки_Const.Приміщення, Comparison.EQ, СкладПриміщенняВласник.Pointer.UnigueID.UGuid));
             }
 
             ТабличніСписки.СкладськіКомірки_Записи.LoadRecords();
@@ -193,7 +189,8 @@ namespace StorageAndTrade
                     {
                         PageList = this,
                         IsNew = true,
-                        СкладськеПриміщенняДляНового = СкладПриміщенняВласник.Pointer
+                        СкладськеПриміщенняДляНового = СкладПриміщенняВласник.Pointer,
+                        РодичДляНового = ДеревоПапок.Parent_Pointer
                     };
 
                     page.SetValue();
