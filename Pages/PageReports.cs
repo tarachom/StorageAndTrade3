@@ -60,6 +60,7 @@ namespace StorageAndTrade
             AddLink(vLeft, "Замовлення постачальникам", ЗамовленняПостачальникам);
             AddLink(vLeft, "Закупівлі", Закупівлі);
             AddLink(vLeft, "Продажі", Продажі);
+            AddLink(vLeft, "Товари в комірках на складах", ТовариВКоміркахНаСкладах);
 
             PackStart(hBoxList, false, false, 10);
 
@@ -71,7 +72,7 @@ namespace StorageAndTrade
             Program.GeneralForm?.CreateNotebookPage("Звіт - Вільні залишки", () =>
             {
                 Звіт_ВільніЗалишки page = new Звіт_ВільніЗалишки();
-                return page;                
+                return page;
             });
         }
 
@@ -164,6 +165,16 @@ namespace StorageAndTrade
                 return page;
             });
         }
+
+        void ТовариВКоміркахНаСкладах(object? sender, EventArgs args)
+        {
+            Program.GeneralForm?.CreateNotebookPage("Звіт - Товари в комірках на складах", () =>
+            {
+                Звіт_ТовариВКоміркахНаСкладах page = new Звіт_ТовариВКоміркахНаСкладах();
+                return page;
+            });
+        }
+
 
         void AddLink(VBox vbox, string uri, EventHandler? clickAction = null)
         {

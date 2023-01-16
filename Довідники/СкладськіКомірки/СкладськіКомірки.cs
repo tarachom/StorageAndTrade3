@@ -42,7 +42,7 @@ namespace StorageAndTrade
 
         TreeView TreeViewGrid;
         СкладськіКомірки_Папки_Дерево ДеревоПапок;
-        CheckButton checkButtonIsHierarchy = new CheckButton("Враховувати ієрархію папок") { Active = true };
+        CheckButton checkButtonIsHierarchy = new CheckButton("Враховувати ієрархію папок") { Active = false };
         public СкладськіПриміщення_PointerControl СкладПриміщенняВласник = new СкладськіПриміщення_PointerControl();
 
         public СкладськіКомірки(bool IsSelectPointer = false) : base()

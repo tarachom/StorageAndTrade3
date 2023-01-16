@@ -5,7 +5,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>16.01.2023 18:51:01</DateTimeSave>
+  <DateTimeSave>16.01.2023 21:24:52</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -4807,6 +4807,24 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <FieldAndAlias>
                 <table>join_tab_2</table>
                 <field>Довідники.ТипорозміриКомірок_Const.Назва</field>
+              </FieldAndAlias>
+            </Field>
+            <Field>
+              <Name>Папка</Name>
+              <Caption>Папка</Caption>
+              <Size>0</Size>
+              <SortNum>9</SortNum>
+              <SortField>False</SortField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.СкладськіКомірки_Папки</Pointer>
+              <Join>
+                <table>Довідники.СкладськіКомірки_Папки_Const.TABLE</table>
+                <field>Папка</field>
+                <alias>join_tab_3</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_3</table>
+                <field>Довідники.СкладськіКомірки_Папки_Const.Назва</field>
               </FieldAndAlias>
             </Field>
           </Fields>
@@ -17706,76 +17724,8 @@ HAVING
       </AllowDocumentSpend>
       <TabularParts>
         <TablePart>
-          <Name>Залишки</Name>
-          <Table>tab_b04</Table>
-          <Desc>Віртуальна таблиця</Desc>
-          <Fields>
-            <Field>
-              <Name>Період</Name>
-              <NameInTable>col_a1</NameInTable>
-              <Type>date</Type>
-              <Desc>
-              </Desc>
-              <IsIndex>1</IsIndex>
-            </Field>
-            <Field>
-              <Name>Номенклатура</Name>
-              <NameInTable>col_a2</NameInTable>
-              <Type>pointer</Type>
-              <Pointer>Довідники.Номенклатура</Pointer>
-              <Desc>
-              </Desc>
-              <IsIndex>1</IsIndex>
-            </Field>
-            <Field>
-              <Name>ХарактеристикаНоменклатури</Name>
-              <NameInTable>col_a3</NameInTable>
-              <Type>pointer</Type>
-              <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
-              <Desc>
-              </Desc>
-              <IsIndex>1</IsIndex>
-            </Field>
-            <Field>
-              <Name>Пакування</Name>
-              <NameInTable>col_a4</NameInTable>
-              <Type>pointer</Type>
-              <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
-              <Desc>
-              </Desc>
-              <IsIndex>1</IsIndex>
-            </Field>
-            <Field>
-              <Name>Комірка</Name>
-              <NameInTable>col_a5</NameInTable>
-              <Type>pointer</Type>
-              <Pointer>Довідники.СкладськіКомірки</Pointer>
-              <Desc>
-              </Desc>
-              <IsIndex>1</IsIndex>
-            </Field>
-            <Field>
-              <Name>Серія</Name>
-              <NameInTable>col_a6</NameInTable>
-              <Type>pointer</Type>
-              <Pointer>Довідники.СеріїНоменклатури</Pointer>
-              <Desc>
-              </Desc>
-              <IsIndex>1</IsIndex>
-            </Field>
-            <Field>
-              <Name>ВНаявності</Name>
-              <NameInTable>col_a7</NameInTable>
-              <Type>numeric</Type>
-              <Desc>
-              </Desc>
-              <IsIndex>0</IsIndex>
-            </Field>
-          </Fields>
-        </TablePart>
-        <TablePart>
           <Name>ЗалишкиТаОбороти</Name>
-          <Table>tab_b05</Table>
+          <Table>tab_b33</Table>
           <Desc>Віртуальна таблиця</Desc>
           <Fields>
             <Field>
@@ -17857,64 +17807,76 @@ HAVING
             </Field>
           </Fields>
         </TablePart>
+        <TablePart>
+          <Name>Залишки</Name>
+          <Table>tab_b05</Table>
+          <Desc>Віртуальна таблиця</Desc>
+          <Fields>
+            <Field>
+              <Name>Період</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>date</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Номенклатура</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Номенклатура</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>ХарактеристикаНоменклатури</Name>
+              <NameInTable>col_a3</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Пакування</Name>
+              <NameInTable>col_a4</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Комірка</Name>
+              <NameInTable>col_a5</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.СкладськіКомірки</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Серія</Name>
+              <NameInTable>col_a6</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.СеріїНоменклатури</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>ВНаявності</Name>
+              <NameInTable>col_a7</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+          </Fields>
+        </TablePart>
       </TabularParts>
       <QueryBlockList>
-        <QueryBlock>
-          <Name>Залишки</Name>
-          <FinalCalculation>False</FinalCalculation>
-          <Query position="0" key="DELETE">
-DELETE FROM 
-    {ТовариВКомірках_Залишки_TablePart.TABLE}
-WHERE 
-    {ТовариВКомірках_Залишки_TablePart.TABLE}.{ТовариВКомірках_Залишки_TablePart.Період} = @ПеріодДеньВідбір
-</Query>
-          <Query position="1" key="SELECT">
-INSERT INTO {ТовариВКомірках_Залишки_TablePart.TABLE} 
-(
-    uid,
-    {ТовариВКомірках_Залишки_TablePart.Період},
-    {ТовариВКомірках_Залишки_TablePart.Номенклатура},
-    {ТовариВКомірках_Залишки_TablePart.ХарактеристикаНоменклатури},
-    {ТовариВКомірках_Залишки_TablePart.Пакування},
-    {ТовариВКомірках_Залишки_TablePart.Комірка},
-    {ТовариВКомірках_Залишки_TablePart.Серія},
-    {ТовариВКомірках_Залишки_TablePart.ВНаявності}
-)
-SELECT
-    uuid_generate_v4(),
-    date_trunc('day', ТовариВКомірках.period::timestamp) AS Період,
-    ТовариВКомірках.{ТовариВКомірках_Const.Номенклатура} AS Номенклатура,
-    ТовариВКомірках.{ТовариВКомірках_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
-    ТовариВКомірках.{ТовариВКомірках_Const.Пакування} AS Пакування,
-    ТовариВКомірках.{ТовариВКомірках_Const.Комірка} AS Комірка,
-    ТовариВКомірках.{ТовариВКомірках_Const.Серія} AS Серія,
-
-    /* ВНаявності */
-    SUM(CASE WHEN ТовариВКомірках.income = true THEN 
-        ТовариВКомірках.{ТовариВКомірках_Const.ВНаявності} ELSE 
-        -ТовариВКомірках.{ТовариВКомірках_Const.ВНаявності} END) AS ВНаявності
-
-FROM
-    {ТовариВКомірках_Const.TABLE} AS ТовариВКомірках
-
-WHERE
-    date_trunc('day', ТовариВКомірках.period::timestamp) = @ПеріодДеньВідбір
-
-GROUP BY
-    Період, Номенклатура, ХарактеристикаНоменклатури, Пакування, Комірка, Серія
-
-HAVING
-
-    /* ВНаявності */
-    SUM(CASE WHEN ТовариВКомірках.income = true THEN 
-        ТовариВКомірках.{ТовариВКомірках_Const.ВНаявності} ELSE 
-        -ТовариВКомірках.{ТовариВКомірках_Const.ВНаявності} END) != 0 
-
-
-
-
-</Query>
-        </QueryBlock>
         <QueryBlock>
           <Name>ЗалишкиТаОбороти</Name>
           <FinalCalculation>False</FinalCalculation>
@@ -17972,6 +17934,62 @@ HAVING
         ТовариВКомірках.{ТовариВКомірках_Const.ВНаявності} ELSE 0 END) != 0 OR 
     SUM(CASE WHEN ТовариВКомірках.income = false THEN 
         ТовариВКомірках.{ТовариВКомірках_Const.ВНаявності} ELSE 0 END) != 0 OR
+    SUM(CASE WHEN ТовариВКомірках.income = true THEN 
+        ТовариВКомірках.{ТовариВКомірках_Const.ВНаявності} ELSE 
+        -ТовариВКомірках.{ТовариВКомірках_Const.ВНаявності} END) != 0 
+
+
+
+
+</Query>
+        </QueryBlock>
+        <QueryBlock>
+          <Name>Залишки</Name>
+          <FinalCalculation>False</FinalCalculation>
+          <Query position="0" key="DELETE">
+DELETE FROM 
+    {ТовариВКомірках_Залишки_TablePart.TABLE}
+WHERE 
+    {ТовариВКомірках_Залишки_TablePart.TABLE}.{ТовариВКомірках_Залишки_TablePart.Період} = @ПеріодДеньВідбір
+</Query>
+          <Query position="1" key="SELECT">
+INSERT INTO {ТовариВКомірках_Залишки_TablePart.TABLE} 
+(
+    uid,
+    {ТовариВКомірках_Залишки_TablePart.Період},
+    {ТовариВКомірках_Залишки_TablePart.Номенклатура},
+    {ТовариВКомірках_Залишки_TablePart.ХарактеристикаНоменклатури},
+    {ТовариВКомірках_Залишки_TablePart.Пакування},
+    {ТовариВКомірках_Залишки_TablePart.Комірка},
+    {ТовариВКомірках_Залишки_TablePart.Серія},
+    {ТовариВКомірках_Залишки_TablePart.ВНаявності}
+)
+SELECT
+    uuid_generate_v4(),
+    date_trunc('day', ТовариВКомірках.period::timestamp) AS Період,
+    ТовариВКомірках.{ТовариВКомірках_Const.Номенклатура} AS Номенклатура,
+    ТовариВКомірках.{ТовариВКомірках_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
+    ТовариВКомірках.{ТовариВКомірках_Const.Пакування} AS Пакування,
+    ТовариВКомірках.{ТовариВКомірках_Const.Комірка} AS Комірка,
+    ТовариВКомірках.{ТовариВКомірках_Const.Серія} AS Серія,
+
+    /* ВНаявності */
+    SUM(CASE WHEN ТовариВКомірках.income = true THEN 
+        ТовариВКомірках.{ТовариВКомірках_Const.ВНаявності} ELSE 
+        -ТовариВКомірках.{ТовариВКомірках_Const.ВНаявності} END) AS ВНаявності
+
+FROM
+    {ТовариВКомірках_Const.TABLE} AS ТовариВКомірках
+
+WHERE
+    date_trunc('day', ТовариВКомірках.period::timestamp) = @ПеріодДеньВідбір
+
+GROUP BY
+    Період, Номенклатура, ХарактеристикаНоменклатури, Пакування, Комірка, Серія
+
+HAVING
+
+    /* ВНаявності */
     SUM(CASE WHEN ТовариВКомірках.income = true THEN 
         ТовариВКомірках.{ТовариВКомірках_Const.ВНаявності} ELSE 
         -ТовариВКомірках.{ТовариВКомірках_Const.ВНаявності} END) != 0 

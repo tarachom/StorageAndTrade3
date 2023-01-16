@@ -293,6 +293,14 @@ namespace StorageAndTrade
 
                                     break;
                                 }
+                            case "Приміщення_Назва":
+                                {
+                                    СкладськіПриміщення page = new СкладськіПриміщення() { SelectPointerItem = new СкладськіПриміщення_Pointer(unigueID) };
+                                    Program.GeneralForm?.CreateNotebookPage("Складські приміщення", () => { return page; }, true);
+                                    page.LoadRecords();
+
+                                    break;
+                                }
                         }
                     }
                 }

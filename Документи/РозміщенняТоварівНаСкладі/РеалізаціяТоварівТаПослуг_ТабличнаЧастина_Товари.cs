@@ -317,7 +317,7 @@ namespace StorageAndTrade
 
                                 Program.GeneralForm?.CreateNotebookPage("Вибір - Складська комірка", () => { return page; }, true);
 
-                                page.LoadRecords();
+                                page.LoadTree();
 
                                 break;
                             }

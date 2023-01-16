@@ -35,7 +35,7 @@ namespace StorageAndTrade
         {
             pointer = new СкладськіКомірки_Pointer();
             WidthPresentation = 300;
-            Caption = "Склад приміщення:";
+            Caption = "Складська комірка:";
         }
 
         СкладськіКомірки_Pointer pointer;
@@ -68,7 +68,7 @@ namespace StorageAndTrade
 
             Program.GeneralForm?.CreateNotebookPage("Вибір - Складські комірки", () => { return page; }, true);
 
-            page.LoadRecords();
+            page.LoadTree();
         }
 
         protected override void OnClear(object? sender, EventArgs args)
