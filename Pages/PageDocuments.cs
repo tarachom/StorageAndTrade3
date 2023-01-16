@@ -77,6 +77,7 @@ namespace StorageAndTrade
             AddLink(vRight, "Внутрішнє споживання товарів", ВнутрішнєСпоживанняТоварів);
             AddLink(vRight, "Розміщення товарів на складі", РозміщенняТоварівНаСкладі);
             AddLink(vRight, "Переміщення товарів на складі", ПереміщенняТоварівНаСкладі);
+            AddLink(vRight, "Збірка товарів на складі", ЗбіркаТоварівНаСкладі);
 
             hBoxList.PackStart(vRight, false, false, 5);
 
@@ -197,6 +198,12 @@ namespace StorageAndTrade
             page.SetValue();
         }
 
+        void ЗбіркаТоварівНаСкладі(object? sender, EventArgs args)
+        {
+            ЗбіркаТоварівНаСкладі page = new ЗбіркаТоварівНаСкладі();
+            Program.GeneralForm?.CreateNotebookPage("Збірка товарів на складі", () => { return page; });
+            page.SetValue();
+        }
 
         void AddCaption(VBox vBox, string name)
         {

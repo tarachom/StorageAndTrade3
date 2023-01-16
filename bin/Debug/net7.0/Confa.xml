@@ -5,7 +5,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>17.01.2023 00:03:56</DateTimeSave>
+  <DateTimeSave>17.01.2023 00:31:36</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -622,6 +622,14 @@ https://accounting.org.ua/storage_and_trade.html</Desc>
         <Constant>
           <Name>ПереміщенняТоварівНаСкладі</Name>
           <NameInTable>col_b3</NameInTable>
+          <Desc>
+          </Desc>
+          <Type>integer</Type>
+          <TabularParts />
+        </Constant>
+        <Constant>
+          <Name>ЗбіркаТоварівНаСкладі</Name>
+          <NameInTable>col_b4</NameInTable>
           <Desc>
           </Desc>
           <Type>integer</Type>
@@ -13851,18 +13859,13 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
         <Name>ТовариВКомірках</Name>
       </AllowRegisterAccumulation>
       <TriggerFunctions>
-        <BeforeSave>
-        </BeforeSave>
-        <AfterSave>
-        </AfterSave>
-        <BeforeDelete>
-        </BeforeDelete>
+        <BeforeSave>ЗбіркаТоварівНаСкладі_Triggers.BeforeRecording</BeforeSave>
+        <AfterSave>ЗбіркаТоварівНаСкладі_Triggers.AfterRecording</AfterSave>
+        <BeforeDelete>ЗбіркаТоварівНаСкладі_Triggers.BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <SpendFunctions>
-        <Spend>
-        </Spend>
-        <ClearSpend>
-        </ClearSpend>
+        <Spend>ЗбіркаТоварівНаСкладі_SpendTheDocument.Spend</Spend>
+        <ClearSpend>ЗбіркаТоварівНаСкладі_SpendTheDocument.ClearSpend</ClearSpend>
       </SpendFunctions>
     </Document>
     <Document>

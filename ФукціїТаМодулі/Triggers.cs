@@ -645,4 +645,22 @@ namespace StorageAndTrade_1_0.Документи
             ДокументОбєкт.ClearSpendTheDocument();
         }
     }
+
+    class ЗбіркаТоварівНаСкладі_Triggers
+    {
+        public static void BeforeRecording(ЗбіркаТоварівНаСкладі_Objest ДокументОбєкт)
+        {
+
+        }
+
+        public static void AfterRecording(ЗбіркаТоварівНаСкладі_Objest ДокументОбєкт)
+        {
+
+        }
+
+        public static void BeforeDelete(ЗбіркаТоварівНаСкладі_Objest ДокументОбєкт)
+        {
+            ДокументОбєкт.ClearSpendTheDocument();
+        }
+    }
 }
