@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 16.01.2023 10:27:26
+ * Дата конфігурації: 16.01.2023 10:55:31
  *
  */
  
@@ -3326,11 +3326,6 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
     #endregion
     
     #region DIRECTORY "СкладськіКомірки_Папки"
-    
-      
-    #endregion
-    
-    #region DIRECTORY "СкладськіПриміщення_Папки"
     
       
     #endregion

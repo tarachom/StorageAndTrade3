@@ -5,7 +5,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>16.01.2023 10:27:26</DateTimeSave>
+  <DateTimeSave>16.01.2023 10:55:31</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -5089,60 +5089,6 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <NameInTable>col_a1</NameInTable>
           <Type>pointer</Type>
           <Pointer>Довідники.СкладськіПриміщення</Pointer>
-          <Desc>
-          </Desc>
-          <IsPresentation>0</IsPresentation>
-          <IsIndex>1</IsIndex>
-        </Field>
-      </Fields>
-      <TabularParts />
-      <TabularLists />
-      <TriggerFunctions>
-        <BeforeSave>
-        </BeforeSave>
-        <AfterSave>
-        </AfterSave>
-        <BeforeDelete>
-        </BeforeDelete>
-      </TriggerFunctions>
-    </Directory>
-    <Directory>
-      <Name>СкладськіПриміщення_Папки</Name>
-      <Table>tab_a97</Table>
-      <Desc>Ієрархія для складських приміщень.
-Підпорядковується складу</Desc>
-      <Fields>
-        <Field>
-          <Name>Назва</Name>
-          <NameInTable>col_j1</NameInTable>
-          <Type>string</Type>
-          <Desc>Назва</Desc>
-          <IsPresentation>1</IsPresentation>
-          <IsIndex>0</IsIndex>
-        </Field>
-        <Field>
-          <Name>Код</Name>
-          <NameInTable>col_j2</NameInTable>
-          <Type>string</Type>
-          <Desc>Код</Desc>
-          <IsPresentation>0</IsPresentation>
-          <IsIndex>0</IsIndex>
-        </Field>
-        <Field>
-          <Name>Родич</Name>
-          <NameInTable>col_j3</NameInTable>
-          <Type>pointer</Type>
-          <Pointer>Довідники.СкладськіПриміщення_Папки</Pointer>
-          <Desc>
-          </Desc>
-          <IsPresentation>0</IsPresentation>
-          <IsIndex>1</IsIndex>
-        </Field>
-        <Field>
-          <Name>Склад</Name>
-          <NameInTable>col_a1</NameInTable>
-          <Type>pointer</Type>
-          <Pointer>Довідники.Склади</Pointer>
           <Desc>
           </Desc>
           <IsPresentation>0</IsPresentation>
