@@ -5,7 +5,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>15.01.2023 23:07:06</DateTimeSave>
+  <DateTimeSave>16.01.2023 10:27:26</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -805,6 +805,14 @@ https://accounting.org.ua/storage_and_trade.html</Desc>
         <Constant>
           <Name>СтаттяРухуКоштів</Name>
           <NameInTable>col_f5</NameInTable>
+          <Desc>
+          </Desc>
+          <Type>integer</Type>
+          <TabularParts />
+        </Constant>
+        <Constant>
+          <Name>СкладськіКомірки_Папки</Name>
+          <NameInTable>col_b1</NameInTable>
           <Desc>
           </Desc>
           <Type>integer</Type>
@@ -4598,12 +4606,14 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
 Підпорядковується приміщенню</Desc>
       <Fields>
         <Field>
-          <Name>Код</Name>
+          <Name>Папка</Name>
           <NameInTable>col_a1</NameInTable>
-          <Type>string</Type>
-          <Desc>Код</Desc>
+          <Type>pointer</Type>
+          <Pointer>Довідники.СкладськіКомірки_Папки</Pointer>
+          <Desc>
+          </Desc>
           <IsPresentation>0</IsPresentation>
-          <IsIndex>0</IsIndex>
+          <IsIndex>1</IsIndex>
         </Field>
         <Field>
           <Name>Назва</Name>
@@ -4697,16 +4707,6 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Desc>
           </Desc>
           <Fields>
-            <Field>
-              <Name>Код</Name>
-              <Caption>Код</Caption>
-              <Size>0</Size>
-              <SortNum>1</SortNum>
-              <SortField>False</SortField>
-              <Type>string</Type>
-              <Pointer>
-              </Pointer>
-            </Field>
             <Field>
               <Name>Назва</Name>
               <Caption>Назва</Caption>

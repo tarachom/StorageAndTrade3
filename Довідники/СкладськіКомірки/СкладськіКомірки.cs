@@ -34,16 +34,17 @@ using ТабличніСписки = StorageAndTrade_1_0.Довідники.Та
 
 namespace StorageAndTrade
 {
-    class СкладськіПриміщення : VBox
+    class СкладськіКомірки : VBox
     {
-        public СкладськіПриміщення_Pointer? SelectPointerItem { get; set; }
-        public СкладськіПриміщення_Pointer? DirectoryPointerItem { get; set; }
-        public System.Action<СкладськіПриміщення_Pointer>? CallBack_OnSelectPointer { get; set; }
+        public СкладськіКомірки_Pointer? SelectPointerItem { get; set; }
+        public СкладськіКомірки_Pointer? DirectoryPointerItem { get; set; }
+        public System.Action<СкладськіКомірки_Pointer>? CallBack_OnSelectPointer { get; set; }
 
         TreeView TreeViewGrid;
-        public Склади_PointerControl СкладВласник = new Склади_PointerControl();
+        СкладськіКомірки_Папки_Дерево ДеревоПапок;
+        public СкладськіПриміщення_PointerControl СкладПриміщенняВласник = new СкладськіПриміщення_PointerControl();
 
-        public СкладськіПриміщення(bool IsSelectPointer = false) : base()
+        public СкладськіКомірки(bool IsSelectPointer = false) : base()
         {
             new VBox(false, 0);
             BorderWidth = 0;
@@ -62,7 +63,7 @@ namespace StorageAndTrade
                 bEmptyPointer.Clicked += (object? sender, EventArgs args) =>
                 {
                     if (CallBack_OnSelectPointer != null)
-                        CallBack_OnSelectPointer.Invoke(new СкладськіПриміщення_Pointer());
+                        CallBack_OnSelectPointer.Invoke(new СкладськіКомірки_Pointer());
 
                     Program.GeneralForm?.CloseCurrentPageNotebook();
                 };
@@ -73,36 +74,22 @@ namespace StorageAndTrade
             PackStart(hBoxBotton, false, false, 10);
 
             //Власник
-            hBoxBotton.PackStart(СкладВласник, false, false, 2);
-            СкладВласник.Caption = "Склад власник:";
-            СкладВласник.AfterSelectFunc = () =>
+            hBoxBotton.PackStart(СкладПриміщенняВласник, false, false, 2);
+            СкладПриміщенняВласник.Caption = "Склад приміщення власник:";
+            СкладПриміщенняВласник.AfterSelectFunc = () =>
             {
-                LoadRecords();
+                LoadTree();
             };
-
-            //Складські комірки
-            LinkButton linkButtonHar = new LinkButton(" Складські комірки") { Halign = Align.Start, Image = new Image("images/doc.png"), AlwaysShowImage = true };
-            linkButtonHar.Clicked += (object? sender, EventArgs args) =>
-            {
-                СкладськіКомірки page = new СкладськіКомірки();
-
-                if (SelectPointerItem != null)
-                    page.СкладПриміщенняВласник.Pointer = SelectPointerItem;
-
-                Program.GeneralForm?.CreateNotebookPage("Складські комірки", () => { return page; });
-
-                page.LoadTree();
-            };
-
-            hBoxBotton.PackStart(linkButtonHar, false, false, 10);
 
             CreateToolbar();
+
+            HPaned hPaned = new HPaned();
 
             ScrolledWindow scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In };
             scrollTree.SetPolicy(PolicyType.Never, PolicyType.Automatic);
 
-            TreeViewGrid = new TreeView(ТабличніСписки.СкладськіПриміщення_Записи.Store);
-            ТабличніСписки.СкладськіПриміщення_Записи.AddColumns(TreeViewGrid);
+            TreeViewGrid = new TreeView(ТабличніСписки.СкладськіКомірки_Записи.Store);
+            ТабличніСписки.СкладськіКомірки_Записи.AddColumns(TreeViewGrid);
 
             TreeViewGrid.Selection.Mode = SelectionMode.Multiple;
             TreeViewGrid.ActivateOnSingleClick = true;
@@ -111,7 +98,13 @@ namespace StorageAndTrade
 
             scrollTree.Add(TreeViewGrid);
 
-            PackStart(scrollTree, true, true, 0);
+            hPaned.Pack1(scrollTree, true, true);
+
+            ДеревоПапок = new СкладськіКомірки_Папки_Дерево() { WidthRequest = 500 };
+            ДеревоПапок.CallBack_RowActivated = LoadRecords;
+            hPaned.Pack2(ДеревоПапок, false, true);
+
+            PackStart(hPaned, true, true, 0);
 
             ShowAll();
         }
@@ -142,35 +135,51 @@ namespace StorageAndTrade
             toolbar.Add(refreshButton);
         }
 
-        public void LoadRecords()
+        public void LoadTree()
         {
-            ТабличніСписки.СкладськіПриміщення_Записи.SelectPointerItem = SelectPointerItem;
-            ТабличніСписки.СкладськіПриміщення_Записи.DirectoryPointerItem = DirectoryPointerItem;
-
-            ТабличніСписки.СкладськіПриміщення_Записи.Where.Clear();
-            if (!СкладВласник.Pointer.UnigueID.IsEmpty())
+            if (DirectoryPointerItem != null || SelectPointerItem != null)
             {
-                ТабличніСписки.СкладськіПриміщення_Записи.Where.Add(
-                    new Where(СкладськіПриміщення_Const.Склад, Comparison.EQ, СкладВласник.Pointer.UnigueID.UGuid));
+                string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                UnigueID unigueID = new UnigueID(UidSelect);
+
+                СкладськіКомірки_Objest? СкладськіКомірки_Objest = new СкладськіКомірки_Pointer(unigueID).GetDirectoryObject();
+                if (СкладськіКомірки_Objest != null)
+                    ДеревоПапок.Parent_Pointer = СкладськіКомірки_Objest.Папка;
             }
 
-            ТабличніСписки.СкладськіПриміщення_Записи.LoadRecords();
+            ДеревоПапок.СкладПриміщенняВласник = СкладПриміщенняВласник.Pointer;
+            ДеревоПапок.LoadTree();
+        }
 
-            if (ТабличніСписки.СкладськіПриміщення_Записи.SelectPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.СкладськіПриміщення_Записи.SelectPath, TreeViewGrid.Columns[0], false);
+        public void LoadRecords()
+        {
+            ТабличніСписки.СкладськіКомірки_Записи.SelectPointerItem = SelectPointerItem;
+            ТабличніСписки.СкладськіКомірки_Записи.DirectoryPointerItem = DirectoryPointerItem;
+
+            ТабличніСписки.СкладськіКомірки_Записи.Where.Clear();
+            if (!СкладПриміщенняВласник.Pointer.UnigueID.IsEmpty())
+            {
+                ТабличніСписки.СкладськіКомірки_Записи.Where.Add(
+                    new Where(СкладськіКомірки_Const.Приміщення, Comparison.EQ, СкладПриміщенняВласник.Pointer.UnigueID.UGuid));
+            }
+
+            ТабличніСписки.СкладськіКомірки_Записи.LoadRecords();
+
+            if (ТабличніСписки.СкладськіКомірки_Записи.SelectPath != null)
+                TreeViewGrid.SetCursor(ТабличніСписки.СкладськіКомірки_Записи.SelectPath, TreeViewGrid.Columns[0], false);
         }
 
         void OpenPageElement(bool IsNew, string uid = "")
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"Складські приміщення: *", () =>
+                Program.GeneralForm?.CreateNotebookPage($"Складські комірки: *", () =>
                 {
-                    СкладськіПриміщення_Елемент page = new СкладськіПриміщення_Елемент
+                    СкладськіКомірки_Елемент page = new СкладськіКомірки_Елемент
                     {
                         PageList = this,
                         IsNew = true,
-                        СкладДляНового = СкладВласник.Pointer
+                        СкладськеПриміщенняДляНового = СкладПриміщенняВласник.Pointer
                     };
 
                     page.SetValue();
@@ -180,16 +189,16 @@ namespace StorageAndTrade
             }
             else
             {
-                СкладськіПриміщення_Objest СкладськіПриміщення_Objest = new СкладськіПриміщення_Objest();
-                if (СкладськіПриміщення_Objest.Read(new UnigueID(uid)))
+                СкладськіКомірки_Objest СкладськіКомірки_Objest = new СкладськіКомірки_Objest();
+                if (СкладськіКомірки_Objest.Read(new UnigueID(uid)))
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"Складські приміщення: {СкладськіПриміщення_Objest.Назва}", () =>
+                    Program.GeneralForm?.CreateNotebookPage($"Складські комірки: {СкладськіКомірки_Objest.Назва}", () =>
                     {
-                        СкладськіПриміщення_Елемент page = new СкладськіПриміщення_Елемент
+                        СкладськіКомірки_Елемент page = new СкладськіКомірки_Елемент
                         {
                             PageList = this,
                             IsNew = false,
-                            СкладськіПриміщення_Objest = СкладськіПриміщення_Objest,
+                            СкладськіКомірки_Objest = СкладськіКомірки_Objest,
                         };
 
                         page.SetValue();
@@ -213,7 +222,7 @@ namespace StorageAndTrade
 
                 UnigueID unigueID = new UnigueID((string)TreeViewGrid.Model.GetValue(iter, 1));
 
-                SelectPointerItem = new StorageAndTrade_1_0.Довідники.СкладськіПриміщення_Pointer(unigueID);
+                SelectPointerItem = new StorageAndTrade_1_0.Довідники.СкладськіКомірки_Pointer(unigueID);
             }
         }
 
@@ -233,7 +242,7 @@ namespace StorageAndTrade
                         else
                         {
                             if (CallBack_OnSelectPointer != null)
-                                CallBack_OnSelectPointer.Invoke(new СкладськіПриміщення_Pointer(new UnigueID(uid)));
+                                CallBack_OnSelectPointer.Invoke(new СкладськіКомірки_Pointer(new UnigueID(uid)));
 
                             Program.GeneralForm?.CloseCurrentPageNotebook();
                         }
@@ -284,9 +293,9 @@ namespace StorageAndTrade
 
                         string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
 
-                        СкладськіПриміщення_Objest СкладськіПриміщення_Objest = new СкладськіПриміщення_Objest();
-                        if (СкладськіПриміщення_Objest.Read(new UnigueID(uid)))
-                            СкладськіПриміщення_Objest.Delete();
+                        СкладськіКомірки_Objest СкладськіКомірки_Objest = new СкладськіКомірки_Objest();
+                        if (СкладськіКомірки_Objest.Read(new UnigueID(uid)))
+                            СкладськіКомірки_Objest.Delete();
                         else
                             Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                     }
@@ -311,14 +320,14 @@ namespace StorageAndTrade
 
                         string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
 
-                        СкладськіПриміщення_Objest СкладськіПриміщення_Objest = new СкладськіПриміщення_Objest();
-                        if (СкладськіПриміщення_Objest.Read(new UnigueID(uid)))
+                        СкладськіКомірки_Objest СкладськіКомірки_Objest = new СкладськіКомірки_Objest();
+                        if (СкладськіКомірки_Objest.Read(new UnigueID(uid)))
                         {
-                            СкладськіПриміщення_Objest СкладськіПриміщення_Objest_Новий = СкладськіПриміщення_Objest.Copy();
-                            СкладськіПриміщення_Objest_Новий.Назва += " - Копія";
-                            СкладськіПриміщення_Objest_Новий.Save();
+                            СкладськіКомірки_Objest СкладськіКомірки_Objest_Новий = СкладськіКомірки_Objest.Copy();
+                            СкладськіКомірки_Objest_Новий.Назва += " - Копія";
+                            СкладськіКомірки_Objest_Новий.Save();
 
-                            SelectPointerItem = СкладськіПриміщення_Objest_Новий.GetDirectoryPointer();
+                            SelectPointerItem = СкладськіКомірки_Objest_Новий.GetDirectoryPointer();
                         }
                         else
                             Message.Error(Program.GeneralForm, "Не вдалось прочитати!");

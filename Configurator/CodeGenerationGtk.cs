@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 15.01.2023 23:07:06
+ * Дата конфігурації: 16.01.2023 10:27:26
  *
  */
  
@@ -2968,7 +2968,6 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         string Image = "images/doc.png";
         string ID = "";
         
-        string Код = "";
         string Назва = "";
         string ОбластьЗберігання = "";
         string Лінія = "";
@@ -2982,11 +2981,10 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         Array ToArray()
         {
             return new object[] { new Gdk.Pixbuf(Image), ID 
-            /* */ , Код, Назва, ОбластьЗберігання, Лінія, Позиція, Приміщення, Стелаж, Ярус, ТипСкладськоїКомірки, Типорозмір };
+            /* */ , Назва, ОбластьЗберігання, Лінія, Позиція, Приміщення, Стелаж, Ярус, ТипСкладськоїКомірки, Типорозмір };
         }
 
         public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */
-            , typeof(string) /* Код */
             , typeof(string) /* Назва */
             , typeof(string) /* ОбластьЗберігання */
             , typeof(string) /* Лінія */
@@ -3003,16 +3001,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 4 }, "pixbuf", 0));
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
-            treeView.AppendColumn(new TreeViewColumn("Область зберігання", new CellRendererText() { Xpad = 4 }, "text", 4) { SortColumnId = 4 } ); /*ОбластьЗберігання*/
-            treeView.AppendColumn(new TreeViewColumn("Лінія", new CellRendererText() { Xpad = 4 }, "text", 5) { SortColumnId = 5 } ); /*Лінія*/
-            treeView.AppendColumn(new TreeViewColumn("Позиція", new CellRendererText() { Xpad = 4 }, "text", 6) { SortColumnId = 6 } ); /*Позиція*/
-            treeView.AppendColumn(new TreeViewColumn("Приміщення", new CellRendererText() { Xpad = 4 }, "text", 7) { SortColumnId = 7 } ); /*Приміщення*/
-            treeView.AppendColumn(new TreeViewColumn("Стелаж", new CellRendererText() { Xpad = 4 }, "text", 8) { SortColumnId = 8 } ); /*Стелаж*/
-            treeView.AppendColumn(new TreeViewColumn("Ярус", new CellRendererText() { Xpad = 4 }, "text", 9) { SortColumnId = 9 } ); /*Ярус*/
-            treeView.AppendColumn(new TreeViewColumn("Тип комірки", new CellRendererText() { Xpad = 4 }, "text", 10) { SortColumnId = 10 } ); /*ТипСкладськоїКомірки*/
-            treeView.AppendColumn(new TreeViewColumn("Типорозмір", new CellRendererText() { Xpad = 4 }, "text", 11) { SortColumnId = 11 } ); /*Типорозмір*/
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Область зберігання", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*ОбластьЗберігання*/
+            treeView.AppendColumn(new TreeViewColumn("Лінія", new CellRendererText() { Xpad = 4 }, "text", 4) { SortColumnId = 4 } ); /*Лінія*/
+            treeView.AppendColumn(new TreeViewColumn("Позиція", new CellRendererText() { Xpad = 4 }, "text", 5) { SortColumnId = 5 } ); /*Позиція*/
+            treeView.AppendColumn(new TreeViewColumn("Приміщення", new CellRendererText() { Xpad = 4 }, "text", 6) { SortColumnId = 6 } ); /*Приміщення*/
+            treeView.AppendColumn(new TreeViewColumn("Стелаж", new CellRendererText() { Xpad = 4 }, "text", 7) { SortColumnId = 7 } ); /*Стелаж*/
+            treeView.AppendColumn(new TreeViewColumn("Ярус", new CellRendererText() { Xpad = 4 }, "text", 8) { SortColumnId = 8 } ); /*Ярус*/
+            treeView.AppendColumn(new TreeViewColumn("Тип комірки", new CellRendererText() { Xpad = 4 }, "text", 9) { SortColumnId = 9 } ); /*ТипСкладськоїКомірки*/
+            treeView.AppendColumn(new TreeViewColumn("Типорозмір", new CellRendererText() { Xpad = 4 }, "text", 10) { SortColumnId = 10 } ); /*Типорозмір*/
             
         }
 
@@ -3032,13 +3029,12 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             СкладськіКомірки_Select.QuerySelect.Field.AddRange(
                 new string[]
                 {
-                    Довідники.СкладськіКомірки_Const.Код /* 1 */
-                    , Довідники.СкладськіКомірки_Const.Назва /* 2 */
-                    , Довідники.СкладськіКомірки_Const.Лінія /* 3 */
-                    , Довідники.СкладськіКомірки_Const.Позиція /* 4 */
-                    , Довідники.СкладськіКомірки_Const.Стелаж /* 5 */
-                    , Довідники.СкладськіКомірки_Const.Ярус /* 6 */
-                    , Довідники.СкладськіКомірки_Const.ТипСкладськоїКомірки /* 7 */
+                    Довідники.СкладськіКомірки_Const.Назва /* 1 */
+                    , Довідники.СкладськіКомірки_Const.Лінія /* 2 */
+                    , Довідники.СкладськіКомірки_Const.Позиція /* 3 */
+                    , Довідники.СкладськіКомірки_Const.Стелаж /* 4 */
+                    , Довідники.СкладськіКомірки_Const.Ярус /* 5 */
+                    , Довідники.СкладськіКомірки_Const.ТипСкладськоїКомірки /* 6 */
                     
                 });
 
@@ -3088,7 +3084,6 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                         ОбластьЗберігання = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Приміщення = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
                         Типорозмір = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
-                        Код = cur.Fields?[СкладськіКомірки_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[СкладськіКомірки_Const.Назва]?.ToString() ?? "", /**/
                         Лінія = cur.Fields?[СкладськіКомірки_Const.Лінія]?.ToString() ?? "", /**/
                         Позиція = cur.Fields?[СкладськіКомірки_Const.Позиція]?.ToString() ?? "", /**/

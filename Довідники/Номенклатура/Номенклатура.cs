@@ -166,9 +166,9 @@ namespace StorageAndTrade
                 string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
                 UnigueID unigueID = new UnigueID(UidSelect);
 
-                Номенклатура_Objest? контрагенти_Objest = new Номенклатура_Pointer(unigueID).GetDirectoryObject();
-                if (контрагенти_Objest != null)
-                    ДеревоПапок.Parent_Pointer = контрагенти_Objest.Папка;
+                Номенклатура_Objest? номенклатура_Objest = new Номенклатура_Pointer(unigueID).GetDirectoryObject();
+                if (номенклатура_Objest != null)
+                    ДеревоПапок.Parent_Pointer = номенклатура_Objest.Папка;
             }
 
             ДеревоПапок.LoadTree();

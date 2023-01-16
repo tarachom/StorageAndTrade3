@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 15.01.2023 23:07:06
+ * Дата конфігурації: 16.01.2023 10:27:26
  *
  */
 
@@ -1200,7 +1200,7 @@ namespace StorageAndTrade_1_0.Константи
             
             Dictionary<string, object> fieldValue = new Dictionary<string, object>();
             bool IsSelect = Config.Kernel!.DataBase.SelectAllConstants("tab_constants",
-                 new string[] { "col_b8", "col_d1", "col_d2", "col_d3", "col_d4", "col_d5", "col_d6", "col_d7", "col_d8", "col_d9", "col_e1", "col_e2", "col_e3", "col_e4", "col_e5", "col_e6", "col_e7", "col_e8", "col_e9", "col_f1", "col_f2", "col_f3", "col_f4", "col_f5" }, fieldValue);
+                 new string[] { "col_b8", "col_d1", "col_d2", "col_d3", "col_d4", "col_d5", "col_d6", "col_d7", "col_d8", "col_d9", "col_e1", "col_e2", "col_e3", "col_e4", "col_e5", "col_e6", "col_e7", "col_e8", "col_e9", "col_f1", "col_f2", "col_f3", "col_f4", "col_f5", "col_b1" }, fieldValue);
             
             if (IsSelect)
             {
@@ -1228,6 +1228,7 @@ namespace StorageAndTrade_1_0.Константи
                 m_ДоговориКонтрагентів_Const = (fieldValue["col_f3"] != DBNull.Value) ? (int)fieldValue["col_f3"] : 0;
                 m_БанківськіРахункиКонтрагентів_Const = (fieldValue["col_f4"] != DBNull.Value) ? (int)fieldValue["col_f4"] : 0;
                 m_СтаттяРухуКоштів_Const = (fieldValue["col_f5"] != DBNull.Value) ? (int)fieldValue["col_f5"] : 0;
+                m_СкладськіКомірки_Папки_Const = (fieldValue["col_b1"] != DBNull.Value) ? (int)fieldValue["col_b1"] : 0;
                 
             }
 			
@@ -1567,6 +1568,20 @@ namespace StorageAndTrade_1_0.Константи
             {
                 m_СтаттяРухуКоштів_Const = value;
                 Config.Kernel!.DataBase.SaveConstants("tab_constants", "col_f5", m_СтаттяРухуКоштів_Const);
+            }
+        }
+        
+        static int m_СкладськіКомірки_Папки_Const = 0;
+        public static int СкладськіКомірки_Папки_Const
+        {
+            get 
+            {
+                return m_СкладськіКомірки_Папки_Const;
+            }
+            set
+            {
+                m_СкладськіКомірки_Папки_Const = value;
+                Config.Kernel!.DataBase.SaveConstants("tab_constants", "col_b1", m_СкладськіКомірки_Папки_Const);
             }
         }
              
@@ -7866,7 +7881,7 @@ namespace StorageAndTrade_1_0.Довідники
     {
         public const string TABLE = "tab_a72";
         
-        public const string Код = "col_a1";
+        public const string Папка = "col_a1";
         public const string Назва = "col_a2";
         public const string ОбластьЗберігання = "col_a3";
         public const string Лінія = "col_a4";
@@ -7884,7 +7899,7 @@ namespace StorageAndTrade_1_0.Довідники
         public СкладськіКомірки_Objest() : base(Config.Kernel!, "tab_a72",
              new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b1" }) 
         {
-            Код = "";
+            Папка = new Довідники.СкладськіКомірки_Папки_Pointer();
             Назва = "";
             ОбластьЗберігання = new Довідники.ОбластьЗберігання_Pointer();
             Лінія = "";
@@ -7901,7 +7916,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             if (BaseRead(uid))
             {
-                Код = base.FieldValue["col_a1"]?.ToString() ?? "";
+                Папка = new Довідники.СкладськіКомірки_Папки_Pointer(base.FieldValue["col_a1"]);
                 Назва = base.FieldValue["col_a2"]?.ToString() ?? "";
                 ОбластьЗберігання = new Довідники.ОбластьЗберігання_Pointer(base.FieldValue["col_a3"]);
                 Лінія = base.FieldValue["col_a4"]?.ToString() ?? "";
@@ -7921,7 +7936,7 @@ namespace StorageAndTrade_1_0.Довідники
         
         public void Save()
         {
-		    base.FieldValue["col_a1"] = Код;
+		    base.FieldValue["col_a1"] = Папка.UnigueID.UGuid;
             base.FieldValue["col_a2"] = Назва;
             base.FieldValue["col_a3"] = ОбластьЗберігання.UnigueID.UGuid;
             base.FieldValue["col_a4"] = Лінія;
@@ -7940,7 +7955,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             СкладськіКомірки_Objest copy = new СкладськіКомірки_Objest();
 			copy.New();
-            copy.Код = Код;
+            copy.Папка = Папка;
 			copy.Назва = Назва;
 			copy.ОбластьЗберігання = ОбластьЗберігання;
 			copy.Лінія = Лінія;
@@ -7966,7 +7981,7 @@ namespace StorageAndTrade_1_0.Довідники
             return directoryPointer;
         }
         
-        public string Код { get; set; }
+        public Довідники.СкладськіКомірки_Папки_Pointer Папка { get; set; }
         public string Назва { get; set; }
         public Довідники.ОбластьЗберігання_Pointer ОбластьЗберігання { get; set; }
         public string Лінія { get; set; }
