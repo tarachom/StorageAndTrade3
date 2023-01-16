@@ -29,25 +29,21 @@ using Gtk;
 
 using AccountingSoftware;
 
-using StorageAndTrade_1_0.Константи;
 using StorageAndTrade_1_0.Довідники;
-
 using ТабличніСписки = StorageAndTrade_1_0.Довідники.ТабличніСписки;
 
 namespace StorageAndTrade
 {
-    class Склади : VBox
+    class СкладськіПриміщення : VBox
     {
-        public Склади_Pointer? SelectPointerItem { get; set; }
-        public Склади_Pointer? DirectoryPointerItem { get; set; }
-        public System.Action<Склади_Pointer>? CallBack_OnSelectPointer { get; set; }
+        public СкладськіПриміщення_Pointer? SelectPointerItem { get; set; }
+        public СкладськіПриміщення_Pointer? DirectoryPointerItem { get; set; }
+        public System.Action<СкладськіПриміщення_Pointer>? CallBack_OnSelectPointer { get; set; }
 
         TreeView TreeViewGrid;
-        Склади_Папки_Дерево ДеревоПапок;
-        CheckButton checkButtonIsHierarchy = new CheckButton("Враховувати ієрархію папок") { Active = true };
-        SearchControl ПошукПоНазві = new SearchControl();
+        public Склади_PointerControl СкладВласник = new Склади_PointerControl();
 
-        public Склади(bool IsSelectPointer = false) : base()
+        public СкладськіПриміщення(bool IsSelectPointer = false) : base()
         {
             new VBox(false, 0);
             BorderWidth = 0;
@@ -57,7 +53,6 @@ namespace StorageAndTrade
 
             Button bClose = new Button("Закрити");
             bClose.Clicked += (object? sender, EventArgs args) => { Program.GeneralForm?.CloseCurrentPageNotebook(); };
-
             hBoxBotton.PackStart(bClose, false, false, 10);
 
             //Як форма відкрита для вибору
@@ -67,7 +62,7 @@ namespace StorageAndTrade
                 bEmptyPointer.Clicked += (object? sender, EventArgs args) =>
                 {
                     if (CallBack_OnSelectPointer != null)
-                        CallBack_OnSelectPointer.Invoke(new Склади_Pointer());
+                        CallBack_OnSelectPointer.Invoke(new СкладськіПриміщення_Pointer());
 
                     Program.GeneralForm?.CloseCurrentPageNotebook();
                 };
@@ -75,46 +70,23 @@ namespace StorageAndTrade
                 hBoxBotton.PackStart(bEmptyPointer, false, false, 10);
             }
 
-            //Враховувати ієрархію папок
-            checkButtonIsHierarchy.Clicked += OnCheckButtonIsHierarchyClicked;
-            hBoxBotton.PackStart(checkButtonIsHierarchy, false, false, 10);
-
             PackStart(hBoxBotton, false, false, 10);
 
-            //Пошук
-            hBoxBotton.PackStart(ПошукПоНазві, false, false, 2);
-            ПошукПоНазві.QueryFind = ПошуковіЗапити.Склади;
-            ПошукПоНазві.Select = (UnigueID uid) =>
+            //Власник
+            hBoxBotton.PackStart(СкладВласник, false, false, 2);
+            СкладВласник.Caption = "Склад власник:";
+            СкладВласник.AfterSelectFunc = () =>
             {
-                SelectPointerItem = new Склади_Pointer(uid);
-                LoadTree();
+                LoadRecords();
             };
-
-            //Склади приміщення
-            LinkButton linkButtonHar = new LinkButton(" Склади приміщення") { Halign = Align.Start, Image = new Image("images/doc.png"), AlwaysShowImage = true };
-            linkButtonHar.Clicked += (object? sender, EventArgs args) =>
-            {
-                СкладськіПриміщення page = new СкладськіПриміщення();
-
-                if (SelectPointerItem != null)
-                    page.СкладВласник.Pointer = SelectPointerItem;
-
-                Program.GeneralForm?.CreateNotebookPage("Склади приміщення", () => { return page; });
-
-                page.LoadRecords();
-            };
-
-            hBoxBotton.PackStart(linkButtonHar, false, false, 10);
 
             CreateToolbar();
 
-            HPaned hPaned = new HPaned();
-
             ScrolledWindow scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In };
-            scrollTree.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
+            scrollTree.SetPolicy(PolicyType.Never, PolicyType.Automatic);
 
-            TreeViewGrid = new TreeView(ТабличніСписки.Склади_Записи.Store);
-            ТабличніСписки.Склади_Записи.AddColumns(TreeViewGrid);
+            TreeViewGrid = new TreeView(ТабличніСписки.СкладськіПриміщення_Записи.Store);
+            ТабличніСписки.СкладськіПриміщення_Записи.AddColumns(TreeViewGrid);
 
             TreeViewGrid.Selection.Mode = SelectionMode.Multiple;
             TreeViewGrid.ActivateOnSingleClick = true;
@@ -123,13 +95,7 @@ namespace StorageAndTrade
 
             scrollTree.Add(TreeViewGrid);
 
-            hPaned.Pack1(scrollTree, true, true);
-
-            ДеревоПапок = new Склади_Папки_Дерево() { WidthRequest = 500 };
-            ДеревоПапок.CallBack_RowActivated = LoadRecords;
-            hPaned.Pack2(ДеревоПапок, false, true);
-
-            PackStart(hPaned, true, true, 0);
+            PackStart(scrollTree, true, true, 0);
 
             ShowAll();
         }
@@ -160,47 +126,35 @@ namespace StorageAndTrade
             toolbar.Add(refreshButton);
         }
 
-        public void LoadTree()
-        {
-            if (DirectoryPointerItem != null || SelectPointerItem != null)
-            {
-                string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
-                UnigueID unigueID = new UnigueID(UidSelect);
-
-                Склади_Objest? контрагенти_Objest = new Склади_Pointer(unigueID).GetDirectoryObject();
-                if (контрагенти_Objest != null)
-                    ДеревоПапок.Parent_Pointer = контрагенти_Objest.Папка;
-            }
-
-            ДеревоПапок.LoadTree();
-        }
-
         public void LoadRecords()
         {
-            ТабличніСписки.Склади_Записи.SelectPointerItem = SelectPointerItem;
-            ТабличніСписки.Склади_Записи.DirectoryPointerItem = DirectoryPointerItem;
+            ТабличніСписки.СкладськіПриміщення_Записи.SelectPointerItem = SelectPointerItem;
+            ТабличніСписки.СкладськіПриміщення_Записи.DirectoryPointerItem = DirectoryPointerItem;
 
-            ТабличніСписки.Склади_Записи.Where.Clear();
-            if (checkButtonIsHierarchy.Active)
-                ТабличніСписки.Склади_Записи.Where.Add(new Where(Склади_Const.Папка, Comparison.EQ, ДеревоПапок.Parent_Pointer.UnigueID.UGuid));
+            ТабличніСписки.СкладськіПриміщення_Записи.Where.Clear();
+            if (!СкладВласник.Pointer.UnigueID.IsEmpty())
+            {
+                ТабличніСписки.СкладськіПриміщення_Записи.Where.Add(
+                    new Where(СкладськіПриміщення_Const.Склад, Comparison.EQ, СкладВласник.Pointer.UnigueID.UGuid));
+            }
 
-            ТабличніСписки.Склади_Записи.LoadRecords();
+            ТабличніСписки.СкладськіПриміщення_Записи.LoadRecords();
 
-            if (ТабличніСписки.Склади_Записи.SelectPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.Склади_Записи.SelectPath, TreeViewGrid.Columns[0], false);
+            if (ТабличніСписки.СкладськіПриміщення_Записи.SelectPath != null)
+                TreeViewGrid.SetCursor(ТабличніСписки.СкладськіПриміщення_Записи.SelectPath, TreeViewGrid.Columns[0], false);
         }
 
         void OpenPageElement(bool IsNew, string uid = "")
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"Склад: *", () =>
+                Program.GeneralForm?.CreateNotebookPage($"Складські приміщення: *", () =>
                 {
-                    Склади_Елемент page = new Склади_Елемент
+                    СкладськіПриміщення_Елемент page = new СкладськіПриміщення_Елемент
                     {
                         PageList = this,
                         IsNew = true,
-                        РодичДляНового = ДеревоПапок.Parent_Pointer
+                        СкладДляНового = СкладВласник.Pointer
                     };
 
                     page.SetValue();
@@ -210,16 +164,16 @@ namespace StorageAndTrade
             }
             else
             {
-                Склади_Objest Склади_Objest = new Склади_Objest();
-                if (Склади_Objest.Read(new UnigueID(uid)))
+                СкладськіПриміщення_Objest СкладськіПриміщення_Objest = new СкладськіПриміщення_Objest();
+                if (СкладськіПриміщення_Objest.Read(new UnigueID(uid)))
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"Склад: {Склади_Objest.Назва}", () =>
+                    Program.GeneralForm?.CreateNotebookPage($"Складські приміщення: {СкладськіПриміщення_Objest.Назва}", () =>
                     {
-                        Склади_Елемент page = new Склади_Елемент
+                        СкладськіПриміщення_Елемент page = new СкладськіПриміщення_Елемент
                         {
                             PageList = this,
                             IsNew = false,
-                            Склади_Objest = Склади_Objest,
+                            СкладськіПриміщення_Objest = СкладськіПриміщення_Objest,
                         };
 
                         page.SetValue();
@@ -243,28 +197,30 @@ namespace StorageAndTrade
 
                 UnigueID unigueID = new UnigueID((string)TreeViewGrid.Model.GetValue(iter, 1));
 
-                SelectPointerItem = new StorageAndTrade_1_0.Довідники.Склади_Pointer(unigueID);
+                SelectPointerItem = new StorageAndTrade_1_0.Довідники.СкладськіПриміщення_Pointer(unigueID);
             }
         }
 
         void OnButtonPressEvent(object? sender, ButtonPressEventArgs args)
         {
-            if (args.Event.Type == Gdk.EventType.DoubleButtonPress && TreeViewGrid.Selection.CountSelectedRows() != 0)
+            if (args.Event.Type == Gdk.EventType.DoubleButtonPress)
             {
-                TreeIter iter;
-
-                if (TreeViewGrid.Model.GetIter(out iter, TreeViewGrid.Selection.GetSelectedRows()[0]))
+                if (TreeViewGrid.Selection.CountSelectedRows() != 0)
                 {
-                    string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
-
-                    if (DirectoryPointerItem == null)
-                        OpenPageElement(false, uid);
-                    else
+                    TreeIter iter;
+                    if (TreeViewGrid.Model.GetIter(out iter, TreeViewGrid.Selection.GetSelectedRows()[0]))
                     {
-                        if (CallBack_OnSelectPointer != null)
-                            CallBack_OnSelectPointer.Invoke(new Склади_Pointer(new UnigueID(uid)));
+                        string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
 
-                        Program.GeneralForm?.CloseCurrentPageNotebook();
+                        if (DirectoryPointerItem == null)
+                            OpenPageElement(false, uid);
+                        else
+                        {
+                            if (CallBack_OnSelectPointer != null)
+                                CallBack_OnSelectPointer.Invoke(new СкладськіПриміщення_Pointer(new UnigueID(uid)));
+
+                            Program.GeneralForm?.CloseCurrentPageNotebook();
+                        }
                     }
                 }
             }
@@ -312,9 +268,9 @@ namespace StorageAndTrade
 
                         string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
 
-                        Склади_Objest Склади_Objest = new Склади_Objest();
-                        if (Склади_Objest.Read(new UnigueID(uid)))
-                            Склади_Objest.Delete();
+                        СкладськіПриміщення_Objest СкладськіПриміщення_Objest = new СкладськіПриміщення_Objest();
+                        if (СкладськіПриміщення_Objest.Read(new UnigueID(uid)))
+                            СкладськіПриміщення_Objest.Delete();
                         else
                             Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                     }
@@ -339,15 +295,14 @@ namespace StorageAndTrade
 
                         string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
 
-                        Склади_Objest Склади_Objest = new Склади_Objest();
-                        if (Склади_Objest.Read(new UnigueID(uid)))
+                        СкладськіПриміщення_Objest СкладськіПриміщення_Objest = new СкладськіПриміщення_Objest();
+                        if (СкладськіПриміщення_Objest.Read(new UnigueID(uid)))
                         {
-                            Склади_Objest Склади_Objest_Новий = Склади_Objest.Copy();
-                            Склади_Objest_Новий.Назва += " - Копія";
-                            Склади_Objest_Новий.Код = (++НумераціяДовідників.Склади_Const).ToString("D6");
-                            Склади_Objest_Новий.Save();
+                            СкладськіПриміщення_Objest СкладськіПриміщення_Objest_Новий = СкладськіПриміщення_Objest.Copy();
+                            СкладськіПриміщення_Objest_Новий.Назва += " - Копія";
+                            СкладськіПриміщення_Objest_Новий.Save();
 
-                            SelectPointerItem = Склади_Objest_Новий.GetDirectoryPointer();
+                            SelectPointerItem = СкладськіПриміщення_Objest_Новий.GetDirectoryPointer();
                         }
                         else
                             Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
@@ -360,21 +315,5 @@ namespace StorageAndTrade
 
         #endregion
 
-        #region Controls
-
-        void OnCheckButtonIsHierarchyClicked(object? sender, EventArgs args)
-        {
-            LoadRecords();
-        }
-
-        void OnEntrySearchKeyRelease(object? sender, KeyReleaseEventArgs args)
-        {
-            if (args.Event.Key == Gdk.Key.Return || args.Event.Key == Gdk.Key.KP_Enter)
-            {
-
-            }
-        }
-
-        #endregion
     }
 }
