@@ -663,4 +663,22 @@ namespace StorageAndTrade_1_0.Документи
             ДокументОбєкт.ClearSpendTheDocument();
         }
     }
+
+    class РозміщенняНоменклатуриПоКоміркам_Triggers
+    {
+        public static void BeforeRecording(РозміщенняНоменклатуриПоКоміркам_Objest ДокументОбєкт)
+        {
+
+        }
+
+        public static void AfterRecording(РозміщенняНоменклатуриПоКоміркам_Objest ДокументОбєкт)
+        {
+
+        }
+
+        public static void BeforeDelete(РозміщенняНоменклатуриПоКоміркам_Objest ДокументОбєкт)
+        {
+            ДокументОбєкт.ClearSpendTheDocument();
+        }
+    }
 }

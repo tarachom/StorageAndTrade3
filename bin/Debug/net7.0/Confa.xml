@@ -5,7 +5,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>17.01.2023 15:05:40</DateTimeSave>
+  <DateTimeSave>17.01.2023 15:20:45</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -14100,18 +14100,13 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       </TabularLists>
       <AllowRegisterAccumulation />
       <TriggerFunctions>
-        <BeforeSave>
-        </BeforeSave>
-        <AfterSave>
-        </AfterSave>
-        <BeforeDelete>
-        </BeforeDelete>
+        <BeforeSave>РозміщенняНоменклатуриПоКоміркам_Triggers.BeforeRecording</BeforeSave>
+        <AfterSave>РозміщенняНоменклатуриПоКоміркам_Triggers.AfterRecording</AfterSave>
+        <BeforeDelete>РозміщенняНоменклатуриПоКоміркам_Triggers.BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <SpendFunctions>
-        <Spend>
-        </Spend>
-        <ClearSpend>
-        </ClearSpend>
+        <Spend>РозміщенняНоменклатуриПоКоміркам_SpendTheDocument.Spend</Spend>
+        <ClearSpend>РозміщенняНоменклатуриПоКоміркам_SpendTheDocument.ClearSpend</ClearSpend>
       </SpendFunctions>
     </Document>
   </Documents>

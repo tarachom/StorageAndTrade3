@@ -29,8 +29,11 @@ using Gtk;
 
 using AccountingSoftware;
 
+using StorageAndTrade_1_0;
 using StorageAndTrade_1_0.Довідники;
+using Перелічення = StorageAndTrade_1_0.Перелічення;
 using StorageAndTrade_1_0.Документи;
+using StorageAndTrade_1_0.РегістриВідомостей;
 
 namespace StorageAndTrade
 {
@@ -262,6 +265,18 @@ namespace StorageAndTrade
             ToolButton deleteButton = new ToolButton(Stock.Delete) { Label = "Видалити", IsImportant = true };
             deleteButton.Clicked += OnDeleteClick;
             toolbar.Add(deleteButton);
+
+            //
+            //
+            //
+
+            ToolButton fillDirectoryButton = new ToolButton(Stock.Add) { Label = "Заповнити товарами", IsImportant = true };
+            fillDirectoryButton.Clicked += OnFillDirectory;
+            toolbar.Add(fillDirectoryButton);
+
+            ToolButton fillRegisterButton = new ToolButton(Stock.Add) { Label = "Заповнити комірками", IsImportant = true };
+            fillRegisterButton.Clicked += OnFillRegister;
+            toolbar.Add(fillRegisterButton);
         }
 
         public void LoadRecords()
@@ -493,7 +508,157 @@ namespace StorageAndTrade
             }
         }
 
-        #endregion
+        void OnFillDirectory(object? sender, EventArgs args)
+        {
+            string query = $@"
+SELECT
+    Номенклатура.uid AS Номенклатура,
+    Номенклатура.{Номенклатура_Const.Назва} AS Номенклатура_Назва,
+    Номенклатура.{Номенклатура_Const.ОдиницяВиміру} AS Пакування,
+    Довідник_ПакуванняОдиниціВиміру.{ПакуванняОдиниціВиміру_Const.Назва} AS Пакування_Назва,
+    (
+        SELECT
+            {РозміщенняНоменклатуриПоКоміркамНаСкладі_Const.Комірка}
+        FROM
+            {РозміщенняНоменклатуриПоКоміркамНаСкладі_Const.TABLE} AS РозміщенняНоменклатуриПоКоміркамНаСкладі
+        WHERE
+            РозміщенняНоменклатуриПоКоміркамНаСкладі.{РозміщенняНоменклатуриПоКоміркамНаСкладі_Const.Номенклатура} = Номенклатура.uid
+        ORDER BY РозміщенняНоменклатуриПоКоміркамНаСкладі.period DESC
+        LIMIT 1
+    ) AS Комірка,
+    Довідник_СкладськіКомірки.{СкладськіКомірки_Const.Назва} AS Комірка_Назва
+FROM
+    {Номенклатура_Const.TABLE} AS Номенклатура
+    LEFT JOIN {ПакуванняОдиниціВиміру_Const.TABLE} AS Довідник_ПакуванняОдиниціВиміру ON 
+        Довідник_ПакуванняОдиниціВиміру.uid = Номенклатура.{Номенклатура_Const.ОдиницяВиміру}
+    LEFT JOIN {СкладськіКомірки_Const.TABLE} AS Довідник_СкладськіКомірки ON 
+        Довідник_СкладськіКомірки.uid = 
+        (
+            SELECT
+                {РозміщенняНоменклатуриПоКоміркамНаСкладі_Const.Комірка}
+            FROM
+                {РозміщенняНоменклатуриПоКоміркамНаСкладі_Const.TABLE} AS РозміщенняНоменклатуриПоКоміркамНаСкладі
+            WHERE
+                РозміщенняНоменклатуриПоКоміркамНаСкладі.{РозміщенняНоменклатуриПоКоміркамНаСкладі_Const.Номенклатура} = Номенклатура.uid
+            ORDER BY РозміщенняНоменклатуриПоКоміркамНаСкладі.period DESC
+            LIMIT 1
+        )
+WHERE
+    Номенклатура.{Номенклатура_Const.ТипНоменклатури} = {(int)Перелічення.ТипиНоменклатури.Товар}
+ORDER BY Номенклатура_Назва
+";
+            Store.Clear();
+            Записи.Clear();
 
+            if (РозміщенняНоменклатуриПоКоміркам_Objest != null)
+            {
+                Dictionary<string, object> paramQuery = new Dictionary<string, object>();
+
+                string[] columnsName;
+                List<Dictionary<string, object>> listRow;
+
+                Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listRow);
+
+                foreach (Dictionary<string, object> row in listRow)
+                {
+                    Запис запис = new Запис
+                    {
+                        ID = Guid.Empty,
+                        Номенклатура = new Номенклатура_Pointer(row["Номенклатура"]),
+                        НоменклатураНазва = row["Номенклатура_Назва"].ToString() ?? "",
+                        Пакування = new ПакуванняОдиниціВиміру_Pointer(row["Пакування"]),
+                        ПакуванняНазва = row["Пакування_Назва"].ToString() ?? "",
+                        Комірка = new СкладськіКомірки_Pointer(row["Комірка"]),
+                        КоміркаНазва = row["Комірка_Назва"].ToString() ?? ""
+                    };
+
+                    Записи.Add(запис);
+                    Store.AppendValues(запис.ToArray());
+                }
+            }
+        }
+
+        void OnFillRegister(object? sender, EventArgs args)
+        {
+            string query = $@"
+        WITH register AS
+        (
+            SELECT DISTINCT 
+                {РозміщенняНоменклатуриПоКоміркамНаСкладі_Const.Номенклатура} AS Номенклатура
+            FROM
+                {РозміщенняНоменклатуриПоКоміркамНаСкладі_Const.TABLE}
+        )
+        SELECT
+            register.Номенклатура,
+            Довідник_Номенклатура.{Номенклатура_Const.Назва} AS Номенклатура_Назва,
+            Довідник_Номенклатура.{Номенклатура_Const.ОдиницяВиміру} AS Пакування,
+            Довідник_ПакуванняОдиниціВиміру.{ПакуванняОдиниціВиміру_Const.Назва} AS Пакування_Назва,
+            (
+                SELECT
+                    {РозміщенняНоменклатуриПоКоміркамНаСкладі_Const.Комірка}
+                FROM
+                    {РозміщенняНоменклатуриПоКоміркамНаСкладі_Const.TABLE} AS РозміщенняНоменклатуриПоКоміркамНаСкладі
+                WHERE
+                    РозміщенняНоменклатуриПоКоміркамНаСкладі.{РозміщенняНоменклатуриПоКоміркамНаСкладі_Const.Номенклатура} = register.Номенклатура
+                ORDER BY РозміщенняНоменклатуриПоКоміркамНаСкладі.period DESC
+                LIMIT 1
+            ) AS Комірка,
+            Довідник_СкладськіКомірки.{СкладськіКомірки_Const.Назва} AS Комірка_Назва
+        FROM
+            register
+
+            LEFT JOIN {Номенклатура_Const.TABLE} AS Довідник_Номенклатура ON 
+                Довідник_Номенклатура.uid = register.Номенклатура
+            LEFT JOIN {ПакуванняОдиниціВиміру_Const.TABLE} AS Довідник_ПакуванняОдиниціВиміру ON 
+                Довідник_ПакуванняОдиниціВиміру.uid = Довідник_Номенклатура.{Номенклатура_Const.ОдиницяВиміру}
+            LEFT JOIN {СкладськіКомірки_Const.TABLE} AS Довідник_СкладськіКомірки ON 
+                Довідник_СкладськіКомірки.uid = 
+                (
+                    SELECT
+                        {РозміщенняНоменклатуриПоКоміркамНаСкладі_Const.Комірка}
+                    FROM
+                        {РозміщенняНоменклатуриПоКоміркамНаСкладі_Const.TABLE} AS РозміщенняНоменклатуриПоКоміркамНаСкладі
+                    WHERE
+                        РозміщенняНоменклатуриПоКоміркамНаСкладі.{РозміщенняНоменклатуриПоКоміркамНаСкладі_Const.Номенклатура} = register.Номенклатура
+                    ORDER BY РозміщенняНоменклатуриПоКоміркамНаСкладі.period DESC
+                    LIMIT 1
+                )
+        ORDER BY
+            Номенклатура_Назва
+        ";
+
+            Store.Clear();
+            Записи.Clear();
+
+            if (РозміщенняНоменклатуриПоКоміркам_Objest != null)
+            {
+                Dictionary<string, object> paramQuery = new Dictionary<string, object>();
+
+                string[] columnsName;
+                List<Dictionary<string, object>> listRow;
+
+                Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listRow);
+
+                foreach (Dictionary<string, object> row in listRow)
+                {
+                    Запис запис = new Запис
+                    {
+                        ID = Guid.Empty,
+                        Номенклатура = new Номенклатура_Pointer(row["Номенклатура"]),
+                        НоменклатураНазва = row["Номенклатура_Назва"].ToString() ?? "",
+                        Пакування = new ПакуванняОдиниціВиміру_Pointer(row["Пакування"]),
+                        ПакуванняНазва = row["Пакування_Назва"].ToString() ?? "",
+                        Комірка = new СкладськіКомірки_Pointer(row["Комірка"]),
+                        КоміркаНазва = row["Комірка_Назва"].ToString() ?? ""
+                    };
+
+                    Записи.Add(запис);
+                    Store.AppendValues(запис.ToArray());
+                }
+            }
+
+        }
+
+        #endregion
     }
 }
