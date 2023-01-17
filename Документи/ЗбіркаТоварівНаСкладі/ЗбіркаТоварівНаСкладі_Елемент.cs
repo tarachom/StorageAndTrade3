@@ -49,6 +49,8 @@ namespace StorageAndTrade
         СтруктураПідприємства_PointerControl Підрозділ = new СтруктураПідприємства_PointerControl() { Caption = "Підрозділ" };
         Користувачі_PointerControl Автор = new Користувачі_PointerControl();
         Entry Коментар = new Entry() { WidthRequest = 920 };
+        РеалізаціяТоварівТаПослуг_PointerControl ДокументРеалізації = new РеалізаціяТоварівТаПослуг_PointerControl() { Caption = "Документ реалізації:" };
+
         ЗбіркаТоварівНаСкладі_ТабличнаЧастина_Товари Товари = new ЗбіркаТоварівНаСкладі_ТабличнаЧастина_Товари();
 
         #endregion
@@ -108,7 +110,7 @@ namespace StorageAndTrade
             HBox hBoxNumberDataDoc = new HBox() { Halign = Align.Start };
             vBox.PackStart(hBoxNumberDataDoc, false, false, 5);
 
-            hBoxNumberDataDoc.PackStart(new Label("Розміщення товарів на складі №:"), false, false, 5);
+            hBoxNumberDataDoc.PackStart(new Label("Збірка товарів на складі №:"), false, false, 5);
             hBoxNumberDataDoc.PackStart(НомерДок, false, false, 5);
             hBoxNumberDataDoc.PackStart(new Label("від:"), false, false, 5);
             hBoxNumberDataDoc.PackStart(ДатаДок, false, false, 5);
@@ -149,6 +151,12 @@ namespace StorageAndTrade
             vBox.PackStart(hBoxOrganization, false, false, 5);
 
             hBoxOrganization.PackStart(Організація, false, false, 5);
+
+            //ДокументРеалізації
+            HBox hBoxDocRealisacia = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxDocRealisacia, false, false, 5);
+
+            hBoxDocRealisacia.PackStart(ДокументРеалізації, false, false, 5);
         }
 
         void CreateContainer2(VBox vBox)
@@ -225,6 +233,7 @@ namespace StorageAndTrade
             Коментар.Text = ЗбіркаТоварівНаСкладі_Objest.Коментар;
             Підрозділ.Pointer = ЗбіркаТоварівНаСкладі_Objest.Підрозділ;
             Автор.Pointer = ЗбіркаТоварівНаСкладі_Objest.Автор;
+            ДокументРеалізації.Pointer = ЗбіркаТоварівНаСкладі_Objest.ДокументРеалізації;
 
             //Таблична частина
             Товари.ЗбіркаТоварівНаСкладі_Objest = ЗбіркаТоварівНаСкладі_Objest;
@@ -245,6 +254,7 @@ namespace StorageAndTrade
             ЗбіркаТоварівНаСкладі_Objest.Коментар = Коментар.Text;
             ЗбіркаТоварівНаСкладі_Objest.Підрозділ = Підрозділ.Pointer;
             ЗбіркаТоварівНаСкладі_Objest.Автор = Автор.Pointer;
+            ЗбіркаТоварівНаСкладі_Objest.ДокументРеалізації = ДокументРеалізації.Pointer;
         }
 
         #endregion

@@ -167,7 +167,7 @@ namespace StorageAndTrade
 
             ТипорозміриКомірок_Objest.Save();
 
-            Program.GeneralForm?.RenameCurrentPageNotebook($"Валюта: {ТипорозміриКомірок_Objest.Назва}");
+            Program.GeneralForm?.RenameCurrentPageNotebook($"Типорозмір: {ТипорозміриКомірок_Objest.Назва}");
 
             if (PageList != null)
             {

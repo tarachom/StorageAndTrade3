@@ -108,7 +108,7 @@ namespace StorageAndTrade
             HBox hBoxNumberDataDoc = new HBox() { Halign = Align.Start };
             vBox.PackStart(hBoxNumberDataDoc, false, false, 5);
 
-            hBoxNumberDataDoc.PackStart(new Label("Розміщення товарів на складі №:"), false, false, 5);
+            hBoxNumberDataDoc.PackStart(new Label("Розміщення номенклатури по комірках №:"), false, false, 5);
             hBoxNumberDataDoc.PackStart(НомерДок, false, false, 5);
             hBoxNumberDataDoc.PackStart(new Label("від:"), false, false, 5);
             hBoxNumberDataDoc.PackStart(ДатаДок, false, false, 5);
@@ -235,7 +235,7 @@ namespace StorageAndTrade
         {
             РозміщенняНоменклатуриПоКоміркам_Objest.НомерДок = НомерДок.Text;
             РозміщенняНоменклатуриПоКоміркам_Objest.ДатаДок = ДатаДок.Value;
-            РозміщенняНоменклатуриПоКоміркам_Objest.Назва = $"Розміщення товарів на складі №{РозміщенняНоменклатуриПоКоміркам_Objest.НомерДок} від {РозміщенняНоменклатуриПоКоміркам_Objest.ДатаДок.ToShortDateString()}";
+            РозміщенняНоменклатуриПоКоміркам_Objest.Назва = $"Розміщення номенклатури по комірках №{РозміщенняНоменклатуриПоКоміркам_Objest.НомерДок} від {РозміщенняНоменклатуриПоКоміркам_Objest.ДатаДок.ToShortDateString()}";
             РозміщенняНоменклатуриПоКоміркам_Objest.Організація = Організація.Pointer;
             РозміщенняНоменклатуриПоКоміркам_Objest.Склад = Склад.Pointer;
             РозміщенняНоменклатуриПоКоміркам_Objest.Коментар = Коментар.Text;

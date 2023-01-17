@@ -175,6 +175,27 @@ namespace StorageAndTrade
                                     page.LoadRecords();
                                     break;
                                 }
+                            case "РозміщенняТоварівНаСкладі":
+                                {
+                                    РозміщенняТоварівНаСкладі page = new РозміщенняТоварівНаСкладі() { SelectPointerItem = new РозміщенняТоварівНаСкладі_Pointer(unigueID) };
+                                    Program.GeneralForm?.CreateNotebookPage("Розміщення товарів на складі", () => { return page; }, true);
+                                    page.LoadRecords();
+                                    break;
+                                }
+                            case "ЗбіркаТоварівНаСкладі":
+                                {
+                                    ЗбіркаТоварівНаСкладі page = new ЗбіркаТоварівНаСкладі() { SelectPointerItem = new ЗбіркаТоварівНаСкладі_Pointer(unigueID) };
+                                    Program.GeneralForm?.CreateNotebookPage("Збірка товарів на складі", () => { return page; }, true);
+                                    page.LoadRecords();
+                                    break;
+                                }
+                            case "ПереміщенняТоварівНаСкладі":
+                                {
+                                    ПереміщенняТоварівНаСкладі page = new ПереміщенняТоварівНаСкладі() { SelectPointerItem = new ПереміщенняТоварівНаСкладі_Pointer(unigueID) };
+                                    Program.GeneralForm?.CreateNotebookPage("Переміщення товарів на складі", () => { return page; }, true);
+                                    page.LoadRecords();
+                                    break;
+                                }
                         }
                     }
                     else

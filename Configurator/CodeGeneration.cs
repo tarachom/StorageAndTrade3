@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 17.01.2023 15:20:45
+ * Дата конфігурації: 17.01.2023 19:26:11
  *
  */
 
@@ -15757,13 +15757,14 @@ namespace StorageAndTrade_1_0.Документи
         public const string Автор = "col_a4";
         public const string Організація = "col_a5";
         public const string Підрозділ = "col_a6";
+        public const string ДокументПоступлення = "col_a7";
     }
 	
     
     public class РозміщенняТоварівНаСкладі_Objest : DocumentObject
     {
         public РозміщенняТоварівНаСкладі_Objest() : base(Config.Kernel!, "tab_a64", "РозміщенняТоварівНаСкладі",
-             new string[] { "docname", "docdate", "docnomer", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6" }) 
+             new string[] { "docname", "docdate", "docnomer", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7" }) 
         {
             Назва = "";
             ДатаДок = DateTime.MinValue;
@@ -15774,6 +15775,7 @@ namespace StorageAndTrade_1_0.Документи
             Автор = new Довідники.Користувачі_Pointer();
             Організація = new Довідники.Організації_Pointer();
             Підрозділ = new Довідники.СтруктураПідприємства_Pointer();
+            ДокументПоступлення = new Документи.ПоступленняТоварівТаПослуг_Pointer();
             
             //Табличні частини
             Товари_TablePart = new РозміщенняТоварівНаСкладі_Товари_TablePart(this);
@@ -15793,6 +15795,7 @@ namespace StorageAndTrade_1_0.Документи
                 Автор = new Довідники.Користувачі_Pointer(base.FieldValue["col_a4"]);
                 Організація = new Довідники.Організації_Pointer(base.FieldValue["col_a5"]);
                 Підрозділ = new Довідники.СтруктураПідприємства_Pointer(base.FieldValue["col_a6"]);
+                ДокументПоступлення = new Документи.ПоступленняТоварівТаПослуг_Pointer(base.FieldValue["col_a7"]);
                 
                 BaseClear();
                 return true;
@@ -15813,6 +15816,7 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a4"] = Автор.UnigueID.UGuid;
             base.FieldValue["col_a5"] = Організація.UnigueID.UGuid;
             base.FieldValue["col_a6"] = Підрозділ.UnigueID.UGuid;
+            base.FieldValue["col_a7"] = ДокументПоступлення.UnigueID.UGuid;
             
             BaseSave();
 			РозміщенняТоварівНаСкладі_Triggers.AfterRecording(this);
@@ -15844,6 +15848,7 @@ namespace StorageAndTrade_1_0.Документи
 			copy.Автор = Автор;
 			copy.Організація = Організація;
 			copy.Підрозділ = Підрозділ;
+			copy.ДокументПоступлення = ДокументПоступлення;
 			
 			return copy;
         }
@@ -15869,6 +15874,7 @@ namespace StorageAndTrade_1_0.Документи
         public Довідники.Користувачі_Pointer Автор { get; set; }
         public Довідники.Організації_Pointer Організація { get; set; }
         public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; }
+        public Документи.ПоступленняТоварівТаПослуг_Pointer ДокументПоступлення { get; set; }
         
         //Табличні частини
         public РозміщенняТоварівНаСкладі_Товари_TablePart Товари_TablePart { get; set; }
@@ -16386,13 +16392,14 @@ namespace StorageAndTrade_1_0.Документи
         public const string Автор = "col_a4";
         public const string Організація = "col_a5";
         public const string Підрозділ = "col_a6";
+        public const string ДокументРеалізації = "col_a7";
     }
 	
     
     public class ЗбіркаТоварівНаСкладі_Objest : DocumentObject
     {
         public ЗбіркаТоварівНаСкладі_Objest() : base(Config.Kernel!, "tab_b27", "ЗбіркаТоварівНаСкладі",
-             new string[] { "docname", "docdate", "docnomer", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6" }) 
+             new string[] { "docname", "docdate", "docnomer", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7" }) 
         {
             Назва = "";
             ДатаДок = DateTime.MinValue;
@@ -16403,6 +16410,7 @@ namespace StorageAndTrade_1_0.Документи
             Автор = new Довідники.Користувачі_Pointer();
             Організація = new Довідники.Організації_Pointer();
             Підрозділ = new Довідники.СтруктураПідприємства_Pointer();
+            ДокументРеалізації = new Документи.РеалізаціяТоварівТаПослуг_Pointer();
             
             //Табличні частини
             Товари_TablePart = new ЗбіркаТоварівНаСкладі_Товари_TablePart(this);
@@ -16422,6 +16430,7 @@ namespace StorageAndTrade_1_0.Документи
                 Автор = new Довідники.Користувачі_Pointer(base.FieldValue["col_a4"]);
                 Організація = new Довідники.Організації_Pointer(base.FieldValue["col_a5"]);
                 Підрозділ = new Довідники.СтруктураПідприємства_Pointer(base.FieldValue["col_a6"]);
+                ДокументРеалізації = new Документи.РеалізаціяТоварівТаПослуг_Pointer(base.FieldValue["col_a7"]);
                 
                 BaseClear();
                 return true;
@@ -16442,6 +16451,7 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a4"] = Автор.UnigueID.UGuid;
             base.FieldValue["col_a5"] = Організація.UnigueID.UGuid;
             base.FieldValue["col_a6"] = Підрозділ.UnigueID.UGuid;
+            base.FieldValue["col_a7"] = ДокументРеалізації.UnigueID.UGuid;
             
             BaseSave();
 			ЗбіркаТоварівНаСкладі_Triggers.AfterRecording(this);
@@ -16473,6 +16483,7 @@ namespace StorageAndTrade_1_0.Документи
 			copy.Автор = Автор;
 			copy.Організація = Організація;
 			copy.Підрозділ = Підрозділ;
+			copy.ДокументРеалізації = ДокументРеалізації;
 			
 			return copy;
         }
@@ -16498,6 +16509,7 @@ namespace StorageAndTrade_1_0.Документи
         public Довідники.Користувачі_Pointer Автор { get; set; }
         public Довідники.Організації_Pointer Організація { get; set; }
         public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; }
+        public Документи.РеалізаціяТоварівТаПослуг_Pointer ДокументРеалізації { get; set; }
         
         //Табличні частини
         public ЗбіркаТоварівНаСкладі_Товари_TablePart Товари_TablePart { get; set; }

@@ -5,7 +5,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>17.01.2023 15:20:45</DateTimeSave>
+  <DateTimeSave>17.01.2023 19:26:11</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -13161,6 +13161,16 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
         </Field>
+        <Field>
+          <Name>ДокументПоступлення</Name>
+          <NameInTable>col_a7</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Документи.ПоступленняТоварівТаПослуг</Pointer>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+        </Field>
       </Fields>
       <TabularParts>
         <TablePart>
@@ -13693,6 +13703,16 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <NameInTable>col_a6</NameInTable>
           <Type>pointer</Type>
           <Pointer>Довідники.СтруктураПідприємства</Pointer>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+        </Field>
+        <Field>
+          <Name>ДокументРеалізації</Name>
+          <NameInTable>col_a7</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Документи.РеалізаціяТоварівТаПослуг</Pointer>
           <Desc>
           </Desc>
           <IsPresentation>0</IsPresentation>
