@@ -162,13 +162,23 @@ namespace StorageAndTrade
         {
             Menu Menu = new Menu();
 
-            MenuItem newDocKasovyiOrderButton = new MenuItem("Прихідний касовий ордер");
-            newDocKasovyiOrderButton.Activated += OnNewDocNaOsnovi_KasovyiOrder;
-            Menu.Append(newDocKasovyiOrderButton);
+            {
+                MenuItem doc = new MenuItem("Прихідний касовий ордер");
+                doc.Activated += OnNewDocNaOsnovi_KasovyiOrder;
+                Menu.Append(doc);
+            }
 
-            MenuItem newDocPovernenjaVidKlientaButton = new MenuItem("Повернення товарів від клієнта");
-            newDocPovernenjaVidKlientaButton.Activated += OnNewDocNaOsnovi_ПоверненняТоварівВідКлієнта;
-            Menu.Append(newDocPovernenjaVidKlientaButton);
+            {
+                MenuItem doc = new MenuItem("Повернення товарів від клієнта");
+                doc.Activated += OnNewDocNaOsnovi_ПоверненняТоварівВідКлієнта;
+                Menu.Append(doc);
+            }
+
+            {
+                MenuItem doc = new MenuItem("Збірка товарів на складі");
+                doc.Activated += OnNewDocNaOsnovi_ЗбіркаТоварівНаСкладі;
+                Menu.Append(doc);
+            }
 
             Menu.ShowAll();
 
@@ -193,7 +203,7 @@ namespace StorageAndTrade
         }
 
         #endregion
-        
+
         public void SetValue()
         {
             if ((int)Константи.ЖурналиДокументів.ОсновнийТипПеріоду_Const != 0)
@@ -607,6 +617,68 @@ namespace StorageAndTrade
                         {
                             IsNew = false,
                             ПоверненняТоварівВідКлієнта_Objest = поверненняТоварівВідКлієнта_Objest
+                        };
+
+                        page.SetValue();
+
+                        return page;
+                    });
+                }
+            }
+        }
+
+        void OnNewDocNaOsnovi_ЗбіркаТоварівНаСкладі(object? sender, EventArgs args)
+        {
+            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
+            {
+                TreePath[] selectionRows = TreeViewGrid.Selection.GetSelectedRows();
+
+                foreach (TreePath itemPath in selectionRows)
+                {
+                    TreeIter iter;
+                    TreeViewGrid.Model.GetIter(out iter, itemPath);
+
+                    string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
+
+                    РеалізаціяТоварівТаПослуг_Pointer реалізаціяТоварівТаПослуг_Pointer = new РеалізаціяТоварівТаПослуг_Pointer(new UnigueID(uid));
+                    РеалізаціяТоварівТаПослуг_Objest реалізаціяТоварівТаПослуг_Objest = реалізаціяТоварівТаПослуг_Pointer.GetDocumentObject(true);
+
+                    //
+                    //Новий документ
+                    //
+
+                    ЗбіркаТоварівНаСкладі_Objest збіркаТоварівНаСкладі_Objest = new ЗбіркаТоварівНаСкладі_Objest();
+                    збіркаТоварівНаСкладі_Objest.New();
+                    збіркаТоварівНаСкладі_Objest.ДатаДок = DateTime.Now;
+                    збіркаТоварівНаСкладі_Objest.НомерДок = (++Константи.НумераціяДокументів.ЗбіркаТоварівНаСкладі_Const).ToString("D8");
+                    збіркаТоварівНаСкладі_Objest.Назва = $"Збірка товарів на складі №{збіркаТоварівНаСкладі_Objest.НомерДок} від {збіркаТоварівНаСкладі_Objest.ДатаДок.ToString("dd.MM.yyyy")}";
+                    збіркаТоварівНаСкладі_Objest.Організація = реалізаціяТоварівТаПослуг_Objest.Організація;
+                    збіркаТоварівНаСкладі_Objest.Склад = реалізаціяТоварівТаПослуг_Objest.Склад;
+                    збіркаТоварівНаСкладі_Objest.Основа = new UuidAndText(реалізаціяТоварівТаПослуг_Objest.UnigueID.UGuid, реалізаціяТоварівТаПослуг_Objest.TypeDocument);
+                    збіркаТоварівНаСкладі_Objest.Save();
+
+                    //Товари
+                    foreach (РеалізаціяТоварівТаПослуг_Товари_TablePart.Record record_реалізаціяТоварівТаПослуг in реалізаціяТоварівТаПослуг_Objest.Товари_TablePart.Records)
+                    {
+                        ЗбіркаТоварівНаСкладі_Товари_TablePart.Record record = new ЗбіркаТоварівНаСкладі_Товари_TablePart.Record();
+                        збіркаТоварівНаСкладі_Objest.Товари_TablePart.Records.Add(record);
+
+                        record.Номенклатура = record_реалізаціяТоварівТаПослуг.Номенклатура;
+                        record.ХарактеристикаНоменклатури = record_реалізаціяТоварівТаПослуг.ХарактеристикаНоменклатури;
+                        record.Серія = record_реалізаціяТоварівТаПослуг.Серія;
+                        record.Пакування = record_реалізаціяТоварівТаПослуг.Пакування;
+                        record.КількістьУпаковок = record_реалізаціяТоварівТаПослуг.КількістьУпаковок;
+                        record.Кількість = record_реалізаціяТоварівТаПослуг.Кількість;
+                    }
+
+                    збіркаТоварівНаСкладі_Objest.Товари_TablePart.Save(false);
+
+                    Program.GeneralForm?.CreateNotebookPage($"{збіркаТоварівНаСкладі_Objest.Назва}", () =>
+                    {
+                        ЗбіркаТоварівНаСкладі_Елемент page = new ЗбіркаТоварівНаСкладі_Елемент
+                        {
+                            IsNew = false,
+                            ЗбіркаТоварівНаСкладі_Objest = збіркаТоварівНаСкладі_Objest
                         };
 
                         page.SetValue();

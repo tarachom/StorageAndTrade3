@@ -80,6 +80,8 @@ namespace StorageAndTrade
 
             PackStart(hBoxBotton, false, false, 10);
 
+
+
             //Пошук
             hBoxBotton.PackStart(ПошукПоНазві, false, false, 2);
             ПошукПоНазві.QueryFind = ПошуковіЗапити.Номенклатура;
