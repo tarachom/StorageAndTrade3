@@ -5,7 +5,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>17.01.2023 00:35:09</DateTimeSave>
+  <DateTimeSave>17.01.2023 15:05:40</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -630,6 +630,14 @@ https://accounting.org.ua/storage_and_trade.html</Desc>
         <Constant>
           <Name>ЗбіркаТоварівНаСкладі</Name>
           <NameInTable>col_b4</NameInTable>
+          <Desc>
+          </Desc>
+          <Type>integer</Type>
+          <TabularParts />
+        </Constant>
+        <Constant>
+          <Name>РозміщенняНоменклатуриПоКоміркам</Name>
+          <NameInTable>col_b5</NameInTable>
           <Desc>
           </Desc>
           <Type>integer</Type>
@@ -13940,6 +13948,25 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
         </Field>
+        <Field>
+          <Name>Підрозділ</Name>
+          <NameInTable>col_a3</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Довідники.СтруктураПідприємства</Pointer>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+        </Field>
+        <Field>
+          <Name>Основа</Name>
+          <NameInTable>col_a5</NameInTable>
+          <Type>composite_pointer</Type>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+        </Field>
       </Fields>
       <TabularParts>
         <TablePart>
@@ -14279,7 +14306,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       </PropertyFields>
     </RegisterInformation>
     <RegisterInformation>
-      <Name>РозміщенняНоменклатуриПоКоміркам</Name>
+      <Name>РозміщенняНоменклатуриПоКоміркамНаСкладі</Name>
       <Table>tab_a74</Table>
       <Desc>
       </Desc>

@@ -82,6 +82,7 @@ namespace StorageAndTrade
             AddLink(vRight, "Розміщення товарів на складі", РозміщенняТоварівНаСкладі);
             AddLink(vRight, "Переміщення товарів на складі", ПереміщенняТоварівНаСкладі);
             AddLink(vRight, "Збірка товарів на складі", ЗбіркаТоварівНаСкладі);
+            AddLink(vRight, "Розміщення номенклатури по коміркам", РозміщенняНоменклатуриПоКоміркам);
 
             hBoxList.PackStart(vRight, false, false, 5);
 
@@ -208,6 +209,14 @@ namespace StorageAndTrade
             Program.GeneralForm?.CreateNotebookPage("Збірка товарів на складі", () => { return page; });
             page.SetValue();
         }
+
+        void РозміщенняНоменклатуриПоКоміркам(object? sender, EventArgs args)
+        {
+            РозміщенняНоменклатуриПоКоміркам page = new РозміщенняНоменклатуриПоКоміркам();
+            Program.GeneralForm?.CreateNotebookPage("Розміщення номенклатури по коміркам", () => { return page; });
+            page.SetValue();
+        }
+
 
         void AddCaption(VBox vBox, string name)
         {

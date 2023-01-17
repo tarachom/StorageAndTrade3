@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 17.01.2023 00:35:09
+ * Дата конфігурації: 17.01.2023 15:05:40
  *
  */
 
@@ -909,7 +909,7 @@ namespace StorageAndTrade_1_0.Константи
             
             Dictionary<string, object> fieldValue = new Dictionary<string, object>();
             bool IsSelect = Config.Kernel!.DataBase.SelectAllConstants("tab_constants",
-                 new string[] { "col_b7", "col_b9", "col_c1", "col_c2", "col_c4", "col_c5", "col_c6", "col_c7", "col_c8", "col_c9", "col_f6", "col_f7", "col_f8", "col_f9", "col_g1", "col_g2", "col_h1", "col_h2", "col_b2", "col_b3", "col_b4" }, fieldValue);
+                 new string[] { "col_b7", "col_b9", "col_c1", "col_c2", "col_c4", "col_c5", "col_c6", "col_c7", "col_c8", "col_c9", "col_f6", "col_f7", "col_f8", "col_f9", "col_g1", "col_g2", "col_h1", "col_h2", "col_b2", "col_b3", "col_b4", "col_b5" }, fieldValue);
             
             if (IsSelect)
             {
@@ -934,6 +934,7 @@ namespace StorageAndTrade_1_0.Константи
                 m_РозміщенняТоварівНаСкладі_Const = (fieldValue["col_b2"] != DBNull.Value) ? (int)fieldValue["col_b2"] : 0;
                 m_ПереміщенняТоварівНаСкладі_Const = (fieldValue["col_b3"] != DBNull.Value) ? (int)fieldValue["col_b3"] : 0;
                 m_ЗбіркаТоварівНаСкладі_Const = (fieldValue["col_b4"] != DBNull.Value) ? (int)fieldValue["col_b4"] : 0;
+                m_РозміщенняНоменклатуриПоКоміркам_Const = (fieldValue["col_b5"] != DBNull.Value) ? (int)fieldValue["col_b5"] : 0;
                 
             }
 			
@@ -1231,6 +1232,20 @@ namespace StorageAndTrade_1_0.Константи
             {
                 m_ЗбіркаТоварівНаСкладі_Const = value;
                 Config.Kernel!.DataBase.SaveConstants("tab_constants", "col_b4", m_ЗбіркаТоварівНаСкладі_Const);
+            }
+        }
+        
+        static int m_РозміщенняНоменклатуриПоКоміркам_Const = 0;
+        public static int РозміщенняНоменклатуриПоКоміркам_Const
+        {
+            get 
+            {
+                return m_РозміщенняНоменклатуриПоКоміркам_Const;
+            }
+            set
+            {
+                m_РозміщенняНоменклатуриПоКоміркам_Const = value;
+                Config.Kernel!.DataBase.SaveConstants("tab_constants", "col_b5", m_РозміщенняНоменклатуриПоКоміркам_Const);
             }
         }
              
@@ -16681,13 +16696,15 @@ namespace StorageAndTrade_1_0.Документи
         public const string Склад = "col_a1";
         public const string Коментар = "col_g9";
         public const string Автор = "col_a4";
+        public const string Підрозділ = "col_a3";
+        public const string Основа = "col_a5";
     }
 	
     
     public class РозміщенняНоменклатуриПоКоміркам_Objest : DocumentObject
     {
         public РозміщенняНоменклатуриПоКоміркам_Objest() : base(Config.Kernel!, "tab_b29", "РозміщенняНоменклатуриПоКоміркам",
-             new string[] { "docname", "docnomer", "docdate", "col_a2", "col_a1", "col_g9", "col_a4" }) 
+             new string[] { "docname", "docnomer", "docdate", "col_a2", "col_a1", "col_g9", "col_a4", "col_a3", "col_a5" }) 
         {
             Назва = "";
             НомерДок = "";
@@ -16696,6 +16713,8 @@ namespace StorageAndTrade_1_0.Документи
             Склад = new Довідники.Склади_Pointer();
             Коментар = "";
             Автор = new Довідники.Користувачі_Pointer();
+            Підрозділ = new Довідники.СтруктураПідприємства_Pointer();
+            Основа = new UuidAndText();
             
             //Табличні частини
             Товари_TablePart = new РозміщенняНоменклатуриПоКоміркам_Товари_TablePart(this);
@@ -16713,6 +16732,8 @@ namespace StorageAndTrade_1_0.Документи
                 Склад = new Довідники.Склади_Pointer(base.FieldValue["col_a1"]);
                 Коментар = base.FieldValue["col_g9"]?.ToString() ?? "";
                 Автор = new Довідники.Користувачі_Pointer(base.FieldValue["col_a4"]);
+                Підрозділ = new Довідники.СтруктураПідприємства_Pointer(base.FieldValue["col_a3"]);
+                Основа = (base.FieldValue["col_a5"] != DBNull.Value) ? (UuidAndText)base.FieldValue["col_a5"] : new UuidAndText();
                 
                 BaseClear();
                 return true;
@@ -16730,6 +16751,8 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a1"] = Склад.UnigueID.UGuid;
             base.FieldValue["col_g9"] = Коментар;
             base.FieldValue["col_a4"] = Автор.UnigueID.UGuid;
+            base.FieldValue["col_a3"] = Підрозділ.UnigueID.UGuid;
+            base.FieldValue["col_a5"] = Основа;
             
             BaseSave();
 			
@@ -16757,6 +16780,8 @@ namespace StorageAndTrade_1_0.Документи
 			copy.Склад = Склад;
 			copy.Коментар = Коментар;
 			copy.Автор = Автор;
+			copy.Підрозділ = Підрозділ;
+			copy.Основа = Основа;
 			
 			return copy;
         }
@@ -16780,6 +16805,8 @@ namespace StorageAndTrade_1_0.Документи
         public Довідники.Склади_Pointer Склад { get; set; }
         public string Коментар { get; set; }
         public Довідники.Користувачі_Pointer Автор { get; set; }
+        public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; }
+        public UuidAndText Основа { get; set; }
         
         //Табличні частини
         public РозміщенняНоменклатуриПоКоміркам_Товари_TablePart Товари_TablePart { get; set; }
@@ -17590,9 +17617,9 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
 	
     #endregion
   
-    #region REGISTER "РозміщенняНоменклатуриПоКоміркам"
+    #region REGISTER "РозміщенняНоменклатуриПоКоміркамНаСкладі"
     
-    public static class РозміщенняНоменклатуриПоКоміркам_Const
+    public static class РозміщенняНоменклатуриПоКоміркамНаСкладі_Const
     {
         public const string TABLE = "tab_a74";
         
@@ -17603,9 +17630,9 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
     }
 	
     
-    public class РозміщенняНоменклатуриПоКоміркам_RecordsSet : RegisterInformationRecordsSet
+    public class РозміщенняНоменклатуриПоКоміркамНаСкладі_RecordsSet : RegisterInformationRecordsSet
     {
-        public РозміщенняНоменклатуриПоКоміркам_RecordsSet() : base(Config.Kernel!, "tab_a74",
+        public РозміщенняНоменклатуриПоКоміркамНаСкладі_RecordsSet() : base(Config.Kernel!, "tab_a74",
              new string[] { "col_a1", "col_a2", "col_a3", "col_a4" }) 
         {
             Records = new List<Record>();
@@ -17679,9 +17706,9 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
     }
 	
     
-    public class РозміщенняНоменклатуриПоКоміркам_Objest : RegisterInformationObject
+    public class РозміщенняНоменклатуриПоКоміркамНаСкладі_Objest : RegisterInformationObject
     {
-		public РозміщенняНоменклатуриПоКоміркам_Objest() : base(Config.Kernel!, "tab_a74",
+		public РозміщенняНоменклатуриПоКоміркамНаСкладі_Objest() : base(Config.Kernel!, "tab_a74",
              new string[] { "col_a1", "col_a2", "col_a3", "col_a4" }) 
         {
             Номенклатура = new Довідники.Номенклатура_Pointer();
@@ -17717,9 +17744,9 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
             BaseSave();
         }
 
-        public РозміщенняНоменклатуриПоКоміркам_Objest Copy()
+        public РозміщенняНоменклатуриПоКоміркамНаСкладі_Objest Copy()
         {
-            РозміщенняНоменклатуриПоКоміркам_Objest copy = new РозміщенняНоменклатуриПоКоміркам_Objest();
+            РозміщенняНоменклатуриПоКоміркамНаСкладі_Objest copy = new РозміщенняНоменклатуриПоКоміркамНаСкладі_Objest();
 			copy.New();
             copy.Номенклатура = Номенклатура;
 			copy.Склад = Склад;
