@@ -34,6 +34,7 @@ using Константи = StorageAndTrade_1_0.Константи;
 using StorageAndTrade_1_0.Довідники;
 using StorageAndTrade_1_0.Документи;
 using StorageAndTrade_1_0.РегістриВідомостей;
+using StorageAndTrade_1_0.РегістриНакопичення;
 
 namespace StorageAndTrade
 {
@@ -173,6 +174,14 @@ namespace StorageAndTrade
             public static void ПісляЗміни_Комірка(Запис запис)
             {
                 запис.КоміркаНазва = запис.Комірка.GetPresentation();
+            }
+            public static void ПісляДобавленняНовогоРядка(Запис запис)
+            {
+                ПісляЗміни_Номенклатура(запис);
+                ПісляЗміни_Характеристика(запис);
+                ПісляЗміни_Серія(запис);
+                ПісляЗміни_Пакування(запис);
+                ПісляЗміни_Комірка(запис);
             }
         }
 
@@ -342,6 +351,14 @@ namespace StorageAndTrade
             ToolButton deleteButton = new ToolButton(Stock.Delete) { Label = "Видалити", IsImportant = true };
             deleteButton.Clicked += OnDeleteClick;
             toolbar.Add(deleteButton);
+
+            //
+            //
+            //
+
+            ToolButton fillButton = new ToolButton(Stock.Add) { Label = "Розприділити по комірках", IsImportant = true };
+            fillButton.Clicked += РозприділитиПоКоміркахВідповідноДоЗалишків;
+            toolbar.Add(fillButton);
         }
 
         public void LoadRecords()
@@ -639,6 +656,101 @@ namespace StorageAndTrade
                     Записи.Remove(запис);
                     Store.Remove(ref iter);
                 }
+            }
+        }
+
+        #endregion
+
+        #region ОбробкаТабЧастини Товари
+
+        void РозприділитиПоКоміркахВідповідноДоЗалишків(object? sender, EventArgs args)
+        {
+            List<Запис> НовіЗаписи = new List<Запис>();
+
+            int sequenceNumber = 0;
+
+            foreach (Запис запис in Записи)
+            {
+                decimal КількістьЯкуПотрібноРозприділити = запис.Кількість;
+
+                string query = @$"
+SELECT
+    ТовариВКомірках.{ТовариВКомірках_Залишки_TablePart.Комірка} AS Комірка,
+    SUM(ТовариВКомірках.{ТовариВКомірках_Залишки_TablePart.ВНаявності}) AS ВНаявності
+FROM
+    {ТовариВКомірках_Залишки_TablePart.TABLE} AS ТовариВКомірках
+WHERE
+    ТовариВКомірках.{ТовариВКомірках_Залишки_TablePart.Номенклатура} = @Номенклатура AND
+    ТовариВКомірках.{ТовариВКомірках_Залишки_TablePart.ХарактеристикаНоменклатури} = @ХарактеристикаНоменклатури AND
+    ТовариВКомірках.{ТовариВКомірках_Залишки_TablePart.Пакування} = @Пакування AND
+    ТовариВКомірках.{ТовариВКомірках_Залишки_TablePart.Серія} = @Серія
+GROUP BY
+    Комірка
+HAVING
+    SUM(ТовариВКомірках.{ТовариВКомірках_Залишки_TablePart.ВНаявності}) != 0 
+";
+
+                Dictionary<string, object> paramQuery = new Dictionary<string, object>();
+                paramQuery.Add("Номенклатура", запис.Номенклатура.UnigueID.UGuid);
+                paramQuery.Add("ХарактеристикаНоменклатури", запис.Характеристика.UnigueID.UGuid);
+                paramQuery.Add("Пакування", запис.Пакування.UnigueID.UGuid);
+                paramQuery.Add("Серія", запис.Серія.UnigueID.UGuid);
+
+                string[] columnsName;
+                List<Dictionary<string, object>> listRow;
+
+                Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listRow);
+
+                Console.WriteLine(запис.НоменклатураНазва);
+
+                foreach (Dictionary<string, object> row in listRow)
+                {
+                    Console.WriteLine(" -> " + КількістьЯкуПотрібноРозприділити + " - " + row["Комірка"] + " " + row["ВНаявності"]);
+
+                    decimal ЗалишокВКомірці = (decimal)row["ВНаявності"];
+                    СкладськіКомірки_Pointer складськіКомірки_Pointer = new СкладськіКомірки_Pointer(row["Комірка"]);
+
+                    if (ЗалишокВКомірці >= КількістьЯкуПотрібноРозприділити)
+                    {
+                        запис.Кількість = КількістьЯкуПотрібноРозприділити;
+                        запис.Комірка = складськіКомірки_Pointer;
+                        Запис.ПісляЗміни_Комірка(запис);
+
+                        TreeIter iter;
+                        Store.GetIterFromString(out iter, sequenceNumber.ToString());
+                        Store.SetValues(iter, запис.ToArray());
+
+                        break;
+                    }
+                    else
+                    {
+                        Запис записНовий = Запис.Clone(запис);
+                        НовіЗаписи.Add(записНовий);
+
+                        записНовий.Кількість = ЗалишокВКомірці;
+                        записНовий.Комірка = складськіКомірки_Pointer;
+                        Запис.ПісляЗміни_Комірка(записНовий);
+
+                        КількістьЯкуПотрібноРозприділити -= ЗалишокВКомірці;
+                    }
+                }
+
+                if (КількістьЯкуПотрібноРозприділити > 0)
+                {
+                    запис.Кількість = КількістьЯкуПотрібноРозприділити;
+
+                    TreeIter iter;
+                    Store.GetIterFromString(out iter, sequenceNumber.ToString());
+                    Store.SetValues(iter, запис.ToArray());
+                }
+
+                sequenceNumber++;
+            }
+
+            foreach (Запис запис in НовіЗаписи)
+            {
+                Записи.Add(запис);
+                Store.AppendValues(запис.ToArray());
             }
         }
 

@@ -34,6 +34,7 @@ using Константи = StorageAndTrade_1_0.Константи;
 using StorageAndTrade_1_0.Довідники;
 using StorageAndTrade_1_0.Документи;
 using StorageAndTrade_1_0.РегістриВідомостей;
+using StorageAndTrade_1_0.РегістриНакопичення;
 
 namespace StorageAndTrade
 {
@@ -342,6 +343,14 @@ namespace StorageAndTrade
             ToolButton deleteButton = new ToolButton(Stock.Delete) { Label = "Видалити", IsImportant = true };
             deleteButton.Clicked += OnDeleteClick;
             toolbar.Add(deleteButton);
+
+            //
+            //
+            //
+
+            ToolButton fillButton = new ToolButton(Stock.Add) { Label = "Заповнити", IsImportant = true };
+            fillButton.Clicked += ЗаповнитиВідповідноДоЗалишків;
+            toolbar.Add(fillButton);
         }
 
         public void LoadRecords()
@@ -638,6 +647,51 @@ namespace StorageAndTrade
 
                     Записи.Remove(запис);
                     Store.Remove(ref iter);
+                }
+            }
+        }
+
+        #endregion
+
+        #region ОбробкаТабЧастини Товари
+
+        void ЗаповнитиВідповідноДоЗалишків(object? sender, EventArgs args)
+        {
+            foreach (Запис запис in Записи)
+            {
+                string query = @$"
+SELECT
+    ТовариВКомірках.{ТовариВКомірках_Залишки_TablePart.Комірка} AS Комірка,
+    SUM(ТовариВКомірках.{ТовариВКомірках_Залишки_TablePart.ВНаявності}) AS ВНаявності
+FROM
+    {ТовариВКомірках_Залишки_TablePart.TABLE} AS ТовариВКомірках
+WHERE
+    ТовариВКомірках.{ТовариВКомірках_Залишки_TablePart.Номенклатура} = @Номенклатура AND
+    ТовариВКомірках.{ТовариВКомірках_Залишки_TablePart.ХарактеристикаНоменклатури} = @ХарактеристикаНоменклатури AND
+    ТовариВКомірках.{ТовариВКомірках_Залишки_TablePart.Пакування} = @Пакування AND
+    ТовариВКомірках.{ТовариВКомірках_Залишки_TablePart.Серія} = @Серія
+GROUP BY
+    Комірка
+HAVING
+    SUM(ТовариВКомірках.{ТовариВКомірках_Залишки_TablePart.ВНаявності}) != 0 
+";
+
+                Dictionary<string, object> paramQuery = new Dictionary<string, object>();
+                paramQuery.Add("Номенклатура", запис.Номенклатура.UnigueID.UGuid);
+                paramQuery.Add("ХарактеристикаНоменклатури", запис.Характеристика.UnigueID.UGuid);
+                paramQuery.Add("Пакування", запис.Пакування.UnigueID.UGuid);
+                paramQuery.Add("Серія", запис.Серія.UnigueID.UGuid);
+
+                string[] columnsName;
+                List<Dictionary<string, object>> listRow;
+
+                Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listRow);
+
+                Console.WriteLine(запис.НоменклатураНазва);
+
+                foreach (Dictionary<string, object> row in listRow)
+                {
+                    Console.WriteLine(" -> " + row["Комірка"] + " " + row["ВНаявності"]);
                 }
             }
         }

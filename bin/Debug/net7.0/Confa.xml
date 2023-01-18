@@ -5,7 +5,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>17.01.2023 19:26:11</DateTimeSave>
+  <DateTimeSave>18.01.2023 12:05:23</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -13306,21 +13306,21 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               </FieldAndAlias>
             </Field>
             <Field>
-              <Name>Організація</Name>
-              <Caption>Організація</Caption>
+              <Name>ДокументПоступлення</Name>
+              <Caption>Документ поступлення</Caption>
               <Size>0</Size>
-              <SortNum>5</SortNum>
+              <SortNum>6</SortNum>
               <SortField>False</SortField>
               <Type>pointer</Type>
-              <Pointer>Довідники.Організації</Pointer>
+              <Pointer>Документи.ПоступленняТоварівТаПослуг</Pointer>
               <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
+                <table>Документи.ПоступленняТоварівТаПослуг_Const.TABLE</table>
+                <field>ДокументПоступлення</field>
                 <alias>join_tab_2</alias>
               </Join>
               <FieldAndAlias>
                 <table>join_tab_2</table>
-                <field>Довідники.Організації_Const.Назва</field>
+                <field>Документи.ПоступленняТоварівТаПослуг_Const.Назва</field>
               </FieldAndAlias>
             </Field>
             <Field>
@@ -13853,21 +13853,21 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               </FieldAndAlias>
             </Field>
             <Field>
-              <Name>Організація</Name>
-              <Caption>Організація</Caption>
+              <Name>ДокументРеалізації</Name>
+              <Caption>Документ реалізації</Caption>
               <Size>0</Size>
               <SortNum>5</SortNum>
               <SortField>False</SortField>
               <Type>pointer</Type>
-              <Pointer>Довідники.Організації</Pointer>
+              <Pointer>Документи.РеалізаціяТоварівТаПослуг</Pointer>
               <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
+                <table>Документи.РеалізаціяТоварівТаПослуг_Const.TABLE</table>
+                <field>ДокументРеалізації</field>
                 <alias>join_tab_2</alias>
               </Join>
               <FieldAndAlias>
                 <table>join_tab_2</table>
-                <field>Довідники.Організації_Const.Назва</field>
+                <field>Документи.РеалізаціяТоварівТаПослуг_Const.Назва</field>
               </FieldAndAlias>
             </Field>
             <Field>
