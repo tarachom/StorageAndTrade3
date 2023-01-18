@@ -348,7 +348,7 @@ namespace StorageAndTrade
             //
             //
 
-            ToolButton fillButton = new ToolButton(Stock.Add) { Label = "Розприділити по комірках", IsImportant = true };
+            ToolButton fillButton = new ToolButton(Stock.Convert) { Label = "Розприділити", IsImportant = true };
             fillButton.Clicked += РозприділитиПоКоміркахВідповідноДоЗалишків;
             toolbar.Add(fillButton);
         }

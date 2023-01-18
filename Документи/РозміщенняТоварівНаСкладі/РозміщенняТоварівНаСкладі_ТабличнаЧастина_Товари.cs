@@ -348,8 +348,8 @@ namespace StorageAndTrade
             //
             //
 
-            ToolButton fillButton = new ToolButton(Stock.Add) { Label = "Заповнити", IsImportant = true };
-            fillButton.Clicked += ЗаповнитиВідповідноДоЗалишків;
+            ToolButton fillButton = new ToolButton(Stock.Convert) { Label = "Заповнити розміщення", IsImportant = true };
+            fillButton.Clicked += ЗаповнитиРозміщенняНоменклатуриПоКомірках;
             toolbar.Add(fillButton);
         }
 
@@ -655,48 +655,76 @@ namespace StorageAndTrade
 
         #region ОбробкаТабЧастини Товари
 
-        void ЗаповнитиВідповідноДоЗалишків(object? sender, EventArgs args)
+        void ЗаповнитиРозміщенняНоменклатуриПоКомірках(object? sender, EventArgs args)
         {
+            if (Записи.Count == 0)
+                return;
+
+            List<Guid> списокНоменклатуриДляВідбору = new List<Guid>();
+
             foreach (Запис запис in Записи)
-            {
-                string query = @$"
+                списокНоменклатуриДляВідбору.Add(запис.Номенклатура.UnigueID.UGuid);
+
+            string query = @$"
+WITH register AS
+(
+    SELECT DISTINCT 
+        {РозміщенняНоменклатуриПоКоміркамНаСкладі_Const.Номенклатура} AS Номенклатура
+    FROM
+        {РозміщенняНоменклатуриПоКоміркамНаСкладі_Const.TABLE}
+    WHERE
+        {РозміщенняНоменклатуриПоКоміркамНаСкладі_Const.Номенклатура} IN
+        (
+            '{string.Join("', '", списокНоменклатуриДляВідбору)}'
+        )
+)
 SELECT
-    ТовариВКомірках.{ТовариВКомірках_Залишки_TablePart.Комірка} AS Комірка,
-    SUM(ТовариВКомірках.{ТовариВКомірках_Залишки_TablePart.ВНаявності}) AS ВНаявності
+    register.Номенклатура,
+    (
+        SELECT
+            {РозміщенняНоменклатуриПоКоміркамНаСкладі_Const.Комірка}
+        FROM
+            {РозміщенняНоменклатуриПоКоміркамНаСкладі_Const.TABLE} AS РозміщенняНоменклатуриПоКоміркамНаСкладі
+        WHERE
+            РозміщенняНоменклатуриПоКоміркамНаСкладі.{РозміщенняНоменклатуриПоКоміркамНаСкладі_Const.Номенклатура} = register.Номенклатура
+        ORDER BY РозміщенняНоменклатуриПоКоміркамНаСкладі.period DESC
+        LIMIT 1
+    ) AS Комірка
 FROM
-    {ТовариВКомірках_Залишки_TablePart.TABLE} AS ТовариВКомірках
-WHERE
-    ТовариВКомірках.{ТовариВКомірках_Залишки_TablePart.Номенклатура} = @Номенклатура AND
-    ТовариВКомірках.{ТовариВКомірках_Залишки_TablePart.ХарактеристикаНоменклатури} = @ХарактеристикаНоменклатури AND
-    ТовариВКомірках.{ТовариВКомірках_Залишки_TablePart.Пакування} = @Пакування AND
-    ТовариВКомірках.{ТовариВКомірках_Залишки_TablePart.Серія} = @Серія
-GROUP BY
-    Комірка
-HAVING
-    SUM(ТовариВКомірках.{ТовариВКомірках_Залишки_TablePart.ВНаявності}) != 0 
+    register
 ";
 
-                Dictionary<string, object> paramQuery = new Dictionary<string, object>();
-                paramQuery.Add("Номенклатура", запис.Номенклатура.UnigueID.UGuid);
-                paramQuery.Add("ХарактеристикаНоменклатури", запис.Характеристика.UnigueID.UGuid);
-                paramQuery.Add("Пакування", запис.Пакування.UnigueID.UGuid);
-                paramQuery.Add("Серія", запис.Серія.UnigueID.UGuid);
+            Dictionary<string, object> paramQuery = new Dictionary<string, object>();
 
-                string[] columnsName;
-                List<Dictionary<string, object>> listRow;
+            string[] columnsName;
+            List<Dictionary<string, object>> listRow;
 
-                Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listRow);
+            Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listRow);
 
-                Console.WriteLine(запис.НоменклатураНазва);
+            Dictionary<Guid, Guid> НоменклатураТаКомірки = new Dictionary<Guid, Guid>();
 
-                foreach (Dictionary<string, object> row in listRow)
+            foreach (Dictionary<string, object> row in listRow)
+                НоменклатураТаКомірки.Add((Guid)row["Номенклатура"], (Guid)row["Комірка"]);
+
+            int sequenceNumber = 0;
+
+            foreach (Запис запис in Записи)
+            {
+                if (НоменклатураТаКомірки.ContainsKey(запис.Номенклатура.UnigueID.UGuid))
                 {
-                    Console.WriteLine(" -> " + row["Комірка"] + " " + row["ВНаявності"]);
+                    запис.Комірка = new СкладськіКомірки_Pointer(НоменклатураТаКомірки[запис.Номенклатура.UnigueID.UGuid]);
+                    Запис.ПісляЗміни_Комірка(запис);
+
+                    TreeIter iter;
+                    Store.GetIterFromString(out iter, sequenceNumber.ToString());
+                    Store.SetValues(iter, запис.ToArray());
                 }
+
+                sequenceNumber++;
             }
         }
-
-        #endregion
-
     }
+
+    #endregion
+
 }
