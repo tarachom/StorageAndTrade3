@@ -5,7 +5,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>18.01.2023 12:05:23</DateTimeSave>
+  <DateTimeSave>18.01.2023 22:13:33</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -8630,24 +8630,6 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               </FieldAndAlias>
             </Field>
             <Field>
-              <Name>КасаВідправник</Name>
-              <Caption>Каса відправник</Caption>
-              <Size>0</Size>
-              <SortNum>7</SortNum>
-              <SortField>False</SortField>
-              <Type>pointer</Type>
-              <Pointer>Довідники.Каси</Pointer>
-              <Join>
-                <table>Довідники.Каси_Const.TABLE</table>
-                <field>КасаВідправник</field>
-                <alias>join_tab_4</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_4</table>
-                <field>Довідники.Каси_Const.Назва</field>
-              </FieldAndAlias>
-            </Field>
-            <Field>
               <Name>Контрагент</Name>
               <Caption>Контрагент</Caption>
               <Size>0</Size>
@@ -8658,10 +8640,10 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <Join>
                 <table>Довідники.Контрагенти_Const.TABLE</table>
                 <field>Контрагент</field>
-                <alias>join_tab_5</alias>
+                <alias>join_tab_4</alias>
               </Join>
               <FieldAndAlias>
-                <table>join_tab_5</table>
+                <table>join_tab_4</table>
                 <field>Довідники.Контрагенти_Const.Назва</field>
               </FieldAndAlias>
             </Field>
@@ -8674,6 +8656,15 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <Type>numeric</Type>
               <Pointer>
               </Pointer>
+            </Field>
+            <Field>
+              <Name>ГосподарськаОперація</Name>
+              <Caption>Операція</Caption>
+              <Size>0</Size>
+              <SortNum>10</SortNum>
+              <SortField>False</SortField>
+              <Type>enum</Type>
+              <Pointer>Перелічення.ГосподарськіОперації</Pointer>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -9069,24 +9060,6 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               </FieldAndAlias>
             </Field>
             <Field>
-              <Name>КасаОтримувач</Name>
-              <Caption>Каса отримувач</Caption>
-              <Size>0</Size>
-              <SortNum>8</SortNum>
-              <SortField>False</SortField>
-              <Type>pointer</Type>
-              <Pointer>Довідники.Каси</Pointer>
-              <Join>
-                <table>Довідники.Каси_Const.TABLE</table>
-                <field>КасаОтримувач</field>
-                <alias>join_tab_5</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_5</table>
-                <field>Довідники.Каси_Const.Назва</field>
-              </FieldAndAlias>
-            </Field>
-            <Field>
               <Name>СумаДокументу</Name>
               <Caption>Сума</Caption>
               <Size>0</Size>
@@ -9095,6 +9068,15 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <Type>numeric</Type>
               <Pointer>
               </Pointer>
+            </Field>
+            <Field>
+              <Name>ГосподарськаОперація</Name>
+              <Caption>Операція</Caption>
+              <Size>0</Size>
+              <SortNum>10</SortNum>
+              <SortField>False</SortField>
+              <Type>enum</Type>
+              <Pointer>Перелічення.ГосподарськіОперації</Pointer>
             </Field>
             <Field>
               <Name>Коментар</Name>

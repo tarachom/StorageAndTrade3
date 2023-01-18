@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 18.01.2023 12:05:23
+ * Дата конфігурації: 18.01.2023 22:13:33
  *
  */
  
@@ -4257,15 +4257,15 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         string Організація = "";
         string Валюта = "";
         string Каса = "";
-        string КасаВідправник = "";
         string Контрагент = "";
         string СумаДокументу = "";
+        string ГосподарськаОперація = "";
         string Коментар = "";
 
         Array ToArray()
         {
             return new object[] { new Gdk.Pixbuf(Image), ID, Spend /*Проведений документ*/
-            /* */ , Назва, НомерДок, ДатаДок, Організація, Валюта, Каса, КасаВідправник, Контрагент, СумаДокументу, Коментар };
+            /* */ , Назва, НомерДок, ДатаДок, Організація, Валюта, Каса, Контрагент, СумаДокументу, ГосподарськаОперація, Коментар };
         }
 
         public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(bool) /* Spend Проведений документ*/
@@ -4275,9 +4275,9 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             , typeof(string) /* Організація */
             , typeof(string) /* Валюта */
             , typeof(string) /* Каса */
-            , typeof(string) /* КасаВідправник */
             , typeof(string) /* Контрагент */
             , typeof(string) /* СумаДокументу */
+            , typeof(string) /* ГосподарськаОперація */
             , typeof(string) /* Коментар */
             );
 
@@ -4293,9 +4293,9 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Організація*/
             treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Валюта*/
             treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Каса*/
-            treeView.AppendColumn(new TreeViewColumn("Каса відправник", new CellRendererText() { Xpad = 4 }, "text", 9)); /*КасаВідправник*/
-            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 4 }, "text", 10)); /*Контрагент*/
-            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 11)); /*СумаДокументу*/
+            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 4 }, "text", 9)); /*Контрагент*/
+            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 10)); /*СумаДокументу*/
+            treeView.AppendColumn(new TreeViewColumn("Операція", new CellRendererText() { Xpad = 4 }, "text", 11)); /*ГосподарськаОперація*/
             treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 12)); /*Коментар*/
             
         }
@@ -4326,7 +4326,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     , Документи.ПрихіднийКасовийОрдер_Const.НомерДок /* 2 */
                     , Документи.ПрихіднийКасовийОрдер_Const.ДатаДок /* 3 */
                     , Документи.ПрихіднийКасовийОрдер_Const.СумаДокументу /* 4 */
-                    , Документи.ПрихіднийКасовийОрдер_Const.Коментар /* 5 */
+                    , Документи.ПрихіднийКасовийОрдер_Const.ГосподарськаОперація /* 5 */
+                    , Документи.ПрихіднийКасовийОрдер_Const.Коментар /* 6 */
                     
                 });
 
@@ -4363,19 +4364,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   
                 /* Join Table */
                 ПрихіднийКасовийОрдер_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Каси_Const.TABLE, Документи.ПрихіднийКасовийОрдер_Const.КасаВідправник, ПрихіднийКасовийОрдер_Select.QuerySelect.Table, "join_tab_4"));
+                    new Join(Довідники.Контрагенти_Const.TABLE, Документи.ПрихіднийКасовийОрдер_Const.Контрагент, ПрихіднийКасовийОрдер_Select.QuerySelect.Table, "join_tab_4"));
                 
                   /* Field */
                   ПрихіднийКасовийОрдер_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>("join_tab_4." + Довідники.Каси_Const.Назва, "join_tab_4_field_1"));
-                  
-                /* Join Table */
-                ПрихіднийКасовийОрдер_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Контрагенти_Const.TABLE, Документи.ПрихіднийКасовийОрдер_Const.Контрагент, ПрихіднийКасовийОрдер_Select.QuerySelect.Table, "join_tab_5"));
-                
-                  /* Field */
-                  ПрихіднийКасовийОрдер_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>("join_tab_5." + Довідники.Контрагенти_Const.Назва, "join_tab_5_field_1"));
+                    new NameValue<string>("join_tab_4." + Довідники.Контрагенти_Const.Назва, "join_tab_4_field_1"));
                   
 
             /* SELECT */
@@ -4393,12 +4386,12 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                         Організація = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Валюта = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
                         Каса = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
-                        КасаВідправник = cur.Fields?["join_tab_4_field_1"]?.ToString() ?? "", /**/
-                        Контрагент = cur.Fields?["join_tab_5_field_1"]?.ToString() ?? "", /**/
+                        Контрагент = cur.Fields?["join_tab_4_field_1"]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[ПрихіднийКасовийОрдер_Const.Назва]?.ToString() ?? "", /**/
                         НомерДок = cur.Fields?[ПрихіднийКасовийОрдер_Const.НомерДок]?.ToString() ?? "", /**/
                         ДатаДок = cur.Fields?[ПрихіднийКасовийОрдер_Const.ДатаДок]?.ToString() ?? "", /**/
                         СумаДокументу = cur.Fields?[ПрихіднийКасовийОрдер_Const.СумаДокументу]?.ToString() ?? "", /**/
+                        ГосподарськаОперація = ((Перелічення.ГосподарськіОперації)(cur.Fields?[ПрихіднийКасовийОрдер_Const.ГосподарськаОперація]!)).ToString(), /**/
                         Коментар = cur.Fields?[ПрихіднийКасовийОрдер_Const.Коментар]?.ToString() ?? "" /**/
                         
                     };
@@ -4436,14 +4429,14 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         string Контрагент = "";
         string Валюта = "";
         string Каса = "";
-        string КасаОтримувач = "";
         string СумаДокументу = "";
+        string ГосподарськаОперація = "";
         string Коментар = "";
 
         Array ToArray()
         {
             return new object[] { new Gdk.Pixbuf(Image), ID, Spend /*Проведений документ*/
-            /* */ , Назва, НомерДок, ДатаДок, Організація, Контрагент, Валюта, Каса, КасаОтримувач, СумаДокументу, Коментар };
+            /* */ , Назва, НомерДок, ДатаДок, Організація, Контрагент, Валюта, Каса, СумаДокументу, ГосподарськаОперація, Коментар };
         }
 
         public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(bool) /* Spend Проведений документ*/
@@ -4454,8 +4447,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             , typeof(string) /* Контрагент */
             , typeof(string) /* Валюта */
             , typeof(string) /* Каса */
-            , typeof(string) /* КасаОтримувач */
             , typeof(string) /* СумаДокументу */
+            , typeof(string) /* ГосподарськаОперація */
             , typeof(string) /* Коментар */
             );
 
@@ -4472,8 +4465,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Контрагент*/
             treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Валюта*/
             treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText() { Xpad = 4 }, "text", 9)); /*Каса*/
-            treeView.AppendColumn(new TreeViewColumn("Каса отримувач", new CellRendererText() { Xpad = 4 }, "text", 10)); /*КасаОтримувач*/
-            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 11)); /*СумаДокументу*/
+            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 10)); /*СумаДокументу*/
+            treeView.AppendColumn(new TreeViewColumn("Операція", new CellRendererText() { Xpad = 4 }, "text", 11)); /*ГосподарськаОперація*/
             treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 12)); /*Коментар*/
             
         }
@@ -4504,7 +4497,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     , Документи.РозхіднийКасовийОрдер_Const.НомерДок /* 2 */
                     , Документи.РозхіднийКасовийОрдер_Const.ДатаДок /* 3 */
                     , Документи.РозхіднийКасовийОрдер_Const.СумаДокументу /* 4 */
-                    , Документи.РозхіднийКасовийОрдер_Const.Коментар /* 5 */
+                    , Документи.РозхіднийКасовийОрдер_Const.ГосподарськаОперація /* 5 */
+                    , Документи.РозхіднийКасовийОрдер_Const.Коментар /* 6 */
                     
                 });
 
@@ -4547,14 +4541,6 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   РозхіднийКасовийОрдер_Select.QuerySelect.FieldAndAlias.Add(
                     new NameValue<string>("join_tab_4." + Довідники.Каси_Const.Назва, "join_tab_4_field_1"));
                   
-                /* Join Table */
-                РозхіднийКасовийОрдер_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Каси_Const.TABLE, Документи.РозхіднийКасовийОрдер_Const.КасаОтримувач, РозхіднийКасовийОрдер_Select.QuerySelect.Table, "join_tab_5"));
-                
-                  /* Field */
-                  РозхіднийКасовийОрдер_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>("join_tab_5." + Довідники.Каси_Const.Назва, "join_tab_5_field_1"));
-                  
 
             /* SELECT */
             РозхіднийКасовийОрдер_Select.Select();
@@ -4572,11 +4558,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                         Контрагент = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
                         Валюта = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
                         Каса = cur.Fields?["join_tab_4_field_1"]?.ToString() ?? "", /**/
-                        КасаОтримувач = cur.Fields?["join_tab_5_field_1"]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[РозхіднийКасовийОрдер_Const.Назва]?.ToString() ?? "", /**/
                         НомерДок = cur.Fields?[РозхіднийКасовийОрдер_Const.НомерДок]?.ToString() ?? "", /**/
                         ДатаДок = cur.Fields?[РозхіднийКасовийОрдер_Const.ДатаДок]?.ToString() ?? "", /**/
                         СумаДокументу = cur.Fields?[РозхіднийКасовийОрдер_Const.СумаДокументу]?.ToString() ?? "", /**/
+                        ГосподарськаОперація = ((Перелічення.ГосподарськіОперації)(cur.Fields?[РозхіднийКасовийОрдер_Const.ГосподарськаОперація]!)).ToString(), /**/
                         Коментар = cur.Fields?[РозхіднийКасовийОрдер_Const.Коментар]?.ToString() ?? "" /**/
                         
                     };
