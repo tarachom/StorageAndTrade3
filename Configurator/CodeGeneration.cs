@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 18.01.2023 22:13:33
+ * Дата конфігурації: 20.01.2023 16:19:29
  *
  */
 
@@ -17791,18 +17791,25 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
 {
     public static class VirtualTablesСalculation
     {
+        /* Функція повного очищення віртуальних таблиць */
+        public static void ClearAll()
+        {
+            /*  */
+        }
+
         /* Функція для обчислення віртуальних таблиць  */
         public static void Execute(DateTime period, string regAccumName)
         {
+            
             Dictionary<string, object> paramQuery = new Dictionary<string, object>();
             paramQuery.Add("ПеріодДеньВідбір", period);
 
-            byte transactionID = Config.Kernel!.DataBase.BeginTransaction();
             switch(regAccumName)
             {
             
                 case "ТовариНаСкладах":
                 {
+                    byte transactionID = Config.Kernel!.DataBase.BeginTransaction();
                     
                     /* QueryBlock: Залишки */
                         
@@ -17816,11 +17823,13 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                         
                     Config.Kernel!.DataBase.ExecuteSQL($@"INSERT INTO {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.TABLE} ( uid, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.Період}, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.Номенклатура}, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.ХарактеристикаНоменклатури}, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.Склад}, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.Серія}, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.ВНаявностіПрихід}, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.ВНаявностіРозхід}, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.ВНаявностіЗалишок}, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.ДоВідвантаженняПрихід}, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.ДоВідвантаженняРозхід}, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.ДоВідвантаженняЗалишок} ) SELECT uuid_generate_v4(), date_trunc('day', ТовариНаСкладах.period::timestamp) AS Період, ТовариНаСкладах.{ТовариНаСкладах_Const.Номенклатура} AS Номенклатура, ТовариНаСкладах.{ТовариНаСкладах_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури, ТовариНаСкладах.{ТовариНаСкладах_Const.Склад} AS Склад, ТовариНаСкладах.{ТовариНаСкладах_Const.Серія} AS Серія, /* ВНаявності */ SUM(CASE WHEN ТовариНаСкладах.income = true THEN ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE 0 END) AS ВНаявностіПрихід, SUM(CASE WHEN ТовариНаСкладах.income = false THEN ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE 0 END) AS ВНаявностіРозхід, SUM(CASE WHEN ТовариНаСкладах.income = true THEN ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE -ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} END) AS ВНаявностіЗалишок, /* ДоВідвантаження */ SUM(CASE WHEN ТовариНаСкладах.income = true THEN ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE 0 END) AS ДоВідвантаженняПрихід, SUM(CASE WHEN ТовариНаСкладах.income = false THEN ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE 0 END) AS ДоВідвантаженняРозхід, SUM(CASE WHEN ТовариНаСкладах.income = true THEN ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE -ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} END) AS ДоВідвантаженняЗалишок FROM {ТовариНаСкладах_Const.TABLE} AS ТовариНаСкладах WHERE date_trunc('day', ТовариНаСкладах.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, Номенклатура, ХарактеристикаНоменклатури, Склад, Серія HAVING /* ВНаявності */ SUM(CASE WHEN ТовариНаСкладах.income = true THEN ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE 0 END) != 0 OR SUM(CASE WHEN ТовариНаСкладах.income = false THEN ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE 0 END) != 0 OR SUM(CASE WHEN ТовариНаСкладах.income = true THEN ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE -ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} END) != 0 OR /* ДоВідвантаження */ SUM(CASE WHEN ТовариНаСкладах.income = true THEN ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE 0 END) != 0 OR SUM(CASE WHEN ТовариНаСкладах.income = false THEN ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE 0 END) != 0 OR SUM(CASE WHEN ТовариНаСкладах.income = true THEN ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE -ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} END) != 0", paramQuery, transactionID);
                         
+                    Config.Kernel!.DataBase.CommitTransaction(transactionID);
                     break;
                 }
                 
                 case "РухТоварів":
                 {
+                    byte transactionID = Config.Kernel!.DataBase.BeginTransaction();
                     
                     /* QueryBlock: Обороти */
                         
@@ -17828,11 +17837,13 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                         
                     Config.Kernel!.DataBase.ExecuteSQL($@"INSERT INTO {РухТоварів_Обороти_TablePart.TABLE} ( uid, {РухТоварів_Обороти_TablePart.Період}, {РухТоварів_Обороти_TablePart.Номенклатура}, {РухТоварів_Обороти_TablePart.ХарактеристикаНоменклатури}, {РухТоварів_Обороти_TablePart.Склад}, {РухТоварів_Обороти_TablePart.Кількість} ) SELECT uuid_generate_v4(), date_trunc('day', РухТоварів.period::timestamp) AS Період, РухТоварів.{РухТоварів_Const.Номенклатура} AS Номенклатура, РухТоварів.{РухТоварів_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури, РухТоварів.{РухТоварів_Const.Склад} AS Склад, SUM(РухТоварів.{РухТоварів_Const.Кількість}) AS Кількість FROM {РухТоварів_Const.TABLE} AS РухТоварів WHERE date_trunc('day', РухТоварів.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, Номенклатура, ХарактеристикаНоменклатури, Склад", paramQuery, transactionID);
                         
+                    Config.Kernel!.DataBase.CommitTransaction(transactionID);
                     break;
                 }
                 
                 case "ЗамовленняКлієнтів":
                 {
+                    byte transactionID = Config.Kernel!.DataBase.BeginTransaction();
                     
                     /* QueryBlock: Залишки */
                         
@@ -17840,11 +17851,13 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                         
                     Config.Kernel!.DataBase.ExecuteSQL($@"INSERT INTO {ЗамовленняКлієнтів_Залишки_TablePart.TABLE} ( uid, {ЗамовленняКлієнтів_Залишки_TablePart.Період}, {ЗамовленняКлієнтів_Залишки_TablePart.ЗамовленняКлієнта}, {ЗамовленняКлієнтів_Залишки_TablePart.Номенклатура}, {ЗамовленняКлієнтів_Залишки_TablePart.ХарактеристикаНоменклатури}, {ЗамовленняКлієнтів_Залишки_TablePart.Склад}, {ЗамовленняКлієнтів_Залишки_TablePart.Замовлено}, {ЗамовленняКлієнтів_Залишки_TablePart.Сума} ) SELECT uuid_generate_v4(), date_trunc('day', ЗамовленняКлієнтів.period::timestamp) AS Період, ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.ЗамовленняКлієнта} AS ЗамовленняКлієнта, ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Номенклатура} AS Номенклатура, ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури, ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Склад} AS Склад, /* Замовлено */ SUM(CASE WHEN ЗамовленняКлієнтів.income = true THEN ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Замовлено} ELSE -ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Замовлено} END) AS Замовлено, /* Сума */ SUM(CASE WHEN ЗамовленняКлієнтів.income = true THEN ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Сума} ELSE -ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Сума} END) AS Сума FROM {ЗамовленняКлієнтів_Const.TABLE} AS ЗамовленняКлієнтів WHERE date_trunc('day', ЗамовленняКлієнтів.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, ЗамовленняКлієнта, Номенклатура, ХарактеристикаНоменклатури, Склад HAVING /* Замовлено */ SUM(CASE WHEN ЗамовленняКлієнтів.income = true THEN ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Замовлено} ELSE -ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Замовлено} END) != 0 OR /* Сума */ SUM(CASE WHEN ЗамовленняКлієнтів.income = true THEN ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Сума} ELSE -ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Сума} END) != 0", paramQuery, transactionID);
                         
+                    Config.Kernel!.DataBase.CommitTransaction(transactionID);
                     break;
                 }
                 
                 case "РозрахункиЗКлієнтами":
                 {
+                    byte transactionID = Config.Kernel!.DataBase.BeginTransaction();
                     
                     /* QueryBlock: Залишки */
                         
@@ -17858,11 +17871,13 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                         
                     Config.Kernel!.DataBase.ExecuteSQL($@"INSERT INTO {РозрахункиЗКлієнтами_ЗалишкиТаОбороти_TablePart.TABLE} ( uid, {РозрахункиЗКлієнтами_ЗалишкиТаОбороти_TablePart.Період}, {РозрахункиЗКлієнтами_ЗалишкиТаОбороти_TablePart.Валюта}, {РозрахункиЗКлієнтами_ЗалишкиТаОбороти_TablePart.Контрагент}, {РозрахункиЗКлієнтами_ЗалишкиТаОбороти_TablePart.СумаПрихід}, {РозрахункиЗКлієнтами_ЗалишкиТаОбороти_TablePart.СумаРозхід}, {РозрахункиЗКлієнтами_ЗалишкиТаОбороти_TablePart.СумаЗалишок} ) SELECT uuid_generate_v4(), date_trunc('day', РозрахункиЗКлієнтами.period::timestamp) AS Період, РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Валюта} AS Валюта, РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Контрагент} AS Контрагент, /* Сума */ SUM(CASE WHEN РозрахункиЗКлієнтами.income = true THEN РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} ELSE 0 END) AS СумаПрихід, SUM(CASE WHEN РозрахункиЗКлієнтами.income = false THEN РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} ELSE 0 END) AS СумаРозхід, SUM(CASE WHEN РозрахункиЗКлієнтами.income = true THEN РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} ELSE -РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} END) AS СумаЗалишок FROM {РозрахункиЗКлієнтами_Const.TABLE} AS РозрахункиЗКлієнтами WHERE date_trunc('day', РозрахункиЗКлієнтами.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, Валюта, Контрагент HAVING /* Сума */ SUM(CASE WHEN РозрахункиЗКлієнтами.income = true THEN РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} ELSE 0 END) != 0 OR SUM(CASE WHEN РозрахункиЗКлієнтами.income = false THEN РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} ELSE 0 END) != 0 OR SUM(CASE WHEN РозрахункиЗКлієнтами.income = true THEN РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} ELSE -РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} END) != 0", paramQuery, transactionID);
                         
+                    Config.Kernel!.DataBase.CommitTransaction(transactionID);
                     break;
                 }
                 
                 case "Закупівлі":
                 {
+                    byte transactionID = Config.Kernel!.DataBase.BeginTransaction();
                     
                     /* QueryBlock: Обороти */
                         
@@ -17870,11 +17885,13 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                         
                     Config.Kernel!.DataBase.ExecuteSQL($@"INSERT INTO {Закупівлі_Обороти_TablePart.TABLE} ( uid, {Закупівлі_Обороти_TablePart.Період}, {Закупівлі_Обороти_TablePart.Організація}, {Закупівлі_Обороти_TablePart.Склад}, {Закупівлі_Обороти_TablePart.Контрагент}, {Закупівлі_Обороти_TablePart.Договір}, {Закупівлі_Обороти_TablePart.Номенклатура}, {Закупівлі_Обороти_TablePart.ХарактеристикаНоменклатури}, {Закупівлі_Обороти_TablePart.Кількість}, {Закупівлі_Обороти_TablePart.Сума}, {Закупівлі_Обороти_TablePart.Собівартість} ) SELECT uuid_generate_v4(), date_trunc('day', Закупівлі.period::timestamp) AS Період, Закупівлі.{Закупівлі_Const.Організація} AS Організація, Закупівлі.{Закупівлі_Const.Склад} AS Склад, Закупівлі.{Закупівлі_Const.Контрагент} AS Контрагент, Закупівлі.{Закупівлі_Const.Договір} AS Договір, Закупівлі.{Закупівлі_Const.Номенклатура} AS Номенклатура, Закупівлі.{Закупівлі_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури, SUM(Закупівлі.{Закупівлі_Const.Кількість}) AS Кількість, SUM(Закупівлі.{Закупівлі_Const.Сума}) AS Сума, Закупівлі.{Закупівлі_Const.Собівартість} AS Собівартість FROM {Закупівлі_Const.TABLE} AS Закупівлі WHERE date_trunc('day', Закупівлі.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, Організація, Склад, Контрагент, Договір, Номенклатура, ХарактеристикаНоменклатури, Собівартість HAVING SUM(Закупівлі.{Закупівлі_Const.Кількість}) != 0 OR SUM(Закупівлі.{Закупівлі_Const.Сума}) != 0", paramQuery, transactionID);
                         
+                    Config.Kernel!.DataBase.CommitTransaction(transactionID);
                     break;
                 }
                 
                 case "ВільніЗалишки":
                 {
+                    byte transactionID = Config.Kernel!.DataBase.BeginTransaction();
                     
                     /* QueryBlock: Залишки */
                         
@@ -17882,11 +17899,13 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                         
                     Config.Kernel!.DataBase.ExecuteSQL($@"INSERT INTO {ВільніЗалишки_Залишки_TablePart.TABLE} ( uid, {ВільніЗалишки_Залишки_TablePart.Період}, {ВільніЗалишки_Залишки_TablePart.Номенклатура}, {ВільніЗалишки_Залишки_TablePart.ХарактеристикаНоменклатури}, {ВільніЗалишки_Залишки_TablePart.Склад}, {ВільніЗалишки_Залишки_TablePart.ВНаявності}, {ВільніЗалишки_Залишки_TablePart.ВРезервіЗіСкладу}, {ВільніЗалишки_Залишки_TablePart.ВРезервіПідЗамовлення} ) SELECT uuid_generate_v4(), date_trunc('day', ВільніЗалишки.period::timestamp) AS Період, ВільніЗалишки.{ВільніЗалишки_Const.Номенклатура} AS Номенклатура, ВільніЗалишки.{ВільніЗалишки_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури, ВільніЗалишки.{ВільніЗалишки_Const.Склад} AS Склад, /* ВНаявності */ SUM(CASE WHEN ВільніЗалишки.income = true THEN ВільніЗалишки.{ВільніЗалишки_Const.ВНаявності} ELSE -ВільніЗалишки.{ВільніЗалишки_Const.ВНаявності} END) AS ВНаявності, /* ВРезервіЗіСкладу */ SUM(CASE WHEN ВільніЗалишки.income = true THEN ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіЗіСкладу} ELSE -ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіЗіСкладу} END) AS ВРезервіЗіСкладу, /* ВРезервіПідЗамовлення */ SUM(CASE WHEN ВільніЗалишки.income = true THEN ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіПідЗамовлення} ELSE -ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіПідЗамовлення} END) AS ВРезервіПідЗамовлення FROM {ВільніЗалишки_Const.TABLE} AS ВільніЗалишки WHERE date_trunc('day', ВільніЗалишки.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, Номенклатура, ХарактеристикаНоменклатури, Склад HAVING /* ВНаявності */ SUM(CASE WHEN ВільніЗалишки.income = true THEN ВільніЗалишки.{ВільніЗалишки_Const.ВНаявності} ELSE -ВільніЗалишки.{ВільніЗалишки_Const.ВНаявності} END) != 0 OR /* ВРезервіЗіСкладу */ SUM(CASE WHEN ВільніЗалишки.income = true THEN ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіЗіСкладу} ELSE -ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіЗіСкладу} END) != 0 OR /* ВРезервіПідЗамовлення */ SUM(CASE WHEN ВільніЗалишки.income = true THEN ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіПідЗамовлення} ELSE -ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіПідЗамовлення} END) != 0", paramQuery, transactionID);
                         
+                    Config.Kernel!.DataBase.CommitTransaction(transactionID);
                     break;
                 }
                 
                 case "ЗамовленняПостачальникам":
                 {
+                    byte transactionID = Config.Kernel!.DataBase.BeginTransaction();
                     
                     /* QueryBlock: Залишки */
                         
@@ -17894,11 +17913,13 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                         
                     Config.Kernel!.DataBase.ExecuteSQL($@"INSERT INTO {ЗамовленняПостачальникам_Залишки_TablePart.TABLE} ( uid, {ЗамовленняПостачальникам_Залишки_TablePart.Період}, {ЗамовленняПостачальникам_Залишки_TablePart.ЗамовленняПостачальнику}, {ЗамовленняПостачальникам_Залишки_TablePart.Номенклатура}, {ЗамовленняПостачальникам_Залишки_TablePart.ХарактеристикаНоменклатури}, {ЗамовленняПостачальникам_Залишки_TablePart.Склад}, {ЗамовленняПостачальникам_Залишки_TablePart.Замовлено} ) SELECT uuid_generate_v4(), date_trunc('day', ЗамовленняПостачальникам.period::timestamp) AS Період, ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.ЗамовленняПостачальнику} AS ЗамовленняПостачальнику, ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Номенклатура} AS Номенклатура, ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури, ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Склад} AS Склад, /* Замовлено */ SUM(CASE WHEN ЗамовленняПостачальникам.income = true THEN ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Замовлено} ELSE -ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Замовлено} END) AS Замовлено FROM {ЗамовленняПостачальникам_Const.TABLE} AS ЗамовленняПостачальникам WHERE date_trunc('day', ЗамовленняПостачальникам.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, ЗамовленняПостачальнику, Номенклатура, ХарактеристикаНоменклатури, Склад HAVING /* Замовлено */ SUM(CASE WHEN ЗамовленняПостачальникам.income = true THEN ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Замовлено} ELSE -ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Замовлено} END) != 0", paramQuery, transactionID);
                         
+                    Config.Kernel!.DataBase.CommitTransaction(transactionID);
                     break;
                 }
                 
                 case "РозрахункиЗПостачальниками":
                 {
+                    byte transactionID = Config.Kernel!.DataBase.BeginTransaction();
                     
                     /* QueryBlock: Залишки */
                         
@@ -17912,11 +17933,13 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                         
                     Config.Kernel!.DataBase.ExecuteSQL($@"INSERT INTO {РозрахункиЗПостачальниками_ЗалишкиТаОбороти_TablePart.TABLE} ( uid, {РозрахункиЗПостачальниками_ЗалишкиТаОбороти_TablePart.Період}, {РозрахункиЗПостачальниками_ЗалишкиТаОбороти_TablePart.Контрагент}, {РозрахункиЗПостачальниками_ЗалишкиТаОбороти_TablePart.Валюта}, {РозрахункиЗПостачальниками_ЗалишкиТаОбороти_TablePart.СумаПрихід}, {РозрахункиЗПостачальниками_ЗалишкиТаОбороти_TablePart.СумаРозхід}, {РозрахункиЗПостачальниками_ЗалишкиТаОбороти_TablePart.СумаЗалишок} ) SELECT uuid_generate_v4(), date_trunc('day', РозрахункиЗПостачальниками.period::timestamp) AS Період, РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Контрагент} AS Контрагент, РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Валюта} AS Валюта, /* Сума */ SUM(CASE WHEN РозрахункиЗПостачальниками.income = true THEN РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} ELSE 0 END) AS СумаПрихід, SUM(CASE WHEN РозрахункиЗПостачальниками.income = false THEN РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} ELSE 0 END) AS СумаРозхід, SUM(CASE WHEN РозрахункиЗПостачальниками.income = true THEN РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} ELSE -РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} END) AS СумаЗалишок FROM {РозрахункиЗПостачальниками_Const.TABLE} AS РозрахункиЗПостачальниками WHERE date_trunc('day', РозрахункиЗПостачальниками.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, Контрагент, Валюта HAVING /* Сума */ SUM(CASE WHEN РозрахункиЗПостачальниками.income = true THEN РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} ELSE 0 END) != 0 OR SUM(CASE WHEN РозрахункиЗПостачальниками.income = false THEN РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} ELSE 0 END) != 0 OR SUM(CASE WHEN РозрахункиЗПостачальниками.income = true THEN РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} ELSE -РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} END) != 0", paramQuery, transactionID);
                         
+                    Config.Kernel!.DataBase.CommitTransaction(transactionID);
                     break;
                 }
                 
                 case "РухКоштів":
                 {
+                    byte transactionID = Config.Kernel!.DataBase.BeginTransaction();
                     
                     /* QueryBlock: Залишки */
                         
@@ -17930,11 +17953,13 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                         
                     Config.Kernel!.DataBase.ExecuteSQL($@"INSERT INTO {РухКоштів_ЗалишкиТаОбороти_TablePart.TABLE} ( uid, {РухКоштів_ЗалишкиТаОбороти_TablePart.Період}, {РухКоштів_ЗалишкиТаОбороти_TablePart.Організація}, {РухКоштів_ЗалишкиТаОбороти_TablePart.Каса}, {РухКоштів_ЗалишкиТаОбороти_TablePart.Валюта}, {РухКоштів_ЗалишкиТаОбороти_TablePart.СумаПрихід}, {РухКоштів_ЗалишкиТаОбороти_TablePart.СумаРозхід}, {РухКоштів_ЗалишкиТаОбороти_TablePart.СумаЗалишок} ) SELECT uuid_generate_v4(), date_trunc('day', РухКоштів.period::timestamp) AS Період, РухКоштів.{РухКоштів_Const.Організація} AS Організація, РухКоштів.{РухКоштів_Const.Каса} AS Каса, РухКоштів.{РухКоштів_Const.Валюта} AS Валюта, /* Сума */ SUM(CASE WHEN РухКоштів.income = true THEN РухКоштів.{РухКоштів_Const.Сума} ELSE 0 END) AS СумаПрихід, SUM(CASE WHEN РухКоштів.income = false THEN РухКоштів.{РухКоштів_Const.Сума} ELSE 0 END) AS СумаРозхід, SUM(CASE WHEN РухКоштів.income = true THEN РухКоштів.{РухКоштів_Const.Сума} ELSE -РухКоштів.{РухКоштів_Const.Сума} END) AS СумаЗалишок FROM {РухКоштів_Const.TABLE} AS РухКоштів WHERE date_trunc('day', РухКоштів.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, Організація, Каса, Валюта HAVING /* Сума */ SUM(CASE WHEN РухКоштів.income = true THEN РухКоштів.{РухКоштів_Const.Сума} ELSE 0 END) != 0 OR SUM(CASE WHEN РухКоштів.income = false THEN РухКоштів.{РухКоштів_Const.Сума} ELSE 0 END) != 0 OR SUM(CASE WHEN РухКоштів.income = true THEN РухКоштів.{РухКоштів_Const.Сума} ELSE -РухКоштів.{РухКоштів_Const.Сума} END) != 0", paramQuery, transactionID);
                         
+                    Config.Kernel!.DataBase.CommitTransaction(transactionID);
                     break;
                 }
                 
                 case "ПартіїТоварів":
                 {
+                    byte transactionID = Config.Kernel!.DataBase.BeginTransaction();
                     
                     /* QueryBlock: Залишки */
                         
@@ -17948,11 +17973,13 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                         
                     Config.Kernel!.DataBase.ExecuteSQL($@"INSERT INTO {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.TABLE} ( uid, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.Період}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.Організація}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.ПартіяТоварівКомпозит}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.Номенклатура}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.ХарактеристикаНоменклатури}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.Серія}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.Склад}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.КількістьПрихід}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.КількістьРозхід}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.КількістьЗалишок}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.СобівартістьПрихід}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.СобівартістьРозхід}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.СобівартістьЗалишок} ) SELECT uuid_generate_v4(), date_trunc('day', ПартіїТоварів.period::timestamp) AS Період, ПартіїТоварів.{ПартіїТоварів_Const.Організація} AS Організація, ПартіїТоварів.{ПартіїТоварів_Const.ПартіяТоварівКомпозит} AS ПартіяТоварівКомпозит, ПартіїТоварів.{ПартіїТоварів_Const.Номенклатура} AS Номенклатура, ПартіїТоварів.{ПартіїТоварів_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури, ПартіїТоварів.{ПартіїТоварів_Const.Серія} AS Серія, ПартіїТоварів.{ПартіїТоварів_Const.Склад} AS Склад, /* Кількість */ SUM(CASE WHEN ПартіїТоварів.income = true THEN ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE 0 END) AS КількістьПрихід, SUM(CASE WHEN ПартіїТоварів.income = false THEN ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE 0 END) AS КількістьРозхід, SUM(CASE WHEN ПартіїТоварів.income = true THEN ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE -ПартіїТоварів.{ПартіїТоварів_Const.Кількість} END) AS КількістьЗалишок, /* Собівартість */ SUM(CASE WHEN ПартіїТоварів.income = true THEN ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE 0 END) AS СобівартістьПрихід, SUM(CASE WHEN ПартіїТоварів.income = false THEN ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE 0 END) AS СобівартістьРозхід, SUM(CASE WHEN ПартіїТоварів.income = true THEN ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE -ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} END) AS СобівартістьЗалишок FROM {ПартіїТоварів_Const.TABLE} AS ПартіїТоварів WHERE date_trunc('day', ПартіїТоварів.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, Організація, ПартіяТоварівКомпозит, Номенклатура, ХарактеристикаНоменклатури, Серія, Склад HAVING /* Кількість */ SUM(CASE WHEN ПартіїТоварів.income = true THEN ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE 0 END) != 0 OR SUM(CASE WHEN ПартіїТоварів.income = false THEN ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE 0 END) != 0 OR SUM(CASE WHEN ПартіїТоварів.income = true THEN ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE -ПартіїТоварів.{ПартіїТоварів_Const.Кількість} END) != 0 OR /* Собівартість */ SUM(CASE WHEN ПартіїТоварів.income = true THEN ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE 0 END) != 0 OR SUM(CASE WHEN ПартіїТоварів.income = false THEN ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE 0 END) != 0 OR SUM(CASE WHEN ПартіїТоварів.income = true THEN ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE -ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} END) != 0", paramQuery, transactionID);
                         
+                    Config.Kernel!.DataBase.CommitTransaction(transactionID);
                     break;
                 }
                 
                 case "Продажі":
                 {
+                    byte transactionID = Config.Kernel!.DataBase.BeginTransaction();
                     
                     /* QueryBlock: Обороти */
                         
@@ -17960,11 +17987,13 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                         
                     Config.Kernel!.DataBase.ExecuteSQL($@"INSERT INTO {Продажі_Обороти_TablePart.TABLE} ( uid, {Продажі_Обороти_TablePart.Період}, {Продажі_Обороти_TablePart.Організація}, {Продажі_Обороти_TablePart.Склад}, {Продажі_Обороти_TablePart.Контрагент}, {Продажі_Обороти_TablePart.Договір}, {Продажі_Обороти_TablePart.Номенклатура}, {Продажі_Обороти_TablePart.ХарактеристикаНоменклатури}, {Продажі_Обороти_TablePart.Кількість}, {Продажі_Обороти_TablePart.Сума}, {Продажі_Обороти_TablePart.Дохід}, {Продажі_Обороти_TablePart.Собівартість} ) SELECT uuid_generate_v4(), date_trunc('day', Продажі.period::timestamp) AS Період, Продажі.{Продажі_Const.Організація} AS Організація, Продажі.{Продажі_Const.Склад} AS Склад, Продажі.{Продажі_Const.Контрагент} AS Контрагент, Продажі.{Продажі_Const.Договір} AS Договір, Продажі.{Продажі_Const.Номенклатура} AS Номенклатура, Продажі.{Продажі_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури, SUM(Продажі.{Продажі_Const.Кількість}) AS Кількість, SUM(Продажі.{Продажі_Const.Сума}) AS Сума, SUM(Продажі.{Продажі_Const.Дохід}) AS Дохід, Продажі.{Продажі_Const.Собівартість} AS Собівартість FROM {Продажі_Const.TABLE} AS Продажі WHERE date_trunc('day', Продажі.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, Організація, Склад, Контрагент, Договір, Номенклатура, ХарактеристикаНоменклатури, Собівартість HAVING SUM(Продажі.{Продажі_Const.Кількість}) != 0 OR SUM(Продажі.{Продажі_Const.Сума}) != 0 OR SUM(Продажі.{Продажі_Const.Дохід}) != 0", paramQuery, transactionID);
                         
+                    Config.Kernel!.DataBase.CommitTransaction(transactionID);
                     break;
                 }
                 
                 case "ТовариВКомірках":
                 {
+                    byte transactionID = Config.Kernel!.DataBase.BeginTransaction();
                     
                     /* QueryBlock: ЗалишкиТаОбороти */
                         
@@ -17978,11 +18007,42 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                         
                     Config.Kernel!.DataBase.ExecuteSQL($@"INSERT INTO {ТовариВКомірках_Залишки_TablePart.TABLE} ( uid, {ТовариВКомірках_Залишки_TablePart.Період}, {ТовариВКомірках_Залишки_TablePart.Номенклатура}, {ТовариВКомірках_Залишки_TablePart.ХарактеристикаНоменклатури}, {ТовариВКомірках_Залишки_TablePart.Пакування}, {ТовариВКомірках_Залишки_TablePart.Комірка}, {ТовариВКомірках_Залишки_TablePart.Серія}, {ТовариВКомірках_Залишки_TablePart.ВНаявності} ) SELECT uuid_generate_v4(), date_trunc('day', ТовариВКомірках.period::timestamp) AS Період, ТовариВКомірках.{ТовариВКомірках_Const.Номенклатура} AS Номенклатура, ТовариВКомірках.{ТовариВКомірках_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури, ТовариВКомірках.{ТовариВКомірках_Const.Пакування} AS Пакування, ТовариВКомірках.{ТовариВКомірках_Const.Комірка} AS Комірка, ТовариВКомірках.{ТовариВКомірках_Const.Серія} AS Серія, /* ВНаявності */ SUM(CASE WHEN ТовариВКомірках.income = true THEN ТовариВКомірках.{ТовариВКомірках_Const.ВНаявності} ELSE -ТовариВКомірках.{ТовариВКомірках_Const.ВНаявності} END) AS ВНаявності FROM {ТовариВКомірках_Const.TABLE} AS ТовариВКомірках WHERE date_trunc('day', ТовариВКомірках.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, Номенклатура, ХарактеристикаНоменклатури, Пакування, Комірка, Серія HAVING /* ВНаявності */ SUM(CASE WHEN ТовариВКомірках.income = true THEN ТовариВКомірках.{ТовариВКомірках_Const.ВНаявності} ELSE -ТовариВКомірках.{ТовариВКомірках_Const.ВНаявності} END) != 0", paramQuery, transactionID);
                         
+                    Config.Kernel!.DataBase.CommitTransaction(transactionID);
                     break;
                 }
                 
+                    default:
+                        break;
             }
-            Config.Kernel!.DataBase.CommitTransaction(transactionID);
+            
+        }
+
+        /* Функція для обчислення підсумкових віртуальних таблиць */
+        public static void ExecuteFinalCalculation(List<string> regAccumNameList)
+        {
+            
+            foreach (string regAccumName in regAccumNameList)
+                switch(regAccumName)
+                {
+                
+                    case "ТовариНаСкладах":
+                    {
+                        byte transactionID = Config.Kernel!.DataBase.BeginTransaction();
+                        
+                        /* QueryBlock: Підсумки */
+                            
+                        Config.Kernel!.DataBase.ExecuteSQL($@"DELETE FROM {ТовариНаСкладах_Підсумки_TablePart.TABLE}", null, transactionID);
+                            
+                        Config.Kernel!.DataBase.ExecuteSQL($@"INSERT INTO {ТовариНаСкладах_Підсумки_TablePart.TABLE} ( uid, {ТовариНаСкладах_Підсумки_TablePart.Номенклатура}, {ТовариНаСкладах_Підсумки_TablePart.ХарактеристикаНоменклатури}, {ТовариНаСкладах_Підсумки_TablePart.Склад}, {ТовариНаСкладах_Підсумки_TablePart.Серія}, {ТовариНаСкладах_Підсумки_TablePart.ВНаявності}, {ТовариНаСкладах_Підсумки_TablePart.ДоВідвантаження} ) SELECT uuid_generate_v4(), ТовариНаСкладах.{ТовариНаСкладах_Залишки_TablePart.Номенклатура} AS Номенклатура, ТовариНаСкладах.{ТовариНаСкладах_Залишки_TablePart.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури, ТовариНаСкладах.{ТовариНаСкладах_Залишки_TablePart.Склад} AS Склад, ТовариНаСкладах.{ТовариНаСкладах_Залишки_TablePart.Серія} AS Серія, /* ВНаявності */ SUM(ТовариНаСкладах.{ТовариНаСкладах_Залишки_TablePart.ВНаявності}) AS ВНаявності, /* ДоВідвантаження */ SUM(ТовариНаСкладах.{ТовариНаСкладах_Залишки_TablePart.ДоВідвантаження}) AS ДоВідвантаження FROM {ТовариНаСкладах_Залишки_TablePart.TABLE} AS ТовариНаСкладах GROUP BY Номенклатура, ХарактеристикаНоменклатури, Склад, Серія HAVING /* ВНаявності */ SUM(ТовариНаСкладах.{ТовариНаСкладах_Залишки_TablePart.ВНаявності}) != 0 OR /* ДоВідвантаження */ SUM(ТовариНаСкладах.{ТовариНаСкладах_Залишки_TablePart.ДоВідвантаження}) != 0", null, transactionID);
+                            
+                        Config.Kernel!.DataBase.CommitTransaction(transactionID);
+                        break;
+                    }
+                    
+                        default:
+                            break;
+                }
+            
         }
     }
 
@@ -18303,6 +18363,98 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             public decimal ДоВідвантаженняПрихід { get; set; }
             public decimal ДоВідвантаженняРозхід { get; set; }
             public decimal ДоВідвантаженняЗалишок { get; set; }
+            
+        }            
+    }
+    
+    public class ТовариНаСкладах_Підсумки_TablePart : RegisterAccumulationTablePart
+    {
+        public ТовариНаСкладах_Підсумки_TablePart() : base(Config.Kernel!, "tab_a97",
+              new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6" }) 
+        {
+            Records = new List<Record>();
+        }
+        
+        public const string TABLE = "tab_a97";
+        
+        public const string Номенклатура = "col_a1";
+        public const string ХарактеристикаНоменклатури = "col_a2";
+        public const string Склад = "col_a3";
+        public const string Серія = "col_a4";
+        public const string ВНаявності = "col_a5";
+        public const string ДоВідвантаження = "col_a6";
+        public List<Record> Records { get; set; }
+    
+        public void Read()
+        {
+            Records.Clear();
+            base.BaseRead();
+
+            foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
+            {
+                Record record = new Record();
+                record.UID = (Guid)fieldValue["uid"];
+                
+                record.Номенклатура = new Довідники.Номенклатура_Pointer(fieldValue["col_a1"]);
+                record.ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer(fieldValue["col_a2"]);
+                record.Склад = new Довідники.Склади_Pointer(fieldValue["col_a3"]);
+                record.Серія = new Довідники.СеріїНоменклатури_Pointer(fieldValue["col_a4"]);
+                record.ВНаявності = (fieldValue["col_a5"] != DBNull.Value) ? (decimal)fieldValue["col_a5"] : 0;
+                record.ДоВідвантаження = (fieldValue["col_a6"] != DBNull.Value) ? (decimal)fieldValue["col_a6"] : 0;
+                
+                Records.Add(record);
+            }
+        
+            base.BaseClear();
+        }
+    
+        public void Save(bool clear_all_before_save /*= true*/) 
+        {
+            base.BaseBeginTransaction();
+            
+            if (clear_all_before_save)
+                base.BaseDelete();
+
+            foreach (Record record in Records)
+            {
+                Dictionary<string, object> fieldValue = new Dictionary<string, object>();
+
+                fieldValue.Add("col_a1", record.Номенклатура.UnigueID.UGuid);
+                fieldValue.Add("col_a2", record.ХарактеристикаНоменклатури.UnigueID.UGuid);
+                fieldValue.Add("col_a3", record.Склад.UnigueID.UGuid);
+                fieldValue.Add("col_a4", record.Серія.UnigueID.UGuid);
+                fieldValue.Add("col_a5", record.ВНаявності);
+                fieldValue.Add("col_a6", record.ДоВідвантаження);
+                
+                base.BaseSave(record.UID, fieldValue);
+            }
+            
+            base.BaseCommitTransaction();
+        }
+    
+        public void Delete()
+        {
+            base.BaseDelete();
+        }
+        
+        public class Record : RegisterAccumulationTablePartRecord
+        {
+            public Record()
+            {
+                Номенклатура = new Довідники.Номенклатура_Pointer();
+                ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer();
+                Склад = new Довідники.Склади_Pointer();
+                Серія = new Довідники.СеріїНоменклатури_Pointer();
+                ВНаявності = 0;
+                ДоВідвантаження = 0;
+                
+            }
+            public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
+            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; }
+            public Довідники.Склади_Pointer Склад { get; set; }
+            public Довідники.СеріїНоменклатури_Pointer Серія { get; set; }
+            public decimal ВНаявності { get; set; }
+            public decimal ДоВідвантаження { get; set; }
             
         }            
     }

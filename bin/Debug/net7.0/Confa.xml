@@ -5,7 +5,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>18.01.2023 22:13:33</DateTimeSave>
+  <DateTimeSave>20.01.2023 16:19:29</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -14602,11 +14602,70 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
             </Field>
           </Fields>
         </TablePart>
+        <TablePart>
+          <Name>Підсумки</Name>
+          <Table>tab_a97</Table>
+          <Desc>Віртуальна таблиця</Desc>
+          <Fields>
+            <Field>
+              <Name>Номенклатура</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Номенклатура</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>ХарактеристикаНоменклатури</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Склад</Name>
+              <NameInTable>col_a3</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Склади</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Серія</Name>
+              <NameInTable>col_a4</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.СеріїНоменклатури</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>ВНаявності</Name>
+              <NameInTable>col_a5</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+            <Field>
+              <Name>ДоВідвантаження</Name>
+              <NameInTable>col_a6</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+          </Fields>
+        </TablePart>
       </TabularParts>
       <QueryBlockList>
         <QueryBlock>
           <Name>Залишки</Name>
-          <FinalCalculation>False</FinalCalculation>
+          <FinalCalculation>0</FinalCalculation>
           <Query position="0" key="DELETE">
 DELETE FROM 
     {ТовариНаСкладах_Залишки_TablePart.TABLE}
@@ -14673,7 +14732,7 @@ HAVING
         </QueryBlock>
         <QueryBlock>
           <Name>ЗалишкиТаОбороти</Name>
-          <FinalCalculation>False</FinalCalculation>
+          <FinalCalculation>0</FinalCalculation>
           <Query position="0" key="DELETE">
 DELETE FROM 
     {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.TABLE}
@@ -14752,6 +14811,55 @@ HAVING
     SUM(CASE WHEN ТовариНаСкладах.income = true THEN 
         ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE 
         -ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} END) != 0 
+
+
+
+
+</Query>
+        </QueryBlock>
+        <QueryBlock>
+          <Name>Підсумки</Name>
+          <FinalCalculation>1</FinalCalculation>
+          <Query position="0" key="DELETE">
+DELETE FROM {ТовариНаСкладах_Підсумки_TablePart.TABLE}
+</Query>
+          <Query position="1" key="SELECT">
+INSERT INTO {ТовариНаСкладах_Підсумки_TablePart.TABLE} 
+(
+    uid,
+    {ТовариНаСкладах_Підсумки_TablePart.Номенклатура},
+    {ТовариНаСкладах_Підсумки_TablePart.ХарактеристикаНоменклатури},
+    {ТовариНаСкладах_Підсумки_TablePart.Склад},
+    {ТовариНаСкладах_Підсумки_TablePart.Серія},
+    {ТовариНаСкладах_Підсумки_TablePart.ВНаявності},
+    {ТовариНаСкладах_Підсумки_TablePart.ДоВідвантаження}
+)
+SELECT
+    uuid_generate_v4(),
+    ТовариНаСкладах.{ТовариНаСкладах_Залишки_TablePart.Номенклатура} AS Номенклатура,
+    ТовариНаСкладах.{ТовариНаСкладах_Залишки_TablePart.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
+    ТовариНаСкладах.{ТовариНаСкладах_Залишки_TablePart.Склад} AS Склад,
+    ТовариНаСкладах.{ТовариНаСкладах_Залишки_TablePart.Серія} AS Серія,
+
+    /* ВНаявності */
+    SUM(ТовариНаСкладах.{ТовариНаСкладах_Залишки_TablePart.ВНаявності}) AS ВНаявності,
+
+    /* ДоВідвантаження */
+    SUM(ТовариНаСкладах.{ТовариНаСкладах_Залишки_TablePart.ДоВідвантаження}) AS ДоВідвантаження
+
+FROM
+    {ТовариНаСкладах_Залишки_TablePart.TABLE} AS ТовариНаСкладах
+
+GROUP BY
+Номенклатура, ХарактеристикаНоменклатури, Склад, Серія
+
+HAVING
+
+    /* ВНаявності */
+    SUM(ТовариНаСкладах.{ТовариНаСкладах_Залишки_TablePart.ВНаявності}) != 0  OR 
+
+    /* ДоВідвантаження */
+    SUM(ТовариНаСкладах.{ТовариНаСкладах_Залишки_TablePart.ДоВідвантаження}) != 0 
 
 
 
@@ -14924,7 +15032,7 @@ HAVING
       <QueryBlockList>
         <QueryBlock>
           <Name>Обороти</Name>
-          <FinalCalculation>False</FinalCalculation>
+          <FinalCalculation>0</FinalCalculation>
           <Query position="0" key="DELETE">
 DELETE FROM 
     {РухТоварів_Обороти_TablePart.TABLE}
@@ -15111,7 +15219,7 @@ GROUP BY
       <QueryBlockList>
         <QueryBlock>
           <Name>Залишки</Name>
-          <FinalCalculation>False</FinalCalculation>
+          <FinalCalculation>0</FinalCalculation>
           <Query position="0" key="DELETE">
 DELETE FROM 
     {ЗамовленняКлієнтів_Залишки_TablePart.TABLE}
@@ -15332,7 +15440,7 @@ HAVING
       <QueryBlockList>
         <QueryBlock>
           <Name>Залишки</Name>
-          <FinalCalculation>False</FinalCalculation>
+          <FinalCalculation>0</FinalCalculation>
           <Query position="0" key="DELETE">
 DELETE FROM 
     {РозрахункиЗКлієнтами_Залишки_TablePart.TABLE}
@@ -15382,7 +15490,7 @@ HAVING
         </QueryBlock>
         <QueryBlock>
           <Name>ЗалишкиТаОбороти</Name>
-          <FinalCalculation>False</FinalCalculation>
+          <FinalCalculation>0</FinalCalculation>
           <Query position="0" key="DELETE">
 DELETE FROM 
     {РозрахункиЗКлієнтами_ЗалишкиТаОбороти_TablePart.TABLE}
@@ -15640,7 +15748,7 @@ HAVING
       <QueryBlockList>
         <QueryBlock>
           <Name>Обороти</Name>
-          <FinalCalculation>False</FinalCalculation>
+          <FinalCalculation>0</FinalCalculation>
           <Query position="0" key="DELETE">
 DELETE FROM 
     {Закупівлі_Обороти_TablePart.TABLE}
@@ -15857,7 +15965,7 @@ HAVING
       <QueryBlockList>
         <QueryBlock>
           <Name>Залишки</Name>
-          <FinalCalculation>False</FinalCalculation>
+          <FinalCalculation>0</FinalCalculation>
           <Query position="0" key="DELETE">
 DELETE FROM 
     {ВільніЗалишки_Залишки_TablePart.TABLE}
@@ -16064,7 +16172,7 @@ HAVING
       <QueryBlockList>
         <QueryBlock>
           <Name>Залишки</Name>
-          <FinalCalculation>False</FinalCalculation>
+          <FinalCalculation>0</FinalCalculation>
           <Query position="0" key="DELETE">
 DELETE FROM 
     {ЗамовленняПостачальникам_Залишки_TablePart.TABLE}
@@ -16271,7 +16379,7 @@ HAVING
       <QueryBlockList>
         <QueryBlock>
           <Name>Залишки</Name>
-          <FinalCalculation>False</FinalCalculation>
+          <FinalCalculation>0</FinalCalculation>
           <Query position="0" key="DELETE">
 DELETE FROM 
     {РозрахункиЗПостачальниками_Залишки_TablePart.TABLE}
@@ -16321,7 +16429,7 @@ HAVING
         </QueryBlock>
         <QueryBlock>
           <Name>ЗалишкиТаОбороти</Name>
-          <FinalCalculation>False</FinalCalculation>
+          <FinalCalculation>0</FinalCalculation>
           <Query position="0" key="DELETE">
 DELETE FROM 
     {РозрахункиЗПостачальниками_ЗалишкиТаОбороти_TablePart.TABLE}
@@ -16615,7 +16723,7 @@ HAVING
       <QueryBlockList>
         <QueryBlock>
           <Name>Залишки</Name>
-          <FinalCalculation>False</FinalCalculation>
+          <FinalCalculation>0</FinalCalculation>
           <Query position="0" key="DELETE">
 DELETE FROM 
     {РухКоштів_Залишки_TablePart.TABLE}
@@ -16667,7 +16775,7 @@ HAVING
         </QueryBlock>
         <QueryBlock>
           <Name>ЗалишкиТаОбороти</Name>
-          <FinalCalculation>False</FinalCalculation>
+          <FinalCalculation>0</FinalCalculation>
           <Query position="0" key="DELETE">
 DELETE FROM 
     {РухКоштів_ЗалишкиТаОбороти_TablePart.TABLE}
@@ -17041,7 +17149,7 @@ HAVING
       <QueryBlockList>
         <QueryBlock>
           <Name>Залишки</Name>
-          <FinalCalculation>False</FinalCalculation>
+          <FinalCalculation>0</FinalCalculation>
           <Query position="0" key="DELETE">
 DELETE FROM 
     {ПартіїТоварів_Залишки_TablePart.TABLE}
@@ -17112,7 +17220,7 @@ HAVING
         </QueryBlock>
         <QueryBlock>
           <Name>ЗалишкиТаОбороти</Name>
-          <FinalCalculation>False</FinalCalculation>
+          <FinalCalculation>0</FinalCalculation>
           <Query position="0" key="DELETE">
 DELETE FROM 
     {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.TABLE}
@@ -17617,7 +17725,7 @@ HAVING
       <QueryBlockList>
         <QueryBlock>
           <Name>Обороти</Name>
-          <FinalCalculation>False</FinalCalculation>
+          <FinalCalculation>0</FinalCalculation>
           <Query position="0" key="DELETE">
 DELETE FROM 
     {Продажі_Обороти_TablePart.TABLE}
@@ -17910,7 +18018,7 @@ HAVING
       <QueryBlockList>
         <QueryBlock>
           <Name>ЗалишкиТаОбороти</Name>
-          <FinalCalculation>False</FinalCalculation>
+          <FinalCalculation>0</FinalCalculation>
           <Query position="0" key="DELETE">
 DELETE FROM 
     {ТовариВКомірках_ЗалишкиТаОбороти_TablePart.TABLE}
@@ -17976,7 +18084,7 @@ HAVING
         </QueryBlock>
         <QueryBlock>
           <Name>Залишки</Name>
-          <FinalCalculation>False</FinalCalculation>
+          <FinalCalculation>0</FinalCalculation>
           <Query position="0" key="DELETE">
 DELETE FROM 
     {ТовариВКомірках_Залишки_TablePart.TABLE}

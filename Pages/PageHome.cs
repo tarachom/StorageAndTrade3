@@ -58,7 +58,9 @@ namespace StorageAndTrade
                 {
                     if (!Константи.Системні.ЗупинитиФоновіЗадачі_Const)
                     {
-                        Config.Kernel!.DataBase.SpetialTableRegAccumTrigerExecute(VirtualTablesСalculation.Execute);
+                        Config.Kernel!.DataBase.SpetialTableRegAccumTrigerExecute(
+                            VirtualTablesСalculation.Execute, 
+                            VirtualTablesСalculation.ExecuteFinalCalculation);
                     }
 
                     counter = 0;
