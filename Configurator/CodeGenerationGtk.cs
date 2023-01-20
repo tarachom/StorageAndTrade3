@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 20.01.2023 16:19:29
+ * Дата конфігурації: 20.01.2023 16:36:00
  *
  */
  
@@ -145,7 +145,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
     #region DIRECTORY "Номенклатура"
     
       
-    public class Номенклатура_Записи
+    public class Номенклатура_ЗаписиПрототип
     {
         string Image = "images/doc.png";
         string ID = "";
@@ -153,23 +153,19 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         string Код = "";
         string Назва = "";
         string ОдиницяВиміру = "";
-        string Виробник = "";
         string ТипНоменклатури = "";
-        string ВидНоменклатури = "";
 
         Array ToArray()
         {
             return new object[] { new Gdk.Pixbuf(Image), ID 
-            /* */ , Код, Назва, ОдиницяВиміру, Виробник, ТипНоменклатури, ВидНоменклатури };
+            /* */ , Код, Назва, ОдиницяВиміру, ТипНоменклатури };
         }
 
         public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */
             , typeof(string) /* Код */
             , typeof(string) /* Назва */
             , typeof(string) /* ОдиницяВиміру */
-            , typeof(string) /* Виробник */
             , typeof(string) /* ТипНоменклатури */
-            , typeof(string) /* ВидНоменклатури */
             );
 
         public static void AddColumns(TreeView treeView)
@@ -179,10 +175,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             /* */
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
             treeView.AppendColumn(new TreeViewColumn("Номенклатура", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
-            treeView.AppendColumn(new TreeViewColumn("Одиниця пакування", new CellRendererText() { Xpad = 4 }, "text", 4) { SortColumnId = 4 } ); /*ОдиницяВиміру*/
-            treeView.AppendColumn(new TreeViewColumn("Виробник", new CellRendererText() { Xpad = 4 }, "text", 5) { SortColumnId = 5 } ); /*Виробник*/
-            treeView.AppendColumn(new TreeViewColumn("Тип", new CellRendererText() { Xpad = 4 }, "text", 6) { SortColumnId = 6 } ); /*ТипНоменклатури*/
-            treeView.AppendColumn(new TreeViewColumn("Вид", new CellRendererText() { Xpad = 4 }, "text", 7) { SortColumnId = 7 } ); /*ВидНоменклатури*/
+            treeView.AppendColumn(new TreeViewColumn("Пакування", new CellRendererText() { Xpad = 4 }, "text", 4) { SortColumnId = 4 } ); /*ОдиницяВиміру*/
+            treeView.AppendColumn(new TreeViewColumn("Тип", new CellRendererText() { Xpad = 4 }, "text", 5) { SortColumnId = 5 } ); /*ТипНоменклатури*/
             
         }
 
@@ -223,22 +217,6 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                   Номенклатура_Select.QuerySelect.FieldAndAlias.Add(
                     new NameValue<string>("join_tab_1." + Довідники.ПакуванняОдиниціВиміру_Const.Назва, "join_tab_1_field_1"));
                   
-                /* Join Table */
-                Номенклатура_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Виробники_Const.TABLE, Довідники.Номенклатура_Const.Виробник, Номенклатура_Select.QuerySelect.Table, "join_tab_2"));
-                
-                  /* Field */
-                  Номенклатура_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>("join_tab_2." + Довідники.Виробники_Const.Назва, "join_tab_2_field_1"));
-                  
-                /* Join Table */
-                Номенклатура_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.ВидиНоменклатури_Const.TABLE, Довідники.Номенклатура_Const.ВидНоменклатури, Номенклатура_Select.QuerySelect.Table, "join_tab_3"));
-                
-                  /* Field */
-                  Номенклатура_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>("join_tab_3." + Довідники.ВидиНоменклатури_Const.Назва, "join_tab_3_field_1"));
-                  
 
             /* SELECT */
             Номенклатура_Select.Select();
@@ -248,12 +226,10 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                 if (cur != null)
                 {
-                    Номенклатура_Записи Record = new Номенклатура_Записи
+                    Номенклатура_ЗаписиПрототип Record = new Номенклатура_ЗаписиПрототип
                     {
                         ID = cur.UnigueID.ToString(),
                         ОдиницяВиміру = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
-                        Виробник = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
-                        ВидНоменклатури = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
                         Код = cur.Fields?[Номенклатура_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[Номенклатура_Const.Назва]?.ToString() ?? "", /**/
                         ТипНоменклатури = ((Перелічення.ТипиНоменклатури)(cur.Fields?[Номенклатура_Const.ТипНоменклатури]! != DBNull.Value ? cur.Fields?[Номенклатура_Const.ТипНоменклатури]! : 0)).ToString() /**/

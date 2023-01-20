@@ -5,7 +5,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>20.01.2023 16:19:29</DateTimeSave>
+  <DateTimeSave>20.01.2023 16:36:00</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -1316,7 +1316,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       </TabularParts>
       <TabularLists>
         <TabularList>
-          <Name>Записи</Name>
+          <Name>ЗаписиПрототип</Name>
           <Desc>
           </Desc>
           <Fields>
@@ -1342,7 +1342,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
             </Field>
             <Field>
               <Name>ОдиницяВиміру</Name>
-              <Caption>Одиниця пакування</Caption>
+              <Caption>Пакування</Caption>
               <Size>0</Size>
               <SortNum>3</SortNum>
               <SortField>False</SortField>
@@ -1359,24 +1359,6 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               </FieldAndAlias>
             </Field>
             <Field>
-              <Name>Виробник</Name>
-              <Caption>Виробник</Caption>
-              <Size>0</Size>
-              <SortNum>4</SortNum>
-              <SortField>False</SortField>
-              <Type>pointer</Type>
-              <Pointer>Довідники.Виробники</Pointer>
-              <Join>
-                <table>Довідники.Виробники_Const.TABLE</table>
-                <field>Виробник</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.Виробники_Const.Назва</field>
-              </FieldAndAlias>
-            </Field>
-            <Field>
               <Name>ТипНоменклатури</Name>
               <Caption>Тип</Caption>
               <Size>0</Size>
@@ -1384,24 +1366,6 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <SortField>False</SortField>
               <Type>enum</Type>
               <Pointer>Перелічення.ТипиНоменклатури</Pointer>
-            </Field>
-            <Field>
-              <Name>ВидНоменклатури</Name>
-              <Caption>Вид</Caption>
-              <Size>0</Size>
-              <SortNum>6</SortNum>
-              <SortField>False</SortField>
-              <Type>pointer</Type>
-              <Pointer>Довідники.ВидиНоменклатури</Pointer>
-              <Join>
-                <table>Довідники.ВидиНоменклатури_Const.TABLE</table>
-                <field>ВидНоменклатури</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.ВидиНоменклатури_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
           </Fields>
         </TabularList>
