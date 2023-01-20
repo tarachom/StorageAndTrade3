@@ -49,7 +49,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         }
 
         public static List<Where> Where { get; set; } = new List<Where>();
-
+        
         public static Довідники.Номенклатура_Pointer? DirectoryPointerItem { get; set; }
         public static Довідники.Номенклатура_Pointer? SelectPointerItem { get; set; }
         public static TreePath? SelectPath;

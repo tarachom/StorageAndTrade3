@@ -45,7 +45,7 @@ namespace StorageAndTrade
         TreeView TreeViewGrid;
         Номенклатура_Папки_Дерево ДеревоПапок;
         CheckButton checkButtonIsHierarchy = new CheckButton("Враховувати ієрархію папок") { Active = true };
-        SearchControl ПошукПоНазві = new SearchControl();
+        SearchControl2 ПошукПовнотекстовий = new SearchControl2();
 
         public Номенклатура(bool IsSelectPointer = false) : base()
         {
@@ -80,23 +80,17 @@ namespace StorageAndTrade
 
             PackStart(hBoxBotton, false, false, 10);
 
-
-
-            //Пошук
-            hBoxBotton.PackStart(ПошукПоНазві, false, false, 2);
-            ПошукПоНазві.QueryFind = ПошуковіЗапити.Номенклатура;
-            ПошукПоНазві.Select = (UnigueID uid) =>
-            {
-                SelectPointerItem = new Номенклатура_Pointer(uid);
-                LoadTree();
-            };
+            //Пошук 2
+            hBoxBotton.PackStart(ПошукПовнотекстовий, false, false, 2);
+            ПошукПовнотекстовий.Select = LoadRecords_OnSearch;
+            ПошукПовнотекстовий.Clear = LoadRecords;
 
             //Характеристики
             LinkButton linkButtonHar = new LinkButton(" Характеристики номеклатури") { Halign = Align.Start, Image = new Image("images/doc.png"), AlwaysShowImage = true };
             linkButtonHar.Clicked += (object? sender, EventArgs args) =>
             {
                 ХарактеристикиНоменклатури page = new ХарактеристикиНоменклатури();
-                
+
                 if (SelectPointerItem != null)
                     page.НоменклатураВласник.Pointer = SelectPointerItem;
 
@@ -186,6 +180,31 @@ namespace StorageAndTrade
             {
                 ТабличніСписки.Номенклатура_Записи.Where.Add(new Where(Номенклатура_Const.Папка, Comparison.EQ, ДеревоПапок.Parent_Pointer.UnigueID.UGuid));
             }
+
+            ТабличніСписки.Номенклатура_Записи.LoadRecords();
+
+            if (ТабличніСписки.Номенклатура_Записи.SelectPath != null)
+                TreeViewGrid.SetCursor(ТабличніСписки.Номенклатура_Записи.SelectPath, TreeViewGrid.Columns[0], false);
+        }
+
+        void LoadRecords_OnSearch(string searchText)
+        {
+            searchText = searchText.ToLower().Trim();
+
+            if (searchText.Length <= 1)
+                return;
+
+            searchText = "%" + searchText.Replace(" ", "%") + "%";
+
+            ТабличніСписки.Номенклатура_Записи.Where.Clear();
+
+            //Код
+            ТабличніСписки.Номенклатура_Записи.Where.Add(
+                new Where(Номенклатура_Const.Код, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
+
+            //Назва
+            ТабличніСписки.Номенклатура_Записи.Where.Add(
+                new Where(Comparison.OR, Номенклатура_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
             ТабличніСписки.Номенклатура_Записи.LoadRecords();
 
