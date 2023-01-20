@@ -15,11 +15,12 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         string ОдиницяВиміру = "";
         string ТипНоменклатури = "";
         string Залишок = "";
+        string ЗалишокВКомірках = "";
 
         Array ToArray()
         {
             return new object[] { new Gdk.Pixbuf(Image), ID 
-            /* */ , Код, Назва, ОдиницяВиміру, ТипНоменклатури, Залишок };
+            /* */ , Код, Назва, ОдиницяВиміру, ТипНоменклатури, Залишок, ЗалишокВКомірках };
         }
 
         public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */
@@ -28,6 +29,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             , typeof(string) /* ОдиницяВиміру */
             , typeof(string) /* ТипНоменклатури */
             , typeof(string)  /* Залишок */
+            , typeof(string)  /* ЗалишокВКомірках */
             );
 
         public static void AddColumns(TreeView treeView)
@@ -40,6 +42,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Пакування", new CellRendererText() { Xpad = 4 }, "text", 4) { SortColumnId = 4 }); /*ОдиницяВиміру*/
             treeView.AppendColumn(new TreeViewColumn("Тип", new CellRendererText() { Xpad = 4 }, "text", 5) { SortColumnId = 5 }); /*ТипНоменклатури*/
             treeView.AppendColumn(new TreeViewColumn("Залишок", new CellRendererText() { Xpad = 4, Xalign = 1 }, "text", 6) { SortColumnId = 6, Alignment = 1 }); /*Залишок*/
+            treeView.AppendColumn(new TreeViewColumn("В комірках", new CellRendererText() { Xpad = 4, Xalign = 1 }, "text", 7) { SortColumnId = 7, Alignment = 1 }); /*ЗалишокВКомірках*/
 
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
@@ -96,7 +99,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                 {ТовариНаСкладах_Підсумки_TablePart.TABLE} AS ТовариНаСкладах
             WHERE
                 ТовариНаСкладах.{ТовариНаСкладах_Підсумки_TablePart.Номенклатура} = {Довідники.Номенклатура_Const.TABLE}.uid
-            Group By Номенклатура
+            GROUP BY Номенклатура
         )
         SELECT 
             ROUND(ВНаявності, 1) AS ВНаявності 
@@ -105,6 +108,30 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
     )
 END)
 ", "salishok"));
+
+            /* Field ЗалишокВКомірках */
+            Номенклатура_Select.QuerySelect.FieldAndAlias.Add(
+              new NameValue<string>(@$"
+(CASE WHEN {Довідники.Номенклатура_Const.TABLE}.{Довідники.Номенклатура_Const.ТипНоменклатури} = {(int)Перелічення.ТипиНоменклатури.Товар} THEN
+	(
+        WITH Залишки AS 
+        (
+            SELECT
+                ТовариВКомірках.{ТовариВКомірках_Підсумки_TablePart.Номенклатура} AS Номенклатура,
+                SUM(ТовариВКомірках.{ТовариВКомірках_Підсумки_TablePart.ВНаявності} ) AS ВНаявності
+            FROM
+                {ТовариВКомірках_Підсумки_TablePart.TABLE} AS ТовариВКомірках
+            WHERE
+                ТовариВКомірках.{ТовариВКомірках_Підсумки_TablePart.Номенклатура} = {Довідники.Номенклатура_Const.TABLE}.uid
+            GROUP BY Номенклатура
+        )
+        SELECT 
+            ROUND(ВНаявності, 1) AS ВНаявності 
+        FROM 
+            Залишки
+    )
+END)
+", "salishok_v_komirkach"));
 
             /* SELECT */
             Номенклатура_Select.Select();
@@ -121,7 +148,8 @@ END)
                         Код = cur.Fields?[Номенклатура_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[Номенклатура_Const.Назва]?.ToString() ?? "", /**/
                         ТипНоменклатури = ((Перелічення.ТипиНоменклатури)(cur.Fields?[Номенклатура_Const.ТипНоменклатури]! != DBNull.Value ? cur.Fields?[Номенклатура_Const.ТипНоменклатури]! : 0)).ToString(), /**/
-                        Залишок = cur.Fields?["salishok"]?.ToString() ?? "" /**/
+                        Залишок = cur.Fields?["salishok"]?.ToString() ?? "", /**/
+                        ЗалишокВКомірках = cur.Fields?["salishok_v_komirkach"]?.ToString() ?? ""
                     };
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());

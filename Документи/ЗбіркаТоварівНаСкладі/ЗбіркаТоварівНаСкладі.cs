@@ -197,7 +197,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"Реалізація товарів та послуг: *", () =>
+                Program.GeneralForm?.CreateNotebookPage($"Збірка товарів на складі: *", () =>
                 {
                     ЗбіркаТоварівНаСкладі_Елемент page = new ЗбіркаТоварівНаСкладі_Елемент
                     {

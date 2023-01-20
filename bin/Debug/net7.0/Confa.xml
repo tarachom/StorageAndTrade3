@@ -5,7 +5,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>20.01.2023 16:36:00</DateTimeSave>
+  <DateTimeSave>20.01.2023 17:10:03</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -16683,6 +16683,48 @@ HAVING
             </Field>
           </Fields>
         </TablePart>
+        <TablePart>
+          <Name>Підсумки</Name>
+          <Table>tab_a99</Table>
+          <Desc>Віртуальна таблиця</Desc>
+          <Fields>
+            <Field>
+              <Name>Організація</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Організації</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Каса</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Каси</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Валюта</Name>
+              <NameInTable>col_a3</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Валюти</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Сума</Name>
+              <NameInTable>col_a4</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+          </Fields>
+        </TablePart>
       </TabularParts>
       <QueryBlockList>
         <QueryBlock>
@@ -16793,6 +16835,46 @@ HAVING
     SUM(CASE WHEN РухКоштів.income = true THEN 
         РухКоштів.{РухКоштів_Const.Сума} ELSE 
         -РухКоштів.{РухКоштів_Const.Сума} END) != 0 
+
+
+
+
+</Query>
+        </QueryBlock>
+        <QueryBlock>
+          <Name>Підсумки</Name>
+          <FinalCalculation>1</FinalCalculation>
+          <Query position="0" key="DELETE">
+DELETE FROM {РухКоштів_Підсумки_TablePart.TABLE}
+</Query>
+          <Query position="1" key="SELECT">
+INSERT INTO {РухКоштів_Підсумки_TablePart.TABLE} 
+(
+    uid,
+    {РухКоштів_Підсумки_TablePart.Організація},
+    {РухКоштів_Підсумки_TablePart.Каса},
+    {РухКоштів_Підсумки_TablePart.Валюта},
+    {РухКоштів_Підсумки_TablePart.Сума}
+)
+SELECT
+    uuid_generate_v4(),
+    РухКоштів.{РухКоштів_Залишки_TablePart.Організація} AS Організація,
+    РухКоштів.{РухКоштів_Залишки_TablePart.Каса} AS Каса,
+    РухКоштів.{РухКоштів_Залишки_TablePart.Валюта} AS Валюта,
+
+    /* Сума */
+    SUM(РухКоштів.{РухКоштів_Залишки_TablePart.Сума}) AS Сума
+
+FROM
+    {РухКоштів_Залишки_TablePart.TABLE} AS РухКоштів
+
+GROUP BY
+Організація, Каса, Валюта
+
+HAVING
+
+    /* Сума */
+    SUM(РухКоштів.{РухКоштів_Залишки_TablePart.Сума}) != 0 
 
 
 
@@ -17978,6 +18060,66 @@ HAVING
             </Field>
           </Fields>
         </TablePart>
+        <TablePart>
+          <Name>Підсумки</Name>
+          <Table>tab_a98</Table>
+          <Desc>Віртуальна таблиця</Desc>
+          <Fields>
+            <Field>
+              <Name>Номенклатура</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Номенклатура</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>ХарактеристикаНоменклатури</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Пакування</Name>
+              <NameInTable>col_a3</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Комірка</Name>
+              <NameInTable>col_a4</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.СкладськіКомірки</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>Серія</Name>
+              <NameInTable>col_a5</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.СеріїНоменклатури</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+            </Field>
+            <Field>
+              <Name>ВНаявності</Name>
+              <NameInTable>col_a6</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+          </Fields>
+        </TablePart>
       </TabularParts>
       <QueryBlockList>
         <QueryBlock>
@@ -18096,6 +18238,50 @@ HAVING
     SUM(CASE WHEN ТовариВКомірках.income = true THEN 
         ТовариВКомірках.{ТовариВКомірках_Const.ВНаявності} ELSE 
         -ТовариВКомірках.{ТовариВКомірках_Const.ВНаявності} END) != 0 
+
+
+
+
+</Query>
+        </QueryBlock>
+        <QueryBlock>
+          <Name>Підсумки</Name>
+          <FinalCalculation>1</FinalCalculation>
+          <Query position="0" key="DELETE">
+DELETE FROM {ТовариВКомірках_Підсумки_TablePart.TABLE}
+</Query>
+          <Query position="1" key="SELECT">
+INSERT INTO {ТовариВКомірках_Підсумки_TablePart.TABLE} 
+(
+    uid,
+    {ТовариВКомірках_Підсумки_TablePart.Номенклатура},
+    {ТовариВКомірках_Підсумки_TablePart.ХарактеристикаНоменклатури},
+    {ТовариВКомірках_Підсумки_TablePart.Пакування},
+    {ТовариВКомірках_Підсумки_TablePart.Комірка},
+    {ТовариВКомірках_Підсумки_TablePart.Серія},
+    {ТовариВКомірках_Підсумки_TablePart.ВНаявності}
+)
+SELECT
+    uuid_generate_v4(),
+    ТовариВКомірках.{ТовариВКомірках_Залишки_TablePart.Номенклатура} AS Номенклатура,
+    ТовариВКомірках.{ТовариВКомірках_Залишки_TablePart.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
+    ТовариВКомірках.{ТовариВКомірках_Залишки_TablePart.Пакування} AS Пакування,
+    ТовариВКомірках.{ТовариВКомірках_Залишки_TablePart.Комірка} AS Комірка,
+    ТовариВКомірках.{ТовариВКомірках_Залишки_TablePart.Серія} AS Серія,
+
+    /* ВНаявності */
+    SUM(ТовариВКомірках.{ТовариВКомірках_Залишки_TablePart.ВНаявності}) AS ВНаявності
+
+FROM
+    {ТовариВКомірках_Залишки_TablePart.TABLE} AS ТовариВКомірках
+
+GROUP BY
+Номенклатура, ХарактеристикаНоменклатури, Пакування, Комірка, Серія
+
+HAVING
+
+    /* ВНаявності */
+    SUM(ТовариВКомірках.{ТовариВКомірках_Залишки_TablePart.ВНаявності}) != 0 
 
 
 
