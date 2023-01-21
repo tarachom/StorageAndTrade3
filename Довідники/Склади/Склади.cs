@@ -206,7 +206,7 @@ namespace StorageAndTrade
                     page.SetValue();
 
                     return page;
-                });
+                }, true);
             }
             else
             {
@@ -225,7 +225,7 @@ namespace StorageAndTrade
                         page.SetValue();
 
                         return page;
-                    });
+                    }, true);
                 }
                 else
                     Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
@@ -365,14 +365,6 @@ namespace StorageAndTrade
         void OnCheckButtonIsHierarchyClicked(object? sender, EventArgs args)
         {
             LoadRecords();
-        }
-
-        void OnEntrySearchKeyRelease(object? sender, KeyReleaseEventArgs args)
-        {
-            if (args.Event.Key == Gdk.Key.Return || args.Event.Key == Gdk.Key.KP_Enter)
-            {
-
-            }
         }
 
         #endregion

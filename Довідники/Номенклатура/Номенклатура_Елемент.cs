@@ -263,7 +263,7 @@ namespace StorageAndTrade
             Номенклатура_Objest.Save();
             Файли.SaveRecords();
 
-            Program.GeneralForm?.RenameCurrentPageNotebook($"Контрагент: {Номенклатура_Objest.Назва}");
+            Program.GeneralForm?.RenameCurrentPageNotebook($"Номенклатура: {Номенклатура_Objest.Назва}");
 
             if (PageList != null)
             {

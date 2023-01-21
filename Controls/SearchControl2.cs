@@ -34,31 +34,13 @@ namespace StorageAndTrade
 {
     class SearchControl2 : HBox
     {
-        Label labelCaption = new Label("Пошук:");
-        Entry entrySearch = new Entry();
+        SearchEntry entrySearch = new SearchEntry() { WidthRequest = 200 };
 
         public SearchControl2() : base()
         {
-            PackStart(labelCaption, false, false, 2);
-
             entrySearch.KeyReleaseEvent += OnKeyReleaseEntrySearch;
+            entrySearch.TextDeleted += OnClear;
             PackStart(entrySearch, false, false, 2);
-
-            Button bClear = new Button(new Image("images/clean.png"));
-            bClear.Clicked += OnClear;
-            PackStart(bClear, false, false, 2);
-        }
-
-        public string Caption
-        {
-            get
-            {
-                return labelCaption.Text;
-            }
-            set
-            {
-                labelCaption.Text = value;
-            }
         }
 
         public System.Action<string>? Select { get; set; }

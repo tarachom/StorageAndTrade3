@@ -207,7 +207,7 @@ namespace StorageAndTrade
                     page.SetValue();
 
                     return page;
-                });
+                }, true);
             }
             else
             {
@@ -226,7 +226,7 @@ namespace StorageAndTrade
                         page.SetValue();
 
                         return page;
-                    });
+                    }, true);
                 }
                 else
                     Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
