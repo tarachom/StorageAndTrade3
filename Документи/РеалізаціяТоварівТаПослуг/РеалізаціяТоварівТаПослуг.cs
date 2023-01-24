@@ -110,25 +110,30 @@ namespace StorageAndTrade
             Toolbar toolbar = new Toolbar();
             PackStart(toolbar, false, false, 0);
 
-            ToolButton addButton = new ToolButton(Stock.Add) { Label = "Додати", IsImportant = true };
+            ToolButton addButton = new ToolButton(Stock.Add) { TooltipText = "Додати" };
             addButton.Clicked += OnAddClick;
             toolbar.Add(addButton);
 
-            ToolButton upButton = new ToolButton(Stock.Edit) { Label = "Редагувати", IsImportant = true };
+            ToolButton upButton = new ToolButton(Stock.Edit) { TooltipText = "Редагувати" };
             upButton.Clicked += OnEditClick;
             toolbar.Add(upButton);
 
-            ToolButton copyButton = new ToolButton(Stock.Copy) { Label = "Копіювати", IsImportant = true };
+            ToolButton copyButton = new ToolButton(Stock.Copy) { TooltipText = "Копіювати" };
             copyButton.Clicked += OnCopyClick;
             toolbar.Add(copyButton);
 
-            ToolButton deleteButton = new ToolButton(Stock.Delete) { Label = "Видалити", IsImportant = true };
+            ToolButton deleteButton = new ToolButton(Stock.Delete) { TooltipText = "Видалити" };
             deleteButton.Clicked += OnDeleteClick;
             toolbar.Add(deleteButton);
 
-            ToolButton refreshButton = new ToolButton(Stock.Refresh) { Label = "Обновити", IsImportant = true };
+            ToolButton refreshButton = new ToolButton(Stock.Refresh) { TooltipText = "Обновити" };
             refreshButton.Clicked += OnRefreshClick;
             toolbar.Add(refreshButton);
+
+            //Separator
+            ToolItem toolItemSeparator = new ToolItem();
+            toolItemSeparator.Add(new Separator(Orientation.Horizontal));
+            toolbar.Add(toolItemSeparator);
 
             MenuToolButton provodkyButton = new MenuToolButton(Stock.Find) { Label = "Проводки", IsImportant = true };
             provodkyButton.Clicked += OnReportSpendTheDocumentClick;
@@ -164,7 +169,7 @@ namespace StorageAndTrade
 
             {
                 MenuItem doc = new MenuItem("Прихідний касовий ордер");
-                doc.Activated += OnNewDocNaOsnovi_KasovyiOrder;
+                doc.Activated += OnNewDocNaOsnovi_КасовийОрдер;
                 Menu.Append(doc);
             }
 
@@ -507,7 +512,7 @@ namespace StorageAndTrade
             }
         }
 
-        void OnNewDocNaOsnovi_KasovyiOrder(object? sender, EventArgs args)
+        void OnNewDocNaOsnovi_КасовийОрдер(object? sender, EventArgs args)
         {
             if (TreeViewGrid.Selection.CountSelectedRows() != 0)
             {

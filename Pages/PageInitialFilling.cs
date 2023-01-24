@@ -27,7 +27,6 @@ limitations under the License.
 
 using Gtk;
 
-using StorageAndTrade_1_0;
 using Константи = StorageAndTrade_1_0.Константи;
 using StorageAndTrade_1_0.Довідники;
 
@@ -77,14 +76,20 @@ namespace StorageAndTrade
 
             hBoxBotton.PackStart(bStop, false, false, 10);
 
-            //Показувати при запуску
-            visibleOnSart = new Switch() { HeightRequest = 20 };
+            //Показувати при запуску -->
+            VBox vBoxSwitch = new VBox();
+
+            HBox hBoxSwitch = new HBox();
+            vBoxSwitch.PackStart(hBoxSwitch, false, false, 0);
+
+            visibleOnSart = new Switch() { HeightRequest = 20, Active = !Константи.ПриЗапускуПрограми.ПрограмаЗаповненаПочатковимиДаними_Const };
             visibleOnSart.ButtonReleaseEvent += (object? sender, ButtonReleaseEventArgs args) => { Константи.ПриЗапускуПрограми.ПрограмаЗаповненаПочатковимиДаними_Const = visibleOnSart.Active; };
-            visibleOnSart.Active = !Константи.ПриЗапускуПрограми.ПрограмаЗаповненаПочатковимиДаними_Const;
 
-            hBoxBotton.PackEnd(new Label("Показувати при запуску"), false, false, 10);
-            hBoxBotton.PackEnd(visibleOnSart, false, false, 10);
+            hBoxSwitch.PackStart(visibleOnSart, false, false, 0);
+            hBoxSwitch.PackStart(new Label("Показувати при запуску"), false, false, 10);
 
+            hBoxBotton.PackEnd(vBoxSwitch, false, false, 10);
+            //<-- Показувати при запуску
 
             PackStart(hBoxBotton, false, false, 10);
 
@@ -108,7 +113,7 @@ namespace StorageAndTrade
         {
             ButtonSensitive(false);
 
-            string initialFillingXmlFilePath = System.IO.Path.Combine(AppContext.BaseDirectory, "InitialFilling.xml");
+            string initialFillingXmlFilePath = System.IO.Path.Combine(AppContext.BaseDirectory, "template/InitialFilling.xml");
 
             if (File.Exists(initialFillingXmlFilePath))
             {

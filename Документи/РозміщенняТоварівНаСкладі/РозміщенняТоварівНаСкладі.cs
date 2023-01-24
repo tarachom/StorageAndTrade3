@@ -110,30 +110,45 @@ namespace StorageAndTrade
             Toolbar toolbar = new Toolbar();
             PackStart(toolbar, false, false, 0);
 
-            ToolButton addButton = new ToolButton(Stock.Add) { Label = "Додати", IsImportant = true };
+            ToolButton addButton = new ToolButton(Stock.Add) { TooltipText = "Додати" };
             addButton.Clicked += OnAddClick;
             toolbar.Add(addButton);
 
-            ToolButton upButton = new ToolButton(Stock.Edit) { Label = "Редагувати", IsImportant = true };
+            ToolButton upButton = new ToolButton(Stock.Edit) { TooltipText = "Редагувати" };
             upButton.Clicked += OnEditClick;
             toolbar.Add(upButton);
 
-            ToolButton copyButton = new ToolButton(Stock.Copy) { Label = "Копіювати", IsImportant = true };
+            ToolButton copyButton = new ToolButton(Stock.Copy) { TooltipText = "Копіювати" };
             copyButton.Clicked += OnCopyClick;
             toolbar.Add(copyButton);
 
-            ToolButton deleteButton = new ToolButton(Stock.Delete) { Label = "Видалити", IsImportant = true };
+            ToolButton deleteButton = new ToolButton(Stock.Delete) { TooltipText = "Видалити" };
             deleteButton.Clicked += OnDeleteClick;
             toolbar.Add(deleteButton);
 
-            ToolButton refreshButton = new ToolButton(Stock.Refresh) { Label = "Обновити", IsImportant = true };
+            ToolButton refreshButton = new ToolButton(Stock.Refresh) { TooltipText = "Обновити" };
             refreshButton.Clicked += OnRefreshClick;
             toolbar.Add(refreshButton);
+
+            //Separator
+            ToolItem toolItemSeparator = new ToolItem();
+            toolItemSeparator.Add(new Separator(Orientation.Horizontal));
+            toolbar.Add(toolItemSeparator);
 
             MenuToolButton provodkyButton = new MenuToolButton(Stock.Find) { Label = "Проводки", IsImportant = true };
             provodkyButton.Clicked += OnReportSpendTheDocumentClick;
             provodkyButton.Menu = ToolbarProvodkySubMenu();
             toolbar.Add(provodkyButton);
+
+            MenuToolButton printingButton = new MenuToolButton(Stock.Print){ TooltipText = "Друк" };
+            printingButton.Clicked += OnPrintingClick;
+            printingButton.Menu = ToolbarPrintingSubMenu();
+            toolbar.Add(printingButton);
+
+            MenuToolButton exportButton = new MenuToolButton(Stock.Convert) { Label = "Експорт", IsImportant = true };
+            exportButton.Clicked += OnExportClick;
+            exportButton.Menu = ToolbarExportSubMenu();
+            toolbar.Add(exportButton);
         }
 
         Menu ToolbarProvodkySubMenu()
@@ -170,6 +185,33 @@ namespace StorageAndTrade
             return Menu;
         }
 
+        Menu ToolbarPrintingSubMenu()
+        {
+            Menu Menu = new Menu();
+
+            MenuItem invoiceButton = new MenuItem("Накладна на розміщення товарів");
+            invoiceButton.Activated += OnPrintingInvoiceClick;
+            Menu.Append(invoiceButton);
+
+            Menu.ShowAll();
+
+            return Menu;
+        }
+
+        Menu ToolbarExportSubMenu()
+        {
+            Menu Menu = new Menu();
+
+            MenuItem exportXMLButton = new MenuItem("Формат XML");
+            exportXMLButton.Activated += OnExportXMLClick;
+            Menu.Append(exportXMLButton);
+
+            Menu.ShowAll();
+
+            return Menu;
+        }
+
+
         #endregion
 
         public void SetValue()
@@ -197,7 +239,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"Реалізація товарів та послуг: *", () =>
+                Program.GeneralForm?.CreateNotebookPage($"Розміщення товарів на складі: *", () =>
                 {
                     РозміщенняТоварівНаСкладі_Елемент page = new РозміщенняТоварівНаСкладі_Елемент
                     {
@@ -459,6 +501,44 @@ namespace StorageAndTrade
         void OnClearSpend(object? sender, EventArgs args)
         {
             SpendTheDocumentOrClear(false);
+        }
+
+        //
+        // Export
+        //
+
+        void OnExportClick(object? sender, EventArgs arg)
+        {
+            if (sender != null)
+            {
+                MenuToolButton menuToolButton = (MenuToolButton)sender;
+                Menu Menu = (Menu)menuToolButton.Menu;
+                Menu.Popup();
+            }
+        }
+
+        void OnExportXMLClick(object? sender, EventArgs arg)
+        {
+
+        }
+
+        //
+        // Друк
+        //
+
+        void OnPrintingClick(object? sender, EventArgs arg)
+        {
+            if (sender != null)
+            {
+                MenuToolButton menuToolButton = (MenuToolButton)sender;
+                Menu Menu = (Menu)menuToolButton.Menu;
+                Menu.Popup();
+            }
+        }
+
+        void OnPrintingInvoiceClick(object? sender, EventArgs arg)
+        {
+
         }
 
         #endregion
