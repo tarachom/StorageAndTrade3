@@ -159,9 +159,6 @@ namespace StorageAndTrade
                 new Where(Comparison.OR, Валюти_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
             ТабличніСписки.Валюти_Записи.LoadRecords();
-
-            if (ТабличніСписки.Валюти_Записи.SelectPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.Валюти_Записи.SelectPath, TreeViewGrid.Columns[0], false);
         }
 
         void OpenPageElement(bool IsNew, string uid = "")

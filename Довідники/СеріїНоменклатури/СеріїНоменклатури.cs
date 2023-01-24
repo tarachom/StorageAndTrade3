@@ -154,9 +154,6 @@ SearchControl2 ПошукПовнотекстовий = new SearchControl2();
                 new Where(СеріїНоменклатури_Const.Номер, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
             ТабличніСписки.СеріїНоменклатури_Записи.LoadRecords();
-
-            if (ТабличніСписки.СеріїНоменклатури_Записи.SelectPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.СеріїНоменклатури_Записи.SelectPath, TreeViewGrid.Columns[0], false);
         }
 
         void OpenPageElement(bool IsNew, string uid = "")

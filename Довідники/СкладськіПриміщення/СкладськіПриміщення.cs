@@ -182,9 +182,6 @@ namespace StorageAndTrade
                 new Where(СкладськіПриміщення_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
             ТабличніСписки.СкладськіПриміщення_Записи.LoadRecords();
-
-            if (ТабличніСписки.СкладськіПриміщення_Записи.SelectPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.СкладськіПриміщення_Записи.SelectPath, TreeViewGrid.Columns[0], false);
         }
 
         void OpenPageElement(bool IsNew, string uid = "")

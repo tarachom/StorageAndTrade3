@@ -155,9 +155,6 @@ namespace StorageAndTrade
                 new Where(ПакуванняОдиниціВиміру_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
             ТабличніСписки.ПакуванняОдиниціВиміру_Записи.LoadRecords();
-
-            if (ТабличніСписки.ПакуванняОдиниціВиміру_Записи.SelectPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.ПакуванняОдиниціВиміру_Записи.SelectPath, TreeViewGrid.Columns[0], false);
         }
 
         void OpenPageElement(bool IsNew, string uid = "")

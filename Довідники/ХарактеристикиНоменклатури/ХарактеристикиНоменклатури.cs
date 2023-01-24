@@ -168,9 +168,6 @@ namespace StorageAndTrade
                 new Where(ХарактеристикиНоменклатури_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
             ТабличніСписки.ХарактеристикиНоменклатури_Записи.LoadRecords();
-
-            if (ТабличніСписки.ХарактеристикиНоменклатури_Записи.SelectPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.ХарактеристикиНоменклатури_Записи.SelectPath, TreeViewGrid.Columns[0], false);
         }
 
         void OpenPageElement(bool IsNew, string uid = "")

@@ -44,6 +44,7 @@ namespace StorageAndTrade
 
         TreeView TreeViewGrid;
         ComboBoxText ComboBoxPeriodWhere = new ComboBoxText();
+        SearchControl2 ПошукПовнотекстовий = new SearchControl2();
 
         public ПереміщенняТоварівНаСкладі(bool IsSelectPointer = false) : base()
         {
@@ -82,6 +83,11 @@ namespace StorageAndTrade
             hBoxBotton.PackStart(ComboBoxPeriodWhere, false, false, 0);
 
             PackStart(hBoxBotton, false, false, 10);
+
+            //Пошук 2
+            hBoxBotton.PackStart(ПошукПовнотекстовий, false, false, 2);
+            ПошукПовнотекстовий.Select = LoadRecords_OnSearch;
+            ПошукПовнотекстовий.Clear = () => { OnComboBoxPeriodWhereChanged(null, new EventArgs()); };
 
             CreateToolbar();
 
@@ -196,6 +202,24 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.ПереміщенняТоварівНаСкладі_Записи.SelectPath, TreeViewGrid.Columns[0], false);
             else if (ТабличніСписки.ПереміщенняТоварівНаСкладі_Записи.CurrentPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.ПереміщенняТоварівНаСкладі_Записи.CurrentPath, TreeViewGrid.Columns[0], false);
+        }
+
+        void LoadRecords_OnSearch(string searchText)
+        {
+            searchText = searchText.ToLower().Trim();
+
+            if (searchText.Length < 1)
+                return;
+
+            searchText = "%" + searchText.Replace(" ", "%") + "%";
+
+            ТабличніСписки.ПереміщенняТоварівНаСкладі_Записи.Where.Clear();
+
+            //Назва
+            ТабличніСписки.ПереміщенняТоварівНаСкладі_Записи.Where.Add(
+                new Where(ПереміщенняТоварівНаСкладі_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
+
+            ТабличніСписки.ПереміщенняТоварівНаСкладі_Записи.LoadRecords();
         }
 
         void OpenPageElement(bool IsNew, string uid = "")

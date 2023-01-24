@@ -192,9 +192,6 @@ namespace StorageAndTrade
                 new Where(Comparison.OR, Контрагенти_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
             ТабличніСписки.Контрагенти_Записи.LoadRecords();
-
-            if (ТабличніСписки.Контрагенти_Записи.SelectPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.Контрагенти_Записи.SelectPath, TreeViewGrid.Columns[0], false);
         }
 
         void OpenPageElement(bool IsNew, string uid = "")

@@ -44,6 +44,7 @@ namespace StorageAndTrade
 
         TreeView TreeViewGrid;
         ComboBoxText ComboBoxPeriodWhere = new ComboBoxText();
+        SearchControl2 ПошукПовнотекстовий = new SearchControl2();
 
         public РозміщенняТоварівНаСкладі(bool IsSelectPointer = false) : base()
         {
@@ -82,6 +83,11 @@ namespace StorageAndTrade
             hBoxBotton.PackStart(ComboBoxPeriodWhere, false, false, 0);
 
             PackStart(hBoxBotton, false, false, 10);
+
+            //Пошук 2
+            hBoxBotton.PackStart(ПошукПовнотекстовий, false, false, 2);
+            ПошукПовнотекстовий.Select = LoadRecords_OnSearch;
+            ПошукПовнотекстовий.Clear = () => { OnComboBoxPeriodWhereChanged(null, new EventArgs()); };
 
             CreateToolbar();
 
@@ -140,7 +146,7 @@ namespace StorageAndTrade
             provodkyButton.Menu = ToolbarProvodkySubMenu();
             toolbar.Add(provodkyButton);
 
-            MenuToolButton printingButton = new MenuToolButton(Stock.Print){ TooltipText = "Друк" };
+            MenuToolButton printingButton = new MenuToolButton(Stock.Print) { TooltipText = "Друк" };
             printingButton.Clicked += OnPrintingClick;
             printingButton.Menu = ToolbarPrintingSubMenu();
             toolbar.Add(printingButton);
@@ -233,6 +239,24 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.РозміщенняТоварівНаСкладі_Записи.SelectPath, TreeViewGrid.Columns[0], false);
             else if (ТабличніСписки.РозміщенняТоварівНаСкладі_Записи.CurrentPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.РозміщенняТоварівНаСкладі_Записи.CurrentPath, TreeViewGrid.Columns[0], false);
+        }
+
+        void LoadRecords_OnSearch(string searchText)
+        {
+            searchText = searchText.ToLower().Trim();
+
+            if (searchText.Length < 1)
+                return;
+
+            searchText = "%" + searchText.Replace(" ", "%") + "%";
+
+            ТабличніСписки.РозміщенняТоварівНаСкладі_Записи.Where.Clear();
+
+            //Назва
+            ТабличніСписки.РозміщенняТоварівНаСкладі_Записи.Where.Add(
+                new Where(РозміщенняТоварівНаСкладі_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
+
+            ТабличніСписки.РозміщенняТоварівНаСкладі_Записи.LoadRecords();
         }
 
         void OpenPageElement(bool IsNew, string uid = "")

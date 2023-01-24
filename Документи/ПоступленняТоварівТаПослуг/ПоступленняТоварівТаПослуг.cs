@@ -44,6 +44,7 @@ namespace StorageAndTrade
 
         TreeView TreeViewGrid;
         ComboBoxText ComboBoxPeriodWhere = new ComboBoxText();
+        SearchControl2 ПошукПовнотекстовий = new SearchControl2();
 
         public ПоступленняТоварівТаПослуг(bool IsSelectPointer = false) : base()
         {
@@ -82,6 +83,11 @@ namespace StorageAndTrade
             hBoxBotton.PackStart(ComboBoxPeriodWhere, false, false, 0);
 
             PackStart(hBoxBotton, false, false, 10);
+
+            //Пошук 2
+            hBoxBotton.PackStart(ПошукПовнотекстовий, false, false, 2);
+            ПошукПовнотекстовий.Select = LoadRecords_OnSearch;
+            ПошукПовнотекстовий.Clear = () => { OnComboBoxPeriodWhereChanged(null, new EventArgs()); };
 
             CreateToolbar();
 
@@ -168,7 +174,7 @@ namespace StorageAndTrade
             Menu Menu = new Menu();
 
             MenuItem newDocKasovyiOrderButton = new MenuItem("Розхідний касовий ордер");
-            newDocKasovyiOrderButton.Activated += OnNewDocNaOsnovi_KasovyiOrder;
+            newDocKasovyiOrderButton.Activated += OnNewDocNaOsnovi_КасовийОрдер;
             Menu.Append(newDocKasovyiOrderButton);
 
             MenuItem newDocPovernenjaPostachalnykuButton = new MenuItem("Повернення товарів постачальнику");
@@ -215,13 +221,31 @@ namespace StorageAndTrade
         {
             ТабличніСписки.ПоступленняТоварівТаПослуг_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.ПоступленняТоварівТаПослуг_Записи.DocumentPointerItem = DocumentPointerItem;
-
+            
             ТабличніСписки.ПоступленняТоварівТаПослуг_Записи.LoadRecords();
 
             if (ТабличніСписки.ПоступленняТоварівТаПослуг_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.ПоступленняТоварівТаПослуг_Записи.SelectPath, TreeViewGrid.Columns[0], false);
             else if (ТабличніСписки.ПоступленняТоварівТаПослуг_Записи.CurrentPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.ПоступленняТоварівТаПослуг_Записи.CurrentPath, TreeViewGrid.Columns[0], false);
+        }
+
+        void LoadRecords_OnSearch(string searchText)
+        {
+            searchText = searchText.ToLower().Trim();
+
+            if (searchText.Length < 1)
+                return;
+
+            searchText = "%" + searchText.Replace(" ", "%") + "%";
+
+            ТабличніСписки.ПоступленняТоварівТаПослуг_Записи.Where.Clear();
+
+            //Назва
+            ТабличніСписки.ПоступленняТоварівТаПослуг_Записи.Where.Add(
+                new Where(ПоступленняТоварівТаПослуг_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
+
+            ТабличніСписки.ПоступленняТоварівТаПослуг_Записи.LoadRecords();
         }
 
         void OpenPageElement(bool IsNew, string uid = "")
@@ -506,7 +530,7 @@ namespace StorageAndTrade
             }
         }
 
-        void OnNewDocNaOsnovi_KasovyiOrder(object? sender, EventArgs args)
+        void OnNewDocNaOsnovi_КасовийОрдер(object? sender, EventArgs args)
         {
             if (TreeViewGrid.Selection.CountSelectedRows() != 0)
             {
