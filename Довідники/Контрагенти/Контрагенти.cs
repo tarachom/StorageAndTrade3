@@ -45,7 +45,7 @@ namespace StorageAndTrade
         TreeView TreeViewGrid;
         Контрагенти_Папки_Дерево ДеревоПапок;
         CheckButton checkButtonIsHierarchy = new CheckButton("Враховувати ієрархію папок") { Active = true };
-        SearchControl ПошукПоНазві = new SearchControl();
+        SearchControl2 ПошукПовнотекстовий = new SearchControl2();
 
         public Контрагенти(bool IsSelectPointer = false) : base()
         {
@@ -81,14 +81,10 @@ namespace StorageAndTrade
 
             PackStart(hBoxBotton, false, false, 10);
 
-            //Пошук
-            hBoxBotton.PackStart(ПошукПоНазві, false, false, 2);
-            ПошукПоНазві.QueryFind = ПошуковіЗапити.Контрагенти;
-            ПошукПоНазві.Select = (UnigueID uid) =>
-            {
-                SelectPointerItem = new Контрагенти_Pointer(uid);
-                LoadTree();
-            };
+            //Пошук 2
+            hBoxBotton.PackStart(ПошукПовнотекстовий, false, false, 2);
+            ПошукПовнотекстовий.Select = LoadRecords_OnSearch;
+            ПошукПовнотекстовий.Clear = LoadRecords;
 
             CreateToolbar();
 
@@ -169,6 +165,31 @@ namespace StorageAndTrade
             {
                 ТабличніСписки.Контрагенти_Записи.Where.Add(new Where(Контрагенти_Const.Папка, Comparison.EQ, ДеревоПапок.Parent_Pointer.UnigueID.UGuid));
             }
+
+            ТабличніСписки.Контрагенти_Записи.LoadRecords();
+
+            if (ТабличніСписки.Контрагенти_Записи.SelectPath != null)
+                TreeViewGrid.SetCursor(ТабличніСписки.Контрагенти_Записи.SelectPath, TreeViewGrid.Columns[0], false);
+        }
+
+        void LoadRecords_OnSearch(string searchText)
+        {
+            searchText = searchText.ToLower().Trim();
+
+            if (searchText.Length < 1)
+                return;
+
+            searchText = "%" + searchText.Replace(" ", "%") + "%";
+
+            ТабличніСписки.Контрагенти_Записи.Where.Clear();
+
+            //Код
+            ТабличніСписки.Контрагенти_Записи.Where.Add(
+                new Where(Контрагенти_Const.Код, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
+
+            //Назва
+            ТабличніСписки.Контрагенти_Записи.Where.Add(
+                new Where(Comparison.OR, Контрагенти_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
             ТабличніСписки.Контрагенти_Записи.LoadRecords();
 

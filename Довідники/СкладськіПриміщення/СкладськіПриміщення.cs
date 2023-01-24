@@ -42,6 +42,7 @@ namespace StorageAndTrade
 
         TreeView TreeViewGrid;
         public Склади_PointerControl СкладВласник = new Склади_PointerControl();
+        SearchControl2 ПошукПовнотекстовий = new SearchControl2();
 
         public СкладськіПриміщення(bool IsSelectPointer = false) : base()
         {
@@ -79,6 +80,11 @@ namespace StorageAndTrade
             {
                 LoadRecords();
             };
+
+            //Пошук 2
+            hBoxBotton.PackStart(ПошукПовнотекстовий, false, false, 2);
+            ПошукПовнотекстовий.Select = LoadRecords_OnSearch;
+            ПошукПовнотекстовий.Clear = LoadRecords;
 
             //Складські комірки
             LinkButton linkButtonHar = new LinkButton(" Складські комірки") { Halign = Align.Start, Image = new Image("images/doc.png"), AlwaysShowImage = true };
@@ -153,6 +159,27 @@ namespace StorageAndTrade
                 ТабличніСписки.СкладськіПриміщення_Записи.Where.Add(
                     new Where(СкладськіПриміщення_Const.Склад, Comparison.EQ, СкладВласник.Pointer.UnigueID.UGuid));
             }
+
+            ТабличніСписки.СкладськіПриміщення_Записи.LoadRecords();
+
+            if (ТабличніСписки.СкладськіПриміщення_Записи.SelectPath != null)
+                TreeViewGrid.SetCursor(ТабличніСписки.СкладськіПриміщення_Записи.SelectPath, TreeViewGrid.Columns[0], false);
+        }
+
+        void LoadRecords_OnSearch(string searchText)
+        {
+            searchText = searchText.ToLower().Trim();
+
+            if (searchText.Length < 1)
+                return;
+
+            searchText = "%" + searchText.Replace(" ", "%") + "%";
+
+            ТабличніСписки.СкладськіПриміщення_Записи.Where.Clear();
+
+            //Назва
+            ТабличніСписки.СкладськіПриміщення_Записи.Where.Add(
+                new Where(СкладськіПриміщення_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
             ТабличніСписки.СкладськіПриміщення_Записи.LoadRecords();
 

@@ -43,6 +43,7 @@ namespace StorageAndTrade
         public System.Action<Виробники_Pointer>? CallBack_OnSelectPointer { get; set; }
 
         TreeView TreeViewGrid;
+        SearchControl2 ПошукПовнотекстовий = new SearchControl2();
 
         public Виробники(bool IsSelectPointer = false) : base()
         {
@@ -73,6 +74,11 @@ namespace StorageAndTrade
             }
 
             PackStart(hBoxBotton, false, false, 10);
+
+            //Пошук 2
+            hBoxBotton.PackStart(ПошукПовнотекстовий, false, false, 2);
+            ПошукПовнотекстовий.Select = LoadRecords_OnSearch;
+            ПошукПовнотекстовий.Clear = LoadRecords;
 
             CreateToolbar();
 
@@ -124,6 +130,29 @@ namespace StorageAndTrade
         {
             ТабличніСписки.Виробники_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.Виробники_Записи.DirectoryPointerItem = DirectoryPointerItem;
+
+            ТабличніСписки.Виробники_Записи.Where.Clear();
+
+            ТабличніСписки.Виробники_Записи.LoadRecords();
+
+            if (ТабличніСписки.Виробники_Записи.SelectPath != null)
+                TreeViewGrid.SetCursor(ТабличніСписки.Виробники_Записи.SelectPath, TreeViewGrid.Columns[0], false);
+        }
+
+        void LoadRecords_OnSearch(string searchText)
+        {
+            searchText = searchText.ToLower().Trim();
+
+            if (searchText.Length < 1)
+                return;
+
+            searchText = "%" + searchText.Replace(" ", "%") + "%";
+
+            ТабличніСписки.Виробники_Записи.Where.Clear();
+
+            //Назва
+            ТабличніСписки.Виробники_Записи.Where.Add(
+                new Where(Виробники_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
             ТабличніСписки.Виробники_Записи.LoadRecords();
 

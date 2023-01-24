@@ -43,6 +43,7 @@ namespace StorageAndTrade
         public System.Action<Валюти_Pointer>? CallBack_OnSelectPointer { get; set; }
 
         TreeView TreeViewGrid;
+        SearchControl2 ПошукПовнотекстовий = new SearchControl2();
 
         public Валюти(bool IsSelectPointer = false) : base()
         {
@@ -73,6 +74,11 @@ namespace StorageAndTrade
 
                 hBoxBotton.PackStart(bEmptyPointer, false, false, 10);
             }
+
+            //Пошук 2
+            hBoxBotton.PackStart(ПошукПовнотекстовий, false, false, 2);
+            ПошукПовнотекстовий.Select = LoadRecords_OnSearch;
+            ПошукПовнотекстовий.Clear = LoadRecords;
 
             CreateToolbar();
 
@@ -124,6 +130,33 @@ namespace StorageAndTrade
         {
             ТабличніСписки.Валюти_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.Валюти_Записи.DirectoryPointerItem = DirectoryPointerItem;
+
+            ТабличніСписки.Валюти_Записи.Where.Clear();
+
+            ТабличніСписки.Валюти_Записи.LoadRecords();
+
+            if (ТабличніСписки.Валюти_Записи.SelectPath != null)
+                TreeViewGrid.SetCursor(ТабличніСписки.Валюти_Записи.SelectPath, TreeViewGrid.Columns[0], false);
+        }
+
+        void LoadRecords_OnSearch(string searchText)
+        {
+            searchText = searchText.ToLower().Trim();
+
+            if (searchText.Length < 1)
+                return;
+
+            searchText = "%" + searchText.Replace(" ", "%") + "%";
+
+            ТабличніСписки.Валюти_Записи.Where.Clear();
+
+            //Код
+            ТабличніСписки.Валюти_Записи.Where.Add(
+                new Where(Валюти_Const.Код, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
+
+            //Назва
+            ТабличніСписки.Валюти_Записи.Where.Add(
+                new Where(Comparison.OR, Валюти_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
             ТабличніСписки.Валюти_Записи.LoadRecords();
 

@@ -44,6 +44,7 @@ namespace StorageAndTrade
         СкладськіКомірки_Папки_Дерево ДеревоПапок;
         CheckButton checkButtonIsHierarchy = new CheckButton("Враховувати ієрархію папок") { Active = false };
         public СкладськіПриміщення_PointerControl СкладПриміщенняВласник = new СкладськіПриміщення_PointerControl();
+        SearchControl2 ПошукПовнотекстовий = new SearchControl2();
 
         public СкладськіКомірки(bool IsSelectPointer = false) : base()
         {
@@ -80,11 +81,16 @@ namespace StorageAndTrade
 
             //Власник
             hBoxBotton.PackStart(СкладПриміщенняВласник, false, false, 2);
-            СкладПриміщенняВласник.Caption = "Складське приміщення власник:";
+            СкладПриміщенняВласник.Caption = "Приміщення власник:";
             СкладПриміщенняВласник.AfterSelectFunc = () =>
             {
                 LoadTree();
             };
+
+            //Пошук 2
+            hBoxBotton.PackStart(ПошукПовнотекстовий, false, false, 2);
+            ПошукПовнотекстовий.Select = LoadRecords_OnSearch;
+            ПошукПовнотекстовий.Clear = LoadRecords;
 
             CreateToolbar();
 
@@ -172,6 +178,27 @@ namespace StorageAndTrade
                 ТабличніСписки.СкладськіКомірки_Записи.Where.Add(
                     new Where(СкладськіКомірки_Const.Приміщення, Comparison.EQ, СкладПриміщенняВласник.Pointer.UnigueID.UGuid));
             }
+
+            ТабличніСписки.СкладськіКомірки_Записи.LoadRecords();
+
+            if (ТабличніСписки.СкладськіКомірки_Записи.SelectPath != null)
+                TreeViewGrid.SetCursor(ТабличніСписки.СкладськіКомірки_Записи.SelectPath, TreeViewGrid.Columns[0], false);
+        }
+
+        void LoadRecords_OnSearch(string searchText)
+        {
+            searchText = searchText.ToLower().Trim();
+
+            if (searchText.Length < 1)
+                return;
+
+            searchText = "%" + searchText.Replace(" ", "%") + "%";
+
+            ТабличніСписки.СкладськіКомірки_Записи.Where.Clear();
+
+            //Назва
+            ТабличніСписки.СкладськіКомірки_Записи.Where.Add(
+                new Where(СкладськіКомірки_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
             ТабличніСписки.СкладськіКомірки_Записи.LoadRecords();
 

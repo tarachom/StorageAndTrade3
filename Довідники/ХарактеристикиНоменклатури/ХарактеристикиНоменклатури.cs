@@ -44,6 +44,7 @@ namespace StorageAndTrade
 
         TreeView TreeViewGrid;
         public Номенклатура_PointerControl НоменклатураВласник = new Номенклатура_PointerControl();
+        SearchControl2 ПошукПовнотекстовий = new SearchControl2();
 
         public ХарактеристикиНоменклатури(bool IsSelectPointer = false) : base()
         {
@@ -81,6 +82,11 @@ namespace StorageAndTrade
             {
                 LoadRecords();
             };
+
+            //Пошук 2
+            hBoxBotton.PackStart(ПошукПовнотекстовий, false, false, 2);
+            ПошукПовнотекстовий.Select = LoadRecords_OnSearch;
+            ПошукПовнотекстовий.Clear = LoadRecords;
 
             CreateToolbar();
 
@@ -139,6 +145,27 @@ namespace StorageAndTrade
                 ТабличніСписки.ХарактеристикиНоменклатури_Записи.Where.Add(
                     new Where(ХарактеристикиНоменклатури_Const.Номенклатура, Comparison.EQ, НоменклатураВласник.Pointer.UnigueID.UGuid));
             }
+
+            ТабличніСписки.ХарактеристикиНоменклатури_Записи.LoadRecords();
+
+            if (ТабличніСписки.ХарактеристикиНоменклатури_Записи.SelectPath != null)
+                TreeViewGrid.SetCursor(ТабличніСписки.ХарактеристикиНоменклатури_Записи.SelectPath, TreeViewGrid.Columns[0], false);
+        }
+
+        void LoadRecords_OnSearch(string searchText)
+        {
+            searchText = searchText.ToLower().Trim();
+
+            if (searchText.Length < 1)
+                return;
+
+            searchText = "%" + searchText.Replace(" ", "%") + "%";
+
+            ТабличніСписки.ХарактеристикиНоменклатури_Записи.Where.Clear();
+
+            //Назва
+            ТабличніСписки.ХарактеристикиНоменклатури_Записи.Where.Add(
+                new Where(ХарактеристикиНоменклатури_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
             ТабличніСписки.ХарактеристикиНоменклатури_Записи.LoadRecords();
 

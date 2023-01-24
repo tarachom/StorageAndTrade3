@@ -45,7 +45,7 @@ namespace StorageAndTrade
         TreeView TreeViewGrid;
         Склади_Папки_Дерево ДеревоПапок;
         CheckButton checkButtonIsHierarchy = new CheckButton("Враховувати ієрархію папок") { Active = true };
-        SearchControl ПошукПоНазві = new SearchControl();
+        SearchControl2 ПошукПовнотекстовий = new SearchControl2();
 
         public Склади(bool IsSelectPointer = false) : base()
         {
@@ -81,14 +81,10 @@ namespace StorageAndTrade
 
             PackStart(hBoxBotton, false, false, 10);
 
-            //Пошук
-            hBoxBotton.PackStart(ПошукПоНазві, false, false, 2);
-            ПошукПоНазві.QueryFind = ПошуковіЗапити.Склади;
-            ПошукПоНазві.Select = (UnigueID uid) =>
-            {
-                SelectPointerItem = new Склади_Pointer(uid);
-                LoadTree();
-            };
+            //Пошук 2
+            hBoxBotton.PackStart(ПошукПовнотекстовий, false, false, 2);
+            ПошукПовнотекстовий.Select = LoadRecords_OnSearch;
+            ПошукПовнотекстовий.Clear = LoadRecords;
 
             //Склади приміщення
             LinkButton linkButtonHar = new LinkButton(" Складські приміщення") { Halign = Align.Start, Image = new Image("images/doc.png"), AlwaysShowImage = true };
@@ -183,6 +179,31 @@ namespace StorageAndTrade
             ТабличніСписки.Склади_Записи.Where.Clear();
             if (checkButtonIsHierarchy.Active)
                 ТабличніСписки.Склади_Записи.Where.Add(new Where(Склади_Const.Папка, Comparison.EQ, ДеревоПапок.Parent_Pointer.UnigueID.UGuid));
+
+            ТабличніСписки.Склади_Записи.LoadRecords();
+
+            if (ТабличніСписки.Склади_Записи.SelectPath != null)
+                TreeViewGrid.SetCursor(ТабличніСписки.Склади_Записи.SelectPath, TreeViewGrid.Columns[0], false);
+        }
+
+        void LoadRecords_OnSearch(string searchText)
+        {
+            searchText = searchText.ToLower().Trim();
+
+            if (searchText.Length < 1)
+                return;
+
+            searchText = "%" + searchText.Replace(" ", "%") + "%";
+
+            ТабличніСписки.Склади_Записи.Where.Clear();
+
+            //Код
+            ТабличніСписки.Склади_Записи.Where.Add(
+                new Where(Склади_Const.Код, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
+
+            //Назва
+            ТабличніСписки.Склади_Записи.Where.Add(
+                new Where(Comparison.OR, Склади_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
             ТабличніСписки.Склади_Записи.LoadRecords();
 
