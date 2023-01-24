@@ -103,19 +103,19 @@ namespace StorageAndTrade
             Toolbar toolbar = new Toolbar();
             PackStart(toolbar, false, false, 0);
 
-            ToolButton upButton = new ToolButton(Stock.Add) { Label = "Додати", IsImportant = true };
+            ToolButton upButton = new ToolButton(Stock.Add) { TooltipText = "Додати" };
             upButton.Clicked += OnAddClick;
             toolbar.Add(upButton);
 
-            ToolButton refreshButton = new ToolButton(Stock.Refresh) { Label = "Обновити", IsImportant = true };
+            ToolButton refreshButton = new ToolButton(Stock.Refresh) { TooltipText = "Обновити" };
             refreshButton.Clicked += OnRefreshClick;
             toolbar.Add(refreshButton);
 
-            ToolButton deleteButton = new ToolButton(Stock.Delete) { Label = "Видалити", IsImportant = true };
+            ToolButton deleteButton = new ToolButton(Stock.Delete) { TooltipText = "Видалити" };
             deleteButton.Clicked += OnDeleteClick;
             toolbar.Add(deleteButton);
 
-            ToolButton copyButton = new ToolButton(Stock.Copy) { Label = "Копіювати", IsImportant = true };
+            ToolButton copyButton = new ToolButton(Stock.Copy) { TooltipText = "Копіювати" };
             copyButton.Clicked += OnCopyClick;
             toolbar.Add(copyButton);
         }

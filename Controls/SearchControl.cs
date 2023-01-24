@@ -23,6 +23,12 @@ limitations under the License.
 Сайт:     accounting.org.ua
 */
 
+/*
+
+Пошук з виводом результатів у список
+
+*/
+
 #endregion
 
 using Gtk;

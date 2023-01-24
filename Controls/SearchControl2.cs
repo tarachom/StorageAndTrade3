@@ -23,12 +23,15 @@ limitations under the License.
 Сайт:     accounting.org.ua
 */
 
+/*
+
+Пошук з виводом результатів у таб частину
+
+*/
+
 #endregion
 
 using Gtk;
-
-using AccountingSoftware;
-using StorageAndTrade_1_0;
 
 namespace StorageAndTrade
 {
