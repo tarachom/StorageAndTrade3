@@ -27,9 +27,6 @@ limitations under the License.
 
 using Gtk;
 
-using AccountingSoftware;
-
-using StorageAndTrade_1_0;
 using StorageAndTrade_1_0.Довідники;
 using Перелічення = StorageAndTrade_1_0.Перелічення;
 
@@ -116,8 +113,8 @@ namespace StorageAndTrade
             HBox hBoxTypeCell = new HBox() { Halign = Align.End };
             vBox.PackStart(hBoxTypeCell, false, false, 5);
 
-            foreach (ConfigurationEnumField field in Config.Kernel!.Conf.Enums["ТипиСкладськихКомірок"].Fields.Values)
-                ТипСкладськоїКомірки.Append(field.Name, field.Desc);
+            foreach (var field in Перелічення.ПсевдонімиПерелічення.ТипиСкладськихКомірок_Array())
+                ТипСкладськоїКомірки.Append(field.Value.ToString(), field.Name);
 
             hBoxTypeCell.PackStart(new Label("Тип комірки:"), false, false, 5);
             hBoxTypeCell.PackStart(ТипСкладськоїКомірки, false, false, 5);

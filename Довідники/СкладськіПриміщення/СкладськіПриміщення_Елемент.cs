@@ -27,9 +27,6 @@ limitations under the License.
 
 using Gtk;
 
-using AccountingSoftware;
-
-using StorageAndTrade_1_0;
 using StorageAndTrade_1_0.Довідники;
 using Перелічення = StorageAndTrade_1_0.Перелічення;
 
@@ -98,8 +95,8 @@ namespace StorageAndTrade
             HBox hBoxAdressSave = new HBox() { Halign = Align.End };
             vBox.PackStart(hBoxAdressSave, false, false, 5);
 
-            foreach (ConfigurationEnumField field in Config.Kernel!.Conf.Enums["НалаштуванняАдресногоЗберігання"].Fields.Values)
-                НалаштуванняАдресногоЗберігання.Append(field.Name, field.Desc);
+            foreach (var field in Перелічення.ПсевдонімиПерелічення.НалаштуванняАдресногоЗберігання_Array())
+                НалаштуванняАдресногоЗберігання.Append(field.Value.ToString(), field.Name);
 
             hBoxAdressSave.PackStart(new Label("Адресне зберігання:"), false, false, 5);
             hBoxAdressSave.PackStart(НалаштуванняАдресногоЗберігання, false, false, 5);

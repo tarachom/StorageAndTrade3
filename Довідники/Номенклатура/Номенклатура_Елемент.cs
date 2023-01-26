@@ -27,12 +27,9 @@ limitations under the License.
 
 using Gtk;
 
-using AccountingSoftware;
-
-using StorageAndTrade_1_0;
 using StorageAndTrade_1_0.Константи;
 using StorageAndTrade_1_0.Довідники;
-using StorageAndTrade_1_0.Перелічення;
+using Перелічення = StorageAndTrade_1_0.Перелічення;
 
 namespace StorageAndTrade
 {
@@ -136,8 +133,8 @@ namespace StorageAndTrade
             HBox hBoxType = new HBox() { Halign = Align.End };
             vBox.PackStart(hBoxType, false, false, 5);
 
-            foreach (ConfigurationEnumField field in Config.Kernel!.Conf.Enums["ТипиНоменклатури"].Fields.Values)
-                ТипНоменклатури.Append(field.Name, field.Desc);
+            foreach (var field in Перелічення.ПсевдонімиПерелічення.ТипиНоменклатури_Array())
+                ТипНоменклатури.Append(field.Value.ToString(), field.Name);
 
             hBoxType.PackStart(new Label("Тип:"), false, false, 5);
             hBoxType.PackStart(ТипНоменклатури, false, false, 5);
@@ -209,7 +206,7 @@ namespace StorageAndTrade
             {
                 Номенклатура_Objest.Код = (++НумераціяДовідників.Номенклатура_Const).ToString("D6");
                 Номенклатура_Objest.Папка = РодичДляНового;
-                Номенклатура_Objest.ТипНоменклатури = ТипиНоменклатури.Товар;
+                Номенклатура_Objest.ТипНоменклатури = Перелічення.ТипиНоменклатури.Товар;
                 Номенклатура_Objest.ОдиницяВиміру = ЗначенняЗаЗамовчуванням.ОсновнаОдиницяПакування_Const;
                 Номенклатура_Objest.ВидНоменклатури = ЗначенняЗаЗамовчуванням.ОсновнийВидНоменклатури_Const;
             }
@@ -227,7 +224,7 @@ namespace StorageAndTrade
             ОсновнаКартинкаФайл.Pointer = Номенклатура_Objest.ОсновнаКартинкаФайл;
 
             if (ТипНоменклатури.Active == -1)
-                ТипНоменклатури.ActiveId = ТипиНоменклатури.Товар.ToString();
+                ТипНоменклатури.ActiveId = Перелічення.ТипиНоменклатури.Товар.ToString();
 
             Файли.Номенклатура_Objest = Номенклатура_Objest;
             Файли.LoadRecords();
@@ -238,7 +235,7 @@ namespace StorageAndTrade
             Номенклатура_Objest.Код = Код.Text;
             Номенклатура_Objest.Назва = Назва.Text;
             Номенклатура_Objest.Артикул = Артикул.Text;
-            Номенклатура_Objest.ТипНоменклатури = Enum.Parse<ТипиНоменклатури>(ТипНоменклатури.ActiveId);
+            Номенклатура_Objest.ТипНоменклатури = Enum.Parse<Перелічення.ТипиНоменклатури>(ТипНоменклатури.ActiveId);
             Номенклатура_Objest.ВидНоменклатури = ВидНоменклатури.Pointer;
             Номенклатура_Objest.Папка = Родич.Pointer;
             Номенклатура_Objest.НазваПовна = НазваПовна.Buffer.Text;
