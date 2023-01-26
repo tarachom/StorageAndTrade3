@@ -26,12 +26,13 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 26.01.2023 19:30:56
+ * Дата конфігурації: 26.01.2023 21:35:46
  *
  */
 
 
 using AccountingSoftware;
+using System.Xml;
 
 namespace StorageAndTrade_1_0
 {
@@ -1895,7 +1896,6 @@ namespace StorageAndTrade_1_0.Довідники
 {
     
     #region DIRECTORY "Організації"
-    
     public static class Організації_Const
     {
         public const string TABLE = "tab_a01";
@@ -1910,8 +1910,7 @@ namespace StorageAndTrade_1_0.Довідники
         public const string СвідоцтвоДатаВидачі = "col_a8";
         public const string Холдинг = "col_a9";
     }
-	
-    
+
     public class Організації_Objest : DirectoryObject
     {
         public Організації_Objest() : base(Config.Kernel!, "tab_a01",
@@ -2192,7 +2191,6 @@ namespace StorageAndTrade_1_0.Довідники
     #endregion
     
     #region DIRECTORY "Номенклатура"
-    
     public static class Номенклатура_Const
     {
         public const string TABLE = "tab_a03";
@@ -2209,8 +2207,7 @@ namespace StorageAndTrade_1_0.Довідники
         public const string Папка = "col_a5";
         public const string ОсновнаКартинкаФайл = "col_a7";
     }
-	
-    
+
     public class Номенклатура_Objest : DirectoryObject
     {
         public Номенклатура_Objest() : base(Config.Kernel!, "tab_a03",
@@ -2472,7 +2469,6 @@ namespace StorageAndTrade_1_0.Довідники
     #endregion
     
     #region DIRECTORY "Виробники"
-    
     public static class Виробники_Const
     {
         public const string TABLE = "tab_a04";
@@ -2480,8 +2476,7 @@ namespace StorageAndTrade_1_0.Довідники
         public const string Назва = "col_b6";
         public const string Код = "col_b7";
     }
-	
-    
+
     public class Виробники_Objest : DirectoryObject
     {
         public Виробники_Objest() : base(Config.Kernel!, "tab_a04",
@@ -2614,7 +2609,6 @@ namespace StorageAndTrade_1_0.Довідники
     #endregion
     
     #region DIRECTORY "ВидиНоменклатури"
-    
     public static class ВидиНоменклатури_Const
     {
         public const string TABLE = "tab_a05";
@@ -2625,8 +2619,7 @@ namespace StorageAndTrade_1_0.Довідники
         public const string ТипНоменклатури = "col_a1";
         public const string ОдиницяВиміру = "col_a4";
     }
-	
-    
+
     public class ВидиНоменклатури_Objest : DirectoryObject
     {
         public ВидиНоменклатури_Objest() : base(Config.Kernel!, "tab_a05",
@@ -2774,7 +2767,6 @@ namespace StorageAndTrade_1_0.Довідники
     #endregion
     
     #region DIRECTORY "ПакуванняОдиниціВиміру"
-    
     public static class ПакуванняОдиниціВиміру_Const
     {
         public const string TABLE = "tab_a06";
@@ -2784,8 +2776,7 @@ namespace StorageAndTrade_1_0.Довідники
         public const string НазваПовна = "col_c3";
         public const string КількістьУпаковок = "col_c4";
     }
-	
-    
+
     public class ПакуванняОдиниціВиміру_Objest : DirectoryObject
     {
         public ПакуванняОдиниціВиміру_Objest() : base(Config.Kernel!, "tab_a06",
@@ -2928,7 +2919,6 @@ namespace StorageAndTrade_1_0.Довідники
     #endregion
     
     #region DIRECTORY "Валюти"
-    
     public static class Валюти_Const
     {
         public const string TABLE = "tab_a07";
@@ -2938,8 +2928,7 @@ namespace StorageAndTrade_1_0.Довідники
         public const string Код = "col_c6";
         public const string Код_R030 = "col_a1";
     }
-	
-    
+
     public class Валюти_Objest : DirectoryObject
     {
         public Валюти_Objest() : base(Config.Kernel!, "tab_a07",
@@ -3083,7 +3072,6 @@ namespace StorageAndTrade_1_0.Довідники
     #endregion
     
     #region DIRECTORY "Контрагенти"
-    
     public static class Контрагенти_Const
     {
         public const string TABLE = "tab_a08";
@@ -3095,8 +3083,7 @@ namespace StorageAndTrade_1_0.Довідники
         public const string Папка = "col_a1";
         public const string Опис = "col_a2";
     }
-	
-    
+
     public class Контрагенти_Objest : DirectoryObject
     {
         public Контрагенти_Objest() : base(Config.Kernel!, "tab_a08",
@@ -3437,7 +3424,6 @@ namespace StorageAndTrade_1_0.Довідники
     #endregion
     
     #region DIRECTORY "Склади"
-    
     public static class Склади_Const
     {
         public const string TABLE = "tab_a10";
@@ -3451,8 +3437,7 @@ namespace StorageAndTrade_1_0.Довідники
         public const string Папка = "col_a5";
         public const string НалаштуванняАдресногоЗберігання = "col_a6";
     }
-	
-    
+
     public class Склади_Objest : DirectoryObject
     {
         public Склади_Objest() : base(Config.Kernel!, "tab_a10",
@@ -3728,7 +3713,6 @@ namespace StorageAndTrade_1_0.Довідники
     #endregion
     
     #region DIRECTORY "ВидиЦін"
-    
     public static class ВидиЦін_Const
     {
         public const string TABLE = "tab_a12";
@@ -3737,8 +3721,7 @@ namespace StorageAndTrade_1_0.Довідники
         public const string Код = "col_f1";
         public const string Валюта = "col_f2";
     }
-	
-    
+
     public class ВидиЦін_Objest : DirectoryObject
     {
         public ВидиЦін_Objest() : base(Config.Kernel!, "tab_a12",
@@ -3876,7 +3859,6 @@ namespace StorageAndTrade_1_0.Довідники
     #endregion
     
     #region DIRECTORY "ВидиЦінПостачальників"
-    
     public static class ВидиЦінПостачальників_Const
     {
         public const string TABLE = "tab_a13";
@@ -3885,8 +3867,7 @@ namespace StorageAndTrade_1_0.Довідники
         public const string Код = "col_f4";
         public const string Валюта = "col_f5";
     }
-	
-    
+
     public class ВидиЦінПостачальників_Objest : DirectoryObject
     {
         public ВидиЦінПостачальників_Objest() : base(Config.Kernel!, "tab_a13",
@@ -4024,7 +4005,6 @@ namespace StorageAndTrade_1_0.Довідники
     #endregion
     
     #region DIRECTORY "Користувачі"
-    
     public static class Користувачі_Const
     {
         public const string TABLE = "tab_a14";
@@ -4034,8 +4014,7 @@ namespace StorageAndTrade_1_0.Довідники
         public const string ФізичнаОсоба = "col_a1";
         public const string Коментар = "col_g6";
     }
-	
-    
+
     public class Користувачі_Objest : DirectoryObject
     {
         public Користувачі_Objest() : base(Config.Kernel!, "tab_a14",
@@ -4286,7 +4265,6 @@ namespace StorageAndTrade_1_0.Довідники
     #endregion
     
     #region DIRECTORY "ФізичніОсоби"
-    
     public static class ФізичніОсоби_Const
     {
         public const string TABLE = "tab_a16";
@@ -4297,8 +4275,7 @@ namespace StorageAndTrade_1_0.Довідники
         public const string Стать = "col_a1";
         public const string ІПН = "col_a2";
     }
-	
-    
+
     public class ФізичніОсоби_Objest : DirectoryObject
     {
         public ФізичніОсоби_Objest() : base(Config.Kernel!, "tab_a16",
@@ -4554,7 +4531,6 @@ namespace StorageAndTrade_1_0.Довідники
     #endregion
     
     #region DIRECTORY "СтруктураПідприємства"
-    
     public static class СтруктураПідприємства_Const
     {
         public const string TABLE = "tab_a18";
@@ -4563,8 +4539,7 @@ namespace StorageAndTrade_1_0.Довідники
         public const string Код = "col_h9";
         public const string Керівник = "col_i1";
     }
-	
-    
+
     public class СтруктураПідприємства_Objest : DirectoryObject
     {
         public СтруктураПідприємства_Objest() : base(Config.Kernel!, "tab_a18",
@@ -4702,7 +4677,6 @@ namespace StorageAndTrade_1_0.Довідники
     #endregion
     
     #region DIRECTORY "КраїниСвіту"
-    
     public static class КраїниСвіту_Const
     {
         public const string TABLE = "tab_a19";
@@ -4711,8 +4685,7 @@ namespace StorageAndTrade_1_0.Довідники
         public const string Код = "col_i3";
         public const string НазваПовна = "col_i4";
     }
-	
-    
+
     public class КраїниСвіту_Objest : DirectoryObject
     {
         public КраїниСвіту_Objest() : base(Config.Kernel!, "tab_a19",
@@ -4850,7 +4823,6 @@ namespace StorageAndTrade_1_0.Довідники
     #endregion
     
     #region DIRECTORY "Файли"
-    
     public static class Файли_Const
     {
         public const string TABLE = "tab_a20";
@@ -4862,8 +4834,7 @@ namespace StorageAndTrade_1_0.Довідники
         public const string Розмір = "col_a3";
         public const string ДатаСтворення = "col_a4";
     }
-	
-    
+
     public class Файли_Objest : DirectoryObject
     {
         public Файли_Objest() : base(Config.Kernel!, "tab_a20",
@@ -5016,7 +4987,6 @@ namespace StorageAndTrade_1_0.Довідники
     #endregion
     
     #region DIRECTORY "ХарактеристикиНоменклатури"
-    
     public static class ХарактеристикиНоменклатури_Const
     {
         public const string TABLE = "tab_a21";
@@ -5026,8 +4996,7 @@ namespace StorageAndTrade_1_0.Довідники
         public const string НазваПовна = "col_i9";
         public const string Номенклатура = "col_a1";
     }
-	
-    
+
     public class ХарактеристикиНоменклатури_Objest : DirectoryObject
     {
         public ХарактеристикиНоменклатури_Objest() : base(Config.Kernel!, "tab_a21",
@@ -5170,7 +5139,6 @@ namespace StorageAndTrade_1_0.Довідники
     #endregion
     
     #region DIRECTORY "Номенклатура_Папки"
-    
     public static class Номенклатура_Папки_Const
     {
         public const string TABLE = "tab_a22";
@@ -5179,8 +5147,7 @@ namespace StorageAndTrade_1_0.Довідники
         public const string Код = "col_j2";
         public const string Родич = "col_j3";
     }
-	
-    
+
     public class Номенклатура_Папки_Objest : DirectoryObject
     {
         public Номенклатура_Папки_Objest() : base(Config.Kernel!, "tab_a22",
@@ -5318,7 +5285,6 @@ namespace StorageAndTrade_1_0.Довідники
     #endregion
     
     #region DIRECTORY "Контрагенти_Папки"
-    
     public static class Контрагенти_Папки_Const
     {
         public const string TABLE = "tab_a23";
@@ -5327,8 +5293,7 @@ namespace StorageAndTrade_1_0.Довідники
         public const string Код = "col_j5";
         public const string Родич = "col_j6";
     }
-	
-    
+
     public class Контрагенти_Папки_Objest : DirectoryObject
     {
         public Контрагенти_Папки_Objest() : base(Config.Kernel!, "tab_a23",
@@ -5466,7 +5431,6 @@ namespace StorageAndTrade_1_0.Довідники
     #endregion
     
     #region DIRECTORY "Склади_Папки"
-    
     public static class Склади_Папки_Const
     {
         public const string TABLE = "tab_a24";
@@ -5475,8 +5439,7 @@ namespace StorageAndTrade_1_0.Довідники
         public const string Код = "col_j8";
         public const string Родич = "col_a1";
     }
-	
-    
+
     public class Склади_Папки_Objest : DirectoryObject
     {
         public Склади_Папки_Objest() : base(Config.Kernel!, "tab_a24",
@@ -5614,7 +5577,6 @@ namespace StorageAndTrade_1_0.Довідники
     #endregion
     
     #region DIRECTORY "Каси"
-    
     public static class Каси_Const
     {
         public const string TABLE = "tab_a26";
@@ -5624,8 +5586,7 @@ namespace StorageAndTrade_1_0.Довідники
         public const string Валюта = "col_a2";
         public const string Підрозділ = "col_a1";
     }
-	
-    
+
     public class Каси_Objest : DirectoryObject
     {
         public Каси_Objest() : base(Config.Kernel!, "tab_a26",
@@ -5768,7 +5729,6 @@ namespace StorageAndTrade_1_0.Довідники
     #endregion
     
     #region DIRECTORY "БанківськіРахункиОрганізацій"
-    
     public static class БанківськіРахункиОрганізацій_Const
     {
         public const string TABLE = "tab_a27";
@@ -5787,8 +5747,7 @@ namespace StorageAndTrade_1_0.Довідники
         public const string Закритий = "col_n3";
         public const string Організація = "col_a1";
     }
-	
-    
+
     public class БанківськіРахункиОрганізацій_Objest : DirectoryObject
     {
         public БанківськіРахункиОрганізацій_Objest() : base(Config.Kernel!, "tab_a27",
@@ -5976,7 +5935,6 @@ namespace StorageAndTrade_1_0.Довідники
     #endregion
     
     #region DIRECTORY "ДоговориКонтрагентів"
-    
     public static class ДоговориКонтрагентів_Const
     {
         public const string TABLE = "tab_a28";
@@ -6002,8 +5960,7 @@ namespace StorageAndTrade_1_0.Довідники
         public const string Сума = "col_b7";
         public const string Коментар = "col_a3";
     }
-	
-    
+
     public class ДоговориКонтрагентів_Objest : DirectoryObject
     {
         public ДоговориКонтрагентів_Objest() : base(Config.Kernel!, "tab_a28",
@@ -6227,7 +6184,6 @@ namespace StorageAndTrade_1_0.Довідники
     #endregion
     
     #region DIRECTORY "БанківськіРахункиКонтрагентів"
-    
     public static class БанківськіРахункиКонтрагентів_Const
     {
         public const string TABLE = "tab_a29";
@@ -6248,8 +6204,7 @@ namespace StorageAndTrade_1_0.Довідники
         public const string Закрито = "col_o2";
         public const string Контрагент = "col_o3";
     }
-	
-    
+
     public class БанківськіРахункиКонтрагентів_Objest : DirectoryObject
     {
         public БанківськіРахункиКонтрагентів_Objest() : base(Config.Kernel!, "tab_a29",
@@ -6447,7 +6402,6 @@ namespace StorageAndTrade_1_0.Довідники
     #endregion
     
     #region DIRECTORY "СтаттяРухуКоштів"
-    
     public static class СтаттяРухуКоштів_Const
     {
         public const string TABLE = "tab_a45";
@@ -6458,8 +6412,7 @@ namespace StorageAndTrade_1_0.Довідники
         public const string ВидРухуКоштів = "col_j2";
         public const string Опис = "col_j1";
     }
-	
-    
+
     public class СтаттяРухуКоштів_Objest : DirectoryObject
     {
         public СтаттяРухуКоштів_Objest() : base(Config.Kernel!, "tab_a45",
@@ -6685,7 +6638,6 @@ namespace StorageAndTrade_1_0.Довідники
     #endregion
     
     #region DIRECTORY "СеріїНоменклатури"
-    
     public static class СеріїНоменклатури_Const
     {
         public const string TABLE = "tab_b02";
@@ -6694,8 +6646,7 @@ namespace StorageAndTrade_1_0.Довідники
         public const string Коментар = "col_a1";
         public const string ДатаСтворення = "col_a2";
     }
-	
-    
+
     public class СеріїНоменклатури_Objest : DirectoryObject
     {
         public СеріїНоменклатури_Objest() : base(Config.Kernel!, "tab_b02",
@@ -6834,7 +6785,6 @@ namespace StorageAndTrade_1_0.Довідники
     #endregion
     
     #region DIRECTORY "ПартіяТоварівКомпозит"
-    
     public static class ПартіяТоварівКомпозит_Const
     {
         public const string TABLE = "tab_b06";
@@ -6846,8 +6796,7 @@ namespace StorageAndTrade_1_0.Довідники
         public const string ПоступленняТоварівТаПослуг = "col_a4";
         public const string ВведенняЗалишків = "col_a5";
     }
-	
-    
+
     public class ПартіяТоварівКомпозит_Objest : DirectoryObject
     {
         public ПартіяТоварівКомпозит_Objest() : base(Config.Kernel!, "tab_b06",
@@ -7000,7 +6949,6 @@ namespace StorageAndTrade_1_0.Довідники
     #endregion
     
     #region DIRECTORY "ВидиЗапасів"
-    
     public static class ВидиЗапасів_Const
     {
         public const string TABLE = "tab_b13";
@@ -7012,8 +6960,7 @@ namespace StorageAndTrade_1_0.Довідники
         public const string Контрагент = "col_b1";
         public const string Договір = "col_b2";
     }
-	
-    
+
     public class ВидиЗапасів_Objest : DirectoryObject
     {
         public ВидиЗапасів_Objest() : base(Config.Kernel!, "tab_b13",
@@ -7166,7 +7113,6 @@ namespace StorageAndTrade_1_0.Довідники
     #endregion
     
     #region DIRECTORY "ПродажіДокументКомпозит"
-    
     public static class ПродажіДокументКомпозит_Const
     {
         public const string TABLE = "tab_b14";
@@ -7178,8 +7124,7 @@ namespace StorageAndTrade_1_0.Довідники
         public const string АктВиконанихРобіт = "col_b9";
         public const string РеалізаціяТоварівТаПослуг = "col_c1";
     }
-	
-    
+
     public class ПродажіДокументКомпозит_Objest : DirectoryObject
     {
         public ПродажіДокументКомпозит_Objest() : base(Config.Kernel!, "tab_b14",
@@ -7332,7 +7277,6 @@ namespace StorageAndTrade_1_0.Довідники
     #endregion
     
     #region DIRECTORY "АналітикаНоменклатуриКомпозит"
-    
     public static class АналітикаНоменклатуриКомпозит_Const
     {
         public const string TABLE = "tab_b15";
@@ -7343,8 +7287,7 @@ namespace StorageAndTrade_1_0.Довідники
         public const string Серія = "col_a6";
         public const string Склад = "col_a7";
     }
-	
-    
+
     public class АналітикаНоменклатуриКомпозит_Objest : DirectoryObject
     {
         public АналітикаНоменклатуриКомпозит_Objest() : base(Config.Kernel!, "tab_b15",
@@ -7492,7 +7435,6 @@ namespace StorageAndTrade_1_0.Довідники
     #endregion
     
     #region DIRECTORY "АналітикаКонтрагентівКомпозит"
-    
     public static class АналітикаКонтрагентівКомпозит_Const
     {
         public const string TABLE = "tab_b16";
@@ -7502,8 +7444,7 @@ namespace StorageAndTrade_1_0.Довідники
         public const string Контрагент = "col_b1";
         public const string Договір = "col_b2";
     }
-	
-    
+
     public class АналітикаКонтрагентівКомпозит_Objest : DirectoryObject
     {
         public АналітикаКонтрагентівКомпозит_Objest() : base(Config.Kernel!, "tab_b16",
@@ -7646,7 +7587,6 @@ namespace StorageAndTrade_1_0.Довідники
     #endregion
     
     #region DIRECTORY "АналітикаПартійКомпозит"
-    
     public static class АналітикаПартійКомпозит_Const
     {
         public const string TABLE = "tab_b18";
@@ -7654,8 +7594,7 @@ namespace StorageAndTrade_1_0.Довідники
         public const string Назва = "col_b4";
         public const string Контрагент = "col_b6";
     }
-	
-    
+
     public class АналітикаПартійКомпозит_Objest : DirectoryObject
     {
         public АналітикаПартійКомпозит_Objest() : base(Config.Kernel!, "tab_b18",
@@ -7788,7 +7727,6 @@ namespace StorageAndTrade_1_0.Довідники
     #endregion
     
     #region DIRECTORY "СкладськіПриміщення"
-    
     public static class СкладськіПриміщення_Const
     {
         public const string TABLE = "tab_a71";
@@ -7797,8 +7735,7 @@ namespace StorageAndTrade_1_0.Довідники
         public const string НалаштуванняАдресногоЗберігання = "col_a3";
         public const string Склад = "col_a1";
     }
-	
-    
+
     public class СкладськіПриміщення_Objest : DirectoryObject
     {
         public СкладськіПриміщення_Objest() : base(Config.Kernel!, "tab_a71",
@@ -7936,7 +7873,6 @@ namespace StorageAndTrade_1_0.Довідники
     #endregion
     
     #region DIRECTORY "СкладськіКомірки"
-    
     public static class СкладськіКомірки_Const
     {
         public const string TABLE = "tab_a72";
@@ -7952,8 +7888,7 @@ namespace StorageAndTrade_1_0.Довідники
         public const string ТипСкладськоїКомірки = "col_a9";
         public const string Типорозмір = "col_b1";
     }
-	
-    
+
     public class СкладськіКомірки_Objest : DirectoryObject
     {
         public СкладськіКомірки_Objest() : base(Config.Kernel!, "tab_a72",
@@ -8126,7 +8061,6 @@ namespace StorageAndTrade_1_0.Довідники
     #endregion
     
     #region DIRECTORY "ОбластьЗберігання"
-    
     public static class ОбластьЗберігання_Const
     {
         public const string TABLE = "tab_a73";
@@ -8135,8 +8069,7 @@ namespace StorageAndTrade_1_0.Довідники
         public const string Опис = "col_a3";
         public const string Приміщення = "col_a4";
     }
-	
-    
+
     public class ОбластьЗберігання_Objest : DirectoryObject
     {
         public ОбластьЗберігання_Objest() : base(Config.Kernel!, "tab_a73",
@@ -8274,7 +8207,6 @@ namespace StorageAndTrade_1_0.Довідники
     #endregion
     
     #region DIRECTORY "ТипорозміриКомірок"
-    
     public static class ТипорозміриКомірок_Const
     {
         public const string TABLE = "tab_a75";
@@ -8286,8 +8218,7 @@ namespace StorageAndTrade_1_0.Довідники
         public const string Обєм = "col_a5";
         public const string Ширина = "col_a6";
     }
-	
-    
+
     public class ТипорозміриКомірок_Objest : DirectoryObject
     {
         public ТипорозміриКомірок_Objest() : base(Config.Kernel!, "tab_a75",
@@ -8440,7 +8371,6 @@ namespace StorageAndTrade_1_0.Довідники
     #endregion
     
     #region DIRECTORY "СкладськіКомірки_Папки"
-    
     public static class СкладськіКомірки_Папки_Const
     {
         public const string TABLE = "tab_a76";
@@ -8450,8 +8380,7 @@ namespace StorageAndTrade_1_0.Довідники
         public const string Родич = "col_j3";
         public const string Приміщення = "col_a1";
     }
-	
-    
+
     public class СкладськіКомірки_Папки_Objest : DirectoryObject
     {
         public СкладськіКомірки_Папки_Objest() : base(Config.Kernel!, "tab_a76",
@@ -9651,6 +9580,312 @@ namespace StorageAndTrade_1_0.Документи
         public const string Основа = "col_b8";
         public const string Коментар = "col_a2";
     }
+
+    public static class ЗамовленняПостачальнику_Export
+    {
+        public static void ToXmlFile(ЗамовленняПостачальнику_Pointer ЗамовленняПостачальнику, string pathToSave)
+        {
+            ЗамовленняПостачальнику_Objest ЗамовленняПостачальнику_Objest = ЗамовленняПостачальнику.GetDocumentObject(true);
+
+            XmlWriter xmlWriter = XmlWriter.Create(pathToSave, new XmlWriterSettings() { Indent = true, Encoding = System.Text.Encoding.UTF8 });
+            xmlWriter.WriteStartDocument();
+            xmlWriter.WriteStartElement("root");
+            xmlWriter.WriteAttributeString("uid", ЗамовленняПостачальнику_Objest.UnigueID.ToString());
+            
+            xmlWriter.WriteStartElement("Назва");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ЗамовленняПостачальнику_Objest.Назва);
+              
+            xmlWriter.WriteEndElement(); //Назва
+            xmlWriter.WriteStartElement("НомерДок");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ЗамовленняПостачальнику_Objest.НомерДок);
+              
+            xmlWriter.WriteEndElement(); //НомерДок
+            xmlWriter.WriteStartElement("ДатаДок");
+            xmlWriter.WriteAttributeString("type", "datetime");
+            
+                xmlWriter.WriteValue(ЗамовленняПостачальнику_Objest.ДатаДок);
+              
+            xmlWriter.WriteEndElement(); //ДатаДок
+            xmlWriter.WriteStartElement("Контрагент");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Контрагенти");
+                    xmlWriter.WriteAttributeString("uid", ЗамовленняПостачальнику_Objest.Контрагент.UnigueID.ToString());
+                    xmlWriter.WriteString(ЗамовленняПостачальнику_Objest.Контрагент.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Контрагент
+            xmlWriter.WriteStartElement("Організація");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Організації");
+                    xmlWriter.WriteAttributeString("uid", ЗамовленняПостачальнику_Objest.Організація.UnigueID.ToString());
+                    xmlWriter.WriteString(ЗамовленняПостачальнику_Objest.Організація.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Організація
+            xmlWriter.WriteStartElement("Склад");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Склади");
+                    xmlWriter.WriteAttributeString("uid", ЗамовленняПостачальнику_Objest.Склад.UnigueID.ToString());
+                    xmlWriter.WriteString(ЗамовленняПостачальнику_Objest.Склад.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Склад
+            xmlWriter.WriteStartElement("Валюта");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Валюти");
+                    xmlWriter.WriteAttributeString("uid", ЗамовленняПостачальнику_Objest.Валюта.UnigueID.ToString());
+                    xmlWriter.WriteString(ЗамовленняПостачальнику_Objest.Валюта.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Валюта
+            xmlWriter.WriteStartElement("СумаДокументу");
+            xmlWriter.WriteAttributeString("type", "numeric");
+            
+                xmlWriter.WriteValue(ЗамовленняПостачальнику_Objest.СумаДокументу);
+              
+            xmlWriter.WriteEndElement(); //СумаДокументу
+            xmlWriter.WriteStartElement("Каса");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Каси");
+                    xmlWriter.WriteAttributeString("uid", ЗамовленняПостачальнику_Objest.Каса.UnigueID.ToString());
+                    xmlWriter.WriteString(ЗамовленняПостачальнику_Objest.Каса.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Каса
+            xmlWriter.WriteStartElement("БанківськийРахунок");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.БанківськіРахункиОрганізацій");
+                    xmlWriter.WriteAttributeString("uid", ЗамовленняПостачальнику_Objest.БанківськийРахунок.UnigueID.ToString());
+                    xmlWriter.WriteString(ЗамовленняПостачальнику_Objest.БанківськийРахунок.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //БанківськийРахунок
+            xmlWriter.WriteStartElement("Підрозділ");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.СтруктураПідприємства");
+                    xmlWriter.WriteAttributeString("uid", ЗамовленняПостачальнику_Objest.Підрозділ.UnigueID.ToString());
+                    xmlWriter.WriteString(ЗамовленняПостачальнику_Objest.Підрозділ.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Підрозділ
+            xmlWriter.WriteStartElement("Договір");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.ДоговориКонтрагентів");
+                    xmlWriter.WriteAttributeString("uid", ЗамовленняПостачальнику_Objest.Договір.UnigueID.ToString());
+                    xmlWriter.WriteString(ЗамовленняПостачальнику_Objest.Договір.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Договір
+            xmlWriter.WriteStartElement("Автор");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
+                    xmlWriter.WriteAttributeString("uid", ЗамовленняПостачальнику_Objest.Автор.UnigueID.ToString());
+                    xmlWriter.WriteString(ЗамовленняПостачальнику_Objest.Автор.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Автор
+            xmlWriter.WriteStartElement("ДатаПоступлення");
+            xmlWriter.WriteAttributeString("type", "date");
+            
+                xmlWriter.WriteValue(ЗамовленняПостачальнику_Objest.ДатаПоступлення);
+              
+            xmlWriter.WriteEndElement(); //ДатаПоступлення
+            xmlWriter.WriteStartElement("АдресаДоставкиДляПостачальника");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ЗамовленняПостачальнику_Objest.АдресаДоставкиДляПостачальника);
+              
+            xmlWriter.WriteEndElement(); //АдресаДоставкиДляПостачальника
+            xmlWriter.WriteStartElement("ПовернутиТару");
+            xmlWriter.WriteAttributeString("type", "boolean");
+            
+                xmlWriter.WriteValue(ЗамовленняПостачальнику_Objest.ПовернутиТару);
+              
+            xmlWriter.WriteEndElement(); //ПовернутиТару
+            xmlWriter.WriteStartElement("СпосібДоставки");
+            xmlWriter.WriteAttributeString("type", "enum");
+            
+                xmlWriter.WriteAttributeString("pointer", "Перелічення.СпособиДоставки");
+                xmlWriter.WriteAttributeString("uid", ((int)ЗамовленняПостачальнику_Objest.СпосібДоставки).ToString());
+                xmlWriter.WriteString(ЗамовленняПостачальнику_Objest.СпосібДоставки.ToString());
+              
+            xmlWriter.WriteEndElement(); //СпосібДоставки
+            xmlWriter.WriteStartElement("ЧасДоставкиЗ");
+            xmlWriter.WriteAttributeString("type", "time");
+            
+                xmlWriter.WriteValue(ЗамовленняПостачальнику_Objest.ЧасДоставкиЗ);
+              
+            xmlWriter.WriteEndElement(); //ЧасДоставкиЗ
+            xmlWriter.WriteStartElement("ЧасДоставкиДо");
+            xmlWriter.WriteAttributeString("type", "time");
+            
+                xmlWriter.WriteValue(ЗамовленняПостачальнику_Objest.ЧасДоставкиДо);
+              
+            xmlWriter.WriteEndElement(); //ЧасДоставкиДо
+            xmlWriter.WriteStartElement("АдресаДоставки");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ЗамовленняПостачальнику_Objest.АдресаДоставки);
+              
+            xmlWriter.WriteEndElement(); //АдресаДоставки
+            xmlWriter.WriteStartElement("ГосподарськаОперація");
+            xmlWriter.WriteAttributeString("type", "enum");
+            
+                xmlWriter.WriteAttributeString("pointer", "Перелічення.ГосподарськіОперації");
+                xmlWriter.WriteAttributeString("uid", ((int)ЗамовленняПостачальнику_Objest.ГосподарськаОперація).ToString());
+                xmlWriter.WriteString(ЗамовленняПостачальнику_Objest.ГосподарськаОперація.ToString());
+              
+            xmlWriter.WriteEndElement(); //ГосподарськаОперація
+            xmlWriter.WriteStartElement("Статус");
+            xmlWriter.WriteAttributeString("type", "enum");
+            
+                xmlWriter.WriteAttributeString("pointer", "Перелічення.СтатусиЗамовленьПостачальникам");
+                xmlWriter.WriteAttributeString("uid", ((int)ЗамовленняПостачальнику_Objest.Статус).ToString());
+                xmlWriter.WriteString(ЗамовленняПостачальнику_Objest.Статус.ToString());
+              
+            xmlWriter.WriteEndElement(); //Статус
+            xmlWriter.WriteStartElement("ФормаОплати");
+            xmlWriter.WriteAttributeString("type", "enum");
+            
+                xmlWriter.WriteAttributeString("pointer", "Перелічення.ФормаОплати");
+                xmlWriter.WriteAttributeString("uid", ((int)ЗамовленняПостачальнику_Objest.ФормаОплати).ToString());
+                xmlWriter.WriteString(ЗамовленняПостачальнику_Objest.ФормаОплати.ToString());
+              
+            xmlWriter.WriteEndElement(); //ФормаОплати
+            xmlWriter.WriteStartElement("Менеджер");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
+                    xmlWriter.WriteAttributeString("uid", ЗамовленняПостачальнику_Objest.Менеджер.UnigueID.ToString());
+                    xmlWriter.WriteString(ЗамовленняПостачальнику_Objest.Менеджер.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Менеджер
+            xmlWriter.WriteStartElement("Основа");
+            xmlWriter.WriteAttributeString("type", "composite_pointer");
+            
+                xmlWriter.WriteRaw(((UuidAndText)ЗамовленняПостачальнику_Objest.Основа).ToXml());
+              
+            xmlWriter.WriteEndElement(); //Основа
+            xmlWriter.WriteStartElement("Коментар");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ЗамовленняПостачальнику_Objest.Коментар);
+              
+            xmlWriter.WriteEndElement(); //Коментар
+
+                /* 
+                Табличні частини
+                */
+
+                xmlWriter.WriteStartElement("TabularParts");
+                
+                    xmlWriter.WriteStartElement("TablePart");
+                    xmlWriter.WriteAttributeString("name", "Товари");
+
+                    foreach(ЗамовленняПостачальнику_Товари_TablePart.Record record in ЗамовленняПостачальнику_Objest.Товари_TablePart.Records)
+                    {
+                        xmlWriter.WriteStartElement("row");
+                        xmlWriter.WriteAttributeString("uid", record.UID.ToString());
+                        
+                        xmlWriter.WriteStartElement("НомерРядка");
+                        xmlWriter.WriteAttributeString("type", "integer");
+                        
+                            xmlWriter.WriteValue(record.НомерРядка);
+                          
+                        xmlWriter.WriteEndElement(); //НомерРядка
+                        xmlWriter.WriteStartElement("Номенклатура");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.Номенклатура");
+                                xmlWriter.WriteAttributeString("uid", record.Номенклатура.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Номенклатура.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Номенклатура
+                        xmlWriter.WriteStartElement("ХарактеристикаНоменклатури");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.ХарактеристикиНоменклатури");
+                                xmlWriter.WriteAttributeString("uid", record.ХарактеристикаНоменклатури.UnigueID.ToString());
+                                xmlWriter.WriteString(record.ХарактеристикаНоменклатури.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //ХарактеристикаНоменклатури
+                        xmlWriter.WriteStartElement("Пакування");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.ПакуванняОдиниціВиміру");
+                                xmlWriter.WriteAttributeString("uid", record.Пакування.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Пакування.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Пакування
+                        xmlWriter.WriteStartElement("КількістьУпаковок");
+                        xmlWriter.WriteAttributeString("type", "integer");
+                        
+                            xmlWriter.WriteValue(record.КількістьУпаковок);
+                          
+                        xmlWriter.WriteEndElement(); //КількістьУпаковок
+                        xmlWriter.WriteStartElement("Кількість");
+                        xmlWriter.WriteAttributeString("type", "numeric");
+                        
+                            xmlWriter.WriteValue(record.Кількість);
+                          
+                        xmlWriter.WriteEndElement(); //Кількість
+                        xmlWriter.WriteStartElement("ДатаПоступлення");
+                        xmlWriter.WriteAttributeString("type", "date");
+                        
+                            xmlWriter.WriteValue(record.ДатаПоступлення);
+                          
+                        xmlWriter.WriteEndElement(); //ДатаПоступлення
+                        xmlWriter.WriteStartElement("Ціна");
+                        xmlWriter.WriteAttributeString("type", "numeric");
+                        
+                            xmlWriter.WriteValue(record.Ціна);
+                          
+                        xmlWriter.WriteEndElement(); //Ціна
+                        xmlWriter.WriteStartElement("Сума");
+                        xmlWriter.WriteAttributeString("type", "numeric");
+                        
+                            xmlWriter.WriteValue(record.Сума);
+                          
+                        xmlWriter.WriteEndElement(); //Сума
+                        xmlWriter.WriteStartElement("Скидка");
+                        xmlWriter.WriteAttributeString("type", "numeric");
+                        
+                            xmlWriter.WriteValue(record.Скидка);
+                          
+                        xmlWriter.WriteEndElement(); //Скидка
+                        xmlWriter.WriteStartElement("Склад");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.Склади");
+                                xmlWriter.WriteAttributeString("uid", record.Склад.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Склад.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Склад
+                        xmlWriter.WriteStartElement("Підрозділ");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.СтруктураПідприємства");
+                                xmlWriter.WriteAttributeString("uid", record.Підрозділ.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Підрозділ.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Підрозділ
+                        xmlWriter.WriteEndElement(); //row
+                    }
+
+                    xmlWriter.WriteEndElement(); //TablePart
+                
+                xmlWriter.WriteEndElement(); //TabularParts
+            
+
+            xmlWriter.WriteEndElement(); //root
+            xmlWriter.WriteEndDocument();
+            xmlWriter.Close();
+        }
+    }
 	
     
     public class ЗамовленняПостачальнику_Objest : DocumentObject
@@ -10090,6 +10325,362 @@ namespace StorageAndTrade_1_0.Документи
         public const string Каса = "col_d3";
         public const string Основа = "col_a1";
         public const string Коментар = "col_b1";
+    }
+
+    public static class ПоступленняТоварівТаПослуг_Export
+    {
+        public static void ToXmlFile(ПоступленняТоварівТаПослуг_Pointer ПоступленняТоварівТаПослуг, string pathToSave)
+        {
+            ПоступленняТоварівТаПослуг_Objest ПоступленняТоварівТаПослуг_Objest = ПоступленняТоварівТаПослуг.GetDocumentObject(true);
+
+            XmlWriter xmlWriter = XmlWriter.Create(pathToSave, new XmlWriterSettings() { Indent = true, Encoding = System.Text.Encoding.UTF8 });
+            xmlWriter.WriteStartDocument();
+            xmlWriter.WriteStartElement("root");
+            xmlWriter.WriteAttributeString("uid", ПоступленняТоварівТаПослуг_Objest.UnigueID.ToString());
+            
+            xmlWriter.WriteStartElement("Назва");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ПоступленняТоварівТаПослуг_Objest.Назва);
+              
+            xmlWriter.WriteEndElement(); //Назва
+            xmlWriter.WriteStartElement("НомерДок");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ПоступленняТоварівТаПослуг_Objest.НомерДок);
+              
+            xmlWriter.WriteEndElement(); //НомерДок
+            xmlWriter.WriteStartElement("ДатаДок");
+            xmlWriter.WriteAttributeString("type", "datetime");
+            
+                xmlWriter.WriteValue(ПоступленняТоварівТаПослуг_Objest.ДатаДок);
+              
+            xmlWriter.WriteEndElement(); //ДатаДок
+            xmlWriter.WriteStartElement("Валюта");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Валюти");
+                    xmlWriter.WriteAttributeString("uid", ПоступленняТоварівТаПослуг_Objest.Валюта.UnigueID.ToString());
+                    xmlWriter.WriteString(ПоступленняТоварівТаПослуг_Objest.Валюта.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Валюта
+            xmlWriter.WriteStartElement("ГосподарськаОперація");
+            xmlWriter.WriteAttributeString("type", "enum");
+            
+                xmlWriter.WriteAttributeString("pointer", "Перелічення.ГосподарськіОперації");
+                xmlWriter.WriteAttributeString("uid", ((int)ПоступленняТоварівТаПослуг_Objest.ГосподарськаОперація).ToString());
+                xmlWriter.WriteString(ПоступленняТоварівТаПослуг_Objest.ГосподарськаОперація.ToString());
+              
+            xmlWriter.WriteEndElement(); //ГосподарськаОперація
+            xmlWriter.WriteStartElement("Підрозділ");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.СтруктураПідприємства");
+                    xmlWriter.WriteAttributeString("uid", ПоступленняТоварівТаПослуг_Objest.Підрозділ.UnigueID.ToString());
+                    xmlWriter.WriteString(ПоступленняТоварівТаПослуг_Objest.Підрозділ.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Підрозділ
+            xmlWriter.WriteStartElement("Склад");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Склади");
+                    xmlWriter.WriteAttributeString("uid", ПоступленняТоварівТаПослуг_Objest.Склад.UnigueID.ToString());
+                    xmlWriter.WriteString(ПоступленняТоварівТаПослуг_Objest.Склад.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Склад
+            xmlWriter.WriteStartElement("Контрагент");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Контрагенти");
+                    xmlWriter.WriteAttributeString("uid", ПоступленняТоварівТаПослуг_Objest.Контрагент.UnigueID.ToString());
+                    xmlWriter.WriteString(ПоступленняТоварівТаПослуг_Objest.Контрагент.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Контрагент
+            xmlWriter.WriteStartElement("СумаДокументу");
+            xmlWriter.WriteAttributeString("type", "numeric");
+            
+                xmlWriter.WriteValue(ПоступленняТоварівТаПослуг_Objest.СумаДокументу);
+              
+            xmlWriter.WriteEndElement(); //СумаДокументу
+            xmlWriter.WriteStartElement("ЗамовленняПостачальнику");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Документи.ЗамовленняПостачальнику");
+                    xmlWriter.WriteAttributeString("uid", ПоступленняТоварівТаПослуг_Objest.ЗамовленняПостачальнику.UnigueID.ToString());
+                    xmlWriter.WriteString(ПоступленняТоварівТаПослуг_Objest.ЗамовленняПостачальнику.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //ЗамовленняПостачальнику
+            xmlWriter.WriteStartElement("ДатаОплати");
+            xmlWriter.WriteAttributeString("type", "date");
+            
+                xmlWriter.WriteValue(ПоступленняТоварівТаПослуг_Objest.ДатаОплати);
+              
+            xmlWriter.WriteEndElement(); //ДатаОплати
+            xmlWriter.WriteStartElement("ФормаОплати");
+            xmlWriter.WriteAttributeString("type", "enum");
+            
+                xmlWriter.WriteAttributeString("pointer", "Перелічення.ФормаОплати");
+                xmlWriter.WriteAttributeString("uid", ((int)ПоступленняТоварівТаПослуг_Objest.ФормаОплати).ToString());
+                xmlWriter.WriteString(ПоступленняТоварівТаПослуг_Objest.ФормаОплати.ToString());
+              
+            xmlWriter.WriteEndElement(); //ФормаОплати
+            xmlWriter.WriteStartElement("Узгоджений");
+            xmlWriter.WriteAttributeString("type", "boolean");
+            
+                xmlWriter.WriteValue(ПоступленняТоварівТаПослуг_Objest.Узгоджений);
+              
+            xmlWriter.WriteEndElement(); //Узгоджений
+            xmlWriter.WriteStartElement("БанківськийРахунокОрганізації");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.БанківськіРахункиОрганізацій");
+                    xmlWriter.WriteAttributeString("uid", ПоступленняТоварівТаПослуг_Objest.БанківськийРахунокОрганізації.UnigueID.ToString());
+                    xmlWriter.WriteString(ПоступленняТоварівТаПослуг_Objest.БанківськийРахунокОрганізації.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //БанківськийРахунокОрганізації
+            xmlWriter.WriteStartElement("НомерВхідногоДокументу");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ПоступленняТоварівТаПослуг_Objest.НомерВхідногоДокументу);
+              
+            xmlWriter.WriteEndElement(); //НомерВхідногоДокументу
+            xmlWriter.WriteStartElement("ДатаВхідногоДокументу");
+            xmlWriter.WriteAttributeString("type", "date");
+            
+                xmlWriter.WriteValue(ПоступленняТоварівТаПослуг_Objest.ДатаВхідногоДокументу);
+              
+            xmlWriter.WriteEndElement(); //ДатаВхідногоДокументу
+            xmlWriter.WriteStartElement("БанківськийРахунокКонтрагента");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.БанківськіРахункиКонтрагентів");
+                    xmlWriter.WriteAttributeString("uid", ПоступленняТоварівТаПослуг_Objest.БанківськийРахунокКонтрагента.UnigueID.ToString());
+                    xmlWriter.WriteString(ПоступленняТоварівТаПослуг_Objest.БанківськийРахунокКонтрагента.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //БанківськийРахунокКонтрагента
+            xmlWriter.WriteStartElement("Договір");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.ДоговориКонтрагентів");
+                    xmlWriter.WriteAttributeString("uid", ПоступленняТоварівТаПослуг_Objest.Договір.UnigueID.ToString());
+                    xmlWriter.WriteString(ПоступленняТоварівТаПослуг_Objest.Договір.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Договір
+            xmlWriter.WriteStartElement("Автор");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
+                    xmlWriter.WriteAttributeString("uid", ПоступленняТоварівТаПослуг_Objest.Автор.UnigueID.ToString());
+                    xmlWriter.WriteString(ПоступленняТоварівТаПослуг_Objest.Автор.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Автор
+            xmlWriter.WriteStartElement("ПовернутиТару");
+            xmlWriter.WriteAttributeString("type", "boolean");
+            
+                xmlWriter.WriteValue(ПоступленняТоварівТаПослуг_Objest.ПовернутиТару);
+              
+            xmlWriter.WriteEndElement(); //ПовернутиТару
+            xmlWriter.WriteStartElement("ДатаПоверненняТари");
+            xmlWriter.WriteAttributeString("type", "date");
+            
+                xmlWriter.WriteValue(ПоступленняТоварівТаПослуг_Objest.ДатаПоверненняТари);
+              
+            xmlWriter.WriteEndElement(); //ДатаПоверненняТари
+            xmlWriter.WriteStartElement("СпосібДоставки");
+            xmlWriter.WriteAttributeString("type", "enum");
+            
+                xmlWriter.WriteAttributeString("pointer", "Перелічення.СпособиДоставки");
+                xmlWriter.WriteAttributeString("uid", ((int)ПоступленняТоварівТаПослуг_Objest.СпосібДоставки).ToString());
+                xmlWriter.WriteString(ПоступленняТоварівТаПослуг_Objest.СпосібДоставки.ToString());
+              
+            xmlWriter.WriteEndElement(); //СпосібДоставки
+            xmlWriter.WriteStartElement("Організація");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Організації");
+                    xmlWriter.WriteAttributeString("uid", ПоступленняТоварівТаПослуг_Objest.Організація.UnigueID.ToString());
+                    xmlWriter.WriteString(ПоступленняТоварівТаПослуг_Objest.Організація.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Організація
+            xmlWriter.WriteStartElement("Курс");
+            xmlWriter.WriteAttributeString("type", "numeric");
+            
+                xmlWriter.WriteValue(ПоступленняТоварівТаПослуг_Objest.Курс);
+              
+            xmlWriter.WriteEndElement(); //Курс
+            xmlWriter.WriteStartElement("Кратність");
+            xmlWriter.WriteAttributeString("type", "integer");
+            
+                xmlWriter.WriteValue(ПоступленняТоварівТаПослуг_Objest.Кратність);
+              
+            xmlWriter.WriteEndElement(); //Кратність
+            xmlWriter.WriteStartElement("ЧасДоставкиЗ");
+            xmlWriter.WriteAttributeString("type", "time");
+            
+                xmlWriter.WriteValue(ПоступленняТоварівТаПослуг_Objest.ЧасДоставкиЗ);
+              
+            xmlWriter.WriteEndElement(); //ЧасДоставкиЗ
+            xmlWriter.WriteStartElement("ЧасДоставкиДо");
+            xmlWriter.WriteAttributeString("type", "time");
+            
+                xmlWriter.WriteValue(ПоступленняТоварівТаПослуг_Objest.ЧасДоставкиДо);
+              
+            xmlWriter.WriteEndElement(); //ЧасДоставкиДо
+            xmlWriter.WriteStartElement("Менеджер");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
+                    xmlWriter.WriteAttributeString("uid", ПоступленняТоварівТаПослуг_Objest.Менеджер.UnigueID.ToString());
+                    xmlWriter.WriteString(ПоступленняТоварівТаПослуг_Objest.Менеджер.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Менеджер
+            xmlWriter.WriteStartElement("СтаттяРухуКоштів");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.СтаттяРухуКоштів");
+                    xmlWriter.WriteAttributeString("uid", ПоступленняТоварівТаПослуг_Objest.СтаттяРухуКоштів.UnigueID.ToString());
+                    xmlWriter.WriteString(ПоступленняТоварівТаПослуг_Objest.СтаттяРухуКоштів.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //СтаттяРухуКоштів
+            xmlWriter.WriteStartElement("Каса");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Каси");
+                    xmlWriter.WriteAttributeString("uid", ПоступленняТоварівТаПослуг_Objest.Каса.UnigueID.ToString());
+                    xmlWriter.WriteString(ПоступленняТоварівТаПослуг_Objest.Каса.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Каса
+            xmlWriter.WriteStartElement("Основа");
+            xmlWriter.WriteAttributeString("type", "composite_pointer");
+            
+                xmlWriter.WriteRaw(((UuidAndText)ПоступленняТоварівТаПослуг_Objest.Основа).ToXml());
+              
+            xmlWriter.WriteEndElement(); //Основа
+            xmlWriter.WriteStartElement("Коментар");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ПоступленняТоварівТаПослуг_Objest.Коментар);
+              
+            xmlWriter.WriteEndElement(); //Коментар
+
+                /* 
+                Табличні частини
+                */
+
+                xmlWriter.WriteStartElement("TabularParts");
+                
+                    xmlWriter.WriteStartElement("TablePart");
+                    xmlWriter.WriteAttributeString("name", "Товари");
+
+                    foreach(ПоступленняТоварівТаПослуг_Товари_TablePart.Record record in ПоступленняТоварівТаПослуг_Objest.Товари_TablePart.Records)
+                    {
+                        xmlWriter.WriteStartElement("row");
+                        xmlWriter.WriteAttributeString("uid", record.UID.ToString());
+                        
+                        xmlWriter.WriteStartElement("НомерРядка");
+                        xmlWriter.WriteAttributeString("type", "integer");
+                        
+                            xmlWriter.WriteValue(record.НомерРядка);
+                          
+                        xmlWriter.WriteEndElement(); //НомерРядка
+                        xmlWriter.WriteStartElement("Номенклатура");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.Номенклатура");
+                                xmlWriter.WriteAttributeString("uid", record.Номенклатура.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Номенклатура.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Номенклатура
+                        xmlWriter.WriteStartElement("ХарактеристикаНоменклатури");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.ХарактеристикиНоменклатури");
+                                xmlWriter.WriteAttributeString("uid", record.ХарактеристикаНоменклатури.UnigueID.ToString());
+                                xmlWriter.WriteString(record.ХарактеристикаНоменклатури.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //ХарактеристикаНоменклатури
+                        xmlWriter.WriteStartElement("Серія");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.СеріїНоменклатури");
+                                xmlWriter.WriteAttributeString("uid", record.Серія.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Серія.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Серія
+                        xmlWriter.WriteStartElement("Пакування");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.ПакуванняОдиниціВиміру");
+                                xmlWriter.WriteAttributeString("uid", record.Пакування.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Пакування.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Пакування
+                        xmlWriter.WriteStartElement("КількістьУпаковок");
+                        xmlWriter.WriteAttributeString("type", "integer");
+                        
+                            xmlWriter.WriteValue(record.КількістьУпаковок);
+                          
+                        xmlWriter.WriteEndElement(); //КількістьУпаковок
+                        xmlWriter.WriteStartElement("Кількість");
+                        xmlWriter.WriteAttributeString("type", "numeric");
+                        
+                            xmlWriter.WriteValue(record.Кількість);
+                          
+                        xmlWriter.WriteEndElement(); //Кількість
+                        xmlWriter.WriteStartElement("Ціна");
+                        xmlWriter.WriteAttributeString("type", "numeric");
+                        
+                            xmlWriter.WriteValue(record.Ціна);
+                          
+                        xmlWriter.WriteEndElement(); //Ціна
+                        xmlWriter.WriteStartElement("Сума");
+                        xmlWriter.WriteAttributeString("type", "numeric");
+                        
+                            xmlWriter.WriteValue(record.Сума);
+                          
+                        xmlWriter.WriteEndElement(); //Сума
+                        xmlWriter.WriteStartElement("Склад");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.Склади");
+                                xmlWriter.WriteAttributeString("uid", record.Склад.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Склад.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Склад
+                        xmlWriter.WriteStartElement("ЗамовленняПостачальнику");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Документи.ЗамовленняПостачальнику");
+                                xmlWriter.WriteAttributeString("uid", record.ЗамовленняПостачальнику.UnigueID.ToString());
+                                xmlWriter.WriteString(record.ЗамовленняПостачальнику.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //ЗамовленняПостачальнику
+                        xmlWriter.WriteStartElement("Скидка");
+                        xmlWriter.WriteAttributeString("type", "numeric");
+                        
+                            xmlWriter.WriteValue(record.Скидка);
+                          
+                        xmlWriter.WriteEndElement(); //Скидка
+                        xmlWriter.WriteStartElement("Підрозділ");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.СтруктураПідприємства");
+                                xmlWriter.WriteAttributeString("uid", record.Підрозділ.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Підрозділ.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Підрозділ
+                        xmlWriter.WriteEndElement(); //row
+                    }
+
+                    xmlWriter.WriteEndElement(); //TablePart
+                
+                xmlWriter.WriteEndElement(); //TabularParts
+            
+
+            xmlWriter.WriteEndElement(); //root
+            xmlWriter.WriteEndDocument();
+            xmlWriter.Close();
+        }
     }
 	
     
@@ -10563,6 +11154,326 @@ namespace StorageAndTrade_1_0.Документи
         public const string Коментар = "col_c1";
         public const string Менеджер = "col_b2";
     }
+
+    public static class ЗамовленняКлієнта_Export
+    {
+        public static void ToXmlFile(ЗамовленняКлієнта_Pointer ЗамовленняКлієнта, string pathToSave)
+        {
+            ЗамовленняКлієнта_Objest ЗамовленняКлієнта_Objest = ЗамовленняКлієнта.GetDocumentObject(true);
+
+            XmlWriter xmlWriter = XmlWriter.Create(pathToSave, new XmlWriterSettings() { Indent = true, Encoding = System.Text.Encoding.UTF8 });
+            xmlWriter.WriteStartDocument();
+            xmlWriter.WriteStartElement("root");
+            xmlWriter.WriteAttributeString("uid", ЗамовленняКлієнта_Objest.UnigueID.ToString());
+            
+            xmlWriter.WriteStartElement("Назва");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ЗамовленняКлієнта_Objest.Назва);
+              
+            xmlWriter.WriteEndElement(); //Назва
+            xmlWriter.WriteStartElement("НомерДок");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ЗамовленняКлієнта_Objest.НомерДок);
+              
+            xmlWriter.WriteEndElement(); //НомерДок
+            xmlWriter.WriteStartElement("ДатаДок");
+            xmlWriter.WriteAttributeString("type", "datetime");
+            
+                xmlWriter.WriteValue(ЗамовленняКлієнта_Objest.ДатаДок);
+              
+            xmlWriter.WriteEndElement(); //ДатаДок
+            xmlWriter.WriteStartElement("Контрагент");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Контрагенти");
+                    xmlWriter.WriteAttributeString("uid", ЗамовленняКлієнта_Objest.Контрагент.UnigueID.ToString());
+                    xmlWriter.WriteString(ЗамовленняКлієнта_Objest.Контрагент.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Контрагент
+            xmlWriter.WriteStartElement("Організація");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Організації");
+                    xmlWriter.WriteAttributeString("uid", ЗамовленняКлієнта_Objest.Організація.UnigueID.ToString());
+                    xmlWriter.WriteString(ЗамовленняКлієнта_Objest.Організація.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Організація
+            xmlWriter.WriteStartElement("Валюта");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Валюти");
+                    xmlWriter.WriteAttributeString("uid", ЗамовленняКлієнта_Objest.Валюта.UnigueID.ToString());
+                    xmlWriter.WriteString(ЗамовленняКлієнта_Objest.Валюта.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Валюта
+            xmlWriter.WriteStartElement("СумаДокументу");
+            xmlWriter.WriteAttributeString("type", "numeric");
+            
+                xmlWriter.WriteValue(ЗамовленняКлієнта_Objest.СумаДокументу);
+              
+            xmlWriter.WriteEndElement(); //СумаДокументу
+            xmlWriter.WriteStartElement("Склад");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Склади");
+                    xmlWriter.WriteAttributeString("uid", ЗамовленняКлієнта_Objest.Склад.UnigueID.ToString());
+                    xmlWriter.WriteString(ЗамовленняКлієнта_Objest.Склад.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Склад
+            xmlWriter.WriteStartElement("Статус");
+            xmlWriter.WriteAttributeString("type", "enum");
+            
+                xmlWriter.WriteAttributeString("pointer", "Перелічення.СтатусиЗамовленьКлієнтів");
+                xmlWriter.WriteAttributeString("uid", ((int)ЗамовленняКлієнта_Objest.Статус).ToString());
+                xmlWriter.WriteString(ЗамовленняКлієнта_Objest.Статус.ToString());
+              
+            xmlWriter.WriteEndElement(); //Статус
+            xmlWriter.WriteStartElement("Узгоджений");
+            xmlWriter.WriteAttributeString("type", "boolean");
+            
+                xmlWriter.WriteValue(ЗамовленняКлієнта_Objest.Узгоджений);
+              
+            xmlWriter.WriteEndElement(); //Узгоджений
+            xmlWriter.WriteStartElement("ФормаОплати");
+            xmlWriter.WriteAttributeString("type", "enum");
+            
+                xmlWriter.WriteAttributeString("pointer", "Перелічення.ФормаОплати");
+                xmlWriter.WriteAttributeString("uid", ((int)ЗамовленняКлієнта_Objest.ФормаОплати).ToString());
+                xmlWriter.WriteString(ЗамовленняКлієнта_Objest.ФормаОплати.ToString());
+              
+            xmlWriter.WriteEndElement(); //ФормаОплати
+            xmlWriter.WriteStartElement("БанківськийРахунок");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.БанківськіРахункиОрганізацій");
+                    xmlWriter.WriteAttributeString("uid", ЗамовленняКлієнта_Objest.БанківськийРахунок.UnigueID.ToString());
+                    xmlWriter.WriteString(ЗамовленняКлієнта_Objest.БанківськийРахунок.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //БанківськийРахунок
+            xmlWriter.WriteStartElement("БанківськийРахунокКонтрагента");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.БанківськіРахункиКонтрагентів");
+                    xmlWriter.WriteAttributeString("uid", ЗамовленняКлієнта_Objest.БанківськийРахунокКонтрагента.UnigueID.ToString());
+                    xmlWriter.WriteString(ЗамовленняКлієнта_Objest.БанківськийРахунокКонтрагента.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //БанківськийРахунокКонтрагента
+            xmlWriter.WriteStartElement("Каса");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Каси");
+                    xmlWriter.WriteAttributeString("uid", ЗамовленняКлієнта_Objest.Каса.UnigueID.ToString());
+                    xmlWriter.WriteString(ЗамовленняКлієнта_Objest.Каса.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Каса
+            xmlWriter.WriteStartElement("СумаАвансуДоЗабезпечення");
+            xmlWriter.WriteAttributeString("type", "numeric");
+            
+                xmlWriter.WriteValue(ЗамовленняКлієнта_Objest.СумаАвансуДоЗабезпечення);
+              
+            xmlWriter.WriteEndElement(); //СумаАвансуДоЗабезпечення
+            xmlWriter.WriteStartElement("СумаПередоплатиДоВідгрузки");
+            xmlWriter.WriteAttributeString("type", "numeric");
+            
+                xmlWriter.WriteValue(ЗамовленняКлієнта_Objest.СумаПередоплатиДоВідгрузки);
+              
+            xmlWriter.WriteEndElement(); //СумаПередоплатиДоВідгрузки
+            xmlWriter.WriteStartElement("ДатаВідгрузки");
+            xmlWriter.WriteAttributeString("type", "date");
+            
+                xmlWriter.WriteValue(ЗамовленняКлієнта_Objest.ДатаВідгрузки);
+              
+            xmlWriter.WriteEndElement(); //ДатаВідгрузки
+            xmlWriter.WriteStartElement("АдресаДоставки");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ЗамовленняКлієнта_Objest.АдресаДоставки);
+              
+            xmlWriter.WriteEndElement(); //АдресаДоставки
+            xmlWriter.WriteStartElement("ГосподарськаОперація");
+            xmlWriter.WriteAttributeString("type", "enum");
+            
+                xmlWriter.WriteAttributeString("pointer", "Перелічення.ГосподарськіОперації");
+                xmlWriter.WriteAttributeString("uid", ((int)ЗамовленняКлієнта_Objest.ГосподарськаОперація).ToString());
+                xmlWriter.WriteString(ЗамовленняКлієнта_Objest.ГосподарськаОперація.ToString());
+              
+            xmlWriter.WriteEndElement(); //ГосподарськаОперація
+            xmlWriter.WriteStartElement("Договір");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.ДоговориКонтрагентів");
+                    xmlWriter.WriteAttributeString("uid", ЗамовленняКлієнта_Objest.Договір.UnigueID.ToString());
+                    xmlWriter.WriteString(ЗамовленняКлієнта_Objest.Договір.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Договір
+            xmlWriter.WriteStartElement("Підрозділ");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.СтруктураПідприємства");
+                    xmlWriter.WriteAttributeString("uid", ЗамовленняКлієнта_Objest.Підрозділ.UnigueID.ToString());
+                    xmlWriter.WriteString(ЗамовленняКлієнта_Objest.Підрозділ.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Підрозділ
+            xmlWriter.WriteStartElement("Автор");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
+                    xmlWriter.WriteAttributeString("uid", ЗамовленняКлієнта_Objest.Автор.UnigueID.ToString());
+                    xmlWriter.WriteString(ЗамовленняКлієнта_Objest.Автор.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Автор
+            xmlWriter.WriteStartElement("СпосібДоставки");
+            xmlWriter.WriteAttributeString("type", "enum");
+            
+                xmlWriter.WriteAttributeString("pointer", "Перелічення.СпособиДоставки");
+                xmlWriter.WriteAttributeString("uid", ((int)ЗамовленняКлієнта_Objest.СпосібДоставки).ToString());
+                xmlWriter.WriteString(ЗамовленняКлієнта_Objest.СпосібДоставки.ToString());
+              
+            xmlWriter.WriteEndElement(); //СпосібДоставки
+            xmlWriter.WriteStartElement("ЧасДоставкиЗ");
+            xmlWriter.WriteAttributeString("type", "time");
+            
+                xmlWriter.WriteValue(ЗамовленняКлієнта_Objest.ЧасДоставкиЗ);
+              
+            xmlWriter.WriteEndElement(); //ЧасДоставкиЗ
+            xmlWriter.WriteStartElement("ЧасДоставкиДо");
+            xmlWriter.WriteAttributeString("type", "time");
+            
+                xmlWriter.WriteValue(ЗамовленняКлієнта_Objest.ЧасДоставкиДо);
+              
+            xmlWriter.WriteEndElement(); //ЧасДоставкиДо
+            xmlWriter.WriteStartElement("ПовернутиТару");
+            xmlWriter.WriteAttributeString("type", "boolean");
+            
+                xmlWriter.WriteValue(ЗамовленняКлієнта_Objest.ПовернутиТару);
+              
+            xmlWriter.WriteEndElement(); //ПовернутиТару
+            xmlWriter.WriteStartElement("ДатаПоверненняТари");
+            xmlWriter.WriteAttributeString("type", "date");
+            
+                xmlWriter.WriteValue(ЗамовленняКлієнта_Objest.ДатаПоверненняТари);
+              
+            xmlWriter.WriteEndElement(); //ДатаПоверненняТари
+            xmlWriter.WriteStartElement("Коментар");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ЗамовленняКлієнта_Objest.Коментар);
+              
+            xmlWriter.WriteEndElement(); //Коментар
+            xmlWriter.WriteStartElement("Менеджер");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
+                    xmlWriter.WriteAttributeString("uid", ЗамовленняКлієнта_Objest.Менеджер.UnigueID.ToString());
+                    xmlWriter.WriteString(ЗамовленняКлієнта_Objest.Менеджер.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Менеджер
+
+                /* 
+                Табличні частини
+                */
+
+                xmlWriter.WriteStartElement("TabularParts");
+                
+                    xmlWriter.WriteStartElement("TablePart");
+                    xmlWriter.WriteAttributeString("name", "Товари");
+
+                    foreach(ЗамовленняКлієнта_Товари_TablePart.Record record in ЗамовленняКлієнта_Objest.Товари_TablePart.Records)
+                    {
+                        xmlWriter.WriteStartElement("row");
+                        xmlWriter.WriteAttributeString("uid", record.UID.ToString());
+                        
+                        xmlWriter.WriteStartElement("НомерРядка");
+                        xmlWriter.WriteAttributeString("type", "integer");
+                        
+                            xmlWriter.WriteValue(record.НомерРядка);
+                          
+                        xmlWriter.WriteEndElement(); //НомерРядка
+                        xmlWriter.WriteStartElement("Номенклатура");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.Номенклатура");
+                                xmlWriter.WriteAttributeString("uid", record.Номенклатура.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Номенклатура.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Номенклатура
+                        xmlWriter.WriteStartElement("ХарактеристикаНоменклатури");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.ХарактеристикиНоменклатури");
+                                xmlWriter.WriteAttributeString("uid", record.ХарактеристикаНоменклатури.UnigueID.ToString());
+                                xmlWriter.WriteString(record.ХарактеристикаНоменклатури.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //ХарактеристикаНоменклатури
+                        xmlWriter.WriteStartElement("Пакування");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.ПакуванняОдиниціВиміру");
+                                xmlWriter.WriteAttributeString("uid", record.Пакування.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Пакування.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Пакування
+                        xmlWriter.WriteStartElement("КількістьУпаковок");
+                        xmlWriter.WriteAttributeString("type", "integer");
+                        
+                            xmlWriter.WriteValue(record.КількістьУпаковок);
+                          
+                        xmlWriter.WriteEndElement(); //КількістьУпаковок
+                        xmlWriter.WriteStartElement("Кількість");
+                        xmlWriter.WriteAttributeString("type", "numeric");
+                        
+                            xmlWriter.WriteValue(record.Кількість);
+                          
+                        xmlWriter.WriteEndElement(); //Кількість
+                        xmlWriter.WriteStartElement("ВидЦіни");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.ВидиЦін");
+                                xmlWriter.WriteAttributeString("uid", record.ВидЦіни.UnigueID.ToString());
+                                xmlWriter.WriteString(record.ВидЦіни.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //ВидЦіни
+                        xmlWriter.WriteStartElement("Ціна");
+                        xmlWriter.WriteAttributeString("type", "numeric");
+                        
+                            xmlWriter.WriteValue(record.Ціна);
+                          
+                        xmlWriter.WriteEndElement(); //Ціна
+                        xmlWriter.WriteStartElement("Сума");
+                        xmlWriter.WriteAttributeString("type", "numeric");
+                        
+                            xmlWriter.WriteValue(record.Сума);
+                          
+                        xmlWriter.WriteEndElement(); //Сума
+                        xmlWriter.WriteStartElement("Скидка");
+                        xmlWriter.WriteAttributeString("type", "numeric");
+                        
+                            xmlWriter.WriteValue(record.Скидка);
+                          
+                        xmlWriter.WriteEndElement(); //Скидка
+                        xmlWriter.WriteStartElement("Склад");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.Склади");
+                                xmlWriter.WriteAttributeString("uid", record.Склад.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Склад.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Склад
+                        xmlWriter.WriteEndElement(); //row
+                    }
+
+                    xmlWriter.WriteEndElement(); //TablePart
+                
+                xmlWriter.WriteEndElement(); //TabularParts
+            
+
+            xmlWriter.WriteEndElement(); //root
+            xmlWriter.WriteEndDocument();
+            xmlWriter.Close();
+        }
+    }
 	
     
     public class ЗамовленняКлієнта_Objest : DocumentObject
@@ -11011,6 +11922,364 @@ namespace StorageAndTrade_1_0.Документи
         public const string Кратність = "col_d2";
         public const string Коментар = "col_b2";
         public const string Менеджер = "col_c9";
+    }
+
+    public static class РеалізаціяТоварівТаПослуг_Export
+    {
+        public static void ToXmlFile(РеалізаціяТоварівТаПослуг_Pointer РеалізаціяТоварівТаПослуг, string pathToSave)
+        {
+            РеалізаціяТоварівТаПослуг_Objest РеалізаціяТоварівТаПослуг_Objest = РеалізаціяТоварівТаПослуг.GetDocumentObject(true);
+
+            XmlWriter xmlWriter = XmlWriter.Create(pathToSave, new XmlWriterSettings() { Indent = true, Encoding = System.Text.Encoding.UTF8 });
+            xmlWriter.WriteStartDocument();
+            xmlWriter.WriteStartElement("root");
+            xmlWriter.WriteAttributeString("uid", РеалізаціяТоварівТаПослуг_Objest.UnigueID.ToString());
+            
+            xmlWriter.WriteStartElement("Назва");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(РеалізаціяТоварівТаПослуг_Objest.Назва);
+              
+            xmlWriter.WriteEndElement(); //Назва
+            xmlWriter.WriteStartElement("НомерДок");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(РеалізаціяТоварівТаПослуг_Objest.НомерДок);
+              
+            xmlWriter.WriteEndElement(); //НомерДок
+            xmlWriter.WriteStartElement("ДатаДок");
+            xmlWriter.WriteAttributeString("type", "datetime");
+            
+                xmlWriter.WriteValue(РеалізаціяТоварівТаПослуг_Objest.ДатаДок);
+              
+            xmlWriter.WriteEndElement(); //ДатаДок
+            xmlWriter.WriteStartElement("Організація");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Організації");
+                    xmlWriter.WriteAttributeString("uid", РеалізаціяТоварівТаПослуг_Objest.Організація.UnigueID.ToString());
+                    xmlWriter.WriteString(РеалізаціяТоварівТаПослуг_Objest.Організація.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Організація
+            xmlWriter.WriteStartElement("Валюта");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Валюти");
+                    xmlWriter.WriteAttributeString("uid", РеалізаціяТоварівТаПослуг_Objest.Валюта.UnigueID.ToString());
+                    xmlWriter.WriteString(РеалізаціяТоварівТаПослуг_Objest.Валюта.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Валюта
+            xmlWriter.WriteStartElement("БанківськийРахунокОрганізації");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.БанківськіРахункиОрганізацій");
+                    xmlWriter.WriteAttributeString("uid", РеалізаціяТоварівТаПослуг_Objest.БанківськийРахунокОрганізації.UnigueID.ToString());
+                    xmlWriter.WriteString(РеалізаціяТоварівТаПослуг_Objest.БанківськийРахунокОрганізації.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //БанківськийРахунокОрганізації
+            xmlWriter.WriteStartElement("БанківськийРахунокКонтрагента");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.БанківськіРахункиКонтрагентів");
+                    xmlWriter.WriteAttributeString("uid", РеалізаціяТоварівТаПослуг_Objest.БанківськийРахунокКонтрагента.UnigueID.ToString());
+                    xmlWriter.WriteString(РеалізаціяТоварівТаПослуг_Objest.БанківськийРахунокКонтрагента.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //БанківськийРахунокКонтрагента
+            xmlWriter.WriteStartElement("ДатаОплати");
+            xmlWriter.WriteAttributeString("type", "date");
+            
+                xmlWriter.WriteValue(РеалізаціяТоварівТаПослуг_Objest.ДатаОплати);
+              
+            xmlWriter.WriteEndElement(); //ДатаОплати
+            xmlWriter.WriteStartElement("ЗамовленняКлієнта");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Документи.ЗамовленняКлієнта");
+                    xmlWriter.WriteAttributeString("uid", РеалізаціяТоварівТаПослуг_Objest.ЗамовленняКлієнта.UnigueID.ToString());
+                    xmlWriter.WriteString(РеалізаціяТоварівТаПослуг_Objest.ЗамовленняКлієнта.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //ЗамовленняКлієнта
+            xmlWriter.WriteStartElement("Контрагент");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Контрагенти");
+                    xmlWriter.WriteAttributeString("uid", РеалізаціяТоварівТаПослуг_Objest.Контрагент.UnigueID.ToString());
+                    xmlWriter.WriteString(РеалізаціяТоварівТаПослуг_Objest.Контрагент.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Контрагент
+            xmlWriter.WriteStartElement("СумаДокументу");
+            xmlWriter.WriteAttributeString("type", "numeric");
+            
+                xmlWriter.WriteValue(РеалізаціяТоварівТаПослуг_Objest.СумаДокументу);
+              
+            xmlWriter.WriteEndElement(); //СумаДокументу
+            xmlWriter.WriteStartElement("Підрозділ");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.СтруктураПідприємства");
+                    xmlWriter.WriteAttributeString("uid", РеалізаціяТоварівТаПослуг_Objest.Підрозділ.UnigueID.ToString());
+                    xmlWriter.WriteString(РеалізаціяТоварівТаПослуг_Objest.Підрозділ.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Підрозділ
+            xmlWriter.WriteStartElement("Склад");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Склади");
+                    xmlWriter.WriteAttributeString("uid", РеалізаціяТоварівТаПослуг_Objest.Склад.UnigueID.ToString());
+                    xmlWriter.WriteString(РеалізаціяТоварівТаПослуг_Objest.Склад.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Склад
+            xmlWriter.WriteStartElement("ФормаОплати");
+            xmlWriter.WriteAttributeString("type", "enum");
+            
+                xmlWriter.WriteAttributeString("pointer", "Перелічення.ФормаОплати");
+                xmlWriter.WriteAttributeString("uid", ((int)РеалізаціяТоварівТаПослуг_Objest.ФормаОплати).ToString());
+                xmlWriter.WriteString(РеалізаціяТоварівТаПослуг_Objest.ФормаОплати.ToString());
+              
+            xmlWriter.WriteEndElement(); //ФормаОплати
+            xmlWriter.WriteStartElement("ГосподарськаОперація");
+            xmlWriter.WriteAttributeString("type", "enum");
+            
+                xmlWriter.WriteAttributeString("pointer", "Перелічення.ГосподарськіОперації");
+                xmlWriter.WriteAttributeString("uid", ((int)РеалізаціяТоварівТаПослуг_Objest.ГосподарськаОперація).ToString());
+                xmlWriter.WriteString(РеалізаціяТоварівТаПослуг_Objest.ГосподарськаОперація.ToString());
+              
+            xmlWriter.WriteEndElement(); //ГосподарськаОперація
+            xmlWriter.WriteStartElement("Каса");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Каси");
+                    xmlWriter.WriteAttributeString("uid", РеалізаціяТоварівТаПослуг_Objest.Каса.UnigueID.ToString());
+                    xmlWriter.WriteString(РеалізаціяТоварівТаПослуг_Objest.Каса.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Каса
+            xmlWriter.WriteStartElement("Договір");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.ДоговориКонтрагентів");
+                    xmlWriter.WriteAttributeString("uid", РеалізаціяТоварівТаПослуг_Objest.Договір.UnigueID.ToString());
+                    xmlWriter.WriteString(РеалізаціяТоварівТаПослуг_Objest.Договір.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Договір
+            xmlWriter.WriteStartElement("Основа");
+            xmlWriter.WriteAttributeString("type", "composite_pointer");
+            
+                xmlWriter.WriteRaw(((UuidAndText)РеалізаціяТоварівТаПослуг_Objest.Основа).ToXml());
+              
+            xmlWriter.WriteEndElement(); //Основа
+            xmlWriter.WriteStartElement("Статус");
+            xmlWriter.WriteAttributeString("type", "enum");
+            
+                xmlWriter.WriteAttributeString("pointer", "Перелічення.СтатусиРеалізаціїТоварівТаПослуг");
+                xmlWriter.WriteAttributeString("uid", ((int)РеалізаціяТоварівТаПослуг_Objest.Статус).ToString());
+                xmlWriter.WriteString(РеалізаціяТоварівТаПослуг_Objest.Статус.ToString());
+              
+            xmlWriter.WriteEndElement(); //Статус
+            xmlWriter.WriteStartElement("Автор");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
+                    xmlWriter.WriteAttributeString("uid", РеалізаціяТоварівТаПослуг_Objest.Автор.UnigueID.ToString());
+                    xmlWriter.WriteString(РеалізаціяТоварівТаПослуг_Objest.Автор.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Автор
+            xmlWriter.WriteStartElement("СумаПередоплати");
+            xmlWriter.WriteAttributeString("type", "numeric");
+            
+                xmlWriter.WriteValue(РеалізаціяТоварівТаПослуг_Objest.СумаПередоплати);
+              
+            xmlWriter.WriteEndElement(); //СумаПередоплати
+            xmlWriter.WriteStartElement("СумаПередоплатиЗаТару");
+            xmlWriter.WriteAttributeString("type", "numeric");
+            
+                xmlWriter.WriteValue(РеалізаціяТоварівТаПослуг_Objest.СумаПередоплатиЗаТару);
+              
+            xmlWriter.WriteEndElement(); //СумаПередоплатиЗаТару
+            xmlWriter.WriteStartElement("СпосібДоставки");
+            xmlWriter.WriteAttributeString("type", "enum");
+            
+                xmlWriter.WriteAttributeString("pointer", "Перелічення.СпособиДоставки");
+                xmlWriter.WriteAttributeString("uid", ((int)РеалізаціяТоварівТаПослуг_Objest.СпосібДоставки).ToString());
+                xmlWriter.WriteString(РеалізаціяТоварівТаПослуг_Objest.СпосібДоставки.ToString());
+              
+            xmlWriter.WriteEndElement(); //СпосібДоставки
+            xmlWriter.WriteStartElement("ЧасДоставкиЗ");
+            xmlWriter.WriteAttributeString("type", "time");
+            
+                xmlWriter.WriteValue(РеалізаціяТоварівТаПослуг_Objest.ЧасДоставкиЗ);
+              
+            xmlWriter.WriteEndElement(); //ЧасДоставкиЗ
+            xmlWriter.WriteStartElement("ЧасДоставкиДо");
+            xmlWriter.WriteAttributeString("type", "time");
+            
+                xmlWriter.WriteValue(РеалізаціяТоварівТаПослуг_Objest.ЧасДоставкиДо);
+              
+            xmlWriter.WriteEndElement(); //ЧасДоставкиДо
+            xmlWriter.WriteStartElement("ПовернутиТару");
+            xmlWriter.WriteAttributeString("type", "boolean");
+            
+                xmlWriter.WriteValue(РеалізаціяТоварівТаПослуг_Objest.ПовернутиТару);
+              
+            xmlWriter.WriteEndElement(); //ПовернутиТару
+            xmlWriter.WriteStartElement("ДатаПоверненняТари");
+            xmlWriter.WriteAttributeString("type", "date");
+            
+                xmlWriter.WriteValue(РеалізаціяТоварівТаПослуг_Objest.ДатаПоверненняТари);
+              
+            xmlWriter.WriteEndElement(); //ДатаПоверненняТари
+            xmlWriter.WriteStartElement("Курс");
+            xmlWriter.WriteAttributeString("type", "numeric");
+            
+                xmlWriter.WriteValue(РеалізаціяТоварівТаПослуг_Objest.Курс);
+              
+            xmlWriter.WriteEndElement(); //Курс
+            xmlWriter.WriteStartElement("Кратність");
+            xmlWriter.WriteAttributeString("type", "integer");
+            
+                xmlWriter.WriteValue(РеалізаціяТоварівТаПослуг_Objest.Кратність);
+              
+            xmlWriter.WriteEndElement(); //Кратність
+            xmlWriter.WriteStartElement("Коментар");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(РеалізаціяТоварівТаПослуг_Objest.Коментар);
+              
+            xmlWriter.WriteEndElement(); //Коментар
+            xmlWriter.WriteStartElement("Менеджер");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
+                    xmlWriter.WriteAttributeString("uid", РеалізаціяТоварівТаПослуг_Objest.Менеджер.UnigueID.ToString());
+                    xmlWriter.WriteString(РеалізаціяТоварівТаПослуг_Objest.Менеджер.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Менеджер
+
+                /* 
+                Табличні частини
+                */
+
+                xmlWriter.WriteStartElement("TabularParts");
+                
+                    xmlWriter.WriteStartElement("TablePart");
+                    xmlWriter.WriteAttributeString("name", "Товари");
+
+                    foreach(РеалізаціяТоварівТаПослуг_Товари_TablePart.Record record in РеалізаціяТоварівТаПослуг_Objest.Товари_TablePart.Records)
+                    {
+                        xmlWriter.WriteStartElement("row");
+                        xmlWriter.WriteAttributeString("uid", record.UID.ToString());
+                        
+                        xmlWriter.WriteStartElement("НомерРядка");
+                        xmlWriter.WriteAttributeString("type", "integer");
+                        
+                            xmlWriter.WriteValue(record.НомерРядка);
+                          
+                        xmlWriter.WriteEndElement(); //НомерРядка
+                        xmlWriter.WriteStartElement("Номенклатура");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.Номенклатура");
+                                xmlWriter.WriteAttributeString("uid", record.Номенклатура.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Номенклатура.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Номенклатура
+                        xmlWriter.WriteStartElement("ХарактеристикаНоменклатури");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.ХарактеристикиНоменклатури");
+                                xmlWriter.WriteAttributeString("uid", record.ХарактеристикаНоменклатури.UnigueID.ToString());
+                                xmlWriter.WriteString(record.ХарактеристикаНоменклатури.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //ХарактеристикаНоменклатури
+                        xmlWriter.WriteStartElement("Серія");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.СеріїНоменклатури");
+                                xmlWriter.WriteAttributeString("uid", record.Серія.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Серія.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Серія
+                        xmlWriter.WriteStartElement("Пакування");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.ПакуванняОдиниціВиміру");
+                                xmlWriter.WriteAttributeString("uid", record.Пакування.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Пакування.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Пакування
+                        xmlWriter.WriteStartElement("КількістьУпаковок");
+                        xmlWriter.WriteAttributeString("type", "integer");
+                        
+                            xmlWriter.WriteValue(record.КількістьУпаковок);
+                          
+                        xmlWriter.WriteEndElement(); //КількістьУпаковок
+                        xmlWriter.WriteStartElement("Кількість");
+                        xmlWriter.WriteAttributeString("type", "numeric");
+                        
+                            xmlWriter.WriteValue(record.Кількість);
+                          
+                        xmlWriter.WriteEndElement(); //Кількість
+                        xmlWriter.WriteStartElement("ВидЦіни");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.ВидиЦін");
+                                xmlWriter.WriteAttributeString("uid", record.ВидЦіни.UnigueID.ToString());
+                                xmlWriter.WriteString(record.ВидЦіни.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //ВидЦіни
+                        xmlWriter.WriteStartElement("Ціна");
+                        xmlWriter.WriteAttributeString("type", "numeric");
+                        
+                            xmlWriter.WriteValue(record.Ціна);
+                          
+                        xmlWriter.WriteEndElement(); //Ціна
+                        xmlWriter.WriteStartElement("Сума");
+                        xmlWriter.WriteAttributeString("type", "numeric");
+                        
+                            xmlWriter.WriteValue(record.Сума);
+                          
+                        xmlWriter.WriteEndElement(); //Сума
+                        xmlWriter.WriteStartElement("Склад");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.Склади");
+                                xmlWriter.WriteAttributeString("uid", record.Склад.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Склад.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Склад
+                        xmlWriter.WriteStartElement("ЗамовленняКлієнта");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Документи.ЗамовленняКлієнта");
+                                xmlWriter.WriteAttributeString("uid", record.ЗамовленняКлієнта.UnigueID.ToString());
+                                xmlWriter.WriteString(record.ЗамовленняКлієнта.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //ЗамовленняКлієнта
+                        xmlWriter.WriteStartElement("РахунокФактура");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Документи.РахунокФактура");
+                                xmlWriter.WriteAttributeString("uid", record.РахунокФактура.UnigueID.ToString());
+                                xmlWriter.WriteString(record.РахунокФактура.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //РахунокФактура
+                        xmlWriter.WriteStartElement("Скидка");
+                        xmlWriter.WriteAttributeString("type", "numeric");
+                        
+                            xmlWriter.WriteValue(record.Скидка);
+                          
+                        xmlWriter.WriteEndElement(); //Скидка
+                        xmlWriter.WriteEndElement(); //row
+                    }
+
+                    xmlWriter.WriteEndElement(); //TablePart
+                
+                xmlWriter.WriteEndElement(); //TabularParts
+            
+
+            xmlWriter.WriteEndElement(); //root
+            xmlWriter.WriteEndDocument();
+            xmlWriter.Close();
+        }
     }
 	
     
@@ -11463,6 +12732,146 @@ namespace StorageAndTrade_1_0.Документи
         public const string Коментар = "col_g9";
         public const string Автор = "col_a4";
     }
+
+    public static class ВстановленняЦінНоменклатури_Export
+    {
+        public static void ToXmlFile(ВстановленняЦінНоменклатури_Pointer ВстановленняЦінНоменклатури, string pathToSave)
+        {
+            ВстановленняЦінНоменклатури_Objest ВстановленняЦінНоменклатури_Objest = ВстановленняЦінНоменклатури.GetDocumentObject(true);
+
+            XmlWriter xmlWriter = XmlWriter.Create(pathToSave, new XmlWriterSettings() { Indent = true, Encoding = System.Text.Encoding.UTF8 });
+            xmlWriter.WriteStartDocument();
+            xmlWriter.WriteStartElement("root");
+            xmlWriter.WriteAttributeString("uid", ВстановленняЦінНоменклатури_Objest.UnigueID.ToString());
+            
+            xmlWriter.WriteStartElement("Назва");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ВстановленняЦінНоменклатури_Objest.Назва);
+              
+            xmlWriter.WriteEndElement(); //Назва
+            xmlWriter.WriteStartElement("НомерДок");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ВстановленняЦінНоменклатури_Objest.НомерДок);
+              
+            xmlWriter.WriteEndElement(); //НомерДок
+            xmlWriter.WriteStartElement("ДатаДок");
+            xmlWriter.WriteAttributeString("type", "datetime");
+            
+                xmlWriter.WriteValue(ВстановленняЦінНоменклатури_Objest.ДатаДок);
+              
+            xmlWriter.WriteEndElement(); //ДатаДок
+            xmlWriter.WriteStartElement("Організація");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Організації");
+                    xmlWriter.WriteAttributeString("uid", ВстановленняЦінНоменклатури_Objest.Організація.UnigueID.ToString());
+                    xmlWriter.WriteString(ВстановленняЦінНоменклатури_Objest.Організація.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Організація
+            xmlWriter.WriteStartElement("Валюта");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Валюти");
+                    xmlWriter.WriteAttributeString("uid", ВстановленняЦінНоменклатури_Objest.Валюта.UnigueID.ToString());
+                    xmlWriter.WriteString(ВстановленняЦінНоменклатури_Objest.Валюта.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Валюта
+            xmlWriter.WriteStartElement("ВидЦіни");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.ВидиЦін");
+                    xmlWriter.WriteAttributeString("uid", ВстановленняЦінНоменклатури_Objest.ВидЦіни.UnigueID.ToString());
+                    xmlWriter.WriteString(ВстановленняЦінНоменклатури_Objest.ВидЦіни.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //ВидЦіни
+            xmlWriter.WriteStartElement("Коментар");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ВстановленняЦінНоменклатури_Objest.Коментар);
+              
+            xmlWriter.WriteEndElement(); //Коментар
+            xmlWriter.WriteStartElement("Автор");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
+                    xmlWriter.WriteAttributeString("uid", ВстановленняЦінНоменклатури_Objest.Автор.UnigueID.ToString());
+                    xmlWriter.WriteString(ВстановленняЦінНоменклатури_Objest.Автор.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Автор
+
+                /* 
+                Табличні частини
+                */
+
+                xmlWriter.WriteStartElement("TabularParts");
+                
+                    xmlWriter.WriteStartElement("TablePart");
+                    xmlWriter.WriteAttributeString("name", "Товари");
+
+                    foreach(ВстановленняЦінНоменклатури_Товари_TablePart.Record record in ВстановленняЦінНоменклатури_Objest.Товари_TablePart.Records)
+                    {
+                        xmlWriter.WriteStartElement("row");
+                        xmlWriter.WriteAttributeString("uid", record.UID.ToString());
+                        
+                        xmlWriter.WriteStartElement("НомерРядка");
+                        xmlWriter.WriteAttributeString("type", "integer");
+                        
+                            xmlWriter.WriteValue(record.НомерРядка);
+                          
+                        xmlWriter.WriteEndElement(); //НомерРядка
+                        xmlWriter.WriteStartElement("Номенклатура");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.Номенклатура");
+                                xmlWriter.WriteAttributeString("uid", record.Номенклатура.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Номенклатура.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Номенклатура
+                        xmlWriter.WriteStartElement("ХарактеристикаНоменклатури");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.ХарактеристикиНоменклатури");
+                                xmlWriter.WriteAttributeString("uid", record.ХарактеристикаНоменклатури.UnigueID.ToString());
+                                xmlWriter.WriteString(record.ХарактеристикаНоменклатури.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //ХарактеристикаНоменклатури
+                        xmlWriter.WriteStartElement("Пакування");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.ПакуванняОдиниціВиміру");
+                                xmlWriter.WriteAttributeString("uid", record.Пакування.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Пакування.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Пакування
+                        xmlWriter.WriteStartElement("ВидЦіни");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.ВидиЦін");
+                                xmlWriter.WriteAttributeString("uid", record.ВидЦіни.UnigueID.ToString());
+                                xmlWriter.WriteString(record.ВидЦіни.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //ВидЦіни
+                        xmlWriter.WriteStartElement("Ціна");
+                        xmlWriter.WriteAttributeString("type", "numeric");
+                        
+                            xmlWriter.WriteValue(record.Ціна);
+                          
+                        xmlWriter.WriteEndElement(); //Ціна
+                        xmlWriter.WriteEndElement(); //row
+                    }
+
+                    xmlWriter.WriteEndElement(); //TablePart
+                
+                xmlWriter.WriteEndElement(); //TabularParts
+            
+
+            xmlWriter.WriteEndElement(); //root
+            xmlWriter.WriteEndDocument();
+            xmlWriter.Close();
+        }
+    }
 	
     
     public class ВстановленняЦінНоменклатури_Objest : DocumentObject
@@ -11767,6 +13176,210 @@ namespace StorageAndTrade_1_0.Документи
         public const string Курс = "col_a4";
         public const string Коментар = "col_a3";
         public const string Автор = "col_a5";
+    }
+
+    public static class ПрихіднийКасовийОрдер_Export
+    {
+        public static void ToXmlFile(ПрихіднийКасовийОрдер_Pointer ПрихіднийКасовийОрдер, string pathToSave)
+        {
+            ПрихіднийКасовийОрдер_Objest ПрихіднийКасовийОрдер_Objest = ПрихіднийКасовийОрдер.GetDocumentObject(true);
+
+            XmlWriter xmlWriter = XmlWriter.Create(pathToSave, new XmlWriterSettings() { Indent = true, Encoding = System.Text.Encoding.UTF8 });
+            xmlWriter.WriteStartDocument();
+            xmlWriter.WriteStartElement("root");
+            xmlWriter.WriteAttributeString("uid", ПрихіднийКасовийОрдер_Objest.UnigueID.ToString());
+            
+            xmlWriter.WriteStartElement("Назва");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ПрихіднийКасовийОрдер_Objest.Назва);
+              
+            xmlWriter.WriteEndElement(); //Назва
+            xmlWriter.WriteStartElement("НомерДок");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ПрихіднийКасовийОрдер_Objest.НомерДок);
+              
+            xmlWriter.WriteEndElement(); //НомерДок
+            xmlWriter.WriteStartElement("ДатаДок");
+            xmlWriter.WriteAttributeString("type", "datetime");
+            
+                xmlWriter.WriteValue(ПрихіднийКасовийОрдер_Objest.ДатаДок);
+              
+            xmlWriter.WriteEndElement(); //ДатаДок
+            xmlWriter.WriteStartElement("Організація");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Організації");
+                    xmlWriter.WriteAttributeString("uid", ПрихіднийКасовийОрдер_Objest.Організація.UnigueID.ToString());
+                    xmlWriter.WriteString(ПрихіднийКасовийОрдер_Objest.Організація.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Організація
+            xmlWriter.WriteStartElement("Каса");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Каси");
+                    xmlWriter.WriteAttributeString("uid", ПрихіднийКасовийОрдер_Objest.Каса.UnigueID.ToString());
+                    xmlWriter.WriteString(ПрихіднийКасовийОрдер_Objest.Каса.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Каса
+            xmlWriter.WriteStartElement("СумаДокументу");
+            xmlWriter.WriteAttributeString("type", "numeric");
+            
+                xmlWriter.WriteValue(ПрихіднийКасовийОрдер_Objest.СумаДокументу);
+              
+            xmlWriter.WriteEndElement(); //СумаДокументу
+            xmlWriter.WriteStartElement("ГосподарськаОперація");
+            xmlWriter.WriteAttributeString("type", "enum");
+            
+                xmlWriter.WriteAttributeString("pointer", "Перелічення.ГосподарськіОперації");
+                xmlWriter.WriteAttributeString("uid", ((int)ПрихіднийКасовийОрдер_Objest.ГосподарськаОперація).ToString());
+                xmlWriter.WriteString(ПрихіднийКасовийОрдер_Objest.ГосподарськаОперація.ToString());
+              
+            xmlWriter.WriteEndElement(); //ГосподарськаОперація
+            xmlWriter.WriteStartElement("Основа");
+            xmlWriter.WriteAttributeString("type", "composite_pointer");
+            
+                xmlWriter.WriteRaw(((UuidAndText)ПрихіднийКасовийОрдер_Objest.Основа).ToXml());
+              
+            xmlWriter.WriteEndElement(); //Основа
+            xmlWriter.WriteStartElement("Контрагент");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Контрагенти");
+                    xmlWriter.WriteAttributeString("uid", ПрихіднийКасовийОрдер_Objest.Контрагент.UnigueID.ToString());
+                    xmlWriter.WriteString(ПрихіднийКасовийОрдер_Objest.Контрагент.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Контрагент
+            xmlWriter.WriteStartElement("Договір");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.ДоговориКонтрагентів");
+                    xmlWriter.WriteAttributeString("uid", ПрихіднийКасовийОрдер_Objest.Договір.UnigueID.ToString());
+                    xmlWriter.WriteString(ПрихіднийКасовийОрдер_Objest.Договір.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Договір
+            xmlWriter.WriteStartElement("БанківськийРахунок");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.БанківськіРахункиОрганізацій");
+                    xmlWriter.WriteAttributeString("uid", ПрихіднийКасовийОрдер_Objest.БанківськийРахунок.UnigueID.ToString());
+                    xmlWriter.WriteString(ПрихіднийКасовийОрдер_Objest.БанківськийРахунок.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //БанківськийРахунок
+            xmlWriter.WriteStartElement("Валюта");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Валюти");
+                    xmlWriter.WriteAttributeString("uid", ПрихіднийКасовийОрдер_Objest.Валюта.UnigueID.ToString());
+                    xmlWriter.WriteString(ПрихіднийКасовийОрдер_Objest.Валюта.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Валюта
+            xmlWriter.WriteStartElement("СтаттяРухуКоштів");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.СтаттяРухуКоштів");
+                    xmlWriter.WriteAttributeString("uid", ПрихіднийКасовийОрдер_Objest.СтаттяРухуКоштів.UnigueID.ToString());
+                    xmlWriter.WriteString(ПрихіднийКасовийОрдер_Objest.СтаттяРухуКоштів.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //СтаттяРухуКоштів
+            xmlWriter.WriteStartElement("КасаВідправник");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Каси");
+                    xmlWriter.WriteAttributeString("uid", ПрихіднийКасовийОрдер_Objest.КасаВідправник.UnigueID.ToString());
+                    xmlWriter.WriteString(ПрихіднийКасовийОрдер_Objest.КасаВідправник.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //КасаВідправник
+            xmlWriter.WriteStartElement("Курс");
+            xmlWriter.WriteAttributeString("type", "numeric");
+            
+                xmlWriter.WriteValue(ПрихіднийКасовийОрдер_Objest.Курс);
+              
+            xmlWriter.WriteEndElement(); //Курс
+            xmlWriter.WriteStartElement("Коментар");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ПрихіднийКасовийОрдер_Objest.Коментар);
+              
+            xmlWriter.WriteEndElement(); //Коментар
+            xmlWriter.WriteStartElement("Автор");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
+                    xmlWriter.WriteAttributeString("uid", ПрихіднийКасовийОрдер_Objest.Автор.UnigueID.ToString());
+                    xmlWriter.WriteString(ПрихіднийКасовийОрдер_Objest.Автор.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Автор
+
+                /* 
+                Табличні частини
+                */
+
+                xmlWriter.WriteStartElement("TabularParts");
+                
+                    xmlWriter.WriteStartElement("TablePart");
+                    xmlWriter.WriteAttributeString("name", "РозшифруванняПлатежу");
+
+                    foreach(ПрихіднийКасовийОрдер_РозшифруванняПлатежу_TablePart.Record record in ПрихіднийКасовийОрдер_Objest.РозшифруванняПлатежу_TablePart.Records)
+                    {
+                        xmlWriter.WriteStartElement("row");
+                        xmlWriter.WriteAttributeString("uid", record.UID.ToString());
+                        
+                        xmlWriter.WriteStartElement("НомерРядка");
+                        xmlWriter.WriteAttributeString("type", "integer");
+                        
+                            xmlWriter.WriteValue(record.НомерРядка);
+                          
+                        xmlWriter.WriteEndElement(); //НомерРядка
+                        xmlWriter.WriteStartElement("Замовлення");
+                        xmlWriter.WriteAttributeString("type", "string");
+                        
+                            xmlWriter.WriteValue(record.Замовлення);
+                          
+                        xmlWriter.WriteEndElement(); //Замовлення
+                        xmlWriter.WriteStartElement("Сума");
+                        xmlWriter.WriteAttributeString("type", "numeric");
+                        
+                            xmlWriter.WriteValue(record.Сума);
+                          
+                        xmlWriter.WriteEndElement(); //Сума
+                        xmlWriter.WriteStartElement("Підрозділ");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.СтруктураПідприємства");
+                                xmlWriter.WriteAttributeString("uid", record.Підрозділ.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Підрозділ.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Підрозділ
+                        xmlWriter.WriteStartElement("ВалютаВзаєморозрахунків");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.Валюти");
+                                xmlWriter.WriteAttributeString("uid", record.ВалютаВзаєморозрахунків.UnigueID.ToString());
+                                xmlWriter.WriteString(record.ВалютаВзаєморозрахунків.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //ВалютаВзаєморозрахунків
+                        xmlWriter.WriteStartElement("Організація");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.Організації");
+                                xmlWriter.WriteAttributeString("uid", record.Організація.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Організація.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Організація
+                        xmlWriter.WriteEndElement(); //row
+                    }
+
+                    xmlWriter.WriteEndElement(); //TablePart
+                
+                xmlWriter.WriteEndElement(); //TabularParts
+            
+
+            xmlWriter.WriteEndElement(); //root
+            xmlWriter.WriteEndDocument();
+            xmlWriter.Close();
+        }
     }
 	
     
@@ -12119,6 +13732,230 @@ namespace StorageAndTrade_1_0.Документи
         public const string Основа = "col_a1";
         public const string Коментар = "col_l1";
         public const string Автор = "col_a6";
+    }
+
+    public static class РозхіднийКасовийОрдер_Export
+    {
+        public static void ToXmlFile(РозхіднийКасовийОрдер_Pointer РозхіднийКасовийОрдер, string pathToSave)
+        {
+            РозхіднийКасовийОрдер_Objest РозхіднийКасовийОрдер_Objest = РозхіднийКасовийОрдер.GetDocumentObject(true);
+
+            XmlWriter xmlWriter = XmlWriter.Create(pathToSave, new XmlWriterSettings() { Indent = true, Encoding = System.Text.Encoding.UTF8 });
+            xmlWriter.WriteStartDocument();
+            xmlWriter.WriteStartElement("root");
+            xmlWriter.WriteAttributeString("uid", РозхіднийКасовийОрдер_Objest.UnigueID.ToString());
+            
+            xmlWriter.WriteStartElement("Назва");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(РозхіднийКасовийОрдер_Objest.Назва);
+              
+            xmlWriter.WriteEndElement(); //Назва
+            xmlWriter.WriteStartElement("НомерДок");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(РозхіднийКасовийОрдер_Objest.НомерДок);
+              
+            xmlWriter.WriteEndElement(); //НомерДок
+            xmlWriter.WriteStartElement("ДатаДок");
+            xmlWriter.WriteAttributeString("type", "datetime");
+            
+                xmlWriter.WriteValue(РозхіднийКасовийОрдер_Objest.ДатаДок);
+              
+            xmlWriter.WriteEndElement(); //ДатаДок
+            xmlWriter.WriteStartElement("Організація");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Організації");
+                    xmlWriter.WriteAttributeString("uid", РозхіднийКасовийОрдер_Objest.Організація.UnigueID.ToString());
+                    xmlWriter.WriteString(РозхіднийКасовийОрдер_Objest.Організація.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Організація
+            xmlWriter.WriteStartElement("Каса");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Каси");
+                    xmlWriter.WriteAttributeString("uid", РозхіднийКасовийОрдер_Objest.Каса.UnigueID.ToString());
+                    xmlWriter.WriteString(РозхіднийКасовийОрдер_Objest.Каса.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Каса
+            xmlWriter.WriteStartElement("СумаДокументу");
+            xmlWriter.WriteAttributeString("type", "numeric");
+            
+                xmlWriter.WriteValue(РозхіднийКасовийОрдер_Objest.СумаДокументу);
+              
+            xmlWriter.WriteEndElement(); //СумаДокументу
+            xmlWriter.WriteStartElement("СумаДокументуПоКурсу");
+            xmlWriter.WriteAttributeString("type", "numeric");
+            
+                xmlWriter.WriteValue(РозхіднийКасовийОрдер_Objest.СумаДокументуПоКурсу);
+              
+            xmlWriter.WriteEndElement(); //СумаДокументуПоКурсу
+            xmlWriter.WriteStartElement("ГосподарськаОперація");
+            xmlWriter.WriteAttributeString("type", "enum");
+            
+                xmlWriter.WriteAttributeString("pointer", "Перелічення.ГосподарськіОперації");
+                xmlWriter.WriteAttributeString("uid", ((int)РозхіднийКасовийОрдер_Objest.ГосподарськаОперація).ToString());
+                xmlWriter.WriteString(РозхіднийКасовийОрдер_Objest.ГосподарськаОперація.ToString());
+              
+            xmlWriter.WriteEndElement(); //ГосподарськаОперація
+            xmlWriter.WriteStartElement("ОрганізаціяОтримувач");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Організації");
+                    xmlWriter.WriteAttributeString("uid", РозхіднийКасовийОрдер_Objest.ОрганізаціяОтримувач.UnigueID.ToString());
+                    xmlWriter.WriteString(РозхіднийКасовийОрдер_Objest.ОрганізаціяОтримувач.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //ОрганізаціяОтримувач
+            xmlWriter.WriteStartElement("Контрагент");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Контрагенти");
+                    xmlWriter.WriteAttributeString("uid", РозхіднийКасовийОрдер_Objest.Контрагент.UnigueID.ToString());
+                    xmlWriter.WriteString(РозхіднийКасовийОрдер_Objest.Контрагент.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Контрагент
+            xmlWriter.WriteStartElement("Договір");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.ДоговориКонтрагентів");
+                    xmlWriter.WriteAttributeString("uid", РозхіднийКасовийОрдер_Objest.Договір.UnigueID.ToString());
+                    xmlWriter.WriteString(РозхіднийКасовийОрдер_Objest.Договір.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Договір
+            xmlWriter.WriteStartElement("БанківськийРахунок");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.БанківськіРахункиОрганізацій");
+                    xmlWriter.WriteAttributeString("uid", РозхіднийКасовийОрдер_Objest.БанківськийРахунок.UnigueID.ToString());
+                    xmlWriter.WriteString(РозхіднийКасовийОрдер_Objest.БанківськийРахунок.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //БанківськийРахунок
+            xmlWriter.WriteStartElement("Валюта");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Валюти");
+                    xmlWriter.WriteAttributeString("uid", РозхіднийКасовийОрдер_Objest.Валюта.UnigueID.ToString());
+                    xmlWriter.WriteString(РозхіднийКасовийОрдер_Objest.Валюта.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Валюта
+            xmlWriter.WriteStartElement("СтаттяРухуКоштів");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.СтаттяРухуКоштів");
+                    xmlWriter.WriteAttributeString("uid", РозхіднийКасовийОрдер_Objest.СтаттяРухуКоштів.UnigueID.ToString());
+                    xmlWriter.WriteString(РозхіднийКасовийОрдер_Objest.СтаттяРухуКоштів.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //СтаттяРухуКоштів
+            xmlWriter.WriteStartElement("КасаОтримувач");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Каси");
+                    xmlWriter.WriteAttributeString("uid", РозхіднийКасовийОрдер_Objest.КасаОтримувач.UnigueID.ToString());
+                    xmlWriter.WriteString(РозхіднийКасовийОрдер_Objest.КасаОтримувач.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //КасаОтримувач
+            xmlWriter.WriteStartElement("Курс");
+            xmlWriter.WriteAttributeString("type", "numeric");
+            
+                xmlWriter.WriteValue(РозхіднийКасовийОрдер_Objest.Курс);
+              
+            xmlWriter.WriteEndElement(); //Курс
+            xmlWriter.WriteStartElement("Основа");
+            xmlWriter.WriteAttributeString("type", "composite_pointer");
+            
+                xmlWriter.WriteRaw(((UuidAndText)РозхіднийКасовийОрдер_Objest.Основа).ToXml());
+              
+            xmlWriter.WriteEndElement(); //Основа
+            xmlWriter.WriteStartElement("Коментар");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(РозхіднийКасовийОрдер_Objest.Коментар);
+              
+            xmlWriter.WriteEndElement(); //Коментар
+            xmlWriter.WriteStartElement("Автор");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
+                    xmlWriter.WriteAttributeString("uid", РозхіднийКасовийОрдер_Objest.Автор.UnigueID.ToString());
+                    xmlWriter.WriteString(РозхіднийКасовийОрдер_Objest.Автор.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Автор
+
+                /* 
+                Табличні частини
+                */
+
+                xmlWriter.WriteStartElement("TabularParts");
+                
+                    xmlWriter.WriteStartElement("TablePart");
+                    xmlWriter.WriteAttributeString("name", "РозшифруванняПлатежу");
+
+                    foreach(РозхіднийКасовийОрдер_РозшифруванняПлатежу_TablePart.Record record in РозхіднийКасовийОрдер_Objest.РозшифруванняПлатежу_TablePart.Records)
+                    {
+                        xmlWriter.WriteStartElement("row");
+                        xmlWriter.WriteAttributeString("uid", record.UID.ToString());
+                        
+                        xmlWriter.WriteStartElement("НомерРядка");
+                        xmlWriter.WriteAttributeString("type", "integer");
+                        
+                            xmlWriter.WriteValue(record.НомерРядка);
+                          
+                        xmlWriter.WriteEndElement(); //НомерРядка
+                        xmlWriter.WriteStartElement("Замовлення");
+                        xmlWriter.WriteAttributeString("type", "string");
+                        
+                            xmlWriter.WriteValue(record.Замовлення);
+                          
+                        xmlWriter.WriteEndElement(); //Замовлення
+                        xmlWriter.WriteStartElement("Сума");
+                        xmlWriter.WriteAttributeString("type", "numeric");
+                        
+                            xmlWriter.WriteValue(record.Сума);
+                          
+                        xmlWriter.WriteEndElement(); //Сума
+                        xmlWriter.WriteStartElement("ВалютаВзаєморозрахунків");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.Валюти");
+                                xmlWriter.WriteAttributeString("uid", record.ВалютаВзаєморозрахунків.UnigueID.ToString());
+                                xmlWriter.WriteString(record.ВалютаВзаєморозрахунків.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //ВалютаВзаєморозрахунків
+                        xmlWriter.WriteStartElement("Підрозділ");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.СтруктураПідприємства");
+                                xmlWriter.WriteAttributeString("uid", record.Підрозділ.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Підрозділ.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Підрозділ
+                        xmlWriter.WriteStartElement("Коментар");
+                        xmlWriter.WriteAttributeString("type", "string");
+                        
+                            xmlWriter.WriteValue(record.Коментар);
+                          
+                        xmlWriter.WriteEndElement(); //Коментар
+                        xmlWriter.WriteStartElement("Організація");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.Організації");
+                                xmlWriter.WriteAttributeString("uid", record.Організація.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Організація.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Організація
+                        xmlWriter.WriteEndElement(); //row
+                    }
+
+                    xmlWriter.WriteEndElement(); //TablePart
+                
+                xmlWriter.WriteEndElement(); //TabularParts
+            
+
+            xmlWriter.WriteEndElement(); //root
+            xmlWriter.WriteEndDocument();
+            xmlWriter.Close();
+        }
     }
 	
     
@@ -12486,6 +14323,234 @@ namespace StorageAndTrade_1_0.Документи
         public const string ЧасДоставкиДо = "col_b8";
         public const string Коментар = "col_a6";
         public const string Автор = "col_a1";
+    }
+
+    public static class ПереміщенняТоварів_Export
+    {
+        public static void ToXmlFile(ПереміщенняТоварів_Pointer ПереміщенняТоварів, string pathToSave)
+        {
+            ПереміщенняТоварів_Objest ПереміщенняТоварів_Objest = ПереміщенняТоварів.GetDocumentObject(true);
+
+            XmlWriter xmlWriter = XmlWriter.Create(pathToSave, new XmlWriterSettings() { Indent = true, Encoding = System.Text.Encoding.UTF8 });
+            xmlWriter.WriteStartDocument();
+            xmlWriter.WriteStartElement("root");
+            xmlWriter.WriteAttributeString("uid", ПереміщенняТоварів_Objest.UnigueID.ToString());
+            
+            xmlWriter.WriteStartElement("Назва");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ПереміщенняТоварів_Objest.Назва);
+              
+            xmlWriter.WriteEndElement(); //Назва
+            xmlWriter.WriteStartElement("НомерДок");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ПереміщенняТоварів_Objest.НомерДок);
+              
+            xmlWriter.WriteEndElement(); //НомерДок
+            xmlWriter.WriteStartElement("ДатаДок");
+            xmlWriter.WriteAttributeString("type", "datetime");
+            
+                xmlWriter.WriteValue(ПереміщенняТоварів_Objest.ДатаДок);
+              
+            xmlWriter.WriteEndElement(); //ДатаДок
+            xmlWriter.WriteStartElement("Організація");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Організації");
+                    xmlWriter.WriteAttributeString("uid", ПереміщенняТоварів_Objest.Організація.UnigueID.ToString());
+                    xmlWriter.WriteString(ПереміщенняТоварів_Objest.Організація.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Організація
+            xmlWriter.WriteStartElement("БанківськийРахунокОрганізації");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.БанківськіРахункиОрганізацій");
+                    xmlWriter.WriteAttributeString("uid", ПереміщенняТоварів_Objest.БанківськийРахунокОрганізації.UnigueID.ToString());
+                    xmlWriter.WriteString(ПереміщенняТоварів_Objest.БанківськийРахунокОрганізації.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //БанківськийРахунокОрганізації
+            xmlWriter.WriteStartElement("ВидЦіни");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.ВидиЦін");
+                    xmlWriter.WriteAttributeString("uid", ПереміщенняТоварів_Objest.ВидЦіни.UnigueID.ToString());
+                    xmlWriter.WriteString(ПереміщенняТоварів_Objest.ВидЦіни.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //ВидЦіни
+            xmlWriter.WriteStartElement("ОрганізаціяОтримувач");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Організації");
+                    xmlWriter.WriteAttributeString("uid", ПереміщенняТоварів_Objest.ОрганізаціяОтримувач.UnigueID.ToString());
+                    xmlWriter.WriteString(ПереміщенняТоварів_Objest.ОрганізаціяОтримувач.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //ОрганізаціяОтримувач
+            xmlWriter.WriteStartElement("Відповідальний");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
+                    xmlWriter.WriteAttributeString("uid", ПереміщенняТоварів_Objest.Відповідальний.UnigueID.ToString());
+                    xmlWriter.WriteString(ПереміщенняТоварів_Objest.Відповідальний.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Відповідальний
+            xmlWriter.WriteStartElement("Підрозділ");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.СтруктураПідприємства");
+                    xmlWriter.WriteAttributeString("uid", ПереміщенняТоварів_Objest.Підрозділ.UnigueID.ToString());
+                    xmlWriter.WriteString(ПереміщенняТоварів_Objest.Підрозділ.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Підрозділ
+            xmlWriter.WriteStartElement("СкладВідправник");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Склади");
+                    xmlWriter.WriteAttributeString("uid", ПереміщенняТоварів_Objest.СкладВідправник.UnigueID.ToString());
+                    xmlWriter.WriteString(ПереміщенняТоварів_Objest.СкладВідправник.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //СкладВідправник
+            xmlWriter.WriteStartElement("СкладОтримувач");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Склади");
+                    xmlWriter.WriteAttributeString("uid", ПереміщенняТоварів_Objest.СкладОтримувач.UnigueID.ToString());
+                    xmlWriter.WriteString(ПереміщенняТоварів_Objest.СкладОтримувач.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //СкладОтримувач
+            xmlWriter.WriteStartElement("Статус");
+            xmlWriter.WriteAttributeString("type", "enum");
+            
+                xmlWriter.WriteAttributeString("pointer", "Перелічення.СтатусиПереміщенняТоварів");
+                xmlWriter.WriteAttributeString("uid", ((int)ПереміщенняТоварів_Objest.Статус).ToString());
+                xmlWriter.WriteString(ПереміщенняТоварів_Objest.Статус.ToString());
+              
+            xmlWriter.WriteEndElement(); //Статус
+            xmlWriter.WriteStartElement("ГосподарськаОперація");
+            xmlWriter.WriteAttributeString("type", "enum");
+            
+                xmlWriter.WriteAttributeString("pointer", "Перелічення.ГосподарськіОперації");
+                xmlWriter.WriteAttributeString("uid", ((int)ПереміщенняТоварів_Objest.ГосподарськаОперація).ToString());
+                xmlWriter.WriteString(ПереміщенняТоварів_Objest.ГосподарськаОперація.ToString());
+              
+            xmlWriter.WriteEndElement(); //ГосподарськаОперація
+            xmlWriter.WriteStartElement("СпосібДоставки");
+            xmlWriter.WriteAttributeString("type", "enum");
+            
+                xmlWriter.WriteAttributeString("pointer", "Перелічення.СпособиДоставки");
+                xmlWriter.WriteAttributeString("uid", ((int)ПереміщенняТоварів_Objest.СпосібДоставки).ToString());
+                xmlWriter.WriteString(ПереміщенняТоварів_Objest.СпосібДоставки.ToString());
+              
+            xmlWriter.WriteEndElement(); //СпосібДоставки
+            xmlWriter.WriteStartElement("АдресДоставки");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ПереміщенняТоварів_Objest.АдресДоставки);
+              
+            xmlWriter.WriteEndElement(); //АдресДоставки
+            xmlWriter.WriteStartElement("ЧасДоставкиЗ");
+            xmlWriter.WriteAttributeString("type", "time");
+            
+                xmlWriter.WriteValue(ПереміщенняТоварів_Objest.ЧасДоставкиЗ);
+              
+            xmlWriter.WriteEndElement(); //ЧасДоставкиЗ
+            xmlWriter.WriteStartElement("ЧасДоставкиДо");
+            xmlWriter.WriteAttributeString("type", "time");
+            
+                xmlWriter.WriteValue(ПереміщенняТоварів_Objest.ЧасДоставкиДо);
+              
+            xmlWriter.WriteEndElement(); //ЧасДоставкиДо
+            xmlWriter.WriteStartElement("Коментар");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ПереміщенняТоварів_Objest.Коментар);
+              
+            xmlWriter.WriteEndElement(); //Коментар
+            xmlWriter.WriteStartElement("Автор");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
+                    xmlWriter.WriteAttributeString("uid", ПереміщенняТоварів_Objest.Автор.UnigueID.ToString());
+                    xmlWriter.WriteString(ПереміщенняТоварів_Objest.Автор.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Автор
+
+                /* 
+                Табличні частини
+                */
+
+                xmlWriter.WriteStartElement("TabularParts");
+                
+                    xmlWriter.WriteStartElement("TablePart");
+                    xmlWriter.WriteAttributeString("name", "Товари");
+
+                    foreach(ПереміщенняТоварів_Товари_TablePart.Record record in ПереміщенняТоварів_Objest.Товари_TablePart.Records)
+                    {
+                        xmlWriter.WriteStartElement("row");
+                        xmlWriter.WriteAttributeString("uid", record.UID.ToString());
+                        
+                        xmlWriter.WriteStartElement("НомерРядка");
+                        xmlWriter.WriteAttributeString("type", "integer");
+                        
+                            xmlWriter.WriteValue(record.НомерРядка);
+                          
+                        xmlWriter.WriteEndElement(); //НомерРядка
+                        xmlWriter.WriteStartElement("Номенклатура");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.Номенклатура");
+                                xmlWriter.WriteAttributeString("uid", record.Номенклатура.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Номенклатура.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Номенклатура
+                        xmlWriter.WriteStartElement("ХарактеристикаНоменклатури");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.ХарактеристикиНоменклатури");
+                                xmlWriter.WriteAttributeString("uid", record.ХарактеристикаНоменклатури.UnigueID.ToString());
+                                xmlWriter.WriteString(record.ХарактеристикаНоменклатури.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //ХарактеристикаНоменклатури
+                        xmlWriter.WriteStartElement("Серія");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.СеріїНоменклатури");
+                                xmlWriter.WriteAttributeString("uid", record.Серія.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Серія.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Серія
+                        xmlWriter.WriteStartElement("Пакування");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.ПакуванняОдиниціВиміру");
+                                xmlWriter.WriteAttributeString("uid", record.Пакування.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Пакування.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Пакування
+                        xmlWriter.WriteStartElement("КількістьУпаковок");
+                        xmlWriter.WriteAttributeString("type", "integer");
+                        
+                            xmlWriter.WriteValue(record.КількістьУпаковок);
+                          
+                        xmlWriter.WriteEndElement(); //КількістьУпаковок
+                        xmlWriter.WriteStartElement("Кількість");
+                        xmlWriter.WriteAttributeString("type", "numeric");
+                        
+                            xmlWriter.WriteValue(record.Кількість);
+                          
+                        xmlWriter.WriteEndElement(); //Кількість
+                        xmlWriter.WriteEndElement(); //row
+                    }
+
+                    xmlWriter.WriteEndElement(); //TablePart
+                
+                xmlWriter.WriteEndElement(); //TabularParts
+            
+
+            xmlWriter.WriteEndElement(); //root
+            xmlWriter.WriteEndDocument();
+            xmlWriter.Close();
+        }
     }
 	
     
@@ -12856,6 +14921,274 @@ namespace StorageAndTrade_1_0.Документи
         public const string Коментар = "col_c8";
         public const string Автор = "col_a3";
         public const string Менеджер = "col_a4";
+    }
+
+    public static class ПоверненняТоварівПостачальнику_Export
+    {
+        public static void ToXmlFile(ПоверненняТоварівПостачальнику_Pointer ПоверненняТоварівПостачальнику, string pathToSave)
+        {
+            ПоверненняТоварівПостачальнику_Objest ПоверненняТоварівПостачальнику_Objest = ПоверненняТоварівПостачальнику.GetDocumentObject(true);
+
+            XmlWriter xmlWriter = XmlWriter.Create(pathToSave, new XmlWriterSettings() { Indent = true, Encoding = System.Text.Encoding.UTF8 });
+            xmlWriter.WriteStartDocument();
+            xmlWriter.WriteStartElement("root");
+            xmlWriter.WriteAttributeString("uid", ПоверненняТоварівПостачальнику_Objest.UnigueID.ToString());
+            
+            xmlWriter.WriteStartElement("Назва");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ПоверненняТоварівПостачальнику_Objest.Назва);
+              
+            xmlWriter.WriteEndElement(); //Назва
+            xmlWriter.WriteStartElement("НомерДок");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ПоверненняТоварівПостачальнику_Objest.НомерДок);
+              
+            xmlWriter.WriteEndElement(); //НомерДок
+            xmlWriter.WriteStartElement("ДатаДок");
+            xmlWriter.WriteAttributeString("type", "datetime");
+            
+                xmlWriter.WriteValue(ПоверненняТоварівПостачальнику_Objest.ДатаДок);
+              
+            xmlWriter.WriteEndElement(); //ДатаДок
+            xmlWriter.WriteStartElement("Організація");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Організації");
+                    xmlWriter.WriteAttributeString("uid", ПоверненняТоварівПостачальнику_Objest.Організація.UnigueID.ToString());
+                    xmlWriter.WriteString(ПоверненняТоварівПостачальнику_Objest.Організація.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Організація
+            xmlWriter.WriteStartElement("Контрагент");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Контрагенти");
+                    xmlWriter.WriteAttributeString("uid", ПоверненняТоварівПостачальнику_Objest.Контрагент.UnigueID.ToString());
+                    xmlWriter.WriteString(ПоверненняТоварівПостачальнику_Objest.Контрагент.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Контрагент
+            xmlWriter.WriteStartElement("Підрозділ");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.СтруктураПідприємства");
+                    xmlWriter.WriteAttributeString("uid", ПоверненняТоварівПостачальнику_Objest.Підрозділ.UnigueID.ToString());
+                    xmlWriter.WriteString(ПоверненняТоварівПостачальнику_Objest.Підрозділ.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Підрозділ
+            xmlWriter.WriteStartElement("Валюта");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Валюти");
+                    xmlWriter.WriteAttributeString("uid", ПоверненняТоварівПостачальнику_Objest.Валюта.UnigueID.ToString());
+                    xmlWriter.WriteString(ПоверненняТоварівПостачальнику_Objest.Валюта.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Валюта
+            xmlWriter.WriteStartElement("Склад");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Склади");
+                    xmlWriter.WriteAttributeString("uid", ПоверненняТоварівПостачальнику_Objest.Склад.UnigueID.ToString());
+                    xmlWriter.WriteString(ПоверненняТоварівПостачальнику_Objest.Склад.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Склад
+            xmlWriter.WriteStartElement("СумаДокументу");
+            xmlWriter.WriteAttributeString("type", "numeric");
+            
+                xmlWriter.WriteValue(ПоверненняТоварівПостачальнику_Objest.СумаДокументу);
+              
+            xmlWriter.WriteEndElement(); //СумаДокументу
+            xmlWriter.WriteStartElement("ГосподарськаОперація");
+            xmlWriter.WriteAttributeString("type", "enum");
+            
+                xmlWriter.WriteAttributeString("pointer", "Перелічення.ГосподарськіОперації");
+                xmlWriter.WriteAttributeString("uid", ((int)ПоверненняТоварівПостачальнику_Objest.ГосподарськаОперація).ToString());
+                xmlWriter.WriteString(ПоверненняТоварівПостачальнику_Objest.ГосподарськаОперація.ToString());
+              
+            xmlWriter.WriteEndElement(); //ГосподарськаОперація
+            xmlWriter.WriteStartElement("БанківськийРахунокОрганізації");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.БанківськіРахункиОрганізацій");
+                    xmlWriter.WriteAttributeString("uid", ПоверненняТоварівПостачальнику_Objest.БанківськийРахунокОрганізації.UnigueID.ToString());
+                    xmlWriter.WriteString(ПоверненняТоварівПостачальнику_Objest.БанківськийРахунокОрганізації.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //БанківськийРахунокОрганізації
+            xmlWriter.WriteStartElement("БанківськийРахунокКонтрагента");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.БанківськіРахункиКонтрагентів");
+                    xmlWriter.WriteAttributeString("uid", ПоверненняТоварівПостачальнику_Objest.БанківськийРахунокКонтрагента.UnigueID.ToString());
+                    xmlWriter.WriteString(ПоверненняТоварівПостачальнику_Objest.БанківськийРахунокКонтрагента.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //БанківськийРахунокКонтрагента
+            xmlWriter.WriteStartElement("Договір");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.ДоговориКонтрагентів");
+                    xmlWriter.WriteAttributeString("uid", ПоверненняТоварівПостачальнику_Objest.Договір.UnigueID.ToString());
+                    xmlWriter.WriteString(ПоверненняТоварівПостачальнику_Objest.Договір.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Договір
+            xmlWriter.WriteStartElement("СпосібДоставки");
+            xmlWriter.WriteAttributeString("type", "enum");
+            
+                xmlWriter.WriteAttributeString("pointer", "Перелічення.СпособиДоставки");
+                xmlWriter.WriteAttributeString("uid", ((int)ПоверненняТоварівПостачальнику_Objest.СпосібДоставки).ToString());
+                xmlWriter.WriteString(ПоверненняТоварівПостачальнику_Objest.СпосібДоставки.ToString());
+              
+            xmlWriter.WriteEndElement(); //СпосібДоставки
+            xmlWriter.WriteStartElement("АдресДоставки");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ПоверненняТоварівПостачальнику_Objest.АдресДоставки);
+              
+            xmlWriter.WriteEndElement(); //АдресДоставки
+            xmlWriter.WriteStartElement("ЧасДоставкиЗ");
+            xmlWriter.WriteAttributeString("type", "time");
+            
+                xmlWriter.WriteValue(ПоверненняТоварівПостачальнику_Objest.ЧасДоставкиЗ);
+              
+            xmlWriter.WriteEndElement(); //ЧасДоставкиЗ
+            xmlWriter.WriteStartElement("ЧасДоставкиДо");
+            xmlWriter.WriteAttributeString("type", "time");
+            
+                xmlWriter.WriteValue(ПоверненняТоварівПостачальнику_Objest.ЧасДоставкиДо);
+              
+            xmlWriter.WriteEndElement(); //ЧасДоставкиДо
+            xmlWriter.WriteStartElement("Каса");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Каси");
+                    xmlWriter.WriteAttributeString("uid", ПоверненняТоварівПостачальнику_Objest.Каса.UnigueID.ToString());
+                    xmlWriter.WriteString(ПоверненняТоварівПостачальнику_Objest.Каса.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Каса
+            xmlWriter.WriteStartElement("Основа");
+            xmlWriter.WriteAttributeString("type", "composite_pointer");
+            
+                xmlWriter.WriteRaw(((UuidAndText)ПоверненняТоварівПостачальнику_Objest.Основа).ToXml());
+              
+            xmlWriter.WriteEndElement(); //Основа
+            xmlWriter.WriteStartElement("Коментар");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ПоверненняТоварівПостачальнику_Objest.Коментар);
+              
+            xmlWriter.WriteEndElement(); //Коментар
+            xmlWriter.WriteStartElement("Автор");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
+                    xmlWriter.WriteAttributeString("uid", ПоверненняТоварівПостачальнику_Objest.Автор.UnigueID.ToString());
+                    xmlWriter.WriteString(ПоверненняТоварівПостачальнику_Objest.Автор.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Автор
+            xmlWriter.WriteStartElement("Менеджер");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
+                    xmlWriter.WriteAttributeString("uid", ПоверненняТоварівПостачальнику_Objest.Менеджер.UnigueID.ToString());
+                    xmlWriter.WriteString(ПоверненняТоварівПостачальнику_Objest.Менеджер.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Менеджер
+
+                /* 
+                Табличні частини
+                */
+
+                xmlWriter.WriteStartElement("TabularParts");
+                
+                    xmlWriter.WriteStartElement("TablePart");
+                    xmlWriter.WriteAttributeString("name", "Товари");
+
+                    foreach(ПоверненняТоварівПостачальнику_Товари_TablePart.Record record in ПоверненняТоварівПостачальнику_Objest.Товари_TablePart.Records)
+                    {
+                        xmlWriter.WriteStartElement("row");
+                        xmlWriter.WriteAttributeString("uid", record.UID.ToString());
+                        
+                        xmlWriter.WriteStartElement("НомерРядка");
+                        xmlWriter.WriteAttributeString("type", "integer");
+                        
+                            xmlWriter.WriteValue(record.НомерРядка);
+                          
+                        xmlWriter.WriteEndElement(); //НомерРядка
+                        xmlWriter.WriteStartElement("Номенклатура");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.Номенклатура");
+                                xmlWriter.WriteAttributeString("uid", record.Номенклатура.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Номенклатура.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Номенклатура
+                        xmlWriter.WriteStartElement("ХарактеристикаНоменклатури");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.ХарактеристикиНоменклатури");
+                                xmlWriter.WriteAttributeString("uid", record.ХарактеристикаНоменклатури.UnigueID.ToString());
+                                xmlWriter.WriteString(record.ХарактеристикаНоменклатури.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //ХарактеристикаНоменклатури
+                        xmlWriter.WriteStartElement("Серія");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.СеріїНоменклатури");
+                                xmlWriter.WriteAttributeString("uid", record.Серія.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Серія.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Серія
+                        xmlWriter.WriteStartElement("Пакування");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.ПакуванняОдиниціВиміру");
+                                xmlWriter.WriteAttributeString("uid", record.Пакування.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Пакування.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Пакування
+                        xmlWriter.WriteStartElement("КількістьУпаковок");
+                        xmlWriter.WriteAttributeString("type", "integer");
+                        
+                            xmlWriter.WriteValue(record.КількістьУпаковок);
+                          
+                        xmlWriter.WriteEndElement(); //КількістьУпаковок
+                        xmlWriter.WriteStartElement("Кількість");
+                        xmlWriter.WriteAttributeString("type", "numeric");
+                        
+                            xmlWriter.WriteValue(record.Кількість);
+                          
+                        xmlWriter.WriteEndElement(); //Кількість
+                        xmlWriter.WriteStartElement("Ціна");
+                        xmlWriter.WriteAttributeString("type", "numeric");
+                        
+                            xmlWriter.WriteValue(record.Ціна);
+                          
+                        xmlWriter.WriteEndElement(); //Ціна
+                        xmlWriter.WriteStartElement("Сума");
+                        xmlWriter.WriteAttributeString("type", "numeric");
+                        
+                            xmlWriter.WriteValue(record.Сума);
+                          
+                        xmlWriter.WriteEndElement(); //Сума
+                        xmlWriter.WriteStartElement("ДокументПоступлення");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Документи.ПоступленняТоварівТаПослуг");
+                                xmlWriter.WriteAttributeString("uid", record.ДокументПоступлення.UnigueID.ToString());
+                                xmlWriter.WriteString(record.ДокументПоступлення.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //ДокументПоступлення
+                        xmlWriter.WriteEndElement(); //row
+                    }
+
+                    xmlWriter.WriteEndElement(); //TablePart
+                
+                xmlWriter.WriteEndElement(); //TabularParts
+            
+
+            xmlWriter.WriteEndElement(); //root
+            xmlWriter.WriteEndDocument();
+            xmlWriter.Close();
+        }
     }
 	
     
@@ -13253,6 +15586,252 @@ namespace StorageAndTrade_1_0.Документи
         public const string Коментар = "col_f6";
         public const string Автор = "col_a3";
     }
+
+    public static class ПоверненняТоварівВідКлієнта_Export
+    {
+        public static void ToXmlFile(ПоверненняТоварівВідКлієнта_Pointer ПоверненняТоварівВідКлієнта, string pathToSave)
+        {
+            ПоверненняТоварівВідКлієнта_Objest ПоверненняТоварівВідКлієнта_Objest = ПоверненняТоварівВідКлієнта.GetDocumentObject(true);
+
+            XmlWriter xmlWriter = XmlWriter.Create(pathToSave, new XmlWriterSettings() { Indent = true, Encoding = System.Text.Encoding.UTF8 });
+            xmlWriter.WriteStartDocument();
+            xmlWriter.WriteStartElement("root");
+            xmlWriter.WriteAttributeString("uid", ПоверненняТоварівВідКлієнта_Objest.UnigueID.ToString());
+            
+            xmlWriter.WriteStartElement("Назва");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ПоверненняТоварівВідКлієнта_Objest.Назва);
+              
+            xmlWriter.WriteEndElement(); //Назва
+            xmlWriter.WriteStartElement("НомерДок");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ПоверненняТоварівВідКлієнта_Objest.НомерДок);
+              
+            xmlWriter.WriteEndElement(); //НомерДок
+            xmlWriter.WriteStartElement("ДатаДок");
+            xmlWriter.WriteAttributeString("type", "datetime");
+            
+                xmlWriter.WriteValue(ПоверненняТоварівВідКлієнта_Objest.ДатаДок);
+              
+            xmlWriter.WriteEndElement(); //ДатаДок
+            xmlWriter.WriteStartElement("Організація");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Організації");
+                    xmlWriter.WriteAttributeString("uid", ПоверненняТоварівВідКлієнта_Objest.Організація.UnigueID.ToString());
+                    xmlWriter.WriteString(ПоверненняТоварівВідКлієнта_Objest.Організація.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Організація
+            xmlWriter.WriteStartElement("Валюта");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Валюти");
+                    xmlWriter.WriteAttributeString("uid", ПоверненняТоварівВідКлієнта_Objest.Валюта.UnigueID.ToString());
+                    xmlWriter.WriteString(ПоверненняТоварівВідКлієнта_Objest.Валюта.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Валюта
+            xmlWriter.WriteStartElement("СумаДокументу");
+            xmlWriter.WriteAttributeString("type", "numeric");
+            
+                xmlWriter.WriteValue(ПоверненняТоварівВідКлієнта_Objest.СумаДокументу);
+              
+            xmlWriter.WriteEndElement(); //СумаДокументу
+            xmlWriter.WriteStartElement("Склад");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Склади");
+                    xmlWriter.WriteAttributeString("uid", ПоверненняТоварівВідКлієнта_Objest.Склад.UnigueID.ToString());
+                    xmlWriter.WriteString(ПоверненняТоварівВідКлієнта_Objest.Склад.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Склад
+            xmlWriter.WriteStartElement("Підрозділ");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.СтруктураПідприємства");
+                    xmlWriter.WriteAttributeString("uid", ПоверненняТоварівВідКлієнта_Objest.Підрозділ.UnigueID.ToString());
+                    xmlWriter.WriteString(ПоверненняТоварівВідКлієнта_Objest.Підрозділ.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Підрозділ
+            xmlWriter.WriteStartElement("Менеджер");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
+                    xmlWriter.WriteAttributeString("uid", ПоверненняТоварівВідКлієнта_Objest.Менеджер.UnigueID.ToString());
+                    xmlWriter.WriteString(ПоверненняТоварівВідКлієнта_Objest.Менеджер.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Менеджер
+            xmlWriter.WriteStartElement("ДокументПродажу");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Документи.РеалізаціяТоварівТаПослуг");
+                    xmlWriter.WriteAttributeString("uid", ПоверненняТоварівВідКлієнта_Objest.ДокументПродажу.UnigueID.ToString());
+                    xmlWriter.WriteString(ПоверненняТоварівВідКлієнта_Objest.ДокументПродажу.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //ДокументПродажу
+            xmlWriter.WriteStartElement("ГосподарськаОперація");
+            xmlWriter.WriteAttributeString("type", "enum");
+            
+                xmlWriter.WriteAttributeString("pointer", "Перелічення.ГосподарськіОперації");
+                xmlWriter.WriteAttributeString("uid", ((int)ПоверненняТоварівВідКлієнта_Objest.ГосподарськаОперація).ToString());
+                xmlWriter.WriteString(ПоверненняТоварівВідКлієнта_Objest.ГосподарськаОперація.ToString());
+              
+            xmlWriter.WriteEndElement(); //ГосподарськаОперація
+            xmlWriter.WriteStartElement("Договір");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.ДоговориКонтрагентів");
+                    xmlWriter.WriteAttributeString("uid", ПоверненняТоварівВідКлієнта_Objest.Договір.UnigueID.ToString());
+                    xmlWriter.WriteString(ПоверненняТоварівВідКлієнта_Objest.Договір.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Договір
+            xmlWriter.WriteStartElement("ПричинаПовернення");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ПоверненняТоварівВідКлієнта_Objest.ПричинаПовернення);
+              
+            xmlWriter.WriteEndElement(); //ПричинаПовернення
+            xmlWriter.WriteStartElement("Контрагент");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Контрагенти");
+                    xmlWriter.WriteAttributeString("uid", ПоверненняТоварівВідКлієнта_Objest.Контрагент.UnigueID.ToString());
+                    xmlWriter.WriteString(ПоверненняТоварівВідКлієнта_Objest.Контрагент.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Контрагент
+            xmlWriter.WriteStartElement("Каса");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Каси");
+                    xmlWriter.WriteAttributeString("uid", ПоверненняТоварівВідКлієнта_Objest.Каса.UnigueID.ToString());
+                    xmlWriter.WriteString(ПоверненняТоварівВідКлієнта_Objest.Каса.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Каса
+            xmlWriter.WriteStartElement("Основа");
+            xmlWriter.WriteAttributeString("type", "composite_pointer");
+            
+                xmlWriter.WriteRaw(((UuidAndText)ПоверненняТоварівВідКлієнта_Objest.Основа).ToXml());
+              
+            xmlWriter.WriteEndElement(); //Основа
+            xmlWriter.WriteStartElement("Коментар");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ПоверненняТоварівВідКлієнта_Objest.Коментар);
+              
+            xmlWriter.WriteEndElement(); //Коментар
+            xmlWriter.WriteStartElement("Автор");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
+                    xmlWriter.WriteAttributeString("uid", ПоверненняТоварівВідКлієнта_Objest.Автор.UnigueID.ToString());
+                    xmlWriter.WriteString(ПоверненняТоварівВідКлієнта_Objest.Автор.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Автор
+
+                /* 
+                Табличні частини
+                */
+
+                xmlWriter.WriteStartElement("TabularParts");
+                
+                    xmlWriter.WriteStartElement("TablePart");
+                    xmlWriter.WriteAttributeString("name", "Товари");
+
+                    foreach(ПоверненняТоварівВідКлієнта_Товари_TablePart.Record record in ПоверненняТоварівВідКлієнта_Objest.Товари_TablePart.Records)
+                    {
+                        xmlWriter.WriteStartElement("row");
+                        xmlWriter.WriteAttributeString("uid", record.UID.ToString());
+                        
+                        xmlWriter.WriteStartElement("НомерРядка");
+                        xmlWriter.WriteAttributeString("type", "integer");
+                        
+                            xmlWriter.WriteValue(record.НомерРядка);
+                          
+                        xmlWriter.WriteEndElement(); //НомерРядка
+                        xmlWriter.WriteStartElement("Номенклатура");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.Номенклатура");
+                                xmlWriter.WriteAttributeString("uid", record.Номенклатура.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Номенклатура.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Номенклатура
+                        xmlWriter.WriteStartElement("ХарактеристикаНоменклатури");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.ХарактеристикиНоменклатури");
+                                xmlWriter.WriteAttributeString("uid", record.ХарактеристикаНоменклатури.UnigueID.ToString());
+                                xmlWriter.WriteString(record.ХарактеристикаНоменклатури.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //ХарактеристикаНоменклатури
+                        xmlWriter.WriteStartElement("Серія");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.СеріїНоменклатури");
+                                xmlWriter.WriteAttributeString("uid", record.Серія.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Серія.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Серія
+                        xmlWriter.WriteStartElement("Пакування");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.ПакуванняОдиниціВиміру");
+                                xmlWriter.WriteAttributeString("uid", record.Пакування.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Пакування.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Пакування
+                        xmlWriter.WriteStartElement("КількістьУпаковок");
+                        xmlWriter.WriteAttributeString("type", "integer");
+                        
+                            xmlWriter.WriteValue(record.КількістьУпаковок);
+                          
+                        xmlWriter.WriteEndElement(); //КількістьУпаковок
+                        xmlWriter.WriteStartElement("Кількість");
+                        xmlWriter.WriteAttributeString("type", "numeric");
+                        
+                            xmlWriter.WriteValue(record.Кількість);
+                          
+                        xmlWriter.WriteEndElement(); //Кількість
+                        xmlWriter.WriteStartElement("Ціна");
+                        xmlWriter.WriteAttributeString("type", "numeric");
+                        
+                            xmlWriter.WriteValue(record.Ціна);
+                          
+                        xmlWriter.WriteEndElement(); //Ціна
+                        xmlWriter.WriteStartElement("Сума");
+                        xmlWriter.WriteAttributeString("type", "numeric");
+                        
+                            xmlWriter.WriteValue(record.Сума);
+                          
+                        xmlWriter.WriteEndElement(); //Сума
+                        xmlWriter.WriteStartElement("Штрихкод");
+                        xmlWriter.WriteAttributeString("type", "string");
+                        
+                            xmlWriter.WriteValue(record.Штрихкод);
+                          
+                        xmlWriter.WriteEndElement(); //Штрихкод
+                        xmlWriter.WriteStartElement("ДокументРеалізації");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Документи.РеалізаціяТоварівТаПослуг");
+                                xmlWriter.WriteAttributeString("uid", record.ДокументРеалізації.UnigueID.ToString());
+                                xmlWriter.WriteString(record.ДокументРеалізації.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //ДокументРеалізації
+                        xmlWriter.WriteEndElement(); //row
+                    }
+
+                    xmlWriter.WriteEndElement(); //TablePart
+                
+                xmlWriter.WriteEndElement(); //TabularParts
+            
+
+            xmlWriter.WriteEndElement(); //root
+            xmlWriter.WriteEndDocument();
+            xmlWriter.Close();
+        }
+    }
 	
     
     public class ПоверненняТоварівВідКлієнта_Objest : DocumentObject
@@ -13632,6 +16211,204 @@ namespace StorageAndTrade_1_0.Документи
         public const string Автор = "col_a7";
         public const string Менеджер = "col_a8";
     }
+
+    public static class АктВиконанихРобіт_Export
+    {
+        public static void ToXmlFile(АктВиконанихРобіт_Pointer АктВиконанихРобіт, string pathToSave)
+        {
+            АктВиконанихРобіт_Objest АктВиконанихРобіт_Objest = АктВиконанихРобіт.GetDocumentObject(true);
+
+            XmlWriter xmlWriter = XmlWriter.Create(pathToSave, new XmlWriterSettings() { Indent = true, Encoding = System.Text.Encoding.UTF8 });
+            xmlWriter.WriteStartDocument();
+            xmlWriter.WriteStartElement("root");
+            xmlWriter.WriteAttributeString("uid", АктВиконанихРобіт_Objest.UnigueID.ToString());
+            
+            xmlWriter.WriteStartElement("Назва");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(АктВиконанихРобіт_Objest.Назва);
+              
+            xmlWriter.WriteEndElement(); //Назва
+            xmlWriter.WriteStartElement("НомерДок");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(АктВиконанихРобіт_Objest.НомерДок);
+              
+            xmlWriter.WriteEndElement(); //НомерДок
+            xmlWriter.WriteStartElement("ДатаДок");
+            xmlWriter.WriteAttributeString("type", "datetime");
+            
+                xmlWriter.WriteValue(АктВиконанихРобіт_Objest.ДатаДок);
+              
+            xmlWriter.WriteEndElement(); //ДатаДок
+            xmlWriter.WriteStartElement("Валюта");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Валюти");
+                    xmlWriter.WriteAttributeString("uid", АктВиконанихРобіт_Objest.Валюта.UnigueID.ToString());
+                    xmlWriter.WriteString(АктВиконанихРобіт_Objest.Валюта.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Валюта
+            xmlWriter.WriteStartElement("ЗамовленняКлієнта");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Документи.ЗамовленняКлієнта");
+                    xmlWriter.WriteAttributeString("uid", АктВиконанихРобіт_Objest.ЗамовленняКлієнта.UnigueID.ToString());
+                    xmlWriter.WriteString(АктВиконанихРобіт_Objest.ЗамовленняКлієнта.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //ЗамовленняКлієнта
+            xmlWriter.WriteStartElement("Каса");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Каси");
+                    xmlWriter.WriteAttributeString("uid", АктВиконанихРобіт_Objest.Каса.UnigueID.ToString());
+                    xmlWriter.WriteString(АктВиконанихРобіт_Objest.Каса.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Каса
+            xmlWriter.WriteStartElement("Контрагент");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Контрагенти");
+                    xmlWriter.WriteAttributeString("uid", АктВиконанихРобіт_Objest.Контрагент.UnigueID.ToString());
+                    xmlWriter.WriteString(АктВиконанихРобіт_Objest.Контрагент.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Контрагент
+            xmlWriter.WriteStartElement("Організація");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Організації");
+                    xmlWriter.WriteAttributeString("uid", АктВиконанихРобіт_Objest.Організація.UnigueID.ToString());
+                    xmlWriter.WriteString(АктВиконанихРобіт_Objest.Організація.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Організація
+            xmlWriter.WriteStartElement("Підрозділ");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.СтруктураПідприємства");
+                    xmlWriter.WriteAttributeString("uid", АктВиконанихРобіт_Objest.Підрозділ.UnigueID.ToString());
+                    xmlWriter.WriteString(АктВиконанихРобіт_Objest.Підрозділ.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Підрозділ
+            xmlWriter.WriteStartElement("СумаДокументу");
+            xmlWriter.WriteAttributeString("type", "numeric");
+            
+                xmlWriter.WriteValue(АктВиконанихРобіт_Objest.СумаДокументу);
+              
+            xmlWriter.WriteEndElement(); //СумаДокументу
+            xmlWriter.WriteStartElement("ФормаОплати");
+            xmlWriter.WriteAttributeString("type", "enum");
+            
+                xmlWriter.WriteAttributeString("pointer", "Перелічення.ФормаОплати");
+                xmlWriter.WriteAttributeString("uid", ((int)АктВиконанихРобіт_Objest.ФормаОплати).ToString());
+                xmlWriter.WriteString(АктВиконанихРобіт_Objest.ФормаОплати.ToString());
+              
+            xmlWriter.WriteEndElement(); //ФормаОплати
+            xmlWriter.WriteStartElement("Договір");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.ДоговориКонтрагентів");
+                    xmlWriter.WriteAttributeString("uid", АктВиконанихРобіт_Objest.Договір.UnigueID.ToString());
+                    xmlWriter.WriteString(АктВиконанихРобіт_Objest.Договір.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Договір
+            xmlWriter.WriteStartElement("ГосподарськаОперація");
+            xmlWriter.WriteAttributeString("type", "enum");
+            
+                xmlWriter.WriteAttributeString("pointer", "Перелічення.ГосподарськіОперації");
+                xmlWriter.WriteAttributeString("uid", ((int)АктВиконанихРобіт_Objest.ГосподарськаОперація).ToString());
+                xmlWriter.WriteString(АктВиконанихРобіт_Objest.ГосподарськаОперація.ToString());
+              
+            xmlWriter.WriteEndElement(); //ГосподарськаОперація
+            xmlWriter.WriteStartElement("Коментар");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(АктВиконанихРобіт_Objest.Коментар);
+              
+            xmlWriter.WriteEndElement(); //Коментар
+            xmlWriter.WriteStartElement("Автор");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
+                    xmlWriter.WriteAttributeString("uid", АктВиконанихРобіт_Objest.Автор.UnigueID.ToString());
+                    xmlWriter.WriteString(АктВиконанихРобіт_Objest.Автор.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Автор
+            xmlWriter.WriteStartElement("Менеджер");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
+                    xmlWriter.WriteAttributeString("uid", АктВиконанихРобіт_Objest.Менеджер.UnigueID.ToString());
+                    xmlWriter.WriteString(АктВиконанихРобіт_Objest.Менеджер.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Менеджер
+
+                /* 
+                Табличні частини
+                */
+
+                xmlWriter.WriteStartElement("TabularParts");
+                
+                    xmlWriter.WriteStartElement("TablePart");
+                    xmlWriter.WriteAttributeString("name", "Послуги");
+
+                    foreach(АктВиконанихРобіт_Послуги_TablePart.Record record in АктВиконанихРобіт_Objest.Послуги_TablePart.Records)
+                    {
+                        xmlWriter.WriteStartElement("row");
+                        xmlWriter.WriteAttributeString("uid", record.UID.ToString());
+                        
+                        xmlWriter.WriteStartElement("НомерРядка");
+                        xmlWriter.WriteAttributeString("type", "integer");
+                        
+                            xmlWriter.WriteValue(record.НомерРядка);
+                          
+                        xmlWriter.WriteEndElement(); //НомерРядка
+                        xmlWriter.WriteStartElement("Номенклатура");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.Номенклатура");
+                                xmlWriter.WriteAttributeString("uid", record.Номенклатура.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Номенклатура.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Номенклатура
+                        xmlWriter.WriteStartElement("ХарактеристикаНоменклатури");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.ХарактеристикиНоменклатури");
+                                xmlWriter.WriteAttributeString("uid", record.ХарактеристикаНоменклатури.UnigueID.ToString());
+                                xmlWriter.WriteString(record.ХарактеристикаНоменклатури.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //ХарактеристикаНоменклатури
+                        xmlWriter.WriteStartElement("Кількість");
+                        xmlWriter.WriteAttributeString("type", "numeric");
+                        
+                            xmlWriter.WriteValue(record.Кількість);
+                          
+                        xmlWriter.WriteEndElement(); //Кількість
+                        xmlWriter.WriteStartElement("Ціна");
+                        xmlWriter.WriteAttributeString("type", "numeric");
+                        
+                            xmlWriter.WriteValue(record.Ціна);
+                          
+                        xmlWriter.WriteEndElement(); //Ціна
+                        xmlWriter.WriteStartElement("Сума");
+                        xmlWriter.WriteAttributeString("type", "numeric");
+                        
+                            xmlWriter.WriteValue(record.Сума);
+                          
+                        xmlWriter.WriteEndElement(); //Сума
+                        xmlWriter.WriteEndElement(); //row
+                    }
+
+                    xmlWriter.WriteEndElement(); //TablePart
+                
+                xmlWriter.WriteEndElement(); //TabularParts
+            
+
+            xmlWriter.WriteEndElement(); //root
+            xmlWriter.WriteEndDocument();
+            xmlWriter.Close();
+        }
+    }
 	
     
     public class АктВиконанихРобіт_Objest : DocumentObject
@@ -13971,6 +16748,311 @@ namespace StorageAndTrade_1_0.Документи
         public const string ГосподарськаОперація = "col_a1";
         public const string Коментар = "col_d1";
         public const string Автор = "col_a3";
+    }
+
+    public static class ВведенняЗалишків_Export
+    {
+        public static void ToXmlFile(ВведенняЗалишків_Pointer ВведенняЗалишків, string pathToSave)
+        {
+            ВведенняЗалишків_Objest ВведенняЗалишків_Objest = ВведенняЗалишків.GetDocumentObject(true);
+
+            XmlWriter xmlWriter = XmlWriter.Create(pathToSave, new XmlWriterSettings() { Indent = true, Encoding = System.Text.Encoding.UTF8 });
+            xmlWriter.WriteStartDocument();
+            xmlWriter.WriteStartElement("root");
+            xmlWriter.WriteAttributeString("uid", ВведенняЗалишків_Objest.UnigueID.ToString());
+            
+            xmlWriter.WriteStartElement("Назва");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ВведенняЗалишків_Objest.Назва);
+              
+            xmlWriter.WriteEndElement(); //Назва
+            xmlWriter.WriteStartElement("НомерДок");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ВведенняЗалишків_Objest.НомерДок);
+              
+            xmlWriter.WriteEndElement(); //НомерДок
+            xmlWriter.WriteStartElement("ДатаДок");
+            xmlWriter.WriteAttributeString("type", "datetime");
+            
+                xmlWriter.WriteValue(ВведенняЗалишків_Objest.ДатаДок);
+              
+            xmlWriter.WriteEndElement(); //ДатаДок
+            xmlWriter.WriteStartElement("Організація");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Організації");
+                    xmlWriter.WriteAttributeString("uid", ВведенняЗалишків_Objest.Організація.UnigueID.ToString());
+                    xmlWriter.WriteString(ВведенняЗалишків_Objest.Організація.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Організація
+            xmlWriter.WriteStartElement("Підрозділ");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.СтруктураПідприємства");
+                    xmlWriter.WriteAttributeString("uid", ВведенняЗалишків_Objest.Підрозділ.UnigueID.ToString());
+                    xmlWriter.WriteString(ВведенняЗалишків_Objest.Підрозділ.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Підрозділ
+            xmlWriter.WriteStartElement("Склад");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Склади");
+                    xmlWriter.WriteAttributeString("uid", ВведенняЗалишків_Objest.Склад.UnigueID.ToString());
+                    xmlWriter.WriteString(ВведенняЗалишків_Objest.Склад.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Склад
+            xmlWriter.WriteStartElement("Валюта");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Валюти");
+                    xmlWriter.WriteAttributeString("uid", ВведенняЗалишків_Objest.Валюта.UnigueID.ToString());
+                    xmlWriter.WriteString(ВведенняЗалишків_Objest.Валюта.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Валюта
+            xmlWriter.WriteStartElement("Контрагент");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Контрагенти");
+                    xmlWriter.WriteAttributeString("uid", ВведенняЗалишків_Objest.Контрагент.UnigueID.ToString());
+                    xmlWriter.WriteString(ВведенняЗалишків_Objest.Контрагент.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Контрагент
+            xmlWriter.WriteStartElement("Договір");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.ДоговориКонтрагентів");
+                    xmlWriter.WriteAttributeString("uid", ВведенняЗалишків_Objest.Договір.UnigueID.ToString());
+                    xmlWriter.WriteString(ВведенняЗалишків_Objest.Договір.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Договір
+            xmlWriter.WriteStartElement("ГосподарськаОперація");
+            xmlWriter.WriteAttributeString("type", "enum");
+            
+                xmlWriter.WriteAttributeString("pointer", "Перелічення.ГосподарськіОперації");
+                xmlWriter.WriteAttributeString("uid", ((int)ВведенняЗалишків_Objest.ГосподарськаОперація).ToString());
+                xmlWriter.WriteString(ВведенняЗалишків_Objest.ГосподарськаОперація.ToString());
+              
+            xmlWriter.WriteEndElement(); //ГосподарськаОперація
+            xmlWriter.WriteStartElement("Коментар");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ВведенняЗалишків_Objest.Коментар);
+              
+            xmlWriter.WriteEndElement(); //Коментар
+            xmlWriter.WriteStartElement("Автор");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
+                    xmlWriter.WriteAttributeString("uid", ВведенняЗалишків_Objest.Автор.UnigueID.ToString());
+                    xmlWriter.WriteString(ВведенняЗалишків_Objest.Автор.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Автор
+
+                /* 
+                Табличні частини
+                */
+
+                xmlWriter.WriteStartElement("TabularParts");
+                
+                    xmlWriter.WriteStartElement("TablePart");
+                    xmlWriter.WriteAttributeString("name", "Товари");
+
+                    foreach(ВведенняЗалишків_Товари_TablePart.Record record in ВведенняЗалишків_Objest.Товари_TablePart.Records)
+                    {
+                        xmlWriter.WriteStartElement("row");
+                        xmlWriter.WriteAttributeString("uid", record.UID.ToString());
+                        
+                        xmlWriter.WriteStartElement("НомерРядка");
+                        xmlWriter.WriteAttributeString("type", "integer");
+                        
+                            xmlWriter.WriteValue(record.НомерРядка);
+                          
+                        xmlWriter.WriteEndElement(); //НомерРядка
+                        xmlWriter.WriteStartElement("Номенклатура");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.Номенклатура");
+                                xmlWriter.WriteAttributeString("uid", record.Номенклатура.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Номенклатура.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Номенклатура
+                        xmlWriter.WriteStartElement("ХарактеристикаНоменклатури");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.ХарактеристикиНоменклатури");
+                                xmlWriter.WriteAttributeString("uid", record.ХарактеристикаНоменклатури.UnigueID.ToString());
+                                xmlWriter.WriteString(record.ХарактеристикаНоменклатури.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //ХарактеристикаНоменклатури
+                        xmlWriter.WriteStartElement("Серія");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.СеріїНоменклатури");
+                                xmlWriter.WriteAttributeString("uid", record.Серія.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Серія.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Серія
+                        xmlWriter.WriteStartElement("Пакування");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.ПакуванняОдиниціВиміру");
+                                xmlWriter.WriteAttributeString("uid", record.Пакування.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Пакування.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Пакування
+                        xmlWriter.WriteStartElement("КількістьУпаковок");
+                        xmlWriter.WriteAttributeString("type", "integer");
+                        
+                            xmlWriter.WriteValue(record.КількістьУпаковок);
+                          
+                        xmlWriter.WriteEndElement(); //КількістьУпаковок
+                        xmlWriter.WriteStartElement("Кількість");
+                        xmlWriter.WriteAttributeString("type", "numeric");
+                        
+                            xmlWriter.WriteValue(record.Кількість);
+                          
+                        xmlWriter.WriteEndElement(); //Кількість
+                        xmlWriter.WriteStartElement("Ціна");
+                        xmlWriter.WriteAttributeString("type", "numeric");
+                        
+                            xmlWriter.WriteValue(record.Ціна);
+                          
+                        xmlWriter.WriteEndElement(); //Ціна
+                        xmlWriter.WriteStartElement("Сума");
+                        xmlWriter.WriteAttributeString("type", "numeric");
+                        
+                            xmlWriter.WriteValue(record.Сума);
+                          
+                        xmlWriter.WriteEndElement(); //Сума
+                        xmlWriter.WriteEndElement(); //row
+                    }
+
+                    xmlWriter.WriteEndElement(); //TablePart
+                
+                    xmlWriter.WriteStartElement("TablePart");
+                    xmlWriter.WriteAttributeString("name", "Каси");
+
+                    foreach(ВведенняЗалишків_Каси_TablePart.Record record in ВведенняЗалишків_Objest.Каси_TablePart.Records)
+                    {
+                        xmlWriter.WriteStartElement("row");
+                        xmlWriter.WriteAttributeString("uid", record.UID.ToString());
+                        
+                        xmlWriter.WriteStartElement("НомерРядка");
+                        xmlWriter.WriteAttributeString("type", "integer");
+                        
+                            xmlWriter.WriteValue(record.НомерРядка);
+                          
+                        xmlWriter.WriteEndElement(); //НомерРядка
+                        xmlWriter.WriteStartElement("Каса");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.Каси");
+                                xmlWriter.WriteAttributeString("uid", record.Каса.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Каса.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Каса
+                        xmlWriter.WriteStartElement("Сума");
+                        xmlWriter.WriteAttributeString("type", "numeric");
+                        
+                            xmlWriter.WriteValue(record.Сума);
+                          
+                        xmlWriter.WriteEndElement(); //Сума
+                        xmlWriter.WriteEndElement(); //row
+                    }
+
+                    xmlWriter.WriteEndElement(); //TablePart
+                
+                    xmlWriter.WriteStartElement("TablePart");
+                    xmlWriter.WriteAttributeString("name", "БанківськіРахунки");
+
+                    foreach(ВведенняЗалишків_БанківськіРахунки_TablePart.Record record in ВведенняЗалишків_Objest.БанківськіРахунки_TablePart.Records)
+                    {
+                        xmlWriter.WriteStartElement("row");
+                        xmlWriter.WriteAttributeString("uid", record.UID.ToString());
+                        
+                        xmlWriter.WriteStartElement("НомерРядка");
+                        xmlWriter.WriteAttributeString("type", "integer");
+                        
+                            xmlWriter.WriteValue(record.НомерРядка);
+                          
+                        xmlWriter.WriteEndElement(); //НомерРядка
+                        xmlWriter.WriteStartElement("БанківськийРахунок");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.БанківськіРахункиОрганізацій");
+                                xmlWriter.WriteAttributeString("uid", record.БанківськийРахунок.UnigueID.ToString());
+                                xmlWriter.WriteString(record.БанківськийРахунок.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //БанківськийРахунок
+                        xmlWriter.WriteStartElement("Сума");
+                        xmlWriter.WriteAttributeString("type", "numeric");
+                        
+                            xmlWriter.WriteValue(record.Сума);
+                          
+                        xmlWriter.WriteEndElement(); //Сума
+                        xmlWriter.WriteEndElement(); //row
+                    }
+
+                    xmlWriter.WriteEndElement(); //TablePart
+                
+                    xmlWriter.WriteStartElement("TablePart");
+                    xmlWriter.WriteAttributeString("name", "РозрахункиЗКонтрагентами");
+
+                    foreach(ВведенняЗалишків_РозрахункиЗКонтрагентами_TablePart.Record record in ВведенняЗалишків_Objest.РозрахункиЗКонтрагентами_TablePart.Records)
+                    {
+                        xmlWriter.WriteStartElement("row");
+                        xmlWriter.WriteAttributeString("uid", record.UID.ToString());
+                        
+                        xmlWriter.WriteStartElement("НомерРядка");
+                        xmlWriter.WriteAttributeString("type", "integer");
+                        
+                            xmlWriter.WriteValue(record.НомерРядка);
+                          
+                        xmlWriter.WriteEndElement(); //НомерРядка
+                        xmlWriter.WriteStartElement("Контрагент");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.Контрагенти");
+                                xmlWriter.WriteAttributeString("uid", record.Контрагент.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Контрагент.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Контрагент
+                        xmlWriter.WriteStartElement("Валюта");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.Валюти");
+                                xmlWriter.WriteAttributeString("uid", record.Валюта.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Валюта.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Валюта
+                        xmlWriter.WriteStartElement("Сума");
+                        xmlWriter.WriteAttributeString("type", "numeric");
+                        
+                            xmlWriter.WriteValue(record.Сума);
+                          
+                        xmlWriter.WriteEndElement(); //Сума
+                        xmlWriter.WriteStartElement("ТипКонтрагента");
+                        xmlWriter.WriteAttributeString("type", "enum");
+                        
+                            xmlWriter.WriteAttributeString("pointer", "Перелічення.ТипиКонтрагентів");
+                            xmlWriter.WriteAttributeString("uid", ((int)record.ТипКонтрагента).ToString());
+                            xmlWriter.WriteString(record.ТипКонтрагента.ToString());
+                          
+                        xmlWriter.WriteEndElement(); //ТипКонтрагента
+                        xmlWriter.WriteEndElement(); //row
+                    }
+
+                    xmlWriter.WriteEndElement(); //TablePart
+                
+                xmlWriter.WriteEndElement(); //TabularParts
+            
+
+            xmlWriter.WriteEndElement(); //root
+            xmlWriter.WriteEndDocument();
+            xmlWriter.Close();
+        }
     }
 	
     
@@ -14596,6 +17678,144 @@ namespace StorageAndTrade_1_0.Документи
         public const string Назва = "docname";
         public const string Автор = "col_a1";
     }
+
+    public static class НадлишкиТоварів_Export
+    {
+        public static void ToXmlFile(НадлишкиТоварів_Pointer НадлишкиТоварів, string pathToSave)
+        {
+            НадлишкиТоварів_Objest НадлишкиТоварів_Objest = НадлишкиТоварів.GetDocumentObject(true);
+
+            XmlWriter xmlWriter = XmlWriter.Create(pathToSave, new XmlWriterSettings() { Indent = true, Encoding = System.Text.Encoding.UTF8 });
+            xmlWriter.WriteStartDocument();
+            xmlWriter.WriteStartElement("root");
+            xmlWriter.WriteAttributeString("uid", НадлишкиТоварів_Objest.UnigueID.ToString());
+            
+            xmlWriter.WriteStartElement("Організація");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Організації");
+                    xmlWriter.WriteAttributeString("uid", НадлишкиТоварів_Objest.Організація.UnigueID.ToString());
+                    xmlWriter.WriteString(НадлишкиТоварів_Objest.Організація.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Організація
+            xmlWriter.WriteStartElement("Підрозділ");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.СтруктураПідприємства");
+                    xmlWriter.WriteAttributeString("uid", НадлишкиТоварів_Objest.Підрозділ.UnigueID.ToString());
+                    xmlWriter.WriteString(НадлишкиТоварів_Objest.Підрозділ.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Підрозділ
+            xmlWriter.WriteStartElement("Склад");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Склади");
+                    xmlWriter.WriteAttributeString("uid", НадлишкиТоварів_Objest.Склад.UnigueID.ToString());
+                    xmlWriter.WriteString(НадлишкиТоварів_Objest.Склад.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Склад
+            xmlWriter.WriteStartElement("ВидЦіни");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.ВидиЦін");
+                    xmlWriter.WriteAttributeString("uid", НадлишкиТоварів_Objest.ВидЦіни.UnigueID.ToString());
+                    xmlWriter.WriteString(НадлишкиТоварів_Objest.ВидЦіни.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //ВидЦіни
+            xmlWriter.WriteStartElement("Коментар");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(НадлишкиТоварів_Objest.Коментар);
+              
+            xmlWriter.WriteEndElement(); //Коментар
+            xmlWriter.WriteStartElement("НомерДок");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(НадлишкиТоварів_Objest.НомерДок);
+              
+            xmlWriter.WriteEndElement(); //НомерДок
+            xmlWriter.WriteStartElement("ДатаДок");
+            xmlWriter.WriteAttributeString("type", "datetime");
+            
+                xmlWriter.WriteValue(НадлишкиТоварів_Objest.ДатаДок);
+              
+            xmlWriter.WriteEndElement(); //ДатаДок
+            xmlWriter.WriteStartElement("Назва");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(НадлишкиТоварів_Objest.Назва);
+              
+            xmlWriter.WriteEndElement(); //Назва
+            xmlWriter.WriteStartElement("Автор");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
+                    xmlWriter.WriteAttributeString("uid", НадлишкиТоварів_Objest.Автор.UnigueID.ToString());
+                    xmlWriter.WriteString(НадлишкиТоварів_Objest.Автор.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Автор
+
+                /* 
+                Табличні частини
+                */
+
+                xmlWriter.WriteStartElement("TabularParts");
+                
+                    xmlWriter.WriteStartElement("TablePart");
+                    xmlWriter.WriteAttributeString("name", "Товари");
+
+                    foreach(НадлишкиТоварів_Товари_TablePart.Record record in НадлишкиТоварів_Objest.Товари_TablePart.Records)
+                    {
+                        xmlWriter.WriteStartElement("row");
+                        xmlWriter.WriteAttributeString("uid", record.UID.ToString());
+                        
+                        xmlWriter.WriteStartElement("Номенклатура");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.Номенклатура");
+                                xmlWriter.WriteAttributeString("uid", record.Номенклатура.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Номенклатура.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Номенклатура
+                        xmlWriter.WriteStartElement("ХарактеристикаНоменклатури");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.ХарактеристикиНоменклатури");
+                                xmlWriter.WriteAttributeString("uid", record.ХарактеристикаНоменклатури.UnigueID.ToString());
+                                xmlWriter.WriteString(record.ХарактеристикаНоменклатури.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //ХарактеристикаНоменклатури
+                        xmlWriter.WriteStartElement("Кількість");
+                        xmlWriter.WriteAttributeString("type", "numeric");
+                        
+                            xmlWriter.WriteValue(record.Кількість);
+                          
+                        xmlWriter.WriteEndElement(); //Кількість
+                        xmlWriter.WriteStartElement("Ціна");
+                        xmlWriter.WriteAttributeString("type", "numeric");
+                        
+                            xmlWriter.WriteValue(record.Ціна);
+                          
+                        xmlWriter.WriteEndElement(); //Ціна
+                        xmlWriter.WriteStartElement("Сума");
+                        xmlWriter.WriteAttributeString("type", "numeric");
+                        
+                            xmlWriter.WriteValue(record.Сума);
+                          
+                        xmlWriter.WriteEndElement(); //Сума
+                        xmlWriter.WriteEndElement(); //row
+                    }
+
+                    xmlWriter.WriteEndElement(); //TablePart
+                
+                xmlWriter.WriteEndElement(); //TabularParts
+            
+
+            xmlWriter.WriteEndElement(); //root
+            xmlWriter.WriteEndDocument();
+            xmlWriter.Close();
+        }
+    }
 	
     
     public class НадлишкиТоварів_Objest : DocumentObject
@@ -14890,6 +18110,144 @@ namespace StorageAndTrade_1_0.Документи
         public const string Коментар = "col_h6";
         public const string Автор = "col_a1";
     }
+
+    public static class ПересортицяТоварів_Export
+    {
+        public static void ToXmlFile(ПересортицяТоварів_Pointer ПересортицяТоварів, string pathToSave)
+        {
+            ПересортицяТоварів_Objest ПересортицяТоварів_Objest = ПересортицяТоварів.GetDocumentObject(true);
+
+            XmlWriter xmlWriter = XmlWriter.Create(pathToSave, new XmlWriterSettings() { Indent = true, Encoding = System.Text.Encoding.UTF8 });
+            xmlWriter.WriteStartDocument();
+            xmlWriter.WriteStartElement("root");
+            xmlWriter.WriteAttributeString("uid", ПересортицяТоварів_Objest.UnigueID.ToString());
+            
+            xmlWriter.WriteStartElement("Назва");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ПересортицяТоварів_Objest.Назва);
+              
+            xmlWriter.WriteEndElement(); //Назва
+            xmlWriter.WriteStartElement("НомерДок");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ПересортицяТоварів_Objest.НомерДок);
+              
+            xmlWriter.WriteEndElement(); //НомерДок
+            xmlWriter.WriteStartElement("ДатаДок");
+            xmlWriter.WriteAttributeString("type", "datetime");
+            
+                xmlWriter.WriteValue(ПересортицяТоварів_Objest.ДатаДок);
+              
+            xmlWriter.WriteEndElement(); //ДатаДок
+            xmlWriter.WriteStartElement("Організація");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Організації");
+                    xmlWriter.WriteAttributeString("uid", ПересортицяТоварів_Objest.Організація.UnigueID.ToString());
+                    xmlWriter.WriteString(ПересортицяТоварів_Objest.Організація.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Організація
+            xmlWriter.WriteStartElement("Підрозділ");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.СтруктураПідприємства");
+                    xmlWriter.WriteAttributeString("uid", ПересортицяТоварів_Objest.Підрозділ.UnigueID.ToString());
+                    xmlWriter.WriteString(ПересортицяТоварів_Objest.Підрозділ.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Підрозділ
+            xmlWriter.WriteStartElement("Склад");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Склади");
+                    xmlWriter.WriteAttributeString("uid", ПересортицяТоварів_Objest.Склад.UnigueID.ToString());
+                    xmlWriter.WriteString(ПересортицяТоварів_Objest.Склад.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Склад
+            xmlWriter.WriteStartElement("ВидЦіни");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.ВидиЦін");
+                    xmlWriter.WriteAttributeString("uid", ПересортицяТоварів_Objest.ВидЦіни.UnigueID.ToString());
+                    xmlWriter.WriteString(ПересортицяТоварів_Objest.ВидЦіни.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //ВидЦіни
+            xmlWriter.WriteStartElement("Коментар");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ПересортицяТоварів_Objest.Коментар);
+              
+            xmlWriter.WriteEndElement(); //Коментар
+            xmlWriter.WriteStartElement("Автор");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
+                    xmlWriter.WriteAttributeString("uid", ПересортицяТоварів_Objest.Автор.UnigueID.ToString());
+                    xmlWriter.WriteString(ПересортицяТоварів_Objest.Автор.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Автор
+
+                /* 
+                Табличні частини
+                */
+
+                xmlWriter.WriteStartElement("TabularParts");
+                
+                    xmlWriter.WriteStartElement("TablePart");
+                    xmlWriter.WriteAttributeString("name", "Товари");
+
+                    foreach(ПересортицяТоварів_Товари_TablePart.Record record in ПересортицяТоварів_Objest.Товари_TablePart.Records)
+                    {
+                        xmlWriter.WriteStartElement("row");
+                        xmlWriter.WriteAttributeString("uid", record.UID.ToString());
+                        
+                        xmlWriter.WriteStartElement("НомерРядка");
+                        xmlWriter.WriteAttributeString("type", "integer");
+                        
+                            xmlWriter.WriteValue(record.НомерРядка);
+                          
+                        xmlWriter.WriteEndElement(); //НомерРядка
+                        xmlWriter.WriteStartElement("Номенклатура");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.Номенклатура");
+                                xmlWriter.WriteAttributeString("uid", record.Номенклатура.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Номенклатура.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Номенклатура
+                        xmlWriter.WriteStartElement("ХарактеристикаНоменклатури");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.ХарактеристикиНоменклатури");
+                                xmlWriter.WriteAttributeString("uid", record.ХарактеристикаНоменклатури.UnigueID.ToString());
+                                xmlWriter.WriteString(record.ХарактеристикаНоменклатури.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //ХарактеристикаНоменклатури
+                        xmlWriter.WriteStartElement("Кількість");
+                        xmlWriter.WriteAttributeString("type", "numeric");
+                        
+                            xmlWriter.WriteValue(record.Кількість);
+                          
+                        xmlWriter.WriteEndElement(); //Кількість
+                        xmlWriter.WriteStartElement("Ціна");
+                        xmlWriter.WriteAttributeString("type", "numeric");
+                        
+                            xmlWriter.WriteValue(record.Ціна);
+                          
+                        xmlWriter.WriteEndElement(); //Ціна
+                        xmlWriter.WriteEndElement(); //row
+                    }
+
+                    xmlWriter.WriteEndElement(); //TablePart
+                
+                xmlWriter.WriteEndElement(); //TabularParts
+            
+
+            xmlWriter.WriteEndElement(); //root
+            xmlWriter.WriteEndDocument();
+            xmlWriter.Close();
+        }
+    }
 	
     
     public class ПересортицяТоварів_Objest : DocumentObject
@@ -15181,6 +18539,142 @@ namespace StorageAndTrade_1_0.Документи
         public const string Відповідальний = "col_i7";
         public const string Коментар = "col_i5";
         public const string Автор = "col_a1";
+    }
+
+    public static class ПерерахунокТоварів_Export
+    {
+        public static void ToXmlFile(ПерерахунокТоварів_Pointer ПерерахунокТоварів, string pathToSave)
+        {
+            ПерерахунокТоварів_Objest ПерерахунокТоварів_Objest = ПерерахунокТоварів.GetDocumentObject(true);
+
+            XmlWriter xmlWriter = XmlWriter.Create(pathToSave, new XmlWriterSettings() { Indent = true, Encoding = System.Text.Encoding.UTF8 });
+            xmlWriter.WriteStartDocument();
+            xmlWriter.WriteStartElement("root");
+            xmlWriter.WriteAttributeString("uid", ПерерахунокТоварів_Objest.UnigueID.ToString());
+            
+            xmlWriter.WriteStartElement("Назва");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ПерерахунокТоварів_Objest.Назва);
+              
+            xmlWriter.WriteEndElement(); //Назва
+            xmlWriter.WriteStartElement("НомерДок");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ПерерахунокТоварів_Objest.НомерДок);
+              
+            xmlWriter.WriteEndElement(); //НомерДок
+            xmlWriter.WriteStartElement("ДатаДок");
+            xmlWriter.WriteAttributeString("type", "datetime");
+            
+                xmlWriter.WriteValue(ПерерахунокТоварів_Objest.ДатаДок);
+              
+            xmlWriter.WriteEndElement(); //ДатаДок
+            xmlWriter.WriteStartElement("Склад");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Склади");
+                    xmlWriter.WriteAttributeString("uid", ПерерахунокТоварів_Objest.Склад.UnigueID.ToString());
+                    xmlWriter.WriteString(ПерерахунокТоварів_Objest.Склад.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Склад
+            xmlWriter.WriteStartElement("Відповідальний");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.ФізичніОсоби");
+                    xmlWriter.WriteAttributeString("uid", ПерерахунокТоварів_Objest.Відповідальний.UnigueID.ToString());
+                    xmlWriter.WriteString(ПерерахунокТоварів_Objest.Відповідальний.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Відповідальний
+            xmlWriter.WriteStartElement("Коментар");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ПерерахунокТоварів_Objest.Коментар);
+              
+            xmlWriter.WriteEndElement(); //Коментар
+            xmlWriter.WriteStartElement("Автор");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
+                    xmlWriter.WriteAttributeString("uid", ПерерахунокТоварів_Objest.Автор.UnigueID.ToString());
+                    xmlWriter.WriteString(ПерерахунокТоварів_Objest.Автор.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Автор
+
+                /* 
+                Табличні частини
+                */
+
+                xmlWriter.WriteStartElement("TabularParts");
+                
+                    xmlWriter.WriteStartElement("TablePart");
+                    xmlWriter.WriteAttributeString("name", "Товари");
+
+                    foreach(ПерерахунокТоварів_Товари_TablePart.Record record in ПерерахунокТоварів_Objest.Товари_TablePart.Records)
+                    {
+                        xmlWriter.WriteStartElement("row");
+                        xmlWriter.WriteAttributeString("uid", record.UID.ToString());
+                        
+                        xmlWriter.WriteStartElement("Кількість");
+                        xmlWriter.WriteAttributeString("type", "numeric");
+                        
+                            xmlWriter.WriteValue(record.Кількість);
+                          
+                        xmlWriter.WriteEndElement(); //Кількість
+                        xmlWriter.WriteStartElement("КількістьФакт");
+                        xmlWriter.WriteAttributeString("type", "numeric");
+                        
+                            xmlWriter.WriteValue(record.КількістьФакт);
+                          
+                        xmlWriter.WriteEndElement(); //КількістьФакт
+                        xmlWriter.WriteStartElement("КількістьУпаковок");
+                        xmlWriter.WriteAttributeString("type", "integer");
+                        
+                            xmlWriter.WriteValue(record.КількістьУпаковок);
+                          
+                        xmlWriter.WriteEndElement(); //КількістьУпаковок
+                        xmlWriter.WriteStartElement("КількістьУпаковокФакт");
+                        xmlWriter.WriteAttributeString("type", "integer");
+                        
+                            xmlWriter.WriteValue(record.КількістьУпаковокФакт);
+                          
+                        xmlWriter.WriteEndElement(); //КількістьУпаковокФакт
+                        xmlWriter.WriteStartElement("Номенклатура");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.Номенклатура");
+                                xmlWriter.WriteAttributeString("uid", record.Номенклатура.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Номенклатура.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Номенклатура
+                        xmlWriter.WriteStartElement("Пакування");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.ПакуванняОдиниціВиміру");
+                                xmlWriter.WriteAttributeString("uid", record.Пакування.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Пакування.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Пакування
+                        xmlWriter.WriteStartElement("ХарактеристикаНоменклатури");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.ХарактеристикиНоменклатури");
+                                xmlWriter.WriteAttributeString("uid", record.ХарактеристикаНоменклатури.UnigueID.ToString());
+                                xmlWriter.WriteString(record.ХарактеристикаНоменклатури.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //ХарактеристикаНоменклатури
+                        xmlWriter.WriteEndElement(); //row
+                    }
+
+                    xmlWriter.WriteEndElement(); //TablePart
+                
+                xmlWriter.WriteEndElement(); //TabularParts
+            
+
+            xmlWriter.WriteEndElement(); //root
+            xmlWriter.WriteEndDocument();
+            xmlWriter.Close();
+        }
     }
 	
     
@@ -15477,6 +18971,184 @@ namespace StorageAndTrade_1_0.Документи
         public const string СумаДокументу = "col_a1";
         public const string Коментар = "col_a5";
         public const string Автор = "col_a2";
+    }
+
+    public static class ПсуванняТоварів_Export
+    {
+        public static void ToXmlFile(ПсуванняТоварів_Pointer ПсуванняТоварів, string pathToSave)
+        {
+            ПсуванняТоварів_Objest ПсуванняТоварів_Objest = ПсуванняТоварів.GetDocumentObject(true);
+
+            XmlWriter xmlWriter = XmlWriter.Create(pathToSave, new XmlWriterSettings() { Indent = true, Encoding = System.Text.Encoding.UTF8 });
+            xmlWriter.WriteStartDocument();
+            xmlWriter.WriteStartElement("root");
+            xmlWriter.WriteAttributeString("uid", ПсуванняТоварів_Objest.UnigueID.ToString());
+            
+            xmlWriter.WriteStartElement("Назва");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ПсуванняТоварів_Objest.Назва);
+              
+            xmlWriter.WriteEndElement(); //Назва
+            xmlWriter.WriteStartElement("НомерДок");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ПсуванняТоварів_Objest.НомерДок);
+              
+            xmlWriter.WriteEndElement(); //НомерДок
+            xmlWriter.WriteStartElement("ДатаДок");
+            xmlWriter.WriteAttributeString("type", "datetime");
+            
+                xmlWriter.WriteValue(ПсуванняТоварів_Objest.ДатаДок);
+              
+            xmlWriter.WriteEndElement(); //ДатаДок
+            xmlWriter.WriteStartElement("Організація");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Організації");
+                    xmlWriter.WriteAttributeString("uid", ПсуванняТоварів_Objest.Організація.UnigueID.ToString());
+                    xmlWriter.WriteString(ПсуванняТоварів_Objest.Організація.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Організація
+            xmlWriter.WriteStartElement("Підрозділ");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.СтруктураПідприємства");
+                    xmlWriter.WriteAttributeString("uid", ПсуванняТоварів_Objest.Підрозділ.UnigueID.ToString());
+                    xmlWriter.WriteString(ПсуванняТоварів_Objest.Підрозділ.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Підрозділ
+            xmlWriter.WriteStartElement("Склад");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Склади");
+                    xmlWriter.WriteAttributeString("uid", ПсуванняТоварів_Objest.Склад.UnigueID.ToString());
+                    xmlWriter.WriteString(ПсуванняТоварів_Objest.Склад.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Склад
+            xmlWriter.WriteStartElement("Причина");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ПсуванняТоварів_Objest.Причина);
+              
+            xmlWriter.WriteEndElement(); //Причина
+            xmlWriter.WriteStartElement("ВидЦіни");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.ВидиЦін");
+                    xmlWriter.WriteAttributeString("uid", ПсуванняТоварів_Objest.ВидЦіни.UnigueID.ToString());
+                    xmlWriter.WriteString(ПсуванняТоварів_Objest.ВидЦіни.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //ВидЦіни
+            xmlWriter.WriteStartElement("СумаДокументу");
+            xmlWriter.WriteAttributeString("type", "numeric");
+            
+                xmlWriter.WriteValue(ПсуванняТоварів_Objest.СумаДокументу);
+              
+            xmlWriter.WriteEndElement(); //СумаДокументу
+            xmlWriter.WriteStartElement("Коментар");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ПсуванняТоварів_Objest.Коментар);
+              
+            xmlWriter.WriteEndElement(); //Коментар
+            xmlWriter.WriteStartElement("Автор");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
+                    xmlWriter.WriteAttributeString("uid", ПсуванняТоварів_Objest.Автор.UnigueID.ToString());
+                    xmlWriter.WriteString(ПсуванняТоварів_Objest.Автор.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Автор
+
+                /* 
+                Табличні частини
+                */
+
+                xmlWriter.WriteStartElement("TabularParts");
+                
+                    xmlWriter.WriteStartElement("TablePart");
+                    xmlWriter.WriteAttributeString("name", "Товари");
+
+                    foreach(ПсуванняТоварів_Товари_TablePart.Record record in ПсуванняТоварів_Objest.Товари_TablePart.Records)
+                    {
+                        xmlWriter.WriteStartElement("row");
+                        xmlWriter.WriteAttributeString("uid", record.UID.ToString());
+                        
+                        xmlWriter.WriteStartElement("НомерРядка");
+                        xmlWriter.WriteAttributeString("type", "integer");
+                        
+                            xmlWriter.WriteValue(record.НомерРядка);
+                          
+                        xmlWriter.WriteEndElement(); //НомерРядка
+                        xmlWriter.WriteStartElement("Номенклатура");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.Номенклатура");
+                                xmlWriter.WriteAttributeString("uid", record.Номенклатура.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Номенклатура.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Номенклатура
+                        xmlWriter.WriteStartElement("ХарактеристикаНоменклатури");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.ХарактеристикиНоменклатури");
+                                xmlWriter.WriteAttributeString("uid", record.ХарактеристикаНоменклатури.UnigueID.ToString());
+                                xmlWriter.WriteString(record.ХарактеристикаНоменклатури.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //ХарактеристикаНоменклатури
+                        xmlWriter.WriteStartElement("Серія");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.СеріїНоменклатури");
+                                xmlWriter.WriteAttributeString("uid", record.Серія.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Серія.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Серія
+                        xmlWriter.WriteStartElement("Пакування");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.ПакуванняОдиниціВиміру");
+                                xmlWriter.WriteAttributeString("uid", record.Пакування.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Пакування.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Пакування
+                        xmlWriter.WriteStartElement("КількістьУпаковок");
+                        xmlWriter.WriteAttributeString("type", "integer");
+                        
+                            xmlWriter.WriteValue(record.КількістьУпаковок);
+                          
+                        xmlWriter.WriteEndElement(); //КількістьУпаковок
+                        xmlWriter.WriteStartElement("Кількість");
+                        xmlWriter.WriteAttributeString("type", "numeric");
+                        
+                            xmlWriter.WriteValue(record.Кількість);
+                          
+                        xmlWriter.WriteEndElement(); //Кількість
+                        xmlWriter.WriteStartElement("Ціна");
+                        xmlWriter.WriteAttributeString("type", "numeric");
+                        
+                            xmlWriter.WriteValue(record.Ціна);
+                          
+                        xmlWriter.WriteEndElement(); //Ціна
+                        xmlWriter.WriteStartElement("Сума");
+                        xmlWriter.WriteAttributeString("type", "numeric");
+                        
+                            xmlWriter.WriteValue(record.Сума);
+                          
+                        xmlWriter.WriteEndElement(); //Сума
+                        xmlWriter.WriteEndElement(); //row
+                    }
+
+                    xmlWriter.WriteEndElement(); //TablePart
+                
+                xmlWriter.WriteEndElement(); //TabularParts
+            
+
+            xmlWriter.WriteEndElement(); //root
+            xmlWriter.WriteEndDocument();
+            xmlWriter.Close();
+        }
     }
 	
     
@@ -15807,6 +19479,192 @@ namespace StorageAndTrade_1_0.Документи
         public const string Автор = "col_b9";
         public const string ГосподарськаОперація = "col_b4";
         public const string Коментар = "col_b2";
+    }
+
+    public static class ВнутрішнєСпоживанняТоварів_Export
+    {
+        public static void ToXmlFile(ВнутрішнєСпоживанняТоварів_Pointer ВнутрішнєСпоживанняТоварів, string pathToSave)
+        {
+            ВнутрішнєСпоживанняТоварів_Objest ВнутрішнєСпоживанняТоварів_Objest = ВнутрішнєСпоживанняТоварів.GetDocumentObject(true);
+
+            XmlWriter xmlWriter = XmlWriter.Create(pathToSave, new XmlWriterSettings() { Indent = true, Encoding = System.Text.Encoding.UTF8 });
+            xmlWriter.WriteStartDocument();
+            xmlWriter.WriteStartElement("root");
+            xmlWriter.WriteAttributeString("uid", ВнутрішнєСпоживанняТоварів_Objest.UnigueID.ToString());
+            
+            xmlWriter.WriteStartElement("Назва");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ВнутрішнєСпоживанняТоварів_Objest.Назва);
+              
+            xmlWriter.WriteEndElement(); //Назва
+            xmlWriter.WriteStartElement("НомерДок");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ВнутрішнєСпоживанняТоварів_Objest.НомерДок);
+              
+            xmlWriter.WriteEndElement(); //НомерДок
+            xmlWriter.WriteStartElement("ДатаДок");
+            xmlWriter.WriteAttributeString("type", "datetime");
+            
+                xmlWriter.WriteValue(ВнутрішнєСпоживанняТоварів_Objest.ДатаДок);
+              
+            xmlWriter.WriteEndElement(); //ДатаДок
+            xmlWriter.WriteStartElement("Організація");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Організації");
+                    xmlWriter.WriteAttributeString("uid", ВнутрішнєСпоживанняТоварів_Objest.Організація.UnigueID.ToString());
+                    xmlWriter.WriteString(ВнутрішнєСпоживанняТоварів_Objest.Організація.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Організація
+            xmlWriter.WriteStartElement("Склад");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Склади");
+                    xmlWriter.WriteAttributeString("uid", ВнутрішнєСпоживанняТоварів_Objest.Склад.UnigueID.ToString());
+                    xmlWriter.WriteString(ВнутрішнєСпоживанняТоварів_Objest.Склад.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Склад
+            xmlWriter.WriteStartElement("Валюта");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Валюти");
+                    xmlWriter.WriteAttributeString("uid", ВнутрішнєСпоживанняТоварів_Objest.Валюта.UnigueID.ToString());
+                    xmlWriter.WriteString(ВнутрішнєСпоживанняТоварів_Objest.Валюта.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Валюта
+            xmlWriter.WriteStartElement("Підрозділ");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.СтруктураПідприємства");
+                    xmlWriter.WriteAttributeString("uid", ВнутрішнєСпоживанняТоварів_Objest.Підрозділ.UnigueID.ToString());
+                    xmlWriter.WriteString(ВнутрішнєСпоживанняТоварів_Objest.Підрозділ.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Підрозділ
+            xmlWriter.WriteStartElement("СумаДокументу");
+            xmlWriter.WriteAttributeString("type", "numeric");
+            
+                xmlWriter.WriteValue(ВнутрішнєСпоживанняТоварів_Objest.СумаДокументу);
+              
+            xmlWriter.WriteEndElement(); //СумаДокументу
+            xmlWriter.WriteStartElement("Основа");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ВнутрішнєСпоживанняТоварів_Objest.Основа);
+              
+            xmlWriter.WriteEndElement(); //Основа
+            xmlWriter.WriteStartElement("Автор");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
+                    xmlWriter.WriteAttributeString("uid", ВнутрішнєСпоживанняТоварів_Objest.Автор.UnigueID.ToString());
+                    xmlWriter.WriteString(ВнутрішнєСпоживанняТоварів_Objest.Автор.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Автор
+            xmlWriter.WriteStartElement("ГосподарськаОперація");
+            xmlWriter.WriteAttributeString("type", "enum");
+            
+                xmlWriter.WriteAttributeString("pointer", "Перелічення.ГосподарськіОперації");
+                xmlWriter.WriteAttributeString("uid", ((int)ВнутрішнєСпоживанняТоварів_Objest.ГосподарськаОперація).ToString());
+                xmlWriter.WriteString(ВнутрішнєСпоживанняТоварів_Objest.ГосподарськаОперація.ToString());
+              
+            xmlWriter.WriteEndElement(); //ГосподарськаОперація
+            xmlWriter.WriteStartElement("Коментар");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ВнутрішнєСпоживанняТоварів_Objest.Коментар);
+              
+            xmlWriter.WriteEndElement(); //Коментар
+
+                /* 
+                Табличні частини
+                */
+
+                xmlWriter.WriteStartElement("TabularParts");
+                
+                    xmlWriter.WriteStartElement("TablePart");
+                    xmlWriter.WriteAttributeString("name", "Товари");
+
+                    foreach(ВнутрішнєСпоживанняТоварів_Товари_TablePart.Record record in ВнутрішнєСпоживанняТоварів_Objest.Товари_TablePart.Records)
+                    {
+                        xmlWriter.WriteStartElement("row");
+                        xmlWriter.WriteAttributeString("uid", record.UID.ToString());
+                        
+                        xmlWriter.WriteStartElement("НомерРядка");
+                        xmlWriter.WriteAttributeString("type", "integer");
+                        
+                            xmlWriter.WriteValue(record.НомерРядка);
+                          
+                        xmlWriter.WriteEndElement(); //НомерРядка
+                        xmlWriter.WriteStartElement("Номенклатура");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.Номенклатура");
+                                xmlWriter.WriteAttributeString("uid", record.Номенклатура.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Номенклатура.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Номенклатура
+                        xmlWriter.WriteStartElement("ХарактеристикаНоменклатури");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.ХарактеристикиНоменклатури");
+                                xmlWriter.WriteAttributeString("uid", record.ХарактеристикаНоменклатури.UnigueID.ToString());
+                                xmlWriter.WriteString(record.ХарактеристикаНоменклатури.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //ХарактеристикаНоменклатури
+                        xmlWriter.WriteStartElement("Серія");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.СеріїНоменклатури");
+                                xmlWriter.WriteAttributeString("uid", record.Серія.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Серія.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Серія
+                        xmlWriter.WriteStartElement("Пакування");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.ПакуванняОдиниціВиміру");
+                                xmlWriter.WriteAttributeString("uid", record.Пакування.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Пакування.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Пакування
+                        xmlWriter.WriteStartElement("КількістьУпаковок");
+                        xmlWriter.WriteAttributeString("type", "integer");
+                        
+                            xmlWriter.WriteValue(record.КількістьУпаковок);
+                          
+                        xmlWriter.WriteEndElement(); //КількістьУпаковок
+                        xmlWriter.WriteStartElement("Кількість");
+                        xmlWriter.WriteAttributeString("type", "numeric");
+                        
+                            xmlWriter.WriteValue(record.Кількість);
+                          
+                        xmlWriter.WriteEndElement(); //Кількість
+                        xmlWriter.WriteStartElement("Ціна");
+                        xmlWriter.WriteAttributeString("type", "numeric");
+                        
+                            xmlWriter.WriteValue(record.Ціна);
+                          
+                        xmlWriter.WriteEndElement(); //Ціна
+                        xmlWriter.WriteStartElement("Сума");
+                        xmlWriter.WriteAttributeString("type", "numeric");
+                        
+                            xmlWriter.WriteValue(record.Сума);
+                          
+                        xmlWriter.WriteEndElement(); //Сума
+                        xmlWriter.WriteEndElement(); //row
+                    }
+
+                    xmlWriter.WriteEndElement(); //TablePart
+                
+                xmlWriter.WriteEndElement(); //TabularParts
+            
+
+            xmlWriter.WriteEndElement(); //root
+            xmlWriter.WriteEndDocument();
+            xmlWriter.Close();
+        }
     }
 	
     
@@ -16149,6 +20007,264 @@ namespace StorageAndTrade_1_0.Документи
         public const string Автор = "col_c4";
         public const string Коментар = "col_c1";
         public const string Менеджер = "col_a2";
+    }
+
+    public static class РахунокФактура_Export
+    {
+        public static void ToXmlFile(РахунокФактура_Pointer РахунокФактура, string pathToSave)
+        {
+            РахунокФактура_Objest РахунокФактура_Objest = РахунокФактура.GetDocumentObject(true);
+
+            XmlWriter xmlWriter = XmlWriter.Create(pathToSave, new XmlWriterSettings() { Indent = true, Encoding = System.Text.Encoding.UTF8 });
+            xmlWriter.WriteStartDocument();
+            xmlWriter.WriteStartElement("root");
+            xmlWriter.WriteAttributeString("uid", РахунокФактура_Objest.UnigueID.ToString());
+            
+            xmlWriter.WriteStartElement("Назва");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(РахунокФактура_Objest.Назва);
+              
+            xmlWriter.WriteEndElement(); //Назва
+            xmlWriter.WriteStartElement("НомерДок");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(РахунокФактура_Objest.НомерДок);
+              
+            xmlWriter.WriteEndElement(); //НомерДок
+            xmlWriter.WriteStartElement("ДатаДок");
+            xmlWriter.WriteAttributeString("type", "datetime");
+            
+                xmlWriter.WriteValue(РахунокФактура_Objest.ДатаДок);
+              
+            xmlWriter.WriteEndElement(); //ДатаДок
+            xmlWriter.WriteStartElement("Контрагент");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Контрагенти");
+                    xmlWriter.WriteAttributeString("uid", РахунокФактура_Objest.Контрагент.UnigueID.ToString());
+                    xmlWriter.WriteString(РахунокФактура_Objest.Контрагент.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Контрагент
+            xmlWriter.WriteStartElement("Організація");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Організації");
+                    xmlWriter.WriteAttributeString("uid", РахунокФактура_Objest.Організація.UnigueID.ToString());
+                    xmlWriter.WriteString(РахунокФактура_Objest.Організація.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Організація
+            xmlWriter.WriteStartElement("Валюта");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Валюти");
+                    xmlWriter.WriteAttributeString("uid", РахунокФактура_Objest.Валюта.UnigueID.ToString());
+                    xmlWriter.WriteString(РахунокФактура_Objest.Валюта.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Валюта
+            xmlWriter.WriteStartElement("СумаДокументу");
+            xmlWriter.WriteAttributeString("type", "numeric");
+            
+                xmlWriter.WriteValue(РахунокФактура_Objest.СумаДокументу);
+              
+            xmlWriter.WriteEndElement(); //СумаДокументу
+            xmlWriter.WriteStartElement("Склад");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Склади");
+                    xmlWriter.WriteAttributeString("uid", РахунокФактура_Objest.Склад.UnigueID.ToString());
+                    xmlWriter.WriteString(РахунокФактура_Objest.Склад.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Склад
+            xmlWriter.WriteStartElement("Статус");
+            xmlWriter.WriteAttributeString("type", "enum");
+            
+                xmlWriter.WriteAttributeString("pointer", "Перелічення.СтатусиЗамовленьКлієнтів");
+                xmlWriter.WriteAttributeString("uid", ((int)РахунокФактура_Objest.Статус).ToString());
+                xmlWriter.WriteString(РахунокФактура_Objest.Статус.ToString());
+              
+            xmlWriter.WriteEndElement(); //Статус
+            xmlWriter.WriteStartElement("ФормаОплати");
+            xmlWriter.WriteAttributeString("type", "enum");
+            
+                xmlWriter.WriteAttributeString("pointer", "Перелічення.ФормаОплати");
+                xmlWriter.WriteAttributeString("uid", ((int)РахунокФактура_Objest.ФормаОплати).ToString());
+                xmlWriter.WriteString(РахунокФактура_Objest.ФормаОплати.ToString());
+              
+            xmlWriter.WriteEndElement(); //ФормаОплати
+            xmlWriter.WriteStartElement("БанківськийРахунок");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.БанківськіРахункиОрганізацій");
+                    xmlWriter.WriteAttributeString("uid", РахунокФактура_Objest.БанківськийРахунок.UnigueID.ToString());
+                    xmlWriter.WriteString(РахунокФактура_Objest.БанківськийРахунок.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //БанківськийРахунок
+            xmlWriter.WriteStartElement("БанківськийРахунокКонтрагента");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.БанківськіРахункиКонтрагентів");
+                    xmlWriter.WriteAttributeString("uid", РахунокФактура_Objest.БанківськийРахунокКонтрагента.UnigueID.ToString());
+                    xmlWriter.WriteString(РахунокФактура_Objest.БанківськийРахунокКонтрагента.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //БанківськийРахунокКонтрагента
+            xmlWriter.WriteStartElement("Каса");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Каси");
+                    xmlWriter.WriteAttributeString("uid", РахунокФактура_Objest.Каса.UnigueID.ToString());
+                    xmlWriter.WriteString(РахунокФактура_Objest.Каса.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Каса
+            xmlWriter.WriteStartElement("ГосподарськаОперація");
+            xmlWriter.WriteAttributeString("type", "enum");
+            
+                xmlWriter.WriteAttributeString("pointer", "Перелічення.ГосподарськіОперації");
+                xmlWriter.WriteAttributeString("uid", ((int)РахунокФактура_Objest.ГосподарськаОперація).ToString());
+                xmlWriter.WriteString(РахунокФактура_Objest.ГосподарськаОперація.ToString());
+              
+            xmlWriter.WriteEndElement(); //ГосподарськаОперація
+            xmlWriter.WriteStartElement("Договір");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.ДоговориКонтрагентів");
+                    xmlWriter.WriteAttributeString("uid", РахунокФактура_Objest.Договір.UnigueID.ToString());
+                    xmlWriter.WriteString(РахунокФактура_Objest.Договір.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Договір
+            xmlWriter.WriteStartElement("Підрозділ");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.СтруктураПідприємства");
+                    xmlWriter.WriteAttributeString("uid", РахунокФактура_Objest.Підрозділ.UnigueID.ToString());
+                    xmlWriter.WriteString(РахунокФактура_Objest.Підрозділ.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Підрозділ
+            xmlWriter.WriteStartElement("Автор");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
+                    xmlWriter.WriteAttributeString("uid", РахунокФактура_Objest.Автор.UnigueID.ToString());
+                    xmlWriter.WriteString(РахунокФактура_Objest.Автор.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Автор
+            xmlWriter.WriteStartElement("Коментар");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(РахунокФактура_Objest.Коментар);
+              
+            xmlWriter.WriteEndElement(); //Коментар
+            xmlWriter.WriteStartElement("Менеджер");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
+                    xmlWriter.WriteAttributeString("uid", РахунокФактура_Objest.Менеджер.UnigueID.ToString());
+                    xmlWriter.WriteString(РахунокФактура_Objest.Менеджер.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Менеджер
+
+                /* 
+                Табличні частини
+                */
+
+                xmlWriter.WriteStartElement("TabularParts");
+                
+                    xmlWriter.WriteStartElement("TablePart");
+                    xmlWriter.WriteAttributeString("name", "Товари");
+
+                    foreach(РахунокФактура_Товари_TablePart.Record record in РахунокФактура_Objest.Товари_TablePart.Records)
+                    {
+                        xmlWriter.WriteStartElement("row");
+                        xmlWriter.WriteAttributeString("uid", record.UID.ToString());
+                        
+                        xmlWriter.WriteStartElement("НомерРядка");
+                        xmlWriter.WriteAttributeString("type", "integer");
+                        
+                            xmlWriter.WriteValue(record.НомерРядка);
+                          
+                        xmlWriter.WriteEndElement(); //НомерРядка
+                        xmlWriter.WriteStartElement("Номенклатура");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.Номенклатура");
+                                xmlWriter.WriteAttributeString("uid", record.Номенклатура.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Номенклатура.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Номенклатура
+                        xmlWriter.WriteStartElement("ХарактеристикаНоменклатури");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.ХарактеристикиНоменклатури");
+                                xmlWriter.WriteAttributeString("uid", record.ХарактеристикаНоменклатури.UnigueID.ToString());
+                                xmlWriter.WriteString(record.ХарактеристикаНоменклатури.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //ХарактеристикаНоменклатури
+                        xmlWriter.WriteStartElement("Пакування");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.ПакуванняОдиниціВиміру");
+                                xmlWriter.WriteAttributeString("uid", record.Пакування.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Пакування.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Пакування
+                        xmlWriter.WriteStartElement("КількістьУпаковок");
+                        xmlWriter.WriteAttributeString("type", "integer");
+                        
+                            xmlWriter.WriteValue(record.КількістьУпаковок);
+                          
+                        xmlWriter.WriteEndElement(); //КількістьУпаковок
+                        xmlWriter.WriteStartElement("Кількість");
+                        xmlWriter.WriteAttributeString("type", "numeric");
+                        
+                            xmlWriter.WriteValue(record.Кількість);
+                          
+                        xmlWriter.WriteEndElement(); //Кількість
+                        xmlWriter.WriteStartElement("ВидЦіни");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.ВидиЦін");
+                                xmlWriter.WriteAttributeString("uid", record.ВидЦіни.UnigueID.ToString());
+                                xmlWriter.WriteString(record.ВидЦіни.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //ВидЦіни
+                        xmlWriter.WriteStartElement("Ціна");
+                        xmlWriter.WriteAttributeString("type", "numeric");
+                        
+                            xmlWriter.WriteValue(record.Ціна);
+                          
+                        xmlWriter.WriteEndElement(); //Ціна
+                        xmlWriter.WriteStartElement("Сума");
+                        xmlWriter.WriteAttributeString("type", "numeric");
+                        
+                            xmlWriter.WriteValue(record.Сума);
+                          
+                        xmlWriter.WriteEndElement(); //Сума
+                        xmlWriter.WriteStartElement("Скидка");
+                        xmlWriter.WriteAttributeString("type", "numeric");
+                        
+                            xmlWriter.WriteValue(record.Скидка);
+                          
+                        xmlWriter.WriteEndElement(); //Скидка
+                        xmlWriter.WriteStartElement("Склад");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.Склади");
+                                xmlWriter.WriteAttributeString("uid", record.Склад.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Склад.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Склад
+                        xmlWriter.WriteEndElement(); //row
+                    }
+
+                    xmlWriter.WriteEndElement(); //TablePart
+                
+                xmlWriter.WriteEndElement(); //TabularParts
+            
+
+            xmlWriter.WriteEndElement(); //root
+            xmlWriter.WriteEndDocument();
+            xmlWriter.Close();
+        }
     }
 	
     
@@ -16528,6 +20644,174 @@ namespace StorageAndTrade_1_0.Документи
         public const string Підрозділ = "col_a6";
         public const string ДокументПоступлення = "col_a7";
     }
+
+    public static class РозміщенняТоварівНаСкладі_Export
+    {
+        public static void ToXmlFile(РозміщенняТоварівНаСкладі_Pointer РозміщенняТоварівНаСкладі, string pathToSave)
+        {
+            РозміщенняТоварівНаСкладі_Objest РозміщенняТоварівНаСкладі_Objest = РозміщенняТоварівНаСкладі.GetDocumentObject(true);
+
+            XmlWriter xmlWriter = XmlWriter.Create(pathToSave, new XmlWriterSettings() { Indent = true, Encoding = System.Text.Encoding.UTF8 });
+            xmlWriter.WriteStartDocument();
+            xmlWriter.WriteStartElement("root");
+            xmlWriter.WriteAttributeString("uid", РозміщенняТоварівНаСкладі_Objest.UnigueID.ToString());
+            
+            xmlWriter.WriteStartElement("Назва");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(РозміщенняТоварівНаСкладі_Objest.Назва);
+              
+            xmlWriter.WriteEndElement(); //Назва
+            xmlWriter.WriteStartElement("ДатаДок");
+            xmlWriter.WriteAttributeString("type", "datetime");
+            
+                xmlWriter.WriteValue(РозміщенняТоварівНаСкладі_Objest.ДатаДок);
+              
+            xmlWriter.WriteEndElement(); //ДатаДок
+            xmlWriter.WriteStartElement("НомерДок");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(РозміщенняТоварівНаСкладі_Objest.НомерДок);
+              
+            xmlWriter.WriteEndElement(); //НомерДок
+            xmlWriter.WriteStartElement("Коментар");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(РозміщенняТоварівНаСкладі_Objest.Коментар);
+              
+            xmlWriter.WriteEndElement(); //Коментар
+            xmlWriter.WriteStartElement("Основа");
+            xmlWriter.WriteAttributeString("type", "composite_pointer");
+            
+                xmlWriter.WriteRaw(((UuidAndText)РозміщенняТоварівНаСкладі_Objest.Основа).ToXml());
+              
+            xmlWriter.WriteEndElement(); //Основа
+            xmlWriter.WriteStartElement("Склад");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Склади");
+                    xmlWriter.WriteAttributeString("uid", РозміщенняТоварівНаСкладі_Objest.Склад.UnigueID.ToString());
+                    xmlWriter.WriteString(РозміщенняТоварівНаСкладі_Objest.Склад.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Склад
+            xmlWriter.WriteStartElement("Автор");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
+                    xmlWriter.WriteAttributeString("uid", РозміщенняТоварівНаСкладі_Objest.Автор.UnigueID.ToString());
+                    xmlWriter.WriteString(РозміщенняТоварівНаСкладі_Objest.Автор.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Автор
+            xmlWriter.WriteStartElement("Організація");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Організації");
+                    xmlWriter.WriteAttributeString("uid", РозміщенняТоварівНаСкладі_Objest.Організація.UnigueID.ToString());
+                    xmlWriter.WriteString(РозміщенняТоварівНаСкладі_Objest.Організація.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Організація
+            xmlWriter.WriteStartElement("Підрозділ");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.СтруктураПідприємства");
+                    xmlWriter.WriteAttributeString("uid", РозміщенняТоварівНаСкладі_Objest.Підрозділ.UnigueID.ToString());
+                    xmlWriter.WriteString(РозміщенняТоварівНаСкладі_Objest.Підрозділ.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Підрозділ
+            xmlWriter.WriteStartElement("ДокументПоступлення");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Документи.ПоступленняТоварівТаПослуг");
+                    xmlWriter.WriteAttributeString("uid", РозміщенняТоварівНаСкладі_Objest.ДокументПоступлення.UnigueID.ToString());
+                    xmlWriter.WriteString(РозміщенняТоварівНаСкладі_Objest.ДокументПоступлення.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //ДокументПоступлення
+
+                /* 
+                Табличні частини
+                */
+
+                xmlWriter.WriteStartElement("TabularParts");
+                
+                    xmlWriter.WriteStartElement("TablePart");
+                    xmlWriter.WriteAttributeString("name", "Товари");
+
+                    foreach(РозміщенняТоварівНаСкладі_Товари_TablePart.Record record in РозміщенняТоварівНаСкладі_Objest.Товари_TablePart.Records)
+                    {
+                        xmlWriter.WriteStartElement("row");
+                        xmlWriter.WriteAttributeString("uid", record.UID.ToString());
+                        
+                        xmlWriter.WriteStartElement("НомерРядка");
+                        xmlWriter.WriteAttributeString("type", "integer");
+                        
+                            xmlWriter.WriteValue(record.НомерРядка);
+                          
+                        xmlWriter.WriteEndElement(); //НомерРядка
+                        xmlWriter.WriteStartElement("Номенклатура");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.Номенклатура");
+                                xmlWriter.WriteAttributeString("uid", record.Номенклатура.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Номенклатура.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Номенклатура
+                        xmlWriter.WriteStartElement("ХарактеристикаНоменклатури");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.ХарактеристикиНоменклатури");
+                                xmlWriter.WriteAttributeString("uid", record.ХарактеристикаНоменклатури.UnigueID.ToString());
+                                xmlWriter.WriteString(record.ХарактеристикаНоменклатури.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //ХарактеристикаНоменклатури
+                        xmlWriter.WriteStartElement("Серія");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.СеріїНоменклатури");
+                                xmlWriter.WriteAttributeString("uid", record.Серія.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Серія.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Серія
+                        xmlWriter.WriteStartElement("Пакування");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.ПакуванняОдиниціВиміру");
+                                xmlWriter.WriteAttributeString("uid", record.Пакування.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Пакування.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Пакування
+                        xmlWriter.WriteStartElement("КількістьУпаковок");
+                        xmlWriter.WriteAttributeString("type", "integer");
+                        
+                            xmlWriter.WriteValue(record.КількістьУпаковок);
+                          
+                        xmlWriter.WriteEndElement(); //КількістьУпаковок
+                        xmlWriter.WriteStartElement("Кількість");
+                        xmlWriter.WriteAttributeString("type", "numeric");
+                        
+                            xmlWriter.WriteValue(record.Кількість);
+                          
+                        xmlWriter.WriteEndElement(); //Кількість
+                        xmlWriter.WriteStartElement("Комірка");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.СкладськіКомірки");
+                                xmlWriter.WriteAttributeString("uid", record.Комірка.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Комірка.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Комірка
+                        xmlWriter.WriteEndElement(); //row
+                    }
+
+                    xmlWriter.WriteEndElement(); //TablePart
+                
+                xmlWriter.WriteEndElement(); //TabularParts
+            
+
+            xmlWriter.WriteEndElement(); //root
+            xmlWriter.WriteEndDocument();
+            xmlWriter.Close();
+        }
+    }
 	
     
     public class РозміщенняТоварівНаСкладі_Objest : DocumentObject
@@ -16844,6 +21128,174 @@ namespace StorageAndTrade_1_0.Документи
         public const string Автор = "col_a4";
         public const string Організація = "col_a5";
         public const string Підрозділ = "col_a6";
+    }
+
+    public static class ПереміщенняТоварівНаСкладі_Export
+    {
+        public static void ToXmlFile(ПереміщенняТоварівНаСкладі_Pointer ПереміщенняТоварівНаСкладі, string pathToSave)
+        {
+            ПереміщенняТоварівНаСкладі_Objest ПереміщенняТоварівНаСкладі_Objest = ПереміщенняТоварівНаСкладі.GetDocumentObject(true);
+
+            XmlWriter xmlWriter = XmlWriter.Create(pathToSave, new XmlWriterSettings() { Indent = true, Encoding = System.Text.Encoding.UTF8 });
+            xmlWriter.WriteStartDocument();
+            xmlWriter.WriteStartElement("root");
+            xmlWriter.WriteAttributeString("uid", ПереміщенняТоварівНаСкладі_Objest.UnigueID.ToString());
+            
+            xmlWriter.WriteStartElement("Назва");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ПереміщенняТоварівНаСкладі_Objest.Назва);
+              
+            xmlWriter.WriteEndElement(); //Назва
+            xmlWriter.WriteStartElement("ДатаДок");
+            xmlWriter.WriteAttributeString("type", "datetime");
+            
+                xmlWriter.WriteValue(ПереміщенняТоварівНаСкладі_Objest.ДатаДок);
+              
+            xmlWriter.WriteEndElement(); //ДатаДок
+            xmlWriter.WriteStartElement("НомерДок");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ПереміщенняТоварівНаСкладі_Objest.НомерДок);
+              
+            xmlWriter.WriteEndElement(); //НомерДок
+            xmlWriter.WriteStartElement("Коментар");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ПереміщенняТоварівНаСкладі_Objest.Коментар);
+              
+            xmlWriter.WriteEndElement(); //Коментар
+            xmlWriter.WriteStartElement("Основа");
+            xmlWriter.WriteAttributeString("type", "composite_pointer");
+            
+                xmlWriter.WriteRaw(((UuidAndText)ПереміщенняТоварівНаСкладі_Objest.Основа).ToXml());
+              
+            xmlWriter.WriteEndElement(); //Основа
+            xmlWriter.WriteStartElement("Склад");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Склади");
+                    xmlWriter.WriteAttributeString("uid", ПереміщенняТоварівНаСкладі_Objest.Склад.UnigueID.ToString());
+                    xmlWriter.WriteString(ПереміщенняТоварівНаСкладі_Objest.Склад.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Склад
+            xmlWriter.WriteStartElement("Автор");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
+                    xmlWriter.WriteAttributeString("uid", ПереміщенняТоварівНаСкладі_Objest.Автор.UnigueID.ToString());
+                    xmlWriter.WriteString(ПереміщенняТоварівНаСкладі_Objest.Автор.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Автор
+            xmlWriter.WriteStartElement("Організація");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Організації");
+                    xmlWriter.WriteAttributeString("uid", ПереміщенняТоварівНаСкладі_Objest.Організація.UnigueID.ToString());
+                    xmlWriter.WriteString(ПереміщенняТоварівНаСкладі_Objest.Організація.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Організація
+            xmlWriter.WriteStartElement("Підрозділ");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.СтруктураПідприємства");
+                    xmlWriter.WriteAttributeString("uid", ПереміщенняТоварівНаСкладі_Objest.Підрозділ.UnigueID.ToString());
+                    xmlWriter.WriteString(ПереміщенняТоварівНаСкладі_Objest.Підрозділ.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Підрозділ
+
+                /* 
+                Табличні частини
+                */
+
+                xmlWriter.WriteStartElement("TabularParts");
+                
+                    xmlWriter.WriteStartElement("TablePart");
+                    xmlWriter.WriteAttributeString("name", "Товари");
+
+                    foreach(ПереміщенняТоварівНаСкладі_Товари_TablePart.Record record in ПереміщенняТоварівНаСкладі_Objest.Товари_TablePart.Records)
+                    {
+                        xmlWriter.WriteStartElement("row");
+                        xmlWriter.WriteAttributeString("uid", record.UID.ToString());
+                        
+                        xmlWriter.WriteStartElement("НомерРядка");
+                        xmlWriter.WriteAttributeString("type", "integer");
+                        
+                            xmlWriter.WriteValue(record.НомерРядка);
+                          
+                        xmlWriter.WriteEndElement(); //НомерРядка
+                        xmlWriter.WriteStartElement("Номенклатура");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.Номенклатура");
+                                xmlWriter.WriteAttributeString("uid", record.Номенклатура.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Номенклатура.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Номенклатура
+                        xmlWriter.WriteStartElement("ХарактеристикаНоменклатури");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.ХарактеристикиНоменклатури");
+                                xmlWriter.WriteAttributeString("uid", record.ХарактеристикаНоменклатури.UnigueID.ToString());
+                                xmlWriter.WriteString(record.ХарактеристикаНоменклатури.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //ХарактеристикаНоменклатури
+                        xmlWriter.WriteStartElement("Серія");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.СеріїНоменклатури");
+                                xmlWriter.WriteAttributeString("uid", record.Серія.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Серія.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Серія
+                        xmlWriter.WriteStartElement("Пакування");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.ПакуванняОдиниціВиміру");
+                                xmlWriter.WriteAttributeString("uid", record.Пакування.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Пакування.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Пакування
+                        xmlWriter.WriteStartElement("КількістьУпаковок");
+                        xmlWriter.WriteAttributeString("type", "integer");
+                        
+                            xmlWriter.WriteValue(record.КількістьУпаковок);
+                          
+                        xmlWriter.WriteEndElement(); //КількістьУпаковок
+                        xmlWriter.WriteStartElement("Кількість");
+                        xmlWriter.WriteAttributeString("type", "numeric");
+                        
+                            xmlWriter.WriteValue(record.Кількість);
+                          
+                        xmlWriter.WriteEndElement(); //Кількість
+                        xmlWriter.WriteStartElement("КоміркаВідправник");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.СкладськіКомірки");
+                                xmlWriter.WriteAttributeString("uid", record.КоміркаВідправник.UnigueID.ToString());
+                                xmlWriter.WriteString(record.КоміркаВідправник.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //КоміркаВідправник
+                        xmlWriter.WriteStartElement("КоміркаОтримувач");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.СкладськіКомірки");
+                                xmlWriter.WriteAttributeString("uid", record.КоміркаОтримувач.UnigueID.ToString());
+                                xmlWriter.WriteString(record.КоміркаОтримувач.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //КоміркаОтримувач
+                        xmlWriter.WriteEndElement(); //row
+                    }
+
+                    xmlWriter.WriteEndElement(); //TablePart
+                
+                xmlWriter.WriteEndElement(); //TabularParts
+            
+
+            xmlWriter.WriteEndElement(); //root
+            xmlWriter.WriteEndDocument();
+            xmlWriter.Close();
+        }
     }
 	
     
@@ -17163,6 +21615,174 @@ namespace StorageAndTrade_1_0.Документи
         public const string Підрозділ = "col_a6";
         public const string ДокументРеалізації = "col_a7";
     }
+
+    public static class ЗбіркаТоварівНаСкладі_Export
+    {
+        public static void ToXmlFile(ЗбіркаТоварівНаСкладі_Pointer ЗбіркаТоварівНаСкладі, string pathToSave)
+        {
+            ЗбіркаТоварівНаСкладі_Objest ЗбіркаТоварівНаСкладі_Objest = ЗбіркаТоварівНаСкладі.GetDocumentObject(true);
+
+            XmlWriter xmlWriter = XmlWriter.Create(pathToSave, new XmlWriterSettings() { Indent = true, Encoding = System.Text.Encoding.UTF8 });
+            xmlWriter.WriteStartDocument();
+            xmlWriter.WriteStartElement("root");
+            xmlWriter.WriteAttributeString("uid", ЗбіркаТоварівНаСкладі_Objest.UnigueID.ToString());
+            
+            xmlWriter.WriteStartElement("Назва");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ЗбіркаТоварівНаСкладі_Objest.Назва);
+              
+            xmlWriter.WriteEndElement(); //Назва
+            xmlWriter.WriteStartElement("ДатаДок");
+            xmlWriter.WriteAttributeString("type", "datetime");
+            
+                xmlWriter.WriteValue(ЗбіркаТоварівНаСкладі_Objest.ДатаДок);
+              
+            xmlWriter.WriteEndElement(); //ДатаДок
+            xmlWriter.WriteStartElement("НомерДок");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ЗбіркаТоварівНаСкладі_Objest.НомерДок);
+              
+            xmlWriter.WriteEndElement(); //НомерДок
+            xmlWriter.WriteStartElement("Коментар");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ЗбіркаТоварівНаСкладі_Objest.Коментар);
+              
+            xmlWriter.WriteEndElement(); //Коментар
+            xmlWriter.WriteStartElement("Основа");
+            xmlWriter.WriteAttributeString("type", "composite_pointer");
+            
+                xmlWriter.WriteRaw(((UuidAndText)ЗбіркаТоварівНаСкладі_Objest.Основа).ToXml());
+              
+            xmlWriter.WriteEndElement(); //Основа
+            xmlWriter.WriteStartElement("Склад");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Склади");
+                    xmlWriter.WriteAttributeString("uid", ЗбіркаТоварівНаСкладі_Objest.Склад.UnigueID.ToString());
+                    xmlWriter.WriteString(ЗбіркаТоварівНаСкладі_Objest.Склад.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Склад
+            xmlWriter.WriteStartElement("Автор");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
+                    xmlWriter.WriteAttributeString("uid", ЗбіркаТоварівНаСкладі_Objest.Автор.UnigueID.ToString());
+                    xmlWriter.WriteString(ЗбіркаТоварівНаСкладі_Objest.Автор.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Автор
+            xmlWriter.WriteStartElement("Організація");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Організації");
+                    xmlWriter.WriteAttributeString("uid", ЗбіркаТоварівНаСкладі_Objest.Організація.UnigueID.ToString());
+                    xmlWriter.WriteString(ЗбіркаТоварівНаСкладі_Objest.Організація.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Організація
+            xmlWriter.WriteStartElement("Підрозділ");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.СтруктураПідприємства");
+                    xmlWriter.WriteAttributeString("uid", ЗбіркаТоварівНаСкладі_Objest.Підрозділ.UnigueID.ToString());
+                    xmlWriter.WriteString(ЗбіркаТоварівНаСкладі_Objest.Підрозділ.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Підрозділ
+            xmlWriter.WriteStartElement("ДокументРеалізації");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Документи.РеалізаціяТоварівТаПослуг");
+                    xmlWriter.WriteAttributeString("uid", ЗбіркаТоварівНаСкладі_Objest.ДокументРеалізації.UnigueID.ToString());
+                    xmlWriter.WriteString(ЗбіркаТоварівНаСкладі_Objest.ДокументРеалізації.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //ДокументРеалізації
+
+                /* 
+                Табличні частини
+                */
+
+                xmlWriter.WriteStartElement("TabularParts");
+                
+                    xmlWriter.WriteStartElement("TablePart");
+                    xmlWriter.WriteAttributeString("name", "Товари");
+
+                    foreach(ЗбіркаТоварівНаСкладі_Товари_TablePart.Record record in ЗбіркаТоварівНаСкладі_Objest.Товари_TablePart.Records)
+                    {
+                        xmlWriter.WriteStartElement("row");
+                        xmlWriter.WriteAttributeString("uid", record.UID.ToString());
+                        
+                        xmlWriter.WriteStartElement("НомерРядка");
+                        xmlWriter.WriteAttributeString("type", "integer");
+                        
+                            xmlWriter.WriteValue(record.НомерРядка);
+                          
+                        xmlWriter.WriteEndElement(); //НомерРядка
+                        xmlWriter.WriteStartElement("Номенклатура");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.Номенклатура");
+                                xmlWriter.WriteAttributeString("uid", record.Номенклатура.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Номенклатура.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Номенклатура
+                        xmlWriter.WriteStartElement("ХарактеристикаНоменклатури");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.ХарактеристикиНоменклатури");
+                                xmlWriter.WriteAttributeString("uid", record.ХарактеристикаНоменклатури.UnigueID.ToString());
+                                xmlWriter.WriteString(record.ХарактеристикаНоменклатури.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //ХарактеристикаНоменклатури
+                        xmlWriter.WriteStartElement("Серія");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.СеріїНоменклатури");
+                                xmlWriter.WriteAttributeString("uid", record.Серія.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Серія.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Серія
+                        xmlWriter.WriteStartElement("Пакування");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.ПакуванняОдиниціВиміру");
+                                xmlWriter.WriteAttributeString("uid", record.Пакування.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Пакування.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Пакування
+                        xmlWriter.WriteStartElement("КількістьУпаковок");
+                        xmlWriter.WriteAttributeString("type", "integer");
+                        
+                            xmlWriter.WriteValue(record.КількістьУпаковок);
+                          
+                        xmlWriter.WriteEndElement(); //КількістьУпаковок
+                        xmlWriter.WriteStartElement("Кількість");
+                        xmlWriter.WriteAttributeString("type", "numeric");
+                        
+                            xmlWriter.WriteValue(record.Кількість);
+                          
+                        xmlWriter.WriteEndElement(); //Кількість
+                        xmlWriter.WriteStartElement("Комірка");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.СкладськіКомірки");
+                                xmlWriter.WriteAttributeString("uid", record.Комірка.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Комірка.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Комірка
+                        xmlWriter.WriteEndElement(); //row
+                    }
+
+                    xmlWriter.WriteEndElement(); //TablePart
+                
+                xmlWriter.WriteEndElement(); //TabularParts
+            
+
+            xmlWriter.WriteEndElement(); //root
+            xmlWriter.WriteEndDocument();
+            xmlWriter.Close();
+        }
+    }
 	
     
     public class ЗбіркаТоварівНаСкладі_Objest : DocumentObject
@@ -17479,6 +22099,138 @@ namespace StorageAndTrade_1_0.Документи
         public const string Автор = "col_a4";
         public const string Підрозділ = "col_a3";
         public const string Основа = "col_a5";
+    }
+
+    public static class РозміщенняНоменклатуриПоКоміркам_Export
+    {
+        public static void ToXmlFile(РозміщенняНоменклатуриПоКоміркам_Pointer РозміщенняНоменклатуриПоКоміркам, string pathToSave)
+        {
+            РозміщенняНоменклатуриПоКоміркам_Objest РозміщенняНоменклатуриПоКоміркам_Objest = РозміщенняНоменклатуриПоКоміркам.GetDocumentObject(true);
+
+            XmlWriter xmlWriter = XmlWriter.Create(pathToSave, new XmlWriterSettings() { Indent = true, Encoding = System.Text.Encoding.UTF8 });
+            xmlWriter.WriteStartDocument();
+            xmlWriter.WriteStartElement("root");
+            xmlWriter.WriteAttributeString("uid", РозміщенняНоменклатуриПоКоміркам_Objest.UnigueID.ToString());
+            
+            xmlWriter.WriteStartElement("Назва");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(РозміщенняНоменклатуриПоКоміркам_Objest.Назва);
+              
+            xmlWriter.WriteEndElement(); //Назва
+            xmlWriter.WriteStartElement("НомерДок");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(РозміщенняНоменклатуриПоКоміркам_Objest.НомерДок);
+              
+            xmlWriter.WriteEndElement(); //НомерДок
+            xmlWriter.WriteStartElement("ДатаДок");
+            xmlWriter.WriteAttributeString("type", "datetime");
+            
+                xmlWriter.WriteValue(РозміщенняНоменклатуриПоКоміркам_Objest.ДатаДок);
+              
+            xmlWriter.WriteEndElement(); //ДатаДок
+            xmlWriter.WriteStartElement("Організація");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Організації");
+                    xmlWriter.WriteAttributeString("uid", РозміщенняНоменклатуриПоКоміркам_Objest.Організація.UnigueID.ToString());
+                    xmlWriter.WriteString(РозміщенняНоменклатуриПоКоміркам_Objest.Організація.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Організація
+            xmlWriter.WriteStartElement("Склад");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Склади");
+                    xmlWriter.WriteAttributeString("uid", РозміщенняНоменклатуриПоКоміркам_Objest.Склад.UnigueID.ToString());
+                    xmlWriter.WriteString(РозміщенняНоменклатуриПоКоміркам_Objest.Склад.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Склад
+            xmlWriter.WriteStartElement("Коментар");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(РозміщенняНоменклатуриПоКоміркам_Objest.Коментар);
+              
+            xmlWriter.WriteEndElement(); //Коментар
+            xmlWriter.WriteStartElement("Автор");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
+                    xmlWriter.WriteAttributeString("uid", РозміщенняНоменклатуриПоКоміркам_Objest.Автор.UnigueID.ToString());
+                    xmlWriter.WriteString(РозміщенняНоменклатуриПоКоміркам_Objest.Автор.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Автор
+            xmlWriter.WriteStartElement("Підрозділ");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.СтруктураПідприємства");
+                    xmlWriter.WriteAttributeString("uid", РозміщенняНоменклатуриПоКоміркам_Objest.Підрозділ.UnigueID.ToString());
+                    xmlWriter.WriteString(РозміщенняНоменклатуриПоКоміркам_Objest.Підрозділ.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Підрозділ
+            xmlWriter.WriteStartElement("Основа");
+            xmlWriter.WriteAttributeString("type", "composite_pointer");
+            
+                xmlWriter.WriteRaw(((UuidAndText)РозміщенняНоменклатуриПоКоміркам_Objest.Основа).ToXml());
+              
+            xmlWriter.WriteEndElement(); //Основа
+
+                /* 
+                Табличні частини
+                */
+
+                xmlWriter.WriteStartElement("TabularParts");
+                
+                    xmlWriter.WriteStartElement("TablePart");
+                    xmlWriter.WriteAttributeString("name", "Товари");
+
+                    foreach(РозміщенняНоменклатуриПоКоміркам_Товари_TablePart.Record record in РозміщенняНоменклатуриПоКоміркам_Objest.Товари_TablePart.Records)
+                    {
+                        xmlWriter.WriteStartElement("row");
+                        xmlWriter.WriteAttributeString("uid", record.UID.ToString());
+                        
+                        xmlWriter.WriteStartElement("НомерРядка");
+                        xmlWriter.WriteAttributeString("type", "integer");
+                        
+                            xmlWriter.WriteValue(record.НомерРядка);
+                          
+                        xmlWriter.WriteEndElement(); //НомерРядка
+                        xmlWriter.WriteStartElement("Номенклатура");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.Номенклатура");
+                                xmlWriter.WriteAttributeString("uid", record.Номенклатура.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Номенклатура.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Номенклатура
+                        xmlWriter.WriteStartElement("Комірка");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.СкладськіКомірки");
+                                xmlWriter.WriteAttributeString("uid", record.Комірка.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Комірка.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Комірка
+                        xmlWriter.WriteStartElement("Пакування");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.ПакуванняОдиниціВиміру");
+                                xmlWriter.WriteAttributeString("uid", record.Пакування.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Пакування.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Пакування
+                        xmlWriter.WriteEndElement(); //row
+                    }
+
+                    xmlWriter.WriteEndElement(); //TablePart
+                
+                xmlWriter.WriteEndElement(); //TabularParts
+            
+
+            xmlWriter.WriteEndElement(); //root
+            xmlWriter.WriteEndDocument();
+            xmlWriter.Close();
+        }
     }
 	
     

@@ -543,7 +543,23 @@ namespace StorageAndTrade
 
         void OnExportXMLClick(object? sender, EventArgs arg)
         {
+            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
+            {
+                TreePath[] selectionRows = TreeViewGrid.Selection.GetSelectedRows();
 
+                foreach (TreePath itemPath in selectionRows)
+                {
+                    TreeIter iter;
+                    TreeViewGrid.Model.GetIter(out iter, itemPath);
+
+                    string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
+
+                    string pathToSave = System.IO.Path.Combine(AppContext.BaseDirectory, $"РозміщенняТоварівНаСкладі_{uid}.xml");
+                    РозміщенняТоварівНаСкладі_Export.ToXmlFile(new РозміщенняТоварівНаСкладі_Pointer(new UnigueID(uid)), pathToSave);
+                }
+
+                LoadRecords();
+            }
         }
 
         //
