@@ -114,7 +114,7 @@ namespace StorageAndTrade
                 {
                     Store.AppendValues(
                         record.UID.ToString(),
-                        record.Тип.ToString(),
+                        ПсевдонімиПерелічення.ТипиКонтактноїІнформації_Alias(record.Тип),
                         record.Значення,
                         record.Телефон,
                         record.ЕлектроннаПошта,
@@ -146,7 +146,18 @@ namespace StorageAndTrade
                             record.UID = Guid.Parse(uid);
 
                         string type = (string)Store.GetValue(iter, (int)Columns.Тип);
-                        record.Тип = Enum.Parse<ТипиКонтактноїІнформації>(type);
+
+                        //Тип
+                        {
+                            record.Тип = ТипиКонтактноїІнформації.Адрес; //default
+
+                            foreach (var field in ПсевдонімиПерелічення.ТипиКонтактноїІнформації_Array())
+                                if (type == field.Name)
+                                {
+                                    record.Тип = field.Value;
+                                    break;
+                                }
+                        }
 
                         record.Значення = Store.GetValue(iter, (int)Columns.Значення)?.ToString() ?? "";
                         record.Телефон = Store.GetValue(iter, (int)Columns.Телефон)?.ToString() ?? "";
@@ -168,22 +179,19 @@ namespace StorageAndTrade
         {
             TreeViewGrid.AppendColumn(new TreeViewColumn("UID", new CellRendererText(), "text", (int)Columns.UID) { Visible = false });
 
-            ListStore storeTypeInfo = new ListStore(typeof(string), typeof(string));
-
-            if (Config.Kernel != null)
+            //Тип
             {
-                ConfigurationEnums ТипКонтактноїІнформації = Config.Kernel.Conf.Enums["ТипиКонтактноїІнформації"];
+                ListStore storeTypeInfo = new ListStore(typeof(string), typeof(string));
 
-                foreach (ConfigurationEnumField field in ТипКонтактноїІнформації.Fields.Values)
-                    storeTypeInfo.AppendValues(field.Name, field.Desc);
+                foreach (var field in ПсевдонімиПерелічення.ТипиКонтактноїІнформації_Array())
+                    storeTypeInfo.AppendValues(field.Value.ToString(), field.Name);
+
+                CellRendererCombo TypeInfo = new CellRendererCombo() { Editable = true, Model = storeTypeInfo, TextColumn = 1 };
+                TypeInfo.Edited += TextChanged;
+                TypeInfo.Data.Add("Column", (int)Columns.Тип);
+
+                TreeViewGrid.AppendColumn(new TreeViewColumn("Тип", TypeInfo, "text", (int)Columns.Тип) { MinWidth = 100 });
             }
-
-            CellRendererCombo TypeInfo = new CellRendererCombo() { Editable = true, Model = storeTypeInfo, TextColumn = 1 };
-            //TypeInfo.HasEntry = true;
-            TypeInfo.Edited += TextChanged;
-            TypeInfo.Data.Add("Column", (int)Columns.Тип);
-
-            TreeViewGrid.AppendColumn(new TreeViewColumn("Тип", TypeInfo, "text", (int)Columns.Тип) { MinWidth = 100 });
 
             //Значення
             CellRendererText Значення = new CellRendererText() { Editable = true };
