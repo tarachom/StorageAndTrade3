@@ -5,7 +5,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>26.01.2023 21:35:46</DateTimeSave>
+  <DateTimeSave>27.01.2023 14:56:57</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -221,106 +221,6 @@ https://accounting.org.ua/storage_and_trade.html</Desc>
                   <Type>string</Type>
                   <Desc>
                   </Desc>
-                  <IsIndex>0</IsIndex>
-                </Field>
-              </Fields>
-            </TablePart>
-            <TablePart>
-              <Name>ОбчисленняВіртуальнихЗалишків</Name>
-              <Table>tab_a77</Table>
-              <Desc>В таблицю записується інформація про документи які змінили регістри накопичення.
-Обчислення віртуальних залишків відбувається на дату документу.</Desc>
-              <Fields>
-                <Field>
-                  <Name>Дата</Name>
-                  <NameInTable>col_a2</NameInTable>
-                  <Type>datetime</Type>
-                  <Desc>Дата запису</Desc>
-                  <IsIndex>0</IsIndex>
-                </Field>
-                <Field>
-                  <Name>Документ</Name>
-                  <NameInTable>col_a9</NameInTable>
-                  <Type>string</Type>
-                  <Desc>Uid Документу</Desc>
-                  <IsIndex>0</IsIndex>
-                </Field>
-                <Field>
-                  <Name>ТипДокументу</Name>
-                  <NameInTable>col_a1</NameInTable>
-                  <Type>string</Type>
-                  <Desc>Тип документу як задано в конфігураторі</Desc>
-                  <IsIndex>0</IsIndex>
-                </Field>
-                <Field>
-                  <Name>ПеріодОбчислення</Name>
-                  <NameInTable>col_a3</NameInTable>
-                  <Type>date</Type>
-                  <Desc>Дата на яку потрібно зробити розрахунок</Desc>
-                  <IsIndex>0</IsIndex>
-                </Field>
-                <Field>
-                  <Name>ТипРухуПоРегістру</Name>
-                  <NameInTable>col_a8</NameInTable>
-                  <Type>string</Type>
-                  <Desc>Запис в регістер або видалення</Desc>
-                  <IsIndex>0</IsIndex>
-                </Field>
-                <Field>
-                  <Name>Заблоковано</Name>
-                  <NameInTable>col_a5</NameInTable>
-                  <Type>boolean</Type>
-                  <Desc>Не використовується на даний момент</Desc>
-                  <IsIndex>0</IsIndex>
-                </Field>
-                <Field>
-                  <Name>Виконано</Name>
-                  <NameInTable>col_a6</NameInTable>
-                  <Type>boolean</Type>
-                  <Desc>Вже виконано</Desc>
-                  <IsIndex>1</IsIndex>
-                </Field>
-                <Field>
-                  <Name>Користувач</Name>
-                  <NameInTable>col_a7</NameInTable>
-                  <Type>string</Type>
-                  <Desc>Користоувач</Desc>
-                  <IsIndex>0</IsIndex>
-                </Field>
-              </Fields>
-            </TablePart>
-            <TablePart>
-              <Name>АктуальністьВіртуальнихЗалишків</Name>
-              <Table>tab_a96</Table>
-              <Desc>Актутальність віртуальних залишків по місяцях.</Desc>
-              <Fields>
-                <Field>
-                  <Name>Регістр</Name>
-                  <NameInTable>col_a1</NameInTable>
-                  <Type>string</Type>
-                  <Desc>Регістр</Desc>
-                  <IsIndex>1</IsIndex>
-                </Field>
-                <Field>
-                  <Name>Місяць</Name>
-                  <NameInTable>col_a2</NameInTable>
-                  <Type>date</Type>
-                  <Desc>Дата типу 01.05.2022
-Використовується місяць та рік</Desc>
-                  <IsIndex>1</IsIndex>
-                </Field>
-                <Field>
-                  <Name>Актуально</Name>
-                  <NameInTable>col_a3</NameInTable>
-                  <Type>boolean</Type>
-                  <Desc>Залишки обчислені та актуальні</Desc>
-                  <IsIndex>1</IsIndex>
-                </Field>
-                <Field>
-                  <Name>ДатаОстанньогоОбчислення</Name>
-                  <NameInTable>col_a4</NameInTable>
-                  <Type>datetime</Type>
-                  <Desc>Суто інформативне поле</Desc>
                   <IsIndex>0</IsIndex>
                 </Field>
               </Fields>

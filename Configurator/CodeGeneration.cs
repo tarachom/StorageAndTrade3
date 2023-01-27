@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 26.01.2023 21:35:46
+ * Дата конфігурації: 27.01.2023 14:56:57
  *
  */
 
@@ -537,190 +537,6 @@ namespace StorageAndTrade_1_0.Константи
                 public bool Виконано { get; set; }
                 public bool Заблоковано { get; set; }
                 public string Результат { get; set; }
-                
-            }            
-        }
-          
-        public class ФоновіЗадачі_ОбчисленняВіртуальнихЗалишків_TablePart : ConstantsTablePart
-        {
-            public ФоновіЗадачі_ОбчисленняВіртуальнихЗалишків_TablePart() : base(Config.Kernel!, "tab_a77",
-                 new string[] { "col_a2", "col_a9", "col_a1", "col_a3", "col_a8", "col_a5", "col_a6", "col_a7" }) 
-            {
-                Records = new List<Record>();
-            }
-            
-            public const string TABLE = "tab_a77";
-            
-            public const string Дата = "col_a2";
-            public const string Документ = "col_a9";
-            public const string ТипДокументу = "col_a1";
-            public const string ПеріодОбчислення = "col_a3";
-            public const string ТипРухуПоРегістру = "col_a8";
-            public const string Заблоковано = "col_a5";
-            public const string Виконано = "col_a6";
-            public const string Користувач = "col_a7";
-            public List<Record> Records { get; set; }
-        
-            public void Read()
-            {
-                Records.Clear();
-                base.BaseRead();
-
-                foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
-                {
-                    Record record = new Record();
-                    record.UID = (Guid)fieldValue["uid"];
-                    
-                    record.Дата = (fieldValue["col_a2"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a2"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
-                    record.Документ = fieldValue["col_a9"]?.ToString() ?? "";
-                    record.ТипДокументу = fieldValue["col_a1"]?.ToString() ?? "";
-                    record.ПеріодОбчислення = (fieldValue["col_a3"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a3"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
-                    record.ТипРухуПоРегістру = fieldValue["col_a8"]?.ToString() ?? "";
-                    record.Заблоковано = (fieldValue["col_a5"] != DBNull.Value) ? bool.Parse(fieldValue["col_a5"]?.ToString() ?? "False") : false;
-                    record.Виконано = (fieldValue["col_a6"] != DBNull.Value) ? bool.Parse(fieldValue["col_a6"]?.ToString() ?? "False") : false;
-                    record.Користувач = fieldValue["col_a7"]?.ToString() ?? "";
-                    
-                    Records.Add(record);
-                }
-            
-                base.BaseClear();
-            }
-        
-            public void Save(bool clear_all_before_save /*= true*/) 
-            {
-                base.BaseBeginTransaction();
-                
-                if (clear_all_before_save)
-                    base.BaseDelete();
-
-                foreach (Record record in Records)
-                {
-                    Dictionary<string, object> fieldValue = new Dictionary<string, object>();
-
-                    fieldValue.Add("col_a2", record.Дата);
-                    fieldValue.Add("col_a9", record.Документ);
-                    fieldValue.Add("col_a1", record.ТипДокументу);
-                    fieldValue.Add("col_a3", record.ПеріодОбчислення);
-                    fieldValue.Add("col_a8", record.ТипРухуПоРегістру);
-                    fieldValue.Add("col_a5", record.Заблоковано);
-                    fieldValue.Add("col_a6", record.Виконано);
-                    fieldValue.Add("col_a7", record.Користувач);
-                    
-                    base.BaseSave(record.UID, fieldValue);
-                }
-                
-                base.BaseCommitTransaction();
-            }
-        
-            public void Delete()
-            {
-                base.BaseDelete();
-            }
-            
-            public class Record : ConstantsTablePartRecord
-            {
-                public Record()
-                {
-                    Дата = DateTime.MinValue;
-                    Документ = "";
-                    ТипДокументу = "";
-                    ПеріодОбчислення = DateTime.MinValue;
-                    ТипРухуПоРегістру = "";
-                    Заблоковано = false;
-                    Виконано = false;
-                    Користувач = "";
-                    
-                }
-                public DateTime Дата { get; set; }
-                public string Документ { get; set; }
-                public string ТипДокументу { get; set; }
-                public DateTime ПеріодОбчислення { get; set; }
-                public string ТипРухуПоРегістру { get; set; }
-                public bool Заблоковано { get; set; }
-                public bool Виконано { get; set; }
-                public string Користувач { get; set; }
-                
-            }            
-        }
-          
-        public class ФоновіЗадачі_АктуальністьВіртуальнихЗалишків_TablePart : ConstantsTablePart
-        {
-            public ФоновіЗадачі_АктуальністьВіртуальнихЗалишків_TablePart() : base(Config.Kernel!, "tab_a96",
-                 new string[] { "col_a1", "col_a2", "col_a3", "col_a4" }) 
-            {
-                Records = new List<Record>();
-            }
-            
-            public const string TABLE = "tab_a96";
-            
-            public const string Регістр = "col_a1";
-            public const string Місяць = "col_a2";
-            public const string Актуально = "col_a3";
-            public const string ДатаОстанньогоОбчислення = "col_a4";
-            public List<Record> Records { get; set; }
-        
-            public void Read()
-            {
-                Records.Clear();
-                base.BaseRead();
-
-                foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
-                {
-                    Record record = new Record();
-                    record.UID = (Guid)fieldValue["uid"];
-                    
-                    record.Регістр = fieldValue["col_a1"]?.ToString() ?? "";
-                    record.Місяць = (fieldValue["col_a2"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a2"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
-                    record.Актуально = (fieldValue["col_a3"] != DBNull.Value) ? bool.Parse(fieldValue["col_a3"]?.ToString() ?? "False") : false;
-                    record.ДатаОстанньогоОбчислення = (fieldValue["col_a4"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a4"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
-                    
-                    Records.Add(record);
-                }
-            
-                base.BaseClear();
-            }
-        
-            public void Save(bool clear_all_before_save /*= true*/) 
-            {
-                base.BaseBeginTransaction();
-                
-                if (clear_all_before_save)
-                    base.BaseDelete();
-
-                foreach (Record record in Records)
-                {
-                    Dictionary<string, object> fieldValue = new Dictionary<string, object>();
-
-                    fieldValue.Add("col_a1", record.Регістр);
-                    fieldValue.Add("col_a2", record.Місяць);
-                    fieldValue.Add("col_a3", record.Актуально);
-                    fieldValue.Add("col_a4", record.ДатаОстанньогоОбчислення);
-                    
-                    base.BaseSave(record.UID, fieldValue);
-                }
-                
-                base.BaseCommitTransaction();
-            }
-        
-            public void Delete()
-            {
-                base.BaseDelete();
-            }
-            
-            public class Record : ConstantsTablePartRecord
-            {
-                public Record()
-                {
-                    Регістр = "";
-                    Місяць = DateTime.MinValue;
-                    Актуально = false;
-                    ДатаОстанньогоОбчислення = DateTime.MinValue;
-                    
-                }
-                public string Регістр { get; set; }
-                public DateTime Місяць { get; set; }
-                public bool Актуально { get; set; }
-                public DateTime ДатаОстанньогоОбчислення { get; set; }
                 
             }            
         }
@@ -20662,7 +20478,6 @@ namespace StorageAndTrade_1_0.Документи
                 xmlWriter.WriteValue(РозміщенняТоварівНаСкладі_Objest.Назва);
               
             xmlWriter.WriteEndElement(); //Назва
-            
             xmlWriter.WriteStartElement("ДатаДок");
             xmlWriter.WriteAttributeString("type", "datetime");
             
