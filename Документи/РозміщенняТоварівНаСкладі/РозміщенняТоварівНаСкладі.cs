@@ -217,7 +217,6 @@ namespace StorageAndTrade
             return Menu;
         }
 
-
         #endregion
 
         public void SetValue()

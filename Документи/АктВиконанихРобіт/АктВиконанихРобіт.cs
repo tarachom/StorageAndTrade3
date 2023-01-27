@@ -150,6 +150,16 @@ namespace StorageAndTrade
             naOsnoviButton.Clicked += OnNaOsnoviClick;
             naOsnoviButton.Menu = ToolbarNaOsnoviSubMenu();
             toolbar.Add(naOsnoviButton);
+
+            MenuToolButton printingButton = new MenuToolButton(Stock.Print) { TooltipText = "Друк" };
+            printingButton.Clicked += OnPrintingClick;
+            printingButton.Menu = ToolbarPrintingSubMenu();
+            toolbar.Add(printingButton);
+
+            MenuToolButton exportButton = new MenuToolButton(Stock.Convert) { Label = "Експорт", IsImportant = true };
+            exportButton.Clicked += OnExportClick;
+            exportButton.Menu = ToolbarExportSubMenu();
+            toolbar.Add(exportButton);
         }
 
         Menu ToolbarProvodkySubMenu()
@@ -193,6 +203,32 @@ namespace StorageAndTrade
             MenuItem clearSpendButton = new MenuItem("Відмінити проведення");
             clearSpendButton.Activated += OnClearSpend;
             Menu.Append(clearSpendButton);
+
+            Menu.ShowAll();
+
+            return Menu;
+        }
+
+        Menu ToolbarPrintingSubMenu()
+        {
+            Menu Menu = new Menu();
+
+            MenuItem printButton = new MenuItem("Документ");
+            printButton.Activated += OnPrintingInvoiceClick;
+            Menu.Append(printButton);
+
+            Menu.ShowAll();
+
+            return Menu;
+        }
+
+        Menu ToolbarExportSubMenu()
+        {
+            Menu Menu = new Menu();
+
+            MenuItem exportXMLButton = new MenuItem("Формат XML");
+            exportXMLButton.Activated += OnExportXMLClick;
+            Menu.Append(exportXMLButton);
 
             Menu.ShowAll();
 
@@ -570,6 +606,60 @@ namespace StorageAndTrade
                     });
                 }
             }
+        }
+
+        //
+        // Export
+        //
+
+        void OnExportClick(object? sender, EventArgs arg)
+        {
+            if (sender != null)
+            {
+                MenuToolButton menuToolButton = (MenuToolButton)sender;
+                Menu Menu = (Menu)menuToolButton.Menu;
+                Menu.Popup();
+            }
+        }
+
+        void OnExportXMLClick(object? sender, EventArgs arg)
+        {
+            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
+            {
+                TreePath[] selectionRows = TreeViewGrid.Selection.GetSelectedRows();
+
+                foreach (TreePath itemPath in selectionRows)
+                {
+                    TreeIter iter;
+                    TreeViewGrid.Model.GetIter(out iter, itemPath);
+
+                    string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
+
+                    string pathToSave = System.IO.Path.Combine(AppContext.BaseDirectory, $"АктВиконанихРобіт{uid}.xml");
+                    АктВиконанихРобіт_Export.ToXmlFile(new АктВиконанихРобіт_Pointer(new UnigueID(uid)), pathToSave);
+                }
+
+                LoadRecords();
+            }
+        }
+
+        //
+        // Друк
+        //
+
+        void OnPrintingClick(object? sender, EventArgs arg)
+        {
+            if (sender != null)
+            {
+                MenuToolButton menuToolButton = (MenuToolButton)sender;
+                Menu Menu = (Menu)menuToolButton.Menu;
+                Menu.Popup();
+            }
+        }
+
+        void OnPrintingInvoiceClick(object? sender, EventArgs arg)
+        {
+
         }
 
         #endregion

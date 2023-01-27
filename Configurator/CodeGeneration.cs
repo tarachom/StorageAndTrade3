@@ -20662,6 +20662,7 @@ namespace StorageAndTrade_1_0.Документи
                 xmlWriter.WriteValue(РозміщенняТоварівНаСкладі_Objest.Назва);
               
             xmlWriter.WriteEndElement(); //Назва
+            
             xmlWriter.WriteStartElement("ДатаДок");
             xmlWriter.WriteAttributeString("type", "datetime");
             
