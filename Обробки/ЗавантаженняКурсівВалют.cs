@@ -162,7 +162,6 @@ namespace StorageAndTrade
             {
                 CreateMessage(TypeMessage.Ok, "Помилка завантаження або аналізу ХМЛ файлу: " + ex.Message);
                 ФункціїДляФоновихЗавдань.ДодатиЗаписВІсторіюЗавантаженняКурсуВалют("Помилка", link, ex.Message);
-                Thread.Sleep(5000);
             }
 
             if (isOK)
