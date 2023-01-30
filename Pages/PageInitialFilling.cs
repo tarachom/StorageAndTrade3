@@ -98,6 +98,8 @@ namespace StorageAndTrade
             scrollMessage.Add(vBoxMessage = new VBox());
 
             PackStart(scrollMessage, true, true, 0);
+
+            ShowAll();
         }
 
         void OnFilling(object? sender, EventArgs args)

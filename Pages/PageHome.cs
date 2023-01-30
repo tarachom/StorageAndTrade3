@@ -37,7 +37,9 @@ namespace StorageAndTrade
     {
         public PageHome() : base()
         {
+            PackStart(new ЗавантаженняКурсівВалют(), true, true, 0);
 
+            ShowAll();
         }
 
         public void StartBackgroundTask()
@@ -59,7 +61,7 @@ namespace StorageAndTrade
                     if (!Константи.Системні.ЗупинитиФоновіЗадачі_Const)
                     {
                         Config.Kernel!.DataBase.SpetialTableRegAccumTrigerExecute(
-                            VirtualTablesСalculation.Execute, 
+                            VirtualTablesСalculation.Execute,
                             VirtualTablesСalculation.ExecuteFinalCalculation);
                     }
 
