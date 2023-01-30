@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 27.01.2023 14:56:57
+ * Дата конфігурації: 30.01.2023 11:50:20
  *
  */
  
@@ -6811,6 +6811,114 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         }
     }
 	    
+    #endregion
+    
+}
+
+namespace StorageAndTrade_1_0.РегістриВідомостей.ТабличніСписки
+{
+    
+    #region REGISTER "ЦіниНоменклатури"
+    
+      
+    #endregion
+    
+    #region REGISTER "КурсиВалют"
+    
+      
+    public class КурсиВалют_Записи
+    {
+        string Image = "images/doc.png";
+        string ID = "";
+        string Період = "";
+        
+        string Валюта = "";
+        string Курс = "";
+
+        Array ToArray()
+        {
+            return new object[] { new Gdk.Pixbuf(Image), ID, Період
+            /* */ , Валюта, Курс };
+        }
+
+        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(string) /* Період */
+            , typeof(string) /* Валюта */
+            , typeof(string) /* Курс */
+            );
+
+        public static void AddColumns(TreeView treeView)
+        {
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 4 }, "pixbuf", 0));
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
+            treeView.AppendColumn(new TreeViewColumn("Період", new CellRendererText(), "text", 2));
+            /* */
+            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Валюта*/
+            treeView.AppendColumn(new TreeViewColumn("Курс", new CellRendererText() { Xpad = 4 }, "text", 4) { SortColumnId = 4 } ); /*Курс*/
+            
+        }
+
+        public static List<Where> Where { get; set; } = new List<Where>();
+
+        public static TreePath? SelectPath;
+        public static TreePath? CurrentPath;
+
+        public static void LoadRecords()
+        {
+            Store.Clear();
+
+            РегістриВідомостей.КурсиВалют_RecordsSet КурсиВалют_RecordsSet = new РегістриВідомостей.КурсиВалют_RecordsSet();
+
+            /* Where */
+            КурсиВалют_RecordsSet.QuerySelect.Where = Where;
+
+            /* DEFAULT ORDER */
+            КурсиВалют_RecordsSet.QuerySelect.Order.Add("period", SelectOrder.ASC);
+
+            
+                /* Join Table */
+                КурсиВалют_RecordsSet.QuerySelect.Joins.Add(
+                    new Join(Довідники.Валюти_Const.TABLE, РегістриВідомостей.КурсиВалют_Const.Валюта, КурсиВалют_RecordsSet.QuerySelect.Table, "join_tab_1"));
+                
+                  /* Field */
+                  КурсиВалют_RecordsSet.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_1." + Довідники.Валюти_Const.Назва, "join_tab_1_field_1"));
+
+            Console.WriteLine(КурсиВалют_RecordsSet.QuerySelect.Construct());
+
+            /* Read */
+            КурсиВалют_RecordsSet.Read();
+            foreach (КурсиВалют_RecordsSet.Record record in КурсиВалют_RecordsSet.Records)
+            {
+                КурсиВалют_Записи Record = new КурсиВалют_Записи
+                {
+                    ID = record.UID.ToString(),
+                    Період = record.Period.ToString(),
+                    Валюта = КурсиВалют_RecordsSet.JoinValue[record.UID.ToString()]["join_tab_1_field_1"].ToString() ?? "", /**/
+                    Курс = record.Курс.ToString() ?? "" /**/
+                    
+                };
+
+                TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                CurrentPath = Store.GetPath(CurrentIter);
+            }
+        }
+    }
+	    
+    #endregion
+    
+    #region REGISTER "ШтрихкодиНоменклатури"
+    
+      
+    #endregion
+    
+    #region REGISTER "ФайлиДокументів"
+    
+      
+    #endregion
+    
+    #region REGISTER "РозміщенняНоменклатуриПоКоміркамНаСкладі"
+    
+      
     #endregion
     
 }

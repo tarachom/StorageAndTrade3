@@ -80,6 +80,22 @@ namespace StorageAndTrade
             ПошукПовнотекстовий.Select = LoadRecords_OnSearch;
             ПошукПовнотекстовий.Clear = LoadRecords;
 
+            //Курси валют
+            LinkButton linkButtonCurs = new LinkButton(" Курси валют") { Halign = Align.Start, Image = new Image("images/doc.png"), AlwaysShowImage = true };
+            linkButtonCurs.Clicked += (object? sender, EventArgs args) =>
+            {
+                if (SelectPointerItem != null)
+                {
+                    КурсиВалют page = new КурсиВалют();
+                    page.ВалютаВласник.Pointer = SelectPointerItem;
+
+                    Program.GeneralForm?.CreateNotebookPage("Курси валют", () => { return page; });
+                    page.LoadRecords();
+                }
+            };
+
+            hBoxBotton.PackStart(linkButtonCurs, false, false, 10);
+
             CreateToolbar();
 
             ScrolledWindow scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In };

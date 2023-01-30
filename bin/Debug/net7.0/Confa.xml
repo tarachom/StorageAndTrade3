@@ -5,7 +5,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>27.01.2023 14:56:57</DateTimeSave>
+  <DateTimeSave>30.01.2023 11:50:20</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -14046,6 +14046,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       <PropertyFields>
         <Fields />
       </PropertyFields>
+      <TabularLists />
     </RegisterInformation>
     <RegisterInformation>
       <Name>КурсиВалют</Name>
@@ -14088,6 +14089,43 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       <PropertyFields>
         <Fields />
       </PropertyFields>
+      <TabularLists>
+        <TabularList>
+          <Name>Записи</Name>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>Валюта</Name>
+              <Caption>Валюта</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Валюти</Pointer>
+              <Join>
+                <table>Довідники.Валюти_Const.TABLE</table>
+                <field>Валюта</field>
+                <alias>join_tab_1</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_1</table>
+                <field>Довідники.Валюти_Const.Назва</field>
+              </FieldAndAlias>
+            </Field>
+            <Field>
+              <Name>Курс</Name>
+              <Caption>Курс</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <Type>numeric</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+          </Fields>
+        </TabularList>
+      </TabularLists>
     </RegisterInformation>
     <RegisterInformation>
       <Name>ШтрихкодиНоменклатури</Name>
@@ -14140,6 +14178,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       <PropertyFields>
         <Fields />
       </PropertyFields>
+      <TabularLists />
     </RegisterInformation>
     <RegisterInformation>
       <Name>ФайлиДокументів</Name>
@@ -14165,6 +14204,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       <PropertyFields>
         <Fields />
       </PropertyFields>
+      <TabularLists />
     </RegisterInformation>
     <RegisterInformation>
       <Name>РозміщенняНоменклатуриПоКоміркамНаСкладі</Name>
@@ -14215,6 +14255,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       <PropertyFields>
         <Fields />
       </PropertyFields>
+      <TabularLists />
     </RegisterInformation>
   </RegistersInformation>
   <RegistersAccumulation>
