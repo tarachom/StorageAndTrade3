@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 30.01.2023 13:00:43
+ * Дата конфігурації: 30.01.2023 21:29:28
  *
  */
  
@@ -6959,16 +6959,18 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
         
         string Валюта = "";
         string Курс = "";
+        string Кратність = "";
 
         Array ToArray()
         {
             return new object[] { new Gdk.Pixbuf(Image), ID, Період
-            /* */ , Валюта, Курс };
+            /* */ , Валюта, Курс, Кратність };
         }
 
         public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(string) /* Період */
             , typeof(string) /* Валюта */
             , typeof(string) /* Курс */
+            , typeof(string) /* Кратність */
             );
 
         public static void AddColumns(TreeView treeView)
@@ -6979,6 +6981,7 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
             /* */
             treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Валюта*/
             treeView.AppendColumn(new TreeViewColumn("Курс", new CellRendererText() { Xpad = 4 }, "text", 4) { SortColumnId = 4 } ); /*Курс*/
+            treeView.AppendColumn(new TreeViewColumn("Кратність", new CellRendererText() { Xpad = 4 }, "text", 5) { SortColumnId = 5 } ); /*Кратність*/
             
         }
 
@@ -7018,7 +7021,8 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
                     ID = record.UID.ToString(),
                     Період = record.Period.ToString(),
                     Валюта = КурсиВалют_RecordsSet.JoinValue[record.UID.ToString()]["join_tab_1_field_1"].ToString() ?? "", /**/
-                    Курс = record.Курс.ToString() ?? "" /**/
+                    Курс = record.Курс.ToString() ?? "", /**/
+                    Кратність = record.Кратність.ToString() ?? "" /**/
                     
                 };
 

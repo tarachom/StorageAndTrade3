@@ -5,7 +5,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>30.01.2023 12:54:54</DateTimeSave>
+  <DateTimeSave>30.01.2023 21:29:28</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -14207,7 +14207,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <Name>Валюта</Name>
               <Caption>Валюта</Caption>
               <Size>0</Size>
-              <SortNum>100</SortNum>
+              <SortNum>1</SortNum>
               <SortField>False</SortField>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
@@ -14225,9 +14225,19 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <Name>Курс</Name>
               <Caption>Курс</Caption>
               <Size>0</Size>
-              <SortNum>100</SortNum>
+              <SortNum>2</SortNum>
               <SortField>False</SortField>
               <Type>numeric</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>Кратність</Name>
+              <Caption>Кратність</Caption>
+              <Size>0</Size>
+              <SortNum>3</SortNum>
+              <SortField>False</SortField>
+              <Type>integer</Type>
               <Pointer>
               </Pointer>
             </Field>
