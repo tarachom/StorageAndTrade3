@@ -54,14 +54,6 @@ namespace StorageAndTrade
 
             PackStart(hBoxBotton, false, false, 10);
 
-            //Власник
-            hBoxBotton.PackStart(ВалютаВласник, false, false, 2);
-            ВалютаВласник.Caption = "Валюта власник:";
-            ВалютаВласник.AfterSelectFunc = () =>
-            {
-                LoadRecords();
-            };
-
             //Пошук 2
             hBoxBotton.PackStart(ПошукПовнотекстовий, false, false, 2);
             ПошукПовнотекстовий.Select = LoadRecords_OnSearch;
@@ -129,7 +121,12 @@ namespace StorageAndTrade
 
             //period
             ТабличніСписки.КурсиВалют_Записи.Where.Add(
-                new Where(Comparison.AND, "period", Comparison.LIKE, searchText) { FuncToField = "to_char", FuncToField_Param1 = "'DD.MM.YYYY'" });
+                new Where(Comparison.AND, "period", Comparison.LIKE, searchText)
+                {
+                    FuncToField = "to_char",
+                    FuncToField_Param1 = "'DD.MM.YYYY'"
+                }
+            );
 
             ТабличніСписки.КурсиВалют_Записи.LoadRecords();
         }
