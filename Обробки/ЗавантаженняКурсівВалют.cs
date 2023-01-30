@@ -45,7 +45,7 @@ namespace StorageAndTrade
         Button bClose;
         Button bDownload;
         Button bStop;
-        Switch visibleOnSart;
+        Switch visibleOnStart;
         ScrolledWindow scrollMessage;
         VBox vBoxMessage;
         CancellationTokenSource? CancellationTokenThread { get; set; }
@@ -84,10 +84,10 @@ namespace StorageAndTrade
             hBoxBotton.PackStart(bStop, false, false, 10);
 
             //Дата
-            ЗавантаженняНаВказануДату.Activated += OnЗавантаженняНаВказануДату_Activated;
-
             hBoxBotton.PackStart(ЗавантаженняНаВказануДату, false, false, 5);
             hBoxBotton.PackStart(ДатаЗавантаженняКурсу, false, false, 5);
+
+            ЗавантаженняНаВказануДату.Activated += OnЗавантаженняНаВказануДату_Activated;
 
             //Показувати при запуску -->
             VBox vBoxSwitch = new VBox();
@@ -95,10 +95,10 @@ namespace StorageAndTrade
             HBox hBoxSwitch = new HBox();
             vBoxSwitch.PackStart(hBoxSwitch, false, false, 0);
 
-            visibleOnSart = new Switch() { HeightRequest = 20, Active = !Константи.ПриЗапускуПрограми.ПрограмаЗаповненаПочатковимиДаними_Const };
-            visibleOnSart.ButtonReleaseEvent += (object? sender, ButtonReleaseEventArgs args) => { Константи.ПриЗапускуПрограми.ПрограмаЗаповненаПочатковимиДаними_Const = visibleOnSart.Active; };
+            visibleOnStart = new Switch() { HeightRequest = 20, Active = !Константи.ПриЗапускуПрограми.ПрограмаЗаповненаПочатковимиДаними_Const };
+            visibleOnStart.ButtonReleaseEvent += (object? sender, ButtonReleaseEventArgs args) => { Константи.ПриЗапускуПрограми.ПрограмаЗаповненаПочатковимиДаними_Const = visibleOnStart.Active; };
 
-            hBoxSwitch.PackStart(visibleOnSart, false, false, 0);
+            hBoxSwitch.PackStart(visibleOnStart, false, false, 0);
             hBoxSwitch.PackStart(new Label("Показувати при запуску"), false, false, 10);
 
             hBoxBotton.PackEnd(vBoxSwitch, false, false, 10);
@@ -325,6 +325,5 @@ LIMIT 1
         {
             ДатаЗавантаженняКурсу.Sensitive = ЗавантаженняНаВказануДату.Active;
         }
-
     }
 }
