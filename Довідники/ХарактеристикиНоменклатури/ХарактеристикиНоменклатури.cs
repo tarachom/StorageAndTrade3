@@ -88,6 +88,26 @@ namespace StorageAndTrade
             ПошукПовнотекстовий.Select = LoadRecords_OnSearch;
             ПошукПовнотекстовий.Clear = LoadRecords;
 
+            //ШтрихКоди
+            {
+                LinkButton linkButtonShKody = new LinkButton(" Штрихкоди") { Halign = Align.Start, Image = new Image("images/doc.png"), AlwaysShowImage = true };
+                linkButtonShKody.Clicked += (object? sender, EventArgs args) =>
+                {
+                    ШтрихкодиНоменклатури page = new ШтрихкодиНоменклатури();
+
+                    page.НоменклатураВласник = НоменклатураВласник;
+
+                    if (SelectPointerItem != null)
+                        page.ХарактеристикиНоменклатуриВласник.Pointer = SelectPointerItem;
+
+                    Program.GeneralForm?.CreateNotebookPage("Штрихкоди номенклатури", () => { return page; });
+
+                    page.LoadRecords();
+                };
+
+                hBoxBotton.PackStart(linkButtonShKody, false, false, 10);
+            }
+
             CreateToolbar();
 
             ScrolledWindow scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In };
@@ -140,6 +160,7 @@ namespace StorageAndTrade
             ТабличніСписки.ХарактеристикиНоменклатури_Записи.DirectoryPointerItem = DirectoryPointerItem;
 
             ТабличніСписки.ХарактеристикиНоменклатури_Записи.Where.Clear();
+            
             if (!НоменклатураВласник.Pointer.UnigueID.IsEmpty())
             {
                 ТабличніСписки.ХарактеристикиНоменклатури_Записи.Where.Add(

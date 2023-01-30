@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 30.01.2023 11:50:20
+ * Дата конфігурації: 30.01.2023 13:00:43
  *
  */
  
@@ -6821,6 +6821,131 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
     #region REGISTER "ЦіниНоменклатури"
     
       
+    public class ЦіниНоменклатури_Записи
+    {
+        string Image = "images/doc.png";
+        string ID = "";
+        string Період = "";
+        
+        string Номенклатура = "";
+        string ХарактеристикаНоменклатури = "";
+        string ВидЦіни = "";
+        string Ціна = "";
+        string Пакування = "";
+        string Валюта = "";
+
+        Array ToArray()
+        {
+            return new object[] { new Gdk.Pixbuf(Image), ID, Період
+            /* */ , Номенклатура, ХарактеристикаНоменклатури, ВидЦіни, Ціна, Пакування, Валюта };
+        }
+
+        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(string) /* Період */
+            , typeof(string) /* Номенклатура */
+            , typeof(string) /* ХарактеристикаНоменклатури */
+            , typeof(string) /* ВидЦіни */
+            , typeof(string) /* Ціна */
+            , typeof(string) /* Пакування */
+            , typeof(string) /* Валюта */
+            );
+
+        public static void AddColumns(TreeView treeView)
+        {
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 4 }, "pixbuf", 0));
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
+            treeView.AppendColumn(new TreeViewColumn("Період", new CellRendererText(), "text", 2));
+            /* */
+            treeView.AppendColumn(new TreeViewColumn("Номенклатура", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Номенклатура*/
+            treeView.AppendColumn(new TreeViewColumn("Характеристика", new CellRendererText() { Xpad = 4 }, "text", 4) { SortColumnId = 4 } ); /*ХарактеристикаНоменклатури*/
+            treeView.AppendColumn(new TreeViewColumn("ВидЦіни", new CellRendererText() { Xpad = 4 }, "text", 5) { SortColumnId = 5 } ); /*ВидЦіни*/
+            treeView.AppendColumn(new TreeViewColumn("Ціна", new CellRendererText() { Xpad = 4 }, "text", 6) { SortColumnId = 6 } ); /*Ціна*/
+            treeView.AppendColumn(new TreeViewColumn("Пакування", new CellRendererText() { Xpad = 4 }, "text", 7) { SortColumnId = 7 } ); /*Пакування*/
+            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 8) { SortColumnId = 8 } ); /*Валюта*/
+            
+        }
+
+        public static List<Where> Where { get; set; } = new List<Where>();
+
+        public static TreePath? SelectPath;
+        public static TreePath? CurrentPath;
+
+        public static void LoadRecords()
+        {
+            Store.Clear();
+
+            РегістриВідомостей.ЦіниНоменклатури_RecordsSet ЦіниНоменклатури_RecordsSet = new РегістриВідомостей.ЦіниНоменклатури_RecordsSet();
+
+            /* Where */
+            ЦіниНоменклатури_RecordsSet.QuerySelect.Where = Where;
+
+            /* DEFAULT ORDER */
+            ЦіниНоменклатури_RecordsSet.QuerySelect.Order.Add("period", SelectOrder.ASC);
+
+            
+                /* Join Table */
+                ЦіниНоменклатури_RecordsSet.QuerySelect.Joins.Add(
+                    new Join(Довідники.Номенклатура_Const.TABLE, РегістриВідомостей.ЦіниНоменклатури_Const.Номенклатура, ЦіниНоменклатури_RecordsSet.QuerySelect.Table, "join_tab_1"));
+                
+                  /* Field */
+                  ЦіниНоменклатури_RecordsSet.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_1." + Довідники.Номенклатура_Const.Назва, "join_tab_1_field_1"));
+                  
+                /* Join Table */
+                ЦіниНоменклатури_RecordsSet.QuerySelect.Joins.Add(
+                    new Join(Довідники.ХарактеристикиНоменклатури_Const.TABLE, РегістриВідомостей.ЦіниНоменклатури_Const.ХарактеристикаНоменклатури, ЦіниНоменклатури_RecordsSet.QuerySelect.Table, "join_tab_2"));
+                
+                  /* Field */
+                  ЦіниНоменклатури_RecordsSet.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_2." + Довідники.ХарактеристикиНоменклатури_Const.Назва, "join_tab_2_field_1"));
+                  
+                /* Join Table */
+                ЦіниНоменклатури_RecordsSet.QuerySelect.Joins.Add(
+                    new Join(Довідники.ВидиЦін_Const.TABLE, РегістриВідомостей.ЦіниНоменклатури_Const.ВидЦіни, ЦіниНоменклатури_RecordsSet.QuerySelect.Table, "join_tab_3"));
+                
+                  /* Field */
+                  ЦіниНоменклатури_RecordsSet.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_3." + Довідники.ВидиЦін_Const.Назва, "join_tab_3_field_1"));
+                  
+                /* Join Table */
+                ЦіниНоменклатури_RecordsSet.QuerySelect.Joins.Add(
+                    new Join(Довідники.ПакуванняОдиниціВиміру_Const.TABLE, РегістриВідомостей.ЦіниНоменклатури_Const.Пакування, ЦіниНоменклатури_RecordsSet.QuerySelect.Table, "join_tab_4"));
+                
+                  /* Field */
+                  ЦіниНоменклатури_RecordsSet.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_4." + Довідники.ПакуванняОдиниціВиміру_Const.Назва, "join_tab_4_field_1"));
+                  
+                /* Join Table */
+                ЦіниНоменклатури_RecordsSet.QuerySelect.Joins.Add(
+                    new Join(Довідники.Валюти_Const.TABLE, РегістриВідомостей.ЦіниНоменклатури_Const.Валюта, ЦіниНоменклатури_RecordsSet.QuerySelect.Table, "join_tab_5"));
+                
+                  /* Field */
+                  ЦіниНоменклатури_RecordsSet.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_5." + Довідники.Валюти_Const.Назва, "join_tab_5_field_1"));
+                  
+
+            /* Read */
+            ЦіниНоменклатури_RecordsSet.Read();
+            foreach (ЦіниНоменклатури_RecordsSet.Record record in ЦіниНоменклатури_RecordsSet.Records)
+            {
+                ЦіниНоменклатури_Записи Record = new ЦіниНоменклатури_Записи
+                {
+                    ID = record.UID.ToString(),
+                    Період = record.Period.ToString(),
+                    Номенклатура = ЦіниНоменклатури_RecordsSet.JoinValue[record.UID.ToString()]["join_tab_1_field_1"].ToString() ?? "", /**/
+                    ХарактеристикаНоменклатури = ЦіниНоменклатури_RecordsSet.JoinValue[record.UID.ToString()]["join_tab_2_field_1"].ToString() ?? "", /**/
+                    ВидЦіни = ЦіниНоменклатури_RecordsSet.JoinValue[record.UID.ToString()]["join_tab_3_field_1"].ToString() ?? "", /**/
+                    Пакування = ЦіниНоменклатури_RecordsSet.JoinValue[record.UID.ToString()]["join_tab_4_field_1"].ToString() ?? "", /**/
+                    Валюта = ЦіниНоменклатури_RecordsSet.JoinValue[record.UID.ToString()]["join_tab_5_field_1"].ToString() ?? "", /**/
+                    Ціна = record.Ціна.ToString() ?? "" /**/
+                    
+                };
+
+                TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                CurrentPath = Store.GetPath(CurrentIter);
+            }
+        }
+    }
+	    
     #endregion
     
     #region REGISTER "КурсиВалют"
@@ -6882,8 +7007,7 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
                   /* Field */
                   КурсиВалют_RecordsSet.QuerySelect.FieldAndAlias.Add(
                     new NameValue<string>("join_tab_1." + Довідники.Валюти_Const.Назва, "join_tab_1_field_1"));
-
-            Console.WriteLine(КурсиВалют_RecordsSet.QuerySelect.Construct());
+                  
 
             /* Read */
             КурсиВалют_RecordsSet.Read();
@@ -6909,6 +7033,107 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
     #region REGISTER "ШтрихкодиНоменклатури"
     
       
+    public class ШтрихкодиНоменклатури_Записи
+    {
+        string Image = "images/doc.png";
+        string ID = "";
+        string Період = "";
+        
+        string Штрихкод = "";
+        string Номенклатура = "";
+        string ХарактеристикаНоменклатури = "";
+        string Пакування = "";
+
+        Array ToArray()
+        {
+            return new object[] { new Gdk.Pixbuf(Image), ID, Період
+            /* */ , Штрихкод, Номенклатура, ХарактеристикаНоменклатури, Пакування };
+        }
+
+        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(string) /* Період */
+            , typeof(string) /* Штрихкод */
+            , typeof(string) /* Номенклатура */
+            , typeof(string) /* ХарактеристикаНоменклатури */
+            , typeof(string) /* Пакування */
+            );
+
+        public static void AddColumns(TreeView treeView)
+        {
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 4 }, "pixbuf", 0));
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
+            treeView.AppendColumn(new TreeViewColumn("Період", new CellRendererText(), "text", 2));
+            /* */
+            treeView.AppendColumn(new TreeViewColumn("Штрихкод", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Штрихкод*/
+            treeView.AppendColumn(new TreeViewColumn("Номенклатура", new CellRendererText() { Xpad = 4 }, "text", 4) { SortColumnId = 4 } ); /*Номенклатура*/
+            treeView.AppendColumn(new TreeViewColumn("Характеристика", new CellRendererText() { Xpad = 4 }, "text", 5) { SortColumnId = 5 } ); /*ХарактеристикаНоменклатури*/
+            treeView.AppendColumn(new TreeViewColumn("Пакування", new CellRendererText() { Xpad = 4 }, "text", 6) { SortColumnId = 6 } ); /*Пакування*/
+            
+        }
+
+        public static List<Where> Where { get; set; } = new List<Where>();
+
+        public static TreePath? SelectPath;
+        public static TreePath? CurrentPath;
+
+        public static void LoadRecords()
+        {
+            Store.Clear();
+
+            РегістриВідомостей.ШтрихкодиНоменклатури_RecordsSet ШтрихкодиНоменклатури_RecordsSet = new РегістриВідомостей.ШтрихкодиНоменклатури_RecordsSet();
+
+            /* Where */
+            ШтрихкодиНоменклатури_RecordsSet.QuerySelect.Where = Where;
+
+            /* DEFAULT ORDER */
+            ШтрихкодиНоменклатури_RecordsSet.QuerySelect.Order.Add("period", SelectOrder.ASC);
+
+            
+                /* Join Table */
+                ШтрихкодиНоменклатури_RecordsSet.QuerySelect.Joins.Add(
+                    new Join(Довідники.Номенклатура_Const.TABLE, РегістриВідомостей.ШтрихкодиНоменклатури_Const.Номенклатура, ШтрихкодиНоменклатури_RecordsSet.QuerySelect.Table, "join_tab_1"));
+                
+                  /* Field */
+                  ШтрихкодиНоменклатури_RecordsSet.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_1." + Довідники.Номенклатура_Const.Назва, "join_tab_1_field_1"));
+                  
+                /* Join Table */
+                ШтрихкодиНоменклатури_RecordsSet.QuerySelect.Joins.Add(
+                    new Join(Довідники.ХарактеристикиНоменклатури_Const.TABLE, РегістриВідомостей.ШтрихкодиНоменклатури_Const.ХарактеристикаНоменклатури, ШтрихкодиНоменклатури_RecordsSet.QuerySelect.Table, "join_tab_2"));
+                
+                  /* Field */
+                  ШтрихкодиНоменклатури_RecordsSet.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_2." + Довідники.ХарактеристикиНоменклатури_Const.Назва, "join_tab_2_field_1"));
+                  
+                /* Join Table */
+                ШтрихкодиНоменклатури_RecordsSet.QuerySelect.Joins.Add(
+                    new Join(Довідники.ПакуванняОдиниціВиміру_Const.TABLE, РегістриВідомостей.ШтрихкодиНоменклатури_Const.Пакування, ШтрихкодиНоменклатури_RecordsSet.QuerySelect.Table, "join_tab_3"));
+                
+                  /* Field */
+                  ШтрихкодиНоменклатури_RecordsSet.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_3." + Довідники.ПакуванняОдиниціВиміру_Const.Назва, "join_tab_3_field_1"));
+                  
+
+            /* Read */
+            ШтрихкодиНоменклатури_RecordsSet.Read();
+            foreach (ШтрихкодиНоменклатури_RecordsSet.Record record in ШтрихкодиНоменклатури_RecordsSet.Records)
+            {
+                ШтрихкодиНоменклатури_Записи Record = new ШтрихкодиНоменклатури_Записи
+                {
+                    ID = record.UID.ToString(),
+                    Період = record.Period.ToString(),
+                    Номенклатура = ШтрихкодиНоменклатури_RecordsSet.JoinValue[record.UID.ToString()]["join_tab_1_field_1"].ToString() ?? "", /**/
+                    ХарактеристикаНоменклатури = ШтрихкодиНоменклатури_RecordsSet.JoinValue[record.UID.ToString()]["join_tab_2_field_1"].ToString() ?? "", /**/
+                    Пакування = ШтрихкодиНоменклатури_RecordsSet.JoinValue[record.UID.ToString()]["join_tab_3_field_1"].ToString() ?? "", /**/
+                    Штрихкод = record.Штрихкод.ToString() ?? "" /**/
+                    
+                };
+
+                TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                CurrentPath = Store.GetPath(CurrentIter);
+            }
+        }
+    }
+	    
     #endregion
     
     #region REGISTER "ФайлиДокументів"

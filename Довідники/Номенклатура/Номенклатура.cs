@@ -86,20 +86,40 @@ namespace StorageAndTrade
             ПошукПовнотекстовий.Clear = LoadRecords;
 
             //Характеристики
-            LinkButton linkButtonHar = new LinkButton(" Характеристики номеклатури") { Halign = Align.Start, Image = new Image("images/doc.png"), AlwaysShowImage = true };
-            linkButtonHar.Clicked += (object? sender, EventArgs args) =>
             {
-                ХарактеристикиНоменклатури page = new ХарактеристикиНоменклатури();
+                LinkButton linkButtonHar = new LinkButton(" Характеристики номеклатури") { Halign = Align.Start, Image = new Image("images/doc.png"), AlwaysShowImage = true };
+                linkButtonHar.Clicked += (object? sender, EventArgs args) =>
+                {
+                    ХарактеристикиНоменклатури page = new ХарактеристикиНоменклатури();
 
-                if (SelectPointerItem != null)
-                    page.НоменклатураВласник.Pointer = SelectPointerItem;
+                    if (SelectPointerItem != null)
+                        page.НоменклатураВласник.Pointer = SelectPointerItem;
 
-                Program.GeneralForm?.CreateNotebookPage("Характеристики номенклатури", () => { return page; });
+                    Program.GeneralForm?.CreateNotebookPage("Характеристики номенклатури", () => { return page; });
 
-                page.LoadRecords();
-            };
+                    page.LoadRecords();
+                };
 
-            hBoxBotton.PackStart(linkButtonHar, false, false, 10);
+                hBoxBotton.PackStart(linkButtonHar, false, false, 10);
+            }
+
+            //ШтрихКоди
+            {
+                LinkButton linkButtonShKody = new LinkButton(" Штрихкоди") { Halign = Align.Start, Image = new Image("images/doc.png"), AlwaysShowImage = true };
+                linkButtonShKody.Clicked += (object? sender, EventArgs args) =>
+                {
+                    ШтрихкодиНоменклатури page = new ШтрихкодиНоменклатури();
+
+                    if (SelectPointerItem != null)
+                        page.НоменклатураВласник.Pointer = SelectPointerItem;
+
+                    Program.GeneralForm?.CreateNotebookPage("Штрихкоди номенклатури", () => { return page; });
+
+                    page.LoadRecords();
+                };
+
+                hBoxBotton.PackStart(linkButtonShKody, false, false, 10);
+            }
 
             CreateToolbar();
 

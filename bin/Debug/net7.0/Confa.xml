@@ -5,7 +5,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>30.01.2023 11:50:20</DateTimeSave>
+  <DateTimeSave>30.01.2023 12:54:54</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -14046,7 +14046,115 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       <PropertyFields>
         <Fields />
       </PropertyFields>
-      <TabularLists />
+      <TabularLists>
+        <TabularList>
+          <Name>Записи</Name>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>Номенклатура</Name>
+              <Caption>Номенклатура</Caption>
+              <Size>0</Size>
+              <SortNum>1</SortNum>
+              <SortField>False</SortField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Номенклатура</Pointer>
+              <Join>
+                <table>Довідники.Номенклатура_Const.TABLE</table>
+                <field>Номенклатура</field>
+                <alias>join_tab_1</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_1</table>
+                <field>Довідники.Номенклатура_Const.Назва</field>
+              </FieldAndAlias>
+            </Field>
+            <Field>
+              <Name>ХарактеристикаНоменклатури</Name>
+              <Caption>Характеристика</Caption>
+              <Size>0</Size>
+              <SortNum>2</SortNum>
+              <SortField>False</SortField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
+              <Join>
+                <table>Довідники.ХарактеристикиНоменклатури_Const.TABLE</table>
+                <field>ХарактеристикаНоменклатури</field>
+                <alias>join_tab_2</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_2</table>
+                <field>Довідники.ХарактеристикиНоменклатури_Const.Назва</field>
+              </FieldAndAlias>
+            </Field>
+            <Field>
+              <Name>ВидЦіни</Name>
+              <Caption>ВидЦіни</Caption>
+              <Size>0</Size>
+              <SortNum>3</SortNum>
+              <SortField>False</SortField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ВидиЦін</Pointer>
+              <Join>
+                <table>Довідники.ВидиЦін_Const.TABLE</table>
+                <field>ВидЦіни</field>
+                <alias>join_tab_3</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_3</table>
+                <field>Довідники.ВидиЦін_Const.Назва</field>
+              </FieldAndAlias>
+            </Field>
+            <Field>
+              <Name>Ціна</Name>
+              <Caption>Ціна</Caption>
+              <Size>0</Size>
+              <SortNum>4</SortNum>
+              <SortField>False</SortField>
+              <Type>numeric</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>Пакування</Name>
+              <Caption>Пакування</Caption>
+              <Size>0</Size>
+              <SortNum>5</SortNum>
+              <SortField>False</SortField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
+              <Join>
+                <table>Довідники.ПакуванняОдиниціВиміру_Const.TABLE</table>
+                <field>Пакування</field>
+                <alias>join_tab_4</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_4</table>
+                <field>Довідники.ПакуванняОдиниціВиміру_Const.Назва</field>
+              </FieldAndAlias>
+            </Field>
+            <Field>
+              <Name>Валюта</Name>
+              <Caption>Валюта</Caption>
+              <Size>0</Size>
+              <SortNum>6</SortNum>
+              <SortField>False</SortField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Валюти</Pointer>
+              <Join>
+                <table>Довідники.Валюти_Const.TABLE</table>
+                <field>Валюта</field>
+                <alias>join_tab_5</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_5</table>
+                <field>Довідники.Валюти_Const.Назва</field>
+              </FieldAndAlias>
+            </Field>
+          </Fields>
+        </TabularList>
+      </TabularLists>
     </RegisterInformation>
     <RegisterInformation>
       <Name>КурсиВалют</Name>
@@ -14178,7 +14286,79 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       <PropertyFields>
         <Fields />
       </PropertyFields>
-      <TabularLists />
+      <TabularLists>
+        <TabularList>
+          <Name>Записи</Name>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>Штрихкод</Name>
+              <Caption>Штрихкод</Caption>
+              <Size>0</Size>
+              <SortNum>1</SortNum>
+              <SortField>False</SortField>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>Номенклатура</Name>
+              <Caption>Номенклатура</Caption>
+              <Size>0</Size>
+              <SortNum>2</SortNum>
+              <SortField>False</SortField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Номенклатура</Pointer>
+              <Join>
+                <table>Довідники.Номенклатура_Const.TABLE</table>
+                <field>Номенклатура</field>
+                <alias>join_tab_1</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_1</table>
+                <field>Довідники.Номенклатура_Const.Назва</field>
+              </FieldAndAlias>
+            </Field>
+            <Field>
+              <Name>ХарактеристикаНоменклатури</Name>
+              <Caption>Характеристика</Caption>
+              <Size>0</Size>
+              <SortNum>3</SortNum>
+              <SortField>False</SortField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
+              <Join>
+                <table>Довідники.ХарактеристикиНоменклатури_Const.TABLE</table>
+                <field>ХарактеристикаНоменклатури</field>
+                <alias>join_tab_2</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_2</table>
+                <field>Довідники.ХарактеристикиНоменклатури_Const.Назва</field>
+              </FieldAndAlias>
+            </Field>
+            <Field>
+              <Name>Пакування</Name>
+              <Caption>Пакування</Caption>
+              <Size>0</Size>
+              <SortNum>4</SortNum>
+              <SortField>False</SortField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
+              <Join>
+                <table>Довідники.ПакуванняОдиниціВиміру_Const.TABLE</table>
+                <field>Пакування</field>
+                <alias>join_tab_3</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_3</table>
+                <field>Довідники.ПакуванняОдиниціВиміру_Const.Назва</field>
+              </FieldAndAlias>
+            </Field>
+          </Fields>
+        </TabularList>
+      </TabularLists>
     </RegisterInformation>
     <RegisterInformation>
       <Name>ФайлиДокументів</Name>

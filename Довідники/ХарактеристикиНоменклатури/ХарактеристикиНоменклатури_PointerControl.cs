@@ -56,14 +56,23 @@ namespace StorageAndTrade
             }
         }
 
+        public Номенклатура_Pointer НоменклатураВласник { get; set; } = new Номенклатура_Pointer();
+
         protected override void OpenSelect(object? sender, EventArgs args)
         {
+            if (BeforeClickOpenFunc != null)
+                BeforeClickOpenFunc.Invoke();
+
             ХарактеристикиНоменклатури page = new ХарактеристикиНоменклатури(true);
 
             page.DirectoryPointerItem = Pointer;
+            page.НоменклатураВласник.Pointer = НоменклатураВласник;
             page.CallBack_OnSelectPointer = (ХарактеристикиНоменклатури_Pointer selectPointer) =>
             {
                 Pointer = selectPointer;
+
+                if (AfterSelectFunc != null)
+                    AfterSelectFunc.Invoke();
             };
 
             Program.GeneralForm?.CreateNotebookPage("Вибір - Характеристики", () => { return page; }, true);
@@ -74,6 +83,9 @@ namespace StorageAndTrade
         protected override void OnClear(object? sender, EventArgs args)
         {
             Pointer = new ХарактеристикиНоменклатури_Pointer();
+
+            if (AfterSelectFunc != null)
+                AfterSelectFunc.Invoke();
         }
     }
 }
