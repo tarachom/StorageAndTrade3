@@ -91,6 +91,7 @@ namespace StorageAndTrade
             PackStart(vBoxDirectory, false, false, 5);
 
             AddLink(vBoxDirectory, "Довідник - Валюти", PageDirectory.Валюти);
+            AddLink(vBoxDirectory, "Історія завантаження", КурсиВалют_Історія);
 
             ShowAll();
         }
@@ -147,6 +148,13 @@ namespace StorageAndTrade
                 }
                 */
             }
+        }
+
+        void КурсиВалют_Історія(object? sender, EventArgs args)
+        {
+            КурсиВалют_ІсторіяЗавантаження page = new КурсиВалют_ІсторіяЗавантаження();
+            page.LoadRecords();
+            Program.GeneralForm?.CreateNotebookPage("Курси валют - історія завантаження", () => { return page; });
         }
 
         void AddLink(VBox vbox, string uri, EventHandler? clickAction = null)

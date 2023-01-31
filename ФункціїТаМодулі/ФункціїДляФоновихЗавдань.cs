@@ -56,12 +56,19 @@ namespace StorageAndTrade
             завантаженняКурсівВалют_Історія_TablePart.Save(false);
         }
 
-        public static void ОчиститиІсторіюЗавантаженняКурсуВалют()
+        public static void ОчиститиІсторіюЗавантаженняКурсуВалют(bool clear_all = false)
         {
             string query = @$"
 DELETE FROM {Константи.ЗавантаженняДанихІзСайтів.ЗавантаженняКурсівВалют_Історія_TablePart.TABLE}
+";
+
+            if (!clear_all)
+            {
+                query += @$"
 WHERE {Константи.ЗавантаженняДанихІзСайтів.ЗавантаженняКурсівВалют_Історія_TablePart.Дата} < @Дата
 ";
+            }
+
             Dictionary<string, object> paramQuery = new Dictionary<string, object>();
             paramQuery.Add("Дата", DateTime.Now.AddDays(-7));
 
