@@ -35,11 +35,127 @@ namespace StorageAndTrade
 {
     class PageHome : VBox
     {
+        Label lbDateLastDownload = new Label();
+        Switch autoDownloadCursOnStart;
+        VBox vBoxCursyValut;
+
         public PageHome() : base()
         {
-            PackStart(new ЗавантаженняКурсівВалют(), true, true, 0);
+            //Завантаження курсів валют
+            HBox hBoxDownloadCurs = new HBox();
+
+            hBoxDownloadCurs.PackStart(new Label("Курси валют НБУ"), false, false, 5);
+            Button bDownloadCurs = new Button(Stock.Refresh);
+            bDownloadCurs.AlwaysShowImage = true;
+            bDownloadCurs.Clicked += (object? sender, EventArgs args) =>
+            {
+                ЗавантаженняКурсівВалют page = new ЗавантаженняКурсівВалют();
+                page.CallBack_EndBackgroundWork = StartDesktop;
+
+                Program.GeneralForm?.CreateNotebookPage("Завантаження курсів валют НБУ", () => { return page; });
+
+                page.OnDownload(null, new EventArgs());
+            };
+
+            hBoxDownloadCurs.PackStart(bDownloadCurs, false, false, 5);
+            hBoxDownloadCurs.PackStart(lbDateLastDownload, false, false, 5);
+
+            PackStart(hBoxDownloadCurs, false, false, 5);
+
+            //Завантажувати при запуску
+            {
+                VBox vBoxSwitch = new VBox();
+
+                HBox hBoxSwitch = new HBox();
+                vBoxSwitch.PackStart(hBoxSwitch, false, false, 0);
+
+                autoDownloadCursOnStart = new Switch() { HeightRequest = 20, Active = Константи.ЗавантаженняДанихІзСайтів.АвтоматичноЗавантажуватиКурсиВалютПриЗапуску_Const };
+                autoDownloadCursOnStart.ButtonReleaseEvent += (object? sender, ButtonReleaseEventArgs args) =>
+                {
+                    Константи.ЗавантаженняДанихІзСайтів.АвтоматичноЗавантажуватиКурсиВалютПриЗапуску_Const = !autoDownloadCursOnStart.Active;
+                };
+
+                hBoxSwitch.PackStart(autoDownloadCursOnStart, false, false, 0);
+                hBoxSwitch.PackStart(new Label("Автоматично обновляти при запуску"), false, false, 10);
+
+                hBoxDownloadCurs.PackEnd(vBoxSwitch, false, false, 10);
+            }
+
+            HBox hBoxCursyValut = new HBox();
+            PackStart(hBoxCursyValut, false, false, 5);
+
+            vBoxCursyValut = new VBox() { WidthRequest = 300 };
+            hBoxCursyValut.PackStart(vBoxCursyValut, false, false, 5);
+
+            VBox vBoxDirectory = new VBox(false, 0);
+            PackStart(vBoxDirectory, false, false, 5);
+
+            AddLink(vBoxDirectory, "Довідник - Валюти", PageDirectory.Валюти);
 
             ShowAll();
+        }
+
+        public void StartDesktop()
+        {
+            DateTime? ДатуОстанньогоЗавантаження = ФункціїДляФоновихЗавдань.ОтриматиДатуОстанньогоЗавантаженняКурсуВалют();
+            lbDateLastDownload.Text = "Обновлення: " + (ДатуОстанньогоЗавантаження != null ? ДатуОстанньогоЗавантаження.ToString() : "...");
+
+            foreach (Widget child in vBoxCursyValut.Children)
+                vBoxCursyValut.Remove(child);
+
+            List<Dictionary<string, object>> ListRow = ФункціїДляФоновихЗавдань.ОтриматиКурсиВалютДляСтартовоїСторінки();
+
+            foreach (Dictionary<string, object> Row in ListRow)
+            {
+                HBox hBoxItemValuta = new HBox();
+                hBoxItemValuta.PackStart(new Label(Row["ВалютаНазва"].ToString()), false, false, 5);
+                hBoxItemValuta.PackEnd(new Label(Row["Курс"].ToString()), false, false, 5);
+                vBoxCursyValut.PackStart(hBoxItemValuta, false, false, 5);
+            }
+
+            ShowAll();
+        }
+
+        public void StartAutoWork()
+        {
+            if (Константи.ЗавантаженняДанихІзСайтів.АвтоматичноЗавантажуватиКурсиВалютПриЗапуску_Const)
+            {
+                //Завантаження кожного разу при запуску
+                ЗавантаженняКурсівВалют page = new ЗавантаженняКурсівВалют();
+                page.IsBackgroundWork = true;
+                page.CallBack_EndBackgroundWork = StartDesktop;
+
+                page.OnDownload(null, new EventArgs());
+
+                //Завантаження один раз на день
+                /*
+                DateTime? ДатуОстанньогоЗавантаження = ФункціїДляФоновихЗавдань.ОтриматиДатуОстанньогоЗавантаженняКурсуВалют();
+
+                if (ДатуОстанньогоЗавантаження == null)
+                    ДатуОстанньогоЗавантаження = DateTime.MinValue;
+
+                DateOnly ДатаЗавантаження = DateOnly.FromDateTime(ДатуОстанньогоЗавантаження.Value);
+                DateOnly ДатаСьогоднішня = DateOnly.FromDateTime(DateTime.Now);
+
+                if (ДатаЗавантаження != ДатаСьогоднішня)
+                {
+                    ЗавантаженняКурсівВалют page = new ЗавантаженняКурсівВалют();
+                    page.IsBackgroundWork = true;
+                    page.CallBack_EndBackgroundWork = StartDesktop;
+
+                    page.OnDownload(null, new EventArgs());
+                }
+                */
+            }
+        }
+
+        void AddLink(VBox vbox, string uri, EventHandler? clickAction = null)
+        {
+            LinkButton lb = new LinkButton(uri, " " + uri) { Halign = Align.Start, Image = new Image("images/doc.png"), AlwaysShowImage = true };
+            vbox.PackStart(lb, false, false, 0);
+
+            if (clickAction != null)
+                lb.Clicked += clickAction;
         }
 
         public void StartBackgroundTask()

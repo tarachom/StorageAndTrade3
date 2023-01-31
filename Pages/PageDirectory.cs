@@ -145,7 +145,7 @@ namespace StorageAndTrade
             });
         }
 
-        void Валюти(object? sender, EventArgs args)
+        public static void Валюти(object? sender, EventArgs args)
         {
             Program.GeneralForm?.CreateNotebookPage("Валюти", () =>
             {

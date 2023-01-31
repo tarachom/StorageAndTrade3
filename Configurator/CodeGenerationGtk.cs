@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 30.01.2023 21:29:28
+ * Дата конфігурації: 31.01.2023 15:18:49
  *
  */
  
@@ -547,11 +547,12 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         string Назва = "";
         string КороткаНазва = "";
         string Код_R030 = "";
+        string ВиводитиКурсНаСтартову = "";
 
         Array ToArray()
         {
             return new object[] { new Gdk.Pixbuf(Image), ID 
-            /* */ , Код, Назва, КороткаНазва, Код_R030 };
+            /* */ , Код, Назва, КороткаНазва, Код_R030, ВиводитиКурсНаСтартову };
         }
 
         public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */
@@ -559,6 +560,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             , typeof(string) /* Назва */
             , typeof(string) /* КороткаНазва */
             , typeof(string) /* Код_R030 */
+            , typeof(string) /* ВиводитиКурсНаСтартову */
             );
 
         public static void AddColumns(TreeView treeView)
@@ -570,6 +572,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
             treeView.AppendColumn(new TreeViewColumn("Коротка назва", new CellRendererText() { Xpad = 4 }, "text", 4) { SortColumnId = 4 } ); /*КороткаНазва*/
             treeView.AppendColumn(new TreeViewColumn("R030", new CellRendererText() { Xpad = 4 }, "text", 5) { SortColumnId = 5 } ); /*Код_R030*/
+            treeView.AppendColumn(new TreeViewColumn("Показувати на стартовій", new CellRendererText() { Xpad = 4 }, "text", 6) { SortColumnId = 6 } ); /*ВиводитиКурсНаСтартову*/
             
         }
 
@@ -593,6 +596,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     , Довідники.Валюти_Const.Назва /* 2 */
                     , Довідники.Валюти_Const.КороткаНазва /* 3 */
                     , Довідники.Валюти_Const.Код_R030 /* 4 */
+                    , Довідники.Валюти_Const.ВиводитиКурсНаСтартову /* 5 */
                     
                 });
 
@@ -618,7 +622,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                         Код = cur.Fields?[Валюти_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[Валюти_Const.Назва]?.ToString() ?? "", /**/
                         КороткаНазва = cur.Fields?[Валюти_Const.КороткаНазва]?.ToString() ?? "", /**/
-                        Код_R030 = cur.Fields?[Валюти_Const.Код_R030]?.ToString() ?? "" /**/
+                        Код_R030 = cur.Fields?[Валюти_Const.Код_R030]?.ToString() ?? "", /**/
+                        ВиводитиКурсНаСтартову = cur.Fields?[Валюти_Const.ВиводитиКурсНаСтартову]?.ToString() ?? "" /**/
                         
                     };
 

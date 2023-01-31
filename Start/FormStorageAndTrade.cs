@@ -37,7 +37,6 @@ namespace StorageAndTrade
 
         Notebook topNotebook = new Notebook() { Scrollable = true, EnablePopup = true, BorderWidth = 0, ShowBorder = false, TabPos = PositionType.Top };
         Statusbar statusBar = new Statusbar();
-        //uint previousNotebookCurrentPage = 0;
 
         public FormStorageAndTrade() : base("\"Зберігання та Торгівля\" для України")
         {
@@ -55,14 +54,16 @@ namespace StorageAndTrade
 
             CreateLeftMenu(hbox);
 
-            topNotebook.SwitchPage += OnNotebookSwitchPage;
-            topNotebook.PageRemoved += OnNotebookPageRemoved;
+            topNotebook.SwitchPage += OnNotebookSwitchPage; //видалити
+            topNotebook.PageRemoved += OnNotebookPageRemoved; //видалити
             hbox.PackStart(topNotebook, true, true, 0);
 
             CreateNotebookPage("Стартова", () =>
             {
                 PageHome page = new PageHome();
                 page.StartBackgroundTask();
+                page.StartDesktop();
+                page.StartAutoWork();
                 return page;
             });
 
@@ -178,12 +179,14 @@ namespace StorageAndTrade
 
         #region Notebook Page
 
+        //видалити
         void OnNotebookSwitchPage(object? sender, SwitchPageArgs args)
         {
             // previousNotebookCurrentPage = args.PageNum;
             // Console.WriteLine("OnSwitchPage " + args.PageNum);
         }
 
+        //видалити
         void OnNotebookPageRemoved(object? sender, PageRemovedArgs args)
         {
             // Console.WriteLine("OnPageRemoved " + args.PageNum);

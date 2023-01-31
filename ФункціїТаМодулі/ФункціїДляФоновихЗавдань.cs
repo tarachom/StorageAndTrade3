@@ -32,6 +32,8 @@ limitations under the License.
 
 using Конфа = StorageAndTrade_1_0;
 using Константи = StorageAndTrade_1_0.Константи;
+using StorageAndTrade_1_0.Довідники;
+using StorageAndTrade_1_0.РегістриВідомостей;
 
 namespace StorageAndTrade
 {
@@ -118,6 +120,45 @@ LIMIT 1
             }
             else
                 return null;
+        }
+
+        public static List<Dictionary<string, object>> ОтриматиКурсиВалютДляСтартовоїСторінки(int КількістьЗаписів = 50)
+        {
+            string query = @$"
+WITH Валюти AS
+(
+    SELECT 
+        Валюти.uid AS Валюта,
+        Валюти.{Валюти_Const.Назва} AS ВалютаНазва
+    FROM
+        {Валюти_Const.TABLE} AS Валюти
+    WHERE
+        Валюти.{Валюти_Const.ВиводитиКурсНаСтартову} = true
+    ORDER BY Валюти.{Валюти_Const.Код}
+)
+SELECT
+    Валюти.ВалютаНазва,
+    (
+        SELECT 
+            КурсиВалют.{КурсиВалют_Const.Курс}
+        FROM 
+            {КурсиВалют_Const.TABLE} AS КурсиВалют
+        WHERE
+            КурсиВалют.{КурсиВалют_Const.Валюта} = Валюти.Валюта
+        ORDER BY КурсиВалют.period DESC
+        LIMIT 1
+    ) AS Курс
+FROM
+    Валюти
+";
+            Dictionary<string, object> paramQuery = new Dictionary<string, object>();
+
+            string[] columnsName;
+            List<Dictionary<string, object>> listRow;
+
+            Конфа.Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listRow);
+
+            return listRow;
         }
     }
 }

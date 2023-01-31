@@ -44,6 +44,7 @@ namespace StorageAndTrade
         Entry Назва = new Entry() { WidthRequest = 500 };
         Entry КороткаНазва = new Entry() { WidthRequest = 500 };
         Entry Код_R030 = new Entry() { WidthRequest = 500 };
+        CheckButton ВиводитиКурсНаСтартову = new CheckButton("Виводити курс на стартову");
 
         public Валюти_Елемент() : base()
         {
@@ -104,6 +105,12 @@ namespace StorageAndTrade
             hBoxCodeR030.PackStart(new Label("Код R030:"), false, false, 5);
             hBoxCodeR030.PackStart(Код_R030, false, false, 5);
 
+            //ВиводитиКурсНаСтартову
+            HBox hBoxVisibleCursOnStartPage = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxVisibleCursOnStartPage, false, false, 5);
+
+            hBoxVisibleCursOnStartPage.PackStart(ВиводитиКурсНаСтартову, false, false, 5);
+
             hPaned.Pack1(vBox, false, false);
         }
 
@@ -127,6 +134,7 @@ namespace StorageAndTrade
             Назва.Text = Валюти_Objest.Назва;
             КороткаНазва.Text = Валюти_Objest.КороткаНазва;
             Код_R030.Text = Валюти_Objest.Код_R030;
+            ВиводитиКурсНаСтартову.Active = Валюти_Objest.ВиводитиКурсНаСтартову;
         }
 
         void GetValue()
@@ -135,6 +143,7 @@ namespace StorageAndTrade
             Валюти_Objest.Назва = Назва.Text;
             Валюти_Objest.КороткаНазва = КороткаНазва.Text;
             Валюти_Objest.Код_R030 = Код_R030.Text;
+            Валюти_Objest.ВиводитиКурсНаСтартову = ВиводитиКурсНаСтартову.Active;
         }
 
         #endregion

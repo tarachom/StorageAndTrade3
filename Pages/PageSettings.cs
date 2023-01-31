@@ -249,7 +249,15 @@ namespace StorageAndTrade
                 });
             });
 
-            vBoxTop.PackStart(expander, false, false, 10);
+            AddLink(vBox, "Завантаження курсів валют НБУ", (object? sender, EventArgs args) =>
+            {
+                Program.GeneralForm?.CreateNotebookPage("Завантаження курсів валют НБУ", () =>
+                {
+                    return new ЗавантаженняКурсівВалют();
+                });
+            });
+
+            vBoxTop.PackStart(expander, false, false, 0);
         }
 
         void AddPointerControl(VBox vBox, Widget wgPointerControl)
@@ -280,7 +288,7 @@ namespace StorageAndTrade
         void AddLink(VBox vbox, string uri, EventHandler? clickAction = null)
         {
             LinkButton lb = new LinkButton(uri, " " + uri) { Halign = Align.Start, Image = new Image("images/doc.png"), AlwaysShowImage = true };
-            vbox.PackStart(lb, false, false, 10);
+            vbox.PackStart(lb, false, false, 0);
 
             if (clickAction != null)
                 lb.Clicked += clickAction;

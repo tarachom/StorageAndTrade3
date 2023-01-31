@@ -5,7 +5,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>30.01.2023 21:29:28</DateTimeSave>
+  <DateTimeSave>31.01.2023 15:18:49</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -836,6 +836,14 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
             </TablePart>
           </TabularParts>
         </Constant>
+        <Constant>
+          <Name>АвтоматичноЗавантажуватиКурсиВалютПриЗапуску</Name>
+          <NameInTable>col_b6</NameInTable>
+          <Desc>
+          </Desc>
+          <Type>boolean</Type>
+          <TabularParts />
+        </Constant>
       </Constants>
     </ConstantsBlock>
     <ConstantsBlock>
@@ -1544,6 +1552,14 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>1</IsIndex>
         </Field>
+        <Field>
+          <Name>ВиводитиКурсНаСтартову</Name>
+          <NameInTable>col_a3</NameInTable>
+          <Type>boolean</Type>
+          <Desc>Виводити курс валюти на старотову сторінку</Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>1</IsIndex>
+        </Field>
       </Fields>
       <TabularParts />
       <TabularLists>
@@ -1589,6 +1605,16 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <SortNum>4</SortNum>
               <SortField>False</SortField>
               <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>ВиводитиКурсНаСтартову</Name>
+              <Caption>Показувати на стартовій</Caption>
+              <Size>0</Size>
+              <SortNum>5</SortNum>
+              <SortField>False</SortField>
+              <Type>boolean</Type>
               <Pointer>
               </Pointer>
             </Field>

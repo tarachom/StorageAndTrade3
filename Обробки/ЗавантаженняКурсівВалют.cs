@@ -45,7 +45,6 @@ namespace StorageAndTrade
         Button bClose;
         Button bDownload;
         Button bStop;
-        Switch visibleOnStart;
         ScrolledWindow scrollMessage;
         VBox vBoxMessage;
         CancellationTokenSource? CancellationTokenThread { get; set; }
@@ -89,21 +88,6 @@ namespace StorageAndTrade
 
             ЗавантаженняНаВказануДату.Activated += OnЗавантаженняНаВказануДату_Activated;
 
-            //Показувати при запуску -->
-            VBox vBoxSwitch = new VBox();
-
-            HBox hBoxSwitch = new HBox();
-            vBoxSwitch.PackStart(hBoxSwitch, false, false, 0);
-
-            visibleOnStart = new Switch() { HeightRequest = 20, Active = !Константи.ПриЗапускуПрограми.ПрограмаЗаповненаПочатковимиДаними_Const };
-            visibleOnStart.ButtonReleaseEvent += (object? sender, ButtonReleaseEventArgs args) => { Константи.ПриЗапускуПрограми.ПрограмаЗаповненаПочатковимиДаними_Const = visibleOnStart.Active; };
-
-            hBoxSwitch.PackStart(visibleOnStart, false, false, 0);
-            hBoxSwitch.PackStart(new Label("Показувати при запуску"), false, false, 10);
-
-            hBoxBotton.PackEnd(vBoxSwitch, false, false, 10);
-            //<-- Показувати при запуску
-
             PackStart(hBoxBotton, false, false, 10);
 
             scrollMessage = new ScrolledWindow() { ShadowType = ShadowType.In };
@@ -115,9 +99,20 @@ namespace StorageAndTrade
             ShowAll();
         }
 
-        void OnDownload(object? sender, EventArgs args)
+        /// <summary>
+        /// Завантаження у фоновому режимі без виводу інформації
+        /// </summary>
+        public bool IsBackgroundWork { get; set; } = false;
+
+        /// <summary>
+        /// Функція яка викликається після завершення завантаження у фоновому режимі
+        /// </summary>
+        public System.Action? CallBack_EndBackgroundWork { get; set; }
+
+        public void OnDownload(object? sender, EventArgs args)
         {
-            ClearMessage();
+            if (!IsBackgroundWork)
+                ClearMessage();
 
             CancellationTokenThread = new CancellationTokenSource();
             Thread thread = new Thread(new ThreadStart(DownloadExCurr));
@@ -126,7 +121,8 @@ namespace StorageAndTrade
 
         void DownloadExCurr()
         {
-            ButtonSensitive(false);
+            if (!IsBackgroundWork)
+                ButtonSensitive(false);
 
             bool isOK = false;
 
@@ -144,7 +140,8 @@ namespace StorageAndTrade
                 link += "?date=" + ДатаКурсу.Year.ToString() + ДатаКурсу.Month.ToString("D2") + ДатаКурсу.Day.ToString("D2");
             }
 
-            CreateMessage(TypeMessage.Info, $"Завантаження ХМЛ файлу з курсами валют з офіційного сайту: bank.gov.ua");
+            if (!IsBackgroundWork)
+                CreateMessage(TypeMessage.Info, $"Завантаження ХМЛ файлу з курсами валют з офіційного сайту: bank.gov.ua");
 
             XPathDocument xPathDoc;
             XPathNavigator? xPathDocNavigator = null;
@@ -155,12 +152,17 @@ namespace StorageAndTrade
                 xPathDocNavigator = xPathDoc.CreateNavigator();
 
                 isOK = true;
-                CreateMessage(TypeMessage.Ok, "OK");
+
+                if (!IsBackgroundWork)
+                    CreateMessage(TypeMessage.Ok, "OK");
+
                 ФункціїДляФоновихЗавдань.ДодатиЗаписВІсторіюЗавантаженняКурсуВалют("OK", link);
             }
             catch (Exception ex)
             {
-                CreateMessage(TypeMessage.Ok, "Помилка завантаження або аналізу ХМЛ файлу: " + ex.Message);
+                if (!IsBackgroundWork)
+                    CreateMessage(TypeMessage.Ok, "Помилка завантаження або аналізу ХМЛ файлу: " + ex.Message);
+
                 ФункціїДляФоновихЗавдань.ДодатиЗаписВІсторіюЗавантаженняКурсуВалют("Помилка", link, ex.Message);
             }
 
@@ -184,7 +186,9 @@ namespace StorageAndTrade
 
                     if (ДатаКурсу != ПоточнаДатаКурсу)
                     {
-                        CreateMessage(TypeMessage.Ok, $"Курс на дату: {ДатаКурсу}");
+                        if (!IsBackgroundWork)
+                            CreateMessage(TypeMessage.Ok, $"Курс на дату: {ДатаКурсу}");
+
                         ПоточнаДатаКурсу = ДатаКурсу;
                     }
 
@@ -201,7 +205,8 @@ namespace StorageAndTrade
 
                         валюти_Pointer = валюти_Objest.GetDirectoryPointer();
 
-                        CreateMessage(TypeMessage.Ok, $"Додано новий елемент довідника Валюти: {НазваВалюти}, код {Код_R030}");
+                        if (!IsBackgroundWork)
+                            CreateMessage(TypeMessage.Ok, $"Додано новий елемент довідника Валюти: {НазваВалюти}, код {Код_R030}");
                     }
 
                     string query = $@"
@@ -233,7 +238,8 @@ LIMIT 1
                         курсиВалют_Objest.Курс = Курс;
                         курсиВалют_Objest.Save();
 
-                        CreateMessage(TypeMessage.Ok, $"Додано новий курс валюти: {НазваВалюти} - курс {Курс}");
+                        if (!IsBackgroundWork)
+                            CreateMessage(TypeMessage.Ok, $"Додано новий курс валюти: {НазваВалюти} - курс {Курс}");
                     }
                     else
                     {
@@ -245,14 +251,26 @@ LIMIT 1
                             курсиВалют_Objest.Курс = Курс;
                             курсиВалют_Objest.Save();
 
-                            CreateMessage(TypeMessage.Ok, $"Перезаписано курс валюти: {НазваВалюти} - курс {Курс}");
+                            if (!IsBackgroundWork)
+                                CreateMessage(TypeMessage.Ok, $"Перезаписано курс валюти: {НазваВалюти} - курс {Курс}");
                         }
                     }
                 }
             }
 
+            if (!IsBackgroundWork)
+                ButtonSensitive(true);
 
-            ButtonSensitive(true);
+            if (CallBack_EndBackgroundWork != null)
+            {
+                Gtk.Application.Invoke
+                (
+                    delegate
+                    {
+                        CallBack_EndBackgroundWork.Invoke();
+                    }
+                );
+            }
         }
 
         void ButtonSensitive(bool sensitive)

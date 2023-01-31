@@ -81,20 +81,36 @@ namespace StorageAndTrade
             ПошукПовнотекстовий.Clear = LoadRecords;
 
             //Курси валют
-            LinkButton linkButtonCurs = new LinkButton(" Курси валют") { Halign = Align.Start, Image = new Image("images/doc.png"), AlwaysShowImage = true };
-            linkButtonCurs.Clicked += (object? sender, EventArgs args) =>
             {
-                if (SelectPointerItem != null)
+                LinkButton linkButtonCurs = new LinkButton(" Курси валют") { Halign = Align.Start, Image = new Image("images/doc.png"), AlwaysShowImage = true };
+                linkButtonCurs.Clicked += (object? sender, EventArgs args) =>
                 {
-                    КурсиВалют page = new КурсиВалют();
-                    page.ВалютаВласник.Pointer = SelectPointerItem;
+                    if (SelectPointerItem != null)
+                    {
+                        КурсиВалют page = new КурсиВалют();
+                        page.ВалютаВласник.Pointer = SelectPointerItem;
 
-                    Program.GeneralForm?.CreateNotebookPage("Курси валют", () => { return page; });
-                    page.LoadRecords();
-                }
-            };
+                        Program.GeneralForm?.CreateNotebookPage("Курси валют", () => { return page; });
+                        page.LoadRecords();
+                    }
+                };
 
-            hBoxBotton.PackStart(linkButtonCurs, false, false, 10);
+                hBoxBotton.PackStart(linkButtonCurs, false, false, 10);
+            }
+
+            //Завантаження курсів валют НБУ
+            {
+                LinkButton linkButtonDownloadCurs = new LinkButton(" Завантаження курсів валют НБУ") { Halign = Align.Start, Image = new Image("images/doc.png"), AlwaysShowImage = true };
+                linkButtonDownloadCurs.Clicked += (object? sender, EventArgs args) =>
+                {
+                    Program.GeneralForm?.CreateNotebookPage("Завантаження курсів валют НБУ", () =>
+                    {
+                        return new ЗавантаженняКурсівВалют();
+                    });
+                };
+
+                hBoxBotton.PackStart(linkButtonDownloadCurs, false, false, 10);
+            }
 
             CreateToolbar();
 

@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 30.01.2023 21:29:28
+ * Дата конфігурації: 31.01.2023 15:18:49
  *
  */
 
@@ -1545,11 +1545,12 @@ namespace StorageAndTrade_1_0.Константи
             
             Dictionary<string, object> fieldValue = new Dictionary<string, object>();
             bool IsSelect = Config.Kernel!.DataBase.SelectAllConstants("tab_constants",
-                 new string[] { "col_h5" }, fieldValue);
+                 new string[] { "col_h5", "col_b6" }, fieldValue);
             
             if (IsSelect)
             {
                 m_ЗавантаженняКурсівВалют_Const = fieldValue["col_h5"]?.ToString() ?? "";
+                m_АвтоматичноЗавантажуватиКурсиВалютПриЗапуску_Const = (fieldValue["col_b6"] != DBNull.Value) ? bool.Parse(fieldValue["col_b6"]?.ToString() ?? "False") : false;
                 
             }
 			
@@ -1567,6 +1568,20 @@ namespace StorageAndTrade_1_0.Константи
             {
                 m_ЗавантаженняКурсівВалют_Const = value;
                 Config.Kernel!.DataBase.SaveConstants("tab_constants", "col_h5", m_ЗавантаженняКурсівВалют_Const);
+            }
+        }
+        
+        static bool m_АвтоматичноЗавантажуватиКурсиВалютПриЗапуску_Const = false;
+        public static bool АвтоматичноЗавантажуватиКурсиВалютПриЗапуску_Const
+        {
+            get 
+            {
+                return m_АвтоматичноЗавантажуватиКурсиВалютПриЗапуску_Const;
+            }
+            set
+            {
+                m_АвтоматичноЗавантажуватиКурсиВалютПриЗапуску_Const = value;
+                Config.Kernel!.DataBase.SaveConstants("tab_constants", "col_b6", m_АвтоматичноЗавантажуватиКурсиВалютПриЗапуску_Const);
             }
         }
         
@@ -2743,17 +2758,19 @@ namespace StorageAndTrade_1_0.Довідники
         public const string КороткаНазва = "col_a2";
         public const string Код = "col_c6";
         public const string Код_R030 = "col_a1";
+        public const string ВиводитиКурсНаСтартову = "col_a3";
     }
 
     public class Валюти_Objest : DirectoryObject
     {
         public Валюти_Objest() : base(Config.Kernel!, "tab_a07",
-             new string[] { "col_c5", "col_a2", "col_c6", "col_a1" }) 
+             new string[] { "col_c5", "col_a2", "col_c6", "col_a1", "col_a3" }) 
         {
             Назва = "";
             КороткаНазва = "";
             Код = "";
             Код_R030 = "";
+            ВиводитиКурсНаСтартову = false;
             
         }
         
@@ -2765,6 +2782,7 @@ namespace StorageAndTrade_1_0.Довідники
                 КороткаНазва = base.FieldValue["col_a2"]?.ToString() ?? "";
                 Код = base.FieldValue["col_c6"]?.ToString() ?? "";
                 Код_R030 = base.FieldValue["col_a1"]?.ToString() ?? "";
+                ВиводитиКурсНаСтартову = (base.FieldValue["col_a3"] != DBNull.Value) ? bool.Parse(base.FieldValue["col_a3"]?.ToString() ?? "False") : false;
                 
                 BaseClear();
                 return true;
@@ -2780,6 +2798,7 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_a2"] = КороткаНазва;
             base.FieldValue["col_c6"] = Код;
             base.FieldValue["col_a1"] = Код_R030;
+            base.FieldValue["col_a3"] = ВиводитиКурсНаСтартову;
             
             BaseSave();
 			Валюти_Triggers.AfterRecording(this);
@@ -2793,6 +2812,7 @@ namespace StorageAndTrade_1_0.Довідники
 			copy.КороткаНазва = КороткаНазва;
 			copy.Код = Код;
 			copy.Код_R030 = Код_R030;
+			copy.ВиводитиКурсНаСтартову = ВиводитиКурсНаСтартову;
 			
 			return copy;
         }
@@ -2813,6 +2833,7 @@ namespace StorageAndTrade_1_0.Довідники
         public string КороткаНазва { get; set; }
         public string Код { get; set; }
         public string Код_R030 { get; set; }
+        public bool ВиводитиКурсНаСтартову { get; set; }
         
     }
     
