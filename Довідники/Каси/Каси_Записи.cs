@@ -86,21 +86,12 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Каси_Select.QuerySelect.FieldAndAlias.Add(
               new NameValue<string>(@$"
 (
-    WITH Залишки AS 
-    (
-        SELECT
-            РухКоштів.{РухКоштів_Підсумки_TablePart.Каса} AS Каса,
-            SUM(РухКоштів.{РухКоштів_Підсумки_TablePart.Сума}) AS Сума
-        FROM
-            {РухКоштів_Підсумки_TablePart.TABLE} AS РухКоштів
-        WHERE
-            РухКоштів.{РухКоштів_Підсумки_TablePart.Каса} = {Довідники.Каси_Const.TABLE}.uid
-        GROUP BY Каса
-    )
-    SELECT 
-        ROUND(Сума, 2) AS Сума 
-    FROM 
-        Залишки
+    SELECT
+        ROUND(РухКоштів.{РухКоштів_Підсумки_TablePart.Сума}, 2) AS Сума
+    FROM
+        {РухКоштів_Підсумки_TablePart.TABLE} AS РухКоштів
+    WHERE
+        РухКоштів.{РухКоштів_Підсумки_TablePart.Каса} = {Довідники.Каси_Const.TABLE}.uid
 )
 ", "salishok"));
 
