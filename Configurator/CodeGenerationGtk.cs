@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 01.02.2023 13:52:03
+ * Дата конфігурації: 01.02.2023 14:14:42
  *
  */
  
@@ -69,6 +69,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
             treeView.AppendColumn(new TreeViewColumn("Холдинг", new CellRendererText() { Xpad = 4 }, "text", 4) { SortColumnId = 4 } ); /*Холдинг*/
             
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
         public static List<Where> Where { get; set; } = new List<Where>();
@@ -178,6 +180,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Пакування", new CellRendererText() { Xpad = 4 }, "text", 4) { SortColumnId = 4 } ); /*ОдиницяВиміру*/
             treeView.AppendColumn(new TreeViewColumn("Тип", new CellRendererText() { Xpad = 4 }, "text", 5) { SortColumnId = 5 } ); /*ТипНоменклатури*/
             
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
         public static List<Where> Where { get; set; } = new List<Where>();
@@ -283,6 +287,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
             
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
         public static List<Where> Where { get; set; } = new List<Where>();
@@ -377,6 +383,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
             
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
         public static List<Where> Where { get; set; } = new List<Where>();
@@ -471,6 +479,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
             
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
         public static List<Where> Where { get; set; } = new List<Where>();
@@ -574,6 +584,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("R030", new CellRendererText() { Xpad = 4 }, "text", 5) { SortColumnId = 5 } ); /*Код_R030*/
             treeView.AppendColumn(new TreeViewColumn("Показувати на стартовій", new CellRendererText() { Xpad = 4 }, "text", 6) { SortColumnId = 6 } ); /*ВиводитиКурсНаСтартову*/
             
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
         public static List<Where> Where { get; set; } = new List<Where>();
@@ -677,6 +689,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
             treeView.AppendColumn(new TreeViewColumn("Папка", new CellRendererText() { Xpad = 4 }, "text", 4) { SortColumnId = 4 } ); /*Папка*/
             
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
         public static List<Where> Where { get; set; } = new List<Where>();
@@ -786,6 +800,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Тип cкладу", new CellRendererText() { Xpad = 4 }, "text", 4) { SortColumnId = 4 } ); /*ТипСкладу*/
             treeView.AppendColumn(new TreeViewColumn("Адресне зберігання", new CellRendererText() { Xpad = 4 }, "text", 5) { SortColumnId = 5 } ); /*НалаштуванняАдресногоЗберігання*/
             
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
         public static List<Where> Where { get; set; } = new List<Where>();
@@ -887,6 +903,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
             treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 4) { SortColumnId = 4 } ); /*Валюта*/
             
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
         public static List<Where> Where { get; set; } = new List<Where>();
@@ -990,6 +1008,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
             
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
         public static List<Where> Where { get; set; } = new List<Where>();
@@ -1084,6 +1104,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
             
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
         public static List<Where> Where { get; set; } = new List<Where>();
@@ -1178,6 +1200,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
             
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
         public static List<Where> Where { get; set; } = new List<Where>();
@@ -1272,6 +1296,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
             
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
         public static List<Where> Where { get; set; } = new List<Where>();
@@ -1366,6 +1392,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
             
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
         public static List<Where> Where { get; set; } = new List<Where>();
@@ -1460,6 +1488,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
             
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
         public static List<Where> Where { get; set; } = new List<Where>();
@@ -1557,6 +1587,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Номенклатура", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Номенклатура*/
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 4) { SortColumnId = 4 } ); /*Назва*/
             
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
         public static List<Where> Where { get; set; } = new List<Where>();
@@ -1678,6 +1710,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
             treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 4) { SortColumnId = 4 } ); /*Валюта*/
             
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
         public static List<Where> Where { get; set; } = new List<Where>();
@@ -1784,6 +1818,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
             treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 4) { SortColumnId = 4 } ); /*Валюта*/
             
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
         public static List<Where> Where { get; set; } = new List<Where>();
@@ -1893,6 +1929,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 4 }, "text", 4) { SortColumnId = 4 } ); /*Контрагент*/
             treeView.AppendColumn(new TreeViewColumn("ТипДоговору", new CellRendererText() { Xpad = 4 }, "text", 5) { SortColumnId = 5 } ); /*ТипДоговору*/
             
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
         public static List<Where> Where { get; set; } = new List<Where>();
@@ -2001,6 +2039,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
             treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 4) { SortColumnId = 4 } ); /*Валюта*/
             
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
         public static List<Where> Where { get; set; } = new List<Where>();
@@ -2110,6 +2150,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("КореспондуючийРахунок", new CellRendererText() { Xpad = 4 }, "text", 4) { SortColumnId = 4 } ); /*КореспондуючийРахунок*/
             treeView.AppendColumn(new TreeViewColumn("ВидРухуКоштів", new CellRendererText() { Xpad = 4 }, "text", 5) { SortColumnId = 5 } ); /*ВидРухуКоштів*/
             
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
         public static List<Where> Where { get; set; } = new List<Where>();
@@ -2205,6 +2247,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             /* */
             treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Номер*/
             
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
         public static List<Where> Where { get; set; } = new List<Where>();
@@ -2306,6 +2350,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("ПоступленняТоварівТаПослуг", new CellRendererText() { Xpad = 4 }, "text", 5) { SortColumnId = 5 } ); /*ПоступленняТоварівТаПослуг*/
             treeView.AppendColumn(new TreeViewColumn("ВведенняЗалишків", new CellRendererText() { Xpad = 4 }, "text", 6) { SortColumnId = 6 } ); /*ВведенняЗалишків*/
             
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
         public static List<Where> Where { get; set; } = new List<Where>();
@@ -2417,6 +2463,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             /* */
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Назва*/
             
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
         public static List<Where> Where { get; set; } = new List<Where>();
@@ -2506,6 +2554,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             /* */
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Назва*/
             
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
         public static List<Where> Where { get; set; } = new List<Where>();
@@ -2595,6 +2645,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             /* */
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Назва*/
             
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
         public static List<Where> Where { get; set; } = new List<Where>();
@@ -2684,6 +2736,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             /* */
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Назва*/
             
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
         public static List<Where> Where { get; set; } = new List<Where>();
@@ -2773,6 +2827,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             /* */
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Назва*/
             
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
         public static List<Where> Where { get; set; } = new List<Where>();
@@ -2868,6 +2924,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Склад*/
             treeView.AppendColumn(new TreeViewColumn("Налаштування", new CellRendererText() { Xpad = 4 }, "text", 4) { SortColumnId = 4 } ); /*НалаштуванняАдресногоЗберігання*/
             
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
         public static List<Where> Where { get; set; } = new List<Where>();
@@ -2992,6 +3050,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Типорозмір", new CellRendererText() { Xpad = 4 }, "text", 9) { SortColumnId = 9 } ); /*Типорозмір*/
             treeView.AppendColumn(new TreeViewColumn("Папка", new CellRendererText() { Xpad = 4 }, "text", 10) { SortColumnId = 10 } ); /*Папка*/
             
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
         public static List<Where> Where { get; set; } = new List<Where>();
@@ -3121,6 +3181,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Назва*/
             treeView.AppendColumn(new TreeViewColumn("Приміщення", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Приміщення*/
             
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
         public static List<Where> Where { get; set; } = new List<Where>();
@@ -3234,6 +3296,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Обєм", new CellRendererText() { Xpad = 4 }, "text", 6) { SortColumnId = 6 } ); /*Обєм*/
             treeView.AppendColumn(new TreeViewColumn("Ширина", new CellRendererText() { Xpad = 4 }, "text", 7) { SortColumnId = 7 } ); /*Ширина*/
             
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
         public static List<Where> Where { get; set; } = new List<Where>();
@@ -3427,6 +3491,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 10)); /*СумаДокументу*/
             treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 11)); /*Коментар*/
             
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
         public static List<Where> Where { get; set; } = new List<Where>();
@@ -3596,6 +3662,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 11)); /*СумаДокументу*/
             treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 12)); /*Коментар*/
             
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
         public static List<Where> Where { get; set; } = new List<Where>();
@@ -3774,6 +3842,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 11)); /*СумаДокументу*/
             treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 12)); /*Коментар*/
             
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
         public static List<Where> Where { get; set; } = new List<Where>();
@@ -3952,6 +4022,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 11)); /*СумаДокументу*/
             treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 12)); /*Коментар*/
             
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
         public static List<Where> Where { get; set; } = new List<Where>();
@@ -4121,6 +4193,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Вид ціни", new CellRendererText() { Xpad = 4 }, "text", 8)); /*ВидЦіни*/
             treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 9)); /*Коментар*/
             
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
         public static List<Where> Where { get; set; } = new List<Where>();
@@ -4279,6 +4353,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Операція", new CellRendererText() { Xpad = 4 }, "text", 11)); /*ГосподарськаОперація*/
             treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 12)); /*Коментар*/
             
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
         public static List<Where> Where { get; set; } = new List<Where>();
@@ -4450,6 +4526,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Операція", new CellRendererText() { Xpad = 4 }, "text", 11)); /*ГосподарськаОперація*/
             treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 12)); /*Коментар*/
             
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
         public static List<Where> Where { get; set; } = new List<Where>();
@@ -4612,6 +4690,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Склад отримувач", new CellRendererText() { Xpad = 4 }, "text", 8)); /*СкладОтримувач*/
             treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 9)); /*Коментар*/
             
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
         public static List<Where> Where { get; set; } = new List<Where>();
@@ -4770,6 +4850,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 11)); /*СумаДокументу*/
             treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 12)); /*Коментар*/
             
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
         public static List<Where> Where { get; set; } = new List<Where>();
@@ -4948,6 +5030,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 11)); /*СумаДокументу*/
             treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 12)); /*Коментар*/
             
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
         public static List<Where> Where { get; set; } = new List<Where>();
@@ -5123,6 +5207,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 10)); /*СумаДокументу*/
             treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 11)); /*Коментар*/
             
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
         public static List<Where> Where { get; set; } = new List<Where>();
@@ -5286,6 +5372,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 9)); /*Валюта*/
             treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 10)); /*Коментар*/
             
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
         public static List<Where> Where { get; set; } = new List<Where>();
@@ -5441,6 +5529,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Склад*/
             treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Коментар*/
             
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
         public static List<Where> Where { get; set; } = new List<Where>();
@@ -5578,6 +5668,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Склад*/
             treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Коментар*/
             
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
         public static List<Where> Where { get; set; } = new List<Where>();
@@ -5712,6 +5804,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Склад*/
             treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Коментар*/
             
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
         public static List<Where> Where { get; set; } = new List<Where>();
@@ -5843,6 +5937,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 8)); /*СумаДокументу*/
             treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 9)); /*Коментар*/
             
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
         public static List<Where> Where { get; set; } = new List<Where>();
@@ -5988,6 +6084,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 9)); /*СумаДокументу*/
             treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 10)); /*Коментар*/
             
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
         public static List<Where> Where { get; set; } = new List<Where>();
@@ -6148,6 +6246,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 11)); /*СумаДокументу*/
             treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 12)); /*Коментар*/
             
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
         public static List<Where> Where { get; set; } = new List<Where>();
@@ -6314,6 +6414,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Документ поступлення", new CellRendererText() { Xpad = 4 }, "text", 7)); /*ДокументПоступлення*/
             treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Коментар*/
             
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
         public static List<Where> Where { get; set; } = new List<Where>();
@@ -6451,6 +6553,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Організація*/
             treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Коментар*/
             
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
         public static List<Where> Where { get; set; } = new List<Where>();
@@ -6588,6 +6692,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Документ реалізації", new CellRendererText() { Xpad = 4 }, "text", 7)); /*ДокументРеалізації*/
             treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Коментар*/
             
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
         public static List<Where> Where { get; set; } = new List<Where>();
@@ -6725,6 +6831,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Склад*/
             treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Коментар*/
             
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
         public static List<Where> Where { get; set; } = new List<Where>();
@@ -6867,6 +6975,8 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
             treeView.AppendColumn(new TreeViewColumn("Пакування", new CellRendererText() { Xpad = 4 }, "text", 7) { SortColumnId = 7 } ); /*Пакування*/
             treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 8) { SortColumnId = 8 } ); /*Валюта*/
             
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
         public static List<Where> Where { get; set; } = new List<Where>();
@@ -6988,6 +7098,8 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
             treeView.AppendColumn(new TreeViewColumn("Курс", new CellRendererText() { Xpad = 4 }, "text", 4) { SortColumnId = 4 } ); /*Курс*/
             treeView.AppendColumn(new TreeViewColumn("Кратність", new CellRendererText() { Xpad = 4 }, "text", 5) { SortColumnId = 5 } ); /*Кратність*/
             
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
         public static List<Where> Where { get; set; } = new List<Where>();
@@ -7077,6 +7189,8 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
             treeView.AppendColumn(new TreeViewColumn("Характеристика", new CellRendererText() { Xpad = 4 }, "text", 5) { SortColumnId = 5 } ); /*ХарактеристикаНоменклатури*/
             treeView.AppendColumn(new TreeViewColumn("Пакування", new CellRendererText() { Xpad = 4 }, "text", 6) { SortColumnId = 6 } ); /*Пакування*/
             
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
         public static List<Where> Where { get; set; } = new List<Where>();
