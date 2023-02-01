@@ -21,16 +21,32 @@ limitations under the License.
 Сайт:     accounting.org.ua
 */
 
+/*
+
+Перевірка правельності числових значеннь
+
+*/
+
 namespace StorageAndTrade
 {
     class Validate
     {
+        /// <summary>
+        /// Чи це ціле число
+        /// </summary>
+        /// <param name="text">Значення</param>
+        /// <returns></returns>
         public static (bool, int) IsInt(string text)
         {
             int value;
             return (int.TryParse(text, out value), value);
         }
 
+        /// <summary>
+        /// Чи це число з комою
+        /// </summary>
+        /// <param name="text">Значення</param>
+        /// <returns></returns>
         public static (bool, decimal) IsDecimal(string text)
         {
             // Треба протестувати чи варто заміняти крапку на кому на інших мовах операційної системи

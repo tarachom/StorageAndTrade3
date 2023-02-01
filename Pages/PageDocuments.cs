@@ -21,6 +21,12 @@ limitations under the License.
 Сайт:     accounting.org.ua
 */
 
+/*
+
+Документи
+
+*/
+
 using Gtk;
 
 namespace StorageAndTrade

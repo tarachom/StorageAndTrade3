@@ -54,12 +54,21 @@ namespace StorageAndTrade
             topNotebook.PageRemoved += OnNotebookPageRemoved; //видалити
             hbox.PackStart(topNotebook, true, true, 0);
 
+            /*
+
+            Важливо!
+            На стартовій сторінці міститься запуск фонового обчислення віртуальних залишків StartBackgroundTask()
+
+            */
+
             CreateNotebookPage("Стартова", () =>
             {
                 PageHome page = new PageHome();
                 page.StartBackgroundTask();
+                
                 page.StartDesktop();
                 page.StartAutoWork();
+
                 return page;
             });
 

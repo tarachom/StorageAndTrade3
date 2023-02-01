@@ -21,6 +21,12 @@ limitations under the License.
 Сайт:     accounting.org.ua
 */
 
+/*
+
+Масове перепроведення документів
+
+*/
+
 using Gtk;
 
 using System.Reflection;

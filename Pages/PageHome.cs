@@ -21,6 +21,15 @@ limitations under the License.
 Сайт:     accounting.org.ua
 */
 
+/*
+
+Стартова сторінка.
+
+Важливо!
+Тут міститься запуск фонового обчислення віртуальних залишків StartBackgroundTask()
+
+*/
+
 using Gtk;
 
 using StorageAndTrade_1_0;
@@ -96,6 +105,9 @@ namespace StorageAndTrade
             ShowAll();
         }
 
+        /// <summary>
+        /// Інтерфейс стартової сторінки
+        /// </summary>
         public void StartDesktop()
         {
             DateTime? ДатуОстанньогоЗавантаження = ФункціїДляФоновихЗавдань.ОтриматиДатуОстанньогоЗавантаженняКурсуВалют();
@@ -117,6 +129,9 @@ namespace StorageAndTrade
             ShowAll();
         }
 
+        /// <summary>
+        /// Запуск автоматичного оновлення курсів валют
+        /// </summary>
         public void StartAutoWork()
         {
             if (Константи.ЗавантаженняДанихІзСайтів.АвтоматичноЗавантажуватиКурсиВалютПриЗапуску_Const)
@@ -165,6 +180,8 @@ namespace StorageAndTrade
                 lb.Clicked += clickAction;
         }
 
+        #region BackgroundTask
+
         public void StartBackgroundTask()
         {
             Program.CancellationTokenBackgroundTask = new CancellationTokenSource();
@@ -173,14 +190,34 @@ namespace StorageAndTrade
             ThreadBackgroundTask.Start();
         }
 
+        /*
+
+        Схема роботи:
+
+        1. В процесі запису в регістр залишків - додається запис у таблицю тригерів.
+           Запис в таблицю тригерів містить дату запису в регістр, назву регістру.
+
+        2. Раз на 5 сек викликається процедура SpetialTableRegAccumTrigerExecute і
+           відбувається розрахунок віртуальних таблиць регістрів залишків.
+
+           Розраховуються тільки змінені регістри на дату проведення документу і
+           додатково на дату якщо змінена дата документу і документ уже був проведений.
+
+           Додатково розраховуються підсумки в кінці всіх розрахунків.
+
+        */
+
         void CalculationVirtualBalances()
         {
             int counter = 0;
 
             while (!Program.CancellationTokenBackgroundTask!.IsCancellationRequested)
             {
+                //Раз на 5 сек
                 if (counter > 5)
                 {
+                    //Зупинка розрахунків використовується при масовому перепроведенні документів щоб
+                    //провести всі документ, а тоді вже розраховувати регістри
                     if (!Константи.Системні.ЗупинитиФоновіЗадачі_Const)
                     {
                         Config.Kernel!.DataBase.SpetialTableRegAccumTrigerExecute(
@@ -193,8 +230,12 @@ namespace StorageAndTrade
 
                 counter++;
 
+                //Затримка на 1 сек
                 Thread.Sleep(1000);
             }
         }
+
+        #endregion
+
     }
 }

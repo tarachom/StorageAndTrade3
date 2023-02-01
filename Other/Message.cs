@@ -21,6 +21,12 @@ limitations under the License.
 Сайт:     accounting.org.ua
 */
 
+/*
+
+Діалогове повідомлення
+
+*/
+
 using Gtk;
 
 namespace StorageAndTrade
@@ -45,6 +51,12 @@ namespace StorageAndTrade
             md.Destroy();
         }
 
+        /// <summary>
+        /// Повідомлення запит Так/Ні
+        /// </summary>
+        /// <param name="pwin">Вікно власник</param>
+        /// <param name="message">Текст</param>
+        /// <returns>Так або Ні</returns>
         public static ResponseType Request(Window? pwin, string message)
         {
             MessageDialog md = new MessageDialog(pwin, DialogFlags.DestroyWithParent, MessageType.Question, ButtonsType.YesNo, message);

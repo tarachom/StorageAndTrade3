@@ -21,6 +21,12 @@ limitations under the License.
 Сайт:     accounting.org.ua
 */
 
+/*
+
+Налаштування
+
+*/
+
 using Gtk;
 
 using AccountingSoftware;
