@@ -93,7 +93,7 @@ ORDER BY Дата DESC
         {
             Program.GeneralForm?.CreateNotebookPage("Повідомлення", () =>
             {
-                PageTerminal page = new PageTerminal();
+                СпільніФорми_ВивідПовідомленняПроПомилки page = new СпільніФорми_ВивідПовідомленняПроПомилки();
                 page.LoadRecords();
                 return page;
             }, true);

@@ -27,9 +27,7 @@ limitations under the License.
 */
 
 using AccountingSoftware;
-using Конфа = StorageAndTrade_1_0;
 using Довідники = StorageAndTrade_1_0.Довідники;
-using Документи = StorageAndTrade_1_0.Документи;
 using Перелічення = StorageAndTrade_1_0.Перелічення;
 using Константи = StorageAndTrade_1_0.Константи;
 

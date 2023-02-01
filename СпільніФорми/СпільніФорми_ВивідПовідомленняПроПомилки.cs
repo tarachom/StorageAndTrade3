@@ -25,11 +25,11 @@ using Gtk;
 
 namespace StorageAndTrade
 {
-    class PageTerminal : VBox
+    class СпільніФорми_ВивідПовідомленняПроПомилки : VBox
     {
         VBox vBoxMessage = new VBox();
 
-        public PageTerminal() : base()
+        public СпільніФорми_ВивідПовідомленняПроПомилки() : base()
         {
             //Кнопки
             HBox hBoxBotton = new HBox();
