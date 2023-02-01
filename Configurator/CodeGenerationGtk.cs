@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 31.01.2023 15:18:49
+ * Дата конфігурації: 01.02.2023 13:52:03
  *
  */
  
@@ -1648,7 +1648,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
     #region DIRECTORY "Каси"
     
       
-    public class Каси_Записи
+    public class Каси_ЗаписиПрототип
     {
         string Image = "images/doc.png";
         string ID = "";
@@ -1725,7 +1725,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                 if (cur != null)
                 {
-                    Каси_Записи Record = new Каси_Записи
+                    Каси_ЗаписиПрототип Record = new Каси_ЗаписиПрототип
                     {
                         ID = cur.UnigueID.ToString(),
                         Валюта = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/

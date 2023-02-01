@@ -5,7 +5,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>31.01.2023 15:18:49</DateTimeSave>
+  <DateTimeSave>01.02.2023 13:52:03</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -3012,7 +3012,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       <TabularParts />
       <TabularLists>
         <TabularList>
-          <Name>Записи</Name>
+          <Name>ЗаписиПрототип</Name>
           <Desc>
           </Desc>
           <Fields>
