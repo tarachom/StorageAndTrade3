@@ -123,7 +123,6 @@ namespace StorageAndTrade
             {
                 //Завантаження кожного разу при запуску
                 Обробка_ЗавантаженняКурсівВалют page = new Обробка_ЗавантаженняКурсівВалют();
-                page.IsBackgroundWork = true;
                 page.CallBack_EndBackgroundWork = StartDesktop;
 
                 page.OnDownload(null, new EventArgs());

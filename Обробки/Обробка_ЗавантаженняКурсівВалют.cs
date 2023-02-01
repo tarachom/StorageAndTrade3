@@ -96,19 +96,13 @@ namespace StorageAndTrade
         }
 
         /// <summary>
-        /// Завантаження у фоновому режимі без виводу інформації
-        /// </summary>
-        public bool IsBackgroundWork { get; set; } = false;
-
-        /// <summary>
         /// Функція яка викликається після завершення завантаження у фоновому режимі
         /// </summary>
         public System.Action? CallBack_EndBackgroundWork { get; set; }
 
         public void OnDownload(object? sender, EventArgs args)
         {
-            if (!IsBackgroundWork)
-                ClearMessage();
+            ClearMessage();
 
             CancellationTokenThread = new CancellationTokenSource();
             Thread thread = new Thread(new ThreadStart(DownloadExCurr));
@@ -117,8 +111,7 @@ namespace StorageAndTrade
 
         void DownloadExCurr()
         {
-            if (!IsBackgroundWork)
-                ButtonSensitive(false);
+            ButtonSensitive(false);
 
             bool isOK = false;
 
@@ -136,8 +129,7 @@ namespace StorageAndTrade
                 link += "?date=" + ДатаКурсу.Year.ToString() + ДатаКурсу.Month.ToString("D2") + ДатаКурсу.Day.ToString("D2");
             }
 
-            if (!IsBackgroundWork)
-                CreateMessage(TypeMessage.Info, $"Завантаження ХМЛ файлу з курсами валют з офіційного сайту: bank.gov.ua");
+            CreateMessage(TypeMessage.Info, $"Завантаження ХМЛ файлу з курсами валют з офіційного сайту: bank.gov.ua");
 
             XPathDocument xPathDoc;
             XPathNavigator? xPathDocNavigator = null;
@@ -149,15 +141,13 @@ namespace StorageAndTrade
 
                 isOK = true;
 
-                if (!IsBackgroundWork)
-                    CreateMessage(TypeMessage.Ok, "OK");
+                CreateMessage(TypeMessage.Ok, "OK");
 
                 ФункціїДляФоновихЗавдань.ДодатиЗаписВІсторіюЗавантаженняКурсуВалют("OK", link);
             }
             catch (Exception ex)
             {
-                if (!IsBackgroundWork)
-                    CreateMessage(TypeMessage.Ok, "Помилка завантаження або аналізу ХМЛ файлу: " + ex.Message);
+                CreateMessage(TypeMessage.Ok, "Помилка завантаження або аналізу ХМЛ файлу: " + ex.Message);
 
                 ФункціїДляФоновихЗавдань.ДодатиЗаписВІсторіюЗавантаженняКурсуВалют("Помилка", link, ex.Message);
             }
@@ -182,8 +172,7 @@ namespace StorageAndTrade
 
                     if (ДатаКурсу != ПоточнаДатаКурсу)
                     {
-                        if (!IsBackgroundWork)
-                            CreateMessage(TypeMessage.Ok, $"Курс на дату: {ДатаКурсу}");
+                        CreateMessage(TypeMessage.Ok, $"Курс на дату: {ДатаКурсу}");
 
                         ПоточнаДатаКурсу = ДатаКурсу;
                     }
@@ -201,8 +190,7 @@ namespace StorageAndTrade
 
                         валюти_Pointer = валюти_Objest.GetDirectoryPointer();
 
-                        if (!IsBackgroundWork)
-                            CreateMessage(TypeMessage.Ok, $"Додано новий елемент довідника Валюти: {НазваВалюти}, код {Код_R030}");
+                        CreateMessage(TypeMessage.Ok, $"Додано новий елемент довідника Валюти: {НазваВалюти}, код {Код_R030}");
                     }
 
                     string query = $@"
@@ -234,8 +222,7 @@ LIMIT 1
                         курсиВалют_Objest.Курс = Курс;
                         курсиВалют_Objest.Save();
 
-                        if (!IsBackgroundWork)
-                            CreateMessage(TypeMessage.Ok, $"Додано новий курс валюти: {НазваВалюти} - курс {Курс}");
+                        CreateMessage(TypeMessage.Ok, $"Додано новий курс валюти: {НазваВалюти} - курс {Курс}");
                     }
                     else
                     {
@@ -247,15 +234,13 @@ LIMIT 1
                             курсиВалют_Objest.Курс = Курс;
                             курсиВалют_Objest.Save();
 
-                            if (!IsBackgroundWork)
-                                CreateMessage(TypeMessage.Ok, $"Перезаписано курс валюти: {НазваВалюти} - курс {Курс}");
+                            CreateMessage(TypeMessage.Ok, $"Перезаписано курс валюти: {НазваВалюти} - курс {Курс}");
                         }
                     }
                 }
             }
 
-            if (!IsBackgroundWork)
-                ButtonSensitive(true);
+            ButtonSensitive(true);
 
             if (CallBack_EndBackgroundWork != null)
             {
