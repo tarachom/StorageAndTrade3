@@ -70,6 +70,12 @@ namespace StorageAndTrade
 
         ComboBoxText ОсновнийТипПеріоду_ДляЖурналівДокументів = new ComboBoxText();
 
+        //
+        //ЗавантаженняДанихІзСайтів
+        //
+
+        Entry ЗавантаженняДанихІзСайтів = new Entry() { WidthRequest = 500 };
+
         #endregion
 
         public PageSettings() : base()
@@ -140,7 +146,7 @@ namespace StorageAndTrade
             {
                 VBox vBoxSystem = new VBox();
 
-                Expander expanderSystem = new Expander("Налаштування обліку") { Expanded = true };
+                Expander expanderSystem = new Expander("Налаштування обліку") { Expanded = false };
                 expanderSystem.Add(vBoxSystem);
 
                 //Info
@@ -159,7 +165,7 @@ namespace StorageAndTrade
             {
                 VBox vBoxBatch = new VBox();
 
-                Expander expanderBatch = new Expander("Партії товарів") { Expanded = true };
+                Expander expanderBatch = new Expander("Партії товарів") { Expanded = false };
                 expanderBatch.Add(vBoxBatch);
 
                 //Info
@@ -189,6 +195,24 @@ namespace StorageAndTrade
                 AddControl(vBoxBackgroundTask, ЗупинитиФоновіЗадачі);
 
                 vBox.PackStart(expanderBackgroundTask, false, false, 10);
+            }
+
+            //4
+            {
+                VBox vBoxDownloadCursNBU = new VBox();
+
+                Expander expanderDownloadCursNBU = new Expander("Завантаження курсів валют НБУ") { Expanded = false };
+                expanderDownloadCursNBU.Add(vBoxDownloadCursNBU);
+
+                //Info
+                HBox hBoxInfo = new HBox() { Halign = Align.Start };
+                vBoxDownloadCursNBU.PackStart(hBoxInfo, false, false, 15);
+                hBoxInfo.PackStart(new Label("За замовчуванням: https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange") { Wrap = true }, false, false, 5);
+
+                //Controls
+                AddCaptionAndControl(vBoxDownloadCursNBU, new Label("Лінк:"), ЗавантаженняДанихІзСайтів);
+
+                vBox.PackStart(expanderDownloadCursNBU, false, false, 10);
             }
         }
 
@@ -337,6 +361,12 @@ namespace StorageAndTrade
                 if (ОсновнийТипПеріоду_ДляЖурналівДокументів.Active == -1)
                     ОсновнийТипПеріоду_ДляЖурналівДокументів.ActiveId = Перелічення.ТипПеріодуДляЖурналівДокументів.ЗПочаткуМісяця.ToString();
             }
+
+            //
+            //ЗавантаженняДанихІзСайтів
+            //
+
+            ЗавантаженняДанихІзСайтів.Text = Константи.ЗавантаженняДанихІзСайтів.ЗавантаженняКурсівВалют_Const;
         }
 
         void GetValue()
@@ -371,6 +401,12 @@ namespace StorageAndTrade
             //
 
             Константи.ЖурналиДокументів.ОсновнийТипПеріоду_Const = Enum.Parse<Перелічення.ТипПеріодуДляЖурналівДокументів>(ОсновнийТипПеріоду_ДляЖурналівДокументів.ActiveId);
+
+            //
+            //ЗавантаженняДанихІзСайтів
+            //
+
+            Константи.ЗавантаженняДанихІзСайтів.ЗавантаженняКурсівВалют_Const = ЗавантаженняДанихІзСайтів.Text;
         }
 
         void OnSaveClick(object? sender, EventArgs args)

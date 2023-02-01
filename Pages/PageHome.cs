@@ -1,5 +1,3 @@
-#region Info
-
 /*
 Copyright (C) 2019-2023 TARAKHOMYN YURIY IVANOVYCH
 All rights reserved.
@@ -23,8 +21,6 @@ limitations under the License.
 Сайт:     accounting.org.ua
 */
 
-#endregion
-
 using Gtk;
 
 using StorageAndTrade_1_0;
@@ -45,8 +41,7 @@ namespace StorageAndTrade
             HBox hBoxDownloadCurs = new HBox();
 
             hBoxDownloadCurs.PackStart(new Label("Курси валют НБУ"), false, false, 5);
-            Button bDownloadCurs = new Button(Stock.Refresh);
-            bDownloadCurs.AlwaysShowImage = true;
+            Button bDownloadCurs = new Button("Оновити");
             bDownloadCurs.Clicked += (object? sender, EventArgs args) =>
             {
                 ЗавантаженняКурсівВалют page = new ЗавантаженняКурсівВалют();
@@ -69,7 +64,12 @@ namespace StorageAndTrade
                 HBox hBoxSwitch = new HBox();
                 vBoxSwitch.PackStart(hBoxSwitch, false, false, 0);
 
-                autoDownloadCursOnStart = new Switch() { HeightRequest = 20, Active = Константи.ЗавантаженняДанихІзСайтів.АвтоматичноЗавантажуватиКурсиВалютПриЗапуску_Const };
+                autoDownloadCursOnStart = new Switch()
+                {
+                    HeightRequest = 20,
+                    Active = Константи.ЗавантаженняДанихІзСайтів.АвтоматичноЗавантажуватиКурсиВалютПриЗапуску_Const
+                };
+
                 autoDownloadCursOnStart.ButtonReleaseEvent += (object? sender, ButtonReleaseEventArgs args) =>
                 {
                     Константи.ЗавантаженняДанихІзСайтів.АвтоматичноЗавантажуватиКурсиВалютПриЗапуску_Const = !autoDownloadCursOnStart.Active;
@@ -84,14 +84,14 @@ namespace StorageAndTrade
             HBox hBoxCursyValut = new HBox();
             PackStart(hBoxCursyValut, false, false, 5);
 
-            vBoxCursyValut = new VBox() { WidthRequest = 300 };
+            vBoxCursyValut = new VBox() { WidthRequest = 200 };
             hBoxCursyValut.PackStart(vBoxCursyValut, false, false, 5);
 
             VBox vBoxDirectory = new VBox(false, 0);
             PackStart(vBoxDirectory, false, false, 5);
 
             AddLink(vBoxDirectory, "Довідник - Валюти", PageDirectory.Валюти);
-            AddLink(vBoxDirectory, "Історія завантаження", КурсиВалют_Історія);
+            AddLink(vBoxDirectory, "Історія завантажень", КурсиВалют_Історія);
 
             ShowAll();
         }
@@ -99,7 +99,7 @@ namespace StorageAndTrade
         public void StartDesktop()
         {
             DateTime? ДатуОстанньогоЗавантаження = ФункціїДляФоновихЗавдань.ОтриматиДатуОстанньогоЗавантаженняКурсуВалют();
-            lbDateLastDownload.Text = "Обновлення: " + (ДатуОстанньогоЗавантаження != null ? ДатуОстанньогоЗавантаження.ToString() : "...");
+            lbDateLastDownload.Text = "Оновлення: " + (ДатуОстанньогоЗавантаження != null ? ДатуОстанньогоЗавантаження.ToString() : "...");
 
             foreach (Widget child in vBoxCursyValut.Children)
                 vBoxCursyValut.Remove(child);
@@ -109,8 +109,8 @@ namespace StorageAndTrade
             foreach (Dictionary<string, object> Row in ListRow)
             {
                 HBox hBoxItemValuta = new HBox();
-                hBoxItemValuta.PackStart(new Label(Row["ВалютаНазва"].ToString()), false, false, 5);
-                hBoxItemValuta.PackEnd(new Label(Row["Курс"].ToString()), false, false, 5);
+                hBoxItemValuta.PackStart(new Label(Row["ВалютаНазва"].ToString()), false, false, 0);
+                hBoxItemValuta.PackEnd(new Label(Row["Курс"].ToString()), false, false, 0);
                 vBoxCursyValut.PackStart(hBoxItemValuta, false, false, 5);
             }
 
