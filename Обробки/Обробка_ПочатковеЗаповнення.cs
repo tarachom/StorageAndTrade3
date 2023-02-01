@@ -1,5 +1,3 @@
-#region Info
-
 /*
 Copyright (C) 2019-2023 TARAKHOMYN YURIY IVANOVYCH
 All rights reserved.
@@ -23,8 +21,6 @@ limitations under the License.
 Сайт:     accounting.org.ua
 */
 
-#endregion
-
 using Gtk;
 
 using Константи = StorageAndTrade_1_0.Константи;
@@ -34,7 +30,7 @@ using System.Xml.XPath;
 
 namespace StorageAndTrade
 {
-    class PageInitialFilling : VBox
+    class Обробка_ПочатковеЗаповнення : VBox
     {
         #region Fields
 
@@ -56,7 +52,7 @@ namespace StorageAndTrade
 
         #endregion
 
-        public PageInitialFilling() : base()
+        public Обробка_ПочатковеЗаповнення() : base()
         {
             //Кнопки
             HBox hBoxBotton = new HBox();

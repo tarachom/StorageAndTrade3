@@ -105,7 +105,7 @@ namespace StorageAndTrade
                 {
                     Program.GeneralForm?.CreateNotebookPage("Завантаження курсів валют НБУ", () =>
                     {
-                        return new ЗавантаженняКурсівВалют();
+                        return new Обробка_ЗавантаженняКурсівВалют();
                     });
                 };
 

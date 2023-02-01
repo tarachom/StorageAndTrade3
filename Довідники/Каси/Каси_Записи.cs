@@ -17,7 +17,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         string Код = "";
         string Назва = "";
         string Валюта = "";
- string Залишок = "";
+        string Залишок = "";
 
         Array ToArray()
         {

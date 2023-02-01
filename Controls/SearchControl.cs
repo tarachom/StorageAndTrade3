@@ -1,5 +1,3 @@
-#region Info
-
 /*
 Copyright (C) 2019-2023 TARAKHOMYN YURIY IVANOVYCH
 All rights reserved.
@@ -28,8 +26,6 @@ limitations under the License.
 Пошук з виводом результатів у список
 
 */
-
-#endregion
 
 using Gtk;
 
