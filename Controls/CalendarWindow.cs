@@ -29,7 +29,7 @@ namespace StorageAndTrade
     {
         Calendar calendar;
 
-        public CalendarWindow() : base("Calendar")
+        public CalendarWindow() : base("Календар")
         {
             SetDefaultSize(300, 0);
             SetDefaultIconFromFile("images/form.ico");

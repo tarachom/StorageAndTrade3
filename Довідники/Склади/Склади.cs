@@ -382,7 +382,7 @@ namespace StorageAndTrade
 
         void OnCheckButtonIsHierarchyClicked(object? sender, EventArgs args)
         {
-            LoadRecords();
+            LoadTree();
         }
 
         #endregion
