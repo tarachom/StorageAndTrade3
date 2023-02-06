@@ -99,19 +99,19 @@ namespace StorageAndTrade
                 return new object[]
                 {
                     НомерРядка,
-                    Номенклатура.Presentation,
-                    Характеристика.Presentation,
-                    Серія.Presentation,
+                    Номенклатура.Назва,
+                    Характеристика.Назва,
+                    Серія.Назва,
                     КількістьУпаковок,
-                    Пакування.Presentation,
+                    Пакування.Назва,
                     (float)Кількість,
-                    ВидЦіни.Presentation,
+                    ВидЦіни.Назва,
                     (float)Ціна,
                     (float)Сума,
                     (float)Скидка,
-                    ЗамовленняКлієнта.Presentation,
-                    РахунокФактура.Presentation,
-                    Склад.Presentation
+                    ЗамовленняКлієнта.Назва,
+                    РахунокФактура.Назва,
+                    Склад.Назва
                 };
             }
 
@@ -540,14 +540,14 @@ LIMIT 1
                 {
                     string uid = record.UID.ToString();
 
-                    record.Номенклатура.Presentation = JoinValue[uid]["Номенклатура"];
-                    record.ХарактеристикаНоменклатури.Presentation = JoinValue[uid]["Характеристика"];
-                    record.Серія.Presentation = JoinValue[uid]["Серія"];
-                    record.Пакування.Presentation = JoinValue[uid]["Пакування"];
-                    record.ВидЦіни.Presentation = JoinValue[uid]["ВидЦін"];
-                    record.ЗамовленняКлієнта.Presentation = JoinValue[uid]["Замовлення"];
-                    record.РахунокФактура.Presentation = JoinValue[uid]["Рахунок"];
-                    record.Склад.Presentation = JoinValue[uid]["Склад"];
+                    record.Номенклатура.Назва = JoinValue[uid]["Номенклатура"];
+                    record.ХарактеристикаНоменклатури.Назва = JoinValue[uid]["Характеристика"];
+                    record.Серія.Назва = JoinValue[uid]["Серія"];
+                    record.Пакування.Назва = JoinValue[uid]["Пакування"];
+                    record.ВидЦіни.Назва = JoinValue[uid]["ВидЦін"];
+                    record.ЗамовленняКлієнта.Назва = JoinValue[uid]["Замовлення"];
+                    record.РахунокФактура.Назва = JoinValue[uid]["Рахунок"];
+                    record.Склад.Назва = JoinValue[uid]["Склад"];
 
                     Запис запис = new Запис
                     {
