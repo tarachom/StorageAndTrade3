@@ -40,7 +40,6 @@ namespace StorageAndTrade
     class ЗамовленняКлієнта_ТабличнаЧастина_Товари : VBox
     {
         public ЗамовленняКлієнта_Objest? ЗамовленняКлієнта_Objest { get; set; }
-        public System.Action? ОбновитиЗначенняДокумента { get; set; }
 
         #region Записи
 
@@ -87,7 +86,7 @@ namespace StorageAndTrade
             public ПакуванняОдиниціВиміру_Pointer Пакування { get; set; } = new ПакуванняОдиниціВиміру_Pointer();
             public string ПакуванняНазва { get; set; } = "";
             public decimal Кількість { get; set; } = 1;
-            public ВидиЦін_Pointer ВидЦіни { get; set; } = new ВидиЦін_Pointer();
+            public ВидиЦін_Pointer ВидЦіни { get; set; } = Константи.ЗначенняЗаЗамовчуванням.ОсновнийВидЦіни_Const;
             public string ВидЦіниНазва { get; set; } = "";
             public decimal Ціна { get; set; }
             public decimal Сума { get; set; }
@@ -136,6 +135,10 @@ namespace StorageAndTrade
                 };
             }
 
+            public static void ПісляДодаванняНового(Запис запис)
+            {
+                ПісляЗміни_ВидЦіни(запис);
+            }
             public static void ПісляЗміни_Номенклатура(Запис запис)
             {
                 if (запис.Номенклатура.IsEmpty())
@@ -193,31 +196,15 @@ namespace StorageAndTrade
             {
                 запис.Сума = запис.Кількість * запис.Ціна;
             }
-            public static void ОтриматиЦіну(Запис запис, ЗамовленняКлієнта_Objest ДокументОбєкт)
+            public static void ОтриматиЦіну(Запис запис)
             {
                 if (запис.Номенклатура.IsEmpty())
                     return;
 
                 if (запис.ВидЦіни.IsEmpty())
-                {
-                    if (ДокументОбєкт == null)
-                        return;
-                    else
-                    {
-                        Склади_Objest? cклади_Objest = ДокументОбєкт.Склад.GetDirectoryObject();
-                        if (cклади_Objest != null)
-                        {
-                            запис.ВидЦіни = cклади_Objest.ВидЦін;
-                            Запис.ПісляЗміни_ВидЦіни(запис);
-                        }
-                        else
-                            return;
-                    }
-                }
+                    return;
 
-                if (запис.Ціна == 0)
-                {
-                    string query = $@"
+                string query = $@"
 SELECT
     ЦіниНоменклатури.{ЦіниНоменклатури_Const.Ціна} AS Ціна
 FROM 
@@ -225,24 +212,37 @@ FROM
 WHERE
     ЦіниНоменклатури.{ЦіниНоменклатури_Const.ВидЦіни} = '{запис.ВидЦіни.UnigueID}' AND
     ЦіниНоменклатури.{ЦіниНоменклатури_Const.Номенклатура} = '{запис.Номенклатура.UnigueID}'
+";
+
+                #region WHERE
+
+                if (!запис.Характеристика.IsEmpty())
+                {
+                    query += $@"
+AND ЦіниНоменклатури.{ЦіниНоменклатури_Const.ХарактеристикаНоменклатури} = '{запис.Характеристика.UnigueID}'
+";
+                }
+
+                #endregion
+
+                query += $@"
 ORDER BY 
     ЦіниНоменклатури.period DESC 
 LIMIT 1
 ";
-                    Dictionary<string, object> paramQuery = new Dictionary<string, object>();
+                Dictionary<string, object> paramQuery = new Dictionary<string, object>();
 
-                    string[] columnsName;
-                    List<Dictionary<string, object>> listRow;
+                string[] columnsName;
+                List<Dictionary<string, object>> listRow;
 
-                    Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listRow);
+                Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listRow);
 
-                    if (listRow.Count > 0)
-                        foreach (Dictionary<string, object> row in listRow)
-                        {
-                            запис.Ціна = (decimal)row["Ціна"];
-                            запис.Сума = запис.Кількість * запис.Ціна;
-                        }
-                }
+                if (listRow.Count > 0)
+                    foreach (Dictionary<string, object> row in listRow)
+                    {
+                        запис.Ціна = (decimal)row["Ціна"];
+                        запис.Сума = запис.Кількість * запис.Ціна;
+                    }
             }
         }
 
@@ -302,10 +302,7 @@ LIMIT 1
                                     запис.Номенклатура = selectPointer;
                                     Запис.ПісляЗміни_Номенклатура(запис);
 
-                                    if (ОбновитиЗначенняДокумента != null)
-                                        ОбновитиЗначенняДокумента.Invoke();
-
-                                    Запис.ОтриматиЦіну(запис, ЗамовленняКлієнта_Objest!);
+                                    Запис.ОтриматиЦіну(запис);
 
                                     Store.SetValues(iter, запис.ToArray());
                                 };
@@ -326,6 +323,8 @@ LIMIT 1
                                 {
                                     запис.Характеристика = selectPointer;
                                     Запис.ПісляЗміни_Характеристика(запис);
+
+                                    Запис.ОтриматиЦіну(запис);
 
                                     Store.SetValues(iter, запис.ToArray());
                                 };
@@ -365,10 +364,7 @@ LIMIT 1
                                     запис.ВидЦіни = selectPointer;
                                     Запис.ПісляЗміни_ВидЦіни(запис);
 
-                                    if (ОбновитиЗначенняДокумента != null)
-                                        ОбновитиЗначенняДокумента.Invoke();
-
-                                    Запис.ОтриматиЦіну(запис, ЗамовленняКлієнта_Objest!);
+                                    Запис.ОтриматиЦіну(запис);
 
                                     Store.SetValues(iter, запис.ToArray());
                                 };
@@ -763,6 +759,8 @@ LIMIT 1
         {
             Запис запис = new Запис();
             Записи.Add(запис);
+
+            Запис.ПісляДодаванняНового(запис);
 
             Store.AppendValues(запис.ToArray());
         }

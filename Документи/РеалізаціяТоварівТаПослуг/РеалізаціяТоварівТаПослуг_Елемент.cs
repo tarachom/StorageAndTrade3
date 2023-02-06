@@ -1,5 +1,3 @@
-#region Info
-
 /*
 Copyright (C) 2019-2023 TARAKHOMYN YURIY IVANOVYCH
 All rights reserved.
@@ -22,8 +20,6 @@ limitations under the License.
 Адреса:   Україна, м. Львів
 Сайт:     accounting.org.ua
 */
-
-#endregion
 
 using Gtk;
 
@@ -442,10 +438,6 @@ namespace StorageAndTrade
 
             //Таблична частина
             Товари.РеалізаціяТоварівТаПослуг_Objest = РеалізаціяТоварівТаПослуг_Objest;
-            Товари.ОбновитиЗначенняДокумента = () =>
-            {
-                РеалізаціяТоварівТаПослуг_Objest.Склад = Склад.Pointer;
-            };
             Товари.LoadRecords();
 
             if (IsNew)

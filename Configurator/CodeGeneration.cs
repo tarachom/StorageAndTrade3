@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 01.02.2023 14:14:42
+ * Дата конфігурації: 06.02.2023 18:48:59
  *
  */
 
@@ -66,7 +66,7 @@ namespace StorageAndTrade_1_0.Константи
             
             Dictionary<string, object> fieldValue = new Dictionary<string, object>();
             bool IsSelect = Config.Kernel!.DataBase.SelectAllConstants("tab_constants",
-                 new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_g4", "col_g5", "col_g9", "col_i2" }, fieldValue);
+                 new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_g4", "col_g5", "col_g9", "col_i2", "col_c3" }, fieldValue);
             
             if (IsSelect)
             {
@@ -81,6 +81,7 @@ namespace StorageAndTrade_1_0.Константи
                 m_ОсновнийБанківськийРахунок_Const = new Довідники.БанківськіРахункиОрганізацій_Pointer(fieldValue["col_g5"]);
                 m_ОсновнийВидЦіни_Const = new Довідники.ВидиЦін_Pointer(fieldValue["col_g9"]);
                 m_ОсновнийВидНоменклатури_Const = new Довідники.ВидиНоменклатури_Pointer(fieldValue["col_i2"]);
+                m_ОсновнийВидЦіниЗакупівлі_Const = new Довідники.ВидиЦін_Pointer(fieldValue["col_c3"]);
                 
             }
 			
@@ -238,6 +239,20 @@ namespace StorageAndTrade_1_0.Константи
             {
                 m_ОсновнийВидНоменклатури_Const = value;
                 Config.Kernel!.DataBase.SaveConstants("tab_constants", "col_i2", m_ОсновнийВидНоменклатури_Const.UnigueID.UGuid);
+            }
+        }
+        
+        static Довідники.ВидиЦін_Pointer m_ОсновнийВидЦіниЗакупівлі_Const = new Довідники.ВидиЦін_Pointer();
+        public static Довідники.ВидиЦін_Pointer ОсновнийВидЦіниЗакупівлі_Const
+        {
+            get 
+            {
+                return m_ОсновнийВидЦіниЗакупівлі_Const.GetNewDirectoryPointer();
+            }
+            set
+            {
+                m_ОсновнийВидЦіниЗакупівлі_Const = value;
+                Config.Kernel!.DataBase.SaveConstants("tab_constants", "col_c3", m_ОсновнийВидЦіниЗакупівлі_Const.UnigueID.UGuid);
             }
         }
              
@@ -1785,7 +1800,7 @@ namespace StorageAndTrade_1_0.Довідники
         
         public void Save()
         {
-		    base.FieldValue["col_a1"] = Назва;
+            base.FieldValue["col_a1"] = Назва;
             base.FieldValue["col_a2"] = Код;
             base.FieldValue["col_a3"] = НазваПовна;
             base.FieldValue["col_a4"] = НазваСкорочена;
@@ -1796,30 +1811,30 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_a9"] = Холдинг.UnigueID.UGuid;
             
             BaseSave();
-			
+            
         }
-		
+
         public Організації_Objest Copy()
         {
             Організації_Objest copy = new Організації_Objest();
-			copy.New();
+            copy.New();
             copy.Назва = Назва;
-			copy.Код = Код;
-			copy.НазваПовна = НазваПовна;
-			copy.НазваСкорочена = НазваСкорочена;
-			copy.ДатаРеєстрації = ДатаРеєстрації;
-			copy.КраїнаРеєстрації = КраїнаРеєстрації;
-			copy.СвідоцтвоСеріяНомер = СвідоцтвоСеріяНомер;
-			copy.СвідоцтвоДатаВидачі = СвідоцтвоДатаВидачі;
-			copy.Холдинг = Холдинг;
-			
-			return copy;
+            copy.Код = Код;
+            copy.НазваПовна = НазваПовна;
+            copy.НазваСкорочена = НазваСкорочена;
+            copy.ДатаРеєстрації = ДатаРеєстрації;
+            copy.КраїнаРеєстрації = КраїнаРеєстрації;
+            copy.СвідоцтвоСеріяНомер = СвідоцтвоСеріяНомер;
+            copy.СвідоцтвоДатаВидачі = СвідоцтвоДатаВидачі;
+            copy.Холдинг = Холдинг;
+            
+            return copy;
         }
 
         public void Delete()
         {
             
-			base.BaseDelete(new string[] { "tab_a02" });
+            base.BaseDelete(new string[] { "tab_a02" });
         }
         
         public Організації_Pointer GetDirectoryPointer()
@@ -1862,17 +1877,19 @@ namespace StorageAndTrade_1_0.Довідники
             Організації_Objest ОрганізаціїObjestItem = new Організації_Objest();
             return ОрганізаціїObjestItem.Read(base.UnigueID) ? ОрганізаціїObjestItem : null;
         }
-		
+
         public Організації_Pointer GetNewDirectoryPointer()
         {
             return new Організації_Pointer(base.UnigueID);
         }
-		
-		public string GetPresentation()
+
+        public string Presentation { get; set; } = "";
+
+        public string GetPresentation()
         {
-		    return base.BasePresentation(
-			    new string[] { "col_a1" }
-			);
+            return Presentation = base.BasePresentation(
+              new string[] { "col_a1" }
+            );
         }
 		
         public Організації_Pointer GetEmptyPointer()
@@ -2086,8 +2103,8 @@ namespace StorageAndTrade_1_0.Довідники
         
         public void Save()
         {
-		    Номенклатура_Triggers.BeforeRecording(this);
-			base.FieldValue["col_b1"] = Назва;
+            Номенклатура_Triggers.BeforeRecording(this);
+            base.FieldValue["col_b1"] = Назва;
             base.FieldValue["col_b2"] = Код;
             base.FieldValue["col_b4"] = НазваПовна;
             base.FieldValue["col_a1"] = Опис;
@@ -2100,32 +2117,32 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_a7"] = ОсновнаКартинкаФайл.UnigueID.UGuid;
             
             BaseSave();
-			Номенклатура_Triggers.AfterRecording(this);
+            Номенклатура_Triggers.AfterRecording(this);
         }
-		
+
         public Номенклатура_Objest Copy()
         {
             Номенклатура_Objest copy = new Номенклатура_Objest();
-			copy.New();
+            copy.New();
             copy.Назва = Назва;
-			copy.Код = Код;
-			copy.НазваПовна = НазваПовна;
-			copy.Опис = Опис;
-			copy.Артикул = Артикул;
-			copy.ТипНоменклатури = ТипНоменклатури;
-			copy.Виробник = Виробник;
-			copy.ВидНоменклатури = ВидНоменклатури;
-			copy.ОдиницяВиміру = ОдиницяВиміру;
-			copy.Папка = Папка;
-			copy.ОсновнаКартинкаФайл = ОсновнаКартинкаФайл;
-			
-			return copy;
+            copy.Код = Код;
+            copy.НазваПовна = НазваПовна;
+            copy.Опис = Опис;
+            copy.Артикул = Артикул;
+            copy.ТипНоменклатури = ТипНоменклатури;
+            copy.Виробник = Виробник;
+            copy.ВидНоменклатури = ВидНоменклатури;
+            copy.ОдиницяВиміру = ОдиницяВиміру;
+            copy.Папка = Папка;
+            copy.ОсновнаКартинкаФайл = ОсновнаКартинкаФайл;
+            
+            return copy;
         }
 
         public void Delete()
         {
             Номенклатура_Triggers.BeforeDelete(this);
-			base.BaseDelete(new string[] { "tab_b19" });
+            base.BaseDelete(new string[] { "tab_b19" });
         }
         
         public Номенклатура_Pointer GetDirectoryPointer()
@@ -2170,17 +2187,19 @@ namespace StorageAndTrade_1_0.Довідники
             Номенклатура_Objest НоменклатураObjestItem = new Номенклатура_Objest();
             return НоменклатураObjestItem.Read(base.UnigueID) ? НоменклатураObjestItem : null;
         }
-		
+
         public Номенклатура_Pointer GetNewDirectoryPointer()
         {
             return new Номенклатура_Pointer(base.UnigueID);
         }
-		
-		public string GetPresentation()
+
+        public string Presentation { get; set; } = "";
+
+        public string GetPresentation()
         {
-		    return base.BasePresentation(
-			    new string[] { "col_b1" }
-			);
+            return Presentation = base.BasePresentation(
+              new string[] { "col_b1" }
+            );
         }
 		
         public Номенклатура_Pointer GetEmptyPointer()
@@ -2334,27 +2353,27 @@ namespace StorageAndTrade_1_0.Довідники
         
         public void Save()
         {
-		    base.FieldValue["col_b6"] = Назва;
+            base.FieldValue["col_b6"] = Назва;
             base.FieldValue["col_b7"] = Код;
             
             BaseSave();
-			
+            
         }
-		
+
         public Виробники_Objest Copy()
         {
             Виробники_Objest copy = new Виробники_Objest();
-			copy.New();
+            copy.New();
             copy.Назва = Назва;
-			copy.Код = Код;
-			
-			return copy;
+            copy.Код = Код;
+            
+            return copy;
         }
 
         public void Delete()
         {
             
-			base.BaseDelete(new string[] {  });
+            base.BaseDelete(new string[] {  });
         }
         
         public Виробники_Pointer GetDirectoryPointer()
@@ -2387,17 +2406,19 @@ namespace StorageAndTrade_1_0.Довідники
             Виробники_Objest ВиробникиObjestItem = new Виробники_Objest();
             return ВиробникиObjestItem.Read(base.UnigueID) ? ВиробникиObjestItem : null;
         }
-		
+
         public Виробники_Pointer GetNewDirectoryPointer()
         {
             return new Виробники_Pointer(base.UnigueID);
         }
-		
-		public string GetPresentation()
+
+        public string Presentation { get; set; } = "";
+
+        public string GetPresentation()
         {
-		    return base.BasePresentation(
-			    new string[] { "col_b6" }
-			);
+            return Presentation = base.BasePresentation(
+              new string[] { "col_b6" }
+            );
         }
 		
         public Виробники_Pointer GetEmptyPointer()
@@ -2483,33 +2504,33 @@ namespace StorageAndTrade_1_0.Довідники
         
         public void Save()
         {
-		    base.FieldValue["col_b8"] = Назва;
+            base.FieldValue["col_b8"] = Назва;
             base.FieldValue["col_b9"] = Код;
             base.FieldValue["col_a2"] = Опис;
             base.FieldValue["col_a1"] = (int)ТипНоменклатури;
             base.FieldValue["col_a4"] = ОдиницяВиміру.UnigueID.UGuid;
             
             BaseSave();
-			
+            
         }
-		
+
         public ВидиНоменклатури_Objest Copy()
         {
             ВидиНоменклатури_Objest copy = new ВидиНоменклатури_Objest();
-			copy.New();
+            copy.New();
             copy.Назва = Назва;
-			copy.Код = Код;
-			copy.Опис = Опис;
-			copy.ТипНоменклатури = ТипНоменклатури;
-			copy.ОдиницяВиміру = ОдиницяВиміру;
-			
-			return copy;
+            copy.Код = Код;
+            copy.Опис = Опис;
+            copy.ТипНоменклатури = ТипНоменклатури;
+            copy.ОдиницяВиміру = ОдиницяВиміру;
+            
+            return copy;
         }
 
         public void Delete()
         {
             
-			base.BaseDelete(new string[] {  });
+            base.BaseDelete(new string[] {  });
         }
         
         public ВидиНоменклатури_Pointer GetDirectoryPointer()
@@ -2545,17 +2566,19 @@ namespace StorageAndTrade_1_0.Довідники
             ВидиНоменклатури_Objest ВидиНоменклатуриObjestItem = new ВидиНоменклатури_Objest();
             return ВидиНоменклатуриObjestItem.Read(base.UnigueID) ? ВидиНоменклатуриObjestItem : null;
         }
-		
+
         public ВидиНоменклатури_Pointer GetNewDirectoryPointer()
         {
             return new ВидиНоменклатури_Pointer(base.UnigueID);
         }
-		
-		public string GetPresentation()
+
+        public string Presentation { get; set; } = "";
+
+        public string GetPresentation()
         {
-		    return base.BasePresentation(
-			    new string[] { "col_b8" }
-			);
+            return Presentation = base.BasePresentation(
+              new string[] { "col_b8" }
+            );
         }
 		
         public ВидиНоменклатури_Pointer GetEmptyPointer()
@@ -2638,31 +2661,31 @@ namespace StorageAndTrade_1_0.Довідники
         
         public void Save()
         {
-		    base.FieldValue["col_c1"] = Назва;
+            base.FieldValue["col_c1"] = Назва;
             base.FieldValue["col_c2"] = Код;
             base.FieldValue["col_c3"] = НазваПовна;
             base.FieldValue["col_c4"] = КількістьУпаковок;
             
             BaseSave();
-			
+            
         }
-		
+
         public ПакуванняОдиниціВиміру_Objest Copy()
         {
             ПакуванняОдиниціВиміру_Objest copy = new ПакуванняОдиниціВиміру_Objest();
-			copy.New();
+            copy.New();
             copy.Назва = Назва;
-			copy.Код = Код;
-			copy.НазваПовна = НазваПовна;
-			copy.КількістьУпаковок = КількістьУпаковок;
-			
-			return copy;
+            copy.Код = Код;
+            copy.НазваПовна = НазваПовна;
+            copy.КількістьУпаковок = КількістьУпаковок;
+            
+            return copy;
         }
 
         public void Delete()
         {
             
-			base.BaseDelete(new string[] {  });
+            base.BaseDelete(new string[] {  });
         }
         
         public ПакуванняОдиниціВиміру_Pointer GetDirectoryPointer()
@@ -2697,17 +2720,19 @@ namespace StorageAndTrade_1_0.Довідники
             ПакуванняОдиниціВиміру_Objest ПакуванняОдиниціВиміруObjestItem = new ПакуванняОдиниціВиміру_Objest();
             return ПакуванняОдиниціВиміруObjestItem.Read(base.UnigueID) ? ПакуванняОдиниціВиміруObjestItem : null;
         }
-		
+
         public ПакуванняОдиниціВиміру_Pointer GetNewDirectoryPointer()
         {
             return new ПакуванняОдиниціВиміру_Pointer(base.UnigueID);
         }
-		
-		public string GetPresentation()
+
+        public string Presentation { get; set; } = "";
+
+        public string GetPresentation()
         {
-		    return base.BasePresentation(
-			    new string[] { "col_c1" }
-			);
+            return Presentation = base.BasePresentation(
+              new string[] { "col_c1" }
+            );
         }
 		
         public ПакуванняОдиниціВиміру_Pointer GetEmptyPointer()
@@ -2793,34 +2818,34 @@ namespace StorageAndTrade_1_0.Довідники
         
         public void Save()
         {
-		    Валюти_Triggers.BeforeRecording(this);
-			base.FieldValue["col_c5"] = Назва;
+            Валюти_Triggers.BeforeRecording(this);
+            base.FieldValue["col_c5"] = Назва;
             base.FieldValue["col_a2"] = КороткаНазва;
             base.FieldValue["col_c6"] = Код;
             base.FieldValue["col_a1"] = Код_R030;
             base.FieldValue["col_a3"] = ВиводитиКурсНаСтартову;
             
             BaseSave();
-			Валюти_Triggers.AfterRecording(this);
+            Валюти_Triggers.AfterRecording(this);
         }
-		
+
         public Валюти_Objest Copy()
         {
             Валюти_Objest copy = new Валюти_Objest();
-			copy.New();
+            copy.New();
             copy.Назва = Назва;
-			copy.КороткаНазва = КороткаНазва;
-			copy.Код = Код;
-			copy.Код_R030 = Код_R030;
-			copy.ВиводитиКурсНаСтартову = ВиводитиКурсНаСтартову;
-			
-			return copy;
+            copy.КороткаНазва = КороткаНазва;
+            copy.Код = Код;
+            copy.Код_R030 = Код_R030;
+            copy.ВиводитиКурсНаСтартову = ВиводитиКурсНаСтартову;
+            
+            return copy;
         }
 
         public void Delete()
         {
             Валюти_Triggers.BeforeDelete(this);
-			base.BaseDelete(new string[] {  });
+            base.BaseDelete(new string[] {  });
         }
         
         public Валюти_Pointer GetDirectoryPointer()
@@ -2856,17 +2881,19 @@ namespace StorageAndTrade_1_0.Довідники
             Валюти_Objest ВалютиObjestItem = new Валюти_Objest();
             return ВалютиObjestItem.Read(base.UnigueID) ? ВалютиObjestItem : null;
         }
-		
+
         public Валюти_Pointer GetNewDirectoryPointer()
         {
             return new Валюти_Pointer(base.UnigueID);
         }
-		
-		public string GetPresentation()
+
+        public string Presentation { get; set; } = "";
+
+        public string GetPresentation()
         {
-		    return base.BasePresentation(
-			    new string[] { "col_c5" }
-			);
+            return Presentation = base.BasePresentation(
+              new string[] { "col_c5" }
+            );
         }
 		
         public Валюти_Pointer GetEmptyPointer()
@@ -2959,8 +2986,8 @@ namespace StorageAndTrade_1_0.Довідники
         
         public void Save()
         {
-		    Контрагенти_Triggers.BeforeRecording(this);
-			base.FieldValue["col_c7"] = Назва;
+            Контрагенти_Triggers.BeforeRecording(this);
+            base.FieldValue["col_c7"] = Назва;
             base.FieldValue["col_c8"] = Код;
             base.FieldValue["col_c9"] = НазваПовна;
             base.FieldValue["col_d1"] = РеєстраційнийНомер;
@@ -2968,27 +2995,27 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_a2"] = Опис;
             
             BaseSave();
-			Контрагенти_Triggers.AfterRecording(this);
+            Контрагенти_Triggers.AfterRecording(this);
         }
-		
+
         public Контрагенти_Objest Copy()
         {
             Контрагенти_Objest copy = new Контрагенти_Objest();
-			copy.New();
+            copy.New();
             copy.Назва = Назва;
-			copy.Код = Код;
-			copy.НазваПовна = НазваПовна;
-			copy.РеєстраційнийНомер = РеєстраційнийНомер;
-			copy.Папка = Папка;
-			copy.Опис = Опис;
-			
-			return copy;
+            copy.Код = Код;
+            copy.НазваПовна = НазваПовна;
+            copy.РеєстраційнийНомер = РеєстраційнийНомер;
+            copy.Папка = Папка;
+            copy.Опис = Опис;
+            
+            return copy;
         }
 
         public void Delete()
         {
             Контрагенти_Triggers.BeforeDelete(this);
-			base.BaseDelete(new string[] { "tab_a09", "tab_b20" });
+            base.BaseDelete(new string[] { "tab_a09", "tab_b20" });
         }
         
         public Контрагенти_Pointer GetDirectoryPointer()
@@ -3029,17 +3056,19 @@ namespace StorageAndTrade_1_0.Довідники
             Контрагенти_Objest КонтрагентиObjestItem = new Контрагенти_Objest();
             return КонтрагентиObjestItem.Read(base.UnigueID) ? КонтрагентиObjestItem : null;
         }
-		
+
         public Контрагенти_Pointer GetNewDirectoryPointer()
         {
             return new Контрагенти_Pointer(base.UnigueID);
         }
-		
-		public string GetPresentation()
+
+        public string Presentation { get; set; } = "";
+
+        public string GetPresentation()
         {
-		    return base.BasePresentation(
-			    new string[] { "col_c7" }
-			);
+            return Presentation = base.BasePresentation(
+              new string[] { "col_c7" }
+            );
         }
 		
         public Контрагенти_Pointer GetEmptyPointer()
@@ -3316,7 +3345,7 @@ namespace StorageAndTrade_1_0.Довідники
         
         public void Save()
         {
-		    base.FieldValue["col_d9"] = Назва;
+            base.FieldValue["col_d9"] = Назва;
             base.FieldValue["col_e1"] = Код;
             base.FieldValue["col_a1"] = (int)ТипСкладу;
             base.FieldValue["col_a2"] = Відповідальний.UnigueID.UGuid;
@@ -3326,29 +3355,29 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_a6"] = (int)НалаштуванняАдресногоЗберігання;
             
             BaseSave();
-			
+            
         }
-		
+
         public Склади_Objest Copy()
         {
             Склади_Objest copy = new Склади_Objest();
-			copy.New();
+            copy.New();
             copy.Назва = Назва;
-			copy.Код = Код;
-			copy.ТипСкладу = ТипСкладу;
-			copy.Відповідальний = Відповідальний;
-			copy.ВидЦін = ВидЦін;
-			copy.Підрозділ = Підрозділ;
-			copy.Папка = Папка;
-			copy.НалаштуванняАдресногоЗберігання = НалаштуванняАдресногоЗберігання;
-			
-			return copy;
+            copy.Код = Код;
+            copy.ТипСкладу = ТипСкладу;
+            copy.Відповідальний = Відповідальний;
+            copy.ВидЦін = ВидЦін;
+            copy.Підрозділ = Підрозділ;
+            copy.Папка = Папка;
+            copy.НалаштуванняАдресногоЗберігання = НалаштуванняАдресногоЗберігання;
+            
+            return copy;
         }
 
         public void Delete()
         {
             
-			base.BaseDelete(new string[] { "tab_a11" });
+            base.BaseDelete(new string[] { "tab_a11" });
         }
         
         public Склади_Pointer GetDirectoryPointer()
@@ -3390,17 +3419,19 @@ namespace StorageAndTrade_1_0.Довідники
             Склади_Objest СкладиObjestItem = new Склади_Objest();
             return СкладиObjestItem.Read(base.UnigueID) ? СкладиObjestItem : null;
         }
-		
+
         public Склади_Pointer GetNewDirectoryPointer()
         {
             return new Склади_Pointer(base.UnigueID);
         }
-		
-		public string GetPresentation()
+
+        public string Presentation { get; set; } = "";
+
+        public string GetPresentation()
         {
-		    return base.BasePresentation(
-			    new string[] { "col_d9" }
-			);
+            return Presentation = base.BasePresentation(
+              new string[] { "col_d9" }
+            );
         }
 		
         public Склади_Pointer GetEmptyPointer()
@@ -3587,29 +3618,29 @@ namespace StorageAndTrade_1_0.Довідники
         
         public void Save()
         {
-		    base.FieldValue["col_e9"] = Назва;
+            base.FieldValue["col_e9"] = Назва;
             base.FieldValue["col_f1"] = Код;
             base.FieldValue["col_f2"] = Валюта.UnigueID.UGuid;
             
             BaseSave();
-			
+            
         }
-		
+
         public ВидиЦін_Objest Copy()
         {
             ВидиЦін_Objest copy = new ВидиЦін_Objest();
-			copy.New();
+            copy.New();
             copy.Назва = Назва;
-			copy.Код = Код;
-			copy.Валюта = Валюта;
-			
-			return copy;
+            copy.Код = Код;
+            copy.Валюта = Валюта;
+            
+            return copy;
         }
 
         public void Delete()
         {
             
-			base.BaseDelete(new string[] {  });
+            base.BaseDelete(new string[] {  });
         }
         
         public ВидиЦін_Pointer GetDirectoryPointer()
@@ -3643,17 +3674,19 @@ namespace StorageAndTrade_1_0.Довідники
             ВидиЦін_Objest ВидиЦінObjestItem = new ВидиЦін_Objest();
             return ВидиЦінObjestItem.Read(base.UnigueID) ? ВидиЦінObjestItem : null;
         }
-		
+
         public ВидиЦін_Pointer GetNewDirectoryPointer()
         {
             return new ВидиЦін_Pointer(base.UnigueID);
         }
-		
-		public string GetPresentation()
+
+        public string Presentation { get; set; } = "";
+
+        public string GetPresentation()
         {
-		    return base.BasePresentation(
-			    new string[] { "col_e9" }
-			);
+            return Presentation = base.BasePresentation(
+              new string[] { "col_e9" }
+            );
         }
 		
         public ВидиЦін_Pointer GetEmptyPointer()
@@ -3733,29 +3766,29 @@ namespace StorageAndTrade_1_0.Довідники
         
         public void Save()
         {
-		    base.FieldValue["col_f3"] = Назва;
+            base.FieldValue["col_f3"] = Назва;
             base.FieldValue["col_f4"] = Код;
             base.FieldValue["col_f5"] = Валюта.UnigueID.UGuid;
             
             BaseSave();
-			
+            
         }
-		
+
         public ВидиЦінПостачальників_Objest Copy()
         {
             ВидиЦінПостачальників_Objest copy = new ВидиЦінПостачальників_Objest();
-			copy.New();
+            copy.New();
             copy.Назва = Назва;
-			copy.Код = Код;
-			copy.Валюта = Валюта;
-			
-			return copy;
+            copy.Код = Код;
+            copy.Валюта = Валюта;
+            
+            return copy;
         }
 
         public void Delete()
         {
             
-			base.BaseDelete(new string[] {  });
+            base.BaseDelete(new string[] {  });
         }
         
         public ВидиЦінПостачальників_Pointer GetDirectoryPointer()
@@ -3789,17 +3822,19 @@ namespace StorageAndTrade_1_0.Довідники
             ВидиЦінПостачальників_Objest ВидиЦінПостачальниківObjestItem = new ВидиЦінПостачальників_Objest();
             return ВидиЦінПостачальниківObjestItem.Read(base.UnigueID) ? ВидиЦінПостачальниківObjestItem : null;
         }
-		
+
         public ВидиЦінПостачальників_Pointer GetNewDirectoryPointer()
         {
             return new ВидиЦінПостачальників_Pointer(base.UnigueID);
         }
-		
-		public string GetPresentation()
+
+        public string Presentation { get; set; } = "";
+
+        public string GetPresentation()
         {
-		    return base.BasePresentation(
-			    new string[] { "col_f3" }
-			);
+            return Presentation = base.BasePresentation(
+              new string[] { "col_f3" }
+            );
         }
 		
         public ВидиЦінПостачальників_Pointer GetEmptyPointer()
@@ -3885,31 +3920,31 @@ namespace StorageAndTrade_1_0.Довідники
         
         public void Save()
         {
-		    base.FieldValue["col_f6"] = Назва;
+            base.FieldValue["col_f6"] = Назва;
             base.FieldValue["col_f7"] = Код;
             base.FieldValue["col_a1"] = ФізичнаОсоба.UnigueID.UGuid;
             base.FieldValue["col_g6"] = Коментар;
             
             BaseSave();
-			
+            
         }
-		
+
         public Користувачі_Objest Copy()
         {
             Користувачі_Objest copy = new Користувачі_Objest();
-			copy.New();
+            copy.New();
             copy.Назва = Назва;
-			copy.Код = Код;
-			copy.ФізичнаОсоба = ФізичнаОсоба;
-			copy.Коментар = Коментар;
-			
-			return copy;
+            copy.Код = Код;
+            copy.ФізичнаОсоба = ФізичнаОсоба;
+            copy.Коментар = Коментар;
+            
+            return copy;
         }
 
         public void Delete()
         {
             
-			base.BaseDelete(new string[] { "tab_a15" });
+            base.BaseDelete(new string[] { "tab_a15" });
         }
         
         public Користувачі_Pointer GetDirectoryPointer()
@@ -3947,17 +3982,19 @@ namespace StorageAndTrade_1_0.Довідники
             Користувачі_Objest КористувачіObjestItem = new Користувачі_Objest();
             return КористувачіObjestItem.Read(base.UnigueID) ? КористувачіObjestItem : null;
         }
-		
+
         public Користувачі_Pointer GetNewDirectoryPointer()
         {
             return new Користувачі_Pointer(base.UnigueID);
         }
-		
-		public string GetPresentation()
+
+        public string Presentation { get; set; } = "";
+
+        public string GetPresentation()
         {
-		    return base.BasePresentation(
-			    new string[] { "col_f6" }
-			);
+            return Presentation = base.BasePresentation(
+              new string[] { "col_f6" }
+            );
         }
 		
         public Користувачі_Pointer GetEmptyPointer()
@@ -4148,33 +4185,33 @@ namespace StorageAndTrade_1_0.Довідники
         
         public void Save()
         {
-		    base.FieldValue["col_g7"] = Назва;
+            base.FieldValue["col_g7"] = Назва;
             base.FieldValue["col_g8"] = Код;
             base.FieldValue["col_g9"] = ДатаНародження;
             base.FieldValue["col_a1"] = (int)Стать;
             base.FieldValue["col_a2"] = ІПН;
             
             BaseSave();
-			
+            
         }
-		
+
         public ФізичніОсоби_Objest Copy()
         {
             ФізичніОсоби_Objest copy = new ФізичніОсоби_Objest();
-			copy.New();
+            copy.New();
             copy.Назва = Назва;
-			copy.Код = Код;
-			copy.ДатаНародження = ДатаНародження;
-			copy.Стать = Стать;
-			copy.ІПН = ІПН;
-			
-			return copy;
+            copy.Код = Код;
+            copy.ДатаНародження = ДатаНародження;
+            copy.Стать = Стать;
+            copy.ІПН = ІПН;
+            
+            return copy;
         }
 
         public void Delete()
         {
             
-			base.BaseDelete(new string[] { "tab_a17" });
+            base.BaseDelete(new string[] { "tab_a17" });
         }
         
         public ФізичніОсоби_Pointer GetDirectoryPointer()
@@ -4213,17 +4250,19 @@ namespace StorageAndTrade_1_0.Довідники
             ФізичніОсоби_Objest ФізичніОсобиObjestItem = new ФізичніОсоби_Objest();
             return ФізичніОсобиObjestItem.Read(base.UnigueID) ? ФізичніОсобиObjestItem : null;
         }
-		
+
         public ФізичніОсоби_Pointer GetNewDirectoryPointer()
         {
             return new ФізичніОсоби_Pointer(base.UnigueID);
         }
-		
-		public string GetPresentation()
+
+        public string Presentation { get; set; } = "";
+
+        public string GetPresentation()
         {
-		    return base.BasePresentation(
-			    new string[] { "col_g7" }
-			);
+            return Presentation = base.BasePresentation(
+              new string[] { "col_g7" }
+            );
         }
 		
         public ФізичніОсоби_Pointer GetEmptyPointer()
@@ -4405,29 +4444,29 @@ namespace StorageAndTrade_1_0.Довідники
         
         public void Save()
         {
-		    base.FieldValue["col_h8"] = Назва;
+            base.FieldValue["col_h8"] = Назва;
             base.FieldValue["col_h9"] = Код;
             base.FieldValue["col_i1"] = Керівник.UnigueID.UGuid;
             
             BaseSave();
-			
+            
         }
-		
+
         public СтруктураПідприємства_Objest Copy()
         {
             СтруктураПідприємства_Objest copy = new СтруктураПідприємства_Objest();
-			copy.New();
+            copy.New();
             copy.Назва = Назва;
-			copy.Код = Код;
-			copy.Керівник = Керівник;
-			
-			return copy;
+            copy.Код = Код;
+            copy.Керівник = Керівник;
+            
+            return copy;
         }
 
         public void Delete()
         {
             
-			base.BaseDelete(new string[] {  });
+            base.BaseDelete(new string[] {  });
         }
         
         public СтруктураПідприємства_Pointer GetDirectoryPointer()
@@ -4461,17 +4500,19 @@ namespace StorageAndTrade_1_0.Довідники
             СтруктураПідприємства_Objest СтруктураПідприємстваObjestItem = new СтруктураПідприємства_Objest();
             return СтруктураПідприємстваObjestItem.Read(base.UnigueID) ? СтруктураПідприємстваObjestItem : null;
         }
-		
+
         public СтруктураПідприємства_Pointer GetNewDirectoryPointer()
         {
             return new СтруктураПідприємства_Pointer(base.UnigueID);
         }
-		
-		public string GetPresentation()
+
+        public string Presentation { get; set; } = "";
+
+        public string GetPresentation()
         {
-		    return base.BasePresentation(
-			    new string[] { "col_h8" }
-			);
+            return Presentation = base.BasePresentation(
+              new string[] { "col_h8" }
+            );
         }
 		
         public СтруктураПідприємства_Pointer GetEmptyPointer()
@@ -4551,29 +4592,29 @@ namespace StorageAndTrade_1_0.Довідники
         
         public void Save()
         {
-		    base.FieldValue["col_i2"] = Назва;
+            base.FieldValue["col_i2"] = Назва;
             base.FieldValue["col_i3"] = Код;
             base.FieldValue["col_i4"] = НазваПовна;
             
             BaseSave();
-			
+            
         }
-		
+
         public КраїниСвіту_Objest Copy()
         {
             КраїниСвіту_Objest copy = new КраїниСвіту_Objest();
-			copy.New();
+            copy.New();
             copy.Назва = Назва;
-			copy.Код = Код;
-			copy.НазваПовна = НазваПовна;
-			
-			return copy;
+            copy.Код = Код;
+            copy.НазваПовна = НазваПовна;
+            
+            return copy;
         }
 
         public void Delete()
         {
             
-			base.BaseDelete(new string[] {  });
+            base.BaseDelete(new string[] {  });
         }
         
         public КраїниСвіту_Pointer GetDirectoryPointer()
@@ -4607,17 +4648,19 @@ namespace StorageAndTrade_1_0.Довідники
             КраїниСвіту_Objest КраїниСвітуObjestItem = new КраїниСвіту_Objest();
             return КраїниСвітуObjestItem.Read(base.UnigueID) ? КраїниСвітуObjestItem : null;
         }
-		
+
         public КраїниСвіту_Pointer GetNewDirectoryPointer()
         {
             return new КраїниСвіту_Pointer(base.UnigueID);
         }
-		
-		public string GetPresentation()
+
+        public string Presentation { get; set; } = "";
+
+        public string GetPresentation()
         {
-		    return base.BasePresentation(
-			    new string[] { "col_i2" }
-			);
+            return Presentation = base.BasePresentation(
+              new string[] { "col_i2" }
+            );
         }
 		
         public КраїниСвіту_Pointer GetEmptyPointer()
@@ -4706,7 +4749,7 @@ namespace StorageAndTrade_1_0.Довідники
         
         public void Save()
         {
-		    base.FieldValue["col_i6"] = Код;
+            base.FieldValue["col_i6"] = Код;
             base.FieldValue["col_i5"] = Назва;
             base.FieldValue["col_a2"] = НазваФайлу;
             base.FieldValue["col_a1"] = БінарніДані;
@@ -4714,27 +4757,27 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_a4"] = ДатаСтворення;
             
             BaseSave();
-			
+            
         }
-		
+
         public Файли_Objest Copy()
         {
             Файли_Objest copy = new Файли_Objest();
-			copy.New();
+            copy.New();
             copy.Код = Код;
-			copy.Назва = Назва;
-			copy.НазваФайлу = НазваФайлу;
-			copy.БінарніДані = БінарніДані;
-			copy.Розмір = Розмір;
-			copy.ДатаСтворення = ДатаСтворення;
-			
-			return copy;
+            copy.Назва = Назва;
+            copy.НазваФайлу = НазваФайлу;
+            copy.БінарніДані = БінарніДані;
+            copy.Розмір = Розмір;
+            copy.ДатаСтворення = ДатаСтворення;
+            
+            return copy;
         }
 
         public void Delete()
         {
             
-			base.BaseDelete(new string[] {  });
+            base.BaseDelete(new string[] {  });
         }
         
         public Файли_Pointer GetDirectoryPointer()
@@ -4771,17 +4814,19 @@ namespace StorageAndTrade_1_0.Довідники
             Файли_Objest ФайлиObjestItem = new Файли_Objest();
             return ФайлиObjestItem.Read(base.UnigueID) ? ФайлиObjestItem : null;
         }
-		
+
         public Файли_Pointer GetNewDirectoryPointer()
         {
             return new Файли_Pointer(base.UnigueID);
         }
-		
-		public string GetPresentation()
+
+        public string Presentation { get; set; } = "";
+
+        public string GetPresentation()
         {
-		    return base.BasePresentation(
-			    new string[] { "col_i5" }
-			);
+            return Presentation = base.BasePresentation(
+              new string[] { "col_i5" }
+            );
         }
 		
         public Файли_Pointer GetEmptyPointer()
@@ -4864,31 +4909,31 @@ namespace StorageAndTrade_1_0.Довідники
         
         public void Save()
         {
-		    base.FieldValue["col_i7"] = Назва;
+            base.FieldValue["col_i7"] = Назва;
             base.FieldValue["col_i8"] = Код;
             base.FieldValue["col_i9"] = НазваПовна;
             base.FieldValue["col_a1"] = Номенклатура.UnigueID.UGuid;
             
             BaseSave();
-			
+            
         }
-		
+
         public ХарактеристикиНоменклатури_Objest Copy()
         {
             ХарактеристикиНоменклатури_Objest copy = new ХарактеристикиНоменклатури_Objest();
-			copy.New();
+            copy.New();
             copy.Назва = Назва;
-			copy.Код = Код;
-			copy.НазваПовна = НазваПовна;
-			copy.Номенклатура = Номенклатура;
-			
-			return copy;
+            copy.Код = Код;
+            copy.НазваПовна = НазваПовна;
+            copy.Номенклатура = Номенклатура;
+            
+            return copy;
         }
 
         public void Delete()
         {
             
-			base.BaseDelete(new string[] {  });
+            base.BaseDelete(new string[] {  });
         }
         
         public ХарактеристикиНоменклатури_Pointer GetDirectoryPointer()
@@ -4923,17 +4968,19 @@ namespace StorageAndTrade_1_0.Довідники
             ХарактеристикиНоменклатури_Objest ХарактеристикиНоменклатуриObjestItem = new ХарактеристикиНоменклатури_Objest();
             return ХарактеристикиНоменклатуриObjestItem.Read(base.UnigueID) ? ХарактеристикиНоменклатуриObjestItem : null;
         }
-		
+
         public ХарактеристикиНоменклатури_Pointer GetNewDirectoryPointer()
         {
             return new ХарактеристикиНоменклатури_Pointer(base.UnigueID);
         }
-		
-		public string GetPresentation()
+
+        public string Presentation { get; set; } = "";
+
+        public string GetPresentation()
         {
-		    return base.BasePresentation(
-			    new string[] { "col_i7" }
-			);
+            return Presentation = base.BasePresentation(
+              new string[] { "col_i7" }
+            );
         }
 		
         public ХарактеристикиНоменклатури_Pointer GetEmptyPointer()
@@ -5013,29 +5060,29 @@ namespace StorageAndTrade_1_0.Довідники
         
         public void Save()
         {
-		    base.FieldValue["col_j1"] = Назва;
+            base.FieldValue["col_j1"] = Назва;
             base.FieldValue["col_j2"] = Код;
             base.FieldValue["col_j3"] = Родич.UnigueID.UGuid;
             
             BaseSave();
-			
+            
         }
-		
+
         public Номенклатура_Папки_Objest Copy()
         {
             Номенклатура_Папки_Objest copy = new Номенклатура_Папки_Objest();
-			copy.New();
+            copy.New();
             copy.Назва = Назва;
-			copy.Код = Код;
-			copy.Родич = Родич;
-			
-			return copy;
+            copy.Код = Код;
+            copy.Родич = Родич;
+            
+            return copy;
         }
 
         public void Delete()
         {
             
-			base.BaseDelete(new string[] {  });
+            base.BaseDelete(new string[] {  });
         }
         
         public Номенклатура_Папки_Pointer GetDirectoryPointer()
@@ -5069,17 +5116,19 @@ namespace StorageAndTrade_1_0.Довідники
             Номенклатура_Папки_Objest Номенклатура_ПапкиObjestItem = new Номенклатура_Папки_Objest();
             return Номенклатура_ПапкиObjestItem.Read(base.UnigueID) ? Номенклатура_ПапкиObjestItem : null;
         }
-		
+
         public Номенклатура_Папки_Pointer GetNewDirectoryPointer()
         {
             return new Номенклатура_Папки_Pointer(base.UnigueID);
         }
-		
-		public string GetPresentation()
+
+        public string Presentation { get; set; } = "";
+
+        public string GetPresentation()
         {
-		    return base.BasePresentation(
-			    new string[] { "col_j1" }
-			);
+            return Presentation = base.BasePresentation(
+              new string[] { "col_j1" }
+            );
         }
 		
         public Номенклатура_Папки_Pointer GetEmptyPointer()
@@ -5159,29 +5208,29 @@ namespace StorageAndTrade_1_0.Довідники
         
         public void Save()
         {
-		    base.FieldValue["col_j4"] = Назва;
+            base.FieldValue["col_j4"] = Назва;
             base.FieldValue["col_j5"] = Код;
             base.FieldValue["col_j6"] = Родич.UnigueID.UGuid;
             
             BaseSave();
-			Контрагенти_Папки_Triggers.AfterRecording(this);
+            Контрагенти_Папки_Triggers.AfterRecording(this);
         }
-		
+
         public Контрагенти_Папки_Objest Copy()
         {
             Контрагенти_Папки_Objest copy = new Контрагенти_Папки_Objest();
-			copy.New();
+            copy.New();
             copy.Назва = Назва;
-			copy.Код = Код;
-			copy.Родич = Родич;
-			
-			return copy;
+            copy.Код = Код;
+            copy.Родич = Родич;
+            
+            return copy;
         }
 
         public void Delete()
         {
             Контрагенти_Папки_Triggers.BeforeDelete(this);
-			base.BaseDelete(new string[] {  });
+            base.BaseDelete(new string[] {  });
         }
         
         public Контрагенти_Папки_Pointer GetDirectoryPointer()
@@ -5215,17 +5264,19 @@ namespace StorageAndTrade_1_0.Довідники
             Контрагенти_Папки_Objest Контрагенти_ПапкиObjestItem = new Контрагенти_Папки_Objest();
             return Контрагенти_ПапкиObjestItem.Read(base.UnigueID) ? Контрагенти_ПапкиObjestItem : null;
         }
-		
+
         public Контрагенти_Папки_Pointer GetNewDirectoryPointer()
         {
             return new Контрагенти_Папки_Pointer(base.UnigueID);
         }
-		
-		public string GetPresentation()
+
+        public string Presentation { get; set; } = "";
+
+        public string GetPresentation()
         {
-		    return base.BasePresentation(
-			    new string[] { "col_j4" }
-			);
+            return Presentation = base.BasePresentation(
+              new string[] { "col_j4" }
+            );
         }
 		
         public Контрагенти_Папки_Pointer GetEmptyPointer()
@@ -5305,29 +5356,29 @@ namespace StorageAndTrade_1_0.Довідники
         
         public void Save()
         {
-		    base.FieldValue["col_j7"] = Назва;
+            base.FieldValue["col_j7"] = Назва;
             base.FieldValue["col_j8"] = Код;
             base.FieldValue["col_a1"] = Родич.UnigueID.UGuid;
             
             BaseSave();
-			
+            
         }
-		
+
         public Склади_Папки_Objest Copy()
         {
             Склади_Папки_Objest copy = new Склади_Папки_Objest();
-			copy.New();
+            copy.New();
             copy.Назва = Назва;
-			copy.Код = Код;
-			copy.Родич = Родич;
-			
-			return copy;
+            copy.Код = Код;
+            copy.Родич = Родич;
+            
+            return copy;
         }
 
         public void Delete()
         {
             Склади_Папки_Triggers.BeforeDelete(this);
-			base.BaseDelete(new string[] {  });
+            base.BaseDelete(new string[] {  });
         }
         
         public Склади_Папки_Pointer GetDirectoryPointer()
@@ -5361,17 +5412,19 @@ namespace StorageAndTrade_1_0.Довідники
             Склади_Папки_Objest Склади_ПапкиObjestItem = new Склади_Папки_Objest();
             return Склади_ПапкиObjestItem.Read(base.UnigueID) ? Склади_ПапкиObjestItem : null;
         }
-		
+
         public Склади_Папки_Pointer GetNewDirectoryPointer()
         {
             return new Склади_Папки_Pointer(base.UnigueID);
         }
-		
-		public string GetPresentation()
+
+        public string Presentation { get; set; } = "";
+
+        public string GetPresentation()
         {
-		    return base.BasePresentation(
-			    new string[] { "col_j7" }
-			);
+            return Presentation = base.BasePresentation(
+              new string[] { "col_j7" }
+            );
         }
 		
         public Склади_Папки_Pointer GetEmptyPointer()
@@ -5454,31 +5507,31 @@ namespace StorageAndTrade_1_0.Довідники
         
         public void Save()
         {
-		    base.FieldValue["col_k8"] = Назва;
+            base.FieldValue["col_k8"] = Назва;
             base.FieldValue["col_k9"] = Код;
             base.FieldValue["col_a2"] = Валюта.UnigueID.UGuid;
             base.FieldValue["col_a1"] = Підрозділ.UnigueID.UGuid;
             
             BaseSave();
-			
+            
         }
-		
+
         public Каси_Objest Copy()
         {
             Каси_Objest copy = new Каси_Objest();
-			copy.New();
+            copy.New();
             copy.Назва = Назва;
-			copy.Код = Код;
-			copy.Валюта = Валюта;
-			copy.Підрозділ = Підрозділ;
-			
-			return copy;
+            copy.Код = Код;
+            copy.Валюта = Валюта;
+            copy.Підрозділ = Підрозділ;
+            
+            return copy;
         }
 
         public void Delete()
         {
             
-			base.BaseDelete(new string[] {  });
+            base.BaseDelete(new string[] {  });
         }
         
         public Каси_Pointer GetDirectoryPointer()
@@ -5513,17 +5566,19 @@ namespace StorageAndTrade_1_0.Довідники
             Каси_Objest КасиObjestItem = new Каси_Objest();
             return КасиObjestItem.Read(base.UnigueID) ? КасиObjestItem : null;
         }
-		
+
         public Каси_Pointer GetNewDirectoryPointer()
         {
             return new Каси_Pointer(base.UnigueID);
         }
-		
-		public string GetPresentation()
+
+        public string Presentation { get; set; } = "";
+
+        public string GetPresentation()
         {
-		    return base.BasePresentation(
-			    new string[] { "col_k8" }
-			);
+            return Presentation = base.BasePresentation(
+              new string[] { "col_k8" }
+            );
         }
 		
         public Каси_Pointer GetEmptyPointer()
@@ -5633,7 +5688,7 @@ namespace StorageAndTrade_1_0.Довідники
         
         public void Save()
         {
-		    base.FieldValue["col_l1"] = Назва;
+            base.FieldValue["col_l1"] = Назва;
             base.FieldValue["col_l2"] = Код;
             base.FieldValue["col_l3"] = Валюта.UnigueID.UGuid;
             base.FieldValue["col_l4"] = Банк;
@@ -5648,34 +5703,34 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_a1"] = Організація.UnigueID.UGuid;
             
             BaseSave();
-			
+            
         }
-		
+
         public БанківськіРахункиОрганізацій_Objest Copy()
         {
             БанківськіРахункиОрганізацій_Objest copy = new БанківськіРахункиОрганізацій_Objest();
-			copy.New();
+            copy.New();
             copy.Назва = Назва;
-			copy.Код = Код;
-			copy.Валюта = Валюта;
-			copy.Банк = Банк;
-			copy.Підрозділ = Підрозділ;
-			copy.НазваБанку = НазваБанку;
-			copy.НомерРахунку = НомерРахунку;
-			copy.АдресаБанку = АдресаБанку;
-			copy.МістоБанку = МістоБанку;
-			copy.КореспонденськийРахунокБанку = КореспонденськийРахунокБанку;
-			copy.ТелефониБанку = ТелефониБанку;
-			copy.Закритий = Закритий;
-			copy.Організація = Організація;
-			
-			return copy;
+            copy.Код = Код;
+            copy.Валюта = Валюта;
+            copy.Банк = Банк;
+            copy.Підрозділ = Підрозділ;
+            copy.НазваБанку = НазваБанку;
+            copy.НомерРахунку = НомерРахунку;
+            copy.АдресаБанку = АдресаБанку;
+            copy.МістоБанку = МістоБанку;
+            copy.КореспонденськийРахунокБанку = КореспонденськийРахунокБанку;
+            copy.ТелефониБанку = ТелефониБанку;
+            copy.Закритий = Закритий;
+            copy.Організація = Організація;
+            
+            return copy;
         }
 
         public void Delete()
         {
             
-			base.BaseDelete(new string[] {  });
+            base.BaseDelete(new string[] {  });
         }
         
         public БанківськіРахункиОрганізацій_Pointer GetDirectoryPointer()
@@ -5719,17 +5774,19 @@ namespace StorageAndTrade_1_0.Довідники
             БанківськіРахункиОрганізацій_Objest БанківськіРахункиОрганізаційObjestItem = new БанківськіРахункиОрганізацій_Objest();
             return БанківськіРахункиОрганізаційObjestItem.Read(base.UnigueID) ? БанківськіРахункиОрганізаційObjestItem : null;
         }
-		
+
         public БанківськіРахункиОрганізацій_Pointer GetNewDirectoryPointer()
         {
             return new БанківськіРахункиОрганізацій_Pointer(base.UnigueID);
         }
-		
-		public string GetPresentation()
+
+        public string Presentation { get; set; } = "";
+
+        public string GetPresentation()
         {
-		    return base.BasePresentation(
-			    new string[] { "col_l1" }
-			);
+            return Presentation = base.BasePresentation(
+              new string[] { "col_l1" }
+            );
         }
 		
         public БанківськіРахункиОрганізацій_Pointer GetEmptyPointer()
@@ -5860,8 +5917,8 @@ namespace StorageAndTrade_1_0.Довідники
         
         public void Save()
         {
-		    ДоговориКонтрагентів_Triggers.BeforeRecording(this);
-			base.FieldValue["col_n4"] = Назва;
+            ДоговориКонтрагентів_Triggers.BeforeRecording(this);
+            base.FieldValue["col_n4"] = Назва;
             base.FieldValue["col_n5"] = Код;
             base.FieldValue["col_n6"] = БанківськийРахунок.UnigueID.UGuid;
             base.FieldValue["col_a1"] = БанківськийРахунокКонтрагента.UnigueID.UGuid;
@@ -5883,41 +5940,41 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_a3"] = Коментар;
             
             BaseSave();
-			ДоговориКонтрагентів_Triggers.AfterRecording(this);
+            ДоговориКонтрагентів_Triggers.AfterRecording(this);
         }
-		
+
         public ДоговориКонтрагентів_Objest Copy()
         {
             ДоговориКонтрагентів_Objest copy = new ДоговориКонтрагентів_Objest();
-			copy.New();
+            copy.New();
             copy.Назва = Назва;
-			copy.Код = Код;
-			copy.БанківськийРахунок = БанківськийРахунок;
-			copy.БанківськийРахунокКонтрагента = БанківськийРахунокКонтрагента;
-			copy.ВалютаВзаєморозрахунків = ВалютаВзаєморозрахунків;
-			copy.ДатаПочаткуДії = ДатаПочаткуДії;
-			copy.ДатаЗакінченняДії = ДатаЗакінченняДії;
-			copy.Організація = Організація;
-			copy.Контрагент = Контрагент;
-			copy.Дата = Дата;
-			copy.Номер = Номер;
-			copy.Підрозділ = Підрозділ;
-			copy.Узгоджений = Узгоджений;
-			copy.Статус = Статус;
-			copy.ГосподарськаОперація = ГосподарськаОперація;
-			copy.ТипДоговору = ТипДоговору;
-			copy.ТипДоговоруПредставлення = ТипДоговоруПредставлення;
-			copy.ДопустимаСумаЗаборгованості = ДопустимаСумаЗаборгованості;
-			copy.Сума = Сума;
-			copy.Коментар = Коментар;
-			
-			return copy;
+            copy.Код = Код;
+            copy.БанківськийРахунок = БанківськийРахунок;
+            copy.БанківськийРахунокКонтрагента = БанківськийРахунокКонтрагента;
+            copy.ВалютаВзаєморозрахунків = ВалютаВзаєморозрахунків;
+            copy.ДатаПочаткуДії = ДатаПочаткуДії;
+            copy.ДатаЗакінченняДії = ДатаЗакінченняДії;
+            copy.Організація = Організація;
+            copy.Контрагент = Контрагент;
+            copy.Дата = Дата;
+            copy.Номер = Номер;
+            copy.Підрозділ = Підрозділ;
+            copy.Узгоджений = Узгоджений;
+            copy.Статус = Статус;
+            copy.ГосподарськаОперація = ГосподарськаОперація;
+            copy.ТипДоговору = ТипДоговору;
+            copy.ТипДоговоруПредставлення = ТипДоговоруПредставлення;
+            copy.ДопустимаСумаЗаборгованості = ДопустимаСумаЗаборгованості;
+            copy.Сума = Сума;
+            copy.Коментар = Коментар;
+            
+            return copy;
         }
 
         public void Delete()
         {
             ДоговориКонтрагентів_Triggers.BeforeDelete(this);
-			base.BaseDelete(new string[] {  });
+            base.BaseDelete(new string[] {  });
         }
         
         public ДоговориКонтрагентів_Pointer GetDirectoryPointer()
@@ -5968,17 +6025,19 @@ namespace StorageAndTrade_1_0.Довідники
             ДоговориКонтрагентів_Objest ДоговориКонтрагентівObjestItem = new ДоговориКонтрагентів_Objest();
             return ДоговориКонтрагентівObjestItem.Read(base.UnigueID) ? ДоговориКонтрагентівObjestItem : null;
         }
-		
+
         public ДоговориКонтрагентів_Pointer GetNewDirectoryPointer()
         {
             return new ДоговориКонтрагентів_Pointer(base.UnigueID);
         }
-		
-		public string GetPresentation()
+
+        public string Presentation { get; set; } = "";
+
+        public string GetPresentation()
         {
-		    return base.BasePresentation(
-			    new string[] { "col_n4", "col_b8" }
-			);
+            return Presentation = base.BasePresentation(
+              new string[] { "col_n4", "col_b8" }
+            );
         }
 		
         public ДоговориКонтрагентів_Pointer GetEmptyPointer()
@@ -6094,7 +6153,7 @@ namespace StorageAndTrade_1_0.Довідники
         
         public void Save()
         {
-		    base.FieldValue["col_n7"] = Назва;
+            base.FieldValue["col_n7"] = Назва;
             base.FieldValue["col_n8"] = Код;
             base.FieldValue["col_n9"] = НомерРахунку;
             base.FieldValue["col_m1"] = Банк;
@@ -6111,36 +6170,36 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_o3"] = Контрагент.UnigueID.UGuid;
             
             BaseSave();
-			
+            
         }
-		
+
         public БанківськіРахункиКонтрагентів_Objest Copy()
         {
             БанківськіРахункиКонтрагентів_Objest copy = new БанківськіРахункиКонтрагентів_Objest();
-			copy.New();
+            copy.New();
             copy.Назва = Назва;
-			copy.Код = Код;
-			copy.НомерРахунку = НомерРахунку;
-			copy.Банк = Банк;
-			copy.БанкДляРозрахунків = БанкДляРозрахунків;
-			copy.ТекстКореспондента = ТекстКореспондента;
-			copy.ТекстПризначення = ТекстПризначення;
-			copy.Валюта = Валюта;
-			copy.НазваБанку = НазваБанку;
-			copy.КорРахунокБанку = КорРахунокБанку;
-			copy.МістоБанку = МістоБанку;
-			copy.АдресаБанку = АдресаБанку;
-			copy.ТелефониБанку = ТелефониБанку;
-			copy.Закрито = Закрито;
-			copy.Контрагент = Контрагент;
-			
-			return copy;
+            copy.Код = Код;
+            copy.НомерРахунку = НомерРахунку;
+            copy.Банк = Банк;
+            copy.БанкДляРозрахунків = БанкДляРозрахунків;
+            copy.ТекстКореспондента = ТекстКореспондента;
+            copy.ТекстПризначення = ТекстПризначення;
+            copy.Валюта = Валюта;
+            copy.НазваБанку = НазваБанку;
+            copy.КорРахунокБанку = КорРахунокБанку;
+            copy.МістоБанку = МістоБанку;
+            copy.АдресаБанку = АдресаБанку;
+            copy.ТелефониБанку = ТелефониБанку;
+            copy.Закрито = Закрито;
+            copy.Контрагент = Контрагент;
+            
+            return copy;
         }
 
         public void Delete()
         {
             
-			base.BaseDelete(new string[] {  });
+            base.BaseDelete(new string[] {  });
         }
         
         public БанківськіРахункиКонтрагентів_Pointer GetDirectoryPointer()
@@ -6186,17 +6245,19 @@ namespace StorageAndTrade_1_0.Довідники
             БанківськіРахункиКонтрагентів_Objest БанківськіРахункиКонтрагентівObjestItem = new БанківськіРахункиКонтрагентів_Objest();
             return БанківськіРахункиКонтрагентівObjestItem.Read(base.UnigueID) ? БанківськіРахункиКонтрагентівObjestItem : null;
         }
-		
+
         public БанківськіРахункиКонтрагентів_Pointer GetNewDirectoryPointer()
         {
             return new БанківськіРахункиКонтрагентів_Pointer(base.UnigueID);
         }
-		
-		public string GetPresentation()
+
+        public string Presentation { get; set; } = "";
+
+        public string GetPresentation()
         {
-		    return base.BasePresentation(
-			    new string[] { "col_n7" }
-			);
+            return Presentation = base.BasePresentation(
+              new string[] { "col_n7" }
+            );
         }
 		
         public БанківськіРахункиКонтрагентів_Pointer GetEmptyPointer()
@@ -6285,33 +6346,33 @@ namespace StorageAndTrade_1_0.Довідники
         
         public void Save()
         {
-		    base.FieldValue["col_i7"] = Назва;
+            base.FieldValue["col_i7"] = Назва;
             base.FieldValue["col_i8"] = Код;
             base.FieldValue["col_i9"] = КореспондуючийРахунок;
             base.FieldValue["col_j2"] = (int)ВидРухуКоштів;
             base.FieldValue["col_j1"] = Опис;
             
             BaseSave();
-			
+            
         }
-		
+
         public СтаттяРухуКоштів_Objest Copy()
         {
             СтаттяРухуКоштів_Objest copy = new СтаттяРухуКоштів_Objest();
-			copy.New();
+            copy.New();
             copy.Назва = Назва;
-			copy.Код = Код;
-			copy.КореспондуючийРахунок = КореспондуючийРахунок;
-			copy.ВидРухуКоштів = ВидРухуКоштів;
-			copy.Опис = Опис;
-			
-			return copy;
+            copy.Код = Код;
+            copy.КореспондуючийРахунок = КореспондуючийРахунок;
+            copy.ВидРухуКоштів = ВидРухуКоштів;
+            copy.Опис = Опис;
+            
+            return copy;
         }
 
         public void Delete()
         {
             
-			base.BaseDelete(new string[] { "tab_a46" });
+            base.BaseDelete(new string[] { "tab_a46" });
         }
         
         public СтаттяРухуКоштів_Pointer GetDirectoryPointer()
@@ -6350,17 +6411,19 @@ namespace StorageAndTrade_1_0.Довідники
             СтаттяРухуКоштів_Objest СтаттяРухуКоштівObjestItem = new СтаттяРухуКоштів_Objest();
             return СтаттяРухуКоштівObjestItem.Read(base.UnigueID) ? СтаттяРухуКоштівObjestItem : null;
         }
-		
+
         public СтаттяРухуКоштів_Pointer GetNewDirectoryPointer()
         {
             return new СтаттяРухуКоштів_Pointer(base.UnigueID);
         }
-		
-		public string GetPresentation()
+
+        public string Presentation { get; set; } = "";
+
+        public string GetPresentation()
         {
-		    return base.BasePresentation(
-			    new string[] { "col_i7" }
-			);
+            return Presentation = base.BasePresentation(
+              new string[] { "col_i7" }
+            );
         }
 		
         public СтаттяРухуКоштів_Pointer GetEmptyPointer()
@@ -6512,30 +6575,30 @@ namespace StorageAndTrade_1_0.Довідники
         
         public void Save()
         {
-		    СеріїНоменклатури_Triggers.BeforeRecording(this);
-			base.FieldValue["col_a3"] = Номер;
+            СеріїНоменклатури_Triggers.BeforeRecording(this);
+            base.FieldValue["col_a3"] = Номер;
             base.FieldValue["col_a1"] = Коментар;
             base.FieldValue["col_a2"] = ДатаСтворення;
             
             BaseSave();
-			СеріїНоменклатури_Triggers.AfterRecording(this);
+            СеріїНоменклатури_Triggers.AfterRecording(this);
         }
-		
+
         public СеріїНоменклатури_Objest Copy()
         {
             СеріїНоменклатури_Objest copy = new СеріїНоменклатури_Objest();
-			copy.New();
+            copy.New();
             copy.Номер = Номер;
-			copy.Коментар = Коментар;
-			copy.ДатаСтворення = ДатаСтворення;
-			
-			return copy;
+            copy.Коментар = Коментар;
+            copy.ДатаСтворення = ДатаСтворення;
+            
+            return copy;
         }
 
         public void Delete()
         {
             СеріїНоменклатури_Triggers.BeforeDelete(this);
-			base.BaseDelete(new string[] {  });
+            base.BaseDelete(new string[] {  });
         }
         
         public СеріїНоменклатури_Pointer GetDirectoryPointer()
@@ -6569,17 +6632,19 @@ namespace StorageAndTrade_1_0.Довідники
             СеріїНоменклатури_Objest СеріїНоменклатуриObjestItem = new СеріїНоменклатури_Objest();
             return СеріїНоменклатуриObjestItem.Read(base.UnigueID) ? СеріїНоменклатуриObjestItem : null;
         }
-		
+
         public СеріїНоменклатури_Pointer GetNewDirectoryPointer()
         {
             return new СеріїНоменклатури_Pointer(base.UnigueID);
         }
-		
-		public string GetPresentation()
+
+        public string Presentation { get; set; } = "";
+
+        public string GetPresentation()
         {
-		    return base.BasePresentation(
-			    new string[] { "col_a3" }
-			);
+            return Presentation = base.BasePresentation(
+              new string[] { "col_a3" }
+            );
         }
 		
         public СеріїНоменклатури_Pointer GetEmptyPointer()
@@ -6668,7 +6733,7 @@ namespace StorageAndTrade_1_0.Довідники
         
         public void Save()
         {
-		    base.FieldValue["col_a1"] = Назва;
+            base.FieldValue["col_a1"] = Назва;
             base.FieldValue["col_a2"] = Дата;
             base.FieldValue["col_a3"] = (int)ТипДокументу;
             base.FieldValue["col_a6"] = ДокументКлюч;
@@ -6676,27 +6741,27 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_a5"] = ВведенняЗалишків.UnigueID.UGuid;
             
             BaseSave();
-			
+            
         }
-		
+
         public ПартіяТоварівКомпозит_Objest Copy()
         {
             ПартіяТоварівКомпозит_Objest copy = new ПартіяТоварівКомпозит_Objest();
-			copy.New();
+            copy.New();
             copy.Назва = Назва;
-			copy.Дата = Дата;
-			copy.ТипДокументу = ТипДокументу;
-			copy.ДокументКлюч = ДокументКлюч;
-			copy.ПоступленняТоварівТаПослуг = ПоступленняТоварівТаПослуг;
-			copy.ВведенняЗалишків = ВведенняЗалишків;
-			
-			return copy;
+            copy.Дата = Дата;
+            copy.ТипДокументу = ТипДокументу;
+            copy.ДокументКлюч = ДокументКлюч;
+            copy.ПоступленняТоварівТаПослуг = ПоступленняТоварівТаПослуг;
+            copy.ВведенняЗалишків = ВведенняЗалишків;
+            
+            return copy;
         }
 
         public void Delete()
         {
             
-			base.BaseDelete(new string[] {  });
+            base.BaseDelete(new string[] {  });
         }
         
         public ПартіяТоварівКомпозит_Pointer GetDirectoryPointer()
@@ -6733,17 +6798,19 @@ namespace StorageAndTrade_1_0.Довідники
             ПартіяТоварівКомпозит_Objest ПартіяТоварівКомпозитObjestItem = new ПартіяТоварівКомпозит_Objest();
             return ПартіяТоварівКомпозитObjestItem.Read(base.UnigueID) ? ПартіяТоварівКомпозитObjestItem : null;
         }
-		
+
         public ПартіяТоварівКомпозит_Pointer GetNewDirectoryPointer()
         {
             return new ПартіяТоварівКомпозит_Pointer(base.UnigueID);
         }
-		
-		public string GetPresentation()
+
+        public string Presentation { get; set; } = "";
+
+        public string GetPresentation()
         {
-		    return base.BasePresentation(
-			    new string[] { "col_a1" }
-			);
+            return Presentation = base.BasePresentation(
+              new string[] { "col_a1" }
+            );
         }
 		
         public ПартіяТоварівКомпозит_Pointer GetEmptyPointer()
@@ -6832,7 +6899,7 @@ namespace StorageAndTrade_1_0.Довідники
         
         public void Save()
         {
-		    base.FieldValue["col_a5"] = Назва;
+            base.FieldValue["col_a5"] = Назва;
             base.FieldValue["col_b3"] = Організація.UnigueID.UGuid;
             base.FieldValue["col_a7"] = (int)ТипЗапасів;
             base.FieldValue["col_a9"] = Валюта.UnigueID.UGuid;
@@ -6840,27 +6907,27 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_b2"] = Договір.UnigueID.UGuid;
             
             BaseSave();
-			
+            
         }
-		
+
         public ВидиЗапасів_Objest Copy()
         {
             ВидиЗапасів_Objest copy = new ВидиЗапасів_Objest();
-			copy.New();
+            copy.New();
             copy.Назва = Назва;
-			copy.Організація = Організація;
-			copy.ТипЗапасів = ТипЗапасів;
-			copy.Валюта = Валюта;
-			copy.Контрагент = Контрагент;
-			copy.Договір = Договір;
-			
-			return copy;
+            copy.Організація = Організація;
+            copy.ТипЗапасів = ТипЗапасів;
+            copy.Валюта = Валюта;
+            copy.Контрагент = Контрагент;
+            copy.Договір = Договір;
+            
+            return copy;
         }
 
         public void Delete()
         {
             
-			base.BaseDelete(new string[] {  });
+            base.BaseDelete(new string[] {  });
         }
         
         public ВидиЗапасів_Pointer GetDirectoryPointer()
@@ -6897,17 +6964,19 @@ namespace StorageAndTrade_1_0.Довідники
             ВидиЗапасів_Objest ВидиЗапасівObjestItem = new ВидиЗапасів_Objest();
             return ВидиЗапасівObjestItem.Read(base.UnigueID) ? ВидиЗапасівObjestItem : null;
         }
-		
+
         public ВидиЗапасів_Pointer GetNewDirectoryPointer()
         {
             return new ВидиЗапасів_Pointer(base.UnigueID);
         }
-		
-		public string GetPresentation()
+
+        public string Presentation { get; set; } = "";
+
+        public string GetPresentation()
         {
-		    return base.BasePresentation(
-			    new string[] { "col_a5" }
-			);
+            return Presentation = base.BasePresentation(
+              new string[] { "col_a5" }
+            );
         }
 		
         public ВидиЗапасів_Pointer GetEmptyPointer()
@@ -6996,7 +7065,7 @@ namespace StorageAndTrade_1_0.Довідники
         
         public void Save()
         {
-		    base.FieldValue["col_b4"] = Назва;
+            base.FieldValue["col_b4"] = Назва;
             base.FieldValue["col_b6"] = (int)ТипДокументу;
             base.FieldValue["col_b7"] = ДокументКлюч;
             base.FieldValue["col_b8"] = ЗамовленняКлієнта.UnigueID.UGuid;
@@ -7004,27 +7073,27 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_c1"] = РеалізаціяТоварівТаПослуг.UnigueID.UGuid;
             
             BaseSave();
-			
+            
         }
-		
+
         public ПродажіДокументКомпозит_Objest Copy()
         {
             ПродажіДокументКомпозит_Objest copy = new ПродажіДокументКомпозит_Objest();
-			copy.New();
+            copy.New();
             copy.Назва = Назва;
-			copy.ТипДокументу = ТипДокументу;
-			copy.ДокументКлюч = ДокументКлюч;
-			copy.ЗамовленняКлієнта = ЗамовленняКлієнта;
-			copy.АктВиконанихРобіт = АктВиконанихРобіт;
-			copy.РеалізаціяТоварівТаПослуг = РеалізаціяТоварівТаПослуг;
-			
-			return copy;
+            copy.ТипДокументу = ТипДокументу;
+            copy.ДокументКлюч = ДокументКлюч;
+            copy.ЗамовленняКлієнта = ЗамовленняКлієнта;
+            copy.АктВиконанихРобіт = АктВиконанихРобіт;
+            copy.РеалізаціяТоварівТаПослуг = РеалізаціяТоварівТаПослуг;
+            
+            return copy;
         }
 
         public void Delete()
         {
             
-			base.BaseDelete(new string[] {  });
+            base.BaseDelete(new string[] {  });
         }
         
         public ПродажіДокументКомпозит_Pointer GetDirectoryPointer()
@@ -7061,17 +7130,19 @@ namespace StorageAndTrade_1_0.Довідники
             ПродажіДокументКомпозит_Objest ПродажіДокументКомпозитObjestItem = new ПродажіДокументКомпозит_Objest();
             return ПродажіДокументКомпозитObjestItem.Read(base.UnigueID) ? ПродажіДокументКомпозитObjestItem : null;
         }
-		
+
         public ПродажіДокументКомпозит_Pointer GetNewDirectoryPointer()
         {
             return new ПродажіДокументКомпозит_Pointer(base.UnigueID);
         }
-		
-		public string GetPresentation()
+
+        public string Presentation { get; set; } = "";
+
+        public string GetPresentation()
         {
-		    return base.BasePresentation(
-			    new string[] { "col_b4" }
-			);
+            return Presentation = base.BasePresentation(
+              new string[] { "col_b4" }
+            );
         }
 		
         public ПродажіДокументКомпозит_Pointer GetEmptyPointer()
@@ -7157,33 +7228,33 @@ namespace StorageAndTrade_1_0.Довідники
         
         public void Save()
         {
-		    base.FieldValue["col_a1"] = Назва;
+            base.FieldValue["col_a1"] = Назва;
             base.FieldValue["col_a4"] = Номенклатура.UnigueID.UGuid;
             base.FieldValue["col_a5"] = ХарактеристикаНоменклатури.UnigueID.UGuid;
             base.FieldValue["col_a6"] = Серія.UnigueID.UGuid;
             base.FieldValue["col_a7"] = Склад.UnigueID.UGuid;
             
             BaseSave();
-			
+            
         }
-		
+
         public АналітикаНоменклатуриКомпозит_Objest Copy()
         {
             АналітикаНоменклатуриКомпозит_Objest copy = new АналітикаНоменклатуриКомпозит_Objest();
-			copy.New();
+            copy.New();
             copy.Назва = Назва;
-			copy.Номенклатура = Номенклатура;
-			copy.ХарактеристикаНоменклатури = ХарактеристикаНоменклатури;
-			copy.Серія = Серія;
-			copy.Склад = Склад;
-			
-			return copy;
+            copy.Номенклатура = Номенклатура;
+            copy.ХарактеристикаНоменклатури = ХарактеристикаНоменклатури;
+            copy.Серія = Серія;
+            copy.Склад = Склад;
+            
+            return copy;
         }
 
         public void Delete()
         {
             
-			base.BaseDelete(new string[] {  });
+            base.BaseDelete(new string[] {  });
         }
         
         public АналітикаНоменклатуриКомпозит_Pointer GetDirectoryPointer()
@@ -7219,17 +7290,19 @@ namespace StorageAndTrade_1_0.Довідники
             АналітикаНоменклатуриКомпозит_Objest АналітикаНоменклатуриКомпозитObjestItem = new АналітикаНоменклатуриКомпозит_Objest();
             return АналітикаНоменклатуриКомпозитObjestItem.Read(base.UnigueID) ? АналітикаНоменклатуриКомпозитObjestItem : null;
         }
-		
+
         public АналітикаНоменклатуриКомпозит_Pointer GetNewDirectoryPointer()
         {
             return new АналітикаНоменклатуриКомпозит_Pointer(base.UnigueID);
         }
-		
-		public string GetPresentation()
+
+        public string Presentation { get; set; } = "";
+
+        public string GetPresentation()
         {
-		    return base.BasePresentation(
-			    new string[] { "col_a1" }
-			);
+            return Presentation = base.BasePresentation(
+              new string[] { "col_a1" }
+            );
         }
 		
         public АналітикаНоменклатуриКомпозит_Pointer GetEmptyPointer()
@@ -7312,31 +7385,31 @@ namespace StorageAndTrade_1_0.Довідники
         
         public void Save()
         {
-		    base.FieldValue["col_a8"] = Назва;
+            base.FieldValue["col_a8"] = Назва;
             base.FieldValue["col_b3"] = Організація.UnigueID.UGuid;
             base.FieldValue["col_b1"] = Контрагент.UnigueID.UGuid;
             base.FieldValue["col_b2"] = Договір.UnigueID.UGuid;
             
             BaseSave();
-			
+            
         }
-		
+
         public АналітикаКонтрагентівКомпозит_Objest Copy()
         {
             АналітикаКонтрагентівКомпозит_Objest copy = new АналітикаКонтрагентівКомпозит_Objest();
-			copy.New();
+            copy.New();
             copy.Назва = Назва;
-			copy.Організація = Організація;
-			copy.Контрагент = Контрагент;
-			copy.Договір = Договір;
-			
-			return copy;
+            copy.Організація = Організація;
+            copy.Контрагент = Контрагент;
+            copy.Договір = Договір;
+            
+            return copy;
         }
 
         public void Delete()
         {
             
-			base.BaseDelete(new string[] {  });
+            base.BaseDelete(new string[] {  });
         }
         
         public АналітикаКонтрагентівКомпозит_Pointer GetDirectoryPointer()
@@ -7371,17 +7444,19 @@ namespace StorageAndTrade_1_0.Довідники
             АналітикаКонтрагентівКомпозит_Objest АналітикаКонтрагентівКомпозитObjestItem = new АналітикаКонтрагентівКомпозит_Objest();
             return АналітикаКонтрагентівКомпозитObjestItem.Read(base.UnigueID) ? АналітикаКонтрагентівКомпозитObjestItem : null;
         }
-		
+
         public АналітикаКонтрагентівКомпозит_Pointer GetNewDirectoryPointer()
         {
             return new АналітикаКонтрагентівКомпозит_Pointer(base.UnigueID);
         }
-		
-		public string GetPresentation()
+
+        public string Presentation { get; set; } = "";
+
+        public string GetPresentation()
         {
-		    return base.BasePresentation(
-			    new string[] {  }
-			);
+            return Presentation = base.BasePresentation(
+              new string[] {  }
+            );
         }
 		
         public АналітикаКонтрагентівКомпозит_Pointer GetEmptyPointer()
@@ -7458,27 +7533,27 @@ namespace StorageAndTrade_1_0.Довідники
         
         public void Save()
         {
-		    base.FieldValue["col_b4"] = Назва;
+            base.FieldValue["col_b4"] = Назва;
             base.FieldValue["col_b6"] = Контрагент.UnigueID.UGuid;
             
             BaseSave();
-			
+            
         }
-		
+
         public АналітикаПартійКомпозит_Objest Copy()
         {
             АналітикаПартійКомпозит_Objest copy = new АналітикаПартійКомпозит_Objest();
-			copy.New();
+            copy.New();
             copy.Назва = Назва;
-			copy.Контрагент = Контрагент;
-			
-			return copy;
+            copy.Контрагент = Контрагент;
+            
+            return copy;
         }
 
         public void Delete()
         {
             
-			base.BaseDelete(new string[] {  });
+            base.BaseDelete(new string[] {  });
         }
         
         public АналітикаПартійКомпозит_Pointer GetDirectoryPointer()
@@ -7511,17 +7586,19 @@ namespace StorageAndTrade_1_0.Довідники
             АналітикаПартійКомпозит_Objest АналітикаПартійКомпозитObjestItem = new АналітикаПартійКомпозит_Objest();
             return АналітикаПартійКомпозитObjestItem.Read(base.UnigueID) ? АналітикаПартійКомпозитObjestItem : null;
         }
-		
+
         public АналітикаПартійКомпозит_Pointer GetNewDirectoryPointer()
         {
             return new АналітикаПартійКомпозит_Pointer(base.UnigueID);
         }
-		
-		public string GetPresentation()
+
+        public string Presentation { get; set; } = "";
+
+        public string GetPresentation()
         {
-		    return base.BasePresentation(
-			    new string[] {  }
-			);
+            return Presentation = base.BasePresentation(
+              new string[] {  }
+            );
         }
 		
         public АналітикаПартійКомпозит_Pointer GetEmptyPointer()
@@ -7601,29 +7678,29 @@ namespace StorageAndTrade_1_0.Довідники
         
         public void Save()
         {
-		    base.FieldValue["col_a2"] = Назва;
+            base.FieldValue["col_a2"] = Назва;
             base.FieldValue["col_a3"] = (int)НалаштуванняАдресногоЗберігання;
             base.FieldValue["col_a1"] = Склад.UnigueID.UGuid;
             
             BaseSave();
-			
+            
         }
-		
+
         public СкладськіПриміщення_Objest Copy()
         {
             СкладськіПриміщення_Objest copy = new СкладськіПриміщення_Objest();
-			copy.New();
+            copy.New();
             copy.Назва = Назва;
-			copy.НалаштуванняАдресногоЗберігання = НалаштуванняАдресногоЗберігання;
-			copy.Склад = Склад;
-			
-			return copy;
+            copy.НалаштуванняАдресногоЗберігання = НалаштуванняАдресногоЗберігання;
+            copy.Склад = Склад;
+            
+            return copy;
         }
 
         public void Delete()
         {
             
-			base.BaseDelete(new string[] {  });
+            base.BaseDelete(new string[] {  });
         }
         
         public СкладськіПриміщення_Pointer GetDirectoryPointer()
@@ -7657,17 +7734,19 @@ namespace StorageAndTrade_1_0.Довідники
             СкладськіПриміщення_Objest СкладськіПриміщенняObjestItem = new СкладськіПриміщення_Objest();
             return СкладськіПриміщенняObjestItem.Read(base.UnigueID) ? СкладськіПриміщенняObjestItem : null;
         }
-		
+
         public СкладськіПриміщення_Pointer GetNewDirectoryPointer()
         {
             return new СкладськіПриміщення_Pointer(base.UnigueID);
         }
-		
-		public string GetPresentation()
+
+        public string Presentation { get; set; } = "";
+
+        public string GetPresentation()
         {
-		    return base.BasePresentation(
-			    new string[] { "col_a2" }
-			);
+            return Presentation = base.BasePresentation(
+              new string[] { "col_a2" }
+            );
         }
 		
         public СкладськіПриміщення_Pointer GetEmptyPointer()
@@ -7768,7 +7847,7 @@ namespace StorageAndTrade_1_0.Довідники
         
         public void Save()
         {
-		    base.FieldValue["col_a1"] = Папка.UnigueID.UGuid;
+            base.FieldValue["col_a1"] = Папка.UnigueID.UGuid;
             base.FieldValue["col_a2"] = Назва;
             base.FieldValue["col_a3"] = ОбластьЗберігання.UnigueID.UGuid;
             base.FieldValue["col_a4"] = Лінія;
@@ -7780,31 +7859,31 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_b1"] = Типорозмір.UnigueID.UGuid;
             
             BaseSave();
-			
+            
         }
-		
+
         public СкладськіКомірки_Objest Copy()
         {
             СкладськіКомірки_Objest copy = new СкладськіКомірки_Objest();
-			copy.New();
+            copy.New();
             copy.Папка = Папка;
-			copy.Назва = Назва;
-			copy.ОбластьЗберігання = ОбластьЗберігання;
-			copy.Лінія = Лінія;
-			copy.Позиція = Позиція;
-			copy.Приміщення = Приміщення;
-			copy.Стелаж = Стелаж;
-			copy.Ярус = Ярус;
-			copy.ТипСкладськоїКомірки = ТипСкладськоїКомірки;
-			copy.Типорозмір = Типорозмір;
-			
-			return copy;
+            copy.Назва = Назва;
+            copy.ОбластьЗберігання = ОбластьЗберігання;
+            copy.Лінія = Лінія;
+            copy.Позиція = Позиція;
+            copy.Приміщення = Приміщення;
+            copy.Стелаж = Стелаж;
+            copy.Ярус = Ярус;
+            copy.ТипСкладськоїКомірки = ТипСкладськоїКомірки;
+            copy.Типорозмір = Типорозмір;
+            
+            return copy;
         }
 
         public void Delete()
         {
             
-			base.BaseDelete(new string[] {  });
+            base.BaseDelete(new string[] {  });
         }
         
         public СкладськіКомірки_Pointer GetDirectoryPointer()
@@ -7845,17 +7924,19 @@ namespace StorageAndTrade_1_0.Довідники
             СкладськіКомірки_Objest СкладськіКоміркиObjestItem = new СкладськіКомірки_Objest();
             return СкладськіКоміркиObjestItem.Read(base.UnigueID) ? СкладськіКоміркиObjestItem : null;
         }
-		
+
         public СкладськіКомірки_Pointer GetNewDirectoryPointer()
         {
             return new СкладськіКомірки_Pointer(base.UnigueID);
         }
-		
-		public string GetPresentation()
+
+        public string Presentation { get; set; } = "";
+
+        public string GetPresentation()
         {
-		    return base.BasePresentation(
-			    new string[] { "col_a2" }
-			);
+            return Presentation = base.BasePresentation(
+              new string[] { "col_a2" }
+            );
         }
 		
         public СкладськіКомірки_Pointer GetEmptyPointer()
@@ -7935,29 +8016,29 @@ namespace StorageAndTrade_1_0.Довідники
         
         public void Save()
         {
-		    base.FieldValue["col_a2"] = Назва;
+            base.FieldValue["col_a2"] = Назва;
             base.FieldValue["col_a3"] = Опис;
             base.FieldValue["col_a4"] = Приміщення.UnigueID.UGuid;
             
             BaseSave();
-			
+            
         }
-		
+
         public ОбластьЗберігання_Objest Copy()
         {
             ОбластьЗберігання_Objest copy = new ОбластьЗберігання_Objest();
-			copy.New();
+            copy.New();
             copy.Назва = Назва;
-			copy.Опис = Опис;
-			copy.Приміщення = Приміщення;
-			
-			return copy;
+            copy.Опис = Опис;
+            copy.Приміщення = Приміщення;
+            
+            return copy;
         }
 
         public void Delete()
         {
             
-			base.BaseDelete(new string[] {  });
+            base.BaseDelete(new string[] {  });
         }
         
         public ОбластьЗберігання_Pointer GetDirectoryPointer()
@@ -7991,17 +8072,19 @@ namespace StorageAndTrade_1_0.Довідники
             ОбластьЗберігання_Objest ОбластьЗберіганняObjestItem = new ОбластьЗберігання_Objest();
             return ОбластьЗберіганняObjestItem.Read(base.UnigueID) ? ОбластьЗберіганняObjestItem : null;
         }
-		
+
         public ОбластьЗберігання_Pointer GetNewDirectoryPointer()
         {
             return new ОбластьЗберігання_Pointer(base.UnigueID);
         }
-		
-		public string GetPresentation()
+
+        public string Presentation { get; set; } = "";
+
+        public string GetPresentation()
         {
-		    return base.BasePresentation(
-			    new string[] { "col_a2" }
-			);
+            return Presentation = base.BasePresentation(
+              new string[] { "col_a2" }
+            );
         }
 		
         public ОбластьЗберігання_Pointer GetEmptyPointer()
@@ -8090,7 +8173,7 @@ namespace StorageAndTrade_1_0.Довідники
         
         public void Save()
         {
-		    base.FieldValue["col_a1"] = Висота;
+            base.FieldValue["col_a1"] = Висота;
             base.FieldValue["col_a2"] = Назва;
             base.FieldValue["col_a3"] = Глибина;
             base.FieldValue["col_a4"] = Вантажопідйомність;
@@ -8098,27 +8181,27 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_a6"] = Ширина;
             
             BaseSave();
-			
+            
         }
-		
+
         public ТипорозміриКомірок_Objest Copy()
         {
             ТипорозміриКомірок_Objest copy = new ТипорозміриКомірок_Objest();
-			copy.New();
+            copy.New();
             copy.Висота = Висота;
-			copy.Назва = Назва;
-			copy.Глибина = Глибина;
-			copy.Вантажопідйомність = Вантажопідйомність;
-			copy.Обєм = Обєм;
-			copy.Ширина = Ширина;
-			
-			return copy;
+            copy.Назва = Назва;
+            copy.Глибина = Глибина;
+            copy.Вантажопідйомність = Вантажопідйомність;
+            copy.Обєм = Обєм;
+            copy.Ширина = Ширина;
+            
+            return copy;
         }
 
         public void Delete()
         {
             
-			base.BaseDelete(new string[] {  });
+            base.BaseDelete(new string[] {  });
         }
         
         public ТипорозміриКомірок_Pointer GetDirectoryPointer()
@@ -8155,17 +8238,19 @@ namespace StorageAndTrade_1_0.Довідники
             ТипорозміриКомірок_Objest ТипорозміриКомірокObjestItem = new ТипорозміриКомірок_Objest();
             return ТипорозміриКомірокObjestItem.Read(base.UnigueID) ? ТипорозміриКомірокObjestItem : null;
         }
-		
+
         public ТипорозміриКомірок_Pointer GetNewDirectoryPointer()
         {
             return new ТипорозміриКомірок_Pointer(base.UnigueID);
         }
-		
-		public string GetPresentation()
+
+        public string Presentation { get; set; } = "";
+
+        public string GetPresentation()
         {
-		    return base.BasePresentation(
-			    new string[] { "col_a2" }
-			);
+            return Presentation = base.BasePresentation(
+              new string[] { "col_a2" }
+            );
         }
 		
         public ТипорозміриКомірок_Pointer GetEmptyPointer()
@@ -8248,31 +8333,31 @@ namespace StorageAndTrade_1_0.Довідники
         
         public void Save()
         {
-		    base.FieldValue["col_j1"] = Назва;
+            base.FieldValue["col_j1"] = Назва;
             base.FieldValue["col_j2"] = Код;
             base.FieldValue["col_j3"] = Родич.UnigueID.UGuid;
             base.FieldValue["col_a1"] = Приміщення.UnigueID.UGuid;
             
             BaseSave();
-			
+            
         }
-		
+
         public СкладськіКомірки_Папки_Objest Copy()
         {
             СкладськіКомірки_Папки_Objest copy = new СкладськіКомірки_Папки_Objest();
-			copy.New();
+            copy.New();
             copy.Назва = Назва;
-			copy.Код = Код;
-			copy.Родич = Родич;
-			copy.Приміщення = Приміщення;
-			
-			return copy;
+            copy.Код = Код;
+            copy.Родич = Родич;
+            copy.Приміщення = Приміщення;
+            
+            return copy;
         }
 
         public void Delete()
         {
             
-			base.BaseDelete(new string[] {  });
+            base.BaseDelete(new string[] {  });
         }
         
         public СкладськіКомірки_Папки_Pointer GetDirectoryPointer()
@@ -8307,17 +8392,19 @@ namespace StorageAndTrade_1_0.Довідники
             СкладськіКомірки_Папки_Objest СкладськіКомірки_ПапкиObjestItem = new СкладськіКомірки_Папки_Objest();
             return СкладськіКомірки_ПапкиObjestItem.Read(base.UnigueID) ? СкладськіКомірки_ПапкиObjestItem : null;
         }
-		
+
         public СкладськіКомірки_Папки_Pointer GetNewDirectoryPointer()
         {
             return new СкладськіКомірки_Папки_Pointer(base.UnigueID);
         }
-		
-		public string GetPresentation()
+
+        public string Presentation { get; set; } = "";
+
+        public string GetPresentation()
         {
-		    return base.BasePresentation(
-			    new string[] { "col_j1" }
-			);
+            return Presentation = base.BasePresentation(
+              new string[] { "col_j1" }
+            );
         }
 		
         public СкладськіКомірки_Папки_Pointer GetEmptyPointer()
@@ -9803,7 +9890,7 @@ namespace StorageAndTrade_1_0.Документи
         public void Save()
         {
             ЗамовленняПостачальнику_Triggers.BeforeRecording(this);
-			base.FieldValue["docname"] = Назва;
+            base.FieldValue["docname"] = Назва;
             base.FieldValue["docnomer"] = НомерДок;
             base.FieldValue["docdate"] = ДатаДок;
             base.FieldValue["col_k2"] = Контрагент.UnigueID.UGuid;
@@ -9831,7 +9918,7 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a2"] = Коментар;
             
             BaseSave();
-			ЗамовленняПостачальнику_Triggers.AfterRecording(this);
+            ЗамовленняПостачальнику_Triggers.AfterRecording(this);
 		}
 
 		public bool SpendTheDocument(DateTime spendDate)
@@ -9938,11 +10025,13 @@ namespace StorageAndTrade_1_0.Документи
             base.Init(uid, fields);
         }
 		
-		    public string GetPresentation()
+        public string Presentation { get; set; } = "";
+
+        public string GetPresentation()
         {
-		        return base.BasePresentation(
-				    new string[] { "docname" }
-			      );
+            return Presentation = base.BasePresentation(
+              new string[] { "docname" }
+            );
         }
 		
         public ЗамовленняПостачальнику_Pointer GetNewDocumentPointer()
@@ -10506,6 +10595,14 @@ namespace StorageAndTrade_1_0.Документи
                                 xmlWriter.WriteString(record.Підрозділ.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Підрозділ
+                        xmlWriter.WriteStartElement("ВидЦіни");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.ВидиЦін");
+                                xmlWriter.WriteAttributeString("uid", record.ВидЦіни.UnigueID.ToString());
+                                xmlWriter.WriteString(record.ВидЦіни.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //ВидЦіни
                         xmlWriter.WriteEndElement(); //row
                     }
 
@@ -10611,7 +10708,7 @@ namespace StorageAndTrade_1_0.Документи
         public void Save()
         {
             ПоступленняТоварівТаПослуг_Triggers.BeforeRecording(this);
-			base.FieldValue["docname"] = Назва;
+            base.FieldValue["docname"] = Назва;
             base.FieldValue["docnomer"] = НомерДок;
             base.FieldValue["docdate"] = ДатаДок;
             base.FieldValue["col_a3"] = Валюта.UnigueID.UGuid;
@@ -10645,7 +10742,7 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_b1"] = Коментар;
             
             BaseSave();
-			ПоступленняТоварівТаПослуг_Triggers.AfterRecording(this);
+            ПоступленняТоварівТаПослуг_Triggers.AfterRecording(this);
 		}
 
 		public bool SpendTheDocument(DateTime spendDate)
@@ -10764,11 +10861,13 @@ namespace StorageAndTrade_1_0.Документи
             base.Init(uid, fields);
         }
 		
-		    public string GetPresentation()
+        public string Presentation { get; set; } = "";
+
+        public string GetPresentation()
         {
-		        return base.BasePresentation(
-				    new string[] { "docname" }
-			      );
+            return Presentation = base.BasePresentation(
+              new string[] { "docname" }
+            );
         }
 		
         public ПоступленняТоварівТаПослуг_Pointer GetNewDocumentPointer()
@@ -10813,7 +10912,7 @@ namespace StorageAndTrade_1_0.Документи
     public class ПоступленняТоварівТаПослуг_Товари_TablePart : DocumentTablePart
     {
         public ПоступленняТоварівТаПослуг_Товари_TablePart(ПоступленняТоварівТаПослуг_Objest owner) : base(Config.Kernel!, "tab_a33",
-             new string[] { "col_b3", "col_a9", "col_b1", "col_b4", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_b2" }) 
+             new string[] { "col_b3", "col_a9", "col_b1", "col_b4", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_b2", "col_b5" }) 
         {
             if (owner == null) throw new Exception("owner null");
             
@@ -10834,6 +10933,7 @@ namespace StorageAndTrade_1_0.Документи
         public const string ЗамовленняПостачальнику = "col_a7";
         public const string Скидка = "col_a8";
         public const string Підрозділ = "col_b2";
+        public const string ВидЦіни = "col_b5";
 
         public ПоступленняТоварівТаПослуг_Objest Owner { get; private set; }
         
@@ -10862,6 +10962,7 @@ namespace StorageAndTrade_1_0.Документи
                 record.ЗамовленняПостачальнику = new Документи.ЗамовленняПостачальнику_Pointer(fieldValue["col_a7"]);
                 record.Скидка = (fieldValue["col_a8"] != DBNull.Value) ? (decimal)fieldValue["col_a8"] : 0;
                 record.Підрозділ = new Довідники.СтруктураПідприємства_Pointer(fieldValue["col_b2"]);
+                record.ВидЦіни = new Довідники.ВидиЦін_Pointer(fieldValue["col_b5"]);
                 
                 Records.Add(record);
             }
@@ -10893,6 +10994,7 @@ namespace StorageAndTrade_1_0.Документи
                 fieldValue.Add("col_a7", record.ЗамовленняПостачальнику.UnigueID.UGuid);
                 fieldValue.Add("col_a8", record.Скидка);
                 fieldValue.Add("col_b2", record.Підрозділ.UnigueID.UGuid);
+                fieldValue.Add("col_b5", record.ВидЦіни.UnigueID.UGuid);
                 
                 base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
@@ -10933,6 +11035,7 @@ namespace StorageAndTrade_1_0.Документи
                 ЗамовленняПостачальнику = new Документи.ЗамовленняПостачальнику_Pointer();
                 Скидка = 0;
                 Підрозділ = new Довідники.СтруктураПідприємства_Pointer();
+                ВидЦіни = new Довідники.ВидиЦін_Pointer();
                 
             }
             public int НомерРядка { get; set; }
@@ -10948,6 +11051,7 @@ namespace StorageAndTrade_1_0.Документи
             public Документи.ЗамовленняПостачальнику_Pointer ЗамовленняПостачальнику { get; set; }
             public decimal Скидка { get; set; }
             public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; }
+            public Довідники.ВидиЦін_Pointer ВидЦіни { get; set; }
             
         }
     }
@@ -11397,7 +11501,7 @@ namespace StorageAndTrade_1_0.Документи
         public void Save()
         {
             ЗамовленняКлієнта_Triggers.BeforeRecording(this);
-			base.FieldValue["docname"] = Назва;
+            base.FieldValue["docname"] = Назва;
             base.FieldValue["docnomer"] = НомерДок;
             base.FieldValue["docdate"] = ДатаДок;
             base.FieldValue["col_b4"] = Контрагент.UnigueID.UGuid;
@@ -11428,7 +11532,7 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_b2"] = Менеджер.UnigueID.UGuid;
             
             BaseSave();
-			ЗамовленняКлієнта_Triggers.AfterRecording(this);
+            ЗамовленняКлієнта_Triggers.AfterRecording(this);
 		}
 
 		public bool SpendTheDocument(DateTime spendDate)
@@ -11541,11 +11645,13 @@ namespace StorageAndTrade_1_0.Документи
             base.Init(uid, fields);
         }
 		
-		    public string GetPresentation()
+        public string Presentation { get; set; } = "";
+
+        public string GetPresentation()
         {
-		        return base.BasePresentation(
-				    new string[] { "docname" }
-			      );
+            return Presentation = base.BasePresentation(
+              new string[] { "docname" }
+            );
         }
 		
         public ЗамовленняКлієнта_Pointer GetNewDocumentPointer()
@@ -12208,7 +12314,7 @@ namespace StorageAndTrade_1_0.Документи
         public void Save()
         {
             РеалізаціяТоварівТаПослуг_Triggers.BeforeRecording(this);
-			base.FieldValue["docname"] = Назва;
+            base.FieldValue["docname"] = Назва;
             base.FieldValue["docnomer"] = НомерДок;
             base.FieldValue["docdate"] = ДатаДок;
             base.FieldValue["col_a1"] = Організація.UnigueID.UGuid;
@@ -12241,7 +12347,7 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_c9"] = Менеджер.UnigueID.UGuid;
             
             BaseSave();
-			РеалізаціяТоварівТаПослуг_Triggers.AfterRecording(this);
+            РеалізаціяТоварівТаПослуг_Triggers.AfterRecording(this);
 		}
 
 		public bool SpendTheDocument(DateTime spendDate)
@@ -12358,11 +12464,13 @@ namespace StorageAndTrade_1_0.Документи
             base.Init(uid, fields);
         }
 		
-		    public string GetPresentation()
+        public string Presentation { get; set; } = "";
+
+        public string GetPresentation()
         {
-		        return base.BasePresentation(
-				    new string[] { "docname" }
-			      );
+            return Presentation = base.BasePresentation(
+              new string[] { "docname" }
+            );
         }
 		
         public РеалізаціяТоварівТаПослуг_Pointer GetNewDocumentPointer()
@@ -12753,7 +12861,7 @@ namespace StorageAndTrade_1_0.Документи
         public void Save()
         {
             ВстановленняЦінНоменклатури_Triggers.BeforeRecording(this);
-			base.FieldValue["docname"] = Назва;
+            base.FieldValue["docname"] = Назва;
             base.FieldValue["docnomer"] = НомерДок;
             base.FieldValue["docdate"] = ДатаДок;
             base.FieldValue["col_a2"] = Організація.UnigueID.UGuid;
@@ -12763,7 +12871,7 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a4"] = Автор.UnigueID.UGuid;
             
             BaseSave();
-			ВстановленняЦінНоменклатури_Triggers.AfterRecording(this);
+            ВстановленняЦінНоменклатури_Triggers.AfterRecording(this);
 		}
 
 		public bool SpendTheDocument(DateTime spendDate)
@@ -12834,11 +12942,13 @@ namespace StorageAndTrade_1_0.Документи
             base.Init(uid, fields);
         }
 		
-		    public string GetPresentation()
+        public string Presentation { get; set; } = "";
+
+        public string GetPresentation()
         {
-		        return base.BasePresentation(
-				    new string[] { "docname" }
-			      );
+            return Presentation = base.BasePresentation(
+              new string[] { "docname" }
+            );
         }
 		
         public ВстановленняЦінНоменклатури_Pointer GetNewDocumentPointer()
@@ -13280,7 +13390,7 @@ namespace StorageAndTrade_1_0.Документи
         public void Save()
         {
             ПрихіднийКасовийОрдер_Triggers.BeforeRecording(this);
-			base.FieldValue["docname"] = Назва;
+            base.FieldValue["docname"] = Назва;
             base.FieldValue["docnomer"] = НомерДок;
             base.FieldValue["docdate"] = ДатаДок;
             base.FieldValue["col_h8"] = Організація.UnigueID.UGuid;
@@ -13299,7 +13409,7 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a5"] = Автор.UnigueID.UGuid;
             
             BaseSave();
-			ПрихіднийКасовийОрдер_Triggers.AfterRecording(this);
+            ПрихіднийКасовийОрдер_Triggers.AfterRecording(this);
 		}
 
 		public bool SpendTheDocument(DateTime spendDate)
@@ -13388,11 +13498,13 @@ namespace StorageAndTrade_1_0.Документи
             base.Init(uid, fields);
         }
 		
-		    public string GetPresentation()
+        public string Presentation { get; set; } = "";
+
+        public string GetPresentation()
         {
-		        return base.BasePresentation(
-				    new string[] { "docname" }
-			      );
+            return Presentation = base.BasePresentation(
+              new string[] { "docname" }
+            );
         }
 		
         public ПрихіднийКасовийОрдер_Pointer GetNewDocumentPointer()
@@ -13860,7 +13972,7 @@ namespace StorageAndTrade_1_0.Документи
         public void Save()
         {
             РозхіднийКасовийОрдер_Triggers.BeforeRecording(this);
-			base.FieldValue["docname"] = Назва;
+            base.FieldValue["docname"] = Назва;
             base.FieldValue["docnomer"] = НомерДок;
             base.FieldValue["docdate"] = ДатаДок;
             base.FieldValue["col_k2"] = Організація.UnigueID.UGuid;
@@ -13881,7 +13993,7 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a6"] = Автор.UnigueID.UGuid;
             
             BaseSave();
-			РозхіднийКасовийОрдер_Triggers.AfterRecording(this);
+            РозхіднийКасовийОрдер_Triggers.AfterRecording(this);
 		}
 
 		public bool SpendTheDocument(DateTime spendDate)
@@ -13974,11 +14086,13 @@ namespace StorageAndTrade_1_0.Документи
             base.Init(uid, fields);
         }
 		
-		    public string GetPresentation()
+        public string Presentation { get; set; } = "";
+
+        public string GetPresentation()
         {
-		        return base.BasePresentation(
-				    new string[] { "docname" }
-			      );
+            return Presentation = base.BasePresentation(
+              new string[] { "docname" }
+            );
         }
 		
         public РозхіднийКасовийОрдер_Pointer GetNewDocumentPointer()
@@ -14455,7 +14569,7 @@ namespace StorageAndTrade_1_0.Документи
         public void Save()
         {
             ПереміщенняТоварів_Triggers.BeforeRecording(this);
-			base.FieldValue["docname"] = Назва;
+            base.FieldValue["docname"] = Назва;
             base.FieldValue["docnomer"] = НомерДок;
             base.FieldValue["docdate"] = ДатаДок;
             base.FieldValue["col_a3"] = Організація.UnigueID.UGuid;
@@ -14476,7 +14590,7 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a1"] = Автор.UnigueID.UGuid;
             
             BaseSave();
-			ПереміщенняТоварів_Triggers.AfterRecording(this);
+            ПереміщенняТоварів_Triggers.AfterRecording(this);
 		}
 
 		public bool SpendTheDocument(DateTime spendDate)
@@ -14569,11 +14683,13 @@ namespace StorageAndTrade_1_0.Документи
             base.Init(uid, fields);
         }
 		
-		    public string GetPresentation()
+        public string Presentation { get; set; } = "";
+
+        public string GetPresentation()
         {
-		        return base.BasePresentation(
-				    new string[] { "docname" }
-			      );
+            return Presentation = base.BasePresentation(
+              new string[] { "docname" }
+            );
         }
 		
         public ПереміщенняТоварів_Pointer GetNewDocumentPointer()
@@ -15099,7 +15215,7 @@ namespace StorageAndTrade_1_0.Документи
         public void Save()
         {
             ПоверненняТоварівПостачальнику_Triggers.BeforeRecording(this);
-			base.FieldValue["docname"] = Назва;
+            base.FieldValue["docname"] = Назва;
             base.FieldValue["docnomer"] = НомерДок;
             base.FieldValue["docdate"] = ДатаДок;
             base.FieldValue["col_c2"] = Організація.UnigueID.UGuid;
@@ -15123,7 +15239,7 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a4"] = Менеджер.UnigueID.UGuid;
             
             BaseSave();
-			ПоверненняТоварівПостачальнику_Triggers.AfterRecording(this);
+            ПоверненняТоварівПостачальнику_Triggers.AfterRecording(this);
 		}
 
 		public bool SpendTheDocument(DateTime spendDate)
@@ -15222,11 +15338,13 @@ namespace StorageAndTrade_1_0.Документи
             base.Init(uid, fields);
         }
 		
-		    public string GetPresentation()
+        public string Presentation { get; set; } = "";
+
+        public string GetPresentation()
         {
-		        return base.BasePresentation(
-				    new string[] { "docname" }
-			      );
+            return Presentation = base.BasePresentation(
+              new string[] { "docname" }
+            );
         }
 		
         public ПоверненняТоварівПостачальнику_Pointer GetNewDocumentPointer()
@@ -15733,7 +15851,7 @@ namespace StorageAndTrade_1_0.Документи
         public void Save()
         {
             ПоверненняТоварівВідКлієнта_Triggers.BeforeRecording(this);
-			base.FieldValue["docname"] = Назва;
+            base.FieldValue["docname"] = Назва;
             base.FieldValue["docnomer"] = НомерДок;
             base.FieldValue["docdate"] = ДатаДок;
             base.FieldValue["col_e8"] = Організація.UnigueID.UGuid;
@@ -15753,7 +15871,7 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a3"] = Автор.UnigueID.UGuid;
             
             BaseSave();
-			ПоверненняТоварівВідКлієнта_Triggers.AfterRecording(this);
+            ПоверненняТоварівВідКлієнта_Triggers.AfterRecording(this);
 		}
 
 		public bool SpendTheDocument(DateTime spendDate)
@@ -15844,11 +15962,13 @@ namespace StorageAndTrade_1_0.Документи
             base.Init(uid, fields);
         }
 		
-		    public string GetPresentation()
+        public string Presentation { get; set; } = "";
+
+        public string GetPresentation()
         {
-		        return base.BasePresentation(
-				    new string[] { "docname" }
-			      );
+            return Presentation = base.BasePresentation(
+              new string[] { "docname" }
+            );
         }
 		
         public ПоверненняТоварівВідКлієнта_Pointer GetNewDocumentPointer()
@@ -16306,7 +16426,7 @@ namespace StorageAndTrade_1_0.Документи
         public void Save()
         {
             АктВиконанихРобіт_Triggers.BeforeRecording(this);
-			base.FieldValue["docname"] = Назва;
+            base.FieldValue["docname"] = Назва;
             base.FieldValue["docnomer"] = НомерДок;
             base.FieldValue["docdate"] = ДатаДок;
             base.FieldValue["col_b2"] = Валюта.UnigueID.UGuid;
@@ -16324,7 +16444,7 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a8"] = Менеджер.UnigueID.UGuid;
             
             BaseSave();
-			АктВиконанихРобіт_Triggers.AfterRecording(this);
+            АктВиконанихРобіт_Triggers.AfterRecording(this);
 		}
 
 		public bool SpendTheDocument(DateTime spendDate)
@@ -16411,11 +16531,13 @@ namespace StorageAndTrade_1_0.Документи
             base.Init(uid, fields);
         }
 		
-		    public string GetPresentation()
+        public string Presentation { get; set; } = "";
+
+        public string GetPresentation()
         {
-		        return base.BasePresentation(
-				    new string[] { "docname" }
-			      );
+            return Presentation = base.BasePresentation(
+              new string[] { "docname" }
+            );
         }
 		
         public АктВиконанихРобіт_Pointer GetNewDocumentPointer()
@@ -16946,7 +17068,7 @@ namespace StorageAndTrade_1_0.Документи
         public void Save()
         {
             ВведенняЗалишків_Triggers.BeforeRecording(this);
-			base.FieldValue["docname"] = Назва;
+            base.FieldValue["docname"] = Назва;
             base.FieldValue["docnomer"] = НомерДок;
             base.FieldValue["docdate"] = ДатаДок;
             base.FieldValue["col_c8"] = Організація.UnigueID.UGuid;
@@ -16960,7 +17082,7 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a3"] = Автор.UnigueID.UGuid;
             
             BaseSave();
-			ВведенняЗалишків_Triggers.AfterRecording(this);
+            ВведенняЗалишків_Triggers.AfterRecording(this);
 		}
 
 		public bool SpendTheDocument(DateTime spendDate)
@@ -17042,11 +17164,13 @@ namespace StorageAndTrade_1_0.Документи
             base.Init(uid, fields);
         }
 		
-		    public string GetPresentation()
+        public string Presentation { get; set; } = "";
+
+        public string GetPresentation()
         {
-		        return base.BasePresentation(
-				    new string[] { "docname" }
-			      );
+            return Presentation = base.BasePresentation(
+              new string[] { "docname" }
+            );
         }
 		
         public ВведенняЗалишків_Pointer GetNewDocumentPointer()
@@ -17709,7 +17833,7 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a1"] = Автор.UnigueID.UGuid;
             
             BaseSave();
-			
+            
 		}
 
 		public bool SpendTheDocument(DateTime spendDate)
@@ -17780,11 +17904,13 @@ namespace StorageAndTrade_1_0.Документи
             base.Init(uid, fields);
         }
 		
-		    public string GetPresentation()
+        public string Presentation { get; set; } = "";
+
+        public string GetPresentation()
         {
-		        return base.BasePresentation(
-				    new string[] { "docname" }
-			      );
+            return Presentation = base.BasePresentation(
+              new string[] { "docname" }
+            );
         }
 		
         public НадлишкиТоварів_Pointer GetNewDocumentPointer()
@@ -18141,7 +18267,7 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a1"] = Автор.UnigueID.UGuid;
             
             BaseSave();
-			
+            
 		}
 
 		public bool SpendTheDocument(DateTime spendDate)
@@ -18212,11 +18338,13 @@ namespace StorageAndTrade_1_0.Документи
             base.Init(uid, fields);
         }
 		
-		    public string GetPresentation()
+        public string Presentation { get; set; } = "";
+
+        public string GetPresentation()
         {
-		        return base.BasePresentation(
-				    new string[] { "docname" }
-			      );
+            return Presentation = base.BasePresentation(
+              new string[] { "docname" }
+            );
         }
 		
         public ПересортицяТоварів_Pointer GetNewDocumentPointer()
@@ -18563,7 +18691,7 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a1"] = Автор.UnigueID.UGuid;
             
             BaseSave();
-			
+            
 		}
 
 		public bool SpendTheDocument(DateTime spendDate)
@@ -18630,11 +18758,13 @@ namespace StorageAndTrade_1_0.Документи
             base.Init(uid, fields);
         }
 		
-		    public string GetPresentation()
+        public string Presentation { get; set; } = "";
+
+        public string GetPresentation()
         {
-		        return base.BasePresentation(
-				    new string[] { "docname" }
-			      );
+            return Presentation = base.BasePresentation(
+              new string[] { "docname" }
+            );
         }
 		
         public ПерерахунокТоварів_Pointer GetNewDocumentPointer()
@@ -19037,7 +19167,7 @@ namespace StorageAndTrade_1_0.Документи
         public void Save()
         {
             ПсуванняТоварів_Triggers.BeforeRecording(this);
-			base.FieldValue["docname"] = Назва;
+            base.FieldValue["docname"] = Назва;
             base.FieldValue["docnomer"] = НомерДок;
             base.FieldValue["docdate"] = ДатаДок;
             base.FieldValue["col_a6"] = Організація.UnigueID.UGuid;
@@ -19050,7 +19180,7 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a2"] = Автор.UnigueID.UGuid;
             
             BaseSave();
-			ПсуванняТоварів_Triggers.AfterRecording(this);
+            ПсуванняТоварів_Triggers.AfterRecording(this);
 		}
 
 		public bool SpendTheDocument(DateTime spendDate)
@@ -19127,11 +19257,13 @@ namespace StorageAndTrade_1_0.Документи
             base.Init(uid, fields);
         }
 		
-		    public string GetPresentation()
+        public string Presentation { get; set; } = "";
+
+        public string GetPresentation()
         {
-		        return base.BasePresentation(
-				    new string[] { "docname" }
-			      );
+            return Presentation = base.BasePresentation(
+              new string[] { "docname" }
+            );
         }
 		
         public ПсуванняТоварів_Pointer GetNewDocumentPointer()
@@ -19555,7 +19687,7 @@ namespace StorageAndTrade_1_0.Документи
         public void Save()
         {
             ВнутрішнєСпоживанняТоварів_Triggers.BeforeRecording(this);
-			base.FieldValue["docname"] = Назва;
+            base.FieldValue["docname"] = Назва;
             base.FieldValue["docnomer"] = НомерДок;
             base.FieldValue["docdate"] = ДатаДок;
             base.FieldValue["col_a1"] = Організація.UnigueID.UGuid;
@@ -19569,7 +19701,7 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_b2"] = Коментар;
             
             BaseSave();
-			ВнутрішнєСпоживанняТоварів_Triggers.AfterRecording(this);
+            ВнутрішнєСпоживанняТоварів_Triggers.AfterRecording(this);
 		}
 
 		public bool SpendTheDocument(DateTime spendDate)
@@ -19648,11 +19780,13 @@ namespace StorageAndTrade_1_0.Документи
             base.Init(uid, fields);
         }
 		
-		    public string GetPresentation()
+        public string Presentation { get; set; } = "";
+
+        public string GetPresentation()
         {
-		        return base.BasePresentation(
-				    new string[] { "docname" }
-			      );
+            return Presentation = base.BasePresentation(
+              new string[] { "docname" }
+            );
         }
 		
         public ВнутрішнєСпоживанняТоварів_Pointer GetNewDocumentPointer()
@@ -20169,7 +20303,7 @@ namespace StorageAndTrade_1_0.Документи
         public void Save()
         {
             РахунокФактура_Triggers.BeforeRecording(this);
-			base.FieldValue["docname"] = Назва;
+            base.FieldValue["docname"] = Назва;
             base.FieldValue["docnomer"] = НомерДок;
             base.FieldValue["docdate"] = ДатаДок;
             base.FieldValue["col_b4"] = Контрагент.UnigueID.UGuid;
@@ -20190,7 +20324,7 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a2"] = Менеджер.UnigueID.UGuid;
             
             BaseSave();
-			РахунокФактура_Triggers.AfterRecording(this);
+            РахунокФактура_Triggers.AfterRecording(this);
 		}
 
 		public bool SpendTheDocument(DateTime spendDate)
@@ -20283,11 +20417,13 @@ namespace StorageAndTrade_1_0.Документи
             base.Init(uid, fields);
         }
 		
-		    public string GetPresentation()
+        public string Presentation { get; set; } = "";
+
+        public string GetPresentation()
         {
-		        return base.BasePresentation(
-				    new string[] { "docname" }
-			      );
+            return Presentation = base.BasePresentation(
+              new string[] { "docname" }
+            );
         }
 		
         public РахунокФактура_Pointer GetNewDocumentPointer()
@@ -20697,7 +20833,7 @@ namespace StorageAndTrade_1_0.Документи
         public void Save()
         {
             РозміщенняТоварівНаСкладі_Triggers.BeforeRecording(this);
-			base.FieldValue["docname"] = Назва;
+            base.FieldValue["docname"] = Назва;
             base.FieldValue["docdate"] = ДатаДок;
             base.FieldValue["docnomer"] = НомерДок;
             base.FieldValue["col_a1"] = Коментар;
@@ -20709,7 +20845,7 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a7"] = ДокументПоступлення.UnigueID.UGuid;
             
             BaseSave();
-			РозміщенняТоварівНаСкладі_Triggers.AfterRecording(this);
+            РозміщенняТоварівНаСкладі_Triggers.AfterRecording(this);
 		}
 
 		public bool SpendTheDocument(DateTime spendDate)
@@ -20784,11 +20920,13 @@ namespace StorageAndTrade_1_0.Документи
             base.Init(uid, fields);
         }
 		
-		    public string GetPresentation()
+        public string Presentation { get; set; } = "";
+
+        public string GetPresentation()
         {
-		        return base.BasePresentation(
-				    new string[] { "docname" }
-			      );
+            return Presentation = base.BasePresentation(
+              new string[] { "docname" }
+            );
         }
 		
         public РозміщенняТоварівНаСкладі_Pointer GetNewDocumentPointer()
@@ -21180,7 +21318,7 @@ namespace StorageAndTrade_1_0.Документи
         public void Save()
         {
             ПереміщенняТоварівНаСкладі_Triggers.BeforeRecording(this);
-			base.FieldValue["docname"] = Назва;
+            base.FieldValue["docname"] = Назва;
             base.FieldValue["docdate"] = ДатаДок;
             base.FieldValue["docnomer"] = НомерДок;
             base.FieldValue["col_a1"] = Коментар;
@@ -21191,7 +21329,7 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a6"] = Підрозділ.UnigueID.UGuid;
             
             BaseSave();
-			ПереміщенняТоварівНаСкладі_Triggers.AfterRecording(this);
+            ПереміщенняТоварівНаСкладі_Triggers.AfterRecording(this);
 		}
 
 		public bool SpendTheDocument(DateTime spendDate)
@@ -21264,11 +21402,13 @@ namespace StorageAndTrade_1_0.Документи
             base.Init(uid, fields);
         }
 		
-		    public string GetPresentation()
+        public string Presentation { get; set; } = "";
+
+        public string GetPresentation()
         {
-		        return base.BasePresentation(
-				    new string[] { "docname" }
-			      );
+            return Presentation = base.BasePresentation(
+              new string[] { "docname" }
+            );
         }
 		
         public ПереміщенняТоварівНаСкладі_Pointer GetNewDocumentPointer()
@@ -21668,7 +21808,7 @@ namespace StorageAndTrade_1_0.Документи
         public void Save()
         {
             ЗбіркаТоварівНаСкладі_Triggers.BeforeRecording(this);
-			base.FieldValue["docname"] = Назва;
+            base.FieldValue["docname"] = Назва;
             base.FieldValue["docdate"] = ДатаДок;
             base.FieldValue["docnomer"] = НомерДок;
             base.FieldValue["col_a1"] = Коментар;
@@ -21680,7 +21820,7 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a7"] = ДокументРеалізації.UnigueID.UGuid;
             
             BaseSave();
-			ЗбіркаТоварівНаСкладі_Triggers.AfterRecording(this);
+            ЗбіркаТоварівНаСкладі_Triggers.AfterRecording(this);
 		}
 
 		public bool SpendTheDocument(DateTime spendDate)
@@ -21755,11 +21895,13 @@ namespace StorageAndTrade_1_0.Документи
             base.Init(uid, fields);
         }
 		
-		    public string GetPresentation()
+        public string Presentation { get; set; } = "";
+
+        public string GetPresentation()
         {
-		        return base.BasePresentation(
-				    new string[] { "docname" }
-			      );
+            return Presentation = base.BasePresentation(
+              new string[] { "docname" }
+            );
         }
 		
         public ЗбіркаТоварівНаСкладі_Pointer GetNewDocumentPointer()
@@ -22115,7 +22257,7 @@ namespace StorageAndTrade_1_0.Документи
         public void Save()
         {
             РозміщенняНоменклатуриПоКоміркам_Triggers.BeforeRecording(this);
-			base.FieldValue["docname"] = Назва;
+            base.FieldValue["docname"] = Назва;
             base.FieldValue["docnomer"] = НомерДок;
             base.FieldValue["docdate"] = ДатаДок;
             base.FieldValue["col_a2"] = Організація.UnigueID.UGuid;
@@ -22126,7 +22268,7 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a5"] = Основа;
             
             BaseSave();
-			РозміщенняНоменклатуриПоКоміркам_Triggers.AfterRecording(this);
+            РозміщенняНоменклатуриПоКоміркам_Triggers.AfterRecording(this);
 		}
 
 		public bool SpendTheDocument(DateTime spendDate)
@@ -22199,11 +22341,13 @@ namespace StorageAndTrade_1_0.Документи
             base.Init(uid, fields);
         }
 		
-		    public string GetPresentation()
+        public string Presentation { get; set; } = "";
+
+        public string GetPresentation()
         {
-		        return base.BasePresentation(
-				    new string[] { "docname" }
-			      );
+            return Presentation = base.BasePresentation(
+              new string[] { "docname" }
+            );
         }
 		
         public РозміщенняНоменклатуриПоКоміркам_Pointer GetNewDocumentPointer()

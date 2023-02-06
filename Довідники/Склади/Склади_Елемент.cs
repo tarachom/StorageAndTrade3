@@ -49,6 +49,7 @@ namespace StorageAndTrade
         Entry Назва = new Entry() { WidthRequest = 500 };
         Склади_Папки_PointerControl Родич = new Склади_Папки_PointerControl() { Caption = "Папка:" };
         ComboBoxText ТипСкладу = new ComboBoxText();
+        ВидиЦін_PointerControl ВидЦін = new ВидиЦін_PointerControl();
         ComboBoxText НалаштуванняАдресногоЗберігання = new ComboBoxText();
         Склади_ТабличнаЧастина_Контакти Контакти = new Склади_ТабличнаЧастина_Контакти();
 
@@ -107,6 +108,12 @@ namespace StorageAndTrade
 
             hPaned.Pack1(vBox, false, false);
 
+            //ВидЦін
+            HBox hBoxVidCen = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxVidCen, false, false, 5);
+
+            hBoxVidCen.PackStart(ВидЦін, false, false, 5);
+
             //Тип складу
             HBox hBoxType = new HBox() { Halign = Align.End };
             vBox.PackStart(hBoxType, false, false, 5);
@@ -126,6 +133,8 @@ namespace StorageAndTrade
 
             hBoxAdressSave.PackStart(new Label("Адресне зберігання:"), false, false, 5);
             hBoxAdressSave.PackStart(НалаштуванняАдресногоЗберігання, false, false, 5);
+
+            hPaned.Pack1(vBox, false, false);
         }
 
         void CreatePack2(HPaned hPaned)
@@ -156,6 +165,7 @@ namespace StorageAndTrade
             Код.Text = Склади_Objest.Код;
             Назва.Text = Склади_Objest.Назва;
             Родич.Pointer = Склади_Objest.Папка;
+            ВидЦін.Pointer = Склади_Objest.ВидЦін;
             ТипСкладу.ActiveId = Склади_Objest.ТипСкладу.ToString();
             НалаштуванняАдресногоЗберігання.ActiveId = Склади_Objest.НалаштуванняАдресногоЗберігання.ToString();
 
@@ -174,6 +184,7 @@ namespace StorageAndTrade
             Склади_Objest.Код = Код.Text;
             Склади_Objest.Назва = Назва.Text;
             Склади_Objest.Папка = Родич.Pointer;
+            Склади_Objest.ВидЦін = ВидЦін.Pointer;
             Склади_Objest.ТипСкладу = Enum.Parse<Перелічення.ТипиСкладів>(ТипСкладу.ActiveId);
             Склади_Objest.НалаштуванняАдресногоЗберігання = Enum.Parse<Перелічення.НалаштуванняАдресногоЗберігання>(НалаштуванняАдресногоЗберігання.ActiveId);
         }

@@ -1,5 +1,3 @@
-#region Info
-
 /*
 Copyright (C) 2019-2023 TARAKHOMYN YURIY IVANOVYCH
 All rights reserved.
@@ -23,15 +21,15 @@ limitations under the License.
 Сайт:     accounting.org.ua
 */
 
-#endregion
-
 using Gtk;
 
 using AccountingSoftware;
 
+using StorageAndTrade_1_0;
 using Константи = StorageAndTrade_1_0.Константи;
 using StorageAndTrade_1_0.Довідники;
 using StorageAndTrade_1_0.Документи;
+using StorageAndTrade_1_0.РегістриВідомостей;
 
 namespace StorageAndTrade
 {
@@ -50,6 +48,7 @@ namespace StorageAndTrade
             КількістьУпаковок,
             ПакуванняНазва,
             Кількість,
+            ВидЦіниНазва,
             Ціна,
             Сума,
             Скидка,
@@ -65,6 +64,7 @@ namespace StorageAndTrade
             typeof(int),      //КількістьУпаковок
             typeof(string),   //ПакуванняНазва
             typeof(float),    //Кількість
+            typeof(string),   //ВидЦіниНазва
             typeof(float),    //Ціна
             typeof(float),    //Сума
             typeof(float),    //Скидка
@@ -88,6 +88,8 @@ namespace StorageAndTrade
             public ПакуванняОдиниціВиміру_Pointer Пакування { get; set; } = new ПакуванняОдиниціВиміру_Pointer();
             public string ПакуванняНазва { get; set; } = "";
             public decimal Кількість { get; set; } = 1;
+            public ВидиЦін_Pointer ВидЦіни { get; set; } = Константи.ЗначенняЗаЗамовчуванням.ОсновнийВидЦіниЗакупівлі_Const;
+            public string ВидЦіниНазва { get; set; } = "";
             public decimal Ціна { get; set; }
             public decimal Сума { get; set; }
             public decimal Скидка { get; set; }
@@ -107,6 +109,7 @@ namespace StorageAndTrade
                     КількістьУпаковок,
                     ПакуванняНазва,
                     (float)Кількість,
+                    ВидЦіниНазва,
                     (float)Ціна,
                     (float)Сума,
                     (float)Скидка,
@@ -130,6 +133,8 @@ namespace StorageAndTrade
                     Пакування = запис.Пакування,
                     ПакуванняНазва = запис.ПакуванняНазва,
                     Кількість = запис.Кількість,
+                    ВидЦіни = запис.ВидЦіни,
+                    ВидЦіниНазва = запис.ВидЦіниНазва,
                     Ціна = запис.Ціна,
                     Сума = запис.Сума,
                     Скидка = запис.Скидка,
@@ -140,6 +145,10 @@ namespace StorageAndTrade
                 };
             }
 
+            public static void ПісляДодаванняНового(Запис запис)
+            {
+                ПісляЗміни_ВидЦіни(запис);
+            }
             public static void ПісляЗміни_Номенклатура(Запис запис)
             {
                 if (запис.Номенклатура.IsEmpty())
@@ -189,6 +198,10 @@ namespace StorageAndTrade
             {
                 запис.ПакуванняНазва = запис.Пакування.GetPresentation();
             }
+            public static void ПісляЗміни_ВидЦіни(Запис запис)
+            {
+                запис.ВидЦіниНазва = запис.ВидЦіни.GetPresentation();
+            }
             public static void ПісляЗміни_ЗамовленняПостачальнику(Запис запис)
             {
                 запис.ЗамовленняПостачальникуНазва = запис.ЗамовленняПостачальнику.GetPresentation();
@@ -200,6 +213,54 @@ namespace StorageAndTrade
             public static void ПісляЗміни_КількістьАбоЦіна(Запис запис)
             {
                 запис.Сума = запис.Кількість * запис.Ціна;
+            }
+            public static void ОтриматиЦіну(Запис запис)
+            {
+                if (запис.Номенклатура.IsEmpty())
+                    return;
+
+                if (запис.ВидЦіни.IsEmpty())
+                    return;
+
+                string query = $@"
+SELECT
+    ЦіниНоменклатури.{ЦіниНоменклатури_Const.Ціна} AS Ціна
+FROM 
+    {ЦіниНоменклатури_Const.TABLE} AS ЦіниНоменклатури
+WHERE
+    ЦіниНоменклатури.{ЦіниНоменклатури_Const.ВидЦіни} = '{запис.ВидЦіни.UnigueID}' AND
+    ЦіниНоменклатури.{ЦіниНоменклатури_Const.Номенклатура} = '{запис.Номенклатура.UnigueID}'
+";
+
+                #region WHERE
+
+                if (!запис.Характеристика.IsEmpty())
+                {
+                    query += $@"
+AND ЦіниНоменклатури.{ЦіниНоменклатури_Const.ХарактеристикаНоменклатури} = '{запис.Характеристика.UnigueID}'
+";
+                }
+
+                #endregion
+
+                query += $@"
+ORDER BY 
+    ЦіниНоменклатури.period DESC 
+LIMIT 1
+";
+                Dictionary<string, object> paramQuery = new Dictionary<string, object>();
+
+                string[] columnsName;
+                List<Dictionary<string, object>> listRow;
+
+                Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listRow);
+
+                if (listRow.Count > 0)
+                    foreach (Dictionary<string, object> row in listRow)
+                    {
+                        запис.Ціна = (decimal)row["Ціна"];
+                        запис.Сума = запис.Кількість * запис.Ціна;
+                    }
             }
         }
 
@@ -259,6 +320,8 @@ namespace StorageAndTrade
                                     запис.Номенклатура = selectPointer;
                                     Запис.ПісляЗміни_Номенклатура(запис);
 
+                                    Запис.ОтриматиЦіну(запис);
+
                                     Store.SetValues(iter, запис.ToArray());
                                 };
 
@@ -278,6 +341,8 @@ namespace StorageAndTrade
                                 {
                                     запис.Характеристика = selectPointer;
                                     Запис.ПісляЗміни_Характеристика(запис);
+
+                                    Запис.ОтриматиЦіну(запис);
 
                                     Store.SetValues(iter, запис.ToArray());
                                 };
@@ -321,6 +386,27 @@ namespace StorageAndTrade
                                 };
 
                                 Program.GeneralForm?.CreateNotebookPage("Вибір - Пакування", () => { return page; }, true);
+
+                                page.LoadRecords();
+
+                                break;
+                            }
+                        case Columns.ВидЦіниНазва:
+                            {
+                                ВидиЦін page = new ВидиЦін(true);
+
+                                page.DirectoryPointerItem = запис.ВидЦіни;
+                                page.CallBack_OnSelectPointer = (ВидиЦін_Pointer selectPointer) =>
+                                {
+                                    запис.ВидЦіни = selectPointer;
+                                    Запис.ПісляЗміни_ВидЦіни(запис);
+
+                                    Запис.ОтриматиЦіну(запис);
+
+                                    Store.SetValues(iter, запис.ToArray());
+                                };
+
+                                Program.GeneralForm?.CreateNotebookPage("Вибір - Вид ціни", () => { return page; }, true);
 
                                 page.LoadRecords();
 
@@ -417,17 +503,23 @@ namespace StorageAndTrade
 
                 //JOIN 4
                 querySelect.FieldAndAlias.Add(
+                    new NameValue<string>(ВидиЦін_Const.TABLE + "." + ВидиЦін_Const.Назва, "vidy_cen"));
+                querySelect.Joins.Add(
+                    new Join(ВидиЦін_Const.TABLE, ПоступленняТоварівТаПослуг_Товари_TablePart.ВидЦіни, querySelect.Table));
+
+                //JOIN 5
+                querySelect.FieldAndAlias.Add(
                     new NameValue<string>(СеріїНоменклатури_Const.TABLE + "." + СеріїНоменклатури_Const.Номер, "seria_number"));
                 querySelect.Joins.Add(
                     new Join(СеріїНоменклатури_Const.TABLE, ПоступленняТоварівТаПослуг_Товари_TablePart.Серія, querySelect.Table));
 
-                //JOIN 5
+                //JOIN 6
                 querySelect.FieldAndAlias.Add(
                     new NameValue<string>(ЗамовленняПостачальнику_Const.TABLE + "." + ЗамовленняПостачальнику_Const.Назва, "sam_name"));
                 querySelect.Joins.Add(
                     new Join(ЗамовленняПостачальнику_Const.TABLE, ПоступленняТоварівТаПослуг_Товари_TablePart.ЗамовленняПостачальнику, querySelect.Table));
 
-                //JOIN 6
+                //JOIN 7
                 querySelect.FieldAndAlias.Add(
                     new NameValue<string>(Склади_Const.TABLE + "." + Склади_Const.Назва, "sklad_name"));
                 querySelect.Joins.Add(
@@ -456,6 +548,8 @@ namespace StorageAndTrade
                         Пакування = record.Пакування,
                         ПакуванняНазва = join[record.UID.ToString()]["pak_name"],
                         Кількість = record.Кількість,
+                        ВидЦіни = record.ВидЦіни,
+                        ВидЦіниНазва = join[record.UID.ToString()]["vidy_cen"],
                         Ціна = record.Ціна,
                         Сума = record.Сума,
                         Скидка = record.Скидка,
@@ -491,6 +585,7 @@ namespace StorageAndTrade
                     record.КількістьУпаковок = запис.КількістьУпаковок;
                     record.Пакування = запис.Пакування;
                     record.Кількість = запис.Кількість;
+                    record.ВидЦіни = запис.ВидЦіни;
                     record.Ціна = запис.Ціна;
                     record.Сума = запис.Сума;
                     record.Скидка = запис.Скидка;
@@ -575,6 +670,14 @@ namespace StorageAndTrade
                 TreeViewColumn Column = new TreeViewColumn("Кількість", Кількість, "text", (int)Columns.Кількість) { MinWidth = 100 };
                 Column.SetCellDataFunc(Кількість, new TreeCellDataFunc(NumericCellDataFunc));
                 TreeViewGrid.AppendColumn(Column);
+            }
+
+            //ВидЦіниНазва
+            {
+                TreeViewColumn ВидЦіниНазва = new TreeViewColumn("Вид ціни", new CellRendererText(), "text", (int)Columns.ВидЦіниНазва) { MinWidth = 100 };
+                ВидЦіниНазва.Data.Add("Column", Columns.ВидЦіниНазва);
+
+                TreeViewGrid.AppendColumn(ВидЦіниНазва);
             }
 
             //Ціна
@@ -745,6 +848,8 @@ namespace StorageAndTrade
         {
             Запис запис = new Запис();
             Записи.Add(запис);
+
+            Запис.ПісляДодаванняНового(запис);
 
             Store.AppendValues(запис.ToArray());
         }
