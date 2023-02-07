@@ -286,7 +286,7 @@ namespace StorageAndTrade
 
                     record.Номенклатура.Назва = JoinValue[uid]["Номенклатура"];
                     record.Пакування.Назва = JoinValue[uid]["Пакування"];
-                    record.Комірка.Назва = JoinValue[uid]["Склад"];
+                    record.Комірка.Назва = JoinValue[uid]["Комірка"];
 
                     Запис запис = new Запис
                     {
