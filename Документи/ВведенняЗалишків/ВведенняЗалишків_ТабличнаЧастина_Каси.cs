@@ -1,5 +1,3 @@
-#region Info
-
 /*
 Copyright (C) 2019-2023 TARAKHOMYN YURIY IVANOVYCH
 All rights reserved.
@@ -23,8 +21,6 @@ limitations under the License.
 Сайт:     accounting.org.ua
 */
 
-#endregion
-
 using Gtk;
 
 using AccountingSoftware;
@@ -43,13 +39,13 @@ namespace StorageAndTrade
         enum Columns
         {
             НомерРядка,
-            КасаНазва,
+            Каса,
             Сума
         }
 
         ListStore Store = new ListStore(
             typeof(int),      //НомерРядка
-            typeof(string),   //КасаНазва
+            typeof(string),   //Каса
             typeof(float)     //Сума
         );
 
@@ -60,7 +56,6 @@ namespace StorageAndTrade
             public Guid ID { get; set; } = Guid.Empty;
             public int НомерРядка { get; set; }
             public Каси_Pointer Каса { get; set; } = new Каси_Pointer();
-            public string КасаНазва { get; set; } = "";
             public decimal Сума { get; set; }
 
             public object[] ToArray()
@@ -68,7 +63,7 @@ namespace StorageAndTrade
                 return new object[]
                 {
                     НомерРядка,
-                    КасаНазва,
+                    Каса.Назва,
                     (float)Сума
                 };
             }
@@ -79,14 +74,13 @@ namespace StorageAndTrade
                 {
                     ID = Guid.Empty,
                     Каса = запис.Каса,
-                    КасаНазва = запис.КасаНазва,
                     Сума = запис.Сума
                 };
             }
 
             public static void ПісляЗміни_Каса(Запис запис)
             {
-                запис.КасаНазва = запис.Каса.GetPresentation();
+                запис.Каса.GetPresentation();
             }
         }
 
@@ -136,7 +130,7 @@ namespace StorageAndTrade
 
                     switch ((Columns)treeColumn.Data["Column"]!)
                     {
-                        case Columns.КасаНазва:
+                        case Columns.Каса:
                             {
                                 Каси page = new Каси(true);
 
@@ -188,9 +182,9 @@ namespace StorageAndTrade
                 Query querySelect = ВведенняЗалишків_Objest.Каси_TablePart.QuerySelect;
                 querySelect.Clear();
 
-                //JOIN 1
+                //JOIN Каса
                 querySelect.FieldAndAlias.Add(
-                    new NameValue<string>(Каси_Const.TABLE + "." + Каси_Const.Назва, "kasa_name"));
+                    new NameValue<string>(Каси_Const.TABLE + "." + Каси_Const.Назва, "Каса"));
                 querySelect.Joins.Add(
                     new Join(Каси_Const.TABLE, ВведенняЗалишків_Каси_TablePart.Каса, querySelect.Table));
 
@@ -199,16 +193,19 @@ namespace StorageAndTrade
 
                 ВведенняЗалишків_Objest.Каси_TablePart.Read();
 
-                Dictionary<string, Dictionary<string, string>> join = ВведенняЗалишків_Objest.Каси_TablePart.JoinValue;
+                Dictionary<string, Dictionary<string, string>> JoinValue = ВведенняЗалишків_Objest.Каси_TablePart.JoinValue;
 
                 foreach (ВведенняЗалишків_Каси_TablePart.Record record in ВведенняЗалишків_Objest.Каси_TablePart.Records)
                 {
+                    string uid = record.UID.ToString();
+
+                    record.Каса.Назва = JoinValue[uid]["Каса"];
+
                     Запис запис = new Запис
                     {
                         ID = record.UID,
                         НомерРядка = record.НомерРядка,
                         Каса = record.Каса,
-                        КасаНазва = join[record.UID.ToString()]["kasa_name"],
                         Сума = record.Сума
                     };
 
@@ -249,12 +246,12 @@ namespace StorageAndTrade
             //НомерРядка
             TreeViewGrid.AppendColumn(new TreeViewColumn("№", new CellRendererText(), "text", (int)Columns.НомерРядка) { MinWidth = 30 });
 
-            //КасаНазва
+            //Каса
             {
-                TreeViewColumn КасаНазва = new TreeViewColumn("Каса", new CellRendererText(), "text", (int)Columns.КасаНазва) { MinWidth = 300 };
-                КасаНазва.Data.Add("Column", Columns.КасаНазва);
+                TreeViewColumn Каса = new TreeViewColumn("Каса", new CellRendererText(), "text", (int)Columns.Каса) { MinWidth = 300 };
+                Каса.Data.Add("Column", Columns.Каса);
 
-                TreeViewGrid.AppendColumn(КасаНазва);
+                TreeViewGrid.AppendColumn(Каса);
             }
 
             //Сума

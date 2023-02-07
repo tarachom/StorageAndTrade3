@@ -1,5 +1,3 @@
-#region Info
-
 /*
 Copyright (C) 2019-2023 TARAKHOMYN YURIY IVANOVYCH
 All rights reserved.
@@ -23,8 +21,6 @@ limitations under the License.
 Сайт:     accounting.org.ua
 */
 
-#endregion
-
 using Gtk;
 
 using AccountingSoftware;
@@ -43,13 +39,13 @@ namespace StorageAndTrade
         enum Columns
         {
             НомерРядка,
-            БанківськийРахунокНазва,
+            БанківськийРахунок,
             Сума
         }
 
         ListStore Store = new ListStore(
             typeof(int),      //НомерРядка
-            typeof(string),   //БанківськийРахунокНазва
+            typeof(string),   //БанківськийРахунок
             typeof(float)     //Сума
         );
 
@@ -60,7 +56,6 @@ namespace StorageAndTrade
             public Guid ID { get; set; } = Guid.Empty;
             public int НомерРядка { get; set; }
             public БанківськіРахункиОрганізацій_Pointer БанківськийРахунок { get; set; } = new БанківськіРахункиОрганізацій_Pointer();
-            public string БанківськийРахунокНазва { get; set; } = "";
             public decimal Сума { get; set; }
 
             public object[] ToArray()
@@ -68,7 +63,7 @@ namespace StorageAndTrade
                 return new object[]
                 {
                     НомерРядка,
-                    БанківськийРахунокНазва,
+                    БанківськийРахунок.Назва,
                     (float)Сума
                 };
             }
@@ -79,14 +74,13 @@ namespace StorageAndTrade
                 {
                     ID = Guid.Empty,
                     БанківськийРахунок = запис.БанківськийРахунок,
-                    БанківськийРахунокНазва = запис.БанківськийРахунокНазва,
                     Сума = запис.Сума
                 };
             }
 
             public static void ПісляЗміни_БанківськийРахунок(Запис запис)
             {
-                запис.БанківськийРахунокНазва = запис.БанківськийРахунок.GetPresentation();
+                запис.БанківськийРахунок.GetPresentation();
             }
         }
 
@@ -136,7 +130,7 @@ namespace StorageAndTrade
 
                     switch ((Columns)treeColumn.Data["Column"]!)
                     {
-                        case Columns.БанківськийРахунокНазва:
+                        case Columns.БанківськийРахунок:
                             {
                                 БанківськіРахункиОрганізацій page = new БанківськіРахункиОрганізацій(true);
 
@@ -188,9 +182,9 @@ namespace StorageAndTrade
                 Query querySelect = ВведенняЗалишків_Objest.БанківськіРахунки_TablePart.QuerySelect;
                 querySelect.Clear();
 
-                //JOIN 1
+                //JOIN БанківськійРахунок
                 querySelect.FieldAndAlias.Add(
-                    new NameValue<string>(БанківськіРахункиОрганізацій_Const.TABLE + "." + БанківськіРахункиОрганізацій_Const.Назва, "bank_rah_name"));
+                    new NameValue<string>(БанківськіРахункиОрганізацій_Const.TABLE + "." + БанківськіРахункиОрганізацій_Const.Назва, "БанківськійРахунок"));
                 querySelect.Joins.Add(
                     new Join(БанківськіРахункиОрганізацій_Const.TABLE, ВведенняЗалишків_БанківськіРахунки_TablePart.БанківськийРахунок, querySelect.Table));
 
@@ -199,16 +193,19 @@ namespace StorageAndTrade
 
                 ВведенняЗалишків_Objest.БанківськіРахунки_TablePart.Read();
 
-                Dictionary<string, Dictionary<string, string>> join = ВведенняЗалишків_Objest.БанківськіРахунки_TablePart.JoinValue;
+                Dictionary<string, Dictionary<string, string>> JoinValue = ВведенняЗалишків_Objest.БанківськіРахунки_TablePart.JoinValue;
 
                 foreach (ВведенняЗалишків_БанківськіРахунки_TablePart.Record record in ВведенняЗалишків_Objest.БанківськіРахунки_TablePart.Records)
                 {
+                    string uid = record.UID.ToString();
+
+                    record.БанківськийРахунок.Назва = JoinValue[uid]["БанківськійРахунок"];
+
                     Запис запис = new Запис
                     {
                         ID = record.UID,
                         НомерРядка = record.НомерРядка,
                         БанківськийРахунок = record.БанківськийРахунок,
-                        БанківськийРахунокНазва = join[record.UID.ToString()]["bank_rah_name"],
                         Сума = record.Сума
                     };
 
@@ -249,12 +246,12 @@ namespace StorageAndTrade
             //НомерРядка
             TreeViewGrid.AppendColumn(new TreeViewColumn("№", new CellRendererText(), "text", (int)Columns.НомерРядка) { MinWidth = 30 });
 
-            //БанківськийРахунокНазва
+            //БанківськийРахунок
             {
-                TreeViewColumn БанківськийРахунокНазва = new TreeViewColumn("Банківський рахунок", new CellRendererText(), "text", (int)Columns.БанківськийРахунокНазва) { MinWidth = 300 };
-                БанківськийРахунокНазва.Data.Add("Column", Columns.БанківськийРахунокНазва);
+                TreeViewColumn БанківськийРахунок = new TreeViewColumn("Банківський рахунок", new CellRendererText(), "text", (int)Columns.БанківськийРахунок) { MinWidth = 300 };
+                БанківськийРахунок.Data.Add("Column", Columns.БанківськийРахунок);
 
-                TreeViewGrid.AppendColumn(БанківськийРахунокНазва);
+                TreeViewGrid.AppendColumn(БанківськийРахунок);
             }
 
             //Сума

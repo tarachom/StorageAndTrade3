@@ -1,5 +1,3 @@
-#region Info
-
 /*
 Copyright (C) 2019-2023 TARAKHOMYN YURIY IVANOVYCH
 All rights reserved.
@@ -23,8 +21,6 @@ limitations under the License.
 Сайт:     accounting.org.ua
 */
 
-#endregion
-
 using Gtk;
 
 using AccountingSoftware;
@@ -43,8 +39,8 @@ namespace StorageAndTrade
         enum Columns
         {
             НомерРядка,
-            НоменклатураНазва,
-            ХарактеристикаНазва,
+            Номенклатура,
+            Характеристика,
             Кількість,
             Ціна,
             Сума
@@ -52,8 +48,8 @@ namespace StorageAndTrade
 
         ListStore Store = new ListStore(
             typeof(int),      //НомерРядка
-            typeof(string),   //НоменклатураНазва
-            typeof(string),   //ХарактеристикаНазва
+            typeof(string),   //Номенклатура
+            typeof(string),   //Характеристика
             typeof(float),    //Кількість
             typeof(float),    //Ціна
             typeof(float)     //Сума
@@ -66,9 +62,7 @@ namespace StorageAndTrade
             public Guid ID { get; set; } = Guid.Empty;
             public int НомерРядка { get; set; }
             public Номенклатура_Pointer Номенклатура { get; set; } = new Номенклатура_Pointer();
-            public string НоменклатураНазва { get; set; } = "";
             public ХарактеристикиНоменклатури_Pointer Характеристика { get; set; } = new ХарактеристикиНоменклатури_Pointer();
-            public string ХарактеристикаНазва { get; set; } = "";
             public decimal Кількість { get; set; } = 1;
             public decimal Ціна { get; set; }
             public decimal Сума { get; set; }
@@ -78,8 +72,8 @@ namespace StorageAndTrade
                 return new object[]
                 {
                     НомерРядка,
-                    НоменклатураНазва,
-                    ХарактеристикаНазва,
+                    Номенклатура.Назва,
+                    Характеристика.Назва,
                     (float)Кількість,
                     (float)Ціна,
                     (float)Сума
@@ -92,9 +86,7 @@ namespace StorageAndTrade
                 {
                     ID = Guid.Empty,
                     Номенклатура = запис.Номенклатура,
-                    НоменклатураНазва = запис.НоменклатураНазва,
                     Характеристика = запис.Характеристика,
-                    ХарактеристикаНазва = запис.ХарактеристикаНазва,
                     Кількість = запис.Кількість,
                     Ціна = запис.Ціна,
                     Сума = запис.Сума
@@ -103,11 +95,11 @@ namespace StorageAndTrade
 
             public static void ПісляЗміни_Номенклатура(Запис запис)
             {
-                запис.НоменклатураНазва = запис.Номенклатура.GetPresentation();
+                запис.Номенклатура.GetPresentation();
             }
             public static void ПісляЗміни_Характеристика(Запис запис)
             {
-                запис.ХарактеристикаНазва = запис.Характеристика.GetPresentation();
+                запис.Характеристика.GetPresentation();
             }
             public static void ПісляЗміни_КількістьАбоЦіна(Запис запис)
             {
@@ -161,7 +153,7 @@ namespace StorageAndTrade
 
                     switch ((Columns)treeColumn.Data["Column"]!)
                     {
-                        case Columns.НоменклатураНазва:
+                        case Columns.Номенклатура:
                             {
                                 Номенклатура page = new Номенклатура(true);
 
@@ -180,7 +172,7 @@ namespace StorageAndTrade
 
                                 break;
                             }
-                        case Columns.ХарактеристикаНазва:
+                        case Columns.Характеристика:
                             {
                                 ХарактеристикиНоменклатури page = new ХарактеристикиНоменклатури(true);
 
@@ -233,15 +225,15 @@ namespace StorageAndTrade
                 Query querySelect = АктВиконанихРобіт_Objest.Послуги_TablePart.QuerySelect;
                 querySelect.Clear();
 
-                //JOIN 1
+                //JOIN Номенклатура
                 querySelect.FieldAndAlias.Add(
-                    new NameValue<string>(Номенклатура_Const.TABLE + "." + Номенклатура_Const.Назва, "nom_name"));
+                    new NameValue<string>(Номенклатура_Const.TABLE + "." + Номенклатура_Const.Назва, "Номенклатура"));
                 querySelect.Joins.Add(
                     new Join(Номенклатура_Const.TABLE, АктВиконанихРобіт_Послуги_TablePart.Номенклатура, querySelect.Table));
 
-                //JOIN 3
+                //JOIN Характеристика
                 querySelect.FieldAndAlias.Add(
-                    new NameValue<string>(ХарактеристикиНоменклатури_Const.TABLE + "." + ХарактеристикиНоменклатури_Const.Назва, "xar_name"));
+                    new NameValue<string>(ХарактеристикиНоменклатури_Const.TABLE + "." + ХарактеристикиНоменклатури_Const.Назва, "Характеристика"));
                 querySelect.Joins.Add(
                     new Join(ХарактеристикиНоменклатури_Const.TABLE, АктВиконанихРобіт_Послуги_TablePart.ХарактеристикаНоменклатури, querySelect.Table));
 
@@ -250,18 +242,21 @@ namespace StorageAndTrade
 
                 АктВиконанихРобіт_Objest.Послуги_TablePart.Read();
 
-                Dictionary<string, Dictionary<string, string>> join = АктВиконанихРобіт_Objest.Послуги_TablePart.JoinValue;
+                Dictionary<string, Dictionary<string, string>> JoinValue = АктВиконанихРобіт_Objest.Послуги_TablePart.JoinValue;
 
                 foreach (АктВиконанихРобіт_Послуги_TablePart.Record record in АктВиконанихРобіт_Objest.Послуги_TablePart.Records)
                 {
+                    string uid = record.UID.ToString();
+
+                    record.Номенклатура.Назва = JoinValue[uid]["Номенклатура"];
+                    record.ХарактеристикаНоменклатури.Назва = JoinValue[uid]["Характеристика"];
+
                     Запис запис = new Запис
                     {
                         ID = record.UID,
                         НомерРядка = record.НомерРядка,
                         Номенклатура = record.Номенклатура,
-                        НоменклатураНазва = join[record.UID.ToString()]["nom_name"],
                         Характеристика = record.ХарактеристикаНоменклатури,
-                        ХарактеристикаНазва = join[record.UID.ToString()]["xar_name"],
                         Кількість = record.Кількість,
                         Ціна = record.Ціна,
                         Сума = record.Сума
@@ -317,20 +312,20 @@ namespace StorageAndTrade
             //НомерРядка
             TreeViewGrid.AppendColumn(new TreeViewColumn("№", new CellRendererText(), "text", (int)Columns.НомерРядка) { MinWidth = 30 });
 
-            //НоменклатураНазва
+            //Номенклатура
             {
-                TreeViewColumn НоменклатураНазва = new TreeViewColumn("Номенклатура", new CellRendererText(), "text", (int)Columns.НоменклатураНазва) { MinWidth = 300 };
-                НоменклатураНазва.Data.Add("Column", Columns.НоменклатураНазва);
+                TreeViewColumn Номенклатура = new TreeViewColumn("Номенклатура", new CellRendererText(), "text", (int)Columns.Номенклатура) { MinWidth = 300 };
+                Номенклатура.Data.Add("Column", Columns.Номенклатура);
 
-                TreeViewGrid.AppendColumn(НоменклатураНазва);
+                TreeViewGrid.AppendColumn(Номенклатура);
             }
 
-            //ХарактеристикаНазва
+            //Характеристика
             {
-                TreeViewColumn ХарактеристикаНазва = new TreeViewColumn("Характеристика", new CellRendererText(), "text", (int)Columns.ХарактеристикаНазва) { MinWidth = 300 };
-                ХарактеристикаНазва.Data.Add("Column", Columns.ХарактеристикаНазва);
+                TreeViewColumn Характеристика = new TreeViewColumn("Характеристика", new CellRendererText(), "text", (int)Columns.Характеристика) { MinWidth = 300 };
+                Характеристика.Data.Add("Column", Columns.Характеристика);
 
-                TreeViewGrid.AppendColumn(ХарактеристикаНазва);
+                TreeViewGrid.AppendColumn(Характеристика);
             }
 
             //Кількість

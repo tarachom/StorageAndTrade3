@@ -144,9 +144,6 @@ namespace StorageAndTrade
             {
                 запис.Номенклатура.GetPresentation();
 
-                if (запис.Номенклатура.IsEmpty())
-                    return;
-
                 Номенклатура_Objest? номенклатура_Objest = запис.Номенклатура.GetDirectoryObject();
                 if (номенклатура_Objest != null && !номенклатура_Objest.ОдиницяВиміру.IsEmpty())
                 {

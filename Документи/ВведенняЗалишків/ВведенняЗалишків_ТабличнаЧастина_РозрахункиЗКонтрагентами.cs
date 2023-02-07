@@ -1,5 +1,3 @@
-#region Info
-
 /*
 Copyright (C) 2019-2023 TARAKHOMYN YURIY IVANOVYCH
 All rights reserved.
@@ -23,8 +21,6 @@ limitations under the License.
 Сайт:     accounting.org.ua
 */
 
-#endregion
-
 using Gtk;
 
 using AccountingSoftware;
@@ -46,16 +42,16 @@ namespace StorageAndTrade
         {
             НомерРядка,
             ТипКонтрагента,
-            КонтрагентНазва,
-            ВалютаНазва,
+            Контрагент,
+            Валюта,
             Сума
         }
 
         ListStore Store = new ListStore(
             typeof(int),      //НомерРядка
             typeof(string),   //ТипКонтрагента
-            typeof(string),   //КонтрагентНазва
-            typeof(string),   //ВалютаНазва
+            typeof(string),   //Контрагент
+            typeof(string),   //Валюта
             typeof(float)     //Сума
         );
 
@@ -66,9 +62,7 @@ namespace StorageAndTrade
             public Guid ID { get; set; } = Guid.Empty;
             public int НомерРядка { get; set; }
             public Контрагенти_Pointer Контрагент { get; set; } = new Контрагенти_Pointer();
-            public string КонтрагентНазва { get; set; } = "";
             public Валюти_Pointer Валюта { get; set; } = new Валюти_Pointer();
-            public string ВалютаНазва { get; set; } = "";
             public decimal Сума { get; set; }
             public ТипиКонтрагентів ТипКонтрагента { get; set; } = ТипиКонтрагентів.Постачальник;
 
@@ -78,8 +72,8 @@ namespace StorageAndTrade
                 {
                     НомерРядка,
                     ТипКонтрагента.ToString(),
-                    КонтрагентНазва,
-                    ВалютаНазва,
+                    Контрагент.Назва,
+                    Валюта.Назва,
                     (float)Сума
                 };
             }
@@ -90,9 +84,7 @@ namespace StorageAndTrade
                 {
                     ID = Guid.Empty,
                     Контрагент = запис.Контрагент,
-                    КонтрагентНазва = запис.КонтрагентНазва,
                     Валюта = запис.Валюта,
-                    ВалютаНазва = запис.ВалютаНазва,
                     Сума = запис.Сума,
                     ТипКонтрагента = запис.ТипКонтрагента
                 };
@@ -100,11 +92,11 @@ namespace StorageAndTrade
 
             public static void ПісляЗміни_Контрагент(Запис запис)
             {
-                запис.КонтрагентНазва = запис.Контрагент.GetPresentation();
+                запис.Контрагент.GetPresentation();
             }
             public static void ПісляЗміни_Валюта(Запис запис)
             {
-                запис.ВалютаНазва = запис.Валюта.GetPresentation();
+                запис.Валюта.GetPresentation();
             }
         }
 
@@ -154,7 +146,7 @@ namespace StorageAndTrade
 
                     switch ((Columns)treeColumn.Data["Column"]!)
                     {
-                        case Columns.КонтрагентНазва:
+                        case Columns.Контрагент:
                             {
                                 Контрагенти page = new Контрагенти(true);
 
@@ -173,7 +165,7 @@ namespace StorageAndTrade
 
                                 break;
                             }
-                        case Columns.ВалютаНазва:
+                        case Columns.Валюта:
                             {
                                 Валюти page = new Валюти(true);
 
@@ -225,15 +217,15 @@ namespace StorageAndTrade
                 Query querySelect = ВведенняЗалишків_Objest.РозрахункиЗКонтрагентами_TablePart.QuerySelect;
                 querySelect.Clear();
 
-                //JOIN 1
+                //JOIN Контрагент
                 querySelect.FieldAndAlias.Add(
-                    new NameValue<string>(Контрагенти_Const.TABLE + "." + Контрагенти_Const.Назва, "kontragent_name"));
+                    new NameValue<string>(Контрагенти_Const.TABLE + "." + Контрагенти_Const.Назва, "Контрагент"));
                 querySelect.Joins.Add(
                     new Join(Контрагенти_Const.TABLE, ВведенняЗалишків_РозрахункиЗКонтрагентами_TablePart.Контрагент, querySelect.Table));
 
-                //JOIN 2
+                //JOIN Валюта
                 querySelect.FieldAndAlias.Add(
-                    new NameValue<string>(Валюти_Const.TABLE + "." + Валюти_Const.Назва, "valuta_name"));
+                    new NameValue<string>(Валюти_Const.TABLE + "." + Валюти_Const.Назва, "Валюта"));
                 querySelect.Joins.Add(
                     new Join(Валюти_Const.TABLE, ВведенняЗалишків_РозрахункиЗКонтрагентами_TablePart.Валюта, querySelect.Table));
 
@@ -242,19 +234,22 @@ namespace StorageAndTrade
 
                 ВведенняЗалишків_Objest.РозрахункиЗКонтрагентами_TablePart.Read();
 
-                Dictionary<string, Dictionary<string, string>> join = ВведенняЗалишків_Objest.РозрахункиЗКонтрагентами_TablePart.JoinValue;
+                Dictionary<string, Dictionary<string, string>> JoinValue = ВведенняЗалишків_Objest.РозрахункиЗКонтрагентами_TablePart.JoinValue;
 
                 foreach (ВведенняЗалишків_РозрахункиЗКонтрагентами_TablePart.Record record in ВведенняЗалишків_Objest.РозрахункиЗКонтрагентами_TablePart.Records)
                 {
+                    string uid = record.UID.ToString();
+
+                    record.Контрагент.Назва = JoinValue[uid]["Контрагент"];
+                    record.Валюта.Назва = JoinValue[uid]["Валюта"];
+
                     Запис запис = new Запис
                     {
                         ID = record.UID,
                         НомерРядка = record.НомерРядка,
                         ТипКонтрагента = (ТипиКонтрагентів)record.ТипКонтрагента,
                         Контрагент = record.Контрагент,
-                        КонтрагентНазва = join[record.UID.ToString()]["kontragent_name"],
                         Валюта = record.Валюта,
-                        ВалютаНазва = join[record.UID.ToString()]["valuta_name"],
                         Сума = record.Сума
                     };
 
@@ -316,20 +311,20 @@ namespace StorageAndTrade
                 TreeViewGrid.AppendColumn(new TreeViewColumn("Тип контрагента", TypeContragent, "text", (int)Columns.ТипКонтрагента) { MinWidth = 100 });
             }
 
-            //КонтрагентНазва
+            //Контрагент
             {
-                TreeViewColumn КонтрагентНазва = new TreeViewColumn("Контрагент", new CellRendererText(), "text", (int)Columns.КонтрагентНазва) { MinWidth = 300 };
-                КонтрагентНазва.Data.Add("Column", Columns.КонтрагентНазва);
+                TreeViewColumn Контрагент = new TreeViewColumn("Контрагент", new CellRendererText(), "text", (int)Columns.Контрагент) { MinWidth = 300 };
+                Контрагент.Data.Add("Column", Columns.Контрагент);
 
-                TreeViewGrid.AppendColumn(КонтрагентНазва);
+                TreeViewGrid.AppendColumn(Контрагент);
             }
 
-            //ВалютаНазва
+            //Валюта
             {
-                TreeViewColumn ВалютаНазва = new TreeViewColumn("Валюта", new CellRendererText(), "text", (int)Columns.ВалютаНазва) { MinWidth = 300 };
-                ВалютаНазва.Data.Add("Column", Columns.ВалютаНазва);
+                TreeViewColumn Валюта = new TreeViewColumn("Валюта", new CellRendererText(), "text", (int)Columns.Валюта) { MinWidth = 300 };
+                Валюта.Data.Add("Column", Columns.Валюта);
 
-                TreeViewGrid.AppendColumn(ВалютаНазва);
+                TreeViewGrid.AppendColumn(Валюта);
             }
 
             //Сума
