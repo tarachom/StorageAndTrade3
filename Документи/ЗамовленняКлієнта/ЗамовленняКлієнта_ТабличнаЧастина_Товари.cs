@@ -83,7 +83,7 @@ namespace StorageAndTrade
             public int КількістьУпаковок { get; set; } = 1;
             public ПакуванняОдиниціВиміру_Pointer Пакування { get; set; } = new ПакуванняОдиниціВиміру_Pointer();
             public decimal Кількість { get; set; } = 1;
-            public ВидиЦін_Pointer ВидЦіни { get; set; } = Константи.ЗначенняЗаЗамовчуванням.ОсновнийВидЦіни_Const;
+            public ВидиЦін_Pointer ВидЦіни { get; set; } = new ВидиЦін_Pointer();
             public decimal Ціна { get; set; }
             public decimal Сума { get; set; }
             public decimal Скидка { get; set; }
@@ -127,6 +127,7 @@ namespace StorageAndTrade
 
             public static void ПісляДодаванняНового(Запис запис)
             {
+                запис.ВидЦіни = Константи.ЗначенняЗаЗамовчуванням.ОсновнийВидЦіни_Const;
                 ПісляЗміни_ВидЦіни(запис);
             }
             public static void ПісляЗміни_Номенклатура(Запис запис)
@@ -151,15 +152,15 @@ namespace StorageAndTrade
             }
             public static void ПісляЗміни_Характеристика(Запис запис)
             {
-                 запис.Характеристика.GetPresentation();
+                запис.Характеристика.GetPresentation();
             }
             public static void ПісляЗміни_Пакування(Запис запис)
             {
-                 запис.Пакування.GetPresentation();
+                запис.Пакування.GetPresentation();
             }
             public static void ПісляЗміни_ВидЦіни(Запис запис)
             {
-               запис.ВидЦіни.GetPresentation();
+                запис.ВидЦіни.GetPresentation();
             }
             public static void ПісляЗміни_Склад(Запис запис)
             {
