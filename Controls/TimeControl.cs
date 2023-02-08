@@ -29,6 +29,7 @@ namespace StorageAndTrade
     {
         Entry entryTime = new Entry();
         HBox hBoxInfoValid = new HBox() { WidthRequest = 16 };
+        Button bOpenPopover;
 
         public TimeControl() : base()
         {
@@ -36,6 +37,12 @@ namespace StorageAndTrade
 
             entryTime.Changed += OnEntryTimeChanged;
             PackStart(entryTime, false, false, 2);
+
+            //Button
+            bOpenPopover = new Button(new Image("images/find.png"));
+            bOpenPopover.Clicked += OnOpenPopover;
+
+            PackStart(bOpenPopover, false, false, 1);
         }
 
         TimeSpan mValue;
@@ -79,6 +86,76 @@ namespace StorageAndTrade
 
                 return false;
             }
+        }
+
+        void OnOpenPopover(object? sender, EventArgs args)
+        {
+            Popover popoverCalendar = new Popover(bOpenPopover);
+            popoverCalendar.BorderWidth = 5;
+
+            VBox vBox = new VBox();
+
+            HBox hBoxTime = new HBox() { Halign = Align.Center };
+            vBox.PackStart(hBoxTime, false, false, 5);
+
+            SpinButton hourSpin = new SpinButton(0, 23, 1) { Orientation = Orientation.Vertical };
+            SpinButton minuteSpin = new SpinButton(0, 59, 1) { Orientation = Orientation.Vertical };
+            SpinButton secondSpin = new SpinButton(0, 59, 1) { Orientation = Orientation.Vertical };
+
+            //Hour
+            {
+                hourSpin.Value = Value.Hours;
+                hourSpin.ValueChanged += (object? sender, EventArgs args) =>
+                {
+                    Value = new TimeSpan((int)hourSpin.Value, Value.Minutes, Value.Seconds);
+                };
+
+                hBoxTime.PackStart(hourSpin, false, false, 0);
+            }
+
+            hBoxTime.PackStart(new Label(":"), false, false, 5);
+
+            //Minute
+            {
+                minuteSpin.Value = Value.Minutes;
+                minuteSpin.ValueChanged += (object? sender, EventArgs args) =>
+                {
+                    Value = new TimeSpan(Value.Hours, (int)minuteSpin.Value, Value.Seconds);
+                };
+
+                hBoxTime.PackStart(minuteSpin, false, false, 0);
+            }
+
+            hBoxTime.PackStart(new Label(":"), false, false, 5);
+
+            //Second
+            {
+                secondSpin.Value = Value.Seconds;
+                secondSpin.ValueChanged += (object? sender, EventArgs args) =>
+                {
+                    Value = new TimeSpan(Value.Hours, Value.Minutes, (int)secondSpin.Value);
+                };
+
+                hBoxTime.PackStart(secondSpin, false, false, 0);
+            }
+
+            //Поточний час
+            {
+                LinkButton lbCurrentDate = new LinkButton("", "Поточний час");
+                lbCurrentDate.Clicked += (object? sender, EventArgs args) =>
+                {
+                    Value = DateTime.Now.TimeOfDay;
+
+                    hourSpin.Value = Value.Hours;
+                    minuteSpin.Value = Value.Minutes;
+                    secondSpin.Value = Value.Seconds;
+                };
+
+                vBox.PackStart(lbCurrentDate, false, false, 0);
+            }
+
+            popoverCalendar.Add(vBox);
+            popoverCalendar.ShowAll();
         }
 
         void OnEntryTimeChanged(object? sender, EventArgs args)

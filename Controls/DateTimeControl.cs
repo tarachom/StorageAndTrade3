@@ -56,7 +56,7 @@ namespace StorageAndTrade
             set
             {
                 mValue = value;
-                entryDateTimeValue.Text = OnlyDate ? mValue.ToString("dd.MM.yyyy") : mValue.ToString("dd.MM.yyyy hh:mm:ss");
+                entryDateTimeValue.Text = OnlyDate ? mValue.ToString("dd.MM.yyyy") : mValue.ToString("dd.MM.yyyy HH:mm:ss");
             }
         }
 
@@ -110,6 +110,10 @@ namespace StorageAndTrade
 
             vBox.PackStart(calendar, false, false, 0);
 
+            SpinButton hourSpin = new SpinButton(0, 23, 1) { Orientation = Orientation.Vertical };
+            SpinButton minuteSpin = new SpinButton(0, 59, 1) { Orientation = Orientation.Vertical };
+            SpinButton secondSpin = new SpinButton(0, 59, 1) { Orientation = Orientation.Vertical };
+
             if (!OnlyDate)
             {
                 HBox hBoxTime = new HBox() { Halign = Align.Center };
@@ -117,7 +121,6 @@ namespace StorageAndTrade
 
                 //Hour
                 {
-                    SpinButton hourSpin = new SpinButton(0, 23, 1) { Orientation = Orientation.Vertical };
                     hourSpin.Value = TimeOnly.FromDateTime(Value).Hour;
                     hourSpin.ValueChanged += (object? sender, EventArgs args) =>
                     {
@@ -133,7 +136,6 @@ namespace StorageAndTrade
 
                 //Minute
                 {
-                    SpinButton minuteSpin = new SpinButton(0, 59, 1) { Orientation = Orientation.Vertical };
                     minuteSpin.Value = TimeOnly.FromDateTime(Value).Minute;
                     minuteSpin.ValueChanged += (object? sender, EventArgs args) =>
                     {
@@ -149,7 +151,6 @@ namespace StorageAndTrade
 
                 //Second
                 {
-                    SpinButton secondSpin = new SpinButton(0, 59, 1) { Orientation = Orientation.Vertical };
                     secondSpin.Value = TimeOnly.FromDateTime(Value).Second;
                     secondSpin.ValueChanged += (object? sender, EventArgs args) =>
                     {
@@ -160,6 +161,21 @@ namespace StorageAndTrade
 
                     hBoxTime.PackStart(secondSpin, false, false, 0);
                 }
+            }
+
+            //Поточна дата
+            {
+                LinkButton lbCurrentDate = new LinkButton("", "Поточна дата");
+                lbCurrentDate.Clicked += (object? sender, EventArgs args) =>
+                {
+                    calendar.Date = Value = DateTime.Now;
+
+                    hourSpin.Value = TimeOnly.FromDateTime(Value).Hour;
+                    minuteSpin.Value = TimeOnly.FromDateTime(Value).Minute;
+                    secondSpin.Value = TimeOnly.FromDateTime(Value).Second;
+                };
+
+                vBox.PackStart(lbCurrentDate, false, false, 0);
             }
 
             popoverCalendar.Add(vBox);
