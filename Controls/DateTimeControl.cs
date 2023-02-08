@@ -29,6 +29,7 @@ namespace StorageAndTrade
     {
         Entry entryDateTimeValue = new Entry();
         HBox hBoxInfoValid = new HBox() { WidthRequest = 16 };
+        Button bOpenCalendar;
 
         public DateTimeControl() : base()
         {
@@ -39,10 +40,10 @@ namespace StorageAndTrade
             PackStart(entryDateTimeValue, false, false, 1);
 
             //Button
-            Button openCalendarButton = new Button(new Image("images/find.png"));
-            openCalendarButton.Clicked += OnOpenCalendar;
+            bOpenCalendar = new Button(new Image("images/find.png"));
+            bOpenCalendar.Clicked += OnOpenCalendar;
 
-            PackStart(openCalendarButton, false, false, 1);
+            PackStart(bOpenCalendar, false, false, 1);
         }
 
         DateTime mValue;
@@ -55,7 +56,7 @@ namespace StorageAndTrade
             set
             {
                 mValue = value;
-                entryDateTimeValue.Text = OnlyDate ? mValue.ToShortDateString() : mValue.ToString();
+                entryDateTimeValue.Text = OnlyDate ? mValue.ToString("dd.MM.yyyy") : mValue.ToString("dd.MM.yyyy hh:mm:ss");
             }
         }
 
@@ -92,10 +93,77 @@ namespace StorageAndTrade
 
         void OnOpenCalendar(object? sender, EventArgs args)
         {
-            CalendarWindow cw = new CalendarWindow();
-            cw.Select = (DateTime x) => { Value = x; };
-            cw.Value = Value;
-            cw.Show();
+            Popover popoverCalendar = new Popover(bOpenCalendar);
+            popoverCalendar.BorderWidth = 5;
+
+            VBox vBox = new VBox();
+
+            //Calendar
+            Calendar calendar = new Calendar();
+            calendar.Date = Value;
+            calendar.DaySelected += (object? sender, EventArgs args) =>
+            {
+                Value = new DateTime(
+                    calendar.Date.Year, calendar.Date.Month, calendar.Date.Day,
+                    Value.Hour, Value.Minute, Value.Second);
+            };
+
+            vBox.PackStart(calendar, false, false, 0);
+
+            if (!OnlyDate)
+            {
+                HBox hBoxTime = new HBox() { Halign = Align.Center };
+                vBox.PackStart(hBoxTime, false, false, 5);
+
+                //Hour
+                {
+                    SpinButton hourSpin = new SpinButton(0, 23, 1) { Orientation = Orientation.Vertical };
+                    hourSpin.Value = TimeOnly.FromDateTime(Value).Hour;
+                    hourSpin.ValueChanged += (object? sender, EventArgs args) =>
+                    {
+                        Value = new DateTime(
+                            calendar.Date.Year, calendar.Date.Month, calendar.Date.Day,
+                            (int)hourSpin.Value, Value.Minute, Value.Second);
+                    };
+
+                    hBoxTime.PackStart(hourSpin, false, false, 0);
+                }
+
+                hBoxTime.PackStart(new Label(":"), false, false, 5);
+
+                //Minute
+                {
+                    SpinButton minuteSpin = new SpinButton(0, 59, 1) { Orientation = Orientation.Vertical };
+                    minuteSpin.Value = TimeOnly.FromDateTime(Value).Minute;
+                    minuteSpin.ValueChanged += (object? sender, EventArgs args) =>
+                    {
+                        Value = new DateTime(
+                            calendar.Date.Year, calendar.Date.Month, calendar.Date.Day,
+                            Value.Hour, (int)minuteSpin.Value, Value.Second);
+                    };
+
+                    hBoxTime.PackStart(minuteSpin, false, false, 0);
+                }
+
+                hBoxTime.PackStart(new Label(":"), false, false, 5);
+
+                //Second
+                {
+                    SpinButton secondSpin = new SpinButton(0, 59, 1) { Orientation = Orientation.Vertical };
+                    secondSpin.Value = TimeOnly.FromDateTime(Value).Second;
+                    secondSpin.ValueChanged += (object? sender, EventArgs args) =>
+                    {
+                        Value = new DateTime(
+                            calendar.Date.Year, calendar.Date.Month, calendar.Date.Day,
+                            Value.Hour, Value.Minute, (int)secondSpin.Value);
+                    };
+
+                    hBoxTime.PackStart(secondSpin, false, false, 0);
+                }
+            }
+
+            popoverCalendar.Add(vBox);
+            popoverCalendar.ShowAll();
         }
 
         void OnEntryDateTimeChanged(object? sender, EventArgs args)
