@@ -54,6 +54,23 @@ namespace StorageAndTrade
             ПошукПовнотекстовий.Select = LoadRecords_OnSearch;
             ПошукПовнотекстовий.Clear = LoadRecords;
 
+            //Сторінка
+            {
+                LinkButton linkPage = new LinkButton(" Валюти") { Halign = Align.Start, Image = new Image("images/doc.png"), AlwaysShowImage = true };
+                linkPage.Clicked += (object? sender, EventArgs args) =>
+                {
+                    Валюти page = new Валюти(true);
+                    page.DirectoryPointerItem = DirectoryPointerItem;
+                    page.CallBack_OnSelectPointer = CallBack_OnSelectPointer;
+
+                    Program.GeneralForm?.CreateNotebookPage("Вибір - Валюти", () => { return page; }, true);
+
+                    page.LoadRecords();
+                };
+
+                hBoxTop.PackStart(linkPage, false, false, 10);
+            }
+
             ScrolledWindow scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In, WidthRequest = 600, HeightRequest = 300 };
             scrollTree.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
 

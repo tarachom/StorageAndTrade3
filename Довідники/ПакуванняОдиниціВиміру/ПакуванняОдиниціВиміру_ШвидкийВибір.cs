@@ -31,18 +31,19 @@ using ТабличніСписки = StorageAndTrade_1_0.Довідники.Та
 
 namespace StorageAndTrade
 {
-    class Організації_ШвидкийВибір : VBox
+    class ПакуванняОдиниціВиміру_ШвидкийВибір : VBox
     {
         public Popover? PopoverParent { get; set; }
-        public Організації_Pointer? DirectoryPointerItem { get; set; }
-        public System.Action<Організації_Pointer>? CallBack_OnSelectPointer { get; set; }
+        public ПакуванняОдиниціВиміру_Pointer? DirectoryPointerItem { get; set; }
+        public System.Action<ПакуванняОдиниціВиміру_Pointer>? CallBack_OnSelectPointer { get; set; }
 
         TreeView TreeViewGrid;
         SearchControl2 ПошукПовнотекстовий = new SearchControl2();
 
-        public Організації_ШвидкийВибір() : base()
+        public ПакуванняОдиниціВиміру_ШвидкийВибір(bool IsSelectPointer = false) : base()
         {
-            new VBox(false, 0) { BorderWidth = 0 };
+            new VBox(false, 0);
+            BorderWidth = 0;
 
             //Зверху
             HBox hBoxTop = new HBox();
@@ -55,14 +56,14 @@ namespace StorageAndTrade
 
             //Сторінка
             {
-                LinkButton linkPage = new LinkButton(" Організації") { Halign = Align.Start, Image = new Image("images/doc.png"), AlwaysShowImage = true };
+                LinkButton linkPage = new LinkButton(" Пакування") { Halign = Align.Start, Image = new Image("images/doc.png"), AlwaysShowImage = true };
                 linkPage.Clicked += (object? sender, EventArgs args) =>
                 {
-                    Організації page = new Організації(true);
+                    ПакуванняОдиниціВиміру page = new ПакуванняОдиниціВиміру(true);
                     page.DirectoryPointerItem = DirectoryPointerItem;
                     page.CallBack_OnSelectPointer = CallBack_OnSelectPointer;
 
-                    Program.GeneralForm?.CreateNotebookPage("Вибір - Організації", () => { return page; }, true);
+                    Program.GeneralForm?.CreateNotebookPage("Вибір - Пакування", () => { return page; }, true);
 
                     page.LoadRecords();
                 };
@@ -71,10 +72,10 @@ namespace StorageAndTrade
             }
 
             ScrolledWindow scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In, WidthRequest = 600, HeightRequest = 300 };
-            scrollTree.SetPolicy(PolicyType.Never, PolicyType.Automatic);
+            scrollTree.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
 
-            TreeViewGrid = new TreeView(ТабличніСписки.Організації_ЗаписиШвидкийВибір.Store);
-            ТабличніСписки.Організації_ЗаписиШвидкийВибір.AddColumns(TreeViewGrid);
+            TreeViewGrid = new TreeView(ТабличніСписки.ПакуванняОдиниціВиміру_ЗаписиШвидкийВибір.Store);
+            ТабличніСписки.ПакуванняОдиниціВиміру_ЗаписиШвидкийВибір.AddColumns(TreeViewGrid);
 
             TreeViewGrid.Selection.Mode = SelectionMode.Multiple;
             TreeViewGrid.ActivateOnSingleClick = true;
@@ -89,14 +90,14 @@ namespace StorageAndTrade
 
         public void LoadRecords()
         {
-            ТабличніСписки.Організації_ЗаписиШвидкийВибір.DirectoryPointerItem = DirectoryPointerItem;
+            ТабличніСписки.ПакуванняОдиниціВиміру_ЗаписиШвидкийВибір.DirectoryPointerItem = DirectoryPointerItem;
 
-            ТабличніСписки.Організації_ЗаписиШвидкийВибір.Where.Clear();
+            ТабличніСписки.ПакуванняОдиниціВиміру_ЗаписиШвидкийВибір.Where.Clear();
 
-            ТабличніСписки.Організації_ЗаписиШвидкийВибір.LoadRecords();
+            ТабличніСписки.ПакуванняОдиниціВиміру_ЗаписиШвидкийВибір.LoadRecords();
 
-            if (ТабличніСписки.Організації_ЗаписиШвидкийВибір.SelectPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.Організації_ЗаписиШвидкийВибір.SelectPath, TreeViewGrid.Columns[0], false);
+            if (ТабличніСписки.ПакуванняОдиниціВиміру_ЗаписиШвидкийВибір.SelectPath != null)
+                TreeViewGrid.SetCursor(ТабличніСписки.ПакуванняОдиниціВиміру_ЗаписиШвидкийВибір.SelectPath, TreeViewGrid.Columns[0], false);
         }
 
         void LoadRecords_OnSearch(string searchText)
@@ -108,17 +109,17 @@ namespace StorageAndTrade
 
             searchText = "%" + searchText.Replace(" ", "%") + "%";
 
-            ТабличніСписки.Організації_ЗаписиШвидкийВибір.Where.Clear();
+            ТабличніСписки.ПакуванняОдиниціВиміру_ЗаписиШвидкийВибір.Where.Clear();
 
             //Код
-            ТабличніСписки.Організації_ЗаписиШвидкийВибір.Where.Add(
-                new Where(Організації_Const.Код, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
+            ТабличніСписки.ПакуванняОдиниціВиміру_ЗаписиШвидкийВибір.Where.Add(
+                new Where(ПакуванняОдиниціВиміру_Const.Код, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
             //Назва
-            ТабличніСписки.Організації_ЗаписиШвидкийВибір.Where.Add(
-                new Where(Comparison.OR, Організації_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
+            ТабличніСписки.ПакуванняОдиниціВиміру_ЗаписиШвидкийВибір.Where.Add(
+                new Where(Comparison.OR, ПакуванняОдиниціВиміру_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
-            ТабличніСписки.Організації_ЗаписиШвидкийВибір.LoadRecords();
+            ТабличніСписки.ПакуванняОдиниціВиміру_ЗаписиШвидкийВибір.LoadRecords();
         }
 
         #region TreeView
@@ -134,7 +135,7 @@ namespace StorageAndTrade
                     string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
 
                     if (CallBack_OnSelectPointer != null)
-                        CallBack_OnSelectPointer.Invoke(new Організації_Pointer(new UnigueID(uid)));
+                        CallBack_OnSelectPointer.Invoke(new ПакуванняОдиниціВиміру_Pointer(new UnigueID(uid)));
 
                     if (PopoverParent != null)
                         PopoverParent.Hide();

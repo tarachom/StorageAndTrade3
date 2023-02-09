@@ -54,28 +54,14 @@ namespace StorageAndTrade
             }
         }
 
-        protected override void OpenSmallSelect(object? sender, EventArgs args)
+        protected override void OpenSelect(object? sender, EventArgs args)
         {
             Popover PopoverSmallSelect = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
 
-            Номенклатура_ШвидкийВибір page = new Номенклатура_ШвидкийВибір() { PopoverParent = PopoverSmallSelect, DirectoryPointerItem = Pointer };
-            page.CallBack_OnSelectPointer = (Номенклатура_Pointer selectPointer) =>
-            {
-                Pointer = selectPointer;
-            };
-
-            PopoverSmallSelect.Add(page);
-            PopoverSmallSelect.ShowAll();
-
-            page.LoadRecords();
-        }
-
-        protected override void OpenSelect(object? sender, EventArgs args)
-        {
             if (BeforeClickOpenFunc != null)
                 BeforeClickOpenFunc.Invoke();
 
-            Номенклатура page = new Номенклатура(true);
+            Номенклатура_ШвидкийВибір page = new Номенклатура_ШвидкийВибір() { PopoverParent = PopoverSmallSelect, DirectoryPointerItem = Pointer };
 
             page.DirectoryPointerItem = Pointer;
             page.CallBack_OnSelectPointer = (Номенклатура_Pointer selectPointer) =>
@@ -86,9 +72,10 @@ namespace StorageAndTrade
                     AfterSelectFunc.Invoke();
             };
 
-            Program.GeneralForm?.CreateNotebookPage("Вибір - Номенклатура", () => { return page; }, true);
+            PopoverSmallSelect.Add(page);
+            PopoverSmallSelect.ShowAll();
 
-            page.LoadTree();
+            page.LoadRecords();
         }
 
         protected override void OnClear(object? sender, EventArgs args)

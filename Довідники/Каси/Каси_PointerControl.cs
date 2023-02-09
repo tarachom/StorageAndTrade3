@@ -54,33 +54,26 @@ namespace StorageAndTrade
             }
         }
 
-        protected override void OpenSmallSelect(object? sender, EventArgs args)
+        protected override void OpenSelect(object? sender, EventArgs args)
         {
             Popover PopoverSmallSelect = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
 
+            if (BeforeClickOpenFunc != null)
+                BeforeClickOpenFunc.Invoke();
+
             Каси_ШвидкийВибір page = new Каси_ШвидкийВибір() { PopoverParent = PopoverSmallSelect, DirectoryPointerItem = Pointer };
-            page.CallBack_OnSelectPointer = (Каси_Pointer selectPointer) =>
-            {
-                Pointer = selectPointer;
-            };
-
-            PopoverSmallSelect.Add(page);
-            PopoverSmallSelect.ShowAll();
-
-            page.LoadRecords();
-        }
-
-        protected override void OpenSelect(object? sender, EventArgs args)
-        {
-            Каси page = new Каси(true);
 
             page.DirectoryPointerItem = Pointer;
             page.CallBack_OnSelectPointer = (Каси_Pointer selectPointer) =>
             {
                 Pointer = selectPointer;
+
+                if (AfterSelectFunc != null)
+                    AfterSelectFunc.Invoke();
             };
 
-            Program.GeneralForm?.CreateNotebookPage("Вибір - Каси", () => { return page; }, true);
+            PopoverSmallSelect.Add(page);
+            PopoverSmallSelect.ShowAll();
 
             page.LoadRecords();
         }

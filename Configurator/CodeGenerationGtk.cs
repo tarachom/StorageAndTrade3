@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 09.02.2023 13:04:10
+ * Дата конфігурації: 09.02.2023 14:16:32
  *
  */
  
@@ -521,6 +521,97 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         }
     }
 	    
+    public class Виробники_ЗаписиШвидкийВибір
+    {
+        string Image = "images/doc.png";
+        string ID = "";
+        
+        string Код = "";
+        string Назва = "";
+
+        Array ToArray()
+        {
+            return new object[] { new Gdk.Pixbuf(Image), ID 
+            /* */ , Код, Назва };
+        }
+
+        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */
+            , typeof(string) /* Код */
+            , typeof(string) /* Назва */
+            );
+
+        public static void AddColumns(TreeView treeView)
+        {
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 4 }, "pixbuf", 0));
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
+            /* */
+            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
+            
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
+        }
+
+        public static List<Where> Where { get; set; } = new List<Where>();
+
+        public static Довідники.Виробники_Pointer? DirectoryPointerItem { get; set; }
+        public static Довідники.Виробники_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? SelectPath;
+        public static TreePath? CurrentPath;
+
+        public static void LoadRecords()
+        {
+            Store.Clear();
+            SelectPath = null;
+
+            Довідники.Виробники_Select Виробники_Select = new Довідники.Виробники_Select();
+            Виробники_Select.QuerySelect.Field.AddRange(
+                new string[]
+                {
+                    Довідники.Виробники_Const.Код /* 1 */
+                    , Довідники.Виробники_Const.Назва /* 2 */
+                    
+                });
+
+            /* Where */
+            Виробники_Select.QuerySelect.Where = Where;
+
+            
+              /* ORDER */
+              Виробники_Select.QuerySelect.Order.Add(Довідники.Виробники_Const.Назва, SelectOrder.ASC);
+            
+
+            /* SELECT */
+            Виробники_Select.Select();
+            while (Виробники_Select.MoveNext())
+            {
+                Довідники.Виробники_Pointer? cur = Виробники_Select.Current;
+
+                if (cur != null)
+                {
+                    Виробники_ЗаписиШвидкийВибір Record = new Виробники_ЗаписиШвидкийВибір
+                    {
+                        ID = cur.UnigueID.ToString(),
+                        Код = cur.Fields?[Виробники_Const.Код]?.ToString() ?? "", /**/
+                        Назва = cur.Fields?[Виробники_Const.Назва]?.ToString() ?? "" /**/
+                        
+                    };
+
+                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                    CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (DirectoryPointerItem != null || SelectPointerItem != null)
+                    {
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+
+                        if (Record.ID == UidSelect)
+                            SelectPath = CurrentPath;
+                    }
+                }
+            }
+        }
+    }
+	    
     #endregion
     
     #region DIRECTORY "ВидиНоменклатури"
@@ -713,6 +804,97 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         }
     }
 	    
+    public class ПакуванняОдиниціВиміру_ЗаписиШвидкийВибір
+    {
+        string Image = "images/doc.png";
+        string ID = "";
+        
+        string Код = "";
+        string Назва = "";
+
+        Array ToArray()
+        {
+            return new object[] { new Gdk.Pixbuf(Image), ID 
+            /* */ , Код, Назва };
+        }
+
+        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */
+            , typeof(string) /* Код */
+            , typeof(string) /* Назва */
+            );
+
+        public static void AddColumns(TreeView treeView)
+        {
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 4 }, "pixbuf", 0));
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
+            /* */
+            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
+            
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
+        }
+
+        public static List<Where> Where { get; set; } = new List<Where>();
+
+        public static Довідники.ПакуванняОдиниціВиміру_Pointer? DirectoryPointerItem { get; set; }
+        public static Довідники.ПакуванняОдиниціВиміру_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? SelectPath;
+        public static TreePath? CurrentPath;
+
+        public static void LoadRecords()
+        {
+            Store.Clear();
+            SelectPath = null;
+
+            Довідники.ПакуванняОдиниціВиміру_Select ПакуванняОдиниціВиміру_Select = new Довідники.ПакуванняОдиниціВиміру_Select();
+            ПакуванняОдиниціВиміру_Select.QuerySelect.Field.AddRange(
+                new string[]
+                {
+                    Довідники.ПакуванняОдиниціВиміру_Const.Код /* 1 */
+                    , Довідники.ПакуванняОдиниціВиміру_Const.Назва /* 2 */
+                    
+                });
+
+            /* Where */
+            ПакуванняОдиниціВиміру_Select.QuerySelect.Where = Where;
+
+            
+              /* ORDER */
+              ПакуванняОдиниціВиміру_Select.QuerySelect.Order.Add(Довідники.ПакуванняОдиниціВиміру_Const.Назва, SelectOrder.ASC);
+            
+
+            /* SELECT */
+            ПакуванняОдиниціВиміру_Select.Select();
+            while (ПакуванняОдиниціВиміру_Select.MoveNext())
+            {
+                Довідники.ПакуванняОдиниціВиміру_Pointer? cur = ПакуванняОдиниціВиміру_Select.Current;
+
+                if (cur != null)
+                {
+                    ПакуванняОдиниціВиміру_ЗаписиШвидкийВибір Record = new ПакуванняОдиниціВиміру_ЗаписиШвидкийВибір
+                    {
+                        ID = cur.UnigueID.ToString(),
+                        Код = cur.Fields?[ПакуванняОдиниціВиміру_Const.Код]?.ToString() ?? "", /**/
+                        Назва = cur.Fields?[ПакуванняОдиниціВиміру_Const.Назва]?.ToString() ?? "" /**/
+                        
+                    };
+
+                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                    CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (DirectoryPointerItem != null || SelectPointerItem != null)
+                    {
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+
+                        if (Record.ID == UidSelect)
+                            SelectPath = CurrentPath;
+                    }
+                }
+            }
+        }
+    }
+	    
     #endregion
     
     #region DIRECTORY "Валюти"
@@ -831,16 +1013,18 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         
         string Код = "";
         string Назва = "";
+        string КороткаНазва = "";
 
         Array ToArray()
         {
             return new object[] { new Gdk.Pixbuf(Image), ID 
-            /* */ , Код, Назва };
+            /* */ , Код, Назва, КороткаНазва };
         }
 
         public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */
             , typeof(string) /* Код */
             , typeof(string) /* Назва */
+            , typeof(string) /* КороткаНазва */
             );
 
         public static void AddColumns(TreeView treeView)
@@ -850,6 +1034,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             /* */
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("КороткаНазва", new CellRendererText() { Xpad = 4 }, "text", 4) { SortColumnId = 4 } ); /*КороткаНазва*/
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
@@ -873,6 +1058,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                 {
                     Довідники.Валюти_Const.Код /* 1 */
                     , Довідники.Валюти_Const.Назва /* 2 */
+                    , Довідники.Валюти_Const.КороткаНазва /* 3 */
                     
                 });
 
@@ -896,7 +1082,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     {
                         ID = cur.UnigueID.ToString(),
                         Код = cur.Fields?[Валюти_Const.Код]?.ToString() ?? "", /**/
-                        Назва = cur.Fields?[Валюти_Const.Назва]?.ToString() ?? "" /**/
+                        Назва = cur.Fields?[Валюти_Const.Назва]?.ToString() ?? "", /**/
+                        КороткаНазва = cur.Fields?[Валюти_Const.КороткаНазва]?.ToString() ?? "" /**/
                         
                     };
 

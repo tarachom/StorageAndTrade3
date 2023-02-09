@@ -35,21 +35,16 @@ namespace StorageAndTrade
             PackStart(labelCaption, false, false, 5);
             PackStart(entryText, false, false, 0);
 
-            Button bSmallOpen = new Button(new Image("images/find.png"));
-            bSmallOpen.Clicked += OpenSmallSelect;
-
             Button bOpen = new Button(new Image("images/find.png"));
             bOpen.Clicked += OpenSelect;
 
             Button bClear = new Button(new Image("images/clean.png"));
             bClear.Clicked += OnClear;
 
-            PackStart(bSmallOpen, false, false, 2);
             PackStart(bOpen, false, false, 2);
             PackStart(bClear, false, false, 2);
         }
 
-        protected virtual void OpenSmallSelect(object? sender, EventArgs args) { }
         protected virtual void OpenSelect(object? sender, EventArgs args) { }
         protected virtual void OnClear(object? sender, EventArgs args) { }
 
