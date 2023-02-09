@@ -47,7 +47,7 @@ namespace StorageAndTrade
             AddLink(vLeft, "Каси", Каси);
             AddLink(vLeft, "Види цін", ВидиЦін);
             AddLink(vLeft, "Банківські рахунки організацій", БанківськіРахункиОрганізацій);
-            AddLink(vLeft, "Структура підприємства", СтруктураПідприємства);
+            AddLink(vLeft, "Підрозділи", СтруктураПідприємства);
 
             AddCaption(vLeft, "Додаткові");
             AddLink(vLeft, "Користувачі", Користувачі);

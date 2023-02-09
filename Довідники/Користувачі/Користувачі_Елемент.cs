@@ -38,6 +38,8 @@ namespace StorageAndTrade
 
         Entry Код = new Entry() { WidthRequest = 100 };
         Entry Назва = new Entry() { WidthRequest = 500 };
+        ФізичніОсоби_PointerControl ФізичнаОсоба = new ФізичніОсоби_PointerControl();
+        TextView Коментар = new TextView();
 
         public Користувачі_Елемент() : base()
         {
@@ -84,6 +86,24 @@ namespace StorageAndTrade
             hBoxName.PackStart(new Label("Назва:"), false, false, 5);
             hBoxName.PackStart(Назва, false, false, 5);
 
+            //ФізичнаОсоба
+            HBox hBoxFizOsoba = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxFizOsoba, false, false, 5);
+
+            hBoxFizOsoba.PackStart(ФізичнаОсоба, false, false, 5);
+
+            //Коментар
+            HBox hBoxComment = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxComment, false, false, 5);
+
+            hBoxComment.PackStart(new Label("Коментар:") { Valign = Align.Start }, false, false, 5);
+
+            ScrolledWindow scrollTextViewComment = new ScrolledWindow() { ShadowType = ShadowType.In, WidthRequest = 500, HeightRequest = 200 };
+            scrollTextViewComment.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
+            scrollTextViewComment.Add(Коментар);
+
+            hBoxComment.PackStart(scrollTextViewComment, false, false, 5);
+
             hPaned.Pack1(vBox, false, false);
         }
 
@@ -105,12 +125,16 @@ namespace StorageAndTrade
 
             Код.Text = Користувачі_Objest.Код;
             Назва.Text = Користувачі_Objest.Назва;
+            ФізичнаОсоба.Pointer = Користувачі_Objest.ФізичнаОсоба;
+            Коментар.Buffer.Text = Користувачі_Objest.Коментар;
         }
 
         void GetValue()
         {
             Користувачі_Objest.Код = Код.Text;
             Користувачі_Objest.Назва = Назва.Text;
+            Користувачі_Objest.ФізичнаОсоба = ФізичнаОсоба.Pointer;
+            Користувачі_Objest.Коментар = Коментар.Buffer.Text;
         }
 
         #endregion
