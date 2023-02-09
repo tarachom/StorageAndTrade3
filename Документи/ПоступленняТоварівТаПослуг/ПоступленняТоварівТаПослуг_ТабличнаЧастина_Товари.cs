@@ -35,6 +35,7 @@ namespace StorageAndTrade
 {
     class ПоступленняТоварівТаПослуг_ТабличнаЧастина_Товари : VBox
     {
+        ScrolledWindow scrollTree;
         public ПоступленняТоварівТаПослуг_Objest? ПоступленняТоварівТаПослуг_Objest { get; set; }
 
         #region Записи
@@ -244,7 +245,7 @@ LIMIT 1
 
             CreateToolbar();
 
-            ScrolledWindow scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In };
+            scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In };
             scrollTree.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
 
             TreeViewGrid = new TreeView(Store);
@@ -253,6 +254,7 @@ LIMIT 1
             TreeViewGrid.Selection.Mode = SelectionMode.Multiple;
             TreeViewGrid.ActivateOnSingleClick = true;
             TreeViewGrid.ButtonPressEvent += OnButtonPressEvent;
+            TreeViewGrid.ButtonReleaseEvent += OnButtonReleaseEvent;
 
             scrollTree.Add(TreeViewGrid);
 
@@ -260,7 +262,44 @@ LIMIT 1
 
             ShowAll();
         }
+        void OnButtonReleaseEvent(object sender, ButtonReleaseEventArgs args)
+        {
+            if (args.Event.Button == 3 && TreeViewGrid.Selection.CountSelectedRows() != 0)
+            {
+                TreePath itemPath;
+                TreeViewColumn treeColumn;
 
+                TreeViewGrid.GetCursor(out itemPath, out treeColumn);
+
+                Gdk.Rectangle rectangleCell = TreeViewGrid.GetCellArea(itemPath, treeColumn);
+                rectangleCell.Offset(-(int)scrollTree.Hadjustment.Value, rectangleCell.Height / 2);
+
+                Popover po = new Popover(TreeViewGrid);
+                po.BorderWidth = 2;
+                po.Position = PositionType.Bottom;
+                po.PointingTo = rectangleCell;
+                po.Add(new SearchEntry() { WidthRequest = rectangleCell.Width });
+
+                if (treeColumn.Data.ContainsKey("Column"))
+                {
+                    TreeIter iter;
+                    TreeViewGrid.Model.GetIter(out iter, itemPath);
+
+                    int rowNumber = int.Parse(itemPath.ToString());
+                    Запис запис = Записи[rowNumber];
+
+                    switch ((Columns)treeColumn.Data["Column"]!)
+                    {
+                        case Columns.Номенклатура:
+                            {
+
+                                po.ShowAll();
+                                break;
+                            }
+                    }
+                }
+            }
+        }
         void OnButtonPressEvent(object sender, ButtonPressEventArgs args)
         {
             if (args.Event.Type == Gdk.EventType.DoubleButtonPress)

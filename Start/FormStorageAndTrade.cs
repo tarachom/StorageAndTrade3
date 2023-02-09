@@ -57,7 +57,8 @@ namespace StorageAndTrade
             /*
 
             Важливо!
-            На стартовій сторінці міститься запуск фонового обчислення віртуальних залишків StartBackgroundTask()
+            На стартовій сторінці міститься запуск фонового обчислення 
+            віртуальних залишків StartBackgroundTask()
 
             */
 
@@ -65,7 +66,7 @@ namespace StorageAndTrade
             {
                 PageHome page = new PageHome();
                 page.StartBackgroundTask();
-                
+
                 page.StartDesktop();
                 page.StartAutoWork();
 
@@ -127,38 +128,50 @@ namespace StorageAndTrade
 
         void Документи(object? sender, EventArgs args)
         {
-            CreateNotebookPage("Документи", () =>
+            if (sender != null)
             {
-                PageDocuments page = new PageDocuments();
-                return page;
-            });
+                LinkButton lb = (LinkButton)sender;
+
+                Popover po = new Popover(lb) { Position = PositionType.Right };
+                po.Add(new PageDocuments());
+                po.ShowAll();
+            }
         }
 
         void Журнали(object? sender, EventArgs args)
         {
-            CreateNotebookPage("Журнали", () =>
+            if (sender != null)
             {
-                PageJournals page = new PageJournals();
-                return page;
-            });
+                LinkButton lb = (LinkButton)sender;
+
+                Popover po = new Popover(lb) { Position = PositionType.Right };
+                po.Add(new PageJournals());
+                po.ShowAll();
+            }
         }
 
         void Звіти(object? sender, EventArgs args)
         {
-            CreateNotebookPage("Звіти", () =>
+            if (sender != null)
             {
-                PageReports page = new PageReports();
-                return page;
-            });
+                LinkButton lb = (LinkButton)sender;
+
+                Popover po = new Popover(lb) { Position = PositionType.Right };
+                po.Add(new PageReports());
+                po.ShowAll();
+            }
         }
 
         void Довідники(object? sender, EventArgs args)
         {
-            CreateNotebookPage("Довідники", () =>
+            if (sender != null)
             {
-                PageDirectory page = new PageDirectory();
-                return page;
-            });
+                LinkButton lb = (LinkButton)sender;
+
+                Popover po = new Popover(lb) { Position = PositionType.Right };
+                po.Add(new PageDirectory());
+                po.ShowAll();
+            }
         }
 
         void Налаштування(object? sender, EventArgs args)
@@ -226,6 +239,8 @@ namespace StorageAndTrade
             topNotebook.ShowAll();
 
             topNotebook.CurrentPage = numPage;
+
+            topNotebook.GrabFocus();
         }
 
         #endregion
