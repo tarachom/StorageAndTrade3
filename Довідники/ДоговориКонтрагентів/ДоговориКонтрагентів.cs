@@ -131,6 +131,7 @@ namespace StorageAndTrade
             ТабличніСписки.ДоговориКонтрагентів_Записи.DirectoryPointerItem = DirectoryPointerItem;
 
             ТабличніСписки.ДоговориКонтрагентів_Записи.Where.Clear();
+            
             if (!КонтрагентВласник.Pointer.UnigueID.IsEmpty())
             {
                 ТабличніСписки.ДоговориКонтрагентів_Записи.Where.Add(

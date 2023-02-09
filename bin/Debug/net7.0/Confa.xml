@@ -5,7 +5,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>09.02.2023 15:42:37</DateTimeSave>
+  <DateTimeSave>09.02.2023 16:03:50</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -3845,7 +3845,51 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
             </Field>
             <Field>
               <Name>ТипДоговору</Name>
-              <Caption>ТипДоговору</Caption>
+              <Caption>Тип</Caption>
+              <Size>0</Size>
+              <SortNum>4</SortNum>
+              <SortField>False</SortField>
+              <Type>enum</Type>
+              <Pointer>Перелічення.ТипДоговорів</Pointer>
+            </Field>
+          </Fields>
+        </TabularList>
+        <TabularList>
+          <Name>ЗаписиШвидкийВибір</Name>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>Назва</Name>
+              <Caption>Назва</Caption>
+              <Size>0</Size>
+              <SortNum>2</SortNum>
+              <SortField>True</SortField>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>Контрагент</Name>
+              <Caption>Контрагент</Caption>
+              <Size>0</Size>
+              <SortNum>3</SortNum>
+              <SortField>False</SortField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Контрагенти</Pointer>
+              <Join>
+                <table>Довідники.Контрагенти_Const.TABLE</table>
+                <field>Контрагент</field>
+                <alias>join_tab_1</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_1</table>
+                <field>Довідники.Контрагенти_Const.Назва</field>
+              </FieldAndAlias>
+            </Field>
+            <Field>
+              <Name>ТипДоговору</Name>
+              <Caption>Тип</Caption>
               <Size>0</Size>
               <SortNum>4</SortNum>
               <SortField>False</SortField>

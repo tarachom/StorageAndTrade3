@@ -21,6 +21,8 @@ limitations under the License.
 Сайт:     accounting.org.ua
 */
 
+using Gtk;
+
 using StorageAndTrade_1_0.Довідники;
 
 namespace StorageAndTrade
@@ -56,10 +58,12 @@ namespace StorageAndTrade
 
         protected override void OpenSelect(object? sender, EventArgs args)
         {
+            Popover PopoverSmallSelect = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
+
             if (BeforeClickOpenFunc != null)
                 BeforeClickOpenFunc.Invoke();
 
-            ДоговориКонтрагентів page = new ДоговориКонтрагентів(true);
+            ДоговориКонтрагентів_ШвидкийВибір page = new ДоговориКонтрагентів_ШвидкийВибір() { PopoverParent = PopoverSmallSelect, DirectoryPointerItem = Pointer };
 
             page.DirectoryPointerItem = Pointer;
             page.КонтрагентВласник.Pointer = КонтрагентВласник;
@@ -71,7 +75,8 @@ namespace StorageAndTrade
                     AfterSelectFunc.Invoke();
             };
 
-            Program.GeneralForm?.CreateNotebookPage("Вибір - Договори", () => { return page; }, true);
+            PopoverSmallSelect.Add(page);
+            PopoverSmallSelect.ShowAll();
 
             page.LoadRecords();
         }

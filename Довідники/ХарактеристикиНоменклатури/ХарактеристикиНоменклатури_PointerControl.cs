@@ -79,26 +79,6 @@ namespace StorageAndTrade
             PopoverSmallSelect.ShowAll();
 
             page.LoadRecords();
-            /*
-            if (BeforeClickOpenFunc != null)
-                BeforeClickOpenFunc.Invoke();
-
-            ХарактеристикиНоменклатури page = new ХарактеристикиНоменклатури(true);
-
-            page.DirectoryPointerItem = Pointer;
-            page.НоменклатураВласник.Pointer = НоменклатураВласник;
-            page.CallBack_OnSelectPointer = (ХарактеристикиНоменклатури_Pointer selectPointer) =>
-            {
-                Pointer = selectPointer;
-
-                if (AfterSelectFunc != null)
-                    AfterSelectFunc.Invoke();
-            };
-
-            Program.GeneralForm?.CreateNotebookPage("Вибір - Характеристики", () => { return page; }, true);
-
-            page.LoadRecords();
-            */
         }
 
         protected override void OnClear(object? sender, EventArgs args)

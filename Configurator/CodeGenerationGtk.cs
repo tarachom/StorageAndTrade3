@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 09.02.2023 15:42:37
+ * Дата конфігурації: 09.02.2023 16:03:50
  *
  */
  
@@ -3038,7 +3038,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
             treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 4 }, "text", 4) { SortColumnId = 4 } ); /*Контрагент*/
-            treeView.AppendColumn(new TreeViewColumn("ТипДоговору", new CellRendererText() { Xpad = 4 }, "text", 5) { SortColumnId = 5 } ); /*ТипДоговору*/
+            treeView.AppendColumn(new TreeViewColumn("Тип", new CellRendererText() { Xpad = 4 }, "text", 5) { SortColumnId = 5 } ); /*ТипДоговору*/
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
@@ -3095,6 +3095,109 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                         ID = cur.UnigueID.ToString(),
                         Контрагент = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Код = cur.Fields?[ДоговориКонтрагентів_Const.Код]?.ToString() ?? "", /**/
+                        Назва = cur.Fields?[ДоговориКонтрагентів_Const.Назва]?.ToString() ?? "", /**/
+                        ТипДоговору = Перелічення.ПсевдонімиПерелічення.ТипДоговорів_Alias( ((Перелічення.ТипДоговорів)(cur.Fields?[ДоговориКонтрагентів_Const.ТипДоговору]! != DBNull.Value ? cur.Fields?[ДоговориКонтрагентів_Const.ТипДоговору]! : 0)) ) /**/
+                        
+                    };
+
+                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                    CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (DirectoryPointerItem != null || SelectPointerItem != null)
+                    {
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+
+                        if (Record.ID == UidSelect)
+                            SelectPath = CurrentPath;
+                    }
+                }
+            }
+        }
+    }
+	    
+    public class ДоговориКонтрагентів_ЗаписиШвидкийВибір
+    {
+        string Image = "images/doc.png";
+        string ID = "";
+        
+        string Назва = "";
+        string Контрагент = "";
+        string ТипДоговору = "";
+
+        Array ToArray()
+        {
+            return new object[] { new Gdk.Pixbuf(Image), ID 
+            /* */ , Назва, Контрагент, ТипДоговору };
+        }
+
+        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */
+            , typeof(string) /* Назва */
+            , typeof(string) /* Контрагент */
+            , typeof(string) /* ТипДоговору */
+            );
+
+        public static void AddColumns(TreeView treeView)
+        {
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 4 }, "pixbuf", 0));
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
+            /* */
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Контрагент*/
+            treeView.AppendColumn(new TreeViewColumn("Тип", new CellRendererText() { Xpad = 4 }, "text", 4) { SortColumnId = 4 } ); /*ТипДоговору*/
+            
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
+        }
+
+        public static List<Where> Where { get; set; } = new List<Where>();
+
+        public static Довідники.ДоговориКонтрагентів_Pointer? DirectoryPointerItem { get; set; }
+        public static Довідники.ДоговориКонтрагентів_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? SelectPath;
+        public static TreePath? CurrentPath;
+
+        public static void LoadRecords()
+        {
+            Store.Clear();
+            SelectPath = null;
+
+            Довідники.ДоговориКонтрагентів_Select ДоговориКонтрагентів_Select = new Довідники.ДоговориКонтрагентів_Select();
+            ДоговориКонтрагентів_Select.QuerySelect.Field.AddRange(
+                new string[]
+                {
+                    Довідники.ДоговориКонтрагентів_Const.Назва /* 1 */
+                    , Довідники.ДоговориКонтрагентів_Const.ТипДоговору /* 2 */
+                    
+                });
+
+            /* Where */
+            ДоговориКонтрагентів_Select.QuerySelect.Where = Where;
+
+            
+              /* ORDER */
+              ДоговориКонтрагентів_Select.QuerySelect.Order.Add(Довідники.ДоговориКонтрагентів_Const.Назва, SelectOrder.ASC);
+            
+                /* Join Table */
+                ДоговориКонтрагентів_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Контрагенти_Const.TABLE, Довідники.ДоговориКонтрагентів_Const.Контрагент, ДоговориКонтрагентів_Select.QuerySelect.Table, "join_tab_1"));
+                
+                  /* Field */
+                  ДоговориКонтрагентів_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_1." + Довідники.Контрагенти_Const.Назва, "join_tab_1_field_1"));
+                  
+
+            /* SELECT */
+            ДоговориКонтрагентів_Select.Select();
+            while (ДоговориКонтрагентів_Select.MoveNext())
+            {
+                Довідники.ДоговориКонтрагентів_Pointer? cur = ДоговориКонтрагентів_Select.Current;
+
+                if (cur != null)
+                {
+                    ДоговориКонтрагентів_ЗаписиШвидкийВибір Record = new ДоговориКонтрагентів_ЗаписиШвидкийВибір
+                    {
+                        ID = cur.UnigueID.ToString(),
+                        Контрагент = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[ДоговориКонтрагентів_Const.Назва]?.ToString() ?? "", /**/
                         ТипДоговору = Перелічення.ПсевдонімиПерелічення.ТипДоговорів_Alias( ((Перелічення.ТипДоговорів)(cur.Fields?[ДоговориКонтрагентів_Const.ТипДоговору]! != DBNull.Value ? cur.Fields?[ДоговориКонтрагентів_Const.ТипДоговору]! : 0)) ) /**/
                         
