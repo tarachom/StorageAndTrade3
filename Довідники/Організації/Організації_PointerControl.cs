@@ -21,6 +21,8 @@ limitations under the License.
 Сайт:     accounting.org.ua
 */
 
+using Gtk;
+
 using StorageAndTrade_1_0.Довідники;
 
 namespace StorageAndTrade
@@ -50,6 +52,22 @@ namespace StorageAndTrade
                 else
                     Presentation = "";
             }
+        }
+
+        protected override void OpenSmallSelect(object? sender, EventArgs args)
+        {
+            Popover PopoverSmallSelect = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
+
+            Організації_ШвидкийВибір page = new Організації_ШвидкийВибір() { PopoverParent = PopoverSmallSelect, DirectoryPointerItem = Pointer };
+            page.CallBack_OnSelectPointer = (Організації_Pointer selectPointer) =>
+            {
+                Pointer = selectPointer;
+            };
+
+            PopoverSmallSelect.Add(page);
+            PopoverSmallSelect.ShowAll();
+
+            page.LoadRecords();
         }
 
         protected override void OpenSelect(object? sender, EventArgs args)
