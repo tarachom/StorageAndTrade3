@@ -77,7 +77,7 @@ namespace StorageAndTrade
 
             //Власник
             hBoxBotton.PackStart(СкладПриміщенняВласник, false, false, 2);
-            СкладПриміщенняВласник.Caption = "Приміщення власник:";
+            СкладПриміщенняВласник.Caption = "Приміщення:";
             СкладПриміщенняВласник.AfterSelectFunc = () =>
             {
                 LoadTree();

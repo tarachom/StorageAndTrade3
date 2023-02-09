@@ -71,7 +71,7 @@ namespace StorageAndTrade
 
             //Власник
             hBoxBotton.PackStart(СкладВласник, false, false, 2);
-            СкладВласник.Caption = "Склад власник:";
+            СкладВласник.Caption = "Склад:";
             СкладВласник.AfterSelectFunc = () =>
             {
                 LoadRecords();
@@ -150,6 +150,7 @@ namespace StorageAndTrade
             ТабличніСписки.СкладськіПриміщення_Записи.DirectoryPointerItem = DirectoryPointerItem;
 
             ТабличніСписки.СкладськіПриміщення_Записи.Where.Clear();
+            
             if (!СкладВласник.Pointer.UnigueID.IsEmpty())
             {
                 ТабличніСписки.СкладськіПриміщення_Записи.Where.Add(

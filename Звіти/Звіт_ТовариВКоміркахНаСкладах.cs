@@ -152,11 +152,21 @@ namespace StorageAndTrade
             HBox hBoxSkaldPrem = new HBox() { Halign = Align.End };
             vBox.PackStart(hBoxSkaldPrem, false, false, 5);
 
+            СкладськеПриміщення.BeforeClickOpenFunc = () =>
+            {
+                СкладськеПриміщення.СкладВласник = Склад.Pointer;
+            };
+
             hBoxSkaldPrem.PackStart(СкладськеПриміщення, false, false, 5);
 
             //СкладськаКомірка
             HBox hBoxSkaldCell = new HBox() { Halign = Align.End };
             vBox.PackStart(hBoxSkaldCell, false, false, 5);
+
+            СкладськаКомірка.BeforeClickOpenFunc = () =>
+            {
+                СкладськаКомірка.СкладПриміщенняВласник = СкладськеПриміщення.Pointer;
+            };
 
             hBoxSkaldCell.PackStart(СкладськаКомірка, false, false, 5);
         }

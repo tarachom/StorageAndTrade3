@@ -5,7 +5,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>09.02.2023 16:03:50</DateTimeSave>
+  <DateTimeSave>09.02.2023 16:34:34</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -1765,7 +1765,17 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <Name>КороткаНазва</Name>
               <Caption>КороткаНазва</Caption>
               <Size>0</Size>
-              <SortNum>100</SortNum>
+              <SortNum>3</SortNum>
+              <SortField>False</SortField>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>Код_R030</Name>
+              <Caption>Код R030</Caption>
+              <Size>0</Size>
+              <SortNum>4</SortNum>
               <SortField>False</SortField>
               <Type>string</Type>
               <Pointer>
@@ -3609,7 +3619,8 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
     <Directory>
       <Name>ДоговориКонтрагентів</Name>
       <Table>tab_a28</Table>
-      <Desc>Договори контрагентів. Договори підпорядковані контрагенту</Desc>
+      <Desc>Договори контрагентів. 
+Договори підпорядковані контрагенту</Desc>
       <Fields>
         <Field>
           <Name>Назва</Name>
@@ -4958,6 +4969,41 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
             </Field>
           </Fields>
         </TabularList>
+        <TabularList>
+          <Name>ЗаписиШвидкийВибір</Name>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>Назва</Name>
+              <Caption>Назва</Caption>
+              <Size>0</Size>
+              <SortNum>1</SortNum>
+              <SortField>True</SortField>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>Склад</Name>
+              <Caption>Склад</Caption>
+              <Size>0</Size>
+              <SortNum>2</SortNum>
+              <SortField>False</SortField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Склади</Pointer>
+              <Join>
+                <table>Довідники.Склади_Const.TABLE</table>
+                <field>Склад</field>
+                <alias>join_tab_1</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_1</table>
+                <field>Довідники.Склади_Const.Назва</field>
+              </FieldAndAlias>
+            </Field>
+          </Fields>
+        </TabularList>
       </TabularLists>
       <TriggerFunctions>
         <BeforeSave>
@@ -5080,7 +5126,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <Name>Назва</Name>
               <Caption>Назва</Caption>
               <Size>0</Size>
-              <SortNum>2</SortNum>
+              <SortNum>1</SortNum>
               <SortField>True</SortField>
               <Type>string</Type>
               <Pointer>
@@ -5187,6 +5233,41 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <FieldAndAlias>
                 <table>join_tab_3</table>
                 <field>Довідники.СкладськіКомірки_Папки_Const.Назва</field>
+              </FieldAndAlias>
+            </Field>
+          </Fields>
+        </TabularList>
+        <TabularList>
+          <Name>ЗаписиШвидкийВибір</Name>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>Назва</Name>
+              <Caption>Назва</Caption>
+              <Size>0</Size>
+              <SortNum>1</SortNum>
+              <SortField>True</SortField>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>Приміщення</Name>
+              <Caption>Приміщення</Caption>
+              <Size>0</Size>
+              <SortNum>2</SortNum>
+              <SortField>False</SortField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.СкладськіПриміщення</Pointer>
+              <Join>
+                <table>Довідники.СкладськіПриміщення_Const.TABLE</table>
+                <field>Приміщення</field>
+                <alias>join_tab_1</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_1</table>
+                <field>Довідники.СкладськіПриміщення_Const.Назва</field>
               </FieldAndAlias>
             </Field>
           </Fields>

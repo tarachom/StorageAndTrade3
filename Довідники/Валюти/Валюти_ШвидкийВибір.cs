@@ -119,6 +119,14 @@ namespace StorageAndTrade
             ТабличніСписки.Валюти_ЗаписиШвидкийВибір.Where.Add(
                 new Where(Comparison.OR, Валюти_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
+            //КороткаНазва
+            ТабличніСписки.Валюти_ЗаписиШвидкийВибір.Where.Add(
+                new Where(Comparison.OR, Валюти_Const.КороткаНазва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
+
+            //Код_R030
+            ТабличніСписки.Валюти_ЗаписиШвидкийВибір.Where.Add(
+                new Where(Comparison.OR, Валюти_Const.Код_R030, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
+
             ТабличніСписки.Валюти_ЗаписиШвидкийВибір.LoadRecords();
         }
 

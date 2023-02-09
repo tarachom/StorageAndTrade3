@@ -21,6 +21,8 @@ limitations under the License.
 Сайт:     accounting.org.ua
 */
 
+using Gtk;
+
 using StorageAndTrade_1_0.Довідники;
 
 namespace StorageAndTrade
@@ -52,19 +54,31 @@ namespace StorageAndTrade
             }
         }
 
+        public СкладськіПриміщення_Pointer СкладПриміщенняВласник = new СкладськіПриміщення_Pointer();
+
         protected override void OpenSelect(object? sender, EventArgs args)
         {
-            СкладськіКомірки page = new СкладськіКомірки(true);
+            Popover PopoverSmallSelect = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
+
+            if (BeforeClickOpenFunc != null)
+                BeforeClickOpenFunc.Invoke();
+
+            СкладськіКомірки_ШвидкийВибір page = new СкладськіКомірки_ШвидкийВибір() { PopoverParent = PopoverSmallSelect, DirectoryPointerItem = Pointer };
 
             page.DirectoryPointerItem = Pointer;
+            page.СкладПриміщенняВласник.Pointer = СкладПриміщенняВласник;
             page.CallBack_OnSelectPointer = (СкладськіКомірки_Pointer selectPointer) =>
             {
                 Pointer = selectPointer;
+
+                if (AfterSelectFunc != null)
+                    AfterSelectFunc.Invoke();
             };
 
-            Program.GeneralForm?.CreateNotebookPage("Вибір - Складські комірки", () => { return page; }, true);
+            PopoverSmallSelect.Add(page);
+            PopoverSmallSelect.ShowAll();
 
-            page.LoadTree();
+            page.LoadRecords();
         }
 
         protected override void OnClear(object? sender, EventArgs args)
