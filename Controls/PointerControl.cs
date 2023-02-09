@@ -33,7 +33,7 @@ namespace StorageAndTrade
         public PointerControl() : base()
         {
             PackStart(labelCaption, false, false, 5);
-            PackStart(entryText, false, false, 0);
+            PackStart(entryText, false, false, 1);
 
             Button bOpen = new Button(new Image("images/find.png"));
             bOpen.Clicked += OpenSelect;
@@ -41,8 +41,8 @@ namespace StorageAndTrade
             Button bClear = new Button(new Image("images/clean.png"));
             bClear.Clicked += OnClear;
 
-            PackStart(bOpen, false, false, 0);
-            PackStart(bClear, false, false, 0);
+            PackStart(bOpen, false, false, 1);
+            PackStart(bClear, false, false, 1);
         }
 
         protected virtual void OpenSelect(object? sender, EventArgs args) { }
