@@ -50,12 +50,12 @@ namespace StorageAndTrade
         Валюти_PointerControl Валюта = new Валюти_PointerControl();
         Каси_PointerControl Каса = new Каси_PointerControl();
         Каси_PointerControl КасаОтримувач = new Каси_PointerControl() { Caption = "Каса отримувач:" };
-        NumericControl Курс = new NumericControl();
-        NumericControl СумаДокументу = new NumericControl();
+        NumericControl Курс = new NumericControl() { Caption = "Курс:" };
+        NumericControl СумаДокументу = new NumericControl() { Caption = "Сума:" };
         Контрагенти_PointerControl Контрагент = new Контрагенти_PointerControl();
         ДоговориКонтрагентів_PointerControl Договір = new ДоговориКонтрагентів_PointerControl();
         ComboBoxText ГосподарськаОперація = new ComboBoxText();
-        БанківськіРахункиОрганізацій_PointerControl БанківськийРахунок = new БанківськіРахункиОрганізацій_PointerControl() { WidthPresentation = 200 };
+        БанківськіРахункиОрганізацій_PointerControl БанківськийРахунок = new БанківськіРахункиОрганізацій_PointerControl() { Caption = "Банківський рахунок:" };
         Користувачі_PointerControl Автор = new Користувачі_PointerControl();
         СтаттяРухуКоштів_PointerControl СтаттяРухуКоштів = new СтаттяРухуКоштів_PointerControl();
         Entry Коментар = new Entry() { WidthRequest = 920 };
@@ -136,8 +136,6 @@ namespace StorageAndTrade
                 ГосподарськаОперація.Append(
                     Перелічення.ГосподарськіОперації.ПоверненняОплатиКлієнту.ToString(),
                     Конфігурація_ГосподарськіОперації.Fields["ПоверненняОплатиКлієнту"].Desc);
-
-                ГосподарськаОперація.Active = 0;
             }
         }
 
@@ -254,6 +252,8 @@ namespace StorageAndTrade
             HBox hBoxOperation = new HBox() { Halign = Align.End };
             vBox.PackStart(hBoxOperation, false, false, 5);
 
+            ГосподарськаОперація.Changed += OnComboBoxChanged_ГосподарськаОперація;
+
             hBoxOperation.PackStart(new Label("Господарська операція: "), false, false, 0);
             hBoxOperation.PackStart(ГосподарськаОперація, false, false, 5);
 
@@ -269,14 +269,17 @@ namespace StorageAndTrade
 
             hBoxKasaOtrymuvach.PackStart(КасаОтримувач, false, false, 5);
 
+            //БанківськийРахунок
+            HBox hBoxBankRahunokOrganization = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxBankRahunokOrganization, false, false, 5);
+
+            hBoxBankRahunokOrganization.PackStart(БанківськийРахунок, false, false, 5);
+
             //СумаДокументу та Курс
             HBox hBoxSuma = new HBox() { Halign = Align.End };
             vBox.PackStart(hBoxSuma, false, false, 5);
 
-            hBoxSuma.PackStart(new Label("Сума:"), false, false, 5);
             hBoxSuma.PackStart(СумаДокументу, false, false, 5);
-
-            hBoxSuma.PackStart(new Label("Курс:"), false, false, 5);
             hBoxSuma.PackStart(Курс, false, false, 5);
         }
 
@@ -291,12 +294,6 @@ namespace StorageAndTrade
 
         void CreateContainer4(VBox vBox)
         {
-            //БанківськийРахунок
-            HBox hBoxBankRahunokOrganization = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxBankRahunokOrganization, false, false, 5);
-
-            hBoxBankRahunokOrganization.PackStart(БанківськийРахунок, false, false, 5);
-
             //СтаттяРухуКоштів
             HBox hBoxStatjaRuhuKoshtiv = new HBox() { Halign = Align.End };
             vBox.PackStart(hBoxStatjaRuhuKoshtiv, false, false, 5);
@@ -341,6 +338,8 @@ namespace StorageAndTrade
                 РозхіднийКасовийОрдер_Objest.Каса = ЗначенняЗаЗамовчуванням.ОсновнаКаса_Const; ;
                 РозхіднийКасовийОрдер_Objest.Контрагент = ЗначенняЗаЗамовчуванням.ОсновнийПостачальник_Const;
                 РозхіднийКасовийОрдер_Objest.БанківськийРахунок = ЗначенняЗаЗамовчуванням.ОсновнийБанківськийРахунок_Const;
+
+                РозхіднийКасовийОрдер_Objest.ГосподарськаОперація = Перелічення.ГосподарськіОперації.ОплатаПостачальнику;
             }
 
             НомерДок.Text = РозхіднийКасовийОрдер_Objest.НомерДок;
@@ -351,7 +350,7 @@ namespace StorageAndTrade
             КасаОтримувач.Pointer = РозхіднийКасовийОрдер_Objest.КасаОтримувач;
             Контрагент.Pointer = РозхіднийКасовийОрдер_Objest.Контрагент;
             Договір.Pointer = РозхіднийКасовийОрдер_Objest.Договір;
-            ГосподарськаОперація.ActiveId = ((Перелічення.ГосподарськіОперації)РозхіднийКасовийОрдер_Objest.ГосподарськаОперація).ToString();
+            ГосподарськаОперація.ActiveId = РозхіднийКасовийОрдер_Objest.ГосподарськаОперація.ToString();
             Коментар.Text = РозхіднийКасовийОрдер_Objest.Коментар;
             БанківськийРахунок.Pointer = РозхіднийКасовийОрдер_Objest.БанківськийРахунок;
             Автор.Pointer = РозхіднийКасовийОрдер_Objest.Автор;
@@ -388,6 +387,43 @@ namespace StorageAndTrade
         }
 
         #endregion
+
+        void OnComboBoxChanged_ГосподарськаОперація(object? sender, EventArgs args)
+        {
+            switch (Enum.Parse<Перелічення.ГосподарськіОперації>(ГосподарськаОперація.ActiveId))
+            {
+                case Перелічення.ГосподарськіОперації.ВидачаКоштівВІншуКасу:
+                    {
+                        КасаОтримувач.Sensitive = true;
+                        Курс.Sensitive = true;
+                        Контрагент.Sensitive = false;
+                        Договір.Sensitive = false;
+                        БанківськийРахунок.Sensitive = false;
+
+                        break;
+                    }
+                case Перелічення.ГосподарськіОперації.ЗдачаКоштівВБанк:
+                    {
+                        КасаОтримувач.Sensitive = false;
+                        Курс.Sensitive = false;
+                        Контрагент.Sensitive = false;
+                        Договір.Sensitive = false;
+                        БанківськийРахунок.Sensitive = true;
+
+                        break;
+                    }
+                default:
+                    {
+                        КасаОтримувач.Sensitive = false;
+                        Курс.Sensitive = false;
+                        Контрагент.Sensitive = true;
+                        Договір.Sensitive = true;
+                        БанківськийРахунок.Sensitive = false;
+
+                        break;
+                    }
+            }
+        }
 
         bool IsValidValue()
         {

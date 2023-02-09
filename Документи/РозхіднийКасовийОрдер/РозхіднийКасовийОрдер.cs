@@ -302,37 +302,31 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"Розхідний касовий ордер: *", () =>
+                РозхіднийКасовийОрдер_Елемент page = new РозхіднийКасовийОрдер_Елемент
                 {
-                    РозхіднийКасовийОрдер_Елемент page = new РозхіднийКасовийОрдер_Елемент
-                    {
-                        PageList = this,
-                        IsNew = true
-                    };
+                    PageList = this,
+                    IsNew = true
+                };
 
-                    page.SetValue();
+                Program.GeneralForm?.CreateNotebookPage($"Розхідний касовий ордер: *", () => { return page; }, true);
 
-                    return page;
-                }, true);
+                page.SetValue();
             }
             else
             {
                 РозхіднийКасовийОрдер_Objest РозхіднийКасовийОрдер_Objest = new РозхіднийКасовийОрдер_Objest();
                 if (РозхіднийКасовийОрдер_Objest.Read(new UnigueID(uid)))
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"{РозхіднийКасовийОрдер_Objest.Назва}", () =>
+                    РозхіднийКасовийОрдер_Елемент page = new РозхіднийКасовийОрдер_Елемент
                     {
-                        РозхіднийКасовийОрдер_Елемент page = new РозхіднийКасовийОрдер_Елемент
-                        {
-                            PageList = this,
-                            IsNew = false,
-                            РозхіднийКасовийОрдер_Objest = РозхіднийКасовийОрдер_Objest,
-                        };
+                        PageList = this,
+                        IsNew = false,
+                        РозхіднийКасовийОрдер_Objest = РозхіднийКасовийОрдер_Objest,
+                    };
 
-                        page.SetValue();
+                    Program.GeneralForm?.CreateNotebookPage($"{РозхіднийКасовийОрдер_Objest.Назва}", () => { return page; }, true);
 
-                        return page;
-                    }, true);
+                    page.SetValue();
                 }
                 else
                     Message.Error(Program.GeneralForm, "Не вдалось прочитати!");

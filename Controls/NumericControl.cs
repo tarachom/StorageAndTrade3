@@ -27,15 +27,30 @@ namespace StorageAndTrade
 {
     class NumericControl : HBox
     {
+        Label labelCaption = new Label();
         Entry entryNumeric = new Entry();
         HBox hBoxInfoValid = new HBox() { WidthRequest = 16 };
 
         public NumericControl() : base()
         {
+            PackStart(labelCaption, false, false, 5);
+
             PackStart(hBoxInfoValid, false, false, 1);
 
             entryNumeric.Changed += OnEntryNumericChanged;
             PackStart(entryNumeric, false, false, 1);
+        }
+        
+        public string Caption
+        {
+            get
+            {
+                return labelCaption.Text;
+            }
+            set
+            {
+                labelCaption.Text = value;
+            }
         }
 
         decimal mValue;

@@ -41,8 +41,8 @@ namespace StorageAndTrade
             Button bClear = new Button(new Image("images/clean.png"));
             bClear.Clicked += OnClear;
 
-            PackStart(bOpen, false, false, 2);
-            PackStart(bClear, false, false, 2);
+            PackStart(bOpen, false, false, 0);
+            PackStart(bClear, false, false, 0);
         }
 
         protected virtual void OpenSelect(object? sender, EventArgs args) { }
