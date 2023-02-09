@@ -73,7 +73,7 @@ namespace StorageAndTrade
 
             //Власник
             hBoxBotton.PackStart(НоменклатураВласник, false, false, 2);
-            НоменклатураВласник.Caption = "Номенклатура власник:";
+            НоменклатураВласник.Caption = "Номенклатура:";
             НоменклатураВласник.AfterSelectFunc = () =>
             {
                 LoadRecords();

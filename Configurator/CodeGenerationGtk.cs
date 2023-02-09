@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 09.02.2023 15:34:04
+ * Дата конфігурації: 09.02.2023 15:42:37
  *
  */
  
@@ -2439,6 +2439,109 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                 if (cur != null)
                 {
                     ХарактеристикиНоменклатури_Записи Record = new ХарактеристикиНоменклатури_Записи
+                    {
+                        ID = cur.UnigueID.ToString(),
+                        Номенклатура = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
+                        Код = cur.Fields?[ХарактеристикиНоменклатури_Const.Код]?.ToString() ?? "", /**/
+                        Назва = cur.Fields?[ХарактеристикиНоменклатури_Const.Назва]?.ToString() ?? "" /**/
+                        
+                    };
+
+                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                    CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (DirectoryPointerItem != null || SelectPointerItem != null)
+                    {
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+
+                        if (Record.ID == UidSelect)
+                            SelectPath = CurrentPath;
+                    }
+                }
+            }
+        }
+    }
+	    
+    public class ХарактеристикиНоменклатури_ЗаписиШвидкийВибір
+    {
+        string Image = "images/doc.png";
+        string ID = "";
+        
+        string Код = "";
+        string Номенклатура = "";
+        string Назва = "";
+
+        Array ToArray()
+        {
+            return new object[] { new Gdk.Pixbuf(Image), ID 
+            /* */ , Код, Номенклатура, Назва };
+        }
+
+        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */
+            , typeof(string) /* Код */
+            , typeof(string) /* Номенклатура */
+            , typeof(string) /* Назва */
+            );
+
+        public static void AddColumns(TreeView treeView)
+        {
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 4 }, "pixbuf", 0));
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
+            /* */
+            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
+            treeView.AppendColumn(new TreeViewColumn("Номенклатура", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Номенклатура*/
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 4) { SortColumnId = 4 } ); /*Назва*/
+            
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
+        }
+
+        public static List<Where> Where { get; set; } = new List<Where>();
+
+        public static Довідники.ХарактеристикиНоменклатури_Pointer? DirectoryPointerItem { get; set; }
+        public static Довідники.ХарактеристикиНоменклатури_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? SelectPath;
+        public static TreePath? CurrentPath;
+
+        public static void LoadRecords()
+        {
+            Store.Clear();
+            SelectPath = null;
+
+            Довідники.ХарактеристикиНоменклатури_Select ХарактеристикиНоменклатури_Select = new Довідники.ХарактеристикиНоменклатури_Select();
+            ХарактеристикиНоменклатури_Select.QuerySelect.Field.AddRange(
+                new string[]
+                {
+                    Довідники.ХарактеристикиНоменклатури_Const.Код /* 1 */
+                    , Довідники.ХарактеристикиНоменклатури_Const.Назва /* 2 */
+                    
+                });
+
+            /* Where */
+            ХарактеристикиНоменклатури_Select.QuerySelect.Where = Where;
+
+            
+              /* ORDER */
+              ХарактеристикиНоменклатури_Select.QuerySelect.Order.Add(Довідники.ХарактеристикиНоменклатури_Const.Назва, SelectOrder.ASC);
+            
+                /* Join Table */
+                ХарактеристикиНоменклатури_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Номенклатура_Const.TABLE, Довідники.ХарактеристикиНоменклатури_Const.Номенклатура, ХарактеристикиНоменклатури_Select.QuerySelect.Table, "join_tab_1"));
+                
+                  /* Field */
+                  ХарактеристикиНоменклатури_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_1." + Довідники.Номенклатура_Const.Назва, "join_tab_1_field_1"));
+                  
+
+            /* SELECT */
+            ХарактеристикиНоменклатури_Select.Select();
+            while (ХарактеристикиНоменклатури_Select.MoveNext())
+            {
+                Довідники.ХарактеристикиНоменклатури_Pointer? cur = ХарактеристикиНоменклатури_Select.Current;
+
+                if (cur != null)
+                {
+                    ХарактеристикиНоменклатури_ЗаписиШвидкийВибір Record = new ХарактеристикиНоменклатури_ЗаписиШвидкийВибір
                     {
                         ID = cur.UnigueID.ToString(),
                         Номенклатура = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/

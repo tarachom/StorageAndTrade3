@@ -160,6 +160,11 @@ namespace StorageAndTrade
             HBox hBoxHarakterystyka = new HBox() { Halign = Align.End };
             vBox.PackStart(hBoxHarakterystyka, false, false, 5);
 
+            ХарактеристикиНоменклатури.BeforeClickOpenFunc = () =>
+            {
+                ХарактеристикиНоменклатури.НоменклатураВласник = Номенклатура.Pointer;
+            };
+
             hBoxHarakterystyka.PackStart(ХарактеристикиНоменклатури, false, false, 5);
         }
 

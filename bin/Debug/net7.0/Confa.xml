@@ -5,7 +5,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>09.02.2023 15:34:04</DateTimeSave>
+  <DateTimeSave>09.02.2023 15:42:37</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -3012,6 +3012,51 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       <TabularLists>
         <TabularList>
           <Name>Записи</Name>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>Код</Name>
+              <Caption>Код</Caption>
+              <Size>0</Size>
+              <SortNum>1</SortNum>
+              <SortField>False</SortField>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>Номенклатура</Name>
+              <Caption>Номенклатура</Caption>
+              <Size>0</Size>
+              <SortNum>2</SortNum>
+              <SortField>False</SortField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Номенклатура</Pointer>
+              <Join>
+                <table>Довідники.Номенклатура_Const.TABLE</table>
+                <field>Номенклатура</field>
+                <alias>join_tab_1</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_1</table>
+                <field>Довідники.Номенклатура_Const.Назва</field>
+              </FieldAndAlias>
+            </Field>
+            <Field>
+              <Name>Назва</Name>
+              <Caption>Назва</Caption>
+              <Size>0</Size>
+              <SortNum>3</SortNum>
+              <SortField>True</SortField>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+          </Fields>
+        </TabularList>
+        <TabularList>
+          <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
           <Fields>
