@@ -190,8 +190,8 @@ namespace StorageAndTrade
                         {
                             try
                             {
-                                 object? obj = doc.GetType().InvokeMember("SpendTheDocument",
-                                      BindingFlags.InvokeMethod, null, doc, new object[] { journalSelect.Current.SpendDate });
+                                object? obj = doc.GetType().InvokeMember("SpendTheDocument",
+                                     BindingFlags.InvokeMethod, null, doc, new object[] { journalSelect.Current.SpendDate });
 
                                 counter++;
 
@@ -232,9 +232,10 @@ namespace StorageAndTrade
             CreateMessage(TypeMessage.Info, "Проведено документів: " + counter);
 
             Константи.Системні.ЗупинитиФоновіЗадачі_Const = false;
-
-            Thread.Sleep(500);
             ButtonSensitive(true);
+
+            Thread.Sleep(1000);
+            CreateMessage(TypeMessage.None, "\n\n\n");
         }
 
         #endregion
