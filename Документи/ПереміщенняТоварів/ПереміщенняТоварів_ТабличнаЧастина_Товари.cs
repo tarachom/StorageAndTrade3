@@ -33,6 +33,7 @@ namespace StorageAndTrade
 {
     class ПереміщенняТоварів_ТабличнаЧастина_Товари : VBox
     {
+        ScrolledWindow scrollTree;
         public ПереміщенняТоварів_Objest? ПереміщенняТоварів_Objest { get; set; }
 
         #region Записи
@@ -143,7 +144,7 @@ namespace StorageAndTrade
 
             CreateToolbar();
 
-            ScrolledWindow scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In };
+            scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In };
             scrollTree.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
 
             TreeViewGrid = new TreeView(Store);
@@ -174,6 +175,12 @@ namespace StorageAndTrade
                     TreeIter iter;
                     TreeViewGrid.Model.GetIter(out iter, itemPath);
 
+                    Gdk.Rectangle rectangleCell = TreeViewGrid.GetCellArea(itemPath, treeColumn);
+                    rectangleCell.Offset(-(int)scrollTree.Hadjustment.Value, rectangleCell.Height / 2);
+
+                    Popover PopoverSmallSelect = new Popover(TreeViewGrid) { Position = PositionType.Bottom, BorderWidth = 2 };
+                    PopoverSmallSelect.PointingTo = rectangleCell;
+
                     int rowNumber = int.Parse(itemPath.ToString());
                     Запис запис = Записи[rowNumber];
 
@@ -181,9 +188,7 @@ namespace StorageAndTrade
                     {
                         case Columns.Номенклатура:
                             {
-                                Номенклатура page = new Номенклатура(true);
-
-                                page.DirectoryPointerItem = запис.Номенклатура;
+                                Номенклатура_ШвидкийВибір page = new Номенклатура_ШвидкийВибір() { PopoverParent = PopoverSmallSelect, DirectoryPointerItem = запис.Номенклатура };
                                 page.CallBack_OnSelectPointer = (Номенклатура_Pointer selectPointer) =>
                                 {
                                     запис.Номенклатура = selectPointer;
@@ -192,18 +197,17 @@ namespace StorageAndTrade
                                     Store.SetValues(iter, запис.ToArray());
                                 };
 
-                                Program.GeneralForm?.CreateNotebookPage("Вибір - Номенклатура", () => { return page; }, true);
+                                PopoverSmallSelect.Add(page);
+                                PopoverSmallSelect.ShowAll();
 
-                                page.LoadTree();
-
+                                page.LoadRecords();
                                 break;
                             }
                         case Columns.Характеристика:
                             {
-                                ХарактеристикиНоменклатури page = new ХарактеристикиНоменклатури(true);
+                                ХарактеристикиНоменклатури_ШвидкийВибір page = new ХарактеристикиНоменклатури_ШвидкийВибір() { PopoverParent = PopoverSmallSelect, DirectoryPointerItem = запис.Характеристика };
 
                                 page.НоменклатураВласник.Pointer = запис.Номенклатура;
-                                page.DirectoryPointerItem = запис.Характеристика;
                                 page.CallBack_OnSelectPointer = (ХарактеристикиНоменклатури_Pointer selectPointer) =>
                                 {
                                     запис.Характеристика = selectPointer;
@@ -212,17 +216,15 @@ namespace StorageAndTrade
                                     Store.SetValues(iter, запис.ToArray());
                                 };
 
-                                Program.GeneralForm?.CreateNotebookPage("Вибір - Характеристика", () => { return page; }, true);
+                                PopoverSmallSelect.Add(page);
+                                PopoverSmallSelect.ShowAll();
 
                                 page.LoadRecords();
-
                                 break;
                             }
                         case Columns.Серія:
                             {
-                                СеріїНоменклатури page = new СеріїНоменклатури(true);
-
-                                page.DirectoryPointerItem = запис.Серія;
+                                СеріїНоменклатури_ШвидкийВибір page = new СеріїНоменклатури_ШвидкийВибір() { PopoverParent = PopoverSmallSelect, DirectoryPointerItem = запис.Серія };
                                 page.CallBack_OnSelectPointer = (СеріїНоменклатури_Pointer selectPointer) =>
                                 {
                                     запис.Серія = selectPointer;
@@ -231,17 +233,15 @@ namespace StorageAndTrade
                                     Store.SetValues(iter, запис.ToArray());
                                 };
 
-                                Program.GeneralForm?.CreateNotebookPage("Вибір - Серія", () => { return page; }, true);
+                                PopoverSmallSelect.Add(page);
+                                PopoverSmallSelect.ShowAll();
 
                                 page.LoadRecords();
-
                                 break;
                             }
                         case Columns.Пакування:
                             {
-                                ПакуванняОдиниціВиміру page = new ПакуванняОдиниціВиміру(true);
-
-                                page.DirectoryPointerItem = запис.Пакування;
+                                ПакуванняОдиниціВиміру_ШвидкийВибір page = new ПакуванняОдиниціВиміру_ШвидкийВибір() { PopoverParent = PopoverSmallSelect, DirectoryPointerItem = запис.Пакування };
                                 page.CallBack_OnSelectPointer = (ПакуванняОдиниціВиміру_Pointer selectPointer) =>
                                 {
                                     запис.Пакування = selectPointer;
@@ -250,10 +250,10 @@ namespace StorageAndTrade
                                     Store.SetValues(iter, запис.ToArray());
                                 };
 
-                                Program.GeneralForm?.CreateNotebookPage("Вибір - Довідник: Пакування", () => { return page; }, true);
+                                PopoverSmallSelect.Add(page);
+                                PopoverSmallSelect.ShowAll();
 
                                 page.LoadRecords();
-
                                 break;
                             }
                     }

@@ -35,6 +35,7 @@ namespace StorageAndTrade
 {
     class РахунокФактура_ТабличнаЧастина_Товари : VBox
     {
+        ScrolledWindow scrollTree;
         public РахунокФактура_Objest? РахунокФактура_Objest { get; set; }
         public System.Action? ОбновитиЗначенняДокумента { get; set; }
 
@@ -227,7 +228,7 @@ LIMIT 1
 
             CreateToolbar();
 
-            ScrolledWindow scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In };
+            scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In };
             scrollTree.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
 
             TreeViewGrid = new TreeView(Store);
@@ -258,6 +259,12 @@ LIMIT 1
                     TreeIter iter;
                     TreeViewGrid.Model.GetIter(out iter, itemPath);
 
+                    Gdk.Rectangle rectangleCell = TreeViewGrid.GetCellArea(itemPath, treeColumn);
+                    rectangleCell.Offset(-(int)scrollTree.Hadjustment.Value, rectangleCell.Height / 2);
+
+                    Popover PopoverSmallSelect = new Popover(TreeViewGrid) { Position = PositionType.Bottom, BorderWidth = 2 };
+                    PopoverSmallSelect.PointingTo = rectangleCell;
+
                     int rowNumber = int.Parse(itemPath.ToString());
                     Запис запис = Записи[rowNumber];
 
@@ -265,9 +272,7 @@ LIMIT 1
                     {
                         case Columns.Номенклатура:
                             {
-                                Номенклатура page = new Номенклатура(true);
-
-                                page.DirectoryPointerItem = запис.Номенклатура;
+                                Номенклатура_ШвидкийВибір page = new Номенклатура_ШвидкийВибір() { PopoverParent = PopoverSmallSelect, DirectoryPointerItem = запис.Номенклатура };
                                 page.CallBack_OnSelectPointer = (Номенклатура_Pointer selectPointer) =>
                                 {
                                     запис.Номенклатура = selectPointer;
@@ -276,23 +281,20 @@ LIMIT 1
                                     if (ОбновитиЗначенняДокумента != null)
                                         ОбновитиЗначенняДокумента.Invoke();
 
-                                    Запис.ОтриматиЦіну(запис, РахунокФактура_Objest!);
-
                                     Store.SetValues(iter, запис.ToArray());
                                 };
 
-                                Program.GeneralForm?.CreateNotebookPage("Вибір - Номенклатура", () => { return page; }, true);
+                                PopoverSmallSelect.Add(page);
+                                PopoverSmallSelect.ShowAll();
 
-                                page.LoadTree();
-
+                                page.LoadRecords();
                                 break;
                             }
                         case Columns.Характеристика:
                             {
-                                ХарактеристикиНоменклатури page = new ХарактеристикиНоменклатури(true);
+                                ХарактеристикиНоменклатури_ШвидкийВибір page = new ХарактеристикиНоменклатури_ШвидкийВибір() { PopoverParent = PopoverSmallSelect, DirectoryPointerItem = запис.Характеристика };
 
                                 page.НоменклатураВласник.Pointer = запис.Номенклатура;
-                                page.DirectoryPointerItem = запис.Характеристика;
                                 page.CallBack_OnSelectPointer = (ХарактеристикиНоменклатури_Pointer selectPointer) =>
                                 {
                                     запис.Характеристика = selectPointer;
@@ -301,17 +303,15 @@ LIMIT 1
                                     Store.SetValues(iter, запис.ToArray());
                                 };
 
-                                Program.GeneralForm?.CreateNotebookPage("Вибір - Характеристика", () => { return page; }, true);
+                                PopoverSmallSelect.Add(page);
+                                PopoverSmallSelect.ShowAll();
 
                                 page.LoadRecords();
-
                                 break;
                             }
                         case Columns.Пакування:
                             {
-                                ПакуванняОдиниціВиміру page = new ПакуванняОдиниціВиміру(true);
-
-                                page.DirectoryPointerItem = запис.Пакування;
+                                ПакуванняОдиниціВиміру_ШвидкийВибір page = new ПакуванняОдиниціВиміру_ШвидкийВибір() { PopoverParent = PopoverSmallSelect, DirectoryPointerItem = запис.Пакування };
                                 page.CallBack_OnSelectPointer = (ПакуванняОдиниціВиміру_Pointer selectPointer) =>
                                 {
                                     запис.Пакування = selectPointer;
@@ -320,17 +320,15 @@ LIMIT 1
                                     Store.SetValues(iter, запис.ToArray());
                                 };
 
-                                Program.GeneralForm?.CreateNotebookPage("Вибір - Пакування", () => { return page; }, true);
+                                PopoverSmallSelect.Add(page);
+                                PopoverSmallSelect.ShowAll();
 
                                 page.LoadRecords();
-
                                 break;
                             }
                         case Columns.ВидЦіни:
                             {
-                                ВидиЦін page = new ВидиЦін(true);
-
-                                page.DirectoryPointerItem = запис.ВидЦіни;
+                                ВидиЦін_ШвидкийВибір page = new ВидиЦін_ШвидкийВибір() { PopoverParent = PopoverSmallSelect, DirectoryPointerItem = запис.ВидЦіни };
                                 page.CallBack_OnSelectPointer = (ВидиЦін_Pointer selectPointer) =>
                                 {
                                     запис.ВидЦіни = selectPointer;
@@ -339,22 +337,18 @@ LIMIT 1
                                     if (ОбновитиЗначенняДокумента != null)
                                         ОбновитиЗначенняДокумента.Invoke();
 
-                                    Запис.ОтриматиЦіну(запис, РахунокФактура_Objest!);
-
                                     Store.SetValues(iter, запис.ToArray());
                                 };
 
-                                Program.GeneralForm?.CreateNotebookPage("Вибір - Вид ціни", () => { return page; }, true);
+                                PopoverSmallSelect.Add(page);
+                                PopoverSmallSelect.ShowAll();
 
                                 page.LoadRecords();
-
                                 break;
                             }
                         case Columns.Склад:
                             {
-                                Склади page = new Склади(true);
-
-                                page.DirectoryPointerItem = запис.Склад;
+                                Склади_ШвидкийВибір page = new Склади_ШвидкийВибір() { PopoverParent = PopoverSmallSelect, DirectoryPointerItem = запис.Склад };
                                 page.CallBack_OnSelectPointer = (Склади_Pointer selectPointer) =>
                                 {
                                     запис.Склад = selectPointer;
@@ -363,10 +357,10 @@ LIMIT 1
                                     Store.SetValues(iter, запис.ToArray());
                                 };
 
-                                Program.GeneralForm?.CreateNotebookPage("Вибір - Склад", () => { return page; }, true);
+                                PopoverSmallSelect.Add(page);
+                                PopoverSmallSelect.ShowAll();
 
-                                page.LoadTree();
-
+                                page.LoadRecords();
                                 break;
                             }
                     }

@@ -32,6 +32,7 @@ namespace StorageAndTrade
 {
     class ВведенняЗалишків_ТабличнаЧастина_БанківськіРахунки : VBox
     {
+        ScrolledWindow scrollTree;
         public ВведенняЗалишків_Objest? ВведенняЗалишків_Objest { get; set; }
 
         #region Записи
@@ -94,7 +95,7 @@ namespace StorageAndTrade
 
             CreateToolbar();
 
-            ScrolledWindow scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In };
+            scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In };
             scrollTree.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
 
             TreeViewGrid = new TreeView(Store);
@@ -125,6 +126,12 @@ namespace StorageAndTrade
                     TreeIter iter;
                     TreeViewGrid.Model.GetIter(out iter, itemPath);
 
+                    Gdk.Rectangle rectangleCell = TreeViewGrid.GetCellArea(itemPath, treeColumn);
+                    rectangleCell.Offset(-(int)scrollTree.Hadjustment.Value, rectangleCell.Height / 2);
+
+                    Popover PopoverSmallSelect = new Popover(TreeViewGrid) { Position = PositionType.Bottom, BorderWidth = 2 };
+                    PopoverSmallSelect.PointingTo = rectangleCell;
+
                     int rowNumber = int.Parse(itemPath.ToString());
                     Запис запис = Записи[rowNumber];
 
@@ -132,9 +139,7 @@ namespace StorageAndTrade
                     {
                         case Columns.БанківськийРахунок:
                             {
-                                БанківськіРахункиОрганізацій page = new БанківськіРахункиОрганізацій(true);
-
-                                page.DirectoryPointerItem = запис.БанківськийРахунок;
+                                БанківськіРахункиОрганізацій_ШвидкийВибір page = new БанківськіРахункиОрганізацій_ШвидкийВибір() { PopoverParent = PopoverSmallSelect, DirectoryPointerItem = запис.БанківськийРахунок };
                                 page.CallBack_OnSelectPointer = (БанківськіРахункиОрганізацій_Pointer selectPointer) =>
                                 {
                                     запис.БанківськийРахунок = selectPointer;
@@ -143,10 +148,10 @@ namespace StorageAndTrade
                                     Store.SetValues(iter, запис.ToArray());
                                 };
 
-                                Program.GeneralForm?.CreateNotebookPage("Вибір - Банківські рахунки", () => { return page; }, true);
+                                PopoverSmallSelect.Add(page);
+                                PopoverSmallSelect.ShowAll();
 
                                 page.LoadRecords();
-
                                 break;
                             }
                     }

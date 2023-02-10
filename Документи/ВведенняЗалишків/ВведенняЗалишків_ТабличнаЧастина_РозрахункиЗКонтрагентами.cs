@@ -34,6 +34,7 @@ namespace StorageAndTrade
 {
     class ВведенняЗалишків_ТабличнаЧастина_РозрахункиЗКонтрагентами : VBox
     {
+        ScrolledWindow scrollTree;
         public ВведенняЗалишків_Objest? ВведенняЗалишків_Objest { get; set; }
 
         #region Записи
@@ -110,7 +111,7 @@ namespace StorageAndTrade
 
             CreateToolbar();
 
-            ScrolledWindow scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In };
+            scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In };
             scrollTree.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
 
             TreeViewGrid = new TreeView(Store);
@@ -141,6 +142,12 @@ namespace StorageAndTrade
                     TreeIter iter;
                     TreeViewGrid.Model.GetIter(out iter, itemPath);
 
+                    Gdk.Rectangle rectangleCell = TreeViewGrid.GetCellArea(itemPath, treeColumn);
+                    rectangleCell.Offset(-(int)scrollTree.Hadjustment.Value, rectangleCell.Height / 2);
+
+                    Popover PopoverSmallSelect = new Popover(TreeViewGrid) { Position = PositionType.Bottom, BorderWidth = 2 };
+                    PopoverSmallSelect.PointingTo = rectangleCell;
+
                     int rowNumber = int.Parse(itemPath.ToString());
                     Запис запис = Записи[rowNumber];
 
@@ -148,9 +155,7 @@ namespace StorageAndTrade
                     {
                         case Columns.Контрагент:
                             {
-                                Контрагенти page = new Контрагенти(true);
-
-                                page.DirectoryPointerItem = запис.Контрагент;
+                                Контрагенти_ШвидкийВибір page = new Контрагенти_ШвидкийВибір() { PopoverParent = PopoverSmallSelect, DirectoryPointerItem = запис.Контрагент };
                                 page.CallBack_OnSelectPointer = (Контрагенти_Pointer selectPointer) =>
                                 {
                                     запис.Контрагент = selectPointer;
@@ -159,17 +164,15 @@ namespace StorageAndTrade
                                     Store.SetValues(iter, запис.ToArray());
                                 };
 
-                                Program.GeneralForm?.CreateNotebookPage("Вибір - Контрагенти", () => { return page; }, true);
+                                PopoverSmallSelect.Add(page);
+                                PopoverSmallSelect.ShowAll();
 
-                                page.LoadTree();
-
+                                page.LoadRecords();
                                 break;
                             }
                         case Columns.Валюта:
                             {
-                                Валюти page = new Валюти(true);
-
-                                page.DirectoryPointerItem = запис.Валюта;
+                                Валюти_ШвидкийВибір page = new Валюти_ШвидкийВибір() { PopoverParent = PopoverSmallSelect, DirectoryPointerItem = запис.Валюта };
                                 page.CallBack_OnSelectPointer = (Валюти_Pointer selectPointer) =>
                                 {
                                     запис.Валюта = selectPointer;
@@ -178,10 +181,10 @@ namespace StorageAndTrade
                                     Store.SetValues(iter, запис.ToArray());
                                 };
 
-                                Program.GeneralForm?.CreateNotebookPage("Вибір - Довідник: Валюти", () => { return page; }, true);
+                                PopoverSmallSelect.Add(page);
+                                PopoverSmallSelect.ShowAll();
 
                                 page.LoadRecords();
-
                                 break;
                             }
                     }
