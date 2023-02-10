@@ -25,7 +25,6 @@ using Gtk;
 
 using AccountingSoftware;
 
-using StorageAndTrade_1_0;
 using StorageAndTrade_1_0.Константи;
 using StorageAndTrade_1_0.Довідники;
 
@@ -79,7 +78,7 @@ namespace StorageAndTrade
             scrollTree.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
 
             TreeViewGrid = new TreeView();
-            AddColumns();
+            Номенклатура_Папки_Дерево_СпільніФункції.AddColumns(TreeViewGrid);
 
             TreeViewGrid.Selection.Mode = SelectionMode.Single;
             TreeViewGrid.ActivateOnSingleClick = true;
@@ -122,112 +121,10 @@ namespace StorageAndTrade
 
         public void LoadTree()
         {
-            TreeStore.Clear();
-
-            TreeIter rootIter = TreeStore.AppendValues(Guid.Empty.ToString(), " Номенклатура ");
-
-            #region SQL
-
-            string query = $@"
-WITH RECURSIVE r AS (
-    SELECT 
-        uid, 
-        {Номенклатура_Папки_Const.Назва}, 
-        {Номенклатура_Папки_Const.Родич}, 
-        1 AS level 
-    FROM {Номенклатура_Папки_Const.TABLE}
-    WHERE {Номенклатура_Папки_Const.Родич} = '{Guid.Empty}'";
-
-            if (!String.IsNullOrEmpty(UidOpenFolder))
-            {
-                query += $@"
-AND uid != '{UidOpenFolder}'
-";
-            }
-
-            query += $@"
-    UNION ALL
-    SELECT 
-        {Номенклатура_Папки_Const.TABLE}.uid, 
-        {Номенклатура_Папки_Const.TABLE}.{Номенклатура_Папки_Const.Назва}, 
-        {Номенклатура_Папки_Const.TABLE}.{Номенклатура_Папки_Const.Родич}, 
-        r.level + 1 AS level
-    FROM {Номенклатура_Папки_Const.TABLE}
-        JOIN r ON {Номенклатура_Папки_Const.TABLE}.{Номенклатура_Папки_Const.Родич} = r.uid";
-
-            if (!String.IsNullOrEmpty(UidOpenFolder))
-            {
-                query += $@"
-WHERE {Номенклатура_Папки_Const.TABLE}.uid != '{UidOpenFolder}'
-";
-            }
-
-            query += $@"
-)
-SELECT 
-    uid, 
-    {Номенклатура_Папки_Const.Назва}, 
-    {Номенклатура_Папки_Const.Родич}, 
-    level FROM r
-ORDER BY level ASC
-";
-
-            #endregion
-
-            string[] columnsName;
-            List<object[]>? listRow = null;
-
-            Config.Kernel?.DataBase.SelectRequest(query, null, out columnsName, out listRow);
-
-            Dictionary<string, TreeIter> NodeDictionary = new Dictionary<string, TreeIter>();
-
-            if (listRow != null)
-                foreach (object[] o in listRow)
-                {
-                    string uid = o[0]?.ToString() ?? Guid.Empty.ToString();
-                    string fieldName = o[1]?.ToString() ?? "";
-                    string fieldParent = o[2]?.ToString() ?? Guid.Empty.ToString();
-                    int level = (int)o[3];
-
-                    if (level == 1)
-                    {
-                        TreeIter Iter = TreeStore.AppendValues(rootIter, uid, fieldName);
-                        NodeDictionary.Add(uid, Iter);
-                    }
-                    else
-                    {
-                        TreeIter parentIter = NodeDictionary[fieldParent];
-
-                        TreeIter Iter = TreeStore.AppendValues(parentIter, uid, fieldName);
-                        NodeDictionary.Add(uid, Iter);
-                    }
-                }
-
-            TreePath rootPath = TreeViewGrid.Model.GetPath(rootIter);
-            TreeViewGrid.ExpandToPath(rootPath);
-
             if (DirectoryPointerItem != null)
                 Parent_Pointer = DirectoryPointerItem;
 
-            if (Parent_Pointer.IsEmpty())
-            {
-                TreeViewGrid.SetCursor(rootPath, TreeViewGrid.Columns[0], false);
-            }
-            else
-            {
-                if (NodeDictionary.ContainsKey(Parent_Pointer.UnigueID.ToString()))
-                {
-                    TreeIter parentIter = NodeDictionary[Parent_Pointer.UnigueID.ToString()];
-                    TreePath parentPath = TreeViewGrid.Model.GetPath(parentIter);
-                    TreeViewGrid.ExpandToPath(parentPath);
-                    TreeViewGrid.SetCursor(parentPath, TreeViewGrid.Columns[0], false);
-                }
-                else
-                {
-                    Parent_Pointer = new Номенклатура_Папки_Pointer();
-                    TreeViewGrid.SetCursor(rootPath, TreeViewGrid.Columns[0], false);
-                }
-            }
+            Номенклатура_Папки_Дерево_СпільніФункції.FillTree(TreeViewGrid, TreeStore, UidOpenFolder, Parent_Pointer);
 
             OnRowActivated(TreeViewGrid, new RowActivatedArgs());
         }
@@ -275,12 +172,6 @@ ORDER BY level ASC
         }
 
         #region TreeView
-
-        void AddColumns()
-        {
-            TreeViewGrid.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 0) { Visible = false });
-            TreeViewGrid.AppendColumn(new TreeViewColumn("Папки", new CellRendererText(), "text", 1));
-        }
 
         void OnRowActivated(object sender, RowActivatedArgs args)
         {
