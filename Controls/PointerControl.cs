@@ -28,7 +28,7 @@ namespace StorageAndTrade
     abstract class PointerControl : HBox
     {
         Label labelCaption = new Label();
-        Entry entryText = new Entry();
+        Entry entryText = new Entry() { IsEditable = false };
 
         public PointerControl() : base()
         {
