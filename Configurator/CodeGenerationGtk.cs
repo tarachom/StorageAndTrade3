@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 09.02.2023 16:54:55
+ * Дата конфігурації: 10.02.2023 15:21:43
  *
  */
  
@@ -3868,6 +3868,92 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                 if (cur != null)
                 {
                     СеріїНоменклатури_Записи Record = new СеріїНоменклатури_Записи
+                    {
+                        ID = cur.UnigueID.ToString(),
+                        Номер = cur.Fields?[СеріїНоменклатури_Const.Номер]?.ToString() ?? "" /**/
+                        
+                    };
+
+                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                    CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (DirectoryPointerItem != null || SelectPointerItem != null)
+                    {
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+
+                        if (Record.ID == UidSelect)
+                            SelectPath = CurrentPath;
+                    }
+                }
+            }
+        }
+    }
+	    
+    public class СеріїНоменклатури_ЗаписиШвидкийВибір
+    {
+        string Image = "images/doc.png";
+        string ID = "";
+        
+        string Номер = "";
+
+        Array ToArray()
+        {
+            return new object[] { new Gdk.Pixbuf(Image), ID 
+            /* */ , Номер };
+        }
+
+        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */
+            , typeof(string) /* Номер */
+            );
+
+        public static void AddColumns(TreeView treeView)
+        {
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 4 }, "pixbuf", 0));
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
+            /* */
+            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Номер*/
+            
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
+        }
+
+        public static List<Where> Where { get; set; } = new List<Where>();
+
+        public static Довідники.СеріїНоменклатури_Pointer? DirectoryPointerItem { get; set; }
+        public static Довідники.СеріїНоменклатури_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? SelectPath;
+        public static TreePath? CurrentPath;
+
+        public static void LoadRecords()
+        {
+            Store.Clear();
+            SelectPath = null;
+
+            Довідники.СеріїНоменклатури_Select СеріїНоменклатури_Select = new Довідники.СеріїНоменклатури_Select();
+            СеріїНоменклатури_Select.QuerySelect.Field.AddRange(
+                new string[]
+                {
+                    Довідники.СеріїНоменклатури_Const.Номер /* 1 */
+                    
+                });
+
+            /* Where */
+            СеріїНоменклатури_Select.QuerySelect.Where = Where;
+
+            
+              /* ORDER */
+              СеріїНоменклатури_Select.QuerySelect.Order.Add(Довідники.СеріїНоменклатури_Const.Номер, SelectOrder.ASC);
+            
+
+            /* SELECT */
+            СеріїНоменклатури_Select.Select();
+            while (СеріїНоменклатури_Select.MoveNext())
+            {
+                Довідники.СеріїНоменклатури_Pointer? cur = СеріїНоменклатури_Select.Current;
+
+                if (cur != null)
+                {
+                    СеріїНоменклатури_ЗаписиШвидкийВибір Record = new СеріїНоменклатури_ЗаписиШвидкийВибір
                     {
                         ID = cur.UnigueID.ToString(),
                         Номер = cur.Fields?[СеріїНоменклатури_Const.Номер]?.ToString() ?? "" /**/

@@ -149,6 +149,8 @@ namespace StorageAndTrade
                     hourSpin.Value = Value.Hours;
                     minuteSpin.Value = Value.Minutes;
                     secondSpin.Value = Value.Seconds;
+
+                    popoverCalendar.Hide();
                 };
 
                 vBox.PackStart(lbCurrentDate, false, false, 0);

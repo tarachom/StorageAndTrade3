@@ -101,11 +101,17 @@ namespace StorageAndTrade
             //Calendar
             Calendar calendar = new Calendar();
             calendar.Date = Value;
+
             calendar.DaySelected += (object? sender, EventArgs args) =>
             {
                 Value = new DateTime(
                     calendar.Date.Year, calendar.Date.Month, calendar.Date.Day,
                     Value.Hour, Value.Minute, Value.Second);
+            };
+
+            calendar.DaySelectedDoubleClick += (object? sender, EventArgs args) =>
+            {
+                popoverCalendar.Hide();
             };
 
             vBox.PackStart(calendar, false, false, 0);
@@ -173,6 +179,8 @@ namespace StorageAndTrade
                     hourSpin.Value = TimeOnly.FromDateTime(Value).Hour;
                     minuteSpin.Value = TimeOnly.FromDateTime(Value).Minute;
                     secondSpin.Value = TimeOnly.FromDateTime(Value).Second;
+
+                    popoverCalendar.Hide();
                 };
 
                 vBox.PackStart(lbCurrentDate, false, false, 0);
