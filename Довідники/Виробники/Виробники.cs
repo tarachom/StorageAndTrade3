@@ -41,7 +41,7 @@ namespace StorageAndTrade
         TreeView TreeViewGrid;
         SearchControl2 ПошукПовнотекстовий = new SearchControl2();
 
-        public Виробники(bool IsSelectPointer = false) : base()
+        public Виробники() : base()
         {
             new VBox(false, 0);
             BorderWidth = 0;
@@ -53,21 +53,6 @@ namespace StorageAndTrade
             bClose.Clicked += (object? sender, EventArgs args) => { Program.GeneralForm?.CloseCurrentPageNotebook(); };
 
             hBoxBotton.PackStart(bClose, false, false, 10);
-
-            //Як форма відкрита для вибору
-            if (IsSelectPointer)
-            {
-                Button bEmptyPointer = new Button("Вибрати пустий елемент");
-                bEmptyPointer.Clicked += (object? sender, EventArgs args) =>
-                {
-                    if (CallBack_OnSelectPointer != null)
-                        CallBack_OnSelectPointer.Invoke(new Виробники_Pointer());
-
-                    Program.GeneralForm?.CloseCurrentPageNotebook();
-                };
-
-                hBoxBotton.PackStart(bEmptyPointer, false, false, 10);
-            }
 
             PackStart(hBoxBotton, false, false, 10);
 

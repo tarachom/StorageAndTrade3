@@ -60,7 +60,7 @@ namespace StorageAndTrade
                 LinkButton linkPage = new LinkButton(" Складські комірки") { Halign = Align.Start, Image = new Image("images/doc.png"), AlwaysShowImage = true };
                 linkPage.Clicked += (object? sender, EventArgs args) =>
                 {
-                    СкладськіКомірки page = new СкладськіКомірки(true);
+                    СкладськіКомірки page = new СкладськіКомірки();
                     page.DirectoryPointerItem = DirectoryPointerItem;
                     page.СкладПриміщенняВласник.Pointer = СкладПриміщенняВласник.Pointer;
                     page.CallBack_OnSelectPointer = CallBack_OnSelectPointer;
@@ -80,6 +80,21 @@ namespace StorageAndTrade
             {
                 LoadRecords();
             };
+
+            //Очистка
+            {
+                Button bClear = new Button(new Image("images/clean.png"));
+                bClear.Clicked += (object? sender, EventArgs args) =>
+                {
+                    if (CallBack_OnSelectPointer != null)
+                        CallBack_OnSelectPointer.Invoke(new СкладськіКомірки_Pointer());
+
+                    if (PopoverParent != null)
+                        PopoverParent.Hide();
+                };
+
+                hBoxTop.PackEnd(bClear, false, false, 10);
+            }
 
             ScrolledWindow scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In, WidthRequest = 600, HeightRequest = 300 };
             scrollTree.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);

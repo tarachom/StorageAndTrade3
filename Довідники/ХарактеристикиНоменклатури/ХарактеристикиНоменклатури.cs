@@ -42,7 +42,7 @@ namespace StorageAndTrade
         public Номенклатура_PointerControl НоменклатураВласник = new Номенклатура_PointerControl();
         SearchControl2 ПошукПовнотекстовий = new SearchControl2();
 
-        public ХарактеристикиНоменклатури(bool IsSelectPointer = false) : base()
+        public ХарактеристикиНоменклатури() : base()
         {
             new VBox(false, 0);
             BorderWidth = 0;
@@ -53,21 +53,6 @@ namespace StorageAndTrade
             Button bClose = new Button("Закрити");
             bClose.Clicked += (object? sender, EventArgs args) => { Program.GeneralForm?.CloseCurrentPageNotebook(); };
             hBoxBotton.PackStart(bClose, false, false, 10);
-
-            //Як форма відкрита для вибору
-            if (IsSelectPointer)
-            {
-                Button bEmptyPointer = new Button("Вибрати пустий елемент");
-                bEmptyPointer.Clicked += (object? sender, EventArgs args) =>
-                {
-                    if (CallBack_OnSelectPointer != null)
-                        CallBack_OnSelectPointer.Invoke(new ХарактеристикиНоменклатури_Pointer());
-
-                    Program.GeneralForm?.CloseCurrentPageNotebook();
-                };
-
-                hBoxBotton.PackStart(bEmptyPointer, false, false, 10);
-            }
 
             PackStart(hBoxBotton, false, false, 10);
 

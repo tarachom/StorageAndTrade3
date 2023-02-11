@@ -47,12 +47,16 @@ namespace StorageAndTrade
             new VBox(false, 0);
             BorderWidth = 0;
 
+            //Зверху
+            HBox hBoxTop = new HBox();
+            PackStart(hBoxTop, false, false, 5);
+
             //Сторінка
             {
                 LinkButton linkPage = new LinkButton(" Номенклатура папки") { Halign = Align.Start, Image = new Image("images/doc.png"), AlwaysShowImage = true };
                 linkPage.Clicked += (object? sender, EventArgs args) =>
                 {
-                    Номенклатура_Папки_Дерево page = new Номенклатура_Папки_Дерево(true);
+                    Номенклатура_Папки_Дерево page = new Номенклатура_Папки_Дерево();
                     page.DirectoryPointerItem = DirectoryPointerItem;
                     page.CallBack_OnSelectPointer = CallBack_OnSelectPointer;
                     page.UidOpenFolder = UidOpenFolder;
@@ -62,7 +66,22 @@ namespace StorageAndTrade
                     page.LoadTree();
                 };
 
-                PackStart(linkPage, false, false, 10);
+                hBoxTop.PackStart(linkPage, false, false, 10);
+            }
+
+            //Очистка
+            {
+                Button bClear = new Button(new Image("images/clean.png"));
+                bClear.Clicked += (object? sender, EventArgs args) =>
+                {
+                    if (CallBack_OnSelectPointer != null)
+                        CallBack_OnSelectPointer.Invoke(new Номенклатура_Папки_Pointer());
+
+                    if (PopoverParent != null)
+                        PopoverParent.Hide();
+                };
+
+                hBoxTop.PackEnd(bClear, false, false, 10);
             }
 
             ScrolledWindow scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In, WidthRequest = 600, HeightRequest = 300 };

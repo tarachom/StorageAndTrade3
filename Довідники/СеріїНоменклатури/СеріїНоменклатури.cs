@@ -38,9 +38,9 @@ namespace StorageAndTrade
         public System.Action<СеріїНоменклатури_Pointer>? CallBack_OnSelectPointer { get; set; }
 
         TreeView TreeViewGrid;
-SearchControl2 ПошукПовнотекстовий = new SearchControl2();
+        SearchControl2 ПошукПовнотекстовий = new SearchControl2();
 
-        public СеріїНоменклатури(bool IsSelectPointer = false) : base()
+        public СеріїНоменклатури() : base()
         {
             new VBox(false, 0);
             BorderWidth = 0;
@@ -54,21 +54,6 @@ SearchControl2 ПошукПовнотекстовий = new SearchControl2();
             hBoxBotton.PackStart(bClose, false, false, 10);
 
             PackStart(hBoxBotton, false, false, 10);
-
-            //Як форма відкрита для вибору
-            if (IsSelectPointer)
-            {
-                Button bEmptyPointer = new Button("Вибрати пустий елемент");
-                bEmptyPointer.Clicked += (object? sender, EventArgs args) =>
-                {
-                    if (CallBack_OnSelectPointer != null)
-                        CallBack_OnSelectPointer.Invoke(new СеріїНоменклатури_Pointer());
-
-                    Program.GeneralForm?.CloseCurrentPageNotebook();
-                };
-
-                hBoxBotton.PackStart(bEmptyPointer, false, false, 10);
-            }
 
             //Пошук 2
             hBoxBotton.PackStart(ПошукПовнотекстовий, false, false, 2);

@@ -59,7 +59,7 @@ namespace StorageAndTrade
                 LinkButton linkPage = new LinkButton(" Каси") { Halign = Align.Start, Image = new Image("images/doc.png"), AlwaysShowImage = true };
                 linkPage.Clicked += (object? sender, EventArgs args) =>
                 {
-                    Каси page = new Каси(true);
+                    Каси page = new Каси();
                     page.DirectoryPointerItem = DirectoryPointerItem;
                     page.CallBack_OnSelectPointer = CallBack_OnSelectPointer;
 
@@ -69,6 +69,21 @@ namespace StorageAndTrade
                 };
 
                 hBoxTop.PackStart(linkPage, false, false, 10);
+            }
+
+            //Очистка
+            {
+                Button bClear = new Button(new Image("images/clean.png"));
+                bClear.Clicked += (object? sender, EventArgs args) =>
+                {
+                    if (CallBack_OnSelectPointer != null)
+                        CallBack_OnSelectPointer.Invoke(new Каси_Pointer());
+
+                    if (PopoverParent != null)
+                        PopoverParent.Hide();
+                };
+
+                hBoxTop.PackEnd(bClear, false, false, 10);
             }
 
             ScrolledWindow scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In, WidthRequest = 600, HeightRequest = 300 };

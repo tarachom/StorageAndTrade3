@@ -41,7 +41,7 @@ namespace StorageAndTrade
         TreeView TreeViewGrid;
         public Контрагенти_PointerControl КонтрагентВласник = new Контрагенти_PointerControl();
 
-        public ДоговориКонтрагентів(bool IsSelectPointer = false) : base()
+        public ДоговориКонтрагентів() : base()
         {
             new VBox(false, 0);
             BorderWidth = 0;
@@ -53,21 +53,6 @@ namespace StorageAndTrade
             bClose.Clicked += (object? sender, EventArgs args) => { Program.GeneralForm?.CloseCurrentPageNotebook(); };
 
             hBoxBotton.PackStart(bClose, false, false, 10);
-
-            //Як форма відкрита для вибору
-            if (IsSelectPointer)
-            {
-                Button bEmptyPointer = new Button("Вибрати пустий елемент");
-                bEmptyPointer.Clicked += (object? sender, EventArgs args) =>
-                {
-                    if (CallBack_OnSelectPointer != null)
-                        CallBack_OnSelectPointer.Invoke(new ДоговориКонтрагентів_Pointer());
-
-                    Program.GeneralForm?.CloseCurrentPageNotebook();
-                };
-
-                hBoxBotton.PackStart(bEmptyPointer, false, false, 10);
-            }
 
             PackStart(hBoxBotton, false, false, 10);
 

@@ -59,7 +59,7 @@ namespace StorageAndTrade
                 LinkButton linkPage = new LinkButton(" Банківські рахунки контрагентів") { Halign = Align.Start, Image = new Image("images/doc.png"), AlwaysShowImage = true };
                 linkPage.Clicked += (object? sender, EventArgs args) =>
                 {
-                    БанківськіРахункиКонтрагентів page = new БанківськіРахункиКонтрагентів(true);
+                    БанківськіРахункиКонтрагентів page = new БанківськіРахункиКонтрагентів();
                     page.DirectoryPointerItem = DirectoryPointerItem;
                     page.CallBack_OnSelectPointer = CallBack_OnSelectPointer;
 
@@ -69,6 +69,21 @@ namespace StorageAndTrade
                 };
 
                 hBoxTop.PackStart(linkPage, false, false, 10);
+            }
+
+            //Очистка
+            {
+                Button bClear = new Button(new Image("images/clean.png"));
+                bClear.Clicked += (object? sender, EventArgs args) =>
+                {
+                    if (CallBack_OnSelectPointer != null)
+                        CallBack_OnSelectPointer.Invoke(new БанківськіРахункиКонтрагентів_Pointer());
+
+                    if (PopoverParent != null)
+                        PopoverParent.Hide();
+                };
+
+                hBoxTop.PackEnd(bClear, false, false, 10);
             }
 
             ScrolledWindow scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In, WidthRequest = 600, HeightRequest = 300 };
