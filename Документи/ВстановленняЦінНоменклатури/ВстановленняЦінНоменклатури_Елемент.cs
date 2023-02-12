@@ -50,7 +50,6 @@ namespace StorageAndTrade
 
         #endregion
 
-
         public ВстановленняЦінНоменклатури_Елемент() : base()
         {
             new VBox();
@@ -65,11 +64,6 @@ namespace StorageAndTrade
             bSave.Clicked += OnSaveClick;
 
             hBox.PackStart(bSave, false, false, 10);
-
-            Button bClose = new Button("Закрити");
-            bClose.Clicked += (object? sender, EventArgs args) => { Program.GeneralForm?.CloseCurrentPageNotebook(); };
-
-            hBox.PackStart(bClose, false, false, 10);
 
             //Проводки
             LinkButton linkButtonProvodky = new LinkButton("Проводки") { Halign = Align.Start };

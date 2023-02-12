@@ -50,8 +50,6 @@ namespace StorageAndTrade
 
             CreateLeftMenu(hbox);
 
-            topNotebook.SwitchPage += OnNotebookSwitchPage; //видалити
-            topNotebook.PageRemoved += OnNotebookPageRemoved; //видалити
             hbox.PackStart(topNotebook, true, true, 0);
 
             /*
@@ -197,19 +195,6 @@ namespace StorageAndTrade
 
         #region Notebook Page
 
-        //видалити
-        void OnNotebookSwitchPage(object? sender, SwitchPageArgs args)
-        {
-            // previousNotebookCurrentPage = args.PageNum;
-            // Console.WriteLine("OnSwitchPage " + args.PageNum);
-        }
-
-        //видалити
-        void OnNotebookPageRemoved(object? sender, PageRemovedArgs args)
-        {
-            // Console.WriteLine("OnPageRemoved " + args.PageNum);
-        }
-
         public void CloseCurrentPageNotebook()
         {
             topNotebook.RemovePage(topNotebook.CurrentPage);
@@ -217,21 +202,43 @@ namespace StorageAndTrade
 
         public void RenameCurrentPageNotebook(string name)
         {
-            topNotebook.SetTabLabelText(topNotebook.CurrentPageWidget, name);
+            //topNotebook.SetTabLabel(topNotebook.CurrentPageWidget, name);
         }
 
         public void CreateNotebookPage(string tabName, System.Func<Widget>? pageWidget, bool insertPage = false)
         {
-            ScrolledWindow scroll = new ScrolledWindow() { ShadowType = ShadowType.In };
+            int numPage;
+            string namePage = Guid.NewGuid().ToString();
+
+            ScrolledWindow scroll = new ScrolledWindow() { ShadowType = ShadowType.In, Name = namePage };
             scroll.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
 
-            int numPage;
+            HBox hBoxLabel = new HBox();
+
             Label label = new Label { Text = tabName, Expand = false, Halign = Align.Start };
+            hBoxLabel.PackStart(label, false, false, 2);
+
+            LinkButton lbClose = new LinkButton("Закрити", " ") { Halign = Align.Start, Image = new Image("images/clean.png"), AlwaysShowImage = true, Name = namePage };
+            lbClose.Clicked += (object? sender, EventArgs args) =>
+            {
+                string widgetName = ((Widget)sender!).Name;
+
+                topNotebook.Foreach(
+                    (Widget wg) =>
+                    {
+                        if (wg.Name == widgetName)
+                            topNotebook.DetachTab(wg);
+                    });
+            };
+
+            hBoxLabel.PackEnd(lbClose, false, false, 0);
+
+            hBoxLabel.ShowAll();
 
             if (insertPage)
-                numPage = topNotebook.InsertPage(scroll, label, topNotebook.CurrentPage);
+                numPage = topNotebook.InsertPage(scroll, hBoxLabel, topNotebook.CurrentPage);
             else
-                numPage = topNotebook.AppendPage(scroll, label);
+                numPage = topNotebook.AppendPage(scroll, hBoxLabel);
 
             if (pageWidget != null)
                 scroll.Add((Widget)pageWidget.Invoke());

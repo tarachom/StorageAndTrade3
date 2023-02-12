@@ -83,7 +83,7 @@ namespace StorageAndTrade
                         PopoverParent.Hide();
                 };
 
-                hBoxTop.PackEnd(bClear, false, false, 10);
+                hBoxTop.PackEnd(bClear, false, false, 0);
             }
 
             ScrolledWindow scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In, WidthRequest = 600, HeightRequest = 300 };

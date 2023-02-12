@@ -52,12 +52,8 @@ namespace StorageAndTrade
             BorderWidth = 0;
 
             //Кнопки
-            HBox hBoxBotton = new HBox();
-
-            Button bClose = new Button("Закрити");
-            bClose.Clicked += (object? sender, EventArgs args) => { Program.GeneralForm?.CloseCurrentPageNotebook(); };
-
-            hBoxBotton.PackStart(bClose, false, false, 10);
+            HBox hBoxButton = new HBox();
+            PackStart(hBoxButton, false, false, 10);
 
             //Як форма відкрита для вибору
             if (IsSelectPointer)
@@ -71,21 +67,19 @@ namespace StorageAndTrade
                     Program.GeneralForm?.CloseCurrentPageNotebook();
                 };
 
-                hBoxBotton.PackStart(bEmptyPointer, false, false, 10);
+                hBoxButton.PackStart(bEmptyPointer, false, false, 10);
             }
 
             //Відбір по періоду
-            hBoxBotton.PackStart(new Label("Період:"), false, false, 5);
+            hBoxButton.PackStart(new Label("Період:"), false, false, 5);
 
             ComboBoxPeriodWhere = ТабличніСписки.Інтерфейс.СписокВідбірПоПеріоду();
             ComboBoxPeriodWhere.Changed += OnComboBoxPeriodWhereChanged;
 
-            hBoxBotton.PackStart(ComboBoxPeriodWhere, false, false, 0);
-
-            PackStart(hBoxBotton, false, false, 10);
+            hBoxButton.PackStart(ComboBoxPeriodWhere, false, false, 0);
 
             //Пошук 2
-            hBoxBotton.PackStart(ПошукПовнотекстовий, false, false, 2);
+            hBoxButton.PackStart(ПошукПовнотекстовий, false, false, 2);
             ПошукПовнотекстовий.Select = LoadRecords_OnSearch;
             ПошукПовнотекстовий.Clear = () => { OnComboBoxPeriodWhereChanged(null, new EventArgs()); };
 

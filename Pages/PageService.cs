@@ -38,7 +38,6 @@ namespace StorageAndTrade
 {
     class PageService : VBox
     {
-        Button bClose;
         Button bSpendTheDocument;
         Button bStop;
         ScrolledWindow scrollMessage;
@@ -58,11 +57,6 @@ namespace StorageAndTrade
         {
             //Кнопки
             HBox hBoxBotton = new HBox();
-
-            bClose = new Button("Закрити");
-            bClose.Clicked += (object? sender, EventArgs args) => { Program.GeneralForm?.CloseCurrentPageNotebook(); };
-
-            hBoxBotton.PackStart(bClose, false, false, 10);
 
             bSpendTheDocument = new Button("Перепровести документи");
             bSpendTheDocument.Clicked += OnSpendTheDocument;
@@ -91,7 +85,6 @@ namespace StorageAndTrade
             (
                 delegate
                 {
-                    bClose.Sensitive = sensitive;
                     bSpendTheDocument.Sensitive = sensitive;
                     bStop.Sensitive = !sensitive;
                 }

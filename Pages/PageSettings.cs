@@ -91,11 +91,6 @@ namespace StorageAndTrade
 
             hBox.PackStart(bSave, false, false, 10);
 
-            Button bClose = new Button("Закрити");
-            bClose.Clicked += (object? sender, EventArgs args) => { Program.GeneralForm?.CloseCurrentPageNotebook(); };
-
-            hBox.PackStart(bClose, false, false, 10);
-
             PackStart(hBox, false, false, 10);
 
             FillComboBoxes();
