@@ -61,7 +61,7 @@ namespace StorageAndTrade
             if (BeforeClickOpenFunc != null)
                 BeforeClickOpenFunc.Invoke();
                 
-            СкладськіКомірки_Папки_Дерево page = new СкладськіКомірки_Папки_Дерево(true);
+            СкладськіКомірки_Папки_Дерево page = new СкладськіКомірки_Папки_Дерево();
 
             page.DirectoryPointerItem = Pointer;
             page.UidOpenFolder = UidOpenFolder;
@@ -71,7 +71,7 @@ namespace StorageAndTrade
                 Pointer = selectPointer;
             };
 
-            Program.GeneralForm?.CreateNotebookPage("Вибір - СкладськіКомірки папки", () => { return page; }, true);
+            Program.GeneralForm?.CreateNotebookPage("Вибір - Складські комірки папки", () => { return page; }, true);
 
             page.LoadTree();
         }

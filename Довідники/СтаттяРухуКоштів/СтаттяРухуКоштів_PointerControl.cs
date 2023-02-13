@@ -54,7 +54,7 @@ namespace StorageAndTrade
 
         protected override void OpenSelect(object? sender, EventArgs args)
         {
-            СтаттяРухуКоштів page = new СтаттяРухуКоштів(true);
+            СтаттяРухуКоштів page = new СтаттяРухуКоштів();
 
             page.DirectoryPointerItem = Pointer;
             page.CallBack_OnSelectPointer = (СтаттяРухуКоштів_Pointer selectPointer) =>

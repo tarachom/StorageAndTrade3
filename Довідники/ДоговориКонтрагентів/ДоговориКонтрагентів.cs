@@ -47,18 +47,12 @@ namespace StorageAndTrade
             BorderWidth = 0;
 
             //Кнопки
-            HBox hBoxBotton = new HBox();
-
-            Button bClose = new Button("Закрити");
-            bClose.Clicked += (object? sender, EventArgs args) => { Program.GeneralForm?.CloseCurrentPageNotebook(); };
-
-            hBoxBotton.PackStart(bClose, false, false, 10);
-
-            PackStart(hBoxBotton, false, false, 10);
+            HBox hBoxTop = new HBox();
+            PackStart(hBoxTop, false, false, 10);
 
             //Власник
-            hBoxBotton.PackStart(КонтрагентВласник, false, false, 2);
-            КонтрагентВласник.Caption = "Контрагент власник:";
+            hBoxTop.PackStart(КонтрагентВласник, false, false, 2);
+            КонтрагентВласник.Caption = "Контрагент:";
             КонтрагентВласник.AfterSelectFunc = () =>
             {
                 LoadRecords();
@@ -116,7 +110,7 @@ namespace StorageAndTrade
             ТабличніСписки.ДоговориКонтрагентів_Записи.DirectoryPointerItem = DirectoryPointerItem;
 
             ТабличніСписки.ДоговориКонтрагентів_Записи.Where.Clear();
-            
+
             if (!КонтрагентВласник.Pointer.UnigueID.IsEmpty())
             {
                 ТабличніСписки.ДоговориКонтрагентів_Записи.Where.Add(

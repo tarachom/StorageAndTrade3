@@ -45,16 +45,6 @@ namespace StorageAndTrade
             new VBox(false, 0);
             BorderWidth = 0;
 
-            //Кнопки
-            HBox hBoxBotton = new HBox();
-
-            Button bClose = new Button("Закрити");
-            bClose.Clicked += (object? sender, EventArgs args) => { Program.GeneralForm?.CloseCurrentPageNotebook(); };
-
-            hBoxBotton.PackStart(bClose, false, false, 10);
-
-            PackStart(hBoxBotton, false, false, 10);
-
             CreateToolbar();
 
             ScrolledWindow scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In };

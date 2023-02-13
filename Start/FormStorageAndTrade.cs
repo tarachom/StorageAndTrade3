@@ -202,23 +202,24 @@ namespace StorageAndTrade
 
         public void RenameCurrentPageNotebook(string name)
         {
-            //topNotebook.SetTabLabel(topNotebook.CurrentPageWidget, name);
+            topNotebook.SetTabLabel(topNotebook.CurrentPageWidget, CreateLabelPageWidget(name, topNotebook.CurrentPageWidget.Name));
         }
 
-        public void CreateNotebookPage(string tabName, System.Func<Widget>? pageWidget, bool insertPage = false)
+        HBox CreateLabelPageWidget(string caption, string codePage)
         {
-            int numPage;
-            string namePage = Guid.NewGuid().ToString();
-
-            ScrolledWindow scroll = new ScrolledWindow() { ShadowType = ShadowType.In, Name = namePage };
-            scroll.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
-
             HBox hBoxLabel = new HBox();
 
-            Label label = new Label { Text = tabName, Expand = false, Halign = Align.Start };
+            Label label = new Label { Text = caption, Expand = false, Halign = Align.Start };
             hBoxLabel.PackStart(label, false, false, 2);
 
-            LinkButton lbClose = new LinkButton("Закрити", " ") { Halign = Align.Start, Image = new Image("images/clean.png"), AlwaysShowImage = true, Name = namePage };
+            LinkButton lbClose = new LinkButton("Закрити", " ")
+            {
+                Halign = Align.Start,
+                Image = new Image("images/clean.png"),
+                AlwaysShowImage = true,
+                Name = codePage
+            };
+
             lbClose.Clicked += (object? sender, EventArgs args) =>
             {
                 string widgetName = ((Widget)sender!).Name;
@@ -232,8 +233,20 @@ namespace StorageAndTrade
             };
 
             hBoxLabel.PackEnd(lbClose, false, false, 0);
-
             hBoxLabel.ShowAll();
+
+            return hBoxLabel;
+        }
+
+        public void CreateNotebookPage(string tabName, System.Func<Widget>? pageWidget, bool insertPage = false)
+        {
+            int numPage;
+            string codePage = Guid.NewGuid().ToString();
+
+            ScrolledWindow scroll = new ScrolledWindow() { ShadowType = ShadowType.In, Name = codePage };
+            scroll.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
+
+            HBox hBoxLabel = CreateLabelPageWidget(tabName, codePage);
 
             if (insertPage)
                 numPage = topNotebook.InsertPage(scroll, hBoxLabel, topNotebook.CurrentPage);
@@ -244,9 +257,7 @@ namespace StorageAndTrade
                 scroll.Add((Widget)pageWidget.Invoke());
 
             topNotebook.ShowAll();
-
             topNotebook.CurrentPage = numPage;
-
             topNotebook.GrabFocus();
         }
 

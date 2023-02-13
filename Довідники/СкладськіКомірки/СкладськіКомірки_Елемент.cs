@@ -53,15 +53,13 @@ namespace StorageAndTrade
             new VBox();
             HBox hBox = new HBox();
 
+            Button bSaveAndClose = new Button("Зберегти та закрити");
+            bSaveAndClose.Clicked += (object? sender, EventArgs args) => { Save(true); };
+            hBox.PackStart(bSaveAndClose, false, false, 10);
+
             Button bSave = new Button("Зберегти");
-            bSave.Clicked += OnSaveClick;
-
+            bSave.Clicked += (object? sender, EventArgs args) => { Save(); };
             hBox.PackStart(bSave, false, false, 10);
-
-            Button bClose = new Button("Закрити");
-            bClose.Clicked += (object? sender, EventArgs args) => { Program.GeneralForm?.CloseCurrentPageNotebook(); };
-
-            hBox.PackStart(bClose, false, false, 10);
 
             PackStart(hBox, false, false, 10);
 
@@ -207,7 +205,7 @@ namespace StorageAndTrade
 
         #endregion
 
-        void OnSaveClick(object? sender, EventArgs args)
+        void Save(bool closePage = false)
         {
             if (IsNew)
             {
@@ -219,7 +217,10 @@ namespace StorageAndTrade
 
             СкладськіКомірки_Objest.Save();
 
-            Program.GeneralForm?.RenameCurrentPageNotebook($"Складська комірка: {СкладськіКомірки_Objest.Назва}");
+            if (closePage)
+                Program.GeneralForm?.CloseCurrentPageNotebook();
+            else
+                Program.GeneralForm?.RenameCurrentPageNotebook($"Складська комірка: {СкладськіКомірки_Objest.Назва}");
 
             if (PageList != null)
             {

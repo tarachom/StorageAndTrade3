@@ -56,7 +56,7 @@ namespace StorageAndTrade
 
         protected override void OpenSelect(object? sender, EventArgs args)
         {
-            Контрагенти_Папки_Дерево page = new Контрагенти_Папки_Дерево(true);
+            Контрагенти_Папки_Дерево page = new Контрагенти_Папки_Дерево();
 
             page.DirectoryPointerItem = Pointer;
             page.UidOpenFolder = UidOpenFolder;

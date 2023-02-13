@@ -46,17 +46,11 @@ namespace StorageAndTrade
             BorderWidth = 0;
 
             //Кнопки
-            HBox hBoxBotton = new HBox();
-
-            Button bClose = new Button("Закрити");
-            bClose.Clicked += (object? sender, EventArgs args) => { Program.GeneralForm?.CloseCurrentPageNotebook(); };
-
-            hBoxBotton.PackStart(bClose, false, false, 10);
-
-            PackStart(hBoxBotton, false, false, 10);
+            HBox hBoxTop = new HBox();
+            PackStart(hBoxTop, false, false, 10);
 
             //Пошук 2
-            hBoxBotton.PackStart(ПошукПовнотекстовий, false, false, 2);
+            hBoxTop.PackStart(ПошукПовнотекстовий, false, false, 2);
             ПошукПовнотекстовий.Select = LoadRecords_OnSearch;
             ПошукПовнотекстовий.Clear = LoadRecords;
 

@@ -54,7 +54,7 @@ namespace StorageAndTrade
 
         protected override void OpenSelect(object? sender, EventArgs args)
         {
-            ТипорозміриКомірок page = new ТипорозміриКомірок(true);
+            ТипорозміриКомірок page = new ТипорозміриКомірок();
 
             page.DirectoryPointerItem = Pointer;
             page.CallBack_OnSelectPointer = (ТипорозміриКомірок_Pointer selectPointer) =>
@@ -62,7 +62,7 @@ namespace StorageAndTrade
                 Pointer = selectPointer;
             };
 
-            Program.GeneralForm?.CreateNotebookPage("Вибір - ТипорозміриКомірок", () => { return page; }, true);
+            Program.GeneralForm?.CreateNotebookPage("Вибір - Типорозміри комірок", () => { return page; }, true);
 
             page.LoadRecords();
         }

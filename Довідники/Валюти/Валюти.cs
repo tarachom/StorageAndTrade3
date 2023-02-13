@@ -46,18 +46,11 @@ namespace StorageAndTrade
             new VBox(false, 0);
             BorderWidth = 0;
 
-            //Кнопки
-            HBox hBoxBotton = new HBox();
-
-            Button bClose = new Button("Закрити");
-            bClose.Clicked += (object? sender, EventArgs args) => { Program.GeneralForm?.CloseCurrentPageNotebook(); };
-
-            hBoxBotton.PackStart(bClose, false, false, 10);
-
-            PackStart(hBoxBotton, false, false, 10);
+            HBox hBoxTop = new HBox();
+            PackStart(hBoxTop, false, false, 10);
 
             //Пошук 2
-            hBoxBotton.PackStart(ПошукПовнотекстовий, false, false, 2);
+            hBoxTop.PackStart(ПошукПовнотекстовий, false, false, 2);
             ПошукПовнотекстовий.Select = LoadRecords_OnSearch;
             ПошукПовнотекстовий.Clear = LoadRecords;
 
@@ -76,7 +69,7 @@ namespace StorageAndTrade
                     }
                 };
 
-                hBoxBotton.PackStart(linkButtonCurs, false, false, 10);
+                hBoxTop.PackStart(linkButtonCurs, false, false, 10);
             }
 
             //Завантаження курсів валют НБУ
@@ -90,7 +83,7 @@ namespace StorageAndTrade
                     });
                 };
 
-                hBoxBotton.PackStart(linkButtonDownloadCurs, false, false, 10);
+                hBoxTop.PackStart(linkButtonDownloadCurs, false, false, 10);
             }
 
             CreateToolbar();
