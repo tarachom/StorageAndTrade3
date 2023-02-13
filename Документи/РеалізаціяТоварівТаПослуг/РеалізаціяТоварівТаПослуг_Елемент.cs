@@ -82,7 +82,7 @@ namespace StorageAndTrade
 
             hBox.PackStart(bSaveAndSpend, false, false, 10);
 
-            Button bSave = new Button("Зберегти");
+            Button bSave = new Button("Зберегти без проведення");
             bSave.Clicked += OnSaveClick;
 
             hBox.PackStart(bSave, false, false, 10);
