@@ -32,22 +32,14 @@ namespace StorageAndTrade
         public КурсиВалют_ІсторіяЗавантаження() : base()
         {
             //Кнопки
-            HBox hBoxBotton = new HBox();
-
-            Button bClose = new Button("Закрити");
-            bClose.Clicked += (object? sender, EventArgs args) =>
-            {
-                Program.GeneralForm?.CloseCurrentPageNotebook();
-            };
-
-            hBoxBotton.PackStart(bClose, false, false, 10);
+            HBox hBoxTop = new HBox();
 
             Button bClear = new Button("Очистити");
             bClear.Clicked += OnClear;
 
-            hBoxBotton.PackStart(bClear, false, false, 10);
+            hBoxTop.PackStart(bClear, false, false, 10);
 
-            PackStart(hBoxBotton, false, false, 10);
+            PackStart(hBoxTop, false, false, 10);
 
             ScrolledWindow scroll = new ScrolledWindow() { ShadowType = ShadowType.In };
             scroll.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
