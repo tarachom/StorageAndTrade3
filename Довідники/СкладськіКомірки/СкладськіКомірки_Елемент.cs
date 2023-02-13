@@ -220,7 +220,7 @@ namespace StorageAndTrade
             if (closePage)
                 Program.GeneralForm?.CloseCurrentPageNotebook();
             else
-                Program.GeneralForm?.RenameCurrentPageNotebook($"Складська комірка: {СкладськіКомірки_Objest.Назва}");
+                Program.GeneralForm?.RenameCurrentPageNotebook($"Складські комірки: {СкладськіКомірки_Objest.Назва}");
 
             if (PageList != null)
             {

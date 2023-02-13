@@ -59,12 +59,12 @@ namespace StorageAndTrade
                 LinkButton linkButtonCurs = new LinkButton(" Курси валют") { Halign = Align.Start, Image = new Image("images/doc.png"), AlwaysShowImage = true };
                 linkButtonCurs.Clicked += (object? sender, EventArgs args) =>
                 {
-                    if (SelectPointerItem != null)
+                    if (SelectPointerItem != null || DirectoryPointerItem != null)
                     {
                         КурсиВалют page = new КурсиВалют();
-                        page.ВалютаВласник.Pointer = SelectPointerItem;
+                        page.ВалютаВласник.Pointer = SelectPointerItem != null ? SelectPointerItem : DirectoryPointerItem!;
 
-                        Program.GeneralForm?.CreateNotebookPage("Курси валют", () => { return page; });
+                        Program.GeneralForm?.CreateNotebookPage("Курси валют", () => { return page; }, true);
                         page.LoadRecords();
                     }
                 };
@@ -80,7 +80,7 @@ namespace StorageAndTrade
                     Program.GeneralForm?.CreateNotebookPage("Завантаження курсів валют НБУ", () =>
                     {
                         return new Обробка_ЗавантаженняКурсівВалют();
-                    });
+                    }, true);
                 };
 
                 hBoxTop.PackStart(linkButtonDownloadCurs, false, false, 10);
