@@ -69,7 +69,7 @@ namespace StorageAndTrade
             new VBox();
             HBox hBox = new HBox();
 
-            Button bSaveAndSpend = new Button("Зберегти і провести");
+            Button bSaveAndSpend = new Button("Провести та закрити");
             bSaveAndSpend.Clicked += OnSaveAndSpendClick;
 
             hBox.PackStart(bSaveAndSpend, false, false, 10);
@@ -452,7 +452,7 @@ namespace StorageAndTrade
         void ReloadList()
         {
             Товари.LoadRecords();
-            
+
             if (PageList != null)
             {
                 PageList.SelectPointerItem = РахунокФактура_Objest.GetDocumentPointer();
@@ -469,6 +469,9 @@ namespace StorageAndTrade
             SpendTheDocument(true);
 
             ReloadList();
+
+            if (РахунокФактура_Objest.Spend)
+                Program.GeneralForm?.CloseCurrentPageNotebook();
         }
 
         void OnSaveClick(object? sender, EventArgs args)
