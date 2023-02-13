@@ -56,11 +56,25 @@ namespace StorageAndTrade
             set
             {
                 mValue = value;
+
+                if (OnlyDate)
+                    mValue = new DateTime(mValue.Year, mValue.Month, mValue.Day);
+
                 entryDateTimeValue.Text = OnlyDate ? mValue.ToString("dd.MM.yyyy") : mValue.ToString("dd.MM.yyyy HH:mm:ss");
             }
         }
 
         public bool OnlyDate { get; set; } = false;
+
+        public DateTime ПочатокДня()
+        {
+            return new DateTime(Value.Year, Value.Month, Value.Day, 0, 0, 0);
+        }
+
+        public DateTime КінецьДня()
+        {
+            return new DateTime(Value.Year, Value.Month, Value.Day, 23, 59, 59);
+        }
 
         void ClearHBoxInfoValid()
         {

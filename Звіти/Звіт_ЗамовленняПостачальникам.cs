@@ -498,8 +498,8 @@ ORDER BY period ASC
             ПозиціяТекстуВКолонці.Add("Замовлено", 1);
 
             Dictionary<string, object> paramQuery = new Dictionary<string, object>();
-            paramQuery.Add("ПочатокПеріоду", DateTime.Parse($"{ДатаПочатокПеріоду.Value.Day}.{ДатаПочатокПеріоду.Value.Month}.{ДатаПочатокПеріоду.Value.Year} 00:00:00"));
-            paramQuery.Add("КінецьПеріоду", DateTime.Parse($"{ДатаКінецьПеріоду.Value.Day}.{ДатаКінецьПеріоду.Value.Month}.{ДатаКінецьПеріоду.Value.Year} 23:59:59"));
+            paramQuery.Add("ПочатокПеріоду", ДатаПочатокПеріоду.ПочатокДня());
+            paramQuery.Add("КінецьПеріоду", ДатаКінецьПеріоду.КінецьДня());
 
             string[] columnsName;
             List<Dictionary<string, object>> listRow;
