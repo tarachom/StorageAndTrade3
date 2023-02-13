@@ -109,13 +109,13 @@ namespace StorageAndTrade
         {
             ТабличніСписки.ШтрихкодиНоменклатури_Записи.Where.Clear();
 
-            if (!НоменклатураВласник.Pointer.UnigueID.IsEmpty())
+            if (!НоменклатураВласник.Pointer.IsEmpty())
             {
                 ТабличніСписки.ШтрихкодиНоменклатури_Записи.Where.Add(
                     new Where(ШтрихкодиНоменклатури_Const.Номенклатура, Comparison.EQ, НоменклатураВласник.Pointer.UnigueID.UGuid));
             }
 
-            if (!ХарактеристикиНоменклатуриВласник.Pointer.UnigueID.IsEmpty())
+            if (!ХарактеристикиНоменклатуриВласник.Pointer.IsEmpty())
             {
                 ТабличніСписки.ШтрихкодиНоменклатури_Записи.Where.Add(
                     new Where(Comparison.AND, ШтрихкодиНоменклатури_Const.ХарактеристикаНоменклатури, Comparison.EQ, ХарактеристикиНоменклатуриВласник.Pointer.UnigueID.UGuid));

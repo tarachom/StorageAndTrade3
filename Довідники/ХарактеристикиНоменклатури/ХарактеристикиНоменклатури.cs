@@ -71,7 +71,7 @@ namespace StorageAndTrade
                 {
                     ШтрихкодиНоменклатури page = new ШтрихкодиНоменклатури();
 
-                    page.НоменклатураВласник = НоменклатураВласник;
+                    page.НоменклатураВласник.Pointer = НоменклатураВласник.Pointer;
 
                     if (SelectPointerItem != null)
                         page.ХарактеристикиНоменклатуриВласник.Pointer = SelectPointerItem;
