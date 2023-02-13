@@ -144,7 +144,7 @@ SELECT
     {Контрагенти_Папки_Const.Назва}, 
     {Контрагенти_Папки_Const.Родич}, 
     level FROM r
-ORDER BY level ASC
+ORDER BY level, {Контрагенти_Папки_Const.Назва} ASC
             ";
 
             #endregion
@@ -223,7 +223,7 @@ ORDER BY level ASC
                     page.SetValue();
 
                     return page;
-                });
+                }, true);
             }
             else
             {
@@ -242,13 +242,12 @@ ORDER BY level ASC
                         page.SetValue();
 
                         return page;
-                    });
+                    }, true);
                 }
                 else
                     Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
             }
         }
-
 
         #region TreeView
 

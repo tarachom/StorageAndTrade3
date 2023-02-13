@@ -85,7 +85,7 @@ SELECT
     {Номенклатура_Папки_Const.Назва}, 
     {Номенклатура_Папки_Const.Родич}, 
     level FROM r
-ORDER BY level ASC
+ORDER BY level, {Номенклатура_Папки_Const.Назва} ASC
 ";
 
             #endregion
