@@ -46,6 +46,8 @@ namespace StorageAndTrade
             PackStart(bOpenCalendar, false, false, 1);
         }
 
+        public bool OnlyDate { get; set; } = false;
+
         DateTime mValue;
         public DateTime Value
         {
@@ -58,13 +60,14 @@ namespace StorageAndTrade
                 mValue = value;
 
                 if (OnlyDate)
+                {
                     mValue = new DateTime(mValue.Year, mValue.Month, mValue.Day);
-
-                entryDateTimeValue.Text = OnlyDate ? mValue.ToString("dd.MM.yyyy") : mValue.ToString("dd.MM.yyyy HH:mm:ss");
+                    entryDateTimeValue.Text = mValue.ToString("dd.MM.yyyy");
+                }
+                else
+                    entryDateTimeValue.Text = mValue.ToString("dd.MM.yyyy HH:mm:ss");
             }
         }
-
-        public bool OnlyDate { get; set; } = false;
 
         public DateTime ПочатокДня()
         {
