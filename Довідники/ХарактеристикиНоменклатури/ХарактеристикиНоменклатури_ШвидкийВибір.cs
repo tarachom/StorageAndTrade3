@@ -57,7 +57,7 @@ namespace StorageAndTrade
 
             //Сторінка
             {
-                LinkButton linkPage = new LinkButton(" Характеристики номенклатури") { Halign = Align.Start, Image = new Image("images/doc.png"), AlwaysShowImage = true };
+                LinkButton linkPage = new LinkButton(" Характеристики") { Halign = Align.Start, Image = new Image("images/doc.png"), AlwaysShowImage = true };
                 linkPage.Clicked += (object? sender, EventArgs args) =>
                 {
                     ХарактеристикиНоменклатури page = new ХарактеристикиНоменклатури();
@@ -65,7 +65,7 @@ namespace StorageAndTrade
                     page.НоменклатураВласник.Pointer = НоменклатураВласник.Pointer;
                     page.CallBack_OnSelectPointer = CallBack_OnSelectPointer;
 
-                    Program.GeneralForm?.CreateNotebookPage("Вибір - Характеристики номенклатури", () => { return page; }, true);
+                    Program.GeneralForm?.CreateNotebookPage("Вибір - Характеристики", () => { return page; }, true);
 
                     page.LoadRecords();
                 };

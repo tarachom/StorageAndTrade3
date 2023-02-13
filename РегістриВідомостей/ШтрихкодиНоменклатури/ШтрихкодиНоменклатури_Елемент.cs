@@ -48,18 +48,12 @@ namespace StorageAndTrade
         {
             new VBox();
             HBox hBox = new HBox();
+            PackStart(hBox, false, false, 10);
 
             Button bSave = new Button("Зберегти");
             bSave.Clicked += OnSaveClick;
 
             hBox.PackStart(bSave, false, false, 10);
-
-            Button bClose = new Button("Закрити");
-            bClose.Clicked += (object? sender, EventArgs args) => { Program.GeneralForm?.CloseCurrentPageNotebook(); };
-
-            hBox.PackStart(bClose, false, false, 10);
-
-            PackStart(hBox, false, false, 10);
 
             HPaned hPaned = new HPaned() { BorderWidth = 5, Position = 500 };
 

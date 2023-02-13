@@ -47,33 +47,26 @@ namespace StorageAndTrade
         public Звіт_РухКоштів() : base()
         {
             //Кнопки
-            HBox hBoxBotton = new HBox();
-
-            //1
-            Button bClose = new Button("Закрити");
-            bClose.Clicked += (object? sender, EventArgs args) => { Program.GeneralForm?.CloseCurrentPageNotebook(); };
-
-            hBoxBotton.PackStart(bClose, false, false, 10);
+            HBox hBoxTop = new HBox();
+            PackStart(hBoxTop, false, false, 10);
 
             //2
             Button bOstatok = new Button("Залишки");
             bOstatok.Clicked += OnReport_Залишки;
 
-            hBoxBotton.PackStart(bOstatok, false, false, 10);
+            hBoxTop.PackStart(bOstatok, false, false, 10);
 
             //3
             Button bOborot = new Button("Залишки та обороти");
             bOborot.Clicked += OnReport_ЗалишкиТаОбороти;
 
-            hBoxBotton.PackStart(bOborot, false, false, 10);
+            hBoxTop.PackStart(bOborot, false, false, 10);
 
             //4
             Button bDocuments = new Button("Документи");
             bDocuments.Clicked += OnReport_Документи;
 
-            hBoxBotton.PackStart(bDocuments, false, false, 10);
-
-            PackStart(hBoxBotton, false, false, 10);
+            hBoxTop.PackStart(bDocuments, false, false, 10);
 
             CreateFilters();
 

@@ -41,17 +41,11 @@ namespace StorageAndTrade
             BorderWidth = 0;
 
             //Кнопки
-            HBox hBoxBotton = new HBox();
-
-            Button bClose = new Button("Закрити");
-            bClose.Clicked += (object? sender, EventArgs args) => { Program.GeneralForm?.CloseCurrentPageNotebook(); };
-
-            hBoxBotton.PackStart(bClose, false, false, 10);
-
-            PackStart(hBoxBotton, false, false, 10);
+            HBox hBoxTop = new HBox();
+            PackStart(hBoxTop, false, false, 10);
 
             //Номенклатура Власник
-            hBoxBotton.PackStart(НоменклатураВласник, false, false, 2);
+            hBoxTop.PackStart(НоменклатураВласник, false, false, 2);
             НоменклатураВласник.Caption = "Номенклатура:";
             НоменклатураВласник.AfterSelectFunc = () =>
             {
@@ -59,7 +53,7 @@ namespace StorageAndTrade
             };
 
             //Характеристика Власник
-            hBoxBotton.PackStart(ХарактеристикиНоменклатуриВласник, false, false, 2);
+            hBoxTop.PackStart(ХарактеристикиНоменклатуриВласник, false, false, 2);
             ХарактеристикиНоменклатуриВласник.Caption = "Характеристика:";
             ХарактеристикиНоменклатуриВласник.BeforeClickOpenFunc = () =>
             {

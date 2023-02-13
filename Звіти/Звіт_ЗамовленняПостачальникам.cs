@@ -51,27 +51,21 @@ namespace StorageAndTrade
         public Звіт_ЗамовленняПостачальникам() : base()
         {
             //Кнопки
-            HBox hBoxBotton = new HBox();
-
-            //1
-            Button bClose = new Button("Закрити");
-            bClose.Clicked += (object? sender, EventArgs args) => { Program.GeneralForm?.CloseCurrentPageNotebook(); };
-
-            hBoxBotton.PackStart(bClose, false, false, 10);
+            HBox hBoxTop = new HBox();
 
             //2
             Button bOstatok = new Button("Залишки");
             bOstatok.Clicked += OnReport_Залишки;
 
-            hBoxBotton.PackStart(bOstatok, false, false, 10);
+            hBoxTop.PackStart(bOstatok, false, false, 10);
 
             //3
             Button bDocuments = new Button("Документи");
             bDocuments.Clicked += OnReport_Документи;
 
-            hBoxBotton.PackStart(bDocuments, false, false, 10);
+            hBoxTop.PackStart(bDocuments, false, false, 10);
 
-            PackStart(hBoxBotton, false, false, 10);
+            PackStart(hBoxTop, false, false, 10);
 
             CreateFilters();
 

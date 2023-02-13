@@ -34,7 +34,6 @@ namespace StorageAndTrade
     {
         #region Fields
 
-        Button bClose;
         Button bFilling;
         Button bStop;
         Switch visibleOnStart;
@@ -55,22 +54,18 @@ namespace StorageAndTrade
         public Обробка_ПочатковеЗаповнення() : base()
         {
             //Кнопки
-            HBox hBoxBotton = new HBox();
-
-            bClose = new Button("Закрити");
-            bClose.Clicked += (object? sender, EventArgs args) => { Program.GeneralForm?.CloseCurrentPageNotebook(); };
-
-            hBoxBotton.PackStart(bClose, false, false, 10);
+            HBox hBoxTop = new HBox();
+            PackStart(hBoxTop, false, false, 10);
 
             bFilling = new Button("Заповнити");
             bFilling.Clicked += OnFilling;
 
-            hBoxBotton.PackStart(bFilling, false, false, 10);
+            hBoxTop.PackStart(bFilling, false, false, 10);
 
             bStop = new Button("Зупинити") { Sensitive = false };
             bStop.Clicked += OnStopClick;
 
-            hBoxBotton.PackStart(bStop, false, false, 10);
+            hBoxTop.PackStart(bStop, false, false, 10);
 
             //Показувати при запуску -->
             VBox vBoxSwitch = new VBox();
@@ -84,10 +79,8 @@ namespace StorageAndTrade
             hBoxSwitch.PackStart(visibleOnStart, false, false, 0);
             hBoxSwitch.PackStart(new Label("Показувати при запуску"), false, false, 10);
 
-            hBoxBotton.PackEnd(vBoxSwitch, false, false, 10);
+            hBoxTop.PackEnd(vBoxSwitch, false, false, 10);
             //<-- Показувати при запуску
-
-            PackStart(hBoxBotton, false, false, 10);
 
             scrollMessage = new ScrolledWindow() { ShadowType = ShadowType.In };
             scrollMessage.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
@@ -339,7 +332,6 @@ namespace StorageAndTrade
             (
                 delegate
                 {
-                    bClose.Sensitive = sensitive;
                     bFilling.Sensitive = sensitive;
                     bStop.Sensitive = !sensitive;
                 }

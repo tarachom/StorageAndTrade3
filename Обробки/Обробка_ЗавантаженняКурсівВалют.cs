@@ -38,7 +38,6 @@ namespace StorageAndTrade
     {
         #region Fields
 
-        Button bClose;
         Button bDownload;
         Button bStop;
         ScrolledWindow scrollMessage;
@@ -61,30 +60,24 @@ namespace StorageAndTrade
         public Обробка_ЗавантаженняКурсівВалют() : base()
         {
             //Кнопки
-            HBox hBoxBotton = new HBox();
-
-            bClose = new Button("Закрити");
-            bClose.Clicked += (object? sender, EventArgs args) => { Program.GeneralForm?.CloseCurrentPageNotebook(); };
-
-            hBoxBotton.PackStart(bClose, false, false, 10);
+            HBox hBoxTop = new HBox();
+            PackStart(hBoxTop, false, false, 10);
 
             bDownload = new Button("Завантаження");
             bDownload.Clicked += OnDownload;
 
-            hBoxBotton.PackStart(bDownload, false, false, 10);
+            hBoxTop.PackStart(bDownload, false, false, 10);
 
             bStop = new Button("Зупинити") { Sensitive = false };
             bStop.Clicked += OnStopClick;
 
-            hBoxBotton.PackStart(bStop, false, false, 10);
+            hBoxTop.PackStart(bStop, false, false, 10);
 
             //Дата
-            hBoxBotton.PackStart(ЗавантаженняНаВказануДату, false, false, 5);
-            hBoxBotton.PackStart(ДатаЗавантаженняКурсу, false, false, 5);
+            hBoxTop.PackStart(ЗавантаженняНаВказануДату, false, false, 5);
+            hBoxTop.PackStart(ДатаЗавантаженняКурсу, false, false, 5);
 
             ЗавантаженняНаВказануДату.Activated += OnЗавантаженняНаВказануДату_Activated;
-
-            PackStart(hBoxBotton, false, false, 10);
 
             scrollMessage = new ScrolledWindow() { ShadowType = ShadowType.In };
             scrollMessage.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
@@ -260,7 +253,6 @@ LIMIT 1
             (
                 delegate
                 {
-                    bClose.Sensitive = sensitive;
                     bDownload.Sensitive = sensitive;
                     bStop.Sensitive = !sensitive;
                 }
