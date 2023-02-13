@@ -73,7 +73,7 @@ namespace StorageAndTrade
             HPaned hPaned = new HPaned();
 
             ScrolledWindow scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In };
-            scrollTree.SetPolicy(PolicyType.Never, PolicyType.Automatic);
+            scrollTree.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
 
             TreeViewGrid = new TreeView(ТабличніСписки.СкладськіКомірки_Записи.Store);
             ТабличніСписки.СкладськіКомірки_Записи.AddColumns(TreeViewGrid);
