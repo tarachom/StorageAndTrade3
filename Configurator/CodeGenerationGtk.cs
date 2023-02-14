@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 14.02.2023 11:50:14
+ * Дата конфігурації: 14.02.2023 12:37:42
  *
  */
  
@@ -2533,16 +2533,22 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         
         string Код = "";
         string Назва = "";
+        string НазваФайлу = "";
+        string Розмір = "";
+        string ДатаСтворення = "";
 
         Array ToArray()
         {
             return new object[] { new Gdk.Pixbuf(Image), ID 
-            /* */ , Код, Назва };
+            /* */ , Код, Назва, НазваФайлу, Розмір, ДатаСтворення };
         }
 
         public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */
             , typeof(string) /* Код */
             , typeof(string) /* Назва */
+            , typeof(string) /* НазваФайлу */
+            , typeof(string) /* Розмір */
+            , typeof(string) /* ДатаСтворення */
             );
 
         public static void AddColumns(TreeView treeView)
@@ -2552,6 +2558,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             /* */
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 } ); /*Код*/
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Назва файлу", new CellRendererText() { Xpad = 4 }, "text", 4) { SortColumnId = 4 } ); /*НазваФайлу*/
+            treeView.AppendColumn(new TreeViewColumn("Розмір", new CellRendererText() { Xpad = 4 }, "text", 5) { SortColumnId = 5 } ); /*Розмір*/
+            treeView.AppendColumn(new TreeViewColumn("Дата створення", new CellRendererText() { Xpad = 4 }, "text", 6) { SortColumnId = 6 } ); /*ДатаСтворення*/
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
@@ -2575,6 +2584,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                 {
                     Довідники.Файли_Const.Код /* 1 */
                     , Довідники.Файли_Const.Назва /* 2 */
+                    , Довідники.Файли_Const.НазваФайлу /* 3 */
+                    , Довідники.Файли_Const.Розмір /* 4 */
+                    , Довідники.Файли_Const.ДатаСтворення /* 5 */
                     
                 });
 
@@ -2598,7 +2610,10 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     {
                         ID = cur.UnigueID.ToString(),
                         Код = cur.Fields?[Файли_Const.Код]?.ToString() ?? "", /**/
-                        Назва = cur.Fields?[Файли_Const.Назва]?.ToString() ?? "" /**/
+                        Назва = cur.Fields?[Файли_Const.Назва]?.ToString() ?? "", /**/
+                        НазваФайлу = cur.Fields?[Файли_Const.НазваФайлу]?.ToString() ?? "", /**/
+                        Розмір = cur.Fields?[Файли_Const.Розмір]?.ToString() ?? "", /**/
+                        ДатаСтворення = cur.Fields?[Файли_Const.ДатаСтворення]?.ToString() ?? "" /**/
                         
                     };
 

@@ -5,7 +5,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>14.02.2023 11:50:14</DateTimeSave>
+  <DateTimeSave>14.02.2023 12:37:42</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -3013,6 +3013,36 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <SortNum>2</SortNum>
               <SortField>True</SortField>
               <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>НазваФайлу</Name>
+              <Caption>Назва файлу</Caption>
+              <Size>0</Size>
+              <SortNum>3</SortNum>
+              <SortField>False</SortField>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>Розмір</Name>
+              <Caption>Розмір</Caption>
+              <Size>0</Size>
+              <SortNum>4</SortNum>
+              <SortField>False</SortField>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>ДатаСтворення</Name>
+              <Caption>Дата створення</Caption>
+              <Size>0</Size>
+              <SortNum>5</SortNum>
+              <SortField>False</SortField>
+              <Type>datetime</Type>
               <Pointer>
               </Pointer>
             </Field>
@@ -14690,6 +14720,67 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
         <Name>ПсуванняТоварів</Name>
         <Name>ВнутрішнєСпоживанняТоварів</Name>
         <Name>РахунокФактура</Name>
+        <Name>РозміщенняТоварівНаСкладі</Name>
+        <Name>ПереміщенняТоварівНаСкладі</Name>
+        <Name>ЗбіркаТоварівНаСкладі</Name>
+        <Name>РозміщенняНоменклатуриПоКоміркам</Name>
+      </AllowDocument>
+    </Journal>
+    <Journal>
+      <Name>Закупівлі</Name>
+      <Desc>
+      </Desc>
+      <Fields />
+      <AllowDocument>
+        <Name>ЗамовленняПостачальнику</Name>
+        <Name>ПоступленняТоварівТаПослуг</Name>
+        <Name>ПоверненняТоварівПостачальнику</Name>
+      </AllowDocument>
+    </Journal>
+    <Journal>
+      <Name>Продажі</Name>
+      <Desc>
+      </Desc>
+      <Fields />
+      <AllowDocument>
+        <Name>ЗамовленняКлієнта</Name>
+        <Name>РеалізаціяТоварівТаПослуг</Name>
+        <Name>ПоверненняТоварівВідКлієнта</Name>
+        <Name>АктВиконанихРобіт</Name>
+        <Name>РахунокФактура</Name>
+      </AllowDocument>
+    </Journal>
+    <Journal>
+      <Name>Каса</Name>
+      <Desc>
+      </Desc>
+      <Fields />
+      <AllowDocument>
+        <Name>ПрихіднийКасовийОрдер</Name>
+        <Name>РозхіднийКасовийОрдер</Name>
+      </AllowDocument>
+    </Journal>
+    <Journal>
+      <Name>Склад</Name>
+      <Desc>
+      </Desc>
+      <Fields />
+      <AllowDocument>
+        <Name>ПереміщенняТоварів</Name>
+        <Name>ВведенняЗалишків</Name>
+        <Name>НадлишкиТоварів</Name>
+        <Name>ПересортицяТоварів</Name>
+        <Name>ПерерахунокТоварів</Name>
+        <Name>ПсуванняТоварів</Name>
+        <Name>ВнутрішнєСпоживанняТоварів</Name>
+      </AllowDocument>
+    </Journal>
+    <Journal>
+      <Name>АдреснеЗберігання</Name>
+      <Desc>
+      </Desc>
+      <Fields />
+      <AllowDocument>
         <Name>РозміщенняТоварівНаСкладі</Name>
         <Name>ПереміщенняТоварівНаСкладі</Name>
         <Name>ЗбіркаТоварівНаСкладі</Name>
