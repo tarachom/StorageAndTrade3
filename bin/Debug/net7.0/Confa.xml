@@ -5,7 +5,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>13.02.2023 16:49:35</DateTimeSave>
+  <DateTimeSave>14.02.2023 11:50:14</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -14671,6 +14671,30 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           </Desc>
         </Field>
       </Fields>
+      <AllowDocument>
+        <Name>ЗамовленняПостачальнику</Name>
+        <Name>ПоступленняТоварівТаПослуг</Name>
+        <Name>ЗамовленняКлієнта</Name>
+        <Name>РеалізаціяТоварівТаПослуг</Name>
+        <Name>ВстановленняЦінНоменклатури</Name>
+        <Name>ПрихіднийКасовийОрдер</Name>
+        <Name>РозхіднийКасовийОрдер</Name>
+        <Name>ПереміщенняТоварів</Name>
+        <Name>ПоверненняТоварівПостачальнику</Name>
+        <Name>ПоверненняТоварівВідКлієнта</Name>
+        <Name>АктВиконанихРобіт</Name>
+        <Name>ВведенняЗалишків</Name>
+        <Name>НадлишкиТоварів</Name>
+        <Name>ПересортицяТоварів</Name>
+        <Name>ПерерахунокТоварів</Name>
+        <Name>ПсуванняТоварів</Name>
+        <Name>ВнутрішнєСпоживанняТоварів</Name>
+        <Name>РахунокФактура</Name>
+        <Name>РозміщенняТоварівНаСкладі</Name>
+        <Name>ПереміщенняТоварівНаСкладі</Name>
+        <Name>ЗбіркаТоварівНаСкладі</Name>
+        <Name>РозміщенняНоменклатуриПоКоміркам</Name>
+      </AllowDocument>
     </Journal>
   </Journals>
   <RegistersInformation>
