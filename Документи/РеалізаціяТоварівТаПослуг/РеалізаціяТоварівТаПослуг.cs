@@ -175,7 +175,7 @@ namespace StorageAndTrade
 
             {
                 MenuItem doc = new MenuItem("Прихідний касовий ордер");
-                doc.Activated += OnNewDocNaOsnovi_КасовийОрдер;
+                doc.Activated += OnNewDocNaOsnovi_ПрихіднийКасовийОрдер;
                 Menu.Append(doc);
             }
 
@@ -562,7 +562,7 @@ namespace StorageAndTrade
             }
         }
 
-        void OnNewDocNaOsnovi_КасовийОрдер(object? sender, EventArgs args)
+        void OnNewDocNaOsnovi_ПрихіднийКасовийОрдер(object? sender, EventArgs args)
         {
             if (TreeViewGrid.Selection.CountSelectedRows() != 0)
             {
@@ -587,6 +587,7 @@ namespace StorageAndTrade
                     прихіднийКасовийОрдер_Новий.ДатаДок = DateTime.Now;
                     прихіднийКасовийОрдер_Новий.НомерДок = (++Константи.НумераціяДокументів.ПрихіднийКасовийОрдер_Const).ToString("D8");
                     прихіднийКасовийОрдер_Новий.Назва = $"Прихідний касовий ордер №{прихіднийКасовийОрдер_Новий.НомерДок} від {прихіднийКасовийОрдер_Новий.ДатаДок.ToString("dd.MM.yyyy")}";
+                    прихіднийКасовийОрдер_Новий.ГосподарськаОперація = Перелічення.ГосподарськіОперації.ПоступленняОплатиВідКлієнта;
                     прихіднийКасовийОрдер_Новий.Організація = реалізаціяТоварівТаПослуг_Objest.Організація;
                     прихіднийКасовийОрдер_Новий.Валюта = реалізаціяТоварівТаПослуг_Objest.Валюта;
                     прихіднийКасовийОрдер_Новий.Каса = реалізаціяТоварівТаПослуг_Objest.Каса;

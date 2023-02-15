@@ -173,17 +173,29 @@ namespace StorageAndTrade
         {
             Menu Menu = new Menu();
 
-            MenuItem newDocRoshidnaNakladnaButton = new MenuItem("Реалізація товарів та послуг");
-            newDocRoshidnaNakladnaButton.Activated += OnNewDocNaOsnovi_RoshidnaNakladna;
-            Menu.Append(newDocRoshidnaNakladnaButton);
+            {
+                MenuItem doc = new MenuItem("Реалізація товарів та послуг");
+                doc.Activated += OnNewDocNaOsnovi_РеалізаціяТоварівТаПослуг;
+                Menu.Append(doc);
+            }
 
-            MenuItem newDocSamovlenjaPostachalnykuButton = new MenuItem("Замовлення постачальнику");
-            newDocSamovlenjaPostachalnykuButton.Activated += OnNewDocNaOsnovi_SamovlenjaPostachalnyku;
-            Menu.Append(newDocSamovlenjaPostachalnykuButton);
+            {
+                MenuItem doc = new MenuItem("Замовлення постачальнику");
+                doc.Activated += OnNewDocNaOsnovi_ЗамовленняПостачальнику;
+                Menu.Append(doc);
+            }
 
-            MenuItem newDocPryhydnaNakladnaButton = new MenuItem("Поступлення товарів та послуг");
-            newDocPryhydnaNakladnaButton.Activated += OnNewDocNaOsnovi_PryhydnaNakladna;
-            Menu.Append(newDocPryhydnaNakladnaButton);
+            {
+                MenuItem doc = new MenuItem("Поступлення товарів та послуг");
+                doc.Activated += OnNewDocNaOsnovi_ПоступленняТоварівТаПослуг;
+                Menu.Append(doc);
+            }
+
+            {
+                MenuItem doc = new MenuItem("Прихідний касовий ордер");
+                doc.Activated += OnNewDocNaOsnovi_ПрихіднийКасовийОрдер;
+                Menu.Append(doc);
+            }
 
             Menu.ShowAll();
 
@@ -556,7 +568,7 @@ namespace StorageAndTrade
             }
         }
 
-        void OnNewDocNaOsnovi_RoshidnaNakladna(object? sender, EventArgs args)
+        void OnNewDocNaOsnovi_РеалізаціяТоварівТаПослуг(object? sender, EventArgs args)
         {
             if (TreeViewGrid.Selection.CountSelectedRows() != 0)
             {
@@ -630,7 +642,7 @@ namespace StorageAndTrade
             }
         }
 
-        void OnNewDocNaOsnovi_SamovlenjaPostachalnyku(object? sender, EventArgs args)
+        void OnNewDocNaOsnovi_ЗамовленняПостачальнику(object? sender, EventArgs args)
         {
             if (TreeViewGrid.Selection.CountSelectedRows() != 0)
             {
@@ -702,7 +714,7 @@ namespace StorageAndTrade
             }
         }
 
-        void OnNewDocNaOsnovi_PryhydnaNakladna(object? sender, EventArgs args)
+        void OnNewDocNaOsnovi_ПоступленняТоварівТаПослуг(object? sender, EventArgs args)
         {
             if (TreeViewGrid.Selection.CountSelectedRows() != 0)
             {
@@ -764,6 +776,57 @@ namespace StorageAndTrade
                         {
                             IsNew = false,
                             ПоступленняТоварівТаПослуг_Objest = поступленняТоварівТаПослуг_Новий,
+                        };
+
+                        page.SetValue();
+
+                        return page;
+                    });
+                }
+            }
+        }
+
+        void OnNewDocNaOsnovi_ПрихіднийКасовийОрдер(object? sender, EventArgs args)
+        {
+            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
+            {
+                TreePath[] selectionRows = TreeViewGrid.Selection.GetSelectedRows();
+
+                foreach (TreePath itemPath in selectionRows)
+                {
+                    TreeIter iter;
+                    TreeViewGrid.Model.GetIter(out iter, itemPath);
+
+                    string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
+
+                    ЗамовленняКлієнта_Pointer замовленняКлієнта_Pointer = new ЗамовленняКлієнта_Pointer(new UnigueID(uid));
+                    ЗамовленняКлієнта_Objest замовленняКлієнта_Objest = замовленняКлієнта_Pointer.GetDocumentObject(true);
+
+                    //
+                    //Новий документ
+                    //
+
+                    ПрихіднийКасовийОрдер_Objest прихіднийКасовийОрдер_Новий = new ПрихіднийКасовийОрдер_Objest();
+                    прихіднийКасовийОрдер_Новий.New();
+                    прихіднийКасовийОрдер_Новий.ДатаДок = DateTime.Now;
+                    прихіднийКасовийОрдер_Новий.НомерДок = (++Константи.НумераціяДокументів.ПрихіднийКасовийОрдер_Const).ToString("D8");
+                    прихіднийКасовийОрдер_Новий.Назва = $"Прихідний касовий ордер №{прихіднийКасовийОрдер_Новий.НомерДок} від {прихіднийКасовийОрдер_Новий.ДатаДок.ToString("dd.MM.yyyy")}";
+                    прихіднийКасовийОрдер_Новий.ГосподарськаОперація = Перелічення.ГосподарськіОперації.ПоступленняОплатиВідКлієнта;
+                    прихіднийКасовийОрдер_Новий.Організація = замовленняКлієнта_Objest.Організація;
+                    прихіднийКасовийОрдер_Новий.Валюта = замовленняКлієнта_Objest.Валюта;
+                    прихіднийКасовийОрдер_Новий.Каса = замовленняКлієнта_Objest.Каса;
+                    прихіднийКасовийОрдер_Новий.Контрагент = замовленняКлієнта_Objest.Контрагент;
+                    прихіднийКасовийОрдер_Новий.Договір = замовленняКлієнта_Objest.Договір;
+                    прихіднийКасовийОрдер_Новий.СумаДокументу = замовленняКлієнта_Objest.СумаДокументу;
+                    прихіднийКасовийОрдер_Новий.Основа = new UuidAndText(замовленняКлієнта_Objest.UnigueID.UGuid, замовленняКлієнта_Objest.TypeDocument);
+                    прихіднийКасовийОрдер_Новий.Save();
+
+                    Program.GeneralForm?.CreateNotebookPage($"{прихіднийКасовийОрдер_Новий.Назва}", () =>
+                    {
+                        ПрихіднийКасовийОрдер_Елемент page = new ПрихіднийКасовийОрдер_Елемент
+                        {
+                            IsNew = false,
+                            ПрихіднийКасовийОрдер_Objest = прихіднийКасовийОрдер_Новий,
                         };
 
                         page.SetValue();

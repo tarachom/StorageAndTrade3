@@ -27,7 +27,7 @@
     <Port>19066</Port>
     <Login>admin</Login>
     <Password>12345678</Password>
-    <BaseName>storage_and_trade2</BaseName>
+    <BaseName>storage_and_trade</BaseName>
     <OtherParam />
   </Configuration>
 </root>
