@@ -20,12 +20,22 @@
     <BaseName>storage_and_trade_demo</BaseName>
     <OtherParam />
   </Configuration>
-  <Configuration Select="True">
+  <Configuration Select="False">
     <Key>6134635f-6421-4ed6-92c8-87d72b9c0da9</Key>
     <Name>cloudclusters</Name>
     <Server>postgresql-111143-0.cloudclusters.net</Server>
     <Port>19066</Port>
     <Login>admin</Login>
+    <Password>12345678</Password>
+    <BaseName>storage_and_trade</BaseName>
+    <OtherParam />
+  </Configuration>
+  <Configuration Select="True">
+    <Key>c3a2ccd0-c5dc-4835-aa7d-a84f03c95448</Key>
+    <Name>database-1.cgmsfs5rvp68.us-east-1.rds.amazonaws.com</Name>
+    <Server>database-1.cgmsfs5rvp68.us-east-1.rds.amazonaws.com</Server>
+    <Port>5432</Port>
+    <Login>postgres</Login>
     <Password>12345678</Password>
     <BaseName>storage_and_trade</BaseName>
     <OtherParam />
