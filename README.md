@@ -56,8 +56,62 @@
     Закупівлі
     Продажі
 
-<hr />
+<br/>
+<br/>
 
+ <b>Встановлення dotnet-sdk для Ubuntu 22.10</b>
+ 
+ Детальніше - [Install the .NET SDK or the .NET Runtime on Ubuntu](https://learn.microsoft.com/uk-ua/dotnet/core/install/linux-ubuntu)<br/>
+ 
+    wget https://packages.microsoft.com/config/ubuntu/22.10/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+    sudo dpkg -i packages-microsoft-prod.deb
+    rm packages-microsoft-prod.deb
+    
+    sudo apt-get update && sudo apt-get install -y dotnet-sdk-7.0
+    
+    # Переглянути детальну інформацію про встановлені версії sdk і runtimes
+    dotnet --list-sdks && dotnet --list-runtimes
+
+<br/>
+
+ <b>Встановлення PostgreSQL для Ubuntu</b>
+ 
+ Детальніше - [PostgreSQL](https://www.postgresql.org/download/linux/ubuntu/)<br/>
+ 
+    sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+    wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+    
+    sudo apt-get update
+    
+    sudo apt-get -y install postgresql
+
+    # Встановлення пароля для postgres
+    sudo -u postgres psql
+    \password postgres
+    
+    # Переглянути детальну інформацію про встановлену програму postgresql
+    dpkg -l | grep postgresql
+
+<br/>
+
+ <b>Встановлення Git</b>
+    
+    sudo apt install git
+
+<br/>
+
+ <b>Збірка програми</b>
+    
+    git clone https://github.com/tarachom/StorageAndTrade3.git
+    git clone https://github.com/tarachom/AccountingSoftwareLib.git
+    
+    dotnet build StorageAndTrade3 --output StorageAndTrade3/bin/Debug/net7.0
+    
+    mkdir -p bin
+    cp -r StorageAndTrade3/bin/Debug/net7.0/* bin
+
+<hr />
+ 
   Детальніше про програму [accounting.org.ua](https://accounting.org.ua/storage_and_trade.html)<br/>
   Середовище розробки [Visual Studio Code](https://code.visualstudio.com)<br/>
   База даних [PostgreSQL](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads)<br/>
