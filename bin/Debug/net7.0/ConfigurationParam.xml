@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <Configuration Select="False">
+  <Configuration Select="True">
     <Key>6b4ef58d-4b62-4885-8059-eb6f43c51c2d</Key>
     <Name>"Зберігання та Торгівля" для України</Name>
     <Server>localhost</Server>
@@ -30,7 +30,7 @@
     <BaseName>storage_and_trade</BaseName>
     <OtherParam />
   </Configuration>
-  <Configuration Select="True">
+  <Configuration Select="False">
     <Key>c3a2ccd0-c5dc-4835-aa7d-a84f03c95448</Key>
     <Name>database-1.cgmsfs5rvp68.us-east-1.rds.amazonaws.com</Name>
     <Server>database-1.cgmsfs5rvp68.us-east-1.rds.amazonaws.com</Server>

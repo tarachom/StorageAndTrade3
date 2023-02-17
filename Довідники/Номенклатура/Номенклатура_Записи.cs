@@ -62,7 +62,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 4 }, "pixbuf", 0));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 0 }, "pixbuf", 0));
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { SortColumnId = 2 }); /*Код*/
