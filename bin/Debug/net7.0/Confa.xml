@@ -5,7 +5,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>17.02.2023 07:36:59</DateTimeSave>
+  <DateTimeSave>18.02.2023 13:45:03</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -14573,7 +14573,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       <Name>ТипПеріодуДляЖурналівДокументів</Name>
       <Desc>
       </Desc>
-      <SerialNumber>7</SerialNumber>
+      <SerialNumber>8</SerialNumber>
       <Fields>
         <Field>
           <Name>ВесьПеріод</Name>
@@ -14588,17 +14588,22 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
         <Field>
           <Name>Квартал</Name>
           <Value>6</Value>
-          <Desc>Квартал (3 місяці)</Desc>
+          <Desc>Квартал (три місяці)</Desc>
         </Field>
         <Field>
           <Name>ЗМинулогоМісяця</Name>
           <Value>7</Value>
-          <Desc>Два місяці</Desc>
+          <Desc>Два місяці (з 1 числа)</Desc>
+        </Field>
+        <Field>
+          <Name>Місяць</Name>
+          <Value>8</Value>
+          <Desc>Місяць</Desc>
         </Field>
         <Field>
           <Name>ЗПочаткуМісяця</Name>
           <Value>3</Value>
-          <Desc>Місяць (з початку місяця)</Desc>
+          <Desc>Місяць (з 1 числа)</Desc>
         </Field>
         <Field>
           <Name>ЗПочаткуТижня</Name>

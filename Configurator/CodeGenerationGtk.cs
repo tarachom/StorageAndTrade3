@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 17.02.2023 07:36:59
+ * Дата конфігурації: 18.02.2023 13:45:03
  *
  */
  
@@ -5528,6 +5528,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     сomboBox.Append(field.Name, field.Desc);
             }
 
+            сomboBox.Active = 0;
+
             return сomboBox;
         }
 
@@ -5550,6 +5552,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                 {
                     DateTime ДатаМісцьНазад = DateTime.Now.AddMonths(-1);
                     Where.Add(new Where(fieldWhere, Comparison.QT_EQ, new DateTime(ДатаМісцьНазад.Year, ДатаМісцьНазад.Month, 1)));
+                    break;
+                }
+                case Перелічення.ТипПеріодуДляЖурналівДокументів.Місяць:
+                {
+                    Where.Add(new Where(fieldWhere, Comparison.QT_EQ, DateTime.Now.AddMonths(-1)));
                     break;
                 }
                 case Перелічення.ТипПеріодуДляЖурналівДокументів.ЗПочаткуМісяця:

@@ -352,8 +352,7 @@ namespace StorageAndTrade
 
                 TreeViewColumn treeColumn = new TreeViewColumn(
                     isVisibleColumn ? visibleColumns[columnName] : columnName,
-                    new CellRendererText() { Xalign = xalign }, "text", i)
-                { Visible = isVisibleColumn, Alignment = xalign };
+                    new CellRendererText() { Xalign = xalign }, "text", i) { Visible = isVisibleColumn, Alignment = xalign };
 
                 if (dataColumns != null && dataColumns.ContainsKey(columnName))
                 {
