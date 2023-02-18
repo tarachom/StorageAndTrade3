@@ -101,6 +101,13 @@ namespace StorageAndTrade
                                     page.LoadRecords();
                                     break;
                                 }
+                            case "АктВиконанихРобіт":
+                                {
+                                    АктВиконанихРобіт page = new АктВиконанихРобіт() { SelectPointerItem = new АктВиконанихРобіт_Pointer(unigueID) };
+                                    Program.GeneralForm?.CreateNotebookPage("Акт виконаних робіт", () => { return page; }, true);
+                                    page.LoadRecords();
+                                    break;
+                                }
                             case "ЗамовленняПостачальнику":
                                 {
                                     ЗамовленняПостачальнику page = new ЗамовленняПостачальнику() { SelectPointerItem = new ЗамовленняПостачальнику_Pointer(unigueID) };
@@ -394,11 +401,6 @@ namespace StorageAndTrade
 
         #region NotebookReport
 
-        // public static void CloseCurrentPageNotebook(Notebook notebook)
-        // {
-        //     notebook.RemovePage(notebook.CurrentPage);
-        //}
-
         /// <summary>
         /// Створити сторінку в блокноті звіту
         /// </summary>
@@ -450,7 +452,7 @@ namespace StorageAndTrade
                 bRefresh.Clicked += (object? sender, EventArgs args) =>
                 {
                     onRefreshAction.Invoke(refreshParam, true);
-                    Program.GeneralForm!.NotebookDetachTabToCode(notebook, codePage);
+                    Program.GeneralForm!.NotebookCloseTabToCode(notebook, codePage);
                 };
 
                 hBoxButton.PackStart(bRefresh, false, false, 10);

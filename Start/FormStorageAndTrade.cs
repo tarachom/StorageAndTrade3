@@ -38,6 +38,8 @@ namespace StorageAndTrade
         {
             SetDefaultSize(1200, 900);
             SetPosition(WindowPosition.Center);
+            Maximize();
+
             if (File.Exists(Program.IcoFileName)) SetDefaultIconFromFile(Program.IcoFileName);
 
             DeleteEvent += delegate { Program.Quit(); };
@@ -237,7 +239,7 @@ namespace StorageAndTrade
 
             lbClose.Clicked += (object? sender, EventArgs args) =>
             {
-                NotebookDetachTabToCode(notebook, ((Widget)sender!).Name);
+                NotebookCloseTabToCode(notebook, ((Widget)sender!).Name);
             };
 
             hBoxLabel.PackEnd(lbClose, false, false, 0);
@@ -251,7 +253,7 @@ namespace StorageAndTrade
         /// </summary>
         /// <param name="notebook">Блокнот</param>
         /// <param name="codePage">Код</param>
-        public void NotebookDetachTabToCode(Notebook notebook, string codePage)
+        public void NotebookCloseTabToCode(Notebook notebook, string codePage)
         {
             notebook.Foreach(
                 (Widget wg) =>

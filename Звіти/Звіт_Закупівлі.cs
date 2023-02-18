@@ -51,6 +51,23 @@ namespace StorageAndTrade
         Склади_PointerControl Склад = new Склади_PointerControl();
         Склади_Папки_PointerControl Склад_Папка = new Склади_Папки_PointerControl() { Caption = "Склад папка:" };
 
+        struct ПараметриФільтр
+        {
+            public DateTime ДатаПочатокПеріоду;
+            public DateTime ДатаКінецьПеріоду;
+            public bool ГрупуватиПоПеріоду;
+            public bool СобівартістьЗакупки;
+            public Організації_Pointer Організація;
+            public Контрагенти_Pointer Контрагент;
+            public Контрагенти_Папки_Pointer Контрагент_Папка;
+            public ДоговориКонтрагентів_Pointer ДоговірКонтрагента;
+            public Номенклатура_Pointer Номенклатура;
+            public Номенклатура_Папки_Pointer Номенклатура_Папка;
+            public ХарактеристикиНоменклатури_Pointer ХарактеристикиНоменклатури;
+            public Склади_Pointer Склад;
+            public Склади_Папки_Pointer Склад_Папка;
+        }
+        
         #endregion
 
         public Звіт_Закупівлі() : base()
@@ -191,15 +208,42 @@ namespace StorageAndTrade
 
         #endregion
 
+        ПараметриФільтр СформуватиФільтр()
+        {
+            return new ПараметриФільтр()
+            {
+                ДатаПочатокПеріоду = ДатаПочатокПеріоду.ПочатокДня(),
+                ДатаКінецьПеріоду = ДатаКінецьПеріоду.КінецьДня(),
+                ГрупуватиПоПеріоду = ГрупуватиПоПеріоду.Active,
+                СобівартістьЗакупки = СобівартістьЗакупки.Active,
+                Організація = Організація.Pointer,
+                Контрагент = Контрагент.Pointer,
+                Контрагент_Папка = Контрагент_Папка.Pointer,
+                ДоговірКонтрагента = ДоговірКонтрагента.Pointer,
+                Номенклатура = Номенклатура.Pointer,
+                Номенклатура_Папка = Номенклатура_Папка.Pointer,
+                ХарактеристикиНоменклатури = ХарактеристикиНоменклатури.Pointer,
+                Склад = Склад.Pointer,
+                Склад_Папка = Склад_Папка.Pointer
+            };
+        }
+
         void OnReport_Обороти(object? sender, EventArgs args)
         {
+            Обороти(СформуватиФільтр());
+        }
+
+        void Обороти(object? Параметри, bool refreshPage = false)
+        {
+            ПараметриФільтр Фільтр = Параметри != null ? (ПараметриФільтр)Параметри : new ПараметриФільтр();
+
             #region SELECT
 
             bool isExistParent = true;
 
             string query = $@"
 SELECT 
-" + (ГрупуватиПоПеріоду.Active ? $@"
+" + (Фільтр.ГрупуватиПоПеріоду ? $@"
     Закупівлі.{Закупівлі_Обороти_TablePart.Період} AS Період,
     TO_CHAR(Закупівлі.{Закупівлі_Обороти_TablePart.Період}, 'dd.mm.yyyy') AS Період_Назва," : "") + $@" 
     Закупівлі.{Закупівлі_Обороти_TablePart.Організація} AS Організація,
@@ -217,7 +261,7 @@ SELECT
     Довідник_ХарактеристикиНоменклатури.{ХарактеристикиНоменклатури_Const.Назва} AS ХарактеристикаНоменклатури_Назва,
     ROUND(SUM(Закупівлі.{Закупівлі_Обороти_TablePart.Кількість}), 2) AS Кількість,
     ROUND(SUM(Закупівлі.{Закупівлі_Обороти_TablePart.Сума}), 2) AS Сума" +
-    (СобівартістьЗакупки.Active ? $", Закупівлі.{Закупівлі_Обороти_TablePart.Собівартість} AS Собівартість" : "") + $@"
+    (Фільтр.СобівартістьЗакупки ? $", Закупівлі.{Закупівлі_Обороти_TablePart.Собівартість} AS Собівартість" : "") + $@"
 FROM 
     {Закупівлі_Обороти_TablePart.TABLE} AS Закупівлі
 
@@ -241,18 +285,18 @@ WHERE
             #region WHERE
 
             //Відбір по вибраному елементу Організація
-            if (!Організація.Pointer.IsEmpty())
+            if (!Фільтр.Організація.IsEmpty())
             {
                 query += isExistParent ? "AND" : "WHERE";
                 isExistParent = true;
 
                 query += $@"
-Довідник_Організації.uid = '{Організація.Pointer.UnigueID}'
+Довідник_Організації.uid = '{Фільтр.Організація.UnigueID}'
 ";
             }
 
             //Відбір по всіх вкладених папках вибраної папки Склади
-            if (!Склад_Папка.Pointer.IsEmpty())
+            if (!Фільтр.Склад_Папка.IsEmpty())
             {
                 query += isExistParent ? "AND" : "WHERE";
                 isExistParent = true;
@@ -264,7 +308,7 @@ WHERE
         (
             SELECT uid
             FROM {Склади_Папки_Const.TABLE}
-            WHERE {Склади_Папки_Const.TABLE}.uid = '{Склад_Папка.Pointer.UnigueID}' 
+            WHERE {Склади_Папки_Const.TABLE}.uid = '{Фільтр.Склад_Папка.UnigueID}' 
             UNION ALL
             SELECT {Склади_Папки_Const.TABLE}.uid
             FROM {Склади_Папки_Const.TABLE}
@@ -275,18 +319,18 @@ WHERE
             }
 
             //Відбір по вибраному елементу Склади
-            if (!Склад.Pointer.IsEmpty())
+            if (!Фільтр.Склад.IsEmpty())
             {
                 query += isExistParent ? "AND" : "WHERE";
                 isExistParent = true;
 
                 query += $@"
-Довідник_Склади.uid = '{Склад.Pointer.UnigueID}'
+Довідник_Склади.uid = '{Фільтр.Склад.UnigueID}'
 ";
             }
 
             //Відбір по всіх вкладених папках вибраної папки Контрагент
-            if (!Контрагент_Папка.Pointer.IsEmpty())
+            if (!Фільтр.Контрагент_Папка.IsEmpty())
             {
                 query += isExistParent ? "AND" : "WHERE";
                 isExistParent = true;
@@ -298,7 +342,7 @@ WHERE
         (
             SELECT uid
             FROM {Контрагенти_Папки_Const.TABLE}
-            WHERE {Контрагенти_Папки_Const.TABLE}.uid = '{Контрагент_Папка.Pointer.UnigueID}' 
+            WHERE {Контрагенти_Папки_Const.TABLE}.uid = '{Фільтр.Контрагент_Папка.UnigueID}' 
             UNION ALL
             SELECT {Контрагенти_Папки_Const.TABLE}.uid
             FROM {Контрагенти_Папки_Const.TABLE}
@@ -309,29 +353,29 @@ WHERE
             }
 
             //Відбір по вибраному елементу Контрагент
-            if (!Контрагент.Pointer.IsEmpty())
+            if (!Фільтр.Контрагент.IsEmpty())
             {
                 query += isExistParent ? "AND" : "WHERE";
                 isExistParent = true;
 
                 query += $@"
-Довідник_Контрагенти.uid = '{Контрагент.Pointer.UnigueID}'
+Довідник_Контрагенти.uid = '{Фільтр.Контрагент.UnigueID}'
 ";
             }
 
             //Відбір по вибраному елементу ДоговірКонтрагента
-            if (!ДоговірКонтрагента.Pointer.IsEmpty())
+            if (!Фільтр.ДоговірКонтрагента.IsEmpty())
             {
                 query += isExistParent ? "AND" : "WHERE";
                 isExistParent = true;
 
                 query += $@"
-Довідник_ДоговориКонтрагентів.uid = '{ДоговірКонтрагента.Pointer.UnigueID}'
+Довідник_ДоговориКонтрагентів.uid = '{Фільтр.ДоговірКонтрагента.UnigueID}'
 ";
             }
 
             //Відбір по всіх вкладених папках вибраної папки Номенклатури
-            if (!Номенклатура_Папка.Pointer.IsEmpty())
+            if (!Фільтр.Номенклатура_Папка.IsEmpty())
             {
                 query += isExistParent ? "AND" : "WHERE";
                 isExistParent = true;
@@ -343,7 +387,7 @@ WHERE
         (
             SELECT uid
             FROM {Номенклатура_Папки_Const.TABLE}
-            WHERE {Номенклатура_Папки_Const.TABLE}.uid = '{Номенклатура_Папка.Pointer.UnigueID}' 
+            WHERE {Номенклатура_Папки_Const.TABLE}.uid = '{Фільтр.Номенклатура_Папка.UnigueID}' 
             UNION ALL
             SELECT {Номенклатура_Папки_Const.TABLE}.uid
             FROM {Номенклатура_Папки_Const.TABLE}
@@ -354,24 +398,24 @@ WHERE
             }
 
             //Відбір по вибраному елементу Номенклатура
-            if (!Номенклатура.Pointer.IsEmpty())
+            if (!Фільтр.Номенклатура.IsEmpty())
             {
                 query += isExistParent ? "AND" : "WHERE";
                 isExistParent = true;
 
                 query += $@"
-Довідник_Номенклатура.uid = '{Номенклатура.Pointer.UnigueID}'
+Довідник_Номенклатура.uid = '{Фільтр.Номенклатура.UnigueID}'
 ";
             }
 
             //Відбір по вибраному елементу Характеристики Номенклатури
-            if (!ХарактеристикиНоменклатури.Pointer.IsEmpty())
+            if (!Фільтр.ХарактеристикиНоменклатури.IsEmpty())
             {
                 query += isExistParent ? "AND" : "WHERE";
                 isExistParent = true;
 
                 query += $@"
-Довідник_ХарактеристикиНоменклатури.uid = '{ХарактеристикиНоменклатури.Pointer.UnigueID}'
+Довідник_ХарактеристикиНоменклатури.uid = '{Фільтр.ХарактеристикиНоменклатури.UnigueID}'
 ";
             }
 
@@ -379,21 +423,21 @@ WHERE
 
             query += @"
 GROUP BY " +
-    (ГрупуватиПоПеріоду.Active ? "Період, Період_Назва, " : "") + @"
+    (Фільтр.ГрупуватиПоПеріоду ? "Період, Період_Назва, " : "") + @"
     Організація, Організація_Назва,
     Склад, Склад_Назва,
     Контрагент, Контрагент_Назва,
     Договір, Договір_Назва,
     Номенклатура, Номенклатура_Назва,
     ХарактеристикаНоменклатури, ХарактеристикаНоменклатури_Назва" +
-    (СобівартістьЗакупки.Active ? ", Собівартість" : "") + @$"
+    (Фільтр.СобівартістьЗакупки ? ", Собівартість" : "") + @$"
 
 HAVING
     SUM(Закупівлі.{Закупівлі_Обороти_TablePart.Кількість}) != 0 OR
     SUM(Закупівлі.{Закупівлі_Обороти_TablePart.Сума}) != 0 
 
 ORDER BY " +
-    (ГрупуватиПоПеріоду.Active ? "Період," : "") + @"
+    (Фільтр.ГрупуватиПоПеріоду ? "Період," : "") + @"
     Організація_Назва, Склад_Назва, Контрагент_Назва, Договір_Назва, Номенклатура_Назва, ХарактеристикаНоменклатури_Назва
 ";
             #endregion
@@ -424,8 +468,8 @@ ORDER BY " +
             ПозиціяТекстуВКолонці.Add("Собівартість", 1);
 
             Dictionary<string, object> paramQuery = new Dictionary<string, object>();
-            paramQuery.Add("ПочатокПеріоду", ДатаПочатокПеріоду.Value);
-            paramQuery.Add("КінецьПеріоду", ДатаКінецьПеріоду.Value);
+            paramQuery.Add("ПочатокПеріоду", Фільтр.ДатаПочатокПеріоду);
+            paramQuery.Add("КінецьПеріоду", Фільтр.ДатаКінецьПеріоду);
 
             string[] columnsName;
             List<Dictionary<string, object>> listRow;
@@ -441,7 +485,7 @@ ORDER BY " +
             ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних, ПозиціяТекстуВКолонці);
             ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, columnsName, listRow);
 
-            ФункціїДляЗвітів.CreateReportNotebookPage(reportNotebook, "Обороти", treeView);
+            ФункціїДляЗвітів.CreateReportNotebookPage(reportNotebook, "Обороти", treeView, Обороти, Фільтр, refreshPage);
         }
     }
 }

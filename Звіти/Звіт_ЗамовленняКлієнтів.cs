@@ -46,6 +46,17 @@ namespace StorageAndTrade
         Склади_PointerControl Склад = new Склади_PointerControl();
         Склади_Папки_PointerControl Склад_Папка = new Склади_Папки_PointerControl() { Caption = "Склад папка:" };
 
+        struct ПараметриФільтр
+        {
+            public DateTime ДатаПочатокПеріоду;
+            public DateTime ДатаКінецьПеріоду;
+            public Номенклатура_Pointer Номенклатура;
+            public Номенклатура_Папки_Pointer Номенклатура_Папка;
+            public ХарактеристикиНоменклатури_Pointer ХарактеристикиНоменклатури;
+            public Склади_Pointer Склад;
+            public Склади_Папки_Pointer Склад_Папка;
+        }
+
         #endregion
 
         public Звіт_ЗамовленняКлієнтів() : base()
@@ -150,8 +161,34 @@ namespace StorageAndTrade
 
         #endregion
 
+        ПараметриФільтр СформуватиФільтр()
+        {
+            return new ПараметриФільтр()
+            {
+                ДатаПочатокПеріоду = ДатаПочатокПеріоду.ПочатокДня(),
+                ДатаКінецьПеріоду = ДатаКінецьПеріоду.КінецьДня(),
+                Номенклатура = Номенклатура.Pointer,
+                Номенклатура_Папка = Номенклатура_Папка.Pointer,
+                ХарактеристикиНоменклатури = ХарактеристикиНоменклатури.Pointer,
+                Склад = Склад.Pointer,
+                Склад_Папка = Склад_Папка.Pointer
+            };
+        }
+
         void OnReport_Залишки(object? sender, EventArgs args)
         {
+            Залишки(СформуватиФільтр());
+        }
+
+        void OnReport_Документи(object? sender, EventArgs args)
+        {
+            Документи(СформуватиФільтр());
+        }
+
+        void Залишки(object? Параметри, bool refreshPage = false)
+        {
+            ПараметриФільтр Фільтр = Параметри != null ? (ПараметриФільтр)Параметри : new ПараметриФільтр();
+
             #region SELECT
 
             bool isExistParent = false;
@@ -179,7 +216,7 @@ FROM
             #region WHERE
 
             //Відбір по всіх вкладених папках вибраної папки Номенклатури
-            if (!Номенклатура_Папка.Pointer.IsEmpty())
+            if (!Фільтр.Номенклатура_Папка.IsEmpty())
             {
                 query += isExistParent ? "AND" : "WHERE";
                 isExistParent = true;
@@ -191,7 +228,7 @@ FROM
         (
             SELECT uid
             FROM {Номенклатура_Папки_Const.TABLE}
-            WHERE {Номенклатура_Папки_Const.TABLE}.uid = '{Номенклатура_Папка.Pointer.UnigueID}' 
+            WHERE {Номенклатура_Папки_Const.TABLE}.uid = '{Фільтр.Номенклатура_Папка.UnigueID}' 
             UNION ALL
             SELECT {Номенклатура_Папки_Const.TABLE}.uid
             FROM {Номенклатура_Папки_Const.TABLE}
@@ -202,29 +239,29 @@ FROM
             }
 
             //Відбір по вибраному елементу Номенклатура
-            if (!Номенклатура.Pointer.IsEmpty())
+            if (!Фільтр.Номенклатура.IsEmpty())
             {
                 query += isExistParent ? "AND" : "WHERE";
                 isExistParent = true;
 
                 query += $@"
-Довідник_Номенклатура.uid = '{Номенклатура.Pointer.UnigueID}'
+Довідник_Номенклатура.uid = '{Фільтр.Номенклатура.UnigueID}'
 ";
             }
 
             //Відбір по вибраному елементу Характеристики Номенклатури
-            if (!ХарактеристикиНоменклатури.Pointer.IsEmpty())
+            if (!Фільтр.ХарактеристикиНоменклатури.IsEmpty())
             {
                 query += isExistParent ? "AND" : "WHERE";
                 isExistParent = true;
 
                 query += $@"
-Довідник_ХарактеристикиНоменклатури.uid = '{ХарактеристикиНоменклатури.Pointer.UnigueID}'
+Довідник_ХарактеристикиНоменклатури.uid = '{Фільтр.ХарактеристикиНоменклатури.UnigueID}'
 ";
             }
 
             //Відбір по всіх вкладених папках вибраної папки Склади
-            if (!Склад_Папка.Pointer.IsEmpty())
+            if (!Фільтр.Склад_Папка.IsEmpty())
             {
                 query += isExistParent ? "AND" : "WHERE";
                 isExistParent = true;
@@ -236,7 +273,7 @@ FROM
         (
             SELECT uid
             FROM {Склади_Папки_Const.TABLE}
-            WHERE {Склади_Папки_Const.TABLE}.uid = '{Склад_Папка.Pointer.UnigueID}' 
+            WHERE {Склади_Папки_Const.TABLE}.uid = '{Фільтр.Склад_Папка.UnigueID}' 
             UNION ALL
             SELECT {Склади_Папки_Const.TABLE}.uid
             FROM {Склади_Папки_Const.TABLE}
@@ -247,13 +284,13 @@ FROM
             }
 
             //Відбір по вибраному елементу Склади
-            if (!Склад.Pointer.IsEmpty())
+            if (!Фільтр.Склад.IsEmpty())
             {
                 query += isExistParent ? "AND" : "WHERE";
                 isExistParent = true;
 
                 query += $@"
-Довідник_Склади.uid = '{Склад.Pointer.UnigueID}'
+Довідник_Склади.uid = '{Фільтр.Склад.UnigueID}'
 ";
             }
 
@@ -303,11 +340,13 @@ ORDER BY Номенклатура_Назва
             ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних, ПозиціяТекстуВКолонці);
             ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, columnsName, listRow);
 
-            ФункціїДляЗвітів.CreateReportNotebookPage(reportNotebook, "Залишки", treeView);
+            ФункціїДляЗвітів.CreateReportNotebookPage(reportNotebook, "Залишки", treeView, Залишки, Фільтр, refreshPage);
         }
 
-        void OnReport_Документи(object? sender, EventArgs args)
+        void Документи(object? Параметри, bool refreshPage = false)
         {
+            ПараметриФільтр Фільтр = Параметри != null ? (ПараметриФільтр)Параметри : new ПараметриФільтр();
+
             #region SELECT
 
             bool isExistParent = false;
@@ -336,35 +375,35 @@ WITH register AS
             isExistParent = true;
 
             //Відбір по вибраному елементу Номенклатура
-            if (!Номенклатура.Pointer.IsEmpty())
+            if (!Фільтр.Номенклатура.IsEmpty())
             {
                 query += isExistParent ? "AND" : "WHERE";
                 isExistParent = true;
 
                 query += $@"
-ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Номенклатура} = '{Номенклатура.Pointer.UnigueID}'
+ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Номенклатура} = '{Фільтр.Номенклатура.UnigueID}'
 ";
             }
 
             //Відбір по вибраному елементу Характеристики Номенклатури
-            if (!ХарактеристикиНоменклатури.Pointer.IsEmpty())
+            if (!Фільтр.ХарактеристикиНоменклатури.IsEmpty())
             {
                 query += isExistParent ? "AND" : "WHERE";
                 isExistParent = true;
 
                 query += $@"
-ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.ХарактеристикаНоменклатури} = '{ХарактеристикиНоменклатури.Pointer.UnigueID}'
+ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.ХарактеристикаНоменклатури} = '{Фільтр.ХарактеристикиНоменклатури.UnigueID}'
 ";
             }
 
             //Відбір по вибраному елементу Склади
-            if (!Склад.Pointer.IsEmpty())
+            if (!Фільтр.Склад.IsEmpty())
             {
                 query += isExistParent ? "AND" : "WHERE";
                 isExistParent = true;
 
                 query += $@"
-ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Склад} = '{Склад.Pointer.UnigueID}'
+ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Склад} = '{Фільтр.Склад.UnigueID}'
 ";
             }
 
@@ -410,7 +449,7 @@ FROM register INNER JOIN {table} ON {table}.uid = register.owner
                 isExistParent = false;
 
                 //Відбір по всіх вкладених папках вибраної папки Номенклатури
-                if (!Номенклатура_Папка.Pointer.IsEmpty())
+                if (!Фільтр.Номенклатура_Папка.IsEmpty())
                 {
                     query += isExistParent ? "AND" : "WHERE";
                     isExistParent = true;
@@ -422,7 +461,7 @@ FROM register INNER JOIN {table} ON {table}.uid = register.owner
         (
             SELECT uid
             FROM {Номенклатура_Папки_Const.TABLE}
-            WHERE {Номенклатура_Папки_Const.TABLE}.uid = '{Номенклатура_Папка.Pointer.UnigueID}' 
+            WHERE {Номенклатура_Папки_Const.TABLE}.uid = '{Фільтр.Номенклатура_Папка.UnigueID}' 
             UNION ALL
             SELECT {Номенклатура_Папки_Const.TABLE}.uid
             FROM {Номенклатура_Папки_Const.TABLE}
@@ -433,7 +472,7 @@ FROM register INNER JOIN {table} ON {table}.uid = register.owner
                 }
 
                 //Відбір по всіх вкладених папках вибраної папки Склади
-                if (!Склад_Папка.Pointer.IsEmpty())
+                if (!Фільтр.Склад_Папка.IsEmpty())
                 {
                     query += isExistParent ? "AND" : "WHERE";
                     isExistParent = true;
@@ -445,7 +484,7 @@ FROM register INNER JOIN {table} ON {table}.uid = register.owner
         (
             SELECT uid
             FROM {Склади_Папки_Const.TABLE}
-            WHERE {Склади_Папки_Const.TABLE}.uid = '{Склад_Папка.Pointer.UnigueID}' 
+            WHERE {Склади_Папки_Const.TABLE}.uid = '{Фільтр.Склад_Папка.UnigueID}' 
             UNION ALL
             SELECT {Склади_Папки_Const.TABLE}.uid
             FROM {Склади_Папки_Const.TABLE}
@@ -506,8 +545,8 @@ ORDER BY period ASC
             ПозиціяТекстуВКолонці.Add("Сума", 1);
 
             Dictionary<string, object> paramQuery = new Dictionary<string, object>();
-            paramQuery.Add("ПочатокПеріоду", ДатаПочатокПеріоду.ПочатокДня());
-            paramQuery.Add("КінецьПеріоду", ДатаКінецьПеріоду.КінецьДня());
+            paramQuery.Add("ПочатокПеріоду", Фільтр.ДатаПочатокПеріоду);
+            paramQuery.Add("КінецьПеріоду", Фільтр.ДатаКінецьПеріоду);
 
             string[] columnsName;
             List<Dictionary<string, object>> listRow;
@@ -523,7 +562,7 @@ ORDER BY period ASC
             ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних, ПозиціяТекстуВКолонці);
             ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, columnsName, listRow);
 
-            ФункціїДляЗвітів.CreateReportNotebookPage(reportNotebook, "Документи", treeView);
+            ФункціїДляЗвітів.CreateReportNotebookPage(reportNotebook, "Документи", treeView, Документи, Фільтр, refreshPage);
         }
 
     }

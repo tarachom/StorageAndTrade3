@@ -174,7 +174,7 @@ namespace StorageAndTrade
 
         #endregion
 
-        ПараметриФільтр Сформувати_ПараметриФільтр()
+        ПараметриФільтр СформуватиФільтр()
         {
             return new ПараметриФільтр()
             {
@@ -191,17 +191,17 @@ namespace StorageAndTrade
 
         void OnReport_Залишки(object? sender, EventArgs args)
         {
-            Залишки(Сформувати_ПараметриФільтр());
+            Залишки(СформуватиФільтр());
         }
 
         void OnReport_ЗалишкиТаОбороти(object? sender, EventArgs args)
         {
-            ЗалишкиТаОбороти(Сформувати_ПараметриФільтр());
+            ЗалишкиТаОбороти(СформуватиФільтр());
         }
 
         void OnReport_Документи(object? sender, EventArgs args)
         {
-            Документи(Сформувати_ПараметриФільтр());
+            Документи(СформуватиФільтр());
         }
 
         void Залишки(object? Параметри, bool refreshPage = false)
