@@ -352,7 +352,8 @@ namespace StorageAndTrade
 
                 TreeViewColumn treeColumn = new TreeViewColumn(
                     isVisibleColumn ? visibleColumns[columnName] : columnName,
-                    new CellRendererText() { Xalign = xalign }, "text", i) { Visible = isVisibleColumn, Alignment = xalign };
+                    new CellRendererText() { Xalign = xalign }, "text", i)
+                { Visible = isVisibleColumn, Alignment = xalign };
 
                 if (dataColumns != null && dataColumns.ContainsKey(columnName))
                 {
@@ -393,17 +394,31 @@ namespace StorageAndTrade
 
         #region NotebookReport
 
-        public static void CloseCurrentPageNotebook(Notebook notebook)
-        {
-            notebook.RemovePage(notebook.CurrentPage);
-        }
+        // public static void CloseCurrentPageNotebook(Notebook notebook)
+        // {
+        //     notebook.RemovePage(notebook.CurrentPage);
+        //}
 
-        public static void CreateNotebookPage(Notebook notebook, string tabName, System.Func<Widget>? pageWidget)
+        /// <summary>
+        /// Створити сторінку в блокноті звіту
+        /// </summary>
+        /// <param name="notebook">Блокнот</param>
+        /// <param name="tabName">Назва сторінки</param>
+        /// <param name="codePage">Код</param>
+        /// <param name="pageWidget">Віджет</param>
+        /// <param name="insertPage">Вставка</param>
+        public static void CreateNotebookPageReport(Notebook notebook, string tabName, string codePage, System.Func<Widget>? pageWidget, bool insertPage = false)
         {
-            ScrolledWindow scroll = new ScrolledWindow() { ShadowType = ShadowType.In };
+            int numPage;
+            HBox hBoxLabel = Program.GeneralForm!.CreateLabelPageWidget(tabName, codePage, notebook);
+
+            ScrolledWindow scroll = new ScrolledWindow() { ShadowType = ShadowType.In, Name = codePage };
             scroll.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
 
-            int numPage = notebook.AppendPage(scroll, new Label { Text = tabName, Expand = false, Halign = Align.Start });
+            if (insertPage)
+                numPage = notebook.InsertPage(scroll, hBoxLabel, notebook.CurrentPage);
+            else
+                numPage = notebook.AppendPage(scroll, hBoxLabel);
 
             if (pageWidget != null)
                 scroll.Add((Widget)pageWidget.Invoke());
@@ -412,15 +427,34 @@ namespace StorageAndTrade
             notebook.CurrentPage = numPage;
         }
 
-        public static void CreateReportNotebookPage(Notebook notebook, string caption, Widget wgTree)
+        /// <summary>
+        /// Створити сторінку звіту
+        /// </summary>
+        /// <param name="notebook">Блокнот</param>
+        /// <param name="caption">Назва сторінки</param>
+        /// <param name="wgTree">Дерево з даними</param>
+        /// <param name="onRefreshAction">Процедура формування звіту</param>
+        /// <param name="refreshParam">Параметри процедури формування звіту</param>
+        /// <param name="refreshPage">Признак обновлення сторінки</param>
+        public static void CreateReportNotebookPage(Notebook notebook, string caption, Widget wgTree,
+            System.Action<object?, bool>? onRefreshAction = null, object? refreshParam = null, bool refreshPage = false)
         {
+            string codePage = Guid.NewGuid().ToString();
+
             VBox vBox = new VBox();
             HBox hBoxButton = new HBox();
 
-            Button bClose = new Button("Закрити");
-            bClose.Clicked += (object? sender, EventArgs args) => { CloseCurrentPageNotebook(notebook); };
+            if (onRefreshAction != null)
+            {
+                Button bRefresh = new Button("Обновити");
+                bRefresh.Clicked += (object? sender, EventArgs args) =>
+                {
+                    onRefreshAction.Invoke(refreshParam, true);
+                    Program.GeneralForm!.NotebookDetachTabToCode(notebook, codePage);
+                };
 
-            hBoxButton.PackStart(bClose, false, false, 10);
+                hBoxButton.PackStart(bRefresh, false, false, 10);
+            }
 
             vBox.PackStart(hBoxButton, false, false, 5);
 
@@ -433,7 +467,7 @@ namespace StorageAndTrade
 
             vBox.PackStart(hBox, true, true, 5);
 
-            CreateNotebookPage(notebook, caption, () => { return vBox; });
+            CreateNotebookPageReport(notebook, caption, codePage, () => { return vBox; }, refreshPage);
         }
 
         #endregion

@@ -195,17 +195,32 @@ namespace StorageAndTrade
 
         #region Notebook Page
 
+        /// <summary>
+        /// Закрити поточну сторінку блокноту
+        /// </summary>
         public void CloseCurrentPageNotebook()
         {
             topNotebook.RemovePage(topNotebook.CurrentPage);
         }
 
+        /// <summary>
+        /// Перейменувати поточну сторінку блокноту
+        /// </summary>
+        /// <param name="name">Назва</param>
         public void RenameCurrentPageNotebook(string name)
         {
-            topNotebook.SetTabLabel(topNotebook.CurrentPageWidget, CreateLabelPageWidget(name, topNotebook.CurrentPageWidget.Name));
+            HBox hBoxLabel = CreateLabelPageWidget(name, topNotebook.CurrentPageWidget.Name, topNotebook);
+            topNotebook.SetTabLabel(topNotebook.CurrentPageWidget, hBoxLabel);
         }
 
-        HBox CreateLabelPageWidget(string caption, string codePage)
+        /// <summary>
+        /// Заголовок сторінки блокноту
+        /// </summary>
+        /// <param name="caption">Заголовок</param>
+        /// <param name="codePage">Код сторінки</param>
+        /// <param name="notebook">Блокнот</param>
+        /// <returns></returns>
+        public HBox CreateLabelPageWidget(string caption, string codePage, Notebook notebook)
         {
             HBox hBoxLabel = new HBox();
 
@@ -222,14 +237,7 @@ namespace StorageAndTrade
 
             lbClose.Clicked += (object? sender, EventArgs args) =>
             {
-                string widgetName = ((Widget)sender!).Name;
-
-                topNotebook.Foreach(
-                    (Widget wg) =>
-                    {
-                        if (wg.Name == widgetName)
-                            topNotebook.DetachTab(wg);
-                    });
+                NotebookDetachTabToCode(notebook, ((Widget)sender!).Name);
             };
 
             hBoxLabel.PackEnd(lbClose, false, false, 0);
@@ -238,6 +246,27 @@ namespace StorageAndTrade
             return hBoxLabel;
         }
 
+        /// <summary>
+        /// Закрити сторінку блокноту по коду
+        /// </summary>
+        /// <param name="notebook">Блокнот</param>
+        /// <param name="codePage">Код</param>
+        public void NotebookDetachTabToCode(Notebook notebook, string codePage)
+        {
+            notebook.Foreach(
+                (Widget wg) =>
+                {
+                    if (wg.Name == codePage)
+                        notebook.DetachTab(wg);
+                });
+        }
+
+        /// <summary>
+        /// Створити сторінку в блокноті
+        /// </summary>
+        /// <param name="tabName">Назва сторінки</param>
+        /// <param name="pageWidget">Віджет для сторінки</param>
+        /// <param name="insertPage">Вставити сторінку перед поточною</param>
         public void CreateNotebookPage(string tabName, System.Func<Widget>? pageWidget, bool insertPage = false)
         {
             int numPage;
@@ -246,7 +275,7 @@ namespace StorageAndTrade
             ScrolledWindow scroll = new ScrolledWindow() { ShadowType = ShadowType.In, Name = codePage };
             scroll.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
 
-            HBox hBoxLabel = CreateLabelPageWidget(tabName, codePage);
+            HBox hBoxLabel = CreateLabelPageWidget(tabName, codePage, topNotebook);
 
             if (insertPage)
                 numPage = topNotebook.InsertPage(scroll, hBoxLabel, topNotebook.CurrentPage);
