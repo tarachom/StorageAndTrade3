@@ -409,10 +409,29 @@ namespace StorageAndTrade
         /// <param name="codePage">Код</param>
         /// <param name="pageWidget">Віджет</param>
         /// <param name="insertPage">Вставка</param>
-        public static void CreateNotebookPageReport(Notebook notebook, string tabName, string codePage, System.Func<Widget>? pageWidget, bool insertPage = false)
+        /// <param name="refresh">Процедура обновлення</param>
+        public static void CreateNotebookPageReport(Notebook notebook, string tabName, string codePage, System.Func<Widget>? pageWidget,
+            bool insertPage = false, System.Action? refresh = null)
         {
             int numPage;
             HBox hBoxLabel = Program.GeneralForm!.CreateLabelPageWidget(tabName, codePage, notebook);
+
+            //Лінк для обновлення звіту
+            if (refresh != null)
+            {
+                LinkButton lbRefresh = new LinkButton("Обновити", " ")
+                {
+                    Halign = Align.Start,
+                    Image = new Image("images/refresh.png"),
+                    AlwaysShowImage = true,
+                    Name = codePage
+                };
+
+                lbRefresh.Clicked += (object? sender, EventArgs args) => { refresh.Invoke(); };
+
+                hBoxLabel.PackStart(lbRefresh, false, false, 4);
+                hBoxLabel.ShowAll();
+            }
 
             ScrolledWindow scroll = new ScrolledWindow() { ShadowType = ShadowType.In, Name = codePage };
             scroll.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
@@ -444,21 +463,6 @@ namespace StorageAndTrade
             string codePage = Guid.NewGuid().ToString();
 
             VBox vBox = new VBox();
-            HBox hBoxButton = new HBox();
-
-            if (onRefreshAction != null)
-            {
-                Button bRefresh = new Button("Обновити");
-                bRefresh.Clicked += (object? sender, EventArgs args) =>
-                {
-                    onRefreshAction.Invoke(refreshParam, true);
-                    Program.GeneralForm!.NotebookCloseTabToCode(notebook, codePage);
-                };
-
-                hBoxButton.PackStart(bRefresh, false, false, 10);
-            }
-
-            vBox.PackStart(hBoxButton, false, false, 5);
 
             ScrolledWindow scrol = new ScrolledWindow() { ShadowType = ShadowType.In };
             scrol.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
@@ -469,7 +473,22 @@ namespace StorageAndTrade
 
             vBox.PackStart(hBox, true, true, 5);
 
-            CreateNotebookPageReport(notebook, caption, codePage, () => { return vBox; }, refreshPage);
+            CreateNotebookPageReport(notebook, caption, codePage,
+                () => { return vBox; }, refreshPage,
+
+                /* Обновлення сторінки */
+                () =>
+                {
+                    if (onRefreshAction != null)
+                    {
+                        Program.GeneralForm!.NotebookCurrentPageToCode(notebook, codePage);
+
+                        onRefreshAction.Invoke(refreshParam, true);
+
+                        Program.GeneralForm!.NotebookCloseTabToCode(notebook, codePage);
+                    }
+                }
+            );
         }
 
         #endregion

@@ -227,8 +227,9 @@ namespace StorageAndTrade
             HBox hBoxLabel = new HBox();
 
             Label label = new Label { Text = caption, Expand = false, Halign = Align.Start };
-            hBoxLabel.PackStart(label, false, false, 2);
+            hBoxLabel.PackStart(label, false, false, 4);
 
+            //Лінк закриття сторінки
             LinkButton lbClose = new LinkButton("Закрити", " ")
             {
                 Halign = Align.Start,
@@ -260,6 +261,25 @@ namespace StorageAndTrade
                 {
                     if (wg.Name == codePage)
                         notebook.DetachTab(wg);
+                });
+        }
+
+        /// <summary>
+        /// Встановлення поточної сторінки по коду
+        /// </summary>
+        /// <param name="notebook">Блокнот</param>
+        /// <param name="codePage">Код</param>
+        public void NotebookCurrentPageToCode(Notebook notebook, string codePage)
+        {
+            int counter = 0;
+
+            notebook.Foreach(
+                (Widget wg) =>
+                {
+                    if (wg.Name == codePage)
+                        notebook.CurrentPage = counter;
+
+                    counter++;
                 });
         }
 
