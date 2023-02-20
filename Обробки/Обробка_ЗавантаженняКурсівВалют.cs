@@ -106,6 +106,8 @@ namespace StorageAndTrade
         {
             ButtonSensitive(false);
 
+
+
             bool isOK = false;
 
             string link = Константи.ЗавантаженняДанихІзСайтів.ЗавантаженняКурсівВалют_Const;
@@ -135,13 +137,11 @@ namespace StorageAndTrade
                 isOK = true;
 
                 CreateMessage(TypeMessage.Ok, "OK");
-
                 ФункціїДляФоновихЗавдань.ДодатиЗаписВІсторіюЗавантаженняКурсуВалют("OK", link);
             }
             catch (Exception ex)
             {
                 CreateMessage(TypeMessage.Ok, "Помилка завантаження або аналізу ХМЛ файлу: " + ex.Message);
-
                 ФункціїДляФоновихЗавдань.ДодатиЗаписВІсторіюЗавантаженняКурсуВалют("Помилка", link, ex.Message);
             }
 

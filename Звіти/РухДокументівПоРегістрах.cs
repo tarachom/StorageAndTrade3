@@ -64,6 +64,7 @@ namespace StorageAndTrade
         {
             Dictionary<string, float> columns = new Dictionary<string, float>();
 
+            columns.Add("income", 0.5f);
             columns.Add("ВНаявності", 1);
             columns.Add("ДоВідвантаження", 1);
 
@@ -144,6 +145,7 @@ ORDER BY Номенклатура_Назва
         {
             Dictionary<string, float> columns = new Dictionary<string, float>();
 
+            columns.Add("income", 0.5f);
             columns.Add("Кількість", 1);
             columns.Add("Собівартість", 1);
             columns.Add("СписанаСобівартість", 1);
@@ -228,6 +230,7 @@ ORDER BY Організація_Назва
         {
             Dictionary<string, float> columns = new Dictionary<string, float>();
 
+            columns.Add("income", 0.5f);
             columns.Add("Кількість", 1);
 
             return columns;
@@ -296,6 +299,7 @@ ORDER BY Номенклатура_Назва
         {
             Dictionary<string, float> columns = new Dictionary<string, float>();
 
+            columns.Add("income", 0.5f);
             columns.Add("Замовлено", 1);
             columns.Add("Сума", 1);
 
@@ -366,6 +370,7 @@ ORDER BY Номенклатура_Назва
         {
             Dictionary<string, float> columns = new Dictionary<string, float>();
 
+            columns.Add("income", 0.5f);
             columns.Add("Сума", 1);
 
             return columns;
@@ -427,6 +432,7 @@ WHERE
         {
             Dictionary<string, float> columns = new Dictionary<string, float>();
 
+            columns.Add("income", 0.5f);
             columns.Add("ВНаявності", 1);
             columns.Add("ВРезервіЗіСкладу", 1);
             columns.Add("ВРезервіПідЗамовлення", 1);
@@ -498,6 +504,7 @@ ORDER BY Номенклатура_Назва
         {
             Dictionary<string, float> columns = new Dictionary<string, float>();
 
+            columns.Add("income", 0.5f);
             columns.Add("Замовлено", 1);
 
             return columns;
@@ -566,6 +573,7 @@ ORDER BY Номенклатура_Назва
         {
             Dictionary<string, float> columns = new Dictionary<string, float>();
 
+            columns.Add("income", 0.5f);
             columns.Add("Сума", 1);
 
             return columns;
@@ -626,6 +634,7 @@ WHERE
         {
             Dictionary<string, float> columns = new Dictionary<string, float>();
 
+            columns.Add("income", 0.5f);
             columns.Add("ВНаявності", 1);
             columns.Add("ДоПоступлення", 1);
 
@@ -692,6 +701,7 @@ ORDER BY Номенклатура_Назва
         {
             Dictionary<string, float> columns = new Dictionary<string, float>();
 
+            columns.Add("income", 0.5f);
             columns.Add("Сума", 1);
 
             return columns;
@@ -907,7 +917,6 @@ WHERE
 
         #endregion
 
-
         #region ТовариВКомірках
 
         public static Dictionary<string, string> ТовариВКомірках_ВидиміКолонки()
@@ -943,6 +952,7 @@ WHERE
         {
             Dictionary<string, float> columns = new Dictionary<string, float>();
 
+            columns.Add("income", 0.5f);
             columns.Add("ВНаявності", 1);
 
             return columns;
