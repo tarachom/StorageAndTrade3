@@ -67,7 +67,7 @@ namespace StorageAndTrade
             public Склади_Pointer Склад;
             public Склади_Папки_Pointer Склад_Папка;
         }
-        
+
         #endregion
 
         public Звіт_Закупівлі() : base()
@@ -226,6 +226,48 @@ namespace StorageAndTrade
                 Склад = Склад.Pointer,
                 Склад_Папка = Склад_Папка.Pointer
             };
+        }
+
+        HBox ВідобразитиФільтр(string typeReport, ПараметриФільтр Фільтр)
+        {
+            HBox hBoxCaption = new HBox();
+
+            string text = "";
+
+            text += "З <b>" +
+                Фільтр.ДатаПочатокПеріоду.ToString("dd.MM.yyyy") + "</b> по <b>" +
+                Фільтр.ДатаКінецьПеріоду.ToString("dd.MM.yyyy") + "</b>; ";
+
+            if (!Фільтр.Організація.IsEmpty())
+                text += "Організація: <b>" + Фільтр.Організація.GetPresentation() + "</b>; ";
+
+            if (!Фільтр.Контрагент.IsEmpty())
+                text += "Контрагент: <b>" + Фільтр.Контрагент.GetPresentation() + "</b>; ";
+
+            if (!Фільтр.ДоговірКонтрагента.IsEmpty())
+                text += "Договір: <b>" + Фільтр.ДоговірКонтрагента.GetPresentation() + "</b>; ";
+
+            if (!Фільтр.Контрагент_Папка.IsEmpty())
+                text += "Контрагент папка: <b>" + Фільтр.Контрагент_Папка.GetPresentation() + "</b>; ";
+
+            if (!Фільтр.Номенклатура.IsEmpty())
+                text += "Номенклатура: <b>" + Фільтр.Номенклатура.GetPresentation() + "</b>; ";
+
+            if (!Фільтр.Номенклатура_Папка.IsEmpty())
+                text += "Номенклатура папка: <b>" + Фільтр.Номенклатура_Папка.GetPresentation() + "</b>; ";
+
+            if (!Фільтр.ХарактеристикиНоменклатури.IsEmpty())
+                text += "Характеристика: <b>" + Фільтр.ХарактеристикиНоменклатури.GetPresentation() + "</b>; ";
+
+            if (!Фільтр.Склад.IsEmpty())
+                text += "Склад: <b>" + Фільтр.Склад.GetPresentation() + "</b>; ";
+
+            if (!Фільтр.Склад_Папка.IsEmpty())
+                text += "Склад папка: <b>" + Фільтр.Склад_Папка.GetPresentation() + "</b>; ";
+
+            hBoxCaption.PackStart(new Label(text) { Wrap = true, UseMarkup = true }, false, false, 2);
+
+            return hBoxCaption;
         }
 
         void OnReport_Обороти(object? sender, EventArgs args)
@@ -485,7 +527,7 @@ ORDER BY " +
             ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних, ПозиціяТекстуВКолонці);
             ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, columnsName, listRow);
 
-            ФункціїДляЗвітів.CreateReportNotebookPage(reportNotebook, "Обороти", treeView, Обороти, Фільтр, refreshPage);
+            ФункціїДляЗвітів.CreateReportNotebookPage(reportNotebook, "Обороти", ВідобразитиФільтр("Обороти", Фільтр), treeView, Обороти, Фільтр, refreshPage);
         }
     }
 }

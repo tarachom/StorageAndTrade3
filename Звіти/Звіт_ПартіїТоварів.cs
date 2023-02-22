@@ -198,6 +198,52 @@ namespace StorageAndTrade
             };
         }
 
+        HBox ВідобразитиФільтр(string typeReport, ПараметриФільтр Фільтр)
+        {
+            HBox hBoxCaption = new HBox();
+
+            string text = "";
+
+            switch (typeReport)
+            {
+                case "Залишки":
+                    {
+                        text += "Без періоду; ";
+                        break;
+                    }
+                case "ЗалишкиТаОбороти":
+                case "Документи":
+                    {
+                        text += "З <b>" +
+                            Фільтр.ДатаПочатокПеріоду.ToString("dd.MM.yyyy") + "</b> по <b>" +
+                            Фільтр.ДатаКінецьПеріоду.ToString("dd.MM.yyyy") + "</b>; ";
+                        break;
+                    }
+            }
+
+            if (!Фільтр.Номенклатура.IsEmpty())
+                text += "Номенклатура: <b>" + Фільтр.Номенклатура.GetPresentation() + "</b>; ";
+
+            if (!Фільтр.Номенклатура_Папка.IsEmpty())
+                text += "Номенклатура папка: <b>" + Фільтр.Номенклатура_Папка.GetPresentation() + "</b>; ";
+
+            if (!Фільтр.ХарактеристикиНоменклатури.IsEmpty())
+                text += "Характеристика: <b>" + Фільтр.ХарактеристикиНоменклатури.GetPresentation() + "</b>; ";
+
+            if (!Фільтр.Склад.IsEmpty())
+                text += "Склад: <b>" + Фільтр.Склад.GetPresentation() + "</b>; ";
+
+            if (!Фільтр.Склад_Папка.IsEmpty())
+                text += "Склад папка: <b>" + Фільтр.Склад_Папка.GetPresentation() + "</b>; ";
+
+            if (!Фільтр.Серія.IsEmpty())
+                text += "Серія: <b>" + Фільтр.Серія.GetPresentation() + "</b>; ";
+
+            hBoxCaption.PackStart(new Label(text) { Wrap = true, UseMarkup = true }, false, false, 2);
+
+            return hBoxCaption;
+        }
+
         void OnReport_Залишки(object? sender, EventArgs args)
         {
             Залишки(СформуватиФільтр());
@@ -412,7 +458,7 @@ ORDER BY Організація_Назва, ПартіяТоварівКомпо
             ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних, ПозиціяТекстуВКолонці);
             ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, columnsName, listRow);
 
-            ФункціїДляЗвітів.CreateReportNotebookPage(reportNotebook, "Залишки", treeView, Залишки, Фільтр, refreshPage);
+            ФункціїДляЗвітів.CreateReportNotebookPage(reportNotebook, "Залишки", ВідобразитиФільтр("Залишки", Фільтр), treeView, Залишки, Фільтр, refreshPage);
         }
 
         void ЗалишкиТаОбороти(object? Параметри, bool refreshPage = false)
@@ -748,7 +794,7 @@ ORDER BY Організація_Назва, ПартіяТоварівКомпо
             ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних, ПозиціяТекстуВКолонці);
             ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, columnsName, listRow);
 
-            ФункціїДляЗвітів.CreateReportNotebookPage(reportNotebook, "Залишки та обороти", treeView, ЗалишкиТаОбороти, Фільтр, refreshPage);
+            ФункціїДляЗвітів.CreateReportNotebookPage(reportNotebook, "Залишки та обороти", ВідобразитиФільтр("ЗалишкиТаОбороти", Фільтр), treeView, ЗалишкиТаОбороти, Фільтр, refreshPage);
         }
 
         void Документи(object? Параметри, bool refreshPage = false)
@@ -1013,7 +1059,7 @@ ORDER BY period ASC, Організація_Назва,
             ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних, ПозиціяТекстуВКолонці);
             ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, columnsName, listRow);
 
-            ФункціїДляЗвітів.CreateReportNotebookPage(reportNotebook, "Документи", treeView, Документи, Фільтр, refreshPage);
+            ФункціїДляЗвітів.CreateReportNotebookPage(reportNotebook, "Документи", ВідобразитиФільтр("Документи", Фільтр), treeView, Документи, Фільтр, refreshPage);
         }
 
     }

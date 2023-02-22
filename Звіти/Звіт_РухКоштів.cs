@@ -156,6 +156,43 @@ namespace StorageAndTrade
             };
         }
 
+        HBox ВідобразитиФільтр(string typeReport, ПараметриФільтр Фільтр)
+        {
+            HBox hBoxCaption = new HBox();
+
+            string text = "";
+
+            switch (typeReport)
+            {
+                case "Залишки":
+                    {
+                        text += "Без періоду; ";
+                        break;
+                    }
+                case "ЗалишкиТаОбороти":
+                case "Документи":
+                    {
+                        text += "З <b>" +
+                            Фільтр.ДатаПочатокПеріоду.ToString("dd.MM.yyyy") + "</b> по <b>" +
+                            Фільтр.ДатаКінецьПеріоду.ToString("dd.MM.yyyy") + "</b>; ";
+                        break;
+                    }
+            }
+
+            if (!Фільтр.Організація.IsEmpty())
+                text += "Організація: <b>" + Фільтр.Організація.GetPresentation() + "</b>; ";
+
+            if (!Фільтр.Каса.IsEmpty())
+                text += "Каса: <b>" + Фільтр.Каса.GetPresentation() + "</b>; ";
+
+            if (!Фільтр.Валюта.IsEmpty())
+                text += "Валюта: <b>" + Фільтр.Валюта.GetPresentation() + "</b>; ";
+
+            hBoxCaption.PackStart(new Label(text) { Wrap = true, UseMarkup = true }, false, false, 2);
+
+            return hBoxCaption;
+        }
+
         void OnReport_Залишки(object? sender, EventArgs args)
         {
             Залишки(СформуватиФільтр());
@@ -272,7 +309,7 @@ ORDER BY Організація_Назва, Каса_Назва, Валюта_Н
             ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних, ПозиціяТекстуВКолонці);
             ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, columnsName, listRow);
 
-            ФункціїДляЗвітів.CreateReportNotebookPage(reportNotebook, "Залишки", treeView, Залишки, Фільтр, refreshPage);
+            ФункціїДляЗвітів.CreateReportNotebookPage(reportNotebook, "Залишки", ВідобразитиФільтр("Залишки", Фільтр), treeView, Залишки, Фільтр, refreshPage);
         }
 
         void ЗалишкиТаОбороти(object? Параметри, bool refreshPage = false)
@@ -467,7 +504,7 @@ ORDER BY Організація_Назва, Каса_Назва, Валюта_Н
             ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних, ПозиціяТекстуВКолонці);
             ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, columnsName, listRow);
 
-            ФункціїДляЗвітів.CreateReportNotebookPage(reportNotebook, "Залишки та обороти", treeView, ЗалишкиТаОбороти, Фільтр, refreshPage);
+            ФункціїДляЗвітів.CreateReportNotebookPage(reportNotebook, "Залишки та обороти", ВідобразитиФільтр("ЗалишкиТаОбороти", Фільтр), treeView, ЗалишкиТаОбороти, Фільтр, refreshPage);
         }
 
         void Документи(object? Параметри, bool refreshPage = false)
@@ -623,7 +660,7 @@ ORDER BY period ASC
             ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних, ПозиціяТекстуВКолонці);
             ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, columnsName, listRow);
 
-            ФункціїДляЗвітів.CreateReportNotebookPage(reportNotebook, "Документи", treeView, Документи, Фільтр, refreshPage);
+            ФункціїДляЗвітів.CreateReportNotebookPage(reportNotebook, "Документи", ВідобразитиФільтр("Документи", Фільтр), treeView, Документи, Фільтр, refreshPage);
         }
 
     }

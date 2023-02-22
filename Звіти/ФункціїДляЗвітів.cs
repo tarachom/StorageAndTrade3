@@ -457,7 +457,7 @@ namespace StorageAndTrade
         /// <param name="onRefreshAction">Процедура формування звіту</param>
         /// <param name="refreshParam">Параметри процедури формування звіту</param>
         /// <param name="refreshPage">Признак обновлення сторінки</param>
-        public static void CreateReportNotebookPage(Notebook notebook, string caption, Widget wgTree,
+        public static void CreateReportNotebookPage(Notebook notebook, string caption, Widget wgHead, Widget wgTree,
             System.Action<object?, bool>? onRefreshAction = null, object? refreshParam = null, bool refreshPage = false)
         {
             string codePage = Guid.NewGuid().ToString();
@@ -468,9 +468,12 @@ namespace StorageAndTrade
             scrol.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
             scrol.Add(wgTree);
 
+            HBox hBoxHead = new HBox();
+            hBoxHead.PackStart(wgHead, false, false, 5);
+            vBox.PackStart(hBoxHead, false, false, 5);
+
             HBox hBox = new HBox();
             hBox.PackStart(scrol, true, true, 5);
-
             vBox.PackStart(hBox, true, true, 5);
 
             CreateNotebookPageReport(notebook, caption, codePage,
