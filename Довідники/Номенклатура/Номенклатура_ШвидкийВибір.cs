@@ -56,7 +56,7 @@ namespace StorageAndTrade
 
             //Сторінка
             {
-                LinkButton linkPage = new LinkButton(" Номенклатура") { Halign = Align.Start, Image = new Image("images/doc.png"), AlwaysShowImage = true };
+                LinkButton linkPage = new LinkButton(" Номенклатура") { Image = new Image("images/doc.png"), AlwaysShowImage = true };
                 linkPage.Clicked += (object? sender, EventArgs args) =>
                 {
                     Номенклатура page = new Номенклатура();
@@ -68,13 +68,28 @@ namespace StorageAndTrade
                     page.LoadTree();
                 };
 
-                hBoxTop.PackStart(linkPage, false, false, 10);
+                hBoxTop.PackStart(linkPage, false, false, 0);
+            }
+
+            //Новий
+            {
+                LinkButton linkNew = new LinkButton("Новий");
+                linkNew.Clicked += (object? sender, EventArgs args) =>
+                {
+                    Номенклатура_Елемент page = new Номенклатура_Елемент { IsNew = true };
+
+                    Program.GeneralForm?.CreateNotebookPage($"Номенклатура: *", () => { return page; }, true);
+
+                    page.SetValue();
+                };
+
+                hBoxTop.PackStart(linkNew, false, false, 0);
             }
 
             //Очистка
             {
-                Button bClear = new Button(new Image("images/clean.png"));
-                bClear.Clicked += (object? sender, EventArgs args) =>
+                LinkButton linkClear= new LinkButton(" Очистити"){ Image = new Image("images/clean.png"), AlwaysShowImage = true };
+                linkClear.Clicked += (object? sender, EventArgs args) =>
                 {
                     if (CallBack_OnSelectPointer != null)
                         CallBack_OnSelectPointer.Invoke(new Номенклатура_Pointer());
@@ -83,7 +98,7 @@ namespace StorageAndTrade
                         PopoverParent.Hide();
                 };
 
-                hBoxTop.PackEnd(bClear, false, false, 0);
+                hBoxTop.PackEnd(linkClear, false, false, 0);
             }
 
             ScrolledWindow scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In, WidthRequest = 600, HeightRequest = 300 };

@@ -38,7 +38,7 @@ namespace StorageAndTrade
         public System.Action<ДоговориКонтрагентів_Pointer>? CallBack_OnSelectPointer { get; set; }
 
         TreeView TreeViewGrid;
-        public Контрагенти_PointerControl КонтрагентВласник = new Контрагенти_PointerControl();
+        public Контрагенти_PointerControl КонтрагентВласник = new Контрагенти_PointerControl() { WidthPresentation = 100 };
         SearchControl2 ПошукПовнотекстовий = new SearchControl2();
 
         public ДоговориКонтрагентів_ШвидкийВибір(bool IsSelectPointer = false) : base()
@@ -73,6 +73,21 @@ namespace StorageAndTrade
                 hBoxTop.PackStart(linkPage, false, false, 10);
             }
 
+            //Новий
+            {
+                LinkButton linkNew = new LinkButton("Новий");
+                linkNew.Clicked += (object? sender, EventArgs args) =>
+                {
+                    ДоговориКонтрагентів_Елемент page = new ДоговориКонтрагентів_Елемент { IsNew = true };
+
+                    Program.GeneralForm?.CreateNotebookPage($"Договори: *", () => { return page; }, true);
+
+                    page.SetValue();
+                };
+
+                hBoxTop.PackStart(linkNew, false, false, 0);
+            }
+
             //Власник
             hBoxTop.PackStart(КонтрагентВласник, false, false, 2);
             КонтрагентВласник.Caption = "Контрагент:";
@@ -83,8 +98,8 @@ namespace StorageAndTrade
 
             //Очистка
             {
-                Button bClear = new Button(new Image("images/clean.png"));
-                bClear.Clicked += (object? sender, EventArgs args) =>
+                LinkButton linkClear = new LinkButton(" Очистити") { Image = new Image("images/clean.png"), AlwaysShowImage = true };
+                linkClear.Clicked += (object? sender, EventArgs args) =>
                 {
                     if (CallBack_OnSelectPointer != null)
                         CallBack_OnSelectPointer.Invoke(new ДоговориКонтрагентів_Pointer());
@@ -93,7 +108,7 @@ namespace StorageAndTrade
                         PopoverParent.Hide();
                 };
 
-                hBoxTop.PackEnd(bClear, false, false, 10);
+                hBoxTop.PackEnd(linkClear, false, false, 10);
             }
 
             ScrolledWindow scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In, WidthRequest = 600, HeightRequest = 300 };
