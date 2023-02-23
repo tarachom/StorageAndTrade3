@@ -23,11 +23,19 @@ limitations under the License.
 
 using Gtk;
 
+using StorageAndTrade_1_0.Довідники;
+
 namespace StorageAndTrade
 {
     class Program
     {
         public static CancellationTokenSource? CancellationTokenBackgroundTask { get; set; }
+        public static CancellationTokenSource? CancellationTokenPageService { get; set; }
+
+        /// <summary>
+        /// Авторизований користувач
+        /// </summary>
+        public static Користувачі_Pointer Користувач { get; set; } = new Користувачі_Pointer();
 
         public static void Main()
         {
@@ -36,15 +44,25 @@ namespace StorageAndTrade
             Application.Run();
         }
 
+        /// <summary>
+        /// Завершення програми
+        /// </summary>
         public static void Quit()
         {
+            //Завершення фонового потоку
             if (CancellationTokenBackgroundTask != null)
                 CancellationTokenBackgroundTask.Cancel();
+
+            //Завершення потоку з розділу Сервіс
+            if (CancellationTokenPageService != null)
+                CancellationTokenPageService.Cancel();
 
             Application.Quit();
         }
 
-        //Основна форма
+        /// <summary>
+        /// Основна форма
+        /// </summary>
         public static FormStorageAndTrade? GeneralForm { get; set; }
 
         #region Const

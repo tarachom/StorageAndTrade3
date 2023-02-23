@@ -43,8 +43,6 @@ namespace StorageAndTrade
         ScrolledWindow scrollMessage;
         VBox vBoxMessage = new VBox();
 
-        CancellationTokenSource? CancellationTokenThread { get; set; }
-
         enum TypeMessage
         {
             Ok,
@@ -132,12 +130,6 @@ namespace StorageAndTrade
             );
         }
 
-        // void OnShown(object? sender, EventArgs args)
-        // {
-        //     scrollMessage.Vadjustment.Value = scrollMessage.Vadjustment.Upper;
-        //     Console.WriteLine(scrollMessage.Vadjustment.Value);
-        // }
-
         void ClearMessage()
         {
             foreach (Widget Child in vBoxMessage.Children)
@@ -150,7 +142,7 @@ namespace StorageAndTrade
         {
             ClearMessage();
 
-            CancellationTokenThread = new CancellationTokenSource();
+            Program.CancellationTokenPageService = new CancellationTokenSource();
             Thread thread = new Thread(new ThreadStart(SpendTheDocument));
             thread.Start();
         }
@@ -170,7 +162,7 @@ namespace StorageAndTrade
 
             while (journalSelect.MoveNext())
             {
-                if (CancellationTokenThread!.IsCancellationRequested)
+                if (Program.CancellationTokenPageService!.IsCancellationRequested)
                     break;
 
                 if (journalSelect.Current.Spend)
@@ -204,6 +196,7 @@ namespace StorageAndTrade
                                     //Очистка проводок документу
                                     doc.GetType().InvokeMember("ClearSpendTheDocument", BindingFlags.InvokeMethod, null, doc, new object[] { });
 
+                                    ФункціїДляПовідомлень.ВідкритиТермінал();
                                     break;
                                 }
                                 else
@@ -235,7 +228,7 @@ namespace StorageAndTrade
 
         void OnStopClick(object? sender, EventArgs args)
         {
-            CancellationTokenThread?.Cancel();
+            Program.CancellationTokenPageService?.Cancel();
         }
     }
 }

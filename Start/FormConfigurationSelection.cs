@@ -37,6 +37,8 @@ namespace StorageAndTrade
         {
             SetDefaultSize(660, 320);
             SetPosition(WindowPosition.Center);
+            Resizable = false;
+
             if (File.Exists(Program.IcoFileName)) SetDefaultIconFromFile(Program.IcoFileName);
 
             DeleteEvent += delegate { Application.Quit(); };
@@ -182,6 +184,33 @@ namespace StorageAndTrade
                     return;
                 }
 
+                //
+                // Авторизація
+                //
+
+                ResponseType ModalResult = ResponseType.None;
+
+                using (FormLogIn windowFormLogIn = new FormLogIn())
+                {
+                    windowFormLogIn.TransientFor = this;
+                    windowFormLogIn.Modal = true;
+                    windowFormLogIn.Resizable = false;
+                    windowFormLogIn.SetValue();
+                    windowFormLogIn.Show();
+
+                    while (ModalResult == ResponseType.None)
+                    {
+                        ModalResult = windowFormLogIn.ModalResult;
+                        Application.RunIteration(true);
+                    }
+                }
+
+                if (ModalResult == ResponseType.Cancel)
+                {
+                    Конфа.Config.Kernel.Close();
+                    return;
+                }
+
                 if (Конфа.Config.Kernel.DataBase.IfExistsTable("tab_constants"))
                 {
                     Конфа.Config.ReadAllConstants();
@@ -190,9 +219,14 @@ namespace StorageAndTrade
                     Program.GeneralForm.OpenConfigurationParam = ConfigurationParamCollection.GetConfigurationParam(selectedRows[0].Name);
                     Program.GeneralForm.Show();
 
-                    Program.GeneralForm.CheckValueConstant();
+                    //Присвоєння значень
+                    Program.GeneralForm.SetValue();
 
-                    Hide();
+                    //Запуск фонових задач
+                    Program.GeneralForm.StartBackgroundTask();
+
+                    //Сховати форму вибору
+                    this.Hide();
                 }
                 else
                 {
@@ -215,7 +249,7 @@ namespace StorageAndTrade
 
             if (selectedRows.Length != 0)
             {
-                //selectedRows[0].Name
+                //
             }
         }
 
@@ -267,6 +301,9 @@ namespace StorageAndTrade
             if (selectedRows.Length != 0)
             {
                 FormConfigurationSelectionParam configurationSelectionParam = new FormConfigurationSelectionParam();
+                configurationSelectionParam.Modal = true;
+                configurationSelectionParam.TransientFor = this;
+                configurationSelectionParam.Resizable = false;
                 configurationSelectionParam.OpenConfigurationParam = ConfigurationParamCollection.GetConfigurationParam(selectedRows[0].Name);
                 configurationSelectionParam.CallBackUpdate = CallBackUpdate;
                 configurationSelectionParam.Show();

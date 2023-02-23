@@ -23,13 +23,19 @@ limitations under the License.
 
 using Gtk;
 
-using Константи = StorageAndTrade_1_0.Константи;
+using StorageAndTrade_1_0;
+using StorageAndTrade_1_0.Константи;
+using StorageAndTrade_1_0.Довідники;
+using StorageAndTrade_1_0.РегістриНакопичення;
 
 namespace StorageAndTrade
 {
     class FormStorageAndTrade : Window
     {
         public ConfigurationParam? OpenConfigurationParam { get; set; }
+
+        Guid KernelUser { get; set; } = Guid.Empty;
+        Guid KernelSession { get; set; } = Guid.Empty;
 
         Notebook topNotebook = new Notebook() { Scrollable = true, EnablePopup = true, BorderWidth = 0, ShowBorder = false, TabPos = PositionType.Top };
         Statusbar statusBar = new Statusbar();
@@ -53,34 +59,46 @@ namespace StorageAndTrade
             CreateLeftMenu(hbox);
 
             hbox.PackStart(topNotebook, true, true, 0);
+            vbox.PackStart(statusBar, false, false, 0);
 
-            /*
+            ShowAll();
+        }
 
-            Важливо!
-            На стартовій сторінці міститься запуск фонового обчислення 
-            віртуальних залишків StartBackgroundTask()
+        public void SetValue()
+        {
+            KernelUser = Config.Kernel!.User;
+            KernelSession = Config.Kernel!.Session;
 
-            */
+            Користувачі_Pointer ЗнайденийКористувач = new Користувачі_Select().FindByField(Користувачі_Const.КодВСпеціальнійТаблиці, KernelUser);
+
+            if (ЗнайденийКористувач.IsEmpty())
+            {
+                Користувачі_Objest НовийКористувач = new Користувачі_Objest();
+                НовийКористувач.New();
+                НовийКористувач.Код = (++НумераціяДовідників.Користувачі_Const).ToString("D6");
+                НовийКористувач.КодВСпеціальнійТаблиці = Config.Kernel!.User;
+                НовийКористувач.Назва = Config.Kernel!.DataBase.SpetialTableUsersGetName(KernelUser);
+                НовийКористувач.Save();
+
+                Program.Користувач = НовийКористувач.GetDirectoryPointer();
+            }
+            else
+                Program.Користувач = ЗнайденийКористувач;
 
             CreateNotebookPage("Стартова", () =>
             {
                 PageHome page = new PageHome();
-                page.StartBackgroundTask();
-
                 page.StartDesktop();
                 page.StartAutoWork();
 
                 return page;
             });
 
-            vbox.PackStart(statusBar, false, false, 0);
+            //
+            // Перевірка констант
+            //
 
-            ShowAll();
-        }
-
-        public void CheckValueConstant()
-        {
-            if (!Константи.ПриЗапускуПрограми.ПрограмаЗаповненаПочатковимиДаними_Const)
+            if (!ПриЗапускуПрограми.ПрограмаЗаповненаПочатковимиДаними_Const)
             {
                 CreateNotebookPage("Початкове заповнення", () =>
                 {
@@ -88,6 +106,69 @@ namespace StorageAndTrade
                 });
             }
         }
+
+        #region BackgroundTask
+
+        public void StartBackgroundTask()
+        {
+            Program.CancellationTokenBackgroundTask = new CancellationTokenSource();
+
+            Thread ThreadBackgroundTask = new Thread(new ThreadStart(CalculationVirtualBalances));
+            ThreadBackgroundTask.Start();
+        }
+
+        /*
+
+        Схема роботи:
+
+        1. В процесі запису в регістр залишків - додається запис у таблицю тригерів.
+           Запис в таблицю тригерів містить дату запису в регістр, назву регістру.
+
+        2. Раз на 5 сек викликається процедура SpetialTableRegAccumTrigerExecute і
+           відбувається розрахунок віртуальних таблиць регістрів залишків.
+
+           Розраховуються тільки змінені регістри на дату проведення документу і
+           додатково на дату якщо змінена дата документу і документ уже був проведений.
+
+           Додатково розраховуються підсумки в кінці всіх розрахунків.
+
+        */
+
+        void CalculationVirtualBalances()
+        {
+            int counter = 0;
+
+            while (!Program.CancellationTokenBackgroundTask!.IsCancellationRequested)
+            {
+                //Обновлення сесії
+                Config.Kernel!.DataBase.SpetialTableActiveUsersUpdateSession(KernelSession);
+
+                //Раз на 5 сек
+                if (counter > 5)
+                {
+                    //Очищення устарівших сесій
+                    Config.Kernel!.DataBase.SpetialTableActiveUsersClearOldSessions();
+
+                    //Зупинка розрахунків використовується при масовому перепроведенні документів щоб
+                    //провести всі документ, а тоді вже розраховувати регістри
+                    if (!Системні.ЗупинитиФоновіЗадачі_Const)
+                    {
+                        Config.Kernel!.DataBase.SpetialTableRegAccumTrigerExecute(
+                            VirtualTablesСalculation.Execute,
+                            VirtualTablesСalculation.ExecuteFinalCalculation);
+                    }
+
+                    counter = 0;
+                }
+
+                counter++;
+
+                //Затримка на 1 сек
+                Thread.Sleep(1000);
+            }
+        }
+
+        #endregion
 
         #region LeftMenu
 

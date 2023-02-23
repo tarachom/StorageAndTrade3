@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 21.02.2023 01:08:46
+ * Дата конфігурації: 23.02.2023 15:23:45
  *
  */
 
@@ -3885,17 +3885,19 @@ namespace StorageAndTrade_1_0.Довідники
         public const string Код = "col_f7";
         public const string ФізичнаОсоба = "col_a1";
         public const string Коментар = "col_g6";
+        public const string КодВСпеціальнійТаблиці = "col_a2";
     }
 
     public class Користувачі_Objest : DirectoryObject
     {
         public Користувачі_Objest() : base(Config.Kernel!, "tab_a14",
-             new string[] { "col_f6", "col_f7", "col_a1", "col_g6" }) 
+             new string[] { "col_f6", "col_f7", "col_a1", "col_g6", "col_a2" }) 
         {
             Назва = "";
             Код = "";
             ФізичнаОсоба = new Довідники.ФізичніОсоби_Pointer();
             Коментар = "";
+            КодВСпеціальнійТаблиці = new Guid();
             
             //Табличні частини
             Контакти_TablePart = new Користувачі_Контакти_TablePart(this);
@@ -3910,6 +3912,7 @@ namespace StorageAndTrade_1_0.Довідники
                 Код = base.FieldValue["col_f7"]?.ToString() ?? "";
                 ФізичнаОсоба = new Довідники.ФізичніОсоби_Pointer(base.FieldValue["col_a1"]);
                 Коментар = base.FieldValue["col_g6"]?.ToString() ?? "";
+                КодВСпеціальнійТаблиці = (base.FieldValue["col_a2"] != DBNull.Value) ? Guid.Parse(base.FieldValue["col_a2"]?.ToString() ?? Guid.Empty.ToString()) : Guid.Empty;
                 
                 BaseClear();
                 return true;
@@ -3924,6 +3927,7 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_f7"] = Код;
             base.FieldValue["col_a1"] = ФізичнаОсоба.UnigueID.UGuid;
             base.FieldValue["col_g6"] = Коментар;
+            base.FieldValue["col_a2"] = КодВСпеціальнійТаблиці;
             
             BaseSave();
             
@@ -3937,6 +3941,7 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Код = Код;
             copy.ФізичнаОсоба = ФізичнаОсоба;
             copy.Коментар = Коментар;
+            copy.КодВСпеціальнійТаблиці = КодВСпеціальнійТаблиці;
             
             return copy;
         }
@@ -3957,6 +3962,7 @@ namespace StorageAndTrade_1_0.Довідники
         public string Код { get; set; }
         public Довідники.ФізичніОсоби_Pointer ФізичнаОсоба { get; set; }
         public string Коментар { get; set; }
+        public Guid КодВСпеціальнійТаблиці { get; set; }
         
         //Табличні частини
         public Користувачі_Контакти_TablePart Контакти_TablePart { get; set; }

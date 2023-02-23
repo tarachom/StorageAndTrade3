@@ -11,18 +11,8 @@
     <OtherParam />
   </Configuration>
   <Configuration Select="False">
-    <Key>58e747e9-e22d-4a52-8d95-7e7de0c2e6df</Key>
-    <Name>"Зберігання та Торгівля" для України - Демо</Name>
-    <Server>localhost</Server>
-    <Port>5432</Port>
-    <Login>postgres</Login>
-    <Password>1</Password>
-    <BaseName>storage_and_trade_demo</BaseName>
-    <OtherParam />
-  </Configuration>
-  <Configuration Select="False">
     <Key>6134635f-6421-4ed6-92c8-87d72b9c0da9</Key>
-    <Name>cloudclusters</Name>
+    <Name>Демо онлайн - cloudclusters.io</Name>
     <Server>postgresql-111143-0.cloudclusters.net</Server>
     <Port>19066</Port>
     <Login>admin</Login>
@@ -31,11 +21,21 @@
     <OtherParam />
   </Configuration>
   <Configuration Select="False">
-    <Key>c3a2ccd0-c5dc-4835-aa7d-a84f03c95448</Key>
-    <Name>database-1.cgmsfs5rvp68.us-east-1.rds.amazonaws.com</Name>
+    <Key>0475b27c-f0ba-4f71-875b-841e85745135</Key>
+    <Name>Демо онлайн - amazonaws.com</Name>
     <Server>database-1.cgmsfs5rvp68.us-east-1.rds.amazonaws.com</Server>
     <Port>5432</Port>
     <Login>postgres</Login>
+    <Password>12345678</Password>
+    <BaseName>storage_and_trade</BaseName>
+    <OtherParam />
+  </Configuration>
+  <Configuration Select="False">
+    <Key>bcbb3c02-ee42-4fd4-8fe4-a242dcdd6f94</Key>
+    <Name>Демо онлайн - cloudclusters.io - 2</Name>
+    <Server>postgresql-112371-0.cloudclusters.net</Server>
+    <Port>12701</Port>
+    <Login>admin</Login>
     <Password>12345678</Password>
     <BaseName>storage_and_trade</BaseName>
     <OtherParam />
