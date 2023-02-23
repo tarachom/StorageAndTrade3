@@ -137,17 +137,24 @@ namespace StorageAndTrade
         void CalculationVirtualBalances()
         {
             int counter = 0;
+            int counter_up = 0;
 
             //Очищення устарівших сесій
             ClearOldSessions();
 
             while (!Program.CancellationTokenBackgroundTask!.IsCancellationRequested)
             {
-                //Обновлення сесії
-                UpdateSession();
+                //Раз на 3 сек
+                if (counter_up >= 3)
+                {
+                    //Обновлення сесії
+                    UpdateSession();
+
+                    counter_up = 0;
+                }
 
                 //Раз на 5 сек
-                if (counter > 5)
+                if (counter >= 5)
                 {
                     //Очищення устарівших сесій
                     ClearOldSessions();
@@ -158,6 +165,7 @@ namespace StorageAndTrade
                     {
                         //Виконання обчислень
                         Config.Kernel!.DataBase.SpetialTableRegAccumTrigerExecute(
+                            KernelSession,
                             VirtualTablesСalculation.Execute,
                             VirtualTablesСalculation.ExecuteFinalCalculation);
                     }
@@ -166,6 +174,7 @@ namespace StorageAndTrade
                 }
 
                 counter++;
+                counter_up++;
 
                 //Затримка на 1 сек
                 Thread.Sleep(1000);
