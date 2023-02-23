@@ -138,21 +138,25 @@ namespace StorageAndTrade
         {
             int counter = 0;
 
+            //Очищення устарівших сесій
+            ClearOldSessions();
+
             while (!Program.CancellationTokenBackgroundTask!.IsCancellationRequested)
             {
                 //Обновлення сесії
-                Config.Kernel!.DataBase.SpetialTableActiveUsersUpdateSession(KernelSession);
+                UpdateSession();
 
                 //Раз на 5 сек
                 if (counter > 5)
                 {
                     //Очищення устарівших сесій
-                    Config.Kernel!.DataBase.SpetialTableActiveUsersClearOldSessions();
+                    ClearOldSessions();
 
                     //Зупинка розрахунків використовується при масовому перепроведенні документів щоб
                     //провести всі документ, а тоді вже розраховувати регістри
                     if (!Системні.ЗупинитиФоновіЗадачі_Const)
                     {
+                        //Виконання обчислень
                         Config.Kernel!.DataBase.SpetialTableRegAccumTrigerExecute(
                             VirtualTablesСalculation.Execute,
                             VirtualTablesСalculation.ExecuteFinalCalculation);
@@ -166,6 +170,16 @@ namespace StorageAndTrade
                 //Затримка на 1 сек
                 Thread.Sleep(1000);
             }
+        }
+
+        void UpdateSession()
+        {
+            Config.Kernel!.DataBase.SpetialTableActiveUsersUpdateSession(KernelSession);
+        }
+
+        void ClearOldSessions()
+        {
+            Config.Kernel!.DataBase.SpetialTableActiveUsersClearOldSessions();
         }
 
         #endregion
