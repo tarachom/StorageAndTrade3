@@ -35,14 +35,27 @@ namespace StorageAndTrade
 {
     class PageHome : VBox
     {
-        public БлокДляСторінки_КурсиВалют БлокКурсиВалют = new БлокДляСторінки_КурсиВалют();
-        public БлокДляСторінки_АктивніКористувачі АктивніКористувачі = new БлокДляСторінки_АктивніКористувачі();
+        public БлокДляСторінки_КурсиВалют БлокКурсиВалют = new БлокДляСторінки_КурсиВалют() { WidthRequest = 500 };
+        public БлокДляСторінки_АктивніКористувачі АктивніКористувачі = new БлокДляСторінки_АктивніКористувачі() { WidthRequest = 500 };
 
         public PageHome() : base()
         {
-            PackStart(БлокКурсиВалют, false, false, 0);
+            VBox vBox = new VBox();
 
-            PackStart(АктивніКористувачі, false, false, 0);
+            {
+                HBox hBox = new HBox();
+                hBox.PackStart(БлокКурсиВалют, false, false, 5);
+
+                vBox.PackStart(hBox, false, false, 5);
+            }
+
+            {
+                HBox hBox = new HBox();
+                hBox.PackStart(АктивніКористувачі, false, false, 5);
+                vBox.PackStart(hBox, false, false, 5);
+            }
+
+            PackStart(vBox, false, false, 5);
 
             ShowAll();
         }

@@ -41,9 +41,11 @@ namespace StorageAndTrade
 
         public БлокДляСторінки_КурсиВалют() : base()
         {
-            HBox hBoxDownloadCurs = new HBox();
+            HBox hBoxCaption = new HBox();
+            hBoxCaption.PackStart(new Label("<b>Курси валют НБУ</b>") { UseMarkup = true }, false, false, 5);
+            PackStart(hBoxCaption, false, false, 5);
 
-            hBoxDownloadCurs.PackStart(new Label("Курси валют НБУ"), false, false, 5);
+            HBox hBoxDownloadCurs = new HBox();
             Button bDownloadCurs = new Button("Оновити");
             bDownloadCurs.Clicked += OnDownloadCurs;
 
@@ -70,9 +72,9 @@ namespace StorageAndTrade
                     Константи.ЗавантаженняДанихІзСайтів.АвтоматичноЗавантажуватиКурсиВалютПриЗапуску_Const = !autoDownloadCursOnStart.Active;
                 };
 
+                hBoxSwitch.PackStart(new Label("Авто"), false, false, 10);
                 hBoxSwitch.PackStart(autoDownloadCursOnStart, false, false, 0);
-                hBoxSwitch.PackStart(new Label("Автоматично обновляти при запуску"), false, false, 10);
-
+                
                 hBoxDownloadCurs.PackEnd(vBoxSwitch, false, false, 10);
             }
 

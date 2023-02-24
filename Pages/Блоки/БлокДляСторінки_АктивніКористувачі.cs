@@ -23,7 +23,7 @@ limitations under the License.
 
 /*
 
-Блоку курсів валют
+Список активних користувачів
 
 */
 
@@ -43,7 +43,8 @@ namespace StorageAndTrade
             UserUID,
             UserName,
             DateLogin,
-            DateUp
+            DateUp,
+            Master
         }
 
         ListStore Store = new ListStore(
@@ -51,13 +52,18 @@ namespace StorageAndTrade
             typeof(string), //UserUID
             typeof(string), //UserName
             typeof(string), //DateLogin
-            typeof(string)  //DateUp
+            typeof(string), //DateUp
+            typeof(bool)  //Master
         );
 
         TreeView TreeViewGrid;
 
         public БлокДляСторінки_АктивніКористувачі() : base()
         {
+            HBox hBoxCaption = new HBox();
+            hBoxCaption.PackStart(new Label("<b>Сесії користувачів</b>") { UseMarkup = true }, false, false, 5);
+            PackStart(hBoxCaption, false, false, 5);
+
             ScrolledWindow scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In, HeightRequest = 200 };
             scrollTree.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
 
@@ -69,7 +75,7 @@ namespace StorageAndTrade
 
             scrollTree.Add(TreeViewGrid);
 
-            PackStart(scrollTree, true, false, 0);
+            PackStart(scrollTree, false, false, 5);
 
             ShowAll();
         }
@@ -114,7 +120,8 @@ namespace StorageAndTrade
                     record["usersuid"].ToString(),
                     record["username"].ToString(),
                     record["datelogin"].ToString(),
-                    record["dateupdate"].ToString()
+                    record["dateupdate"].ToString(),
+                    record["master"]
                 );
             }
         }
@@ -128,6 +135,10 @@ namespace StorageAndTrade
             TreeViewGrid.AppendColumn(new TreeViewColumn("Користувач", new CellRendererText(), "text", (int)Columns.UserName));
             TreeViewGrid.AppendColumn(new TreeViewColumn("Авторизація", new CellRendererText(), "text", (int)Columns.DateLogin));
             TreeViewGrid.AppendColumn(new TreeViewColumn("Підтвердження", new CellRendererText(), "text", (int)Columns.DateUp));
+            TreeViewGrid.AppendColumn(new TreeViewColumn("Головний", new CellRendererToggle(), "active", (int)Columns.Master));
+
+            //Пустишка
+            TreeViewGrid.AppendColumn(new TreeViewColumn());
         }
 
         #endregion
