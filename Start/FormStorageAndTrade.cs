@@ -33,6 +33,7 @@ namespace StorageAndTrade
     class FormStorageAndTrade : Window
     {
         public ConfigurationParam? OpenConfigurationParam { get; set; }
+        CancellationTokenSource? CancellationTokenBackgroundTask;
 
         Guid KernelUser { get; set; } = Guid.Empty;
         Guid KernelSession { get; set; } = Guid.Empty;
@@ -88,8 +89,13 @@ namespace StorageAndTrade
             CreateNotebookPage("Стартова", () =>
             {
                 PageHome page = new PageHome();
-                page.StartDesktop();
-                page.StartAutoWork();
+
+                //Блок курсів валют
+                page.БлокКурсиВалют.StartDesktop();
+                page.БлокКурсиВалют.StartAutoWork();
+
+                //Активні користувачі
+                page.АктивніКористувачі.AutoRefreshRun();
 
                 return page;
             });
@@ -111,7 +117,7 @@ namespace StorageAndTrade
 
         public void StartBackgroundTask()
         {
-            Program.CancellationTokenBackgroundTask = new CancellationTokenSource();
+            Program.ListCancellationTokenSource.Add(CancellationTokenBackgroundTask = new CancellationTokenSource());
 
             Thread ThreadBackgroundTask = new Thread(new ThreadStart(CalculationVirtualBalances));
             ThreadBackgroundTask.Start();
@@ -142,7 +148,7 @@ namespace StorageAndTrade
             //Очищення устарівших сесій
             ClearOldSessions();
 
-            while (!Program.CancellationTokenBackgroundTask!.IsCancellationRequested)
+            while (!CancellationTokenBackgroundTask!.IsCancellationRequested)
             {
                 //Раз на 3 сек
                 if (counter_up >= 3)

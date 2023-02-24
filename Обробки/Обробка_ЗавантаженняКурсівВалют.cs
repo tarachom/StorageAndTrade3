@@ -97,7 +97,7 @@ namespace StorageAndTrade
         {
             ClearMessage();
 
-            CancellationTokenThread = new CancellationTokenSource();
+            Program.ListCancellationTokenSource.Add(CancellationTokenThread = new CancellationTokenSource());
             Thread thread = new Thread(new ThreadStart(DownloadExCurr));
             thread.Start();
         }
@@ -105,8 +105,6 @@ namespace StorageAndTrade
         void DownloadExCurr()
         {
             ButtonSensitive(false);
-
-
 
             bool isOK = false;
 

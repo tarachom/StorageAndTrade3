@@ -38,6 +38,8 @@ namespace StorageAndTrade
 {
     class PageService : VBox
     {
+        CancellationTokenSource? CancellationTokenPageService;
+
         Button bSpendTheDocument;
         Button bStop;
         ScrolledWindow scrollMessage;
@@ -142,7 +144,8 @@ namespace StorageAndTrade
         {
             ClearMessage();
 
-            Program.CancellationTokenPageService = new CancellationTokenSource();
+            Program.ListCancellationTokenSource.Add(CancellationTokenPageService = new CancellationTokenSource());
+
             Thread thread = new Thread(new ThreadStart(SpendTheDocument));
             thread.Start();
         }
@@ -162,7 +165,7 @@ namespace StorageAndTrade
 
             while (journalSelect.MoveNext())
             {
-                if (Program.CancellationTokenPageService!.IsCancellationRequested)
+                if (CancellationTokenPageService!.IsCancellationRequested)
                     break;
 
                 if (journalSelect.Current.Spend)
@@ -228,7 +231,7 @@ namespace StorageAndTrade
 
         void OnStopClick(object? sender, EventArgs args)
         {
-            Program.CancellationTokenPageService?.Cancel();
+            CancellationTokenPageService?.Cancel();
         }
     }
 }

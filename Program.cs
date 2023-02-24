@@ -29,8 +29,11 @@ namespace StorageAndTrade
 {
     class Program
     {
-        public static CancellationTokenSource? CancellationTokenBackgroundTask { get; set; }
-        public static CancellationTokenSource? CancellationTokenPageService { get; set; }
+        /// <summary>
+        /// Список токенів для управління потоками
+        /// При завершенні програми, всі потоки повинні також завершити свою роботу
+        /// </summary>
+        public static List<CancellationTokenSource> ListCancellationTokenSource = new List<CancellationTokenSource>();
 
         /// <summary>
         /// Авторизований користувач
@@ -49,13 +52,14 @@ namespace StorageAndTrade
         /// </summary>
         public static void Quit()
         {
-            //Завершення фонового потоку
-            if (CancellationTokenBackgroundTask != null)
-                CancellationTokenBackgroundTask.Cancel();
-
-            //Завершення потоку з розділу Сервіс
-            if (CancellationTokenPageService != null)
-                CancellationTokenPageService.Cancel();
+            foreach (CancellationTokenSource cancellationTokenItem in ListCancellationTokenSource)
+            {
+                try
+                {
+                    cancellationTokenItem.Cancel();
+                }
+                catch { }
+            }
 
             Application.Quit();
         }
