@@ -109,21 +109,27 @@ namespace StorageAndTrade
 
         void LoadRecords()
         {
-            Store.Clear();
+            Gtk.Application.Invoke
+            (
+                delegate
+                {
+                    Store.Clear();
 
-            List<Dictionary<string, object>> listRow = Config.Kernel!.DataBase.SpetialTableActiveUsersAllSelect();
+                    List<Dictionary<string, object>> listRow = Config.Kernel!.DataBase.SpetialTableActiveUsersAllSelect();
 
-            foreach (Dictionary<string, object> record in listRow)
-            {
-                Store.AppendValues(
-                    record["uid"].ToString(),
-                    record["usersuid"].ToString(),
-                    record["username"].ToString(),
-                    record["datelogin"].ToString(),
-                    record["dateupdate"].ToString(),
-                    record["master"]
-                );
-            }
+                    foreach (Dictionary<string, object> record in listRow)
+                    {
+                        Store.AppendValues(
+                            record["uid"].ToString(),
+                            record["usersuid"].ToString(),
+                            record["username"].ToString(),
+                            record["datelogin"].ToString(),
+                            record["dateupdate"].ToString(),
+                            record["master"]
+                        );
+                    }
+                }
+            );
         }
 
         #region TreeView
