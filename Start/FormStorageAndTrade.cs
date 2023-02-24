@@ -117,7 +117,7 @@ namespace StorageAndTrade
 
         public void StartBackgroundTask()
         {
-            Program.ListCancellationTokenSource.Add(CancellationTokenBackgroundTask = new CancellationTokenSource());
+            Program.ListCancellationToken.Add(CancellationTokenBackgroundTask = new CancellationTokenSource());
 
             Thread ThreadBackgroundTask = new Thread(new ThreadStart(CalculationVirtualBalances));
             ThreadBackgroundTask.Start();

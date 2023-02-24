@@ -33,7 +33,7 @@ namespace StorageAndTrade
         /// Список токенів для управління потоками
         /// При завершенні програми, всі потоки повинні також завершити свою роботу
         /// </summary>
-        public static List<CancellationTokenSource> ListCancellationTokenSource = new List<CancellationTokenSource>();
+        public static List<CancellationTokenSource> ListCancellationToken = new List<CancellationTokenSource>();
 
         /// <summary>
         /// Авторизований користувач
@@ -52,7 +52,7 @@ namespace StorageAndTrade
         /// </summary>
         public static void Quit()
         {
-            foreach (CancellationTokenSource cancellationTokenItem in ListCancellationTokenSource)
+            foreach (CancellationTokenSource cancellationTokenItem in ListCancellationToken)
             {
                 try
                 {

@@ -144,7 +144,7 @@ namespace StorageAndTrade
         {
             ClearMessage();
 
-            Program.ListCancellationTokenSource.Add(CancellationTokenPageService = new CancellationTokenSource());
+            Program.ListCancellationToken.Add(CancellationTokenPageService = new CancellationTokenSource());
 
             Thread thread = new Thread(new ThreadStart(SpendTheDocument));
             thread.Start();

@@ -97,7 +97,7 @@ namespace StorageAndTrade
         {
             ClearMessage();
 
-            Program.ListCancellationTokenSource.Add(CancellationTokenThread = new CancellationTokenSource());
+            Program.ListCancellationToken.Add(CancellationTokenThread = new CancellationTokenSource());
             Thread thread = new Thread(new ThreadStart(DownloadExCurr));
             thread.Start();
         }
