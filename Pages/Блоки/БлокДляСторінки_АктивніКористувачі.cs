@@ -94,9 +94,10 @@ namespace StorageAndTrade
 
             while (!CancellationTokenSourceItem!.IsCancellationRequested)
             {
-                if (counter == 0 || counter > 6)
+                if (counter == 0 || counter > 5)
                 {
                     LoadRecords();
+                    
                     counter = 1;
                 }
 
@@ -115,7 +116,7 @@ namespace StorageAndTrade
                 {
                     Store.Clear();
 
-                    List<Dictionary<string, object>> listRow = Config.Kernel!.DataBase.SpetialTableActiveUsersAllSelect();
+                    List<Dictionary<string, object>> listRow = Config.Kernel!.DataBase.SpetialTableActiveUsersSelect();
 
                     foreach (Dictionary<string, object> record in listRow)
                     {

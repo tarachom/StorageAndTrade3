@@ -219,11 +219,14 @@ namespace StorageAndTrade
                     Program.GeneralForm.OpenConfigurationParam = ConfigurationParamCollection.GetConfigurationParam(selectedRows[0].Name);
                     Program.GeneralForm.Show();
 
-                    //Присвоєння значень
-                    Program.GeneralForm.SetValue();
+                    //Присвоєння користувача
+                    Program.GeneralForm.SetCurrentUser();
 
                     //Запуск фонових задач
                     Program.GeneralForm.StartBackgroundTask();
+
+                    //Відкрити перші сторінки
+                    Program.GeneralForm.OpenFirstPages();
 
                     //Сховати форму вибору
                     this.Hide();

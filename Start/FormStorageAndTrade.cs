@@ -65,7 +65,7 @@ namespace StorageAndTrade
             ShowAll();
         }
 
-        public void SetValue()
+        public void SetCurrentUser()
         {
             KernelUser = Config.Kernel!.User;
             KernelSession = Config.Kernel!.Session;
@@ -78,14 +78,17 @@ namespace StorageAndTrade
                 НовийКористувач.New();
                 НовийКористувач.Код = (++НумераціяДовідників.Користувачі_Const).ToString("D6");
                 НовийКористувач.КодВСпеціальнійТаблиці = Config.Kernel!.User;
-                НовийКористувач.Назва = Config.Kernel!.DataBase.SpetialTableUsersGetName(KernelUser);
+                НовийКористувач.Назва = Config.Kernel!.DataBase.SpetialTableUsersGetFullName(KernelUser);
                 НовийКористувач.Save();
 
                 Program.Користувач = НовийКористувач.GetDirectoryPointer();
             }
             else
                 Program.Користувач = ЗнайденийКористувач;
+        }
 
+        public void OpenFirstPages()
+        {
             CreateNotebookPage("Стартова", () =>
             {
                 PageHome page = new PageHome();
@@ -143,27 +146,17 @@ namespace StorageAndTrade
         void CalculationVirtualBalances()
         {
             int counter = 0;
-            int counter_up = 0;
 
-            //Очищення устарівших сесій
-            ClearOldSessions();
+            //Обновлення сесії
+            UpdateSession();
 
             while (!CancellationTokenBackgroundTask!.IsCancellationRequested)
             {
-                //Раз на 3 сек
-                if (counter_up >= 3)
-                {
-                    //Обновлення сесії
-                    UpdateSession();
-
-                    counter_up = 0;
-                }
-
                 //Раз на 5 сек
                 if (counter >= 5)
                 {
-                    //Очищення устарівших сесій
-                    ClearOldSessions();
+                    //Обновлення сесії
+                    UpdateSession();
 
                     //Зупинка розрахунків використовується при масовому перепроведенні документів щоб
                     //провести всі документ, а тоді вже розраховувати регістри
@@ -180,7 +173,6 @@ namespace StorageAndTrade
                 }
 
                 counter++;
-                counter_up++;
 
                 //Затримка на 1 сек
                 Thread.Sleep(1000);
@@ -189,12 +181,10 @@ namespace StorageAndTrade
 
         void UpdateSession()
         {
-            Config.Kernel!.DataBase.SpetialTableActiveUsersUpdateSession(KernelSession);
-        }
-
-        void ClearOldSessions()
-        {
-            Config.Kernel!.DataBase.SpetialTableActiveUsersClearOldSessions();
+            if (!Config.Kernel!.DataBase.SpetialTableActiveUsersUpdateSession(KernelSession))
+            {
+                // Log Off
+            }
         }
 
         #endregion

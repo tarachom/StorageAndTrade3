@@ -76,7 +76,7 @@ namespace StorageAndTrade
         {
             if (Config.Kernel != null)
             {
-                Dictionary<string, string> allUsers = Config.Kernel.DataBase.SpetialTableUsersAllSelect();
+                Dictionary<string, string> allUsers = Config.Kernel.DataBase.SpetialTableUsersShortSelect();
 
                 foreach (KeyValuePair<string, string> user in allUsers)
                     comboBoxAllUsers.Append(user.Key, user.Value);
