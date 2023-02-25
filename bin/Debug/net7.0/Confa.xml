@@ -5,7 +5,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>23.02.2023 15:23:45</DateTimeSave>
+  <DateTimeSave>25.02.2023 17:51:47</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -6200,10 +6200,28 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               </Pointer>
             </Field>
             <Field>
+              <Name>Автор</Name>
+              <Caption>Автор</Caption>
+              <Size>0</Size>
+              <SortNum>98</SortNum>
+              <SortField>False</SortField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Користувачі</Pointer>
+              <Join>
+                <table>Довідники.Користувачі_Const.TABLE</table>
+                <field>Автор</field>
+                <alias>join_tab_5</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_5</table>
+                <field>Довідники.Користувачі_Const.Назва</field>
+              </FieldAndAlias>
+            </Field>
+            <Field>
               <Name>Коментар</Name>
               <Caption>Коментар</Caption>
               <Size>0</Size>
-              <SortNum>9</SortNum>
+              <SortNum>99</SortNum>
               <SortField>False</SortField>
               <Type>string</Type>
               <Pointer>
@@ -6802,6 +6820,24 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               </Pointer>
             </Field>
             <Field>
+              <Name>Автор</Name>
+              <Caption>Автор</Caption>
+              <Size>0</Size>
+              <SortNum>98</SortNum>
+              <SortField>False</SortField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Користувачі</Pointer>
+              <Join>
+                <table>Довідники.Користувачі_Const.TABLE</table>
+                <field>Автор</field>
+                <alias>join_tab_6</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_6</table>
+                <field>Довідники.Користувачі_Const.Назва</field>
+              </FieldAndAlias>
+            </Field>
+            <Field>
               <Name>Коментар</Name>
               <Caption>Коментар</Caption>
               <Size>0</Size>
@@ -7353,6 +7389,24 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <Type>numeric</Type>
               <Pointer>
               </Pointer>
+            </Field>
+            <Field>
+              <Name>Автор</Name>
+              <Caption>Автор</Caption>
+              <Size>0</Size>
+              <SortNum>98</SortNum>
+              <SortField>False</SortField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Користувачі</Pointer>
+              <Join>
+                <table>Довідники.Користувачі_Const.TABLE</table>
+                <field>Автор</field>
+                <alias>join_tab_6</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_6</table>
+                <field>Довідники.Користувачі_Const.Назва</field>
+              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -7949,6 +8003,24 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               </Pointer>
             </Field>
             <Field>
+              <Name>Автор</Name>
+              <Caption>Автор</Caption>
+              <Size>0</Size>
+              <SortNum>98</SortNum>
+              <SortField>False</SortField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Користувачі</Pointer>
+              <Join>
+                <table>Довідники.Користувачі_Const.TABLE</table>
+                <field>Автор</field>
+                <alias>join_tab_6</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_6</table>
+                <field>Довідники.Користувачі_Const.Назва</field>
+              </FieldAndAlias>
+            </Field>
+            <Field>
               <Name>Коментар</Name>
               <Caption>Коментар</Caption>
               <Size>0</Size>
@@ -8211,6 +8283,24 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <FieldAndAlias>
                 <table>join_tab_3</table>
                 <field>Довідники.ВидиЦін_Const.Назва</field>
+              </FieldAndAlias>
+            </Field>
+            <Field>
+              <Name>Автор</Name>
+              <Caption>Автор</Caption>
+              <Size>0</Size>
+              <SortNum>98</SortNum>
+              <SortField>False</SortField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Користувачі</Pointer>
+              <Join>
+                <table>Довідники.Користувачі_Const.TABLE</table>
+                <field>Автор</field>
+                <alias>join_tab_4</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_4</table>
+                <field>Довідники.Користувачі_Const.Назва</field>
               </FieldAndAlias>
             </Field>
             <Field>
@@ -8594,6 +8684,24 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <SortField>False</SortField>
               <Type>enum</Type>
               <Pointer>Перелічення.ГосподарськіОперації</Pointer>
+            </Field>
+            <Field>
+              <Name>Автор</Name>
+              <Caption>Автор</Caption>
+              <Size>0</Size>
+              <SortNum>98</SortNum>
+              <SortField>False</SortField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Користувачі</Pointer>
+              <Join>
+                <table>Довідники.Користувачі_Const.TABLE</table>
+                <field>Автор</field>
+                <alias>join_tab_5</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_5</table>
+                <field>Довідники.Користувачі_Const.Назва</field>
+              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -9008,6 +9116,24 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <Pointer>Перелічення.ГосподарськіОперації</Pointer>
             </Field>
             <Field>
+              <Name>Автор</Name>
+              <Caption>Автор</Caption>
+              <Size>0</Size>
+              <SortNum>98</SortNum>
+              <SortField>False</SortField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Користувачі</Pointer>
+              <Join>
+                <table>Довідники.Користувачі_Const.TABLE</table>
+                <field>Автор</field>
+                <alias>join_tab_5</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_5</table>
+                <field>Довідники.Користувачі_Const.Назва</field>
+              </FieldAndAlias>
+            </Field>
+            <Field>
               <Name>Коментар</Name>
               <Caption>Коментар</Caption>
               <Size>0</Size>
@@ -9382,6 +9508,24 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <FieldAndAlias>
                 <table>join_tab_3</table>
                 <field>Довідники.Склади_Const.Назва</field>
+              </FieldAndAlias>
+            </Field>
+            <Field>
+              <Name>Автор</Name>
+              <Caption>Автор</Caption>
+              <Size>0</Size>
+              <SortNum>98</SortNum>
+              <SortField>False</SortField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Користувачі</Pointer>
+              <Join>
+                <table>Довідники.Користувачі_Const.TABLE</table>
+                <field>Автор</field>
+                <alias>join_tab_4</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_4</table>
+                <field>Довідники.Користувачі_Const.Назва</field>
               </FieldAndAlias>
             </Field>
             <Field>
@@ -9861,6 +10005,24 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               </Pointer>
             </Field>
             <Field>
+              <Name>Автор</Name>
+              <Caption>Автор</Caption>
+              <Size>0</Size>
+              <SortNum>98</SortNum>
+              <SortField>False</SortField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Користувачі</Pointer>
+              <Join>
+                <table>Довідники.Користувачі_Const.TABLE</table>
+                <field>Автор</field>
+                <alias>join_tab_6</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_6</table>
+                <field>Довідники.Користувачі_Const.Назва</field>
+              </FieldAndAlias>
+            </Field>
+            <Field>
               <Name>Коментар</Name>
               <Caption>Коментар</Caption>
               <Size>0</Size>
@@ -10309,6 +10471,24 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               </Pointer>
             </Field>
             <Field>
+              <Name>Автор</Name>
+              <Caption>Автор</Caption>
+              <Size>0</Size>
+              <SortNum>98</SortNum>
+              <SortField>False</SortField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Користувачі</Pointer>
+              <Join>
+                <table>Довідники.Користувачі_Const.TABLE</table>
+                <field>Автор</field>
+                <alias>join_tab_6</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_6</table>
+                <field>Довідники.Користувачі_Const.Назва</field>
+              </FieldAndAlias>
+            </Field>
+            <Field>
               <Name>Коментар</Name>
               <Caption>Коментар</Caption>
               <Size>0</Size>
@@ -10677,6 +10857,24 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <Type>numeric</Type>
               <Pointer>
               </Pointer>
+            </Field>
+            <Field>
+              <Name>Автор</Name>
+              <Caption>Автор</Caption>
+              <Size>0</Size>
+              <SortNum>98</SortNum>
+              <SortField>False</SortField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Користувачі</Pointer>
+              <Join>
+                <table>Довідники.Користувачі_Const.TABLE</table>
+                <field>Автор</field>
+                <alias>join_tab_5</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_5</table>
+                <field>Довідники.Користувачі_Const.Назва</field>
+              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -11141,6 +11339,24 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               </FieldAndAlias>
             </Field>
             <Field>
+              <Name>Автор</Name>
+              <Caption>Автор</Caption>
+              <Size>0</Size>
+              <SortNum>98</SortNum>
+              <SortField>False</SortField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Користувачі</Pointer>
+              <Join>
+                <table>Довідники.Користувачі_Const.TABLE</table>
+                <field>Автор</field>
+                <alias>join_tab_5</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_5</table>
+                <field>Довідники.Користувачі_Const.Назва</field>
+              </FieldAndAlias>
+            </Field>
+            <Field>
               <Name>Коментар</Name>
               <Caption>Коментар</Caption>
               <Size>0</Size>
@@ -11386,6 +11602,24 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <FieldAndAlias>
                 <table>join_tab_2</table>
                 <field>Довідники.Склади_Const.Назва</field>
+              </FieldAndAlias>
+            </Field>
+            <Field>
+              <Name>Автор</Name>
+              <Caption>Автор</Caption>
+              <Size>0</Size>
+              <SortNum>98</SortNum>
+              <SortField>False</SortField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Користувачі</Pointer>
+              <Join>
+                <table>Довідники.Користувачі_Const.TABLE</table>
+                <field>Автор</field>
+                <alias>join_tab_3</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_3</table>
+                <field>Довідники.Користувачі_Const.Назва</field>
               </FieldAndAlias>
             </Field>
             <Field>
@@ -11635,6 +11869,24 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               </FieldAndAlias>
             </Field>
             <Field>
+              <Name>Автор</Name>
+              <Caption>Автор</Caption>
+              <Size>0</Size>
+              <SortNum>98</SortNum>
+              <SortField>False</SortField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Користувачі</Pointer>
+              <Join>
+                <table>Довідники.Користувачі_Const.TABLE</table>
+                <field>Автор</field>
+                <alias>join_tab_3</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_3</table>
+                <field>Довідники.Користувачі_Const.Назва</field>
+              </FieldAndAlias>
+            </Field>
+            <Field>
               <Name>Коментар</Name>
               <Caption>Коментар</Caption>
               <Size>0</Size>
@@ -11857,6 +12109,24 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <FieldAndAlias>
                 <table>join_tab_1</table>
                 <field>Довідники.Склади_Const.Назва</field>
+              </FieldAndAlias>
+            </Field>
+            <Field>
+              <Name>Автор</Name>
+              <Caption>Автор</Caption>
+              <Size>0</Size>
+              <SortNum>98</SortNum>
+              <SortField>False</SortField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Користувачі</Pointer>
+              <Join>
+                <table>Довідники.Користувачі_Const.TABLE</table>
+                <field>Автор</field>
+                <alias>join_tab_2</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_2</table>
+                <field>Довідники.Користувачі_Const.Назва</field>
               </FieldAndAlias>
             </Field>
             <Field>
@@ -12166,6 +12436,24 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <Type>numeric</Type>
               <Pointer>
               </Pointer>
+            </Field>
+            <Field>
+              <Name>Автор</Name>
+              <Caption>Автор</Caption>
+              <Size>0</Size>
+              <SortNum>98</SortNum>
+              <SortField>False</SortField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Користувачі</Pointer>
+              <Join>
+                <table>Довідники.Користувачі_Const.TABLE</table>
+                <field>Автор</field>
+                <alias>join_tab_3</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_3</table>
+                <field>Довідники.Користувачі_Const.Назва</field>
+              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -12501,6 +12789,24 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <Type>numeric</Type>
               <Pointer>
               </Pointer>
+            </Field>
+            <Field>
+              <Name>Автор</Name>
+              <Caption>Автор</Caption>
+              <Size>0</Size>
+              <SortNum>98</SortNum>
+              <SortField>False</SortField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Користувачі</Pointer>
+              <Join>
+                <table>Довідники.Користувачі_Const.TABLE</table>
+                <field>Автор</field>
+                <alias>join_tab_4</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_4</table>
+                <field>Довідники.Користувачі_Const.Назва</field>
+              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -12961,6 +13267,24 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               </Pointer>
             </Field>
             <Field>
+              <Name>Автор</Name>
+              <Caption>Автор</Caption>
+              <Size>0</Size>
+              <SortNum>98</SortNum>
+              <SortField>False</SortField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Користувачі</Pointer>
+              <Join>
+                <table>Довідники.Користувачі_Const.TABLE</table>
+                <field>Автор</field>
+                <alias>join_tab_6</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_6</table>
+                <field>Довідники.Користувачі_Const.Назва</field>
+              </FieldAndAlias>
+            </Field>
+            <Field>
               <Name>Коментар</Name>
               <Caption>Коментар</Caption>
               <Size>0</Size>
@@ -13235,6 +13559,24 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               </FieldAndAlias>
             </Field>
             <Field>
+              <Name>Автор</Name>
+              <Caption>Автор</Caption>
+              <Size>0</Size>
+              <SortNum>98</SortNum>
+              <SortField>False</SortField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Користувачі</Pointer>
+              <Join>
+                <table>Довідники.Користувачі_Const.TABLE</table>
+                <field>Автор</field>
+                <alias>join_tab_3</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_3</table>
+                <field>Довідники.Користувачі_Const.Назва</field>
+              </FieldAndAlias>
+            </Field>
+            <Field>
               <Name>Коментар</Name>
               <Caption>Коментар</Caption>
               <Size>0</Size>
@@ -13505,6 +13847,24 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <FieldAndAlias>
                 <table>join_tab_2</table>
                 <field>Довідники.Організації_Const.Назва</field>
+              </FieldAndAlias>
+            </Field>
+            <Field>
+              <Name>Автор</Name>
+              <Caption>Автор</Caption>
+              <Size>0</Size>
+              <SortNum>98</SortNum>
+              <SortField>False</SortField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Користувачі</Pointer>
+              <Join>
+                <table>Довідники.Користувачі_Const.TABLE</table>
+                <field>Автор</field>
+                <alias>join_tab_3</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_3</table>
+                <field>Довідники.Користувачі_Const.Назва</field>
               </FieldAndAlias>
             </Field>
             <Field>
@@ -13782,6 +14142,24 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               </FieldAndAlias>
             </Field>
             <Field>
+              <Name>Автор</Name>
+              <Caption>Автор</Caption>
+              <Size>0</Size>
+              <SortNum>98</SortNum>
+              <SortField>False</SortField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Користувачі</Pointer>
+              <Join>
+                <table>Довідники.Користувачі_Const.TABLE</table>
+                <field>Автор</field>
+                <alias>join_tab_3</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_3</table>
+                <field>Довідники.Користувачі_Const.Назва</field>
+              </FieldAndAlias>
+            </Field>
+            <Field>
               <Name>Коментар</Name>
               <Caption>Коментар</Caption>
               <Size>0</Size>
@@ -14014,6 +14392,24 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <FieldAndAlias>
                 <table>join_tab_2</table>
                 <field>Довідники.Склади_Const.Назва</field>
+              </FieldAndAlias>
+            </Field>
+            <Field>
+              <Name>Автор</Name>
+              <Caption>Автор</Caption>
+              <Size>0</Size>
+              <SortNum>98</SortNum>
+              <SortField>False</SortField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Користувачі</Pointer>
+              <Join>
+                <table>Довідники.Користувачі_Const.TABLE</table>
+                <field>Автор</field>
+                <alias>join_tab_3</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_3</table>
+                <field>Довідники.Користувачі_Const.Назва</field>
               </FieldAndAlias>
             </Field>
             <Field>

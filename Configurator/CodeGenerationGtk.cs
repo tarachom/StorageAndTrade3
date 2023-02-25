@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 23.02.2023 15:23:45
+ * Дата конфігурації: 25.02.2023 17:51:47
  *
  */
  
@@ -5597,12 +5597,13 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         string Склад = "";
         string Валюта = "";
         string СумаДокументу = "";
+        string Автор = "";
         string Коментар = "";
 
         Array ToArray()
         {
             return new object[] { new Gdk.Pixbuf(Image), ID, Spend /*Проведений документ*/
-            /* */ , Назва, НомерДок, ДатаДок, Організація, Контрагент, Склад, Валюта, СумаДокументу, Коментар };
+            /* */ , Назва, НомерДок, ДатаДок, Організація, Контрагент, Склад, Валюта, СумаДокументу, Автор, Коментар };
         }
 
         public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(bool) /* Spend Проведений документ*/
@@ -5614,6 +5615,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             , typeof(string) /* Склад */
             , typeof(string) /* Валюта */
             , typeof(string) /* СумаДокументу */
+            , typeof(string) /* Автор */
             , typeof(string) /* Коментар */
             );
 
@@ -5631,7 +5633,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Склад*/
             treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 9)); /*Валюта*/
             treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 10)); /*СумаДокументу*/
-            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 11)); /*Коментар*/
+            treeView.AppendColumn(new TreeViewColumn("Автор", new CellRendererText() { Xpad = 4 }, "text", 11)); /*Автор*/
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 12)); /*Коментар*/
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
@@ -5706,6 +5709,14 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   ЗамовленняПостачальнику_Select.QuerySelect.FieldAndAlias.Add(
                     new NameValue<string>("join_tab_4." + Довідники.Валюти_Const.Назва, "join_tab_4_field_1"));
                   
+                /* Join Table */
+                ЗамовленняПостачальнику_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Користувачі_Const.TABLE, Документи.ЗамовленняПостачальнику_Const.Автор, ЗамовленняПостачальнику_Select.QuerySelect.Table, "join_tab_5"));
+                
+                  /* Field */
+                  ЗамовленняПостачальнику_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_5." + Довідники.Користувачі_Const.Назва, "join_tab_5_field_1"));
+                  
 
             /* SELECT */
             ЗамовленняПостачальнику_Select.Select();
@@ -5723,6 +5734,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                         Контрагент = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
                         Склад = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
                         Валюта = cur.Fields?["join_tab_4_field_1"]?.ToString() ?? "", /**/
+                        Автор = cur.Fields?["join_tab_5_field_1"]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[ЗамовленняПостачальнику_Const.Назва]?.ToString() ?? "", /**/
                         НомерДок = cur.Fields?[ЗамовленняПостачальнику_Const.НомерДок]?.ToString() ?? "", /**/
                         ДатаДок = cur.Fields?[ЗамовленняПостачальнику_Const.ДатаДок]?.ToString() ?? "", /**/
@@ -5766,12 +5778,13 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         string Валюта = "";
         string Каса = "";
         string СумаДокументу = "";
+        string Автор = "";
         string Коментар = "";
 
         Array ToArray()
         {
             return new object[] { new Gdk.Pixbuf(Image), ID, Spend /*Проведений документ*/
-            /* */ , Назва, НомерДок, ДатаДок, Організація, Склад, Контрагент, Валюта, Каса, СумаДокументу, Коментар };
+            /* */ , Назва, НомерДок, ДатаДок, Організація, Склад, Контрагент, Валюта, Каса, СумаДокументу, Автор, Коментар };
         }
 
         public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(bool) /* Spend Проведений документ*/
@@ -5784,6 +5797,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             , typeof(string) /* Валюта */
             , typeof(string) /* Каса */
             , typeof(string) /* СумаДокументу */
+            , typeof(string) /* Автор */
             , typeof(string) /* Коментар */
             );
 
@@ -5802,7 +5816,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 9)); /*Валюта*/
             treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText() { Xpad = 4 }, "text", 10)); /*Каса*/
             treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 11)); /*СумаДокументу*/
-            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 12)); /*Коментар*/
+            treeView.AppendColumn(new TreeViewColumn("Автор", new CellRendererText() { Xpad = 4 }, "text", 12)); /*Автор*/
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 13)); /*Коментар*/
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
@@ -5885,6 +5900,14 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   ПоступленняТоварівТаПослуг_Select.QuerySelect.FieldAndAlias.Add(
                     new NameValue<string>("join_tab_5." + Довідники.Каси_Const.Назва, "join_tab_5_field_1"));
                   
+                /* Join Table */
+                ПоступленняТоварівТаПослуг_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Користувачі_Const.TABLE, Документи.ПоступленняТоварівТаПослуг_Const.Автор, ПоступленняТоварівТаПослуг_Select.QuerySelect.Table, "join_tab_6"));
+                
+                  /* Field */
+                  ПоступленняТоварівТаПослуг_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_6." + Довідники.Користувачі_Const.Назва, "join_tab_6_field_1"));
+                  
 
             /* SELECT */
             ПоступленняТоварівТаПослуг_Select.Select();
@@ -5903,6 +5926,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                         Контрагент = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
                         Валюта = cur.Fields?["join_tab_4_field_1"]?.ToString() ?? "", /**/
                         Каса = cur.Fields?["join_tab_5_field_1"]?.ToString() ?? "", /**/
+                        Автор = cur.Fields?["join_tab_6_field_1"]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[ПоступленняТоварівТаПослуг_Const.Назва]?.ToString() ?? "", /**/
                         НомерДок = cur.Fields?[ПоступленняТоварівТаПослуг_Const.НомерДок]?.ToString() ?? "", /**/
                         ДатаДок = cur.Fields?[ПоступленняТоварівТаПослуг_Const.ДатаДок]?.ToString() ?? "", /**/
@@ -5946,12 +5970,13 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         string Каса = "";
         string Склад = "";
         string СумаДокументу = "";
+        string Автор = "";
         string Коментар = "";
 
         Array ToArray()
         {
             return new object[] { new Gdk.Pixbuf(Image), ID, Spend /*Проведений документ*/
-            /* */ , Назва, НомерДок, ДатаДок, Організація, Контрагент, Валюта, Каса, Склад, СумаДокументу, Коментар };
+            /* */ , Назва, НомерДок, ДатаДок, Організація, Контрагент, Валюта, Каса, Склад, СумаДокументу, Автор, Коментар };
         }
 
         public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(bool) /* Spend Проведений документ*/
@@ -5964,6 +5989,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             , typeof(string) /* Каса */
             , typeof(string) /* Склад */
             , typeof(string) /* СумаДокументу */
+            , typeof(string) /* Автор */
             , typeof(string) /* Коментар */
             );
 
@@ -5982,7 +6008,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText() { Xpad = 4 }, "text", 9)); /*Каса*/
             treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 10)); /*Склад*/
             treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 11)); /*СумаДокументу*/
-            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 12)); /*Коментар*/
+            treeView.AppendColumn(new TreeViewColumn("Автор", new CellRendererText() { Xpad = 4 }, "text", 12)); /*Автор*/
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 13)); /*Коментар*/
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
@@ -6065,6 +6092,14 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   ЗамовленняКлієнта_Select.QuerySelect.FieldAndAlias.Add(
                     new NameValue<string>("join_tab_5." + Довідники.Склади_Const.Назва, "join_tab_5_field_1"));
                   
+                /* Join Table */
+                ЗамовленняКлієнта_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Користувачі_Const.TABLE, Документи.ЗамовленняКлієнта_Const.Автор, ЗамовленняКлієнта_Select.QuerySelect.Table, "join_tab_6"));
+                
+                  /* Field */
+                  ЗамовленняКлієнта_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_6." + Довідники.Користувачі_Const.Назва, "join_tab_6_field_1"));
+                  
 
             /* SELECT */
             ЗамовленняКлієнта_Select.Select();
@@ -6083,6 +6118,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                         Валюта = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
                         Каса = cur.Fields?["join_tab_4_field_1"]?.ToString() ?? "", /**/
                         Склад = cur.Fields?["join_tab_5_field_1"]?.ToString() ?? "", /**/
+                        Автор = cur.Fields?["join_tab_6_field_1"]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[ЗамовленняКлієнта_Const.Назва]?.ToString() ?? "", /**/
                         НомерДок = cur.Fields?[ЗамовленняКлієнта_Const.НомерДок]?.ToString() ?? "", /**/
                         ДатаДок = cur.Fields?[ЗамовленняКлієнта_Const.ДатаДок]?.ToString() ?? "", /**/
@@ -6126,12 +6162,13 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         string Каса = "";
         string Склад = "";
         string СумаДокументу = "";
+        string Автор = "";
         string Коментар = "";
 
         Array ToArray()
         {
             return new object[] { new Gdk.Pixbuf(Image), ID, Spend /*Проведений документ*/
-            /* */ , Назва, НомерДок, ДатаДок, Організація, Контрагент, Валюта, Каса, Склад, СумаДокументу, Коментар };
+            /* */ , Назва, НомерДок, ДатаДок, Організація, Контрагент, Валюта, Каса, Склад, СумаДокументу, Автор, Коментар };
         }
 
         public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(bool) /* Spend Проведений документ*/
@@ -6144,6 +6181,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             , typeof(string) /* Каса */
             , typeof(string) /* Склад */
             , typeof(string) /* СумаДокументу */
+            , typeof(string) /* Автор */
             , typeof(string) /* Коментар */
             );
 
@@ -6162,7 +6200,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText() { Xpad = 4 }, "text", 9)); /*Каса*/
             treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 10)); /*Склад*/
             treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 11)); /*СумаДокументу*/
-            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 12)); /*Коментар*/
+            treeView.AppendColumn(new TreeViewColumn("Автор", new CellRendererText() { Xpad = 4 }, "text", 12)); /*Автор*/
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 13)); /*Коментар*/
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
@@ -6245,6 +6284,14 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   РеалізаціяТоварівТаПослуг_Select.QuerySelect.FieldAndAlias.Add(
                     new NameValue<string>("join_tab_5." + Довідники.Склади_Const.Назва, "join_tab_5_field_1"));
                   
+                /* Join Table */
+                РеалізаціяТоварівТаПослуг_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Користувачі_Const.TABLE, Документи.РеалізаціяТоварівТаПослуг_Const.Автор, РеалізаціяТоварівТаПослуг_Select.QuerySelect.Table, "join_tab_6"));
+                
+                  /* Field */
+                  РеалізаціяТоварівТаПослуг_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_6." + Довідники.Користувачі_Const.Назва, "join_tab_6_field_1"));
+                  
 
             /* SELECT */
             РеалізаціяТоварівТаПослуг_Select.Select();
@@ -6263,6 +6310,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                         Валюта = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
                         Каса = cur.Fields?["join_tab_4_field_1"]?.ToString() ?? "", /**/
                         Склад = cur.Fields?["join_tab_5_field_1"]?.ToString() ?? "", /**/
+                        Автор = cur.Fields?["join_tab_6_field_1"]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[РеалізаціяТоварівТаПослуг_Const.Назва]?.ToString() ?? "", /**/
                         НомерДок = cur.Fields?[РеалізаціяТоварівТаПослуг_Const.НомерДок]?.ToString() ?? "", /**/
                         ДатаДок = cur.Fields?[РеалізаціяТоварівТаПослуг_Const.ДатаДок]?.ToString() ?? "", /**/
@@ -6303,12 +6351,13 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         string Організація = "";
         string Валюта = "";
         string ВидЦіни = "";
+        string Автор = "";
         string Коментар = "";
 
         Array ToArray()
         {
             return new object[] { new Gdk.Pixbuf(Image), ID, Spend /*Проведений документ*/
-            /* */ , Назва, НомерДок, ДатаДок, Організація, Валюта, ВидЦіни, Коментар };
+            /* */ , Назва, НомерДок, ДатаДок, Організація, Валюта, ВидЦіни, Автор, Коментар };
         }
 
         public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(bool) /* Spend Проведений документ*/
@@ -6318,6 +6367,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             , typeof(string) /* Організація */
             , typeof(string) /* Валюта */
             , typeof(string) /* ВидЦіни */
+            , typeof(string) /* Автор */
             , typeof(string) /* Коментар */
             );
 
@@ -6333,7 +6383,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Організація*/
             treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Валюта*/
             treeView.AppendColumn(new TreeViewColumn("Вид ціни", new CellRendererText() { Xpad = 4 }, "text", 8)); /*ВидЦіни*/
-            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 9)); /*Коментар*/
+            treeView.AppendColumn(new TreeViewColumn("Автор", new CellRendererText() { Xpad = 4 }, "text", 9)); /*Автор*/
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 10)); /*Коментар*/
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
@@ -6399,6 +6450,14 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   ВстановленняЦінНоменклатури_Select.QuerySelect.FieldAndAlias.Add(
                     new NameValue<string>("join_tab_3." + Довідники.ВидиЦін_Const.Назва, "join_tab_3_field_1"));
                   
+                /* Join Table */
+                ВстановленняЦінНоменклатури_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Користувачі_Const.TABLE, Документи.ВстановленняЦінНоменклатури_Const.Автор, ВстановленняЦінНоменклатури_Select.QuerySelect.Table, "join_tab_4"));
+                
+                  /* Field */
+                  ВстановленняЦінНоменклатури_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_4." + Довідники.Користувачі_Const.Назва, "join_tab_4_field_1"));
+                  
 
             /* SELECT */
             ВстановленняЦінНоменклатури_Select.Select();
@@ -6415,6 +6474,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                         Організація = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Валюта = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
                         ВидЦіни = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
+                        Автор = cur.Fields?["join_tab_4_field_1"]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[ВстановленняЦінНоменклатури_Const.Назва]?.ToString() ?? "", /**/
                         НомерДок = cur.Fields?[ВстановленняЦінНоменклатури_Const.НомерДок]?.ToString() ?? "", /**/
                         ДатаДок = cur.Fields?[ВстановленняЦінНоменклатури_Const.ДатаДок]?.ToString() ?? "", /**/
@@ -6457,12 +6517,13 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         string Контрагент = "";
         string СумаДокументу = "";
         string ГосподарськаОперація = "";
+        string Автор = "";
         string Коментар = "";
 
         Array ToArray()
         {
             return new object[] { new Gdk.Pixbuf(Image), ID, Spend /*Проведений документ*/
-            /* */ , Назва, НомерДок, ДатаДок, Організація, Валюта, Каса, Контрагент, СумаДокументу, ГосподарськаОперація, Коментар };
+            /* */ , Назва, НомерДок, ДатаДок, Організація, Валюта, Каса, Контрагент, СумаДокументу, ГосподарськаОперація, Автор, Коментар };
         }
 
         public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(bool) /* Spend Проведений документ*/
@@ -6475,6 +6536,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             , typeof(string) /* Контрагент */
             , typeof(string) /* СумаДокументу */
             , typeof(string) /* ГосподарськаОперація */
+            , typeof(string) /* Автор */
             , typeof(string) /* Коментар */
             );
 
@@ -6493,7 +6555,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 4 }, "text", 9)); /*Контрагент*/
             treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 10)); /*СумаДокументу*/
             treeView.AppendColumn(new TreeViewColumn("Операція", new CellRendererText() { Xpad = 4 }, "text", 11)); /*ГосподарськаОперація*/
-            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 12)); /*Коментар*/
+            treeView.AppendColumn(new TreeViewColumn("Автор", new CellRendererText() { Xpad = 4 }, "text", 12)); /*Автор*/
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 13)); /*Коментар*/
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
@@ -6569,6 +6632,14 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   ПрихіднийКасовийОрдер_Select.QuerySelect.FieldAndAlias.Add(
                     new NameValue<string>("join_tab_4." + Довідники.Контрагенти_Const.Назва, "join_tab_4_field_1"));
                   
+                /* Join Table */
+                ПрихіднийКасовийОрдер_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Користувачі_Const.TABLE, Документи.ПрихіднийКасовийОрдер_Const.Автор, ПрихіднийКасовийОрдер_Select.QuerySelect.Table, "join_tab_5"));
+                
+                  /* Field */
+                  ПрихіднийКасовийОрдер_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_5." + Довідники.Користувачі_Const.Назва, "join_tab_5_field_1"));
+                  
 
             /* SELECT */
             ПрихіднийКасовийОрдер_Select.Select();
@@ -6586,6 +6657,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                         Валюта = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
                         Каса = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
                         Контрагент = cur.Fields?["join_tab_4_field_1"]?.ToString() ?? "", /**/
+                        Автор = cur.Fields?["join_tab_5_field_1"]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[ПрихіднийКасовийОрдер_Const.Назва]?.ToString() ?? "", /**/
                         НомерДок = cur.Fields?[ПрихіднийКасовийОрдер_Const.НомерДок]?.ToString() ?? "", /**/
                         ДатаДок = cur.Fields?[ПрихіднийКасовийОрдер_Const.ДатаДок]?.ToString() ?? "", /**/
@@ -6630,12 +6702,13 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         string Каса = "";
         string СумаДокументу = "";
         string ГосподарськаОперація = "";
+        string Автор = "";
         string Коментар = "";
 
         Array ToArray()
         {
             return new object[] { new Gdk.Pixbuf(Image), ID, Spend /*Проведений документ*/
-            /* */ , Назва, НомерДок, ДатаДок, Організація, Контрагент, Валюта, Каса, СумаДокументу, ГосподарськаОперація, Коментар };
+            /* */ , Назва, НомерДок, ДатаДок, Організація, Контрагент, Валюта, Каса, СумаДокументу, ГосподарськаОперація, Автор, Коментар };
         }
 
         public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(bool) /* Spend Проведений документ*/
@@ -6648,6 +6721,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             , typeof(string) /* Каса */
             , typeof(string) /* СумаДокументу */
             , typeof(string) /* ГосподарськаОперація */
+            , typeof(string) /* Автор */
             , typeof(string) /* Коментар */
             );
 
@@ -6666,7 +6740,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText() { Xpad = 4 }, "text", 9)); /*Каса*/
             treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 10)); /*СумаДокументу*/
             treeView.AppendColumn(new TreeViewColumn("Операція", new CellRendererText() { Xpad = 4 }, "text", 11)); /*ГосподарськаОперація*/
-            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 12)); /*Коментар*/
+            treeView.AppendColumn(new TreeViewColumn("Автор", new CellRendererText() { Xpad = 4 }, "text", 12)); /*Автор*/
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 13)); /*Коментар*/
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
@@ -6742,6 +6817,14 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   РозхіднийКасовийОрдер_Select.QuerySelect.FieldAndAlias.Add(
                     new NameValue<string>("join_tab_4." + Довідники.Каси_Const.Назва, "join_tab_4_field_1"));
                   
+                /* Join Table */
+                РозхіднийКасовийОрдер_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Користувачі_Const.TABLE, Документи.РозхіднийКасовийОрдер_Const.Автор, РозхіднийКасовийОрдер_Select.QuerySelect.Table, "join_tab_5"));
+                
+                  /* Field */
+                  РозхіднийКасовийОрдер_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_5." + Довідники.Користувачі_Const.Назва, "join_tab_5_field_1"));
+                  
 
             /* SELECT */
             РозхіднийКасовийОрдер_Select.Select();
@@ -6759,6 +6842,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                         Контрагент = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
                         Валюта = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
                         Каса = cur.Fields?["join_tab_4_field_1"]?.ToString() ?? "", /**/
+                        Автор = cur.Fields?["join_tab_5_field_1"]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[РозхіднийКасовийОрдер_Const.Назва]?.ToString() ?? "", /**/
                         НомерДок = cur.Fields?[РозхіднийКасовийОрдер_Const.НомерДок]?.ToString() ?? "", /**/
                         ДатаДок = cur.Fields?[РозхіднийКасовийОрдер_Const.ДатаДок]?.ToString() ?? "", /**/
@@ -6800,12 +6884,13 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         string Організація = "";
         string СкладВідправник = "";
         string СкладОтримувач = "";
+        string Автор = "";
         string Коментар = "";
 
         Array ToArray()
         {
             return new object[] { new Gdk.Pixbuf(Image), ID, Spend /*Проведений документ*/
-            /* */ , Назва, НомерДок, ДатаДок, Організація, СкладВідправник, СкладОтримувач, Коментар };
+            /* */ , Назва, НомерДок, ДатаДок, Організація, СкладВідправник, СкладОтримувач, Автор, Коментар };
         }
 
         public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(bool) /* Spend Проведений документ*/
@@ -6815,6 +6900,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             , typeof(string) /* Організація */
             , typeof(string) /* СкладВідправник */
             , typeof(string) /* СкладОтримувач */
+            , typeof(string) /* Автор */
             , typeof(string) /* Коментар */
             );
 
@@ -6830,7 +6916,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Організація*/
             treeView.AppendColumn(new TreeViewColumn("Склад відправник", new CellRendererText() { Xpad = 4 }, "text", 7)); /*СкладВідправник*/
             treeView.AppendColumn(new TreeViewColumn("Склад отримувач", new CellRendererText() { Xpad = 4 }, "text", 8)); /*СкладОтримувач*/
-            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 9)); /*Коментар*/
+            treeView.AppendColumn(new TreeViewColumn("Автор", new CellRendererText() { Xpad = 4 }, "text", 9)); /*Автор*/
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 10)); /*Коментар*/
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
@@ -6896,6 +6983,14 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   ПереміщенняТоварів_Select.QuerySelect.FieldAndAlias.Add(
                     new NameValue<string>("join_tab_3." + Довідники.Склади_Const.Назва, "join_tab_3_field_1"));
                   
+                /* Join Table */
+                ПереміщенняТоварів_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Користувачі_Const.TABLE, Документи.ПереміщенняТоварів_Const.Автор, ПереміщенняТоварів_Select.QuerySelect.Table, "join_tab_4"));
+                
+                  /* Field */
+                  ПереміщенняТоварів_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_4." + Довідники.Користувачі_Const.Назва, "join_tab_4_field_1"));
+                  
 
             /* SELECT */
             ПереміщенняТоварів_Select.Select();
@@ -6912,6 +7007,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                         Організація = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         СкладВідправник = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
                         СкладОтримувач = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
+                        Автор = cur.Fields?["join_tab_4_field_1"]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[ПереміщенняТоварів_Const.Назва]?.ToString() ?? "", /**/
                         НомерДок = cur.Fields?[ПереміщенняТоварів_Const.НомерДок]?.ToString() ?? "", /**/
                         ДатаДок = cur.Fields?[ПереміщенняТоварів_Const.ДатаДок]?.ToString() ?? "", /**/
@@ -6954,12 +7050,13 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         string Каса = "";
         string Склад = "";
         string СумаДокументу = "";
+        string Автор = "";
         string Коментар = "";
 
         Array ToArray()
         {
             return new object[] { new Gdk.Pixbuf(Image), ID, Spend /*Проведений документ*/
-            /* */ , Назва, НомерДок, ДатаДок, Організація, Контрагент, Валюта, Каса, Склад, СумаДокументу, Коментар };
+            /* */ , Назва, НомерДок, ДатаДок, Організація, Контрагент, Валюта, Каса, Склад, СумаДокументу, Автор, Коментар };
         }
 
         public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(bool) /* Spend Проведений документ*/
@@ -6972,6 +7069,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             , typeof(string) /* Каса */
             , typeof(string) /* Склад */
             , typeof(string) /* СумаДокументу */
+            , typeof(string) /* Автор */
             , typeof(string) /* Коментар */
             );
 
@@ -6990,7 +7088,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText() { Xpad = 4 }, "text", 9)); /*Каса*/
             treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 10)); /*Склад*/
             treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 11)); /*СумаДокументу*/
-            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 12)); /*Коментар*/
+            treeView.AppendColumn(new TreeViewColumn("Автор", new CellRendererText() { Xpad = 4 }, "text", 12)); /*Автор*/
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 13)); /*Коментар*/
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
@@ -7073,6 +7172,14 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   ПоверненняТоварівПостачальнику_Select.QuerySelect.FieldAndAlias.Add(
                     new NameValue<string>("join_tab_5." + Довідники.Склади_Const.Назва, "join_tab_5_field_1"));
                   
+                /* Join Table */
+                ПоверненняТоварівПостачальнику_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Користувачі_Const.TABLE, Документи.ПоверненняТоварівПостачальнику_Const.Автор, ПоверненняТоварівПостачальнику_Select.QuerySelect.Table, "join_tab_6"));
+                
+                  /* Field */
+                  ПоверненняТоварівПостачальнику_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_6." + Довідники.Користувачі_Const.Назва, "join_tab_6_field_1"));
+                  
 
             /* SELECT */
             ПоверненняТоварівПостачальнику_Select.Select();
@@ -7091,6 +7198,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                         Валюта = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
                         Каса = cur.Fields?["join_tab_4_field_1"]?.ToString() ?? "", /**/
                         Склад = cur.Fields?["join_tab_5_field_1"]?.ToString() ?? "", /**/
+                        Автор = cur.Fields?["join_tab_6_field_1"]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[ПоверненняТоварівПостачальнику_Const.Назва]?.ToString() ?? "", /**/
                         НомерДок = cur.Fields?[ПоверненняТоварівПостачальнику_Const.НомерДок]?.ToString() ?? "", /**/
                         ДатаДок = cur.Fields?[ПоверненняТоварівПостачальнику_Const.ДатаДок]?.ToString() ?? "", /**/
@@ -7134,12 +7242,13 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         string Контрагент = "";
         string Склад = "";
         string СумаДокументу = "";
+        string Автор = "";
         string Коментар = "";
 
         Array ToArray()
         {
             return new object[] { new Gdk.Pixbuf(Image), ID, Spend /*Проведений документ*/
-            /* */ , Назва, НомерДок, ДатаДок, Організація, Валюта, Каса, Контрагент, Склад, СумаДокументу, Коментар };
+            /* */ , Назва, НомерДок, ДатаДок, Організація, Валюта, Каса, Контрагент, Склад, СумаДокументу, Автор, Коментар };
         }
 
         public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(bool) /* Spend Проведений документ*/
@@ -7152,6 +7261,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             , typeof(string) /* Контрагент */
             , typeof(string) /* Склад */
             , typeof(string) /* СумаДокументу */
+            , typeof(string) /* Автор */
             , typeof(string) /* Коментар */
             );
 
@@ -7170,7 +7280,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 4 }, "text", 9)); /*Контрагент*/
             treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 10)); /*Склад*/
             treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 11)); /*СумаДокументу*/
-            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 12)); /*Коментар*/
+            treeView.AppendColumn(new TreeViewColumn("Автор", new CellRendererText() { Xpad = 4 }, "text", 12)); /*Автор*/
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 13)); /*Коментар*/
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
@@ -7253,6 +7364,14 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   ПоверненняТоварівВідКлієнта_Select.QuerySelect.FieldAndAlias.Add(
                     new NameValue<string>("join_tab_5." + Довідники.Склади_Const.Назва, "join_tab_5_field_1"));
                   
+                /* Join Table */
+                ПоверненняТоварівВідКлієнта_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Користувачі_Const.TABLE, Документи.ПоверненняТоварівВідКлієнта_Const.Автор, ПоверненняТоварівВідКлієнта_Select.QuerySelect.Table, "join_tab_6"));
+                
+                  /* Field */
+                  ПоверненняТоварівВідКлієнта_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_6." + Довідники.Користувачі_Const.Назва, "join_tab_6_field_1"));
+                  
 
             /* SELECT */
             ПоверненняТоварівВідКлієнта_Select.Select();
@@ -7271,6 +7390,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                         Каса = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
                         Контрагент = cur.Fields?["join_tab_4_field_1"]?.ToString() ?? "", /**/
                         Склад = cur.Fields?["join_tab_5_field_1"]?.ToString() ?? "", /**/
+                        Автор = cur.Fields?["join_tab_6_field_1"]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[ПоверненняТоварівВідКлієнта_Const.Назва]?.ToString() ?? "", /**/
                         НомерДок = cur.Fields?[ПоверненняТоварівВідКлієнта_Const.НомерДок]?.ToString() ?? "", /**/
                         ДатаДок = cur.Fields?[ПоверненняТоварівВідКлієнта_Const.ДатаДок]?.ToString() ?? "", /**/
@@ -7313,12 +7433,13 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         string Каса = "";
         string Контрагент = "";
         string СумаДокументу = "";
+        string Автор = "";
         string Коментар = "";
 
         Array ToArray()
         {
             return new object[] { new Gdk.Pixbuf(Image), ID, Spend /*Проведений документ*/
-            /* */ , Назва, НомерДок, ДатаДок, Організація, Валюта, Каса, Контрагент, СумаДокументу, Коментар };
+            /* */ , Назва, НомерДок, ДатаДок, Організація, Валюта, Каса, Контрагент, СумаДокументу, Автор, Коментар };
         }
 
         public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(bool) /* Spend Проведений документ*/
@@ -7330,6 +7451,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             , typeof(string) /* Каса */
             , typeof(string) /* Контрагент */
             , typeof(string) /* СумаДокументу */
+            , typeof(string) /* Автор */
             , typeof(string) /* Коментар */
             );
 
@@ -7347,7 +7469,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Каса*/
             treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 4 }, "text", 9)); /*Контрагент*/
             treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 10)); /*СумаДокументу*/
-            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 11)); /*Коментар*/
+            treeView.AppendColumn(new TreeViewColumn("Автор", new CellRendererText() { Xpad = 4 }, "text", 11)); /*Автор*/
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 12)); /*Коментар*/
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
@@ -7422,6 +7545,14 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   АктВиконанихРобіт_Select.QuerySelect.FieldAndAlias.Add(
                     new NameValue<string>("join_tab_4." + Довідники.Контрагенти_Const.Назва, "join_tab_4_field_1"));
                   
+                /* Join Table */
+                АктВиконанихРобіт_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Користувачі_Const.TABLE, Документи.АктВиконанихРобіт_Const.Автор, АктВиконанихРобіт_Select.QuerySelect.Table, "join_tab_5"));
+                
+                  /* Field */
+                  АктВиконанихРобіт_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_5." + Довідники.Користувачі_Const.Назва, "join_tab_5_field_1"));
+                  
 
             /* SELECT */
             АктВиконанихРобіт_Select.Select();
@@ -7439,6 +7570,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                         Валюта = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
                         Каса = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
                         Контрагент = cur.Fields?["join_tab_4_field_1"]?.ToString() ?? "", /**/
+                        Автор = cur.Fields?["join_tab_5_field_1"]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[АктВиконанихРобіт_Const.Назва]?.ToString() ?? "", /**/
                         НомерДок = cur.Fields?[АктВиконанихРобіт_Const.НомерДок]?.ToString() ?? "", /**/
                         ДатаДок = cur.Fields?[АктВиконанихРобіт_Const.ДатаДок]?.ToString() ?? "", /**/
@@ -7480,12 +7612,13 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         string Склад = "";
         string Контрагент = "";
         string Валюта = "";
+        string Автор = "";
         string Коментар = "";
 
         Array ToArray()
         {
             return new object[] { new Gdk.Pixbuf(Image), ID, Spend /*Проведений документ*/
-            /* */ , Назва, НомерДок, ДатаДок, Організація, Склад, Контрагент, Валюта, Коментар };
+            /* */ , Назва, НомерДок, ДатаДок, Організація, Склад, Контрагент, Валюта, Автор, Коментар };
         }
 
         public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(bool) /* Spend Проведений документ*/
@@ -7496,6 +7629,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             , typeof(string) /* Склад */
             , typeof(string) /* Контрагент */
             , typeof(string) /* Валюта */
+            , typeof(string) /* Автор */
             , typeof(string) /* Коментар */
             );
 
@@ -7512,7 +7646,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Склад*/
             treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Контрагент*/
             treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 9)); /*Валюта*/
-            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 10)); /*Коментар*/
+            treeView.AppendColumn(new TreeViewColumn("Автор", new CellRendererText() { Xpad = 4 }, "text", 10)); /*Автор*/
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 11)); /*Коментар*/
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
@@ -7586,6 +7721,14 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   ВведенняЗалишків_Select.QuerySelect.FieldAndAlias.Add(
                     new NameValue<string>("join_tab_4." + Довідники.Валюти_Const.Назва, "join_tab_4_field_1"));
                   
+                /* Join Table */
+                ВведенняЗалишків_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Користувачі_Const.TABLE, Документи.ВведенняЗалишків_Const.Автор, ВведенняЗалишків_Select.QuerySelect.Table, "join_tab_5"));
+                
+                  /* Field */
+                  ВведенняЗалишків_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_5." + Довідники.Користувачі_Const.Назва, "join_tab_5_field_1"));
+                  
 
             /* SELECT */
             ВведенняЗалишків_Select.Select();
@@ -7603,6 +7746,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                         Склад = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
                         Контрагент = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
                         Валюта = cur.Fields?["join_tab_4_field_1"]?.ToString() ?? "", /**/
+                        Автор = cur.Fields?["join_tab_5_field_1"]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[ВведенняЗалишків_Const.Назва]?.ToString() ?? "", /**/
                         НомерДок = cur.Fields?[ВведенняЗалишків_Const.НомерДок]?.ToString() ?? "", /**/
                         ДатаДок = cur.Fields?[ВведенняЗалишків_Const.ДатаДок]?.ToString() ?? "", /**/
@@ -7641,12 +7785,13 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         string ДатаДок = "";
         string Організація = "";
         string Склад = "";
+        string Автор = "";
         string Коментар = "";
 
         Array ToArray()
         {
             return new object[] { new Gdk.Pixbuf(Image), ID, Spend /*Проведений документ*/
-            /* */ , Назва, НомерДок, ДатаДок, Організація, Склад, Коментар };
+            /* */ , Назва, НомерДок, ДатаДок, Організація, Склад, Автор, Коментар };
         }
 
         public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(bool) /* Spend Проведений документ*/
@@ -7655,6 +7800,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             , typeof(string) /* ДатаДок */
             , typeof(string) /* Організація */
             , typeof(string) /* Склад */
+            , typeof(string) /* Автор */
             , typeof(string) /* Коментар */
             );
 
@@ -7669,7 +7815,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 5) { FixedWidth = 160 } ); /*ДатаДок*/
             treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Організація*/
             treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Склад*/
-            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Коментар*/
+            treeView.AppendColumn(new TreeViewColumn("Автор", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Автор*/
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 9)); /*Коментар*/
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
@@ -7727,6 +7874,14 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   НадлишкиТоварів_Select.QuerySelect.FieldAndAlias.Add(
                     new NameValue<string>("join_tab_2." + Довідники.Склади_Const.Назва, "join_tab_2_field_1"));
                   
+                /* Join Table */
+                НадлишкиТоварів_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Користувачі_Const.TABLE, Документи.НадлишкиТоварів_Const.Автор, НадлишкиТоварів_Select.QuerySelect.Table, "join_tab_3"));
+                
+                  /* Field */
+                  НадлишкиТоварів_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_3." + Довідники.Користувачі_Const.Назва, "join_tab_3_field_1"));
+                  
 
             /* SELECT */
             НадлишкиТоварів_Select.Select();
@@ -7742,6 +7897,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                         Spend = (bool)cur.Fields?["spend"]!, /*Проведений документ*/
                         Організація = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Склад = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
+                        Автор = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[НадлишкиТоварів_Const.Назва]?.ToString() ?? "", /**/
                         НомерДок = cur.Fields?[НадлишкиТоварів_Const.НомерДок]?.ToString() ?? "", /**/
                         ДатаДок = cur.Fields?[НадлишкиТоварів_Const.ДатаДок]?.ToString() ?? "", /**/
@@ -7780,12 +7936,13 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         string ДатаДок = "";
         string Організація = "";
         string Склад = "";
+        string Автор = "";
         string Коментар = "";
 
         Array ToArray()
         {
             return new object[] { new Gdk.Pixbuf(Image), ID, Spend /*Проведений документ*/
-            /* */ , Назва, НомерДок, ДатаДок, Організація, Склад, Коментар };
+            /* */ , Назва, НомерДок, ДатаДок, Організація, Склад, Автор, Коментар };
         }
 
         public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(bool) /* Spend Проведений документ*/
@@ -7794,6 +7951,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             , typeof(string) /* ДатаДок */
             , typeof(string) /* Організація */
             , typeof(string) /* Склад */
+            , typeof(string) /* Автор */
             , typeof(string) /* Коментар */
             );
 
@@ -7808,7 +7966,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("ДатаДок", new CellRendererText() { Xpad = 4 }, "text", 5) { FixedWidth = 160 } ); /*ДатаДок*/
             treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Організація*/
             treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Склад*/
-            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Коментар*/
+            treeView.AppendColumn(new TreeViewColumn("Автор", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Автор*/
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 9)); /*Коментар*/
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
@@ -7866,6 +8025,14 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   ПересортицяТоварів_Select.QuerySelect.FieldAndAlias.Add(
                     new NameValue<string>("join_tab_2." + Довідники.Склади_Const.Назва, "join_tab_2_field_1"));
                   
+                /* Join Table */
+                ПересортицяТоварів_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Користувачі_Const.TABLE, Документи.ПересортицяТоварів_Const.Автор, ПересортицяТоварів_Select.QuerySelect.Table, "join_tab_3"));
+                
+                  /* Field */
+                  ПересортицяТоварів_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_3." + Довідники.Користувачі_Const.Назва, "join_tab_3_field_1"));
+                  
 
             /* SELECT */
             ПересортицяТоварів_Select.Select();
@@ -7881,6 +8048,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                         Spend = (bool)cur.Fields?["spend"]!, /*Проведений документ*/
                         Організація = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Склад = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
+                        Автор = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[ПересортицяТоварів_Const.Назва]?.ToString() ?? "", /**/
                         НомерДок = cur.Fields?[ПересортицяТоварів_Const.НомерДок]?.ToString() ?? "", /**/
                         ДатаДок = cur.Fields?[ПересортицяТоварів_Const.ДатаДок]?.ToString() ?? "", /**/
@@ -7918,12 +8086,13 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         string НомерДок = "";
         string ДатаДок = "";
         string Склад = "";
+        string Автор = "";
         string Коментар = "";
 
         Array ToArray()
         {
             return new object[] { new Gdk.Pixbuf(Image), ID, Spend /*Проведений документ*/
-            /* */ , Назва, НомерДок, ДатаДок, Склад, Коментар };
+            /* */ , Назва, НомерДок, ДатаДок, Склад, Автор, Коментар };
         }
 
         public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(bool) /* Spend Проведений документ*/
@@ -7931,6 +8100,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             , typeof(string) /* НомерДок */
             , typeof(string) /* ДатаДок */
             , typeof(string) /* Склад */
+            , typeof(string) /* Автор */
             , typeof(string) /* Коментар */
             );
 
@@ -7944,7 +8114,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 4)); /*НомерДок*/
             treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 5) { FixedWidth = 160 } ); /*ДатаДок*/
             treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Склад*/
-            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Коментар*/
+            treeView.AppendColumn(new TreeViewColumn("Автор", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Автор*/
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Коментар*/
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
@@ -7994,6 +8165,14 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   ПерерахунокТоварів_Select.QuerySelect.FieldAndAlias.Add(
                     new NameValue<string>("join_tab_1." + Довідники.Склади_Const.Назва, "join_tab_1_field_1"));
                   
+                /* Join Table */
+                ПерерахунокТоварів_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Користувачі_Const.TABLE, Документи.ПерерахунокТоварів_Const.Автор, ПерерахунокТоварів_Select.QuerySelect.Table, "join_tab_2"));
+                
+                  /* Field */
+                  ПерерахунокТоварів_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_2." + Довідники.Користувачі_Const.Назва, "join_tab_2_field_1"));
+                  
 
             /* SELECT */
             ПерерахунокТоварів_Select.Select();
@@ -8008,6 +8187,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                         ID = cur.UnigueID.ToString(),
                         Spend = (bool)cur.Fields?["spend"]!, /*Проведений документ*/
                         Склад = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
+                        Автор = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[ПерерахунокТоварів_Const.Назва]?.ToString() ?? "", /**/
                         НомерДок = cur.Fields?[ПерерахунокТоварів_Const.НомерДок]?.ToString() ?? "", /**/
                         ДатаДок = cur.Fields?[ПерерахунокТоварів_Const.ДатаДок]?.ToString() ?? "", /**/
@@ -8047,12 +8227,13 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         string Організація = "";
         string Склад = "";
         string СумаДокументу = "";
+        string Автор = "";
         string Коментар = "";
 
         Array ToArray()
         {
             return new object[] { new Gdk.Pixbuf(Image), ID, Spend /*Проведений документ*/
-            /* */ , Назва, НомерДок, ДатаДок, Організація, Склад, СумаДокументу, Коментар };
+            /* */ , Назва, НомерДок, ДатаДок, Організація, Склад, СумаДокументу, Автор, Коментар };
         }
 
         public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(bool) /* Spend Проведений документ*/
@@ -8062,6 +8243,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             , typeof(string) /* Організація */
             , typeof(string) /* Склад */
             , typeof(string) /* СумаДокументу */
+            , typeof(string) /* Автор */
             , typeof(string) /* Коментар */
             );
 
@@ -8077,7 +8259,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Організація*/
             treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Склад*/
             treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 8)); /*СумаДокументу*/
-            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 9)); /*Коментар*/
+            treeView.AppendColumn(new TreeViewColumn("Автор", new CellRendererText() { Xpad = 4 }, "text", 9)); /*Автор*/
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 10)); /*Коментар*/
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
@@ -8136,6 +8319,14 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   ПсуванняТоварів_Select.QuerySelect.FieldAndAlias.Add(
                     new NameValue<string>("join_tab_2." + Довідники.Склади_Const.Назва, "join_tab_2_field_1"));
                   
+                /* Join Table */
+                ПсуванняТоварів_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Користувачі_Const.TABLE, Документи.ПсуванняТоварів_Const.Автор, ПсуванняТоварів_Select.QuerySelect.Table, "join_tab_3"));
+                
+                  /* Field */
+                  ПсуванняТоварів_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_3." + Довідники.Користувачі_Const.Назва, "join_tab_3_field_1"));
+                  
 
             /* SELECT */
             ПсуванняТоварів_Select.Select();
@@ -8151,6 +8342,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                         Spend = (bool)cur.Fields?["spend"]!, /*Проведений документ*/
                         Організація = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Склад = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
+                        Автор = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[ПсуванняТоварів_Const.Назва]?.ToString() ?? "", /**/
                         НомерДок = cur.Fields?[ПсуванняТоварів_Const.НомерДок]?.ToString() ?? "", /**/
                         ДатаДок = cur.Fields?[ПсуванняТоварів_Const.ДатаДок]?.ToString() ?? "", /**/
@@ -8192,12 +8384,13 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         string Склад = "";
         string Валюта = "";
         string СумаДокументу = "";
+        string Автор = "";
         string Коментар = "";
 
         Array ToArray()
         {
             return new object[] { new Gdk.Pixbuf(Image), ID, Spend /*Проведений документ*/
-            /* */ , Назва, НомерДок, ДатаДок, Організація, Склад, Валюта, СумаДокументу, Коментар };
+            /* */ , Назва, НомерДок, ДатаДок, Організація, Склад, Валюта, СумаДокументу, Автор, Коментар };
         }
 
         public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(bool) /* Spend Проведений документ*/
@@ -8208,6 +8401,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             , typeof(string) /* Склад */
             , typeof(string) /* Валюта */
             , typeof(string) /* СумаДокументу */
+            , typeof(string) /* Автор */
             , typeof(string) /* Коментар */
             );
 
@@ -8224,7 +8418,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Склад*/
             treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Валюта*/
             treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 9)); /*СумаДокументу*/
-            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 10)); /*Коментар*/
+            treeView.AppendColumn(new TreeViewColumn("Автор", new CellRendererText() { Xpad = 4 }, "text", 10)); /*Автор*/
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 11)); /*Коментар*/
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
@@ -8291,6 +8486,14 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   ВнутрішнєСпоживанняТоварів_Select.QuerySelect.FieldAndAlias.Add(
                     new NameValue<string>("join_tab_3." + Довідники.Валюти_Const.Назва, "join_tab_3_field_1"));
                   
+                /* Join Table */
+                ВнутрішнєСпоживанняТоварів_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Користувачі_Const.TABLE, Документи.ВнутрішнєСпоживанняТоварів_Const.Автор, ВнутрішнєСпоживанняТоварів_Select.QuerySelect.Table, "join_tab_4"));
+                
+                  /* Field */
+                  ВнутрішнєСпоживанняТоварів_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_4." + Довідники.Користувачі_Const.Назва, "join_tab_4_field_1"));
+                  
 
             /* SELECT */
             ВнутрішнєСпоживанняТоварів_Select.Select();
@@ -8307,6 +8510,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                         Організація = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Склад = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
                         Валюта = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
+                        Автор = cur.Fields?["join_tab_4_field_1"]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[ВнутрішнєСпоживанняТоварів_Const.Назва]?.ToString() ?? "", /**/
                         НомерДок = cur.Fields?[ВнутрішнєСпоживанняТоварів_Const.НомерДок]?.ToString() ?? "", /**/
                         ДатаДок = cur.Fields?[ВнутрішнєСпоживанняТоварів_Const.ДатаДок]?.ToString() ?? "", /**/
@@ -8350,12 +8554,13 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         string Каса = "";
         string Склад = "";
         string СумаДокументу = "";
+        string Автор = "";
         string Коментар = "";
 
         Array ToArray()
         {
             return new object[] { new Gdk.Pixbuf(Image), ID, Spend /*Проведений документ*/
-            /* */ , Назва, НомерДок, ДатаДок, Організація, Контрагент, Валюта, Каса, Склад, СумаДокументу, Коментар };
+            /* */ , Назва, НомерДок, ДатаДок, Організація, Контрагент, Валюта, Каса, Склад, СумаДокументу, Автор, Коментар };
         }
 
         public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(bool) /* Spend Проведений документ*/
@@ -8368,6 +8573,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             , typeof(string) /* Каса */
             , typeof(string) /* Склад */
             , typeof(string) /* СумаДокументу */
+            , typeof(string) /* Автор */
             , typeof(string) /* Коментар */
             );
 
@@ -8386,7 +8592,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText() { Xpad = 4 }, "text", 9)); /*Каса*/
             treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 10)); /*Склад*/
             treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 11)); /*СумаДокументу*/
-            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 12)); /*Коментар*/
+            treeView.AppendColumn(new TreeViewColumn("Автор", new CellRendererText() { Xpad = 4 }, "text", 12)); /*Автор*/
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 13)); /*Коментар*/
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
@@ -8469,6 +8676,14 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   РахунокФактура_Select.QuerySelect.FieldAndAlias.Add(
                     new NameValue<string>("join_tab_5." + Довідники.Склади_Const.Назва, "join_tab_5_field_1"));
                   
+                /* Join Table */
+                РахунокФактура_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Користувачі_Const.TABLE, Документи.РахунокФактура_Const.Автор, РахунокФактура_Select.QuerySelect.Table, "join_tab_6"));
+                
+                  /* Field */
+                  РахунокФактура_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_6." + Довідники.Користувачі_Const.Назва, "join_tab_6_field_1"));
+                  
 
             /* SELECT */
             РахунокФактура_Select.Select();
@@ -8487,6 +8702,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                         Валюта = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
                         Каса = cur.Fields?["join_tab_4_field_1"]?.ToString() ?? "", /**/
                         Склад = cur.Fields?["join_tab_5_field_1"]?.ToString() ?? "", /**/
+                        Автор = cur.Fields?["join_tab_6_field_1"]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[РахунокФактура_Const.Назва]?.ToString() ?? "", /**/
                         НомерДок = cur.Fields?[РахунокФактура_Const.НомерДок]?.ToString() ?? "", /**/
                         ДатаДок = cur.Fields?[РахунокФактура_Const.ДатаДок]?.ToString() ?? "", /**/
@@ -8526,12 +8742,13 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         string НомерДок = "";
         string Склад = "";
         string ДокументПоступлення = "";
+        string Автор = "";
         string Коментар = "";
 
         Array ToArray()
         {
             return new object[] { new Gdk.Pixbuf(Image), ID, Spend /*Проведений документ*/
-            /* */ , Назва, ДатаДок, НомерДок, Склад, ДокументПоступлення, Коментар };
+            /* */ , Назва, ДатаДок, НомерДок, Склад, ДокументПоступлення, Автор, Коментар };
         }
 
         public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(bool) /* Spend Проведений документ*/
@@ -8540,6 +8757,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             , typeof(string) /* НомерДок */
             , typeof(string) /* Склад */
             , typeof(string) /* ДокументПоступлення */
+            , typeof(string) /* Автор */
             , typeof(string) /* Коментар */
             );
 
@@ -8554,7 +8772,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 5)); /*НомерДок*/
             treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Склад*/
             treeView.AppendColumn(new TreeViewColumn("Документ поступлення", new CellRendererText() { Xpad = 4 }, "text", 7)); /*ДокументПоступлення*/
-            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Коментар*/
+            treeView.AppendColumn(new TreeViewColumn("Автор", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Автор*/
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 9)); /*Коментар*/
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
@@ -8612,6 +8831,14 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   РозміщенняТоварівНаСкладі_Select.QuerySelect.FieldAndAlias.Add(
                     new NameValue<string>("join_tab_2." + Документи.ПоступленняТоварівТаПослуг_Const.Назва, "join_tab_2_field_1"));
                   
+                /* Join Table */
+                РозміщенняТоварівНаСкладі_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Користувачі_Const.TABLE, Документи.РозміщенняТоварівНаСкладі_Const.Автор, РозміщенняТоварівНаСкладі_Select.QuerySelect.Table, "join_tab_3"));
+                
+                  /* Field */
+                  РозміщенняТоварівНаСкладі_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_3." + Довідники.Користувачі_Const.Назва, "join_tab_3_field_1"));
+                  
 
             /* SELECT */
             РозміщенняТоварівНаСкладі_Select.Select();
@@ -8627,6 +8854,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                         Spend = (bool)cur.Fields?["spend"]!, /*Проведений документ*/
                         Склад = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         ДокументПоступлення = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
+                        Автор = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[РозміщенняТоварівНаСкладі_Const.Назва]?.ToString() ?? "", /**/
                         ДатаДок = cur.Fields?[РозміщенняТоварівНаСкладі_Const.ДатаДок]?.ToString() ?? "", /**/
                         НомерДок = cur.Fields?[РозміщенняТоварівНаСкладі_Const.НомерДок]?.ToString() ?? "", /**/
@@ -8665,12 +8893,13 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         string НомерДок = "";
         string Склад = "";
         string Організація = "";
+        string Автор = "";
         string Коментар = "";
 
         Array ToArray()
         {
             return new object[] { new Gdk.Pixbuf(Image), ID, Spend /*Проведений документ*/
-            /* */ , Назва, ДатаДок, НомерДок, Склад, Організація, Коментар };
+            /* */ , Назва, ДатаДок, НомерДок, Склад, Організація, Автор, Коментар };
         }
 
         public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(bool) /* Spend Проведений документ*/
@@ -8679,6 +8908,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             , typeof(string) /* НомерДок */
             , typeof(string) /* Склад */
             , typeof(string) /* Організація */
+            , typeof(string) /* Автор */
             , typeof(string) /* Коментар */
             );
 
@@ -8693,7 +8923,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 5)); /*НомерДок*/
             treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Склад*/
             treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Організація*/
-            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Коментар*/
+            treeView.AppendColumn(new TreeViewColumn("Автор", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Автор*/
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 9)); /*Коментар*/
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
@@ -8751,6 +8982,14 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   ПереміщенняТоварівНаСкладі_Select.QuerySelect.FieldAndAlias.Add(
                     new NameValue<string>("join_tab_2." + Довідники.Організації_Const.Назва, "join_tab_2_field_1"));
                   
+                /* Join Table */
+                ПереміщенняТоварівНаСкладі_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Користувачі_Const.TABLE, Документи.ПереміщенняТоварівНаСкладі_Const.Автор, ПереміщенняТоварівНаСкладі_Select.QuerySelect.Table, "join_tab_3"));
+                
+                  /* Field */
+                  ПереміщенняТоварівНаСкладі_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_3." + Довідники.Користувачі_Const.Назва, "join_tab_3_field_1"));
+                  
 
             /* SELECT */
             ПереміщенняТоварівНаСкладі_Select.Select();
@@ -8766,6 +9005,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                         Spend = (bool)cur.Fields?["spend"]!, /*Проведений документ*/
                         Склад = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Організація = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
+                        Автор = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[ПереміщенняТоварівНаСкладі_Const.Назва]?.ToString() ?? "", /**/
                         ДатаДок = cur.Fields?[ПереміщенняТоварівНаСкладі_Const.ДатаДок]?.ToString() ?? "", /**/
                         НомерДок = cur.Fields?[ПереміщенняТоварівНаСкладі_Const.НомерДок]?.ToString() ?? "", /**/
@@ -8804,12 +9044,13 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         string НомерДок = "";
         string Склад = "";
         string ДокументРеалізації = "";
+        string Автор = "";
         string Коментар = "";
 
         Array ToArray()
         {
             return new object[] { new Gdk.Pixbuf(Image), ID, Spend /*Проведений документ*/
-            /* */ , Назва, ДатаДок, НомерДок, Склад, ДокументРеалізації, Коментар };
+            /* */ , Назва, ДатаДок, НомерДок, Склад, ДокументРеалізації, Автор, Коментар };
         }
 
         public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(bool) /* Spend Проведений документ*/
@@ -8818,6 +9059,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             , typeof(string) /* НомерДок */
             , typeof(string) /* Склад */
             , typeof(string) /* ДокументРеалізації */
+            , typeof(string) /* Автор */
             , typeof(string) /* Коментар */
             );
 
@@ -8832,7 +9074,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 5)); /*НомерДок*/
             treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Склад*/
             treeView.AppendColumn(new TreeViewColumn("Документ реалізації", new CellRendererText() { Xpad = 4 }, "text", 7)); /*ДокументРеалізації*/
-            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Коментар*/
+            treeView.AppendColumn(new TreeViewColumn("Автор", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Автор*/
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 9)); /*Коментар*/
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
@@ -8890,6 +9133,14 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   ЗбіркаТоварівНаСкладі_Select.QuerySelect.FieldAndAlias.Add(
                     new NameValue<string>("join_tab_2." + Документи.РеалізаціяТоварівТаПослуг_Const.Назва, "join_tab_2_field_1"));
                   
+                /* Join Table */
+                ЗбіркаТоварівНаСкладі_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Користувачі_Const.TABLE, Документи.ЗбіркаТоварівНаСкладі_Const.Автор, ЗбіркаТоварівНаСкладі_Select.QuerySelect.Table, "join_tab_3"));
+                
+                  /* Field */
+                  ЗбіркаТоварівНаСкладі_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_3." + Довідники.Користувачі_Const.Назва, "join_tab_3_field_1"));
+                  
 
             /* SELECT */
             ЗбіркаТоварівНаСкладі_Select.Select();
@@ -8905,6 +9156,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                         Spend = (bool)cur.Fields?["spend"]!, /*Проведений документ*/
                         Склад = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         ДокументРеалізації = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
+                        Автор = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[ЗбіркаТоварівНаСкладі_Const.Назва]?.ToString() ?? "", /**/
                         ДатаДок = cur.Fields?[ЗбіркаТоварівНаСкладі_Const.ДатаДок]?.ToString() ?? "", /**/
                         НомерДок = cur.Fields?[ЗбіркаТоварівНаСкладі_Const.НомерДок]?.ToString() ?? "", /**/
@@ -8943,12 +9195,13 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         string НомерДок = "";
         string Організація = "";
         string Склад = "";
+        string Автор = "";
         string Коментар = "";
 
         Array ToArray()
         {
             return new object[] { new Gdk.Pixbuf(Image), ID, Spend /*Проведений документ*/
-            /* */ , Назва, ДатаДок, НомерДок, Організація, Склад, Коментар };
+            /* */ , Назва, ДатаДок, НомерДок, Організація, Склад, Автор, Коментар };
         }
 
         public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(bool) /* Spend Проведений документ*/
@@ -8957,6 +9210,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             , typeof(string) /* НомерДок */
             , typeof(string) /* Організація */
             , typeof(string) /* Склад */
+            , typeof(string) /* Автор */
             , typeof(string) /* Коментар */
             );
 
@@ -8971,7 +9225,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 5)); /*НомерДок*/
             treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Організація*/
             treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Склад*/
-            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Коментар*/
+            treeView.AppendColumn(new TreeViewColumn("Автор", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Автор*/
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 9)); /*Коментар*/
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
@@ -9029,6 +9284,14 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   РозміщенняНоменклатуриПоКоміркам_Select.QuerySelect.FieldAndAlias.Add(
                     new NameValue<string>("join_tab_2." + Довідники.Склади_Const.Назва, "join_tab_2_field_1"));
                   
+                /* Join Table */
+                РозміщенняНоменклатуриПоКоміркам_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Користувачі_Const.TABLE, Документи.РозміщенняНоменклатуриПоКоміркам_Const.Автор, РозміщенняНоменклатуриПоКоміркам_Select.QuerySelect.Table, "join_tab_3"));
+                
+                  /* Field */
+                  РозміщенняНоменклатуриПоКоміркам_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_3." + Довідники.Користувачі_Const.Назва, "join_tab_3_field_1"));
+                  
 
             /* SELECT */
             РозміщенняНоменклатуриПоКоміркам_Select.Select();
@@ -9044,6 +9307,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                         Spend = (bool)cur.Fields?["spend"]!, /*Проведений документ*/
                         Організація = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Склад = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
+                        Автор = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[РозміщенняНоменклатуриПоКоміркам_Const.Назва]?.ToString() ?? "", /**/
                         ДатаДок = cur.Fields?[РозміщенняНоменклатуриПоКоміркам_Const.ДатаДок]?.ToString() ?? "", /**/
                         НомерДок = cur.Fields?[РозміщенняНоменклатуриПоКоміркам_Const.НомерДок]?.ToString() ?? "", /**/
