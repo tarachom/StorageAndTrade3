@@ -117,7 +117,7 @@ WITH RECURSIVE r AS (
             if (!String.IsNullOrEmpty(UidOpenFolder))
             {
                 query += $@"
-AND uid != '{UidOpenFolder}'
+    AND uid != '{UidOpenFolder}'
 ";
             }
 
@@ -134,7 +134,7 @@ AND uid != '{UidOpenFolder}'
             if (!String.IsNullOrEmpty(UidOpenFolder))
             {
                 query += $@"
-WHERE {Склади_Папки_Const.TABLE}.uid != '{UidOpenFolder}'
+    WHERE {Склади_Папки_Const.TABLE}.uid != '{UidOpenFolder}'
 ";
             }
 
