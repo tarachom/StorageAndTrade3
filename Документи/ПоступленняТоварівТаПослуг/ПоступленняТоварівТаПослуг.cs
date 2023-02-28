@@ -174,7 +174,7 @@ namespace StorageAndTrade
             Menu Menu = new Menu();
 
             MenuItem newDocKasovyiOrderButton = new MenuItem("Розхідний касовий ордер");
-            newDocKasovyiOrderButton.Activated += OnNewDocNaOsnovi_КасовийОрдер;
+            newDocKasovyiOrderButton.Activated += OnNewDocNaOsnovi_РозхіднийКасовийОрдер;
             Menu.Append(newDocKasovyiOrderButton);
 
             MenuItem newDocPovernenjaPostachalnykuButton = new MenuItem("Повернення товарів постачальнику");
@@ -184,6 +184,10 @@ namespace StorageAndTrade
             MenuItem newDocRozmisctenjaNaSkaldyButton = new MenuItem("Розміщення товарів на складі");
             newDocRozmisctenjaNaSkaldyButton.Activated += OnNewDocNaOsnovi_РозміщенняТоварівНаСкладі;
             Menu.Append(newDocRozmisctenjaNaSkaldyButton);
+
+            MenuItem newDocVnSpozivButton = new MenuItem("Внутрішнє споживання товарів");
+            newDocVnSpozivButton.Activated += OnNewDocNaOsnovi_ВнутрішнєСпоживанняТоварів;
+            Menu.Append(newDocVnSpozivButton);
 
             Menu.ShowAll();
 
@@ -558,7 +562,7 @@ namespace StorageAndTrade
             }
         }
 
-        void OnNewDocNaOsnovi_КасовийОрдер(object? sender, EventArgs args)
+        void OnNewDocNaOsnovi_РозхіднийКасовийОрдер(object? sender, EventArgs args)
         {
             if (TreeViewGrid.Selection.CountSelectedRows() != 0)
             {
@@ -589,7 +593,7 @@ namespace StorageAndTrade
                     розхіднийКасовийОрдер_Новий.Контрагент = поступленняТоварівТаПослуг_Objest.Контрагент;
                     розхіднийКасовийОрдер_Новий.Договір = поступленняТоварівТаПослуг_Objest.Договір;
                     розхіднийКасовийОрдер_Новий.СумаДокументу = поступленняТоварівТаПослуг_Objest.СумаДокументу;
-                    розхіднийКасовийОрдер_Новий.Основа = new UuidAndText(поступленняТоварівТаПослуг_Objest.UnigueID.UGuid, поступленняТоварівТаПослуг_Objest.TypeDocument);
+                    розхіднийКасовийОрдер_Новий.Основа = поступленняТоварівТаПослуг_Objest.GetBasis();
                     розхіднийКасовийОрдер_Новий.ГосподарськаОперація = Перелічення.ГосподарськіОперації.ОплатаПостачальнику;
                     розхіднийКасовийОрдер_Новий.Автор = Program.Користувач;
                     розхіднийКасовийОрдер_Новий.Save();
@@ -642,7 +646,7 @@ namespace StorageAndTrade
                     поверненняТоварівПостачальнику_Objest.Договір = поступленняТоварівТаПослуг_Objest.Договір;
                     поверненняТоварівПостачальнику_Objest.Склад = поступленняТоварівТаПослуг_Objest.Склад;
                     поверненняТоварівПостачальнику_Objest.СумаДокументу = поступленняТоварівТаПослуг_Objest.СумаДокументу;
-                    поверненняТоварівПостачальнику_Objest.Основа = new UuidAndText(поступленняТоварівТаПослуг_Objest.UnigueID.UGuid, поступленняТоварівТаПослуг_Objest.TypeDocument);
+                    поверненняТоварівПостачальнику_Objest.Основа = поступленняТоварівТаПослуг_Objest.GetBasis();
                     поверненняТоварівПостачальнику_Objest.Автор = Program.Користувач;
                     поверненняТоварівПостачальнику_Objest.Менеджер = Program.Користувач;
                     поверненняТоварівПостачальнику_Objest.Save();
@@ -711,7 +715,7 @@ namespace StorageAndTrade
                     розміщенняТоварівНаСкладі_Objest.Склад = поступленняТоварівТаПослуг_Objest.Склад;
                     розміщенняТоварівНаСкладі_Objest.Автор = поступленняТоварівТаПослуг_Objest.Автор;
                     розміщенняТоварівНаСкладі_Objest.Підрозділ = поступленняТоварівТаПослуг_Objest.Підрозділ;
-                    розміщенняТоварівНаСкладі_Objest.Основа = new UuidAndText(поступленняТоварівТаПослуг_Objest.UnigueID.UGuid, поступленняТоварівТаПослуг_Objest.TypeDocument);
+                    розміщенняТоварівНаСкладі_Objest.Основа = поступленняТоварівТаПослуг_Objest.GetBasis();
                     розміщенняТоварівНаСкладі_Objest.ДокументПоступлення = поступленняТоварівТаПослуг_Pointer;
                     розміщенняТоварівНаСкладі_Objest.Автор = Program.Користувач;
                     розміщенняТоварівНаСкладі_Objest.Save();
@@ -738,6 +742,73 @@ namespace StorageAndTrade
                         {
                             IsNew = false,
                             РозміщенняТоварівНаСкладі_Objest = розміщенняТоварівНаСкладі_Objest
+                        };
+
+                        page.SetValue();
+
+                        return page;
+                    });
+                }
+            }
+        }
+
+        void OnNewDocNaOsnovi_ВнутрішнєСпоживанняТоварів(object? sender, EventArgs args)
+        {
+            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
+            {
+                TreePath[] selectionRows = TreeViewGrid.Selection.GetSelectedRows();
+
+                foreach (TreePath itemPath in selectionRows)
+                {
+                    TreeIter iter;
+                    TreeViewGrid.Model.GetIter(out iter, itemPath);
+
+                    string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
+
+                    ПоступленняТоварівТаПослуг_Pointer поступленняТоварівТаПослуг_Pointer = new ПоступленняТоварівТаПослуг_Pointer(new UnigueID(uid));
+                    ПоступленняТоварівТаПослуг_Objest поступленняТоварівТаПослуг_Objest = поступленняТоварівТаПослуг_Pointer.GetDocumentObject(true);
+
+                    //
+                    //Новий документ
+                    //
+
+                    ВнутрішнєСпоживанняТоварів_Objest внутрішнєСпоживанняТоварів_Objest = new ВнутрішнєСпоживанняТоварів_Objest();
+                    внутрішнєСпоживанняТоварів_Objest.New();
+                    внутрішнєСпоживанняТоварів_Objest.ДатаДок = DateTime.Now;
+                    внутрішнєСпоживанняТоварів_Objest.НомерДок = (++Константи.НумераціяДокументів.ВнутрішнєСпоживанняТоварів_Const).ToString("D8");
+                    внутрішнєСпоживанняТоварів_Objest.Назва = $"Внутрішнє споживання товарів №{внутрішнєСпоживанняТоварів_Objest.НомерДок} від {внутрішнєСпоживанняТоварів_Objest.ДатаДок.ToString("dd.MM.yyyy")}";
+                    внутрішнєСпоживанняТоварів_Objest.Організація = поступленняТоварівТаПослуг_Objest.Організація;
+                    внутрішнєСпоживанняТоварів_Objest.Склад = поступленняТоварівТаПослуг_Objest.Склад;
+                    внутрішнєСпоживанняТоварів_Objest.Автор = поступленняТоварівТаПослуг_Objest.Автор;
+                    внутрішнєСпоживанняТоварів_Objest.Підрозділ = поступленняТоварівТаПослуг_Objest.Підрозділ;
+                    внутрішнєСпоживанняТоварів_Objest.Основа = поступленняТоварівТаПослуг_Objest.GetBasis();
+                    внутрішнєСпоживанняТоварів_Objest.Автор = Program.Користувач;
+                    внутрішнєСпоживанняТоварів_Objest.Save();
+
+                    //Товари
+                    foreach (ПоступленняТоварівТаПослуг_Товари_TablePart.Record record_поступленняТоварівТаПослуг in поступленняТоварівТаПослуг_Objest.Товари_TablePart.Records)
+                    {
+                        ВнутрішнєСпоживанняТоварів_Товари_TablePart.Record record = new ВнутрішнєСпоживанняТоварів_Товари_TablePart.Record();
+                        внутрішнєСпоживанняТоварів_Objest.Товари_TablePart.Records.Add(record);
+
+                        record.Номенклатура = record_поступленняТоварівТаПослуг.Номенклатура;
+                        record.ХарактеристикаНоменклатури = record_поступленняТоварівТаПослуг.ХарактеристикаНоменклатури;
+                        record.Серія = record_поступленняТоварівТаПослуг.Серія;
+                        record.Пакування = record_поступленняТоварівТаПослуг.Пакування;
+                        record.КількістьУпаковок = record_поступленняТоварівТаПослуг.КількістьУпаковок;
+                        record.Кількість = record_поступленняТоварівТаПослуг.Кількість;
+                        record.Ціна = record_поступленняТоварівТаПослуг.Ціна;
+                        record.Сума = record_поступленняТоварівТаПослуг.Сума;
+                    }
+
+                    внутрішнєСпоживанняТоварів_Objest.Товари_TablePart.Save(true);
+
+                    Program.GeneralForm?.CreateNotebookPage($"{внутрішнєСпоживанняТоварів_Objest.Назва}", () =>
+                    {
+                        ВнутрішнєСпоживанняТоварів_Елемент page = new ВнутрішнєСпоживанняТоварів_Елемент
+                        {
+                            IsNew = false,
+                            ВнутрішнєСпоживанняТоварів_Objest = внутрішнєСпоживанняТоварів_Objest
                         };
 
                         page.SetValue();

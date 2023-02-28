@@ -205,7 +205,7 @@ namespace StorageAndTrade
 
         void CreateContainer4(VBox vBox)
         {
-
+            
         }
 
         void CreatePack2(HPaned hPaned)

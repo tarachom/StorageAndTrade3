@@ -72,6 +72,7 @@ namespace StorageAndTrade
         Користувачі_PointerControl Менеджер = new Користувачі_PointerControl() { Caption = "Менеджер:" };
         СтаттяРухуКоштів_PointerControl СтаттяРухуКоштів = new СтаттяРухуКоштів_PointerControl();
         Entry Коментар = new Entry() { WidthRequest = 920 };
+        Basis_PointerControl Основа = new Basis_PointerControl();
 
         ПоступленняТоварівТаПослуг_ТабличнаЧастина_Товари Товари = new ПоступленняТоварівТаПослуг_ТабличнаЧастина_Товари();
 
@@ -319,6 +320,12 @@ namespace StorageAndTrade
             vBox.PackStart(hBoxMenedjer, false, false, 5);
 
             hBoxMenedjer.PackStart(Менеджер, false, false, 5);
+
+            //Основа
+            HBox hBoxBasis = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxBasis, false, false, 5);
+
+            hBoxBasis.PackStart(Основа, false, false, 5);
         }
 
         void CreateContainer4(VBox vBox)
@@ -464,6 +471,7 @@ namespace StorageAndTrade
             ЧасДоставкиДо.Value = ПоступленняТоварівТаПослуг_Objest.ЧасДоставкиДо;
             Менеджер.Pointer = ПоступленняТоварівТаПослуг_Objest.Менеджер;
             СтаттяРухуКоштів.Pointer = ПоступленняТоварівТаПослуг_Objest.СтаттяРухуКоштів;
+            Основа.Pointer = ПоступленняТоварівТаПослуг_Objest.Основа;
 
             //Таблична частина
             Товари.ПоступленняТоварівТаПослуг_Objest = ПоступленняТоварівТаПослуг_Objest;
@@ -508,6 +516,7 @@ namespace StorageAndTrade
             ПоступленняТоварівТаПослуг_Objest.ЧасДоставкиДо = ЧасДоставкиДо.Value;
             ПоступленняТоварівТаПослуг_Objest.Менеджер = Менеджер.Pointer;
             ПоступленняТоварівТаПослуг_Objest.СтаттяРухуКоштів = СтаттяРухуКоштів.Pointer;
+            ПоступленняТоварівТаПослуг_Objest.Основа = Основа.Pointer;
 
             ПоступленняТоварівТаПослуг_Objest.СумаДокументу = Товари.СумаДокументу();
         }
@@ -566,7 +575,7 @@ namespace StorageAndTrade
         void ReloadList()
         {
             Товари.LoadRecords();
-            
+
             if (PageList != null)
             {
                 PageList.SelectPointerItem = ПоступленняТоварівТаПослуг_Objest.GetDocumentPointer();

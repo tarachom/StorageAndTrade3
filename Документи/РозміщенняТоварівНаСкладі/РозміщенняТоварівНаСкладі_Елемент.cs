@@ -46,6 +46,7 @@ namespace StorageAndTrade
         Користувачі_PointerControl Автор = new Користувачі_PointerControl();
         Entry Коментар = new Entry() { WidthRequest = 920 };
         ПоступленняТоварівТаПослуг_PointerControl ДокументПоступлення = new ПоступленняТоварівТаПослуг_PointerControl() { Caption = "Документ поступлення: " };
+        Basis_PointerControl Основа = new Basis_PointerControl();
 
         РозміщенняТоварівНаСкладі_ТабличнаЧастина_Товари Товари = new РозміщенняТоварівНаСкладі_ТабличнаЧастина_Товари();
 
@@ -172,6 +173,12 @@ namespace StorageAndTrade
             vBox.PackStart(hBoxAutor, false, false, 5);
 
             hBoxAutor.PackStart(Автор, false, false, 5);
+
+            //Основа
+            HBox hBoxBasis = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxBasis, false, false, 5);
+
+            hBoxBasis.PackStart(Основа, false, false, 5);
         }
 
         void CreateContainer4(VBox vBox)
@@ -226,6 +233,7 @@ namespace StorageAndTrade
             Підрозділ.Pointer = РозміщенняТоварівНаСкладі_Objest.Підрозділ;
             Автор.Pointer = РозміщенняТоварівНаСкладі_Objest.Автор;
             ДокументПоступлення.Pointer = РозміщенняТоварівНаСкладі_Objest.ДокументПоступлення;
+            Основа.Pointer = РозміщенняТоварівНаСкладі_Objest.Основа;
 
             //Таблична частина
             Товари.РозміщенняТоварівНаСкладі_Objest = РозміщенняТоварівНаСкладі_Objest;
@@ -247,6 +255,7 @@ namespace StorageAndTrade
             РозміщенняТоварівНаСкладі_Objest.Підрозділ = Підрозділ.Pointer;
             РозміщенняТоварівНаСкладі_Objest.Автор = Автор.Pointer;
             РозміщенняТоварівНаСкладі_Objest.ДокументПоступлення = ДокументПоступлення.Pointer;
+            РозміщенняТоварівНаСкладі_Objest.Основа = Основа.Pointer;
         }
 
         #endregion

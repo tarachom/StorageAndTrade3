@@ -63,7 +63,7 @@ namespace StorageAndTrade
         TimeControl ЧасДоставкиДо = new TimeControl();
         Користувачі_PointerControl Менеджер = new Користувачі_PointerControl() { Caption = "Менеджер:" };
         Entry Коментар = new Entry() { WidthRequest = 920 };
-
+        Basis_PointerControl Основа = new Basis_PointerControl();
         ЗамовленняПостачальнику_ТабличнаЧастина_Товари Товари = new ЗамовленняПостачальнику_ТабличнаЧастина_Товари();
 
         #endregion
@@ -292,6 +292,12 @@ namespace StorageAndTrade
             vBox.PackStart(hBoxMenedjer, false, false, 5);
 
             hBoxMenedjer.PackStart(Менеджер, false, false, 5);
+
+            //Основа
+            HBox hBoxBasis = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxBasis, false, false, 5);
+
+            hBoxBasis.PackStart(Основа, false, false, 5);
         }
 
         void CreateContainer4(VBox vBox)
@@ -396,6 +402,7 @@ namespace StorageAndTrade
             ЧасДоставкиЗ.Value = ЗамовленняПостачальнику_Objest.ЧасДоставкиЗ;
             ЧасДоставкиДо.Value = ЗамовленняПостачальнику_Objest.ЧасДоставкиДо;
             Менеджер.Pointer = ЗамовленняПостачальнику_Objest.Менеджер;
+            Основа.Pointer = ЗамовленняПостачальнику_Objest.Основа;
 
             //Таблична частина
             Товари.ЗамовленняПостачальнику_Objest = ЗамовленняПостачальнику_Objest;
@@ -432,6 +439,7 @@ namespace StorageAndTrade
             ЗамовленняПостачальнику_Objest.ЧасДоставкиЗ = ЧасДоставкиЗ.Value;
             ЗамовленняПостачальнику_Objest.ЧасДоставкиДо = ЧасДоставкиДо.Value;
             ЗамовленняПостачальнику_Objest.Менеджер = Менеджер.Pointer;
+            ЗамовленняПостачальнику_Objest.Основа = Основа.Pointer;
 
             ЗамовленняПостачальнику_Objest.СумаДокументу = Товари.СумаДокументу();
         }
@@ -490,7 +498,7 @@ namespace StorageAndTrade
         void ReloadList()
         {
             Товари.LoadRecords();
-            
+
             if (PageList != null)
             {
                 PageList.SelectPointerItem = ЗамовленняПостачальнику_Objest.GetDocumentPointer();

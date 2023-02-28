@@ -40,4 +40,14 @@
     <BaseName>storage_and_trade</BaseName>
     <OtherParam />
   </Configuration>
+  <Configuration Select="False">
+    <Key>be6b05d2-5cf9-4aba-a994-c450e92527c0</Key>
+    <Name>Демо онлайн - cloudclusters.io - 3</Name>
+    <Server>postgresql-113297-0.cloudclusters.net</Server>
+    <Port>19985</Port>
+    <Login>admin</Login>
+    <Password>12345678</Password>
+    <BaseName>storage_and_trade</BaseName>
+    <OtherParam />
+  </Configuration>
 </root>

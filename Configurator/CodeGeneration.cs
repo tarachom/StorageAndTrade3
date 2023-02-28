@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 25.02.2023 17:51:47
+ * Дата конфігурації: 28.02.2023 15:16:04
  *
  */
 
@@ -51,6 +51,159 @@ namespace StorageAndTrade_1_0
             Константи.ЗавантаженняДанихІзСайтів.ReadAll();
             Константи.ПриЗапускуПрограми.ReadAll();
             
+        }
+
+        public static string GetBasisObjectPresentation(UuidAndText uuidAndText, out string pointer, out string type)
+        {
+            pointer = type = "";
+
+            if (uuidAndText.IsEmpty() || String.IsNullOrEmpty(uuidAndText.Text) || uuidAndText.Text.IndexOf(".") == -1)
+                return "";
+
+            string[] pointer_and_type = uuidAndText.Text.Split(".", StringSplitOptions.None);
+
+            if (pointer_and_type.Length == 2)
+            {
+                pointer = pointer_and_type[0];
+                type = pointer_and_type[1];
+
+                if (pointer == "Документи")
+                {
+                    
+                    switch (type)
+                    {
+                        
+                        case "ЗамовленняПостачальнику": return new Документи.ЗамовленняПостачальнику_Pointer(uuidAndText.Uuid).GetPresentation();
+                        
+                        case "ПоступленняТоварівТаПослуг": return new Документи.ПоступленняТоварівТаПослуг_Pointer(uuidAndText.Uuid).GetPresentation();
+                        
+                        case "ЗамовленняКлієнта": return new Документи.ЗамовленняКлієнта_Pointer(uuidAndText.Uuid).GetPresentation();
+                        
+                        case "РеалізаціяТоварівТаПослуг": return new Документи.РеалізаціяТоварівТаПослуг_Pointer(uuidAndText.Uuid).GetPresentation();
+                        
+                        case "ВстановленняЦінНоменклатури": return new Документи.ВстановленняЦінНоменклатури_Pointer(uuidAndText.Uuid).GetPresentation();
+                        
+                        case "ПрихіднийКасовийОрдер": return new Документи.ПрихіднийКасовийОрдер_Pointer(uuidAndText.Uuid).GetPresentation();
+                        
+                        case "РозхіднийКасовийОрдер": return new Документи.РозхіднийКасовийОрдер_Pointer(uuidAndText.Uuid).GetPresentation();
+                        
+                        case "ПереміщенняТоварів": return new Документи.ПереміщенняТоварів_Pointer(uuidAndText.Uuid).GetPresentation();
+                        
+                        case "ПоверненняТоварівПостачальнику": return new Документи.ПоверненняТоварівПостачальнику_Pointer(uuidAndText.Uuid).GetPresentation();
+                        
+                        case "ПоверненняТоварівВідКлієнта": return new Документи.ПоверненняТоварівВідКлієнта_Pointer(uuidAndText.Uuid).GetPresentation();
+                        
+                        case "АктВиконанихРобіт": return new Документи.АктВиконанихРобіт_Pointer(uuidAndText.Uuid).GetPresentation();
+                        
+                        case "ВведенняЗалишків": return new Документи.ВведенняЗалишків_Pointer(uuidAndText.Uuid).GetPresentation();
+                        
+                        case "НадлишкиТоварів": return new Документи.НадлишкиТоварів_Pointer(uuidAndText.Uuid).GetPresentation();
+                        
+                        case "ПересортицяТоварів": return new Документи.ПересортицяТоварів_Pointer(uuidAndText.Uuid).GetPresentation();
+                        
+                        case "ПерерахунокТоварів": return new Документи.ПерерахунокТоварів_Pointer(uuidAndText.Uuid).GetPresentation();
+                        
+                        case "ПсуванняТоварів": return new Документи.ПсуванняТоварів_Pointer(uuidAndText.Uuid).GetPresentation();
+                        
+                        case "ВнутрішнєСпоживанняТоварів": return new Документи.ВнутрішнєСпоживанняТоварів_Pointer(uuidAndText.Uuid).GetPresentation();
+                        
+                        case "РахунокФактура": return new Документи.РахунокФактура_Pointer(uuidAndText.Uuid).GetPresentation();
+                        
+                        case "РозміщенняТоварівНаСкладі": return new Документи.РозміщенняТоварівНаСкладі_Pointer(uuidAndText.Uuid).GetPresentation();
+                        
+                        case "ПереміщенняТоварівНаСкладі": return new Документи.ПереміщенняТоварівНаСкладі_Pointer(uuidAndText.Uuid).GetPresentation();
+                        
+                        case "ЗбіркаТоварівНаСкладі": return new Документи.ЗбіркаТоварівНаСкладі_Pointer(uuidAndText.Uuid).GetPresentation();
+                        
+                        case "РозміщенняНоменклатуриПоКоміркам": return new Документи.РозміщенняНоменклатуриПоКоміркам_Pointer(uuidAndText.Uuid).GetPresentation();
+                        
+                    }
+                    
+                }
+                else if (pointer == "Довідники")
+                {
+                    
+                    switch (type)
+                    {
+                        
+                        case "Організації": return new Довідники.Організації_Pointer(uuidAndText.Uuid).GetPresentation();
+                        
+                        case "Номенклатура": return new Довідники.Номенклатура_Pointer(uuidAndText.Uuid).GetPresentation();
+                        
+                        case "Виробники": return new Довідники.Виробники_Pointer(uuidAndText.Uuid).GetPresentation();
+                        
+                        case "ВидиНоменклатури": return new Довідники.ВидиНоменклатури_Pointer(uuidAndText.Uuid).GetPresentation();
+                        
+                        case "ПакуванняОдиниціВиміру": return new Довідники.ПакуванняОдиниціВиміру_Pointer(uuidAndText.Uuid).GetPresentation();
+                        
+                        case "Валюти": return new Довідники.Валюти_Pointer(uuidAndText.Uuid).GetPresentation();
+                        
+                        case "Контрагенти": return new Довідники.Контрагенти_Pointer(uuidAndText.Uuid).GetPresentation();
+                        
+                        case "Склади": return new Довідники.Склади_Pointer(uuidAndText.Uuid).GetPresentation();
+                        
+                        case "ВидиЦін": return new Довідники.ВидиЦін_Pointer(uuidAndText.Uuid).GetPresentation();
+                        
+                        case "ВидиЦінПостачальників": return new Довідники.ВидиЦінПостачальників_Pointer(uuidAndText.Uuid).GetPresentation();
+                        
+                        case "Користувачі": return new Довідники.Користувачі_Pointer(uuidAndText.Uuid).GetPresentation();
+                        
+                        case "ФізичніОсоби": return new Довідники.ФізичніОсоби_Pointer(uuidAndText.Uuid).GetPresentation();
+                        
+                        case "СтруктураПідприємства": return new Довідники.СтруктураПідприємства_Pointer(uuidAndText.Uuid).GetPresentation();
+                        
+                        case "КраїниСвіту": return new Довідники.КраїниСвіту_Pointer(uuidAndText.Uuid).GetPresentation();
+                        
+                        case "Файли": return new Довідники.Файли_Pointer(uuidAndText.Uuid).GetPresentation();
+                        
+                        case "ХарактеристикиНоменклатури": return new Довідники.ХарактеристикиНоменклатури_Pointer(uuidAndText.Uuid).GetPresentation();
+                        
+                        case "Номенклатура_Папки": return new Довідники.Номенклатура_Папки_Pointer(uuidAndText.Uuid).GetPresentation();
+                        
+                        case "Контрагенти_Папки": return new Довідники.Контрагенти_Папки_Pointer(uuidAndText.Uuid).GetPresentation();
+                        
+                        case "Склади_Папки": return new Довідники.Склади_Папки_Pointer(uuidAndText.Uuid).GetPresentation();
+                        
+                        case "Каси": return new Довідники.Каси_Pointer(uuidAndText.Uuid).GetPresentation();
+                        
+                        case "БанківськіРахункиОрганізацій": return new Довідники.БанківськіРахункиОрганізацій_Pointer(uuidAndText.Uuid).GetPresentation();
+                        
+                        case "ДоговориКонтрагентів": return new Довідники.ДоговориКонтрагентів_Pointer(uuidAndText.Uuid).GetPresentation();
+                        
+                        case "БанківськіРахункиКонтрагентів": return new Довідники.БанківськіРахункиКонтрагентів_Pointer(uuidAndText.Uuid).GetPresentation();
+                        
+                        case "СтаттяРухуКоштів": return new Довідники.СтаттяРухуКоштів_Pointer(uuidAndText.Uuid).GetPresentation();
+                        
+                        case "СеріїНоменклатури": return new Довідники.СеріїНоменклатури_Pointer(uuidAndText.Uuid).GetPresentation();
+                        
+                        case "ПартіяТоварівКомпозит": return new Довідники.ПартіяТоварівКомпозит_Pointer(uuidAndText.Uuid).GetPresentation();
+                        
+                        case "ВидиЗапасів": return new Довідники.ВидиЗапасів_Pointer(uuidAndText.Uuid).GetPresentation();
+                        
+                        case "ПродажіДокументКомпозит": return new Довідники.ПродажіДокументКомпозит_Pointer(uuidAndText.Uuid).GetPresentation();
+                        
+                        case "АналітикаНоменклатуриКомпозит": return new Довідники.АналітикаНоменклатуриКомпозит_Pointer(uuidAndText.Uuid).GetPresentation();
+                        
+                        case "АналітикаКонтрагентівКомпозит": return new Довідники.АналітикаКонтрагентівКомпозит_Pointer(uuidAndText.Uuid).GetPresentation();
+                        
+                        case "АналітикаПартійКомпозит": return new Довідники.АналітикаПартійКомпозит_Pointer(uuidAndText.Uuid).GetPresentation();
+                        
+                        case "СкладськіПриміщення": return new Довідники.СкладськіПриміщення_Pointer(uuidAndText.Uuid).GetPresentation();
+                        
+                        case "СкладськіКомірки": return new Довідники.СкладськіКомірки_Pointer(uuidAndText.Uuid).GetPresentation();
+                        
+                        case "ОбластьЗберігання": return new Довідники.ОбластьЗберігання_Pointer(uuidAndText.Uuid).GetPresentation();
+                        
+                        case "ТипорозміриКомірок": return new Довідники.ТипорозміриКомірок_Pointer(uuidAndText.Uuid).GetPresentation();
+                        
+                        case "СкладськіКомірки_Папки": return new Довідники.СкладськіКомірки_Папки_Pointer(uuidAndText.Uuid).GetPresentation();
+                        
+                    }
+                    
+                }
+            }
+
+            return "";
         }
     }
 }
@@ -1839,8 +1992,12 @@ namespace StorageAndTrade_1_0.Довідники
         
         public Організації_Pointer GetDirectoryPointer()
         {
-            Організації_Pointer directoryPointer = new Організації_Pointer(UnigueID.UGuid);
-            return directoryPointer;
+            return new Організації_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.Організації");
         }
         
         public string Назва { get; set; }
@@ -1895,6 +2052,11 @@ namespace StorageAndTrade_1_0.Довідники
         public Організації_Pointer GetEmptyPointer()
         {
             return new Організації_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.Організації");
         }
     }
     
@@ -2147,8 +2309,12 @@ namespace StorageAndTrade_1_0.Довідники
         
         public Номенклатура_Pointer GetDirectoryPointer()
         {
-            Номенклатура_Pointer directoryPointer = new Номенклатура_Pointer(UnigueID.UGuid);
-            return directoryPointer;
+            return new Номенклатура_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.Номенклатура");
         }
         
         public string Назва { get; set; }
@@ -2205,6 +2371,11 @@ namespace StorageAndTrade_1_0.Довідники
         public Номенклатура_Pointer GetEmptyPointer()
         {
             return new Номенклатура_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.Номенклатура");
         }
     }
     
@@ -2378,8 +2549,12 @@ namespace StorageAndTrade_1_0.Довідники
         
         public Виробники_Pointer GetDirectoryPointer()
         {
-            Виробники_Pointer directoryPointer = new Виробники_Pointer(UnigueID.UGuid);
-            return directoryPointer;
+            return new Виробники_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.Виробники");
         }
         
         public string Назва { get; set; }
@@ -2424,6 +2599,11 @@ namespace StorageAndTrade_1_0.Довідники
         public Виробники_Pointer GetEmptyPointer()
         {
             return new Виробники_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.Виробники");
         }
     }
     
@@ -2535,8 +2715,12 @@ namespace StorageAndTrade_1_0.Довідники
         
         public ВидиНоменклатури_Pointer GetDirectoryPointer()
         {
-            ВидиНоменклатури_Pointer directoryPointer = new ВидиНоменклатури_Pointer(UnigueID.UGuid);
-            return directoryPointer;
+            return new ВидиНоменклатури_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.ВидиНоменклатури");
         }
         
         public string Назва { get; set; }
@@ -2584,6 +2768,11 @@ namespace StorageAndTrade_1_0.Довідники
         public ВидиНоменклатури_Pointer GetEmptyPointer()
         {
             return new ВидиНоменклатури_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.ВидиНоменклатури");
         }
     }
     
@@ -2690,8 +2879,12 @@ namespace StorageAndTrade_1_0.Довідники
         
         public ПакуванняОдиниціВиміру_Pointer GetDirectoryPointer()
         {
-            ПакуванняОдиниціВиміру_Pointer directoryPointer = new ПакуванняОдиниціВиміру_Pointer(UnigueID.UGuid);
-            return directoryPointer;
+            return new ПакуванняОдиниціВиміру_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.ПакуванняОдиниціВиміру");
         }
         
         public string Назва { get; set; }
@@ -2738,6 +2931,11 @@ namespace StorageAndTrade_1_0.Довідники
         public ПакуванняОдиниціВиміру_Pointer GetEmptyPointer()
         {
             return new ПакуванняОдиниціВиміру_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.ПакуванняОдиниціВиміру");
         }
     }
     
@@ -2850,8 +3048,12 @@ namespace StorageAndTrade_1_0.Довідники
         
         public Валюти_Pointer GetDirectoryPointer()
         {
-            Валюти_Pointer directoryPointer = new Валюти_Pointer(UnigueID.UGuid);
-            return directoryPointer;
+            return new Валюти_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.Валюти");
         }
         
         public string Назва { get; set; }
@@ -2899,6 +3101,11 @@ namespace StorageAndTrade_1_0.Довідники
         public Валюти_Pointer GetEmptyPointer()
         {
             return new Валюти_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.Валюти");
         }
     }
     
@@ -3020,8 +3227,12 @@ namespace StorageAndTrade_1_0.Довідники
         
         public Контрагенти_Pointer GetDirectoryPointer()
         {
-            Контрагенти_Pointer directoryPointer = new Контрагенти_Pointer(UnigueID.UGuid);
-            return directoryPointer;
+            return new Контрагенти_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.Контрагенти");
         }
         
         public string Назва { get; set; }
@@ -3074,6 +3285,11 @@ namespace StorageAndTrade_1_0.Довідники
         public Контрагенти_Pointer GetEmptyPointer()
         {
             return new Контрагенти_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.Контрагенти");
         }
     }
     
@@ -3382,8 +3598,12 @@ namespace StorageAndTrade_1_0.Довідники
         
         public Склади_Pointer GetDirectoryPointer()
         {
-            Склади_Pointer directoryPointer = new Склади_Pointer(UnigueID.UGuid);
-            return directoryPointer;
+            return new Склади_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.Склади");
         }
         
         public string Назва { get; set; }
@@ -3437,6 +3657,11 @@ namespace StorageAndTrade_1_0.Довідники
         public Склади_Pointer GetEmptyPointer()
         {
             return new Склади_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.Склади");
         }
     }
     
@@ -3645,8 +3870,12 @@ namespace StorageAndTrade_1_0.Довідники
         
         public ВидиЦін_Pointer GetDirectoryPointer()
         {
-            ВидиЦін_Pointer directoryPointer = new ВидиЦін_Pointer(UnigueID.UGuid);
-            return directoryPointer;
+            return new ВидиЦін_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.ВидиЦін");
         }
         
         public string Назва { get; set; }
@@ -3692,6 +3921,11 @@ namespace StorageAndTrade_1_0.Довідники
         public ВидиЦін_Pointer GetEmptyPointer()
         {
             return new ВидиЦін_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.ВидиЦін");
         }
     }
     
@@ -3793,8 +4027,12 @@ namespace StorageAndTrade_1_0.Довідники
         
         public ВидиЦінПостачальників_Pointer GetDirectoryPointer()
         {
-            ВидиЦінПостачальників_Pointer directoryPointer = new ВидиЦінПостачальників_Pointer(UnigueID.UGuid);
-            return directoryPointer;
+            return new ВидиЦінПостачальників_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.ВидиЦінПостачальників");
         }
         
         public string Назва { get; set; }
@@ -3840,6 +4078,11 @@ namespace StorageAndTrade_1_0.Довідники
         public ВидиЦінПостачальників_Pointer GetEmptyPointer()
         {
             return new ВидиЦінПостачальників_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.ВидиЦінПостачальників");
         }
     }
     
@@ -3954,8 +4197,12 @@ namespace StorageAndTrade_1_0.Довідники
         
         public Користувачі_Pointer GetDirectoryPointer()
         {
-            Користувачі_Pointer directoryPointer = new Користувачі_Pointer(UnigueID.UGuid);
-            return directoryPointer;
+            return new Користувачі_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.Користувачі");
         }
         
         public string Назва { get; set; }
@@ -4006,6 +4253,11 @@ namespace StorageAndTrade_1_0.Довідники
         public Користувачі_Pointer GetEmptyPointer()
         {
             return new Користувачі_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.Користувачі");
         }
     }
     
@@ -4222,8 +4474,12 @@ namespace StorageAndTrade_1_0.Довідники
         
         public ФізичніОсоби_Pointer GetDirectoryPointer()
         {
-            ФізичніОсоби_Pointer directoryPointer = new ФізичніОсоби_Pointer(UnigueID.UGuid);
-            return directoryPointer;
+            return new ФізичніОсоби_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.ФізичніОсоби");
         }
         
         public string Назва { get; set; }
@@ -4274,6 +4530,11 @@ namespace StorageAndTrade_1_0.Довідники
         public ФізичніОсоби_Pointer GetEmptyPointer()
         {
             return new ФізичніОсоби_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.ФізичніОсоби");
         }
     }
     
@@ -4477,8 +4738,12 @@ namespace StorageAndTrade_1_0.Довідники
         
         public СтруктураПідприємства_Pointer GetDirectoryPointer()
         {
-            СтруктураПідприємства_Pointer directoryPointer = new СтруктураПідприємства_Pointer(UnigueID.UGuid);
-            return directoryPointer;
+            return new СтруктураПідприємства_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.СтруктураПідприємства");
         }
         
         public string Назва { get; set; }
@@ -4524,6 +4789,11 @@ namespace StorageAndTrade_1_0.Довідники
         public СтруктураПідприємства_Pointer GetEmptyPointer()
         {
             return new СтруктураПідприємства_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.СтруктураПідприємства");
         }
     }
     
@@ -4625,8 +4895,12 @@ namespace StorageAndTrade_1_0.Довідники
         
         public КраїниСвіту_Pointer GetDirectoryPointer()
         {
-            КраїниСвіту_Pointer directoryPointer = new КраїниСвіту_Pointer(UnigueID.UGuid);
-            return directoryPointer;
+            return new КраїниСвіту_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.КраїниСвіту");
         }
         
         public string Назва { get; set; }
@@ -4672,6 +4946,11 @@ namespace StorageAndTrade_1_0.Довідники
         public КраїниСвіту_Pointer GetEmptyPointer()
         {
             return new КраїниСвіту_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.КраїниСвіту");
         }
     }
     
@@ -4788,8 +5067,12 @@ namespace StorageAndTrade_1_0.Довідники
         
         public Файли_Pointer GetDirectoryPointer()
         {
-            Файли_Pointer directoryPointer = new Файли_Pointer(UnigueID.UGuid);
-            return directoryPointer;
+            return new Файли_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.Файли");
         }
         
         public string Код { get; set; }
@@ -4838,6 +5121,11 @@ namespace StorageAndTrade_1_0.Довідники
         public Файли_Pointer GetEmptyPointer()
         {
             return new Файли_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.Файли");
         }
     }
     
@@ -4944,8 +5232,12 @@ namespace StorageAndTrade_1_0.Довідники
         
         public ХарактеристикиНоменклатури_Pointer GetDirectoryPointer()
         {
-            ХарактеристикиНоменклатури_Pointer directoryPointer = new ХарактеристикиНоменклатури_Pointer(UnigueID.UGuid);
-            return directoryPointer;
+            return new ХарактеристикиНоменклатури_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.ХарактеристикиНоменклатури");
         }
         
         public string Назва { get; set; }
@@ -4992,6 +5284,11 @@ namespace StorageAndTrade_1_0.Довідники
         public ХарактеристикиНоменклатури_Pointer GetEmptyPointer()
         {
             return new ХарактеристикиНоменклатури_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.ХарактеристикиНоменклатури");
         }
     }
     
@@ -5093,8 +5390,12 @@ namespace StorageAndTrade_1_0.Довідники
         
         public Номенклатура_Папки_Pointer GetDirectoryPointer()
         {
-            Номенклатура_Папки_Pointer directoryPointer = new Номенклатура_Папки_Pointer(UnigueID.UGuid);
-            return directoryPointer;
+            return new Номенклатура_Папки_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.Номенклатура_Папки");
         }
         
         public string Назва { get; set; }
@@ -5140,6 +5441,11 @@ namespace StorageAndTrade_1_0.Довідники
         public Номенклатура_Папки_Pointer GetEmptyPointer()
         {
             return new Номенклатура_Папки_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.Номенклатура_Папки");
         }
     }
     
@@ -5241,8 +5547,12 @@ namespace StorageAndTrade_1_0.Довідники
         
         public Контрагенти_Папки_Pointer GetDirectoryPointer()
         {
-            Контрагенти_Папки_Pointer directoryPointer = new Контрагенти_Папки_Pointer(UnigueID.UGuid);
-            return directoryPointer;
+            return new Контрагенти_Папки_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.Контрагенти_Папки");
         }
         
         public string Назва { get; set; }
@@ -5288,6 +5598,11 @@ namespace StorageAndTrade_1_0.Довідники
         public Контрагенти_Папки_Pointer GetEmptyPointer()
         {
             return new Контрагенти_Папки_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.Контрагенти_Папки");
         }
     }
     
@@ -5389,8 +5704,12 @@ namespace StorageAndTrade_1_0.Довідники
         
         public Склади_Папки_Pointer GetDirectoryPointer()
         {
-            Склади_Папки_Pointer directoryPointer = new Склади_Папки_Pointer(UnigueID.UGuid);
-            return directoryPointer;
+            return new Склади_Папки_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.Склади_Папки");
         }
         
         public string Назва { get; set; }
@@ -5436,6 +5755,11 @@ namespace StorageAndTrade_1_0.Довідники
         public Склади_Папки_Pointer GetEmptyPointer()
         {
             return new Склади_Папки_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.Склади_Папки");
         }
     }
     
@@ -5542,8 +5866,12 @@ namespace StorageAndTrade_1_0.Довідники
         
         public Каси_Pointer GetDirectoryPointer()
         {
-            Каси_Pointer directoryPointer = new Каси_Pointer(UnigueID.UGuid);
-            return directoryPointer;
+            return new Каси_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.Каси");
         }
         
         public string Назва { get; set; }
@@ -5590,6 +5918,11 @@ namespace StorageAndTrade_1_0.Довідники
         public Каси_Pointer GetEmptyPointer()
         {
             return new Каси_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.Каси");
         }
     }
     
@@ -5741,8 +6074,12 @@ namespace StorageAndTrade_1_0.Довідники
         
         public БанківськіРахункиОрганізацій_Pointer GetDirectoryPointer()
         {
-            БанківськіРахункиОрганізацій_Pointer directoryPointer = new БанківськіРахункиОрганізацій_Pointer(UnigueID.UGuid);
-            return directoryPointer;
+            return new БанківськіРахункиОрганізацій_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.БанківськіРахункиОрганізацій");
         }
         
         public string Назва { get; set; }
@@ -5798,6 +6135,11 @@ namespace StorageAndTrade_1_0.Довідники
         public БанківськіРахункиОрганізацій_Pointer GetEmptyPointer()
         {
             return new БанківськіРахункиОрганізацій_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.БанківськіРахункиОрганізацій");
         }
     }
     
@@ -5985,8 +6327,12 @@ namespace StorageAndTrade_1_0.Довідники
         
         public ДоговориКонтрагентів_Pointer GetDirectoryPointer()
         {
-            ДоговориКонтрагентів_Pointer directoryPointer = new ДоговориКонтрагентів_Pointer(UnigueID.UGuid);
-            return directoryPointer;
+            return new ДоговориКонтрагентів_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.ДоговориКонтрагентів");
         }
         
         public string Назва { get; set; }
@@ -6049,6 +6395,11 @@ namespace StorageAndTrade_1_0.Довідники
         public ДоговориКонтрагентів_Pointer GetEmptyPointer()
         {
             return new ДоговориКонтрагентів_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.ДоговориКонтрагентів");
         }
     }
     
@@ -6210,8 +6561,12 @@ namespace StorageAndTrade_1_0.Довідники
         
         public БанківськіРахункиКонтрагентів_Pointer GetDirectoryPointer()
         {
-            БанківськіРахункиКонтрагентів_Pointer directoryPointer = new БанківськіРахункиКонтрагентів_Pointer(UnigueID.UGuid);
-            return directoryPointer;
+            return new БанківськіРахункиКонтрагентів_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.БанківськіРахункиКонтрагентів");
         }
         
         public string Назва { get; set; }
@@ -6269,6 +6624,11 @@ namespace StorageAndTrade_1_0.Довідники
         public БанківськіРахункиКонтрагентів_Pointer GetEmptyPointer()
         {
             return new БанківськіРахункиКонтрагентів_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.БанківськіРахункиКонтрагентів");
         }
     }
     
@@ -6383,8 +6743,12 @@ namespace StorageAndTrade_1_0.Довідники
         
         public СтаттяРухуКоштів_Pointer GetDirectoryPointer()
         {
-            СтаттяРухуКоштів_Pointer directoryPointer = new СтаттяРухуКоштів_Pointer(UnigueID.UGuid);
-            return directoryPointer;
+            return new СтаттяРухуКоштів_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.СтаттяРухуКоштів");
         }
         
         public string Назва { get; set; }
@@ -6435,6 +6799,11 @@ namespace StorageAndTrade_1_0.Довідники
         public СтаттяРухуКоштів_Pointer GetEmptyPointer()
         {
             return new СтаттяРухуКоштів_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.СтаттяРухуКоштів");
         }
     }
     
@@ -6609,8 +6978,12 @@ namespace StorageAndTrade_1_0.Довідники
         
         public СеріїНоменклатури_Pointer GetDirectoryPointer()
         {
-            СеріїНоменклатури_Pointer directoryPointer = new СеріїНоменклатури_Pointer(UnigueID.UGuid);
-            return directoryPointer;
+            return new СеріїНоменклатури_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.СеріїНоменклатури");
         }
         
         public string Номер { get; set; }
@@ -6656,6 +7029,11 @@ namespace StorageAndTrade_1_0.Довідники
         public СеріїНоменклатури_Pointer GetEmptyPointer()
         {
             return new СеріїНоменклатури_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.СеріїНоменклатури");
         }
     }
     
@@ -6772,8 +7150,12 @@ namespace StorageAndTrade_1_0.Довідники
         
         public ПартіяТоварівКомпозит_Pointer GetDirectoryPointer()
         {
-            ПартіяТоварівКомпозит_Pointer directoryPointer = new ПартіяТоварівКомпозит_Pointer(UnigueID.UGuid);
-            return directoryPointer;
+            return new ПартіяТоварівКомпозит_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.ПартіяТоварівКомпозит");
         }
         
         public string Назва { get; set; }
@@ -6822,6 +7204,11 @@ namespace StorageAndTrade_1_0.Довідники
         public ПартіяТоварівКомпозит_Pointer GetEmptyPointer()
         {
             return new ПартіяТоварівКомпозит_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.ПартіяТоварівКомпозит");
         }
     }
     
@@ -6938,8 +7325,12 @@ namespace StorageAndTrade_1_0.Довідники
         
         public ВидиЗапасів_Pointer GetDirectoryPointer()
         {
-            ВидиЗапасів_Pointer directoryPointer = new ВидиЗапасів_Pointer(UnigueID.UGuid);
-            return directoryPointer;
+            return new ВидиЗапасів_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.ВидиЗапасів");
         }
         
         public string Назва { get; set; }
@@ -6988,6 +7379,11 @@ namespace StorageAndTrade_1_0.Довідники
         public ВидиЗапасів_Pointer GetEmptyPointer()
         {
             return new ВидиЗапасів_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.ВидиЗапасів");
         }
     }
     
@@ -7104,8 +7500,12 @@ namespace StorageAndTrade_1_0.Довідники
         
         public ПродажіДокументКомпозит_Pointer GetDirectoryPointer()
         {
-            ПродажіДокументКомпозит_Pointer directoryPointer = new ПродажіДокументКомпозит_Pointer(UnigueID.UGuid);
-            return directoryPointer;
+            return new ПродажіДокументКомпозит_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.ПродажіДокументКомпозит");
         }
         
         public string Назва { get; set; }
@@ -7154,6 +7554,11 @@ namespace StorageAndTrade_1_0.Довідники
         public ПродажіДокументКомпозит_Pointer GetEmptyPointer()
         {
             return new ПродажіДокументКомпозит_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.ПродажіДокументКомпозит");
         }
     }
     
@@ -7265,8 +7670,12 @@ namespace StorageAndTrade_1_0.Довідники
         
         public АналітикаНоменклатуриКомпозит_Pointer GetDirectoryPointer()
         {
-            АналітикаНоменклатуриКомпозит_Pointer directoryPointer = new АналітикаНоменклатуриКомпозит_Pointer(UnigueID.UGuid);
-            return directoryPointer;
+            return new АналітикаНоменклатуриКомпозит_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.АналітикаНоменклатуриКомпозит");
         }
         
         public string Назва { get; set; }
@@ -7314,6 +7723,11 @@ namespace StorageAndTrade_1_0.Довідники
         public АналітикаНоменклатуриКомпозит_Pointer GetEmptyPointer()
         {
             return new АналітикаНоменклатуриКомпозит_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.АналітикаНоменклатуриКомпозит");
         }
     }
     
@@ -7420,8 +7834,12 @@ namespace StorageAndTrade_1_0.Довідники
         
         public АналітикаКонтрагентівКомпозит_Pointer GetDirectoryPointer()
         {
-            АналітикаКонтрагентівКомпозит_Pointer directoryPointer = new АналітикаКонтрагентівКомпозит_Pointer(UnigueID.UGuid);
-            return directoryPointer;
+            return new АналітикаКонтрагентівКомпозит_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.АналітикаКонтрагентівКомпозит");
         }
         
         public string Назва { get; set; }
@@ -7468,6 +7886,11 @@ namespace StorageAndTrade_1_0.Довідники
         public АналітикаКонтрагентівКомпозит_Pointer GetEmptyPointer()
         {
             return new АналітикаКонтрагентівКомпозит_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.АналітикаКонтрагентівКомпозит");
         }
     }
     
@@ -7564,8 +7987,12 @@ namespace StorageAndTrade_1_0.Довідники
         
         public АналітикаПартійКомпозит_Pointer GetDirectoryPointer()
         {
-            АналітикаПартійКомпозит_Pointer directoryPointer = new АналітикаПартійКомпозит_Pointer(UnigueID.UGuid);
-            return directoryPointer;
+            return new АналітикаПартійКомпозит_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.АналітикаПартійКомпозит");
         }
         
         public string Назва { get; set; }
@@ -7610,6 +8037,11 @@ namespace StorageAndTrade_1_0.Довідники
         public АналітикаПартійКомпозит_Pointer GetEmptyPointer()
         {
             return new АналітикаПартійКомпозит_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.АналітикаПартійКомпозит");
         }
     }
     
@@ -7711,8 +8143,12 @@ namespace StorageAndTrade_1_0.Довідники
         
         public СкладськіПриміщення_Pointer GetDirectoryPointer()
         {
-            СкладськіПриміщення_Pointer directoryPointer = new СкладськіПриміщення_Pointer(UnigueID.UGuid);
-            return directoryPointer;
+            return new СкладськіПриміщення_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.СкладськіПриміщення");
         }
         
         public string Назва { get; set; }
@@ -7758,6 +8194,11 @@ namespace StorageAndTrade_1_0.Довідники
         public СкладськіПриміщення_Pointer GetEmptyPointer()
         {
             return new СкладськіПриміщення_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.СкладськіПриміщення");
         }
     }
     
@@ -7894,8 +8335,12 @@ namespace StorageAndTrade_1_0.Довідники
         
         public СкладськіКомірки_Pointer GetDirectoryPointer()
         {
-            СкладськіКомірки_Pointer directoryPointer = new СкладськіКомірки_Pointer(UnigueID.UGuid);
-            return directoryPointer;
+            return new СкладськіКомірки_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.СкладськіКомірки");
         }
         
         public Довідники.СкладськіКомірки_Папки_Pointer Папка { get; set; }
@@ -7948,6 +8393,11 @@ namespace StorageAndTrade_1_0.Довідники
         public СкладськіКомірки_Pointer GetEmptyPointer()
         {
             return new СкладськіКомірки_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.СкладськіКомірки");
         }
     }
     
@@ -8049,8 +8499,12 @@ namespace StorageAndTrade_1_0.Довідники
         
         public ОбластьЗберігання_Pointer GetDirectoryPointer()
         {
-            ОбластьЗберігання_Pointer directoryPointer = new ОбластьЗберігання_Pointer(UnigueID.UGuid);
-            return directoryPointer;
+            return new ОбластьЗберігання_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.ОбластьЗберігання");
         }
         
         public string Назва { get; set; }
@@ -8096,6 +8550,11 @@ namespace StorageAndTrade_1_0.Довідники
         public ОбластьЗберігання_Pointer GetEmptyPointer()
         {
             return new ОбластьЗберігання_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.ОбластьЗберігання");
         }
     }
     
@@ -8212,8 +8671,12 @@ namespace StorageAndTrade_1_0.Довідники
         
         public ТипорозміриКомірок_Pointer GetDirectoryPointer()
         {
-            ТипорозміриКомірок_Pointer directoryPointer = new ТипорозміриКомірок_Pointer(UnigueID.UGuid);
-            return directoryPointer;
+            return new ТипорозміриКомірок_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.ТипорозміриКомірок");
         }
         
         public string Висота { get; set; }
@@ -8262,6 +8725,11 @@ namespace StorageAndTrade_1_0.Довідники
         public ТипорозміриКомірок_Pointer GetEmptyPointer()
         {
             return new ТипорозміриКомірок_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.ТипорозміриКомірок");
         }
     }
     
@@ -8368,8 +8836,12 @@ namespace StorageAndTrade_1_0.Довідники
         
         public СкладськіКомірки_Папки_Pointer GetDirectoryPointer()
         {
-            СкладськіКомірки_Папки_Pointer directoryPointer = new СкладськіКомірки_Папки_Pointer(UnigueID.UGuid);
-            return directoryPointer;
+            return new СкладськіКомірки_Папки_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.СкладськіКомірки_Папки");
         }
         
         public string Назва { get; set; }
@@ -8416,6 +8888,11 @@ namespace StorageAndTrade_1_0.Довідники
         public СкладськіКомірки_Папки_Pointer GetEmptyPointer()
         {
             return new СкладськіКомірки_Папки_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.СкладськіКомірки_Папки");
         }
     }
     
@@ -9987,8 +10464,12 @@ namespace StorageAndTrade_1_0.Документи
         
         public ЗамовленняПостачальнику_Pointer GetDocumentPointer()
         {
-            ЗамовленняПостачальнику_Pointer directoryPointer = new ЗамовленняПостачальнику_Pointer(UnigueID.UGuid);
-            return directoryPointer;
+            return new ЗамовленняПостачальнику_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Документи.ЗамовленняПостачальнику");
         }
         
         public string Назва { get; set; }
@@ -10053,6 +10534,11 @@ namespace StorageAndTrade_1_0.Документи
         public ЗамовленняПостачальнику_Pointer GetEmptyPointer()
         {
             return new ЗамовленняПостачальнику_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Документи.ЗамовленняПостачальнику");
         }
 		
         public ЗамовленняПостачальнику_Objest GetDocumentObject(bool readAllTablePart = false)
@@ -10817,8 +11303,12 @@ namespace StorageAndTrade_1_0.Документи
         
         public ПоступленняТоварівТаПослуг_Pointer GetDocumentPointer()
         {
-            ПоступленняТоварівТаПослуг_Pointer directoryPointer = new ПоступленняТоварівТаПослуг_Pointer(UnigueID.UGuid);
-            return directoryPointer;
+            return new ПоступленняТоварівТаПослуг_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Документи.ПоступленняТоварівТаПослуг");
         }
         
         public string Назва { get; set; }
@@ -10889,6 +11379,11 @@ namespace StorageAndTrade_1_0.Документи
         public ПоступленняТоварівТаПослуг_Pointer GetEmptyPointer()
         {
             return new ПоступленняТоварівТаПослуг_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Документи.ПоступленняТоварівТаПослуг");
         }
 		
         public ПоступленняТоварівТаПослуг_Objest GetDocumentObject(bool readAllTablePart = false)
@@ -11604,8 +12099,12 @@ namespace StorageAndTrade_1_0.Документи
         
         public ЗамовленняКлієнта_Pointer GetDocumentPointer()
         {
-            ЗамовленняКлієнта_Pointer directoryPointer = new ЗамовленняКлієнта_Pointer(UnigueID.UGuid);
-            return directoryPointer;
+            return new ЗамовленняКлієнта_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Документи.ЗамовленняКлієнта");
         }
         
         public string Назва { get; set; }
@@ -11673,6 +12172,11 @@ namespace StorageAndTrade_1_0.Документи
         public ЗамовленняКлієнта_Pointer GetEmptyPointer()
         {
             return new ЗамовленняКлієнта_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Документи.ЗамовленняКлієнта");
         }
 		
         public ЗамовленняКлієнта_Objest GetDocumentObject(bool readAllTablePart = false)
@@ -12421,8 +12925,12 @@ namespace StorageAndTrade_1_0.Документи
         
         public РеалізаціяТоварівТаПослуг_Pointer GetDocumentPointer()
         {
-            РеалізаціяТоварівТаПослуг_Pointer directoryPointer = new РеалізаціяТоварівТаПослуг_Pointer(UnigueID.UGuid);
-            return directoryPointer;
+            return new РеалізаціяТоварівТаПослуг_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Документи.РеалізаціяТоварівТаПослуг");
         }
         
         public string Назва { get; set; }
@@ -12492,6 +13000,11 @@ namespace StorageAndTrade_1_0.Документи
         public РеалізаціяТоварівТаПослуг_Pointer GetEmptyPointer()
         {
             return new РеалізаціяТоварівТаПослуг_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Документи.РеалізаціяТоварівТаПослуг");
         }
 		
         public РеалізаціяТоварівТаПослуг_Objest GetDocumentObject(bool readAllTablePart = false)
@@ -12922,8 +13435,12 @@ namespace StorageAndTrade_1_0.Документи
         
         public ВстановленняЦінНоменклатури_Pointer GetDocumentPointer()
         {
-            ВстановленняЦінНоменклатури_Pointer directoryPointer = new ВстановленняЦінНоменклатури_Pointer(UnigueID.UGuid);
-            return directoryPointer;
+            return new ВстановленняЦінНоменклатури_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Документи.ВстановленняЦінНоменклатури");
         }
         
         public string Назва { get; set; }
@@ -12970,6 +13487,11 @@ namespace StorageAndTrade_1_0.Документи
         public ВстановленняЦінНоменклатури_Pointer GetEmptyPointer()
         {
             return new ВстановленняЦінНоменклатури_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Документи.ВстановленняЦінНоменклатури");
         }
 		
         public ВстановленняЦінНоменклатури_Objest GetDocumentObject(bool readAllTablePart = false)
@@ -13469,8 +13991,12 @@ namespace StorageAndTrade_1_0.Документи
         
         public ПрихіднийКасовийОрдер_Pointer GetDocumentPointer()
         {
-            ПрихіднийКасовийОрдер_Pointer directoryPointer = new ПрихіднийКасовийОрдер_Pointer(UnigueID.UGuid);
-            return directoryPointer;
+            return new ПрихіднийКасовийОрдер_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Документи.ПрихіднийКасовийОрдер");
         }
         
         public string Назва { get; set; }
@@ -13526,6 +14052,11 @@ namespace StorageAndTrade_1_0.Документи
         public ПрихіднийКасовийОрдер_Pointer GetEmptyPointer()
         {
             return new ПрихіднийКасовийОрдер_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Документи.ПрихіднийКасовийОрдер");
         }
 		
         public ПрихіднийКасовийОрдер_Objest GetDocumentObject(bool readAllTablePart = false)
@@ -14055,8 +14586,12 @@ namespace StorageAndTrade_1_0.Документи
         
         public РозхіднийКасовийОрдер_Pointer GetDocumentPointer()
         {
-            РозхіднийКасовийОрдер_Pointer directoryPointer = new РозхіднийКасовийОрдер_Pointer(UnigueID.UGuid);
-            return directoryPointer;
+            return new РозхіднийКасовийОрдер_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Документи.РозхіднийКасовийОрдер");
         }
         
         public string Назва { get; set; }
@@ -14114,6 +14649,11 @@ namespace StorageAndTrade_1_0.Документи
         public РозхіднийКасовийОрдер_Pointer GetEmptyPointer()
         {
             return new РозхіднийКасовийОрдер_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Документи.РозхіднийКасовийОрдер");
         }
 		
         public РозхіднийКасовийОрдер_Objest GetDocumentObject(bool readAllTablePart = false)
@@ -14652,8 +15192,12 @@ namespace StorageAndTrade_1_0.Документи
         
         public ПереміщенняТоварів_Pointer GetDocumentPointer()
         {
-            ПереміщенняТоварів_Pointer directoryPointer = new ПереміщенняТоварів_Pointer(UnigueID.UGuid);
-            return directoryPointer;
+            return new ПереміщенняТоварів_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Документи.ПереміщенняТоварів");
         }
         
         public string Назва { get; set; }
@@ -14711,6 +15255,11 @@ namespace StorageAndTrade_1_0.Документи
         public ПереміщенняТоварів_Pointer GetEmptyPointer()
         {
             return new ПереміщенняТоварів_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Документи.ПереміщенняТоварів");
         }
 		
         public ПереміщенняТоварів_Objest GetDocumentObject(bool readAllTablePart = false)
@@ -15304,8 +15853,12 @@ namespace StorageAndTrade_1_0.Документи
         
         public ПоверненняТоварівПостачальнику_Pointer GetDocumentPointer()
         {
-            ПоверненняТоварівПостачальнику_Pointer directoryPointer = new ПоверненняТоварівПостачальнику_Pointer(UnigueID.UGuid);
-            return directoryPointer;
+            return new ПоверненняТоварівПостачальнику_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Документи.ПоверненняТоварівПостачальнику");
         }
         
         public string Назва { get; set; }
@@ -15366,6 +15919,11 @@ namespace StorageAndTrade_1_0.Документи
         public ПоверненняТоварівПостачальнику_Pointer GetEmptyPointer()
         {
             return new ПоверненняТоварівПостачальнику_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Документи.ПоверненняТоварівПостачальнику");
         }
 		
         public ПоверненняТоварівПостачальнику_Objest GetDocumentObject(bool readAllTablePart = false)
@@ -15932,8 +16490,12 @@ namespace StorageAndTrade_1_0.Документи
         
         public ПоверненняТоварівВідКлієнта_Pointer GetDocumentPointer()
         {
-            ПоверненняТоварівВідКлієнта_Pointer directoryPointer = new ПоверненняТоварівВідКлієнта_Pointer(UnigueID.UGuid);
-            return directoryPointer;
+            return new ПоверненняТоварівВідКлієнта_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Документи.ПоверненняТоварівВідКлієнта");
         }
         
         public string Назва { get; set; }
@@ -15990,6 +16552,11 @@ namespace StorageAndTrade_1_0.Документи
         public ПоверненняТоварівВідКлієнта_Pointer GetEmptyPointer()
         {
             return new ПоверненняТоварівВідКлієнта_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Документи.ПоверненняТоварівВідКлієнта");
         }
 		
         public ПоверненняТоварівВідКлієнта_Objest GetDocumentObject(bool readAllTablePart = false)
@@ -16503,8 +17070,12 @@ namespace StorageAndTrade_1_0.Документи
         
         public АктВиконанихРобіт_Pointer GetDocumentPointer()
         {
-            АктВиконанихРобіт_Pointer directoryPointer = new АктВиконанихРобіт_Pointer(UnigueID.UGuid);
-            return directoryPointer;
+            return new АктВиконанихРобіт_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Документи.АктВиконанихРобіт");
         }
         
         public string Назва { get; set; }
@@ -16559,6 +17130,11 @@ namespace StorageAndTrade_1_0.Документи
         public АктВиконанихРобіт_Pointer GetEmptyPointer()
         {
             return new АктВиконанихРобіт_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Документи.АктВиконанихРобіт");
         }
 		
         public АктВиконанихРобіт_Objest GetDocumentObject(bool readAllTablePart = false)
@@ -17137,8 +17713,12 @@ namespace StorageAndTrade_1_0.Документи
         
         public ВведенняЗалишків_Pointer GetDocumentPointer()
         {
-            ВведенняЗалишків_Pointer directoryPointer = new ВведенняЗалишків_Pointer(UnigueID.UGuid);
-            return directoryPointer;
+            return new ВведенняЗалишків_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Документи.ВведенняЗалишків");
         }
         
         public string Назва { get; set; }
@@ -17192,6 +17772,11 @@ namespace StorageAndTrade_1_0.Документи
         public ВведенняЗалишків_Pointer GetEmptyPointer()
         {
             return new ВведенняЗалишків_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Документи.ВведенняЗалишків");
         }
 		
         public ВведенняЗалишків_Objest GetDocumentObject(bool readAllTablePart = false)
@@ -17883,8 +18468,12 @@ namespace StorageAndTrade_1_0.Документи
         
         public НадлишкиТоварів_Pointer GetDocumentPointer()
         {
-            НадлишкиТоварів_Pointer directoryPointer = new НадлишкиТоварів_Pointer(UnigueID.UGuid);
-            return directoryPointer;
+            return new НадлишкиТоварів_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Документи.НадлишкиТоварів");
         }
         
         public Довідники.Організації_Pointer Організація { get; set; }
@@ -17932,6 +18521,11 @@ namespace StorageAndTrade_1_0.Документи
         public НадлишкиТоварів_Pointer GetEmptyPointer()
         {
             return new НадлишкиТоварів_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Документи.НадлишкиТоварів");
         }
 		
         public НадлишкиТоварів_Objest GetDocumentObject(bool readAllTablePart = false)
@@ -18317,8 +18911,12 @@ namespace StorageAndTrade_1_0.Документи
         
         public ПересортицяТоварів_Pointer GetDocumentPointer()
         {
-            ПересортицяТоварів_Pointer directoryPointer = new ПересортицяТоварів_Pointer(UnigueID.UGuid);
-            return directoryPointer;
+            return new ПересортицяТоварів_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Документи.ПересортицяТоварів");
         }
         
         public string Назва { get; set; }
@@ -18366,6 +18964,11 @@ namespace StorageAndTrade_1_0.Документи
         public ПересортицяТоварів_Pointer GetEmptyPointer()
         {
             return new ПересортицяТоварів_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Документи.ПересортицяТоварів");
         }
 		
         public ПересортицяТоварів_Objest GetDocumentObject(bool readAllTablePart = false)
@@ -18739,8 +19342,12 @@ namespace StorageAndTrade_1_0.Документи
         
         public ПерерахунокТоварів_Pointer GetDocumentPointer()
         {
-            ПерерахунокТоварів_Pointer directoryPointer = new ПерерахунокТоварів_Pointer(UnigueID.UGuid);
-            return directoryPointer;
+            return new ПерерахунокТоварів_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Документи.ПерерахунокТоварів");
         }
         
         public string Назва { get; set; }
@@ -18786,6 +19393,11 @@ namespace StorageAndTrade_1_0.Документи
         public ПерерахунокТоварів_Pointer GetEmptyPointer()
         {
             return new ПерерахунокТоварів_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Документи.ПерерахунокТоварів");
         }
 		
         public ПерерахунокТоварів_Objest GetDocumentObject(bool readAllTablePart = false)
@@ -19234,8 +19846,12 @@ namespace StorageAndTrade_1_0.Документи
         
         public ПсуванняТоварів_Pointer GetDocumentPointer()
         {
-            ПсуванняТоварів_Pointer directoryPointer = new ПсуванняТоварів_Pointer(UnigueID.UGuid);
-            return directoryPointer;
+            return new ПсуванняТоварів_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Документи.ПсуванняТоварів");
         }
         
         public string Назва { get; set; }
@@ -19285,6 +19901,11 @@ namespace StorageAndTrade_1_0.Документи
         public ПсуванняТоварів_Pointer GetEmptyPointer()
         {
             return new ПсуванняТоварів_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Документи.ПсуванняТоварів");
         }
 		
         public ПсуванняТоварів_Objest GetDocumentObject(bool readAllTablePart = false)
@@ -19529,9 +20150,9 @@ namespace StorageAndTrade_1_0.Документи
               
             xmlWriter.WriteEndElement(); //СумаДокументу
             xmlWriter.WriteStartElement("Основа");
-            xmlWriter.WriteAttributeString("type", "string");
+            xmlWriter.WriteAttributeString("type", "composite_pointer");
             
-                xmlWriter.WriteValue(ВнутрішнєСпоживанняТоварів_Objest.Основа);
+                xmlWriter.WriteRaw(((UuidAndText)ВнутрішнєСпоживанняТоварів_Objest.Основа).ToXml());
               
             xmlWriter.WriteEndElement(); //Основа
             xmlWriter.WriteStartElement("Автор");
@@ -19661,7 +20282,7 @@ namespace StorageAndTrade_1_0.Документи
             Валюта = new Довідники.Валюти_Pointer();
             Підрозділ = new Довідники.СтруктураПідприємства_Pointer();
             СумаДокументу = 0;
-            Основа = "";
+            Основа = new UuidAndText();
             Автор = new Довідники.Користувачі_Pointer();
             ГосподарськаОперація = 0;
             Коментар = "";
@@ -19683,7 +20304,7 @@ namespace StorageAndTrade_1_0.Документи
                 Валюта = new Довідники.Валюти_Pointer(base.FieldValue["col_a2"]);
                 Підрозділ = new Довідники.СтруктураПідприємства_Pointer(base.FieldValue["col_a9"]);
                 СумаДокументу = (base.FieldValue["col_a8"] != DBNull.Value) ? (decimal)base.FieldValue["col_a8"] : 0;
-                Основа = base.FieldValue["col_b7"]?.ToString() ?? "";
+                Основа = (base.FieldValue["col_b7"] != DBNull.Value) ? (UuidAndText)base.FieldValue["col_b7"] : new UuidAndText();
                 Автор = new Довідники.Користувачі_Pointer(base.FieldValue["col_b9"]);
                 ГосподарськаОперація = (base.FieldValue["col_b4"] != DBNull.Value) ? (Перелічення.ГосподарськіОперації)base.FieldValue["col_b4"] : 0;
                 Коментар = base.FieldValue["col_b2"]?.ToString() ?? "";
@@ -19756,8 +20377,12 @@ namespace StorageAndTrade_1_0.Документи
         
         public ВнутрішнєСпоживанняТоварів_Pointer GetDocumentPointer()
         {
-            ВнутрішнєСпоживанняТоварів_Pointer directoryPointer = new ВнутрішнєСпоживанняТоварів_Pointer(UnigueID.UGuid);
-            return directoryPointer;
+            return new ВнутрішнєСпоживанняТоварів_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Документи.ВнутрішнєСпоживанняТоварів");
         }
         
         public string Назва { get; set; }
@@ -19768,7 +20393,7 @@ namespace StorageAndTrade_1_0.Документи
         public Довідники.Валюти_Pointer Валюта { get; set; }
         public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; }
         public decimal СумаДокументу { get; set; }
-        public string Основа { get; set; }
+        public UuidAndText Основа { get; set; }
         public Довідники.Користувачі_Pointer Автор { get; set; }
         public Перелічення.ГосподарськіОперації ГосподарськаОперація { get; set; }
         public string Коментар { get; set; }
@@ -19808,6 +20433,11 @@ namespace StorageAndTrade_1_0.Документи
         public ВнутрішнєСпоживанняТоварів_Pointer GetEmptyPointer()
         {
             return new ВнутрішнєСпоживанняТоварів_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Документи.ВнутрішнєСпоживанняТоварів");
         }
 		
         public ВнутрішнєСпоживанняТоварів_Objest GetDocumentObject(bool readAllTablePart = false)
@@ -20386,8 +21016,12 @@ namespace StorageAndTrade_1_0.Документи
         
         public РахунокФактура_Pointer GetDocumentPointer()
         {
-            РахунокФактура_Pointer directoryPointer = new РахунокФактура_Pointer(UnigueID.UGuid);
-            return directoryPointer;
+            return new РахунокФактура_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Документи.РахунокФактура");
         }
         
         public string Назва { get; set; }
@@ -20445,6 +21079,11 @@ namespace StorageAndTrade_1_0.Документи
         public РахунокФактура_Pointer GetEmptyPointer()
         {
             return new РахунокФактура_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Документи.РахунокФактура");
         }
 		
         public РахунокФактура_Objest GetDocumentObject(bool readAllTablePart = false)
@@ -20898,8 +21537,12 @@ namespace StorageAndTrade_1_0.Документи
         
         public РозміщенняТоварівНаСкладі_Pointer GetDocumentPointer()
         {
-            РозміщенняТоварівНаСкладі_Pointer directoryPointer = new РозміщенняТоварівНаСкладі_Pointer(UnigueID.UGuid);
-            return directoryPointer;
+            return new РозміщенняТоварівНаСкладі_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Документи.РозміщенняТоварівНаСкладі");
         }
         
         public string Назва { get; set; }
@@ -20948,6 +21591,11 @@ namespace StorageAndTrade_1_0.Документи
         public РозміщенняТоварівНаСкладі_Pointer GetEmptyPointer()
         {
             return new РозміщенняТоварівНаСкладі_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Документи.РозміщенняТоварівНаСкладі");
         }
 		
         public РозміщенняТоварівНаСкладі_Objest GetDocumentObject(bool readAllTablePart = false)
@@ -21381,8 +22029,12 @@ namespace StorageAndTrade_1_0.Документи
         
         public ПереміщенняТоварівНаСкладі_Pointer GetDocumentPointer()
         {
-            ПереміщенняТоварівНаСкладі_Pointer directoryPointer = new ПереміщенняТоварівНаСкладі_Pointer(UnigueID.UGuid);
-            return directoryPointer;
+            return new ПереміщенняТоварівНаСкладі_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Документи.ПереміщенняТоварівНаСкладі");
         }
         
         public string Назва { get; set; }
@@ -21430,6 +22082,11 @@ namespace StorageAndTrade_1_0.Документи
         public ПереміщенняТоварівНаСкладі_Pointer GetEmptyPointer()
         {
             return new ПереміщенняТоварівНаСкладі_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Документи.ПереміщенняТоварівНаСкладі");
         }
 		
         public ПереміщенняТоварівНаСкладі_Objest GetDocumentObject(bool readAllTablePart = false)
@@ -21873,8 +22530,12 @@ namespace StorageAndTrade_1_0.Документи
         
         public ЗбіркаТоварівНаСкладі_Pointer GetDocumentPointer()
         {
-            ЗбіркаТоварівНаСкладі_Pointer directoryPointer = new ЗбіркаТоварівНаСкладі_Pointer(UnigueID.UGuid);
-            return directoryPointer;
+            return new ЗбіркаТоварівНаСкладі_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Документи.ЗбіркаТоварівНаСкладі");
         }
         
         public string Назва { get; set; }
@@ -21923,6 +22584,11 @@ namespace StorageAndTrade_1_0.Документи
         public ЗбіркаТоварівНаСкладі_Pointer GetEmptyPointer()
         {
             return new ЗбіркаТоварівНаСкладі_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Документи.ЗбіркаТоварівНаСкладі");
         }
 		
         public ЗбіркаТоварівНаСкладі_Objest GetDocumentObject(bool readAllTablePart = false)
@@ -22320,8 +22986,12 @@ namespace StorageAndTrade_1_0.Документи
         
         public РозміщенняНоменклатуриПоКоміркам_Pointer GetDocumentPointer()
         {
-            РозміщенняНоменклатуриПоКоміркам_Pointer directoryPointer = new РозміщенняНоменклатуриПоКоміркам_Pointer(UnigueID.UGuid);
-            return directoryPointer;
+            return new РозміщенняНоменклатуриПоКоміркам_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Документи.РозміщенняНоменклатуриПоКоміркам");
         }
         
         public string Назва { get; set; }
@@ -22369,6 +23039,11 @@ namespace StorageAndTrade_1_0.Документи
         public РозміщенняНоменклатуриПоКоміркам_Pointer GetEmptyPointer()
         {
             return new РозміщенняНоменклатуриПоКоміркам_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Документи.РозміщенняНоменклатуриПоКоміркам");
         }
 		
         public РозміщенняНоменклатуриПоКоміркам_Objest GetDocumentObject(bool readAllTablePart = false)

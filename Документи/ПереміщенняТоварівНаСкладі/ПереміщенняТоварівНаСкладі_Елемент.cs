@@ -46,6 +46,7 @@ namespace StorageAndTrade
         Користувачі_PointerControl Автор = new Користувачі_PointerControl();
         Entry Коментар = new Entry() { WidthRequest = 920 };
         ПереміщенняТоварівНаСкладі_ТабличнаЧастина_Товари Товари = new ПереміщенняТоварівНаСкладі_ТабличнаЧастина_Товари();
+        Basis_PointerControl Основа = new Basis_PointerControl();
 
         #endregion
 
@@ -164,6 +165,12 @@ namespace StorageAndTrade
             vBox.PackStart(hBoxAutor, false, false, 5);
 
             hBoxAutor.PackStart(Автор, false, false, 5);
+
+            //Основа
+            HBox hBoxBasis = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxBasis, false, false, 5);
+
+            hBoxBasis.PackStart(Основа, false, false, 5);
         }
 
         void CreateContainer4(VBox vBox)
@@ -217,6 +224,7 @@ namespace StorageAndTrade
             Коментар.Text = ПереміщенняТоварівНаСкладі_Objest.Коментар;
             Підрозділ.Pointer = ПереміщенняТоварівНаСкладі_Objest.Підрозділ;
             Автор.Pointer = ПереміщенняТоварівНаСкладі_Objest.Автор;
+            Основа.Pointer = ПереміщенняТоварівНаСкладі_Objest.Основа;
 
             //Таблична частина
             Товари.ПереміщенняТоварівНаСкладі_Objest = ПереміщенняТоварівНаСкладі_Objest;
@@ -237,6 +245,7 @@ namespace StorageAndTrade
             ПереміщенняТоварівНаСкладі_Objest.Коментар = Коментар.Text;
             ПереміщенняТоварівНаСкладі_Objest.Підрозділ = Підрозділ.Pointer;
             ПереміщенняТоварівНаСкладі_Objest.Автор = Автор.Pointer;
+            ПереміщенняТоварівНаСкладі_Objest.Основа = Основа.Pointer;
         }
 
         #endregion

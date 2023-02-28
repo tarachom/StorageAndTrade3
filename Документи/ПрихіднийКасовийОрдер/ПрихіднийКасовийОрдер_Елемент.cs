@@ -58,6 +58,7 @@ namespace StorageAndTrade
         Користувачі_PointerControl Автор = new Користувачі_PointerControl();
         СтаттяРухуКоштів_PointerControl СтаттяРухуКоштів = new СтаттяРухуКоштів_PointerControl();
         Entry Коментар = new Entry() { WidthRequest = 920 };
+        Basis_PointerControl Основа = new Basis_PointerControl();
 
         #endregion
 
@@ -284,6 +285,12 @@ namespace StorageAndTrade
             vBox.PackStart(hBoxAutor, false, false, 5);
 
             hBoxAutor.PackStart(Автор, false, false, 5);
+
+            //Основа
+            HBox hBoxBasis = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxBasis, false, false, 5);
+
+            hBoxBasis.PackStart(Основа, false, false, 5);
         }
 
         void CreateContainer4(VBox vBox)
@@ -353,6 +360,7 @@ namespace StorageAndTrade
             СумаДокументу.Value = ПрихіднийКасовийОрдер_Objest.СумаДокументу;
             Курс.Value = ПрихіднийКасовийОрдер_Objest.Курс;
             СтаттяРухуКоштів.Pointer = ПрихіднийКасовийОрдер_Objest.СтаттяРухуКоштів;
+            Основа.Pointer = ПрихіднийКасовийОрдер_Objest.Основа;
 
             if (IsNew)
             {
@@ -380,6 +388,7 @@ namespace StorageAndTrade
             ПрихіднийКасовийОрдер_Objest.СумаДокументу = СумаДокументу.Value;
             ПрихіднийКасовийОрдер_Objest.Курс = Курс.Value;
             ПрихіднийКасовийОрдер_Objest.СтаттяРухуКоштів = СтаттяРухуКоштів.Pointer;
+            ПрихіднийКасовийОрдер_Objest.Основа = Основа.Pointer;
         }
 
         #endregion

@@ -61,6 +61,7 @@ namespace StorageAndTrade
         TimeControl ЧасДоставкиДо = new TimeControl();
         Користувачі_PointerControl Менеджер = new Користувачі_PointerControl() { Caption = "Менеджер" };
         Entry Коментар = new Entry() { WidthRequest = 920 };
+        Basis_PointerControl Основа = new Basis_PointerControl();
 
         ПоверненняТоварівПостачальнику_ТабличнаЧастина_Товари Товари = new ПоверненняТоварівПостачальнику_ТабличнаЧастина_Товари();
 
@@ -283,6 +284,12 @@ namespace StorageAndTrade
             vBox.PackStart(hBoxMenedjer, false, false, 5);
 
             hBoxMenedjer.PackStart(Менеджер, false, false, 5);
+
+            //Основа
+            HBox hBoxBasis = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxBasis, false, false, 5);
+
+            hBoxBasis.PackStart(Основа, false, false, 5);
         }
 
         void CreateContainer4(VBox vBox)
@@ -373,6 +380,7 @@ namespace StorageAndTrade
             ЧасДоставкиЗ.Value = ПоверненняТоварівПостачальнику_Objest.ЧасДоставкиЗ;
             ЧасДоставкиДо.Value = ПоверненняТоварівПостачальнику_Objest.ЧасДоставкиДо;
             Менеджер.Pointer = ПоверненняТоварівПостачальнику_Objest.Менеджер;
+            Основа.Pointer = ПоверненняТоварівПостачальнику_Objest.Основа;
 
             //Таблична частина
             Товари.ПоверненняТоварівПостачальнику_Objest = ПоверненняТоварівПостачальнику_Objest;
@@ -407,6 +415,7 @@ namespace StorageAndTrade
             ПоверненняТоварівПостачальнику_Objest.ЧасДоставкиЗ = ЧасДоставкиЗ.Value;
             ПоверненняТоварівПостачальнику_Objest.ЧасДоставкиДо = ЧасДоставкиДо.Value;
             ПоверненняТоварівПостачальнику_Objest.Менеджер = Менеджер.Pointer;
+            ПоверненняТоварівПостачальнику_Objest.Основа = Основа.Pointer;
 
             ПоверненняТоварівПостачальнику_Objest.СумаДокументу = Товари.СумаДокументу();
         }
