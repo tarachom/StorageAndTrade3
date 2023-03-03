@@ -5,7 +5,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>03.03.2023 11:36:58</DateTimeSave>
+  <DateTimeSave>03.03.2023 14:25:27</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -15115,9 +15115,9 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
         </Field>
         <Field>
           <Name>Дата</Name>
-          <Desc>
-          </Desc>
-          <Type>timestamp</Type>
+          <Desc>timestamp</Desc>
+          <Type>
+          </Type>
           <SortField>1</SortField>
           <WherePeriod>1</WherePeriod>
         </Field>
@@ -15178,7 +15178,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
         <Field>
           <Name>Сума</Name>
           <Desc>Деякі документи немають поля Сума, 
-тому дане поле треба привести до SQL типу text.
+тому дане поле треба привести до SQL типу text
 </Desc>
           <Type>text</Type>
           <SortField>0</SortField>
@@ -15234,7 +15234,8 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
             <Field>
               <Name>Дата</Name>
               <DocField>ДатаДок</DocField>
-              <SqlType>timestamp</SqlType>
+              <SqlType>
+              </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
               <Pointer>
@@ -15388,7 +15389,8 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
             <Field>
               <Name>Дата</Name>
               <DocField>ДатаДок</DocField>
-              <SqlType>timestamp</SqlType>
+              <SqlType>
+              </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
               <Pointer>
@@ -15542,7 +15544,8 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
             <Field>
               <Name>Дата</Name>
               <DocField>ДатаДок</DocField>
-              <SqlType>timestamp</SqlType>
+              <SqlType>
+              </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
               <Pointer>
@@ -15696,7 +15699,8 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
             <Field>
               <Name>Дата</Name>
               <DocField>ДатаДок</DocField>
-              <SqlType>timestamp</SqlType>
+              <SqlType>
+              </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
               <Pointer>
@@ -15850,7 +15854,8 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
             <Field>
               <Name>Дата</Name>
               <DocField>ДатаДок</DocField>
-              <SqlType>timestamp</SqlType>
+              <SqlType>
+              </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
               <Pointer>
@@ -15972,7 +15977,8 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
             <Field>
               <Name>Дата</Name>
               <DocField>ДатаДок</DocField>
-              <SqlType>timestamp</SqlType>
+              <SqlType>
+              </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
               <Pointer>
@@ -16116,7 +16122,8 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
             <Field>
               <Name>Дата</Name>
               <DocField>ДатаДок</DocField>
-              <SqlType>timestamp</SqlType>
+              <SqlType>
+              </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
               <Pointer>
@@ -16260,7 +16267,8 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
             <Field>
               <Name>Дата</Name>
               <DocField>ДатаДок</DocField>
-              <SqlType>timestamp</SqlType>
+              <SqlType>
+              </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
               <Pointer>
@@ -16382,7 +16390,8 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
             <Field>
               <Name>Дата</Name>
               <DocField>ДатаДок</DocField>
-              <SqlType>timestamp</SqlType>
+              <SqlType>
+              </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
               <Pointer>
@@ -16536,7 +16545,8 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
             <Field>
               <Name>Дата</Name>
               <DocField>ДатаДок</DocField>
-              <SqlType>timestamp</SqlType>
+              <SqlType>
+              </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
               <Pointer>
@@ -16690,7 +16700,8 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
             <Field>
               <Name>Дата</Name>
               <DocField>ДатаДок</DocField>
-              <SqlType>timestamp</SqlType>
+              <SqlType>
+              </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
               <Pointer>
@@ -16834,7 +16845,8 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
             <Field>
               <Name>Дата</Name>
               <DocField>ДатаДок</DocField>
-              <SqlType>timestamp</SqlType>
+              <SqlType>
+              </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
               <Pointer>
@@ -16975,7 +16987,8 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <Name>Дата</Name>
               <DocField>
               </DocField>
-              <SqlType>timestamp</SqlType>
+              <SqlType>
+              </SqlType>
               <WherePeriod>1</WherePeriod>
             </Field>
             <Field>
@@ -17061,7 +17074,8 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <Name>Дата</Name>
               <DocField>
               </DocField>
-              <SqlType>timestamp</SqlType>
+              <SqlType>
+              </SqlType>
               <WherePeriod>1</WherePeriod>
             </Field>
             <Field>
@@ -17147,7 +17161,8 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <Name>Дата</Name>
               <DocField>
               </DocField>
-              <SqlType>timestamp</SqlType>
+              <SqlType>
+              </SqlType>
               <WherePeriod>1</WherePeriod>
             </Field>
             <Field>
@@ -17233,7 +17248,8 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <Name>Дата</Name>
               <DocField>
               </DocField>
-              <SqlType>timestamp</SqlType>
+              <SqlType>
+              </SqlType>
               <WherePeriod>1</WherePeriod>
             </Field>
             <Field>
@@ -17320,7 +17336,8 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
             <Field>
               <Name>Дата</Name>
               <DocField>ДатаДок</DocField>
-              <SqlType>timestamp</SqlType>
+              <SqlType>
+              </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
               <Pointer>
@@ -17454,7 +17471,8 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
             <Field>
               <Name>Дата</Name>
               <DocField>ДатаДок</DocField>
-              <SqlType>timestamp</SqlType>
+              <SqlType>
+              </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
               <Pointer>
@@ -17608,7 +17626,8 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
             <Field>
               <Name>Дата</Name>
               <DocField>ДатаДок</DocField>
-              <SqlType>timestamp</SqlType>
+              <SqlType>
+              </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
               <Pointer>
@@ -17730,7 +17749,8 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
             <Field>
               <Name>Дата</Name>
               <DocField>ДатаДок</DocField>
-              <SqlType>timestamp</SqlType>
+              <SqlType>
+              </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
               <Pointer>
@@ -17852,7 +17872,8 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
             <Field>
               <Name>Дата</Name>
               <DocField>ДатаДок</DocField>
-              <SqlType>timestamp</SqlType>
+              <SqlType>
+              </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
               <Pointer>
@@ -17974,7 +17995,8 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
             <Field>
               <Name>Дата</Name>
               <DocField>ДатаДок</DocField>
-              <SqlType>timestamp</SqlType>
+              <SqlType>
+              </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
               <Pointer>
@@ -18095,9 +18117,9 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
         </Field>
         <Field>
           <Name>Дата</Name>
-          <Desc>
-          </Desc>
-          <Type>timestamp</Type>
+          <Desc>timestamp</Desc>
+          <Type>
+          </Type>
           <SortField>1</SortField>
           <WherePeriod>1</WherePeriod>
         </Field>
@@ -18200,7 +18222,8 @@ SQL тип  непотрібно вказувати
             <Field>
               <Name>Дата</Name>
               <DocField>ДатаДок</DocField>
-              <SqlType>timestamp</SqlType>
+              <SqlType>
+              </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
               <Pointer>
@@ -18355,7 +18378,8 @@ SQL тип  непотрібно вказувати
             <Field>
               <Name>Дата</Name>
               <DocField>ДатаДок</DocField>
-              <SqlType>timestamp</SqlType>
+              <SqlType>
+              </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
               <Pointer>
@@ -18510,7 +18534,8 @@ SQL тип  непотрібно вказувати
             <Field>
               <Name>Дата</Name>
               <DocField>ДатаДок</DocField>
-              <SqlType>timestamp</SqlType>
+              <SqlType>
+              </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
               <Pointer>
@@ -18664,9 +18689,9 @@ SQL тип  непотрібно вказувати
         </Field>
         <Field>
           <Name>Дата</Name>
-          <Desc>
-          </Desc>
-          <Type>timestamp</Type>
+          <Desc>timestamp</Desc>
+          <Type>
+          </Type>
           <SortField>1</SortField>
           <WherePeriod>1</WherePeriod>
         </Field>
@@ -18772,7 +18797,8 @@ SQL тип  непотрібно вказувати
             <Field>
               <Name>Дата</Name>
               <DocField>ДатаДок</DocField>
-              <SqlType>timestamp</SqlType>
+              <SqlType>
+              </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
               <Pointer>
@@ -18927,7 +18953,8 @@ SQL тип  непотрібно вказувати
             <Field>
               <Name>Дата</Name>
               <DocField>ДатаДок</DocField>
-              <SqlType>timestamp</SqlType>
+              <SqlType>
+              </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
               <Pointer>
@@ -19082,7 +19109,8 @@ SQL тип  непотрібно вказувати
             <Field>
               <Name>Дата</Name>
               <DocField>ДатаДок</DocField>
-              <SqlType>timestamp</SqlType>
+              <SqlType>
+              </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
               <Pointer>
@@ -19237,7 +19265,8 @@ SQL тип  непотрібно вказувати
             <Field>
               <Name>Дата</Name>
               <DocField>ДатаДок</DocField>
-              <SqlType>timestamp</SqlType>
+              <SqlType>
+              </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
               <Pointer>
@@ -19382,7 +19411,8 @@ SQL тип  непотрібно вказувати
             <Field>
               <Name>Дата</Name>
               <DocField>ДатаДок</DocField>
-              <SqlType>timestamp</SqlType>
+              <SqlType>
+              </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
               <Pointer>
@@ -19536,9 +19566,9 @@ SQL тип  непотрібно вказувати
         </Field>
         <Field>
           <Name>Дата</Name>
-          <Desc>
-          </Desc>
-          <Type>timestamp</Type>
+          <Desc>timestamp</Desc>
+          <Type>
+          </Type>
           <SortField>1</SortField>
           <WherePeriod>1</WherePeriod>
         </Field>
@@ -19639,7 +19669,8 @@ SQL тип  непотрібно вказувати
             <Field>
               <Name>Дата</Name>
               <DocField>ДатаДок</DocField>
-              <SqlType>timestamp</SqlType>
+              <SqlType>
+              </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
               <Pointer>
@@ -19794,7 +19825,8 @@ SQL тип  непотрібно вказувати
             <Field>
               <Name>Дата</Name>
               <DocField>ДатаДок</DocField>
-              <SqlType>timestamp</SqlType>
+              <SqlType>
+              </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
               <Pointer>
@@ -19948,9 +19980,9 @@ SQL тип  непотрібно вказувати
         </Field>
         <Field>
           <Name>Дата</Name>
-          <Desc>
-          </Desc>
-          <Type>timestamp</Type>
+          <Desc>timestamp</Desc>
+          <Type>
+          </Type>
           <SortField>1</SortField>
           <WherePeriod>1</WherePeriod>
         </Field>
@@ -20025,7 +20057,8 @@ SQL тип  непотрібно вказувати
             <Field>
               <Name>Дата</Name>
               <DocField>ДатаДок</DocField>
-              <SqlType>timestamp</SqlType>
+              <SqlType>
+              </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
               <Pointer>
@@ -20124,7 +20157,8 @@ SQL тип  непотрібно вказувати
             <Field>
               <Name>Дата</Name>
               <DocField>ДатаДок</DocField>
-              <SqlType>timestamp</SqlType>
+              <SqlType>
+              </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
               <Pointer>
@@ -20223,7 +20257,8 @@ SQL тип  непотрібно вказувати
             <Field>
               <Name>Дата</Name>
               <DocField>ДатаДок</DocField>
-              <SqlType>timestamp</SqlType>
+              <SqlType>
+              </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
               <Pointer>
@@ -20321,9 +20356,9 @@ SQL тип  непотрібно вказувати
         </Field>
         <Field>
           <Name>Дата</Name>
-          <Desc>
-          </Desc>
-          <Type>timestamp</Type>
+          <Desc>timestamp</Desc>
+          <Type>
+          </Type>
           <SortField>1</SortField>
           <WherePeriod>1</WherePeriod>
         </Field>
@@ -20390,7 +20425,8 @@ SQL тип  непотрібно вказувати
             <Field>
               <Name>Дата</Name>
               <DocField>ДатаДок</DocField>
-              <SqlType>timestamp</SqlType>
+              <SqlType>
+              </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
               <Pointer>
@@ -20481,7 +20517,8 @@ SQL тип  непотрібно вказувати
             <Field>
               <Name>Дата</Name>
               <DocField>ДатаДок</DocField>
-              <SqlType>timestamp</SqlType>
+              <SqlType>
+              </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
               <Pointer>
@@ -20572,7 +20609,8 @@ SQL тип  непотрібно вказувати
             <Field>
               <Name>Дата</Name>
               <DocField>ДатаДок</DocField>
-              <SqlType>timestamp</SqlType>
+              <SqlType>
+              </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
               <Pointer>
@@ -20663,7 +20701,8 @@ SQL тип  непотрібно вказувати
             <Field>
               <Name>Дата</Name>
               <DocField>ДатаДок</DocField>
-              <SqlType>timestamp</SqlType>
+              <SqlType>
+              </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
               <Pointer>

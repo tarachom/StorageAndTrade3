@@ -82,14 +82,14 @@ namespace StorageAndTrade
             {
                 mValue = value;
 
-                hBoxInfoValid.Add(new Image("images/16/ok.png"));
+                hBoxInfoValid.Add(new Image(AppContext.BaseDirectory + "images/16/ok.png"));
                 hBoxInfoValid.ShowAll();
 
                 return true;
             }
             else
             {
-                hBoxInfoValid.Add(new Image("images/16/error.png"));
+                hBoxInfoValid.Add(new Image(AppContext.BaseDirectory + "images/16/error.png"));
                 hBoxInfoValid.ShowAll();
 
                 return false;

@@ -73,7 +73,7 @@ namespace StorageAndTrade
             HBox hBoxInfo = new HBox();
             vBoxMessage.PackStart(hBoxInfo, false, false, 10);
 
-            hBoxInfo.PackStart(new Image("images/error.png"), false, false, 25);
+            hBoxInfo.PackStart(new Image(AppContext.BaseDirectory + "images/error.png"), false, false, 25);
 
             VBox vBoxInfo = new VBox();
             hBoxInfo.PackStart(vBoxInfo, false, false, 10);

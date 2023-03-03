@@ -422,7 +422,7 @@ namespace StorageAndTrade
                 LinkButton lbRefresh = new LinkButton("Обновити", " ")
                 {
                     Halign = Align.Start,
-                    Image = new Image("images/refresh.png"),
+                    Image = new Image(AppContext.BaseDirectory + "images/refresh.png"),
                     AlwaysShowImage = true,
                     Name = codePage
                 };

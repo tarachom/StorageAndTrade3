@@ -62,7 +62,7 @@ namespace StorageAndTrade
             ПошукПовнотекстовий.Clear = LoadRecords;
 
             //Склади приміщення
-            LinkButton linkButtonHar = new LinkButton(" Складські приміщення") { Halign = Align.Start, Image = new Image("images/doc.png"), AlwaysShowImage = true };
+            LinkButton linkButtonHar = new LinkButton(" Складські приміщення") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
             linkButtonHar.Clicked += (object? sender, EventArgs args) =>
             {
                 СкладськіПриміщення page = new СкладськіПриміщення();

@@ -35,10 +35,10 @@ namespace StorageAndTrade
             PackStart(labelCaption, false, false, 5);
             PackStart(entryText, false, false, 1);
 
-            Button bOpen = new Button(new Image("images/find.png"));
+            Button bOpen = new Button(new Image(AppContext.BaseDirectory + "images/find.png"));
             bOpen.Clicked += OpenSelect;
 
-            Button bClear = new Button(new Image("images/clean.png"));
+            Button bClear = new Button(new Image(AppContext.BaseDirectory + "images/clean.png"));
             bClear.Clicked += OnClear;
 
             PackStart(bOpen, false, false, 1);

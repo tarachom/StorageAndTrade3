@@ -72,7 +72,7 @@ namespace StorageAndTrade
         #region Const
 
         //Шлях до іконки
-        public const string IcoFileName = "images/form.ico";
+        public static readonly string IcoFileName = AppContext.BaseDirectory +"images/form.ico";
 
         #endregion
     }

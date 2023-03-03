@@ -215,7 +215,7 @@ namespace StorageAndTrade
             LinkButton lb = new LinkButton(name, name)
             {
                 Halign = Align.Start,
-                Image = new Image(image),
+                Image = new Image(AppContext.BaseDirectory + image),
                 AlwaysShowImage = true
             };
 
@@ -333,7 +333,7 @@ namespace StorageAndTrade
             LinkButton lbClose = new LinkButton("Закрити", " ")
             {
                 Halign = Align.Start,
-                Image = new Image("images/clean.png"),
+                Image = new Image(AppContext.BaseDirectory + "images/clean.png"),
                 AlwaysShowImage = true,
                 Name = codePage
             };

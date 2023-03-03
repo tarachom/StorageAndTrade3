@@ -74,7 +74,7 @@ namespace StorageAndTrade
 
                 hBoxSwitch.PackStart(new Label("Авто"), false, false, 10);
                 hBoxSwitch.PackStart(autoDownloadCursOnStart, false, false, 0);
-                
+
                 hBoxDownloadCurs.PackEnd(vBoxSwitch, false, false, 10);
             }
 
@@ -177,7 +177,7 @@ namespace StorageAndTrade
 
         void AddLink(VBox vbox, string uri, EventHandler? clickAction = null)
         {
-            LinkButton lb = new LinkButton(uri, " " + uri) { Halign = Align.Start, Image = new Image("images/doc.png"), AlwaysShowImage = true };
+            LinkButton lb = new LinkButton(uri, " " + uri) { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
             vbox.PackStart(lb, false, false, 0);
 
             if (clickAction != null)

@@ -56,7 +56,7 @@ namespace StorageAndTrade
 
             //Курси валют
             {
-                LinkButton linkButtonCurs = new LinkButton(" Курси валют") { Halign = Align.Start, Image = new Image("images/doc.png"), AlwaysShowImage = true };
+                LinkButton linkButtonCurs = new LinkButton(" Курси валют") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
                 linkButtonCurs.Clicked += (object? sender, EventArgs args) =>
                 {
                     if (SelectPointerItem != null || DirectoryPointerItem != null)
@@ -74,7 +74,7 @@ namespace StorageAndTrade
 
             //Завантаження курсів валют НБУ
             {
-                LinkButton linkButtonDownloadCurs = new LinkButton(" Завантаження курсів валют НБУ") { Halign = Align.Start, Image = new Image("images/doc.png"), AlwaysShowImage = true };
+                LinkButton linkButtonDownloadCurs = new LinkButton(" Завантаження курсів валют НБУ") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
                 linkButtonDownloadCurs.Clicked += (object? sender, EventArgs args) =>
                 {
                     Program.GeneralForm?.CreateNotebookPage("Завантаження курсів валют НБУ", () =>

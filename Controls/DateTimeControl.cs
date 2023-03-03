@@ -40,7 +40,7 @@ namespace StorageAndTrade
             PackStart(entryDateTimeValue, false, false, 1);
 
             //Button
-            bOpenCalendar = new Button(new Image("images/find.png"));
+            bOpenCalendar = new Button(new Image(AppContext.BaseDirectory + "images/find.png"));
             bOpenCalendar.Clicked += OnOpenCalendar;
 
             PackStart(bOpenCalendar, false, false, 1);
@@ -94,14 +94,14 @@ namespace StorageAndTrade
             {
                 mValue = value;
 
-                hBoxInfoValid.Add(new Image("images/16/ok.png"));
+                hBoxInfoValid.Add(new Image(AppContext.BaseDirectory + "images/16/ok.png"));
                 hBoxInfoValid.ShowAll();
 
                 return true;
             }
             else
             {
-                hBoxInfoValid.Add(new Image("images/16/error.png"));
+                hBoxInfoValid.Add(new Image(AppContext.BaseDirectory + "images/16/error.png"));
                 hBoxInfoValid.ShowAll();
 
                 return false;

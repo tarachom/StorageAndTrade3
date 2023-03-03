@@ -63,7 +63,7 @@ namespace StorageAndTrade
             ПошукПовнотекстовий.Clear = LoadRecords;
 
             //Складські комірки
-            LinkButton linkButtonHar = new LinkButton(" Складські комірки") { Halign = Align.Start, Image = new Image("images/doc.png"), AlwaysShowImage = true };
+            LinkButton linkButtonHar = new LinkButton(" Складські комірки") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
             linkButtonHar.Clicked += (object? sender, EventArgs args) =>
             {
                 СкладськіКомірки page = new СкладськіКомірки();

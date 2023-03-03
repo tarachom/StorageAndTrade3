@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 03.03.2023 11:36:58
+ * Дата конфігурації: 03.03.2023 14:25:27
  *
  */
  
@@ -41,7 +41,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class Організації_Записи
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         string ID = "";
         
         string Код = "";
@@ -132,7 +132,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 	    
     public class Організації_ЗаписиШвидкийВибір
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         string ID = "";
         
         string Код = "";
@@ -228,7 +228,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class Номенклатура_ЗаписиПрототип
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         string ID = "";
         
         string Код = "";
@@ -336,7 +336,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 	    
     public class Номенклатура_ЗаписиШвидкийВибір
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         string ID = "";
         
         string Код = "";
@@ -432,7 +432,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class Виробники_Записи
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         string ID = "";
         
         string Код = "";
@@ -523,7 +523,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 	    
     public class Виробники_ЗаписиШвидкийВибір
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         string ID = "";
         
         string Код = "";
@@ -619,7 +619,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class ВидиНоменклатури_Записи
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         string ID = "";
         
         string Код = "";
@@ -710,7 +710,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 	    
     public class ВидиНоменклатури_ЗаписиШвидкийВибір
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         string ID = "";
         
         string Назва = "";
@@ -801,7 +801,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class ПакуванняОдиниціВиміру_Записи
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         string ID = "";
         
         string Код = "";
@@ -892,7 +892,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 	    
     public class ПакуванняОдиниціВиміру_ЗаписиШвидкийВибір
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         string ID = "";
         
         string Код = "";
@@ -988,7 +988,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class Валюти_Записи
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         string ID = "";
         
         string Код = "";
@@ -1094,7 +1094,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 	    
     public class Валюти_ЗаписиШвидкийВибір
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         string ID = "";
         
         string Код = "";
@@ -1200,7 +1200,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class Контрагенти_Записи
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         string ID = "";
         
         string Код = "";
@@ -1303,7 +1303,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 	    
     public class Контрагенти_ЗаписиШвидкийВибір
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         string ID = "";
         
         string Код = "";
@@ -1399,7 +1399,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class Склади_Записи
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         string ID = "";
         
         string Код = "";
@@ -1500,7 +1500,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 	    
     public class Склади_ЗаписиШвидкийВибір
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         string ID = "";
         
         string Код = "";
@@ -1596,7 +1596,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class ВидиЦін_Записи
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         string ID = "";
         
         string Код = "";
@@ -1699,7 +1699,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 	    
     public class ВидиЦін_ЗаписиШвидкийВибір
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         string ID = "";
         
         string Назва = "";
@@ -1790,7 +1790,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class ВидиЦінПостачальників_Записи
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         string ID = "";
         
         string Код = "";
@@ -1886,7 +1886,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class Користувачі_Записи
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         string ID = "";
         
         string Код = "";
@@ -1977,7 +1977,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 	    
     public class Користувачі_ЗаписиШвидкийВибір
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         string ID = "";
         
         string Назва = "";
@@ -2068,7 +2068,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class ФізичніОсоби_Записи
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         string ID = "";
         
         string Код = "";
@@ -2159,7 +2159,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 	    
     public class ФізичніОсоби_ЗаписиШвидкийВибір
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         string ID = "";
         
         string Назва = "";
@@ -2250,7 +2250,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class СтруктураПідприємства_Записи
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         string ID = "";
         
         string Код = "";
@@ -2341,7 +2341,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 	    
     public class СтруктураПідприємства_ЗаписиШвидкийВибір
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         string ID = "";
         
         string Назва = "";
@@ -2432,7 +2432,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class КраїниСвіту_Записи
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         string ID = "";
         
         string Код = "";
@@ -2528,7 +2528,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class Файли_Записи
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         string ID = "";
         
         string Код = "";
@@ -2634,7 +2634,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 	    
     public class Файли_ЗаписиШвидкийВибір
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         string ID = "";
         
         string Назва = "";
@@ -2725,7 +2725,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class ХарактеристикиНоменклатури_Записи
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         string ID = "";
         
         string Код = "";
@@ -2828,7 +2828,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 	    
     public class ХарактеристикиНоменклатури_ЗаписиШвидкийВибір
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         string ID = "";
         
         string Код = "";
@@ -2951,7 +2951,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class Каси_ЗаписиПрототип
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         string ID = "";
         
         string Код = "";
@@ -3054,7 +3054,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 	    
     public class Каси_ЗаписиШвидкийВибір
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         string ID = "";
         
         string Код = "";
@@ -3162,7 +3162,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class БанківськіРахункиОрганізацій_Записи
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         string ID = "";
         
         string Код = "";
@@ -3265,7 +3265,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 	    
     public class БанківськіРахункиОрганізацій_ЗаписиШвидкийВибір
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         string ID = "";
         
         string Код = "";
@@ -3373,7 +3373,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class ДоговориКонтрагентів_Записи
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         string ID = "";
         
         string Код = "";
@@ -3481,7 +3481,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 	    
     public class ДоговориКонтрагентів_ЗаписиШвидкийВибір
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         string ID = "";
         
         string Назва = "";
@@ -3589,7 +3589,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class БанківськіРахункиКонтрагентів_Записи
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         string ID = "";
         
         string Код = "";
@@ -3692,7 +3692,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 	    
     public class БанківськіРахункиКонтрагентів_ЗаписиШвидкийВибір
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         string ID = "";
         
         string Код = "";
@@ -3800,7 +3800,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class СтаттяРухуКоштів_Записи
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         string ID = "";
         
         string Назва = "";
@@ -3901,7 +3901,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 	    
     public class СтаттяРухуКоштів_ЗаписиШвидкийВибір
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         string ID = "";
         
         string Назва = "";
@@ -3992,7 +3992,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class СеріїНоменклатури_Записи
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         string ID = "";
         
         string Номер = "";
@@ -4078,7 +4078,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 	    
     public class СеріїНоменклатури_ЗаписиШвидкийВибір
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         string ID = "";
         
         string Номер = "";
@@ -4169,7 +4169,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class ПартіяТоварівКомпозит_Записи
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         string ID = "";
         
         string Назва = "";
@@ -4294,7 +4294,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class ВидиЗапасів_Записи
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         string ID = "";
         
         string Назва = "";
@@ -4385,7 +4385,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class ПродажіДокументКомпозит_Записи
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         string ID = "";
         
         string Назва = "";
@@ -4476,7 +4476,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class АналітикаНоменклатуриКомпозит_Записи
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         string ID = "";
         
         string Назва = "";
@@ -4567,7 +4567,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class АналітикаКонтрагентівКомпозит_Записи
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         string ID = "";
         
         string Назва = "";
@@ -4658,7 +4658,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class АналітикаПартійКомпозит_Записи
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         string ID = "";
         
         string Назва = "";
@@ -4749,7 +4749,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class СкладськіПриміщення_Записи
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         string ID = "";
         
         string Назва = "";
@@ -4852,7 +4852,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 	    
     public class СкладськіПриміщення_ЗаписиШвидкийВибір
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         string ID = "";
         
         string Назва = "";
@@ -4955,7 +4955,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class СкладськіКомірки_Записи
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         string ID = "";
         
         string Назва = "";
@@ -5102,7 +5102,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 	    
     public class СкладськіКомірки_ЗаписиШвидкийВибір
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         string ID = "";
         
         string Назва = "";
@@ -5205,7 +5205,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class ОбластьЗберігання_Записи
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         string ID = "";
         
         string Назва = "";
@@ -5308,7 +5308,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class ТипорозміриКомірок_Записи
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         string ID = "";
         
         string Назва = "";
@@ -5419,7 +5419,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 	    
     public class ТипорозміриКомірок_ЗаписиШвидкийВибір
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         string ID = "";
         
         string Назва = "";
@@ -5585,7 +5585,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class ЗамовленняПостачальнику_Записи
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         bool Spend = false;
         string ID = "";
         
@@ -5765,7 +5765,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class ПоступленняТоварівТаПослуг_Записи
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         bool Spend = false;
         string ID = "";
         
@@ -5957,7 +5957,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class ЗамовленняКлієнта_Записи
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         bool Spend = false;
         string ID = "";
         
@@ -6149,7 +6149,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class РеалізаціяТоварівТаПослуг_Записи
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         bool Spend = false;
         string ID = "";
         
@@ -6341,7 +6341,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class ВстановленняЦінНоменклатури_Записи
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         bool Spend = false;
         string ID = "";
         
@@ -6504,7 +6504,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class ПрихіднийКасовийОрдер_Записи
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         bool Spend = false;
         string ID = "";
         
@@ -6689,7 +6689,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class РозхіднийКасовийОрдер_Записи
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         bool Spend = false;
         string ID = "";
         
@@ -6874,7 +6874,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class ПереміщенняТоварів_Записи
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         bool Spend = false;
         string ID = "";
         
@@ -7037,7 +7037,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class ПоверненняТоварівПостачальнику_Записи
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         bool Spend = false;
         string ID = "";
         
@@ -7229,7 +7229,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class ПоверненняТоварівВідКлієнта_Записи
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         bool Spend = false;
         string ID = "";
         
@@ -7421,7 +7421,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class АктВиконанихРобіт_Записи
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         bool Spend = false;
         string ID = "";
         
@@ -7601,7 +7601,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class ВведенняЗалишків_Записи
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         bool Spend = false;
         string ID = "";
         
@@ -7776,7 +7776,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class НадлишкиТоварів_Записи
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         bool Spend = false;
         string ID = "";
         
@@ -7927,7 +7927,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class ПересортицяТоварів_Записи
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         bool Spend = false;
         string ID = "";
         
@@ -8078,7 +8078,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class ПерерахунокТоварів_Записи
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         bool Spend = false;
         string ID = "";
         
@@ -8217,7 +8217,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class ПсуванняТоварів_Записи
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         bool Spend = false;
         string ID = "";
         
@@ -8373,7 +8373,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class ВнутрішнєСпоживанняТоварів_Записи
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         bool Spend = false;
         string ID = "";
         
@@ -8541,7 +8541,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class РахунокФактура_Записи
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         bool Spend = false;
         string ID = "";
         
@@ -8733,7 +8733,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class РозміщенняТоварівНаСкладі_Записи
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         bool Spend = false;
         string ID = "";
         
@@ -8884,7 +8884,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class ПереміщенняТоварівНаСкладі_Записи
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         bool Spend = false;
         string ID = "";
         
@@ -9035,7 +9035,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class ЗбіркаТоварівНаСкладі_Записи
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         bool Spend = false;
         string ID = "";
         
@@ -9186,7 +9186,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class РозміщенняНоменклатуриПоКоміркам_Записи
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         bool Spend = false;
         string ID = "";
         
@@ -9342,9 +9342,10 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
     
     public class Журнали_Повний
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         bool Spend = false;
         string ID = "";
+        string Type = ""; //Тип документу
         
         string Назва = "";
         string Дата = "";
@@ -9357,13 +9358,19 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         string Сума = "";
         string Автор = "";
 
+        // Масив для запису стрічки в Store
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID, Spend /*Проведений документ*/
+            return new object[] { new Gdk.Pixbuf(Image), ID, Type, Spend /*Проведений документ*/
             /* */ , Назва, Дата, Номер, Організація, Контрагент, Склад, Каса, Валюта, Сума, Автор };
         }
 
-        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(bool) /* Spend Проведений документ*/
+        // Джерело даних для списку
+        public static ListStore Store = new ListStore(
+          typeof(Gdk.Pixbuf) /* Image */, 
+          typeof(string) /* ID */, 
+          typeof(string) /* Type */, 
+          typeof(bool) /* Spend Проведений документ*/
             , typeof(string) /* Назва */
             , typeof(string) /* Дата */
             , typeof(string) /* Номер */
@@ -9376,29 +9383,33 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             , typeof(string) /* Автор */
             );
 
+        // Добавлення колонок в список
         public static void AddColumns(TreeView treeView)
         {
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /*Image*/ /* { Ypad = 0 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false }); /*UID*/
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererToggle(), "active", 2)); /*Проведений документ*/
+            treeView.AppendColumn(new TreeViewColumn("Type", new CellRendererText(), "text", 2) { Visible = false }); /*Type*/
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererToggle(), "active", 3)); /*Проведений документ*/
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3)); /*Назва*/
-            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 4)); /*Дата*/
-            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 5)); /*Номер*/
-            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Організація*/
-            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Контрагент*/
-            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Склад*/
-            treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText() { Xpad = 4 }, "text", 9)); /*Каса*/
-            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 10)); /*Валюта*/
-            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 11)); /*Сума*/
-            treeView.AppendColumn(new TreeViewColumn("Автор", new CellRendererText() { Xpad = 4 }, "text", 12)); /*Автор*/
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 4)); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 5)); /*Дата*/
+            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Номер*/
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Організація*/
+            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Контрагент*/
+            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 9)); /*Склад*/
+            treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText() { Xpad = 4 }, "text", 10)); /*Каса*/
+            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 11)); /*Валюта*/
+            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 12)); /*Сума*/
+            treeView.AppendColumn(new TreeViewColumn("Автор", new CellRendererText() { Xpad = 4 }, "text", 13)); /*Автор*/
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
 
+        // Словник з відборами, ключ це Тип документу
         public static Dictionary<string, List<Where>> Where { get; set; } = new Dictionary<string, List<Where>>();
 
+        // Добавляє відбір по періоду в словник відборів
         public static void ДодатиВідбірПоПеріоду(Перелічення.ТипПеріодуДляЖурналівДокументів типПеріоду)
         {
             Where.Clear();
@@ -9513,6 +9524,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               
         }
 
+        // Масив документів які входять в журнал
         public static string[] AllowDocument()
         {
             return new string[] 
@@ -9543,6 +9555,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
+        // Завантаження даних
         public static void LoadRecords()
         {
             Store.Clear();
@@ -9551,20 +9564,23 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
             
               {
-                  Query query = new Query("tab_a25");
+                  Query query = new Query(Документи.ЗамовленняПостачальнику_Const.TABLE);
+
+                  // Встановлення відбору для даного типу документу
                   if (Where.ContainsKey("ЗамовленняПостачальнику") && Where["ЗамовленняПостачальнику"].Count != 0) {
                       query.Where = Where["ЗамовленняПостачальнику"];
                       foreach(Where field in query.Where)
                           paramQuery.Add(field.Alias, field.Value);
                   }
 
+                  query.FieldAndAlias.Add(new NameValue<string>("'ЗамовленняПостачальнику'", "type"));
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.ЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗамовленняПостачальнику_Const.Назва, "Назва"));
                             
                               query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗамовленняПостачальнику_Const.ДатаДок + "::timestamp", "Дата"));
+                                  new NameValue<string>(Документи.ЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗамовленняПостачальнику_Const.ДатаДок, "Дата"));
                             
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.ЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗамовленняПостачальнику_Const.НомерДок, "Номер"));
@@ -9625,20 +9641,23 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               }
               
               {
-                  Query query = new Query("tab_a32");
+                  Query query = new Query(Документи.ПоступленняТоварівТаПослуг_Const.TABLE);
+
+                  // Встановлення відбору для даного типу документу
                   if (Where.ContainsKey("ПоступленняТоварівТаПослуг") && Where["ПоступленняТоварівТаПослуг"].Count != 0) {
                       query.Where = Where["ПоступленняТоварівТаПослуг"];
                       foreach(Where field in query.Where)
                           paramQuery.Add(field.Alias, field.Value);
                   }
 
+                  query.FieldAndAlias.Add(new NameValue<string>("'ПоступленняТоварівТаПослуг'", "type"));
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.ПоступленняТоварівТаПослуг_Const.TABLE + "." + Документи.ПоступленняТоварівТаПослуг_Const.Назва, "Назва"));
                             
                               query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПоступленняТоварівТаПослуг_Const.TABLE + "." + Документи.ПоступленняТоварівТаПослуг_Const.ДатаДок + "::timestamp", "Дата"));
+                                  new NameValue<string>(Документи.ПоступленняТоварівТаПослуг_Const.TABLE + "." + Документи.ПоступленняТоварівТаПослуг_Const.ДатаДок, "Дата"));
                             
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.ПоступленняТоварівТаПослуг_Const.TABLE + "." + Документи.ПоступленняТоварівТаПослуг_Const.НомерДок, "Номер"));
@@ -9699,20 +9718,23 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               }
               
               {
-                  Query query = new Query("tab_a34");
+                  Query query = new Query(Документи.ЗамовленняКлієнта_Const.TABLE);
+
+                  // Встановлення відбору для даного типу документу
                   if (Where.ContainsKey("ЗамовленняКлієнта") && Where["ЗамовленняКлієнта"].Count != 0) {
                       query.Where = Where["ЗамовленняКлієнта"];
                       foreach(Where field in query.Where)
                           paramQuery.Add(field.Alias, field.Value);
                   }
 
+                  query.FieldAndAlias.Add(new NameValue<string>("'ЗамовленняКлієнта'", "type"));
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.ЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗамовленняКлієнта_Const.Назва, "Назва"));
                             
                               query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗамовленняКлієнта_Const.ДатаДок + "::timestamp", "Дата"));
+                                  new NameValue<string>(Документи.ЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗамовленняКлієнта_Const.ДатаДок, "Дата"));
                             
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.ЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗамовленняКлієнта_Const.НомерДок, "Номер"));
@@ -9773,20 +9795,23 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               }
               
               {
-                  Query query = new Query("tab_a36");
+                  Query query = new Query(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE);
+
+                  // Встановлення відбору для даного типу документу
                   if (Where.ContainsKey("РеалізаціяТоварівТаПослуг") && Where["РеалізаціяТоварівТаПослуг"].Count != 0) {
                       query.Where = Where["РеалізаціяТоварівТаПослуг"];
                       foreach(Where field in query.Where)
                           paramQuery.Add(field.Alias, field.Value);
                   }
 
+                  query.FieldAndAlias.Add(new NameValue<string>("'РеалізаціяТоварівТаПослуг'", "type"));
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE + "." + Документи.РеалізаціяТоварівТаПослуг_Const.Назва, "Назва"));
                             
                               query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE + "." + Документи.РеалізаціяТоварівТаПослуг_Const.ДатаДок + "::timestamp", "Дата"));
+                                  new NameValue<string>(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE + "." + Документи.РеалізаціяТоварівТаПослуг_Const.ДатаДок, "Дата"));
                             
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE + "." + Документи.РеалізаціяТоварівТаПослуг_Const.НомерДок, "Номер"));
@@ -9847,20 +9872,23 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               }
               
               {
-                  Query query = new Query("tab_a42");
+                  Query query = new Query(Документи.ВстановленняЦінНоменклатури_Const.TABLE);
+
+                  // Встановлення відбору для даного типу документу
                   if (Where.ContainsKey("ВстановленняЦінНоменклатури") && Where["ВстановленняЦінНоменклатури"].Count != 0) {
                       query.Where = Where["ВстановленняЦінНоменклатури"];
                       foreach(Where field in query.Where)
                           paramQuery.Add(field.Alias, field.Value);
                   }
 
+                  query.FieldAndAlias.Add(new NameValue<string>("'ВстановленняЦінНоменклатури'", "type"));
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.ВстановленняЦінНоменклатури_Const.TABLE + "." + Документи.ВстановленняЦінНоменклатури_Const.Назва, "Назва"));
                             
                               query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ВстановленняЦінНоменклатури_Const.TABLE + "." + Документи.ВстановленняЦінНоменклатури_Const.ДатаДок + "::timestamp", "Дата"));
+                                  new NameValue<string>(Документи.ВстановленняЦінНоменклатури_Const.TABLE + "." + Документи.ВстановленняЦінНоменклатури_Const.ДатаДок, "Дата"));
                             
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.ВстановленняЦінНоменклатури_Const.TABLE + "." + Документи.ВстановленняЦінНоменклатури_Const.НомерДок, "Номер"));
@@ -9906,20 +9934,23 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               }
               
               {
-                  Query query = new Query("tab_a44");
+                  Query query = new Query(Документи.ПрихіднийКасовийОрдер_Const.TABLE);
+
+                  // Встановлення відбору для даного типу документу
                   if (Where.ContainsKey("ПрихіднийКасовийОрдер") && Where["ПрихіднийКасовийОрдер"].Count != 0) {
                       query.Where = Where["ПрихіднийКасовийОрдер"];
                       foreach(Where field in query.Where)
                           paramQuery.Add(field.Alias, field.Value);
                   }
 
+                  query.FieldAndAlias.Add(new NameValue<string>("'ПрихіднийКасовийОрдер'", "type"));
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.ПрихіднийКасовийОрдер_Const.TABLE + "." + Документи.ПрихіднийКасовийОрдер_Const.Назва, "Назва"));
                             
                               query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПрихіднийКасовийОрдер_Const.TABLE + "." + Документи.ПрихіднийКасовийОрдер_Const.ДатаДок + "::timestamp", "Дата"));
+                                  new NameValue<string>(Документи.ПрихіднийКасовийОрдер_Const.TABLE + "." + Документи.ПрихіднийКасовийОрдер_Const.ДатаДок, "Дата"));
                             
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.ПрихіднийКасовийОрдер_Const.TABLE + "." + Документи.ПрихіднийКасовийОрдер_Const.НомерДок, "Номер"));
@@ -9975,20 +10006,23 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               }
               
               {
-                  Query query = new Query("tab_a48");
+                  Query query = new Query(Документи.РозхіднийКасовийОрдер_Const.TABLE);
+
+                  // Встановлення відбору для даного типу документу
                   if (Where.ContainsKey("РозхіднийКасовийОрдер") && Where["РозхіднийКасовийОрдер"].Count != 0) {
                       query.Where = Where["РозхіднийКасовийОрдер"];
                       foreach(Where field in query.Where)
                           paramQuery.Add(field.Alias, field.Value);
                   }
 
+                  query.FieldAndAlias.Add(new NameValue<string>("'РозхіднийКасовийОрдер'", "type"));
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.РозхіднийКасовийОрдер_Const.TABLE + "." + Документи.РозхіднийКасовийОрдер_Const.Назва, "Назва"));
                             
                               query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.РозхіднийКасовийОрдер_Const.TABLE + "." + Документи.РозхіднийКасовийОрдер_Const.ДатаДок + "::timestamp", "Дата"));
+                                  new NameValue<string>(Документи.РозхіднийКасовийОрдер_Const.TABLE + "." + Документи.РозхіднийКасовийОрдер_Const.ДатаДок, "Дата"));
                             
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.РозхіднийКасовийОрдер_Const.TABLE + "." + Документи.РозхіднийКасовийОрдер_Const.НомерДок, "Номер"));
@@ -10044,20 +10078,23 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               }
               
               {
-                  Query query = new Query("tab_a31");
+                  Query query = new Query(Документи.ПереміщенняТоварів_Const.TABLE);
+
+                  // Встановлення відбору для даного типу документу
                   if (Where.ContainsKey("ПереміщенняТоварів") && Where["ПереміщенняТоварів"].Count != 0) {
                       query.Where = Where["ПереміщенняТоварів"];
                       foreach(Where field in query.Where)
                           paramQuery.Add(field.Alias, field.Value);
                   }
 
+                  query.FieldAndAlias.Add(new NameValue<string>("'ПереміщенняТоварів'", "type"));
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.ПереміщенняТоварів_Const.TABLE + "." + Документи.ПереміщенняТоварів_Const.Назва, "Назва"));
                             
                               query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПереміщенняТоварів_Const.TABLE + "." + Документи.ПереміщенняТоварів_Const.ДатаДок + "::timestamp", "Дата"));
+                                  new NameValue<string>(Документи.ПереміщенняТоварів_Const.TABLE + "." + Документи.ПереміщенняТоварів_Const.ДатаДок, "Дата"));
                             
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.ПереміщенняТоварів_Const.TABLE + "." + Документи.ПереміщенняТоварів_Const.НомерДок, "Номер"));
@@ -10103,20 +10140,23 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               }
               
               {
-                  Query query = new Query("tab_a51");
+                  Query query = new Query(Документи.ПоверненняТоварівПостачальнику_Const.TABLE);
+
+                  // Встановлення відбору для даного типу документу
                   if (Where.ContainsKey("ПоверненняТоварівПостачальнику") && Where["ПоверненняТоварівПостачальнику"].Count != 0) {
                       query.Where = Where["ПоверненняТоварівПостачальнику"];
                       foreach(Where field in query.Where)
                           paramQuery.Add(field.Alias, field.Value);
                   }
 
+                  query.FieldAndAlias.Add(new NameValue<string>("'ПоверненняТоварівПостачальнику'", "type"));
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.ПоверненняТоварівПостачальнику_Const.TABLE + "." + Документи.ПоверненняТоварівПостачальнику_Const.Назва, "Назва"));
                             
                               query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПоверненняТоварівПостачальнику_Const.TABLE + "." + Документи.ПоверненняТоварівПостачальнику_Const.ДатаДок + "::timestamp", "Дата"));
+                                  new NameValue<string>(Документи.ПоверненняТоварівПостачальнику_Const.TABLE + "." + Документи.ПоверненняТоварівПостачальнику_Const.ДатаДок, "Дата"));
                             
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.ПоверненняТоварівПостачальнику_Const.TABLE + "." + Документи.ПоверненняТоварівПостачальнику_Const.НомерДок, "Номер"));
@@ -10177,20 +10217,23 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               }
               
               {
-                  Query query = new Query("tab_a53");
+                  Query query = new Query(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE);
+
+                  // Встановлення відбору для даного типу документу
                   if (Where.ContainsKey("ПоверненняТоварівВідКлієнта") && Where["ПоверненняТоварівВідКлієнта"].Count != 0) {
                       query.Where = Where["ПоверненняТоварівВідКлієнта"];
                       foreach(Where field in query.Where)
                           paramQuery.Add(field.Alias, field.Value);
                   }
 
+                  query.FieldAndAlias.Add(new NameValue<string>("'ПоверненняТоварівВідКлієнта'", "type"));
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE + "." + Документи.ПоверненняТоварівВідКлієнта_Const.Назва, "Назва"));
                             
                               query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE + "." + Документи.ПоверненняТоварівВідКлієнта_Const.ДатаДок + "::timestamp", "Дата"));
+                                  new NameValue<string>(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE + "." + Документи.ПоверненняТоварівВідКлієнта_Const.ДатаДок, "Дата"));
                             
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE + "." + Документи.ПоверненняТоварівВідКлієнта_Const.НомерДок, "Номер"));
@@ -10251,20 +10294,23 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               }
               
               {
-                  Query query = new Query("tab_a81");
+                  Query query = new Query(Документи.АктВиконанихРобіт_Const.TABLE);
+
+                  // Встановлення відбору для даного типу документу
                   if (Where.ContainsKey("АктВиконанихРобіт") && Where["АктВиконанихРобіт"].Count != 0) {
                       query.Where = Where["АктВиконанихРобіт"];
                       foreach(Where field in query.Where)
                           paramQuery.Add(field.Alias, field.Value);
                   }
 
+                  query.FieldAndAlias.Add(new NameValue<string>("'АктВиконанихРобіт'", "type"));
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.АктВиконанихРобіт_Const.TABLE + "." + Документи.АктВиконанихРобіт_Const.Назва, "Назва"));
                             
                               query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.АктВиконанихРобіт_Const.TABLE + "." + Документи.АктВиконанихРобіт_Const.ДатаДок + "::timestamp", "Дата"));
+                                  new NameValue<string>(Документи.АктВиконанихРобіт_Const.TABLE + "." + Документи.АктВиконанихРобіт_Const.ДатаДок, "Дата"));
                             
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.АктВиконанихРобіт_Const.TABLE + "." + Документи.АктВиконанихРобіт_Const.НомерДок, "Номер"));
@@ -10320,20 +10366,23 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               }
               
               {
-                  Query query = new Query("tab_a83");
+                  Query query = new Query(Документи.ВведенняЗалишків_Const.TABLE);
+
+                  // Встановлення відбору для даного типу документу
                   if (Where.ContainsKey("ВведенняЗалишків") && Where["ВведенняЗалишків"].Count != 0) {
                       query.Where = Where["ВведенняЗалишків"];
                       foreach(Where field in query.Where)
                           paramQuery.Add(field.Alias, field.Value);
                   }
 
+                  query.FieldAndAlias.Add(new NameValue<string>("'ВведенняЗалишків'", "type"));
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.ВведенняЗалишків_Const.TABLE + "." + Документи.ВведенняЗалишків_Const.Назва, "Назва"));
                             
                               query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ВведенняЗалишків_Const.TABLE + "." + Документи.ВведенняЗалишків_Const.ДатаДок + "::timestamp", "Дата"));
+                                  new NameValue<string>(Документи.ВведенняЗалишків_Const.TABLE + "." + Документи.ВведенняЗалишків_Const.ДатаДок, "Дата"));
                             
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.ВведенняЗалишків_Const.TABLE + "." + Документи.ВведенняЗалишків_Const.НомерДок, "Номер"));
@@ -10389,20 +10438,23 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               }
               
               {
-                  Query query = new Query("tab_b07");
+                  Query query = new Query(Документи.ВнутрішнєСпоживанняТоварів_Const.TABLE);
+
+                  // Встановлення відбору для даного типу документу
                   if (Where.ContainsKey("ВнутрішнєСпоживанняТоварів") && Where["ВнутрішнєСпоживанняТоварів"].Count != 0) {
                       query.Where = Where["ВнутрішнєСпоживанняТоварів"];
                       foreach(Where field in query.Where)
                           paramQuery.Add(field.Alias, field.Value);
                   }
 
+                  query.FieldAndAlias.Add(new NameValue<string>("'ВнутрішнєСпоживанняТоварів'", "type"));
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.ВнутрішнєСпоживанняТоварів_Const.TABLE + "." + Документи.ВнутрішнєСпоживанняТоварів_Const.Назва, "Назва"));
                             
                               query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ВнутрішнєСпоживанняТоварів_Const.TABLE + "." + Документи.ВнутрішнєСпоживанняТоварів_Const.ДатаДок + "::timestamp", "Дата"));
+                                  new NameValue<string>(Документи.ВнутрішнєСпоживанняТоварів_Const.TABLE + "." + Документи.ВнутрішнєСпоживанняТоварів_Const.ДатаДок, "Дата"));
                             
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.ВнутрішнєСпоживанняТоварів_Const.TABLE + "." + Документи.ВнутрішнєСпоживанняТоварів_Const.НомерДок, "Номер"));
@@ -10453,20 +10505,23 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               }
               
               {
-                  Query query = new Query("tab_b10");
+                  Query query = new Query(Документи.РахунокФактура_Const.TABLE);
+
+                  // Встановлення відбору для даного типу документу
                   if (Where.ContainsKey("РахунокФактура") && Where["РахунокФактура"].Count != 0) {
                       query.Where = Where["РахунокФактура"];
                       foreach(Where field in query.Where)
                           paramQuery.Add(field.Alias, field.Value);
                   }
 
+                  query.FieldAndAlias.Add(new NameValue<string>("'РахунокФактура'", "type"));
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.РахунокФактура_Const.TABLE + "." + Документи.РахунокФактура_Const.Назва, "Назва"));
                             
                               query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.РахунокФактура_Const.TABLE + "." + Документи.РахунокФактура_Const.ДатаДок + "::timestamp", "Дата"));
+                                  new NameValue<string>(Документи.РахунокФактура_Const.TABLE + "." + Документи.РахунокФактура_Const.ДатаДок, "Дата"));
                             
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.РахунокФактура_Const.TABLE + "." + Документи.РахунокФактура_Const.НомерДок, "Номер"));
@@ -10527,20 +10582,23 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               }
               
               {
-                  Query query = new Query("tab_a64");
+                  Query query = new Query(Документи.РозміщенняТоварівНаСкладі_Const.TABLE);
+
+                  // Встановлення відбору для даного типу документу
                   if (Where.ContainsKey("РозміщенняТоварівНаСкладі") && Where["РозміщенняТоварівНаСкладі"].Count != 0) {
                       query.Where = Where["РозміщенняТоварівНаСкладі"];
                       foreach(Where field in query.Where)
                           paramQuery.Add(field.Alias, field.Value);
                   }
 
+                  query.FieldAndAlias.Add(new NameValue<string>("'РозміщенняТоварівНаСкладі'", "type"));
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.РозміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.РозміщенняТоварівНаСкладі_Const.Назва, "Назва"));
                             
                               query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.РозміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.РозміщенняТоварівНаСкладі_Const.ДатаДок + "::timestamp", "Дата"));
+                                  new NameValue<string>(Документи.РозміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.РозміщенняТоварівНаСкладі_Const.ДатаДок, "Дата"));
                             
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.РозміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.РозміщенняТоварівНаСкладі_Const.НомерДок, "Номер"));
@@ -10586,20 +10644,23 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               }
               
               {
-                  Query query = new Query("tab_b09");
+                  Query query = new Query(Документи.ПереміщенняТоварівНаСкладі_Const.TABLE);
+
+                  // Встановлення відбору для даного типу документу
                   if (Where.ContainsKey("ПереміщенняТоварівНаСкладі") && Where["ПереміщенняТоварівНаСкладі"].Count != 0) {
                       query.Where = Where["ПереміщенняТоварівНаСкладі"];
                       foreach(Where field in query.Where)
                           paramQuery.Add(field.Alias, field.Value);
                   }
 
+                  query.FieldAndAlias.Add(new NameValue<string>("'ПереміщенняТоварівНаСкладі'", "type"));
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.ПереміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.ПереміщенняТоварівНаСкладі_Const.Назва, "Назва"));
                             
                               query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПереміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.ПереміщенняТоварівНаСкладі_Const.ДатаДок + "::timestamp", "Дата"));
+                                  new NameValue<string>(Документи.ПереміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.ПереміщенняТоварівНаСкладі_Const.ДатаДок, "Дата"));
                             
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.ПереміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.ПереміщенняТоварівНаСкладі_Const.НомерДок, "Номер"));
@@ -10645,20 +10706,23 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               }
               
               {
-                  Query query = new Query("tab_b27");
+                  Query query = new Query(Документи.ЗбіркаТоварівНаСкладі_Const.TABLE);
+
+                  // Встановлення відбору для даного типу документу
                   if (Where.ContainsKey("ЗбіркаТоварівНаСкладі") && Where["ЗбіркаТоварівНаСкладі"].Count != 0) {
                       query.Where = Where["ЗбіркаТоварівНаСкладі"];
                       foreach(Where field in query.Where)
                           paramQuery.Add(field.Alias, field.Value);
                   }
 
+                  query.FieldAndAlias.Add(new NameValue<string>("'ЗбіркаТоварівНаСкладі'", "type"));
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.ЗбіркаТоварівНаСкладі_Const.TABLE + "." + Документи.ЗбіркаТоварівНаСкладі_Const.Назва, "Назва"));
                             
                               query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ЗбіркаТоварівНаСкладі_Const.TABLE + "." + Документи.ЗбіркаТоварівНаСкладі_Const.ДатаДок + "::timestamp", "Дата"));
+                                  new NameValue<string>(Документи.ЗбіркаТоварівНаСкладі_Const.TABLE + "." + Документи.ЗбіркаТоварівНаСкладі_Const.ДатаДок, "Дата"));
                             
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.ЗбіркаТоварівНаСкладі_Const.TABLE + "." + Документи.ЗбіркаТоварівНаСкладі_Const.НомерДок, "Номер"));
@@ -10704,20 +10768,23 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               }
               
               {
-                  Query query = new Query("tab_b29");
+                  Query query = new Query(Документи.РозміщенняНоменклатуриПоКоміркам_Const.TABLE);
+
+                  // Встановлення відбору для даного типу документу
                   if (Where.ContainsKey("РозміщенняНоменклатуриПоКоміркам") && Where["РозміщенняНоменклатуриПоКоміркам"].Count != 0) {
                       query.Where = Where["РозміщенняНоменклатуриПоКоміркам"];
                       foreach(Where field in query.Where)
                           paramQuery.Add(field.Alias, field.Value);
                   }
 
+                  query.FieldAndAlias.Add(new NameValue<string>("'РозміщенняНоменклатуриПоКоміркам'", "type"));
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.РозміщенняНоменклатуриПоКоміркам_Const.TABLE + "." + Документи.РозміщенняНоменклатуриПоКоміркам_Const.Назва, "Назва"));
                             
                               query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.РозміщенняНоменклатуриПоКоміркам_Const.TABLE + "." + Документи.РозміщенняНоменклатуриПоКоміркам_Const.ДатаДок + "::timestamp", "Дата"));
+                                  new NameValue<string>(Документи.РозміщенняНоменклатуриПоКоміркам_Const.TABLE + "." + Документи.РозміщенняНоменклатуриПоКоміркам_Const.ДатаДок, "Дата"));
                             
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.РозміщенняНоменклатуриПоКоміркам_Const.TABLE + "." + Документи.РозміщенняНоменклатуриПоКоміркам_Const.НомерДок, "Номер"));
@@ -10767,8 +10834,6 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
             unionAllQuery += "\nORDER BY Дата";
 
-            //Console.WriteLine(unionAllQuery);
-
             string[] columnsName;
             List<Dictionary<string, object>> listRow;
 
@@ -10778,6 +10843,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             {
                 Журнали_Повний record = new Журнали_Повний();
                 record.ID = row["uid"]?.ToString() ?? "";
+                record.Type = row["type"]?.ToString() ?? "";
                 record.Spend = (bool)row["spend"];
                 
                     record.Назва = row["Назва"] != DBNull.Value ? (row["Назва"]?.ToString() ?? "") : "";
@@ -10818,9 +10884,10 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
     
     public class Журнали_Закупівлі
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         bool Spend = false;
         string ID = "";
+        string Type = ""; //Тип документу
         
         string Назва = "";
         string Дата = "";
@@ -10833,13 +10900,19 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         string Сума = "";
         string Автор = "";
 
+        // Масив для запису стрічки в Store
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID, Spend /*Проведений документ*/
+            return new object[] { new Gdk.Pixbuf(Image), ID, Type, Spend /*Проведений документ*/
             /* */ , Назва, Дата, Номер, Організація, Контрагент, Склад, Каса, Валюта, Сума, Автор };
         }
 
-        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(bool) /* Spend Проведений документ*/
+        // Джерело даних для списку
+        public static ListStore Store = new ListStore(
+          typeof(Gdk.Pixbuf) /* Image */, 
+          typeof(string) /* ID */, 
+          typeof(string) /* Type */, 
+          typeof(bool) /* Spend Проведений документ*/
             , typeof(string) /* Назва */
             , typeof(string) /* Дата */
             , typeof(string) /* Номер */
@@ -10852,29 +10925,33 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             , typeof(string) /* Автор */
             );
 
+        // Добавлення колонок в список
         public static void AddColumns(TreeView treeView)
         {
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /*Image*/ /* { Ypad = 0 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false }); /*UID*/
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererToggle(), "active", 2)); /*Проведений документ*/
+            treeView.AppendColumn(new TreeViewColumn("Type", new CellRendererText(), "text", 2) { Visible = false }); /*Type*/
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererToggle(), "active", 3)); /*Проведений документ*/
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3)); /*Назва*/
-            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 4)); /*Дата*/
-            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 5)); /*Номер*/
-            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Організація*/
-            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Контрагент*/
-            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Склад*/
-            treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText() { Xpad = 4 }, "text", 9)); /*Каса*/
-            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 10)); /*Валюта*/
-            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 11)); /*Сума*/
-            treeView.AppendColumn(new TreeViewColumn("Автор", new CellRendererText() { Xpad = 4 }, "text", 12)); /*Автор*/
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 4)); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 5)); /*Дата*/
+            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Номер*/
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Організація*/
+            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Контрагент*/
+            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 9)); /*Склад*/
+            treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText() { Xpad = 4 }, "text", 10)); /*Каса*/
+            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 11)); /*Валюта*/
+            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 12)); /*Сума*/
+            treeView.AppendColumn(new TreeViewColumn("Автор", new CellRendererText() { Xpad = 4 }, "text", 13)); /*Автор*/
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
 
+        // Словник з відборами, ключ це Тип документу
         public static Dictionary<string, List<Where>> Where { get; set; } = new Dictionary<string, List<Where>>();
 
+        // Добавляє відбір по періоду в словник відборів
         public static void ДодатиВідбірПоПеріоду(Перелічення.ТипПеріодуДляЖурналівДокументів типПеріоду)
         {
             Where.Clear();
@@ -10899,6 +10976,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               
         }
 
+        // Масив документів які входять в журнал
         public static string[] AllowDocument()
         {
             return new string[] 
@@ -10914,6 +10992,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
+        // Завантаження даних
         public static void LoadRecords()
         {
             Store.Clear();
@@ -10922,20 +11001,23 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
             
               {
-                  Query query = new Query("tab_a25");
+                  Query query = new Query(Документи.ЗамовленняПостачальнику_Const.TABLE);
+
+                  // Встановлення відбору для даного типу документу
                   if (Where.ContainsKey("ЗамовленняПостачальнику") && Where["ЗамовленняПостачальнику"].Count != 0) {
                       query.Where = Where["ЗамовленняПостачальнику"];
                       foreach(Where field in query.Where)
                           paramQuery.Add(field.Alias, field.Value);
                   }
 
+                  query.FieldAndAlias.Add(new NameValue<string>("'ЗамовленняПостачальнику'", "type"));
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.ЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗамовленняПостачальнику_Const.Назва, "Назва"));
                             
                               query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗамовленняПостачальнику_Const.ДатаДок + "::timestamp", "Дата"));
+                                  new NameValue<string>(Документи.ЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗамовленняПостачальнику_Const.ДатаДок, "Дата"));
                             
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.ЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗамовленняПостачальнику_Const.НомерДок, "Номер"));
@@ -10996,20 +11078,23 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               }
               
               {
-                  Query query = new Query("tab_a32");
+                  Query query = new Query(Документи.ПоступленняТоварівТаПослуг_Const.TABLE);
+
+                  // Встановлення відбору для даного типу документу
                   if (Where.ContainsKey("ПоступленняТоварівТаПослуг") && Where["ПоступленняТоварівТаПослуг"].Count != 0) {
                       query.Where = Where["ПоступленняТоварівТаПослуг"];
                       foreach(Where field in query.Where)
                           paramQuery.Add(field.Alias, field.Value);
                   }
 
+                  query.FieldAndAlias.Add(new NameValue<string>("'ПоступленняТоварівТаПослуг'", "type"));
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.ПоступленняТоварівТаПослуг_Const.TABLE + "." + Документи.ПоступленняТоварівТаПослуг_Const.Назва, "Назва"));
                             
                               query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПоступленняТоварівТаПослуг_Const.TABLE + "." + Документи.ПоступленняТоварівТаПослуг_Const.ДатаДок + "::timestamp", "Дата"));
+                                  new NameValue<string>(Документи.ПоступленняТоварівТаПослуг_Const.TABLE + "." + Документи.ПоступленняТоварівТаПослуг_Const.ДатаДок, "Дата"));
                             
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.ПоступленняТоварівТаПослуг_Const.TABLE + "." + Документи.ПоступленняТоварівТаПослуг_Const.НомерДок, "Номер"));
@@ -11070,20 +11155,23 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               }
               
               {
-                  Query query = new Query("tab_a51");
+                  Query query = new Query(Документи.ПоверненняТоварівПостачальнику_Const.TABLE);
+
+                  // Встановлення відбору для даного типу документу
                   if (Where.ContainsKey("ПоверненняТоварівПостачальнику") && Where["ПоверненняТоварівПостачальнику"].Count != 0) {
                       query.Where = Where["ПоверненняТоварівПостачальнику"];
                       foreach(Where field in query.Where)
                           paramQuery.Add(field.Alias, field.Value);
                   }
 
+                  query.FieldAndAlias.Add(new NameValue<string>("'ПоверненняТоварівПостачальнику'", "type"));
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.ПоверненняТоварівПостачальнику_Const.TABLE + "." + Документи.ПоверненняТоварівПостачальнику_Const.Назва, "Назва"));
                             
                               query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПоверненняТоварівПостачальнику_Const.TABLE + "." + Документи.ПоверненняТоварівПостачальнику_Const.ДатаДок + "::timestamp", "Дата"));
+                                  new NameValue<string>(Документи.ПоверненняТоварівПостачальнику_Const.TABLE + "." + Документи.ПоверненняТоварівПостачальнику_Const.ДатаДок, "Дата"));
                             
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.ПоверненняТоварівПостачальнику_Const.TABLE + "." + Документи.ПоверненняТоварівПостачальнику_Const.НомерДок, "Номер"));
@@ -11148,8 +11236,6 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
             unionAllQuery += "\nORDER BY Дата";
 
-            //Console.WriteLine(unionAllQuery);
-
             string[] columnsName;
             List<Dictionary<string, object>> listRow;
 
@@ -11159,6 +11245,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             {
                 Журнали_Закупівлі record = new Журнали_Закупівлі();
                 record.ID = row["uid"]?.ToString() ?? "";
+                record.Type = row["type"]?.ToString() ?? "";
                 record.Spend = (bool)row["spend"];
                 
                     record.Назва = row["Назва"] != DBNull.Value ? (row["Назва"]?.ToString() ?? "") : "";
@@ -11199,9 +11286,10 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
     
     public class Журнали_Продажі
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         bool Spend = false;
         string ID = "";
+        string Type = ""; //Тип документу
         
         string Назва = "";
         string Дата = "";
@@ -11214,13 +11302,19 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         string Сума = "";
         string Автор = "";
 
+        // Масив для запису стрічки в Store
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID, Spend /*Проведений документ*/
+            return new object[] { new Gdk.Pixbuf(Image), ID, Type, Spend /*Проведений документ*/
             /* */ , Назва, Дата, Номер, Організація, Контрагент, Склад, Каса, Валюта, Сума, Автор };
         }
 
-        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(bool) /* Spend Проведений документ*/
+        // Джерело даних для списку
+        public static ListStore Store = new ListStore(
+          typeof(Gdk.Pixbuf) /* Image */, 
+          typeof(string) /* ID */, 
+          typeof(string) /* Type */, 
+          typeof(bool) /* Spend Проведений документ*/
             , typeof(string) /* Назва */
             , typeof(string) /* Дата */
             , typeof(string) /* Номер */
@@ -11233,29 +11327,33 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             , typeof(string) /* Автор */
             );
 
+        // Добавлення колонок в список
         public static void AddColumns(TreeView treeView)
         {
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /*Image*/ /* { Ypad = 0 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false }); /*UID*/
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererToggle(), "active", 2)); /*Проведений документ*/
+            treeView.AppendColumn(new TreeViewColumn("Type", new CellRendererText(), "text", 2) { Visible = false }); /*Type*/
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererToggle(), "active", 3)); /*Проведений документ*/
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3)); /*Назва*/
-            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 4)); /*Дата*/
-            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 5)); /*Номер*/
-            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Організація*/
-            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Контрагент*/
-            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Склад*/
-            treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText() { Xpad = 4 }, "text", 9)); /*Каса*/
-            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 10)); /*Валюта*/
-            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 11)); /*Сума*/
-            treeView.AppendColumn(new TreeViewColumn("Автор", new CellRendererText() { Xpad = 4 }, "text", 12)); /*Автор*/
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 4)); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 5)); /*Дата*/
+            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Номер*/
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Організація*/
+            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Контрагент*/
+            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 9)); /*Склад*/
+            treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText() { Xpad = 4 }, "text", 10)); /*Каса*/
+            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 11)); /*Валюта*/
+            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 12)); /*Сума*/
+            treeView.AppendColumn(new TreeViewColumn("Автор", new CellRendererText() { Xpad = 4 }, "text", 13)); /*Автор*/
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
 
+        // Словник з відборами, ключ це Тип документу
         public static Dictionary<string, List<Where>> Where { get; set; } = new Dictionary<string, List<Where>>();
 
+        // Добавляє відбір по періоду в словник відборів
         public static void ДодатиВідбірПоПеріоду(Перелічення.ТипПеріодуДляЖурналівДокументів типПеріоду)
         {
             Where.Clear();
@@ -11292,6 +11390,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               
         }
 
+        // Масив документів які входять в журнал
         public static string[] AllowDocument()
         {
             return new string[] 
@@ -11309,6 +11408,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
+        // Завантаження даних
         public static void LoadRecords()
         {
             Store.Clear();
@@ -11317,20 +11417,23 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
             
               {
-                  Query query = new Query("tab_a34");
+                  Query query = new Query(Документи.ЗамовленняКлієнта_Const.TABLE);
+
+                  // Встановлення відбору для даного типу документу
                   if (Where.ContainsKey("ЗамовленняКлієнта") && Where["ЗамовленняКлієнта"].Count != 0) {
                       query.Where = Where["ЗамовленняКлієнта"];
                       foreach(Where field in query.Where)
                           paramQuery.Add(field.Alias, field.Value);
                   }
 
+                  query.FieldAndAlias.Add(new NameValue<string>("'ЗамовленняКлієнта'", "type"));
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.ЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗамовленняКлієнта_Const.Назва, "Назва"));
                             
                               query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗамовленняКлієнта_Const.ДатаДок + "::timestamp", "Дата"));
+                                  new NameValue<string>(Документи.ЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗамовленняКлієнта_Const.ДатаДок, "Дата"));
                             
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.ЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗамовленняКлієнта_Const.НомерДок, "Номер"));
@@ -11391,20 +11494,23 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               }
               
               {
-                  Query query = new Query("tab_a36");
+                  Query query = new Query(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE);
+
+                  // Встановлення відбору для даного типу документу
                   if (Where.ContainsKey("РеалізаціяТоварівТаПослуг") && Where["РеалізаціяТоварівТаПослуг"].Count != 0) {
                       query.Where = Where["РеалізаціяТоварівТаПослуг"];
                       foreach(Where field in query.Where)
                           paramQuery.Add(field.Alias, field.Value);
                   }
 
+                  query.FieldAndAlias.Add(new NameValue<string>("'РеалізаціяТоварівТаПослуг'", "type"));
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE + "." + Документи.РеалізаціяТоварівТаПослуг_Const.Назва, "Назва"));
                             
                               query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE + "." + Документи.РеалізаціяТоварівТаПослуг_Const.ДатаДок + "::timestamp", "Дата"));
+                                  new NameValue<string>(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE + "." + Документи.РеалізаціяТоварівТаПослуг_Const.ДатаДок, "Дата"));
                             
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE + "." + Документи.РеалізаціяТоварівТаПослуг_Const.НомерДок, "Номер"));
@@ -11465,20 +11571,23 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               }
               
               {
-                  Query query = new Query("tab_a53");
+                  Query query = new Query(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE);
+
+                  // Встановлення відбору для даного типу документу
                   if (Where.ContainsKey("ПоверненняТоварівВідКлієнта") && Where["ПоверненняТоварівВідКлієнта"].Count != 0) {
                       query.Where = Where["ПоверненняТоварівВідКлієнта"];
                       foreach(Where field in query.Where)
                           paramQuery.Add(field.Alias, field.Value);
                   }
 
+                  query.FieldAndAlias.Add(new NameValue<string>("'ПоверненняТоварівВідКлієнта'", "type"));
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE + "." + Документи.ПоверненняТоварівВідКлієнта_Const.Назва, "Назва"));
                             
                               query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE + "." + Документи.ПоверненняТоварівВідКлієнта_Const.ДатаДок + "::timestamp", "Дата"));
+                                  new NameValue<string>(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE + "." + Документи.ПоверненняТоварівВідКлієнта_Const.ДатаДок, "Дата"));
                             
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE + "." + Документи.ПоверненняТоварівВідКлієнта_Const.НомерДок, "Номер"));
@@ -11539,20 +11648,23 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               }
               
               {
-                  Query query = new Query("tab_a81");
+                  Query query = new Query(Документи.АктВиконанихРобіт_Const.TABLE);
+
+                  // Встановлення відбору для даного типу документу
                   if (Where.ContainsKey("АктВиконанихРобіт") && Where["АктВиконанихРобіт"].Count != 0) {
                       query.Where = Where["АктВиконанихРобіт"];
                       foreach(Where field in query.Where)
                           paramQuery.Add(field.Alias, field.Value);
                   }
 
+                  query.FieldAndAlias.Add(new NameValue<string>("'АктВиконанихРобіт'", "type"));
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.АктВиконанихРобіт_Const.TABLE + "." + Документи.АктВиконанихРобіт_Const.Назва, "Назва"));
                             
                               query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.АктВиконанихРобіт_Const.TABLE + "." + Документи.АктВиконанихРобіт_Const.ДатаДок + "::timestamp", "Дата"));
+                                  new NameValue<string>(Документи.АктВиконанихРобіт_Const.TABLE + "." + Документи.АктВиконанихРобіт_Const.ДатаДок, "Дата"));
                             
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.АктВиконанихРобіт_Const.TABLE + "." + Документи.АктВиконанихРобіт_Const.НомерДок, "Номер"));
@@ -11608,20 +11720,23 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               }
               
               {
-                  Query query = new Query("tab_b10");
+                  Query query = new Query(Документи.РахунокФактура_Const.TABLE);
+
+                  // Встановлення відбору для даного типу документу
                   if (Where.ContainsKey("РахунокФактура") && Where["РахунокФактура"].Count != 0) {
                       query.Where = Where["РахунокФактура"];
                       foreach(Where field in query.Where)
                           paramQuery.Add(field.Alias, field.Value);
                   }
 
+                  query.FieldAndAlias.Add(new NameValue<string>("'РахунокФактура'", "type"));
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.РахунокФактура_Const.TABLE + "." + Документи.РахунокФактура_Const.Назва, "Назва"));
                             
                               query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.РахунокФактура_Const.TABLE + "." + Документи.РахунокФактура_Const.ДатаДок + "::timestamp", "Дата"));
+                                  new NameValue<string>(Документи.РахунокФактура_Const.TABLE + "." + Документи.РахунокФактура_Const.ДатаДок, "Дата"));
                             
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.РахунокФактура_Const.TABLE + "." + Документи.РахунокФактура_Const.НомерДок, "Номер"));
@@ -11686,8 +11801,6 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
             unionAllQuery += "\nORDER BY Дата";
 
-            //Console.WriteLine(unionAllQuery);
-
             string[] columnsName;
             List<Dictionary<string, object>> listRow;
 
@@ -11697,6 +11810,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             {
                 Журнали_Продажі record = new Журнали_Продажі();
                 record.ID = row["uid"]?.ToString() ?? "";
+                record.Type = row["type"]?.ToString() ?? "";
                 record.Spend = (bool)row["spend"];
                 
                     record.Назва = row["Назва"] != DBNull.Value ? (row["Назва"]?.ToString() ?? "") : "";
@@ -11737,9 +11851,10 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
     
     public class Журнали_Каса
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         bool Spend = false;
         string ID = "";
+        string Type = ""; //Тип документу
         
         string Назва = "";
         string Дата = "";
@@ -11752,13 +11867,19 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         string Сума = "";
         string Автор = "";
 
+        // Масив для запису стрічки в Store
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID, Spend /*Проведений документ*/
+            return new object[] { new Gdk.Pixbuf(Image), ID, Type, Spend /*Проведений документ*/
             /* */ , Назва, Дата, Номер, Організація, Контрагент, Каса, Каса2, Валюта, Сума, Автор };
         }
 
-        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(bool) /* Spend Проведений документ*/
+        // Джерело даних для списку
+        public static ListStore Store = new ListStore(
+          typeof(Gdk.Pixbuf) /* Image */, 
+          typeof(string) /* ID */, 
+          typeof(string) /* Type */, 
+          typeof(bool) /* Spend Проведений документ*/
             , typeof(string) /* Назва */
             , typeof(string) /* Дата */
             , typeof(string) /* Номер */
@@ -11771,29 +11892,33 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             , typeof(string) /* Автор */
             );
 
+        // Добавлення колонок в список
         public static void AddColumns(TreeView treeView)
         {
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /*Image*/ /* { Ypad = 0 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false }); /*UID*/
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererToggle(), "active", 2)); /*Проведений документ*/
+            treeView.AppendColumn(new TreeViewColumn("Type", new CellRendererText(), "text", 2) { Visible = false }); /*Type*/
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererToggle(), "active", 3)); /*Проведений документ*/
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3)); /*Назва*/
-            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 4)); /*Дата*/
-            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 5)); /*Номер*/
-            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Організація*/
-            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Контрагент*/
-            treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Каса*/
-            treeView.AppendColumn(new TreeViewColumn("Каса2", new CellRendererText() { Xpad = 4 }, "text", 9)); /*Каса2*/
-            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 10)); /*Валюта*/
-            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 11)); /*Сума*/
-            treeView.AppendColumn(new TreeViewColumn("Автор", new CellRendererText() { Xpad = 4 }, "text", 12)); /*Автор*/
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 4)); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 5)); /*Дата*/
+            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Номер*/
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Організація*/
+            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Контрагент*/
+            treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText() { Xpad = 4 }, "text", 9)); /*Каса*/
+            treeView.AppendColumn(new TreeViewColumn("Каса2", new CellRendererText() { Xpad = 4 }, "text", 10)); /*Каса2*/
+            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 11)); /*Валюта*/
+            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 12)); /*Сума*/
+            treeView.AppendColumn(new TreeViewColumn("Автор", new CellRendererText() { Xpad = 4 }, "text", 13)); /*Автор*/
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
 
+        // Словник з відборами, ключ це Тип документу
         public static Dictionary<string, List<Where>> Where { get; set; } = new Dictionary<string, List<Where>>();
 
+        // Добавляє відбір по періоду в словник відборів
         public static void ДодатиВідбірПоПеріоду(Перелічення.ТипПеріодуДляЖурналівДокументів типПеріоду)
         {
             Where.Clear();
@@ -11812,6 +11937,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               
         }
 
+        // Масив документів які входять в журнал
         public static string[] AllowDocument()
         {
             return new string[] 
@@ -11826,6 +11952,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
+        // Завантаження даних
         public static void LoadRecords()
         {
             Store.Clear();
@@ -11834,20 +11961,23 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
             
               {
-                  Query query = new Query("tab_a44");
+                  Query query = new Query(Документи.ПрихіднийКасовийОрдер_Const.TABLE);
+
+                  // Встановлення відбору для даного типу документу
                   if (Where.ContainsKey("ПрихіднийКасовийОрдер") && Where["ПрихіднийКасовийОрдер"].Count != 0) {
                       query.Where = Where["ПрихіднийКасовийОрдер"];
                       foreach(Where field in query.Where)
                           paramQuery.Add(field.Alias, field.Value);
                   }
 
+                  query.FieldAndAlias.Add(new NameValue<string>("'ПрихіднийКасовийОрдер'", "type"));
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.ПрихіднийКасовийОрдер_Const.TABLE + "." + Документи.ПрихіднийКасовийОрдер_Const.Назва, "Назва"));
                             
                               query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПрихіднийКасовийОрдер_Const.TABLE + "." + Документи.ПрихіднийКасовийОрдер_Const.ДатаДок + "::timestamp", "Дата"));
+                                  new NameValue<string>(Документи.ПрихіднийКасовийОрдер_Const.TABLE + "." + Документи.ПрихіднийКасовийОрдер_Const.ДатаДок, "Дата"));
                             
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.ПрихіднийКасовийОрдер_Const.TABLE + "." + Документи.ПрихіднийКасовийОрдер_Const.НомерДок, "Номер"));
@@ -11908,20 +12038,23 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               }
               
               {
-                  Query query = new Query("tab_a48");
+                  Query query = new Query(Документи.РозхіднийКасовийОрдер_Const.TABLE);
+
+                  // Встановлення відбору для даного типу документу
                   if (Where.ContainsKey("РозхіднийКасовийОрдер") && Where["РозхіднийКасовийОрдер"].Count != 0) {
                       query.Where = Where["РозхіднийКасовийОрдер"];
                       foreach(Where field in query.Where)
                           paramQuery.Add(field.Alias, field.Value);
                   }
 
+                  query.FieldAndAlias.Add(new NameValue<string>("'РозхіднийКасовийОрдер'", "type"));
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.РозхіднийКасовийОрдер_Const.TABLE + "." + Документи.РозхіднийКасовийОрдер_Const.Назва, "Назва"));
                             
                               query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.РозхіднийКасовийОрдер_Const.TABLE + "." + Документи.РозхіднийКасовийОрдер_Const.ДатаДок + "::timestamp", "Дата"));
+                                  new NameValue<string>(Документи.РозхіднийКасовийОрдер_Const.TABLE + "." + Документи.РозхіднийКасовийОрдер_Const.ДатаДок, "Дата"));
                             
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.РозхіднийКасовийОрдер_Const.TABLE + "." + Документи.РозхіднийКасовийОрдер_Const.НомерДок, "Номер"));
@@ -11986,8 +12119,6 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
             unionAllQuery += "\nORDER BY Дата";
 
-            //Console.WriteLine(unionAllQuery);
-
             string[] columnsName;
             List<Dictionary<string, object>> listRow;
 
@@ -11997,6 +12128,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             {
                 Журнали_Каса record = new Журнали_Каса();
                 record.ID = row["uid"]?.ToString() ?? "";
+                record.Type = row["type"]?.ToString() ?? "";
                 record.Spend = (bool)row["spend"];
                 
                     record.Назва = row["Назва"] != DBNull.Value ? (row["Назва"]?.ToString() ?? "") : "";
@@ -12037,9 +12169,10 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
     
     public class Журнали_Склад
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         bool Spend = false;
         string ID = "";
+        string Type = ""; //Тип документу
         
         string Назва = "";
         string Дата = "";
@@ -12049,13 +12182,19 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         string СкладОтримувач = "";
         string Автор = "";
 
+        // Масив для запису стрічки в Store
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID, Spend /*Проведений документ*/
+            return new object[] { new Gdk.Pixbuf(Image), ID, Type, Spend /*Проведений документ*/
             /* */ , Назва, Дата, Номер, Організація, СкладВідправник, СкладОтримувач, Автор };
         }
 
-        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(bool) /* Spend Проведений документ*/
+        // Джерело даних для списку
+        public static ListStore Store = new ListStore(
+          typeof(Gdk.Pixbuf) /* Image */, 
+          typeof(string) /* ID */, 
+          typeof(string) /* Type */, 
+          typeof(bool) /* Spend Проведений документ*/
             , typeof(string) /* Назва */
             , typeof(string) /* Дата */
             , typeof(string) /* Номер */
@@ -12065,26 +12204,30 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             , typeof(string) /* Автор */
             );
 
+        // Добавлення колонок в список
         public static void AddColumns(TreeView treeView)
         {
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /*Image*/ /* { Ypad = 0 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false }); /*UID*/
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererToggle(), "active", 2)); /*Проведений документ*/
+            treeView.AppendColumn(new TreeViewColumn("Type", new CellRendererText(), "text", 2) { Visible = false }); /*Type*/
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererToggle(), "active", 3)); /*Проведений документ*/
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3)); /*Назва*/
-            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 4)); /*Дата*/
-            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 5)); /*Номер*/
-            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Організація*/
-            treeView.AppendColumn(new TreeViewColumn("СкладВідправник", new CellRendererText() { Xpad = 4 }, "text", 7)); /*СкладВідправник*/
-            treeView.AppendColumn(new TreeViewColumn("СкладОтримувач", new CellRendererText() { Xpad = 4 }, "text", 8)); /*СкладОтримувач*/
-            treeView.AppendColumn(new TreeViewColumn("Автор", new CellRendererText() { Xpad = 4 }, "text", 9)); /*Автор*/
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 4)); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 5)); /*Дата*/
+            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Номер*/
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Організація*/
+            treeView.AppendColumn(new TreeViewColumn("СкладВідправник", new CellRendererText() { Xpad = 4 }, "text", 8)); /*СкладВідправник*/
+            treeView.AppendColumn(new TreeViewColumn("СкладОтримувач", new CellRendererText() { Xpad = 4 }, "text", 9)); /*СкладОтримувач*/
+            treeView.AppendColumn(new TreeViewColumn("Автор", new CellRendererText() { Xpad = 4 }, "text", 10)); /*Автор*/
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
 
+        // Словник з відборами, ключ це Тип документу
         public static Dictionary<string, List<Where>> Where { get; set; } = new Dictionary<string, List<Where>>();
 
+        // Добавляє відбір по періоду в словник відборів
         public static void ДодатиВідбірПоПеріоду(Перелічення.ТипПеріодуДляЖурналівДокументів типПеріоду)
         {
             Where.Clear();
@@ -12109,6 +12252,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               
         }
 
+        // Масив документів які входять в журнал
         public static string[] AllowDocument()
         {
             return new string[] 
@@ -12124,6 +12268,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
+        // Завантаження даних
         public static void LoadRecords()
         {
             Store.Clear();
@@ -12132,20 +12277,23 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
             
               {
-                  Query query = new Query("tab_a31");
+                  Query query = new Query(Документи.ПереміщенняТоварів_Const.TABLE);
+
+                  // Встановлення відбору для даного типу документу
                   if (Where.ContainsKey("ПереміщенняТоварів") && Where["ПереміщенняТоварів"].Count != 0) {
                       query.Where = Where["ПереміщенняТоварів"];
                       foreach(Where field in query.Where)
                           paramQuery.Add(field.Alias, field.Value);
                   }
 
+                  query.FieldAndAlias.Add(new NameValue<string>("'ПереміщенняТоварів'", "type"));
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.ПереміщенняТоварів_Const.TABLE + "." + Документи.ПереміщенняТоварів_Const.Назва, "Назва"));
                             
                               query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПереміщенняТоварів_Const.TABLE + "." + Документи.ПереміщенняТоварів_Const.ДатаДок + "::timestamp", "Дата"));
+                                  new NameValue<string>(Документи.ПереміщенняТоварів_Const.TABLE + "." + Документи.ПереміщенняТоварів_Const.ДатаДок, "Дата"));
                             
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.ПереміщенняТоварів_Const.TABLE + "." + Документи.ПереміщенняТоварів_Const.НомерДок, "Номер"));
@@ -12182,20 +12330,23 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               }
               
               {
-                  Query query = new Query("tab_a83");
+                  Query query = new Query(Документи.ВведенняЗалишків_Const.TABLE);
+
+                  // Встановлення відбору для даного типу документу
                   if (Where.ContainsKey("ВведенняЗалишків") && Where["ВведенняЗалишків"].Count != 0) {
                       query.Where = Where["ВведенняЗалишків"];
                       foreach(Where field in query.Where)
                           paramQuery.Add(field.Alias, field.Value);
                   }
 
+                  query.FieldAndAlias.Add(new NameValue<string>("'ВведенняЗалишків'", "type"));
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.ВведенняЗалишків_Const.TABLE + "." + Документи.ВведенняЗалишків_Const.Назва, "Назва"));
                             
                               query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ВведенняЗалишків_Const.TABLE + "." + Документи.ВведенняЗалишків_Const.ДатаДок + "::timestamp", "Дата"));
+                                  new NameValue<string>(Документи.ВведенняЗалишків_Const.TABLE + "." + Документи.ВведенняЗалишків_Const.ДатаДок, "Дата"));
                             
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.ВведенняЗалишків_Const.TABLE + "." + Документи.ВведенняЗалишків_Const.НомерДок, "Номер"));
@@ -12232,20 +12383,23 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               }
               
               {
-                  Query query = new Query("tab_b07");
+                  Query query = new Query(Документи.ВнутрішнєСпоживанняТоварів_Const.TABLE);
+
+                  // Встановлення відбору для даного типу документу
                   if (Where.ContainsKey("ВнутрішнєСпоживанняТоварів") && Where["ВнутрішнєСпоживанняТоварів"].Count != 0) {
                       query.Where = Where["ВнутрішнєСпоживанняТоварів"];
                       foreach(Where field in query.Where)
                           paramQuery.Add(field.Alias, field.Value);
                   }
 
+                  query.FieldAndAlias.Add(new NameValue<string>("'ВнутрішнєСпоживанняТоварів'", "type"));
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.ВнутрішнєСпоживанняТоварів_Const.TABLE + "." + Документи.ВнутрішнєСпоживанняТоварів_Const.Назва, "Назва"));
                             
                               query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ВнутрішнєСпоживанняТоварів_Const.TABLE + "." + Документи.ВнутрішнєСпоживанняТоварів_Const.ДатаДок + "::timestamp", "Дата"));
+                                  new NameValue<string>(Документи.ВнутрішнєСпоживанняТоварів_Const.TABLE + "." + Документи.ВнутрішнєСпоживанняТоварів_Const.ДатаДок, "Дата"));
                             
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.ВнутрішнєСпоживанняТоварів_Const.TABLE + "." + Документи.ВнутрішнєСпоживанняТоварів_Const.НомерДок, "Номер"));
@@ -12286,8 +12440,6 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
             unionAllQuery += "\nORDER BY Дата";
 
-            //Console.WriteLine(unionAllQuery);
-
             string[] columnsName;
             List<Dictionary<string, object>> listRow;
 
@@ -12297,6 +12449,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             {
                 Журнали_Склад record = new Журнали_Склад();
                 record.ID = row["uid"]?.ToString() ?? "";
+                record.Type = row["type"]?.ToString() ?? "";
                 record.Spend = (bool)row["spend"];
                 
                     record.Назва = row["Назва"] != DBNull.Value ? (row["Назва"]?.ToString() ?? "") : "";
@@ -12331,9 +12484,10 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
     
     public class Журнали_АдреснеЗберігання
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         bool Spend = false;
         string ID = "";
+        string Type = ""; //Тип документу
         
         string Назва = "";
         string Дата = "";
@@ -12342,13 +12496,19 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         string Склад = "";
         string Автор = "";
 
+        // Масив для запису стрічки в Store
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID, Spend /*Проведений документ*/
+            return new object[] { new Gdk.Pixbuf(Image), ID, Type, Spend /*Проведений документ*/
             /* */ , Назва, Дата, Номер, Організація, Склад, Автор };
         }
 
-        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(bool) /* Spend Проведений документ*/
+        // Джерело даних для списку
+        public static ListStore Store = new ListStore(
+          typeof(Gdk.Pixbuf) /* Image */, 
+          typeof(string) /* ID */, 
+          typeof(string) /* Type */, 
+          typeof(bool) /* Spend Проведений документ*/
             , typeof(string) /* Назва */
             , typeof(string) /* Дата */
             , typeof(string) /* Номер */
@@ -12357,25 +12517,29 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             , typeof(string) /* Автор */
             );
 
+        // Добавлення колонок в список
         public static void AddColumns(TreeView treeView)
         {
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /*Image*/ /* { Ypad = 0 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false }); /*UID*/
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererToggle(), "active", 2)); /*Проведений документ*/
+            treeView.AppendColumn(new TreeViewColumn("Type", new CellRendererText(), "text", 2) { Visible = false }); /*Type*/
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererToggle(), "active", 3)); /*Проведений документ*/
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3)); /*Назва*/
-            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 4)); /*Дата*/
-            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 5)); /*Номер*/
-            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Організація*/
-            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Склад*/
-            treeView.AppendColumn(new TreeViewColumn("Автор", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Автор*/
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 4)); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 5)); /*Дата*/
+            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Номер*/
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Організація*/
+            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Склад*/
+            treeView.AppendColumn(new TreeViewColumn("Автор", new CellRendererText() { Xpad = 4 }, "text", 9)); /*Автор*/
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
 
+        // Словник з відборами, ключ це Тип документу
         public static Dictionary<string, List<Where>> Where { get; set; } = new Dictionary<string, List<Where>>();
 
+        // Добавляє відбір по періоду в словник відборів
         public static void ДодатиВідбірПоПеріоду(Перелічення.ТипПеріодуДляЖурналівДокументів типПеріоду)
         {
             Where.Clear();
@@ -12406,6 +12570,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               
         }
 
+        // Масив документів які входять в журнал
         public static string[] AllowDocument()
         {
             return new string[] 
@@ -12422,6 +12587,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
+        // Завантаження даних
         public static void LoadRecords()
         {
             Store.Clear();
@@ -12430,20 +12596,23 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
             
               {
-                  Query query = new Query("tab_a64");
+                  Query query = new Query(Документи.РозміщенняТоварівНаСкладі_Const.TABLE);
+
+                  // Встановлення відбору для даного типу документу
                   if (Where.ContainsKey("РозміщенняТоварівНаСкладі") && Where["РозміщенняТоварівНаСкладі"].Count != 0) {
                       query.Where = Where["РозміщенняТоварівНаСкладі"];
                       foreach(Where field in query.Where)
                           paramQuery.Add(field.Alias, field.Value);
                   }
 
+                  query.FieldAndAlias.Add(new NameValue<string>("'РозміщенняТоварівНаСкладі'", "type"));
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.РозміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.РозміщенняТоварівНаСкладі_Const.Назва, "Назва"));
                             
                               query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.РозміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.РозміщенняТоварівНаСкладі_Const.ДатаДок + "::timestamp", "Дата"));
+                                  new NameValue<string>(Документи.РозміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.РозміщенняТоварівНаСкладі_Const.ДатаДок, "Дата"));
                             
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.РозміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.РозміщенняТоварівНаСкладі_Const.НомерДок, "Номер"));
@@ -12477,20 +12646,23 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               }
               
               {
-                  Query query = new Query("tab_b09");
+                  Query query = new Query(Документи.ПереміщенняТоварівНаСкладі_Const.TABLE);
+
+                  // Встановлення відбору для даного типу документу
                   if (Where.ContainsKey("ПереміщенняТоварівНаСкладі") && Where["ПереміщенняТоварівНаСкладі"].Count != 0) {
                       query.Where = Where["ПереміщенняТоварівНаСкладі"];
                       foreach(Where field in query.Where)
                           paramQuery.Add(field.Alias, field.Value);
                   }
 
+                  query.FieldAndAlias.Add(new NameValue<string>("'ПереміщенняТоварівНаСкладі'", "type"));
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.ПереміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.ПереміщенняТоварівНаСкладі_Const.Назва, "Назва"));
                             
                               query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПереміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.ПереміщенняТоварівНаСкладі_Const.ДатаДок + "::timestamp", "Дата"));
+                                  new NameValue<string>(Документи.ПереміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.ПереміщенняТоварівНаСкладі_Const.ДатаДок, "Дата"));
                             
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.ПереміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.ПереміщенняТоварівНаСкладі_Const.НомерДок, "Номер"));
@@ -12524,20 +12696,23 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               }
               
               {
-                  Query query = new Query("tab_b27");
+                  Query query = new Query(Документи.ЗбіркаТоварівНаСкладі_Const.TABLE);
+
+                  // Встановлення відбору для даного типу документу
                   if (Where.ContainsKey("ЗбіркаТоварівНаСкладі") && Where["ЗбіркаТоварівНаСкладі"].Count != 0) {
                       query.Where = Where["ЗбіркаТоварівНаСкладі"];
                       foreach(Where field in query.Where)
                           paramQuery.Add(field.Alias, field.Value);
                   }
 
+                  query.FieldAndAlias.Add(new NameValue<string>("'ЗбіркаТоварівНаСкладі'", "type"));
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.ЗбіркаТоварівНаСкладі_Const.TABLE + "." + Документи.ЗбіркаТоварівНаСкладі_Const.Назва, "Назва"));
                             
                               query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ЗбіркаТоварівНаСкладі_Const.TABLE + "." + Документи.ЗбіркаТоварівНаСкладі_Const.ДатаДок + "::timestamp", "Дата"));
+                                  new NameValue<string>(Документи.ЗбіркаТоварівНаСкладі_Const.TABLE + "." + Документи.ЗбіркаТоварівНаСкладі_Const.ДатаДок, "Дата"));
                             
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.ЗбіркаТоварівНаСкладі_Const.TABLE + "." + Документи.ЗбіркаТоварівНаСкладі_Const.НомерДок, "Номер"));
@@ -12571,20 +12746,23 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               }
               
               {
-                  Query query = new Query("tab_b29");
+                  Query query = new Query(Документи.РозміщенняНоменклатуриПоКоміркам_Const.TABLE);
+
+                  // Встановлення відбору для даного типу документу
                   if (Where.ContainsKey("РозміщенняНоменклатуриПоКоміркам") && Where["РозміщенняНоменклатуриПоКоміркам"].Count != 0) {
                       query.Where = Where["РозміщенняНоменклатуриПоКоміркам"];
                       foreach(Where field in query.Where)
                           paramQuery.Add(field.Alias, field.Value);
                   }
 
+                  query.FieldAndAlias.Add(new NameValue<string>("'РозміщенняНоменклатуриПоКоміркам'", "type"));
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.РозміщенняНоменклатуриПоКоміркам_Const.TABLE + "." + Документи.РозміщенняНоменклатуриПоКоміркам_Const.Назва, "Назва"));
                             
                               query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.РозміщенняНоменклатуриПоКоміркам_Const.TABLE + "." + Документи.РозміщенняНоменклатуриПоКоміркам_Const.ДатаДок + "::timestamp", "Дата"));
+                                  new NameValue<string>(Документи.РозміщенняНоменклатуриПоКоміркам_Const.TABLE + "." + Документи.РозміщенняНоменклатуриПоКоміркам_Const.ДатаДок, "Дата"));
                             
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.РозміщенняНоменклатуриПоКоміркам_Const.TABLE + "." + Документи.РозміщенняНоменклатуриПоКоміркам_Const.НомерДок, "Номер"));
@@ -12622,8 +12800,6 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
             unionAllQuery += "\nORDER BY Дата";
 
-            //Console.WriteLine(unionAllQuery);
-
             string[] columnsName;
             List<Dictionary<string, object>> listRow;
 
@@ -12633,6 +12809,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             {
                 Журнали_АдреснеЗберігання record = new Журнали_АдреснеЗберігання();
                 record.ID = row["uid"]?.ToString() ?? "";
+                record.Type = row["type"]?.ToString() ?? "";
                 record.Spend = (bool)row["spend"];
                 
                     record.Назва = row["Назва"] != DBNull.Value ? (row["Назва"]?.ToString() ?? "") : "";
@@ -12671,7 +12848,7 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
       
     public class ЦіниНоменклатури_Записи
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         string ID = "";
         string Період = "";
         
@@ -12803,7 +12980,7 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
       
     public class КурсиВалют_Записи
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         string ID = "";
         string Період = "";
         
@@ -12891,7 +13068,7 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
       
     public class ШтрихкодиНоменклатури_Записи
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         string ID = "";
         string Період = "";
         

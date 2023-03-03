@@ -57,7 +57,7 @@ namespace StorageAndTrade
 
             //Сторінка
             {
-                LinkButton linkPage = new LinkButton(" Характеристики") { Halign = Align.Start, Image = new Image("images/doc.png"), AlwaysShowImage = true };
+                LinkButton linkPage = new LinkButton(" Характеристики") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
                 linkPage.Clicked += (object? sender, EventArgs args) =>
                 {
                     ХарактеристикиНоменклатури page = new ХарактеристикиНоменклатури();
@@ -102,7 +102,7 @@ namespace StorageAndTrade
 
             //Очистка
             {
-                LinkButton linkClear = new LinkButton(" Очистити") { Image = new Image("images/clean.png"), AlwaysShowImage = true };
+                LinkButton linkClear = new LinkButton(" Очистити") { Image = new Image(AppContext.BaseDirectory + "images/clean.png"), AlwaysShowImage = true };
                 linkClear.Clicked += (object? sender, EventArgs args) =>
                 {
                     if (CallBack_OnSelectPointer != null)

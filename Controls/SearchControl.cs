@@ -50,7 +50,7 @@ namespace StorageAndTrade
             entrySearch.Changed += OnEntrySearchChanged;
             PackStart(entrySearch, false, false, 2);
 
-            Button bClear = new Button(new Image("images/clean.png"));
+            Button bClear = new Button(new Image(AppContext.BaseDirectory + "images/clean.png"));
             bClear.Clicked += OnClear;
             PackStart(bClear, false, false, 2);
         }

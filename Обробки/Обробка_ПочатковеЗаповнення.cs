@@ -585,17 +585,17 @@ namespace StorageAndTrade
                     {
                         case TypeMessage.Ok:
                             {
-                                hBoxInfo.PackStart(new Image("images/16/ok.png"), false, false, 5);
+                                hBoxInfo.PackStart(new Image(AppContext.BaseDirectory + "images/16/ok.png"), false, false, 5);
                                 break;
                             }
                         case TypeMessage.Error:
                             {
-                                hBoxInfo.PackStart(new Image("images/16/error.png"), false, false, 5);
+                                hBoxInfo.PackStart(new Image(AppContext.BaseDirectory + "images/16/error.png"), false, false, 5);
                                 break;
                             }
                         case TypeMessage.Info:
                             {
-                                hBoxInfo.PackStart(new Image("images/16/info.png"), false, false, 5);
+                                hBoxInfo.PackStart(new Image(AppContext.BaseDirectory + "images/16/info.png"), false, false, 5);
                                 break;
                             }
                         case TypeMessage.None:

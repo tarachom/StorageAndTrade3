@@ -63,7 +63,7 @@ namespace StorageAndTrade
 
             //Характеристики
             {
-                LinkButton linkButtonHar = new LinkButton(" Характеристики номеклатури") { Halign = Align.Start, Image = new Image("images/doc.png"), AlwaysShowImage = true };
+                LinkButton linkButtonHar = new LinkButton(" Характеристики номеклатури") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
                 linkButtonHar.Clicked += (object? sender, EventArgs args) =>
                 {
                     ХарактеристикиНоменклатури page = new ХарактеристикиНоменклатури();
@@ -81,7 +81,7 @@ namespace StorageAndTrade
 
             //ШтрихКоди
             {
-                LinkButton linkButtonShKody = new LinkButton(" Штрихкоди") { Halign = Align.Start, Image = new Image("images/doc.png"), AlwaysShowImage = true };
+                LinkButton linkButtonShKody = new LinkButton(" Штрихкоди") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
                 linkButtonShKody.Clicked += (object? sender, EventArgs args) =>
                 {
                     ШтрихкодиНоменклатури page = new ШтрихкодиНоменклатури();
