@@ -47,7 +47,8 @@ namespace StorageAndTrade
             SetPosition(WindowPosition.Center);
             Maximize();
 
-            if (File.Exists(Program.IcoFileName)) SetDefaultIconFromFile(Program.IcoFileName);
+            if (File.Exists(Program.IcoFileName))
+                SetDefaultIconFromFile(Program.IcoFileName);
 
             DeleteEvent += delegate { Program.Quit(); };
 
@@ -194,10 +195,10 @@ namespace StorageAndTrade
         void CreateLeftMenu(HBox hbox)
         {
             VBox vbox = new VBox();
-            vbox.BorderWidth = 10;
+            vbox.BorderWidth = 0;
 
-            ScrolledWindow scrolLeftMenu = new ScrolledWindow() { ShadowType = ShadowType.In, WidthRequest = 200 };
-            scrolLeftMenu.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
+            ScrolledWindow scrolLeftMenu = new ScrolledWindow() { ShadowType = ShadowType.In, WidthRequest = 170 };
+            scrolLeftMenu.SetPolicy(PolicyType.Never, PolicyType.Never);
             scrolLeftMenu.Add(vbox);
 
             CreateItemLeftMenu(vbox, "Документи", Документи, "images/documents.png");
@@ -220,7 +221,6 @@ namespace StorageAndTrade
             };
 
             lb.Image.Valign = Align.End;
-
             lb.Clicked += ClikAction;
 
             vBox.PackStart(lb, false, false, 10);
