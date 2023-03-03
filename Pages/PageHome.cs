@@ -29,7 +29,7 @@ limitations under the License.
 
 using Gtk;
 
-using Константи = StorageAndTrade_1_0.Константи;
+using ТабличніСписки = StorageAndTrade_1_0.Документи.ТабличніСписки;
 
 namespace StorageAndTrade
 {

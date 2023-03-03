@@ -43,9 +43,10 @@ namespace StorageAndTrade
 
             AddLink(vLeft, "Повний", Повний);
             AddLink(vLeft, "Продажі", Продажі);
-            AddLink(vLeft, "Закупки", Закупки);
-            AddLink(vLeft, "Склади", Склади);
-            AddLink(vLeft, "Фінанси", Фінанси);
+            AddLink(vLeft, "Закупівлі", Закупівлі);
+            AddLink(vLeft, "Склади", Склад);
+            AddLink(vLeft, "Каса", Каса);
+            AddLink(vLeft, "Адресне зберігання", АдреснеЗберігання);
 
             PackStart(hBoxList, false, false, 10);
 
@@ -54,27 +55,44 @@ namespace StorageAndTrade
 
         void Повний(object? sender, EventArgs args)
         {
-
+            Журнал_Повний page = new Журнал_Повний();
+            Program.GeneralForm?.CreateNotebookPage("Повний", () => { return page; });
+            page.SetValue();
         }
 
         void Продажі(object? sender, EventArgs args)
         {
-
+            Журнал_Продажі page = new Журнал_Продажі();
+            Program.GeneralForm?.CreateNotebookPage("Продажі", () => { return page; });
+            page.SetValue();
         }
 
-        void Закупки(object? sender, EventArgs args)
+        void Закупівлі(object? sender, EventArgs args)
         {
-
+            Журнал_Закупівлі page = new Журнал_Закупівлі();
+            Program.GeneralForm?.CreateNotebookPage("Закупівлі", () => { return page; });
+            page.SetValue();
         }
 
-        void Склади(object? sender, EventArgs args)
+        void Склад(object? sender, EventArgs args)
         {
-
+            Журнал_Склад page = new Журнал_Склад();
+            Program.GeneralForm?.CreateNotebookPage("Склад", () => { return page; });
+            page.SetValue();
         }
 
-        void Фінанси(object? sender, EventArgs args)
+        void Каса(object? sender, EventArgs args)
         {
+            Журнал_Каса page = new Журнал_Каса();
+            Program.GeneralForm?.CreateNotebookPage("Каса", () => { return page; });
+            page.SetValue();
+        }
 
+        void АдреснеЗберігання(object? sender, EventArgs args)
+        {
+            Журнал_АдреснеЗберігання page = new Журнал_АдреснеЗберігання();
+            Program.GeneralForm?.CreateNotebookPage("Адресне зберігання", () => { return page; });
+            page.SetValue();
         }
 
         void AddLink(VBox vbox, string uri, EventHandler? clickAction = null)

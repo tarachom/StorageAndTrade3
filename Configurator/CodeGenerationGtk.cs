@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 28.02.2023 15:16:04
+ * Дата конфігурації: 03.03.2023 11:36:58
  *
  */
  
@@ -9330,6 +9330,3335 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         }
     }
 	    
+    #endregion
+    
+
+    //
+    // Журнали
+    //
+
+    
+    #region JOURNAL "Повний"
+    
+    public class Журнали_Повний
+    {
+        string Image = "images/doc.png";
+        bool Spend = false;
+        string ID = "";
+        
+        string Назва = "";
+        string Дата = "";
+        string Номер = "";
+        string Організація = "";
+        string Контрагент = "";
+        string Склад = "";
+        string Каса = "";
+        string Валюта = "";
+        string Сума = "";
+        string Автор = "";
+
+        Array ToArray()
+        {
+            return new object[] { new Gdk.Pixbuf(Image), ID, Spend /*Проведений документ*/
+            /* */ , Назва, Дата, Номер, Організація, Контрагент, Склад, Каса, Валюта, Сума, Автор };
+        }
+
+        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(bool) /* Spend Проведений документ*/
+            , typeof(string) /* Назва */
+            , typeof(string) /* Дата */
+            , typeof(string) /* Номер */
+            , typeof(string) /* Організація */
+            , typeof(string) /* Контрагент */
+            , typeof(string) /* Склад */
+            , typeof(string) /* Каса */
+            , typeof(string) /* Валюта */
+            , typeof(string) /* Сума */
+            , typeof(string) /* Автор */
+            );
+
+        public static void AddColumns(TreeView treeView)
+        {
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /*Image*/ /* { Ypad = 0 } */
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false }); /*UID*/
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererToggle(), "active", 2)); /*Проведений документ*/
+            /* */
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3)); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 4)); /*Дата*/
+            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 5)); /*Номер*/
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Організація*/
+            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Контрагент*/
+            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Склад*/
+            treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText() { Xpad = 4 }, "text", 9)); /*Каса*/
+            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 10)); /*Валюта*/
+            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 11)); /*Сума*/
+            treeView.AppendColumn(new TreeViewColumn("Автор", new CellRendererText() { Xpad = 4 }, "text", 12)); /*Автор*/
+            
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
+        }
+
+        public static Dictionary<string, List<Where>> Where { get; set; } = new Dictionary<string, List<Where>>();
+
+        public static void ДодатиВідбірПоПеріоду(Перелічення.ТипПеріодуДляЖурналівДокументів типПеріоду)
+        {
+            Where.Clear();
+            
+            {
+                List<Where> where = new List<Where>();
+                Where.Add("ЗамовленняПостачальнику", where);
+                Інтерфейс.ДодатиВідбірПоПеріоду(where, ЗамовленняПостачальнику_Const.ДатаДок, типПеріоду);
+            }
+              
+            {
+                List<Where> where = new List<Where>();
+                Where.Add("ПоступленняТоварівТаПослуг", where);
+                Інтерфейс.ДодатиВідбірПоПеріоду(where, ПоступленняТоварівТаПослуг_Const.ДатаДок, типПеріоду);
+            }
+              
+            {
+                List<Where> where = new List<Where>();
+                Where.Add("ЗамовленняКлієнта", where);
+                Інтерфейс.ДодатиВідбірПоПеріоду(where, ЗамовленняКлієнта_Const.ДатаДок, типПеріоду);
+            }
+              
+            {
+                List<Where> where = new List<Where>();
+                Where.Add("РеалізаціяТоварівТаПослуг", where);
+                Інтерфейс.ДодатиВідбірПоПеріоду(where, РеалізаціяТоварівТаПослуг_Const.ДатаДок, типПеріоду);
+            }
+              
+            {
+                List<Where> where = new List<Where>();
+                Where.Add("ВстановленняЦінНоменклатури", where);
+                Інтерфейс.ДодатиВідбірПоПеріоду(where, ВстановленняЦінНоменклатури_Const.ДатаДок, типПеріоду);
+            }
+              
+            {
+                List<Where> where = new List<Where>();
+                Where.Add("ПрихіднийКасовийОрдер", where);
+                Інтерфейс.ДодатиВідбірПоПеріоду(where, ПрихіднийКасовийОрдер_Const.ДатаДок, типПеріоду);
+            }
+              
+            {
+                List<Where> where = new List<Where>();
+                Where.Add("РозхіднийКасовийОрдер", where);
+                Інтерфейс.ДодатиВідбірПоПеріоду(where, РозхіднийКасовийОрдер_Const.ДатаДок, типПеріоду);
+            }
+              
+            {
+                List<Where> where = new List<Where>();
+                Where.Add("ПереміщенняТоварів", where);
+                Інтерфейс.ДодатиВідбірПоПеріоду(where, ПереміщенняТоварів_Const.ДатаДок, типПеріоду);
+            }
+              
+            {
+                List<Where> where = new List<Where>();
+                Where.Add("ПоверненняТоварівПостачальнику", where);
+                Інтерфейс.ДодатиВідбірПоПеріоду(where, ПоверненняТоварівПостачальнику_Const.ДатаДок, типПеріоду);
+            }
+              
+            {
+                List<Where> where = new List<Where>();
+                Where.Add("ПоверненняТоварівВідКлієнта", where);
+                Інтерфейс.ДодатиВідбірПоПеріоду(where, ПоверненняТоварівВідКлієнта_Const.ДатаДок, типПеріоду);
+            }
+              
+            {
+                List<Where> where = new List<Where>();
+                Where.Add("АктВиконанихРобіт", where);
+                Інтерфейс.ДодатиВідбірПоПеріоду(where, АктВиконанихРобіт_Const.ДатаДок, типПеріоду);
+            }
+              
+            {
+                List<Where> where = new List<Where>();
+                Where.Add("ВведенняЗалишків", where);
+                Інтерфейс.ДодатиВідбірПоПеріоду(where, ВведенняЗалишків_Const.ДатаДок, типПеріоду);
+            }
+              
+            {
+                List<Where> where = new List<Where>();
+                Where.Add("ВнутрішнєСпоживанняТоварів", where);
+                Інтерфейс.ДодатиВідбірПоПеріоду(where, ВнутрішнєСпоживанняТоварів_Const.ДатаДок, типПеріоду);
+            }
+              
+            {
+                List<Where> where = new List<Where>();
+                Where.Add("РахунокФактура", where);
+                Інтерфейс.ДодатиВідбірПоПеріоду(where, РахунокФактура_Const.ДатаДок, типПеріоду);
+            }
+              
+            {
+                List<Where> where = new List<Where>();
+                Where.Add("РозміщенняТоварівНаСкладі", where);
+                Інтерфейс.ДодатиВідбірПоПеріоду(where, РозміщенняТоварівНаСкладі_Const.ДатаДок, типПеріоду);
+            }
+              
+            {
+                List<Where> where = new List<Where>();
+                Where.Add("ПереміщенняТоварівНаСкладі", where);
+                Інтерфейс.ДодатиВідбірПоПеріоду(where, ПереміщенняТоварівНаСкладі_Const.ДатаДок, типПеріоду);
+            }
+              
+            {
+                List<Where> where = new List<Where>();
+                Where.Add("ЗбіркаТоварівНаСкладі", where);
+                Інтерфейс.ДодатиВідбірПоПеріоду(where, ЗбіркаТоварівНаСкладі_Const.ДатаДок, типПеріоду);
+            }
+              
+            {
+                List<Where> where = new List<Where>();
+                Where.Add("РозміщенняНоменклатуриПоКоміркам", where);
+                Інтерфейс.ДодатиВідбірПоПеріоду(where, РозміщенняНоменклатуриПоКоміркам_Const.ДатаДок, типПеріоду);
+            }
+              
+        }
+
+        public static string[] AllowDocument()
+        {
+            return new string[] 
+            {
+                "ЗамовленняПостачальнику" /* */
+                , "ПоступленняТоварівТаПослуг" /* */
+                , "ЗамовленняКлієнта" /* */
+                , "РеалізаціяТоварівТаПослуг" /* */
+                , "ВстановленняЦінНоменклатури" /* */
+                , "ПрихіднийКасовийОрдер" /* */
+                , "РозхіднийКасовийОрдер" /* */
+                , "ПереміщенняТоварів" /* */
+                , "ПоверненняТоварівПостачальнику" /* */
+                , "ПоверненняТоварівВідКлієнта" /* */
+                , "АктВиконанихРобіт" /* */
+                , "ВведенняЗалишків" /* */
+                , "ВнутрішнєСпоживанняТоварів" /* */
+                , "РахунокФактура" /* */
+                , "РозміщенняТоварівНаСкладі" /* */
+                , "ПереміщенняТоварівНаСкладі" /* */
+                , "ЗбіркаТоварівНаСкладі" /* */
+                , "РозміщенняНоменклатуриПоКоміркам" /* */
+                
+            };
+        }
+
+        public static UnigueID? SelectPointerItem { get; set; }
+        public static TreePath? SelectPath;
+        public static TreePath? CurrentPath;
+
+        public static void LoadRecords()
+        {
+            Store.Clear();
+            List<string> allQuery = new List<string>();
+            Dictionary<string, object> paramQuery = new Dictionary<string, object>();
+
+            
+              {
+                  Query query = new Query("tab_a25");
+                  if (Where.ContainsKey("ЗамовленняПостачальнику") && Where["ЗамовленняПостачальнику"].Count != 0) {
+                      query.Where = Where["ЗамовленняПостачальнику"];
+                      foreach(Where field in query.Where)
+                          paramQuery.Add(field.Alias, field.Value);
+                  }
+
+                  query.Field.Add("spend");
+                  
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗамовленняПостачальнику_Const.Назва, "Назва"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗамовленняПостачальнику_Const.ДатаДок + "::timestamp", "Дата"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗамовленняПостачальнику_Const.НомерДок, "Номер"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Організації_Const.TABLE, Документи.ЗамовленняПостачальнику_Const.Організація, query.Table, "join_tab_1"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_1." + Довідники.Організації_Const.Назва, "Організація"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Контрагенти_Const.TABLE, Документи.ЗамовленняПостачальнику_Const.Контрагент, query.Table, "join_tab_2"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_2." + Довідники.Контрагенти_Const.Назва, "Контрагент"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Склади_Const.TABLE, Документи.ЗамовленняПостачальнику_Const.Склад, query.Table, "join_tab_3"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_3." + Довідники.Склади_Const.Назва, "Склад"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Каси_Const.TABLE, Документи.ЗамовленняПостачальнику_Const.Каса, query.Table, "join_tab_4"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_4." + Довідники.Каси_Const.Назва, "Каса"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Валюти_Const.TABLE, Документи.ЗамовленняПостачальнику_Const.Валюта, query.Table, "join_tab_5"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_5." + Довідники.Валюти_Const.Назва, "Валюта"));
+                              
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗамовленняПостачальнику_Const.СумаДокументу + "::text", "Сума"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Користувачі_Const.TABLE, Документи.ЗамовленняПостачальнику_Const.Автор, query.Table, "join_tab_6"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_6." + Довідники.Користувачі_Const.Назва, "Автор"));
+                              
+
+                  allQuery.Add(query.Construct());
+              }
+              
+              {
+                  Query query = new Query("tab_a32");
+                  if (Where.ContainsKey("ПоступленняТоварівТаПослуг") && Where["ПоступленняТоварівТаПослуг"].Count != 0) {
+                      query.Where = Where["ПоступленняТоварівТаПослуг"];
+                      foreach(Where field in query.Where)
+                          paramQuery.Add(field.Alias, field.Value);
+                  }
+
+                  query.Field.Add("spend");
+                  
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПоступленняТоварівТаПослуг_Const.TABLE + "." + Документи.ПоступленняТоварівТаПослуг_Const.Назва, "Назва"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПоступленняТоварівТаПослуг_Const.TABLE + "." + Документи.ПоступленняТоварівТаПослуг_Const.ДатаДок + "::timestamp", "Дата"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПоступленняТоварівТаПослуг_Const.TABLE + "." + Документи.ПоступленняТоварівТаПослуг_Const.НомерДок, "Номер"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Організації_Const.TABLE, Документи.ПоступленняТоварівТаПослуг_Const.Організація, query.Table, "join_tab_1"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_1." + Довідники.Організації_Const.Назва, "Організація"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Контрагенти_Const.TABLE, Документи.ПоступленняТоварівТаПослуг_Const.Контрагент, query.Table, "join_tab_2"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_2." + Довідники.Контрагенти_Const.Назва, "Контрагент"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Склади_Const.TABLE, Документи.ПоступленняТоварівТаПослуг_Const.Склад, query.Table, "join_tab_3"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_3." + Довідники.Склади_Const.Назва, "Склад"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Каси_Const.TABLE, Документи.ПоступленняТоварівТаПослуг_Const.Каса, query.Table, "join_tab_4"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_4." + Довідники.Каси_Const.Назва, "Каса"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Валюти_Const.TABLE, Документи.ПоступленняТоварівТаПослуг_Const.Валюта, query.Table, "join_tab_5"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_5." + Довідники.Валюти_Const.Назва, "Валюта"));
+                              
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПоступленняТоварівТаПослуг_Const.TABLE + "." + Документи.ПоступленняТоварівТаПослуг_Const.СумаДокументу + "::text", "Сума"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Користувачі_Const.TABLE, Документи.ПоступленняТоварівТаПослуг_Const.Автор, query.Table, "join_tab_6"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_6." + Довідники.Користувачі_Const.Назва, "Автор"));
+                              
+
+                  allQuery.Add(query.Construct());
+              }
+              
+              {
+                  Query query = new Query("tab_a34");
+                  if (Where.ContainsKey("ЗамовленняКлієнта") && Where["ЗамовленняКлієнта"].Count != 0) {
+                      query.Where = Where["ЗамовленняКлієнта"];
+                      foreach(Where field in query.Where)
+                          paramQuery.Add(field.Alias, field.Value);
+                  }
+
+                  query.Field.Add("spend");
+                  
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗамовленняКлієнта_Const.Назва, "Назва"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗамовленняКлієнта_Const.ДатаДок + "::timestamp", "Дата"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗамовленняКлієнта_Const.НомерДок, "Номер"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Організації_Const.TABLE, Документи.ЗамовленняКлієнта_Const.Організація, query.Table, "join_tab_1"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_1." + Довідники.Організації_Const.Назва, "Організація"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Контрагенти_Const.TABLE, Документи.ЗамовленняКлієнта_Const.Контрагент, query.Table, "join_tab_2"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_2." + Довідники.Контрагенти_Const.Назва, "Контрагент"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Склади_Const.TABLE, Документи.ЗамовленняКлієнта_Const.Склад, query.Table, "join_tab_3"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_3." + Довідники.Склади_Const.Назва, "Склад"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Каси_Const.TABLE, Документи.ЗамовленняКлієнта_Const.Каса, query.Table, "join_tab_4"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_4." + Довідники.Каси_Const.Назва, "Каса"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Валюти_Const.TABLE, Документи.ЗамовленняКлієнта_Const.Валюта, query.Table, "join_tab_5"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_5." + Довідники.Валюти_Const.Назва, "Валюта"));
+                              
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗамовленняКлієнта_Const.СумаДокументу + "::text", "Сума"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Користувачі_Const.TABLE, Документи.ЗамовленняКлієнта_Const.Автор, query.Table, "join_tab_6"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_6." + Довідники.Користувачі_Const.Назва, "Автор"));
+                              
+
+                  allQuery.Add(query.Construct());
+              }
+              
+              {
+                  Query query = new Query("tab_a36");
+                  if (Where.ContainsKey("РеалізаціяТоварівТаПослуг") && Where["РеалізаціяТоварівТаПослуг"].Count != 0) {
+                      query.Where = Where["РеалізаціяТоварівТаПослуг"];
+                      foreach(Where field in query.Where)
+                          paramQuery.Add(field.Alias, field.Value);
+                  }
+
+                  query.Field.Add("spend");
+                  
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE + "." + Документи.РеалізаціяТоварівТаПослуг_Const.Назва, "Назва"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE + "." + Документи.РеалізаціяТоварівТаПослуг_Const.ДатаДок + "::timestamp", "Дата"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE + "." + Документи.РеалізаціяТоварівТаПослуг_Const.НомерДок, "Номер"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Організації_Const.TABLE, Документи.РеалізаціяТоварівТаПослуг_Const.Організація, query.Table, "join_tab_1"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_1." + Довідники.Організації_Const.Назва, "Організація"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Контрагенти_Const.TABLE, Документи.РеалізаціяТоварівТаПослуг_Const.Контрагент, query.Table, "join_tab_2"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_2." + Довідники.Контрагенти_Const.Назва, "Контрагент"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Склади_Const.TABLE, Документи.РеалізаціяТоварівТаПослуг_Const.Склад, query.Table, "join_tab_3"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_3." + Довідники.Склади_Const.Назва, "Склад"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Каси_Const.TABLE, Документи.РеалізаціяТоварівТаПослуг_Const.Каса, query.Table, "join_tab_4"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_4." + Довідники.Каси_Const.Назва, "Каса"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Валюти_Const.TABLE, Документи.РеалізаціяТоварівТаПослуг_Const.Валюта, query.Table, "join_tab_5"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_5." + Довідники.Валюти_Const.Назва, "Валюта"));
+                              
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE + "." + Документи.РеалізаціяТоварівТаПослуг_Const.СумаДокументу + "::text", "Сума"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Користувачі_Const.TABLE, Документи.РеалізаціяТоварівТаПослуг_Const.Автор, query.Table, "join_tab_6"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_6." + Довідники.Користувачі_Const.Назва, "Автор"));
+                              
+
+                  allQuery.Add(query.Construct());
+              }
+              
+              {
+                  Query query = new Query("tab_a42");
+                  if (Where.ContainsKey("ВстановленняЦінНоменклатури") && Where["ВстановленняЦінНоменклатури"].Count != 0) {
+                      query.Where = Where["ВстановленняЦінНоменклатури"];
+                      foreach(Where field in query.Where)
+                          paramQuery.Add(field.Alias, field.Value);
+                  }
+
+                  query.Field.Add("spend");
+                  
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ВстановленняЦінНоменклатури_Const.TABLE + "." + Документи.ВстановленняЦінНоменклатури_Const.Назва, "Назва"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ВстановленняЦінНоменклатури_Const.TABLE + "." + Документи.ВстановленняЦінНоменклатури_Const.ДатаДок + "::timestamp", "Дата"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ВстановленняЦінНоменклатури_Const.TABLE + "." + Документи.ВстановленняЦінНоменклатури_Const.НомерДок, "Номер"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Організації_Const.TABLE, Документи.ВстановленняЦінНоменклатури_Const.Організація, query.Table, "join_tab_1"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_1." + Довідники.Організації_Const.Назва, "Організація"));
+                              
+                          /* Empty Field */
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Контрагент"));
+                        
+                          /* Empty Field */
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Склад"));
+                        
+                          /* Empty Field */
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Каса"));
+                        
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Валюти_Const.TABLE, Документи.ВстановленняЦінНоменклатури_Const.Валюта, query.Table, "join_tab_2"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_2." + Довідники.Валюти_Const.Назва, "Валюта"));
+                              
+                          /* Empty Field */
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Сума"));
+                        
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Користувачі_Const.TABLE, Документи.ВстановленняЦінНоменклатури_Const.Автор, query.Table, "join_tab_3"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_3." + Довідники.Користувачі_Const.Назва, "Автор"));
+                              
+
+                  allQuery.Add(query.Construct());
+              }
+              
+              {
+                  Query query = new Query("tab_a44");
+                  if (Where.ContainsKey("ПрихіднийКасовийОрдер") && Where["ПрихіднийКасовийОрдер"].Count != 0) {
+                      query.Where = Where["ПрихіднийКасовийОрдер"];
+                      foreach(Where field in query.Where)
+                          paramQuery.Add(field.Alias, field.Value);
+                  }
+
+                  query.Field.Add("spend");
+                  
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПрихіднийКасовийОрдер_Const.TABLE + "." + Документи.ПрихіднийКасовийОрдер_Const.Назва, "Назва"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПрихіднийКасовийОрдер_Const.TABLE + "." + Документи.ПрихіднийКасовийОрдер_Const.ДатаДок + "::timestamp", "Дата"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПрихіднийКасовийОрдер_Const.TABLE + "." + Документи.ПрихіднийКасовийОрдер_Const.НомерДок, "Номер"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Організації_Const.TABLE, Документи.ПрихіднийКасовийОрдер_Const.Організація, query.Table, "join_tab_1"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_1." + Довідники.Організації_Const.Назва, "Організація"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Контрагенти_Const.TABLE, Документи.ПрихіднийКасовийОрдер_Const.Контрагент, query.Table, "join_tab_2"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_2." + Довідники.Контрагенти_Const.Назва, "Контрагент"));
+                              
+                          /* Empty Field */
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Склад"));
+                        
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Каси_Const.TABLE, Документи.ПрихіднийКасовийОрдер_Const.Каса, query.Table, "join_tab_3"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_3." + Довідники.Каси_Const.Назва, "Каса"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Валюти_Const.TABLE, Документи.ПрихіднийКасовийОрдер_Const.Валюта, query.Table, "join_tab_4"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_4." + Довідники.Валюти_Const.Назва, "Валюта"));
+                              
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПрихіднийКасовийОрдер_Const.TABLE + "." + Документи.ПрихіднийКасовийОрдер_Const.СумаДокументу + "::text", "Сума"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Користувачі_Const.TABLE, Документи.ПрихіднийКасовийОрдер_Const.Автор, query.Table, "join_tab_5"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_5." + Довідники.Користувачі_Const.Назва, "Автор"));
+                              
+
+                  allQuery.Add(query.Construct());
+              }
+              
+              {
+                  Query query = new Query("tab_a48");
+                  if (Where.ContainsKey("РозхіднийКасовийОрдер") && Where["РозхіднийКасовийОрдер"].Count != 0) {
+                      query.Where = Where["РозхіднийКасовийОрдер"];
+                      foreach(Where field in query.Where)
+                          paramQuery.Add(field.Alias, field.Value);
+                  }
+
+                  query.Field.Add("spend");
+                  
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.РозхіднийКасовийОрдер_Const.TABLE + "." + Документи.РозхіднийКасовийОрдер_Const.Назва, "Назва"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.РозхіднийКасовийОрдер_Const.TABLE + "." + Документи.РозхіднийКасовийОрдер_Const.ДатаДок + "::timestamp", "Дата"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.РозхіднийКасовийОрдер_Const.TABLE + "." + Документи.РозхіднийКасовийОрдер_Const.НомерДок, "Номер"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Організації_Const.TABLE, Документи.РозхіднийКасовийОрдер_Const.Організація, query.Table, "join_tab_1"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_1." + Довідники.Організації_Const.Назва, "Організація"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Контрагенти_Const.TABLE, Документи.РозхіднийКасовийОрдер_Const.Контрагент, query.Table, "join_tab_2"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_2." + Довідники.Контрагенти_Const.Назва, "Контрагент"));
+                              
+                          /* Empty Field */
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Склад"));
+                        
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Каси_Const.TABLE, Документи.РозхіднийКасовийОрдер_Const.Каса, query.Table, "join_tab_3"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_3." + Довідники.Каси_Const.Назва, "Каса"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Валюти_Const.TABLE, Документи.РозхіднийКасовийОрдер_Const.Валюта, query.Table, "join_tab_4"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_4." + Довідники.Валюти_Const.Назва, "Валюта"));
+                              
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.РозхіднийКасовийОрдер_Const.TABLE + "." + Документи.РозхіднийКасовийОрдер_Const.СумаДокументу + "::text", "Сума"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Користувачі_Const.TABLE, Документи.РозхіднийКасовийОрдер_Const.Автор, query.Table, "join_tab_5"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_5." + Довідники.Користувачі_Const.Назва, "Автор"));
+                              
+
+                  allQuery.Add(query.Construct());
+              }
+              
+              {
+                  Query query = new Query("tab_a31");
+                  if (Where.ContainsKey("ПереміщенняТоварів") && Where["ПереміщенняТоварів"].Count != 0) {
+                      query.Where = Where["ПереміщенняТоварів"];
+                      foreach(Where field in query.Where)
+                          paramQuery.Add(field.Alias, field.Value);
+                  }
+
+                  query.Field.Add("spend");
+                  
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПереміщенняТоварів_Const.TABLE + "." + Документи.ПереміщенняТоварів_Const.Назва, "Назва"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПереміщенняТоварів_Const.TABLE + "." + Документи.ПереміщенняТоварів_Const.ДатаДок + "::timestamp", "Дата"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПереміщенняТоварів_Const.TABLE + "." + Документи.ПереміщенняТоварів_Const.НомерДок, "Номер"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Організації_Const.TABLE, Документи.ПереміщенняТоварів_Const.Організація, query.Table, "join_tab_1"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_1." + Довідники.Організації_Const.Назва, "Організація"));
+                              
+                          /* Empty Field */
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Контрагент"));
+                        
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Склади_Const.TABLE, Документи.ПереміщенняТоварів_Const.СкладВідправник, query.Table, "join_tab_2"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_2." + Довідники.Склади_Const.Назва, "Склад"));
+                              
+                          /* Empty Field */
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Каса"));
+                        
+                          /* Empty Field */
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Валюта"));
+                        
+                          /* Empty Field */
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Сума"));
+                        
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Користувачі_Const.TABLE, Документи.ПереміщенняТоварів_Const.Автор, query.Table, "join_tab_3"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_3." + Довідники.Користувачі_Const.Назва, "Автор"));
+                              
+
+                  allQuery.Add(query.Construct());
+              }
+              
+              {
+                  Query query = new Query("tab_a51");
+                  if (Where.ContainsKey("ПоверненняТоварівПостачальнику") && Where["ПоверненняТоварівПостачальнику"].Count != 0) {
+                      query.Where = Where["ПоверненняТоварівПостачальнику"];
+                      foreach(Where field in query.Where)
+                          paramQuery.Add(field.Alias, field.Value);
+                  }
+
+                  query.Field.Add("spend");
+                  
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПоверненняТоварівПостачальнику_Const.TABLE + "." + Документи.ПоверненняТоварівПостачальнику_Const.Назва, "Назва"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПоверненняТоварівПостачальнику_Const.TABLE + "." + Документи.ПоверненняТоварівПостачальнику_Const.ДатаДок + "::timestamp", "Дата"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПоверненняТоварівПостачальнику_Const.TABLE + "." + Документи.ПоверненняТоварівПостачальнику_Const.НомерДок, "Номер"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Організації_Const.TABLE, Документи.ПоверненняТоварівПостачальнику_Const.Організація, query.Table, "join_tab_1"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_1." + Довідники.Організації_Const.Назва, "Організація"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Контрагенти_Const.TABLE, Документи.ПоверненняТоварівПостачальнику_Const.Контрагент, query.Table, "join_tab_2"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_2." + Довідники.Контрагенти_Const.Назва, "Контрагент"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Склади_Const.TABLE, Документи.ПоверненняТоварівПостачальнику_Const.Склад, query.Table, "join_tab_3"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_3." + Довідники.Склади_Const.Назва, "Склад"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Каси_Const.TABLE, Документи.ПоверненняТоварівПостачальнику_Const.Каса, query.Table, "join_tab_4"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_4." + Довідники.Каси_Const.Назва, "Каса"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Валюти_Const.TABLE, Документи.ПоверненняТоварівПостачальнику_Const.Валюта, query.Table, "join_tab_5"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_5." + Довідники.Валюти_Const.Назва, "Валюта"));
+                              
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПоверненняТоварівПостачальнику_Const.TABLE + "." + Документи.ПоверненняТоварівПостачальнику_Const.СумаДокументу + "::text", "Сума"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Користувачі_Const.TABLE, Документи.ПоверненняТоварівПостачальнику_Const.Автор, query.Table, "join_tab_6"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_6." + Довідники.Користувачі_Const.Назва, "Автор"));
+                              
+
+                  allQuery.Add(query.Construct());
+              }
+              
+              {
+                  Query query = new Query("tab_a53");
+                  if (Where.ContainsKey("ПоверненняТоварівВідКлієнта") && Where["ПоверненняТоварівВідКлієнта"].Count != 0) {
+                      query.Where = Where["ПоверненняТоварівВідКлієнта"];
+                      foreach(Where field in query.Where)
+                          paramQuery.Add(field.Alias, field.Value);
+                  }
+
+                  query.Field.Add("spend");
+                  
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE + "." + Документи.ПоверненняТоварівВідКлієнта_Const.Назва, "Назва"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE + "." + Документи.ПоверненняТоварівВідКлієнта_Const.ДатаДок + "::timestamp", "Дата"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE + "." + Документи.ПоверненняТоварівВідКлієнта_Const.НомерДок, "Номер"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Організації_Const.TABLE, Документи.ПоверненняТоварівВідКлієнта_Const.Організація, query.Table, "join_tab_1"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_1." + Довідники.Організації_Const.Назва, "Організація"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Контрагенти_Const.TABLE, Документи.ПоверненняТоварівВідКлієнта_Const.Контрагент, query.Table, "join_tab_2"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_2." + Довідники.Контрагенти_Const.Назва, "Контрагент"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Склади_Const.TABLE, Документи.ПоверненняТоварівВідКлієнта_Const.Склад, query.Table, "join_tab_3"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_3." + Довідники.Склади_Const.Назва, "Склад"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Каси_Const.TABLE, Документи.ПоверненняТоварівВідКлієнта_Const.Каса, query.Table, "join_tab_4"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_4." + Довідники.Каси_Const.Назва, "Каса"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Валюти_Const.TABLE, Документи.ПоверненняТоварівВідКлієнта_Const.Валюта, query.Table, "join_tab_5"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_5." + Довідники.Валюти_Const.Назва, "Валюта"));
+                              
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE + "." + Документи.ПоверненняТоварівВідКлієнта_Const.СумаДокументу + "::text", "Сума"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Користувачі_Const.TABLE, Документи.ПоверненняТоварівВідКлієнта_Const.Автор, query.Table, "join_tab_6"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_6." + Довідники.Користувачі_Const.Назва, "Автор"));
+                              
+
+                  allQuery.Add(query.Construct());
+              }
+              
+              {
+                  Query query = new Query("tab_a81");
+                  if (Where.ContainsKey("АктВиконанихРобіт") && Where["АктВиконанихРобіт"].Count != 0) {
+                      query.Where = Where["АктВиконанихРобіт"];
+                      foreach(Where field in query.Where)
+                          paramQuery.Add(field.Alias, field.Value);
+                  }
+
+                  query.Field.Add("spend");
+                  
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.АктВиконанихРобіт_Const.TABLE + "." + Документи.АктВиконанихРобіт_Const.Назва, "Назва"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.АктВиконанихРобіт_Const.TABLE + "." + Документи.АктВиконанихРобіт_Const.ДатаДок + "::timestamp", "Дата"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.АктВиконанихРобіт_Const.TABLE + "." + Документи.АктВиконанихРобіт_Const.НомерДок, "Номер"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Організації_Const.TABLE, Документи.АктВиконанихРобіт_Const.Організація, query.Table, "join_tab_1"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_1." + Довідники.Організації_Const.Назва, "Організація"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Контрагенти_Const.TABLE, Документи.АктВиконанихРобіт_Const.Контрагент, query.Table, "join_tab_2"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_2." + Довідники.Контрагенти_Const.Назва, "Контрагент"));
+                              
+                          /* Empty Field */
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Склад"));
+                        
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Каси_Const.TABLE, Документи.АктВиконанихРобіт_Const.Каса, query.Table, "join_tab_3"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_3." + Довідники.Каси_Const.Назва, "Каса"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Валюти_Const.TABLE, Документи.АктВиконанихРобіт_Const.Валюта, query.Table, "join_tab_4"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_4." + Довідники.Валюти_Const.Назва, "Валюта"));
+                              
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.АктВиконанихРобіт_Const.TABLE + "." + Документи.АктВиконанихРобіт_Const.СумаДокументу + "::text", "Сума"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Користувачі_Const.TABLE, Документи.АктВиконанихРобіт_Const.Автор, query.Table, "join_tab_5"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_5." + Довідники.Користувачі_Const.Назва, "Автор"));
+                              
+
+                  allQuery.Add(query.Construct());
+              }
+              
+              {
+                  Query query = new Query("tab_a83");
+                  if (Where.ContainsKey("ВведенняЗалишків") && Where["ВведенняЗалишків"].Count != 0) {
+                      query.Where = Where["ВведенняЗалишків"];
+                      foreach(Where field in query.Where)
+                          paramQuery.Add(field.Alias, field.Value);
+                  }
+
+                  query.Field.Add("spend");
+                  
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ВведенняЗалишків_Const.TABLE + "." + Документи.ВведенняЗалишків_Const.Назва, "Назва"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ВведенняЗалишків_Const.TABLE + "." + Документи.ВведенняЗалишків_Const.ДатаДок + "::timestamp", "Дата"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ВведенняЗалишків_Const.TABLE + "." + Документи.ВведенняЗалишків_Const.НомерДок, "Номер"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Організації_Const.TABLE, Документи.ВведенняЗалишків_Const.Організація, query.Table, "join_tab_1"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_1." + Довідники.Організації_Const.Назва, "Організація"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Контрагенти_Const.TABLE, Документи.ВведенняЗалишків_Const.Контрагент, query.Table, "join_tab_2"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_2." + Довідники.Контрагенти_Const.Назва, "Контрагент"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Склади_Const.TABLE, Документи.ВведенняЗалишків_Const.Склад, query.Table, "join_tab_3"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_3." + Довідники.Склади_Const.Назва, "Склад"));
+                              
+                          /* Empty Field */
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Каса"));
+                        
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Валюти_Const.TABLE, Документи.ВведенняЗалишків_Const.Валюта, query.Table, "join_tab_4"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_4." + Довідники.Валюти_Const.Назва, "Валюта"));
+                              
+                          /* Empty Field */
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Сума"));
+                        
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Користувачі_Const.TABLE, Документи.ВведенняЗалишків_Const.Автор, query.Table, "join_tab_5"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_5." + Довідники.Користувачі_Const.Назва, "Автор"));
+                              
+
+                  allQuery.Add(query.Construct());
+              }
+              
+              {
+                  Query query = new Query("tab_b07");
+                  if (Where.ContainsKey("ВнутрішнєСпоживанняТоварів") && Where["ВнутрішнєСпоживанняТоварів"].Count != 0) {
+                      query.Where = Where["ВнутрішнєСпоживанняТоварів"];
+                      foreach(Where field in query.Where)
+                          paramQuery.Add(field.Alias, field.Value);
+                  }
+
+                  query.Field.Add("spend");
+                  
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ВнутрішнєСпоживанняТоварів_Const.TABLE + "." + Документи.ВнутрішнєСпоживанняТоварів_Const.Назва, "Назва"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ВнутрішнєСпоживанняТоварів_Const.TABLE + "." + Документи.ВнутрішнєСпоживанняТоварів_Const.ДатаДок + "::timestamp", "Дата"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ВнутрішнєСпоживанняТоварів_Const.TABLE + "." + Документи.ВнутрішнєСпоживанняТоварів_Const.НомерДок, "Номер"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Організації_Const.TABLE, Документи.ВнутрішнєСпоживанняТоварів_Const.Організація, query.Table, "join_tab_1"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_1." + Довідники.Організації_Const.Назва, "Організація"));
+                              
+                          /* Empty Field */
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Контрагент"));
+                        
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Склади_Const.TABLE, Документи.ВнутрішнєСпоживанняТоварів_Const.Склад, query.Table, "join_tab_2"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_2." + Довідники.Склади_Const.Назва, "Склад"));
+                              
+                          /* Empty Field */
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Каса"));
+                        
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Валюти_Const.TABLE, Документи.ВнутрішнєСпоживанняТоварів_Const.Валюта, query.Table, "join_tab_3"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_3." + Довідники.Валюти_Const.Назва, "Валюта"));
+                              
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ВнутрішнєСпоживанняТоварів_Const.TABLE + "." + Документи.ВнутрішнєСпоживанняТоварів_Const.СумаДокументу + "::text", "Сума"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Користувачі_Const.TABLE, Документи.ВнутрішнєСпоживанняТоварів_Const.Автор, query.Table, "join_tab_4"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_4." + Довідники.Користувачі_Const.Назва, "Автор"));
+                              
+
+                  allQuery.Add(query.Construct());
+              }
+              
+              {
+                  Query query = new Query("tab_b10");
+                  if (Where.ContainsKey("РахунокФактура") && Where["РахунокФактура"].Count != 0) {
+                      query.Where = Where["РахунокФактура"];
+                      foreach(Where field in query.Where)
+                          paramQuery.Add(field.Alias, field.Value);
+                  }
+
+                  query.Field.Add("spend");
+                  
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.РахунокФактура_Const.TABLE + "." + Документи.РахунокФактура_Const.Назва, "Назва"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.РахунокФактура_Const.TABLE + "." + Документи.РахунокФактура_Const.ДатаДок + "::timestamp", "Дата"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.РахунокФактура_Const.TABLE + "." + Документи.РахунокФактура_Const.НомерДок, "Номер"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Організації_Const.TABLE, Документи.РахунокФактура_Const.Організація, query.Table, "join_tab_1"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_1." + Довідники.Організації_Const.Назва, "Організація"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Контрагенти_Const.TABLE, Документи.РахунокФактура_Const.Контрагент, query.Table, "join_tab_2"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_2." + Довідники.Контрагенти_Const.Назва, "Контрагент"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Склади_Const.TABLE, Документи.РахунокФактура_Const.Склад, query.Table, "join_tab_3"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_3." + Довідники.Склади_Const.Назва, "Склад"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Каси_Const.TABLE, Документи.РахунокФактура_Const.Каса, query.Table, "join_tab_4"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_4." + Довідники.Каси_Const.Назва, "Каса"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Валюти_Const.TABLE, Документи.РахунокФактура_Const.Валюта, query.Table, "join_tab_5"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_5." + Довідники.Валюти_Const.Назва, "Валюта"));
+                              
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.РахунокФактура_Const.TABLE + "." + Документи.РахунокФактура_Const.СумаДокументу + "::text", "Сума"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Користувачі_Const.TABLE, Документи.РахунокФактура_Const.Автор, query.Table, "join_tab_6"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_6." + Довідники.Користувачі_Const.Назва, "Автор"));
+                              
+
+                  allQuery.Add(query.Construct());
+              }
+              
+              {
+                  Query query = new Query("tab_a64");
+                  if (Where.ContainsKey("РозміщенняТоварівНаСкладі") && Where["РозміщенняТоварівНаСкладі"].Count != 0) {
+                      query.Where = Where["РозміщенняТоварівНаСкладі"];
+                      foreach(Where field in query.Where)
+                          paramQuery.Add(field.Alias, field.Value);
+                  }
+
+                  query.Field.Add("spend");
+                  
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.РозміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.РозміщенняТоварівНаСкладі_Const.Назва, "Назва"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.РозміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.РозміщенняТоварівНаСкладі_Const.ДатаДок + "::timestamp", "Дата"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.РозміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.РозміщенняТоварівНаСкладі_Const.НомерДок, "Номер"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Організації_Const.TABLE, Документи.РозміщенняТоварівНаСкладі_Const.Організація, query.Table, "join_tab_1"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_1." + Довідники.Організації_Const.Назва, "Організація"));
+                              
+                          /* Empty Field */
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Контрагент"));
+                        
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Склади_Const.TABLE, Документи.РозміщенняТоварівНаСкладі_Const.Склад, query.Table, "join_tab_2"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_2." + Довідники.Склади_Const.Назва, "Склад"));
+                              
+                          /* Empty Field */
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Каса"));
+                        
+                          /* Empty Field */
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Валюта"));
+                        
+                          /* Empty Field */
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Сума"));
+                        
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Користувачі_Const.TABLE, Документи.РозміщенняТоварівНаСкладі_Const.Автор, query.Table, "join_tab_3"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_3." + Довідники.Користувачі_Const.Назва, "Автор"));
+                              
+
+                  allQuery.Add(query.Construct());
+              }
+              
+              {
+                  Query query = new Query("tab_b09");
+                  if (Where.ContainsKey("ПереміщенняТоварівНаСкладі") && Where["ПереміщенняТоварівНаСкладі"].Count != 0) {
+                      query.Where = Where["ПереміщенняТоварівНаСкладі"];
+                      foreach(Where field in query.Where)
+                          paramQuery.Add(field.Alias, field.Value);
+                  }
+
+                  query.Field.Add("spend");
+                  
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПереміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.ПереміщенняТоварівНаСкладі_Const.Назва, "Назва"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПереміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.ПереміщенняТоварівНаСкладі_Const.ДатаДок + "::timestamp", "Дата"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПереміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.ПереміщенняТоварівНаСкладі_Const.НомерДок, "Номер"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Організації_Const.TABLE, Документи.ПереміщенняТоварівНаСкладі_Const.Організація, query.Table, "join_tab_1"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_1." + Довідники.Організації_Const.Назва, "Організація"));
+                              
+                          /* Empty Field */
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Контрагент"));
+                        
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Склади_Const.TABLE, Документи.ПереміщенняТоварівНаСкладі_Const.Склад, query.Table, "join_tab_2"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_2." + Довідники.Склади_Const.Назва, "Склад"));
+                              
+                          /* Empty Field */
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Каса"));
+                        
+                          /* Empty Field */
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Валюта"));
+                        
+                          /* Empty Field */
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Сума"));
+                        
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Користувачі_Const.TABLE, Документи.ПереміщенняТоварівНаСкладі_Const.Автор, query.Table, "join_tab_3"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_3." + Довідники.Користувачі_Const.Назва, "Автор"));
+                              
+
+                  allQuery.Add(query.Construct());
+              }
+              
+              {
+                  Query query = new Query("tab_b27");
+                  if (Where.ContainsKey("ЗбіркаТоварівНаСкладі") && Where["ЗбіркаТоварівНаСкладі"].Count != 0) {
+                      query.Where = Where["ЗбіркаТоварівНаСкладі"];
+                      foreach(Where field in query.Where)
+                          paramQuery.Add(field.Alias, field.Value);
+                  }
+
+                  query.Field.Add("spend");
+                  
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ЗбіркаТоварівНаСкладі_Const.TABLE + "." + Документи.ЗбіркаТоварівНаСкладі_Const.Назва, "Назва"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ЗбіркаТоварівНаСкладі_Const.TABLE + "." + Документи.ЗбіркаТоварівНаСкладі_Const.ДатаДок + "::timestamp", "Дата"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ЗбіркаТоварівНаСкладі_Const.TABLE + "." + Документи.ЗбіркаТоварівНаСкладі_Const.НомерДок, "Номер"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Організації_Const.TABLE, Документи.ЗбіркаТоварівНаСкладі_Const.Організація, query.Table, "join_tab_1"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_1." + Довідники.Організації_Const.Назва, "Організація"));
+                              
+                          /* Empty Field */
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Контрагент"));
+                        
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Склади_Const.TABLE, Документи.ЗбіркаТоварівНаСкладі_Const.Склад, query.Table, "join_tab_2"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_2." + Довідники.Склади_Const.Назва, "Склад"));
+                              
+                          /* Empty Field */
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Каса"));
+                        
+                          /* Empty Field */
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Валюта"));
+                        
+                          /* Empty Field */
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Сума"));
+                        
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Користувачі_Const.TABLE, Документи.ЗбіркаТоварівНаСкладі_Const.Автор, query.Table, "join_tab_3"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_3." + Довідники.Користувачі_Const.Назва, "Автор"));
+                              
+
+                  allQuery.Add(query.Construct());
+              }
+              
+              {
+                  Query query = new Query("tab_b29");
+                  if (Where.ContainsKey("РозміщенняНоменклатуриПоКоміркам") && Where["РозміщенняНоменклатуриПоКоміркам"].Count != 0) {
+                      query.Where = Where["РозміщенняНоменклатуриПоКоміркам"];
+                      foreach(Where field in query.Where)
+                          paramQuery.Add(field.Alias, field.Value);
+                  }
+
+                  query.Field.Add("spend");
+                  
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.РозміщенняНоменклатуриПоКоміркам_Const.TABLE + "." + Документи.РозміщенняНоменклатуриПоКоміркам_Const.Назва, "Назва"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.РозміщенняНоменклатуриПоКоміркам_Const.TABLE + "." + Документи.РозміщенняНоменклатуриПоКоміркам_Const.ДатаДок + "::timestamp", "Дата"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.РозміщенняНоменклатуриПоКоміркам_Const.TABLE + "." + Документи.РозміщенняНоменклатуриПоКоміркам_Const.НомерДок, "Номер"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Організації_Const.TABLE, Документи.РозміщенняНоменклатуриПоКоміркам_Const.Організація, query.Table, "join_tab_1"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_1." + Довідники.Організації_Const.Назва, "Організація"));
+                              
+                          /* Empty Field */
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Контрагент"));
+                        
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Склади_Const.TABLE, Документи.РозміщенняНоменклатуриПоКоміркам_Const.Склад, query.Table, "join_tab_2"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_2." + Довідники.Склади_Const.Назва, "Склад"));
+                              
+                          /* Empty Field */
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Каса"));
+                        
+                          /* Empty Field */
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Валюта"));
+                        
+                          /* Empty Field */
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Сума"));
+                        
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Користувачі_Const.TABLE, Документи.РозміщенняНоменклатуриПоКоміркам_Const.Автор, query.Table, "join_tab_3"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_3." + Довідники.Користувачі_Const.Назва, "Автор"));
+                              
+
+                  allQuery.Add(query.Construct());
+              }
+              
+
+            string unionAllQuery = string.Join("\nUNION\n", allQuery);
+
+            unionAllQuery += "\nORDER BY Дата";
+
+            //Console.WriteLine(unionAllQuery);
+
+            string[] columnsName;
+            List<Dictionary<string, object>> listRow;
+
+            Config.Kernel!.DataBase.SelectRequest(unionAllQuery, paramQuery, out columnsName, out listRow);
+
+            foreach (Dictionary<string, object> row in listRow)
+            {
+                Журнали_Повний record = new Журнали_Повний();
+                record.ID = row["uid"]?.ToString() ?? "";
+                record.Spend = (bool)row["spend"];
+                
+                    record.Назва = row["Назва"] != DBNull.Value ? (row["Назва"]?.ToString() ?? "") : "";
+                
+                    record.Дата = row["Дата"] != DBNull.Value ? (row["Дата"]?.ToString() ?? "") : "";
+                
+                    record.Номер = row["Номер"] != DBNull.Value ? (row["Номер"]?.ToString() ?? "") : "";
+                
+                    record.Організація = row["Організація"] != DBNull.Value ? (row["Організація"]?.ToString() ?? "") : "";
+                
+                    record.Контрагент = row["Контрагент"] != DBNull.Value ? (row["Контрагент"]?.ToString() ?? "") : "";
+                
+                    record.Склад = row["Склад"] != DBNull.Value ? (row["Склад"]?.ToString() ?? "") : "";
+                
+                    record.Каса = row["Каса"] != DBNull.Value ? (row["Каса"]?.ToString() ?? "") : "";
+                
+                    record.Валюта = row["Валюта"] != DBNull.Value ? (row["Валюта"]?.ToString() ?? "") : "";
+                
+                    record.Сума = row["Сума"] != DBNull.Value ? (row["Сума"]?.ToString() ?? "") : "";
+                
+                    record.Автор = row["Автор"] != DBNull.Value ? (row["Автор"]?.ToString() ?? "") : "";
+                
+
+                TreeIter CurrentIter = Store.AppendValues(record.ToArray());
+                CurrentPath = Store.GetPath(CurrentIter);
+
+                if (SelectPointerItem != null)
+                {
+                    if (record.ID == SelectPointerItem.ToString())
+                        SelectPath = CurrentPath;
+                }
+            }
+        }
+    }
+    #endregion
+    
+    #region JOURNAL "Закупівлі"
+    
+    public class Журнали_Закупівлі
+    {
+        string Image = "images/doc.png";
+        bool Spend = false;
+        string ID = "";
+        
+        string Назва = "";
+        string Дата = "";
+        string Номер = "";
+        string Організація = "";
+        string Контрагент = "";
+        string Склад = "";
+        string Каса = "";
+        string Валюта = "";
+        string Сума = "";
+        string Автор = "";
+
+        Array ToArray()
+        {
+            return new object[] { new Gdk.Pixbuf(Image), ID, Spend /*Проведений документ*/
+            /* */ , Назва, Дата, Номер, Організація, Контрагент, Склад, Каса, Валюта, Сума, Автор };
+        }
+
+        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(bool) /* Spend Проведений документ*/
+            , typeof(string) /* Назва */
+            , typeof(string) /* Дата */
+            , typeof(string) /* Номер */
+            , typeof(string) /* Організація */
+            , typeof(string) /* Контрагент */
+            , typeof(string) /* Склад */
+            , typeof(string) /* Каса */
+            , typeof(string) /* Валюта */
+            , typeof(string) /* Сума */
+            , typeof(string) /* Автор */
+            );
+
+        public static void AddColumns(TreeView treeView)
+        {
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /*Image*/ /* { Ypad = 0 } */
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false }); /*UID*/
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererToggle(), "active", 2)); /*Проведений документ*/
+            /* */
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3)); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 4)); /*Дата*/
+            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 5)); /*Номер*/
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Організація*/
+            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Контрагент*/
+            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Склад*/
+            treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText() { Xpad = 4 }, "text", 9)); /*Каса*/
+            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 10)); /*Валюта*/
+            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 11)); /*Сума*/
+            treeView.AppendColumn(new TreeViewColumn("Автор", new CellRendererText() { Xpad = 4 }, "text", 12)); /*Автор*/
+            
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
+        }
+
+        public static Dictionary<string, List<Where>> Where { get; set; } = new Dictionary<string, List<Where>>();
+
+        public static void ДодатиВідбірПоПеріоду(Перелічення.ТипПеріодуДляЖурналівДокументів типПеріоду)
+        {
+            Where.Clear();
+            
+            {
+                List<Where> where = new List<Where>();
+                Where.Add("ЗамовленняПостачальнику", where);
+                Інтерфейс.ДодатиВідбірПоПеріоду(where, ЗамовленняПостачальнику_Const.ДатаДок, типПеріоду);
+            }
+              
+            {
+                List<Where> where = new List<Where>();
+                Where.Add("ПоступленняТоварівТаПослуг", where);
+                Інтерфейс.ДодатиВідбірПоПеріоду(where, ПоступленняТоварівТаПослуг_Const.ДатаДок, типПеріоду);
+            }
+              
+            {
+                List<Where> where = new List<Where>();
+                Where.Add("ПоверненняТоварівПостачальнику", where);
+                Інтерфейс.ДодатиВідбірПоПеріоду(where, ПоверненняТоварівПостачальнику_Const.ДатаДок, типПеріоду);
+            }
+              
+        }
+
+        public static string[] AllowDocument()
+        {
+            return new string[] 
+            {
+                "ЗамовленняПостачальнику" /* */
+                , "ПоступленняТоварівТаПослуг" /* */
+                , "ПоверненняТоварівПостачальнику" /* */
+                
+            };
+        }
+
+        public static UnigueID? SelectPointerItem { get; set; }
+        public static TreePath? SelectPath;
+        public static TreePath? CurrentPath;
+
+        public static void LoadRecords()
+        {
+            Store.Clear();
+            List<string> allQuery = new List<string>();
+            Dictionary<string, object> paramQuery = new Dictionary<string, object>();
+
+            
+              {
+                  Query query = new Query("tab_a25");
+                  if (Where.ContainsKey("ЗамовленняПостачальнику") && Where["ЗамовленняПостачальнику"].Count != 0) {
+                      query.Where = Where["ЗамовленняПостачальнику"];
+                      foreach(Where field in query.Where)
+                          paramQuery.Add(field.Alias, field.Value);
+                  }
+
+                  query.Field.Add("spend");
+                  
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗамовленняПостачальнику_Const.Назва, "Назва"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗамовленняПостачальнику_Const.ДатаДок + "::timestamp", "Дата"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗамовленняПостачальнику_Const.НомерДок, "Номер"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Організації_Const.TABLE, Документи.ЗамовленняПостачальнику_Const.Організація, query.Table, "join_tab_1"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_1." + Довідники.Організації_Const.Назва, "Організація"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Контрагенти_Const.TABLE, Документи.ЗамовленняПостачальнику_Const.Контрагент, query.Table, "join_tab_2"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_2." + Довідники.Контрагенти_Const.Назва, "Контрагент"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Склади_Const.TABLE, Документи.ЗамовленняПостачальнику_Const.Склад, query.Table, "join_tab_3"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_3." + Довідники.Склади_Const.Назва, "Склад"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Каси_Const.TABLE, Документи.ЗамовленняПостачальнику_Const.Каса, query.Table, "join_tab_4"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_4." + Довідники.Каси_Const.Назва, "Каса"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Валюти_Const.TABLE, Документи.ЗамовленняПостачальнику_Const.Валюта, query.Table, "join_tab_5"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_5." + Довідники.Валюти_Const.Назва, "Валюта"));
+                              
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗамовленняПостачальнику_Const.СумаДокументу, "Сума"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Користувачі_Const.TABLE, Документи.ЗамовленняПостачальнику_Const.Автор, query.Table, "join_tab_6"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_6." + Довідники.Користувачі_Const.Назва, "Автор"));
+                              
+
+                  allQuery.Add(query.Construct());
+              }
+              
+              {
+                  Query query = new Query("tab_a32");
+                  if (Where.ContainsKey("ПоступленняТоварівТаПослуг") && Where["ПоступленняТоварівТаПослуг"].Count != 0) {
+                      query.Where = Where["ПоступленняТоварівТаПослуг"];
+                      foreach(Where field in query.Where)
+                          paramQuery.Add(field.Alias, field.Value);
+                  }
+
+                  query.Field.Add("spend");
+                  
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПоступленняТоварівТаПослуг_Const.TABLE + "." + Документи.ПоступленняТоварівТаПослуг_Const.Назва, "Назва"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПоступленняТоварівТаПослуг_Const.TABLE + "." + Документи.ПоступленняТоварівТаПослуг_Const.ДатаДок + "::timestamp", "Дата"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПоступленняТоварівТаПослуг_Const.TABLE + "." + Документи.ПоступленняТоварівТаПослуг_Const.НомерДок, "Номер"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Організації_Const.TABLE, Документи.ПоступленняТоварівТаПослуг_Const.Організація, query.Table, "join_tab_1"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_1." + Довідники.Організації_Const.Назва, "Організація"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Контрагенти_Const.TABLE, Документи.ПоступленняТоварівТаПослуг_Const.Контрагент, query.Table, "join_tab_2"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_2." + Довідники.Контрагенти_Const.Назва, "Контрагент"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Склади_Const.TABLE, Документи.ПоступленняТоварівТаПослуг_Const.Склад, query.Table, "join_tab_3"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_3." + Довідники.Склади_Const.Назва, "Склад"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Каси_Const.TABLE, Документи.ПоступленняТоварівТаПослуг_Const.Каса, query.Table, "join_tab_4"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_4." + Довідники.Каси_Const.Назва, "Каса"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Валюти_Const.TABLE, Документи.ПоступленняТоварівТаПослуг_Const.Валюта, query.Table, "join_tab_5"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_5." + Довідники.Валюти_Const.Назва, "Валюта"));
+                              
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПоступленняТоварівТаПослуг_Const.TABLE + "." + Документи.ПоступленняТоварівТаПослуг_Const.СумаДокументу, "Сума"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Користувачі_Const.TABLE, Документи.ПоступленняТоварівТаПослуг_Const.Автор, query.Table, "join_tab_6"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_6." + Довідники.Користувачі_Const.Назва, "Автор"));
+                              
+
+                  allQuery.Add(query.Construct());
+              }
+              
+              {
+                  Query query = new Query("tab_a51");
+                  if (Where.ContainsKey("ПоверненняТоварівПостачальнику") && Where["ПоверненняТоварівПостачальнику"].Count != 0) {
+                      query.Where = Where["ПоверненняТоварівПостачальнику"];
+                      foreach(Where field in query.Where)
+                          paramQuery.Add(field.Alias, field.Value);
+                  }
+
+                  query.Field.Add("spend");
+                  
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПоверненняТоварівПостачальнику_Const.TABLE + "." + Документи.ПоверненняТоварівПостачальнику_Const.Назва, "Назва"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПоверненняТоварівПостачальнику_Const.TABLE + "." + Документи.ПоверненняТоварівПостачальнику_Const.ДатаДок + "::timestamp", "Дата"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПоверненняТоварівПостачальнику_Const.TABLE + "." + Документи.ПоверненняТоварівПостачальнику_Const.НомерДок, "Номер"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Організації_Const.TABLE, Документи.ПоверненняТоварівПостачальнику_Const.Організація, query.Table, "join_tab_1"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_1." + Довідники.Організації_Const.Назва, "Організація"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Контрагенти_Const.TABLE, Документи.ПоверненняТоварівПостачальнику_Const.Контрагент, query.Table, "join_tab_2"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_2." + Довідники.Контрагенти_Const.Назва, "Контрагент"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Склади_Const.TABLE, Документи.ПоверненняТоварівПостачальнику_Const.Склад, query.Table, "join_tab_3"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_3." + Довідники.Склади_Const.Назва, "Склад"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Каси_Const.TABLE, Документи.ПоверненняТоварівПостачальнику_Const.Каса, query.Table, "join_tab_4"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_4." + Довідники.Каси_Const.Назва, "Каса"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Валюти_Const.TABLE, Документи.ПоверненняТоварівПостачальнику_Const.Валюта, query.Table, "join_tab_5"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_5." + Довідники.Валюти_Const.Назва, "Валюта"));
+                              
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПоверненняТоварівПостачальнику_Const.TABLE + "." + Документи.ПоверненняТоварівПостачальнику_Const.СумаДокументу, "Сума"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Користувачі_Const.TABLE, Документи.ПоверненняТоварівПостачальнику_Const.Автор, query.Table, "join_tab_6"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_6." + Довідники.Користувачі_Const.Назва, "Автор"));
+                              
+
+                  allQuery.Add(query.Construct());
+              }
+              
+
+            string unionAllQuery = string.Join("\nUNION\n", allQuery);
+
+            unionAllQuery += "\nORDER BY Дата";
+
+            //Console.WriteLine(unionAllQuery);
+
+            string[] columnsName;
+            List<Dictionary<string, object>> listRow;
+
+            Config.Kernel!.DataBase.SelectRequest(unionAllQuery, paramQuery, out columnsName, out listRow);
+
+            foreach (Dictionary<string, object> row in listRow)
+            {
+                Журнали_Закупівлі record = new Журнали_Закупівлі();
+                record.ID = row["uid"]?.ToString() ?? "";
+                record.Spend = (bool)row["spend"];
+                
+                    record.Назва = row["Назва"] != DBNull.Value ? (row["Назва"]?.ToString() ?? "") : "";
+                
+                    record.Дата = row["Дата"] != DBNull.Value ? (row["Дата"]?.ToString() ?? "") : "";
+                
+                    record.Номер = row["Номер"] != DBNull.Value ? (row["Номер"]?.ToString() ?? "") : "";
+                
+                    record.Організація = row["Організація"] != DBNull.Value ? (row["Організація"]?.ToString() ?? "") : "";
+                
+                    record.Контрагент = row["Контрагент"] != DBNull.Value ? (row["Контрагент"]?.ToString() ?? "") : "";
+                
+                    record.Склад = row["Склад"] != DBNull.Value ? (row["Склад"]?.ToString() ?? "") : "";
+                
+                    record.Каса = row["Каса"] != DBNull.Value ? (row["Каса"]?.ToString() ?? "") : "";
+                
+                    record.Валюта = row["Валюта"] != DBNull.Value ? (row["Валюта"]?.ToString() ?? "") : "";
+                
+                    record.Сума = row["Сума"] != DBNull.Value ? (row["Сума"]?.ToString() ?? "") : "";
+                
+                    record.Автор = row["Автор"] != DBNull.Value ? (row["Автор"]?.ToString() ?? "") : "";
+                
+
+                TreeIter CurrentIter = Store.AppendValues(record.ToArray());
+                CurrentPath = Store.GetPath(CurrentIter);
+
+                if (SelectPointerItem != null)
+                {
+                    if (record.ID == SelectPointerItem.ToString())
+                        SelectPath = CurrentPath;
+                }
+            }
+        }
+    }
+    #endregion
+    
+    #region JOURNAL "Продажі"
+    
+    public class Журнали_Продажі
+    {
+        string Image = "images/doc.png";
+        bool Spend = false;
+        string ID = "";
+        
+        string Назва = "";
+        string Дата = "";
+        string Номер = "";
+        string Організація = "";
+        string Контрагент = "";
+        string Склад = "";
+        string Каса = "";
+        string Валюта = "";
+        string Сума = "";
+        string Автор = "";
+
+        Array ToArray()
+        {
+            return new object[] { new Gdk.Pixbuf(Image), ID, Spend /*Проведений документ*/
+            /* */ , Назва, Дата, Номер, Організація, Контрагент, Склад, Каса, Валюта, Сума, Автор };
+        }
+
+        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(bool) /* Spend Проведений документ*/
+            , typeof(string) /* Назва */
+            , typeof(string) /* Дата */
+            , typeof(string) /* Номер */
+            , typeof(string) /* Організація */
+            , typeof(string) /* Контрагент */
+            , typeof(string) /* Склад */
+            , typeof(string) /* Каса */
+            , typeof(string) /* Валюта */
+            , typeof(string) /* Сума */
+            , typeof(string) /* Автор */
+            );
+
+        public static void AddColumns(TreeView treeView)
+        {
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /*Image*/ /* { Ypad = 0 } */
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false }); /*UID*/
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererToggle(), "active", 2)); /*Проведений документ*/
+            /* */
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3)); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 4)); /*Дата*/
+            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 5)); /*Номер*/
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Організація*/
+            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Контрагент*/
+            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Склад*/
+            treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText() { Xpad = 4 }, "text", 9)); /*Каса*/
+            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 10)); /*Валюта*/
+            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 11)); /*Сума*/
+            treeView.AppendColumn(new TreeViewColumn("Автор", new CellRendererText() { Xpad = 4 }, "text", 12)); /*Автор*/
+            
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
+        }
+
+        public static Dictionary<string, List<Where>> Where { get; set; } = new Dictionary<string, List<Where>>();
+
+        public static void ДодатиВідбірПоПеріоду(Перелічення.ТипПеріодуДляЖурналівДокументів типПеріоду)
+        {
+            Where.Clear();
+            
+            {
+                List<Where> where = new List<Where>();
+                Where.Add("ЗамовленняКлієнта", where);
+                Інтерфейс.ДодатиВідбірПоПеріоду(where, ЗамовленняКлієнта_Const.ДатаДок, типПеріоду);
+            }
+              
+            {
+                List<Where> where = new List<Where>();
+                Where.Add("РеалізаціяТоварівТаПослуг", where);
+                Інтерфейс.ДодатиВідбірПоПеріоду(where, РеалізаціяТоварівТаПослуг_Const.ДатаДок, типПеріоду);
+            }
+              
+            {
+                List<Where> where = new List<Where>();
+                Where.Add("ПоверненняТоварівВідКлієнта", where);
+                Інтерфейс.ДодатиВідбірПоПеріоду(where, ПоверненняТоварівВідКлієнта_Const.ДатаДок, типПеріоду);
+            }
+              
+            {
+                List<Where> where = new List<Where>();
+                Where.Add("АктВиконанихРобіт", where);
+                Інтерфейс.ДодатиВідбірПоПеріоду(where, АктВиконанихРобіт_Const.ДатаДок, типПеріоду);
+            }
+              
+            {
+                List<Where> where = new List<Where>();
+                Where.Add("РахунокФактура", where);
+                Інтерфейс.ДодатиВідбірПоПеріоду(where, РахунокФактура_Const.ДатаДок, типПеріоду);
+            }
+              
+        }
+
+        public static string[] AllowDocument()
+        {
+            return new string[] 
+            {
+                "ЗамовленняКлієнта" /* */
+                , "РеалізаціяТоварівТаПослуг" /* */
+                , "ПоверненняТоварівВідКлієнта" /* */
+                , "АктВиконанихРобіт" /* */
+                , "РахунокФактура" /* */
+                
+            };
+        }
+
+        public static UnigueID? SelectPointerItem { get; set; }
+        public static TreePath? SelectPath;
+        public static TreePath? CurrentPath;
+
+        public static void LoadRecords()
+        {
+            Store.Clear();
+            List<string> allQuery = new List<string>();
+            Dictionary<string, object> paramQuery = new Dictionary<string, object>();
+
+            
+              {
+                  Query query = new Query("tab_a34");
+                  if (Where.ContainsKey("ЗамовленняКлієнта") && Where["ЗамовленняКлієнта"].Count != 0) {
+                      query.Where = Where["ЗамовленняКлієнта"];
+                      foreach(Where field in query.Where)
+                          paramQuery.Add(field.Alias, field.Value);
+                  }
+
+                  query.Field.Add("spend");
+                  
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗамовленняКлієнта_Const.Назва, "Назва"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗамовленняКлієнта_Const.ДатаДок + "::timestamp", "Дата"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗамовленняКлієнта_Const.НомерДок, "Номер"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Організації_Const.TABLE, Документи.ЗамовленняКлієнта_Const.Організація, query.Table, "join_tab_1"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_1." + Довідники.Організації_Const.Назва, "Організація"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Контрагенти_Const.TABLE, Документи.ЗамовленняКлієнта_Const.Контрагент, query.Table, "join_tab_2"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_2." + Довідники.Контрагенти_Const.Назва, "Контрагент"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Склади_Const.TABLE, Документи.ЗамовленняКлієнта_Const.Склад, query.Table, "join_tab_3"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_3." + Довідники.Склади_Const.Назва, "Склад"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Каси_Const.TABLE, Документи.ЗамовленняКлієнта_Const.Каса, query.Table, "join_tab_4"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_4." + Довідники.Каси_Const.Назва, "Каса"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Валюти_Const.TABLE, Документи.ЗамовленняКлієнта_Const.Валюта, query.Table, "join_tab_5"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_5." + Довідники.Валюти_Const.Назва, "Валюта"));
+                              
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗамовленняКлієнта_Const.СумаДокументу, "Сума"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Користувачі_Const.TABLE, Документи.ЗамовленняКлієнта_Const.Автор, query.Table, "join_tab_6"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_6." + Довідники.Користувачі_Const.Назва, "Автор"));
+                              
+
+                  allQuery.Add(query.Construct());
+              }
+              
+              {
+                  Query query = new Query("tab_a36");
+                  if (Where.ContainsKey("РеалізаціяТоварівТаПослуг") && Where["РеалізаціяТоварівТаПослуг"].Count != 0) {
+                      query.Where = Where["РеалізаціяТоварівТаПослуг"];
+                      foreach(Where field in query.Where)
+                          paramQuery.Add(field.Alias, field.Value);
+                  }
+
+                  query.Field.Add("spend");
+                  
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE + "." + Документи.РеалізаціяТоварівТаПослуг_Const.Назва, "Назва"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE + "." + Документи.РеалізаціяТоварівТаПослуг_Const.ДатаДок + "::timestamp", "Дата"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE + "." + Документи.РеалізаціяТоварівТаПослуг_Const.НомерДок, "Номер"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Організації_Const.TABLE, Документи.РеалізаціяТоварівТаПослуг_Const.Організація, query.Table, "join_tab_1"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_1." + Довідники.Організації_Const.Назва, "Організація"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Контрагенти_Const.TABLE, Документи.РеалізаціяТоварівТаПослуг_Const.Контрагент, query.Table, "join_tab_2"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_2." + Довідники.Контрагенти_Const.Назва, "Контрагент"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Склади_Const.TABLE, Документи.РеалізаціяТоварівТаПослуг_Const.Склад, query.Table, "join_tab_3"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_3." + Довідники.Склади_Const.Назва, "Склад"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Каси_Const.TABLE, Документи.РеалізаціяТоварівТаПослуг_Const.Каса, query.Table, "join_tab_4"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_4." + Довідники.Каси_Const.Назва, "Каса"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Валюти_Const.TABLE, Документи.РеалізаціяТоварівТаПослуг_Const.Валюта, query.Table, "join_tab_5"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_5." + Довідники.Валюти_Const.Назва, "Валюта"));
+                              
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE + "." + Документи.РеалізаціяТоварівТаПослуг_Const.СумаДокументу, "Сума"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Користувачі_Const.TABLE, Документи.РеалізаціяТоварівТаПослуг_Const.Автор, query.Table, "join_tab_6"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_6." + Довідники.Користувачі_Const.Назва, "Автор"));
+                              
+
+                  allQuery.Add(query.Construct());
+              }
+              
+              {
+                  Query query = new Query("tab_a53");
+                  if (Where.ContainsKey("ПоверненняТоварівВідКлієнта") && Where["ПоверненняТоварівВідКлієнта"].Count != 0) {
+                      query.Where = Where["ПоверненняТоварівВідКлієнта"];
+                      foreach(Where field in query.Where)
+                          paramQuery.Add(field.Alias, field.Value);
+                  }
+
+                  query.Field.Add("spend");
+                  
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE + "." + Документи.ПоверненняТоварівВідКлієнта_Const.Назва, "Назва"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE + "." + Документи.ПоверненняТоварівВідКлієнта_Const.ДатаДок + "::timestamp", "Дата"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE + "." + Документи.ПоверненняТоварівВідКлієнта_Const.НомерДок, "Номер"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Організації_Const.TABLE, Документи.ПоверненняТоварівВідКлієнта_Const.Організація, query.Table, "join_tab_1"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_1." + Довідники.Організації_Const.Назва, "Організація"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Контрагенти_Const.TABLE, Документи.ПоверненняТоварівВідКлієнта_Const.Контрагент, query.Table, "join_tab_2"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_2." + Довідники.Контрагенти_Const.Назва, "Контрагент"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Склади_Const.TABLE, Документи.ПоверненняТоварівВідКлієнта_Const.Склад, query.Table, "join_tab_3"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_3." + Довідники.Склади_Const.Назва, "Склад"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Каси_Const.TABLE, Документи.ПоверненняТоварівВідКлієнта_Const.Каса, query.Table, "join_tab_4"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_4." + Довідники.Каси_Const.Назва, "Каса"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Валюти_Const.TABLE, Документи.ПоверненняТоварівВідКлієнта_Const.Валюта, query.Table, "join_tab_5"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_5." + Довідники.Валюти_Const.Назва, "Валюта"));
+                              
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE + "." + Документи.ПоверненняТоварівВідКлієнта_Const.СумаДокументу, "Сума"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Користувачі_Const.TABLE, Документи.ПоверненняТоварівВідКлієнта_Const.Автор, query.Table, "join_tab_6"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_6." + Довідники.Користувачі_Const.Назва, "Автор"));
+                              
+
+                  allQuery.Add(query.Construct());
+              }
+              
+              {
+                  Query query = new Query("tab_a81");
+                  if (Where.ContainsKey("АктВиконанихРобіт") && Where["АктВиконанихРобіт"].Count != 0) {
+                      query.Where = Where["АктВиконанихРобіт"];
+                      foreach(Where field in query.Where)
+                          paramQuery.Add(field.Alias, field.Value);
+                  }
+
+                  query.Field.Add("spend");
+                  
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.АктВиконанихРобіт_Const.TABLE + "." + Документи.АктВиконанихРобіт_Const.Назва, "Назва"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.АктВиконанихРобіт_Const.TABLE + "." + Документи.АктВиконанихРобіт_Const.ДатаДок + "::timestamp", "Дата"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.АктВиконанихРобіт_Const.TABLE + "." + Документи.АктВиконанихРобіт_Const.НомерДок, "Номер"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Організації_Const.TABLE, Документи.АктВиконанихРобіт_Const.Організація, query.Table, "join_tab_1"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_1." + Довідники.Організації_Const.Назва, "Організація"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Контрагенти_Const.TABLE, Документи.АктВиконанихРобіт_Const.Контрагент, query.Table, "join_tab_2"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_2." + Довідники.Контрагенти_Const.Назва, "Контрагент"));
+                              
+                          /* Empty Field */
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Склад"));
+                        
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Каси_Const.TABLE, Документи.АктВиконанихРобіт_Const.Каса, query.Table, "join_tab_3"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_3." + Довідники.Каси_Const.Назва, "Каса"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Валюти_Const.TABLE, Документи.АктВиконанихРобіт_Const.Валюта, query.Table, "join_tab_4"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_4." + Довідники.Валюти_Const.Назва, "Валюта"));
+                              
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.АктВиконанихРобіт_Const.TABLE + "." + Документи.АктВиконанихРобіт_Const.СумаДокументу, "Сума"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Користувачі_Const.TABLE, Документи.АктВиконанихРобіт_Const.Автор, query.Table, "join_tab_5"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_5." + Довідники.Користувачі_Const.Назва, "Автор"));
+                              
+
+                  allQuery.Add(query.Construct());
+              }
+              
+              {
+                  Query query = new Query("tab_b10");
+                  if (Where.ContainsKey("РахунокФактура") && Where["РахунокФактура"].Count != 0) {
+                      query.Where = Where["РахунокФактура"];
+                      foreach(Where field in query.Where)
+                          paramQuery.Add(field.Alias, field.Value);
+                  }
+
+                  query.Field.Add("spend");
+                  
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.РахунокФактура_Const.TABLE + "." + Документи.РахунокФактура_Const.Назва, "Назва"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.РахунокФактура_Const.TABLE + "." + Документи.РахунокФактура_Const.ДатаДок + "::timestamp", "Дата"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.РахунокФактура_Const.TABLE + "." + Документи.РахунокФактура_Const.НомерДок, "Номер"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Організації_Const.TABLE, Документи.РахунокФактура_Const.Організація, query.Table, "join_tab_1"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_1." + Довідники.Організації_Const.Назва, "Організація"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Контрагенти_Const.TABLE, Документи.РахунокФактура_Const.Контрагент, query.Table, "join_tab_2"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_2." + Довідники.Контрагенти_Const.Назва, "Контрагент"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Склади_Const.TABLE, Документи.РахунокФактура_Const.Склад, query.Table, "join_tab_3"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_3." + Довідники.Склади_Const.Назва, "Склад"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Каси_Const.TABLE, Документи.РахунокФактура_Const.Каса, query.Table, "join_tab_4"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_4." + Довідники.Каси_Const.Назва, "Каса"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Валюти_Const.TABLE, Документи.РахунокФактура_Const.Валюта, query.Table, "join_tab_5"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_5." + Довідники.Валюти_Const.Назва, "Валюта"));
+                              
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.РахунокФактура_Const.TABLE + "." + Документи.РахунокФактура_Const.СумаДокументу, "Сума"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Користувачі_Const.TABLE, Документи.РахунокФактура_Const.Автор, query.Table, "join_tab_6"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_6." + Довідники.Користувачі_Const.Назва, "Автор"));
+                              
+
+                  allQuery.Add(query.Construct());
+              }
+              
+
+            string unionAllQuery = string.Join("\nUNION\n", allQuery);
+
+            unionAllQuery += "\nORDER BY Дата";
+
+            //Console.WriteLine(unionAllQuery);
+
+            string[] columnsName;
+            List<Dictionary<string, object>> listRow;
+
+            Config.Kernel!.DataBase.SelectRequest(unionAllQuery, paramQuery, out columnsName, out listRow);
+
+            foreach (Dictionary<string, object> row in listRow)
+            {
+                Журнали_Продажі record = new Журнали_Продажі();
+                record.ID = row["uid"]?.ToString() ?? "";
+                record.Spend = (bool)row["spend"];
+                
+                    record.Назва = row["Назва"] != DBNull.Value ? (row["Назва"]?.ToString() ?? "") : "";
+                
+                    record.Дата = row["Дата"] != DBNull.Value ? (row["Дата"]?.ToString() ?? "") : "";
+                
+                    record.Номер = row["Номер"] != DBNull.Value ? (row["Номер"]?.ToString() ?? "") : "";
+                
+                    record.Організація = row["Організація"] != DBNull.Value ? (row["Організація"]?.ToString() ?? "") : "";
+                
+                    record.Контрагент = row["Контрагент"] != DBNull.Value ? (row["Контрагент"]?.ToString() ?? "") : "";
+                
+                    record.Склад = row["Склад"] != DBNull.Value ? (row["Склад"]?.ToString() ?? "") : "";
+                
+                    record.Каса = row["Каса"] != DBNull.Value ? (row["Каса"]?.ToString() ?? "") : "";
+                
+                    record.Валюта = row["Валюта"] != DBNull.Value ? (row["Валюта"]?.ToString() ?? "") : "";
+                
+                    record.Сума = row["Сума"] != DBNull.Value ? (row["Сума"]?.ToString() ?? "") : "";
+                
+                    record.Автор = row["Автор"] != DBNull.Value ? (row["Автор"]?.ToString() ?? "") : "";
+                
+
+                TreeIter CurrentIter = Store.AppendValues(record.ToArray());
+                CurrentPath = Store.GetPath(CurrentIter);
+
+                if (SelectPointerItem != null)
+                {
+                    if (record.ID == SelectPointerItem.ToString())
+                        SelectPath = CurrentPath;
+                }
+            }
+        }
+    }
+    #endregion
+    
+    #region JOURNAL "Каса"
+    
+    public class Журнали_Каса
+    {
+        string Image = "images/doc.png";
+        bool Spend = false;
+        string ID = "";
+        
+        string Назва = "";
+        string Дата = "";
+        string Номер = "";
+        string Організація = "";
+        string Контрагент = "";
+        string Каса = "";
+        string Каса2 = "";
+        string Валюта = "";
+        string Сума = "";
+        string Автор = "";
+
+        Array ToArray()
+        {
+            return new object[] { new Gdk.Pixbuf(Image), ID, Spend /*Проведений документ*/
+            /* */ , Назва, Дата, Номер, Організація, Контрагент, Каса, Каса2, Валюта, Сума, Автор };
+        }
+
+        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(bool) /* Spend Проведений документ*/
+            , typeof(string) /* Назва */
+            , typeof(string) /* Дата */
+            , typeof(string) /* Номер */
+            , typeof(string) /* Організація */
+            , typeof(string) /* Контрагент */
+            , typeof(string) /* Каса */
+            , typeof(string) /* Каса2 */
+            , typeof(string) /* Валюта */
+            , typeof(string) /* Сума */
+            , typeof(string) /* Автор */
+            );
+
+        public static void AddColumns(TreeView treeView)
+        {
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /*Image*/ /* { Ypad = 0 } */
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false }); /*UID*/
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererToggle(), "active", 2)); /*Проведений документ*/
+            /* */
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3)); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 4)); /*Дата*/
+            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 5)); /*Номер*/
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Організація*/
+            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Контрагент*/
+            treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Каса*/
+            treeView.AppendColumn(new TreeViewColumn("Каса2", new CellRendererText() { Xpad = 4 }, "text", 9)); /*Каса2*/
+            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 10)); /*Валюта*/
+            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 11)); /*Сума*/
+            treeView.AppendColumn(new TreeViewColumn("Автор", new CellRendererText() { Xpad = 4 }, "text", 12)); /*Автор*/
+            
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
+        }
+
+        public static Dictionary<string, List<Where>> Where { get; set; } = new Dictionary<string, List<Where>>();
+
+        public static void ДодатиВідбірПоПеріоду(Перелічення.ТипПеріодуДляЖурналівДокументів типПеріоду)
+        {
+            Where.Clear();
+            
+            {
+                List<Where> where = new List<Where>();
+                Where.Add("ПрихіднийКасовийОрдер", where);
+                Інтерфейс.ДодатиВідбірПоПеріоду(where, ПрихіднийКасовийОрдер_Const.ДатаДок, типПеріоду);
+            }
+              
+            {
+                List<Where> where = new List<Where>();
+                Where.Add("РозхіднийКасовийОрдер", where);
+                Інтерфейс.ДодатиВідбірПоПеріоду(where, РозхіднийКасовийОрдер_Const.ДатаДок, типПеріоду);
+            }
+              
+        }
+
+        public static string[] AllowDocument()
+        {
+            return new string[] 
+            {
+                "ПрихіднийКасовийОрдер" /* */
+                , "РозхіднийКасовийОрдер" /* */
+                
+            };
+        }
+
+        public static UnigueID? SelectPointerItem { get; set; }
+        public static TreePath? SelectPath;
+        public static TreePath? CurrentPath;
+
+        public static void LoadRecords()
+        {
+            Store.Clear();
+            List<string> allQuery = new List<string>();
+            Dictionary<string, object> paramQuery = new Dictionary<string, object>();
+
+            
+              {
+                  Query query = new Query("tab_a44");
+                  if (Where.ContainsKey("ПрихіднийКасовийОрдер") && Where["ПрихіднийКасовийОрдер"].Count != 0) {
+                      query.Where = Where["ПрихіднийКасовийОрдер"];
+                      foreach(Where field in query.Where)
+                          paramQuery.Add(field.Alias, field.Value);
+                  }
+
+                  query.Field.Add("spend");
+                  
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПрихіднийКасовийОрдер_Const.TABLE + "." + Документи.ПрихіднийКасовийОрдер_Const.Назва, "Назва"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПрихіднийКасовийОрдер_Const.TABLE + "." + Документи.ПрихіднийКасовийОрдер_Const.ДатаДок + "::timestamp", "Дата"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПрихіднийКасовийОрдер_Const.TABLE + "." + Документи.ПрихіднийКасовийОрдер_Const.НомерДок, "Номер"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Організації_Const.TABLE, Документи.ПрихіднийКасовийОрдер_Const.Організація, query.Table, "join_tab_1"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_1." + Довідники.Організації_Const.Назва, "Організація"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Контрагенти_Const.TABLE, Документи.ПрихіднийКасовийОрдер_Const.Контрагент, query.Table, "join_tab_2"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_2." + Довідники.Контрагенти_Const.Назва, "Контрагент"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Каси_Const.TABLE, Документи.ПрихіднийКасовийОрдер_Const.Каса, query.Table, "join_tab_3"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_3." + Довідники.Каси_Const.Назва, "Каса"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Каси_Const.TABLE, Документи.ПрихіднийКасовийОрдер_Const.КасаВідправник, query.Table, "join_tab_4"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_4." + Довідники.Каси_Const.Назва, "Каса2"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Валюти_Const.TABLE, Документи.ПрихіднийКасовийОрдер_Const.Валюта, query.Table, "join_tab_5"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_5." + Довідники.Валюти_Const.Назва, "Валюта"));
+                              
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПрихіднийКасовийОрдер_Const.TABLE + "." + Документи.ПрихіднийКасовийОрдер_Const.СумаДокументу, "Сума"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Користувачі_Const.TABLE, Документи.ПрихіднийКасовийОрдер_Const.Автор, query.Table, "join_tab_6"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_6." + Довідники.Користувачі_Const.Назва, "Автор"));
+                              
+
+                  allQuery.Add(query.Construct());
+              }
+              
+              {
+                  Query query = new Query("tab_a48");
+                  if (Where.ContainsKey("РозхіднийКасовийОрдер") && Where["РозхіднийКасовийОрдер"].Count != 0) {
+                      query.Where = Where["РозхіднийКасовийОрдер"];
+                      foreach(Where field in query.Where)
+                          paramQuery.Add(field.Alias, field.Value);
+                  }
+
+                  query.Field.Add("spend");
+                  
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.РозхіднийКасовийОрдер_Const.TABLE + "." + Документи.РозхіднийКасовийОрдер_Const.Назва, "Назва"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.РозхіднийКасовийОрдер_Const.TABLE + "." + Документи.РозхіднийКасовийОрдер_Const.ДатаДок + "::timestamp", "Дата"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.РозхіднийКасовийОрдер_Const.TABLE + "." + Документи.РозхіднийКасовийОрдер_Const.НомерДок, "Номер"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Організації_Const.TABLE, Документи.РозхіднийКасовийОрдер_Const.Організація, query.Table, "join_tab_1"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_1." + Довідники.Організації_Const.Назва, "Організація"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Контрагенти_Const.TABLE, Документи.РозхіднийКасовийОрдер_Const.Контрагент, query.Table, "join_tab_2"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_2." + Довідники.Контрагенти_Const.Назва, "Контрагент"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Каси_Const.TABLE, Документи.РозхіднийКасовийОрдер_Const.Каса, query.Table, "join_tab_3"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_3." + Довідники.Каси_Const.Назва, "Каса"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Каси_Const.TABLE, Документи.РозхіднийКасовийОрдер_Const.КасаОтримувач, query.Table, "join_tab_4"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_4." + Довідники.Каси_Const.Назва, "Каса2"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Валюти_Const.TABLE, Документи.РозхіднийКасовийОрдер_Const.Валюта, query.Table, "join_tab_5"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_5." + Довідники.Валюти_Const.Назва, "Валюта"));
+                              
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.РозхіднийКасовийОрдер_Const.TABLE + "." + Документи.РозхіднийКасовийОрдер_Const.СумаДокументу, "Сума"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Користувачі_Const.TABLE, Документи.РозхіднийКасовийОрдер_Const.Автор, query.Table, "join_tab_6"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_6." + Довідники.Користувачі_Const.Назва, "Автор"));
+                              
+
+                  allQuery.Add(query.Construct());
+              }
+              
+
+            string unionAllQuery = string.Join("\nUNION\n", allQuery);
+
+            unionAllQuery += "\nORDER BY Дата";
+
+            //Console.WriteLine(unionAllQuery);
+
+            string[] columnsName;
+            List<Dictionary<string, object>> listRow;
+
+            Config.Kernel!.DataBase.SelectRequest(unionAllQuery, paramQuery, out columnsName, out listRow);
+
+            foreach (Dictionary<string, object> row in listRow)
+            {
+                Журнали_Каса record = new Журнали_Каса();
+                record.ID = row["uid"]?.ToString() ?? "";
+                record.Spend = (bool)row["spend"];
+                
+                    record.Назва = row["Назва"] != DBNull.Value ? (row["Назва"]?.ToString() ?? "") : "";
+                
+                    record.Дата = row["Дата"] != DBNull.Value ? (row["Дата"]?.ToString() ?? "") : "";
+                
+                    record.Номер = row["Номер"] != DBNull.Value ? (row["Номер"]?.ToString() ?? "") : "";
+                
+                    record.Організація = row["Організація"] != DBNull.Value ? (row["Організація"]?.ToString() ?? "") : "";
+                
+                    record.Контрагент = row["Контрагент"] != DBNull.Value ? (row["Контрагент"]?.ToString() ?? "") : "";
+                
+                    record.Каса = row["Каса"] != DBNull.Value ? (row["Каса"]?.ToString() ?? "") : "";
+                
+                    record.Каса2 = row["Каса2"] != DBNull.Value ? (row["Каса2"]?.ToString() ?? "") : "";
+                
+                    record.Валюта = row["Валюта"] != DBNull.Value ? (row["Валюта"]?.ToString() ?? "") : "";
+                
+                    record.Сума = row["Сума"] != DBNull.Value ? (row["Сума"]?.ToString() ?? "") : "";
+                
+                    record.Автор = row["Автор"] != DBNull.Value ? (row["Автор"]?.ToString() ?? "") : "";
+                
+
+                TreeIter CurrentIter = Store.AppendValues(record.ToArray());
+                CurrentPath = Store.GetPath(CurrentIter);
+
+                if (SelectPointerItem != null)
+                {
+                    if (record.ID == SelectPointerItem.ToString())
+                        SelectPath = CurrentPath;
+                }
+            }
+        }
+    }
+    #endregion
+    
+    #region JOURNAL "Склад"
+    
+    public class Журнали_Склад
+    {
+        string Image = "images/doc.png";
+        bool Spend = false;
+        string ID = "";
+        
+        string Назва = "";
+        string Дата = "";
+        string Номер = "";
+        string Організація = "";
+        string СкладВідправник = "";
+        string СкладОтримувач = "";
+        string Автор = "";
+
+        Array ToArray()
+        {
+            return new object[] { new Gdk.Pixbuf(Image), ID, Spend /*Проведений документ*/
+            /* */ , Назва, Дата, Номер, Організація, СкладВідправник, СкладОтримувач, Автор };
+        }
+
+        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(bool) /* Spend Проведений документ*/
+            , typeof(string) /* Назва */
+            , typeof(string) /* Дата */
+            , typeof(string) /* Номер */
+            , typeof(string) /* Організація */
+            , typeof(string) /* СкладВідправник */
+            , typeof(string) /* СкладОтримувач */
+            , typeof(string) /* Автор */
+            );
+
+        public static void AddColumns(TreeView treeView)
+        {
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /*Image*/ /* { Ypad = 0 } */
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false }); /*UID*/
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererToggle(), "active", 2)); /*Проведений документ*/
+            /* */
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3)); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 4)); /*Дата*/
+            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 5)); /*Номер*/
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Організація*/
+            treeView.AppendColumn(new TreeViewColumn("СкладВідправник", new CellRendererText() { Xpad = 4 }, "text", 7)); /*СкладВідправник*/
+            treeView.AppendColumn(new TreeViewColumn("СкладОтримувач", new CellRendererText() { Xpad = 4 }, "text", 8)); /*СкладОтримувач*/
+            treeView.AppendColumn(new TreeViewColumn("Автор", new CellRendererText() { Xpad = 4 }, "text", 9)); /*Автор*/
+            
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
+        }
+
+        public static Dictionary<string, List<Where>> Where { get; set; } = new Dictionary<string, List<Where>>();
+
+        public static void ДодатиВідбірПоПеріоду(Перелічення.ТипПеріодуДляЖурналівДокументів типПеріоду)
+        {
+            Where.Clear();
+            
+            {
+                List<Where> where = new List<Where>();
+                Where.Add("ПереміщенняТоварів", where);
+                Інтерфейс.ДодатиВідбірПоПеріоду(where, ПереміщенняТоварів_Const.ДатаДок, типПеріоду);
+            }
+              
+            {
+                List<Where> where = new List<Where>();
+                Where.Add("ВведенняЗалишків", where);
+                Інтерфейс.ДодатиВідбірПоПеріоду(where, ВведенняЗалишків_Const.ДатаДок, типПеріоду);
+            }
+              
+            {
+                List<Where> where = new List<Where>();
+                Where.Add("ВнутрішнєСпоживанняТоварів", where);
+                Інтерфейс.ДодатиВідбірПоПеріоду(where, ВнутрішнєСпоживанняТоварів_Const.ДатаДок, типПеріоду);
+            }
+              
+        }
+
+        public static string[] AllowDocument()
+        {
+            return new string[] 
+            {
+                "ПереміщенняТоварів" /* */
+                , "ВведенняЗалишків" /* */
+                , "ВнутрішнєСпоживанняТоварів" /* */
+                
+            };
+        }
+
+        public static UnigueID? SelectPointerItem { get; set; }
+        public static TreePath? SelectPath;
+        public static TreePath? CurrentPath;
+
+        public static void LoadRecords()
+        {
+            Store.Clear();
+            List<string> allQuery = new List<string>();
+            Dictionary<string, object> paramQuery = new Dictionary<string, object>();
+
+            
+              {
+                  Query query = new Query("tab_a31");
+                  if (Where.ContainsKey("ПереміщенняТоварів") && Where["ПереміщенняТоварів"].Count != 0) {
+                      query.Where = Where["ПереміщенняТоварів"];
+                      foreach(Where field in query.Where)
+                          paramQuery.Add(field.Alias, field.Value);
+                  }
+
+                  query.Field.Add("spend");
+                  
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПереміщенняТоварів_Const.TABLE + "." + Документи.ПереміщенняТоварів_Const.Назва, "Назва"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПереміщенняТоварів_Const.TABLE + "." + Документи.ПереміщенняТоварів_Const.ДатаДок + "::timestamp", "Дата"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПереміщенняТоварів_Const.TABLE + "." + Документи.ПереміщенняТоварів_Const.НомерДок, "Номер"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Організації_Const.TABLE, Документи.ПереміщенняТоварів_Const.Організація, query.Table, "join_tab_1"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_1." + Довідники.Організації_Const.Назва, "Організація"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Склади_Const.TABLE, Документи.ПереміщенняТоварів_Const.СкладВідправник, query.Table, "join_tab_2"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_2." + Довідники.Склади_Const.Назва, "СкладВідправник"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Склади_Const.TABLE, Документи.ПереміщенняТоварів_Const.СкладОтримувач, query.Table, "join_tab_3"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_3." + Довідники.Склади_Const.Назва, "СкладОтримувач"));
+                              
+                          /* Empty Field */
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Автор"));
+                        
+
+                  allQuery.Add(query.Construct());
+              }
+              
+              {
+                  Query query = new Query("tab_a83");
+                  if (Where.ContainsKey("ВведенняЗалишків") && Where["ВведенняЗалишків"].Count != 0) {
+                      query.Where = Where["ВведенняЗалишків"];
+                      foreach(Where field in query.Where)
+                          paramQuery.Add(field.Alias, field.Value);
+                  }
+
+                  query.Field.Add("spend");
+                  
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ВведенняЗалишків_Const.TABLE + "." + Документи.ВведенняЗалишків_Const.Назва, "Назва"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ВведенняЗалишків_Const.TABLE + "." + Документи.ВведенняЗалишків_Const.ДатаДок + "::timestamp", "Дата"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ВведенняЗалишків_Const.TABLE + "." + Документи.ВведенняЗалишків_Const.НомерДок, "Номер"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Організації_Const.TABLE, Документи.ВведенняЗалишків_Const.Організація, query.Table, "join_tab_1"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_1." + Довідники.Організації_Const.Назва, "Організація"));
+                              
+                          /* Empty Field */
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "СкладВідправник"));
+                        
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Склади_Const.TABLE, Документи.ВведенняЗалишків_Const.Склад, query.Table, "join_tab_2"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_2." + Довідники.Склади_Const.Назва, "СкладОтримувач"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Користувачі_Const.TABLE, Документи.ВведенняЗалишків_Const.Автор, query.Table, "join_tab_3"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_3." + Довідники.Користувачі_Const.Назва, "Автор"));
+                              
+
+                  allQuery.Add(query.Construct());
+              }
+              
+              {
+                  Query query = new Query("tab_b07");
+                  if (Where.ContainsKey("ВнутрішнєСпоживанняТоварів") && Where["ВнутрішнєСпоживанняТоварів"].Count != 0) {
+                      query.Where = Where["ВнутрішнєСпоживанняТоварів"];
+                      foreach(Where field in query.Where)
+                          paramQuery.Add(field.Alias, field.Value);
+                  }
+
+                  query.Field.Add("spend");
+                  
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ВнутрішнєСпоживанняТоварів_Const.TABLE + "." + Документи.ВнутрішнєСпоживанняТоварів_Const.Назва, "Назва"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ВнутрішнєСпоживанняТоварів_Const.TABLE + "." + Документи.ВнутрішнєСпоживанняТоварів_Const.ДатаДок + "::timestamp", "Дата"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ВнутрішнєСпоживанняТоварів_Const.TABLE + "." + Документи.ВнутрішнєСпоживанняТоварів_Const.НомерДок, "Номер"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Організації_Const.TABLE, Документи.ВнутрішнєСпоживанняТоварів_Const.Організація, query.Table, "join_tab_1"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_1." + Довідники.Організації_Const.Назва, "Організація"));
+                              
+                          /* Empty Field */
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "СкладВідправник"));
+                        
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Склади_Const.TABLE, Документи.ВнутрішнєСпоживанняТоварів_Const.Склад, query.Table, "join_tab_2"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_2." + Довідники.Склади_Const.Назва, "СкладОтримувач"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Користувачі_Const.TABLE, Документи.ВнутрішнєСпоживанняТоварів_Const.Автор, query.Table, "join_tab_3"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_3." + Довідники.Користувачі_Const.Назва, "Автор"));
+                              
+
+                  allQuery.Add(query.Construct());
+              }
+              
+
+            string unionAllQuery = string.Join("\nUNION\n", allQuery);
+
+            unionAllQuery += "\nORDER BY Дата";
+
+            //Console.WriteLine(unionAllQuery);
+
+            string[] columnsName;
+            List<Dictionary<string, object>> listRow;
+
+            Config.Kernel!.DataBase.SelectRequest(unionAllQuery, paramQuery, out columnsName, out listRow);
+
+            foreach (Dictionary<string, object> row in listRow)
+            {
+                Журнали_Склад record = new Журнали_Склад();
+                record.ID = row["uid"]?.ToString() ?? "";
+                record.Spend = (bool)row["spend"];
+                
+                    record.Назва = row["Назва"] != DBNull.Value ? (row["Назва"]?.ToString() ?? "") : "";
+                
+                    record.Дата = row["Дата"] != DBNull.Value ? (row["Дата"]?.ToString() ?? "") : "";
+                
+                    record.Номер = row["Номер"] != DBNull.Value ? (row["Номер"]?.ToString() ?? "") : "";
+                
+                    record.Організація = row["Організація"] != DBNull.Value ? (row["Організація"]?.ToString() ?? "") : "";
+                
+                    record.СкладВідправник = row["СкладВідправник"] != DBNull.Value ? (row["СкладВідправник"]?.ToString() ?? "") : "";
+                
+                    record.СкладОтримувач = row["СкладОтримувач"] != DBNull.Value ? (row["СкладОтримувач"]?.ToString() ?? "") : "";
+                
+                    record.Автор = row["Автор"] != DBNull.Value ? (row["Автор"]?.ToString() ?? "") : "";
+                
+
+                TreeIter CurrentIter = Store.AppendValues(record.ToArray());
+                CurrentPath = Store.GetPath(CurrentIter);
+
+                if (SelectPointerItem != null)
+                {
+                    if (record.ID == SelectPointerItem.ToString())
+                        SelectPath = CurrentPath;
+                }
+            }
+        }
+    }
+    #endregion
+    
+    #region JOURNAL "АдреснеЗберігання"
+    
+    public class Журнали_АдреснеЗберігання
+    {
+        string Image = "images/doc.png";
+        bool Spend = false;
+        string ID = "";
+        
+        string Назва = "";
+        string Дата = "";
+        string Номер = "";
+        string Організація = "";
+        string Склад = "";
+        string Автор = "";
+
+        Array ToArray()
+        {
+            return new object[] { new Gdk.Pixbuf(Image), ID, Spend /*Проведений документ*/
+            /* */ , Назва, Дата, Номер, Організація, Склад, Автор };
+        }
+
+        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(bool) /* Spend Проведений документ*/
+            , typeof(string) /* Назва */
+            , typeof(string) /* Дата */
+            , typeof(string) /* Номер */
+            , typeof(string) /* Організація */
+            , typeof(string) /* Склад */
+            , typeof(string) /* Автор */
+            );
+
+        public static void AddColumns(TreeView treeView)
+        {
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /*Image*/ /* { Ypad = 0 } */
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false }); /*UID*/
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererToggle(), "active", 2)); /*Проведений документ*/
+            /* */
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3)); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 4)); /*Дата*/
+            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 5)); /*Номер*/
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Організація*/
+            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Склад*/
+            treeView.AppendColumn(new TreeViewColumn("Автор", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Автор*/
+            
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
+        }
+
+        public static Dictionary<string, List<Where>> Where { get; set; } = new Dictionary<string, List<Where>>();
+
+        public static void ДодатиВідбірПоПеріоду(Перелічення.ТипПеріодуДляЖурналівДокументів типПеріоду)
+        {
+            Where.Clear();
+            
+            {
+                List<Where> where = new List<Where>();
+                Where.Add("РозміщенняТоварівНаСкладі", where);
+                Інтерфейс.ДодатиВідбірПоПеріоду(where, РозміщенняТоварівНаСкладі_Const.ДатаДок, типПеріоду);
+            }
+              
+            {
+                List<Where> where = new List<Where>();
+                Where.Add("ПереміщенняТоварівНаСкладі", where);
+                Інтерфейс.ДодатиВідбірПоПеріоду(where, ПереміщенняТоварівНаСкладі_Const.ДатаДок, типПеріоду);
+            }
+              
+            {
+                List<Where> where = new List<Where>();
+                Where.Add("ЗбіркаТоварівНаСкладі", where);
+                Інтерфейс.ДодатиВідбірПоПеріоду(where, ЗбіркаТоварівНаСкладі_Const.ДатаДок, типПеріоду);
+            }
+              
+            {
+                List<Where> where = new List<Where>();
+                Where.Add("РозміщенняНоменклатуриПоКоміркам", where);
+                Інтерфейс.ДодатиВідбірПоПеріоду(where, РозміщенняНоменклатуриПоКоміркам_Const.ДатаДок, типПеріоду);
+            }
+              
+        }
+
+        public static string[] AllowDocument()
+        {
+            return new string[] 
+            {
+                "РозміщенняТоварівНаСкладі" /* */
+                , "ПереміщенняТоварівНаСкладі" /* */
+                , "ЗбіркаТоварівНаСкладі" /* */
+                , "РозміщенняНоменклатуриПоКоміркам" /* */
+                
+            };
+        }
+
+        public static UnigueID? SelectPointerItem { get; set; }
+        public static TreePath? SelectPath;
+        public static TreePath? CurrentPath;
+
+        public static void LoadRecords()
+        {
+            Store.Clear();
+            List<string> allQuery = new List<string>();
+            Dictionary<string, object> paramQuery = new Dictionary<string, object>();
+
+            
+              {
+                  Query query = new Query("tab_a64");
+                  if (Where.ContainsKey("РозміщенняТоварівНаСкладі") && Where["РозміщенняТоварівНаСкладі"].Count != 0) {
+                      query.Where = Where["РозміщенняТоварівНаСкладі"];
+                      foreach(Where field in query.Where)
+                          paramQuery.Add(field.Alias, field.Value);
+                  }
+
+                  query.Field.Add("spend");
+                  
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.РозміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.РозміщенняТоварівНаСкладі_Const.Назва, "Назва"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.РозміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.РозміщенняТоварівНаСкладі_Const.ДатаДок + "::timestamp", "Дата"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.РозміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.РозміщенняТоварівНаСкладі_Const.НомерДок, "Номер"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Організації_Const.TABLE, Документи.РозміщенняТоварівНаСкладі_Const.Організація, query.Table, "join_tab_1"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_1." + Довідники.Організації_Const.Назва, "Організація"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Склади_Const.TABLE, Документи.РозміщенняТоварівНаСкладі_Const.Склад, query.Table, "join_tab_2"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_2." + Довідники.Склади_Const.Назва, "Склад"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Користувачі_Const.TABLE, Документи.РозміщенняТоварівНаСкладі_Const.Автор, query.Table, "join_tab_3"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_3." + Довідники.Користувачі_Const.Назва, "Автор"));
+                              
+
+                  allQuery.Add(query.Construct());
+              }
+              
+              {
+                  Query query = new Query("tab_b09");
+                  if (Where.ContainsKey("ПереміщенняТоварівНаСкладі") && Where["ПереміщенняТоварівНаСкладі"].Count != 0) {
+                      query.Where = Where["ПереміщенняТоварівНаСкладі"];
+                      foreach(Where field in query.Where)
+                          paramQuery.Add(field.Alias, field.Value);
+                  }
+
+                  query.Field.Add("spend");
+                  
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПереміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.ПереміщенняТоварівНаСкладі_Const.Назва, "Назва"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПереміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.ПереміщенняТоварівНаСкладі_Const.ДатаДок + "::timestamp", "Дата"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПереміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.ПереміщенняТоварівНаСкладі_Const.НомерДок, "Номер"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Організації_Const.TABLE, Документи.ПереміщенняТоварівНаСкладі_Const.Організація, query.Table, "join_tab_1"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_1." + Довідники.Організації_Const.Назва, "Організація"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Склади_Const.TABLE, Документи.ПереміщенняТоварівНаСкладі_Const.Склад, query.Table, "join_tab_2"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_2." + Довідники.Склади_Const.Назва, "Склад"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Користувачі_Const.TABLE, Документи.ПереміщенняТоварівНаСкладі_Const.Автор, query.Table, "join_tab_3"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_3." + Довідники.Користувачі_Const.Назва, "Автор"));
+                              
+
+                  allQuery.Add(query.Construct());
+              }
+              
+              {
+                  Query query = new Query("tab_b27");
+                  if (Where.ContainsKey("ЗбіркаТоварівНаСкладі") && Where["ЗбіркаТоварівНаСкладі"].Count != 0) {
+                      query.Where = Where["ЗбіркаТоварівНаСкладі"];
+                      foreach(Where field in query.Where)
+                          paramQuery.Add(field.Alias, field.Value);
+                  }
+
+                  query.Field.Add("spend");
+                  
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ЗбіркаТоварівНаСкладі_Const.TABLE + "." + Документи.ЗбіркаТоварівНаСкладі_Const.Назва, "Назва"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ЗбіркаТоварівНаСкладі_Const.TABLE + "." + Документи.ЗбіркаТоварівНаСкладі_Const.ДатаДок + "::timestamp", "Дата"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ЗбіркаТоварівНаСкладі_Const.TABLE + "." + Документи.ЗбіркаТоварівНаСкладі_Const.НомерДок, "Номер"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Організації_Const.TABLE, Документи.ЗбіркаТоварівНаСкладі_Const.Організація, query.Table, "join_tab_1"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_1." + Довідники.Організації_Const.Назва, "Організація"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Склади_Const.TABLE, Документи.ЗбіркаТоварівНаСкладі_Const.Склад, query.Table, "join_tab_2"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_2." + Довідники.Склади_Const.Назва, "Склад"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Користувачі_Const.TABLE, Документи.ЗбіркаТоварівНаСкладі_Const.Автор, query.Table, "join_tab_3"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_3." + Довідники.Користувачі_Const.Назва, "Автор"));
+                              
+
+                  allQuery.Add(query.Construct());
+              }
+              
+              {
+                  Query query = new Query("tab_b29");
+                  if (Where.ContainsKey("РозміщенняНоменклатуриПоКоміркам") && Where["РозміщенняНоменклатуриПоКоміркам"].Count != 0) {
+                      query.Where = Where["РозміщенняНоменклатуриПоКоміркам"];
+                      foreach(Where field in query.Where)
+                          paramQuery.Add(field.Alias, field.Value);
+                  }
+
+                  query.Field.Add("spend");
+                  
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.РозміщенняНоменклатуриПоКоміркам_Const.TABLE + "." + Документи.РозміщенняНоменклатуриПоКоміркам_Const.Назва, "Назва"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.РозміщенняНоменклатуриПоКоміркам_Const.TABLE + "." + Документи.РозміщенняНоменклатуриПоКоміркам_Const.ДатаДок + "::timestamp", "Дата"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.РозміщенняНоменклатуриПоКоміркам_Const.TABLE + "." + Документи.РозміщенняНоменклатуриПоКоміркам_Const.НомерДок, "Номер"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Організації_Const.TABLE, Документи.РозміщенняНоменклатуриПоКоміркам_Const.Організація, query.Table, "join_tab_1"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_1." + Довідники.Організації_Const.Назва, "Організація"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Склади_Const.TABLE, Документи.РозміщенняНоменклатуриПоКоміркам_Const.Склад, query.Table, "join_tab_2"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_2." + Довідники.Склади_Const.Назва, "Склад"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Користувачі_Const.TABLE, Документи.РозміщенняНоменклатуриПоКоміркам_Const.Автор, query.Table, "join_tab_3"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_3." + Довідники.Користувачі_Const.Назва, "Автор"));
+                              
+
+                  allQuery.Add(query.Construct());
+              }
+              
+
+            string unionAllQuery = string.Join("\nUNION\n", allQuery);
+
+            unionAllQuery += "\nORDER BY Дата";
+
+            //Console.WriteLine(unionAllQuery);
+
+            string[] columnsName;
+            List<Dictionary<string, object>> listRow;
+
+            Config.Kernel!.DataBase.SelectRequest(unionAllQuery, paramQuery, out columnsName, out listRow);
+
+            foreach (Dictionary<string, object> row in listRow)
+            {
+                Журнали_АдреснеЗберігання record = new Журнали_АдреснеЗберігання();
+                record.ID = row["uid"]?.ToString() ?? "";
+                record.Spend = (bool)row["spend"];
+                
+                    record.Назва = row["Назва"] != DBNull.Value ? (row["Назва"]?.ToString() ?? "") : "";
+                
+                    record.Дата = row["Дата"] != DBNull.Value ? (row["Дата"]?.ToString() ?? "") : "";
+                
+                    record.Номер = row["Номер"] != DBNull.Value ? (row["Номер"]?.ToString() ?? "") : "";
+                
+                    record.Організація = row["Організація"] != DBNull.Value ? (row["Організація"]?.ToString() ?? "") : "";
+                
+                    record.Склад = row["Склад"] != DBNull.Value ? (row["Склад"]?.ToString() ?? "") : "";
+                
+                    record.Автор = row["Автор"] != DBNull.Value ? (row["Автор"]?.ToString() ?? "") : "";
+                
+
+                TreeIter CurrentIter = Store.AppendValues(record.ToArray());
+                CurrentPath = Store.GetPath(CurrentIter);
+
+                if (SelectPointerItem != null)
+                {
+                    if (record.ID == SelectPointerItem.ToString())
+                        SelectPath = CurrentPath;
+                }
+            }
+        }
+    }
     #endregion
     
 }

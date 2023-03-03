@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 28.02.2023 15:16:04
+ * Дата конфігурації: 03.03.2023 11:36:58
  *
  */
 
@@ -52,7 +52,10 @@ namespace StorageAndTrade_1_0
             Константи.ПриЗапускуПрограми.ReadAll();
             
         }
-
+        
+        /*
+        
+        */
         public static string GetBasisObjectPresentation(UuidAndText uuidAndText, out string pointer, out string type)
         {
             pointer = type = "";
