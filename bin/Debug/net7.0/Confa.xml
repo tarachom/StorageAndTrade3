@@ -5,7 +5,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>04.03.2023 17:44:52</DateTimeSave>
+  <DateTimeSave>04.03.2023 20:47:09</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -7283,7 +7283,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
             <Field>
               <Name>ДатаДок</Name>
               <Caption>Дата</Caption>
-              <Size>160</Size>
+              <Size>0</Size>
               <SortNum>3</SortNum>
               <SortField>True</SortField>
               <Type>datetime</Type>
@@ -7895,7 +7895,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
             <Field>
               <Name>ДатаДок</Name>
               <Caption>Дата</Caption>
-              <Size>160</Size>
+              <Size>0</Size>
               <SortNum>3</SortNum>
               <SortField>True</SortField>
               <Type>datetime</Type>
@@ -8224,7 +8224,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
             <Field>
               <Name>ДатаДок</Name>
               <Caption>Дата</Caption>
-              <Size>160</Size>
+              <Size>0</Size>
               <SortNum>3</SortNum>
               <SortField>True</SortField>
               <Type>datetime</Type>
@@ -8587,7 +8587,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
             <Field>
               <Name>ДатаДок</Name>
               <Caption>Дата</Caption>
-              <Size>160</Size>
+              <Size>0</Size>
               <SortNum>3</SortNum>
               <SortField>True</SortField>
               <Type>datetime</Type>
@@ -9017,7 +9017,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
             <Field>
               <Name>ДатаДок</Name>
               <Caption>Дата</Caption>
-              <Size>160</Size>
+              <Size>0</Size>
               <SortNum>3</SortNum>
               <SortField>True</SortField>
               <Type>datetime</Type>
@@ -9449,7 +9449,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
             <Field>
               <Name>ДатаДок</Name>
               <Caption>Дата</Caption>
-              <Size>160</Size>
+              <Size>0</Size>
               <SortNum>3</SortNum>
               <SortField>True</SortField>
               <Type>datetime</Type>
@@ -9897,7 +9897,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
             <Field>
               <Name>ДатаДок</Name>
               <Caption>Дата</Caption>
-              <Size>160</Size>
+              <Size>0</Size>
               <SortNum>3</SortNum>
               <SortField>True</SortField>
               <Type>datetime</Type>
@@ -10363,7 +10363,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
             <Field>
               <Name>ДатаДок</Name>
               <Caption>Дата</Caption>
-              <Size>160</Size>
+              <Size>0</Size>
               <SortNum>3</SortNum>
               <SortField>True</SortField>
               <Type>datetime</Type>
@@ -10769,7 +10769,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
             <Field>
               <Name>ДатаДок</Name>
               <Caption>Дата</Caption>
-              <Size>160</Size>
+              <Size>0</Size>
               <SortNum>3</SortNum>
               <SortField>True</SortField>
               <Type>datetime</Type>
@@ -11259,7 +11259,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
             <Field>
               <Name>ДатаДок</Name>
               <Caption>ДатаДок</Caption>
-              <Size>160</Size>
+              <Size>0</Size>
               <SortNum>3</SortNum>
               <SortField>True</SortField>
               <Type>datetime</Type>
@@ -11561,7 +11561,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
             <Field>
               <Name>ДатаДок</Name>
               <Caption>Дата</Caption>
-              <Size>160</Size>
+              <Size>0</Size>
               <SortNum>3</SortNum>
               <SortField>True</SortField>
               <Type>datetime</Type>
@@ -11825,7 +11825,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
             <Field>
               <Name>ДатаДок</Name>
               <Caption>ДатаДок</Caption>
-              <Size>160</Size>
+              <Size>0</Size>
               <SortNum>3</SortNum>
               <SortField>True</SortField>
               <Type>datetime</Type>
@@ -12086,7 +12086,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
             <Field>
               <Name>ДатаДок</Name>
               <Caption>Дата</Caption>
-              <Size>160</Size>
+              <Size>0</Size>
               <SortNum>3</SortNum>
               <SortField>True</SortField>
               <Type>datetime</Type>
@@ -12384,7 +12384,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
             <Field>
               <Name>ДатаДок</Name>
               <Caption>Дата</Caption>
-              <Size>160</Size>
+              <Size>0</Size>
               <SortNum>3</SortNum>
               <SortField>True</SortField>
               <Type>datetime</Type>
@@ -12719,7 +12719,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
             <Field>
               <Name>ДатаДок</Name>
               <Caption>Дата</Caption>
-              <Size>160</Size>
+              <Size>0</Size>
               <SortNum>3</SortNum>
               <SortField>True</SortField>
               <Type>datetime</Type>

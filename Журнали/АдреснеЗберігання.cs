@@ -40,6 +40,7 @@ namespace StorageAndTrade
 
         TreeView TreeViewGrid;
         ComboBoxText ComboBoxPeriodWhere = new ComboBoxText();
+        ToolButton? TypeDocToolButton; //Список документів
 
         public Журнал_АдреснеЗберігання() : base()
         {
@@ -69,6 +70,7 @@ namespace StorageAndTrade
             TreeViewGrid.ActivateOnSingleClick = true;
             TreeViewGrid.RowActivated += OnRowActivated;
             TreeViewGrid.ButtonPressEvent += OnButtonPressEvent;
+            TreeViewGrid.KeyReleaseEvent += OnKeyReleaseEvent;
 
             scrollTree.Add(TreeViewGrid);
 
@@ -95,9 +97,9 @@ namespace StorageAndTrade
             toolItemSeparator.Add(new Separator(Orientation.Horizontal));
             toolbar.Add(toolItemSeparator);
 
-            ToolButton typeButton = new ToolButton(Stock.Find) { Label = "Документи", IsImportant = true };
-            typeButton.Clicked += OnTypeDocsClick;
-            toolbar.Add(typeButton);
+            TypeDocToolButton = new ToolButton(Stock.Find) { Label = "Документи", IsImportant = true };
+            TypeDocToolButton.Clicked += OnTypeDocsClick;
+            toolbar.Add(TypeDocToolButton);
         }
 
         public void SetValue()
@@ -116,6 +118,8 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.Журнали_АдреснеЗберігання.SelectPath, TreeViewGrid.Columns[0], false);
             else if (ТабличніСписки.Журнали_АдреснеЗберігання.CurrentPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.Журнали_АдреснеЗберігання.CurrentPath, TreeViewGrid.Columns[0], false);
+
+            TreeViewGrid.GrabFocus();
         }
 
         #region TreeView
@@ -150,6 +154,40 @@ namespace StorageAndTrade
                     ФункціїДляЖурналів.ВідкритиЖурналВідповідноДоВидуДокументу(typeDoc, new UnigueID(uid),
                         Enum.Parse<Перелічення.ТипПеріодуДляЖурналівДокументів>(ComboBoxPeriodWhere.ActiveId));
                 }
+            }
+        }
+
+        void OnKeyReleaseEvent(object? sender, KeyReleaseEventArgs args)
+        {
+            switch (args.Event.Key)
+            {
+                case Gdk.Key.Insert:
+                    {
+                        if (TypeDocToolButton != null)
+                            OnTypeDocsClick(TypeDocToolButton, new EventArgs());
+                        break;
+                    }
+                case Gdk.Key.F5:
+                    {
+                        LoadRecords();
+                        break;
+                    }
+                case Gdk.Key.KP_Enter:
+                case Gdk.Key.Return:
+                    {
+                        OpenDocTypeJournal();
+                        break;
+                    }
+                case Gdk.Key.End:
+                case Gdk.Key.Home:
+                case Gdk.Key.Up:
+                case Gdk.Key.Down:
+                case Gdk.Key.Prior:
+                case Gdk.Key.Next:
+                    {
+                        OnRowActivated(TreeViewGrid, new RowActivatedArgs());
+                        break;
+                    }
             }
         }
 

@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 04.03.2023 17:44:52
+ * Дата конфігурації: 04.03.2023 20:47:09
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон Gtk.xslt
@@ -5653,6 +5653,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         public static Документи.ЗамовленняПостачальнику_Pointer? DocumentPointerItem { get; set; }
         public static Документи.ЗамовленняПостачальнику_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
@@ -5749,6 +5750,9 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
 
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
+
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DocumentPointerItem!.UnigueID.ToString();
@@ -5836,6 +5840,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         public static Документи.ПоступленняТоварівТаПослуг_Pointer? DocumentPointerItem { get; set; }
         public static Документи.ПоступленняТоварівТаПослуг_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
@@ -5941,6 +5946,9 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
 
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
+
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DocumentPointerItem!.UnigueID.ToString();
@@ -6004,7 +6012,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             /* */
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3)); /*Назва*/
             treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 4)); /*НомерДок*/
-            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 5) { FixedWidth = 160 } ); /*ДатаДок*/
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 5)); /*ДатаДок*/
             treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Організація*/
             treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Контрагент*/
             treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Валюта*/
@@ -6028,6 +6036,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         public static Документи.ЗамовленняКлієнта_Pointer? DocumentPointerItem { get; set; }
         public static Документи.ЗамовленняКлієнта_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
@@ -6133,6 +6142,9 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
 
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
+
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DocumentPointerItem!.UnigueID.ToString();
@@ -6196,7 +6208,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             /* */
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3)); /*Назва*/
             treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 4)); /*НомерДок*/
-            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 5) { FixedWidth = 160 } ); /*ДатаДок*/
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 5)); /*ДатаДок*/
             treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Організація*/
             treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Контрагент*/
             treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Валюта*/
@@ -6220,6 +6232,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         public static Документи.РеалізаціяТоварівТаПослуг_Pointer? DocumentPointerItem { get; set; }
         public static Документи.РеалізаціяТоварівТаПослуг_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
@@ -6325,6 +6338,9 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
 
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
+
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DocumentPointerItem!.UnigueID.ToString();
@@ -6382,7 +6398,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             /* */
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3)); /*Назва*/
             treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 4)); /*НомерДок*/
-            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 5) { FixedWidth = 160 } ); /*ДатаДок*/
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 5)); /*ДатаДок*/
             treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Організація*/
             treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Валюта*/
             treeView.AppendColumn(new TreeViewColumn("Вид ціни", new CellRendererText() { Xpad = 4 }, "text", 8)); /*ВидЦіни*/
@@ -6403,6 +6419,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         public static Документи.ВстановленняЦінНоменклатури_Pointer? DocumentPointerItem { get; set; }
         public static Документи.ВстановленняЦінНоменклатури_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
@@ -6488,6 +6505,9 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
 
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
+
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DocumentPointerItem!.UnigueID.ToString();
@@ -6551,7 +6571,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             /* */
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3)); /*Назва*/
             treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 4)); /*НомерДок*/
-            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 5) { FixedWidth = 160 } ); /*ДатаДок*/
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 5)); /*ДатаДок*/
             treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Організація*/
             treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Валюта*/
             treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Каса*/
@@ -6575,6 +6595,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         public static Документи.ПрихіднийКасовийОрдер_Pointer? DocumentPointerItem { get; set; }
         public static Документи.ПрихіднийКасовийОрдер_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
@@ -6673,6 +6694,9 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
 
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
+
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DocumentPointerItem!.UnigueID.ToString();
@@ -6736,7 +6760,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             /* */
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3)); /*Назва*/
             treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 4)); /*НомерДок*/
-            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 5) { FixedWidth = 160 } ); /*ДатаДок*/
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 5)); /*ДатаДок*/
             treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Організація*/
             treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Контрагент*/
             treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Валюта*/
@@ -6760,6 +6784,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         public static Документи.РозхіднийКасовийОрдер_Pointer? DocumentPointerItem { get; set; }
         public static Документи.РозхіднийКасовийОрдер_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
@@ -6858,6 +6883,9 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
 
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
+
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DocumentPointerItem!.UnigueID.ToString();
@@ -6915,7 +6943,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             /* */
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3)); /*Назва*/
             treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 4)); /*НомерДок*/
-            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 5) { FixedWidth = 160 } ); /*ДатаДок*/
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 5)); /*ДатаДок*/
             treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Організація*/
             treeView.AppendColumn(new TreeViewColumn("Склад відправник", new CellRendererText() { Xpad = 4 }, "text", 7)); /*СкладВідправник*/
             treeView.AppendColumn(new TreeViewColumn("Склад отримувач", new CellRendererText() { Xpad = 4 }, "text", 8)); /*СкладОтримувач*/
@@ -6936,6 +6964,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         public static Документи.ПереміщенняТоварів_Pointer? DocumentPointerItem { get; set; }
         public static Документи.ПереміщенняТоварів_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
@@ -7021,6 +7050,9 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
 
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
+
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DocumentPointerItem!.UnigueID.ToString();
@@ -7084,7 +7116,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             /* */
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3)); /*Назва*/
             treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 4)); /*НомерДок*/
-            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 5) { FixedWidth = 160 } ); /*ДатаДок*/
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 5)); /*ДатаДок*/
             treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Організація*/
             treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Контрагент*/
             treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Валюта*/
@@ -7108,6 +7140,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         public static Документи.ПоверненняТоварівПостачальнику_Pointer? DocumentPointerItem { get; set; }
         public static Документи.ПоверненняТоварівПостачальнику_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
@@ -7213,6 +7246,9 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
 
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
+
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DocumentPointerItem!.UnigueID.ToString();
@@ -7276,7 +7312,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             /* */
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3)); /*Назва*/
             treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 4)); /*НомерДок*/
-            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 5) { FixedWidth = 160 } ); /*ДатаДок*/
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 5)); /*ДатаДок*/
             treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Організація*/
             treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Валюта*/
             treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Каса*/
@@ -7300,6 +7336,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         public static Документи.ПоверненняТоварівВідКлієнта_Pointer? DocumentPointerItem { get; set; }
         public static Документи.ПоверненняТоварівВідКлієнта_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
@@ -7405,6 +7442,9 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
 
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
+
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DocumentPointerItem!.UnigueID.ToString();
@@ -7466,7 +7506,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             /* */
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3)); /*Назва*/
             treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 4)); /*НомерДок*/
-            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 5) { FixedWidth = 160 } ); /*ДатаДок*/
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 5)); /*ДатаДок*/
             treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Організація*/
             treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Валюта*/
             treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Каса*/
@@ -7489,6 +7529,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         public static Документи.АктВиконанихРобіт_Pointer? DocumentPointerItem { get; set; }
         public static Документи.АктВиконанихРобіт_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
@@ -7585,6 +7626,9 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
 
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
+
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DocumentPointerItem!.UnigueID.ToString();
@@ -7644,7 +7688,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             /* */
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3)); /*Назва*/
             treeView.AppendColumn(new TreeViewColumn("НомерДок", new CellRendererText() { Xpad = 4 }, "text", 4)); /*НомерДок*/
-            treeView.AppendColumn(new TreeViewColumn("ДатаДок", new CellRendererText() { Xpad = 4 }, "text", 5) { FixedWidth = 160 } ); /*ДатаДок*/
+            treeView.AppendColumn(new TreeViewColumn("ДатаДок", new CellRendererText() { Xpad = 4 }, "text", 5)); /*ДатаДок*/
             treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Організація*/
             treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Склад*/
             treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Контрагент*/
@@ -7666,6 +7710,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         public static Документи.ВведенняЗалишків_Pointer? DocumentPointerItem { get; set; }
         public static Документи.ВведенняЗалишків_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
@@ -7760,6 +7805,9 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
 
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
+
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DocumentPointerItem!.UnigueID.ToString();
@@ -7815,7 +7863,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             /* */
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3)); /*Назва*/
             treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 4)); /*НомерДок*/
-            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 5) { FixedWidth = 160 } ); /*ДатаДок*/
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 5)); /*ДатаДок*/
             treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Організація*/
             treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Склад*/
             treeView.AppendColumn(new TreeViewColumn("Автор", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Автор*/
@@ -7835,6 +7883,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         public static Документи.НадлишкиТоварів_Pointer? DocumentPointerItem { get; set; }
         public static Документи.НадлишкиТоварів_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
@@ -7911,6 +7960,9 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
 
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
+
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DocumentPointerItem!.UnigueID.ToString();
@@ -7966,7 +8018,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             /* */
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3)); /*Назва*/
             treeView.AppendColumn(new TreeViewColumn("НомерДок", new CellRendererText() { Xpad = 4 }, "text", 4)); /*НомерДок*/
-            treeView.AppendColumn(new TreeViewColumn("ДатаДок", new CellRendererText() { Xpad = 4 }, "text", 5) { FixedWidth = 160 } ); /*ДатаДок*/
+            treeView.AppendColumn(new TreeViewColumn("ДатаДок", new CellRendererText() { Xpad = 4 }, "text", 5)); /*ДатаДок*/
             treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Організація*/
             treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Склад*/
             treeView.AppendColumn(new TreeViewColumn("Автор", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Автор*/
@@ -7986,6 +8038,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         public static Документи.ПересортицяТоварів_Pointer? DocumentPointerItem { get; set; }
         public static Документи.ПересортицяТоварів_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
@@ -8062,6 +8115,9 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
 
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
+
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DocumentPointerItem!.UnigueID.ToString();
@@ -8115,7 +8171,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             /* */
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3)); /*Назва*/
             treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 4)); /*НомерДок*/
-            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 5) { FixedWidth = 160 } ); /*ДатаДок*/
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 5)); /*ДатаДок*/
             treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Склад*/
             treeView.AppendColumn(new TreeViewColumn("Автор", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Автор*/
             treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Коментар*/
@@ -8134,6 +8190,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         public static Документи.ПерерахунокТоварів_Pointer? DocumentPointerItem { get; set; }
         public static Документи.ПерерахунокТоварів_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
@@ -8201,6 +8258,9 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
 
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
+
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DocumentPointerItem!.UnigueID.ToString();
@@ -8258,7 +8318,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             /* */
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3)); /*Назва*/
             treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 4)); /*НомерДок*/
-            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 5) { FixedWidth = 160 } ); /*ДатаДок*/
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 5)); /*ДатаДок*/
             treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Організація*/
             treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Склад*/
             treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 8)); /*СумаДокументу*/
@@ -8279,6 +8339,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         public static Документи.ПсуванняТоварів_Pointer? DocumentPointerItem { get; set; }
         public static Документи.ПсуванняТоварів_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
@@ -8357,6 +8418,9 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
 
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
+
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DocumentPointerItem!.UnigueID.ToString();
@@ -8416,7 +8480,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             /* */
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3)); /*Назва*/
             treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 4)); /*НомерДок*/
-            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 5) { FixedWidth = 160 } ); /*ДатаДок*/
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 5)); /*ДатаДок*/
             treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 6)); /*Організація*/
             treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Склад*/
             treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Валюта*/
@@ -8438,6 +8502,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         public static Документи.ВнутрішнєСпоживанняТоварів_Pointer? DocumentPointerItem { get; set; }
         public static Документи.ВнутрішнєСпоживанняТоварів_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
@@ -8524,6 +8589,9 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
@@ -8612,6 +8680,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         public static Документи.РахунокФактура_Pointer? DocumentPointerItem { get; set; }
         public static Документи.РахунокФактура_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
@@ -8717,6 +8786,9 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
 
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
+
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DocumentPointerItem!.UnigueID.ToString();
@@ -8792,6 +8864,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         public static Документи.РозміщенняТоварівНаСкладі_Pointer? DocumentPointerItem { get; set; }
         public static Документи.РозміщенняТоварівНаСкладі_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
@@ -8868,6 +8941,9 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
 
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
+
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DocumentPointerItem!.UnigueID.ToString();
@@ -8943,6 +9019,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         public static Документи.ПереміщенняТоварівНаСкладі_Pointer? DocumentPointerItem { get; set; }
         public static Документи.ПереміщенняТоварівНаСкладі_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
@@ -9019,6 +9096,9 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
 
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
+
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DocumentPointerItem!.UnigueID.ToString();
@@ -9094,6 +9174,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         public static Документи.ЗбіркаТоварівНаСкладі_Pointer? DocumentPointerItem { get; set; }
         public static Документи.ЗбіркаТоварівНаСкладі_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
@@ -9170,6 +9251,9 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
 
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
+
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DocumentPointerItem!.UnigueID.ToString();
@@ -9245,6 +9329,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
         public static Документи.РозміщенняНоменклатуриПоКоміркам_Pointer? DocumentPointerItem { get; set; }
         public static Документи.РозміщенняНоменклатуриПоКоміркам_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
@@ -9320,6 +9405,9 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {

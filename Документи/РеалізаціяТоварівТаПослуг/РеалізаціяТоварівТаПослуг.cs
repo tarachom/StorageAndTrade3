@@ -93,6 +93,7 @@ namespace StorageAndTrade
             TreeViewGrid.RowActivated += OnRowActivated;
             TreeViewGrid.ButtonPressEvent += OnButtonPressEvent;
             TreeViewGrid.ButtonReleaseEvent += OnButtonReleaseEvent;
+            TreeViewGrid.KeyReleaseEvent += OnKeyReleaseEvent;
             scrollTree.Add(TreeViewGrid);
 
             PackStart(scrollTree, true, true, 0);
@@ -261,6 +262,8 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.РеалізаціяТоварівТаПослуг_Записи.SelectPath, TreeViewGrid.Columns[0], false);
             else if (ТабличніСписки.РеалізаціяТоварівТаПослуг_Записи.CurrentPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.РеалізаціяТоварівТаПослуг_Записи.CurrentPath, TreeViewGrid.Columns[0], false);
+
+            TreeViewGrid.GrabFocus();
         }
 
         void LoadRecords_OnSearch(string searchText)
@@ -279,6 +282,11 @@ namespace StorageAndTrade
                 new Where(РеалізаціяТоварівТаПослуг_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
             ТабличніСписки.РеалізаціяТоварівТаПослуг_Записи.LoadRecords();
+
+            if (ТабличніСписки.РеалізаціяТоварівТаПослуг_Записи.FirstPath != null)
+                TreeViewGrid.SetCursor(ТабличніСписки.РеалізаціяТоварівТаПослуг_Записи.FirstPath, TreeViewGrid.Columns[0], false);
+
+            TreeViewGrid.GrabFocus();
         }
 
         void OpenPageElement(bool IsNew, string uid = "")
@@ -363,6 +371,39 @@ namespace StorageAndTrade
                         Program.GeneralForm?.CloseCurrentPageNotebook();
                     }
                 }
+            }
+        }
+
+        void OnKeyReleaseEvent(object? sender, KeyReleaseEventArgs args)
+        {
+            switch (args.Event.Key)
+            {
+                case Gdk.Key.Insert:
+                    {
+                        OpenPageElement(true);
+                        break;
+                    }
+                case Gdk.Key.F5:
+                    {
+                        LoadRecords();
+                        break;
+                    }
+                case Gdk.Key.KP_Enter:
+                case Gdk.Key.Return:
+                    {
+                        OnEditClick(null, new EventArgs());
+                        break;
+                    }
+                case Gdk.Key.End:
+                case Gdk.Key.Home:
+                case Gdk.Key.Up:
+                case Gdk.Key.Down:
+                case Gdk.Key.Prior:
+                case Gdk.Key.Next:
+                    {
+                        OnRowActivated(TreeViewGrid, new RowActivatedArgs());
+                        break;
+                    }
             }
         }
 

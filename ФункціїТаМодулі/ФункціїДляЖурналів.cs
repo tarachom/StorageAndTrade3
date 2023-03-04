@@ -256,6 +256,21 @@ namespace StorageAndTrade
 
                         break;
                     }
+                case "ВстановленняЦінНоменклатури":
+                    {
+                        ВстановленняЦінНоменклатури page = new ВстановленняЦінНоменклатури() { SelectPointerItem = new ВстановленняЦінНоменклатури_Pointer(unigueID) };
+                        Program.GeneralForm?.CreateNotebookPage("Встановлення цін номенклатури", () => { return page; }, true);
+
+                        if (periodWhere != 0)
+                        {
+                            page.PeriodWhere = periodWhere;
+                            page.SetValue();
+                        }
+                        else
+                            page.LoadRecords();
+
+                        break;
+                    }
                 case "РозміщенняТоварівНаСкладі":
                     {
                         РозміщенняТоварівНаСкладі page = new РозміщенняТоварівНаСкладі() { SelectPointerItem = new РозміщенняТоварівНаСкладі_Pointer(unigueID) };
