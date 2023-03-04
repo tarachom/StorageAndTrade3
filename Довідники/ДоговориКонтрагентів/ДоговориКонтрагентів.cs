@@ -121,6 +121,8 @@ namespace StorageAndTrade
 
             if (ТабличніСписки.ДоговориКонтрагентів_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.ДоговориКонтрагентів_Записи.SelectPath, TreeViewGrid.Columns[0], false);
+
+            TreeViewGrid.GrabFocus();
         }
 
         void OpenPageElement(bool IsNew, string uid = "")

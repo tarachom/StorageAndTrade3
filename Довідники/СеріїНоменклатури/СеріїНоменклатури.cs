@@ -111,6 +111,8 @@ namespace StorageAndTrade
 
             if (ТабличніСписки.СеріїНоменклатури_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.СеріїНоменклатури_Записи.SelectPath, TreeViewGrid.Columns[0], false);
+
+            TreeViewGrid.GrabFocus();
         }
 
         void LoadRecords_OnSearch(string searchText)
@@ -129,6 +131,11 @@ namespace StorageAndTrade
                 new Where(СеріїНоменклатури_Const.Номер, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
             ТабличніСписки.СеріїНоменклатури_Записи.LoadRecords();
+
+            if (ТабличніСписки.СеріїНоменклатури_Записи.FirstPath != null)
+                TreeViewGrid.SetCursor(ТабличніСписки.СеріїНоменклатури_Записи.FirstPath, TreeViewGrid.Columns[0], false);
+
+            TreeViewGrid.GrabFocus();
         }
 
         void OpenPageElement(bool IsNew, string uid = "")

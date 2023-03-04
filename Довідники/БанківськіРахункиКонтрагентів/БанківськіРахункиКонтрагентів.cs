@@ -100,6 +100,8 @@ namespace StorageAndTrade
 
             if (ТабличніСписки.БанківськіРахункиКонтрагентів_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.БанківськіРахункиКонтрагентів_Записи.SelectPath, TreeViewGrid.Columns[0], false);
+
+            TreeViewGrid.GrabFocus();
         }
 
         void OpenPageElement(bool IsNew, string uid = "")

@@ -69,7 +69,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Номенклатура", new CellRendererText() { Xpad = 4 }, "text", 3) { SortColumnId = 3 }); /*Назва*/
             treeView.AppendColumn(new TreeViewColumn("Пакування", new CellRendererText() { Xpad = 4 }, "text", 4) { SortColumnId = 4 }); /*ОдиницяВиміру*/
             treeView.AppendColumn(new TreeViewColumn("Тип", new CellRendererText() { Xpad = 4 }, "text", 5) { SortColumnId = 5 }); /*ТипНоменклатури*/
-            
+
             treeView.AppendColumn(new TreeViewColumn("Залишок", new CellRendererText() { Xpad = 4, Xalign = 1 }, "text", 6) { SortColumnId = 6, Alignment = 1 }); /*Залишок*/
             treeView.AppendColumn(new TreeViewColumn("В комірках", new CellRendererText() { Xpad = 4, Xalign = 1 }, "text", 7) { SortColumnId = 7, Alignment = 1 }); /*ЗалишокВКомірках*/
 
@@ -78,16 +78,17 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         }
 
         public static List<Where> Where { get; set; } = new List<Where>();
-        
+
         public static Довідники.Номенклатура_Pointer? DirectoryPointerItem { get; set; }
         public static Довідники.Номенклатура_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Довідники.Номенклатура_Select Номенклатура_Select = new Довідники.Номенклатура_Select();
             Номенклатура_Select.QuerySelect.Field.AddRange(
@@ -183,6 +184,9 @@ END)
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {

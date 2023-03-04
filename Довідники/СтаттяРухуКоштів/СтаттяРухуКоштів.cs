@@ -100,6 +100,8 @@ namespace StorageAndTrade
 
             if (ТабличніСписки.СтаттяРухуКоштів_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.СтаттяРухуКоштів_Записи.SelectPath, TreeViewGrid.Columns[0], false);
+
+            TreeViewGrid.GrabFocus();
         }
 
         void OpenPageElement(bool IsNew, string uid = "")

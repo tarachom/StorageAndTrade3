@@ -112,6 +112,8 @@ namespace StorageAndTrade
 
             if (ТабличніСписки.Виробники_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.Виробники_Записи.SelectPath, TreeViewGrid.Columns[0], false);
+
+            TreeViewGrid.GrabFocus();
         }
 
         void LoadRecords_OnSearch(string searchText)
@@ -130,6 +132,11 @@ namespace StorageAndTrade
                 new Where(Виробники_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
             ТабличніСписки.Виробники_Записи.LoadRecords();
+
+            if (ТабличніСписки.Виробники_Записи.FirstPath != null)
+                TreeViewGrid.SetCursor(ТабличніСписки.Виробники_Записи.FirstPath, TreeViewGrid.Columns[0], false);
+
+            TreeViewGrid.GrabFocus();
         }
 
         void OpenPageElement(bool IsNew, string uid = "")

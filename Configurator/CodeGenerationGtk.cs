@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 04.03.2023 20:47:09
+ * Дата конфігурації: 04.03.2023 21:27:59
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон Gtk.xslt
@@ -77,13 +77,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static Довідники.Організації_Pointer? DirectoryPointerItem { get; set; }
         public static Довідники.Організації_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Довідники.Організації_Select Організації_Select = new Довідники.Організації_Select();
             Організації_Select.QuerySelect.Field.AddRange(
@@ -120,6 +121,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -168,13 +172,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static Довідники.Організації_Pointer? DirectoryPointerItem { get; set; }
         public static Довідники.Організації_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Довідники.Організації_Select Організації_Select = new Довідники.Організації_Select();
             Організації_Select.QuerySelect.Field.AddRange(
@@ -211,6 +216,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -270,13 +278,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static Довідники.Номенклатура_Pointer? DirectoryPointerItem { get; set; }
         public static Довідники.Номенклатура_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Довідники.Номенклатура_Select Номенклатура_Select = new Довідники.Номенклатура_Select();
             Номенклатура_Select.QuerySelect.Field.AddRange(
@@ -325,6 +334,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
 
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
+
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
@@ -372,13 +384,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static Довідники.Номенклатура_Pointer? DirectoryPointerItem { get; set; }
         public static Довідники.Номенклатура_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Довідники.Номенклатура_Select Номенклатура_Select = new Довідники.Номенклатура_Select();
             Номенклатура_Select.QuerySelect.Field.AddRange(
@@ -415,6 +428,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -468,13 +484,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static Довідники.Виробники_Pointer? DirectoryPointerItem { get; set; }
         public static Довідники.Виробники_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Довідники.Виробники_Select Виробники_Select = new Довідники.Виробники_Select();
             Виробники_Select.QuerySelect.Field.AddRange(
@@ -511,6 +528,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -559,13 +579,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static Довідники.Виробники_Pointer? DirectoryPointerItem { get; set; }
         public static Довідники.Виробники_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Довідники.Виробники_Select Виробники_Select = new Довідники.Виробники_Select();
             Виробники_Select.QuerySelect.Field.AddRange(
@@ -602,6 +623,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -655,13 +679,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static Довідники.ВидиНоменклатури_Pointer? DirectoryPointerItem { get; set; }
         public static Довідники.ВидиНоменклатури_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Довідники.ВидиНоменклатури_Select ВидиНоменклатури_Select = new Довідники.ВидиНоменклатури_Select();
             ВидиНоменклатури_Select.QuerySelect.Field.AddRange(
@@ -698,6 +723,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -743,13 +771,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static Довідники.ВидиНоменклатури_Pointer? DirectoryPointerItem { get; set; }
         public static Довідники.ВидиНоменклатури_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Довідники.ВидиНоменклатури_Select ВидиНоменклатури_Select = new Довідники.ВидиНоменклатури_Select();
             ВидиНоменклатури_Select.QuerySelect.Field.AddRange(
@@ -784,6 +813,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -837,13 +869,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static Довідники.ПакуванняОдиниціВиміру_Pointer? DirectoryPointerItem { get; set; }
         public static Довідники.ПакуванняОдиниціВиміру_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Довідники.ПакуванняОдиниціВиміру_Select ПакуванняОдиниціВиміру_Select = new Довідники.ПакуванняОдиниціВиміру_Select();
             ПакуванняОдиниціВиміру_Select.QuerySelect.Field.AddRange(
@@ -880,6 +913,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -928,13 +964,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static Довідники.ПакуванняОдиниціВиміру_Pointer? DirectoryPointerItem { get; set; }
         public static Довідники.ПакуванняОдиниціВиміру_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Довідники.ПакуванняОдиниціВиміру_Select ПакуванняОдиниціВиміру_Select = new Довідники.ПакуванняОдиниціВиміру_Select();
             ПакуванняОдиниціВиміру_Select.QuerySelect.Field.AddRange(
@@ -971,6 +1008,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -1033,13 +1073,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static Довідники.Валюти_Pointer? DirectoryPointerItem { get; set; }
         public static Довідники.Валюти_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Довідники.Валюти_Select Валюти_Select = new Довідники.Валюти_Select();
             Валюти_Select.QuerySelect.Field.AddRange(
@@ -1082,6 +1123,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -1136,13 +1180,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static Довідники.Валюти_Pointer? DirectoryPointerItem { get; set; }
         public static Довідники.Валюти_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Довідники.Валюти_Select Валюти_Select = new Довідники.Валюти_Select();
             Валюти_Select.QuerySelect.Field.AddRange(
@@ -1183,6 +1228,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -1239,13 +1287,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static Довідники.Контрагенти_Pointer? DirectoryPointerItem { get; set; }
         public static Довідники.Контрагенти_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Довідники.Контрагенти_Select Контрагенти_Select = new Довідники.Контрагенти_Select();
             Контрагенти_Select.QuerySelect.Field.AddRange(
@@ -1291,6 +1340,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -1339,13 +1391,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static Довідники.Контрагенти_Pointer? DirectoryPointerItem { get; set; }
         public static Довідники.Контрагенти_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Довідники.Контрагенти_Select Контрагенти_Select = new Довідники.Контрагенти_Select();
             Контрагенти_Select.QuerySelect.Field.AddRange(
@@ -1382,6 +1435,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -1441,13 +1497,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static Довідники.Склади_Pointer? DirectoryPointerItem { get; set; }
         public static Довідники.Склади_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Довідники.Склади_Select Склади_Select = new Довідники.Склади_Select();
             Склади_Select.QuerySelect.Field.AddRange(
@@ -1488,6 +1545,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -1536,13 +1596,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static Довідники.Склади_Pointer? DirectoryPointerItem { get; set; }
         public static Довідники.Склади_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Довідники.Склади_Select Склади_Select = new Довідники.Склади_Select();
             Склади_Select.QuerySelect.Field.AddRange(
@@ -1579,6 +1640,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -1635,13 +1699,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static Довідники.ВидиЦін_Pointer? DirectoryPointerItem { get; set; }
         public static Довідники.ВидиЦін_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Довідники.ВидиЦін_Select ВидиЦін_Select = new Довідники.ВидиЦін_Select();
             ВидиЦін_Select.QuerySelect.Field.AddRange(
@@ -1688,6 +1753,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
 
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
+
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
@@ -1732,13 +1800,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static Довідники.ВидиЦін_Pointer? DirectoryPointerItem { get; set; }
         public static Довідники.ВидиЦін_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Довідники.ВидиЦін_Select ВидиЦін_Select = new Довідники.ВидиЦін_Select();
             ВидиЦін_Select.QuerySelect.Field.AddRange(
@@ -1773,6 +1842,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -1826,13 +1898,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static Довідники.ВидиЦінПостачальників_Pointer? DirectoryPointerItem { get; set; }
         public static Довідники.ВидиЦінПостачальників_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Довідники.ВидиЦінПостачальників_Select ВидиЦінПостачальників_Select = new Довідники.ВидиЦінПостачальників_Select();
             ВидиЦінПостачальників_Select.QuerySelect.Field.AddRange(
@@ -1869,6 +1942,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -1922,13 +1998,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static Довідники.Користувачі_Pointer? DirectoryPointerItem { get; set; }
         public static Довідники.Користувачі_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Довідники.Користувачі_Select Користувачі_Select = new Довідники.Користувачі_Select();
             Користувачі_Select.QuerySelect.Field.AddRange(
@@ -1965,6 +2042,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -2010,13 +2090,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static Довідники.Користувачі_Pointer? DirectoryPointerItem { get; set; }
         public static Довідники.Користувачі_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Довідники.Користувачі_Select Користувачі_Select = new Довідники.Користувачі_Select();
             Користувачі_Select.QuerySelect.Field.AddRange(
@@ -2051,6 +2132,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -2104,13 +2188,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static Довідники.ФізичніОсоби_Pointer? DirectoryPointerItem { get; set; }
         public static Довідники.ФізичніОсоби_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Довідники.ФізичніОсоби_Select ФізичніОсоби_Select = new Довідники.ФізичніОсоби_Select();
             ФізичніОсоби_Select.QuerySelect.Field.AddRange(
@@ -2147,6 +2232,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -2192,13 +2280,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static Довідники.ФізичніОсоби_Pointer? DirectoryPointerItem { get; set; }
         public static Довідники.ФізичніОсоби_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Довідники.ФізичніОсоби_Select ФізичніОсоби_Select = new Довідники.ФізичніОсоби_Select();
             ФізичніОсоби_Select.QuerySelect.Field.AddRange(
@@ -2233,6 +2322,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -2286,13 +2378,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static Довідники.СтруктураПідприємства_Pointer? DirectoryPointerItem { get; set; }
         public static Довідники.СтруктураПідприємства_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Довідники.СтруктураПідприємства_Select СтруктураПідприємства_Select = new Довідники.СтруктураПідприємства_Select();
             СтруктураПідприємства_Select.QuerySelect.Field.AddRange(
@@ -2329,6 +2422,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -2374,13 +2470,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static Довідники.СтруктураПідприємства_Pointer? DirectoryPointerItem { get; set; }
         public static Довідники.СтруктураПідприємства_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Довідники.СтруктураПідприємства_Select СтруктураПідприємства_Select = new Довідники.СтруктураПідприємства_Select();
             СтруктураПідприємства_Select.QuerySelect.Field.AddRange(
@@ -2415,6 +2512,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -2468,13 +2568,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static Довідники.КраїниСвіту_Pointer? DirectoryPointerItem { get; set; }
         public static Довідники.КраїниСвіту_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Довідники.КраїниСвіту_Select КраїниСвіту_Select = new Довідники.КраїниСвіту_Select();
             КраїниСвіту_Select.QuerySelect.Field.AddRange(
@@ -2511,6 +2612,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -2573,13 +2677,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static Довідники.Файли_Pointer? DirectoryPointerItem { get; set; }
         public static Довідники.Файли_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Довідники.Файли_Select Файли_Select = new Довідники.Файли_Select();
             Файли_Select.QuerySelect.Field.AddRange(
@@ -2622,6 +2727,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -2667,13 +2775,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static Довідники.Файли_Pointer? DirectoryPointerItem { get; set; }
         public static Довідники.Файли_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Довідники.Файли_Select Файли_Select = new Довідники.Файли_Select();
             Файли_Select.QuerySelect.Field.AddRange(
@@ -2708,6 +2817,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -2764,13 +2876,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static Довідники.ХарактеристикиНоменклатури_Pointer? DirectoryPointerItem { get; set; }
         public static Довідники.ХарактеристикиНоменклатури_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Довідники.ХарактеристикиНоменклатури_Select ХарактеристикиНоменклатури_Select = new Довідники.ХарактеристикиНоменклатури_Select();
             ХарактеристикиНоменклатури_Select.QuerySelect.Field.AddRange(
@@ -2816,6 +2929,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -2867,13 +2983,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static Довідники.ХарактеристикиНоменклатури_Pointer? DirectoryPointerItem { get; set; }
         public static Довідники.ХарактеристикиНоменклатури_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Довідники.ХарактеристикиНоменклатури_Select ХарактеристикиНоменклатури_Select = new Довідники.ХарактеристикиНоменклатури_Select();
             ХарактеристикиНоменклатури_Select.QuerySelect.Field.AddRange(
@@ -2919,6 +3036,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -2990,13 +3110,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static Довідники.Каси_Pointer? DirectoryPointerItem { get; set; }
         public static Довідники.Каси_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Довідники.Каси_Select Каси_Select = new Довідники.Каси_Select();
             Каси_Select.QuerySelect.Field.AddRange(
@@ -3042,6 +3163,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -3093,13 +3217,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static Довідники.Каси_Pointer? DirectoryPointerItem { get; set; }
         public static Довідники.Каси_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Довідники.Каси_Select Каси_Select = new Довідники.Каси_Select();
             Каси_Select.QuerySelect.Field.AddRange(
@@ -3145,6 +3270,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -3201,13 +3329,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static Довідники.БанківськіРахункиОрганізацій_Pointer? DirectoryPointerItem { get; set; }
         public static Довідники.БанківськіРахункиОрганізацій_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Довідники.БанківськіРахункиОрганізацій_Select БанківськіРахункиОрганізацій_Select = new Довідники.БанківськіРахункиОрганізацій_Select();
             БанківськіРахункиОрганізацій_Select.QuerySelect.Field.AddRange(
@@ -3253,6 +3382,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -3304,13 +3436,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static Довідники.БанківськіРахункиОрганізацій_Pointer? DirectoryPointerItem { get; set; }
         public static Довідники.БанківськіРахункиОрганізацій_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Довідники.БанківськіРахункиОрганізацій_Select БанківськіРахункиОрганізацій_Select = new Довідники.БанківськіРахункиОрганізацій_Select();
             БанківськіРахункиОрганізацій_Select.QuerySelect.Field.AddRange(
@@ -3356,6 +3489,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -3415,13 +3551,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static Довідники.ДоговориКонтрагентів_Pointer? DirectoryPointerItem { get; set; }
         public static Довідники.ДоговориКонтрагентів_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Довідники.ДоговориКонтрагентів_Select ДоговориКонтрагентів_Select = new Довідники.ДоговориКонтрагентів_Select();
             ДоговориКонтрагентів_Select.QuerySelect.Field.AddRange(
@@ -3469,6 +3606,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -3520,13 +3660,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static Довідники.ДоговориКонтрагентів_Pointer? DirectoryPointerItem { get; set; }
         public static Довідники.ДоговориКонтрагентів_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Довідники.ДоговориКонтрагентів_Select ДоговориКонтрагентів_Select = new Довідники.ДоговориКонтрагентів_Select();
             ДоговориКонтрагентів_Select.QuerySelect.Field.AddRange(
@@ -3572,6 +3713,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -3628,13 +3772,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static Довідники.БанківськіРахункиКонтрагентів_Pointer? DirectoryPointerItem { get; set; }
         public static Довідники.БанківськіРахункиКонтрагентів_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Довідники.БанківськіРахункиКонтрагентів_Select БанківськіРахункиКонтрагентів_Select = new Довідники.БанківськіРахункиКонтрагентів_Select();
             БанківськіРахункиКонтрагентів_Select.QuerySelect.Field.AddRange(
@@ -3680,6 +3825,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -3731,13 +3879,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static Довідники.БанківськіРахункиКонтрагентів_Pointer? DirectoryPointerItem { get; set; }
         public static Довідники.БанківськіРахункиКонтрагентів_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Довідники.БанківськіРахункиКонтрагентів_Select БанківськіРахункиКонтрагентів_Select = new Довідники.БанківськіРахункиКонтрагентів_Select();
             БанківськіРахункиКонтрагентів_Select.QuerySelect.Field.AddRange(
@@ -3783,6 +3932,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -3842,13 +3994,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static Довідники.СтаттяРухуКоштів_Pointer? DirectoryPointerItem { get; set; }
         public static Довідники.СтаттяРухуКоштів_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Довідники.СтаттяРухуКоштів_Select СтаттяРухуКоштів_Select = new Довідники.СтаттяРухуКоштів_Select();
             СтаттяРухуКоштів_Select.QuerySelect.Field.AddRange(
@@ -3889,6 +4042,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -3934,13 +4090,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static Довідники.СтаттяРухуКоштів_Pointer? DirectoryPointerItem { get; set; }
         public static Довідники.СтаттяРухуКоштів_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Довідники.СтаттяРухуКоштів_Select СтаттяРухуКоштів_Select = new Довідники.СтаттяРухуКоштів_Select();
             СтаттяРухуКоштів_Select.QuerySelect.Field.AddRange(
@@ -3975,6 +4132,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -4025,13 +4185,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static Довідники.СеріїНоменклатури_Pointer? DirectoryPointerItem { get; set; }
         public static Довідники.СеріїНоменклатури_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Довідники.СеріїНоменклатури_Select СеріїНоменклатури_Select = new Довідники.СеріїНоменклатури_Select();
             СеріїНоменклатури_Select.QuerySelect.Field.AddRange(
@@ -4066,6 +4227,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -4111,13 +4275,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static Довідники.СеріїНоменклатури_Pointer? DirectoryPointerItem { get; set; }
         public static Довідники.СеріїНоменклатури_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Довідники.СеріїНоменклатури_Select СеріїНоменклатури_Select = new Довідники.СеріїНоменклатури_Select();
             СеріїНоменклатури_Select.QuerySelect.Field.AddRange(
@@ -4152,6 +4317,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -4214,13 +4382,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static Довідники.ПартіяТоварівКомпозит_Pointer? DirectoryPointerItem { get; set; }
         public static Довідники.ПартіяТоварівКомпозит_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Довідники.ПартіяТоварівКомпозит_Select ПартіяТоварівКомпозит_Select = new Довідники.ПартіяТоварівКомпозит_Select();
             ПартіяТоварівКомпозит_Select.QuerySelect.Field.AddRange(
@@ -4278,6 +4447,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
 
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
+
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
@@ -4327,13 +4499,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static Довідники.ВидиЗапасів_Pointer? DirectoryPointerItem { get; set; }
         public static Довідники.ВидиЗапасів_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Довідники.ВидиЗапасів_Select ВидиЗапасів_Select = new Довідники.ВидиЗапасів_Select();
             ВидиЗапасів_Select.QuerySelect.Field.AddRange(
@@ -4368,6 +4541,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -4418,13 +4594,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static Довідники.ПродажіДокументКомпозит_Pointer? DirectoryPointerItem { get; set; }
         public static Довідники.ПродажіДокументКомпозит_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Довідники.ПродажіДокументКомпозит_Select ПродажіДокументКомпозит_Select = new Довідники.ПродажіДокументКомпозит_Select();
             ПродажіДокументКомпозит_Select.QuerySelect.Field.AddRange(
@@ -4459,6 +4636,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -4509,13 +4689,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static Довідники.АналітикаНоменклатуриКомпозит_Pointer? DirectoryPointerItem { get; set; }
         public static Довідники.АналітикаНоменклатуриКомпозит_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Довідники.АналітикаНоменклатуриКомпозит_Select АналітикаНоменклатуриКомпозит_Select = new Довідники.АналітикаНоменклатуриКомпозит_Select();
             АналітикаНоменклатуриКомпозит_Select.QuerySelect.Field.AddRange(
@@ -4550,6 +4731,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -4600,13 +4784,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static Довідники.АналітикаКонтрагентівКомпозит_Pointer? DirectoryPointerItem { get; set; }
         public static Довідники.АналітикаКонтрагентівКомпозит_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Довідники.АналітикаКонтрагентівКомпозит_Select АналітикаКонтрагентівКомпозит_Select = new Довідники.АналітикаКонтрагентівКомпозит_Select();
             АналітикаКонтрагентівКомпозит_Select.QuerySelect.Field.AddRange(
@@ -4641,6 +4826,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -4691,13 +4879,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static Довідники.АналітикаПартійКомпозит_Pointer? DirectoryPointerItem { get; set; }
         public static Довідники.АналітикаПартійКомпозит_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Довідники.АналітикаПартійКомпозит_Select АналітикаПартійКомпозит_Select = new Довідники.АналітикаПартійКомпозит_Select();
             АналітикаПартійКомпозит_Select.QuerySelect.Field.AddRange(
@@ -4732,6 +4921,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -4788,13 +4980,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static Довідники.СкладськіПриміщення_Pointer? DirectoryPointerItem { get; set; }
         public static Довідники.СкладськіПриміщення_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Довідники.СкладськіПриміщення_Select СкладськіПриміщення_Select = new Довідники.СкладськіПриміщення_Select();
             СкладськіПриміщення_Select.QuerySelect.Field.AddRange(
@@ -4840,6 +5033,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -4888,13 +5084,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static Довідники.СкладськіПриміщення_Pointer? DirectoryPointerItem { get; set; }
         public static Довідники.СкладськіПриміщення_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Довідники.СкладськіПриміщення_Select СкладськіПриміщення_Select = new Довідники.СкладськіПриміщення_Select();
             СкладськіПриміщення_Select.QuerySelect.Field.AddRange(
@@ -4938,6 +5135,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -5012,13 +5212,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static Довідники.СкладськіКомірки_Pointer? DirectoryPointerItem { get; set; }
         public static Довідники.СкладськіКомірки_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Довідники.СкладськіКомірки_Select СкладськіКомірки_Select = new Довідники.СкладськіКомірки_Select();
             СкладськіКомірки_Select.QuerySelect.Field.AddRange(
@@ -5091,6 +5292,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
 
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
+
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
@@ -5138,13 +5342,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static Довідники.СкладськіКомірки_Pointer? DirectoryPointerItem { get; set; }
         public static Довідники.СкладськіКомірки_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Довідники.СкладськіКомірки_Select СкладськіКомірки_Select = new Довідники.СкладськіКомірки_Select();
             СкладськіКомірки_Select.QuerySelect.Field.AddRange(
@@ -5188,6 +5393,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -5241,13 +5449,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static Довідники.ОбластьЗберігання_Pointer? DirectoryPointerItem { get; set; }
         public static Довідники.ОбластьЗберігання_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Довідники.ОбластьЗберігання_Select ОбластьЗберігання_Select = new Довідники.ОбластьЗберігання_Select();
             ОбластьЗберігання_Select.QuerySelect.Field.AddRange(
@@ -5291,6 +5500,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -5356,13 +5568,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static Довідники.ТипорозміриКомірок_Pointer? DirectoryPointerItem { get; set; }
         public static Довідники.ТипорозміриКомірок_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Довідники.ТипорозміриКомірок_Select ТипорозміриКомірок_Select = new Довідники.ТипорозміриКомірок_Select();
             ТипорозміриКомірок_Select.QuerySelect.Field.AddRange(
@@ -5408,6 +5621,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
 
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
+
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
@@ -5452,13 +5668,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static Довідники.ТипорозміриКомірок_Pointer? DirectoryPointerItem { get; set; }
         public static Довідники.ТипорозміриКомірок_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Довідники.ТипорозміриКомірок_Select ТипорозміриКомірок_Select = new Довідники.ТипорозміриКомірок_Select();
             ТипорозміриКомірок_Select.QuerySelect.Field.AddRange(
@@ -5493,6 +5710,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -5660,7 +5880,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Документи.ЗамовленняПостачальнику_Select ЗамовленняПостачальнику_Select = new Документи.ЗамовленняПостачальнику_Select();
             ЗамовленняПостачальнику_Select.QuerySelect.Field.AddRange(
@@ -5847,7 +6067,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Документи.ПоступленняТоварівТаПослуг_Select ПоступленняТоварівТаПослуг_Select = new Документи.ПоступленняТоварівТаПослуг_Select();
             ПоступленняТоварівТаПослуг_Select.QuerySelect.Field.AddRange(
@@ -6043,7 +6263,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Документи.ЗамовленняКлієнта_Select ЗамовленняКлієнта_Select = new Документи.ЗамовленняКлієнта_Select();
             ЗамовленняКлієнта_Select.QuerySelect.Field.AddRange(
@@ -6239,7 +6459,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Документи.РеалізаціяТоварівТаПослуг_Select РеалізаціяТоварівТаПослуг_Select = new Документи.РеалізаціяТоварівТаПослуг_Select();
             РеалізаціяТоварівТаПослуг_Select.QuerySelect.Field.AddRange(
@@ -6426,7 +6646,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Документи.ВстановленняЦінНоменклатури_Select ВстановленняЦінНоменклатури_Select = new Документи.ВстановленняЦінНоменклатури_Select();
             ВстановленняЦінНоменклатури_Select.QuerySelect.Field.AddRange(
@@ -6602,7 +6822,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Документи.ПрихіднийКасовийОрдер_Select ПрихіднийКасовийОрдер_Select = new Документи.ПрихіднийКасовийОрдер_Select();
             ПрихіднийКасовийОрдер_Select.QuerySelect.Field.AddRange(
@@ -6791,7 +7011,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Документи.РозхіднийКасовийОрдер_Select РозхіднийКасовийОрдер_Select = new Документи.РозхіднийКасовийОрдер_Select();
             РозхіднийКасовийОрдер_Select.QuerySelect.Field.AddRange(
@@ -6971,7 +7191,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Документи.ПереміщенняТоварів_Select ПереміщенняТоварів_Select = new Документи.ПереміщенняТоварів_Select();
             ПереміщенняТоварів_Select.QuerySelect.Field.AddRange(
@@ -7147,7 +7367,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Документи.ПоверненняТоварівПостачальнику_Select ПоверненняТоварівПостачальнику_Select = new Документи.ПоверненняТоварівПостачальнику_Select();
             ПоверненняТоварівПостачальнику_Select.QuerySelect.Field.AddRange(
@@ -7343,7 +7563,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Документи.ПоверненняТоварівВідКлієнта_Select ПоверненняТоварівВідКлієнта_Select = new Документи.ПоверненняТоварівВідКлієнта_Select();
             ПоверненняТоварівВідКлієнта_Select.QuerySelect.Field.AddRange(
@@ -7536,7 +7756,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Документи.АктВиконанихРобіт_Select АктВиконанихРобіт_Select = new Документи.АктВиконанихРобіт_Select();
             АктВиконанихРобіт_Select.QuerySelect.Field.AddRange(
@@ -7717,7 +7937,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Документи.ВведенняЗалишків_Select ВведенняЗалишків_Select = new Документи.ВведенняЗалишків_Select();
             ВведенняЗалишків_Select.QuerySelect.Field.AddRange(
@@ -7890,7 +8110,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Документи.НадлишкиТоварів_Select НадлишкиТоварів_Select = new Документи.НадлишкиТоварів_Select();
             НадлишкиТоварів_Select.QuerySelect.Field.AddRange(
@@ -8045,7 +8265,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Документи.ПересортицяТоварів_Select ПересортицяТоварів_Select = new Документи.ПересортицяТоварів_Select();
             ПересортицяТоварів_Select.QuerySelect.Field.AddRange(
@@ -8197,7 +8417,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Документи.ПерерахунокТоварів_Select ПерерахунокТоварів_Select = new Документи.ПерерахунокТоварів_Select();
             ПерерахунокТоварів_Select.QuerySelect.Field.AddRange(
@@ -8346,7 +8566,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Документи.ПсуванняТоварів_Select ПсуванняТоварів_Select = new Документи.ПсуванняТоварів_Select();
             ПсуванняТоварів_Select.QuerySelect.Field.AddRange(
@@ -8509,7 +8729,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Документи.ВнутрішнєСпоживанняТоварів_Select ВнутрішнєСпоживанняТоварів_Select = new Документи.ВнутрішнєСпоживанняТоварів_Select();
             ВнутрішнєСпоживанняТоварів_Select.QuerySelect.Field.AddRange(
@@ -8687,7 +8907,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Документи.РахунокФактура_Select РахунокФактура_Select = new Документи.РахунокФактура_Select();
             РахунокФактура_Select.QuerySelect.Field.AddRange(
@@ -8871,7 +9091,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Документи.РозміщенняТоварівНаСкладі_Select РозміщенняТоварівНаСкладі_Select = new Документи.РозміщенняТоварівНаСкладі_Select();
             РозміщенняТоварівНаСкладі_Select.QuerySelect.Field.AddRange(
@@ -9026,7 +9246,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Документи.ПереміщенняТоварівНаСкладі_Select ПереміщенняТоварівНаСкладі_Select = new Документи.ПереміщенняТоварівНаСкладі_Select();
             ПереміщенняТоварівНаСкладі_Select.QuerySelect.Field.AddRange(
@@ -9181,7 +9401,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Документи.ЗбіркаТоварівНаСкладі_Select ЗбіркаТоварівНаСкладі_Select = new Документи.ЗбіркаТоварівНаСкладі_Select();
             ЗбіркаТоварівНаСкладі_Select.QuerySelect.Field.AddRange(
@@ -9336,7 +9556,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Документи.РозміщенняНоменклатуриПоКоміркам_Select РозміщенняНоменклатуриПоКоміркам_Select = new Документи.РозміщенняНоменклатуриПоКоміркам_Select();
             РозміщенняНоменклатуриПоКоміркам_Select.QuerySelect.Field.AddRange(
@@ -12984,12 +13204,14 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
+            FirstPath = null;
 
             РегістриВідомостей.ЦіниНоменклатури_RecordsSet ЦіниНоменклатури_RecordsSet = new РегістриВідомостей.ЦіниНоменклатури_RecordsSet();
 
@@ -13060,6 +13282,9 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
 
                 TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                 CurrentPath = Store.GetPath(CurrentIter);
+
+                if (FirstPath == null)
+                    FirstPath = CurrentPath;
             }
         }
     }
@@ -13107,12 +13332,14 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
+            FirstPath = null;
 
             РегістриВідомостей.КурсиВалют_RecordsSet КурсиВалют_RecordsSet = new РегістриВідомостей.КурсиВалют_RecordsSet();
 
@@ -13148,6 +13375,9 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
 
                 TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                 CurrentPath = Store.GetPath(CurrentIter);
+
+                if (FirstPath == null)
+                    FirstPath = CurrentPath;
             }
         }
     }
@@ -13198,12 +13428,14 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
+            FirstPath = null;
 
             РегістриВідомостей.ШтрихкодиНоменклатури_RecordsSet ШтрихкодиНоменклатури_RecordsSet = new РегістриВідомостей.ШтрихкодиНоменклатури_RecordsSet();
 
@@ -13256,6 +13488,9 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
 
                 TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                 CurrentPath = Store.GetPath(CurrentIter);
+
+                if (FirstPath == null)
+                    FirstPath = CurrentPath;
             }
         }
     }
