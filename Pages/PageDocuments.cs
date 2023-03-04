@@ -40,19 +40,19 @@ namespace StorageAndTrade
 
             VBox vLeft = new VBox(false, 0);
 
-            AddCaption(vLeft, "Продажі");
+            AddCaption(vLeft, "Продажі", PageJournals.Продажі);
             AddLink(vLeft, "Замовлення клієнта", ЗамовленняКлієнта);
             AddLink(vLeft, "Рахунок фактура", РахунокФактура);
             AddLink(vLeft, "Реалізація товарів та послуг", РеалізаціяТоварівТаПослуг);
             AddLink(vLeft, "Акт виконаних робіт", АктВиконанихРобіт);
             AddLink(vLeft, "Повернення товарів від клієнта", ПоверненняТоварівВідКлієнта);
 
-            AddCaption(vLeft, "Закупки");
+            AddCaption(vLeft, "Закупівлі", PageJournals.Закупівлі);
             AddLink(vLeft, "Замовлення постачальнику", ЗамовленняПостачальнику);
             AddLink(vLeft, "Поступлення товарів та послуг", ПоступленняТоварівТаПослуг);
             AddLink(vLeft, "Повернення товарів постачальнику", ПоверненняТоварівПостачальнику);
 
-            AddCaption(vLeft, "Ціни");
+            AddCaption(vLeft, "Ціноутворення");
             AddLink(vLeft, "Встановлення цін номенклатури", ВстановленняЦінНоменклатури);
 
             hBoxList.PackStart(vLeft, false, false, 5);
@@ -61,16 +61,16 @@ namespace StorageAndTrade
 
             VBox vRight = new VBox(false, 0);
 
-            AddCaption(vRight, "Каса");
+            AddCaption(vRight, "Каса", PageJournals.Каса);
             AddLink(vRight, "Прихідний касовий ордер", ПрихіднийКасовийОрдер);
             AddLink(vRight, "Розхідний касовий ордер", РозхіднийКасовийОрдер);
 
-            AddCaption(vRight, "Склад");
+            AddCaption(vRight, "Склад", PageJournals.Склад);
             AddLink(vRight, "Переміщення товарів між складами", ПереміщенняТоварів);
             AddLink(vRight, "Введення залишків", ВведенняЗалишків);
             AddLink(vRight, "Внутрішнє споживання товарів", ВнутрішнєСпоживанняТоварів);
 
-            AddCaption(vRight, "Адресне зберігання");
+            AddCaption(vRight, "Адресне зберігання", PageJournals.АдреснеЗберігання);
             AddLink(vRight, "Розміщення товарів на складі", РозміщенняТоварівНаСкладі);
             AddLink(vRight, "Збірка товарів на складі", ЗбіркаТоварівНаСкладі);
             AddLink(vRight, "Переміщення товарів між комірками", ПереміщенняТоварівНаСкладі);
@@ -212,10 +212,20 @@ namespace StorageAndTrade
         }
 
 
-        void AddCaption(VBox vBox, string name)
+        void AddCaption(VBox vBox, string name, EventHandler? clickAction = null)
         {
-            Label caption = new Label(name);
-            vBox.PackStart(caption, false, false, 10);
+            if (clickAction != null)
+            {
+                LinkButton lb = new LinkButton(name, " " + name);
+                vBox.PackStart(lb, false, false, 10);
+
+                lb.Clicked += clickAction;
+            }
+            else
+            {
+                Label caption = new Label(name);
+                vBox.PackStart(caption, false, false, 10);
+            }
         }
 
         void AddSeparator(HBox hbox)

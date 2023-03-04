@@ -41,12 +41,12 @@ namespace StorageAndTrade
             VBox vLeft = new VBox(false, 0);
             hBoxList.PackStart(vLeft, false, false, 5);
 
-            AddLink(vLeft, "Повний", Повний);
+            AddLink(vLeft, "Повний (всі документи)", Повний);
             AddLink(vLeft, "Продажі", Продажі);
             AddLink(vLeft, "Закупівлі", Закупівлі);
-            AddLink(vLeft, "Склади", Склад);
             AddLink(vLeft, "Каса", Каса);
-            AddLink(vLeft, "Адресне зберігання", АдреснеЗберігання);
+            AddLink(vLeft, "Склад", Склад);
+            AddLink(vLeft, "Адресне зберігання на складах", АдреснеЗберігання);
 
             PackStart(hBoxList, false, false, 10);
 
@@ -60,35 +60,35 @@ namespace StorageAndTrade
             page.SetValue();
         }
 
-        void Продажі(object? sender, EventArgs args)
+        public static void Продажі(object? sender, EventArgs args)
         {
             Журнал_Продажі page = new Журнал_Продажі();
             Program.GeneralForm?.CreateNotebookPage("Продажі", () => { return page; });
             page.SetValue();
         }
 
-        void Закупівлі(object? sender, EventArgs args)
+        public static void Закупівлі(object? sender, EventArgs args)
         {
             Журнал_Закупівлі page = new Журнал_Закупівлі();
             Program.GeneralForm?.CreateNotebookPage("Закупівлі", () => { return page; });
             page.SetValue();
         }
 
-        void Склад(object? sender, EventArgs args)
+        public static void Склад(object? sender, EventArgs args)
         {
             Журнал_Склад page = new Журнал_Склад();
             Program.GeneralForm?.CreateNotebookPage("Склад", () => { return page; });
             page.SetValue();
         }
 
-        void Каса(object? sender, EventArgs args)
+        public static void Каса(object? sender, EventArgs args)
         {
             Журнал_Каса page = new Журнал_Каса();
             Program.GeneralForm?.CreateNotebookPage("Каса", () => { return page; });
             page.SetValue();
         }
 
-        void АдреснеЗберігання(object? sender, EventArgs args)
+        public static void АдреснеЗберігання(object? sender, EventArgs args)
         {
             Журнал_АдреснеЗберігання page = new Журнал_АдреснеЗберігання();
             Program.GeneralForm?.CreateNotebookPage("Адресне зберігання", () => { return page; });

@@ -83,29 +83,28 @@ namespace StorageAndTrade
             Toolbar toolbar = new Toolbar();
             PackStart(toolbar, false, false, 0);
 
-            ToolButton upButton = new ToolButton(Stock.Edit) { TooltipText = "Редагувати" };
+            ToolButton upButton = new ToolButton(Stock.GoUp) { TooltipText = "Знайти в журналі відповідго типу документу" };
             upButton.Clicked += OnEditClick;
             toolbar.Add(upButton);
-
-            ToolButton copyButton = new ToolButton(Stock.Copy) { TooltipText = "Копіювати" };
-            copyButton.Clicked += OnCopyClick;
-            toolbar.Add(copyButton);
-
-            ToolButton deleteButton = new ToolButton(Stock.Delete) { TooltipText = "Видалити" };
-            deleteButton.Clicked += OnDeleteClick;
-            toolbar.Add(deleteButton);
 
             ToolButton refreshButton = new ToolButton(Stock.Refresh) { TooltipText = "Обновити" };
             refreshButton.Clicked += OnRefreshClick;
             toolbar.Add(refreshButton);
+
+            //Separator
+            ToolItem toolItemSeparator = new ToolItem();
+            toolItemSeparator.Add(new Separator(Orientation.Horizontal));
+            toolbar.Add(toolItemSeparator);
+
+            ToolButton typeButton = new ToolButton(Stock.Find) { Label = "Документи", IsImportant = true };
+            typeButton.Clicked += OnTypeDocsClick;
+            toolbar.Add(typeButton);
         }
 
         public void SetValue()
         {
             if ((int)Константи.ЖурналиДокументів.ОсновнийТипПеріоду_Const != 0)
                 ComboBoxPeriodWhere.ActiveId = Константи.ЖурналиДокументів.ОсновнийТипПеріоду_Const.ToString();
-            else
-                ComboBoxPeriodWhere.Active = 0;
         }
 
         public void LoadRecords()
@@ -135,14 +134,22 @@ namespace StorageAndTrade
 
         void OnButtonPressEvent(object? sender, ButtonPressEventArgs args)
         {
-            if (args.Event.Type == Gdk.EventType.DoubleButtonPress && TreeViewGrid.Selection.CountSelectedRows() != 0)
+            if (args.Event.Type == Gdk.EventType.DoubleButtonPress)
+                OpenDocTypeJournal();
+        }
+
+        void OpenDocTypeJournal()
+        {
+            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
             {
                 TreeIter iter;
-
                 if (TreeViewGrid.Model.GetIter(out iter, TreeViewGrid.Selection.GetSelectedRows()[0]))
                 {
                     string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
+                    string typeDoc = (string)TreeViewGrid.Model.GetValue(iter, 2);
 
+                    ФункціїДляЖурналів.ВідкритиЖурналВідповідноДоВидуДокументу(typeDoc, new UnigueID(uid),
+                        Enum.Parse<Перелічення.ТипПеріодуДляЖурналівДокументів>(ComboBoxPeriodWhere.ActiveId));
                 }
             }
         }
@@ -153,141 +160,14 @@ namespace StorageAndTrade
 
         void OnComboBoxPeriodWhereChanged(object? sender, EventArgs args)
         {
-            ТабличніСписки.Журнали_Повний.ДодатиВідбірПоПеріоду(Enum.Parse<Перелічення.ТипПеріодуДляЖурналівДокументів>(ComboBoxPeriodWhere.ActiveId));
+            ТабличніСписки.Журнали_Повний.ДодатиВідбірПоПеріоду(
+                Enum.Parse<Перелічення.ТипПеріодуДляЖурналівДокументів>(ComboBoxPeriodWhere.ActiveId));
             LoadRecords();
         }
 
         void OnEditClick(object? sender, EventArgs args)
         {
-            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
-            {
-                TreeIter iter;
-                if (TreeViewGrid.Model.GetIter(out iter, TreeViewGrid.Selection.GetSelectedRows()[0]))
-                {
-                    string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
-                    string type = (string)TreeViewGrid.Model.GetValue(iter, 2);
-
-                    UnigueID unigueID = new UnigueID(uid);
-
-                    
-                    switch (type)
-                    {
-                        case "ЗамовленняКлієнта":
-                            {
-                                ЗамовленняКлієнта page = new ЗамовленняКлієнта() { SelectPointerItem = new ЗамовленняКлієнта_Pointer(unigueID) };
-                                Program.GeneralForm?.CreateNotebookPage("Замовлення клієнтів", () => { return page; }, true);
-                                page.LoadRecords();
-                                break;
-                            }
-                        case "РахунокФактура":
-                            {
-                                РахунокФактура page = new РахунокФактура() { SelectPointerItem = new РахунокФактура_Pointer(unigueID) };
-                                Program.GeneralForm?.CreateNotebookPage("Рахунок фактура", () => { return page; }, true);
-                                page.LoadRecords();
-                                break;
-                            }
-                        case "АктВиконанихРобіт":
-                            {
-                                АктВиконанихРобіт page = new АктВиконанихРобіт() { SelectPointerItem = new АктВиконанихРобіт_Pointer(unigueID) };
-                                Program.GeneralForm?.CreateNotebookPage("Акт виконаних робіт", () => { return page; }, true);
-                                page.LoadRecords();
-                                break;
-                            }
-                        case "ЗамовленняПостачальнику":
-                            {
-                                ЗамовленняПостачальнику page = new ЗамовленняПостачальнику() { SelectPointerItem = new ЗамовленняПостачальнику_Pointer(unigueID) };
-                                Program.GeneralForm?.CreateNotebookPage("Замовлення постачальнику", () => { return page; }, true);
-                                page.LoadRecords();
-                                break;
-                            }
-                        case "РеалізаціяТоварівТаПослуг":
-                            {
-                                РеалізаціяТоварівТаПослуг page = new РеалізаціяТоварівТаПослуг() { SelectPointerItem = new РеалізаціяТоварівТаПослуг_Pointer(unigueID) };
-                                Program.GeneralForm?.CreateNotebookPage("Реалізація товарів та послуг", () => { return page; }, true);
-                                page.LoadRecords();
-                                break;
-                            }
-                        case "ПоступленняТоварівТаПослуг":
-                            {
-                                ПоступленняТоварівТаПослуг page = new ПоступленняТоварівТаПослуг() { SelectPointerItem = new ПоступленняТоварівТаПослуг_Pointer(unigueID) };
-                                Program.GeneralForm?.CreateNotebookPage("Поступлення товарів та послуг", () => { return page; }, true);
-                                page.LoadRecords();
-                                break;
-                            }
-                        case "РозхіднийКасовийОрдер":
-                            {
-                                РозхіднийКасовийОрдер page = new РозхіднийКасовийОрдер() { SelectPointerItem = new РозхіднийКасовийОрдер_Pointer(unigueID) };
-                                Program.GeneralForm?.CreateNotebookPage("Розхідний касовий ордер", () => { return page; }, true);
-                                page.LoadRecords();
-                                break;
-                            }
-                        case "ПрихіднийКасовийОрдер":
-                            {
-                                ПрихіднийКасовийОрдер page = new ПрихіднийКасовийОрдер() { SelectPointerItem = new ПрихіднийКасовийОрдер_Pointer(unigueID) };
-                                Program.GeneralForm?.CreateNotebookPage("Прихідний касовий ордер", () => { return page; }, true);
-                                page.LoadRecords();
-                                break;
-                            }
-                        case "ПереміщенняТоварів":
-                            {
-                                ПереміщенняТоварів page = new ПереміщенняТоварів() { SelectPointerItem = new ПереміщенняТоварів_Pointer(unigueID) };
-                                Program.GeneralForm?.CreateNotebookPage("Переміщення товарів", () => { return page; }, true);
-                                page.LoadRecords();
-                                break;
-                            }
-                        case "ПоверненняТоварівВідКлієнта":
-                            {
-                                ПоверненняТоварівВідКлієнта page = new ПоверненняТоварівВідКлієнта() { SelectPointerItem = new ПоверненняТоварівВідКлієнта_Pointer(unigueID) };
-                                Program.GeneralForm?.CreateNotebookPage("Повернення товарів від клієнта", () => { return page; }, true);
-                                page.LoadRecords();
-                                break;
-                            }
-                        case "ПоверненняТоварівПостачальнику":
-                            {
-                                ПоверненняТоварівПостачальнику page = new ПоверненняТоварівПостачальнику() { SelectPointerItem = new ПоверненняТоварівПостачальнику_Pointer(unigueID) };
-                                Program.GeneralForm?.CreateNotebookPage("Повернення товарів постачальнику", () => { return page; }, true);
-                                page.LoadRecords();
-                                break;
-                            }
-                        case "ВнутрішнєСпоживанняТоварів":
-                            {
-                                ВнутрішнєСпоживанняТоварів page = new ВнутрішнєСпоживанняТоварів() { SelectPointerItem = new ВнутрішнєСпоживанняТоварів_Pointer(unigueID) };
-                                Program.GeneralForm?.CreateNotebookPage("Внутрішнє споживання товарів", () => { return page; }, true);
-                                page.LoadRecords();
-                                break;
-                            }
-                        case "ВведенняЗалишків":
-                            {
-                                ВведенняЗалишків page = new ВведенняЗалишків() { SelectPointerItem = new ВведенняЗалишків_Pointer(unigueID) };
-                                Program.GeneralForm?.CreateNotebookPage("Введення залишків", () => { return page; }, true);
-                                page.LoadRecords();
-                                break;
-                            }
-                        case "РозміщенняТоварівНаСкладі":
-                            {
-                                РозміщенняТоварівНаСкладі page = new РозміщенняТоварівНаСкладі() { SelectPointerItem = new РозміщенняТоварівНаСкладі_Pointer(unigueID) };
-                                Program.GeneralForm?.CreateNotebookPage("Розміщення товарів на складі", () => { return page; }, true);
-                                page.LoadRecords();
-                                break;
-                            }
-                        case "ЗбіркаТоварівНаСкладі":
-                            {
-                                ЗбіркаТоварівНаСкладі page = new ЗбіркаТоварівНаСкладі() { SelectPointerItem = new ЗбіркаТоварівНаСкладі_Pointer(unigueID) };
-                                Program.GeneralForm?.CreateNotebookPage("Збірка товарів на складі", () => { return page; }, true);
-                                page.LoadRecords();
-                                break;
-                            }
-                        case "ПереміщенняТоварівНаСкладі":
-                            {
-                                ПереміщенняТоварівНаСкладі page = new ПереміщенняТоварівНаСкладі() { SelectPointerItem = new ПереміщенняТоварівНаСкладі_Pointer(unigueID) };
-                                Program.GeneralForm?.CreateNotebookPage("Переміщення товарів на складі", () => { return page; }, true);
-                                page.LoadRecords();
-                                break;
-                            }
-                    }
-
-                }
-            }
+            OpenDocTypeJournal();
         }
 
         void OnRefreshClick(object? sender, EventArgs args)
@@ -295,49 +175,10 @@ namespace StorageAndTrade
             LoadRecords();
         }
 
-        void OnDeleteClick(object? sender, EventArgs args)
+        void OnTypeDocsClick(object? sender, EventArgs args)
         {
-            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
-            {
-                if (Message.Request(Program.GeneralForm, "Видалити?") == ResponseType.Yes)
-                {
-                    TreePath[] selectionRows = TreeViewGrid.Selection.GetSelectedRows();
-
-                    foreach (TreePath itemPath in selectionRows)
-                    {
-                        TreeIter iter;
-                        TreeViewGrid.Model.GetIter(out iter, itemPath);
-
-                        string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
-
-                    }
-
-                    LoadRecords();
-                }
-            }
-        }
-
-        void OnCopyClick(object? sender, EventArgs args)
-        {
-            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
-            {
-                if (Message.Request(Program.GeneralForm, "Копіювати?") == ResponseType.Yes)
-                {
-                    TreePath[] selectionRows = TreeViewGrid.Selection.GetSelectedRows();
-
-                    foreach (TreePath itemPath in selectionRows)
-                    {
-                        TreeIter iter;
-                        TreeViewGrid.Model.GetIter(out iter, itemPath);
-
-                        string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
-
-
-                    }
-
-                    LoadRecords();
-                }
-            }
+            ФункціїДляЖурналів.ВідкритиСписокДокументів((ToolButton)sender!, ТабличніСписки.Журнали_Повний.AllowDocument(),
+                Enum.Parse<Перелічення.ТипПеріодуДляЖурналівДокументів>(ComboBoxPeriodWhere.ActiveId));
         }
 
         #endregion

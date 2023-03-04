@@ -37,6 +37,8 @@ namespace StorageAndTrade
         public ПоверненняТоварівВідКлієнта_Pointer? SelectPointerItem { get; set; }
         public ПоверненняТоварівВідКлієнта_Pointer? DocumentPointerItem { get; set; }
         public System.Action<ПоверненняТоварівВідКлієнта_Pointer>? CallBack_OnSelectPointer { get; set; }
+        public Перелічення.ТипПеріодуДляЖурналівДокументів PeriodWhere { get; set; } = 0;
+
         TreeView TreeViewGrid;
         ComboBoxText ComboBoxPeriodWhere = new ComboBoxText();
         SearchControl2 ПошукПовнотекстовий = new SearchControl2();
@@ -210,10 +212,10 @@ namespace StorageAndTrade
 
         public void SetValue()
         {
-            if ((int)Константи.ЖурналиДокументів.ОсновнийТипПеріоду_Const != 0)
+            if (PeriodWhere != 0)
+                ComboBoxPeriodWhere.ActiveId = PeriodWhere.ToString();
+            else if ((int)Константи.ЖурналиДокументів.ОсновнийТипПеріоду_Const != 0)
                 ComboBoxPeriodWhere.ActiveId = Константи.ЖурналиДокументів.ОсновнийТипПеріоду_Const.ToString();
-            else
-                ComboBoxPeriodWhere.Active = 0;
         }
 
         public void LoadRecords()
