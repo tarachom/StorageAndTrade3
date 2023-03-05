@@ -65,7 +65,15 @@ namespace StorageAndTrade
 
                     Program.GeneralForm?.CreateNotebookPage("Вибір - Номенклатура", () => { return page; }, true);
 
-                    page.LoadTree();
+                    try
+                    {
+                        page.LoadTree();
+                    }
+                    catch (Exception ex)
+                    {
+                        Message.Info(null, ex.Message + "\n" + ex.Source);
+                    }
+
                 };
 
                 hBoxTop.PackStart(linkPage, false, false, 0);
@@ -88,7 +96,7 @@ namespace StorageAndTrade
 
             //Очистка
             {
-                LinkButton linkClear= new LinkButton(" Очистити"){ Image = new Image(AppContext.BaseDirectory + "images/clean.png"), AlwaysShowImage = true };
+                LinkButton linkClear = new LinkButton(" Очистити") { Image = new Image(AppContext.BaseDirectory + "images/clean.png"), AlwaysShowImage = true };
                 linkClear.Clicked += (object? sender, EventArgs args) =>
                 {
                     if (CallBack_OnSelectPointer != null)

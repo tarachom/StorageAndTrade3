@@ -35,7 +35,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 {
     public class Номенклатура_Записи
     {
-        string Image = "images/doc.png";
+        string Image = AppContext.BaseDirectory + "images/doc.png";
         string ID = "";
 
         string Код = "";
