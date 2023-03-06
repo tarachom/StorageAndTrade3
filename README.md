@@ -103,14 +103,11 @@
     git clone https://github.com/tarachom/AccountingSoftwareLib.git
     
     dotnet build StorageAndTrade3 --output StorageAndTrade3/bin/Debug/net7.0
-    dotnet build Configurator3 --output Configurator3/bin/Debug/net7.0
     
     mkdir -p bin
     mkdir -p bin/StorageAndTrade3
-    mkdir -p bin/Configurator3
     
     cp -r StorageAndTrade3/bin/Debug/net7.0/* bin/StorageAndTrade3
-    cp -r Configurator3/bin/Debug/net7.0/* bin/Configurator3
 
 <hr />
  
