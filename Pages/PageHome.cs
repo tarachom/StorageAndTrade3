@@ -57,6 +57,11 @@ namespace StorageAndTrade
 
             PackStart(vBox, false, false, 5);
 
+            Label lv = new Label("Text") { Selectable = true };
+            vBox.PackStart(lv, false, false, 0);
+
+            Console.WriteLine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData));
+
             ShowAll();
         }
     }
