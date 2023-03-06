@@ -8,11 +8,7 @@
     <Login>postgres</Login>
     <Password>1</Password>
     <BaseName>storage_and_trade</BaseName>
-    <OtherParam>
-      <Param name="IsGenerateCode">True</Param>
-      <Param name="GenerateCodePath">/home/tarachom/Projects/StorageAndTrade3/Configurator</Param>
-      <Param name="CompileProgramPath">/home/tarachom/Projects/StorageAndTrade3/bin/Debug/net7.0/</Param>
-    </OtherParam>
+    <OtherParam />
   </Configuration>
   <Configuration Select="False">
     <Key>0475b27c-f0ba-4f71-875b-841e85745135</Key>

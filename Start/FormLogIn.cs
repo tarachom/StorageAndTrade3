@@ -23,14 +23,12 @@ limitations under the License.
 
 using Gtk;
 
-using AccountingSoftware;
 using StorageAndTrade_1_0;
 
 namespace StorageAndTrade
 {
     class FormLogIn : Window
     {
-
         public ResponseType ModalResult { get; set; } = ResponseType.None;
 
         ComboBoxText comboBoxAllUsers = new ComboBoxText() { WidthRequest = 200 };

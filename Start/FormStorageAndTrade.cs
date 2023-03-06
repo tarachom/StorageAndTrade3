@@ -32,7 +32,7 @@ namespace StorageAndTrade
 {
     class FormStorageAndTrade : Window
     {
-        public ConfigurationParam? OpenConfigurationParam { get; set; }
+        public Configurator.ConfigurationParam? OpenConfigurationParam { get; set; }
         CancellationTokenSource? CancellationTokenBackgroundTask;
 
         Guid KernelUser { get; set; } = Guid.Empty;

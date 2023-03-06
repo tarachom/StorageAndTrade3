@@ -6,14 +6,13 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v7.0": {
-      "StorageAndTrade3/1.0.0": {
+      "Configurator3/1.0.0": {
         "dependencies": {
           "AccountingSoftware": "1.0.0",
-          "Configurator3": "1.0.0",
           "GtkSharp": "3.24.24.38"
         },
         "runtime": {
-          "StorageAndTrade3.dll": {}
+          "Configurator3.dll": {}
         }
       },
       "AtkSharp/3.24.24.38": {
@@ -124,20 +123,11 @@
         "runtime": {
           "AccountingSoftware.dll": {}
         }
-      },
-      "Configurator3/1.0.0": {
-        "dependencies": {
-          "AccountingSoftware": "1.0.0",
-          "GtkSharp": "3.24.24.38"
-        },
-        "runtime": {
-          "Configurator3.dll": {}
-        }
       }
     }
   },
   "libraries": {
-    "StorageAndTrade3/1.0.0": {
+    "Configurator3/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
@@ -213,11 +203,6 @@
       "hashPath": "system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
     },
     "AccountingSoftware/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Configurator3/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
