@@ -11,7 +11,8 @@
     <OtherParam>
       <Param name="IsGenerateCode">True</Param>
       <Param name="GenerateCodePath">/home/tarachom/Projects/StorageAndTrade3/Configurator</Param>
-      <Param name="CompileProgramPath">/home/tarachom/Projects/StorageAndTrade3/bin/Debug/net7.0/</Param>
+      <Param name="CompileProgramPath">
+      </Param>
     </OtherParam>
   </Configuration>
   <Configuration Select="False">
