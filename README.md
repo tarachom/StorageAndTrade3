@@ -105,9 +105,7 @@
     dotnet build StorageAndTrade3 --output StorageAndTrade3/bin/Debug/net7.0
     
     mkdir -p bin
-    mkdir -p bin/StorageAndTrade3
-    
-    cp -r StorageAndTrade3/bin/Debug/net7.0/* bin/StorageAndTrade3
+    cp -r StorageAndTrade3/bin/Debug/net7.0/* bin
 
 <hr />
  
