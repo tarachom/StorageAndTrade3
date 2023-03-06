@@ -30,10 +30,20 @@ using Конфа = StorageAndTrade_1_0;
 
 namespace StorageAndTrade
 {
+    /// <summary>
+    /// Переоприділення форми вибору бази з Конфігуратора
+    /// </summary>
     class FormConfigurationSelection : Configurator.FormConfigurationSelection
     {
+        /// <summary>
+        /// Тип форми - робоча програма.
+        /// Добавляється кнопка "Відкрити" і стає активною процедура Open()
+        /// </summary>
         public override TypeForm TypeOpenForm { get; } = TypeForm.WorkingProgram;
 
+        /// <summary>
+        /// Переоприділення процедури Open() для кнопки "Відкрити"
+        /// </summary>
         public override void Open()
         {
             ListBoxRow[] selectedRows = listBox.SelectedRows;
