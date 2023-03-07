@@ -202,6 +202,7 @@ limitations under the License.
                 </xsl:choose>
               </xsl:if>
 
+              <!--
               <xsl:if test="$ConfFieldType = 'empty_pointer'">
                 <xsl:choose>
                   <xsl:when test="$InfoSchemaFieldDataType = 'uuid' and $InfoSchemaFieldUdtName = 'uuid'">
@@ -213,6 +214,7 @@ limitations under the License.
                   </xsl:otherwise>
                 </xsl:choose>
               </xsl:if>
+              -->
 
 			  <xsl:if test="$ConfFieldType = 'any_pointer'">
                 <xsl:choose>
@@ -336,9 +338,11 @@ limitations under the License.
           <xsl:when test="Type = 'pointer'">
             <xsl:text>uuid</xsl:text>
           </xsl:when>
+          <!--
           <xsl:when test="Type = 'empty_pointer'">
             <xsl:text>uuid</xsl:text>
           </xsl:when>
+          -->
 		  <xsl:when test="Type = 'any_pointer'">
             <xsl:text>uuid</xsl:text>
           </xsl:when>
@@ -460,7 +464,7 @@ limitations under the License.
         </xsl:when>
         <xsl:otherwise>
 
-          <xsl:if test="$SecondConfFieldType = 'pointer' or $SecondConfFieldType = 'empty_pointer' or $SecondConfFieldType = 'any_pointer' or $SecondConfFieldType = 'enum'">
+          <xsl:if test="$SecondConfFieldType = 'pointer' or $SecondConfFieldType = 'any_pointer' or $SecondConfFieldType = 'enum'">
 
             <xsl:variable name="DocumentConfigurationType" select="$DocumentConfigurationFieldNodes[NameInTable = $SecondConfFieldNameInTable]/Type" />
 
@@ -471,9 +475,7 @@ limitations under the License.
             <!-- Вказівник з копії конфігурації -->
             <xsl:variable name="SecondConfFieldPointer" select="Pointer" />
 
-            <xsl:if test="($SecondConfFieldPointer != $DocumentConfigurationPointer) or 
-              ($SecondConfFieldType = 'empty_pointer' and $DocumentConfigurationType = 'pointer') or
-              ($SecondConfFieldType = 'pointer' and $DocumentConfigurationType = 'empty_pointer')">
+            <xsl:if test="($SecondConfFieldPointer != $DocumentConfigurationPointer)">
 
               <Control_Table>
                 <Type>
@@ -499,7 +501,7 @@ limitations under the License.
                     <Coincide>clear</Coincide>
 
                     <xsl:choose>
-                      <xsl:when test="$SecondConfFieldType = 'pointer' or $SecondConfFieldType = 'empty_pointer'">
+                      <xsl:when test="$SecondConfFieldType = 'pointer'">
                         <DataTypeCreate>uuid</DataTypeCreate>
                       </xsl:when>
                       <xsl:when test="$SecondConfFieldType = 'enum'">

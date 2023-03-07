@@ -61,9 +61,11 @@ limitations under the License.
         <xsl:value-of select="Pointer"/>
         <xsl:text>_Pointer</xsl:text>
       </xsl:when>
+      <!--
       <xsl:when test="Type = 'empty_pointer'">
         <xsl:text>EmptyPointer</xsl:text>
       </xsl:when>
+      -->
 	  <xsl:when test="Type = 'any_pointer'">
         <xsl:text>Guid</xsl:text>
       </xsl:when>
@@ -114,9 +116,11 @@ limitations under the License.
         <xsl:value-of select="Pointer"/>
         <xsl:text>_Pointer()</xsl:text>
       </xsl:when>
+      <!--
       <xsl:when test="Type = 'empty_pointer'">
         <xsl:text>new EmptyPointer()</xsl:text>
       </xsl:when>
+      -->
 	  <xsl:when test="Type = 'any_pointer'">
         <xsl:text>new Guid()</xsl:text>
       </xsl:when>
@@ -165,9 +169,11 @@ limitations under the License.
       <xsl:when test="Type = 'pointer'">
         <xsl:text>null</xsl:text>
       </xsl:when>
+      <!--
       <xsl:when test="Type = 'empty_pointer'">
         <xsl:text>null</xsl:text>
       </xsl:when>
+      -->
 	  <xsl:when test="Type = 'any_pointer'">
         <xsl:text>Guid.Empty</xsl:text>
       </xsl:when>
@@ -235,9 +241,11 @@ limitations under the License.
           <xsl:text>new </xsl:text><xsl:value-of select="Pointer"/>
           <xsl:text>_Pointer(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"])</xsl:text>
         </xsl:when>
+        <!--
         <xsl:when test="Type = 'empty_pointer'">
           <xsl:text>new EmptyPointer()</xsl:text>
         </xsl:when>
+        -->
 		<xsl:when test="Type = 'any_pointer'">
 		  <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
           <xsl:text>Guid.Parse(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"]?.ToString() ?? Guid.Empty.ToString())</xsl:text>
@@ -295,7 +303,7 @@ limitations under the License.
       </xsl:when>
       <xsl:when test="Type = 'integer' or Type = 'numeric' or 
                 Type = 'date' or Type = 'datetime' or Type = 'time' or
-                Type = 'pointer' or Type = 'empty_pointer' or Type = 'any_pointer' or Type = 'composite_pointer'">
+                Type = 'pointer' or Type = 'any_pointer' or Type = 'composite_pointer'">
         <xsl:text>.ToString()</xsl:text>
       </xsl:when>
       <xsl:when test="Type = 'string'">
@@ -479,7 +487,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Константи
                 <xsl:value-of select="Name"/>
                 <xsl:text>_Const</xsl:text>
                 <xsl:choose>
-                  <xsl:when test="Type = 'pointer' or Type = 'empty_pointer'">
+                  <xsl:when test="Type = 'pointer'">
                     <xsl:text>.UnigueID.UGuid</xsl:text>
                   </xsl:when>
                 </xsl:choose>);
@@ -557,7 +565,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Константи
 					    </xsl:if>
 						<xsl:text>record.</xsl:text><xsl:value-of select="Name"/>
                         <xsl:choose>
-                        <xsl:when test="Type = 'pointer' or Type = 'empty_pointer'">
+                        <xsl:when test="Type = 'pointer'">
                             <xsl:text>.UnigueID.UGuid</xsl:text>
                         </xsl:when>
                         </xsl:choose>
@@ -668,7 +676,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
               </xsl:if>
               <xsl:value-of select="Name"/>
               <xsl:choose>
-                <xsl:when test="Type = 'pointer' or Type = 'empty_pointer'">
+                <xsl:when test="Type = 'pointer'">
                   <xsl:text>.UnigueID.UGuid</xsl:text>
                 </xsl:when>
               </xsl:choose>;
@@ -881,7 +889,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
 					</xsl:if>
 					<xsl:text>record.</xsl:text><xsl:value-of select="Name"/>
                     <xsl:choose>
-                    <xsl:when test="Type = 'pointer' or Type = 'empty_pointer'">
+                    <xsl:when test="Type = 'pointer'">
                         <xsl:text>.UnigueID.UGuid</xsl:text>
                     </xsl:when>
                     </xsl:choose>
@@ -1163,7 +1171,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
               </xsl:if>
               <xsl:value-of select="Name"/>
               <xsl:choose>
-                <xsl:when test="Type = 'pointer' or Type = 'empty_pointer'">
+                <xsl:when test="Type = 'pointer'">
                   <xsl:text>.UnigueID.UGuid</xsl:text>
                 </xsl:when>
               </xsl:choose>;
@@ -1392,7 +1400,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
 					</xsl:if>
 					<xsl:text>record.</xsl:text><xsl:value-of select="Name"/>
                     <xsl:choose>
-                        <xsl:when test="Type = 'pointer' or Type = 'empty_pointer'">
+                        <xsl:when test="Type = 'pointer'">
                             <xsl:text>.UnigueID.UGuid</xsl:text>
                         </xsl:when>				
                     </xsl:choose>
@@ -1571,7 +1579,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВі�
                         <xsl:text>(int)</xsl:text>      
                     </xsl:if>
 					<xsl:text>record.</xsl:text><xsl:value-of select="Name"/>
-                    <xsl:if test="Type = 'pointer' or Type = 'empty_pointer'">
+                    <xsl:if test="Type = 'pointer'">
                     <xsl:text>.UnigueID.UGuid</xsl:text>
                     </xsl:if>
                     <xsl:text>)</xsl:text>;
@@ -1654,7 +1662,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВі�
               </xsl:if>
               <xsl:value-of select="Name"/>
               <xsl:choose>
-                <xsl:when test="Type = 'pointer' or Type = 'empty_pointer'">
+                <xsl:when test="Type = 'pointer'">
                   <xsl:text>.UnigueID.UGuid</xsl:text>
                 </xsl:when>
               </xsl:choose>;
@@ -1854,7 +1862,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриНа�
                         <xsl:text>(int)</xsl:text>      
                     </xsl:if>
 					          <xsl:text>record.</xsl:text><xsl:value-of select="Name"/>
-                    <xsl:if test="Type = 'pointer' or Type = 'empty_pointer'">
+                    <xsl:if test="Type = 'pointer'">
                     <xsl:text>.UnigueID.UGuid</xsl:text>
                     </xsl:if>
                     <xsl:text>)</xsl:text>;
@@ -1960,7 +1968,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриНа�
           </xsl:if>
         <xsl:text>record.</xsl:text><xsl:value-of select="Name"/>
                     <xsl:choose>
-                    <xsl:when test="Type = 'pointer' or Type = 'empty_pointer'">
+                    <xsl:when test="Type = 'pointer'">
                         <xsl:text>.UnigueID.UGuid</xsl:text>
                     </xsl:when>
                     </xsl:choose>
