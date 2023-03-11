@@ -43,7 +43,6 @@ namespace StorageAndTrade
 
         public Виробники() : base()
         {
-            new VBox(false, 0);
             BorderWidth = 0;
 
             //Кнопки

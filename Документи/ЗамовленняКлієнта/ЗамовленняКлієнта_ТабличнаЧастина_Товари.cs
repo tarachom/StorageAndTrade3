@@ -227,8 +227,6 @@ LIMIT 1
 
         public ЗамовленняКлієнта_ТабличнаЧастина_Товари() : base()
         {
-            new VBox();
-
             CreateToolbar();
 
             scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In };

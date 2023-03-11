@@ -224,8 +224,6 @@ LIMIT 1
 
         public РахунокФактура_ТабличнаЧастина_Товари() : base()
         {
-            new VBox();
-
             CreateToolbar();
 
             scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In };

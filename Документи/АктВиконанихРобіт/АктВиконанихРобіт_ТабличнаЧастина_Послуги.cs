@@ -114,8 +114,6 @@ namespace StorageAndTrade
 
         public АктВиконанихРобіт_ТабличнаЧастина_Послуги() : base()
         {
-            new VBox();
-
             CreateToolbar();
 
             scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In };

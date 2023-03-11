@@ -46,7 +46,6 @@ namespace StorageAndTrade
 
         public ШтрихкодиНоменклатури_Елемент() : base()
         {
-            new VBox();
             HBox hBox = new HBox();
             PackStart(hBox, false, false, 10);
 

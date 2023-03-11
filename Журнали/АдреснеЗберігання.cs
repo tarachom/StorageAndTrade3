@@ -44,7 +44,6 @@ namespace StorageAndTrade
 
         public Журнал_АдреснеЗберігання() : base()
         {
-            new VBox(false, 0);
             BorderWidth = 0;
 
             HBox hBoxTop = new HBox();

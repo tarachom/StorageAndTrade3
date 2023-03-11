@@ -154,8 +154,6 @@ namespace StorageAndTrade
 
         public ВнутрішнєСпоживанняТоварів_ТабличнаЧастина_Товари() : base()
         {
-            new VBox();
-
             CreateToolbar();
 
             scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In };

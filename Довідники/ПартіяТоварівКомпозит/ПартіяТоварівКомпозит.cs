@@ -26,7 +26,6 @@ using Gtk;
 using AccountingSoftware;
 
 using StorageAndTrade_1_0.Довідники;
-
 using ТабличніСписки = StorageAndTrade_1_0.Довідники.ТабличніСписки;
 
 namespace StorageAndTrade
@@ -41,7 +40,6 @@ namespace StorageAndTrade
 
         public ПартіяТоварівКомпозит() : base()
         {
-            new VBox(false, 0);
             BorderWidth = 0;
 
             CreateToolbar();

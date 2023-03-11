@@ -44,7 +44,6 @@ namespace StorageAndTrade
 
         public Номенклатура_Папки_Дерево() : base()
         {
-            new VBox(false, 0);
             BorderWidth = 0;
 
             CreateToolbar();

@@ -107,8 +107,6 @@ namespace StorageAndTrade
 
         public ВведенняЗалишків_ТабличнаЧастина_РозрахункиЗКонтрагентами() : base()
         {
-            new VBox();
-
             CreateToolbar();
 
             scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In };

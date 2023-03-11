@@ -42,7 +42,6 @@ namespace StorageAndTrade
 
         public Користувачі() : base()
         {
-            new VBox(false, 0);
             BorderWidth = 0;
 
             CreateToolbar();

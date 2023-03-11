@@ -91,8 +91,6 @@ namespace StorageAndTrade
 
         public ВведенняЗалишків_ТабличнаЧастина_Каси() : base()
         {
-            new VBox();
-
             CreateToolbar();
 
             scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In };

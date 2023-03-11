@@ -43,7 +43,6 @@ namespace StorageAndTrade
 
         public СкладськіПриміщення_Елемент() : base()
         {
-            new VBox();
             HBox hBox = new HBox();
 
             Button bSaveAndClose = new Button("Зберегти та закрити");

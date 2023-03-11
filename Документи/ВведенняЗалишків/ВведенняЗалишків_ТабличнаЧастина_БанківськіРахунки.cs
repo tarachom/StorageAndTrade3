@@ -91,8 +91,6 @@ namespace StorageAndTrade
 
         public ВведенняЗалишків_ТабличнаЧастина_БанківськіРахунки() : base()
         {
-            new VBox();
-
             CreateToolbar();
 
             scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In };

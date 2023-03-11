@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 06.03.2023 14:04:49
+ * Дата конфігурації: 11.03.2023 15:25:18
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон Gtk.xslt
@@ -12177,12 +12177,13 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         string Валюта = "";
         string Сума = "";
         string Автор = "";
+        string Коментар = "";
 
         // Масив для запису стрічки в Store
         Array ToArray()
         {
             return new object[] { new Gdk.Pixbuf(Image), ID, Type, Spend /*Проведений документ*/
-            /* */ , Назва, Дата, Номер, Організація, Контрагент, Каса, Каса2, Валюта, Сума, Автор };
+            /* */ , Назва, Дата, Номер, Організація, Контрагент, Каса, Каса2, Валюта, Сума, Автор, Коментар };
         }
 
         // Джерело даних для списку
@@ -12201,6 +12202,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             , typeof(string) /* Валюта */
             , typeof(string) /* Сума */
             , typeof(string) /* Автор */
+            , typeof(string) /* Коментар */
             );
 
         // Добавлення колонок в список
@@ -12221,6 +12223,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 11)); /*Валюта*/
             treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 12)); /*Сума*/
             treeView.AppendColumn(new TreeViewColumn("Автор", new CellRendererText() { Xpad = 4 }, "text", 13)); /*Автор*/
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 14)); /*Коментар*/
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
@@ -12344,6 +12347,9 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                                 query.FieldAndAlias.Add(
                                   new NameValue<string>("join_tab_6." + Довідники.Користувачі_Const.Назва, "Автор"));
                               
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПрихіднийКасовийОрдер_Const.TABLE + "." + Документи.ПрихіднийКасовийОрдер_Const.Коментар, "Коментар"));
+                            
 
                   allQuery.Add(query.Construct());
               }
@@ -12421,6 +12427,9 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                                 query.FieldAndAlias.Add(
                                   new NameValue<string>("join_tab_6." + Довідники.Користувачі_Const.Назва, "Автор"));
                               
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.РозхіднийКасовийОрдер_Const.TABLE + "." + Документи.РозхіднийКасовийОрдер_Const.Коментар, "Коментар"));
+                            
 
                   allQuery.Add(query.Construct());
               }
@@ -12461,6 +12470,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     record.Сума = row["Сума"] != DBNull.Value ? (row["Сума"]?.ToString() ?? "") : "";
                 
                     record.Автор = row["Автор"] != DBNull.Value ? (row["Автор"]?.ToString() ?? "") : "";
+                
+                    record.Коментар = row["Коментар"] != DBNull.Value ? (row["Коментар"]?.ToString() ?? "") : "";
                 
 
                 TreeIter CurrentIter = Store.AppendValues(record.ToArray());

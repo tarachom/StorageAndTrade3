@@ -41,7 +41,6 @@ namespace StorageAndTrade
 
         public СтруктураПідприємства_Елемент() : base()
         {
-            new VBox();
             HBox hBox = new HBox();
 
             Button bSaveAndClose = new Button("Зберегти та закрити");

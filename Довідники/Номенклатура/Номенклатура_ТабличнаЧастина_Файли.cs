@@ -89,8 +89,6 @@ namespace StorageAndTrade
 
         public Номенклатура_ТабличнаЧастина_Файли() : base()
         {
-            new VBox();
-
             CreateToolbar();
 
             ScrolledWindow scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In, HeightRequest = 300 };
@@ -230,7 +228,7 @@ namespace StorageAndTrade
         void AddColumn()
         {
             //Основний
-            CellRendererToggle Основний = new CellRendererToggle(){};
+            CellRendererToggle Основний = new CellRendererToggle() { };
             Основний.Toggled += Edited;
             Основний.Data.Add("Column", (int)Columns.Основний);
 

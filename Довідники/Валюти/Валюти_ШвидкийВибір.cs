@@ -42,7 +42,6 @@ namespace StorageAndTrade
 
         public Валюти_ШвидкийВибір(bool IsSelectPointer = false) : base()
         {
-            new VBox(false, 0);
             BorderWidth = 0;
 
             //Зверху

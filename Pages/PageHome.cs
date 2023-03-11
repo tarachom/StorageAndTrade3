@@ -40,22 +40,18 @@ namespace StorageAndTrade
 
         public PageHome() : base()
         {
-            VBox vBox = new VBox();
-
             {
                 HBox hBox = new HBox();
                 hBox.PackStart(БлокКурсиВалют, false, false, 5);
 
-                vBox.PackStart(hBox, false, false, 5);
+                PackStart(hBox, false, false, 5);
             }
 
             {
                 HBox hBox = new HBox();
                 hBox.PackStart(АктивніКористувачі, false, false, 5);
-                vBox.PackStart(hBox, false, false, 5);
+                PackStart(hBox, false, false, 5);
             }
-
-            PackStart(vBox, false, false, 5);
 
 /*
             Label lv = new Label("Text") { Selectable = true };

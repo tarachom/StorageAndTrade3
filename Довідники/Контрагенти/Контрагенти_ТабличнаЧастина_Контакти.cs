@@ -61,8 +61,6 @@ namespace StorageAndTrade
 
         public Контрагенти_ТабличнаЧастина_Контакти() : base()
         {
-            new VBox();
-
             CreateToolbar();
 
             ScrolledWindow scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In, HeightRequest = 200 };

@@ -70,7 +70,6 @@ namespace StorageAndTrade
 
         public ЗамовленняПостачальнику_Елемент() : base()
         {
-            new VBox();
             HBox hBox = new HBox();
 
             Button bSaveAndSpend = new Button("Провести та закрити");

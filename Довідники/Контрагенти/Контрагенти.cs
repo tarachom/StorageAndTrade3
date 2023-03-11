@@ -45,7 +45,6 @@ namespace StorageAndTrade
 
         public Контрагенти() : base()
         {
-            new VBox(false, 0);
             BorderWidth = 0;
 
             //Кнопки
