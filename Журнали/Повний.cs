@@ -73,6 +73,7 @@ namespace StorageAndTrade
 
             scrollTree.Add(TreeViewGrid);
 
+/*
             scrollTree.Vadjustment.ValueChanged += (object? sender, EventArgs args) =>
             {
                 Console.WriteLine(
@@ -82,6 +83,7 @@ namespace StorageAndTrade
                     scrollTree.Vadjustment.PageSize);
             };
 
+*/
             PackStart(scrollTree, true, true, 0);
 
             ShowAll();
