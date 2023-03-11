@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 11.03.2023 15:25:18
+ * Дата конфігурації: 11.03.2023 16:24:48
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон Gtk.xslt
@@ -9668,12 +9668,13 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         string Валюта = "";
         string Сума = "";
         string Автор = "";
+        string Коментар = "";
 
         // Масив для запису стрічки в Store
         Array ToArray()
         {
             return new object[] { new Gdk.Pixbuf(Image), ID, Type, Spend /*Проведений документ*/
-            /* */ , Назва, Дата, Номер, Організація, Контрагент, Склад, Каса, Валюта, Сума, Автор };
+            /* */ , Назва, Дата, Номер, Організація, Контрагент, Склад, Каса, Валюта, Сума, Автор, Коментар };
         }
 
         // Джерело даних для списку
@@ -9692,6 +9693,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             , typeof(string) /* Валюта */
             , typeof(string) /* Сума */
             , typeof(string) /* Автор */
+            , typeof(string) /* Коментар */
             );
 
         // Добавлення колонок в список
@@ -9712,6 +9714,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 11)); /*Валюта*/
             treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 12)); /*Сума*/
             treeView.AppendColumn(new TreeViewColumn("Автор", new CellRendererText() { Xpad = 4 }, "text", 13)); /*Автор*/
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 14)); /*Коментар*/
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
@@ -9947,6 +9950,9 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                                 query.FieldAndAlias.Add(
                                   new NameValue<string>("join_tab_6." + Довідники.Користувачі_Const.Назва, "Автор"));
                               
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗамовленняПостачальнику_Const.Коментар, "Коментар"));
+                            
 
                   allQuery.Add(query.Construct());
               }
@@ -10024,6 +10030,9 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                                 query.FieldAndAlias.Add(
                                   new NameValue<string>("join_tab_6." + Довідники.Користувачі_Const.Назва, "Автор"));
                               
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПоступленняТоварівТаПослуг_Const.TABLE + "." + Документи.ПоступленняТоварівТаПослуг_Const.Коментар, "Коментар"));
+                            
 
                   allQuery.Add(query.Construct());
               }
@@ -10101,6 +10110,9 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                                 query.FieldAndAlias.Add(
                                   new NameValue<string>("join_tab_6." + Довідники.Користувачі_Const.Назва, "Автор"));
                               
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗамовленняКлієнта_Const.Коментар, "Коментар"));
+                            
 
                   allQuery.Add(query.Construct());
               }
@@ -10178,6 +10190,9 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                                 query.FieldAndAlias.Add(
                                   new NameValue<string>("join_tab_6." + Довідники.Користувачі_Const.Назва, "Автор"));
                               
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE + "." + Документи.РеалізаціяТоварівТаПослуг_Const.Коментар, "Коментар"));
+                            
 
                   allQuery.Add(query.Construct());
               }
@@ -10240,6 +10255,9 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                                 query.FieldAndAlias.Add(
                                   new NameValue<string>("join_tab_3." + Довідники.Користувачі_Const.Назва, "Автор"));
                               
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ВстановленняЦінНоменклатури_Const.TABLE + "." + Документи.ВстановленняЦінНоменклатури_Const.Коментар, "Коментар"));
+                            
 
                   allQuery.Add(query.Construct());
               }
@@ -10312,6 +10330,9 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                                 query.FieldAndAlias.Add(
                                   new NameValue<string>("join_tab_5." + Довідники.Користувачі_Const.Назва, "Автор"));
                               
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПрихіднийКасовийОрдер_Const.TABLE + "." + Документи.ПрихіднийКасовийОрдер_Const.Коментар, "Коментар"));
+                            
 
                   allQuery.Add(query.Construct());
               }
@@ -10384,6 +10405,9 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                                 query.FieldAndAlias.Add(
                                   new NameValue<string>("join_tab_5." + Довідники.Користувачі_Const.Назва, "Автор"));
                               
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.РозхіднийКасовийОрдер_Const.TABLE + "." + Документи.РозхіднийКасовийОрдер_Const.Коментар, "Коментар"));
+                            
 
                   allQuery.Add(query.Construct());
               }
@@ -10446,6 +10470,9 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                                 query.FieldAndAlias.Add(
                                   new NameValue<string>("join_tab_3." + Довідники.Користувачі_Const.Назва, "Автор"));
                               
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПереміщенняТоварів_Const.TABLE + "." + Документи.ПереміщенняТоварів_Const.Коментар, "Коментар"));
+                            
 
                   allQuery.Add(query.Construct());
               }
@@ -10523,6 +10550,9 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                                 query.FieldAndAlias.Add(
                                   new NameValue<string>("join_tab_6." + Довідники.Користувачі_Const.Назва, "Автор"));
                               
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПоверненняТоварівПостачальнику_Const.TABLE + "." + Документи.ПоверненняТоварівПостачальнику_Const.Коментар, "Коментар"));
+                            
 
                   allQuery.Add(query.Construct());
               }
@@ -10600,6 +10630,9 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                                 query.FieldAndAlias.Add(
                                   new NameValue<string>("join_tab_6." + Довідники.Користувачі_Const.Назва, "Автор"));
                               
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE + "." + Документи.ПоверненняТоварівВідКлієнта_Const.Коментар, "Коментар"));
+                            
 
                   allQuery.Add(query.Construct());
               }
@@ -10672,6 +10705,9 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                                 query.FieldAndAlias.Add(
                                   new NameValue<string>("join_tab_5." + Довідники.Користувачі_Const.Назва, "Автор"));
                               
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.АктВиконанихРобіт_Const.TABLE + "." + Документи.АктВиконанихРобіт_Const.Коментар, "Коментар"));
+                            
 
                   allQuery.Add(query.Construct());
               }
@@ -10744,6 +10780,9 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                                 query.FieldAndAlias.Add(
                                   new NameValue<string>("join_tab_5." + Довідники.Користувачі_Const.Назва, "Автор"));
                               
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ВведенняЗалишків_Const.TABLE + "." + Документи.ВведенняЗалишків_Const.Коментар, "Коментар"));
+                            
 
                   allQuery.Add(query.Construct());
               }
@@ -10811,6 +10850,9 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                                 query.FieldAndAlias.Add(
                                   new NameValue<string>("join_tab_4." + Довідники.Користувачі_Const.Назва, "Автор"));
                               
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ВнутрішнєСпоживанняТоварів_Const.TABLE + "." + Документи.ВнутрішнєСпоживанняТоварів_Const.Коментар, "Коментар"));
+                            
 
                   allQuery.Add(query.Construct());
               }
@@ -10888,6 +10930,9 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                                 query.FieldAndAlias.Add(
                                   new NameValue<string>("join_tab_6." + Довідники.Користувачі_Const.Назва, "Автор"));
                               
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.РахунокФактура_Const.TABLE + "." + Документи.РахунокФактура_Const.Коментар, "Коментар"));
+                            
 
                   allQuery.Add(query.Construct());
               }
@@ -10950,6 +10995,9 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                                 query.FieldAndAlias.Add(
                                   new NameValue<string>("join_tab_3." + Довідники.Користувачі_Const.Назва, "Автор"));
                               
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.РозміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.РозміщенняТоварівНаСкладі_Const.Коментар, "Коментар"));
+                            
 
                   allQuery.Add(query.Construct());
               }
@@ -11012,6 +11060,9 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                                 query.FieldAndAlias.Add(
                                   new NameValue<string>("join_tab_3." + Довідники.Користувачі_Const.Назва, "Автор"));
                               
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПереміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.ПереміщенняТоварівНаСкладі_Const.Коментар, "Коментар"));
+                            
 
                   allQuery.Add(query.Construct());
               }
@@ -11074,6 +11125,9 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                                 query.FieldAndAlias.Add(
                                   new NameValue<string>("join_tab_3." + Довідники.Користувачі_Const.Назва, "Автор"));
                               
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ЗбіркаТоварівНаСкладі_Const.TABLE + "." + Документи.ЗбіркаТоварівНаСкладі_Const.Коментар, "Коментар"));
+                            
 
                   allQuery.Add(query.Construct());
               }
@@ -11136,6 +11190,9 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                                 query.FieldAndAlias.Add(
                                   new NameValue<string>("join_tab_3." + Довідники.Користувачі_Const.Назва, "Автор"));
                               
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.РозміщенняНоменклатуриПоКоміркам_Const.TABLE + "." + Документи.РозміщенняНоменклатуриПоКоміркам_Const.Коментар, "Коментар"));
+                            
 
                   allQuery.Add(query.Construct());
               }
@@ -11177,6 +11234,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                 
                     record.Автор = row["Автор"] != DBNull.Value ? (row["Автор"]?.ToString() ?? "") : "";
                 
+                    record.Коментар = row["Коментар"] != DBNull.Value ? (row["Коментар"]?.ToString() ?? "") : "";
+                
 
                 TreeIter CurrentIter = Store.AppendValues(record.ToArray());
                 CurrentPath = Store.GetPath(CurrentIter);
@@ -11210,12 +11269,13 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         string Валюта = "";
         string Сума = "";
         string Автор = "";
+        string Коментар = "";
 
         // Масив для запису стрічки в Store
         Array ToArray()
         {
             return new object[] { new Gdk.Pixbuf(Image), ID, Type, Spend /*Проведений документ*/
-            /* */ , Назва, Дата, Номер, Організація, Контрагент, Склад, Каса, Валюта, Сума, Автор };
+            /* */ , Назва, Дата, Номер, Організація, Контрагент, Склад, Каса, Валюта, Сума, Автор, Коментар };
         }
 
         // Джерело даних для списку
@@ -11234,6 +11294,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             , typeof(string) /* Валюта */
             , typeof(string) /* Сума */
             , typeof(string) /* Автор */
+            , typeof(string) /* Коментар */
             );
 
         // Добавлення колонок в список
@@ -11254,6 +11315,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 11)); /*Валюта*/
             treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 12)); /*Сума*/
             treeView.AppendColumn(new TreeViewColumn("Автор", new CellRendererText() { Xpad = 4 }, "text", 13)); /*Автор*/
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 14)); /*Коментар*/
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
@@ -11384,6 +11446,9 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                                 query.FieldAndAlias.Add(
                                   new NameValue<string>("join_tab_6." + Довідники.Користувачі_Const.Назва, "Автор"));
                               
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗамовленняПостачальнику_Const.Коментар, "Коментар"));
+                            
 
                   allQuery.Add(query.Construct());
               }
@@ -11461,6 +11526,9 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                                 query.FieldAndAlias.Add(
                                   new NameValue<string>("join_tab_6." + Довідники.Користувачі_Const.Назва, "Автор"));
                               
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПоступленняТоварівТаПослуг_Const.TABLE + "." + Документи.ПоступленняТоварівТаПослуг_Const.Коментар, "Коментар"));
+                            
 
                   allQuery.Add(query.Construct());
               }
@@ -11538,6 +11606,9 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                                 query.FieldAndAlias.Add(
                                   new NameValue<string>("join_tab_6." + Довідники.Користувачі_Const.Назва, "Автор"));
                               
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПоверненняТоварівПостачальнику_Const.TABLE + "." + Документи.ПоверненняТоварівПостачальнику_Const.Коментар, "Коментар"));
+                            
 
                   allQuery.Add(query.Construct());
               }
@@ -11579,6 +11650,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                 
                     record.Автор = row["Автор"] != DBNull.Value ? (row["Автор"]?.ToString() ?? "") : "";
                 
+                    record.Коментар = row["Коментар"] != DBNull.Value ? (row["Коментар"]?.ToString() ?? "") : "";
+                
 
                 TreeIter CurrentIter = Store.AppendValues(record.ToArray());
                 CurrentPath = Store.GetPath(CurrentIter);
@@ -11612,12 +11685,13 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         string Валюта = "";
         string Сума = "";
         string Автор = "";
+        string Коментар = "";
 
         // Масив для запису стрічки в Store
         Array ToArray()
         {
             return new object[] { new Gdk.Pixbuf(Image), ID, Type, Spend /*Проведений документ*/
-            /* */ , Назва, Дата, Номер, Організація, Контрагент, Склад, Каса, Валюта, Сума, Автор };
+            /* */ , Назва, Дата, Номер, Організація, Контрагент, Склад, Каса, Валюта, Сума, Автор, Коментар };
         }
 
         // Джерело даних для списку
@@ -11636,6 +11710,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             , typeof(string) /* Валюта */
             , typeof(string) /* Сума */
             , typeof(string) /* Автор */
+            , typeof(string) /* Коментар */
             );
 
         // Добавлення колонок в список
@@ -11656,6 +11731,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 11)); /*Валюта*/
             treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 12)); /*Сума*/
             treeView.AppendColumn(new TreeViewColumn("Автор", new CellRendererText() { Xpad = 4 }, "text", 13)); /*Автор*/
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 14)); /*Коментар*/
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
@@ -11800,6 +11876,9 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                                 query.FieldAndAlias.Add(
                                   new NameValue<string>("join_tab_6." + Довідники.Користувачі_Const.Назва, "Автор"));
                               
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗамовленняКлієнта_Const.Коментар, "Коментар"));
+                            
 
                   allQuery.Add(query.Construct());
               }
@@ -11877,6 +11956,9 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                                 query.FieldAndAlias.Add(
                                   new NameValue<string>("join_tab_6." + Довідники.Користувачі_Const.Назва, "Автор"));
                               
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE + "." + Документи.РеалізаціяТоварівТаПослуг_Const.Коментар, "Коментар"));
+                            
 
                   allQuery.Add(query.Construct());
               }
@@ -11954,6 +12036,9 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                                 query.FieldAndAlias.Add(
                                   new NameValue<string>("join_tab_6." + Довідники.Користувачі_Const.Назва, "Автор"));
                               
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE + "." + Документи.ПоверненняТоварівВідКлієнта_Const.Коментар, "Коментар"));
+                            
 
                   allQuery.Add(query.Construct());
               }
@@ -12026,6 +12111,9 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                                 query.FieldAndAlias.Add(
                                   new NameValue<string>("join_tab_5." + Довідники.Користувачі_Const.Назва, "Автор"));
                               
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.АктВиконанихРобіт_Const.TABLE + "." + Документи.АктВиконанихРобіт_Const.Коментар, "Коментар"));
+                            
 
                   allQuery.Add(query.Construct());
               }
@@ -12103,6 +12191,9 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                                 query.FieldAndAlias.Add(
                                   new NameValue<string>("join_tab_6." + Довідники.Користувачі_Const.Назва, "Автор"));
                               
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.РахунокФактура_Const.TABLE + "." + Документи.РахунокФактура_Const.Коментар, "Коментар"));
+                            
 
                   allQuery.Add(query.Construct());
               }
@@ -12143,6 +12234,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     record.Сума = row["Сума"] != DBNull.Value ? (row["Сума"]?.ToString() ?? "") : "";
                 
                     record.Автор = row["Автор"] != DBNull.Value ? (row["Автор"]?.ToString() ?? "") : "";
+                
+                    record.Коментар = row["Коментар"] != DBNull.Value ? (row["Коментар"]?.ToString() ?? "") : "";
                 
 
                 TreeIter CurrentIter = Store.AppendValues(record.ToArray());
@@ -12503,12 +12596,13 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         string СкладВідправник = "";
         string СкладОтримувач = "";
         string Автор = "";
+        string Коментар = "";
 
         // Масив для запису стрічки в Store
         Array ToArray()
         {
             return new object[] { new Gdk.Pixbuf(Image), ID, Type, Spend /*Проведений документ*/
-            /* */ , Назва, Дата, Номер, Організація, СкладВідправник, СкладОтримувач, Автор };
+            /* */ , Назва, Дата, Номер, Організація, СкладВідправник, СкладОтримувач, Автор, Коментар };
         }
 
         // Джерело даних для списку
@@ -12524,6 +12618,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             , typeof(string) /* СкладВідправник */
             , typeof(string) /* СкладОтримувач */
             , typeof(string) /* Автор */
+            , typeof(string) /* Коментар */
             );
 
         // Добавлення колонок в список
@@ -12541,6 +12636,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("СкладВідправник", new CellRendererText() { Xpad = 4 }, "text", 8)); /*СкладВідправник*/
             treeView.AppendColumn(new TreeViewColumn("СкладОтримувач", new CellRendererText() { Xpad = 4 }, "text", 9)); /*СкладОтримувач*/
             treeView.AppendColumn(new TreeViewColumn("Автор", new CellRendererText() { Xpad = 4 }, "text", 10)); /*Автор*/
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 11)); /*Коментар*/
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
@@ -12644,9 +12740,17 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                                 query.FieldAndAlias.Add(
                                   new NameValue<string>("join_tab_3." + Довідники.Склади_Const.Назва, "СкладОтримувач"));
                               
-                          /* Empty Field */
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Автор"));
-                        
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Користувачі_Const.TABLE, Документи.ПереміщенняТоварів_Const.Автор, query.Table, "join_tab_4"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_4." + Довідники.Користувачі_Const.Назва, "Автор"));
+                              
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПереміщенняТоварів_Const.TABLE + "." + Документи.ПереміщенняТоварів_Const.Коментар, "Коментар"));
+                            
 
                   allQuery.Add(query.Construct());
               }
@@ -12700,6 +12804,9 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                                 query.FieldAndAlias.Add(
                                   new NameValue<string>("join_tab_3." + Довідники.Користувачі_Const.Назва, "Автор"));
                               
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ВведенняЗалишків_Const.TABLE + "." + Документи.ВведенняЗалишків_Const.Коментар, "Коментар"));
+                            
 
                   allQuery.Add(query.Construct());
               }
@@ -12753,6 +12860,9 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                                 query.FieldAndAlias.Add(
                                   new NameValue<string>("join_tab_3." + Довідники.Користувачі_Const.Назва, "Автор"));
                               
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ВнутрішнєСпоживанняТоварів_Const.TABLE + "." + Документи.ВнутрішнєСпоживанняТоварів_Const.Коментар, "Коментар"));
+                            
 
                   allQuery.Add(query.Construct());
               }
@@ -12788,6 +12898,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                 
                     record.Автор = row["Автор"] != DBNull.Value ? (row["Автор"]?.ToString() ?? "") : "";
                 
+                    record.Коментар = row["Коментар"] != DBNull.Value ? (row["Коментар"]?.ToString() ?? "") : "";
+                
 
                 TreeIter CurrentIter = Store.AppendValues(record.ToArray());
                 CurrentPath = Store.GetPath(CurrentIter);
@@ -12817,12 +12929,13 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         string Організація = "";
         string Склад = "";
         string Автор = "";
+        string Коментар = "";
 
         // Масив для запису стрічки в Store
         Array ToArray()
         {
             return new object[] { new Gdk.Pixbuf(Image), ID, Type, Spend /*Проведений документ*/
-            /* */ , Назва, Дата, Номер, Організація, Склад, Автор };
+            /* */ , Назва, Дата, Номер, Організація, Склад, Автор, Коментар };
         }
 
         // Джерело даних для списку
@@ -12837,6 +12950,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             , typeof(string) /* Організація */
             , typeof(string) /* Склад */
             , typeof(string) /* Автор */
+            , typeof(string) /* Коментар */
             );
 
         // Добавлення колонок в список
@@ -12853,6 +12967,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 7)); /*Організація*/
             treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 8)); /*Склад*/
             treeView.AppendColumn(new TreeViewColumn("Автор", new CellRendererText() { Xpad = 4 }, "text", 9)); /*Автор*/
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 10)); /*Коментар*/
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
@@ -12963,6 +13078,9 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                                 query.FieldAndAlias.Add(
                                   new NameValue<string>("join_tab_3." + Довідники.Користувачі_Const.Назва, "Автор"));
                               
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.РозміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.РозміщенняТоварівНаСкладі_Const.Коментар, "Коментар"));
+                            
 
                   allQuery.Add(query.Construct());
               }
@@ -13013,6 +13131,9 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                                 query.FieldAndAlias.Add(
                                   new NameValue<string>("join_tab_3." + Довідники.Користувачі_Const.Назва, "Автор"));
                               
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПереміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.ПереміщенняТоварівНаСкладі_Const.Коментар, "Коментар"));
+                            
 
                   allQuery.Add(query.Construct());
               }
@@ -13063,6 +13184,9 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                                 query.FieldAndAlias.Add(
                                   new NameValue<string>("join_tab_3." + Довідники.Користувачі_Const.Назва, "Автор"));
                               
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ЗбіркаТоварівНаСкладі_Const.TABLE + "." + Документи.ЗбіркаТоварівНаСкладі_Const.Коментар, "Коментар"));
+                            
 
                   allQuery.Add(query.Construct());
               }
@@ -13113,6 +13237,9 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                                 query.FieldAndAlias.Add(
                                   new NameValue<string>("join_tab_3." + Довідники.Користувачі_Const.Назва, "Автор"));
                               
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.РозміщенняНоменклатуриПоКоміркам_Const.TABLE + "." + Документи.РозміщенняНоменклатуриПоКоміркам_Const.Коментар, "Коментар"));
+                            
 
                   allQuery.Add(query.Construct());
               }
@@ -13145,6 +13272,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     record.Склад = row["Склад"] != DBNull.Value ? (row["Склад"]?.ToString() ?? "") : "";
                 
                     record.Автор = row["Автор"] != DBNull.Value ? (row["Автор"]?.ToString() ?? "") : "";
+                
+                    record.Коментар = row["Коментар"] != DBNull.Value ? (row["Коментар"]?.ToString() ?? "") : "";
                 
 
                 TreeIter CurrentIter = Store.AppendValues(record.ToArray());
