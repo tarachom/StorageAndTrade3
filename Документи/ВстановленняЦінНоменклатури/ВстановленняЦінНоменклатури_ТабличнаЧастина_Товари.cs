@@ -151,7 +151,7 @@ namespace StorageAndTrade
 
         void OnButtonPressEvent(object sender, ButtonPressEventArgs args)
         {
-            if (args.Event.Type == Gdk.EventType.DoubleButtonPress)
+            if (args.Event.Type == Gdk.EventType.DoubleButtonPress && TreeViewGrid.Selection.CountSelectedRows() != 0)
             {
                 TreePath itemPath;
                 TreeViewColumn treeColumn;
@@ -379,11 +379,11 @@ namespace StorageAndTrade
         void AddColumn()
         {
             //НомерРядка
-            TreeViewGrid.AppendColumn(new TreeViewColumn("№", new CellRendererText(), "text", (int)Columns.НомерРядка) { MinWidth = 30 });
+            TreeViewGrid.AppendColumn(new TreeViewColumn("№", new CellRendererText(), "text", (int)Columns.НомерРядка) { Resizable = true, MinWidth =  30 });
 
             //Номенклатура
             {
-                TreeViewColumn Номенклатура = new TreeViewColumn("Номенклатура", new CellRendererText(), "text", (int)Columns.Номенклатура) { MinWidth = 300 };
+                TreeViewColumn Номенклатура = new TreeViewColumn("Номенклатура", new CellRendererText(), "text", (int)Columns.Номенклатура) { Resizable = true, MinWidth =  200 };
                 Номенклатура.Data.Add("Column", Columns.Номенклатура);
 
                 TreeViewGrid.AppendColumn(Номенклатура);
@@ -391,7 +391,7 @@ namespace StorageAndTrade
 
             //Характеристика
             {
-                TreeViewColumn Характеристика = new TreeViewColumn("Характеристика", new CellRendererText(), "text", (int)Columns.Характеристика) { MinWidth = 300 };
+                TreeViewColumn Характеристика = new TreeViewColumn("Характеристика", new CellRendererText(), "text", (int)Columns.Характеристика) { Resizable = true, MinWidth =  200 };
                 Характеристика.Visible = Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const;
                 Характеристика.Data.Add("Column", Columns.Характеристика);
 
@@ -400,7 +400,7 @@ namespace StorageAndTrade
 
             //Пакування
             {
-                TreeViewColumn Пакування = new TreeViewColumn("Пакування", new CellRendererText(), "text", (int)Columns.Пакування) { MinWidth = 100 };
+                TreeViewColumn Пакування = new TreeViewColumn("Пакування", new CellRendererText(), "text", (int)Columns.Пакування) { Resizable = true, MinWidth =  100 };
                 Пакування.Data.Add("Column", Columns.Пакування);
 
                 TreeViewGrid.AppendColumn(Пакування);
@@ -408,7 +408,7 @@ namespace StorageAndTrade
 
             //ВидЦіни
             {
-                TreeViewColumn ВидЦіни = new TreeViewColumn("Вид ціни", new CellRendererText(), "text", (int)Columns.ВидЦіни) { MinWidth = 100 };
+                TreeViewColumn ВидЦіни = new TreeViewColumn("Вид ціни", new CellRendererText(), "text", (int)Columns.ВидЦіни) { Resizable = true, MinWidth =  100 };
                 ВидЦіни.Data.Add("Column", Columns.ВидЦіни);
 
                 TreeViewGrid.AppendColumn(ВидЦіни);
@@ -420,7 +420,7 @@ namespace StorageAndTrade
                 Ціна.Edited += TextChanged;
                 Ціна.Data.Add("Column", (int)Columns.Ціна);
 
-                TreeViewColumn Column = new TreeViewColumn("Ціна", Ціна, "text", (int)Columns.Ціна) { MinWidth = 100 };
+                TreeViewColumn Column = new TreeViewColumn("Ціна", Ціна, "text", (int)Columns.Ціна) { Resizable = true, MinWidth =  100 };
                 Column.SetCellDataFunc(Ціна, new TreeCellDataFunc(NumericCellDataFunc));
                 TreeViewGrid.AppendColumn(Column);
             }

@@ -181,7 +181,7 @@ namespace StorageAndTrade
                 TypeInfo.Edited += TextChanged;
                 TypeInfo.Data.Add("Column", (int)Columns.Тип);
 
-                TreeViewGrid.AppendColumn(new TreeViewColumn("Тип", TypeInfo, "text", (int)Columns.Тип) { MinWidth = 100 });
+                TreeViewGrid.AppendColumn(new TreeViewColumn("Тип", TypeInfo, "text", (int)Columns.Тип) { MinWidth = 100, Resizable = true });
             }
 
             //Значення
@@ -189,49 +189,49 @@ namespace StorageAndTrade
             Значення.Edited += TextChanged;
             Значення.Data.Add("Column", (int)Columns.Значення);
 
-            TreeViewGrid.AppendColumn(new TreeViewColumn("Значення", Значення, "text", (int)Columns.Значення) { MinWidth = 200 });
+            TreeViewGrid.AppendColumn(new TreeViewColumn("Значення", Значення, "text", (int)Columns.Значення) { MinWidth = 200, Resizable = true });
 
             //Телефон
             CellRendererText Телефон = new CellRendererText() { Editable = true };
             Телефон.Edited += TextChanged;
             Телефон.Data.Add("Column", (int)Columns.Телефон);
 
-            TreeViewGrid.AppendColumn(new TreeViewColumn("Телефон", Телефон, "text", (int)Columns.Телефон) { MinWidth = 150 });
+            TreeViewGrid.AppendColumn(new TreeViewColumn("Телефон", Телефон, "text", (int)Columns.Телефон) { MinWidth = 150, Resizable = true });
 
             //Email
             CellRendererText Email = new CellRendererText() { Editable = true };
             Email.Edited += TextChanged;
             Email.Data.Add("Column", (int)Columns.ЕлектроннаПошта);
 
-            TreeViewGrid.AppendColumn(new TreeViewColumn("Email", Email, "text", (int)Columns.ЕлектроннаПошта) { MinWidth = 150 });
+            TreeViewGrid.AppendColumn(new TreeViewColumn("Email", Email, "text", (int)Columns.ЕлектроннаПошта) { MinWidth = 150, Resizable = true });
 
             //Країна
             CellRendererText Країна = new CellRendererText() { Editable = true };
             Країна.Edited += TextChanged;
             Країна.Data.Add("Column", (int)Columns.Країна);
 
-            TreeViewGrid.AppendColumn(new TreeViewColumn("Країна", Країна, "text", (int)Columns.Країна) { MinWidth = 150 });
+            TreeViewGrid.AppendColumn(new TreeViewColumn("Країна", Країна, "text", (int)Columns.Країна) { MinWidth = 150, Resizable = true });
 
             //Область
             CellRendererText Область = new CellRendererText() { Editable = true };
             Область.Edited += TextChanged;
             Область.Data.Add("Column", (int)Columns.Область);
 
-            TreeViewGrid.AppendColumn(new TreeViewColumn("Область", Область, "text", (int)Columns.Область) { MinWidth = 150 });
+            TreeViewGrid.AppendColumn(new TreeViewColumn("Область", Область, "text", (int)Columns.Область) { MinWidth = 150, Resizable = true });
 
             //Район
             CellRendererText Район = new CellRendererText() { Editable = true };
             Район.Edited += TextChanged;
             Район.Data.Add("Column", (int)Columns.Район);
 
-            TreeViewGrid.AppendColumn(new TreeViewColumn("Район", Район, "text", (int)Columns.Район) { MinWidth = 150 });
+            TreeViewGrid.AppendColumn(new TreeViewColumn("Район", Район, "text", (int)Columns.Район) { MinWidth = 150, Resizable = true });
 
             //Місто
             CellRendererText Місто = new CellRendererText() { Editable = true };
             Місто.Edited += TextChanged;
             Місто.Data.Add("Column", (int)Columns.Місто);
 
-            TreeViewGrid.AppendColumn(new TreeViewColumn("Місто", Місто, "text", (int)Columns.Місто) { MinWidth = 150 });
+            TreeViewGrid.AppendColumn(new TreeViewColumn("Місто", Місто, "text", (int)Columns.Місто) { MinWidth = 150, Resizable = true });
         }
 
         void TextChanged(object sender, EditedArgs args)

@@ -112,7 +112,7 @@ namespace StorageAndTrade
 
         void OnButtonPressEvent(object sender, ButtonPressEventArgs args)
         {
-            if (args.Event.Type == Gdk.EventType.DoubleButtonPress)
+            if (args.Event.Type == Gdk.EventType.DoubleButtonPress && TreeViewGrid.Selection.CountSelectedRows() != 0)
             {
                 TreePath itemPath;
                 TreeViewColumn treeColumn;
@@ -247,11 +247,11 @@ namespace StorageAndTrade
         void AddColumn()
         {
             //НомерРядка
-            TreeViewGrid.AppendColumn(new TreeViewColumn("№", new CellRendererText(), "text", (int)Columns.НомерРядка) { MinWidth = 30 });
+            TreeViewGrid.AppendColumn(new TreeViewColumn("№", new CellRendererText(), "text", (int)Columns.НомерРядка) { Resizable = true, MinWidth =  30 });
 
             //БанківськийРахунок
             {
-                TreeViewColumn БанківськийРахунок = new TreeViewColumn("Банківський рахунок", new CellRendererText(), "text", (int)Columns.БанківськийРахунок) { MinWidth = 300 };
+                TreeViewColumn БанківськийРахунок = new TreeViewColumn("Банківський рахунок", new CellRendererText(), "text", (int)Columns.БанківськийРахунок) { Resizable = true, MinWidth =  200 };
                 БанківськийРахунок.Data.Add("Column", Columns.БанківськийРахунок);
 
                 TreeViewGrid.AppendColumn(БанківськийРахунок);
@@ -263,7 +263,7 @@ namespace StorageAndTrade
                 Сума.Edited += TextChanged;
                 Сума.Data.Add("Column", (int)Columns.Сума);
 
-                TreeViewColumn Column = new TreeViewColumn("Сума", Сума, "text", (int)Columns.Сума) { MinWidth = 100 };
+                TreeViewColumn Column = new TreeViewColumn("Сума", Сума, "text", (int)Columns.Сума) { Resizable = true, MinWidth =  100 };
                 Column.SetCellDataFunc(Сума, new TreeCellDataFunc(NumericCellDataFunc));
                 TreeViewGrid.AppendColumn(Column);
             }

@@ -128,7 +128,7 @@ namespace StorageAndTrade
 
         void OnButtonPressEvent(object sender, ButtonPressEventArgs args)
         {
-            if (args.Event.Type == Gdk.EventType.DoubleButtonPress)
+            if (args.Event.Type == Gdk.EventType.DoubleButtonPress && TreeViewGrid.Selection.CountSelectedRows() != 0)
             {
                 TreePath itemPath;
                 TreeViewColumn treeColumn;
@@ -291,7 +291,7 @@ namespace StorageAndTrade
         void AddColumn()
         {
             //НомерРядка
-            TreeViewGrid.AppendColumn(new TreeViewColumn("№", new CellRendererText(), "text", (int)Columns.НомерРядка) { MinWidth = 30 });
+            TreeViewGrid.AppendColumn(new TreeViewColumn("№", new CellRendererText(), "text", (int)Columns.НомерРядка) { Resizable = true, MinWidth =  30 });
 
             //ТипКонтрагента
             {
@@ -309,12 +309,12 @@ namespace StorageAndTrade
                 TypeContragent.Edited += TextChanged;
                 TypeContragent.Data.Add("Column", (int)Columns.ТипКонтрагента);
 
-                TreeViewGrid.AppendColumn(new TreeViewColumn("Тип контрагента", TypeContragent, "text", (int)Columns.ТипКонтрагента) { MinWidth = 100 });
+                TreeViewGrid.AppendColumn(new TreeViewColumn("Тип контрагента", TypeContragent, "text", (int)Columns.ТипКонтрагента) { Resizable = true, MinWidth =  100 });
             }
 
             //Контрагент
             {
-                TreeViewColumn Контрагент = new TreeViewColumn("Контрагент", new CellRendererText(), "text", (int)Columns.Контрагент) { MinWidth = 300 };
+                TreeViewColumn Контрагент = new TreeViewColumn("Контрагент", new CellRendererText(), "text", (int)Columns.Контрагент) { Resizable = true, MinWidth =  200 };
                 Контрагент.Data.Add("Column", Columns.Контрагент);
 
                 TreeViewGrid.AppendColumn(Контрагент);
@@ -322,7 +322,7 @@ namespace StorageAndTrade
 
             //Валюта
             {
-                TreeViewColumn Валюта = new TreeViewColumn("Валюта", new CellRendererText(), "text", (int)Columns.Валюта) { MinWidth = 300 };
+                TreeViewColumn Валюта = new TreeViewColumn("Валюта", new CellRendererText(), "text", (int)Columns.Валюта) { Resizable = true, MinWidth =  200 };
                 Валюта.Data.Add("Column", Columns.Валюта);
 
                 TreeViewGrid.AppendColumn(Валюта);
@@ -334,7 +334,7 @@ namespace StorageAndTrade
                 Сума.Edited += TextChanged;
                 Сума.Data.Add("Column", (int)Columns.Сума);
 
-                TreeViewColumn Column = new TreeViewColumn("Сума", Сума, "text", (int)Columns.Сума) { MinWidth = 100 };
+                TreeViewColumn Column = new TreeViewColumn("Сума", Сума, "text", (int)Columns.Сума) { Resizable = true, MinWidth =  100 };
                 Column.SetCellDataFunc(Сума, new TreeCellDataFunc(NumericCellDataFunc));
                 TreeViewGrid.AppendColumn(Column);
             }

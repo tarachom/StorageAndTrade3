@@ -69,7 +69,7 @@ namespace StorageAndTrade
             HBox hBoxNomer = new HBox() { Halign = Align.End };
             vBox.PackStart(hBoxNomer, false, false, 5);
 
-            hBoxNomer.PackStart(new Label("Назва:"), false, false, 5);
+            hBoxNomer.PackStart(new Label("Номер:"), false, false, 5);
             hBoxNomer.PackStart(Номер, false, false, 5);
 
             hPaned.Pack1(vBox, false, false);

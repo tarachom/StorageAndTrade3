@@ -235,7 +235,7 @@ namespace StorageAndTrade
             TreeViewGrid.AppendColumn(new TreeViewColumn("Основний", Основний, "active", (int)Columns.Основний));
 
             //ФайлНазва
-            TreeViewColumn ФайлНазва = new TreeViewColumn("Файл", new CellRendererText(), "text", (int)Columns.ФайлНазва) { MinWidth = 300 };
+            TreeViewColumn ФайлНазва = new TreeViewColumn("Файл", new CellRendererText(), "text", (int)Columns.ФайлНазва) { MinWidth = 300, Resizable = true };
             ФайлНазва.Data.Add("Column", Columns.ФайлНазва);
 
             TreeViewGrid.AppendColumn(ФайлНазва);
