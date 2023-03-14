@@ -200,7 +200,7 @@ ORDER BY Організація_Назва
         #endregion
 
         #region РухТоварів
-
+/*
         public static Dictionary<string, string> РухТоварів_ВидиміКолонки()
         {
             Dictionary<string, string> columns = new Dictionary<string, string>();
@@ -263,6 +263,7 @@ WHERE
 ORDER BY Номенклатура_Назва
 ";
 
+*/
         #endregion
 
         #region ЗамовленняКлієнтів
@@ -603,7 +604,7 @@ WHERE
         #endregion
 
         #region ТовариДоПоступлення
-
+/*
         public static Dictionary<string, string> ТовариДоПоступлення_ВидиміКолонки()
         {
             Dictionary<string, string> columns = new Dictionary<string, string>();
@@ -668,6 +669,7 @@ WHERE
 ORDER BY Номенклатура_Назва
 ";
 
+*/
         #endregion
 
         #region РухКоштів

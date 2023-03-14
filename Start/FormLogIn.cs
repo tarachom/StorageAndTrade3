@@ -42,7 +42,7 @@ namespace StorageAndTrade
             DeleteEvent += delegate { OnCancel(null, new EventArgs()); };
 
             BorderWidth = 5;
-            
+
             VBox vBox = new VBox(false, 2);
 
             HBox hBoxLogin = new HBox();
@@ -53,6 +53,7 @@ namespace StorageAndTrade
             HBox hBoxPassword = new HBox();
             hBoxPassword.PackStart(new Label("Пароль:"), false, false, 5);
             hBoxPassword.PackEnd(passwordUser, false, false, 5);
+            passwordUser.KeyReleaseEvent += OnKeyReleaseEvent;
             vBox.PackStart(hBoxPassword, false, false, 5);
 
             Button bLogIn = new Button("Авторизація");
@@ -103,6 +104,19 @@ namespace StorageAndTrade
         {
             ModalResult = ResponseType.Cancel;
             ThisClose();
+        }
+
+        void OnKeyReleaseEvent(object? sender, KeyReleaseEventArgs args)
+        {
+            switch (args.Event.Key)
+            {
+                case Gdk.Key.KP_Enter:
+                case Gdk.Key.Return:
+                    {
+                        OnLogIn(this, new EventArgs());
+                        break;
+                    }
+            }
         }
 
         void ThisClose()

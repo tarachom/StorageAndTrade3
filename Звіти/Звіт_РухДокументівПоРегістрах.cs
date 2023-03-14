@@ -82,19 +82,19 @@ namespace StorageAndTrade
 
                             break;
                         }
-                    case "РухТоварів":
-                        {
-                            exist = true;
-                            blockCaption = "Рух товарів";
+                    // case "РухТоварів":
+                    //     {
+                    //         exist = true;
+                    //         blockCaption = "Рух товарів";
 
-                            visibleColumn = РухДокументівПоРегістрах.РухТоварів_ВидиміКолонки();
-                            dataColumn = РухДокументівПоРегістрах.РухТоварів_КолонкиДаних();
-                            textAlignColumn = РухДокументівПоРегістрах.РухТоварів_ПозиціяТекстуВКолонці();
+                    //         visibleColumn = РухДокументівПоРегістрах.РухТоварів_ВидиміКолонки();
+                    //         dataColumn = РухДокументівПоРегістрах.РухТоварів_КолонкиДаних();
+                    //         textAlignColumn = РухДокументівПоРегістрах.РухТоварів_ПозиціяТекстуВКолонці();
 
-                            Config.Kernel.DataBase.SelectRequest(РухДокументівПоРегістрах.РухТоварів_Запит, paramQuery, out columnsName, out listRow);
+                    //         Config.Kernel.DataBase.SelectRequest(РухДокументівПоРегістрах.РухТоварів_Запит, paramQuery, out columnsName, out listRow);
 
-                            break;
-                        }
+                    //         break;
+                    //     }
                     case "ЗамовленняКлієнтів":
                         {
                             exist = true;
@@ -160,19 +160,19 @@ namespace StorageAndTrade
 
                             break;
                         }
-                    case "ТовариДоПоступлення":
-                        {
-                            exist = true;
-                            blockCaption = "Товари до поступлення";
+                    // case "ТовариДоПоступлення":
+                    //     {
+                    //         exist = true;
+                    //         blockCaption = "Товари до поступлення";
 
-                            visibleColumn = РухДокументівПоРегістрах.ТовариДоПоступлення_ВидиміКолонки();
-                            dataColumn = РухДокументівПоРегістрах.ТовариДоПоступлення_КолонкиДаних();
-                            textAlignColumn = РухДокументівПоРегістрах.ТовариДоПоступлення_ПозиціяТекстуВКолонці();
+                    //         visibleColumn = РухДокументівПоРегістрах.ТовариДоПоступлення_ВидиміКолонки();
+                    //         dataColumn = РухДокументівПоРегістрах.ТовариДоПоступлення_КолонкиДаних();
+                    //         textAlignColumn = РухДокументівПоРегістрах.ТовариДоПоступлення_ПозиціяТекстуВКолонці();
 
-                            Config.Kernel.DataBase.SelectRequest(РухДокументівПоРегістрах.ТовариДоПоступлення_Запит, paramQuery, out columnsName, out listRow);
+                    //         Config.Kernel.DataBase.SelectRequest(РухДокументівПоРегістрах.ТовариДоПоступлення_Запит, paramQuery, out columnsName, out listRow);
 
-                            break;
-                        }
+                    //         break;
+                    //     }
                     case "РухКоштів":
                         {
                             exist = true;
