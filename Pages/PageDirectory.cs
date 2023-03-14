@@ -50,6 +50,7 @@ namespace StorageAndTrade
             AddLink(vLeft, "Підрозділи", СтруктураПідприємства);
 
             AddCaption(vLeft, "Додаткові");
+            AddLink(vLeft, "Банки", Банки);
             AddLink(vLeft, "Користувачі", Користувачі);
             AddLink(vLeft, "Фізичні особи", ФізичніОсоби);
             AddLink(vLeft, "Файли", Файли);
@@ -152,6 +153,16 @@ namespace StorageAndTrade
             Program.GeneralForm?.CreateNotebookPage("Каси", () =>
             {
                 Каси page = new Каси();
+                page.LoadRecords();
+                return page;
+            });
+        }
+
+        void Банки(object? sender, EventArgs args)
+        {
+            Program.GeneralForm?.CreateNotebookPage("Банки", () =>
+            {
+                Банки page = new Банки();
                 page.LoadRecords();
                 return page;
             });

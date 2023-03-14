@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 14.03.2023 19:54:30
+ * Дата конфігурації: 14.03.2023 20:32:04
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -185,6 +185,8 @@ namespace StorageAndTrade_1_0
                         case "ПартіяТоварівКомпозит": return new Довідники.ПартіяТоварівКомпозит_Pointer(uuidAndText.Uuid).GetPresentation();
                         
                         case "ВидиЗапасів": return new Довідники.ВидиЗапасів_Pointer(uuidAndText.Uuid).GetPresentation();
+                        
+                        case "Банки": return new Довідники.Банки_Pointer(uuidAndText.Uuid).GetPresentation();
                         
                         case "СкладськіПриміщення": return new Довідники.СкладськіПриміщення_Pointer(uuidAndText.Uuid).GetPresentation();
                         
@@ -1243,7 +1245,7 @@ namespace StorageAndTrade_1_0.Константи
             
             Dictionary<string, object> fieldValue = new Dictionary<string, object>();
             bool IsSelect = Config.Kernel!.DataBase.SelectAllConstants("tab_constants",
-                 new string[] { "col_b8", "col_d1", "col_d2", "col_d3", "col_d4", "col_d5", "col_d6", "col_d7", "col_d8", "col_d9", "col_e1", "col_e2", "col_e3", "col_e4", "col_e5", "col_e6", "col_e7", "col_e8", "col_e9", "col_f1", "col_f2", "col_f3", "col_f4", "col_f5", "col_b1" }, fieldValue);
+                 new string[] { "col_b8", "col_d1", "col_d2", "col_d3", "col_d4", "col_d5", "col_d6", "col_d7", "col_d8", "col_d9", "col_e1", "col_e2", "col_e3", "col_e4", "col_e5", "col_e6", "col_e7", "col_e8", "col_e9", "col_f1", "col_f2", "col_f3", "col_f4", "col_f5", "col_b1", "col_g8" }, fieldValue);
             
             if (IsSelect)
             {
@@ -1272,6 +1274,7 @@ namespace StorageAndTrade_1_0.Константи
                 m_БанківськіРахункиКонтрагентів_Const = (fieldValue["col_f4"] != DBNull.Value) ? (int)fieldValue["col_f4"] : 0;
                 m_СтаттяРухуКоштів_Const = (fieldValue["col_f5"] != DBNull.Value) ? (int)fieldValue["col_f5"] : 0;
                 m_СкладськіКомірки_Папки_Const = (fieldValue["col_b1"] != DBNull.Value) ? (int)fieldValue["col_b1"] : 0;
+                m_Банки_Const = (fieldValue["col_g8"] != DBNull.Value) ? (int)fieldValue["col_g8"] : 0;
                 
             }
 			
@@ -1625,6 +1628,20 @@ namespace StorageAndTrade_1_0.Константи
             {
                 m_СкладськіКомірки_Папки_Const = value;
                 Config.Kernel!.DataBase.SaveConstants("tab_constants", "col_b1", m_СкладськіКомірки_Папки_Const);
+            }
+        }
+        
+        static int m_Банки_Const = 0;
+        public static int Банки_Const
+        {
+            get 
+            {
+                return m_Банки_Const;
+            }
+            set
+            {
+                m_Банки_Const = value;
+                Config.Kernel!.DataBase.SaveConstants("tab_constants", "col_g8", m_Банки_Const);
             }
         }
              
@@ -7412,6 +7429,223 @@ namespace StorageAndTrade_1_0.Довідники
    
     #endregion
     
+    #region DIRECTORY "Банки"
+    public static class Банки_Const
+    {
+        public const string TABLE = "tab_a39";
+        
+        public const string Код = "col_a1";
+        public const string Назва = "col_a2";
+        public const string КодМФО = "col_a3";
+        public const string НазваГоловноїУстанови = "col_a4";
+        public const string НазваГоловноїУстановиEng = "col_a5";
+        public const string КодЄДРПОУ = "col_a6";
+        public const string НазваСкорочена = "col_a7";
+        public const string НазваПовна = "col_a8";
+        public const string УнікальнийКодБанку = "col_a9";
+        public const string ТипУстанови = "col_b1";
+        public const string КодОблОперДіяльності = "col_b2";
+        public const string НазваОблОперДіяльностіУстанови = "col_b3";
+        public const string ВнутрішньобанківськийКод = "col_b4";
+    }
+
+    public class Банки_Objest : DirectoryObject
+    {
+        public Банки_Objest() : base(Config.Kernel!, "tab_a39",
+             new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b1", "col_b2", "col_b3", "col_b4" }) 
+        {
+            Код = "";
+            Назва = "";
+            КодМФО = "";
+            НазваГоловноїУстанови = "";
+            НазваГоловноїУстановиEng = "";
+            КодЄДРПОУ = "";
+            НазваСкорочена = "";
+            НазваПовна = "";
+            УнікальнийКодБанку = "";
+            ТипУстанови = 0;
+            КодОблОперДіяльності = "";
+            НазваОблОперДіяльностіУстанови = "";
+            ВнутрішньобанківськийКод = "";
+            
+        }
+        
+        public bool Read(UnigueID uid)
+        {
+            if (BaseRead(uid))
+            {
+                Код = base.FieldValue["col_a1"]?.ToString() ?? "";
+                Назва = base.FieldValue["col_a2"]?.ToString() ?? "";
+                КодМФО = base.FieldValue["col_a3"]?.ToString() ?? "";
+                НазваГоловноїУстанови = base.FieldValue["col_a4"]?.ToString() ?? "";
+                НазваГоловноїУстановиEng = base.FieldValue["col_a5"]?.ToString() ?? "";
+                КодЄДРПОУ = base.FieldValue["col_a6"]?.ToString() ?? "";
+                НазваСкорочена = base.FieldValue["col_a7"]?.ToString() ?? "";
+                НазваПовна = base.FieldValue["col_a8"]?.ToString() ?? "";
+                УнікальнийКодБанку = base.FieldValue["col_a9"]?.ToString() ?? "";
+                ТипУстанови = (base.FieldValue["col_b1"] != DBNull.Value) ? (Перелічення.ТипБанківськоїУстанови)base.FieldValue["col_b1"] : 0;
+                КодОблОперДіяльності = base.FieldValue["col_b2"]?.ToString() ?? "";
+                НазваОблОперДіяльностіУстанови = base.FieldValue["col_b3"]?.ToString() ?? "";
+                ВнутрішньобанківськийКод = base.FieldValue["col_b4"]?.ToString() ?? "";
+                
+                BaseClear();
+                return true;
+            }
+            else
+                return false;
+        }
+        
+        public void Save()
+        {
+            base.FieldValue["col_a1"] = Код;
+            base.FieldValue["col_a2"] = Назва;
+            base.FieldValue["col_a3"] = КодМФО;
+            base.FieldValue["col_a4"] = НазваГоловноїУстанови;
+            base.FieldValue["col_a5"] = НазваГоловноїУстановиEng;
+            base.FieldValue["col_a6"] = КодЄДРПОУ;
+            base.FieldValue["col_a7"] = НазваСкорочена;
+            base.FieldValue["col_a8"] = НазваПовна;
+            base.FieldValue["col_a9"] = УнікальнийКодБанку;
+            base.FieldValue["col_b1"] = (int)ТипУстанови;
+            base.FieldValue["col_b2"] = КодОблОперДіяльності;
+            base.FieldValue["col_b3"] = НазваОблОперДіяльностіУстанови;
+            base.FieldValue["col_b4"] = ВнутрішньобанківськийКод;
+            
+            BaseSave();
+            
+        }
+
+        public Банки_Objest Copy()
+        {
+            Банки_Objest copy = new Банки_Objest();
+            copy.New();
+            copy.Код = Код;
+            copy.Назва = Назва;
+            copy.КодМФО = КодМФО;
+            copy.НазваГоловноїУстанови = НазваГоловноїУстанови;
+            copy.НазваГоловноїУстановиEng = НазваГоловноїУстановиEng;
+            copy.КодЄДРПОУ = КодЄДРПОУ;
+            copy.НазваСкорочена = НазваСкорочена;
+            copy.НазваПовна = НазваПовна;
+            copy.УнікальнийКодБанку = УнікальнийКодБанку;
+            copy.ТипУстанови = ТипУстанови;
+            copy.КодОблОперДіяльності = КодОблОперДіяльності;
+            copy.НазваОблОперДіяльностіУстанови = НазваОблОперДіяльностіУстанови;
+            copy.ВнутрішньобанківськийКод = ВнутрішньобанківськийКод;
+            
+            return copy;
+        }
+
+        public void Delete()
+        {
+            
+            base.BaseDelete(new string[] {  });
+        }
+        
+        public Банки_Pointer GetDirectoryPointer()
+        {
+            return new Банки_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.Банки");
+        }
+        
+        public string Код { get; set; }
+        public string Назва { get; set; }
+        public string КодМФО { get; set; }
+        public string НазваГоловноїУстанови { get; set; }
+        public string НазваГоловноїУстановиEng { get; set; }
+        public string КодЄДРПОУ { get; set; }
+        public string НазваСкорочена { get; set; }
+        public string НазваПовна { get; set; }
+        public string УнікальнийКодБанку { get; set; }
+        public Перелічення.ТипБанківськоїУстанови ТипУстанови { get; set; }
+        public string КодОблОперДіяльності { get; set; }
+        public string НазваОблОперДіяльностіУстанови { get; set; }
+        public string ВнутрішньобанківськийКод { get; set; }
+        
+    }
+    
+    
+    public class Банки_Pointer : DirectoryPointer
+    {
+        public Банки_Pointer(object? uid = null) : base(Config.Kernel!, "tab_a39")
+        {
+            base.Init(new UnigueID(uid), null);
+        }
+        
+        public Банки_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel!, "tab_a39")
+        {
+            base.Init(uid, fields);
+        }
+        
+        public Банки_Objest? GetDirectoryObject()
+        {
+            if (this.IsEmpty()) return null;
+            Банки_Objest БанкиObjestItem = new Банки_Objest();
+            return БанкиObjestItem.Read(base.UnigueID) ? БанкиObjestItem : null;
+        }
+
+        public Банки_Pointer GetNewDirectoryPointer()
+        {
+            return new Банки_Pointer(base.UnigueID);
+        }
+
+        public string Назва { get; set; } = "";
+
+        public string GetPresentation()
+        {
+            return Назва = base.BasePresentation(
+              new string[] {  }
+            );
+        }
+		
+        public Банки_Pointer GetEmptyPointer()
+        {
+            return new Банки_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.Банки");
+        }
+    }
+    
+    
+    public class Банки_Select : DirectorySelect
+    {
+        public Банки_Select() : base(Config.Kernel!, "tab_a39") { }        
+        public bool Select() { return base.BaseSelect(); }
+        
+        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        
+        public bool MoveNext() { if (MoveToPosition()) { Current = new Банки_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
+
+        public Банки_Pointer? Current { get; private set; }
+        
+        public Банки_Pointer FindByField(string name, object value)
+        {
+            Банки_Pointer itemPointer = new Банки_Pointer();
+            DirectoryPointer directoryPointer = base.BaseFindByField(name, value);
+            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
+            return itemPointer;
+        }
+        
+        public List<Банки_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<Банки_Pointer> directoryPointerList = new List<Банки_Pointer>();
+            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(name, value, limit, offset)) 
+                directoryPointerList.Add(new Банки_Pointer(directoryPointer.UnigueID));
+            return directoryPointerList;
+        }
+    }
+    
+      
+   
+    #endregion
+    
     #region DIRECTORY "СкладськіПриміщення"
     public static class СкладськіПриміщення_Const
     {
@@ -8515,6 +8749,19 @@ namespace StorageAndTrade_1_0.Перелічення
     }
     #endregion
     
+    #region ENUM "ТипБанківськоїУстанови"
+    
+    public enum ТипБанківськоїУстанови
+    {
+         Банк = 1,
+         Філія = 2,
+         Відділення = 3,
+         ПредставництвоНаТериторіїУкраїни = 4,
+         ФіліяЗаМежамиУкраїни = 5,
+         ПредставництвоЗаМежамиУкраїни = 6
+    }
+    #endregion
+    
 
     public static class ПсевдонімиПерелічення
     {
@@ -9282,6 +9529,48 @@ namespace StorageAndTrade_1_0.Перелічення
             value[1] = new NameValue<ТипиСкладськихКомірок>("Відвантаження", ТипиСкладськихКомірок.Відвантаження);
             
             value[2] = new NameValue<ТипиСкладськихКомірок>("Зберігання", ТипиСкладськихКомірок.Зберігання);
+            
+            return value;
+        }
+        #endregion
+    
+        #region ENUM "ТипБанківськоїУстанови"
+        public static string ТипБанківськоїУстанови_Alias(ТипБанківськоїУстанови value)
+        {
+            switch (value)
+            {
+                
+                case ТипБанківськоїУстанови.Банк: return "Банк";
+                
+                case ТипБанківськоїУстанови.Філія: return "Філія";
+                
+                case ТипБанківськоїУстанови.Відділення: return "Відділення";
+                
+                case ТипБанківськоїУстанови.ПредставництвоНаТериторіїУкраїни: return "Представництво на території України";
+                
+                case ТипБанківськоїУстанови.ФіліяЗаМежамиУкраїни: return "Філія за межами України";
+                
+                case ТипБанківськоїУстанови.ПредставництвоЗаМежамиУкраїни: return "Представництво за межами України";
+                
+                default: return "";
+            }
+        }
+
+        public static NameValue<ТипБанківськоїУстанови>[] ТипБанківськоїУстанови_Array()
+        {
+            NameValue<ТипБанківськоїУстанови>[] value = new NameValue<ТипБанківськоїУстанови>[6];
+            
+            value[0] = new NameValue<ТипБанківськоїУстанови>("Банк", ТипБанківськоїУстанови.Банк);
+            
+            value[1] = new NameValue<ТипБанківськоїУстанови>("Філія", ТипБанківськоїУстанови.Філія);
+            
+            value[2] = new NameValue<ТипБанківськоїУстанови>("Відділення", ТипБанківськоїУстанови.Відділення);
+            
+            value[3] = new NameValue<ТипБанківськоїУстанови>("Представництво на території України", ТипБанківськоїУстанови.ПредставництвоНаТериторіїУкраїни);
+            
+            value[4] = new NameValue<ТипБанківськоїУстанови>("Філія за межами України", ТипБанківськоїУстанови.ФіліяЗаМежамиУкраїни);
+            
+            value[5] = new NameValue<ТипБанківськоїУстанови>("Представництво за межами України", ТипБанківськоїУстанови.ПредставництвоЗаМежамиУкраїни);
             
             return value;
         }
