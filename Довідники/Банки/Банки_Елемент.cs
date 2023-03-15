@@ -37,7 +37,13 @@ namespace StorageAndTrade
         public Банки_Objest Банки_Objest { get; set; } = new Банки_Objest();
 
         Entry Код = new Entry() { WidthRequest = 100 };
-        Entry Назва = new Entry() { WidthRequest = 500 };
+        Entry КодМФО = new Entry() { WidthRequest = 100 };
+        Entry УнікальнийКодБанку = new Entry() { WidthRequest = 100 };
+        Entry КодЄДРПОУ = new Entry() { WidthRequest = 100 };
+
+        Entry Назва = new Entry();
+        Entry ПовнаНазва = new Entry();
+        Entry НазваГоловноїУстановиАнг = new Entry();
 
         public Банки_Елемент() : base()
         {
@@ -53,20 +59,72 @@ namespace StorageAndTrade
 
             PackStart(hBox, false, false, 10);
 
-            HPaned hPaned = new HPaned() { BorderWidth = 5, Position = 500 };
+            CreateTop();
 
-            CreatePack1(hPaned);
-            CreatePack2(hPaned);
-
-            PackStart(hPaned, false, false, 5);
+            CreatePack();
 
             ShowAll();
         }
 
-        void CreatePack1(HPaned hPaned)
+        void CreateTop()
         {
             VBox vBox = new VBox();
 
+            //Назва
+            HBox hBoxName = new HBox();
+            vBox.PackStart(hBoxName, false, true, 5);
+
+            hBoxName.PackStart(new Label("Коротка назва:"), false, false, 5);
+            hBoxName.PackStart(Назва, true, true, 5);
+
+            //Повна Назва
+            HBox hBoxFullName = new HBox();
+            vBox.PackStart(hBoxFullName, false, true, 5);
+
+            hBoxFullName.PackStart(new Label("Повна назва:"), false, false, 5);
+            hBoxFullName.PackStart(ПовнаНазва, true, true, 5);
+
+            //Назва En
+            HBox hBoxNameEn = new HBox();
+            vBox.PackStart(hBoxNameEn, false, true, 5);
+
+            hBoxNameEn.PackStart(new Label("Назва англ:"), false, false, 5);
+            hBoxNameEn.PackStart(НазваГоловноїУстановиАнг, true, true, 5);
+
+            PackStart(vBox, false, false, 0);
+        }
+
+        void CreatePack()
+        {
+            VBox vBox = new VBox();
+
+            //Два блоки для полів -->
+            HBox hBoxContainer = new HBox();
+            vBox.PackStart(hBoxContainer, false, false, 0);
+
+            //Container1
+            VBox vBoxContainer1 = new VBox() { WidthRequest = 500 };
+            hBoxContainer.PackStart(vBoxContainer1, false, false, 5);
+
+            CreateContainer1(vBoxContainer1);
+
+            //Container2
+            VBox vBoxContainer2 = new VBox() { WidthRequest = 500 };
+            hBoxContainer.PackStart(vBoxContainer2, false, false, 5);
+
+            CreateContainer2(vBoxContainer2);
+            // <--
+
+            PackStart(vBox, false, false, 0);
+        }
+
+        void CreateContainer1(VBox vBox)
+        {
+            
+        }
+
+        void CreateContainer2(VBox vBox)
+        {
             //Код
             HBox hBoxCode = new HBox() { Halign = Align.End };
             vBox.PackStart(hBoxCode, false, false, 5);
@@ -74,23 +132,26 @@ namespace StorageAndTrade
             hBoxCode.PackStart(new Label("Код:"), false, false, 5);
             hBoxCode.PackStart(Код, false, false, 5);
 
-            //Назва
-            HBox hBoxName = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxName, false, false, 5);
+            //КодМФО
+            HBox hBoxCodeMFO = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxCodeMFO, false, false, 5);
 
-            hBoxName.PackStart(new Label("Назва:"), false, false, 5);
-            hBoxName.PackStart(Назва, false, false, 5);
+            hBoxCodeMFO.PackStart(new Label("Код МФО:"), false, false, 5);
+            hBoxCodeMFO.PackStart(КодМФО, false, false, 5);
 
-            hPaned.Pack1(vBox, false, false);
-        }
+            //УнікальнийКодБанку
+            HBox hBoxUniqueCode = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxUniqueCode, false, false, 5);
 
-        void CreatePack2(HPaned hPaned)
-        {
-            VBox vBox = new VBox();
+            hBoxUniqueCode.PackStart(new Label("Унікальний код:"), false, false, 5);
+            hBoxUniqueCode.PackStart(УнікальнийКодБанку, false, false, 5);
 
+            //КодЄДРПОУ
+            HBox hBoxCodeEDRPUO = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxCodeEDRPUO, false, false, 5);
 
-
-            hPaned.Pack2(vBox, false, false);
+            hBoxCodeEDRPUO.PackStart(new Label("Код ЄДРПОУ:"), false, false, 5);
+            hBoxCodeEDRPUO.PackStart(КодЄДРПОУ, false, false, 5);
         }
 
         #region Присвоєння / зчитування значень
@@ -102,6 +163,11 @@ namespace StorageAndTrade
 
             Код.Text = Банки_Objest.Код;
             Назва.Text = Банки_Objest.Назва;
+            ПовнаНазва.Text = Банки_Objest.ПовнаНазва;
+            НазваГоловноїУстановиАнг.Text = Банки_Objest.НазваГоловноїУстановиАнг;
+            КодМФО.Text = Банки_Objest.КодМФО;
+            УнікальнийКодБанку.Text = Банки_Objest.УнікальнийКодБанку;
+            КодЄДРПОУ.Text = Банки_Objest.КодЄДРПОУ;
         }
 
         void GetValue()

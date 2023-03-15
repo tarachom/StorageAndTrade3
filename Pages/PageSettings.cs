@@ -78,6 +78,7 @@ namespace StorageAndTrade
         //
 
         Entry ЗавантаженняДанихІзСайтів = new Entry() { WidthRequest = 500 };
+        Entry ЗавантаженняСпискуБанківІзСайтів = new Entry() { WidthRequest = 500 };
 
         #endregion
 
@@ -205,12 +206,30 @@ namespace StorageAndTrade
                 //Info
                 HBox hBoxInfo = new HBox() { Halign = Align.Start };
                 vBoxDownloadCursNBU.PackStart(hBoxInfo, false, false, 15);
-                hBoxInfo.PackStart(new Label("За замовчуванням: https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange") { Wrap = true }, false, false, 5);
+                hBoxInfo.PackStart(new Label("За замовчуванням: https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange") { Selectable = true, Wrap = true }, false, false, 5);
 
                 //Controls
                 AddCaptionAndControl(vBoxDownloadCursNBU, new Label("Лінк:"), ЗавантаженняДанихІзСайтів);
 
                 vBox.PackStart(expanderDownloadCursNBU, false, false, 10);
+            }
+
+            //5
+            {
+                VBox vBoxDownloadListBank = new VBox();
+
+                Expander expanderDownloadListBank = new Expander("Завантаження списку банків") { Expanded = false };
+                expanderDownloadListBank.Add(vBoxDownloadListBank);
+
+                //Info
+                HBox hBoxInfo = new HBox() { Halign = Align.Start };
+                vBoxDownloadListBank.PackStart(hBoxInfo, false, false, 15);
+                hBoxInfo.PackStart(new Label("За замовчуванням: https://accounting.org.ua/xml/get_data_branch_glbank.xml") { Selectable = true, Wrap = true }, false, false, 5);
+
+                //Controls
+                AddCaptionAndControl(vBoxDownloadListBank, new Label("Лінк:"), ЗавантаженняСпискуБанківІзСайтів);
+
+                vBox.PackStart(expanderDownloadListBank, false, false, 10);
             }
         }
 
@@ -367,6 +386,7 @@ namespace StorageAndTrade
             //
 
             ЗавантаженняДанихІзСайтів.Text = Константи.ЗавантаженняДанихІзСайтів.ЗавантаженняКурсівВалют_Const;
+            ЗавантаженняСпискуБанківІзСайтів.Text = Константи.ЗавантаженняДанихІзСайтів.ЗавантаженняСпискуБанків_Const;
         }
 
         void GetValue()
@@ -408,6 +428,7 @@ namespace StorageAndTrade
             //
 
             Константи.ЗавантаженняДанихІзСайтів.ЗавантаженняКурсівВалют_Const = ЗавантаженняДанихІзСайтів.Text;
+            Константи.ЗавантаженняДанихІзСайтів.ЗавантаженняСпискуБанків_Const = ЗавантаженняСпискуБанківІзСайтів.Text;
         }
 
         void OnSaveClick(object? sender, EventArgs args)

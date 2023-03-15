@@ -100,10 +100,10 @@ namespace StorageAndTrade
             if (String.IsNullOrEmpty(link))
             {
                 //За замовчуванням
-                link = "https://bank.gov.ua/NBU_BankInfo/get_data_branch_glbank";
+                link = "https://accounting.org.ua/xml/get_data_branch_glbank.xml";
             }
 
-            CreateMessage(TypeMessage.Info, $"Завантаження ХМЛ файлу із списком банків з офіційного сайту: bank.gov.ua");
+            CreateMessage(TypeMessage.Info, $"Завантаження ХМЛ файлу із accounting.org.ua");
 
             XPathDocument xPathDoc;
             XPathNavigator? xPathDocNavigator = null;
@@ -168,11 +168,25 @@ namespace StorageAndTrade
                     string ДатаЗапису = Записи?.Current?.SelectSingleNode("DT_LIC")?.Value ?? "";
 
                     Банки_Pointer банки_Pointer = банки_Select.FindByField(Банки_Const.КодМФО, КодМФО);
+                    Банки_Objest? банки_Objest;
+
                     if (банки_Pointer.IsEmpty())
                     {
-                        Банки_Objest банки_Objest = new Банки_Objest();
+                        банки_Objest = new Банки_Objest();
                         банки_Objest.New();
+                        банки_Objest.КодМФО = КодМФО;
                         банки_Objest.Код = (++Константи.НумераціяДовідників.Банки_Const).ToString("D6");
+
+                        CreateMessage(TypeMessage.Ok, $"Додано новий елемент довідника Банки: {Назва}");
+                    }
+                    else
+                    {
+                        банки_Objest = банки_Pointer.GetDirectoryObject();
+                        CreateMessage(TypeMessage.Info, $"Знайдено банк {Назва} з кодом МФО: {КодМФО}");
+                    }
+
+                    if (банки_Objest != null)
+                    {
                         банки_Objest.НазваГоловноїУстановиАнг = НазваГоловноїУстановиАнг;
                         банки_Objest.КодЄДРПОУ = КодЄДРПОУ;
                         банки_Objest.Назва = Назва;
@@ -201,10 +215,7 @@ namespace StorageAndTrade
                         банки_Objest.ДатаЗапису = ДатаЗапису;
 
                         банки_Objest.Save();
-
-                        CreateMessage(TypeMessage.Ok, $"Додано новий елемент довідника Банки: {Назва}");
                     }
-
                 }
             }
 
