@@ -26,13 +26,12 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 15.03.2023 15:25:05
+ * Дата конфігурації: 15.03.2023 21:50:59
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
  *
  */
-
 
 using AccountingSoftware;
 using System.Xml;
@@ -55,9 +54,15 @@ namespace StorageAndTrade_1_0
             Константи.ПриЗапускуПрограми.ReadAll();
             
         }
-        
+    }
+
+    public class Functions
+    {
         /*
-        
+          Функція для типу який задається користувачем.
+          Повертає презентацію для uuidAndText.
+          В @pointer - повертає групу (Документи або Довідники)
+            @type - повертає назву типу
         */
         public static string GetBasisObjectPresentation(UuidAndText uuidAndText, out string pointer, out string type)
         {
@@ -211,7 +216,7 @@ namespace StorageAndTrade_1_0
 namespace StorageAndTrade_1_0.Константи
 {
     
-	#region CONSTANTS BLOCK "ЗначенняЗаЗамовчуванням"
+	  #region CONSTANTS BLOCK "ЗначенняЗаЗамовчуванням"
     public static class ЗначенняЗаЗамовчуванням
     {
         public static void ReadAll()
@@ -237,7 +242,7 @@ namespace StorageAndTrade_1_0.Константи
                 m_ОсновнийВидЦіниЗакупівлі_Const = new Довідники.ВидиЦін_Pointer(fieldValue["col_c3"]);
                 
             }
-			
+			      
         }
         
         
@@ -412,7 +417,7 @@ namespace StorageAndTrade_1_0.Константи
     }
     #endregion
     
-	#region CONSTANTS BLOCK "Системні"
+	  #region CONSTANTS BLOCK "Системні"
     public static class Системні
     {
         public static void ReadAll()
@@ -433,7 +438,7 @@ namespace StorageAndTrade_1_0.Константи
                 m_ВестиОблікПоХарактеристикахНоменклатури_Const = (fieldValue["col_i1"] != DBNull.Value) ? bool.Parse(fieldValue["col_i1"]?.ToString() ?? "False") : false;
                 
             }
-			
+			      
         }
         
         
@@ -535,6 +540,7 @@ namespace StorageAndTrade_1_0.Константи
             }
         }
         
+        
         public class ЖурналРеєстрації_Журнал_TablePart : ConstantsTablePart
         {
             public ЖурналРеєстрації_Журнал_TablePart() : base(Config.Kernel!, "tab_a69",
@@ -601,22 +607,15 @@ namespace StorageAndTrade_1_0.Константи
             
             public class Record : ConstantsTablePartRecord
             {
-                public Record()
-                {
-                    Дата = DateTime.MinValue;
-                    Коментар = "";
-                    Обєкт = "";
-                    Користувач = "";
-                    
-                }
-                public DateTime Дата { get; set; }
-                public string Коментар { get; set; }
-                public string Обєкт { get; set; }
-                public string Користувач { get; set; }
+                public DateTime Дата { get; set; } = DateTime.MinValue;
+                public string Коментар { get; set; } = "";
+                public string Обєкт { get; set; } = "";
+                public string Користувач { get; set; } = "";
                 
-            }            
+            }
         }
           
+        
         public class ФоновіЗадачі_Задачі_TablePart : ConstantsTablePart
         {
             public ФоновіЗадачі_Задачі_TablePart() : base(Config.Kernel!, "tab_a67",
@@ -689,26 +688,17 @@ namespace StorageAndTrade_1_0.Константи
             
             public class Record : ConstantsTablePartRecord
             {
-                public Record()
-                {
-                    Назва = "";
-                    Дата = DateTime.MinValue;
-                    Ключ = "";
-                    Виконано = false;
-                    Заблоковано = false;
-                    Результат = "";
-                    
-                }
-                public string Назва { get; set; }
-                public DateTime Дата { get; set; }
-                public string Ключ { get; set; }
-                public bool Виконано { get; set; }
-                public bool Заблоковано { get; set; }
-                public string Результат { get; set; }
+                public string Назва { get; set; } = "";
+                public DateTime Дата { get; set; } = DateTime.MinValue;
+                public string Ключ { get; set; } = "";
+                public bool Виконано { get; set; } = false;
+                public bool Заблоковано { get; set; } = false;
+                public string Результат { get; set; } = "";
                 
-            }            
+            }
         }
           
+        
         public class ЗаблокованіОбєкти_Документи_TablePart : ConstantsTablePart
         {
             public ЗаблокованіОбєкти_Документи_TablePart() : base(Config.Kernel!, "tab_b03",
@@ -775,22 +765,15 @@ namespace StorageAndTrade_1_0.Константи
             
             public class Record : ConstantsTablePartRecord
             {
-                public Record()
-                {
-                    Обєкт = new Guid();
-                    Користувач = "";
-                    ДатаБлокування = DateTime.MinValue;
-                    ДатаПідтвердженняБлокування = DateTime.MinValue;
-                    
-                }
-                public Guid Обєкт { get; set; }
-                public string Користувач { get; set; }
-                public DateTime ДатаБлокування { get; set; }
-                public DateTime ДатаПідтвердженняБлокування { get; set; }
+                public Guid Обєкт { get; set; } = new Guid();
+                public string Користувач { get; set; } = "";
+                public DateTime ДатаБлокування { get; set; } = DateTime.MinValue;
+                public DateTime ДатаПідтвердженняБлокування { get; set; } = DateTime.MinValue;
                 
-            }            
+            }
         }
           
+        
         public class ПовідомленняТаПомилки_Помилки_TablePart : ConstantsTablePart
         {
             public ПовідомленняТаПомилки_Помилки_TablePart() : base(Config.Kernel!, "tab_b21",
@@ -863,30 +846,20 @@ namespace StorageAndTrade_1_0.Константи
             
             public class Record : ConstantsTablePartRecord
             {
-                public Record()
-                {
-                    Дата = DateTime.MinValue;
-                    НазваПроцесу = "";
-                    Обєкт = new Guid();
-                    ТипОбєкту = "";
-                    НазваОбєкту = "";
-                    Повідомлення = "";
-                    
-                }
-                public DateTime Дата { get; set; }
-                public string НазваПроцесу { get; set; }
-                public Guid Обєкт { get; set; }
-                public string ТипОбєкту { get; set; }
-                public string НазваОбєкту { get; set; }
-                public string Повідомлення { get; set; }
+                public DateTime Дата { get; set; } = DateTime.MinValue;
+                public string НазваПроцесу { get; set; } = "";
+                public Guid Обєкт { get; set; } = new Guid();
+                public string ТипОбєкту { get; set; } = "";
+                public string НазваОбєкту { get; set; } = "";
+                public string Повідомлення { get; set; } = "";
                 
-            }            
+            }
         }
                
     }
     #endregion
     
-	#region CONSTANTS BLOCK "НумераціяДокументів"
+	  #region CONSTANTS BLOCK "НумераціяДокументів"
     public static class НумераціяДокументів
     {
         public static void ReadAll()
@@ -922,7 +895,7 @@ namespace StorageAndTrade_1_0.Константи
                 m_РозміщенняНоменклатуриПоКоміркам_Const = (fieldValue["col_b5"] != DBNull.Value) ? (int)fieldValue["col_b5"] : 0;
                 
             }
-			
+			      
         }
         
         
@@ -1237,7 +1210,7 @@ namespace StorageAndTrade_1_0.Константи
     }
     #endregion
     
-	#region CONSTANTS BLOCK "НумераціяДовідників"
+	  #region CONSTANTS BLOCK "НумераціяДовідників"
     public static class НумераціяДовідників
     {
         public static void ReadAll()
@@ -1277,7 +1250,7 @@ namespace StorageAndTrade_1_0.Константи
                 m_Банки_Const = (fieldValue["col_g8"] != DBNull.Value) ? (int)fieldValue["col_g8"] : 0;
                 
             }
-			
+			      
         }
         
         
@@ -1648,7 +1621,7 @@ namespace StorageAndTrade_1_0.Константи
     }
     #endregion
     
-	#region CONSTANTS BLOCK "ЖурналиДокументів"
+	  #region CONSTANTS BLOCK "ЖурналиДокументів"
     public static class ЖурналиДокументів
     {
         public static void ReadAll()
@@ -1663,7 +1636,7 @@ namespace StorageAndTrade_1_0.Константи
                 m_ОсновнийТипПеріоду_Const = (fieldValue["col_h3"] != DBNull.Value) ? (Перелічення.ТипПеріодуДляЖурналівДокументів)fieldValue["col_h3"] : 0;
                 
             }
-			
+			      
         }
         
         
@@ -1684,7 +1657,7 @@ namespace StorageAndTrade_1_0.Константи
     }
     #endregion
     
-	#region CONSTANTS BLOCK "ПартіїТоварів"
+	  #region CONSTANTS BLOCK "ПартіїТоварів"
     public static class ПартіїТоварів
     {
         public static void ReadAll()
@@ -1699,7 +1672,7 @@ namespace StorageAndTrade_1_0.Константи
                 m_МетодСписанняПартій_Const = (fieldValue["col_h4"] != DBNull.Value) ? (Перелічення.МетодиСписанняПартій)fieldValue["col_h4"] : 0;
                 
             }
-			
+			      
         }
         
         
@@ -1720,7 +1693,7 @@ namespace StorageAndTrade_1_0.Константи
     }
     #endregion
     
-	#region CONSTANTS BLOCK "ЗавантаженняДанихІзСайтів"
+	  #region CONSTANTS BLOCK "ЗавантаженняДанихІзСайтів"
     public static class ЗавантаженняДанихІзСайтів
     {
         public static void ReadAll()
@@ -1737,7 +1710,7 @@ namespace StorageAndTrade_1_0.Константи
                 m_ЗавантаженняСпискуБанків_Const = fieldValue["col_g3"]?.ToString() ?? "";
                 
             }
-			
+			      
         }
         
         
@@ -1782,6 +1755,7 @@ namespace StorageAndTrade_1_0.Константи
                 Config.Kernel!.DataBase.SaveConstants("tab_constants", "col_g3", m_ЗавантаженняСпискуБанків_Const);
             }
         }
+        
         
         public class ЗавантаженняКурсівВалют_Історія_TablePart : ConstantsTablePart
         {
@@ -1849,26 +1823,18 @@ namespace StorageAndTrade_1_0.Константи
             
             public class Record : ConstantsTablePartRecord
             {
-                public Record()
-                {
-                    Дата = DateTime.MinValue;
-                    Стан = "";
-                    Посилання = "";
-                    Повідомлення = "";
-                    
-                }
-                public DateTime Дата { get; set; }
-                public string Стан { get; set; }
-                public string Посилання { get; set; }
-                public string Повідомлення { get; set; }
+                public DateTime Дата { get; set; } = DateTime.MinValue;
+                public string Стан { get; set; } = "";
+                public string Посилання { get; set; } = "";
+                public string Повідомлення { get; set; } = "";
                 
-            }            
+            }
         }
                
     }
     #endregion
     
-	#region CONSTANTS BLOCK "ПриЗапускуПрограми"
+	  #region CONSTANTS BLOCK "ПриЗапускуПрограми"
     public static class ПриЗапускуПрограми
     {
         public static void ReadAll()
@@ -1884,7 +1850,7 @@ namespace StorageAndTrade_1_0.Константи
                 m_ВідкриватиРобочийСтіл_Const = (fieldValue["col_h6"] != DBNull.Value) ? bool.Parse(fieldValue["col_h6"]?.ToString() ?? "False") : false;
                 
             }
-			
+			      
         }
         
         
@@ -2044,8 +2010,7 @@ namespace StorageAndTrade_1_0.Довідники
         public Організації_Контакти_TablePart Контакти_TablePart { get; set; }
         
     }
-    
-    
+
     public class Організації_Pointer : DirectoryPointer
     {
         public Організації_Pointer(object? uid = null) : base(Config.Kernel!, "tab_a01")
@@ -2090,7 +2055,6 @@ namespace StorageAndTrade_1_0.Довідники
         }
     }
     
-    
     public class Організації_Select : DirectorySelect
     {
         public Організації_Select() : base(Config.Kernel!, "tab_a01") { }        
@@ -2120,6 +2084,7 @@ namespace StorageAndTrade_1_0.Довідники
     }
     
       
+    
     public class Організації_Контакти_TablePart : DirectoryTablePart
     {
         public Організації_Контакти_TablePart(Організації_Objest owner) : base(Config.Kernel!, "tab_a02",
@@ -2200,29 +2165,16 @@ namespace StorageAndTrade_1_0.Довідники
             base.BaseDelete(Owner.UnigueID);
         }
         
-        
         public class Record : DirectoryTablePartRecord
         {
-            public Record()
-            {
-                Тип = 0;
-                Телефон = "";
-                ЕлектроннаПошта = "";
-                Країна = "";
-                Область = "";
-                Район = "";
-                Місто = "";
-                Значення = "";
-                
-            }
-            public Перелічення.ТипиКонтактноїІнформації Тип { get; set; }
-            public string Телефон { get; set; }
-            public string ЕлектроннаПошта { get; set; }
-            public string Країна { get; set; }
-            public string Область { get; set; }
-            public string Район { get; set; }
-            public string Місто { get; set; }
-            public string Значення { get; set; }
+            public Перелічення.ТипиКонтактноїІнформації Тип { get; set; } = 0;
+            public string Телефон { get; set; } = "";
+            public string ЕлектроннаПошта { get; set; } = "";
+            public string Країна { get; set; } = "";
+            public string Область { get; set; } = "";
+            public string Район { get; set; } = "";
+            public string Місто { get; set; } = "";
+            public string Значення { get; set; } = "";
             
         }
     }
@@ -2363,8 +2315,7 @@ namespace StorageAndTrade_1_0.Довідники
         public Номенклатура_Файли_TablePart Файли_TablePart { get; set; }
         
     }
-    
-    
+
     public class Номенклатура_Pointer : DirectoryPointer
     {
         public Номенклатура_Pointer(object? uid = null) : base(Config.Kernel!, "tab_a03")
@@ -2409,7 +2360,6 @@ namespace StorageAndTrade_1_0.Довідники
         }
     }
     
-    
     public class Номенклатура_Select : DirectorySelect
     {
         public Номенклатура_Select() : base(Config.Kernel!, "tab_a03") { }        
@@ -2439,6 +2389,7 @@ namespace StorageAndTrade_1_0.Довідники
     }
     
       
+    
     public class Номенклатура_Файли_TablePart : DirectoryTablePart
     {
         public Номенклатура_Файли_TablePart(Номенклатура_Objest owner) : base(Config.Kernel!, "tab_b19",
@@ -2501,17 +2452,10 @@ namespace StorageAndTrade_1_0.Довідники
             base.BaseDelete(Owner.UnigueID);
         }
         
-        
         public class Record : DirectoryTablePartRecord
         {
-            public Record()
-            {
-                Файл = new Довідники.Файли_Pointer();
-                Основний = false;
-                
-            }
-            public Довідники.Файли_Pointer Файл { get; set; }
-            public bool Основний { get; set; }
+            public Довідники.Файли_Pointer Файл { get; set; } = new Довідники.Файли_Pointer();
+            public bool Основний { get; set; } = false;
             
         }
     }
@@ -2591,8 +2535,7 @@ namespace StorageAndTrade_1_0.Довідники
         public string Код { get; set; }
         
     }
-    
-    
+
     public class Виробники_Pointer : DirectoryPointer
     {
         public Виробники_Pointer(object? uid = null) : base(Config.Kernel!, "tab_a04")
@@ -2636,7 +2579,6 @@ namespace StorageAndTrade_1_0.Довідники
             return new UuidAndText(UnigueID.UGuid, "Довідники.Виробники");
         }
     }
-    
     
     public class Виробники_Select : DirectorySelect
     {
@@ -2760,8 +2702,7 @@ namespace StorageAndTrade_1_0.Довідники
         public Довідники.ПакуванняОдиниціВиміру_Pointer ОдиницяВиміру { get; set; }
         
     }
-    
-    
+
     public class ВидиНоменклатури_Pointer : DirectoryPointer
     {
         public ВидиНоменклатури_Pointer(object? uid = null) : base(Config.Kernel!, "tab_a05")
@@ -2805,7 +2746,6 @@ namespace StorageAndTrade_1_0.Довідники
             return new UuidAndText(UnigueID.UGuid, "Довідники.ВидиНоменклатури");
         }
     }
-    
     
     public class ВидиНоменклатури_Select : DirectorySelect
     {
@@ -2923,8 +2863,7 @@ namespace StorageAndTrade_1_0.Довідники
         public int КількістьУпаковок { get; set; }
         
     }
-    
-    
+
     public class ПакуванняОдиниціВиміру_Pointer : DirectoryPointer
     {
         public ПакуванняОдиниціВиміру_Pointer(object? uid = null) : base(Config.Kernel!, "tab_a06")
@@ -2968,7 +2907,6 @@ namespace StorageAndTrade_1_0.Довідники
             return new UuidAndText(UnigueID.UGuid, "Довідники.ПакуванняОдиниціВиміру");
         }
     }
-    
     
     public class ПакуванняОдиниціВиміру_Select : DirectorySelect
     {
@@ -3093,8 +3031,7 @@ namespace StorageAndTrade_1_0.Довідники
         public bool ВиводитиКурсНаСтартову { get; set; }
         
     }
-    
-    
+
     public class Валюти_Pointer : DirectoryPointer
     {
         public Валюти_Pointer(object? uid = null) : base(Config.Kernel!, "tab_a07")
@@ -3138,7 +3075,6 @@ namespace StorageAndTrade_1_0.Довідники
             return new UuidAndText(UnigueID.UGuid, "Довідники.Валюти");
         }
     }
-    
     
     public class Валюти_Select : DirectorySelect
     {
@@ -3277,8 +3213,7 @@ namespace StorageAndTrade_1_0.Довідники
         public Контрагенти_Файли_TablePart Файли_TablePart { get; set; }
         
     }
-    
-    
+
     public class Контрагенти_Pointer : DirectoryPointer
     {
         public Контрагенти_Pointer(object? uid = null) : base(Config.Kernel!, "tab_a08")
@@ -3323,7 +3258,6 @@ namespace StorageAndTrade_1_0.Довідники
         }
     }
     
-    
     public class Контрагенти_Select : DirectorySelect
     {
         public Контрагенти_Select() : base(Config.Kernel!, "tab_a08") { }        
@@ -3353,6 +3287,7 @@ namespace StorageAndTrade_1_0.Довідники
     }
     
       
+    
     public class Контрагенти_Контакти_TablePart : DirectoryTablePart
     {
         public Контрагенти_Контакти_TablePart(Контрагенти_Objest owner) : base(Config.Kernel!, "tab_a09",
@@ -3433,33 +3368,21 @@ namespace StorageAndTrade_1_0.Довідники
             base.BaseDelete(Owner.UnigueID);
         }
         
-        
         public class Record : DirectoryTablePartRecord
         {
-            public Record()
-            {
-                Тип = 0;
-                Телефон = "";
-                ЕлектроннаПошта = "";
-                Країна = "";
-                Область = "";
-                Район = "";
-                Місто = "";
-                Значення = "";
-                
-            }
-            public Перелічення.ТипиКонтактноїІнформації Тип { get; set; }
-            public string Телефон { get; set; }
-            public string ЕлектроннаПошта { get; set; }
-            public string Країна { get; set; }
-            public string Область { get; set; }
-            public string Район { get; set; }
-            public string Місто { get; set; }
-            public string Значення { get; set; }
+            public Перелічення.ТипиКонтактноїІнформації Тип { get; set; } = 0;
+            public string Телефон { get; set; } = "";
+            public string ЕлектроннаПошта { get; set; } = "";
+            public string Країна { get; set; } = "";
+            public string Область { get; set; } = "";
+            public string Район { get; set; } = "";
+            public string Місто { get; set; } = "";
+            public string Значення { get; set; } = "";
             
         }
     }
       
+    
     public class Контрагенти_Файли_TablePart : DirectoryTablePart
     {
         public Контрагенти_Файли_TablePart(Контрагенти_Objest owner) : base(Config.Kernel!, "tab_b20",
@@ -3519,15 +3442,9 @@ namespace StorageAndTrade_1_0.Довідники
             base.BaseDelete(Owner.UnigueID);
         }
         
-        
         public class Record : DirectoryTablePartRecord
         {
-            public Record()
-            {
-                Файл = new Довідники.Файли_Pointer();
-                
-            }
-            public Довідники.Файли_Pointer Файл { get; set; }
+            public Довідники.Файли_Pointer Файл { get; set; } = new Довідники.Файли_Pointer();
             
         }
     }
@@ -3649,8 +3566,7 @@ namespace StorageAndTrade_1_0.Довідники
         public Склади_Контакти_TablePart Контакти_TablePart { get; set; }
         
     }
-    
-    
+
     public class Склади_Pointer : DirectoryPointer
     {
         public Склади_Pointer(object? uid = null) : base(Config.Kernel!, "tab_a10")
@@ -3695,7 +3611,6 @@ namespace StorageAndTrade_1_0.Довідники
         }
     }
     
-    
     public class Склади_Select : DirectorySelect
     {
         public Склади_Select() : base(Config.Kernel!, "tab_a10") { }        
@@ -3725,6 +3640,7 @@ namespace StorageAndTrade_1_0.Довідники
     }
     
       
+    
     public class Склади_Контакти_TablePart : DirectoryTablePart
     {
         public Склади_Контакти_TablePart(Склади_Objest owner) : base(Config.Kernel!, "tab_a11",
@@ -3805,29 +3721,16 @@ namespace StorageAndTrade_1_0.Довідники
             base.BaseDelete(Owner.UnigueID);
         }
         
-        
         public class Record : DirectoryTablePartRecord
         {
-            public Record()
-            {
-                Тип = 0;
-                Телефон = "";
-                ЕлектроннаПошта = "";
-                Країна = "";
-                Область = "";
-                Район = "";
-                Місто = "";
-                Значення = "";
-                
-            }
-            public Перелічення.ТипиКонтактноїІнформації Тип { get; set; }
-            public string Телефон { get; set; }
-            public string ЕлектроннаПошта { get; set; }
-            public string Країна { get; set; }
-            public string Область { get; set; }
-            public string Район { get; set; }
-            public string Місто { get; set; }
-            public string Значення { get; set; }
+            public Перелічення.ТипиКонтактноїІнформації Тип { get; set; } = 0;
+            public string Телефон { get; set; } = "";
+            public string ЕлектроннаПошта { get; set; } = "";
+            public string Країна { get; set; } = "";
+            public string Область { get; set; } = "";
+            public string Район { get; set; } = "";
+            public string Місто { get; set; } = "";
+            public string Значення { get; set; } = "";
             
         }
     }
@@ -3913,8 +3816,7 @@ namespace StorageAndTrade_1_0.Довідники
         public Довідники.Валюти_Pointer Валюта { get; set; }
         
     }
-    
-    
+
     public class ВидиЦін_Pointer : DirectoryPointer
     {
         public ВидиЦін_Pointer(object? uid = null) : base(Config.Kernel!, "tab_a12")
@@ -3958,7 +3860,6 @@ namespace StorageAndTrade_1_0.Довідники
             return new UuidAndText(UnigueID.UGuid, "Довідники.ВидиЦін");
         }
     }
-    
     
     public class ВидиЦін_Select : DirectorySelect
     {
@@ -4070,8 +3971,7 @@ namespace StorageAndTrade_1_0.Довідники
         public Довідники.Валюти_Pointer Валюта { get; set; }
         
     }
-    
-    
+
     public class ВидиЦінПостачальників_Pointer : DirectoryPointer
     {
         public ВидиЦінПостачальників_Pointer(object? uid = null) : base(Config.Kernel!, "tab_a13")
@@ -4115,7 +4015,6 @@ namespace StorageAndTrade_1_0.Довідники
             return new UuidAndText(UnigueID.UGuid, "Довідники.ВидиЦінПостачальників");
         }
     }
-    
     
     public class ВидиЦінПостачальників_Select : DirectorySelect
     {
@@ -4245,8 +4144,7 @@ namespace StorageAndTrade_1_0.Довідники
         public Користувачі_Контакти_TablePart Контакти_TablePart { get; set; }
         
     }
-    
-    
+
     public class Користувачі_Pointer : DirectoryPointer
     {
         public Користувачі_Pointer(object? uid = null) : base(Config.Kernel!, "tab_a14")
@@ -4291,7 +4189,6 @@ namespace StorageAndTrade_1_0.Довідники
         }
     }
     
-    
     public class Користувачі_Select : DirectorySelect
     {
         public Користувачі_Select() : base(Config.Kernel!, "tab_a14") { }        
@@ -4321,6 +4218,7 @@ namespace StorageAndTrade_1_0.Довідники
     }
     
       
+    
     public class Користувачі_Контакти_TablePart : DirectoryTablePart
     {
         public Користувачі_Контакти_TablePart(Користувачі_Objest owner) : base(Config.Kernel!, "tab_a15",
@@ -4398,27 +4296,15 @@ namespace StorageAndTrade_1_0.Довідники
             base.BaseDelete(Owner.UnigueID);
         }
         
-        
         public class Record : DirectoryTablePartRecord
         {
-            public Record()
-            {
-                Тип = 0;
-                Телефон = "";
-                ЕлектроннаПошта = "";
-                Країна = "";
-                Область = "";
-                Район = "";
-                Місто = "";
-                
-            }
-            public Перелічення.ТипиКонтактноїІнформації Тип { get; set; }
-            public string Телефон { get; set; }
-            public string ЕлектроннаПошта { get; set; }
-            public string Країна { get; set; }
-            public string Область { get; set; }
-            public string Район { get; set; }
-            public string Місто { get; set; }
+            public Перелічення.ТипиКонтактноїІнформації Тип { get; set; } = 0;
+            public string Телефон { get; set; } = "";
+            public string ЕлектроннаПошта { get; set; } = "";
+            public string Країна { get; set; } = "";
+            public string Область { get; set; } = "";
+            public string Район { get; set; } = "";
+            public string Місто { get; set; } = "";
             
         }
     }
@@ -4522,8 +4408,7 @@ namespace StorageAndTrade_1_0.Довідники
         public ФізичніОсоби_Контакти_TablePart Контакти_TablePart { get; set; }
         
     }
-    
-    
+
     public class ФізичніОсоби_Pointer : DirectoryPointer
     {
         public ФізичніОсоби_Pointer(object? uid = null) : base(Config.Kernel!, "tab_a16")
@@ -4568,7 +4453,6 @@ namespace StorageAndTrade_1_0.Довідники
         }
     }
     
-    
     public class ФізичніОсоби_Select : DirectorySelect
     {
         public ФізичніОсоби_Select() : base(Config.Kernel!, "tab_a16") { }        
@@ -4598,6 +4482,7 @@ namespace StorageAndTrade_1_0.Довідники
     }
     
       
+    
     public class ФізичніОсоби_Контакти_TablePart : DirectoryTablePart
     {
         public ФізичніОсоби_Контакти_TablePart(ФізичніОсоби_Objest owner) : base(Config.Kernel!, "tab_a17",
@@ -4675,27 +4560,15 @@ namespace StorageAndTrade_1_0.Довідники
             base.BaseDelete(Owner.UnigueID);
         }
         
-        
         public class Record : DirectoryTablePartRecord
         {
-            public Record()
-            {
-                Тип = 0;
-                Телефон = "";
-                ЕлектроннаПошта = "";
-                Країна = "";
-                Область = "";
-                Район = "";
-                Місто = "";
-                
-            }
-            public Перелічення.ТипиКонтактноїІнформації Тип { get; set; }
-            public string Телефон { get; set; }
-            public string ЕлектроннаПошта { get; set; }
-            public string Країна { get; set; }
-            public string Область { get; set; }
-            public string Район { get; set; }
-            public string Місто { get; set; }
+            public Перелічення.ТипиКонтактноїІнформації Тип { get; set; } = 0;
+            public string Телефон { get; set; } = "";
+            public string ЕлектроннаПошта { get; set; } = "";
+            public string Країна { get; set; } = "";
+            public string Область { get; set; } = "";
+            public string Район { get; set; } = "";
+            public string Місто { get; set; } = "";
             
         }
     }
@@ -4781,8 +4654,7 @@ namespace StorageAndTrade_1_0.Довідники
         public Довідники.ФізичніОсоби_Pointer Керівник { get; set; }
         
     }
-    
-    
+
     public class СтруктураПідприємства_Pointer : DirectoryPointer
     {
         public СтруктураПідприємства_Pointer(object? uid = null) : base(Config.Kernel!, "tab_a18")
@@ -4826,7 +4698,6 @@ namespace StorageAndTrade_1_0.Довідники
             return new UuidAndText(UnigueID.UGuid, "Довідники.СтруктураПідприємства");
         }
     }
-    
     
     public class СтруктураПідприємства_Select : DirectorySelect
     {
@@ -4932,8 +4803,7 @@ namespace StorageAndTrade_1_0.Довідники
         public string Код { get; set; }
         
     }
-    
-    
+
     public class КраїниСвіту_Pointer : DirectoryPointer
     {
         public КраїниСвіту_Pointer(object? uid = null) : base(Config.Kernel!, "tab_a19")
@@ -4977,7 +4847,6 @@ namespace StorageAndTrade_1_0.Довідники
             return new UuidAndText(UnigueID.UGuid, "Довідники.КраїниСвіту");
         }
     }
-    
     
     public class КраїниСвіту_Select : DirectorySelect
     {
@@ -5107,8 +4976,7 @@ namespace StorageAndTrade_1_0.Довідники
         public DateTime ДатаСтворення { get; set; }
         
     }
-    
-    
+
     public class Файли_Pointer : DirectoryPointer
     {
         public Файли_Pointer(object? uid = null) : base(Config.Kernel!, "tab_a20")
@@ -5152,7 +5020,6 @@ namespace StorageAndTrade_1_0.Довідники
             return new UuidAndText(UnigueID.UGuid, "Довідники.Файли");
         }
     }
-    
     
     public class Файли_Select : DirectorySelect
     {
@@ -5270,8 +5137,7 @@ namespace StorageAndTrade_1_0.Довідники
         public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
         
     }
-    
-    
+
     public class ХарактеристикиНоменклатури_Pointer : DirectoryPointer
     {
         public ХарактеристикиНоменклатури_Pointer(object? uid = null) : base(Config.Kernel!, "tab_a21")
@@ -5315,7 +5181,6 @@ namespace StorageAndTrade_1_0.Довідники
             return new UuidAndText(UnigueID.UGuid, "Довідники.ХарактеристикиНоменклатури");
         }
     }
-    
     
     public class ХарактеристикиНоменклатури_Select : DirectorySelect
     {
@@ -5427,8 +5292,7 @@ namespace StorageAndTrade_1_0.Довідники
         public Довідники.Номенклатура_Папки_Pointer Родич { get; set; }
         
     }
-    
-    
+
     public class Номенклатура_Папки_Pointer : DirectoryPointer
     {
         public Номенклатура_Папки_Pointer(object? uid = null) : base(Config.Kernel!, "tab_a22")
@@ -5472,7 +5336,6 @@ namespace StorageAndTrade_1_0.Довідники
             return new UuidAndText(UnigueID.UGuid, "Довідники.Номенклатура_Папки");
         }
     }
-    
     
     public class Номенклатура_Папки_Select : DirectorySelect
     {
@@ -5584,8 +5447,7 @@ namespace StorageAndTrade_1_0.Довідники
         public Довідники.Контрагенти_Папки_Pointer Родич { get; set; }
         
     }
-    
-    
+
     public class Контрагенти_Папки_Pointer : DirectoryPointer
     {
         public Контрагенти_Папки_Pointer(object? uid = null) : base(Config.Kernel!, "tab_a23")
@@ -5629,7 +5491,6 @@ namespace StorageAndTrade_1_0.Довідники
             return new UuidAndText(UnigueID.UGuid, "Довідники.Контрагенти_Папки");
         }
     }
-    
     
     public class Контрагенти_Папки_Select : DirectorySelect
     {
@@ -5741,8 +5602,7 @@ namespace StorageAndTrade_1_0.Довідники
         public Довідники.Склади_Папки_Pointer Родич { get; set; }
         
     }
-    
-    
+
     public class Склади_Папки_Pointer : DirectoryPointer
     {
         public Склади_Папки_Pointer(object? uid = null) : base(Config.Kernel!, "tab_a24")
@@ -5786,7 +5646,6 @@ namespace StorageAndTrade_1_0.Довідники
             return new UuidAndText(UnigueID.UGuid, "Довідники.Склади_Папки");
         }
     }
-    
     
     public class Склади_Папки_Select : DirectorySelect
     {
@@ -5904,8 +5763,7 @@ namespace StorageAndTrade_1_0.Довідники
         public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; }
         
     }
-    
-    
+
     public class Каси_Pointer : DirectoryPointer
     {
         public Каси_Pointer(object? uid = null) : base(Config.Kernel!, "tab_a26")
@@ -5949,7 +5807,6 @@ namespace StorageAndTrade_1_0.Довідники
             return new UuidAndText(UnigueID.UGuid, "Довідники.Каси");
         }
     }
-    
     
     public class Каси_Select : DirectorySelect
     {
@@ -6121,8 +5978,7 @@ namespace StorageAndTrade_1_0.Довідники
         public Довідники.Організації_Pointer Організація { get; set; }
         
     }
-    
-    
+
     public class БанківськіРахункиОрганізацій_Pointer : DirectoryPointer
     {
         public БанківськіРахункиОрганізацій_Pointer(object? uid = null) : base(Config.Kernel!, "tab_a27")
@@ -6166,7 +6022,6 @@ namespace StorageAndTrade_1_0.Довідники
             return new UuidAndText(UnigueID.UGuid, "Довідники.БанківськіРахункиОрганізацій");
         }
     }
-    
     
     public class БанківськіРахункиОрганізацій_Select : DirectorySelect
     {
@@ -6381,8 +6236,7 @@ namespace StorageAndTrade_1_0.Довідники
         public string Коментар { get; set; }
         
     }
-    
-    
+
     public class ДоговориКонтрагентів_Pointer : DirectoryPointer
     {
         public ДоговориКонтрагентів_Pointer(object? uid = null) : base(Config.Kernel!, "tab_a28")
@@ -6426,7 +6280,6 @@ namespace StorageAndTrade_1_0.Довідники
             return new UuidAndText(UnigueID.UGuid, "Довідники.ДоговориКонтрагентів");
         }
     }
-    
     
     public class ДоговориКонтрагентів_Select : DirectorySelect
     {
@@ -6610,8 +6463,7 @@ namespace StorageAndTrade_1_0.Довідники
         public Довідники.Контрагенти_Pointer Контрагент { get; set; }
         
     }
-    
-    
+
     public class БанківськіРахункиКонтрагентів_Pointer : DirectoryPointer
     {
         public БанківськіРахункиКонтрагентів_Pointer(object? uid = null) : base(Config.Kernel!, "tab_a29")
@@ -6655,7 +6507,6 @@ namespace StorageAndTrade_1_0.Довідники
             return new UuidAndText(UnigueID.UGuid, "Довідники.БанківськіРахункиКонтрагентів");
         }
     }
-    
     
     public class БанківськіРахункиКонтрагентів_Select : DirectorySelect
     {
@@ -6785,8 +6636,7 @@ namespace StorageAndTrade_1_0.Довідники
         public СтаттяРухуКоштів_ГосподарськіОперації_TablePart ГосподарськіОперації_TablePart { get; set; }
         
     }
-    
-    
+
     public class СтаттяРухуКоштів_Pointer : DirectoryPointer
     {
         public СтаттяРухуКоштів_Pointer(object? uid = null) : base(Config.Kernel!, "tab_a45")
@@ -6831,7 +6681,6 @@ namespace StorageAndTrade_1_0.Довідники
         }
     }
     
-    
     public class СтаттяРухуКоштів_Select : DirectorySelect
     {
         public СтаттяРухуКоштів_Select() : base(Config.Kernel!, "tab_a45") { }        
@@ -6861,6 +6710,7 @@ namespace StorageAndTrade_1_0.Довідники
     }
     
       
+    
     public class СтаттяРухуКоштів_ГосподарськіОперації_TablePart : DirectoryTablePart
     {
         public СтаттяРухуКоштів_ГосподарськіОперації_TablePart(СтаттяРухуКоштів_Objest owner) : base(Config.Kernel!, "tab_a46",
@@ -6920,15 +6770,9 @@ namespace StorageAndTrade_1_0.Довідники
             base.BaseDelete(Owner.UnigueID);
         }
         
-        
         public class Record : DirectoryTablePartRecord
         {
-            public Record()
-            {
-                ГосподарськаОперація = 0;
-                
-            }
-            public Перелічення.ГосподарськіОперації ГосподарськаОперація { get; set; }
+            public Перелічення.ГосподарськіОперації ГосподарськаОперація { get; set; } = 0;
             
         }
     }
@@ -7015,8 +6859,7 @@ namespace StorageAndTrade_1_0.Довідники
         public DateTime ДатаСтворення { get; set; }
         
     }
-    
-    
+
     public class СеріїНоменклатури_Pointer : DirectoryPointer
     {
         public СеріїНоменклатури_Pointer(object? uid = null) : base(Config.Kernel!, "tab_b02")
@@ -7060,7 +6903,6 @@ namespace StorageAndTrade_1_0.Довідники
             return new UuidAndText(UnigueID.UGuid, "Довідники.СеріїНоменклатури");
         }
     }
-    
     
     public class СеріїНоменклатури_Select : DirectorySelect
     {
@@ -7190,8 +7032,7 @@ namespace StorageAndTrade_1_0.Довідники
         public Документи.ВведенняЗалишків_Pointer ВведенняЗалишків { get; set; }
         
     }
-    
-    
+
     public class ПартіяТоварівКомпозит_Pointer : DirectoryPointer
     {
         public ПартіяТоварівКомпозит_Pointer(object? uid = null) : base(Config.Kernel!, "tab_b06")
@@ -7235,7 +7076,6 @@ namespace StorageAndTrade_1_0.Довідники
             return new UuidAndText(UnigueID.UGuid, "Довідники.ПартіяТоварівКомпозит");
         }
     }
-    
     
     public class ПартіяТоварівКомпозит_Select : DirectorySelect
     {
@@ -7365,8 +7205,7 @@ namespace StorageAndTrade_1_0.Довідники
         public Довідники.ДоговориКонтрагентів_Pointer Договір { get; set; }
         
     }
-    
-    
+
     public class ВидиЗапасів_Pointer : DirectoryPointer
     {
         public ВидиЗапасів_Pointer(object? uid = null) : base(Config.Kernel!, "tab_b13")
@@ -7410,7 +7249,6 @@ namespace StorageAndTrade_1_0.Довідники
             return new UuidAndText(UnigueID.UGuid, "Довідники.ВидиЗапасів");
         }
     }
-    
     
     public class ВидиЗапасів_Select : DirectorySelect
     {
@@ -7672,8 +7510,7 @@ namespace StorageAndTrade_1_0.Довідники
         public string ДатаЗапису { get; set; }
         
     }
-    
-    
+
     public class Банки_Pointer : DirectoryPointer
     {
         public Банки_Pointer(object? uid = null) : base(Config.Kernel!, "tab_a39")
@@ -7717,7 +7554,6 @@ namespace StorageAndTrade_1_0.Довідники
             return new UuidAndText(UnigueID.UGuid, "Довідники.Банки");
         }
     }
-    
     
     public class Банки_Select : DirectorySelect
     {
@@ -7829,8 +7665,7 @@ namespace StorageAndTrade_1_0.Довідники
         public Довідники.Склади_Pointer Склад { get; set; }
         
     }
-    
-    
+
     public class СкладськіПриміщення_Pointer : DirectoryPointer
     {
         public СкладськіПриміщення_Pointer(object? uid = null) : base(Config.Kernel!, "tab_a71")
@@ -7874,7 +7709,6 @@ namespace StorageAndTrade_1_0.Довідники
             return new UuidAndText(UnigueID.UGuid, "Довідники.СкладськіПриміщення");
         }
     }
-    
     
     public class СкладськіПриміщення_Select : DirectorySelect
     {
@@ -8028,8 +7862,7 @@ namespace StorageAndTrade_1_0.Довідники
         public Довідники.ТипорозміриКомірок_Pointer Типорозмір { get; set; }
         
     }
-    
-    
+
     public class СкладськіКомірки_Pointer : DirectoryPointer
     {
         public СкладськіКомірки_Pointer(object? uid = null) : base(Config.Kernel!, "tab_a72")
@@ -8073,7 +7906,6 @@ namespace StorageAndTrade_1_0.Довідники
             return new UuidAndText(UnigueID.UGuid, "Довідники.СкладськіКомірки");
         }
     }
-    
     
     public class СкладськіКомірки_Select : DirectorySelect
     {
@@ -8185,8 +8017,7 @@ namespace StorageAndTrade_1_0.Довідники
         public Довідники.СкладськіПриміщення_Pointer Приміщення { get; set; }
         
     }
-    
-    
+
     public class ОбластьЗберігання_Pointer : DirectoryPointer
     {
         public ОбластьЗберігання_Pointer(object? uid = null) : base(Config.Kernel!, "tab_a73")
@@ -8230,7 +8061,6 @@ namespace StorageAndTrade_1_0.Довідники
             return new UuidAndText(UnigueID.UGuid, "Довідники.ОбластьЗберігання");
         }
     }
-    
     
     public class ОбластьЗберігання_Select : DirectorySelect
     {
@@ -8360,8 +8190,7 @@ namespace StorageAndTrade_1_0.Довідники
         public string Ширина { get; set; }
         
     }
-    
-    
+
     public class ТипорозміриКомірок_Pointer : DirectoryPointer
     {
         public ТипорозміриКомірок_Pointer(object? uid = null) : base(Config.Kernel!, "tab_a75")
@@ -8405,7 +8234,6 @@ namespace StorageAndTrade_1_0.Довідники
             return new UuidAndText(UnigueID.UGuid, "Довідники.ТипорозміриКомірок");
         }
     }
-    
     
     public class ТипорозміриКомірок_Select : DirectorySelect
     {
@@ -8523,8 +8351,7 @@ namespace StorageAndTrade_1_0.Довідники
         public Довідники.СкладськіПриміщення_Pointer Приміщення { get; set; }
         
     }
-    
-    
+
     public class СкладськіКомірки_Папки_Pointer : DirectoryPointer
     {
         public СкладськіКомірки_Папки_Pointer(object? uid = null) : base(Config.Kernel!, "tab_a76")
@@ -8569,7 +8396,6 @@ namespace StorageAndTrade_1_0.Довідники
         }
     }
     
-    
     public class СкладськіКомірки_Папки_Select : DirectorySelect
     {
         public СкладськіКомірки_Папки_Select() : base(Config.Kernel!, "tab_a76") { }        
@@ -8608,7 +8434,6 @@ namespace StorageAndTrade_1_0.Перелічення
 {
     
     #region ENUM "ТипиКонтактноїІнформації"
-    
     public enum ТипиКонтактноїІнформації
     {
          Адрес = 1,
@@ -8621,7 +8446,6 @@ namespace StorageAndTrade_1_0.Перелічення
     #endregion
     
     #region ENUM "ТипиНоменклатури"
-    
     public enum ТипиНоменклатури
     {
          Товар = 1,
@@ -8633,7 +8457,6 @@ namespace StorageAndTrade_1_0.Перелічення
     #endregion
     
     #region ENUM "ТипиСкладів"
-    
     public enum ТипиСкладів
     {
          Гуртовий = 1,
@@ -8642,7 +8465,6 @@ namespace StorageAndTrade_1_0.Перелічення
     #endregion
     
     #region ENUM "СтатьФізичноїОсоби"
-    
     public enum СтатьФізичноїОсоби
     {
          Чоловік = 1,
@@ -8651,7 +8473,6 @@ namespace StorageAndTrade_1_0.Перелічення
     #endregion
     
     #region ENUM "СтатусиДоговорівКонтрагентів"
-    
     public enum СтатусиДоговорівКонтрагентів
     {
          НеУзгоджений = 1,
@@ -8661,7 +8482,6 @@ namespace StorageAndTrade_1_0.Перелічення
     #endregion
     
     #region ENUM "ГосподарськіОперації"
-    
     public enum ГосподарськіОперації
     {
          ЗамовленняВПостачальника = 1,
@@ -8693,7 +8513,6 @@ namespace StorageAndTrade_1_0.Перелічення
     #endregion
     
     #region ENUM "ТипДоговорів"
-    
     public enum ТипДоговорів
     {
          ЗПокупцями = 1,
@@ -8702,7 +8521,6 @@ namespace StorageAndTrade_1_0.Перелічення
     #endregion
     
     #region ENUM "СпособиДоставки"
-    
     public enum СпособиДоставки
     {
          Самовивіз = 1,
@@ -8714,7 +8532,6 @@ namespace StorageAndTrade_1_0.Перелічення
     #endregion
     
     #region ENUM "ФормаОплати"
-    
     public enum ФормаОплати
     {
          Готівка = 1,
@@ -8724,7 +8541,6 @@ namespace StorageAndTrade_1_0.Перелічення
     #endregion
     
     #region ENUM "СтатусиЗамовленьКлієнтів"
-    
     public enum СтатусиЗамовленьКлієнтів
     {
          НеУзгоджений = 1,
@@ -8735,7 +8551,6 @@ namespace StorageAndTrade_1_0.Перелічення
     #endregion
     
     #region ENUM "СтатусиРеалізаціїТоварівТаПослуг"
-    
     public enum СтатусиРеалізаціїТоварівТаПослуг
     {
          ДоОплати = 1,
@@ -8745,7 +8560,6 @@ namespace StorageAndTrade_1_0.Перелічення
     #endregion
     
     #region ENUM "ВидиРухуКоштів"
-    
     public enum ВидиРухуКоштів
     {
          ОплатаПраці = 1,
@@ -8755,7 +8569,6 @@ namespace StorageAndTrade_1_0.Перелічення
     #endregion
     
     #region ENUM "СтатусиПереміщенняТоварів"
-    
     public enum СтатусиПереміщенняТоварів
     {
          Відгружено = 1,
@@ -8764,7 +8577,6 @@ namespace StorageAndTrade_1_0.Перелічення
     #endregion
     
     #region ENUM "СтатусиЗамовленьПостачальникам"
-    
     public enum СтатусиЗамовленьПостачальникам
     {
          НеУзгоджений = 1,
@@ -8775,7 +8587,6 @@ namespace StorageAndTrade_1_0.Перелічення
     #endregion
     
     #region ENUM "ТипДокументуПартіяТоварівКомпозит"
-    
     public enum ТипДокументуПартіяТоварівКомпозит
     {
          ПоступленняТоварівТаПослуг = 1,
@@ -8784,7 +8595,6 @@ namespace StorageAndTrade_1_0.Перелічення
     #endregion
     
     #region ENUM "ТипЗапасів"
-    
     public enum ТипЗапасів
     {
          Товар = 1,
@@ -8793,7 +8603,6 @@ namespace StorageAndTrade_1_0.Перелічення
     #endregion
     
     #region ENUM "ТипДокументуПродажіДокументКомпозит"
-    
     public enum ТипДокументуПродажіДокументКомпозит
     {
          ЗамовленняКлієнта = 5,
@@ -8803,7 +8612,6 @@ namespace StorageAndTrade_1_0.Перелічення
     #endregion
     
     #region ENUM "ТипПеріодуДляЖурналівДокументів"
-    
     public enum ТипПеріодуДляЖурналівДокументів
     {
          ВесьПеріод = 1,
@@ -8818,7 +8626,6 @@ namespace StorageAndTrade_1_0.Перелічення
     #endregion
     
     #region ENUM "МетодиСписанняПартій"
-    
     public enum МетодиСписанняПартій
     {
          FIFO = 1,
@@ -8827,7 +8634,6 @@ namespace StorageAndTrade_1_0.Перелічення
     #endregion
     
     #region ENUM "ТипиКонтрагентів"
-    
     public enum ТипиКонтрагентів
     {
          Постачальник = 1,
@@ -8836,7 +8642,6 @@ namespace StorageAndTrade_1_0.Перелічення
     #endregion
     
     #region ENUM "НалаштуванняАдресногоЗберігання"
-    
     public enum НалаштуванняАдресногоЗберігання
     {
          НеВикористовувати = 1,
@@ -8845,7 +8650,6 @@ namespace StorageAndTrade_1_0.Перелічення
     #endregion
     
     #region ENUM "ТипиСкладськихКомірок"
-    
     public enum ТипиСкладськихКомірок
     {
          Приймання = 1,
@@ -9633,7 +9437,6 @@ namespace StorageAndTrade_1_0.Документи
 {
     
     #region DOCUMENT "ЗамовленняПостачальнику"
-    
     public static class ЗамовленняПостачальнику_Const
     {
         public const string TABLE = "tab_a25";
@@ -9971,8 +9774,7 @@ namespace StorageAndTrade_1_0.Документи
             xmlWriter.Close();
         }
     }
-	
-    
+
     public class ЗамовленняПостачальнику_Objest : DocumentObject
     {
         public ЗамовленняПостачальнику_Objest() : base(Config.Kernel!, "tab_a25", "ЗамовленняПостачальнику",
@@ -10080,58 +9882,58 @@ namespace StorageAndTrade_1_0.Документи
             
             BaseSave();
             ЗамовленняПостачальнику_Triggers.AfterRecording(this);
-		}
+		    }
 
-		public bool SpendTheDocument(DateTime spendDate)
-		{
+        public bool SpendTheDocument(DateTime spendDate)
+        {
             bool rezult = ЗамовленняПостачальнику_SpendTheDocument.Spend(this);
-		    BaseSpend(rezult, spendDate);
-		    return rezult;
-		}
+                BaseSpend(rezult, spendDate);
+                return rezult;
+		    }
 
-		public void ClearSpendTheDocument()
-		{
+        public void ClearSpendTheDocument()
+        {
             ЗамовленняПостачальнику_SpendTheDocument.ClearSpend(this);
-			BaseSpend(false, DateTime.MinValue);
-		}
+            BaseSpend(false, DateTime.MinValue);
+		    }
 
 		    public ЗамовленняПостачальнику_Objest Copy()
         {
             ЗамовленняПостачальнику_Objest copy = new ЗамовленняПостачальнику_Objest();
 			      copy.New();
             copy.Назва = Назва;
-			copy.НомерДок = НомерДок;
-			copy.ДатаДок = ДатаДок;
-			copy.Контрагент = Контрагент;
-			copy.Організація = Організація;
-			copy.Склад = Склад;
-			copy.Валюта = Валюта;
-			copy.СумаДокументу = СумаДокументу;
-			copy.Каса = Каса;
-			copy.БанківськийРахунок = БанківськийРахунок;
-			copy.Підрозділ = Підрозділ;
-			copy.Договір = Договір;
-			copy.Автор = Автор;
-			copy.ДатаПоступлення = ДатаПоступлення;
-			copy.АдресаДоставкиДляПостачальника = АдресаДоставкиДляПостачальника;
-			copy.ПовернутиТару = ПовернутиТару;
-			copy.СпосібДоставки = СпосібДоставки;
-			copy.ЧасДоставкиЗ = ЧасДоставкиЗ;
-			copy.ЧасДоставкиДо = ЧасДоставкиДо;
-			copy.АдресаДоставки = АдресаДоставки;
-			copy.ГосподарськаОперація = ГосподарськаОперація;
-			copy.Статус = Статус;
-			copy.ФормаОплати = ФормаОплати;
-			copy.Менеджер = Менеджер;
-			copy.Основа = Основа;
-			copy.Коментар = Коментар;
-			
-			return copy;
+            copy.НомерДок = НомерДок;
+            copy.ДатаДок = ДатаДок;
+            copy.Контрагент = Контрагент;
+            copy.Організація = Організація;
+            copy.Склад = Склад;
+            copy.Валюта = Валюта;
+            copy.СумаДокументу = СумаДокументу;
+            copy.Каса = Каса;
+            copy.БанківськийРахунок = БанківськийРахунок;
+            copy.Підрозділ = Підрозділ;
+            copy.Договір = Договір;
+            copy.Автор = Автор;
+            copy.ДатаПоступлення = ДатаПоступлення;
+            copy.АдресаДоставкиДляПостачальника = АдресаДоставкиДляПостачальника;
+            copy.ПовернутиТару = ПовернутиТару;
+            copy.СпосібДоставки = СпосібДоставки;
+            copy.ЧасДоставкиЗ = ЧасДоставкиЗ;
+            copy.ЧасДоставкиДо = ЧасДоставкиДо;
+            copy.АдресаДоставки = АдресаДоставки;
+            copy.ГосподарськаОперація = ГосподарськаОперація;
+            copy.Статус = Статус;
+            copy.ФормаОплати = ФормаОплати;
+            copy.Менеджер = Менеджер;
+            copy.Основа = Основа;
+            copy.Коментар = Коментар;
+            
+            return copy;
         }
 
         public void Delete()
         {
-		    ЗамовленняПостачальнику_Triggers.BeforeDelete(this);
+		        ЗамовленняПостачальнику_Triggers.BeforeDelete(this);
             base.BaseDelete(new string[] { "tab_a30" });
         }
         
@@ -10177,7 +9979,6 @@ namespace StorageAndTrade_1_0.Документи
         
     }
     
-    
     public class ЗамовленняПостачальнику_Pointer : DocumentPointer
     {
         public ЗамовленняПостачальнику_Pointer(object? uid = null) : base(Config.Kernel!, "tab_a25", "ЗамовленняПостачальнику")
@@ -10218,16 +10019,15 @@ namespace StorageAndTrade_1_0.Документи
         {
             ЗамовленняПостачальнику_Objest ЗамовленняПостачальникуObjestItem = new ЗамовленняПостачальнику_Objest();
             ЗамовленняПостачальникуObjestItem.Read(base.UnigueID);
-			
-			if (readAllTablePart)
-			{   
-				ЗамовленняПостачальникуObjestItem.Товари_TablePart.Read();
-			}
-			
+            
+            if (readAllTablePart)
+            {   
+                ЗамовленняПостачальникуObjestItem.Товари_TablePart.Read();
+            }
+            
             return ЗамовленняПостачальникуObjestItem;
         }
     }
-    
     
     public class ЗамовленняПостачальнику_Select : DocumentSelect
     {		
@@ -10243,6 +10043,7 @@ namespace StorageAndTrade_1_0.Документи
     }
     
       
+    
     public class ЗамовленняПостачальнику_Товари_TablePart : DocumentTablePart
     {
         public ЗамовленняПостачальнику_Товари_TablePart(ЗамовленняПостачальнику_Objest owner) : base(Config.Kernel!, "tab_a30",
@@ -10345,37 +10146,21 @@ namespace StorageAndTrade_1_0.Документи
 
             return copyRecords;
         }
-        
+
         public class Record : DocumentTablePartRecord
         {
-            public Record()
-            {
-                НомерРядка = 0;
-                Номенклатура = new Довідники.Номенклатура_Pointer();
-                ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer();
-                Пакування = new Довідники.ПакуванняОдиниціВиміру_Pointer();
-                КількістьУпаковок = 0;
-                Кількість = 0;
-                ДатаПоступлення = DateTime.MinValue;
-                Ціна = 0;
-                Сума = 0;
-                Скидка = 0;
-                Склад = new Довідники.Склади_Pointer();
-                Підрозділ = new Довідники.СтруктураПідприємства_Pointer();
-                
-            }
-            public int НомерРядка { get; set; }
-            public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
-            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; }
-            public Довідники.ПакуванняОдиниціВиміру_Pointer Пакування { get; set; }
-            public int КількістьУпаковок { get; set; }
-            public decimal Кількість { get; set; }
-            public DateTime ДатаПоступлення { get; set; }
-            public decimal Ціна { get; set; }
-            public decimal Сума { get; set; }
-            public decimal Скидка { get; set; }
-            public Довідники.Склади_Pointer Склад { get; set; }
-            public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; }
+            public int НомерРядка { get; set; } = 0;
+            public Довідники.Номенклатура_Pointer Номенклатура { get; set; } = new Довідники.Номенклатура_Pointer();
+            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; } = new Довідники.ХарактеристикиНоменклатури_Pointer();
+            public Довідники.ПакуванняОдиниціВиміру_Pointer Пакування { get; set; } = new Довідники.ПакуванняОдиниціВиміру_Pointer();
+            public int КількістьУпаковок { get; set; } = 0;
+            public decimal Кількість { get; set; } = 0;
+            public DateTime ДатаПоступлення { get; set; } = DateTime.MinValue;
+            public decimal Ціна { get; set; } = 0;
+            public decimal Сума { get; set; } = 0;
+            public decimal Скидка { get; set; } = 0;
+            public Довідники.Склади_Pointer Склад { get; set; } = new Довідники.Склади_Pointer();
+            public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; } = new Довідники.СтруктураПідприємства_Pointer();
             
         }
     }
@@ -10384,7 +10169,6 @@ namespace StorageAndTrade_1_0.Документи
     #endregion
     
     #region DOCUMENT "ПоступленняТоварівТаПослуг"
-    
     public static class ПоступленняТоварівТаПослуг_Const
     {
         public const string TABLE = "tab_a32";
@@ -10786,8 +10570,7 @@ namespace StorageAndTrade_1_0.Документи
             xmlWriter.Close();
         }
     }
-	
-    
+
     public class ПоступленняТоварівТаПослуг_Objest : DocumentObject
     {
         public ПоступленняТоварівТаПослуг_Objest() : base(Config.Kernel!, "tab_a32", "ПоступленняТоварівТаПослуг",
@@ -10913,64 +10696,64 @@ namespace StorageAndTrade_1_0.Документи
             
             BaseSave();
             ПоступленняТоварівТаПослуг_Triggers.AfterRecording(this);
-		}
+		    }
 
-		public bool SpendTheDocument(DateTime spendDate)
-		{
+        public bool SpendTheDocument(DateTime spendDate)
+        {
             bool rezult = ПоступленняТоварівТаПослуг_SpendTheDocument.Spend(this);
-		    BaseSpend(rezult, spendDate);
-		    return rezult;
-		}
+                BaseSpend(rezult, spendDate);
+                return rezult;
+		    }
 
-		public void ClearSpendTheDocument()
-		{
+        public void ClearSpendTheDocument()
+        {
             ПоступленняТоварівТаПослуг_SpendTheDocument.ClearSpend(this);
-			BaseSpend(false, DateTime.MinValue);
-		}
+            BaseSpend(false, DateTime.MinValue);
+		    }
 
 		    public ПоступленняТоварівТаПослуг_Objest Copy()
         {
             ПоступленняТоварівТаПослуг_Objest copy = new ПоступленняТоварівТаПослуг_Objest();
 			      copy.New();
             copy.Назва = Назва;
-			copy.НомерДок = НомерДок;
-			copy.ДатаДок = ДатаДок;
-			copy.Валюта = Валюта;
-			copy.ГосподарськаОперація = ГосподарськаОперація;
-			copy.Підрозділ = Підрозділ;
-			copy.Склад = Склад;
-			copy.Контрагент = Контрагент;
-			copy.СумаДокументу = СумаДокументу;
-			copy.ЗамовленняПостачальнику = ЗамовленняПостачальнику;
-			copy.ДатаОплати = ДатаОплати;
-			copy.ФормаОплати = ФормаОплати;
-			copy.Узгоджений = Узгоджений;
-			copy.БанківськийРахунокОрганізації = БанківськийРахунокОрганізації;
-			copy.НомерВхідногоДокументу = НомерВхідногоДокументу;
-			copy.ДатаВхідногоДокументу = ДатаВхідногоДокументу;
-			copy.БанківськийРахунокКонтрагента = БанківськийРахунокКонтрагента;
-			copy.Договір = Договір;
-			copy.Автор = Автор;
-			copy.ПовернутиТару = ПовернутиТару;
-			copy.ДатаПоверненняТари = ДатаПоверненняТари;
-			copy.СпосібДоставки = СпосібДоставки;
-			copy.Організація = Організація;
-			copy.Курс = Курс;
-			copy.Кратність = Кратність;
-			copy.ЧасДоставкиЗ = ЧасДоставкиЗ;
-			copy.ЧасДоставкиДо = ЧасДоставкиДо;
-			copy.Менеджер = Менеджер;
-			copy.СтаттяРухуКоштів = СтаттяРухуКоштів;
-			copy.Каса = Каса;
-			copy.Основа = Основа;
-			copy.Коментар = Коментар;
-			
-			return copy;
+            copy.НомерДок = НомерДок;
+            copy.ДатаДок = ДатаДок;
+            copy.Валюта = Валюта;
+            copy.ГосподарськаОперація = ГосподарськаОперація;
+            copy.Підрозділ = Підрозділ;
+            copy.Склад = Склад;
+            copy.Контрагент = Контрагент;
+            copy.СумаДокументу = СумаДокументу;
+            copy.ЗамовленняПостачальнику = ЗамовленняПостачальнику;
+            copy.ДатаОплати = ДатаОплати;
+            copy.ФормаОплати = ФормаОплати;
+            copy.Узгоджений = Узгоджений;
+            copy.БанківськийРахунокОрганізації = БанківськийРахунокОрганізації;
+            copy.НомерВхідногоДокументу = НомерВхідногоДокументу;
+            copy.ДатаВхідногоДокументу = ДатаВхідногоДокументу;
+            copy.БанківськийРахунокКонтрагента = БанківськийРахунокКонтрагента;
+            copy.Договір = Договір;
+            copy.Автор = Автор;
+            copy.ПовернутиТару = ПовернутиТару;
+            copy.ДатаПоверненняТари = ДатаПоверненняТари;
+            copy.СпосібДоставки = СпосібДоставки;
+            copy.Організація = Організація;
+            copy.Курс = Курс;
+            copy.Кратність = Кратність;
+            copy.ЧасДоставкиЗ = ЧасДоставкиЗ;
+            copy.ЧасДоставкиДо = ЧасДоставкиДо;
+            copy.Менеджер = Менеджер;
+            copy.СтаттяРухуКоштів = СтаттяРухуКоштів;
+            copy.Каса = Каса;
+            copy.Основа = Основа;
+            copy.Коментар = Коментар;
+            
+            return copy;
         }
 
         public void Delete()
         {
-		    ПоступленняТоварівТаПослуг_Triggers.BeforeDelete(this);
+		        ПоступленняТоварівТаПослуг_Triggers.BeforeDelete(this);
             base.BaseDelete(new string[] { "tab_a33" });
         }
         
@@ -11022,7 +10805,6 @@ namespace StorageAndTrade_1_0.Документи
         
     }
     
-    
     public class ПоступленняТоварівТаПослуг_Pointer : DocumentPointer
     {
         public ПоступленняТоварівТаПослуг_Pointer(object? uid = null) : base(Config.Kernel!, "tab_a32", "ПоступленняТоварівТаПослуг")
@@ -11063,16 +10845,15 @@ namespace StorageAndTrade_1_0.Документи
         {
             ПоступленняТоварівТаПослуг_Objest ПоступленняТоварівТаПослугObjestItem = new ПоступленняТоварівТаПослуг_Objest();
             ПоступленняТоварівТаПослугObjestItem.Read(base.UnigueID);
-			
-			if (readAllTablePart)
-			{   
-				ПоступленняТоварівТаПослугObjestItem.Товари_TablePart.Read();
-			}
-			
+            
+            if (readAllTablePart)
+            {   
+                ПоступленняТоварівТаПослугObjestItem.Товари_TablePart.Read();
+            }
+            
             return ПоступленняТоварівТаПослугObjestItem;
         }
     }
-    
     
     public class ПоступленняТоварівТаПослуг_Select : DocumentSelect
     {		
@@ -11088,6 +10869,7 @@ namespace StorageAndTrade_1_0.Документи
     }
     
       
+    
     public class ПоступленняТоварівТаПослуг_Товари_TablePart : DocumentTablePart
     {
         public ПоступленняТоварівТаПослуг_Товари_TablePart(ПоступленняТоварівТаПослуг_Objest owner) : base(Config.Kernel!, "tab_a33",
@@ -11196,41 +10978,23 @@ namespace StorageAndTrade_1_0.Документи
 
             return copyRecords;
         }
-        
+
         public class Record : DocumentTablePartRecord
         {
-            public Record()
-            {
-                НомерРядка = 0;
-                Номенклатура = new Довідники.Номенклатура_Pointer();
-                ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer();
-                Серія = new Довідники.СеріїНоменклатури_Pointer();
-                Пакування = new Довідники.ПакуванняОдиниціВиміру_Pointer();
-                КількістьУпаковок = 0;
-                Кількість = 0;
-                Ціна = 0;
-                Сума = 0;
-                Склад = new Довідники.Склади_Pointer();
-                ЗамовленняПостачальнику = new Документи.ЗамовленняПостачальнику_Pointer();
-                Скидка = 0;
-                Підрозділ = new Довідники.СтруктураПідприємства_Pointer();
-                ВидЦіни = new Довідники.ВидиЦін_Pointer();
-                
-            }
-            public int НомерРядка { get; set; }
-            public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
-            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; }
-            public Довідники.СеріїНоменклатури_Pointer Серія { get; set; }
-            public Довідники.ПакуванняОдиниціВиміру_Pointer Пакування { get; set; }
-            public int КількістьУпаковок { get; set; }
-            public decimal Кількість { get; set; }
-            public decimal Ціна { get; set; }
-            public decimal Сума { get; set; }
-            public Довідники.Склади_Pointer Склад { get; set; }
-            public Документи.ЗамовленняПостачальнику_Pointer ЗамовленняПостачальнику { get; set; }
-            public decimal Скидка { get; set; }
-            public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; }
-            public Довідники.ВидиЦін_Pointer ВидЦіни { get; set; }
+            public int НомерРядка { get; set; } = 0;
+            public Довідники.Номенклатура_Pointer Номенклатура { get; set; } = new Довідники.Номенклатура_Pointer();
+            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; } = new Довідники.ХарактеристикиНоменклатури_Pointer();
+            public Довідники.СеріїНоменклатури_Pointer Серія { get; set; } = new Довідники.СеріїНоменклатури_Pointer();
+            public Довідники.ПакуванняОдиниціВиміру_Pointer Пакування { get; set; } = new Довідники.ПакуванняОдиниціВиміру_Pointer();
+            public int КількістьУпаковок { get; set; } = 0;
+            public decimal Кількість { get; set; } = 0;
+            public decimal Ціна { get; set; } = 0;
+            public decimal Сума { get; set; } = 0;
+            public Довідники.Склади_Pointer Склад { get; set; } = new Довідники.Склади_Pointer();
+            public Документи.ЗамовленняПостачальнику_Pointer ЗамовленняПостачальнику { get; set; } = new Документи.ЗамовленняПостачальнику_Pointer();
+            public decimal Скидка { get; set; } = 0;
+            public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; } = new Довідники.СтруктураПідприємства_Pointer();
+            public Довідники.ВидиЦін_Pointer ВидЦіни { get; set; } = new Довідники.ВидиЦін_Pointer();
             
         }
     }
@@ -11239,7 +11003,6 @@ namespace StorageAndTrade_1_0.Документи
     #endregion
     
     #region DOCUMENT "ЗамовленняКлієнта"
-    
     public static class ЗамовленняКлієнта_Const
     {
         public const string TABLE = "tab_a34";
@@ -11594,8 +11357,7 @@ namespace StorageAndTrade_1_0.Документи
             xmlWriter.Close();
         }
     }
-	
-    
+
     public class ЗамовленняКлієнта_Objest : DocumentObject
     {
         public ЗамовленняКлієнта_Objest() : base(Config.Kernel!, "tab_a34", "ЗамовленняКлієнта",
@@ -11712,61 +11474,61 @@ namespace StorageAndTrade_1_0.Документи
             
             BaseSave();
             ЗамовленняКлієнта_Triggers.AfterRecording(this);
-		}
+		    }
 
-		public bool SpendTheDocument(DateTime spendDate)
-		{
+        public bool SpendTheDocument(DateTime spendDate)
+        {
             bool rezult = ЗамовленняКлієнта_SpendTheDocument.Spend(this);
-		    BaseSpend(rezult, spendDate);
-		    return rezult;
-		}
+                BaseSpend(rezult, spendDate);
+                return rezult;
+		    }
 
-		public void ClearSpendTheDocument()
-		{
+        public void ClearSpendTheDocument()
+        {
             ЗамовленняКлієнта_SpendTheDocument.ClearSpend(this);
-			BaseSpend(false, DateTime.MinValue);
-		}
+            BaseSpend(false, DateTime.MinValue);
+		    }
 
 		    public ЗамовленняКлієнта_Objest Copy()
         {
             ЗамовленняКлієнта_Objest copy = new ЗамовленняКлієнта_Objest();
 			      copy.New();
             copy.Назва = Назва;
-			copy.НомерДок = НомерДок;
-			copy.ДатаДок = ДатаДок;
-			copy.Контрагент = Контрагент;
-			copy.Організація = Організація;
-			copy.Валюта = Валюта;
-			copy.СумаДокументу = СумаДокументу;
-			copy.Склад = Склад;
-			copy.Статус = Статус;
-			copy.Узгоджений = Узгоджений;
-			copy.ФормаОплати = ФормаОплати;
-			copy.БанківськийРахунок = БанківськийРахунок;
-			copy.БанківськийРахунокКонтрагента = БанківськийРахунокКонтрагента;
-			copy.Каса = Каса;
-			copy.СумаАвансуДоЗабезпечення = СумаАвансуДоЗабезпечення;
-			copy.СумаПередоплатиДоВідгрузки = СумаПередоплатиДоВідгрузки;
-			copy.ДатаВідгрузки = ДатаВідгрузки;
-			copy.АдресаДоставки = АдресаДоставки;
-			copy.ГосподарськаОперація = ГосподарськаОперація;
-			copy.Договір = Договір;
-			copy.Підрозділ = Підрозділ;
-			copy.Автор = Автор;
-			copy.СпосібДоставки = СпосібДоставки;
-			copy.ЧасДоставкиЗ = ЧасДоставкиЗ;
-			copy.ЧасДоставкиДо = ЧасДоставкиДо;
-			copy.ПовернутиТару = ПовернутиТару;
-			copy.ДатаПоверненняТари = ДатаПоверненняТари;
-			copy.Коментар = Коментар;
-			copy.Менеджер = Менеджер;
-			
-			return copy;
+            copy.НомерДок = НомерДок;
+            copy.ДатаДок = ДатаДок;
+            copy.Контрагент = Контрагент;
+            copy.Організація = Організація;
+            copy.Валюта = Валюта;
+            copy.СумаДокументу = СумаДокументу;
+            copy.Склад = Склад;
+            copy.Статус = Статус;
+            copy.Узгоджений = Узгоджений;
+            copy.ФормаОплати = ФормаОплати;
+            copy.БанківськийРахунок = БанківськийРахунок;
+            copy.БанківськийРахунокКонтрагента = БанківськийРахунокКонтрагента;
+            copy.Каса = Каса;
+            copy.СумаАвансуДоЗабезпечення = СумаАвансуДоЗабезпечення;
+            copy.СумаПередоплатиДоВідгрузки = СумаПередоплатиДоВідгрузки;
+            copy.ДатаВідгрузки = ДатаВідгрузки;
+            copy.АдресаДоставки = АдресаДоставки;
+            copy.ГосподарськаОперація = ГосподарськаОперація;
+            copy.Договір = Договір;
+            copy.Підрозділ = Підрозділ;
+            copy.Автор = Автор;
+            copy.СпосібДоставки = СпосібДоставки;
+            copy.ЧасДоставкиЗ = ЧасДоставкиЗ;
+            copy.ЧасДоставкиДо = ЧасДоставкиДо;
+            copy.ПовернутиТару = ПовернутиТару;
+            copy.ДатаПоверненняТари = ДатаПоверненняТари;
+            copy.Коментар = Коментар;
+            copy.Менеджер = Менеджер;
+            
+            return copy;
         }
 
         public void Delete()
         {
-		    ЗамовленняКлієнта_Triggers.BeforeDelete(this);
+		        ЗамовленняКлієнта_Triggers.BeforeDelete(this);
             base.BaseDelete(new string[] { "tab_a35" });
         }
         
@@ -11815,7 +11577,6 @@ namespace StorageAndTrade_1_0.Документи
         
     }
     
-    
     public class ЗамовленняКлієнта_Pointer : DocumentPointer
     {
         public ЗамовленняКлієнта_Pointer(object? uid = null) : base(Config.Kernel!, "tab_a34", "ЗамовленняКлієнта")
@@ -11856,16 +11617,15 @@ namespace StorageAndTrade_1_0.Документи
         {
             ЗамовленняКлієнта_Objest ЗамовленняКлієнтаObjestItem = new ЗамовленняКлієнта_Objest();
             ЗамовленняКлієнтаObjestItem.Read(base.UnigueID);
-			
-			if (readAllTablePart)
-			{   
-				ЗамовленняКлієнтаObjestItem.Товари_TablePart.Read();
-			}
-			
+            
+            if (readAllTablePart)
+            {   
+                ЗамовленняКлієнтаObjestItem.Товари_TablePart.Read();
+            }
+            
             return ЗамовленняКлієнтаObjestItem;
         }
     }
-    
     
     public class ЗамовленняКлієнта_Select : DocumentSelect
     {		
@@ -11881,6 +11641,7 @@ namespace StorageAndTrade_1_0.Документи
     }
     
       
+    
     public class ЗамовленняКлієнта_Товари_TablePart : DocumentTablePart
     {
         public ЗамовленняКлієнта_Товари_TablePart(ЗамовленняКлієнта_Objest owner) : base(Config.Kernel!, "tab_a35",
@@ -11980,35 +11741,20 @@ namespace StorageAndTrade_1_0.Документи
 
             return copyRecords;
         }
-        
+
         public class Record : DocumentTablePartRecord
         {
-            public Record()
-            {
-                НомерРядка = 0;
-                Номенклатура = new Довідники.Номенклатура_Pointer();
-                ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer();
-                Пакування = new Довідники.ПакуванняОдиниціВиміру_Pointer();
-                КількістьУпаковок = 0;
-                Кількість = 0;
-                ВидЦіни = new Довідники.ВидиЦін_Pointer();
-                Ціна = 0;
-                Сума = 0;
-                Скидка = 0;
-                Склад = new Довідники.Склади_Pointer();
-                
-            }
-            public int НомерРядка { get; set; }
-            public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
-            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; }
-            public Довідники.ПакуванняОдиниціВиміру_Pointer Пакування { get; set; }
-            public int КількістьУпаковок { get; set; }
-            public decimal Кількість { get; set; }
-            public Довідники.ВидиЦін_Pointer ВидЦіни { get; set; }
-            public decimal Ціна { get; set; }
-            public decimal Сума { get; set; }
-            public decimal Скидка { get; set; }
-            public Довідники.Склади_Pointer Склад { get; set; }
+            public int НомерРядка { get; set; } = 0;
+            public Довідники.Номенклатура_Pointer Номенклатура { get; set; } = new Довідники.Номенклатура_Pointer();
+            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; } = new Довідники.ХарактеристикиНоменклатури_Pointer();
+            public Довідники.ПакуванняОдиниціВиміру_Pointer Пакування { get; set; } = new Довідники.ПакуванняОдиниціВиміру_Pointer();
+            public int КількістьУпаковок { get; set; } = 0;
+            public decimal Кількість { get; set; } = 0;
+            public Довідники.ВидиЦін_Pointer ВидЦіни { get; set; } = new Довідники.ВидиЦін_Pointer();
+            public decimal Ціна { get; set; } = 0;
+            public decimal Сума { get; set; } = 0;
+            public decimal Скидка { get; set; } = 0;
+            public Довідники.Склади_Pointer Склад { get; set; } = new Довідники.Склади_Pointer();
             
         }
     }
@@ -12017,7 +11763,6 @@ namespace StorageAndTrade_1_0.Документи
     #endregion
     
     #region DOCUMENT "РеалізаціяТоварівТаПослуг"
-    
     public static class РеалізаціяТоварівТаПослуг_Const
     {
         public const string TABLE = "tab_a36";
@@ -12412,8 +12157,7 @@ namespace StorageAndTrade_1_0.Документи
             xmlWriter.Close();
         }
     }
-	
-    
+
     public class РеалізаціяТоварівТаПослуг_Objest : DocumentObject
     {
         public РеалізаціяТоварівТаПослуг_Objest() : base(Config.Kernel!, "tab_a36", "РеалізаціяТоварівТаПослуг",
@@ -12536,63 +12280,63 @@ namespace StorageAndTrade_1_0.Документи
             
             BaseSave();
             РеалізаціяТоварівТаПослуг_Triggers.AfterRecording(this);
-		}
+		    }
 
-		public bool SpendTheDocument(DateTime spendDate)
-		{
+        public bool SpendTheDocument(DateTime spendDate)
+        {
             bool rezult = РеалізаціяТоварівТаПослуг_SpendTheDocument.Spend(this);
-		    BaseSpend(rezult, spendDate);
-		    return rezult;
-		}
+                BaseSpend(rezult, spendDate);
+                return rezult;
+		    }
 
-		public void ClearSpendTheDocument()
-		{
+        public void ClearSpendTheDocument()
+        {
             РеалізаціяТоварівТаПослуг_SpendTheDocument.ClearSpend(this);
-			BaseSpend(false, DateTime.MinValue);
-		}
+            BaseSpend(false, DateTime.MinValue);
+		    }
 
 		    public РеалізаціяТоварівТаПослуг_Objest Copy()
         {
             РеалізаціяТоварівТаПослуг_Objest copy = new РеалізаціяТоварівТаПослуг_Objest();
 			      copy.New();
             copy.Назва = Назва;
-			copy.НомерДок = НомерДок;
-			copy.ДатаДок = ДатаДок;
-			copy.Організація = Організація;
-			copy.Валюта = Валюта;
-			copy.БанківськийРахунокОрганізації = БанківськийРахунокОрганізації;
-			copy.БанківськийРахунокКонтрагента = БанківськийРахунокКонтрагента;
-			copy.ДатаОплати = ДатаОплати;
-			copy.ЗамовленняКлієнта = ЗамовленняКлієнта;
-			copy.Контрагент = Контрагент;
-			copy.СумаДокументу = СумаДокументу;
-			copy.Підрозділ = Підрозділ;
-			copy.Склад = Склад;
-			copy.ФормаОплати = ФормаОплати;
-			copy.ГосподарськаОперація = ГосподарськаОперація;
-			copy.Каса = Каса;
-			copy.Договір = Договір;
-			copy.Основа = Основа;
-			copy.Статус = Статус;
-			copy.Автор = Автор;
-			copy.СумаПередоплати = СумаПередоплати;
-			copy.СумаПередоплатиЗаТару = СумаПередоплатиЗаТару;
-			copy.СпосібДоставки = СпосібДоставки;
-			copy.ЧасДоставкиЗ = ЧасДоставкиЗ;
-			copy.ЧасДоставкиДо = ЧасДоставкиДо;
-			copy.ПовернутиТару = ПовернутиТару;
-			copy.ДатаПоверненняТари = ДатаПоверненняТари;
-			copy.Курс = Курс;
-			copy.Кратність = Кратність;
-			copy.Коментар = Коментар;
-			copy.Менеджер = Менеджер;
-			
-			return copy;
+            copy.НомерДок = НомерДок;
+            copy.ДатаДок = ДатаДок;
+            copy.Організація = Організація;
+            copy.Валюта = Валюта;
+            copy.БанківськийРахунокОрганізації = БанківськийРахунокОрганізації;
+            copy.БанківськийРахунокКонтрагента = БанківськийРахунокКонтрагента;
+            copy.ДатаОплати = ДатаОплати;
+            copy.ЗамовленняКлієнта = ЗамовленняКлієнта;
+            copy.Контрагент = Контрагент;
+            copy.СумаДокументу = СумаДокументу;
+            copy.Підрозділ = Підрозділ;
+            copy.Склад = Склад;
+            copy.ФормаОплати = ФормаОплати;
+            copy.ГосподарськаОперація = ГосподарськаОперація;
+            copy.Каса = Каса;
+            copy.Договір = Договір;
+            copy.Основа = Основа;
+            copy.Статус = Статус;
+            copy.Автор = Автор;
+            copy.СумаПередоплати = СумаПередоплати;
+            copy.СумаПередоплатиЗаТару = СумаПередоплатиЗаТару;
+            copy.СпосібДоставки = СпосібДоставки;
+            copy.ЧасДоставкиЗ = ЧасДоставкиЗ;
+            copy.ЧасДоставкиДо = ЧасДоставкиДо;
+            copy.ПовернутиТару = ПовернутиТару;
+            copy.ДатаПоверненняТари = ДатаПоверненняТари;
+            copy.Курс = Курс;
+            copy.Кратність = Кратність;
+            copy.Коментар = Коментар;
+            copy.Менеджер = Менеджер;
+            
+            return copy;
         }
 
         public void Delete()
         {
-		    РеалізаціяТоварівТаПослуг_Triggers.BeforeDelete(this);
+		        РеалізаціяТоварівТаПослуг_Triggers.BeforeDelete(this);
             base.BaseDelete(new string[] { "tab_a37" });
         }
         
@@ -12643,7 +12387,6 @@ namespace StorageAndTrade_1_0.Документи
         
     }
     
-    
     public class РеалізаціяТоварівТаПослуг_Pointer : DocumentPointer
     {
         public РеалізаціяТоварівТаПослуг_Pointer(object? uid = null) : base(Config.Kernel!, "tab_a36", "РеалізаціяТоварівТаПослуг")
@@ -12684,16 +12427,15 @@ namespace StorageAndTrade_1_0.Документи
         {
             РеалізаціяТоварівТаПослуг_Objest РеалізаціяТоварівТаПослугObjestItem = new РеалізаціяТоварівТаПослуг_Objest();
             РеалізаціяТоварівТаПослугObjestItem.Read(base.UnigueID);
-			
-			if (readAllTablePart)
-			{   
-				РеалізаціяТоварівТаПослугObjestItem.Товари_TablePart.Read();
-			}
-			
+            
+            if (readAllTablePart)
+            {   
+                РеалізаціяТоварівТаПослугObjestItem.Товари_TablePart.Read();
+            }
+            
             return РеалізаціяТоварівТаПослугObjestItem;
         }
     }
-    
     
     public class РеалізаціяТоварівТаПослуг_Select : DocumentSelect
     {		
@@ -12709,6 +12451,7 @@ namespace StorageAndTrade_1_0.Документи
     }
     
       
+    
     public class РеалізаціяТоварівТаПослуг_Товари_TablePart : DocumentTablePart
     {
         public РеалізаціяТоварівТаПослуг_Товари_TablePart(РеалізаціяТоварівТаПослуг_Objest owner) : base(Config.Kernel!, "tab_a37",
@@ -12817,41 +12560,23 @@ namespace StorageAndTrade_1_0.Документи
 
             return copyRecords;
         }
-        
+
         public class Record : DocumentTablePartRecord
         {
-            public Record()
-            {
-                НомерРядка = 0;
-                Номенклатура = new Довідники.Номенклатура_Pointer();
-                ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer();
-                Серія = new Довідники.СеріїНоменклатури_Pointer();
-                Пакування = new Довідники.ПакуванняОдиниціВиміру_Pointer();
-                КількістьУпаковок = 0;
-                Кількість = 0;
-                ВидЦіни = new Довідники.ВидиЦін_Pointer();
-                Ціна = 0;
-                Сума = 0;
-                Склад = new Довідники.Склади_Pointer();
-                ЗамовленняКлієнта = new Документи.ЗамовленняКлієнта_Pointer();
-                РахунокФактура = new Документи.РахунокФактура_Pointer();
-                Скидка = 0;
-                
-            }
-            public int НомерРядка { get; set; }
-            public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
-            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; }
-            public Довідники.СеріїНоменклатури_Pointer Серія { get; set; }
-            public Довідники.ПакуванняОдиниціВиміру_Pointer Пакування { get; set; }
-            public int КількістьУпаковок { get; set; }
-            public decimal Кількість { get; set; }
-            public Довідники.ВидиЦін_Pointer ВидЦіни { get; set; }
-            public decimal Ціна { get; set; }
-            public decimal Сума { get; set; }
-            public Довідники.Склади_Pointer Склад { get; set; }
-            public Документи.ЗамовленняКлієнта_Pointer ЗамовленняКлієнта { get; set; }
-            public Документи.РахунокФактура_Pointer РахунокФактура { get; set; }
-            public decimal Скидка { get; set; }
+            public int НомерРядка { get; set; } = 0;
+            public Довідники.Номенклатура_Pointer Номенклатура { get; set; } = new Довідники.Номенклатура_Pointer();
+            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; } = new Довідники.ХарактеристикиНоменклатури_Pointer();
+            public Довідники.СеріїНоменклатури_Pointer Серія { get; set; } = new Довідники.СеріїНоменклатури_Pointer();
+            public Довідники.ПакуванняОдиниціВиміру_Pointer Пакування { get; set; } = new Довідники.ПакуванняОдиниціВиміру_Pointer();
+            public int КількістьУпаковок { get; set; } = 0;
+            public decimal Кількість { get; set; } = 0;
+            public Довідники.ВидиЦін_Pointer ВидЦіни { get; set; } = new Довідники.ВидиЦін_Pointer();
+            public decimal Ціна { get; set; } = 0;
+            public decimal Сума { get; set; } = 0;
+            public Довідники.Склади_Pointer Склад { get; set; } = new Довідники.Склади_Pointer();
+            public Документи.ЗамовленняКлієнта_Pointer ЗамовленняКлієнта { get; set; } = new Документи.ЗамовленняКлієнта_Pointer();
+            public Документи.РахунокФактура_Pointer РахунокФактура { get; set; } = new Документи.РахунокФактура_Pointer();
+            public decimal Скидка { get; set; } = 0;
             
         }
     }
@@ -12860,7 +12585,6 @@ namespace StorageAndTrade_1_0.Документи
     #endregion
     
     #region DOCUMENT "ВстановленняЦінНоменклатури"
-    
     public static class ВстановленняЦінНоменклатури_Const
     {
         public const string TABLE = "tab_a42";
@@ -13014,8 +12738,7 @@ namespace StorageAndTrade_1_0.Документи
             xmlWriter.Close();
         }
     }
-	
-    
+
     public class ВстановленняЦінНоменклатури_Objest : DocumentObject
     {
         public ВстановленняЦінНоменклатури_Objest() : base(Config.Kernel!, "tab_a42", "ВстановленняЦінНоменклатури",
@@ -13069,40 +12792,40 @@ namespace StorageAndTrade_1_0.Документи
             
             BaseSave();
             ВстановленняЦінНоменклатури_Triggers.AfterRecording(this);
-		}
+		    }
 
-		public bool SpendTheDocument(DateTime spendDate)
-		{
+        public bool SpendTheDocument(DateTime spendDate)
+        {
             bool rezult = ВстановленняЦінНоменклатури_SpendTheDocument.Spend(this);
-		    BaseSpend(rezult, spendDate);
-		    return rezult;
-		}
+                BaseSpend(rezult, spendDate);
+                return rezult;
+		    }
 
-		public void ClearSpendTheDocument()
-		{
+        public void ClearSpendTheDocument()
+        {
             ВстановленняЦінНоменклатури_SpendTheDocument.ClearSpend(this);
-			BaseSpend(false, DateTime.MinValue);
-		}
+            BaseSpend(false, DateTime.MinValue);
+		    }
 
 		    public ВстановленняЦінНоменклатури_Objest Copy()
         {
             ВстановленняЦінНоменклатури_Objest copy = new ВстановленняЦінНоменклатури_Objest();
 			      copy.New();
             copy.Назва = Назва;
-			copy.НомерДок = НомерДок;
-			copy.ДатаДок = ДатаДок;
-			copy.Організація = Організація;
-			copy.Валюта = Валюта;
-			copy.ВидЦіни = ВидЦіни;
-			copy.Коментар = Коментар;
-			copy.Автор = Автор;
-			
-			return copy;
+            copy.НомерДок = НомерДок;
+            copy.ДатаДок = ДатаДок;
+            copy.Організація = Організація;
+            copy.Валюта = Валюта;
+            copy.ВидЦіни = ВидЦіни;
+            copy.Коментар = Коментар;
+            copy.Автор = Автор;
+            
+            return copy;
         }
 
         public void Delete()
         {
-		    ВстановленняЦінНоменклатури_Triggers.BeforeDelete(this);
+		        ВстановленняЦінНоменклатури_Triggers.BeforeDelete(this);
             base.BaseDelete(new string[] { "tab_a43" });
         }
         
@@ -13129,7 +12852,6 @@ namespace StorageAndTrade_1_0.Документи
         public ВстановленняЦінНоменклатури_Товари_TablePart Товари_TablePart { get; set; }
         
     }
-    
     
     public class ВстановленняЦінНоменклатури_Pointer : DocumentPointer
     {
@@ -13171,16 +12893,15 @@ namespace StorageAndTrade_1_0.Документи
         {
             ВстановленняЦінНоменклатури_Objest ВстановленняЦінНоменклатуриObjestItem = new ВстановленняЦінНоменклатури_Objest();
             ВстановленняЦінНоменклатуриObjestItem.Read(base.UnigueID);
-			
-			if (readAllTablePart)
-			{   
-				ВстановленняЦінНоменклатуриObjestItem.Товари_TablePart.Read();
-			}
-			
+            
+            if (readAllTablePart)
+            {   
+                ВстановленняЦінНоменклатуриObjestItem.Товари_TablePart.Read();
+            }
+            
             return ВстановленняЦінНоменклатуриObjestItem;
         }
     }
-    
     
     public class ВстановленняЦінНоменклатури_Select : DocumentSelect
     {		
@@ -13196,6 +12917,7 @@ namespace StorageAndTrade_1_0.Документи
     }
     
       
+    
     public class ВстановленняЦінНоменклатури_Товари_TablePart : DocumentTablePart
     {
         public ВстановленняЦінНоменклатури_Товари_TablePart(ВстановленняЦінНоменклатури_Objest owner) : base(Config.Kernel!, "tab_a43",
@@ -13280,25 +13002,15 @@ namespace StorageAndTrade_1_0.Документи
 
             return copyRecords;
         }
-        
+
         public class Record : DocumentTablePartRecord
         {
-            public Record()
-            {
-                НомерРядка = 0;
-                Номенклатура = new Довідники.Номенклатура_Pointer();
-                ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer();
-                Пакування = new Довідники.ПакуванняОдиниціВиміру_Pointer();
-                ВидЦіни = new Довідники.ВидиЦін_Pointer();
-                Ціна = 0;
-                
-            }
-            public int НомерРядка { get; set; }
-            public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
-            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; }
-            public Довідники.ПакуванняОдиниціВиміру_Pointer Пакування { get; set; }
-            public Довідники.ВидиЦін_Pointer ВидЦіни { get; set; }
-            public decimal Ціна { get; set; }
+            public int НомерРядка { get; set; } = 0;
+            public Довідники.Номенклатура_Pointer Номенклатура { get; set; } = new Довідники.Номенклатура_Pointer();
+            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; } = new Довідники.ХарактеристикиНоменклатури_Pointer();
+            public Довідники.ПакуванняОдиниціВиміру_Pointer Пакування { get; set; } = new Довідники.ПакуванняОдиниціВиміру_Pointer();
+            public Довідники.ВидиЦін_Pointer ВидЦіни { get; set; } = new Довідники.ВидиЦін_Pointer();
+            public decimal Ціна { get; set; } = 0;
             
         }
     }
@@ -13307,7 +13019,6 @@ namespace StorageAndTrade_1_0.Документи
     #endregion
     
     #region DOCUMENT "ПрихіднийКасовийОрдер"
-    
     public static class ПрихіднийКасовийОрдер_Const
     {
         public const string TABLE = "tab_a44";
@@ -13534,8 +13245,7 @@ namespace StorageAndTrade_1_0.Документи
             xmlWriter.Close();
         }
     }
-	
-    
+
     public class ПрихіднийКасовийОрдер_Objest : DocumentObject
     {
         public ПрихіднийКасовийОрдер_Objest() : base(Config.Kernel!, "tab_a44", "ПрихіднийКасовийОрдер",
@@ -13616,49 +13326,49 @@ namespace StorageAndTrade_1_0.Документи
             
             BaseSave();
             ПрихіднийКасовийОрдер_Triggers.AfterRecording(this);
-		}
+		    }
 
-		public bool SpendTheDocument(DateTime spendDate)
-		{
+        public bool SpendTheDocument(DateTime spendDate)
+        {
             bool rezult = ПрихіднийКасовийОрдер_SpendTheDocument.Spend(this);
-		    BaseSpend(rezult, spendDate);
-		    return rezult;
-		}
+                BaseSpend(rezult, spendDate);
+                return rezult;
+		    }
 
-		public void ClearSpendTheDocument()
-		{
+        public void ClearSpendTheDocument()
+        {
             ПрихіднийКасовийОрдер_SpendTheDocument.ClearSpend(this);
-			BaseSpend(false, DateTime.MinValue);
-		}
+            BaseSpend(false, DateTime.MinValue);
+		    }
 
 		    public ПрихіднийКасовийОрдер_Objest Copy()
         {
             ПрихіднийКасовийОрдер_Objest copy = new ПрихіднийКасовийОрдер_Objest();
 			      copy.New();
             copy.Назва = Назва;
-			copy.НомерДок = НомерДок;
-			copy.ДатаДок = ДатаДок;
-			copy.Організація = Організація;
-			copy.Каса = Каса;
-			copy.СумаДокументу = СумаДокументу;
-			copy.ГосподарськаОперація = ГосподарськаОперація;
-			copy.Основа = Основа;
-			copy.Контрагент = Контрагент;
-			copy.Договір = Договір;
-			copy.БанківськийРахунок = БанківськийРахунок;
-			copy.Валюта = Валюта;
-			copy.СтаттяРухуКоштів = СтаттяРухуКоштів;
-			copy.КасаВідправник = КасаВідправник;
-			copy.Курс = Курс;
-			copy.Коментар = Коментар;
-			copy.Автор = Автор;
-			
-			return copy;
+            copy.НомерДок = НомерДок;
+            copy.ДатаДок = ДатаДок;
+            copy.Організація = Організація;
+            copy.Каса = Каса;
+            copy.СумаДокументу = СумаДокументу;
+            copy.ГосподарськаОперація = ГосподарськаОперація;
+            copy.Основа = Основа;
+            copy.Контрагент = Контрагент;
+            copy.Договір = Договір;
+            copy.БанківськийРахунок = БанківськийРахунок;
+            copy.Валюта = Валюта;
+            copy.СтаттяРухуКоштів = СтаттяРухуКоштів;
+            copy.КасаВідправник = КасаВідправник;
+            copy.Курс = Курс;
+            copy.Коментар = Коментар;
+            copy.Автор = Автор;
+            
+            return copy;
         }
 
         public void Delete()
         {
-		    ПрихіднийКасовийОрдер_Triggers.BeforeDelete(this);
+		        ПрихіднийКасовийОрдер_Triggers.BeforeDelete(this);
             base.BaseDelete(new string[] { "tab_a47" });
         }
         
@@ -13694,7 +13404,6 @@ namespace StorageAndTrade_1_0.Документи
         public ПрихіднийКасовийОрдер_РозшифруванняПлатежу_TablePart РозшифруванняПлатежу_TablePart { get; set; }
         
     }
-    
     
     public class ПрихіднийКасовийОрдер_Pointer : DocumentPointer
     {
@@ -13736,16 +13445,15 @@ namespace StorageAndTrade_1_0.Документи
         {
             ПрихіднийКасовийОрдер_Objest ПрихіднийКасовийОрдерObjestItem = new ПрихіднийКасовийОрдер_Objest();
             ПрихіднийКасовийОрдерObjestItem.Read(base.UnigueID);
-			
-			if (readAllTablePart)
-			{   
-				ПрихіднийКасовийОрдерObjestItem.РозшифруванняПлатежу_TablePart.Read();
-			}
-			
+            
+            if (readAllTablePart)
+            {   
+                ПрихіднийКасовийОрдерObjestItem.РозшифруванняПлатежу_TablePart.Read();
+            }
+            
             return ПрихіднийКасовийОрдерObjestItem;
         }
     }
-    
     
     public class ПрихіднийКасовийОрдер_Select : DocumentSelect
     {		
@@ -13761,6 +13469,7 @@ namespace StorageAndTrade_1_0.Документи
     }
     
       
+    
     public class ПрихіднийКасовийОрдер_РозшифруванняПлатежу_TablePart : DocumentTablePart
     {
         public ПрихіднийКасовийОрдер_РозшифруванняПлатежу_TablePart(ПрихіднийКасовийОрдер_Objest owner) : base(Config.Kernel!, "tab_a47",
@@ -13845,25 +13554,15 @@ namespace StorageAndTrade_1_0.Документи
 
             return copyRecords;
         }
-        
+
         public class Record : DocumentTablePartRecord
         {
-            public Record()
-            {
-                НомерРядка = 0;
-                Замовлення = "";
-                Сума = 0;
-                Підрозділ = new Довідники.СтруктураПідприємства_Pointer();
-                ВалютаВзаєморозрахунків = new Довідники.Валюти_Pointer();
-                Організація = new Довідники.Організації_Pointer();
-                
-            }
-            public int НомерРядка { get; set; }
-            public string Замовлення { get; set; }
-            public decimal Сума { get; set; }
-            public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; }
-            public Довідники.Валюти_Pointer ВалютаВзаєморозрахунків { get; set; }
-            public Довідники.Організації_Pointer Організація { get; set; }
+            public int НомерРядка { get; set; } = 0;
+            public string Замовлення { get; set; } = "";
+            public decimal Сума { get; set; } = 0;
+            public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; } = new Довідники.СтруктураПідприємства_Pointer();
+            public Довідники.Валюти_Pointer ВалютаВзаєморозрахунків { get; set; } = new Довідники.Валюти_Pointer();
+            public Довідники.Організації_Pointer Організація { get; set; } = new Довідники.Організації_Pointer();
             
         }
     }
@@ -13872,7 +13571,6 @@ namespace StorageAndTrade_1_0.Документи
     #endregion
     
     #region DOCUMENT "РозхіднийКасовийОрдер"
-    
     public static class РозхіднийКасовийОрдер_Const
     {
         public const string TABLE = "tab_a48";
@@ -14121,8 +13819,7 @@ namespace StorageAndTrade_1_0.Документи
             xmlWriter.Close();
         }
     }
-	
-    
+
     public class РозхіднийКасовийОрдер_Objest : DocumentObject
     {
         public РозхіднийКасовийОрдер_Objest() : base(Config.Kernel!, "tab_a48", "РозхіднийКасовийОрдер",
@@ -14209,51 +13906,51 @@ namespace StorageAndTrade_1_0.Документи
             
             BaseSave();
             РозхіднийКасовийОрдер_Triggers.AfterRecording(this);
-		}
+		    }
 
-		public bool SpendTheDocument(DateTime spendDate)
-		{
+        public bool SpendTheDocument(DateTime spendDate)
+        {
             bool rezult = РозхіднийКасовийОрдер_SpendTheDocument.Spend(this);
-		    BaseSpend(rezult, spendDate);
-		    return rezult;
-		}
+                BaseSpend(rezult, spendDate);
+                return rezult;
+		    }
 
-		public void ClearSpendTheDocument()
-		{
+        public void ClearSpendTheDocument()
+        {
             РозхіднийКасовийОрдер_SpendTheDocument.ClearSpend(this);
-			BaseSpend(false, DateTime.MinValue);
-		}
+            BaseSpend(false, DateTime.MinValue);
+		    }
 
 		    public РозхіднийКасовийОрдер_Objest Copy()
         {
             РозхіднийКасовийОрдер_Objest copy = new РозхіднийКасовийОрдер_Objest();
 			      copy.New();
             copy.Назва = Назва;
-			copy.НомерДок = НомерДок;
-			copy.ДатаДок = ДатаДок;
-			copy.Організація = Організація;
-			copy.Каса = Каса;
-			copy.СумаДокументу = СумаДокументу;
-			copy.СумаДокументуПоКурсу = СумаДокументуПоКурсу;
-			copy.ГосподарськаОперація = ГосподарськаОперація;
-			copy.ОрганізаціяОтримувач = ОрганізаціяОтримувач;
-			copy.Контрагент = Контрагент;
-			copy.Договір = Договір;
-			copy.БанківськийРахунок = БанківськийРахунок;
-			copy.Валюта = Валюта;
-			copy.СтаттяРухуКоштів = СтаттяРухуКоштів;
-			copy.КасаОтримувач = КасаОтримувач;
-			copy.Курс = Курс;
-			copy.Основа = Основа;
-			copy.Коментар = Коментар;
-			copy.Автор = Автор;
-			
-			return copy;
+            copy.НомерДок = НомерДок;
+            copy.ДатаДок = ДатаДок;
+            copy.Організація = Організація;
+            copy.Каса = Каса;
+            copy.СумаДокументу = СумаДокументу;
+            copy.СумаДокументуПоКурсу = СумаДокументуПоКурсу;
+            copy.ГосподарськаОперація = ГосподарськаОперація;
+            copy.ОрганізаціяОтримувач = ОрганізаціяОтримувач;
+            copy.Контрагент = Контрагент;
+            copy.Договір = Договір;
+            copy.БанківськийРахунок = БанківськийРахунок;
+            copy.Валюта = Валюта;
+            copy.СтаттяРухуКоштів = СтаттяРухуКоштів;
+            copy.КасаОтримувач = КасаОтримувач;
+            copy.Курс = Курс;
+            copy.Основа = Основа;
+            copy.Коментар = Коментар;
+            copy.Автор = Автор;
+            
+            return copy;
         }
 
         public void Delete()
         {
-		    РозхіднийКасовийОрдер_Triggers.BeforeDelete(this);
+		        РозхіднийКасовийОрдер_Triggers.BeforeDelete(this);
             base.BaseDelete(new string[] { "tab_a49" });
         }
         
@@ -14291,7 +13988,6 @@ namespace StorageAndTrade_1_0.Документи
         public РозхіднийКасовийОрдер_РозшифруванняПлатежу_TablePart РозшифруванняПлатежу_TablePart { get; set; }
         
     }
-    
     
     public class РозхіднийКасовийОрдер_Pointer : DocumentPointer
     {
@@ -14333,16 +14029,15 @@ namespace StorageAndTrade_1_0.Документи
         {
             РозхіднийКасовийОрдер_Objest РозхіднийКасовийОрдерObjestItem = new РозхіднийКасовийОрдер_Objest();
             РозхіднийКасовийОрдерObjestItem.Read(base.UnigueID);
-			
-			if (readAllTablePart)
-			{   
-				РозхіднийКасовийОрдерObjestItem.РозшифруванняПлатежу_TablePart.Read();
-			}
-			
+            
+            if (readAllTablePart)
+            {   
+                РозхіднийКасовийОрдерObjestItem.РозшифруванняПлатежу_TablePart.Read();
+            }
+            
             return РозхіднийКасовийОрдерObjestItem;
         }
     }
-    
     
     public class РозхіднийКасовийОрдер_Select : DocumentSelect
     {		
@@ -14358,6 +14053,7 @@ namespace StorageAndTrade_1_0.Документи
     }
     
       
+    
     public class РозхіднийКасовийОрдер_РозшифруванняПлатежу_TablePart : DocumentTablePart
     {
         public РозхіднийКасовийОрдер_РозшифруванняПлатежу_TablePart(РозхіднийКасовийОрдер_Objest owner) : base(Config.Kernel!, "tab_a49",
@@ -14445,27 +14141,16 @@ namespace StorageAndTrade_1_0.Документи
 
             return copyRecords;
         }
-        
+
         public class Record : DocumentTablePartRecord
         {
-            public Record()
-            {
-                НомерРядка = 0;
-                Замовлення = "";
-                Сума = 0;
-                ВалютаВзаєморозрахунків = new Довідники.Валюти_Pointer();
-                Підрозділ = new Довідники.СтруктураПідприємства_Pointer();
-                Коментар = "";
-                Організація = new Довідники.Організації_Pointer();
-                
-            }
-            public int НомерРядка { get; set; }
-            public string Замовлення { get; set; }
-            public decimal Сума { get; set; }
-            public Довідники.Валюти_Pointer ВалютаВзаєморозрахунків { get; set; }
-            public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; }
-            public string Коментар { get; set; }
-            public Довідники.Організації_Pointer Організація { get; set; }
+            public int НомерРядка { get; set; } = 0;
+            public string Замовлення { get; set; } = "";
+            public decimal Сума { get; set; } = 0;
+            public Довідники.Валюти_Pointer ВалютаВзаєморозрахунків { get; set; } = new Довідники.Валюти_Pointer();
+            public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; } = new Довідники.СтруктураПідприємства_Pointer();
+            public string Коментар { get; set; } = "";
+            public Довідники.Організації_Pointer Організація { get; set; } = new Довідники.Організації_Pointer();
             
         }
     }
@@ -14474,7 +14159,6 @@ namespace StorageAndTrade_1_0.Документи
     #endregion
     
     #region DOCUMENT "ПереміщенняТоварів"
-    
     public static class ПереміщенняТоварів_Const
     {
         public const string TABLE = "tab_a31";
@@ -14727,8 +14411,7 @@ namespace StorageAndTrade_1_0.Документи
             xmlWriter.Close();
         }
     }
-	
-    
+
     public class ПереміщенняТоварів_Objest : DocumentObject
     {
         public ПереміщенняТоварів_Objest() : base(Config.Kernel!, "tab_a31", "ПереміщенняТоварів",
@@ -14815,51 +14498,51 @@ namespace StorageAndTrade_1_0.Документи
             
             BaseSave();
             ПереміщенняТоварів_Triggers.AfterRecording(this);
-		}
+		    }
 
-		public bool SpendTheDocument(DateTime spendDate)
-		{
+        public bool SpendTheDocument(DateTime spendDate)
+        {
             bool rezult = ПереміщенняТоварів_SpendTheDocument.Spend(this);
-		    BaseSpend(rezult, spendDate);
-		    return rezult;
-		}
+                BaseSpend(rezult, spendDate);
+                return rezult;
+		    }
 
-		public void ClearSpendTheDocument()
-		{
+        public void ClearSpendTheDocument()
+        {
             ПереміщенняТоварів_SpendTheDocument.ClearSpend(this);
-			BaseSpend(false, DateTime.MinValue);
-		}
+            BaseSpend(false, DateTime.MinValue);
+		    }
 
 		    public ПереміщенняТоварів_Objest Copy()
         {
             ПереміщенняТоварів_Objest copy = new ПереміщенняТоварів_Objest();
 			      copy.New();
             copy.Назва = Назва;
-			copy.НомерДок = НомерДок;
-			copy.ДатаДок = ДатаДок;
-			copy.Організація = Організація;
-			copy.БанківськийРахунокОрганізації = БанківськийРахунокОрганізації;
-			copy.ВидЦіни = ВидЦіни;
-			copy.ОрганізаціяОтримувач = ОрганізаціяОтримувач;
-			copy.Відповідальний = Відповідальний;
-			copy.Підрозділ = Підрозділ;
-			copy.СкладВідправник = СкладВідправник;
-			copy.СкладОтримувач = СкладОтримувач;
-			copy.Статус = Статус;
-			copy.ГосподарськаОперація = ГосподарськаОперація;
-			copy.СпосібДоставки = СпосібДоставки;
-			copy.АдресДоставки = АдресДоставки;
-			copy.ЧасДоставкиЗ = ЧасДоставкиЗ;
-			copy.ЧасДоставкиДо = ЧасДоставкиДо;
-			copy.Коментар = Коментар;
-			copy.Автор = Автор;
-			
-			return copy;
+            copy.НомерДок = НомерДок;
+            copy.ДатаДок = ДатаДок;
+            copy.Організація = Організація;
+            copy.БанківськийРахунокОрганізації = БанківськийРахунокОрганізації;
+            copy.ВидЦіни = ВидЦіни;
+            copy.ОрганізаціяОтримувач = ОрганізаціяОтримувач;
+            copy.Відповідальний = Відповідальний;
+            copy.Підрозділ = Підрозділ;
+            copy.СкладВідправник = СкладВідправник;
+            copy.СкладОтримувач = СкладОтримувач;
+            copy.Статус = Статус;
+            copy.ГосподарськаОперація = ГосподарськаОперація;
+            copy.СпосібДоставки = СпосібДоставки;
+            copy.АдресДоставки = АдресДоставки;
+            copy.ЧасДоставкиЗ = ЧасДоставкиЗ;
+            copy.ЧасДоставкиДо = ЧасДоставкиДо;
+            copy.Коментар = Коментар;
+            copy.Автор = Автор;
+            
+            return copy;
         }
 
         public void Delete()
         {
-		    ПереміщенняТоварів_Triggers.BeforeDelete(this);
+		        ПереміщенняТоварів_Triggers.BeforeDelete(this);
             base.BaseDelete(new string[] { "tab_a50" });
         }
         
@@ -14897,7 +14580,6 @@ namespace StorageAndTrade_1_0.Документи
         public ПереміщенняТоварів_Товари_TablePart Товари_TablePart { get; set; }
         
     }
-    
     
     public class ПереміщенняТоварів_Pointer : DocumentPointer
     {
@@ -14939,16 +14621,15 @@ namespace StorageAndTrade_1_0.Документи
         {
             ПереміщенняТоварів_Objest ПереміщенняТоварівObjestItem = new ПереміщенняТоварів_Objest();
             ПереміщенняТоварівObjestItem.Read(base.UnigueID);
-			
-			if (readAllTablePart)
-			{   
-				ПереміщенняТоварівObjestItem.Товари_TablePart.Read();
-			}
-			
+            
+            if (readAllTablePart)
+            {   
+                ПереміщенняТоварівObjestItem.Товари_TablePart.Read();
+            }
+            
             return ПереміщенняТоварівObjestItem;
         }
     }
-    
     
     public class ПереміщенняТоварів_Select : DocumentSelect
     {		
@@ -14964,6 +14645,7 @@ namespace StorageAndTrade_1_0.Документи
     }
     
       
+    
     public class ПереміщенняТоварів_Товари_TablePart : DocumentTablePart
     {
         public ПереміщенняТоварів_Товари_TablePart(ПереміщенняТоварів_Objest owner) : base(Config.Kernel!, "tab_a50",
@@ -15051,27 +14733,16 @@ namespace StorageAndTrade_1_0.Документи
 
             return copyRecords;
         }
-        
+
         public class Record : DocumentTablePartRecord
         {
-            public Record()
-            {
-                НомерРядка = 0;
-                Номенклатура = new Довідники.Номенклатура_Pointer();
-                ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer();
-                Серія = new Довідники.СеріїНоменклатури_Pointer();
-                Пакування = new Довідники.ПакуванняОдиниціВиміру_Pointer();
-                КількістьУпаковок = 0;
-                Кількість = 0;
-                
-            }
-            public int НомерРядка { get; set; }
-            public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
-            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; }
-            public Довідники.СеріїНоменклатури_Pointer Серія { get; set; }
-            public Довідники.ПакуванняОдиниціВиміру_Pointer Пакування { get; set; }
-            public int КількістьУпаковок { get; set; }
-            public decimal Кількість { get; set; }
+            public int НомерРядка { get; set; } = 0;
+            public Довідники.Номенклатура_Pointer Номенклатура { get; set; } = new Довідники.Номенклатура_Pointer();
+            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; } = new Довідники.ХарактеристикиНоменклатури_Pointer();
+            public Довідники.СеріїНоменклатури_Pointer Серія { get; set; } = new Довідники.СеріїНоменклатури_Pointer();
+            public Довідники.ПакуванняОдиниціВиміру_Pointer Пакування { get; set; } = new Довідники.ПакуванняОдиниціВиміру_Pointer();
+            public int КількістьУпаковок { get; set; } = 0;
+            public decimal Кількість { get; set; } = 0;
             
         }
     }
@@ -15080,7 +14751,6 @@ namespace StorageAndTrade_1_0.Документи
     #endregion
     
     #region DOCUMENT "ПоверненняТоварівПостачальнику"
-    
     public static class ПоверненняТоварівПостачальнику_Const
     {
         public const string TABLE = "tab_a51";
@@ -15376,8 +15046,7 @@ namespace StorageAndTrade_1_0.Документи
             xmlWriter.Close();
         }
     }
-	
-    
+
     public class ПоверненняТоварівПостачальнику_Objest : DocumentObject
     {
         public ПоверненняТоварівПостачальнику_Objest() : base(Config.Kernel!, "tab_a51", "ПоверненняТоварівПостачальнику",
@@ -15473,54 +15142,54 @@ namespace StorageAndTrade_1_0.Документи
             
             BaseSave();
             ПоверненняТоварівПостачальнику_Triggers.AfterRecording(this);
-		}
+		    }
 
-		public bool SpendTheDocument(DateTime spendDate)
-		{
+        public bool SpendTheDocument(DateTime spendDate)
+        {
             bool rezult = ПоверненняТоварівПостачальнику_SpendTheDocument.Spend(this);
-		    BaseSpend(rezult, spendDate);
-		    return rezult;
-		}
+                BaseSpend(rezult, spendDate);
+                return rezult;
+		    }
 
-		public void ClearSpendTheDocument()
-		{
+        public void ClearSpendTheDocument()
+        {
             ПоверненняТоварівПостачальнику_SpendTheDocument.ClearSpend(this);
-			BaseSpend(false, DateTime.MinValue);
-		}
+            BaseSpend(false, DateTime.MinValue);
+		    }
 
 		    public ПоверненняТоварівПостачальнику_Objest Copy()
         {
             ПоверненняТоварівПостачальнику_Objest copy = new ПоверненняТоварівПостачальнику_Objest();
 			      copy.New();
             copy.Назва = Назва;
-			copy.НомерДок = НомерДок;
-			copy.ДатаДок = ДатаДок;
-			copy.Організація = Організація;
-			copy.Контрагент = Контрагент;
-			copy.Підрозділ = Підрозділ;
-			copy.Валюта = Валюта;
-			copy.Склад = Склад;
-			copy.СумаДокументу = СумаДокументу;
-			copy.ГосподарськаОперація = ГосподарськаОперація;
-			copy.БанківськийРахунокОрганізації = БанківськийРахунокОрганізації;
-			copy.БанківськийРахунокКонтрагента = БанківськийРахунокКонтрагента;
-			copy.Договір = Договір;
-			copy.СпосібДоставки = СпосібДоставки;
-			copy.АдресДоставки = АдресДоставки;
-			copy.ЧасДоставкиЗ = ЧасДоставкиЗ;
-			copy.ЧасДоставкиДо = ЧасДоставкиДо;
-			copy.Каса = Каса;
-			copy.Основа = Основа;
-			copy.Коментар = Коментар;
-			copy.Автор = Автор;
-			copy.Менеджер = Менеджер;
-			
-			return copy;
+            copy.НомерДок = НомерДок;
+            copy.ДатаДок = ДатаДок;
+            copy.Організація = Організація;
+            copy.Контрагент = Контрагент;
+            copy.Підрозділ = Підрозділ;
+            copy.Валюта = Валюта;
+            copy.Склад = Склад;
+            copy.СумаДокументу = СумаДокументу;
+            copy.ГосподарськаОперація = ГосподарськаОперація;
+            copy.БанківськийРахунокОрганізації = БанківськийРахунокОрганізації;
+            copy.БанківськийРахунокКонтрагента = БанківськийРахунокКонтрагента;
+            copy.Договір = Договір;
+            copy.СпосібДоставки = СпосібДоставки;
+            copy.АдресДоставки = АдресДоставки;
+            copy.ЧасДоставкиЗ = ЧасДоставкиЗ;
+            copy.ЧасДоставкиДо = ЧасДоставкиДо;
+            copy.Каса = Каса;
+            copy.Основа = Основа;
+            copy.Коментар = Коментар;
+            copy.Автор = Автор;
+            copy.Менеджер = Менеджер;
+            
+            return copy;
         }
 
         public void Delete()
         {
-		    ПоверненняТоварівПостачальнику_Triggers.BeforeDelete(this);
+		        ПоверненняТоварівПостачальнику_Triggers.BeforeDelete(this);
             base.BaseDelete(new string[] { "tab_a52" });
         }
         
@@ -15562,7 +15231,6 @@ namespace StorageAndTrade_1_0.Документи
         
     }
     
-    
     public class ПоверненняТоварівПостачальнику_Pointer : DocumentPointer
     {
         public ПоверненняТоварівПостачальнику_Pointer(object? uid = null) : base(Config.Kernel!, "tab_a51", "ПоверненняТоварівПостачальнику")
@@ -15603,16 +15271,15 @@ namespace StorageAndTrade_1_0.Документи
         {
             ПоверненняТоварівПостачальнику_Objest ПоверненняТоварівПостачальникуObjestItem = new ПоверненняТоварівПостачальнику_Objest();
             ПоверненняТоварівПостачальникуObjestItem.Read(base.UnigueID);
-			
-			if (readAllTablePart)
-			{   
-				ПоверненняТоварівПостачальникуObjestItem.Товари_TablePart.Read();
-			}
-			
+            
+            if (readAllTablePart)
+            {   
+                ПоверненняТоварівПостачальникуObjestItem.Товари_TablePart.Read();
+            }
+            
             return ПоверненняТоварівПостачальникуObjestItem;
         }
     }
-    
     
     public class ПоверненняТоварівПостачальнику_Select : DocumentSelect
     {		
@@ -15628,6 +15295,7 @@ namespace StorageAndTrade_1_0.Документи
     }
     
       
+    
     public class ПоверненняТоварівПостачальнику_Товари_TablePart : DocumentTablePart
     {
         public ПоверненняТоварівПостачальнику_Товари_TablePart(ПоверненняТоварівПостачальнику_Objest owner) : base(Config.Kernel!, "tab_a52",
@@ -15724,33 +15392,19 @@ namespace StorageAndTrade_1_0.Документи
 
             return copyRecords;
         }
-        
+
         public class Record : DocumentTablePartRecord
         {
-            public Record()
-            {
-                НомерРядка = 0;
-                Номенклатура = new Довідники.Номенклатура_Pointer();
-                ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer();
-                Серія = new Довідники.СеріїНоменклатури_Pointer();
-                Пакування = new Довідники.ПакуванняОдиниціВиміру_Pointer();
-                КількістьУпаковок = 0;
-                Кількість = 0;
-                Ціна = 0;
-                Сума = 0;
-                ДокументПоступлення = new Документи.ПоступленняТоварівТаПослуг_Pointer();
-                
-            }
-            public int НомерРядка { get; set; }
-            public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
-            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; }
-            public Довідники.СеріїНоменклатури_Pointer Серія { get; set; }
-            public Довідники.ПакуванняОдиниціВиміру_Pointer Пакування { get; set; }
-            public int КількістьУпаковок { get; set; }
-            public decimal Кількість { get; set; }
-            public decimal Ціна { get; set; }
-            public decimal Сума { get; set; }
-            public Документи.ПоступленняТоварівТаПослуг_Pointer ДокументПоступлення { get; set; }
+            public int НомерРядка { get; set; } = 0;
+            public Довідники.Номенклатура_Pointer Номенклатура { get; set; } = new Довідники.Номенклатура_Pointer();
+            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; } = new Довідники.ХарактеристикиНоменклатури_Pointer();
+            public Довідники.СеріїНоменклатури_Pointer Серія { get; set; } = new Довідники.СеріїНоменклатури_Pointer();
+            public Довідники.ПакуванняОдиниціВиміру_Pointer Пакування { get; set; } = new Довідники.ПакуванняОдиниціВиміру_Pointer();
+            public int КількістьУпаковок { get; set; } = 0;
+            public decimal Кількість { get; set; } = 0;
+            public decimal Ціна { get; set; } = 0;
+            public decimal Сума { get; set; } = 0;
+            public Документи.ПоступленняТоварівТаПослуг_Pointer ДокументПоступлення { get; set; } = new Документи.ПоступленняТоварівТаПослуг_Pointer();
             
         }
     }
@@ -15759,7 +15413,6 @@ namespace StorageAndTrade_1_0.Документи
     #endregion
     
     #region DOCUMENT "ПоверненняТоварівВідКлієнта"
-    
     public static class ПоверненняТоварівВідКлієнта_Const
     {
         public const string TABLE = "tab_a53";
@@ -16029,8 +15682,7 @@ namespace StorageAndTrade_1_0.Документи
             xmlWriter.Close();
         }
     }
-	
-    
+
     public class ПоверненняТоварівВідКлієнта_Objest : DocumentObject
     {
         public ПоверненняТоварівВідКлієнта_Objest() : base(Config.Kernel!, "tab_a53", "ПоверненняТоварівВідКлієнта",
@@ -16114,50 +15766,50 @@ namespace StorageAndTrade_1_0.Документи
             
             BaseSave();
             ПоверненняТоварівВідКлієнта_Triggers.AfterRecording(this);
-		}
+		    }
 
-		public bool SpendTheDocument(DateTime spendDate)
-		{
+        public bool SpendTheDocument(DateTime spendDate)
+        {
             bool rezult = ПоверненняТоварівВідКлієнта_SpendTheDocument.Spend(this);
-		    BaseSpend(rezult, spendDate);
-		    return rezult;
-		}
+                BaseSpend(rezult, spendDate);
+                return rezult;
+		    }
 
-		public void ClearSpendTheDocument()
-		{
+        public void ClearSpendTheDocument()
+        {
             ПоверненняТоварівВідКлієнта_SpendTheDocument.ClearSpend(this);
-			BaseSpend(false, DateTime.MinValue);
-		}
+            BaseSpend(false, DateTime.MinValue);
+		    }
 
 		    public ПоверненняТоварівВідКлієнта_Objest Copy()
         {
             ПоверненняТоварівВідКлієнта_Objest copy = new ПоверненняТоварівВідКлієнта_Objest();
 			      copy.New();
             copy.Назва = Назва;
-			copy.НомерДок = НомерДок;
-			copy.ДатаДок = ДатаДок;
-			copy.Організація = Організація;
-			copy.Валюта = Валюта;
-			copy.СумаДокументу = СумаДокументу;
-			copy.Склад = Склад;
-			copy.Підрозділ = Підрозділ;
-			copy.Менеджер = Менеджер;
-			copy.ДокументПродажу = ДокументПродажу;
-			copy.ГосподарськаОперація = ГосподарськаОперація;
-			copy.Договір = Договір;
-			copy.ПричинаПовернення = ПричинаПовернення;
-			copy.Контрагент = Контрагент;
-			copy.Каса = Каса;
-			copy.Основа = Основа;
-			copy.Коментар = Коментар;
-			copy.Автор = Автор;
-			
-			return copy;
+            copy.НомерДок = НомерДок;
+            copy.ДатаДок = ДатаДок;
+            copy.Організація = Організація;
+            copy.Валюта = Валюта;
+            copy.СумаДокументу = СумаДокументу;
+            copy.Склад = Склад;
+            copy.Підрозділ = Підрозділ;
+            copy.Менеджер = Менеджер;
+            copy.ДокументПродажу = ДокументПродажу;
+            copy.ГосподарськаОперація = ГосподарськаОперація;
+            copy.Договір = Договір;
+            copy.ПричинаПовернення = ПричинаПовернення;
+            copy.Контрагент = Контрагент;
+            copy.Каса = Каса;
+            copy.Основа = Основа;
+            copy.Коментар = Коментар;
+            copy.Автор = Автор;
+            
+            return copy;
         }
 
         public void Delete()
         {
-		    ПоверненняТоварівВідКлієнта_Triggers.BeforeDelete(this);
+		        ПоверненняТоварівВідКлієнта_Triggers.BeforeDelete(this);
             base.BaseDelete(new string[] { "tab_a54" });
         }
         
@@ -16194,7 +15846,6 @@ namespace StorageAndTrade_1_0.Документи
         public ПоверненняТоварівВідКлієнта_Товари_TablePart Товари_TablePart { get; set; }
         
     }
-    
     
     public class ПоверненняТоварівВідКлієнта_Pointer : DocumentPointer
     {
@@ -16236,16 +15887,15 @@ namespace StorageAndTrade_1_0.Документи
         {
             ПоверненняТоварівВідКлієнта_Objest ПоверненняТоварівВідКлієнтаObjestItem = new ПоверненняТоварівВідКлієнта_Objest();
             ПоверненняТоварівВідКлієнтаObjestItem.Read(base.UnigueID);
-			
-			if (readAllTablePart)
-			{   
-				ПоверненняТоварівВідКлієнтаObjestItem.Товари_TablePart.Read();
-			}
-			
+            
+            if (readAllTablePart)
+            {   
+                ПоверненняТоварівВідКлієнтаObjestItem.Товари_TablePart.Read();
+            }
+            
             return ПоверненняТоварівВідКлієнтаObjestItem;
         }
     }
-    
     
     public class ПоверненняТоварівВідКлієнта_Select : DocumentSelect
     {		
@@ -16261,6 +15911,7 @@ namespace StorageAndTrade_1_0.Документи
     }
     
       
+    
     public class ПоверненняТоварівВідКлієнта_Товари_TablePart : DocumentTablePart
     {
         public ПоверненняТоварівВідКлієнта_Товари_TablePart(ПоверненняТоварівВідКлієнта_Objest owner) : base(Config.Kernel!, "tab_a54",
@@ -16360,35 +16011,20 @@ namespace StorageAndTrade_1_0.Документи
 
             return copyRecords;
         }
-        
+
         public class Record : DocumentTablePartRecord
         {
-            public Record()
-            {
-                НомерРядка = 0;
-                Номенклатура = new Довідники.Номенклатура_Pointer();
-                ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer();
-                Серія = new Довідники.СеріїНоменклатури_Pointer();
-                Пакування = new Довідники.ПакуванняОдиниціВиміру_Pointer();
-                КількістьУпаковок = 0;
-                Кількість = 0;
-                Ціна = 0;
-                Сума = 0;
-                Штрихкод = "";
-                ДокументРеалізації = new Документи.РеалізаціяТоварівТаПослуг_Pointer();
-                
-            }
-            public int НомерРядка { get; set; }
-            public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
-            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; }
-            public Довідники.СеріїНоменклатури_Pointer Серія { get; set; }
-            public Довідники.ПакуванняОдиниціВиміру_Pointer Пакування { get; set; }
-            public int КількістьУпаковок { get; set; }
-            public decimal Кількість { get; set; }
-            public decimal Ціна { get; set; }
-            public decimal Сума { get; set; }
-            public string Штрихкод { get; set; }
-            public Документи.РеалізаціяТоварівТаПослуг_Pointer ДокументРеалізації { get; set; }
+            public int НомерРядка { get; set; } = 0;
+            public Довідники.Номенклатура_Pointer Номенклатура { get; set; } = new Довідники.Номенклатура_Pointer();
+            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; } = new Довідники.ХарактеристикиНоменклатури_Pointer();
+            public Довідники.СеріїНоменклатури_Pointer Серія { get; set; } = new Довідники.СеріїНоменклатури_Pointer();
+            public Довідники.ПакуванняОдиниціВиміру_Pointer Пакування { get; set; } = new Довідники.ПакуванняОдиниціВиміру_Pointer();
+            public int КількістьУпаковок { get; set; } = 0;
+            public decimal Кількість { get; set; } = 0;
+            public decimal Ціна { get; set; } = 0;
+            public decimal Сума { get; set; } = 0;
+            public string Штрихкод { get; set; } = "";
+            public Документи.РеалізаціяТоварівТаПослуг_Pointer ДокументРеалізації { get; set; } = new Документи.РеалізаціяТоварівТаПослуг_Pointer();
             
         }
     }
@@ -16397,7 +16033,6 @@ namespace StorageAndTrade_1_0.Документи
     #endregion
     
     #region DOCUMENT "АктВиконанихРобіт"
-    
     public static class АктВиконанихРобіт_Const
     {
         public const string TABLE = "tab_a81";
@@ -16617,8 +16252,7 @@ namespace StorageAndTrade_1_0.Документи
             xmlWriter.Close();
         }
     }
-	
-    
+
     public class АктВиконанихРобіт_Objest : DocumentObject
     {
         public АктВиконанихРобіт_Objest() : base(Config.Kernel!, "tab_a81", "АктВиконанихРобіт",
@@ -16696,48 +16330,48 @@ namespace StorageAndTrade_1_0.Документи
             
             BaseSave();
             АктВиконанихРобіт_Triggers.AfterRecording(this);
-		}
+		    }
 
-		public bool SpendTheDocument(DateTime spendDate)
-		{
+        public bool SpendTheDocument(DateTime spendDate)
+        {
             bool rezult = АктВиконанихРобіт_SpendTheDocument.Spend(this);
-		    BaseSpend(rezult, spendDate);
-		    return rezult;
-		}
+                BaseSpend(rezult, spendDate);
+                return rezult;
+		    }
 
-		public void ClearSpendTheDocument()
-		{
+        public void ClearSpendTheDocument()
+        {
             АктВиконанихРобіт_SpendTheDocument.ClearSpend(this);
-			BaseSpend(false, DateTime.MinValue);
-		}
+            BaseSpend(false, DateTime.MinValue);
+		    }
 
 		    public АктВиконанихРобіт_Objest Copy()
         {
             АктВиконанихРобіт_Objest copy = new АктВиконанихРобіт_Objest();
 			      copy.New();
             copy.Назва = Назва;
-			copy.НомерДок = НомерДок;
-			copy.ДатаДок = ДатаДок;
-			copy.Валюта = Валюта;
-			copy.ЗамовленняКлієнта = ЗамовленняКлієнта;
-			copy.Каса = Каса;
-			copy.Контрагент = Контрагент;
-			copy.Організація = Організація;
-			copy.Підрозділ = Підрозділ;
-			copy.СумаДокументу = СумаДокументу;
-			copy.ФормаОплати = ФормаОплати;
-			copy.Договір = Договір;
-			copy.ГосподарськаОперація = ГосподарськаОперація;
-			copy.Коментар = Коментар;
-			copy.Автор = Автор;
-			copy.Менеджер = Менеджер;
-			
-			return copy;
+            copy.НомерДок = НомерДок;
+            copy.ДатаДок = ДатаДок;
+            copy.Валюта = Валюта;
+            copy.ЗамовленняКлієнта = ЗамовленняКлієнта;
+            copy.Каса = Каса;
+            copy.Контрагент = Контрагент;
+            copy.Організація = Організація;
+            copy.Підрозділ = Підрозділ;
+            copy.СумаДокументу = СумаДокументу;
+            copy.ФормаОплати = ФормаОплати;
+            copy.Договір = Договір;
+            copy.ГосподарськаОперація = ГосподарськаОперація;
+            copy.Коментар = Коментар;
+            copy.Автор = Автор;
+            copy.Менеджер = Менеджер;
+            
+            return copy;
         }
 
         public void Delete()
         {
-		    АктВиконанихРобіт_Triggers.BeforeDelete(this);
+		        АктВиконанихРобіт_Triggers.BeforeDelete(this);
             base.BaseDelete(new string[] { "tab_a82" });
         }
         
@@ -16772,7 +16406,6 @@ namespace StorageAndTrade_1_0.Документи
         public АктВиконанихРобіт_Послуги_TablePart Послуги_TablePart { get; set; }
         
     }
-    
     
     public class АктВиконанихРобіт_Pointer : DocumentPointer
     {
@@ -16814,16 +16447,15 @@ namespace StorageAndTrade_1_0.Документи
         {
             АктВиконанихРобіт_Objest АктВиконанихРобітObjestItem = new АктВиконанихРобіт_Objest();
             АктВиконанихРобітObjestItem.Read(base.UnigueID);
-			
-			if (readAllTablePart)
-			{   
-				АктВиконанихРобітObjestItem.Послуги_TablePart.Read();
-			}
-			
+            
+            if (readAllTablePart)
+            {   
+                АктВиконанихРобітObjestItem.Послуги_TablePart.Read();
+            }
+            
             return АктВиконанихРобітObjestItem;
         }
     }
-    
     
     public class АктВиконанихРобіт_Select : DocumentSelect
     {		
@@ -16839,6 +16471,7 @@ namespace StorageAndTrade_1_0.Документи
     }
     
       
+    
     public class АктВиконанихРобіт_Послуги_TablePart : DocumentTablePart
     {
         public АктВиконанихРобіт_Послуги_TablePart(АктВиконанихРобіт_Objest owner) : base(Config.Kernel!, "tab_a82",
@@ -16923,25 +16556,15 @@ namespace StorageAndTrade_1_0.Документи
 
             return copyRecords;
         }
-        
+
         public class Record : DocumentTablePartRecord
         {
-            public Record()
-            {
-                НомерРядка = 0;
-                Номенклатура = new Довідники.Номенклатура_Pointer();
-                ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer();
-                Кількість = 0;
-                Ціна = 0;
-                Сума = 0;
-                
-            }
-            public int НомерРядка { get; set; }
-            public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
-            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; }
-            public decimal Кількість { get; set; }
-            public decimal Ціна { get; set; }
-            public decimal Сума { get; set; }
+            public int НомерРядка { get; set; } = 0;
+            public Довідники.Номенклатура_Pointer Номенклатура { get; set; } = new Довідники.Номенклатура_Pointer();
+            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; } = new Довідники.ХарактеристикиНоменклатури_Pointer();
+            public decimal Кількість { get; set; } = 0;
+            public decimal Ціна { get; set; } = 0;
+            public decimal Сума { get; set; } = 0;
             
         }
     }
@@ -16950,7 +16573,6 @@ namespace StorageAndTrade_1_0.Документи
     #endregion
     
     #region DOCUMENT "ВведенняЗалишків"
-    
     public static class ВведенняЗалишків_Const
     {
         public const string TABLE = "tab_a83";
@@ -17273,8 +16895,7 @@ namespace StorageAndTrade_1_0.Документи
             xmlWriter.Close();
         }
     }
-	
-    
+
     public class ВведенняЗалишків_Objest : DocumentObject
     {
         public ВведенняЗалишків_Objest() : base(Config.Kernel!, "tab_a83", "ВведенняЗалишків",
@@ -17343,44 +16964,44 @@ namespace StorageAndTrade_1_0.Документи
             
             BaseSave();
             ВведенняЗалишків_Triggers.AfterRecording(this);
-		}
+		    }
 
-		public bool SpendTheDocument(DateTime spendDate)
-		{
+        public bool SpendTheDocument(DateTime spendDate)
+        {
             bool rezult = ВведенняЗалишків_SpendTheDocument.Spend(this);
-		    BaseSpend(rezult, spendDate);
-		    return rezult;
-		}
+                BaseSpend(rezult, spendDate);
+                return rezult;
+		    }
 
-		public void ClearSpendTheDocument()
-		{
+        public void ClearSpendTheDocument()
+        {
             ВведенняЗалишків_SpendTheDocument.ClearSpend(this);
-			BaseSpend(false, DateTime.MinValue);
-		}
+            BaseSpend(false, DateTime.MinValue);
+		    }
 
 		    public ВведенняЗалишків_Objest Copy()
         {
             ВведенняЗалишків_Objest copy = new ВведенняЗалишків_Objest();
 			      copy.New();
             copy.Назва = Назва;
-			copy.НомерДок = НомерДок;
-			copy.ДатаДок = ДатаДок;
-			copy.Організація = Організація;
-			copy.Підрозділ = Підрозділ;
-			copy.Склад = Склад;
-			copy.Валюта = Валюта;
-			copy.Контрагент = Контрагент;
-			copy.Договір = Договір;
-			copy.ГосподарськаОперація = ГосподарськаОперація;
-			copy.Коментар = Коментар;
-			copy.Автор = Автор;
-			
-			return copy;
+            copy.НомерДок = НомерДок;
+            copy.ДатаДок = ДатаДок;
+            copy.Організація = Організація;
+            copy.Підрозділ = Підрозділ;
+            copy.Склад = Склад;
+            copy.Валюта = Валюта;
+            copy.Контрагент = Контрагент;
+            copy.Договір = Договір;
+            copy.ГосподарськаОперація = ГосподарськаОперація;
+            copy.Коментар = Коментар;
+            copy.Автор = Автор;
+            
+            return copy;
         }
 
         public void Delete()
         {
-		    ВведенняЗалишків_Triggers.BeforeDelete(this);
+		        ВведенняЗалишків_Triggers.BeforeDelete(this);
             base.BaseDelete(new string[] { "tab_a84", "tab_a85", "tab_a86", "tab_a87" });
         }
         
@@ -17414,7 +17035,6 @@ namespace StorageAndTrade_1_0.Документи
         public ВведенняЗалишків_РозрахункиЗКонтрагентами_TablePart РозрахункиЗКонтрагентами_TablePart { get; set; }
         
     }
-    
     
     public class ВведенняЗалишків_Pointer : DocumentPointer
     {
@@ -17456,16 +17076,15 @@ namespace StorageAndTrade_1_0.Документи
         {
             ВведенняЗалишків_Objest ВведенняЗалишківObjestItem = new ВведенняЗалишків_Objest();
             ВведенняЗалишківObjestItem.Read(base.UnigueID);
-			
-			if (readAllTablePart)
-			{   
-				ВведенняЗалишківObjestItem.Товари_TablePart.Read();ВведенняЗалишківObjestItem.Каси_TablePart.Read();ВведенняЗалишківObjestItem.БанківськіРахунки_TablePart.Read();ВведенняЗалишківObjestItem.РозрахункиЗКонтрагентами_TablePart.Read();
-			}
-			
+            
+            if (readAllTablePart)
+            {   
+                ВведенняЗалишківObjestItem.Товари_TablePart.Read();ВведенняЗалишківObjestItem.Каси_TablePart.Read();ВведенняЗалишківObjestItem.БанківськіРахунки_TablePart.Read();ВведенняЗалишківObjestItem.РозрахункиЗКонтрагентами_TablePart.Read();
+            }
+            
             return ВведенняЗалишківObjestItem;
         }
     }
-    
     
     public class ВведенняЗалишків_Select : DocumentSelect
     {		
@@ -17481,6 +17100,7 @@ namespace StorageAndTrade_1_0.Документи
     }
     
       
+    
     public class ВведенняЗалишків_Товари_TablePart : DocumentTablePart
     {
         public ВведенняЗалишків_Товари_TablePart(ВведенняЗалишків_Objest owner) : base(Config.Kernel!, "tab_a84",
@@ -17574,35 +17194,23 @@ namespace StorageAndTrade_1_0.Документи
 
             return copyRecords;
         }
-        
+
         public class Record : DocumentTablePartRecord
         {
-            public Record()
-            {
-                НомерРядка = 0;
-                Номенклатура = new Довідники.Номенклатура_Pointer();
-                ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer();
-                Серія = new Довідники.СеріїНоменклатури_Pointer();
-                Пакування = new Довідники.ПакуванняОдиниціВиміру_Pointer();
-                КількістьУпаковок = 0;
-                Кількість = 0;
-                Ціна = 0;
-                Сума = 0;
-                
-            }
-            public int НомерРядка { get; set; }
-            public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
-            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; }
-            public Довідники.СеріїНоменклатури_Pointer Серія { get; set; }
-            public Довідники.ПакуванняОдиниціВиміру_Pointer Пакування { get; set; }
-            public int КількістьУпаковок { get; set; }
-            public decimal Кількість { get; set; }
-            public decimal Ціна { get; set; }
-            public decimal Сума { get; set; }
+            public int НомерРядка { get; set; } = 0;
+            public Довідники.Номенклатура_Pointer Номенклатура { get; set; } = new Довідники.Номенклатура_Pointer();
+            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; } = new Довідники.ХарактеристикиНоменклатури_Pointer();
+            public Довідники.СеріїНоменклатури_Pointer Серія { get; set; } = new Довідники.СеріїНоменклатури_Pointer();
+            public Довідники.ПакуванняОдиниціВиміру_Pointer Пакування { get; set; } = new Довідники.ПакуванняОдиниціВиміру_Pointer();
+            public int КількістьУпаковок { get; set; } = 0;
+            public decimal Кількість { get; set; } = 0;
+            public decimal Ціна { get; set; } = 0;
+            public decimal Сума { get; set; } = 0;
             
         }
     }
       
+    
     public class ВведенняЗалишків_Каси_TablePart : DocumentTablePart
     {
         public ВведенняЗалишків_Каси_TablePart(ВведенняЗалишків_Objest owner) : base(Config.Kernel!, "tab_a85",
@@ -17678,23 +17286,17 @@ namespace StorageAndTrade_1_0.Документи
 
             return copyRecords;
         }
-        
+
         public class Record : DocumentTablePartRecord
         {
-            public Record()
-            {
-                НомерРядка = 0;
-                Каса = new Довідники.Каси_Pointer();
-                Сума = 0;
-                
-            }
-            public int НомерРядка { get; set; }
-            public Довідники.Каси_Pointer Каса { get; set; }
-            public decimal Сума { get; set; }
+            public int НомерРядка { get; set; } = 0;
+            public Довідники.Каси_Pointer Каса { get; set; } = new Довідники.Каси_Pointer();
+            public decimal Сума { get; set; } = 0;
             
         }
     }
       
+    
     public class ВведенняЗалишків_БанківськіРахунки_TablePart : DocumentTablePart
     {
         public ВведенняЗалишків_БанківськіРахунки_TablePart(ВведенняЗалишків_Objest owner) : base(Config.Kernel!, "tab_a86",
@@ -17770,23 +17372,17 @@ namespace StorageAndTrade_1_0.Документи
 
             return copyRecords;
         }
-        
+
         public class Record : DocumentTablePartRecord
         {
-            public Record()
-            {
-                НомерРядка = 0;
-                БанківськийРахунок = new Довідники.БанківськіРахункиОрганізацій_Pointer();
-                Сума = 0;
-                
-            }
-            public int НомерРядка { get; set; }
-            public Довідники.БанківськіРахункиОрганізацій_Pointer БанківськийРахунок { get; set; }
-            public decimal Сума { get; set; }
+            public int НомерРядка { get; set; } = 0;
+            public Довідники.БанківськіРахункиОрганізацій_Pointer БанківськийРахунок { get; set; } = new Довідники.БанківськіРахункиОрганізацій_Pointer();
+            public decimal Сума { get; set; } = 0;
             
         }
     }
       
+    
     public class ВведенняЗалишків_РозрахункиЗКонтрагентами_TablePart : DocumentTablePart
     {
         public ВведенняЗалишків_РозрахункиЗКонтрагентами_TablePart(ВведенняЗалишків_Objest owner) : base(Config.Kernel!, "tab_a87",
@@ -17868,23 +17464,14 @@ namespace StorageAndTrade_1_0.Документи
 
             return copyRecords;
         }
-        
+
         public class Record : DocumentTablePartRecord
         {
-            public Record()
-            {
-                НомерРядка = 0;
-                Контрагент = new Довідники.Контрагенти_Pointer();
-                Валюта = new Довідники.Валюти_Pointer();
-                Сума = 0;
-                ТипКонтрагента = 0;
-                
-            }
-            public int НомерРядка { get; set; }
-            public Довідники.Контрагенти_Pointer Контрагент { get; set; }
-            public Довідники.Валюти_Pointer Валюта { get; set; }
-            public decimal Сума { get; set; }
-            public Перелічення.ТипиКонтрагентів ТипКонтрагента { get; set; }
+            public int НомерРядка { get; set; } = 0;
+            public Довідники.Контрагенти_Pointer Контрагент { get; set; } = new Довідники.Контрагенти_Pointer();
+            public Довідники.Валюти_Pointer Валюта { get; set; } = new Довідники.Валюти_Pointer();
+            public decimal Сума { get; set; } = 0;
+            public Перелічення.ТипиКонтрагентів ТипКонтрагента { get; set; } = 0;
             
         }
     }
@@ -17893,7 +17480,6 @@ namespace StorageAndTrade_1_0.Документи
     #endregion
     
     #region DOCUMENT "НадлишкиТоварів"
-    
     public static class НадлишкиТоварів_Const
     {
         public const string TABLE = "tab_a88";
@@ -18046,8 +17632,7 @@ namespace StorageAndTrade_1_0.Документи
             xmlWriter.Close();
         }
     }
-	
-    
+
     public class НадлишкиТоварів_Objest : DocumentObject
     {
         public НадлишкиТоварів_Objest() : base(Config.Kernel!, "tab_a88", "НадлишкиТоварів",
@@ -18103,39 +17688,39 @@ namespace StorageAndTrade_1_0.Документи
             
             BaseSave();
             
-		}
+		    }
 
-		public bool SpendTheDocument(DateTime spendDate)
-		{
+        public bool SpendTheDocument(DateTime spendDate)
+        {
             BaseSpend(false, DateTime.MinValue);
-		    return false;
-		}
+                return false;
+		    }
 
-		public void ClearSpendTheDocument()
-		{
+        public void ClearSpendTheDocument()
+        {
             BaseSpend(false, DateTime.MinValue);
-		}
+		    }
 
 		    public НадлишкиТоварів_Objest Copy()
         {
             НадлишкиТоварів_Objest copy = new НадлишкиТоварів_Objest();
 			      copy.New();
             copy.Організація = Організація;
-			copy.Підрозділ = Підрозділ;
-			copy.Склад = Склад;
-			copy.ВидЦіни = ВидЦіни;
-			copy.Коментар = Коментар;
-			copy.НомерДок = НомерДок;
-			copy.ДатаДок = ДатаДок;
-			copy.Назва = Назва;
-			copy.Автор = Автор;
-			
-			return copy;
+            copy.Підрозділ = Підрозділ;
+            copy.Склад = Склад;
+            copy.ВидЦіни = ВидЦіни;
+            copy.Коментар = Коментар;
+            copy.НомерДок = НомерДок;
+            copy.ДатаДок = ДатаДок;
+            copy.Назва = Назва;
+            copy.Автор = Автор;
+            
+            return copy;
         }
 
         public void Delete()
         {
-		    
+		        
             base.BaseDelete(new string[] { "tab_a89" });
         }
         
@@ -18163,7 +17748,6 @@ namespace StorageAndTrade_1_0.Документи
         public НадлишкиТоварів_Товари_TablePart Товари_TablePart { get; set; }
         
     }
-    
     
     public class НадлишкиТоварів_Pointer : DocumentPointer
     {
@@ -18205,16 +17789,15 @@ namespace StorageAndTrade_1_0.Документи
         {
             НадлишкиТоварів_Objest НадлишкиТоварівObjestItem = new НадлишкиТоварів_Objest();
             НадлишкиТоварівObjestItem.Read(base.UnigueID);
-			
-			if (readAllTablePart)
-			{   
-				НадлишкиТоварівObjestItem.Товари_TablePart.Read();
-			}
-			
+            
+            if (readAllTablePart)
+            {   
+                НадлишкиТоварівObjestItem.Товари_TablePart.Read();
+            }
+            
             return НадлишкиТоварівObjestItem;
         }
     }
-    
     
     public class НадлишкиТоварів_Select : DocumentSelect
     {		
@@ -18230,6 +17813,7 @@ namespace StorageAndTrade_1_0.Документи
     }
     
       
+    
     public class НадлишкиТоварів_Товари_TablePart : DocumentTablePart
     {
         public НадлишкиТоварів_Товари_TablePart(НадлишкиТоварів_Objest owner) : base(Config.Kernel!, "tab_a89",
@@ -18311,23 +17895,14 @@ namespace StorageAndTrade_1_0.Документи
 
             return copyRecords;
         }
-        
+
         public class Record : DocumentTablePartRecord
         {
-            public Record()
-            {
-                Номенклатура = new Довідники.Номенклатура_Pointer();
-                ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer();
-                Кількість = 0;
-                Ціна = 0;
-                Сума = 0;
-                
-            }
-            public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
-            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; }
-            public decimal Кількість { get; set; }
-            public decimal Ціна { get; set; }
-            public decimal Сума { get; set; }
+            public Довідники.Номенклатура_Pointer Номенклатура { get; set; } = new Довідники.Номенклатура_Pointer();
+            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; } = new Довідники.ХарактеристикиНоменклатури_Pointer();
+            public decimal Кількість { get; set; } = 0;
+            public decimal Ціна { get; set; } = 0;
+            public decimal Сума { get; set; } = 0;
             
         }
     }
@@ -18336,7 +17911,6 @@ namespace StorageAndTrade_1_0.Документи
     #endregion
     
     #region DOCUMENT "ПересортицяТоварів"
-    
     public static class ПересортицяТоварів_Const
     {
         public const string TABLE = "tab_a90";
@@ -18489,8 +18063,7 @@ namespace StorageAndTrade_1_0.Документи
             xmlWriter.Close();
         }
     }
-	
-    
+
     public class ПересортицяТоварів_Objest : DocumentObject
     {
         public ПересортицяТоварів_Objest() : base(Config.Kernel!, "tab_a90", "ПересортицяТоварів",
@@ -18546,39 +18119,39 @@ namespace StorageAndTrade_1_0.Документи
             
             BaseSave();
             
-		}
+		    }
 
-		public bool SpendTheDocument(DateTime spendDate)
-		{
+        public bool SpendTheDocument(DateTime spendDate)
+        {
             BaseSpend(false, DateTime.MinValue);
-		    return false;
-		}
+                return false;
+		    }
 
-		public void ClearSpendTheDocument()
-		{
+        public void ClearSpendTheDocument()
+        {
             BaseSpend(false, DateTime.MinValue);
-		}
+		    }
 
 		    public ПересортицяТоварів_Objest Copy()
         {
             ПересортицяТоварів_Objest copy = new ПересортицяТоварів_Objest();
 			      copy.New();
             copy.Назва = Назва;
-			copy.НомерДок = НомерДок;
-			copy.ДатаДок = ДатаДок;
-			copy.Організація = Організація;
-			copy.Підрозділ = Підрозділ;
-			copy.Склад = Склад;
-			copy.ВидЦіни = ВидЦіни;
-			copy.Коментар = Коментар;
-			copy.Автор = Автор;
-			
-			return copy;
+            copy.НомерДок = НомерДок;
+            copy.ДатаДок = ДатаДок;
+            copy.Організація = Організація;
+            copy.Підрозділ = Підрозділ;
+            copy.Склад = Склад;
+            copy.ВидЦіни = ВидЦіни;
+            copy.Коментар = Коментар;
+            copy.Автор = Автор;
+            
+            return copy;
         }
 
         public void Delete()
         {
-		    
+		        
             base.BaseDelete(new string[] { "tab_a91" });
         }
         
@@ -18606,7 +18179,6 @@ namespace StorageAndTrade_1_0.Документи
         public ПересортицяТоварів_Товари_TablePart Товари_TablePart { get; set; }
         
     }
-    
     
     public class ПересортицяТоварів_Pointer : DocumentPointer
     {
@@ -18648,16 +18220,15 @@ namespace StorageAndTrade_1_0.Документи
         {
             ПересортицяТоварів_Objest ПересортицяТоварівObjestItem = new ПересортицяТоварів_Objest();
             ПересортицяТоварівObjestItem.Read(base.UnigueID);
-			
-			if (readAllTablePart)
-			{   
-				ПересортицяТоварівObjestItem.Товари_TablePart.Read();
-			}
-			
+            
+            if (readAllTablePart)
+            {   
+                ПересортицяТоварівObjestItem.Товари_TablePart.Read();
+            }
+            
             return ПересортицяТоварівObjestItem;
         }
     }
-    
     
     public class ПересортицяТоварів_Select : DocumentSelect
     {		
@@ -18673,6 +18244,7 @@ namespace StorageAndTrade_1_0.Документи
     }
     
       
+    
     public class ПересортицяТоварів_Товари_TablePart : DocumentTablePart
     {
         public ПересортицяТоварів_Товари_TablePart(ПересортицяТоварів_Objest owner) : base(Config.Kernel!, "tab_a91",
@@ -18754,23 +18326,14 @@ namespace StorageAndTrade_1_0.Документи
 
             return copyRecords;
         }
-        
+
         public class Record : DocumentTablePartRecord
         {
-            public Record()
-            {
-                НомерРядка = 0;
-                Номенклатура = new Довідники.Номенклатура_Pointer();
-                ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer();
-                Кількість = 0;
-                Ціна = 0;
-                
-            }
-            public int НомерРядка { get; set; }
-            public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
-            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; }
-            public decimal Кількість { get; set; }
-            public decimal Ціна { get; set; }
+            public int НомерРядка { get; set; } = 0;
+            public Довідники.Номенклатура_Pointer Номенклатура { get; set; } = new Довідники.Номенклатура_Pointer();
+            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; } = new Довідники.ХарактеристикиНоменклатури_Pointer();
+            public decimal Кількість { get; set; } = 0;
+            public decimal Ціна { get; set; } = 0;
             
         }
     }
@@ -18779,7 +18342,6 @@ namespace StorageAndTrade_1_0.Документи
     #endregion
     
     #region DOCUMENT "ПерерахунокТоварів"
-    
     public static class ПерерахунокТоварів_Const
     {
         public const string TABLE = "tab_a92";
@@ -18928,8 +18490,7 @@ namespace StorageAndTrade_1_0.Документи
             xmlWriter.Close();
         }
     }
-	
-    
+
     public class ПерерахунокТоварів_Objest : DocumentObject
     {
         public ПерерахунокТоварів_Objest() : base(Config.Kernel!, "tab_a92", "ПерерахунокТоварів",
@@ -18979,37 +18540,37 @@ namespace StorageAndTrade_1_0.Документи
             
             BaseSave();
             
-		}
+		    }
 
-		public bool SpendTheDocument(DateTime spendDate)
-		{
+        public bool SpendTheDocument(DateTime spendDate)
+        {
             BaseSpend(false, DateTime.MinValue);
-		    return false;
-		}
+                return false;
+		    }
 
-		public void ClearSpendTheDocument()
-		{
+        public void ClearSpendTheDocument()
+        {
             BaseSpend(false, DateTime.MinValue);
-		}
+		    }
 
 		    public ПерерахунокТоварів_Objest Copy()
         {
             ПерерахунокТоварів_Objest copy = new ПерерахунокТоварів_Objest();
 			      copy.New();
             copy.Назва = Назва;
-			copy.НомерДок = НомерДок;
-			copy.ДатаДок = ДатаДок;
-			copy.Склад = Склад;
-			copy.Відповідальний = Відповідальний;
-			copy.Коментар = Коментар;
-			copy.Автор = Автор;
-			
-			return copy;
+            copy.НомерДок = НомерДок;
+            copy.ДатаДок = ДатаДок;
+            copy.Склад = Склад;
+            copy.Відповідальний = Відповідальний;
+            copy.Коментар = Коментар;
+            copy.Автор = Автор;
+            
+            return copy;
         }
 
         public void Delete()
         {
-		    
+		        
             base.BaseDelete(new string[] { "tab_a93" });
         }
         
@@ -19035,7 +18596,6 @@ namespace StorageAndTrade_1_0.Документи
         public ПерерахунокТоварів_Товари_TablePart Товари_TablePart { get; set; }
         
     }
-    
     
     public class ПерерахунокТоварів_Pointer : DocumentPointer
     {
@@ -19077,16 +18637,15 @@ namespace StorageAndTrade_1_0.Документи
         {
             ПерерахунокТоварів_Objest ПерерахунокТоварівObjestItem = new ПерерахунокТоварів_Objest();
             ПерерахунокТоварівObjestItem.Read(base.UnigueID);
-			
-			if (readAllTablePart)
-			{   
-				ПерерахунокТоварівObjestItem.Товари_TablePart.Read();
-			}
-			
+            
+            if (readAllTablePart)
+            {   
+                ПерерахунокТоварівObjestItem.Товари_TablePart.Read();
+            }
+            
             return ПерерахунокТоварівObjestItem;
         }
     }
-    
     
     public class ПерерахунокТоварів_Select : DocumentSelect
     {		
@@ -19102,6 +18661,7 @@ namespace StorageAndTrade_1_0.Документи
     }
     
       
+    
     public class ПерерахунокТоварів_Товари_TablePart : DocumentTablePart
     {
         public ПерерахунокТоварів_Товари_TablePart(ПерерахунокТоварів_Objest owner) : base(Config.Kernel!, "tab_a93",
@@ -19189,27 +18749,16 @@ namespace StorageAndTrade_1_0.Документи
 
             return copyRecords;
         }
-        
+
         public class Record : DocumentTablePartRecord
         {
-            public Record()
-            {
-                Кількість = 0;
-                КількістьФакт = 0;
-                КількістьУпаковок = 0;
-                КількістьУпаковокФакт = 0;
-                Номенклатура = new Довідники.Номенклатура_Pointer();
-                Пакування = new Довідники.ПакуванняОдиниціВиміру_Pointer();
-                ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer();
-                
-            }
-            public decimal Кількість { get; set; }
-            public decimal КількістьФакт { get; set; }
-            public int КількістьУпаковок { get; set; }
-            public int КількістьУпаковокФакт { get; set; }
-            public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
-            public Довідники.ПакуванняОдиниціВиміру_Pointer Пакування { get; set; }
-            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; }
+            public decimal Кількість { get; set; } = 0;
+            public decimal КількістьФакт { get; set; } = 0;
+            public int КількістьУпаковок { get; set; } = 0;
+            public int КількістьУпаковокФакт { get; set; } = 0;
+            public Довідники.Номенклатура_Pointer Номенклатура { get; set; } = new Довідники.Номенклатура_Pointer();
+            public Довідники.ПакуванняОдиниціВиміру_Pointer Пакування { get; set; } = new Довідники.ПакуванняОдиниціВиміру_Pointer();
+            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; } = new Довідники.ХарактеристикиНоменклатури_Pointer();
             
         }
     }
@@ -19218,7 +18767,6 @@ namespace StorageAndTrade_1_0.Документи
     #endregion
     
     #region DOCUMENT "ПсуванняТоварів"
-    
     public static class ПсуванняТоварів_Const
     {
         public const string TABLE = "tab_a94";
@@ -19413,8 +18961,7 @@ namespace StorageAndTrade_1_0.Документи
             xmlWriter.Close();
         }
     }
-	
-    
+
     public class ПсуванняТоварів_Objest : DocumentObject
     {
         public ПсуванняТоварів_Objest() : base(Config.Kernel!, "tab_a94", "ПсуванняТоварів",
@@ -19477,43 +19024,43 @@ namespace StorageAndTrade_1_0.Документи
             
             BaseSave();
             ПсуванняТоварів_Triggers.AfterRecording(this);
-		}
+		    }
 
-		public bool SpendTheDocument(DateTime spendDate)
-		{
+        public bool SpendTheDocument(DateTime spendDate)
+        {
             bool rezult = ПсуванняТоварів_SpendTheDocument.Spend(this);
-		    BaseSpend(rezult, spendDate);
-		    return rezult;
-		}
+                BaseSpend(rezult, spendDate);
+                return rezult;
+		    }
 
-		public void ClearSpendTheDocument()
-		{
+        public void ClearSpendTheDocument()
+        {
             ПсуванняТоварів_SpendTheDocument.ClearSpend(this);
-			BaseSpend(false, DateTime.MinValue);
-		}
+            BaseSpend(false, DateTime.MinValue);
+		    }
 
 		    public ПсуванняТоварів_Objest Copy()
         {
             ПсуванняТоварів_Objest copy = new ПсуванняТоварів_Objest();
 			      copy.New();
             copy.Назва = Назва;
-			copy.НомерДок = НомерДок;
-			copy.ДатаДок = ДатаДок;
-			copy.Організація = Організація;
-			copy.Підрозділ = Підрозділ;
-			copy.Склад = Склад;
-			copy.Причина = Причина;
-			copy.ВидЦіни = ВидЦіни;
-			copy.СумаДокументу = СумаДокументу;
-			copy.Коментар = Коментар;
-			copy.Автор = Автор;
-			
-			return copy;
+            copy.НомерДок = НомерДок;
+            copy.ДатаДок = ДатаДок;
+            copy.Організація = Організація;
+            copy.Підрозділ = Підрозділ;
+            copy.Склад = Склад;
+            copy.Причина = Причина;
+            copy.ВидЦіни = ВидЦіни;
+            copy.СумаДокументу = СумаДокументу;
+            copy.Коментар = Коментар;
+            copy.Автор = Автор;
+            
+            return copy;
         }
 
         public void Delete()
         {
-		    ПсуванняТоварів_Triggers.BeforeDelete(this);
+		        ПсуванняТоварів_Triggers.BeforeDelete(this);
             base.BaseDelete(new string[] { "tab_a95" });
         }
         
@@ -19543,7 +19090,6 @@ namespace StorageAndTrade_1_0.Документи
         public ПсуванняТоварів_Товари_TablePart Товари_TablePart { get; set; }
         
     }
-    
     
     public class ПсуванняТоварів_Pointer : DocumentPointer
     {
@@ -19585,16 +19131,15 @@ namespace StorageAndTrade_1_0.Документи
         {
             ПсуванняТоварів_Objest ПсуванняТоварівObjestItem = new ПсуванняТоварів_Objest();
             ПсуванняТоварівObjestItem.Read(base.UnigueID);
-			
-			if (readAllTablePart)
-			{   
-				ПсуванняТоварівObjestItem.Товари_TablePart.Read();
-			}
-			
+            
+            if (readAllTablePart)
+            {   
+                ПсуванняТоварівObjestItem.Товари_TablePart.Read();
+            }
+            
             return ПсуванняТоварівObjestItem;
         }
     }
-    
     
     public class ПсуванняТоварів_Select : DocumentSelect
     {		
@@ -19610,6 +19155,7 @@ namespace StorageAndTrade_1_0.Документи
     }
     
       
+    
     public class ПсуванняТоварів_Товари_TablePart : DocumentTablePart
     {
         public ПсуванняТоварів_Товари_TablePart(ПсуванняТоварів_Objest owner) : base(Config.Kernel!, "tab_a95",
@@ -19703,31 +19249,18 @@ namespace StorageAndTrade_1_0.Документи
 
             return copyRecords;
         }
-        
+
         public class Record : DocumentTablePartRecord
         {
-            public Record()
-            {
-                НомерРядка = 0;
-                Номенклатура = new Довідники.Номенклатура_Pointer();
-                ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer();
-                Серія = new Довідники.СеріїНоменклатури_Pointer();
-                Пакування = new Довідники.ПакуванняОдиниціВиміру_Pointer();
-                КількістьУпаковок = 0;
-                Кількість = 0;
-                Ціна = 0;
-                Сума = 0;
-                
-            }
-            public int НомерРядка { get; set; }
-            public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
-            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; }
-            public Довідники.СеріїНоменклатури_Pointer Серія { get; set; }
-            public Довідники.ПакуванняОдиниціВиміру_Pointer Пакування { get; set; }
-            public int КількістьУпаковок { get; set; }
-            public decimal Кількість { get; set; }
-            public decimal Ціна { get; set; }
-            public decimal Сума { get; set; }
+            public int НомерРядка { get; set; } = 0;
+            public Довідники.Номенклатура_Pointer Номенклатура { get; set; } = new Довідники.Номенклатура_Pointer();
+            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; } = new Довідники.ХарактеристикиНоменклатури_Pointer();
+            public Довідники.СеріїНоменклатури_Pointer Серія { get; set; } = new Довідники.СеріїНоменклатури_Pointer();
+            public Довідники.ПакуванняОдиниціВиміру_Pointer Пакування { get; set; } = new Довідники.ПакуванняОдиниціВиміру_Pointer();
+            public int КількістьУпаковок { get; set; } = 0;
+            public decimal Кількість { get; set; } = 0;
+            public decimal Ціна { get; set; } = 0;
+            public decimal Сума { get; set; } = 0;
             
         }
     }
@@ -19736,7 +19269,6 @@ namespace StorageAndTrade_1_0.Документи
     #endregion
     
     #region DOCUMENT "ВнутрішнєСпоживанняТоварів"
-    
     public static class ВнутрішнєСпоживанняТоварів_Const
     {
         public const string TABLE = "tab_b07";
@@ -19940,8 +19472,7 @@ namespace StorageAndTrade_1_0.Документи
             xmlWriter.Close();
         }
     }
-	
-    
+
     public class ВнутрішнєСпоживанняТоварів_Objest : DocumentObject
     {
         public ВнутрішнєСпоживанняТоварів_Objest() : base(Config.Kernel!, "tab_b07", "ВнутрішнєСпоживанняТоварів",
@@ -20007,44 +19538,44 @@ namespace StorageAndTrade_1_0.Документи
             
             BaseSave();
             ВнутрішнєСпоживанняТоварів_Triggers.AfterRecording(this);
-		}
+		    }
 
-		public bool SpendTheDocument(DateTime spendDate)
-		{
+        public bool SpendTheDocument(DateTime spendDate)
+        {
             bool rezult = ВнутрішнєСпоживанняТоварів_SpendTheDocument.Spend(this);
-		    BaseSpend(rezult, spendDate);
-		    return rezult;
-		}
+                BaseSpend(rezult, spendDate);
+                return rezult;
+		    }
 
-		public void ClearSpendTheDocument()
-		{
+        public void ClearSpendTheDocument()
+        {
             ВнутрішнєСпоживанняТоварів_SpendTheDocument.ClearSpend(this);
-			BaseSpend(false, DateTime.MinValue);
-		}
+            BaseSpend(false, DateTime.MinValue);
+		    }
 
 		    public ВнутрішнєСпоживанняТоварів_Objest Copy()
         {
             ВнутрішнєСпоживанняТоварів_Objest copy = new ВнутрішнєСпоживанняТоварів_Objest();
 			      copy.New();
             copy.Назва = Назва;
-			copy.НомерДок = НомерДок;
-			copy.ДатаДок = ДатаДок;
-			copy.Організація = Організація;
-			copy.Склад = Склад;
-			copy.Валюта = Валюта;
-			copy.Підрозділ = Підрозділ;
-			copy.СумаДокументу = СумаДокументу;
-			copy.Основа = Основа;
-			copy.Автор = Автор;
-			copy.ГосподарськаОперація = ГосподарськаОперація;
-			copy.Коментар = Коментар;
-			
-			return copy;
+            copy.НомерДок = НомерДок;
+            copy.ДатаДок = ДатаДок;
+            copy.Організація = Організація;
+            copy.Склад = Склад;
+            copy.Валюта = Валюта;
+            copy.Підрозділ = Підрозділ;
+            copy.СумаДокументу = СумаДокументу;
+            copy.Основа = Основа;
+            copy.Автор = Автор;
+            copy.ГосподарськаОперація = ГосподарськаОперація;
+            copy.Коментар = Коментар;
+            
+            return copy;
         }
 
         public void Delete()
         {
-		    ВнутрішнєСпоживанняТоварів_Triggers.BeforeDelete(this);
+		        ВнутрішнєСпоживанняТоварів_Triggers.BeforeDelete(this);
             base.BaseDelete(new string[] { "tab_b08" });
         }
         
@@ -20075,7 +19606,6 @@ namespace StorageAndTrade_1_0.Документи
         public ВнутрішнєСпоживанняТоварів_Товари_TablePart Товари_TablePart { get; set; }
         
     }
-    
     
     public class ВнутрішнєСпоживанняТоварів_Pointer : DocumentPointer
     {
@@ -20117,16 +19647,15 @@ namespace StorageAndTrade_1_0.Документи
         {
             ВнутрішнєСпоживанняТоварів_Objest ВнутрішнєСпоживанняТоварівObjestItem = new ВнутрішнєСпоживанняТоварів_Objest();
             ВнутрішнєСпоживанняТоварівObjestItem.Read(base.UnigueID);
-			
-			if (readAllTablePart)
-			{   
-				ВнутрішнєСпоживанняТоварівObjestItem.Товари_TablePart.Read();
-			}
-			
+            
+            if (readAllTablePart)
+            {   
+                ВнутрішнєСпоживанняТоварівObjestItem.Товари_TablePart.Read();
+            }
+            
             return ВнутрішнєСпоживанняТоварівObjestItem;
         }
     }
-    
     
     public class ВнутрішнєСпоживанняТоварів_Select : DocumentSelect
     {		
@@ -20142,6 +19671,7 @@ namespace StorageAndTrade_1_0.Документи
     }
     
       
+    
     public class ВнутрішнєСпоживанняТоварів_Товари_TablePart : DocumentTablePart
     {
         public ВнутрішнєСпоживанняТоварів_Товари_TablePart(ВнутрішнєСпоживанняТоварів_Objest owner) : base(Config.Kernel!, "tab_b08",
@@ -20235,31 +19765,18 @@ namespace StorageAndTrade_1_0.Документи
 
             return copyRecords;
         }
-        
+
         public class Record : DocumentTablePartRecord
         {
-            public Record()
-            {
-                НомерРядка = 0;
-                Номенклатура = new Довідники.Номенклатура_Pointer();
-                ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer();
-                Серія = new Довідники.СеріїНоменклатури_Pointer();
-                Пакування = new Довідники.ПакуванняОдиниціВиміру_Pointer();
-                КількістьУпаковок = 0;
-                Кількість = 0;
-                Ціна = 0;
-                Сума = 0;
-                
-            }
-            public int НомерРядка { get; set; }
-            public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
-            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; }
-            public Довідники.СеріїНоменклатури_Pointer Серія { get; set; }
-            public Довідники.ПакуванняОдиниціВиміру_Pointer Пакування { get; set; }
-            public int КількістьУпаковок { get; set; }
-            public decimal Кількість { get; set; }
-            public decimal Ціна { get; set; }
-            public decimal Сума { get; set; }
+            public int НомерРядка { get; set; } = 0;
+            public Довідники.Номенклатура_Pointer Номенклатура { get; set; } = new Довідники.Номенклатура_Pointer();
+            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; } = new Довідники.ХарактеристикиНоменклатури_Pointer();
+            public Довідники.СеріїНоменклатури_Pointer Серія { get; set; } = new Довідники.СеріїНоменклатури_Pointer();
+            public Довідники.ПакуванняОдиниціВиміру_Pointer Пакування { get; set; } = new Довідники.ПакуванняОдиниціВиміру_Pointer();
+            public int КількістьУпаковок { get; set; } = 0;
+            public decimal Кількість { get; set; } = 0;
+            public decimal Ціна { get; set; } = 0;
+            public decimal Сума { get; set; } = 0;
             
         }
     }
@@ -20268,7 +19785,6 @@ namespace StorageAndTrade_1_0.Документи
     #endregion
     
     #region DOCUMENT "РахунокФактура"
-    
     public static class РахунокФактура_Const
     {
         public const string TABLE = "tab_b10";
@@ -20551,8 +20067,7 @@ namespace StorageAndTrade_1_0.Документи
             xmlWriter.Close();
         }
     }
-	
-    
+
     public class РахунокФактура_Objest : DocumentObject
     {
         public РахунокФактура_Objest() : base(Config.Kernel!, "tab_b10", "РахунокФактура",
@@ -20639,51 +20154,51 @@ namespace StorageAndTrade_1_0.Документи
             
             BaseSave();
             РахунокФактура_Triggers.AfterRecording(this);
-		}
+		    }
 
-		public bool SpendTheDocument(DateTime spendDate)
-		{
+        public bool SpendTheDocument(DateTime spendDate)
+        {
             bool rezult = РахунокФактура_SpendTheDocument.Spend(this);
-		    BaseSpend(rezult, spendDate);
-		    return rezult;
-		}
+                BaseSpend(rezult, spendDate);
+                return rezult;
+		    }
 
-		public void ClearSpendTheDocument()
-		{
+        public void ClearSpendTheDocument()
+        {
             РахунокФактура_SpendTheDocument.ClearSpend(this);
-			BaseSpend(false, DateTime.MinValue);
-		}
+            BaseSpend(false, DateTime.MinValue);
+		    }
 
 		    public РахунокФактура_Objest Copy()
         {
             РахунокФактура_Objest copy = new РахунокФактура_Objest();
 			      copy.New();
             copy.Назва = Назва;
-			copy.НомерДок = НомерДок;
-			copy.ДатаДок = ДатаДок;
-			copy.Контрагент = Контрагент;
-			copy.Організація = Організація;
-			copy.Валюта = Валюта;
-			copy.СумаДокументу = СумаДокументу;
-			copy.Склад = Склад;
-			copy.Статус = Статус;
-			copy.ФормаОплати = ФормаОплати;
-			copy.БанківськийРахунок = БанківськийРахунок;
-			copy.БанківськийРахунокКонтрагента = БанківськийРахунокКонтрагента;
-			copy.Каса = Каса;
-			copy.ГосподарськаОперація = ГосподарськаОперація;
-			copy.Договір = Договір;
-			copy.Підрозділ = Підрозділ;
-			copy.Автор = Автор;
-			copy.Коментар = Коментар;
-			copy.Менеджер = Менеджер;
-			
-			return copy;
+            copy.НомерДок = НомерДок;
+            copy.ДатаДок = ДатаДок;
+            copy.Контрагент = Контрагент;
+            copy.Організація = Організація;
+            copy.Валюта = Валюта;
+            copy.СумаДокументу = СумаДокументу;
+            copy.Склад = Склад;
+            copy.Статус = Статус;
+            copy.ФормаОплати = ФормаОплати;
+            copy.БанківськийРахунок = БанківськийРахунок;
+            copy.БанківськийРахунокКонтрагента = БанківськийРахунокКонтрагента;
+            copy.Каса = Каса;
+            copy.ГосподарськаОперація = ГосподарськаОперація;
+            copy.Договір = Договір;
+            copy.Підрозділ = Підрозділ;
+            copy.Автор = Автор;
+            copy.Коментар = Коментар;
+            copy.Менеджер = Менеджер;
+            
+            return copy;
         }
 
         public void Delete()
         {
-		    РахунокФактура_Triggers.BeforeDelete(this);
+		        РахунокФактура_Triggers.BeforeDelete(this);
             base.BaseDelete(new string[] { "tab_b11" });
         }
         
@@ -20721,7 +20236,6 @@ namespace StorageAndTrade_1_0.Документи
         public РахунокФактура_Товари_TablePart Товари_TablePart { get; set; }
         
     }
-    
     
     public class РахунокФактура_Pointer : DocumentPointer
     {
@@ -20763,16 +20277,15 @@ namespace StorageAndTrade_1_0.Документи
         {
             РахунокФактура_Objest РахунокФактураObjestItem = new РахунокФактура_Objest();
             РахунокФактураObjestItem.Read(base.UnigueID);
-			
-			if (readAllTablePart)
-			{   
-				РахунокФактураObjestItem.Товари_TablePart.Read();
-			}
-			
+            
+            if (readAllTablePart)
+            {   
+                РахунокФактураObjestItem.Товари_TablePart.Read();
+            }
+            
             return РахунокФактураObjestItem;
         }
     }
-    
     
     public class РахунокФактура_Select : DocumentSelect
     {		
@@ -20788,6 +20301,7 @@ namespace StorageAndTrade_1_0.Документи
     }
     
       
+    
     public class РахунокФактура_Товари_TablePart : DocumentTablePart
     {
         public РахунокФактура_Товари_TablePart(РахунокФактура_Objest owner) : base(Config.Kernel!, "tab_b11",
@@ -20887,35 +20401,20 @@ namespace StorageAndTrade_1_0.Документи
 
             return copyRecords;
         }
-        
+
         public class Record : DocumentTablePartRecord
         {
-            public Record()
-            {
-                НомерРядка = 0;
-                Номенклатура = new Довідники.Номенклатура_Pointer();
-                ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer();
-                Пакування = new Довідники.ПакуванняОдиниціВиміру_Pointer();
-                КількістьУпаковок = 0;
-                Кількість = 0;
-                ВидЦіни = new Довідники.ВидиЦін_Pointer();
-                Ціна = 0;
-                Сума = 0;
-                Скидка = 0;
-                Склад = new Довідники.Склади_Pointer();
-                
-            }
-            public int НомерРядка { get; set; }
-            public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
-            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; }
-            public Довідники.ПакуванняОдиниціВиміру_Pointer Пакування { get; set; }
-            public int КількістьУпаковок { get; set; }
-            public decimal Кількість { get; set; }
-            public Довідники.ВидиЦін_Pointer ВидЦіни { get; set; }
-            public decimal Ціна { get; set; }
-            public decimal Сума { get; set; }
-            public decimal Скидка { get; set; }
-            public Довідники.Склади_Pointer Склад { get; set; }
+            public int НомерРядка { get; set; } = 0;
+            public Довідники.Номенклатура_Pointer Номенклатура { get; set; } = new Довідники.Номенклатура_Pointer();
+            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; } = new Довідники.ХарактеристикиНоменклатури_Pointer();
+            public Довідники.ПакуванняОдиниціВиміру_Pointer Пакування { get; set; } = new Довідники.ПакуванняОдиниціВиміру_Pointer();
+            public int КількістьУпаковок { get; set; } = 0;
+            public decimal Кількість { get; set; } = 0;
+            public Довідники.ВидиЦін_Pointer ВидЦіни { get; set; } = new Довідники.ВидиЦін_Pointer();
+            public decimal Ціна { get; set; } = 0;
+            public decimal Сума { get; set; } = 0;
+            public decimal Скидка { get; set; } = 0;
+            public Довідники.Склади_Pointer Склад { get; set; } = new Довідники.Склади_Pointer();
             
         }
     }
@@ -20924,7 +20423,6 @@ namespace StorageAndTrade_1_0.Документи
     #endregion
     
     #region DOCUMENT "РозміщенняТоварівНаСкладі"
-    
     public static class РозміщенняТоварівНаСкладі_Const
     {
         public const string TABLE = "tab_a64";
@@ -21108,8 +20606,7 @@ namespace StorageAndTrade_1_0.Документи
             xmlWriter.Close();
         }
     }
-	
-    
+
     public class РозміщенняТоварівНаСкладі_Objest : DocumentObject
     {
         public РозміщенняТоварівНаСкладі_Objest() : base(Config.Kernel!, "tab_a64", "РозміщенняТоварівНаСкладі",
@@ -21169,42 +20666,42 @@ namespace StorageAndTrade_1_0.Документи
             
             BaseSave();
             РозміщенняТоварівНаСкладі_Triggers.AfterRecording(this);
-		}
+		    }
 
-		public bool SpendTheDocument(DateTime spendDate)
-		{
+        public bool SpendTheDocument(DateTime spendDate)
+        {
             bool rezult = РозміщенняТоварівНаСкладі_SpendTheDocument.Spend(this);
-		    BaseSpend(rezult, spendDate);
-		    return rezult;
-		}
+                BaseSpend(rezult, spendDate);
+                return rezult;
+		    }
 
-		public void ClearSpendTheDocument()
-		{
+        public void ClearSpendTheDocument()
+        {
             РозміщенняТоварівНаСкладі_SpendTheDocument.ClearSpend(this);
-			BaseSpend(false, DateTime.MinValue);
-		}
+            BaseSpend(false, DateTime.MinValue);
+		    }
 
 		    public РозміщенняТоварівНаСкладі_Objest Copy()
         {
             РозміщенняТоварівНаСкладі_Objest copy = new РозміщенняТоварівНаСкладі_Objest();
 			      copy.New();
             copy.Назва = Назва;
-			copy.ДатаДок = ДатаДок;
-			copy.НомерДок = НомерДок;
-			copy.Коментар = Коментар;
-			copy.Основа = Основа;
-			copy.Склад = Склад;
-			copy.Автор = Автор;
-			copy.Організація = Організація;
-			copy.Підрозділ = Підрозділ;
-			copy.ДокументПоступлення = ДокументПоступлення;
-			
-			return copy;
+            copy.ДатаДок = ДатаДок;
+            copy.НомерДок = НомерДок;
+            copy.Коментар = Коментар;
+            copy.Основа = Основа;
+            copy.Склад = Склад;
+            copy.Автор = Автор;
+            copy.Організація = Організація;
+            copy.Підрозділ = Підрозділ;
+            copy.ДокументПоступлення = ДокументПоступлення;
+            
+            return copy;
         }
 
         public void Delete()
         {
-		    РозміщенняТоварівНаСкладі_Triggers.BeforeDelete(this);
+		        РозміщенняТоварівНаСкладі_Triggers.BeforeDelete(this);
             base.BaseDelete(new string[] { "tab_a68" });
         }
         
@@ -21233,7 +20730,6 @@ namespace StorageAndTrade_1_0.Документи
         public РозміщенняТоварівНаСкладі_Товари_TablePart Товари_TablePart { get; set; }
         
     }
-    
     
     public class РозміщенняТоварівНаСкладі_Pointer : DocumentPointer
     {
@@ -21275,16 +20771,15 @@ namespace StorageAndTrade_1_0.Документи
         {
             РозміщенняТоварівНаСкладі_Objest РозміщенняТоварівНаСкладіObjestItem = new РозміщенняТоварівНаСкладі_Objest();
             РозміщенняТоварівНаСкладіObjestItem.Read(base.UnigueID);
-			
-			if (readAllTablePart)
-			{   
-				РозміщенняТоварівНаСкладіObjestItem.Товари_TablePart.Read();
-			}
-			
+            
+            if (readAllTablePart)
+            {   
+                РозміщенняТоварівНаСкладіObjestItem.Товари_TablePart.Read();
+            }
+            
             return РозміщенняТоварівНаСкладіObjestItem;
         }
     }
-    
     
     public class РозміщенняТоварівНаСкладі_Select : DocumentSelect
     {		
@@ -21300,6 +20795,7 @@ namespace StorageAndTrade_1_0.Документи
     }
     
       
+    
     public class РозміщенняТоварівНаСкладі_Товари_TablePart : DocumentTablePart
     {
         public РозміщенняТоварівНаСкладі_Товари_TablePart(РозміщенняТоварівНаСкладі_Objest owner) : base(Config.Kernel!, "tab_a68",
@@ -21390,29 +20886,17 @@ namespace StorageAndTrade_1_0.Документи
 
             return copyRecords;
         }
-        
+
         public class Record : DocumentTablePartRecord
         {
-            public Record()
-            {
-                НомерРядка = 0;
-                Номенклатура = new Довідники.Номенклатура_Pointer();
-                ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer();
-                Серія = new Довідники.СеріїНоменклатури_Pointer();
-                Пакування = new Довідники.ПакуванняОдиниціВиміру_Pointer();
-                КількістьУпаковок = 0;
-                Кількість = 0;
-                Комірка = new Довідники.СкладськіКомірки_Pointer();
-                
-            }
-            public int НомерРядка { get; set; }
-            public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
-            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; }
-            public Довідники.СеріїНоменклатури_Pointer Серія { get; set; }
-            public Довідники.ПакуванняОдиниціВиміру_Pointer Пакування { get; set; }
-            public int КількістьУпаковок { get; set; }
-            public decimal Кількість { get; set; }
-            public Довідники.СкладськіКомірки_Pointer Комірка { get; set; }
+            public int НомерРядка { get; set; } = 0;
+            public Довідники.Номенклатура_Pointer Номенклатура { get; set; } = new Довідники.Номенклатура_Pointer();
+            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; } = new Довідники.ХарактеристикиНоменклатури_Pointer();
+            public Довідники.СеріїНоменклатури_Pointer Серія { get; set; } = new Довідники.СеріїНоменклатури_Pointer();
+            public Довідники.ПакуванняОдиниціВиміру_Pointer Пакування { get; set; } = new Довідники.ПакуванняОдиниціВиміру_Pointer();
+            public int КількістьУпаковок { get; set; } = 0;
+            public decimal Кількість { get; set; } = 0;
+            public Довідники.СкладськіКомірки_Pointer Комірка { get; set; } = new Довідники.СкладськіКомірки_Pointer();
             
         }
     }
@@ -21421,7 +20905,6 @@ namespace StorageAndTrade_1_0.Документи
     #endregion
     
     #region DOCUMENT "ПереміщенняТоварівНаСкладі"
-    
     public static class ПереміщенняТоварівНаСкладі_Const
     {
         public const string TABLE = "tab_b09";
@@ -21604,8 +21087,7 @@ namespace StorageAndTrade_1_0.Документи
             xmlWriter.Close();
         }
     }
-	
-    
+
     public class ПереміщенняТоварівНаСкладі_Objest : DocumentObject
     {
         public ПереміщенняТоварівНаСкладі_Objest() : base(Config.Kernel!, "tab_b09", "ПереміщенняТоварівНаСкладі",
@@ -21662,41 +21144,41 @@ namespace StorageAndTrade_1_0.Документи
             
             BaseSave();
             ПереміщенняТоварівНаСкладі_Triggers.AfterRecording(this);
-		}
+		    }
 
-		public bool SpendTheDocument(DateTime spendDate)
-		{
+        public bool SpendTheDocument(DateTime spendDate)
+        {
             bool rezult = ПереміщенняТоварівНаСкладі_SpendTheDocument.Spend(this);
-		    BaseSpend(rezult, spendDate);
-		    return rezult;
-		}
+                BaseSpend(rezult, spendDate);
+                return rezult;
+		    }
 
-		public void ClearSpendTheDocument()
-		{
+        public void ClearSpendTheDocument()
+        {
             ПереміщенняТоварівНаСкладі_SpendTheDocument.ClearSpend(this);
-			BaseSpend(false, DateTime.MinValue);
-		}
+            BaseSpend(false, DateTime.MinValue);
+		    }
 
 		    public ПереміщенняТоварівНаСкладі_Objest Copy()
         {
             ПереміщенняТоварівНаСкладі_Objest copy = new ПереміщенняТоварівНаСкладі_Objest();
 			      copy.New();
             copy.Назва = Назва;
-			copy.ДатаДок = ДатаДок;
-			copy.НомерДок = НомерДок;
-			copy.Коментар = Коментар;
-			copy.Основа = Основа;
-			copy.Склад = Склад;
-			copy.Автор = Автор;
-			copy.Організація = Організація;
-			copy.Підрозділ = Підрозділ;
-			
-			return copy;
+            copy.ДатаДок = ДатаДок;
+            copy.НомерДок = НомерДок;
+            copy.Коментар = Коментар;
+            copy.Основа = Основа;
+            copy.Склад = Склад;
+            copy.Автор = Автор;
+            copy.Організація = Організація;
+            copy.Підрозділ = Підрозділ;
+            
+            return copy;
         }
 
         public void Delete()
         {
-		    ПереміщенняТоварівНаСкладі_Triggers.BeforeDelete(this);
+		        ПереміщенняТоварівНаСкладі_Triggers.BeforeDelete(this);
             base.BaseDelete(new string[] { "tab_b26" });
         }
         
@@ -21724,7 +21206,6 @@ namespace StorageAndTrade_1_0.Документи
         public ПереміщенняТоварівНаСкладі_Товари_TablePart Товари_TablePart { get; set; }
         
     }
-    
     
     public class ПереміщенняТоварівНаСкладі_Pointer : DocumentPointer
     {
@@ -21766,16 +21247,15 @@ namespace StorageAndTrade_1_0.Документи
         {
             ПереміщенняТоварівНаСкладі_Objest ПереміщенняТоварівНаСкладіObjestItem = new ПереміщенняТоварівНаСкладі_Objest();
             ПереміщенняТоварівНаСкладіObjestItem.Read(base.UnigueID);
-			
-			if (readAllTablePart)
-			{   
-				ПереміщенняТоварівНаСкладіObjestItem.Товари_TablePart.Read();
-			}
-			
+            
+            if (readAllTablePart)
+            {   
+                ПереміщенняТоварівНаСкладіObjestItem.Товари_TablePart.Read();
+            }
+            
             return ПереміщенняТоварівНаСкладіObjestItem;
         }
     }
-    
     
     public class ПереміщенняТоварівНаСкладі_Select : DocumentSelect
     {		
@@ -21791,6 +21271,7 @@ namespace StorageAndTrade_1_0.Документи
     }
     
       
+    
     public class ПереміщенняТоварівНаСкладі_Товари_TablePart : DocumentTablePart
     {
         public ПереміщенняТоварівНаСкладі_Товари_TablePart(ПереміщенняТоварівНаСкладі_Objest owner) : base(Config.Kernel!, "tab_b26",
@@ -21884,31 +21365,18 @@ namespace StorageAndTrade_1_0.Документи
 
             return copyRecords;
         }
-        
+
         public class Record : DocumentTablePartRecord
         {
-            public Record()
-            {
-                НомерРядка = 0;
-                Номенклатура = new Довідники.Номенклатура_Pointer();
-                ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer();
-                Серія = new Довідники.СеріїНоменклатури_Pointer();
-                Пакування = new Довідники.ПакуванняОдиниціВиміру_Pointer();
-                КількістьУпаковок = 0;
-                Кількість = 0;
-                КоміркаВідправник = new Довідники.СкладськіКомірки_Pointer();
-                КоміркаОтримувач = new Довідники.СкладськіКомірки_Pointer();
-                
-            }
-            public int НомерРядка { get; set; }
-            public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
-            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; }
-            public Довідники.СеріїНоменклатури_Pointer Серія { get; set; }
-            public Довідники.ПакуванняОдиниціВиміру_Pointer Пакування { get; set; }
-            public int КількістьУпаковок { get; set; }
-            public decimal Кількість { get; set; }
-            public Довідники.СкладськіКомірки_Pointer КоміркаВідправник { get; set; }
-            public Довідники.СкладськіКомірки_Pointer КоміркаОтримувач { get; set; }
+            public int НомерРядка { get; set; } = 0;
+            public Довідники.Номенклатура_Pointer Номенклатура { get; set; } = new Довідники.Номенклатура_Pointer();
+            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; } = new Довідники.ХарактеристикиНоменклатури_Pointer();
+            public Довідники.СеріїНоменклатури_Pointer Серія { get; set; } = new Довідники.СеріїНоменклатури_Pointer();
+            public Довідники.ПакуванняОдиниціВиміру_Pointer Пакування { get; set; } = new Довідники.ПакуванняОдиниціВиміру_Pointer();
+            public int КількістьУпаковок { get; set; } = 0;
+            public decimal Кількість { get; set; } = 0;
+            public Довідники.СкладськіКомірки_Pointer КоміркаВідправник { get; set; } = new Довідники.СкладськіКомірки_Pointer();
+            public Довідники.СкладськіКомірки_Pointer КоміркаОтримувач { get; set; } = new Довідники.СкладськіКомірки_Pointer();
             
         }
     }
@@ -21917,7 +21385,6 @@ namespace StorageAndTrade_1_0.Документи
     #endregion
     
     #region DOCUMENT "ЗбіркаТоварівНаСкладі"
-    
     public static class ЗбіркаТоварівНаСкладі_Const
     {
         public const string TABLE = "tab_b27";
@@ -22101,8 +21568,7 @@ namespace StorageAndTrade_1_0.Документи
             xmlWriter.Close();
         }
     }
-	
-    
+
     public class ЗбіркаТоварівНаСкладі_Objest : DocumentObject
     {
         public ЗбіркаТоварівНаСкладі_Objest() : base(Config.Kernel!, "tab_b27", "ЗбіркаТоварівНаСкладі",
@@ -22162,42 +21628,42 @@ namespace StorageAndTrade_1_0.Документи
             
             BaseSave();
             ЗбіркаТоварівНаСкладі_Triggers.AfterRecording(this);
-		}
+		    }
 
-		public bool SpendTheDocument(DateTime spendDate)
-		{
+        public bool SpendTheDocument(DateTime spendDate)
+        {
             bool rezult = ЗбіркаТоварівНаСкладі_SpendTheDocument.Spend(this);
-		    BaseSpend(rezult, spendDate);
-		    return rezult;
-		}
+                BaseSpend(rezult, spendDate);
+                return rezult;
+		    }
 
-		public void ClearSpendTheDocument()
-		{
+        public void ClearSpendTheDocument()
+        {
             ЗбіркаТоварівНаСкладі_SpendTheDocument.ClearSpend(this);
-			BaseSpend(false, DateTime.MinValue);
-		}
+            BaseSpend(false, DateTime.MinValue);
+		    }
 
 		    public ЗбіркаТоварівНаСкладі_Objest Copy()
         {
             ЗбіркаТоварівНаСкладі_Objest copy = new ЗбіркаТоварівНаСкладі_Objest();
 			      copy.New();
             copy.Назва = Назва;
-			copy.ДатаДок = ДатаДок;
-			copy.НомерДок = НомерДок;
-			copy.Коментар = Коментар;
-			copy.Основа = Основа;
-			copy.Склад = Склад;
-			copy.Автор = Автор;
-			copy.Організація = Організація;
-			copy.Підрозділ = Підрозділ;
-			copy.ДокументРеалізації = ДокументРеалізації;
-			
-			return copy;
+            copy.ДатаДок = ДатаДок;
+            copy.НомерДок = НомерДок;
+            copy.Коментар = Коментар;
+            copy.Основа = Основа;
+            copy.Склад = Склад;
+            copy.Автор = Автор;
+            copy.Організація = Організація;
+            copy.Підрозділ = Підрозділ;
+            copy.ДокументРеалізації = ДокументРеалізації;
+            
+            return copy;
         }
 
         public void Delete()
         {
-		    ЗбіркаТоварівНаСкладі_Triggers.BeforeDelete(this);
+		        ЗбіркаТоварівНаСкладі_Triggers.BeforeDelete(this);
             base.BaseDelete(new string[] { "tab_b28" });
         }
         
@@ -22226,7 +21692,6 @@ namespace StorageAndTrade_1_0.Документи
         public ЗбіркаТоварівНаСкладі_Товари_TablePart Товари_TablePart { get; set; }
         
     }
-    
     
     public class ЗбіркаТоварівНаСкладі_Pointer : DocumentPointer
     {
@@ -22268,16 +21733,15 @@ namespace StorageAndTrade_1_0.Документи
         {
             ЗбіркаТоварівНаСкладі_Objest ЗбіркаТоварівНаСкладіObjestItem = new ЗбіркаТоварівНаСкладі_Objest();
             ЗбіркаТоварівНаСкладіObjestItem.Read(base.UnigueID);
-			
-			if (readAllTablePart)
-			{   
-				ЗбіркаТоварівНаСкладіObjestItem.Товари_TablePart.Read();
-			}
-			
+            
+            if (readAllTablePart)
+            {   
+                ЗбіркаТоварівНаСкладіObjestItem.Товари_TablePart.Read();
+            }
+            
             return ЗбіркаТоварівНаСкладіObjestItem;
         }
     }
-    
     
     public class ЗбіркаТоварівНаСкладі_Select : DocumentSelect
     {		
@@ -22293,6 +21757,7 @@ namespace StorageAndTrade_1_0.Документи
     }
     
       
+    
     public class ЗбіркаТоварівНаСкладі_Товари_TablePart : DocumentTablePart
     {
         public ЗбіркаТоварівНаСкладі_Товари_TablePart(ЗбіркаТоварівНаСкладі_Objest owner) : base(Config.Kernel!, "tab_b28",
@@ -22383,29 +21848,17 @@ namespace StorageAndTrade_1_0.Документи
 
             return copyRecords;
         }
-        
+
         public class Record : DocumentTablePartRecord
         {
-            public Record()
-            {
-                НомерРядка = 0;
-                Номенклатура = new Довідники.Номенклатура_Pointer();
-                ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer();
-                Серія = new Довідники.СеріїНоменклатури_Pointer();
-                Пакування = new Довідники.ПакуванняОдиниціВиміру_Pointer();
-                КількістьУпаковок = 0;
-                Кількість = 0;
-                Комірка = new Довідники.СкладськіКомірки_Pointer();
-                
-            }
-            public int НомерРядка { get; set; }
-            public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
-            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; }
-            public Довідники.СеріїНоменклатури_Pointer Серія { get; set; }
-            public Довідники.ПакуванняОдиниціВиміру_Pointer Пакування { get; set; }
-            public int КількістьУпаковок { get; set; }
-            public decimal Кількість { get; set; }
-            public Довідники.СкладськіКомірки_Pointer Комірка { get; set; }
+            public int НомерРядка { get; set; } = 0;
+            public Довідники.Номенклатура_Pointer Номенклатура { get; set; } = new Довідники.Номенклатура_Pointer();
+            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; } = new Довідники.ХарактеристикиНоменклатури_Pointer();
+            public Довідники.СеріїНоменклатури_Pointer Серія { get; set; } = new Довідники.СеріїНоменклатури_Pointer();
+            public Довідники.ПакуванняОдиниціВиміру_Pointer Пакування { get; set; } = new Довідники.ПакуванняОдиниціВиміру_Pointer();
+            public int КількістьУпаковок { get; set; } = 0;
+            public decimal Кількість { get; set; } = 0;
+            public Довідники.СкладськіКомірки_Pointer Комірка { get; set; } = new Довідники.СкладськіКомірки_Pointer();
             
         }
     }
@@ -22414,7 +21867,6 @@ namespace StorageAndTrade_1_0.Документи
     #endregion
     
     #region DOCUMENT "РозміщенняНоменклатуриПоКоміркам"
-    
     public static class РозміщенняНоменклатуриПоКоміркам_Const
     {
         public const string TABLE = "tab_b29";
@@ -22561,8 +22013,7 @@ namespace StorageAndTrade_1_0.Документи
             xmlWriter.Close();
         }
     }
-	
-    
+
     public class РозміщенняНоменклатуриПоКоміркам_Objest : DocumentObject
     {
         public РозміщенняНоменклатуриПоКоміркам_Objest() : base(Config.Kernel!, "tab_b29", "РозміщенняНоменклатуриПоКоміркам",
@@ -22619,41 +22070,41 @@ namespace StorageAndTrade_1_0.Документи
             
             BaseSave();
             РозміщенняНоменклатуриПоКоміркам_Triggers.AfterRecording(this);
-		}
+		    }
 
-		public bool SpendTheDocument(DateTime spendDate)
-		{
+        public bool SpendTheDocument(DateTime spendDate)
+        {
             bool rezult = РозміщенняНоменклатуриПоКоміркам_SpendTheDocument.Spend(this);
-		    BaseSpend(rezult, spendDate);
-		    return rezult;
-		}
+                BaseSpend(rezult, spendDate);
+                return rezult;
+		    }
 
-		public void ClearSpendTheDocument()
-		{
+        public void ClearSpendTheDocument()
+        {
             РозміщенняНоменклатуриПоКоміркам_SpendTheDocument.ClearSpend(this);
-			BaseSpend(false, DateTime.MinValue);
-		}
+            BaseSpend(false, DateTime.MinValue);
+		    }
 
 		    public РозміщенняНоменклатуриПоКоміркам_Objest Copy()
         {
             РозміщенняНоменклатуриПоКоміркам_Objest copy = new РозміщенняНоменклатуриПоКоміркам_Objest();
 			      copy.New();
             copy.Назва = Назва;
-			copy.НомерДок = НомерДок;
-			copy.ДатаДок = ДатаДок;
-			copy.Організація = Організація;
-			copy.Склад = Склад;
-			copy.Коментар = Коментар;
-			copy.Автор = Автор;
-			copy.Підрозділ = Підрозділ;
-			copy.Основа = Основа;
-			
-			return copy;
+            copy.НомерДок = НомерДок;
+            copy.ДатаДок = ДатаДок;
+            copy.Організація = Організація;
+            copy.Склад = Склад;
+            copy.Коментар = Коментар;
+            copy.Автор = Автор;
+            copy.Підрозділ = Підрозділ;
+            copy.Основа = Основа;
+            
+            return copy;
         }
 
         public void Delete()
         {
-		    РозміщенняНоменклатуриПоКоміркам_Triggers.BeforeDelete(this);
+		        РозміщенняНоменклатуриПоКоміркам_Triggers.BeforeDelete(this);
             base.BaseDelete(new string[] { "tab_b32" });
         }
         
@@ -22681,7 +22132,6 @@ namespace StorageAndTrade_1_0.Документи
         public РозміщенняНоменклатуриПоКоміркам_Товари_TablePart Товари_TablePart { get; set; }
         
     }
-    
     
     public class РозміщенняНоменклатуриПоКоміркам_Pointer : DocumentPointer
     {
@@ -22723,16 +22173,15 @@ namespace StorageAndTrade_1_0.Документи
         {
             РозміщенняНоменклатуриПоКоміркам_Objest РозміщенняНоменклатуриПоКоміркамObjestItem = new РозміщенняНоменклатуриПоКоміркам_Objest();
             РозміщенняНоменклатуриПоКоміркамObjestItem.Read(base.UnigueID);
-			
-			if (readAllTablePart)
-			{   
-				РозміщенняНоменклатуриПоКоміркамObjestItem.Товари_TablePart.Read();
-			}
-			
+            
+            if (readAllTablePart)
+            {   
+                РозміщенняНоменклатуриПоКоміркамObjestItem.Товари_TablePart.Read();
+            }
+            
             return РозміщенняНоменклатуриПоКоміркамObjestItem;
         }
     }
-    
     
     public class РозміщенняНоменклатуриПоКоміркам_Select : DocumentSelect
     {		
@@ -22748,6 +22197,7 @@ namespace StorageAndTrade_1_0.Документи
     }
     
       
+    
     public class РозміщенняНоменклатуриПоКоміркам_Товари_TablePart : DocumentTablePart
     {
         public РозміщенняНоменклатуриПоКоміркам_Товари_TablePart(РозміщенняНоменклатуриПоКоміркам_Objest owner) : base(Config.Kernel!, "tab_b32",
@@ -22826,21 +22276,13 @@ namespace StorageAndTrade_1_0.Документи
 
             return copyRecords;
         }
-        
+
         public class Record : DocumentTablePartRecord
         {
-            public Record()
-            {
-                НомерРядка = 0;
-                Номенклатура = new Довідники.Номенклатура_Pointer();
-                Комірка = new Довідники.СкладськіКомірки_Pointer();
-                Пакування = new Довідники.ПакуванняОдиниціВиміру_Pointer();
-                
-            }
-            public int НомерРядка { get; set; }
-            public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
-            public Довідники.СкладськіКомірки_Pointer Комірка { get; set; }
-            public Довідники.ПакуванняОдиниціВиміру_Pointer Пакування { get; set; }
+            public int НомерРядка { get; set; } = 0;
+            public Довідники.Номенклатура_Pointer Номенклатура { get; set; } = new Довідники.Номенклатура_Pointer();
+            public Довідники.СкладськіКомірки_Pointer Комірка { get; set; } = new Довідники.СкладськіКомірки_Pointer();
+            public Довідники.ПакуванняОдиниціВиміру_Pointer Пакування { get; set; } = new Довідники.ПакуванняОдиниціВиміру_Pointer();
             
         }
     }
@@ -22857,7 +22299,7 @@ namespace StorageAndTrade_1_0.Журнали
     {
         public Journal_Select() : base(Config.Kernel!,
              new string[] { "tab_a25", "tab_a32", "tab_a34", "tab_a36", "tab_a42", "tab_a44", "tab_a48", "tab_a31", "tab_a51", "tab_a53", "tab_a81", "tab_a83", "tab_a88", "tab_a90", "tab_a92", "tab_a94", "tab_b07", "tab_b10", "tab_a64", "tab_b09", "tab_b27", "tab_b29"},
-			 new string[] { "ЗамовленняПостачальнику", "ПоступленняТоварівТаПослуг", "ЗамовленняКлієнта", "РеалізаціяТоварівТаПослуг", "ВстановленняЦінНоменклатури", "ПрихіднийКасовийОрдер", "РозхіднийКасовийОрдер", "ПереміщенняТоварів", "ПоверненняТоварівПостачальнику", "ПоверненняТоварівВідКлієнта", "АктВиконанихРобіт", "ВведенняЗалишків", "НадлишкиТоварів", "ПересортицяТоварів", "ПерерахунокТоварів", "ПсуванняТоварів", "ВнутрішнєСпоживанняТоварів", "РахунокФактура", "РозміщенняТоварівНаСкладі", "ПереміщенняТоварівНаСкладі", "ЗбіркаТоварівНаСкладі", "РозміщенняНоменклатуриПоКоміркам"}) { }
+			       new string[] { "ЗамовленняПостачальнику", "ПоступленняТоварівТаПослуг", "ЗамовленняКлієнта", "РеалізаціяТоварівТаПослуг", "ВстановленняЦінНоменклатури", "ПрихіднийКасовийОрдер", "РозхіднийКасовийОрдер", "ПереміщенняТоварів", "ПоверненняТоварівПостачальнику", "ПоверненняТоварівВідКлієнта", "АктВиконанихРобіт", "ВведенняЗалишків", "НадлишкиТоварів", "ПересортицяТоварів", "ПерерахунокТоварів", "ПсуванняТоварів", "ВнутрішнєСпоживанняТоварів", "РахунокФактура", "РозміщенняТоварівНаСкладі", "ПереміщенняТоварівНаСкладі", "ЗбіркаТоварівНаСкладі", "РозміщенняНоменклатуриПоКоміркам"}) { }
 
         public DocumentObject? GetDocumentObject(bool readAllTablePart = true)
         {
@@ -22866,32 +22308,32 @@ namespace StorageAndTrade_1_0.Журнали
 
             switch (Current.TypeDocument)
             {
-			    case "ЗамовленняПостачальнику": return new Документи.ЗамовленняПостачальнику_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-				case "ПоступленняТоварівТаПослуг": return new Документи.ПоступленняТоварівТаПослуг_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-				case "ЗамовленняКлієнта": return new Документи.ЗамовленняКлієнта_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-				case "РеалізаціяТоварівТаПослуг": return new Документи.РеалізаціяТоварівТаПослуг_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-				case "ВстановленняЦінНоменклатури": return new Документи.ВстановленняЦінНоменклатури_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-				case "ПрихіднийКасовийОрдер": return new Документи.ПрихіднийКасовийОрдер_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-				case "РозхіднийКасовийОрдер": return new Документи.РозхіднийКасовийОрдер_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-				case "ПереміщенняТоварів": return new Документи.ПереміщенняТоварів_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-				case "ПоверненняТоварівПостачальнику": return new Документи.ПоверненняТоварівПостачальнику_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-				case "ПоверненняТоварівВідКлієнта": return new Документи.ПоверненняТоварівВідКлієнта_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-				case "АктВиконанихРобіт": return new Документи.АктВиконанихРобіт_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-				case "ВведенняЗалишків": return new Документи.ВведенняЗалишків_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-				case "НадлишкиТоварів": return new Документи.НадлишкиТоварів_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-				case "ПересортицяТоварів": return new Документи.ПересортицяТоварів_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-				case "ПерерахунокТоварів": return new Документи.ПерерахунокТоварів_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-				case "ПсуванняТоварів": return new Документи.ПсуванняТоварів_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-				case "ВнутрішнєСпоживанняТоварів": return new Документи.ВнутрішнєСпоживанняТоварів_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-				case "РахунокФактура": return new Документи.РахунокФактура_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-				case "РозміщенняТоварівНаСкладі": return new Документи.РозміщенняТоварівНаСкладі_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-				case "ПереміщенняТоварівНаСкладі": return new Документи.ПереміщенняТоварівНаСкладі_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-				case "ЗбіркаТоварівНаСкладі": return new Документи.ЗбіркаТоварівНаСкладі_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-				case "РозміщенняНоменклатуриПоКоміркам": return new Документи.РозміщенняНоменклатуриПоКоміркам_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-				
+                case "ЗамовленняПостачальнику": return new Документи.ЗамовленняПостачальнику_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "ПоступленняТоварівТаПослуг": return new Документи.ПоступленняТоварівТаПослуг_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "ЗамовленняКлієнта": return new Документи.ЗамовленняКлієнта_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "РеалізаціяТоварівТаПослуг": return new Документи.РеалізаціяТоварівТаПослуг_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "ВстановленняЦінНоменклатури": return new Документи.ВстановленняЦінНоменклатури_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "ПрихіднийКасовийОрдер": return new Документи.ПрихіднийКасовийОрдер_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "РозхіднийКасовийОрдер": return new Документи.РозхіднийКасовийОрдер_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "ПереміщенняТоварів": return new Документи.ПереміщенняТоварів_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "ПоверненняТоварівПостачальнику": return new Документи.ПоверненняТоварівПостачальнику_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "ПоверненняТоварівВідКлієнта": return new Документи.ПоверненняТоварівВідКлієнта_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "АктВиконанихРобіт": return new Документи.АктВиконанихРобіт_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "ВведенняЗалишків": return new Документи.ВведенняЗалишків_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "НадлишкиТоварів": return new Документи.НадлишкиТоварів_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "ПересортицяТоварів": return new Документи.ПересортицяТоварів_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "ПерерахунокТоварів": return new Документи.ПерерахунокТоварів_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "ПсуванняТоварів": return new Документи.ПсуванняТоварів_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "ВнутрішнєСпоживанняТоварів": return new Документи.ВнутрішнєСпоживанняТоварів_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "РахунокФактура": return new Документи.РахунокФактура_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "РозміщенняТоварівНаСкладі": return new Документи.РозміщенняТоварівНаСкладі_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "ПереміщенняТоварівНаСкладі": return new Документи.ПереміщенняТоварівНаСкладі_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "ЗбіркаТоварівНаСкладі": return new Документи.ЗбіркаТоварівНаСкладі_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "РозміщенняНоменклатуриПоКоміркам": return new Документи.РозміщенняНоменклатуриПоКоміркам_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                
             }
 			
-			return null;
+			      return null;
         }
     }
     #endregion
@@ -22902,7 +22344,6 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
 {
     
     #region REGISTER "ЦіниНоменклатури"
-    
     public static class ЦіниНоменклатури_Const
     {
         public const string TABLE = "tab_a40";
@@ -22914,8 +22355,7 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
         public const string Пакування = "col_f9";
         public const string Валюта = "col_g2";
     }
-	
-    
+
     public class ЦіниНоменклатури_RecordsSet : RegisterInformationRecordsSet
     {
         public ЦіниНоменклатури_RecordsSet() : base(Config.Kernel!, "tab_a40",
@@ -22975,34 +22415,21 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
             base.BaseDelete(owner);
         }
 
-        
         public class Record : RegisterInformationRecord
         {
-            public Record()
-            {
-                Номенклатура = new Довідники.Номенклатура_Pointer();
-                ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer();
-                ВидЦіни = new Довідники.ВидиЦін_Pointer();
-                Ціна = 0;
-                Пакування = new Довідники.ПакуванняОдиниціВиміру_Pointer();
-                Валюта = new Довідники.Валюти_Pointer();
-                
-            }
-        
-            public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
-            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; }
-            public Довідники.ВидиЦін_Pointer ВидЦіни { get; set; }
-            public decimal Ціна { get; set; }
-            public Довідники.ПакуванняОдиниціВиміру_Pointer Пакування { get; set; }
-            public Довідники.Валюти_Pointer Валюта { get; set; }
+            public Довідники.Номенклатура_Pointer Номенклатура { get; set; } = new Довідники.Номенклатура_Pointer();
+            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; } = new Довідники.ХарактеристикиНоменклатури_Pointer();
+            public Довідники.ВидиЦін_Pointer ВидЦіни { get; set; } = new Довідники.ВидиЦін_Pointer();
+            public decimal Ціна { get; set; } = 0;
+            public Довідники.ПакуванняОдиниціВиміру_Pointer Пакування { get; set; } = new Довідники.ПакуванняОдиниціВиміру_Pointer();
+            public Довідники.Валюти_Pointer Валюта { get; set; } = new Довідники.Валюти_Pointer();
             
         }
     }
-	
-    
+
     public class ЦіниНоменклатури_Objest : RegisterInformationObject
     {
-		public ЦіниНоменклатури_Objest() : base(Config.Kernel!, "tab_a40",
+		    public ЦіниНоменклатури_Objest() : base(Config.Kernel!, "tab_a40",
              new string[] { "col_f5", "col_f6", "col_f7", "col_f8", "col_f9", "col_g2" }) 
         {
             Номенклатура = new Довідники.Номенклатура_Pointer();
@@ -23047,22 +22474,22 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
         public ЦіниНоменклатури_Objest Copy()
         {
             ЦіниНоменклатури_Objest copy = new ЦіниНоменклатури_Objest();
-			copy.New();
+			      copy.New();
             copy.Номенклатура = Номенклатура;
-			copy.ХарактеристикаНоменклатури = ХарактеристикаНоменклатури;
-			copy.ВидЦіни = ВидЦіни;
-			copy.Ціна = Ціна;
-			copy.Пакування = Пакування;
-			copy.Валюта = Валюта;
-			
-			return copy;
+            copy.ХарактеристикаНоменклатури = ХарактеристикаНоменклатури;
+            copy.ВидЦіни = ВидЦіни;
+            copy.Ціна = Ціна;
+            copy.Пакування = Пакування;
+            copy.Валюта = Валюта;
+            
+            return copy;
         }
 
         public void Delete()
         {
-			base.BaseDelete();
+			      base.BaseDelete();
         }
-                
+
         public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
         public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; }
         public Довідники.ВидиЦін_Pointer ВидЦіни { get; set; }
@@ -23075,7 +22502,6 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
     #endregion
   
     #region REGISTER "КурсиВалют"
-    
     public static class КурсиВалют_Const
     {
         public const string TABLE = "tab_a59";
@@ -23084,8 +22510,7 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
         public const string Курс = "col_a2";
         public const string Кратність = "col_a3";
     }
-	
-    
+
     public class КурсиВалют_RecordsSet : RegisterInformationRecordsSet
     {
         public КурсиВалют_RecordsSet() : base(Config.Kernel!, "tab_a59",
@@ -23139,28 +22564,18 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
             base.BaseDelete(owner);
         }
 
-        
         public class Record : RegisterInformationRecord
         {
-            public Record()
-            {
-                Валюта = new Довідники.Валюти_Pointer();
-                Курс = 0;
-                Кратність = 0;
-                
-            }
-        
-            public Довідники.Валюти_Pointer Валюта { get; set; }
-            public decimal Курс { get; set; }
-            public int Кратність { get; set; }
+            public Довідники.Валюти_Pointer Валюта { get; set; } = new Довідники.Валюти_Pointer();
+            public decimal Курс { get; set; } = 0;
+            public int Кратність { get; set; } = 0;
             
         }
     }
-	
-    
+
     public class КурсиВалют_Objest : RegisterInformationObject
     {
-		public КурсиВалют_Objest() : base(Config.Kernel!, "tab_a59",
+		    public КурсиВалют_Objest() : base(Config.Kernel!, "tab_a59",
              new string[] { "col_a1", "col_a2", "col_a3" }) 
         {
             Валюта = new Довідники.Валюти_Pointer();
@@ -23196,19 +22611,19 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
         public КурсиВалют_Objest Copy()
         {
             КурсиВалют_Objest copy = new КурсиВалют_Objest();
-			copy.New();
+			      copy.New();
             copy.Валюта = Валюта;
-			copy.Курс = Курс;
-			copy.Кратність = Кратність;
-			
-			return copy;
+            copy.Курс = Курс;
+            copy.Кратність = Кратність;
+            
+            return copy;
         }
 
         public void Delete()
         {
-			base.BaseDelete();
+			      base.BaseDelete();
         }
-                
+
         public Довідники.Валюти_Pointer Валюта { get; set; }
         public decimal Курс { get; set; }
         public int Кратність { get; set; }
@@ -23218,7 +22633,6 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
     #endregion
   
     #region REGISTER "ШтрихкодиНоменклатури"
-    
     public static class ШтрихкодиНоменклатури_Const
     {
         public const string TABLE = "tab_b17";
@@ -23228,8 +22642,7 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
         public const string ХарактеристикаНоменклатури = "col_a3";
         public const string Пакування = "col_a4";
     }
-	
-    
+
     public class ШтрихкодиНоменклатури_RecordsSet : RegisterInformationRecordsSet
     {
         public ШтрихкодиНоменклатури_RecordsSet() : base(Config.Kernel!, "tab_b17",
@@ -23285,30 +22698,19 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
             base.BaseDelete(owner);
         }
 
-        
         public class Record : RegisterInformationRecord
         {
-            public Record()
-            {
-                Штрихкод = "";
-                Номенклатура = new Довідники.Номенклатура_Pointer();
-                ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer();
-                Пакування = new Довідники.ПакуванняОдиниціВиміру_Pointer();
-                
-            }
-        
-            public string Штрихкод { get; set; }
-            public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
-            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; }
-            public Довідники.ПакуванняОдиниціВиміру_Pointer Пакування { get; set; }
+            public string Штрихкод { get; set; } = "";
+            public Довідники.Номенклатура_Pointer Номенклатура { get; set; } = new Довідники.Номенклатура_Pointer();
+            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; } = new Довідники.ХарактеристикиНоменклатури_Pointer();
+            public Довідники.ПакуванняОдиниціВиміру_Pointer Пакування { get; set; } = new Довідники.ПакуванняОдиниціВиміру_Pointer();
             
         }
     }
-	
-    
+
     public class ШтрихкодиНоменклатури_Objest : RegisterInformationObject
     {
-		public ШтрихкодиНоменклатури_Objest() : base(Config.Kernel!, "tab_b17",
+		    public ШтрихкодиНоменклатури_Objest() : base(Config.Kernel!, "tab_b17",
              new string[] { "col_a1", "col_a2", "col_a3", "col_a4" }) 
         {
             Штрихкод = "";
@@ -23347,20 +22749,20 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
         public ШтрихкодиНоменклатури_Objest Copy()
         {
             ШтрихкодиНоменклатури_Objest copy = new ШтрихкодиНоменклатури_Objest();
-			copy.New();
+			      copy.New();
             copy.Штрихкод = Штрихкод;
-			copy.Номенклатура = Номенклатура;
-			copy.ХарактеристикаНоменклатури = ХарактеристикаНоменклатури;
-			copy.Пакування = Пакування;
-			
-			return copy;
+            copy.Номенклатура = Номенклатура;
+            copy.ХарактеристикаНоменклатури = ХарактеристикаНоменклатури;
+            copy.Пакування = Пакування;
+            
+            return copy;
         }
 
         public void Delete()
         {
-			base.BaseDelete();
+			      base.BaseDelete();
         }
-                
+
         public string Штрихкод { get; set; }
         public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
         public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; }
@@ -23371,15 +22773,13 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
     #endregion
   
     #region REGISTER "ФайлиДокументів"
-    
     public static class ФайлиДокументів_Const
     {
         public const string TABLE = "tab_b23";
         
         public const string Файл = "col_a1";
     }
-	
-    
+
     public class ФайлиДокументів_RecordsSet : RegisterInformationRecordsSet
     {
         public ФайлиДокументів_RecordsSet() : base(Config.Kernel!, "tab_b23",
@@ -23429,24 +22829,16 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
             base.BaseDelete(owner);
         }
 
-        
         public class Record : RegisterInformationRecord
         {
-            public Record()
-            {
-                Файл = new Довідники.Файли_Pointer();
-                
-            }
-        
-            public Довідники.Файли_Pointer Файл { get; set; }
+            public Довідники.Файли_Pointer Файл { get; set; } = new Довідники.Файли_Pointer();
             
         }
     }
-	
-    
+
     public class ФайлиДокументів_Objest : RegisterInformationObject
     {
-		public ФайлиДокументів_Objest() : base(Config.Kernel!, "tab_b23",
+		    public ФайлиДокументів_Objest() : base(Config.Kernel!, "tab_b23",
              new string[] { "col_a1" }) 
         {
             Файл = new Довідники.Файли_Pointer();
@@ -23476,17 +22868,17 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
         public ФайлиДокументів_Objest Copy()
         {
             ФайлиДокументів_Objest copy = new ФайлиДокументів_Objest();
-			copy.New();
+			      copy.New();
             copy.Файл = Файл;
-			
-			return copy;
+            
+            return copy;
         }
 
         public void Delete()
         {
-			base.BaseDelete();
+			      base.BaseDelete();
         }
-                
+
         public Довідники.Файли_Pointer Файл { get; set; }
         
     }
@@ -23494,7 +22886,6 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
     #endregion
   
     #region REGISTER "РозміщенняНоменклатуриПоКоміркамНаСкладі"
-    
     public static class РозміщенняНоменклатуриПоКоміркамНаСкладі_Const
     {
         public const string TABLE = "tab_a74";
@@ -23504,8 +22895,7 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
         public const string Приміщення = "col_a3";
         public const string Комірка = "col_a4";
     }
-	
-    
+
     public class РозміщенняНоменклатуриПоКоміркамНаСкладі_RecordsSet : RegisterInformationRecordsSet
     {
         public РозміщенняНоменклатуриПоКоміркамНаСкладі_RecordsSet() : base(Config.Kernel!, "tab_a74",
@@ -23561,30 +22951,19 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
             base.BaseDelete(owner);
         }
 
-        
         public class Record : RegisterInformationRecord
         {
-            public Record()
-            {
-                Номенклатура = new Довідники.Номенклатура_Pointer();
-                Склад = new Довідники.Склади_Pointer();
-                Приміщення = new Довідники.СкладськіПриміщення_Pointer();
-                Комірка = new Довідники.СкладськіКомірки_Pointer();
-                
-            }
-        
-            public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
-            public Довідники.Склади_Pointer Склад { get; set; }
-            public Довідники.СкладськіПриміщення_Pointer Приміщення { get; set; }
-            public Довідники.СкладськіКомірки_Pointer Комірка { get; set; }
+            public Довідники.Номенклатура_Pointer Номенклатура { get; set; } = new Довідники.Номенклатура_Pointer();
+            public Довідники.Склади_Pointer Склад { get; set; } = new Довідники.Склади_Pointer();
+            public Довідники.СкладськіПриміщення_Pointer Приміщення { get; set; } = new Довідники.СкладськіПриміщення_Pointer();
+            public Довідники.СкладськіКомірки_Pointer Комірка { get; set; } = new Довідники.СкладськіКомірки_Pointer();
             
         }
     }
-	
-    
+
     public class РозміщенняНоменклатуриПоКоміркамНаСкладі_Objest : RegisterInformationObject
     {
-		public РозміщенняНоменклатуриПоКоміркамНаСкладі_Objest() : base(Config.Kernel!, "tab_a74",
+		    public РозміщенняНоменклатуриПоКоміркамНаСкладі_Objest() : base(Config.Kernel!, "tab_a74",
              new string[] { "col_a1", "col_a2", "col_a3", "col_a4" }) 
         {
             Номенклатура = new Довідники.Номенклатура_Pointer();
@@ -23623,20 +23002,20 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
         public РозміщенняНоменклатуриПоКоміркамНаСкладі_Objest Copy()
         {
             РозміщенняНоменклатуриПоКоміркамНаСкладі_Objest copy = new РозміщенняНоменклатуриПоКоміркамНаСкладі_Objest();
-			copy.New();
+			      copy.New();
             copy.Номенклатура = Номенклатура;
-			copy.Склад = Склад;
-			copy.Приміщення = Приміщення;
-			copy.Комірка = Комірка;
-			
-			return copy;
+            copy.Склад = Склад;
+            copy.Приміщення = Приміщення;
+            copy.Комірка = Комірка;
+            
+            return copy;
         }
 
         public void Delete()
         {
-			base.BaseDelete();
+			      base.BaseDelete();
         }
-                
+
         public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
         public Довідники.Склади_Pointer Склад { get; set; }
         public Довідники.СкладськіПриміщення_Pointer Приміщення { get; set; }
@@ -23923,7 +23302,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
 
     
     #region REGISTER "ТовариНаСкладах"
-    
     public static class ТовариНаСкладах_Const
     {
         public const string TABLE = "tab_a38";
@@ -23938,7 +23316,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public const string ДоВідвантаження = "col_e8";
     }
 	
-    
     public class ТовариНаСкладах_RecordsSet : RegisterAccumulationRecordsSet
     {
         public ТовариНаСкладах_RecordsSet() : base(Config.Kernel!, "tab_a38", "ТовариНаСкладах",
@@ -24004,28 +23381,18 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             base.BaseDelete(owner);
         }
         
-        
         public class Record : RegisterAccumulationRecord
         {
-            public Record()
-            {
-                Номенклатура = new Довідники.Номенклатура_Pointer();
-                ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer();
-                Склад = new Довідники.Склади_Pointer();
-                Серія = new Довідники.СеріїНоменклатури_Pointer();
-                ВНаявності = 0;
-                ДоВідвантаження = 0;
-                
-            }
-            public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
-            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; }
-            public Довідники.Склади_Pointer Склад { get; set; }
-            public Довідники.СеріїНоменклатури_Pointer Серія { get; set; }
-            public decimal ВНаявності { get; set; }
-            public decimal ДоВідвантаження { get; set; }
+            public Довідники.Номенклатура_Pointer Номенклатура { get; set; } = new Довідники.Номенклатура_Pointer();
+            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; } = new Довідники.ХарактеристикиНоменклатури_Pointer();
+            public Довідники.Склади_Pointer Склад { get; set; } = new Довідники.Склади_Pointer();
+            public Довідники.СеріїНоменклатури_Pointer Серія { get; set; } = new Довідники.СеріїНоменклатури_Pointer();
+            public decimal ВНаявності { get; set; } = 0;
+            public decimal ДоВідвантаження { get; set; } = 0;
             
         }
     }
+    
     
     
     public class ТовариНаСкладах_Залишки_TablePart : RegisterAccumulationTablePart
@@ -24103,27 +23470,17 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         
         public class Record : RegisterAccumulationTablePartRecord
         {
-            public Record()
-            {
-                Період = DateTime.MinValue;
-                Номенклатура = new Довідники.Номенклатура_Pointer();
-                ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer();
-                Склад = new Довідники.Склади_Pointer();
-                Серія = new Довідники.СеріїНоменклатури_Pointer();
-                ВНаявності = 0;
-                ДоВідвантаження = 0;
-                
-            }
-            public DateTime Період { get; set; }
-            public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
-            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; }
-            public Довідники.Склади_Pointer Склад { get; set; }
-            public Довідники.СеріїНоменклатури_Pointer Серія { get; set; }
-            public decimal ВНаявності { get; set; }
-            public decimal ДоВідвантаження { get; set; }
+            public DateTime Період { get; set; } = DateTime.MinValue;
+            public Довідники.Номенклатура_Pointer Номенклатура { get; set; } = new Довідники.Номенклатура_Pointer();
+            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; } = new Довідники.ХарактеристикиНоменклатури_Pointer();
+            public Довідники.Склади_Pointer Склад { get; set; } = new Довідники.Склади_Pointer();
+            public Довідники.СеріїНоменклатури_Pointer Серія { get; set; } = new Довідники.СеріїНоменклатури_Pointer();
+            public decimal ВНаявності { get; set; } = 0;
+            public decimal ДоВідвантаження { get; set; } = 0;
             
         }            
     }
+    
     
     public class ТовариНаСкладах_ЗалишкиТаОбороти_TablePart : RegisterAccumulationTablePart
     {
@@ -24212,35 +23569,21 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         
         public class Record : RegisterAccumulationTablePartRecord
         {
-            public Record()
-            {
-                Період = DateTime.MinValue;
-                Номенклатура = new Довідники.Номенклатура_Pointer();
-                ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer();
-                Склад = new Довідники.Склади_Pointer();
-                Серія = new Довідники.СеріїНоменклатури_Pointer();
-                ВНаявностіПрихід = 0;
-                ВНаявностіРозхід = 0;
-                ВНаявностіЗалишок = 0;
-                ДоВідвантаженняПрихід = 0;
-                ДоВідвантаженняРозхід = 0;
-                ДоВідвантаженняЗалишок = 0;
-                
-            }
-            public DateTime Період { get; set; }
-            public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
-            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; }
-            public Довідники.Склади_Pointer Склад { get; set; }
-            public Довідники.СеріїНоменклатури_Pointer Серія { get; set; }
-            public decimal ВНаявностіПрихід { get; set; }
-            public decimal ВНаявностіРозхід { get; set; }
-            public decimal ВНаявностіЗалишок { get; set; }
-            public decimal ДоВідвантаженняПрихід { get; set; }
-            public decimal ДоВідвантаженняРозхід { get; set; }
-            public decimal ДоВідвантаженняЗалишок { get; set; }
+            public DateTime Період { get; set; } = DateTime.MinValue;
+            public Довідники.Номенклатура_Pointer Номенклатура { get; set; } = new Довідники.Номенклатура_Pointer();
+            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; } = new Довідники.ХарактеристикиНоменклатури_Pointer();
+            public Довідники.Склади_Pointer Склад { get; set; } = new Довідники.Склади_Pointer();
+            public Довідники.СеріїНоменклатури_Pointer Серія { get; set; } = new Довідники.СеріїНоменклатури_Pointer();
+            public decimal ВНаявностіПрихід { get; set; } = 0;
+            public decimal ВНаявностіРозхід { get; set; } = 0;
+            public decimal ВНаявностіЗалишок { get; set; } = 0;
+            public decimal ДоВідвантаженняПрихід { get; set; } = 0;
+            public decimal ДоВідвантаженняРозхід { get; set; } = 0;
+            public decimal ДоВідвантаженняЗалишок { get; set; } = 0;
             
         }            
     }
+    
     
     public class ТовариНаСкладах_Підсумки_TablePart : RegisterAccumulationTablePart
     {
@@ -24314,22 +23657,12 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         
         public class Record : RegisterAccumulationTablePartRecord
         {
-            public Record()
-            {
-                Номенклатура = new Довідники.Номенклатура_Pointer();
-                ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer();
-                Склад = new Довідники.Склади_Pointer();
-                Серія = new Довідники.СеріїНоменклатури_Pointer();
-                ВНаявності = 0;
-                ДоВідвантаження = 0;
-                
-            }
-            public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
-            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; }
-            public Довідники.Склади_Pointer Склад { get; set; }
-            public Довідники.СеріїНоменклатури_Pointer Серія { get; set; }
-            public decimal ВНаявності { get; set; }
-            public decimal ДоВідвантаження { get; set; }
+            public Довідники.Номенклатура_Pointer Номенклатура { get; set; } = new Довідники.Номенклатура_Pointer();
+            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; } = new Довідники.ХарактеристикиНоменклатури_Pointer();
+            public Довідники.Склади_Pointer Склад { get; set; } = new Довідники.Склади_Pointer();
+            public Довідники.СеріїНоменклатури_Pointer Серія { get; set; } = new Довідники.СеріїНоменклатури_Pointer();
+            public decimal ВНаявності { get; set; } = 0;
+            public decimal ДоВідвантаження { get; set; } = 0;
             
         }            
     }
@@ -24337,7 +23670,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
     #endregion
   
     #region REGISTER "ЗамовленняКлієнтів"
-    
     public static class ЗамовленняКлієнтів_Const
     {
         public const string TABLE = "tab_a55";
@@ -24352,7 +23684,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public const string Сума = "col_a6";
     }
 	
-    
     public class ЗамовленняКлієнтів_RecordsSet : RegisterAccumulationRecordsSet
     {
         public ЗамовленняКлієнтів_RecordsSet() : base(Config.Kernel!, "tab_a55", "ЗамовленняКлієнтів",
@@ -24418,28 +23749,18 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             base.BaseDelete(owner);
         }
         
-        
         public class Record : RegisterAccumulationRecord
         {
-            public Record()
-            {
-                ЗамовленняКлієнта = new Документи.ЗамовленняКлієнта_Pointer();
-                Номенклатура = new Довідники.Номенклатура_Pointer();
-                ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer();
-                Склад = new Довідники.Склади_Pointer();
-                Замовлено = 0;
-                Сума = 0;
-                
-            }
-            public Документи.ЗамовленняКлієнта_Pointer ЗамовленняКлієнта { get; set; }
-            public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
-            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; }
-            public Довідники.Склади_Pointer Склад { get; set; }
-            public decimal Замовлено { get; set; }
-            public decimal Сума { get; set; }
+            public Документи.ЗамовленняКлієнта_Pointer ЗамовленняКлієнта { get; set; } = new Документи.ЗамовленняКлієнта_Pointer();
+            public Довідники.Номенклатура_Pointer Номенклатура { get; set; } = new Довідники.Номенклатура_Pointer();
+            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; } = new Довідники.ХарактеристикиНоменклатури_Pointer();
+            public Довідники.Склади_Pointer Склад { get; set; } = new Довідники.Склади_Pointer();
+            public decimal Замовлено { get; set; } = 0;
+            public decimal Сума { get; set; } = 0;
             
         }
     }
+    
     
     
     public class ЗамовленняКлієнтів_Залишки_TablePart : RegisterAccumulationTablePart
@@ -24517,24 +23838,13 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         
         public class Record : RegisterAccumulationTablePartRecord
         {
-            public Record()
-            {
-                Період = DateTime.MinValue;
-                ЗамовленняКлієнта = new Документи.ЗамовленняКлієнта_Pointer();
-                Номенклатура = new Довідники.Номенклатура_Pointer();
-                ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer();
-                Склад = new Довідники.Склади_Pointer();
-                Замовлено = 0;
-                Сума = 0;
-                
-            }
-            public DateTime Період { get; set; }
-            public Документи.ЗамовленняКлієнта_Pointer ЗамовленняКлієнта { get; set; }
-            public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
-            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; }
-            public Довідники.Склади_Pointer Склад { get; set; }
-            public decimal Замовлено { get; set; }
-            public decimal Сума { get; set; }
+            public DateTime Період { get; set; } = DateTime.MinValue;
+            public Документи.ЗамовленняКлієнта_Pointer ЗамовленняКлієнта { get; set; } = new Документи.ЗамовленняКлієнта_Pointer();
+            public Довідники.Номенклатура_Pointer Номенклатура { get; set; } = new Довідники.Номенклатура_Pointer();
+            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; } = new Довідники.ХарактеристикиНоменклатури_Pointer();
+            public Довідники.Склади_Pointer Склад { get; set; } = new Довідники.Склади_Pointer();
+            public decimal Замовлено { get; set; } = 0;
+            public decimal Сума { get; set; } = 0;
             
         }            
     }
@@ -24542,7 +23852,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
     #endregion
   
     #region REGISTER "РозрахункиЗКлієнтами"
-    
     public static class РозрахункиЗКлієнтами_Const
     {
         public const string TABLE = "tab_a56";
@@ -24554,7 +23863,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public const string Сума = "col_a4";
     }
 	
-    
     public class РозрахункиЗКлієнтами_RecordsSet : RegisterAccumulationRecordsSet
     {
         public РозрахункиЗКлієнтами_RecordsSet() : base(Config.Kernel!, "tab_a56", "РозрахункиЗКлієнтами",
@@ -24614,22 +23922,15 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             base.BaseDelete(owner);
         }
         
-        
         public class Record : RegisterAccumulationRecord
         {
-            public Record()
-            {
-                Валюта = new Довідники.Валюти_Pointer();
-                Контрагент = new Довідники.Контрагенти_Pointer();
-                Сума = 0;
-                
-            }
-            public Довідники.Валюти_Pointer Валюта { get; set; }
-            public Довідники.Контрагенти_Pointer Контрагент { get; set; }
-            public decimal Сума { get; set; }
+            public Довідники.Валюти_Pointer Валюта { get; set; } = new Довідники.Валюти_Pointer();
+            public Довідники.Контрагенти_Pointer Контрагент { get; set; } = new Довідники.Контрагенти_Pointer();
+            public decimal Сума { get; set; } = 0;
             
         }
     }
+    
     
     
     public class РозрахункиЗКлієнтами_Залишки_TablePart : RegisterAccumulationTablePart
@@ -24698,21 +23999,14 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         
         public class Record : RegisterAccumulationTablePartRecord
         {
-            public Record()
-            {
-                Період = DateTime.MinValue;
-                Валюта = new Довідники.Валюти_Pointer();
-                Контрагент = new Довідники.Контрагенти_Pointer();
-                Сума = 0;
-                
-            }
-            public DateTime Період { get; set; }
-            public Довідники.Валюти_Pointer Валюта { get; set; }
-            public Довідники.Контрагенти_Pointer Контрагент { get; set; }
-            public decimal Сума { get; set; }
+            public DateTime Період { get; set; } = DateTime.MinValue;
+            public Довідники.Валюти_Pointer Валюта { get; set; } = new Довідники.Валюти_Pointer();
+            public Довідники.Контрагенти_Pointer Контрагент { get; set; } = new Довідники.Контрагенти_Pointer();
+            public decimal Сума { get; set; } = 0;
             
         }            
     }
+    
     
     public class РозрахункиЗКлієнтами_ЗалишкиТаОбороти_TablePart : RegisterAccumulationTablePart
     {
@@ -24786,22 +24080,12 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         
         public class Record : RegisterAccumulationTablePartRecord
         {
-            public Record()
-            {
-                Період = DateTime.MinValue;
-                Валюта = new Довідники.Валюти_Pointer();
-                Контрагент = new Довідники.Контрагенти_Pointer();
-                СумаПрихід = 0;
-                СумаРозхід = 0;
-                СумаЗалишок = 0;
-                
-            }
-            public DateTime Період { get; set; }
-            public Довідники.Валюти_Pointer Валюта { get; set; }
-            public Довідники.Контрагенти_Pointer Контрагент { get; set; }
-            public decimal СумаПрихід { get; set; }
-            public decimal СумаРозхід { get; set; }
-            public decimal СумаЗалишок { get; set; }
+            public DateTime Період { get; set; } = DateTime.MinValue;
+            public Довідники.Валюти_Pointer Валюта { get; set; } = new Довідники.Валюти_Pointer();
+            public Довідники.Контрагенти_Pointer Контрагент { get; set; } = new Довідники.Контрагенти_Pointer();
+            public decimal СумаПрихід { get; set; } = 0;
+            public decimal СумаРозхід { get; set; } = 0;
+            public decimal СумаЗалишок { get; set; } = 0;
             
         }            
     }
@@ -24809,7 +24093,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
     #endregion
   
     #region REGISTER "Закупівлі"
-    
     public static class Закупівлі_Const
     {
         public const string TABLE = "tab_a57";
@@ -24827,7 +24110,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public const string Собівартість = "col_a3";
     }
 	
-    
     public class Закупівлі_RecordsSet : RegisterAccumulationRecordsSet
     {
         public Закупівлі_RecordsSet() : base(Config.Kernel!, "tab_a57", "Закупівлі",
@@ -24899,34 +24181,21 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             base.BaseDelete(owner);
         }
         
-        
         public class Record : RegisterAccumulationRecord
         {
-            public Record()
-            {
-                Організація = new Довідники.Організації_Pointer();
-                Склад = new Довідники.Склади_Pointer();
-                Контрагент = new Довідники.Контрагенти_Pointer();
-                Договір = new Довідники.ДоговориКонтрагентів_Pointer();
-                Номенклатура = new Довідники.Номенклатура_Pointer();
-                ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer();
-                Кількість = 0;
-                Сума = 0;
-                Собівартість = 0;
-                
-            }
-            public Довідники.Організації_Pointer Організація { get; set; }
-            public Довідники.Склади_Pointer Склад { get; set; }
-            public Довідники.Контрагенти_Pointer Контрагент { get; set; }
-            public Довідники.ДоговориКонтрагентів_Pointer Договір { get; set; }
-            public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
-            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; }
-            public decimal Кількість { get; set; }
-            public decimal Сума { get; set; }
-            public decimal Собівартість { get; set; }
+            public Довідники.Організації_Pointer Організація { get; set; } = new Довідники.Організації_Pointer();
+            public Довідники.Склади_Pointer Склад { get; set; } = new Довідники.Склади_Pointer();
+            public Довідники.Контрагенти_Pointer Контрагент { get; set; } = new Довідники.Контрагенти_Pointer();
+            public Довідники.ДоговориКонтрагентів_Pointer Договір { get; set; } = new Довідники.ДоговориКонтрагентів_Pointer();
+            public Довідники.Номенклатура_Pointer Номенклатура { get; set; } = new Довідники.Номенклатура_Pointer();
+            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; } = new Довідники.ХарактеристикиНоменклатури_Pointer();
+            public decimal Кількість { get; set; } = 0;
+            public decimal Сума { get; set; } = 0;
+            public decimal Собівартість { get; set; } = 0;
             
         }
     }
+    
     
     
     public class Закупівлі_Обороти_TablePart : RegisterAccumulationTablePart
@@ -25013,30 +24282,16 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         
         public class Record : RegisterAccumulationTablePartRecord
         {
-            public Record()
-            {
-                Період = DateTime.MinValue;
-                Організація = new Довідники.Організації_Pointer();
-                Склад = new Довідники.Склади_Pointer();
-                Контрагент = new Довідники.Контрагенти_Pointer();
-                Договір = new Довідники.ДоговориКонтрагентів_Pointer();
-                Номенклатура = new Довідники.Номенклатура_Pointer();
-                ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer();
-                Кількість = 0;
-                Сума = 0;
-                Собівартість = 0;
-                
-            }
-            public DateTime Період { get; set; }
-            public Довідники.Організації_Pointer Організація { get; set; }
-            public Довідники.Склади_Pointer Склад { get; set; }
-            public Довідники.Контрагенти_Pointer Контрагент { get; set; }
-            public Довідники.ДоговориКонтрагентів_Pointer Договір { get; set; }
-            public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
-            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; }
-            public decimal Кількість { get; set; }
-            public decimal Сума { get; set; }
-            public decimal Собівартість { get; set; }
+            public DateTime Період { get; set; } = DateTime.MinValue;
+            public Довідники.Організації_Pointer Організація { get; set; } = new Довідники.Організації_Pointer();
+            public Довідники.Склади_Pointer Склад { get; set; } = new Довідники.Склади_Pointer();
+            public Довідники.Контрагенти_Pointer Контрагент { get; set; } = new Довідники.Контрагенти_Pointer();
+            public Довідники.ДоговориКонтрагентів_Pointer Договір { get; set; } = new Довідники.ДоговориКонтрагентів_Pointer();
+            public Довідники.Номенклатура_Pointer Номенклатура { get; set; } = new Довідники.Номенклатура_Pointer();
+            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; } = new Довідники.ХарактеристикиНоменклатури_Pointer();
+            public decimal Кількість { get; set; } = 0;
+            public decimal Сума { get; set; } = 0;
+            public decimal Собівартість { get; set; } = 0;
             
         }            
     }
@@ -25044,7 +24299,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
     #endregion
   
     #region REGISTER "ВільніЗалишки"
-    
     public static class ВільніЗалишки_Const
     {
         public const string TABLE = "tab_a58";
@@ -25060,7 +24314,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public const string ДокументРезерву = "col_a1";
     }
 	
-    
     public class ВільніЗалишки_RecordsSet : RegisterAccumulationRecordsSet
     {
         public ВільніЗалишки_RecordsSet() : base(Config.Kernel!, "tab_a58", "ВільніЗалишки",
@@ -25128,30 +24381,19 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             base.BaseDelete(owner);
         }
         
-        
         public class Record : RegisterAccumulationRecord
         {
-            public Record()
-            {
-                Номенклатура = new Довідники.Номенклатура_Pointer();
-                ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer();
-                Склад = new Довідники.Склади_Pointer();
-                ВНаявності = 0;
-                ВРезервіЗіСкладу = 0;
-                ВРезервіПідЗамовлення = 0;
-                ДокументРезерву = new Guid();
-                
-            }
-            public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
-            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; }
-            public Довідники.Склади_Pointer Склад { get; set; }
-            public decimal ВНаявності { get; set; }
-            public decimal ВРезервіЗіСкладу { get; set; }
-            public decimal ВРезервіПідЗамовлення { get; set; }
-            public Guid ДокументРезерву { get; set; }
+            public Довідники.Номенклатура_Pointer Номенклатура { get; set; } = new Довідники.Номенклатура_Pointer();
+            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; } = new Довідники.ХарактеристикиНоменклатури_Pointer();
+            public Довідники.Склади_Pointer Склад { get; set; } = new Довідники.Склади_Pointer();
+            public decimal ВНаявності { get; set; } = 0;
+            public decimal ВРезервіЗіСкладу { get; set; } = 0;
+            public decimal ВРезервіПідЗамовлення { get; set; } = 0;
+            public Guid ДокументРезерву { get; set; } = new Guid();
             
         }
     }
+    
     
     
     public class ВільніЗалишки_Залишки_TablePart : RegisterAccumulationTablePart
@@ -25229,24 +24471,13 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         
         public class Record : RegisterAccumulationTablePartRecord
         {
-            public Record()
-            {
-                Період = DateTime.MinValue;
-                Номенклатура = new Довідники.Номенклатура_Pointer();
-                ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer();
-                Склад = new Довідники.Склади_Pointer();
-                ВНаявності = 0;
-                ВРезервіЗіСкладу = 0;
-                ВРезервіПідЗамовлення = 0;
-                
-            }
-            public DateTime Період { get; set; }
-            public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
-            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; }
-            public Довідники.Склади_Pointer Склад { get; set; }
-            public decimal ВНаявності { get; set; }
-            public decimal ВРезервіЗіСкладу { get; set; }
-            public decimal ВРезервіПідЗамовлення { get; set; }
+            public DateTime Період { get; set; } = DateTime.MinValue;
+            public Довідники.Номенклатура_Pointer Номенклатура { get; set; } = new Довідники.Номенклатура_Pointer();
+            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; } = new Довідники.ХарактеристикиНоменклатури_Pointer();
+            public Довідники.Склади_Pointer Склад { get; set; } = new Довідники.Склади_Pointer();
+            public decimal ВНаявності { get; set; } = 0;
+            public decimal ВРезервіЗіСкладу { get; set; } = 0;
+            public decimal ВРезервіПідЗамовлення { get; set; } = 0;
             
         }            
     }
@@ -25254,7 +24485,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
     #endregion
   
     #region REGISTER "ЗамовленняПостачальникам"
-    
     public static class ЗамовленняПостачальникам_Const
     {
         public const string TABLE = "tab_a60";
@@ -25268,7 +24498,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public const string Замовлено = "col_a5";
     }
 	
-    
     public class ЗамовленняПостачальникам_RecordsSet : RegisterAccumulationRecordsSet
     {
         public ЗамовленняПостачальникам_RecordsSet() : base(Config.Kernel!, "tab_a60", "ЗамовленняПостачальникам",
@@ -25332,26 +24561,17 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             base.BaseDelete(owner);
         }
         
-        
         public class Record : RegisterAccumulationRecord
         {
-            public Record()
-            {
-                ЗамовленняПостачальнику = new Документи.ЗамовленняПостачальнику_Pointer();
-                Номенклатура = new Довідники.Номенклатура_Pointer();
-                ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer();
-                Склад = new Довідники.Склади_Pointer();
-                Замовлено = 0;
-                
-            }
-            public Документи.ЗамовленняПостачальнику_Pointer ЗамовленняПостачальнику { get; set; }
-            public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
-            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; }
-            public Довідники.Склади_Pointer Склад { get; set; }
-            public decimal Замовлено { get; set; }
+            public Документи.ЗамовленняПостачальнику_Pointer ЗамовленняПостачальнику { get; set; } = new Документи.ЗамовленняПостачальнику_Pointer();
+            public Довідники.Номенклатура_Pointer Номенклатура { get; set; } = new Довідники.Номенклатура_Pointer();
+            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; } = new Довідники.ХарактеристикиНоменклатури_Pointer();
+            public Довідники.Склади_Pointer Склад { get; set; } = new Довідники.Склади_Pointer();
+            public decimal Замовлено { get; set; } = 0;
             
         }
     }
+    
     
     
     public class ЗамовленняПостачальникам_Залишки_TablePart : RegisterAccumulationTablePart
@@ -25426,22 +24646,12 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         
         public class Record : RegisterAccumulationTablePartRecord
         {
-            public Record()
-            {
-                Період = DateTime.MinValue;
-                ЗамовленняПостачальнику = new Документи.ЗамовленняПостачальнику_Pointer();
-                Номенклатура = new Довідники.Номенклатура_Pointer();
-                ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer();
-                Склад = new Довідники.Склади_Pointer();
-                Замовлено = 0;
-                
-            }
-            public DateTime Період { get; set; }
-            public Документи.ЗамовленняПостачальнику_Pointer ЗамовленняПостачальнику { get; set; }
-            public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
-            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; }
-            public Довідники.Склади_Pointer Склад { get; set; }
-            public decimal Замовлено { get; set; }
+            public DateTime Період { get; set; } = DateTime.MinValue;
+            public Документи.ЗамовленняПостачальнику_Pointer ЗамовленняПостачальнику { get; set; } = new Документи.ЗамовленняПостачальнику_Pointer();
+            public Довідники.Номенклатура_Pointer Номенклатура { get; set; } = new Довідники.Номенклатура_Pointer();
+            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; } = new Довідники.ХарактеристикиНоменклатури_Pointer();
+            public Довідники.Склади_Pointer Склад { get; set; } = new Довідники.Склади_Pointer();
+            public decimal Замовлено { get; set; } = 0;
             
         }            
     }
@@ -25449,7 +24659,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
     #endregion
   
     #region REGISTER "РозрахункиЗПостачальниками"
-    
     public static class РозрахункиЗПостачальниками_Const
     {
         public const string TABLE = "tab_a61";
@@ -25461,7 +24670,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public const string Сума = "col_a8";
     }
 	
-    
     public class РозрахункиЗПостачальниками_RecordsSet : RegisterAccumulationRecordsSet
     {
         public РозрахункиЗПостачальниками_RecordsSet() : base(Config.Kernel!, "tab_a61", "РозрахункиЗПостачальниками",
@@ -25521,22 +24729,15 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             base.BaseDelete(owner);
         }
         
-        
         public class Record : RegisterAccumulationRecord
         {
-            public Record()
-            {
-                Контрагент = new Довідники.Контрагенти_Pointer();
-                Валюта = new Довідники.Валюти_Pointer();
-                Сума = 0;
-                
-            }
-            public Довідники.Контрагенти_Pointer Контрагент { get; set; }
-            public Довідники.Валюти_Pointer Валюта { get; set; }
-            public decimal Сума { get; set; }
+            public Довідники.Контрагенти_Pointer Контрагент { get; set; } = new Довідники.Контрагенти_Pointer();
+            public Довідники.Валюти_Pointer Валюта { get; set; } = new Довідники.Валюти_Pointer();
+            public decimal Сума { get; set; } = 0;
             
         }
     }
+    
     
     
     public class РозрахункиЗПостачальниками_Залишки_TablePart : RegisterAccumulationTablePart
@@ -25605,21 +24806,14 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         
         public class Record : RegisterAccumulationTablePartRecord
         {
-            public Record()
-            {
-                Період = DateTime.MinValue;
-                Контрагент = new Довідники.Контрагенти_Pointer();
-                Валюта = new Довідники.Валюти_Pointer();
-                Сума = 0;
-                
-            }
-            public DateTime Період { get; set; }
-            public Довідники.Контрагенти_Pointer Контрагент { get; set; }
-            public Довідники.Валюти_Pointer Валюта { get; set; }
-            public decimal Сума { get; set; }
+            public DateTime Період { get; set; } = DateTime.MinValue;
+            public Довідники.Контрагенти_Pointer Контрагент { get; set; } = new Довідники.Контрагенти_Pointer();
+            public Довідники.Валюти_Pointer Валюта { get; set; } = new Довідники.Валюти_Pointer();
+            public decimal Сума { get; set; } = 0;
             
         }            
     }
+    
     
     public class РозрахункиЗПостачальниками_ЗалишкиТаОбороти_TablePart : RegisterAccumulationTablePart
     {
@@ -25693,22 +24887,12 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         
         public class Record : RegisterAccumulationTablePartRecord
         {
-            public Record()
-            {
-                Період = DateTime.MinValue;
-                Контрагент = new Довідники.Контрагенти_Pointer();
-                Валюта = new Довідники.Валюти_Pointer();
-                СумаПрихід = 0;
-                СумаРозхід = 0;
-                СумаЗалишок = 0;
-                
-            }
-            public DateTime Період { get; set; }
-            public Довідники.Контрагенти_Pointer Контрагент { get; set; }
-            public Довідники.Валюти_Pointer Валюта { get; set; }
-            public decimal СумаПрихід { get; set; }
-            public decimal СумаРозхід { get; set; }
-            public decimal СумаЗалишок { get; set; }
+            public DateTime Період { get; set; } = DateTime.MinValue;
+            public Довідники.Контрагенти_Pointer Контрагент { get; set; } = new Довідники.Контрагенти_Pointer();
+            public Довідники.Валюти_Pointer Валюта { get; set; } = new Довідники.Валюти_Pointer();
+            public decimal СумаПрихід { get; set; } = 0;
+            public decimal СумаРозхід { get; set; } = 0;
+            public decimal СумаЗалишок { get; set; } = 0;
             
         }            
     }
@@ -25716,7 +24900,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
     #endregion
   
     #region REGISTER "РухКоштів"
-    
     public static class РухКоштів_Const
     {
         public const string TABLE = "tab_a78";
@@ -25729,7 +24912,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public const string Сума = "col_a4";
     }
 	
-    
     public class РухКоштів_RecordsSet : RegisterAccumulationRecordsSet
     {
         public РухКоштів_RecordsSet() : base(Config.Kernel!, "tab_a78", "РухКоштів",
@@ -25791,24 +24973,16 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             base.BaseDelete(owner);
         }
         
-        
         public class Record : RegisterAccumulationRecord
         {
-            public Record()
-            {
-                Організація = new Довідники.Організації_Pointer();
-                Каса = new Довідники.Каси_Pointer();
-                Валюта = new Довідники.Валюти_Pointer();
-                Сума = 0;
-                
-            }
-            public Довідники.Організації_Pointer Організація { get; set; }
-            public Довідники.Каси_Pointer Каса { get; set; }
-            public Довідники.Валюти_Pointer Валюта { get; set; }
-            public decimal Сума { get; set; }
+            public Довідники.Організації_Pointer Організація { get; set; } = new Довідники.Організації_Pointer();
+            public Довідники.Каси_Pointer Каса { get; set; } = new Довідники.Каси_Pointer();
+            public Довідники.Валюти_Pointer Валюта { get; set; } = new Довідники.Валюти_Pointer();
+            public decimal Сума { get; set; } = 0;
             
         }
     }
+    
     
     
     public class РухКоштів_Залишки_TablePart : RegisterAccumulationTablePart
@@ -25880,23 +25054,15 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         
         public class Record : RegisterAccumulationTablePartRecord
         {
-            public Record()
-            {
-                Період = DateTime.MinValue;
-                Організація = new Довідники.Організації_Pointer();
-                Каса = new Довідники.Каси_Pointer();
-                Валюта = new Довідники.Валюти_Pointer();
-                Сума = 0;
-                
-            }
-            public DateTime Період { get; set; }
-            public Довідники.Організації_Pointer Організація { get; set; }
-            public Довідники.Каси_Pointer Каса { get; set; }
-            public Довідники.Валюти_Pointer Валюта { get; set; }
-            public decimal Сума { get; set; }
+            public DateTime Період { get; set; } = DateTime.MinValue;
+            public Довідники.Організації_Pointer Організація { get; set; } = new Довідники.Організації_Pointer();
+            public Довідники.Каси_Pointer Каса { get; set; } = new Довідники.Каси_Pointer();
+            public Довідники.Валюти_Pointer Валюта { get; set; } = new Довідники.Валюти_Pointer();
+            public decimal Сума { get; set; } = 0;
             
         }            
     }
+    
     
     public class РухКоштів_ЗалишкиТаОбороти_TablePart : RegisterAccumulationTablePart
     {
@@ -25973,27 +25139,17 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         
         public class Record : RegisterAccumulationTablePartRecord
         {
-            public Record()
-            {
-                Період = DateTime.MinValue;
-                Організація = new Довідники.Організації_Pointer();
-                Каса = new Довідники.Каси_Pointer();
-                Валюта = new Довідники.Валюти_Pointer();
-                СумаПрихід = 0;
-                СумаРозхід = 0;
-                СумаЗалишок = 0;
-                
-            }
-            public DateTime Період { get; set; }
-            public Довідники.Організації_Pointer Організація { get; set; }
-            public Довідники.Каси_Pointer Каса { get; set; }
-            public Довідники.Валюти_Pointer Валюта { get; set; }
-            public decimal СумаПрихід { get; set; }
-            public decimal СумаРозхід { get; set; }
-            public decimal СумаЗалишок { get; set; }
+            public DateTime Період { get; set; } = DateTime.MinValue;
+            public Довідники.Організації_Pointer Організація { get; set; } = new Довідники.Організації_Pointer();
+            public Довідники.Каси_Pointer Каса { get; set; } = new Довідники.Каси_Pointer();
+            public Довідники.Валюти_Pointer Валюта { get; set; } = new Довідники.Валюти_Pointer();
+            public decimal СумаПрихід { get; set; } = 0;
+            public decimal СумаРозхід { get; set; } = 0;
+            public decimal СумаЗалишок { get; set; } = 0;
             
         }            
     }
+    
     
     public class РухКоштів_Підсумки_TablePart : RegisterAccumulationTablePart
     {
@@ -26061,18 +25217,10 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         
         public class Record : RegisterAccumulationTablePartRecord
         {
-            public Record()
-            {
-                Організація = new Довідники.Організації_Pointer();
-                Каса = new Довідники.Каси_Pointer();
-                Валюта = new Довідники.Валюти_Pointer();
-                Сума = 0;
-                
-            }
-            public Довідники.Організації_Pointer Організація { get; set; }
-            public Довідники.Каси_Pointer Каса { get; set; }
-            public Довідники.Валюти_Pointer Валюта { get; set; }
-            public decimal Сума { get; set; }
+            public Довідники.Організації_Pointer Організація { get; set; } = new Довідники.Організації_Pointer();
+            public Довідники.Каси_Pointer Каса { get; set; } = new Довідники.Каси_Pointer();
+            public Довідники.Валюти_Pointer Валюта { get; set; } = new Довідники.Валюти_Pointer();
+            public decimal Сума { get; set; } = 0;
             
         }            
     }
@@ -26080,7 +25228,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
     #endregion
   
     #region REGISTER "ПартіїТоварів"
-    
     public static class ПартіїТоварів_Const
     {
         public const string TABLE = "tab_a79";
@@ -26098,7 +25245,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public const string СписанаСобівартість = "col_b5";
     }
 	
-    
     public class ПартіїТоварів_RecordsSet : RegisterAccumulationRecordsSet
     {
         public ПартіїТоварів_RecordsSet() : base(Config.Kernel!, "tab_a79", "ПартіїТоварів",
@@ -26170,34 +25316,21 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             base.BaseDelete(owner);
         }
         
-        
         public class Record : RegisterAccumulationRecord
         {
-            public Record()
-            {
-                Організація = new Довідники.Організації_Pointer();
-                ПартіяТоварівКомпозит = new Довідники.ПартіяТоварівКомпозит_Pointer();
-                Номенклатура = new Довідники.Номенклатура_Pointer();
-                ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer();
-                Серія = new Довідники.СеріїНоменклатури_Pointer();
-                Склад = new Довідники.Склади_Pointer();
-                Кількість = 0;
-                Собівартість = 0;
-                СписанаСобівартість = 0;
-                
-            }
-            public Довідники.Організації_Pointer Організація { get; set; }
-            public Довідники.ПартіяТоварівКомпозит_Pointer ПартіяТоварівКомпозит { get; set; }
-            public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
-            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; }
-            public Довідники.СеріїНоменклатури_Pointer Серія { get; set; }
-            public Довідники.Склади_Pointer Склад { get; set; }
-            public decimal Кількість { get; set; }
-            public decimal Собівартість { get; set; }
-            public decimal СписанаСобівартість { get; set; }
+            public Довідники.Організації_Pointer Організація { get; set; } = new Довідники.Організації_Pointer();
+            public Довідники.ПартіяТоварівКомпозит_Pointer ПартіяТоварівКомпозит { get; set; } = new Довідники.ПартіяТоварівКомпозит_Pointer();
+            public Довідники.Номенклатура_Pointer Номенклатура { get; set; } = new Довідники.Номенклатура_Pointer();
+            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; } = new Довідники.ХарактеристикиНоменклатури_Pointer();
+            public Довідники.СеріїНоменклатури_Pointer Серія { get; set; } = new Довідники.СеріїНоменклатури_Pointer();
+            public Довідники.Склади_Pointer Склад { get; set; } = new Довідники.Склади_Pointer();
+            public decimal Кількість { get; set; } = 0;
+            public decimal Собівартість { get; set; } = 0;
+            public decimal СписанаСобівартість { get; set; } = 0;
             
         }
     }
+    
     
     
     public class ПартіїТоварів_Залишки_TablePart : RegisterAccumulationTablePart
@@ -26281,31 +25414,19 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         
         public class Record : RegisterAccumulationTablePartRecord
         {
-            public Record()
-            {
-                Період = DateTime.MinValue;
-                Організація = new Довідники.Організації_Pointer();
-                ПартіяТоварівКомпозит = new Довідники.ПартіяТоварівКомпозит_Pointer();
-                Номенклатура = new Довідники.Номенклатура_Pointer();
-                ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer();
-                Серія = new Довідники.СеріїНоменклатури_Pointer();
-                Склад = new Довідники.Склади_Pointer();
-                Кількість = 0;
-                Собівартість = 0;
-                
-            }
-            public DateTime Період { get; set; }
-            public Довідники.Організації_Pointer Організація { get; set; }
-            public Довідники.ПартіяТоварівКомпозит_Pointer ПартіяТоварівКомпозит { get; set; }
-            public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
-            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; }
-            public Довідники.СеріїНоменклатури_Pointer Серія { get; set; }
-            public Довідники.Склади_Pointer Склад { get; set; }
-            public decimal Кількість { get; set; }
-            public decimal Собівартість { get; set; }
+            public DateTime Період { get; set; } = DateTime.MinValue;
+            public Довідники.Організації_Pointer Організація { get; set; } = new Довідники.Організації_Pointer();
+            public Довідники.ПартіяТоварівКомпозит_Pointer ПартіяТоварівКомпозит { get; set; } = new Довідники.ПартіяТоварівКомпозит_Pointer();
+            public Довідники.Номенклатура_Pointer Номенклатура { get; set; } = new Довідники.Номенклатура_Pointer();
+            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; } = new Довідники.ХарактеристикиНоменклатури_Pointer();
+            public Довідники.СеріїНоменклатури_Pointer Серія { get; set; } = new Довідники.СеріїНоменклатури_Pointer();
+            public Довідники.Склади_Pointer Склад { get; set; } = new Довідники.Склади_Pointer();
+            public decimal Кількість { get; set; } = 0;
+            public decimal Собівартість { get; set; } = 0;
             
         }            
     }
+    
     
     public class ПартіїТоварів_ЗалишкиТаОбороти_TablePart : RegisterAccumulationTablePart
     {
@@ -26400,36 +25521,19 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         
         public class Record : RegisterAccumulationTablePartRecord
         {
-            public Record()
-            {
-                Період = DateTime.MinValue;
-                Організація = new Довідники.Організації_Pointer();
-                ПартіяТоварівКомпозит = new Довідники.ПартіяТоварівКомпозит_Pointer();
-                Номенклатура = new Довідники.Номенклатура_Pointer();
-                ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer();
-                Серія = new Довідники.СеріїНоменклатури_Pointer();
-                Склад = new Довідники.Склади_Pointer();
-                КількістьПрихід = 0;
-                КількістьРозхід = 0;
-                КількістьЗалишок = 0;
-                СобівартістьПрихід = 0;
-                СобівартістьРозхід = 0;
-                СобівартістьЗалишок = 0;
-                
-            }
-            public DateTime Період { get; set; }
-            public Довідники.Організації_Pointer Організація { get; set; }
-            public Довідники.ПартіяТоварівКомпозит_Pointer ПартіяТоварівКомпозит { get; set; }
-            public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
-            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; }
-            public Довідники.СеріїНоменклатури_Pointer Серія { get; set; }
-            public Довідники.Склади_Pointer Склад { get; set; }
-            public decimal КількістьПрихід { get; set; }
-            public decimal КількістьРозхід { get; set; }
-            public decimal КількістьЗалишок { get; set; }
-            public decimal СобівартістьПрихід { get; set; }
-            public decimal СобівартістьРозхід { get; set; }
-            public decimal СобівартістьЗалишок { get; set; }
+            public DateTime Період { get; set; } = DateTime.MinValue;
+            public Довідники.Організації_Pointer Організація { get; set; } = new Довідники.Організації_Pointer();
+            public Довідники.ПартіяТоварівКомпозит_Pointer ПартіяТоварівКомпозит { get; set; } = new Довідники.ПартіяТоварівКомпозит_Pointer();
+            public Довідники.Номенклатура_Pointer Номенклатура { get; set; } = new Довідники.Номенклатура_Pointer();
+            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; } = new Довідники.ХарактеристикиНоменклатури_Pointer();
+            public Довідники.СеріїНоменклатури_Pointer Серія { get; set; } = new Довідники.СеріїНоменклатури_Pointer();
+            public Довідники.Склади_Pointer Склад { get; set; } = new Довідники.Склади_Pointer();
+            public decimal КількістьПрихід { get; set; } = 0;
+            public decimal КількістьРозхід { get; set; } = 0;
+            public decimal КількістьЗалишок { get; set; } = 0;
+            public decimal СобівартістьПрихід { get; set; } = 0;
+            public decimal СобівартістьРозхід { get; set; } = 0;
+            public decimal СобівартістьЗалишок { get; set; } = 0;
             
         }            
     }
@@ -26437,7 +25541,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
     #endregion
   
     #region REGISTER "Продажі"
-    
     public static class Продажі_Const
     {
         public const string TABLE = "tab_a66";
@@ -26456,7 +25559,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public const string Собівартість = "col_a3";
     }
 	
-    
     public class Продажі_RecordsSet : RegisterAccumulationRecordsSet
     {
         public Продажі_RecordsSet() : base(Config.Kernel!, "tab_a66", "Продажі",
@@ -26530,36 +25632,22 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             base.BaseDelete(owner);
         }
         
-        
         public class Record : RegisterAccumulationRecord
         {
-            public Record()
-            {
-                Організація = new Довідники.Організації_Pointer();
-                Склад = new Довідники.Склади_Pointer();
-                Контрагент = new Довідники.Контрагенти_Pointer();
-                Договір = new Довідники.ДоговориКонтрагентів_Pointer();
-                Номенклатура = new Довідники.Номенклатура_Pointer();
-                ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer();
-                Кількість = 0;
-                Сума = 0;
-                Дохід = 0;
-                Собівартість = 0;
-                
-            }
-            public Довідники.Організації_Pointer Організація { get; set; }
-            public Довідники.Склади_Pointer Склад { get; set; }
-            public Довідники.Контрагенти_Pointer Контрагент { get; set; }
-            public Довідники.ДоговориКонтрагентів_Pointer Договір { get; set; }
-            public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
-            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; }
-            public decimal Кількість { get; set; }
-            public decimal Сума { get; set; }
-            public decimal Дохід { get; set; }
-            public decimal Собівартість { get; set; }
+            public Довідники.Організації_Pointer Організація { get; set; } = new Довідники.Організації_Pointer();
+            public Довідники.Склади_Pointer Склад { get; set; } = new Довідники.Склади_Pointer();
+            public Довідники.Контрагенти_Pointer Контрагент { get; set; } = new Довідники.Контрагенти_Pointer();
+            public Довідники.ДоговориКонтрагентів_Pointer Договір { get; set; } = new Довідники.ДоговориКонтрагентів_Pointer();
+            public Довідники.Номенклатура_Pointer Номенклатура { get; set; } = new Довідники.Номенклатура_Pointer();
+            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; } = new Довідники.ХарактеристикиНоменклатури_Pointer();
+            public decimal Кількість { get; set; } = 0;
+            public decimal Сума { get; set; } = 0;
+            public decimal Дохід { get; set; } = 0;
+            public decimal Собівартість { get; set; } = 0;
             
         }
     }
+    
     
     
     public class Продажі_Обороти_TablePart : RegisterAccumulationTablePart
@@ -26649,32 +25737,17 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         
         public class Record : RegisterAccumulationTablePartRecord
         {
-            public Record()
-            {
-                Період = DateTime.MinValue;
-                Організація = new Довідники.Організації_Pointer();
-                Склад = new Довідники.Склади_Pointer();
-                Контрагент = new Довідники.Контрагенти_Pointer();
-                Договір = new Довідники.ДоговориКонтрагентів_Pointer();
-                Номенклатура = new Довідники.Номенклатура_Pointer();
-                ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer();
-                Кількість = 0;
-                Сума = 0;
-                Дохід = 0;
-                Собівартість = 0;
-                
-            }
-            public DateTime Період { get; set; }
-            public Довідники.Організації_Pointer Організація { get; set; }
-            public Довідники.Склади_Pointer Склад { get; set; }
-            public Довідники.Контрагенти_Pointer Контрагент { get; set; }
-            public Довідники.ДоговориКонтрагентів_Pointer Договір { get; set; }
-            public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
-            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; }
-            public decimal Кількість { get; set; }
-            public decimal Сума { get; set; }
-            public decimal Дохід { get; set; }
-            public decimal Собівартість { get; set; }
+            public DateTime Період { get; set; } = DateTime.MinValue;
+            public Довідники.Організації_Pointer Організація { get; set; } = new Довідники.Організації_Pointer();
+            public Довідники.Склади_Pointer Склад { get; set; } = new Довідники.Склади_Pointer();
+            public Довідники.Контрагенти_Pointer Контрагент { get; set; } = new Довідники.Контрагенти_Pointer();
+            public Довідники.ДоговориКонтрагентів_Pointer Договір { get; set; } = new Довідники.ДоговориКонтрагентів_Pointer();
+            public Довідники.Номенклатура_Pointer Номенклатура { get; set; } = new Довідники.Номенклатура_Pointer();
+            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; } = new Довідники.ХарактеристикиНоменклатури_Pointer();
+            public decimal Кількість { get; set; } = 0;
+            public decimal Сума { get; set; } = 0;
+            public decimal Дохід { get; set; } = 0;
+            public decimal Собівартість { get; set; } = 0;
             
         }            
     }
@@ -26682,7 +25755,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
     #endregion
   
     #region REGISTER "ТовариВКомірках"
-    
     public static class ТовариВКомірках_Const
     {
         public const string TABLE = "tab_b01";
@@ -26697,7 +25769,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public const string ВНаявності = "col_a6";
     }
 	
-    
     public class ТовариВКомірках_RecordsSet : RegisterAccumulationRecordsSet
     {
         public ТовариВКомірках_RecordsSet() : base(Config.Kernel!, "tab_b01", "ТовариВКомірках",
@@ -26763,28 +25834,18 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             base.BaseDelete(owner);
         }
         
-        
         public class Record : RegisterAccumulationRecord
         {
-            public Record()
-            {
-                Номенклатура = new Довідники.Номенклатура_Pointer();
-                ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer();
-                Пакування = new Довідники.ПакуванняОдиниціВиміру_Pointer();
-                Комірка = new Довідники.СкладськіКомірки_Pointer();
-                Серія = new Довідники.СеріїНоменклатури_Pointer();
-                ВНаявності = 0;
-                
-            }
-            public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
-            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; }
-            public Довідники.ПакуванняОдиниціВиміру_Pointer Пакування { get; set; }
-            public Довідники.СкладськіКомірки_Pointer Комірка { get; set; }
-            public Довідники.СеріїНоменклатури_Pointer Серія { get; set; }
-            public decimal ВНаявності { get; set; }
+            public Довідники.Номенклатура_Pointer Номенклатура { get; set; } = new Довідники.Номенклатура_Pointer();
+            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; } = new Довідники.ХарактеристикиНоменклатури_Pointer();
+            public Довідники.ПакуванняОдиниціВиміру_Pointer Пакування { get; set; } = new Довідники.ПакуванняОдиниціВиміру_Pointer();
+            public Довідники.СкладськіКомірки_Pointer Комірка { get; set; } = new Довідники.СкладськіКомірки_Pointer();
+            public Довідники.СеріїНоменклатури_Pointer Серія { get; set; } = new Довідники.СеріїНоменклатури_Pointer();
+            public decimal ВНаявності { get; set; } = 0;
             
         }
     }
+    
     
     
     public class ТовариВКомірках_ЗалишкиТаОбороти_TablePart : RegisterAccumulationTablePart
@@ -26868,31 +25929,19 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         
         public class Record : RegisterAccumulationTablePartRecord
         {
-            public Record()
-            {
-                Період = DateTime.MinValue;
-                Номенклатура = new Довідники.Номенклатура_Pointer();
-                ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer();
-                Пакування = new Довідники.ПакуванняОдиниціВиміру_Pointer();
-                Комірка = new Довідники.СкладськіКомірки_Pointer();
-                Серія = new Довідники.СеріїНоменклатури_Pointer();
-                ВНаявностіПрихід = 0;
-                ВНаявностіРозхід = 0;
-                ВНаявностіЗалишок = 0;
-                
-            }
-            public DateTime Період { get; set; }
-            public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
-            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; }
-            public Довідники.ПакуванняОдиниціВиміру_Pointer Пакування { get; set; }
-            public Довідники.СкладськіКомірки_Pointer Комірка { get; set; }
-            public Довідники.СеріїНоменклатури_Pointer Серія { get; set; }
-            public decimal ВНаявностіПрихід { get; set; }
-            public decimal ВНаявностіРозхід { get; set; }
-            public decimal ВНаявностіЗалишок { get; set; }
+            public DateTime Період { get; set; } = DateTime.MinValue;
+            public Довідники.Номенклатура_Pointer Номенклатура { get; set; } = new Довідники.Номенклатура_Pointer();
+            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; } = new Довідники.ХарактеристикиНоменклатури_Pointer();
+            public Довідники.ПакуванняОдиниціВиміру_Pointer Пакування { get; set; } = new Довідники.ПакуванняОдиниціВиміру_Pointer();
+            public Довідники.СкладськіКомірки_Pointer Комірка { get; set; } = new Довідники.СкладськіКомірки_Pointer();
+            public Довідники.СеріїНоменклатури_Pointer Серія { get; set; } = new Довідники.СеріїНоменклатури_Pointer();
+            public decimal ВНаявностіПрихід { get; set; } = 0;
+            public decimal ВНаявностіРозхід { get; set; } = 0;
+            public decimal ВНаявностіЗалишок { get; set; } = 0;
             
         }            
     }
+    
     
     public class ТовариВКомірках_Залишки_TablePart : RegisterAccumulationTablePart
     {
@@ -26969,27 +26018,17 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         
         public class Record : RegisterAccumulationTablePartRecord
         {
-            public Record()
-            {
-                Період = DateTime.MinValue;
-                Номенклатура = new Довідники.Номенклатура_Pointer();
-                ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer();
-                Пакування = new Довідники.ПакуванняОдиниціВиміру_Pointer();
-                Комірка = new Довідники.СкладськіКомірки_Pointer();
-                Серія = new Довідники.СеріїНоменклатури_Pointer();
-                ВНаявності = 0;
-                
-            }
-            public DateTime Період { get; set; }
-            public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
-            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; }
-            public Довідники.ПакуванняОдиниціВиміру_Pointer Пакування { get; set; }
-            public Довідники.СкладськіКомірки_Pointer Комірка { get; set; }
-            public Довідники.СеріїНоменклатури_Pointer Серія { get; set; }
-            public decimal ВНаявності { get; set; }
+            public DateTime Період { get; set; } = DateTime.MinValue;
+            public Довідники.Номенклатура_Pointer Номенклатура { get; set; } = new Довідники.Номенклатура_Pointer();
+            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; } = new Довідники.ХарактеристикиНоменклатури_Pointer();
+            public Довідники.ПакуванняОдиниціВиміру_Pointer Пакування { get; set; } = new Довідники.ПакуванняОдиниціВиміру_Pointer();
+            public Довідники.СкладськіКомірки_Pointer Комірка { get; set; } = new Довідники.СкладськіКомірки_Pointer();
+            public Довідники.СеріїНоменклатури_Pointer Серія { get; set; } = new Довідники.СеріїНоменклатури_Pointer();
+            public decimal ВНаявності { get; set; } = 0;
             
         }            
     }
+    
     
     public class ТовариВКомірках_Підсумки_TablePart : RegisterAccumulationTablePart
     {
@@ -27063,22 +26102,12 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         
         public class Record : RegisterAccumulationTablePartRecord
         {
-            public Record()
-            {
-                Номенклатура = new Довідники.Номенклатура_Pointer();
-                ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer();
-                Пакування = new Довідники.ПакуванняОдиниціВиміру_Pointer();
-                Комірка = new Довідники.СкладськіКомірки_Pointer();
-                Серія = new Довідники.СеріїНоменклатури_Pointer();
-                ВНаявності = 0;
-                
-            }
-            public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
-            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; }
-            public Довідники.ПакуванняОдиниціВиміру_Pointer Пакування { get; set; }
-            public Довідники.СкладськіКомірки_Pointer Комірка { get; set; }
-            public Довідники.СеріїНоменклатури_Pointer Серія { get; set; }
-            public decimal ВНаявності { get; set; }
+            public Довідники.Номенклатура_Pointer Номенклатура { get; set; } = new Довідники.Номенклатура_Pointer();
+            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; } = new Довідники.ХарактеристикиНоменклатури_Pointer();
+            public Довідники.ПакуванняОдиниціВиміру_Pointer Пакування { get; set; } = new Довідники.ПакуванняОдиниціВиміру_Pointer();
+            public Довідники.СкладськіКомірки_Pointer Комірка { get; set; } = new Довідники.СкладськіКомірки_Pointer();
+            public Довідники.СеріїНоменклатури_Pointer Серія { get; set; } = new Довідники.СеріїНоменклатури_Pointer();
+            public decimal ВНаявності { get; set; } = 0;
             
         }            
     }

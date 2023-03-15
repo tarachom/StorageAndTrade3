@@ -51,7 +51,7 @@ namespace StorageAndTrade
                 pointer = value;
 
                 if (pointer != null)
-                    Presentation = Config.GetBasisObjectPresentation(pointer, out PointerName, out Type);
+                    Presentation = Functions.GetBasisObjectPresentation(pointer, out PointerName, out Type);
                 else
                     Presentation = PointerName = Type = "";
             }
