@@ -5,7 +5,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>06.03.2023 14:04:49</DateTimeSave>
+  <DateTimeSave>15.03.2023 13:23:47</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -135,8 +135,7 @@ https://accounting.org.ua/storage_and_trade.html</Desc>
             <TablePart>
               <Name>Журнал</Name>
               <Table>tab_a69</Table>
-              <Desc>
-              </Desc>
+              <Desc>Ще не використовується</Desc>
               <Fields>
                 <Field>
                   <Name>Дата</Name>
@@ -759,6 +758,14 @@ https://accounting.org.ua/storage_and_trade.html</Desc>
           <Type>integer</Type>
           <TabularParts />
         </Constant>
+        <Constant>
+          <Name>Банки</Name>
+          <NameInTable>col_g8</NameInTable>
+          <Desc>
+          </Desc>
+          <Type>integer</Type>
+          <TabularParts />
+        </Constant>
       </Constants>
     </ConstantsBlock>
     <ConstantsBlock>
@@ -851,6 +858,14 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Desc>
           </Desc>
           <Type>boolean</Type>
+          <TabularParts />
+        </Constant>
+        <Constant>
+          <Name>ЗавантаженняСпискуБанків</Name>
+          <NameInTable>col_g3</NameInTable>
+          <Desc>
+          </Desc>
+          <Type>string</Type>
           <TabularParts />
         </Constant>
       </Constants>
@@ -2890,15 +2905,6 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
         </Field>
-        <Field>
-          <Name>НазваПовна</Name>
-          <NameInTable>col_i4</NameInTable>
-          <Type>string</Type>
-          <Desc>
-          </Desc>
-          <IsPresentation>0</IsPresentation>
-          <IsIndex>0</IsIndex>
-        </Field>
       </Fields>
       <TabularParts />
       <TabularLists>
@@ -4725,272 +4731,256 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       </TriggerFunctions>
     </Directory>
     <Directory>
-      <Name>ПродажіДокументКомпозит</Name>
-      <Table>tab_b14</Table>
-      <Desc>Композитний тип для регістру ДоходиТаСобівартістьПродажів</Desc>
-      <Fields>
-        <Field>
-          <Name>Назва</Name>
-          <NameInTable>col_b4</NameInTable>
-          <Type>string</Type>
-          <Desc>Назва</Desc>
-          <IsPresentation>1</IsPresentation>
-          <IsIndex>0</IsIndex>
-        </Field>
-        <Field>
-          <Name>ТипДокументу</Name>
-          <NameInTable>col_b6</NameInTable>
-          <Type>enum</Type>
-          <Pointer>Перелічення.ТипДокументуПродажіДокументКомпозит</Pointer>
-          <Desc>
-          </Desc>
-          <IsPresentation>0</IsPresentation>
-          <IsIndex>0</IsIndex>
-        </Field>
-        <Field>
-          <Name>ДокументКлюч</Name>
-          <NameInTable>col_b7</NameInTable>
-          <Type>any_pointer</Type>
-          <Desc>
-          </Desc>
-          <IsPresentation>0</IsPresentation>
-          <IsIndex>0</IsIndex>
-        </Field>
-        <Field>
-          <Name>ЗамовленняКлієнта</Name>
-          <NameInTable>col_b8</NameInTable>
-          <Type>pointer</Type>
-          <Pointer>Документи.ЗамовленняКлієнта</Pointer>
-          <Desc>
-          </Desc>
-          <IsPresentation>0</IsPresentation>
-          <IsIndex>0</IsIndex>
-        </Field>
-        <Field>
-          <Name>АктВиконанихРобіт</Name>
-          <NameInTable>col_b9</NameInTable>
-          <Type>pointer</Type>
-          <Pointer>Документи.АктВиконанихРобіт</Pointer>
-          <Desc>
-          </Desc>
-          <IsPresentation>0</IsPresentation>
-          <IsIndex>0</IsIndex>
-        </Field>
-        <Field>
-          <Name>РеалізаціяТоварівТаПослуг</Name>
-          <NameInTable>col_c1</NameInTable>
-          <Type>pointer</Type>
-          <Pointer>Документи.РеалізаціяТоварівТаПослуг</Pointer>
-          <Desc>
-          </Desc>
-          <IsPresentation>0</IsPresentation>
-          <IsIndex>0</IsIndex>
-        </Field>
-      </Fields>
-      <TabularParts />
-      <TabularLists>
-        <TabularList>
-          <Name>Записи</Name>
-          <Desc>
-          </Desc>
-          <Fields>
-            <Field>
-              <Name>Назва</Name>
-              <Caption>Назва</Caption>
-              <Size>0</Size>
-              <SortNum>0</SortNum>
-              <SortField>True</SortField>
-              <Type>string</Type>
-              <Pointer>
-              </Pointer>
-            </Field>
-          </Fields>
-        </TabularList>
-      </TabularLists>
-      <TriggerFunctions>
-        <BeforeSave>
-        </BeforeSave>
-        <AfterSave>
-        </AfterSave>
-        <BeforeDelete>
-        </BeforeDelete>
-      </TriggerFunctions>
-    </Directory>
-    <Directory>
-      <Name>АналітикаНоменклатуриКомпозит</Name>
-      <Table>tab_b15</Table>
-      <Desc>Композитний тип для регістру ДоходиТаСобівартістьПродажів</Desc>
-      <Fields>
-        <Field>
-          <Name>Назва</Name>
-          <NameInTable>col_a1</NameInTable>
-          <Type>string</Type>
-          <Desc>Назва</Desc>
-          <IsPresentation>1</IsPresentation>
-          <IsIndex>0</IsIndex>
-        </Field>
-        <Field>
-          <Name>Номенклатура</Name>
-          <NameInTable>col_a4</NameInTable>
-          <Type>pointer</Type>
-          <Pointer>Довідники.Номенклатура</Pointer>
-          <Desc>
-          </Desc>
-          <IsPresentation>0</IsPresentation>
-          <IsIndex>0</IsIndex>
-        </Field>
-        <Field>
-          <Name>ХарактеристикаНоменклатури</Name>
-          <NameInTable>col_a5</NameInTable>
-          <Type>pointer</Type>
-          <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
-          <Desc>
-          </Desc>
-          <IsPresentation>0</IsPresentation>
-          <IsIndex>0</IsIndex>
-        </Field>
-        <Field>
-          <Name>Серія</Name>
-          <NameInTable>col_a6</NameInTable>
-          <Type>pointer</Type>
-          <Pointer>Довідники.СеріїНоменклатури</Pointer>
-          <Desc>
-          </Desc>
-          <IsPresentation>0</IsPresentation>
-          <IsIndex>0</IsIndex>
-        </Field>
-        <Field>
-          <Name>Склад</Name>
-          <NameInTable>col_a7</NameInTable>
-          <Type>pointer</Type>
-          <Pointer>Довідники.Склади</Pointer>
-          <Desc>
-          </Desc>
-          <IsPresentation>0</IsPresentation>
-          <IsIndex>0</IsIndex>
-        </Field>
-      </Fields>
-      <TabularParts />
-      <TabularLists>
-        <TabularList>
-          <Name>Записи</Name>
-          <Desc>
-          </Desc>
-          <Fields>
-            <Field>
-              <Name>Назва</Name>
-              <Caption>Назва</Caption>
-              <Size>0</Size>
-              <SortNum>0</SortNum>
-              <SortField>True</SortField>
-              <Type>string</Type>
-              <Pointer>
-              </Pointer>
-            </Field>
-          </Fields>
-        </TabularList>
-      </TabularLists>
-      <TriggerFunctions>
-        <BeforeSave>
-        </BeforeSave>
-        <AfterSave>
-        </AfterSave>
-        <BeforeDelete>
-        </BeforeDelete>
-      </TriggerFunctions>
-    </Directory>
-    <Directory>
-      <Name>АналітикаКонтрагентівКомпозит</Name>
-      <Table>tab_b16</Table>
-      <Desc>Композитний тип для регістру ДоходиТаСобівартістьПродажів</Desc>
-      <Fields>
-        <Field>
-          <Name>Назва</Name>
-          <NameInTable>col_a8</NameInTable>
-          <Type>string</Type>
-          <Desc>Назва</Desc>
-          <IsPresentation>0</IsPresentation>
-          <IsIndex>0</IsIndex>
-        </Field>
-        <Field>
-          <Name>Організація</Name>
-          <NameInTable>col_b3</NameInTable>
-          <Type>pointer</Type>
-          <Pointer>Довідники.Організації</Pointer>
-          <Desc>
-          </Desc>
-          <IsPresentation>0</IsPresentation>
-          <IsIndex>0</IsIndex>
-        </Field>
-        <Field>
-          <Name>Контрагент</Name>
-          <NameInTable>col_b1</NameInTable>
-          <Type>pointer</Type>
-          <Pointer>Довідники.Контрагенти</Pointer>
-          <Desc>
-          </Desc>
-          <IsPresentation>0</IsPresentation>
-          <IsIndex>0</IsIndex>
-        </Field>
-        <Field>
-          <Name>Договір</Name>
-          <NameInTable>col_b2</NameInTable>
-          <Type>pointer</Type>
-          <Pointer>Довідники.ДоговориКонтрагентів</Pointer>
-          <Desc>
-          </Desc>
-          <IsPresentation>0</IsPresentation>
-          <IsIndex>0</IsIndex>
-        </Field>
-      </Fields>
-      <TabularParts />
-      <TabularLists>
-        <TabularList>
-          <Name>Записи</Name>
-          <Desc>
-          </Desc>
-          <Fields>
-            <Field>
-              <Name>Назва</Name>
-              <Caption>Назва</Caption>
-              <Size>0</Size>
-              <SortNum>0</SortNum>
-              <SortField>True</SortField>
-              <Type>string</Type>
-              <Pointer>
-              </Pointer>
-            </Field>
-          </Fields>
-        </TabularList>
-      </TabularLists>
-      <TriggerFunctions>
-        <BeforeSave>
-        </BeforeSave>
-        <AfterSave>
-        </AfterSave>
-        <BeforeDelete>
-        </BeforeDelete>
-      </TriggerFunctions>
-    </Directory>
-    <Directory>
-      <Name>АналітикаПартійКомпозит</Name>
-      <Table>tab_b18</Table>
+      <Name>Банки</Name>
+      <Table>tab_a39</Table>
       <Desc>
       </Desc>
       <Fields>
         <Field>
+          <Name>Код</Name>
+          <NameInTable>col_a1</NameInTable>
+          <Type>string</Type>
+          <Desc>Код</Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+        </Field>
+        <Field>
           <Name>Назва</Name>
-          <NameInTable>col_b4</NameInTable>
+          <NameInTable>col_a2</NameInTable>
           <Type>string</Type>
           <Desc>Назва</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
         </Field>
         <Field>
-          <Name>Контрагент</Name>
+          <Name>ТипНаселеногоПункту</Name>
+          <NameInTable>col_b4</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+        </Field>
+        <Field>
+          <Name>КодМФО</Name>
+          <NameInTable>col_a3</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+        </Field>
+        <Field>
+          <Name>НазваГоловноїУстановиАнг</Name>
+          <NameInTable>col_a4</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+        </Field>
+        <Field>
+          <Name>КодЄДРПОУ</Name>
+          <NameInTable>col_a5</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+        </Field>
+        <Field>
+          <Name>ПовнаНазва</Name>
+          <NameInTable>col_a6</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+        </Field>
+        <Field>
+          <Name>УнікальнийКодБанку</Name>
+          <NameInTable>col_a7</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+        </Field>
+        <Field>
+          <Name>КодОбластіОпераційноїДіяльності</Name>
+          <NameInTable>col_a8</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+        </Field>
+        <Field>
+          <Name>НазваОбластіОпераційноїДіяльності</Name>
+          <NameInTable>col_a9</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+        </Field>
+        <Field>
+          <Name>КодОбластіЗгідноСтатуту</Name>
+          <NameInTable>col_b1</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+        </Field>
+        <Field>
+          <Name>НазваОбластіЗгідноСтатуту</Name>
+          <NameInTable>col_b2</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+        </Field>
+        <Field>
+          <Name>ПоштовийІндекс</Name>
+          <NameInTable>col_b3</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+        </Field>
+        <Field>
+          <Name>НазваНаселеногоПункту</Name>
+          <NameInTable>col_b5</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+        </Field>
+        <Field>
+          <Name>Адреса</Name>
           <NameInTable>col_b6</NameInTable>
-          <Type>pointer</Type>
-          <Pointer>Довідники.Контрагенти</Pointer>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+        </Field>
+        <Field>
+          <Name>КодТелефонногоЗвязку</Name>
+          <NameInTable>col_b7</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+        </Field>
+        <Field>
+          <Name>НомерТелефону</Name>
+          <NameInTable>col_b8</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+        </Field>
+        <Field>
+          <Name>ЧисловийКодСтануУстанови</Name>
+          <NameInTable>col_b9</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+        </Field>
+        <Field>
+          <Name>НазваСтануУстанови</Name>
+          <NameInTable>col_c1</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+        </Field>
+        <Field>
+          <Name>ДатаЗміниСтану</Name>
+          <NameInTable>col_c2</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+        </Field>
+        <Field>
+          <Name>ДатаВідкриттяУстанови</Name>
+          <NameInTable>col_c3</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+        </Field>
+        <Field>
+          <Name>ДатаЗакриттяУстанови</Name>
+          <NameInTable>col_c4</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+        </Field>
+        <Field>
+          <Name>КодНБУ</Name>
+          <NameInTable>col_c5</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+        </Field>
+        <Field>
+          <Name>НомерЛіцензії</Name>
+          <NameInTable>col_c6</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+        </Field>
+        <Field>
+          <Name>ДатаЛіцензії</Name>
+          <NameInTable>col_c7</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+        </Field>
+        <Field>
+          <Name>КодСтатусу</Name>
+          <NameInTable>col_c8</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+        </Field>
+        <Field>
+          <Name>Статус</Name>
+          <NameInTable>col_c9</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+        </Field>
+        <Field>
+          <Name>ДатаЗапису</Name>
+          <NameInTable>col_d1</NameInTable>
+          <Type>string</Type>
           <Desc>
           </Desc>
           <IsPresentation>0</IsPresentation>
@@ -5005,10 +4995,47 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           </Desc>
           <Fields>
             <Field>
+              <Name>Код</Name>
+              <Caption>Код</Caption>
+              <Size>0</Size>
+              <SortNum>1</SortNum>
+              <SortField>False</SortField>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
               <Name>Назва</Name>
               <Caption>Назва</Caption>
               <Size>0</Size>
-              <SortNum>0</SortNum>
+              <SortNum>2</SortNum>
+              <SortField>True</SortField>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+          </Fields>
+        </TabularList>
+        <TabularList>
+          <Name>ЗаписиШвидкийВибір</Name>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>Код</Name>
+              <Caption>Код</Caption>
+              <Size>0</Size>
+              <SortNum>1</SortNum>
+              <SortField>False</SortField>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>Назва</Name>
+              <Caption>Назва</Caption>
+              <Size>0</Size>
+              <SortNum>2</SortNum>
               <SortField>True</SortField>
               <Type>string</Type>
               <Pointer>
@@ -15193,6 +15220,15 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <SortField>0</SortField>
           <WherePeriod>0</WherePeriod>
         </Field>
+        <Field>
+          <Name>Коментар</Name>
+          <Desc>
+          </Desc>
+          <Type>
+          </Type>
+          <SortField>0</SortField>
+          <WherePeriod>0</WherePeriod>
+        </Field>
       </Fields>
       <AllowDocument>
         <Name>ЗамовленняПостачальнику</Name>
@@ -15368,6 +15404,16 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
                 <field>Довідники.Користувачі_Const.Назва</field>
               </FieldAndAlias>
             </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <DocField>Коментар</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
           </Fields>
         </TabularList>
         <TabularList>
@@ -15522,6 +15568,16 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
                 <table>join_tab_6</table>
                 <field>Довідники.Користувачі_Const.Назва</field>
               </FieldAndAlias>
+            </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <DocField>Коментар</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -15678,6 +15734,16 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
                 <field>Довідники.Користувачі_Const.Назва</field>
               </FieldAndAlias>
             </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <DocField>Коментар</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
           </Fields>
         </TabularList>
         <TabularList>
@@ -15833,6 +15899,16 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
                 <field>Довідники.Користувачі_Const.Назва</field>
               </FieldAndAlias>
             </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <DocField>Коментар</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
           </Fields>
         </TabularList>
         <TabularList>
@@ -15955,6 +16031,16 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
                 <table>join_tab_3</table>
                 <field>Довідники.Користувачі_Const.Назва</field>
               </FieldAndAlias>
+            </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <DocField>Коментар</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -16101,6 +16187,16 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
                 <field>Довідники.Користувачі_Const.Назва</field>
               </FieldAndAlias>
             </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <DocField>Коментар</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
           </Fields>
         </TabularList>
         <TabularList>
@@ -16246,6 +16342,16 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
                 <field>Довідники.Користувачі_Const.Назва</field>
               </FieldAndAlias>
             </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <DocField>Коментар</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
           </Fields>
         </TabularList>
         <TabularList>
@@ -16368,6 +16474,16 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
                 <table>join_tab_3</table>
                 <field>Довідники.Користувачі_Const.Назва</field>
               </FieldAndAlias>
+            </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <DocField>Коментар</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -16524,6 +16640,16 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
                 <field>Довідники.Користувачі_Const.Назва</field>
               </FieldAndAlias>
             </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <DocField>Коментар</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
           </Fields>
         </TabularList>
         <TabularList>
@@ -16679,6 +16805,16 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
                 <field>Довідники.Користувачі_Const.Назва</field>
               </FieldAndAlias>
             </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <DocField>Коментар</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
           </Fields>
         </TabularList>
         <TabularList>
@@ -16824,6 +16960,16 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
                 <field>Довідники.Користувачі_Const.Назва</field>
               </FieldAndAlias>
             </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <DocField>Коментар</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
           </Fields>
         </TabularList>
         <TabularList>
@@ -16966,6 +17112,16 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
                 <table>join_tab_5</table>
                 <field>Довідники.Користувачі_Const.Назва</field>
               </FieldAndAlias>
+            </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <DocField>Коментар</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -17450,6 +17606,16 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
                 <field>Довідники.Користувачі_Const.Назва</field>
               </FieldAndAlias>
             </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <DocField>Коментар</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
           </Fields>
         </TabularList>
         <TabularList>
@@ -17605,6 +17771,16 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
                 <field>Довідники.Користувачі_Const.Назва</field>
               </FieldAndAlias>
             </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <DocField>Коментар</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
           </Fields>
         </TabularList>
         <TabularList>
@@ -17727,6 +17903,16 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
                 <table>join_tab_3</table>
                 <field>Довідники.Користувачі_Const.Назва</field>
               </FieldAndAlias>
+            </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <DocField>Коментар</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -17851,6 +18037,16 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
                 <field>Довідники.Користувачі_Const.Назва</field>
               </FieldAndAlias>
             </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <DocField>Коментар</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
           </Fields>
         </TabularList>
         <TabularList>
@@ -17973,6 +18169,16 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
                 <table>join_tab_3</table>
                 <field>Довідники.Користувачі_Const.Назва</field>
               </FieldAndAlias>
+            </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <DocField>Коментар</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -18097,6 +18303,16 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
                 <field>Довідники.Користувачі_Const.Назва</field>
               </FieldAndAlias>
             </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <DocField>Коментар</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
           </Fields>
         </TabularList>
       </TabularLists>
@@ -18189,6 +18405,15 @@ SQL тип  непотрібно вказувати
         </Field>
         <Field>
           <Name>Автор</Name>
+          <Desc>
+          </Desc>
+          <Type>
+          </Type>
+          <SortField>0</SortField>
+          <WherePeriod>0</WherePeriod>
+        </Field>
+        <Field>
+          <Name>Коментар</Name>
           <Desc>
           </Desc>
           <Type>
@@ -18357,6 +18582,16 @@ SQL тип  непотрібно вказувати
                 <field>Довідники.Користувачі_Const.Назва</field>
               </FieldAndAlias>
             </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <DocField>Коментар</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
           </Fields>
         </TabularList>
         <TabularList>
@@ -18512,6 +18747,16 @@ SQL тип  непотрібно вказувати
                 <table>join_tab_6</table>
                 <field>Довідники.Користувачі_Const.Назва</field>
               </FieldAndAlias>
+            </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <DocField>Коментар</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -18669,6 +18914,16 @@ SQL тип  непотрібно вказувати
                 <field>Довідники.Користувачі_Const.Назва</field>
               </FieldAndAlias>
             </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <DocField>Коментар</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
           </Fields>
         </TabularList>
       </TabularLists>
@@ -18762,6 +19017,15 @@ SQL тип  непотрібно вказувати
         </Field>
         <Field>
           <Name>Автор</Name>
+          <Desc>
+          </Desc>
+          <Type>
+          </Type>
+          <SortField>0</SortField>
+          <WherePeriod>0</WherePeriod>
+        </Field>
+        <Field>
+          <Name>Коментар</Name>
           <Desc>
           </Desc>
           <Type>
@@ -18932,6 +19196,16 @@ SQL тип  непотрібно вказувати
                 <field>Довідники.Користувачі_Const.Назва</field>
               </FieldAndAlias>
             </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <DocField>Коментар</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
           </Fields>
         </TabularList>
         <TabularList>
@@ -19087,6 +19361,16 @@ SQL тип  непотрібно вказувати
                 <table>join_tab_6</table>
                 <field>Довідники.Користувачі_Const.Назва</field>
               </FieldAndAlias>
+            </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <DocField>Коментар</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -19244,6 +19528,16 @@ SQL тип  непотрібно вказувати
                 <field>Довідники.Користувачі_Const.Назва</field>
               </FieldAndAlias>
             </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <DocField>Коментар</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
           </Fields>
         </TabularList>
         <TabularList>
@@ -19389,6 +19683,16 @@ SQL тип  непотрібно вказувати
                 <table>join_tab_5</table>
                 <field>Довідники.Користувачі_Const.Назва</field>
               </FieldAndAlias>
+            </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <DocField>Коментар</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -19546,6 +19850,16 @@ SQL тип  непотрібно вказувати
                 <field>Довідники.Користувачі_Const.Назва</field>
               </FieldAndAlias>
             </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <DocField>Коментар</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
           </Fields>
         </TabularList>
       </TabularLists>
@@ -19637,6 +19951,15 @@ SQL тип  непотрібно вказувати
         </Field>
         <Field>
           <Name>Автор</Name>
+          <Desc>
+          </Desc>
+          <Type>
+          </Type>
+          <SortField>0</SortField>
+          <WherePeriod>0</WherePeriod>
+        </Field>
+        <Field>
+          <Name>Коментар</Name>
           <Desc>
           </Desc>
           <Type>
@@ -19804,6 +20127,16 @@ SQL тип  непотрібно вказувати
                 <field>Довідники.Користувачі_Const.Назва</field>
               </FieldAndAlias>
             </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <DocField>Коментар</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
           </Fields>
         </TabularList>
         <TabularList>
@@ -19960,6 +20293,16 @@ SQL тип  непотрібно вказувати
                 <field>Довідники.Користувачі_Const.Назва</field>
               </FieldAndAlias>
             </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <DocField>Коментар</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
           </Fields>
         </TabularList>
       </TabularLists>
@@ -20024,6 +20367,15 @@ SQL тип  непотрібно вказувати
         </Field>
         <Field>
           <Name>Автор</Name>
+          <Desc>
+          </Desc>
+          <Type>
+          </Type>
+          <SortField>0</SortField>
+          <WherePeriod>0</WherePeriod>
+        </Field>
+        <Field>
+          <Name>Коментар</Name>
           <Desc>
           </Desc>
           <Type>
@@ -20130,11 +20482,31 @@ SQL тип  непотрібно вказувати
             </Field>
             <Field>
               <Name>Автор</Name>
-              <DocField>
-              </DocField>
+              <DocField>Автор</DocField>
               <SqlType>
               </SqlType>
               <WherePeriod>0</WherePeriod>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Користувачі</Pointer>
+              <Join>
+                <table>Довідники.Користувачі_Const.TABLE</table>
+                <field>Автор</field>
+                <alias>join_tab_4</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_4</table>
+                <field>Довідники.Користувачі_Const.Назва</field>
+              </FieldAndAlias>
+            </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <DocField>Коментар</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -20236,6 +20608,16 @@ SQL тип  непотрібно вказувати
                 <field>Довідники.Користувачі_Const.Назва</field>
               </FieldAndAlias>
             </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <DocField>Коментар</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
           </Fields>
         </TabularList>
         <TabularList>
@@ -20336,6 +20718,16 @@ SQL тип  непотрібно вказувати
                 <field>Довідники.Користувачі_Const.Назва</field>
               </FieldAndAlias>
             </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <DocField>Коментар</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
           </Fields>
         </TabularList>
       </TabularLists>
@@ -20391,6 +20783,15 @@ SQL тип  непотрібно вказувати
         </Field>
         <Field>
           <Name>Автор</Name>
+          <Desc>
+          </Desc>
+          <Type>
+          </Type>
+          <SortField>0</SortField>
+          <WherePeriod>0</WherePeriod>
+        </Field>
+        <Field>
+          <Name>Коментар</Name>
           <Desc>
           </Desc>
           <Type>
@@ -20496,6 +20897,16 @@ SQL тип  непотрібно вказувати
                 <field>Довідники.Користувачі_Const.Назва</field>
               </FieldAndAlias>
             </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <DocField>Коментар</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
           </Fields>
         </TabularList>
         <TabularList>
@@ -20587,6 +20998,16 @@ SQL тип  непотрібно вказувати
                 <table>join_tab_3</table>
                 <field>Довідники.Користувачі_Const.Назва</field>
               </FieldAndAlias>
+            </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <DocField>Коментар</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -20680,6 +21101,16 @@ SQL тип  непотрібно вказувати
                 <field>Довідники.Користувачі_Const.Назва</field>
               </FieldAndAlias>
             </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <DocField>Коментар</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
           </Fields>
         </TabularList>
         <TabularList>
@@ -20771,6 +21202,16 @@ SQL тип  непотрібно вказувати
                 <table>join_tab_3</table>
                 <field>Довідники.Користувачі_Const.Назва</field>
               </FieldAndAlias>
+            </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <DocField>Коментар</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -21754,213 +22195,6 @@ HAVING
 
     /* ДоВідвантаження */
     SUM(ТовариНаСкладах.{ТовариНаСкладах_Залишки_TablePart.ДоВідвантаження}) != 0 
-
-
-
-
-</Query>
-        </QueryBlock>
-      </QueryBlockList>
-    </RegisterAccumulation>
-    <RegisterAccumulation>
-      <Name>ТовариОрганізацій</Name>
-      <Table>tab_a39</Table>
-      <Type>Residues</Type>
-      <Desc>
-      </Desc>
-      <DimensionFields>
-        <Fields>
-          <Field>
-            <Name>Організація</Name>
-            <NameInTable>col_e9</NameInTable>
-            <Type>pointer</Type>
-            <Pointer>Довідники.Організації</Pointer>
-            <Desc>
-            </Desc>
-            <IsIndex>1</IsIndex>
-          </Field>
-          <Field>
-            <Name>Номенклатура</Name>
-            <NameInTable>col_f2</NameInTable>
-            <Type>pointer</Type>
-            <Pointer>Довідники.Номенклатура</Pointer>
-            <Desc>
-            </Desc>
-            <IsIndex>1</IsIndex>
-          </Field>
-          <Field>
-            <Name>ХарактеристикаНоменклатури</Name>
-            <NameInTable>col_f3</NameInTable>
-            <Type>pointer</Type>
-            <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
-            <Desc>
-            </Desc>
-            <IsIndex>1</IsIndex>
-          </Field>
-        </Fields>
-      </DimensionFields>
-      <ResourcesFields>
-        <Fields>
-          <Field>
-            <Name>Кількість</Name>
-            <NameInTable>col_f1</NameInTable>
-            <Type>numeric</Type>
-            <Desc>
-            </Desc>
-            <IsIndex>0</IsIndex>
-          </Field>
-        </Fields>
-      </ResourcesFields>
-      <PropertyFields>
-        <Fields />
-      </PropertyFields>
-      <AllowDocumentSpend />
-      <TabularParts />
-      <QueryBlockList />
-    </RegisterAccumulation>
-    <RegisterAccumulation>
-      <Name>РухТоварів</Name>
-      <Table>tab_a41</Table>
-      <Type>Turnover</Type>
-      <Desc>
-      </Desc>
-      <DimensionFields>
-        <Fields>
-          <Field>
-            <Name>Номенклатура</Name>
-            <NameInTable>col_g3</NameInTable>
-            <Type>pointer</Type>
-            <Pointer>Довідники.Номенклатура</Pointer>
-            <Desc>
-            </Desc>
-            <IsIndex>1</IsIndex>
-          </Field>
-          <Field>
-            <Name>ХарактеристикаНоменклатури</Name>
-            <NameInTable>col_g4</NameInTable>
-            <Type>pointer</Type>
-            <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
-            <Desc>
-            </Desc>
-            <IsIndex>1</IsIndex>
-          </Field>
-          <Field>
-            <Name>Склад</Name>
-            <NameInTable>col_g5</NameInTable>
-            <Type>pointer</Type>
-            <Pointer>Довідники.Склади</Pointer>
-            <Desc>
-            </Desc>
-            <IsIndex>1</IsIndex>
-          </Field>
-        </Fields>
-      </DimensionFields>
-      <ResourcesFields>
-        <Fields>
-          <Field>
-            <Name>Кількість</Name>
-            <NameInTable>col_g6</NameInTable>
-            <Type>numeric</Type>
-            <Desc>
-            </Desc>
-            <IsIndex>0</IsIndex>
-          </Field>
-        </Fields>
-      </ResourcesFields>
-      <PropertyFields>
-        <Fields />
-      </PropertyFields>
-      <AllowDocumentSpend />
-      <TabularParts>
-        <TablePart>
-          <Name>Обороти</Name>
-          <Table>tab_a65</Table>
-          <Desc>Віртуальна таблиця</Desc>
-          <Fields>
-            <Field>
-              <Name>Період</Name>
-              <NameInTable>col_a1</NameInTable>
-              <Type>date</Type>
-              <Desc>
-              </Desc>
-              <IsIndex>1</IsIndex>
-            </Field>
-            <Field>
-              <Name>Номенклатура</Name>
-              <NameInTable>col_a2</NameInTable>
-              <Type>pointer</Type>
-              <Pointer>Довідники.Номенклатура</Pointer>
-              <Desc>
-              </Desc>
-              <IsIndex>1</IsIndex>
-            </Field>
-            <Field>
-              <Name>ХарактеристикаНоменклатури</Name>
-              <NameInTable>col_a3</NameInTable>
-              <Type>pointer</Type>
-              <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
-              <Desc>
-              </Desc>
-              <IsIndex>1</IsIndex>
-            </Field>
-            <Field>
-              <Name>Склад</Name>
-              <NameInTable>col_a4</NameInTable>
-              <Type>pointer</Type>
-              <Pointer>Довідники.Склади</Pointer>
-              <Desc>
-              </Desc>
-              <IsIndex>1</IsIndex>
-            </Field>
-            <Field>
-              <Name>Кількість</Name>
-              <NameInTable>col_a5</NameInTable>
-              <Type>numeric</Type>
-              <Desc>
-              </Desc>
-              <IsIndex>0</IsIndex>
-            </Field>
-          </Fields>
-        </TablePart>
-      </TabularParts>
-      <QueryBlockList>
-        <QueryBlock>
-          <Name>Обороти</Name>
-          <FinalCalculation>0</FinalCalculation>
-          <Query position="0" key="DELETE">
-DELETE FROM 
-    {РухТоварів_Обороти_TablePart.TABLE}
-WHERE 
-    {РухТоварів_Обороти_TablePart.TABLE}.{РухТоварів_Обороти_TablePart.Період} = @ПеріодДеньВідбір
-</Query>
-          <Query position="1" key="SELECT">
-INSERT INTO {РухТоварів_Обороти_TablePart.TABLE} 
-(
-    uid,
-    {РухТоварів_Обороти_TablePart.Період},
-    {РухТоварів_Обороти_TablePart.Номенклатура},
-    {РухТоварів_Обороти_TablePart.ХарактеристикаНоменклатури},
-    {РухТоварів_Обороти_TablePart.Склад},
-    {РухТоварів_Обороти_TablePart.Кількість}
-)
-SELECT
-    uuid_generate_v4(),
-    date_trunc('day', РухТоварів.period::timestamp) AS Період,
-    РухТоварів.{РухТоварів_Const.Номенклатура} AS Номенклатура,
-    РухТоварів.{РухТоварів_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
-    РухТоварів.{РухТоварів_Const.Склад} AS Склад,
-
-    SUM(РухТоварів.{РухТоварів_Const.Кількість}) AS Кількість
-
-
-FROM
-    {РухТоварів_Const.TABLE} AS РухТоварів
-
-WHERE
-    date_trunc('day', РухТоварів.period::timestamp) = @ПеріодДеньВідбір
-
-GROUP BY
-    Період, Номенклатура, ХарактеристикаНоменклатури, Склад
 
 
 
@@ -23384,62 +23618,6 @@ HAVING
       </QueryBlockList>
     </RegisterAccumulation>
     <RegisterAccumulation>
-      <Name>ТовариДоПоступлення</Name>
-      <Table>tab_a62</Table>
-      <Type>Residues</Type>
-      <Desc>
-      </Desc>
-      <DimensionFields>
-        <Fields>
-          <Field>
-            <Name>Номенклатура</Name>
-            <NameInTable>col_b2</NameInTable>
-            <Type>pointer</Type>
-            <Pointer>Довідники.Номенклатура</Pointer>
-            <Desc>
-            </Desc>
-            <IsIndex>1</IsIndex>
-          </Field>
-          <Field>
-            <Name>ХарактеристикаНоменклатури</Name>
-            <NameInTable>col_b3</NameInTable>
-            <Type>pointer</Type>
-            <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
-            <Desc>
-            </Desc>
-            <IsIndex>1</IsIndex>
-          </Field>
-          <Field>
-            <Name>Склад</Name>
-            <NameInTable>col_b4</NameInTable>
-            <Type>pointer</Type>
-            <Pointer>Довідники.Склади</Pointer>
-            <Desc>
-            </Desc>
-            <IsIndex>1</IsIndex>
-          </Field>
-        </Fields>
-      </DimensionFields>
-      <ResourcesFields>
-        <Fields>
-          <Field>
-            <Name>ДоПоступлення</Name>
-            <NameInTable>col_b5</NameInTable>
-            <Type>numeric</Type>
-            <Desc>
-            </Desc>
-            <IsIndex>0</IsIndex>
-          </Field>
-        </Fields>
-      </ResourcesFields>
-      <PropertyFields>
-        <Fields />
-      </PropertyFields>
-      <AllowDocumentSpend />
-      <TabularParts />
-      <QueryBlockList />
-    </RegisterAccumulation>
-    <RegisterAccumulation>
       <Name>РухКоштів</Name>
       <Table>tab_a78</Table>
       <Type>Residues</Type>
@@ -24286,205 +24464,6 @@ HAVING
 </Query>
         </QueryBlock>
       </QueryBlockList>
-    </RegisterAccumulation>
-    <RegisterAccumulation>
-      <Name>ТовариДоВідвантаження</Name>
-      <Table>tab_a80</Table>
-      <Type>Residues</Type>
-      <Desc>
-      </Desc>
-      <DimensionFields>
-        <Fields>
-          <Field>
-            <Name>Номенклатура</Name>
-            <NameInTable>col_b2</NameInTable>
-            <Type>pointer</Type>
-            <Pointer>Довідники.Номенклатура</Pointer>
-            <Desc>
-            </Desc>
-            <IsIndex>1</IsIndex>
-          </Field>
-          <Field>
-            <Name>ХарактеристикаНоменклатури</Name>
-            <NameInTable>col_b3</NameInTable>
-            <Type>pointer</Type>
-            <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
-            <Desc>
-            </Desc>
-            <IsIndex>1</IsIndex>
-          </Field>
-          <Field>
-            <Name>Склад</Name>
-            <NameInTable>col_b4</NameInTable>
-            <Type>pointer</Type>
-            <Pointer>Довідники.Склади</Pointer>
-            <Desc>
-            </Desc>
-            <IsIndex>1</IsIndex>
-          </Field>
-        </Fields>
-      </DimensionFields>
-      <ResourcesFields>
-        <Fields>
-          <Field>
-            <Name>ВРезерві</Name>
-            <NameInTable>col_b5</NameInTable>
-            <Type>numeric</Type>
-            <Desc>
-            </Desc>
-            <IsIndex>0</IsIndex>
-          </Field>
-          <Field>
-            <Name>ДоВідвантаження</Name>
-            <NameInTable>col_a2</NameInTable>
-            <Type>numeric</Type>
-            <Desc>
-            </Desc>
-            <IsIndex>0</IsIndex>
-          </Field>
-        </Fields>
-      </ResourcesFields>
-      <PropertyFields>
-        <Fields />
-      </PropertyFields>
-      <AllowDocumentSpend />
-      <TabularParts />
-      <QueryBlockList />
-    </RegisterAccumulation>
-    <RegisterAccumulation>
-      <Name>ДоходиТаСобівартістьПродажів</Name>
-      <Table>tab_b12</Table>
-      <Type>Turnover</Type>
-      <Desc>Доходи та собівартість продажів</Desc>
-      <DimensionFields>
-        <Fields>
-          <Field>
-            <Name>ДокументКомпозит</Name>
-            <NameInTable>col_a1</NameInTable>
-            <Type>pointer</Type>
-            <Pointer>Довідники.ПродажіДокументКомпозит</Pointer>
-            <Desc>
-            </Desc>
-            <IsIndex>1</IsIndex>
-          </Field>
-          <Field>
-            <Name>ТипЗапасів</Name>
-            <NameInTable>col_a2</NameInTable>
-            <Type>enum</Type>
-            <Pointer>Перелічення.ТипЗапасів</Pointer>
-            <Desc>
-            </Desc>
-            <IsIndex>1</IsIndex>
-          </Field>
-          <Field>
-            <Name>ВидЗапасів</Name>
-            <NameInTable>col_a4</NameInTable>
-            <Type>pointer</Type>
-            <Pointer>Довідники.ВидиЗапасів</Pointer>
-            <Desc>
-            </Desc>
-            <IsIndex>1</IsIndex>
-          </Field>
-          <Field>
-            <Name>Склад</Name>
-            <NameInTable>col_a5</NameInTable>
-            <Type>pointer</Type>
-            <Pointer>Довідники.Склади</Pointer>
-            <Desc>
-            </Desc>
-            <IsIndex>1</IsIndex>
-          </Field>
-          <Field>
-            <Name>Договір</Name>
-            <NameInTable>col_a6</NameInTable>
-            <Type>pointer</Type>
-            <Pointer>Довідники.ДоговориКонтрагентів</Pointer>
-            <Desc>
-            </Desc>
-            <IsIndex>1</IsIndex>
-          </Field>
-          <Field>
-            <Name>ГосподарськаОперація</Name>
-            <NameInTable>col_a7</NameInTable>
-            <Type>enum</Type>
-            <Pointer>Перелічення.ГосподарськіОперації</Pointer>
-            <Desc>
-            </Desc>
-            <IsIndex>1</IsIndex>
-          </Field>
-          <Field>
-            <Name>АналітикаНоменклатуриКомпозит</Name>
-            <NameInTable>col_a9</NameInTable>
-            <Type>pointer</Type>
-            <Pointer>Довідники.АналітикаНоменклатуриКомпозит</Pointer>
-            <Desc>
-            </Desc>
-            <IsIndex>1</IsIndex>
-          </Field>
-          <Field>
-            <Name>АналітикаКонтрагентівКомпозит</Name>
-            <NameInTable>col_b4</NameInTable>
-            <Type>pointer</Type>
-            <Pointer>Довідники.АналітикаКонтрагентівКомпозит</Pointer>
-            <Desc>
-            </Desc>
-            <IsIndex>1</IsIndex>
-          </Field>
-          <Field>
-            <Name>Підрозділ</Name>
-            <NameInTable>col_b6</NameInTable>
-            <Type>pointer</Type>
-            <Pointer>Довідники.СтруктураПідприємства</Pointer>
-            <Desc>
-            </Desc>
-            <IsIndex>1</IsIndex>
-          </Field>
-        </Fields>
-      </DimensionFields>
-      <ResourcesFields>
-        <Fields>
-          <Field>
-            <Name>Кількість</Name>
-            <NameInTable>col_a8</NameInTable>
-            <Type>numeric</Type>
-            <Desc>
-            </Desc>
-            <IsIndex>0</IsIndex>
-          </Field>
-          <Field>
-            <Name>СумаДоходу</Name>
-            <NameInTable>col_b2</NameInTable>
-            <Type>numeric</Type>
-            <Desc>
-            </Desc>
-            <IsIndex>0</IsIndex>
-          </Field>
-          <Field>
-            <Name>Собівартість</Name>
-            <NameInTable>col_b3</NameInTable>
-            <Type>numeric</Type>
-            <Desc>
-            </Desc>
-            <IsIndex>0</IsIndex>
-          </Field>
-        </Fields>
-      </ResourcesFields>
-      <PropertyFields>
-        <Fields>
-          <Field>
-            <Name>ВалютаДокументу</Name>
-            <NameInTable>col_b5</NameInTable>
-            <Type>pointer</Type>
-            <Pointer>Довідники.Валюти</Pointer>
-            <Desc>
-            </Desc>
-            <IsIndex>0</IsIndex>
-          </Field>
-        </Fields>
-      </PropertyFields>
-      <AllowDocumentSpend />
-      <TabularParts />
-      <QueryBlockList />
     </RegisterAccumulation>
     <RegisterAccumulation>
       <Name>Продажі</Name>

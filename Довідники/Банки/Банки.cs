@@ -54,6 +54,20 @@ namespace StorageAndTrade
             ПошукПовнотекстовий.Select = LoadRecords_OnSearch;
             ПошукПовнотекстовий.Clear = LoadRecords;
 
+            //Завантаження списку Банків
+            {
+                LinkButton linkButtonDownloadCurs = new LinkButton(" Завантаження списку Банків") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
+                linkButtonDownloadCurs.Clicked += (object? sender, EventArgs args) =>
+                {
+                    Program.GeneralForm?.CreateNotebookPage("Завантаження списку Банків", () =>
+                    {
+                        return new Обробка_ЗавантаженняБанків();
+                    }, true);
+                };
+
+                hBoxTop.PackStart(linkButtonDownloadCurs, false, false, 10);
+            }
+
             CreateToolbar();
 
             ScrolledWindow scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In };
