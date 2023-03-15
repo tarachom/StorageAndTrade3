@@ -638,7 +638,7 @@ LIMIT 1
 
             //ВидЦіни
             {
-                TreeViewColumn ВидЦіни = new TreeViewColumn("Вид ціни", new CellRendererText(), "text", (int)Columns.ВидЦіни) { Resizable = true, MinWidth =  200 };
+                TreeViewColumn ВидЦіни = new TreeViewColumn("Вид ціни", new CellRendererText(), "text", (int)Columns.ВидЦіни) { Resizable = true, MinWidth =  100 };
                 ВидЦіни.Data.Add("Column", Columns.ВидЦіни);
 
                 TreeViewGrid.AppendColumn(ВидЦіни);
