@@ -216,7 +216,7 @@ limitations under the License.
               </xsl:if>
               -->
 
-			  <xsl:if test="$ConfFieldType = 'any_pointer'">
+			        <xsl:if test="$ConfFieldType = 'any_pointer'">
                 <xsl:choose>
                   <xsl:when test="$InfoSchemaFieldDataType = 'uuid' and $InfoSchemaFieldUdtName = 'uuid'">
                     <Coincide>yes</Coincide>
@@ -228,7 +228,7 @@ limitations under the License.
                 </xsl:choose>
               </xsl:if>
 				
-			  <xsl:if test="$ConfFieldType = 'composite_pointer'">
+			        <xsl:if test="$ConfFieldType = 'composite_pointer'">
                 <xsl:choose>
                   <xsl:when test="$InfoSchemaFieldDataType = 'USER-DEFINED' and $InfoSchemaFieldUdtName = 'uuidtext'">
                     <Coincide>yes</Coincide>
@@ -252,7 +252,7 @@ limitations under the License.
                 </xsl:choose>
               </xsl:if>
 
-			 <xsl:if test="$ConfFieldType = 'bytea'">
+			        <xsl:if test="$ConfFieldType = 'bytea'">
                 <xsl:choose>
                   <xsl:when test="$InfoSchemaFieldDataType = 'bytea' and $InfoSchemaFieldUdtName = 'bytea'">
                     <Coincide>yes</Coincide>
@@ -745,10 +745,10 @@ limitations under the License.
               <IsExist>yes</IsExist>
 
               <xsl:call-template name="FieldsControl">
-				<xsl:with-param name="TableName" select="$ConfDirectoryTable" />
+				      <xsl:with-param name="TableName" select="$ConfDirectoryTable" />
                 <xsl:with-param name="ConfigurationFieldList" select="Fields/Field" />
                 <xsl:with-param name="InfoSchemaFieldList" select="$InfoSchemaTableList[Name = $ConfDirectoryTable]/Column" />
-				<xsl:with-param name="InfoSchemaIndexList" select="$InfoSchemaTableList[Name = $ConfDirectoryTable]/Index" />
+				      <xsl:with-param name="InfoSchemaIndexList" select="$InfoSchemaTableList[Name = $ConfDirectoryTable]/Index" />
               </xsl:call-template>
 
             </xsl:when>
@@ -762,7 +762,7 @@ limitations under the License.
                     <xsl:with-param name="ConfFieldName" select="Name" />
                     <xsl:with-param name="ConfFieldNameInTable" select="NameInTable" />
                     <xsl:with-param name="ConfFieldType" select="Type" />
-					<xsl:with-param name="ConfFieldIndex" select="IsIndex" />
+					          <xsl:with-param name="ConfFieldIndex" select="IsIndex" />
                   </xsl:call-template>
                 </xsl:for-each>
 
@@ -806,10 +806,10 @@ limitations under the License.
               <IsExist>yes</IsExist>
 
               <xsl:call-template name="FieldsControl">
-				<xsl:with-param name="TableName" select="$ConfDirectoryTable" />
+				      <xsl:with-param name="TableName" select="$ConfDirectoryTable" />
                 <xsl:with-param name="ConfigurationFieldList" select="Fields/Field" />
                 <xsl:with-param name="InfoSchemaFieldList" select="$InfoSchemaTableList[Name = $ConfDirectoryTable]/Column" />
-				<xsl:with-param name="InfoSchemaIndexList" select="$InfoSchemaTableList[Name = $ConfDirectoryTable]/Index" />				  
+				      <xsl:with-param name="InfoSchemaIndexList" select="$InfoSchemaTableList[Name = $ConfDirectoryTable]/Index" />				  
               </xsl:call-template>
 
             </xsl:when>
@@ -823,7 +823,7 @@ limitations under the License.
                     <xsl:with-param name="ConfFieldName" select="Name" />
                     <xsl:with-param name="ConfFieldNameInTable" select="NameInTable" />
                     <xsl:with-param name="ConfFieldType" select="Type" />
-					<xsl:with-param name="ConfFieldIndex" select="IsIndex" />
+					          <xsl:with-param name="ConfFieldIndex" select="IsIndex" />
                   </xsl:call-template>
                 </xsl:for-each>
 
@@ -867,10 +867,10 @@ limitations under the License.
               <IsExist>yes</IsExist>
 
               <xsl:call-template name="FieldsControl">
-				<xsl:with-param name="TableName" select="$ConfDirectoryTable" />
+				      <xsl:with-param name="TableName" select="$ConfDirectoryTable" />
                 <xsl:with-param name="ConfigurationFieldList" select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field" />
                 <xsl:with-param name="InfoSchemaFieldList" select="$InfoSchemaTableList[Name = $ConfDirectoryTable]/Column" />
-				<xsl:with-param name="InfoSchemaIndexList" select="$InfoSchemaTableList[Name = $ConfDirectoryTable]/Index" />
+				      <xsl:with-param name="InfoSchemaIndexList" select="$InfoSchemaTableList[Name = $ConfDirectoryTable]/Index" />
               </xsl:call-template>
 
             </xsl:when>
@@ -884,7 +884,7 @@ limitations under the License.
                     <xsl:with-param name="ConfFieldName" select="Name" />
                     <xsl:with-param name="ConfFieldNameInTable" select="NameInTable" />
                     <xsl:with-param name="ConfFieldType" select="Type" />
-					<xsl:with-param name="ConfFieldIndex" select="IsIndex" />
+					          <xsl:with-param name="ConfFieldIndex" select="IsIndex" />
                   </xsl:call-template>
                 </xsl:for-each>
 
@@ -931,10 +931,10 @@ limitations under the License.
               <IsExist>yes</IsExist>
 
               <xsl:call-template name="FieldsControl">
-				<xsl:with-param name="TableName" select="$ConfDirectoryTable" />
+				      <xsl:with-param name="TableName" select="$ConfDirectoryTable" />
                 <xsl:with-param name="ConfigurationFieldList" select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field" />
                 <xsl:with-param name="InfoSchemaFieldList" select="$InfoSchemaTableList[Name = $ConfDirectoryTable]/Column" />
-				<xsl:with-param name="InfoSchemaIndexList" select="$InfoSchemaTableList[Name = $ConfDirectoryTable]/Index" />
+				      <xsl:with-param name="InfoSchemaIndexList" select="$InfoSchemaTableList[Name = $ConfDirectoryTable]/Index" />
               </xsl:call-template>
 
             </xsl:when>
@@ -948,7 +948,7 @@ limitations under the License.
                     <xsl:with-param name="ConfFieldName" select="Name" />
                     <xsl:with-param name="ConfFieldNameInTable" select="NameInTable" />
                     <xsl:with-param name="ConfFieldType" select="Type" />
-					<xsl:with-param name="ConfFieldIndex" select="IsIndex" />
+					          <xsl:with-param name="ConfFieldIndex" select="IsIndex" />
                   </xsl:call-template>
                 </xsl:for-each>
 

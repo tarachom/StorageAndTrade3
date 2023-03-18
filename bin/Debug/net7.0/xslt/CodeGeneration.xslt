@@ -340,8 +340,6 @@ limitations under the License.
  *
  */
 
-<!-- using System;
-using System.Collections.Generic; -->
 using AccountingSoftware;
 using System.Xml;
 
@@ -357,9 +355,15 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
                    <xsl:text>Константи.</xsl:text><xsl:value-of select="Name"/>.ReadAll();
             </xsl:for-each>
         }
-        
+    }
+
+    public class Functions
+    {
         /*
-        
+          Функція для типу який задається користувачем.
+          Повертає презентацію для uuidAndText.
+          В @pointer - повертає групу (Документи або Довідники)
+            @type - повертає назву типу
         */
         public static string GetBasisObjectPresentation(UuidAndText uuidAndText, out string pointer, out string type)
         {
@@ -417,13 +421,13 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
 namespace <xsl:value-of select="Configuration/NameSpace"/>.Константи
 {
     <xsl:for-each select="Configuration/ConstantsBlocks/ConstantsBlock">
-	#region CONSTANTS BLOCK "<xsl:value-of select="Name"/>"
+	  #region CONSTANTS BLOCK "<xsl:value-of select="Name"/>"
     public static class <xsl:value-of select="Name"/>
     {
         public static void ReadAll()
         {
             <xsl:variable name="Constants" select="Constants/Constant" />
-		    <xsl:if test="count($Constants) &gt; 0">
+		        <xsl:if test="count($Constants) &gt; 0">
             Dictionary&lt;string, object&gt; fieldValue = new Dictionary&lt;string, object&gt;();
             bool IsSelect = Config.Kernel!.DataBase.SelectAllConstants("tab_constants",
                  <xsl:text>new string[] { </xsl:text>
@@ -445,7 +449,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Константи
                   </xsl:call-template>;
                 </xsl:for-each>
             }
-			</xsl:if>
+			      </xsl:if>
         }
         
         <xsl:for-each select="Constants/Constant">
@@ -463,26 +467,26 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Константи
             {
                 return m_<xsl:value-of select="Name"/><xsl:text>_Const</xsl:text>
                 <xsl:if test="Type = 'pointer'">
-					<xsl:variable name="groupPointer" select="substring-before(Pointer, '.')" />
-					<xsl:choose>
-						<xsl:when test="$groupPointer = 'Довідники'">
-							<xsl:text>.GetNewDirectoryPointer()</xsl:text>
-						</xsl:when>
-						<xsl:when test="$groupPointer = 'Документи'">
-							<xsl:text>.GetNewDocumentPointer()</xsl:text>
-						</xsl:when>
-					</xsl:choose>
-				</xsl:if>;
+                <xsl:variable name="groupPointer" select="substring-before(Pointer, '.')" />
+                <xsl:choose>
+                  <xsl:when test="$groupPointer = 'Довідники'">
+                    <xsl:text>.GetNewDirectoryPointer()</xsl:text>
+                  </xsl:when>
+                  <xsl:when test="$groupPointer = 'Документи'">
+                    <xsl:text>.GetNewDocumentPointer()</xsl:text>
+                  </xsl:when>
+                </xsl:choose>
+                </xsl:if>;
             }
             set
             {
                 m_<xsl:value-of select="Name"/>_Const = value;
                 Config.Kernel!.DataBase.SaveConstants("tab_constants", "<xsl:value-of select="NameInTable"/><xsl:text>", </xsl:text>
-			    <xsl:choose>
-					<xsl:when test="Type = 'enum'">
-						<xsl:text>(int)</xsl:text>
-					</xsl:when>
-				</xsl:choose>
+                <xsl:choose>
+                  <xsl:when test="Type = 'enum'">
+                    <xsl:text>(int)</xsl:text>
+                  </xsl:when>
+                </xsl:choose>
                 <xsl:text>m_</xsl:text>
                 <xsl:value-of select="Name"/>
                 <xsl:text>_Const</xsl:text>
@@ -502,7 +506,6 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Константи
             <xsl:variable name="TablePartName" select="Name"/>
             <xsl:variable name="TablePartFullName" select="concat($ConstantsName, '_', $TablePartName)"/>
         
-        <!--<xsl:call-template name="CommentSummary" />-->
         public class <xsl:value-of select="$TablePartFullName"/>_TablePart : ConstantsTablePart
         {
             public <xsl:value-of select="$TablePartFullName"/>_TablePart() : base(Config.Kernel!, "<xsl:value-of select="Table"/>",
@@ -560,10 +563,10 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Константи
                     <xsl:for-each select="Fields/Field">
                         <xsl:text>fieldValue.Add("</xsl:text>
                         <xsl:value-of select="NameInTable"/><xsl:text>", </xsl:text>
-						<xsl:if test="Type = 'enum'">
-						    <xsl:text>(int)</xsl:text>
-					    </xsl:if>
-						<xsl:text>record.</xsl:text><xsl:value-of select="Name"/>
+                        <xsl:if test="Type = 'enum'">
+                            <xsl:text>(int)</xsl:text>
+                          </xsl:if>
+                        <xsl:text>record.</xsl:text><xsl:value-of select="Name"/>
                         <xsl:choose>
                         <xsl:when test="Type = 'pointer'">
                             <xsl:text>.UnigueID.UGuid</xsl:text>
@@ -584,22 +587,15 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Константи
             
             public class Record : ConstantsTablePartRecord
             {
-                public Record()
-                {
-                    <xsl:for-each select="Fields/Field">
-                      <xsl:value-of select="Name"/>
-                      <xsl:text> = </xsl:text>
-                      <xsl:call-template name="DefaultFieldValue" />;
-                    </xsl:for-each>
-                }
                 <xsl:for-each select="Fields/Field">
                   <xsl:text>public </xsl:text>
                   <xsl:call-template name="FieldType" />
                   <xsl:text> </xsl:text>
                   <xsl:value-of select="Name"/>
-                  <xsl:text> { get; set; </xsl:text>}
+                  <xsl:text> { get; set; } = </xsl:text>
+                  <xsl:call-template name="DefaultFieldValue" />;
                 </xsl:for-each>
-            }            
+            }
         }
           </xsl:for-each>
         </xsl:for-each>     
@@ -737,8 +733,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
             <xsl:value-of select="$TablePartName"/><xsl:text> { get; set; </xsl:text>}
         </xsl:for-each>
     }
-    
-    <!--<xsl:call-template name="CommentSummary" />-->
+
     public class <xsl:value-of select="$DirectoryName"/>_Pointer : DirectoryPointer
     {
         public <xsl:value-of select="$DirectoryName"/>_Pointer(object? uid = null) : base(Config.Kernel!, "<xsl:value-of select="Table"/>")
@@ -789,7 +784,6 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
         }
     }
     
-    <!--<xsl:call-template name="CommentSummary" />-->
     public class <xsl:value-of select="$DirectoryName"/>_Select : DirectorySelect
     {
         public <xsl:value-of select="$DirectoryName"/>_Select() : base(Config.Kernel!, "<xsl:value-of select="Table"/>") { }        
@@ -822,7 +816,6 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
         <xsl:variable name="TablePartName" select="Name"/>
         <xsl:variable name="TablePartFullName" select="concat($DirectoryName, '_', $TablePartName)"/>
     
-    <!--<xsl:call-template name="CommentSummary" />-->
     public class <xsl:value-of select="$TablePartFullName"/>_TablePart : DirectoryTablePart
     {
         public <xsl:value-of select="$TablePartFullName"/>_TablePart(<xsl:value-of select="$DirectoryName"/>_Objest owner) : base(Config.Kernel!, "<xsl:value-of select="Table"/>",
@@ -884,10 +877,10 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
                 <xsl:for-each select="Fields/Field">
                     <xsl:text>fieldValue.Add("</xsl:text>
                     <xsl:value-of select="NameInTable"/><xsl:text>", </xsl:text>
-					<xsl:if test="Type = 'enum'">
-						<xsl:text>(int)</xsl:text>
-					</xsl:if>
-					<xsl:text>record.</xsl:text><xsl:value-of select="Name"/>
+                    <xsl:if test="Type = 'enum'">
+                      <xsl:text>(int)</xsl:text>
+                    </xsl:if>
+                    <xsl:text>record.</xsl:text><xsl:value-of select="Name"/>
                     <xsl:choose>
                     <xsl:when test="Type = 'pointer'">
                         <xsl:text>.UnigueID.UGuid</xsl:text>
@@ -906,23 +899,15 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
             base.BaseDelete(Owner.UnigueID);
         }
         
-        <!--<xsl:call-template name="CommentSummary" />-->
         public class Record : DirectoryTablePartRecord
         {
-            public Record()
-            {
-                <xsl:for-each select="Fields/Field">
-                  <xsl:value-of select="Name"/>
-                  <xsl:text> = </xsl:text>
-                  <xsl:call-template name="DefaultFieldValue" />;
-                </xsl:for-each>
-            }
             <xsl:for-each select="Fields/Field">
               <xsl:text>public </xsl:text>
               <xsl:call-template name="FieldType" />
               <xsl:text> </xsl:text>
               <xsl:value-of select="Name"/>
-              <xsl:text> { get; set; </xsl:text>}
+              <xsl:text> { get; set; } = </xsl:text>
+              <xsl:call-template name="DefaultFieldValue" />;
             </xsl:for-each>
         }
     }
@@ -936,7 +921,6 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Переліченн�
 {
     <xsl:for-each select="Configuration/Enums/Enum">
     #region ENUM "<xsl:value-of select="Name"/>"
-    <!--<xsl:call-template name="CommentSummary" />-->
     public enum <xsl:value-of select="Name"/>
     {
          <xsl:variable name="CountEnumField" select="count(Fields/Field)" />
@@ -1008,7 +992,6 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
     <xsl:for-each select="Configuration/Documents/Document">
       <xsl:variable name="DocumentName" select="Name"/>
     #region DOCUMENT "<xsl:value-of select="$DocumentName"/>"
-    <!--<xsl:call-template name="CommentSummary" />-->
     public static class <xsl:value-of select="$DocumentName"/>_Const
     {
         public const string TABLE = "<xsl:value-of select="Table"/>";
@@ -1113,8 +1096,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
             xmlWriter.Close();
         }
     }
-	
-    <!--<xsl:call-template name="CommentSummary" />-->
+
     public class <xsl:value-of select="$DocumentName"/>_Objest : DocumentObject
     {
         public <xsl:value-of select="$DocumentName"/>_Objest() : base(Config.Kernel!, "<xsl:value-of select="Table"/>", "<xsl:value-of select="$DocumentName"/>",
@@ -1180,54 +1162,54 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
             <xsl:if test="normalize-space(TriggerFunctions/AfterSave) != ''">
                 <xsl:value-of select="TriggerFunctions/AfterSave"/><xsl:text>(this);</xsl:text>      
             </xsl:if>
-		}
+		    }
 
-		public bool SpendTheDocument(DateTime spendDate)
-		{
+        public bool SpendTheDocument(DateTime spendDate)
+        {
             <xsl:choose>
                 <xsl:when test="normalize-space(SpendFunctions/Spend) != ''">
-		    <xsl:text>bool rezult = </xsl:text><xsl:value-of select="SpendFunctions/Spend"/><xsl:text>(this)</xsl:text>;
-		    <xsl:text>BaseSpend(rezult, spendDate)</xsl:text>;
-		    <xsl:text>return rezult;</xsl:text>
-				</xsl:when>
+                <xsl:text>bool rezult = </xsl:text><xsl:value-of select="SpendFunctions/Spend"/><xsl:text>(this)</xsl:text>;
+                <xsl:text>BaseSpend(rezult, spendDate)</xsl:text>;
+                <xsl:text>return rezult;</xsl:text>
+                </xsl:when>
                 <xsl:otherwise>
-		    <xsl:text>BaseSpend(false, DateTime.MinValue)</xsl:text>;
-		    <xsl:text>return false;</xsl:text>
-				</xsl:otherwise>
+                <xsl:text>BaseSpend(false, DateTime.MinValue)</xsl:text>;
+                <xsl:text>return false;</xsl:text>
+                </xsl:otherwise>
             </xsl:choose>
-		}
+		    }
 
-		public void ClearSpendTheDocument()
-		{
+        public void ClearSpendTheDocument()
+        {
             <xsl:if test="normalize-space(SpendFunctions/ClearSpend) != ''">
                 <xsl:value-of select="SpendFunctions/ClearSpend"/>
-				<xsl:text>(this)</xsl:text>;
-			</xsl:if>
-		    <xsl:text>BaseSpend(false, DateTime.MinValue);</xsl:text>
-		}
+              <xsl:text>(this)</xsl:text>;
+            </xsl:if>
+            <xsl:text>BaseSpend(false, DateTime.MinValue);</xsl:text>
+		    }
 
 		    public <xsl:value-of select="$DocumentName"/>_Objest Copy()
         {
             <xsl:value-of select="$DocumentName"/>_Objest copy = new <xsl:value-of select="$DocumentName"/>_Objest();
 			      copy.New();
             <xsl:for-each select="Fields/Field">
-				<xsl:text>copy.</xsl:text><xsl:value-of select="Name"/><xsl:text> = </xsl:text><xsl:value-of select="Name"/>;
-			</xsl:for-each>
-			return copy;
+              <xsl:text>copy.</xsl:text><xsl:value-of select="Name"/><xsl:text> = </xsl:text><xsl:value-of select="Name"/>;
+            </xsl:for-each>
+            return copy;
         }
 
         public void Delete()
         {
-		    <xsl:if test="normalize-space(TriggerFunctions/BeforeDelete) != ''">
+		        <xsl:if test="normalize-space(TriggerFunctions/BeforeDelete) != ''">
                 <xsl:value-of select="TriggerFunctions/BeforeDelete"/><xsl:text>(this);</xsl:text>      
             </xsl:if>
             base.BaseDelete(<xsl:text>new string[] { </xsl:text>
-             <xsl:for-each select="TabularParts/TablePart">
-               <xsl:if test="position() != 1">
-                 <xsl:text>, </xsl:text>
-               </xsl:if>
-               <xsl:text>"</xsl:text><xsl:value-of select="Table"/><xsl:text>"</xsl:text>
-             </xsl:for-each> });
+            <xsl:for-each select="TabularParts/TablePart">
+              <xsl:if test="position() != 1">
+                <xsl:text>, </xsl:text>
+              </xsl:if>
+              <xsl:text>"</xsl:text><xsl:value-of select="Table"/><xsl:text>"</xsl:text>
+            </xsl:for-each> });
         }
         
         public <xsl:value-of select="$DocumentName"/>_Pointer GetDocumentPointer()
@@ -1257,7 +1239,6 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
         </xsl:for-each>
     }
     
-    <!--<xsl:call-template name="CommentSummary" />-->
     public class <xsl:value-of select="$DocumentName"/>_Pointer : DocumentPointer
     {
         public <xsl:value-of select="$DocumentName"/>_Pointer(object? uid = null) : base(Config.Kernel!, "<xsl:value-of select="Table"/>", "<xsl:value-of select="$DocumentName"/>")
@@ -1304,18 +1285,17 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
         {
             <xsl:value-of select="$DocumentName"/>_Objest <xsl:value-of select="$DocumentName"/>ObjestItem = new <xsl:value-of select="$DocumentName"/>_Objest();
             <xsl:value-of select="$DocumentName"/>ObjestItem.Read(base.UnigueID);
-			<xsl:if test="count(TabularParts/TablePart) != 0">
-			if (readAllTablePart)
-			{   
-				<xsl:for-each select="TabularParts/TablePart">
-					<xsl:value-of select="$DocumentName"/>ObjestItem.<xsl:value-of select="concat(Name, '_TablePart')"/>.Read();</xsl:for-each>
-			}
-			</xsl:if>
+            <xsl:if test="count(TabularParts/TablePart) != 0">
+            if (readAllTablePart)
+            {   
+                <xsl:for-each select="TabularParts/TablePart">
+                <xsl:value-of select="$DocumentName"/>ObjestItem.<xsl:value-of select="concat(Name, '_TablePart')"/>.Read();</xsl:for-each>
+            }
+            </xsl:if>
             return <xsl:value-of select="$DocumentName"/>ObjestItem;
         }
     }
     
-    <!--<xsl:call-template name="CommentSummary" />-->
     public class <xsl:value-of select="$DocumentName"/>_Select : DocumentSelect
     {		
         public <xsl:value-of select="$DocumentName"/>_Select() : base(Config.Kernel!, "<xsl:value-of select="Table"/>") { }
@@ -1333,7 +1313,6 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
         <xsl:variable name="TablePartName" select="Name"/>
         <xsl:variable name="TablePartFullName" select="concat($DocumentName, '_', $TablePartName)"/>
     
-    <!--<xsl:call-template name="CommentSummary" />-->
     public class <xsl:value-of select="$TablePartFullName"/>_TablePart : DocumentTablePart
     {
         public <xsl:value-of select="$TablePartFullName"/>_TablePart(<xsl:value-of select="$DocumentName"/>_Objest owner) : base(Config.Kernel!, "<xsl:value-of select="Table"/>",
@@ -1395,10 +1374,10 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
                 <xsl:for-each select="Fields/Field">
                     <xsl:text>fieldValue.Add("</xsl:text>
                     <xsl:value-of select="NameInTable"/><xsl:text>", </xsl:text>
-					<xsl:if test="Type = 'enum'">
-						<xsl:text>(int)</xsl:text>
-					</xsl:if>
-					<xsl:text>record.</xsl:text><xsl:value-of select="Name"/>
+                    <xsl:if test="Type = 'enum'">
+                      <xsl:text>(int)</xsl:text>
+                    </xsl:if>
+                    <xsl:text>record.</xsl:text><xsl:value-of select="Name"/>
                     <xsl:choose>
                         <xsl:when test="Type = 'pointer'">
                             <xsl:text>.UnigueID.UGuid</xsl:text>
@@ -1427,23 +1406,16 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
 
             return copyRecords;
         }
-        <!--<xsl:call-template name="CommentSummary" />-->
+
         public class Record : DocumentTablePartRecord
         {
-            public Record()
-            {
-                <xsl:for-each select="Fields/Field">
-                  <xsl:value-of select="Name"/>
-                  <xsl:text> = </xsl:text>
-                  <xsl:call-template name="DefaultFieldValue" />;
-                </xsl:for-each>
-            }
             <xsl:for-each select="Fields/Field">
               <xsl:text>public </xsl:text>
               <xsl:call-template name="FieldType" />
               <xsl:text> </xsl:text>
               <xsl:value-of select="Name"/>
-              <xsl:text> { get; set; </xsl:text>}
+              <xsl:text> { get; set; } = </xsl:text>
+              <xsl:call-template name="DefaultFieldValue" />;
             </xsl:for-each>
         }
     }
@@ -1466,7 +1438,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Журнали
                </xsl:if>
                <xsl:text>"</xsl:text><xsl:value-of select="Table"/><xsl:text>"</xsl:text>
              </xsl:for-each>},
-			 <xsl:text>new string[] { </xsl:text>
+			       <xsl:text>new string[] { </xsl:text>
              <xsl:for-each select="Configuration/Documents/Document">
                <xsl:if test="position() != 1">
                  <xsl:text>, </xsl:text>
@@ -1481,12 +1453,12 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Журнали
 
             switch (Current.TypeDocument)
             {
-			    <xsl:for-each select="Configuration/Documents/Document">
-					<xsl:text>case </xsl:text>"<xsl:value-of select="Name"/>": return new Документи.<xsl:value-of select="Name"/>_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-				</xsl:for-each>
+                <xsl:for-each select="Configuration/Documents/Document">
+                    <xsl:text>case </xsl:text>"<xsl:value-of select="Name"/>": return new Документи.<xsl:value-of select="Name"/>_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                </xsl:for-each>
             }
 			
-			return null;
+			      return null;
         }
     }
     #endregion
@@ -1513,15 +1485,13 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВі�
     <xsl:for-each select="Configuration/RegistersInformation/RegisterInformation">
        <xsl:variable name="RegisterName" select="Name"/>
     #region REGISTER "<xsl:value-of select="$RegisterName"/>"
-    <!--<xsl:call-template name="CommentSummary" />-->
     public static class <xsl:value-of select="$RegisterName"/>_Const
     {
         public const string TABLE = "<xsl:value-of select="Table"/>";
         <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
         public const string <xsl:value-of select="Name"/> = "<xsl:value-of select="NameInTable"/>";</xsl:for-each>
     }
-	
-    <!--<xsl:call-template name="CommentSummary" />-->
+
     public class <xsl:value-of select="$RegisterName"/>_RecordsSet : RegisterInformationRecordsSet
     {
         public <xsl:value-of select="$RegisterName"/>_RecordsSet() : base(Config.Kernel!, "<xsl:value-of select="Table"/>",
@@ -1578,7 +1548,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВі�
                     <xsl:if test="Type = 'enum'">
                         <xsl:text>(int)</xsl:text>      
                     </xsl:if>
-					<xsl:text>record.</xsl:text><xsl:value-of select="Name"/>
+					          <xsl:text>record.</xsl:text><xsl:value-of select="Name"/>
                     <xsl:if test="Type = 'pointer'">
                     <xsl:text>.UnigueID.UGuid</xsl:text>
                     </xsl:if>
@@ -1594,32 +1564,22 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВі�
             base.BaseDelete(owner);
         }
 
-        <!--<xsl:call-template name="CommentSummary" />-->
         public class Record : RegisterInformationRecord
         {
-            public Record()
-            {
-                <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
-                  <xsl:value-of select="Name"/>
-                  <xsl:text> = </xsl:text>
-                  <xsl:call-template name="DefaultFieldValue" />;
-                </xsl:for-each>
-            }
-        
             <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
               <xsl:text>public </xsl:text>
               <xsl:call-template name="FieldType" />
               <xsl:text> </xsl:text>
               <xsl:value-of select="Name"/>
-              <xsl:text> { get; set; </xsl:text>}
+              <xsl:text> { get; set; } = </xsl:text>
+              <xsl:call-template name="DefaultFieldValue" />;
             </xsl:for-each>
         }
     }
-	
-    <!--<xsl:call-template name="CommentSummary" />-->
+
     public class <xsl:value-of select="$RegisterName"/>_Objest : RegisterInformationObject
     {
-		public <xsl:value-of select="$RegisterName"/>_Objest() : base(Config.Kernel!, "<xsl:value-of select="Table"/>",
+		    public <xsl:value-of select="$RegisterName"/>_Objest() : base(Config.Kernel!, "<xsl:value-of select="Table"/>",
              <xsl:text>new string[] { </xsl:text>
              <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
                <xsl:if test="position() != 1">
@@ -1673,18 +1633,18 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВі�
         public <xsl:value-of select="$RegisterName"/>_Objest Copy()
         {
             <xsl:value-of select="$RegisterName"/>_Objest copy = new <xsl:value-of select="$RegisterName"/>_Objest();
-			copy.New();
+			      copy.New();
             <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
-				<xsl:text>copy.</xsl:text><xsl:value-of select="Name"/><xsl:text> = </xsl:text><xsl:value-of select="Name"/>;
-			</xsl:for-each>
-			return copy;
+              <xsl:text>copy.</xsl:text><xsl:value-of select="Name"/><xsl:text> = </xsl:text><xsl:value-of select="Name"/>;
+            </xsl:for-each>
+            return copy;
         }
 
         public void Delete()
         {
-			base.BaseDelete();
+			      base.BaseDelete();
         }
-                
+
         <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
           <xsl:text>public </xsl:text>
           <xsl:call-template name="FieldType" />
@@ -1779,7 +1739,6 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриНа�
 	    <xsl:variable name="Documents" select="../../Documents"/>
       <xsl:variable name="RegisterName" select="Name"/>
     #region REGISTER "<xsl:value-of select="$RegisterName"/>"
-    <!--<xsl:call-template name="CommentSummary" />-->
     public static class <xsl:value-of select="$RegisterName"/>_Const
     {
         public const string TABLE = "<xsl:value-of select="Table"/>";
@@ -1800,7 +1759,6 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриНа�
         public const string <xsl:value-of select="Name"/> = "<xsl:value-of select="NameInTable"/>";</xsl:for-each>
     }
 	
-    <!--<xsl:call-template name="CommentSummary" />-->
     public class <xsl:value-of select="$RegisterName"/>_RecordsSet : RegisterAccumulationRecordsSet
     {
         public <xsl:value-of select="$RegisterName"/>_RecordsSet() : base(Config.Kernel!, "<xsl:value-of select="Table"/>", "<xsl:value-of select="$RegisterName"/>",
@@ -1879,23 +1837,15 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриНа�
             base.BaseDelete(owner);
         }
         
-        <!--<xsl:call-template name="CommentSummary" />-->
         public class Record : RegisterAccumulationRecord
         {
-            public Record()
-            {
-                <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
-                  <xsl:value-of select="Name"/>
-                  <xsl:text> = </xsl:text>
-                  <xsl:call-template name="DefaultFieldValue" />;
-                </xsl:for-each>
-            }
             <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
               <xsl:text>public </xsl:text>
               <xsl:call-template name="FieldType" />
-              <xsl:text> </xsl:text>
+               <xsl:text> </xsl:text>
               <xsl:value-of select="Name"/>
-              <xsl:text> { get; set; </xsl:text>}
+              <xsl:text> { get; set; } = </xsl:text>
+              <xsl:call-template name="DefaultFieldValue" />;
             </xsl:for-each>
         }
     }
@@ -1904,8 +1854,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриНа�
         <!-- TableParts -->
         <xsl:variable name="TablePartName" select="Name"/>
         <xsl:variable name="TablePartFullName" select="concat($RegisterName, '_', $TablePartName)"/>
-        
-    <!--<xsl:call-template name="CommentSummary" />-->
+    
     public class <xsl:value-of select="$TablePartFullName"/>_TablePart : RegisterAccumulationTablePart
     {
         public <xsl:value-of select="$TablePartFullName"/>_TablePart() : base(Config.Kernel!, "<xsl:value-of select="Table"/>",
@@ -1963,10 +1912,10 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриНа�
                 <xsl:for-each select="Fields/Field">
                     <xsl:text>fieldValue.Add("</xsl:text>
                     <xsl:value-of select="NameInTable"/><xsl:text>", </xsl:text>
-        <xsl:if test="Type = 'enum'">
-            <xsl:text>(int)</xsl:text>
-          </xsl:if>
-        <xsl:text>record.</xsl:text><xsl:value-of select="Name"/>
+                    <xsl:if test="Type = 'enum'">
+                        <xsl:text>(int)</xsl:text>
+                      </xsl:if>
+                    <xsl:text>record.</xsl:text><xsl:value-of select="Name"/>
                     <xsl:choose>
                     <xsl:when test="Type = 'pointer'">
                         <xsl:text>.UnigueID.UGuid</xsl:text>
@@ -1987,20 +1936,13 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриНа�
         
         public class Record : RegisterAccumulationTablePartRecord
         {
-            public Record()
-            {
-                <xsl:for-each select="Fields/Field">
-                  <xsl:value-of select="Name"/>
-                  <xsl:text> = </xsl:text>
-                  <xsl:call-template name="DefaultFieldValue" />;
-                </xsl:for-each>
-            }
             <xsl:for-each select="Fields/Field">
               <xsl:text>public </xsl:text>
               <xsl:call-template name="FieldType" />
               <xsl:text> </xsl:text>
               <xsl:value-of select="Name"/>
-              <xsl:text> { get; set; </xsl:text>}
+              <xsl:text> { get; set; } = </xsl:text>
+              <xsl:call-template name="DefaultFieldValue" />;
             </xsl:for-each>
         }            
     }

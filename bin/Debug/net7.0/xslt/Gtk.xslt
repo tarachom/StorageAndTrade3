@@ -82,7 +82,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники.Т
               <xsl:value-of select="normalize-space(Caption)"/>
               <xsl:text>", new CellRendererText() { Xpad = 4 }, "text", </xsl:text>
               <xsl:value-of select="position() + 1"/>
-              <xsl:text>) { SortColumnId = </xsl:text>
+              <xsl:text>) { MinWidth = 20, Resizable = true, SortColumnId = </xsl:text>
               <xsl:value-of select="position() + 1"/>
               <xsl:if test="Size != '0'">
                 <xsl:text>, FixedWidth = </xsl:text>
@@ -340,12 +340,12 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи.Т
               <xsl:value-of select="normalize-space(Caption)"/>
               <xsl:text>", new CellRendererText() { Xpad = 4 }, "text", </xsl:text>
               <xsl:value-of select="position() + 2"/>
-              <xsl:text>)</xsl:text>
+              <xsl:text>) { MinWidth = 20, Resizable = true</xsl:text>
               <xsl:if test="Size != '0'">
-                <xsl:text> { FixedWidth = </xsl:text>
+                <xsl:text>, FixedWidth = </xsl:text>
                 <xsl:value-of select="Size"/>
-                <xsl:text> } </xsl:text>
-              </xsl:if>); /*<xsl:value-of select="Name"/>*/
+              </xsl:if>
+              <xsl:text> } )</xsl:text>; /*<xsl:value-of select="Name"/>*/
             </xsl:for-each>
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
@@ -548,7 +548,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи.Т
               <xsl:value-of select="normalize-space(Name)"/>
               <xsl:text>", new CellRendererText() { Xpad = 4 }, "text", </xsl:text>
               <xsl:value-of select="position() + 3"/> <!-- УВАГА! Коефіціент зміщення нумерації колонок -->
-              <xsl:text>)</xsl:text>); /*<xsl:value-of select="Name"/>*/
+              <xsl:text>) { MinWidth = 20, Resizable = true } )</xsl:text>; /*<xsl:value-of select="Name"/>*/
             </xsl:for-each>
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
@@ -744,7 +744,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВі�
               <xsl:value-of select="normalize-space(Caption)"/>
               <xsl:text>", new CellRendererText() { Xpad = 4 }, "text", </xsl:text>
               <xsl:value-of select="position() + 2"/>
-              <xsl:text>) { SortColumnId = </xsl:text>
+              <xsl:text>) { MinWidth = 20, Resizable = true, SortColumnId = </xsl:text>
               <xsl:value-of select="position() + 2"/>
               <xsl:if test="Size != '0'">
                 <xsl:text>, FixedWidth = </xsl:text>

@@ -617,7 +617,7 @@ limitations under the License.
                 </xsl:choose>
               </xsl:when>
 			  
-			  <xsl:when test="Type/DataType = 'bytea'">				  
+			        <xsl:when test="Type/DataType = 'bytea'">				  
                 <xsl:choose>
                     <xsl:when test="$ReplacementColumn = 'yes'">
 
@@ -719,11 +719,11 @@ limitations under the License.
               <xsl:value-of select="DataType"/>
               <xsl:text>;</xsl:text>
             </sql>
-			<xsl:if test="Index = '1'">
-				<sql>
-					<xsl:value-of select="concat('CREATE INDEX IF NOT EXISTS ', $TableName, '_', NameInTable, '_idx ON ', $TableName, ' (', NameInTable, ');')"/>
-				</sql>
-			</xsl:if>
+            <xsl:if test="Index = '1'">
+              <sql>
+                <xsl:value-of select="concat('CREATE INDEX IF NOT EXISTS ', $TableName, '_', NameInTable, '_idx ON ', $TableName, ' (', NameInTable, ');')"/>
+              </sql>
+            </xsl:if>
           </xsl:for-each>
 
         </xsl:when>
@@ -775,19 +775,19 @@ limitations under the License.
                 <xsl:value-of select="$TableName"/>
                 <xsl:text> (</xsl:text>
                 <xsl:text>uid uuid NOT NULL, </xsl:text>
-				<xsl:if test="$TableType = 'Document'">
-					<xsl:text>spend bool NOT NULL, </xsl:text>
-					<xsl:text>spend_date timestamp without time zone NOT NULL, </xsl:text>
-				</xsl:if>
-				<xsl:if test="$TableType = 'RegisterInformation'">
-					<xsl:text>period timestamp without time zone NOT NULL, </xsl:text>
-					<xsl:text>owner uuid NOT NULL, </xsl:text>
-				</xsl:if>
-				<xsl:if test="$TableType = 'RegisterAccumulation'">
-					<xsl:text>period timestamp without time zone NOT NULL, </xsl:text>
-					<xsl:text>income bool NOT NULL, </xsl:text>
-					<xsl:text>owner uuid NOT NULL, </xsl:text>
-				</xsl:if>
+                <xsl:if test="$TableType = 'Document'">
+                  <xsl:text>spend bool NOT NULL, </xsl:text>
+                  <xsl:text>spend_date timestamp without time zone NOT NULL, </xsl:text>
+                </xsl:if>
+                <xsl:if test="$TableType = 'RegisterInformation'">
+                  <xsl:text>period timestamp without time zone NOT NULL, </xsl:text>
+                  <xsl:text>owner uuid NOT NULL, </xsl:text>
+                </xsl:if>
+                <xsl:if test="$TableType = 'RegisterAccumulation'">
+                  <xsl:text>period timestamp without time zone NOT NULL, </xsl:text>
+                  <xsl:text>income bool NOT NULL, </xsl:text>
+                  <xsl:text>owner uuid NOT NULL, </xsl:text>
+                </xsl:if>
                 <xsl:for-each select="FieldCreate">
                   <xsl:text> "</xsl:text>
                   <xsl:value-of select="NameInTable"/>
@@ -797,35 +797,35 @@ limitations under the License.
                 </xsl:for-each>
                 <xsl:text>PRIMARY KEY(uid));</xsl:text>
               </sql>
-			  <xsl:for-each select="FieldCreate[Index = '1']">
-				  <sql>
-					  <xsl:value-of select="concat('CREATE INDEX IF NOT EXISTS ', $TableName, '_', NameInTable, '_idx ON ', $TableName, ' (', NameInTable, ');')"/>
-				  </sql>
-			  </xsl:for-each>
-			  <xsl:if test="$TableType = 'Document'">
-				 <sql>
-					 <xsl:value-of select="concat('CREATE INDEX IF NOT EXISTS ', $TableName, '_spend_idx ON ', $TableName, ' (spend);')"/>
-				 </sql>
-			  </xsl:if>
-			  <xsl:if test="$TableType = 'RegisterInformation'">
-				 <sql>
-				    <xsl:value-of select="concat('CREATE INDEX IF NOT EXISTS ', $TableName, '_period_idx ON ', $TableName, ' (period);')"/>
-				 </sql>
-				 <sql>
-					<xsl:value-of select="concat('CREATE INDEX IF NOT EXISTS ', $TableName, '_owner_idx ON ', $TableName, ' (owner);')"/>
-				 </sql>
-			  </xsl:if>
-			  <xsl:if test="$TableType = 'RegisterAccumulation'">
-				 <sql>
-				    <xsl:value-of select="concat('CREATE INDEX IF NOT EXISTS ', $TableName, '_period_idx ON ', $TableName, ' (period);')"/>
-				 </sql>
-				 <sql>
-					<xsl:value-of select="concat('CREATE INDEX IF NOT EXISTS ', $TableName, '_income_idx ON ', $TableName, ' (income);')"/>
-				 </sql>
-				 <sql>
-					<xsl:value-of select="concat('CREATE INDEX IF NOT EXISTS ', $TableName, '_owner_idx ON ', $TableName, ' (owner);')"/>
-				 </sql>
-			  </xsl:if>
+              <xsl:for-each select="FieldCreate[Index = '1']">
+                <sql>
+                  <xsl:value-of select="concat('CREATE INDEX IF NOT EXISTS ', $TableName, '_', NameInTable, '_idx ON ', $TableName, ' (', NameInTable, ');')"/>
+                </sql>
+              </xsl:for-each>
+              <xsl:if test="$TableType = 'Document'">
+              <sql>
+                <xsl:value-of select="concat('CREATE INDEX IF NOT EXISTS ', $TableName, '_spend_idx ON ', $TableName, ' (spend);')"/>
+              </sql>
+              </xsl:if>
+              <xsl:if test="$TableType = 'RegisterInformation'">
+              <sql>
+                  <xsl:value-of select="concat('CREATE INDEX IF NOT EXISTS ', $TableName, '_period_idx ON ', $TableName, ' (period);')"/>
+              </sql>
+              <sql>
+                <xsl:value-of select="concat('CREATE INDEX IF NOT EXISTS ', $TableName, '_owner_idx ON ', $TableName, ' (owner);')"/>
+              </sql>
+              </xsl:if>
+              <xsl:if test="$TableType = 'RegisterAccumulation'">
+              <sql>
+                  <xsl:value-of select="concat('CREATE INDEX IF NOT EXISTS ', $TableName, '_period_idx ON ', $TableName, ' (period);')"/>
+              </sql>
+              <sql>
+                <xsl:value-of select="concat('CREATE INDEX IF NOT EXISTS ', $TableName, '_income_idx ON ', $TableName, ' (income);')"/>
+              </sql>
+              <sql>
+                <xsl:value-of select="concat('CREATE INDEX IF NOT EXISTS ', $TableName, '_owner_idx ON ', $TableName, ' (owner);')"/>
+              </sql>
+              </xsl:if>
             </xsl:for-each>
 
           </xsl:when>
@@ -878,11 +878,11 @@ limitations under the License.
                   </xsl:for-each>
                   <xsl:text>PRIMARY KEY(uid));</xsl:text>
                 </sql>
-				<xsl:for-each select="FieldCreate[Index = '1']">
-				  <sql>
-					  <xsl:value-of select="concat('CREATE INDEX IF NOT EXISTS ', $TabularParts_TableName, '_', NameInTable, '_idx ON ', $TabularParts_TableName, ' (', NameInTable, ');')"/>
-				  </sql>
-			    </xsl:for-each>
+                <xsl:for-each select="FieldCreate[Index = '1']">
+                  <sql>
+                    <xsl:value-of select="concat('CREATE INDEX IF NOT EXISTS ', $TabularParts_TableName, '_', NameInTable, '_idx ON ', $TabularParts_TableName, ' (', NameInTable, ');')"/>
+                  </sql>
+                </xsl:for-each>
                 <xsl:if test="$IsCreateOwnerField = 'yes'">
                   <sql>
 					          <xsl:value-of select="concat('CREATE INDEX IF NOT EXISTS ', $TabularParts_TableName, '_owner_idx ON ', $TabularParts_TableName, ' (owner);')"/>
