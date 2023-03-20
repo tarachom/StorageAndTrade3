@@ -5,7 +5,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>15.03.2023 21:50:59</DateTimeSave>
+  <DateTimeSave>20.03.2023 12:57:54</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -4626,6 +4626,33 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
             </Field>
           </Fields>
         </TabularList>
+        <TabularList>
+          <Name>ЗаписиШвидкийВибір</Name>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>Назва</Name>
+              <Caption>Назва</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>Дата</Name>
+              <Caption>Дата</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <Type>datetime</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+          </Fields>
+        </TabularList>
       </TabularLists>
       <TriggerFunctions>
         <BeforeSave>
@@ -8060,6 +8087,14 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               </Desc>
               <IsIndex>0</IsIndex>
             </Field>
+            <Field>
+              <Name>Партія</Name>
+              <NameInTable>col_a4</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ПартіяТоварівКомпозит</Pointer>
+              <Desc>Партія з якої потрібно списати товар</Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
           </Fields>
         </TablePart>
       </TabularParts>
@@ -9612,6 +9647,14 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <Type>numeric</Type>
               <Desc>
               </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+            <Field>
+              <Name>Партія</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ПартіяТоварівКомпозит</Pointer>
+              <Desc>Партія з якої переміщаються товари</Desc>
               <IsIndex>0</IsIndex>
             </Field>
           </Fields>
@@ -12549,6 +12592,14 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               </Desc>
               <IsIndex>0</IsIndex>
             </Field>
+            <Field>
+              <Name>Партія</Name>
+              <NameInTable>col_a6</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ПартіяТоварівКомпозит</Pointer>
+              <Desc>Партія</Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
           </Fields>
         </TablePart>
       </TabularParts>
@@ -12882,6 +12933,14 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <Type>numeric</Type>
               <Desc>
               </Desc>
+              <IsIndex>0</IsIndex>
+            </Field>
+            <Field>
+              <Name>Партія</Name>
+              <NameInTable>col_a3</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ПартіяТоварівКомпозит</Pointer>
+              <Desc>Партія з якої списується товар</Desc>
               <IsIndex>0</IsIndex>
             </Field>
           </Fields>

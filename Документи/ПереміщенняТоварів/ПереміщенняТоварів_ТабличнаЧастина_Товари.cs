@@ -46,7 +46,8 @@ namespace StorageAndTrade
             Серія,
             КількістьУпаковок,
             Пакування,
-            Кількість
+            Кількість,
+            Партія
         }
 
         ListStore Store = new ListStore(
@@ -56,7 +57,8 @@ namespace StorageAndTrade
             typeof(string),   //Серія
             typeof(int),      //КількістьУпаковок
             typeof(string),   //Пакування
-            typeof(float)     //Кількість
+            typeof(float),    //Кількість
+            typeof(string)    //Партія
         );
 
         List<Запис> Записи = new List<Запис>();
@@ -71,6 +73,7 @@ namespace StorageAndTrade
             public int КількістьУпаковок { get; set; } = 1;
             public ПакуванняОдиниціВиміру_Pointer Пакування { get; set; } = new ПакуванняОдиниціВиміру_Pointer();
             public decimal Кількість { get; set; } = 1;
+            public ПартіяТоварівКомпозит_Pointer Партія { get; set; } = new ПартіяТоварівКомпозит_Pointer();
 
             public object[] ToArray()
             {
@@ -82,7 +85,8 @@ namespace StorageAndTrade
                     Серія.Назва,
                     КількістьУпаковок,
                     Пакування.Назва,
-                    (float)Кількість
+                    (float)Кількість,
+                    Партія.Назва
                 };
             }
 
@@ -96,7 +100,8 @@ namespace StorageAndTrade
                     Серія = запис.Серія,
                     КількістьУпаковок = запис.КількістьУпаковок,
                     Пакування = запис.Пакування,
-                    Кількість = запис.Кількість
+                    Кількість = запис.Кількість,
+                    Партія = запис.Партія
                 };
             }
 
@@ -131,6 +136,10 @@ namespace StorageAndTrade
             public static void ПісляЗміни_Пакування(Запис запис)
             {
                 запис.Пакування.GetPresentation();
+            }
+            public static void ПісляЗміни_Партія(Запис запис)
+            {
+                запис.Партія.GetPresentation();
             }
         }
 
@@ -254,6 +263,23 @@ namespace StorageAndTrade
                                 page.LoadRecords();
                                 break;
                             }
+                        case Columns.Партія:
+                            {
+                                ПартіяТоварівКомпозит_ШвидкийВибір page = new ПартіяТоварівКомпозит_ШвидкийВибір() { PopoverParent = PopoverSmallSelect, DirectoryPointerItem = запис.Партія };
+                                page.CallBack_OnSelectPointer = (ПартіяТоварівКомпозит_Pointer selectPointer) =>
+                                {
+                                    запис.Партія = selectPointer;
+                                    Запис.ПісляЗміни_Партія(запис);
+
+                                    Store.SetValues(iter, запис.ToArray());
+                                };
+
+                                PopoverSmallSelect.Add(page);
+                                PopoverSmallSelect.ShowAll();
+
+                                page.LoadRecords();
+                                break;
+                            }
                     }
                 }
             }
@@ -311,6 +337,12 @@ namespace StorageAndTrade
                 querySelect.Joins.Add(
                     new Join(ПакуванняОдиниціВиміру_Const.TABLE, ПереміщенняТоварів_Товари_TablePart.Пакування, querySelect.Table));
 
+                //JOIN Партія
+                querySelect.FieldAndAlias.Add(
+                    new NameValue<string>(ПартіяТоварівКомпозит_Const.TABLE + "." + ПартіяТоварівКомпозит_Const.Назва, "Партія"));
+                querySelect.Joins.Add(
+                    new Join(ПартіяТоварівКомпозит_Const.TABLE, ПереміщенняТоварів_Товари_TablePart.Партія, querySelect.Table));
+
                 //ORDER
                 querySelect.Order.Add(ПереміщенняТоварів_Товари_TablePart.НомерРядка, SelectOrder.ASC);
 
@@ -326,6 +358,7 @@ namespace StorageAndTrade
                     record.ХарактеристикаНоменклатури.Назва = JoinValue[uid]["Характеристика"];
                     record.Серія.Назва = JoinValue[uid]["Серія"];
                     record.Пакування.Назва = JoinValue[uid]["Пакування"];
+                    record.Партія.Назва = JoinValue[uid]["Партія"];
 
                     Запис запис = new Запис
                     {
@@ -336,7 +369,8 @@ namespace StorageAndTrade
                         Серія = record.Серія,
                         КількістьУпаковок = record.КількістьУпаковок,
                         Пакування = record.Пакування,
-                        Кількість = record.Кількість
+                        Кількість = record.Кількість,
+                        Партія = record.Партія
                     };
 
                     Записи.Add(запис);
@@ -365,6 +399,7 @@ namespace StorageAndTrade
                     record.КількістьУпаковок = запис.КількістьУпаковок;
                     record.Пакування = запис.Пакування;
                     record.Кількість = запис.Кількість;
+                    record.Партія = запис.Партія;
 
                     ПереміщенняТоварів_Objest.Товари_TablePart.Records.Add(record);
                 }
@@ -378,11 +413,11 @@ namespace StorageAndTrade
         void AddColumn()
         {
             //НомерРядка
-            TreeViewGrid.AppendColumn(new TreeViewColumn("№", new CellRendererText(), "text", (int)Columns.НомерРядка) { Resizable = true, MinWidth =  30 });
+            TreeViewGrid.AppendColumn(new TreeViewColumn("№", new CellRendererText(), "text", (int)Columns.НомерРядка) { Resizable = true, MinWidth = 30 });
 
             //Номенклатура
             {
-                TreeViewColumn Номенклатура = new TreeViewColumn("Номенклатура", new CellRendererText(), "text", (int)Columns.Номенклатура) { Resizable = true, MinWidth =  200 };
+                TreeViewColumn Номенклатура = new TreeViewColumn("Номенклатура", new CellRendererText(), "text", (int)Columns.Номенклатура) { Resizable = true, MinWidth = 200 };
                 Номенклатура.Data.Add("Column", Columns.Номенклатура);
 
                 TreeViewGrid.AppendColumn(Номенклатура);
@@ -390,7 +425,7 @@ namespace StorageAndTrade
 
             //Характеристика
             {
-                TreeViewColumn Характеристика = new TreeViewColumn("Характеристика", new CellRendererText(), "text", (int)Columns.Характеристика) { Resizable = true, MinWidth =  200 };
+                TreeViewColumn Характеристика = new TreeViewColumn("Характеристика", new CellRendererText(), "text", (int)Columns.Характеристика) { Resizable = true, MinWidth = 200 };
                 Характеристика.Visible = Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const;
                 Характеристика.Data.Add("Column", Columns.Характеристика);
 
@@ -399,7 +434,7 @@ namespace StorageAndTrade
 
             //Серія
             {
-                TreeViewColumn Серія = new TreeViewColumn("Серія", new CellRendererText(), "text", (int)Columns.Серія) { Resizable = true, MinWidth =  200 };
+                TreeViewColumn Серія = new TreeViewColumn("Серія", new CellRendererText(), "text", (int)Columns.Серія) { Resizable = true, MinWidth = 200 };
                 Серія.Visible = Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const;
                 Серія.Data.Add("Column", Columns.Серія);
 
@@ -412,14 +447,14 @@ namespace StorageAndTrade
                 КількістьУпаковок.Edited += TextChanged;
                 КількістьУпаковок.Data.Add("Column", (int)Columns.КількістьУпаковок);
 
-                TreeViewColumn Column = new TreeViewColumn("Пак", КількістьУпаковок, "text", (int)Columns.КількістьУпаковок) { Resizable = true, MinWidth =  50 };
+                TreeViewColumn Column = new TreeViewColumn("Пак", КількістьУпаковок, "text", (int)Columns.КількістьУпаковок) { Resizable = true, MinWidth = 50 };
                 Column.SetCellDataFunc(КількістьУпаковок, new TreeCellDataFunc(NumericCellDataFunc));
                 TreeViewGrid.AppendColumn(Column);
             }
 
             //Пакування
             {
-                TreeViewColumn Пакування = new TreeViewColumn("Пакування", new CellRendererText(), "text", (int)Columns.Пакування) { Resizable = true, MinWidth =  100 };
+                TreeViewColumn Пакування = new TreeViewColumn("Пакування", new CellRendererText(), "text", (int)Columns.Пакування) { Resizable = true, MinWidth = 100 };
                 Пакування.Data.Add("Column", Columns.Пакування);
 
                 TreeViewGrid.AppendColumn(Пакування);
@@ -431,9 +466,17 @@ namespace StorageAndTrade
                 Кількість.Edited += TextChanged;
                 Кількість.Data.Add("Column", (int)Columns.Кількість);
 
-                TreeViewColumn Column = new TreeViewColumn("Кількість", Кількість, "text", (int)Columns.Кількість) { Resizable = true, MinWidth =  100 };
+                TreeViewColumn Column = new TreeViewColumn("Кількість", Кількість, "text", (int)Columns.Кількість) { Resizable = true, MinWidth = 100 };
                 Column.SetCellDataFunc(Кількість, new TreeCellDataFunc(NumericCellDataFunc));
                 TreeViewGrid.AppendColumn(Column);
+            }
+            
+            //Партія
+            {
+                TreeViewColumn Партія = new TreeViewColumn("Партія", new CellRendererText(), "text", (int)Columns.Партія) { Resizable = true, MinWidth = 150 };
+                Партія.Data.Add("Column", Columns.Партія);
+
+                TreeViewGrid.AppendColumn(Партія);
             }
 
             //Колонка пустишка для заповнення вільного простору

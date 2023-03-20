@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 15.03.2023 21:50:59
+ * Дата конфігурації: 20.03.2023 12:57:54
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -12144,6 +12144,14 @@ namespace StorageAndTrade_1_0.Документи
                             xmlWriter.WriteValue(record.Скидка);
                           
                         xmlWriter.WriteEndElement(); //Скидка
+                        xmlWriter.WriteStartElement("Партія");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.ПартіяТоварівКомпозит");
+                                xmlWriter.WriteAttributeString("uid", record.Партія.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Партія.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Партія
                         xmlWriter.WriteEndElement(); //row
                     }
 
@@ -12455,7 +12463,7 @@ namespace StorageAndTrade_1_0.Документи
     public class РеалізаціяТоварівТаПослуг_Товари_TablePart : DocumentTablePart
     {
         public РеалізаціяТоварівТаПослуг_Товари_TablePart(РеалізаціяТоварівТаПослуг_Objest owner) : base(Config.Kernel!, "tab_a37",
-             new string[] { "col_a1", "col_d2", "col_d3", "col_a2", "col_d4", "col_d5", "col_d6", "col_d7", "col_d8", "col_d9", "col_e1", "col_e2", "col_a3", "col_e3" }) 
+             new string[] { "col_a1", "col_d2", "col_d3", "col_a2", "col_d4", "col_d5", "col_d6", "col_d7", "col_d8", "col_d9", "col_e1", "col_e2", "col_a3", "col_e3", "col_a4" }) 
         {
             if (owner == null) throw new Exception("owner null");
             
@@ -12477,6 +12485,7 @@ namespace StorageAndTrade_1_0.Документи
         public const string ЗамовленняКлієнта = "col_e2";
         public const string РахунокФактура = "col_a3";
         public const string Скидка = "col_e3";
+        public const string Партія = "col_a4";
 
         public РеалізаціяТоварівТаПослуг_Objest Owner { get; private set; }
         
@@ -12506,6 +12515,7 @@ namespace StorageAndTrade_1_0.Документи
                 record.ЗамовленняКлієнта = new Документи.ЗамовленняКлієнта_Pointer(fieldValue["col_e2"]);
                 record.РахунокФактура = new Документи.РахунокФактура_Pointer(fieldValue["col_a3"]);
                 record.Скидка = (fieldValue["col_e3"] != DBNull.Value) ? (decimal)fieldValue["col_e3"] : 0;
+                record.Партія = new Довідники.ПартіяТоварівКомпозит_Pointer(fieldValue["col_a4"]);
                 
                 Records.Add(record);
             }
@@ -12538,6 +12548,7 @@ namespace StorageAndTrade_1_0.Документи
                 fieldValue.Add("col_e2", record.ЗамовленняКлієнта.UnigueID.UGuid);
                 fieldValue.Add("col_a3", record.РахунокФактура.UnigueID.UGuid);
                 fieldValue.Add("col_e3", record.Скидка);
+                fieldValue.Add("col_a4", record.Партія.UnigueID.UGuid);
                 
                 base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
@@ -12577,6 +12588,7 @@ namespace StorageAndTrade_1_0.Документи
             public Документи.ЗамовленняКлієнта_Pointer ЗамовленняКлієнта { get; set; } = new Документи.ЗамовленняКлієнта_Pointer();
             public Документи.РахунокФактура_Pointer РахунокФактура { get; set; } = new Документи.РахунокФактура_Pointer();
             public decimal Скидка { get; set; } = 0;
+            public Довідники.ПартіяТоварівКомпозит_Pointer Партія { get; set; } = new Довідники.ПартіяТоварівКомпозит_Pointer();
             
         }
     }
@@ -14398,6 +14410,14 @@ namespace StorageAndTrade_1_0.Документи
                             xmlWriter.WriteValue(record.Кількість);
                           
                         xmlWriter.WriteEndElement(); //Кількість
+                        xmlWriter.WriteStartElement("Партія");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.ПартіяТоварівКомпозит");
+                                xmlWriter.WriteAttributeString("uid", record.Партія.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Партія.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Партія
                         xmlWriter.WriteEndElement(); //row
                     }
 
@@ -14649,7 +14669,7 @@ namespace StorageAndTrade_1_0.Документи
     public class ПереміщенняТоварів_Товари_TablePart : DocumentTablePart
     {
         public ПереміщенняТоварів_Товари_TablePart(ПереміщенняТоварів_Objest owner) : base(Config.Kernel!, "tab_a50",
-             new string[] { "col_b8", "col_b3", "col_b4", "col_a1", "col_b5", "col_b6", "col_b7" }) 
+             new string[] { "col_b8", "col_b3", "col_b4", "col_a1", "col_b5", "col_b6", "col_b7", "col_a2" }) 
         {
             if (owner == null) throw new Exception("owner null");
             
@@ -14664,6 +14684,7 @@ namespace StorageAndTrade_1_0.Документи
         public const string Пакування = "col_b5";
         public const string КількістьУпаковок = "col_b6";
         public const string Кількість = "col_b7";
+        public const string Партія = "col_a2";
 
         public ПереміщенняТоварів_Objest Owner { get; private set; }
         
@@ -14686,6 +14707,7 @@ namespace StorageAndTrade_1_0.Документи
                 record.Пакування = new Довідники.ПакуванняОдиниціВиміру_Pointer(fieldValue["col_b5"]);
                 record.КількістьУпаковок = (fieldValue["col_b6"] != DBNull.Value) ? (int)fieldValue["col_b6"] : 0;
                 record.Кількість = (fieldValue["col_b7"] != DBNull.Value) ? (decimal)fieldValue["col_b7"] : 0;
+                record.Партія = new Довідники.ПартіяТоварівКомпозит_Pointer(fieldValue["col_a2"]);
                 
                 Records.Add(record);
             }
@@ -14711,6 +14733,7 @@ namespace StorageAndTrade_1_0.Документи
                 fieldValue.Add("col_b5", record.Пакування.UnigueID.UGuid);
                 fieldValue.Add("col_b6", record.КількістьУпаковок);
                 fieldValue.Add("col_b7", record.Кількість);
+                fieldValue.Add("col_a2", record.Партія.UnigueID.UGuid);
                 
                 base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
@@ -14743,6 +14766,7 @@ namespace StorageAndTrade_1_0.Документи
             public Довідники.ПакуванняОдиниціВиміру_Pointer Пакування { get; set; } = new Довідники.ПакуванняОдиниціВиміру_Pointer();
             public int КількістьУпаковок { get; set; } = 0;
             public decimal Кількість { get; set; } = 0;
+            public Довідники.ПартіяТоварівКомпозит_Pointer Партія { get; set; } = new Довідники.ПартіяТоварівКомпозит_Pointer();
             
         }
     }
@@ -18948,6 +18972,14 @@ namespace StorageAndTrade_1_0.Документи
                             xmlWriter.WriteValue(record.Сума);
                           
                         xmlWriter.WriteEndElement(); //Сума
+                        xmlWriter.WriteStartElement("Партія");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.ПартіяТоварівКомпозит");
+                                xmlWriter.WriteAttributeString("uid", record.Партія.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Партія.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Партія
                         xmlWriter.WriteEndElement(); //row
                     }
 
@@ -19159,7 +19191,7 @@ namespace StorageAndTrade_1_0.Документи
     public class ПсуванняТоварів_Товари_TablePart : DocumentTablePart
     {
         public ПсуванняТоварів_Товари_TablePart(ПсуванняТоварів_Objest owner) : base(Config.Kernel!, "tab_a95",
-             new string[] { "col_a3", "col_b2", "col_b3", "col_a1", "col_a4", "col_a5", "col_b4", "col_b5", "col_a2" }) 
+             new string[] { "col_a3", "col_b2", "col_b3", "col_a1", "col_a4", "col_a5", "col_b4", "col_b5", "col_a2", "col_a6" }) 
         {
             if (owner == null) throw new Exception("owner null");
             
@@ -19176,6 +19208,7 @@ namespace StorageAndTrade_1_0.Документи
         public const string Кількість = "col_b4";
         public const string Ціна = "col_b5";
         public const string Сума = "col_a2";
+        public const string Партія = "col_a6";
 
         public ПсуванняТоварів_Objest Owner { get; private set; }
         
@@ -19200,6 +19233,7 @@ namespace StorageAndTrade_1_0.Документи
                 record.Кількість = (fieldValue["col_b4"] != DBNull.Value) ? (decimal)fieldValue["col_b4"] : 0;
                 record.Ціна = (fieldValue["col_b5"] != DBNull.Value) ? (decimal)fieldValue["col_b5"] : 0;
                 record.Сума = (fieldValue["col_a2"] != DBNull.Value) ? (decimal)fieldValue["col_a2"] : 0;
+                record.Партія = new Довідники.ПартіяТоварівКомпозит_Pointer(fieldValue["col_a6"]);
                 
                 Records.Add(record);
             }
@@ -19227,6 +19261,7 @@ namespace StorageAndTrade_1_0.Документи
                 fieldValue.Add("col_b4", record.Кількість);
                 fieldValue.Add("col_b5", record.Ціна);
                 fieldValue.Add("col_a2", record.Сума);
+                fieldValue.Add("col_a6", record.Партія.UnigueID.UGuid);
                 
                 base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
@@ -19261,6 +19296,7 @@ namespace StorageAndTrade_1_0.Документи
             public decimal Кількість { get; set; } = 0;
             public decimal Ціна { get; set; } = 0;
             public decimal Сума { get; set; } = 0;
+            public Довідники.ПартіяТоварівКомпозит_Pointer Партія { get; set; } = new Довідники.ПартіяТоварівКомпозит_Pointer();
             
         }
     }
@@ -19459,6 +19495,14 @@ namespace StorageAndTrade_1_0.Документи
                             xmlWriter.WriteValue(record.Сума);
                           
                         xmlWriter.WriteEndElement(); //Сума
+                        xmlWriter.WriteStartElement("Партія");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.ПартіяТоварівКомпозит");
+                                xmlWriter.WriteAttributeString("uid", record.Партія.UnigueID.ToString());
+                                xmlWriter.WriteString(record.Партія.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Партія
                         xmlWriter.WriteEndElement(); //row
                     }
 
@@ -19675,7 +19719,7 @@ namespace StorageAndTrade_1_0.Документи
     public class ВнутрішнєСпоживанняТоварів_Товари_TablePart : DocumentTablePart
     {
         public ВнутрішнєСпоживанняТоварів_Товари_TablePart(ВнутрішнєСпоживанняТоварів_Objest owner) : base(Config.Kernel!, "tab_b08",
-             new string[] { "col_a1", "col_d2", "col_d3", "col_a2", "col_d4", "col_d5", "col_d6", "col_d8", "col_d9" }) 
+             new string[] { "col_a1", "col_d2", "col_d3", "col_a2", "col_d4", "col_d5", "col_d6", "col_d8", "col_d9", "col_a3" }) 
         {
             if (owner == null) throw new Exception("owner null");
             
@@ -19692,6 +19736,7 @@ namespace StorageAndTrade_1_0.Документи
         public const string Кількість = "col_d6";
         public const string Ціна = "col_d8";
         public const string Сума = "col_d9";
+        public const string Партія = "col_a3";
 
         public ВнутрішнєСпоживанняТоварів_Objest Owner { get; private set; }
         
@@ -19716,6 +19761,7 @@ namespace StorageAndTrade_1_0.Документи
                 record.Кількість = (fieldValue["col_d6"] != DBNull.Value) ? (decimal)fieldValue["col_d6"] : 0;
                 record.Ціна = (fieldValue["col_d8"] != DBNull.Value) ? (decimal)fieldValue["col_d8"] : 0;
                 record.Сума = (fieldValue["col_d9"] != DBNull.Value) ? (decimal)fieldValue["col_d9"] : 0;
+                record.Партія = new Довідники.ПартіяТоварівКомпозит_Pointer(fieldValue["col_a3"]);
                 
                 Records.Add(record);
             }
@@ -19743,6 +19789,7 @@ namespace StorageAndTrade_1_0.Документи
                 fieldValue.Add("col_d6", record.Кількість);
                 fieldValue.Add("col_d8", record.Ціна);
                 fieldValue.Add("col_d9", record.Сума);
+                fieldValue.Add("col_a3", record.Партія.UnigueID.UGuid);
                 
                 base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
@@ -19777,6 +19824,7 @@ namespace StorageAndTrade_1_0.Документи
             public decimal Кількість { get; set; } = 0;
             public decimal Ціна { get; set; } = 0;
             public decimal Сума { get; set; } = 0;
+            public Довідники.ПартіяТоварівКомпозит_Pointer Партія { get; set; } = new Довідники.ПартіяТоварівКомпозит_Pointer();
             
         }
     }

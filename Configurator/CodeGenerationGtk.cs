@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 15.03.2023 21:50:59
+ * Дата конфігурації: 20.03.2023 12:57:54
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон Gtk.xslt
@@ -4441,6 +4441,98 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                         Назва = cur.Fields?[ПартіяТоварівКомпозит_Const.Назва]?.ToString() ?? "", /**/
                         Дата = cur.Fields?[ПартіяТоварівКомпозит_Const.Дата]?.ToString() ?? "", /**/
                         ТипДокументу = Перелічення.ПсевдонімиПерелічення.ТипДокументуПартіяТоварівКомпозит_Alias( ((Перелічення.ТипДокументуПартіяТоварівКомпозит)(cur.Fields?[ПартіяТоварівКомпозит_Const.ТипДокументу]! != DBNull.Value ? cur.Fields?[ПартіяТоварівКомпозит_Const.ТипДокументу]! : 0)) ) /**/
+                        
+                    };
+
+                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                    CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
+
+                    if (DirectoryPointerItem != null || SelectPointerItem != null)
+                    {
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+
+                        if (Record.ID == UidSelect)
+                            SelectPath = CurrentPath;
+                    }
+                }
+            }
+        }
+    }
+	    
+    public class ПартіяТоварівКомпозит_ЗаписиШвидкийВибір
+    {
+        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string ID = "";
+        
+        string Назва = "";
+        string Дата = "";
+
+        Array ToArray()
+        {
+            return new object[] { new Gdk.Pixbuf(Image), ID 
+            /* */ , Назва, Дата };
+        }
+
+        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */
+            , typeof(string) /* Назва */
+            , typeof(string) /* Дата */
+            );
+
+        public static void AddColumns(TreeView treeView)
+        {
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
+            /* */
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Дата*/
+            
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
+        }
+
+        public static List<Where> Where { get; set; } = new List<Where>();
+
+        public static Довідники.ПартіяТоварівКомпозит_Pointer? DirectoryPointerItem { get; set; }
+        public static Довідники.ПартіяТоварівКомпозит_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
+        public static TreePath? SelectPath;
+        public static TreePath? CurrentPath;
+
+        public static void LoadRecords()
+        {
+            Store.Clear();
+            SelectPath = FirstPath = null;
+
+            Довідники.ПартіяТоварівКомпозит_Select ПартіяТоварівКомпозит_Select = new Довідники.ПартіяТоварівКомпозит_Select();
+            ПартіяТоварівКомпозит_Select.QuerySelect.Field.AddRange(
+                new string[]
+                {
+                    Довідники.ПартіяТоварівКомпозит_Const.Назва /* 1 */
+                    , Довідники.ПартіяТоварівКомпозит_Const.Дата /* 2 */
+                    
+                });
+
+            /* Where */
+            ПартіяТоварівКомпозит_Select.QuerySelect.Where = Where;
+
+            
+
+            /* SELECT */
+            ПартіяТоварівКомпозит_Select.Select();
+            while (ПартіяТоварівКомпозит_Select.MoveNext())
+            {
+                Довідники.ПартіяТоварівКомпозит_Pointer? cur = ПартіяТоварівКомпозит_Select.Current;
+
+                if (cur != null)
+                {
+                    ПартіяТоварівКомпозит_ЗаписиШвидкийВибір Record = new ПартіяТоварівКомпозит_ЗаписиШвидкийВибір
+                    {
+                        ID = cur.UnigueID.ToString(),
+                        Назва = cur.Fields?[ПартіяТоварівКомпозит_Const.Назва]?.ToString() ?? "", /**/
+                        Дата = cur.Fields?[ПартіяТоварівКомпозит_Const.Дата]?.ToString() ?? "" /**/
                         
                     };
 
