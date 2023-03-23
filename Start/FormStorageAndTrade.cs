@@ -178,6 +178,9 @@ namespace StorageAndTrade
                 //Затримка на 1 сек
                 Thread.Sleep(1000);
             }
+
+            //Закрити поточну сесію
+            Config.Kernel!.DataBase.SpetialTableActiveUsersCloseSession(KernelSession);
         }
 
         void UpdateSession()
