@@ -31,6 +31,7 @@ namespace StorageAndTrade
     class СкладськіКомірки_Папки_Елемент : VBox
     {
         public СкладськіКомірки_Папки_Дерево? PageList { get; set; }
+        public System.Action<СкладськіКомірки_Папки_Pointer>? CallBack_OnSelectPointer { get; set; }
 
         public bool IsNew { get; set; } = true;
 
@@ -155,6 +156,9 @@ namespace StorageAndTrade
                 Program.GeneralForm?.CloseCurrentPageNotebook();
             else
                 Program.GeneralForm?.RenameCurrentPageNotebook($"Контрагент Папки: {СкладськіКомірки_Папки_Objest.Назва}");
+
+            if (CallBack_OnSelectPointer != null)
+                CallBack_OnSelectPointer.Invoke(СкладськіКомірки_Папки_Objest.GetDirectoryPointer());
 
             if (PageList != null)
             {

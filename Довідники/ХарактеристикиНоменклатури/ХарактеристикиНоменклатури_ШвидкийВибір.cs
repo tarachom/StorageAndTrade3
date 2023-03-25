@@ -79,7 +79,8 @@ namespace StorageAndTrade
                     ХарактеристикиНоменклатури_Елемент page = new ХарактеристикиНоменклатури_Елемент
                     {
                         IsNew = true,
-                        НоменклатураДляНового = НоменклатураВласник.Pointer
+                        НоменклатураДляНового = НоменклатураВласник.Pointer,
+                        CallBack_OnSelectPointer = CallBack_OnSelectPointer
                     };
 
                     Program.GeneralForm?.CreateNotebookPage($"Характеристики: *", () => { return page; }, true);

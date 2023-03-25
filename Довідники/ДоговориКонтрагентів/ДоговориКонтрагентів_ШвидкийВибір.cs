@@ -76,7 +76,7 @@ namespace StorageAndTrade
                 LinkButton linkNew = new LinkButton("Новий");
                 linkNew.Clicked += (object? sender, EventArgs args) =>
                 {
-                    ДоговориКонтрагентів_Елемент page = new ДоговориКонтрагентів_Елемент { IsNew = true };
+                    ДоговориКонтрагентів_Елемент page = new ДоговориКонтрагентів_Елемент { IsNew = true, CallBack_OnSelectPointer = CallBack_OnSelectPointer };
 
                     Program.GeneralForm?.CreateNotebookPage($"Договори: *", () => { return page; }, true);
 

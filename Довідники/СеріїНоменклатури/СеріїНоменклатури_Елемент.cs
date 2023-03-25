@@ -30,6 +30,7 @@ namespace StorageAndTrade
     class СеріїНоменклатури_Елемент : VBox
     {
         public СеріїНоменклатури? PageList { get; set; }
+        public System.Action<СеріїНоменклатури_Pointer>? CallBack_OnSelectPointer { get; set; }
 
         public bool IsNew { get; set; } = true;
 
@@ -114,6 +115,9 @@ namespace StorageAndTrade
                 Program.GeneralForm?.CloseCurrentPageNotebook();
             else
                 Program.GeneralForm?.RenameCurrentPageNotebook($"Серійний номер: {СеріїНоменклатури_Objest.Номер}");
+
+            if (CallBack_OnSelectPointer != null)
+                CallBack_OnSelectPointer.Invoke(СеріїНоменклатури_Objest.GetDirectoryPointer());
 
             if (PageList != null)
             {

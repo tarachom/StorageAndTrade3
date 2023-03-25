@@ -73,7 +73,7 @@ namespace StorageAndTrade
                 LinkButton linkNew = new LinkButton("Новий");
                 linkNew.Clicked += (object? sender, EventArgs args) =>
                 {
-                    Номенклатура_Папки_Елемент page = new Номенклатура_Папки_Елемент { IsNew = true };
+                    Номенклатура_Папки_Елемент page = new Номенклатура_Папки_Елемент { IsNew = true, CallBack_OnSelectPointer = CallBack_OnSelectPointer };
 
                     Program.GeneralForm?.CreateNotebookPage($"Номенклатура папки: *", () => { return page; }, true);
 

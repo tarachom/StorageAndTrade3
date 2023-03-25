@@ -75,7 +75,7 @@ namespace StorageAndTrade
                 LinkButton linkNew = new LinkButton("Новий");
                 linkNew.Clicked += (object? sender, EventArgs args) =>
                 {
-                    БанківськіРахункиКонтрагентів_Елемент page = new БанківськіРахункиКонтрагентів_Елемент { IsNew = true };
+                    БанківськіРахункиКонтрагентів_Елемент page = new БанківськіРахункиКонтрагентів_Елемент { IsNew = true, CallBack_OnSelectPointer = CallBack_OnSelectPointer };
 
                     Program.GeneralForm?.CreateNotebookPage($"Банківські рахунки контрагентів: *", () => { return page; }, true);
 

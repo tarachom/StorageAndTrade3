@@ -31,6 +31,7 @@ namespace StorageAndTrade
     class ХарактеристикиНоменклатури_Елемент : VBox
     {
         public ХарактеристикиНоменклатури? PageList { get; set; }
+        public System.Action<ХарактеристикиНоменклатури_Pointer>? CallBack_OnSelectPointer { get; set; }
 
         public bool IsNew { get; set; } = true;
 
@@ -154,6 +155,9 @@ namespace StorageAndTrade
                 Program.GeneralForm?.CloseCurrentPageNotebook();
             else
                 Program.GeneralForm?.RenameCurrentPageNotebook($"Характеристики: {ХарактеристикиНоменклатури_Objest.Назва}");
+
+            if (CallBack_OnSelectPointer != null)
+                CallBack_OnSelectPointer.Invoke(ХарактеристикиНоменклатури_Objest.GetDirectoryPointer());
 
             if (PageList != null)
             {

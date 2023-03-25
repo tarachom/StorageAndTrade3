@@ -32,6 +32,7 @@ namespace StorageAndTrade
     class Склади_Елемент : VBox
     {
         public Склади? PageList { get; set; }
+        public System.Action<Склади_Pointer>? CallBack_OnSelectPointer { get; set; }
 
         public bool IsNew { get; set; } = true;
 
@@ -201,6 +202,9 @@ namespace StorageAndTrade
                 Program.GeneralForm?.CloseCurrentPageNotebook();
             else
                 Program.GeneralForm?.RenameCurrentPageNotebook($"Склад: {Склади_Objest.Назва}");
+
+            if (CallBack_OnSelectPointer != null)
+                CallBack_OnSelectPointer.Invoke(Склади_Objest.GetDirectoryPointer());
 
             if (PageList != null)
             {

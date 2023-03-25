@@ -31,6 +31,7 @@ namespace StorageAndTrade
     class БанківськіРахункиКонтрагентів_Елемент : VBox
     {
         public БанківськіРахункиКонтрагентів? PageList { get; set; }
+        public System.Action<БанківськіРахункиКонтрагентів_Pointer>? CallBack_OnSelectPointer { get; set; }
 
         public bool IsNew { get; set; } = true;
 
@@ -146,6 +147,9 @@ namespace StorageAndTrade
                 Program.GeneralForm?.CloseCurrentPageNotebook();
             else
                 Program.GeneralForm?.RenameCurrentPageNotebook($"Банківський рахунок контрагента: {БанківськіРахункиКонтрагентів_Objest.Назва}");
+
+            if (CallBack_OnSelectPointer != null)
+                CallBack_OnSelectPointer.Invoke(БанківськіРахункиКонтрагентів_Objest.GetDirectoryPointer());
 
             if (PageList != null)
             {

@@ -31,6 +31,7 @@ namespace StorageAndTrade
     class Банки_Елемент : VBox
     {
         public Банки? PageList { get; set; }
+        public System.Action<Банки_Pointer>? CallBack_OnSelectPointer { get; set; }
 
         public bool IsNew { get; set; } = true;
 
@@ -194,6 +195,9 @@ namespace StorageAndTrade
                 Program.GeneralForm?.CloseCurrentPageNotebook();
             else
                 Program.GeneralForm?.RenameCurrentPageNotebook($"Валюта: {Банки_Objest.Назва}");
+
+            if (CallBack_OnSelectPointer != null)
+                CallBack_OnSelectPointer.Invoke(Банки_Objest.GetDirectoryPointer());
 
             if (PageList != null)
             {

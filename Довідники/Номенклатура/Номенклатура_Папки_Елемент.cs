@@ -31,6 +31,7 @@ namespace StorageAndTrade
     class Номенклатура_Папки_Елемент : VBox
     {
         public Номенклатура_Папки_Дерево? PageList { get; set; }
+        public System.Action<Номенклатура_Папки_Pointer>? CallBack_OnSelectPointer { get; set; }
 
         public bool IsNew { get; set; } = true;
 
@@ -144,6 +145,9 @@ namespace StorageAndTrade
                 Program.GeneralForm?.CloseCurrentPageNotebook();
             else
                 Program.GeneralForm?.RenameCurrentPageNotebook($"Контрагент Папки: {Номенклатура_Папки_Objest.Назва}");
+
+            if (CallBack_OnSelectPointer != null)
+                CallBack_OnSelectPointer.Invoke(Номенклатура_Папки_Objest.GetDirectoryPointer());
 
             if (PageList != null)
             {

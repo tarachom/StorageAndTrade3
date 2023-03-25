@@ -74,7 +74,7 @@ namespace StorageAndTrade
                 LinkButton linkNew = new LinkButton("Новий");
                 linkNew.Clicked += (object? sender, EventArgs args) =>
                 {
-                    ВидиЦін_Елемент page = new ВидиЦін_Елемент { IsNew = true };
+                    ВидиЦін_Елемент page = new ВидиЦін_Елемент { IsNew = true, CallBack_OnSelectPointer = CallBack_OnSelectPointer };
 
                     Program.GeneralForm?.CreateNotebookPage($"Види цін: *", () => { return page; }, true);
 

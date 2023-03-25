@@ -31,6 +31,7 @@ namespace StorageAndTrade
     class ПакуванняОдиниціВиміру_Елемент : VBox
     {
         public ПакуванняОдиниціВиміру? PageList { get; set; }
+        public System.Action<ПакуванняОдиниціВиміру_Pointer>? CallBack_OnSelectPointer { get; set; }
 
         public bool IsNew { get; set; } = true;
 
@@ -150,7 +151,10 @@ namespace StorageAndTrade
             if (closePage)
                 Program.GeneralForm?.CloseCurrentPageNotebook();
             else
-                Program.GeneralForm?.RenameCurrentPageNotebook($"Валюта: {ПакуванняОдиниціВиміру_Objest.Назва}");
+                Program.GeneralForm?.RenameCurrentPageNotebook($"Пакування: {ПакуванняОдиниціВиміру_Objest.Назва}");
+
+            if (CallBack_OnSelectPointer != null)
+                CallBack_OnSelectPointer.Invoke(ПакуванняОдиниціВиміру_Objest.GetDirectoryPointer());
 
             if (PageList != null)
             {

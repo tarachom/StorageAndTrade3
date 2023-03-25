@@ -35,6 +35,7 @@ namespace StorageAndTrade
     class СтаттяРухуКоштів_Елемент : VBox
     {
         public СтаттяРухуКоштів? PageList { get; set; }
+        public System.Action<СтаттяРухуКоштів_Pointer>? CallBack_OnSelectPointer { get; set; }
 
         public bool IsNew { get; set; } = true;
 
@@ -176,7 +177,10 @@ namespace StorageAndTrade
             if (closePage)
                 Program.GeneralForm?.CloseCurrentPageNotebook();
             else
-                Program.GeneralForm?.RenameCurrentPageNotebook($"Валюта: {СтаттяРухуКоштів_Objest.Назва}");
+                Program.GeneralForm?.RenameCurrentPageNotebook($"Стаття руху коштів: {СтаттяРухуКоштів_Objest.Назва}");
+
+            if (CallBack_OnSelectPointer != null)
+                CallBack_OnSelectPointer.Invoke(СтаттяРухуКоштів_Objest.GetDirectoryPointer());
 
             if (PageList != null)
             {

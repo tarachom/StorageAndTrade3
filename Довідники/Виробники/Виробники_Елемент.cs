@@ -31,6 +31,7 @@ namespace StorageAndTrade
     class Виробники_Елемент : VBox
     {
         public Виробники? PageList { get; set; }
+        public System.Action<Виробники_Pointer>? CallBack_OnSelectPointer { get; set; }
 
         public bool IsNew { get; set; } = true;
 
@@ -128,6 +129,9 @@ namespace StorageAndTrade
                 Program.GeneralForm?.CloseCurrentPageNotebook();
             else
                 Program.GeneralForm?.RenameCurrentPageNotebook($"Валюта: {Виробники_Objest.Назва}");
+
+            if (CallBack_OnSelectPointer != null)
+                CallBack_OnSelectPointer.Invoke(Виробники_Objest.GetDirectoryPointer());
 
             if (PageList != null)
             {

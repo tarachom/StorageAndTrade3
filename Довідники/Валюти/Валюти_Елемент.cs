@@ -31,6 +31,7 @@ namespace StorageAndTrade
     class Валюти_Елемент : VBox
     {
         public Валюти? PageList { get; set; }
+        public System.Action<Валюти_Pointer>? CallBack_OnSelectPointer { get; set; }
 
         public bool IsNew { get; set; } = true;
 
@@ -157,6 +158,9 @@ namespace StorageAndTrade
                 Program.GeneralForm?.CloseCurrentPageNotebook();
             else
                 Program.GeneralForm?.RenameCurrentPageNotebook($"Валюта: {Валюти_Objest.Назва}");
+
+            if (CallBack_OnSelectPointer != null)
+                CallBack_OnSelectPointer.Invoke(Валюти_Objest.GetDirectoryPointer());
 
             if (PageList != null)
             {

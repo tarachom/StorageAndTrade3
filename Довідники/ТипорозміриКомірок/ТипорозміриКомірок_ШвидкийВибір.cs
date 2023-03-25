@@ -75,7 +75,7 @@ namespace StorageAndTrade
                 LinkButton linkNew = new LinkButton("Новий");
                 linkNew.Clicked += (object? sender, EventArgs args) =>
                 {
-                    ТипорозміриКомірок_Елемент page = new ТипорозміриКомірок_Елемент { IsNew = true };
+                    ТипорозміриКомірок_Елемент page = new ТипорозміриКомірок_Елемент { IsNew = true, CallBack_OnSelectPointer = CallBack_OnSelectPointer };
 
                     Program.GeneralForm?.CreateNotebookPage($"Типорозміри комірок: *", () => { return page; }, true);
 

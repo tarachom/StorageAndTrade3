@@ -31,6 +31,7 @@ namespace StorageAndTrade
     class Організації_Елемент : VBox
     {
         public Організації? PageList { get; set; }
+        public System.Action<Організації_Pointer>? CallBack_OnSelectPointer { get; set; }
 
         public bool IsNew { get; set; } = true;
 
@@ -219,6 +220,9 @@ namespace StorageAndTrade
                 Program.GeneralForm?.CloseCurrentPageNotebook();
             else
                 Program.GeneralForm?.RenameCurrentPageNotebook($"Організація: {Організації_Objest.Назва}");
+
+            if (CallBack_OnSelectPointer != null)
+                CallBack_OnSelectPointer.Invoke(Організації_Objest.GetDirectoryPointer());
 
             if (PageList != null)
             {

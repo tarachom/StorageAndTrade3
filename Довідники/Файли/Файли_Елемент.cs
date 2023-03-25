@@ -31,6 +31,7 @@ namespace StorageAndTrade
     class Файли_Елемент : VBox
     {
         public Файли? PageList { get; set; }
+        public System.Action<Файли_Pointer>? CallBack_OnSelectPointer { get; set; }
 
         public bool IsNew { get; set; } = true;
 
@@ -128,6 +129,9 @@ namespace StorageAndTrade
                 Program.GeneralForm?.CloseCurrentPageNotebook();
             else
                 Program.GeneralForm?.RenameCurrentPageNotebook($"Файл: {Файли_Objest.Назва}");
+
+            if (CallBack_OnSelectPointer != null)
+                CallBack_OnSelectPointer.Invoke(Файли_Objest.GetDirectoryPointer());
 
             if (PageList != null)
             {

@@ -31,6 +31,7 @@ namespace StorageAndTrade
     class Користувачі_Елемент : VBox
     {
         public Користувачі? PageList { get; set; }
+        public System.Action<Користувачі_Pointer>? CallBack_OnSelectPointer { get; set; }
 
         public bool IsNew { get; set; } = true;
 
@@ -152,6 +153,9 @@ namespace StorageAndTrade
                 Program.GeneralForm?.CloseCurrentPageNotebook();
             else
                 Program.GeneralForm?.RenameCurrentPageNotebook($"Користувач: {Користувачі_Objest.Назва}");
+
+            if (CallBack_OnSelectPointer != null)
+                CallBack_OnSelectPointer.Invoke(Користувачі_Objest.GetDirectoryPointer());
 
             if (PageList != null)
             {

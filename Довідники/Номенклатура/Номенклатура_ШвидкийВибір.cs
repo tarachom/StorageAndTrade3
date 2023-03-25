@@ -83,7 +83,7 @@ namespace StorageAndTrade
                 LinkButton linkNew = new LinkButton("Новий");
                 linkNew.Clicked += (object? sender, EventArgs args) =>
                 {
-                    Номенклатура_Елемент page = new Номенклатура_Елемент { IsNew = true };
+                    Номенклатура_Елемент page = new Номенклатура_Елемент { IsNew = true, CallBack_OnSelectPointer = CallBack_OnSelectPointer };
 
                     Program.GeneralForm?.CreateNotebookPage($"Номенклатура: *", () => { return page; }, true);
 

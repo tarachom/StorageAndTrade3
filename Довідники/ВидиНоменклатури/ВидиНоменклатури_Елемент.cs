@@ -31,6 +31,7 @@ namespace StorageAndTrade
     class ВидиНоменклатури_Елемент : VBox
     {
         public ВидиНоменклатури? PageList { get; set; }
+        public System.Action<ВидиНоменклатури_Pointer>? CallBack_OnSelectPointer { get; set; }
 
         public bool IsNew { get; set; } = true;
 
@@ -137,6 +138,9 @@ namespace StorageAndTrade
                 Program.GeneralForm?.CloseCurrentPageNotebook();
             else
                 Program.GeneralForm?.RenameCurrentPageNotebook($"Види номенклатури: {ВидиНоменклатури_Objest.Назва}");
+
+            if (CallBack_OnSelectPointer != null)
+                CallBack_OnSelectPointer.Invoke(ВидиНоменклатури_Objest.GetDirectoryPointer());
 
             if (PageList != null)
             {

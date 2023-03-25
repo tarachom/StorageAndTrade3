@@ -31,6 +31,7 @@ namespace StorageAndTrade
     class СтруктураПідприємства_Елемент : VBox
     {
         public СтруктураПідприємства? PageList { get; set; }
+        public System.Action<СтруктураПідприємства_Pointer>? CallBack_OnSelectPointer { get; set; }
 
         public bool IsNew { get; set; } = true;
 
@@ -128,6 +129,9 @@ namespace StorageAndTrade
                 Program.GeneralForm?.CloseCurrentPageNotebook();
             else
                 Program.GeneralForm?.RenameCurrentPageNotebook($"Структура підприємства: {СтруктураПідприємства_Objest.Назва}");
+
+            if (CallBack_OnSelectPointer != null)
+                CallBack_OnSelectPointer.Invoke(СтруктураПідприємства_Objest.GetDirectoryPointer());
 
             if (PageList != null)
             {

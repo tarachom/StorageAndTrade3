@@ -34,6 +34,7 @@ namespace StorageAndTrade
     class ДоговориКонтрагентів_Елемент : VBox
     {
         public ДоговориКонтрагентів? PageList { get; set; }
+        public System.Action<ДоговориКонтрагентів_Pointer>? CallBack_OnSelectPointer { get; set; }
 
         public bool IsNew { get; set; } = true;
 
@@ -323,6 +324,9 @@ namespace StorageAndTrade
                 Program.GeneralForm?.CloseCurrentPageNotebook();
             else
                 Program.GeneralForm?.RenameCurrentPageNotebook($"Договір: {ДоговориКонтрагентів_Objest.Назва}");
+
+            if (CallBack_OnSelectPointer != null)
+                CallBack_OnSelectPointer.Invoke(ДоговориКонтрагентів_Objest.GetDirectoryPointer());
 
             if (PageList != null)
             {

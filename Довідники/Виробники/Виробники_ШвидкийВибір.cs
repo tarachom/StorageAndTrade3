@@ -74,7 +74,7 @@ namespace StorageAndTrade
                 LinkButton linkNew = new LinkButton("Новий");
                 linkNew.Clicked += (object? sender, EventArgs args) =>
                 {
-                    Виробники_Елемент page = new Виробники_Елемент { IsNew = true };
+                    Виробники_Елемент page = new Виробники_Елемент { IsNew = true, CallBack_OnSelectPointer = CallBack_OnSelectPointer };
 
                     Program.GeneralForm?.CreateNotebookPage($"Виробники: *", () => { return page; }, true);
 

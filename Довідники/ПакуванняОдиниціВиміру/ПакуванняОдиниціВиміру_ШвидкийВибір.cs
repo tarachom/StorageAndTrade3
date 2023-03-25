@@ -74,7 +74,7 @@ namespace StorageAndTrade
                 LinkButton linkNew = new LinkButton("Новий");
                 linkNew.Clicked += (object? sender, EventArgs args) =>
                 {
-                    ПакуванняОдиниціВиміру_Елемент page = new ПакуванняОдиниціВиміру_Елемент { IsNew = true };
+                    ПакуванняОдиниціВиміру_Елемент page = new ПакуванняОдиниціВиміру_Елемент { IsNew = true, CallBack_OnSelectPointer = CallBack_OnSelectPointer };
 
                     Program.GeneralForm?.CreateNotebookPage($"Пакування: *", () => { return page; }, true);
 

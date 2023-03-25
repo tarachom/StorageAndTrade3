@@ -30,6 +30,7 @@ namespace StorageAndTrade
     class ТипорозміриКомірок_Елемент : VBox
     {
         public ТипорозміриКомірок? PageList { get; set; }
+        public System.Action<ТипорозміриКомірок_Pointer>? CallBack_OnSelectPointer { get; set; }
 
         public bool IsNew { get; set; } = true;
 
@@ -164,6 +165,9 @@ namespace StorageAndTrade
                 Program.GeneralForm?.CloseCurrentPageNotebook();
             else
                 Program.GeneralForm?.RenameCurrentPageNotebook($"Типорозмір: {ТипорозміриКомірок_Objest.Назва}");
+
+            if (CallBack_OnSelectPointer != null)
+                CallBack_OnSelectPointer.Invoke(ТипорозміриКомірок_Objest.GetDirectoryPointer());
 
             if (PageList != null)
             {

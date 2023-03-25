@@ -72,7 +72,7 @@ namespace StorageAndTrade
                 LinkButton linkNew = new LinkButton("Новий");
                 linkNew.Clicked += (object? sender, EventArgs args) =>
                 {
-                    Організації_Елемент page = new Організації_Елемент { IsNew = true };
+                    Організації_Елемент page = new Організації_Елемент { IsNew = true, CallBack_OnSelectPointer = CallBack_OnSelectPointer };
 
                     Program.GeneralForm?.CreateNotebookPage($"Організації: *", () => { return page; }, true);
 

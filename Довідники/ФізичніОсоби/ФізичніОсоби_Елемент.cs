@@ -31,6 +31,7 @@ namespace StorageAndTrade
     class ФізичніОсоби_Елемент : VBox
     {
         public ФізичніОсоби? PageList { get; set; }
+        public System.Action<ФізичніОсоби_Pointer>? CallBack_OnSelectPointer { get; set; }
 
         public bool IsNew { get; set; } = true;
 
@@ -128,6 +129,9 @@ namespace StorageAndTrade
                 Program.GeneralForm?.CloseCurrentPageNotebook();
             else
                 Program.GeneralForm?.RenameCurrentPageNotebook($"Фізичні особи: {ФізичніОсоби_Objest.Назва}");
+
+            if (CallBack_OnSelectPointer != null)
+                CallBack_OnSelectPointer.Invoke(ФізичніОсоби_Objest.GetDirectoryPointer());
 
             if (PageList != null)
             {

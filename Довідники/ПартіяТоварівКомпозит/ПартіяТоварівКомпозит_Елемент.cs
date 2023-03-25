@@ -34,6 +34,7 @@ namespace StorageAndTrade
     class ПартіяТоварівКомпозит_Елемент : VBox
     {
         public ПартіяТоварівКомпозит? PageList { get; set; }
+        public System.Action<ПартіяТоварівКомпозит_Pointer>? CallBack_OnSelectPointer { get; set; }
 
         public bool IsNew { get; set; } = true;
 
@@ -169,6 +170,9 @@ namespace StorageAndTrade
                 Program.GeneralForm?.CloseCurrentPageNotebook();
             else
                 Program.GeneralForm?.RenameCurrentPageNotebook($"Партія: {ПартіяТоварівКомпозит_Objest.Назва}");
+
+            if (CallBack_OnSelectPointer != null)
+                CallBack_OnSelectPointer.Invoke(ПартіяТоварівКомпозит_Objest.GetDirectoryPointer());
 
             if (PageList != null)
             {
