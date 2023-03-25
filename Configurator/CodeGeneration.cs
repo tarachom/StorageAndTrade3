@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 20.03.2023 12:57:54
+ * Дата конфігурації: 25.03.2023 22:17:41
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -14194,6 +14194,7 @@ namespace StorageAndTrade_1_0.Документи
         public const string ЧасДоставкиДо = "col_b8";
         public const string Коментар = "col_a6";
         public const string Автор = "col_a1";
+        public const string Основа = "col_a2";
     }
 
     public static class ПереміщенняТоварів_Export
@@ -14345,6 +14346,12 @@ namespace StorageAndTrade_1_0.Документи
                     xmlWriter.WriteString(ПереміщенняТоварів_Objest.Автор.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Автор
+            xmlWriter.WriteStartElement("Основа");
+            xmlWriter.WriteAttributeString("type", "composite_pointer");
+            
+                xmlWriter.WriteRaw(((UuidAndText)ПереміщенняТоварів_Objest.Основа).ToXml());
+              
+            xmlWriter.WriteEndElement(); //Основа
 
                 /* 
                 Табличні частини
@@ -14435,7 +14442,7 @@ namespace StorageAndTrade_1_0.Документи
     public class ПереміщенняТоварів_Objest : DocumentObject
     {
         public ПереміщенняТоварів_Objest() : base(Config.Kernel!, "tab_a31", "ПереміщенняТоварів",
-             new string[] { "docname", "docnomer", "docdate", "col_a3", "col_a4", "col_a5", "col_a7", "col_a8", "col_a9", "col_b1", "col_b2", "col_b3", "col_b4", "col_b5", "col_b6", "col_b7", "col_b8", "col_a6", "col_a1" }) 
+             new string[] { "docname", "docnomer", "docdate", "col_a3", "col_a4", "col_a5", "col_a7", "col_a8", "col_a9", "col_b1", "col_b2", "col_b3", "col_b4", "col_b5", "col_b6", "col_b7", "col_b8", "col_a6", "col_a1", "col_a2" }) 
         {
             Назва = "";
             НомерДок = "";
@@ -14456,6 +14463,7 @@ namespace StorageAndTrade_1_0.Документи
             ЧасДоставкиДо = DateTime.MinValue.TimeOfDay;
             Коментар = "";
             Автор = new Довідники.Користувачі_Pointer();
+            Основа = new UuidAndText();
             
             //Табличні частини
             Товари_TablePart = new ПереміщенняТоварів_Товари_TablePart(this);
@@ -14485,6 +14493,7 @@ namespace StorageAndTrade_1_0.Документи
                 ЧасДоставкиДо = (base.FieldValue["col_b8"] != DBNull.Value) ? TimeSpan.Parse(base.FieldValue["col_b8"]?.ToString() ?? DateTime.MinValue.TimeOfDay.ToString()) : DateTime.MinValue.TimeOfDay;
                 Коментар = base.FieldValue["col_a6"]?.ToString() ?? "";
                 Автор = new Довідники.Користувачі_Pointer(base.FieldValue["col_a1"]);
+                Основа = (base.FieldValue["col_a2"] != DBNull.Value) ? (UuidAndText)base.FieldValue["col_a2"] : new UuidAndText();
                 
                 BaseClear();
                 return true;
@@ -14515,6 +14524,7 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_b8"] = ЧасДоставкиДо;
             base.FieldValue["col_a6"] = Коментар;
             base.FieldValue["col_a1"] = Автор.UnigueID.UGuid;
+            base.FieldValue["col_a2"] = Основа;
             
             BaseSave();
             ПереміщенняТоварів_Triggers.AfterRecording(this);
@@ -14556,6 +14566,7 @@ namespace StorageAndTrade_1_0.Документи
             copy.ЧасДоставкиДо = ЧасДоставкиДо;
             copy.Коментар = Коментар;
             copy.Автор = Автор;
+            copy.Основа = Основа;
             
             return copy;
         }
@@ -14595,6 +14606,7 @@ namespace StorageAndTrade_1_0.Документи
         public TimeSpan ЧасДоставкиДо { get; set; }
         public string Коментар { get; set; }
         public Довідники.Користувачі_Pointer Автор { get; set; }
+        public UuidAndText Основа { get; set; }
         
         //Табличні частини
         public ПереміщенняТоварів_Товари_TablePart Товари_TablePart { get; set; }

@@ -190,6 +190,10 @@ namespace StorageAndTrade
             newDocVnSpozivButton.Activated += OnNewDocNaOsnovi_ВнутрішнєСпоживанняТоварів;
             Menu.Append(newDocVnSpozivButton);
 
+            MenuItem newDocPeremischennyaTovariv = new MenuItem("Переміщення товарів");
+            newDocPeremischennyaTovariv.Activated += OnNewDocNaOsnovi_ПереміщенняТоварів;
+            Menu.Append(newDocPeremischennyaTovariv);
+
             Menu.ShowAll();
 
             return Menu;
@@ -693,20 +697,20 @@ namespace StorageAndTrade
                     поверненняТоварівПостачальнику_Objest.Save();
 
                     //Товари
-                    foreach (ПоступленняТоварівТаПослуг_Товари_TablePart.Record record_реалізаціяТоварівТаПослуг in поступленняТоварівТаПослуг_Objest.Товари_TablePart.Records)
+                    foreach (ПоступленняТоварівТаПослуг_Товари_TablePart.Record record in поступленняТоварівТаПослуг_Objest.Товари_TablePart.Records)
                     {
-                        ПоверненняТоварівПостачальнику_Товари_TablePart.Record record_повернення = new ПоверненняТоварівПостачальнику_Товари_TablePart.Record();
-                        поверненняТоварівПостачальнику_Objest.Товари_TablePart.Records.Add(record_повернення);
-
-                        record_повернення.Номенклатура = record_реалізаціяТоварівТаПослуг.Номенклатура;
-                        record_повернення.ХарактеристикаНоменклатури = record_реалізаціяТоварівТаПослуг.ХарактеристикаНоменклатури;
-                        record_повернення.Серія = record_реалізаціяТоварівТаПослуг.Серія;
-                        record_повернення.Пакування = record_реалізаціяТоварівТаПослуг.Пакування;
-                        record_повернення.КількістьУпаковок = record_реалізаціяТоварівТаПослуг.КількістьУпаковок;
-                        record_повернення.Кількість = record_реалізаціяТоварівТаПослуг.Кількість;
-                        record_повернення.Ціна = record_реалізаціяТоварівТаПослуг.Ціна;
-                        record_повернення.Сума = record_реалізаціяТоварівТаПослуг.Сума;
-                        record_повернення.ДокументПоступлення = поступленняТоварівТаПослуг_Objest.GetDocumentPointer();
+                        поверненняТоварівПостачальнику_Objest.Товари_TablePart.Records.Add(new ПоверненняТоварівПостачальнику_Товари_TablePart.Record()
+                        {
+                            Номенклатура = record.Номенклатура,
+                            ХарактеристикаНоменклатури = record.ХарактеристикаНоменклатури,
+                            Серія = record.Серія,
+                            Пакування = record.Пакування,
+                            КількістьУпаковок = record.КількістьУпаковок,
+                            Кількість = record.Кількість,
+                            Ціна = record.Ціна,
+                            Сума = record.Сума,
+                            ДокументПоступлення = поступленняТоварівТаПослуг_Objest.GetDocumentPointer()
+                        });
                     }
 
                     поверненняТоварівПостачальнику_Objest.Товари_TablePart.Save(false);
@@ -762,17 +766,17 @@ namespace StorageAndTrade
                     розміщенняТоварівНаСкладі_Objest.Save();
 
                     //Товари
-                    foreach (ПоступленняТоварівТаПослуг_Товари_TablePart.Record record_реалізаціяТоварівТаПослуг in поступленняТоварівТаПослуг_Objest.Товари_TablePart.Records)
+                    foreach (ПоступленняТоварівТаПослуг_Товари_TablePart.Record record in поступленняТоварівТаПослуг_Objest.Товари_TablePart.Records)
                     {
-                        РозміщенняТоварівНаСкладі_Товари_TablePart.Record record = new РозміщенняТоварівНаСкладі_Товари_TablePart.Record();
-                        розміщенняТоварівНаСкладі_Objest.Товари_TablePart.Records.Add(record);
-
-                        record.Номенклатура = record_реалізаціяТоварівТаПослуг.Номенклатура;
-                        record.ХарактеристикаНоменклатури = record_реалізаціяТоварівТаПослуг.ХарактеристикаНоменклатури;
-                        record.Серія = record_реалізаціяТоварівТаПослуг.Серія;
-                        record.Пакування = record_реалізаціяТоварівТаПослуг.Пакування;
-                        record.КількістьУпаковок = record_реалізаціяТоварівТаПослуг.КількістьУпаковок;
-                        record.Кількість = record_реалізаціяТоварівТаПослуг.Кількість;
+                        розміщенняТоварівНаСкладі_Objest.Товари_TablePart.Records.Add(new РозміщенняТоварівНаСкладі_Товари_TablePart.Record()
+                        {
+                            Номенклатура = record.Номенклатура,
+                            ХарактеристикаНоменклатури = record.ХарактеристикаНоменклатури,
+                            Серія = record.Серія,
+                            Пакування = record.Пакування,
+                            КількістьУпаковок = record.КількістьУпаковок,
+                            Кількість = record.Кількість
+                        });
                     }
 
                     розміщенняТоварівНаСкладі_Objest.Товари_TablePart.Save(true);
@@ -820,6 +824,7 @@ namespace StorageAndTrade
                     внутрішнєСпоживанняТоварів_Objest.Назва = $"Внутрішнє споживання товарів №{внутрішнєСпоживанняТоварів_Objest.НомерДок} від {внутрішнєСпоживанняТоварів_Objest.ДатаДок.ToString("dd.MM.yyyy")}";
                     внутрішнєСпоживанняТоварів_Objest.Організація = поступленняТоварівТаПослуг_Objest.Організація;
                     внутрішнєСпоживанняТоварів_Objest.Склад = поступленняТоварівТаПослуг_Objest.Склад;
+                    внутрішнєСпоживанняТоварів_Objest.Валюта = поступленняТоварівТаПослуг_Objest.Валюта;
                     внутрішнєСпоживанняТоварів_Objest.Автор = поступленняТоварівТаПослуг_Objest.Автор;
                     внутрішнєСпоживанняТоварів_Objest.Підрозділ = поступленняТоварівТаПослуг_Objest.Підрозділ;
                     внутрішнєСпоживанняТоварів_Objest.Основа = поступленняТоварівТаПослуг_Objest.GetBasis();
@@ -827,19 +832,19 @@ namespace StorageAndTrade
                     внутрішнєСпоживанняТоварів_Objest.Save();
 
                     //Товари
-                    foreach (ПоступленняТоварівТаПослуг_Товари_TablePart.Record record_поступленняТоварівТаПослуг in поступленняТоварівТаПослуг_Objest.Товари_TablePart.Records)
+                    foreach (ПоступленняТоварівТаПослуг_Товари_TablePart.Record record in поступленняТоварівТаПослуг_Objest.Товари_TablePart.Records)
                     {
-                        ВнутрішнєСпоживанняТоварів_Товари_TablePart.Record record = new ВнутрішнєСпоживанняТоварів_Товари_TablePart.Record();
-                        внутрішнєСпоживанняТоварів_Objest.Товари_TablePart.Records.Add(record);
-
-                        record.Номенклатура = record_поступленняТоварівТаПослуг.Номенклатура;
-                        record.ХарактеристикаНоменклатури = record_поступленняТоварівТаПослуг.ХарактеристикаНоменклатури;
-                        record.Серія = record_поступленняТоварівТаПослуг.Серія;
-                        record.Пакування = record_поступленняТоварівТаПослуг.Пакування;
-                        record.КількістьУпаковок = record_поступленняТоварівТаПослуг.КількістьУпаковок;
-                        record.Кількість = record_поступленняТоварівТаПослуг.Кількість;
-                        record.Ціна = record_поступленняТоварівТаПослуг.Ціна;
-                        record.Сума = record_поступленняТоварівТаПослуг.Сума;
+                        внутрішнєСпоживанняТоварів_Objest.Товари_TablePart.Records.Add(new ВнутрішнєСпоживанняТоварів_Товари_TablePart.Record()
+                        {
+                            Номенклатура = record.Номенклатура,
+                            ХарактеристикаНоменклатури = record.ХарактеристикаНоменклатури,
+                            Серія = record.Серія,
+                            Пакування = record.Пакування,
+                            КількістьУпаковок = record.КількістьУпаковок,
+                            Кількість = record.Кількість,
+                            Ціна = record.Ціна,
+                            Сума = record.Сума
+                        });
                     }
 
                     внутрішнєСпоживанняТоварів_Objest.Товари_TablePart.Save(true);
@@ -850,6 +855,71 @@ namespace StorageAndTrade
                         {
                             IsNew = false,
                             ВнутрішнєСпоживанняТоварів_Objest = внутрішнєСпоживанняТоварів_Objest
+                        };
+
+                        page.SetValue();
+
+                        return page;
+                    });
+                }
+            }
+        }
+
+        void OnNewDocNaOsnovi_ПереміщенняТоварів(object? sender, EventArgs args)
+        {
+            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
+            {
+                TreePath[] selectionRows = TreeViewGrid.Selection.GetSelectedRows();
+
+                foreach (TreePath itemPath in selectionRows)
+                {
+                    TreeIter iter;
+                    TreeViewGrid.Model.GetIter(out iter, itemPath);
+
+                    string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
+
+                    ПоступленняТоварівТаПослуг_Pointer поступленняТоварівТаПослуг_Pointer = new ПоступленняТоварівТаПослуг_Pointer(new UnigueID(uid));
+                    ПоступленняТоварівТаПослуг_Objest поступленняТоварівТаПослуг_Objest = поступленняТоварівТаПослуг_Pointer.GetDocumentObject(true);
+
+                    //
+                    //Новий документ
+                    //
+
+                    ПереміщенняТоварів_Objest переміщенняТоварів_Objest = new ПереміщенняТоварів_Objest();
+                    переміщенняТоварів_Objest.New();
+                    переміщенняТоварів_Objest.ДатаДок = DateTime.Now;
+                    переміщенняТоварів_Objest.НомерДок = (++Константи.НумераціяДокументів.ПереміщенняТоварів_Const).ToString("D8");
+                    переміщенняТоварів_Objest.Назва = $"Переміщення товарів №{переміщенняТоварів_Objest.НомерДок} від {переміщенняТоварів_Objest.ДатаДок.ToString("dd.MM.yyyy")}";
+                    переміщенняТоварів_Objest.Організація = поступленняТоварівТаПослуг_Objest.Організація;
+                    переміщенняТоварів_Objest.СкладВідправник = поступленняТоварівТаПослуг_Objest.Склад;
+                    переміщенняТоварів_Objest.Автор = поступленняТоварівТаПослуг_Objest.Автор;
+                    переміщенняТоварів_Objest.Підрозділ = поступленняТоварівТаПослуг_Objest.Підрозділ;
+                    переміщенняТоварів_Objest.Основа = поступленняТоварівТаПослуг_Objest.GetBasis();
+                    переміщенняТоварів_Objest.Автор = Program.Користувач;
+                    переміщенняТоварів_Objest.Save();
+
+                    //Товари
+                    foreach (ПоступленняТоварівТаПослуг_Товари_TablePart.Record record in поступленняТоварівТаПослуг_Objest.Товари_TablePart.Records)
+                    {
+                        переміщенняТоварів_Objest.Товари_TablePart.Records.Add(new ПереміщенняТоварів_Товари_TablePart.Record()
+                        {
+                            Номенклатура = record.Номенклатура,
+                            ХарактеристикаНоменклатури = record.ХарактеристикаНоменклатури,
+                            Серія = record.Серія,
+                            Пакування = record.Пакування,
+                            КількістьУпаковок = record.КількістьУпаковок,
+                            Кількість = record.Кількість
+                        });
+                    }
+
+                    переміщенняТоварів_Objest.Товари_TablePart.Save(true);
+
+                    Program.GeneralForm?.CreateNotebookPage($"{переміщенняТоварів_Objest.Назва}", () =>
+                    {
+                        ПереміщенняТоварів_Елемент page = new ПереміщенняТоварів_Елемент
+                        {
+                            IsNew = false,
+                            ПереміщенняТоварів_Objest = переміщенняТоварів_Objest
                         };
 
                         page.SetValue();
