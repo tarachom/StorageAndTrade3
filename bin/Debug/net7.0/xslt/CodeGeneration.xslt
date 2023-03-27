@@ -681,6 +681,12 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
             <xsl:if test="normalize-space(TriggerFunctions/AfterSave) != ''">
                 <xsl:value-of select="TriggerFunctions/AfterSave"/><xsl:text>(this);</xsl:text>      
             </xsl:if>
+            BaseWriteFullTextSearch(GetBasis(), new string[] { <xsl:for-each select="Fields/Field[IsFullTextSearch = '1' and Type = 'string']">
+              <xsl:if test="position() != 1">
+                <xsl:text>, </xsl:text>
+              </xsl:if>
+              <xsl:value-of select="Name"/>
+            </xsl:for-each> });
         }
 
         public <xsl:value-of select="$DirectoryName"/>_Objest Copy()
@@ -869,7 +875,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
                 
             if (clear_all_before_save)
                 base.BaseDelete(Owner.UnigueID);
-
+            
             foreach (Record record in Records)
             {
                 Dictionary&lt;string, object&gt; fieldValue = new Dictionary&lt;string, object&gt;();
@@ -1162,7 +1168,13 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
             <xsl:if test="normalize-space(TriggerFunctions/AfterSave) != ''">
                 <xsl:value-of select="TriggerFunctions/AfterSave"/><xsl:text>(this);</xsl:text>      
             </xsl:if>
-		    }
+            BaseWriteFullTextSearch(GetBasis(), new string[] { <xsl:for-each select="Fields/Field[IsFullTextSearch = '1' and Type = 'string']">
+              <xsl:if test="position() != 1">
+                <xsl:text>, </xsl:text>
+              </xsl:if>
+              <xsl:value-of select="Name"/>
+            </xsl:for-each> });
+        }
 
         public bool SpendTheDocument(DateTime spendDate)
         {

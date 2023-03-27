@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 25.03.2023 22:17:41
+ * Дата конфігурації: 27.03.2023 19:26:48
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -1961,6 +1961,7 @@ namespace StorageAndTrade_1_0.Довідники
             
             BaseSave();
             
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НазваПовна, НазваСкорочена, КраїнаРеєстрації, СвідоцтвоСеріяНомер, СвідоцтвоДатаВидачі });
         }
 
         public Організації_Objest Copy()
@@ -2140,7 +2141,7 @@ namespace StorageAndTrade_1_0.Довідники
                 
             if (clear_all_before_save)
                 base.BaseDelete(Owner.UnigueID);
-
+            
             foreach (Record record in Records)
             {
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>();
@@ -2262,6 +2263,7 @@ namespace StorageAndTrade_1_0.Довідники
             
             BaseSave();
             Номенклатура_Triggers.AfterRecording(this);
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НазваПовна, Опис, Артикул });
         }
 
         public Номенклатура_Objest Copy()
@@ -2433,7 +2435,7 @@ namespace StorageAndTrade_1_0.Довідники
                 
             if (clear_all_before_save)
                 base.BaseDelete(Owner.UnigueID);
-
+            
             foreach (Record record in Records)
             {
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>();
@@ -2503,6 +2505,7 @@ namespace StorageAndTrade_1_0.Довідники
             
             BaseSave();
             
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
         }
 
         public Виробники_Objest Copy()
@@ -2664,6 +2667,7 @@ namespace StorageAndTrade_1_0.Довідники
             
             BaseSave();
             
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, Опис });
         }
 
         public ВидиНоменклатури_Objest Copy()
@@ -2827,6 +2831,7 @@ namespace StorageAndTrade_1_0.Довідники
             
             BaseSave();
             
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НазваПовна });
         }
 
         public ПакуванняОдиниціВиміру_Objest Copy()
@@ -2993,6 +2998,7 @@ namespace StorageAndTrade_1_0.Довідники
             
             BaseSave();
             Валюти_Triggers.AfterRecording(this);
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, КороткаНазва, Код_R030 });
         }
 
         public Валюти_Objest Copy()
@@ -3169,6 +3175,7 @@ namespace StorageAndTrade_1_0.Довідники
             
             BaseSave();
             Контрагенти_Triggers.AfterRecording(this);
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НазваПовна, РеєстраційнийНомер, Опис });
         }
 
         public Контрагенти_Objest Copy()
@@ -3343,7 +3350,7 @@ namespace StorageAndTrade_1_0.Довідники
                 
             if (clear_all_before_save)
                 base.BaseDelete(Owner.UnigueID);
-
+            
             foreach (Record record in Records)
             {
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>();
@@ -3424,7 +3431,7 @@ namespace StorageAndTrade_1_0.Довідники
                 
             if (clear_all_before_save)
                 base.BaseDelete(Owner.UnigueID);
-
+            
             foreach (Record record in Records)
             {
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>();
@@ -3519,6 +3526,7 @@ namespace StorageAndTrade_1_0.Довідники
             
             BaseSave();
             
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
         }
 
         public Склади_Objest Copy()
@@ -3696,7 +3704,7 @@ namespace StorageAndTrade_1_0.Довідники
                 
             if (clear_all_before_save)
                 base.BaseDelete(Owner.UnigueID);
-
+            
             foreach (Record record in Records)
             {
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>();
@@ -3782,6 +3790,7 @@ namespace StorageAndTrade_1_0.Довідники
             
             BaseSave();
             
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
         }
 
         public ВидиЦін_Objest Copy()
@@ -3937,6 +3946,7 @@ namespace StorageAndTrade_1_0.Довідники
             
             BaseSave();
             
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
         }
 
         public ВидиЦінПостачальників_Objest Copy()
@@ -4103,6 +4113,7 @@ namespace StorageAndTrade_1_0.Довідники
             
             BaseSave();
             
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, Коментар });
         }
 
         public Користувачі_Objest Copy()
@@ -4272,7 +4283,7 @@ namespace StorageAndTrade_1_0.Довідники
                 
             if (clear_all_before_save)
                 base.BaseDelete(Owner.UnigueID);
-
+            
             foreach (Record record in Records)
             {
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>();
@@ -4367,6 +4378,7 @@ namespace StorageAndTrade_1_0.Довідники
             
             BaseSave();
             
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, ІПН });
         }
 
         public ФізичніОсоби_Objest Copy()
@@ -4536,7 +4548,7 @@ namespace StorageAndTrade_1_0.Довідники
                 
             if (clear_all_before_save)
                 base.BaseDelete(Owner.UnigueID);
-
+            
             foreach (Record record in Records)
             {
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>();
@@ -4620,6 +4632,7 @@ namespace StorageAndTrade_1_0.Довідники
             
             BaseSave();
             
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
         }
 
         public СтруктураПідприємства_Objest Copy()
@@ -4771,6 +4784,7 @@ namespace StorageAndTrade_1_0.Довідники
             
             BaseSave();
             
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
         }
 
         public КраїниСвіту_Objest Copy()
@@ -4936,6 +4950,7 @@ namespace StorageAndTrade_1_0.Довідники
             
             BaseSave();
             
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НазваФайлу });
         }
 
         public Файли_Objest Copy()
@@ -5101,6 +5116,7 @@ namespace StorageAndTrade_1_0.Довідники
             
             BaseSave();
             
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НазваПовна });
         }
 
         public ХарактеристикиНоменклатури_Objest Copy()
@@ -5258,6 +5274,7 @@ namespace StorageAndTrade_1_0.Довідники
             
             BaseSave();
             
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
         }
 
         public Номенклатура_Папки_Objest Copy()
@@ -5413,6 +5430,7 @@ namespace StorageAndTrade_1_0.Довідники
             
             BaseSave();
             Контрагенти_Папки_Triggers.AfterRecording(this);
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
         }
 
         public Контрагенти_Папки_Objest Copy()
@@ -5568,6 +5586,7 @@ namespace StorageAndTrade_1_0.Довідники
             
             BaseSave();
             
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
         }
 
         public Склади_Папки_Objest Copy()
@@ -5727,6 +5746,7 @@ namespace StorageAndTrade_1_0.Довідники
             
             BaseSave();
             
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
         }
 
         public Каси_Objest Copy()
@@ -5924,6 +5944,7 @@ namespace StorageAndTrade_1_0.Довідники
             
             BaseSave();
             
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, Банк, НазваБанку, НомерРахунку, АдресаБанку, МістоБанку, ТелефониБанку });
         }
 
         public БанківськіРахункиОрганізацій_Objest Copy()
@@ -6168,6 +6189,7 @@ namespace StorageAndTrade_1_0.Довідники
             
             BaseSave();
             ДоговориКонтрагентів_Triggers.AfterRecording(this);
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, Коментар });
         }
 
         public ДоговориКонтрагентів_Objest Copy()
@@ -6405,6 +6427,7 @@ namespace StorageAndTrade_1_0.Довідники
             
             BaseSave();
             
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НазваБанку, КорРахунокБанку, МістоБанку, АдресаБанку, ТелефониБанку });
         }
 
         public БанківськіРахункиКонтрагентів_Objest Copy()
@@ -6595,6 +6618,7 @@ namespace StorageAndTrade_1_0.Довідники
             
             BaseSave();
             
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, Опис });
         }
 
         public СтаттяРухуКоштів_Objest Copy()
@@ -6752,7 +6776,7 @@ namespace StorageAndTrade_1_0.Довідники
                 
             if (clear_all_before_save)
                 base.BaseDelete(Owner.UnigueID);
-
+            
             foreach (Record record in Records)
             {
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>();
@@ -6825,6 +6849,7 @@ namespace StorageAndTrade_1_0.Довідники
             
             BaseSave();
             СеріїНоменклатури_Triggers.AfterRecording(this);
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Номер, Коментар });
         }
 
         public СеріїНоменклатури_Objest Copy()
@@ -6992,6 +7017,7 @@ namespace StorageAndTrade_1_0.Довідники
             
             BaseSave();
             
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
         }
 
         public ПартіяТоварівКомпозит_Objest Copy()
@@ -7165,6 +7191,7 @@ namespace StorageAndTrade_1_0.Довідники
             
             BaseSave();
             
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
         }
 
         public ВидиЗапасів_Objest Copy()
@@ -7426,6 +7453,7 @@ namespace StorageAndTrade_1_0.Довідники
             
             BaseSave();
             
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, КодМФО, КодЄДРПОУ, НазваНаселеногоПункту, Адреса });
         }
 
         public Банки_Objest Copy()
@@ -7631,6 +7659,7 @@ namespace StorageAndTrade_1_0.Довідники
             
             BaseSave();
             
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
         }
 
         public СкладськіПриміщення_Objest Copy()
@@ -7814,6 +7843,7 @@ namespace StorageAndTrade_1_0.Довідники
             
             BaseSave();
             
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
         }
 
         public СкладськіКомірки_Objest Copy()
@@ -7983,6 +8013,7 @@ namespace StorageAndTrade_1_0.Довідники
             
             BaseSave();
             
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
         }
 
         public ОбластьЗберігання_Objest Copy()
@@ -8150,6 +8181,7 @@ namespace StorageAndTrade_1_0.Довідники
             
             BaseSave();
             
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
         }
 
         public ТипорозміриКомірок_Objest Copy()
@@ -8315,6 +8347,7 @@ namespace StorageAndTrade_1_0.Довідники
             
             BaseSave();
             
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
         }
 
         public СкладськіКомірки_Папки_Objest Copy()
@@ -9882,7 +9915,8 @@ namespace StorageAndTrade_1_0.Документи
             
             BaseSave();
             ЗамовленняПостачальнику_Triggers.AfterRecording(this);
-		    }
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар });
+        }
 
         public bool SpendTheDocument(DateTime spendDate)
         {
@@ -10696,7 +10730,8 @@ namespace StorageAndTrade_1_0.Документи
             
             BaseSave();
             ПоступленняТоварівТаПослуг_Triggers.AfterRecording(this);
-		    }
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар });
+        }
 
         public bool SpendTheDocument(DateTime spendDate)
         {
@@ -11474,7 +11509,8 @@ namespace StorageAndTrade_1_0.Документи
             
             BaseSave();
             ЗамовленняКлієнта_Triggers.AfterRecording(this);
-		    }
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар });
+        }
 
         public bool SpendTheDocument(DateTime spendDate)
         {
@@ -12288,7 +12324,8 @@ namespace StorageAndTrade_1_0.Документи
             
             BaseSave();
             РеалізаціяТоварівТаПослуг_Triggers.AfterRecording(this);
-		    }
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар });
+        }
 
         public bool SpendTheDocument(DateTime spendDate)
         {
@@ -12804,7 +12841,8 @@ namespace StorageAndTrade_1_0.Документи
             
             BaseSave();
             ВстановленняЦінНоменклатури_Triggers.AfterRecording(this);
-		    }
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар });
+        }
 
         public bool SpendTheDocument(DateTime spendDate)
         {
@@ -13338,7 +13376,8 @@ namespace StorageAndTrade_1_0.Документи
             
             BaseSave();
             ПрихіднийКасовийОрдер_Triggers.AfterRecording(this);
-		    }
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар });
+        }
 
         public bool SpendTheDocument(DateTime spendDate)
         {
@@ -13918,7 +13957,8 @@ namespace StorageAndTrade_1_0.Документи
             
             BaseSave();
             РозхіднийКасовийОрдер_Triggers.AfterRecording(this);
-		    }
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок });
+        }
 
         public bool SpendTheDocument(DateTime spendDate)
         {
@@ -14528,7 +14568,8 @@ namespace StorageAndTrade_1_0.Документи
             
             BaseSave();
             ПереміщенняТоварів_Triggers.AfterRecording(this);
-		    }
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар });
+        }
 
         public bool SpendTheDocument(DateTime spendDate)
         {
@@ -15178,7 +15219,8 @@ namespace StorageAndTrade_1_0.Документи
             
             BaseSave();
             ПоверненняТоварівПостачальнику_Triggers.AfterRecording(this);
-		    }
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар });
+        }
 
         public bool SpendTheDocument(DateTime spendDate)
         {
@@ -15802,7 +15844,8 @@ namespace StorageAndTrade_1_0.Документи
             
             BaseSave();
             ПоверненняТоварівВідКлієнта_Triggers.AfterRecording(this);
-		    }
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар });
+        }
 
         public bool SpendTheDocument(DateTime spendDate)
         {
@@ -16366,7 +16409,8 @@ namespace StorageAndTrade_1_0.Документи
             
             BaseSave();
             АктВиконанихРобіт_Triggers.AfterRecording(this);
-		    }
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар });
+        }
 
         public bool SpendTheDocument(DateTime spendDate)
         {
@@ -17000,7 +17044,8 @@ namespace StorageAndTrade_1_0.Документи
             
             BaseSave();
             ВведенняЗалишків_Triggers.AfterRecording(this);
-		    }
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар });
+        }
 
         public bool SpendTheDocument(DateTime spendDate)
         {
@@ -17724,7 +17769,8 @@ namespace StorageAndTrade_1_0.Документи
             
             BaseSave();
             
-		    }
+            BaseWriteFullTextSearch(GetBasis(), new string[] {  });
+        }
 
         public bool SpendTheDocument(DateTime spendDate)
         {
@@ -18155,7 +18201,8 @@ namespace StorageAndTrade_1_0.Документи
             
             BaseSave();
             
-		    }
+            BaseWriteFullTextSearch(GetBasis(), new string[] {  });
+        }
 
         public bool SpendTheDocument(DateTime spendDate)
         {
@@ -18576,7 +18623,8 @@ namespace StorageAndTrade_1_0.Документи
             
             BaseSave();
             
-		    }
+            BaseWriteFullTextSearch(GetBasis(), new string[] {  });
+        }
 
         public bool SpendTheDocument(DateTime spendDate)
         {
@@ -19068,7 +19116,8 @@ namespace StorageAndTrade_1_0.Документи
             
             BaseSave();
             ПсуванняТоварів_Triggers.AfterRecording(this);
-		    }
+            BaseWriteFullTextSearch(GetBasis(), new string[] {  });
+        }
 
         public bool SpendTheDocument(DateTime spendDate)
         {
@@ -19594,7 +19643,8 @@ namespace StorageAndTrade_1_0.Документи
             
             BaseSave();
             ВнутрішнєСпоживанняТоварів_Triggers.AfterRecording(this);
-		    }
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар });
+        }
 
         public bool SpendTheDocument(DateTime spendDate)
         {
@@ -20214,7 +20264,8 @@ namespace StorageAndTrade_1_0.Документи
             
             BaseSave();
             РахунокФактура_Triggers.AfterRecording(this);
-		    }
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар });
+        }
 
         public bool SpendTheDocument(DateTime spendDate)
         {
@@ -20726,7 +20777,8 @@ namespace StorageAndTrade_1_0.Документи
             
             BaseSave();
             РозміщенняТоварівНаСкладі_Triggers.AfterRecording(this);
-		    }
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар });
+        }
 
         public bool SpendTheDocument(DateTime spendDate)
         {
@@ -21204,7 +21256,8 @@ namespace StorageAndTrade_1_0.Документи
             
             BaseSave();
             ПереміщенняТоварівНаСкладі_Triggers.AfterRecording(this);
-		    }
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар });
+        }
 
         public bool SpendTheDocument(DateTime spendDate)
         {
@@ -21688,7 +21741,8 @@ namespace StorageAndTrade_1_0.Документи
             
             BaseSave();
             ЗбіркаТоварівНаСкладі_Triggers.AfterRecording(this);
-		    }
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар });
+        }
 
         public bool SpendTheDocument(DateTime spendDate)
         {
@@ -22130,7 +22184,8 @@ namespace StorageAndTrade_1_0.Документи
             
             BaseSave();
             РозміщенняНоменклатуриПоКоміркам_Triggers.AfterRecording(this);
-		    }
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар });
+        }
 
         public bool SpendTheDocument(DateTime spendDate)
         {

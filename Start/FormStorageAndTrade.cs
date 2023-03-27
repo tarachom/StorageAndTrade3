@@ -39,6 +39,7 @@ namespace StorageAndTrade
         Guid KernelSession { get; set; } = Guid.Empty;
 
         Notebook topNotebook = new Notebook() { Scrollable = true, EnablePopup = true, BorderWidth = 0, ShowBorder = false, TabPos = PositionType.Top };
+        SearchEntry entryFullTextSearch = new SearchEntry();
         Statusbar statusBar = new Statusbar();
 
         public FormStorageAndTrade() : base("\"Зберігання та Торгівля\" для України")
@@ -59,6 +60,9 @@ namespace StorageAndTrade
             vbox.PackStart(hbox, true, true, 0);
 
             CreateLeftMenu(hbox);
+
+            entryFullTextSearch.KeyReleaseEvent += OnKeyReleaseEntryFullTextSearch;
+            entryFullTextSearch.TextDeleted += OnClearFullTextSearch;
 
             hbox.PackStart(topNotebook, true, true, 0);
             vbox.PackStart(statusBar, false, false, 0);
@@ -116,6 +120,27 @@ namespace StorageAndTrade
                 });
             }
         }
+
+        #region FullTextSearch
+
+        void OnKeyReleaseEntryFullTextSearch(object? sender, KeyReleaseEventArgs args)
+        {
+            if (args.Event.Key == Gdk.Key.Return || args.Event.Key == Gdk.Key.KP_Enter)
+            {
+                PageFullTextSearch page = new PageFullTextSearch();
+
+                CreateNotebookPage("Пошук", () => { return page; });
+
+                page.Find(entryFullTextSearch.Text);
+            }
+        }
+
+        void OnClearFullTextSearch(object? sender, EventArgs args)
+        {
+            //entryFullTextSearch.Text = "";
+        }
+
+        #endregion
 
         #region BackgroundTask
 
@@ -203,6 +228,8 @@ namespace StorageAndTrade
             ScrolledWindow scrolLeftMenu = new ScrolledWindow() { ShadowType = ShadowType.In, WidthRequest = 170 };
             scrolLeftMenu.SetPolicy(PolicyType.Never, PolicyType.Never);
             scrolLeftMenu.Add(vbox);
+
+            vbox.PackStart(entryFullTextSearch, false, false, 10);
 
             CreateItemLeftMenu(vbox, "Документи", Документи, "images/documents.png");
             CreateItemLeftMenu(vbox, "Журнали", Журнали, "images/journal.png");

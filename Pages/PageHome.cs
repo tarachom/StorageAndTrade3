@@ -29,8 +29,6 @@ limitations under the License.
 
 using Gtk;
 
-using ТабличніСписки = StorageAndTrade_1_0.Документи.ТабличніСписки;
-
 namespace StorageAndTrade
 {
     class PageHome : VBox
