@@ -37,6 +37,9 @@ namespace StorageAndTrade
     {
         VBox vBoxMessage = new VBox();
         SearchEntry entryFullTextSearch = new SearchEntry() { WidthRequest = 500 };
+        const int maxRowsToPage = 10;
+        uint offset = 0;
+        int count = 0;
 
         public PageFullTextSearch() : base()
         {
@@ -47,7 +50,7 @@ namespace StorageAndTrade
             entryFullTextSearch.KeyReleaseEvent += (object? sender, KeyReleaseEventArgs args) =>
             {
                 if (args.Event.Key == Gdk.Key.Return || args.Event.Key == Gdk.Key.KP_Enter)
-                    Find(entryFullTextSearch.Text);
+                    Find(entryFullTextSearch.Text, offset = 0);
             };
 
             ScrolledWindow scroll = new ScrolledWindow() { ShadowType = ShadowType.In };
@@ -59,29 +62,78 @@ namespace StorageAndTrade
             ShowAll();
         }
 
-        public void Find(string findtext)
+        public void Find(string findtext, uint offset = 0)
         {
+            Console.WriteLine(offset);
+
             entryFullTextSearch.Text = findtext;
 
             foreach (Widget Child in vBoxMessage.Children)
                 vBoxMessage.Remove(Child);
 
-            List<Dictionary<string, object>>? listRow = Config.Kernel!.DataBase.SpetialTableFullTextSearchSelect(findtext);
+            List<Dictionary<string, object>>? listRow = Config.Kernel!.DataBase.SpetialTableFullTextSearchSelect(findtext, offset);
 
             if (listRow != null)
+            {
+                count = listRow.Count;
+
                 foreach (Dictionary<string, object> row in listRow)
                     CreateMessage(row);
+
+                CreatePagination();
+            }
 
             vBoxMessage.ShowAll();
         }
 
         void CreateMessage(Dictionary<string, object> row)
         {
-            HBox hBoxRow = new HBox();
+            Basis_PointerControl Обєкт = new Basis_PointerControl() { Caption = "" };
+            Обєкт.Pointer = (UuidAndText)row["obj"];
 
-            hBoxRow.PackStart(new Label(row["value"].ToString()) { UseMarkup = true }, false, false, 5);
+            HBox hBoxRowInfo = new HBox();
+            vBoxMessage.PackStart(hBoxRowInfo, false, false, 3);
+            hBoxRowInfo.PackStart(new Label(row["value"].ToString()) { UseMarkup = true, Wrap = true }, false, false, 12);
 
-            vBoxMessage.PackStart(hBoxRow, false, false, 5);
+            HBox hBoxRowType = new HBox();
+            vBoxMessage.PackStart(hBoxRowType, false, false, 3);
+            hBoxRowType.PackStart(new Label("<small>" + Обєкт.PointerName + ": " + Обєкт.Type + "</small>") { UseMarkup = true }, false, false, 12);
+
+            HBox hBoxRowControl = new HBox();
+            vBoxMessage.PackStart(hBoxRowControl, false, false, 3);
+            hBoxRowControl.PackStart(Обєкт, false, false, 0);
+
+            vBoxMessage.PackStart(new Separator(Orientation.Horizontal), false, false, 0);
+        }
+
+        void CreatePagination()
+        {
+            HBox hBoxPagination = new HBox() { Halign = Align.Center };
+
+            if (offset >= maxRowsToPage)
+            {
+                LinkButton linkButtonLast = new LinkButton("", " Попередня сторінка") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
+                linkButtonLast.Clicked += (object? sender, EventArgs args) =>
+                {
+                    if (offset >= maxRowsToPage) offset -= maxRowsToPage;
+                    Find(entryFullTextSearch.Text, offset);
+                };
+
+                hBoxPagination.PackStart(linkButtonLast, false, false, 0);
+            }
+
+            if (count == maxRowsToPage)
+            {
+                LinkButton linkButtonNext = new LinkButton("", " Наступна сторінка") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
+                linkButtonNext.Clicked += (object? sender, EventArgs args) =>
+                {
+                    Find(entryFullTextSearch.Text, offset += maxRowsToPage);
+                };
+
+                hBoxPagination.PackStart(linkButtonNext, false, false, 0);
+            }
+
+            vBoxMessage.PackStart(hBoxPagination, false, false, 10);
         }
     }
 }
