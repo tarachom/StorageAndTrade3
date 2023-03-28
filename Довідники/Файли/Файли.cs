@@ -261,7 +261,6 @@ namespace StorageAndTrade
                         {
                             Файли_Objest Файли_Objest_Новий = Файли_Objest.Copy();
                             Файли_Objest_Новий.Назва += " - Копія";
-                            Файли_Objest_Новий.Код = (++НумераціяДовідників.Файли_Const).ToString("D6");
                             Файли_Objest_Новий.Save();
 
                             SelectPointerItem = Файли_Objest_Новий.GetDirectoryPointer();

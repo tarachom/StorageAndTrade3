@@ -99,7 +99,7 @@ namespace StorageAndTrade
 
             if (ТабличніСписки.Каси_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.Каси_Записи.SelectPath, TreeViewGrid.Columns[0], false);
-                
+
             TreeViewGrid.GrabFocus();
         }
 
@@ -261,7 +261,6 @@ namespace StorageAndTrade
                         {
                             Каси_Objest Каси_Objest_Новий = Каси_Objest.Copy();
                             Каси_Objest_Новий.Назва += " - Копія";
-                            Каси_Objest_Новий.Код = (++НумераціяДовідників.Каси_Const).ToString("D6");
                             Каси_Objest_Новий.Save();
 
                             SelectPointerItem = Каси_Objest_Новий.GetDirectoryPointer();

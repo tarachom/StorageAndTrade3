@@ -260,8 +260,8 @@ namespace StorageAndTrade
         public void SetValue()
         {
             if (IsNew)
-                ДоговориКонтрагентів_Objest.Код = (++НумераціяДовідників.ДоговориКонтрагентів_Const).ToString("D6");
-
+                ДоговориКонтрагентів_Objest.New();
+                
             Код.Text = ДоговориКонтрагентів_Objest.Код;
             Назва.Text = ДоговориКонтрагентів_Objest.Назва;
             Дата.Value = ДоговориКонтрагентів_Objest.Дата;
@@ -310,12 +310,6 @@ namespace StorageAndTrade
 
         void Save(bool closePage = false)
         {
-            if (IsNew)
-            {
-                ДоговориКонтрагентів_Objest.New();
-                IsNew = false;
-            }
-
             GetValue();
 
             ДоговориКонтрагентів_Objest.Save();

@@ -129,6 +129,9 @@ namespace StorageAndTrade
 
         public void SetValue()
         {
+            if (IsNew)
+                ТипорозміриКомірок_Objest.New();
+
             Назва.Text = ТипорозміриКомірок_Objest.Назва;
             Висота.Text = ТипорозміриКомірок_Objest.Висота;
             Ширина.Text = ТипорозміриКомірок_Objest.Ширина;
@@ -151,12 +154,6 @@ namespace StorageAndTrade
 
         void Save(bool closePage = false)
         {
-            if (IsNew)
-            {
-                ТипорозміриКомірок_Objest.New();
-                IsNew = false;
-            }
-
             GetValue();
 
             ТипорозміриКомірок_Objest.Save();

@@ -348,7 +348,6 @@ namespace StorageAndTrade
                         {
                             Склади_Objest Склади_Objest_Новий = Склади_Objest.Copy();
                             Склади_Objest_Новий.Назва += " - Копія";
-                            Склади_Objest_Новий.Код = (++НумераціяДовідників.Склади_Const).ToString("D6");
                             Склади_Objest_Новий.Save();
 
                             SelectPointerItem = Склади_Objest_Новий.GetDirectoryPointer();

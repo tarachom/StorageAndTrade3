@@ -261,7 +261,6 @@ namespace StorageAndTrade
                         {
                             ВидиЦін_Objest ВидиЦін_Objest_Новий = ВидиЦін_Objest.Copy();
                             ВидиЦін_Objest_Новий.Назва += " - Копія";
-                            ВидиЦін_Objest_Новий.Код = (++НумераціяДовідників.ВидиЦін_Const).ToString("D6");
                             ВидиЦін_Objest_Новий.Save();
 
                             SelectPointerItem = ВидиЦін_Objest_Новий.GetDirectoryPointer();

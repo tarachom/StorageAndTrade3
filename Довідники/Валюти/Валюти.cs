@@ -331,7 +331,6 @@ namespace StorageAndTrade
                         {
                             Валюти_Objest Валюти_Objest_Новий = Валюти_Objest.Copy();
                             Валюти_Objest_Новий.Назва += " - Копія";
-                            Валюти_Objest_Новий.Код = (++НумераціяДовідників.Валюти_Const).ToString("D6");
                             Валюти_Objest_Новий.Save();
 
                             SelectPointerItem = Валюти_Objest_Новий.GetDirectoryPointer();

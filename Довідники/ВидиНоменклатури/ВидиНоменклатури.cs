@@ -261,7 +261,6 @@ namespace StorageAndTrade
                         {
                             ВидиНоменклатури_Objest ВидиНоменклатури_Objest_Новий = ВидиНоменклатури_Objest.Copy();
                             ВидиНоменклатури_Objest_Новий.Назва += " - Копія";
-                            ВидиНоменклатури_Objest_Новий.Код = (++НумераціяДовідників.ВидиНоменклатури_Const).ToString("D6");
                             ВидиНоменклатури_Objest_Новий.Save();
 
                             SelectPointerItem = ВидиНоменклатури_Objest_Новий.GetDirectoryPointer();

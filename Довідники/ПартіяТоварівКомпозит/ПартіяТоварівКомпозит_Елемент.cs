@@ -132,6 +132,9 @@ namespace StorageAndTrade
 
         public void SetValue()
         {
+            if (IsNew)
+                ПартіяТоварівКомпозит_Objest.New();
+
             Назва.Text = ПартіяТоварівКомпозит_Objest.Назва;
             ТипДокументу.ActiveId = ПартіяТоварівКомпозит_Objest.ТипДокументу.ToString();
             ПоступленняТоварівТаПослуг.Pointer = ПартіяТоварівКомпозит_Objest.ПоступленняТоварівТаПослуг;
@@ -156,12 +159,6 @@ namespace StorageAndTrade
 
         void Save(bool closePage = false)
         {
-            if (IsNew)
-            {
-                ПартіяТоварівКомпозит_Objest.New();
-                IsNew = false;
-            }
-
             GetValue();
 
             ПартіяТоварівКомпозит_Objest.Save();

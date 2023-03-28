@@ -260,7 +260,6 @@ namespace StorageAndTrade
                         {
                             ФізичніОсоби_Objest ФізичніОсоби_Objest_Новий = ФізичніОсоби_Objest.Copy();
                             ФізичніОсоби_Objest_Новий.Назва += " - Копія";
-                            ФізичніОсоби_Objest_Новий.Код = (++НумераціяДовідників.ФізичніОсоби_Const).ToString("D6");
                             ФізичніОсоби_Objest_Новий.Save();
 
                             SelectPointerItem = ФізичніОсоби_Objest_Новий.GetDirectoryPointer();

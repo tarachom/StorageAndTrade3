@@ -310,7 +310,6 @@ namespace StorageAndTrade
                         {
                             Банки_Objest Банки_Objest_Новий = Банки_Objest.Copy();
                             Банки_Objest_Новий.Назва += " - Копія";
-                            Банки_Objest_Новий.Код = (++НумераціяДовідників.Банки_Const).ToString("D6");
                             Банки_Objest_Новий.Save();
 
                             SelectPointerItem = Банки_Objest_Новий.GetDirectoryPointer();

@@ -106,8 +106,8 @@ namespace StorageAndTrade
         public void SetValue()
         {
             if (IsNew)
-                Каси_Objest.Код = (++НумераціяДовідників.Каси_Const).ToString("D6");
-
+                Каси_Objest.New();
+                
             Код.Text = Каси_Objest.Код;
             Назва.Text = Каси_Objest.Назва;
             Валюта.Pointer = Каси_Objest.Валюта;
@@ -124,12 +124,6 @@ namespace StorageAndTrade
 
         void Save(bool closePage = false)
         {
-            if (IsNew)
-            {
-                Каси_Objest.New();
-                IsNew = false;
-            }
-
             GetValue();
 
             Каси_Objest.Save();

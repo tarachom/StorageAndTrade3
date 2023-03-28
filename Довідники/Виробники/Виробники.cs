@@ -296,7 +296,6 @@ namespace StorageAndTrade
                         {
                             Виробники_Objest Виробники_Objest_Новий = Виробники_Objest.Copy();
                             Виробники_Objest_Новий.Назва += " - Копія";
-                            Виробники_Objest_Новий.Код = (++НумераціяДовідників.Виробники_Const).ToString("D6");
                             Виробники_Objest_Новий.Save();
 
                             SelectPointerItem = Виробники_Objest_Новий.GetDirectoryPointer();

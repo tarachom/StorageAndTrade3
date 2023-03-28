@@ -276,7 +276,6 @@ namespace StorageAndTrade
                     {
                         Номенклатура_Папки_Objest Номенклатура_Папки_Objest_Новий = Номенклатура_Папки_Objest.Copy();
                         Номенклатура_Папки_Objest_Новий.Назва += " - Копія";
-                        Номенклатура_Папки_Objest_Новий.Код = (++НумераціяДовідників.Номенклатура_Папки_Const).ToString("D6");
                         Номенклатура_Папки_Objest_Новий.Save();
 
                         Parent_Pointer = Номенклатура_Папки_Objest_Новий.GetDirectoryPointer();

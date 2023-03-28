@@ -166,6 +166,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
+                СкладськіКомірки_Objest.New();
                 СкладськіКомірки_Objest.Приміщення = СкладськеПриміщенняДляНового;
                 СкладськіКомірки_Objest.Папка = РодичДляНового;
             }
@@ -207,12 +208,6 @@ namespace StorageAndTrade
 
         void Save(bool closePage = false)
         {
-            if (IsNew)
-            {
-                СкладськіКомірки_Objest.New();
-                IsNew = false;
-            }
-
             GetValue();
 
             СкладськіКомірки_Objest.Save();

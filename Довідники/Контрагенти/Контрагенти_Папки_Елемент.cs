@@ -109,7 +109,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Контрагенти_Папки_Objest.Код = (++НумераціяДовідників.Контрагенти_Папки_Const).ToString("D6");
+                Контрагенти_Папки_Objest.New();
                 Контрагенти_Папки_Objest.Родич = РодичДляНового;
             }
             else
@@ -131,12 +131,6 @@ namespace StorageAndTrade
 
         void Save(bool closePage = false)
         {
-            if (IsNew)
-            {
-                Контрагенти_Папки_Objest.New();
-                IsNew = false;
-            }
-
             GetValue();
 
             Контрагенти_Папки_Objest.Save();

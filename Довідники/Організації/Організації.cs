@@ -261,7 +261,6 @@ namespace StorageAndTrade
                         {
                             Організації_Objest Організації_Objest_Новий = Організації_Objest.Copy();
                             Організації_Objest_Новий.Назва += " - Копія";
-                            Організації_Objest_Новий.Код = (++НумераціяДовідників.Організації_Const).ToString("D6");
                             Організації_Objest_Новий.Save();
 
                             SelectPointerItem = Організації_Objest_Новий.GetDirectoryPointer();

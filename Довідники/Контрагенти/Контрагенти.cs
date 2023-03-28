@@ -334,7 +334,6 @@ namespace StorageAndTrade
                         {
                             Контрагенти_Objest Контрагенти_Objest_Новий = Контрагенти_Objest.Copy();
                             Контрагенти_Objest_Новий.Назва += " - Копія";
-                            Контрагенти_Objest_Новий.Код = (++НумераціяДовідників.Контрагенти_Const).ToString("D6");
                             Контрагенти_Objest_Новий.Save();
 
                             SelectPointerItem = Контрагенти_Objest_Новий.GetDirectoryPointer();

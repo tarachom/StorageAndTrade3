@@ -152,7 +152,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Склади_Objest.Код = (++НумераціяДовідників.Склади_Const).ToString("D6");
+                Склади_Objest.New();
                 Склади_Objest.Папка = РодичДляНового;
             }
 
@@ -187,12 +187,6 @@ namespace StorageAndTrade
 
         void Save(bool closePage = false)
         {
-            if (IsNew)
-            {
-                Склади_Objest.New();
-                IsNew = false;
-            }
-
             GetValue();
 
             Склади_Objest.Save();

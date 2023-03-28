@@ -116,7 +116,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                ПакуванняОдиниціВиміру_Objest.Код = (++НумераціяДовідників.ПакуванняОдиниціВиміру_Const).ToString("D6");
+                ПакуванняОдиниціВиміру_Objest.New();
                 ПакуванняОдиниціВиміру_Objest.КількістьУпаковок = 1;
             }
 
@@ -138,12 +138,6 @@ namespace StorageAndTrade
 
         void Save(bool closePage = false)
         {
-            if (IsNew)
-            {
-                ПакуванняОдиниціВиміру_Objest.New();
-                IsNew = false;
-            }
-
             GetValue();
 
             ПакуванняОдиниціВиміру_Objest.Save();

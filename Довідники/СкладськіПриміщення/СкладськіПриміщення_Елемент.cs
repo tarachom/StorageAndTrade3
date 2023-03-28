@@ -109,6 +109,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
+                СкладськіПриміщення_Objest.New();
                 СкладськіПриміщення_Objest.Склад = СкладДляНового;
             }
 
@@ -131,12 +132,6 @@ namespace StorageAndTrade
 
         void Save(bool closePage = false)
         {
-            if (IsNew)
-            {
-                СкладськіПриміщення_Objest.New();
-                IsNew = false;
-            }
-
             GetValue();
 
             СкладськіПриміщення_Objest.Save();

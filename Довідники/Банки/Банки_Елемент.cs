@@ -160,8 +160,8 @@ namespace StorageAndTrade
         public void SetValue()
         {
             if (IsNew)
-                Банки_Objest.Код = (++НумераціяДовідників.Банки_Const).ToString("D6");
-
+                Банки_Objest.New();
+                
             Код.Text = Банки_Objest.Код;
             Назва.Text = Банки_Objest.Назва;
             ПовнаНазва.Text = Банки_Objest.ПовнаНазва;
@@ -181,12 +181,6 @@ namespace StorageAndTrade
 
         void Save(bool closePage = false)
         {
-            if (IsNew)
-            {
-                Банки_Objest.New();
-                IsNew = false;
-            }
-
             GetValue();
 
             Банки_Objest.Save();

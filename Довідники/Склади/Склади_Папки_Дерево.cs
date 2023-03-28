@@ -386,7 +386,6 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
                     {
                         Склади_Папки_Objest Склади_Папки_Objest_Новий = Склади_Папки_Objest.Copy();
                         Склади_Папки_Objest_Новий.Назва += " - Копія";
-                        Склади_Папки_Objest_Новий.Код = (++НумераціяДовідників.Склади_Папки_Const).ToString("D6");
                         Склади_Папки_Objest_Новий.Save();
 
                         Parent_Pointer = Склади_Папки_Objest_Новий.GetDirectoryPointer();

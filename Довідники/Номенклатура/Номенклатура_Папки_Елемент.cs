@@ -109,7 +109,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Номенклатура_Папки_Objest.Код = (++НумераціяДовідників.Номенклатура_Папки_Const).ToString("D6");
+                Номенклатура_Папки_Objest.New();
                 Номенклатура_Папки_Objest.Родич = РодичДляНового;
             }
             else
@@ -131,12 +131,6 @@ namespace StorageAndTrade
 
         void Save(bool closePage = false)
         {
-            if (IsNew)
-            {
-                Номенклатура_Папки_Objest.New();
-                IsNew = false;
-            }
-
             GetValue();
 
             Номенклатура_Папки_Objest.Save();

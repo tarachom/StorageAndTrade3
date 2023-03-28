@@ -370,7 +370,6 @@ namespace StorageAndTrade
                         {
                             Номенклатура_Objest Номенклатура_Objest_Новий = Номенклатура_Objest.Copy();
                             Номенклатура_Objest_Новий.Назва += " - Копія";
-                            Номенклатура_Objest_Новий.Код = (++НумераціяДовідників.Номенклатура_Const).ToString("D6");
                             Номенклатура_Objest_Новий.Save();
 
                             SelectPointerItem = Номенклатура_Objest_Новий.GetDirectoryPointer();

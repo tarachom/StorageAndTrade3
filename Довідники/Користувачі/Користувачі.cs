@@ -261,7 +261,6 @@ namespace StorageAndTrade
                         {
                             Користувачі_Objest Користувачі_Objest_Новий = Користувачі_Objest.Copy();
                             Користувачі_Objest_Новий.Назва += " - Копія";
-                            Користувачі_Objest_Новий.Код = (++НумераціяДовідників.Користувачі_Const).ToString("D6");
                             Користувачі_Objest_Новий.Save();
 
                             SelectPointerItem = Користувачі_Objest_Новий.GetDirectoryPointer();

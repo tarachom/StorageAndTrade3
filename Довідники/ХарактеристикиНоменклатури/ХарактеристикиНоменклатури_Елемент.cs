@@ -119,7 +119,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                ХарактеристикиНоменклатури_Objest.Код = (++НумераціяДовідників.ХарактеристикиНоменклатури_Const).ToString("D6");
+                ХарактеристикиНоменклатури_Objest.New();
                 ХарактеристикиНоменклатури_Objest.Номенклатура = НоменклатураДляНового;
             }
 
@@ -141,12 +141,6 @@ namespace StorageAndTrade
 
         void Save(bool closePage = false)
         {
-            if (IsNew)
-            {
-                ХарактеристикиНоменклатури_Objest.New();
-                IsNew = false;
-            }
-
             GetValue();
 
             ХарактеристикиНоменклатури_Objest.Save();

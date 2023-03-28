@@ -140,7 +140,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                СтаттяРухуКоштів_Objest.Код = (++НумераціяДовідників.СтаттяРухуКоштів_Const).ToString("D6");
+                СтаттяРухуКоштів_Objest.New();
                 СтаттяРухуКоштів_Objest.ВидРухуКоштів = Перелічення.ВидиРухуКоштів.ОплатаОборотнихАктивів;
             }
 
@@ -164,12 +164,6 @@ namespace StorageAndTrade
 
         void Save(bool closePage = false)
         {
-            if (IsNew)
-            {
-                СтаттяРухуКоштів_Objest.New();
-                IsNew = false;
-            }
-
             GetValue();
 
             СтаттяРухуКоштів_Objest.Save();

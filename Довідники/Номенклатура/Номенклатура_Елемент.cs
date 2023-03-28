@@ -198,7 +198,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Номенклатура_Objest.Код = (++НумераціяДовідників.Номенклатура_Const).ToString("D6");
+                Номенклатура_Objest.New();
                 Номенклатура_Objest.Папка = РодичДляНового;
                 Номенклатура_Objest.ТипНоменклатури = Перелічення.ТипиНоменклатури.Товар;
                 Номенклатура_Objest.ОдиницяВиміру = ЗначенняЗаЗамовчуванням.ОсновнаОдиницяПакування_Const;
@@ -243,12 +243,6 @@ namespace StorageAndTrade
 
         void Save(bool closePage = false)
         {
-            if (IsNew)
-            {
-                Номенклатура_Objest.New();
-                IsNew = false;
-            }
-
             GetValue();
 
             Номенклатура_Objest.Save();

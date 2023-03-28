@@ -99,8 +99,8 @@ namespace StorageAndTrade
         public void SetValue()
         {
             if (IsNew)
-                ФізичніОсоби_Objest.Код = (++НумераціяДовідників.ФізичніОсоби_Const).ToString("D6");
-
+                ФізичніОсоби_Objest.New();
+                
             Код.Text = ФізичніОсоби_Objest.Код;
             Назва.Text = ФізичніОсоби_Objest.Назва;
         }
@@ -115,12 +115,6 @@ namespace StorageAndTrade
 
         void Save(bool closePage = false)
         {
-            if (IsNew)
-            {
-                ФізичніОсоби_Objest.New();
-                IsNew = false;
-            }
-
             GetValue();
 
             ФізичніОсоби_Objest.Save();

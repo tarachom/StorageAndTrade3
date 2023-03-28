@@ -106,7 +106,7 @@ namespace StorageAndTrade
         public void SetValue()
         {
             if (IsNew)
-                ВидиНоменклатури_Objest.Код = (++НумераціяДовідників.ВидиНоменклатури_Const).ToString("D6");
+                ВидиНоменклатури_Objest.New();
 
             Код.Text = ВидиНоменклатури_Objest.Код;
             Назва.Text = ВидиНоменклатури_Objest.Назва;
@@ -124,12 +124,6 @@ namespace StorageAndTrade
 
         void Save(bool closePage = false)
         {
-            if (IsNew)
-            {
-                ВидиНоменклатури_Objest.New();
-                IsNew = false;
-            }
-
             GetValue();
 
             ВидиНоменклатури_Objest.Save();

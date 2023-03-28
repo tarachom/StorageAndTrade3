@@ -119,8 +119,8 @@ namespace StorageAndTrade
         public void SetValue()
         {
             if (IsNew)
-                Користувачі_Objest.Код = (++НумераціяДовідників.Користувачі_Const).ToString("D6");
-
+                Користувачі_Objest.New();
+                
             Код.Text = Користувачі_Objest.Код;
             Назва.Text = Користувачі_Objest.Назва;
             ФізичнаОсоба.Pointer = Користувачі_Objest.ФізичнаОсоба;
@@ -139,12 +139,6 @@ namespace StorageAndTrade
 
         void Save(bool closePage = false)
         {
-            if (IsNew)
-            {
-                Користувачі_Objest.New();
-                IsNew = false;
-            }
-
             GetValue();
 
             Користувачі_Objest.Save();

@@ -113,8 +113,8 @@ namespace StorageAndTrade
         public void SetValue()
         {
             if (IsNew)
-                БанківськіРахункиКонтрагентів_Objest.Код = (++НумераціяДовідників.БанківськіРахункиКонтрагентів_Const).ToString("D6");
-
+                БанківськіРахункиКонтрагентів_Objest.New();
+                
             Код.Text = БанківськіРахункиКонтрагентів_Objest.Код;
             Назва.Text = БанківськіРахункиКонтрагентів_Objest.Назва;
             Валюта.Pointer = БанківськіРахункиКонтрагентів_Objest.Валюта;
@@ -133,12 +133,6 @@ namespace StorageAndTrade
 
         void Save(bool closePage = false)
         {
-            if (IsNew)
-            {
-                БанківськіРахункиКонтрагентів_Objest.New();
-                IsNew = false;
-            }
-
             GetValue();
 
             БанківськіРахункиКонтрагентів_Objest.Save();

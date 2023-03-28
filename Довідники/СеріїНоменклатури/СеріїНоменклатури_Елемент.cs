@@ -89,6 +89,9 @@ namespace StorageAndTrade
 
         public void SetValue()
         {
+            if (IsNew)
+                СеріїНоменклатури_Objest.New();
+
             Номер.Text = СеріїНоменклатури_Objest.Номер;
         }
 
@@ -101,12 +104,6 @@ namespace StorageAndTrade
 
         void Save(bool closePage = false)
         {
-            if (IsNew)
-            {
-                СеріїНоменклатури_Objest.New();
-                IsNew = false;
-            }
-
             GetValue();
 
             СеріїНоменклатури_Objest.Save();

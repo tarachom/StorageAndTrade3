@@ -106,8 +106,8 @@ namespace StorageAndTrade
         public void SetValue()
         {
             if (IsNew)
-                ВидиЦін_Objest.Код = (++НумераціяДовідників.ВидиЦін_Const).ToString("D6");
-
+                ВидиЦін_Objest.New();
+                
             Код.Text = ВидиЦін_Objest.Код;
             Назва.Text = ВидиЦін_Objest.Назва;
             Валюта.Pointer = ВидиЦін_Objest.Валюта;
@@ -124,12 +124,6 @@ namespace StorageAndTrade
 
         void Save(bool closePage = false)
         {
-            if (IsNew)
-            {
-                ВидиЦін_Objest.New();
-                IsNew = false;
-            }
-
             GetValue();
 
             ВидиЦін_Objest.Save();

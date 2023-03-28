@@ -99,8 +99,8 @@ namespace StorageAndTrade
         public void SetValue()
         {
             if (IsNew)
-                СтруктураПідприємства_Objest.Код = (++НумераціяДовідників.СтруктураПідприємства_Const).ToString("D6");
-
+                СтруктураПідприємства_Objest.New();
+                
             Код.Text = СтруктураПідприємства_Objest.Код;
             Назва.Text = СтруктураПідприємства_Objest.Назва;
         }
@@ -115,12 +115,6 @@ namespace StorageAndTrade
 
         void Save(bool closePage = false)
         {
-            if (IsNew)
-            {
-                СтруктураПідприємства_Objest.New();
-                IsNew = false;
-            }
-
             GetValue();
 
             СтруктураПідприємства_Objest.Save();

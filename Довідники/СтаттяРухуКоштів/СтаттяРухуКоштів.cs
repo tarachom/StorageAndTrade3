@@ -261,7 +261,6 @@ namespace StorageAndTrade
                         {
                             СтаттяРухуКоштів_Objest СтаттяРухуКоштів_Objest_Новий = СтаттяРухуКоштів_Objest.Copy();
                             СтаттяРухуКоштів_Objest_Новий.Назва += " - Копія";
-                            СтаттяРухуКоштів_Objest_Новий.Код = (++НумераціяДовідників.СтаттяРухуКоштів_Const).ToString("D6");
                             СтаттяРухуКоштів_Objest_Новий.Save();
 
                             SelectPointerItem = СтаттяРухуКоштів_Objest_Новий.GetDirectoryPointer();

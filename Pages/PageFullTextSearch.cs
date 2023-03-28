@@ -64,8 +64,6 @@ namespace StorageAndTrade
 
         public void Find(string findtext, uint offset = 0)
         {
-            Console.WriteLine(offset);
-
             entryFullTextSearch.Text = findtext;
 
             foreach (Widget Child in vBoxMessage.Children)
@@ -93,7 +91,7 @@ namespace StorageAndTrade
 
             HBox hBoxRowInfo = new HBox();
             vBoxMessage.PackStart(hBoxRowInfo, false, false, 3);
-            hBoxRowInfo.PackStart(new Label(row["value"].ToString()) { UseMarkup = true, Wrap = true }, false, false, 12);
+            hBoxRowInfo.PackStart(new Label(row["value"].ToString()) { UseMarkup = true, Wrap = true, Selectable = true }, false, false, 12);
 
             HBox hBoxRowType = new HBox();
             vBoxMessage.PackStart(hBoxRowType, false, false, 3);
