@@ -36,17 +36,19 @@ namespace StorageAndTrade
     class PageFullTextSearch : VBox
     {
         VBox vBoxMessage = new VBox();
+        SearchEntry entryFullTextSearch = new SearchEntry() { WidthRequest = 500 };
 
         public PageFullTextSearch() : base()
         {
-            //Кнопки
-            HBox hBoxTop = new HBox();
+            HBox hBoxTop = new HBox() { Halign = Align.Center };
             PackStart(hBoxTop, false, false, 10);
 
-            Button bClear = new Button("Очистити");
-            //bClear.Clicked += OnClear;
-
-            hBoxTop.PackStart(bClear, false, false, 10);
+            hBoxTop.PackStart(entryFullTextSearch, false, false, 10);
+            entryFullTextSearch.KeyReleaseEvent += (object? sender, KeyReleaseEventArgs args) =>
+            {
+                if (args.Event.Key == Gdk.Key.Return || args.Event.Key == Gdk.Key.KP_Enter)
+                    Find(entryFullTextSearch.Text);
+            };
 
             ScrolledWindow scroll = new ScrolledWindow() { ShadowType = ShadowType.In };
             scroll.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
@@ -59,6 +61,8 @@ namespace StorageAndTrade
 
         public void Find(string findtext)
         {
+            entryFullTextSearch.Text = findtext;
+
             foreach (Widget Child in vBoxMessage.Children)
                 vBoxMessage.Remove(Child);
 

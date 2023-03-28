@@ -39,33 +39,41 @@ namespace StorageAndTrade
         Guid KernelSession { get; set; } = Guid.Empty;
 
         Notebook topNotebook = new Notebook() { Scrollable = true, EnablePopup = true, BorderWidth = 0, ShowBorder = false, TabPos = PositionType.Top };
-        SearchEntry entryFullTextSearch = new SearchEntry();
         Statusbar statusBar = new Statusbar();
 
-        public FormStorageAndTrade() : base("\"Зберігання та Торгівля\" для України")
+        public FormStorageAndTrade() : base("")
         {
             SetDefaultSize(1200, 900);
             SetPosition(WindowPosition.Center);
             Maximize();
 
+            DeleteEvent += delegate { Program.Quit(); };
+
             if (File.Exists(Program.IcoFileName))
                 SetDefaultIconFromFile(Program.IcoFileName);
 
-            DeleteEvent += delegate { Program.Quit(); };
+            HeaderBar headerBar = new HeaderBar();
+            headerBar.ShowCloseButton = true;
+            headerBar.Title = "\"Зберігання та Торгівля\" для України";
+            headerBar.Subtitle = "Облік складу, торгівлі та фінансів";
+            Titlebar = headerBar;
 
-            VBox vbox = new VBox();
-            Add(vbox);
+            //Повнотекстовий пошук
+            Button buttonFind = new Button();
+            buttonFind.Add(new Image(AppContext.BaseDirectory + "images/find.png"));
+            buttonFind.Clicked += OnButtonFindClicked;
+            headerBar.PackEnd(buttonFind);
 
-            HBox hbox = new HBox();
-            vbox.PackStart(hbox, true, true, 0);
+            VBox vBox = new VBox();
+            Add(vBox);
 
-            CreateLeftMenu(hbox);
+            HBox hBox = new HBox();
+            vBox.PackStart(hBox, true, true, 0);
 
-            entryFullTextSearch.KeyReleaseEvent += OnKeyReleaseEntryFullTextSearch;
-            entryFullTextSearch.TextDeleted += OnClearFullTextSearch;
+            CreateLeftMenu(hBox);
 
-            hbox.PackStart(topNotebook, true, true, 0);
-            vbox.PackStart(statusBar, false, false, 0);
+            hBox.PackStart(topNotebook, true, true, 0);
+            vBox.PackStart(statusBar, false, false, 0);
 
             ShowAll();
         }
@@ -123,21 +131,23 @@ namespace StorageAndTrade
 
         #region FullTextSearch
 
-        void OnKeyReleaseEntryFullTextSearch(object? sender, KeyReleaseEventArgs args)
+        void OnButtonFindClicked(object? sender, EventArgs args)
         {
-            if (args.Event.Key == Gdk.Key.Return || args.Event.Key == Gdk.Key.KP_Enter)
+            Popover PopoverFind = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 5 };
+
+            SearchEntry entryFullTextSearch = new SearchEntry() { WidthRequest = 500 };
+            entryFullTextSearch.KeyReleaseEvent += (object? sender, KeyReleaseEventArgs args) =>
             {
-                PageFullTextSearch page = new PageFullTextSearch();
+                if (args.Event.Key == Gdk.Key.Return || args.Event.Key == Gdk.Key.KP_Enter)
+                {
+                    PageFullTextSearch page = new PageFullTextSearch();
+                    CreateNotebookPage("Пошук", () => { return page; });
+                    page.Find(((SearchEntry)sender!).Text);
+                }
+            };
 
-                CreateNotebookPage("Пошук", () => { return page; });
-
-                page.Find(entryFullTextSearch.Text);
-            }
-        }
-
-        void OnClearFullTextSearch(object? sender, EventArgs args)
-        {
-            //entryFullTextSearch.Text = "";
+            PopoverFind.Add(entryFullTextSearch);
+            PopoverFind.ShowAll();
         }
 
         #endregion
@@ -228,8 +238,6 @@ namespace StorageAndTrade
             ScrolledWindow scrolLeftMenu = new ScrolledWindow() { ShadowType = ShadowType.In, WidthRequest = 170 };
             scrolLeftMenu.SetPolicy(PolicyType.Never, PolicyType.Never);
             scrolLeftMenu.Add(vbox);
-
-            vbox.PackStart(entryFullTextSearch, false, false, 10);
 
             CreateItemLeftMenu(vbox, "Документи", Документи, "images/documents.png");
             CreateItemLeftMenu(vbox, "Журнали", Журнали, "images/journal.png");
