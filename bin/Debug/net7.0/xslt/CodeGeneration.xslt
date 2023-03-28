@@ -1222,6 +1222,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
             <xsl:for-each select="Fields/Field">
               <xsl:text>copy.</xsl:text><xsl:value-of select="Name"/><xsl:text> = </xsl:text><xsl:value-of select="Name"/>;
             </xsl:for-each>
+            copy.New();
             return copy;
         }
 
