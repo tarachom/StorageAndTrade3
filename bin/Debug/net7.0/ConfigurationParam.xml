@@ -25,4 +25,19 @@
     <BaseName>storage_and_trade</BaseName>
     <OtherParam />
   </Configuration>
+  <Configuration Select="False">
+    <Key>4ffa8fdd-679d-497e-a75b-20450a979596</Key>
+    <Name>"Зберігання та Торгівля" для України - Копія</Name>
+    <Server>localhost</Server>
+    <Port>5432</Port>
+    <Login>postgres</Login>
+    <Password>1</Password>
+    <BaseName>storage_and_trade_backup</BaseName>
+    <OtherParam>
+      <Param name="IsGenerateCode">True</Param>
+      <Param name="GenerateCodePath">/home/tarachom/Projects/StorageAndTrade3/Configurator</Param>
+      <Param name="CompileProgramPath">
+      </Param>
+    </OtherParam>
+  </Configuration>
 </root>

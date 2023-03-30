@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 28.03.2023 22:10:40
+ * Дата конфігурації: 30.03.2023 16:24:50
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -3171,12 +3171,13 @@ namespace StorageAndTrade_1_0.Довідники
         public const string РеєстраційнийНомер = "col_d1";
         public const string Папка = "col_a1";
         public const string Опис = "col_a2";
+        public const string КлючовіСловаДляПошуку = "col_a3";
     }
 
     public class Контрагенти_Objest : DirectoryObject
     {
         public Контрагенти_Objest() : base(Config.Kernel!, "tab_a08",
-             new string[] { "col_c7", "col_c8", "col_c9", "col_d1", "col_a1", "col_a2" }) 
+             new string[] { "col_c7", "col_c8", "col_c9", "col_d1", "col_a1", "col_a2", "col_a3" }) 
         {
             Назва = "";
             Код = "";
@@ -3184,6 +3185,7 @@ namespace StorageAndTrade_1_0.Довідники
             РеєстраційнийНомер = "";
             Папка = new Довідники.Контрагенти_Папки_Pointer();
             Опис = "";
+            КлючовіСловаДляПошуку = "";
             
             //Табличні частини
             Контакти_TablePart = new Контрагенти_Контакти_TablePart(this);
@@ -3208,6 +3210,7 @@ namespace StorageAndTrade_1_0.Довідники
                 РеєстраційнийНомер = base.FieldValue["col_d1"]?.ToString() ?? "";
                 Папка = new Довідники.Контрагенти_Папки_Pointer(base.FieldValue["col_a1"]);
                 Опис = base.FieldValue["col_a2"]?.ToString() ?? "";
+                КлючовіСловаДляПошуку = base.FieldValue["col_a3"]?.ToString() ?? "";
                 
                 BaseClear();
                 return true;
@@ -3225,10 +3228,11 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_d1"] = РеєстраційнийНомер;
             base.FieldValue["col_a1"] = Папка.UnigueID.UGuid;
             base.FieldValue["col_a2"] = Опис;
+            base.FieldValue["col_a3"] = КлючовіСловаДляПошуку;
             
             BaseSave();
             Контрагенти_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НазваПовна, РеєстраційнийНомер, Опис });
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НазваПовна, РеєстраційнийНомер, Опис, КлючовіСловаДляПошуку });
         }
 
         public Контрагенти_Objest Copy()
@@ -3240,6 +3244,7 @@ namespace StorageAndTrade_1_0.Довідники
             copy.РеєстраційнийНомер = РеєстраційнийНомер;
             copy.Папка = Папка;
             copy.Опис = Опис;
+            copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
             copy.New();
             return copy;
@@ -3267,6 +3272,7 @@ namespace StorageAndTrade_1_0.Довідники
         public string РеєстраційнийНомер { get; set; }
         public Довідники.Контрагенти_Папки_Pointer Папка { get; set; }
         public string Опис { get; set; }
+        public string КлючовіСловаДляПошуку { get; set; }
         
         //Табличні частини
         public Контрагенти_Контакти_TablePart Контакти_TablePart { get; set; }
@@ -9757,6 +9763,7 @@ namespace StorageAndTrade_1_0.Документи
         public const string Менеджер = "col_b7";
         public const string Основа = "col_b8";
         public const string Коментар = "col_a2";
+        public const string КлючовіСловаДляПошуку = "col_b9";
     }
 
     public static class ЗамовленняПостачальнику_Export
@@ -9954,6 +9961,12 @@ namespace StorageAndTrade_1_0.Документи
                 xmlWriter.WriteValue(ЗамовленняПостачальнику_Objest.Коментар);
               
             xmlWriter.WriteEndElement(); //Коментар
+            xmlWriter.WriteStartElement("КлючовіСловаДляПошуку");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ЗамовленняПостачальнику_Objest.КлючовіСловаДляПошуку);
+              
+            xmlWriter.WriteEndElement(); //КлючовіСловаДляПошуку
 
                 /* 
                 Табличні частини
@@ -10068,7 +10081,7 @@ namespace StorageAndTrade_1_0.Документи
     public class ЗамовленняПостачальнику_Objest : DocumentObject
     {
         public ЗамовленняПостачальнику_Objest() : base(Config.Kernel!, "tab_a25", "ЗамовленняПостачальнику",
-             new string[] { "docname", "docnomer", "docdate", "col_k2", "col_k3", "col_k4", "col_k5", "col_k6", "col_k7", "col_a1", "col_a3", "col_a4", "col_a5", "col_a7", "col_a8", "col_a9", "col_b1", "col_b2", "col_b3", "col_b4", "col_a6", "col_b5", "col_b6", "col_b7", "col_b8", "col_a2" }) 
+             new string[] { "docname", "docnomer", "docdate", "col_k2", "col_k3", "col_k4", "col_k5", "col_k6", "col_k7", "col_a1", "col_a3", "col_a4", "col_a5", "col_a7", "col_a8", "col_a9", "col_b1", "col_b2", "col_b3", "col_b4", "col_a6", "col_b5", "col_b6", "col_b7", "col_b8", "col_a2", "col_b9" }) 
         {
             Назва = "";
             НомерДок = "";
@@ -10096,6 +10109,7 @@ namespace StorageAndTrade_1_0.Документи
             Менеджер = new Довідники.Користувачі_Pointer();
             Основа = new UuidAndText();
             Коментар = "";
+            КлючовіСловаДляПошуку = "";
             
             //Табличні частини
             Товари_TablePart = new ЗамовленняПостачальнику_Товари_TablePart(this);
@@ -10139,6 +10153,7 @@ namespace StorageAndTrade_1_0.Документи
                 Менеджер = new Довідники.Користувачі_Pointer(base.FieldValue["col_b7"]);
                 Основа = (base.FieldValue["col_b8"] != DBNull.Value) ? (UuidAndText)base.FieldValue["col_b8"] : new UuidAndText();
                 Коментар = base.FieldValue["col_a2"]?.ToString() ?? "";
+                КлючовіСловаДляПошуку = base.FieldValue["col_b9"]?.ToString() ?? "";
                 
                 BaseClear();
                 return true;
@@ -10176,10 +10191,11 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_b7"] = Менеджер.UnigueID.UGuid;
             base.FieldValue["col_b8"] = Основа;
             base.FieldValue["col_a2"] = Коментар;
+            base.FieldValue["col_b9"] = КлючовіСловаДляПошуку;
             
             BaseSave();
             ЗамовленняПостачальнику_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар });
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
         }
 
         public bool SpendTheDocument(DateTime spendDate)
@@ -10224,6 +10240,7 @@ namespace StorageAndTrade_1_0.Документи
             copy.Менеджер = Менеджер;
             copy.Основа = Основа;
             copy.Коментар = Коментар;
+            copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
             copy.New();
             return copy;
@@ -10271,6 +10288,7 @@ namespace StorageAndTrade_1_0.Документи
         public Довідники.Користувачі_Pointer Менеджер { get; set; }
         public UuidAndText Основа { get; set; }
         public string Коментар { get; set; }
+        public string КлючовіСловаДляПошуку { get; set; }
         
         //Табличні частини
         public ЗамовленняПостачальнику_Товари_TablePart Товари_TablePart { get; set; }
@@ -10503,6 +10521,7 @@ namespace StorageAndTrade_1_0.Документи
         public const string Каса = "col_d3";
         public const string Основа = "col_a1";
         public const string Коментар = "col_b1";
+        public const string КлючовіСловаДляПошуку = "col_a2";
     }
 
     public static class ПоступленняТоварівТаПослуг_Export
@@ -10740,6 +10759,12 @@ namespace StorageAndTrade_1_0.Документи
                 xmlWriter.WriteValue(ПоступленняТоварівТаПослуг_Objest.Коментар);
               
             xmlWriter.WriteEndElement(); //Коментар
+            xmlWriter.WriteStartElement("КлючовіСловаДляПошуку");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ПоступленняТоварівТаПослуг_Objest.КлючовіСловаДляПошуку);
+              
+            xmlWriter.WriteEndElement(); //КлючовіСловаДляПошуку
 
                 /* 
                 Табличні частини
@@ -10872,7 +10897,7 @@ namespace StorageAndTrade_1_0.Документи
     public class ПоступленняТоварівТаПослуг_Objest : DocumentObject
     {
         public ПоступленняТоварівТаПослуг_Objest() : base(Config.Kernel!, "tab_a32", "ПоступленняТоварівТаПослуг",
-             new string[] { "docname", "docnomer", "docdate", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b2", "col_b3", "col_b4", "col_b5", "col_b6", "col_b7", "col_b8", "col_b9", "col_c1", "col_c2", "col_c3", "col_c4", "col_c5", "col_c6", "col_c7", "col_c8", "col_c9", "col_d1", "col_d2", "col_d3", "col_a1", "col_b1" }) 
+             new string[] { "docname", "docnomer", "docdate", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b2", "col_b3", "col_b4", "col_b5", "col_b6", "col_b7", "col_b8", "col_b9", "col_c1", "col_c2", "col_c3", "col_c4", "col_c5", "col_c6", "col_c7", "col_c8", "col_c9", "col_d1", "col_d2", "col_d3", "col_a1", "col_b1", "col_a2" }) 
         {
             Назва = "";
             НомерДок = "";
@@ -10906,6 +10931,7 @@ namespace StorageAndTrade_1_0.Документи
             Каса = new Довідники.Каси_Pointer();
             Основа = new UuidAndText();
             Коментар = "";
+            КлючовіСловаДляПошуку = "";
             
             //Табличні частини
             Товари_TablePart = new ПоступленняТоварівТаПослуг_Товари_TablePart(this);
@@ -10955,6 +10981,7 @@ namespace StorageAndTrade_1_0.Документи
                 Каса = new Довідники.Каси_Pointer(base.FieldValue["col_d3"]);
                 Основа = (base.FieldValue["col_a1"] != DBNull.Value) ? (UuidAndText)base.FieldValue["col_a1"] : new UuidAndText();
                 Коментар = base.FieldValue["col_b1"]?.ToString() ?? "";
+                КлючовіСловаДляПошуку = base.FieldValue["col_a2"]?.ToString() ?? "";
                 
                 BaseClear();
                 return true;
@@ -10998,10 +11025,11 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_d3"] = Каса.UnigueID.UGuid;
             base.FieldValue["col_a1"] = Основа;
             base.FieldValue["col_b1"] = Коментар;
+            base.FieldValue["col_a2"] = КлючовіСловаДляПошуку;
             
             BaseSave();
             ПоступленняТоварівТаПослуг_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар });
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
         }
 
         public bool SpendTheDocument(DateTime spendDate)
@@ -11052,6 +11080,7 @@ namespace StorageAndTrade_1_0.Документи
             copy.Каса = Каса;
             copy.Основа = Основа;
             copy.Коментар = Коментар;
+            copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
             copy.New();
             return copy;
@@ -11105,6 +11134,7 @@ namespace StorageAndTrade_1_0.Документи
         public Довідники.Каси_Pointer Каса { get; set; }
         public UuidAndText Основа { get; set; }
         public string Коментар { get; set; }
+        public string КлючовіСловаДляПошуку { get; set; }
         
         //Табличні частини
         public ПоступленняТоварівТаПослуг_Товари_TablePart Товари_TablePart { get; set; }
@@ -11342,6 +11372,7 @@ namespace StorageAndTrade_1_0.Документи
         public const string ДатаПоверненняТари = "col_c9";
         public const string Коментар = "col_c1";
         public const string Менеджер = "col_b2";
+        public const string КлючовіСловаДляПошуку = "col_b3";
     }
 
     public static class ЗамовленняКлієнта_Export
@@ -11559,6 +11590,12 @@ namespace StorageAndTrade_1_0.Документи
                     xmlWriter.WriteString(ЗамовленняКлієнта_Objest.Менеджер.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Менеджер
+            xmlWriter.WriteStartElement("КлючовіСловаДляПошуку");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ЗамовленняКлієнта_Objest.КлючовіСловаДляПошуку);
+              
+            xmlWriter.WriteEndElement(); //КлючовіСловаДляПошуку
 
                 /* 
                 Табличні частини
@@ -11667,7 +11704,7 @@ namespace StorageAndTrade_1_0.Документи
     public class ЗамовленняКлієнта_Objest : DocumentObject
     {
         public ЗамовленняКлієнта_Objest() : base(Config.Kernel!, "tab_a34", "ЗамовленняКлієнта",
-             new string[] { "docname", "docnomer", "docdate", "col_b4", "col_b5", "col_b6", "col_b7", "col_b8", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_b1", "col_a9", "col_b9", "col_c2", "col_c3", "col_c4", "col_c5", "col_c6", "col_c7", "col_c8", "col_c9", "col_c1", "col_b2" }) 
+             new string[] { "docname", "docnomer", "docdate", "col_b4", "col_b5", "col_b6", "col_b7", "col_b8", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_b1", "col_a9", "col_b9", "col_c2", "col_c3", "col_c4", "col_c5", "col_c6", "col_c7", "col_c8", "col_c9", "col_c1", "col_b2", "col_b3" }) 
         {
             Назва = "";
             НомерДок = "";
@@ -11698,6 +11735,7 @@ namespace StorageAndTrade_1_0.Документи
             ДатаПоверненняТари = DateTime.MinValue;
             Коментар = "";
             Менеджер = new Довідники.Користувачі_Pointer();
+            КлючовіСловаДляПошуку = "";
             
             //Табличні частини
             Товари_TablePart = new ЗамовленняКлієнта_Товари_TablePart(this);
@@ -11744,6 +11782,7 @@ namespace StorageAndTrade_1_0.Документи
                 ДатаПоверненняТари = (base.FieldValue["col_c9"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["col_c9"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
                 Коментар = base.FieldValue["col_c1"]?.ToString() ?? "";
                 Менеджер = new Довідники.Користувачі_Pointer(base.FieldValue["col_b2"]);
+                КлючовіСловаДляПошуку = base.FieldValue["col_b3"]?.ToString() ?? "";
                 
                 BaseClear();
                 return true;
@@ -11784,10 +11823,11 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_c9"] = ДатаПоверненняТари;
             base.FieldValue["col_c1"] = Коментар;
             base.FieldValue["col_b2"] = Менеджер.UnigueID.UGuid;
+            base.FieldValue["col_b3"] = КлючовіСловаДляПошуку;
             
             BaseSave();
             ЗамовленняКлієнта_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар });
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
         }
 
         public bool SpendTheDocument(DateTime spendDate)
@@ -11835,6 +11875,7 @@ namespace StorageAndTrade_1_0.Документи
             copy.ДатаПоверненняТари = ДатаПоверненняТари;
             copy.Коментар = Коментар;
             copy.Менеджер = Менеджер;
+            copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
             copy.New();
             return copy;
@@ -11885,6 +11926,7 @@ namespace StorageAndTrade_1_0.Документи
         public DateTime ДатаПоверненняТари { get; set; }
         public string Коментар { get; set; }
         public Довідники.Користувачі_Pointer Менеджер { get; set; }
+        public string КлючовіСловаДляПошуку { get; set; }
         
         //Табличні частини
         public ЗамовленняКлієнта_Товари_TablePart Товари_TablePart { get; set; }
@@ -12112,6 +12154,7 @@ namespace StorageAndTrade_1_0.Документи
         public const string Кратність = "col_d2";
         public const string Коментар = "col_b2";
         public const string Менеджер = "col_c9";
+        public const string КлючовіСловаДляПошуку = "col_d1";
     }
 
     public static class РеалізаціяТоварівТаПослуг_Export
@@ -12343,6 +12386,12 @@ namespace StorageAndTrade_1_0.Документи
                     xmlWriter.WriteString(РеалізаціяТоварівТаПослуг_Objest.Менеджер.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Менеджер
+            xmlWriter.WriteStartElement("КлючовіСловаДляПошуку");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(РеалізаціяТоварівТаПослуг_Objest.КлючовіСловаДляПошуку);
+              
+            xmlWriter.WriteEndElement(); //КлючовіСловаДляПошуку
 
                 /* 
                 Табличні частини
@@ -12483,7 +12532,7 @@ namespace StorageAndTrade_1_0.Документи
     public class РеалізаціяТоварівТаПослуг_Objest : DocumentObject
     {
         public РеалізаціяТоварівТаПослуг_Objest() : base(Config.Kernel!, "tab_a36", "РеалізаціяТоварівТаПослуг",
-             new string[] { "docname", "docnomer", "docdate", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b1", "col_b3", "col_b4", "col_b5", "col_b6", "col_b7", "col_b8", "col_b9", "col_c1", "col_c2", "col_c3", "col_c4", "col_c5", "col_c6", "col_c7", "col_c8", "col_d2", "col_b2", "col_c9" }) 
+             new string[] { "docname", "docnomer", "docdate", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b1", "col_b3", "col_b4", "col_b5", "col_b6", "col_b7", "col_b8", "col_b9", "col_c1", "col_c2", "col_c3", "col_c4", "col_c5", "col_c6", "col_c7", "col_c8", "col_d2", "col_b2", "col_c9", "col_d1" }) 
         {
             Назва = "";
             НомерДок = "";
@@ -12516,6 +12565,7 @@ namespace StorageAndTrade_1_0.Документи
             Кратність = 0;
             Коментар = "";
             Менеджер = new Довідники.Користувачі_Pointer();
+            КлючовіСловаДляПошуку = "";
             
             //Табличні частини
             Товари_TablePart = new РеалізаціяТоварівТаПослуг_Товари_TablePart(this);
@@ -12564,6 +12614,7 @@ namespace StorageAndTrade_1_0.Документи
                 Кратність = (base.FieldValue["col_d2"] != DBNull.Value) ? (int)base.FieldValue["col_d2"] : 0;
                 Коментар = base.FieldValue["col_b2"]?.ToString() ?? "";
                 Менеджер = new Довідники.Користувачі_Pointer(base.FieldValue["col_c9"]);
+                КлючовіСловаДляПошуку = base.FieldValue["col_d1"]?.ToString() ?? "";
                 
                 BaseClear();
                 return true;
@@ -12606,10 +12657,11 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_d2"] = Кратність;
             base.FieldValue["col_b2"] = Коментар;
             base.FieldValue["col_c9"] = Менеджер.UnigueID.UGuid;
+            base.FieldValue["col_d1"] = КлючовіСловаДляПошуку;
             
             BaseSave();
             РеалізаціяТоварівТаПослуг_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар });
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
         }
 
         public bool SpendTheDocument(DateTime spendDate)
@@ -12659,6 +12711,7 @@ namespace StorageAndTrade_1_0.Документи
             copy.Кратність = Кратність;
             copy.Коментар = Коментар;
             copy.Менеджер = Менеджер;
+            copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
             copy.New();
             return copy;
@@ -12711,6 +12764,7 @@ namespace StorageAndTrade_1_0.Документи
         public int Кратність { get; set; }
         public string Коментар { get; set; }
         public Довідники.Користувачі_Pointer Менеджер { get; set; }
+        public string КлючовіСловаДляПошуку { get; set; }
         
         //Табличні частини
         public РеалізаціяТоварівТаПослуг_Товари_TablePart Товари_TablePart { get; set; }
@@ -12931,6 +12985,7 @@ namespace StorageAndTrade_1_0.Документи
         public const string ВидЦіни = "col_a3";
         public const string Коментар = "col_g9";
         public const string Автор = "col_a4";
+        public const string КлючовіСловаДляПошуку = "col_a5";
     }
 
     public static class ВстановленняЦінНоменклатури_Export
@@ -13000,6 +13055,12 @@ namespace StorageAndTrade_1_0.Документи
                     xmlWriter.WriteString(ВстановленняЦінНоменклатури_Objest.Автор.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Автор
+            xmlWriter.WriteStartElement("КлючовіСловаДляПошуку");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ВстановленняЦінНоменклатури_Objest.КлючовіСловаДляПошуку);
+              
+            xmlWriter.WriteEndElement(); //КлючовіСловаДляПошуку
 
                 /* 
                 Табличні частини
@@ -13076,7 +13137,7 @@ namespace StorageAndTrade_1_0.Документи
     public class ВстановленняЦінНоменклатури_Objest : DocumentObject
     {
         public ВстановленняЦінНоменклатури_Objest() : base(Config.Kernel!, "tab_a42", "ВстановленняЦінНоменклатури",
-             new string[] { "docname", "docnomer", "docdate", "col_a2", "col_a1", "col_a3", "col_g9", "col_a4" }) 
+             new string[] { "docname", "docnomer", "docdate", "col_a2", "col_a1", "col_a3", "col_g9", "col_a4", "col_a5" }) 
         {
             Назва = "";
             НомерДок = "";
@@ -13086,6 +13147,7 @@ namespace StorageAndTrade_1_0.Документи
             ВидЦіни = new Довідники.ВидиЦін_Pointer();
             Коментар = "";
             Автор = new Довідники.Користувачі_Pointer();
+            КлючовіСловаДляПошуку = "";
             
             //Табличні частини
             Товари_TablePart = new ВстановленняЦінНоменклатури_Товари_TablePart(this);
@@ -13111,6 +13173,7 @@ namespace StorageAndTrade_1_0.Документи
                 ВидЦіни = new Довідники.ВидиЦін_Pointer(base.FieldValue["col_a3"]);
                 Коментар = base.FieldValue["col_g9"]?.ToString() ?? "";
                 Автор = new Довідники.Користувачі_Pointer(base.FieldValue["col_a4"]);
+                КлючовіСловаДляПошуку = base.FieldValue["col_a5"]?.ToString() ?? "";
                 
                 BaseClear();
                 return true;
@@ -13130,10 +13193,11 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a3"] = ВидЦіни.UnigueID.UGuid;
             base.FieldValue["col_g9"] = Коментар;
             base.FieldValue["col_a4"] = Автор.UnigueID.UGuid;
+            base.FieldValue["col_a5"] = КлючовіСловаДляПошуку;
             
             BaseSave();
             ВстановленняЦінНоменклатури_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар });
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
         }
 
         public bool SpendTheDocument(DateTime spendDate)
@@ -13160,6 +13224,7 @@ namespace StorageAndTrade_1_0.Документи
             copy.ВидЦіни = ВидЦіни;
             copy.Коментар = Коментар;
             copy.Автор = Автор;
+            copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
             copy.New();
             return copy;
@@ -13189,6 +13254,7 @@ namespace StorageAndTrade_1_0.Документи
         public Довідники.ВидиЦін_Pointer ВидЦіни { get; set; }
         public string Коментар { get; set; }
         public Довідники.Користувачі_Pointer Автор { get; set; }
+        public string КлючовіСловаДляПошуку { get; set; }
         
         //Табличні частини
         public ВстановленняЦінНоменклатури_Товари_TablePart Товари_TablePart { get; set; }
@@ -13382,6 +13448,7 @@ namespace StorageAndTrade_1_0.Документи
         public const string Курс = "col_a4";
         public const string Коментар = "col_a3";
         public const string Автор = "col_a5";
+        public const string КлючовіСловаДляПошуку = "col_a7";
     }
 
     public static class ПрихіднийКасовийОрдер_Export
@@ -13517,6 +13584,12 @@ namespace StorageAndTrade_1_0.Документи
                     xmlWriter.WriteString(ПрихіднийКасовийОрдер_Objest.Автор.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Автор
+            xmlWriter.WriteStartElement("КлючовіСловаДляПошуку");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ПрихіднийКасовийОрдер_Objest.КлючовіСловаДляПошуку);
+              
+            xmlWriter.WriteEndElement(); //КлючовіСловаДляПошуку
 
                 /* 
                 Табличні частини
@@ -13591,7 +13664,7 @@ namespace StorageAndTrade_1_0.Документи
     public class ПрихіднийКасовийОрдер_Objest : DocumentObject
     {
         public ПрихіднийКасовийОрдер_Objest() : base(Config.Kernel!, "tab_a44", "ПрихіднийКасовийОрдер",
-             new string[] { "docname", "docnomer", "docdate", "col_h8", "col_h9", "col_i1", "col_i2", "col_i3", "col_i4", "col_a6", "col_i5", "col_i6", "col_a1", "col_a2", "col_a4", "col_a3", "col_a5" }) 
+             new string[] { "docname", "docnomer", "docdate", "col_h8", "col_h9", "col_i1", "col_i2", "col_i3", "col_i4", "col_a6", "col_i5", "col_i6", "col_a1", "col_a2", "col_a4", "col_a3", "col_a5", "col_a7" }) 
         {
             Назва = "";
             НомерДок = "";
@@ -13610,6 +13683,7 @@ namespace StorageAndTrade_1_0.Документи
             Курс = 0;
             Коментар = "";
             Автор = new Довідники.Користувачі_Pointer();
+            КлючовіСловаДляПошуку = "";
             
             //Табличні частини
             РозшифруванняПлатежу_TablePart = new ПрихіднийКасовийОрдер_РозшифруванняПлатежу_TablePart(this);
@@ -13644,6 +13718,7 @@ namespace StorageAndTrade_1_0.Документи
                 Курс = (base.FieldValue["col_a4"] != DBNull.Value) ? (decimal)base.FieldValue["col_a4"] : 0;
                 Коментар = base.FieldValue["col_a3"]?.ToString() ?? "";
                 Автор = new Довідники.Користувачі_Pointer(base.FieldValue["col_a5"]);
+                КлючовіСловаДляПошуку = base.FieldValue["col_a7"]?.ToString() ?? "";
                 
                 BaseClear();
                 return true;
@@ -13672,10 +13747,11 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a4"] = Курс;
             base.FieldValue["col_a3"] = Коментар;
             base.FieldValue["col_a5"] = Автор.UnigueID.UGuid;
+            base.FieldValue["col_a7"] = КлючовіСловаДляПошуку;
             
             BaseSave();
             ПрихіднийКасовийОрдер_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар });
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
         }
 
         public bool SpendTheDocument(DateTime spendDate)
@@ -13711,6 +13787,7 @@ namespace StorageAndTrade_1_0.Документи
             copy.Курс = Курс;
             copy.Коментар = Коментар;
             copy.Автор = Автор;
+            copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
             copy.New();
             return copy;
@@ -13749,6 +13826,7 @@ namespace StorageAndTrade_1_0.Документи
         public decimal Курс { get; set; }
         public string Коментар { get; set; }
         public Довідники.Користувачі_Pointer Автор { get; set; }
+        public string КлючовіСловаДляПошуку { get; set; }
         
         //Табличні частини
         public ПрихіднийКасовийОрдер_РозшифруванняПлатежу_TablePart РозшифруванняПлатежу_TablePart { get; set; }
@@ -13944,6 +14022,7 @@ namespace StorageAndTrade_1_0.Документи
         public const string Основа = "col_a1";
         public const string Коментар = "col_l1";
         public const string Автор = "col_a6";
+        public const string КлючовіСловаДляПошуку = "col_a7";
     }
 
     public static class РозхіднийКасовийОрдер_Export
@@ -14093,6 +14172,12 @@ namespace StorageAndTrade_1_0.Документи
                     xmlWriter.WriteString(РозхіднийКасовийОрдер_Objest.Автор.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Автор
+            xmlWriter.WriteStartElement("КлючовіСловаДляПошуку");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(РозхіднийКасовийОрдер_Objest.КлючовіСловаДляПошуку);
+              
+            xmlWriter.WriteEndElement(); //КлючовіСловаДляПошуку
 
                 /* 
                 Табличні частини
@@ -14173,7 +14258,7 @@ namespace StorageAndTrade_1_0.Документи
     public class РозхіднийКасовийОрдер_Objest : DocumentObject
     {
         public РозхіднийКасовийОрдер_Objest() : base(Config.Kernel!, "tab_a48", "РозхіднийКасовийОрдер",
-             new string[] { "docname", "docnomer", "docdate", "col_k2", "col_k3", "col_a3", "col_a5", "col_k5", "col_k4", "col_k7", "col_a4", "col_k8", "col_k9", "col_l2", "col_k6", "col_a2", "col_a1", "col_l1", "col_a6" }) 
+             new string[] { "docname", "docnomer", "docdate", "col_k2", "col_k3", "col_a3", "col_a5", "col_k5", "col_k4", "col_k7", "col_a4", "col_k8", "col_k9", "col_l2", "col_k6", "col_a2", "col_a1", "col_l1", "col_a6", "col_a7" }) 
         {
             Назва = "";
             НомерДок = "";
@@ -14194,6 +14279,7 @@ namespace StorageAndTrade_1_0.Документи
             Основа = new UuidAndText();
             Коментар = "";
             Автор = new Довідники.Користувачі_Pointer();
+            КлючовіСловаДляПошуку = "";
             
             //Табличні частини
             РозшифруванняПлатежу_TablePart = new РозхіднийКасовийОрдер_РозшифруванняПлатежу_TablePart(this);
@@ -14230,6 +14316,7 @@ namespace StorageAndTrade_1_0.Документи
                 Основа = (base.FieldValue["col_a1"] != DBNull.Value) ? (UuidAndText)base.FieldValue["col_a1"] : new UuidAndText();
                 Коментар = base.FieldValue["col_l1"]?.ToString() ?? "";
                 Автор = new Довідники.Користувачі_Pointer(base.FieldValue["col_a6"]);
+                КлючовіСловаДляПошуку = base.FieldValue["col_a7"]?.ToString() ?? "";
                 
                 BaseClear();
                 return true;
@@ -14260,10 +14347,11 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a1"] = Основа;
             base.FieldValue["col_l1"] = Коментар;
             base.FieldValue["col_a6"] = Автор.UnigueID.UGuid;
+            base.FieldValue["col_a7"] = КлючовіСловаДляПошуку;
             
             BaseSave();
             РозхіднийКасовийОрдер_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок });
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, КлючовіСловаДляПошуку });
         }
 
         public bool SpendTheDocument(DateTime spendDate)
@@ -14301,6 +14389,7 @@ namespace StorageAndTrade_1_0.Документи
             copy.Основа = Основа;
             copy.Коментар = Коментар;
             copy.Автор = Автор;
+            copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
             copy.New();
             return copy;
@@ -14341,6 +14430,7 @@ namespace StorageAndTrade_1_0.Документи
         public UuidAndText Основа { get; set; }
         public string Коментар { get; set; }
         public Довідники.Користувачі_Pointer Автор { get; set; }
+        public string КлючовіСловаДляПошуку { get; set; }
         
         //Табличні частини
         public РозхіднийКасовийОрдер_РозшифруванняПлатежу_TablePart РозшифруванняПлатежу_TablePart { get; set; }
@@ -14541,6 +14631,7 @@ namespace StorageAndTrade_1_0.Документи
         public const string Коментар = "col_a6";
         public const string Автор = "col_a1";
         public const string Основа = "col_a2";
+        public const string КлючовіСловаДляПошуку = "col_b9";
     }
 
     public static class ПереміщенняТоварів_Export
@@ -14698,6 +14789,12 @@ namespace StorageAndTrade_1_0.Документи
                 xmlWriter.WriteRaw(((UuidAndText)ПереміщенняТоварів_Objest.Основа).ToXml());
               
             xmlWriter.WriteEndElement(); //Основа
+            xmlWriter.WriteStartElement("КлючовіСловаДляПошуку");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ПереміщенняТоварів_Objest.КлючовіСловаДляПошуку);
+              
+            xmlWriter.WriteEndElement(); //КлючовіСловаДляПошуку
 
                 /* 
                 Табличні частини
@@ -14788,7 +14885,7 @@ namespace StorageAndTrade_1_0.Документи
     public class ПереміщенняТоварів_Objest : DocumentObject
     {
         public ПереміщенняТоварів_Objest() : base(Config.Kernel!, "tab_a31", "ПереміщенняТоварів",
-             new string[] { "docname", "docnomer", "docdate", "col_a3", "col_a4", "col_a5", "col_a7", "col_a8", "col_a9", "col_b1", "col_b2", "col_b3", "col_b4", "col_b5", "col_b6", "col_b7", "col_b8", "col_a6", "col_a1", "col_a2" }) 
+             new string[] { "docname", "docnomer", "docdate", "col_a3", "col_a4", "col_a5", "col_a7", "col_a8", "col_a9", "col_b1", "col_b2", "col_b3", "col_b4", "col_b5", "col_b6", "col_b7", "col_b8", "col_a6", "col_a1", "col_a2", "col_b9" }) 
         {
             Назва = "";
             НомерДок = "";
@@ -14810,6 +14907,7 @@ namespace StorageAndTrade_1_0.Документи
             Коментар = "";
             Автор = new Довідники.Користувачі_Pointer();
             Основа = new UuidAndText();
+            КлючовіСловаДляПошуку = "";
             
             //Табличні частини
             Товари_TablePart = new ПереміщенняТоварів_Товари_TablePart(this);
@@ -14847,6 +14945,7 @@ namespace StorageAndTrade_1_0.Документи
                 Коментар = base.FieldValue["col_a6"]?.ToString() ?? "";
                 Автор = new Довідники.Користувачі_Pointer(base.FieldValue["col_a1"]);
                 Основа = (base.FieldValue["col_a2"] != DBNull.Value) ? (UuidAndText)base.FieldValue["col_a2"] : new UuidAndText();
+                КлючовіСловаДляПошуку = base.FieldValue["col_b9"]?.ToString() ?? "";
                 
                 BaseClear();
                 return true;
@@ -14878,10 +14977,11 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a6"] = Коментар;
             base.FieldValue["col_a1"] = Автор.UnigueID.UGuid;
             base.FieldValue["col_a2"] = Основа;
+            base.FieldValue["col_b9"] = КлючовіСловаДляПошуку;
             
             BaseSave();
             ПереміщенняТоварів_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар });
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
         }
 
         public bool SpendTheDocument(DateTime spendDate)
@@ -14920,6 +15020,7 @@ namespace StorageAndTrade_1_0.Документи
             copy.Коментар = Коментар;
             copy.Автор = Автор;
             copy.Основа = Основа;
+            copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
             copy.New();
             return copy;
@@ -14961,6 +15062,7 @@ namespace StorageAndTrade_1_0.Документи
         public string Коментар { get; set; }
         public Довідники.Користувачі_Pointer Автор { get; set; }
         public UuidAndText Основа { get; set; }
+        public string КлючовіСловаДляПошуку { get; set; }
         
         //Табличні частини
         public ПереміщенняТоварів_Товари_TablePart Товари_TablePart { get; set; }
@@ -15167,6 +15269,7 @@ namespace StorageAndTrade_1_0.Документи
         public const string Коментар = "col_c8";
         public const string Автор = "col_a3";
         public const string Менеджер = "col_a4";
+        public const string КлючовіСловаДляПошуку = "col_a5";
     }
 
     public static class ПоверненняТоварівПостачальнику_Export
@@ -15338,6 +15441,12 @@ namespace StorageAndTrade_1_0.Документи
                     xmlWriter.WriteString(ПоверненняТоварівПостачальнику_Objest.Менеджер.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Менеджер
+            xmlWriter.WriteStartElement("КлючовіСловаДляПошуку");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ПоверненняТоварівПостачальнику_Objest.КлючовіСловаДляПошуку);
+              
+            xmlWriter.WriteEndElement(); //КлючовіСловаДляПошуку
 
                 /* 
                 Табличні частини
@@ -15440,7 +15549,7 @@ namespace StorageAndTrade_1_0.Документи
     public class ПоверненняТоварівПостачальнику_Objest : DocumentObject
     {
         public ПоверненняТоварівПостачальнику_Objest() : base(Config.Kernel!, "tab_a51", "ПоверненняТоварівПостачальнику",
-             new string[] { "docname", "docnomer", "docdate", "col_c2", "col_c3", "col_c4", "col_c5", "col_c6", "col_c7", "col_c9", "col_d1", "col_d2", "col_d3", "col_d4", "col_d5", "col_d6", "col_d7", "col_a1", "col_a2", "col_c8", "col_a3", "col_a4" }) 
+             new string[] { "docname", "docnomer", "docdate", "col_c2", "col_c3", "col_c4", "col_c5", "col_c6", "col_c7", "col_c9", "col_d1", "col_d2", "col_d3", "col_d4", "col_d5", "col_d6", "col_d7", "col_a1", "col_a2", "col_c8", "col_a3", "col_a4", "col_a5" }) 
         {
             Назва = "";
             НомерДок = "";
@@ -15464,6 +15573,7 @@ namespace StorageAndTrade_1_0.Документи
             Коментар = "";
             Автор = new Довідники.Користувачі_Pointer();
             Менеджер = new Довідники.Користувачі_Pointer();
+            КлючовіСловаДляПошуку = "";
             
             //Табличні частини
             Товари_TablePart = new ПоверненняТоварівПостачальнику_Товари_TablePart(this);
@@ -15503,6 +15613,7 @@ namespace StorageAndTrade_1_0.Документи
                 Коментар = base.FieldValue["col_c8"]?.ToString() ?? "";
                 Автор = new Довідники.Користувачі_Pointer(base.FieldValue["col_a3"]);
                 Менеджер = new Довідники.Користувачі_Pointer(base.FieldValue["col_a4"]);
+                КлючовіСловаДляПошуку = base.FieldValue["col_a5"]?.ToString() ?? "";
                 
                 BaseClear();
                 return true;
@@ -15536,10 +15647,11 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_c8"] = Коментар;
             base.FieldValue["col_a3"] = Автор.UnigueID.UGuid;
             base.FieldValue["col_a4"] = Менеджер.UnigueID.UGuid;
+            base.FieldValue["col_a5"] = КлючовіСловаДляПошуку;
             
             BaseSave();
             ПоверненняТоварівПостачальнику_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар });
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
         }
 
         public bool SpendTheDocument(DateTime spendDate)
@@ -15580,6 +15692,7 @@ namespace StorageAndTrade_1_0.Документи
             copy.Коментар = Коментар;
             copy.Автор = Автор;
             copy.Менеджер = Менеджер;
+            copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
             copy.New();
             return copy;
@@ -15623,6 +15736,7 @@ namespace StorageAndTrade_1_0.Документи
         public string Коментар { get; set; }
         public Довідники.Користувачі_Pointer Автор { get; set; }
         public Довідники.Користувачі_Pointer Менеджер { get; set; }
+        public string КлючовіСловаДляПошуку { get; set; }
         
         //Табличні частини
         public ПоверненняТоварівПостачальнику_Товари_TablePart Товари_TablePart { get; set; }
@@ -15833,6 +15947,7 @@ namespace StorageAndTrade_1_0.Документи
         public const string Основа = "col_a2";
         public const string Коментар = "col_f6";
         public const string Автор = "col_a3";
+        public const string КлючовіСловаДляПошуку = "col_a4";
     }
 
     public static class ПоверненняТоварівВідКлієнта_Export
@@ -15976,6 +16091,12 @@ namespace StorageAndTrade_1_0.Документи
                     xmlWriter.WriteString(ПоверненняТоварівВідКлієнта_Objest.Автор.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Автор
+            xmlWriter.WriteStartElement("КлючовіСловаДляПошуку");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ПоверненняТоварівВідКлієнта_Objest.КлючовіСловаДляПошуку);
+              
+            xmlWriter.WriteEndElement(); //КлючовіСловаДляПошуку
 
                 /* 
                 Табличні частини
@@ -16084,7 +16205,7 @@ namespace StorageAndTrade_1_0.Документи
     public class ПоверненняТоварівВідКлієнта_Objest : DocumentObject
     {
         public ПоверненняТоварівВідКлієнта_Objest() : base(Config.Kernel!, "tab_a53", "ПоверненняТоварівВідКлієнта",
-             new string[] { "docname", "docnomer", "docdate", "col_e8", "col_e9", "col_f1", "col_f2", "col_f3", "col_f5", "col_f7", "col_f8", "col_f9", "col_g1", "col_g2", "col_a1", "col_a2", "col_f6", "col_a3" }) 
+             new string[] { "docname", "docnomer", "docdate", "col_e8", "col_e9", "col_f1", "col_f2", "col_f3", "col_f5", "col_f7", "col_f8", "col_f9", "col_g1", "col_g2", "col_a1", "col_a2", "col_f6", "col_a3", "col_a4" }) 
         {
             Назва = "";
             НомерДок = "";
@@ -16104,6 +16225,7 @@ namespace StorageAndTrade_1_0.Документи
             Основа = new UuidAndText();
             Коментар = "";
             Автор = new Довідники.Користувачі_Pointer();
+            КлючовіСловаДляПошуку = "";
             
             //Табличні частини
             Товари_TablePart = new ПоверненняТоварівВідКлієнта_Товари_TablePart(this);
@@ -16139,6 +16261,7 @@ namespace StorageAndTrade_1_0.Документи
                 Основа = (base.FieldValue["col_a2"] != DBNull.Value) ? (UuidAndText)base.FieldValue["col_a2"] : new UuidAndText();
                 Коментар = base.FieldValue["col_f6"]?.ToString() ?? "";
                 Автор = new Довідники.Користувачі_Pointer(base.FieldValue["col_a3"]);
+                КлючовіСловаДляПошуку = base.FieldValue["col_a4"]?.ToString() ?? "";
                 
                 BaseClear();
                 return true;
@@ -16168,10 +16291,11 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a2"] = Основа;
             base.FieldValue["col_f6"] = Коментар;
             base.FieldValue["col_a3"] = Автор.UnigueID.UGuid;
+            base.FieldValue["col_a4"] = КлючовіСловаДляПошуку;
             
             BaseSave();
             ПоверненняТоварівВідКлієнта_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар });
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
         }
 
         public bool SpendTheDocument(DateTime spendDate)
@@ -16208,6 +16332,7 @@ namespace StorageAndTrade_1_0.Документи
             copy.Основа = Основа;
             copy.Коментар = Коментар;
             copy.Автор = Автор;
+            copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
             copy.New();
             return copy;
@@ -16247,6 +16372,7 @@ namespace StorageAndTrade_1_0.Документи
         public UuidAndText Основа { get; set; }
         public string Коментар { get; set; }
         public Довідники.Користувачі_Pointer Автор { get; set; }
+        public string КлючовіСловаДляПошуку { get; set; }
         
         //Табличні частини
         public ПоверненняТоварівВідКлієнта_Товари_TablePart Товари_TablePart { get; set; }
@@ -16459,6 +16585,7 @@ namespace StorageAndTrade_1_0.Документи
         public const string Коментар = "col_a1";
         public const string Автор = "col_a7";
         public const string Менеджер = "col_a8";
+        public const string КлючовіСловаДляПошуку = "col_a9";
     }
 
     public static class АктВиконанихРобіт_Export
@@ -16590,6 +16717,12 @@ namespace StorageAndTrade_1_0.Документи
                     xmlWriter.WriteString(АктВиконанихРобіт_Objest.Менеджер.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Менеджер
+            xmlWriter.WriteStartElement("КлючовіСловаДляПошуку");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(АктВиконанихРобіт_Objest.КлючовіСловаДляПошуку);
+              
+            xmlWriter.WriteEndElement(); //КлючовіСловаДляПошуку
 
                 /* 
                 Табличні частини
@@ -16662,7 +16795,7 @@ namespace StorageAndTrade_1_0.Документи
     public class АктВиконанихРобіт_Objest : DocumentObject
     {
         public АктВиконанихРобіт_Objest() : base(Config.Kernel!, "tab_a81", "АктВиконанихРобіт",
-             new string[] { "docname", "docnomer", "docdate", "col_b2", "col_b3", "col_b4", "col_b5", "col_b6", "col_a5", "col_a2", "col_a3", "col_a4", "col_a6", "col_a1", "col_a7", "col_a8" }) 
+             new string[] { "docname", "docnomer", "docdate", "col_b2", "col_b3", "col_b4", "col_b5", "col_b6", "col_a5", "col_a2", "col_a3", "col_a4", "col_a6", "col_a1", "col_a7", "col_a8", "col_a9" }) 
         {
             Назва = "";
             НомерДок = "";
@@ -16680,6 +16813,7 @@ namespace StorageAndTrade_1_0.Документи
             Коментар = "";
             Автор = new Довідники.Користувачі_Pointer();
             Менеджер = new Довідники.Користувачі_Pointer();
+            КлючовіСловаДляПошуку = "";
             
             //Табличні частини
             Послуги_TablePart = new АктВиконанихРобіт_Послуги_TablePart(this);
@@ -16713,6 +16847,7 @@ namespace StorageAndTrade_1_0.Документи
                 Коментар = base.FieldValue["col_a1"]?.ToString() ?? "";
                 Автор = new Довідники.Користувачі_Pointer(base.FieldValue["col_a7"]);
                 Менеджер = new Довідники.Користувачі_Pointer(base.FieldValue["col_a8"]);
+                КлючовіСловаДляПошуку = base.FieldValue["col_a9"]?.ToString() ?? "";
                 
                 BaseClear();
                 return true;
@@ -16740,10 +16875,11 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a1"] = Коментар;
             base.FieldValue["col_a7"] = Автор.UnigueID.UGuid;
             base.FieldValue["col_a8"] = Менеджер.UnigueID.UGuid;
+            base.FieldValue["col_a9"] = КлючовіСловаДляПошуку;
             
             BaseSave();
             АктВиконанихРобіт_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар });
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
         }
 
         public bool SpendTheDocument(DateTime spendDate)
@@ -16778,6 +16914,7 @@ namespace StorageAndTrade_1_0.Документи
             copy.Коментар = Коментар;
             copy.Автор = Автор;
             copy.Менеджер = Менеджер;
+            copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
             copy.New();
             return copy;
@@ -16815,6 +16952,7 @@ namespace StorageAndTrade_1_0.Документи
         public string Коментар { get; set; }
         public Довідники.Користувачі_Pointer Автор { get; set; }
         public Довідники.Користувачі_Pointer Менеджер { get; set; }
+        public string КлючовіСловаДляПошуку { get; set; }
         
         //Табличні частини
         public АктВиконанихРобіт_Послуги_TablePart Послуги_TablePart { get; set; }
@@ -17003,6 +17141,7 @@ namespace StorageAndTrade_1_0.Документи
         public const string ГосподарськаОперація = "col_a1";
         public const string Коментар = "col_d1";
         public const string Автор = "col_a3";
+        public const string КлючовіСловаДляПошуку = "col_a2";
     }
 
     public static class ВведенняЗалишків_Export
@@ -17104,6 +17243,12 @@ namespace StorageAndTrade_1_0.Документи
                     xmlWriter.WriteString(ВведенняЗалишків_Objest.Автор.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Автор
+            xmlWriter.WriteStartElement("КлючовіСловаДляПошуку");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ВведенняЗалишків_Objest.КлючовіСловаДляПошуку);
+              
+            xmlWriter.WriteEndElement(); //КлючовіСловаДляПошуку
 
                 /* 
                 Табличні частини
@@ -17313,7 +17458,7 @@ namespace StorageAndTrade_1_0.Документи
     public class ВведенняЗалишків_Objest : DocumentObject
     {
         public ВведенняЗалишків_Objest() : base(Config.Kernel!, "tab_a83", "ВведенняЗалишків",
-             new string[] { "docname", "docnomer", "docdate", "col_c8", "col_d5", "col_c9", "col_d2", "col_d3", "col_d4", "col_a1", "col_d1", "col_a3" }) 
+             new string[] { "docname", "docnomer", "docdate", "col_c8", "col_d5", "col_c9", "col_d2", "col_d3", "col_d4", "col_a1", "col_d1", "col_a3", "col_a2" }) 
         {
             Назва = "";
             НомерДок = "";
@@ -17327,6 +17472,7 @@ namespace StorageAndTrade_1_0.Документи
             ГосподарськаОперація = 0;
             Коментар = "";
             Автор = new Довідники.Користувачі_Pointer();
+            КлючовіСловаДляПошуку = "";
             
             //Табличні частини
             Товари_TablePart = new ВведенняЗалишків_Товари_TablePart(this);
@@ -17359,6 +17505,7 @@ namespace StorageAndTrade_1_0.Документи
                 ГосподарськаОперація = (base.FieldValue["col_a1"] != DBNull.Value) ? (Перелічення.ГосподарськіОперації)base.FieldValue["col_a1"] : 0;
                 Коментар = base.FieldValue["col_d1"]?.ToString() ?? "";
                 Автор = new Довідники.Користувачі_Pointer(base.FieldValue["col_a3"]);
+                КлючовіСловаДляПошуку = base.FieldValue["col_a2"]?.ToString() ?? "";
                 
                 BaseClear();
                 return true;
@@ -17382,10 +17529,11 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a1"] = (int)ГосподарськаОперація;
             base.FieldValue["col_d1"] = Коментар;
             base.FieldValue["col_a3"] = Автор.UnigueID.UGuid;
+            base.FieldValue["col_a2"] = КлючовіСловаДляПошуку;
             
             BaseSave();
             ВведенняЗалишків_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар });
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
         }
 
         public bool SpendTheDocument(DateTime spendDate)
@@ -17416,6 +17564,7 @@ namespace StorageAndTrade_1_0.Документи
             copy.ГосподарськаОперація = ГосподарськаОперація;
             copy.Коментар = Коментар;
             copy.Автор = Автор;
+            copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
             copy.New();
             return copy;
@@ -17449,6 +17598,7 @@ namespace StorageAndTrade_1_0.Документи
         public Перелічення.ГосподарськіОперації ГосподарськаОперація { get; set; }
         public string Коментар { get; set; }
         public Довідники.Користувачі_Pointer Автор { get; set; }
+        public string КлючовіСловаДляПошуку { get; set; }
         
         //Табличні частини
         public ВведенняЗалишків_Товари_TablePart Товари_TablePart { get; set; }
@@ -17915,6 +18065,7 @@ namespace StorageAndTrade_1_0.Документи
         public const string ДатаДок = "docdate";
         public const string Назва = "docname";
         public const string Автор = "col_a1";
+        public const string КлючовіСловаДляПошуку = "col_a2";
     }
 
     public static class НадлишкиТоварів_Export
@@ -17992,6 +18143,12 @@ namespace StorageAndTrade_1_0.Документи
                     xmlWriter.WriteString(НадлишкиТоварів_Objest.Автор.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Автор
+            xmlWriter.WriteStartElement("КлючовіСловаДляПошуку");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(НадлишкиТоварів_Objest.КлючовіСловаДляПошуку);
+              
+            xmlWriter.WriteEndElement(); //КлючовіСловаДляПошуку
 
                 /* 
                 Табличні частини
@@ -18058,7 +18215,7 @@ namespace StorageAndTrade_1_0.Документи
     public class НадлишкиТоварів_Objest : DocumentObject
     {
         public НадлишкиТоварів_Objest() : base(Config.Kernel!, "tab_a88", "НадлишкиТоварів",
-             new string[] { "col_f6", "col_f7", "col_f8", "col_f9", "col_g1", "docnomer", "docdate", "docname", "col_a1" }) 
+             new string[] { "col_f6", "col_f7", "col_f8", "col_f9", "col_g1", "docnomer", "docdate", "docname", "col_a1", "col_a2" }) 
         {
             Організація = new Довідники.Організації_Pointer();
             Підрозділ = new Довідники.СтруктураПідприємства_Pointer();
@@ -18069,6 +18226,7 @@ namespace StorageAndTrade_1_0.Документи
             ДатаДок = DateTime.MinValue;
             Назва = "";
             Автор = new Довідники.Користувачі_Pointer();
+            КлючовіСловаДляПошуку = "";
             
             //Табличні частини
             Товари_TablePart = new НадлишкиТоварів_Товари_TablePart(this);
@@ -18094,6 +18252,7 @@ namespace StorageAndTrade_1_0.Документи
                 ДатаДок = (base.FieldValue["docdate"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["docdate"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
                 Назва = base.FieldValue["docname"]?.ToString() ?? "";
                 Автор = new Довідники.Користувачі_Pointer(base.FieldValue["col_a1"]);
+                КлючовіСловаДляПошуку = base.FieldValue["col_a2"]?.ToString() ?? "";
                 
                 BaseClear();
                 return true;
@@ -18113,10 +18272,11 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["docdate"] = ДатаДок;
             base.FieldValue["docname"] = Назва;
             base.FieldValue["col_a1"] = Автор.UnigueID.UGuid;
+            base.FieldValue["col_a2"] = КлючовіСловаДляПошуку;
             
             BaseSave();
             
-            BaseWriteFullTextSearch(GetBasis(), new string[] {  });
+            BaseWriteFullTextSearch(GetBasis(), new string[] { КлючовіСловаДляПошуку });
         }
 
         public bool SpendTheDocument(DateTime spendDate)
@@ -18142,6 +18302,7 @@ namespace StorageAndTrade_1_0.Документи
             copy.ДатаДок = ДатаДок;
             copy.Назва = Назва;
             copy.Автор = Автор;
+            copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
             copy.New();
             return copy;
@@ -18172,6 +18333,7 @@ namespace StorageAndTrade_1_0.Документи
         public DateTime ДатаДок { get; set; }
         public string Назва { get; set; }
         public Довідники.Користувачі_Pointer Автор { get; set; }
+        public string КлючовіСловаДляПошуку { get; set; }
         
         //Табличні частини
         public НадлишкиТоварів_Товари_TablePart Товари_TablePart { get; set; }
@@ -18353,6 +18515,7 @@ namespace StorageAndTrade_1_0.Документи
         public const string ВидЦіни = "col_h5";
         public const string Коментар = "col_h6";
         public const string Автор = "col_a1";
+        public const string КлючовіСловаДляПошуку = "col_a2";
     }
 
     public static class ПересортицяТоварів_Export
@@ -18430,6 +18593,12 @@ namespace StorageAndTrade_1_0.Документи
                     xmlWriter.WriteString(ПересортицяТоварів_Objest.Автор.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Автор
+            xmlWriter.WriteStartElement("КлючовіСловаДляПошуку");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ПересортицяТоварів_Objest.КлючовіСловаДляПошуку);
+              
+            xmlWriter.WriteEndElement(); //КлючовіСловаДляПошуку
 
                 /* 
                 Табличні частини
@@ -18496,7 +18665,7 @@ namespace StorageAndTrade_1_0.Документи
     public class ПересортицяТоварів_Objest : DocumentObject
     {
         public ПересортицяТоварів_Objest() : base(Config.Kernel!, "tab_a90", "ПересортицяТоварів",
-             new string[] { "docname", "docnomer", "docdate", "col_h2", "col_h3", "col_h4", "col_h5", "col_h6", "col_a1" }) 
+             new string[] { "docname", "docnomer", "docdate", "col_h2", "col_h3", "col_h4", "col_h5", "col_h6", "col_a1", "col_a2" }) 
         {
             Назва = "";
             НомерДок = "";
@@ -18507,6 +18676,7 @@ namespace StorageAndTrade_1_0.Документи
             ВидЦіни = new Довідники.ВидиЦін_Pointer();
             Коментар = "";
             Автор = new Довідники.Користувачі_Pointer();
+            КлючовіСловаДляПошуку = "";
             
             //Табличні частини
             Товари_TablePart = new ПересортицяТоварів_Товари_TablePart(this);
@@ -18532,6 +18702,7 @@ namespace StorageAndTrade_1_0.Документи
                 ВидЦіни = new Довідники.ВидиЦін_Pointer(base.FieldValue["col_h5"]);
                 Коментар = base.FieldValue["col_h6"]?.ToString() ?? "";
                 Автор = new Довідники.Користувачі_Pointer(base.FieldValue["col_a1"]);
+                КлючовіСловаДляПошуку = base.FieldValue["col_a2"]?.ToString() ?? "";
                 
                 BaseClear();
                 return true;
@@ -18551,10 +18722,11 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_h5"] = ВидЦіни.UnigueID.UGuid;
             base.FieldValue["col_h6"] = Коментар;
             base.FieldValue["col_a1"] = Автор.UnigueID.UGuid;
+            base.FieldValue["col_a2"] = КлючовіСловаДляПошуку;
             
             BaseSave();
             
-            BaseWriteFullTextSearch(GetBasis(), new string[] {  });
+            BaseWriteFullTextSearch(GetBasis(), new string[] { КлючовіСловаДляПошуку });
         }
 
         public bool SpendTheDocument(DateTime spendDate)
@@ -18580,6 +18752,7 @@ namespace StorageAndTrade_1_0.Документи
             copy.ВидЦіни = ВидЦіни;
             copy.Коментар = Коментар;
             copy.Автор = Автор;
+            copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
             copy.New();
             return copy;
@@ -18610,6 +18783,7 @@ namespace StorageAndTrade_1_0.Документи
         public Довідники.ВидиЦін_Pointer ВидЦіни { get; set; }
         public string Коментар { get; set; }
         public Довідники.Користувачі_Pointer Автор { get; set; }
+        public string КлючовіСловаДляПошуку { get; set; }
         
         //Табличні частини
         public ПересортицяТоварів_Товари_TablePart Товари_TablePart { get; set; }
@@ -18789,6 +18963,7 @@ namespace StorageAndTrade_1_0.Документи
         public const string Відповідальний = "col_i7";
         public const string Коментар = "col_i5";
         public const string Автор = "col_a1";
+        public const string КлючовіСловаДляПошуку = "col_a2";
     }
 
     public static class ПерерахунокТоварів_Export
@@ -18850,6 +19025,12 @@ namespace StorageAndTrade_1_0.Документи
                     xmlWriter.WriteString(ПерерахунокТоварів_Objest.Автор.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Автор
+            xmlWriter.WriteStartElement("КлючовіСловаДляПошуку");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ПерерахунокТоварів_Objest.КлючовіСловаДляПошуку);
+              
+            xmlWriter.WriteEndElement(); //КлючовіСловаДляПошуку
 
                 /* 
                 Табличні частини
@@ -18930,7 +19111,7 @@ namespace StorageAndTrade_1_0.Документи
     public class ПерерахунокТоварів_Objest : DocumentObject
     {
         public ПерерахунокТоварів_Objest() : base(Config.Kernel!, "tab_a92", "ПерерахунокТоварів",
-             new string[] { "docname", "docnomer", "docdate", "col_i6", "col_i7", "col_i5", "col_a1" }) 
+             new string[] { "docname", "docnomer", "docdate", "col_i6", "col_i7", "col_i5", "col_a1", "col_a2" }) 
         {
             Назва = "";
             НомерДок = "";
@@ -18939,6 +19120,7 @@ namespace StorageAndTrade_1_0.Документи
             Відповідальний = new Довідники.ФізичніОсоби_Pointer();
             Коментар = "";
             Автор = new Довідники.Користувачі_Pointer();
+            КлючовіСловаДляПошуку = "";
             
             //Табличні частини
             Товари_TablePart = new ПерерахунокТоварів_Товари_TablePart(this);
@@ -18962,6 +19144,7 @@ namespace StorageAndTrade_1_0.Документи
                 Відповідальний = new Довідники.ФізичніОсоби_Pointer(base.FieldValue["col_i7"]);
                 Коментар = base.FieldValue["col_i5"]?.ToString() ?? "";
                 Автор = new Довідники.Користувачі_Pointer(base.FieldValue["col_a1"]);
+                КлючовіСловаДляПошуку = base.FieldValue["col_a2"]?.ToString() ?? "";
                 
                 BaseClear();
                 return true;
@@ -18979,10 +19162,11 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_i7"] = Відповідальний.UnigueID.UGuid;
             base.FieldValue["col_i5"] = Коментар;
             base.FieldValue["col_a1"] = Автор.UnigueID.UGuid;
+            base.FieldValue["col_a2"] = КлючовіСловаДляПошуку;
             
             BaseSave();
             
-            BaseWriteFullTextSearch(GetBasis(), new string[] {  });
+            BaseWriteFullTextSearch(GetBasis(), new string[] { КлючовіСловаДляПошуку });
         }
 
         public bool SpendTheDocument(DateTime spendDate)
@@ -19006,6 +19190,7 @@ namespace StorageAndTrade_1_0.Документи
             copy.Відповідальний = Відповідальний;
             copy.Коментар = Коментар;
             copy.Автор = Автор;
+            copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
             copy.New();
             return copy;
@@ -19034,6 +19219,7 @@ namespace StorageAndTrade_1_0.Документи
         public Довідники.ФізичніОсоби_Pointer Відповідальний { get; set; }
         public string Коментар { get; set; }
         public Довідники.Користувачі_Pointer Автор { get; set; }
+        public string КлючовіСловаДляПошуку { get; set; }
         
         //Табличні частини
         public ПерерахунокТоварів_Товари_TablePart Товари_TablePart { get; set; }
@@ -19225,6 +19411,7 @@ namespace StorageAndTrade_1_0.Документи
         public const string СумаДокументу = "col_a1";
         public const string Коментар = "col_a5";
         public const string Автор = "col_a2";
+        public const string КлючовіСловаДляПошуку = "col_a3";
     }
 
     public static class ПсуванняТоварів_Export
@@ -19314,6 +19501,12 @@ namespace StorageAndTrade_1_0.Документи
                     xmlWriter.WriteString(ПсуванняТоварів_Objest.Автор.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Автор
+            xmlWriter.WriteStartElement("КлючовіСловаДляПошуку");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ПсуванняТоварів_Objest.КлючовіСловаДляПошуку);
+              
+            xmlWriter.WriteEndElement(); //КлючовіСловаДляПошуку
 
                 /* 
                 Табличні частини
@@ -19416,7 +19609,7 @@ namespace StorageAndTrade_1_0.Документи
     public class ПсуванняТоварів_Objest : DocumentObject
     {
         public ПсуванняТоварів_Objest() : base(Config.Kernel!, "tab_a94", "ПсуванняТоварів",
-             new string[] { "docname", "docnomer", "docdate", "col_a6", "col_a7", "col_a4", "col_a8", "col_b1", "col_a1", "col_a5", "col_a2" }) 
+             new string[] { "docname", "docnomer", "docdate", "col_a6", "col_a7", "col_a4", "col_a8", "col_b1", "col_a1", "col_a5", "col_a2", "col_a3" }) 
         {
             Назва = "";
             НомерДок = "";
@@ -19429,6 +19622,7 @@ namespace StorageAndTrade_1_0.Документи
             СумаДокументу = 0;
             Коментар = "";
             Автор = new Довідники.Користувачі_Pointer();
+            КлючовіСловаДляПошуку = "";
             
             //Табличні частини
             Товари_TablePart = new ПсуванняТоварів_Товари_TablePart(this);
@@ -19456,6 +19650,7 @@ namespace StorageAndTrade_1_0.Документи
                 СумаДокументу = (base.FieldValue["col_a1"] != DBNull.Value) ? (decimal)base.FieldValue["col_a1"] : 0;
                 Коментар = base.FieldValue["col_a5"]?.ToString() ?? "";
                 Автор = new Довідники.Користувачі_Pointer(base.FieldValue["col_a2"]);
+                КлючовіСловаДляПошуку = base.FieldValue["col_a3"]?.ToString() ?? "";
                 
                 BaseClear();
                 return true;
@@ -19477,10 +19672,11 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a1"] = СумаДокументу;
             base.FieldValue["col_a5"] = Коментар;
             base.FieldValue["col_a2"] = Автор.UnigueID.UGuid;
+            base.FieldValue["col_a3"] = КлючовіСловаДляПошуку;
             
             BaseSave();
             
-            BaseWriteFullTextSearch(GetBasis(), new string[] {  });
+            BaseWriteFullTextSearch(GetBasis(), new string[] { КлючовіСловаДляПошуку });
         }
 
         public bool SpendTheDocument(DateTime spendDate)
@@ -19510,6 +19706,7 @@ namespace StorageAndTrade_1_0.Документи
             copy.СумаДокументу = СумаДокументу;
             copy.Коментар = Коментар;
             copy.Автор = Автор;
+            copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
             copy.New();
             return copy;
@@ -19542,6 +19739,7 @@ namespace StorageAndTrade_1_0.Документи
         public decimal СумаДокументу { get; set; }
         public string Коментар { get; set; }
         public Довідники.Користувачі_Pointer Автор { get; set; }
+        public string КлючовіСловаДляПошуку { get; set; }
         
         //Табличні частини
         public ПсуванняТоварів_Товари_TablePart Товари_TablePart { get; set; }
@@ -19746,6 +19944,7 @@ namespace StorageAndTrade_1_0.Документи
         public const string Автор = "col_b9";
         public const string ГосподарськаОперація = "col_b4";
         public const string Коментар = "col_b2";
+        public const string КлючовіСловаДляПошуку = "col_a3";
     }
 
     public static class ВнутрішнєСпоживанняТоварів_Export
@@ -19843,6 +20042,12 @@ namespace StorageAndTrade_1_0.Документи
                 xmlWriter.WriteValue(ВнутрішнєСпоживанняТоварів_Objest.Коментар);
               
             xmlWriter.WriteEndElement(); //Коментар
+            xmlWriter.WriteStartElement("КлючовіСловаДляПошуку");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ВнутрішнєСпоживанняТоварів_Objest.КлючовіСловаДляПошуку);
+              
+            xmlWriter.WriteEndElement(); //КлючовіСловаДляПошуку
 
                 /* 
                 Табличні частини
@@ -19945,7 +20150,7 @@ namespace StorageAndTrade_1_0.Документи
     public class ВнутрішнєСпоживанняТоварів_Objest : DocumentObject
     {
         public ВнутрішнєСпоживанняТоварів_Objest() : base(Config.Kernel!, "tab_b07", "ВнутрішнєСпоживанняТоварів",
-             new string[] { "docname", "docnomer", "docdate", "col_a1", "col_b1", "col_a2", "col_a9", "col_a8", "col_b7", "col_b9", "col_b4", "col_b2" }) 
+             new string[] { "docname", "docnomer", "docdate", "col_a1", "col_b1", "col_a2", "col_a9", "col_a8", "col_b7", "col_b9", "col_b4", "col_b2", "col_a3" }) 
         {
             Назва = "";
             НомерДок = "";
@@ -19959,6 +20164,7 @@ namespace StorageAndTrade_1_0.Документи
             Автор = new Довідники.Користувачі_Pointer();
             ГосподарськаОперація = 0;
             Коментар = "";
+            КлючовіСловаДляПошуку = "";
             
             //Табличні частини
             Товари_TablePart = new ВнутрішнєСпоживанняТоварів_Товари_TablePart(this);
@@ -19988,6 +20194,7 @@ namespace StorageAndTrade_1_0.Документи
                 Автор = new Довідники.Користувачі_Pointer(base.FieldValue["col_b9"]);
                 ГосподарськаОперація = (base.FieldValue["col_b4"] != DBNull.Value) ? (Перелічення.ГосподарськіОперації)base.FieldValue["col_b4"] : 0;
                 Коментар = base.FieldValue["col_b2"]?.ToString() ?? "";
+                КлючовіСловаДляПошуку = base.FieldValue["col_a3"]?.ToString() ?? "";
                 
                 BaseClear();
                 return true;
@@ -20011,10 +20218,11 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_b9"] = Автор.UnigueID.UGuid;
             base.FieldValue["col_b4"] = (int)ГосподарськаОперація;
             base.FieldValue["col_b2"] = Коментар;
+            base.FieldValue["col_a3"] = КлючовіСловаДляПошуку;
             
             BaseSave();
             ВнутрішнєСпоживанняТоварів_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар });
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
         }
 
         public bool SpendTheDocument(DateTime spendDate)
@@ -20045,6 +20253,7 @@ namespace StorageAndTrade_1_0.Документи
             copy.Автор = Автор;
             copy.ГосподарськаОперація = ГосподарськаОперація;
             copy.Коментар = Коментар;
+            copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
             copy.New();
             return copy;
@@ -20078,6 +20287,7 @@ namespace StorageAndTrade_1_0.Документи
         public Довідники.Користувачі_Pointer Автор { get; set; }
         public Перелічення.ГосподарськіОперації ГосподарськаОперація { get; set; }
         public string Коментар { get; set; }
+        public string КлючовіСловаДляПошуку { get; set; }
         
         //Табличні частини
         public ВнутрішнєСпоживанняТоварів_Товари_TablePart Товари_TablePart { get; set; }
@@ -20289,6 +20499,7 @@ namespace StorageAndTrade_1_0.Документи
         public const string Автор = "col_c4";
         public const string Коментар = "col_c1";
         public const string Менеджер = "col_a2";
+        public const string КлючовіСловаДляПошуку = "col_a7";
     }
 
     public static class РахунокФактура_Export
@@ -20444,6 +20655,12 @@ namespace StorageAndTrade_1_0.Документи
                     xmlWriter.WriteString(РахунокФактура_Objest.Менеджер.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Менеджер
+            xmlWriter.WriteStartElement("КлючовіСловаДляПошуку");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(РахунокФактура_Objest.КлючовіСловаДляПошуку);
+              
+            xmlWriter.WriteEndElement(); //КлючовіСловаДляПошуку
 
                 /* 
                 Табличні частини
@@ -20552,7 +20769,7 @@ namespace StorageAndTrade_1_0.Документи
     public class РахунокФактура_Objest : DocumentObject
     {
         public РахунокФактура_Objest() : base(Config.Kernel!, "tab_b10", "РахунокФактура",
-             new string[] { "docname", "docnomer", "docdate", "col_b4", "col_b5", "col_b6", "col_b7", "col_b8", "col_a1", "col_a3", "col_a4", "col_a5", "col_a6", "col_b9", "col_c2", "col_c3", "col_c4", "col_c1", "col_a2" }) 
+             new string[] { "docname", "docnomer", "docdate", "col_b4", "col_b5", "col_b6", "col_b7", "col_b8", "col_a1", "col_a3", "col_a4", "col_a5", "col_a6", "col_b9", "col_c2", "col_c3", "col_c4", "col_c1", "col_a2", "col_a7" }) 
         {
             Назва = "";
             НомерДок = "";
@@ -20573,6 +20790,7 @@ namespace StorageAndTrade_1_0.Документи
             Автор = new Довідники.Користувачі_Pointer();
             Коментар = "";
             Менеджер = new Довідники.Користувачі_Pointer();
+            КлючовіСловаДляПошуку = "";
             
             //Табличні частини
             Товари_TablePart = new РахунокФактура_Товари_TablePart(this);
@@ -20609,6 +20827,7 @@ namespace StorageAndTrade_1_0.Документи
                 Автор = new Довідники.Користувачі_Pointer(base.FieldValue["col_c4"]);
                 Коментар = base.FieldValue["col_c1"]?.ToString() ?? "";
                 Менеджер = new Довідники.Користувачі_Pointer(base.FieldValue["col_a2"]);
+                КлючовіСловаДляПошуку = base.FieldValue["col_a7"]?.ToString() ?? "";
                 
                 BaseClear();
                 return true;
@@ -20639,10 +20858,11 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_c4"] = Автор.UnigueID.UGuid;
             base.FieldValue["col_c1"] = Коментар;
             base.FieldValue["col_a2"] = Менеджер.UnigueID.UGuid;
+            base.FieldValue["col_a7"] = КлючовіСловаДляПошуку;
             
             BaseSave();
             РахунокФактура_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар });
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
         }
 
         public bool SpendTheDocument(DateTime spendDate)
@@ -20680,6 +20900,7 @@ namespace StorageAndTrade_1_0.Документи
             copy.Автор = Автор;
             copy.Коментар = Коментар;
             copy.Менеджер = Менеджер;
+            copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
             copy.New();
             return copy;
@@ -20720,6 +20941,7 @@ namespace StorageAndTrade_1_0.Документи
         public Довідники.Користувачі_Pointer Автор { get; set; }
         public string Коментар { get; set; }
         public Довідники.Користувачі_Pointer Менеджер { get; set; }
+        public string КлючовіСловаДляПошуку { get; set; }
         
         //Табличні частини
         public РахунокФактура_Товари_TablePart Товари_TablePart { get; set; }
@@ -20926,6 +21148,7 @@ namespace StorageAndTrade_1_0.Документи
         public const string Організація = "col_a5";
         public const string Підрозділ = "col_a6";
         public const string ДокументПоступлення = "col_a7";
+        public const string КлючовіСловаДляПошуку = "col_a8";
     }
 
     public static class РозміщенняТоварівНаСкладі_Export
@@ -21009,6 +21232,12 @@ namespace StorageAndTrade_1_0.Документи
                     xmlWriter.WriteString(РозміщенняТоварівНаСкладі_Objest.ДокументПоступлення.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //ДокументПоступлення
+            xmlWriter.WriteStartElement("КлючовіСловаДляПошуку");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(РозміщенняТоварівНаСкладі_Objest.КлючовіСловаДляПошуку);
+              
+            xmlWriter.WriteEndElement(); //КлючовіСловаДляПошуку
 
                 /* 
                 Табличні частини
@@ -21099,7 +21328,7 @@ namespace StorageAndTrade_1_0.Документи
     public class РозміщенняТоварівНаСкладі_Objest : DocumentObject
     {
         public РозміщенняТоварівНаСкладі_Objest() : base(Config.Kernel!, "tab_a64", "РозміщенняТоварівНаСкладі",
-             new string[] { "docname", "docdate", "docnomer", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7" }) 
+             new string[] { "docname", "docdate", "docnomer", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8" }) 
         {
             Назва = "";
             ДатаДок = DateTime.MinValue;
@@ -21111,6 +21340,7 @@ namespace StorageAndTrade_1_0.Документи
             Організація = new Довідники.Організації_Pointer();
             Підрозділ = new Довідники.СтруктураПідприємства_Pointer();
             ДокументПоступлення = new Документи.ПоступленняТоварівТаПослуг_Pointer();
+            КлючовіСловаДляПошуку = "";
             
             //Табличні частини
             Товари_TablePart = new РозміщенняТоварівНаСкладі_Товари_TablePart(this);
@@ -21138,6 +21368,7 @@ namespace StorageAndTrade_1_0.Документи
                 Організація = new Довідники.Організації_Pointer(base.FieldValue["col_a5"]);
                 Підрозділ = new Довідники.СтруктураПідприємства_Pointer(base.FieldValue["col_a6"]);
                 ДокументПоступлення = new Документи.ПоступленняТоварівТаПослуг_Pointer(base.FieldValue["col_a7"]);
+                КлючовіСловаДляПошуку = base.FieldValue["col_a8"]?.ToString() ?? "";
                 
                 BaseClear();
                 return true;
@@ -21159,10 +21390,11 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a5"] = Організація.UnigueID.UGuid;
             base.FieldValue["col_a6"] = Підрозділ.UnigueID.UGuid;
             base.FieldValue["col_a7"] = ДокументПоступлення.UnigueID.UGuid;
+            base.FieldValue["col_a8"] = КлючовіСловаДляПошуку;
             
             BaseSave();
             РозміщенняТоварівНаСкладі_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар });
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
         }
 
         public bool SpendTheDocument(DateTime spendDate)
@@ -21191,6 +21423,7 @@ namespace StorageAndTrade_1_0.Документи
             copy.Організація = Організація;
             copy.Підрозділ = Підрозділ;
             copy.ДокументПоступлення = ДокументПоступлення;
+            copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
             copy.New();
             return copy;
@@ -21222,6 +21455,7 @@ namespace StorageAndTrade_1_0.Документи
         public Довідники.Організації_Pointer Організація { get; set; }
         public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; }
         public Документи.ПоступленняТоварівТаПослуг_Pointer ДокументПоступлення { get; set; }
+        public string КлючовіСловаДляПошуку { get; set; }
         
         //Табличні частини
         public РозміщенняТоварівНаСкладі_Товари_TablePart Товари_TablePart { get; set; }
@@ -21415,6 +21649,7 @@ namespace StorageAndTrade_1_0.Документи
         public const string Автор = "col_a4";
         public const string Організація = "col_a5";
         public const string Підрозділ = "col_a6";
+        public const string КлючовіСловаДляПошуку = "col_a7";
     }
 
     public static class ПереміщенняТоварівНаСкладі_Export
@@ -21490,6 +21725,12 @@ namespace StorageAndTrade_1_0.Документи
                     xmlWriter.WriteString(ПереміщенняТоварівНаСкладі_Objest.Підрозділ.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Підрозділ
+            xmlWriter.WriteStartElement("КлючовіСловаДляПошуку");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ПереміщенняТоварівНаСкладі_Objest.КлючовіСловаДляПошуку);
+              
+            xmlWriter.WriteEndElement(); //КлючовіСловаДляПошуку
 
                 /* 
                 Табличні частини
@@ -21588,7 +21829,7 @@ namespace StorageAndTrade_1_0.Документи
     public class ПереміщенняТоварівНаСкладі_Objest : DocumentObject
     {
         public ПереміщенняТоварівНаСкладі_Objest() : base(Config.Kernel!, "tab_b09", "ПереміщенняТоварівНаСкладі",
-             new string[] { "docname", "docdate", "docnomer", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6" }) 
+             new string[] { "docname", "docdate", "docnomer", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7" }) 
         {
             Назва = "";
             ДатаДок = DateTime.MinValue;
@@ -21599,6 +21840,7 @@ namespace StorageAndTrade_1_0.Документи
             Автор = new Довідники.Користувачі_Pointer();
             Організація = new Довідники.Організації_Pointer();
             Підрозділ = new Довідники.СтруктураПідприємства_Pointer();
+            КлючовіСловаДляПошуку = "";
             
             //Табличні частини
             Товари_TablePart = new ПереміщенняТоварівНаСкладі_Товари_TablePart(this);
@@ -21625,6 +21867,7 @@ namespace StorageAndTrade_1_0.Документи
                 Автор = new Довідники.Користувачі_Pointer(base.FieldValue["col_a4"]);
                 Організація = new Довідники.Організації_Pointer(base.FieldValue["col_a5"]);
                 Підрозділ = new Довідники.СтруктураПідприємства_Pointer(base.FieldValue["col_a6"]);
+                КлючовіСловаДляПошуку = base.FieldValue["col_a7"]?.ToString() ?? "";
                 
                 BaseClear();
                 return true;
@@ -21645,10 +21888,11 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a4"] = Автор.UnigueID.UGuid;
             base.FieldValue["col_a5"] = Організація.UnigueID.UGuid;
             base.FieldValue["col_a6"] = Підрозділ.UnigueID.UGuid;
+            base.FieldValue["col_a7"] = КлючовіСловаДляПошуку;
             
             BaseSave();
             ПереміщенняТоварівНаСкладі_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар });
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
         }
 
         public bool SpendTheDocument(DateTime spendDate)
@@ -21676,6 +21920,7 @@ namespace StorageAndTrade_1_0.Документи
             copy.Автор = Автор;
             copy.Організація = Організація;
             copy.Підрозділ = Підрозділ;
+            copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
             copy.New();
             return copy;
@@ -21706,6 +21951,7 @@ namespace StorageAndTrade_1_0.Документи
         public Довідники.Користувачі_Pointer Автор { get; set; }
         public Довідники.Організації_Pointer Організація { get; set; }
         public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; }
+        public string КлючовіСловаДляПошуку { get; set; }
         
         //Табличні частини
         public ПереміщенняТоварівНаСкладі_Товари_TablePart Товари_TablePart { get; set; }
@@ -21904,6 +22150,7 @@ namespace StorageAndTrade_1_0.Документи
         public const string Організація = "col_a5";
         public const string Підрозділ = "col_a6";
         public const string ДокументРеалізації = "col_a7";
+        public const string КлючовіСловаДляПошуку = "col_a8";
     }
 
     public static class ЗбіркаТоварівНаСкладі_Export
@@ -21987,6 +22234,12 @@ namespace StorageAndTrade_1_0.Документи
                     xmlWriter.WriteString(ЗбіркаТоварівНаСкладі_Objest.ДокументРеалізації.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //ДокументРеалізації
+            xmlWriter.WriteStartElement("КлючовіСловаДляПошуку");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(ЗбіркаТоварівНаСкладі_Objest.КлючовіСловаДляПошуку);
+              
+            xmlWriter.WriteEndElement(); //КлючовіСловаДляПошуку
 
                 /* 
                 Табличні частини
@@ -22077,7 +22330,7 @@ namespace StorageAndTrade_1_0.Документи
     public class ЗбіркаТоварівНаСкладі_Objest : DocumentObject
     {
         public ЗбіркаТоварівНаСкладі_Objest() : base(Config.Kernel!, "tab_b27", "ЗбіркаТоварівНаСкладі",
-             new string[] { "docname", "docdate", "docnomer", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7" }) 
+             new string[] { "docname", "docdate", "docnomer", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8" }) 
         {
             Назва = "";
             ДатаДок = DateTime.MinValue;
@@ -22089,6 +22342,7 @@ namespace StorageAndTrade_1_0.Документи
             Організація = new Довідники.Організації_Pointer();
             Підрозділ = new Довідники.СтруктураПідприємства_Pointer();
             ДокументРеалізації = new Документи.РеалізаціяТоварівТаПослуг_Pointer();
+            КлючовіСловаДляПошуку = "";
             
             //Табличні частини
             Товари_TablePart = new ЗбіркаТоварівНаСкладі_Товари_TablePart(this);
@@ -22116,6 +22370,7 @@ namespace StorageAndTrade_1_0.Документи
                 Організація = new Довідники.Організації_Pointer(base.FieldValue["col_a5"]);
                 Підрозділ = new Довідники.СтруктураПідприємства_Pointer(base.FieldValue["col_a6"]);
                 ДокументРеалізації = new Документи.РеалізаціяТоварівТаПослуг_Pointer(base.FieldValue["col_a7"]);
+                КлючовіСловаДляПошуку = base.FieldValue["col_a8"]?.ToString() ?? "";
                 
                 BaseClear();
                 return true;
@@ -22137,10 +22392,11 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a5"] = Організація.UnigueID.UGuid;
             base.FieldValue["col_a6"] = Підрозділ.UnigueID.UGuid;
             base.FieldValue["col_a7"] = ДокументРеалізації.UnigueID.UGuid;
+            base.FieldValue["col_a8"] = КлючовіСловаДляПошуку;
             
             BaseSave();
             ЗбіркаТоварівНаСкладі_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар });
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
         }
 
         public bool SpendTheDocument(DateTime spendDate)
@@ -22169,6 +22425,7 @@ namespace StorageAndTrade_1_0.Документи
             copy.Організація = Організація;
             copy.Підрозділ = Підрозділ;
             copy.ДокументРеалізації = ДокументРеалізації;
+            copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
             copy.New();
             return copy;
@@ -22200,6 +22457,7 @@ namespace StorageAndTrade_1_0.Документи
         public Довідники.Організації_Pointer Організація { get; set; }
         public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; }
         public Документи.РеалізаціяТоварівТаПослуг_Pointer ДокументРеалізації { get; set; }
+        public string КлючовіСловаДляПошуку { get; set; }
         
         //Табличні частини
         public ЗбіркаТоварівНаСкладі_Товари_TablePart Товари_TablePart { get; set; }
@@ -22393,6 +22651,7 @@ namespace StorageAndTrade_1_0.Документи
         public const string Автор = "col_a4";
         public const string Підрозділ = "col_a3";
         public const string Основа = "col_a5";
+        public const string КлючовіСловаДляПошуку = "col_a6";
     }
 
     public static class РозміщенняНоменклатуриПоКоміркам_Export
@@ -22468,6 +22727,12 @@ namespace StorageAndTrade_1_0.Документи
                 xmlWriter.WriteRaw(((UuidAndText)РозміщенняНоменклатуриПоКоміркам_Objest.Основа).ToXml());
               
             xmlWriter.WriteEndElement(); //Основа
+            xmlWriter.WriteStartElement("КлючовіСловаДляПошуку");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(РозміщенняНоменклатуриПоКоміркам_Objest.КлючовіСловаДляПошуку);
+              
+            xmlWriter.WriteEndElement(); //КлючовіСловаДляПошуку
 
                 /* 
                 Табличні частини
@@ -22530,7 +22795,7 @@ namespace StorageAndTrade_1_0.Документи
     public class РозміщенняНоменклатуриПоКоміркам_Objest : DocumentObject
     {
         public РозміщенняНоменклатуриПоКоміркам_Objest() : base(Config.Kernel!, "tab_b29", "РозміщенняНоменклатуриПоКоміркам",
-             new string[] { "docname", "docnomer", "docdate", "col_a2", "col_a1", "col_g9", "col_a4", "col_a3", "col_a5" }) 
+             new string[] { "docname", "docnomer", "docdate", "col_a2", "col_a1", "col_g9", "col_a4", "col_a3", "col_a5", "col_a6" }) 
         {
             Назва = "";
             НомерДок = "";
@@ -22541,6 +22806,7 @@ namespace StorageAndTrade_1_0.Документи
             Автор = new Довідники.Користувачі_Pointer();
             Підрозділ = new Довідники.СтруктураПідприємства_Pointer();
             Основа = new UuidAndText();
+            КлючовіСловаДляПошуку = "";
             
             //Табличні частини
             Товари_TablePart = new РозміщенняНоменклатуриПоКоміркам_Товари_TablePart(this);
@@ -22567,6 +22833,7 @@ namespace StorageAndTrade_1_0.Документи
                 Автор = new Довідники.Користувачі_Pointer(base.FieldValue["col_a4"]);
                 Підрозділ = new Довідники.СтруктураПідприємства_Pointer(base.FieldValue["col_a3"]);
                 Основа = (base.FieldValue["col_a5"] != DBNull.Value) ? (UuidAndText)base.FieldValue["col_a5"] : new UuidAndText();
+                КлючовіСловаДляПошуку = base.FieldValue["col_a6"]?.ToString() ?? "";
                 
                 BaseClear();
                 return true;
@@ -22587,10 +22854,11 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a4"] = Автор.UnigueID.UGuid;
             base.FieldValue["col_a3"] = Підрозділ.UnigueID.UGuid;
             base.FieldValue["col_a5"] = Основа;
+            base.FieldValue["col_a6"] = КлючовіСловаДляПошуку;
             
             BaseSave();
             РозміщенняНоменклатуриПоКоміркам_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар });
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
         }
 
         public bool SpendTheDocument(DateTime spendDate)
@@ -22618,6 +22886,7 @@ namespace StorageAndTrade_1_0.Документи
             copy.Автор = Автор;
             copy.Підрозділ = Підрозділ;
             copy.Основа = Основа;
+            copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
             copy.New();
             return copy;
@@ -22648,6 +22917,7 @@ namespace StorageAndTrade_1_0.Документи
         public Довідники.Користувачі_Pointer Автор { get; set; }
         public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; }
         public UuidAndText Основа { get; set; }
+        public string КлючовіСловаДляПошуку { get; set; }
         
         //Табличні частини
         public РозміщенняНоменклатуриПоКоміркам_Товари_TablePart Товари_TablePart { get; set; }

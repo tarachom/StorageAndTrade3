@@ -386,9 +386,16 @@ namespace StorageAndTrade
             РозхіднийКасовийОрдер_Objest.Курс = Курс.Value;
             РозхіднийКасовийОрдер_Objest.СтаттяРухуКоштів = СтаттяРухуКоштів.Pointer;
             РозхіднийКасовийОрдер_Objest.Основа = Основа.Pointer;
+
+            РозхіднийКасовийОрдер_Objest.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку();
         }
 
         #endregion
+
+        string КлючовіСловаДляПошуку()
+        {
+            return $"\n{Організація.Pointer.Назва} {Валюта.Pointer.Назва} {Каса.Pointer.Назва} {КасаОтримувач.Pointer.Назва} {Контрагент.Pointer.Назва}";
+        }
 
         void OnComboBoxChanged_ГосподарськаОперація(object? sender, EventArgs args)
         {

@@ -428,6 +428,20 @@ namespace StorageAndTrade
             }
         }
 
+        public string КлючовіСловаДляПошуку()
+        {
+            string ключовіСлова = "";
+
+            if (ПоверненняТоварівВідКлієнта_Objest != null)
+            {
+                int sequenceNumber = 0;
+                foreach (Запис запис in Записи)
+                    ключовіСлова += $"\n{++sequenceNumber}. {запис.Номенклатура.Назва} {запис.Характеристика.Назва} {запис.Серія.Назва}";
+            }
+
+            return ключовіСлова;
+        }
+
         public decimal СумаДокументу()
         {
             decimal Сума = 0;

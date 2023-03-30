@@ -419,11 +419,16 @@ namespace StorageAndTrade
         {
             if (TreeViewGrid.Selection.CountSelectedRows() != 0)
             {
-                TreeIter iter;
-                if (TreeViewGrid.Model.GetIter(out iter, TreeViewGrid.Selection.GetSelectedRows()[0]))
+                TreePath[] selectionRows = TreeViewGrid.Selection.GetSelectedRows();
+
+                foreach (TreePath itemPath in selectionRows)
                 {
-                    string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
-                    OpenPageElement(false, uid);
+                    TreeIter iter;
+                    if (TreeViewGrid.Model.GetIter(out iter, itemPath))
+                    {
+                        string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
+                        OpenPageElement(false, uid);
+                    }
                 }
             }
         }

@@ -23,7 +23,6 @@ limitations under the License.
 
 using Gtk;
 
-using StorageAndTrade_1_0.Константи;
 using StorageAndTrade_1_0.Довідники;
 
 namespace StorageAndTrade
@@ -193,6 +192,7 @@ namespace StorageAndTrade
             Контрагенти_Objest.НазваПовна = НазваПовна.Buffer.Text;
             Контрагенти_Objest.РеєстраційнийНомер = РеєстраційнийНомер.Text;
             Контрагенти_Objest.Опис = Опис.Buffer.Text;
+            Контрагенти_Objest.КлючовіСловаДляПошуку = Контакти.КлючовіСловаДляПошуку();
         }
 
         #endregion

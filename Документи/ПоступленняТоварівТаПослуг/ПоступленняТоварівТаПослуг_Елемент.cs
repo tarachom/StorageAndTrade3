@@ -78,6 +78,8 @@ namespace StorageAndTrade
 
         #endregion
 
+        Label IndicatorSpend = new Label();
+
         public ПоступленняТоварівТаПослуг_Елемент() : base()
         {
             HBox hBox = new HBox();
@@ -105,6 +107,7 @@ namespace StorageAndTrade
             };
 
             hBox.PackStart(linkButtonProvodky, false, false, 10);
+            hBox.PackStart(IndicatorSpend, false, false, 10);
 
             PackStart(hBox, false, false, 10);
 
@@ -479,6 +482,8 @@ namespace StorageAndTrade
                 if (Контрагент.AfterSelectFunc != null)
                     Контрагент.AfterSelectFunc.Invoke();
             }
+
+            IndicatorSpend.Text = ПоступленняТоварівТаПослуг_Objest.Spend ? "Проведений" : "Не проведений";
         }
 
         void GetValue()
@@ -514,9 +519,15 @@ namespace StorageAndTrade
             ПоступленняТоварівТаПослуг_Objest.Основа = Основа.Pointer;
 
             ПоступленняТоварівТаПослуг_Objest.СумаДокументу = Товари.СумаДокументу();
+            ПоступленняТоварівТаПослуг_Objest.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку() + Товари.КлючовіСловаДляПошуку();
         }
 
         #endregion
+
+        string КлючовіСловаДляПошуку()
+        {
+            return $"\n{Організація.Pointer.Назва} {Валюта.Pointer.Назва} {Каса.Pointer.Назва} {Склад.Pointer.Назва} {Контрагент.Pointer.Назва}";
+        }
 
         bool IsValidValue()
         {
@@ -595,6 +606,8 @@ namespace StorageAndTrade
             SpendTheDocument(false);
 
             ReloadList();
+
+            Program.GeneralForm?.CloseCurrentPageNotebook();
         }
     }
 }

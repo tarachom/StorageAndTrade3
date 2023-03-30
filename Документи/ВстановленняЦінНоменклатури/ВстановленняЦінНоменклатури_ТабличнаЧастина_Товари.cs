@@ -374,6 +374,20 @@ namespace StorageAndTrade
             }
         }
 
+        public string КлючовіСловаДляПошуку()
+        {
+            string ключовіСлова = "";
+
+            if (ВстановленняЦінНоменклатури_Objest != null)
+            {
+                int sequenceNumber = 0;
+                foreach (Запис запис in Записи)
+                    ключовіСлова += $"\n{++sequenceNumber}. {запис.Номенклатура.Назва} {запис.Характеристика.Назва} ";
+            }
+
+            return ключовіСлова;
+        }
+
         #region TreeView
 
         void AddColumn()

@@ -754,8 +754,10 @@ ORDER BY period ASC
             #endregion
 
             Dictionary<string, string> ВидиміКолонки = new Dictionary<string, string>();
+            //ВидиміКолонки.Add("uid_and_text", "uid_and_text");
             ВидиміКолонки.Add("income", "Рух");
             ВидиміКолонки.Add("Документ", "Документ");
+            
             ВидиміКолонки.Add("Контрагент_Назва", "Контрагент");
             ВидиміКолонки.Add("Валюта_Назва", "Валюта");
             ВидиміКолонки.Add("Сума", "Сума");

@@ -408,6 +408,20 @@ namespace StorageAndTrade
             return Math.Round(Сума, 2);
         }
 
+        public string КлючовіСловаДляПошуку()
+        {
+            string ключовіСлова = "";
+
+            if (ЗамовленняПостачальнику_Objest != null)
+            {
+                int sequenceNumber = 0;
+                foreach (Запис запис in Записи)
+                    ключовіСлова += $"\n{++sequenceNumber}. {запис.Номенклатура.Назва} {запис.Характеристика.Назва} ";
+            }
+
+            return ключовіСлова;
+        }
+
         #region TreeView
 
         void AddColumn()

@@ -242,6 +242,20 @@ namespace StorageAndTrade
             }
         }
 
+        public string КлючовіСловаДляПошуку()
+        {
+            string ключовіСлова = "";
+
+            if (ВведенняЗалишків_Objest != null)
+            {
+                int sequenceNumber = 0;
+                foreach (Запис запис in Записи)
+                    ключовіСлова += $"\n{++sequenceNumber}. {запис.БанківськийРахунок.Назва}";
+            }
+
+            return ключовіСлова;
+        }
+
         #region TreeView
 
         void AddColumn()

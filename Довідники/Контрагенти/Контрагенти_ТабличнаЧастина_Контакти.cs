@@ -164,6 +164,34 @@ namespace StorageAndTrade
             }
         }
 
+        public string КлючовіСловаДляПошуку()
+        {
+            string ключовіСлова = "";
+
+            if (Контрагенти_Objest != null)
+            {
+                int sequenceNumber = 0;
+
+                TreeIter iter;
+                if (Store.GetIterFirst(out iter))
+                    do
+                    {
+                        ключовіСлова += $"\n{++sequenceNumber}. " +
+                            (string)Store.GetValue(iter, (int)Columns.Тип) + " " +
+                            (Store.GetValue(iter, (int)Columns.Значення)?.ToString() ?? "") + " " +
+                            (Store.GetValue(iter, (int)Columns.Телефон)?.ToString() ?? "") + " " +
+                            (Store.GetValue(iter, (int)Columns.ЕлектроннаПошта)?.ToString() ?? "") + " " +
+                            (Store.GetValue(iter, (int)Columns.Країна)?.ToString() ?? "") + " " +
+                            (Store.GetValue(iter, (int)Columns.Область)?.ToString() ?? "") + " " +
+                            (Store.GetValue(iter, (int)Columns.Район)?.ToString() ?? "") + " " +
+                            (Store.GetValue(iter, (int)Columns.Місто)?.ToString() ?? "");
+                    }
+                    while (Store.IterNext(ref iter));
+            }
+
+            return ключовіСлова;
+        }
+
         #region TreeView
 
         void AddColumn()

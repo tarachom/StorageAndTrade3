@@ -506,6 +506,20 @@ LIMIT 1
             return Math.Round(Сума, 2);
         }
 
+        public string КлючовіСловаДляПошуку()
+        {
+            string ключовіСлова = "";
+
+            if (ЗамовленняКлієнта_Objest != null)
+            {
+                int sequenceNumber = 0;
+                foreach (Запис запис in Записи)
+                    ключовіСлова += $"\n{++sequenceNumber}. {запис.Номенклатура.Назва} {запис.Характеристика.Назва} ";
+            }
+
+            return ключовіСлова;
+        }
+
         #region TreeView
 
         void AddColumn()

@@ -645,7 +645,6 @@ FROM
 
             return true;
         }
-
         public static void ClearSpend(ЗамовленняКлієнта_Objest ДокументОбєкт)
         {
             ЗамовленняКлієнтів_RecordsSet замовленняКлієнтів_RecordsSet = new ЗамовленняКлієнтів_RecordsSet();
