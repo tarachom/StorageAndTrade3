@@ -37,7 +37,7 @@ namespace StorageAndTrade
         public Блокнот_Objest Блокнот_Objest { get; set; } = new Блокнот_Objest();
 
         Entry Код = new Entry() { WidthRequest = 100 };
-        Entry Назва = new Entry() { WidthRequest = 500 };
+        Entry Назва = new Entry() { WidthRequest = 800 };
         DateTimeControl ДатаЗапису = new DateTimeControl();
         TextView Опис = new TextView();
 
@@ -55,7 +55,7 @@ namespace StorageAndTrade
 
             PackStart(hBox, false, false, 10);
 
-            HPaned hPaned = new HPaned() { BorderWidth = 5, Position = 500 };
+            HPaned hPaned = new HPaned() { BorderWidth = 5, Position = 800 };
 
             CreatePack1(hPaned);
             CreatePack2(hPaned);
@@ -92,7 +92,7 @@ namespace StorageAndTrade
 
             hBoxOpys.PackStart(new Label("Опис:") { Valign = Align.Start }, false, false, 5);
 
-            ScrolledWindow scrollTextViewOpys = new ScrolledWindow() { ShadowType = ShadowType.In, WidthRequest = 500, HeightRequest = 200 };
+            ScrolledWindow scrollTextViewOpys = new ScrolledWindow() { ShadowType = ShadowType.In, WidthRequest = 800, HeightRequest = 500 };
             scrollTextViewOpys.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
             scrollTextViewOpys.Add(Опис);
 
