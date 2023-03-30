@@ -697,13 +697,27 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
             </xsl:for-each> });
         }
 
-        public <xsl:value-of select="$DirectoryName"/>_Objest Copy()
+        public <xsl:value-of select="$DirectoryName"/>_Objest Copy(bool copyTableParts = false)
         {
             <xsl:value-of select="$DirectoryName"/>_Objest copy = new <xsl:value-of select="$DirectoryName"/>_Objest();
             <xsl:for-each select="Fields/Field">
               <xsl:text>copy.</xsl:text><xsl:value-of select="Name"/><xsl:text> = </xsl:text><xsl:value-of select="Name"/>;
             </xsl:for-each>
+            
+            if (copyTableParts)
+            {
+            <xsl:for-each select="TabularParts/TablePart">
+                <xsl:variable name="TablePartName" select="concat(Name, '_TablePart')"/>
+                //<xsl:value-of select="Name"/> - Таблична частина
+                <xsl:value-of select="$TablePartName"/>.Read();
+                copy.<xsl:value-of select="$TablePartName"/>.Records = <xsl:value-of select="$TablePartName"/>.Copy();
+            </xsl:for-each>
+            }
+
             copy.New();
+            <xsl:if test="normalize-space(TriggerFunctions/Copying) != ''">
+                <xsl:value-of select="TriggerFunctions/Copying"/><xsl:text>(copy, this);</xsl:text>      
+            </xsl:if>
             return copy;
         }
 
@@ -911,6 +925,17 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
         public void Delete()
         {
             base.BaseDelete(Owner.UnigueID);
+        }
+
+        public List&lt;Record&gt; Copy()
+        {
+            List&lt;Record&gt; copyRecords = new List&lt;Record&gt;();
+            copyRecords = Records;
+
+            foreach (Record copyRecordItem in copyRecords)
+                copyRecordItem.UID = Guid.Empty;
+
+            return copyRecords;
         }
         
         public class Record : DirectoryTablePartRecord
@@ -1216,13 +1241,27 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
             <xsl:text>BaseSpend(false, DateTime.MinValue);</xsl:text>
         }
 
-        public <xsl:value-of select="$DocumentName"/>_Objest Copy()
+        public <xsl:value-of select="$DocumentName"/>_Objest Copy(bool copyTableParts = false)
         {
             <xsl:value-of select="$DocumentName"/>_Objest copy = new <xsl:value-of select="$DocumentName"/>_Objest();
             <xsl:for-each select="Fields/Field">
               <xsl:text>copy.</xsl:text><xsl:value-of select="Name"/><xsl:text> = </xsl:text><xsl:value-of select="Name"/>;
             </xsl:for-each>
+
+            if (copyTableParts)
+            {
+            <xsl:for-each select="TabularParts/TablePart">
+                <xsl:variable name="TablePartName" select="concat(Name, '_TablePart')"/>
+                //<xsl:value-of select="Name"/> - Таблична частина
+                <xsl:value-of select="$TablePartName"/>.Read();
+                copy.<xsl:value-of select="$TablePartName"/>.Records = <xsl:value-of select="$TablePartName"/>.Copy();
+            </xsl:for-each>
+            }
+
             copy.New();
+            <xsl:if test="normalize-space(TriggerFunctions/Copying) != ''">
+                <xsl:value-of select="TriggerFunctions/Copying"/><xsl:text>(copy, this);</xsl:text>      
+            </xsl:if>
             return copy;
         }
 
@@ -1418,32 +1457,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
                 
             base.BaseCommitTransaction();
         }
-        <!-- /* видалити */
-        public string GeneratingTextForFullTextSearch() 
-        {
-            string fullText = "";
-            <xsl:if test="count(Fields/Field[IsFullTextSearch = '1']) != 0">
-            foreach (Record record in Records)
-            {
-                fullText += string.Join(" ", new string[] { 
-                    <xsl:for-each select="Fields/Field[IsFullTextSearch = '1']">
-                      <xsl:if test="position() != 1">, 
-                      </xsl:if>
-                      <xsl:text>record.</xsl:text><xsl:value-of select="Name"/>
-                      <xsl:choose>
-                          <xsl:when test="Type = 'pointer'">
-                              <xsl:text>.GetPresentation()</xsl:text>
-                          </xsl:when>
-                          <xsl:otherwise>
-                              <xsl:text>.ToString()</xsl:text>
-                          </xsl:otherwise>
-                      </xsl:choose>
-                    </xsl:for-each> }) + "\n";
-            }
-            </xsl:if>
-            return fullText;
-        }
-        -->
+
         public void Delete()
         {
             base.BaseDelete(Owner.UnigueID);

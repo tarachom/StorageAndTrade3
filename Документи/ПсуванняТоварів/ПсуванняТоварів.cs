@@ -451,13 +451,8 @@ namespace StorageAndTrade
                         ПсуванняТоварів_Objest ПсуванняТоварів_Objest = new ПсуванняТоварів_Objest();
                         if (ПсуванняТоварів_Objest.Read(new UnigueID(uid)))
                         {
-                            ПсуванняТоварів_Objest ПсуванняТоварів_Objest_Новий = ПсуванняТоварів_Objest.Copy();
-                            ПсуванняТоварів_Objest_Новий.Коментар = "Копія: " + ПсуванняТоварів_Objest.Назва;
+                            ПсуванняТоварів_Objest ПсуванняТоварів_Objest_Новий = ПсуванняТоварів_Objest.Copy(true);
                             ПсуванняТоварів_Objest_Новий.Save();
-
-                            //Зчитати та скопіювати табличну частину Товари
-                            ПсуванняТоварів_Objest.Товари_TablePart.Read();
-                            ПсуванняТоварів_Objest_Новий.Товари_TablePart.Records = ПсуванняТоварів_Objest.Товари_TablePart.Copy();
                             ПсуванняТоварів_Objest_Новий.Товари_TablePart.Save(true);
 
                             SelectPointerItem = ПсуванняТоварів_Objest_Новий.GetDocumentPointer();

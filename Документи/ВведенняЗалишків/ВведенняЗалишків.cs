@@ -451,28 +451,11 @@ namespace StorageAndTrade
                         ВведенняЗалишків_Objest ВведенняЗалишків_Objest = new ВведенняЗалишків_Objest();
                         if (ВведенняЗалишків_Objest.Read(new UnigueID(uid)))
                         {
-                            ВведенняЗалишків_Objest ВведенняЗалишків_Objest_Новий = ВведенняЗалишків_Objest.Copy();
-                            ВведенняЗалишків_Objest_Новий.Коментар = "Копія: " + ВведенняЗалишків_Objest.Назва;
+                            ВведенняЗалишків_Objest ВведенняЗалишків_Objest_Новий = ВведенняЗалишків_Objest.Copy(true);
                             ВведенняЗалишків_Objest_Новий.Save();
-
-                            //Зчитати та скопіювати табличну частину Товари
-                            ВведенняЗалишків_Objest.Товари_TablePart.Read();
-                            ВведенняЗалишків_Objest_Новий.Товари_TablePart.Records = ВведенняЗалишків_Objest.Товари_TablePart.Copy();
                             ВведенняЗалишків_Objest_Новий.Товари_TablePart.Save(true);
-
-                            //Зчитати та скопіювати табличну частину Каси
-                            ВведенняЗалишків_Objest.Каси_TablePart.Read();
-                            ВведенняЗалишків_Objest_Новий.Каси_TablePart.Records = ВведенняЗалишків_Objest.Каси_TablePart.Copy();
                             ВведенняЗалишків_Objest_Новий.Каси_TablePart.Save(true);
-
-                            //Зчитати та скопіювати табличну частину БанківськіРахунки
-                            ВведенняЗалишків_Objest.БанківськіРахунки_TablePart.Read();
-                            ВведенняЗалишків_Objest_Новий.БанківськіРахунки_TablePart.Records = ВведенняЗалишків_Objest.БанківськіРахунки_TablePart.Copy();
                             ВведенняЗалишків_Objest_Новий.БанківськіРахунки_TablePart.Save(true);
-
-                            //Зчитати та скопіювати табличну частину РозрахункиЗКонтрагентами
-                            ВведенняЗалишків_Objest.РозрахункиЗКонтрагентами_TablePart.Read();
-                            ВведенняЗалишків_Objest_Новий.РозрахункиЗКонтрагентами_TablePart.Records = ВведенняЗалишків_Objest.РозрахункиЗКонтрагентами_TablePart.Copy();
                             ВведенняЗалишків_Objest_Новий.РозрахункиЗКонтрагентами_TablePart.Save(true);
 
                             SelectPointerItem = ВведенняЗалишків_Objest_Новий.GetDocumentPointer();

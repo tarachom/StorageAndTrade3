@@ -5,7 +5,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>30.03.2023 18:16:08</DateTimeSave>
+  <DateTimeSave>30.03.2023 22:12:37</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -794,6 +794,14 @@ https://accounting.org.ua/storage_and_trade.html</Desc>
           <Type>integer</Type>
           <TabularParts />
         </Constant>
+        <Constant>
+          <Name>ВидиЗапасів</Name>
+          <NameInTable>col_i4</NameInTable>
+          <Desc>
+          </Desc>
+          <Type>integer</Type>
+          <TabularParts />
+        </Constant>
       </Constants>
     </ConstantsBlock>
     <ConstantsBlock>
@@ -1161,6 +1169,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       </TabularLists>
       <TriggerFunctions>
         <New>Організації_Triggers.New</New>
+        <Copying>Організації_Triggers.Copying</Copying>
         <BeforeSave>Організації_Triggers.BeforeSave</BeforeSave>
         <AfterSave>Організації_Triggers.AfterSave</AfterSave>
         <BeforeDelete>Організації_Triggers.BeforeDelete</BeforeDelete>
@@ -1400,6 +1409,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       </TabularLists>
       <TriggerFunctions>
         <New>Номенклатура_Triggers.New</New>
+        <Copying>Номенклатура_Triggers.Copying</Copying>
         <BeforeSave>Номенклатура_Triggers.BeforeSave</BeforeSave>
         <AfterSave>Номенклатура_Triggers.AfterSave</AfterSave>
         <BeforeDelete>Номенклатура_Triggers.BeforeDelete</BeforeDelete>
@@ -1488,6 +1498,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       </TabularLists>
       <TriggerFunctions>
         <New>Виробники_Triggers.New</New>
+        <Copying>Виробники_Triggers.Copying</Copying>
         <BeforeSave>Виробники_Triggers.BeforeSave</BeforeSave>
         <AfterSave>Виробники_Triggers.AfterSave</AfterSave>
         <BeforeDelete>Виробники_Triggers.BeforeDelete</BeforeDelete>
@@ -1598,6 +1609,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       </TabularLists>
       <TriggerFunctions>
         <New>ВидиНоменклатури_Triggers.New</New>
+        <Copying>ВидиНоменклатури_Triggers.Copying</Copying>
         <BeforeSave>ВидиНоменклатури_Triggers.BeforeSave</BeforeSave>
         <AfterSave>ВидиНоменклатури_Triggers.AfterSave</AfterSave>
         <BeforeDelete>ВидиНоменклатури_Triggers.BeforeDelete</BeforeDelete>
@@ -1706,6 +1718,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       </TabularLists>
       <TriggerFunctions>
         <New>ПакуванняОдиниціВиміру_Triggers.New</New>
+        <Copying>ПакуванняОдиниціВиміру_Triggers.Copying</Copying>
         <BeforeSave>ПакуванняОдиниціВиміру_Triggers.BeforeSave</BeforeSave>
         <AfterSave>ПакуванняОдиниціВиміру_Triggers.AfterSave</AfterSave>
         <BeforeDelete>ПакуванняОдиниціВиміру_Triggers.BeforeDelete</BeforeDelete>
@@ -1872,6 +1885,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       </TabularLists>
       <TriggerFunctions>
         <New>Валюти_Triggers.New</New>
+        <Copying>Валюти_Triggers.Copying</Copying>
         <BeforeSave>Валюти_Triggers.BeforeSave</BeforeSave>
         <AfterSave>Валюти_Triggers.AfterSave</AfterSave>
         <BeforeDelete>Валюти_Triggers.BeforeDelete</BeforeDelete>
@@ -2129,6 +2143,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       </TabularLists>
       <TriggerFunctions>
         <New>Контрагенти_Triggers.New</New>
+        <Copying>Контрагенти_Triggers.Copying</Copying>
         <BeforeSave>Контрагенти_Triggers.BeforeSave</BeforeSave>
         <AfterSave>Контрагенти_Triggers.AfterSave</AfterSave>
         <BeforeDelete>Контрагенти_Triggers.BeforeDelete</BeforeDelete>
@@ -2383,6 +2398,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       </TabularLists>
       <TriggerFunctions>
         <New>Склади_Triggers.New</New>
+        <Copying>Склади_Triggers.Copying</Copying>
         <BeforeSave>Склади_Triggers.BeforeSave</BeforeSave>
         <AfterSave>Склади_Triggers.AfterSave</AfterSave>
         <BeforeDelete>Склади_Triggers.BeforeDelete</BeforeDelete>
@@ -2490,6 +2506,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       </TabularLists>
       <TriggerFunctions>
         <New>ВидиЦін_Triggers.New</New>
+        <Copying>ВидиЦін_Triggers.Copying</Copying>
         <BeforeSave>ВидиЦін_Triggers.BeforeSave</BeforeSave>
         <AfterSave>ВидиЦін_Triggers.AfterSave</AfterSave>
         <BeforeDelete>ВидиЦін_Triggers.BeforeDelete</BeforeDelete>
@@ -2559,9 +2576,37 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
             </Field>
           </Fields>
         </TabularList>
+        <TabularList>
+          <Name>ЗаписиШвидкийВибір</Name>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>Код</Name>
+              <Caption>Код</Caption>
+              <Size>0</Size>
+              <SortNum>1</SortNum>
+              <SortField>False</SortField>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>Назва</Name>
+              <Caption>Назва</Caption>
+              <Size>0</Size>
+              <SortNum>2</SortNum>
+              <SortField>True</SortField>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+          </Fields>
+        </TabularList>
       </TabularLists>
       <TriggerFunctions>
         <New>ВидиЦінПостачальників_Triggers.New</New>
+        <Copying>ВидиЦінПостачальників_Triggers.Copying</Copying>
         <BeforeSave>ВидиЦінПостачальників_Triggers.BeforeSave</BeforeSave>
         <AfterSave>ВидиЦінПостачальників_Triggers.AfterSave</AfterSave>
         <BeforeDelete>ВидиЦінПостачальників_Triggers.BeforeDelete</BeforeDelete>
@@ -2743,6 +2788,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       </TabularLists>
       <TriggerFunctions>
         <New>Користувачі_Triggers.New</New>
+        <Copying>Користувачі_Triggers.Copying</Copying>
         <BeforeSave>Користувачі_Triggers.BeforeSave</BeforeSave>
         <AfterSave>Користувачі_Triggers.AfterSave</AfterSave>
         <BeforeDelete>Користувачі_Triggers.BeforeDelete</BeforeDelete>
@@ -2925,6 +2971,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       </TabularLists>
       <TriggerFunctions>
         <New>ФізичніОсоби_Triggers.New</New>
+        <Copying>ФізичніОсоби_Triggers.Copying</Copying>
         <BeforeSave>ФізичніОсоби_Triggers.BeforeSave</BeforeSave>
         <AfterSave>ФізичніОсоби_Triggers.AfterSave</AfterSave>
         <BeforeDelete>ФізичніОсоби_Triggers.BeforeDelete</BeforeDelete>
@@ -3014,6 +3061,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       </TabularLists>
       <TriggerFunctions>
         <New>СтруктураПідприємства_Triggers.New</New>
+        <Copying>СтруктураПідприємства_Triggers.Copying</Copying>
         <BeforeSave>СтруктураПідприємства_Triggers.BeforeSave</BeforeSave>
         <AfterSave>СтруктураПідприємства_Triggers.AfterSave</AfterSave>
         <BeforeDelete>СтруктураПідприємства_Triggers.BeforeDelete</BeforeDelete>
@@ -3072,9 +3120,37 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
             </Field>
           </Fields>
         </TabularList>
+        <TabularList>
+          <Name>ЗаписиШвидкийВибір</Name>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>Код</Name>
+              <Caption>Код</Caption>
+              <Size>0</Size>
+              <SortNum>1</SortNum>
+              <SortField>False</SortField>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>Назва</Name>
+              <Caption>Назва</Caption>
+              <Size>0</Size>
+              <SortNum>2</SortNum>
+              <SortField>True</SortField>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+          </Fields>
+        </TabularList>
       </TabularLists>
       <TriggerFunctions>
         <New>КраїниСвіту_Triggers.New</New>
+        <Copying>КраїниСвіту_Triggers.Copying</Copying>
         <BeforeSave>КраїниСвіту_Triggers.BeforeSave</BeforeSave>
         <AfterSave>КраїниСвіту_Triggers.AfterSave</AfterSave>
         <BeforeDelete>КраїниСвіту_Triggers.BeforeDelete</BeforeDelete>
@@ -3223,6 +3299,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       </TabularLists>
       <TriggerFunctions>
         <New>Файли_Triggers.New</New>
+        <Copying>Файли_Triggers.Copying</Copying>
         <BeforeSave>Файли_Triggers.BeforeSave</BeforeSave>
         <AfterSave>Файли_Triggers.AfterSave</AfterSave>
         <BeforeDelete>Файли_Triggers.BeforeDelete</BeforeDelete>
@@ -3368,6 +3445,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       </TabularLists>
       <TriggerFunctions>
         <New>ХарактеристикиНоменклатури_Triggers.New</New>
+        <Copying>ХарактеристикиНоменклатури_Triggers.Copying</Copying>
         <BeforeSave>ХарактеристикиНоменклатури_Triggers.BeforeSave</BeforeSave>
         <AfterSave>ХарактеристикиНоменклатури_Triggers.AfterSave</AfterSave>
         <BeforeDelete>ХарактеристикиНоменклатури_Triggers.BeforeDelete</BeforeDelete>
@@ -3412,6 +3490,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       <TabularLists />
       <TriggerFunctions>
         <New>Номенклатура_Папки_Triggers.New</New>
+        <Copying>Номенклатура_Папки_Triggers.Copying</Copying>
         <BeforeSave>Номенклатура_Папки_Triggers.BeforeSave</BeforeSave>
         <AfterSave>Номенклатура_Папки_Triggers.AfterSave</AfterSave>
         <BeforeDelete>Номенклатура_Папки_Triggers.BeforeDelete</BeforeDelete>
@@ -3456,6 +3535,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       <TabularLists />
       <TriggerFunctions>
         <New>Контрагенти_Папки_Triggers.New</New>
+        <Copying>Контрагенти_Папки_Triggers.Copying</Copying>
         <BeforeSave>Контрагенти_Папки_Triggers.BeforeSave</BeforeSave>
         <AfterSave>Контрагенти_Папки_Triggers.AfterSave</AfterSave>
         <BeforeDelete>Контрагенти_Папки_Triggers.BeforeDelete</BeforeDelete>
@@ -3500,6 +3580,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       <TabularLists />
       <TriggerFunctions>
         <New>Склади_Папки_Triggers.New</New>
+        <Copying>Склади_Папки_Triggers.Copying</Copying>
         <BeforeSave>Склади_Папки_Triggers.BeforeSave</BeforeSave>
         <AfterSave>Склади_Папки_Triggers.AfterSave</AfterSave>
         <BeforeDelete>Склади_Папки_Triggers.BeforeDelete</BeforeDelete>
@@ -3646,6 +3727,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       </TabularLists>
       <TriggerFunctions>
         <New>Каси_Triggers.New</New>
+        <Copying>Каси_Triggers.Copying</Copying>
         <BeforeSave>Каси_Triggers.BeforeSave</BeforeSave>
         <AfterSave>Каси_Triggers.AfterSave</AfterSave>
         <BeforeDelete>Каси_Triggers.BeforeDelete</BeforeDelete>
@@ -3883,6 +3965,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       </TabularLists>
       <TriggerFunctions>
         <New>БанківськіРахункиОрганізацій_Triggers.New</New>
+        <Copying>БанківськіРахункиОрганізацій_Triggers.Copying</Copying>
         <BeforeSave>БанківськіРахункиОрганізацій_Triggers.BeforeSave</BeforeSave>
         <AfterSave>БанківськіРахункиОрганізацій_Triggers.AfterSave</AfterSave>
         <BeforeDelete>БанківськіРахункиОрганізацій_Triggers.BeforeDelete</BeforeDelete>
@@ -4204,6 +4287,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       </TabularLists>
       <TriggerFunctions>
         <New>ДоговориКонтрагентів_Triggers.New</New>
+        <Copying>ДоговориКонтрагентів_Triggers.Copying</Copying>
         <BeforeSave>ДоговориКонтрагентів_Triggers.BeforeSave</BeforeSave>
         <AfterSave>ДоговориКонтрагентів_Triggers.AfterSave</AfterSave>
         <BeforeDelete>ДоговориКонтрагентів_Triggers.BeforeDelete</BeforeDelete>
@@ -4460,6 +4544,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       </TabularLists>
       <TriggerFunctions>
         <New>БанківськіРахункиКонтрагентів_Triggers.New</New>
+        <Copying>БанківськіРахункиКонтрагентів_Triggers.Copying</Copying>
         <BeforeSave>БанківськіРахункиКонтрагентів_Triggers.BeforeSave</BeforeSave>
         <AfterSave>БанківськіРахункиКонтрагентів_Triggers.AfterSave</AfterSave>
         <BeforeDelete>БанківськіРахункиКонтрагентів_Triggers.BeforeDelete</BeforeDelete>
@@ -4607,6 +4692,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       </TabularLists>
       <TriggerFunctions>
         <New>СтаттяРухуКоштів_Triggers.New</New>
+        <Copying>СтаттяРухуКоштів_Triggers.Copying</Copying>
         <BeforeSave>СтаттяРухуКоштів_Triggers.BeforeSave</BeforeSave>
         <AfterSave>СтаттяРухуКоштів_Triggers.AfterSave</AfterSave>
         <BeforeDelete>СтаттяРухуКоштів_Triggers.BeforeDelete</BeforeDelete>
@@ -4687,6 +4773,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       </TabularLists>
       <TriggerFunctions>
         <New>СеріїНоменклатури_Triggers.New</New>
+        <Copying>СеріїНоменклатури_Triggers.Copying</Copying>
         <BeforeSave>СеріїНоменклатури_Triggers.BeforeSave</BeforeSave>
         <AfterSave>СеріїНоменклатури_Triggers.AfterSave</AfterSave>
         <BeforeDelete>СеріїНоменклатури_Triggers.BeforeDelete</BeforeDelete>
@@ -4864,6 +4951,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       </TabularLists>
       <TriggerFunctions>
         <New>ПартіяТоварівКомпозит_Triggers.New</New>
+        <Copying>ПартіяТоварівКомпозит_Triggers.Copying</Copying>
         <BeforeSave>ПартіяТоварівКомпозит_Triggers.BeforeSave</BeforeSave>
         <AfterSave>ПартіяТоварівКомпозит_Triggers.AfterSave</AfterSave>
         <BeforeDelete>ПартіяТоварівКомпозит_Triggers.BeforeDelete</BeforeDelete>
@@ -4939,6 +5027,16 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
         </Field>
+        <Field>
+          <Name>Код</Name>
+          <NameInTable>col_a1</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+          <IsFullTextSearch>0</IsFullTextSearch>
+        </Field>
       </Fields>
       <TabularParts />
       <TabularLists>
@@ -4948,10 +5046,47 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           </Desc>
           <Fields>
             <Field>
+              <Name>Код</Name>
+              <Caption>Код</Caption>
+              <Size>0</Size>
+              <SortNum>1</SortNum>
+              <SortField>False</SortField>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
               <Name>Назва</Name>
               <Caption>Назва</Caption>
               <Size>0</Size>
-              <SortNum>0</SortNum>
+              <SortNum>2</SortNum>
+              <SortField>True</SortField>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+          </Fields>
+        </TabularList>
+        <TabularList>
+          <Name>ЗаписиШвидкийВибір</Name>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>Код</Name>
+              <Caption>Код</Caption>
+              <Size>0</Size>
+              <SortNum>1</SortNum>
+              <SortField>False</SortField>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>Назва</Name>
+              <Caption>Назва</Caption>
+              <Size>0</Size>
+              <SortNum>2</SortNum>
               <SortField>True</SortField>
               <Type>string</Type>
               <Pointer>
@@ -4962,6 +5097,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       </TabularLists>
       <TriggerFunctions>
         <New>ВидиЗапасів_Triggers.New</New>
+        <Copying>ВидиЗапасів_Triggers.Copying</Copying>
         <BeforeSave>ВидиЗапасів_Triggers.BeforeSave</BeforeSave>
         <AfterSave>ВидиЗапасів_Triggers.AfterSave</AfterSave>
         <BeforeDelete>ВидиЗапасів_Triggers.BeforeDelete</BeforeDelete>
@@ -5481,6 +5617,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       </TabularLists>
       <TriggerFunctions>
         <New>Банки_Triggers.New</New>
+        <Copying>Банки_Triggers.Copying</Copying>
         <BeforeSave>Банки_Triggers.BeforeSave</BeforeSave>
         <AfterSave>Банки_Triggers.AfterSave</AfterSave>
         <BeforeDelete>Банки_Triggers.BeforeDelete</BeforeDelete>
@@ -5610,6 +5747,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       </TabularLists>
       <TriggerFunctions>
         <New>СкладськіПриміщення_Triggers.New</New>
+        <Copying>СкладськіПриміщення_Triggers.Copying</Copying>
         <BeforeSave>СкладськіПриміщення_Triggers.BeforeSave</BeforeSave>
         <AfterSave>СкладськіПриміщення_Triggers.AfterSave</AfterSave>
         <BeforeDelete>СкладськіПриміщення_Triggers.BeforeDelete</BeforeDelete>
@@ -5886,6 +6024,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       </TabularLists>
       <TriggerFunctions>
         <New>СкладськіКомірки_Triggers.New</New>
+        <Copying>СкладськіКомірки_Triggers.Copying</Copying>
         <BeforeSave>СкладськіКомірки_Triggers.BeforeSave</BeforeSave>
         <AfterSave>СкладськіКомірки_Triggers.AfterSave</AfterSave>
         <BeforeDelete>СкладськіКомірки_Triggers.BeforeDelete</BeforeDelete>
@@ -5971,6 +6110,8 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       <TriggerFunctions>
         <New>
         </New>
+        <Copying>
+        </Copying>
         <BeforeSave>
         </BeforeSave>
         <AfterSave>
@@ -6133,6 +6274,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       </TabularLists>
       <TriggerFunctions>
         <New>ТипорозміриКомірок_Triggers.New</New>
+        <Copying>ТипорозміриКомірок_Triggers.Copying</Copying>
         <BeforeSave>ТипорозміриКомірок_Triggers.BeforeSave</BeforeSave>
         <AfterSave>ТипорозміриКомірок_Triggers.AfterSave</AfterSave>
         <BeforeDelete>ТипорозміриКомірок_Triggers.BeforeDelete</BeforeDelete>
@@ -6189,6 +6331,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       <TabularLists />
       <TriggerFunctions>
         <New>СкладськіКомірки_Папки_Triggers.New</New>
+        <Copying>СкладськіКомірки_Папки_Triggers.Copying</Copying>
         <BeforeSave>СкладськіКомірки_Папки_Triggers.BeforeSave</BeforeSave>
         <AfterSave>СкладськіКомірки_Папки_Triggers.AfterSave</AfterSave>
         <BeforeDelete>СкладськіКомірки_Папки_Triggers.BeforeDelete</BeforeDelete>
@@ -6327,6 +6470,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       </TabularLists>
       <TriggerFunctions>
         <New>Блокнот_Triggers.New</New>
+        <Copying>Блокнот_Triggers.Copying</Copying>
         <BeforeSave>Блокнот_Triggers.BeforeSave</BeforeSave>
         <AfterSave>Блокнот_Triggers.AfterSave</AfterSave>
         <BeforeDelete>Блокнот_Triggers.BeforeDelete</BeforeDelete>
@@ -6901,6 +7045,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       </AllowRegisterAccumulation>
       <TriggerFunctions>
         <New>ЗамовленняПостачальнику_Triggers.New</New>
+        <Copying>ЗамовленняПостачальнику_Triggers.Copying</Copying>
         <BeforeSave>ЗамовленняПостачальнику_Triggers.BeforeSave</BeforeSave>
         <AfterSave>ЗамовленняПостачальнику_Triggers.AfterSave</AfterSave>
         <BeforeDelete>ЗамовленняПостачальнику_Triggers.BeforeDelete</BeforeDelete>
@@ -7582,6 +7727,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       </AllowRegisterAccumulation>
       <TriggerFunctions>
         <New>ПоступленняТоварівТаПослуг_Triggers.New</New>
+        <Copying>ПоступленняТоварівТаПослуг_Triggers.Copying</Copying>
         <BeforeSave>ПоступленняТоварівТаПослуг_Triggers.BeforeSave</BeforeSave>
         <AfterSave>ПоступленняТоварівТаПослуг_Triggers.AfterSave</AfterSave>
         <BeforeDelete>ПоступленняТоварівТаПослуг_Triggers.BeforeDelete</BeforeDelete>
@@ -8200,6 +8346,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       </AllowRegisterAccumulation>
       <TriggerFunctions>
         <New>ЗамовленняКлієнта_Triggers.New</New>
+        <Copying>ЗамовленняКлієнта_Triggers.Copying</Copying>
         <BeforeSave>ЗамовленняКлієнта_Triggers.BeforeSave</BeforeSave>
         <AfterSave>ЗамовленняКлієнта_Triggers.AfterSave</AfterSave>
         <BeforeDelete>ЗамовленняКлієнта_Triggers.BeforeDelete</BeforeDelete>
@@ -8881,6 +9028,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       </AllowRegisterAccumulation>
       <TriggerFunctions>
         <New>РеалізаціяТоварівТаПослуг_Triggers.New</New>
+        <Copying>РеалізаціяТоварівТаПослуг_Triggers.Copying</Copying>
         <BeforeSave>РеалізаціяТоварівТаПослуг_Triggers.BeforeSave</BeforeSave>
         <AfterSave>РеалізаціяТоварівТаПослуг_Triggers.AfterSave</AfterSave>
         <BeforeDelete>РеалізаціяТоварівТаПослуг_Triggers.BeforeDelete</BeforeDelete>
@@ -9182,6 +9330,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       <AllowRegisterAccumulation />
       <TriggerFunctions>
         <New>ВстановленняЦінНоменклатури_Triggers.New</New>
+        <Copying>ВстановленняЦінНоменклатури_Triggers.Copying</Copying>
         <BeforeSave>ВстановленняЦінНоменклатури_Triggers.BeforeSave</BeforeSave>
         <AfterSave>ВстановленняЦінНоменклатури_Triggers.AfterSave</AfterSave>
         <BeforeDelete>ВстановленняЦінНоменклатури_Triggers.BeforeDelete</BeforeDelete>
@@ -9620,6 +9769,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       </AllowRegisterAccumulation>
       <TriggerFunctions>
         <New>ПрихіднийКасовийОрдер_Triggers.New</New>
+        <Copying>ПрихіднийКасовийОрдер_Triggers.Copying</Copying>
         <BeforeSave>ПрихіднийКасовийОрдер_Triggers.BeforeSave</BeforeSave>
         <AfterSave>ПрихіднийКасовийОрдер_Triggers.AfterSave</AfterSave>
         <BeforeDelete>ПрихіднийКасовийОрдер_Triggers.BeforeDelete</BeforeDelete>
@@ -10087,6 +10237,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       </AllowRegisterAccumulation>
       <TriggerFunctions>
         <New>РозхіднийКасовийОрдер_Triggers.New</New>
+        <Copying>РозхіднийКасовийОрдер_Triggers.Copying</Copying>
         <BeforeSave>РозхіднийКасовийОрдер_Triggers.BeforeSave</BeforeSave>
         <AfterSave>РозхіднийКасовийОрдер_Triggers.AfterSave</AfterSave>
         <BeforeDelete>РозхіднийКасовийОрдер_Triggers.BeforeDelete</BeforeDelete>
@@ -10538,6 +10689,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       </AllowRegisterAccumulation>
       <TriggerFunctions>
         <New>ПереміщенняТоварів_Triggers.New</New>
+        <Copying>ПереміщенняТоварів_Triggers.Copying</Copying>
         <BeforeSave>ПереміщенняТоварів_Triggers.BeforeSave</BeforeSave>
         <AfterSave>ПереміщенняТоварів_Triggers.AfterSave</AfterSave>
         <BeforeDelete>ПереміщенняТоварів_Triggers.BeforeDelete</BeforeDelete>
@@ -11077,6 +11229,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       </AllowRegisterAccumulation>
       <TriggerFunctions>
         <New>ПоверненняТоварівПостачальнику_Triggers.New</New>
+        <Copying>ПоверненняТоварівПостачальнику_Triggers.Copying</Copying>
         <BeforeSave>ПоверненняТоварівПостачальнику_Triggers.BeforeSave</BeforeSave>
         <AfterSave>ПоверненняТоварівПостачальнику_Triggers.AfterSave</AfterSave>
         <BeforeDelete>ПоверненняТоварівПостачальнику_Triggers.BeforeDelete</BeforeDelete>
@@ -11583,6 +11736,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       </AllowRegisterAccumulation>
       <TriggerFunctions>
         <New>ПоверненняТоварівВідКлієнта_Triggers.New</New>
+        <Copying>ПоверненняТоварівВідКлієнта_Triggers.Copying</Copying>
         <BeforeSave>ПоверненняТоварівВідКлієнта_Triggers.BeforeSave</BeforeSave>
         <AfterSave>ПоверненняТоварівВідКлієнта_Triggers.AfterSave</AfterSave>
         <BeforeDelete>ПоверненняТоварівВідКлієнта_Triggers.BeforeDelete</BeforeDelete>
@@ -12001,6 +12155,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       </AllowRegisterAccumulation>
       <TriggerFunctions>
         <New>АктВиконанихРобіт_Triggers.New</New>
+        <Copying>АктВиконанихРобіт_Triggers.Copying</Copying>
         <BeforeSave>АктВиконанихРобіт_Triggers.BeforeSave</BeforeSave>
         <AfterSave>АктВиконанихРобіт_Triggers.AfterSave</AfterSave>
         <BeforeDelete>АктВиконанихРобіт_Triggers.BeforeDelete</BeforeDelete>
@@ -12528,6 +12683,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       </AllowRegisterAccumulation>
       <TriggerFunctions>
         <New>ВведенняЗалишків_Triggers.New</New>
+        <Copying>ВведенняЗалишків_Triggers.Copying</Copying>
         <BeforeSave>ВведенняЗалишків_Triggers.BeforeSave</BeforeSave>
         <AfterSave>ВведенняЗалишків_Triggers.AfterSave</AfterSave>
         <BeforeDelete>ВведенняЗалишків_Triggers.BeforeDelete</BeforeDelete>
@@ -12813,6 +12969,8 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       <TriggerFunctions>
         <New>
         </New>
+        <Copying>
+        </Copying>
         <BeforeSave>
         </BeforeSave>
         <AfterSave>
@@ -13103,6 +13261,8 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       <TriggerFunctions>
         <New>
         </New>
+        <Copying>
+        </Copying>
         <BeforeSave>
         </BeforeSave>
         <AfterSave>
@@ -13372,6 +13532,8 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       <TriggerFunctions>
         <New>
         </New>
+        <Copying>
+        </Copying>
         <BeforeSave>
         </BeforeSave>
         <AfterSave>
@@ -13741,6 +13903,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       </AllowRegisterAccumulation>
       <TriggerFunctions>
         <New>ПсуванняТоварів_Triggers.New</New>
+        <Copying>ПсуванняТоварів_Triggers.Copying</Copying>
         <BeforeSave>ПсуванняТоварів_Triggers.BeforeSave</BeforeSave>
         <AfterSave>ПсуванняТоварів_Triggers.AfterSave</AfterSave>
         <BeforeDelete>ПсуванняТоварів_Triggers.BeforeDelete</BeforeDelete>
@@ -14135,6 +14298,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       </AllowRegisterAccumulation>
       <TriggerFunctions>
         <New>ВнутрішнєСпоживанняТоварів_Triggers.New</New>
+        <Copying>ВнутрішнєСпоживанняТоварів_Triggers.Copying</Copying>
         <BeforeSave>ВнутрішнєСпоживанняТоварів_Triggers.BeforeSave</BeforeSave>
         <AfterSave>ВнутрішнєСпоживанняТоварів_Triggers.AfterSave</AfterSave>
         <BeforeDelete>ВнутрішнєСпоживанняТоварів_Triggers.BeforeDelete</BeforeDelete>
@@ -14650,6 +14814,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       </AllowRegisterAccumulation>
       <TriggerFunctions>
         <New>РахунокФактура_Triggers.New</New>
+        <Copying>РахунокФактура_Triggers.Copying</Copying>
         <BeforeSave>РахунокФактура_Triggers.BeforeSave</BeforeSave>
         <AfterSave>РахунокФактура_Triggers.AfterSave</AfterSave>
         <BeforeDelete>РахунокФактура_Triggers.BeforeDelete</BeforeDelete>
@@ -14971,6 +15136,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       </AllowRegisterAccumulation>
       <TriggerFunctions>
         <New>РозміщенняТоварівНаСкладі_Triggers.New</New>
+        <Copying>РозміщенняТоварівНаСкладі_Triggers.Copying</Copying>
         <BeforeSave>РозміщенняТоварівНаСкладі_Triggers.BeforeSave</BeforeSave>
         <AfterSave>РозміщенняТоварівНаСкладі_Triggers.AfterSave</AfterSave>
         <BeforeDelete>РозміщенняТоварівНаСкладі_Triggers.BeforeDelete</BeforeDelete>
@@ -15291,6 +15457,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       </AllowRegisterAccumulation>
       <TriggerFunctions>
         <New>ПереміщенняТоварівНаСкладі_Triggers.New</New>
+        <Copying>ПереміщенняТоварівНаСкладі_Triggers.Copying</Copying>
         <BeforeSave>ПереміщенняТоварівНаСкладі_Triggers.BeforeSave</BeforeSave>
         <AfterSave>ПереміщенняТоварівНаСкладі_Triggers.AfterSave</AfterSave>
         <BeforeDelete>ПереміщенняТоварівНаСкладі_Triggers.BeforeDelete</BeforeDelete>
@@ -15612,6 +15779,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       </AllowRegisterAccumulation>
       <TriggerFunctions>
         <New>ЗбіркаТоварівНаСкладі_Triggers.New</New>
+        <Copying>ЗбіркаТоварівНаСкладі_Triggers.Copying</Copying>
         <BeforeSave>ЗбіркаТоварівНаСкладі_Triggers.BeforeSave</BeforeSave>
         <AfterSave>ЗбіркаТоварівНаСкладі_Triggers.AfterSave</AfterSave>
         <BeforeDelete>ЗбіркаТоварівНаСкладі_Triggers.BeforeDelete</BeforeDelete>
@@ -15887,6 +16055,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       <AllowRegisterAccumulation />
       <TriggerFunctions>
         <New>РозміщенняНоменклатуриПоКоміркам_Triggers.New</New>
+        <Copying>РозміщенняНоменклатуриПоКоміркам_Triggers.Copying</Copying>
         <BeforeSave>РозміщенняНоменклатуриПоКоміркам_Triggers.BeforeSave</BeforeSave>
         <AfterSave>РозміщенняНоменклатуриПоКоміркам_Triggers.AfterSave</AfterSave>
         <BeforeDelete>РозміщенняНоменклатуриПоКоміркам_Triggers.BeforeDelete</BeforeDelete>

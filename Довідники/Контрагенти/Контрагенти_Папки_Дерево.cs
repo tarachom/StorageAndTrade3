@@ -26,7 +26,6 @@ using Gtk;
 using AccountingSoftware;
 
 using StorageAndTrade_1_0;
-using StorageAndTrade_1_0.Константи;
 using StorageAndTrade_1_0.Довідники;
 
 namespace StorageAndTrade
@@ -383,8 +382,7 @@ ORDER BY level, {Контрагенти_Папки_Const.Назва} ASC
                     Контрагенти_Папки_Objest Контрагенти_Папки_Objest = new Контрагенти_Папки_Objest();
                     if (Контрагенти_Папки_Objest.Read(unigueID))
                     {
-                        Контрагенти_Папки_Objest Контрагенти_Папки_Objest_Новий = Контрагенти_Папки_Objest.Copy();
-                        Контрагенти_Папки_Objest_Новий.Назва += " - Копія";
+                        Контрагенти_Папки_Objest Контрагенти_Папки_Objest_Новий = Контрагенти_Папки_Objest.Copy(true);
                         Контрагенти_Папки_Objest_Новий.Save();
 
                         Parent_Pointer = Контрагенти_Папки_Objest_Новий.GetDirectoryPointer();

@@ -25,7 +25,6 @@ using Gtk;
 
 using AccountingSoftware;
 
-using StorageAndTrade_1_0.Константи;
 using StorageAndTrade_1_0.Довідники;
 
 using ТабличніСписки = StorageAndTrade_1_0.Довідники.ТабличніСписки;
@@ -259,8 +258,7 @@ namespace StorageAndTrade
                         ВидиЦін_Objest ВидиЦін_Objest = new ВидиЦін_Objest();
                         if (ВидиЦін_Objest.Read(new UnigueID(uid)))
                         {
-                            ВидиЦін_Objest ВидиЦін_Objest_Новий = ВидиЦін_Objest.Copy();
-                            ВидиЦін_Objest_Новий.Назва += " - Копія";
+                            ВидиЦін_Objest ВидиЦін_Objest_Новий = ВидиЦін_Objest.Copy(true);
                             ВидиЦін_Objest_Новий.Save();
 
                             SelectPointerItem = ВидиЦін_Objest_Новий.GetDirectoryPointer();

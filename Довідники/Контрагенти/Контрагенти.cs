@@ -25,7 +25,6 @@ using Gtk;
 
 using AccountingSoftware;
 
-using StorageAndTrade_1_0.Константи;
 using StorageAndTrade_1_0.Довідники;
 
 using ТабличніСписки = StorageAndTrade_1_0.Довідники.ТабличніСписки;
@@ -332,9 +331,10 @@ namespace StorageAndTrade
                         Контрагенти_Objest Контрагенти_Objest = new Контрагенти_Objest();
                         if (Контрагенти_Objest.Read(new UnigueID(uid)))
                         {
-                            Контрагенти_Objest Контрагенти_Objest_Новий = Контрагенти_Objest.Copy();
-                            Контрагенти_Objest_Новий.Назва += " - Копія";
+                            Контрагенти_Objest Контрагенти_Objest_Новий = Контрагенти_Objest.Copy(true);
                             Контрагенти_Objest_Новий.Save();
+                            Контрагенти_Objest_Новий.Контакти_TablePart.Save(true);
+                            Контрагенти_Objest_Новий.Файли_TablePart.Save(true);
 
                             SelectPointerItem = Контрагенти_Objest_Новий.GetDirectoryPointer();
                         }

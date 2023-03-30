@@ -47,6 +47,7 @@ namespace StorageAndTrade
             AddLink(vLeft, "Валюти", Валюти);
             AddLink(vLeft, "Каси", Каси);
             AddLink(vLeft, "Види цін", ВидиЦін);
+            AddLink(vLeft, "Види цін постачальників", ВидиЦінПостачальників);
             AddLink(vLeft, "Банківські рахунки організацій", БанківськіРахункиОрганізацій);
             AddLink(vLeft, "Підрозділи", СтруктураПідприємства);
 
@@ -56,6 +57,8 @@ namespace StorageAndTrade
             AddLink(vLeft, "Фізичні особи", ФізичніОсоби);
             AddLink(vLeft, "Файли", Файли);
             AddLink(vLeft, "Статті руху коштів", СтаттіРухуКоштів);
+            AddLink(vLeft, "Види запасів", ВидиЗапасів);
+            AddLink(vLeft, "Країни світу", КраїниСвіту);
 
             AddCaption(vLeft, "Адресне зберігання");
             AddLink(vLeft, "Складські приміщення", СкладськіПриміщення);
@@ -202,6 +205,16 @@ namespace StorageAndTrade
             });
         }
 
+        void ВидиЦінПостачальників(object? sender, EventArgs args)
+        {
+            Program.GeneralForm?.CreateNotebookPage("Види цін постачальників", () =>
+            {
+                ВидиЦінПостачальників page = new ВидиЦінПостачальників();
+                page.LoadRecords();
+                return page;
+            });
+        }
+
         void БанківськіРахункиОрганізацій(object? sender, EventArgs args)
         {
             Program.GeneralForm?.CreateNotebookPage("Банківські рахунки організацій", () =>
@@ -307,6 +320,26 @@ namespace StorageAndTrade
             Program.GeneralForm?.CreateNotebookPage("Статті руху коштів", () =>
             {
                 СтаттяРухуКоштів page = new СтаттяРухуКоштів();
+                page.LoadRecords();
+                return page;
+            });
+        }
+
+        void ВидиЗапасів(object? sender, EventArgs args)
+        {
+            Program.GeneralForm?.CreateNotebookPage("Види запасів", () =>
+            {
+                ВидиЗапасів page = new ВидиЗапасів();
+                page.LoadRecords();
+                return page;
+            });
+        }
+
+        void КраїниСвіту(object? sender, EventArgs args)
+        {
+            Program.GeneralForm?.CreateNotebookPage("Країни світу", () =>
+            {
+                КраїниСвіту page = new КраїниСвіту();
                 page.LoadRecords();
                 return page;
             });

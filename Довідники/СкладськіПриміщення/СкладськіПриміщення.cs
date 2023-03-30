@@ -62,7 +62,7 @@ namespace StorageAndTrade
             ПошукПовнотекстовий.Clear = LoadRecords;
 
             //Складські комірки
-            LinkButton linkButtonHar = new LinkButton(" Складські комірки") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
+            LinkButton linkButtonHar = new LinkButton(" Складські приміщення") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
             linkButtonHar.Clicked += (object? sender, EventArgs args) =>
             {
                 СкладськіКомірки page = new СкладськіКомірки();
@@ -70,7 +70,7 @@ namespace StorageAndTrade
                 if (SelectPointerItem != null)
                     page.СкладПриміщенняВласник.Pointer = SelectPointerItem;
 
-                Program.GeneralForm?.CreateNotebookPage("Складські комірки", () => { return page; });
+                Program.GeneralForm?.CreateNotebookPage("Складські приміщення", () => { return page; });
 
                 page.LoadTree();
             };
@@ -326,8 +326,7 @@ namespace StorageAndTrade
                         СкладськіПриміщення_Objest СкладськіПриміщення_Objest = new СкладськіПриміщення_Objest();
                         if (СкладськіПриміщення_Objest.Read(new UnigueID(uid)))
                         {
-                            СкладськіПриміщення_Objest СкладськіПриміщення_Objest_Новий = СкладськіПриміщення_Objest.Copy();
-                            СкладськіПриміщення_Objest_Новий.Назва += " - Копія";
+                            СкладськіПриміщення_Objest СкладськіПриміщення_Objest_Новий = СкладськіПриміщення_Objest.Copy(true);
                             СкладськіПриміщення_Objest_Новий.Save();
 
                             SelectPointerItem = СкладськіПриміщення_Objest_Новий.GetDirectoryPointer();

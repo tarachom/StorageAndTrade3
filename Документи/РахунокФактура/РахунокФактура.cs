@@ -473,13 +473,8 @@ namespace StorageAndTrade
                         РахунокФактура_Objest РахунокФактура_Objest = new РахунокФактура_Objest();
                         if (РахунокФактура_Objest.Read(new UnigueID(uid)))
                         {
-                            РахунокФактура_Objest РахунокФактура_Objest_Новий = РахунокФактура_Objest.Copy();
-                            РахунокФактура_Objest_Новий.Коментар = "Копія: " + РахунокФактура_Objest.Назва;
+                            РахунокФактура_Objest РахунокФактура_Objest_Новий = РахунокФактура_Objest.Copy(true);
                             РахунокФактура_Objest_Новий.Save();
-
-                            //Зчитати та скопіювати табличну частину Товари
-                            РахунокФактура_Objest.Товари_TablePart.Read();
-                            РахунокФактура_Objest_Новий.Товари_TablePart.Records = РахунокФактура_Objest.Товари_TablePart.Copy();
                             РахунокФактура_Objest_Новий.Товари_TablePart.Save(true);
 
                             SelectPointerItem = РахунокФактура_Objest_Новий.GetDocumentPointer();

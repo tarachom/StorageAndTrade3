@@ -45,6 +45,11 @@ namespace StorageAndTrade_1_0.Довідники
             ДовідникОбєкт.Код = (++НумераціяДовідників.Організації_Const).ToString("D6");
         }
 
+        public static void Copying(Організації_Objest ДовідникОбєкт, Організації_Objest Основа)
+        {
+            ДовідникОбєкт.Назва += " - Копія";
+        }
+
         public static void BeforeSave(Організації_Objest ДовідникОбєкт)
         {
 
@@ -66,6 +71,11 @@ namespace StorageAndTrade_1_0.Довідники
         public static void New(Номенклатура_Objest ДовідникОбєкт)
         {
             ДовідникОбєкт.Код = (++НумераціяДовідників.Номенклатура_Const).ToString("D6");
+        }
+
+        public static void Copying(Номенклатура_Objest ДовідникОбєкт, Номенклатура_Objest Основа)
+        {
+            ДовідникОбєкт.Назва += " - Копія";
         }
 
         public static void BeforeSave(Номенклатура_Objest ДовідникОбєкт)
@@ -98,6 +108,11 @@ namespace StorageAndTrade_1_0.Довідники
             ДовідникОбєкт.Код = (++НумераціяДовідників.Виробники_Const).ToString("D6");
         }
 
+        public static void Copying(Виробники_Objest ДовідникОбєкт, Виробники_Objest Основа)
+        {
+            ДовідникОбєкт.Назва += " - Копія";
+        }
+
         public static void BeforeSave(Виробники_Objest ДовідникОбєкт)
         {
 
@@ -119,6 +134,11 @@ namespace StorageAndTrade_1_0.Довідники
         public static void New(ВидиНоменклатури_Objest ДовідникОбєкт)
         {
             ДовідникОбєкт.Код = (++НумераціяДовідників.ВидиНоменклатури_Const).ToString("D6");
+        }
+
+        public static void Copying(ВидиНоменклатури_Objest ДовідникОбєкт, ВидиНоменклатури_Objest Основа)
+        {
+            ДовідникОбєкт.Назва += " - Копія";
         }
 
         public static void BeforeSave(ВидиНоменклатури_Objest ДовідникОбєкт)
@@ -144,6 +164,11 @@ namespace StorageAndTrade_1_0.Довідники
             ДовідникОбєкт.Код = (++НумераціяДовідників.ПакуванняОдиниціВиміру_Const).ToString("D6");
         }
 
+        public static void Copying(ПакуванняОдиниціВиміру_Objest ДовідникОбєкт, ПакуванняОдиниціВиміру_Objest Основа)
+        {
+            ДовідникОбєкт.Назва += " - Копія";
+        }
+
         public static void BeforeSave(ПакуванняОдиниціВиміру_Objest ДовідникОбєкт)
         {
 
@@ -165,6 +190,11 @@ namespace StorageAndTrade_1_0.Довідники
         public static void New(Валюти_Objest ДовідникОбєкт)
         {
             ДовідникОбєкт.Код = (++НумераціяДовідників.Валюти_Const).ToString("D6");
+        }
+
+        public static void Copying(Валюти_Objest ДовідникОбєкт, Валюти_Objest Основа)
+        {
+            ДовідникОбєкт.Назва += " - Копія";
         }
 
         public static void BeforeSave(Валюти_Objest ДовідникОбєкт)
@@ -203,6 +233,11 @@ WHERE
             ДовідникОбєкт.Код = (++НумераціяДовідників.Контрагенти_Const).ToString("D6");
         }
 
+        public static void Copying(Контрагенти_Objest ДовідникОбєкт, Контрагенти_Objest Основа)
+        {
+            ДовідникОбєкт.Назва += " - Копія";
+        }
+
         public static void BeforeSave(Контрагенти_Objest ДовідникОбєкт)
         {
 
@@ -224,6 +259,11 @@ WHERE
         public static void New(Склади_Objest ДовідникОбєкт)
         {
             ДовідникОбєкт.Код = (++НумераціяДовідників.Склади_Const).ToString("D6");
+        }
+
+        public static void Copying(Склади_Objest ДовідникОбєкт, Склади_Objest Основа)
+        {
+            ДовідникОбєкт.Назва += " - Копія";
         }
 
         public static void BeforeSave(Склади_Objest ДовідникОбєкт)
@@ -249,6 +289,11 @@ WHERE
             ДовідникОбєкт.Код = (++НумераціяДовідників.ВидиЦін_Const).ToString("D6");
         }
 
+        public static void Copying(ВидиЦін_Objest ДовідникОбєкт, ВидиЦін_Objest Основа)
+        {
+            ДовідникОбєкт.Назва += " - Копія";
+        }
+
         public static void BeforeSave(ВидиЦін_Objest ДовідникОбєкт)
         {
 
@@ -270,6 +315,11 @@ WHERE
         public static void New(ВидиЦінПостачальників_Objest ДовідникОбєкт)
         {
             ДовідникОбєкт.Код = (++НумераціяДовідників.ВидиЦінПостачальників_Const).ToString("D6");
+        }
+
+        public static void Copying(ВидиЦінПостачальників_Objest ДовідникОбєкт, ВидиЦінПостачальників_Objest Основа)
+        {
+            ДовідникОбєкт.Назва += " - Копія";
         }
 
         public static void BeforeSave(ВидиЦінПостачальників_Objest ДовідникОбєкт)
@@ -295,6 +345,11 @@ WHERE
             ДовідникОбєкт.Код = (++НумераціяДовідників.Користувачі_Const).ToString("D6");
         }
 
+        public static void Copying(Користувачі_Objest ДовідникОбєкт, Користувачі_Objest Основа)
+        {
+            ДовідникОбєкт.Назва += " - Копія";
+        }
+
         public static void BeforeSave(Користувачі_Objest ДовідникОбєкт)
         {
 
@@ -316,6 +371,11 @@ WHERE
         public static void New(ФізичніОсоби_Objest ДовідникОбєкт)
         {
             ДовідникОбєкт.Код = (++НумераціяДовідників.ФізичніОсоби_Const).ToString("D6");
+        }
+
+        public static void Copying(ФізичніОсоби_Objest ДовідникОбєкт, ФізичніОсоби_Objest Основа)
+        {
+            ДовідникОбєкт.Назва += " - Копія";
         }
 
         public static void BeforeSave(ФізичніОсоби_Objest ДовідникОбєкт)
@@ -341,6 +401,11 @@ WHERE
             ДовідникОбєкт.Код = (++НумераціяДовідників.СтруктураПідприємства_Const).ToString("D6");
         }
 
+        public static void Copying(СтруктураПідприємства_Objest ДовідникОбєкт, СтруктураПідприємства_Objest Основа)
+        {
+            ДовідникОбєкт.Назва += " - Копія";
+        }
+
         public static void BeforeSave(СтруктураПідприємства_Objest ДовідникОбєкт)
         {
 
@@ -362,6 +427,11 @@ WHERE
         public static void New(КраїниСвіту_Objest ДовідникОбєкт)
         {
             ДовідникОбєкт.Код = (++НумераціяДовідників.КраїниСвіту_Const).ToString("D6");
+        }
+
+        public static void Copying(КраїниСвіту_Objest ДовідникОбєкт, КраїниСвіту_Objest Основа)
+        {
+            ДовідникОбєкт.Назва += " - Копія";
         }
 
         public static void BeforeSave(КраїниСвіту_Objest ДовідникОбєкт)
@@ -387,6 +457,11 @@ WHERE
             ДовідникОбєкт.Код = (++НумераціяДовідників.Файли_Const).ToString("D6");
         }
 
+        public static void Copying(Файли_Objest ДовідникОбєкт, Файли_Objest Основа)
+        {
+            ДовідникОбєкт.Назва += " - Копія";
+        }
+
         public static void BeforeSave(Файли_Objest ДовідникОбєкт)
         {
 
@@ -410,6 +485,11 @@ WHERE
             ДовідникОбєкт.Код = (++НумераціяДовідників.ХарактеристикиНоменклатури_Const).ToString("D6");
         }
 
+        public static void Copying(ХарактеристикиНоменклатури_Objest ДовідникОбєкт, ХарактеристикиНоменклатури_Objest Основа)
+        {
+            ДовідникОбєкт.Назва += " - Копія";
+        }
+
         public static void BeforeSave(ХарактеристикиНоменклатури_Objest ДовідникОбєкт)
         {
 
@@ -431,6 +511,11 @@ WHERE
         public static void New(Номенклатура_Папки_Objest ДовідникОбєкт)
         {
             ДовідникОбєкт.Код = (++НумераціяДовідників.Номенклатура_Папки_Const).ToString("D6");
+        }
+
+        public static void Copying(Номенклатура_Папки_Objest ДовідникОбєкт, Номенклатура_Папки_Objest Основа)
+        {
+            ДовідникОбєкт.Назва += " - Копія";
         }
 
         public static void BeforeSave(Номенклатура_Папки_Objest ДовідникОбєкт)
@@ -486,6 +571,11 @@ WHERE
         public static void New(Контрагенти_Папки_Objest ДовідникОбєкт)
         {
             ДовідникОбєкт.Код = (++НумераціяДовідників.Контрагенти_Папки_Const).ToString("D6");
+        }
+
+        public static void Copying(Контрагенти_Папки_Objest ДовідникОбєкт, Контрагенти_Папки_Objest Основа)
+        {
+            ДовідникОбєкт.Назва += " - Копія";
         }
 
         public static void BeforeSave(Контрагенти_Папки_Objest ДовідникОбєкт)
@@ -544,6 +634,11 @@ WHERE
             ДовідникОбєкт.Код = (++НумераціяДовідників.Склади_Папки_Const).ToString("D6");
         }
 
+        public static void Copying(Склади_Папки_Objest ДовідникОбєкт, Склади_Папки_Objest Основа)
+        {
+            ДовідникОбєкт.Назва += " - Копія";
+        }
+
         public static void BeforeSave(Склади_Папки_Objest ДовідникОбєкт)
         {
 
@@ -600,6 +695,11 @@ WHERE
             ДовідникОбєкт.Код = (++НумераціяДовідників.Каси_Const).ToString("D6");
         }
 
+        public static void Copying(Каси_Objest ДовідникОбєкт, Каси_Objest Основа)
+        {
+            ДовідникОбєкт.Назва += " - Копія";
+        }
+
         public static void BeforeSave(Каси_Objest ДовідникОбєкт)
         {
 
@@ -623,6 +723,11 @@ WHERE
             ДовідникОбєкт.Код = (++НумераціяДовідників.БанківськіРахункиОрганізацій_Const).ToString("D6");
         }
 
+        public static void Copying(БанківськіРахункиОрганізацій_Objest ДовідникОбєкт, БанківськіРахункиОрганізацій_Objest Основа)
+        {
+            ДовідникОбєкт.Назва += " - Копія";
+        }
+
         public static void BeforeSave(БанківськіРахункиОрганізацій_Objest ДовідникОбєкт)
         {
 
@@ -639,11 +744,75 @@ WHERE
         }
     }
 
+    class ДоговориКонтрагентів_Triggers
+    {
+        public static void New(ДоговориКонтрагентів_Objest ДовідникОбєкт)
+        {
+            ДовідникОбєкт.Код = (++НумераціяДовідників.ДоговориКонтрагентів_Const).ToString("D6");
+        }
+
+        public static void Copying(ДоговориКонтрагентів_Objest ДовідникОбєкт, ДоговориКонтрагентів_Objest Основа)
+        {
+            ДовідникОбєкт.Назва += " - Копія";
+        }
+
+        public static void BeforeSave(ДоговориКонтрагентів_Objest ДовідникОбєкт)
+        {
+            string НазваПереліченняЗКонфігурації =
+                Конфа.Config.Kernel!.Conf.Enums["ТипДоговорів"].Fields[ДовідникОбєкт.ТипДоговору.ToString()].Desc;
+
+            ДовідникОбєкт.ТипДоговоруПредставлення = НазваПереліченняЗКонфігурації;
+        }
+
+        public static void AfterSave(ДоговориКонтрагентів_Objest ДовідникОбєкт)
+        {
+
+        }
+
+        public static void BeforeDelete(ДоговориКонтрагентів_Objest ДовідникОбєкт)
+        {
+
+        }
+    }
+
+    class БанківськіРахункиКонтрагентів_Triggers
+    {
+        public static void New(БанківськіРахункиКонтрагентів_Objest ДовідникОбєкт)
+        {
+            ДовідникОбєкт.Код = (++НумераціяДовідників.БанківськіРахункиКонтрагентів_Const).ToString("D6");
+        }
+
+        public static void Copying(БанківськіРахункиКонтрагентів_Objest ДовідникОбєкт, БанківськіРахункиКонтрагентів_Objest Основа)
+        {
+            ДовідникОбєкт.Назва += " - Копія";
+        }
+
+        public static void BeforeSave(БанківськіРахункиКонтрагентів_Objest ДовідникОбєкт)
+        {
+
+        }
+
+        public static void AfterSave(БанківськіРахункиКонтрагентів_Objest ДовідникОбєкт)
+        {
+
+        }
+
+        public static void BeforeDelete(БанківськіРахункиКонтрагентів_Objest ДовідникОбєкт)
+        {
+
+        }
+    }
+
     class СтаттяРухуКоштів_Triggers
     {
         public static void New(СтаттяРухуКоштів_Objest ДовідникОбєкт)
         {
             ДовідникОбєкт.Код = (++НумераціяДовідників.СтаттяРухуКоштів_Const).ToString("D6");
+        }
+
+        public static void Copying(СтаттяРухуКоштів_Objest ДовідникОбєкт, СтаттяРухуКоштів_Objest Основа)
+        {
+            ДовідникОбєкт.Назва += " - Копія";
         }
 
         public static void BeforeSave(СтаттяРухуКоштів_Objest ДовідникОбєкт)
@@ -667,6 +836,12 @@ WHERE
         public static void New(СеріїНоменклатури_Objest ДовідникОбєкт)
         {
 
+        }
+
+        public static void Copying(СеріїНоменклатури_Objest ДовідникОбєкт, СеріїНоменклатури_Objest Основа)
+        {
+            ДовідникОбєкт.Номер = Guid.NewGuid().ToString();
+            ДовідникОбєкт.Коментар = "Копія - " + Основа.Номер;
         }
 
         public static void BeforeSave(СеріїНоменклатури_Objest ДовідникОбєкт)
@@ -700,6 +875,11 @@ WHERE
 
         }
 
+        public static void Copying(ПартіяТоварівКомпозит_Objest ДовідникОбєкт, ПартіяТоварівКомпозит_Objest Основа)
+        {
+
+        }
+
         public static void BeforeSave(ПартіяТоварівКомпозит_Objest ДовідникОбєкт)
         {
 
@@ -720,7 +900,12 @@ WHERE
     {
         public static void New(ВидиЗапасів_Objest ДовідникОбєкт)
         {
+            ДовідникОбєкт.Код = (++НумераціяДовідників.ВидиЗапасів_Const).ToString("D6");
+        }
 
+        public static void Copying(ВидиЗапасів_Objest ДовідникОбєкт, ВидиЗапасів_Objest Основа)
+        {
+            ДовідникОбєкт.Назва += " - Копія";
         }
 
         public static void BeforeSave(ВидиЗапасів_Objest ДовідникОбєкт)
@@ -746,6 +931,11 @@ WHERE
             ДовідникОбєкт.Код = (++НумераціяДовідників.Банки_Const).ToString("D6");
         }
 
+        public static void Copying(Банки_Objest ДовідникОбєкт, Банки_Objest Основа)
+        {
+            ДовідникОбєкт.Назва += " - Копія";
+        }
+
         public static void BeforeSave(Банки_Objest ДовідникОбєкт)
         {
 
@@ -767,6 +957,11 @@ WHERE
         public static void New(СкладськіПриміщення_Objest ДовідникОбєкт)
         {
 
+        }
+
+        public static void Copying(СкладськіПриміщення_Objest ДовідникОбєкт, СкладськіПриміщення_Objest Основа)
+        {
+            ДовідникОбєкт.Назва += " - Копія";
         }
 
         public static void BeforeSave(СкладськіПриміщення_Objest ДовідникОбєкт)
@@ -792,6 +987,11 @@ WHERE
 
         }
 
+        public static void Copying(СкладськіКомірки_Objest ДовідникОбєкт, СкладськіКомірки_Objest Основа)
+        {
+            ДовідникОбєкт.Назва += " - Копія";
+        }
+
         public static void BeforeSave(СкладськіКомірки_Objest ДовідникОбєкт)
         {
 
@@ -813,6 +1013,11 @@ WHERE
         public static void New(ТипорозміриКомірок_Objest ДовідникОбєкт)
         {
 
+        }
+
+        public static void Copying(ТипорозміриКомірок_Objest ДовідникОбєкт, ТипорозміриКомірок_Objest Основа)
+        {
+            ДовідникОбєкт.Назва += " - Копія";
         }
 
         public static void BeforeSave(ТипорозміриКомірок_Objest ДовідникОбєкт)
@@ -838,6 +1043,11 @@ WHERE
             ДовідникОбєкт.Код = (++НумераціяДовідників.СкладськіКомірки_Папки_Const).ToString("D6");
         }
 
+        public static void Copying(СкладськіКомірки_Папки_Objest ДовідникОбєкт, СкладськіКомірки_Папки_Objest Основа)
+        {
+            ДовідникОбєкт.Назва += " - Копія";
+        }
+
         public static void BeforeSave(СкладськіКомірки_Папки_Objest ДовідникОбєкт)
         {
 
@@ -854,61 +1064,17 @@ WHERE
         }
     }
 
-    class ДоговориКонтрагентів_Triggers
-    {
-        public static void New(ДоговориКонтрагентів_Objest ДовідникОбєкт)
-        {
-            ДовідникОбєкт.Код = (++НумераціяДовідників.ДоговориКонтрагентів_Const).ToString("D6");
-        }
-
-        public static void BeforeSave(ДоговориКонтрагентів_Objest ДовідникОбєкт)
-        {
-            string НазваПереліченняЗКонфігурації =
-                Конфа.Config.Kernel!.Conf.Enums["ТипДоговорів"].Fields[ДовідникОбєкт.ТипДоговору.ToString()].Desc;
-
-            ДовідникОбєкт.ТипДоговоруПредставлення = НазваПереліченняЗКонфігурації;
-        }
-
-        public static void AfterSave(ДоговориКонтрагентів_Objest ДовідникОбєкт)
-        {
-
-        }
-
-        public static void BeforeDelete(ДоговориКонтрагентів_Objest ДовідникОбєкт)
-        {
-
-        }
-    }
-
-    class БанківськіРахункиКонтрагентів_Triggers
-    {
-        public static void New(БанківськіРахункиКонтрагентів_Objest ДовідникОбєкт)
-        {
-            ДовідникОбєкт.Код = (++НумераціяДовідників.БанківськіРахункиКонтрагентів_Const).ToString("D6");
-        }
-
-        public static void BeforeSave(БанківськіРахункиКонтрагентів_Objest ДовідникОбєкт)
-        {
-
-        }
-
-        public static void AfterSave(БанківськіРахункиКонтрагентів_Objest ДовідникОбєкт)
-        {
-
-        }
-
-        public static void BeforeDelete(БанківськіРахункиКонтрагентів_Objest ДовідникОбєкт)
-        {
-
-        }
-    }
-
     class Блокнот_Triggers
     {
         public static void New(Блокнот_Objest ДовідникОбєкт)
         {
             ДовідникОбєкт.Код = (++НумераціяДовідників.Блокнот_Const).ToString("D6");
             ДовідникОбєкт.ДатаЗапису = DateTime.Now;
+        }
+
+        public static void Copying(Блокнот_Objest ДовідникОбєкт, Блокнот_Objest Основа)
+        {
+            ДовідникОбєкт.Назва += " - Копія";
         }
 
         public static void BeforeSave(Блокнот_Objest ДовідникОбєкт)
@@ -941,6 +1107,11 @@ namespace StorageAndTrade_1_0.Документи
             ДокументОбєкт.Менеджер = Program.Користувач;
         }
 
+        public static void Copying(ЗамовленняПостачальнику_Objest ДокументОбєкт, ЗамовленняПостачальнику_Objest Основа)
+        {
+            ДокументОбєкт.Коментар = "Копія: " + Основа.Назва;
+        }
+
         public static void BeforeSave(ЗамовленняПостачальнику_Objest ДокументОбєкт)
         {
             ДокументОбєкт.Назва = $"Замовлення постачальнику №{ДокументОбєкт.НомерДок} від {ДокументОбєкт.ДатаДок.ToShortDateString()}";
@@ -965,6 +1136,11 @@ namespace StorageAndTrade_1_0.Документи
             ДокументОбєкт.ДатаДок = DateTime.Now;
             ДокументОбєкт.Автор = Program.Користувач;
             ДокументОбєкт.Менеджер = Program.Користувач;
+        }
+
+        public static void Copying(ПоступленняТоварівТаПослуг_Objest ДокументОбєкт, ПоступленняТоварівТаПослуг_Objest Основа)
+        {
+            ДокументОбєкт.Коментар = "Копія: " + Основа.Назва;
         }
 
         public static void BeforeSave(ПоступленняТоварівТаПослуг_Objest ДокументОбєкт)
@@ -993,6 +1169,11 @@ namespace StorageAndTrade_1_0.Документи
             ДокументОбєкт.Менеджер = Program.Користувач;
         }
 
+        public static void Copying(ЗамовленняКлієнта_Objest ДокументОбєкт, ЗамовленняКлієнта_Objest Основа)
+        {
+            ДокументОбєкт.Коментар = "Копія: " + Основа.Назва;
+        }
+
         public static void BeforeSave(ЗамовленняКлієнта_Objest ДокументОбєкт)
         {
             ДокументОбєкт.Назва = $"Замовлення клієнта №{ДокументОбєкт.НомерДок} від {ДокументОбєкт.ДатаДок.ToShortDateString()}";
@@ -1017,6 +1198,11 @@ namespace StorageAndTrade_1_0.Документи
             ДокументОбєкт.ДатаДок = DateTime.Now;
             ДокументОбєкт.Автор = Program.Користувач;
             ДокументОбєкт.Менеджер = Program.Користувач;
+        }
+
+        public static void Copying(РеалізаціяТоварівТаПослуг_Objest ДокументОбєкт, РеалізаціяТоварівТаПослуг_Objest Основа)
+        {
+            ДокументОбєкт.Коментар = "Копія: " + Основа.Назва;
         }
 
         public static void BeforeSave(РеалізаціяТоварівТаПослуг_Objest ДокументОбєкт)
@@ -1044,6 +1230,11 @@ namespace StorageAndTrade_1_0.Документи
             ДокументОбєкт.Автор = Program.Користувач;
         }
 
+        public static void Copying(ВстановленняЦінНоменклатури_Objest ДокументОбєкт, ВстановленняЦінНоменклатури_Objest Основа)
+        {
+            ДокументОбєкт.Коментар = "Копія: " + Основа.Назва;
+        }
+
         public static void BeforeSave(ВстановленняЦінНоменклатури_Objest ДокументОбєкт)
         {
             ДокументОбєкт.Назва = $"Встановлення цін номенклатури №{ДокументОбєкт.НомерДок} від {ДокументОбєкт.ДатаДок.ToShortDateString()}";
@@ -1067,6 +1258,11 @@ namespace StorageAndTrade_1_0.Документи
             ДокументОбєкт.НомерДок = (++НумераціяДокументів.ПрихіднийКасовийОрдер_Const).ToString("D8");
             ДокументОбєкт.ДатаДок = DateTime.Now;
             ДокументОбєкт.Автор = Program.Користувач;
+        }
+
+        public static void Copying(ПрихіднийКасовийОрдер_Objest ДокументОбєкт, ПрихіднийКасовийОрдер_Objest Основа)
+        {
+            ДокументОбєкт.Коментар = "Копія: " + Основа.Назва;
         }
 
         public static void BeforeSave(ПрихіднийКасовийОрдер_Objest ДокументОбєкт)
@@ -1094,6 +1290,11 @@ namespace StorageAndTrade_1_0.Документи
             ДокументОбєкт.Автор = Program.Користувач;
         }
 
+        public static void Copying(РозхіднийКасовийОрдер_Objest ДокументОбєкт, РозхіднийКасовийОрдер_Objest Основа)
+        {
+            ДокументОбєкт.Коментар = "Копія: " + Основа.Назва;
+        }
+
         public static void BeforeSave(РозхіднийКасовийОрдер_Objest ДокументОбєкт)
         {
             ДокументОбєкт.Назва = $"Розхідний касовий ордер №{ДокументОбєкт.НомерДок} від {ДокументОбєкт.ДатаДок.ToShortDateString()}";
@@ -1117,6 +1318,11 @@ namespace StorageAndTrade_1_0.Документи
             ДокументОбєкт.НомерДок = (++НумераціяДокументів.ПереміщенняТоварів_Const).ToString("D8");
             ДокументОбєкт.ДатаДок = DateTime.Now;
             ДокументОбєкт.Автор = Program.Користувач;
+        }
+
+        public static void Copying(ПереміщенняТоварів_Objest ДокументОбєкт, ПереміщенняТоварів_Objest Основа)
+        {
+            ДокументОбєкт.Коментар = "Копія: " + Основа.Назва;
         }
 
         public static void BeforeSave(ПереміщенняТоварів_Objest ДокументОбєкт)
@@ -1145,6 +1351,11 @@ namespace StorageAndTrade_1_0.Документи
             ДокументОбєкт.Менеджер = Program.Користувач;
         }
 
+        public static void Copying(ПоверненняТоварівПостачальнику_Objest ДокументОбєкт, ПоверненняТоварівПостачальнику_Objest Основа)
+        {
+            ДокументОбєкт.Коментар = "Копія: " + Основа.Назва;
+        }
+
         public static void BeforeSave(ПоверненняТоварівПостачальнику_Objest ДокументОбєкт)
         {
             ДокументОбєкт.Назва = $"Повернення товарів постачальнику №{ДокументОбєкт.НомерДок} від {ДокументОбєкт.ДатаДок.ToShortDateString()}";
@@ -1169,6 +1380,11 @@ namespace StorageAndTrade_1_0.Документи
             ДокументОбєкт.ДатаДок = DateTime.Now;
             ДокументОбєкт.Автор = Program.Користувач;
             ДокументОбєкт.Менеджер = Program.Користувач;
+        }
+
+        public static void Copying(ПоверненняТоварівВідКлієнта_Objest ДокументОбєкт, ПоверненняТоварівВідКлієнта_Objest Основа)
+        {
+            ДокументОбєкт.Коментар = "Копія: " + Основа.Назва;
         }
 
         public static void BeforeSave(ПоверненняТоварівВідКлієнта_Objest ДокументОбєкт)
@@ -1197,6 +1413,11 @@ namespace StorageAndTrade_1_0.Документи
             ДокументОбєкт.Менеджер = Program.Користувач;
         }
 
+        public static void Copying(АктВиконанихРобіт_Objest ДокументОбєкт, АктВиконанихРобіт_Objest Основа)
+        {
+            ДокументОбєкт.Коментар = "Копія: " + Основа.Назва;
+        }
+
         public static void BeforeSave(АктВиконанихРобіт_Objest ДокументОбєкт)
         {
             ДокументОбєкт.Назва = $"Акт виконаних робіт №{ДокументОбєкт.НомерДок} від {ДокументОбєкт.ДатаДок.ToShortDateString()}";
@@ -1222,6 +1443,11 @@ namespace StorageAndTrade_1_0.Документи
             ДокументОбєкт.Автор = Program.Користувач;
         }
 
+        public static void Copying(ВведенняЗалишків_Objest ДокументОбєкт, ВведенняЗалишків_Objest Основа)
+        {
+            ДокументОбєкт.Коментар = "Копія: " + Основа.Назва;
+        }
+
         public static void BeforeSave(ВведенняЗалишків_Objest ДокументОбєкт)
         {
             ДокументОбєкт.Назва = $"Введення залишків №{ДокументОбєкт.НомерДок} від {ДокументОбєкт.ДатаДок.ToShortDateString()}";
@@ -1238,6 +1464,36 @@ namespace StorageAndTrade_1_0.Документи
         }
     }
 
+    class ПсуванняТоварів_Triggers
+    {
+        public static void New(ПсуванняТоварів_Objest ДокументОбєкт)
+        {
+            ДокументОбєкт.НомерДок = (++НумераціяДокументів.ПсуванняТоварів_Const).ToString("D8");
+            ДокументОбєкт.ДатаДок = DateTime.Now;
+            ДокументОбєкт.Автор = Program.Користувач;
+        }
+
+        public static void Copying(ПсуванняТоварів_Objest ДокументОбєкт, ПсуванняТоварів_Objest Основа)
+        {
+            ДокументОбєкт.Коментар = "Копія: " + Основа.Назва;
+        }
+
+        public static void BeforeSave(ПсуванняТоварів_Objest ДокументОбєкт)
+        {
+            ДокументОбєкт.Назва = $"Псування товарів №{ДокументОбєкт.НомерДок} від {ДокументОбєкт.ДатаДок.ToShortDateString()}";
+        }
+
+        public static void AfterSave(ПсуванняТоварів_Objest ДокументОбєкт)
+        {
+
+        }
+
+        public static void BeforeDelete(ПсуванняТоварів_Objest ДокументОбєкт)
+        {
+            ДокументОбєкт.ClearSpendTheDocument();
+        }
+    }
+
     class ВнутрішнєСпоживанняТоварів_Triggers
     {
         public static void New(ВнутрішнєСпоживанняТоварів_Objest ДокументОбєкт)
@@ -1245,6 +1501,11 @@ namespace StorageAndTrade_1_0.Документи
             ДокументОбєкт.НомерДок = (++НумераціяДокументів.ВнутрішнєСпоживанняТоварів_Const).ToString("D8");
             ДокументОбєкт.ДатаДок = DateTime.Now;
             ДокументОбєкт.Автор = Program.Користувач;
+        }
+
+        public static void Copying(ВнутрішнєСпоживанняТоварів_Objest ДокументОбєкт, ВнутрішнєСпоживанняТоварів_Objest Основа)
+        {
+            ДокументОбєкт.Коментар = "Копія: " + Основа.Назва;
         }
 
         public static void BeforeSave(ВнутрішнєСпоживанняТоварів_Objest ДокументОбєкт)
@@ -1273,6 +1534,11 @@ namespace StorageAndTrade_1_0.Документи
             ДокументОбєкт.Менеджер = Program.Користувач;
         }
 
+        public static void Copying(РахунокФактура_Objest ДокументОбєкт, РахунокФактура_Objest Основа)
+        {
+            ДокументОбєкт.Коментар = "Копія: " + Основа.Назва;
+        }
+
         public static void BeforeSave(РахунокФактура_Objest ДокументОбєкт)
         {
             ДокументОбєкт.Назва = $"Рахунок фактура №{ДокументОбєкт.НомерДок} від {ДокументОбєкт.ДатаДок.ToShortDateString()}";
@@ -1296,6 +1562,11 @@ namespace StorageAndTrade_1_0.Документи
             ДокументОбєкт.НомерДок = (++НумераціяДокументів.РозміщенняТоварівНаСкладі_Const).ToString("D8");
             ДокументОбєкт.ДатаДок = DateTime.Now;
             ДокументОбєкт.Автор = Program.Користувач;
+        }
+
+        public static void Copying(РозміщенняТоварівНаСкладі_Objest ДокументОбєкт, РозміщенняТоварівНаСкладі_Objest Основа)
+        {
+            ДокументОбєкт.Коментар = "Копія: " + Основа.Назва;
         }
 
         public static void BeforeSave(РозміщенняТоварівНаСкладі_Objest ДокументОбєкт)
@@ -1323,6 +1594,11 @@ namespace StorageAndTrade_1_0.Документи
             ДокументОбєкт.Автор = Program.Користувач;
         }
 
+        public static void Copying(ПереміщенняТоварівНаСкладі_Objest ДокументОбєкт, ПереміщенняТоварівНаСкладі_Objest Основа)
+        {
+            ДокументОбєкт.Коментар = "Копія: " + Основа.Назва;
+        }
+
         public static void BeforeSave(ПереміщенняТоварівНаСкладі_Objest ДокументОбєкт)
         {
             ДокументОбєкт.Назва = $"Переміщення товарів на складі №{ДокументОбєкт.НомерДок} від {ДокументОбєкт.ДатаДок.ToShortDateString()}";
@@ -1346,6 +1622,11 @@ namespace StorageAndTrade_1_0.Документи
             ДокументОбєкт.НомерДок = (++НумераціяДокументів.ЗбіркаТоварівНаСкладі_Const).ToString("D8");
             ДокументОбєкт.ДатаДок = DateTime.Now;
             ДокументОбєкт.Автор = Program.Користувач;
+        }
+
+        public static void Copying(ЗбіркаТоварівНаСкладі_Objest ДокументОбєкт, ЗбіркаТоварівНаСкладі_Objest Основа)
+        {
+            ДокументОбєкт.Коментар = "Копія: " + Основа.Назва;
         }
 
         public static void BeforeSave(ЗбіркаТоварівНаСкладі_Objest ДокументОбєкт)
@@ -1373,6 +1654,11 @@ namespace StorageAndTrade_1_0.Документи
             ДокументОбєкт.Автор = Program.Користувач;
         }
 
+        public static void Copying(РозміщенняНоменклатуриПоКоміркам_Objest ДокументОбєкт, РозміщенняНоменклатуриПоКоміркам_Objest Основа)
+        {
+            ДокументОбєкт.Коментар = "Копія: " + Основа.Назва;
+        }
+
         public static void BeforeSave(РозміщенняНоменклатуриПоКоміркам_Objest ДокументОбєкт)
         {
             ДокументОбєкт.Назва = $"Розміщення номенклатури по комірках №{ДокументОбєкт.НомерДок} від {ДокументОбєкт.ДатаДок.ToShortDateString()}";
@@ -1388,30 +1674,4 @@ namespace StorageAndTrade_1_0.Документи
             ДокументОбєкт.ClearSpendTheDocument();
         }
     }
-
-    class ПсуванняТоварів_Triggers
-    {
-        public static void New(ПсуванняТоварів_Objest ДокументОбєкт)
-        {
-            ДокументОбєкт.НомерДок = (++НумераціяДокументів.ПсуванняТоварів_Const).ToString("D8");
-            ДокументОбєкт.ДатаДок = DateTime.Now;
-            ДокументОбєкт.Автор = Program.Користувач;
-        }
-
-        public static void BeforeSave(ПсуванняТоварів_Objest ДокументОбєкт)
-        {
-            ДокументОбєкт.Назва = $"Псування товарів №{ДокументОбєкт.НомерДок} від {ДокументОбєкт.ДатаДок.ToShortDateString()}";
-        }
-
-        public static void AfterSave(ПсуванняТоварів_Objest ДокументОбєкт)
-        {
-
-        }
-
-        public static void BeforeDelete(ПсуванняТоварів_Objest ДокументОбєкт)
-        {
-            ДокументОбєкт.ClearSpendTheDocument();
-        }
-    }
-
 }

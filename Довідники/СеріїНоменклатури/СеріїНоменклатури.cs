@@ -292,9 +292,7 @@ namespace StorageAndTrade
                         СеріїНоменклатури_Objest СеріїНоменклатури_Objest = new СеріїНоменклатури_Objest();
                         if (СеріїНоменклатури_Objest.Read(new UnigueID(uid)))
                         {
-                            СеріїНоменклатури_Objest СеріїНоменклатури_Objest_Новий = СеріїНоменклатури_Objest.Copy();
-                            СеріїНоменклатури_Objest_Новий.Номер = Guid.NewGuid().ToString();
-                            СеріїНоменклатури_Objest_Новий.Коментар = "Копія - " + СеріїНоменклатури_Objest_Новий.Номер;
+                            СеріїНоменклатури_Objest СеріїНоменклатури_Objest_Новий = СеріїНоменклатури_Objest.Copy(true);
                             СеріїНоменклатури_Objest_Новий.Save();
 
                             SelectPointerItem = СеріїНоменклатури_Objest_Новий.GetDirectoryPointer();

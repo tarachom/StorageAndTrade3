@@ -25,7 +25,6 @@ using Gtk;
 
 using AccountingSoftware;
 
-using StorageAndTrade_1_0.Константи;
 using StorageAndTrade_1_0.Довідники;
 
 using ТабличніСписки = StorageAndTrade_1_0.Довідники.ТабличніСписки;
@@ -308,8 +307,7 @@ namespace StorageAndTrade
                         Банки_Objest Банки_Objest = new Банки_Objest();
                         if (Банки_Objest.Read(new UnigueID(uid)))
                         {
-                            Банки_Objest Банки_Objest_Новий = Банки_Objest.Copy();
-                            Банки_Objest_Новий.Назва += " - Копія";
+                            Банки_Objest Банки_Objest_Новий = Банки_Objest.Copy(true);
                             Банки_Objest_Новий.Save();
 
                             SelectPointerItem = Банки_Objest_Новий.GetDirectoryPointer();

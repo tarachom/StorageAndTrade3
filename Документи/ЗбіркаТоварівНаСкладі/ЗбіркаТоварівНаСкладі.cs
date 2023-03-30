@@ -451,13 +451,8 @@ namespace StorageAndTrade
                         ЗбіркаТоварівНаСкладі_Objest ЗбіркаТоварівНаСкладі_Objest = new ЗбіркаТоварівНаСкладі_Objest();
                         if (ЗбіркаТоварівНаСкладі_Objest.Read(new UnigueID(uid)))
                         {
-                            ЗбіркаТоварівНаСкладі_Objest ЗбіркаТоварівНаСкладі_Objest_Новий = ЗбіркаТоварівНаСкладі_Objest.Copy();
-                            ЗбіркаТоварівНаСкладі_Objest_Новий.Коментар = "Копія: " + ЗбіркаТоварівНаСкладі_Objest.Назва;
+                            ЗбіркаТоварівНаСкладі_Objest ЗбіркаТоварівНаСкладі_Objest_Новий = ЗбіркаТоварівНаСкладі_Objest.Copy(true);
                             ЗбіркаТоварівНаСкладі_Objest_Новий.Save();
-
-                            //Зчитати та скопіювати табличну частину Товари
-                            ЗбіркаТоварівНаСкладі_Objest.Товари_TablePart.Read();
-                            ЗбіркаТоварівНаСкладі_Objest_Новий.Товари_TablePart.Records = ЗбіркаТоварівНаСкладі_Objest.Товари_TablePart.Copy();
                             ЗбіркаТоварівНаСкладі_Objest_Новий.Товари_TablePart.Save(true);
 
                             SelectPointerItem = ЗбіркаТоварівНаСкладі_Objest_Новий.GetDocumentPointer();

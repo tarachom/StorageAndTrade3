@@ -25,7 +25,6 @@ using Gtk;
 
 using AccountingSoftware;
 
-using StorageAndTrade_1_0.Константи;
 using StorageAndTrade_1_0.Довідники;
 
 using ТабличніСписки = StorageAndTrade_1_0.Довідники.ТабличніСписки;
@@ -259,8 +258,7 @@ namespace StorageAndTrade
                         Каси_Objest Каси_Objest = new Каси_Objest();
                         if (Каси_Objest.Read(new UnigueID(uid)))
                         {
-                            Каси_Objest Каси_Objest_Новий = Каси_Objest.Copy();
-                            Каси_Objest_Новий.Назва += " - Копія";
+                            Каси_Objest Каси_Objest_Новий = Каси_Objest.Copy(true);
                             Каси_Objest_Новий.Save();
 
                             SelectPointerItem = Каси_Objest_Новий.GetDirectoryPointer();

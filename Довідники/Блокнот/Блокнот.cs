@@ -292,8 +292,7 @@ namespace StorageAndTrade
                         Блокнот_Objest Блокнот_Objest = new Блокнот_Objest();
                         if (Блокнот_Objest.Read(new UnigueID(uid)))
                         {
-                            Блокнот_Objest Блокнот_Objest_Новий = Блокнот_Objest.Copy();
-                            Блокнот_Objest_Новий.Назва += " - Копія";
+                            Блокнот_Objest Блокнот_Objest_Новий = Блокнот_Objest.Copy(true);
                             Блокнот_Objest_Новий.Save();
 
                             SelectPointerItem = Блокнот_Objest_Новий.GetDirectoryPointer();

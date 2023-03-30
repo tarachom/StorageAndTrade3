@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 30.03.2023 18:16:08
+ * Дата конфігурації: 30.03.2023 22:12:37
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -1220,7 +1220,7 @@ namespace StorageAndTrade_1_0.Константи
             
             Dictionary<string, object> fieldValue = new Dictionary<string, object>();
             bool IsSelect = Config.Kernel!.DataBase.SelectAllConstants("tab_constants",
-                 new string[] { "col_b8", "col_d1", "col_d2", "col_d3", "col_d4", "col_d5", "col_d6", "col_d7", "col_d8", "col_d9", "col_e1", "col_e2", "col_e3", "col_e4", "col_e5", "col_e6", "col_e7", "col_e8", "col_e9", "col_f1", "col_f2", "col_f3", "col_f4", "col_f5", "col_b1", "col_g8", "col_i3" }, fieldValue);
+                 new string[] { "col_b8", "col_d1", "col_d2", "col_d3", "col_d4", "col_d5", "col_d6", "col_d7", "col_d8", "col_d9", "col_e1", "col_e2", "col_e3", "col_e4", "col_e5", "col_e6", "col_e7", "col_e8", "col_e9", "col_f1", "col_f2", "col_f3", "col_f4", "col_f5", "col_b1", "col_g8", "col_i3", "col_i4" }, fieldValue);
             
             if (IsSelect)
             {
@@ -1251,6 +1251,7 @@ namespace StorageAndTrade_1_0.Константи
                 m_СкладськіКомірки_Папки_Const = (fieldValue["col_b1"] != DBNull.Value) ? (int)fieldValue["col_b1"] : 0;
                 m_Банки_Const = (fieldValue["col_g8"] != DBNull.Value) ? (int)fieldValue["col_g8"] : 0;
                 m_Блокнот_Const = (fieldValue["col_i3"] != DBNull.Value) ? (int)fieldValue["col_i3"] : 0;
+                m_ВидиЗапасів_Const = (fieldValue["col_i4"] != DBNull.Value) ? (int)fieldValue["col_i4"] : 0;
                 
             }
 			      
@@ -1634,6 +1635,20 @@ namespace StorageAndTrade_1_0.Константи
                 Config.Kernel!.DataBase.SaveConstants("tab_constants", "col_i3", m_Блокнот_Const);
             }
         }
+        
+        static int m_ВидиЗапасів_Const = 0;
+        public static int ВидиЗапасів_Const
+        {
+            get 
+            {
+                return m_ВидиЗапасів_Const;
+            }
+            set
+            {
+                m_ВидиЗапасів_Const = value;
+                Config.Kernel!.DataBase.SaveConstants("tab_constants", "col_i4", m_ВидиЗапасів_Const);
+            }
+        }
              
     }
     #endregion
@@ -1989,7 +2004,7 @@ namespace StorageAndTrade_1_0.Довідники
             BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НазваПовна, НазваСкорочена, КраїнаРеєстрації, СвідоцтвоСеріяНомер, СвідоцтвоДатаВидачі });
         }
 
-        public Організації_Objest Copy()
+        public Організації_Objest Copy(bool copyTableParts = false)
         {
             Організації_Objest copy = new Організації_Objest();
             copy.Назва = Назва;
@@ -2002,7 +2017,18 @@ namespace StorageAndTrade_1_0.Довідники
             copy.СвідоцтвоДатаВидачі = СвідоцтвоДатаВидачі;
             copy.Холдинг = Холдинг;
             
+            
+            if (copyTableParts)
+            {
+            
+                //Контакти - Таблична частина
+                Контакти_TablePart.Read();
+                copy.Контакти_TablePart.Records = Контакти_TablePart.Copy();
+            
+            }
+
             copy.New();
+            Організації_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -2190,6 +2216,17 @@ namespace StorageAndTrade_1_0.Довідники
         {
             base.BaseDelete(Owner.UnigueID);
         }
+
+        public List<Record> Copy()
+        {
+            List<Record> copyRecords = new List<Record>();
+            copyRecords = Records;
+
+            foreach (Record copyRecordItem in copyRecords)
+                copyRecordItem.UID = Guid.Empty;
+
+            return copyRecords;
+        }
         
         public class Record : DirectoryTablePartRecord
         {
@@ -2298,7 +2335,7 @@ namespace StorageAndTrade_1_0.Довідники
             BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НазваПовна, Опис, Артикул });
         }
 
-        public Номенклатура_Objest Copy()
+        public Номенклатура_Objest Copy(bool copyTableParts = false)
         {
             Номенклатура_Objest copy = new Номенклатура_Objest();
             copy.Назва = Назва;
@@ -2313,7 +2350,18 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Папка = Папка;
             copy.ОсновнаКартинкаФайл = ОсновнаКартинкаФайл;
             
+            
+            if (copyTableParts)
+            {
+            
+                //Файли - Таблична частина
+                Файли_TablePart.Read();
+                copy.Файли_TablePart.Records = Файли_TablePart.Copy();
+            
+            }
+
             copy.New();
+            Номенклатура_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -2485,6 +2533,17 @@ namespace StorageAndTrade_1_0.Довідники
         {
             base.BaseDelete(Owner.UnigueID);
         }
+
+        public List<Record> Copy()
+        {
+            List<Record> copyRecords = new List<Record>();
+            copyRecords = Records;
+
+            foreach (Record copyRecordItem in copyRecords)
+                copyRecordItem.UID = Guid.Empty;
+
+            return copyRecords;
+        }
         
         public class Record : DirectoryTablePartRecord
         {
@@ -2548,13 +2607,20 @@ namespace StorageAndTrade_1_0.Довідники
             BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
         }
 
-        public Виробники_Objest Copy()
+        public Виробники_Objest Copy(bool copyTableParts = false)
         {
             Виробники_Objest copy = new Виробники_Objest();
             copy.Назва = Назва;
             copy.Код = Код;
             
+            
+            if (copyTableParts)
+            {
+            
+            }
+
             copy.New();
+            Виробники_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -2718,7 +2784,7 @@ namespace StorageAndTrade_1_0.Довідники
             BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, Опис });
         }
 
-        public ВидиНоменклатури_Objest Copy()
+        public ВидиНоменклатури_Objest Copy(bool copyTableParts = false)
         {
             ВидиНоменклатури_Objest copy = new ВидиНоменклатури_Objest();
             copy.Назва = Назва;
@@ -2727,7 +2793,14 @@ namespace StorageAndTrade_1_0.Довідники
             copy.ТипНоменклатури = ТипНоменклатури;
             copy.ОдиницяВиміру = ОдиницяВиміру;
             
+            
+            if (copyTableParts)
+            {
+            
+            }
+
             copy.New();
+            ВидиНоменклатури_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -2890,7 +2963,7 @@ namespace StorageAndTrade_1_0.Довідники
             BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НазваПовна });
         }
 
-        public ПакуванняОдиниціВиміру_Objest Copy()
+        public ПакуванняОдиниціВиміру_Objest Copy(bool copyTableParts = false)
         {
             ПакуванняОдиниціВиміру_Objest copy = new ПакуванняОдиниціВиміру_Objest();
             copy.Назва = Назва;
@@ -2898,7 +2971,14 @@ namespace StorageAndTrade_1_0.Довідники
             copy.НазваПовна = НазваПовна;
             copy.КількістьУпаковок = КількістьУпаковок;
             
+            
+            if (copyTableParts)
+            {
+            
+            }
+
             copy.New();
+            ПакуванняОдиниціВиміру_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -3064,7 +3144,7 @@ namespace StorageAndTrade_1_0.Довідники
             BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, КороткаНазва, Код_R030 });
         }
 
-        public Валюти_Objest Copy()
+        public Валюти_Objest Copy(bool copyTableParts = false)
         {
             Валюти_Objest copy = new Валюти_Objest();
             copy.Назва = Назва;
@@ -3073,7 +3153,14 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Код_R030 = Код_R030;
             copy.ВиводитиКурсНаСтартову = ВиводитиКурсНаСтартову;
             
+            
+            if (copyTableParts)
+            {
+            
+            }
+
             copy.New();
+            Валюти_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -3252,7 +3339,7 @@ namespace StorageAndTrade_1_0.Довідники
             BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НазваПовна, РеєстраційнийНомер, Опис, КлючовіСловаДляПошуку });
         }
 
-        public Контрагенти_Objest Copy()
+        public Контрагенти_Objest Copy(bool copyTableParts = false)
         {
             Контрагенти_Objest copy = new Контрагенти_Objest();
             copy.Назва = Назва;
@@ -3263,7 +3350,22 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Опис = Опис;
             copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
+            
+            if (copyTableParts)
+            {
+            
+                //Контакти - Таблична частина
+                Контакти_TablePart.Read();
+                copy.Контакти_TablePart.Records = Контакти_TablePart.Copy();
+            
+                //Файли - Таблична частина
+                Файли_TablePart.Read();
+                copy.Файли_TablePart.Records = Файли_TablePart.Copy();
+            
+            }
+
             copy.New();
+            Контрагенти_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -3450,6 +3552,17 @@ namespace StorageAndTrade_1_0.Довідники
         {
             base.BaseDelete(Owner.UnigueID);
         }
+
+        public List<Record> Copy()
+        {
+            List<Record> copyRecords = new List<Record>();
+            copyRecords = Records;
+
+            foreach (Record copyRecordItem in copyRecords)
+                copyRecordItem.UID = Guid.Empty;
+
+            return copyRecords;
+        }
         
         public class Record : DirectoryTablePartRecord
         {
@@ -3523,6 +3636,17 @@ namespace StorageAndTrade_1_0.Довідники
         public void Delete()
         {
             base.BaseDelete(Owner.UnigueID);
+        }
+
+        public List<Record> Copy()
+        {
+            List<Record> copyRecords = new List<Record>();
+            copyRecords = Records;
+
+            foreach (Record copyRecordItem in copyRecords)
+                copyRecordItem.UID = Guid.Empty;
+
+            return copyRecords;
         }
         
         public class Record : DirectoryTablePartRecord
@@ -3613,7 +3737,7 @@ namespace StorageAndTrade_1_0.Довідники
             BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
         }
 
-        public Склади_Objest Copy()
+        public Склади_Objest Copy(bool copyTableParts = false)
         {
             Склади_Objest copy = new Склади_Objest();
             copy.Назва = Назва;
@@ -3625,7 +3749,18 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Папка = Папка;
             copy.НалаштуванняАдресногоЗберігання = НалаштуванняАдресногоЗберігання;
             
+            
+            if (copyTableParts)
+            {
+            
+                //Контакти - Таблична частина
+                Контакти_TablePart.Read();
+                copy.Контакти_TablePart.Records = Контакти_TablePart.Copy();
+            
+            }
+
             copy.New();
+            Склади_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -3812,6 +3947,17 @@ namespace StorageAndTrade_1_0.Довідники
         {
             base.BaseDelete(Owner.UnigueID);
         }
+
+        public List<Record> Copy()
+        {
+            List<Record> copyRecords = new List<Record>();
+            copyRecords = Records;
+
+            foreach (Record copyRecordItem in copyRecords)
+                copyRecordItem.UID = Guid.Empty;
+
+            return copyRecords;
+        }
         
         public class Record : DirectoryTablePartRecord
         {
@@ -3885,14 +4031,21 @@ namespace StorageAndTrade_1_0.Довідники
             BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
         }
 
-        public ВидиЦін_Objest Copy()
+        public ВидиЦін_Objest Copy(bool copyTableParts = false)
         {
             ВидиЦін_Objest copy = new ВидиЦін_Objest();
             copy.Назва = Назва;
             copy.Код = Код;
             copy.Валюта = Валюта;
             
+            
+            if (copyTableParts)
+            {
+            
+            }
+
             copy.New();
+            ВидиЦін_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -4049,14 +4202,21 @@ namespace StorageAndTrade_1_0.Довідники
             BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
         }
 
-        public ВидиЦінПостачальників_Objest Copy()
+        public ВидиЦінПостачальників_Objest Copy(bool copyTableParts = false)
         {
             ВидиЦінПостачальників_Objest copy = new ВидиЦінПостачальників_Objest();
             copy.Назва = Назва;
             copy.Код = Код;
             copy.Валюта = Валюта;
             
+            
+            if (copyTableParts)
+            {
+            
+            }
+
             copy.New();
+            ВидиЦінПостачальників_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -4224,7 +4384,7 @@ namespace StorageAndTrade_1_0.Довідники
             BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, Коментар });
         }
 
-        public Користувачі_Objest Copy()
+        public Користувачі_Objest Copy(bool copyTableParts = false)
         {
             Користувачі_Objest copy = new Користувачі_Objest();
             copy.Назва = Назва;
@@ -4233,7 +4393,18 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Коментар = Коментар;
             copy.КодВСпеціальнійТаблиці = КодВСпеціальнійТаблиці;
             
+            
+            if (copyTableParts)
+            {
+            
+                //Контакти - Таблична частина
+                Контакти_TablePart.Read();
+                copy.Контакти_TablePart.Records = Контакти_TablePart.Copy();
+            
+            }
+
             copy.New();
+            Користувачі_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -4414,6 +4585,17 @@ namespace StorageAndTrade_1_0.Довідники
         {
             base.BaseDelete(Owner.UnigueID);
         }
+
+        public List<Record> Copy()
+        {
+            List<Record> copyRecords = new List<Record>();
+            copyRecords = Records;
+
+            foreach (Record copyRecordItem in copyRecords)
+                copyRecordItem.UID = Guid.Empty;
+
+            return copyRecords;
+        }
         
         public class Record : DirectoryTablePartRecord
         {
@@ -4497,7 +4679,7 @@ namespace StorageAndTrade_1_0.Довідники
             BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, ІПН });
         }
 
-        public ФізичніОсоби_Objest Copy()
+        public ФізичніОсоби_Objest Copy(bool copyTableParts = false)
         {
             ФізичніОсоби_Objest copy = new ФізичніОсоби_Objest();
             copy.Назва = Назва;
@@ -4506,7 +4688,18 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Стать = Стать;
             copy.ІПН = ІПН;
             
+            
+            if (copyTableParts)
+            {
+            
+                //Контакти - Таблична частина
+                Контакти_TablePart.Read();
+                copy.Контакти_TablePart.Records = Контакти_TablePart.Copy();
+            
+            }
+
             copy.New();
+            ФізичніОсоби_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -4687,6 +4880,17 @@ namespace StorageAndTrade_1_0.Довідники
         {
             base.BaseDelete(Owner.UnigueID);
         }
+
+        public List<Record> Copy()
+        {
+            List<Record> copyRecords = new List<Record>();
+            copyRecords = Records;
+
+            foreach (Record copyRecordItem in copyRecords)
+                copyRecordItem.UID = Guid.Empty;
+
+            return copyRecords;
+        }
         
         public class Record : DirectoryTablePartRecord
         {
@@ -4759,14 +4963,21 @@ namespace StorageAndTrade_1_0.Довідники
             BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
         }
 
-        public СтруктураПідприємства_Objest Copy()
+        public СтруктураПідприємства_Objest Copy(bool copyTableParts = false)
         {
             СтруктураПідприємства_Objest copy = new СтруктураПідприємства_Objest();
             copy.Назва = Назва;
             copy.Код = Код;
             copy.Керівник = Керівник;
             
+            
+            if (copyTableParts)
+            {
+            
+            }
+
             copy.New();
+            СтруктураПідприємства_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -4919,13 +5130,20 @@ namespace StorageAndTrade_1_0.Довідники
             BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
         }
 
-        public КраїниСвіту_Objest Copy()
+        public КраїниСвіту_Objest Copy(bool copyTableParts = false)
         {
             КраїниСвіту_Objest copy = new КраїниСвіту_Objest();
             copy.Назва = Назва;
             copy.Код = Код;
             
+            
+            if (copyTableParts)
+            {
+            
+            }
+
             copy.New();
+            КраїниСвіту_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -5093,7 +5311,7 @@ namespace StorageAndTrade_1_0.Довідники
             BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НазваФайлу });
         }
 
-        public Файли_Objest Copy()
+        public Файли_Objest Copy(bool copyTableParts = false)
         {
             Файли_Objest copy = new Файли_Objest();
             copy.Код = Код;
@@ -5103,7 +5321,14 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Розмір = Розмір;
             copy.ДатаСтворення = ДатаСтворення;
             
+            
+            if (copyTableParts)
+            {
+            
+            }
+
             copy.New();
+            Файли_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -5267,7 +5492,7 @@ namespace StorageAndTrade_1_0.Довідники
             BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НазваПовна });
         }
 
-        public ХарактеристикиНоменклатури_Objest Copy()
+        public ХарактеристикиНоменклатури_Objest Copy(bool copyTableParts = false)
         {
             ХарактеристикиНоменклатури_Objest copy = new ХарактеристикиНоменклатури_Objest();
             copy.Назва = Назва;
@@ -5275,7 +5500,14 @@ namespace StorageAndTrade_1_0.Довідники
             copy.НазваПовна = НазваПовна;
             copy.Номенклатура = Номенклатура;
             
+            
+            if (copyTableParts)
+            {
+            
+            }
+
             copy.New();
+            ХарактеристикиНоменклатури_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -5433,14 +5665,21 @@ namespace StorageAndTrade_1_0.Довідники
             BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
         }
 
-        public Номенклатура_Папки_Objest Copy()
+        public Номенклатура_Папки_Objest Copy(bool copyTableParts = false)
         {
             Номенклатура_Папки_Objest copy = new Номенклатура_Папки_Objest();
             copy.Назва = Назва;
             copy.Код = Код;
             copy.Родич = Родич;
             
+            
+            if (copyTableParts)
+            {
+            
+            }
+
             copy.New();
+            Номенклатура_Папки_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -5597,14 +5836,21 @@ namespace StorageAndTrade_1_0.Довідники
             BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
         }
 
-        public Контрагенти_Папки_Objest Copy()
+        public Контрагенти_Папки_Objest Copy(bool copyTableParts = false)
         {
             Контрагенти_Папки_Objest copy = new Контрагенти_Папки_Objest();
             copy.Назва = Назва;
             copy.Код = Код;
             copy.Родич = Родич;
             
+            
+            if (copyTableParts)
+            {
+            
+            }
+
             copy.New();
+            Контрагенти_Папки_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -5761,14 +6007,21 @@ namespace StorageAndTrade_1_0.Довідники
             BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
         }
 
-        public Склади_Папки_Objest Copy()
+        public Склади_Папки_Objest Copy(bool copyTableParts = false)
         {
             Склади_Папки_Objest copy = new Склади_Папки_Objest();
             copy.Назва = Назва;
             copy.Код = Код;
             copy.Родич = Родич;
             
+            
+            if (copyTableParts)
+            {
+            
+            }
+
             copy.New();
+            Склади_Папки_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -5929,7 +6182,7 @@ namespace StorageAndTrade_1_0.Довідники
             BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
         }
 
-        public Каси_Objest Copy()
+        public Каси_Objest Copy(bool copyTableParts = false)
         {
             Каси_Objest copy = new Каси_Objest();
             copy.Назва = Назва;
@@ -5937,7 +6190,14 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Валюта = Валюта;
             copy.Підрозділ = Підрозділ;
             
+            
+            if (copyTableParts)
+            {
+            
+            }
+
             copy.New();
+            Каси_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -6135,7 +6395,7 @@ namespace StorageAndTrade_1_0.Довідники
             BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, Банк, НазваБанку, НомерРахунку, АдресаБанку, МістоБанку, ТелефониБанку });
         }
 
-        public БанківськіРахункиОрганізацій_Objest Copy()
+        public БанківськіРахункиОрганізацій_Objest Copy(bool copyTableParts = false)
         {
             БанківськіРахункиОрганізацій_Objest copy = new БанківськіРахункиОрганізацій_Objest();
             copy.Назва = Назва;
@@ -6152,7 +6412,14 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Закритий = Закритий;
             copy.Організація = Організація;
             
+            
+            if (copyTableParts)
+            {
+            
+            }
+
             copy.New();
+            БанківськіРахункиОрганізацій_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -6387,7 +6654,7 @@ namespace StorageAndTrade_1_0.Довідники
             BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, Коментар });
         }
 
-        public ДоговориКонтрагентів_Objest Copy()
+        public ДоговориКонтрагентів_Objest Copy(bool copyTableParts = false)
         {
             ДоговориКонтрагентів_Objest copy = new ДоговориКонтрагентів_Objest();
             copy.Назва = Назва;
@@ -6411,7 +6678,14 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Сума = Сума;
             copy.Коментар = Коментар;
             
+            
+            if (copyTableParts)
+            {
+            
+            }
+
             copy.New();
+            ДоговориКонтрагентів_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -6633,7 +6907,7 @@ namespace StorageAndTrade_1_0.Довідники
             BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НазваБанку, КорРахунокБанку, МістоБанку, АдресаБанку, ТелефониБанку });
         }
 
-        public БанківськіРахункиКонтрагентів_Objest Copy()
+        public БанківськіРахункиКонтрагентів_Objest Copy(bool copyTableParts = false)
         {
             БанківськіРахункиКонтрагентів_Objest copy = new БанківськіРахункиКонтрагентів_Objest();
             copy.Назва = Назва;
@@ -6652,7 +6926,14 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Закрито = Закрито;
             copy.Контрагент = Контрагент;
             
+            
+            if (copyTableParts)
+            {
+            
+            }
+
             copy.New();
+            БанківськіРахункиКонтрагентів_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -6832,7 +7113,7 @@ namespace StorageAndTrade_1_0.Довідники
             BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, Опис });
         }
 
-        public СтаттяРухуКоштів_Objest Copy()
+        public СтаттяРухуКоштів_Objest Copy(bool copyTableParts = false)
         {
             СтаттяРухуКоштів_Objest copy = new СтаттяРухуКоштів_Objest();
             copy.Назва = Назва;
@@ -6841,7 +7122,18 @@ namespace StorageAndTrade_1_0.Довідники
             copy.ВидРухуКоштів = ВидРухуКоштів;
             copy.Опис = Опис;
             
+            
+            if (copyTableParts)
+            {
+            
+                //ГосподарськіОперації - Таблична частина
+                ГосподарськіОперації_TablePart.Read();
+                copy.ГосподарськіОперації_TablePart.Records = ГосподарськіОперації_TablePart.Copy();
+            
+            }
+
             copy.New();
+            СтаттяРухуКоштів_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -7004,6 +7296,17 @@ namespace StorageAndTrade_1_0.Довідники
         {
             base.BaseDelete(Owner.UnigueID);
         }
+
+        public List<Record> Copy()
+        {
+            List<Record> copyRecords = new List<Record>();
+            copyRecords = Records;
+
+            foreach (Record copyRecordItem in copyRecords)
+                copyRecordItem.UID = Guid.Empty;
+
+            return copyRecords;
+        }
         
         public class Record : DirectoryTablePartRecord
         {
@@ -7070,14 +7373,21 @@ namespace StorageAndTrade_1_0.Довідники
             BaseWriteFullTextSearch(GetBasis(), new string[] { Номер, Коментар });
         }
 
-        public СеріїНоменклатури_Objest Copy()
+        public СеріїНоменклатури_Objest Copy(bool copyTableParts = false)
         {
             СеріїНоменклатури_Objest copy = new СеріїНоменклатури_Objest();
             copy.Номер = Номер;
             copy.Коментар = Коментар;
             copy.ДатаСтворення = ДатаСтворення;
             
+            
+            if (copyTableParts)
+            {
+            
+            }
+
             copy.New();
+            СеріїНоменклатури_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -7246,7 +7556,7 @@ namespace StorageAndTrade_1_0.Довідники
             BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
         }
 
-        public ПартіяТоварівКомпозит_Objest Copy()
+        public ПартіяТоварівКомпозит_Objest Copy(bool copyTableParts = false)
         {
             ПартіяТоварівКомпозит_Objest copy = new ПартіяТоварівКомпозит_Objest();
             copy.Назва = Назва;
@@ -7256,7 +7566,14 @@ namespace StorageAndTrade_1_0.Довідники
             copy.ПоступленняТоварівТаПослуг = ПоступленняТоварівТаПослуг;
             copy.ВведенняЗалишків = ВведенняЗалишків;
             
+            
+            if (copyTableParts)
+            {
+            
+            }
+
             copy.New();
+            ПартіяТоварівКомпозит_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -7372,12 +7689,13 @@ namespace StorageAndTrade_1_0.Довідники
         public const string Валюта = "col_a9";
         public const string Контрагент = "col_b1";
         public const string Договір = "col_b2";
+        public const string Код = "col_a1";
     }
 
     public class ВидиЗапасів_Objest : DirectoryObject
     {
         public ВидиЗапасів_Objest() : base(Config.Kernel!, "tab_b13",
-             new string[] { "col_a5", "col_b3", "col_a7", "col_a9", "col_b1", "col_b2" }) 
+             new string[] { "col_a5", "col_b3", "col_a7", "col_a9", "col_b1", "col_b2", "col_a1" }) 
         {
             Назва = "";
             Організація = new Довідники.Організації_Pointer();
@@ -7385,6 +7703,7 @@ namespace StorageAndTrade_1_0.Довідники
             Валюта = new Довідники.Валюти_Pointer();
             Контрагент = new Довідники.Контрагенти_Pointer();
             Договір = new Довідники.ДоговориКонтрагентів_Pointer();
+            Код = "";
             
         }
         
@@ -7405,6 +7724,7 @@ namespace StorageAndTrade_1_0.Довідники
                 Валюта = new Довідники.Валюти_Pointer(base.FieldValue["col_a9"]);
                 Контрагент = new Довідники.Контрагенти_Pointer(base.FieldValue["col_b1"]);
                 Договір = new Довідники.ДоговориКонтрагентів_Pointer(base.FieldValue["col_b2"]);
+                Код = base.FieldValue["col_a1"]?.ToString() ?? "";
                 
                 BaseClear();
                 return true;
@@ -7422,13 +7742,14 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_a9"] = Валюта.UnigueID.UGuid;
             base.FieldValue["col_b1"] = Контрагент.UnigueID.UGuid;
             base.FieldValue["col_b2"] = Договір.UnigueID.UGuid;
+            base.FieldValue["col_a1"] = Код;
             
             BaseSave();
             ВидиЗапасів_Triggers.AfterSave(this);
             BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
         }
 
-        public ВидиЗапасів_Objest Copy()
+        public ВидиЗапасів_Objest Copy(bool copyTableParts = false)
         {
             ВидиЗапасів_Objest copy = new ВидиЗапасів_Objest();
             copy.Назва = Назва;
@@ -7437,8 +7758,16 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Валюта = Валюта;
             copy.Контрагент = Контрагент;
             copy.Договір = Договір;
+            copy.Код = Код;
             
+            
+            if (copyTableParts)
+            {
+            
+            }
+
             copy.New();
+            ВидиЗапасів_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -7464,6 +7793,7 @@ namespace StorageAndTrade_1_0.Довідники
         public Довідники.Валюти_Pointer Валюта { get; set; }
         public Довідники.Контрагенти_Pointer Контрагент { get; set; }
         public Довідники.ДоговориКонтрагентів_Pointer Договір { get; set; }
+        public string Код { get; set; }
         
     }
 
@@ -7698,7 +8028,7 @@ namespace StorageAndTrade_1_0.Довідники
             BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, КодМФО, КодЄДРПОУ, НазваНаселеногоПункту, Адреса });
         }
 
-        public Банки_Objest Copy()
+        public Банки_Objest Copy(bool copyTableParts = false)
         {
             Банки_Objest copy = new Банки_Objest();
             copy.Код = Код;
@@ -7730,7 +8060,14 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Статус = Статус;
             copy.ДатаЗапису = ДатаЗапису;
             
+            
+            if (copyTableParts)
+            {
+            
+            }
+
             copy.New();
+            Банки_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -7912,14 +8249,21 @@ namespace StorageAndTrade_1_0.Довідники
             BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
         }
 
-        public СкладськіПриміщення_Objest Copy()
+        public СкладськіПриміщення_Objest Copy(bool copyTableParts = false)
         {
             СкладськіПриміщення_Objest copy = new СкладськіПриміщення_Objest();
             copy.Назва = Назва;
             copy.НалаштуванняАдресногоЗберігання = НалаштуванняАдресногоЗберігання;
             copy.Склад = Склад;
             
+            
+            if (copyTableParts)
+            {
+            
+            }
+
             copy.New();
+            СкладськіПриміщення_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -8104,7 +8448,7 @@ namespace StorageAndTrade_1_0.Довідники
             BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
         }
 
-        public СкладськіКомірки_Objest Copy()
+        public СкладськіКомірки_Objest Copy(bool copyTableParts = false)
         {
             СкладськіКомірки_Objest copy = new СкладськіКомірки_Objest();
             copy.Папка = Папка;
@@ -8118,7 +8462,14 @@ namespace StorageAndTrade_1_0.Довідники
             copy.ТипСкладськоїКомірки = ТипСкладськоїКомірки;
             copy.Типорозмір = Типорозмір;
             
+            
+            if (copyTableParts)
+            {
+            
+            }
+
             copy.New();
+            СкладськіКомірки_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -8280,14 +8631,21 @@ namespace StorageAndTrade_1_0.Довідники
             BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
         }
 
-        public ОбластьЗберігання_Objest Copy()
+        public ОбластьЗберігання_Objest Copy(bool copyTableParts = false)
         {
             ОбластьЗберігання_Objest copy = new ОбластьЗберігання_Objest();
             copy.Назва = Назва;
             copy.Опис = Опис;
             copy.Приміщення = Приміщення;
             
+            
+            if (copyTableParts)
+            {
+            
+            }
+
             copy.New();
+            
             return copy;
         }
 
@@ -8456,7 +8814,7 @@ namespace StorageAndTrade_1_0.Довідники
             BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
         }
 
-        public ТипорозміриКомірок_Objest Copy()
+        public ТипорозміриКомірок_Objest Copy(bool copyTableParts = false)
         {
             ТипорозміриКомірок_Objest copy = new ТипорозміриКомірок_Objest();
             copy.Висота = Висота;
@@ -8466,7 +8824,14 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Обєм = Обєм;
             copy.Ширина = Ширина;
             
+            
+            if (copyTableParts)
+            {
+            
+            }
+
             copy.New();
+            ТипорозміриКомірок_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -8630,7 +8995,7 @@ namespace StorageAndTrade_1_0.Довідники
             BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
         }
 
-        public СкладськіКомірки_Папки_Objest Copy()
+        public СкладськіКомірки_Папки_Objest Copy(bool copyTableParts = false)
         {
             СкладськіКомірки_Папки_Objest copy = new СкладськіКомірки_Папки_Objest();
             copy.Назва = Назва;
@@ -8638,7 +9003,14 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Родич = Родич;
             copy.Приміщення = Приміщення;
             
+            
+            if (copyTableParts)
+            {
+            
+            }
+
             copy.New();
+            СкладськіКомірки_Папки_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -8804,7 +9176,7 @@ namespace StorageAndTrade_1_0.Довідники
             BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, Опис });
         }
 
-        public Блокнот_Objest Copy()
+        public Блокнот_Objest Copy(bool copyTableParts = false)
         {
             Блокнот_Objest copy = new Блокнот_Objest();
             copy.Код = Код;
@@ -8813,7 +9185,14 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Опис = Опис;
             copy.Лінк = Лінк;
             
+            
+            if (copyTableParts)
+            {
+            
+            }
+
             copy.New();
+            Блокнот_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -10404,7 +10783,7 @@ namespace StorageAndTrade_1_0.Документи
             BaseSpend(false, DateTime.MinValue);
         }
 
-        public ЗамовленняПостачальнику_Objest Copy()
+        public ЗамовленняПостачальнику_Objest Copy(bool copyTableParts = false)
         {
             ЗамовленняПостачальнику_Objest copy = new ЗамовленняПостачальнику_Objest();
             copy.Назва = Назва;
@@ -10435,7 +10814,18 @@ namespace StorageAndTrade_1_0.Документи
             copy.Коментар = Коментар;
             copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
+
+            if (copyTableParts)
+            {
+            
+                //Товари - Таблична частина
+                Товари_TablePart.Read();
+                copy.Товари_TablePart.Records = Товари_TablePart.Copy();
+            
+            }
+
             copy.New();
+            ЗамовленняПостачальнику_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -10639,7 +11029,7 @@ namespace StorageAndTrade_1_0.Документи
                 
             base.BaseCommitTransaction();
         }
-        
+
         public void Delete()
         {
             base.BaseDelete(Owner.UnigueID);
@@ -11238,7 +11628,7 @@ namespace StorageAndTrade_1_0.Документи
             BaseSpend(false, DateTime.MinValue);
         }
 
-        public ПоступленняТоварівТаПослуг_Objest Copy()
+        public ПоступленняТоварівТаПослуг_Objest Copy(bool copyTableParts = false)
         {
             ПоступленняТоварівТаПослуг_Objest copy = new ПоступленняТоварівТаПослуг_Objest();
             copy.Назва = Назва;
@@ -11275,7 +11665,18 @@ namespace StorageAndTrade_1_0.Документи
             copy.Коментар = Коментар;
             copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
+
+            if (copyTableParts)
+            {
+            
+                //Товари - Таблична частина
+                Товари_TablePart.Read();
+                copy.Товари_TablePart.Records = Товари_TablePart.Copy();
+            
+            }
+
             copy.New();
+            ПоступленняТоварівТаПослуг_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -11491,7 +11892,7 @@ namespace StorageAndTrade_1_0.Документи
                 
             base.BaseCommitTransaction();
         }
-        
+
         public void Delete()
         {
             base.BaseDelete(Owner.UnigueID);
@@ -12036,7 +12437,7 @@ namespace StorageAndTrade_1_0.Документи
             BaseSpend(false, DateTime.MinValue);
         }
 
-        public ЗамовленняКлієнта_Objest Copy()
+        public ЗамовленняКлієнта_Objest Copy(bool copyTableParts = false)
         {
             ЗамовленняКлієнта_Objest copy = new ЗамовленняКлієнта_Objest();
             copy.Назва = Назва;
@@ -12070,7 +12471,18 @@ namespace StorageAndTrade_1_0.Документи
             copy.Менеджер = Менеджер;
             copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
+
+            if (copyTableParts)
+            {
+            
+                //Товари - Таблична частина
+                Товари_TablePart.Read();
+                copy.Товари_TablePart.Records = Товари_TablePart.Copy();
+            
+            }
+
             copy.New();
+            ЗамовленняКлієнта_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -12274,7 +12686,7 @@ namespace StorageAndTrade_1_0.Документи
                 
             base.BaseCommitTransaction();
         }
-        
+
         public void Delete()
         {
             base.BaseDelete(Owner.UnigueID);
@@ -12870,7 +13282,7 @@ namespace StorageAndTrade_1_0.Документи
             BaseSpend(false, DateTime.MinValue);
         }
 
-        public РеалізаціяТоварівТаПослуг_Objest Copy()
+        public РеалізаціяТоварівТаПослуг_Objest Copy(bool copyTableParts = false)
         {
             РеалізаціяТоварівТаПослуг_Objest copy = new РеалізаціяТоварівТаПослуг_Objest();
             copy.Назва = Назва;
@@ -12906,7 +13318,18 @@ namespace StorageAndTrade_1_0.Документи
             copy.Менеджер = Менеджер;
             copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
+
+            if (copyTableParts)
+            {
+            
+                //Товари - Таблична частина
+                Товари_TablePart.Read();
+                copy.Товари_TablePart.Records = Товари_TablePart.Copy();
+            
+            }
+
             copy.New();
+            РеалізаціяТоварівТаПослуг_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -13124,7 +13547,7 @@ namespace StorageAndTrade_1_0.Документи
                 
             base.BaseCommitTransaction();
         }
-        
+
         public void Delete()
         {
             base.BaseDelete(Owner.UnigueID);
@@ -13406,7 +13829,7 @@ namespace StorageAndTrade_1_0.Документи
             BaseSpend(false, DateTime.MinValue);
         }
 
-        public ВстановленняЦінНоменклатури_Objest Copy()
+        public ВстановленняЦінНоменклатури_Objest Copy(bool copyTableParts = false)
         {
             ВстановленняЦінНоменклатури_Objest copy = new ВстановленняЦінНоменклатури_Objest();
             copy.Назва = Назва;
@@ -13419,7 +13842,18 @@ namespace StorageAndTrade_1_0.Документи
             copy.Автор = Автор;
             copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
+
+            if (copyTableParts)
+            {
+            
+                //Товари - Таблична частина
+                Товари_TablePart.Read();
+                copy.Товари_TablePart.Records = Товари_TablePart.Copy();
+            
+            }
+
             copy.New();
+            ВстановленняЦінНоменклатури_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -13587,7 +14021,7 @@ namespace StorageAndTrade_1_0.Документи
                 
             base.BaseCommitTransaction();
         }
-        
+
         public void Delete()
         {
             base.BaseDelete(Owner.UnigueID);
@@ -13960,7 +14394,7 @@ namespace StorageAndTrade_1_0.Документи
             BaseSpend(false, DateTime.MinValue);
         }
 
-        public ПрихіднийКасовийОрдер_Objest Copy()
+        public ПрихіднийКасовийОрдер_Objest Copy(bool copyTableParts = false)
         {
             ПрихіднийКасовийОрдер_Objest copy = new ПрихіднийКасовийОрдер_Objest();
             copy.Назва = Назва;
@@ -13982,7 +14416,18 @@ namespace StorageAndTrade_1_0.Документи
             copy.Автор = Автор;
             copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
+
+            if (copyTableParts)
+            {
+            
+                //РозшифруванняПлатежу - Таблична частина
+                РозшифруванняПлатежу_TablePart.Read();
+                copy.РозшифруванняПлатежу_TablePart.Records = РозшифруванняПлатежу_TablePart.Copy();
+            
+            }
+
             copy.New();
+            ПрихіднийКасовийОрдер_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -14159,7 +14604,7 @@ namespace StorageAndTrade_1_0.Документи
                 
             base.BaseCommitTransaction();
         }
-        
+
         public void Delete()
         {
             base.BaseDelete(Owner.UnigueID);
@@ -14560,7 +15005,7 @@ namespace StorageAndTrade_1_0.Документи
             BaseSpend(false, DateTime.MinValue);
         }
 
-        public РозхіднийКасовийОрдер_Objest Copy()
+        public РозхіднийКасовийОрдер_Objest Copy(bool copyTableParts = false)
         {
             РозхіднийКасовийОрдер_Objest copy = new РозхіднийКасовийОрдер_Objest();
             copy.Назва = Назва;
@@ -14584,7 +15029,18 @@ namespace StorageAndTrade_1_0.Документи
             copy.Автор = Автор;
             copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
+
+            if (copyTableParts)
+            {
+            
+                //РозшифруванняПлатежу - Таблична частина
+                РозшифруванняПлатежу_TablePart.Read();
+                copy.РозшифруванняПлатежу_TablePart.Records = РозшифруванняПлатежу_TablePart.Copy();
+            
+            }
+
             copy.New();
+            РозхіднийКасовийОрдер_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -14766,7 +15222,7 @@ namespace StorageAndTrade_1_0.Документи
                 
             base.BaseCommitTransaction();
         }
-        
+
         public void Delete()
         {
             base.BaseDelete(Owner.UnigueID);
@@ -15190,7 +15646,7 @@ namespace StorageAndTrade_1_0.Документи
             BaseSpend(false, DateTime.MinValue);
         }
 
-        public ПереміщенняТоварів_Objest Copy()
+        public ПереміщенняТоварів_Objest Copy(bool copyTableParts = false)
         {
             ПереміщенняТоварів_Objest copy = new ПереміщенняТоварів_Objest();
             copy.Назва = Назва;
@@ -15215,7 +15671,18 @@ namespace StorageAndTrade_1_0.Документи
             copy.Основа = Основа;
             copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
+
+            if (copyTableParts)
+            {
+            
+                //Товари - Таблична частина
+                Товари_TablePart.Read();
+                copy.Товари_TablePart.Records = Товари_TablePart.Copy();
+            
+            }
+
             copy.New();
+            ПереміщенняТоварів_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -15401,7 +15868,7 @@ namespace StorageAndTrade_1_0.Документи
                 
             base.BaseCommitTransaction();
         }
-        
+
         public void Delete()
         {
             base.BaseDelete(Owner.UnigueID);
@@ -15860,7 +16327,7 @@ namespace StorageAndTrade_1_0.Документи
             BaseSpend(false, DateTime.MinValue);
         }
 
-        public ПоверненняТоварівПостачальнику_Objest Copy()
+        public ПоверненняТоварівПостачальнику_Objest Copy(bool copyTableParts = false)
         {
             ПоверненняТоварівПостачальнику_Objest copy = new ПоверненняТоварівПостачальнику_Objest();
             copy.Назва = Назва;
@@ -15887,7 +16354,18 @@ namespace StorageAndTrade_1_0.Документи
             copy.Менеджер = Менеджер;
             copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
+
+            if (copyTableParts)
+            {
+            
+                //Товари - Таблична частина
+                Товари_TablePart.Read();
+                copy.Товари_TablePart.Records = Товари_TablePart.Copy();
+            
+            }
+
             copy.New();
+            ПоверненняТоварівПостачальнику_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -16081,7 +16559,7 @@ namespace StorageAndTrade_1_0.Документи
                 
             base.BaseCommitTransaction();
         }
-        
+
         public void Delete()
         {
             base.BaseDelete(Owner.UnigueID);
@@ -16504,7 +16982,7 @@ namespace StorageAndTrade_1_0.Документи
             BaseSpend(false, DateTime.MinValue);
         }
 
-        public ПоверненняТоварівВідКлієнта_Objest Copy()
+        public ПоверненняТоварівВідКлієнта_Objest Copy(bool copyTableParts = false)
         {
             ПоверненняТоварівВідКлієнта_Objest copy = new ПоверненняТоварівВідКлієнта_Objest();
             copy.Назва = Назва;
@@ -16527,7 +17005,18 @@ namespace StorageAndTrade_1_0.Документи
             copy.Автор = Автор;
             copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
+
+            if (copyTableParts)
+            {
+            
+                //Товари - Таблична частина
+                Товари_TablePart.Read();
+                copy.Товари_TablePart.Records = Товари_TablePart.Copy();
+            
+            }
+
             copy.New();
+            ПоверненняТоварівВідКлієнта_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -16720,7 +17209,7 @@ namespace StorageAndTrade_1_0.Документи
                 
             base.BaseCommitTransaction();
         }
-        
+
         public void Delete()
         {
             base.BaseDelete(Owner.UnigueID);
@@ -17088,7 +17577,7 @@ namespace StorageAndTrade_1_0.Документи
             BaseSpend(false, DateTime.MinValue);
         }
 
-        public АктВиконанихРобіт_Objest Copy()
+        public АктВиконанихРобіт_Objest Copy(bool copyTableParts = false)
         {
             АктВиконанихРобіт_Objest copy = new АктВиконанихРобіт_Objest();
             copy.Назва = Назва;
@@ -17109,7 +17598,18 @@ namespace StorageAndTrade_1_0.Документи
             copy.Менеджер = Менеджер;
             copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
+
+            if (copyTableParts)
+            {
+            
+                //Послуги - Таблична частина
+                Послуги_TablePart.Read();
+                copy.Послуги_TablePart.Records = Послуги_TablePart.Copy();
+            
+            }
+
             copy.New();
+            АктВиконанихРобіт_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -17285,7 +17785,7 @@ namespace StorageAndTrade_1_0.Документи
                 
             base.BaseCommitTransaction();
         }
-        
+
         public void Delete()
         {
             base.BaseDelete(Owner.UnigueID);
@@ -17742,7 +18242,7 @@ namespace StorageAndTrade_1_0.Документи
             BaseSpend(false, DateTime.MinValue);
         }
 
-        public ВведенняЗалишків_Objest Copy()
+        public ВведенняЗалишків_Objest Copy(bool copyTableParts = false)
         {
             ВведенняЗалишків_Objest copy = new ВведенняЗалишків_Objest();
             copy.Назва = Назва;
@@ -17759,7 +18259,30 @@ namespace StorageAndTrade_1_0.Документи
             copy.Автор = Автор;
             copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
+
+            if (copyTableParts)
+            {
+            
+                //Товари - Таблична частина
+                Товари_TablePart.Read();
+                copy.Товари_TablePart.Records = Товари_TablePart.Copy();
+            
+                //Каси - Таблична частина
+                Каси_TablePart.Read();
+                copy.Каси_TablePart.Records = Каси_TablePart.Copy();
+            
+                //БанківськіРахунки - Таблична частина
+                БанківськіРахунки_TablePart.Read();
+                copy.БанківськіРахунки_TablePart.Records = БанківськіРахунки_TablePart.Copy();
+            
+                //РозрахункиЗКонтрагентами - Таблична частина
+                РозрахункиЗКонтрагентами_TablePart.Read();
+                copy.РозрахункиЗКонтрагентами_TablePart.Records = РозрахункиЗКонтрагентами_TablePart.Copy();
+            
+            }
+
             copy.New();
+            ВведенняЗалишків_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -17943,7 +18466,7 @@ namespace StorageAndTrade_1_0.Документи
                 
             base.BaseCommitTransaction();
         }
-        
+
         public void Delete()
         {
             base.BaseDelete(Owner.UnigueID);
@@ -18035,7 +18558,7 @@ namespace StorageAndTrade_1_0.Документи
                 
             base.BaseCommitTransaction();
         }
-        
+
         public void Delete()
         {
             base.BaseDelete(Owner.UnigueID);
@@ -18121,7 +18644,7 @@ namespace StorageAndTrade_1_0.Документи
                 
             base.BaseCommitTransaction();
         }
-        
+
         public void Delete()
         {
             base.BaseDelete(Owner.UnigueID);
@@ -18213,7 +18736,7 @@ namespace StorageAndTrade_1_0.Документи
                 
             base.BaseCommitTransaction();
         }
-        
+
         public void Delete()
         {
             base.BaseDelete(Owner.UnigueID);
@@ -18483,7 +19006,7 @@ namespace StorageAndTrade_1_0.Документи
             BaseSpend(false, DateTime.MinValue);
         }
 
-        public НадлишкиТоварів_Objest Copy()
+        public НадлишкиТоварів_Objest Copy(bool copyTableParts = false)
         {
             НадлишкиТоварів_Objest copy = new НадлишкиТоварів_Objest();
             copy.Організація = Організація;
@@ -18497,7 +19020,18 @@ namespace StorageAndTrade_1_0.Документи
             copy.Автор = Автор;
             copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
+
+            if (copyTableParts)
+            {
+            
+                //Товари - Таблична частина
+                Товари_TablePart.Read();
+                copy.Товари_TablePart.Records = Товари_TablePart.Copy();
+            
+            }
+
             copy.New();
+            
             return copy;
         }
 
@@ -18663,7 +19197,7 @@ namespace StorageAndTrade_1_0.Документи
                 
             base.BaseCommitTransaction();
         }
-        
+
         public void Delete()
         {
             base.BaseDelete(Owner.UnigueID);
@@ -18933,7 +19467,7 @@ namespace StorageAndTrade_1_0.Документи
             BaseSpend(false, DateTime.MinValue);
         }
 
-        public ПересортицяТоварів_Objest Copy()
+        public ПересортицяТоварів_Objest Copy(bool copyTableParts = false)
         {
             ПересортицяТоварів_Objest copy = new ПересортицяТоварів_Objest();
             copy.Назва = Назва;
@@ -18947,7 +19481,18 @@ namespace StorageAndTrade_1_0.Документи
             copy.Автор = Автор;
             copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
+
+            if (copyTableParts)
+            {
+            
+                //Товари - Таблична частина
+                Товари_TablePart.Read();
+                copy.Товари_TablePart.Records = Товари_TablePart.Copy();
+            
+            }
+
             copy.New();
+            
             return copy;
         }
 
@@ -19113,7 +19658,7 @@ namespace StorageAndTrade_1_0.Документи
                 
             base.BaseCommitTransaction();
         }
-        
+
         public void Delete()
         {
             base.BaseDelete(Owner.UnigueID);
@@ -19373,7 +19918,7 @@ namespace StorageAndTrade_1_0.Документи
             BaseSpend(false, DateTime.MinValue);
         }
 
-        public ПерерахунокТоварів_Objest Copy()
+        public ПерерахунокТоварів_Objest Copy(bool copyTableParts = false)
         {
             ПерерахунокТоварів_Objest copy = new ПерерахунокТоварів_Objest();
             copy.Назва = Назва;
@@ -19385,7 +19930,18 @@ namespace StorageAndTrade_1_0.Документи
             copy.Автор = Автор;
             copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
+
+            if (copyTableParts)
+            {
+            
+                //Товари - Таблична частина
+                Товари_TablePart.Read();
+                copy.Товари_TablePart.Records = Товари_TablePart.Copy();
+            
+            }
+
             copy.New();
+            
             return copy;
         }
 
@@ -19555,7 +20111,7 @@ namespace StorageAndTrade_1_0.Документи
                 
             base.BaseCommitTransaction();
         }
-        
+
         public void Delete()
         {
             base.BaseDelete(Owner.UnigueID);
@@ -19885,7 +20441,7 @@ namespace StorageAndTrade_1_0.Документи
             BaseSpend(false, DateTime.MinValue);
         }
 
-        public ПсуванняТоварів_Objest Copy()
+        public ПсуванняТоварів_Objest Copy(bool copyTableParts = false)
         {
             ПсуванняТоварів_Objest copy = new ПсуванняТоварів_Objest();
             copy.Назва = Назва;
@@ -19901,7 +20457,18 @@ namespace StorageAndTrade_1_0.Документи
             copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             copy.Основа = Основа;
             
+
+            if (copyTableParts)
+            {
+            
+                //Товари - Таблична частина
+                Товари_TablePart.Read();
+                copy.Товари_TablePart.Records = Товари_TablePart.Copy();
+            
+            }
+
             copy.New();
+            ПсуванняТоварів_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -20084,7 +20651,7 @@ namespace StorageAndTrade_1_0.Документи
                 
             base.BaseCommitTransaction();
         }
-        
+
         public void Delete()
         {
             base.BaseDelete(Owner.UnigueID);
@@ -20431,7 +20998,7 @@ namespace StorageAndTrade_1_0.Документи
             BaseSpend(false, DateTime.MinValue);
         }
 
-        public ВнутрішнєСпоживанняТоварів_Objest Copy()
+        public ВнутрішнєСпоживанняТоварів_Objest Copy(bool copyTableParts = false)
         {
             ВнутрішнєСпоживанняТоварів_Objest copy = new ВнутрішнєСпоживанняТоварів_Objest();
             copy.Назва = Назва;
@@ -20448,7 +21015,18 @@ namespace StorageAndTrade_1_0.Документи
             copy.Коментар = Коментар;
             copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
+
+            if (copyTableParts)
+            {
+            
+                //Товари - Таблична частина
+                Товари_TablePart.Read();
+                copy.Товари_TablePart.Records = Товари_TablePart.Copy();
+            
+            }
+
             copy.New();
+            ВнутрішнєСпоживанняТоварів_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -20632,7 +21210,7 @@ namespace StorageAndTrade_1_0.Документи
                 
             base.BaseCommitTransaction();
         }
-        
+
         public void Delete()
         {
             base.BaseDelete(Owner.UnigueID);
@@ -21071,7 +21649,7 @@ namespace StorageAndTrade_1_0.Документи
             BaseSpend(false, DateTime.MinValue);
         }
 
-        public РахунокФактура_Objest Copy()
+        public РахунокФактура_Objest Copy(bool copyTableParts = false)
         {
             РахунокФактура_Objest copy = new РахунокФактура_Objest();
             copy.Назва = Назва;
@@ -21095,7 +21673,18 @@ namespace StorageAndTrade_1_0.Документи
             copy.Менеджер = Менеджер;
             copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
+
+            if (copyTableParts)
+            {
+            
+                //Товари - Таблична частина
+                Товари_TablePart.Read();
+                copy.Товари_TablePart.Records = Товари_TablePart.Copy();
+            
+            }
+
             copy.New();
+            РахунокФактура_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -21289,7 +21878,7 @@ namespace StorageAndTrade_1_0.Документи
                 
             base.BaseCommitTransaction();
         }
-        
+
         public void Delete()
         {
             base.BaseDelete(Owner.UnigueID);
@@ -21603,7 +22192,7 @@ namespace StorageAndTrade_1_0.Документи
             BaseSpend(false, DateTime.MinValue);
         }
 
-        public РозміщенняТоварівНаСкладі_Objest Copy()
+        public РозміщенняТоварівНаСкладі_Objest Copy(bool copyTableParts = false)
         {
             РозміщенняТоварівНаСкладі_Objest copy = new РозміщенняТоварівНаСкладі_Objest();
             copy.Назва = Назва;
@@ -21618,7 +22207,18 @@ namespace StorageAndTrade_1_0.Документи
             copy.ДокументПоступлення = ДокументПоступлення;
             copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
+
+            if (copyTableParts)
+            {
+            
+                //Товари - Таблична частина
+                Товари_TablePart.Read();
+                copy.Товари_TablePart.Records = Товари_TablePart.Copy();
+            
+            }
+
             copy.New();
+            РозміщенняТоварівНаСкладі_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -21794,7 +22394,7 @@ namespace StorageAndTrade_1_0.Документи
                 
             base.BaseCommitTransaction();
         }
-        
+
         public void Delete()
         {
             base.BaseDelete(Owner.UnigueID);
@@ -22101,7 +22701,7 @@ namespace StorageAndTrade_1_0.Документи
             BaseSpend(false, DateTime.MinValue);
         }
 
-        public ПереміщенняТоварівНаСкладі_Objest Copy()
+        public ПереміщенняТоварівНаСкладі_Objest Copy(bool copyTableParts = false)
         {
             ПереміщенняТоварівНаСкладі_Objest copy = new ПереміщенняТоварівНаСкладі_Objest();
             copy.Назва = Назва;
@@ -22115,7 +22715,18 @@ namespace StorageAndTrade_1_0.Документи
             copy.Підрозділ = Підрозділ;
             copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
+
+            if (copyTableParts)
+            {
+            
+                //Товари - Таблична частина
+                Товари_TablePart.Read();
+                copy.Товари_TablePart.Records = Товари_TablePart.Copy();
+            
+            }
+
             copy.New();
+            ПереміщенняТоварівНаСкладі_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -22293,7 +22904,7 @@ namespace StorageAndTrade_1_0.Документи
                 
             base.BaseCommitTransaction();
         }
-        
+
         public void Delete()
         {
             base.BaseDelete(Owner.UnigueID);
@@ -22605,7 +23216,7 @@ namespace StorageAndTrade_1_0.Документи
             BaseSpend(false, DateTime.MinValue);
         }
 
-        public ЗбіркаТоварівНаСкладі_Objest Copy()
+        public ЗбіркаТоварівНаСкладі_Objest Copy(bool copyTableParts = false)
         {
             ЗбіркаТоварівНаСкладі_Objest copy = new ЗбіркаТоварівНаСкладі_Objest();
             copy.Назва = Назва;
@@ -22620,7 +23231,18 @@ namespace StorageAndTrade_1_0.Документи
             copy.ДокументРеалізації = ДокументРеалізації;
             copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
+
+            if (copyTableParts)
+            {
+            
+                //Товари - Таблична частина
+                Товари_TablePart.Read();
+                copy.Товари_TablePart.Records = Товари_TablePart.Copy();
+            
+            }
+
             copy.New();
+            ЗбіркаТоварівНаСкладі_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -22796,7 +23418,7 @@ namespace StorageAndTrade_1_0.Документи
                 
             base.BaseCommitTransaction();
         }
-        
+
         public void Delete()
         {
             base.BaseDelete(Owner.UnigueID);
@@ -23067,7 +23689,7 @@ namespace StorageAndTrade_1_0.Документи
             BaseSpend(false, DateTime.MinValue);
         }
 
-        public РозміщенняНоменклатуриПоКоміркам_Objest Copy()
+        public РозміщенняНоменклатуриПоКоміркам_Objest Copy(bool copyTableParts = false)
         {
             РозміщенняНоменклатуриПоКоміркам_Objest copy = new РозміщенняНоменклатуриПоКоміркам_Objest();
             copy.Назва = Назва;
@@ -23081,7 +23703,18 @@ namespace StorageAndTrade_1_0.Документи
             copy.Основа = Основа;
             copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
+
+            if (copyTableParts)
+            {
+            
+                //Товари - Таблична частина
+                Товари_TablePart.Read();
+                copy.Товари_TablePart.Records = Товари_TablePart.Copy();
+            
+            }
+
             copy.New();
+            РозміщенняНоменклатуриПоКоміркам_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -23244,7 +23877,7 @@ namespace StorageAndTrade_1_0.Документи
                 
             base.BaseCommitTransaction();
         }
-        
+
         public void Delete()
         {
             base.BaseDelete(Owner.UnigueID);

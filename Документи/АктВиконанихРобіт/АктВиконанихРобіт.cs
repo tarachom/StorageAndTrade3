@@ -473,13 +473,8 @@ namespace StorageAndTrade
                         АктВиконанихРобіт_Objest АктВиконанихРобіт_Objest = new АктВиконанихРобіт_Objest();
                         if (АктВиконанихРобіт_Objest.Read(new UnigueID(uid)))
                         {
-                            АктВиконанихРобіт_Objest АктВиконанихРобіт_Objest_Новий = АктВиконанихРобіт_Objest.Copy();
-                            АктВиконанихРобіт_Objest_Новий.Коментар = "Копія: " + АктВиконанихРобіт_Objest.Назва;
+                            АктВиконанихРобіт_Objest АктВиконанихРобіт_Objest_Новий = АктВиконанихРобіт_Objest.Copy(true);
                             АктВиконанихРобіт_Objest_Новий.Save();
-
-                            //Зчитати та скопіювати табличну частину Товари
-                            АктВиконанихРобіт_Objest.Послуги_TablePart.Read();
-                            АктВиконанихРобіт_Objest_Новий.Послуги_TablePart.Records = АктВиконанихРобіт_Objest.Послуги_TablePart.Copy();
                             АктВиконанихРобіт_Objest_Новий.Послуги_TablePart.Save(true);
 
                             SelectPointerItem = АктВиконанихРобіт_Objest_Новий.GetDocumentPointer();

@@ -97,7 +97,7 @@ namespace StorageAndTrade
 
             if (ТабличніСписки.ТипорозміриКомірок_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.ТипорозміриКомірок_Записи.SelectPath, TreeViewGrid.Columns[0], false);
-                
+
             TreeViewGrid.GrabFocus();
         }
 
@@ -257,8 +257,7 @@ namespace StorageAndTrade
                         ТипорозміриКомірок_Objest ТипорозміриКомірок_Objest = new ТипорозміриКомірок_Objest();
                         if (ТипорозміриКомірок_Objest.Read(new UnigueID(uid)))
                         {
-                            ТипорозміриКомірок_Objest ТипорозміриКомірок_Objest_Новий = ТипорозміриКомірок_Objest.Copy();
-                            ТипорозміриКомірок_Objest_Новий.Назва += " - Копія";
+                            ТипорозміриКомірок_Objest ТипорозміриКомірок_Objest_Новий = ТипорозміриКомірок_Objest.Copy(true);
                             ТипорозміриКомірок_Objest_Новий.Save();
 
                             SelectPointerItem = ТипорозміриКомірок_Objest_Новий.GetDirectoryPointer();

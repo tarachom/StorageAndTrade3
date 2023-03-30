@@ -25,7 +25,6 @@ using Gtk;
 
 using AccountingSoftware;
 
-using StorageAndTrade_1_0.Константи;
 using StorageAndTrade_1_0.Довідники;
 using ТабличніСписки = StorageAndTrade_1_0.Довідники.ТабличніСписки;
 
@@ -331,8 +330,7 @@ namespace StorageAndTrade
                         ХарактеристикиНоменклатури_Objest ХарактеристикиНоменклатури_Objest = new ХарактеристикиНоменклатури_Objest();
                         if (ХарактеристикиНоменклатури_Objest.Read(new UnigueID(uid)))
                         {
-                            ХарактеристикиНоменклатури_Objest ХарактеристикиНоменклатури_Objest_Новий = ХарактеристикиНоменклатури_Objest.Copy();
-                            ХарактеристикиНоменклатури_Objest_Новий.Назва += " - Копія";
+                            ХарактеристикиНоменклатури_Objest ХарактеристикиНоменклатури_Objest_Новий = ХарактеристикиНоменклатури_Objest.Copy(true);
                             ХарактеристикиНоменклатури_Objest_Новий.Save();
 
                             SelectPointerItem = ХарактеристикиНоменклатури_Objest_Новий.GetDirectoryPointer();

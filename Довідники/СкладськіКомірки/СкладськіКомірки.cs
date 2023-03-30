@@ -345,8 +345,7 @@ namespace StorageAndTrade
                         СкладськіКомірки_Objest СкладськіКомірки_Objest = new СкладськіКомірки_Objest();
                         if (СкладськіКомірки_Objest.Read(new UnigueID(uid)))
                         {
-                            СкладськіКомірки_Objest СкладськіКомірки_Objest_Новий = СкладськіКомірки_Objest.Copy();
-                            СкладськіКомірки_Objest_Новий.Назва += " - Копія";
+                            СкладськіКомірки_Objest СкладськіКомірки_Objest_Новий = СкладськіКомірки_Objest.Copy(true);
                             СкладськіКомірки_Objest_Новий.Save();
 
                             SelectPointerItem = СкладськіКомірки_Objest_Новий.GetDirectoryPointer();

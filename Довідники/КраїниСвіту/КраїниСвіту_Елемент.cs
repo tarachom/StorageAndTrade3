@@ -27,22 +27,19 @@ using StorageAndTrade_1_0.Довідники;
 
 namespace StorageAndTrade
 {
-    class Блокнот_Елемент : VBox
+    class КраїниСвіту_Елемент : VBox
     {
-        public Блокнот? PageList { get; set; }
-        public System.Action<Блокнот_Pointer>? CallBack_OnSelectPointer { get; set; }
+        public КраїниСвіту? PageList { get; set; }
+        public System.Action<КраїниСвіту_Pointer>? CallBack_OnSelectPointer { get; set; }
 
         public bool IsNew { get; set; } = true;
 
-        public Блокнот_Objest Блокнот_Objest { get; set; } = new Блокнот_Objest();
+        public КраїниСвіту_Objest КраїниСвіту_Objest { get; set; } = new КраїниСвіту_Objest();
 
         Entry Код = new Entry() { WidthRequest = 100 };
-        Entry Назва = new Entry() { WidthRequest = 800 };
-        DateTimeControl ДатаЗапису = new DateTimeControl();
-        TextView Опис = new TextView();
-        Entry Лінк = new Entry() { WidthRequest = 800 };
+        Entry Назва = new Entry() { WidthRequest = 500 };
 
-        public Блокнот_Елемент() : base()
+        public КраїниСвіту_Елемент() : base()
         {
             HBox hBox = new HBox();
 
@@ -56,7 +53,7 @@ namespace StorageAndTrade
 
             PackStart(hBox, false, false, 10);
 
-            HPaned hPaned = new HPaned() { BorderWidth = 5, Position = 800 };
+            HPaned hPaned = new HPaned() { BorderWidth = 5, Position = 500 };
 
             CreatePack1(hPaned);
             CreatePack2(hPaned);
@@ -69,15 +66,13 @@ namespace StorageAndTrade
         void CreatePack1(HPaned hPaned)
         {
             VBox vBox = new VBox();
-            hPaned.Pack1(vBox, false, false);
 
-            //Код + ДатаЗапису
+            //Код
             HBox hBoxCode = new HBox() { Halign = Align.End };
             vBox.PackStart(hBoxCode, false, false, 5);
 
             hBoxCode.PackStart(new Label("Код:"), false, false, 5);
             hBoxCode.PackStart(Код, false, false, 5);
-            hBoxCode.PackStart(ДатаЗапису, false, false, 5);
 
             //Назва
             HBox hBoxName = new HBox() { Halign = Align.End };
@@ -86,24 +81,7 @@ namespace StorageAndTrade
             hBoxName.PackStart(new Label("Назва:"), false, false, 5);
             hBoxName.PackStart(Назва, false, false, 5);
 
-            //Опис
-            HBox hBoxOpys = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxOpys, false, false, 5);
-
-            hBoxOpys.PackStart(new Label("Опис:") { Valign = Align.Start }, false, false, 5);
-
-            ScrolledWindow scrollTextViewOpys = new ScrolledWindow() { ShadowType = ShadowType.In, WidthRequest = 800, HeightRequest = 500 };
-            scrollTextViewOpys.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
-            scrollTextViewOpys.Add(Опис);
-
-            hBoxOpys.PackStart(scrollTextViewOpys, false, false, 5);
-
-            //Лінк
-            HBox hBoxLink = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxLink, false, false, 5);
-
-            hBoxLink.PackStart(new Label("Лінк:"), false, false, 5);
-            hBoxLink.PackStart(Лінк, false, false, 5);
+            hPaned.Pack1(vBox, false, false);
         }
 
         void CreatePack2(HPaned hPaned)
@@ -120,22 +98,16 @@ namespace StorageAndTrade
         public void SetValue()
         {
             if (IsNew)
-                Блокнот_Objest.New();
+                КраїниСвіту_Objest.New();
 
-            Код.Text = Блокнот_Objest.Код;
-            Назва.Text = Блокнот_Objest.Назва;
-            ДатаЗапису.Value = Блокнот_Objest.ДатаЗапису;
-            Опис.Buffer.Text = Блокнот_Objest.Опис;
-            Лінк.Text = Блокнот_Objest.Лінк;
+            Код.Text = КраїниСвіту_Objest.Код;
+            Назва.Text = КраїниСвіту_Objest.Назва;
         }
 
         void GetValue()
         {
-            Блокнот_Objest.Код = Код.Text;
-            Блокнот_Objest.Назва = Назва.Text;
-            Блокнот_Objest.ДатаЗапису = ДатаЗапису.Value;
-            Блокнот_Objest.Опис = Опис.Buffer.Text;
-            Блокнот_Objest.Лінк = Лінк.Text;
+            КраїниСвіту_Objest.Код = Код.Text;
+            КраїниСвіту_Objest.Назва = Назва.Text;
         }
 
         #endregion
@@ -144,19 +116,19 @@ namespace StorageAndTrade
         {
             GetValue();
 
-            Блокнот_Objest.Save();
+            КраїниСвіту_Objest.Save();
 
             if (closePage)
                 Program.GeneralForm?.CloseCurrentPageNotebook();
             else
-                Program.GeneralForm?.RenameCurrentPageNotebook($"Блокнот: {Блокнот_Objest.Назва}");
+                Program.GeneralForm?.RenameCurrentPageNotebook($"Країни світу: {КраїниСвіту_Objest.Назва}");
 
             if (CallBack_OnSelectPointer != null)
-                CallBack_OnSelectPointer.Invoke(Блокнот_Objest.GetDirectoryPointer());
+                CallBack_OnSelectPointer.Invoke(КраїниСвіту_Objest.GetDirectoryPointer());
 
             if (PageList != null)
             {
-                PageList.SelectPointerItem = Блокнот_Objest.GetDirectoryPointer();
+                PageList.SelectPointerItem = КраїниСвіту_Objest.GetDirectoryPointer();
                 PageList.LoadRecords();
             }
         }

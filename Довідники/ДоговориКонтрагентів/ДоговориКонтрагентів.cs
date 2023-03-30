@@ -280,9 +280,7 @@ namespace StorageAndTrade
                         ДоговориКонтрагентів_Objest ДоговориКонтрагентів_Objest = new ДоговориКонтрагентів_Objest();
                         if (ДоговориКонтрагентів_Objest.Read(new UnigueID(uid)))
                         {
-                            ДоговориКонтрагентів_Objest ДоговориКонтрагентів_Objest_Новий = ДоговориКонтрагентів_Objest.Copy();
-                            ДоговориКонтрагентів_Objest_Новий.Назва += " - Копія";
-                            ДоговориКонтрагентів_Objest_Новий.Код = (++НумераціяДовідників.ДоговориКонтрагентів_Const).ToString("D6");
+                            ДоговориКонтрагентів_Objest ДоговориКонтрагентів_Objest_Новий = ДоговориКонтрагентів_Objest.Copy(true);
                             ДоговориКонтрагентів_Objest_Новий.Save();
 
                             SelectPointerItem = ДоговориКонтрагентів_Objest_Новий.GetDirectoryPointer();

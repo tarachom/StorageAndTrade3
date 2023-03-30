@@ -25,7 +25,6 @@ using Gtk;
 
 using AccountingSoftware;
 
-using StorageAndTrade_1_0.Константи;
 using StorageAndTrade_1_0.Довідники;
 
 using ТабличніСписки = StorageAndTrade_1_0.Довідники.ТабличніСписки;
@@ -259,8 +258,7 @@ namespace StorageAndTrade
                         БанківськіРахункиКонтрагентів_Objest БанківськіРахункиКонтрагентів_Objest = new БанківськіРахункиКонтрагентів_Objest();
                         if (БанківськіРахункиКонтрагентів_Objest.Read(new UnigueID(uid)))
                         {
-                            БанківськіРахункиКонтрагентів_Objest БанківськіРахункиКонтрагентів_Objest_Новий = БанківськіРахункиКонтрагентів_Objest.Copy();
-                            БанківськіРахункиКонтрагентів_Objest_Новий.Назва += " - Копія";
+                            БанківськіРахункиКонтрагентів_Objest БанківськіРахункиКонтрагентів_Objest_Новий = БанківськіРахункиКонтрагентів_Objest.Copy(true);
                             БанківськіРахункиКонтрагентів_Objest_Новий.Save();
 
                             SelectPointerItem = БанківськіРахункиКонтрагентів_Objest_Новий.GetDirectoryPointer();

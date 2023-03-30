@@ -31,66 +31,25 @@ using ТабличніСписки = StorageAndTrade_1_0.Довідники.Та
 
 namespace StorageAndTrade
 {
-    class Валюти : VBox
+    class ВидиЦінПостачальників : VBox
     {
-        public Валюти_Pointer? SelectPointerItem { get; set; }
-        public Валюти_Pointer? DirectoryPointerItem { get; set; }
-        public System.Action<Валюти_Pointer>? CallBack_OnSelectPointer { get; set; }
+        public ВидиЦінПостачальників_Pointer? SelectPointerItem { get; set; }
+        public ВидиЦінПостачальників_Pointer? DirectoryPointerItem { get; set; }
+        public System.Action<ВидиЦінПостачальників_Pointer>? CallBack_OnSelectPointer { get; set; }
 
         TreeView TreeViewGrid;
-        SearchControl2 ПошукПовнотекстовий = new SearchControl2();
 
-        public Валюти() : base()
+        public ВидиЦінПостачальників() : base()
         {
             BorderWidth = 0;
-
-            HBox hBoxTop = new HBox();
-            PackStart(hBoxTop, false, false, 10);
-
-            //Пошук 2
-            hBoxTop.PackStart(ПошукПовнотекстовий, false, false, 2);
-            ПошукПовнотекстовий.Select = LoadRecords_OnSearch;
-            ПошукПовнотекстовий.Clear = LoadRecords;
-
-            //Курси валют
-            {
-                LinkButton linkButtonCurs = new LinkButton(" Курси валют") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
-                linkButtonCurs.Clicked += (object? sender, EventArgs args) =>
-                {
-                    if (SelectPointerItem != null || DirectoryPointerItem != null)
-                    {
-                        КурсиВалют page = new КурсиВалют();
-                        page.ВалютаВласник.Pointer = SelectPointerItem != null ? SelectPointerItem : DirectoryPointerItem!;
-
-                        Program.GeneralForm?.CreateNotebookPage("Курси валют", () => { return page; }, true);
-                        page.LoadRecords();
-                    }
-                };
-
-                hBoxTop.PackStart(linkButtonCurs, false, false, 10);
-            }
-
-            //Завантаження курсів валют НБУ
-            {
-                LinkButton linkButtonDownloadCurs = new LinkButton(" Завантаження курсів валют НБУ") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
-                linkButtonDownloadCurs.Clicked += (object? sender, EventArgs args) =>
-                {
-                    Program.GeneralForm?.CreateNotebookPage("Завантаження курсів валют НБУ", () =>
-                    {
-                        return new Обробка_ЗавантаженняКурсівВалют();
-                    }, true);
-                };
-
-                hBoxTop.PackStart(linkButtonDownloadCurs, false, false, 10);
-            }
 
             CreateToolbar();
 
             ScrolledWindow scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In };
             scrollTree.SetPolicy(PolicyType.Never, PolicyType.Automatic);
 
-            TreeViewGrid = new TreeView(ТабличніСписки.Валюти_Записи.Store);
-            ТабличніСписки.Валюти_Записи.AddColumns(TreeViewGrid);
+            TreeViewGrid = new TreeView(ТабличніСписки.ВидиЦінПостачальників_Записи.Store);
+            ТабличніСписки.ВидиЦінПостачальників_Записи.AddColumns(TreeViewGrid);
 
             TreeViewGrid.Selection.Mode = SelectionMode.Multiple;
             TreeViewGrid.ActivateOnSingleClick = true;
@@ -132,42 +91,13 @@ namespace StorageAndTrade
 
         public void LoadRecords()
         {
-            ТабличніСписки.Валюти_Записи.SelectPointerItem = SelectPointerItem;
-            ТабличніСписки.Валюти_Записи.DirectoryPointerItem = DirectoryPointerItem;
+            ТабличніСписки.ВидиЦінПостачальників_Записи.SelectPointerItem = SelectPointerItem;
+            ТабличніСписки.ВидиЦінПостачальників_Записи.DirectoryPointerItem = DirectoryPointerItem;
 
-            ТабличніСписки.Валюти_Записи.Where.Clear();
+            ТабличніСписки.ВидиЦінПостачальників_Записи.LoadRecords();
 
-            ТабличніСписки.Валюти_Записи.LoadRecords();
-
-            if (ТабличніСписки.Валюти_Записи.SelectPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.Валюти_Записи.SelectPath, TreeViewGrid.Columns[0], false);
-
-            TreeViewGrid.GrabFocus();
-        }
-
-        void LoadRecords_OnSearch(string searchText)
-        {
-            searchText = searchText.ToLower().Trim();
-
-            if (searchText.Length < 1)
-                return;
-
-            searchText = "%" + searchText.Replace(" ", "%") + "%";
-
-            ТабличніСписки.Валюти_Записи.Where.Clear();
-
-            //Код
-            ТабличніСписки.Валюти_Записи.Where.Add(
-                new Where(Валюти_Const.Код, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
-
-            //Назва
-            ТабличніСписки.Валюти_Записи.Where.Add(
-                new Where(Comparison.OR, Валюти_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
-
-            ТабличніСписки.Валюти_Записи.LoadRecords();
-
-            if (ТабличніСписки.Валюти_Записи.FirstPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.Валюти_Записи.FirstPath, TreeViewGrid.Columns[0], false);
+            if (ТабличніСписки.ВидиЦінПостачальників_Записи.SelectPath != null)
+                TreeViewGrid.SetCursor(ТабличніСписки.ВидиЦінПостачальників_Записи.SelectPath, TreeViewGrid.Columns[0], false);
 
             TreeViewGrid.GrabFocus();
         }
@@ -176,9 +106,9 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"Валюта: *", () =>
+                Program.GeneralForm?.CreateNotebookPage($"Види цін постачальників: *", () =>
                 {
-                    Валюти_Елемент page = new Валюти_Елемент
+                    ВидиЦінПостачальників_Елемент page = new ВидиЦінПостачальників_Елемент
                     {
                         PageList = this,
                         IsNew = true
@@ -191,16 +121,16 @@ namespace StorageAndTrade
             }
             else
             {
-                Валюти_Objest Валюти_Objest = new Валюти_Objest();
-                if (Валюти_Objest.Read(new UnigueID(uid)))
+                ВидиЦінПостачальників_Objest ВидиЦінПостачальників_Objest = new ВидиЦінПостачальників_Objest();
+                if (ВидиЦінПостачальників_Objest.Read(new UnigueID(uid)))
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"Валюта: {Валюти_Objest.Назва}", () =>
+                    Program.GeneralForm?.CreateNotebookPage($"Види цін постачальників: {ВидиЦінПостачальників_Objest.Назва}", () =>
                     {
-                        Валюти_Елемент page = new Валюти_Елемент
+                        ВидиЦінПостачальників_Елемент page = new ВидиЦінПостачальників_Елемент
                         {
                             PageList = this,
                             IsNew = false,
-                            Валюти_Objest = Валюти_Objest,
+                            ВидиЦінПостачальників_Objest = ВидиЦінПостачальників_Objest,
                         };
 
                         page.SetValue();
@@ -224,7 +154,7 @@ namespace StorageAndTrade
 
                 UnigueID unigueID = new UnigueID((string)TreeViewGrid.Model.GetValue(iter, 1));
 
-                SelectPointerItem = new StorageAndTrade_1_0.Довідники.Валюти_Pointer(unigueID);
+                SelectPointerItem = new StorageAndTrade_1_0.Довідники.ВидиЦінПостачальників_Pointer(unigueID);
             }
         }
 
@@ -243,7 +173,7 @@ namespace StorageAndTrade
                     else
                     {
                         if (CallBack_OnSelectPointer != null)
-                            CallBack_OnSelectPointer.Invoke(new Валюти_Pointer(new UnigueID(uid)));
+                            CallBack_OnSelectPointer.Invoke(new ВидиЦінПостачальників_Pointer(new UnigueID(uid)));
 
                         Program.GeneralForm?.CloseCurrentPageNotebook();
                     }
@@ -298,9 +228,9 @@ namespace StorageAndTrade
 
                         string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
 
-                        Валюти_Objest Валюти_Objest = new Валюти_Objest();
-                        if (Валюти_Objest.Read(new UnigueID(uid)))
-                            Валюти_Objest.Delete();
+                        ВидиЦінПостачальників_Objest ВидиЦінПостачальників_Objest = new ВидиЦінПостачальників_Objest();
+                        if (ВидиЦінПостачальників_Objest.Read(new UnigueID(uid)))
+                            ВидиЦінПостачальників_Objest.Delete();
                         else
                             Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                     }
@@ -325,13 +255,13 @@ namespace StorageAndTrade
 
                         string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
 
-                        Валюти_Objest Валюти_Objest = new Валюти_Objest();
-                        if (Валюти_Objest.Read(new UnigueID(uid)))
+                        ВидиЦінПостачальників_Objest ВидиЦінПостачальників_Objest = new ВидиЦінПостачальників_Objest();
+                        if (ВидиЦінПостачальників_Objest.Read(new UnigueID(uid)))
                         {
-                            Валюти_Objest Валюти_Objest_Новий = Валюти_Objest.Copy(true);
-                            Валюти_Objest_Новий.Save();
+                            ВидиЦінПостачальників_Objest ВидиЦінПостачальників_Objest_Новий = ВидиЦінПостачальників_Objest.Copy(true);
+                            ВидиЦінПостачальників_Objest_Новий.Save();
 
-                            SelectPointerItem = Валюти_Objest_Новий.GetDirectoryPointer();
+                            SelectPointerItem = ВидиЦінПостачальників_Objest_Новий.GetDirectoryPointer();
                         }
                         else
                             Message.Error(Program.GeneralForm, "Не вдалось прочитати!");

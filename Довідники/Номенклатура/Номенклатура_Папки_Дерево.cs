@@ -25,7 +25,6 @@ using Gtk;
 
 using AccountingSoftware;
 
-using StorageAndTrade_1_0.Константи;
 using StorageAndTrade_1_0.Довідники;
 
 namespace StorageAndTrade
@@ -274,8 +273,7 @@ namespace StorageAndTrade
                     Номенклатура_Папки_Objest Номенклатура_Папки_Objest = new Номенклатура_Папки_Objest();
                     if (Номенклатура_Папки_Objest.Read(unigueID))
                     {
-                        Номенклатура_Папки_Objest Номенклатура_Папки_Objest_Новий = Номенклатура_Папки_Objest.Copy();
-                        Номенклатура_Папки_Objest_Новий.Назва += " - Копія";
+                        Номенклатура_Папки_Objest Номенклатура_Папки_Objest_Новий = Номенклатура_Папки_Objest.Copy(true);
                         Номенклатура_Папки_Objest_Новий.Save();
 
                         Parent_Pointer = Номенклатура_Папки_Objest_Новий.GetDirectoryPointer();

@@ -23,7 +23,6 @@ limitations under the License.
 
 using Gtk;
 
-using StorageAndTrade_1_0.Константи;
 using StorageAndTrade_1_0.Довідники;
 
 namespace StorageAndTrade
@@ -122,7 +121,7 @@ namespace StorageAndTrade
             if (closePage)
                 Program.GeneralForm?.CloseCurrentPageNotebook();
             else
-                Program.GeneralForm?.RenameCurrentPageNotebook($"Валюта: {Виробники_Objest.Назва}");
+                Program.GeneralForm?.RenameCurrentPageNotebook($"Виробники: {Виробники_Objest.Назва}");
 
             if (CallBack_OnSelectPointer != null)
                 CallBack_OnSelectPointer.Invoke(Виробники_Objest.GetDirectoryPointer());

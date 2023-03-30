@@ -25,7 +25,6 @@ using Gtk;
 
 using AccountingSoftware;
 
-using StorageAndTrade_1_0.Константи;
 using StorageAndTrade_1_0.Довідники;
 
 using ТабличніСписки = StorageAndTrade_1_0.Довідники.ТабличніСписки;
@@ -142,7 +141,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"Виробник: *", () =>
+                Program.GeneralForm?.CreateNotebookPage($"Виробники: *", () =>
                 {
                     Виробники_Елемент page = new Виробники_Елемент
                     {
@@ -160,7 +159,7 @@ namespace StorageAndTrade
                 Виробники_Objest Виробники_Objest = new Виробники_Objest();
                 if (Виробники_Objest.Read(new UnigueID(uid)))
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"Виробник: {Виробники_Objest.Назва}", () =>
+                    Program.GeneralForm?.CreateNotebookPage($"Виробники: {Виробники_Objest.Назва}", () =>
                     {
                         Виробники_Елемент page = new Виробники_Елемент
                         {
@@ -294,8 +293,7 @@ namespace StorageAndTrade
                         Виробники_Objest Виробники_Objest = new Виробники_Objest();
                         if (Виробники_Objest.Read(new UnigueID(uid)))
                         {
-                            Виробники_Objest Виробники_Objest_Новий = Виробники_Objest.Copy();
-                            Виробники_Objest_Новий.Назва += " - Копія";
+                            Виробники_Objest Виробники_Objest_Новий = Виробники_Objest.Copy(true);
                             Виробники_Objest_Новий.Save();
 
                             SelectPointerItem = Виробники_Objest_Новий.GetDirectoryPointer();

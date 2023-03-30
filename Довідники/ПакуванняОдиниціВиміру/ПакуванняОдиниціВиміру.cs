@@ -25,7 +25,6 @@ using Gtk;
 
 using AccountingSoftware;
 
-using StorageAndTrade_1_0.Константи;
 using StorageAndTrade_1_0.Довідники;
 
 using ТабличніСписки = StorageAndTrade_1_0.Довідники.ТабличніСписки;
@@ -294,8 +293,7 @@ namespace StorageAndTrade
                         ПакуванняОдиниціВиміру_Objest ПакуванняОдиниціВиміру_Objest = new ПакуванняОдиниціВиміру_Objest();
                         if (ПакуванняОдиниціВиміру_Objest.Read(new UnigueID(uid)))
                         {
-                            ПакуванняОдиниціВиміру_Objest ПакуванняОдиниціВиміру_Objest_Новий = ПакуванняОдиниціВиміру_Objest.Copy();
-                            ПакуванняОдиниціВиміру_Objest_Новий.Назва += " - Копія";
+                            ПакуванняОдиниціВиміру_Objest ПакуванняОдиниціВиміру_Objest_Новий = ПакуванняОдиниціВиміру_Objest.Copy(true);
                             ПакуванняОдиниціВиміру_Objest_Новий.Save();
 
                             SelectPointerItem = ПакуванняОдиниціВиміру_Objest_Новий.GetDirectoryPointer();

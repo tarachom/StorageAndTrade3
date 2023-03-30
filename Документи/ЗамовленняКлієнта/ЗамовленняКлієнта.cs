@@ -489,13 +489,8 @@ namespace StorageAndTrade
                         ЗамовленняКлієнта_Objest ЗамовленняКлієнта_Objest = new ЗамовленняКлієнта_Objest();
                         if (ЗамовленняКлієнта_Objest.Read(new UnigueID(uid)))
                         {
-                            ЗамовленняКлієнта_Objest ЗамовленняКлієнта_Objest_Новий = ЗамовленняКлієнта_Objest.Copy();
-                            ЗамовленняКлієнта_Objest_Новий.Коментар = "Копія: " + ЗамовленняКлієнта_Objest.Назва;
+                            ЗамовленняКлієнта_Objest ЗамовленняКлієнта_Objest_Новий = ЗамовленняКлієнта_Objest.Copy(true);
                             ЗамовленняКлієнта_Objest_Новий.Save();
-
-                            //Зчитати та скопіювати табличну частину Товари
-                            ЗамовленняКлієнта_Objest.Товари_TablePart.Read();
-                            ЗамовленняКлієнта_Objest_Новий.Товари_TablePart.Records = ЗамовленняКлієнта_Objest.Товари_TablePart.Copy();
                             ЗамовленняКлієнта_Objest_Новий.Товари_TablePart.Save(true);
 
                             SelectPointerItem = ЗамовленняКлієнта_Objest_Новий.GetDocumentPointer();

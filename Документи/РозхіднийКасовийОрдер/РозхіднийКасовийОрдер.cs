@@ -445,8 +445,7 @@ namespace StorageAndTrade
                         РозхіднийКасовийОрдер_Objest РозхіднийКасовийОрдер_Objest = new РозхіднийКасовийОрдер_Objest();
                         if (РозхіднийКасовийОрдер_Objest.Read(new UnigueID(uid)))
                         {
-                            РозхіднийКасовийОрдер_Objest РозхіднийКасовийОрдер_Objest_Новий = РозхіднийКасовийОрдер_Objest.Copy();
-                            РозхіднийКасовийОрдер_Objest_Новий.Коментар = "Копія: " + РозхіднийКасовийОрдер_Objest.Назва;
+                            РозхіднийКасовийОрдер_Objest РозхіднийКасовийОрдер_Objest_Новий = РозхіднийКасовийОрдер_Objest.Copy(true);
                             РозхіднийКасовийОрдер_Objest_Новий.Save();
 
                             SelectPointerItem = РозхіднийКасовийОрдер_Objest_Новий.GetDocumentPointer();
