@@ -69,6 +69,7 @@ namespace StorageAndTrade
             AddLink(vRight, "Переміщення товарів між складами", ПереміщенняТоварів);
             AddLink(vRight, "Введення залишків", ВведенняЗалишків);
             AddLink(vRight, "Внутрішнє споживання товарів", ВнутрішнєСпоживанняТоварів);
+            AddLink(vRight, "Псування товарів", ПсуванняТоварів);
 
             AddCaption(vRight, "Адресне зберігання", PageJournals.АдреснеЗберігання);
             AddLink(vRight, "Розміщення товарів на складі", РозміщенняТоварівНаСкладі);
@@ -173,6 +174,13 @@ namespace StorageAndTrade
         {
             ВнутрішнєСпоживанняТоварів page = new ВнутрішнєСпоживанняТоварів();
             Program.GeneralForm?.CreateNotebookPage("Внутрішнє споживання товарів", () => { return page; });
+            page.SetValue();
+        }
+
+        void ПсуванняТоварів(object? sender, EventArgs args)
+        {
+            ПсуванняТоварів page = new ПсуванняТоварів();
+            Program.GeneralForm?.CreateNotebookPage("Псування товарів", () => { return page; });
             page.SetValue();
         }
 

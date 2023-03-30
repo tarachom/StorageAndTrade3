@@ -23,41 +23,36 @@ limitations under the License.
 
 using Gtk;
 
-using AccountingSoftware;
-
-using StorageAndTrade_1_0;
 using StorageAndTrade_1_0.Константи;
 using StorageAndTrade_1_0.Документи;
-using Перелічення = StorageAndTrade_1_0.Перелічення;
 
 namespace StorageAndTrade
 {
-    class ВнутрішнєСпоживанняТоварів_Елемент : VBox
+    class ПсуванняТоварів_Елемент : VBox
     {
-        public ВнутрішнєСпоживанняТоварів? PageList { get; set; }
+        public ПсуванняТоварів? PageList { get; set; }
 
         public bool IsNew { get; set; } = true;
 
-        public ВнутрішнєСпоживанняТоварів_Objest ВнутрішнєСпоживанняТоварів_Objest { get; set; } = new ВнутрішнєСпоживанняТоварів_Objest();
+        public ПсуванняТоварів_Objest ПсуванняТоварів_Objest { get; set; } = new ПсуванняТоварів_Objest();
 
         #region Fields
 
         Entry НомерДок = new Entry() { WidthRequest = 100 };
         DateTimeControl ДатаДок = new DateTimeControl();
         Організації_PointerControl Організація = new Організації_PointerControl();
-        Валюти_PointerControl Валюта = new Валюти_PointerControl();
         Склади_PointerControl Склад = new Склади_PointerControl();
-        ComboBoxText ГосподарськаОперація = new ComboBoxText();
         СтруктураПідприємства_PointerControl Підрозділ = new СтруктураПідприємства_PointerControl() { Caption = "Підрозділ" };
         Користувачі_PointerControl Автор = new Користувачі_PointerControl();
+        Entry Причина = new Entry() { WidthRequest = 920 };
         Entry Коментар = new Entry() { WidthRequest = 920 };
         Basis_PointerControl Основа = new Basis_PointerControl();
 
-        ВнутрішнєСпоживанняТоварів_ТабличнаЧастина_Товари Товари = new ВнутрішнєСпоживанняТоварів_ТабличнаЧастина_Товари();
+        ПсуванняТоварів_ТабличнаЧастина_Товари Товари = new ПсуванняТоварів_ТабличнаЧастина_Товари();
 
         #endregion
 
-        public ВнутрішнєСпоживанняТоварів_Елемент() : base()
+        public ПсуванняТоварів_Елемент() : base()
         {
             HBox hBox = new HBox();
 
@@ -78,7 +73,7 @@ namespace StorageAndTrade
                 Program.GeneralForm?.CreateNotebookPage($"Проводки", () =>
                 {
                     Звіт_РухДокументівПоРегістрах page = new Звіт_РухДокументівПоРегістрах();
-                    page.CreateReport(ВнутрішнєСпоживанняТоварів_Objest.GetDocumentPointer());
+                    page.CreateReport(ПсуванняТоварів_Objest.GetDocumentPointer());
                     return page;
                 });
             };
@@ -89,29 +84,12 @@ namespace StorageAndTrade
 
             HPaned hPaned = new HPaned() { Orientation = Orientation.Vertical, BorderWidth = 5 };
 
-            FillComboBoxes();
-
             CreatePack1(hPaned);
             CreatePack2(hPaned);
 
-            PackStart(hPaned, true, true, 0);
+            PackStart(hPaned, true, true, 5);
 
             ShowAll();
-        }
-
-        void FillComboBoxes()
-        {
-            if (Config.Kernel != null)
-            {
-                //1
-                ConfigurationEnums Конфігурація_ГосподарськіОперації = Config.Kernel.Conf.Enums["ГосподарськіОперації"];
-
-                ГосподарськаОперація.Append(
-                    Перелічення.ГосподарськіОперації.ВнутрішнєСпоживанняТоварів.ToString(),
-                    Конфігурація_ГосподарськіОперації.Fields["ВнутрішнєСпоживанняТоварів"].Desc);
-
-                ГосподарськаОперація.Active = 0;
-            }
         }
 
         void CreatePack1(HPaned hPaned)
@@ -123,7 +101,7 @@ namespace StorageAndTrade
             HBox hBoxNumberDataDoc = new HBox() { Halign = Align.Start };
             vBox.PackStart(hBoxNumberDataDoc, false, false, 5);
 
-            hBoxNumberDataDoc.PackStart(new Label("Внутрішнє споживання товарів №:"), false, false, 5);
+            hBoxNumberDataDoc.PackStart(new Label("Псування товарів №:"), false, false, 5);
             hBoxNumberDataDoc.PackStart(НомерДок, false, false, 5);
             hBoxNumberDataDoc.PackStart(new Label("від:"), false, false, 5);
             hBoxNumberDataDoc.PackStart(ДатаДок, false, false, 5);
@@ -149,6 +127,13 @@ namespace StorageAndTrade
             CreateContainer2(vBoxContainer2);
             // <--
 
+            //Причина
+            HBox hBoxPrichina = new HBox() { Halign = Align.Start };
+            vBox.PackStart(hBoxPrichina, false, false, 5);
+
+            hBoxPrichina.PackStart(new Label("Причина: "), false, false, 5);
+            hBoxPrichina.PackStart(Причина, false, false, 5);
+
             //Коментар
             HBox hBoxComment = new HBox() { Halign = Align.Start };
             vBox.PackStart(hBoxComment, false, false, 5);
@@ -164,7 +149,10 @@ namespace StorageAndTrade
             vBox.PackStart(hBoxOrganization, false, false, 5);
 
             hBoxOrganization.PackStart(Організація, false, false, 5);
+        }
 
+        void CreateContainer2(VBox vBox)
+        {
             //Склад
             HBox hBoxSklad = new HBox() { Halign = Align.End };
             vBox.PackStart(hBoxSklad, false, false, 5);
@@ -172,24 +160,8 @@ namespace StorageAndTrade
             hBoxSklad.PackStart(Склад, false, false, 5);
         }
 
-        void CreateContainer2(VBox vBox)
-        {
-            //Валюта
-            HBox hBoxValuta = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxValuta, false, false, 5);
-
-            hBoxValuta.PackStart(Валюта, false, false, 5);
-        }
-
         void CreateContainer3(VBox vBox)
         {
-            //ГосподарськаОперація
-            HBox hBoxOperation = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxOperation, false, false, 5);
-
-            hBoxOperation.PackStart(new Label("Господарська операція: "), false, false, 0);
-            hBoxOperation.PackStart(ГосподарськаОперація, false, false, 5);
-
             //Підрозділ
             HBox hBoxPidrozdil = new HBox() { Halign = Align.End };
             vBox.PackStart(hBoxPidrozdil, false, false, 5);
@@ -201,15 +173,17 @@ namespace StorageAndTrade
             vBox.PackStart(hBoxAutor, false, false, 5);
 
             hBoxAutor.PackStart(Автор, false, false, 5);
-        }
 
-        void CreateContainer4(VBox vBox)
-        {
             //Основа
             HBox hBoxBasis = new HBox() { Halign = Align.End };
             vBox.PackStart(hBoxBasis, false, false, 5);
 
             hBoxBasis.PackStart(Основа, false, false, 5);
+        }
+
+        void CreateContainer4(VBox vBox)
+        {
+
         }
 
         void CreatePack2(HPaned hPaned)
@@ -243,58 +217,55 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                ВнутрішнєСпоживанняТоварів_Objest.New();
-                ВнутрішнєСпоживанняТоварів_Objest.Організація = ЗначенняЗаЗамовчуванням.ОсновнаОрганізація_Const;
-                ВнутрішнєСпоживанняТоварів_Objest.Валюта = ЗначенняЗаЗамовчуванням.ОсновнаВалюта_Const;
-                ВнутрішнєСпоживанняТоварів_Objest.Склад = ЗначенняЗаЗамовчуванням.ОсновнийСклад_Const;
-                ВнутрішнєСпоживанняТоварів_Objest.Підрозділ = ЗначенняЗаЗамовчуванням.ОсновнийПідрозділ_Const;
+                ПсуванняТоварів_Objest.New();
+                ПсуванняТоварів_Objest.Організація = ЗначенняЗаЗамовчуванням.ОсновнаОрганізація_Const;
+                ПсуванняТоварів_Objest.Склад = ЗначенняЗаЗамовчуванням.ОсновнийСклад_Const;
+                ПсуванняТоварів_Objest.Підрозділ = ЗначенняЗаЗамовчуванням.ОсновнийПідрозділ_Const;
             }
 
-            НомерДок.Text = ВнутрішнєСпоживанняТоварів_Objest.НомерДок;
-            ДатаДок.Value = ВнутрішнєСпоживанняТоварів_Objest.ДатаДок;
-            Організація.Pointer = ВнутрішнєСпоживанняТоварів_Objest.Організація;
-            Валюта.Pointer = ВнутрішнєСпоживанняТоварів_Objest.Валюта;
-            Склад.Pointer = ВнутрішнєСпоживанняТоварів_Objest.Склад;
-            ГосподарськаОперація.ActiveId = ((Перелічення.ГосподарськіОперації)ВнутрішнєСпоживанняТоварів_Objest.ГосподарськаОперація).ToString();
-            Коментар.Text = ВнутрішнєСпоживанняТоварів_Objest.Коментар;
-            Підрозділ.Pointer = ВнутрішнєСпоживанняТоварів_Objest.Підрозділ;
-            Автор.Pointer = ВнутрішнєСпоживанняТоварів_Objest.Автор;
-            Основа.Pointer = ВнутрішнєСпоживанняТоварів_Objest.Основа;
+            НомерДок.Text = ПсуванняТоварів_Objest.НомерДок;
+            ДатаДок.Value = ПсуванняТоварів_Objest.ДатаДок;
+            Організація.Pointer = ПсуванняТоварів_Objest.Організація;
+            Склад.Pointer = ПсуванняТоварів_Objest.Склад;
+            Причина.Text = ПсуванняТоварів_Objest.Причина;
+            Коментар.Text = ПсуванняТоварів_Objest.Коментар;
+            Підрозділ.Pointer = ПсуванняТоварів_Objest.Підрозділ;
+            Автор.Pointer = ПсуванняТоварів_Objest.Автор;
+            Основа.Pointer = ПсуванняТоварів_Objest.Основа;
 
             //Таблична частина
-            Товари.ВнутрішнєСпоживанняТоварів_Objest = ВнутрішнєСпоживанняТоварів_Objest;
+            Товари.ПсуванняТоварів_Objest = ПсуванняТоварів_Objest;
             Товари.LoadRecords();
         }
 
         void GetValue()
         {
-            ВнутрішнєСпоживанняТоварів_Objest.НомерДок = НомерДок.Text;
-            ВнутрішнєСпоживанняТоварів_Objest.ДатаДок = ДатаДок.Value;
-            ВнутрішнєСпоживанняТоварів_Objest.Організація = Організація.Pointer;
-            ВнутрішнєСпоживанняТоварів_Objest.Валюта = Валюта.Pointer;
-            ВнутрішнєСпоживанняТоварів_Objest.Склад = Склад.Pointer;
-            ВнутрішнєСпоживанняТоварів_Objest.ГосподарськаОперація = Enum.Parse<Перелічення.ГосподарськіОперації>(ГосподарськаОперація.ActiveId);
-            ВнутрішнєСпоживанняТоварів_Objest.Коментар = Коментар.Text;
-            ВнутрішнєСпоживанняТоварів_Objest.Підрозділ = Підрозділ.Pointer;
-            ВнутрішнєСпоживанняТоварів_Objest.Автор = Автор.Pointer;
-            ВнутрішнєСпоживанняТоварів_Objest.Основа = Основа.Pointer;
+            ПсуванняТоварів_Objest.НомерДок = НомерДок.Text;
+            ПсуванняТоварів_Objest.ДатаДок = ДатаДок.Value;
+            ПсуванняТоварів_Objest.Організація = Організація.Pointer;
+            ПсуванняТоварів_Objest.Склад = Склад.Pointer;
+            ПсуванняТоварів_Objest.Причина = Причина.Text;
+            ПсуванняТоварів_Objest.Коментар = Коментар.Text;
+            ПсуванняТоварів_Objest.Підрозділ = Підрозділ.Pointer;
+            ПсуванняТоварів_Objest.Автор = Автор.Pointer;
+            ПсуванняТоварів_Objest.Основа = Основа.Pointer;
 
-            ВнутрішнєСпоживанняТоварів_Objest.СумаДокументу = Товари.СумаДокументу();
-            ВнутрішнєСпоживанняТоварів_Objest.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку() + Товари.КлючовіСловаДляПошуку();
+            ПсуванняТоварів_Objest.СумаДокументу = Товари.СумаДокументу();
+            ПсуванняТоварів_Objest.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку() + Товари.КлючовіСловаДляПошуку();
         }
 
         #endregion
 
         string КлючовіСловаДляПошуку()
         {
-            return $"\n{Організація.Pointer.Назва} {Валюта.Pointer.Назва} {Склад.Pointer.Назва} ";
+            return $"\n{Організація.Pointer.Назва} {Склад.Pointer.Назва} ";
         }
 
         bool IsValidValue()
         {
             if (!ДатаДок.IsValidValue())
             {
-                Message.Error(Program.GeneralForm, "Перевірте правельність заповнення полів");
+                Message.Error(Program.GeneralForm, "Перевірте правельність заповнення полів типу Дата та Число");
                 return false;
             }
             else return true;
@@ -304,10 +275,10 @@ namespace StorageAndTrade
         {
             GetValue();
 
-            ВнутрішнєСпоживанняТоварів_Objest.Save();
+            ПсуванняТоварів_Objest.Save();
             Товари.SaveRecords();
 
-            Program.GeneralForm?.RenameCurrentPageNotebook($"{ВнутрішнєСпоживанняТоварів_Objest.Назва}");
+            Program.GeneralForm?.RenameCurrentPageNotebook($"{ПсуванняТоварів_Objest.Назва}");
         }
 
         void SpendTheDocument(bool spendDoc)
@@ -316,21 +287,21 @@ namespace StorageAndTrade
             {
                 try
                 {
-                    if (!ВнутрішнєСпоживанняТоварів_Objest.SpendTheDocument(ВнутрішнєСпоживанняТоварів_Objest.ДатаДок))
+                    if (!ПсуванняТоварів_Objest.SpendTheDocument(ПсуванняТоварів_Objest.ДатаДок))
                     {
-                        ВнутрішнєСпоживанняТоварів_Objest.ClearSpendTheDocument();
+                        ПсуванняТоварів_Objest.ClearSpendTheDocument();
                         ФункціїДляПовідомлень.ВідкритиТермінал();
                     }
                 }
                 catch (Exception exp)
                 {
-                    ВнутрішнєСпоживанняТоварів_Objest.ClearSpendTheDocument();
+                    ПсуванняТоварів_Objest.ClearSpendTheDocument();
                     Message.Error(Program.GeneralForm, exp.Message);
                     return;
                 }
             }
             else
-                ВнутрішнєСпоживанняТоварів_Objest.ClearSpendTheDocument();
+                ПсуванняТоварів_Objest.ClearSpendTheDocument();
         }
 
         void ReloadList()
@@ -339,7 +310,7 @@ namespace StorageAndTrade
 
             if (PageList != null)
             {
-                PageList.SelectPointerItem = ВнутрішнєСпоживанняТоварів_Objest.GetDocumentPointer();
+                PageList.SelectPointerItem = ПсуванняТоварів_Objest.GetDocumentPointer();
                 PageList.LoadRecords();
             }
         }
@@ -354,7 +325,7 @@ namespace StorageAndTrade
 
             ReloadList();
 
-            if (ВнутрішнєСпоживанняТоварів_Objest.Spend)
+            if (ПсуванняТоварів_Objest.Spend)
                 Program.GeneralForm?.CloseCurrentPageNotebook();
         }
 

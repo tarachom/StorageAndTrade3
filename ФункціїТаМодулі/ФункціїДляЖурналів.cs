@@ -241,6 +241,21 @@ namespace StorageAndTrade
 
                         break;
                     }
+                case "ПсуванняТоварів":
+                    {
+                        ПсуванняТоварів page = new ПсуванняТоварів() { SelectPointerItem = new ПсуванняТоварів_Pointer(unigueID) };
+                        Program.GeneralForm?.CreateNotebookPage("Псування товарів", () => { return page; }, true);
+
+                        if (periodWhere != 0)
+                        {
+                            page.PeriodWhere = periodWhere;
+                            page.SetValue();
+                        }
+                        else
+                            page.LoadRecords();
+
+                        break;
+                    }
                 case "ВведенняЗалишків":
                     {
                         ВведенняЗалишків page = new ВведенняЗалишків() { SelectPointerItem = new ВведенняЗалишків_Pointer(unigueID) };

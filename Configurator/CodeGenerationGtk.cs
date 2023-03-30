@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 30.03.2023 17:08:43
+ * Дата конфігурації: 30.03.2023 18:16:08
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон Gtk.xslt
@@ -9999,6 +9999,12 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               
             {
                 List<Where> where = new List<Where>();
+                Where.Add("ПсуванняТоварів", where);
+                Інтерфейс.ДодатиВідбірПоПеріоду(where, ПсуванняТоварів_Const.ДатаДок, типПеріоду);
+            }
+              
+            {
+                List<Where> where = new List<Where>();
                 Where.Add("ВнутрішнєСпоживанняТоварів", where);
                 Інтерфейс.ДодатиВідбірПоПеріоду(where, ВнутрішнєСпоживанняТоварів_Const.ДатаДок, типПеріоду);
             }
@@ -10052,6 +10058,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                 , "ПоверненняТоварівВідКлієнта" /* */
                 , "АктВиконанихРобіт" /* */
                 , "ВведенняЗалишків" /* */
+                , "ПсуванняТоварів" /* */
                 , "ВнутрішнєСпоживанняТоварів" /* */
                 , "РахунокФактура" /* */
                 , "РозміщенняТоварівНаСкладі" /* */
@@ -10979,6 +10986,71 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                               
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.ВведенняЗалишків_Const.TABLE + "." + Документи.ВведенняЗалишків_Const.Коментар, "Коментар"));
+                            
+
+                  allQuery.Add(query.Construct());
+              }
+              
+              {
+                  Query query = new Query(Документи.ПсуванняТоварів_Const.TABLE);
+
+                  // Встановлення відбору для даного типу документу
+                  if (Where.ContainsKey("ПсуванняТоварів") && Where["ПсуванняТоварів"].Count != 0) {
+                      query.Where = Where["ПсуванняТоварів"];
+                      foreach(Where field in query.Where)
+                          paramQuery.Add(field.Alias, field.Value);
+                  }
+
+                  query.FieldAndAlias.Add(new NameValue<string>("'ПсуванняТоварів'", "type"));
+                  query.Field.Add("spend");
+                  
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПсуванняТоварів_Const.TABLE + "." + Документи.ПсуванняТоварів_Const.Назва, "Назва"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПсуванняТоварів_Const.TABLE + "." + Документи.ПсуванняТоварів_Const.ДатаДок, "Дата"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПсуванняТоварів_Const.TABLE + "." + Документи.ПсуванняТоварів_Const.НомерДок, "Номер"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Організації_Const.TABLE, Документи.ПсуванняТоварів_Const.Організація, query.Table, "join_tab_1"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_1." + Довідники.Організації_Const.Назва, "Організація"));
+                              
+                          /* Empty Field */
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Контрагент"));
+                        
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Склади_Const.TABLE, Документи.ПсуванняТоварів_Const.Склад, query.Table, "join_tab_2"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_2." + Довідники.Склади_Const.Назва, "Склад"));
+                              
+                          /* Empty Field */
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Каса"));
+                        
+                          /* Empty Field */
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Валюта"));
+                        
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПсуванняТоварів_Const.TABLE + "." + Документи.ПсуванняТоварів_Const.СумаДокументу + "::text", "Сума"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Користувачі_Const.TABLE, Документи.ПсуванняТоварів_Const.Автор, query.Table, "join_tab_3"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_3." + Довідники.Користувачі_Const.Назва, "Автор"));
+                              
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПсуванняТоварів_Const.TABLE + "." + Документи.ПсуванняТоварів_Const.Коментар, "Коментар"));
                             
 
                   allQuery.Add(query.Construct());
@@ -12861,6 +12933,12 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               
             {
                 List<Where> where = new List<Where>();
+                Where.Add("ПсуванняТоварів", where);
+                Інтерфейс.ДодатиВідбірПоПеріоду(where, ПсуванняТоварів_Const.ДатаДок, типПеріоду);
+            }
+              
+            {
+                List<Where> where = new List<Where>();
                 Where.Add("ВнутрішнєСпоживанняТоварів", where);
                 Інтерфейс.ДодатиВідбірПоПеріоду(where, ВнутрішнєСпоживанняТоварів_Const.ДатаДок, типПеріоду);
             }
@@ -12874,6 +12952,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             {
                 "ПереміщенняТоварів" /* */
                 , "ВведенняЗалишків" /* */
+                , "ПсуванняТоварів" /* */
                 , "ВнутрішнєСпоживанняТоварів" /* */
                 
             };
@@ -13059,6 +13138,62 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                               
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.ВнутрішнєСпоживанняТоварів_Const.TABLE + "." + Документи.ВнутрішнєСпоживанняТоварів_Const.Коментар, "Коментар"));
+                            
+
+                  allQuery.Add(query.Construct());
+              }
+              
+              {
+                  Query query = new Query(Документи.ПсуванняТоварів_Const.TABLE);
+
+                  // Встановлення відбору для даного типу документу
+                  if (Where.ContainsKey("ПсуванняТоварів") && Where["ПсуванняТоварів"].Count != 0) {
+                      query.Where = Where["ПсуванняТоварів"];
+                      foreach(Where field in query.Where)
+                          paramQuery.Add(field.Alias, field.Value);
+                  }
+
+                  query.FieldAndAlias.Add(new NameValue<string>("'ПсуванняТоварів'", "type"));
+                  query.Field.Add("spend");
+                  
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПсуванняТоварів_Const.TABLE + "." + Документи.ПсуванняТоварів_Const.Назва, "Назва"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПсуванняТоварів_Const.TABLE + "." + Документи.ПсуванняТоварів_Const.ДатаДок, "Дата"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПсуванняТоварів_Const.TABLE + "." + Документи.ПсуванняТоварів_Const.НомерДок, "Номер"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Організації_Const.TABLE, Документи.ПсуванняТоварів_Const.Організація, query.Table, "join_tab_1"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_1." + Довідники.Організації_Const.Назва, "Організація"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Склади_Const.TABLE, Документи.ПсуванняТоварів_Const.Склад, query.Table, "join_tab_2"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_2." + Довідники.Склади_Const.Назва, "СкладВідправник"));
+                              
+                          /* Empty Field */
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "СкладОтримувач"));
+                        
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Користувачі_Const.TABLE, Документи.ПсуванняТоварів_Const.Автор, query.Table, "join_tab_3"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_3." + Довідники.Користувачі_Const.Назва, "Автор"));
+                              
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПсуванняТоварів_Const.TABLE + "." + Документи.ПсуванняТоварів_Const.Коментар, "Коментар"));
                             
 
                   allQuery.Add(query.Construct());

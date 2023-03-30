@@ -5,7 +5,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>30.03.2023 17:08:43</DateTimeSave>
+  <DateTimeSave>30.03.2023 18:16:08</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -13400,7 +13400,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           </Desc>
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
-          <IsFullTextSearch>0</IsFullTextSearch>
+          <IsFullTextSearch>1</IsFullTextSearch>
         </Field>
         <Field>
           <Name>НомерДок</Name>
@@ -13463,18 +13463,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           </Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
-          <IsFullTextSearch>0</IsFullTextSearch>
-        </Field>
-        <Field>
-          <Name>ВидЦіни</Name>
-          <NameInTable>col_b1</NameInTable>
-          <Type>pointer</Type>
-          <Pointer>Довідники.ВидиЦін</Pointer>
-          <Desc>
-          </Desc>
-          <IsPresentation>0</IsPresentation>
-          <IsIndex>0</IsIndex>
-          <IsFullTextSearch>0</IsFullTextSearch>
+          <IsFullTextSearch>1</IsFullTextSearch>
         </Field>
         <Field>
           <Name>СумаДокументу</Name>
@@ -13494,7 +13483,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           </Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
-          <IsFullTextSearch>0</IsFullTextSearch>
+          <IsFullTextSearch>1</IsFullTextSearch>
         </Field>
         <Field>
           <Name>Автор</Name>
@@ -13516,6 +13505,16 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+        </Field>
+        <Field>
+          <Name>Основа</Name>
+          <NameInTable>col_b2</NameInTable>
+          <Type>composite_pointer</Type>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+          <IsFullTextSearch>0</IsFullTextSearch>
         </Field>
       </Fields>
       <TabularParts>
@@ -13741,14 +13740,10 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
         <Name>ПартіїТоварів</Name>
       </AllowRegisterAccumulation>
       <TriggerFunctions>
-        <New>
-        </New>
-        <BeforeSave>
-        </BeforeSave>
-        <AfterSave>
-        </AfterSave>
-        <BeforeDelete>
-        </BeforeDelete>
+        <New>ПсуванняТоварів_Triggers.New</New>
+        <BeforeSave>ПсуванняТоварів_Triggers.BeforeSave</BeforeSave>
+        <AfterSave>ПсуванняТоварів_Triggers.AfterSave</AfterSave>
+        <BeforeDelete>ПсуванняТоварів_Triggers.BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <SpendFunctions>
         <Spend>ПсуванняТоварів_SpendTheDocument.Spend</Spend>
@@ -16681,6 +16676,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
         <Name>ПоверненняТоварівВідКлієнта</Name>
         <Name>АктВиконанихРобіт</Name>
         <Name>ВведенняЗалишків</Name>
+        <Name>ПсуванняТоварів</Name>
         <Name>ВнутрішнєСпоживанняТоварів</Name>
         <Name>РахунокФактура</Name>
         <Name>РозміщенняТоварівНаСкладі</Name>
@@ -18832,35 +18828,51 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Fields>
             <Field>
               <Name>Назва</Name>
-              <DocField>
-              </DocField>
+              <DocField>Назва</DocField>
               <SqlType>
               </SqlType>
               <WherePeriod>0</WherePeriod>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
             </Field>
             <Field>
               <Name>Дата</Name>
-              <DocField>
-              </DocField>
+              <DocField>ДатаДок</DocField>
               <SqlType>
               </SqlType>
               <WherePeriod>1</WherePeriod>
+              <Type>datetime</Type>
+              <Pointer>
+              </Pointer>
             </Field>
             <Field>
               <Name>Номер</Name>
-              <DocField>
-              </DocField>
+              <DocField>НомерДок</DocField>
               <SqlType>
               </SqlType>
               <WherePeriod>0</WherePeriod>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
-              <DocField>
-              </DocField>
+              <DocField>Організація</DocField>
               <SqlType>
               </SqlType>
               <WherePeriod>0</WherePeriod>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Організації</Pointer>
+              <Join>
+                <table>Довідники.Організації_Const.TABLE</table>
+                <field>Організація</field>
+                <alias>join_tab_1</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_1</table>
+                <field>Довідники.Організації_Const.Назва</field>
+              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Контрагент</Name>
@@ -18871,15 +18883,25 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <WherePeriod>0</WherePeriod>
             </Field>
             <Field>
-              <Name>Каса</Name>
-              <DocField>
-              </DocField>
+              <Name>Склад</Name>
+              <DocField>Склад</DocField>
               <SqlType>
               </SqlType>
               <WherePeriod>0</WherePeriod>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Склади</Pointer>
+              <Join>
+                <table>Довідники.Склади_Const.TABLE</table>
+                <field>Склад</field>
+                <alias>join_tab_2</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_2</table>
+                <field>Довідники.Склади_Const.Назва</field>
+              </FieldAndAlias>
             </Field>
             <Field>
-              <Name>Склад</Name>
+              <Name>Каса</Name>
               <DocField>
               </DocField>
               <SqlType>
@@ -18896,18 +18918,40 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
             </Field>
             <Field>
               <Name>Сума</Name>
-              <DocField>
-              </DocField>
+              <DocField>СумаДокументу</DocField>
               <SqlType>text</SqlType>
               <WherePeriod>0</WherePeriod>
+              <Type>numeric</Type>
+              <Pointer>
+              </Pointer>
             </Field>
             <Field>
               <Name>Автор</Name>
-              <DocField>
-              </DocField>
+              <DocField>Автор</DocField>
               <SqlType>
               </SqlType>
               <WherePeriod>0</WherePeriod>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Користувачі</Pointer>
+              <Join>
+                <table>Довідники.Користувачі_Const.TABLE</table>
+                <field>Автор</field>
+                <alias>join_tab_3</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_3</table>
+                <field>Довідники.Користувачі_Const.Назва</field>
+              </FieldAndAlias>
+            </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <DocField>Коментар</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -21825,6 +21869,7 @@ SQL тип  непотрібно вказувати
       <AllowDocument>
         <Name>ПереміщенняТоварів</Name>
         <Name>ВведенняЗалишків</Name>
+        <Name>ПсуванняТоварів</Name>
         <Name>ВнутрішнєСпоживанняТоварів</Name>
       </AllowDocument>
       <TabularLists>
@@ -22137,6 +22182,116 @@ SQL тип  непотрібно вказувати
                 <table>join_tab_2</table>
                 <field>Довідники.Склади_Const.Назва</field>
               </FieldAndAlias>
+            </Field>
+            <Field>
+              <Name>Автор</Name>
+              <DocField>Автор</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Користувачі</Pointer>
+              <Join>
+                <table>Довідники.Користувачі_Const.TABLE</table>
+                <field>Автор</field>
+                <alias>join_tab_3</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_3</table>
+                <field>Довідники.Користувачі_Const.Назва</field>
+              </FieldAndAlias>
+            </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <DocField>Коментар</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+          </Fields>
+        </TabularList>
+        <TabularList>
+          <Name>ПсуванняТоварів</Name>
+          <Desc>
+          </Desc>
+          <Table>tab_a94</Table>
+          <Fields>
+            <Field>
+              <Name>Назва</Name>
+              <DocField>Назва</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>Дата</Name>
+              <DocField>ДатаДок</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>1</WherePeriod>
+              <Type>datetime</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>Номер</Name>
+              <DocField>НомерДок</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>Організація</Name>
+              <DocField>Організація</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Організації</Pointer>
+              <Join>
+                <table>Довідники.Організації_Const.TABLE</table>
+                <field>Організація</field>
+                <alias>join_tab_1</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_1</table>
+                <field>Довідники.Організації_Const.Назва</field>
+              </FieldAndAlias>
+            </Field>
+            <Field>
+              <Name>СкладВідправник</Name>
+              <DocField>Склад</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Склади</Pointer>
+              <Join>
+                <table>Довідники.Склади_Const.TABLE</table>
+                <field>Склад</field>
+                <alias>join_tab_2</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_2</table>
+                <field>Довідники.Склади_Const.Назва</field>
+              </FieldAndAlias>
+            </Field>
+            <Field>
+              <Name>СкладОтримувач</Name>
+              <DocField>
+              </DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
             </Field>
             <Field>
               <Name>Автор</Name>

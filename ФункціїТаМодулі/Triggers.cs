@@ -1389,4 +1389,29 @@ namespace StorageAndTrade_1_0.Документи
         }
     }
 
+    class ПсуванняТоварів_Triggers
+    {
+        public static void New(ПсуванняТоварів_Objest ДокументОбєкт)
+        {
+            ДокументОбєкт.НомерДок = (++НумераціяДокументів.ПсуванняТоварів_Const).ToString("D8");
+            ДокументОбєкт.ДатаДок = DateTime.Now;
+            ДокументОбєкт.Автор = Program.Користувач;
+        }
+
+        public static void BeforeSave(ПсуванняТоварів_Objest ДокументОбєкт)
+        {
+            ДокументОбєкт.Назва = $"Псування товарів №{ДокументОбєкт.НомерДок} від {ДокументОбєкт.ДатаДок.ToShortDateString()}";
+        }
+
+        public static void AfterSave(ПсуванняТоварів_Objest ДокументОбєкт)
+        {
+
+        }
+
+        public static void BeforeDelete(ПсуванняТоварів_Objest ДокументОбєкт)
+        {
+            ДокументОбєкт.ClearSpendTheDocument();
+        }
+    }
+
 }

@@ -56,6 +56,7 @@ namespace StorageAndTrade
         TimeControl ЧасДоставкиЗ = new TimeControl();
         TimeControl ЧасДоставкиДо = new TimeControl();
         Entry Коментар = new Entry() { WidthRequest = 920 };
+        Basis_PointerControl Основа = new Basis_PointerControl();
 
         ПереміщенняТоварів_ТабличнаЧастина_Товари Товари = new ПереміщенняТоварів_ТабличнаЧастина_Товари();
 
@@ -210,6 +211,12 @@ namespace StorageAndTrade
             vBox.PackStart(hBoxAutor, false, false, 5);
 
             hBoxAutor.PackStart(Автор, false, false, 5);
+
+            //Основа
+            HBox hBoxBasis = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxBasis, false, false, 5);
+
+            hBoxBasis.PackStart(Основа, false, false, 5);
         }
 
         void CreateContainer4(VBox vBox)
@@ -289,6 +296,7 @@ namespace StorageAndTrade
             СпосібДоставки.ActiveId = ((Перелічення.СпособиДоставки)ПереміщенняТоварів_Objest.СпосібДоставки).ToString();
             ЧасДоставкиЗ.Value = ПереміщенняТоварів_Objest.ЧасДоставкиЗ;
             ЧасДоставкиДо.Value = ПереміщенняТоварів_Objest.ЧасДоставкиДо;
+            Основа.Pointer = ПереміщенняТоварів_Objest.Основа;
 
             //Таблична частина
             Товари.ПереміщенняТоварів_Objest = ПереміщенняТоварів_Objest;
@@ -310,6 +318,7 @@ namespace StorageAndTrade
             ПереміщенняТоварів_Objest.СпосібДоставки = Enum.Parse<Перелічення.СпособиДоставки>(СпосібДоставки.ActiveId);
             ПереміщенняТоварів_Objest.ЧасДоставкиЗ = ЧасДоставкиЗ.Value;
             ПереміщенняТоварів_Objest.ЧасДоставкиДо = ЧасДоставкиДо.Value;
+            ПереміщенняТоварів_Objest.Основа = Основа.Pointer;
 
             ПереміщенняТоварів_Objest.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку() + Товари.КлючовіСловаДляПошуку();
         }

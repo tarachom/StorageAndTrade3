@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 30.03.2023 17:08:43
+ * Дата конфігурації: 30.03.2023 18:16:08
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -19600,11 +19600,11 @@ namespace StorageAndTrade_1_0.Документи
         public const string Підрозділ = "col_a7";
         public const string Склад = "col_a4";
         public const string Причина = "col_a8";
-        public const string ВидЦіни = "col_b1";
         public const string СумаДокументу = "col_a1";
         public const string Коментар = "col_a5";
         public const string Автор = "col_a2";
         public const string КлючовіСловаДляПошуку = "col_a3";
+        public const string Основа = "col_b2";
     }
 
     public static class ПсуванняТоварів_Export
@@ -19666,14 +19666,6 @@ namespace StorageAndTrade_1_0.Документи
                 xmlWriter.WriteValue(ПсуванняТоварів_Objest.Причина);
               
             xmlWriter.WriteEndElement(); //Причина
-            xmlWriter.WriteStartElement("ВидЦіни");
-            xmlWriter.WriteAttributeString("type", "pointer");
-            
-                    xmlWriter.WriteAttributeString("pointer", "Довідники.ВидиЦін");
-                    xmlWriter.WriteAttributeString("uid", ПсуванняТоварів_Objest.ВидЦіни.UnigueID.ToString());
-                    xmlWriter.WriteString(ПсуванняТоварів_Objest.ВидЦіни.GetPresentation());
-                  
-            xmlWriter.WriteEndElement(); //ВидЦіни
             xmlWriter.WriteStartElement("СумаДокументу");
             xmlWriter.WriteAttributeString("type", "numeric");
             
@@ -19700,6 +19692,12 @@ namespace StorageAndTrade_1_0.Документи
                 xmlWriter.WriteValue(ПсуванняТоварів_Objest.КлючовіСловаДляПошуку);
               
             xmlWriter.WriteEndElement(); //КлючовіСловаДляПошуку
+            xmlWriter.WriteStartElement("Основа");
+            xmlWriter.WriteAttributeString("type", "composite_pointer");
+            
+                xmlWriter.WriteRaw(((UuidAndText)ПсуванняТоварів_Objest.Основа).ToXml());
+              
+            xmlWriter.WriteEndElement(); //Основа
 
                 /* 
                 Табличні частини
@@ -19802,7 +19800,7 @@ namespace StorageAndTrade_1_0.Документи
     public class ПсуванняТоварів_Objest : DocumentObject
     {
         public ПсуванняТоварів_Objest() : base(Config.Kernel!, "tab_a94", "ПсуванняТоварів",
-             new string[] { "docname", "docnomer", "docdate", "col_a6", "col_a7", "col_a4", "col_a8", "col_b1", "col_a1", "col_a5", "col_a2", "col_a3" }) 
+             new string[] { "docname", "docnomer", "docdate", "col_a6", "col_a7", "col_a4", "col_a8", "col_a1", "col_a5", "col_a2", "col_a3", "col_b2" }) 
         {
             Назва = "";
             НомерДок = "";
@@ -19811,11 +19809,11 @@ namespace StorageAndTrade_1_0.Документи
             Підрозділ = new Довідники.СтруктураПідприємства_Pointer();
             Склад = new Довідники.Склади_Pointer();
             Причина = "";
-            ВидЦіни = new Довідники.ВидиЦін_Pointer();
             СумаДокументу = 0;
             Коментар = "";
             Автор = new Довідники.Користувачі_Pointer();
             КлючовіСловаДляПошуку = "";
+            Основа = new UuidAndText();
             
             //Табличні частини
             Товари_TablePart = new ПсуванняТоварів_Товари_TablePart(this);
@@ -19825,6 +19823,7 @@ namespace StorageAndTrade_1_0.Документи
         public void New()
         {
             BaseNew();
+            ПсуванняТоварів_Triggers.New(this);
             
         }
 
@@ -19839,11 +19838,11 @@ namespace StorageAndTrade_1_0.Документи
                 Підрозділ = new Довідники.СтруктураПідприємства_Pointer(base.FieldValue["col_a7"]);
                 Склад = new Довідники.Склади_Pointer(base.FieldValue["col_a4"]);
                 Причина = base.FieldValue["col_a8"]?.ToString() ?? "";
-                ВидЦіни = new Довідники.ВидиЦін_Pointer(base.FieldValue["col_b1"]);
                 СумаДокументу = (base.FieldValue["col_a1"] != DBNull.Value) ? (decimal)base.FieldValue["col_a1"] : 0;
                 Коментар = base.FieldValue["col_a5"]?.ToString() ?? "";
                 Автор = new Довідники.Користувачі_Pointer(base.FieldValue["col_a2"]);
                 КлючовіСловаДляПошуку = base.FieldValue["col_a3"]?.ToString() ?? "";
+                Основа = (base.FieldValue["col_b2"] != DBNull.Value) ? (UuidAndText)base.FieldValue["col_b2"] : new UuidAndText();
                 
                 BaseClear();
                 return true;
@@ -19854,6 +19853,7 @@ namespace StorageAndTrade_1_0.Документи
         
         public void Save()
         {
+            ПсуванняТоварів_Triggers.BeforeSave(this);
             base.FieldValue["docname"] = Назва;
             base.FieldValue["docnomer"] = НомерДок;
             base.FieldValue["docdate"] = ДатаДок;
@@ -19861,15 +19861,15 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a7"] = Підрозділ.UnigueID.UGuid;
             base.FieldValue["col_a4"] = Склад.UnigueID.UGuid;
             base.FieldValue["col_a8"] = Причина;
-            base.FieldValue["col_b1"] = ВидЦіни.UnigueID.UGuid;
             base.FieldValue["col_a1"] = СумаДокументу;
             base.FieldValue["col_a5"] = Коментар;
             base.FieldValue["col_a2"] = Автор.UnigueID.UGuid;
             base.FieldValue["col_a3"] = КлючовіСловаДляПошуку;
+            base.FieldValue["col_b2"] = Основа;
             
             BaseSave();
-            
-            BaseWriteFullTextSearch(GetBasis(), new string[] { КлючовіСловаДляПошуку });
+            ПсуванняТоварів_Triggers.AfterSave(this);
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, Причина, Коментар, КлючовіСловаДляПошуку });
         }
 
         public bool SpendTheDocument(DateTime spendDate)
@@ -19895,11 +19895,11 @@ namespace StorageAndTrade_1_0.Документи
             copy.Підрозділ = Підрозділ;
             copy.Склад = Склад;
             copy.Причина = Причина;
-            copy.ВидЦіни = ВидЦіни;
             copy.СумаДокументу = СумаДокументу;
             copy.Коментар = Коментар;
             copy.Автор = Автор;
             copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
+            copy.Основа = Основа;
             
             copy.New();
             return copy;
@@ -19907,7 +19907,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public void Delete()
         {
-            
+            ПсуванняТоварів_Triggers.BeforeDelete(this);
             base.BaseDelete(new string[] { "tab_a95" });
         }
         
@@ -19928,11 +19928,11 @@ namespace StorageAndTrade_1_0.Документи
         public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; }
         public Довідники.Склади_Pointer Склад { get; set; }
         public string Причина { get; set; }
-        public Довідники.ВидиЦін_Pointer ВидЦіни { get; set; }
         public decimal СумаДокументу { get; set; }
         public string Коментар { get; set; }
         public Довідники.Користувачі_Pointer Автор { get; set; }
         public string КлючовіСловаДляПошуку { get; set; }
+        public UuidAndText Основа { get; set; }
         
         //Табличні частини
         public ПсуванняТоварів_Товари_TablePart Товари_TablePart { get; set; }
