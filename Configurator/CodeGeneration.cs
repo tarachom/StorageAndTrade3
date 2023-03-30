@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 30.03.2023 16:24:50
+ * Дата конфігурації: 30.03.2023 17:08:43
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -202,6 +202,8 @@ namespace StorageAndTrade_1_0
                         case "ТипорозміриКомірок": return new Довідники.ТипорозміриКомірок_Pointer(uuidAndText.Uuid).GetPresentation();
                         
                         case "СкладськіКомірки_Папки": return new Довідники.СкладськіКомірки_Папки_Pointer(uuidAndText.Uuid).GetPresentation();
+                        
+                        case "Блокнот": return new Довідники.Блокнот_Pointer(uuidAndText.Uuid).GetPresentation();
                         
                     }
                     
@@ -1218,7 +1220,7 @@ namespace StorageAndTrade_1_0.Константи
             
             Dictionary<string, object> fieldValue = new Dictionary<string, object>();
             bool IsSelect = Config.Kernel!.DataBase.SelectAllConstants("tab_constants",
-                 new string[] { "col_b8", "col_d1", "col_d2", "col_d3", "col_d4", "col_d5", "col_d6", "col_d7", "col_d8", "col_d9", "col_e1", "col_e2", "col_e3", "col_e4", "col_e5", "col_e6", "col_e7", "col_e8", "col_e9", "col_f1", "col_f2", "col_f3", "col_f4", "col_f5", "col_b1", "col_g8" }, fieldValue);
+                 new string[] { "col_b8", "col_d1", "col_d2", "col_d3", "col_d4", "col_d5", "col_d6", "col_d7", "col_d8", "col_d9", "col_e1", "col_e2", "col_e3", "col_e4", "col_e5", "col_e6", "col_e7", "col_e8", "col_e9", "col_f1", "col_f2", "col_f3", "col_f4", "col_f5", "col_b1", "col_g8", "col_i3" }, fieldValue);
             
             if (IsSelect)
             {
@@ -1248,6 +1250,7 @@ namespace StorageAndTrade_1_0.Константи
                 m_СтаттяРухуКоштів_Const = (fieldValue["col_f5"] != DBNull.Value) ? (int)fieldValue["col_f5"] : 0;
                 m_СкладськіКомірки_Папки_Const = (fieldValue["col_b1"] != DBNull.Value) ? (int)fieldValue["col_b1"] : 0;
                 m_Банки_Const = (fieldValue["col_g8"] != DBNull.Value) ? (int)fieldValue["col_g8"] : 0;
+                m_Блокнот_Const = (fieldValue["col_i3"] != DBNull.Value) ? (int)fieldValue["col_i3"] : 0;
                 
             }
 			      
@@ -1615,6 +1618,20 @@ namespace StorageAndTrade_1_0.Константи
             {
                 m_Банки_Const = value;
                 Config.Kernel!.DataBase.SaveConstants("tab_constants", "col_g8", m_Банки_Const);
+            }
+        }
+        
+        static int m_Блокнот_Const = 0;
+        public static int Блокнот_Const
+        {
+            get 
+            {
+                return m_Блокнот_Const;
+            }
+            set
+            {
+                m_Блокнот_Const = value;
+                Config.Kernel!.DataBase.SaveConstants("tab_constants", "col_i3", m_Блокнот_Const);
             }
         }
              
@@ -8716,6 +8733,182 @@ namespace StorageAndTrade_1_0.Довідники
             List<СкладськіКомірки_Папки_Pointer> directoryPointerList = new List<СкладськіКомірки_Папки_Pointer>();
             foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(name, value, limit, offset)) 
                 directoryPointerList.Add(new СкладськіКомірки_Папки_Pointer(directoryPointer.UnigueID));
+            return directoryPointerList;
+        }
+    }
+    
+      
+   
+    #endregion
+    
+    #region DIRECTORY "Блокнот"
+    public static class Блокнот_Const
+    {
+        public const string TABLE = "tab_a41";
+        
+        public const string Код = "col_a1";
+        public const string Назва = "col_a2";
+        public const string ДатаЗапису = "col_a3";
+        public const string Опис = "col_a4";
+        public const string Лінк = "col_a5";
+    }
+
+    public class Блокнот_Objest : DirectoryObject
+    {
+        public Блокнот_Objest() : base(Config.Kernel!, "tab_a41",
+             new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5" }) 
+        {
+            Код = "";
+            Назва = "";
+            ДатаЗапису = DateTime.MinValue;
+            Опис = "";
+            Лінк = "";
+            
+        }
+        
+        public void New()
+        {
+            BaseNew();
+            Блокнот_Triggers.New(this);
+            
+        }
+
+        public bool Read(UnigueID uid)
+        {
+            if (BaseRead(uid))
+            {
+                Код = base.FieldValue["col_a1"]?.ToString() ?? "";
+                Назва = base.FieldValue["col_a2"]?.ToString() ?? "";
+                ДатаЗапису = (base.FieldValue["col_a3"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["col_a3"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                Опис = base.FieldValue["col_a4"]?.ToString() ?? "";
+                Лінк = base.FieldValue["col_a5"]?.ToString() ?? "";
+                
+                BaseClear();
+                return true;
+            }
+            else
+                return false;
+        }
+        
+        public void Save()
+        {
+            Блокнот_Triggers.BeforeSave(this);
+            base.FieldValue["col_a1"] = Код;
+            base.FieldValue["col_a2"] = Назва;
+            base.FieldValue["col_a3"] = ДатаЗапису;
+            base.FieldValue["col_a4"] = Опис;
+            base.FieldValue["col_a5"] = Лінк;
+            
+            BaseSave();
+            Блокнот_Triggers.AfterSave(this);
+            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, Опис });
+        }
+
+        public Блокнот_Objest Copy()
+        {
+            Блокнот_Objest copy = new Блокнот_Objest();
+            copy.Код = Код;
+            copy.Назва = Назва;
+            copy.ДатаЗапису = ДатаЗапису;
+            copy.Опис = Опис;
+            copy.Лінк = Лінк;
+            
+            copy.New();
+            return copy;
+        }
+
+        public void Delete()
+        {
+            Блокнот_Triggers.BeforeDelete(this);
+            base.BaseDelete(new string[] {  });
+        }
+        
+        public Блокнот_Pointer GetDirectoryPointer()
+        {
+            return new Блокнот_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.Блокнот");
+        }
+        
+        public string Код { get; set; }
+        public string Назва { get; set; }
+        public DateTime ДатаЗапису { get; set; }
+        public string Опис { get; set; }
+        public string Лінк { get; set; }
+        
+    }
+
+    public class Блокнот_Pointer : DirectoryPointer
+    {
+        public Блокнот_Pointer(object? uid = null) : base(Config.Kernel!, "tab_a41")
+        {
+            base.Init(new UnigueID(uid), null);
+        }
+        
+        public Блокнот_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel!, "tab_a41")
+        {
+            base.Init(uid, fields);
+        }
+        
+        public Блокнот_Objest? GetDirectoryObject()
+        {
+            if (this.IsEmpty()) return null;
+            Блокнот_Objest БлокнотObjestItem = new Блокнот_Objest();
+            return БлокнотObjestItem.Read(base.UnigueID) ? БлокнотObjestItem : null;
+        }
+
+        public Блокнот_Pointer GetNewDirectoryPointer()
+        {
+            return new Блокнот_Pointer(base.UnigueID);
+        }
+
+        public string Назва { get; set; } = "";
+
+        public string GetPresentation()
+        {
+            return Назва = base.BasePresentation(
+              new string[] {  }
+            );
+        }
+		
+        public Блокнот_Pointer GetEmptyPointer()
+        {
+            return new Блокнот_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.Блокнот");
+        }
+    }
+    
+    public class Блокнот_Select : DirectorySelect
+    {
+        public Блокнот_Select() : base(Config.Kernel!, "tab_a41") { }        
+        public bool Select() { return base.BaseSelect(); }
+        
+        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        
+        public bool MoveNext() { if (MoveToPosition()) { Current = new Блокнот_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
+
+        public Блокнот_Pointer? Current { get; private set; }
+        
+        public Блокнот_Pointer FindByField(string name, object value)
+        {
+            Блокнот_Pointer itemPointer = new Блокнот_Pointer();
+            DirectoryPointer directoryPointer = base.BaseFindByField(name, value);
+            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
+            return itemPointer;
+        }
+        
+        public List<Блокнот_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<Блокнот_Pointer> directoryPointerList = new List<Блокнот_Pointer>();
+            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(name, value, limit, offset)) 
+                directoryPointerList.Add(new Блокнот_Pointer(directoryPointer.UnigueID));
             return directoryPointerList;
         }
     }

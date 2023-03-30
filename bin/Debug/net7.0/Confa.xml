@@ -5,7 +5,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>30.03.2023 16:24:50</DateTimeSave>
+  <DateTimeSave>30.03.2023 17:08:43</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -781,6 +781,14 @@ https://accounting.org.ua/storage_and_trade.html</Desc>
         <Constant>
           <Name>Банки</Name>
           <NameInTable>col_g8</NameInTable>
+          <Desc>
+          </Desc>
+          <Type>integer</Type>
+          <TabularParts />
+        </Constant>
+        <Constant>
+          <Name>Блокнот</Name>
+          <NameInTable>col_i3</NameInTable>
           <Desc>
           </Desc>
           <Type>integer</Type>
@@ -6184,6 +6192,144 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
         <BeforeSave>СкладськіКомірки_Папки_Triggers.BeforeSave</BeforeSave>
         <AfterSave>СкладськіКомірки_Папки_Triggers.AfterSave</AfterSave>
         <BeforeDelete>СкладськіКомірки_Папки_Triggers.BeforeDelete</BeforeDelete>
+      </TriggerFunctions>
+    </Directory>
+    <Directory>
+      <Name>Блокнот</Name>
+      <Table>tab_a41</Table>
+      <Desc>Блокнот для записів</Desc>
+      <Fields>
+        <Field>
+          <Name>Код</Name>
+          <NameInTable>col_a1</NameInTable>
+          <Type>string</Type>
+          <Desc>Код</Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+          <IsFullTextSearch>0</IsFullTextSearch>
+        </Field>
+        <Field>
+          <Name>Назва</Name>
+          <NameInTable>col_a2</NameInTable>
+          <Type>string</Type>
+          <Desc>Назва</Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+          <IsFullTextSearch>1</IsFullTextSearch>
+        </Field>
+        <Field>
+          <Name>ДатаЗапису</Name>
+          <NameInTable>col_a3</NameInTable>
+          <Type>datetime</Type>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>1</IsIndex>
+          <IsFullTextSearch>1</IsFullTextSearch>
+        </Field>
+        <Field>
+          <Name>Опис</Name>
+          <NameInTable>col_a4</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+          <IsFullTextSearch>1</IsFullTextSearch>
+        </Field>
+        <Field>
+          <Name>Лінк</Name>
+          <NameInTable>col_a5</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+          <IsFullTextSearch>0</IsFullTextSearch>
+        </Field>
+      </Fields>
+      <TabularParts />
+      <TabularLists>
+        <TabularList>
+          <Name>Записи</Name>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>Код</Name>
+              <Caption>Код</Caption>
+              <Size>0</Size>
+              <SortNum>1</SortNum>
+              <SortField>False</SortField>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>Назва</Name>
+              <Caption>Назва</Caption>
+              <Size>0</Size>
+              <SortNum>2</SortNum>
+              <SortField>False</SortField>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>ДатаЗапису</Name>
+              <Caption>Дата</Caption>
+              <Size>0</Size>
+              <SortNum>3</SortNum>
+              <SortField>True</SortField>
+              <Type>datetime</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+          </Fields>
+        </TabularList>
+        <TabularList>
+          <Name>ЗаписиШвидкийВибір</Name>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>Код</Name>
+              <Caption>Код</Caption>
+              <Size>0</Size>
+              <SortNum>1</SortNum>
+              <SortField>False</SortField>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>Назва</Name>
+              <Caption>Назва</Caption>
+              <Size>0</Size>
+              <SortNum>2</SortNum>
+              <SortField>False</SortField>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>ДатаЗапису</Name>
+              <Caption>Дата</Caption>
+              <Size>0</Size>
+              <SortNum>3</SortNum>
+              <SortField>True</SortField>
+              <Type>datetime</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+          </Fields>
+        </TabularList>
+      </TabularLists>
+      <TriggerFunctions>
+        <New>Блокнот_Triggers.New</New>
+        <BeforeSave>Блокнот_Triggers.BeforeSave</BeforeSave>
+        <AfterSave>Блокнот_Triggers.AfterSave</AfterSave>
+        <BeforeDelete>Блокнот_Triggers.BeforeDelete</BeforeDelete>
       </TriggerFunctions>
     </Directory>
   </Directories>

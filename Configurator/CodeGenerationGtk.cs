@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 30.03.2023 16:24:50
+ * Дата конфігурації: 30.03.2023 17:08:43
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон Gtk.xslt
@@ -5723,6 +5723,211 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
     #region DIRECTORY "СкладськіКомірки_Папки"
     
       
+    #endregion
+    
+    #region DIRECTORY "Блокнот"
+    
+      
+    public class Блокнот_Записи
+    {
+        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string ID = "";
+        
+        string Код = "";
+        string Назва = "";
+        string ДатаЗапису = "";
+
+        Array ToArray()
+        {
+            return new object[] { new Gdk.Pixbuf(Image), ID 
+            /* */ , Код, Назва, ДатаЗапису };
+        }
+
+        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */
+            , typeof(string) /* Код */
+            , typeof(string) /* Назва */
+            , typeof(string) /* ДатаЗапису */
+            );
+
+        public static void AddColumns(TreeView treeView)
+        {
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
+            /* */
+            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Код*/
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 4) { MinWidth = 20, Resizable = true, SortColumnId = 4 } ); /*ДатаЗапису*/
+            
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
+        }
+
+        public static List<Where> Where { get; set; } = new List<Where>();
+
+        public static Довідники.Блокнот_Pointer? DirectoryPointerItem { get; set; }
+        public static Довідники.Блокнот_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
+        public static TreePath? SelectPath;
+        public static TreePath? CurrentPath;
+
+        public static void LoadRecords()
+        {
+            Store.Clear();
+            SelectPath = FirstPath = null;
+
+            Довідники.Блокнот_Select Блокнот_Select = new Довідники.Блокнот_Select();
+            Блокнот_Select.QuerySelect.Field.AddRange(
+                new string[]
+                {
+                    Довідники.Блокнот_Const.Код /* 1 */
+                    , Довідники.Блокнот_Const.Назва /* 2 */
+                    , Довідники.Блокнот_Const.ДатаЗапису /* 3 */
+                    
+                });
+
+            /* Where */
+            Блокнот_Select.QuerySelect.Where = Where;
+
+            
+              /* ORDER */
+              Блокнот_Select.QuerySelect.Order.Add(Довідники.Блокнот_Const.ДатаЗапису, SelectOrder.ASC);
+            
+
+            /* SELECT */
+            Блокнот_Select.Select();
+            while (Блокнот_Select.MoveNext())
+            {
+                Довідники.Блокнот_Pointer? cur = Блокнот_Select.Current;
+
+                if (cur != null)
+                {
+                    Блокнот_Записи Record = new Блокнот_Записи
+                    {
+                        ID = cur.UnigueID.ToString(),
+                        Код = cur.Fields?[Блокнот_Const.Код]?.ToString() ?? "", /**/
+                        Назва = cur.Fields?[Блокнот_Const.Назва]?.ToString() ?? "", /**/
+                        ДатаЗапису = cur.Fields?[Блокнот_Const.ДатаЗапису]?.ToString() ?? "" /**/
+                        
+                    };
+
+                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                    CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
+
+                    if (DirectoryPointerItem != null || SelectPointerItem != null)
+                    {
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+
+                        if (Record.ID == UidSelect)
+                            SelectPath = CurrentPath;
+                    }
+                }
+            }
+        }
+    }
+	    
+    public class Блокнот_ЗаписиШвидкийВибір
+    {
+        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string ID = "";
+        
+        string Код = "";
+        string Назва = "";
+        string ДатаЗапису = "";
+
+        Array ToArray()
+        {
+            return new object[] { new Gdk.Pixbuf(Image), ID 
+            /* */ , Код, Назва, ДатаЗапису };
+        }
+
+        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */
+            , typeof(string) /* Код */
+            , typeof(string) /* Назва */
+            , typeof(string) /* ДатаЗапису */
+            );
+
+        public static void AddColumns(TreeView treeView)
+        {
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
+            /* */
+            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Код*/
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 4) { MinWidth = 20, Resizable = true, SortColumnId = 4 } ); /*ДатаЗапису*/
+            
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
+        }
+
+        public static List<Where> Where { get; set; } = new List<Where>();
+
+        public static Довідники.Блокнот_Pointer? DirectoryPointerItem { get; set; }
+        public static Довідники.Блокнот_Pointer? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
+        public static TreePath? SelectPath;
+        public static TreePath? CurrentPath;
+
+        public static void LoadRecords()
+        {
+            Store.Clear();
+            SelectPath = FirstPath = null;
+
+            Довідники.Блокнот_Select Блокнот_Select = new Довідники.Блокнот_Select();
+            Блокнот_Select.QuerySelect.Field.AddRange(
+                new string[]
+                {
+                    Довідники.Блокнот_Const.Код /* 1 */
+                    , Довідники.Блокнот_Const.Назва /* 2 */
+                    , Довідники.Блокнот_Const.ДатаЗапису /* 3 */
+                    
+                });
+
+            /* Where */
+            Блокнот_Select.QuerySelect.Where = Where;
+
+            
+              /* ORDER */
+              Блокнот_Select.QuerySelect.Order.Add(Довідники.Блокнот_Const.ДатаЗапису, SelectOrder.ASC);
+            
+
+            /* SELECT */
+            Блокнот_Select.Select();
+            while (Блокнот_Select.MoveNext())
+            {
+                Довідники.Блокнот_Pointer? cur = Блокнот_Select.Current;
+
+                if (cur != null)
+                {
+                    Блокнот_ЗаписиШвидкийВибір Record = new Блокнот_ЗаписиШвидкийВибір
+                    {
+                        ID = cur.UnigueID.ToString(),
+                        Код = cur.Fields?[Блокнот_Const.Код]?.ToString() ?? "", /**/
+                        Назва = cur.Fields?[Блокнот_Const.Назва]?.ToString() ?? "", /**/
+                        ДатаЗапису = cur.Fields?[Блокнот_Const.ДатаЗапису]?.ToString() ?? "" /**/
+                        
+                    };
+
+                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                    CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
+
+                    if (DirectoryPointerItem != null || SelectPointerItem != null)
+                    {
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+
+                        if (Record.ID == UidSelect)
+                            SelectPath = CurrentPath;
+                    }
+                }
+            }
+        }
+    }
+	    
     #endregion
     
 }

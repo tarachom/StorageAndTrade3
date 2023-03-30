@@ -82,6 +82,9 @@ namespace StorageAndTrade
             AddLink(vRight, "Серії номенклатури", СеріїНоменклатури);
             AddLink(vRight, "Виробники", Виробники);
 
+            AddCaption(vRight, "Внутрішні");
+            AddLink(vRight, "Блокнот", Блокнот);
+
             hBoxList.PackStart(vRight, false, false, 5);
 
             PackStart(hBoxList, false, false, 10);
@@ -334,6 +337,16 @@ namespace StorageAndTrade
             Program.GeneralForm?.CreateNotebookPage("Типорозміри комірок", () =>
             {
                 ТипорозміриКомірок page = new ТипорозміриКомірок();
+                page.LoadRecords();
+                return page;
+            });
+        }
+
+        void Блокнот(object? sender, EventArgs args)
+        {
+            Program.GeneralForm?.CreateNotebookPage("Блокнот", () =>
+            {
+                Блокнот page = new Блокнот();
                 page.LoadRecords();
                 return page;
             });

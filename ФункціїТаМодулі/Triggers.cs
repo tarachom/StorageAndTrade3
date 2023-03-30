@@ -902,6 +902,31 @@ WHERE
 
         }
     }
+
+    class Блокнот_Triggers
+    {
+        public static void New(Блокнот_Objest ДовідникОбєкт)
+        {
+            ДовідникОбєкт.Код = (++НумераціяДовідників.Блокнот_Const).ToString("D6");
+            ДовідникОбєкт.ДатаЗапису = DateTime.Now;
+        }
+
+        public static void BeforeSave(Блокнот_Objest ДовідникОбєкт)
+        {
+
+        }
+
+        public static void AfterSave(Блокнот_Objest ДовідникОбєкт)
+        {
+
+        }
+
+        public static void BeforeDelete(Блокнот_Objest ДовідникОбєкт)
+        {
+
+        }
+    }
+
 }
 
 namespace StorageAndTrade_1_0.Документи
