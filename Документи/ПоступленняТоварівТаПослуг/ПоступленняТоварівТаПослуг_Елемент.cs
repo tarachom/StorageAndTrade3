@@ -607,7 +607,7 @@ namespace StorageAndTrade
 
             ReloadList();
 
-            Program.GeneralForm?.CloseCurrentPageNotebook();
+            //Program.GeneralForm?.CloseCurrentPageNotebook();
         }
     }
 }

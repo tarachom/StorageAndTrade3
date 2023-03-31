@@ -88,6 +88,7 @@ namespace StorageAndTrade
         #endregion
 
         TreeView TreeViewGrid;
+        Label ПідсумокСума = new Label() { Selectable = true };
 
         public ВведенняЗалишків_ТабличнаЧастина_Каси() : base()
         {
@@ -104,8 +105,13 @@ namespace StorageAndTrade
             TreeViewGrid.ButtonPressEvent += OnButtonPressEvent;
 
             scrollTree.Add(TreeViewGrid);
+            PackStart(scrollTree, true, true, 0);
 
-            Add(scrollTree);
+            CreateBottomBlock();
+
+            Store.RowChanged += (object? sender, RowChangedArgs args) => { ОбчислитиПідсумки(); };
+            Store.RowDeleted += (object? sender, RowDeletedArgs args) => { ОбчислитиПідсумки(); };
+
 
             ShowAll();
         }
@@ -173,6 +179,16 @@ namespace StorageAndTrade
             ToolButton deleteButton = new ToolButton(Stock.Delete) { TooltipText = "Видалити" };
             deleteButton.Clicked += OnDeleteClick;
             toolbar.Add(deleteButton);
+        }
+
+        //Блок для підсумків
+        void CreateBottomBlock()
+        {
+            HBox hBox = new HBox() { Halign = Align.Start };
+            hBox.PackStart(new Label("<b>Підсумки</b> ") { UseMarkup = true }, false, false, 2);
+            hBox.PackStart(ПідсумокСума, false, false, 2);
+
+            PackStart(hBox, false, false, 2);
         }
 
         public void LoadRecords()
@@ -256,16 +272,27 @@ namespace StorageAndTrade
             return ключовіСлова;
         }
 
+        void ОбчислитиПідсумки()
+        {
+            decimal Сума = 0;
+
+            foreach (Запис запис in Записи)
+                Сума += запис.Сума;
+
+            ПідсумокСума.Text = $"Сума: <b>{Сума}</b>";
+            ПідсумокСума.UseMarkup = true;
+        }
+
         #region TreeView
 
         void AddColumn()
         {
             //НомерРядка
-            TreeViewGrid.AppendColumn(new TreeViewColumn("№", new CellRendererText(), "text", (int)Columns.НомерРядка) { Resizable = true, MinWidth =  30 });
+            TreeViewGrid.AppendColumn(new TreeViewColumn("№", new CellRendererText(), "text", (int)Columns.НомерРядка) { Resizable = true, MinWidth = 30 });
 
             //Каса
             {
-                TreeViewColumn Каса = new TreeViewColumn("Каса", new CellRendererText(), "text", (int)Columns.Каса) { Resizable = true, MinWidth =  200 };
+                TreeViewColumn Каса = new TreeViewColumn("Каса", new CellRendererText(), "text", (int)Columns.Каса) { Resizable = true, MinWidth = 200 };
                 Каса.Data.Add("Column", Columns.Каса);
 
                 TreeViewGrid.AppendColumn(Каса);
@@ -277,7 +304,7 @@ namespace StorageAndTrade
                 Сума.Edited += TextChanged;
                 Сума.Data.Add("Column", (int)Columns.Сума);
 
-                TreeViewColumn Column = new TreeViewColumn("Сума", Сума, "text", (int)Columns.Сума) { Resizable = true, MinWidth =  100 };
+                TreeViewColumn Column = new TreeViewColumn("Сума", Сума, "text", (int)Columns.Сума) { Resizable = true, MinWidth = 100 };
                 Column.SetCellDataFunc(Сума, new TreeCellDataFunc(NumericCellDataFunc));
                 TreeViewGrid.AppendColumn(Column);
             }

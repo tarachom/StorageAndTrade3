@@ -160,6 +160,7 @@ namespace StorageAndTrade
         #endregion
 
         TreeView TreeViewGrid;
+        Label ПідсумокСума = new Label() { Selectable = true };
 
         public ВнутрішнєСпоживанняТоварів_ТабличнаЧастина_Товари() : base()
         {
@@ -176,8 +177,12 @@ namespace StorageAndTrade
             TreeViewGrid.ButtonPressEvent += OnButtonPressEvent;
 
             scrollTree.Add(TreeViewGrid);
+            PackStart(scrollTree, true, true, 0);
 
-            Add(scrollTree);
+            CreateBottomBlock();
+
+            Store.RowChanged += (object? sender, RowChangedArgs args) => { ОбчислитиПідсумки(); };
+            Store.RowDeleted += (object? sender, RowDeletedArgs args) => { ОбчислитиПідсумки(); };
 
             ShowAll();
         }
@@ -317,6 +322,16 @@ namespace StorageAndTrade
             toolbar.Add(deleteButton);
         }
 
+        //Блок для підсумків
+        void CreateBottomBlock()
+        {
+            HBox hBox = new HBox() { Halign = Align.Start };
+            hBox.PackStart(new Label("<b>Підсумки</b> ") { UseMarkup = true }, false, false, 2);
+            hBox.PackStart(ПідсумокСума, false, false, 2);
+
+            PackStart(hBox, false, false, 2);
+        }
+
         public void LoadRecords()
         {
             Store.Clear();
@@ -448,6 +463,17 @@ namespace StorageAndTrade
             }
 
             return ключовіСлова;
+        }
+
+        void ОбчислитиПідсумки()
+        {
+            decimal Сума = 0;
+
+            foreach (Запис запис in Записи)
+                Сума += запис.Сума;
+
+            ПідсумокСума.Text = $"Сума: <b>{Сума}</b>";
+            ПідсумокСума.UseMarkup = true;
         }
 
         #region TreeView
