@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 30.03.2023 22:12:37
+ * Дата конфігурації: 31.03.2023 19:28:38
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -596,7 +596,7 @@ namespace StorageAndTrade_1_0.Константи
                     fieldValue.Add("col_a1", record.Обєкт);
                     fieldValue.Add("col_a2", record.Користувач);
                     
-                    base.BaseSave(record.UID, fieldValue);
+                    record.UID = base.BaseSave(record.UID, fieldValue);
                 }
                 
                 base.BaseCommitTransaction();
@@ -677,7 +677,7 @@ namespace StorageAndTrade_1_0.Константи
                     fieldValue.Add("col_a4", record.Заблоковано);
                     fieldValue.Add("col_a6", record.Результат);
                     
-                    base.BaseSave(record.UID, fieldValue);
+                    record.UID = base.BaseSave(record.UID, fieldValue);
                 }
                 
                 base.BaseCommitTransaction();
@@ -754,7 +754,7 @@ namespace StorageAndTrade_1_0.Константи
                     fieldValue.Add("col_a3", record.ДатаБлокування);
                     fieldValue.Add("col_a4", record.ДатаПідтвердженняБлокування);
                     
-                    base.BaseSave(record.UID, fieldValue);
+                    record.UID = base.BaseSave(record.UID, fieldValue);
                 }
                 
                 base.BaseCommitTransaction();
@@ -835,7 +835,7 @@ namespace StorageAndTrade_1_0.Константи
                     fieldValue.Add("col_a4", record.НазваОбєкту);
                     fieldValue.Add("col_a3", record.Повідомлення);
                     
-                    base.BaseSave(record.UID, fieldValue);
+                    record.UID = base.BaseSave(record.UID, fieldValue);
                 }
                 
                 base.BaseCommitTransaction();
@@ -1842,7 +1842,7 @@ namespace StorageAndTrade_1_0.Константи
                     fieldValue.Add("col_a3", record.Посилання);
                     fieldValue.Add("col_a4", record.Повідомлення);
                     
-                    base.BaseSave(record.UID, fieldValue);
+                    record.UID = base.BaseSave(record.UID, fieldValue);
                 }
                 
                 base.BaseCommitTransaction();
@@ -2206,7 +2206,7 @@ namespace StorageAndTrade_1_0.Довідники
                 fieldValue.Add("col_a3", record.Місто);
                 fieldValue.Add("col_a8", record.Значення);
                 
-                base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
                 
             base.BaseCommitTransaction();
@@ -2523,7 +2523,7 @@ namespace StorageAndTrade_1_0.Довідники
                 fieldValue.Add("col_a1", record.Файл.UnigueID.UGuid);
                 fieldValue.Add("col_a3", record.Основний);
                 
-                base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
                 
             base.BaseCommitTransaction();
@@ -3542,7 +3542,7 @@ namespace StorageAndTrade_1_0.Довідники
                 fieldValue.Add("col_d6", record.Місто);
                 fieldValue.Add("col_a1", record.Значення);
                 
-                base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
                 
             base.BaseCommitTransaction();
@@ -3627,7 +3627,7 @@ namespace StorageAndTrade_1_0.Довідники
 
                 fieldValue.Add("col_a1", record.Файл.UnigueID.UGuid);
                 
-                base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
                 
             base.BaseCommitTransaction();
@@ -3937,7 +3937,7 @@ namespace StorageAndTrade_1_0.Довідники
                 fieldValue.Add("col_e6", record.Місто);
                 fieldValue.Add("col_a1", record.Значення);
                 
-                base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
                 
             base.BaseCommitTransaction();
@@ -4575,7 +4575,7 @@ namespace StorageAndTrade_1_0.Довідники
                 fieldValue.Add("col_g2", record.Район);
                 fieldValue.Add("col_g3", record.Місто);
                 
-                base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
                 
             base.BaseCommitTransaction();
@@ -4870,7 +4870,7 @@ namespace StorageAndTrade_1_0.Довідники
                 fieldValue.Add("col_h4", record.Район);
                 fieldValue.Add("col_h5", record.Місто);
                 
-                base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
                 
             base.BaseCommitTransaction();
@@ -7286,7 +7286,7 @@ namespace StorageAndTrade_1_0.Довідники
 
                 fieldValue.Add("col_j3", (int)record.ГосподарськаОперація);
                 
-                base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
                 
             base.BaseCommitTransaction();
@@ -9249,7 +9249,7 @@ namespace StorageAndTrade_1_0.Довідники
         public string GetPresentation()
         {
             return Назва = base.BasePresentation(
-              new string[] {  }
+              new string[] { "col_a2" }
             );
         }
 		
@@ -11024,7 +11024,7 @@ namespace StorageAndTrade_1_0.Документи
                 fieldValue.Add("col_a9", record.Склад.UnigueID.UGuid);
                 fieldValue.Add("col_b1", record.Підрозділ.UnigueID.UGuid);
                 
-                base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
                 
             base.BaseCommitTransaction();
@@ -11887,7 +11887,7 @@ namespace StorageAndTrade_1_0.Документи
                 fieldValue.Add("col_b2", record.Підрозділ.UnigueID.UGuid);
                 fieldValue.Add("col_b5", record.ВидЦіни.UnigueID.UGuid);
                 
-                base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
                 
             base.BaseCommitTransaction();
@@ -12681,7 +12681,7 @@ namespace StorageAndTrade_1_0.Документи
                 fieldValue.Add("col_c8", record.Скидка);
                 fieldValue.Add("col_a1", record.Склад.UnigueID.UGuid);
                 
-                base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
                 
             base.BaseCommitTransaction();
@@ -13542,7 +13542,7 @@ namespace StorageAndTrade_1_0.Документи
                 fieldValue.Add("col_e3", record.Скидка);
                 fieldValue.Add("col_a4", record.Партія.UnigueID.UGuid);
                 
-                base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
                 
             base.BaseCommitTransaction();
@@ -14016,7 +14016,7 @@ namespace StorageAndTrade_1_0.Документи
                 fieldValue.Add("col_h4", record.ВидЦіни.UnigueID.UGuid);
                 fieldValue.Add("col_h5", record.Ціна);
                 
-                base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
                 
             base.BaseCommitTransaction();
@@ -14599,7 +14599,7 @@ namespace StorageAndTrade_1_0.Документи
                 fieldValue.Add("col_j7", record.ВалютаВзаєморозрахунків.UnigueID.UGuid);
                 fieldValue.Add("col_j8", record.Організація.UnigueID.UGuid);
                 
-                base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
                 
             base.BaseCommitTransaction();
@@ -15217,7 +15217,7 @@ namespace StorageAndTrade_1_0.Документи
                 fieldValue.Add("col_l8", record.Коментар);
                 fieldValue.Add("col_l9", record.Організація.UnigueID.UGuid);
                 
-                base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
                 
             base.BaseCommitTransaction();
@@ -15863,7 +15863,7 @@ namespace StorageAndTrade_1_0.Документи
                 fieldValue.Add("col_b7", record.Кількість);
                 fieldValue.Add("col_a2", record.Партія.UnigueID.UGuid);
                 
-                base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
                 
             base.BaseCommitTransaction();
@@ -16554,7 +16554,7 @@ namespace StorageAndTrade_1_0.Документи
                 fieldValue.Add("col_e5", record.Сума);
                 fieldValue.Add("col_a2", record.ДокументПоступлення.UnigueID.UGuid);
                 
-                base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
                 
             base.BaseCommitTransaction();
@@ -17204,7 +17204,7 @@ namespace StorageAndTrade_1_0.Документи
                 fieldValue.Add("col_h1", record.Штрихкод);
                 fieldValue.Add("col_a2", record.ДокументРеалізації.UnigueID.UGuid);
                 
-                base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
                 
             base.BaseCommitTransaction();
@@ -17780,7 +17780,7 @@ namespace StorageAndTrade_1_0.Документи
                 fieldValue.Add("col_c3", record.Ціна);
                 fieldValue.Add("col_c2", record.Сума);
                 
-                base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
                 
             base.BaseCommitTransaction();
@@ -18461,7 +18461,7 @@ namespace StorageAndTrade_1_0.Документи
                 fieldValue.Add("col_e2", record.Ціна);
                 fieldValue.Add("col_e3", record.Сума);
                 
-                base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
                 
             base.BaseCommitTransaction();
@@ -18553,7 +18553,7 @@ namespace StorageAndTrade_1_0.Документи
                 fieldValue.Add("col_e5", record.Каса.UnigueID.UGuid);
                 fieldValue.Add("col_e6", record.Сума);
                 
-                base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
                 
             base.BaseCommitTransaction();
@@ -18639,7 +18639,7 @@ namespace StorageAndTrade_1_0.Документи
                 fieldValue.Add("col_e7", record.БанківськийРахунок.UnigueID.UGuid);
                 fieldValue.Add("col_e8", record.Сума);
                 
-                base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
                 
             base.BaseCommitTransaction();
@@ -18731,7 +18731,7 @@ namespace StorageAndTrade_1_0.Документи
                 fieldValue.Add("col_f2", record.Сума);
                 fieldValue.Add("col_a2", (int)record.ТипКонтрагента);
                 
-                base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
                 
             base.BaseCommitTransaction();
@@ -19192,7 +19192,7 @@ namespace StorageAndTrade_1_0.Документи
                 fieldValue.Add("col_g5", record.Ціна);
                 fieldValue.Add("col_g6", record.Сума);
                 
-                base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
                 
             base.BaseCommitTransaction();
@@ -19653,7 +19653,7 @@ namespace StorageAndTrade_1_0.Документи
                 fieldValue.Add("col_i1", record.Кількість);
                 fieldValue.Add("col_h9", record.Ціна);
                 
-                base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
                 
             base.BaseCommitTransaction();
@@ -20106,7 +20106,7 @@ namespace StorageAndTrade_1_0.Документи
                 fieldValue.Add("col_j5", record.Пакування.UnigueID.UGuid);
                 fieldValue.Add("col_j6", record.ХарактеристикаНоменклатури.UnigueID.UGuid);
                 
-                base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
                 
             base.BaseCommitTransaction();
@@ -20646,7 +20646,7 @@ namespace StorageAndTrade_1_0.Документи
                 fieldValue.Add("col_a2", record.Сума);
                 fieldValue.Add("col_a6", record.Партія.UnigueID.UGuid);
                 
-                base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
                 
             base.BaseCommitTransaction();
@@ -21205,7 +21205,7 @@ namespace StorageAndTrade_1_0.Документи
                 fieldValue.Add("col_d9", record.Сума);
                 fieldValue.Add("col_a3", record.Партія.UnigueID.UGuid);
                 
-                base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
                 
             base.BaseCommitTransaction();
@@ -21873,7 +21873,7 @@ namespace StorageAndTrade_1_0.Документи
                 fieldValue.Add("col_c8", record.Скидка);
                 fieldValue.Add("col_a1", record.Склад.UnigueID.UGuid);
                 
-                base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
                 
             base.BaseCommitTransaction();
@@ -22389,7 +22389,7 @@ namespace StorageAndTrade_1_0.Документи
                 fieldValue.Add("col_a7", record.Кількість);
                 fieldValue.Add("col_a8", record.Комірка.UnigueID.UGuid);
                 
-                base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
                 
             base.BaseCommitTransaction();
@@ -22899,7 +22899,7 @@ namespace StorageAndTrade_1_0.Документи
                 fieldValue.Add("col_a8", record.КоміркаВідправник.UnigueID.UGuid);
                 fieldValue.Add("col_a9", record.КоміркаОтримувач.UnigueID.UGuid);
                 
-                base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
                 
             base.BaseCommitTransaction();
@@ -23413,7 +23413,7 @@ namespace StorageAndTrade_1_0.Документи
                 fieldValue.Add("col_a7", record.Кількість);
                 fieldValue.Add("col_a8", record.Комірка.UnigueID.UGuid);
                 
-                base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
                 
             base.BaseCommitTransaction();
@@ -23872,7 +23872,7 @@ namespace StorageAndTrade_1_0.Документи
                 fieldValue.Add("col_a2", record.Комірка.UnigueID.UGuid);
                 fieldValue.Add("col_h3", record.Пакування.UnigueID.UGuid);
                 
-                base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
                 
             base.BaseCommitTransaction();
@@ -24022,7 +24022,7 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
                 fieldValue.Add("col_f9", record.Пакування.UnigueID.UGuid);
                 fieldValue.Add("col_g2", record.Валюта.UnigueID.UGuid);
                 
-                base.BaseSave(record.UID, period, owner, fieldValue);
+                record.UID = base.BaseSave(record.UID, period, owner, fieldValue);
             }
             base.BaseCommitTransaction();
         }
@@ -24171,7 +24171,7 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
                 fieldValue.Add("col_a2", record.Курс);
                 fieldValue.Add("col_a3", record.Кратність);
                 
-                base.BaseSave(record.UID, period, owner, fieldValue);
+                record.UID = base.BaseSave(record.UID, period, owner, fieldValue);
             }
             base.BaseCommitTransaction();
         }
@@ -24305,7 +24305,7 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
                 fieldValue.Add("col_a3", record.ХарактеристикаНоменклатури.UnigueID.UGuid);
                 fieldValue.Add("col_a4", record.Пакування.UnigueID.UGuid);
                 
-                base.BaseSave(record.UID, period, owner, fieldValue);
+                record.UID = base.BaseSave(record.UID, period, owner, fieldValue);
             }
             base.BaseCommitTransaction();
         }
@@ -24436,7 +24436,7 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>();
                 fieldValue.Add("col_a1", record.Файл.UnigueID.UGuid);
                 
-                base.BaseSave(record.UID, period, owner, fieldValue);
+                record.UID = base.BaseSave(record.UID, period, owner, fieldValue);
             }
             base.BaseCommitTransaction();
         }
@@ -24558,7 +24558,7 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
                 fieldValue.Add("col_a3", record.Приміщення.UnigueID.UGuid);
                 fieldValue.Add("col_a4", record.Комірка.UnigueID.UGuid);
                 
-                base.BaseSave(record.UID, period, owner, fieldValue);
+                record.UID = base.BaseSave(record.UID, period, owner, fieldValue);
             }
             base.BaseCommitTransaction();
         }
@@ -24808,13 +24808,13 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                         
                     Config.Kernel!.DataBase.ExecuteSQL($@"DELETE FROM {ПартіїТоварів_Залишки_TablePart.TABLE} WHERE {ПартіїТоварів_Залишки_TablePart.TABLE}.{ПартіїТоварів_Залишки_TablePart.Період} = @ПеріодДеньВідбір", paramQuery, transactionID);
                         
-                    Config.Kernel!.DataBase.ExecuteSQL($@"INSERT INTO {ПартіїТоварів_Залишки_TablePart.TABLE} ( uid, {ПартіїТоварів_Залишки_TablePart.Період}, {ПартіїТоварів_Залишки_TablePart.Організація}, {ПартіїТоварів_Залишки_TablePart.ПартіяТоварівКомпозит}, {ПартіїТоварів_Залишки_TablePart.Номенклатура}, {ПартіїТоварів_Залишки_TablePart.ХарактеристикаНоменклатури}, {ПартіїТоварів_Залишки_TablePart.Серія}, {ПартіїТоварів_Залишки_TablePart.Склад}, {ПартіїТоварів_Залишки_TablePart.Кількість}, {ПартіїТоварів_Залишки_TablePart.Собівартість} ) SELECT uuid_generate_v4(), date_trunc('day', ПартіїТоварів.period::timestamp) AS Період, ПартіїТоварів.{ПартіїТоварів_Const.Організація} AS Організація, ПартіїТоварів.{ПартіїТоварів_Const.ПартіяТоварівКомпозит} AS ПартіяТоварівКомпозит, ПартіїТоварів.{ПартіїТоварів_Const.Номенклатура} AS Номенклатура, ПартіїТоварів.{ПартіїТоварів_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури, ПартіїТоварів.{ПартіїТоварів_Const.Серія} AS Серія, ПартіїТоварів.{ПартіїТоварів_Const.Склад} AS Склад, /* Кількість */ SUM(CASE WHEN ПартіїТоварів.income = true THEN ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE -ПартіїТоварів.{ПартіїТоварів_Const.Кількість} END) AS Кількість, /* Собівартість */ SUM(CASE WHEN ПартіїТоварів.income = true THEN ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE -ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} END) AS Собівартість FROM {ПартіїТоварів_Const.TABLE} AS ПартіїТоварів WHERE date_trunc('day', ПартіїТоварів.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, Організація, ПартіяТоварівКомпозит, Номенклатура, ХарактеристикаНоменклатури, Серія, Склад HAVING /* Кількість */ SUM(CASE WHEN ПартіїТоварів.income = true THEN ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE -ПартіїТоварів.{ПартіїТоварів_Const.Кількість} END) != 0 OR /* Собівартість */ SUM(CASE WHEN ПартіїТоварів.income = true THEN ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE -ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} END) != 0", paramQuery, transactionID);
+                    Config.Kernel!.DataBase.ExecuteSQL($@"INSERT INTO {ПартіїТоварів_Залишки_TablePart.TABLE} ( uid, {ПартіїТоварів_Залишки_TablePart.Період}, {ПартіїТоварів_Залишки_TablePart.Організація}, {ПартіїТоварів_Залишки_TablePart.ПартіяТоварівКомпозит}, {ПартіїТоварів_Залишки_TablePart.Номенклатура}, {ПартіїТоварів_Залишки_TablePart.ХарактеристикаНоменклатури}, {ПартіїТоварів_Залишки_TablePart.Серія}, {ПартіїТоварів_Залишки_TablePart.Склад}, {ПартіїТоварів_Залишки_TablePart.Рядок}, {ПартіїТоварів_Залишки_TablePart.Кількість}, {ПартіїТоварів_Залишки_TablePart.Собівартість} ) SELECT uuid_generate_v4(), date_trunc('day', ПартіїТоварів.period::timestamp) AS Період, ПартіїТоварів.{ПартіїТоварів_Const.Організація} AS Організація, ПартіїТоварів.{ПартіїТоварів_Const.ПартіяТоварівКомпозит} AS ПартіяТоварівКомпозит, ПартіїТоварів.{ПартіїТоварів_Const.Номенклатура} AS Номенклатура, ПартіїТоварів.{ПартіїТоварів_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури, ПартіїТоварів.{ПартіїТоварів_Const.Серія} AS Серія, ПартіїТоварів.{ПартіїТоварів_Const.Склад} AS Склад, ПартіїТоварів.{ПартіїТоварів_Const.Рядок} AS Рядок, /* Кількість */ SUM(CASE WHEN ПартіїТоварів.income = true THEN ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE -ПартіїТоварів.{ПартіїТоварів_Const.Кількість} END) AS Кількість, /* Собівартість */ SUM(CASE WHEN ПартіїТоварів.income = true THEN ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE -ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} END) AS Собівартість FROM {ПартіїТоварів_Const.TABLE} AS ПартіїТоварів WHERE date_trunc('day', ПартіїТоварів.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, Організація, ПартіяТоварівКомпозит, Номенклатура, ХарактеристикаНоменклатури, Серія, Склад, Рядок HAVING /* Кількість */ SUM(CASE WHEN ПартіїТоварів.income = true THEN ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE -ПартіїТоварів.{ПартіїТоварів_Const.Кількість} END) != 0 OR /* Собівартість */ SUM(CASE WHEN ПартіїТоварів.income = true THEN ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE -ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} END) != 0", paramQuery, transactionID);
                         
                     /* QueryBlock: ЗалишкиТаОбороти */
                         
                     Config.Kernel!.DataBase.ExecuteSQL($@"DELETE FROM {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.TABLE} WHERE {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.TABLE}.{ПартіїТоварів_ЗалишкиТаОбороти_TablePart.Період} = @ПеріодДеньВідбір", paramQuery, transactionID);
                         
-                    Config.Kernel!.DataBase.ExecuteSQL($@"INSERT INTO {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.TABLE} ( uid, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.Період}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.Організація}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.ПартіяТоварівКомпозит}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.Номенклатура}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.ХарактеристикаНоменклатури}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.Серія}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.Склад}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.КількістьПрихід}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.КількістьРозхід}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.КількістьЗалишок}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.СобівартістьПрихід}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.СобівартістьРозхід}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.СобівартістьЗалишок} ) SELECT uuid_generate_v4(), date_trunc('day', ПартіїТоварів.period::timestamp) AS Період, ПартіїТоварів.{ПартіїТоварів_Const.Організація} AS Організація, ПартіїТоварів.{ПартіїТоварів_Const.ПартіяТоварівКомпозит} AS ПартіяТоварівКомпозит, ПартіїТоварів.{ПартіїТоварів_Const.Номенклатура} AS Номенклатура, ПартіїТоварів.{ПартіїТоварів_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури, ПартіїТоварів.{ПартіїТоварів_Const.Серія} AS Серія, ПартіїТоварів.{ПартіїТоварів_Const.Склад} AS Склад, /* Кількість */ SUM(CASE WHEN ПартіїТоварів.income = true THEN ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE 0 END) AS КількістьПрихід, SUM(CASE WHEN ПартіїТоварів.income = false THEN ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE 0 END) AS КількістьРозхід, SUM(CASE WHEN ПартіїТоварів.income = true THEN ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE -ПартіїТоварів.{ПартіїТоварів_Const.Кількість} END) AS КількістьЗалишок, /* Собівартість */ SUM(CASE WHEN ПартіїТоварів.income = true THEN ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE 0 END) AS СобівартістьПрихід, SUM(CASE WHEN ПартіїТоварів.income = false THEN ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE 0 END) AS СобівартістьРозхід, SUM(CASE WHEN ПартіїТоварів.income = true THEN ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE -ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} END) AS СобівартістьЗалишок FROM {ПартіїТоварів_Const.TABLE} AS ПартіїТоварів WHERE date_trunc('day', ПартіїТоварів.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, Організація, ПартіяТоварівКомпозит, Номенклатура, ХарактеристикаНоменклатури, Серія, Склад HAVING /* Кількість */ SUM(CASE WHEN ПартіїТоварів.income = true THEN ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE 0 END) != 0 OR SUM(CASE WHEN ПартіїТоварів.income = false THEN ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE 0 END) != 0 OR SUM(CASE WHEN ПартіїТоварів.income = true THEN ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE -ПартіїТоварів.{ПартіїТоварів_Const.Кількість} END) != 0 OR /* Собівартість */ SUM(CASE WHEN ПартіїТоварів.income = true THEN ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE 0 END) != 0 OR SUM(CASE WHEN ПартіїТоварів.income = false THEN ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE 0 END) != 0 OR SUM(CASE WHEN ПартіїТоварів.income = true THEN ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE -ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} END) != 0", paramQuery, transactionID);
+                    Config.Kernel!.DataBase.ExecuteSQL($@"INSERT INTO {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.TABLE} ( uid, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.Період}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.Організація}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.ПартіяТоварівКомпозит}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.Номенклатура}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.ХарактеристикаНоменклатури}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.Серія}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.Склад}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.Рядок}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.КількістьПрихід}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.КількістьРозхід}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.КількістьЗалишок}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.СобівартістьПрихід}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.СобівартістьРозхід}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.СобівартістьЗалишок} ) SELECT uuid_generate_v4(), date_trunc('day', ПартіїТоварів.period::timestamp) AS Період, ПартіїТоварів.{ПартіїТоварів_Const.Організація} AS Організація, ПартіїТоварів.{ПартіїТоварів_Const.ПартіяТоварівКомпозит} AS ПартіяТоварівКомпозит, ПартіїТоварів.{ПартіїТоварів_Const.Номенклатура} AS Номенклатура, ПартіїТоварів.{ПартіїТоварів_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури, ПартіїТоварів.{ПартіїТоварів_Const.Серія} AS Серія, ПартіїТоварів.{ПартіїТоварів_Const.Склад} AS Склад, ПартіїТоварів.{ПартіїТоварів_Const.Рядок} AS Рядок, /* Кількість */ SUM(CASE WHEN ПартіїТоварів.income = true THEN ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE 0 END) AS КількістьПрихід, SUM(CASE WHEN ПартіїТоварів.income = false THEN ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE 0 END) AS КількістьРозхід, SUM(CASE WHEN ПартіїТоварів.income = true THEN ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE -ПартіїТоварів.{ПартіїТоварів_Const.Кількість} END) AS КількістьЗалишок, /* Собівартість */ SUM(CASE WHEN ПартіїТоварів.income = true THEN ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE 0 END) AS СобівартістьПрихід, SUM(CASE WHEN ПартіїТоварів.income = false THEN ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE 0 END) AS СобівартістьРозхід, SUM(CASE WHEN ПартіїТоварів.income = true THEN ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE -ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} END) AS СобівартістьЗалишок FROM {ПартіїТоварів_Const.TABLE} AS ПартіїТоварів WHERE date_trunc('day', ПартіїТоварів.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, Організація, ПартіяТоварівКомпозит, Номенклатура, ХарактеристикаНоменклатури, Серія, Склад, Рядок HAVING /* Кількість */ SUM(CASE WHEN ПартіїТоварів.income = true THEN ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE 0 END) != 0 OR SUM(CASE WHEN ПартіїТоварів.income = false THEN ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE 0 END) != 0 OR SUM(CASE WHEN ПартіїТоварів.income = true THEN ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE -ПартіїТоварів.{ПартіїТоварів_Const.Кількість} END) != 0 OR /* Собівартість */ SUM(CASE WHEN ПартіїТоварів.income = true THEN ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE 0 END) != 0 OR SUM(CASE WHEN ПартіїТоварів.income = false THEN ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE 0 END) != 0 OR SUM(CASE WHEN ПартіїТоварів.income = true THEN ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE -ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} END) != 0", paramQuery, transactionID);
                         
                     Config.Kernel!.DataBase.CommitTransaction(transactionID);
                     break;
@@ -24986,7 +24986,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_e7", record.ВНаявності);
                 fieldValue.Add("col_e8", record.ДоВідвантаження);
                 
-                base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
+                record.UID = base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
             }
             base.BaseTrigerAdd(period, owner);
             base.BaseCommitTransaction();
@@ -25074,7 +25074,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_a6", record.ВНаявності);
                 fieldValue.Add("col_a7", record.ДоВідвантаження);
                 
-                base.BaseSave(record.UID, fieldValue);
+                record.UID = base.BaseSave(record.UID, fieldValue);
             }
             
             base.BaseCommitTransaction();
@@ -25173,7 +25173,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_b1", record.ДоВідвантаженняРозхід);
                 fieldValue.Add("col_b2", record.ДоВідвантаженняЗалишок);
                 
-                base.BaseSave(record.UID, fieldValue);
+                record.UID = base.BaseSave(record.UID, fieldValue);
             }
             
             base.BaseCommitTransaction();
@@ -25261,7 +25261,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_a5", record.ВНаявності);
                 fieldValue.Add("col_a6", record.ДоВідвантаження);
                 
-                base.BaseSave(record.UID, fieldValue);
+                record.UID = base.BaseSave(record.UID, fieldValue);
             }
             
             base.BaseCommitTransaction();
@@ -25354,7 +25354,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_a5", record.Замовлено);
                 fieldValue.Add("col_a6", record.Сума);
                 
-                base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
+                record.UID = base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
             }
             base.BaseTrigerAdd(period, owner);
             base.BaseCommitTransaction();
@@ -25442,7 +25442,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_a6", record.Замовлено);
                 fieldValue.Add("col_a7", record.Сума);
                 
-                base.BaseSave(record.UID, fieldValue);
+                record.UID = base.BaseSave(record.UID, fieldValue);
             }
             
             base.BaseCommitTransaction();
@@ -25527,7 +25527,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_a5", record.Контрагент.UnigueID.UGuid);
                 fieldValue.Add("col_a4", record.Сума);
                 
-                base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
+                record.UID = base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
             }
             base.BaseTrigerAdd(period, owner);
             base.BaseCommitTransaction();
@@ -25603,7 +25603,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_a3", record.Контрагент.UnigueID.UGuid);
                 fieldValue.Add("col_a4", record.Сума);
                 
-                base.BaseSave(record.UID, fieldValue);
+                record.UID = base.BaseSave(record.UID, fieldValue);
             }
             
             base.BaseCommitTransaction();
@@ -25684,7 +25684,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_a5", record.СумаРозхід);
                 fieldValue.Add("col_a6", record.СумаЗалишок);
                 
-                base.BaseSave(record.UID, fieldValue);
+                record.UID = base.BaseSave(record.UID, fieldValue);
             }
             
             base.BaseCommitTransaction();
@@ -25786,7 +25786,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_b1", record.Сума);
                 fieldValue.Add("col_a3", record.Собівартість);
                 
-                base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
+                record.UID = base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
             }
             base.BaseTrigerAdd(period, owner);
             base.BaseCommitTransaction();
@@ -25886,7 +25886,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_a9", record.Сума);
                 fieldValue.Add("col_b1", record.Собівартість);
                 
-                base.BaseSave(record.UID, fieldValue);
+                record.UID = base.BaseSave(record.UID, fieldValue);
             }
             
             base.BaseCommitTransaction();
@@ -25986,7 +25986,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_b2", record.ВРезервіПідЗамовлення);
                 fieldValue.Add("col_a1", record.ДокументРезерву);
                 
-                base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
+                record.UID = base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
             }
             base.BaseTrigerAdd(period, owner);
             base.BaseCommitTransaction();
@@ -26075,7 +26075,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_a6", record.ВРезервіЗіСкладу);
                 fieldValue.Add("col_a7", record.ВРезервіПідЗамовлення);
                 
-                base.BaseSave(record.UID, fieldValue);
+                record.UID = base.BaseSave(record.UID, fieldValue);
             }
             
             base.BaseCommitTransaction();
@@ -26166,7 +26166,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_a4", record.Склад.UnigueID.UGuid);
                 fieldValue.Add("col_a5", record.Замовлено);
                 
-                base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
+                record.UID = base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
             }
             base.BaseTrigerAdd(period, owner);
             base.BaseCommitTransaction();
@@ -26250,7 +26250,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_a5", record.Склад.UnigueID.UGuid);
                 fieldValue.Add("col_a6", record.Замовлено);
                 
-                base.BaseSave(record.UID, fieldValue);
+                record.UID = base.BaseSave(record.UID, fieldValue);
             }
             
             base.BaseCommitTransaction();
@@ -26334,7 +26334,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_a7", record.Валюта.UnigueID.UGuid);
                 fieldValue.Add("col_a8", record.Сума);
                 
-                base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
+                record.UID = base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
             }
             base.BaseTrigerAdd(period, owner);
             base.BaseCommitTransaction();
@@ -26410,7 +26410,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_a3", record.Валюта.UnigueID.UGuid);
                 fieldValue.Add("col_a4", record.Сума);
                 
-                base.BaseSave(record.UID, fieldValue);
+                record.UID = base.BaseSave(record.UID, fieldValue);
             }
             
             base.BaseCommitTransaction();
@@ -26491,7 +26491,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_a5", record.СумаРозхід);
                 fieldValue.Add("col_a6", record.СумаЗалишок);
                 
-                base.BaseSave(record.UID, fieldValue);
+                record.UID = base.BaseSave(record.UID, fieldValue);
             }
             
             base.BaseCommitTransaction();
@@ -26578,7 +26578,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_a3", record.Валюта.UnigueID.UGuid);
                 fieldValue.Add("col_a4", record.Сума);
                 
-                base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
+                record.UID = base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
             }
             base.BaseTrigerAdd(period, owner);
             base.BaseCommitTransaction();
@@ -26658,7 +26658,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_a4", record.Валюта.UnigueID.UGuid);
                 fieldValue.Add("col_a5", record.Сума);
                 
-                base.BaseSave(record.UID, fieldValue);
+                record.UID = base.BaseSave(record.UID, fieldValue);
             }
             
             base.BaseCommitTransaction();
@@ -26743,7 +26743,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_a6", record.СумаРозхід);
                 fieldValue.Add("col_a7", record.СумаЗалишок);
                 
-                base.BaseSave(record.UID, fieldValue);
+                record.UID = base.BaseSave(record.UID, fieldValue);
             }
             
             base.BaseCommitTransaction();
@@ -26821,7 +26821,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_a3", record.Валюта.UnigueID.UGuid);
                 fieldValue.Add("col_a4", record.Сума);
                 
-                base.BaseSave(record.UID, fieldValue);
+                record.UID = base.BaseSave(record.UID, fieldValue);
             }
             
             base.BaseCommitTransaction();
@@ -26857,6 +26857,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public const string ХарактеристикаНоменклатури = "col_a7";
         public const string Серія = "col_a8";
         public const string Склад = "col_a2";
+        public const string Рядок = "col_a6";
         public const string Кількість = "col_a3";
         public const string Собівартість = "col_a4";
         public const string СписанаСобівартість = "col_b5";
@@ -26865,7 +26866,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
     public class ПартіїТоварів_RecordsSet : RegisterAccumulationRecordsSet
     {
         public ПартіїТоварів_RecordsSet() : base(Config.Kernel!, "tab_a79", "ПартіїТоварів",
-             new string[] { "col_a1", "col_a9", "col_a5", "col_a7", "col_a8", "col_a2", "col_a3", "col_a4", "col_b5" }) 
+             new string[] { "col_a1", "col_a9", "col_a5", "col_a7", "col_a8", "col_a2", "col_a6", "col_a3", "col_a4", "col_b5" }) 
         {
             Records = new List<Record>();
         }
@@ -26891,6 +26892,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 record.ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer(fieldValue["col_a7"]);
                 record.Серія = new Довідники.СеріїНоменклатури_Pointer(fieldValue["col_a8"]);
                 record.Склад = new Довідники.Склади_Pointer(fieldValue["col_a2"]);
+                record.Рядок = (fieldValue["col_a6"] != DBNull.Value) ? (int)fieldValue["col_a6"] : 0;
                 record.Кількість = (fieldValue["col_a3"] != DBNull.Value) ? (decimal)fieldValue["col_a3"] : 0;
                 record.Собівартість = (fieldValue["col_a4"] != DBNull.Value) ? (decimal)fieldValue["col_a4"] : 0;
                 record.СписанаСобівартість = (fieldValue["col_b5"] != DBNull.Value) ? (decimal)fieldValue["col_b5"] : 0;
@@ -26917,11 +26919,12 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_a7", record.ХарактеристикаНоменклатури.UnigueID.UGuid);
                 fieldValue.Add("col_a8", record.Серія.UnigueID.UGuid);
                 fieldValue.Add("col_a2", record.Склад.UnigueID.UGuid);
+                fieldValue.Add("col_a6", record.Рядок);
                 fieldValue.Add("col_a3", record.Кількість);
                 fieldValue.Add("col_a4", record.Собівартість);
                 fieldValue.Add("col_b5", record.СписанаСобівартість);
                 
-                base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
+                record.UID = base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
             }
             base.BaseTrigerAdd(period, owner);
             base.BaseCommitTransaction();
@@ -26941,6 +26944,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; } = new Довідники.ХарактеристикиНоменклатури_Pointer();
             public Довідники.СеріїНоменклатури_Pointer Серія { get; set; } = new Довідники.СеріїНоменклатури_Pointer();
             public Довідники.Склади_Pointer Склад { get; set; } = new Довідники.Склади_Pointer();
+            public int Рядок { get; set; } = 0;
             public decimal Кількість { get; set; } = 0;
             public decimal Собівартість { get; set; } = 0;
             public decimal СписанаСобівартість { get; set; } = 0;
@@ -26953,7 +26957,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
     public class ПартіїТоварів_Залишки_TablePart : RegisterAccumulationTablePart
     {
         public ПартіїТоварів_Залишки_TablePart() : base(Config.Kernel!, "tab_b49",
-              new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9" }) 
+              new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_b1", "col_a8", "col_a9" }) 
         {
             Records = new List<Record>();
         }
@@ -26967,6 +26971,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public const string ХарактеристикаНоменклатури = "col_a5";
         public const string Серія = "col_a6";
         public const string Склад = "col_a7";
+        public const string Рядок = "col_b1";
         public const string Кількість = "col_a8";
         public const string Собівартість = "col_a9";
         public List<Record> Records { get; set; }
@@ -26988,6 +26993,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 record.ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer(fieldValue["col_a5"]);
                 record.Серія = new Довідники.СеріїНоменклатури_Pointer(fieldValue["col_a6"]);
                 record.Склад = new Довідники.Склади_Pointer(fieldValue["col_a7"]);
+                record.Рядок = (fieldValue["col_b1"] != DBNull.Value) ? (int)fieldValue["col_b1"] : 0;
                 record.Кількість = (fieldValue["col_a8"] != DBNull.Value) ? (decimal)fieldValue["col_a8"] : 0;
                 record.Собівартість = (fieldValue["col_a9"] != DBNull.Value) ? (decimal)fieldValue["col_a9"] : 0;
                 
@@ -27015,10 +27021,11 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_a5", record.ХарактеристикаНоменклатури.UnigueID.UGuid);
                 fieldValue.Add("col_a6", record.Серія.UnigueID.UGuid);
                 fieldValue.Add("col_a7", record.Склад.UnigueID.UGuid);
+                fieldValue.Add("col_b1", record.Рядок);
                 fieldValue.Add("col_a8", record.Кількість);
                 fieldValue.Add("col_a9", record.Собівартість);
                 
-                base.BaseSave(record.UID, fieldValue);
+                record.UID = base.BaseSave(record.UID, fieldValue);
             }
             
             base.BaseCommitTransaction();
@@ -27038,6 +27045,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; } = new Довідники.ХарактеристикиНоменклатури_Pointer();
             public Довідники.СеріїНоменклатури_Pointer Серія { get; set; } = new Довідники.СеріїНоменклатури_Pointer();
             public Довідники.Склади_Pointer Склад { get; set; } = new Довідники.Склади_Pointer();
+            public int Рядок { get; set; } = 0;
             public decimal Кількість { get; set; } = 0;
             public decimal Собівартість { get; set; } = 0;
             
@@ -27048,7 +27056,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
     public class ПартіїТоварів_ЗалишкиТаОбороти_TablePart : RegisterAccumulationTablePart
     {
         public ПартіїТоварів_ЗалишкиТаОбороти_TablePart() : base(Config.Kernel!, "tab_b25",
-              new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b1", "col_b2", "col_b3", "col_b4" }) 
+              new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_b5", "col_a8", "col_a9", "col_b1", "col_b2", "col_b3", "col_b4" }) 
         {
             Records = new List<Record>();
         }
@@ -27062,6 +27070,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public const string ХарактеристикаНоменклатури = "col_a5";
         public const string Серія = "col_a6";
         public const string Склад = "col_a7";
+        public const string Рядок = "col_b5";
         public const string КількістьПрихід = "col_a8";
         public const string КількістьРозхід = "col_a9";
         public const string КількістьЗалишок = "col_b1";
@@ -27087,6 +27096,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 record.ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer(fieldValue["col_a5"]);
                 record.Серія = new Довідники.СеріїНоменклатури_Pointer(fieldValue["col_a6"]);
                 record.Склад = new Довідники.Склади_Pointer(fieldValue["col_a7"]);
+                record.Рядок = (fieldValue["col_b5"] != DBNull.Value) ? (int)fieldValue["col_b5"] : 0;
                 record.КількістьПрихід = (fieldValue["col_a8"] != DBNull.Value) ? (decimal)fieldValue["col_a8"] : 0;
                 record.КількістьРозхід = (fieldValue["col_a9"] != DBNull.Value) ? (decimal)fieldValue["col_a9"] : 0;
                 record.КількістьЗалишок = (fieldValue["col_b1"] != DBNull.Value) ? (decimal)fieldValue["col_b1"] : 0;
@@ -27118,6 +27128,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_a5", record.ХарактеристикаНоменклатури.UnigueID.UGuid);
                 fieldValue.Add("col_a6", record.Серія.UnigueID.UGuid);
                 fieldValue.Add("col_a7", record.Склад.UnigueID.UGuid);
+                fieldValue.Add("col_b5", record.Рядок);
                 fieldValue.Add("col_a8", record.КількістьПрихід);
                 fieldValue.Add("col_a9", record.КількістьРозхід);
                 fieldValue.Add("col_b1", record.КількістьЗалишок);
@@ -27125,7 +27136,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_b3", record.СобівартістьРозхід);
                 fieldValue.Add("col_b4", record.СобівартістьЗалишок);
                 
-                base.BaseSave(record.UID, fieldValue);
+                record.UID = base.BaseSave(record.UID, fieldValue);
             }
             
             base.BaseCommitTransaction();
@@ -27145,6 +27156,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; } = new Довідники.ХарактеристикиНоменклатури_Pointer();
             public Довідники.СеріїНоменклатури_Pointer Серія { get; set; } = new Довідники.СеріїНоменклатури_Pointer();
             public Довідники.Склади_Pointer Склад { get; set; } = new Довідники.Склади_Pointer();
+            public int Рядок { get; set; } = 0;
             public decimal КількістьПрихід { get; set; } = 0;
             public decimal КількістьРозхід { get; set; } = 0;
             public decimal КількістьЗалишок { get; set; } = 0;
@@ -27237,7 +27249,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_a4", record.Дохід);
                 fieldValue.Add("col_a3", record.Собівартість);
                 
-                base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
+                record.UID = base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
             }
             base.BaseTrigerAdd(period, owner);
             base.BaseCommitTransaction();
@@ -27341,7 +27353,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_b1", record.Дохід);
                 fieldValue.Add("col_b2", record.Собівартість);
                 
-                base.BaseSave(record.UID, fieldValue);
+                record.UID = base.BaseSave(record.UID, fieldValue);
             }
             
             base.BaseCommitTransaction();
@@ -27439,7 +27451,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_a5", record.Серія.UnigueID.UGuid);
                 fieldValue.Add("col_a6", record.ВНаявності);
                 
-                base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
+                record.UID = base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
             }
             base.BaseTrigerAdd(period, owner);
             base.BaseCommitTransaction();
@@ -27533,7 +27545,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_a8", record.ВНаявностіРозхід);
                 fieldValue.Add("col_a9", record.ВНаявностіЗалишок);
                 
-                base.BaseSave(record.UID, fieldValue);
+                record.UID = base.BaseSave(record.UID, fieldValue);
             }
             
             base.BaseCommitTransaction();
@@ -27622,7 +27634,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_a6", record.Серія.UnigueID.UGuid);
                 fieldValue.Add("col_a7", record.ВНаявності);
                 
-                base.BaseSave(record.UID, fieldValue);
+                record.UID = base.BaseSave(record.UID, fieldValue);
             }
             
             base.BaseCommitTransaction();
@@ -27706,7 +27718,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_a5", record.Серія.UnigueID.UGuid);
                 fieldValue.Add("col_a6", record.ВНаявності);
                 
-                base.BaseSave(record.UID, fieldValue);
+                record.UID = base.BaseSave(record.UID, fieldValue);
             }
             
             base.BaseCommitTransaction();

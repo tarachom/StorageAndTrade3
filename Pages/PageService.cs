@@ -178,8 +178,8 @@ namespace StorageAndTrade
                         {
                             try
                             {
-                                doc.GetType().InvokeMember("Save",
-                                     BindingFlags.InvokeMethod, null, doc, new object[] { });
+                                // doc.GetType().InvokeMember("Save",
+                                //      BindingFlags.InvokeMethod, null, doc, new object[] { });
 
                                 object? obj = doc.GetType().InvokeMember("SpendTheDocument",
                                      BindingFlags.InvokeMethod, null, doc, new object[] { journalSelect.Current.SpendDate });

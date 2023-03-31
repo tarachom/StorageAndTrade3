@@ -574,7 +574,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Константи
                         </xsl:choose>
                         <xsl:text>)</xsl:text>;
                     </xsl:for-each>
-                    base.BaseSave(record.UID, fieldValue);
+                    record.UID = base.BaseSave(record.UID, fieldValue);
                 }
                 
                 base.BaseCommitTransaction();
@@ -916,7 +916,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
                     </xsl:choose>
                     <xsl:text>)</xsl:text>;
                 </xsl:for-each>
-                base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
                 
             base.BaseCommitTransaction();
@@ -1452,7 +1452,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
                     </xsl:choose>
                     <xsl:text>)</xsl:text>;
                 </xsl:for-each>
-                base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
                 
             base.BaseCommitTransaction();
@@ -1621,7 +1621,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВі�
                     </xsl:if>
                     <xsl:text>)</xsl:text>;
                 </xsl:for-each>
-                base.BaseSave(record.UID, period, owner, fieldValue);
+                record.UID = base.BaseSave(record.UID, period, owner, fieldValue);
             }
             base.BaseCommitTransaction();
         }
@@ -1892,7 +1892,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриНа�
                     </xsl:if>
                     <xsl:text>)</xsl:text>;
                 </xsl:for-each>
-                base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
+                record.UID = base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
             }
             base.BaseTrigerAdd(period, owner);
             base.BaseCommitTransaction();
@@ -1990,7 +1990,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриНа�
                     </xsl:choose>
                     <xsl:text>)</xsl:text>;
                 </xsl:for-each>
-                base.BaseSave(record.UID, fieldValue);
+                record.UID = base.BaseSave(record.UID, fieldValue);
             }
             
             base.BaseCommitTransaction();

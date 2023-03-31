@@ -533,7 +533,7 @@ namespace StorageAndTrade
             ПоступленняТоварівТаПослуг_Objest ПоступленняТоварівТаПослуг_Objest = ПоступленняТоварівТаПослуг_Pointer.GetDocumentObject(true);
 
             //Збереження для запуску тригерів
-            ПоступленняТоварівТаПослуг_Objest.Save();
+            ПоступленняТоварівТаПослуг_Objest.Save(); //??? чи треба
 
             if (spendDoc)
             {

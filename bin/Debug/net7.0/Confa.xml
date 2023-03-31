@@ -5,7 +5,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>30.03.2023 22:12:37</DateTimeSave>
+  <DateTimeSave>31.03.2023 19:28:38</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -6356,7 +6356,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <NameInTable>col_a2</NameInTable>
           <Type>string</Type>
           <Desc>Назва</Desc>
-          <IsPresentation>0</IsPresentation>
+          <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
         </Field>
@@ -23477,6 +23477,7 @@ SQL тип  непотрібно вказувати
       <Type>Residues</Type>
       <Desc>
       </Desc>
+      <NoSummary>0</NoSummary>
       <DimensionFields>
         <Fields>
           <Field>
@@ -24018,6 +24019,7 @@ HAVING
       <Table>tab_a55</Table>
       <Type>Residues</Type>
       <Desc>Замовлення клієнтів</Desc>
+      <NoSummary>0</NoSummary>
       <DimensionFields>
         <Fields>
           <Field>
@@ -24243,6 +24245,7 @@ HAVING
       <Type>Residues</Type>
       <Desc>
       </Desc>
+      <NoSummary>0</NoSummary>
       <DimensionFields>
         <Fields>
           <Field>
@@ -24520,6 +24523,7 @@ HAVING
       <Type>Turnover</Type>
       <Desc>
       </Desc>
+      <NoSummary>0</NoSummary>
       <DimensionFields>
         <Fields>
           <Field>
@@ -24795,6 +24799,7 @@ HAVING
       <Type>Residues</Type>
       <Desc>
       </Desc>
+      <NoSummary>0</NoSummary>
       <DimensionFields>
         <Fields>
           <Field>
@@ -25046,6 +25051,7 @@ HAVING
       <Type>Residues</Type>
       <Desc>
       </Desc>
+      <NoSummary>0</NoSummary>
       <DimensionFields>
         <Fields>
           <Field>
@@ -25240,6 +25246,7 @@ HAVING
       <Type>Residues</Type>
       <Desc>
       </Desc>
+      <NoSummary>0</NoSummary>
       <DimensionFields>
         <Fields>
           <Field>
@@ -25516,6 +25523,7 @@ HAVING
       <Type>Residues</Type>
       <Desc>
       </Desc>
+      <NoSummary>0</NoSummary>
       <DimensionFields>
         <Fields>
           <Field>
@@ -25910,6 +25918,7 @@ HAVING
       <Type>Residues</Type>
       <Desc>
       </Desc>
+      <NoSummary>1</NoSummary>
       <DimensionFields>
         <Fields>
           <Field>
@@ -25969,6 +25978,15 @@ HAVING
             <Pointer>Довідники.Склади</Pointer>
             <Desc>
             </Desc>
+            <IsIndex>1</IsIndex>
+            <IsFullTextSearch>0</IsFullTextSearch>
+          </Field>
+          <Field>
+            <Name>Рядок</Name>
+            <NameInTable>col_a6</NameInTable>
+            <Type>integer</Type>
+            <Desc>Унікальний ідентифікатор рядочку в табличній частині 
+документу поступлення партії</Desc>
             <IsIndex>1</IsIndex>
             <IsFullTextSearch>0</IsFullTextSearch>
           </Field>
@@ -26094,6 +26112,15 @@ HAVING
               <IsFullTextSearch>0</IsFullTextSearch>
             </Field>
             <Field>
+              <Name>Рядок</Name>
+              <NameInTable>col_b1</NameInTable>
+              <Type>integer</Type>
+              <Desc>Унікальний ідентифікатор рядочку в табличній частині 
+документу поступлення партії</Desc>
+              <IsIndex>1</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+            </Field>
+            <Field>
               <Name>Кількість</Name>
               <NameInTable>col_a8</NameInTable>
               <Type>numeric</Type>
@@ -26188,6 +26215,15 @@ HAVING
               <IsFullTextSearch>0</IsFullTextSearch>
             </Field>
             <Field>
+              <Name>Рядок</Name>
+              <NameInTable>col_b5</NameInTable>
+              <Type>integer</Type>
+              <Desc>Унікальний ідентифікатор рядочку в табличній частині 
+документу поступлення партії</Desc>
+              <IsIndex>1</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+            </Field>
+            <Field>
               <Name>КількістьПрихід</Name>
               <NameInTable>col_a8</NameInTable>
               <Type>numeric</Type>
@@ -26265,6 +26301,7 @@ INSERT INTO {ПартіїТоварів_Залишки_TablePart.TABLE}
     {ПартіїТоварів_Залишки_TablePart.ХарактеристикаНоменклатури},
     {ПартіїТоварів_Залишки_TablePart.Серія},
     {ПартіїТоварів_Залишки_TablePart.Склад},
+    {ПартіїТоварів_Залишки_TablePart.Рядок},
     {ПартіїТоварів_Залишки_TablePart.Кількість},
     {ПартіїТоварів_Залишки_TablePart.Собівартість}
 )
@@ -26277,6 +26314,7 @@ SELECT
     ПартіїТоварів.{ПартіїТоварів_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
     ПартіїТоварів.{ПартіїТоварів_Const.Серія} AS Серія,
     ПартіїТоварів.{ПартіїТоварів_Const.Склад} AS Склад,
+    ПартіїТоварів.{ПартіїТоварів_Const.Рядок} AS Рядок,
 
     /* Кількість */
     SUM(CASE WHEN ПартіїТоварів.income = true THEN 
@@ -26295,7 +26333,7 @@ WHERE
     date_trunc('day', ПартіїТоварів.period::timestamp) = @ПеріодДеньВідбір
 
 GROUP BY
-    Період, Організація, ПартіяТоварівКомпозит, Номенклатура, ХарактеристикаНоменклатури, Серія, Склад
+    Період, Організація, ПартіяТоварівКомпозит, Номенклатура, ХарактеристикаНоменклатури, Серія, Склад, Рядок
 
 HAVING
 
@@ -26336,6 +26374,7 @@ INSERT INTO {ПартіїТоварів_ЗалишкиТаОбороти_TablePa
     {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.ХарактеристикаНоменклатури},
     {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.Серія},
     {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.Склад},
+    {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.Рядок},
     {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.КількістьПрихід},
     {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.КількістьРозхід},
     {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.КількістьЗалишок},
@@ -26352,6 +26391,7 @@ SELECT
     ПартіїТоварів.{ПартіїТоварів_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
     ПартіїТоварів.{ПартіїТоварів_Const.Серія} AS Серія,
     ПартіїТоварів.{ПартіїТоварів_Const.Склад} AS Склад,
+    ПартіїТоварів.{ПартіїТоварів_Const.Рядок} AS Рядок,
 
     /* Кількість */
     SUM(CASE WHEN ПартіїТоварів.income = true THEN 
@@ -26378,7 +26418,7 @@ WHERE
     date_trunc('day', ПартіїТоварів.period::timestamp) = @ПеріодДеньВідбір
 
 GROUP BY
-    Період, Організація, ПартіяТоварівКомпозит, Номенклатура, ХарактеристикаНоменклатури, Серія, Склад
+    Період, Організація, ПартіяТоварівКомпозит, Номенклатура, ХарактеристикаНоменклатури, Серія, Склад, Рядок
 
 HAVING
 
@@ -26415,6 +26455,7 @@ HAVING
       <Type>Turnover</Type>
       <Desc>
       </Desc>
+      <NoSummary>0</NoSummary>
       <DimensionFields>
         <Fields>
           <Field>
@@ -26712,6 +26753,7 @@ HAVING
       <Type>Residues</Type>
       <Desc>
       </Desc>
+      <NoSummary>0</NoSummary>
       <DimensionFields>
         <Fields>
           <Field>
