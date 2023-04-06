@@ -371,6 +371,11 @@ namespace StorageAndTrade
                         OnRowActivated(TreeViewGrid, new RowActivatedArgs());
                         break;
                     }
+                case Gdk.Key.Delete:
+                    {
+                        OnDeleteClick(TreeViewGrid, new EventArgs());
+                        break;
+                    }
             }
         }
 
@@ -423,7 +428,7 @@ namespace StorageAndTrade
 
                         РозміщенняНоменклатуриПоКоміркам_Objest РозміщенняНоменклатуриПоКоміркам_Objest = new РозміщенняНоменклатуриПоКоміркам_Objest();
                         if (РозміщенняНоменклатуриПоКоміркам_Objest.Read(new UnigueID(uid)))
-                            РозміщенняНоменклатуриПоКоміркам_Objest.Delete();
+                            РозміщенняНоменклатуриПоКоміркам_Objest.SetDeletionLabel(!РозміщенняНоменклатуриПоКоміркам_Objest.DeletionLabel);
                         else
                             Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                     }

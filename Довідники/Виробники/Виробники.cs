@@ -189,7 +189,7 @@ namespace StorageAndTrade
 
                 UnigueID unigueID = new UnigueID((string)TreeViewGrid.Model.GetValue(iter, 1));
 
-                SelectPointerItem = new StorageAndTrade_1_0.Довідники.Виробники_Pointer(unigueID);
+                SelectPointerItem = new Виробники_Pointer(unigueID);
             }
         }
 
@@ -265,7 +265,7 @@ namespace StorageAndTrade
 
                         Виробники_Objest Виробники_Objest = new Виробники_Objest();
                         if (Виробники_Objest.Read(new UnigueID(uid)))
-                            Виробники_Objest.Delete();
+                            Виробники_Objest.SetDeletionLabel(!Виробники_Objest.DeletionLabel);
                         else
                             Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                     }

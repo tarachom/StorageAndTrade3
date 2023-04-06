@@ -339,7 +339,7 @@ namespace StorageAndTrade
 
                         Номенклатура_Objest Номенклатура_Objest = new Номенклатура_Objest();
                         if (Номенклатура_Objest.Read(new UnigueID(uid)))
-                            Номенклатура_Objest.Delete();
+                            Номенклатура_Objest.SetDeletionLabel(!Номенклатура_Objest.DeletionLabel);
                         else
                             Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                     }

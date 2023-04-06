@@ -173,7 +173,6 @@ namespace StorageAndTrade
                     {
                         Валюти_Objest валюти_Objest = new Валюти_Objest();
                         валюти_Objest.New();
-                        валюти_Objest.Код = (++Константи.НумераціяДовідників.Валюти_Const).ToString("D6");
                         валюти_Objest.Назва = НазваВалюти;
                         валюти_Objest.Код_R030 = Код_R030;
                         валюти_Objest.КороткаНазва = Коротко;

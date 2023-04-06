@@ -265,7 +265,7 @@ namespace StorageAndTrade
 
                         ВидиЗапасів_Objest ВидиЗапасів_Objest = new ВидиЗапасів_Objest();
                         if (ВидиЗапасів_Objest.Read(new UnigueID(uid)))
-                            ВидиЗапасів_Objest.Delete();
+                            ВидиЗапасів_Objest.SetDeletionLabel(!ВидиЗапасів_Objest.DeletionLabel);
                         else
                             Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                     }

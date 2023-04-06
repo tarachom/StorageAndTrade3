@@ -201,7 +201,7 @@ namespace StorageAndTrade
 
                         ПартіяТоварівКомпозит_Objest ПартіяТоварівКомпозит_Objest = new ПартіяТоварівКомпозит_Objest();
                         if (ПартіяТоварівКомпозит_Objest.Read(new UnigueID(uid)))
-                            ПартіяТоварівКомпозит_Objest.Delete();
+                            ПартіяТоварівКомпозит_Objest.SetDeletionLabel(!ПартіяТоварівКомпозит_Objest.DeletionLabel);
                         else
                             Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                     }

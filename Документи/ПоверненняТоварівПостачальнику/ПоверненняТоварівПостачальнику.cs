@@ -370,6 +370,11 @@ namespace StorageAndTrade
                         OnRowActivated(TreeViewGrid, new RowActivatedArgs());
                         break;
                     }
+                case Gdk.Key.Delete:
+                    {
+                        OnDeleteClick(TreeViewGrid, new EventArgs());
+                        break;
+                    }
             }
         }
 
@@ -422,7 +427,7 @@ namespace StorageAndTrade
 
                         ПоверненняТоварівПостачальнику_Objest ПоверненняТоварівПостачальнику_Objest = new ПоверненняТоварівПостачальнику_Objest();
                         if (ПоверненняТоварівПостачальнику_Objest.Read(new UnigueID(uid)))
-                            ПоверненняТоварівПостачальнику_Objest.Delete();
+                            ПоверненняТоварівПостачальнику_Objest.SetDeletionLabel(!ПоверненняТоварівПостачальнику_Objest.DeletionLabel);
                         else
                             Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                     }

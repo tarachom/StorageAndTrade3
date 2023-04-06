@@ -265,7 +265,7 @@ namespace StorageAndTrade
 
                         ПакуванняОдиниціВиміру_Objest ПакуванняОдиниціВиміру_Objest = new ПакуванняОдиниціВиміру_Objest();
                         if (ПакуванняОдиниціВиміру_Objest.Read(new UnigueID(uid)))
-                            ПакуванняОдиниціВиміру_Objest.Delete();
+                            ПакуванняОдиниціВиміру_Objest.SetDeletionLabel(!ПакуванняОдиниціВиміру_Objest.DeletionLabel);
                         else
                             Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                     }

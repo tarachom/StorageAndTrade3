@@ -303,7 +303,7 @@ namespace StorageAndTrade
 
                         Контрагенти_Objest Контрагенти_Objest = new Контрагенти_Objest();
                         if (Контрагенти_Objest.Read(new UnigueID(uid)))
-                            Контрагенти_Objest.Delete();
+                            Контрагенти_Objest.SetDeletionLabel(!Контрагенти_Objest.DeletionLabel);
                         else
                             Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                     }

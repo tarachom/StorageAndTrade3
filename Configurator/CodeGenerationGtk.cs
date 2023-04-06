@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 31.03.2023 19:28:38
+ * Дата конфігурації: 06.04.2023 13:02:18
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон Gtk.xslt
@@ -44,7 +44,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class Організації_Записи
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
         
         string Код = "";
@@ -52,7 +60,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID
             /* */ , Код, Назва };
         }
 
@@ -89,8 +97,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Довідники.Організації_Select Організації_Select = new Довідники.Організації_Select();
             Організації_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Довідники.Організації_Const.Код /* 1 */
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.Організації_Const.Код /* 1 */
                     , Довідники.Організації_Const.Назва /* 2 */
                     
                 });
@@ -114,6 +122,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     Організації_Записи Record = new Організації_Записи
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Код = cur.Fields?[Організації_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[Організації_Const.Назва]?.ToString() ?? "" /**/
                         
@@ -139,7 +148,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 	    
     public class Організації_ЗаписиШвидкийВибір
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
         
         string Код = "";
@@ -147,7 +164,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID
             /* */ , Код, Назва };
         }
 
@@ -184,8 +201,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Довідники.Організації_Select Організації_Select = new Довідники.Організації_Select();
             Організації_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Довідники.Організації_Const.Код /* 1 */
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.Організації_Const.Код /* 1 */
                     , Довідники.Організації_Const.Назва /* 2 */
                     
                 });
@@ -209,6 +226,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     Організації_ЗаписиШвидкийВибір Record = new Організації_ЗаписиШвидкийВибір
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Код = cur.Fields?[Організації_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[Організації_Const.Назва]?.ToString() ?? "" /**/
                         
@@ -239,7 +257,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class Номенклатура_ЗаписиПрототип
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
         
         string Код = "";
@@ -249,7 +275,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID
             /* */ , Код, Назва, ОдиницяВиміру, ТипНоменклатури };
         }
 
@@ -290,8 +316,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Довідники.Номенклатура_Select Номенклатура_Select = new Довідники.Номенклатура_Select();
             Номенклатура_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Довідники.Номенклатура_Const.Код /* 1 */
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.Номенклатура_Const.Код /* 1 */
                     , Довідники.Номенклатура_Const.Назва /* 2 */
                     , Довідники.Номенклатура_Const.ТипНоменклатури /* 3 */
                     
@@ -324,6 +350,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     Номенклатура_ЗаписиПрототип Record = new Номенклатура_ЗаписиПрототип
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         ОдиницяВиміру = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Код = cur.Fields?[Номенклатура_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[Номенклатура_Const.Назва]?.ToString() ?? "", /**/
@@ -351,7 +378,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 	    
     public class Номенклатура_ЗаписиШвидкийВибір
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
         
         string Код = "";
@@ -359,7 +394,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID
             /* */ , Код, Назва };
         }
 
@@ -396,8 +431,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Довідники.Номенклатура_Select Номенклатура_Select = new Довідники.Номенклатура_Select();
             Номенклатура_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Довідники.Номенклатура_Const.Код /* 1 */
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.Номенклатура_Const.Код /* 1 */
                     , Довідники.Номенклатура_Const.Назва /* 2 */
                     
                 });
@@ -421,6 +456,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     Номенклатура_ЗаписиШвидкийВибір Record = new Номенклатура_ЗаписиШвидкийВибір
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Код = cur.Fields?[Номенклатура_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[Номенклатура_Const.Назва]?.ToString() ?? "" /**/
                         
@@ -451,7 +487,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class Виробники_Записи
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
         
         string Код = "";
@@ -459,7 +503,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID
             /* */ , Код, Назва };
         }
 
@@ -496,8 +540,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Довідники.Виробники_Select Виробники_Select = new Довідники.Виробники_Select();
             Виробники_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Довідники.Виробники_Const.Код /* 1 */
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.Виробники_Const.Код /* 1 */
                     , Довідники.Виробники_Const.Назва /* 2 */
                     
                 });
@@ -521,6 +565,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     Виробники_Записи Record = new Виробники_Записи
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Код = cur.Fields?[Виробники_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[Виробники_Const.Назва]?.ToString() ?? "" /**/
                         
@@ -546,7 +591,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 	    
     public class Виробники_ЗаписиШвидкийВибір
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
         
         string Код = "";
@@ -554,7 +607,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID
             /* */ , Код, Назва };
         }
 
@@ -591,8 +644,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Довідники.Виробники_Select Виробники_Select = new Довідники.Виробники_Select();
             Виробники_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Довідники.Виробники_Const.Код /* 1 */
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.Виробники_Const.Код /* 1 */
                     , Довідники.Виробники_Const.Назва /* 2 */
                     
                 });
@@ -616,6 +669,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     Виробники_ЗаписиШвидкийВибір Record = new Виробники_ЗаписиШвидкийВибір
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Код = cur.Fields?[Виробники_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[Виробники_Const.Назва]?.ToString() ?? "" /**/
                         
@@ -646,7 +700,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class ВидиНоменклатури_Записи
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
         
         string Код = "";
@@ -654,7 +716,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID
             /* */ , Код, Назва };
         }
 
@@ -691,8 +753,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Довідники.ВидиНоменклатури_Select ВидиНоменклатури_Select = new Довідники.ВидиНоменклатури_Select();
             ВидиНоменклатури_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Довідники.ВидиНоменклатури_Const.Код /* 1 */
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.ВидиНоменклатури_Const.Код /* 1 */
                     , Довідники.ВидиНоменклатури_Const.Назва /* 2 */
                     
                 });
@@ -716,6 +778,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     ВидиНоменклатури_Записи Record = new ВидиНоменклатури_Записи
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Код = cur.Fields?[ВидиНоменклатури_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[ВидиНоменклатури_Const.Назва]?.ToString() ?? "" /**/
                         
@@ -741,14 +804,22 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 	    
     public class ВидиНоменклатури_ЗаписиШвидкийВибір
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
         
         string Назва = "";
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID
             /* */ , Назва };
         }
 
@@ -783,8 +854,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Довідники.ВидиНоменклатури_Select ВидиНоменклатури_Select = new Довідники.ВидиНоменклатури_Select();
             ВидиНоменклатури_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Довідники.ВидиНоменклатури_Const.Назва /* 1 */
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.ВидиНоменклатури_Const.Назва /* 1 */
                     
                 });
 
@@ -807,6 +878,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     ВидиНоменклатури_ЗаписиШвидкийВибір Record = new ВидиНоменклатури_ЗаписиШвидкийВибір
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Назва = cur.Fields?[ВидиНоменклатури_Const.Назва]?.ToString() ?? "" /**/
                         
                     };
@@ -836,7 +908,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class ПакуванняОдиниціВиміру_Записи
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
         
         string Код = "";
@@ -844,7 +924,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID
             /* */ , Код, Назва };
         }
 
@@ -881,8 +961,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Довідники.ПакуванняОдиниціВиміру_Select ПакуванняОдиниціВиміру_Select = new Довідники.ПакуванняОдиниціВиміру_Select();
             ПакуванняОдиниціВиміру_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Довідники.ПакуванняОдиниціВиміру_Const.Код /* 1 */
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.ПакуванняОдиниціВиміру_Const.Код /* 1 */
                     , Довідники.ПакуванняОдиниціВиміру_Const.Назва /* 2 */
                     
                 });
@@ -906,6 +986,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     ПакуванняОдиниціВиміру_Записи Record = new ПакуванняОдиниціВиміру_Записи
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Код = cur.Fields?[ПакуванняОдиниціВиміру_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[ПакуванняОдиниціВиміру_Const.Назва]?.ToString() ?? "" /**/
                         
@@ -931,7 +1012,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 	    
     public class ПакуванняОдиниціВиміру_ЗаписиШвидкийВибір
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
         
         string Код = "";
@@ -939,7 +1028,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID
             /* */ , Код, Назва };
         }
 
@@ -976,8 +1065,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Довідники.ПакуванняОдиниціВиміру_Select ПакуванняОдиниціВиміру_Select = new Довідники.ПакуванняОдиниціВиміру_Select();
             ПакуванняОдиниціВиміру_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Довідники.ПакуванняОдиниціВиміру_Const.Код /* 1 */
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.ПакуванняОдиниціВиміру_Const.Код /* 1 */
                     , Довідники.ПакуванняОдиниціВиміру_Const.Назва /* 2 */
                     
                 });
@@ -1001,6 +1090,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     ПакуванняОдиниціВиміру_ЗаписиШвидкийВибір Record = new ПакуванняОдиниціВиміру_ЗаписиШвидкийВибір
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Код = cur.Fields?[ПакуванняОдиниціВиміру_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[ПакуванняОдиниціВиміру_Const.Назва]?.ToString() ?? "" /**/
                         
@@ -1031,7 +1121,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class Валюти_Записи
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
         
         string Код = "";
@@ -1042,7 +1140,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID
             /* */ , Код, Назва, КороткаНазва, Код_R030, ВиводитиКурсНаСтартову };
         }
 
@@ -1085,8 +1183,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Довідники.Валюти_Select Валюти_Select = new Довідники.Валюти_Select();
             Валюти_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Довідники.Валюти_Const.Код /* 1 */
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.Валюти_Const.Код /* 1 */
                     , Довідники.Валюти_Const.Назва /* 2 */
                     , Довідники.Валюти_Const.КороткаНазва /* 3 */
                     , Довідники.Валюти_Const.Код_R030 /* 4 */
@@ -1113,6 +1211,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     Валюти_Записи Record = new Валюти_Записи
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Код = cur.Fields?[Валюти_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[Валюти_Const.Назва]?.ToString() ?? "", /**/
                         КороткаНазва = cur.Fields?[Валюти_Const.КороткаНазва]?.ToString() ?? "", /**/
@@ -1141,7 +1240,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 	    
     public class Валюти_ЗаписиШвидкийВибір
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
         
         string Код = "";
@@ -1151,7 +1258,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID
             /* */ , Код, Назва, КороткаНазва, Код_R030 };
         }
 
@@ -1192,8 +1299,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Довідники.Валюти_Select Валюти_Select = new Довідники.Валюти_Select();
             Валюти_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Довідники.Валюти_Const.Код /* 1 */
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.Валюти_Const.Код /* 1 */
                     , Довідники.Валюти_Const.Назва /* 2 */
                     , Довідники.Валюти_Const.КороткаНазва /* 3 */
                     , Довідники.Валюти_Const.Код_R030 /* 4 */
@@ -1219,6 +1326,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     Валюти_ЗаписиШвидкийВибір Record = new Валюти_ЗаписиШвидкийВибір
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Код = cur.Fields?[Валюти_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[Валюти_Const.Назва]?.ToString() ?? "", /**/
                         КороткаНазва = cur.Fields?[Валюти_Const.КороткаНазва]?.ToString() ?? "", /**/
@@ -1251,7 +1359,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class Контрагенти_Записи
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
         
         string Код = "";
@@ -1260,7 +1376,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID
             /* */ , Код, Назва, Папка };
         }
 
@@ -1299,8 +1415,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Довідники.Контрагенти_Select Контрагенти_Select = new Довідники.Контрагенти_Select();
             Контрагенти_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Довідники.Контрагенти_Const.Код /* 1 */
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.Контрагенти_Const.Код /* 1 */
                     , Довідники.Контрагенти_Const.Назва /* 2 */
                     
                 });
@@ -1332,6 +1448,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     Контрагенти_Записи Record = new Контрагенти_Записи
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Папка = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Код = cur.Fields?[Контрагенти_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[Контрагенти_Const.Назва]?.ToString() ?? "" /**/
@@ -1358,7 +1475,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 	    
     public class Контрагенти_ЗаписиШвидкийВибір
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
         
         string Код = "";
@@ -1366,7 +1491,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID
             /* */ , Код, Назва };
         }
 
@@ -1403,8 +1528,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Довідники.Контрагенти_Select Контрагенти_Select = new Довідники.Контрагенти_Select();
             Контрагенти_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Довідники.Контрагенти_Const.Код /* 1 */
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.Контрагенти_Const.Код /* 1 */
                     , Довідники.Контрагенти_Const.Назва /* 2 */
                     
                 });
@@ -1428,6 +1553,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     Контрагенти_ЗаписиШвидкийВибір Record = new Контрагенти_ЗаписиШвидкийВибір
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Код = cur.Fields?[Контрагенти_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[Контрагенти_Const.Назва]?.ToString() ?? "" /**/
                         
@@ -1458,7 +1584,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class Склади_Записи
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
         
         string Код = "";
@@ -1468,7 +1602,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID
             /* */ , Код, Назва, ТипСкладу, НалаштуванняАдресногоЗберігання };
         }
 
@@ -1509,8 +1643,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Довідники.Склади_Select Склади_Select = new Довідники.Склади_Select();
             Склади_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Довідники.Склади_Const.Код /* 1 */
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.Склади_Const.Код /* 1 */
                     , Довідники.Склади_Const.Назва /* 2 */
                     , Довідники.Склади_Const.ТипСкладу /* 3 */
                     , Довідники.Склади_Const.НалаштуванняАдресногоЗберігання /* 4 */
@@ -1536,6 +1670,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     Склади_Записи Record = new Склади_Записи
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Код = cur.Fields?[Склади_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[Склади_Const.Назва]?.ToString() ?? "", /**/
                         ТипСкладу = Перелічення.ПсевдонімиПерелічення.ТипиСкладів_Alias( ((Перелічення.ТипиСкладів)(cur.Fields?[Склади_Const.ТипСкладу]! != DBNull.Value ? cur.Fields?[Склади_Const.ТипСкладу]! : 0)) ), /**/
@@ -1563,7 +1698,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 	    
     public class Склади_ЗаписиШвидкийВибір
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
         
         string Код = "";
@@ -1571,7 +1714,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID
             /* */ , Код, Назва };
         }
 
@@ -1608,8 +1751,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Довідники.Склади_Select Склади_Select = new Довідники.Склади_Select();
             Склади_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Довідники.Склади_Const.Код /* 1 */
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.Склади_Const.Код /* 1 */
                     , Довідники.Склади_Const.Назва /* 2 */
                     
                 });
@@ -1633,6 +1776,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     Склади_ЗаписиШвидкийВибір Record = new Склади_ЗаписиШвидкийВибір
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Код = cur.Fields?[Склади_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[Склади_Const.Назва]?.ToString() ?? "" /**/
                         
@@ -1663,7 +1807,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class ВидиЦін_Записи
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
         
         string Код = "";
@@ -1672,7 +1824,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID
             /* */ , Код, Назва, Валюта };
         }
 
@@ -1711,8 +1863,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Довідники.ВидиЦін_Select ВидиЦін_Select = new Довідники.ВидиЦін_Select();
             ВидиЦін_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Довідники.ВидиЦін_Const.Код /* 1 */
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.ВидиЦін_Const.Код /* 1 */
                     , Довідники.ВидиЦін_Const.Назва /* 2 */
                     
                 });
@@ -1744,6 +1896,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     ВидиЦін_Записи Record = new ВидиЦін_Записи
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Валюта = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Код = cur.Fields?[ВидиЦін_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[ВидиЦін_Const.Назва]?.ToString() ?? "" /**/
@@ -1770,14 +1923,22 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 	    
     public class ВидиЦін_ЗаписиШвидкийВибір
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
         
         string Назва = "";
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID
             /* */ , Назва };
         }
 
@@ -1812,8 +1973,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Довідники.ВидиЦін_Select ВидиЦін_Select = new Довідники.ВидиЦін_Select();
             ВидиЦін_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Довідники.ВидиЦін_Const.Назва /* 1 */
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.ВидиЦін_Const.Назва /* 1 */
                     
                 });
 
@@ -1836,6 +1997,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     ВидиЦін_ЗаписиШвидкийВибір Record = new ВидиЦін_ЗаписиШвидкийВибір
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Назва = cur.Fields?[ВидиЦін_Const.Назва]?.ToString() ?? "" /**/
                         
                     };
@@ -1865,7 +2027,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class ВидиЦінПостачальників_Записи
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
         
         string Код = "";
@@ -1873,7 +2043,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID
             /* */ , Код, Назва };
         }
 
@@ -1910,8 +2080,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Довідники.ВидиЦінПостачальників_Select ВидиЦінПостачальників_Select = new Довідники.ВидиЦінПостачальників_Select();
             ВидиЦінПостачальників_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Довідники.ВидиЦінПостачальників_Const.Код /* 1 */
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.ВидиЦінПостачальників_Const.Код /* 1 */
                     , Довідники.ВидиЦінПостачальників_Const.Назва /* 2 */
                     
                 });
@@ -1935,6 +2105,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     ВидиЦінПостачальників_Записи Record = new ВидиЦінПостачальників_Записи
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Код = cur.Fields?[ВидиЦінПостачальників_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[ВидиЦінПостачальників_Const.Назва]?.ToString() ?? "" /**/
                         
@@ -1960,7 +2131,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 	    
     public class ВидиЦінПостачальників_ЗаписиШвидкийВибір
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
         
         string Код = "";
@@ -1968,7 +2147,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID
             /* */ , Код, Назва };
         }
 
@@ -2005,8 +2184,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Довідники.ВидиЦінПостачальників_Select ВидиЦінПостачальників_Select = new Довідники.ВидиЦінПостачальників_Select();
             ВидиЦінПостачальників_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Довідники.ВидиЦінПостачальників_Const.Код /* 1 */
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.ВидиЦінПостачальників_Const.Код /* 1 */
                     , Довідники.ВидиЦінПостачальників_Const.Назва /* 2 */
                     
                 });
@@ -2030,6 +2209,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     ВидиЦінПостачальників_ЗаписиШвидкийВибір Record = new ВидиЦінПостачальників_ЗаписиШвидкийВибір
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Код = cur.Fields?[ВидиЦінПостачальників_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[ВидиЦінПостачальників_Const.Назва]?.ToString() ?? "" /**/
                         
@@ -2060,7 +2240,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class Користувачі_Записи
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
         
         string Код = "";
@@ -2068,7 +2256,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID
             /* */ , Код, Назва };
         }
 
@@ -2105,8 +2293,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Довідники.Користувачі_Select Користувачі_Select = new Довідники.Користувачі_Select();
             Користувачі_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Довідники.Користувачі_Const.Код /* 1 */
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.Користувачі_Const.Код /* 1 */
                     , Довідники.Користувачі_Const.Назва /* 2 */
                     
                 });
@@ -2130,6 +2318,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     Користувачі_Записи Record = new Користувачі_Записи
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Код = cur.Fields?[Користувачі_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[Користувачі_Const.Назва]?.ToString() ?? "" /**/
                         
@@ -2155,14 +2344,22 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 	    
     public class Користувачі_ЗаписиШвидкийВибір
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
         
         string Назва = "";
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID
             /* */ , Назва };
         }
 
@@ -2197,8 +2394,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Довідники.Користувачі_Select Користувачі_Select = new Довідники.Користувачі_Select();
             Користувачі_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Довідники.Користувачі_Const.Назва /* 1 */
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.Користувачі_Const.Назва /* 1 */
                     
                 });
 
@@ -2221,6 +2418,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     Користувачі_ЗаписиШвидкийВибір Record = new Користувачі_ЗаписиШвидкийВибір
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Назва = cur.Fields?[Користувачі_Const.Назва]?.ToString() ?? "" /**/
                         
                     };
@@ -2250,7 +2448,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class ФізичніОсоби_Записи
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
         
         string Код = "";
@@ -2258,7 +2464,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID
             /* */ , Код, Назва };
         }
 
@@ -2295,8 +2501,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Довідники.ФізичніОсоби_Select ФізичніОсоби_Select = new Довідники.ФізичніОсоби_Select();
             ФізичніОсоби_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Довідники.ФізичніОсоби_Const.Код /* 1 */
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.ФізичніОсоби_Const.Код /* 1 */
                     , Довідники.ФізичніОсоби_Const.Назва /* 2 */
                     
                 });
@@ -2320,6 +2526,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     ФізичніОсоби_Записи Record = new ФізичніОсоби_Записи
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Код = cur.Fields?[ФізичніОсоби_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[ФізичніОсоби_Const.Назва]?.ToString() ?? "" /**/
                         
@@ -2345,14 +2552,22 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 	    
     public class ФізичніОсоби_ЗаписиШвидкийВибір
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
         
         string Назва = "";
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID
             /* */ , Назва };
         }
 
@@ -2387,8 +2602,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Довідники.ФізичніОсоби_Select ФізичніОсоби_Select = new Довідники.ФізичніОсоби_Select();
             ФізичніОсоби_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Довідники.ФізичніОсоби_Const.Назва /* 1 */
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.ФізичніОсоби_Const.Назва /* 1 */
                     
                 });
 
@@ -2411,6 +2626,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     ФізичніОсоби_ЗаписиШвидкийВибір Record = new ФізичніОсоби_ЗаписиШвидкийВибір
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Назва = cur.Fields?[ФізичніОсоби_Const.Назва]?.ToString() ?? "" /**/
                         
                     };
@@ -2440,7 +2656,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class СтруктураПідприємства_Записи
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
         
         string Код = "";
@@ -2448,7 +2672,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID
             /* */ , Код, Назва };
         }
 
@@ -2485,8 +2709,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Довідники.СтруктураПідприємства_Select СтруктураПідприємства_Select = new Довідники.СтруктураПідприємства_Select();
             СтруктураПідприємства_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Довідники.СтруктураПідприємства_Const.Код /* 1 */
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.СтруктураПідприємства_Const.Код /* 1 */
                     , Довідники.СтруктураПідприємства_Const.Назва /* 2 */
                     
                 });
@@ -2510,6 +2734,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     СтруктураПідприємства_Записи Record = new СтруктураПідприємства_Записи
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Код = cur.Fields?[СтруктураПідприємства_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[СтруктураПідприємства_Const.Назва]?.ToString() ?? "" /**/
                         
@@ -2535,14 +2760,22 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 	    
     public class СтруктураПідприємства_ЗаписиШвидкийВибір
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
         
         string Назва = "";
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID
             /* */ , Назва };
         }
 
@@ -2577,8 +2810,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Довідники.СтруктураПідприємства_Select СтруктураПідприємства_Select = new Довідники.СтруктураПідприємства_Select();
             СтруктураПідприємства_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Довідники.СтруктураПідприємства_Const.Назва /* 1 */
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.СтруктураПідприємства_Const.Назва /* 1 */
                     
                 });
 
@@ -2601,6 +2834,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     СтруктураПідприємства_ЗаписиШвидкийВибір Record = new СтруктураПідприємства_ЗаписиШвидкийВибір
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Назва = cur.Fields?[СтруктураПідприємства_Const.Назва]?.ToString() ?? "" /**/
                         
                     };
@@ -2630,7 +2864,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class КраїниСвіту_Записи
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
         
         string Код = "";
@@ -2638,7 +2880,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID
             /* */ , Код, Назва };
         }
 
@@ -2675,8 +2917,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Довідники.КраїниСвіту_Select КраїниСвіту_Select = new Довідники.КраїниСвіту_Select();
             КраїниСвіту_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Довідники.КраїниСвіту_Const.Код /* 1 */
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.КраїниСвіту_Const.Код /* 1 */
                     , Довідники.КраїниСвіту_Const.Назва /* 2 */
                     
                 });
@@ -2700,6 +2942,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     КраїниСвіту_Записи Record = new КраїниСвіту_Записи
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Код = cur.Fields?[КраїниСвіту_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[КраїниСвіту_Const.Назва]?.ToString() ?? "" /**/
                         
@@ -2725,7 +2968,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 	    
     public class КраїниСвіту_ЗаписиШвидкийВибір
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
         
         string Код = "";
@@ -2733,7 +2984,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID
             /* */ , Код, Назва };
         }
 
@@ -2770,8 +3021,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Довідники.КраїниСвіту_Select КраїниСвіту_Select = new Довідники.КраїниСвіту_Select();
             КраїниСвіту_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Довідники.КраїниСвіту_Const.Код /* 1 */
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.КраїниСвіту_Const.Код /* 1 */
                     , Довідники.КраїниСвіту_Const.Назва /* 2 */
                     
                 });
@@ -2795,6 +3046,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     КраїниСвіту_ЗаписиШвидкийВибір Record = new КраїниСвіту_ЗаписиШвидкийВибір
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Код = cur.Fields?[КраїниСвіту_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[КраїниСвіту_Const.Назва]?.ToString() ?? "" /**/
                         
@@ -2825,7 +3077,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class Файли_Записи
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
         
         string Код = "";
@@ -2836,7 +3096,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID
             /* */ , Код, Назва, НазваФайлу, Розмір, ДатаСтворення };
         }
 
@@ -2879,8 +3139,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Довідники.Файли_Select Файли_Select = new Довідники.Файли_Select();
             Файли_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Довідники.Файли_Const.Код /* 1 */
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.Файли_Const.Код /* 1 */
                     , Довідники.Файли_Const.Назва /* 2 */
                     , Довідники.Файли_Const.НазваФайлу /* 3 */
                     , Довідники.Файли_Const.Розмір /* 4 */
@@ -2907,6 +3167,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     Файли_Записи Record = new Файли_Записи
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Код = cur.Fields?[Файли_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[Файли_Const.Назва]?.ToString() ?? "", /**/
                         НазваФайлу = cur.Fields?[Файли_Const.НазваФайлу]?.ToString() ?? "", /**/
@@ -2935,14 +3196,22 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 	    
     public class Файли_ЗаписиШвидкийВибір
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
         
         string Назва = "";
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID
             /* */ , Назва };
         }
 
@@ -2977,8 +3246,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Довідники.Файли_Select Файли_Select = new Довідники.Файли_Select();
             Файли_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Довідники.Файли_Const.Назва /* 1 */
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.Файли_Const.Назва /* 1 */
                     
                 });
 
@@ -3001,6 +3270,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     Файли_ЗаписиШвидкийВибір Record = new Файли_ЗаписиШвидкийВибір
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Назва = cur.Fields?[Файли_Const.Назва]?.ToString() ?? "" /**/
                         
                     };
@@ -3030,7 +3300,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class ХарактеристикиНоменклатури_Записи
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
         
         string Код = "";
@@ -3039,7 +3317,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID
             /* */ , Код, Номенклатура, Назва };
         }
 
@@ -3078,8 +3356,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Довідники.ХарактеристикиНоменклатури_Select ХарактеристикиНоменклатури_Select = new Довідники.ХарактеристикиНоменклатури_Select();
             ХарактеристикиНоменклатури_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Довідники.ХарактеристикиНоменклатури_Const.Код /* 1 */
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.ХарактеристикиНоменклатури_Const.Код /* 1 */
                     , Довідники.ХарактеристикиНоменклатури_Const.Назва /* 2 */
                     
                 });
@@ -3111,6 +3389,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     ХарактеристикиНоменклатури_Записи Record = new ХарактеристикиНоменклатури_Записи
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Номенклатура = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Код = cur.Fields?[ХарактеристикиНоменклатури_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[ХарактеристикиНоменклатури_Const.Назва]?.ToString() ?? "" /**/
@@ -3137,7 +3416,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 	    
     public class ХарактеристикиНоменклатури_ЗаписиШвидкийВибір
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
         
         string Код = "";
@@ -3146,7 +3433,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID
             /* */ , Код, Номенклатура, Назва };
         }
 
@@ -3185,8 +3472,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Довідники.ХарактеристикиНоменклатури_Select ХарактеристикиНоменклатури_Select = new Довідники.ХарактеристикиНоменклатури_Select();
             ХарактеристикиНоменклатури_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Довідники.ХарактеристикиНоменклатури_Const.Код /* 1 */
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.ХарактеристикиНоменклатури_Const.Код /* 1 */
                     , Довідники.ХарактеристикиНоменклатури_Const.Назва /* 2 */
                     
                 });
@@ -3218,6 +3505,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     ХарактеристикиНоменклатури_ЗаписиШвидкийВибір Record = new ХарактеристикиНоменклатури_ЗаписиШвидкийВибір
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Номенклатура = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Код = cur.Fields?[ХарактеристикиНоменклатури_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[ХарактеристикиНоменклатури_Const.Назва]?.ToString() ?? "" /**/
@@ -3264,7 +3552,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class Каси_ЗаписиПрототип
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
         
         string Код = "";
@@ -3273,7 +3569,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID
             /* */ , Код, Назва, Валюта };
         }
 
@@ -3312,8 +3608,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Довідники.Каси_Select Каси_Select = new Довідники.Каси_Select();
             Каси_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Довідники.Каси_Const.Код /* 1 */
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.Каси_Const.Код /* 1 */
                     , Довідники.Каси_Const.Назва /* 2 */
                     
                 });
@@ -3345,6 +3641,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     Каси_ЗаписиПрототип Record = new Каси_ЗаписиПрототип
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Валюта = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Код = cur.Fields?[Каси_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[Каси_Const.Назва]?.ToString() ?? "" /**/
@@ -3371,7 +3668,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 	    
     public class Каси_ЗаписиШвидкийВибір
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
         
         string Код = "";
@@ -3380,7 +3685,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID
             /* */ , Код, Назва, Валюта };
         }
 
@@ -3419,8 +3724,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Довідники.Каси_Select Каси_Select = new Довідники.Каси_Select();
             Каси_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Довідники.Каси_Const.Код /* 1 */
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.Каси_Const.Код /* 1 */
                     , Довідники.Каси_Const.Назва /* 2 */
                     
                 });
@@ -3452,6 +3757,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     Каси_ЗаписиШвидкийВибір Record = new Каси_ЗаписиШвидкийВибір
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Валюта = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Код = cur.Fields?[Каси_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[Каси_Const.Назва]?.ToString() ?? "" /**/
@@ -3483,7 +3789,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class БанківськіРахункиОрганізацій_Записи
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
         
         string Код = "";
@@ -3492,7 +3806,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID
             /* */ , Код, Назва, Валюта };
         }
 
@@ -3531,8 +3845,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Довідники.БанківськіРахункиОрганізацій_Select БанківськіРахункиОрганізацій_Select = new Довідники.БанківськіРахункиОрганізацій_Select();
             БанківськіРахункиОрганізацій_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Довідники.БанківськіРахункиОрганізацій_Const.Код /* 1 */
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.БанківськіРахункиОрганізацій_Const.Код /* 1 */
                     , Довідники.БанківськіРахункиОрганізацій_Const.Назва /* 2 */
                     
                 });
@@ -3564,6 +3878,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     БанківськіРахункиОрганізацій_Записи Record = new БанківськіРахункиОрганізацій_Записи
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Валюта = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Код = cur.Fields?[БанківськіРахункиОрганізацій_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[БанківськіРахункиОрганізацій_Const.Назва]?.ToString() ?? "" /**/
@@ -3590,7 +3905,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 	    
     public class БанківськіРахункиОрганізацій_ЗаписиШвидкийВибір
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
         
         string Код = "";
@@ -3599,7 +3922,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID
             /* */ , Код, Назва, Валюта };
         }
 
@@ -3638,8 +3961,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Довідники.БанківськіРахункиОрганізацій_Select БанківськіРахункиОрганізацій_Select = new Довідники.БанківськіРахункиОрганізацій_Select();
             БанківськіРахункиОрганізацій_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Довідники.БанківськіРахункиОрганізацій_Const.Код /* 1 */
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.БанківськіРахункиОрганізацій_Const.Код /* 1 */
                     , Довідники.БанківськіРахункиОрганізацій_Const.Назва /* 2 */
                     
                 });
@@ -3671,6 +3994,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     БанківськіРахункиОрганізацій_ЗаписиШвидкийВибір Record = new БанківськіРахункиОрганізацій_ЗаписиШвидкийВибір
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Валюта = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Код = cur.Fields?[БанківськіРахункиОрганізацій_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[БанківськіРахункиОрганізацій_Const.Назва]?.ToString() ?? "" /**/
@@ -3702,7 +4026,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class ДоговориКонтрагентів_Записи
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
         
         string Код = "";
@@ -3712,7 +4044,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID
             /* */ , Код, Назва, Контрагент, ТипДоговору };
         }
 
@@ -3753,8 +4085,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Довідники.ДоговориКонтрагентів_Select ДоговориКонтрагентів_Select = new Довідники.ДоговориКонтрагентів_Select();
             ДоговориКонтрагентів_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Довідники.ДоговориКонтрагентів_Const.Код /* 1 */
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.ДоговориКонтрагентів_Const.Код /* 1 */
                     , Довідники.ДоговориКонтрагентів_Const.Назва /* 2 */
                     , Довідники.ДоговориКонтрагентів_Const.ТипДоговору /* 3 */
                     
@@ -3787,6 +4119,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     ДоговориКонтрагентів_Записи Record = new ДоговориКонтрагентів_Записи
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Контрагент = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Код = cur.Fields?[ДоговориКонтрагентів_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[ДоговориКонтрагентів_Const.Назва]?.ToString() ?? "", /**/
@@ -3814,7 +4147,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 	    
     public class ДоговориКонтрагентів_ЗаписиШвидкийВибір
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
         
         string Назва = "";
@@ -3823,7 +4164,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID
             /* */ , Назва, Контрагент, ТипДоговору };
         }
 
@@ -3862,8 +4203,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Довідники.ДоговориКонтрагентів_Select ДоговориКонтрагентів_Select = new Довідники.ДоговориКонтрагентів_Select();
             ДоговориКонтрагентів_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Довідники.ДоговориКонтрагентів_Const.Назва /* 1 */
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.ДоговориКонтрагентів_Const.Назва /* 1 */
                     , Довідники.ДоговориКонтрагентів_Const.ТипДоговору /* 2 */
                     
                 });
@@ -3895,6 +4236,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     ДоговориКонтрагентів_ЗаписиШвидкийВибір Record = new ДоговориКонтрагентів_ЗаписиШвидкийВибір
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Контрагент = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[ДоговориКонтрагентів_Const.Назва]?.ToString() ?? "", /**/
                         ТипДоговору = Перелічення.ПсевдонімиПерелічення.ТипДоговорів_Alias( ((Перелічення.ТипДоговорів)(cur.Fields?[ДоговориКонтрагентів_Const.ТипДоговору]! != DBNull.Value ? cur.Fields?[ДоговориКонтрагентів_Const.ТипДоговору]! : 0)) ) /**/
@@ -3926,7 +4268,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class БанківськіРахункиКонтрагентів_Записи
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
         
         string Код = "";
@@ -3935,7 +4285,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID
             /* */ , Код, Назва, Валюта };
         }
 
@@ -3974,8 +4324,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Довідники.БанківськіРахункиКонтрагентів_Select БанківськіРахункиКонтрагентів_Select = new Довідники.БанківськіРахункиКонтрагентів_Select();
             БанківськіРахункиКонтрагентів_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Довідники.БанківськіРахункиКонтрагентів_Const.Код /* 1 */
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.БанківськіРахункиКонтрагентів_Const.Код /* 1 */
                     , Довідники.БанківськіРахункиКонтрагентів_Const.Назва /* 2 */
                     
                 });
@@ -4007,6 +4357,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     БанківськіРахункиКонтрагентів_Записи Record = new БанківськіРахункиКонтрагентів_Записи
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Валюта = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Код = cur.Fields?[БанківськіРахункиКонтрагентів_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[БанківськіРахункиКонтрагентів_Const.Назва]?.ToString() ?? "" /**/
@@ -4033,7 +4384,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 	    
     public class БанківськіРахункиКонтрагентів_ЗаписиШвидкийВибір
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
         
         string Код = "";
@@ -4042,7 +4401,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID
             /* */ , Код, Назва, Валюта };
         }
 
@@ -4081,8 +4440,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Довідники.БанківськіРахункиКонтрагентів_Select БанківськіРахункиКонтрагентів_Select = new Довідники.БанківськіРахункиКонтрагентів_Select();
             БанківськіРахункиКонтрагентів_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Довідники.БанківськіРахункиКонтрагентів_Const.Код /* 1 */
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.БанківськіРахункиКонтрагентів_Const.Код /* 1 */
                     , Довідники.БанківськіРахункиКонтрагентів_Const.Назва /* 2 */
                     
                 });
@@ -4114,6 +4473,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     БанківськіРахункиКонтрагентів_ЗаписиШвидкийВибір Record = new БанківськіРахункиКонтрагентів_ЗаписиШвидкийВибір
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Валюта = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Код = cur.Fields?[БанківськіРахункиКонтрагентів_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[БанківськіРахункиКонтрагентів_Const.Назва]?.ToString() ?? "" /**/
@@ -4145,7 +4505,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class СтаттяРухуКоштів_Записи
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
         
         string Назва = "";
@@ -4155,7 +4523,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID
             /* */ , Назва, Код, КореспондуючийРахунок, ВидРухуКоштів };
         }
 
@@ -4196,8 +4564,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Довідники.СтаттяРухуКоштів_Select СтаттяРухуКоштів_Select = new Довідники.СтаттяРухуКоштів_Select();
             СтаттяРухуКоштів_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Довідники.СтаттяРухуКоштів_Const.Назва /* 1 */
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.СтаттяРухуКоштів_Const.Назва /* 1 */
                     , Довідники.СтаттяРухуКоштів_Const.Код /* 2 */
                     , Довідники.СтаттяРухуКоштів_Const.КореспондуючийРахунок /* 3 */
                     , Довідники.СтаттяРухуКоштів_Const.ВидРухуКоштів /* 4 */
@@ -4223,6 +4591,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     СтаттяРухуКоштів_Записи Record = new СтаттяРухуКоштів_Записи
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Назва = cur.Fields?[СтаттяРухуКоштів_Const.Назва]?.ToString() ?? "", /**/
                         Код = cur.Fields?[СтаттяРухуКоштів_Const.Код]?.ToString() ?? "", /**/
                         КореспондуючийРахунок = cur.Fields?[СтаттяРухуКоштів_Const.КореспондуючийРахунок]?.ToString() ?? "", /**/
@@ -4250,14 +4619,22 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 	    
     public class СтаттяРухуКоштів_ЗаписиШвидкийВибір
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
         
         string Назва = "";
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID
             /* */ , Назва };
         }
 
@@ -4292,8 +4669,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Довідники.СтаттяРухуКоштів_Select СтаттяРухуКоштів_Select = new Довідники.СтаттяРухуКоштів_Select();
             СтаттяРухуКоштів_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Довідники.СтаттяРухуКоштів_Const.Назва /* 1 */
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.СтаттяРухуКоштів_Const.Назва /* 1 */
                     
                 });
 
@@ -4316,6 +4693,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     СтаттяРухуКоштів_ЗаписиШвидкийВибір Record = new СтаттяРухуКоштів_ЗаписиШвидкийВибір
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Назва = cur.Fields?[СтаттяРухуКоштів_Const.Назва]?.ToString() ?? "" /**/
                         
                     };
@@ -4345,14 +4723,22 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class СеріїНоменклатури_Записи
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
         
         string Номер = "";
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID
             /* */ , Номер };
         }
 
@@ -4387,8 +4773,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Довідники.СеріїНоменклатури_Select СеріїНоменклатури_Select = new Довідники.СеріїНоменклатури_Select();
             СеріїНоменклатури_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Довідники.СеріїНоменклатури_Const.Номер /* 1 */
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.СеріїНоменклатури_Const.Номер /* 1 */
                     
                 });
 
@@ -4411,6 +4797,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     СеріїНоменклатури_Записи Record = new СеріїНоменклатури_Записи
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Номер = cur.Fields?[СеріїНоменклатури_Const.Номер]?.ToString() ?? "" /**/
                         
                     };
@@ -4435,14 +4822,22 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 	    
     public class СеріїНоменклатури_ЗаписиШвидкийВибір
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
         
         string Номер = "";
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID
             /* */ , Номер };
         }
 
@@ -4477,8 +4872,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Довідники.СеріїНоменклатури_Select СеріїНоменклатури_Select = new Довідники.СеріїНоменклатури_Select();
             СеріїНоменклатури_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Довідники.СеріїНоменклатури_Const.Номер /* 1 */
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.СеріїНоменклатури_Const.Номер /* 1 */
                     
                 });
 
@@ -4501,6 +4896,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     СеріїНоменклатури_ЗаписиШвидкийВибір Record = new СеріїНоменклатури_ЗаписиШвидкийВибір
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Номер = cur.Fields?[СеріїНоменклатури_Const.Номер]?.ToString() ?? "" /**/
                         
                     };
@@ -4530,7 +4926,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class ПартіяТоварівКомпозит_Записи
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
         
         string Назва = "";
@@ -4541,7 +4945,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID
             /* */ , Назва, Дата, ТипДокументу, ПоступленняТоварівТаПослуг, ВведенняЗалишків };
         }
 
@@ -4584,8 +4988,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Довідники.ПартіяТоварівКомпозит_Select ПартіяТоварівКомпозит_Select = new Довідники.ПартіяТоварівКомпозит_Select();
             ПартіяТоварівКомпозит_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Довідники.ПартіяТоварівКомпозит_Const.Назва /* 1 */
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.ПартіяТоварівКомпозит_Const.Назва /* 1 */
                     , Довідники.ПартіяТоварівКомпозит_Const.Дата /* 2 */
                     , Довідники.ПартіяТоварівКомпозит_Const.ТипДокументу /* 3 */
                     
@@ -4626,6 +5030,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     ПартіяТоварівКомпозит_Записи Record = new ПартіяТоварівКомпозит_Записи
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         ПоступленняТоварівТаПослуг = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         ВведенняЗалишків = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[ПартіяТоварівКомпозит_Const.Назва]?.ToString() ?? "", /**/
@@ -4654,7 +5059,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 	    
     public class ПартіяТоварівКомпозит_ЗаписиШвидкийВибір
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
         
         string Назва = "";
@@ -4662,7 +5075,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID
             /* */ , Назва, Дата };
         }
 
@@ -4699,8 +5112,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Довідники.ПартіяТоварівКомпозит_Select ПартіяТоварівКомпозит_Select = new Довідники.ПартіяТоварівКомпозит_Select();
             ПартіяТоварівКомпозит_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Довідники.ПартіяТоварівКомпозит_Const.Назва /* 1 */
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.ПартіяТоварівКомпозит_Const.Назва /* 1 */
                     , Довідники.ПартіяТоварівКомпозит_Const.Дата /* 2 */
                     
                 });
@@ -4721,6 +5134,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     ПартіяТоварівКомпозит_ЗаписиШвидкийВибір Record = new ПартіяТоварівКомпозит_ЗаписиШвидкийВибір
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Назва = cur.Fields?[ПартіяТоварівКомпозит_Const.Назва]?.ToString() ?? "", /**/
                         Дата = cur.Fields?[ПартіяТоварівКомпозит_Const.Дата]?.ToString() ?? "" /**/
                         
@@ -4751,7 +5165,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class ВидиЗапасів_Записи
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
         
         string Код = "";
@@ -4759,7 +5181,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID
             /* */ , Код, Назва };
         }
 
@@ -4796,8 +5218,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Довідники.ВидиЗапасів_Select ВидиЗапасів_Select = new Довідники.ВидиЗапасів_Select();
             ВидиЗапасів_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Довідники.ВидиЗапасів_Const.Код /* 1 */
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.ВидиЗапасів_Const.Код /* 1 */
                     , Довідники.ВидиЗапасів_Const.Назва /* 2 */
                     
                 });
@@ -4821,6 +5243,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     ВидиЗапасів_Записи Record = new ВидиЗапасів_Записи
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Код = cur.Fields?[ВидиЗапасів_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[ВидиЗапасів_Const.Назва]?.ToString() ?? "" /**/
                         
@@ -4846,7 +5269,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 	    
     public class ВидиЗапасів_ЗаписиШвидкийВибір
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
         
         string Код = "";
@@ -4854,7 +5285,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID
             /* */ , Код, Назва };
         }
 
@@ -4891,8 +5322,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Довідники.ВидиЗапасів_Select ВидиЗапасів_Select = new Довідники.ВидиЗапасів_Select();
             ВидиЗапасів_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Довідники.ВидиЗапасів_Const.Код /* 1 */
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.ВидиЗапасів_Const.Код /* 1 */
                     , Довідники.ВидиЗапасів_Const.Назва /* 2 */
                     
                 });
@@ -4916,6 +5347,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     ВидиЗапасів_ЗаписиШвидкийВибір Record = new ВидиЗапасів_ЗаписиШвидкийВибір
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Код = cur.Fields?[ВидиЗапасів_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[ВидиЗапасів_Const.Назва]?.ToString() ?? "" /**/
                         
@@ -4946,7 +5378,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class Банки_Записи
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
         
         string Код = "";
@@ -4971,7 +5411,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID
             /* */ , Код, Назва, ПовнаНазва, КодМФО, КодЄДРПОУ, НомерЛіцензії, ДатаЛіцензії, Статус, ТипНаселеногоПункту, УнікальнийКодБанку, ПоштовийІндекс, НазваНаселеногоПункту, Адреса, НомерТелефону, ДатаВідкриттяУстанови, ДатаЗакриттяУстанови, КодНБУ, КодСтатусу, ДатаЗапису };
         }
 
@@ -5042,8 +5482,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Довідники.Банки_Select Банки_Select = new Довідники.Банки_Select();
             Банки_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Довідники.Банки_Const.Код /* 1 */
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.Банки_Const.Код /* 1 */
                     , Довідники.Банки_Const.Назва /* 2 */
                     , Довідники.Банки_Const.ПовнаНазва /* 3 */
                     , Довідники.Банки_Const.КодМФО /* 4 */
@@ -5084,6 +5524,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     Банки_Записи Record = new Банки_Записи
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Код = cur.Fields?[Банки_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[Банки_Const.Назва]?.ToString() ?? "", /**/
                         ПовнаНазва = cur.Fields?[Банки_Const.ПовнаНазва]?.ToString() ?? "", /**/
@@ -5126,7 +5567,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 	    
     public class Банки_ЗаписиШвидкийВибір
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
         
         string Код = "";
@@ -5134,7 +5583,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID
             /* */ , Код, Назва };
         }
 
@@ -5171,8 +5620,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Довідники.Банки_Select Банки_Select = new Довідники.Банки_Select();
             Банки_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Довідники.Банки_Const.Код /* 1 */
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.Банки_Const.Код /* 1 */
                     , Довідники.Банки_Const.Назва /* 2 */
                     
                 });
@@ -5196,6 +5645,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     Банки_ЗаписиШвидкийВибір Record = new Банки_ЗаписиШвидкийВибір
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Код = cur.Fields?[Банки_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[Банки_Const.Назва]?.ToString() ?? "" /**/
                         
@@ -5226,7 +5676,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class СкладськіПриміщення_Записи
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
         
         string Назва = "";
@@ -5235,7 +5693,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID
             /* */ , Назва, Склад, НалаштуванняАдресногоЗберігання };
         }
 
@@ -5274,8 +5732,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Довідники.СкладськіПриміщення_Select СкладськіПриміщення_Select = new Довідники.СкладськіПриміщення_Select();
             СкладськіПриміщення_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Довідники.СкладськіПриміщення_Const.Назва /* 1 */
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.СкладськіПриміщення_Const.Назва /* 1 */
                     , Довідники.СкладськіПриміщення_Const.НалаштуванняАдресногоЗберігання /* 2 */
                     
                 });
@@ -5307,6 +5765,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     СкладськіПриміщення_Записи Record = new СкладськіПриміщення_Записи
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Склад = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[СкладськіПриміщення_Const.Назва]?.ToString() ?? "", /**/
                         НалаштуванняАдресногоЗберігання = Перелічення.ПсевдонімиПерелічення.НалаштуванняАдресногоЗберігання_Alias( ((Перелічення.НалаштуванняАдресногоЗберігання)(cur.Fields?[СкладськіПриміщення_Const.НалаштуванняАдресногоЗберігання]! != DBNull.Value ? cur.Fields?[СкладськіПриміщення_Const.НалаштуванняАдресногоЗберігання]! : 0)) ) /**/
@@ -5333,7 +5792,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 	    
     public class СкладськіПриміщення_ЗаписиШвидкийВибір
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
         
         string Назва = "";
@@ -5341,7 +5808,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID
             /* */ , Назва, Склад };
         }
 
@@ -5378,8 +5845,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Довідники.СкладськіПриміщення_Select СкладськіПриміщення_Select = new Довідники.СкладськіПриміщення_Select();
             СкладськіПриміщення_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Довідники.СкладськіПриміщення_Const.Назва /* 1 */
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.СкладськіПриміщення_Const.Назва /* 1 */
                     
                 });
 
@@ -5410,6 +5877,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     СкладськіПриміщення_ЗаписиШвидкийВибір Record = new СкладськіПриміщення_ЗаписиШвидкийВибір
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Склад = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[СкладськіПриміщення_Const.Назва]?.ToString() ?? "" /**/
                         
@@ -5440,7 +5908,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class СкладськіКомірки_Записи
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
         
         string Назва = "";
@@ -5455,7 +5931,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID
             /* */ , Назва, Приміщення, Лінія, Позиція, Стелаж, Ярус, ТипСкладськоїКомірки, Типорозмір, Папка };
         }
 
@@ -5506,8 +5982,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Довідники.СкладськіКомірки_Select СкладськіКомірки_Select = new Довідники.СкладськіКомірки_Select();
             СкладськіКомірки_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Довідники.СкладськіКомірки_Const.Назва /* 1 */
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.СкладськіКомірки_Const.Назва /* 1 */
                     , Довідники.СкладськіКомірки_Const.Лінія /* 2 */
                     , Довідники.СкладськіКомірки_Const.Позиція /* 3 */
                     , Довідники.СкладськіКомірки_Const.Стелаж /* 4 */
@@ -5559,6 +6035,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     СкладськіКомірки_Записи Record = new СкладськіКомірки_Записи
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Приміщення = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Типорозмір = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
                         Папка = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
@@ -5591,7 +6068,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 	    
     public class СкладськіКомірки_ЗаписиШвидкийВибір
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
         
         string Назва = "";
@@ -5599,7 +6084,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID
             /* */ , Назва, Приміщення };
         }
 
@@ -5636,8 +6121,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Довідники.СкладськіКомірки_Select СкладськіКомірки_Select = new Довідники.СкладськіКомірки_Select();
             СкладськіКомірки_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Довідники.СкладськіКомірки_Const.Назва /* 1 */
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.СкладськіКомірки_Const.Назва /* 1 */
                     
                 });
 
@@ -5668,6 +6153,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     СкладськіКомірки_ЗаписиШвидкийВибір Record = new СкладськіКомірки_ЗаписиШвидкийВибір
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Приміщення = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[СкладськіКомірки_Const.Назва]?.ToString() ?? "" /**/
                         
@@ -5698,7 +6184,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class ОбластьЗберігання_Записи
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
         
         string Назва = "";
@@ -5706,7 +6200,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID
             /* */ , Назва, Приміщення };
         }
 
@@ -5743,8 +6237,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Довідники.ОбластьЗберігання_Select ОбластьЗберігання_Select = new Довідники.ОбластьЗберігання_Select();
             ОбластьЗберігання_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Довідники.ОбластьЗберігання_Const.Назва /* 1 */
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.ОбластьЗберігання_Const.Назва /* 1 */
                     
                 });
 
@@ -5775,6 +6269,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     ОбластьЗберігання_Записи Record = new ОбластьЗберігання_Записи
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Приміщення = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[ОбластьЗберігання_Const.Назва]?.ToString() ?? "" /**/
                         
@@ -5805,7 +6300,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class ТипорозміриКомірок_Записи
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
         
         string Назва = "";
@@ -5817,7 +6320,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID
             /* */ , Назва, Висота, Глибина, Вантажопідйомність, Обєм, Ширина };
         }
 
@@ -5862,8 +6365,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Довідники.ТипорозміриКомірок_Select ТипорозміриКомірок_Select = new Довідники.ТипорозміриКомірок_Select();
             ТипорозміриКомірок_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Довідники.ТипорозміриКомірок_Const.Назва /* 1 */
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.ТипорозміриКомірок_Const.Назва /* 1 */
                     , Довідники.ТипорозміриКомірок_Const.Висота /* 2 */
                     , Довідники.ТипорозміриКомірок_Const.Глибина /* 3 */
                     , Довідники.ТипорозміриКомірок_Const.Вантажопідйомність /* 4 */
@@ -5891,6 +6394,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     ТипорозміриКомірок_Записи Record = new ТипорозміриКомірок_Записи
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Назва = cur.Fields?[ТипорозміриКомірок_Const.Назва]?.ToString() ?? "", /**/
                         Висота = cur.Fields?[ТипорозміриКомірок_Const.Висота]?.ToString() ?? "", /**/
                         Глибина = cur.Fields?[ТипорозміриКомірок_Const.Глибина]?.ToString() ?? "", /**/
@@ -5920,14 +6424,22 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 	    
     public class ТипорозміриКомірок_ЗаписиШвидкийВибір
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
         
         string Назва = "";
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID
             /* */ , Назва };
         }
 
@@ -5962,8 +6474,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Довідники.ТипорозміриКомірок_Select ТипорозміриКомірок_Select = new Довідники.ТипорозміриКомірок_Select();
             ТипорозміриКомірок_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Довідники.ТипорозміриКомірок_Const.Назва /* 1 */
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.ТипорозміриКомірок_Const.Назва /* 1 */
                     
                 });
 
@@ -5986,6 +6498,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     ТипорозміриКомірок_ЗаписиШвидкийВибір Record = new ТипорозміриКомірок_ЗаписиШвидкийВибір
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Назва = cur.Fields?[ТипорозміриКомірок_Const.Назва]?.ToString() ?? "" /**/
                         
                     };
@@ -6020,7 +6533,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
       
     public class Блокнот_Записи
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
         
         string Код = "";
@@ -6029,7 +6550,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID
             /* */ , Код, Назва, ДатаЗапису };
         }
 
@@ -6068,8 +6589,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Довідники.Блокнот_Select Блокнот_Select = new Довідники.Блокнот_Select();
             Блокнот_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Довідники.Блокнот_Const.Код /* 1 */
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.Блокнот_Const.Код /* 1 */
                     , Довідники.Блокнот_Const.Назва /* 2 */
                     , Довідники.Блокнот_Const.ДатаЗапису /* 3 */
                     
@@ -6094,6 +6615,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     Блокнот_Записи Record = new Блокнот_Записи
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Код = cur.Fields?[Блокнот_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[Блокнот_Const.Назва]?.ToString() ?? "", /**/
                         ДатаЗапису = cur.Fields?[Блокнот_Const.ДатаЗапису]?.ToString() ?? "" /**/
@@ -6120,7 +6642,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 	    
     public class Блокнот_ЗаписиШвидкийВибір
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
         
         string Код = "";
@@ -6129,7 +6659,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID
             /* */ , Код, Назва, ДатаЗапису };
         }
 
@@ -6168,8 +6698,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Довідники.Блокнот_Select Блокнот_Select = new Довідники.Блокнот_Select();
             Блокнот_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Довідники.Блокнот_Const.Код /* 1 */
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.Блокнот_Const.Код /* 1 */
                     , Довідники.Блокнот_Const.Назва /* 2 */
                     , Довідники.Блокнот_Const.ДатаЗапису /* 3 */
                     
@@ -6194,6 +6724,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     Блокнот_ЗаписиШвидкийВибір Record = new Блокнот_ЗаписиШвидкийВибір
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Код = cur.Fields?[Блокнот_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[Блокнот_Const.Назва]?.ToString() ?? "", /**/
                         ДатаЗапису = cur.Fields?[Блокнот_Const.ДатаЗапису]?.ToString() ?? "" /**/
@@ -6295,7 +6826,15 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class ЗамовленняПостачальнику_Записи
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         bool Spend = false;
         string ID = "";
         
@@ -6372,7 +6911,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Документи.ЗамовленняПостачальнику_Select ЗамовленняПостачальнику_Select = new Документи.ЗамовленняПостачальнику_Select();
             ЗамовленняПостачальнику_Select.QuerySelect.Field.AddRange(
                 new string[]
-                { "spend" /*Проведений документ*/
+                { "deletion_label" /*Помітка на видалення*/,
+                  "spend" /*Проведений документ*/
                     , Документи.ЗамовленняПостачальнику_Const.Назва /* 1 */
                     , Документи.ЗамовленняПостачальнику_Const.НомерДок /* 2 */
                     , Документи.ЗамовленняПостачальнику_Const.ДатаДок /* 3 */
@@ -6441,6 +6981,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     {
                         ID = cur.UnigueID.ToString(),
                         Spend = (bool)cur.Fields?["spend"]!, /*Проведений документ*/
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Організація = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Контрагент = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
                         Склад = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
@@ -6479,7 +7020,15 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class ПоступленняТоварівТаПослуг_Записи
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         bool Spend = false;
         string ID = "";
         
@@ -6559,7 +7108,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Документи.ПоступленняТоварівТаПослуг_Select ПоступленняТоварівТаПослуг_Select = new Документи.ПоступленняТоварівТаПослуг_Select();
             ПоступленняТоварівТаПослуг_Select.QuerySelect.Field.AddRange(
                 new string[]
-                { "spend" /*Проведений документ*/
+                { "deletion_label" /*Помітка на видалення*/,
+                  "spend" /*Проведений документ*/
                     , Документи.ПоступленняТоварівТаПослуг_Const.Назва /* 1 */
                     , Документи.ПоступленняТоварівТаПослуг_Const.НомерДок /* 2 */
                     , Документи.ПоступленняТоварівТаПослуг_Const.ДатаДок /* 3 */
@@ -6636,6 +7186,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     {
                         ID = cur.UnigueID.ToString(),
                         Spend = (bool)cur.Fields?["spend"]!, /*Проведений документ*/
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Організація = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Склад = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
                         Контрагент = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
@@ -6675,7 +7226,15 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class ЗамовленняКлієнта_Записи
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         bool Spend = false;
         string ID = "";
         
@@ -6755,7 +7314,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Документи.ЗамовленняКлієнта_Select ЗамовленняКлієнта_Select = new Документи.ЗамовленняКлієнта_Select();
             ЗамовленняКлієнта_Select.QuerySelect.Field.AddRange(
                 new string[]
-                { "spend" /*Проведений документ*/
+                { "deletion_label" /*Помітка на видалення*/,
+                  "spend" /*Проведений документ*/
                     , Документи.ЗамовленняКлієнта_Const.Назва /* 1 */
                     , Документи.ЗамовленняКлієнта_Const.НомерДок /* 2 */
                     , Документи.ЗамовленняКлієнта_Const.ДатаДок /* 3 */
@@ -6832,6 +7392,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     {
                         ID = cur.UnigueID.ToString(),
                         Spend = (bool)cur.Fields?["spend"]!, /*Проведений документ*/
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Організація = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Контрагент = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
                         Валюта = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
@@ -6871,7 +7432,15 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class РеалізаціяТоварівТаПослуг_Записи
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         bool Spend = false;
         string ID = "";
         
@@ -6951,7 +7520,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Документи.РеалізаціяТоварівТаПослуг_Select РеалізаціяТоварівТаПослуг_Select = new Документи.РеалізаціяТоварівТаПослуг_Select();
             РеалізаціяТоварівТаПослуг_Select.QuerySelect.Field.AddRange(
                 new string[]
-                { "spend" /*Проведений документ*/
+                { "deletion_label" /*Помітка на видалення*/,
+                  "spend" /*Проведений документ*/
                     , Документи.РеалізаціяТоварівТаПослуг_Const.Назва /* 1 */
                     , Документи.РеалізаціяТоварівТаПослуг_Const.НомерДок /* 2 */
                     , Документи.РеалізаціяТоварівТаПослуг_Const.ДатаДок /* 3 */
@@ -7028,6 +7598,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     {
                         ID = cur.UnigueID.ToString(),
                         Spend = (bool)cur.Fields?["spend"]!, /*Проведений документ*/
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Організація = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Контрагент = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
                         Валюта = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
@@ -7067,7 +7638,15 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class ВстановленняЦінНоменклатури_Записи
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         bool Spend = false;
         string ID = "";
         
@@ -7138,7 +7717,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Документи.ВстановленняЦінНоменклатури_Select ВстановленняЦінНоменклатури_Select = new Документи.ВстановленняЦінНоменклатури_Select();
             ВстановленняЦінНоменклатури_Select.QuerySelect.Field.AddRange(
                 new string[]
-                { "spend" /*Проведений документ*/
+                { "deletion_label" /*Помітка на видалення*/,
+                  "spend" /*Проведений документ*/
                     , Документи.ВстановленняЦінНоменклатури_Const.Назва /* 1 */
                     , Документи.ВстановленняЦінНоменклатури_Const.НомерДок /* 2 */
                     , Документи.ВстановленняЦінНоменклатури_Const.ДатаДок /* 3 */
@@ -7198,6 +7778,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     {
                         ID = cur.UnigueID.ToString(),
                         Spend = (bool)cur.Fields?["spend"]!, /*Проведений документ*/
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Організація = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Валюта = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
                         ВидЦіни = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
@@ -7234,7 +7815,15 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class ПрихіднийКасовийОрдер_Записи
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         bool Spend = false;
         string ID = "";
         
@@ -7314,7 +7903,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Документи.ПрихіднийКасовийОрдер_Select ПрихіднийКасовийОрдер_Select = new Документи.ПрихіднийКасовийОрдер_Select();
             ПрихіднийКасовийОрдер_Select.QuerySelect.Field.AddRange(
                 new string[]
-                { "spend" /*Проведений документ*/
+                { "deletion_label" /*Помітка на видалення*/,
+                  "spend" /*Проведений документ*/
                     , Документи.ПрихіднийКасовийОрдер_Const.Назва /* 1 */
                     , Документи.ПрихіднийКасовийОрдер_Const.НомерДок /* 2 */
                     , Документи.ПрихіднийКасовийОрдер_Const.ДатаДок /* 3 */
@@ -7384,6 +7974,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     {
                         ID = cur.UnigueID.ToString(),
                         Spend = (bool)cur.Fields?["spend"]!, /*Проведений документ*/
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Організація = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Валюта = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
                         Каса = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
@@ -7423,7 +8014,15 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class РозхіднийКасовийОрдер_Записи
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         bool Spend = false;
         string ID = "";
         
@@ -7503,7 +8102,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Документи.РозхіднийКасовийОрдер_Select РозхіднийКасовийОрдер_Select = new Документи.РозхіднийКасовийОрдер_Select();
             РозхіднийКасовийОрдер_Select.QuerySelect.Field.AddRange(
                 new string[]
-                { "spend" /*Проведений документ*/
+                { "deletion_label" /*Помітка на видалення*/,
+                  "spend" /*Проведений документ*/
                     , Документи.РозхіднийКасовийОрдер_Const.Назва /* 1 */
                     , Документи.РозхіднийКасовийОрдер_Const.НомерДок /* 2 */
                     , Документи.РозхіднийКасовийОрдер_Const.ДатаДок /* 3 */
@@ -7573,6 +8173,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     {
                         ID = cur.UnigueID.ToString(),
                         Spend = (bool)cur.Fields?["spend"]!, /*Проведений документ*/
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Організація = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Контрагент = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
                         Валюта = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
@@ -7612,7 +8213,15 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class ПереміщенняТоварів_Записи
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         bool Spend = false;
         string ID = "";
         
@@ -7683,7 +8292,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Документи.ПереміщенняТоварів_Select ПереміщенняТоварів_Select = new Документи.ПереміщенняТоварів_Select();
             ПереміщенняТоварів_Select.QuerySelect.Field.AddRange(
                 new string[]
-                { "spend" /*Проведений документ*/
+                { "deletion_label" /*Помітка на видалення*/,
+                  "spend" /*Проведений документ*/
                     , Документи.ПереміщенняТоварів_Const.Назва /* 1 */
                     , Документи.ПереміщенняТоварів_Const.НомерДок /* 2 */
                     , Документи.ПереміщенняТоварів_Const.ДатаДок /* 3 */
@@ -7743,6 +8353,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     {
                         ID = cur.UnigueID.ToString(),
                         Spend = (bool)cur.Fields?["spend"]!, /*Проведений документ*/
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Організація = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         СкладВідправник = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
                         СкладОтримувач = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
@@ -7779,7 +8390,15 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class ПоверненняТоварівПостачальнику_Записи
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         bool Spend = false;
         string ID = "";
         
@@ -7859,7 +8478,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Документи.ПоверненняТоварівПостачальнику_Select ПоверненняТоварівПостачальнику_Select = new Документи.ПоверненняТоварівПостачальнику_Select();
             ПоверненняТоварівПостачальнику_Select.QuerySelect.Field.AddRange(
                 new string[]
-                { "spend" /*Проведений документ*/
+                { "deletion_label" /*Помітка на видалення*/,
+                  "spend" /*Проведений документ*/
                     , Документи.ПоверненняТоварівПостачальнику_Const.Назва /* 1 */
                     , Документи.ПоверненняТоварівПостачальнику_Const.НомерДок /* 2 */
                     , Документи.ПоверненняТоварівПостачальнику_Const.ДатаДок /* 3 */
@@ -7936,6 +8556,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     {
                         ID = cur.UnigueID.ToString(),
                         Spend = (bool)cur.Fields?["spend"]!, /*Проведений документ*/
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Організація = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Контрагент = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
                         Валюта = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
@@ -7975,7 +8596,15 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class ПоверненняТоварівВідКлієнта_Записи
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         bool Spend = false;
         string ID = "";
         
@@ -8055,7 +8684,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Документи.ПоверненняТоварівВідКлієнта_Select ПоверненняТоварівВідКлієнта_Select = new Документи.ПоверненняТоварівВідКлієнта_Select();
             ПоверненняТоварівВідКлієнта_Select.QuerySelect.Field.AddRange(
                 new string[]
-                { "spend" /*Проведений документ*/
+                { "deletion_label" /*Помітка на видалення*/,
+                  "spend" /*Проведений документ*/
                     , Документи.ПоверненняТоварівВідКлієнта_Const.Назва /* 1 */
                     , Документи.ПоверненняТоварівВідКлієнта_Const.НомерДок /* 2 */
                     , Документи.ПоверненняТоварівВідКлієнта_Const.ДатаДок /* 3 */
@@ -8132,6 +8762,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     {
                         ID = cur.UnigueID.ToString(),
                         Spend = (bool)cur.Fields?["spend"]!, /*Проведений документ*/
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Організація = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Валюта = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
                         Каса = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
@@ -8171,7 +8802,15 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class АктВиконанихРобіт_Записи
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         bool Spend = false;
         string ID = "";
         
@@ -8248,7 +8887,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Документи.АктВиконанихРобіт_Select АктВиконанихРобіт_Select = new Документи.АктВиконанихРобіт_Select();
             АктВиконанихРобіт_Select.QuerySelect.Field.AddRange(
                 new string[]
-                { "spend" /*Проведений документ*/
+                { "deletion_label" /*Помітка на видалення*/,
+                  "spend" /*Проведений документ*/
                     , Документи.АктВиконанихРобіт_Const.Назва /* 1 */
                     , Документи.АктВиконанихРобіт_Const.НомерДок /* 2 */
                     , Документи.АктВиконанихРобіт_Const.ДатаДок /* 3 */
@@ -8317,6 +8957,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     {
                         ID = cur.UnigueID.ToString(),
                         Spend = (bool)cur.Fields?["spend"]!, /*Проведений документ*/
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Організація = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Валюта = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
                         Каса = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
@@ -8355,7 +8996,15 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class ВведенняЗалишків_Записи
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         bool Spend = false;
         string ID = "";
         
@@ -8429,7 +9078,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Документи.ВведенняЗалишків_Select ВведенняЗалишків_Select = new Документи.ВведенняЗалишків_Select();
             ВведенняЗалишків_Select.QuerySelect.Field.AddRange(
                 new string[]
-                { "spend" /*Проведений документ*/
+                { "deletion_label" /*Помітка на видалення*/,
+                  "spend" /*Проведений документ*/
                     , Документи.ВведенняЗалишків_Const.Назва /* 1 */
                     , Документи.ВведенняЗалишків_Const.НомерДок /* 2 */
                     , Документи.ВведенняЗалишків_Const.ДатаДок /* 3 */
@@ -8497,6 +9147,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     {
                         ID = cur.UnigueID.ToString(),
                         Spend = (bool)cur.Fields?["spend"]!, /*Проведений документ*/
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Організація = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Склад = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
                         Контрагент = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
@@ -8534,7 +9185,15 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class НадлишкиТоварів_Записи
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         bool Spend = false;
         string ID = "";
         
@@ -8602,7 +9261,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Документи.НадлишкиТоварів_Select НадлишкиТоварів_Select = new Документи.НадлишкиТоварів_Select();
             НадлишкиТоварів_Select.QuerySelect.Field.AddRange(
                 new string[]
-                { "spend" /*Проведений документ*/
+                { "deletion_label" /*Помітка на видалення*/,
+                  "spend" /*Проведений документ*/
                     , Документи.НадлишкиТоварів_Const.Назва /* 1 */
                     , Документи.НадлишкиТоварів_Const.НомерДок /* 2 */
                     , Документи.НадлишкиТоварів_Const.ДатаДок /* 3 */
@@ -8654,6 +9314,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     {
                         ID = cur.UnigueID.ToString(),
                         Spend = (bool)cur.Fields?["spend"]!, /*Проведений документ*/
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Організація = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Склад = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
                         Автор = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
@@ -8689,7 +9350,15 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class ПересортицяТоварів_Записи
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         bool Spend = false;
         string ID = "";
         
@@ -8757,7 +9426,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Документи.ПересортицяТоварів_Select ПересортицяТоварів_Select = new Документи.ПересортицяТоварів_Select();
             ПересортицяТоварів_Select.QuerySelect.Field.AddRange(
                 new string[]
-                { "spend" /*Проведений документ*/
+                { "deletion_label" /*Помітка на видалення*/,
+                  "spend" /*Проведений документ*/
                     , Документи.ПересортицяТоварів_Const.Назва /* 1 */
                     , Документи.ПересортицяТоварів_Const.НомерДок /* 2 */
                     , Документи.ПересортицяТоварів_Const.ДатаДок /* 3 */
@@ -8809,6 +9479,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     {
                         ID = cur.UnigueID.ToString(),
                         Spend = (bool)cur.Fields?["spend"]!, /*Проведений документ*/
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Організація = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Склад = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
                         Автор = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
@@ -8844,7 +9515,15 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class ПерерахунокТоварів_Записи
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         bool Spend = false;
         string ID = "";
         
@@ -8909,7 +9588,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Документи.ПерерахунокТоварів_Select ПерерахунокТоварів_Select = new Документи.ПерерахунокТоварів_Select();
             ПерерахунокТоварів_Select.QuerySelect.Field.AddRange(
                 new string[]
-                { "spend" /*Проведений документ*/
+                { "deletion_label" /*Помітка на видалення*/,
+                  "spend" /*Проведений документ*/
                     , Документи.ПерерахунокТоварів_Const.Назва /* 1 */
                     , Документи.ПерерахунокТоварів_Const.НомерДок /* 2 */
                     , Документи.ПерерахунокТоварів_Const.ДатаДок /* 3 */
@@ -8953,6 +9633,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     {
                         ID = cur.UnigueID.ToString(),
                         Spend = (bool)cur.Fields?["spend"]!, /*Проведений документ*/
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Склад = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Автор = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[ПерерахунокТоварів_Const.Назва]?.ToString() ?? "", /**/
@@ -8987,7 +9668,15 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class ПсуванняТоварів_Записи
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         bool Spend = false;
         string ID = "";
         
@@ -9058,7 +9747,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Документи.ПсуванняТоварів_Select ПсуванняТоварів_Select = new Документи.ПсуванняТоварів_Select();
             ПсуванняТоварів_Select.QuerySelect.Field.AddRange(
                 new string[]
-                { "spend" /*Проведений документ*/
+                { "deletion_label" /*Помітка на видалення*/,
+                  "spend" /*Проведений документ*/
                     , Документи.ПсуванняТоварів_Const.Назва /* 1 */
                     , Документи.ПсуванняТоварів_Const.НомерДок /* 2 */
                     , Документи.ПсуванняТоварів_Const.ДатаДок /* 3 */
@@ -9111,6 +9801,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     {
                         ID = cur.UnigueID.ToString(),
                         Spend = (bool)cur.Fields?["spend"]!, /*Проведений документ*/
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Організація = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Склад = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
                         Автор = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
@@ -9147,7 +9838,15 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class ВнутрішнєСпоживанняТоварів_Записи
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         bool Spend = false;
         string ID = "";
         
@@ -9221,7 +9920,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Документи.ВнутрішнєСпоживанняТоварів_Select ВнутрішнєСпоживанняТоварів_Select = new Документи.ВнутрішнєСпоживанняТоварів_Select();
             ВнутрішнєСпоживанняТоварів_Select.QuerySelect.Field.AddRange(
                 new string[]
-                { "spend" /*Проведений документ*/
+                { "deletion_label" /*Помітка на видалення*/,
+                  "spend" /*Проведений документ*/
                     , Документи.ВнутрішнєСпоживанняТоварів_Const.Назва /* 1 */
                     , Документи.ВнутрішнєСпоживанняТоварів_Const.НомерДок /* 2 */
                     , Документи.ВнутрішнєСпоживанняТоварів_Const.ДатаДок /* 3 */
@@ -9282,6 +9982,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     {
                         ID = cur.UnigueID.ToString(),
                         Spend = (bool)cur.Fields?["spend"]!, /*Проведений документ*/
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Організація = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Склад = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
                         Валюта = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
@@ -9319,7 +10020,15 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class РахунокФактура_Записи
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         bool Spend = false;
         string ID = "";
         
@@ -9399,7 +10108,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Документи.РахунокФактура_Select РахунокФактура_Select = new Документи.РахунокФактура_Select();
             РахунокФактура_Select.QuerySelect.Field.AddRange(
                 new string[]
-                { "spend" /*Проведений документ*/
+                { "deletion_label" /*Помітка на видалення*/,
+                  "spend" /*Проведений документ*/
                     , Документи.РахунокФактура_Const.Назва /* 1 */
                     , Документи.РахунокФактура_Const.НомерДок /* 2 */
                     , Документи.РахунокФактура_Const.ДатаДок /* 3 */
@@ -9476,6 +10186,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     {
                         ID = cur.UnigueID.ToString(),
                         Spend = (bool)cur.Fields?["spend"]!, /*Проведений документ*/
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Організація = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Контрагент = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
                         Валюта = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
@@ -9515,7 +10226,15 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class РозміщенняТоварівНаСкладі_Записи
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         bool Spend = false;
         string ID = "";
         
@@ -9583,7 +10302,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Документи.РозміщенняТоварівНаСкладі_Select РозміщенняТоварівНаСкладі_Select = new Документи.РозміщенняТоварівНаСкладі_Select();
             РозміщенняТоварівНаСкладі_Select.QuerySelect.Field.AddRange(
                 new string[]
-                { "spend" /*Проведений документ*/
+                { "deletion_label" /*Помітка на видалення*/,
+                  "spend" /*Проведений документ*/
                     , Документи.РозміщенняТоварівНаСкладі_Const.Назва /* 1 */
                     , Документи.РозміщенняТоварівНаСкладі_Const.ДатаДок /* 2 */
                     , Документи.РозміщенняТоварівНаСкладі_Const.НомерДок /* 3 */
@@ -9635,6 +10355,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     {
                         ID = cur.UnigueID.ToString(),
                         Spend = (bool)cur.Fields?["spend"]!, /*Проведений документ*/
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Склад = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         ДокументПоступлення = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
                         Автор = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
@@ -9670,7 +10391,15 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class ПереміщенняТоварівНаСкладі_Записи
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         bool Spend = false;
         string ID = "";
         
@@ -9738,7 +10467,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Документи.ПереміщенняТоварівНаСкладі_Select ПереміщенняТоварівНаСкладі_Select = new Документи.ПереміщенняТоварівНаСкладі_Select();
             ПереміщенняТоварівНаСкладі_Select.QuerySelect.Field.AddRange(
                 new string[]
-                { "spend" /*Проведений документ*/
+                { "deletion_label" /*Помітка на видалення*/,
+                  "spend" /*Проведений документ*/
                     , Документи.ПереміщенняТоварівНаСкладі_Const.Назва /* 1 */
                     , Документи.ПереміщенняТоварівНаСкладі_Const.ДатаДок /* 2 */
                     , Документи.ПереміщенняТоварівНаСкладі_Const.НомерДок /* 3 */
@@ -9790,6 +10520,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     {
                         ID = cur.UnigueID.ToString(),
                         Spend = (bool)cur.Fields?["spend"]!, /*Проведений документ*/
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Склад = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Організація = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
                         Автор = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
@@ -9825,7 +10556,15 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class ЗбіркаТоварівНаСкладі_Записи
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         bool Spend = false;
         string ID = "";
         
@@ -9893,7 +10632,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Документи.ЗбіркаТоварівНаСкладі_Select ЗбіркаТоварівНаСкладі_Select = new Документи.ЗбіркаТоварівНаСкладі_Select();
             ЗбіркаТоварівНаСкладі_Select.QuerySelect.Field.AddRange(
                 new string[]
-                { "spend" /*Проведений документ*/
+                { "deletion_label" /*Помітка на видалення*/,
+                  "spend" /*Проведений документ*/
                     , Документи.ЗбіркаТоварівНаСкладі_Const.Назва /* 1 */
                     , Документи.ЗбіркаТоварівНаСкладі_Const.ДатаДок /* 2 */
                     , Документи.ЗбіркаТоварівНаСкладі_Const.НомерДок /* 3 */
@@ -9945,6 +10685,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     {
                         ID = cur.UnigueID.ToString(),
                         Spend = (bool)cur.Fields?["spend"]!, /*Проведений документ*/
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Склад = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         ДокументРеалізації = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
                         Автор = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
@@ -9980,7 +10721,15 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
       
     public class РозміщенняНоменклатуриПоКоміркам_Записи
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         bool Spend = false;
         string ID = "";
         
@@ -10048,7 +10797,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Документи.РозміщенняНоменклатуриПоКоміркам_Select РозміщенняНоменклатуриПоКоміркам_Select = new Документи.РозміщенняНоменклатуриПоКоміркам_Select();
             РозміщенняНоменклатуриПоКоміркам_Select.QuerySelect.Field.AddRange(
                 new string[]
-                { "spend" /*Проведений документ*/
+                { "deletion_label" /*Помітка на видалення*/,
+                  "spend" /*Проведений документ*/
                     , Документи.РозміщенняНоменклатуриПоКоміркам_Const.Назва /* 1 */
                     , Документи.РозміщенняНоменклатуриПоКоміркам_Const.ДатаДок /* 2 */
                     , Документи.РозміщенняНоменклатуриПоКоміркам_Const.НомерДок /* 3 */
@@ -10100,6 +10850,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     {
                         ID = cur.UnigueID.ToString(),
                         Spend = (bool)cur.Fields?["spend"]!, /*Проведений документ*/
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Організація = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Склад = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
                         Автор = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
@@ -10140,7 +10891,15 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
     
     public class Журнали_Повний
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         bool Spend = false;
         string ID = "";
         string Type = ""; //Тип документу
@@ -10382,6 +11141,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   }
 
                   query.FieldAndAlias.Add(new NameValue<string>("'ЗамовленняПостачальнику'", "type"));
+                  query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
@@ -10462,6 +11222,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   }
 
                   query.FieldAndAlias.Add(new NameValue<string>("'ПоступленняТоварівТаПослуг'", "type"));
+                  query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
@@ -10542,6 +11303,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   }
 
                   query.FieldAndAlias.Add(new NameValue<string>("'ЗамовленняКлієнта'", "type"));
+                  query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
@@ -10622,6 +11384,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   }
 
                   query.FieldAndAlias.Add(new NameValue<string>("'РеалізаціяТоварівТаПослуг'", "type"));
+                  query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
@@ -10702,6 +11465,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   }
 
                   query.FieldAndAlias.Add(new NameValue<string>("'ВстановленняЦінНоменклатури'", "type"));
+                  query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
@@ -10767,6 +11531,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   }
 
                   query.FieldAndAlias.Add(new NameValue<string>("'ПрихіднийКасовийОрдер'", "type"));
+                  query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
@@ -10842,6 +11607,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   }
 
                   query.FieldAndAlias.Add(new NameValue<string>("'РозхіднийКасовийОрдер'", "type"));
+                  query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
@@ -10917,6 +11683,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   }
 
                   query.FieldAndAlias.Add(new NameValue<string>("'ПереміщенняТоварів'", "type"));
+                  query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
@@ -10982,6 +11749,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   }
 
                   query.FieldAndAlias.Add(new NameValue<string>("'ПоверненняТоварівПостачальнику'", "type"));
+                  query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
@@ -11062,6 +11830,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   }
 
                   query.FieldAndAlias.Add(new NameValue<string>("'ПоверненняТоварівВідКлієнта'", "type"));
+                  query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
@@ -11142,6 +11911,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   }
 
                   query.FieldAndAlias.Add(new NameValue<string>("'АктВиконанихРобіт'", "type"));
+                  query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
@@ -11217,6 +11987,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   }
 
                   query.FieldAndAlias.Add(new NameValue<string>("'ВведенняЗалишків'", "type"));
+                  query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
@@ -11292,6 +12063,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   }
 
                   query.FieldAndAlias.Add(new NameValue<string>("'ПсуванняТоварів'", "type"));
+                  query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
@@ -11357,6 +12129,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   }
 
                   query.FieldAndAlias.Add(new NameValue<string>("'ВнутрішнєСпоживанняТоварів'", "type"));
+                  query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
@@ -11427,6 +12200,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   }
 
                   query.FieldAndAlias.Add(new NameValue<string>("'РахунокФактура'", "type"));
+                  query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
@@ -11507,6 +12281,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   }
 
                   query.FieldAndAlias.Add(new NameValue<string>("'РозміщенняТоварівНаСкладі'", "type"));
+                  query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
@@ -11572,6 +12347,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   }
 
                   query.FieldAndAlias.Add(new NameValue<string>("'ПереміщенняТоварівНаСкладі'", "type"));
+                  query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
@@ -11637,6 +12413,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   }
 
                   query.FieldAndAlias.Add(new NameValue<string>("'ЗбіркаТоварівНаСкладі'", "type"));
+                  query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
@@ -11702,6 +12479,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   }
 
                   query.FieldAndAlias.Add(new NameValue<string>("'РозміщенняНоменклатуриПоКоміркам'", "type"));
+                  query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
@@ -11771,6 +12549,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                 Журнали_Повний record = new Журнали_Повний();
                 record.ID = row["uid"]?.ToString() ?? "";
                 record.Type = row["type"]?.ToString() ?? "";
+                record.DeletionLabel = (bool)row["deletion_label"];
                 record.Spend = (bool)row["spend"];
                 
                     record.Назва = row["Назва"] != DBNull.Value ? (row["Назва"]?.ToString() ?? "") : "";
@@ -11813,7 +12592,15 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
     
     public class Журнали_Закупівлі
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         bool Spend = false;
         string ID = "";
         string Type = ""; //Тип документу
@@ -11943,6 +12730,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   }
 
                   query.FieldAndAlias.Add(new NameValue<string>("'ЗамовленняПостачальнику'", "type"));
+                  query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
@@ -12023,6 +12811,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   }
 
                   query.FieldAndAlias.Add(new NameValue<string>("'ПоступленняТоварівТаПослуг'", "type"));
+                  query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
@@ -12103,6 +12892,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   }
 
                   query.FieldAndAlias.Add(new NameValue<string>("'ПоверненняТоварівПостачальнику'", "type"));
+                  query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
@@ -12187,6 +12977,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                 Журнали_Закупівлі record = new Журнали_Закупівлі();
                 record.ID = row["uid"]?.ToString() ?? "";
                 record.Type = row["type"]?.ToString() ?? "";
+                record.DeletionLabel = (bool)row["deletion_label"];
                 record.Spend = (bool)row["spend"];
                 
                     record.Назва = row["Назва"] != DBNull.Value ? (row["Назва"]?.ToString() ?? "") : "";
@@ -12229,7 +13020,15 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
     
     public class Журнали_Продажі
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         bool Spend = false;
         string ID = "";
         string Type = ""; //Тип документу
@@ -12373,6 +13172,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   }
 
                   query.FieldAndAlias.Add(new NameValue<string>("'ЗамовленняКлієнта'", "type"));
+                  query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
@@ -12453,6 +13253,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   }
 
                   query.FieldAndAlias.Add(new NameValue<string>("'РеалізаціяТоварівТаПослуг'", "type"));
+                  query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
@@ -12533,6 +13334,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   }
 
                   query.FieldAndAlias.Add(new NameValue<string>("'ПоверненняТоварівВідКлієнта'", "type"));
+                  query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
@@ -12613,6 +13415,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   }
 
                   query.FieldAndAlias.Add(new NameValue<string>("'АктВиконанихРобіт'", "type"));
+                  query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
@@ -12688,6 +13491,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   }
 
                   query.FieldAndAlias.Add(new NameValue<string>("'РахунокФактура'", "type"));
+                  query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
@@ -12772,6 +13576,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                 Журнали_Продажі record = new Журнали_Продажі();
                 record.ID = row["uid"]?.ToString() ?? "";
                 record.Type = row["type"]?.ToString() ?? "";
+                record.DeletionLabel = (bool)row["deletion_label"];
                 record.Spend = (bool)row["spend"];
                 
                     record.Назва = row["Назва"] != DBNull.Value ? (row["Назва"]?.ToString() ?? "") : "";
@@ -12814,7 +13619,15 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
     
     public class Журнали_Каса
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         bool Spend = false;
         string ID = "";
         string Type = ""; //Тип документу
@@ -12937,6 +13750,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   }
 
                   query.FieldAndAlias.Add(new NameValue<string>("'ПрихіднийКасовийОрдер'", "type"));
+                  query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
@@ -13017,6 +13831,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   }
 
                   query.FieldAndAlias.Add(new NameValue<string>("'РозхіднийКасовийОрдер'", "type"));
+                  query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
@@ -13101,6 +13916,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                 Журнали_Каса record = new Журнали_Каса();
                 record.ID = row["uid"]?.ToString() ?? "";
                 record.Type = row["type"]?.ToString() ?? "";
+                record.DeletionLabel = (bool)row["deletion_label"];
                 record.Spend = (bool)row["spend"];
                 
                     record.Назва = row["Назва"] != DBNull.Value ? (row["Назва"]?.ToString() ?? "") : "";
@@ -13143,7 +13959,15 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
     
     public class Журнали_Склад
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         bool Spend = false;
         string ID = "";
         string Type = ""; //Тип документу
@@ -13271,6 +14095,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   }
 
                   query.FieldAndAlias.Add(new NameValue<string>("'ПереміщенняТоварів'", "type"));
+                  query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
@@ -13332,6 +14157,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   }
 
                   query.FieldAndAlias.Add(new NameValue<string>("'ВведенняЗалишків'", "type"));
+                  query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
@@ -13388,6 +14214,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   }
 
                   query.FieldAndAlias.Add(new NameValue<string>("'ВнутрішнєСпоживанняТоварів'", "type"));
+                  query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
@@ -13444,6 +14271,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   }
 
                   query.FieldAndAlias.Add(new NameValue<string>("'ПсуванняТоварів'", "type"));
+                  query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
@@ -13504,6 +14332,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                 Журнали_Склад record = new Журнали_Склад();
                 record.ID = row["uid"]?.ToString() ?? "";
                 record.Type = row["type"]?.ToString() ?? "";
+                record.DeletionLabel = (bool)row["deletion_label"];
                 record.Spend = (bool)row["spend"];
                 
                     record.Назва = row["Назва"] != DBNull.Value ? (row["Назва"]?.ToString() ?? "") : "";
@@ -13540,7 +14369,15 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
     
     public class Журнали_АдреснеЗберігання
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         bool Spend = false;
         string ID = "";
         string Type = ""; //Тип документу
@@ -13665,6 +14502,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   }
 
                   query.FieldAndAlias.Add(new NameValue<string>("'РозміщенняТоварівНаСкладі'", "type"));
+                  query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
@@ -13718,6 +14556,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   }
 
                   query.FieldAndAlias.Add(new NameValue<string>("'ПереміщенняТоварівНаСкладі'", "type"));
+                  query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
@@ -13771,6 +14610,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   }
 
                   query.FieldAndAlias.Add(new NameValue<string>("'ЗбіркаТоварівНаСкладі'", "type"));
+                  query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
@@ -13824,6 +14664,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   }
 
                   query.FieldAndAlias.Add(new NameValue<string>("'РозміщенняНоменклатуриПоКоміркам'", "type"));
+                  query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
                               query.FieldAndAlias.Add(
@@ -13881,6 +14722,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                 Журнали_АдреснеЗберігання record = new Журнали_АдреснеЗберігання();
                 record.ID = row["uid"]?.ToString() ?? "";
                 record.Type = row["type"]?.ToString() ?? "";
+                record.DeletionLabel = (bool)row["deletion_label"];
                 record.Spend = (bool)row["spend"];
                 
                     record.Назва = row["Назва"] != DBNull.Value ? (row["Назва"]?.ToString() ?? "") : "";

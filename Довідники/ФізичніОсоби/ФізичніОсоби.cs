@@ -229,7 +229,7 @@ namespace StorageAndTrade
 
                         ФізичніОсоби_Objest ФізичніОсоби_Objest = new ФізичніОсоби_Objest();
                         if (ФізичніОсоби_Objest.Read(new UnigueID(uid)))
-                            ФізичніОсоби_Objest.Delete();
+                            ФізичніОсоби_Objest.SetDeletionLabel(!ФізичніОсоби_Objest.DeletionLabel);
                         else
                             Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                     }

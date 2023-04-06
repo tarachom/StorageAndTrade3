@@ -53,14 +53,22 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники.Т
         <xsl:variable name="TabularListName" select="Name"/>
     public class <xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularListName"/>
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
         <xsl:for-each select="Fields/Field">
         string <xsl:value-of select="Name"/> = "";</xsl:for-each>
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
+            return new object[] { new Gdk.Pixbuf(Image), ID
             /* */ <xsl:for-each select="Fields/Field">
               <xsl:text>, </xsl:text>
               <xsl:value-of select="Name"/>
@@ -110,9 +118,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники.Т
             Довідники.<xsl:value-of select="$DirectoryName"/>_Select <xsl:value-of select="$DirectoryName"/>_Select = new Довідники.<xsl:value-of select="$DirectoryName"/>_Select();
             <xsl:value-of select="$DirectoryName"/>_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
+                { "deletion_label" /*Помітка на видалення*/
                     <xsl:for-each select="Fields/Field[Type != 'pointer']">
-                        <xsl:if test="position() &gt; 1">, </xsl:if>
+                        <xsl:text>, </xsl:text>
                         <xsl:text>Довідники.</xsl:text>
                         <xsl:value-of select="$DirectoryName"/>
                         <xsl:text>_Const.</xsl:text>
@@ -154,6 +162,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники.Т
                     <xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularListName"/> Record = new <xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularListName"/>
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         <xsl:variable name="CountPointer" select="count(Fields/Field[Type = 'pointer'])"/>
                         <xsl:variable name="CountNotPointer" select="count(Fields/Field[Type != 'pointer'])"/>
                         <xsl:for-each select="Fields/Field[Type = 'pointer']">
@@ -309,7 +318,15 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи.Т
         <xsl:variable name="TabularListName" select="Name"/>
     public class <xsl:value-of select="$DocumentName"/>_<xsl:value-of select="$TabularListName"/>
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         bool Spend = false;
         string ID = "";
         <xsl:for-each select="Fields/Field">
@@ -373,7 +390,8 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи.Т
             Документи.<xsl:value-of select="$DocumentName"/>_Select <xsl:value-of select="$DocumentName"/>_Select = new Документи.<xsl:value-of select="$DocumentName"/>_Select();
             <xsl:value-of select="$DocumentName"/>_Select.QuerySelect.Field.AddRange(
                 new string[]
-                { "spend" /*Проведений документ*/
+                { "deletion_label" /*Помітка на видалення*/,
+                  "spend" /*Проведений документ*/
                     <xsl:for-each select="Fields/Field[Type != 'pointer']">
                         <xsl:text>, </xsl:text>
                         <xsl:text>Документи.</xsl:text>
@@ -418,6 +436,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи.Т
                     {
                         ID = cur.UnigueID.ToString(),
                         Spend = (bool)cur.Fields?["spend"]!, /*Проведений документ*/
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         <xsl:variable name="CountPointer" select="count(Fields/Field[Type = 'pointer'])"/>
                         <xsl:variable name="CountNotPointer" select="count(Fields/Field[Type != 'pointer'])"/>
                         <xsl:for-each select="Fields/Field[Type = 'pointer']">
@@ -508,7 +527,15 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи.Т
     
     public class Журнали_<xsl:value-of select="$JournalName"/>
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         bool Spend = false;
         string ID = "";
         string Type = ""; //Тип документу
@@ -619,6 +646,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи.Т
                   }
 
                   query.FieldAndAlias.Add(new NameValue&lt;string&gt;("'<xsl:value-of select="$DocumentName"/>'", "type"));
+                  query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   <xsl:for-each select="Fields/Field">
                       <!-- Приведення даних в запиті до певного типу -->
@@ -683,6 +711,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи.Т
                 Журнали_<xsl:value-of select="$JournalName"/> record = new Журнали_<xsl:value-of select="$JournalName"/>();
                 record.ID = row["uid"]?.ToString() ?? "";
                 record.Type = row["type"]?.ToString() ?? "";
+                record.DeletionLabel = (bool)row["deletion_label"];
                 record.Spend = (bool)row["spend"];
                 <xsl:for-each select="Fields/Field">
                     record.<xsl:value-of select="Name"/> = row["<xsl:value-of select="Name"/>"] != DBNull.Value ? (row["<xsl:value-of select="Name"/>"]?.ToString() ?? "") : "";

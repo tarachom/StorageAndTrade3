@@ -279,7 +279,7 @@ namespace StorageAndTrade
 
                         Банки_Objest Банки_Objest = new Банки_Objest();
                         if (Банки_Objest.Read(new UnigueID(uid)))
-                            Банки_Objest.Delete();
+                            Банки_Objest.SetDeletionLabel(!Банки_Objest.DeletionLabel);
                         else
                             Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                     }

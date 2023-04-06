@@ -230,7 +230,7 @@ namespace StorageAndTrade
 
                         СтруктураПідприємства_Objest СтруктураПідприємства_Objest = new СтруктураПідприємства_Objest();
                         if (СтруктураПідприємства_Objest.Read(new UnigueID(uid)))
-                            СтруктураПідприємства_Objest.Delete();
+                            СтруктураПідприємства_Objest.SetDeletionLabel(!СтруктураПідприємства_Objest.DeletionLabel);
                         else
                             Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                     }

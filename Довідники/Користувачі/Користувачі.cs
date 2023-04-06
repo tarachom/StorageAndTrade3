@@ -230,7 +230,7 @@ namespace StorageAndTrade
 
                         Користувачі_Objest Користувачі_Objest = new Користувачі_Objest();
                         if (Користувачі_Objest.Read(new UnigueID(uid)))
-                            Користувачі_Objest.Delete();
+                            Користувачі_Objest.SetDeletionLabel(!Користувачі_Objest.DeletionLabel);
                         else
                             Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                     }

@@ -393,6 +393,11 @@ namespace StorageAndTrade
                         OnRowActivated(TreeViewGrid, new RowActivatedArgs());
                         break;
                     }
+                case Gdk.Key.Delete:
+                    {
+                        OnDeleteClick(TreeViewGrid, new EventArgs());
+                        break;
+                    }
             }
         }
 
@@ -445,7 +450,7 @@ namespace StorageAndTrade
 
                         РахунокФактура_Objest РахунокФактура_Objest = new РахунокФактура_Objest();
                         if (РахунокФактура_Objest.Read(new UnigueID(uid)))
-                            РахунокФактура_Objest.Delete();
+                            РахунокФактура_Objest.SetDeletionLabel(!РахунокФактура_Objest.DeletionLabel);
                         else
                             Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                     }

@@ -252,7 +252,7 @@ namespace StorageAndTrade
 
                         ДоговориКонтрагентів_Objest ДоговориКонтрагентів_Objest = new ДоговориКонтрагентів_Objest();
                         if (ДоговориКонтрагентів_Objest.Read(new UnigueID(uid)))
-                            ДоговориКонтрагентів_Objest.Delete();
+                            ДоговориКонтрагентів_Objest.SetDeletionLabel(!ДоговориКонтрагентів_Objest.DeletionLabel);
                         else
                             Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                     }

@@ -230,7 +230,7 @@ namespace StorageAndTrade
 
                         Каси_Objest Каси_Objest = new Каси_Objest();
                         if (Каси_Objest.Read(new UnigueID(uid)))
-                            Каси_Objest.Delete();
+                            Каси_Objest.SetDeletionLabel(!Каси_Objest.DeletionLabel);
                         else
                             Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                     }

@@ -302,7 +302,7 @@ namespace StorageAndTrade
 
                         ХарактеристикиНоменклатури_Objest ХарактеристикиНоменклатури_Objest = new ХарактеристикиНоменклатури_Objest();
                         if (ХарактеристикиНоменклатури_Objest.Read(new UnigueID(uid)))
-                            ХарактеристикиНоменклатури_Objest.Delete();
+                            ХарактеристикиНоменклатури_Objest.SetDeletionLabel(!ХарактеристикиНоменклатури_Objest.DeletionLabel);
                         else
                             Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                     }

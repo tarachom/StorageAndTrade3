@@ -721,6 +721,11 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
             return copy;
         }
 
+        public void SetDeletionLabel(bool label = true)
+        {
+            base.BaseDeletionLabel(label);
+        }
+
         public void Delete()
         {
             <xsl:if test="normalize-space(TriggerFunctions/BeforeDelete) != ''">
@@ -1263,6 +1268,14 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
                 <xsl:value-of select="TriggerFunctions/Copying"/><xsl:text>(copy, this);</xsl:text>      
             </xsl:if>
             return copy;
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            <xsl:if test="normalize-space(TriggerFunctions/BeforeDelete) != ''"><!-- !!!  -->
+                <xsl:value-of select="TriggerFunctions/BeforeDelete"/><xsl:text>(this);</xsl:text>      
+            </xsl:if>
+            base.BaseDeletionLabel(label);
         }
 
         public void Delete()

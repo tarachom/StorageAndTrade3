@@ -317,7 +317,7 @@ namespace StorageAndTrade
 
                         Склади_Objest Склади_Objest = new Склади_Objest();
                         if (Склади_Objest.Read(new UnigueID(uid)))
-                            Склади_Objest.Delete();
+                            Склади_Objest.SetDeletionLabel(!Склади_Objest.DeletionLabel);
                         else
                             Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                     }

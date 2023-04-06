@@ -230,7 +230,7 @@ namespace StorageAndTrade
 
                         СтаттяРухуКоштів_Objest СтаттяРухуКоштів_Objest = new СтаттяРухуКоштів_Objest();
                         if (СтаттяРухуКоштів_Objest.Read(new UnigueID(uid)))
-                            СтаттяРухуКоштів_Objest.Delete();
+                            СтаттяРухуКоштів_Objest.SetDeletionLabel(!СтаттяРухуКоштів_Objest.DeletionLabel);
                         else
                             Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                     }

@@ -369,8 +369,8 @@ ORDER BY level ASC
                     СкладськіКомірки_Папки_Objest СкладськіКомірки_Папки_Objest = new СкладськіКомірки_Папки_Objest();
                     if (СкладськіКомірки_Папки_Objest.Read(unigueID))
                     {
-                        СкладськіКомірки_Папки_Objest.Delete();
-                        Parent_Pointer = new СкладськіКомірки_Папки_Pointer();
+                        СкладськіКомірки_Папки_Objest.SetDeletionLabel(!СкладськіКомірки_Папки_Objest.DeletionLabel);
+                        //Parent_Pointer = new СкладськіКомірки_Папки_Pointer();
                     }
                     else
                         Message.Error(Program.GeneralForm, "Не вдалось прочитати!");

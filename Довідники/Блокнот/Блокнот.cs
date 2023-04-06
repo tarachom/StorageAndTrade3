@@ -264,7 +264,7 @@ namespace StorageAndTrade
 
                         Блокнот_Objest Блокнот_Objest = new Блокнот_Objest();
                         if (Блокнот_Objest.Read(new UnigueID(uid)))
-                            Блокнот_Objest.Delete();
+                            Блокнот_Objest.SetDeletionLabel(!Блокнот_Objest.DeletionLabel);
                         else
                             Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                     }

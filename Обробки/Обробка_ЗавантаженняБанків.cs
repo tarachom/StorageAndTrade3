@@ -175,7 +175,6 @@ namespace StorageAndTrade
                         банки_Objest = new Банки_Objest();
                         банки_Objest.New();
                         банки_Objest.КодМФО = КодМФО;
-                        банки_Objest.Код = (++Константи.НумераціяДовідників.Банки_Const).ToString("D6");
 
                         CreateMessage(TypeMessage.Ok, $"Додано новий елемент довідника Банки: {Назва}");
                     }

@@ -35,7 +35,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 {
     public class Номенклатура_Записи
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
 
         string Код = "";
@@ -93,8 +101,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Довідники.Номенклатура_Select Номенклатура_Select = new Довідники.Номенклатура_Select();
             Номенклатура_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Довідники.Номенклатура_Const.Код /* 1 */
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.Номенклатура_Const.Код /* 1 */
                     , Довідники.Номенклатура_Const.Назва /* 2 */
                     , Довідники.Номенклатура_Const.ТипНоменклатури /* 3 */
 
@@ -174,6 +182,7 @@ END)
                     Номенклатура_Записи Record = new Номенклатура_Записи
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         ОдиницяВиміру = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Код = cur.Fields?[Номенклатура_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[Номенклатура_Const.Назва]?.ToString() ?? "", /**/

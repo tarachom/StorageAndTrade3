@@ -230,7 +230,7 @@ namespace StorageAndTrade
 
                         БанківськіРахункиКонтрагентів_Objest БанківськіРахункиКонтрагентів_Objest = new БанківськіРахункиКонтрагентів_Objest();
                         if (БанківськіРахункиКонтрагентів_Objest.Read(new UnigueID(uid)))
-                            БанківськіРахункиКонтрагентів_Objest.Delete();
+                            БанківськіРахункиКонтрагентів_Objest.SetDeletionLabel(!БанківськіРахункиКонтрагентів_Objest.DeletionLabel);
                         else
                             Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                     }

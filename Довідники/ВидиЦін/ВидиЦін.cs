@@ -230,7 +230,7 @@ namespace StorageAndTrade
 
                         ВидиЦін_Objest ВидиЦін_Objest = new ВидиЦін_Objest();
                         if (ВидиЦін_Objest.Read(new UnigueID(uid)))
-                            ВидиЦін_Objest.Delete();
+                            ВидиЦін_Objest.SetDeletionLabel(!ВидиЦін_Objest.DeletionLabel);
                         else
                             Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                     }

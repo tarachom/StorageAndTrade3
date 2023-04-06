@@ -298,7 +298,7 @@ namespace StorageAndTrade
 
                         СкладськіПриміщення_Objest СкладськіПриміщення_Objest = new СкладськіПриміщення_Objest();
                         if (СкладськіПриміщення_Objest.Read(new UnigueID(uid)))
-                            СкладськіПриміщення_Objest.Delete();
+                            СкладськіПриміщення_Objest.SetDeletionLabel(!СкладськіПриміщення_Objest.DeletionLabel);
                         else
                             Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                     }

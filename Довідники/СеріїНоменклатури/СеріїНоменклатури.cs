@@ -264,7 +264,7 @@ namespace StorageAndTrade
 
                         СеріїНоменклатури_Objest СеріїНоменклатури_Objest = new СеріїНоменклатури_Objest();
                         if (СеріїНоменклатури_Objest.Read(new UnigueID(uid)))
-                            СеріїНоменклатури_Objest.Delete();
+                            СеріїНоменклатури_Objest.SetDeletionLabel(!СеріїНоменклатури_Objest.DeletionLabel);
                         else
                             Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                     }

@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 31.03.2023 19:28:38
+ * Дата конфігурації: 06.04.2023 13:02:18
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -2032,6 +2032,11 @@ namespace StorageAndTrade_1_0.Довідники
             return copy;
         }
 
+        public void SetDeletionLabel(bool label = true)
+        {
+            base.BaseDeletionLabel(label);
+        }
+
         public void Delete()
         {
             Організації_Triggers.BeforeDelete(this);
@@ -2365,6 +2370,11 @@ namespace StorageAndTrade_1_0.Довідники
             return copy;
         }
 
+        public void SetDeletionLabel(bool label = true)
+        {
+            base.BaseDeletionLabel(label);
+        }
+
         public void Delete()
         {
             Номенклатура_Triggers.BeforeDelete(this);
@@ -2624,6 +2634,11 @@ namespace StorageAndTrade_1_0.Довідники
             return copy;
         }
 
+        public void SetDeletionLabel(bool label = true)
+        {
+            base.BaseDeletionLabel(label);
+        }
+
         public void Delete()
         {
             Виробники_Triggers.BeforeDelete(this);
@@ -2804,6 +2819,11 @@ namespace StorageAndTrade_1_0.Довідники
             return copy;
         }
 
+        public void SetDeletionLabel(bool label = true)
+        {
+            base.BaseDeletionLabel(label);
+        }
+
         public void Delete()
         {
             ВидиНоменклатури_Triggers.BeforeDelete(this);
@@ -2980,6 +3000,11 @@ namespace StorageAndTrade_1_0.Довідники
             copy.New();
             ПакуванняОдиниціВиміру_Triggers.Copying(copy, this);
             return copy;
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            base.BaseDeletionLabel(label);
         }
 
         public void Delete()
@@ -3162,6 +3187,11 @@ namespace StorageAndTrade_1_0.Довідники
             copy.New();
             Валюти_Triggers.Copying(copy, this);
             return copy;
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            base.BaseDeletionLabel(label);
         }
 
         public void Delete()
@@ -3367,6 +3397,11 @@ namespace StorageAndTrade_1_0.Довідники
             copy.New();
             Контрагенти_Triggers.Copying(copy, this);
             return copy;
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            base.BaseDeletionLabel(label);
         }
 
         public void Delete()
@@ -3764,6 +3799,11 @@ namespace StorageAndTrade_1_0.Довідники
             return copy;
         }
 
+        public void SetDeletionLabel(bool label = true)
+        {
+            base.BaseDeletionLabel(label);
+        }
+
         public void Delete()
         {
             Склади_Triggers.BeforeDelete(this);
@@ -4049,6 +4089,11 @@ namespace StorageAndTrade_1_0.Довідники
             return copy;
         }
 
+        public void SetDeletionLabel(bool label = true)
+        {
+            base.BaseDeletionLabel(label);
+        }
+
         public void Delete()
         {
             ВидиЦін_Triggers.BeforeDelete(this);
@@ -4218,6 +4263,11 @@ namespace StorageAndTrade_1_0.Довідники
             copy.New();
             ВидиЦінПостачальників_Triggers.Copying(copy, this);
             return copy;
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            base.BaseDeletionLabel(label);
         }
 
         public void Delete()
@@ -4406,6 +4456,11 @@ namespace StorageAndTrade_1_0.Довідники
             copy.New();
             Користувачі_Triggers.Copying(copy, this);
             return copy;
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            base.BaseDeletionLabel(label);
         }
 
         public void Delete()
@@ -4703,6 +4758,11 @@ namespace StorageAndTrade_1_0.Довідники
             return copy;
         }
 
+        public void SetDeletionLabel(bool label = true)
+        {
+            base.BaseDeletionLabel(label);
+        }
+
         public void Delete()
         {
             ФізичніОсоби_Triggers.BeforeDelete(this);
@@ -4981,6 +5041,11 @@ namespace StorageAndTrade_1_0.Довідники
             return copy;
         }
 
+        public void SetDeletionLabel(bool label = true)
+        {
+            base.BaseDeletionLabel(label);
+        }
+
         public void Delete()
         {
             СтруктураПідприємства_Triggers.BeforeDelete(this);
@@ -5145,6 +5210,11 @@ namespace StorageAndTrade_1_0.Довідники
             copy.New();
             КраїниСвіту_Triggers.Copying(copy, this);
             return copy;
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            base.BaseDeletionLabel(label);
         }
 
         public void Delete()
@@ -5332,6 +5402,11 @@ namespace StorageAndTrade_1_0.Довідники
             return copy;
         }
 
+        public void SetDeletionLabel(bool label = true)
+        {
+            base.BaseDeletionLabel(label);
+        }
+
         public void Delete()
         {
             Файли_Triggers.BeforeDelete(this);
@@ -5511,6 +5586,11 @@ namespace StorageAndTrade_1_0.Довідники
             return copy;
         }
 
+        public void SetDeletionLabel(bool label = true)
+        {
+            base.BaseDeletionLabel(label);
+        }
+
         public void Delete()
         {
             ХарактеристикиНоменклатури_Triggers.BeforeDelete(this);
@@ -5681,6 +5761,11 @@ namespace StorageAndTrade_1_0.Довідники
             copy.New();
             Номенклатура_Папки_Triggers.Copying(copy, this);
             return copy;
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            base.BaseDeletionLabel(label);
         }
 
         public void Delete()
@@ -5854,6 +5939,11 @@ namespace StorageAndTrade_1_0.Довідники
             return copy;
         }
 
+        public void SetDeletionLabel(bool label = true)
+        {
+            base.BaseDeletionLabel(label);
+        }
+
         public void Delete()
         {
             Контрагенти_Папки_Triggers.BeforeDelete(this);
@@ -6023,6 +6113,11 @@ namespace StorageAndTrade_1_0.Довідники
             copy.New();
             Склади_Папки_Triggers.Copying(copy, this);
             return copy;
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            base.BaseDeletionLabel(label);
         }
 
         public void Delete()
@@ -6199,6 +6294,11 @@ namespace StorageAndTrade_1_0.Довідники
             copy.New();
             Каси_Triggers.Copying(copy, this);
             return copy;
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            base.BaseDeletionLabel(label);
         }
 
         public void Delete()
@@ -6421,6 +6521,11 @@ namespace StorageAndTrade_1_0.Довідники
             copy.New();
             БанківськіРахункиОрганізацій_Triggers.Copying(copy, this);
             return copy;
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            base.BaseDeletionLabel(label);
         }
 
         public void Delete()
@@ -6689,6 +6794,11 @@ namespace StorageAndTrade_1_0.Довідники
             return copy;
         }
 
+        public void SetDeletionLabel(bool label = true)
+        {
+            base.BaseDeletionLabel(label);
+        }
+
         public void Delete()
         {
             ДоговориКонтрагентів_Triggers.BeforeDelete(this);
@@ -6937,6 +7047,11 @@ namespace StorageAndTrade_1_0.Довідники
             return copy;
         }
 
+        public void SetDeletionLabel(bool label = true)
+        {
+            base.BaseDeletionLabel(label);
+        }
+
         public void Delete()
         {
             БанківськіРахункиКонтрагентів_Triggers.BeforeDelete(this);
@@ -7135,6 +7250,11 @@ namespace StorageAndTrade_1_0.Довідники
             copy.New();
             СтаттяРухуКоштів_Triggers.Copying(copy, this);
             return copy;
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            base.BaseDeletionLabel(label);
         }
 
         public void Delete()
@@ -7391,6 +7511,11 @@ namespace StorageAndTrade_1_0.Довідники
             return copy;
         }
 
+        public void SetDeletionLabel(bool label = true)
+        {
+            base.BaseDeletionLabel(label);
+        }
+
         public void Delete()
         {
             СеріїНоменклатури_Triggers.BeforeDelete(this);
@@ -7575,6 +7700,11 @@ namespace StorageAndTrade_1_0.Довідники
             copy.New();
             ПартіяТоварівКомпозит_Triggers.Copying(copy, this);
             return copy;
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            base.BaseDeletionLabel(label);
         }
 
         public void Delete()
@@ -7769,6 +7899,11 @@ namespace StorageAndTrade_1_0.Довідники
             copy.New();
             ВидиЗапасів_Triggers.Copying(copy, this);
             return copy;
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            base.BaseDeletionLabel(label);
         }
 
         public void Delete()
@@ -8071,6 +8206,11 @@ namespace StorageAndTrade_1_0.Довідники
             return copy;
         }
 
+        public void SetDeletionLabel(bool label = true)
+        {
+            base.BaseDeletionLabel(label);
+        }
+
         public void Delete()
         {
             Банки_Triggers.BeforeDelete(this);
@@ -8265,6 +8405,11 @@ namespace StorageAndTrade_1_0.Довідники
             copy.New();
             СкладськіПриміщення_Triggers.Copying(copy, this);
             return copy;
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            base.BaseDeletionLabel(label);
         }
 
         public void Delete()
@@ -8473,6 +8618,11 @@ namespace StorageAndTrade_1_0.Довідники
             return copy;
         }
 
+        public void SetDeletionLabel(bool label = true)
+        {
+            base.BaseDeletionLabel(label);
+        }
+
         public void Delete()
         {
             СкладськіКомірки_Triggers.BeforeDelete(this);
@@ -8647,6 +8797,11 @@ namespace StorageAndTrade_1_0.Довідники
             copy.New();
             
             return copy;
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            base.BaseDeletionLabel(label);
         }
 
         public void Delete()
@@ -8835,6 +8990,11 @@ namespace StorageAndTrade_1_0.Довідники
             return copy;
         }
 
+        public void SetDeletionLabel(bool label = true)
+        {
+            base.BaseDeletionLabel(label);
+        }
+
         public void Delete()
         {
             ТипорозміриКомірок_Triggers.BeforeDelete(this);
@@ -9012,6 +9172,11 @@ namespace StorageAndTrade_1_0.Довідники
             copy.New();
             СкладськіКомірки_Папки_Triggers.Copying(copy, this);
             return copy;
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            base.BaseDeletionLabel(label);
         }
 
         public void Delete()
@@ -9194,6 +9359,11 @@ namespace StorageAndTrade_1_0.Довідники
             copy.New();
             Блокнот_Triggers.Copying(copy, this);
             return copy;
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            base.BaseDeletionLabel(label);
         }
 
         public void Delete()
@@ -10829,6 +10999,12 @@ namespace StorageAndTrade_1_0.Документи
             return copy;
         }
 
+        public void SetDeletionLabel(bool label = true)
+        {
+            ЗамовленняПостачальнику_Triggers.BeforeDelete(this);
+            base.BaseDeletionLabel(label);
+        }
+
         public void Delete()
         {
             ЗамовленняПостачальнику_Triggers.BeforeDelete(this);
@@ -11680,6 +11856,12 @@ namespace StorageAndTrade_1_0.Документи
             return copy;
         }
 
+        public void SetDeletionLabel(bool label = true)
+        {
+            ПоступленняТоварівТаПослуг_Triggers.BeforeDelete(this);
+            base.BaseDeletionLabel(label);
+        }
+
         public void Delete()
         {
             ПоступленняТоварівТаПослуг_Triggers.BeforeDelete(this);
@@ -12484,6 +12666,12 @@ namespace StorageAndTrade_1_0.Документи
             copy.New();
             ЗамовленняКлієнта_Triggers.Copying(copy, this);
             return copy;
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            ЗамовленняКлієнта_Triggers.BeforeDelete(this);
+            base.BaseDeletionLabel(label);
         }
 
         public void Delete()
@@ -13333,6 +13521,12 @@ namespace StorageAndTrade_1_0.Документи
             return copy;
         }
 
+        public void SetDeletionLabel(bool label = true)
+        {
+            РеалізаціяТоварівТаПослуг_Triggers.BeforeDelete(this);
+            base.BaseDeletionLabel(label);
+        }
+
         public void Delete()
         {
             РеалізаціяТоварівТаПослуг_Triggers.BeforeDelete(this);
@@ -13855,6 +14049,12 @@ namespace StorageAndTrade_1_0.Документи
             copy.New();
             ВстановленняЦінНоменклатури_Triggers.Copying(copy, this);
             return copy;
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            ВстановленняЦінНоменклатури_Triggers.BeforeDelete(this);
+            base.BaseDeletionLabel(label);
         }
 
         public void Delete()
@@ -14429,6 +14629,12 @@ namespace StorageAndTrade_1_0.Документи
             copy.New();
             ПрихіднийКасовийОрдер_Triggers.Copying(copy, this);
             return copy;
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            ПрихіднийКасовийОрдер_Triggers.BeforeDelete(this);
+            base.BaseDeletionLabel(label);
         }
 
         public void Delete()
@@ -15042,6 +15248,12 @@ namespace StorageAndTrade_1_0.Документи
             copy.New();
             РозхіднийКасовийОрдер_Triggers.Copying(copy, this);
             return copy;
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            РозхіднийКасовийОрдер_Triggers.BeforeDelete(this);
+            base.BaseDeletionLabel(label);
         }
 
         public void Delete()
@@ -15684,6 +15896,12 @@ namespace StorageAndTrade_1_0.Документи
             copy.New();
             ПереміщенняТоварів_Triggers.Copying(copy, this);
             return copy;
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            ПереміщенняТоварів_Triggers.BeforeDelete(this);
+            base.BaseDeletionLabel(label);
         }
 
         public void Delete()
@@ -16369,6 +16587,12 @@ namespace StorageAndTrade_1_0.Документи
             return copy;
         }
 
+        public void SetDeletionLabel(bool label = true)
+        {
+            ПоверненняТоварівПостачальнику_Triggers.BeforeDelete(this);
+            base.BaseDeletionLabel(label);
+        }
+
         public void Delete()
         {
             ПоверненняТоварівПостачальнику_Triggers.BeforeDelete(this);
@@ -17020,6 +17244,12 @@ namespace StorageAndTrade_1_0.Документи
             return copy;
         }
 
+        public void SetDeletionLabel(bool label = true)
+        {
+            ПоверненняТоварівВідКлієнта_Triggers.BeforeDelete(this);
+            base.BaseDeletionLabel(label);
+        }
+
         public void Delete()
         {
             ПоверненняТоварівВідКлієнта_Triggers.BeforeDelete(this);
@@ -17611,6 +17841,12 @@ namespace StorageAndTrade_1_0.Документи
             copy.New();
             АктВиконанихРобіт_Triggers.Copying(copy, this);
             return copy;
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            АктВиконанихРобіт_Triggers.BeforeDelete(this);
+            base.BaseDeletionLabel(label);
         }
 
         public void Delete()
@@ -18284,6 +18520,12 @@ namespace StorageAndTrade_1_0.Документи
             copy.New();
             ВведенняЗалишків_Triggers.Copying(copy, this);
             return copy;
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            ВведенняЗалишків_Triggers.BeforeDelete(this);
+            base.BaseDeletionLabel(label);
         }
 
         public void Delete()
@@ -19035,6 +19277,12 @@ namespace StorageAndTrade_1_0.Документи
             return copy;
         }
 
+        public void SetDeletionLabel(bool label = true)
+        {
+            
+            base.BaseDeletionLabel(label);
+        }
+
         public void Delete()
         {
             
@@ -19496,6 +19744,12 @@ namespace StorageAndTrade_1_0.Документи
             return copy;
         }
 
+        public void SetDeletionLabel(bool label = true)
+        {
+            
+            base.BaseDeletionLabel(label);
+        }
+
         public void Delete()
         {
             
@@ -19943,6 +20197,12 @@ namespace StorageAndTrade_1_0.Документи
             copy.New();
             
             return copy;
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            
+            base.BaseDeletionLabel(label);
         }
 
         public void Delete()
@@ -20470,6 +20730,12 @@ namespace StorageAndTrade_1_0.Документи
             copy.New();
             ПсуванняТоварів_Triggers.Copying(copy, this);
             return copy;
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            ПсуванняТоварів_Triggers.BeforeDelete(this);
+            base.BaseDeletionLabel(label);
         }
 
         public void Delete()
@@ -21028,6 +21294,12 @@ namespace StorageAndTrade_1_0.Документи
             copy.New();
             ВнутрішнєСпоживанняТоварів_Triggers.Copying(copy, this);
             return copy;
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            ВнутрішнєСпоживанняТоварів_Triggers.BeforeDelete(this);
+            base.BaseDeletionLabel(label);
         }
 
         public void Delete()
@@ -21688,6 +21960,12 @@ namespace StorageAndTrade_1_0.Документи
             return copy;
         }
 
+        public void SetDeletionLabel(bool label = true)
+        {
+            РахунокФактура_Triggers.BeforeDelete(this);
+            base.BaseDeletionLabel(label);
+        }
+
         public void Delete()
         {
             РахунокФактура_Triggers.BeforeDelete(this);
@@ -22222,6 +22500,12 @@ namespace StorageAndTrade_1_0.Документи
             return copy;
         }
 
+        public void SetDeletionLabel(bool label = true)
+        {
+            РозміщенняТоварівНаСкладі_Triggers.BeforeDelete(this);
+            base.BaseDeletionLabel(label);
+        }
+
         public void Delete()
         {
             РозміщенняТоварівНаСкладі_Triggers.BeforeDelete(this);
@@ -22728,6 +23012,12 @@ namespace StorageAndTrade_1_0.Документи
             copy.New();
             ПереміщенняТоварівНаСкладі_Triggers.Copying(copy, this);
             return copy;
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            ПереміщенняТоварівНаСкладі_Triggers.BeforeDelete(this);
+            base.BaseDeletionLabel(label);
         }
 
         public void Delete()
@@ -23246,6 +23536,12 @@ namespace StorageAndTrade_1_0.Документи
             return copy;
         }
 
+        public void SetDeletionLabel(bool label = true)
+        {
+            ЗбіркаТоварівНаСкладі_Triggers.BeforeDelete(this);
+            base.BaseDeletionLabel(label);
+        }
+
         public void Delete()
         {
             ЗбіркаТоварівНаСкладі_Triggers.BeforeDelete(this);
@@ -23716,6 +24012,12 @@ namespace StorageAndTrade_1_0.Документи
             copy.New();
             РозміщенняНоменклатуриПоКоміркам_Triggers.Copying(copy, this);
             return copy;
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            РозміщенняНоменклатуриПоКоміркам_Triggers.BeforeDelete(this);
+            base.BaseDeletionLabel(label);
         }
 
         public void Delete()

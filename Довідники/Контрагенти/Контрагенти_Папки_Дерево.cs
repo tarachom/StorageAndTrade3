@@ -352,8 +352,8 @@ ORDER BY level, {Контрагенти_Папки_Const.Назва} ASC
                     Контрагенти_Папки_Objest Контрагенти_Папки_Objest = new Контрагенти_Папки_Objest();
                     if (Контрагенти_Папки_Objest.Read(unigueID))
                     {
-                        Контрагенти_Папки_Objest.Delete();
-                        Parent_Pointer = new Контрагенти_Папки_Pointer();
+                        Контрагенти_Папки_Objest.SetDeletionLabel(!Контрагенти_Папки_Objest.DeletionLabel);
+                        //Parent_Pointer = new Контрагенти_Папки_Pointer();
                     }
                     else
                         Message.Error(Program.GeneralForm, "Не вдалось прочитати!");

@@ -230,7 +230,7 @@ namespace StorageAndTrade
 
                         Файли_Objest Файли_Objest = new Файли_Objest();
                         if (Файли_Objest.Read(new UnigueID(uid)))
-                            Файли_Objest.Delete();
+                            Файли_Objest.SetDeletionLabel(!Файли_Objest.DeletionLabel);
                         else
                             Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                     }

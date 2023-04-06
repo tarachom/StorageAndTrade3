@@ -300,7 +300,7 @@ namespace StorageAndTrade
 
                         Валюти_Objest Валюти_Objest = new Валюти_Objest();
                         if (Валюти_Objest.Read(new UnigueID(uid)))
-                            Валюти_Objest.Delete();
+                            Валюти_Objest.SetDeletionLabel(!Валюти_Objest.DeletionLabel);
                         else
                             Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                     }

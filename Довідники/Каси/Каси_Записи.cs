@@ -33,7 +33,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
     public class Каси_Записи
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string Image
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
         string ID = "";
 
         string Код = "";
@@ -83,8 +91,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             Довідники.Каси_Select Каси_Select = new Довідники.Каси_Select();
             Каси_Select.QuerySelect.Field.AddRange(
                 new string[]
-                {
-                    Довідники.Каси_Const.Код /* 1 */
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.Каси_Const.Код /* 1 */
                     , Довідники.Каси_Const.Назва /* 2 */
                     
                 });
@@ -128,6 +136,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     Каси_Записи Record = new Каси_Записи
                     {
                         ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
                         Валюта = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
                         Код = cur.Fields?[Каси_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[Каси_Const.Назва]?.ToString() ?? "", /**/

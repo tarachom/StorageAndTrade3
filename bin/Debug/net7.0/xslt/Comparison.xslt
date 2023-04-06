@@ -424,7 +424,7 @@ limitations under the License.
     <xsl:param name="InfoSchemaTableList" />
     <xsl:param name="DocumentConfigurationFieldNodes" />
     <xsl:param name="SecondConfigurationFieldsNodes" />
-    <!-- Document, Directiory ... -->
+    <!-- Document, Directory ... -->
     <xsl:param name="Type" />
     <xsl:param name="Name" />
     <xsl:param name="TableName" />

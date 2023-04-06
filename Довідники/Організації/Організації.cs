@@ -230,7 +230,7 @@ namespace StorageAndTrade
 
                         Організації_Objest Організації_Objest = new Організації_Objest();
                         if (Організації_Objest.Read(new UnigueID(uid)))
-                            Організації_Objest.Delete();
+                            Організації_Objest.SetDeletionLabel(!Організації_Objest.DeletionLabel);
                         else
                             Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                     }

@@ -230,7 +230,7 @@ namespace StorageAndTrade
 
                         ВидиНоменклатури_Objest ВидиНоменклатури_Objest = new ВидиНоменклатури_Objest();
                         if (ВидиНоменклатури_Objest.Read(new UnigueID(uid)))
-                            ВидиНоменклатури_Objest.Delete();
+                            ВидиНоменклатури_Objest.SetDeletionLabel(!ВидиНоменклатури_Objest.DeletionLabel);
                         else
                             Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                     }

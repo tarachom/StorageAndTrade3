@@ -229,7 +229,7 @@ namespace StorageAndTrade
 
                         ТипорозміриКомірок_Objest ТипорозміриКомірок_Objest = new ТипорозміриКомірок_Objest();
                         if (ТипорозміриКомірок_Objest.Read(new UnigueID(uid)))
-                            ТипорозміриКомірок_Objest.Delete();
+                            ТипорозміриКомірок_Objest.SetDeletionLabel(!ТипорозміриКомірок_Objest.DeletionLabel);
                         else
                             Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                     }

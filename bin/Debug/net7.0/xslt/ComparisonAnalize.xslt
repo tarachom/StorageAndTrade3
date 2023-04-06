@@ -775,7 +775,11 @@ limitations under the License.
                 <xsl:value-of select="$TableName"/>
                 <xsl:text> (</xsl:text>
                 <xsl:text>uid uuid NOT NULL, </xsl:text>
+                <xsl:if test="$TableType = 'Directory'">
+                  <xsl:text>deletion_label bool NOT NULL, </xsl:text>
+                </xsl:if>
                 <xsl:if test="$TableType = 'Document'">
+                  <xsl:text>deletion_label bool NOT NULL, </xsl:text>
                   <xsl:text>spend bool NOT NULL, </xsl:text>
                   <xsl:text>spend_date timestamp without time zone NOT NULL, </xsl:text>
                 </xsl:if>
@@ -802,15 +806,23 @@ limitations under the License.
                   <xsl:value-of select="concat('CREATE INDEX IF NOT EXISTS ', $TableName, '_', NameInTable, '_idx ON ', $TableName, ' (', NameInTable, ');')"/>
                 </sql>
               </xsl:for-each>
+              <xsl:if test="$TableType = 'Directory'">
+                <sql>
+                  <xsl:value-of select="concat('CREATE INDEX IF NOT EXISTS ', $TableName, '_deletion_label_idx ON ', $TableName, ' (deletion_label);')"/>
+                </sql>
+              </xsl:if>
               <xsl:if test="$TableType = 'Document'">
-              <sql>
-                <xsl:value-of select="concat('CREATE INDEX IF NOT EXISTS ', $TableName, '_spend_idx ON ', $TableName, ' (spend);')"/>
-              </sql>
+                <sql>
+                  <xsl:value-of select="concat('CREATE INDEX IF NOT EXISTS ', $TableName, '_deletion_label_idx ON ', $TableName, ' (deletion_label);')"/>
+                </sql>
+                <sql>
+                  <xsl:value-of select="concat('CREATE INDEX IF NOT EXISTS ', $TableName, '_spend_idx ON ', $TableName, ' (spend);')"/>
+                </sql>
               </xsl:if>
               <xsl:if test="$TableType = 'RegisterInformation'">
-              <sql>
-                  <xsl:value-of select="concat('CREATE INDEX IF NOT EXISTS ', $TableName, '_period_idx ON ', $TableName, ' (period);')"/>
-              </sql>
+                <sql>
+                    <xsl:value-of select="concat('CREATE INDEX IF NOT EXISTS ', $TableName, '_period_idx ON ', $TableName, ' (period);')"/>
+                </sql>
               <sql>
                 <xsl:value-of select="concat('CREATE INDEX IF NOT EXISTS ', $TableName, '_owner_idx ON ', $TableName, ' (owner);')"/>
               </sql>

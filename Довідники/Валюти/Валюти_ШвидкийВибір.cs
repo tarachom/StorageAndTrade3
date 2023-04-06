@@ -108,6 +108,7 @@ namespace StorageAndTrade
 
             TreeViewGrid.Selection.Mode = SelectionMode.Multiple;
             TreeViewGrid.ActivateOnSingleClick = true;
+            TreeViewGrid.RowActivated += OnRowActivated;
             TreeViewGrid.ButtonPressEvent += OnButtonPressEvent;
 
             scrollTree.Add(TreeViewGrid);
@@ -160,6 +161,19 @@ namespace StorageAndTrade
         }
 
         #region TreeView
+
+        void OnRowActivated(object sender, RowActivatedArgs args)
+        {
+            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
+            {
+                TreeIter iter;
+                TreeViewGrid.Model.GetIter(out iter, TreeViewGrid.Selection.GetSelectedRows()[0]);
+
+                UnigueID unigueID = new UnigueID((string)TreeViewGrid.Model.GetValue(iter, 1));
+
+                DirectoryPointerItem = new Валюти_Pointer(unigueID);
+            }
+        }
 
         void OnButtonPressEvent(object? sender, ButtonPressEventArgs args)
         {

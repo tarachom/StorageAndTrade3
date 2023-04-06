@@ -265,7 +265,7 @@ namespace StorageAndTrade
 
                         КраїниСвіту_Objest КраїниСвіту_Objest = new КраїниСвіту_Objest();
                         if (КраїниСвіту_Objest.Read(new UnigueID(uid)))
-                            КраїниСвіту_Objest.Delete();
+                            КраїниСвіту_Objest.SetDeletionLabel(!КраїниСвіту_Objest.DeletionLabel);
                         else
                             Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                     }

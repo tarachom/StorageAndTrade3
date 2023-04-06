@@ -317,7 +317,7 @@ namespace StorageAndTrade
 
                         СкладськіКомірки_Objest СкладськіКомірки_Objest = new СкладськіКомірки_Objest();
                         if (СкладськіКомірки_Objest.Read(new UnigueID(uid)))
-                            СкладськіКомірки_Objest.Delete();
+                            СкладськіКомірки_Objest.SetDeletionLabel(!СкладськіКомірки_Objest.DeletionLabel);
                         else
                             Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                     }

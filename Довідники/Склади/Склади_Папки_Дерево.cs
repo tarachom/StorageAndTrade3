@@ -353,8 +353,8 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
                     Склади_Папки_Objest Склади_Папки_Objest = new Склади_Папки_Objest();
                     if (Склади_Папки_Objest.Read(unigueID))
                     {
-                        Склади_Папки_Objest.Delete();
-                        Parent_Pointer = new Склади_Папки_Pointer();
+                        Склади_Папки_Objest.SetDeletionLabel(!Склади_Папки_Objest.DeletionLabel);
+                        //Parent_Pointer = new Склади_Папки_Pointer();
                     }
                     else
                         Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
