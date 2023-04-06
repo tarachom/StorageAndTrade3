@@ -59,5 +59,13 @@ namespace StorageAndTrade
             if (Clear != null)
                 Clear.Invoke();
         }
+
+        public string Text
+        {
+            get
+            {
+                return entrySearch.Text;
+            }
+        }
     }
 }

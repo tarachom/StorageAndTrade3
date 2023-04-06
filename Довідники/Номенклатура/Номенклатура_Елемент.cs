@@ -42,7 +42,7 @@ namespace StorageAndTrade
         #region Fields
 
         Entry Код = new Entry() { WidthRequest = 100 };
-        Entry Назва = new Entry() { WidthRequest = 500 };
+        public Entry Назва { get; private set; } = new Entry() { WidthRequest = 500 };
         TextView НазваПовна = new TextView();
         TextView Опис = new TextView();
         ComboBoxText ТипНоменклатури = new ComboBoxText();

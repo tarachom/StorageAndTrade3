@@ -64,15 +64,7 @@ namespace StorageAndTrade
 
                     Program.GeneralForm?.CreateNotebookPage("Вибір - Номенклатура", () => { return page; }, true);
 
-                    try
-                    {
-                        page.LoadTree();
-                    }
-                    catch (Exception ex)
-                    {
-                        Message.Info(null, ex.Message + "\n" + ex.Source);
-                    }
-
+                    page.LoadTree();
                 };
 
                 hBoxTop.PackStart(linkPage, false, false, 0);
@@ -84,10 +76,10 @@ namespace StorageAndTrade
                 linkNew.Clicked += (object? sender, EventArgs args) =>
                 {
                     Номенклатура_Елемент page = new Номенклатура_Елемент { IsNew = true, CallBack_OnSelectPointer = CallBack_OnSelectPointer };
-
                     Program.GeneralForm?.CreateNotebookPage($"Номенклатура: *", () => { return page; }, true);
-
                     page.SetValue();
+
+                    page.Назва.Text = ПошукПовнотекстовий.Text;
                 };
 
                 hBoxTop.PackStart(linkNew, false, false, 0);
