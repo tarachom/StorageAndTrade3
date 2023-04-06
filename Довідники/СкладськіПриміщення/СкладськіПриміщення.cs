@@ -89,6 +89,7 @@ namespace StorageAndTrade
             TreeViewGrid.ActivateOnSingleClick = true;
             TreeViewGrid.RowActivated += OnRowActivated;
             TreeViewGrid.ButtonPressEvent += OnButtonPressEvent;
+            TreeViewGrid.KeyReleaseEvent += OnKeyReleaseEvent;
 
             scrollTree.Add(TreeViewGrid);
 
@@ -246,6 +247,44 @@ namespace StorageAndTrade
                         }
                     }
                 }
+            }
+        }
+
+        void OnKeyReleaseEvent(object? sender, KeyReleaseEventArgs args)
+        {
+            switch (args.Event.Key)
+            {
+                case Gdk.Key.Insert:
+                    {
+                        OpenPageElement(true);
+                        break;
+                    }
+                case Gdk.Key.F5:
+                    {
+                        LoadRecords();
+                        break;
+                    }
+                case Gdk.Key.KP_Enter:
+                case Gdk.Key.Return:
+                    {
+                        OnEditClick(null, new EventArgs());
+                        break;
+                    }
+                case Gdk.Key.End:
+                case Gdk.Key.Home:
+                case Gdk.Key.Up:
+                case Gdk.Key.Down:
+                case Gdk.Key.Prior:
+                case Gdk.Key.Next:
+                    {
+                        OnRowActivated(TreeViewGrid, new RowActivatedArgs());
+                        break;
+                    }
+                case Gdk.Key.Delete:
+                    {
+                        OnDeleteClick(TreeViewGrid, new EventArgs());
+                        break;
+                    }
             }
         }
 
