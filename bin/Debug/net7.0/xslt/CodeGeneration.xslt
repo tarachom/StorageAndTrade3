@@ -612,6 +612,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
     public static class <xsl:value-of select="$DirectoryName"/>_Const
     {
         public const string TABLE = "<xsl:value-of select="Table"/>";
+        public const string DELETION_LABEL = "deletion_label";
         <xsl:for-each select="Fields/Field">
         public const string <xsl:value-of select="Name"/> = "<xsl:value-of select="NameInTable"/>";</xsl:for-each>
     }
@@ -723,6 +724,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
 
         public void SetDeletionLabel(bool label = true)
         {
+            <xsl:if test="normalize-space(TriggerFunctions/SetDeletionLabel) != ''">
+                <xsl:value-of select="TriggerFunctions/SetDeletionLabel"/><xsl:text>(this, label);</xsl:text>      
+            </xsl:if>
             base.BaseDeletionLabel(label);
         }
 
@@ -1039,6 +1043,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
     public static class <xsl:value-of select="$DocumentName"/>_Const
     {
         public const string TABLE = "<xsl:value-of select="Table"/>";
+        public const string DELETION_LABEL = "deletion_label";
         <xsl:for-each select="Fields/Field">
         public const string <xsl:value-of select="Name"/> = "<xsl:value-of select="NameInTable"/>";</xsl:for-each>
     }
@@ -1272,9 +1277,10 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
 
         public void SetDeletionLabel(bool label = true)
         {
-            <xsl:if test="normalize-space(TriggerFunctions/BeforeDelete) != ''"><!-- !!!  -->
-                <xsl:value-of select="TriggerFunctions/BeforeDelete"/><xsl:text>(this);</xsl:text>      
+            <xsl:if test="normalize-space(TriggerFunctions/SetDeletionLabel) != ''">
+                <xsl:value-of select="TriggerFunctions/SetDeletionLabel"/><xsl:text>(this, label);</xsl:text>      
             </xsl:if>
+            ClearSpendTheDocument();
             base.BaseDeletionLabel(label);
         }
 
@@ -1283,6 +1289,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
             <xsl:if test="normalize-space(TriggerFunctions/BeforeDelete) != ''">
                 <xsl:value-of select="TriggerFunctions/BeforeDelete"/><xsl:text>(this);</xsl:text>      
             </xsl:if>
+            ClearSpendTheDocument();
             base.BaseDelete(<xsl:text>new string[] { </xsl:text>
             <xsl:for-each select="TabularParts/TablePart">
               <xsl:if test="position() != 1">

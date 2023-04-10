@@ -199,6 +199,10 @@ namespace StorageAndTrade
             clearSpendButton.Activated += OnClearSpend;
             Menu.Append(clearSpendButton);
 
+            MenuItem setDeletionLabel = new MenuItem("Помітка на видалення");
+            setDeletionLabel.Activated += OnDeleteClick;
+            Menu.Append(setDeletionLabel);
+
             Menu.ShowAll();
 
             return Menu;
@@ -437,7 +441,7 @@ namespace StorageAndTrade
         {
             if (TreeViewGrid.Selection.CountSelectedRows() != 0)
             {
-                if (Message.Request(Program.GeneralForm, "Видалити?") == ResponseType.Yes)
+                if (Message.Request(Program.GeneralForm, "Встановити або зняти помітку на видалення?") == ResponseType.Yes)
                 {
                     TreePath[] selectionRows = TreeViewGrid.Selection.GetSelectedRows();
 

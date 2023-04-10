@@ -108,7 +108,8 @@ WITH RECURSIVE r AS (
         uid, 
         {Склади_Папки_Const.Назва}, 
         {Склади_Папки_Const.Родич}, 
-        1 AS level 
+        1 AS level,
+        deletion_label
     FROM {Склади_Папки_Const.TABLE}
     WHERE {Склади_Папки_Const.Родич} = '{Guid.Empty}'";
 
@@ -125,7 +126,8 @@ WITH RECURSIVE r AS (
         {Склади_Папки_Const.TABLE}.uid, 
         {Склади_Папки_Const.TABLE}.{Склади_Папки_Const.Назва}, 
         {Склади_Папки_Const.TABLE}.{Склади_Папки_Const.Родич}, 
-        r.level + 1 AS level
+        r.level + 1 AS level, 
+        {Склади_Папки_Const.TABLE}.deletion_label
     FROM {Склади_Папки_Const.TABLE}
         JOIN r ON {Склади_Папки_Const.TABLE}.{Склади_Папки_Const.Родич} = r.uid";
 
@@ -142,7 +144,9 @@ SELECT
     uid, 
     {Склади_Папки_Const.Назва}, 
     {Склади_Папки_Const.Родич}, 
-    level FROM r
+    level, 
+    deletion_label
+FROM r
 ORDER BY level, {Склади_Папки_Const.Назва} ASC
             ";
 
@@ -159,7 +163,7 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
                 foreach (object[] o in listRow)
                 {
                     string uid = o[0]?.ToString() ?? Guid.Empty.ToString();
-                    string fieldName = o[1]?.ToString() ?? "";
+                    string fieldName = (o[1]?.ToString() ?? "") + ((bool)o[4] ? " [X]" : "");
                     string fieldParent = o[2]?.ToString() ?? Guid.Empty.ToString();
                     int level = (int)o[3];
 
@@ -348,14 +352,11 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
                 if (unigueID.IsEmpty())
                     return;
 
-                if (Message.Request(Program.GeneralForm, "Видалити?") == ResponseType.Yes)
+                if (Message.Request(Program.GeneralForm, "Встановити або зняти помітку на видалення?") == ResponseType.Yes)
                 {
                     Склади_Папки_Objest Склади_Папки_Objest = new Склади_Папки_Objest();
                     if (Склади_Папки_Objest.Read(unigueID))
-                    {
                         Склади_Папки_Objest.SetDeletionLabel(!Склади_Папки_Objest.DeletionLabel);
-                        //Parent_Pointer = new Склади_Папки_Pointer();
-                    }
                     else
                         Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
 

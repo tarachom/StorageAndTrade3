@@ -238,14 +238,11 @@ namespace StorageAndTrade
                 if (unigueID.IsEmpty())
                     return;
 
-                if (Message.Request(Program.GeneralForm, "Видалити?") == ResponseType.Yes)
+                if (Message.Request(Program.GeneralForm, "Встановити або зняти помітку на видалення?") == ResponseType.Yes)
                 {
                     Номенклатура_Папки_Objest Номенклатура_Папки_Objest = new Номенклатура_Папки_Objest();
                     if (Номенклатура_Папки_Objest.Read(unigueID))
-                    {
                         Номенклатура_Папки_Objest.SetDeletionLabel(!Номенклатура_Папки_Objest.DeletionLabel);
-                        //Parent_Pointer = new Номенклатура_Папки_Pointer();
-                    }
                     else
                         Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
 

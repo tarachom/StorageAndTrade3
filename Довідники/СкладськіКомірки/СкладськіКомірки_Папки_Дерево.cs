@@ -109,21 +109,22 @@ WITH RECURSIVE r AS (
         uid, 
         {СкладськіКомірки_Папки_Const.Назва}, 
         {СкладськіКомірки_Папки_Const.Родич}, 
-        1 AS level 
+        1 AS level,
+        deletion_label
     FROM {СкладськіКомірки_Папки_Const.TABLE}
     WHERE {СкладськіКомірки_Папки_Const.Родич} = '{Guid.Empty}'";
 
             if (!СкладПриміщенняВласник.IsEmpty())
             {
                 query += $@"
-AND {СкладськіКомірки_Папки_Const.Приміщення} = '{СкладПриміщенняВласник.UnigueID}'
+    AND {СкладськіКомірки_Папки_Const.Приміщення} = '{СкладПриміщенняВласник.UnigueID}'
 ";
             }
 
             if (!String.IsNullOrEmpty(UidOpenFolder))
             {
                 query += $@"
-AND uid != '{UidOpenFolder}'
+    AND uid != '{UidOpenFolder}'
 ";
             }
 
@@ -133,14 +134,15 @@ AND uid != '{UidOpenFolder}'
         {СкладськіКомірки_Папки_Const.TABLE}.uid, 
         {СкладськіКомірки_Папки_Const.TABLE}.{СкладськіКомірки_Папки_Const.Назва}, 
         {СкладськіКомірки_Папки_Const.TABLE}.{СкладськіКомірки_Папки_Const.Родич}, 
-        r.level + 1 AS level
+        r.level + 1 AS level,
+        {СкладськіКомірки_Папки_Const.TABLE}.deletion_label
     FROM {СкладськіКомірки_Папки_Const.TABLE}
         JOIN r ON {СкладськіКомірки_Папки_Const.TABLE}.{СкладськіКомірки_Папки_Const.Родич} = r.uid";
 
             if (!СкладПриміщенняВласник.IsEmpty())
             {
                 query += $@"
-AND {СкладськіКомірки_Папки_Const.Приміщення} = '{СкладПриміщенняВласник.UnigueID}'
+    AND {СкладськіКомірки_Папки_Const.Приміщення} = '{СкладПриміщенняВласник.UnigueID}'
 ";
             }
 
@@ -157,7 +159,9 @@ SELECT
     uid, 
     {СкладськіКомірки_Папки_Const.Назва}, 
     {СкладськіКомірки_Папки_Const.Родич}, 
-    level FROM r
+    level,
+    deletion_label
+FROM r
 ORDER BY level ASC
 ";
 
@@ -174,7 +178,7 @@ ORDER BY level ASC
                 foreach (object[] o in listRow)
                 {
                     string uid = o[0]?.ToString() ?? Guid.Empty.ToString();
-                    string fieldName = o[1]?.ToString() ?? "";
+                    string fieldName = (o[1]?.ToString() ?? "") + ((bool)o[4] ? " [X]" : "");
                     string fieldParent = o[2]?.ToString() ?? Guid.Empty.ToString();
                     int level = (int)o[3];
 
@@ -364,14 +368,11 @@ ORDER BY level ASC
                 if (unigueID.IsEmpty())
                     return;
 
-                if (Message.Request(Program.GeneralForm, "Видалити?") == ResponseType.Yes)
+                if (Message.Request(Program.GeneralForm, "Встановити або зняти помітку на видалення?") == ResponseType.Yes)
                 {
                     СкладськіКомірки_Папки_Objest СкладськіКомірки_Папки_Objest = new СкладськіКомірки_Папки_Objest();
                     if (СкладськіКомірки_Папки_Objest.Read(unigueID))
-                    {
                         СкладськіКомірки_Папки_Objest.SetDeletionLabel(!СкладськіКомірки_Папки_Objest.DeletionLabel);
-                        //Parent_Pointer = new СкладськіКомірки_Папки_Pointer();
-                    }
                     else
                         Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
 

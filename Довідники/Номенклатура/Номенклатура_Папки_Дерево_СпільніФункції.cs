@@ -50,7 +50,8 @@ WITH RECURSIVE r AS (
         uid, 
         {Номенклатура_Папки_Const.Назва}, 
         {Номенклатура_Папки_Const.Родич}, 
-        1 AS level 
+        1 AS level,
+        deletion_label
     FROM {Номенклатура_Папки_Const.TABLE}
     WHERE {Номенклатура_Папки_Const.Родич} = '{Guid.Empty}'";
 
@@ -67,7 +68,8 @@ WITH RECURSIVE r AS (
         {Номенклатура_Папки_Const.TABLE}.uid, 
         {Номенклатура_Папки_Const.TABLE}.{Номенклатура_Папки_Const.Назва}, 
         {Номенклатура_Папки_Const.TABLE}.{Номенклатура_Папки_Const.Родич}, 
-        r.level + 1 AS level
+        r.level + 1 AS level,
+        {Номенклатура_Папки_Const.TABLE}.deletion_label 
     FROM {Номенклатура_Папки_Const.TABLE}
         JOIN r ON {Номенклатура_Папки_Const.TABLE}.{Номенклатура_Папки_Const.Родич} = r.uid";
 
@@ -84,7 +86,9 @@ SELECT
     uid, 
     {Номенклатура_Папки_Const.Назва}, 
     {Номенклатура_Папки_Const.Родич}, 
-    level FROM r
+    level,
+    deletion_label
+FROM r
 ORDER BY level, {Номенклатура_Папки_Const.Назва} ASC
 ";
 
@@ -101,7 +105,7 @@ ORDER BY level, {Номенклатура_Папки_Const.Назва} ASC
                 foreach (object[] o in listRow)
                 {
                     string uid = o[0]?.ToString() ?? Guid.Empty.ToString();
-                    string fieldName = o[1]?.ToString() ?? "";
+                    string fieldName = (o[1]?.ToString() ?? "") + ((bool)o[4] ? " [X]" : "");
                     string fieldParent = o[2]?.ToString() ?? Guid.Empty.ToString();
                     int level = (int)o[3];
 

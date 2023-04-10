@@ -79,6 +79,7 @@ namespace StorageAndTrade
             TreeViewGrid.ActivateOnSingleClick = true;
             TreeViewGrid.RowActivated += OnRowActivated;
             TreeViewGrid.ButtonPressEvent += OnButtonPressEvent;
+            TreeViewGrid.ButtonReleaseEvent += OnButtonReleaseEvent;
             TreeViewGrid.KeyReleaseEvent += OnKeyReleaseEvent;
 
             scrollTree.Add(TreeViewGrid);
@@ -112,6 +113,19 @@ namespace StorageAndTrade
             ToolButton refreshButton = new ToolButton(Stock.Refresh) { TooltipText = "Обновити" };
             refreshButton.Clicked += OnRefreshClick;
             toolbar.Add(refreshButton);
+        }
+
+        Menu PopUpContextMenu()
+        {
+            Menu Menu = new Menu();
+
+            MenuItem setDeletionLabel = new MenuItem("Помітка на видалення");
+            setDeletionLabel.Activated += OnDeleteClick;
+            Menu.Append(setDeletionLabel);
+
+            Menu.ShowAll();
+
+            return Menu;
         }
 
         public void LoadRecords()
@@ -206,6 +220,12 @@ namespace StorageAndTrade
 
                 SelectPointerItem = new StorageAndTrade_1_0.Довідники.Банки_Pointer(unigueID);
             }
+        }
+
+        void OnButtonReleaseEvent(object? sender, ButtonReleaseEventArgs args)
+        {
+            if (args.Event.Button == 3 && TreeViewGrid.Selection.CountSelectedRows() != 0)
+                PopUpContextMenu().Popup();
         }
 
         void OnButtonPressEvent(object? sender, ButtonPressEventArgs args)
@@ -305,7 +325,7 @@ namespace StorageAndTrade
         {
             if (TreeViewGrid.Selection.CountSelectedRows() != 0)
             {
-                if (Message.Request(Program.GeneralForm, "Видалити?") == ResponseType.Yes)
+                if (Message.Request(Program.GeneralForm, "Встановити або зняти помітку на видалення?") == ResponseType.Yes)
                 {
                     TreePath[] selectionRows = TreeViewGrid.Selection.GetSelectedRows();
 

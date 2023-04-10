@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 06.04.2023 13:02:18
+ * Дата конфігурації: 10.04.2023 15:33:10
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -1926,6 +1926,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class Організації_Const
     {
         public const string TABLE = "tab_a01";
+        public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "col_a1";
         public const string Код = "col_a2";
@@ -2034,6 +2035,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public void SetDeletionLabel(bool label = true)
         {
+            Організації_Triggers.SetDeletionLabel(this, label);
             base.BaseDeletionLabel(label);
         }
 
@@ -2254,6 +2256,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class Номенклатура_Const
     {
         public const string TABLE = "tab_a03";
+        public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "col_b1";
         public const string Код = "col_b2";
@@ -2372,6 +2375,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public void SetDeletionLabel(bool label = true)
         {
+            Номенклатура_Triggers.SetDeletionLabel(this, label);
             base.BaseDeletionLabel(label);
         }
 
@@ -2570,6 +2574,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class Виробники_Const
     {
         public const string TABLE = "tab_a04";
+        public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "col_b6";
         public const string Код = "col_b7";
@@ -2636,6 +2641,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public void SetDeletionLabel(bool label = true)
         {
+            Виробники_Triggers.SetDeletionLabel(this, label);
             base.BaseDeletionLabel(label);
         }
 
@@ -2740,6 +2746,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class ВидиНоменклатури_Const
     {
         public const string TABLE = "tab_a05";
+        public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "col_b8";
         public const string Код = "col_b9";
@@ -2821,6 +2828,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public void SetDeletionLabel(bool label = true)
         {
+            ВидиНоменклатури_Triggers.SetDeletionLabel(this, label);
             base.BaseDeletionLabel(label);
         }
 
@@ -2928,6 +2936,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class ПакуванняОдиниціВиміру_Const
     {
         public const string TABLE = "tab_a06";
+        public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "col_c1";
         public const string Код = "col_c2";
@@ -3004,6 +3013,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public void SetDeletionLabel(bool label = true)
         {
+            ПакуванняОдиниціВиміру_Triggers.SetDeletionLabel(this, label);
             base.BaseDeletionLabel(label);
         }
 
@@ -3110,6 +3120,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class Валюти_Const
     {
         public const string TABLE = "tab_a07";
+        public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "col_c5";
         public const string КороткаНазва = "col_a2";
@@ -3191,6 +3202,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public void SetDeletionLabel(bool label = true)
         {
+            Валюти_Triggers.SetDeletionLabel(this, label);
             base.BaseDeletionLabel(label);
         }
 
@@ -3298,6 +3310,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class Контрагенти_Const
     {
         public const string TABLE = "tab_a08";
+        public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "col_c7";
         public const string Код = "col_c8";
@@ -3401,6 +3414,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public void SetDeletionLabel(bool label = true)
         {
+            Контрагенти_Triggers.SetDeletionLabel(this, label);
             base.BaseDeletionLabel(label);
         }
 
@@ -3698,6 +3712,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class Склади_Const
     {
         public const string TABLE = "tab_a10";
+        public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "col_d9";
         public const string Код = "col_e1";
@@ -3801,6 +3816,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public void SetDeletionLabel(bool label = true)
         {
+            Склади_Triggers.SetDeletionLabel(this, label);
             base.BaseDeletionLabel(label);
         }
 
@@ -4020,6 +4036,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class ВидиЦін_Const
     {
         public const string TABLE = "tab_a12";
+        public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "col_e9";
         public const string Код = "col_f1";
@@ -4091,6 +4108,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public void SetDeletionLabel(bool label = true)
         {
+            ВидиЦін_Triggers.SetDeletionLabel(this, label);
             base.BaseDeletionLabel(label);
         }
 
@@ -4196,6 +4214,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class ВидиЦінПостачальників_Const
     {
         public const string TABLE = "tab_a13";
+        public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "col_f3";
         public const string Код = "col_f4";
@@ -4267,6 +4286,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public void SetDeletionLabel(bool label = true)
         {
+            ВидиЦінПостачальників_Triggers.SetDeletionLabel(this, label);
             base.BaseDeletionLabel(label);
         }
 
@@ -4372,6 +4392,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class Користувачі_Const
     {
         public const string TABLE = "tab_a14";
+        public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "col_f6";
         public const string Код = "col_f7";
@@ -4460,6 +4481,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public void SetDeletionLabel(bool label = true)
         {
+            Користувачі_Triggers.SetDeletionLabel(this, label);
             base.BaseDeletionLabel(label);
         }
 
@@ -4672,6 +4694,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class ФізичніОсоби_Const
     {
         public const string TABLE = "tab_a16";
+        public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "col_g7";
         public const string Код = "col_g8";
@@ -4760,6 +4783,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public void SetDeletionLabel(bool label = true)
         {
+            ФізичніОсоби_Triggers.SetDeletionLabel(this, label);
             base.BaseDeletionLabel(label);
         }
 
@@ -4972,6 +4996,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class СтруктураПідприємства_Const
     {
         public const string TABLE = "tab_a18";
+        public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "col_h8";
         public const string Код = "col_h9";
@@ -5043,6 +5068,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public void SetDeletionLabel(bool label = true)
         {
+            СтруктураПідприємства_Triggers.SetDeletionLabel(this, label);
             base.BaseDeletionLabel(label);
         }
 
@@ -5148,6 +5174,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class КраїниСвіту_Const
     {
         public const string TABLE = "tab_a19";
+        public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "col_i2";
         public const string Код = "col_i3";
@@ -5214,6 +5241,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public void SetDeletionLabel(bool label = true)
         {
+            КраїниСвіту_Triggers.SetDeletionLabel(this, label);
             base.BaseDeletionLabel(label);
         }
 
@@ -5318,6 +5346,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class Файли_Const
     {
         public const string TABLE = "tab_a20";
+        public const string DELETION_LABEL = "deletion_label";
         
         public const string Код = "col_i6";
         public const string Назва = "col_i5";
@@ -5404,6 +5433,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public void SetDeletionLabel(bool label = true)
         {
+            Файли_Triggers.SetDeletionLabel(this, label);
             base.BaseDeletionLabel(label);
         }
 
@@ -5512,6 +5542,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class ХарактеристикиНоменклатури_Const
     {
         public const string TABLE = "tab_a21";
+        public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "col_i7";
         public const string Код = "col_i8";
@@ -5588,6 +5619,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public void SetDeletionLabel(bool label = true)
         {
+            ХарактеристикиНоменклатури_Triggers.SetDeletionLabel(this, label);
             base.BaseDeletionLabel(label);
         }
 
@@ -5694,6 +5726,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class Номенклатура_Папки_Const
     {
         public const string TABLE = "tab_a22";
+        public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "col_j1";
         public const string Код = "col_j2";
@@ -5765,6 +5798,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public void SetDeletionLabel(bool label = true)
         {
+            Номенклатура_Папки_Triggers.SetDeletionLabel(this, label);
             base.BaseDeletionLabel(label);
         }
 
@@ -5870,6 +5904,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class Контрагенти_Папки_Const
     {
         public const string TABLE = "tab_a23";
+        public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "col_j4";
         public const string Код = "col_j5";
@@ -5941,6 +5976,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public void SetDeletionLabel(bool label = true)
         {
+            Контрагенти_Папки_Triggers.SetDeletionLabel(this, label);
             base.BaseDeletionLabel(label);
         }
 
@@ -6046,6 +6082,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class Склади_Папки_Const
     {
         public const string TABLE = "tab_a24";
+        public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "col_j7";
         public const string Код = "col_j8";
@@ -6117,6 +6154,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public void SetDeletionLabel(bool label = true)
         {
+            Склади_Папки_Triggers.SetDeletionLabel(this, label);
             base.BaseDeletionLabel(label);
         }
 
@@ -6222,6 +6260,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class Каси_Const
     {
         public const string TABLE = "tab_a26";
+        public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "col_k8";
         public const string Код = "col_k9";
@@ -6298,6 +6337,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public void SetDeletionLabel(bool label = true)
         {
+            Каси_Triggers.SetDeletionLabel(this, label);
             base.BaseDeletionLabel(label);
         }
 
@@ -6404,6 +6444,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class БанківськіРахункиОрганізацій_Const
     {
         public const string TABLE = "tab_a27";
+        public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "col_l1";
         public const string Код = "col_l2";
@@ -6525,6 +6566,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public void SetDeletionLabel(bool label = true)
         {
+            БанківськіРахункиОрганізацій_Triggers.SetDeletionLabel(this, label);
             base.BaseDeletionLabel(label);
         }
 
@@ -6640,6 +6682,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class ДоговориКонтрагентів_Const
     {
         public const string TABLE = "tab_a28";
+        public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "col_n4";
         public const string Код = "col_n5";
@@ -6796,6 +6839,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public void SetDeletionLabel(bool label = true)
         {
+            ДоговориКонтрагентів_Triggers.SetDeletionLabel(this, label);
             base.BaseDeletionLabel(label);
         }
 
@@ -6918,6 +6962,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class БанківськіРахункиКонтрагентів_Const
     {
         public const string TABLE = "tab_a29";
+        public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "col_n7";
         public const string Код = "col_n8";
@@ -7049,6 +7094,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public void SetDeletionLabel(bool label = true)
         {
+            БанківськіРахункиКонтрагентів_Triggers.SetDeletionLabel(this, label);
             base.BaseDeletionLabel(label);
         }
 
@@ -7166,6 +7212,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class СтаттяРухуКоштів_Const
     {
         public const string TABLE = "tab_a45";
+        public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "col_i7";
         public const string Код = "col_i8";
@@ -7254,6 +7301,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public void SetDeletionLabel(bool label = true)
         {
+            СтаттяРухуКоштів_Triggers.SetDeletionLabel(this, label);
             base.BaseDeletionLabel(label);
         }
 
@@ -7442,6 +7490,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class СеріїНоменклатури_Const
     {
         public const string TABLE = "tab_b02";
+        public const string DELETION_LABEL = "deletion_label";
         
         public const string Номер = "col_a3";
         public const string Коментар = "col_a1";
@@ -7513,6 +7562,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public void SetDeletionLabel(bool label = true)
         {
+            СеріїНоменклатури_Triggers.SetDeletionLabel(this, label);
             base.BaseDeletionLabel(label);
         }
 
@@ -7618,6 +7668,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class ПартіяТоварівКомпозит_Const
     {
         public const string TABLE = "tab_b06";
+        public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "col_a1";
         public const string Дата = "col_a2";
@@ -7704,6 +7755,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public void SetDeletionLabel(bool label = true)
         {
+            ПартіяТоварівКомпозит_Triggers.SetDeletionLabel(this, label);
             base.BaseDeletionLabel(label);
         }
 
@@ -7812,6 +7864,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class ВидиЗапасів_Const
     {
         public const string TABLE = "tab_b13";
+        public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "col_a5";
         public const string Організація = "col_b3";
@@ -7903,6 +7956,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public void SetDeletionLabel(bool label = true)
         {
+            ВидиЗапасів_Triggers.SetDeletionLabel(this, label);
             base.BaseDeletionLabel(label);
         }
 
@@ -8012,6 +8066,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class Банки_Const
     {
         public const string TABLE = "tab_a39";
+        public const string DELETION_LABEL = "deletion_label";
         
         public const string Код = "col_a1";
         public const string Назва = "col_a2";
@@ -8208,6 +8263,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public void SetDeletionLabel(bool label = true)
         {
+            Банки_Triggers.SetDeletionLabel(this, label);
             base.BaseDeletionLabel(label);
         }
 
@@ -8338,6 +8394,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class СкладськіПриміщення_Const
     {
         public const string TABLE = "tab_a71";
+        public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "col_a2";
         public const string НалаштуванняАдресногоЗберігання = "col_a3";
@@ -8409,6 +8466,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public void SetDeletionLabel(bool label = true)
         {
+            СкладськіПриміщення_Triggers.SetDeletionLabel(this, label);
             base.BaseDeletionLabel(label);
         }
 
@@ -8514,6 +8572,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class СкладськіКомірки_Const
     {
         public const string TABLE = "tab_a72";
+        public const string DELETION_LABEL = "deletion_label";
         
         public const string Папка = "col_a1";
         public const string Назва = "col_a2";
@@ -8620,6 +8679,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public void SetDeletionLabel(bool label = true)
         {
+            СкладськіКомірки_Triggers.SetDeletionLabel(this, label);
             base.BaseDeletionLabel(label);
         }
 
@@ -8732,6 +8792,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class ОбластьЗберігання_Const
     {
         public const string TABLE = "tab_a73";
+        public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "col_a2";
         public const string Опис = "col_a3";
@@ -8801,6 +8862,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public void SetDeletionLabel(bool label = true)
         {
+            
             base.BaseDeletionLabel(label);
         }
 
@@ -8906,6 +8968,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class ТипорозміриКомірок_Const
     {
         public const string TABLE = "tab_a75";
+        public const string DELETION_LABEL = "deletion_label";
         
         public const string Висота = "col_a1";
         public const string Назва = "col_a2";
@@ -8992,6 +9055,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public void SetDeletionLabel(bool label = true)
         {
+            ТипорозміриКомірок_Triggers.SetDeletionLabel(this, label);
             base.BaseDeletionLabel(label);
         }
 
@@ -9100,6 +9164,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class СкладськіКомірки_Папки_Const
     {
         public const string TABLE = "tab_a76";
+        public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "col_j1";
         public const string Код = "col_j2";
@@ -9176,6 +9241,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public void SetDeletionLabel(bool label = true)
         {
+            СкладськіКомірки_Папки_Triggers.SetDeletionLabel(this, label);
             base.BaseDeletionLabel(label);
         }
 
@@ -9282,6 +9348,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class Блокнот_Const
     {
         public const string TABLE = "tab_a41";
+        public const string DELETION_LABEL = "deletion_label";
         
         public const string Код = "col_a1";
         public const string Назва = "col_a2";
@@ -9363,6 +9430,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public void SetDeletionLabel(bool label = true)
         {
+            Блокнот_Triggers.SetDeletionLabel(this, label);
             base.BaseDeletionLabel(label);
         }
 
@@ -10478,6 +10546,7 @@ namespace StorageAndTrade_1_0.Документи
     public static class ЗамовленняПостачальнику_Const
     {
         public const string TABLE = "tab_a25";
+        public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "docname";
         public const string НомерДок = "docnomer";
@@ -11001,13 +11070,15 @@ namespace StorageAndTrade_1_0.Документи
 
         public void SetDeletionLabel(bool label = true)
         {
-            ЗамовленняПостачальнику_Triggers.BeforeDelete(this);
+            ЗамовленняПостачальнику_Triggers.SetDeletionLabel(this, label);
+            ClearSpendTheDocument();
             base.BaseDeletionLabel(label);
         }
 
         public void Delete()
         {
             ЗамовленняПостачальнику_Triggers.BeforeDelete(this);
+            ClearSpendTheDocument();
             base.BaseDelete(new string[] { "tab_a30" });
         }
         
@@ -11247,6 +11318,7 @@ namespace StorageAndTrade_1_0.Документи
     public static class ПоступленняТоварівТаПослуг_Const
     {
         public const string TABLE = "tab_a32";
+        public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "docname";
         public const string НомерДок = "docnomer";
@@ -11858,13 +11930,15 @@ namespace StorageAndTrade_1_0.Документи
 
         public void SetDeletionLabel(bool label = true)
         {
-            ПоступленняТоварівТаПослуг_Triggers.BeforeDelete(this);
+            ПоступленняТоварівТаПослуг_Triggers.SetDeletionLabel(this, label);
+            ClearSpendTheDocument();
             base.BaseDeletionLabel(label);
         }
 
         public void Delete()
         {
             ПоступленняТоварівТаПослуг_Triggers.BeforeDelete(this);
+            ClearSpendTheDocument();
             base.BaseDelete(new string[] { "tab_a33" });
         }
         
@@ -12118,6 +12192,7 @@ namespace StorageAndTrade_1_0.Документи
     public static class ЗамовленняКлієнта_Const
     {
         public const string TABLE = "tab_a34";
+        public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "docname";
         public const string НомерДок = "docnomer";
@@ -12670,13 +12745,15 @@ namespace StorageAndTrade_1_0.Документи
 
         public void SetDeletionLabel(bool label = true)
         {
-            ЗамовленняКлієнта_Triggers.BeforeDelete(this);
+            ЗамовленняКлієнта_Triggers.SetDeletionLabel(this, label);
+            ClearSpendTheDocument();
             base.BaseDeletionLabel(label);
         }
 
         public void Delete()
         {
             ЗамовленняКлієнта_Triggers.BeforeDelete(this);
+            ClearSpendTheDocument();
             base.BaseDelete(new string[] { "tab_a35" });
         }
         
@@ -12915,6 +12992,7 @@ namespace StorageAndTrade_1_0.Документи
     public static class РеалізаціяТоварівТаПослуг_Const
     {
         public const string TABLE = "tab_a36";
+        public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "docname";
         public const string НомерДок = "docnomer";
@@ -13523,13 +13601,15 @@ namespace StorageAndTrade_1_0.Документи
 
         public void SetDeletionLabel(bool label = true)
         {
-            РеалізаціяТоварівТаПослуг_Triggers.BeforeDelete(this);
+            РеалізаціяТоварівТаПослуг_Triggers.SetDeletionLabel(this, label);
+            ClearSpendTheDocument();
             base.BaseDeletionLabel(label);
         }
 
         public void Delete()
         {
             РеалізаціяТоварівТаПослуг_Triggers.BeforeDelete(this);
+            ClearSpendTheDocument();
             base.BaseDelete(new string[] { "tab_a37" });
         }
         
@@ -13786,6 +13866,7 @@ namespace StorageAndTrade_1_0.Документи
     public static class ВстановленняЦінНоменклатури_Const
     {
         public const string TABLE = "tab_a42";
+        public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "docname";
         public const string НомерДок = "docnomer";
@@ -14053,13 +14134,15 @@ namespace StorageAndTrade_1_0.Документи
 
         public void SetDeletionLabel(bool label = true)
         {
-            ВстановленняЦінНоменклатури_Triggers.BeforeDelete(this);
+            ВстановленняЦінНоменклатури_Triggers.SetDeletionLabel(this, label);
+            ClearSpendTheDocument();
             base.BaseDeletionLabel(label);
         }
 
         public void Delete()
         {
             ВстановленняЦінНоменклатури_Triggers.BeforeDelete(this);
+            ClearSpendTheDocument();
             base.BaseDelete(new string[] { "tab_a43" });
         }
         
@@ -14257,6 +14340,7 @@ namespace StorageAndTrade_1_0.Документи
     public static class ПрихіднийКасовийОрдер_Const
     {
         public const string TABLE = "tab_a44";
+        public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "docname";
         public const string НомерДок = "docnomer";
@@ -14633,13 +14717,15 @@ namespace StorageAndTrade_1_0.Документи
 
         public void SetDeletionLabel(bool label = true)
         {
-            ПрихіднийКасовийОрдер_Triggers.BeforeDelete(this);
+            ПрихіднийКасовийОрдер_Triggers.SetDeletionLabel(this, label);
+            ClearSpendTheDocument();
             base.BaseDeletionLabel(label);
         }
 
         public void Delete()
         {
             ПрихіднийКасовийОрдер_Triggers.BeforeDelete(this);
+            ClearSpendTheDocument();
             base.BaseDelete(new string[] { "tab_a47" });
         }
         
@@ -14846,6 +14932,7 @@ namespace StorageAndTrade_1_0.Документи
     public static class РозхіднийКасовийОрдер_Const
     {
         public const string TABLE = "tab_a48";
+        public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "docname";
         public const string НомерДок = "docnomer";
@@ -15252,13 +15339,15 @@ namespace StorageAndTrade_1_0.Документи
 
         public void SetDeletionLabel(bool label = true)
         {
-            РозхіднийКасовийОрдер_Triggers.BeforeDelete(this);
+            РозхіднийКасовийОрдер_Triggers.SetDeletionLabel(this, label);
+            ClearSpendTheDocument();
             base.BaseDeletionLabel(label);
         }
 
         public void Delete()
         {
             РозхіднийКасовийОрдер_Triggers.BeforeDelete(this);
+            ClearSpendTheDocument();
             base.BaseDelete(new string[] { "tab_a49" });
         }
         
@@ -15471,6 +15560,7 @@ namespace StorageAndTrade_1_0.Документи
     public static class ПереміщенняТоварів_Const
     {
         public const string TABLE = "tab_a31";
+        public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "docname";
         public const string НомерДок = "docnomer";
@@ -15900,13 +15990,15 @@ namespace StorageAndTrade_1_0.Документи
 
         public void SetDeletionLabel(bool label = true)
         {
-            ПереміщенняТоварів_Triggers.BeforeDelete(this);
+            ПереміщенняТоварів_Triggers.SetDeletionLabel(this, label);
+            ClearSpendTheDocument();
             base.BaseDeletionLabel(label);
         }
 
         public void Delete()
         {
             ПереміщенняТоварів_Triggers.BeforeDelete(this);
+            ClearSpendTheDocument();
             base.BaseDelete(new string[] { "tab_a50" });
         }
         
@@ -16124,6 +16216,7 @@ namespace StorageAndTrade_1_0.Документи
     public static class ПоверненняТоварівПостачальнику_Const
     {
         public const string TABLE = "tab_a51";
+        public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "docname";
         public const string НомерДок = "docnomer";
@@ -16589,13 +16682,15 @@ namespace StorageAndTrade_1_0.Документи
 
         public void SetDeletionLabel(bool label = true)
         {
-            ПоверненняТоварівПостачальнику_Triggers.BeforeDelete(this);
+            ПоверненняТоварівПостачальнику_Triggers.SetDeletionLabel(this, label);
+            ClearSpendTheDocument();
             base.BaseDeletionLabel(label);
         }
 
         public void Delete()
         {
             ПоверненняТоварівПостачальнику_Triggers.BeforeDelete(this);
+            ClearSpendTheDocument();
             base.BaseDelete(new string[] { "tab_a52" });
         }
         
@@ -16823,6 +16918,7 @@ namespace StorageAndTrade_1_0.Документи
     public static class ПоверненняТоварівВідКлієнта_Const
     {
         public const string TABLE = "tab_a53";
+        public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "docname";
         public const string НомерДок = "docnomer";
@@ -17246,13 +17342,15 @@ namespace StorageAndTrade_1_0.Документи
 
         public void SetDeletionLabel(bool label = true)
         {
-            ПоверненняТоварівВідКлієнта_Triggers.BeforeDelete(this);
+            ПоверненняТоварівВідКлієнта_Triggers.SetDeletionLabel(this, label);
+            ClearSpendTheDocument();
             base.BaseDeletionLabel(label);
         }
 
         public void Delete()
         {
             ПоверненняТоварівВідКлієнта_Triggers.BeforeDelete(this);
+            ClearSpendTheDocument();
             base.BaseDelete(new string[] { "tab_a54" });
         }
         
@@ -17480,6 +17578,7 @@ namespace StorageAndTrade_1_0.Документи
     public static class АктВиконанихРобіт_Const
     {
         public const string TABLE = "tab_a81";
+        public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "docname";
         public const string НомерДок = "docnomer";
@@ -17845,13 +17944,15 @@ namespace StorageAndTrade_1_0.Документи
 
         public void SetDeletionLabel(bool label = true)
         {
-            АктВиконанихРобіт_Triggers.BeforeDelete(this);
+            АктВиконанихРобіт_Triggers.SetDeletionLabel(this, label);
+            ClearSpendTheDocument();
             base.BaseDeletionLabel(label);
         }
 
         public void Delete()
         {
             АктВиконанихРобіт_Triggers.BeforeDelete(this);
+            ClearSpendTheDocument();
             base.BaseDelete(new string[] { "tab_a82" });
         }
         
@@ -18057,6 +18158,7 @@ namespace StorageAndTrade_1_0.Документи
     public static class ВведенняЗалишків_Const
     {
         public const string TABLE = "tab_a83";
+        public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "docname";
         public const string НомерДок = "docnomer";
@@ -18524,13 +18626,15 @@ namespace StorageAndTrade_1_0.Документи
 
         public void SetDeletionLabel(bool label = true)
         {
-            ВведенняЗалишків_Triggers.BeforeDelete(this);
+            ВведенняЗалишків_Triggers.SetDeletionLabel(this, label);
+            ClearSpendTheDocument();
             base.BaseDeletionLabel(label);
         }
 
         public void Delete()
         {
             ВведенняЗалишків_Triggers.BeforeDelete(this);
+            ClearSpendTheDocument();
             base.BaseDelete(new string[] { "tab_a84", "tab_a85", "tab_a86", "tab_a87" });
         }
         
@@ -19013,6 +19117,7 @@ namespace StorageAndTrade_1_0.Документи
     public static class НадлишкиТоварів_Const
     {
         public const string TABLE = "tab_a88";
+        public const string DELETION_LABEL = "deletion_label";
         
         public const string Організація = "col_f6";
         public const string Підрозділ = "col_f7";
@@ -19280,12 +19385,14 @@ namespace StorageAndTrade_1_0.Документи
         public void SetDeletionLabel(bool label = true)
         {
             
+            ClearSpendTheDocument();
             base.BaseDeletionLabel(label);
         }
 
         public void Delete()
         {
             
+            ClearSpendTheDocument();
             base.BaseDelete(new string[] { "tab_a89" });
         }
         
@@ -19480,6 +19587,7 @@ namespace StorageAndTrade_1_0.Документи
     public static class ПересортицяТоварів_Const
     {
         public const string TABLE = "tab_a90";
+        public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "docname";
         public const string НомерДок = "docnomer";
@@ -19747,12 +19855,14 @@ namespace StorageAndTrade_1_0.Документи
         public void SetDeletionLabel(bool label = true)
         {
             
+            ClearSpendTheDocument();
             base.BaseDeletionLabel(label);
         }
 
         public void Delete()
         {
             
+            ClearSpendTheDocument();
             base.BaseDelete(new string[] { "tab_a91" });
         }
         
@@ -19947,6 +20057,7 @@ namespace StorageAndTrade_1_0.Документи
     public static class ПерерахунокТоварів_Const
     {
         public const string TABLE = "tab_a92";
+        public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "docname";
         public const string НомерДок = "docnomer";
@@ -20202,12 +20313,14 @@ namespace StorageAndTrade_1_0.Документи
         public void SetDeletionLabel(bool label = true)
         {
             
+            ClearSpendTheDocument();
             base.BaseDeletionLabel(label);
         }
 
         public void Delete()
         {
             
+            ClearSpendTheDocument();
             base.BaseDelete(new string[] { "tab_a93" });
         }
         
@@ -20408,6 +20521,7 @@ namespace StorageAndTrade_1_0.Документи
     public static class ПсуванняТоварів_Const
     {
         public const string TABLE = "tab_a94";
+        public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "docname";
         public const string НомерДок = "docnomer";
@@ -20734,13 +20848,15 @@ namespace StorageAndTrade_1_0.Документи
 
         public void SetDeletionLabel(bool label = true)
         {
-            ПсуванняТоварів_Triggers.BeforeDelete(this);
+            ПсуванняТоварів_Triggers.SetDeletionLabel(this, label);
+            ClearSpendTheDocument();
             base.BaseDeletionLabel(label);
         }
 
         public void Delete()
         {
             ПсуванняТоварів_Triggers.BeforeDelete(this);
+            ClearSpendTheDocument();
             base.BaseDelete(new string[] { "tab_a95" });
         }
         
@@ -20957,6 +21073,7 @@ namespace StorageAndTrade_1_0.Документи
     public static class ВнутрішнєСпоживанняТоварів_Const
     {
         public const string TABLE = "tab_b07";
+        public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "docname";
         public const string НомерДок = "docnomer";
@@ -21298,13 +21415,15 @@ namespace StorageAndTrade_1_0.Документи
 
         public void SetDeletionLabel(bool label = true)
         {
-            ВнутрішнєСпоживанняТоварів_Triggers.BeforeDelete(this);
+            ВнутрішнєСпоживанняТоварів_Triggers.SetDeletionLabel(this, label);
+            ClearSpendTheDocument();
             base.BaseDeletionLabel(label);
         }
 
         public void Delete()
         {
             ВнутрішнєСпоживанняТоварів_Triggers.BeforeDelete(this);
+            ClearSpendTheDocument();
             base.BaseDelete(new string[] { "tab_b08" });
         }
         
@@ -21522,6 +21641,7 @@ namespace StorageAndTrade_1_0.Документи
     public static class РахунокФактура_Const
     {
         public const string TABLE = "tab_b10";
+        public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "docname";
         public const string НомерДок = "docnomer";
@@ -21962,13 +22082,15 @@ namespace StorageAndTrade_1_0.Документи
 
         public void SetDeletionLabel(bool label = true)
         {
-            РахунокФактура_Triggers.BeforeDelete(this);
+            РахунокФактура_Triggers.SetDeletionLabel(this, label);
+            ClearSpendTheDocument();
             base.BaseDeletionLabel(label);
         }
 
         public void Delete()
         {
             РахунокФактура_Triggers.BeforeDelete(this);
+            ClearSpendTheDocument();
             base.BaseDelete(new string[] { "tab_b11" });
         }
         
@@ -22197,6 +22319,7 @@ namespace StorageAndTrade_1_0.Документи
     public static class РозміщенняТоварівНаСкладі_Const
     {
         public const string TABLE = "tab_a64";
+        public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "docname";
         public const string ДатаДок = "docdate";
@@ -22502,13 +22625,15 @@ namespace StorageAndTrade_1_0.Документи
 
         public void SetDeletionLabel(bool label = true)
         {
-            РозміщенняТоварівНаСкладі_Triggers.BeforeDelete(this);
+            РозміщенняТоварівНаСкладі_Triggers.SetDeletionLabel(this, label);
+            ClearSpendTheDocument();
             base.BaseDeletionLabel(label);
         }
 
         public void Delete()
         {
             РозміщенняТоварівНаСкладі_Triggers.BeforeDelete(this);
+            ClearSpendTheDocument();
             base.BaseDelete(new string[] { "tab_a68" });
         }
         
@@ -22716,6 +22841,7 @@ namespace StorageAndTrade_1_0.Документи
     public static class ПереміщенняТоварівНаСкладі_Const
     {
         public const string TABLE = "tab_b09";
+        public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "docname";
         public const string ДатаДок = "docdate";
@@ -23016,13 +23142,15 @@ namespace StorageAndTrade_1_0.Документи
 
         public void SetDeletionLabel(bool label = true)
         {
-            ПереміщенняТоварівНаСкладі_Triggers.BeforeDelete(this);
+            ПереміщенняТоварівНаСкладі_Triggers.SetDeletionLabel(this, label);
+            ClearSpendTheDocument();
             base.BaseDeletionLabel(label);
         }
 
         public void Delete()
         {
             ПереміщенняТоварівНаСкладі_Triggers.BeforeDelete(this);
+            ClearSpendTheDocument();
             base.BaseDelete(new string[] { "tab_b26" });
         }
         
@@ -23233,6 +23361,7 @@ namespace StorageAndTrade_1_0.Документи
     public static class ЗбіркаТоварівНаСкладі_Const
     {
         public const string TABLE = "tab_b27";
+        public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "docname";
         public const string ДатаДок = "docdate";
@@ -23538,13 +23667,15 @@ namespace StorageAndTrade_1_0.Документи
 
         public void SetDeletionLabel(bool label = true)
         {
-            ЗбіркаТоварівНаСкладі_Triggers.BeforeDelete(this);
+            ЗбіркаТоварівНаСкладі_Triggers.SetDeletionLabel(this, label);
+            ClearSpendTheDocument();
             base.BaseDeletionLabel(label);
         }
 
         public void Delete()
         {
             ЗбіркаТоварівНаСкладі_Triggers.BeforeDelete(this);
+            ClearSpendTheDocument();
             base.BaseDelete(new string[] { "tab_b28" });
         }
         
@@ -23752,6 +23883,7 @@ namespace StorageAndTrade_1_0.Документи
     public static class РозміщенняНоменклатуриПоКоміркам_Const
     {
         public const string TABLE = "tab_b29";
+        public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "docname";
         public const string НомерДок = "docnomer";
@@ -24016,13 +24148,15 @@ namespace StorageAndTrade_1_0.Документи
 
         public void SetDeletionLabel(bool label = true)
         {
-            РозміщенняНоменклатуриПоКоміркам_Triggers.BeforeDelete(this);
+            РозміщенняНоменклатуриПоКоміркам_Triggers.SetDeletionLabel(this, label);
+            ClearSpendTheDocument();
             base.BaseDeletionLabel(label);
         }
 
         public void Delete()
         {
             РозміщенняНоменклатуриПоКоміркам_Triggers.BeforeDelete(this);
+            ClearSpendTheDocument();
             base.BaseDelete(new string[] { "tab_b32" });
         }
         

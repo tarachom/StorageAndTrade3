@@ -60,6 +60,11 @@ namespace StorageAndTrade_1_0.Довідники
 
         }
 
+        public static void SetDeletionLabel(Організації_Objest ДовідникОбєкт, bool label)
+        {
+
+        }
+
         public static void BeforeDelete(Організації_Objest ДовідникОбєкт)
         {
 
@@ -88,16 +93,50 @@ namespace StorageAndTrade_1_0.Довідники
 
         }
 
+        public static void SetDeletionLabel(Номенклатура_Objest ДовідникОбєкт, bool label)
+        {
+            // Помітка на виделення всіх характеристик елементу номенклатури у випадку label = true
+            // Якщо мітка знімається, то з характеристик мітка не має зніматися
+
+            if (label == true)
+            {
+                ХарактеристикиНоменклатури_Select характеристикиНоменклатури_Select = new ХарактеристикиНоменклатури_Select();
+                характеристикиНоменклатури_Select.QuerySelect.Where.Add(new Where(ХарактеристикиНоменклатури_Const.Номенклатура, Comparison.EQ, ДовідникОбєкт.UnigueID.UGuid));
+                характеристикиНоменклатури_Select.QuerySelect.Where.Add(new Where(Comparison.AND, ХарактеристикиНоменклатури_Const.DELETION_LABEL, Comparison.NOT, true));
+                характеристикиНоменклатури_Select.Select();
+
+                while (характеристикиНоменклатури_Select.MoveNext())
+                {
+                    ХарактеристикиНоменклатури_Objest? xарактеристикиНоменклатури_Objest = характеристикиНоменклатури_Select.Current?.GetDirectoryObject();
+                    if (xарактеристикиНоменклатури_Objest != null)
+                        xарактеристикиНоменклатури_Objest.SetDeletionLabel();
+                }
+            }
+        }
+
         public static void BeforeDelete(Номенклатура_Objest ДовідникОбєкт)
         {
             //
-            //Очистка штрих-кодів
+            //Очистити регістр штрих-кодів
             //
 
+            string query = $@"
+DELETE FROM 
+	{РегістриВідомостей.ШтрихкодиНоменклатури_Const.TABLE} AS ШтрихкодиНоменклатури
+WHERE
+    ШтрихкодиНоменклатури.{РегістриВідомостей.ШтрихкодиНоменклатури_Const.Номенклатура} = @Номенклатура
+";
+
+            Dictionary<string, object> paramQuery = new Dictionary<string, object>();
+            paramQuery.Add("Номенклатура", ДовідникОбєкт.UnigueID.UGuid);
+
+            Конфа.Config.Kernel!.DataBase.ExecuteSQL(query, paramQuery);
 
             //
             //Очистка характеристик
             //
+
+            
         }
     }
 
@@ -119,6 +158,11 @@ namespace StorageAndTrade_1_0.Довідники
         }
 
         public static void AfterSave(Виробники_Objest ДовідникОбєкт)
+        {
+
+        }
+
+        public static void SetDeletionLabel(Виробники_Objest ДовідникОбєкт, bool label)
         {
 
         }
@@ -151,6 +195,11 @@ namespace StorageAndTrade_1_0.Довідники
 
         }
 
+        public static void SetDeletionLabel(ВидиНоменклатури_Objest ДовідникОбєкт, bool label)
+        {
+
+        }
+
         public static void BeforeDelete(ВидиНоменклатури_Objest ДовідникОбєкт)
         {
 
@@ -179,6 +228,11 @@ namespace StorageAndTrade_1_0.Довідники
 
         }
 
+        public static void SetDeletionLabel(ПакуванняОдиниціВиміру_Objest ДовідникОбєкт, bool label)
+        {
+
+        }
+
         public static void BeforeDelete(ПакуванняОдиниціВиміру_Objest ДовідникОбєкт)
         {
 
@@ -203,6 +257,11 @@ namespace StorageAndTrade_1_0.Довідники
         }
 
         public static void AfterSave(Валюти_Objest ДовідникОбєкт)
+        {
+
+        }
+
+        public static void SetDeletionLabel(Валюти_Objest ДовідникОбєкт, bool label)
         {
 
         }
@@ -248,9 +307,37 @@ WHERE
             ФункціїДляДовідників.СтворитиДоговориКонтрагентаЗаЗамовчуванням(ДовідникОбєкт.GetDirectoryPointer());
         }
 
+        public static void SetDeletionLabel(Контрагенти_Objest ДовідникОбєкт, bool label)
+        {
+            // Помітка на виделення всіх договорів
+            if (label == true)
+            {
+                ДоговориКонтрагентів_Select договориКонтрагентів_Select = new ДоговориКонтрагентів_Select();
+                договориКонтрагентів_Select.QuerySelect.Where.Add(new Where(ДоговориКонтрагентів_Const.Контрагент, Comparison.EQ, ДовідникОбєкт.UnigueID.UGuid));
+                договориКонтрагентів_Select.QuerySelect.Where.Add(new Where(Comparison.AND, ДоговориКонтрагентів_Const.DELETION_LABEL, Comparison.NOT, true));
+                договориКонтрагентів_Select.Select();
+
+                while (договориКонтрагентів_Select.MoveNext())
+                {
+                    ДоговориКонтрагентів_Objest? договориКонтрагентів_Objest = договориКонтрагентів_Select.Current?.GetDirectoryObject();
+                    if (договориКонтрагентів_Objest != null)
+                        договориКонтрагентів_Objest.SetDeletionLabel();
+                }
+            }
+        }
+
         public static void BeforeDelete(Контрагенти_Objest ДовідникОбєкт)
         {
+            ДоговориКонтрагентів_Select договориКонтрагентів_Select = new ДоговориКонтрагентів_Select();
+            договориКонтрагентів_Select.QuerySelect.Where.Add(new Where(ДоговориКонтрагентів_Const.Контрагент, Comparison.EQ, ДовідникОбєкт.UnigueID.UGuid));
+            договориКонтрагентів_Select.Select();
 
+            while (договориКонтрагентів_Select.MoveNext())
+            {
+                ДоговориКонтрагентів_Objest? договориКонтрагентів_Objest = договориКонтрагентів_Select.Current?.GetDirectoryObject();
+                if (договориКонтрагентів_Objest != null)
+                    договориКонтрагентів_Objest.Delete();
+            }
         }
     }
 
@@ -272,6 +359,11 @@ WHERE
         }
 
         public static void AfterSave(Склади_Objest ДовідникОбєкт)
+        {
+
+        }
+
+        public static void SetDeletionLabel(Склади_Objest ДовідникОбєкт, bool label)
         {
 
         }
@@ -304,6 +396,11 @@ WHERE
 
         }
 
+        public static void SetDeletionLabel(ВидиЦін_Objest ДовідникОбєкт, bool label)
+        {
+
+        }
+
         public static void BeforeDelete(ВидиЦін_Objest ДовідникОбєкт)
         {
 
@@ -328,6 +425,11 @@ WHERE
         }
 
         public static void AfterSave(ВидиЦінПостачальників_Objest ДовідникОбєкт)
+        {
+
+        }
+
+        public static void SetDeletionLabel(ВидиЦінПостачальників_Objest ДовідникОбєкт, bool label)
         {
 
         }
@@ -360,6 +462,11 @@ WHERE
 
         }
 
+        public static void SetDeletionLabel(Користувачі_Objest ДовідникОбєкт, bool label)
+        {
+
+        }
+
         public static void BeforeDelete(Користувачі_Objest ДовідникОбєкт)
         {
 
@@ -384,6 +491,11 @@ WHERE
         }
 
         public static void AfterSave(ФізичніОсоби_Objest ДовідникОбєкт)
+        {
+
+        }
+
+        public static void SetDeletionLabel(ФізичніОсоби_Objest ДовідникОбєкт, bool label)
         {
 
         }
@@ -416,6 +528,11 @@ WHERE
 
         }
 
+        public static void SetDeletionLabel(СтруктураПідприємства_Objest ДовідникОбєкт, bool label)
+        {
+
+        }
+
         public static void BeforeDelete(СтруктураПідприємства_Objest ДовідникОбєкт)
         {
 
@@ -440,6 +557,11 @@ WHERE
         }
 
         public static void AfterSave(КраїниСвіту_Objest ДовідникОбєкт)
+        {
+
+        }
+
+        public static void SetDeletionLabel(КраїниСвіту_Objest ДовідникОбєкт, bool label)
         {
 
         }
@@ -472,6 +594,11 @@ WHERE
 
         }
 
+        public static void SetDeletionLabel(Файли_Objest ДовідникОбєкт, bool label)
+        {
+
+        }
+
         public static void BeforeDelete(Файли_Objest ДовідникОбєкт)
         {
 
@@ -496,6 +623,11 @@ WHERE
         }
 
         public static void AfterSave(ХарактеристикиНоменклатури_Objest ДовідникОбєкт)
+        {
+
+        }
+
+        public static void SetDeletionLabel(ХарактеристикиНоменклатури_Objest ДовідникОбєкт, bool label)
         {
 
         }
@@ -528,6 +660,45 @@ WHERE
 
         }
 
+        public static void SetDeletionLabel(Номенклатура_Папки_Objest ДовідникОбєкт, bool label)
+        {
+            //Якщо встановлюється мітка на видалення
+            if (label == true)
+            {
+                //
+                //Елементи помічаються на видалення
+                //
+
+                Номенклатура_Select номенклатура_Select = new Номенклатура_Select();
+                номенклатура_Select.QuerySelect.Where.Add(new Where(Номенклатура_Const.Папка, Comparison.EQ, ДовідникОбєкт.UnigueID.UGuid));
+                номенклатура_Select.QuerySelect.Where.Add(new Where(Comparison.AND, Номенклатура_Const.DELETION_LABEL, Comparison.NOT, true));
+                номенклатура_Select.Select();
+
+                while (номенклатура_Select.MoveNext())
+                {
+                    Номенклатура_Objest? номенклатура_Objest = номенклатура_Select.Current?.GetDirectoryObject();
+                    if (номенклатура_Objest != null)
+                        номенклатура_Objest.SetDeletionLabel();
+                }
+
+                //
+                //Вкладені папки помічаються на видалення
+                //
+
+                Номенклатура_Папки_Select номенклатура_Папки_Select = new Номенклатура_Папки_Select();
+                номенклатура_Папки_Select.QuerySelect.Where.Add(new Where(Номенклатура_Папки_Const.Родич, Comparison.EQ, ДовідникОбєкт.UnigueID.UGuid));
+                номенклатура_Папки_Select.Select();
+
+                while (номенклатура_Папки_Select.MoveNext())
+                {
+                    Номенклатура_Папки_Objest? номенклатура_Папки_Objest = номенклатура_Папки_Select.Current?.GetDirectoryObject();
+                    if (номенклатура_Папки_Objest != null)
+                        номенклатура_Папки_Objest.SetDeletionLabel();
+
+                }
+            }
+        }
+
         public static void BeforeDelete(Номенклатура_Папки_Objest ДовідникОбєкт)
         {
             //
@@ -543,6 +714,9 @@ WHERE
                 Номенклатура_Objest? номенклатура_Objest = номенклатура_Select.Current?.GetDirectoryObject();
                 if (номенклатура_Objest != null)
                 {
+                    //Ставиться помітка на видалення для елементу
+                    номенклатура_Objest.SetDeletionLabel();
+
                     номенклатура_Objest.Папка = new Номенклатура_Папки_Pointer();
                     номенклатура_Objest.Save();
                 }
@@ -588,6 +762,45 @@ WHERE
 
         }
 
+        public static void SetDeletionLabel(Контрагенти_Папки_Objest ДовідникОбєкт, bool label)
+        {
+            //Якщо встановлюється мітка на видалення
+            if (label == true)
+            {
+                //
+                //Елементи помічаються на видалення
+                //
+
+                Контрагенти_Select контрагенти_Select = new Контрагенти_Select();
+                контрагенти_Select.QuerySelect.Where.Add(new Where(Контрагенти_Const.Папка, Comparison.EQ, ДовідникОбєкт.UnigueID.UGuid));
+                контрагенти_Select.QuerySelect.Where.Add(new Where(Comparison.AND, Контрагенти_Const.DELETION_LABEL, Comparison.NOT, true));
+                контрагенти_Select.Select();
+
+                while (контрагенти_Select.MoveNext())
+                {
+                    Контрагенти_Objest? контрагенти_Objest = контрагенти_Select.Current?.GetDirectoryObject();
+                    if (контрагенти_Objest != null)
+                        контрагенти_Objest.SetDeletionLabel();
+                }
+
+                //
+                //Вкладені папки помічаються на видалення
+                //
+
+                Контрагенти_Папки_Select контрагенти_Папки_Select = new Контрагенти_Папки_Select();
+                контрагенти_Папки_Select.QuerySelect.Where.Add(new Where(Контрагенти_Папки_Const.Родич, Comparison.EQ, ДовідникОбєкт.UnigueID.UGuid));
+                контрагенти_Папки_Select.Select();
+
+                while (контрагенти_Папки_Select.MoveNext())
+                {
+                    Контрагенти_Папки_Objest? контрагенти_Папки_Objest = контрагенти_Папки_Select.Current?.GetDirectoryObject();
+                    if (контрагенти_Папки_Objest != null)
+                        контрагенти_Папки_Objest.SetDeletionLabel();
+
+                }
+            }
+        }
+
         public static void BeforeDelete(Контрагенти_Папки_Objest ДовідникОбєкт)
         {
             //
@@ -604,6 +817,10 @@ WHERE
 
                 if (контрагенти_Objest != null)
                 {
+                    //Ставиться помітка на видалення для елементу
+                    контрагенти_Objest.SetDeletionLabel();
+
+                    //Зміна папки
                     контрагенти_Objest.Папка = new Контрагенти_Папки_Pointer();
                     контрагенти_Objest.Save();
                 }
@@ -649,6 +866,44 @@ WHERE
 
         }
 
+        public static void SetDeletionLabel(Склади_Папки_Objest ДовідникОбєкт, bool label)
+        {
+            //Якщо встановлюється мітка на видалення
+            if (label == true)
+            {
+                //
+                //Елементи помічаються на видалення
+                //
+
+                Склади_Select склади_Select = new Склади_Select();
+                склади_Select.QuerySelect.Where.Add(new Where(Склади_Const.Папка, Comparison.EQ, ДовідникОбєкт.UnigueID.UGuid));
+                склади_Select.QuerySelect.Where.Add(new Where(Comparison.AND, Склади_Const.DELETION_LABEL, Comparison.NOT, true));
+                склади_Select.Select();
+
+                while (склади_Select.MoveNext())
+                {
+                    Склади_Objest? склади_Objest = склади_Select.Current?.GetDirectoryObject();
+                    if (склади_Objest != null)
+                        склади_Objest.SetDeletionLabel();
+                }
+
+                //
+                //Вкладені папки помічаються на видалення
+                //
+
+                Склади_Папки_Select cклади_Папки_Select = new Склади_Папки_Select();
+                cклади_Папки_Select.QuerySelect.Where.Add(new Where(Склади_Папки_Const.Родич, Comparison.EQ, ДовідникОбєкт.UnigueID.UGuid));
+                cклади_Папки_Select.Select();
+
+                while (cклади_Папки_Select.MoveNext())
+                {
+                    Склади_Папки_Objest? cклади_Папки_Objest = cклади_Папки_Select.Current?.GetDirectoryObject();
+                    if (cклади_Папки_Objest != null)
+                        cклади_Папки_Objest.SetDeletionLabel();
+                }
+            }
+        }
+
         public static void BeforeDelete(Склади_Папки_Objest ДовідникОбєкт)
         {
             //
@@ -665,6 +920,9 @@ WHERE
 
                 if (склади_Objest != null)
                 {
+                    //Ставиться помітка на видалення для елементу
+                    склади_Objest.SetDeletionLabel();
+
                     склади_Objest.Папка = new Склади_Папки_Pointer();
                     склади_Objest.Save();
                 }
@@ -683,7 +941,6 @@ WHERE
                 Склади_Папки_Objest? cклади_Папки_Objest = cклади_Папки_Select.Current?.GetDirectoryObject();
                 if (cклади_Папки_Objest != null)
                     cклади_Папки_Objest.Delete();
-
             }
         }
     }
@@ -706,6 +963,11 @@ WHERE
         }
 
         public static void AfterSave(Каси_Objest ДовідникОбєкт)
+        {
+
+        }
+
+        public static void SetDeletionLabel(Каси_Objest ДовідникОбєкт, bool label)
         {
 
         }
@@ -734,6 +996,11 @@ WHERE
         }
 
         public static void AfterSave(БанківськіРахункиОрганізацій_Objest ДовідникОбєкт)
+        {
+
+        }
+
+        public static void SetDeletionLabel(БанківськіРахункиОрганізацій_Objest ДовідникОбєкт, bool label)
         {
 
         }
@@ -769,6 +1036,11 @@ WHERE
 
         }
 
+        public static void SetDeletionLabel(ДоговориКонтрагентів_Objest ДовідникОбєкт, bool label)
+        {
+
+        }
+
         public static void BeforeDelete(ДоговориКонтрагентів_Objest ДовідникОбєкт)
         {
 
@@ -797,6 +1069,11 @@ WHERE
 
         }
 
+        public static void SetDeletionLabel(БанківськіРахункиКонтрагентів_Objest ДовідникОбєкт, bool label)
+        {
+
+        }
+
         public static void BeforeDelete(БанківськіРахункиКонтрагентів_Objest ДовідникОбєкт)
         {
 
@@ -821,6 +1098,11 @@ WHERE
         }
 
         public static void AfterSave(СтаттяРухуКоштів_Objest ДовідникОбєкт)
+        {
+
+        }
+
+        public static void SetDeletionLabel(СтаттяРухуКоштів_Objest ДовідникОбєкт, bool label)
         {
 
         }
@@ -862,6 +1144,11 @@ WHERE
 
         }
 
+        public static void SetDeletionLabel(СеріїНоменклатури_Objest ДовідникОбєкт, bool label)
+        {
+
+        }
+
         public static void BeforeDelete(СеріїНоменклатури_Objest ДовідникОбєкт)
         {
 
@@ -886,6 +1173,11 @@ WHERE
         }
 
         public static void AfterSave(ПартіяТоварівКомпозит_Objest ДовідникОбєкт)
+        {
+
+        }
+
+        public static void SetDeletionLabel(ПартіяТоварівКомпозит_Objest ДовідникОбєкт, bool label)
         {
 
         }
@@ -918,6 +1210,11 @@ WHERE
 
         }
 
+        public static void SetDeletionLabel(ВидиЗапасів_Objest ДовідникОбєкт, bool label)
+        {
+
+        }
+
         public static void BeforeDelete(ВидиЗапасів_Objest ДовідникОбєкт)
         {
 
@@ -942,6 +1239,11 @@ WHERE
         }
 
         public static void AfterSave(Банки_Objest ДовідникОбєкт)
+        {
+
+        }
+
+        public static void SetDeletionLabel(Банки_Objest ДовідникОбєкт, bool label)
         {
 
         }
@@ -974,6 +1276,11 @@ WHERE
 
         }
 
+        public static void SetDeletionLabel(СкладськіПриміщення_Objest ДовідникОбєкт, bool label)
+        {
+
+        }
+
         public static void BeforeDelete(СкладськіПриміщення_Objest ДовідникОбєкт)
         {
 
@@ -998,6 +1305,11 @@ WHERE
         }
 
         public static void AfterSave(СкладськіКомірки_Objest ДовідникОбєкт)
+        {
+
+        }
+
+        public static void SetDeletionLabel(СкладськіКомірки_Objest ДовідникОбєкт, bool label)
         {
 
         }
@@ -1030,6 +1342,11 @@ WHERE
 
         }
 
+        public static void SetDeletionLabel(ТипорозміриКомірок_Objest ДовідникОбєкт, bool label)
+        {
+
+        }
+
         public static void BeforeDelete(ТипорозміриКомірок_Objest ДовідникОбєкт)
         {
 
@@ -1058,9 +1375,81 @@ WHERE
 
         }
 
+        public static void SetDeletionLabel(СкладськіКомірки_Папки_Objest ДовідникОбєкт, bool label)
+        {
+            //Якщо встановлюється мітка на видалення
+            if (label == true)
+            {
+                //
+                //Елементи помічаються на видалення
+                //
+
+                СкладськіКомірки_Select cкладськіКомірки_Select = new СкладськіКомірки_Select();
+                cкладськіКомірки_Select.QuerySelect.Where.Add(new Where(СкладськіКомірки_Const.Папка, Comparison.EQ, ДовідникОбєкт.UnigueID.UGuid));
+                cкладськіКомірки_Select.QuerySelect.Where.Add(new Where(Comparison.AND, СкладськіКомірки_Const.DELETION_LABEL, Comparison.NOT, true));
+                cкладськіКомірки_Select.Select();
+
+                while (cкладськіКомірки_Select.MoveNext())
+                {
+                    СкладськіКомірки_Objest? cкладськіКомірки_Objest = cкладськіКомірки_Select.Current?.GetDirectoryObject();
+                    if (cкладськіКомірки_Objest != null)
+                        cкладськіКомірки_Objest.SetDeletionLabel();
+                }
+
+                //
+                //Вкладені папки помічаються на видалення
+                //
+
+                СкладськіКомірки_Папки_Select cкладськіКомірки_Папки_Select = new СкладськіКомірки_Папки_Select();
+                cкладськіКомірки_Папки_Select.QuerySelect.Where.Add(new Where(СкладськіКомірки_Папки_Const.Родич, Comparison.EQ, ДовідникОбєкт.UnigueID.UGuid));
+                cкладськіКомірки_Папки_Select.Select();
+
+                while (cкладськіКомірки_Папки_Select.MoveNext())
+                {
+                    СкладськіКомірки_Папки_Objest? cкладськіКомірки_Папки_Objest = cкладськіКомірки_Папки_Select.Current?.GetDirectoryObject();
+                    if (cкладськіКомірки_Папки_Objest != null)
+                        cкладськіКомірки_Папки_Objest.SetDeletionLabel();
+                }
+            }
+        }
+
         public static void BeforeDelete(СкладськіКомірки_Папки_Objest ДовідникОбєкт)
         {
+            //
+            //Елементи помічаються на видалення
+            //
 
+            СкладськіКомірки_Select cкладськіКомірки_Select = new СкладськіКомірки_Select();
+            cкладськіКомірки_Select.QuerySelect.Where.Add(new Where(СкладськіКомірки_Const.Папка, Comparison.EQ, ДовідникОбєкт.UnigueID.UGuid));
+            cкладськіКомірки_Select.QuerySelect.Where.Add(new Where(Comparison.AND, СкладськіКомірки_Const.DELETION_LABEL, Comparison.NOT, true));
+            cкладськіКомірки_Select.Select();
+
+            while (cкладськіКомірки_Select.MoveNext())
+            {
+                СкладськіКомірки_Objest? cкладськіКомірки_Objest = cкладськіКомірки_Select.Current?.GetDirectoryObject();
+                if (cкладськіКомірки_Objest != null)
+                {
+                    cкладськіКомірки_Objest.SetDeletionLabel();
+
+                    cкладськіКомірки_Objest.Папка = new СкладськіКомірки_Папки_Pointer();
+                    cкладськіКомірки_Objest.Save();
+                }
+            }
+
+            //
+            //Вкладені папки помічаються на видалення
+            //
+
+            СкладськіКомірки_Папки_Select cкладськіКомірки_Папки_Select = new СкладськіКомірки_Папки_Select();
+            cкладськіКомірки_Папки_Select.QuerySelect.Where.Add(new Where(СкладськіКомірки_Папки_Const.Родич, Comparison.EQ, ДовідникОбєкт.UnigueID.UGuid));
+            cкладськіКомірки_Папки_Select.Select();
+
+            while (cкладськіКомірки_Папки_Select.MoveNext())
+            {
+                СкладськіКомірки_Папки_Objest? cкладськіКомірки_Папки_Objest = cкладськіКомірки_Папки_Select.Current?.GetDirectoryObject();
+                if (cкладськіКомірки_Папки_Objest != null)
+                    cкладськіКомірки_Папки_Objest.Delete();
+            }
         }
     }
 
@@ -1083,6 +1472,11 @@ WHERE
         }
 
         public static void AfterSave(Блокнот_Objest ДовідникОбєкт)
+        {
+
+        }
+
+        public static void SetDeletionLabel(Блокнот_Objest ДовідникОбєкт, bool label)
         {
 
         }
@@ -1122,9 +1516,14 @@ namespace StorageAndTrade_1_0.Документи
 
         }
 
+        public static void SetDeletionLabel(ЗамовленняПостачальнику_Objest ДокументОбєкт, bool label)
+        {
+
+        }
+
         public static void BeforeDelete(ЗамовленняПостачальнику_Objest ДокументОбєкт)
         {
-            ДокументОбєкт.ClearSpendTheDocument();
+
         }
     }
 
@@ -1153,9 +1552,14 @@ namespace StorageAndTrade_1_0.Документи
 
         }
 
+        public static void SetDeletionLabel(ПоступленняТоварівТаПослуг_Objest ДокументОбєкт, bool label)
+        {
+
+        }
+
         public static void BeforeDelete(ПоступленняТоварівТаПослуг_Objest ДокументОбєкт)
         {
-            ДокументОбєкт.ClearSpendTheDocument();
+
         }
     }
 
@@ -1184,9 +1588,14 @@ namespace StorageAndTrade_1_0.Документи
 
         }
 
+        public static void SetDeletionLabel(ЗамовленняКлієнта_Objest ДокументОбєкт, bool label)
+        {
+
+        }
+
         public static void BeforeDelete(ЗамовленняКлієнта_Objest ДокументОбєкт)
         {
-            ДокументОбєкт.ClearSpendTheDocument();
+
         }
     }
 
@@ -1215,9 +1624,14 @@ namespace StorageAndTrade_1_0.Документи
 
         }
 
+        public static void SetDeletionLabel(РеалізаціяТоварівТаПослуг_Objest ДокументОбєкт, bool label)
+        {
+
+        }
+
         public static void BeforeDelete(РеалізаціяТоварівТаПослуг_Objest ДокументОбєкт)
         {
-            ДокументОбєкт.ClearSpendTheDocument();
+
         }
     }
 
@@ -1245,9 +1659,14 @@ namespace StorageAndTrade_1_0.Документи
 
         }
 
+        public static void SetDeletionLabel(ВстановленняЦінНоменклатури_Objest ДокументОбєкт, bool label)
+        {
+
+        }
+
         public static void BeforeDelete(ВстановленняЦінНоменклатури_Objest ДокументОбєкт)
         {
-            ДокументОбєкт.ClearSpendTheDocument();
+
         }
     }
 
@@ -1275,9 +1694,14 @@ namespace StorageAndTrade_1_0.Документи
 
         }
 
+        public static void SetDeletionLabel(ПрихіднийКасовийОрдер_Objest ДокументОбєкт, bool label)
+        {
+
+        }
+
         public static void BeforeDelete(ПрихіднийКасовийОрдер_Objest ДокументОбєкт)
         {
-            ДокументОбєкт.ClearSpendTheDocument();
+
         }
     }
 
@@ -1305,9 +1729,14 @@ namespace StorageAndTrade_1_0.Документи
 
         }
 
+        public static void SetDeletionLabel(РозхіднийКасовийОрдер_Objest ДокументОбєкт, bool label)
+        {
+
+        }
+
         public static void BeforeDelete(РозхіднийКасовийОрдер_Objest ДокументОбєкт)
         {
-            ДокументОбєкт.ClearSpendTheDocument();
+
         }
     }
 
@@ -1335,9 +1764,14 @@ namespace StorageAndTrade_1_0.Документи
 
         }
 
+        public static void SetDeletionLabel(ПереміщенняТоварів_Objest ДокументОбєкт, bool label)
+        {
+
+        }
+
         public static void BeforeDelete(ПереміщенняТоварів_Objest ДокументОбєкт)
         {
-            ДокументОбєкт.ClearSpendTheDocument();
+
         }
     }
 
@@ -1366,9 +1800,14 @@ namespace StorageAndTrade_1_0.Документи
 
         }
 
+        public static void SetDeletionLabel(ПоверненняТоварівПостачальнику_Objest ДокументОбєкт, bool label)
+        {
+
+        }
+
         public static void BeforeDelete(ПоверненняТоварівПостачальнику_Objest ДокументОбєкт)
         {
-            ДокументОбєкт.ClearSpendTheDocument();
+
         }
     }
 
@@ -1397,9 +1836,14 @@ namespace StorageAndTrade_1_0.Документи
 
         }
 
+        public static void SetDeletionLabel(ПоверненняТоварівВідКлієнта_Objest ДокументОбєкт, bool label)
+        {
+
+        }
+
         public static void BeforeDelete(ПоверненняТоварівВідКлієнта_Objest ДокументОбєкт)
         {
-            ДокументОбєкт.ClearSpendTheDocument();
+
         }
     }
 
@@ -1428,9 +1872,14 @@ namespace StorageAndTrade_1_0.Документи
 
         }
 
+        public static void SetDeletionLabel(АктВиконанихРобіт_Objest ДокументОбєкт, bool label)
+        {
+
+        }
+
         public static void BeforeDelete(АктВиконанихРобіт_Objest ДокументОбєкт)
         {
-            ДокументОбєкт.ClearSpendTheDocument();
+
         }
     }
 
@@ -1458,9 +1907,14 @@ namespace StorageAndTrade_1_0.Документи
 
         }
 
+        public static void SetDeletionLabel(ВведенняЗалишків_Objest ДокументОбєкт, bool label)
+        {
+
+        }
+
         public static void BeforeDelete(ВведенняЗалишків_Objest ДокументОбєкт)
         {
-            ДокументОбєкт.ClearSpendTheDocument();
+
         }
     }
 
@@ -1488,9 +1942,14 @@ namespace StorageAndTrade_1_0.Документи
 
         }
 
+        public static void SetDeletionLabel(ПсуванняТоварів_Objest ДокументОбєкт, bool label)
+        {
+
+        }
+
         public static void BeforeDelete(ПсуванняТоварів_Objest ДокументОбєкт)
         {
-            ДокументОбєкт.ClearSpendTheDocument();
+
         }
     }
 
@@ -1518,9 +1977,14 @@ namespace StorageAndTrade_1_0.Документи
 
         }
 
+        public static void SetDeletionLabel(ВнутрішнєСпоживанняТоварів_Objest ДокументОбєкт, bool label)
+        {
+
+        }
+
         public static void BeforeDelete(ВнутрішнєСпоживанняТоварів_Objest ДокументОбєкт)
         {
-            ДокументОбєкт.ClearSpendTheDocument();
+
         }
     }
 
@@ -1549,9 +2013,14 @@ namespace StorageAndTrade_1_0.Документи
 
         }
 
+        public static void SetDeletionLabel(РахунокФактура_Objest ДокументОбєкт, bool label)
+        {
+
+        }
+
         public static void BeforeDelete(РахунокФактура_Objest ДокументОбєкт)
         {
-            ДокументОбєкт.ClearSpendTheDocument();
+
         }
     }
 
@@ -1579,9 +2048,14 @@ namespace StorageAndTrade_1_0.Документи
 
         }
 
+        public static void SetDeletionLabel(РозміщенняТоварівНаСкладі_Objest ДокументОбєкт, bool label)
+        {
+
+        }
+
         public static void BeforeDelete(РозміщенняТоварівНаСкладі_Objest ДокументОбєкт)
         {
-            ДокументОбєкт.ClearSpendTheDocument();
+
         }
     }
 
@@ -1609,9 +2083,14 @@ namespace StorageAndTrade_1_0.Документи
 
         }
 
+        public static void SetDeletionLabel(ПереміщенняТоварівНаСкладі_Objest ДокументОбєкт, bool label)
+        {
+
+        }
+
         public static void BeforeDelete(ПереміщенняТоварівНаСкладі_Objest ДокументОбєкт)
         {
-            ДокументОбєкт.ClearSpendTheDocument();
+
         }
     }
 
@@ -1639,9 +2118,14 @@ namespace StorageAndTrade_1_0.Документи
 
         }
 
+        public static void SetDeletionLabel(ЗбіркаТоварівНаСкладі_Objest ДокументОбєкт, bool label)
+        {
+
+        }
+
         public static void BeforeDelete(ЗбіркаТоварівНаСкладі_Objest ДокументОбєкт)
         {
-            ДокументОбєкт.ClearSpendTheDocument();
+
         }
     }
 
@@ -1669,9 +2153,14 @@ namespace StorageAndTrade_1_0.Документи
 
         }
 
+        public static void SetDeletionLabel(РозміщенняНоменклатуриПоКоміркам_Objest ДокументОбєкт, bool label)
+        {
+
+        }
+
         public static void BeforeDelete(РозміщенняНоменклатуриПоКоміркам_Objest ДокументОбєкт)
         {
-            ДокументОбєкт.ClearSpendTheDocument();
+
         }
     }
 }
