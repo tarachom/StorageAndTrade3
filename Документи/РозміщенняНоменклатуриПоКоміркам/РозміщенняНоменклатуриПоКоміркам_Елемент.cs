@@ -273,20 +273,8 @@ namespace StorageAndTrade
         {
             if (spendDoc)
             {
-                try
-                {
-                    if (!РозміщенняНоменклатуриПоКоміркам_Objest.SpendTheDocument(РозміщенняНоменклатуриПоКоміркам_Objest.ДатаДок))
-                    {
-                        РозміщенняНоменклатуриПоКоміркам_Objest.ClearSpendTheDocument();
-                        ФункціїДляПовідомлень.ВідкритиТермінал();
-                    }
-                }
-                catch (Exception exp)
-                {
-                    РозміщенняНоменклатуриПоКоміркам_Objest.ClearSpendTheDocument();
-                    Message.Error(Program.GeneralForm, exp.Message);
-                    return;
-                }
+                if (!РозміщенняНоменклатуриПоКоміркам_Objest.SpendTheDocument(РозміщенняНоменклатуриПоКоміркам_Objest.ДатаДок))
+                    ФункціїДляПовідомлень.ВідкритиТермінал();
             }
             else
                 РозміщенняНоменклатуриПоКоміркам_Objest.ClearSpendTheDocument();

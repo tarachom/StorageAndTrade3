@@ -512,20 +512,8 @@ namespace StorageAndTrade
 
             if (spendDoc)
             {
-                try
-                {
-                    if (!ПереміщенняТоварівНаСкладі_Objest.SpendTheDocument(ПереміщенняТоварівНаСкладі_Objest.ДатаДок))
-                    {
-                        ПереміщенняТоварівНаСкладі_Objest.ClearSpendTheDocument();
-                        ФункціїДляПовідомлень.ВідкритиТермінал();
-                    }
-                }
-                catch (Exception exp)
-                {
-                    ПереміщенняТоварівНаСкладі_Objest.ClearSpendTheDocument();
-                    Message.Error(Program.GeneralForm, exp.Message);
-                    return;
-                }
+                if (!ПереміщенняТоварівНаСкладі_Objest.SpendTheDocument(ПереміщенняТоварівНаСкладі_Objest.ДатаДок))
+                    ФункціїДляПовідомлень.ВідкритиТермінал();
             }
             else
                 ПереміщенняТоварівНаСкладі_Objest.ClearSpendTheDocument();

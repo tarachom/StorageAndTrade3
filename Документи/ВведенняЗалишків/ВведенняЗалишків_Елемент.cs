@@ -349,8 +349,8 @@ namespace StorageAndTrade
             ВведенняЗалишків_Objest.Підрозділ = Підрозділ.Pointer;
             ВведенняЗалишків_Objest.Автор = Автор.Pointer;
 
-            ВведенняЗалишків_Objest.КлючовіСловаДляПошуку = 
-                КлючовіСловаДляПошуку() + 
+            ВведенняЗалишків_Objest.КлючовіСловаДляПошуку =
+                КлючовіСловаДляПошуку() +
                 Товари.КлючовіСловаДляПошуку() +
                 БанківськіРахунки.КлючовіСловаДляПошуку() +
                 Каси.КлючовіСловаДляПошуку() +
@@ -391,20 +391,8 @@ namespace StorageAndTrade
         {
             if (spendDoc)
             {
-                try
-                {
-                    if (!ВведенняЗалишків_Objest.SpendTheDocument(ВведенняЗалишків_Objest.ДатаДок))
-                    {
-                        ВведенняЗалишків_Objest.ClearSpendTheDocument();
-                        ФункціїДляПовідомлень.ВідкритиТермінал();
-                    }
-                }
-                catch (Exception exp)
-                {
-                    ВведенняЗалишків_Objest.ClearSpendTheDocument();
-                    Message.Error(Program.GeneralForm, exp.Message);
-                    return;
-                }
+                if (!ВведенняЗалишків_Objest.SpendTheDocument(ВведенняЗалишків_Objest.ДатаДок))
+                    ФункціїДляПовідомлень.ВідкритиТермінал();
             }
             else
                 ВведенняЗалишків_Objest.ClearSpendTheDocument();

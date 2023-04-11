@@ -41,6 +41,7 @@ namespace StorageAndTrade
         CancellationTokenSource? CancellationTokenPageService;
 
         Button bSpendTheDocument;
+        Button bClearDeletionLabel;
         Button bStop;
         ScrolledWindow scrollMessage;
         VBox vBoxMessage = new VBox();
@@ -60,12 +61,14 @@ namespace StorageAndTrade
 
             bSpendTheDocument = new Button("Перепровести документи");
             bSpendTheDocument.Clicked += OnSpendTheDocument;
-
             hBoxBotton.PackStart(bSpendTheDocument, false, false, 10);
+
+            bClearDeletionLabel = new Button("Очистити помічені на видалення");
+            bClearDeletionLabel.Clicked += OnClearDeletionLabel;
+            hBoxBotton.PackStart(bClearDeletionLabel, false, false, 10);
 
             bStop = new Button("Зупинити") { Sensitive = false };
             bStop.Clicked += OnStopClick;
-
             hBoxBotton.PackStart(bStop, false, false, 10);
 
             PackStart(hBoxBotton, false, false, 10);
@@ -86,6 +89,7 @@ namespace StorageAndTrade
                 delegate
                 {
                     bSpendTheDocument.Sensitive = sensitive;
+                    bClearDeletionLabel.Sensitive = sensitive;
                     bStop.Sensitive = !sensitive;
                 }
             );
@@ -154,13 +158,14 @@ namespace StorageAndTrade
         {
             ButtonSensitive(false);
 
+            int counter = 0;
             Константи.Системні.ЗупинитиФоновіЗадачі_Const = true;
 
             ФункціїДляПовідомлень.ОчиститиПовідомлення();
 
-            int counter = 0;
-
             Журнали.Journal_Select journalSelect = new Журнали.Journal_Select();
+
+            // Вибірка всіх документів. Встановлюється максимальний період
             journalSelect.Select(DateTime.Parse("01.01.2000 00:00:00"), DateTime.Now);
 
             while (journalSelect.MoveNext())
@@ -168,69 +173,94 @@ namespace StorageAndTrade
                 if (CancellationTokenPageService!.IsCancellationRequested)
                     break;
 
-                if (journalSelect.Current.Spend)
+                //Обробляються тільки не помічені на видалення і проведені
+                if (!journalSelect.Current.DeletionLabel && journalSelect.Current.Spend)
                 {
                     DocumentObject? doc = journalSelect.GetDocumentObject(true);
-
                     if (doc != null)
                     {
-                        if (doc.GetType().GetMember("SpendTheDocument").Length == 1)
+                        //Для документу викликається функція проведення
+                        object? obj = doc.GetType().InvokeMember("SpendTheDocument",
+                             BindingFlags.InvokeMethod, null, doc, new object[] { journalSelect.Current.SpendDate });
+
+                        if (obj != null ? (bool)obj : false)
                         {
-                            try
-                            {
-                                // doc.GetType().InvokeMember("Save",
-                                //      BindingFlags.InvokeMethod, null, doc, new object[] { });
-
-                                object? obj = doc.GetType().InvokeMember("SpendTheDocument",
-                                     BindingFlags.InvokeMethod, null, doc, new object[] { journalSelect.Current.SpendDate });
-
-                                counter++;
-
-                                bool rezult = obj != null ? (bool)obj : false;
-
-                                if (!rezult)
-                                {
-                                    List<Dictionary<string, object>> listRow = ФункціїДляПовідомлень.ПрочитатиПовідомленняПроПомилку();
-                                    string msg = "";
-
-                                    foreach (Dictionary<string, object> row in listRow)
-                                        msg += row["Повідомлення"].ToString();
-
-                                    CreateMessage(TypeMessage.Error, msg);
-                                    CreateMessage(TypeMessage.Info, "\n\nПроведення документів перервано!\n\n");
-
-                                    //Очистка проводок документу
-                                    doc.GetType().InvokeMember("ClearSpendTheDocument", BindingFlags.InvokeMethod, null, doc, new object[] { });
-
-                                    ФункціїДляПовідомлень.ВідкритиТермінал();
-                                    break;
-                                }
-                                else
-                                    CreateMessage(TypeMessage.Ok, journalSelect.Current.TypeDocument + " " + journalSelect.Current.SpendDate);
-                            }
-                            catch (Exception ex)
-                            {
-                                CreateMessage(TypeMessage.Error, ex.Message);
-
-                                //Очистка проводок документу
-                                doc.GetType().InvokeMember("ClearSpendTheDocument", BindingFlags.InvokeMethod, null, doc, new object[] { });
-                            }
+                            //Документ проведений ОК
+                            CreateMessage(TypeMessage.Ok, journalSelect.Current.TypeDocument + " " + journalSelect.Current.SpendDate);
                         }
+                        else
+                        {
+                            //Документ НЕ проведений Error
+
+                            //Вивід помилок в окремому вікні
+                            ФункціїДляПовідомлень.ВідкритиТермінал();
+
+                            //Додатково вивід у помилок у це вікно
+                            List<Dictionary<string, object>> listRow = ФункціїДляПовідомлень.ПрочитатиПовідомленняПроПомилку();
+
+                            string msg = "";
+                            foreach (Dictionary<string, object> row in listRow)
+                                msg += row["Повідомлення"].ToString();
+
+                            CreateMessage(TypeMessage.Error, msg);
+                            CreateMessage(TypeMessage.Info, "\n\nПроведення документів перервано!\n\n");
+                            
+                            break;
+                        }
+
+                        counter++;
                     }
                 }
             }
 
-            CreateMessage(TypeMessage.None, "Готово!\n\n\n");
-            CreateMessage(TypeMessage.Info, "Проведено документів: " + counter);
+            if (CancellationTokenPageService != null)
+                Program.ListCancellationToken.Remove(CancellationTokenPageService);
 
             Константи.Системні.ЗупинитиФоновіЗадачі_Const = false;
             ButtonSensitive(true);
+
+            CreateMessage(TypeMessage.None, "Готово!\n\n\n");
+            CreateMessage(TypeMessage.Info, "Проведено документів: " + counter);
+            Thread.Sleep(1000);
+            CreateMessage(TypeMessage.None, "\n\n\n");
+        }
+
+        #endregion
+
+        #region Clear DeletionLabel
+
+        void OnClearDeletionLabel(object? sender, EventArgs args)
+        {
+            ClearMessage();
+
+            Program.ListCancellationToken.Add(CancellationTokenPageService = new CancellationTokenSource());
+
+            Thread thread = new Thread(new ThreadStart(ClearDeletionLabel));
+            thread.Start();
+        }
+
+        void ClearDeletionLabel()
+        {
+            ButtonSensitive(false);
+
+            // if (CancellationTokenPageService!.IsCancellationRequested)
+            //     break;
+
+
+
+
+            CreateMessage(TypeMessage.None, "Готово!\n\n\n");
+            ButtonSensitive(true);
+
+            if (CancellationTokenPageService != null)
+                Program.ListCancellationToken.Remove(CancellationTokenPageService);
 
             Thread.Sleep(1000);
             CreateMessage(TypeMessage.None, "\n\n\n");
         }
 
         #endregion
+
 
         void OnStopClick(object? sender, EventArgs args)
         {

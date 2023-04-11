@@ -385,7 +385,7 @@ namespace StorageAndTrade
             ПрихіднийКасовийОрдер_Objest.Курс = Курс.Value;
             ПрихіднийКасовийОрдер_Objest.СтаттяРухуКоштів = СтаттяРухуКоштів.Pointer;
             ПрихіднийКасовийОрдер_Objest.Основа = Основа.Pointer;
-            
+
             ПрихіднийКасовийОрдер_Objest.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку();
         }
 
@@ -456,20 +456,8 @@ namespace StorageAndTrade
         {
             if (spendDoc)
             {
-                try
-                {
-                    if (!ПрихіднийКасовийОрдер_Objest.SpendTheDocument(ПрихіднийКасовийОрдер_Objest.ДатаДок))
-                    {
-                        ПрихіднийКасовийОрдер_Objest.ClearSpendTheDocument();
-                        ФункціїДляПовідомлень.ВідкритиТермінал();
-                    }
-                }
-                catch (Exception exp)
-                {
-                    ПрихіднийКасовийОрдер_Objest.ClearSpendTheDocument();
-                    Message.Error(Program.GeneralForm, exp.Message);
-                    return;
-                }
+                if (!ПрихіднийКасовийОрдер_Objest.SpendTheDocument(ПрихіднийКасовийОрдер_Objest.ДатаДок))
+                    ФункціїДляПовідомлень.ВідкритиТермінал();
             }
             else
                 ПрихіднийКасовийОрдер_Objest.ClearSpendTheDocument();

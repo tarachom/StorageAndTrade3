@@ -534,20 +534,8 @@ namespace StorageAndTrade
 
             if (spendDoc)
             {
-                try
-                {
-                    if (!РахунокФактура_Objest.SpendTheDocument(РахунокФактура_Objest.ДатаДок))
-                    {
-                        РахунокФактура_Objest.ClearSpendTheDocument();
-                        ФункціїДляПовідомлень.ВідкритиТермінал();
-                    }
-                }
-                catch (Exception exp)
-                {
-                    РахунокФактура_Objest.ClearSpendTheDocument();
-                    Message.Error(Program.GeneralForm, exp.Message);
-                    return;
-                }
+                if (!РахунокФактура_Objest.SpendTheDocument(РахунокФактура_Objest.ДатаДок))
+                    ФункціїДляПовідомлень.ВідкритиТермінал();
             }
             else
                 РахунокФактура_Objest.ClearSpendTheDocument();
