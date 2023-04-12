@@ -507,9 +507,6 @@ namespace StorageAndTrade
             ВнутрішнєСпоживанняТоварів_Pointer ВнутрішнєСпоживанняТоварів_Pointer = new ВнутрішнєСпоживанняТоварів_Pointer(new UnigueID(uid));
             ВнутрішнєСпоживанняТоварів_Objest ВнутрішнєСпоживанняТоварів_Objest = ВнутрішнєСпоживанняТоварів_Pointer.GetDocumentObject(true);
 
-            //Збереження для запуску тригерів
-            ВнутрішнєСпоживанняТоварів_Objest.Save();
-
             if (spendDoc)
             {
                 if (!ВнутрішнєСпоживанняТоварів_Objest.SpendTheDocument(ВнутрішнєСпоживанняТоварів_Objest.ДатаДок))

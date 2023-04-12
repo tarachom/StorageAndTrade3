@@ -529,9 +529,6 @@ namespace StorageAndTrade
             РахунокФактура_Pointer РахунокФактура_Pointer = new РахунокФактура_Pointer(new UnigueID(uid));
             РахунокФактура_Objest РахунокФактура_Objest = РахунокФактура_Pointer.GetDocumentObject(true);
 
-            //Збереження для запуску тригерів
-            РахунокФактура_Objest.Save();
-
             if (spendDoc)
             {
                 if (!РахунокФактура_Objest.SpendTheDocument(РахунокФактура_Objest.ДатаДок))

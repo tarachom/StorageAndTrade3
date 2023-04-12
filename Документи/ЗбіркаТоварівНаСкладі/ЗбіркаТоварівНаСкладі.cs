@@ -507,9 +507,6 @@ namespace StorageAndTrade
             ЗбіркаТоварівНаСкладі_Pointer ЗбіркаТоварівНаСкладі_Pointer = new ЗбіркаТоварівНаСкладі_Pointer(new UnigueID(uid));
             ЗбіркаТоварівНаСкладі_Objest ЗбіркаТоварівНаСкладі_Objest = ЗбіркаТоварівНаСкладі_Pointer.GetDocumentObject(true);
 
-            //Збереження для запуску тригерів
-            ЗбіркаТоварівНаСкладі_Objest.Save();
-
             if (spendDoc)
             {
                 if (!ЗбіркаТоварівНаСкладі_Objest.SpendTheDocument(ЗбіркаТоварівНаСкладі_Objest.ДатаДок))

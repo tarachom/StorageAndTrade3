@@ -208,7 +208,7 @@ WHERE
                 if (!запис.Характеристика.IsEmpty())
                 {
                     query += $@"
-AND ЦіниНоменклатури.{ЦіниНоменклатури_Const.ХарактеристикаНоменклатури} = '{запис.Характеристика.UnigueID}'
+    AND ЦіниНоменклатури.{ЦіниНоменклатури_Const.ХарактеристикаНоменклатури} = '{запис.Характеристика.UnigueID}'
 ";
                 }
 
@@ -254,6 +254,7 @@ LIMIT 1
             TreeViewGrid.Selection.Mode = SelectionMode.Multiple;
             TreeViewGrid.ActivateOnSingleClick = true;
             TreeViewGrid.ButtonPressEvent += OnButtonPressEvent;
+            TreeViewGrid.KeyReleaseEvent += OnKeyReleaseEvent;
 
             scrollTree.Add(TreeViewGrid);
             PackStart(scrollTree, true, true, 0);
@@ -853,6 +854,23 @@ LIMIT 1
             }
         }
 
+        void OnKeyReleaseEvent(object? sender, KeyReleaseEventArgs args)
+        {
+            switch (args.Event.Key)
+            {
+                case Gdk.Key.Insert:
+                    {
+                        OnAddClick(null, new EventArgs());
+                        break;
+                    }
+                case Gdk.Key.Delete:
+                    {
+                        OnDeleteClick(TreeViewGrid, new EventArgs());
+                        break;
+                    }
+            }
+        }
+
         #endregion
 
         #region ToolBar
@@ -864,7 +882,8 @@ LIMIT 1
 
             Запис.ПісляДодаванняНового(запис);
 
-            Store.AppendValues(запис.ToArray());
+            TreeIter iter = Store.AppendValues(запис.ToArray());
+            TreeViewGrid.SetCursor(Store.GetPath(iter), TreeViewGrid.Columns[0], false);
         }
 
         void OnCopyClick(object? sender, EventArgs args)

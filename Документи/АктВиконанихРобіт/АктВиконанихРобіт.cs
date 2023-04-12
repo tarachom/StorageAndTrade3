@@ -529,9 +529,6 @@ namespace StorageAndTrade
             АктВиконанихРобіт_Pointer АктВиконанихРобіт_Pointer = new АктВиконанихРобіт_Pointer(new UnigueID(uid));
             АктВиконанихРобіт_Objest АктВиконанихРобіт_Objest = АктВиконанихРобіт_Pointer.GetDocumentObject(true);
 
-            //Збереження для запуску тригерів
-            АктВиконанихРобіт_Objest.Save();
-
             if (spendDoc)
             {
                 if (!АктВиконанихРобіт_Objest.SpendTheDocument(АктВиконанихРобіт_Objest.ДатаДок))

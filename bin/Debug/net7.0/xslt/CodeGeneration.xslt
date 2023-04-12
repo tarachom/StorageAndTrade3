@@ -753,6 +753,19 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.<xsl:value-of select="$DirectoryName"/>");
         }
+
+        public string GetPresentation()
+        {
+            return base.BasePresentation(
+                <xsl:text>new string[] { </xsl:text>
+                <xsl:for-each select="Fields/Field[IsPresentation=1]">
+                  <xsl:if test="position() != 1">
+                    <xsl:text>, </xsl:text>
+                  </xsl:if>
+                  <xsl:text>"</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"</xsl:text>
+                </xsl:for-each> }
+            );
+        }
         
         <xsl:for-each select="Fields/Field">
           <xsl:text>public </xsl:text>
@@ -800,13 +813,13 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
         public string GetPresentation()
         {
             return Назва = base.BasePresentation(
-              <xsl:text>new string[] { </xsl:text>
-              <xsl:for-each select="Fields/Field[IsPresentation=1]">
-                <xsl:if test="position() != 1">
-                  <xsl:text>, </xsl:text>
-                </xsl:if>
-                <xsl:text>"</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"</xsl:text>
-              </xsl:for-each> }
+                <xsl:text>new string[] { </xsl:text>
+                <xsl:for-each select="Fields/Field[IsPresentation=1]">
+                  <xsl:if test="position() != 1">
+                    <xsl:text>, </xsl:text>
+                  </xsl:if>
+                  <xsl:text>"</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"</xsl:text>
+                </xsl:for-each> }
             );
         }
 		

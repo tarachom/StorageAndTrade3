@@ -27,6 +27,8 @@ using AccountingSoftware;
 using Configurator;
 
 using Конфа = StorageAndTrade_1_0;
+using Константи = StorageAndTrade_1_0.Константи;
+using Перелічення = StorageAndTrade_1_0.Перелічення;
 
 namespace StorageAndTrade
 {
@@ -110,6 +112,10 @@ namespace StorageAndTrade
                 {
                     Конфа.Config.ReadAllConstants();
 
+                    //Значення констант за замовчуванням
+                    if ((int)Константи.ЖурналиДокументів.ОсновнийТипПеріоду_Const == 0)
+                        Константи.ЖурналиДокументів.ОсновнийТипПеріоду_Const = Перелічення.ТипПеріодуДляЖурналівДокументів.ВесьПеріод;
+
                     Program.GeneralForm = new FormStorageAndTrade();
                     Program.GeneralForm.OpenConfigurationParam = ConfigurationParamCollection.GetConfigurationParam(selectedRows[0].Name);
                     Program.GeneralForm.Show();
@@ -130,22 +136,9 @@ namespace StorageAndTrade
                 {
                     Message.Error(this, @"Error: Відсутня таблиця tab_constants. Потрібно відкрити Конфігуратор і зберегти конфігурацію -  
                     (Меню: Конфігурація/Зберегти конфігурацію - дальше Збереження змін. Крок 1, Збереження змін. Крок 2)");
+                    
                     return;
                 }
-
-/*
-                foreach (KeyValuePair<string, ConfigurationDocuments> item in Конфа.Config.Kernel.Conf.Documents)
-                {
-                    string query = @$"ALTER TABLE IF EXISTS {item.Value.Table} ADD COLUMN deletion_label boolean NOT NULL DEFAULT false";
-                    Конфа.Config.Kernel.DataBase.ExecuteSQL(query);
-
-                    string index = @$"CREATE INDEX {item.Value.Table}_deletion_label_idx ON {item.Value.Table} (deletion_label)";
-                    Конфа.Config.Kernel.DataBase.ExecuteSQL(index);
-
-                    Console.WriteLine(item.Value.Table);
-                }
-*/
-                
             }
         }
     }

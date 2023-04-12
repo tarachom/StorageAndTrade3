@@ -172,6 +172,7 @@ namespace StorageAndTrade
             TreeViewGrid.Selection.Mode = SelectionMode.Multiple;
             TreeViewGrid.ActivateOnSingleClick = true;
             TreeViewGrid.ButtonPressEvent += OnButtonPressEvent;
+            TreeViewGrid.KeyReleaseEvent += OnKeyReleaseEvent;
 
             scrollTree.Add(TreeViewGrid);
             PackStart(scrollTree, true, true, 0);
@@ -665,6 +666,23 @@ namespace StorageAndTrade
             }
         }
 
+        void OnKeyReleaseEvent(object? sender, KeyReleaseEventArgs args)
+        {
+            switch (args.Event.Key)
+            {
+                case Gdk.Key.Insert:
+                    {
+                        OnAddClick(null, new EventArgs());
+                        break;
+                    }
+                case Gdk.Key.Delete:
+                    {
+                        OnDeleteClick(TreeViewGrid, new EventArgs());
+                        break;
+                    }
+            }
+        }
+
         #endregion
 
         #region ToolBar
@@ -674,7 +692,8 @@ namespace StorageAndTrade
             Запис запис = new Запис();
             Записи.Add(запис);
 
-            Store.AppendValues(запис.ToArray());
+            TreeIter iter = Store.AppendValues(запис.ToArray());
+            TreeViewGrid.SetCursor(Store.GetPath(iter), TreeViewGrid.Columns[0], false);
         }
 
         void OnCopyClick(object? sender, EventArgs args)

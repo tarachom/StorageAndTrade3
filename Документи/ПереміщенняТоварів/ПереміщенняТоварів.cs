@@ -507,9 +507,6 @@ namespace StorageAndTrade
             ПереміщенняТоварів_Pointer ПереміщенняТоварів_Pointer = new ПереміщенняТоварів_Pointer(new UnigueID(uid));
             ПереміщенняТоварів_Objest ПереміщенняТоварів_Objest = ПереміщенняТоварів_Pointer.GetDocumentObject(true);
 
-            //Збереження для запуску тригерів
-            ПереміщенняТоварів_Objest.Save();
-
             if (spendDoc)
             {
                 if (!ПереміщенняТоварів_Objest.SpendTheDocument(ПереміщенняТоварів_Objest.ДатаДок))

@@ -34,15 +34,13 @@ namespace StorageAndTrade
 {
     class ФункціїДляПовідомлень
     {
-        public static void ДодатиПовідомленняПроПомилку(DateTime Дата,
-            string НазваПроцесу, Guid Обєкт,
-            string ТипОбєкту, string НазваОбєкту, string Повідомлення)
+        public static void ДодатиПовідомленняПроПомилку(DateTime Дата, string НазваПроцесу, Guid Обєкт, string ТипОбєкту, string НазваОбєкту, string Повідомлення)
         {
             Системні.ПовідомленняТаПомилки_Помилки_TablePart повідомленняТаПомилки_Помилки_TablePart =
                 new Системні.ПовідомленняТаПомилки_Помилки_TablePart();
 
-            Системні.ПовідомленняТаПомилки_Помилки_TablePart.Record record =
-                new Системні.ПовідомленняТаПомилки_Помилки_TablePart.Record();
+            Системні.ПовідомленняТаПомилки_Помилки_TablePart.Record record = new Системні.ПовідомленняТаПомилки_Помилки_TablePart.Record();
+            повідомленняТаПомилки_Помилки_TablePart.Records.Add(record);
 
             record.Дата = DateTime.Now;
             record.НазваПроцесу = НазваПроцесу;
@@ -51,15 +49,13 @@ namespace StorageAndTrade
             record.НазваОбєкту = НазваОбєкту;
             record.Повідомлення = Повідомлення;
 
-            повідомленняТаПомилки_Помилки_TablePart.Records.Add(record);
             повідомленняТаПомилки_Помилки_TablePart.Save(false);
         }
 
         public static void ОчиститиПовідомлення()
         {
             string query = $@"
-DELETE FROM {Системні.ПовідомленняТаПомилки_Помилки_TablePart.TABLE}
-";
+DELETE FROM {Системні.ПовідомленняТаПомилки_Помилки_TablePart.TABLE}";
 
             Конфа.Config.Kernel!.DataBase.ExecuteSQL(query);
         }

@@ -545,9 +545,6 @@ namespace StorageAndTrade
             ЗамовленняКлієнта_Pointer ЗамовленняКлієнта_Pointer = new ЗамовленняКлієнта_Pointer(new UnigueID(uid));
             ЗамовленняКлієнта_Objest ЗамовленняКлієнта_Objest = ЗамовленняКлієнта_Pointer.GetDocumentObject(true);
 
-            //Збереження для запуску тригерів
-            ЗамовленняКлієнта_Objest.Save();
-
             if (spendDoc)
             {
                 if (!ЗамовленняКлієнта_Objest.SpendTheDocument(ЗамовленняКлієнта_Objest.ДатаДок))

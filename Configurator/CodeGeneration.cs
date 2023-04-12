@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 10.04.2023 15:33:10
+ * Дата конфігурації: 13.04.2023 00:36:34
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -2054,6 +2054,13 @@ namespace StorageAndTrade_1_0.Довідники
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.Організації");
         }
+
+        public string GetPresentation()
+        {
+            return base.BasePresentation(
+                new string[] { "col_a1" }
+            );
+        }
         
         public string Назва { get; set; }
         public string Код { get; set; }
@@ -2099,7 +2106,7 @@ namespace StorageAndTrade_1_0.Довідники
         public string GetPresentation()
         {
             return Назва = base.BasePresentation(
-              new string[] { "col_a1" }
+                new string[] { "col_a1" }
             );
         }
 		
@@ -2394,6 +2401,13 @@ namespace StorageAndTrade_1_0.Довідники
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.Номенклатура");
         }
+
+        public string GetPresentation()
+        {
+            return base.BasePresentation(
+                new string[] { "col_b1" }
+            );
+        }
         
         public string Назва { get; set; }
         public string Код { get; set; }
@@ -2441,7 +2455,7 @@ namespace StorageAndTrade_1_0.Довідники
         public string GetPresentation()
         {
             return Назва = base.BasePresentation(
-              new string[] { "col_b1" }
+                new string[] { "col_b1" }
             );
         }
 		
@@ -2660,6 +2674,13 @@ namespace StorageAndTrade_1_0.Довідники
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.Виробники");
         }
+
+        public string GetPresentation()
+        {
+            return base.BasePresentation(
+                new string[] { "col_b6" }
+            );
+        }
         
         public string Назва { get; set; }
         public string Код { get; set; }
@@ -2695,7 +2716,7 @@ namespace StorageAndTrade_1_0.Довідники
         public string GetPresentation()
         {
             return Назва = base.BasePresentation(
-              new string[] { "col_b6" }
+                new string[] { "col_b6" }
             );
         }
 		
@@ -2847,6 +2868,13 @@ namespace StorageAndTrade_1_0.Довідники
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.ВидиНоменклатури");
         }
+
+        public string GetPresentation()
+        {
+            return base.BasePresentation(
+                new string[] { "col_b8" }
+            );
+        }
         
         public string Назва { get; set; }
         public string Код { get; set; }
@@ -2885,7 +2913,7 @@ namespace StorageAndTrade_1_0.Довідники
         public string GetPresentation()
         {
             return Назва = base.BasePresentation(
-              new string[] { "col_b8" }
+                new string[] { "col_b8" }
             );
         }
 		
@@ -3032,6 +3060,13 @@ namespace StorageAndTrade_1_0.Довідники
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.ПакуванняОдиниціВиміру");
         }
+
+        public string GetPresentation()
+        {
+            return base.BasePresentation(
+                new string[] { "col_c1" }
+            );
+        }
         
         public string Назва { get; set; }
         public string Код { get; set; }
@@ -3069,7 +3104,7 @@ namespace StorageAndTrade_1_0.Довідники
         public string GetPresentation()
         {
             return Назва = base.BasePresentation(
-              new string[] { "col_c1" }
+                new string[] { "col_c1" }
             );
         }
 		
@@ -3221,6 +3256,13 @@ namespace StorageAndTrade_1_0.Довідники
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.Валюти");
         }
+
+        public string GetPresentation()
+        {
+            return base.BasePresentation(
+                new string[] { "col_c5" }
+            );
+        }
         
         public string Назва { get; set; }
         public string КороткаНазва { get; set; }
@@ -3259,7 +3301,7 @@ namespace StorageAndTrade_1_0.Довідники
         public string GetPresentation()
         {
             return Назва = base.BasePresentation(
-              new string[] { "col_c5" }
+                new string[] { "col_c5" }
             );
         }
 		
@@ -3433,6 +3475,13 @@ namespace StorageAndTrade_1_0.Довідники
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.Контрагенти");
         }
+
+        public string GetPresentation()
+        {
+            return base.BasePresentation(
+                new string[] { "col_c7" }
+            );
+        }
         
         public string Назва { get; set; }
         public string Код { get; set; }
@@ -3477,7 +3526,7 @@ namespace StorageAndTrade_1_0.Довідники
         public string GetPresentation()
         {
             return Назва = base.BasePresentation(
-              new string[] { "col_c7" }
+                new string[] { "col_c7" }
             );
         }
 		
@@ -3835,6 +3884,13 @@ namespace StorageAndTrade_1_0.Довідники
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.Склади");
         }
+
+        public string GetPresentation()
+        {
+            return base.BasePresentation(
+                new string[] { "col_d9" }
+            );
+        }
         
         public string Назва { get; set; }
         public string Код { get; set; }
@@ -3879,7 +3935,7 @@ namespace StorageAndTrade_1_0.Довідники
         public string GetPresentation()
         {
             return Назва = base.BasePresentation(
-              new string[] { "col_d9" }
+                new string[] { "col_d9" }
             );
         }
 		
@@ -4127,6 +4183,13 @@ namespace StorageAndTrade_1_0.Довідники
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.ВидиЦін");
         }
+
+        public string GetPresentation()
+        {
+            return base.BasePresentation(
+                new string[] { "col_e9" }
+            );
+        }
         
         public string Назва { get; set; }
         public string Код { get; set; }
@@ -4163,7 +4226,7 @@ namespace StorageAndTrade_1_0.Довідники
         public string GetPresentation()
         {
             return Назва = base.BasePresentation(
-              new string[] { "col_e9" }
+                new string[] { "col_e9" }
             );
         }
 		
@@ -4305,6 +4368,13 @@ namespace StorageAndTrade_1_0.Довідники
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.ВидиЦінПостачальників");
         }
+
+        public string GetPresentation()
+        {
+            return base.BasePresentation(
+                new string[] { "col_f3" }
+            );
+        }
         
         public string Назва { get; set; }
         public string Код { get; set; }
@@ -4341,7 +4411,7 @@ namespace StorageAndTrade_1_0.Довідники
         public string GetPresentation()
         {
             return Назва = base.BasePresentation(
-              new string[] { "col_f3" }
+                new string[] { "col_f3" }
             );
         }
 		
@@ -4500,6 +4570,13 @@ namespace StorageAndTrade_1_0.Довідники
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.Користувачі");
         }
+
+        public string GetPresentation()
+        {
+            return base.BasePresentation(
+                new string[] { "col_f6" }
+            );
+        }
         
         public string Назва { get; set; }
         public string Код { get; set; }
@@ -4541,7 +4618,7 @@ namespace StorageAndTrade_1_0.Довідники
         public string GetPresentation()
         {
             return Назва = base.BasePresentation(
-              new string[] { "col_f6" }
+                new string[] { "col_f6" }
             );
         }
 		
@@ -4802,6 +4879,13 @@ namespace StorageAndTrade_1_0.Довідники
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.ФізичніОсоби");
         }
+
+        public string GetPresentation()
+        {
+            return base.BasePresentation(
+                new string[] { "col_g7" }
+            );
+        }
         
         public string Назва { get; set; }
         public string Код { get; set; }
@@ -4843,7 +4927,7 @@ namespace StorageAndTrade_1_0.Довідники
         public string GetPresentation()
         {
             return Назва = base.BasePresentation(
-              new string[] { "col_g7" }
+                new string[] { "col_g7" }
             );
         }
 		
@@ -5087,6 +5171,13 @@ namespace StorageAndTrade_1_0.Довідники
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.СтруктураПідприємства");
         }
+
+        public string GetPresentation()
+        {
+            return base.BasePresentation(
+                new string[] { "col_h8" }
+            );
+        }
         
         public string Назва { get; set; }
         public string Код { get; set; }
@@ -5123,7 +5214,7 @@ namespace StorageAndTrade_1_0.Довідники
         public string GetPresentation()
         {
             return Назва = base.BasePresentation(
-              new string[] { "col_h8" }
+                new string[] { "col_h8" }
             );
         }
 		
@@ -5260,6 +5351,13 @@ namespace StorageAndTrade_1_0.Довідники
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.КраїниСвіту");
         }
+
+        public string GetPresentation()
+        {
+            return base.BasePresentation(
+                new string[] { "col_i2" }
+            );
+        }
         
         public string Назва { get; set; }
         public string Код { get; set; }
@@ -5295,7 +5393,7 @@ namespace StorageAndTrade_1_0.Довідники
         public string GetPresentation()
         {
             return Назва = base.BasePresentation(
-              new string[] { "col_i2" }
+                new string[] { "col_i2" }
             );
         }
 		
@@ -5452,6 +5550,13 @@ namespace StorageAndTrade_1_0.Довідники
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.Файли");
         }
+
+        public string GetPresentation()
+        {
+            return base.BasePresentation(
+                new string[] { "col_i5" }
+            );
+        }
         
         public string Код { get; set; }
         public string Назва { get; set; }
@@ -5491,7 +5596,7 @@ namespace StorageAndTrade_1_0.Довідники
         public string GetPresentation()
         {
             return Назва = base.BasePresentation(
-              new string[] { "col_i5" }
+                new string[] { "col_i5" }
             );
         }
 		
@@ -5638,6 +5743,13 @@ namespace StorageAndTrade_1_0.Довідники
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.ХарактеристикиНоменклатури");
         }
+
+        public string GetPresentation()
+        {
+            return base.BasePresentation(
+                new string[] { "col_i7" }
+            );
+        }
         
         public string Назва { get; set; }
         public string Код { get; set; }
@@ -5675,7 +5787,7 @@ namespace StorageAndTrade_1_0.Довідники
         public string GetPresentation()
         {
             return Назва = base.BasePresentation(
-              new string[] { "col_i7" }
+                new string[] { "col_i7" }
             );
         }
 		
@@ -5817,6 +5929,13 @@ namespace StorageAndTrade_1_0.Довідники
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.Номенклатура_Папки");
         }
+
+        public string GetPresentation()
+        {
+            return base.BasePresentation(
+                new string[] { "col_j1" }
+            );
+        }
         
         public string Назва { get; set; }
         public string Код { get; set; }
@@ -5853,7 +5972,7 @@ namespace StorageAndTrade_1_0.Довідники
         public string GetPresentation()
         {
             return Назва = base.BasePresentation(
-              new string[] { "col_j1" }
+                new string[] { "col_j1" }
             );
         }
 		
@@ -5995,6 +6114,13 @@ namespace StorageAndTrade_1_0.Довідники
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.Контрагенти_Папки");
         }
+
+        public string GetPresentation()
+        {
+            return base.BasePresentation(
+                new string[] { "col_j4" }
+            );
+        }
         
         public string Назва { get; set; }
         public string Код { get; set; }
@@ -6031,7 +6157,7 @@ namespace StorageAndTrade_1_0.Довідники
         public string GetPresentation()
         {
             return Назва = base.BasePresentation(
-              new string[] { "col_j4" }
+                new string[] { "col_j4" }
             );
         }
 		
@@ -6173,6 +6299,13 @@ namespace StorageAndTrade_1_0.Довідники
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.Склади_Папки");
         }
+
+        public string GetPresentation()
+        {
+            return base.BasePresentation(
+                new string[] { "col_j7" }
+            );
+        }
         
         public string Назва { get; set; }
         public string Код { get; set; }
@@ -6209,7 +6342,7 @@ namespace StorageAndTrade_1_0.Довідники
         public string GetPresentation()
         {
             return Назва = base.BasePresentation(
-              new string[] { "col_j7" }
+                new string[] { "col_j7" }
             );
         }
 		
@@ -6356,6 +6489,13 @@ namespace StorageAndTrade_1_0.Довідники
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.Каси");
         }
+
+        public string GetPresentation()
+        {
+            return base.BasePresentation(
+                new string[] { "col_k8" }
+            );
+        }
         
         public string Назва { get; set; }
         public string Код { get; set; }
@@ -6393,7 +6533,7 @@ namespace StorageAndTrade_1_0.Довідники
         public string GetPresentation()
         {
             return Назва = base.BasePresentation(
-              new string[] { "col_k8" }
+                new string[] { "col_k8" }
             );
         }
 		
@@ -6585,6 +6725,13 @@ namespace StorageAndTrade_1_0.Довідники
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.БанківськіРахункиОрганізацій");
         }
+
+        public string GetPresentation()
+        {
+            return base.BasePresentation(
+                new string[] { "col_l1" }
+            );
+        }
         
         public string Назва { get; set; }
         public string Код { get; set; }
@@ -6631,7 +6778,7 @@ namespace StorageAndTrade_1_0.Довідники
         public string GetPresentation()
         {
             return Назва = base.BasePresentation(
-              new string[] { "col_l1" }
+                new string[] { "col_l1" }
             );
         }
 		
@@ -6858,6 +7005,13 @@ namespace StorageAndTrade_1_0.Довідники
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.ДоговориКонтрагентів");
         }
+
+        public string GetPresentation()
+        {
+            return base.BasePresentation(
+                new string[] { "col_n4", "col_b8" }
+            );
+        }
         
         public string Назва { get; set; }
         public string Код { get; set; }
@@ -6911,7 +7065,7 @@ namespace StorageAndTrade_1_0.Довідники
         public string GetPresentation()
         {
             return Назва = base.BasePresentation(
-              new string[] { "col_n4", "col_b8" }
+                new string[] { "col_n4", "col_b8" }
             );
         }
 		
@@ -7113,6 +7267,13 @@ namespace StorageAndTrade_1_0.Довідники
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.БанківськіРахункиКонтрагентів");
         }
+
+        public string GetPresentation()
+        {
+            return base.BasePresentation(
+                new string[] { "col_n7" }
+            );
+        }
         
         public string Назва { get; set; }
         public string Код { get; set; }
@@ -7161,7 +7322,7 @@ namespace StorageAndTrade_1_0.Довідники
         public string GetPresentation()
         {
             return Назва = base.BasePresentation(
-              new string[] { "col_n7" }
+                new string[] { "col_n7" }
             );
         }
 		
@@ -7320,6 +7481,13 @@ namespace StorageAndTrade_1_0.Довідники
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.СтаттяРухуКоштів");
         }
+
+        public string GetPresentation()
+        {
+            return base.BasePresentation(
+                new string[] { "col_i7" }
+            );
+        }
         
         public string Назва { get; set; }
         public string Код { get; set; }
@@ -7361,7 +7529,7 @@ namespace StorageAndTrade_1_0.Довідники
         public string GetPresentation()
         {
             return Назва = base.BasePresentation(
-              new string[] { "col_i7" }
+                new string[] { "col_i7" }
             );
         }
 		
@@ -7581,6 +7749,13 @@ namespace StorageAndTrade_1_0.Довідники
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.СеріїНоменклатури");
         }
+
+        public string GetPresentation()
+        {
+            return base.BasePresentation(
+                new string[] { "col_a3" }
+            );
+        }
         
         public string Номер { get; set; }
         public string Коментар { get; set; }
@@ -7617,7 +7792,7 @@ namespace StorageAndTrade_1_0.Довідники
         public string GetPresentation()
         {
             return Назва = base.BasePresentation(
-              new string[] { "col_a3" }
+                new string[] { "col_a3" }
             );
         }
 		
@@ -7774,6 +7949,13 @@ namespace StorageAndTrade_1_0.Довідники
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.ПартіяТоварівКомпозит");
         }
+
+        public string GetPresentation()
+        {
+            return base.BasePresentation(
+                new string[] { "col_a1" }
+            );
+        }
         
         public string Назва { get; set; }
         public DateTime Дата { get; set; }
@@ -7813,7 +7995,7 @@ namespace StorageAndTrade_1_0.Довідники
         public string GetPresentation()
         {
             return Назва = base.BasePresentation(
-              new string[] { "col_a1" }
+                new string[] { "col_a1" }
             );
         }
 		
@@ -7975,6 +8157,13 @@ namespace StorageAndTrade_1_0.Довідники
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.ВидиЗапасів");
         }
+
+        public string GetPresentation()
+        {
+            return base.BasePresentation(
+                new string[] { "col_a5" }
+            );
+        }
         
         public string Назва { get; set; }
         public Довідники.Організації_Pointer Організація { get; set; }
@@ -8015,7 +8204,7 @@ namespace StorageAndTrade_1_0.Довідники
         public string GetPresentation()
         {
             return Назва = base.BasePresentation(
-              new string[] { "col_a5" }
+                new string[] { "col_a5" }
             );
         }
 		
@@ -8282,6 +8471,13 @@ namespace StorageAndTrade_1_0.Довідники
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.Банки");
         }
+
+        public string GetPresentation()
+        {
+            return base.BasePresentation(
+                new string[] {  }
+            );
+        }
         
         public string Код { get; set; }
         public string Назва { get; set; }
@@ -8343,7 +8539,7 @@ namespace StorageAndTrade_1_0.Довідники
         public string GetPresentation()
         {
             return Назва = base.BasePresentation(
-              new string[] {  }
+                new string[] {  }
             );
         }
 		
@@ -8485,6 +8681,13 @@ namespace StorageAndTrade_1_0.Довідники
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.СкладськіПриміщення");
         }
+
+        public string GetPresentation()
+        {
+            return base.BasePresentation(
+                new string[] { "col_a2" }
+            );
+        }
         
         public string Назва { get; set; }
         public Перелічення.НалаштуванняАдресногоЗберігання НалаштуванняАдресногоЗберігання { get; set; }
@@ -8521,7 +8724,7 @@ namespace StorageAndTrade_1_0.Довідники
         public string GetPresentation()
         {
             return Назва = base.BasePresentation(
-              new string[] { "col_a2" }
+                new string[] { "col_a2" }
             );
         }
 		
@@ -8698,6 +8901,13 @@ namespace StorageAndTrade_1_0.Довідники
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.СкладськіКомірки");
         }
+
+        public string GetPresentation()
+        {
+            return base.BasePresentation(
+                new string[] { "col_a2" }
+            );
+        }
         
         public Довідники.СкладськіКомірки_Папки_Pointer Папка { get; set; }
         public string Назва { get; set; }
@@ -8741,7 +8951,7 @@ namespace StorageAndTrade_1_0.Довідники
         public string GetPresentation()
         {
             return Назва = base.BasePresentation(
-              new string[] { "col_a2" }
+                new string[] { "col_a2" }
             );
         }
 		
@@ -8881,6 +9091,13 @@ namespace StorageAndTrade_1_0.Довідники
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.ОбластьЗберігання");
         }
+
+        public string GetPresentation()
+        {
+            return base.BasePresentation(
+                new string[] { "col_a2" }
+            );
+        }
         
         public string Назва { get; set; }
         public string Опис { get; set; }
@@ -8917,7 +9134,7 @@ namespace StorageAndTrade_1_0.Довідники
         public string GetPresentation()
         {
             return Назва = base.BasePresentation(
-              new string[] { "col_a2" }
+                new string[] { "col_a2" }
             );
         }
 		
@@ -9074,6 +9291,13 @@ namespace StorageAndTrade_1_0.Довідники
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.ТипорозміриКомірок");
         }
+
+        public string GetPresentation()
+        {
+            return base.BasePresentation(
+                new string[] { "col_a2" }
+            );
+        }
         
         public string Висота { get; set; }
         public string Назва { get; set; }
@@ -9113,7 +9337,7 @@ namespace StorageAndTrade_1_0.Довідники
         public string GetPresentation()
         {
             return Назва = base.BasePresentation(
-              new string[] { "col_a2" }
+                new string[] { "col_a2" }
             );
         }
 		
@@ -9260,6 +9484,13 @@ namespace StorageAndTrade_1_0.Довідники
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.СкладськіКомірки_Папки");
         }
+
+        public string GetPresentation()
+        {
+            return base.BasePresentation(
+                new string[] { "col_j1" }
+            );
+        }
         
         public string Назва { get; set; }
         public string Код { get; set; }
@@ -9297,7 +9528,7 @@ namespace StorageAndTrade_1_0.Довідники
         public string GetPresentation()
         {
             return Назва = base.BasePresentation(
-              new string[] { "col_j1" }
+                new string[] { "col_j1" }
             );
         }
 		
@@ -9449,6 +9680,13 @@ namespace StorageAndTrade_1_0.Довідники
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.Блокнот");
         }
+
+        public string GetPresentation()
+        {
+            return base.BasePresentation(
+                new string[] { "col_a2" }
+            );
+        }
         
         public string Код { get; set; }
         public string Назва { get; set; }
@@ -9487,7 +9725,7 @@ namespace StorageAndTrade_1_0.Довідники
         public string GetPresentation()
         {
             return Назва = base.BasePresentation(
-              new string[] { "col_a2" }
+                new string[] { "col_a2" }
             );
         }
 		

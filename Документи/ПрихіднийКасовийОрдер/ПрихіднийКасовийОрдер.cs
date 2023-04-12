@@ -500,9 +500,6 @@ namespace StorageAndTrade
             ПрихіднийКасовийОрдер_Pointer ПрихіднийКасовийОрдер_Pointer = new ПрихіднийКасовийОрдер_Pointer(new UnigueID(uid));
             ПрихіднийКасовийОрдер_Objest ПрихіднийКасовийОрдер_Objest = ПрихіднийКасовийОрдер_Pointer.GetDocumentObject(true);
 
-            //Збереження для запуску тригерів
-            ПрихіднийКасовийОрдер_Objest.Save();
-
             if (spendDoc)
             {
                 if (!ПрихіднийКасовийОрдер_Objest.SpendTheDocument(ПрихіднийКасовийОрдер_Objest.ДатаДок))

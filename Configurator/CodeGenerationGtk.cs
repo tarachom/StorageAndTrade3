@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 10.04.2023 15:33:10
+ * Дата конфігурації: 13.04.2023 00:36:34
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон Gtk.xslt
@@ -6769,7 +6769,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     сomboBox.Append(field.Name, field.Desc);
             }
 
-            сomboBox.Active = 0;
+            /*сomboBox.Active = 0;*/
 
             return сomboBox;
         }

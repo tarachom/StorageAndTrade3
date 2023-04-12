@@ -507,9 +507,6 @@ namespace StorageAndTrade
             ПереміщенняТоварівНаСкладі_Pointer ПереміщенняТоварівНаСкладі_Pointer = new ПереміщенняТоварівНаСкладі_Pointer(new UnigueID(uid));
             ПереміщенняТоварівНаСкладі_Objest ПереміщенняТоварівНаСкладі_Objest = ПереміщенняТоварівНаСкладі_Pointer.GetDocumentObject(true);
 
-            //Збереження для запуску тригерів
-            ПереміщенняТоварівНаСкладі_Objest.Save();
-
             if (spendDoc)
             {
                 if (!ПереміщенняТоварівНаСкладі_Objest.SpendTheDocument(ПереміщенняТоварівНаСкладі_Objest.ДатаДок))

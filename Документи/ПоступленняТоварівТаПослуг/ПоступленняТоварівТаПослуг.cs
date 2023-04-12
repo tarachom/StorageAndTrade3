@@ -541,9 +541,6 @@ namespace StorageAndTrade
             ПоступленняТоварівТаПослуг_Pointer ПоступленняТоварівТаПослуг_Pointer = new ПоступленняТоварівТаПослуг_Pointer(new UnigueID(uid));
             ПоступленняТоварівТаПослуг_Objest ПоступленняТоварівТаПослуг_Objest = ПоступленняТоварівТаПослуг_Pointer.GetDocumentObject(true);
 
-            //Збереження для запуску тригерів
-            ПоступленняТоварівТаПослуг_Objest.Save(); //??? чи треба
-
             if (spendDoc)
             {
                 if (!ПоступленняТоварівТаПослуг_Objest.SpendTheDocument(ПоступленняТоварівТаПослуг_Objest.ДатаДок))

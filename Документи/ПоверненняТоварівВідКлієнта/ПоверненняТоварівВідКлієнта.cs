@@ -507,9 +507,6 @@ namespace StorageAndTrade
             ПоверненняТоварівВідКлієнта_Pointer ПоверненняТоварівВідКлієнта_Pointer = new ПоверненняТоварівВідКлієнта_Pointer(new UnigueID(uid));
             ПоверненняТоварівВідКлієнта_Objest ПоверненняТоварівВідКлієнта_Objest = ПоверненняТоварівВідКлієнта_Pointer.GetDocumentObject(true);
 
-            //Збереження для запуску тригерів
-            ПоверненняТоварівВідКлієнта_Objest.Save();
-
             if (spendDoc)
             {
                 if (!ПоверненняТоварівВідКлієнта_Objest.SpendTheDocument(ПоверненняТоварівВідКлієнта_Objest.ДатаДок))

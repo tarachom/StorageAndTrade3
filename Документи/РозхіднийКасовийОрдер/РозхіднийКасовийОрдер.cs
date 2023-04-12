@@ -500,9 +500,6 @@ namespace StorageAndTrade
             РозхіднийКасовийОрдер_Pointer РозхіднийКасовийОрдер_Pointer = new РозхіднийКасовийОрдер_Pointer(new UnigueID(uid));
             РозхіднийКасовийОрдер_Objest РозхіднийКасовийОрдер_Objest = РозхіднийКасовийОрдер_Pointer.GetDocumentObject(true);
 
-            //Збереження для запуску тригерів
-            РозхіднийКасовийОрдер_Objest.Save();
-
             if (spendDoc)
             {
                 if (!РозхіднийКасовийОрдер_Objest.SpendTheDocument(РозхіднийКасовийОрдер_Objest.ДатаДок))

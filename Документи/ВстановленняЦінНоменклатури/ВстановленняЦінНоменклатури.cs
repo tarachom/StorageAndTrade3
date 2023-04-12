@@ -507,9 +507,6 @@ namespace StorageAndTrade
             ВстановленняЦінНоменклатури_Pointer ВстановленняЦінНоменклатури_Pointer = new ВстановленняЦінНоменклатури_Pointer(new UnigueID(uid));
             ВстановленняЦінНоменклатури_Objest ВстановленняЦінНоменклатури_Objest = ВстановленняЦінНоменклатури_Pointer.GetDocumentObject(true);
 
-            //Збереження для запуску тригерів
-            ВстановленняЦінНоменклатури_Objest.Save();
-
             if (spendDoc)
             {
                 if (!ВстановленняЦінНоменклатури_Objest.SpendTheDocument(ВстановленняЦінНоменклатури_Objest.ДатаДок))

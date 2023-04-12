@@ -30,7 +30,9 @@ limitations under the License.
 using Gtk;
 
 using System.Reflection;
+
 using AccountingSoftware;
+using StorageAndTrade_1_0;
 using Константи = StorageAndTrade_1_0.Константи;
 using Журнали = StorageAndTrade_1_0.Журнали;
 
@@ -156,18 +158,17 @@ namespace StorageAndTrade
 
         void SpendTheDocument()
         {
+            ФункціїДляПовідомлень.ОчиститиПовідомлення();
+
             ButtonSensitive(false);
 
-            int counter = 0;
+            int counterDocs = 0;
             Константи.Системні.ЗупинитиФоновіЗадачі_Const = true;
-
-            ФункціїДляПовідомлень.ОчиститиПовідомлення();
 
             Журнали.Journal_Select journalSelect = new Журнали.Journal_Select();
 
             // Вибірка всіх документів. Встановлюється максимальний період
             journalSelect.Select(DateTime.Parse("01.01.2000 00:00:00"), DateTime.Now);
-
             while (journalSelect.MoveNext())
             {
                 if (CancellationTokenPageService!.IsCancellationRequested)
@@ -204,11 +205,11 @@ namespace StorageAndTrade
 
                             CreateMessage(TypeMessage.Error, msg);
                             CreateMessage(TypeMessage.Info, "\n\nПроведення документів перервано!\n\n");
-                            
+
                             break;
                         }
 
-                        counter++;
+                        counterDocs++;
                     }
                 }
             }
@@ -220,7 +221,7 @@ namespace StorageAndTrade
             ButtonSensitive(true);
 
             CreateMessage(TypeMessage.None, "Готово!\n\n\n");
-            CreateMessage(TypeMessage.Info, "Проведено документів: " + counter);
+            CreateMessage(TypeMessage.Info, "Проведено документів: " + counterDocs);
             Thread.Sleep(1000);
             CreateMessage(TypeMessage.None, "\n\n\n");
         }
@@ -231,6 +232,29 @@ namespace StorageAndTrade
 
         void OnClearDeletionLabel(object? sender, EventArgs args)
         {
+            /*
+            try
+            {
+                object? doc = Assembly.GetExecutingAssembly().CreateInstance("StorageAndTrade_1_0.Довідники.Номенклатура_Objest");
+
+                if (doc != null)
+                {
+                    object? o = doc.GetType().InvokeMember("Read", BindingFlags.InvokeMethod, null, doc, new object[] { new UnigueID("e01d5d93-dc8e-453b-866c-b53084854eaa") });
+                    if (o != null ? (bool)o : false)
+                    {
+                        doc.GetType().InvokeMember("SetDeletionLabel", BindingFlags.InvokeMethod, null, doc, new object[] { false });
+                    }
+                }
+                else
+                    Console.WriteLine("No create Instance");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            */
+
             ClearMessage();
 
             Program.ListCancellationToken.Add(CancellationTokenPageService = new CancellationTokenSource());
@@ -243,11 +267,147 @@ namespace StorageAndTrade
         {
             ButtonSensitive(false);
 
-            // if (CancellationTokenPageService!.IsCancellationRequested)
-            //     break;
+            if (Config.Kernel != null)
+            {
+                CreateMessage(TypeMessage.Info, "Обробка довідників:");
 
+                foreach (ConfigurationDirectories configurationDirectories in Config.Kernel!.Conf.Directories.Values)
+                {
+                    if (CancellationTokenPageService!.IsCancellationRequested)
+                        break;
 
+                    CreateMessage(TypeMessage.Info, " -> " + configurationDirectories.Name);
 
+                    //Вибірка помічених на видалення
+                    string query = @$"SELECT uid FROM {configurationDirectories.Table} WHERE deletion_label = true";
+
+                    string[] columnsName;
+                    List<Dictionary<string, object>> listRow;
+
+                    Config.Kernel.DataBase.SelectRequest(query, null, out columnsName, out listRow);
+
+                    if (listRow.Count > 0)
+                    {
+                        //Пошук залежностей
+                        List<string> listTableAndField = Config.Kernel.Conf.SearchForPointers(
+                            "Довідники." + configurationDirectories.Name, Configuration.VariantWorkSearchForPointers.Tables);
+
+                        //Обробка довідників
+                        foreach (Dictionary<string, object> row in listRow)
+                        {
+                            long allCount = 0;
+
+                            Guid uid = (Guid)row["uid"];
+
+                            Console.WriteLine(uid);
+
+                            Dictionary<string, object> paramQuery = new Dictionary<string, object>();
+                            paramQuery.Add("uid", uid);
+
+                            //Обробка залежностей
+                            foreach (string tableAndField in listTableAndField)
+                            {
+                                string[] splitTableAndField = tableAndField.Split(".");
+                                string table = splitTableAndField[0];
+                                string field = splitTableAndField[1];
+
+                                string queryFind = $"SELECT count(uid) FROM {table} WHERE {field} = @uid";
+                                object? objcount = Config.Kernel.DataBase.ExecuteSQLScalar(queryFind, paramQuery);
+
+                                if (objcount != null)
+                                    allCount += (long)objcount;
+                            }
+
+                            if (allCount == 0)
+                            {
+                                object? directoryObject = Assembly.GetExecutingAssembly().CreateInstance($"StorageAndTrade_1_0.Довідники.{configurationDirectories.Name}_Objest");
+                                if (directoryObject != null)
+                                {
+                                    object? objRead = directoryObject.GetType().InvokeMember("Read", BindingFlags.InvokeMethod, null, directoryObject, new object[] { new UnigueID(uid) });
+                                    if (objRead != null ? (bool)objRead : false)
+                                    {
+
+                                        directoryObject.GetType().InvokeMember("Delete", BindingFlags.InvokeMethod, null, directoryObject, null);
+                                        Console.WriteLine("Видалено: " + uid);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                CreateMessage(TypeMessage.Info, "Обробка документів:");
+
+                foreach (ConfigurationDocuments configurationDocuments in Config.Kernel!.Conf.Documents.Values)
+                {
+                    if (CancellationTokenPageService!.IsCancellationRequested)
+                        break;
+
+                    CreateMessage(TypeMessage.Info, " -> " + configurationDocuments.Name);
+
+                    //Вибірка помічених на видалення
+                    string query = @$"
+SELECT 
+    uid, docname 
+FROM 
+    {configurationDocuments.Table} 
+WHERE 
+    deletion_label = true";
+
+                    string[] columnsName;
+                    List<Dictionary<string, object>> listRow;
+
+                    Config.Kernel.DataBase.SelectRequest(query, null, out columnsName, out listRow);
+
+                    if (listRow.Count > 0)
+                    {
+                        //Пошук залежностей
+                        List<string> listTableAndField = Config.Kernel.Conf.SearchForPointers(
+                            "Документи." + configurationDocuments.Name, Configuration.VariantWorkSearchForPointers.Tables);
+
+                        //Обробка документів
+                        foreach (Dictionary<string, object> row in listRow)
+                        {
+                            long allCount = 0;
+
+                            Guid uid = (Guid)row["uid"];
+                            string name = (string)row["docname"];
+
+                            Console.WriteLine(name);
+
+                            Dictionary<string, object> paramQuery = new Dictionary<string, object>();
+                            paramQuery.Add("uid", uid);
+
+                            //Обробка залежностей
+                            foreach (string tableAndField in listTableAndField)
+                            {
+                                string[] splitTableAndField = tableAndField.Split(".");
+                                string table = splitTableAndField[0];
+                                string field = splitTableAndField[1];
+
+                                string queryFind = $"SELECT count(uid) FROM {table} WHERE {field} = @uid";
+                                object? objcount = Config.Kernel.DataBase.ExecuteSQLScalar(queryFind, paramQuery);
+
+                                if (objcount != null)
+                                {
+                                    allCount += (long)objcount;
+                                    Console.WriteLine($"Знайдено [{tableAndField}]: " + (long)objcount);
+                                }
+                            }
+
+                            Console.WriteLine("Загально: " + allCount);
+
+                            if (allCount == 0)
+                            {
+                                string queryFind = $"DELETE FROM {configurationDocuments.Table} WHERE uid = @uid";
+                                Config.Kernel.DataBase.ExecuteSQL(queryFind, paramQuery);
+
+                                Console.WriteLine("Видалено: " + name);
+                            }
+                        }
+                    }
+                }
+            }
 
             CreateMessage(TypeMessage.None, "Готово!\n\n\n");
             ButtonSensitive(true);

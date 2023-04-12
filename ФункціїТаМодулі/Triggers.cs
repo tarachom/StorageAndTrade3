@@ -35,6 +35,8 @@ using AccountingSoftware;
 using StorageAndTrade;
 using Конфа = StorageAndTrade_1_0;
 using StorageAndTrade_1_0.Константи;
+using StorageAndTrade_1_0.Довідники;
+using StorageAndTrade_1_0.Документи;
 
 namespace StorageAndTrade_1_0.Довідники
 {
@@ -136,7 +138,7 @@ WHERE
             //Очистка характеристик
             //
 
-            
+
         }
     }
 
@@ -1554,7 +1556,21 @@ namespace StorageAndTrade_1_0.Документи
 
         public static void SetDeletionLabel(ПоступленняТоварівТаПослуг_Objest ДокументОбєкт, bool label)
         {
+            // Помітка на виделення всіх партій
+            if (label == true)
+            {
+                ПартіяТоварівКомпозит_Select партіяТоварівКомпозит_Select = new ПартіяТоварівКомпозит_Select();
+                партіяТоварівКомпозит_Select.QuerySelect.Where.Add(new Where(ПартіяТоварівКомпозит_Const.ПоступленняТоварівТаПослуг, Comparison.EQ, ДокументОбєкт.UnigueID.UGuid));
+                партіяТоварівКомпозит_Select.QuerySelect.Where.Add(new Where(Comparison.AND, ПартіяТоварівКомпозит_Const.DELETION_LABEL, Comparison.NOT, true));
+                партіяТоварівКомпозит_Select.Select();
 
+                while (партіяТоварівКомпозит_Select.MoveNext())
+                {
+                    ПартіяТоварівКомпозит_Objest? партіяТоварівКомпозит_Objest = партіяТоварівКомпозит_Select.Current?.GetDirectoryObject();
+                    if (партіяТоварівКомпозит_Objest != null)
+                        партіяТоварівКомпозит_Objest.SetDeletionLabel();
+                }
+            }
         }
 
         public static void BeforeDelete(ПоступленняТоварівТаПослуг_Objest ДокументОбєкт)
@@ -1909,7 +1925,21 @@ namespace StorageAndTrade_1_0.Документи
 
         public static void SetDeletionLabel(ВведенняЗалишків_Objest ДокументОбєкт, bool label)
         {
+            // Помітка на виделення всіх партій
+            if (label == true)
+            {
+                ПартіяТоварівКомпозит_Select партіяТоварівКомпозит_Select = new ПартіяТоварівКомпозит_Select();
+                партіяТоварівКомпозит_Select.QuerySelect.Where.Add(new Where(ПартіяТоварівКомпозит_Const.ВведенняЗалишків, Comparison.EQ, ДокументОбєкт.UnigueID.UGuid));
+                партіяТоварівКомпозит_Select.QuerySelect.Where.Add(new Where(Comparison.AND, ПартіяТоварівКомпозит_Const.DELETION_LABEL, Comparison.NOT, true));
+                партіяТоварівКомпозит_Select.Select();
 
+                while (партіяТоварівКомпозит_Select.MoveNext())
+                {
+                    ПартіяТоварівКомпозит_Objest? партіяТоварівКомпозит_Objest = партіяТоварівКомпозит_Select.Current?.GetDirectoryObject();
+                    if (партіяТоварівКомпозит_Objest != null)
+                        партіяТоварівКомпозит_Objest.SetDeletionLabel();
+                }
+            }
         }
 
         public static void BeforeDelete(ВведенняЗалишків_Objest ДокументОбєкт)

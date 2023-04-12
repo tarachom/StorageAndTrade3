@@ -510,9 +510,6 @@ namespace StorageAndTrade
             ВведенняЗалишків_Pointer ВведенняЗалишків_Pointer = new ВведенняЗалишків_Pointer(new UnigueID(uid));
             ВведенняЗалишків_Objest ВведенняЗалишків_Objest = ВведенняЗалишків_Pointer.GetDocumentObject(true);
 
-            //Збереження для запуску тригерів
-            ВведенняЗалишків_Objest.Save();
-
             if (spendDoc)
             {
                 if (!ВведенняЗалишків_Objest.SpendTheDocument(ВведенняЗалишків_Objest.ДатаДок))

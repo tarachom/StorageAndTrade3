@@ -73,17 +73,17 @@ namespace StorageAndTrade
 
             scrollTree.Add(TreeViewGrid);
 
-/*
-            scrollTree.Vadjustment.ValueChanged += (object? sender, EventArgs args) =>
-            {
-                Console.WriteLine(
-                    scrollTree.Vadjustment.Value + " " + 
-                    scrollTree.Vadjustment.Upper + " " + 
-                    scrollTree.Vadjustment.PageIncrement + " " + 
-                    scrollTree.Vadjustment.PageSize);
-            };
+            /*
+                        scrollTree.Vadjustment.ValueChanged += (object? sender, EventArgs args) =>
+                        {
+                            Console.WriteLine(
+                                scrollTree.Vadjustment.Value + " " + 
+                                scrollTree.Vadjustment.Upper + " " + 
+                                scrollTree.Vadjustment.PageIncrement + " " + 
+                                scrollTree.Vadjustment.PageSize);
+                        };
 
-*/
+            */
             PackStart(scrollTree, true, true, 0);
 
             ShowAll();

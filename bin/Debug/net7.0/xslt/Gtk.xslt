@@ -259,7 +259,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи.Т
                     сomboBox.Append(field.Name, field.Desc);
             }
 
-            сomboBox.Active = 0;
+            /*сomboBox.Active = 0;*/
 
             return сomboBox;
         }

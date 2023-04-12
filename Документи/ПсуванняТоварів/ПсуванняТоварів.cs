@@ -507,9 +507,6 @@ namespace StorageAndTrade
             ПсуванняТоварів_Pointer ПсуванняТоварів_Pointer = new ПсуванняТоварів_Pointer(new UnigueID(uid));
             ПсуванняТоварів_Objest ПсуванняТоварів_Objest = ПсуванняТоварів_Pointer.GetDocumentObject(true);
 
-            //Збереження для запуску тригерів
-            ПсуванняТоварів_Objest.Save();
-
             if (spendDoc)
             {
                 if (!ПсуванняТоварів_Objest.SpendTheDocument(ПсуванняТоварів_Objest.ДатаДок))

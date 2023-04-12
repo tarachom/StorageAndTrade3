@@ -539,9 +539,6 @@ namespace StorageAndTrade
             РеалізаціяТоварівТаПослуг_Pointer РеалізаціяТоварівТаПослуг_Pointer = new РеалізаціяТоварівТаПослуг_Pointer(new UnigueID(uid));
             РеалізаціяТоварівТаПослуг_Objest РеалізаціяТоварівТаПослуг_Objest = РеалізаціяТоварівТаПослуг_Pointer.GetDocumentObject(true);
 
-            //Збереження для запуску тригерів
-            РеалізаціяТоварівТаПослуг_Objest.Save();
-
             if (spendDoc)
             {
                 if (!РеалізаціяТоварівТаПослуг_Objest.SpendTheDocument(РеалізаціяТоварівТаПослуг_Objest.ДатаДок))
