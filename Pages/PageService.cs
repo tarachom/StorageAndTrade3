@@ -232,29 +232,6 @@ namespace StorageAndTrade
 
         void OnClearDeletionLabel(object? sender, EventArgs args)
         {
-            /*
-            try
-            {
-                object? doc = Assembly.GetExecutingAssembly().CreateInstance("StorageAndTrade_1_0.Довідники.Номенклатура_Objest");
-
-                if (doc != null)
-                {
-                    object? o = doc.GetType().InvokeMember("Read", BindingFlags.InvokeMethod, null, doc, new object[] { new UnigueID("e01d5d93-dc8e-453b-866c-b53084854eaa") });
-                    if (o != null ? (bool)o : false)
-                    {
-                        doc.GetType().InvokeMember("SetDeletionLabel", BindingFlags.InvokeMethod, null, doc, new object[] { false });
-                    }
-                }
-                else
-                    Console.WriteLine("No create Instance");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-
-            */
-
             ClearMessage();
 
             Program.ListCancellationToken.Add(CancellationTokenPageService = new CancellationTokenSource());
@@ -263,15 +240,51 @@ namespace StorageAndTrade
             thread.Start();
         }
 
+        long SearchDependencies(List<string> listTableAndField, Guid uid, string name)
+        {
+            long allCountDependencies = 0;
+
+            if (listTableAndField.Count > 0)
+            {
+                Dictionary<string, object> paramQuery = new Dictionary<string, object>();
+                paramQuery.Add("uid", uid);
+
+                //Обробка залежностей
+                foreach (string tableAndField in listTableAndField)
+                {
+                    string[] splitTableAndField = tableAndField.Split(".");
+                    string table = splitTableAndField[0];
+                    string field = splitTableAndField[1];
+
+                    //Пошук кількості використання елементу в таблиці залежності
+                    string query = $"SELECT count(uid) FROM {table} WHERE {field} = @uid";
+                    object? objCountcountDependencies = Config.Kernel!.DataBase.ExecuteSQLScalar(query, paramQuery);
+
+                    if (objCountcountDependencies != null)
+                    {
+                        long countDependencies = (long)objCountcountDependencies;
+                        allCountDependencies += countDependencies;
+
+                        if (countDependencies != 0)
+                            CreateMessage(TypeMessage.Error, " --> " + name + ", uid [" + uid + "], table [" + table + "], field [" + field + "]");
+                    }
+                }
+            }
+
+            return allCountDependencies;
+        }
+
         void ClearDeletionLabel()
         {
             ButtonSensitive(false);
+
+            Assembly ExecutingAssembly = Assembly.GetExecutingAssembly();
 
             if (Config.Kernel != null)
             {
                 CreateMessage(TypeMessage.Info, "Обробка довідників:");
 
-                foreach (ConfigurationDirectories configurationDirectories in Config.Kernel!.Conf.Directories.Values)
+                foreach (ConfigurationDirectories configurationDirectories in Config.Kernel.Conf.Directories.Values)
                 {
                     if (CancellationTokenPageService!.IsCancellationRequested)
                         break;
@@ -283,7 +296,6 @@ namespace StorageAndTrade
 
                     string[] columnsName;
                     List<Dictionary<string, object>> listRow;
-
                     Config.Kernel.DataBase.SelectRequest(query, null, out columnsName, out listRow);
 
                     if (listRow.Count > 0)
@@ -292,14 +304,16 @@ namespace StorageAndTrade
                         List<string> listTableAndField = Config.Kernel.Conf.SearchForPointers(
                             "Довідники." + configurationDirectories.Name, Configuration.VariantWorkSearchForPointers.Tables);
 
+                        string DirectoryObjestName = $"StorageAndTrade_1_0.Довідники.{configurationDirectories.Name}_Objest";
+
                         //Обробка довідників
                         foreach (Dictionary<string, object> row in listRow)
                         {
-                            long allCount = 0;
                             Guid uid = (Guid)row["uid"];
                             string name = "";
 
-                            object? directoryObject = Assembly.GetExecutingAssembly().CreateInstance($"StorageAndTrade_1_0.Довідники.{configurationDirectories.Name}_Objest");
+                            //Обєкт довідника
+                            object? directoryObject = ExecutingAssembly.CreateInstance(DirectoryObjestName);
                             if (directoryObject != null)
                             {
                                 object? objRead = directoryObject.GetType().InvokeMember("Read", BindingFlags.InvokeMethod, null, directoryObject, new object[] { new UnigueID(uid) });
@@ -308,41 +322,16 @@ namespace StorageAndTrade
                                     object? objName = directoryObject.GetType().InvokeMember("GetPresentation", BindingFlags.InvokeMethod, null, directoryObject, null);
                                     if (objName != null)
                                         name = (string)objName;
+
+                                    long allCountDependencies = SearchDependencies(listTableAndField, uid, name);
+                                    if (allCountDependencies == 0)
+                                    {
+                                        directoryObject.GetType().InvokeMember("Delete", BindingFlags.InvokeMethod, null, directoryObject, null);
+                                        CreateMessage(TypeMessage.Ok, " --> Видалено: " + name + " [" + uid + "]");
+                                    }
                                 }
                             }
 
-                            Dictionary<string, object> paramQuery = new Dictionary<string, object>();
-                            paramQuery.Add("uid", uid);
-
-                            //Обробка залежностей
-                            foreach (string tableAndField in listTableAndField)
-                            {
-                                string[] splitTableAndField = tableAndField.Split(".");
-                                string table = splitTableAndField[0];
-                                string field = splitTableAndField[1];
-                                long count = 0;
-
-                                string queryFind = $"SELECT count(uid) FROM {table} WHERE {field} = @uid";
-                                object? objcount = Config.Kernel.DataBase.ExecuteSQLScalar(queryFind, paramQuery);
-
-                                if (objcount != null)
-                                {
-                                    count = (long)objcount;
-                                    allCount += count;
-
-                                    if (count != 0)
-                                        CreateMessage(TypeMessage.Error, " --> " + name + ", uid [" + uid + "], table [" + table + "], field [" + field + "]");
-                                }
-                            }
-
-                            if (allCount == 0)
-                            {
-                                if (directoryObject != null)
-                                {
-                                    directoryObject.GetType().InvokeMember("Delete", BindingFlags.InvokeMethod, null, directoryObject, null);
-                                    CreateMessage(TypeMessage.Ok, " --> Видалено: [" + uid + "] " + name);
-                                }
-                            }
                         }
                     }
                 }
@@ -362,7 +351,6 @@ namespace StorageAndTrade
 
                     string[] columnsName;
                     List<Dictionary<string, object>> listRow;
-
                     Config.Kernel.DataBase.SelectRequest(query, null, out columnsName, out listRow);
 
                     if (listRow.Count > 0)
@@ -371,51 +359,30 @@ namespace StorageAndTrade
                         List<string> listTableAndField = Config.Kernel.Conf.SearchForPointers(
                             "Документи." + configurationDocuments.Name, Configuration.VariantWorkSearchForPointers.Tables);
 
+                        string DocumentObjestName = $"StorageAndTrade_1_0.Документи.{configurationDocuments.Name}_Objest";
+
                         //Обробка документів
                         foreach (Dictionary<string, object> row in listRow)
                         {
-                            long allCount = 0;
                             Guid uid = (Guid)row["uid"];
                             string name = (string)row["docname"];
 
-                            Dictionary<string, object> paramQuery = new Dictionary<string, object>();
-                            paramQuery.Add("uid", uid);
-
-                            //Обробка залежностей
-                            foreach (string tableAndField in listTableAndField)
+                            object? documentObject = ExecutingAssembly.CreateInstance(DocumentObjestName);
+                            if (documentObject != null)
                             {
-                                string[] splitTableAndField = tableAndField.Split(".");
-                                string table = splitTableAndField[0];
-                                string field = splitTableAndField[1];
-                                long count = 0;
-
-                                string queryFind = $"SELECT count(uid) FROM {table} WHERE {field} = @uid";
-                                object? objcount = Config.Kernel.DataBase.ExecuteSQLScalar(queryFind, paramQuery);
-
-                                if (objcount != null)
+                                object? objRead = documentObject.GetType().InvokeMember("Read", BindingFlags.InvokeMethod, null, documentObject, new object[] { new UnigueID(uid) });
+                                if (objRead != null ? (bool)objRead : false)
                                 {
-                                    count = (long)objcount;
-                                    allCount += count;
-
-                                    if (count != 0)
-                                        CreateMessage(TypeMessage.Error, " --> " + name + ", uid [" + uid + "], table [" + table + "], field [" + field + "]");
-                                }
-                            }
-
-                            if (allCount == 0)
-                            {
-                                object? documentObject = Assembly.GetExecutingAssembly().CreateInstance($"StorageAndTrade_1_0.Документи.{configurationDocuments.Name}_Objest");
-                                if (documentObject != null)
-                                {
-                                    object? objRead = documentObject.GetType().InvokeMember("Read", BindingFlags.InvokeMethod, null, documentObject, new object[] { new UnigueID(uid) });
-                                    if (objRead != null ? (bool)objRead : false)
+                                    long allCountDependencies = SearchDependencies(listTableAndField, uid, name);
+                                    if (allCountDependencies == 0)
                                     {
-                                        CreateMessage(TypeMessage.Ok, " --> Видалено: [" + uid + "] " + name);
                                         documentObject.GetType().InvokeMember("Delete", BindingFlags.InvokeMethod, null, documentObject, null);
+                                        CreateMessage(TypeMessage.Ok, " --> Видалено: " + name + " [" + uid + "]");
                                     }
                                 }
                             }
                         }
+
                     }
                 }
             }
@@ -431,8 +398,6 @@ namespace StorageAndTrade
         }
 
         #endregion
-
-
         void OnStopClick(object? sender, EventArgs args)
         {
             CancellationTokenPageService?.Cancel();

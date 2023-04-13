@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <Configuration Select="False">
+  <Configuration Select="True">
     <Key>6b4ef58d-4b62-4885-8059-eb6f43c51c2d</Key>
     <Name>"Зберігання та Торгівля" для України</Name>
     <Server>localhost</Server>
@@ -25,7 +25,7 @@
     <BaseName>storage_and_trade_deletelabel</BaseName>
     <OtherParam />
   </Configuration>
-  <Configuration Select="True">
+  <Configuration Select="False">
     <Key>1d4b0184-c2df-404e-a4bd-b75c65e91a52</Key>
     <Name>Новий 2</Name>
     <Server>localhost</Server>

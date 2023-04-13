@@ -265,7 +265,8 @@ WHERE
 
         public static void SetDeletionLabel(Валюти_Objest ДовідникОбєкт, bool label)
         {
-
+            // if (label)
+            //     BeforeDelete(ДовідникОбєкт);
         }
 
         public static void BeforeDelete(Валюти_Objest ДовідникОбєкт)
