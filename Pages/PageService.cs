@@ -296,10 +296,20 @@ namespace StorageAndTrade
                         foreach (Dictionary<string, object> row in listRow)
                         {
                             long allCount = 0;
-
                             Guid uid = (Guid)row["uid"];
+                            string name = "";
 
-                            Console.WriteLine(uid);
+                            object? directoryObject = Assembly.GetExecutingAssembly().CreateInstance($"StorageAndTrade_1_0.Довідники.{configurationDirectories.Name}_Objest");
+                            if (directoryObject != null)
+                            {
+                                object? objRead = directoryObject.GetType().InvokeMember("Read", BindingFlags.InvokeMethod, null, directoryObject, new object[] { new UnigueID(uid) });
+                                if (objRead != null ? (bool)objRead : false)
+                                {
+                                    object? objName = directoryObject.GetType().InvokeMember("GetPresentation", BindingFlags.InvokeMethod, null, directoryObject, null);
+                                    if (objName != null)
+                                        name = (string)objName;
+                                }
+                            }
 
                             Dictionary<string, object> paramQuery = new Dictionary<string, object>();
                             paramQuery.Add("uid", uid);
@@ -310,32 +320,34 @@ namespace StorageAndTrade
                                 string[] splitTableAndField = tableAndField.Split(".");
                                 string table = splitTableAndField[0];
                                 string field = splitTableAndField[1];
+                                long count = 0;
 
                                 string queryFind = $"SELECT count(uid) FROM {table} WHERE {field} = @uid";
                                 object? objcount = Config.Kernel.DataBase.ExecuteSQLScalar(queryFind, paramQuery);
 
                                 if (objcount != null)
-                                    allCount += (long)objcount;
+                                {
+                                    count = (long)objcount;
+                                    allCount += count;
+
+                                    if (count != 0)
+                                        CreateMessage(TypeMessage.Error, " --> " + name + ", uid [" + uid + "], table [" + table + "], field [" + field + "]");
+                                }
                             }
 
                             if (allCount == 0)
                             {
-                                object? directoryObject = Assembly.GetExecutingAssembly().CreateInstance($"StorageAndTrade_1_0.Довідники.{configurationDirectories.Name}_Objest");
                                 if (directoryObject != null)
                                 {
-                                    object? objRead = directoryObject.GetType().InvokeMember("Read", BindingFlags.InvokeMethod, null, directoryObject, new object[] { new UnigueID(uid) });
-                                    if (objRead != null ? (bool)objRead : false)
-                                    {
-
-                                        directoryObject.GetType().InvokeMember("Delete", BindingFlags.InvokeMethod, null, directoryObject, null);
-                                        Console.WriteLine("Видалено: " + uid);
-                                    }
+                                    directoryObject.GetType().InvokeMember("Delete", BindingFlags.InvokeMethod, null, directoryObject, null);
+                                    CreateMessage(TypeMessage.Ok, " --> Видалено: [" + uid + "] " + name);
                                 }
                             }
                         }
                     }
                 }
 
+                CreateMessage(TypeMessage.None, "\n");
                 CreateMessage(TypeMessage.Info, "Обробка документів:");
 
                 foreach (ConfigurationDocuments configurationDocuments in Config.Kernel!.Conf.Documents.Values)
@@ -346,13 +358,7 @@ namespace StorageAndTrade
                     CreateMessage(TypeMessage.Info, " -> " + configurationDocuments.Name);
 
                     //Вибірка помічених на видалення
-                    string query = @$"
-SELECT 
-    uid, docname 
-FROM 
-    {configurationDocuments.Table} 
-WHERE 
-    deletion_label = true";
+                    string query = @$"SELECT uid, docname FROM {configurationDocuments.Table} WHERE deletion_label = true";
 
                     string[] columnsName;
                     List<Dictionary<string, object>> listRow;
@@ -369,11 +375,8 @@ WHERE
                         foreach (Dictionary<string, object> row in listRow)
                         {
                             long allCount = 0;
-
                             Guid uid = (Guid)row["uid"];
                             string name = (string)row["docname"];
-
-                            Console.WriteLine(name);
 
                             Dictionary<string, object> paramQuery = new Dictionary<string, object>();
                             paramQuery.Add("uid", uid);
@@ -384,25 +387,33 @@ WHERE
                                 string[] splitTableAndField = tableAndField.Split(".");
                                 string table = splitTableAndField[0];
                                 string field = splitTableAndField[1];
+                                long count = 0;
 
                                 string queryFind = $"SELECT count(uid) FROM {table} WHERE {field} = @uid";
                                 object? objcount = Config.Kernel.DataBase.ExecuteSQLScalar(queryFind, paramQuery);
 
                                 if (objcount != null)
                                 {
-                                    allCount += (long)objcount;
-                                    Console.WriteLine($"Знайдено [{tableAndField}]: " + (long)objcount);
+                                    count = (long)objcount;
+                                    allCount += count;
+
+                                    if (count != 0)
+                                        CreateMessage(TypeMessage.Error, " --> " + name + ", uid [" + uid + "], table [" + table + "], field [" + field + "]");
                                 }
                             }
 
-                            Console.WriteLine("Загально: " + allCount);
-
                             if (allCount == 0)
                             {
-                                string queryFind = $"DELETE FROM {configurationDocuments.Table} WHERE uid = @uid";
-                                Config.Kernel.DataBase.ExecuteSQL(queryFind, paramQuery);
-
-                                Console.WriteLine("Видалено: " + name);
+                                object? documentObject = Assembly.GetExecutingAssembly().CreateInstance($"StorageAndTrade_1_0.Документи.{configurationDocuments.Name}_Objest");
+                                if (documentObject != null)
+                                {
+                                    object? objRead = documentObject.GetType().InvokeMember("Read", BindingFlags.InvokeMethod, null, documentObject, new object[] { new UnigueID(uid) });
+                                    if (objRead != null ? (bool)objRead : false)
+                                    {
+                                        CreateMessage(TypeMessage.Ok, " --> Видалено: [" + uid + "] " + name);
+                                        documentObject.GetType().InvokeMember("Delete", BindingFlags.InvokeMethod, null, documentObject, null);
+                                    }
+                                }
                             }
                         }
                     }
