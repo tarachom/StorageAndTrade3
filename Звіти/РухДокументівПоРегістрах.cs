@@ -21,6 +21,8 @@ limitations under the License.
 Сайт:     accounting.org.ua
 */
 
+using Gtk;
+
 using Константи = StorageAndTrade_1_0.Константи;
 using StorageAndTrade_1_0.Довідники;
 using StorageAndTrade_1_0.Документи;
@@ -67,6 +69,16 @@ namespace StorageAndTrade
             columns.Add("income", 0.5f);
             columns.Add("ВНаявності", 1);
             columns.Add("ДоВідвантаження", 1);
+
+            return columns;
+        }
+
+        public static Dictionary<string, TreeCellDataFunc> ТовариНаСкладах_ФункціяДляКолонки()
+        {
+            Dictionary<string, TreeCellDataFunc> columns = new Dictionary<string, TreeCellDataFunc>();
+
+            columns.Add("ВНаявності", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла);
+            columns.Add("ДоВідвантаження", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла);
 
             return columns;
         }
@@ -147,10 +159,21 @@ ORDER BY Номенклатура_Назва
             Dictionary<string, float> columns = new Dictionary<string, float>();
 
             columns.Add("income", 0.5f);
-            columns.Add("Рядок", 1);
+            columns.Add("Рядок", 0.1f);
             columns.Add("Кількість", 1);
             columns.Add("Собівартість", 1);
             columns.Add("СписанаСобівартість", 1);
+
+            return columns;
+        }
+
+        public static Dictionary<string, TreeCellDataFunc> ПартіїТоварів_ФункціяДляКолонки()
+        {
+            Dictionary<string, TreeCellDataFunc> columns = new Dictionary<string, TreeCellDataFunc>();
+
+            columns.Add("Кількість", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла);
+            columns.Add("Собівартість", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла);
+            columns.Add("СписанаСобівартість", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла);
 
             return columns;
         }
@@ -310,6 +333,16 @@ ORDER BY Номенклатура_Назва
             return columns;
         }
 
+        public static Dictionary<string, TreeCellDataFunc> ЗамовленняКлієнтів_ФункціяДляКолонки()
+        {
+            Dictionary<string, TreeCellDataFunc> columns = new Dictionary<string, TreeCellDataFunc>();
+
+            columns.Add("Замовлено", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла);
+            columns.Add("Сума", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла);
+
+            return columns;
+        }
+
         public static string ЗамовленняКлієнтів_Запит = $@"
 SELECT 
     (CASE WHEN Рег_ЗамовленняКлієнтів.income = true THEN '+' ELSE '-' END) AS income,
@@ -380,6 +413,15 @@ ORDER BY Номенклатура_Назва
             return columns;
         }
 
+        public static Dictionary<string, TreeCellDataFunc> РозрахункиЗКлієнтами_ФункціяДляКолонки()
+        {
+            Dictionary<string, TreeCellDataFunc> columns = new Dictionary<string, TreeCellDataFunc>();
+
+            columns.Add("Сума", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла);
+
+            return columns;
+        }
+
         public static string РозрахункиЗКлієнтами_Запит = $@"
 SELECT 
     (CASE WHEN Рег_РозрахункиЗКлієнтами.income = true THEN '+' ELSE '-' END) AS income,
@@ -444,6 +486,17 @@ WHERE
             return columns;
         }
 
+        public static Dictionary<string, TreeCellDataFunc> ВільніЗалишки_ФункціяДляКолонки()
+        {
+            Dictionary<string, TreeCellDataFunc> columns = new Dictionary<string, TreeCellDataFunc>();
+
+            columns.Add("ВНаявності", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла);
+            columns.Add("ВРезервіЗіСкладу", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла);
+            columns.Add("ВРезервіПідЗамовлення", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла);
+
+            return columns;
+        }
+        
         public static string ВільніЗалишки_Запит = $@"
 SELECT 
     (CASE WHEN Рег_ВільніЗалишки.income = true THEN '+' ELSE '-' END) AS income, 
@@ -514,6 +567,15 @@ ORDER BY Номенклатура_Назва
             return columns;
         }
 
+        public static Dictionary<string, TreeCellDataFunc> ЗамовленняПостачальникам_ФункціяДляКолонки()
+        {
+            Dictionary<string, TreeCellDataFunc> columns = new Dictionary<string, TreeCellDataFunc>();
+
+            columns.Add("Замовлено", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла);
+
+            return columns;
+        }
+
         public static string ЗамовленняПостачальникам_Запит = $@"
 SELECT 
     (CASE WHEN Рег_ЗамовленняПостачальникам.income = true THEN '+' ELSE '-' END) AS income, 
@@ -579,6 +641,15 @@ ORDER BY Номенклатура_Назва
 
             columns.Add("income", 0.5f);
             columns.Add("Сума", 1);
+
+            return columns;
+        }
+
+        public static Dictionary<string, TreeCellDataFunc> РозрахункиЗПостачальниками_ФункціяДляКолонки()
+        {
+            Dictionary<string, TreeCellDataFunc> columns = new Dictionary<string, TreeCellDataFunc>();
+
+            columns.Add("Сума", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла);
 
             return columns;
         }
@@ -712,6 +783,15 @@ ORDER BY Номенклатура_Назва
             return columns;
         }
 
+        public static Dictionary<string, TreeCellDataFunc> РухКоштів_ФункціяДляКолонки()
+        {
+            Dictionary<string, TreeCellDataFunc> columns = new Dictionary<string, TreeCellDataFunc>();
+
+            columns.Add("Сума", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла);
+
+            return columns;
+        }
+
         public static string РухКоштів_Запит = $@"
 SELECT 
     (CASE WHEN Рег_РухКоштів.income = true THEN '+' ELSE '-' END) AS income, 
@@ -783,6 +863,17 @@ ORDER BY Організація_Назва
             columns.Add("Сума", 1);
             columns.Add("Собівартість", 1);
 
+            return columns;
+        }
+
+        public static Dictionary<string, TreeCellDataFunc> Закупівлі_ФункціяДляКолонки()
+        {
+            Dictionary<string, TreeCellDataFunc> columns = new Dictionary<string, TreeCellDataFunc>();
+
+            columns.Add("Кількість", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла);
+            columns.Add("Сума", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла);
+            columns.Add("Собівартість", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла);
+            
             return columns;
         }
 
@@ -877,6 +968,18 @@ WHERE
             return columns;
         }
 
+        public static Dictionary<string, TreeCellDataFunc> Продажі_ФункціяДляКолонки()
+        {
+            Dictionary<string, TreeCellDataFunc> columns = new Dictionary<string, TreeCellDataFunc>();
+
+            columns.Add("Кількість", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла);
+            columns.Add("Сума", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла);
+            columns.Add("Дохід", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла);
+            columns.Add("Собівартість", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла);
+
+            return columns;
+        }
+
         public static string Продажі_Запит = $@"
 SELECT 
     Рег_Продажі.period, 
@@ -963,6 +1066,15 @@ WHERE
             return columns;
         }
 
+        public static Dictionary<string, TreeCellDataFunc> ТовариВКомірках_ФункціяДляКолонки()
+        {
+            Dictionary<string, TreeCellDataFunc> columns = new Dictionary<string, TreeCellDataFunc>();
+
+            columns.Add("ВНаявності", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла);
+
+            return columns;
+        }
+
         public static string ТовариВКомірках_Запит = $@"
 SELECT 
     (CASE WHEN Рег_ТовариВКомірках.income = true THEN '+' ELSE '-' END) AS income,
@@ -1001,6 +1113,5 @@ ORDER BY Номенклатура_Назва
 ";
 
         #endregion
-
     }
 }

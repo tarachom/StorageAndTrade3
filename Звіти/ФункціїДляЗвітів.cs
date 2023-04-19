@@ -112,7 +112,8 @@ namespace StorageAndTrade
             string[] columnsName,
             Dictionary<string, string> visibleColumns,
             Dictionary<string, string>? dataColumns = null,
-            Dictionary<string, float>? xalignColumns = null)
+            Dictionary<string, float>? xalignColumns = null,
+            Dictionary<string, TreeCellDataFunc>? columnCellDataFunc = null)
         {
             for (int i = 0; i < columnsName.Length; i++)
             {
@@ -122,26 +123,41 @@ namespace StorageAndTrade
                 bool isVisibleColumn = visibleColumns.ContainsKey(columnName);
 
                 //Позиція тексту в колонці (0 .. 1)
-                float xalign = xalignColumns != null ?
-                    (xalignColumns.ContainsKey(columnName) ? xalignColumns[columnName] : 0) : 0;
+                float xalign = xalignColumns != null ? (xalignColumns.ContainsKey(columnName) ? xalignColumns[columnName] : 0) : 0;
 
-                TreeViewColumn treeColumn = new TreeViewColumn(
-                    isVisibleColumn ? visibleColumns[columnName] : columnName,
-                    new CellRendererText() { Xalign = xalign }, "text", i)
-                { Visible = isVisibleColumn, Alignment = xalign, Resizable = true, MinWidth = 20 };
+                CellRendererText cellRendererText = new CellRendererText() { Xalign = xalign };
+
+                TreeViewColumn treeColumn = new TreeViewColumn(isVisibleColumn ? visibleColumns[columnName] : columnName, cellRendererText, "text", i)
+                {
+                    Visible = isVisibleColumn,
+                    Alignment = xalign,
+                    Resizable = true,
+                    MinWidth = 20
+                };
+
+                //
+                // Привязка колонки з даними до видимої колонки
+                //
 
                 if (dataColumns != null && dataColumns.ContainsKey(columnName))
                 {
                     string dataColumName = dataColumns[columnName];
-
                     for (int j = 0; j < columnsName.Length; j++)
-                    {
                         if (dataColumName == columnsName[j])
                         {
                             treeColumn.Data.Add("Column", new NameValue<int>(columnName, j));
                             break;
                         }
-                    }
+                }
+
+                //
+                //Функція обробки ячейки для видимої колонки
+                //
+
+                if (columnCellDataFunc != null && isVisibleColumn && columnCellDataFunc.ContainsKey(columnName))
+                {
+                    treeColumn.Data.Add("CellDataFunc", columnName);
+                    treeColumn.SetCellDataFunc(cellRendererText, columnCellDataFunc[columnName]);
                 }
 
                 treeView.AppendColumn(treeColumn);
@@ -156,7 +172,6 @@ namespace StorageAndTrade
             foreach (Dictionary<string, object> row in listRow)
             {
                 string[] values = new string[columnsName.Length];
-
                 for (int i = 0; i < columnsName.Length; i++)
                 {
                     string column = columnsName[i];
@@ -260,6 +275,28 @@ namespace StorageAndTrade
                     }
                 }
             );
+        }
+
+        #endregion
+
+        #region ФункціяДляКолонки
+
+        public static void ФункціяДляКолонкиБазоваДляЧисла(TreeViewColumn column, CellRenderer cell, ITreeModel model, TreeIter iter)
+        {
+            CellRendererText cellText = (CellRendererText)cell;
+            if (column.Data.Contains("CellDataFunc"))
+                cellText.Foreground = "green";
+        }
+
+        public static void ФункціяДляКолонкиВідємнеЧислоЧервоним(TreeViewColumn column, CellRenderer cell, ITreeModel model, TreeIter iter)
+        {
+            CellRendererText cellText = (CellRendererText)cell;
+            if (column.Data.Contains("CellDataFunc"))
+            {
+                float result;
+                if (float.TryParse(cellText.Text, out result))
+                    cellText.Foreground = (result >= 0) ? "green" : "red";
+            }
         }
 
         #endregion

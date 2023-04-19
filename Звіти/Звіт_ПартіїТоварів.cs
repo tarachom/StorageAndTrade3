@@ -423,6 +423,7 @@ ORDER BY Організація_Назва, ПартіяТоварівКомпо
             #endregion
 
             Dictionary<string, string> ВидиміКолонки = new Dictionary<string, string>();
+
             ВидиміКолонки.Add("Організація_Назва", "Організація");
             ВидиміКолонки.Add("ПартіяТоварівКомпозит_Назва", "Партія");
             ВидиміКолонки.Add("Номенклатура_Назва", "Номенклатура");
@@ -442,9 +443,14 @@ ORDER BY Організація_Назва, ПартіяТоварівКомпо
             КолонкиДаних.Add("Склад_Назва", "Склад");
 
             Dictionary<string, float> ПозиціяТекстуВКолонці = new Dictionary<string, float>();
-            ПозиціяТекстуВКолонці.Add("Рядок", 1);
+            ПозиціяТекстуВКолонці.Add("Рядок", 0.1f);
             ПозиціяТекстуВКолонці.Add("Кількість", 1);
             ПозиціяТекстуВКолонці.Add("Собівартість", 1);
+
+            Dictionary<string, TreeCellDataFunc> ФункціяДляКолонки = new Dictionary<string, TreeCellDataFunc>();
+            ФункціяДляКолонки.Add("Рядок", CellDataFunc);
+            ФункціяДляКолонки.Add("Кількість", CellDataFunc);
+            ФункціяДляКолонки.Add("Собівартість", CellDataFunc);
 
             Dictionary<string, object> paramQuery = new Dictionary<string, object>();
 
@@ -459,7 +465,7 @@ ORDER BY Організація_Назва, ПартіяТоварівКомпо
             TreeView treeView = new TreeView(listStore);
             treeView.ButtonPressEvent += ФункціїДляЗвітів.OpenPageDirectoryOrDocument;
 
-            ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних, ПозиціяТекстуВКолонці);
+            ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних, ПозиціяТекстуВКолонці, ФункціяДляКолонки);
             ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, columnsName, listRow);
 
             ФункціїДляЗвітів.CreateReportNotebookPage(reportNotebook, "Залишки", ВідобразитиФільтр("Залишки", Фільтр), treeView, Залишки, Фільтр, refreshPage);
@@ -781,7 +787,7 @@ ORDER BY Організація_Назва, ПартіяТоварівКомпо
             КолонкиДаних.Add("Склад_Назва", "Склад");
 
             Dictionary<string, float> ПозиціяТекстуВКолонці = new Dictionary<string, float>();
-            ПозиціяТекстуВКолонці.Add("Рядок", 1);
+            ПозиціяТекстуВКолонці.Add("Рядок", 0.1f);
             ПозиціяТекстуВКолонці.Add("КількістьПочатковийЗалишок", 1);
             ПозиціяТекстуВКолонці.Add("СобівартістьПочатковийЗалишок", 1);
             ПозиціяТекстуВКолонці.Add("КількістьПрихід", 1);
@@ -790,6 +796,17 @@ ORDER BY Організація_Назва, ПартіяТоварівКомпо
             ПозиціяТекстуВКолонці.Add("СобівартістьРозхід", 1);
             ПозиціяТекстуВКолонці.Add("КількістьКінцевийЗалишок", 1);
             ПозиціяТекстуВКолонці.Add("СобівартістьКінцевийЗалишок", 1);
+
+            Dictionary<string, TreeCellDataFunc> ФункціяДляКолонки = new Dictionary<string, TreeCellDataFunc>();
+            ФункціяДляКолонки.Add("Рядок", CellDataFunc);
+            ФункціяДляКолонки.Add("КількістьПочатковийЗалишок", CellDataFunc);
+            ФункціяДляКолонки.Add("СобівартістьПочатковийЗалишок", CellDataFunc);
+            ФункціяДляКолонки.Add("КількістьПрихід", CellDataFunc);
+            ФункціяДляКолонки.Add("КількістьРозхід", CellDataFunc);
+            ФункціяДляКолонки.Add("СобівартістьПрихід", CellDataFunc);
+            ФункціяДляКолонки.Add("СобівартістьРозхід", CellDataFunc);
+            ФункціяДляКолонки.Add("КількістьКінцевийЗалишок", CellDataFunc);
+            ФункціяДляКолонки.Add("СобівартістьКінцевийЗалишок", CellDataFunc);
 
             Dictionary<string, object> paramQuery = new Dictionary<string, object>();
             paramQuery.Add("ПочатокПеріоду", Фільтр.ДатаПочатокПеріоду);
@@ -806,7 +823,7 @@ ORDER BY Організація_Назва, ПартіяТоварівКомпо
             TreeView treeView = new TreeView(listStore);
             treeView.ButtonPressEvent += ФункціїДляЗвітів.OpenPageDirectoryOrDocument;
 
-            ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних, ПозиціяТекстуВКолонці);
+            ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних, ПозиціяТекстуВКолонці, ФункціяДляКолонки);
             ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, columnsName, listRow);
 
             ФункціїДляЗвітів.CreateReportNotebookPage(reportNotebook, "Залишки та обороти", ВідобразитиФільтр("ЗалишкиТаОбороти", Фільтр), treeView, ЗалишкиТаОбороти, Фільтр, refreshPage);
@@ -1057,9 +1074,14 @@ ORDER BY period ASC, Організація_Назва,
 
             Dictionary<string, float> ПозиціяТекстуВКолонці = new Dictionary<string, float>();
             ПозиціяТекстуВКолонці.Add("income", 0.5f);
-            ПозиціяТекстуВКолонці.Add("Рядок", 1);
+            ПозиціяТекстуВКолонці.Add("Рядок", 0.1f);
             ПозиціяТекстуВКолонці.Add("Кількість", 1);
             ПозиціяТекстуВКолонці.Add("Собівартість", 1);
+
+            Dictionary<string, TreeCellDataFunc> ФункціяДляКолонки = new Dictionary<string, TreeCellDataFunc>();
+            ФункціяДляКолонки.Add("Рядок", CellDataFunc);
+            ФункціяДляКолонки.Add("Кількість", CellDataFunc);
+            ФункціяДляКолонки.Add("Собівартість", CellDataFunc);
 
             Dictionary<string, object> paramQuery = new Dictionary<string, object>();
             paramQuery.Add("ПочатокПеріоду", Фільтр.ДатаПочатокПеріоду);
@@ -1076,10 +1098,36 @@ ORDER BY period ASC, Організація_Назва,
             TreeView treeView = new TreeView(listStore);
             treeView.ButtonPressEvent += ФункціїДляЗвітів.OpenPageDirectoryOrDocument;
 
-            ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних, ПозиціяТекстуВКолонці);
+            ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних, ПозиціяТекстуВКолонці, ФункціяДляКолонки);
             ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, columnsName, listRow);
 
             ФункціїДляЗвітів.CreateReportNotebookPage(reportNotebook, "Документи", ВідобразитиФільтр("Документи", Фільтр), treeView, Документи, Фільтр, refreshPage);
+        }
+
+        //Функція Для Колонки
+        //Викликається для кожної ячейки колонки
+        void CellDataFunc(TreeViewColumn column, CellRenderer cell, ITreeModel model, TreeIter iter)
+        {
+            CellRendererText cellText = (CellRendererText)cell;
+            if (column.Data.Contains("CellDataFunc"))
+            {
+                switch ((string)column.Data["CellDataFunc"]!)
+                {
+                    case "Рядок":
+                        {
+                            cellText.Text = "№ " + cellText.Text;
+                            break;
+                        }
+                    default:
+                        {
+                            float result;
+                            if (float.TryParse(cellText.Text, out result))
+                                cellText.Foreground = (result >= 0) ? "green" : "red";
+                                
+                            break;
+                        }
+                }
+            }
         }
 
     }

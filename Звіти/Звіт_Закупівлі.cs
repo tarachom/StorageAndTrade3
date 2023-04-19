@@ -509,6 +509,11 @@ ORDER BY " +
             ПозиціяТекстуВКолонці.Add("Сума", 1);
             ПозиціяТекстуВКолонці.Add("Собівартість", 1);
 
+            Dictionary<string, TreeCellDataFunc> ФункціяДляКолонки = new Dictionary<string, TreeCellDataFunc>();
+            ФункціяДляКолонки.Add("Кількість", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним);
+            ФункціяДляКолонки.Add("Сума", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним);
+            ФункціяДляКолонки.Add("Собівартість", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним);
+
             Dictionary<string, object> paramQuery = new Dictionary<string, object>();
             paramQuery.Add("ПочатокПеріоду", Фільтр.ДатаПочатокПеріоду);
             paramQuery.Add("КінецьПеріоду", Фільтр.ДатаКінецьПеріоду);
@@ -524,10 +529,11 @@ ORDER BY " +
             TreeView treeView = new TreeView(listStore);
             treeView.ButtonPressEvent += ФункціїДляЗвітів.OpenPageDirectoryOrDocument;
 
-            ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних, ПозиціяТекстуВКолонці);
+            ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних, ПозиціяТекстуВКолонці, ФункціяДляКолонки);
             ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, columnsName, listRow);
 
             ФункціїДляЗвітів.CreateReportNotebookPage(reportNotebook, "Обороти", ВідобразитиФільтр("Обороти", Фільтр), treeView, Обороти, Фільтр, refreshPage);
         }
+
     }
 }

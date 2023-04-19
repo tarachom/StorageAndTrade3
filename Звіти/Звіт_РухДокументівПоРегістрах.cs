@@ -53,6 +53,7 @@ namespace StorageAndTrade
                 Dictionary<string, string> visibleColumn = new Dictionary<string, string>();
                 Dictionary<string, string>? dataColumn = null;
                 Dictionary<string, float>? textAlignColumn = null;
+                Dictionary<string, TreeCellDataFunc>? funcColumn = null;
 
                 switch (regAccumName)
                 {
@@ -64,6 +65,7 @@ namespace StorageAndTrade
                             visibleColumn = РухДокументівПоРегістрах.ТовариНаСкладах_ВидиміКолонки();
                             dataColumn = РухДокументівПоРегістрах.ТовариНаСкладах_КолонкиДаних();
                             textAlignColumn = РухДокументівПоРегістрах.ТовариНаСкладах_ПозиціяТекстуВКолонці();
+                            funcColumn = РухДокументівПоРегістрах.ТовариНаСкладах_ФункціяДляКолонки();
 
                             Config.Kernel.DataBase.SelectRequest(РухДокументівПоРегістрах.ТовариНаСкладах_Запит, paramQuery, out columnsName, out listRow);
 
@@ -77,24 +79,12 @@ namespace StorageAndTrade
                             visibleColumn = РухДокументівПоРегістрах.ПартіїТоварів_ВидиміКолонки();
                             dataColumn = РухДокументівПоРегістрах.ПартіїТоварів_КолонкиДаних();
                             textAlignColumn = РухДокументівПоРегістрах.ПартіїТоварів_ПозиціяТекстуВКолонці();
+                            funcColumn = РухДокументівПоРегістрах.ПартіїТоварів_ФункціяДляКолонки();
 
                             Config.Kernel.DataBase.SelectRequest(РухДокументівПоРегістрах.ПартіїТоварів_Запит, paramQuery, out columnsName, out listRow);
 
                             break;
                         }
-                    // case "РухТоварів":
-                    //     {
-                    //         exist = true;
-                    //         blockCaption = "Рух товарів";
-
-                    //         visibleColumn = РухДокументівПоРегістрах.РухТоварів_ВидиміКолонки();
-                    //         dataColumn = РухДокументівПоРегістрах.РухТоварів_КолонкиДаних();
-                    //         textAlignColumn = РухДокументівПоРегістрах.РухТоварів_ПозиціяТекстуВКолонці();
-
-                    //         Config.Kernel.DataBase.SelectRequest(РухДокументівПоРегістрах.РухТоварів_Запит, paramQuery, out columnsName, out listRow);
-
-                    //         break;
-                    //     }
                     case "ЗамовленняКлієнтів":
                         {
                             exist = true;
@@ -103,6 +93,7 @@ namespace StorageAndTrade
                             visibleColumn = РухДокументівПоРегістрах.ЗамовленняКлієнтів_ВидиміКолонки();
                             dataColumn = РухДокументівПоРегістрах.ЗамовленняКлієнтів_КолонкиДаних();
                             textAlignColumn = РухДокументівПоРегістрах.ЗамовленняКлієнтів_ПозиціяТекстуВКолонці();
+                            funcColumn = РухДокументівПоРегістрах.ЗамовленняКлієнтів_ФункціяДляКолонки();
 
                             Config.Kernel.DataBase.SelectRequest(РухДокументівПоРегістрах.ЗамовленняКлієнтів_Запит, paramQuery, out columnsName, out listRow);
 
@@ -116,6 +107,7 @@ namespace StorageAndTrade
                             visibleColumn = РухДокументівПоРегістрах.РозрахункиЗКлієнтами_ВидиміКолонки();
                             dataColumn = РухДокументівПоРегістрах.РозрахункиЗКлієнтами_КолонкиДаних();
                             textAlignColumn = РухДокументівПоРегістрах.РозрахункиЗКлієнтами_ПозиціяТекстуВКолонці();
+                            funcColumn = РухДокументівПоРегістрах.РозрахункиЗКлієнтами_ФункціяДляКолонки();
 
                             Config.Kernel.DataBase.SelectRequest(РухДокументівПоРегістрах.РозрахункиЗКлієнтами_Запит, paramQuery, out columnsName, out listRow);
 
@@ -129,6 +121,7 @@ namespace StorageAndTrade
                             visibleColumn = РухДокументівПоРегістрах.ВільніЗалишки_ВидиміКолонки();
                             dataColumn = РухДокументівПоРегістрах.ВільніЗалишки_КолонкиДаних();
                             textAlignColumn = РухДокументівПоРегістрах.ВільніЗалишки_ПозиціяТекстуВКолонці();
+                            funcColumn = РухДокументівПоРегістрах.ВільніЗалишки_ФункціяДляКолонки();
 
                             Config.Kernel.DataBase.SelectRequest(РухДокументівПоРегістрах.ВільніЗалишки_Запит, paramQuery, out columnsName, out listRow);
 
@@ -142,6 +135,7 @@ namespace StorageAndTrade
                             visibleColumn = РухДокументівПоРегістрах.ЗамовленняПостачальникам_ВидиміКолонки();
                             dataColumn = РухДокументівПоРегістрах.ЗамовленняПостачальникам_КолонкиДаних();
                             textAlignColumn = РухДокументівПоРегістрах.ЗамовленняПостачальникам_ПозиціяТекстуВКолонці();
+                            funcColumn = РухДокументівПоРегістрах.ЗамовленняПостачальникам_ФункціяДляКолонки();
 
                             Config.Kernel.DataBase.SelectRequest(РухДокументівПоРегістрах.ЗамовленняПостачальникам_Запит, paramQuery, out columnsName, out listRow);
 
@@ -155,24 +149,12 @@ namespace StorageAndTrade
                             visibleColumn = РухДокументівПоРегістрах.РозрахункиЗПостачальниками_ВидиміКолонки();
                             dataColumn = РухДокументівПоРегістрах.РозрахункиЗПостачальниками_КолонкиДаних();
                             textAlignColumn = РухДокументівПоРегістрах.РозрахункиЗПостачальниками_ПозиціяТекстуВКолонці();
+                            funcColumn = РухДокументівПоРегістрах.РозрахункиЗПостачальниками_ФункціяДляКолонки();
 
                             Config.Kernel.DataBase.SelectRequest(РухДокументівПоРегістрах.РозрахункиЗПостачальниками_Запит, paramQuery, out columnsName, out listRow);
 
                             break;
                         }
-                    // case "ТовариДоПоступлення":
-                    //     {
-                    //         exist = true;
-                    //         blockCaption = "Товари до поступлення";
-
-                    //         visibleColumn = РухДокументівПоРегістрах.ТовариДоПоступлення_ВидиміКолонки();
-                    //         dataColumn = РухДокументівПоРегістрах.ТовариДоПоступлення_КолонкиДаних();
-                    //         textAlignColumn = РухДокументівПоРегістрах.ТовариДоПоступлення_ПозиціяТекстуВКолонці();
-
-                    //         Config.Kernel.DataBase.SelectRequest(РухДокументівПоРегістрах.ТовариДоПоступлення_Запит, paramQuery, out columnsName, out listRow);
-
-                    //         break;
-                    //     }
                     case "РухКоштів":
                         {
                             exist = true;
@@ -181,6 +163,7 @@ namespace StorageAndTrade
                             visibleColumn = РухДокументівПоРегістрах.РухКоштів_ВидиміКолонки();
                             dataColumn = РухДокументівПоРегістрах.РухКоштів_КолонкиДаних();
                             textAlignColumn = РухДокументівПоРегістрах.РухКоштів_ПозиціяТекстуВКолонці();
+                            funcColumn = РухДокументівПоРегістрах.РухКоштів_ФункціяДляКолонки();
 
                             Config.Kernel.DataBase.SelectRequest(РухДокументівПоРегістрах.РухКоштів_Запит, paramQuery, out columnsName, out listRow);
 
@@ -194,6 +177,7 @@ namespace StorageAndTrade
                             visibleColumn = РухДокументівПоРегістрах.Закупівлі_ВидиміКолонки();
                             dataColumn = РухДокументівПоРегістрах.Закупівлі_КолонкиДаних();
                             textAlignColumn = РухДокументівПоРегістрах.Закупівлі_ПозиціяТекстуВКолонці();
+                            funcColumn = РухДокументівПоРегістрах.Закупівлі_ФункціяДляКолонки();
 
                             Config.Kernel.DataBase.SelectRequest(РухДокументівПоРегістрах.Закупівлі_Запит, paramQuery, out columnsName, out listRow);
 
@@ -207,6 +191,7 @@ namespace StorageAndTrade
                             visibleColumn = РухДокументівПоРегістрах.Продажі_ВидиміКолонки();
                             dataColumn = РухДокументівПоРегістрах.Продажі_КолонкиДаних();
                             textAlignColumn = РухДокументівПоРегістрах.Продажі_ПозиціяТекстуВКолонці();
+                            funcColumn = РухДокументівПоРегістрах.Продажі_ФункціяДляКолонки();
 
                             Config.Kernel.DataBase.SelectRequest(РухДокументівПоРегістрах.Продажі_Запит, paramQuery, out columnsName, out listRow);
 
@@ -220,6 +205,7 @@ namespace StorageAndTrade
                             visibleColumn = РухДокументівПоРегістрах.ТовариВКомірках_ВидиміКолонки();
                             dataColumn = РухДокументівПоРегістрах.ТовариВКомірках_КолонкиДаних();
                             textAlignColumn = РухДокументівПоРегістрах.ТовариВКомірках_ПозиціяТекстуВКолонці();
+                            funcColumn = РухДокументівПоРегістрах.ТовариВКомірках_ФункціяДляКолонки();
 
                             Config.Kernel.DataBase.SelectRequest(РухДокументівПоРегістрах.ТовариВКомірках_Запит, paramQuery, out columnsName, out listRow);
 
@@ -240,7 +226,7 @@ namespace StorageAndTrade
                     TreeView treeView = new TreeView(listStore);
                     treeView.ButtonPressEvent += ФункціїДляЗвітів.OpenPageDirectoryOrDocument;
 
-                    ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, visibleColumn, dataColumn, textAlignColumn);
+                    ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, visibleColumn, dataColumn, textAlignColumn, funcColumn);
                     ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, columnsName, listRow);
 
                     WriteBlock(blockCaption, treeView);
