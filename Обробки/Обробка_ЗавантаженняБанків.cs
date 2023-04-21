@@ -23,6 +23,9 @@ limitations under the License.
 
 using Gtk;
 
+using System.Text;
+
+using AccountingSoftware;
 using Константи = StorageAndTrade_1_0.Константи;
 using StorageAndTrade_1_0.Довідники;
 
@@ -100,14 +103,17 @@ namespace StorageAndTrade
             if (String.IsNullOrEmpty(link))
             {
                 //За замовчуванням
-                link = "https://accounting.org.ua/xml/get_data_branch_glbank.xml";
+                link = "https://bank.gov.ua/NBU_BankInfo/get_data_branch_glbank";
             }
 
-            CreateMessage(TypeMessage.Info, $"Завантаження ХМЛ файлу із accounting.org.ua");
+            CreateMessage(TypeMessage.Info, $"Завантаження ХМЛ файлу");
+            CreateMessage(TypeMessage.None, " --> " + link);
+
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+            Encoding.GetEncoding("windows-1251");
 
             XPathDocument xPathDoc;
             XPathNavigator? xPathDocNavigator = null;
-
             try
             {
                 xPathDoc = new XPathDocument(link);
@@ -126,13 +132,25 @@ namespace StorageAndTrade
             {
                 Банки_Select банки_Select = new Банки_Select();
 
+                //Помітка всіх елементів на видалення
+                банки_Select.QuerySelect.Where.Add(new Where(Банки_Const.DELETION_LABEL, Comparison.NOT, true));
+                if (банки_Select.Select())
+                    while (банки_Select.MoveNext())
+                        банки_Select.Current?.SetDeletionLabel();
+
+                банки_Select.QuerySelect.Where.Clear();
+
                 XPathNodeIterator? Записи = xPathDocNavigator?.Select("/BANKBRANCH/ROW");
                 while (Записи!.MoveNext())
                 {
                     if (CancellationTokenThread!.IsCancellationRequested)
                         break;
 
-                    string КодМФО = Записи?.Current?.SelectSingleNode("GLMFO")?.Value ?? "";
+                    XPathNavigator? current = Записи?.Current;
+                    if (current == null)
+                        break;
+
+                    string КодМФО = current.SelectSingleNode("GLMFO")?.Value ?? "";
 
                     if (String.IsNullOrEmpty(КодМФО))
                     {
@@ -140,32 +158,32 @@ namespace StorageAndTrade
                         break;
                     }
 
-                    string НазваГоловноїУстановиАнг = Записи?.Current?.SelectSingleNode("NAME_E")?.Value ?? "";
-                    string КодЄДРПОУ = Записи?.Current?.SelectSingleNode("KOD_EDRPOU")?.Value ?? "";
-                    string Назва = Записи?.Current?.SelectSingleNode("SHORTNAME")?.Value ?? "";
-                    string ПовнаНазва = Записи?.Current?.SelectSingleNode("FULLNAME")?.Value ?? "";
-                    string УнікальнийКодБанку = Записи?.Current?.SelectSingleNode("NKB")?.Value ?? "";
-                    string КодОбластіОпераційноїДіяльності = Записи?.Current?.SelectSingleNode("KU")?.Value ?? "";
-                    string НазваОбластіОпераційноїДіяльності = Записи?.Current?.SelectSingleNode("N_OBL")?.Value ?? "";
-                    string КодОбластіЗгідноСтатуту = Записи?.Current?.SelectSingleNode("OBL_UR")?.Value ?? "";
-                    string НазваОбластіЗгідноСтатуту = Записи?.Current?.SelectSingleNode("N_OBL_UR")?.Value ?? "";
-                    string ПоштовийІндекс = Записи?.Current?.SelectSingleNode("P_IND")?.Value ?? "";
-                    string ТипНаселеногоПункту = Записи?.Current?.SelectSingleNode("TNP")?.Value ?? "";
-                    string НазваНаселеногоПункту = Записи?.Current?.SelectSingleNode("NP")?.Value ?? "";
-                    string Адреса = Записи?.Current?.SelectSingleNode("ADRESS")?.Value ?? "";
-                    string КодТелефонногоЗвязку = Записи?.Current?.SelectSingleNode("KODT")?.Value ?? "";
-                    string НомерТелефону = Записи?.Current?.SelectSingleNode("TELEFON")?.Value ?? "";
-                    string ЧисловийКодСтануУстанови = Записи?.Current?.SelectSingleNode("KSTAN")?.Value ?? "";
-                    string НазваСтануУстанови = Записи?.Current?.SelectSingleNode("N_STAN")?.Value ?? "";
-                    string ДатаЗміниСтану = Записи?.Current?.SelectSingleNode("D_STAN")?.Value ?? "";
-                    string ДатаВідкриттяУстанови = Записи?.Current?.SelectSingleNode("D_OPEN")?.Value ?? "";
-                    string ДатаЗакриттяУстанови = Записи?.Current?.SelectSingleNode("D_CLOSE")?.Value ?? "";
-                    string КодНБУ = Записи?.Current?.SelectSingleNode("IDNBU")?.Value ?? "";
-                    string НомерЛіцензії = Записи?.Current?.SelectSingleNode("NUM_LIC")?.Value ?? "";
-                    string ДатаЛіцензії = Записи?.Current?.SelectSingleNode("DT_GRAND_LIC")?.Value ?? "";
-                    string КодСтатусу = Записи?.Current?.SelectSingleNode("PR_LIC")?.Value ?? "";
-                    string Статус = Записи?.Current?.SelectSingleNode("N_PR_LIC")?.Value ?? "";
-                    string ДатаЗапису = Записи?.Current?.SelectSingleNode("DT_LIC")?.Value ?? "";
+                    string НазваГоловноїУстановиАнг = current.SelectSingleNode("NAME_E")?.Value ?? "";
+                    string КодЄДРПОУ = current.SelectSingleNode("KOD_EDRPOU")?.Value ?? "";
+                    string Назва = current.SelectSingleNode("SHORTNAME")?.Value ?? "";
+                    string ПовнаНазва = current.SelectSingleNode("FULLNAME")?.Value ?? "";
+                    string УнікальнийКодБанку = current.SelectSingleNode("NKB")?.Value ?? "";
+                    string КодОбластіОпераційноїДіяльності = current.SelectSingleNode("KU")?.Value ?? "";
+                    string НазваОбластіОпераційноїДіяльності = current.SelectSingleNode("N_OBL")?.Value ?? "";
+                    string КодОбластіЗгідноСтатуту = current.SelectSingleNode("OBL_UR")?.Value ?? "";
+                    string НазваОбластіЗгідноСтатуту = current.SelectSingleNode("N_OBL_UR")?.Value ?? "";
+                    string ПоштовийІндекс = current.SelectSingleNode("P_IND")?.Value ?? "";
+                    string ТипНаселеногоПункту = current.SelectSingleNode("TNP")?.Value ?? "";
+                    string НазваНаселеногоПункту = current.SelectSingleNode("NP")?.Value ?? "";
+                    string Адреса = current.SelectSingleNode("ADRESS")?.Value ?? "";
+                    string КодТелефонногоЗвязку = current.SelectSingleNode("KODT")?.Value ?? "";
+                    string НомерТелефону = current.SelectSingleNode("TELEFON")?.Value ?? "";
+                    string ЧисловийКодСтануУстанови = current.SelectSingleNode("KSTAN")?.Value ?? "";
+                    string НазваСтануУстанови = current.SelectSingleNode("N_STAN")?.Value ?? "";
+                    string ДатаЗміниСтану = current.SelectSingleNode("D_STAN")?.Value ?? "";
+                    string ДатаВідкриттяУстанови = current.SelectSingleNode("D_OPEN")?.Value ?? "";
+                    string ДатаЗакриттяУстанови = current.SelectSingleNode("D_CLOSE")?.Value ?? "";
+                    string КодНБУ = current.SelectSingleNode("IDNBU")?.Value ?? "";
+                    string НомерЛіцензії = current.SelectSingleNode("NUM_LIC")?.Value ?? "";
+                    string ДатаЛіцензії = current.SelectSingleNode("DT_GRAND_LIC")?.Value ?? "";
+                    string КодСтатусу = current.SelectSingleNode("PR_LIC")?.Value ?? "";
+                    string Статус = current.SelectSingleNode("N_PR_LIC")?.Value ?? "";
+                    string ДатаЗапису = current.SelectSingleNode("DT_LIC")?.Value ?? "";
 
                     Банки_Pointer банки_Pointer = банки_Select.FindByField(Банки_Const.КодМФО, КодМФО);
                     Банки_Objest? банки_Objest;
@@ -213,6 +231,8 @@ namespace StorageAndTrade
                         банки_Objest.Статус = Статус;
                         банки_Objest.ДатаЗапису = ДатаЗапису;
 
+                        банки_Objest.DeletionLabel = false;
+                        
                         банки_Objest.Save();
                     }
                 }

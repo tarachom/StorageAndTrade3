@@ -240,21 +240,20 @@ namespace StorageAndTrade
             thread.Start();
         }
 
-        long SearchDependencies(List<string> listTableAndField, Guid uid, string name)
+        long SearchDependencies(List<ConfigurationDependencies> listDependencies, Guid uid, string name)
         {
             long allCountDependencies = 0;
 
-            if (listTableAndField.Count > 0)
+            if (listDependencies.Count > 0)
             {
                 Dictionary<string, object> paramQuery = new Dictionary<string, object>();
                 paramQuery.Add("uid", uid);
 
                 //Обробка залежностей
-                foreach (string tableAndField in listTableAndField)
+                foreach (ConfigurationDependencies dependence in listDependencies)
                 {
-                    string[] splitTableAndField = tableAndField.Split(".");
-                    string table = splitTableAndField[0];
-                    string field = splitTableAndField[1];
+                    string table = dependence.Table;
+                    string field = dependence.Field;
 
                     //Пошук кількості використання елементу в таблиці залежності
                     string query = $"SELECT count(uid) FROM {table} WHERE {field} = @uid";
@@ -266,7 +265,32 @@ namespace StorageAndTrade
                         allCountDependencies += countDependencies;
 
                         if (countDependencies != 0)
-                            CreateMessage(TypeMessage.Error, " --> " + name + ", uid [" + uid + "], table [" + table + "], field [" + field + "]");
+                        {
+                            CreateMessage(TypeMessage.Error, name);
+                            CreateMessage(TypeMessage.None, " використовується --> " + dependence.ConfigurationGroupName +
+                                ", \"" + dependence.ConfigurationObjectName + "\" " +
+                                (dependence.ConfigurationGroupLevel == ConfigurationDependencies.GroupLevel.TablePart ?
+                                    ", таблична частина \"" + dependence.ConfigurationTablePartName + "\" " : "") +
+                                ", поле \"" + dependence.ConfigurationFieldName + "\"");
+
+                            if (dependence.ConfigurationGroupName == "Довідники" || dependence.ConfigurationGroupName == "Документи")
+                            {
+                                
+                                switch (dependence.ConfigurationGroupName)
+                                {
+                                    case "Довідники":
+                                        {
+
+                                            break;
+                                        }
+                                    case "Документи":
+                                        {
+
+                                            break;
+                                        }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -301,10 +325,9 @@ namespace StorageAndTrade
                     if (listRow.Count > 0)
                     {
                         //Пошук залежностей
-                        List<string> listTableAndField = Config.Kernel.Conf.SearchForPointers(
-                            "Довідники." + configurationDirectories.Name, Configuration.VariantWorkSearchForPointers.Tables);
+                        List<ConfigurationDependencies> listDependencies = Config.Kernel.Conf.SearchDependencies("Довідники." + configurationDirectories.Name);
 
-                        string DirectoryObjestName = $"StorageAndTrade_1_0.Довідники.{configurationDirectories.Name}_Objest";
+                        string directoryObjestName = $"StorageAndTrade_1_0.Довідники.{configurationDirectories.Name}_Objest";
 
                         //Обробка довідників
                         foreach (Dictionary<string, object> row in listRow)
@@ -313,7 +336,7 @@ namespace StorageAndTrade
                             string name = "";
 
                             //Обєкт довідника
-                            object? directoryObject = ExecutingAssembly.CreateInstance(DirectoryObjestName);
+                            object? directoryObject = ExecutingAssembly.CreateInstance(directoryObjestName);
                             if (directoryObject != null)
                             {
                                 object? objRead = directoryObject.GetType().InvokeMember("Read", BindingFlags.InvokeMethod, null, directoryObject, new object[] { new UnigueID(uid) });
@@ -323,7 +346,7 @@ namespace StorageAndTrade
                                     if (objName != null)
                                         name = (string)objName;
 
-                                    long allCountDependencies = SearchDependencies(listTableAndField, uid, name);
+                                    long allCountDependencies = SearchDependencies(listDependencies, uid, name);
                                     if (allCountDependencies == 0)
                                     {
                                         directoryObject.GetType().InvokeMember("Delete", BindingFlags.InvokeMethod, null, directoryObject, null);
@@ -356,8 +379,7 @@ namespace StorageAndTrade
                     if (listRow.Count > 0)
                     {
                         //Пошук залежностей
-                        List<string> listTableAndField = Config.Kernel.Conf.SearchForPointers(
-                            "Документи." + configurationDocuments.Name, Configuration.VariantWorkSearchForPointers.Tables);
+                        List<ConfigurationDependencies> listDependencies = Config.Kernel.Conf.SearchDependencies("Документи." + configurationDocuments.Name);
 
                         string DocumentObjestName = $"StorageAndTrade_1_0.Документи.{configurationDocuments.Name}_Objest";
 
@@ -373,7 +395,7 @@ namespace StorageAndTrade
                                 object? objRead = documentObject.GetType().InvokeMember("Read", BindingFlags.InvokeMethod, null, documentObject, new object[] { new UnigueID(uid) });
                                 if (objRead != null ? (bool)objRead : false)
                                 {
-                                    long allCountDependencies = SearchDependencies(listTableAndField, uid, name);
+                                    long allCountDependencies = SearchDependencies(listDependencies, uid, name);
                                     if (allCountDependencies == 0)
                                     {
                                         documentObject.GetType().InvokeMember("Delete", BindingFlags.InvokeMethod, null, documentObject, null);

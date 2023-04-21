@@ -822,6 +822,18 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
                 </xsl:for-each> }
             );
         }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            <xsl:value-of select="$DirectoryName"/>_Objest? obj = GetDirectoryObject();
+            if (obj != null)
+            {
+                <xsl:if test="normalize-space(TriggerFunctions/SetDeletionLabel) != ''">
+                    <xsl:value-of select="TriggerFunctions/SetDeletionLabel"/><xsl:text>(obj, label)</xsl:text>;
+                </xsl:if>
+                base.BaseDeletionLabel(label);
+            }
+        }
 		
         public <xsl:value-of select="$DirectoryName"/>_Pointer GetEmptyPointer()
         {
@@ -1364,6 +1376,36 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
                 <xsl:text>"</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"</xsl:text>
               </xsl:for-each> }
             );
+        }
+
+        public bool SpendTheDocument(DateTime spendDate)
+        {
+            return GetDocumentObject().SpendTheDocument(spendDate);
+        }
+
+        public void ClearSpendTheDocument()
+        {
+            GetDocumentObject().ClearSpendTheDocument();
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            <xsl:if test="normalize-space(TriggerFunctions/SetDeletionLabel) != '' or normalize-space(SpendFunctions/ClearSpend) != ''">
+                <xsl:value-of select="$DocumentName"/>_Objest obj = GetDocumentObject();
+                <xsl:if test="normalize-space(TriggerFunctions/SetDeletionLabel) != ''">
+                    <xsl:value-of select="TriggerFunctions/SetDeletionLabel"/>
+                    <xsl:text>(obj, label)</xsl:text>;
+                </xsl:if>
+                <xsl:if test="normalize-space(SpendFunctions/ClearSpend) != ''">
+                if (label)
+                {
+                    <xsl:value-of select="SpendFunctions/ClearSpend"/>
+                    <xsl:text>(obj)</xsl:text>;
+                    <xsl:text>BaseSpend(false, DateTime.MinValue)</xsl:text>;
+                }
+                </xsl:if>
+            </xsl:if>
+            base.BaseDeletionLabel(label);
         }
 
         public <xsl:value-of select="$DocumentName"/>_Pointer GetNewDocumentPointer()

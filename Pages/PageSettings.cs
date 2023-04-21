@@ -224,7 +224,7 @@ namespace StorageAndTrade
                 //Info
                 HBox hBoxInfo = new HBox() { Halign = Align.Start };
                 vBoxDownloadListBank.PackStart(hBoxInfo, false, false, 15);
-                hBoxInfo.PackStart(new Label("За замовчуванням: https://accounting.org.ua/xml/get_data_branch_glbank.xml") { Selectable = true, Wrap = true }, false, false, 5);
+                hBoxInfo.PackStart(new Label("За замовчуванням: https://bank.gov.ua/NBU_BankInfo/get_data_branch_glbank") { Selectable = true, Wrap = true }, false, false, 5);
 
                 //Controls
                 AddCaptionAndControl(vBoxDownloadListBank, new Label("Лінк:"), ЗавантаженняСпискуБанківІзСайтів);

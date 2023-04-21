@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 13.04.2023 00:36:34
+ * Дата конфігурації: 21.04.2023 18:51:51
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -2109,6 +2109,17 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_a1" }
             );
         }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            Організації_Objest? obj = GetDirectoryObject();
+            if (obj != null)
+            {
+                Організації_Triggers.SetDeletionLabel(obj, label);
+                
+                base.BaseDeletionLabel(label);
+            }
+        }
 		
         public Організації_Pointer GetEmptyPointer()
         {
@@ -2458,6 +2469,17 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_b1" }
             );
         }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            Номенклатура_Objest? obj = GetDirectoryObject();
+            if (obj != null)
+            {
+                Номенклатура_Triggers.SetDeletionLabel(obj, label);
+                
+                base.BaseDeletionLabel(label);
+            }
+        }
 		
         public Номенклатура_Pointer GetEmptyPointer()
         {
@@ -2719,6 +2741,17 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_b6" }
             );
         }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            Виробники_Objest? obj = GetDirectoryObject();
+            if (obj != null)
+            {
+                Виробники_Triggers.SetDeletionLabel(obj, label);
+                
+                base.BaseDeletionLabel(label);
+            }
+        }
 		
         public Виробники_Pointer GetEmptyPointer()
         {
@@ -2916,6 +2949,17 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_b8" }
             );
         }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            ВидиНоменклатури_Objest? obj = GetDirectoryObject();
+            if (obj != null)
+            {
+                ВидиНоменклатури_Triggers.SetDeletionLabel(obj, label);
+                
+                base.BaseDeletionLabel(label);
+            }
+        }
 		
         public ВидиНоменклатури_Pointer GetEmptyPointer()
         {
@@ -3106,6 +3150,17 @@ namespace StorageAndTrade_1_0.Довідники
             return Назва = base.BasePresentation(
                 new string[] { "col_c1" }
             );
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            ПакуванняОдиниціВиміру_Objest? obj = GetDirectoryObject();
+            if (obj != null)
+            {
+                ПакуванняОдиниціВиміру_Triggers.SetDeletionLabel(obj, label);
+                
+                base.BaseDeletionLabel(label);
+            }
         }
 		
         public ПакуванняОдиниціВиміру_Pointer GetEmptyPointer()
@@ -3303,6 +3358,17 @@ namespace StorageAndTrade_1_0.Довідники
             return Назва = base.BasePresentation(
                 new string[] { "col_c5" }
             );
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            Валюти_Objest? obj = GetDirectoryObject();
+            if (obj != null)
+            {
+                Валюти_Triggers.SetDeletionLabel(obj, label);
+                
+                base.BaseDeletionLabel(label);
+            }
         }
 		
         public Валюти_Pointer GetEmptyPointer()
@@ -3528,6 +3594,17 @@ namespace StorageAndTrade_1_0.Довідники
             return Назва = base.BasePresentation(
                 new string[] { "col_c7" }
             );
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            Контрагенти_Objest? obj = GetDirectoryObject();
+            if (obj != null)
+            {
+                Контрагенти_Triggers.SetDeletionLabel(obj, label);
+                
+                base.BaseDeletionLabel(label);
+            }
         }
 		
         public Контрагенти_Pointer GetEmptyPointer()
@@ -3938,6 +4015,17 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_d9" }
             );
         }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            Склади_Objest? obj = GetDirectoryObject();
+            if (obj != null)
+            {
+                Склади_Triggers.SetDeletionLabel(obj, label);
+                
+                base.BaseDeletionLabel(label);
+            }
+        }
 		
         public Склади_Pointer GetEmptyPointer()
         {
@@ -4229,6 +4317,17 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_e9" }
             );
         }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            ВидиЦін_Objest? obj = GetDirectoryObject();
+            if (obj != null)
+            {
+                ВидиЦін_Triggers.SetDeletionLabel(obj, label);
+                
+                base.BaseDeletionLabel(label);
+            }
+        }
 		
         public ВидиЦін_Pointer GetEmptyPointer()
         {
@@ -4413,6 +4512,17 @@ namespace StorageAndTrade_1_0.Довідники
             return Назва = base.BasePresentation(
                 new string[] { "col_f3" }
             );
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            ВидиЦінПостачальників_Objest? obj = GetDirectoryObject();
+            if (obj != null)
+            {
+                ВидиЦінПостачальників_Triggers.SetDeletionLabel(obj, label);
+                
+                base.BaseDeletionLabel(label);
+            }
         }
 		
         public ВидиЦінПостачальників_Pointer GetEmptyPointer()
@@ -4620,6 +4730,17 @@ namespace StorageAndTrade_1_0.Довідники
             return Назва = base.BasePresentation(
                 new string[] { "col_f6" }
             );
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            Користувачі_Objest? obj = GetDirectoryObject();
+            if (obj != null)
+            {
+                Користувачі_Triggers.SetDeletionLabel(obj, label);
+                
+                base.BaseDeletionLabel(label);
+            }
         }
 		
         public Користувачі_Pointer GetEmptyPointer()
@@ -4930,6 +5051,17 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_g7" }
             );
         }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            ФізичніОсоби_Objest? obj = GetDirectoryObject();
+            if (obj != null)
+            {
+                ФізичніОсоби_Triggers.SetDeletionLabel(obj, label);
+                
+                base.BaseDeletionLabel(label);
+            }
+        }
 		
         public ФізичніОсоби_Pointer GetEmptyPointer()
         {
@@ -5217,6 +5349,17 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_h8" }
             );
         }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            СтруктураПідприємства_Objest? obj = GetDirectoryObject();
+            if (obj != null)
+            {
+                СтруктураПідприємства_Triggers.SetDeletionLabel(obj, label);
+                
+                base.BaseDeletionLabel(label);
+            }
+        }
 		
         public СтруктураПідприємства_Pointer GetEmptyPointer()
         {
@@ -5395,6 +5538,17 @@ namespace StorageAndTrade_1_0.Довідники
             return Назва = base.BasePresentation(
                 new string[] { "col_i2" }
             );
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            КраїниСвіту_Objest? obj = GetDirectoryObject();
+            if (obj != null)
+            {
+                КраїниСвіту_Triggers.SetDeletionLabel(obj, label);
+                
+                base.BaseDeletionLabel(label);
+            }
         }
 		
         public КраїниСвіту_Pointer GetEmptyPointer()
@@ -5599,6 +5753,17 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_i5" }
             );
         }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            Файли_Objest? obj = GetDirectoryObject();
+            if (obj != null)
+            {
+                Файли_Triggers.SetDeletionLabel(obj, label);
+                
+                base.BaseDeletionLabel(label);
+            }
+        }
 		
         public Файли_Pointer GetEmptyPointer()
         {
@@ -5790,6 +5955,17 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_i7" }
             );
         }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            ХарактеристикиНоменклатури_Objest? obj = GetDirectoryObject();
+            if (obj != null)
+            {
+                ХарактеристикиНоменклатури_Triggers.SetDeletionLabel(obj, label);
+                
+                base.BaseDeletionLabel(label);
+            }
+        }
 		
         public ХарактеристикиНоменклатури_Pointer GetEmptyPointer()
         {
@@ -5974,6 +6150,17 @@ namespace StorageAndTrade_1_0.Довідники
             return Назва = base.BasePresentation(
                 new string[] { "col_j1" }
             );
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            Номенклатура_Папки_Objest? obj = GetDirectoryObject();
+            if (obj != null)
+            {
+                Номенклатура_Папки_Triggers.SetDeletionLabel(obj, label);
+                
+                base.BaseDeletionLabel(label);
+            }
         }
 		
         public Номенклатура_Папки_Pointer GetEmptyPointer()
@@ -6160,6 +6347,17 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_j4" }
             );
         }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            Контрагенти_Папки_Objest? obj = GetDirectoryObject();
+            if (obj != null)
+            {
+                Контрагенти_Папки_Triggers.SetDeletionLabel(obj, label);
+                
+                base.BaseDeletionLabel(label);
+            }
+        }
 		
         public Контрагенти_Папки_Pointer GetEmptyPointer()
         {
@@ -6344,6 +6542,17 @@ namespace StorageAndTrade_1_0.Довідники
             return Назва = base.BasePresentation(
                 new string[] { "col_j7" }
             );
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            Склади_Папки_Objest? obj = GetDirectoryObject();
+            if (obj != null)
+            {
+                Склади_Папки_Triggers.SetDeletionLabel(obj, label);
+                
+                base.BaseDeletionLabel(label);
+            }
         }
 		
         public Склади_Папки_Pointer GetEmptyPointer()
@@ -6535,6 +6744,17 @@ namespace StorageAndTrade_1_0.Довідники
             return Назва = base.BasePresentation(
                 new string[] { "col_k8" }
             );
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            Каси_Objest? obj = GetDirectoryObject();
+            if (obj != null)
+            {
+                Каси_Triggers.SetDeletionLabel(obj, label);
+                
+                base.BaseDeletionLabel(label);
+            }
         }
 		
         public Каси_Pointer GetEmptyPointer()
@@ -6780,6 +7000,17 @@ namespace StorageAndTrade_1_0.Довідники
             return Назва = base.BasePresentation(
                 new string[] { "col_l1" }
             );
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            БанківськіРахункиОрганізацій_Objest? obj = GetDirectoryObject();
+            if (obj != null)
+            {
+                БанківськіРахункиОрганізацій_Triggers.SetDeletionLabel(obj, label);
+                
+                base.BaseDeletionLabel(label);
+            }
         }
 		
         public БанківськіРахункиОрганізацій_Pointer GetEmptyPointer()
@@ -7068,6 +7299,17 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_n4", "col_b8" }
             );
         }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            ДоговориКонтрагентів_Objest? obj = GetDirectoryObject();
+            if (obj != null)
+            {
+                ДоговориКонтрагентів_Triggers.SetDeletionLabel(obj, label);
+                
+                base.BaseDeletionLabel(label);
+            }
+        }
 		
         public ДоговориКонтрагентів_Pointer GetEmptyPointer()
         {
@@ -7325,6 +7567,17 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_n7" }
             );
         }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            БанківськіРахункиКонтрагентів_Objest? obj = GetDirectoryObject();
+            if (obj != null)
+            {
+                БанківськіРахункиКонтрагентів_Triggers.SetDeletionLabel(obj, label);
+                
+                base.BaseDeletionLabel(label);
+            }
+        }
 		
         public БанківськіРахункиКонтрагентів_Pointer GetEmptyPointer()
         {
@@ -7531,6 +7784,17 @@ namespace StorageAndTrade_1_0.Довідники
             return Назва = base.BasePresentation(
                 new string[] { "col_i7" }
             );
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            СтаттяРухуКоштів_Objest? obj = GetDirectoryObject();
+            if (obj != null)
+            {
+                СтаттяРухуКоштів_Triggers.SetDeletionLabel(obj, label);
+                
+                base.BaseDeletionLabel(label);
+            }
         }
 		
         public СтаттяРухуКоштів_Pointer GetEmptyPointer()
@@ -7795,6 +8059,17 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_a3" }
             );
         }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            СеріїНоменклатури_Objest? obj = GetDirectoryObject();
+            if (obj != null)
+            {
+                СеріїНоменклатури_Triggers.SetDeletionLabel(obj, label);
+                
+                base.BaseDeletionLabel(label);
+            }
+        }
 		
         public СеріїНоменклатури_Pointer GetEmptyPointer()
         {
@@ -7997,6 +8272,17 @@ namespace StorageAndTrade_1_0.Довідники
             return Назва = base.BasePresentation(
                 new string[] { "col_a1" }
             );
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            ПартіяТоварівКомпозит_Objest? obj = GetDirectoryObject();
+            if (obj != null)
+            {
+                ПартіяТоварівКомпозит_Triggers.SetDeletionLabel(obj, label);
+                
+                base.BaseDeletionLabel(label);
+            }
         }
 		
         public ПартіяТоварівКомпозит_Pointer GetEmptyPointer()
@@ -8206,6 +8492,17 @@ namespace StorageAndTrade_1_0.Довідники
             return Назва = base.BasePresentation(
                 new string[] { "col_a5" }
             );
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            ВидиЗапасів_Objest? obj = GetDirectoryObject();
+            if (obj != null)
+            {
+                ВидиЗапасів_Triggers.SetDeletionLabel(obj, label);
+                
+                base.BaseDeletionLabel(label);
+            }
         }
 		
         public ВидиЗапасів_Pointer GetEmptyPointer()
@@ -8542,6 +8839,17 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] {  }
             );
         }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            Банки_Objest? obj = GetDirectoryObject();
+            if (obj != null)
+            {
+                Банки_Triggers.SetDeletionLabel(obj, label);
+                
+                base.BaseDeletionLabel(label);
+            }
+        }
 		
         public Банки_Pointer GetEmptyPointer()
         {
@@ -8726,6 +9034,17 @@ namespace StorageAndTrade_1_0.Довідники
             return Назва = base.BasePresentation(
                 new string[] { "col_a2" }
             );
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            СкладськіПриміщення_Objest? obj = GetDirectoryObject();
+            if (obj != null)
+            {
+                СкладськіПриміщення_Triggers.SetDeletionLabel(obj, label);
+                
+                base.BaseDeletionLabel(label);
+            }
         }
 		
         public СкладськіПриміщення_Pointer GetEmptyPointer()
@@ -8954,6 +9273,17 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_a2" }
             );
         }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            СкладськіКомірки_Objest? obj = GetDirectoryObject();
+            if (obj != null)
+            {
+                СкладськіКомірки_Triggers.SetDeletionLabel(obj, label);
+                
+                base.BaseDeletionLabel(label);
+            }
+        }
 		
         public СкладськіКомірки_Pointer GetEmptyPointer()
         {
@@ -9136,6 +9466,16 @@ namespace StorageAndTrade_1_0.Довідники
             return Назва = base.BasePresentation(
                 new string[] { "col_a2" }
             );
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            ОбластьЗберігання_Objest? obj = GetDirectoryObject();
+            if (obj != null)
+            {
+                
+                base.BaseDeletionLabel(label);
+            }
         }
 		
         public ОбластьЗберігання_Pointer GetEmptyPointer()
@@ -9340,6 +9680,17 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_a2" }
             );
         }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            ТипорозміриКомірок_Objest? obj = GetDirectoryObject();
+            if (obj != null)
+            {
+                ТипорозміриКомірок_Triggers.SetDeletionLabel(obj, label);
+                
+                base.BaseDeletionLabel(label);
+            }
+        }
 		
         public ТипорозміриКомірок_Pointer GetEmptyPointer()
         {
@@ -9530,6 +9881,17 @@ namespace StorageAndTrade_1_0.Довідники
             return Назва = base.BasePresentation(
                 new string[] { "col_j1" }
             );
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            СкладськіКомірки_Папки_Objest? obj = GetDirectoryObject();
+            if (obj != null)
+            {
+                СкладськіКомірки_Папки_Triggers.SetDeletionLabel(obj, label);
+                
+                base.BaseDeletionLabel(label);
+            }
         }
 		
         public СкладськіКомірки_Папки_Pointer GetEmptyPointer()
@@ -9727,6 +10089,17 @@ namespace StorageAndTrade_1_0.Довідники
             return Назва = base.BasePresentation(
                 new string[] { "col_a2" }
             );
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            Блокнот_Objest? obj = GetDirectoryObject();
+            if (obj != null)
+            {
+                Блокнот_Triggers.SetDeletionLabel(obj, label);
+                
+                base.BaseDeletionLabel(label);
+            }
         }
 		
         public Блокнот_Pointer GetEmptyPointer()
@@ -11384,6 +11757,30 @@ namespace StorageAndTrade_1_0.Документи
             );
         }
 
+        public bool SpendTheDocument(DateTime spendDate)
+        {
+            return GetDocumentObject().SpendTheDocument(spendDate);
+        }
+
+        public void ClearSpendTheDocument()
+        {
+            GetDocumentObject().ClearSpendTheDocument();
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            ЗамовленняПостачальнику_Objest obj = GetDocumentObject();
+                ЗамовленняПостачальнику_Triggers.SetDeletionLabel(obj, label);
+                
+                if (label)
+                {
+                    ЗамовленняПостачальнику_SpendTheDocument.ClearSpend(obj);
+                    BaseSpend(false, DateTime.MinValue);
+                }
+                
+            base.BaseDeletionLabel(label);
+        }
+
         public ЗамовленняПостачальнику_Pointer GetNewDocumentPointer()
         {
             return new ЗамовленняПостачальнику_Pointer(base.UnigueID);
@@ -12250,6 +12647,30 @@ namespace StorageAndTrade_1_0.Документи
             );
         }
 
+        public bool SpendTheDocument(DateTime spendDate)
+        {
+            return GetDocumentObject().SpendTheDocument(spendDate);
+        }
+
+        public void ClearSpendTheDocument()
+        {
+            GetDocumentObject().ClearSpendTheDocument();
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            ПоступленняТоварівТаПослуг_Objest obj = GetDocumentObject();
+                ПоступленняТоварівТаПослуг_Triggers.SetDeletionLabel(obj, label);
+                
+                if (label)
+                {
+                    ПоступленняТоварівТаПослуг_SpendTheDocument.ClearSpend(obj);
+                    BaseSpend(false, DateTime.MinValue);
+                }
+                
+            base.BaseDeletionLabel(label);
+        }
+
         public ПоступленняТоварівТаПослуг_Pointer GetNewDocumentPointer()
         {
             return new ПоступленняТоварівТаПослуг_Pointer(base.UnigueID);
@@ -13060,6 +13481,30 @@ namespace StorageAndTrade_1_0.Документи
             return Назва = base.BasePresentation(
               new string[] { "docname" }
             );
+        }
+
+        public bool SpendTheDocument(DateTime spendDate)
+        {
+            return GetDocumentObject().SpendTheDocument(spendDate);
+        }
+
+        public void ClearSpendTheDocument()
+        {
+            GetDocumentObject().ClearSpendTheDocument();
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            ЗамовленняКлієнта_Objest obj = GetDocumentObject();
+                ЗамовленняКлієнта_Triggers.SetDeletionLabel(obj, label);
+                
+                if (label)
+                {
+                    ЗамовленняКлієнта_SpendTheDocument.ClearSpend(obj);
+                    BaseSpend(false, DateTime.MinValue);
+                }
+                
+            base.BaseDeletionLabel(label);
         }
 
         public ЗамовленняКлієнта_Pointer GetNewDocumentPointer()
@@ -13920,6 +14365,30 @@ namespace StorageAndTrade_1_0.Документи
             );
         }
 
+        public bool SpendTheDocument(DateTime spendDate)
+        {
+            return GetDocumentObject().SpendTheDocument(spendDate);
+        }
+
+        public void ClearSpendTheDocument()
+        {
+            GetDocumentObject().ClearSpendTheDocument();
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            РеалізаціяТоварівТаПослуг_Objest obj = GetDocumentObject();
+                РеалізаціяТоварівТаПослуг_Triggers.SetDeletionLabel(obj, label);
+                
+                if (label)
+                {
+                    РеалізаціяТоварівТаПослуг_SpendTheDocument.ClearSpend(obj);
+                    BaseSpend(false, DateTime.MinValue);
+                }
+                
+            base.BaseDeletionLabel(label);
+        }
+
         public РеалізаціяТоварівТаПослуг_Pointer GetNewDocumentPointer()
         {
             return new РеалізаціяТоварівТаПослуг_Pointer(base.UnigueID);
@@ -14428,6 +14897,30 @@ namespace StorageAndTrade_1_0.Документи
             return Назва = base.BasePresentation(
               new string[] { "docname" }
             );
+        }
+
+        public bool SpendTheDocument(DateTime spendDate)
+        {
+            return GetDocumentObject().SpendTheDocument(spendDate);
+        }
+
+        public void ClearSpendTheDocument()
+        {
+            GetDocumentObject().ClearSpendTheDocument();
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            ВстановленняЦінНоменклатури_Objest obj = GetDocumentObject();
+                ВстановленняЦінНоменклатури_Triggers.SetDeletionLabel(obj, label);
+                
+                if (label)
+                {
+                    ВстановленняЦінНоменклатури_SpendTheDocument.ClearSpend(obj);
+                    BaseSpend(false, DateTime.MinValue);
+                }
+                
+            base.BaseDeletionLabel(label);
         }
 
         public ВстановленняЦінНоменклатури_Pointer GetNewDocumentPointer()
@@ -15020,6 +15513,30 @@ namespace StorageAndTrade_1_0.Документи
             return Назва = base.BasePresentation(
               new string[] { "docname" }
             );
+        }
+
+        public bool SpendTheDocument(DateTime spendDate)
+        {
+            return GetDocumentObject().SpendTheDocument(spendDate);
+        }
+
+        public void ClearSpendTheDocument()
+        {
+            GetDocumentObject().ClearSpendTheDocument();
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            ПрихіднийКасовийОрдер_Objest obj = GetDocumentObject();
+                ПрихіднийКасовийОрдер_Triggers.SetDeletionLabel(obj, label);
+                
+                if (label)
+                {
+                    ПрихіднийКасовийОрдер_SpendTheDocument.ClearSpend(obj);
+                    BaseSpend(false, DateTime.MinValue);
+                }
+                
+            base.BaseDeletionLabel(label);
         }
 
         public ПрихіднийКасовийОрдер_Pointer GetNewDocumentPointer()
@@ -15644,6 +16161,30 @@ namespace StorageAndTrade_1_0.Документи
             return Назва = base.BasePresentation(
               new string[] { "docname" }
             );
+        }
+
+        public bool SpendTheDocument(DateTime spendDate)
+        {
+            return GetDocumentObject().SpendTheDocument(spendDate);
+        }
+
+        public void ClearSpendTheDocument()
+        {
+            GetDocumentObject().ClearSpendTheDocument();
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            РозхіднийКасовийОрдер_Objest obj = GetDocumentObject();
+                РозхіднийКасовийОрдер_Triggers.SetDeletionLabel(obj, label);
+                
+                if (label)
+                {
+                    РозхіднийКасовийОрдер_SpendTheDocument.ClearSpend(obj);
+                    BaseSpend(false, DateTime.MinValue);
+                }
+                
+            base.BaseDeletionLabel(label);
         }
 
         public РозхіднийКасовийОрдер_Pointer GetNewDocumentPointer()
@@ -16296,6 +16837,30 @@ namespace StorageAndTrade_1_0.Документи
             return Назва = base.BasePresentation(
               new string[] { "docname" }
             );
+        }
+
+        public bool SpendTheDocument(DateTime spendDate)
+        {
+            return GetDocumentObject().SpendTheDocument(spendDate);
+        }
+
+        public void ClearSpendTheDocument()
+        {
+            GetDocumentObject().ClearSpendTheDocument();
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            ПереміщенняТоварів_Objest obj = GetDocumentObject();
+                ПереміщенняТоварів_Triggers.SetDeletionLabel(obj, label);
+                
+                if (label)
+                {
+                    ПереміщенняТоварів_SpendTheDocument.ClearSpend(obj);
+                    BaseSpend(false, DateTime.MinValue);
+                }
+                
+            base.BaseDeletionLabel(label);
         }
 
         public ПереміщенняТоварів_Pointer GetNewDocumentPointer()
@@ -16992,6 +17557,30 @@ namespace StorageAndTrade_1_0.Документи
             );
         }
 
+        public bool SpendTheDocument(DateTime spendDate)
+        {
+            return GetDocumentObject().SpendTheDocument(spendDate);
+        }
+
+        public void ClearSpendTheDocument()
+        {
+            GetDocumentObject().ClearSpendTheDocument();
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            ПоверненняТоварівПостачальнику_Objest obj = GetDocumentObject();
+                ПоверненняТоварівПостачальнику_Triggers.SetDeletionLabel(obj, label);
+                
+                if (label)
+                {
+                    ПоверненняТоварівПостачальнику_SpendTheDocument.ClearSpend(obj);
+                    BaseSpend(false, DateTime.MinValue);
+                }
+                
+            base.BaseDeletionLabel(label);
+        }
+
         public ПоверненняТоварівПостачальнику_Pointer GetNewDocumentPointer()
         {
             return new ПоверненняТоварівПостачальнику_Pointer(base.UnigueID);
@@ -17648,6 +18237,30 @@ namespace StorageAndTrade_1_0.Документи
             );
         }
 
+        public bool SpendTheDocument(DateTime spendDate)
+        {
+            return GetDocumentObject().SpendTheDocument(spendDate);
+        }
+
+        public void ClearSpendTheDocument()
+        {
+            GetDocumentObject().ClearSpendTheDocument();
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            ПоверненняТоварівВідКлієнта_Objest obj = GetDocumentObject();
+                ПоверненняТоварівВідКлієнта_Triggers.SetDeletionLabel(obj, label);
+                
+                if (label)
+                {
+                    ПоверненняТоварівВідКлієнта_SpendTheDocument.ClearSpend(obj);
+                    BaseSpend(false, DateTime.MinValue);
+                }
+                
+            base.BaseDeletionLabel(label);
+        }
+
         public ПоверненняТоварівВідКлієнта_Pointer GetNewDocumentPointer()
         {
             return new ПоверненняТоварівВідКлієнта_Pointer(base.UnigueID);
@@ -18246,6 +18859,30 @@ namespace StorageAndTrade_1_0.Документи
             return Назва = base.BasePresentation(
               new string[] { "docname" }
             );
+        }
+
+        public bool SpendTheDocument(DateTime spendDate)
+        {
+            return GetDocumentObject().SpendTheDocument(spendDate);
+        }
+
+        public void ClearSpendTheDocument()
+        {
+            GetDocumentObject().ClearSpendTheDocument();
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            АктВиконанихРобіт_Objest obj = GetDocumentObject();
+                АктВиконанихРобіт_Triggers.SetDeletionLabel(obj, label);
+                
+                if (label)
+                {
+                    АктВиконанихРобіт_SpendTheDocument.ClearSpend(obj);
+                    BaseSpend(false, DateTime.MinValue);
+                }
+                
+            base.BaseDeletionLabel(label);
         }
 
         public АктВиконанихРобіт_Pointer GetNewDocumentPointer()
@@ -18927,6 +19564,30 @@ namespace StorageAndTrade_1_0.Документи
             return Назва = base.BasePresentation(
               new string[] { "docname" }
             );
+        }
+
+        public bool SpendTheDocument(DateTime spendDate)
+        {
+            return GetDocumentObject().SpendTheDocument(spendDate);
+        }
+
+        public void ClearSpendTheDocument()
+        {
+            GetDocumentObject().ClearSpendTheDocument();
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            ВведенняЗалишків_Objest obj = GetDocumentObject();
+                ВведенняЗалишків_Triggers.SetDeletionLabel(obj, label);
+                
+                if (label)
+                {
+                    ВведенняЗалишків_SpendTheDocument.ClearSpend(obj);
+                    BaseSpend(false, DateTime.MinValue);
+                }
+                
+            base.BaseDeletionLabel(label);
         }
 
         public ВведенняЗалишків_Pointer GetNewDocumentPointer()
@@ -19681,6 +20342,22 @@ namespace StorageAndTrade_1_0.Документи
             );
         }
 
+        public bool SpendTheDocument(DateTime spendDate)
+        {
+            return GetDocumentObject().SpendTheDocument(spendDate);
+        }
+
+        public void ClearSpendTheDocument()
+        {
+            GetDocumentObject().ClearSpendTheDocument();
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            
+            base.BaseDeletionLabel(label);
+        }
+
         public НадлишкиТоварів_Pointer GetNewDocumentPointer()
         {
             return new НадлишкиТоварів_Pointer(base.UnigueID);
@@ -20151,6 +20828,22 @@ namespace StorageAndTrade_1_0.Документи
             );
         }
 
+        public bool SpendTheDocument(DateTime spendDate)
+        {
+            return GetDocumentObject().SpendTheDocument(spendDate);
+        }
+
+        public void ClearSpendTheDocument()
+        {
+            GetDocumentObject().ClearSpendTheDocument();
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            
+            base.BaseDeletionLabel(label);
+        }
+
         public ПересортицяТоварів_Pointer GetNewDocumentPointer()
         {
             return new ПересортицяТоварів_Pointer(base.UnigueID);
@@ -20605,6 +21298,22 @@ namespace StorageAndTrade_1_0.Документи
             return Назва = base.BasePresentation(
               new string[] { "docname" }
             );
+        }
+
+        public bool SpendTheDocument(DateTime spendDate)
+        {
+            return GetDocumentObject().SpendTheDocument(spendDate);
+        }
+
+        public void ClearSpendTheDocument()
+        {
+            GetDocumentObject().ClearSpendTheDocument();
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            
+            base.BaseDeletionLabel(label);
         }
 
         public ПерерахунокТоварів_Pointer GetNewDocumentPointer()
@@ -21145,6 +21854,30 @@ namespace StorageAndTrade_1_0.Документи
             return Назва = base.BasePresentation(
               new string[] { "docname" }
             );
+        }
+
+        public bool SpendTheDocument(DateTime spendDate)
+        {
+            return GetDocumentObject().SpendTheDocument(spendDate);
+        }
+
+        public void ClearSpendTheDocument()
+        {
+            GetDocumentObject().ClearSpendTheDocument();
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            ПсуванняТоварів_Objest obj = GetDocumentObject();
+                ПсуванняТоварів_Triggers.SetDeletionLabel(obj, label);
+                
+                if (label)
+                {
+                    ПсуванняТоварів_SpendTheDocument.ClearSpend(obj);
+                    BaseSpend(false, DateTime.MinValue);
+                }
+                
+            base.BaseDeletionLabel(label);
         }
 
         public ПсуванняТоварів_Pointer GetNewDocumentPointer()
@@ -21713,6 +22446,30 @@ namespace StorageAndTrade_1_0.Документи
             return Назва = base.BasePresentation(
               new string[] { "docname" }
             );
+        }
+
+        public bool SpendTheDocument(DateTime spendDate)
+        {
+            return GetDocumentObject().SpendTheDocument(spendDate);
+        }
+
+        public void ClearSpendTheDocument()
+        {
+            GetDocumentObject().ClearSpendTheDocument();
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            ВнутрішнєСпоживанняТоварів_Objest obj = GetDocumentObject();
+                ВнутрішнєСпоживанняТоварів_Triggers.SetDeletionLabel(obj, label);
+                
+                if (label)
+                {
+                    ВнутрішнєСпоживанняТоварів_SpendTheDocument.ClearSpend(obj);
+                    BaseSpend(false, DateTime.MinValue);
+                }
+                
+            base.BaseDeletionLabel(label);
         }
 
         public ВнутрішнєСпоживанняТоварів_Pointer GetNewDocumentPointer()
@@ -22389,6 +23146,30 @@ namespace StorageAndTrade_1_0.Документи
             );
         }
 
+        public bool SpendTheDocument(DateTime spendDate)
+        {
+            return GetDocumentObject().SpendTheDocument(spendDate);
+        }
+
+        public void ClearSpendTheDocument()
+        {
+            GetDocumentObject().ClearSpendTheDocument();
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            РахунокФактура_Objest obj = GetDocumentObject();
+                РахунокФактура_Triggers.SetDeletionLabel(obj, label);
+                
+                if (label)
+                {
+                    РахунокФактура_SpendTheDocument.ClearSpend(obj);
+                    BaseSpend(false, DateTime.MinValue);
+                }
+                
+            base.BaseDeletionLabel(label);
+        }
+
         public РахунокФактура_Pointer GetNewDocumentPointer()
         {
             return new РахунокФактура_Pointer(base.UnigueID);
@@ -22923,6 +23704,30 @@ namespace StorageAndTrade_1_0.Документи
             );
         }
 
+        public bool SpendTheDocument(DateTime spendDate)
+        {
+            return GetDocumentObject().SpendTheDocument(spendDate);
+        }
+
+        public void ClearSpendTheDocument()
+        {
+            GetDocumentObject().ClearSpendTheDocument();
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            РозміщенняТоварівНаСкладі_Objest obj = GetDocumentObject();
+                РозміщенняТоварівНаСкладі_Triggers.SetDeletionLabel(obj, label);
+                
+                if (label)
+                {
+                    РозміщенняТоварівНаСкладі_SpendTheDocument.ClearSpend(obj);
+                    BaseSpend(false, DateTime.MinValue);
+                }
+                
+            base.BaseDeletionLabel(label);
+        }
+
         public РозміщенняТоварівНаСкладі_Pointer GetNewDocumentPointer()
         {
             return new РозміщенняТоварівНаСкладі_Pointer(base.UnigueID);
@@ -23437,6 +24242,30 @@ namespace StorageAndTrade_1_0.Документи
             return Назва = base.BasePresentation(
               new string[] { "docname" }
             );
+        }
+
+        public bool SpendTheDocument(DateTime spendDate)
+        {
+            return GetDocumentObject().SpendTheDocument(spendDate);
+        }
+
+        public void ClearSpendTheDocument()
+        {
+            GetDocumentObject().ClearSpendTheDocument();
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            ПереміщенняТоварівНаСкладі_Objest obj = GetDocumentObject();
+                ПереміщенняТоварівНаСкладі_Triggers.SetDeletionLabel(obj, label);
+                
+                if (label)
+                {
+                    ПереміщенняТоварівНаСкладі_SpendTheDocument.ClearSpend(obj);
+                    BaseSpend(false, DateTime.MinValue);
+                }
+                
+            base.BaseDeletionLabel(label);
         }
 
         public ПереміщенняТоварівНаСкладі_Pointer GetNewDocumentPointer()
@@ -23965,6 +24794,30 @@ namespace StorageAndTrade_1_0.Документи
             );
         }
 
+        public bool SpendTheDocument(DateTime spendDate)
+        {
+            return GetDocumentObject().SpendTheDocument(spendDate);
+        }
+
+        public void ClearSpendTheDocument()
+        {
+            GetDocumentObject().ClearSpendTheDocument();
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            ЗбіркаТоварівНаСкладі_Objest obj = GetDocumentObject();
+                ЗбіркаТоварівНаСкладі_Triggers.SetDeletionLabel(obj, label);
+                
+                if (label)
+                {
+                    ЗбіркаТоварівНаСкладі_SpendTheDocument.ClearSpend(obj);
+                    BaseSpend(false, DateTime.MinValue);
+                }
+                
+            base.BaseDeletionLabel(label);
+        }
+
         public ЗбіркаТоварівНаСкладі_Pointer GetNewDocumentPointer()
         {
             return new ЗбіркаТоварівНаСкладі_Pointer(base.UnigueID);
@@ -24443,6 +25296,30 @@ namespace StorageAndTrade_1_0.Документи
             return Назва = base.BasePresentation(
               new string[] { "docname" }
             );
+        }
+
+        public bool SpendTheDocument(DateTime spendDate)
+        {
+            return GetDocumentObject().SpendTheDocument(spendDate);
+        }
+
+        public void ClearSpendTheDocument()
+        {
+            GetDocumentObject().ClearSpendTheDocument();
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            РозміщенняНоменклатуриПоКоміркам_Objest obj = GetDocumentObject();
+                РозміщенняНоменклатуриПоКоміркам_Triggers.SetDeletionLabel(obj, label);
+                
+                if (label)
+                {
+                    РозміщенняНоменклатуриПоКоміркам_SpendTheDocument.ClearSpend(obj);
+                    BaseSpend(false, DateTime.MinValue);
+                }
+                
+            base.BaseDeletionLabel(label);
         }
 
         public РозміщенняНоменклатуриПоКоміркам_Pointer GetNewDocumentPointer()
