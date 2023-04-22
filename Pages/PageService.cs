@@ -34,12 +34,15 @@ using System.Reflection;
 using AccountingSoftware;
 using StorageAndTrade_1_0;
 using Константи = StorageAndTrade_1_0.Константи;
+using Документи = StorageAndTrade_1_0.Документи;
 using Журнали = StorageAndTrade_1_0.Журнали;
 
 namespace StorageAndTrade
 {
     class PageService : VBox
     {
+        Assembly ExecutingAssembly = Assembly.GetExecutingAssembly();
+
         CancellationTokenSource? CancellationTokenPageService;
 
         Button bSpendTheDocument;
@@ -130,7 +133,7 @@ namespace StorageAndTrade
                             }
                     }
 
-                    hBoxInfo.PackStart(new Label(message) { Wrap = true }, false, false, 0);
+                    hBoxInfo.PackStart(new Label(message) { Wrap = true, Selectable = true }, false, false, 0);
                     hBoxInfo.ShowAll();
 
                     scrollMessage.Vadjustment.Value = scrollMessage.Vadjustment.Upper;
@@ -252,42 +255,41 @@ namespace StorageAndTrade
                 //Обробка залежностей
                 foreach (ConfigurationDependencies dependence in listDependencies)
                 {
-                    string table = dependence.Table;
-                    string field = dependence.Field;
+                    string query = "";
 
-                    //Пошук кількості використання елементу в таблиці залежності
-                    string query = $"SELECT count(uid) FROM {table} WHERE {field} = @uid";
-                    object? objCountcountDependencies = Config.Kernel!.DataBase.ExecuteSQLScalar(query, paramQuery);
+                    if (dependence.ConfigurationGroupLevel == ConfigurationDependencies.GroupLevel.Object)
+                        query = $"SELECT uid FROM {dependence.Table} WHERE {dependence.Field} = @uid";
+                    else if (dependence.ConfigurationGroupLevel == ConfigurationDependencies.GroupLevel.TablePart)
+                        query = $"SELECT DISTINCT owner AS uid FROM {dependence.Table} WHERE {dependence.Field} = @uid";
 
-                    if (objCountcountDependencies != null)
+                    string[] columnsName;
+                    List<Dictionary<string, object>> listRow;
+                    Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listRow);
+
+                    if (listRow.Count > 0)
                     {
-                        long countDependencies = (long)objCountcountDependencies;
-                        allCountDependencies += countDependencies;
+                        allCountDependencies += listRow.Count;
 
-                        if (countDependencies != 0)
+                        CreateMessage(TypeMessage.Error, name);
+                        CreateMessage(TypeMessage.None, "використовується --> " + dependence.ConfigurationGroupName +
+                            ", \"" + dependence.ConfigurationObjectName + "\" " +
+                            (dependence.ConfigurationGroupLevel == ConfigurationDependencies.GroupLevel.TablePart ?
+                                ", таблична частина \"" + dependence.ConfigurationTablePartName + "\" " : "") +
+                            ", поле \"" + dependence.ConfigurationFieldName + "\"");
+
+                        foreach (Dictionary<string, object> row in listRow)
                         {
-                            CreateMessage(TypeMessage.Error, name);
-                            CreateMessage(TypeMessage.None, " використовується --> " + dependence.ConfigurationGroupName +
-                                ", \"" + dependence.ConfigurationObjectName + "\" " +
-                                (dependence.ConfigurationGroupLevel == ConfigurationDependencies.GroupLevel.TablePart ?
-                                    ", таблична частина \"" + dependence.ConfigurationTablePartName + "\" " : "") +
-                                ", поле \"" + dependence.ConfigurationFieldName + "\"");
+                            Guid uid_item = (Guid)row["uid"];
 
                             if (dependence.ConfigurationGroupName == "Довідники" || dependence.ConfigurationGroupName == "Документи")
                             {
-                                
-                                switch (dependence.ConfigurationGroupName)
+                                string documentPointerName = $"StorageAndTrade_1_0.{dependence.ConfigurationGroupName}.{dependence.ConfigurationObjectName}_Pointer";
+                                object? documentPointer = ExecutingAssembly.CreateInstance(documentPointerName, false, BindingFlags.CreateInstance, null, new object[] { uid_item }, null, null);
+                                if (documentPointer != null)
                                 {
-                                    case "Довідники":
-                                        {
-
-                                            break;
-                                        }
-                                    case "Документи":
-                                        {
-
-                                            break;
-                                        }
+                                    object? objPresentation = documentPointer.GetType().InvokeMember("GetPresentation", BindingFlags.InvokeMethod, null, documentPointer, null);
+                                    if (objPresentation != null)
+                                        CreateMessage(TypeMessage.None, (string)objPresentation + $" [{uid_item}]");
                                 }
                             }
                         }
@@ -301,8 +303,6 @@ namespace StorageAndTrade
         void ClearDeletionLabel()
         {
             ButtonSensitive(false);
-
-            Assembly ExecutingAssembly = Assembly.GetExecutingAssembly();
 
             if (Config.Kernel != null)
             {
@@ -420,6 +420,7 @@ namespace StorageAndTrade
         }
 
         #endregion
+
         void OnStopClick(object? sender, EventArgs args)
         {
             CancellationTokenPageService?.Cancel();

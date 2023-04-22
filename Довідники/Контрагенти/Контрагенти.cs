@@ -59,6 +59,24 @@ namespace StorageAndTrade
             ПошукПовнотекстовий.Select = LoadRecords_OnSearch;
             ПошукПовнотекстовий.Clear = LoadRecords;
 
+            //Договори
+            {
+                LinkButton linkButton = new LinkButton(" Договори") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
+                linkButton.Clicked += (object? sender, EventArgs args) =>
+                {
+                    ДоговориКонтрагентів page = new ДоговориКонтрагентів();
+
+                    if (SelectPointerItem != null)
+                        page.КонтрагентВласник.Pointer = SelectPointerItem;
+
+                    Program.GeneralForm?.CreateNotebookPage("Договори", () => { return page; });
+
+                    page.LoadRecords();
+                };
+
+                hBoxTop.PackStart(linkButton, false, false, 10);
+            }
+
             CreateToolbar();
 
             HPaned hPaned = new HPaned();
