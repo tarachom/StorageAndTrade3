@@ -505,7 +505,8 @@ namespace StorageAndTrade
         void SpendTheDocument(string uid, bool spendDoc)
         {
             РозміщенняНоменклатуриПоКоміркам_Pointer РозміщенняНоменклатуриПоКоміркам_Pointer = new РозміщенняНоменклатуриПоКоміркам_Pointer(new UnigueID(uid));
-            РозміщенняНоменклатуриПоКоміркам_Objest РозміщенняНоменклатуриПоКоміркам_Objest = РозміщенняНоменклатуриПоКоміркам_Pointer.GetDocumentObject(true);
+            РозміщенняНоменклатуриПоКоміркам_Objest? РозміщенняНоменклатуриПоКоміркам_Objest = РозміщенняНоменклатуриПоКоміркам_Pointer.GetDocumentObject(true);
+            if (РозміщенняНоменклатуриПоКоміркам_Objest == null) return;
 
             if (spendDoc)
             {

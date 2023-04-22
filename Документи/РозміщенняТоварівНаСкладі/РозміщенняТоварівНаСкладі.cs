@@ -505,7 +505,8 @@ namespace StorageAndTrade
         void SpendTheDocument(string uid, bool spendDoc)
         {
             РозміщенняТоварівНаСкладі_Pointer РозміщенняТоварівНаСкладі_Pointer = new РозміщенняТоварівНаСкладі_Pointer(new UnigueID(uid));
-            РозміщенняТоварівНаСкладі_Objest РозміщенняТоварівНаСкладі_Objest = РозміщенняТоварівНаСкладі_Pointer.GetDocumentObject(true);
+            РозміщенняТоварівНаСкладі_Objest? РозміщенняТоварівНаСкладі_Objest = РозміщенняТоварівНаСкладі_Pointer.GetDocumentObject(true);
+            if (РозміщенняТоварівНаСкладі_Objest == null) return;
 
             if (spendDoc)
             {

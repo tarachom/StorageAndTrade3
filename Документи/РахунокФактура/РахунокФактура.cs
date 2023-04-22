@@ -527,7 +527,8 @@ namespace StorageAndTrade
         void SpendTheDocument(string uid, bool spendDoc)
         {
             РахунокФактура_Pointer РахунокФактура_Pointer = new РахунокФактура_Pointer(new UnigueID(uid));
-            РахунокФактура_Objest РахунокФактура_Objest = РахунокФактура_Pointer.GetDocumentObject(true);
+            РахунокФактура_Objest? РахунокФактура_Objest = РахунокФактура_Pointer.GetDocumentObject(true);
+            if (РахунокФактура_Objest == null) return;
 
             if (spendDoc)
             {
@@ -599,7 +600,8 @@ namespace StorageAndTrade
                     string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
 
                     РахунокФактура_Pointer РахунокФактура_Pointer = new РахунокФактура_Pointer(new UnigueID(uid));
-                    РахунокФактура_Objest рахунокФактура_Objest = РахунокФактура_Pointer.GetDocumentObject(true);
+                    РахунокФактура_Objest? рахунокФактура_Objest = РахунокФактура_Pointer.GetDocumentObject(true);
+                    if (рахунокФактура_Objest == null) continue;
 
                     //
                     //Новий документ
@@ -670,7 +672,8 @@ namespace StorageAndTrade
                     string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
 
                     РахунокФактура_Pointer рахунокФактура_Pointer = new РахунокФактура_Pointer(new UnigueID(uid));
-                    РахунокФактура_Objest рахунокФактура_Objest = рахунокФактура_Pointer.GetDocumentObject(true);
+                    РахунокФактура_Objest? рахунокФактура_Objest = рахунокФактура_Pointer.GetDocumentObject(true);
+                    if (рахунокФактура_Objest == null) continue;
 
                     //
                     //Новий документ

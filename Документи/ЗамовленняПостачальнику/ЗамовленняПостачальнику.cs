@@ -527,7 +527,8 @@ namespace StorageAndTrade
         void SpendTheDocument(string uid, bool spendDoc)
         {
             ЗамовленняПостачальнику_Pointer ЗамовленняПостачальнику_Pointer = new ЗамовленняПостачальнику_Pointer(new UnigueID(uid));
-            ЗамовленняПостачальнику_Objest ЗамовленняПостачальнику_Objest = ЗамовленняПостачальнику_Pointer.GetDocumentObject(true);
+            ЗамовленняПостачальнику_Objest? ЗамовленняПостачальнику_Objest = ЗамовленняПостачальнику_Pointer.GetDocumentObject(true);
+            if (ЗамовленняПостачальнику_Objest == null) return;
 
             if (spendDoc)
             {
@@ -599,7 +600,8 @@ namespace StorageAndTrade
                     string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
 
                     ЗамовленняПостачальнику_Pointer замовленняПостачальнику_Pointer = new ЗамовленняПостачальнику_Pointer(new UnigueID(uid));
-                    ЗамовленняПостачальнику_Objest замовленняПостачальнику_Objest = замовленняПостачальнику_Pointer.GetDocumentObject(true);
+                    ЗамовленняПостачальнику_Objest? замовленняПостачальнику_Objest = замовленняПостачальнику_Pointer.GetDocumentObject(true);
+                    if (замовленняПостачальнику_Objest == null) continue;
 
                     //
                     //Новий документ
@@ -669,7 +671,8 @@ namespace StorageAndTrade
                     string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
 
                     ЗамовленняПостачальнику_Pointer замовленняПостачальнику_Pointer = new ЗамовленняПостачальнику_Pointer(new UnigueID(uid));
-                    ЗамовленняПостачальнику_Objest замовленняПостачальнику_Objest = замовленняПостачальнику_Pointer.GetDocumentObject(true);
+                    ЗамовленняПостачальнику_Objest? замовленняПостачальнику_Objest = замовленняПостачальнику_Pointer.GetDocumentObject(true);
+                    if (замовленняПостачальнику_Objest == null) continue;
 
                     //
                     //Новий документ

@@ -1077,12 +1077,13 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
     {
         public static void ToXmlFile(<xsl:value-of select="$DocumentName"/>_Pointer <xsl:value-of select="$DocumentName"/>, string pathToSave)
         {
-            <xsl:value-of select="$DocumentName"/>_Objest <xsl:value-of select="$DocumentName"/>_Objest = <xsl:value-of select="$DocumentName"/>.GetDocumentObject(true);
+            <xsl:value-of select="$DocumentName"/>_Objest? obj = <xsl:value-of select="$DocumentName"/>.GetDocumentObject(true);
+            if (obj == null) return;
 
             XmlWriter xmlWriter = XmlWriter.Create(pathToSave, new XmlWriterSettings() { Indent = true, Encoding = System.Text.Encoding.UTF8 });
             xmlWriter.WriteStartDocument();
             xmlWriter.WriteStartElement("root");
-            xmlWriter.WriteAttributeString("uid", <xsl:value-of select="$DocumentName"/>_Objest.UnigueID.ToString());
+            xmlWriter.WriteAttributeString("uid", obj.UnigueID.ToString());
             <xsl:for-each select="Fields/Field">
             xmlWriter.WriteStartElement("<xsl:value-of select="Name"/>");
             xmlWriter.WriteAttributeString("type", "<xsl:value-of select="Type"/>");
@@ -1092,21 +1093,21 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
                 <xsl:choose>
                   <xsl:when test="$groupPointer = 'Довідники' or $groupPointer = 'Документи'">
                     xmlWriter.WriteAttributeString("pointer", "<xsl:value-of select="Pointer"/>");
-                    xmlWriter.WriteAttributeString("uid", <xsl:value-of select="$DocumentName"/>_Objest.<xsl:value-of select="Name"/>.UnigueID.ToString());
-                    xmlWriter.WriteString(<xsl:value-of select="$DocumentName"/>_Objest.<xsl:value-of select="Name"/>.GetPresentation());
+                    xmlWriter.WriteAttributeString("uid", obj.<xsl:value-of select="Name"/>.UnigueID.ToString());
+                    xmlWriter.WriteString(obj.<xsl:value-of select="Name"/>.GetPresentation());
                   </xsl:when>
                 </xsl:choose>
               </xsl:when>
               <xsl:when test="Type = 'enum'">
                 xmlWriter.WriteAttributeString("pointer", "<xsl:value-of select="Pointer"/>");
-                xmlWriter.WriteAttributeString("uid", ((int)<xsl:value-of select="$DocumentName"/>_Objest.<xsl:value-of select="Name"/>).ToString());
-                xmlWriter.WriteString(<xsl:value-of select="$DocumentName"/>_Objest.<xsl:value-of select="Name"/>.ToString());
+                xmlWriter.WriteAttributeString("uid", ((int)obj.<xsl:value-of select="Name"/>).ToString());
+                xmlWriter.WriteString(obj.<xsl:value-of select="Name"/>.ToString());
               </xsl:when>
               <xsl:when test="Type = 'composite_pointer'">
-                xmlWriter.WriteRaw(((UuidAndText)<xsl:value-of select="$DocumentName"/>_Objest.<xsl:value-of select="Name"/>).ToXml());
+                xmlWriter.WriteRaw(((UuidAndText)obj.<xsl:value-of select="Name"/>).ToXml());
               </xsl:when>
               <xsl:otherwise>
-                xmlWriter.WriteValue(<xsl:value-of select="$DocumentName"/>_Objest.<xsl:value-of select="Name"/>);
+                xmlWriter.WriteValue(obj.<xsl:value-of select="Name"/>);
               </xsl:otherwise>
             </xsl:choose>
             xmlWriter.WriteEndElement(); //<xsl:value-of select="Name"/>
@@ -1125,7 +1126,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
                     xmlWriter.WriteStartElement("TablePart");
                     xmlWriter.WriteAttributeString("name", "<xsl:value-of select="Name"/>");
 
-                    foreach(<xsl:value-of select="$TablePartFullName"/>_TablePart.Record record in <xsl:value-of select="$DocumentName"/>_Objest.<xsl:value-of select="$TablePartName"/>_TablePart.Records)
+                    foreach(<xsl:value-of select="$TablePartFullName"/>_TablePart.Record record in obj.<xsl:value-of select="$TablePartName"/>_TablePart.Records)
                     {
                         xmlWriter.WriteStartElement("row");
                         xmlWriter.WriteAttributeString("uid", record.UID.ToString());
@@ -1380,18 +1381,21 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
 
         public bool SpendTheDocument(DateTime spendDate)
         {
-            return GetDocumentObject().SpendTheDocument(spendDate);
+            <xsl:value-of select="$DocumentName"/>_Objest? obj = GetDocumentObject();
+            return (obj != null ? obj.SpendTheDocument(spendDate) : false);
         }
 
         public void ClearSpendTheDocument()
         {
-            GetDocumentObject().ClearSpendTheDocument();
+            <xsl:value-of select="$DocumentName"/>_Objest? obj = GetDocumentObject();
+            if (obj != null) obj.ClearSpendTheDocument();
         }
 
         public void SetDeletionLabel(bool label = true)
         {
             <xsl:if test="normalize-space(TriggerFunctions/SetDeletionLabel) != '' or normalize-space(SpendFunctions/ClearSpend) != ''">
-                <xsl:value-of select="$DocumentName"/>_Objest obj = GetDocumentObject();
+                <xsl:value-of select="$DocumentName"/>_Objest? obj = GetDocumentObject();
+                if (obj == null) return;
                 <xsl:if test="normalize-space(TriggerFunctions/SetDeletionLabel) != ''">
                     <xsl:value-of select="TriggerFunctions/SetDeletionLabel"/>
                     <xsl:text>(obj, label)</xsl:text>;
@@ -1423,10 +1427,11 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
             return new UuidAndText(UnigueID.UGuid, "Документи.<xsl:value-of select="$DocumentName"/>");
         }
 
-        public <xsl:value-of select="$DocumentName"/>_Objest GetDocumentObject(bool readAllTablePart = false)
+        public <xsl:value-of select="$DocumentName"/>_Objest? GetDocumentObject(bool readAllTablePart = false)
         {
+            if (this.IsEmpty()) return null;
             <xsl:value-of select="$DocumentName"/>_Objest <xsl:value-of select="$DocumentName"/>ObjestItem = new <xsl:value-of select="$DocumentName"/>_Objest();
-            <xsl:value-of select="$DocumentName"/>ObjestItem.Read(base.UnigueID);
+            if (!<xsl:value-of select="$DocumentName"/>ObjestItem.Read(base.UnigueID)) return null;
             <xsl:if test="count(TabularParts/TablePart) != 0">
             if (readAllTablePart)
             {   

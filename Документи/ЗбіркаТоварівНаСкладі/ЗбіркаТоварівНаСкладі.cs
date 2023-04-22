@@ -505,7 +505,8 @@ namespace StorageAndTrade
         void SpendTheDocument(string uid, bool spendDoc)
         {
             ЗбіркаТоварівНаСкладі_Pointer ЗбіркаТоварівНаСкладі_Pointer = new ЗбіркаТоварівНаСкладі_Pointer(new UnigueID(uid));
-            ЗбіркаТоварівНаСкладі_Objest ЗбіркаТоварівНаСкладі_Objest = ЗбіркаТоварівНаСкладі_Pointer.GetDocumentObject(true);
+            ЗбіркаТоварівНаСкладі_Objest? ЗбіркаТоварівНаСкладі_Objest = ЗбіркаТоварівНаСкладі_Pointer.GetDocumentObject(true);
+            if (ЗбіркаТоварівНаСкладі_Objest == null) return;
 
             if (spendDoc)
             {

@@ -505,7 +505,8 @@ namespace StorageAndTrade
         void SpendTheDocument(string uid, bool spendDoc)
         {
             ПоверненняТоварівВідКлієнта_Pointer ПоверненняТоварівВідКлієнта_Pointer = new ПоверненняТоварівВідКлієнта_Pointer(new UnigueID(uid));
-            ПоверненняТоварівВідКлієнта_Objest ПоверненняТоварівВідКлієнта_Objest = ПоверненняТоварівВідКлієнта_Pointer.GetDocumentObject(true);
+            ПоверненняТоварівВідКлієнта_Objest? ПоверненняТоварівВідКлієнта_Objest = ПоверненняТоварівВідКлієнта_Pointer.GetDocumentObject(true);
+            if (ПоверненняТоварівВідКлієнта_Objest == null) return;
 
             if (spendDoc)
             {

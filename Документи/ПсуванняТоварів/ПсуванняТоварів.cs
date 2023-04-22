@@ -505,7 +505,8 @@ namespace StorageAndTrade
         void SpendTheDocument(string uid, bool spendDoc)
         {
             ПсуванняТоварів_Pointer ПсуванняТоварів_Pointer = new ПсуванняТоварів_Pointer(new UnigueID(uid));
-            ПсуванняТоварів_Objest ПсуванняТоварів_Objest = ПсуванняТоварів_Pointer.GetDocumentObject(true);
+            ПсуванняТоварів_Objest? ПсуванняТоварів_Objest = ПсуванняТоварів_Pointer.GetDocumentObject(true);
+            if (ПсуванняТоварів_Objest == null) return;
 
             if (spendDoc)
             {

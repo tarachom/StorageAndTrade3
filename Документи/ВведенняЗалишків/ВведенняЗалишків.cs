@@ -508,7 +508,8 @@ namespace StorageAndTrade
         void SpendTheDocument(string uid, bool spendDoc)
         {
             ВведенняЗалишків_Pointer ВведенняЗалишків_Pointer = new ВведенняЗалишків_Pointer(new UnigueID(uid));
-            ВведенняЗалишків_Objest ВведенняЗалишків_Objest = ВведенняЗалишків_Pointer.GetDocumentObject(true);
+            ВведенняЗалишків_Objest? ВведенняЗалишків_Objest = ВведенняЗалишків_Pointer.GetDocumentObject(true);
+            if (ВведенняЗалишків_Objest == null) return;
 
             if (spendDoc)
             {

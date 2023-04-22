@@ -498,7 +498,8 @@ namespace StorageAndTrade
         void SpendTheDocument(string uid, bool spendDoc)
         {
             РозхіднийКасовийОрдер_Pointer РозхіднийКасовийОрдер_Pointer = new РозхіднийКасовийОрдер_Pointer(new UnigueID(uid));
-            РозхіднийКасовийОрдер_Objest РозхіднийКасовийОрдер_Objest = РозхіднийКасовийОрдер_Pointer.GetDocumentObject(true);
+            РозхіднийКасовийОрдер_Objest? РозхіднийКасовийОрдер_Objest = РозхіднийКасовийОрдер_Pointer.GetDocumentObject(true);
+            if (РозхіднийКасовийОрдер_Objest == null) return;
 
             if (spendDoc)
             {

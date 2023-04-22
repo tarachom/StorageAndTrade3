@@ -527,7 +527,8 @@ namespace StorageAndTrade
         void SpendTheDocument(string uid, bool spendDoc)
         {
             АктВиконанихРобіт_Pointer АктВиконанихРобіт_Pointer = new АктВиконанихРобіт_Pointer(new UnigueID(uid));
-            АктВиконанихРобіт_Objest АктВиконанихРобіт_Objest = АктВиконанихРобіт_Pointer.GetDocumentObject(true);
+            АктВиконанихРобіт_Objest? АктВиконанихРобіт_Objest = АктВиконанихРобіт_Pointer.GetDocumentObject(true);
+            if (АктВиконанихРобіт_Objest == null) return;
 
             if (spendDoc)
             {
@@ -599,7 +600,8 @@ namespace StorageAndTrade
                     string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
 
                     АктВиконанихРобіт_Pointer актВиконанихРобіт_Pointer = new АктВиконанихРобіт_Pointer(new UnigueID(uid));
-                    АктВиконанихРобіт_Objest актВиконанихРобіт_Objest = актВиконанихРобіт_Pointer.GetDocumentObject(false);
+                    АктВиконанихРобіт_Objest? актВиконанихРобіт_Objest = актВиконанихРобіт_Pointer.GetDocumentObject(false);
+                    if (актВиконанихРобіт_Objest == null) continue;
 
                     //
                     //Новий документ
