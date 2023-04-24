@@ -96,7 +96,8 @@ namespace StorageAndTrade
         {
             ClearMessage();
 
-            CancellationTokenThread = new CancellationTokenSource();
+            Program.ListCancellationToken.Add(CancellationTokenThread = new CancellationTokenSource());
+
             Thread thread = new Thread(new ThreadStart(Filling));
             thread.Start();
         }
@@ -117,6 +118,7 @@ namespace StorageAndTrade
                 XPathNavigator? rootДовідники = rootNode?.SelectSingleNode("Довідники");
 
                 //Валюти
+                if (!CancellationTokenThread!.IsCancellationRequested)
                 {
                     string name = "Валюти";
 
@@ -159,6 +161,7 @@ namespace StorageAndTrade
                 }
 
                 // Організації
+                if (!CancellationTokenThread!.IsCancellationRequested)
                 {
                     string name = "Організації";
 
@@ -195,6 +198,7 @@ namespace StorageAndTrade
                 }
 
                 // Каси
+                if (!CancellationTokenThread!.IsCancellationRequested)
                 {
                     string name = "Каси";
 
@@ -233,6 +237,7 @@ namespace StorageAndTrade
                 }
 
                 // ПакуванняОдиниціВиміру
+                if (!CancellationTokenThread!.IsCancellationRequested)
                 {
                     string name = "Пакування";
 
@@ -272,6 +277,7 @@ namespace StorageAndTrade
                 }
 
                 // ВидиНоменклатури
+                if (!CancellationTokenThread!.IsCancellationRequested)
                 {
                     string name = "Види номенклатури";
 
@@ -314,6 +320,7 @@ namespace StorageAndTrade
                 }
 
                 // ВидиЦін
+                if (!CancellationTokenThread!.IsCancellationRequested)
                 {
                     string name = "Види цін";
 
@@ -355,6 +362,7 @@ namespace StorageAndTrade
                 }
 
                 // Склади
+                if (!CancellationTokenThread!.IsCancellationRequested)
                 {
                     string name = "Склади";
 
@@ -391,6 +399,7 @@ namespace StorageAndTrade
                 }
 
                 // Контрагенти
+                if (!CancellationTokenThread!.IsCancellationRequested)
                 {
                     string name = "Контрагенти";
 
@@ -430,6 +439,7 @@ namespace StorageAndTrade
                 }
 
                 // Контрагенти Папки
+                if (!CancellationTokenThread!.IsCancellationRequested)
                 {
                     string name = "Контрагенти папки";
 
@@ -462,6 +472,7 @@ namespace StorageAndTrade
                 }
 
                 // Номенклатура Папки
+                if (!CancellationTokenThread!.IsCancellationRequested)
                 {
                     string name = "Номенклатура папки";
 
@@ -494,6 +505,7 @@ namespace StorageAndTrade
                 }
 
                 // Номенклатура
+                if (!CancellationTokenThread!.IsCancellationRequested)
                 {
                     string name = "Номенклатура";
 
@@ -540,6 +552,8 @@ namespace StorageAndTrade
                 CreateMessage(TypeMessage.Error, $"Не знайдений файл {initialFillingXmlFilePath}");
                 CreateMessage(TypeMessage.None, "Початкове заповнення перервано!");
             }
+
+            Program.RemoveCancellationToken(CancellationTokenThread);
 
             ButtonSensitive(true);
 
@@ -611,6 +625,7 @@ namespace StorageAndTrade
         void OnStopClick(object? sender, EventArgs args)
         {
             CancellationTokenThread?.Cancel();
+            Program.RemoveCancellationToken(CancellationTokenThread);
         }
 
     }

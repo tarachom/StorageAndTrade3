@@ -216,8 +216,7 @@ namespace StorageAndTrade
                 }
             }
 
-            if (CancellationTokenPageService != null)
-                Program.ListCancellationToken.Remove(CancellationTokenPageService);
+            Program.RemoveCancellationToken(CancellationTokenPageService);
 
             Константи.Системні.ЗупинитиФоновіЗадачі_Const = false;
             ButtonSensitive(true);
@@ -411,8 +410,7 @@ namespace StorageAndTrade
             CreateMessage(TypeMessage.None, "Готово!\n\n\n");
             ButtonSensitive(true);
 
-            if (CancellationTokenPageService != null)
-                Program.ListCancellationToken.Remove(CancellationTokenPageService);
+            Program.RemoveCancellationToken(CancellationTokenPageService);
 
             Thread.Sleep(1000);
             CreateMessage(TypeMessage.None, "\n\n\n");
@@ -423,6 +421,7 @@ namespace StorageAndTrade
         void OnStopClick(object? sender, EventArgs args)
         {
             CancellationTokenPageService?.Cancel();
+            Program.RemoveCancellationToken(CancellationTokenPageService);
         }
     }
 }

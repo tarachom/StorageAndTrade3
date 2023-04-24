@@ -65,6 +65,16 @@ namespace StorageAndTrade
         }
 
         /// <summary>
+        /// Видалення із списку ListCancellationToken використаного токена для завершення роботи потоку
+        /// </summary>
+        /// <param name="cancellationToken">Токен</param>
+        public static void RemoveCancellationToken(CancellationTokenSource? cancellationToken)
+        {
+            if (cancellationToken != null && ListCancellationToken.Contains(cancellationToken))
+                ListCancellationToken.Remove(cancellationToken);
+        }
+
+        /// <summary>
         /// Основна форма
         /// </summary>
         public static FormStorageAndTrade? GeneralForm { get; set; }
@@ -72,7 +82,7 @@ namespace StorageAndTrade
         #region Const
 
         //Шлях до іконки
-        public static readonly string IcoFileName = AppContext.BaseDirectory +"images/form.ico";
+        public static readonly string IcoFileName = AppContext.BaseDirectory + "images/form.ico";
 
         #endregion
     }

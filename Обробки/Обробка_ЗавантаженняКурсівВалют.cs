@@ -98,6 +98,7 @@ namespace StorageAndTrade
             ClearMessage();
 
             Program.ListCancellationToken.Add(CancellationTokenThread = new CancellationTokenSource());
+
             Thread thread = new Thread(new ThreadStart(DownloadExCurr));
             thread.Start();
         }
@@ -230,6 +231,8 @@ LIMIT 1
                 }
             }
 
+            Program.RemoveCancellationToken(CancellationTokenThread);
+
             ButtonSensitive(true);
 
             if (CallBack_EndBackgroundWork != null)
@@ -306,6 +309,7 @@ LIMIT 1
         void OnStopClick(object? sender, EventArgs args)
         {
             CancellationTokenThread?.Cancel();
+            Program.RemoveCancellationToken(CancellationTokenThread);
         }
 
         void OnЗавантаженняНаВказануДату_Activated(object? sender, EventArgs args)

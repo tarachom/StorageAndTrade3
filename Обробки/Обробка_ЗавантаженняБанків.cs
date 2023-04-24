@@ -240,6 +240,8 @@ namespace StorageAndTrade
                 }
             }
 
+            Program.RemoveCancellationToken(CancellationTokenThread);
+
             ButtonSensitive(true);
         }
 
@@ -305,6 +307,7 @@ namespace StorageAndTrade
         void OnStopClick(object? sender, EventArgs args)
         {
             CancellationTokenThread?.Cancel();
+            Program.RemoveCancellationToken(CancellationTokenThread);
         }
     }
 }
