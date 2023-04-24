@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 24.04.2023 15:19:44
+ * Дата конфігурації: 24.04.2023 18:17:13
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -1987,7 +1987,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public void Save()
+        public bool Save()
         {
             Організації_Triggers.BeforeSave(this);
             base.FieldValue["col_a1"] = Назва;
@@ -2000,9 +2000,13 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_a8"] = СвідоцтвоДатаВидачі;
             base.FieldValue["col_a9"] = Холдинг.UnigueID.UGuid;
             
-            BaseSave();
-            Організації_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НазваПовна, НазваСкорочена, КраїнаРеєстрації, СвідоцтвоСеріяНомер, СвідоцтвоДатаВидачі });
+            bool result = BaseSave();
+            if (result)
+            {
+                Організації_Triggers.AfterSave(this);
+                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НазваПовна, НазваСкорочена, КраїнаРеєстрації, СвідоцтвоСеріяНомер, СвідоцтвоДатаВидачі });
+            }
+            return result;
         }
 
         public Організації_Objest Copy(bool copyTableParts = false)
@@ -2341,7 +2345,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public void Save()
+        public bool Save()
         {
             Номенклатура_Triggers.BeforeSave(this);
             base.FieldValue["col_b1"] = Назва;
@@ -2356,9 +2360,13 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_a5"] = Папка.UnigueID.UGuid;
             base.FieldValue["col_a7"] = ОсновнаКартинкаФайл.UnigueID.UGuid;
             
-            BaseSave();
-            Номенклатура_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НазваПовна, Опис, Артикул });
+            bool result = BaseSave();
+            if (result)
+            {
+                Номенклатура_Triggers.AfterSave(this);
+                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НазваПовна, Опис, Артикул });
+            }
+            return result;
         }
 
         public Номенклатура_Objest Copy(bool copyTableParts = false)
@@ -2647,15 +2655,19 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public void Save()
+        public bool Save()
         {
             Виробники_Triggers.BeforeSave(this);
             base.FieldValue["col_b6"] = Назва;
             base.FieldValue["col_b7"] = Код;
             
-            BaseSave();
-            Виробники_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
+            bool result = BaseSave();
+            if (result)
+            {
+                Виробники_Triggers.AfterSave(this);
+                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
+            }
+            return result;
         }
 
         public Виробники_Objest Copy(bool copyTableParts = false)
@@ -2846,7 +2858,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public void Save()
+        public bool Save()
         {
             ВидиНоменклатури_Triggers.BeforeSave(this);
             base.FieldValue["col_b8"] = Назва;
@@ -2855,9 +2867,13 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_a1"] = (int)ТипНоменклатури;
             base.FieldValue["col_a4"] = ОдиницяВиміру.UnigueID.UGuid;
             
-            BaseSave();
-            ВидиНоменклатури_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, Опис });
+            bool result = BaseSave();
+            if (result)
+            {
+                ВидиНоменклатури_Triggers.AfterSave(this);
+                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, Опис });
+            }
+            return result;
         }
 
         public ВидиНоменклатури_Objest Copy(bool copyTableParts = false)
@@ -3051,7 +3067,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public void Save()
+        public bool Save()
         {
             ПакуванняОдиниціВиміру_Triggers.BeforeSave(this);
             base.FieldValue["col_c1"] = Назва;
@@ -3059,9 +3075,13 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_c3"] = НазваПовна;
             base.FieldValue["col_c4"] = КількістьУпаковок;
             
-            BaseSave();
-            ПакуванняОдиниціВиміру_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НазваПовна });
+            bool result = BaseSave();
+            if (result)
+            {
+                ПакуванняОдиниціВиміру_Triggers.AfterSave(this);
+                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НазваПовна });
+            }
+            return result;
         }
 
         public ПакуванняОдиниціВиміру_Objest Copy(bool copyTableParts = false)
@@ -3256,7 +3276,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public void Save()
+        public bool Save()
         {
             Валюти_Triggers.BeforeSave(this);
             base.FieldValue["col_c5"] = Назва;
@@ -3265,9 +3285,13 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_a1"] = Код_R030;
             base.FieldValue["col_a3"] = ВиводитиКурсНаСтартову;
             
-            BaseSave();
-            Валюти_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, КороткаНазва, Код_R030 });
+            bool result = BaseSave();
+            if (result)
+            {
+                Валюти_Triggers.AfterSave(this);
+                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, КороткаНазва, Код_R030 });
+            }
+            return result;
         }
 
         public Валюти_Objest Copy(bool copyTableParts = false)
@@ -3474,7 +3498,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public void Save()
+        public bool Save()
         {
             Контрагенти_Triggers.BeforeSave(this);
             base.FieldValue["col_c7"] = Назва;
@@ -3485,9 +3509,13 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_a2"] = Опис;
             base.FieldValue["col_a3"] = КлючовіСловаДляПошуку;
             
-            BaseSave();
-            Контрагенти_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НазваПовна, РеєстраційнийНомер, Опис, КлючовіСловаДляПошуку });
+            bool result = BaseSave();
+            if (result)
+            {
+                Контрагенти_Triggers.AfterSave(this);
+                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НазваПовна, РеєстраційнийНомер, Опис, КлючовіСловаДляПошуку });
+            }
+            return result;
         }
 
         public Контрагенти_Objest Copy(bool copyTableParts = false)
@@ -3896,7 +3924,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public void Save()
+        public bool Save()
         {
             Склади_Triggers.BeforeSave(this);
             base.FieldValue["col_d9"] = Назва;
@@ -3908,9 +3936,13 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_a5"] = Папка.UnigueID.UGuid;
             base.FieldValue["col_a6"] = (int)НалаштуванняАдресногоЗберігання;
             
-            BaseSave();
-            Склади_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
+            bool result = BaseSave();
+            if (result)
+            {
+                Склади_Triggers.AfterSave(this);
+                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
+            }
+            return result;
         }
 
         public Склади_Objest Copy(bool copyTableParts = false)
@@ -4220,16 +4252,20 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public void Save()
+        public bool Save()
         {
             ВидиЦін_Triggers.BeforeSave(this);
             base.FieldValue["col_e9"] = Назва;
             base.FieldValue["col_f1"] = Код;
             base.FieldValue["col_f2"] = Валюта.UnigueID.UGuid;
             
-            BaseSave();
-            ВидиЦін_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
+            bool result = BaseSave();
+            if (result)
+            {
+                ВидиЦін_Triggers.AfterSave(this);
+                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
+            }
+            return result;
         }
 
         public ВидиЦін_Objest Copy(bool copyTableParts = false)
@@ -4416,16 +4452,20 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public void Save()
+        public bool Save()
         {
             ВидиЦінПостачальників_Triggers.BeforeSave(this);
             base.FieldValue["col_f3"] = Назва;
             base.FieldValue["col_f4"] = Код;
             base.FieldValue["col_f5"] = Валюта.UnigueID.UGuid;
             
-            BaseSave();
-            ВидиЦінПостачальників_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
+            bool result = BaseSave();
+            if (result)
+            {
+                ВидиЦінПостачальників_Triggers.AfterSave(this);
+                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
+            }
+            return result;
         }
 
         public ВидиЦінПостачальників_Objest Copy(bool copyTableParts = false)
@@ -4621,7 +4661,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public void Save()
+        public bool Save()
         {
             Користувачі_Triggers.BeforeSave(this);
             base.FieldValue["col_f6"] = Назва;
@@ -4630,9 +4670,13 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_g6"] = Коментар;
             base.FieldValue["col_a2"] = КодВСпеціальнійТаблиці;
             
-            BaseSave();
-            Користувачі_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, Коментар });
+            bool result = BaseSave();
+            if (result)
+            {
+                Користувачі_Triggers.AfterSave(this);
+                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, Коментар });
+            }
+            return result;
         }
 
         public Користувачі_Objest Copy(bool copyTableParts = false)
@@ -4941,7 +4985,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public void Save()
+        public bool Save()
         {
             ФізичніОсоби_Triggers.BeforeSave(this);
             base.FieldValue["col_g7"] = Назва;
@@ -4950,9 +4994,13 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_a1"] = (int)Стать;
             base.FieldValue["col_a2"] = ІПН;
             
-            BaseSave();
-            ФізичніОсоби_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, ІПН });
+            bool result = BaseSave();
+            if (result)
+            {
+                ФізичніОсоби_Triggers.AfterSave(this);
+                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, ІПН });
+            }
+            return result;
         }
 
         public ФізичніОсоби_Objest Copy(bool copyTableParts = false)
@@ -5252,16 +5300,20 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public void Save()
+        public bool Save()
         {
             СтруктураПідприємства_Triggers.BeforeSave(this);
             base.FieldValue["col_h8"] = Назва;
             base.FieldValue["col_h9"] = Код;
             base.FieldValue["col_i1"] = Керівник.UnigueID.UGuid;
             
-            BaseSave();
-            СтруктураПідприємства_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
+            bool result = BaseSave();
+            if (result)
+            {
+                СтруктураПідприємства_Triggers.AfterSave(this);
+                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
+            }
+            return result;
         }
 
         public СтруктураПідприємства_Objest Copy(bool copyTableParts = false)
@@ -5445,15 +5497,19 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public void Save()
+        public bool Save()
         {
             КраїниСвіту_Triggers.BeforeSave(this);
             base.FieldValue["col_i2"] = Назва;
             base.FieldValue["col_i3"] = Код;
             
-            BaseSave();
-            КраїниСвіту_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
+            bool result = BaseSave();
+            if (result)
+            {
+                КраїниСвіту_Triggers.AfterSave(this);
+                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
+            }
+            return result;
         }
 
         public КраїниСвіту_Objest Copy(bool copyTableParts = false)
@@ -5647,7 +5703,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public void Save()
+        public bool Save()
         {
             Файли_Triggers.BeforeSave(this);
             base.FieldValue["col_i6"] = Код;
@@ -5657,9 +5713,13 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_a3"] = Розмір;
             base.FieldValue["col_a4"] = ДатаСтворення;
             
-            BaseSave();
-            Файли_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НазваФайлу });
+            bool result = BaseSave();
+            if (result)
+            {
+                Файли_Triggers.AfterSave(this);
+                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НазваФайлу });
+            }
+            return result;
         }
 
         public Файли_Objest Copy(bool copyTableParts = false)
@@ -5855,7 +5915,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public void Save()
+        public bool Save()
         {
             ХарактеристикиНоменклатури_Triggers.BeforeSave(this);
             base.FieldValue["col_i7"] = Назва;
@@ -5863,9 +5923,13 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_i9"] = НазваПовна;
             base.FieldValue["col_a1"] = Номенклатура.UnigueID.UGuid;
             
-            BaseSave();
-            ХарактеристикиНоменклатури_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НазваПовна });
+            bool result = BaseSave();
+            if (result)
+            {
+                ХарактеристикиНоменклатури_Triggers.AfterSave(this);
+                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НазваПовна });
+            }
+            return result;
         }
 
         public ХарактеристикиНоменклатури_Objest Copy(bool copyTableParts = false)
@@ -6054,16 +6118,20 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public void Save()
+        public bool Save()
         {
             Номенклатура_Папки_Triggers.BeforeSave(this);
             base.FieldValue["col_j1"] = Назва;
             base.FieldValue["col_j2"] = Код;
             base.FieldValue["col_j3"] = Родич.UnigueID.UGuid;
             
-            BaseSave();
-            Номенклатура_Папки_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
+            bool result = BaseSave();
+            if (result)
+            {
+                Номенклатура_Папки_Triggers.AfterSave(this);
+                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
+            }
+            return result;
         }
 
         public Номенклатура_Папки_Objest Copy(bool copyTableParts = false)
@@ -6250,16 +6318,20 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public void Save()
+        public bool Save()
         {
             Контрагенти_Папки_Triggers.BeforeSave(this);
             base.FieldValue["col_j4"] = Назва;
             base.FieldValue["col_j5"] = Код;
             base.FieldValue["col_j6"] = Родич.UnigueID.UGuid;
             
-            BaseSave();
-            Контрагенти_Папки_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
+            bool result = BaseSave();
+            if (result)
+            {
+                Контрагенти_Папки_Triggers.AfterSave(this);
+                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
+            }
+            return result;
         }
 
         public Контрагенти_Папки_Objest Copy(bool copyTableParts = false)
@@ -6446,16 +6518,20 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public void Save()
+        public bool Save()
         {
             Склади_Папки_Triggers.BeforeSave(this);
             base.FieldValue["col_j7"] = Назва;
             base.FieldValue["col_j8"] = Код;
             base.FieldValue["col_a1"] = Родич.UnigueID.UGuid;
             
-            BaseSave();
-            Склади_Папки_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
+            bool result = BaseSave();
+            if (result)
+            {
+                Склади_Папки_Triggers.AfterSave(this);
+                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
+            }
+            return result;
         }
 
         public Склади_Папки_Objest Copy(bool copyTableParts = false)
@@ -6645,7 +6721,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public void Save()
+        public bool Save()
         {
             Каси_Triggers.BeforeSave(this);
             base.FieldValue["col_k8"] = Назва;
@@ -6653,9 +6729,13 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_a2"] = Валюта.UnigueID.UGuid;
             base.FieldValue["col_a1"] = Підрозділ.UnigueID.UGuid;
             
-            BaseSave();
-            Каси_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
+            bool result = BaseSave();
+            if (result)
+            {
+                Каси_Triggers.AfterSave(this);
+                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
+            }
+            return result;
         }
 
         public Каси_Objest Copy(bool copyTableParts = false)
@@ -6874,7 +6954,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public void Save()
+        public bool Save()
         {
             БанківськіРахункиОрганізацій_Triggers.BeforeSave(this);
             base.FieldValue["col_l1"] = Назва;
@@ -6891,9 +6971,13 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_n3"] = Закритий;
             base.FieldValue["col_a1"] = Організація.UnigueID.UGuid;
             
-            BaseSave();
-            БанківськіРахункиОрганізацій_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, Банк, НазваБанку, НомерРахунку, АдресаБанку, МістоБанку, ТелефониБанку });
+            bool result = BaseSave();
+            if (result)
+            {
+                БанківськіРахункиОрганізацій_Triggers.AfterSave(this);
+                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, Банк, НазваБанку, НомерРахунку, АдресаБанку, МістоБанку, ТелефониБанку });
+            }
+            return result;
         }
 
         public БанківськіРахункиОрганізацій_Objest Copy(bool copyTableParts = false)
@@ -7151,7 +7235,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public void Save()
+        public bool Save()
         {
             ДоговориКонтрагентів_Triggers.BeforeSave(this);
             base.FieldValue["col_n4"] = Назва;
@@ -7175,9 +7259,13 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_b7"] = Сума;
             base.FieldValue["col_a3"] = Коментар;
             
-            BaseSave();
-            ДоговориКонтрагентів_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, Коментар });
+            bool result = BaseSave();
+            if (result)
+            {
+                ДоговориКонтрагентів_Triggers.AfterSave(this);
+                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, Коментар });
+            }
+            return result;
         }
 
         public ДоговориКонтрагентів_Objest Copy(bool copyTableParts = false)
@@ -7434,7 +7522,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public void Save()
+        public bool Save()
         {
             БанківськіРахункиКонтрагентів_Triggers.BeforeSave(this);
             base.FieldValue["col_n7"] = Назва;
@@ -7453,9 +7541,13 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_o2"] = Закрито;
             base.FieldValue["col_o3"] = Контрагент.UnigueID.UGuid;
             
-            BaseSave();
-            БанківськіРахункиКонтрагентів_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НазваБанку, КорРахунокБанку, МістоБанку, АдресаБанку, ТелефониБанку });
+            bool result = BaseSave();
+            if (result)
+            {
+                БанківськіРахункиКонтрагентів_Triggers.AfterSave(this);
+                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НазваБанку, КорРахунокБанку, МістоБанку, АдресаБанку, ТелефониБанку });
+            }
+            return result;
         }
 
         public БанківськіРахункиКонтрагентів_Objest Copy(bool copyTableParts = false)
@@ -7675,7 +7767,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public void Save()
+        public bool Save()
         {
             СтаттяРухуКоштів_Triggers.BeforeSave(this);
             base.FieldValue["col_i7"] = Назва;
@@ -7684,9 +7776,13 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_j2"] = (int)ВидРухуКоштів;
             base.FieldValue["col_j1"] = Опис;
             
-            BaseSave();
-            СтаттяРухуКоштів_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, Опис });
+            bool result = BaseSave();
+            if (result)
+            {
+                СтаттяРухуКоштів_Triggers.AfterSave(this);
+                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, Опис });
+            }
+            return result;
         }
 
         public СтаттяРухуКоштів_Objest Copy(bool copyTableParts = false)
@@ -7962,16 +8058,20 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public void Save()
+        public bool Save()
         {
             СеріїНоменклатури_Triggers.BeforeSave(this);
             base.FieldValue["col_a3"] = Номер;
             base.FieldValue["col_a1"] = Коментар;
             base.FieldValue["col_a2"] = ДатаСтворення;
             
-            BaseSave();
-            СеріїНоменклатури_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Номер, Коментар });
+            bool result = BaseSave();
+            if (result)
+            {
+                СеріїНоменклатури_Triggers.AfterSave(this);
+                BaseWriteFullTextSearch(GetBasis(), new string[] { Номер, Коментар });
+            }
+            return result;
         }
 
         public СеріїНоменклатури_Objest Copy(bool copyTableParts = false)
@@ -8167,7 +8267,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public void Save()
+        public bool Save()
         {
             ПартіяТоварівКомпозит_Triggers.BeforeSave(this);
             base.FieldValue["col_a1"] = Назва;
@@ -8177,9 +8277,13 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_a4"] = ПоступленняТоварівТаПослуг.UnigueID.UGuid;
             base.FieldValue["col_a5"] = ВведенняЗалишків.UnigueID.UGuid;
             
-            BaseSave();
-            ПартіяТоварівКомпозит_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
+            bool result = BaseSave();
+            if (result)
+            {
+                ПартіяТоварівКомпозит_Triggers.AfterSave(this);
+                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
+            }
+            return result;
         }
 
         public ПартіяТоварівКомпозит_Objest Copy(bool copyTableParts = false)
@@ -8384,7 +8488,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public void Save()
+        public bool Save()
         {
             ВидиЗапасів_Triggers.BeforeSave(this);
             base.FieldValue["col_a5"] = Назва;
@@ -8395,9 +8499,13 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_b2"] = Договір.UnigueID.UGuid;
             base.FieldValue["col_a1"] = Код;
             
-            BaseSave();
-            ВидиЗапасів_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
+            bool result = BaseSave();
+            if (result)
+            {
+                ВидиЗапасів_Triggers.AfterSave(this);
+                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
+            }
+            return result;
         }
 
         public ВидиЗапасів_Objest Copy(bool copyTableParts = false)
@@ -8667,7 +8775,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public void Save()
+        public bool Save()
         {
             Банки_Triggers.BeforeSave(this);
             base.FieldValue["col_a1"] = Код;
@@ -8699,9 +8807,13 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_c9"] = Статус;
             base.FieldValue["col_d1"] = ДатаЗапису;
             
-            BaseSave();
-            Банки_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, КодМФО, КодЄДРПОУ, НазваНаселеногоПункту, Адреса });
+            bool result = BaseSave();
+            if (result)
+            {
+                Банки_Triggers.AfterSave(this);
+                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, КодМФО, КодЄДРПОУ, НазваНаселеногоПункту, Адреса });
+            }
+            return result;
         }
 
         public Банки_Objest Copy(bool copyTableParts = false)
@@ -8938,16 +9050,20 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public void Save()
+        public bool Save()
         {
             СкладськіПриміщення_Triggers.BeforeSave(this);
             base.FieldValue["col_a2"] = Назва;
             base.FieldValue["col_a3"] = (int)НалаштуванняАдресногоЗберігання;
             base.FieldValue["col_a1"] = Склад.UnigueID.UGuid;
             
-            BaseSave();
-            СкладськіПриміщення_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
+            bool result = BaseSave();
+            if (result)
+            {
+                СкладськіПриміщення_Triggers.AfterSave(this);
+                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
+            }
+            return result;
         }
 
         public СкладськіПриміщення_Objest Copy(bool copyTableParts = false)
@@ -9155,7 +9271,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public void Save()
+        public bool Save()
         {
             СкладськіКомірки_Triggers.BeforeSave(this);
             base.FieldValue["col_a1"] = Папка.UnigueID.UGuid;
@@ -9169,9 +9285,13 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_a9"] = (int)ТипСкладськоїКомірки;
             base.FieldValue["col_b1"] = Типорозмір.UnigueID.UGuid;
             
-            BaseSave();
-            СкладськіКомірки_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
+            bool result = BaseSave();
+            if (result)
+            {
+                СкладськіКомірки_Triggers.AfterSave(this);
+                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
+            }
+            return result;
         }
 
         public СкладськіКомірки_Objest Copy(bool copyTableParts = false)
@@ -9371,15 +9491,19 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public void Save()
+        public bool Save()
         {
             base.FieldValue["col_a2"] = Назва;
             base.FieldValue["col_a3"] = Опис;
             base.FieldValue["col_a4"] = Приміщення.UnigueID.UGuid;
             
-            BaseSave();
-            
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
+            bool result = BaseSave();
+            if (result)
+            {
+                
+                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
+            }
+            return result;
         }
 
         public ОбластьЗберігання_Objest Copy(bool copyTableParts = false)
@@ -9574,7 +9698,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public void Save()
+        public bool Save()
         {
             ТипорозміриКомірок_Triggers.BeforeSave(this);
             base.FieldValue["col_a1"] = Висота;
@@ -9584,9 +9708,13 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_a5"] = Обєм;
             base.FieldValue["col_a6"] = Ширина;
             
-            BaseSave();
-            ТипорозміриКомірок_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
+            bool result = BaseSave();
+            if (result)
+            {
+                ТипорозміриКомірок_Triggers.AfterSave(this);
+                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
+            }
+            return result;
         }
 
         public ТипорозміриКомірок_Objest Copy(bool copyTableParts = false)
@@ -9782,7 +9910,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public void Save()
+        public bool Save()
         {
             СкладськіКомірки_Папки_Triggers.BeforeSave(this);
             base.FieldValue["col_j1"] = Назва;
@@ -9790,9 +9918,13 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_j3"] = Родич.UnigueID.UGuid;
             base.FieldValue["col_a1"] = Приміщення.UnigueID.UGuid;
             
-            BaseSave();
-            СкладськіКомірки_Папки_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
+            bool result = BaseSave();
+            if (result)
+            {
+                СкладськіКомірки_Папки_Triggers.AfterSave(this);
+                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
+            }
+            return result;
         }
 
         public СкладськіКомірки_Папки_Objest Copy(bool copyTableParts = false)
@@ -9987,7 +10119,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public void Save()
+        public bool Save()
         {
             Блокнот_Triggers.BeforeSave(this);
             base.FieldValue["col_a1"] = Код;
@@ -9996,9 +10128,13 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_a4"] = Опис;
             base.FieldValue["col_a5"] = Лінк;
             
-            BaseSave();
-            Блокнот_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, Опис });
+            bool result = BaseSave();
+            if (result)
+            {
+                Блокнот_Triggers.AfterSave(this);
+                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, Опис });
+            }
+            return result;
         }
 
         public Блокнот_Objest Copy(bool copyTableParts = false)

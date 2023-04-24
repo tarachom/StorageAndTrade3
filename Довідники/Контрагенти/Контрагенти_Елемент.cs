@@ -201,7 +201,26 @@ namespace StorageAndTrade
         {
             GetValue();
 
-            Контрагенти_Objest.Save();
+            bool isSave = false;
+
+            try
+            {
+                isSave = Контрагенти_Objest.Save();
+            }
+            catch (Exception ex)
+            {
+                ФункціїДляПовідомлень.ДодатиПовідомленняПроПомилку(DateTime.Now, "Запис",
+                    Контрагенти_Objest.UnigueID.UGuid, "Довідники", Контрагенти_Objest.Назва, ex.Message);
+
+                ФункціїДляПовідомлень.ВідкритиТермінал();
+            }
+
+            if (!isSave)
+            {
+                Message.Info(Program.GeneralForm, "Не вдалось записати");
+                return;
+            }
+
             Контакти.SaveRecords();
             Файли.SaveRecords();
 

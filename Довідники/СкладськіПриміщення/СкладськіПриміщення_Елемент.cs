@@ -134,7 +134,25 @@ namespace StorageAndTrade
         {
             GetValue();
 
-            СкладськіПриміщення_Objest.Save();
+            bool isSave = false;
+
+            try
+            {
+                isSave = СкладськіПриміщення_Objest.Save();
+            }
+            catch (Exception ex)
+            {
+                ФункціїДляПовідомлень.ДодатиПовідомленняПроПомилку(DateTime.Now, "Запис",
+                    СкладськіПриміщення_Objest.UnigueID.UGuid, "Довідники", СкладськіПриміщення_Objest.Назва, ex.Message);
+
+                ФункціїДляПовідомлень.ВідкритиТермінал();
+            }
+
+            if (!isSave)
+            {
+                Message.Info(Program.GeneralForm, "Не вдалось записати");
+                return;
+            }
 
             if (closePage)
                 Program.GeneralForm?.CloseCurrentPageNotebook();

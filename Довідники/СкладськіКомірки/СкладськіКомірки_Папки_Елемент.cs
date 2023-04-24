@@ -23,7 +23,6 @@ limitations under the License.
 
 using Gtk;
 
-using StorageAndTrade_1_0.Константи;
 using StorageAndTrade_1_0.Довідники;
 
 namespace StorageAndTrade
@@ -144,7 +143,25 @@ namespace StorageAndTrade
         {
             GetValue();
 
-            СкладськіКомірки_Папки_Objest.Save();
+            bool isSave = false;
+
+            try
+            {
+                isSave = СкладськіКомірки_Папки_Objest.Save();
+            }
+            catch (Exception ex)
+            {
+                ФункціїДляПовідомлень.ДодатиПовідомленняПроПомилку(DateTime.Now, "Запис",
+                    СкладськіКомірки_Папки_Objest.UnigueID.UGuid, "Довідники", СкладськіКомірки_Папки_Objest.Назва, ex.Message);
+
+                ФункціїДляПовідомлень.ВідкритиТермінал();
+            }
+
+            if (!isSave)
+            {
+                Message.Info(Program.GeneralForm, "Не вдалось записати");
+                return;
+            }
 
             if (closePage)
                 Program.GeneralForm?.CloseCurrentPageNotebook();

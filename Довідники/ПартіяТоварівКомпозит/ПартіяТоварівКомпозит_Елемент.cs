@@ -161,7 +161,25 @@ namespace StorageAndTrade
         {
             GetValue();
 
-            ПартіяТоварівКомпозит_Objest.Save();
+            bool isSave = false;
+
+            try
+            {
+                isSave = ПартіяТоварівКомпозит_Objest.Save();
+            }
+            catch (Exception ex)
+            {
+                ФункціїДляПовідомлень.ДодатиПовідомленняПроПомилку(DateTime.Now, "Запис",
+                    ПартіяТоварівКомпозит_Objest.UnigueID.UGuid, "Довідники", ПартіяТоварівКомпозит_Objest.Назва, ex.Message);
+
+                ФункціїДляПовідомлень.ВідкритиТермінал();
+            }
+
+            if (!isSave)
+            {
+                Message.Info(Program.GeneralForm, "Не вдалось записати");
+                return;
+            }
 
             if (closePage)
                 Program.GeneralForm?.CloseCurrentPageNotebook();

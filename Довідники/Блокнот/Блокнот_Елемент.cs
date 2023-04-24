@@ -144,7 +144,25 @@ namespace StorageAndTrade
         {
             GetValue();
 
-            Блокнот_Objest.Save();
+            bool isSave = false;
+
+            try
+            {
+                isSave = Блокнот_Objest.Save();
+            }
+            catch (Exception ex)
+            {
+                ФункціїДляПовідомлень.ДодатиПовідомленняПроПомилку(DateTime.Now, "Запис",
+                    Блокнот_Objest.UnigueID.UGuid, "Довідники", Блокнот_Objest.Назва, ex.Message);
+
+                ФункціїДляПовідомлень.ВідкритиТермінал();
+            }
+
+            if (!isSave)
+            {
+                Message.Info(Program.GeneralForm, "Не вдалось записати");
+                return;
+            }
 
             if (closePage)
                 Program.GeneralForm?.CloseCurrentPageNotebook();

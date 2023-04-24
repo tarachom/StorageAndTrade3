@@ -26,7 +26,6 @@ using Gtk;
 using AccountingSoftware;
 
 using StorageAndTrade_1_0;
-using StorageAndTrade_1_0.Константи;
 using StorageAndTrade_1_0.Довідники;
 using Перелічення = StorageAndTrade_1_0.Перелічення;
 
@@ -166,7 +165,25 @@ namespace StorageAndTrade
         {
             GetValue();
 
-            СтаттяРухуКоштів_Objest.Save();
+            bool isSave = false;
+
+            try
+            {
+                isSave = СтаттяРухуКоштів_Objest.Save();
+            }
+            catch (Exception ex)
+            {
+                ФункціїДляПовідомлень.ДодатиПовідомленняПроПомилку(DateTime.Now, "Запис",
+                    СтаттяРухуКоштів_Objest.UnigueID.UGuid, "Довідники", СтаттяРухуКоштів_Objest.Назва, ex.Message);
+
+                ФункціїДляПовідомлень.ВідкритиТермінал();
+            }
+
+            if (!isSave)
+            {
+                Message.Info(Program.GeneralForm, "Не вдалось записати");
+                return;
+            }
 
             if (closePage)
                 Program.GeneralForm?.CloseCurrentPageNotebook();

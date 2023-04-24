@@ -156,7 +156,25 @@ namespace StorageAndTrade
         {
             GetValue();
 
-            ТипорозміриКомірок_Objest.Save();
+            bool isSave = false;
+
+            try
+            {
+                isSave = ТипорозміриКомірок_Objest.Save();
+            }
+            catch (Exception ex)
+            {
+                ФункціїДляПовідомлень.ДодатиПовідомленняПроПомилку(DateTime.Now, "Запис",
+                    ТипорозміриКомірок_Objest.UnigueID.UGuid, "Довідники", ТипорозміриКомірок_Objest.Назва, ex.Message);
+
+                ФункціїДляПовідомлень.ВідкритиТермінал();
+            }
+
+            if (!isSave)
+            {
+                Message.Info(Program.GeneralForm, "Не вдалось записати");
+                return;
+            }
 
             if (closePage)
                 Program.GeneralForm?.CloseCurrentPageNotebook();

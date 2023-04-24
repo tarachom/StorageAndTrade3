@@ -125,7 +125,25 @@ namespace StorageAndTrade
         {
             GetValue();
 
-            ВидиЦінПостачальників_Objest.Save();
+            bool isSave = false;
+
+            try
+            {
+                isSave = ВидиЦінПостачальників_Objest.Save();
+            }
+            catch (Exception ex)
+            {
+                ФункціїДляПовідомлень.ДодатиПовідомленняПроПомилку(DateTime.Now, "Запис",
+                    ВидиЦінПостачальників_Objest.UnigueID.UGuid, "Довідники", ВидиЦінПостачальників_Objest.Назва, ex.Message);
+
+                ФункціїДляПовідомлень.ВідкритиТермінал();
+            }
+
+            if (!isSave)
+            {
+                Message.Info(Program.GeneralForm, "Не вдалось записати");
+                return;
+            }
 
             if (closePage)
                 Program.GeneralForm?.CloseCurrentPageNotebook();

@@ -25,7 +25,6 @@ using Gtk;
 
 using AccountingSoftware;
 using StorageAndTrade_1_0;
-using StorageAndTrade_1_0.Константи;
 using StorageAndTrade_1_0.Довідники;
 using Перелічення = StorageAndTrade_1_0.Перелічення;
 
@@ -261,7 +260,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
                 ДоговориКонтрагентів_Objest.New();
-                
+
             Код.Text = ДоговориКонтрагентів_Objest.Код;
             Назва.Text = ДоговориКонтрагентів_Objest.Назва;
             Дата.Value = ДоговориКонтрагентів_Objest.Дата;
@@ -312,7 +311,25 @@ namespace StorageAndTrade
         {
             GetValue();
 
-            ДоговориКонтрагентів_Objest.Save();
+            bool isSave = false;
+
+            try
+            {
+                isSave = ДоговориКонтрагентів_Objest.Save();
+            }
+            catch (Exception ex)
+            {
+                ФункціїДляПовідомлень.ДодатиПовідомленняПроПомилку(DateTime.Now, "Запис",
+                    ДоговориКонтрагентів_Objest.UnigueID.UGuid, "Довідники", ДоговориКонтрагентів_Objest.Назва, ex.Message);
+
+                ФункціїДляПовідомлень.ВідкритиТермінал();
+            }
+
+            if (!isSave)
+            {
+                Message.Info(Program.GeneralForm, "Не вдалось записати");
+                return;
+            }
 
             if (closePage)
                 Program.GeneralForm?.CloseCurrentPageNotebook();

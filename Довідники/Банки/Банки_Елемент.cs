@@ -23,7 +23,6 @@ limitations under the License.
 
 using Gtk;
 
-using StorageAndTrade_1_0.Константи;
 using StorageAndTrade_1_0.Довідники;
 
 namespace StorageAndTrade
@@ -121,7 +120,7 @@ namespace StorageAndTrade
 
         void CreateContainer1(VBox vBox)
         {
-            
+
         }
 
         void CreateContainer2(VBox vBox)
@@ -161,7 +160,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
                 Банки_Objest.New();
-                
+
             Код.Text = Банки_Objest.Код;
             Назва.Text = Банки_Objest.Назва;
             ПовнаНазва.Text = Банки_Objest.ПовнаНазва;
@@ -183,7 +182,25 @@ namespace StorageAndTrade
         {
             GetValue();
 
-            Банки_Objest.Save();
+            bool isSave = false;
+
+            try
+            {
+                isSave = Банки_Objest.Save();
+            }
+            catch (Exception ex)
+            {
+                ФункціїДляПовідомлень.ДодатиПовідомленняПроПомилку(DateTime.Now, "Запис",
+                    Банки_Objest.UnigueID.UGuid, "Довідники", Банки_Objest.Назва, ex.Message);
+
+                ФункціїДляПовідомлень.ВідкритиТермінал();
+            }
+
+            if (!isSave)
+            {
+                Message.Info(Program.GeneralForm, "Не вдалось записати");
+                return;
+            }
 
             if (closePage)
                 Program.GeneralForm?.CloseCurrentPageNotebook();
