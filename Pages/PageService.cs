@@ -34,7 +34,6 @@ using System.Reflection;
 using AccountingSoftware;
 using StorageAndTrade_1_0;
 using Константи = StorageAndTrade_1_0.Константи;
-using Документи = StorageAndTrade_1_0.Документи;
 using Журнали = StorageAndTrade_1_0.Журнали;
 
 namespace StorageAndTrade
@@ -195,7 +194,7 @@ namespace StorageAndTrade
                         else
                         {
                             //Документ НЕ проведений Error
-
+                            //
                             //Вивід помилок в окремому вікні
                             ФункціїДляПовідомлень.ВідкритиТермінал();
 
@@ -292,10 +291,10 @@ namespace StorageAndTrade
                                         CreateMessage(TypeMessage.None, (string)objPresentation + $" [{uid_item}]");
                                 }
                             }
-                        }
-                    }
-                }
-            }
+                        } //foreach
+                    } //if
+                } //foreach
+            } //if
 
             return allCountDependencies;
         }

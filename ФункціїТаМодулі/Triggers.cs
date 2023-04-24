@@ -313,7 +313,7 @@ WHERE
         public static void SetDeletionLabel(Контрагенти_Objest ДовідникОбєкт, bool label)
         {
             // Помітка на виделення всіх договорів
-            if (label == true)
+            if (label)
             {
                 ДоговориКонтрагентів_Select договориКонтрагентів_Select = new ДоговориКонтрагентів_Select();
                 договориКонтрагентів_Select.QuerySelect.Where.Add(new Where(ДоговориКонтрагентів_Const.Контрагент, Comparison.EQ, ДовідникОбєкт.UnigueID.UGuid));
@@ -331,16 +331,7 @@ WHERE
 
         public static void BeforeDelete(Контрагенти_Objest ДовідникОбєкт)
         {
-            ДоговориКонтрагентів_Select договориКонтрагентів_Select = new ДоговориКонтрагентів_Select();
-            договориКонтрагентів_Select.QuerySelect.Where.Add(new Where(ДоговориКонтрагентів_Const.Контрагент, Comparison.EQ, ДовідникОбєкт.UnigueID.UGuid));
-            договориКонтрагентів_Select.Select();
 
-            while (договориКонтрагентів_Select.MoveNext())
-            {
-                ДоговориКонтрагентів_Objest? договориКонтрагентів_Objest = договориКонтрагентів_Select.Current?.GetDirectoryObject();
-                if (договориКонтрагентів_Objest != null)
-                    договориКонтрагентів_Objest.Delete();
-            }
         }
     }
 
