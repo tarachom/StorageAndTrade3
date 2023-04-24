@@ -445,6 +445,8 @@ namespace StorageAndTrade
                 }
 
                 ПсуванняТоварів_Objest.Товари_TablePart.Save(true);
+
+                LoadRecords();
             }
         }
 

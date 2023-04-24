@@ -231,9 +231,11 @@ namespace StorageAndTrade
                         банки_Objest.Статус = Статус;
                         банки_Objest.ДатаЗапису = ДатаЗапису;
 
-                        банки_Objest.DeletionLabel = false;
-                        
                         банки_Objest.Save();
+
+                        //Зняти помітку на видалення
+                        if (банки_Objest.DeletionLabel)
+                            банки_Objest.SetDeletionLabel(false);
                     }
                 }
             }

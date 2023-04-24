@@ -648,6 +648,8 @@ LIMIT 1
                 }
 
                 РеалізаціяТоварівТаПослуг_Objest.Товари_TablePart.Save(true);
+
+                LoadRecords();
             }
         }
 

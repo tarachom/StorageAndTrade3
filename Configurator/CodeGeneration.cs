@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 22.04.2023 17:53:47
+ * Дата конфігурації: 24.04.2023 15:19:44
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -11585,7 +11585,7 @@ namespace StorageAndTrade_1_0.Документи
                 return false;
         }
         
-        public void Save()
+        public bool Save()
         {
             ЗамовленняПостачальнику_Triggers.BeforeSave(this);
             base.FieldValue["docname"] = Назва;
@@ -11616,9 +11616,15 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a2"] = Коментар;
             base.FieldValue["col_b9"] = КлючовіСловаДляПошуку;
             
-            BaseSave();
-            ЗамовленняПостачальнику_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
+            bool result = BaseSave();
+            
+            if (result)
+            {
+                ЗамовленняПостачальнику_Triggers.AfterSave(this);
+                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
+            }
+
+            return result;
         }
 
         public bool SpendTheDocument(DateTime spendDate)
@@ -12462,7 +12468,7 @@ namespace StorageAndTrade_1_0.Документи
                 return false;
         }
         
-        public void Save()
+        public bool Save()
         {
             ПоступленняТоварівТаПослуг_Triggers.BeforeSave(this);
             base.FieldValue["docname"] = Назва;
@@ -12499,9 +12505,15 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_b1"] = Коментар;
             base.FieldValue["col_a2"] = КлючовіСловаДляПошуку;
             
-            BaseSave();
-            ПоступленняТоварівТаПослуг_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
+            bool result = BaseSave();
+            
+            if (result)
+            {
+                ПоступленняТоварівТаПослуг_Triggers.AfterSave(this);
+                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
+            }
+
+            return result;
         }
 
         public bool SpendTheDocument(DateTime spendDate)
@@ -13312,7 +13324,7 @@ namespace StorageAndTrade_1_0.Документи
                 return false;
         }
         
-        public void Save()
+        public bool Save()
         {
             ЗамовленняКлієнта_Triggers.BeforeSave(this);
             base.FieldValue["docname"] = Назва;
@@ -13346,9 +13358,15 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_b2"] = Менеджер.UnigueID.UGuid;
             base.FieldValue["col_b3"] = КлючовіСловаДляПошуку;
             
-            BaseSave();
-            ЗамовленняКлієнта_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
+            bool result = BaseSave();
+            
+            if (result)
+            {
+                ЗамовленняКлієнта_Triggers.AfterSave(this);
+                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
+            }
+
+            return result;
         }
 
         public bool SpendTheDocument(DateTime spendDate)
@@ -14193,7 +14211,7 @@ namespace StorageAndTrade_1_0.Документи
                 return false;
         }
         
-        public void Save()
+        public bool Save()
         {
             РеалізаціяТоварівТаПослуг_Triggers.BeforeSave(this);
             base.FieldValue["docname"] = Назва;
@@ -14229,9 +14247,15 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_c9"] = Менеджер.UnigueID.UGuid;
             base.FieldValue["col_d1"] = КлючовіСловаДляПошуку;
             
-            BaseSave();
-            РеалізаціяТоварівТаПослуг_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
+            bool result = BaseSave();
+            
+            if (result)
+            {
+                РеалізаціяТоварівТаПослуг_Triggers.AfterSave(this);
+                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
+            }
+
+            return result;
         }
 
         public bool SpendTheDocument(DateTime spendDate)
@@ -14801,7 +14825,7 @@ namespace StorageAndTrade_1_0.Документи
                 return false;
         }
         
-        public void Save()
+        public bool Save()
         {
             ВстановленняЦінНоменклатури_Triggers.BeforeSave(this);
             base.FieldValue["docname"] = Назва;
@@ -14814,9 +14838,15 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a4"] = Автор.UnigueID.UGuid;
             base.FieldValue["col_a5"] = КлючовіСловаДляПошуку;
             
-            BaseSave();
-            ВстановленняЦінНоменклатури_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
+            bool result = BaseSave();
+            
+            if (result)
+            {
+                ВстановленняЦінНоменклатури_Triggers.AfterSave(this);
+                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
+            }
+
+            return result;
         }
 
         public bool SpendTheDocument(DateTime spendDate)
@@ -15395,7 +15425,7 @@ namespace StorageAndTrade_1_0.Документи
                 return false;
         }
         
-        public void Save()
+        public bool Save()
         {
             ПрихіднийКасовийОрдер_Triggers.BeforeSave(this);
             base.FieldValue["docname"] = Назва;
@@ -15417,9 +15447,15 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a5"] = Автор.UnigueID.UGuid;
             base.FieldValue["col_a7"] = КлючовіСловаДляПошуку;
             
-            BaseSave();
-            ПрихіднийКасовийОрдер_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
+            bool result = BaseSave();
+            
+            if (result)
+            {
+                ПрихіднийКасовийОрдер_Triggers.AfterSave(this);
+                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
+            }
+
+            return result;
         }
 
         public bool SpendTheDocument(DateTime spendDate)
@@ -16042,7 +16078,7 @@ namespace StorageAndTrade_1_0.Документи
                 return false;
         }
         
-        public void Save()
+        public bool Save()
         {
             РозхіднийКасовийОрдер_Triggers.BeforeSave(this);
             base.FieldValue["docname"] = Назва;
@@ -16066,9 +16102,15 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a6"] = Автор.UnigueID.UGuid;
             base.FieldValue["col_a7"] = КлючовіСловаДляПошуку;
             
-            BaseSave();
-            РозхіднийКасовийОрдер_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, КлючовіСловаДляПошуку });
+            bool result = BaseSave();
+            
+            if (result)
+            {
+                РозхіднийКасовийОрдер_Triggers.AfterSave(this);
+                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, КлючовіСловаДляПошуку });
+            }
+
+            return result;
         }
 
         public bool SpendTheDocument(DateTime spendDate)
@@ -16720,7 +16762,7 @@ namespace StorageAndTrade_1_0.Документи
                 return false;
         }
         
-        public void Save()
+        public bool Save()
         {
             ПереміщенняТоварів_Triggers.BeforeSave(this);
             base.FieldValue["docname"] = Назва;
@@ -16745,9 +16787,15 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a2"] = Основа;
             base.FieldValue["col_b9"] = КлючовіСловаДляПошуку;
             
-            BaseSave();
-            ПереміщенняТоварів_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
+            bool result = BaseSave();
+            
+            if (result)
+            {
+                ПереміщенняТоварів_Triggers.AfterSave(this);
+                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
+            }
+
+            return result;
         }
 
         public bool SpendTheDocument(DateTime spendDate)
@@ -17437,7 +17485,7 @@ namespace StorageAndTrade_1_0.Документи
                 return false;
         }
         
-        public void Save()
+        public bool Save()
         {
             ПоверненняТоварівПостачальнику_Triggers.BeforeSave(this);
             base.FieldValue["docname"] = Назва;
@@ -17464,9 +17512,15 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a4"] = Менеджер.UnigueID.UGuid;
             base.FieldValue["col_a5"] = КлючовіСловаДляПошуку;
             
-            BaseSave();
-            ПоверненняТоварівПостачальнику_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
+            bool result = BaseSave();
+            
+            if (result)
+            {
+                ПоверненняТоварівПостачальнику_Triggers.AfterSave(this);
+                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
+            }
+
+            return result;
         }
 
         public bool SpendTheDocument(DateTime spendDate)
@@ -18134,7 +18188,7 @@ namespace StorageAndTrade_1_0.Документи
                 return false;
         }
         
-        public void Save()
+        public bool Save()
         {
             ПоверненняТоварівВідКлієнта_Triggers.BeforeSave(this);
             base.FieldValue["docname"] = Назва;
@@ -18157,9 +18211,15 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a3"] = Автор.UnigueID.UGuid;
             base.FieldValue["col_a4"] = КлючовіСловаДляПошуку;
             
-            BaseSave();
-            ПоверненняТоварівВідКлієнта_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
+            bool result = BaseSave();
+            
+            if (result)
+            {
+                ПоверненняТоварівВідКлієнта_Triggers.AfterSave(this);
+                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
+            }
+
+            return result;
         }
 
         public bool SpendTheDocument(DateTime spendDate)
@@ -18769,7 +18829,7 @@ namespace StorageAndTrade_1_0.Документи
                 return false;
         }
         
-        public void Save()
+        public bool Save()
         {
             АктВиконанихРобіт_Triggers.BeforeSave(this);
             base.FieldValue["docname"] = Назва;
@@ -18790,9 +18850,15 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a8"] = Менеджер.UnigueID.UGuid;
             base.FieldValue["col_a9"] = КлючовіСловаДляПошуку;
             
-            BaseSave();
-            АктВиконанихРобіт_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
+            bool result = BaseSave();
+            
+            if (result)
+            {
+                АктВиконанихРобіт_Triggers.AfterSave(this);
+                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
+            }
+
+            return result;
         }
 
         public bool SpendTheDocument(DateTime spendDate)
@@ -19476,7 +19542,7 @@ namespace StorageAndTrade_1_0.Документи
                 return false;
         }
         
-        public void Save()
+        public bool Save()
         {
             ВведенняЗалишків_Triggers.BeforeSave(this);
             base.FieldValue["docname"] = Назва;
@@ -19493,9 +19559,15 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a3"] = Автор.UnigueID.UGuid;
             base.FieldValue["col_a2"] = КлючовіСловаДляПошуку;
             
-            BaseSave();
-            ВведенняЗалишків_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
+            bool result = BaseSave();
+            
+            if (result)
+            {
+                ВведенняЗалишків_Triggers.AfterSave(this);
+                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
+            }
+
+            return result;
         }
 
         public bool SpendTheDocument(DateTime spendDate)
@@ -20284,7 +20356,7 @@ namespace StorageAndTrade_1_0.Документи
                 return false;
         }
         
-        public void Save()
+        public bool Save()
         {
             base.FieldValue["col_f6"] = Організація.UnigueID.UGuid;
             base.FieldValue["col_f7"] = Підрозділ.UnigueID.UGuid;
@@ -20297,9 +20369,15 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a1"] = Автор.UnigueID.UGuid;
             base.FieldValue["col_a2"] = КлючовіСловаДляПошуку;
             
-            BaseSave();
+            bool result = BaseSave();
             
-            BaseWriteFullTextSearch(GetBasis(), new string[] { КлючовіСловаДляПошуку });
+            if (result)
+            {
+                
+                BaseWriteFullTextSearch(GetBasis(), new string[] { КлючовіСловаДляПошуку });
+            }
+
+            return result;
         }
 
         public bool SpendTheDocument(DateTime spendDate)
@@ -20774,7 +20852,7 @@ namespace StorageAndTrade_1_0.Документи
                 return false;
         }
         
-        public void Save()
+        public bool Save()
         {
             base.FieldValue["docname"] = Назва;
             base.FieldValue["docnomer"] = НомерДок;
@@ -20787,9 +20865,15 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a1"] = Автор.UnigueID.UGuid;
             base.FieldValue["col_a2"] = КлючовіСловаДляПошуку;
             
-            BaseSave();
+            bool result = BaseSave();
             
-            BaseWriteFullTextSearch(GetBasis(), new string[] { КлючовіСловаДляПошуку });
+            if (result)
+            {
+                
+                BaseWriteFullTextSearch(GetBasis(), new string[] { КлючовіСловаДляПошуку });
+            }
+
+            return result;
         }
 
         public bool SpendTheDocument(DateTime spendDate)
@@ -21256,7 +21340,7 @@ namespace StorageAndTrade_1_0.Документи
                 return false;
         }
         
-        public void Save()
+        public bool Save()
         {
             base.FieldValue["docname"] = Назва;
             base.FieldValue["docnomer"] = НомерДок;
@@ -21267,9 +21351,15 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a1"] = Автор.UnigueID.UGuid;
             base.FieldValue["col_a2"] = КлючовіСловаДляПошуку;
             
-            BaseSave();
+            bool result = BaseSave();
             
-            BaseWriteFullTextSearch(GetBasis(), new string[] { КлючовіСловаДляПошуку });
+            if (result)
+            {
+                
+                BaseWriteFullTextSearch(GetBasis(), new string[] { КлючовіСловаДляПошуку });
+            }
+
+            return result;
         }
 
         public bool SpendTheDocument(DateTime spendDate)
@@ -21801,7 +21891,7 @@ namespace StorageAndTrade_1_0.Документи
                 return false;
         }
         
-        public void Save()
+        public bool Save()
         {
             ПсуванняТоварів_Triggers.BeforeSave(this);
             base.FieldValue["docname"] = Назва;
@@ -21817,9 +21907,15 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a3"] = КлючовіСловаДляПошуку;
             base.FieldValue["col_b2"] = Основа;
             
-            BaseSave();
-            ПсуванняТоварів_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, Причина, Коментар, КлючовіСловаДляПошуку });
+            bool result = BaseSave();
+            
+            if (result)
+            {
+                ПсуванняТоварів_Triggers.AfterSave(this);
+                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, Причина, Коментар, КлючовіСловаДляПошуку });
+            }
+
+            return result;
         }
 
         public bool SpendTheDocument(DateTime spendDate)
@@ -22395,7 +22491,7 @@ namespace StorageAndTrade_1_0.Документи
                 return false;
         }
         
-        public void Save()
+        public bool Save()
         {
             ВнутрішнєСпоживанняТоварів_Triggers.BeforeSave(this);
             base.FieldValue["docname"] = Назва;
@@ -22412,9 +22508,15 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_b2"] = Коментар;
             base.FieldValue["col_a3"] = КлючовіСловаДляПошуку;
             
-            BaseSave();
-            ВнутрішнєСпоживанняТоварів_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
+            bool result = BaseSave();
+            
+            if (result)
+            {
+                ВнутрішнєСпоживанняТоварів_Triggers.AfterSave(this);
+                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
+            }
+
+            return result;
         }
 
         public bool SpendTheDocument(DateTime spendDate)
@@ -23077,7 +23179,7 @@ namespace StorageAndTrade_1_0.Документи
                 return false;
         }
         
-        public void Save()
+        public bool Save()
         {
             РахунокФактура_Triggers.BeforeSave(this);
             base.FieldValue["docname"] = Назва;
@@ -23101,9 +23203,15 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a2"] = Менеджер.UnigueID.UGuid;
             base.FieldValue["col_a7"] = КлючовіСловаДляПошуку;
             
-            BaseSave();
-            РахунокФактура_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
+            bool result = BaseSave();
+            
+            if (result)
+            {
+                РахунокФактура_Triggers.AfterSave(this);
+                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
+            }
+
+            return result;
         }
 
         public bool SpendTheDocument(DateTime spendDate)
@@ -23667,7 +23775,7 @@ namespace StorageAndTrade_1_0.Документи
                 return false;
         }
         
-        public void Save()
+        public bool Save()
         {
             РозміщенняТоварівНаСкладі_Triggers.BeforeSave(this);
             base.FieldValue["docname"] = Назва;
@@ -23682,9 +23790,15 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a7"] = ДокументПоступлення.UnigueID.UGuid;
             base.FieldValue["col_a8"] = КлючовіСловаДляПошуку;
             
-            BaseSave();
-            РозміщенняТоварівНаСкладі_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
+            bool result = BaseSave();
+            
+            if (result)
+            {
+                РозміщенняТоварівНаСкладі_Triggers.AfterSave(this);
+                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
+            }
+
+            return result;
         }
 
         public bool SpendTheDocument(DateTime spendDate)
@@ -24215,7 +24329,7 @@ namespace StorageAndTrade_1_0.Документи
                 return false;
         }
         
-        public void Save()
+        public bool Save()
         {
             ПереміщенняТоварівНаСкладі_Triggers.BeforeSave(this);
             base.FieldValue["docname"] = Назва;
@@ -24229,9 +24343,15 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a6"] = Підрозділ.UnigueID.UGuid;
             base.FieldValue["col_a7"] = КлючовіСловаДляПошуку;
             
-            BaseSave();
-            ПереміщенняТоварівНаСкладі_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
+            bool result = BaseSave();
+            
+            if (result)
+            {
+                ПереміщенняТоварівНаСкладі_Triggers.AfterSave(this);
+                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
+            }
+
+            return result;
         }
 
         public bool SpendTheDocument(DateTime spendDate)
@@ -24767,7 +24887,7 @@ namespace StorageAndTrade_1_0.Документи
                 return false;
         }
         
-        public void Save()
+        public bool Save()
         {
             ЗбіркаТоварівНаСкладі_Triggers.BeforeSave(this);
             base.FieldValue["docname"] = Назва;
@@ -24782,9 +24902,15 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a7"] = ДокументРеалізації.UnigueID.UGuid;
             base.FieldValue["col_a8"] = КлючовіСловаДляПошуку;
             
-            BaseSave();
-            ЗбіркаТоварівНаСкладі_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
+            bool result = BaseSave();
+            
+            if (result)
+            {
+                ЗбіркаТоварівНаСкладі_Triggers.AfterSave(this);
+                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
+            }
+
+            return result;
         }
 
         public bool SpendTheDocument(DateTime spendDate)
@@ -25279,7 +25405,7 @@ namespace StorageAndTrade_1_0.Документи
                 return false;
         }
         
-        public void Save()
+        public bool Save()
         {
             РозміщенняНоменклатуриПоКоміркам_Triggers.BeforeSave(this);
             base.FieldValue["docname"] = Назва;
@@ -25293,9 +25419,15 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a5"] = Основа;
             base.FieldValue["col_a6"] = КлючовіСловаДляПошуку;
             
-            BaseSave();
-            РозміщенняНоменклатуриПоКоміркам_Triggers.AfterSave(this);
-            BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
+            bool result = BaseSave();
+            
+            if (result)
+            {
+                РозміщенняНоменклатуриПоКоміркам_Triggers.AfterSave(this);
+                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
+            }
+
+            return result;
         }
 
         public bool SpendTheDocument(DateTime spendDate)

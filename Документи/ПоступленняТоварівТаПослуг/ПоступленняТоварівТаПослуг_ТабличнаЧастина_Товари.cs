@@ -578,6 +578,8 @@ LIMIT 1
                 }
 
                 ПоступленняТоварівТаПослуг_Objest.Товари_TablePart.Save(true);
+                
+                LoadRecords();
             }
         }
 

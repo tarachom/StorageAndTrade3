@@ -510,6 +510,8 @@ LIMIT 1
                 }
 
                 РахунокФактура_Objest.Товари_TablePart.Save(true);
+
+                LoadRecords();
             }
         }
 

@@ -441,6 +441,8 @@ namespace StorageAndTrade
                 }
 
                 ПоверненняТоварівВідКлієнта_Objest.Товари_TablePart.Save(true);
+
+                LoadRecords();
             }
         }
 

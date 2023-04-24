@@ -404,6 +404,8 @@ namespace StorageAndTrade
                 }
 
                 ВведенняЗалишків_Objest.Товари_TablePart.Save(true);
+
+                LoadRecords();
             }
         }
 

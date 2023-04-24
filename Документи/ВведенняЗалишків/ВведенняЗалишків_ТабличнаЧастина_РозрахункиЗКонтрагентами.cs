@@ -299,6 +299,8 @@ namespace StorageAndTrade
                 }
 
                 ВведенняЗалишків_Objest.РозрахункиЗКонтрагентами_TablePart.Save(true);
+
+                LoadRecords();
             }
         }
 

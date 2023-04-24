@@ -255,6 +255,8 @@ namespace StorageAndTrade
                 }
 
                 ВведенняЗалишків_Objest.БанківськіРахунки_TablePart.Save(true);
+
+                LoadRecords();
             }
         }
 

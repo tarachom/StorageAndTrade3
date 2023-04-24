@@ -372,6 +372,8 @@ namespace StorageAndTrade
                 }
 
                 ВстановленняЦінНоменклатури_Objest.Товари_TablePart.Save(true);
+
+                LoadRecords();
             }
         }
 

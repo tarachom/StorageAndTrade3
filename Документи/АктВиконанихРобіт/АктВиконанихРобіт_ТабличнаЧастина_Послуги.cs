@@ -310,6 +310,8 @@ namespace StorageAndTrade
                 }
 
                 АктВиконанихРобіт_Objest.Послуги_TablePart.Save(true);
+
+                LoadRecords();
             }
         }
 

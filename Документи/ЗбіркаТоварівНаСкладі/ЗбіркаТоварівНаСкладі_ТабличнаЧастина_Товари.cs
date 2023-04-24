@@ -421,6 +421,8 @@ namespace StorageAndTrade
                 }
 
                 ЗбіркаТоварівНаСкладі_Objest.Товари_TablePart.Save(true);
+
+                LoadRecords();
             }
         }
 

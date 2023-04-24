@@ -256,6 +256,8 @@ namespace StorageAndTrade
                 }
 
                 ВведенняЗалишків_Objest.Каси_TablePart.Save(true);
+
+                LoadRecords();
             }
         }
 

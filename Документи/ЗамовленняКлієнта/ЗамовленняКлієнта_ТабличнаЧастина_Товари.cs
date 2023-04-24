@@ -511,6 +511,8 @@ LIMIT 1
                 }
 
                 ЗамовленняКлієнта_Objest.Товари_TablePart.Save(true);
+
+                LoadRecords();
             }
         }
 

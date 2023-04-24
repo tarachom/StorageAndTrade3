@@ -413,6 +413,8 @@ namespace StorageAndTrade
                 }
 
                 ЗамовленняПостачальнику_Objest.Товари_TablePart.Save(true);
+
+                LoadRecords();
             }
         }
 

@@ -1224,7 +1224,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
                 return false;
         }
         
-        public void Save()
+        public bool Save()
         {
             <xsl:if test="normalize-space(TriggerFunctions/BeforeSave) != ''">
                 <xsl:value-of select="TriggerFunctions/BeforeSave"/><xsl:text>(this)</xsl:text>;
@@ -1241,16 +1241,22 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
                 </xsl:when>
               </xsl:choose>;
             </xsl:for-each>
-            BaseSave();
-            <xsl:if test="normalize-space(TriggerFunctions/AfterSave) != ''">
-                <xsl:value-of select="TriggerFunctions/AfterSave"/><xsl:text>(this);</xsl:text>      
-            </xsl:if>
-            BaseWriteFullTextSearch(GetBasis(), new string[] { <xsl:for-each select="Fields/Field[IsFullTextSearch = '1' and Type = 'string']">
-              <xsl:if test="position() != 1">
-                <xsl:text>, </xsl:text>
-              </xsl:if>
-              <xsl:value-of select="Name"/>
-            </xsl:for-each> });
+            bool result = BaseSave();
+            
+            if (result)
+            {
+                <xsl:if test="normalize-space(TriggerFunctions/AfterSave) != ''">
+                    <xsl:value-of select="TriggerFunctions/AfterSave"/><xsl:text>(this);</xsl:text>      
+                </xsl:if>
+                BaseWriteFullTextSearch(GetBasis(), new string[] { <xsl:for-each select="Fields/Field[IsFullTextSearch = '1' and Type = 'string']">
+                  <xsl:if test="position() != 1">
+                    <xsl:text>, </xsl:text>
+                  </xsl:if>
+                  <xsl:value-of select="Name"/>
+                </xsl:for-each> });
+            }
+
+            return result;
         }
 
         public bool SpendTheDocument(DateTime spendDate)

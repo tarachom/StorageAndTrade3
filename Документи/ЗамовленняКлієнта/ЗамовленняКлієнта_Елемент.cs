@@ -453,24 +453,37 @@ namespace StorageAndTrade
             return $"\n{Організація.Pointer.Назва} {Валюта.Pointer.Назва} {Каса.Pointer.Назва} {Склад.Pointer.Назва} {Контрагент.Pointer.Назва} ";
         }
 
-        bool IsValidValue()
-        {
-            if (!ДатаДок.IsValidValue())
-            {
-                Message.Error(Program.GeneralForm, "Перевірте правельність заповнення полів");
-                return false;
-            }
-            else return true;
-        }
+        #region Save & Spend
 
-        void Save()
+        bool Save()
         {
             GetValue();
 
-            ЗамовленняКлієнта_Objest.Save();
+            bool isSave = false;
+
+            try
+            {
+                isSave = ЗамовленняКлієнта_Objest.Save();
+            }
+            catch (Exception ex)
+            {
+                ФункціїДляПовідомлень.ДодатиПовідомленняПроПомилку(DateTime.Now, "Запис",
+                    ЗамовленняКлієнта_Objest.UnigueID.UGuid, "Документ", ЗамовленняКлієнта_Objest.Назва, ex.Message);
+
+                ФункціїДляПовідомлень.ВідкритиТермінал();
+            }
+
+            if (!isSave)
+            {
+                Message.Info(Program.GeneralForm, "Не вдалось записати документ");
+                return false;
+            }
+
             Товари.SaveRecords();
 
             Program.GeneralForm?.RenameCurrentPageNotebook($"{ЗамовленняКлієнта_Objest.Назва}");
+
+            return true;
         }
 
         void SpendTheDocument(bool spendDoc)
@@ -486,8 +499,6 @@ namespace StorageAndTrade
 
         void ReloadList()
         {
-            Товари.LoadRecords();
-
             if (PageList != null)
             {
                 PageList.SelectPointerItem = ЗамовленняКлієнта_Objest.GetDocumentPointer();
@@ -497,27 +508,32 @@ namespace StorageAndTrade
 
         void OnSaveAndSpendClick(object? sender, EventArgs args)
         {
-            if (!IsValidValue())
-                return;
+            //Зберегти
+            bool isSave = Save();
 
-            Save();
-            SpendTheDocument(true);
+            //Провести
+            if (isSave)
+                SpendTheDocument(true);
+
+            //Закрити сторінку
+            if (isSave && ЗамовленняКлієнта_Objest.Spend)
+                Program.GeneralForm?.CloseCurrentPageNotebook();
 
             ReloadList();
-
-            if (ЗамовленняКлієнта_Objest.Spend)
-                Program.GeneralForm?.CloseCurrentPageNotebook();
         }
 
         void OnSaveClick(object? sender, EventArgs args)
         {
-            if (!IsValidValue())
-                return;
+            //Зберегти
+            bool isSave = Save();
 
-            Save();
-            SpendTheDocument(false);
+            //Очистити проводки
+            if (isSave)
+                SpendTheDocument(false);
 
             ReloadList();
         }
+
+        #endregion
     }
 }

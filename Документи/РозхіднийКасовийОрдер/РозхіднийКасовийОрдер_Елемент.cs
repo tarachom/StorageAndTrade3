@@ -434,23 +434,35 @@ namespace StorageAndTrade
             }
         }
 
-        bool IsValidValue()
-        {
-            if (!ДатаДок.IsValidValue() || !Курс.IsValidValue() || !СумаДокументу.IsValidValue())
-            {
-                Message.Error(Program.GeneralForm, "Перевірте правельність заповнення полів типу Дата та Число");
-                return false;
-            }
-            else return true;
-        }
+        #region Save & Spend
 
-        void Save()
+        bool Save()
         {
             GetValue();
 
-            РозхіднийКасовийОрдер_Objest.Save();
+            bool isSave = false;
+
+            try
+            {
+                isSave = РозхіднийКасовийОрдер_Objest.Save();
+            }
+            catch (Exception ex)
+            {
+                ФункціїДляПовідомлень.ДодатиПовідомленняПроПомилку(DateTime.Now, "Запис",
+                    РозхіднийКасовийОрдер_Objest.UnigueID.UGuid, "Документ", РозхіднийКасовийОрдер_Objest.Назва, ex.Message);
+
+                ФункціїДляПовідомлень.ВідкритиТермінал();
+            }
+
+            if (!isSave)
+            {
+                Message.Info(Program.GeneralForm, "Не вдалось записати документ");
+                return false;
+            }
 
             Program.GeneralForm?.RenameCurrentPageNotebook($"{РозхіднийКасовийОрдер_Objest.Назва}");
+
+            return true;
         }
 
         void SpendTheDocument(bool spendDoc)
@@ -475,27 +487,32 @@ namespace StorageAndTrade
 
         void OnSaveAndSpendClick(object? sender, EventArgs args)
         {
-            if (!IsValidValue())
-                return;
+            //Зберегти
+            bool isSave = Save();
 
-            Save();
-            SpendTheDocument(true);
+            //Провести
+            if (isSave)
+                SpendTheDocument(true);
+
+            //Закрити сторінку
+            if (isSave && РозхіднийКасовийОрдер_Objest.Spend)
+                Program.GeneralForm?.CloseCurrentPageNotebook();
 
             ReloadList();
-
-            if (РозхіднийКасовийОрдер_Objest.Spend)
-                Program.GeneralForm?.CloseCurrentPageNotebook();
         }
 
         void OnSaveClick(object? sender, EventArgs args)
         {
-            if (!IsValidValue())
-                return;
+            //Зберегти
+            bool isSave = Save();
 
-            Save();
-            SpendTheDocument(false);
+            //Очистити проводки
+            if (isSave)
+                SpendTheDocument(false);
 
             ReloadList();
         }
+
+        #endregion
     }
 }
