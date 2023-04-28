@@ -432,7 +432,11 @@ namespace StorageAndTrade
 
                         ПоверненняТоварівВідКлієнта_Objest ПоверненняТоварівВідКлієнта_Objest = new ПоверненняТоварівВідКлієнта_Objest();
                         if (ПоверненняТоварівВідКлієнта_Objest.Read(new UnigueID(uid)))
+                        {
                             ПоверненняТоварівВідКлієнта_Objest.SetDeletionLabel(!ПоверненняТоварівВідКлієнта_Objest.DeletionLabel);
+
+                            SelectPointerItem = ПоверненняТоварівВідКлієнта_Objest.GetDocumentPointer();
+                        }
                         else
                             Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                     }
@@ -515,6 +519,8 @@ namespace StorageAndTrade
             }
             else
                 ПоверненняТоварівВідКлієнта_Objest.ClearSpendTheDocument();
+
+            SelectPointerItem = ПоверненняТоварівВідКлієнта_Pointer;
         }
 
         //

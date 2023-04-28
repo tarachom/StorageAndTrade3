@@ -454,7 +454,11 @@ namespace StorageAndTrade
 
                         РахунокФактура_Objest РахунокФактура_Objest = new РахунокФактура_Objest();
                         if (РахунокФактура_Objest.Read(new UnigueID(uid)))
+                        {
                             РахунокФактура_Objest.SetDeletionLabel(!РахунокФактура_Objest.DeletionLabel);
+
+                            SelectPointerItem = РахунокФактура_Objest.GetDocumentPointer();
+                        }
                         else
                             Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                     }
@@ -537,6 +541,8 @@ namespace StorageAndTrade
             }
             else
                 РахунокФактура_Objest.ClearSpendTheDocument();
+
+            SelectPointerItem = РахунокФактура_Pointer;
         }
 
         //

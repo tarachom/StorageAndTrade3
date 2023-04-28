@@ -464,7 +464,11 @@ namespace StorageAndTrade
 
                         РеалізаціяТоварівТаПослуг_Objest РеалізаціяТоварівТаПослуг_Objest = new РеалізаціяТоварівТаПослуг_Objest();
                         if (РеалізаціяТоварівТаПослуг_Objest.Read(new UnigueID(uid)))
+                        {
                             РеалізаціяТоварівТаПослуг_Objest.SetDeletionLabel(!РеалізаціяТоварівТаПослуг_Objest.DeletionLabel);
+
+                            SelectPointerItem = РеалізаціяТоварівТаПослуг_Objest.GetDocumentPointer();
+                        }
                         else
                             Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                     }
@@ -547,6 +551,8 @@ namespace StorageAndTrade
             }
             else
                 РеалізаціяТоварівТаПослуг_Objest.ClearSpendTheDocument();
+
+            SelectPointerItem = РеалізаціяТоварівТаПослуг_Pointer;
         }
 
         //

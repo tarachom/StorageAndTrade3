@@ -432,7 +432,11 @@ namespace StorageAndTrade
 
                         ПсуванняТоварів_Objest ПсуванняТоварів_Objest = new ПсуванняТоварів_Objest();
                         if (ПсуванняТоварів_Objest.Read(new UnigueID(uid)))
+                        {
                             ПсуванняТоварів_Objest.SetDeletionLabel(!ПсуванняТоварів_Objest.DeletionLabel);
+
+                            SelectPointerItem = ПсуванняТоварів_Objest.GetDocumentPointer();
+                        }
                         else
                             Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                     }
@@ -515,6 +519,8 @@ namespace StorageAndTrade
             }
             else
                 ПсуванняТоварів_Objest.ClearSpendTheDocument();
+
+            SelectPointerItem = ПсуванняТоварів_Pointer;
         }
 
         //

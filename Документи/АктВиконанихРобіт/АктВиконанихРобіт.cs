@@ -454,7 +454,11 @@ namespace StorageAndTrade
 
                         АктВиконанихРобіт_Objest АктВиконанихРобіт_Objest = new АктВиконанихРобіт_Objest();
                         if (АктВиконанихРобіт_Objest.Read(new UnigueID(uid)))
+                        {
                             АктВиконанихРобіт_Objest.SetDeletionLabel(!АктВиконанихРобіт_Objest.DeletionLabel);
+
+                            SelectPointerItem = АктВиконанихРобіт_Objest.GetDocumentPointer();
+                        }
                         else
                             Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                     }
@@ -537,6 +541,8 @@ namespace StorageAndTrade
             }
             else
                 АктВиконанихРобіт_Objest.ClearSpendTheDocument();
+
+            SelectPointerItem = АктВиконанихРобіт_Pointer;
         }
 
         //

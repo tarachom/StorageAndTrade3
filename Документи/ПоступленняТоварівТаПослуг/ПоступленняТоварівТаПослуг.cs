@@ -466,7 +466,11 @@ namespace StorageAndTrade
 
                         ПоступленняТоварівТаПослуг_Objest ПоступленняТоварівТаПослуг_Objest = new ПоступленняТоварівТаПослуг_Objest();
                         if (ПоступленняТоварівТаПослуг_Objest.Read(new UnigueID(uid)))
+                        {
                             ПоступленняТоварівТаПослуг_Objest.SetDeletionLabel(!ПоступленняТоварівТаПослуг_Objest.DeletionLabel);
+
+                            SelectPointerItem = ПоступленняТоварівТаПослуг_Objest.GetDocumentPointer();
+                        }
                         else
                             Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                     }
@@ -549,6 +553,8 @@ namespace StorageAndTrade
             }
             else
                 ПоступленняТоварівТаПослуг_Objest.ClearSpendTheDocument();
+
+            SelectPointerItem = ПоступленняТоварівТаПослуг_Pointer;
         }
 
         //

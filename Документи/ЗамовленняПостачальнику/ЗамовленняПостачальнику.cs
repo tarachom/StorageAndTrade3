@@ -454,7 +454,11 @@ namespace StorageAndTrade
 
                         ЗамовленняПостачальнику_Objest ЗамовленняПостачальнику_Objest = new ЗамовленняПостачальнику_Objest();
                         if (ЗамовленняПостачальнику_Objest.Read(new UnigueID(uid)))
+                        {
                             ЗамовленняПостачальнику_Objest.SetDeletionLabel(!ЗамовленняПостачальнику_Objest.DeletionLabel);
+
+                            SelectPointerItem = ЗамовленняПостачальнику_Objest.GetDocumentPointer();
+                        }
                         else
                             Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                     }
@@ -537,6 +541,8 @@ namespace StorageAndTrade
             }
             else
                 ЗамовленняПостачальнику_Objest.ClearSpendTheDocument();
+
+            SelectPointerItem = ЗамовленняПостачальнику_Pointer;
         }
 
         //

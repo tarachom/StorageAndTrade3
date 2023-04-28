@@ -432,7 +432,11 @@ namespace StorageAndTrade
 
                         ВстановленняЦінНоменклатури_Objest ВстановленняЦінНоменклатури_Objest = new ВстановленняЦінНоменклатури_Objest();
                         if (ВстановленняЦінНоменклатури_Objest.Read(new UnigueID(uid)))
+                        {
                             ВстановленняЦінНоменклатури_Objest.SetDeletionLabel(!ВстановленняЦінНоменклатури_Objest.DeletionLabel);
+
+                            SelectPointerItem = ВстановленняЦінНоменклатури_Objest.GetDocumentPointer();
+                        }
                         else
                             Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                     }
@@ -515,6 +519,8 @@ namespace StorageAndTrade
             }
             else
                 ВстановленняЦінНоменклатури_Objest.ClearSpendTheDocument();
+
+            SelectPointerItem = ВстановленняЦінНоменклатури_Pointer;
         }
 
         //

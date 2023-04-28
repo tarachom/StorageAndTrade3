@@ -432,7 +432,11 @@ namespace StorageAndTrade
 
                         ПереміщенняТоварів_Objest ПереміщенняТоварів_Objest = new ПереміщенняТоварів_Objest();
                         if (ПереміщенняТоварів_Objest.Read(new UnigueID(uid)))
+                        {
                             ПереміщенняТоварів_Objest.SetDeletionLabel(!ПереміщенняТоварів_Objest.DeletionLabel);
+
+                            SelectPointerItem = ПереміщенняТоварів_Objest.GetDocumentPointer();
+                        }
                         else
                             Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                     }
@@ -515,6 +519,8 @@ namespace StorageAndTrade
             }
             else
                 ПереміщенняТоварів_Objest.ClearSpendTheDocument();
+
+            SelectPointerItem = ПереміщенняТоварів_Pointer;
         }
 
         //

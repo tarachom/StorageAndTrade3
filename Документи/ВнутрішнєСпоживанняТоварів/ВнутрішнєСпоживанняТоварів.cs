@@ -432,7 +432,11 @@ namespace StorageAndTrade
 
                         ВнутрішнєСпоживанняТоварів_Objest ВнутрішнєСпоживанняТоварів_Objest = new ВнутрішнєСпоживанняТоварів_Objest();
                         if (ВнутрішнєСпоживанняТоварів_Objest.Read(new UnigueID(uid)))
+                        {
                             ВнутрішнєСпоживанняТоварів_Objest.SetDeletionLabel(!ВнутрішнєСпоживанняТоварів_Objest.DeletionLabel);
+
+                            SelectPointerItem = ВнутрішнєСпоживанняТоварів_Objest.GetDocumentPointer();
+                        }
                         else
                             Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                     }
@@ -515,6 +519,8 @@ namespace StorageAndTrade
             }
             else
                 ВнутрішнєСпоживанняТоварів_Objest.ClearSpendTheDocument();
+
+            SelectPointerItem = ВнутрішнєСпоживанняТоварів_Pointer;
         }
 
         //

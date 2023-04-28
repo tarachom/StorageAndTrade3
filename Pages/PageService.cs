@@ -277,17 +277,17 @@ namespace StorageAndTrade
 
                         foreach (Dictionary<string, object> row in listRow)
                         {
-                            Guid uid_item = (Guid)row["uid"];
+                            UnigueID unigueID = new UnigueID(row["uid"]);
 
                             if (dependence.ConfigurationGroupName == "Довідники" || dependence.ConfigurationGroupName == "Документи")
                             {
                                 string documentPointerName = $"StorageAndTrade_1_0.{dependence.ConfigurationGroupName}.{dependence.ConfigurationObjectName}_Pointer";
-                                object? documentPointer = ExecutingAssembly.CreateInstance(documentPointerName, false, BindingFlags.CreateInstance, null, new object[] { uid_item }, null, null);
+                                object? documentPointer = ExecutingAssembly.CreateInstance(documentPointerName, false, BindingFlags.CreateInstance, null, new object[] { unigueID, null! }, null, null);
                                 if (documentPointer != null)
                                 {
                                     object? objPresentation = documentPointer.GetType().InvokeMember("GetPresentation", BindingFlags.InvokeMethod, null, documentPointer, null);
                                     if (objPresentation != null)
-                                        CreateMessage(TypeMessage.None, (string)objPresentation + $" [{uid_item}]");
+                                        CreateMessage(TypeMessage.None, (string)objPresentation + $" [{unigueID}]");
                                 }
                             }
                         } //foreach
@@ -330,25 +330,25 @@ namespace StorageAndTrade
                         //Обробка довідників
                         foreach (Dictionary<string, object> row in listRow)
                         {
-                            Guid uid = (Guid)row["uid"];
+                            UnigueID unigueID = new UnigueID(row["uid"]);
                             string name = "";
 
                             //Обєкт довідника
                             object? directoryObject = ExecutingAssembly.CreateInstance(directoryObjestName);
                             if (directoryObject != null)
                             {
-                                object? objRead = directoryObject.GetType().InvokeMember("Read", BindingFlags.InvokeMethod, null, directoryObject, new object[] { new UnigueID(uid) });
+                                object? objRead = directoryObject.GetType().InvokeMember("Read", BindingFlags.InvokeMethod, null, directoryObject, new object[] { unigueID });
                                 if (objRead != null ? (bool)objRead : false)
                                 {
                                     object? objName = directoryObject.GetType().InvokeMember("GetPresentation", BindingFlags.InvokeMethod, null, directoryObject, null);
                                     if (objName != null)
                                         name = (string)objName;
 
-                                    long allCountDependencies = SearchDependencies(listDependencies, uid, name);
+                                    long allCountDependencies = SearchDependencies(listDependencies, unigueID.UGuid, name);
                                     if (allCountDependencies == 0)
                                     {
                                         directoryObject.GetType().InvokeMember("Delete", BindingFlags.InvokeMethod, null, directoryObject, null);
-                                        CreateMessage(TypeMessage.Ok, " --> Видалено: " + name + " [" + uid + "]");
+                                        CreateMessage(TypeMessage.Ok, " --> Видалено: " + name + " [" + unigueID.ToString() + "]");
                                     }
                                 }
                             }
@@ -384,20 +384,20 @@ namespace StorageAndTrade
                         //Обробка документів
                         foreach (Dictionary<string, object> row in listRow)
                         {
-                            Guid uid = (Guid)row["uid"];
+                            UnigueID unigueID = new UnigueID(row["uid"]);
                             string name = (string)row["docname"];
 
                             object? documentObject = ExecutingAssembly.CreateInstance(DocumentObjestName);
                             if (documentObject != null)
                             {
-                                object? objRead = documentObject.GetType().InvokeMember("Read", BindingFlags.InvokeMethod, null, documentObject, new object[] { new UnigueID(uid) });
+                                object? objRead = documentObject.GetType().InvokeMember("Read", BindingFlags.InvokeMethod, null, documentObject, new object[] { unigueID });
                                 if (objRead != null ? (bool)objRead : false)
                                 {
-                                    long allCountDependencies = SearchDependencies(listDependencies, uid, name);
+                                    long allCountDependencies = SearchDependencies(listDependencies, unigueID.UGuid, name);
                                     if (allCountDependencies == 0)
                                     {
                                         documentObject.GetType().InvokeMember("Delete", BindingFlags.InvokeMethod, null, documentObject, null);
-                                        CreateMessage(TypeMessage.Ok, " --> Видалено: " + name + " [" + uid + "]");
+                                        CreateMessage(TypeMessage.Ok, " --> Видалено: " + name + " [" + unigueID.ToString() + "]");
                                     }
                                 }
                             }

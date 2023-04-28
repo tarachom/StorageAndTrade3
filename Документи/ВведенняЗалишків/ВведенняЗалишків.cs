@@ -432,7 +432,11 @@ namespace StorageAndTrade
 
                         ВведенняЗалишків_Objest ВведенняЗалишків_Objest = new ВведенняЗалишків_Objest();
                         if (ВведенняЗалишків_Objest.Read(new UnigueID(uid)))
+                        {
                             ВведенняЗалишків_Objest.SetDeletionLabel(!ВведенняЗалишків_Objest.DeletionLabel);
+                            
+                            SelectPointerItem = ВведенняЗалишків_Objest.GetDocumentPointer();
+                        }
                         else
                             Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                     }
@@ -518,6 +522,8 @@ namespace StorageAndTrade
             }
             else
                 ВведенняЗалишків_Objest.ClearSpendTheDocument();
+
+            SelectPointerItem = ВведенняЗалишків_Pointer;
         }
 
         //

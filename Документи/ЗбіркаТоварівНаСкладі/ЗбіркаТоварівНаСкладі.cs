@@ -432,7 +432,11 @@ namespace StorageAndTrade
 
                         ЗбіркаТоварівНаСкладі_Objest ЗбіркаТоварівНаСкладі_Objest = new ЗбіркаТоварівНаСкладі_Objest();
                         if (ЗбіркаТоварівНаСкладі_Objest.Read(new UnigueID(uid)))
+                        {
                             ЗбіркаТоварівНаСкладі_Objest.SetDeletionLabel(!ЗбіркаТоварівНаСкладі_Objest.DeletionLabel);
+
+                            SelectPointerItem = ЗбіркаТоварівНаСкладі_Objest.GetDocumentPointer();
+                        }
                         else
                             Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                     }
@@ -515,6 +519,8 @@ namespace StorageAndTrade
             }
             else
                 ЗбіркаТоварівНаСкладі_Objest.ClearSpendTheDocument();
+
+            SelectPointerItem = ЗбіркаТоварівНаСкладі_Pointer;
         }
 
         //

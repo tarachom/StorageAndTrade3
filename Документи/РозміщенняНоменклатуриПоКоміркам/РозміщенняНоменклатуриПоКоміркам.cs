@@ -432,7 +432,11 @@ namespace StorageAndTrade
 
                         РозміщенняНоменклатуриПоКоміркам_Objest РозміщенняНоменклатуриПоКоміркам_Objest = new РозміщенняНоменклатуриПоКоміркам_Objest();
                         if (РозміщенняНоменклатуриПоКоміркам_Objest.Read(new UnigueID(uid)))
+                        {
                             РозміщенняНоменклатуриПоКоміркам_Objest.SetDeletionLabel(!РозміщенняНоменклатуриПоКоміркам_Objest.DeletionLabel);
+
+                            SelectPointerItem = РозміщенняНоменклатуриПоКоміркам_Objest.GetDocumentPointer();
+                        }
                         else
                             Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                     }
@@ -515,6 +519,8 @@ namespace StorageAndTrade
             }
             else
                 РозміщенняНоменклатуриПоКоміркам_Objest.ClearSpendTheDocument();
+
+            SelectPointerItem = РозміщенняНоменклатуриПоКоміркам_Pointer;
         }
 
         //

@@ -23,6 +23,8 @@ limitations under the License.
 
 using Gtk;
 
+using System.Reflection;
+
 using AccountingSoftware;
 
 using StorageAndTrade_1_0.Довідники;
@@ -35,6 +37,8 @@ namespace StorageAndTrade
 {
     class Журнал_Повний : VBox
     {
+        Assembly ExecutingAssembly = Assembly.GetExecutingAssembly();
+
         public UnigueID? SelectPointerItem { get; set; }
         public System.Action<Валюти_Pointer>? CallBack_OnSelectPointer { get; set; }
 
@@ -69,21 +73,24 @@ namespace StorageAndTrade
             TreeViewGrid.ActivateOnSingleClick = true;
             TreeViewGrid.RowActivated += OnRowActivated;
             TreeViewGrid.ButtonPressEvent += OnButtonPressEvent;
+            TreeViewGrid.ButtonReleaseEvent += OnButtonReleaseEvent;
             TreeViewGrid.KeyReleaseEvent += OnKeyReleaseEvent;
 
             scrollTree.Add(TreeViewGrid);
 
             /*
-                        scrollTree.Vadjustment.ValueChanged += (object? sender, EventArgs args) =>
-                        {
-                            Console.WriteLine(
-                                scrollTree.Vadjustment.Value + " " + 
-                                scrollTree.Vadjustment.Upper + " " + 
-                                scrollTree.Vadjustment.PageIncrement + " " + 
-                                scrollTree.Vadjustment.PageSize);
-                        };
+
+            scrollTree.Vadjustment.ValueChanged += (object? sender, EventArgs args) =>
+            {
+                Console.WriteLine(
+                    scrollTree.Vadjustment.Value + " " + 
+                    scrollTree.Vadjustment.Upper + " " + 
+                    scrollTree.Vadjustment.PageIncrement + " " + 
+                    scrollTree.Vadjustment.PageSize);
+            };
 
             */
+
             PackStart(scrollTree, true, true, 0);
 
             ShowAll();
@@ -110,6 +117,27 @@ namespace StorageAndTrade
             TypeDocToolButton = new ToolButton(Stock.Find) { Label = "Документи", IsImportant = true };
             TypeDocToolButton.Clicked += OnTypeDocsClick;
             toolbar.Add(TypeDocToolButton);
+        }
+
+        Menu PopUpContextMenu()
+        {
+            Menu Menu = new Menu();
+
+            MenuItem spendTheDocumentButton = new MenuItem("Провести документ");
+            spendTheDocumentButton.Activated += OnSpendTheDocument;
+            Menu.Append(spendTheDocumentButton);
+
+            MenuItem clearSpendButton = new MenuItem("Відмінити проведення");
+            clearSpendButton.Activated += OnClearSpend;
+            Menu.Append(clearSpendButton);
+
+            MenuItem setDeletionLabel = new MenuItem("Помітка на видалення");
+            //setDeletionLabel.Activated += OnDeleteClick;
+            Menu.Append(setDeletionLabel);
+
+            Menu.ShowAll();
+
+            return Menu;
         }
 
         public void SetValue()
@@ -143,6 +171,12 @@ namespace StorageAndTrade
 
                 SelectPointerItem = new UnigueID((string)TreeViewGrid.Model.GetValue(iter, 1));
             }
+        }
+
+        void OnButtonReleaseEvent(object? sender, ButtonReleaseEventArgs args)
+        {
+            if (args.Event.Button == 3 && TreeViewGrid.Selection.CountSelectedRows() != 0)
+                PopUpContextMenu().Popup();
         }
 
         void OnButtonPressEvent(object? sender, ButtonPressEventArgs args)
@@ -226,6 +260,80 @@ namespace StorageAndTrade
         {
             ФункціїДляЖурналів.ВідкритиСписокДокументів((ToolButton)sender!, ТабличніСписки.Журнали_Повний.AllowDocument(),
                 Enum.Parse<Перелічення.ТипПеріодуДляЖурналівДокументів>(ComboBoxPeriodWhere.ActiveId));
+        }
+
+        void SpendTheDocument(string uid, string typeDoc, bool spendDoc)
+        {
+            string prefix = "StorageAndTrade_1_0.Документи";
+            string documentPointerName = $"{prefix}.{typeDoc}_Pointer";
+            string documentObjestName = $"{prefix}.{typeDoc}_Objest";
+
+            UnigueID unigueID = new UnigueID(uid);
+
+            object? documentPointer = ExecutingAssembly.CreateInstance(documentPointerName, false, BindingFlags.CreateInstance, null, new object[] { unigueID, null! }, null, null);
+            if (documentPointer != null)
+            {
+                object? documentObjest = documentPointer.GetType().InvokeMember("GetDocumentObject", BindingFlags.InvokeMethod, null, documentPointer, new object[] { true });
+                if (documentObjest != null)
+                {
+                    DateTime dateTimeSpendDocument = DateTime.MinValue;
+
+                    var documentObjestPropertyInfo = documentObjest.GetType().GetProperty("ДатаДок");
+                    if (documentObjestPropertyInfo != null)
+                    {
+                        object? dateTimeSpendDocumentObj = documentObjestPropertyInfo.GetValue(documentObjest);
+                        if (dateTimeSpendDocumentObj != null) dateTimeSpendDocument = (DateTime)dateTimeSpendDocumentObj;
+                    }
+
+                    if (spendDoc)
+                    {
+                        object? documentObjestSpend = documentObjest.GetType().InvokeMember("SpendTheDocument", BindingFlags.InvokeMethod, null, documentObjest, new object[] { dateTimeSpendDocument });
+                        if (documentObjestSpend != null && !(bool)documentObjestSpend)
+                            ФункціїДляПовідомлень.ВідкритиТермінал();
+                    }
+                    else
+                        documentObjest.GetType().InvokeMember("ClearSpendTheDocument", BindingFlags.InvokeMethod, null, documentObjest, null);
+                }
+                else
+                    return;
+            }
+
+            SelectPointerItem = new UnigueID(uid);
+        }
+
+        //
+        // Проведення або очищення проводок для вибраних документів
+        //
+
+        void SpendTheDocumentOrClear(bool spend)
+        {
+            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
+            {
+                TreePath[] selectionRows = TreeViewGrid.Selection.GetSelectedRows();
+
+                foreach (TreePath itemPath in selectionRows)
+                {
+                    TreeIter iter;
+                    TreeViewGrid.Model.GetIter(out iter, itemPath);
+
+                    string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
+                    string typeDoc = (string)TreeViewGrid.Model.GetValue(iter, 2);
+
+                    SpendTheDocument(uid, typeDoc, spend);
+                }
+
+                LoadRecords();
+            }
+        }
+
+        void OnSpendTheDocument(object? sender, EventArgs args)
+        {
+            SpendTheDocumentOrClear(true);
+        }
+
+        void OnClearSpend(object? sender, EventArgs args)
+        {
+            SpendTheDocumentOrClear(false);
         }
 
         #endregion

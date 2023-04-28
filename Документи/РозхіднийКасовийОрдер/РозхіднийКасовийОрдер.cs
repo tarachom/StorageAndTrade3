@@ -426,7 +426,11 @@ namespace StorageAndTrade
 
                         РозхіднийКасовийОрдер_Objest РозхіднийКасовийОрдер_Objest = new РозхіднийКасовийОрдер_Objest();
                         if (РозхіднийКасовийОрдер_Objest.Read(new UnigueID(uid)))
+                        {
                             РозхіднийКасовийОрдер_Objest.SetDeletionLabel(!РозхіднийКасовийОрдер_Objest.DeletionLabel);
+
+                            SelectPointerItem = РозхіднийКасовийОрдер_Objest.GetDocumentPointer();
+                        }
                         else
                             Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                     }
@@ -508,6 +512,8 @@ namespace StorageAndTrade
             }
             else
                 РозхіднийКасовийОрдер_Objest.ClearSpendTheDocument();
+
+            SelectPointerItem = РозхіднийКасовийОрдер_Pointer;
         }
 
         //
