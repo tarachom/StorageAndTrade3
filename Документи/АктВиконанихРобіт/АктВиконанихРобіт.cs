@@ -178,7 +178,7 @@ namespace StorageAndTrade
         {
             Menu Menu = new Menu();
 
-            MenuItem newDocKasovyiOrderButton = new MenuItem("Прихідний касовий ордер");
+            MenuItem newDocKasovyiOrderButton = new MenuItem($"{ПрихіднийКасовийОрдер_Const.FULLNAME}");
             newDocKasovyiOrderButton.Activated += OnNewDocNaOsnovi_KasovyiOrder;
             Menu.Append(newDocKasovyiOrderButton);
 
@@ -286,7 +286,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"Акт виконаних робіт *", () =>
+                Program.GeneralForm?.CreateNotebookPage($"{АктВиконанихРобіт_Const.FULLNAME} *", () =>
                 {
                     АктВиконанихРобіт_Елемент page = new АктВиконанихРобіт_Елемент
                     {
@@ -616,7 +616,7 @@ namespace StorageAndTrade
                     прихіднийКасовийОрдер_Новий.Договір = актВиконанихРобіт_Objest.Договір;
                     прихіднийКасовийОрдер_Новий.Основа = актВиконанихРобіт_Objest.GetBasis();
                     прихіднийКасовийОрдер_Новий.СумаДокументу = актВиконанихРобіт_Objest.СумаДокументу;
-                    
+
                     if (прихіднийКасовийОрдер_Новий.Save())
                     {
                         Program.GeneralForm?.CreateNotebookPage($"{прихіднийКасовийОрдер_Новий.Назва}", () =>
@@ -663,7 +663,7 @@ namespace StorageAndTrade
 
                     string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
 
-                    string pathToSave = System.IO.Path.Combine(AppContext.BaseDirectory, $"АктВиконанихРобіт{uid}.xml");
+                    string pathToSave = System.IO.Path.Combine(AppContext.BaseDirectory, $"{АктВиконанихРобіт_Const.FULLNAME}{uid}.xml");
                     АктВиконанихРобіт_Export.ToXmlFile(new АктВиконанихРобіт_Pointer(new UnigueID(uid)), pathToSave);
                 }
 

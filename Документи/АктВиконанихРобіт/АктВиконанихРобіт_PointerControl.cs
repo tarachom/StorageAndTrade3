@@ -31,7 +31,7 @@ namespace StorageAndTrade
         {
             pointer = new АктВиконанихРобіт_Pointer();
             WidthPresentation = 300;
-            Caption = "Акт виконаних робіт:";
+            Caption = $"{АктВиконанихРобіт_Const.FULLNAME}:";
         }
 
         АктВиконанихРобіт_Pointer pointer;
@@ -62,7 +62,7 @@ namespace StorageAndTrade
                 Pointer = selectPointer;
             };
 
-            Program.GeneralForm?.CreateNotebookPage("Вибір - Акт виконаних робіт", () => { return page; }, true);
+            Program.GeneralForm?.CreateNotebookPage($"Вибір - {АктВиконанихРобіт_Const.FULLNAME}", () => { return page; }, true);
 
             page.LoadRecords();
         }

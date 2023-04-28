@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 24.04.2023 18:17:13
+ * Дата конфігурації: 28.04.2023 17:21:08
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -1925,6 +1925,7 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "Організації"
     public static class Організації_Const
     {
+        public const string FULLNAME = "Організації";
         public const string TABLE = "tab_a01";
         public const string DELETION_LABEL = "deletion_label";
         
@@ -2277,6 +2278,7 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "Номенклатура"
     public static class Номенклатура_Const
     {
+        public const string FULLNAME = "Номенклатура";
         public const string TABLE = "tab_a03";
         public const string DELETION_LABEL = "deletion_label";
         
@@ -2617,6 +2619,7 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "Виробники"
     public static class Виробники_Const
     {
+        public const string FULLNAME = "Виробники";
         public const string TABLE = "tab_a04";
         public const string DELETION_LABEL = "deletion_label";
         
@@ -2811,6 +2814,7 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "ВидиНоменклатури"
     public static class ВидиНоменклатури_Const
     {
+        public const string FULLNAME = "Види номенклатури";
         public const string TABLE = "tab_a05";
         public const string DELETION_LABEL = "deletion_label";
         
@@ -3023,6 +3027,7 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "ПакуванняОдиниціВиміру"
     public static class ПакуванняОдиниціВиміру_Const
     {
+        public const string FULLNAME = "Одиниці виміру";
         public const string TABLE = "tab_a06";
         public const string DELETION_LABEL = "deletion_label";
         
@@ -3229,6 +3234,7 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "Валюти"
     public static class Валюти_Const
     {
+        public const string FULLNAME = "Валюти";
         public const string TABLE = "tab_a07";
         public const string DELETION_LABEL = "deletion_label";
         
@@ -3441,6 +3447,7 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "Контрагенти"
     public static class Контрагенти_Const
     {
+        public const string FULLNAME = "Контрагенти";
         public const string TABLE = "tab_a08";
         public const string DELETION_LABEL = "deletion_label";
         
@@ -3865,6 +3872,7 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "Склади"
     public static class Склади_Const
     {
+        public const string FULLNAME = "Склади";
         public const string TABLE = "tab_a10";
         public const string DELETION_LABEL = "deletion_label";
         
@@ -4211,6 +4219,7 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "ВидиЦін"
     public static class ВидиЦін_Const
     {
+        public const string FULLNAME = "Види цін";
         public const string TABLE = "tab_a12";
         public const string DELETION_LABEL = "deletion_label";
         
@@ -4411,6 +4420,7 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "ВидиЦінПостачальників"
     public static class ВидиЦінПостачальників_Const
     {
+        public const string FULLNAME = "Види цін постачальників";
         public const string TABLE = "tab_a13";
         public const string DELETION_LABEL = "deletion_label";
         
@@ -4611,6 +4621,7 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "Користувачі"
     public static class Користувачі_Const
     {
+        public const string FULLNAME = "Користувачі";
         public const string TABLE = "tab_a14";
         public const string DELETION_LABEL = "deletion_label";
         
@@ -4935,6 +4946,7 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "ФізичніОсоби"
     public static class ФізичніОсоби_Const
     {
+        public const string FULLNAME = "Фізичні особи";
         public const string TABLE = "tab_a16";
         public const string DELETION_LABEL = "deletion_label";
         
@@ -5259,6 +5271,7 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "СтруктураПідприємства"
     public static class СтруктураПідприємства_Const
     {
+        public const string FULLNAME = "Структура підприємства";
         public const string TABLE = "tab_a18";
         public const string DELETION_LABEL = "deletion_label";
         
@@ -5459,6 +5472,7 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "КраїниСвіту"
     public static class КраїниСвіту_Const
     {
+        public const string FULLNAME = "Країни світу";
         public const string TABLE = "tab_a19";
         public const string DELETION_LABEL = "deletion_label";
         
@@ -5653,6 +5667,7 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "Файли"
     public static class Файли_Const
     {
+        public const string FULLNAME = "Файли";
         public const string TABLE = "tab_a20";
         public const string DELETION_LABEL = "deletion_label";
         
@@ -5871,6 +5886,7 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "ХарактеристикиНоменклатури"
     public static class ХарактеристикиНоменклатури_Const
     {
+        public const string FULLNAME = "Характеристики номенклатури";
         public const string TABLE = "tab_a21";
         public const string DELETION_LABEL = "deletion_label";
         
@@ -6077,6 +6093,7 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "Номенклатура_Папки"
     public static class Номенклатура_Папки_Const
     {
+        public const string FULLNAME = "Номенклатура папки";
         public const string TABLE = "tab_a22";
         public const string DELETION_LABEL = "deletion_label";
         
@@ -6277,6 +6294,7 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "Контрагенти_Папки"
     public static class Контрагенти_Папки_Const
     {
+        public const string FULLNAME = "Контрагенти папки";
         public const string TABLE = "tab_a23";
         public const string DELETION_LABEL = "deletion_label";
         
@@ -6477,6 +6495,7 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "Склади_Папки"
     public static class Склади_Папки_Const
     {
+        public const string FULLNAME = "Склади папки";
         public const string TABLE = "tab_a24";
         public const string DELETION_LABEL = "deletion_label";
         
@@ -6677,6 +6696,7 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "Каси"
     public static class Каси_Const
     {
+        public const string FULLNAME = "Каси";
         public const string TABLE = "tab_a26";
         public const string DELETION_LABEL = "deletion_label";
         
@@ -6883,6 +6903,7 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "БанківськіРахункиОрганізацій"
     public static class БанківськіРахункиОрганізацій_Const
     {
+        public const string FULLNAME = "Банківські рахунки організацій";
         public const string TABLE = "tab_a27";
         public const string DELETION_LABEL = "deletion_label";
         
@@ -7143,6 +7164,7 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "ДоговориКонтрагентів"
     public static class ДоговориКонтрагентів_Const
     {
+        public const string FULLNAME = "Договори контрагентів";
         public const string TABLE = "tab_a28";
         public const string DELETION_LABEL = "deletion_label";
         
@@ -7445,6 +7467,7 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "БанківськіРахункиКонтрагентів"
     public static class БанківськіРахункиКонтрагентів_Const
     {
+        public const string FULLNAME = "Банківські рахунки контрагентів";
         public const string TABLE = "tab_a29";
         public const string DELETION_LABEL = "deletion_label";
         
@@ -7717,6 +7740,7 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "СтаттяРухуКоштів"
     public static class СтаттяРухуКоштів_Const
     {
+        public const string FULLNAME = "Стаття руху коштів";
         public const string TABLE = "tab_a45";
         public const string DELETION_LABEL = "deletion_label";
         
@@ -8017,6 +8041,7 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "СеріїНоменклатури"
     public static class СеріїНоменклатури_Const
     {
+        public const string FULLNAME = "Серії номенклатури";
         public const string TABLE = "tab_b02";
         public const string DELETION_LABEL = "deletion_label";
         
@@ -8217,6 +8242,7 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "ПартіяТоварівКомпозит"
     public static class ПартіяТоварівКомпозит_Const
     {
+        public const string FULLNAME = "Партія товарів композит";
         public const string TABLE = "tab_b06";
         public const string DELETION_LABEL = "deletion_label";
         
@@ -8435,6 +8461,7 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "ВидиЗапасів"
     public static class ВидиЗапасів_Const
     {
+        public const string FULLNAME = "Види запасів";
         public const string TABLE = "tab_b13";
         public const string DELETION_LABEL = "deletion_label";
         
@@ -8659,6 +8686,7 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "Банки"
     public static class Банки_Const
     {
+        public const string FULLNAME = "Банки";
         public const string TABLE = "tab_a39";
         public const string DELETION_LABEL = "deletion_label";
         
@@ -9009,6 +9037,7 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "СкладськіПриміщення"
     public static class СкладськіПриміщення_Const
     {
+        public const string FULLNAME = "Складські приміщення";
         public const string TABLE = "tab_a71";
         public const string DELETION_LABEL = "deletion_label";
         
@@ -9209,6 +9238,7 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "СкладськіКомірки"
     public static class СкладськіКомірки_Const
     {
+        public const string FULLNAME = "Складські комірки";
         public const string TABLE = "tab_a72";
         public const string DELETION_LABEL = "deletion_label";
         
@@ -9451,6 +9481,7 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "ОбластьЗберігання"
     public static class ОбластьЗберігання_Const
     {
+        public const string FULLNAME = "Область зберігання";
         public const string TABLE = "tab_a73";
         public const string DELETION_LABEL = "deletion_label";
         
@@ -9648,6 +9679,7 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "ТипорозміриКомірок"
     public static class ТипорозміриКомірок_Const
     {
+        public const string FULLNAME = "Типорозміри комірок";
         public const string TABLE = "tab_a75";
         public const string DELETION_LABEL = "deletion_label";
         
@@ -9866,6 +9898,7 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "СкладськіКомірки_Папки"
     public static class СкладськіКомірки_Папки_Const
     {
+        public const string FULLNAME = "СкладськіКомірки папки";
         public const string TABLE = "tab_a76";
         public const string DELETION_LABEL = "deletion_label";
         
@@ -10072,6 +10105,7 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "Блокнот"
     public static class Блокнот_Const
     {
+        public const string FULLNAME = "Блокнот";
         public const string TABLE = "tab_a41";
         public const string DELETION_LABEL = "deletion_label";
         
@@ -11292,8 +11326,10 @@ namespace StorageAndTrade_1_0.Документи
     #region DOCUMENT "ЗамовленняПостачальнику"
     public static class ЗамовленняПостачальнику_Const
     {
+        public const string FULLNAME = "Замовлення постачальнику";
         public const string TABLE = "tab_a25";
         public const string DELETION_LABEL = "deletion_label";
+        
         
         public const string Назва = "docname";
         public const string НомерДок = "docnomer";
@@ -12099,8 +12135,10 @@ namespace StorageAndTrade_1_0.Документи
     #region DOCUMENT "ПоступленняТоварівТаПослуг"
     public static class ПоступленняТоварівТаПослуг_Const
     {
+        public const string FULLNAME = "Поступлення товарів та послуг";
         public const string TABLE = "tab_a32";
         public const string DELETION_LABEL = "deletion_label";
+        
         
         public const string Назва = "docname";
         public const string НомерДок = "docnomer";
@@ -13008,8 +13046,10 @@ namespace StorageAndTrade_1_0.Документи
     #region DOCUMENT "ЗамовленняКлієнта"
     public static class ЗамовленняКлієнта_Const
     {
+        public const string FULLNAME = "Замовлення клієнта";
         public const string TABLE = "tab_a34";
         public const string DELETION_LABEL = "deletion_label";
+        
         
         public const string Назва = "docname";
         public const string НомерДок = "docnomer";
@@ -13843,8 +13883,10 @@ namespace StorageAndTrade_1_0.Документи
     #region DOCUMENT "РеалізаціяТоварівТаПослуг"
     public static class РеалізаціяТоварівТаПослуг_Const
     {
+        public const string FULLNAME = "Реалізація товарів та послуг";
         public const string TABLE = "tab_a36";
         public const string DELETION_LABEL = "deletion_label";
+        
         
         public const string Назва = "docname";
         public const string НомерДок = "docnomer";
@@ -14752,8 +14794,10 @@ namespace StorageAndTrade_1_0.Документи
     #region DOCUMENT "ВстановленняЦінНоменклатури"
     public static class ВстановленняЦінНоменклатури_Const
     {
+        public const string FULLNAME = "Встановлення цін номенклатури";
         public const string TABLE = "tab_a42";
         public const string DELETION_LABEL = "deletion_label";
+        
         
         public const string Назва = "docname";
         public const string НомерДок = "docnomer";
@@ -15261,8 +15305,10 @@ namespace StorageAndTrade_1_0.Документи
     #region DOCUMENT "ПрихіднийКасовийОрдер"
     public static class ПрихіднийКасовийОрдер_Const
     {
+        public const string FULLNAME = "Прихідний касовий ордер";
         public const string TABLE = "tab_a44";
         public const string DELETION_LABEL = "deletion_label";
+        
         
         public const string Назва = "docname";
         public const string НомерДок = "docnomer";
@@ -15888,8 +15934,10 @@ namespace StorageAndTrade_1_0.Документи
     #region DOCUMENT "РозхіднийКасовийОрдер"
     public static class РозхіднийКасовийОрдер_Const
     {
+        public const string FULLNAME = "Розхідний касовий ордер";
         public const string TABLE = "tab_a48";
         public const string DELETION_LABEL = "deletion_label";
+        
         
         public const string Назва = "docname";
         public const string НомерДок = "docnomer";
@@ -16551,8 +16599,10 @@ namespace StorageAndTrade_1_0.Документи
     #region DOCUMENT "ПереміщенняТоварів"
     public static class ПереміщенняТоварів_Const
     {
+        public const string FULLNAME = "Переміщення товарів";
         public const string TABLE = "tab_a31";
         public const string DELETION_LABEL = "deletion_label";
+        
         
         public const string Назва = "docname";
         public const string НомерДок = "docnomer";
@@ -17242,8 +17292,10 @@ namespace StorageAndTrade_1_0.Документи
     #region DOCUMENT "ПоверненняТоварівПостачальнику"
     public static class ПоверненняТоварівПостачальнику_Const
     {
+        public const string FULLNAME = "Повернення товарів постачальнику";
         public const string TABLE = "tab_a51";
         public const string DELETION_LABEL = "deletion_label";
+        
         
         public const string Назва = "docname";
         public const string НомерДок = "docnomer";
@@ -17979,8 +18031,10 @@ namespace StorageAndTrade_1_0.Документи
     #region DOCUMENT "ПоверненняТоварівВідКлієнта"
     public static class ПоверненняТоварівВідКлієнта_Const
     {
+        public const string FULLNAME = "Повернення товарів від клієнта";
         public const string TABLE = "tab_a53";
         public const string DELETION_LABEL = "deletion_label";
+        
         
         public const string Назва = "docname";
         public const string НомерДок = "docnomer";
@@ -18674,8 +18728,10 @@ namespace StorageAndTrade_1_0.Документи
     #region DOCUMENT "АктВиконанихРобіт"
     public static class АктВиконанихРобіт_Const
     {
+        public const string FULLNAME = "Акт виконаних робіт";
         public const string TABLE = "tab_a81";
         public const string DELETION_LABEL = "deletion_label";
+        
         
         public const string Назва = "docname";
         public const string НомерДок = "docnomer";
@@ -19289,8 +19345,10 @@ namespace StorageAndTrade_1_0.Документи
     #region DOCUMENT "ВведенняЗалишків"
     public static class ВведенняЗалишків_Const
     {
+        public const string FULLNAME = "Введення залишків";
         public const string TABLE = "tab_a83";
         public const string DELETION_LABEL = "deletion_label";
+        
         
         public const string Назва = "docname";
         public const string НомерДок = "docnomer";
@@ -20283,8 +20341,10 @@ namespace StorageAndTrade_1_0.Документи
     #region DOCUMENT "НадлишкиТоварів"
     public static class НадлишкиТоварів_Const
     {
+        public const string FULLNAME = "Надлишки товарів";
         public const string TABLE = "tab_a88";
         public const string DELETION_LABEL = "deletion_label";
+        
         
         public const string Організація = "col_f6";
         public const string Підрозділ = "col_f7";
@@ -20779,8 +20839,10 @@ namespace StorageAndTrade_1_0.Документи
     #region DOCUMENT "ПересортицяТоварів"
     public static class ПересортицяТоварів_Const
     {
+        public const string FULLNAME = "Пересортиця товарів";
         public const string TABLE = "tab_a90";
         public const string DELETION_LABEL = "deletion_label";
+        
         
         public const string Назва = "docname";
         public const string НомерДок = "docnomer";
@@ -21275,8 +21337,10 @@ namespace StorageAndTrade_1_0.Документи
     #region DOCUMENT "ПерерахунокТоварів"
     public static class ПерерахунокТоварів_Const
     {
+        public const string FULLNAME = "Перерахунок товарів";
         public const string TABLE = "tab_a92";
         public const string DELETION_LABEL = "deletion_label";
+        
         
         public const string Назва = "docname";
         public const string НомерДок = "docnomer";
@@ -21765,8 +21829,10 @@ namespace StorageAndTrade_1_0.Документи
     #region DOCUMENT "ПсуванняТоварів"
     public static class ПсуванняТоварів_Const
     {
+        public const string FULLNAME = "Псування товарів";
         public const string TABLE = "tab_a94";
         public const string DELETION_LABEL = "deletion_label";
+        
         
         public const string Назва = "docname";
         public const string НомерДок = "docnomer";
@@ -22352,8 +22418,10 @@ namespace StorageAndTrade_1_0.Документи
     #region DOCUMENT "ВнутрішнєСпоживанняТоварів"
     public static class ВнутрішнєСпоживанняТоварів_Const
     {
+        public const string FULLNAME = "Внутрішнє споживання товарів";
         public const string TABLE = "tab_b07";
         public const string DELETION_LABEL = "deletion_label";
+        
         
         public const string Назва = "docname";
         public const string НомерДок = "docnomer";
@@ -22955,8 +23023,10 @@ namespace StorageAndTrade_1_0.Документи
     #region DOCUMENT "РахунокФактура"
     public static class РахунокФактура_Const
     {
+        public const string FULLNAME = "Рахунок фактура";
         public const string TABLE = "tab_b10";
         public const string DELETION_LABEL = "deletion_label";
+        
         
         public const string Назва = "docname";
         public const string НомерДок = "docnomer";
@@ -23668,8 +23738,10 @@ namespace StorageAndTrade_1_0.Документи
     #region DOCUMENT "РозміщенняТоварівНаСкладі"
     public static class РозміщенняТоварівНаСкладі_Const
     {
+        public const string FULLNAME = "Розміщення товарів на складі";
         public const string TABLE = "tab_a64";
         public const string DELETION_LABEL = "deletion_label";
+        
         
         public const string Назва = "docname";
         public const string ДатаДок = "docdate";
@@ -24225,8 +24297,10 @@ namespace StorageAndTrade_1_0.Документи
     #region DOCUMENT "ПереміщенняТоварівНаСкладі"
     public static class ПереміщенняТоварівНаСкладі_Const
     {
+        public const string FULLNAME = "Переміщення товарів на складі";
         public const string TABLE = "tab_b09";
         public const string DELETION_LABEL = "deletion_label";
+        
         
         public const string Назва = "docname";
         public const string ДатаДок = "docdate";
@@ -24780,8 +24854,10 @@ namespace StorageAndTrade_1_0.Документи
     #region DOCUMENT "ЗбіркаТоварівНаСкладі"
     public static class ЗбіркаТоварівНаСкладі_Const
     {
+        public const string FULLNAME = "Збірка товарів на складі";
         public const string TABLE = "tab_b27";
         public const string DELETION_LABEL = "deletion_label";
+        
         
         public const string Назва = "docname";
         public const string ДатаДок = "docdate";
@@ -25337,8 +25413,10 @@ namespace StorageAndTrade_1_0.Документи
     #region DOCUMENT "РозміщенняНоменклатуриПоКоміркам"
     public static class РозміщенняНоменклатуриПоКоміркам_Const
     {
+        public const string FULLNAME = "Розміщення номенклатури по коміркам";
         public const string TABLE = "tab_b29";
         public const string DELETION_LABEL = "deletion_label";
+        
         
         public const string Назва = "docname";
         public const string НомерДок = "docnomer";

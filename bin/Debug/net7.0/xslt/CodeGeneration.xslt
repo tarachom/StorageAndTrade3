@@ -611,6 +611,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
     #region DIRECTORY "<xsl:value-of select="$DirectoryName"/>"
     public static class <xsl:value-of select="$DirectoryName"/>_Const
     {
+        public const string FULLNAME = "<xsl:value-of select="normalize-space(FullName)"/>";
         public const string TABLE = "<xsl:value-of select="Table"/>";
         public const string DELETION_LABEL = "deletion_label";
         <xsl:for-each select="Fields/Field">
@@ -1071,8 +1072,10 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
     #region DOCUMENT "<xsl:value-of select="$DocumentName"/>"
     public static class <xsl:value-of select="$DocumentName"/>_Const
     {
+        public const string FULLNAME = "<xsl:value-of select="normalize-space(FullName)"/>";
         public const string TABLE = "<xsl:value-of select="Table"/>";
         public const string DELETION_LABEL = "deletion_label";
+        
         <xsl:for-each select="Fields/Field">
         public const string <xsl:value-of select="Name"/> = "<xsl:value-of select="NameInTable"/>";</xsl:for-each>
     }

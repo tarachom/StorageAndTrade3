@@ -15,24 +15,4 @@
       </Param>
     </OtherParam>
   </Configuration>
-  <Configuration Select="False">
-    <Key>1669d748-8fb0-4ea4-8258-e90c27b2986d</Key>
-    <Name>Новий *</Name>
-    <Server>localhost</Server>
-    <Port>5432</Port>
-    <Login>postgres</Login>
-    <Password>1</Password>
-    <BaseName>storage_and_trade_deletelabel</BaseName>
-    <OtherParam />
-  </Configuration>
-  <Configuration Select="False">
-    <Key>1d4b0184-c2df-404e-a4bd-b75c65e91a52</Key>
-    <Name>Новий 2</Name>
-    <Server>localhost</Server>
-    <Port>5432</Port>
-    <Login>postgres</Login>
-    <Password>1</Password>
-    <BaseName>storage_and_trade_test2</BaseName>
-    <OtherParam />
-  </Configuration>
 </root>

@@ -30,6 +30,8 @@ limitations under the License.
 
 using Gtk;
 
+using StorageAndTrade_1_0.Довідники;
+
 namespace StorageAndTrade
 {
     class PageDirectory : VBox
@@ -40,370 +42,323 @@ namespace StorageAndTrade
             HBox hBoxList = new HBox(false, 0);
 
             VBox vLeft = new VBox(false, 0);
-
-            AddCaption(vLeft, "Підприємство");
-            AddLink(vLeft, "Організації", Організація);
-            AddLink(vLeft, "Склади", Склади);
-            AddLink(vLeft, "Валюти", Валюти);
-            AddLink(vLeft, "Каси", Каси);
-            AddLink(vLeft, "Види цін", ВидиЦін);
-            AddLink(vLeft, "Види цін постачальників", ВидиЦінПостачальників);
-            AddLink(vLeft, "Банківські рахунки організацій", БанківськіРахункиОрганізацій);
-            AddLink(vLeft, "Підрозділи", СтруктураПідприємства);
-
-            AddCaption(vLeft, "Додаткові");
-            AddLink(vLeft, "Банки", Банки);
-            AddLink(vLeft, "Користувачі", Користувачі);
-            AddLink(vLeft, "Фізичні особи", ФізичніОсоби);
-            AddLink(vLeft, "Файли", Файли);
-            AddLink(vLeft, "Статті руху коштів", СтаттіРухуКоштів);
-            AddLink(vLeft, "Види запасів", ВидиЗапасів);
-            AddLink(vLeft, "Країни світу", КраїниСвіту);
-
-            AddCaption(vLeft, "Адресне зберігання");
-            AddLink(vLeft, "Складські приміщення", СкладськіПриміщення);
-            AddLink(vLeft, "Складські комірки", СкладськіКомірки);
-            AddLink(vLeft, "Типорозміри комірок", ТипорозміриКомірок);
-
             hBoxList.PackStart(vLeft, false, false, 5);
 
-            AddSeparator(hBoxList);
+            Link.AddCaption(vLeft, "Підприємство");
+            {
+                Link.AddLink(vLeft, $"{Організації_Const.FULLNAME}", () =>
+                {
+                    Program.GeneralForm?.CreateNotebookPage($"{Організації_Const.FULLNAME}", () =>
+                    {
+                        Організації page = new Організації();
+                        page.LoadRecords();
+                        return page;
+                    });
+                });
+
+                Link.AddLink(vLeft, $"{Склади_Const.FULLNAME}", () =>
+                {
+                    Program.GeneralForm?.CreateNotebookPage($"{Склади_Const.FULLNAME}", () =>
+                    {
+                        Склади page = new Склади();
+                        page.LoadTree();
+                        return page;
+                    });
+                });
+
+                Link.AddLink(vLeft, $"{Валюти_Const.FULLNAME}", () =>
+                {
+                    Program.GeneralForm?.CreateNotebookPage($"{Валюти_Const.FULLNAME}", () =>
+                    {
+                        Валюти page = new Валюти();
+                        page.LoadRecords();
+                        return page;
+                    });
+                });
+
+                Link.AddLink(vLeft, $"{Каси_Const.FULLNAME}", () =>
+                {
+                    Program.GeneralForm?.CreateNotebookPage($"{Каси_Const.FULLNAME}", () =>
+                    {
+                        Каси page = new Каси();
+                        page.LoadRecords();
+                        return page;
+                    });
+                });
+
+                Link.AddLink(vLeft, $"{ВидиЦін_Const.FULLNAME}", () =>
+                {
+                    Program.GeneralForm?.CreateNotebookPage($"{ВидиЦін_Const.FULLNAME}", () =>
+                    {
+                        ВидиЦін page = new ВидиЦін();
+                        page.LoadRecords();
+                        return page;
+                    });
+                });
+
+                Link.AddLink(vLeft, $"{ВидиЦінПостачальників_Const.FULLNAME}", () =>
+                {
+                    Program.GeneralForm?.CreateNotebookPage($"{ВидиЦінПостачальників_Const.FULLNAME}", () =>
+                    {
+                        ВидиЦінПостачальників page = new ВидиЦінПостачальників();
+                        page.LoadRecords();
+                        return page;
+                    });
+                });
+
+                Link.AddLink(vLeft, $"{БанківськіРахункиОрганізацій_Const.FULLNAME}", () =>
+                {
+                    Program.GeneralForm?.CreateNotebookPage($"{БанківськіРахункиОрганізацій_Const.FULLNAME}", () =>
+                    {
+                        БанківськіРахункиОрганізацій page = new БанківськіРахункиОрганізацій();
+                        page.LoadRecords();
+                        return page;
+                    });
+                });
+
+                Link.AddLink(vLeft, $"{СтруктураПідприємства_Const.FULLNAME}", () =>
+                {
+                    Program.GeneralForm?.CreateNotebookPage($"{СтруктураПідприємства_Const.FULLNAME}", () =>
+                    {
+                        СтруктураПідприємства page = new СтруктураПідприємства();
+                        page.LoadRecords();
+                        return page;
+                    });
+                });
+            }
+
+            Link.AddCaption(vLeft, "Додаткові");
+            {
+                Link.AddLink(vLeft, $"{Банки_Const.FULLNAME}", () =>
+                {
+                    Program.GeneralForm?.CreateNotebookPage($"{Банки_Const.FULLNAME}", () =>
+                    {
+                        Банки page = new Банки();
+                        page.LoadRecords();
+                        return page;
+                    });
+                });
+
+                Link.AddLink(vLeft, $"{Користувачі_Const.FULLNAME}", () =>
+                {
+                    Program.GeneralForm?.CreateNotebookPage($"{Користувачі_Const.FULLNAME}", () =>
+                    {
+                        Користувачі page = new Користувачі();
+                        page.LoadRecords();
+                        return page;
+                    });
+                });
+
+                Link.AddLink(vLeft, $"{ФізичніОсоби_Const.FULLNAME}", () =>
+                {
+                    Program.GeneralForm?.CreateNotebookPage($"{ФізичніОсоби_Const.FULLNAME}", () =>
+                    {
+                        ФізичніОсоби page = new ФізичніОсоби();
+                        page.LoadRecords();
+                        return page;
+                    });
+                });
+
+                Link.AddLink(vLeft, $"{Файли_Const.FULLNAME}", () =>
+                {
+                    Program.GeneralForm?.CreateNotebookPage($"{Файли_Const.FULLNAME}", () =>
+                    {
+                        Файли page = new Файли();
+                        page.LoadRecords();
+                        return page;
+                    });
+                });
+
+                Link.AddLink(vLeft, $"{СтаттяРухуКоштів_Const.FULLNAME}", () =>
+                {
+                    Program.GeneralForm?.CreateNotebookPage($"{СтаттяРухуКоштів_Const.FULLNAME}", () =>
+                    {
+                        СтаттяРухуКоштів page = new СтаттяРухуКоштів();
+                        page.LoadRecords();
+                        return page;
+                    });
+                });
+
+                Link.AddLink(vLeft, $"{ВидиЗапасів_Const.FULLNAME}", () =>
+                {
+                    Program.GeneralForm?.CreateNotebookPage($"{ВидиЗапасів_Const.FULLNAME}", () =>
+                    {
+                        ВидиЗапасів page = new ВидиЗапасів();
+                        page.LoadRecords();
+                        return page;
+                    });
+                });
+
+                Link.AddLink(vLeft, $"{КраїниСвіту_Const.FULLNAME}", () =>
+                {
+                    Program.GeneralForm?.CreateNotebookPage($"{КраїниСвіту_Const.FULLNAME}", () =>
+                    {
+                        КраїниСвіту page = new КраїниСвіту();
+                        page.LoadRecords();
+                        return page;
+                    });
+                });
+            }
+
+            Link.AddCaption(vLeft, "Адресне зберігання");
+            {
+                Link.AddLink(vLeft, $"{СкладськіПриміщення_Const.FULLNAME}", () =>
+                {
+                    Program.GeneralForm?.CreateNotebookPage($"{СкладськіПриміщення_Const.FULLNAME}", () =>
+                    {
+                        СкладськіПриміщення page = new СкладськіПриміщення();
+                        page.LoadRecords();
+                        return page;
+                    });
+                });
+
+                Link.AddLink(vLeft, $"{СкладськіКомірки_Const.FULLNAME}", () =>
+                {
+                    Program.GeneralForm?.CreateNotebookPage($"{СкладськіКомірки_Const.FULLNAME}", () =>
+                    {
+                        СкладськіКомірки page = new СкладськіКомірки();
+                        page.LoadTree();
+                        return page;
+                    });
+                });
+
+                Link.AddLink(vLeft, $"{ТипорозміриКомірок_Const.FULLNAME}", () =>
+                {
+                    Program.GeneralForm?.CreateNotebookPage($"{ТипорозміриКомірок_Const.FULLNAME}", () =>
+                    {
+                        ТипорозміриКомірок page = new ТипорозміриКомірок();
+                        page.LoadRecords();
+                        return page;
+                    });
+                });
+            }
+
+            Link.AddSeparator(hBoxList);
 
             VBox vRight = new VBox(false, 0);
-
-            AddCaption(vRight, "Партнери");
-            AddLink(vRight, "Контрагенти", Контрагенти);
-            AddLink(vRight, "Договори контрагентів", ДоговориКонтрагентів);
-            AddLink(vRight, "Банківські рахунки контрагентів", БанківськіРахункиКонтрагентів);
-
-            AddCaption(vRight, "Товари та послуги");
-            AddLink(vRight, "Номенклатура", Номенклатура);
-            AddLink(vRight, "Характеристики номенклатури", ХарактеристикаНоменклатури);
-            AddLink(vRight, "Пакування номенклатури", ПакуванняОдиниціВиміру);
-            AddLink(vRight, "Види номенклатури", ВидиНоменклатури);
-            AddLink(vRight, "Партії товарів", ПартіяТоварівКомпозит);
-            AddLink(vRight, "Серії номенклатури", СеріїНоменклатури);
-            AddLink(vRight, "Виробники", Виробники);
-
-            AddCaption(vRight, "Внутрішні");
-            AddLink(vRight, "Блокнот", Блокнот);
-
             hBoxList.PackStart(vRight, false, false, 5);
 
+            Link.AddCaption(vRight, "Партнери");
+            {
+                Link.AddLink(vRight, $"{Контрагенти_Const.FULLNAME}", () =>
+                {
+                    Program.GeneralForm?.CreateNotebookPage($"{Контрагенти_Const.FULLNAME}", () =>
+                    {
+                        Контрагенти page = new Контрагенти();
+                        page.LoadTree();
+                        return page;
+                    });
+                });
+
+                Link.AddLink(vRight, $"{ДоговориКонтрагентів_Const.FULLNAME}", () =>
+                {
+                    Program.GeneralForm?.CreateNotebookPage($"{ДоговориКонтрагентів_Const.FULLNAME}", () =>
+                    {
+                        ДоговориКонтрагентів page = new ДоговориКонтрагентів();
+                        page.LoadRecords();
+                        return page;
+                    });
+                });
+
+                Link.AddLink(vRight, $"{БанківськіРахункиКонтрагентів_Const.FULLNAME}", () =>
+                {
+                    Program.GeneralForm?.CreateNotebookPage($"{БанківськіРахункиКонтрагентів_Const.FULLNAME}", () =>
+                    {
+                        БанківськіРахункиКонтрагентів page = new БанківськіРахункиКонтрагентів();
+                        page.LoadRecords();
+                        return page;
+                    });
+                });
+            }
+
+            Link.AddCaption(vRight, "Товари та послуги");
+            {
+                Link.AddLink(vRight, $"{Номенклатура_Const.FULLNAME}", () =>
+                {
+                    Program.GeneralForm?.CreateNotebookPage($"{Номенклатура_Const.FULLNAME}", () =>
+                    {
+                        Номенклатура page = new Номенклатура();
+                        page.LoadTree();
+                        return page;
+                    });
+                });
+
+                Link.AddLink(vRight, $"{ХарактеристикиНоменклатури_Const.FULLNAME}", () =>
+                {
+                    Program.GeneralForm?.CreateNotebookPage($"{ХарактеристикиНоменклатури_Const.FULLNAME}", () =>
+                    {
+                        ХарактеристикиНоменклатури page = new ХарактеристикиНоменклатури();
+                        page.LoadRecords();
+                        return page;
+                    });
+                });
+
+                Link.AddLink(vRight, $"{ПакуванняОдиниціВиміру_Const.FULLNAME}", () =>
+                {
+                    Program.GeneralForm?.CreateNotebookPage($"{ПакуванняОдиниціВиміру_Const.FULLNAME}", () =>
+                    {
+                        ПакуванняОдиниціВиміру page = new ПакуванняОдиниціВиміру();
+                        page.LoadRecords();
+                        return page;
+                    });
+                });
+
+                Link.AddLink(vRight, $"{ВидиНоменклатури_Const.FULLNAME}", () =>
+                {
+                    Program.GeneralForm?.CreateNotebookPage($"{ВидиНоменклатури_Const.FULLNAME}", () =>
+                    {
+                        ВидиНоменклатури page = new ВидиНоменклатури();
+                        page.LoadRecords();
+                        return page;
+                    });
+                });
+
+                Link.AddLink(vRight, $"{ПартіяТоварівКомпозит_Const.FULLNAME}", () =>
+                {
+                    Program.GeneralForm?.CreateNotebookPage($"{ПартіяТоварівКомпозит_Const.FULLNAME}", () =>
+                    {
+                        ПартіяТоварівКомпозит page = new ПартіяТоварівКомпозит();
+                        page.LoadRecords();
+                        return page;
+                    });
+                });
+
+                Link.AddLink(vRight, $"{СеріїНоменклатури_Const.FULLNAME}", () =>
+                {
+                    Program.GeneralForm?.CreateNotebookPage($"{СеріїНоменклатури_Const.FULLNAME}", () =>
+                    {
+                        СеріїНоменклатури page = new СеріїНоменклатури();
+                        page.LoadRecords();
+                        return page;
+                    });
+                });
+
+                Link.AddLink(vRight, $"{Виробники_Const.FULLNAME}", () =>
+                {
+                    Program.GeneralForm?.CreateNotebookPage($"{Виробники_Const.FULLNAME}", () =>
+                    {
+                        Виробники page = new Виробники();
+                        page.LoadRecords();
+                        return page;
+                    });
+                });
+            }
+
+            Link.AddCaption(vRight, "Внутрішні");
+            {
+                Link.AddLink(vRight, $"{Блокнот_Const.FULLNAME}", () =>
+                {
+                    Program.GeneralForm?.CreateNotebookPage($"{Блокнот_Const.FULLNAME}", () =>
+                    {
+                        Блокнот page = new Блокнот();
+                        page.LoadRecords();
+                        return page;
+                    });
+                });
+            }
+
             PackStart(hBoxList, false, false, 10);
-
             ShowAll();
-        }
-
-        void Організація(object? sender, EventArgs args)
-        {
-            Program.GeneralForm?.CreateNotebookPage("Організації", () =>
-            {
-                Організації page = new Організації();
-                page.LoadRecords();
-                return page;
-            });
-        }
-
-        void Номенклатура(object? sender, EventArgs args)
-        {
-            Program.GeneralForm?.CreateNotebookPage("Номенклатура", () =>
-            {
-                Номенклатура page = new Номенклатура();
-                page.LoadTree();
-                return page;
-            });
-        }
-
-        void ХарактеристикаНоменклатури(object? sender, EventArgs args)
-        {
-            Program.GeneralForm?.CreateNotebookPage("Характеристики номенклатури", () =>
-            {
-                ХарактеристикиНоменклатури page = new ХарактеристикиНоменклатури();
-                page.LoadRecords();
-                return page;
-            });
-        }
-
-        void Контрагенти(object? sender, EventArgs args)
-        {
-            Program.GeneralForm?.CreateNotebookPage("Контрагенти", () =>
-            {
-                Контрагенти page = new Контрагенти();
-                page.LoadTree();
-                return page;
-            });
-        }
-
-        void Склади(object? sender, EventArgs args)
-        {
-            Program.GeneralForm?.CreateNotebookPage("Склади", () =>
-            {
-                Склади page = new Склади();
-                page.LoadTree();
-                return page;
-            });
-        }
-
-        public static void Валюти(object? sender, EventArgs args)
-        {
-            Program.GeneralForm?.CreateNotebookPage("Валюти", () =>
-            {
-                Валюти page = new Валюти();
-                page.LoadRecords();
-                return page;
-            });
-        }
-
-        void Каси(object? sender, EventArgs args)
-        {
-            Program.GeneralForm?.CreateNotebookPage("Каси", () =>
-            {
-                Каси page = new Каси();
-                page.LoadRecords();
-                return page;
-            });
-        }
-
-        void Банки(object? sender, EventArgs args)
-        {
-            Program.GeneralForm?.CreateNotebookPage("Банки", () =>
-            {
-                Банки page = new Банки();
-                page.LoadRecords();
-                return page;
-            });
-        }
-
-        void Користувачі(object? sender, EventArgs args)
-        {
-            Program.GeneralForm?.CreateNotebookPage("Користувачі", () =>
-            {
-                Користувачі page = new Користувачі();
-                page.LoadRecords();
-                return page;
-            });
-        }
-
-        void Файли(object? sender, EventArgs args)
-        {
-            Program.GeneralForm?.CreateNotebookPage("Користувачі", () =>
-            {
-                Файли page = new Файли();
-                page.LoadRecords();
-                return page;
-            });
-        }
-
-        void ВидиЦін(object? sender, EventArgs args)
-        {
-            Program.GeneralForm?.CreateNotebookPage("Види цін", () =>
-            {
-                ВидиЦін page = new ВидиЦін();
-                page.LoadRecords();
-                return page;
-            });
-        }
-
-        void ВидиЦінПостачальників(object? sender, EventArgs args)
-        {
-            Program.GeneralForm?.CreateNotebookPage("Види цін постачальників", () =>
-            {
-                ВидиЦінПостачальників page = new ВидиЦінПостачальників();
-                page.LoadRecords();
-                return page;
-            });
-        }
-
-        void БанківськіРахункиОрганізацій(object? sender, EventArgs args)
-        {
-            Program.GeneralForm?.CreateNotebookPage("Банківські рахунки організацій", () =>
-            {
-                БанківськіРахункиОрганізацій page = new БанківськіРахункиОрганізацій();
-                page.LoadRecords();
-                return page;
-            });
-        }
-
-        void ФізичніОсоби(object? sender, EventArgs args)
-        {
-            Program.GeneralForm?.CreateNotebookPage("Фізичні особи", () =>
-            {
-                ФізичніОсоби page = new ФізичніОсоби();
-                page.LoadRecords();
-                return page;
-            });
-        }
-
-        void СтруктураПідприємства(object? sender, EventArgs args)
-        {
-            Program.GeneralForm?.CreateNotebookPage("Структура підприємства", () =>
-            {
-                СтруктураПідприємства page = new СтруктураПідприємства();
-                page.LoadRecords();
-                return page;
-            });
-        }
-
-        void ДоговориКонтрагентів(object? sender, EventArgs args)
-        {
-            Program.GeneralForm?.CreateNotebookPage("договори контрагентів", () =>
-            {
-                ДоговориКонтрагентів page = new ДоговориКонтрагентів();
-                page.LoadRecords();
-                return page;
-            });
-        }
-
-        void БанківськіРахункиКонтрагентів(object? sender, EventArgs args)
-        {
-            Program.GeneralForm?.CreateNotebookPage("Банківські рахунки контрагентів", () =>
-            {
-                БанківськіРахункиКонтрагентів page = new БанківськіРахункиКонтрагентів();
-                page.LoadRecords();
-                return page;
-            });
-        }
-
-        void ПакуванняОдиниціВиміру(object? sender, EventArgs args)
-        {
-            Program.GeneralForm?.CreateNotebookPage("Пакування номенклатури", () =>
-            {
-                ПакуванняОдиниціВиміру page = new ПакуванняОдиниціВиміру();
-                page.LoadRecords();
-                return page;
-            });
-        }
-
-        void ВидиНоменклатури(object? sender, EventArgs args)
-        {
-            Program.GeneralForm?.CreateNotebookPage("Види номенклатури", () =>
-            {
-                ВидиНоменклатури page = new ВидиНоменклатури();
-                page.LoadRecords();
-                return page;
-            });
-        }
-
-        void ПартіяТоварівКомпозит(object? sender, EventArgs args)
-        {
-            Program.GeneralForm?.CreateNotebookPage("Партія товарів", () =>
-            {
-                ПартіяТоварівКомпозит page = new ПартіяТоварівКомпозит();
-                page.LoadRecords();
-                return page;
-            });
-        }
-
-        void СеріїНоменклатури(object? sender, EventArgs args)
-        {
-            Program.GeneralForm?.CreateNotebookPage("Серії номенклатури", () =>
-            {
-                СеріїНоменклатури page = new СеріїНоменклатури();
-                page.LoadRecords();
-                return page;
-            });
-        }
-
-        void Виробники(object? sender, EventArgs args)
-        {
-            Program.GeneralForm?.CreateNotebookPage("Виробники", () =>
-            {
-                Виробники page = new Виробники();
-                page.LoadRecords();
-                return page;
-            });
-        }
-
-        void СтаттіРухуКоштів(object? sender, EventArgs args)
-        {
-            Program.GeneralForm?.CreateNotebookPage("Статті руху коштів", () =>
-            {
-                СтаттяРухуКоштів page = new СтаттяРухуКоштів();
-                page.LoadRecords();
-                return page;
-            });
-        }
-
-        void ВидиЗапасів(object? sender, EventArgs args)
-        {
-            Program.GeneralForm?.CreateNotebookPage("Види запасів", () =>
-            {
-                ВидиЗапасів page = new ВидиЗапасів();
-                page.LoadRecords();
-                return page;
-            });
-        }
-
-        void КраїниСвіту(object? sender, EventArgs args)
-        {
-            Program.GeneralForm?.CreateNotebookPage("Країни світу", () =>
-            {
-                КраїниСвіту page = new КраїниСвіту();
-                page.LoadRecords();
-                return page;
-            });
-        }
-
-        void СкладськіПриміщення(object? sender, EventArgs args)
-        {
-            Program.GeneralForm?.CreateNotebookPage("Складські приміщення", () =>
-            {
-                СкладськіПриміщення page = new СкладськіПриміщення();
-                page.LoadRecords();
-                return page;
-            });
-        }
-
-        void СкладськіКомірки(object? sender, EventArgs args)
-        {
-            Program.GeneralForm?.CreateNotebookPage("Складські комірки", () =>
-            {
-                СкладськіКомірки page = new СкладськіКомірки();
-                page.LoadTree();
-                return page;
-            });
-        }
-
-        void ТипорозміриКомірок(object? sender, EventArgs args)
-        {
-            Program.GeneralForm?.CreateNotebookPage("Типорозміри комірок", () =>
-            {
-                ТипорозміриКомірок page = new ТипорозміриКомірок();
-                page.LoadRecords();
-                return page;
-            });
-        }
-
-        void Блокнот(object? sender, EventArgs args)
-        {
-            Program.GeneralForm?.CreateNotebookPage("Блокнот", () =>
-            {
-                Блокнот page = new Блокнот();
-                page.LoadRecords();
-                return page;
-            });
-        }
-
-        void AddCaption(VBox vBox, string name)
-        {
-            Label caption = new Label(name);
-            vBox.PackStart(caption, false, false, 10);
-        }
-
-        void AddSeparator(HBox hbox)
-        {
-            Separator separator = new Separator(Orientation.Horizontal);
-            hbox.PackStart(separator, false, false, 5);
-        }
-
-        void AddLink(VBox vbox, string uri, EventHandler? clickAction = null)
-        {
-            LinkButton lb = new LinkButton(uri, " " + uri) { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
-            vbox.PackStart(lb, false, false, 0);
-
-            if (clickAction != null)
-                lb.Clicked += clickAction;
         }
     }
 }

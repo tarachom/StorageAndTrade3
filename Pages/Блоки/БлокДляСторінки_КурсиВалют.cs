@@ -30,6 +30,7 @@ limitations under the License.
 using Gtk;
 
 using Константи = StorageAndTrade_1_0.Константи;
+using StorageAndTrade_1_0.Довідники;
 
 namespace StorageAndTrade
 {
@@ -95,8 +96,17 @@ namespace StorageAndTrade
             VBox vBoxDirectory = new VBox(false, 0);
             PackStart(vBoxDirectory, false, false, 5);
 
-            AddLink(vBoxDirectory, "Довідник - Валюти", PageDirectory.Валюти);
-            AddLink(vBoxDirectory, "Історія завантажень", КурсиВалют_Історія);
+            Link.AddLink(vBoxDirectory, "Довідник - Валюти", () =>
+            {
+                Program.GeneralForm?.CreateNotebookPage($"{Валюти_Const.FULLNAME}", () =>
+                {
+                    Валюти page = new Валюти();
+                    page.LoadRecords();
+                    return page;
+                });
+            });
+
+            Link.AddLink(vBoxDirectory, "Історія завантажень", КурсиВалют_Історія);
         }
 
         void OnDownloadCurs(object? sender, EventArgs args)
@@ -168,20 +178,11 @@ namespace StorageAndTrade
             }
         }
 
-        void КурсиВалют_Історія(object? sender, EventArgs args)
+        void КурсиВалют_Історія()
         {
             КурсиВалют_ІсторіяЗавантаження page = new КурсиВалют_ІсторіяЗавантаження();
             page.LoadRecords();
             Program.GeneralForm?.CreateNotebookPage("Курси валют - історія завантаження", () => { return page; });
-        }
-
-        void AddLink(VBox vbox, string uri, EventHandler? clickAction = null)
-        {
-            LinkButton lb = new LinkButton(uri, " " + uri) { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
-            vbox.PackStart(lb, false, false, 0);
-
-            if (clickAction != null)
-                lb.Clicked += clickAction;
         }
     }
 }

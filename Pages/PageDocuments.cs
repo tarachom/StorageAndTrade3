@@ -29,6 +29,8 @@ limitations under the License.
 
 using Gtk;
 
+using StorageAndTrade_1_0.Документи;
+
 namespace StorageAndTrade
 {
     class PageDocuments : VBox
@@ -39,217 +41,169 @@ namespace StorageAndTrade
             HBox hBoxList = new HBox(false, 0);
 
             VBox vLeft = new VBox(false, 0);
-
-            AddCaption(vLeft, "Продажі", PageJournals.Продажі);
-            AddLink(vLeft, "Замовлення клієнта", ЗамовленняКлієнта);
-            AddLink(vLeft, "Рахунок фактура", РахунокФактура);
-            AddLink(vLeft, "Реалізація товарів та послуг", РеалізаціяТоварівТаПослуг);
-            AddLink(vLeft, "Акт виконаних робіт", АктВиконанихРобіт);
-            AddLink(vLeft, "Повернення товарів від клієнта", ПоверненняТоварівВідКлієнта);
-
-            AddCaption(vLeft, "Закупівлі", PageJournals.Закупівлі);
-            AddLink(vLeft, "Замовлення постачальнику", ЗамовленняПостачальнику);
-            AddLink(vLeft, "Поступлення товарів та послуг", ПоступленняТоварівТаПослуг);
-            AddLink(vLeft, "Повернення товарів постачальнику", ПоверненняТоварівПостачальнику);
-
-            AddCaption(vLeft, "Ціноутворення");
-            AddLink(vLeft, "Встановлення цін номенклатури", ВстановленняЦінНоменклатури);
-
             hBoxList.PackStart(vLeft, false, false, 5);
 
-            AddSeparator(hBoxList);
+            Link.AddCaption(vLeft, "Продажі", PageJournals.Продажі);
+            {
+                Link.AddLink(vLeft, $"{ЗамовленняКлієнта_Const.FULLNAME}", () =>
+                {
+                    ЗамовленняКлієнта page = new ЗамовленняКлієнта();
+                    Program.GeneralForm?.CreateNotebookPage($"{ЗамовленняКлієнта_Const.FULLNAME}", () => { return page; });
+                    page.SetValue();
+                });
+
+                Link.AddLink(vLeft, $"{РахунокФактура_Const.FULLNAME}", () =>
+                {
+                    РахунокФактура page = new РахунокФактура();
+                    Program.GeneralForm?.CreateNotebookPage($"{РахунокФактура_Const.FULLNAME}", () => { return page; });
+                    page.SetValue();
+                });
+
+                Link.AddLink(vLeft, $"{РеалізаціяТоварівТаПослуг_Const.FULLNAME}", () =>
+                {
+                    РеалізаціяТоварівТаПослуг page = new РеалізаціяТоварівТаПослуг();
+                    Program.GeneralForm?.CreateNotebookPage($"{РеалізаціяТоварівТаПослуг_Const.FULLNAME}", () => { return page; });
+                    page.SetValue();
+                });
+
+                Link.AddLink(vLeft, $"{АктВиконанихРобіт_Const.FULLNAME}", () =>
+                {
+                    АктВиконанихРобіт page = new АктВиконанихРобіт();
+                    Program.GeneralForm?.CreateNotebookPage($"{АктВиконанихРобіт_Const.FULLNAME}", () => { return page; });
+                    page.SetValue();
+                });
+
+                Link.AddLink(vLeft, $"{ПоверненняТоварівВідКлієнта_Const.FULLNAME}", () =>
+                {
+                    ПоверненняТоварівВідКлієнта page = new ПоверненняТоварівВідКлієнта();
+                    Program.GeneralForm?.CreateNotebookPage($"{ПоверненняТоварівВідКлієнта_Const.FULLNAME}", () => { return page; });
+                    page.SetValue();
+                });
+            }
+
+            Link.AddCaption(vLeft, "Закупівлі", PageJournals.Закупівлі);
+            {
+                Link.AddLink(vLeft, $"{ЗамовленняПостачальнику_Const.FULLNAME}", () =>
+                {
+                    ЗамовленняПостачальнику page = new ЗамовленняПостачальнику();
+                    Program.GeneralForm?.CreateNotebookPage($"{ЗамовленняПостачальнику_Const.FULLNAME}", () => { return page; });
+                    page.SetValue();
+                });
+
+                Link.AddLink(vLeft, $"{ПоступленняТоварівТаПослуг_Const.FULLNAME}", () =>
+                {
+                    ПоступленняТоварівТаПослуг page = new ПоступленняТоварівТаПослуг();
+                    Program.GeneralForm?.CreateNotebookPage($"{ПоступленняТоварівТаПослуг_Const.FULLNAME}", () => { return page; });
+                    page.SetValue();
+                });
+
+                Link.AddLink(vLeft, $"{ПоверненняТоварівПостачальнику_Const.FULLNAME}", () =>
+                {
+                    ПоверненняТоварівПостачальнику page = new ПоверненняТоварівПостачальнику();
+                    Program.GeneralForm?.CreateNotebookPage($"{ПоверненняТоварівПостачальнику_Const.FULLNAME}", () => { return page; });
+                    page.SetValue();
+                });
+            }
+
+            Link.AddCaption(vLeft, "Ціноутворення");
+            {
+                Link.AddLink(vLeft, $"{ВстановленняЦінНоменклатури_Const.FULLNAME}", () =>
+                {
+                    ВстановленняЦінНоменклатури page = new ВстановленняЦінНоменклатури();
+                    Program.GeneralForm?.CreateNotebookPage($"{ВстановленняЦінНоменклатури_Const.FULLNAME}", () => { return page; });
+                    page.SetValue();
+                });
+            }
+
+            Link.AddSeparator(hBoxList);
 
             VBox vRight = new VBox(false, 0);
-
-            AddCaption(vRight, "Каса", PageJournals.Каса);
-            AddLink(vRight, "Прихідний касовий ордер", ПрихіднийКасовийОрдер);
-            AddLink(vRight, "Розхідний касовий ордер", РозхіднийКасовийОрдер);
-
-            AddCaption(vRight, "Склад", PageJournals.Склад);
-            AddLink(vRight, "Переміщення товарів між складами", ПереміщенняТоварів);
-            AddLink(vRight, "Введення залишків", ВведенняЗалишків);
-            AddLink(vRight, "Внутрішнє споживання товарів", ВнутрішнєСпоживанняТоварів);
-            AddLink(vRight, "Псування товарів", ПсуванняТоварів);
-
-            AddCaption(vRight, "Адресне зберігання", PageJournals.АдреснеЗберігання);
-            AddLink(vRight, "Розміщення товарів на складі", РозміщенняТоварівНаСкладі);
-            AddLink(vRight, "Збірка товарів на складі", ЗбіркаТоварівНаСкладі);
-            AddLink(vRight, "Переміщення товарів між комірками", ПереміщенняТоварівНаСкладі);
-
-            AddCaption(vRight, "Налаштування адресного зберігання");
-            AddLink(vRight, "Розміщення номенклатури по коміркам", РозміщенняНоменклатуриПоКоміркам);
-
             hBoxList.PackStart(vRight, false, false, 5);
 
-            PackStart(hBoxList, false, false, 10);
+            Link.AddCaption(vRight, "Каса", PageJournals.Каса);
+            {
+                Link.AddLink(vRight, $"{ПрихіднийКасовийОрдер_Const.FULLNAME}", () =>
+                {
+                    ПрихіднийКасовийОрдер page = new ПрихіднийКасовийОрдер();
+                    Program.GeneralForm?.CreateNotebookPage($"{ПрихіднийКасовийОрдер_Const.FULLNAME}", () => { return page; });
+                    page.SetValue();
+                });
 
+                Link.AddLink(vRight, $"{РозхіднийКасовийОрдер_Const.FULLNAME}", () =>
+                {
+                    РозхіднийКасовийОрдер page = new РозхіднийКасовийОрдер();
+                    Program.GeneralForm?.CreateNotebookPage($"{РозхіднийКасовийОрдер_Const.FULLNAME}", () => { return page; });
+                    page.SetValue();
+                });
+            }
+
+            Link.AddCaption(vRight, "Склад", PageJournals.Склад);
+            {
+                Link.AddLink(vRight, $"{ПереміщенняТоварів_Const.FULLNAME}", () =>
+                {
+                    ПереміщенняТоварів page = new ПереміщенняТоварів();
+                    Program.GeneralForm?.CreateNotebookPage($"{ПереміщенняТоварів_Const.FULLNAME}", () => { return page; });
+                    page.SetValue();
+                });
+
+                Link.AddLink(vRight, $"{ВведенняЗалишків_Const.FULLNAME}", () =>
+                {
+                    ВведенняЗалишків page = new ВведенняЗалишків();
+                    Program.GeneralForm?.CreateNotebookPage($"{ВведенняЗалишків_Const.FULLNAME}", () => { return page; });
+                    page.SetValue();
+                });
+
+                Link.AddLink(vRight, $"{ВнутрішнєСпоживанняТоварів_Const.FULLNAME}", () =>
+                {
+                    ВнутрішнєСпоживанняТоварів page = new ВнутрішнєСпоживанняТоварів();
+                    Program.GeneralForm?.CreateNotebookPage($"{ВнутрішнєСпоживанняТоварів_Const.FULLNAME}", () => { return page; });
+                    page.SetValue();
+                });
+
+                Link.AddLink(vRight, $"{ПсуванняТоварів_Const.FULLNAME}", () =>
+                {
+                    ПсуванняТоварів page = new ПсуванняТоварів();
+                    Program.GeneralForm?.CreateNotebookPage($"{ПсуванняТоварів_Const.FULLNAME}", () => { return page; });
+                    page.SetValue();
+                });
+            }
+
+            Link.AddCaption(vRight, "Адресне зберігання", PageJournals.АдреснеЗберігання);
+            {
+                Link.AddLink(vRight, $"{РозміщенняТоварівНаСкладі_Const.FULLNAME}", () =>
+                {
+                    РозміщенняТоварівНаСкладі page = new РозміщенняТоварівНаСкладі();
+                    Program.GeneralForm?.CreateNotebookPage($"{РозміщенняТоварівНаСкладі_Const.FULLNAME}", () => { return page; });
+                    page.SetValue();
+                });
+
+                Link.AddLink(vRight, $"{ЗбіркаТоварівНаСкладі_Const.FULLNAME}", () =>
+                {
+                    ЗбіркаТоварівНаСкладі page = new ЗбіркаТоварівНаСкладі();
+                    Program.GeneralForm?.CreateNotebookPage($"{ЗбіркаТоварівНаСкладі_Const.FULLNAME}", () => { return page; });
+                    page.SetValue();
+                });
+
+                Link.AddLink(vRight, $"{ПереміщенняТоварівНаСкладі_Const.FULLNAME}", () =>
+                {
+                    ПереміщенняТоварівНаСкладі page = new ПереміщенняТоварівНаСкладі();
+                    Program.GeneralForm?.CreateNotebookPage($"{ПереміщенняТоварівНаСкладі_Const.FULLNAME}", () => { return page; });
+                    page.SetValue();
+                });
+            }
+
+            Link.AddCaption(vRight, "Налаштування адресного зберігання");
+            {
+                Link.AddLink(vRight, $"{РозміщенняНоменклатуриПоКоміркам_Const.FULLNAME}", () =>
+                {
+                    РозміщенняНоменклатуриПоКоміркам page = new РозміщенняНоменклатуриПоКоміркам();
+                    Program.GeneralForm?.CreateNotebookPage($"{РозміщенняНоменклатуриПоКоміркам_Const.FULLNAME}", () => { return page; });
+                    page.SetValue();
+                });
+            }
+
+            PackStart(hBoxList, false, false, 10);
             ShowAll();
         }
-
-        void ЗамовленняПостачальнику(object? sender, EventArgs args)
-        {
-            ЗамовленняПостачальнику page = new ЗамовленняПостачальнику();
-            Program.GeneralForm?.CreateNotebookPage("Замовлення постачальнику", () => { return page; });
-            page.SetValue();
-        }
-
-        void ПоступленняТоварівТаПослуг(object? sender, EventArgs args)
-        {
-            ПоступленняТоварівТаПослуг page = new ПоступленняТоварівТаПослуг();
-            Program.GeneralForm?.CreateNotebookPage("Поступлення товарів та послуг", () => { return page; });
-            page.SetValue();
-        }
-
-        void ЗамовленняКлієнта(object? sender, EventArgs args)
-        {
-            ЗамовленняКлієнта page = new ЗамовленняКлієнта();
-            Program.GeneralForm?.CreateNotebookPage("Замовлення клієнта", () => { return page; });
-            page.SetValue();
-        }
-
-        void РеалізаціяТоварівТаПослуг(object? sender, EventArgs args)
-        {
-            РеалізаціяТоварівТаПослуг page = new РеалізаціяТоварівТаПослуг();
-            Program.GeneralForm?.CreateNotebookPage("Реалізація товарів та послуг", () => { return page; });
-            page.SetValue();
-        }
-
-        void ВстановленняЦінНоменклатури(object? sender, EventArgs args)
-        {
-            ВстановленняЦінНоменклатури page = new ВстановленняЦінНоменклатури();
-            Program.GeneralForm?.CreateNotebookPage("Встановлення цін номенклатури", () => { return page; });
-            page.SetValue();
-        }
-
-        void ПрихіднийКасовийОрдер(object? sender, EventArgs args)
-        {
-            ПрихіднийКасовийОрдер page = new ПрихіднийКасовийОрдер();
-            Program.GeneralForm?.CreateNotebookPage("Прихідний касовий ордер", () => { return page; });
-            page.SetValue();
-        }
-
-        void РозхіднийКасовийОрдер(object? sender, EventArgs args)
-        {
-            РозхіднийКасовийОрдер page = new РозхіднийКасовийОрдер();
-            Program.GeneralForm?.CreateNotebookPage("Розхідний касовий ордер", () => { return page; });
-            page.SetValue();
-        }
-
-        void ПереміщенняТоварів(object? sender, EventArgs args)
-        {
-            ПереміщенняТоварів page = new ПереміщенняТоварів();
-            Program.GeneralForm?.CreateNotebookPage("Переміщення товарів", () => { return page; });
-            page.SetValue();
-        }
-
-        void ПоверненняТоварівПостачальнику(object? sender, EventArgs args)
-        {
-            ПоверненняТоварівПостачальнику page = new ПоверненняТоварівПостачальнику();
-            Program.GeneralForm?.CreateNotebookPage("Повернення товарів постачальнику", () => { return page; });
-            page.SetValue();
-        }
-
-        void ПоверненняТоварівВідКлієнта(object? sender, EventArgs args)
-        {
-            ПоверненняТоварівВідКлієнта page = new ПоверненняТоварівВідКлієнта();
-            Program.GeneralForm?.CreateNotebookPage("Повернення товарів від клієнта", () => { return page; });
-            page.SetValue();
-        }
-
-        void АктВиконанихРобіт(object? sender, EventArgs args)
-        {
-            АктВиконанихРобіт page = new АктВиконанихРобіт();
-            Program.GeneralForm?.CreateNotebookPage("Акт виконаних робіт", () => { return page; });
-            page.SetValue();
-        }
-
-        void ВведенняЗалишків(object? sender, EventArgs args)
-        {
-            ВведенняЗалишків page = new ВведенняЗалишків();
-            Program.GeneralForm?.CreateNotebookPage("Введення залишків", () => { return page; });
-            page.SetValue();
-        }
-
-        void ВнутрішнєСпоживанняТоварів(object? sender, EventArgs args)
-        {
-            ВнутрішнєСпоживанняТоварів page = new ВнутрішнєСпоживанняТоварів();
-            Program.GeneralForm?.CreateNotebookPage("Внутрішнє споживання товарів", () => { return page; });
-            page.SetValue();
-        }
-
-        void ПсуванняТоварів(object? sender, EventArgs args)
-        {
-            ПсуванняТоварів page = new ПсуванняТоварів();
-            Program.GeneralForm?.CreateNotebookPage("Псування товарів", () => { return page; });
-            page.SetValue();
-        }
-
-        void РахунокФактура(object? sender, EventArgs args)
-        {
-            РахунокФактура page = new РахунокФактура();
-            Program.GeneralForm?.CreateNotebookPage("Рахунок фактура", () => { return page; });
-            page.SetValue();
-        }
-
-        void РозміщенняТоварівНаСкладі(object? sender, EventArgs args)
-        {
-            РозміщенняТоварівНаСкладі page = new РозміщенняТоварівНаСкладі();
-            Program.GeneralForm?.CreateNotebookPage("Розміщення товарів на складі", () => { return page; });
-            page.SetValue();
-        }
-
-        void ПереміщенняТоварівНаСкладі(object? sender, EventArgs args)
-        {
-            ПереміщенняТоварівНаСкладі page = new ПереміщенняТоварівНаСкладі();
-            Program.GeneralForm?.CreateNotebookPage("Переміщення товарів на складі", () => { return page; });
-            page.SetValue();
-        }
-
-        void ЗбіркаТоварівНаСкладі(object? sender, EventArgs args)
-        {
-            ЗбіркаТоварівНаСкладі page = new ЗбіркаТоварівНаСкладі();
-            Program.GeneralForm?.CreateNotebookPage("Збірка товарів на складі", () => { return page; });
-            page.SetValue();
-        }
-
-        void РозміщенняНоменклатуриПоКоміркам(object? sender, EventArgs args)
-        {
-            РозміщенняНоменклатуриПоКоміркам page = new РозміщенняНоменклатуриПоКоміркам();
-            Program.GeneralForm?.CreateNotebookPage("Розміщення номенклатури по коміркам", () => { return page; });
-            page.SetValue();
-        }
-
-
-        void AddCaption(VBox vBox, string name, EventHandler? clickAction = null)
-        {
-            if (clickAction != null)
-            {
-                LinkButton lb = new LinkButton(name, " " + name);
-                vBox.PackStart(lb, false, false, 10);
-
-                lb.Clicked += clickAction;
-            }
-            else
-            {
-                Label caption = new Label(name);
-                vBox.PackStart(caption, false, false, 10);
-            }
-        }
-
-        void AddSeparator(HBox hbox)
-        {
-            Separator separator = new Separator(Orientation.Horizontal);
-            hbox.PackStart(separator, false, false, 5);
-        }
-
-        void AddLink(VBox vbox, string uri, EventHandler? clickAction = null)
-        {
-            LinkButton lb = new LinkButton(uri, " " + uri) { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
-            vbox.PackStart(lb, false, false, 0);
-
-            if (clickAction != null)
-                lb.Clicked += clickAction;
-        }
-
     }
 }
