@@ -1647,6 +1647,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВі�
     #region REGISTER "<xsl:value-of select="$RegisterName"/>"
     public static class <xsl:value-of select="$RegisterName"/>_Const
     {
+        public const string FULLNAME = "<xsl:value-of select="normalize-space(FullName)"/>";
         public const string TABLE = "<xsl:value-of select="Table"/>";
         <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
         public const string <xsl:value-of select="Name"/> = "<xsl:value-of select="NameInTable"/>";</xsl:for-each>
@@ -1901,8 +1902,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриНа�
     #region REGISTER "<xsl:value-of select="$RegisterName"/>"
     public static class <xsl:value-of select="$RegisterName"/>_Const
     {
+        public const string FULLNAME = "<xsl:value-of select="normalize-space(FullName)"/>";
         public const string TABLE = "<xsl:value-of select="Table"/>";
-		public static readonly string[] AllowDocumentSpendTable = new string[] { <xsl:for-each select="AllowDocumentSpend/Name">
+		    public static readonly string[] AllowDocumentSpendTable = new string[] { <xsl:for-each select="AllowDocumentSpend/Name">
 		    <xsl:if test="position() != 1">
                 <xsl:text>, </xsl:text>
             </xsl:if>
