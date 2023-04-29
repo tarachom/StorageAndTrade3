@@ -5,7 +5,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>28.04.2023 17:21:08</DateTimeSave>
+  <DateTimeSave>29.04.2023 07:55:49</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -936,10 +936,11 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
   <Directories>
     <Directory>
       <Name>Організації</Name>
-      <FullName>Організації</FullName>
+      <FullName>
+      </FullName>
       <Table>tab_a01</Table>
       <Desc>Юридичні особи та підприємці нашої організації</Desc>
-      <AutoNum>1</AutoNum>
+      <AutoNum>0</AutoNum>
       <Fields>
         <Field>
           <Name>Назва</Name>
@@ -1423,10 +1424,11 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
     </Directory>
     <Directory>
       <Name>Виробники</Name>
-      <FullName>Виробники</FullName>
+      <FullName>
+      </FullName>
       <Table>tab_a04</Table>
       <Desc>Виробники</Desc>
-      <AutoNum>1</AutoNum>
+      <AutoNum>0</AutoNum>
       <Fields>
         <Field>
           <Name>Назва</Name>
@@ -1515,10 +1517,11 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
     </Directory>
     <Directory>
       <Name>ВидиНоменклатури</Name>
-      <FullName>Види номенклатури</FullName>
+      <FullName>
+      </FullName>
       <Table>tab_a05</Table>
       <Desc>Види номенклатури</Desc>
-      <AutoNum>1</AutoNum>
+      <AutoNum>0</AutoNum>
       <Fields>
         <Field>
           <Name>Назва</Name>
@@ -1629,10 +1632,11 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
     </Directory>
     <Directory>
       <Name>ПакуванняОдиниціВиміру</Name>
-      <FullName>Одиниці виміру</FullName>
+      <FullName>
+      </FullName>
       <Table>tab_a06</Table>
       <Desc>Одиниці виміру</Desc>
-      <AutoNum>1</AutoNum>
+      <AutoNum>0</AutoNum>
       <Fields>
         <Field>
           <Name>Назва</Name>
@@ -1741,10 +1745,11 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
     </Directory>
     <Directory>
       <Name>Валюти</Name>
-      <FullName>Валюти</FullName>
+      <FullName>
+      </FullName>
       <Table>tab_a07</Table>
       <Desc>Валюти</Desc>
-      <AutoNum>1</AutoNum>
+      <AutoNum>0</AutoNum>
       <Fields>
         <Field>
           <Name>Назва</Name>
@@ -1911,10 +1916,11 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
     </Directory>
     <Directory>
       <Name>Контрагенти</Name>
-      <FullName>Контрагенти</FullName>
+      <FullName>
+      </FullName>
       <Table>tab_a08</Table>
       <Desc>Контрагенти</Desc>
-      <AutoNum>1</AutoNum>
+      <AutoNum>0</AutoNum>
       <Fields>
         <Field>
           <Name>Назва</Name>
@@ -2172,10 +2178,11 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
     </Directory>
     <Directory>
       <Name>Склади</Name>
-      <FullName>Склади</FullName>
+      <FullName>
+      </FullName>
       <Table>tab_a10</Table>
       <Desc>Склади</Desc>
-      <AutoNum>1</AutoNum>
+      <AutoNum>0</AutoNum>
       <Fields>
         <Field>
           <Name>Назва</Name>
@@ -2430,10 +2437,11 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
     </Directory>
     <Directory>
       <Name>ВидиЦін</Name>
-      <FullName>Види цін</FullName>
+      <FullName>
+      </FullName>
       <Table>tab_a12</Table>
       <Desc>Види цін</Desc>
-      <AutoNum>1</AutoNum>
+      <AutoNum>0</AutoNum>
       <Fields>
         <Field>
           <Name>Назва</Name>
@@ -2541,10 +2549,11 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
     </Directory>
     <Directory>
       <Name>ВидиЦінПостачальників</Name>
-      <FullName>Види цін постачальників</FullName>
+      <FullName>
+      </FullName>
       <Table>tab_a13</Table>
       <Desc>Види цін постачальників</Desc>
-      <AutoNum>1</AutoNum>
+      <AutoNum>0</AutoNum>
       <Fields>
         <Field>
           <Name>Назва</Name>
@@ -2644,10 +2653,11 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
     </Directory>
     <Directory>
       <Name>Користувачі</Name>
-      <FullName>Користувачі</FullName>
+      <FullName>
+      </FullName>
       <Table>tab_a14</Table>
       <Desc>Користувачі</Desc>
-      <AutoNum>1</AutoNum>
+      <AutoNum>0</AutoNum>
       <Fields>
         <Field>
           <Name>Назва</Name>
@@ -2829,10 +2839,11 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
     </Directory>
     <Directory>
       <Name>ФізичніОсоби</Name>
-      <FullName>Фізичні особи</FullName>
+      <FullName>
+      </FullName>
       <Table>tab_a16</Table>
       <Desc>Фізичні особи</Desc>
-      <AutoNum>1</AutoNum>
+      <AutoNum>0</AutoNum>
       <Fields>
         <Field>
           <Name>Назва</Name>
@@ -3015,10 +3026,11 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
     </Directory>
     <Directory>
       <Name>СтруктураПідприємства</Name>
-      <FullName>Структура підприємства</FullName>
+      <FullName>
+      </FullName>
       <Table>tab_a18</Table>
       <Desc>Структура підприємства</Desc>
-      <AutoNum>1</AutoNum>
+      <AutoNum>0</AutoNum>
       <Fields>
         <Field>
           <Name>Назва</Name>
@@ -3108,10 +3120,11 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
     </Directory>
     <Directory>
       <Name>КраїниСвіту</Name>
-      <FullName>Країни світу</FullName>
+      <FullName>
+      </FullName>
       <Table>tab_a19</Table>
       <Desc>Країни світу</Desc>
-      <AutoNum>1</AutoNum>
+      <AutoNum>0</AutoNum>
       <Fields>
         <Field>
           <Name>Назва</Name>
@@ -3200,10 +3213,11 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
     </Directory>
     <Directory>
       <Name>Файли</Name>
-      <FullName>Файли</FullName>
+      <FullName>
+      </FullName>
       <Table>tab_a20</Table>
       <Desc>Файли</Desc>
-      <AutoNum>1</AutoNum>
+      <AutoNum>0</AutoNum>
       <Fields>
         <Field>
           <Name>Код</Name>
@@ -3352,10 +3366,11 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
     </Directory>
     <Directory>
       <Name>ХарактеристикиНоменклатури</Name>
-      <FullName>Характеристики номенклатури</FullName>
+      <FullName>
+      </FullName>
       <Table>tab_a21</Table>
       <Desc>Характеристики номенклатури</Desc>
-      <AutoNum>1</AutoNum>
+      <AutoNum>0</AutoNum>
       <Fields>
         <Field>
           <Name>Назва</Name>
@@ -3501,10 +3516,11 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
     </Directory>
     <Directory>
       <Name>Номенклатура_Папки</Name>
-      <FullName>Номенклатура папки</FullName>
+      <FullName>
+      </FullName>
       <Table>tab_a22</Table>
       <Desc>Номенклатура папки</Desc>
-      <AutoNum>1</AutoNum>
+      <AutoNum>0</AutoNum>
       <Fields>
         <Field>
           <Name>Назва</Name>
@@ -3549,10 +3565,11 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
     </Directory>
     <Directory>
       <Name>Контрагенти_Папки</Name>
-      <FullName>Контрагенти папки</FullName>
+      <FullName>
+      </FullName>
       <Table>tab_a23</Table>
       <Desc>Контрагенти папки</Desc>
-      <AutoNum>1</AutoNum>
+      <AutoNum>0</AutoNum>
       <Fields>
         <Field>
           <Name>Назва</Name>
@@ -3597,10 +3614,11 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
     </Directory>
     <Directory>
       <Name>Склади_Папки</Name>
-      <FullName>Склади папки</FullName>
+      <FullName>
+      </FullName>
       <Table>tab_a24</Table>
       <Desc>Склади папки</Desc>
-      <AutoNum>1</AutoNum>
+      <AutoNum>0</AutoNum>
       <Fields>
         <Field>
           <Name>Назва</Name>
@@ -3645,10 +3663,11 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
     </Directory>
     <Directory>
       <Name>Каси</Name>
-      <FullName>Каси</FullName>
+      <FullName>
+      </FullName>
       <Table>tab_a26</Table>
       <Desc>Каси</Desc>
-      <AutoNum>1</AutoNum>
+      <AutoNum>0</AutoNum>
       <Fields>
         <Field>
           <Name>Назва</Name>
@@ -3795,10 +3814,11 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
     </Directory>
     <Directory>
       <Name>БанківськіРахункиОрганізацій</Name>
-      <FullName>Банківські рахунки організацій</FullName>
+      <FullName>
+      </FullName>
       <Table>tab_a27</Table>
       <Desc>Банківські рахунки організацій</Desc>
-      <AutoNum>1</AutoNum>
+      <AutoNum>0</AutoNum>
       <Fields>
         <Field>
           <Name>Назва</Name>
@@ -4036,11 +4056,12 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
     </Directory>
     <Directory>
       <Name>ДоговориКонтрагентів</Name>
-      <FullName>Договори контрагентів</FullName>
+      <FullName>
+      </FullName>
       <Table>tab_a28</Table>
       <Desc>Договори контрагентів. 
 Договори підпорядковані контрагенту</Desc>
-      <AutoNum>1</AutoNum>
+      <AutoNum>0</AutoNum>
       <Fields>
         <Field>
           <Name>Назва</Name>
@@ -4361,10 +4382,11 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
     </Directory>
     <Directory>
       <Name>БанківськіРахункиКонтрагентів</Name>
-      <FullName>Банківські рахунки контрагентів</FullName>
+      <FullName>
+      </FullName>
       <Table>tab_a29</Table>
       <Desc>Банківські рахунки контрагентів</Desc>
-      <AutoNum>1</AutoNum>
+      <AutoNum>0</AutoNum>
       <Fields>
         <Field>
           <Name>Назва</Name>
@@ -4621,10 +4643,11 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
     </Directory>
     <Directory>
       <Name>СтаттяРухуКоштів</Name>
-      <FullName>Стаття руху коштів</FullName>
+      <FullName>
+      </FullName>
       <Table>tab_a45</Table>
       <Desc>Стаття руху коштів</Desc>
-      <AutoNum>1</AutoNum>
+      <AutoNum>0</AutoNum>
       <Fields>
         <Field>
           <Name>Назва</Name>
@@ -4772,7 +4795,8 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
     </Directory>
     <Directory>
       <Name>СеріїНоменклатури</Name>
-      <FullName>Серії номенклатури</FullName>
+      <FullName>
+      </FullName>
       <Table>tab_b02</Table>
       <Desc>
       </Desc>
@@ -4856,7 +4880,8 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
     </Directory>
     <Directory>
       <Name>ПартіяТоварівКомпозит</Name>
-      <FullName>Партія товарів композит</FullName>
+      <FullName>
+      </FullName>
       <Table>tab_b06</Table>
       <Desc>Композитний тип для регістру ПартіїТоварів</Desc>
       <AutoNum>0</AutoNum>
@@ -5037,11 +5062,12 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
     </Directory>
     <Directory>
       <Name>ВидиЗапасів</Name>
-      <FullName>Види запасів</FullName>
+      <FullName>
+      </FullName>
       <Table>tab_b13</Table>
       <Desc>
       </Desc>
-      <AutoNum>1</AutoNum>
+      <AutoNum>0</AutoNum>
       <Fields>
         <Field>
           <Name>Назва</Name>
@@ -5186,11 +5212,12 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
     </Directory>
     <Directory>
       <Name>Банки</Name>
-      <FullName>Банки</FullName>
+      <FullName>
+      </FullName>
       <Table>tab_a39</Table>
       <Desc>
       </Desc>
-      <AutoNum>1</AutoNum>
+      <AutoNum>0</AutoNum>
       <Fields>
         <Field>
           <Name>Код</Name>
@@ -5709,7 +5736,8 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
     </Directory>
     <Directory>
       <Name>СкладськіПриміщення</Name>
-      <FullName>Складські приміщення</FullName>
+      <FullName>
+      </FullName>
       <Table>tab_a71</Table>
       <Desc>Складські приміщення це складова одиниця Складу.
 Тобто Склад може складатися з багатьох приміщень чи кімнат. 
@@ -5842,7 +5870,8 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
     </Directory>
     <Directory>
       <Name>СкладськіКомірки</Name>
-      <FullName>Складські комірки</FullName>
+      <FullName>
+      </FullName>
       <Table>tab_a72</Table>
       <Desc>Складська комірка це адресне місце зберігання в приміщенні
 
@@ -6122,7 +6151,8 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
     </Directory>
     <Directory>
       <Name>ОбластьЗберігання</Name>
-      <FullName>Область зберігання</FullName>
+      <FullName>
+      </FullName>
       <Table>tab_a73</Table>
       <Desc>Область зберігання - це певна область чи зона в приміщенні
 Підпорядковужться приміщенню
@@ -6216,7 +6246,8 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
     </Directory>
     <Directory>
       <Name>ТипорозміриКомірок</Name>
-      <FullName>Типорозміри комірок</FullName>
+      <FullName>
+      </FullName>
       <Table>tab_a75</Table>
       <Desc>Опис комірки по параметрах</Desc>
       <AutoNum>0</AutoNum>
@@ -6379,11 +6410,12 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
     </Directory>
     <Directory>
       <Name>СкладськіКомірки_Папки</Name>
-      <FullName>СкладськіКомірки папки</FullName>
+      <FullName>
+      </FullName>
       <Table>tab_a76</Table>
       <Desc>
       </Desc>
-      <AutoNum>1</AutoNum>
+      <AutoNum>0</AutoNum>
       <Fields>
         <Field>
           <Name>Назва</Name>
@@ -6439,10 +6471,11 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
     </Directory>
     <Directory>
       <Name>Блокнот</Name>
-      <FullName>Блокнот</FullName>
+      <FullName>
+      </FullName>
       <Table>tab_a41</Table>
       <Desc>Блокнот для записів</Desc>
-      <AutoNum>1</AutoNum>
+      <AutoNum>0</AutoNum>
       <Fields>
         <Field>
           <Name>Код</Name>
@@ -17005,25 +17038,82 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
         </Field>
       </Fields>
       <AllowDocument>
-        <Name>ЗамовленняПостачальнику</Name>
-        <Name>ПоступленняТоварівТаПослуг</Name>
-        <Name>ЗамовленняКлієнта</Name>
-        <Name>РеалізаціяТоварівТаПослуг</Name>
-        <Name>ВстановленняЦінНоменклатури</Name>
-        <Name>ПрихіднийКасовийОрдер</Name>
-        <Name>РозхіднийКасовийОрдер</Name>
-        <Name>ПереміщенняТоварів</Name>
-        <Name>ПоверненняТоварівПостачальнику</Name>
-        <Name>ПоверненняТоварівВідКлієнта</Name>
-        <Name>АктВиконанихРобіт</Name>
-        <Name>ВведенняЗалишків</Name>
-        <Name>ПсуванняТоварів</Name>
-        <Name>ВнутрішнєСпоживанняТоварів</Name>
-        <Name>РахунокФактура</Name>
-        <Name>РозміщенняТоварівНаСкладі</Name>
-        <Name>ПереміщенняТоварівНаСкладі</Name>
-        <Name>ЗбіркаТоварівНаСкладі</Name>
-        <Name>РозміщенняНоменклатуриПоКоміркам</Name>
+        <Item>
+          <Name>ЗамовленняПостачальнику</Name>
+          <FullName>Замовлення постачальнику</FullName>
+        </Item>
+        <Item>
+          <Name>ПоступленняТоварівТаПослуг</Name>
+          <FullName>Поступлення товарів та послуг</FullName>
+        </Item>
+        <Item>
+          <Name>ЗамовленняКлієнта</Name>
+          <FullName>Замовлення клієнта</FullName>
+        </Item>
+        <Item>
+          <Name>РеалізаціяТоварівТаПослуг</Name>
+          <FullName>Реалізація товарів та послуг</FullName>
+        </Item>
+        <Item>
+          <Name>ВстановленняЦінНоменклатури</Name>
+          <FullName>Встановлення цін номенклатури</FullName>
+        </Item>
+        <Item>
+          <Name>ПрихіднийКасовийОрдер</Name>
+          <FullName>Прихідний касовий ордер</FullName>
+        </Item>
+        <Item>
+          <Name>РозхіднийКасовийОрдер</Name>
+          <FullName>Розхідний касовий ордер</FullName>
+        </Item>
+        <Item>
+          <Name>ПереміщенняТоварів</Name>
+          <FullName>Переміщення товарів</FullName>
+        </Item>
+        <Item>
+          <Name>ПоверненняТоварівПостачальнику</Name>
+          <FullName>Повернення товарів постачальнику</FullName>
+        </Item>
+        <Item>
+          <Name>ПоверненняТоварівВідКлієнта</Name>
+          <FullName>Повернення товарів від клієнта</FullName>
+        </Item>
+        <Item>
+          <Name>АктВиконанихРобіт</Name>
+          <FullName>Акт виконаних робіт</FullName>
+        </Item>
+        <Item>
+          <Name>ВведенняЗалишків</Name>
+          <FullName>Введення залишків</FullName>
+        </Item>
+        <Item>
+          <Name>ПсуванняТоварів</Name>
+          <FullName>Псування товарів</FullName>
+        </Item>
+        <Item>
+          <Name>ВнутрішнєСпоживанняТоварів</Name>
+          <FullName>Внутрішнє споживання товарів</FullName>
+        </Item>
+        <Item>
+          <Name>РахунокФактура</Name>
+          <FullName>Рахунок фактура</FullName>
+        </Item>
+        <Item>
+          <Name>РозміщенняТоварівНаСкладі</Name>
+          <FullName>Розміщення товарів на складі</FullName>
+        </Item>
+        <Item>
+          <Name>ПереміщенняТоварівНаСкладі</Name>
+          <FullName>Переміщення товарів на складі</FullName>
+        </Item>
+        <Item>
+          <Name>ЗбіркаТоварівНаСкладі</Name>
+          <FullName>Збірка товарів на складі</FullName>
+        </Item>
+        <Item>
+          <Name>РозміщенняНоменклатуриПоКоміркам</Name>
+          <FullName>Розміщення номенклатури по коміркам</FullName>
+        </Item>
       </AllowDocument>
       <TabularLists>
         <TabularList>
@@ -20246,9 +20336,18 @@ SQL тип  непотрібно вказувати
         </Field>
       </Fields>
       <AllowDocument>
-        <Name>ЗамовленняПостачальнику</Name>
-        <Name>ПоступленняТоварівТаПослуг</Name>
-        <Name>ПоверненняТоварівПостачальнику</Name>
+        <Item>
+          <Name>ЗамовленняПостачальнику</Name>
+          <FullName>Замовлення постачальнику</FullName>
+        </Item>
+        <Item>
+          <Name>ПоступленняТоварівТаПослуг</Name>
+          <FullName>Поступлення товарів та послуг</FullName>
+        </Item>
+        <Item>
+          <Name>ПоверненняТоварівПостачальнику</Name>
+          <FullName>Повернення товарів постачальнику</FullName>
+        </Item>
       </AllowDocument>
       <TabularLists>
         <TabularList>
@@ -20858,11 +20957,26 @@ SQL тип  непотрібно вказувати
         </Field>
       </Fields>
       <AllowDocument>
-        <Name>ЗамовленняКлієнта</Name>
-        <Name>РеалізаціяТоварівТаПослуг</Name>
-        <Name>ПоверненняТоварівВідКлієнта</Name>
-        <Name>АктВиконанихРобіт</Name>
-        <Name>РахунокФактура</Name>
+        <Item>
+          <Name>ЗамовленняКлієнта</Name>
+          <FullName>Замовлення клієнта</FullName>
+        </Item>
+        <Item>
+          <Name>РеалізаціяТоварівТаПослуг</Name>
+          <FullName>Реалізація товарів та послуг</FullName>
+        </Item>
+        <Item>
+          <Name>ПоверненняТоварівВідКлієнта</Name>
+          <FullName>Повернення товарів від клієнта</FullName>
+        </Item>
+        <Item>
+          <Name>АктВиконанихРобіт</Name>
+          <FullName>Акт виконаних робіт</FullName>
+        </Item>
+        <Item>
+          <Name>РахунокФактура</Name>
+          <FullName>Рахунок фактура</FullName>
+        </Item>
       </AllowDocument>
       <TabularLists>
         <TabularList>
@@ -21792,8 +21906,14 @@ SQL тип  непотрібно вказувати
         </Field>
       </Fields>
       <AllowDocument>
-        <Name>ПрихіднийКасовийОрдер</Name>
-        <Name>РозхіднийКасовийОрдер</Name>
+        <Item>
+          <Name>ПрихіднийКасовийОрдер</Name>
+          <FullName>Прихідний касовий ордер</FullName>
+        </Item>
+        <Item>
+          <Name>РозхіднийКасовийОрдер</Name>
+          <FullName>Розхідний касовий ордер</FullName>
+        </Item>
       </AllowDocument>
       <TabularLists>
         <TabularList>
@@ -22208,10 +22328,22 @@ SQL тип  непотрібно вказувати
         </Field>
       </Fields>
       <AllowDocument>
-        <Name>ПереміщенняТоварів</Name>
-        <Name>ВведенняЗалишків</Name>
-        <Name>ПсуванняТоварів</Name>
-        <Name>ВнутрішнєСпоживанняТоварів</Name>
+        <Item>
+          <Name>ПереміщенняТоварів</Name>
+          <FullName>Переміщення товарів</FullName>
+        </Item>
+        <Item>
+          <Name>ВведенняЗалишків</Name>
+          <FullName>Введення залишків</FullName>
+        </Item>
+        <Item>
+          <Name>ПсуванняТоварів</Name>
+          <FullName>Псування товарів</FullName>
+        </Item>
+        <Item>
+          <Name>ВнутрішнєСпоживанняТоварів</Name>
+          <FullName>Внутрішнє споживання товарів</FullName>
+        </Item>
       </AllowDocument>
       <TabularLists>
         <TabularList>
@@ -22735,10 +22867,22 @@ SQL тип  непотрібно вказувати
         </Field>
       </Fields>
       <AllowDocument>
-        <Name>РозміщенняТоварівНаСкладі</Name>
-        <Name>ПереміщенняТоварівНаСкладі</Name>
-        <Name>ЗбіркаТоварівНаСкладі</Name>
-        <Name>РозміщенняНоменклатуриПоКоміркам</Name>
+        <Item>
+          <Name>РозміщенняТоварівНаСкладі</Name>
+          <FullName>Розміщення товарів на складі</FullName>
+        </Item>
+        <Item>
+          <Name>ПереміщенняТоварівНаСкладі</Name>
+          <FullName>Переміщення товарів на складі</FullName>
+        </Item>
+        <Item>
+          <Name>ЗбіркаТоварівНаСкладі</Name>
+          <FullName>Збірка товарів на складі</FullName>
+        </Item>
+        <Item>
+          <Name>РозміщенняНоменклатуриПоКоміркам</Name>
+          <FullName>Розміщення номенклатури по коміркам</FullName>
+        </Item>
       </AllowDocument>
       <TabularLists>
         <TabularList>

@@ -23,91 +23,20 @@ limitations under the License.
 
 using Gtk;
 
-using AccountingSoftware;
-
-using StorageAndTrade_1_0.Довідники;
-using Константи = StorageAndTrade_1_0.Константи;
 using Перелічення = StorageAndTrade_1_0.Перелічення;
-
 using ТабличніСписки = StorageAndTrade_1_0.Документи.ТабличніСписки;
 
 namespace StorageAndTrade
 {
-    class Журнал_Каса : VBox
+    class Журнал_Каса : Журнал
     {
-        public UnigueID? SelectPointerItem { get; set; }
-        public System.Action<Валюти_Pointer>? CallBack_OnSelectPointer { get; set; }
-
-        TreeView TreeViewGrid;
-        ComboBoxText ComboBoxPeriodWhere = new ComboBoxText();
-        ToolButton? TypeDocToolButton; //Список документів
-
         public Журнал_Каса() : base()
         {
-            BorderWidth = 0;
-
-            HBox hBoxTop = new HBox();
-            PackStart(hBoxTop, false, false, 10);
-
-            //Відбір по періоду
-            hBoxTop.PackStart(new Label("Період:"), false, false, 5);
-
-            ComboBoxPeriodWhere = ТабличніСписки.Інтерфейс.СписокВідбірПоПеріоду();
-            ComboBoxPeriodWhere.Changed += OnComboBoxPeriodWhereChanged;
-
-            hBoxTop.PackStart(ComboBoxPeriodWhere, false, false, 0);
-
-            CreateToolbar();
-
-            ScrolledWindow scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In };
-            scrollTree.SetPolicy(PolicyType.Never, PolicyType.Automatic);
-
-            TreeViewGrid = new TreeView(ТабличніСписки.Журнали_Каса.Store);
+            TreeViewGrid.Model = ТабличніСписки.Журнали_Каса.Store;
             ТабличніСписки.Журнали_Каса.AddColumns(TreeViewGrid);
-
-            TreeViewGrid.Selection.Mode = SelectionMode.Multiple;
-            TreeViewGrid.ActivateOnSingleClick = true;
-            TreeViewGrid.RowActivated += OnRowActivated;
-            TreeViewGrid.ButtonPressEvent += OnButtonPressEvent;
-            TreeViewGrid.KeyReleaseEvent += OnKeyReleaseEvent;
-
-            scrollTree.Add(TreeViewGrid);
-
-            PackStart(scrollTree, true, true, 0);
-
-            ShowAll();
         }
 
-        void CreateToolbar()
-        {
-            Toolbar toolbar = new Toolbar();
-            PackStart(toolbar, false, false, 0);
-
-            ToolButton upButton = new ToolButton(Stock.GoUp) { TooltipText = "Знайти в журналі відповідго типу документу" };
-            upButton.Clicked += OnEditClick;
-            toolbar.Add(upButton);
-
-            ToolButton refreshButton = new ToolButton(Stock.Refresh) { TooltipText = "Обновити" };
-            refreshButton.Clicked += OnRefreshClick;
-            toolbar.Add(refreshButton);
-
-            //Separator
-            ToolItem toolItemSeparator = new ToolItem();
-            toolItemSeparator.Add(new Separator(Orientation.Horizontal));
-            toolbar.Add(toolItemSeparator);
-
-            TypeDocToolButton = new ToolButton(Stock.Find) { Label = "Документи", IsImportant = true };
-            TypeDocToolButton.Clicked += OnTypeDocsClick;
-            toolbar.Add(TypeDocToolButton);
-        }
-
-        public void SetValue()
-        {
-            if ((int)Константи.ЖурналиДокументів.ОсновнийТипПеріоду_Const != 0)
-                ComboBoxPeriodWhere.ActiveId = Константи.ЖурналиДокументів.ОсновнийТипПеріоду_Const.ToString();
-        }
-
-        public void LoadRecords()
+        public override void LoadRecords()
         {
             ТабличніСписки.Журнали_Каса.SelectPointerItem = SelectPointerItem;
 
@@ -121,103 +50,16 @@ namespace StorageAndTrade
             TreeViewGrid.GrabFocus();
         }
 
-        #region TreeView
-
-        void OnRowActivated(object sender, RowActivatedArgs args)
+        public override void OpenTypeListDocs(Widget relative_to)
         {
-            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
-            {
-                TreeIter iter;
-                TreeViewGrid.Model.GetIter(out iter, TreeViewGrid.Selection.GetSelectedRows()[0]);
-
-                SelectPointerItem = new UnigueID((string)TreeViewGrid.Model.GetValue(iter, 1));
-            }
-        }
-
-        void OnButtonPressEvent(object? sender, ButtonPressEventArgs args)
-        {
-            if (args.Event.Type == Gdk.EventType.DoubleButtonPress)
-                OpenDocTypeJournal();
-        }
-
-        void OpenDocTypeJournal()
-        {
-            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
-            {
-                TreeIter iter;
-                if (TreeViewGrid.Model.GetIter(out iter, TreeViewGrid.Selection.GetSelectedRows()[0]))
-                {
-                    string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
-                    string typeDoc = (string)TreeViewGrid.Model.GetValue(iter, 2);
-
-                    ФункціїДляЖурналів.ВідкритиЖурналВідповідноДоВидуДокументу(typeDoc, new UnigueID(uid),
-                        Enum.Parse<Перелічення.ТипПеріодуДляЖурналівДокументів>(ComboBoxPeriodWhere.ActiveId));
-                }
-            }
-        }
-
-        void OnKeyReleaseEvent(object? sender, KeyReleaseEventArgs args)
-        {
-            switch (args.Event.Key)
-            {
-                case Gdk.Key.Insert:
-                    {
-                        if (TypeDocToolButton != null)
-                            OnTypeDocsClick(TypeDocToolButton, new EventArgs());
-                        break;
-                    }
-                case Gdk.Key.F5:
-                    {
-                        LoadRecords();
-                        break;
-                    }
-                case Gdk.Key.KP_Enter:
-                case Gdk.Key.Return:
-                    {
-                        OpenDocTypeJournal();
-                        break;
-                    }
-                case Gdk.Key.End:
-                case Gdk.Key.Home:
-                case Gdk.Key.Up:
-                case Gdk.Key.Down:
-                case Gdk.Key.Prior:
-                case Gdk.Key.Next:
-                    {
-                        OnRowActivated(TreeViewGrid, new RowActivatedArgs());
-                        break;
-                    }
-            }
-        }
-
-        #endregion
-
-        #region ToolBar
-
-        void OnComboBoxPeriodWhereChanged(object? sender, EventArgs args)
-        {
-            ТабличніСписки.Журнали_Каса.ДодатиВідбірПоПеріоду(
+            ФункціїДляЖурналів.ВідкритиСписокДокументів(relative_to, ТабличніСписки.Журнали_Каса.AllowDocument(),
                 Enum.Parse<Перелічення.ТипПеріодуДляЖурналівДокументів>(ComboBoxPeriodWhere.ActiveId));
+        }
+
+        public override void PeriodWhereChanged()
+        {
+            ТабличніСписки.Журнали_Каса.ДодатиВідбірПоПеріоду(Enum.Parse<Перелічення.ТипПеріодуДляЖурналівДокументів>(ComboBoxPeriodWhere.ActiveId));
             LoadRecords();
         }
-
-        void OnEditClick(object? sender, EventArgs args)
-        {
-            OpenDocTypeJournal();
-        }
-
-        void OnRefreshClick(object? sender, EventArgs args)
-        {
-            LoadRecords();
-        }
-
-        void OnTypeDocsClick(object? sender, EventArgs args)
-        {
-            ФункціїДляЖурналів.ВідкритиСписокДокументів((ToolButton)sender!, ТабличніСписки.Журнали_Каса.AllowDocument(),
-               Enum.Parse<Перелічення.ТипПеріодуДляЖурналівДокументів>(ComboBoxPeriodWhere.ActiveId));
-        }
-
-        #endregion
-
     }
 }

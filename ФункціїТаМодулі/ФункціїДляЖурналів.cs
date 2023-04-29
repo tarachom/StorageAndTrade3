@@ -36,18 +36,18 @@ namespace StorageAndTrade
 {
     class ФункціїДляЖурналів
     {
-        public static void ВідкритиСписокДокументів(Widget relative_to, string[] allowDocument, ТипПеріодуДляЖурналівДокументів periodWhere = 0)
+        public static void ВідкритиСписокДокументів(Widget relative_to, Dictionary<string, string> allowDocument, ТипПеріодуДляЖурналівДокументів periodWhere = 0)
         {
             VBox vBox = new VBox();
 
-            foreach (string typeDoc in allowDocument)
+            foreach (KeyValuePair<string, string> typeDoc in allowDocument)
             {
-                LinkButton lb = new LinkButton(typeDoc, " " + typeDoc) { Halign = Align.Start };
+                LinkButton lb = new LinkButton(typeDoc.Value, " " + typeDoc.Value) { Halign = Align.Start };
                 vBox.PackStart(lb, false, false, 0);
 
                 lb.Clicked += (object? sender, EventArgs args) =>
                 {
-                    ФункціїДляЖурналів.ВідкритиЖурналВідповідноДоВидуДокументу(typeDoc, new UnigueID(), periodWhere);
+                    ФункціїДляЖурналів.ВідкритиЖурналВідповідноДоВидуДокументу(typeDoc.Key, new UnigueID(), periodWhere);
                 };
             }
 

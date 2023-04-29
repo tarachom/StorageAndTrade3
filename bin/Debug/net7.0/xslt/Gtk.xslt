@@ -588,35 +588,28 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи.Т
         public static void ДодатиВідбірПоПеріоду(Перелічення.ТипПеріодуДляЖурналівДокументів типПеріоду)
         {
             Where.Clear();
-            <xsl:for-each select="$AllowDocument/Name">
-              <xsl:variable name="AllowName" select="text()"/>
+            <xsl:for-each select="$AllowDocument/Item">
+              <xsl:variable name="AllowName" select="Name"/>
               <xsl:variable name="DocField" select="../../TabularLists/TabularList[Name = $AllowName]/Fields/Field[WherePeriod = '1']/DocField" />
               <xsl:if test="normalize-space($DocField) != ''">
             {
                 List&lt;Where&gt; where = new List&lt;Where&gt;();
-                Where.Add(<xsl:text>"</xsl:text>
-                  <xsl:value-of select="text()"/>
-                  <xsl:text>"</xsl:text>, where);
-                Інтерфейс.ДодатиВідбірПоПеріоду(where, <xsl:value-of select="text()"/>_Const.<xsl:value-of select="$DocField"/>, типПеріоду);
+                Where.Add("<xsl:value-of select="$AllowName"/>", where);
+                Інтерфейс.ДодатиВідбірПоПеріоду(where, <xsl:value-of select="$AllowName"/>_Const.<xsl:value-of select="$DocField"/>, типПеріоду);
             }
               </xsl:if>
             </xsl:for-each>
         }
 
-        // Масив документів які входять в журнал
-        public static string[] AllowDocument()
+        // Список документів які входять в журнал
+        public static Dictionary&lt;string, string&gt; AllowDocument()
         {
-            return new string[] 
-            {
-                <xsl:for-each select="$AllowDocument/Name">
-                    <xsl:if test="position() != 1">
-                        <xsl:text>, </xsl:text>
-                    </xsl:if>
-                    <xsl:text>"</xsl:text>
-                    <xsl:value-of select="text()"/>
-                    <xsl:text>"</xsl:text> /* */
-                </xsl:for-each>
-            };
+            Dictionary&lt;string, string&gt; allowDoc = new Dictionary&lt;string, string&gt;();
+            <xsl:for-each select="$AllowDocument/Item">
+                <xsl:text>allowDoc.Add("</xsl:text>
+                <xsl:value-of select="Name"/>", "<xsl:value-of select="normalize-space(FullName)"/>");
+            </xsl:for-each>
+            return allowDoc;
         }
 
         public static UnigueID? SelectPointerItem { get; set; }
@@ -634,7 +627,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи.Т
               <xsl:variable name="DocumentName" select="Name"/>
               <xsl:variable name="Table" select="Table"/>
               
-              <xsl:if test="count($AllowDocument/Name[text() = $DocumentName]) = 1">
+              <xsl:if test="count($AllowDocument/Item[Name = $DocumentName]) = 1">
               {
                   Query query = new Query(Документи.<xsl:value-of select="$DocumentName"/>_Const.TABLE);
 
