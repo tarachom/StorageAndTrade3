@@ -36,18 +36,18 @@ namespace StorageAndTrade
 {
     abstract class Журнал : VBox
     {
+        public UnigueID? SelectPointerItem { get; set; }
+
+        protected TreeView TreeViewGrid = new TreeView();
+        protected ComboBoxText ComboBoxPeriodWhere = new ComboBoxText();
+        protected ToolButton? TypeDocToolButton; //Список документів
+
         #region Динамічне створення обєктів
 
         protected Assembly ExecutingAssembly = Assembly.GetExecutingAssembly();
         protected string PrefixDocumentObject = "StorageAndTrade_1_0.Документи";
 
         #endregion
-
-        public UnigueID? SelectPointerItem { get; set; }
-
-        protected TreeView TreeViewGrid = new TreeView();
-        protected ComboBoxText ComboBoxPeriodWhere = new ComboBoxText();
-        protected ToolButton? TypeDocToolButton; //Список документів
 
         public Журнал() : base()
         {
@@ -180,7 +180,6 @@ namespace StorageAndTrade
         public virtual void OpenTypeListDocs(Widget relative_to) { }
 
         public virtual void PeriodWhereChanged() { }
-
 
         #region TreeView
 
