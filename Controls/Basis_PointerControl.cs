@@ -92,7 +92,7 @@ namespace StorageAndTrade
                                 Pointer = selectPointer.GetBasis();
                             };
 
-                            Program.GeneralForm?.CreateNotebookPage("Вибір - Поступлення товарів та послуг", () => { return page; }, true);
+                            Program.GeneralForm?.CreateNotebookPage($"Вибір - {ПоступленняТоварівТаПослуг_Const.FULLNAME}", () => { return page; }, true);
                             page.LoadRecords();
 
                             break;

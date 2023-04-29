@@ -145,7 +145,7 @@ namespace StorageAndTrade
 
             КурсиВалют_Objest.Save();
 
-            Program.GeneralForm?.RenameCurrentPageNotebook($"Курс: {КурсиВалют_Objest.Курс}");
+            Program.GeneralForm?.RenameCurrentPageNotebook($"{КурсиВалют_Objest.Курс}");
 
             if (PageList != null)
             {

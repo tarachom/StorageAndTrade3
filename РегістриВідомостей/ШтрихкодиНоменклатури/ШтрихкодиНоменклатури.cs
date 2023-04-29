@@ -130,7 +130,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"Штрихкод: *", () =>
+                Program.GeneralForm?.CreateNotebookPage($"{ШтрихкодиНоменклатури_Const.FULLNAME} *", () =>
                 {
                     ШтрихкодиНоменклатури_Елемент page = new ШтрихкодиНоменклатури_Елемент
                     {
@@ -150,7 +150,7 @@ namespace StorageAndTrade
                 ШтрихкодиНоменклатури_Objest ШтрихкодиНоменклатури_Objest = new ШтрихкодиНоменклатури_Objest();
                 if (ШтрихкодиНоменклатури_Objest.Read(new UnigueID(uid)))
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"Штрихкод: {ШтрихкодиНоменклатури_Objest.Штрихкод}", () =>
+                    Program.GeneralForm?.CreateNotebookPage($"{ШтрихкодиНоменклатури_Objest.Штрихкод}", () =>
                     {
                         ШтрихкодиНоменклатури_Елемент page = new ШтрихкодиНоменклатури_Елемент
                         {

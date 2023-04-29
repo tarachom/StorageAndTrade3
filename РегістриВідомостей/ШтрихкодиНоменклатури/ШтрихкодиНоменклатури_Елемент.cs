@@ -151,7 +151,7 @@ namespace StorageAndTrade
 
             ШтрихкодиНоменклатури_Objest.Save();
 
-            Program.GeneralForm?.RenameCurrentPageNotebook($"Штрихкод: {ШтрихкодиНоменклатури_Objest.Штрихкод}");
+            Program.GeneralForm?.RenameCurrentPageNotebook($"{ШтрихкодиНоменклатури_Objest.Штрихкод}");
 
             if (PageList != null)
             {

@@ -138,7 +138,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"Курс: *", () =>
+                Program.GeneralForm?.CreateNotebookPage($"{КурсиВалют_Const.FULLNAME} *", () =>
                 {
                     КурсиВалют_Елемент page = new КурсиВалют_Елемент
                     {
@@ -157,7 +157,7 @@ namespace StorageAndTrade
                 КурсиВалют_Objest КурсиВалют_Objest = new КурсиВалют_Objest();
                 if (КурсиВалют_Objest.Read(new UnigueID(uid)))
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"Курс: {КурсиВалют_Objest.Курс}", () =>
+                    Program.GeneralForm?.CreateNotebookPage($"{КурсиВалют_Objest.Курс}", () =>
                     {
                         КурсиВалют_Елемент page = new КурсиВалют_Елемент
                         {
