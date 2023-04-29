@@ -33,7 +33,7 @@ namespace StorageAndTrade
         {
             pointer = new Блокнот_Pointer();
             WidthPresentation = 300;
-            Caption = "Виробник:";
+            Caption = $"{Блокнот_Const.FULLNAME}:";
         }
 
         Блокнот_Pointer pointer;

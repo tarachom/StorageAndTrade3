@@ -55,14 +55,14 @@ namespace StorageAndTrade
 
             //Сторінка
             {
-                LinkButton linkPage = new LinkButton(" Банківські рахунки організацій") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
+                LinkButton linkPage = new LinkButton($" {БанківськіРахункиОрганізацій_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
                 linkPage.Clicked += (object? sender, EventArgs args) =>
                 {
                     БанківськіРахункиОрганізацій page = new БанківськіРахункиОрганізацій();
                     page.DirectoryPointerItem = DirectoryPointerItem;
                     page.CallBack_OnSelectPointer = CallBack_OnSelectPointer;
 
-                    Program.GeneralForm?.CreateNotebookPage("Вибір - Банківські рахунки організацій", () => { return page; }, true);
+                    Program.GeneralForm?.CreateNotebookPage($"Вибір - {БанківськіРахункиОрганізацій_Const.FULLNAME}", () => { return page; }, true);
 
                     page.LoadRecords();
                 };
@@ -77,7 +77,7 @@ namespace StorageAndTrade
                 {
                     БанківськіРахункиОрганізацій_Елемент page = new БанківськіРахункиОрганізацій_Елемент { IsNew = true, CallBack_OnSelectPointer = CallBack_OnSelectPointer };
 
-                    Program.GeneralForm?.CreateNotebookPage($"Банківські рахунки організацій: *", () => { return page; }, true);
+                    Program.GeneralForm?.CreateNotebookPage($"{БанківськіРахункиОрганізацій_Const.FULLNAME} *", () => { return page; }, true);
 
                     page.SetValue();
                 };

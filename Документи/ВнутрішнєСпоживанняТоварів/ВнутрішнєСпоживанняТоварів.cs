@@ -264,7 +264,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"Внутрішнє споживання товарів: *", () =>
+                Program.GeneralForm?.CreateNotebookPage($"{ВнутрішнєСпоживанняТоварів_Const.FULLNAME} *", () =>
                 {
                     ВнутрішнєСпоживанняТоварів_Елемент page = new ВнутрішнєСпоживанняТоварів_Елемент
                     {

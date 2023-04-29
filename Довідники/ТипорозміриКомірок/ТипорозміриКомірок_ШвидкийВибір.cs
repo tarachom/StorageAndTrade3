@@ -55,14 +55,14 @@ namespace StorageAndTrade
 
             //Сторінка
             {
-                LinkButton linkPage = new LinkButton(" Типорозміри комірок") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
+                LinkButton linkPage = new LinkButton($" {ТипорозміриКомірок_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
                 linkPage.Clicked += (object? sender, EventArgs args) =>
                 {
                     ТипорозміриКомірок page = new ТипорозміриКомірок();
                     page.DirectoryPointerItem = DirectoryPointerItem;
                     page.CallBack_OnSelectPointer = CallBack_OnSelectPointer;
 
-                    Program.GeneralForm?.CreateNotebookPage("Вибір - Типорозміри комірок", () => { return page; }, true);
+                    Program.GeneralForm?.CreateNotebookPage($"Вибір - {ТипорозміриКомірок_Const.FULLNAME}", () => { return page; }, true);
 
                     page.LoadRecords();
                 };
@@ -77,7 +77,7 @@ namespace StorageAndTrade
                 {
                     ТипорозміриКомірок_Елемент page = new ТипорозміриКомірок_Елемент { IsNew = true, CallBack_OnSelectPointer = CallBack_OnSelectPointer };
 
-                    Program.GeneralForm?.CreateNotebookPage($"Типорозміри комірок: *", () => { return page; }, true);
+                    Program.GeneralForm?.CreateNotebookPage($"{ТипорозміриКомірок_Const.FULLNAME} *", () => { return page; }, true);
 
                     page.SetValue();
                 };

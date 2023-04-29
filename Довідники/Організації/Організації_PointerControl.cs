@@ -33,7 +33,7 @@ namespace StorageAndTrade
         {
             pointer = new Організації_Pointer();
             WidthPresentation = 300;
-            Caption = "Організація:";
+            Caption = $"{Організації_Const.FULLNAME}:";
         }
 
         Організації_Pointer pointer;

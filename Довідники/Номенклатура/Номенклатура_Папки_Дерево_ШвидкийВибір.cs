@@ -52,7 +52,7 @@ namespace StorageAndTrade
 
             //Сторінка
             {
-                LinkButton linkPage = new LinkButton(" Номенклатура папки") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
+                LinkButton linkPage = new LinkButton($" {Номенклатура_Папки_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
                 linkPage.Clicked += (object? sender, EventArgs args) =>
                 {
                     Номенклатура_Папки_Дерево page = new Номенклатура_Папки_Дерево();
@@ -60,7 +60,7 @@ namespace StorageAndTrade
                     page.CallBack_OnSelectPointer = CallBack_OnSelectPointer;
                     page.UidOpenFolder = UidOpenFolder;
 
-                    Program.GeneralForm?.CreateNotebookPage("Вибір - Номенклатура папки", () => { return page; }, true);
+                    Program.GeneralForm?.CreateNotebookPage($"Вибір - {Номенклатура_Папки_Const.FULLNAME}", () => { return page; }, true);
 
                     page.LoadTree();
                 };
@@ -75,7 +75,7 @@ namespace StorageAndTrade
                 {
                     Номенклатура_Папки_Елемент page = new Номенклатура_Папки_Елемент { IsNew = true, CallBack_OnSelectPointer = CallBack_OnSelectPointer };
 
-                    Program.GeneralForm?.CreateNotebookPage($"Номенклатура папки: *", () => { return page; }, true);
+                    Program.GeneralForm?.CreateNotebookPage($"{Номенклатура_Папки_Const.FULLNAME} *", () => { return page; }, true);
 
                     page.SetValue();
                 };

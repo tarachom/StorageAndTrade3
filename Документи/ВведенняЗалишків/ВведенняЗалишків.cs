@@ -264,7 +264,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"Введення залишків: *", () =>
+                Program.GeneralForm?.CreateNotebookPage($"{ВведенняЗалишків_Const.FULLNAME} *", () =>
                 {
                     ВведенняЗалишків_Елемент page = new ВведенняЗалишків_Елемент
                     {

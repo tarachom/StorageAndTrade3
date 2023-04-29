@@ -139,7 +139,7 @@ namespace StorageAndTrade
             if (closePage)
                 Program.GeneralForm?.CloseCurrentPageNotebook();
             else
-                Program.GeneralForm?.RenameCurrentPageNotebook($"Країни світу: {КраїниСвіту_Objest.Назва}");
+                Program.GeneralForm?.RenameCurrentPageNotebook($"{КраїниСвіту_Objest.Назва}");
 
             if (CallBack_OnSelectPointer != null)
                 CallBack_OnSelectPointer.Invoke(КраїниСвіту_Objest.GetDirectoryPointer());

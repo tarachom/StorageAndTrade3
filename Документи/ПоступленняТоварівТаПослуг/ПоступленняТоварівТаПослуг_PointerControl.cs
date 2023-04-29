@@ -31,7 +31,7 @@ namespace StorageAndTrade
         {
             pointer = new ПоступленняТоварівТаПослуг_Pointer();
             WidthPresentation = 300;
-            Caption = "Поступлення товарів та послуг:";
+            Caption = $"{ПоступленняТоварівТаПослуг_Const.FULLNAME}:";
         }
 
         ПоступленняТоварівТаПослуг_Pointer pointer;
@@ -65,7 +65,7 @@ namespace StorageAndTrade
                 Pointer = selectPointer;
             };
 
-            Program.GeneralForm?.CreateNotebookPage("Вибір - Поступлення товарів та послуг", () => { return page; }, true);
+            Program.GeneralForm?.CreateNotebookPage($"Вибір - {ПоступленняТоварівТаПослуг_Const.FULLNAME}", () => { return page; }, true);
 
             if (UseWherePeriod)
                 page.SetValue();

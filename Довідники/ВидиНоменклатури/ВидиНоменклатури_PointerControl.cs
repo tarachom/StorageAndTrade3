@@ -33,7 +33,7 @@ namespace StorageAndTrade
         {
             pointer = new ВидиНоменклатури_Pointer();
             WidthPresentation = 300;
-            Caption = "Види номенклатури:";
+            Caption = $"{ВидиНоменклатури_Const.FULLNAME}:";
         }
 
         ВидиНоменклатури_Pointer pointer;

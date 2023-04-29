@@ -286,7 +286,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"Рахунок фактура: *", () =>
+                Program.GeneralForm?.CreateNotebookPage($"{РахунокФактура_Const.FULLNAME} *", () =>
                 {
                     РахунокФактура_Елемент page = new РахунокФактура_Елемент
                     {

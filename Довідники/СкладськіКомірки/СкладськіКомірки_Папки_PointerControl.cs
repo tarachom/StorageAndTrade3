@@ -31,7 +31,7 @@ namespace StorageAndTrade
         {
             pointer = new СкладськіКомірки_Папки_Pointer();
             WidthPresentation = 300;
-            Caption = "Родич:";
+            Caption = $"{СкладськіКомірки_Папки_Const.FULLNAME}:";
         }
 
         public string UidOpenFolder { get; set; } = "";
@@ -71,7 +71,7 @@ namespace StorageAndTrade
                 Pointer = selectPointer;
             };
 
-            Program.GeneralForm?.CreateNotebookPage("Вибір - Складські комірки папки", () => { return page; }, true);
+            Program.GeneralForm?.CreateNotebookPage($"Вибір - {СкладськіКомірки_Папки_Const.FULLNAME}", () => { return page; }, true);
 
             page.LoadTree();
         }

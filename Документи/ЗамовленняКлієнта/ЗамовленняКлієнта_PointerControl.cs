@@ -31,7 +31,7 @@ namespace StorageAndTrade
         {
             pointer = new ЗамовленняКлієнта_Pointer();
             WidthPresentation = 300;
-            Caption = "Замовлення клієнта:";
+            Caption = $"{ЗамовленняКлієнта_Const.FULLNAME}:";
         }
 
         ЗамовленняКлієнта_Pointer pointer;
@@ -65,7 +65,7 @@ namespace StorageAndTrade
                 Pointer = selectPointer;
             };
 
-            Program.GeneralForm?.CreateNotebookPage("Вибір - Замовлення клієнта", () => { return page; }, true);
+            Program.GeneralForm?.CreateNotebookPage($"Вибір - {ЗамовленняКлієнта_Const.FULLNAME}", () => { return page; }, true);
 
             if (UseWherePeriod)
                 page.SetValue();

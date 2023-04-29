@@ -148,7 +148,7 @@ namespace StorageAndTrade
             if (closePage)
                 Program.GeneralForm?.CloseCurrentPageNotebook();
             else
-                Program.GeneralForm?.RenameCurrentPageNotebook($"Каса: {Каси_Objest.Назва}");
+                Program.GeneralForm?.RenameCurrentPageNotebook($"{Каси_Objest.Назва}");
 
             if (CallBack_OnSelectPointer != null)
                 CallBack_OnSelectPointer.Invoke(Каси_Objest.GetDirectoryPointer());

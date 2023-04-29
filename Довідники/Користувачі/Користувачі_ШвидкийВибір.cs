@@ -54,14 +54,14 @@ namespace StorageAndTrade
 
             //Сторінка
             {
-                LinkButton linkPage = new LinkButton(" Користувачі") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
+                LinkButton linkPage = new LinkButton($" {Користувачі_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
                 linkPage.Clicked += (object? sender, EventArgs args) =>
                 {
                     Користувачі page = new Користувачі();
                     page.DirectoryPointerItem = DirectoryPointerItem;
                     page.CallBack_OnSelectPointer = CallBack_OnSelectPointer;
 
-                    Program.GeneralForm?.CreateNotebookPage("Вибір - Користувачі", () => { return page; }, true);
+                    Program.GeneralForm?.CreateNotebookPage($"Вибір - {Користувачі_Const.FULLNAME}", () => { return page; }, true);
 
                     page.LoadRecords();
                 };
@@ -76,7 +76,7 @@ namespace StorageAndTrade
                 {
                     Користувачі_Елемент page = new Користувачі_Елемент { IsNew = true, CallBack_OnSelectPointer = CallBack_OnSelectPointer };
 
-                    Program.GeneralForm?.CreateNotebookPage($"Користувачі: *", () => { return page; }, true);
+                    Program.GeneralForm?.CreateNotebookPage($"{Користувачі_Const.FULLNAME} *", () => { return page; }, true);
 
                     page.SetValue();
                 };

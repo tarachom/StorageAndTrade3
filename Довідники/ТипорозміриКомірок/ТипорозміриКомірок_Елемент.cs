@@ -179,7 +179,7 @@ namespace StorageAndTrade
             if (closePage)
                 Program.GeneralForm?.CloseCurrentPageNotebook();
             else
-                Program.GeneralForm?.RenameCurrentPageNotebook($"Типорозмір: {ТипорозміриКомірок_Objest.Назва}");
+                Program.GeneralForm?.RenameCurrentPageNotebook($"{ТипорозміриКомірок_Objest.Назва}");
 
             if (CallBack_OnSelectPointer != null)
                 CallBack_OnSelectPointer.Invoke(ТипорозміриКомірок_Objest.GetDirectoryPointer());

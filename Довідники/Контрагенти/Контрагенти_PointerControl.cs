@@ -33,7 +33,7 @@ namespace StorageAndTrade
         {
             pointer = new Контрагенти_Pointer();
             WidthPresentation = 300;
-            Caption = "Контрагент:";
+            Caption = $"{Контрагенти_Const.FULLNAME}:";
         }
 
         Контрагенти_Pointer pointer;

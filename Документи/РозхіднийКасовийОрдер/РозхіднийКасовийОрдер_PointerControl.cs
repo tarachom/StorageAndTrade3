@@ -31,7 +31,7 @@ namespace StorageAndTrade
         {
             pointer = new РозхіднийКасовийОрдер_Pointer();
             WidthPresentation = 300;
-            Caption = "Розхідний касовий ордер:";
+            Caption = $"{РозхіднийКасовийОрдер_Const.FULLNAME}:";
         }
 
         РозхіднийКасовийОрдер_Pointer pointer;
@@ -65,7 +65,7 @@ namespace StorageAndTrade
                 Pointer = selectPointer;
             };
 
-            Program.GeneralForm?.CreateNotebookPage("Вибір - Розхідний касовий ордер", () => { return page; }, true);
+            Program.GeneralForm?.CreateNotebookPage($"Вибір - {РозхіднийКасовийОрдер_Const.FULLNAME}", () => { return page; }, true);
 
             if (UseWherePeriod)
                 page.SetValue();

@@ -31,7 +31,7 @@ namespace StorageAndTrade
         {
             pointer = new ПсуванняТоварів_Pointer();
             WidthPresentation = 300;
-            Caption = "Реалізація товарів та послуг:";
+            Caption = $"{ПсуванняТоварів_Const.FULLNAME}:";
         }
 
         ПсуванняТоварів_Pointer pointer;
@@ -65,7 +65,7 @@ namespace StorageAndTrade
                 Pointer = selectPointer;
             };
 
-            Program.GeneralForm?.CreateNotebookPage("Вибір - Реалізація товарів та послуг", () => { return page; }, true);
+            Program.GeneralForm?.CreateNotebookPage($"Вибір - {ПсуванняТоварів_Const.FULLNAME}", () => { return page; }, true);
 
             if (UseWherePeriod)
                 page.SetValue();

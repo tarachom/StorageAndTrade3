@@ -31,7 +31,7 @@ namespace StorageAndTrade
         {
             pointer = new ПрихіднийКасовийОрдер_Pointer();
             WidthPresentation = 300;
-            Caption = "Прихідний касовий ордер:";
+            Caption = $"{ПрихіднийКасовийОрдер_Const.FULLNAME}:";
         }
 
         ПрихіднийКасовийОрдер_Pointer pointer;
@@ -65,7 +65,7 @@ namespace StorageAndTrade
                 Pointer = selectPointer;
             };
 
-            Program.GeneralForm?.CreateNotebookPage("Вибір - Прихідний касовий ордер", () => { return page; }, true);
+            Program.GeneralForm?.CreateNotebookPage($"Вибір - {ПрихіднийКасовийОрдер_Const.FULLNAME}", () => { return page; }, true);
 
             if (UseWherePeriod)
                 page.SetValue();

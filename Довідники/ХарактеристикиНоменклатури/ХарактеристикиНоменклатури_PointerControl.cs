@@ -33,7 +33,7 @@ namespace StorageAndTrade
         {
             pointer = new ХарактеристикиНоменклатури_Pointer();
             WidthPresentation = 300;
-            Caption = "Характеристика:";
+            Caption = $"{ХарактеристикиНоменклатури_Const.FULLNAME}:";
         }
 
         ХарактеристикиНоменклатури_Pointer pointer;

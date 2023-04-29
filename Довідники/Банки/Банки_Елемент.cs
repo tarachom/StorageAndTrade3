@@ -205,7 +205,7 @@ namespace StorageAndTrade
             if (closePage)
                 Program.GeneralForm?.CloseCurrentPageNotebook();
             else
-                Program.GeneralForm?.RenameCurrentPageNotebook($"Валюта: {Банки_Objest.Назва}");
+                Program.GeneralForm?.RenameCurrentPageNotebook($"{Банки_Objest.Назва}");
 
             if (CallBack_OnSelectPointer != null)
                 CallBack_OnSelectPointer.Invoke(Банки_Objest.GetDirectoryPointer());

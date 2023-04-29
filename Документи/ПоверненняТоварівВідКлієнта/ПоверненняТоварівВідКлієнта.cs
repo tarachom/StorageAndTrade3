@@ -264,7 +264,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"Повернення товарів від клієнта: *", () =>
+                Program.GeneralForm?.CreateNotebookPage($"{ПоверненняТоварівВідКлієнта_Const.FULLNAME} *", () =>
                 {
                     ПоверненняТоварівВідКлієнта_Елемент page = new ПоверненняТоварівВідКлієнта_Елемент
                     {

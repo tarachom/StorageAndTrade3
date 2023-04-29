@@ -264,7 +264,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"Реалізація товарів та послуг: *", () =>
+                Program.GeneralForm?.CreateNotebookPage($"{ПсуванняТоварів_Const.FULLNAME} *", () =>
                 {
                     ПсуванняТоварів_Елемент page = new ПсуванняТоварів_Елемент
                     {

@@ -55,14 +55,14 @@ namespace StorageAndTrade
 
             //Сторінка
             {
-                LinkButton linkPage = new LinkButton(" Склади") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
+                LinkButton linkPage = new LinkButton($" {Склади_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
                 linkPage.Clicked += (object? sender, EventArgs args) =>
                 {
                     Склади page = new Склади();
                     page.DirectoryPointerItem = DirectoryPointerItem;
                     page.CallBack_OnSelectPointer = CallBack_OnSelectPointer;
 
-                    Program.GeneralForm?.CreateNotebookPage("Вибір - Склади", () => { return page; }, true);
+                    Program.GeneralForm?.CreateNotebookPage($"Вибір - {Склади_Const.FULLNAME}", () => { return page; }, true);
 
                     page.LoadTree();
                 };
@@ -77,7 +77,7 @@ namespace StorageAndTrade
                 {
                     Склади_Елемент page = new Склади_Елемент { IsNew = true, CallBack_OnSelectPointer = CallBack_OnSelectPointer };
 
-                    Program.GeneralForm?.CreateNotebookPage($"Склад: *", () => { return page; }, true);
+                    Program.GeneralForm?.CreateNotebookPage($"{Склади_Const.FULLNAME} *", () => { return page; }, true);
 
                     page.SetValue();
                 };

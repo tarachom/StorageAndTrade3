@@ -121,7 +121,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"Виробник: *", () =>
+                Program.GeneralForm?.CreateNotebookPage($"{СтаттяРухуКоштів_Const.FULLNAME} *", () =>
                 {
                     СтаттяРухуКоштів_Елемент page = new СтаттяРухуКоштів_Елемент
                     {
@@ -139,7 +139,7 @@ namespace StorageAndTrade
                 СтаттяРухуКоштів_Objest СтаттяРухуКоштів_Objest = new СтаттяРухуКоштів_Objest();
                 if (СтаттяРухуКоштів_Objest.Read(new UnigueID(uid)))
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"Виробник: {СтаттяРухуКоштів_Objest.Назва}", () =>
+                    Program.GeneralForm?.CreateNotebookPage($"{СтаттяРухуКоштів_Objest.Назва}", () =>
                     {
                         СтаттяРухуКоштів_Елемент page = new СтаттяРухуКоштів_Елемент
                         {

@@ -155,7 +155,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"Cерійний номер: *", () =>
+                Program.GeneralForm?.CreateNotebookPage($"{СеріїНоменклатури_Const.FULLNAME} *", () =>
                 {
                     СеріїНоменклатури_Елемент page = new СеріїНоменклатури_Елемент
                     {
@@ -173,7 +173,7 @@ namespace StorageAndTrade
                 СеріїНоменклатури_Objest СеріїНоменклатури_Objest = new СеріїНоменклатури_Objest();
                 if (СеріїНоменклатури_Objest.Read(new UnigueID(uid)))
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"Cерійний номер: {СеріїНоменклатури_Objest.Номер}", () =>
+                    Program.GeneralForm?.CreateNotebookPage($"{СеріїНоменклатури_Objest.Номер}", () =>
                     {
                         СеріїНоменклатури_Елемент page = new СеріїНоменклатури_Елемент
                         {

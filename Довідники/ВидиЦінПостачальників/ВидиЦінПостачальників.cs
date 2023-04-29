@@ -121,7 +121,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"Види цін постачальників: *", () =>
+                Program.GeneralForm?.CreateNotebookPage($"{ВидиЦінПостачальників_Const.FULLNAME} *", () =>
                 {
                     ВидиЦінПостачальників_Елемент page = new ВидиЦінПостачальників_Елемент
                     {
@@ -139,7 +139,7 @@ namespace StorageAndTrade
                 ВидиЦінПостачальників_Objest ВидиЦінПостачальників_Objest = new ВидиЦінПостачальників_Objest();
                 if (ВидиЦінПостачальників_Objest.Read(new UnigueID(uid)))
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"Види цін постачальників: {ВидиЦінПостачальників_Objest.Назва}", () =>
+                    Program.GeneralForm?.CreateNotebookPage($"{ВидиЦінПостачальників_Objest.Назва}", () =>
                     {
                         ВидиЦінПостачальників_Елемент page = new ВидиЦінПостачальників_Елемент
                         {

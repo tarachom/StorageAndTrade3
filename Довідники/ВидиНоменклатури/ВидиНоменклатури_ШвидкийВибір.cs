@@ -55,14 +55,14 @@ namespace StorageAndTrade
 
             //Сторінка
             {
-                LinkButton linkPage = new LinkButton(" Види номенклатури") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
+                LinkButton linkPage = new LinkButton($" {ВидиНоменклатури_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
                 linkPage.Clicked += (object? sender, EventArgs args) =>
                 {
                     ВидиНоменклатури page = new ВидиНоменклатури();
                     page.DirectoryPointerItem = DirectoryPointerItem;
                     page.CallBack_OnSelectPointer = CallBack_OnSelectPointer;
 
-                    Program.GeneralForm?.CreateNotebookPage("Вибір - Види номенклатури", () => { return page; }, true);
+                    Program.GeneralForm?.CreateNotebookPage($"Вибір - {ВидиНоменклатури_Const.FULLNAME}", () => { return page; }, true);
 
                     page.LoadRecords();
                 };
@@ -77,7 +77,7 @@ namespace StorageAndTrade
                 {
                     ВидиНоменклатури_Елемент page = new ВидиНоменклатури_Елемент { IsNew = true, CallBack_OnSelectPointer = CallBack_OnSelectPointer };
 
-                    Program.GeneralForm?.CreateNotebookPage($"Види номенклатури: *", () => { return page; }, true);
+                    Program.GeneralForm?.CreateNotebookPage($"{ВидиНоменклатури_Const.FULLNAME} *", () => { return page; }, true);
 
                     page.SetValue();
                 };

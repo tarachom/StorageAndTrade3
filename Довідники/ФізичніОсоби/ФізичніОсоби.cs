@@ -120,7 +120,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"Фізичні особи: *", () =>
+                Program.GeneralForm?.CreateNotebookPage($"{ФізичніОсоби_Const.FULLNAME} *", () =>
                 {
                     ФізичніОсоби_Елемент page = new ФізичніОсоби_Елемент
                     {
@@ -138,7 +138,7 @@ namespace StorageAndTrade
                 ФізичніОсоби_Objest ФізичніОсоби_Objest = new ФізичніОсоби_Objest();
                 if (ФізичніОсоби_Objest.Read(new UnigueID(uid)))
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"Фізичні особи: {ФізичніОсоби_Objest.Назва}", () =>
+                    Program.GeneralForm?.CreateNotebookPage($"{ФізичніОсоби_Objest.Назва}", () =>
                     {
                         ФізичніОсоби_Елемент page = new ФізичніОсоби_Елемент
                         {

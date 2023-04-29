@@ -162,7 +162,7 @@ namespace StorageAndTrade
             if (closePage)
                 Program.GeneralForm?.CloseCurrentPageNotebook();
             else
-                Program.GeneralForm?.RenameCurrentPageNotebook($"Пакування: {ПакуванняОдиниціВиміру_Objest.Назва}");
+                Program.GeneralForm?.RenameCurrentPageNotebook($"{ПакуванняОдиниціВиміру_Objest.Назва}");
 
             if (CallBack_OnSelectPointer != null)
                 CallBack_OnSelectPointer.Invoke(ПакуванняОдиниціВиміру_Objest.GetDirectoryPointer());

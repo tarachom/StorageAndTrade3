@@ -33,7 +33,7 @@ namespace StorageAndTrade
         {
             pointer = new Виробники_Pointer();
             WidthPresentation = 300;
-            Caption = "Виробник:";
+            Caption = $"{Виробники_Const.FULLNAME}:";
         }
 
         Виробники_Pointer pointer;

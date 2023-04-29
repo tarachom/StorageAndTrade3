@@ -33,7 +33,7 @@ namespace StorageAndTrade
         {
             pointer = new Номенклатура_Папки_Pointer();
             WidthPresentation = 300;
-            Caption = "Родич:";
+            Caption = $"{Номенклатура_Папки_Const.FULLNAME}:";
         }
 
         public string UidOpenFolder { get; set; } = "";

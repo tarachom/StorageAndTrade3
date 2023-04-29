@@ -54,14 +54,14 @@ namespace StorageAndTrade
 
             //Сторінка
             {
-                LinkButton linkPage = new LinkButton(" Країни світу") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
+                LinkButton linkPage = new LinkButton($" {КраїниСвіту_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
                 linkPage.Clicked += (object? sender, EventArgs args) =>
                 {
                     КраїниСвіту page = new КраїниСвіту();
                     page.DirectoryPointerItem = DirectoryPointerItem;
                     page.CallBack_OnSelectPointer = CallBack_OnSelectPointer;
 
-                    Program.GeneralForm?.CreateNotebookPage("Вибір - Країни світу", () => { return page; }, true);
+                    Program.GeneralForm?.CreateNotebookPage($"Вибір - {КраїниСвіту_Const.FULLNAME}", () => { return page; }, true);
 
                     page.LoadRecords();
                 };
@@ -76,7 +76,7 @@ namespace StorageAndTrade
                 {
                     КраїниСвіту_Елемент page = new КраїниСвіту_Елемент { IsNew = true, CallBack_OnSelectPointer = CallBack_OnSelectPointer };
 
-                    Program.GeneralForm?.CreateNotebookPage($"Країни світу: *", () => { return page; }, true);
+                    Program.GeneralForm?.CreateNotebookPage($"{КраїниСвіту_Const.FULLNAME} *", () => { return page; }, true);
 
                     page.SetValue();
                 };

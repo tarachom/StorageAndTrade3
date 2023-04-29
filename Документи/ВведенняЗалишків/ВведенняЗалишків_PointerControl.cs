@@ -31,7 +31,7 @@ namespace StorageAndTrade
         {
             pointer = new ВведенняЗалишків_Pointer();
             WidthPresentation = 300;
-            Caption = "Введення залишків:";
+            Caption = $"{ВведенняЗалишків_Const.FULLNAME}:";
         }
 
         ВведенняЗалишків_Pointer pointer;
@@ -65,7 +65,7 @@ namespace StorageAndTrade
                 Pointer = selectPointer;
             };
 
-            Program.GeneralForm?.CreateNotebookPage("Вибір - Введення залишків", () => { return page; }, true);
+            Program.GeneralForm?.CreateNotebookPage($"Вибір - {ВведенняЗалишків_Const.FULLNAME}", () => { return page; }, true);
 
             if (UseWherePeriod)
                 page.SetValue();

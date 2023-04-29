@@ -99,7 +99,7 @@ namespace StorageAndTrade
             HBox hBoxNumberDataDoc = new HBox() { Halign = Align.Start };
             vBox.PackStart(hBoxNumberDataDoc, false, false, 5);
 
-            hBoxNumberDataDoc.PackStart(new Label("Встановлення цін номенклатури №:"), false, false, 5);
+            hBoxNumberDataDoc.PackStart(new Label($"{ВстановленняЦінНоменклатури_Const.FULLNAME} №:"), false, false, 5);
             hBoxNumberDataDoc.PackStart(НомерДок, false, false, 5);
             hBoxNumberDataDoc.PackStart(new Label("від:"), false, false, 5);
             hBoxNumberDataDoc.PackStart(ДатаДок, false, false, 5);

@@ -31,7 +31,7 @@ namespace StorageAndTrade
         {
             pointer = new Склади_Папки_Pointer();
             WidthPresentation = 300;
-            Caption = "Родич:";
+            Caption = $"{Склади_Папки_Const.FULLNAME}:";
         }
 
         public string UidOpenFolder { get; set; } = "";
@@ -65,7 +65,7 @@ namespace StorageAndTrade
                 Pointer = selectPointer;
             };
 
-            Program.GeneralForm?.CreateNotebookPage("Вибір - Склади папки", () => { return page; }, true);
+            Program.GeneralForm?.CreateNotebookPage($"Вибір - {Склади_Папки_Const.FULLNAME}", () => { return page; }, true);
 
             page.LoadTree();
         }

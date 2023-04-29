@@ -270,7 +270,7 @@ namespace StorageAndTrade
                     IsNew = true
                 };
 
-                Program.GeneralForm?.CreateNotebookPage($"Прихідний касовий ордер: *", () => { return page; }, true);
+                Program.GeneralForm?.CreateNotebookPage($"{ПрихіднийКасовийОрдер_Const.FULLNAME} *", () => { return page; }, true);
 
                 page.SetValue();
             }

@@ -33,7 +33,7 @@ namespace StorageAndTrade
         {
             pointer = new ТипорозміриКомірок_Pointer();
             WidthPresentation = 300;
-            Caption = "Типорозмір:";
+            Caption = $"{ТипорозміриКомірок_Const.FULLNAME}:";
         }
 
         ТипорозміриКомірок_Pointer pointer;

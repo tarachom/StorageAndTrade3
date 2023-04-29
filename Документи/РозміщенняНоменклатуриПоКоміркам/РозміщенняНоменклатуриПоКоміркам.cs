@@ -264,7 +264,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"Розміщення номенклатури по комірках: *", () =>
+                Program.GeneralForm?.CreateNotebookPage($"{РозміщенняНоменклатуриПоКоміркам_Const.FULLNAME} *", () =>
                 {
                     РозміщенняНоменклатуриПоКоміркам_Елемент page = new РозміщенняНоменклатуриПоКоміркам_Елемент
                     {

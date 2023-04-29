@@ -157,7 +157,7 @@ namespace StorageAndTrade
             if (closePage)
                 Program.GeneralForm?.CloseCurrentPageNotebook();
             else
-                Program.GeneralForm?.RenameCurrentPageNotebook($"Банківський рахунок контрагента: {БанківськіРахункиКонтрагентів_Objest.Назва}");
+                Program.GeneralForm?.RenameCurrentPageNotebook($"{БанківськіРахункиКонтрагентів_Objest.Назва}");
 
             if (CallBack_OnSelectPointer != null)
                 CallBack_OnSelectPointer.Invoke(БанківськіРахункиКонтрагентів_Objest.GetDirectoryPointer());

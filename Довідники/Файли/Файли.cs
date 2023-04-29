@@ -121,7 +121,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"Файл: *", () =>
+                Program.GeneralForm?.CreateNotebookPage($"{Файли_Const.FULLNAME} *", () =>
                 {
                     Файли_Елемент page = new Файли_Елемент
                     {
@@ -139,7 +139,7 @@ namespace StorageAndTrade
                 Файли_Objest Файли_Objest = new Файли_Objest();
                 if (Файли_Objest.Read(new UnigueID(uid)))
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"Файл: {Файли_Objest.Назва}", () =>
+                    Program.GeneralForm?.CreateNotebookPage($"{Файли_Objest.Назва}", () =>
                     {
                         Файли_Елемент page = new Файли_Елемент
                         {

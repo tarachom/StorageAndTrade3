@@ -33,7 +33,7 @@ namespace StorageAndTrade
         {
             pointer = new СтаттяРухуКоштів_Pointer();
             WidthPresentation = 300;
-            Caption = "Стаття:";
+            Caption = $"{СтаттяРухуКоштів_Const.FULLNAME}:";
         }
 
         СтаттяРухуКоштів_Pointer pointer;

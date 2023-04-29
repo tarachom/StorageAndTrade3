@@ -31,7 +31,7 @@ namespace StorageAndTrade
         {
             pointer = new РахунокФактура_Pointer();
             WidthPresentation = 300;
-            Caption = "Рахунок фактура:";
+            Caption = $"{РахунокФактура_Const.FULLNAME}:";
         }
 
         РахунокФактура_Pointer pointer;
@@ -65,7 +65,7 @@ namespace StorageAndTrade
                 Pointer = selectPointer;
             };
 
-            Program.GeneralForm?.CreateNotebookPage("Вибір - Рахунок фактура", () => { return page; }, true);
+            Program.GeneralForm?.CreateNotebookPage($"Вибір - {РахунокФактура_Const.FULLNAME}", () => { return page; }, true);
 
             if (UseWherePeriod)
                 page.SetValue();

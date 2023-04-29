@@ -33,7 +33,7 @@ namespace StorageAndTrade
         {
             pointer = new ВидиЗапасів_Pointer();
             WidthPresentation = 300;
-            Caption = "Види запасів:";
+            Caption = $"{ВидиЗапасів_Const.FULLNAME}:";
         }
 
         ВидиЗапасів_Pointer pointer;

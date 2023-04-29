@@ -33,7 +33,7 @@ namespace StorageAndTrade
         {
             pointer = new Склади_Pointer();
             WidthPresentation = 300;
-            Caption = "Склад:";
+            Caption = $"{Склади_Const.FULLNAME}:";
         }
 
         Склади_Pointer pointer;

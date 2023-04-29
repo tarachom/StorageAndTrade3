@@ -98,7 +98,7 @@ namespace StorageAndTrade
         {
             TreeStore.Clear();
 
-            TreeIter rootIter = TreeStore.AppendValues(Guid.Empty.ToString(), " Склади ");
+            TreeIter rootIter = TreeStore.AppendValues(Guid.Empty.ToString(), $" {Склади_Const.FULLNAME} ");
 
             #region SQL
 
@@ -214,7 +214,7 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"Склади Папка: *", () =>
+                Program.GeneralForm?.CreateNotebookPage($"{Склади_Папки_Const.FULLNAME} *", () =>
                 {
                     Склади_Папки_Елемент page = new Склади_Папки_Елемент
                     {
@@ -233,7 +233,7 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
                 Склади_Папки_Objest Склади_Папки_Objest = new Склади_Папки_Objest();
                 if (Склади_Папки_Objest.Read(new UnigueID(uid)))
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"Склади Папка: {Склади_Папки_Objest.Назва}", () =>
+                    Program.GeneralForm?.CreateNotebookPage($"{Склади_Папки_Objest.Назва}", () =>
                     {
                         Склади_Папки_Елемент page = new Склади_Папки_Елемент
                         {

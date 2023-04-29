@@ -121,7 +121,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"Види номенклатури: *", () =>
+                Program.GeneralForm?.CreateNotebookPage($"{ВидиНоменклатури_Const.FULLNAME} *", () =>
                 {
                     ВидиНоменклатури_Елемент page = new ВидиНоменклатури_Елемент
                     {
@@ -139,7 +139,7 @@ namespace StorageAndTrade
                 ВидиНоменклатури_Objest ВидиНоменклатури_Objest = new ВидиНоменклатури_Objest();
                 if (ВидиНоменклатури_Objest.Read(new UnigueID(uid)))
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"Види номенклатури: {ВидиНоменклатури_Objest.Назва}", () =>
+                    Program.GeneralForm?.CreateNotebookPage($"{ВидиНоменклатури_Objest.Назва}", () =>
                     {
                         ВидиНоменклатури_Елемент page = new ВидиНоменклатури_Елемент
                         {

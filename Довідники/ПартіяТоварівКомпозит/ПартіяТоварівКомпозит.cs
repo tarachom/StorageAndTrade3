@@ -115,7 +115,7 @@ namespace StorageAndTrade
                 ПартіяТоварівКомпозит_Objest ПартіяТоварівКомпозит_Objest = new ПартіяТоварівКомпозит_Objest();
                 if (ПартіяТоварівКомпозит_Objest.Read(new UnigueID(uid)))
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"Партія: {ПартіяТоварівКомпозит_Objest.Назва}", () =>
+                    Program.GeneralForm?.CreateNotebookPage($"{ПартіяТоварівКомпозит_Objest.Назва}", () =>
                     {
                         ПартіяТоварівКомпозит_Елемент page = new ПартіяТоварівКомпозит_Елемент
                         {

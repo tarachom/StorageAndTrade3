@@ -33,7 +33,7 @@ namespace StorageAndTrade
         {
             pointer = new БанківськіРахункиОрганізацій_Pointer();
             WidthPresentation = 300;
-            Caption = "Банківський рахунок організації:";
+            Caption = $"{БанківськіРахункиОрганізацій_Const.FULLNAME}:";
         }
 
         БанківськіРахункиОрганізацій_Pointer pointer;

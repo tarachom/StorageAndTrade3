@@ -121,7 +121,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"Структура підприємства: *", () =>
+                Program.GeneralForm?.CreateNotebookPage($"{СтруктураПідприємства_Const.FULLNAME} *", () =>
                 {
                     СтруктураПідприємства_Елемент page = new СтруктураПідприємства_Елемент
                     {
@@ -139,7 +139,7 @@ namespace StorageAndTrade
                 СтруктураПідприємства_Objest СтруктураПідприємства_Objest = new СтруктураПідприємства_Objest();
                 if (СтруктураПідприємства_Objest.Read(new UnigueID(uid)))
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"Структура підприємства: {СтруктураПідприємства_Objest.Назва}", () =>
+                    Program.GeneralForm?.CreateNotebookPage($"{СтруктураПідприємства_Objest.Назва}", () =>
                     {
                         СтруктураПідприємства_Елемент page = new СтруктураПідприємства_Елемент
                         {

@@ -54,14 +54,14 @@ namespace StorageAndTrade
 
             //Сторінка
             {
-                LinkButton linkPage = new LinkButton(" Види запасів") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
+                LinkButton linkPage = new LinkButton($" {ВидиЗапасів_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
                 linkPage.Clicked += (object? sender, EventArgs args) =>
                 {
                     ВидиЗапасів page = new ВидиЗапасів();
                     page.DirectoryPointerItem = DirectoryPointerItem;
                     page.CallBack_OnSelectPointer = CallBack_OnSelectPointer;
 
-                    Program.GeneralForm?.CreateNotebookPage("Вибір - Види запасів", () => { return page; }, true);
+                    Program.GeneralForm?.CreateNotebookPage($"Вибір - {ВидиЗапасів_Const.FULLNAME}", () => { return page; }, true);
 
                     page.LoadRecords();
                 };
@@ -76,7 +76,7 @@ namespace StorageAndTrade
                 {
                     ВидиЗапасів_Елемент page = new ВидиЗапасів_Елемент { IsNew = true, CallBack_OnSelectPointer = CallBack_OnSelectPointer };
 
-                    Program.GeneralForm?.CreateNotebookPage($"Види запасів: *", () => { return page; }, true);
+                    Program.GeneralForm?.CreateNotebookPage($"{ВидиЗапасів_Const.FULLNAME} *", () => { return page; }, true);
 
                     page.SetValue();
                 };

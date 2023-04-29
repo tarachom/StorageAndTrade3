@@ -54,14 +54,14 @@ namespace StorageAndTrade
 
             //Сторінка
             {
-                LinkButton linkPage = new LinkButton(" Статті руху коштів") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
+                LinkButton linkPage = new LinkButton($" {СтаттяРухуКоштів_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
                 linkPage.Clicked += (object? sender, EventArgs args) =>
                 {
                     СтаттяРухуКоштів page = new СтаттяРухуКоштів();
                     page.DirectoryPointerItem = DirectoryPointerItem;
                     page.CallBack_OnSelectPointer = CallBack_OnSelectPointer;
 
-                    Program.GeneralForm?.CreateNotebookPage("Вибір - Статті руху коштів", () => { return page; }, true);
+                    Program.GeneralForm?.CreateNotebookPage($"Вибір - {СтаттяРухуКоштів_Const.FULLNAME}", () => { return page; }, true);
 
                     page.LoadRecords();
                 };
@@ -76,7 +76,7 @@ namespace StorageAndTrade
                 {
                     СтаттяРухуКоштів_Елемент page = new СтаттяРухуКоштів_Елемент { IsNew = true, CallBack_OnSelectPointer = CallBack_OnSelectPointer };
 
-                    Program.GeneralForm?.CreateNotebookPage($"Статті руху коштів: *", () => { return page; }, true);
+                    Program.GeneralForm?.CreateNotebookPage($"{СтаттяРухуКоштів_Const.FULLNAME} *", () => { return page; }, true);
 
                     page.SetValue();
                 };

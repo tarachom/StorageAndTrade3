@@ -139,7 +139,7 @@ namespace StorageAndTrade
             if (closePage)
                 Program.GeneralForm?.CloseCurrentPageNotebook();
             else
-                Program.GeneralForm?.RenameCurrentPageNotebook($"Виробники: {Виробники_Objest.Назва}");
+                Program.GeneralForm?.RenameCurrentPageNotebook($"{Виробники_Objest.Назва}");
 
             if (CallBack_OnSelectPointer != null)
                 CallBack_OnSelectPointer.Invoke(Виробники_Objest.GetDirectoryPointer());

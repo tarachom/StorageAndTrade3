@@ -56,7 +56,7 @@ namespace StorageAndTrade
 
             //Сторінка
             {
-                LinkButton linkPage = new LinkButton(" Складські комірки") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
+                LinkButton linkPage = new LinkButton($" {СкладськіКомірки_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
                 linkPage.Clicked += (object? sender, EventArgs args) =>
                 {
                     СкладськіКомірки page = new СкладськіКомірки();
@@ -64,7 +64,7 @@ namespace StorageAndTrade
                     page.СкладПриміщенняВласник.Pointer = СкладПриміщенняВласник.Pointer;
                     page.CallBack_OnSelectPointer = CallBack_OnSelectPointer;
 
-                    Program.GeneralForm?.CreateNotebookPage("Вибір - Складські комірки", () => { return page; }, true);
+                    Program.GeneralForm?.CreateNotebookPage($"Вибір - {СкладськіКомірки_Const.FULLNAME}", () => { return page; }, true);
 
                     page.LoadTree();
                 };
@@ -79,7 +79,7 @@ namespace StorageAndTrade
                 {
                     СкладськіКомірки_Елемент page = new СкладськіКомірки_Елемент { IsNew = true, CallBack_OnSelectPointer = CallBack_OnSelectPointer };
 
-                    Program.GeneralForm?.CreateNotebookPage($"Складські комірки: *", () => { return page; }, true);
+                    Program.GeneralForm?.CreateNotebookPage($"{СкладськіКомірки_Const.FULLNAME} *", () => { return page; }, true);
 
                     page.SetValue();
                 };
@@ -89,7 +89,7 @@ namespace StorageAndTrade
 
             //Власник
             hBoxTop.PackStart(СкладПриміщенняВласник, false, false, 2);
-            СкладПриміщенняВласник.Caption = "Приміщення:";
+            СкладПриміщенняВласник.Caption = $"{СкладськіПриміщення_Const.FULLNAME}:";
             СкладПриміщенняВласник.AfterSelectFunc = () =>
             {
                 LoadRecords();

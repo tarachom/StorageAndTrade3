@@ -33,7 +33,7 @@ namespace StorageAndTrade
         {
             pointer = new СкладськіКомірки_Pointer();
             WidthPresentation = 300;
-            Caption = "Складська комірка:";
+            Caption = $"{СкладськіКомірки_Const.FULLNAME}:";
         }
 
         СкладськіКомірки_Pointer pointer;

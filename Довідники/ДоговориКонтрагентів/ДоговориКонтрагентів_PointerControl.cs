@@ -33,7 +33,7 @@ namespace StorageAndTrade
         {
             pointer = new ДоговориКонтрагентів_Pointer();
             WidthPresentation = 300;
-            Caption = "Договір:";
+            Caption = $"{ДоговориКонтрагентів_Const.FULLNAME}:";
         }
 
         ДоговориКонтрагентів_Pointer pointer;

@@ -33,7 +33,7 @@ namespace StorageAndTrade
         {
             pointer = new Файли_Pointer();
             WidthPresentation = 300;
-            Caption = "Файл:";
+            Caption = $"{Файли_Const.FULLNAME}:";
         }
 
         Файли_Pointer pointer;

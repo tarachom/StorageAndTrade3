@@ -167,7 +167,7 @@ namespace StorageAndTrade
             if (closePage)
                 Program.GeneralForm?.CloseCurrentPageNotebook();
             else
-                Program.GeneralForm?.RenameCurrentPageNotebook($"Блокнот: {Блокнот_Objest.Назва}");
+                Program.GeneralForm?.RenameCurrentPageNotebook($"{Блокнот_Objest.Назва}");
 
             if (CallBack_OnSelectPointer != null)
                 CallBack_OnSelectPointer.Invoke(Блокнот_Objest.GetDirectoryPointer());

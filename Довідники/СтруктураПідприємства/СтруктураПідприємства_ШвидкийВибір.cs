@@ -54,14 +54,14 @@ namespace StorageAndTrade
 
             //Сторінка
             {
-                LinkButton linkPage = new LinkButton(" Підрозділ") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
+                LinkButton linkPage = new LinkButton($" {СтруктураПідприємства_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
                 linkPage.Clicked += (object? sender, EventArgs args) =>
                 {
                     СтруктураПідприємства page = new СтруктураПідприємства();
                     page.DirectoryPointerItem = DirectoryPointerItem;
                     page.CallBack_OnSelectPointer = CallBack_OnSelectPointer;
 
-                    Program.GeneralForm?.CreateNotebookPage("Вибір - Підрозділ", () => { return page; }, true);
+                    Program.GeneralForm?.CreateNotebookPage($"Вибір - {СтруктураПідприємства_Const.FULLNAME}", () => { return page; }, true);
 
                     page.LoadRecords();
                 };
@@ -76,7 +76,7 @@ namespace StorageAndTrade
                 {
                     СтруктураПідприємства_Елемент page = new СтруктураПідприємства_Елемент { IsNew = true, CallBack_OnSelectPointer = CallBack_OnSelectPointer };
 
-                    Program.GeneralForm?.CreateNotebookPage($"Підрозділ: *", () => { return page; }, true);
+                    Program.GeneralForm?.CreateNotebookPage($"{СтруктураПідприємства_Const.FULLNAME} *", () => { return page; }, true);
 
                     page.SetValue();
                 };

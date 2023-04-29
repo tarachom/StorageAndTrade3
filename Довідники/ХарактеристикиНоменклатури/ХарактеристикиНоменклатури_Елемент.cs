@@ -165,7 +165,7 @@ namespace StorageAndTrade
             if (closePage)
                 Program.GeneralForm?.CloseCurrentPageNotebook();
             else
-                Program.GeneralForm?.RenameCurrentPageNotebook($"Характеристики: {ХарактеристикиНоменклатури_Objest.Назва}");
+                Program.GeneralForm?.RenameCurrentPageNotebook($"{ХарактеристикиНоменклатури_Objest.Назва}");
 
             if (CallBack_OnSelectPointer != null)
                 CallBack_OnSelectPointer.Invoke(ХарактеристикиНоменклатури_Objest.GetDirectoryPointer());

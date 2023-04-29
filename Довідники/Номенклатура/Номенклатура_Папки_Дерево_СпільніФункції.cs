@@ -40,7 +40,7 @@ namespace StorageAndTrade
         {
             TreeStore.Clear();
 
-            TreeIter rootIter = TreeStore.AppendValues(Guid.Empty.ToString(), " Номенклатура ");
+            TreeIter rootIter = TreeStore.AppendValues(Guid.Empty.ToString(), $" {Номенклатура_Const.FULLNAME} ");
 
             #region SQL
 

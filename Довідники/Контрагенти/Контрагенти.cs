@@ -61,7 +61,7 @@ namespace StorageAndTrade
 
             //Договори
             {
-                LinkButton linkButton = new LinkButton(" Договори") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
+                LinkButton linkButton = new LinkButton($" {ДоговориКонтрагентів_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
                 linkButton.Clicked += (object? sender, EventArgs args) =>
                 {
                     ДоговориКонтрагентів page = new ДоговориКонтрагентів();
@@ -69,7 +69,7 @@ namespace StorageAndTrade
                     if (SelectPointerItem != null)
                         page.КонтрагентВласник.Pointer = SelectPointerItem;
 
-                    Program.GeneralForm?.CreateNotebookPage("Договори", () => { return page; });
+                    Program.GeneralForm?.CreateNotebookPage($"{ДоговориКонтрагентів_Const.FULLNAME}", () => { return page; });
 
                     page.LoadRecords();
                 };
@@ -211,7 +211,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"Контрагент: *", () =>
+                Program.GeneralForm?.CreateNotebookPage($"{Контрагенти_Const.FULLNAME} *", () =>
                 {
                     Контрагенти_Елемент page = new Контрагенти_Елемент
                     {
@@ -230,7 +230,7 @@ namespace StorageAndTrade
                 Контрагенти_Objest Контрагенти_Objest = new Контрагенти_Objest();
                 if (Контрагенти_Objest.Read(new UnigueID(uid)))
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"Контрагент: {Контрагенти_Objest.Назва}", () =>
+                    Program.GeneralForm?.CreateNotebookPage($"{Контрагенти_Objest.Назва}", () =>
                     {
                         Контрагенти_Елемент page = new Контрагенти_Елемент
                         {

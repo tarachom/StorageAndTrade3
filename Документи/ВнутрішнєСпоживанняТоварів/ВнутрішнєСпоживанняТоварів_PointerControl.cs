@@ -31,7 +31,7 @@ namespace StorageAndTrade
         {
             pointer = new ВнутрішнєСпоживанняТоварів_Pointer();
             WidthPresentation = 300;
-            Caption = "Внутрішнє споживання товарів:";
+            Caption = $"{ВнутрішнєСпоживанняТоварів_Const.FULLNAME}:";
         }
 
         ВнутрішнєСпоживанняТоварів_Pointer pointer;
@@ -65,7 +65,7 @@ namespace StorageAndTrade
                 Pointer = selectPointer;
             };
 
-            Program.GeneralForm?.CreateNotebookPage("Вибір - Внутрішнє споживання товарів", () => { return page; }, true);
+            Program.GeneralForm?.CreateNotebookPage($"Вибір - {ВнутрішнєСпоживанняТоварів_Const.FULLNAME}", () => { return page; }, true);
 
             if (UseWherePeriod)
                 page.SetValue();

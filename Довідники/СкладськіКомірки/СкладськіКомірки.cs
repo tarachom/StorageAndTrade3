@@ -204,7 +204,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"Складські комірки: *", () =>
+                Program.GeneralForm?.CreateNotebookPage($"{СкладськіКомірки_Const.FULLNAME} *", () =>
                 {
                     СкладськіКомірки_Елемент page = new СкладськіКомірки_Елемент
                     {
@@ -224,7 +224,7 @@ namespace StorageAndTrade
                 СкладськіКомірки_Objest СкладськіКомірки_Objest = new СкладськіКомірки_Objest();
                 if (СкладськіКомірки_Objest.Read(new UnigueID(uid)))
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"Складські комірки: {СкладськіКомірки_Objest.Назва}", () =>
+                    Program.GeneralForm?.CreateNotebookPage($"{СкладськіКомірки_Objest.Назва}", () =>
                     {
                         СкладськіКомірки_Елемент page = new СкладськіКомірки_Елемент
                         {

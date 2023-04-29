@@ -33,7 +33,7 @@ namespace StorageAndTrade
         {
             pointer = new СеріїНоменклатури_Pointer();
             WidthPresentation = 300;
-            Caption = "Серія:";
+            Caption = $"{СеріїНоменклатури_Const.FULLNAME}:";
         }
 
         СеріїНоменклатури_Pointer pointer;

@@ -334,7 +334,7 @@ namespace StorageAndTrade
             if (closePage)
                 Program.GeneralForm?.CloseCurrentPageNotebook();
             else
-                Program.GeneralForm?.RenameCurrentPageNotebook($"Договір: {ДоговориКонтрагентів_Objest.Назва}");
+                Program.GeneralForm?.RenameCurrentPageNotebook($"{ДоговориКонтрагентів_Objest.Назва}");
 
             if (CallBack_OnSelectPointer != null)
                 CallBack_OnSelectPointer.Invoke(ДоговориКонтрагентів_Objest.GetDirectoryPointer());

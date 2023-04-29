@@ -170,7 +170,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"Виробник: *", () =>
+                Program.GeneralForm?.CreateNotebookPage($"{Банки_Const.FULLNAME} *", () =>
                 {
                     Банки_Елемент page = new Банки_Елемент
                     {
@@ -188,13 +188,13 @@ namespace StorageAndTrade
                 Банки_Objest Банки_Objest = new Банки_Objest();
                 if (Банки_Objest.Read(new UnigueID(uid)))
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"Виробник: {Банки_Objest.Назва}", () =>
+                    Program.GeneralForm?.CreateNotebookPage($"{Банки_Const.FULLNAME}: {Банки_Objest.Назва}", () =>
                     {
                         Банки_Елемент page = new Банки_Елемент
                         {
                             PageList = this,
                             IsNew = false,
-                            Банки_Objest = Банки_Objest,
+                            Банки_Objest = Банки_Objest
                         };
 
                         page.SetValue();

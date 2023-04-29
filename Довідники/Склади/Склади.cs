@@ -60,7 +60,7 @@ namespace StorageAndTrade
             ПошукПовнотекстовий.Clear = LoadRecords;
 
             //Склади приміщення
-            LinkButton linkButtonHar = new LinkButton(" Складські приміщення") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
+            LinkButton linkButtonHar = new LinkButton($" {СкладськіПриміщення_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
             linkButtonHar.Clicked += (object? sender, EventArgs args) =>
             {
                 СкладськіПриміщення page = new СкладськіПриміщення();
@@ -68,7 +68,7 @@ namespace StorageAndTrade
                 if (SelectPointerItem != null)
                     page.СкладВласник.Pointer = SelectPointerItem;
 
-                Program.GeneralForm?.CreateNotebookPage("Складські приміщення", () => { return page; });
+                Program.GeneralForm?.CreateNotebookPage($"{СкладськіПриміщення_Const.FULLNAME}", () => { return page; });
 
                 page.LoadRecords();
             };
@@ -207,7 +207,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"Склад: *", () =>
+                Program.GeneralForm?.CreateNotebookPage($"{Склади_Const.FULLNAME} *", () =>
                 {
                     Склади_Елемент page = new Склади_Елемент
                     {
@@ -226,7 +226,7 @@ namespace StorageAndTrade
                 Склади_Objest Склади_Objest = new Склади_Objest();
                 if (Склади_Objest.Read(new UnigueID(uid)))
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"Склад: {Склади_Objest.Назва}", () =>
+                    Program.GeneralForm?.CreateNotebookPage($"{Склади_Objest.Назва}", () =>
                     {
                         Склади_Елемент page = new Склади_Елемент
                         {

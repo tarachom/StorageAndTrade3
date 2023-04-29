@@ -33,7 +33,7 @@ namespace StorageAndTrade
         {
             pointer = new Користувачі_Pointer();
             WidthPresentation = 300;
-            Caption = "Користувач:";
+            Caption = $"{Користувачі_Const.FULLNAME}:";
         }
 
         Користувачі_Pointer pointer;

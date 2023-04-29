@@ -55,7 +55,7 @@ namespace StorageAndTrade
 
             //Сторінка
             {
-                LinkButton linkPage = new LinkButton(" Характеристики") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
+                LinkButton linkPage = new LinkButton($" {ХарактеристикиНоменклатури_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
                 linkPage.Clicked += (object? sender, EventArgs args) =>
                 {
                     ХарактеристикиНоменклатури page = new ХарактеристикиНоменклатури();
@@ -63,7 +63,7 @@ namespace StorageAndTrade
                     page.НоменклатураВласник.Pointer = НоменклатураВласник.Pointer;
                     page.CallBack_OnSelectPointer = CallBack_OnSelectPointer;
 
-                    Program.GeneralForm?.CreateNotebookPage("Вибір - Характеристики", () => { return page; }, true);
+                    Program.GeneralForm?.CreateNotebookPage($"Вибір - {ХарактеристикиНоменклатури_Const.FULLNAME}", () => { return page; }, true);
 
                     page.LoadRecords();
                 };
@@ -83,7 +83,7 @@ namespace StorageAndTrade
                         CallBack_OnSelectPointer = CallBack_OnSelectPointer
                     };
 
-                    Program.GeneralForm?.CreateNotebookPage($"Характеристики: *", () => { return page; }, true);
+                    Program.GeneralForm?.CreateNotebookPage($"{ХарактеристикиНоменклатури_Const.FULLNAME} *", () => { return page; }, true);
 
                     page.SetValue();
                 };
@@ -93,7 +93,7 @@ namespace StorageAndTrade
 
             //Власник
             hBoxTop.PackStart(НоменклатураВласник, false, false, 2);
-            НоменклатураВласник.Caption = "Номенклатура:";
+            НоменклатураВласник.Caption = $"{Номенклатура_Const.FULLNAME}:";
             НоменклатураВласник.AfterSelectFunc = () =>
             {
                 LoadRecords();

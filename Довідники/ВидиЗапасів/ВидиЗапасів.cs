@@ -156,7 +156,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"Види запасів: *", () =>
+                Program.GeneralForm?.CreateNotebookPage($"{ВидиЗапасів_Const.FULLNAME} *", () =>
                 {
                     ВидиЗапасів_Елемент page = new ВидиЗапасів_Елемент
                     {
@@ -174,7 +174,7 @@ namespace StorageAndTrade
                 ВидиЗапасів_Objest ВидиЗапасів_Objest = new ВидиЗапасів_Objest();
                 if (ВидиЗапасів_Objest.Read(new UnigueID(uid)))
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"Види запасів: {ВидиЗапасів_Objest.Назва}", () =>
+                    Program.GeneralForm?.CreateNotebookPage($"{ВидиЗапасів_Objest.Назва}", () =>
                     {
                         ВидиЗапасів_Елемент page = new ВидиЗапасів_Елемент
                         {

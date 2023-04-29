@@ -156,7 +156,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"Країни світу: *", () =>
+                Program.GeneralForm?.CreateNotebookPage($"{КраїниСвіту_Const.FULLNAME} *", () =>
                 {
                     КраїниСвіту_Елемент page = new КраїниСвіту_Елемент
                     {
@@ -174,7 +174,7 @@ namespace StorageAndTrade
                 КраїниСвіту_Objest КраїниСвіту_Objest = new КраїниСвіту_Objest();
                 if (КраїниСвіту_Objest.Read(new UnigueID(uid)))
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"Країни світу: {КраїниСвіту_Objest.Назва}", () =>
+                    Program.GeneralForm?.CreateNotebookPage($"{КраїниСвіту_Objest.Назва}", () =>
                     {
                         КраїниСвіту_Елемент page = new КраїниСвіту_Елемент
                         {

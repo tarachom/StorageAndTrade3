@@ -99,7 +99,7 @@ namespace StorageAndTrade
         {
             TreeStore.Clear();
 
-            TreeIter rootIter = TreeStore.AppendValues(Guid.Empty.ToString(), " Складські комірки ");
+            TreeIter rootIter = TreeStore.AppendValues(Guid.Empty.ToString(), $" {СкладськіКомірки_Const.FULLNAME} ");
 
             #region SQL
 
@@ -229,7 +229,7 @@ ORDER BY level ASC
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"СкладськіКомірки папка: *", () =>
+                Program.GeneralForm?.CreateNotebookPage($"{СкладськіКомірки_Папки_Const.FULLNAME} *", () =>
                 {
                     СкладськіКомірки_Папки_Елемент page = new СкладськіКомірки_Папки_Елемент
                     {
@@ -249,7 +249,7 @@ ORDER BY level ASC
                 СкладськіКомірки_Папки_Objest СкладськіКомірки_Папки_Objest = new СкладськіКомірки_Папки_Objest();
                 if (СкладськіКомірки_Папки_Objest.Read(new UnigueID(uid)))
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"СкладськіКомірки папка: {СкладськіКомірки_Папки_Objest.Назва}", () =>
+                    Program.GeneralForm?.CreateNotebookPage($"{СкладськіКомірки_Папки_Objest.Назва}", () =>
                     {
                         СкладськіКомірки_Папки_Елемент page = new СкладськіКомірки_Папки_Елемент
                         {

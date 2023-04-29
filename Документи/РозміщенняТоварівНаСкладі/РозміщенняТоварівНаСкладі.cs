@@ -264,7 +264,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"Розміщення товарів на складі: *", () =>
+                Program.GeneralForm?.CreateNotebookPage($"{РозміщенняТоварівНаСкладі_Const.FULLNAME} *", () =>
                 {
                     РозміщенняТоварівНаСкладі_Елемент page = new РозміщенняТоварівНаСкладі_Елемент
                     {

@@ -55,7 +55,7 @@ namespace StorageAndTrade
 
             //Сторінка
             {
-                LinkButton linkPage = new LinkButton(" Договори") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
+                LinkButton linkPage = new LinkButton($" {ДоговориКонтрагентів_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
                 linkPage.Clicked += (object? sender, EventArgs args) =>
                 {
                     ДоговориКонтрагентів page = new ДоговориКонтрагентів();
@@ -63,7 +63,7 @@ namespace StorageAndTrade
                     page.КонтрагентВласник.Pointer = КонтрагентВласник.Pointer;
                     page.CallBack_OnSelectPointer = CallBack_OnSelectPointer;
 
-                    Program.GeneralForm?.CreateNotebookPage("Вибір - Договори", () => { return page; }, true);
+                    Program.GeneralForm?.CreateNotebookPage($"Вибір - {ДоговориКонтрагентів_Const.FULLNAME}", () => { return page; }, true);
 
                     page.LoadRecords();
                 };
@@ -78,7 +78,7 @@ namespace StorageAndTrade
                 {
                     ДоговориКонтрагентів_Елемент page = new ДоговориКонтрагентів_Елемент { IsNew = true, CallBack_OnSelectPointer = CallBack_OnSelectPointer };
 
-                    Program.GeneralForm?.CreateNotebookPage($"Договори: *", () => { return page; }, true);
+                    Program.GeneralForm?.CreateNotebookPage($"{ДоговориКонтрагентів_Const.FULLNAME} *", () => { return page; }, true);
 
                     page.SetValue();
                 };

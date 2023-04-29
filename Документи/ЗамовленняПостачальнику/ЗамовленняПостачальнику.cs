@@ -286,7 +286,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"Замовлення постачальнику: *", () =>
+                Program.GeneralForm?.CreateNotebookPage($"{ЗамовленняПостачальнику_Const.FULLNAME} *", () =>
                 {
                     ЗамовленняПостачальнику_Елемент page = new ЗамовленняПостачальнику_Елемент
                     {

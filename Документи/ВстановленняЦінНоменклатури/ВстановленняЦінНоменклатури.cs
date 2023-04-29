@@ -264,7 +264,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"Встановлення цін номенклатури: *", () =>
+                Program.GeneralForm?.CreateNotebookPage($"{ВстановленняЦінНоменклатури_Const.FULLNAME} *", () =>
                 {
                     ВстановленняЦінНоменклатури_Елемент page = new ВстановленняЦінНоменклатури_Елемент
                     {

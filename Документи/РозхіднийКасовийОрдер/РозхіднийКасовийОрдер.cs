@@ -352,7 +352,7 @@ namespace StorageAndTrade
                     IsNew = true
                 };
 
-                Program.GeneralForm?.CreateNotebookPage($"Розхідний касовий ордер: *", () => { return page; }, true);
+                Program.GeneralForm?.CreateNotebookPage($"{РозхіднийКасовийОрдер_Const.FULLNAME} *", () => { return page; }, true);
 
                 page.SetValue();
             }

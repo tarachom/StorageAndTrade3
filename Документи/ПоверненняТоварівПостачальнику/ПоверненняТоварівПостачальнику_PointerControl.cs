@@ -31,7 +31,7 @@ namespace StorageAndTrade
         {
             pointer = new ПоверненняТоварівПостачальнику_Pointer();
             WidthPresentation = 300;
-            Caption = "Повернення товарів постачальнику:";
+            Caption = $"{ПоверненняТоварівПостачальнику_Const.FULLNAME}:";
         }
 
         ПоверненняТоварівПостачальнику_Pointer pointer;
@@ -65,7 +65,7 @@ namespace StorageAndTrade
                 Pointer = selectPointer;
             };
 
-            Program.GeneralForm?.CreateNotebookPage("Вибір - Повернення товарів постачальнику", () => { return page; }, true);
+            Program.GeneralForm?.CreateNotebookPage($"Вибір - {ПоверненняТоварівПостачальнику_Const.FULLNAME}", () => { return page; }, true);
 
             if (UseWherePeriod)
                 page.SetValue();

@@ -163,7 +163,7 @@ namespace StorageAndTrade
             if (closePage)
                 Program.GeneralForm?.CloseCurrentPageNotebook();
             else
-                Program.GeneralForm?.RenameCurrentPageNotebook($"Користувач: {Користувачі_Objest.Назва}");
+                Program.GeneralForm?.RenameCurrentPageNotebook($"{Користувачі_Objest.Назва}");
 
             if (CallBack_OnSelectPointer != null)
                 CallBack_OnSelectPointer.Invoke(Користувачі_Objest.GetDirectoryPointer());

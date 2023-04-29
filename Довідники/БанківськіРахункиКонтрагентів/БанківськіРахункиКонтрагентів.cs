@@ -121,7 +121,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"Банківський рахунок контрагента: *", () =>
+                Program.GeneralForm?.CreateNotebookPage($"{БанківськіРахункиКонтрагентів_Const.FULLNAME} *", () =>
                 {
                     БанківськіРахункиКонтрагентів_Елемент page = new БанківськіРахункиКонтрагентів_Елемент
                     {
@@ -139,7 +139,7 @@ namespace StorageAndTrade
                 БанківськіРахункиКонтрагентів_Objest БанківськіРахункиКонтрагентів_Objest = new БанківськіРахункиКонтрагентів_Objest();
                 if (БанківськіРахункиКонтрагентів_Objest.Read(new UnigueID(uid)))
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"Банківський рахунок контрагента: {БанківськіРахункиКонтрагентів_Objest.Назва}", () =>
+                    Program.GeneralForm?.CreateNotebookPage($"{БанківськіРахункиКонтрагентів_Objest.Назва}", () =>
                     {
                         БанківськіРахункиКонтрагентів_Елемент page = new БанківськіРахункиКонтрагентів_Елемент
                         {

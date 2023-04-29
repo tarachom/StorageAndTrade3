@@ -26,6 +26,7 @@ using Gtk;
 using AccountingSoftware;
 
 using StorageAndTrade_1_0.Довідники;
+using StorageAndTrade_1_0.РегістриВідомостей;
 
 using ТабличніСписки = StorageAndTrade_1_0.Довідники.ТабличніСписки;
 
@@ -61,7 +62,7 @@ namespace StorageAndTrade
 
             //Характеристики
             {
-                LinkButton linkButtonHar = new LinkButton(" Характеристики номеклатури") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
+                LinkButton linkButtonHar = new LinkButton($" {ХарактеристикиНоменклатури_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
                 linkButtonHar.Clicked += (object? sender, EventArgs args) =>
                 {
                     ХарактеристикиНоменклатури page = new ХарактеристикиНоменклатури();
@@ -69,7 +70,7 @@ namespace StorageAndTrade
                     if (SelectPointerItem != null)
                         page.НоменклатураВласник.Pointer = SelectPointerItem;
 
-                    Program.GeneralForm?.CreateNotebookPage("Характеристики номенклатури", () => { return page; });
+                    Program.GeneralForm?.CreateNotebookPage($"{ХарактеристикиНоменклатури_Const.FULLNAME}", () => { return page; });
 
                     page.LoadRecords();
                 };
@@ -79,7 +80,7 @@ namespace StorageAndTrade
 
             //ШтрихКоди
             {
-                LinkButton linkButtonShKody = new LinkButton(" Штрихкоди") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
+                LinkButton linkButtonShKody = new LinkButton($" {ШтрихкодиНоменклатури_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
                 linkButtonShKody.Clicked += (object? sender, EventArgs args) =>
                 {
                     ШтрихкодиНоменклатури page = new ШтрихкодиНоменклатури();
@@ -87,7 +88,7 @@ namespace StorageAndTrade
                     if (SelectPointerItem != null)
                         page.НоменклатураВласник.Pointer = SelectPointerItem;
 
-                    Program.GeneralForm?.CreateNotebookPage("Штрихкоди номенклатури", () => { return page; });
+                    Program.GeneralForm?.CreateNotebookPage($"{ШтрихкодиНоменклатури_Const.FULLNAME}", () => { return page; });
 
                     page.LoadRecords();
                 };
@@ -229,7 +230,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"Номенклатура: *", () =>
+                Program.GeneralForm?.CreateNotebookPage($"{Номенклатура_Const.FULLNAME} *", () =>
                 {
                     Номенклатура_Елемент page = new Номенклатура_Елемент
                     {
@@ -248,7 +249,7 @@ namespace StorageAndTrade
                 Номенклатура_Objest Номенклатура_Objest = new Номенклатура_Objest();
                 if (Номенклатура_Objest.Read(new UnigueID(uid)))
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"Номенклатура: {Номенклатура_Objest.Назва}", () =>
+                    Program.GeneralForm?.CreateNotebookPage($"{Номенклатура_Objest.Назва}", () =>
                     {
                         Номенклатура_Елемент page = new Номенклатура_Елемент
                         {

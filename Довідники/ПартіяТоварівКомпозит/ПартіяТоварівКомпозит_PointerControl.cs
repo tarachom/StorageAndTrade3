@@ -31,7 +31,7 @@ namespace StorageAndTrade
         {
             pointer = new ПартіяТоварівКомпозит_Pointer();
             WidthPresentation = 300;
-            Caption = "Партія:";
+            Caption = $"{ПартіяТоварівКомпозит_Const.FULLNAME}:";
         }
 
         ПартіяТоварівКомпозит_Pointer pointer;
@@ -62,7 +62,7 @@ namespace StorageAndTrade
                 Pointer = selectPointer;
             };
 
-            Program.GeneralForm?.CreateNotebookPage("Вибір - Партія", () => { return page; }, true);
+            Program.GeneralForm?.CreateNotebookPage($"Вибір - {ПартіяТоварівКомпозит_Const.FULLNAME}", () => { return page; }, true);
 
             page.LoadRecords();
         }

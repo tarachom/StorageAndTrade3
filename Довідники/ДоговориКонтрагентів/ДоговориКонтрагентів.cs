@@ -25,7 +25,6 @@ using Gtk;
 
 using AccountingSoftware;
 
-using StorageAndTrade_1_0.Константи;
 using StorageAndTrade_1_0.Довідники;
 
 using ТабличніСписки = StorageAndTrade_1_0.Довідники.ТабличніСписки;
@@ -51,7 +50,7 @@ namespace StorageAndTrade
 
             //Власник
             hBoxTop.PackStart(КонтрагентВласник, false, false, 2);
-            КонтрагентВласник.Caption = "Контрагент:";
+            КонтрагентВласник.Caption = $"{Контрагенти_Const.FULLNAME}:";
             КонтрагентВласник.AfterSelectFunc = () =>
             {
                 LoadRecords();
@@ -143,7 +142,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"Договір: *", () =>
+                Program.GeneralForm?.CreateNotebookPage($"{ДоговориКонтрагентів_Const.FULLNAME} *", () =>
                 {
                     ДоговориКонтрагентів_Елемент page = new ДоговориКонтрагентів_Елемент
                     {
@@ -161,7 +160,7 @@ namespace StorageAndTrade
                 ДоговориКонтрагентів_Objest ДоговориКонтрагентів_Objest = new ДоговориКонтрагентів_Objest();
                 if (ДоговориКонтрагентів_Objest.Read(new UnigueID(uid)))
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"Договір: {ДоговориКонтрагентів_Objest.Назва}", () =>
+                    Program.GeneralForm?.CreateNotebookPage($"{ДоговориКонтрагентів_Objest.Назва}", () =>
                     {
                         ДоговориКонтрагентів_Елемент page = new ДоговориКонтрагентів_Елемент
                         {

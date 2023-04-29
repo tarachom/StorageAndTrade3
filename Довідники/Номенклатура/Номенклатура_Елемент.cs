@@ -270,7 +270,7 @@ namespace StorageAndTrade
             if (closePage)
                 Program.GeneralForm?.CloseCurrentPageNotebook();
             else
-                Program.GeneralForm?.RenameCurrentPageNotebook($"Номенклатура: {Номенклатура_Objest.Назва}");
+                Program.GeneralForm?.RenameCurrentPageNotebook($"{Номенклатура_Objest.Назва}");
 
             if (CallBack_OnSelectPointer != null)
                 CallBack_OnSelectPointer.Invoke(Номенклатура_Objest.GetDirectoryPointer());

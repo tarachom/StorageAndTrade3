@@ -97,7 +97,7 @@ namespace StorageAndTrade
         {
             TreeStore.Clear();
 
-            TreeIter rootIter = TreeStore.AppendValues(Guid.Empty.ToString(), " Контрагенти ");
+            TreeIter rootIter = TreeStore.AppendValues(Guid.Empty.ToString(), $" {Контрагенти_Const.FULLNAME} ");
 
             #region SQL
 
@@ -213,7 +213,7 @@ ORDER BY level, {Контрагенти_Папки_Const.Назва} ASC
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"Контрагент Папка: *", () =>
+                Program.GeneralForm?.CreateNotebookPage($"{Контрагенти_Папки_Const.FULLNAME} *", () =>
                 {
                     Контрагенти_Папки_Елемент page = new Контрагенти_Папки_Елемент
                     {
@@ -232,7 +232,7 @@ ORDER BY level, {Контрагенти_Папки_Const.Назва} ASC
                 Контрагенти_Папки_Objest Контрагенти_Папки_Objest = new Контрагенти_Папки_Objest();
                 if (Контрагенти_Папки_Objest.Read(new UnigueID(uid)))
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"Контрагент Папка: {Контрагенти_Папки_Objest.Назва}", () =>
+                    Program.GeneralForm?.CreateNotebookPage($"{Контрагенти_Папки_Objest.Назва}", () =>
                     {
                         Контрагенти_Папки_Елемент page = new Контрагенти_Папки_Елемент
                         {

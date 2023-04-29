@@ -156,7 +156,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"Виробники: *", () =>
+                Program.GeneralForm?.CreateNotebookPage($"{Виробники_Const.FULLNAME} *", () =>
                 {
                     Виробники_Елемент page = new Виробники_Елемент
                     {
@@ -174,7 +174,7 @@ namespace StorageAndTrade
                 Виробники_Objest Виробники_Objest = new Виробники_Objest();
                 if (Виробники_Objest.Read(new UnigueID(uid)))
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"Виробники: {Виробники_Objest.Назва}", () =>
+                    Program.GeneralForm?.CreateNotebookPage($"{Виробники_Objest.Назва}", () =>
                     {
                         Виробники_Елемент page = new Виробники_Елемент
                         {

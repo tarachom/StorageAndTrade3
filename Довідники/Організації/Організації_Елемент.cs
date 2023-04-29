@@ -231,7 +231,7 @@ namespace StorageAndTrade
             if (closePage)
                 Program.GeneralForm?.CloseCurrentPageNotebook();
             else
-                Program.GeneralForm?.RenameCurrentPageNotebook($"Організація: {Організації_Objest.Назва}");
+                Program.GeneralForm?.RenameCurrentPageNotebook($"{Організації_Objest.Назва}");
 
             if (CallBack_OnSelectPointer != null)
                 CallBack_OnSelectPointer.Invoke(Організації_Objest.GetDirectoryPointer());

@@ -31,7 +31,7 @@ namespace StorageAndTrade
         {
             pointer = new РозміщенняНоменклатуриПоКоміркам_Pointer();
             WidthPresentation = 300;
-            Caption = "Розміщення номенклатури на складі:";
+            Caption = $"{РозміщенняНоменклатуриПоКоміркам_Const.FULLNAME}";
         }
 
         РозміщенняНоменклатуриПоКоміркам_Pointer pointer;
@@ -65,7 +65,7 @@ namespace StorageAndTrade
                 Pointer = selectPointer;
             };
 
-            Program.GeneralForm?.CreateNotebookPage("Вибір - Розміщення номенклатури на складі:", () => { return page; }, true);
+            Program.GeneralForm?.CreateNotebookPage($"Вибір - {РозміщенняНоменклатуриПоКоміркам_Const.FULLNAME}", () => { return page; }, true);
 
             if (UseWherePeriod)
                 page.SetValue();

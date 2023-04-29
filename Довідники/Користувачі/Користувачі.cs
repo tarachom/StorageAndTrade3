@@ -121,7 +121,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"Користувач: *", () =>
+                Program.GeneralForm?.CreateNotebookPage($"{Користувачі_Const.FULLNAME} *", () =>
                 {
                     Користувачі_Елемент page = new Користувачі_Елемент
                     {
@@ -139,7 +139,7 @@ namespace StorageAndTrade
                 Користувачі_Objest Користувачі_Objest = new Користувачі_Objest();
                 if (Користувачі_Objest.Read(new UnigueID(uid)))
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"Користувач: {Користувачі_Objest.Назва}", () =>
+                    Program.GeneralForm?.CreateNotebookPage($"{Користувачі_Objest.Назва}", () =>
                     {
                         Користувачі_Елемент page = new Користувачі_Елемент
                         {

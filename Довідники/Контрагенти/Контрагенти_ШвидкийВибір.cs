@@ -54,14 +54,14 @@ namespace StorageAndTrade
 
             //Сторінка
             {
-                LinkButton linkPage = new LinkButton(" Контрагенти") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
+                LinkButton linkPage = new LinkButton($" {Контрагенти_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
                 linkPage.Clicked += (object? sender, EventArgs args) =>
                 {
                     Контрагенти page = new Контрагенти();
                     page.DirectoryPointerItem = DirectoryPointerItem;
                     page.CallBack_OnSelectPointer = CallBack_OnSelectPointer;
 
-                    Program.GeneralForm?.CreateNotebookPage("Вибір - Контрагенти", () => { return page; }, true);
+                    Program.GeneralForm?.CreateNotebookPage($"Вибір - {Контрагенти_Const.FULLNAME}", () => { return page; }, true);
 
                     page.LoadTree();
                 };
@@ -76,7 +76,7 @@ namespace StorageAndTrade
                 {
                     Контрагенти_Елемент page = new Контрагенти_Елемент { IsNew = true, CallBack_OnSelectPointer = CallBack_OnSelectPointer };
 
-                    Program.GeneralForm?.CreateNotebookPage($"Контрагенти: *", () => { return page; }, true);
+                    Program.GeneralForm?.CreateNotebookPage($"{Контрагенти_Const.FULLNAME} *", () => { return page; }, true);
 
                     page.SetValue();
                 };

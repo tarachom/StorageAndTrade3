@@ -31,7 +31,7 @@ namespace StorageAndTrade
         {
             pointer = new ВстановленняЦінНоменклатури_Pointer();
             WidthPresentation = 300;
-            Caption = "Встановлення цін номенклатури:";
+            Caption = $"{ВстановленняЦінНоменклатури_Const.FULLNAME}:";
         }
 
         ВстановленняЦінНоменклатури_Pointer pointer;
@@ -65,7 +65,7 @@ namespace StorageAndTrade
                 Pointer = selectPointer;
             };
 
-            Program.GeneralForm?.CreateNotebookPage("Вибір - Встановлення цін номенклатури", () => { return page; }, true);
+            Program.GeneralForm?.CreateNotebookPage($"Вибір - {ВстановленняЦінНоменклатури_Const.FULLNAME}", () => { return page; }, true);
 
             if (UseWherePeriod)
                 page.SetValue();

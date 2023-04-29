@@ -106,7 +106,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"Номенклатура папка: *", () =>
+                Program.GeneralForm?.CreateNotebookPage($"{Номенклатура_Папки_Const.FULLNAME} *", () =>
                 {
                     Номенклатура_Папки_Елемент page = new Номенклатура_Папки_Елемент
                     {
@@ -125,7 +125,7 @@ namespace StorageAndTrade
                 Номенклатура_Папки_Objest Номенклатура_Папки_Objest = new Номенклатура_Папки_Objest();
                 if (Номенклатура_Папки_Objest.Read(new UnigueID(uid)))
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"Номенклатура папка: {Номенклатура_Папки_Objest.Назва}", () =>
+                    Program.GeneralForm?.CreateNotebookPage($"{Номенклатура_Папки_Objest.Назва}", () =>
                     {
                         Номенклатура_Папки_Елемент page = new Номенклатура_Папки_Елемент
                         {

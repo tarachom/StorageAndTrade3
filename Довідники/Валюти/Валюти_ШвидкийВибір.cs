@@ -55,14 +55,14 @@ namespace StorageAndTrade
 
             //Сторінка
             {
-                LinkButton linkPage = new LinkButton(" Валюти") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
+                LinkButton linkPage = new LinkButton($" {Валюти_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
                 linkPage.Clicked += (object? sender, EventArgs args) =>
                 {
                     Валюти page = new Валюти();
                     page.DirectoryPointerItem = DirectoryPointerItem;
                     page.CallBack_OnSelectPointer = CallBack_OnSelectPointer;
 
-                    Program.GeneralForm?.CreateNotebookPage("Вибір - Валюти", () => { return page; }, true);
+                    Program.GeneralForm?.CreateNotebookPage($"Вибір - {Валюти_Const.FULLNAME}", () => { return page; }, true);
 
                     page.LoadRecords();
                 };
@@ -77,7 +77,7 @@ namespace StorageAndTrade
                 {
                     Валюти_Елемент page = new Валюти_Елемент { IsNew = true, CallBack_OnSelectPointer = CallBack_OnSelectPointer };
 
-                    Program.GeneralForm?.CreateNotebookPage($"Валюти: *", () => { return page; }, true);
+                    Program.GeneralForm?.CreateNotebookPage($"{Валюти_Const.FULLNAME} *", () => { return page; }, true);
 
                     page.SetValue();
                 };

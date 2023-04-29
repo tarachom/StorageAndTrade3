@@ -33,7 +33,7 @@ namespace StorageAndTrade
         {
             pointer = new Валюти_Pointer();
             WidthPresentation = 300;
-            Caption = "Валюта:";
+            Caption = $"{Валюти_Const.FULLNAME}:";
         }
 
         Валюти_Pointer pointer;

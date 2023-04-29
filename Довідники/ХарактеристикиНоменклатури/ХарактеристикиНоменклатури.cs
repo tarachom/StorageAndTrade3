@@ -26,6 +26,7 @@ using Gtk;
 using AccountingSoftware;
 
 using StorageAndTrade_1_0.Довідники;
+using StorageAndTrade_1_0.РегістриВідомостей;
 using ТабличніСписки = StorageAndTrade_1_0.Довідники.ТабличніСписки;
 
 namespace StorageAndTrade
@@ -50,7 +51,7 @@ namespace StorageAndTrade
 
             //Власник
             hBoxTop.PackStart(НоменклатураВласник, false, false, 2);
-            НоменклатураВласник.Caption = "Номенклатура:";
+            НоменклатураВласник.Caption = $"{Номенклатура_Const.FULLNAME}:";
             НоменклатураВласник.AfterSelectFunc = () =>
             {
                 LoadRecords();
@@ -63,7 +64,7 @@ namespace StorageAndTrade
 
             //ШтрихКоди
             {
-                LinkButton linkButtonShKody = new LinkButton(" Штрихкоди") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
+                LinkButton linkButtonShKody = new LinkButton($" {ШтрихкодиНоменклатури_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
                 linkButtonShKody.Clicked += (object? sender, EventArgs args) =>
                 {
                     ШтрихкодиНоменклатури page = new ШтрихкодиНоменклатури();
@@ -73,7 +74,7 @@ namespace StorageAndTrade
                     if (SelectPointerItem != null)
                         page.ХарактеристикиНоменклатуриВласник.Pointer = SelectPointerItem;
 
-                    Program.GeneralForm?.CreateNotebookPage("Штрихкоди номенклатури", () => { return page; });
+                    Program.GeneralForm?.CreateNotebookPage($"{ШтрихкодиНоменклатури_Const.FULLNAME}", () => { return page; });
 
                     page.LoadRecords();
                 };
@@ -190,7 +191,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"Характеристики: *", () =>
+                Program.GeneralForm?.CreateNotebookPage($"{ХарактеристикиНоменклатури_Const.FULLNAME} *", () =>
                 {
                     ХарактеристикиНоменклатури_Елемент page = new ХарактеристикиНоменклатури_Елемент
                     {
@@ -209,7 +210,7 @@ namespace StorageAndTrade
                 ХарактеристикиНоменклатури_Objest ХарактеристикиНоменклатури_Objest = new ХарактеристикиНоменклатури_Objest();
                 if (ХарактеристикиНоменклатури_Objest.Read(new UnigueID(uid)))
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"Характеристики: {ХарактеристикиНоменклатури_Objest.Назва}", () =>
+                    Program.GeneralForm?.CreateNotebookPage($"{ХарактеристикиНоменклатури_Objest.Назва}", () =>
                     {
                         ХарактеристикиНоменклатури_Елемент page = new ХарактеристикиНоменклатури_Елемент
                         {

@@ -33,7 +33,7 @@ namespace StorageAndTrade
         {
             pointer = new ПакуванняОдиниціВиміру_Pointer();
             WidthPresentation = 300;
-            Caption = "Пакування:";
+            Caption = $"{ПакуванняОдиниціВиміру_Const.FULLNAME}:";
         }
 
         ПакуванняОдиниціВиміру_Pointer pointer;

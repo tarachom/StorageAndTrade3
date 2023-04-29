@@ -155,7 +155,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"Виробник: *", () =>
+                Program.GeneralForm?.CreateNotebookPage($"{Блокнот_Const.FULLNAME} *", () =>
                 {
                     Блокнот_Елемент page = new Блокнот_Елемент
                     {
@@ -173,7 +173,7 @@ namespace StorageAndTrade
                 Блокнот_Objest Блокнот_Objest = new Блокнот_Objest();
                 if (Блокнот_Objest.Read(new UnigueID(uid)))
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"Виробник: {Блокнот_Objest.Назва}", () =>
+                    Program.GeneralForm?.CreateNotebookPage($"{Блокнот_Objest.Назва}", () =>
                     {
                         Блокнот_Елемент page = new Блокнот_Елемент
                         {

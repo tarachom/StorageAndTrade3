@@ -33,7 +33,7 @@ namespace StorageAndTrade
         {
             pointer = new ФізичніОсоби_Pointer();
             WidthPresentation = 300;
-            Caption = "Фізична особа:";
+            Caption = $"{ФізичніОсоби_Const.FULLNAME}:";
         }
 
         ФізичніОсоби_Pointer pointer;

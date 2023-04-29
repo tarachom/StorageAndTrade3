@@ -121,7 +121,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"Види цін: *", () =>
+                Program.GeneralForm?.CreateNotebookPage($"{ВидиЦін_Const.FULLNAME} *", () =>
                 {
                     ВидиЦін_Елемент page = new ВидиЦін_Елемент
                     {
@@ -139,7 +139,7 @@ namespace StorageAndTrade
                 ВидиЦін_Objest ВидиЦін_Objest = new ВидиЦін_Objest();
                 if (ВидиЦін_Objest.Read(new UnigueID(uid)))
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"Види цін: {ВидиЦін_Objest.Назва}", () =>
+                    Program.GeneralForm?.CreateNotebookPage($"{ВидиЦін_Objest.Назва}", () =>
                     {
                         ВидиЦін_Елемент page = new ВидиЦін_Елемент
                         {

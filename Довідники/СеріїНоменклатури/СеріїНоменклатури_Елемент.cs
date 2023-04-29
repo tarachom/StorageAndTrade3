@@ -129,7 +129,7 @@ namespace StorageAndTrade
             if (closePage)
                 Program.GeneralForm?.CloseCurrentPageNotebook();
             else
-                Program.GeneralForm?.RenameCurrentPageNotebook($"Серійний номер: {СеріїНоменклатури_Objest.Номер}");
+                Program.GeneralForm?.RenameCurrentPageNotebook($"{СеріїНоменклатури_Objest.Номер}");
 
             if (CallBack_OnSelectPointer != null)
                 CallBack_OnSelectPointer.Invoke(СеріїНоменклатури_Objest.GetDirectoryPointer());

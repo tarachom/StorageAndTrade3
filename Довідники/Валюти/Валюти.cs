@@ -191,7 +191,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"Валюта: *", () =>
+                Program.GeneralForm?.CreateNotebookPage($"{Валюти_Const.FULLNAME} *", () =>
                 {
                     Валюти_Елемент page = new Валюти_Елемент
                     {
@@ -209,7 +209,7 @@ namespace StorageAndTrade
                 Валюти_Objest Валюти_Objest = new Валюти_Objest();
                 if (Валюти_Objest.Read(new UnigueID(uid)))
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"Валюта: {Валюти_Objest.Назва}", () =>
+                    Program.GeneralForm?.CreateNotebookPage($"{Валюти_Objest.Назва}", () =>
                     {
                         Валюти_Елемент page = new Валюти_Елемент
                         {

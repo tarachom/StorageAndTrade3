@@ -54,14 +54,14 @@ namespace StorageAndTrade
 
             //Сторінка
             {
-                LinkButton linkPage = new LinkButton(" ПартіяТоварівКомпозит") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
+                LinkButton linkPage = new LinkButton($" {ПартіяТоварівКомпозит_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
                 linkPage.Clicked += (object? sender, EventArgs args) =>
                 {
                     ПартіяТоварівКомпозит page = new ПартіяТоварівКомпозит();
                     page.DirectoryPointerItem = DirectoryPointerItem;
                     page.CallBack_OnSelectPointer = CallBack_OnSelectPointer;
 
-                    Program.GeneralForm?.CreateNotebookPage("Вибір - ПартіяТоварівКомпозит", () => { return page; }, true);
+                    Program.GeneralForm?.CreateNotebookPage($"Вибір - {ПартіяТоварівКомпозит_Const.FULLNAME}", () => { return page; }, true);
 
                     page.LoadRecords();
                 };
@@ -124,10 +124,6 @@ namespace StorageAndTrade
             searchText = "%" + searchText.Replace(" ", "%") + "%";
 
             ТабличніСписки.ПартіяТоварівКомпозит_ЗаписиШвидкийВибір.Where.Clear();
-
-            //Код
-            // ТабличніСписки.ПартіяТоварівКомпозит_ЗаписиШвидкийВибір.Where.Add(
-            //     new Where(ПартіяТоварівКомпозит_Const.Код, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
             //Назва
             ТабличніСписки.ПартіяТоварівКомпозит_ЗаписиШвидкийВибір.Where.Add(

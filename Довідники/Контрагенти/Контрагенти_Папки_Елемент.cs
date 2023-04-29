@@ -155,7 +155,7 @@ namespace StorageAndTrade
             if (closePage)
                 Program.GeneralForm?.CloseCurrentPageNotebook();
             else
-                Program.GeneralForm?.RenameCurrentPageNotebook($"Контрагент Папки: {Контрагенти_Папки_Objest.Назва}");
+                Program.GeneralForm?.RenameCurrentPageNotebook($"{Контрагенти_Папки_Objest.Назва}");
 
             if (CallBack_OnSelectPointer != null)
                 CallBack_OnSelectPointer.Invoke(Контрагенти_Папки_Objest.GetDirectoryPointer());

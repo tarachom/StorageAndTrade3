@@ -33,7 +33,7 @@ namespace StorageAndTrade
         {
             pointer = new Каси_Pointer();
             WidthPresentation = 300;
-            Caption = "Каса:";
+            Caption = $"{Каси_Const.FULLNAME}:";
         }
 
         Каси_Pointer pointer;

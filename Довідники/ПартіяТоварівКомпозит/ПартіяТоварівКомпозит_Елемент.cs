@@ -184,7 +184,7 @@ namespace StorageAndTrade
             if (closePage)
                 Program.GeneralForm?.CloseCurrentPageNotebook();
             else
-                Program.GeneralForm?.RenameCurrentPageNotebook($"Партія: {ПартіяТоварівКомпозит_Objest.Назва}");
+                Program.GeneralForm?.RenameCurrentPageNotebook($"{ПартіяТоварівКомпозит_Objest.Назва}");
 
             if (CallBack_OnSelectPointer != null)
                 CallBack_OnSelectPointer.Invoke(ПартіяТоварівКомпозит_Objest.GetDirectoryPointer());

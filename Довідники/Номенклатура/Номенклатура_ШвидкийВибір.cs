@@ -55,14 +55,14 @@ namespace StorageAndTrade
 
             //Сторінка
             {
-                LinkButton linkPage = new LinkButton(" Номенклатура") { Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
+                LinkButton linkPage = new LinkButton($" {Номенклатура_Const.FULLNAME}") { Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
                 linkPage.Clicked += (object? sender, EventArgs args) =>
                 {
                     Номенклатура page = new Номенклатура();
                     page.DirectoryPointerItem = DirectoryPointerItem;
                     page.CallBack_OnSelectPointer = CallBack_OnSelectPointer;
 
-                    Program.GeneralForm?.CreateNotebookPage("Вибір - Номенклатура", () => { return page; }, true);
+                    Program.GeneralForm?.CreateNotebookPage($"Вибір - {Номенклатура_Const.FULLNAME}", () => { return page; }, true);
 
                     page.LoadTree();
                 };
@@ -76,7 +76,7 @@ namespace StorageAndTrade
                 linkNew.Clicked += (object? sender, EventArgs args) =>
                 {
                     Номенклатура_Елемент page = new Номенклатура_Елемент { IsNew = true, CallBack_OnSelectPointer = CallBack_OnSelectPointer };
-                    Program.GeneralForm?.CreateNotebookPage($"Номенклатура: *", () => { return page; }, true);
+                    Program.GeneralForm?.CreateNotebookPage($"{Номенклатура_Const.FULLNAME} *", () => { return page; }, true);
                     page.SetValue();
 
                     page.Назва.Text = ПошукПовнотекстовий.Text;

@@ -120,7 +120,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"Типорозмір: *", () =>
+                Program.GeneralForm?.CreateNotebookPage($"{ТипорозміриКомірок_Const.FULLNAME} *", () =>
                 {
                     ТипорозміриКомірок_Елемент page = new ТипорозміриКомірок_Елемент
                     {
@@ -138,7 +138,7 @@ namespace StorageAndTrade
                 ТипорозміриКомірок_Objest ТипорозміриКомірок_Objest = new ТипорозміриКомірок_Objest();
                 if (ТипорозміриКомірок_Objest.Read(new UnigueID(uid)))
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"Типорозмір: {ТипорозміриКомірок_Objest.Назва}", () =>
+                    Program.GeneralForm?.CreateNotebookPage($"{ТипорозміриКомірок_Objest.Назва}", () =>
                     {
                         ТипорозміриКомірок_Елемент page = new ТипорозміриКомірок_Елемент
                         {

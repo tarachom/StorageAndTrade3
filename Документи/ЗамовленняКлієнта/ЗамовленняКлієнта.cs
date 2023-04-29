@@ -302,7 +302,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"Замовлення клієнта: *", () =>
+                Program.GeneralForm?.CreateNotebookPage($"{ЗамовленняКлієнта_Const.FULLNAME} *", () =>
                 {
                     ЗамовленняКлієнта_Елемент page = new ЗамовленняКлієнта_Елемент
                     {

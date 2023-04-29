@@ -33,7 +33,7 @@ namespace StorageAndTrade
         {
             pointer = new КраїниСвіту_Pointer();
             WidthPresentation = 300;
-            Caption = "Країни світу:";
+            Caption = $"{КраїниСвіту_Const.FULLNAME}:";
         }
 
         КраїниСвіту_Pointer pointer;

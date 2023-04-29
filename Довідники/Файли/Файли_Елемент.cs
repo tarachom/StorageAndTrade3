@@ -139,7 +139,7 @@ namespace StorageAndTrade
             if (closePage)
                 Program.GeneralForm?.CloseCurrentPageNotebook();
             else
-                Program.GeneralForm?.RenameCurrentPageNotebook($"Файл: {Файли_Objest.Назва}");
+                Program.GeneralForm?.RenameCurrentPageNotebook($"{Файли_Objest.Назва}");
 
             if (CallBack_OnSelectPointer != null)
                 CallBack_OnSelectPointer.Invoke(Файли_Objest.GetDirectoryPointer());

@@ -148,7 +148,7 @@ namespace StorageAndTrade
             if (closePage)
                 Program.GeneralForm?.CloseCurrentPageNotebook();
             else
-                Program.GeneralForm?.RenameCurrentPageNotebook($"Види цін: {ВидиЦін_Objest.Назва}");
+                Program.GeneralForm?.RenameCurrentPageNotebook($"{ВидиЦін_Objest.Назва}");
 
             if (CallBack_OnSelectPointer != null)
                 CallBack_OnSelectPointer.Invoke(ВидиЦін_Objest.GetDirectoryPointer());

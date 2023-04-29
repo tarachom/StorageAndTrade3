@@ -33,7 +33,7 @@ namespace StorageAndTrade
         {
             pointer = new Номенклатура_Pointer();
             WidthPresentation = 300;
-            Caption = "Номенклатура:";
+            Caption = $"{Номенклатура_Const.FULLNAME}:";
         }
 
         Номенклатура_Pointer pointer;
