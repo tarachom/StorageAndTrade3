@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 29.04.2023 13:44:37
+ * Дата конфігурації: 29.04.2023 15:18:29
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -8912,7 +8912,7 @@ namespace StorageAndTrade_1_0.Довідники
         public string GetPresentation()
         {
             return base.BasePresentation(
-                new string[] {  }
+                new string[] { "col_a2" }
             );
         }
         
@@ -8976,7 +8976,7 @@ namespace StorageAndTrade_1_0.Довідники
         public string GetPresentation()
         {
             return Назва = base.BasePresentation(
-                new string[] {  }
+                new string[] { "col_a2" }
             );
         }
 
