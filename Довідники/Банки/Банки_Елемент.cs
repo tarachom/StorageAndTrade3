@@ -45,11 +45,8 @@ namespace StorageAndTrade
             HPanedTop.Position = 800;
         }
 
-        protected override void CreatePack1()
+        protected override void CreatePack1(VBox vBox)
         {
-            VBox vBox = new VBox();
-            HPanedTop.Pack1(vBox, false, false);
-
             //Назва
             CreateField(vBox, "Коротка назва:", Назва);
 
@@ -60,11 +57,8 @@ namespace StorageAndTrade
             CreateField(vBox, "Назва англ:", НазваГоловноїУстановиАнг);
         }
 
-        protected override void CreatePack2()
+        protected override void CreatePack2(VBox vBox)
         {
-            VBox vBox = new VBox();
-            HPanedTop.Pack2(vBox, false, false);
-
             //Container1
             VBox vBoxContainer1 = new VBox() { WidthRequest = 300, Halign = Align.Start };
             vBox.PackStart(vBoxContainer1, false, false, 0);

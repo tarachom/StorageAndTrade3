@@ -43,11 +43,8 @@ namespace StorageAndTrade
             HPanedTop.Position = 150;
         }
 
-        protected override void CreatePack1()
+        protected override void CreatePack1(VBox vBox)
         {
-            VBox vBox = new VBox();
-            HPanedTop.Pack1(vBox, false, false);
-
             //Назва
             CreateField(vBox, "Назва:", Назва);
 

@@ -39,11 +39,8 @@ namespace StorageAndTrade
 
         public СкладськіПриміщення_Елемент() : base() { }
 
-        protected override void CreatePack1()
+        protected override void CreatePack1(VBox vBox)
         {
-            VBox vBox = new VBox();
-            HPanedTop.Pack1(vBox, false, false);
-
             //Склад
             CreateField(vBox, null, Склад);
 

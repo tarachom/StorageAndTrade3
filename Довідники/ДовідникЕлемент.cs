@@ -77,8 +77,15 @@ namespace StorageAndTrade
 
             PackStart(HBoxTop, false, false, 10);
 
-            CreatePack1();
-            CreatePack2();
+            //Pack1
+            VBox vBox1 = new VBox();
+            HPanedTop.Pack1(vBox1, false, false);
+            CreatePack1(vBox1);
+
+            //Pack2
+            VBox vBox2 = new VBox();
+            HPanedTop.Pack2(vBox2, false, false);
+            CreatePack2(vBox2);
 
             PackStart(HPanedTop, false, false, 5);
 
@@ -88,22 +95,12 @@ namespace StorageAndTrade
         /// <summary>
         /// Лівий Блок
         /// </summary>
-        protected virtual void CreatePack1()
-        {
-            VBox vBox = new VBox();
-
-            HPanedTop.Pack1(vBox, false, false);
-        }
+        protected virtual void CreatePack1(VBox vBox) { }
 
         /// <summary>
         /// Правий Блок
         /// </summary>
-        protected virtual void CreatePack2()
-        {
-            VBox vBox = new VBox();
-
-            HPanedTop.Pack2(vBox, false, false);
-        }
+        protected virtual void CreatePack2(VBox vBox) { }
 
         #region Create Field
 

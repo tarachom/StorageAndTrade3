@@ -46,11 +46,8 @@ namespace StorageAndTrade
 
         public СкладськіКомірки_Елемент() : base() { }
 
-        protected override void CreatePack1()
+        protected override void CreatePack1(VBox vBox)
         {
-            VBox vBox = new VBox();
-            HPanedTop.Pack1(vBox, false, false);
-
             //Назва
             CreateField(vBox, "Назва:", Назва);
 
@@ -75,11 +72,8 @@ namespace StorageAndTrade
             CreateField(vBox, null, Типорозмір);
         }
 
-        protected override void CreatePack2()
+        protected override void CreatePack2(VBox vBox)
         {
-            VBox vBox = new VBox();
-            HPanedTop.Pack2(vBox, false, false);
-
             VBox vBoxContainer = new VBox() { WidthRequest = 300, Halign = Align.Start };
             vBox.PackStart(vBoxContainer, false, false, 0);
 

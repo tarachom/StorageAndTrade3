@@ -49,11 +49,8 @@ namespace StorageAndTrade
 
         public Організації_Елемент() : base() { }
 
-        protected override void CreatePack1()
+        protected override void CreatePack1(VBox vBox)
         {
-            VBox vBox = new VBox();
-            HPanedTop.Pack1(vBox, false, false);
-
             //Код
             CreateField(vBox, "Код:", Код);
 
@@ -82,11 +79,8 @@ namespace StorageAndTrade
             CreateField(vBox, null, Холдинг);
         }
 
-        protected override void CreatePack2()
+        protected override void CreatePack2(VBox vBox)
         {
-            VBox vBox = new VBox();
-            HPanedTop.Pack2(vBox, false, false);
-
             //Контакти
             CreateTablePart(vBox, "Контакти:", Контакти);
         }

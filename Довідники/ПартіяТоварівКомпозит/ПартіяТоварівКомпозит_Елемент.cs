@@ -50,11 +50,8 @@ namespace StorageAndTrade
             ТипДокументу.ActiveId = ТипДокументуПартіяТоварівКомпозит.ПоступленняТоварівТаПослуг.ToString();
         }
 
-        protected override void CreatePack1()
+        protected override void CreatePack1(VBox vBox)
         {
-            VBox vBox = new VBox();
-            HPanedTop.Pack1(vBox, false, false);
-
             //Назва
             CreateField(vBox, "Назва:", Назва);
 
@@ -68,11 +65,8 @@ namespace StorageAndTrade
             CreateField(vBox, null, ВведенняЗалишків);
         }
 
-        protected override void CreatePack2()
+        protected override void CreatePack2(VBox vBox)
         {
-            VBox vBox = new VBox();
-            HPanedTop.Pack2(vBox, false, false);
-
             HBox hBoxInfo = new HBox() { Halign = Align.Start };
             vBox.PackStart(hBoxInfo, false, false, 5);
 
