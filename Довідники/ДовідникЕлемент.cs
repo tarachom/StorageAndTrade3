@@ -85,6 +85,9 @@ namespace StorageAndTrade
             ShowAll();
         }
 
+        /// <summary>
+        /// Лівий Блок
+        /// </summary>
         protected virtual void CreatePack1()
         {
             VBox vBox = new VBox();
@@ -92,12 +95,96 @@ namespace StorageAndTrade
             HPanedTop.Pack1(vBox, false, false);
         }
 
+        /// <summary>
+        /// Правий Блок
+        /// </summary>
         protected virtual void CreatePack2()
         {
             VBox vBox = new VBox();
 
             HPanedTop.Pack2(vBox, false, false);
         }
+
+        #region Create Field
+
+        /// <summary>
+        /// Створення поля із заголовком
+        /// </summary>
+        /// <param name="vBox">Контейнер</param>
+        /// <param name="label">Заголовок</param>
+        /// <param name="field">Поле</param>
+        /// <param name="Halign">Положення</param>
+        protected HBox CreateField(VBox vBox, string? label, Widget field, Align Halign = Align.End)
+        {
+            HBox hBox = new HBox() { Halign = Halign };
+            vBox.PackStart(hBox, false, false, 5);
+
+            if (label != null)
+                hBox.PackStart(new Label(label), false, false, 5);
+
+            hBox.PackStart(field, false, false, 5);
+
+            return hBox;
+        }
+
+        /// <summary>
+        /// Добавлення поля в HBox
+        /// </summary>
+        /// <param name="hBox">Контейнер</param>
+        /// <param name="label">Заголовок</param>
+        /// <param name="field">Поле</param>
+        protected void CreateField(HBox hBox, string? label, Widget field)
+        {
+            if (label != null)
+                hBox.PackStart(new Label(label), false, false, 5);
+
+            hBox.PackStart(field, false, false, 5);
+        }
+
+        /// <summary>
+        /// Добавлення поля з прокруткою
+        /// </summary>
+        /// <param name="vBox">Контейнер</param>
+        /// <param name="label">Заголовок</param>
+        /// <param name="field">Поле</param>
+        /// <param name="Width">Висота</param>
+        /// <param name="Height">Ширина</param>
+        protected void CreateFieldView(VBox vBox, string? label, Widget field, int Width = 100, int Height = 100, Align Halign = Align.End)
+        {
+            HBox hBox = new HBox() { Halign = Halign };
+            vBox.PackStart(hBox, false, false, 5);
+
+            if (label != null)
+                hBox.PackStart(new Label(label) { Valign = Align.Start }, false, false, 5);
+
+            ScrolledWindow scrollTextView = new ScrolledWindow() { ShadowType = ShadowType.In, WidthRequest = Width, HeightRequest = Height };
+            scrollTextView.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
+            scrollTextView.Add(field);
+
+            hBox.PackStart(scrollTextView, false, false, 5);
+        }
+
+        /// <summary>
+        /// Добавлення табличної частини
+        /// </summary>
+        /// <param name="vBox">Контейнер</param>
+        /// <param name="label">Заголовок</param>
+        /// <param name="tablePart">Таб частина</param>
+        protected void CreateTablePart(VBox vBox, string? label, Widget tablePart)
+        {
+            if (label != null)
+            {
+                HBox hBoxCaption = new HBox();
+                vBox.PackStart(hBoxCaption, false, false, 5);
+                hBoxCaption.PackStart(new Label(label), false, false, 5);
+            }
+
+            HBox hBox = new HBox();
+            vBox.PackStart(hBox, false, false, 0);
+            hBox.PackStart(tablePart, true, true, 5);
+        }
+
+        #endregion
 
         /// <summary>
         /// Присвоєння значень

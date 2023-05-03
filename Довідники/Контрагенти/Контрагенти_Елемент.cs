@@ -53,55 +53,22 @@ namespace StorageAndTrade
             HPanedTop.Pack1(vBox, false, false);
 
             //Код
-            HBox hBoxCode = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxCode, false, false, 5);
-
-            hBoxCode.PackStart(new Label("Код:"), false, false, 5);
-            hBoxCode.PackStart(Код, false, false, 5);
+            CreateField(vBox, "Код:", Код);
 
             //Назва
-            HBox hBoxName = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxName, false, false, 5);
-
-            hBoxName.PackStart(new Label("Назва:"), false, false, 5);
-            hBoxName.PackStart(Назва, false, false, 5);
+            CreateField(vBox, "Назва:", Назва);
 
             //Родич
-            HBox hBoxParent = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxParent, false, false, 5);
-
-            hBoxParent.PackStart(Родич, false, false, 5);
+            CreateField(vBox, null, Родич);
 
             //НазваПовна
-            HBox hBoxDesc = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxDesc, false, false, 5);
-
-            hBoxDesc.PackStart(new Label("Повна назва:") { Valign = Align.Start }, false, false, 5);
-
-            ScrolledWindow scrollTextView = new ScrolledWindow() { ShadowType = ShadowType.In, WidthRequest = 500, HeightRequest = 60 };
-            scrollTextView.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
-            scrollTextView.Add(НазваПовна);
-
-            hBoxDesc.PackStart(scrollTextView, false, false, 5);
+            CreateFieldView(vBox, "Повна назва:", НазваПовна, 500, 60);
 
             //РеєстраційнийНомер
-            HBox hBoxRegisterNumber = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxRegisterNumber, false, false, 5);
-
-            hBoxRegisterNumber.PackStart(new Label("Реєстраційний номер:"), false, false, 5);
-            hBoxRegisterNumber.PackStart(РеєстраційнийНомер, false, false, 5);
+            CreateField(vBox, "Реєстраційний номер:", РеєстраційнийНомер);
 
             //Опис
-            HBox hBoxOpys = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxOpys, false, false, 5);
-
-            hBoxOpys.PackStart(new Label("Опис:") { Valign = Align.Start }, false, false, 5);
-
-            ScrolledWindow scrollTextViewOpys = new ScrolledWindow() { ShadowType = ShadowType.In, WidthRequest = 500, HeightRequest = 200 };
-            scrollTextViewOpys.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
-            scrollTextViewOpys.Add(Опис);
-
-            hBoxOpys.PackStart(scrollTextViewOpys, false, false, 5);
+            CreateFieldView(vBox, "Опис:", Опис, 500, 200);
         }
 
         protected override void CreatePack2()
@@ -110,24 +77,10 @@ namespace StorageAndTrade
             HPanedTop.Pack2(vBox, false, false);
 
             //Контакти
-            HBox hBoxContaktyInfo = new HBox();
-            hBoxContaktyInfo.PackStart(new Label("Контакти:"), false, false, 5);
-            vBox.PackStart(hBoxContaktyInfo, false, false, 5);
-
-            HBox hBoxContakty = new HBox();
-            hBoxContakty.PackStart(Контакти, true, true, 5);
-
-            vBox.PackStart(hBoxContakty, false, false, 0);
+            CreateTablePart(vBox, "Контакти:", Контакти);
 
             //Файли
-            HBox hBoxFilesInfo = new HBox();
-            hBoxFilesInfo.PackStart(new Label("Файли:"), false, false, 5);
-            vBox.PackStart(hBoxFilesInfo, false, false, 5);
-
-            HBox hBoxFiles = new HBox();
-            hBoxFiles.PackStart(Файли, true, true, 5);
-
-            vBox.PackStart(hBoxFiles, false, false, 0);
+            CreateTablePart(vBox, "Файли:", Файли);
         }
 
         #region Присвоєння / зчитування значень

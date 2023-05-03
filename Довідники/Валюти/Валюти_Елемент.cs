@@ -45,38 +45,19 @@ namespace StorageAndTrade
             HPanedTop.Pack1(vBox, false, false);
 
             //Код
-            HBox hBoxCode = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxCode, false, false, 5);
-
-            hBoxCode.PackStart(new Label("Код:"), false, false, 5);
-            hBoxCode.PackStart(Код, false, false, 5);
+            CreateField(vBox, "Код:", Код);
 
             //Назва
-            HBox hBoxName = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxName, false, false, 5);
-
-            hBoxName.PackStart(new Label("Назва:"), false, false, 5);
-            hBoxName.PackStart(Назва, false, false, 5);
+            CreateField(vBox, "Назва:", Назва);
 
             //КороткаНазва
-            HBox hBoxSmallName = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxSmallName, false, false, 5);
-
-            hBoxSmallName.PackStart(new Label("Коротка назва:"), false, false, 5);
-            hBoxSmallName.PackStart(КороткаНазва, false, false, 5);
+            CreateField(vBox, "Коротка назва:", КороткаНазва);
 
             //Код_R030
-            HBox hBoxCodeR030 = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxCodeR030, false, false, 5);
-
-            hBoxCodeR030.PackStart(new Label("Код R030:"), false, false, 5);
-            hBoxCodeR030.PackStart(Код_R030, false, false, 5);
+            CreateField(vBox, "Код R030:", Код_R030);
 
             //ВиводитиКурсНаСтартову
-            HBox hBoxVisibleCursOnStartPage = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxVisibleCursOnStartPage, false, false, 5);
-
-            hBoxVisibleCursOnStartPage.PackStart(ВиводитиКурсНаСтартову, false, false, 5);
+            CreateField(vBox, null, ВиводитиКурсНаСтартову);
         }
 
         #region Присвоєння / зчитування значень

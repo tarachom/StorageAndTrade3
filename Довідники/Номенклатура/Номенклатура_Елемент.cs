@@ -43,9 +43,9 @@ namespace StorageAndTrade
         ComboBoxText ТипНоменклатури = new ComboBoxText();
         Entry Артикул = new Entry() { WidthRequest = 500 };
         Виробники_PointerControl Виробник = new Виробники_PointerControl() { WidthPresentation = 300 };
-        Номенклатура_Папки_PointerControl Родич = new Номенклатура_Папки_PointerControl() { Caption = "Папка:", WidthPresentation = 420 };
+        Номенклатура_Папки_PointerControl Родич = new Номенклатура_Папки_PointerControl() { Caption = "Родич:", WidthPresentation = 420 };
         ВидиНоменклатури_PointerControl ВидНоменклатури = new ВидиНоменклатури_PointerControl() { Caption = "Вид:", WidthPresentation = 300 };
-        ПакуванняОдиниціВиміру_PointerControl ОдиницяВиміру = new ПакуванняОдиниціВиміру_PointerControl() { WidthPresentation = 300 };
+        ПакуванняОдиниціВиміру_PointerControl ОдиницяВиміру = new ПакуванняОдиниціВиміру_PointerControl() { Caption = "Пакування:", WidthPresentation = 300 };
         Файли_PointerControl ОсновнаКартинкаФайл = new Файли_PointerControl() { Caption = "Основна картинка:", WidthPresentation = 300 };
         Номенклатура_ТабличнаЧастина_Файли Файли = new Номенклатура_ТабличнаЧастина_Файли();
 
@@ -59,101 +59,43 @@ namespace StorageAndTrade
             HPanedTop.Pack1(vBox, false, false);
 
             //Код
-            HBox hBoxCode = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxCode, false, false, 5);
-
-            hBoxCode.PackStart(new Label("Код:"), false, false, 5);
-            hBoxCode.PackStart(Код, false, false, 5);
+            CreateField(vBox, "Код:", Код);
 
             //Назва
-            HBox hBoxName = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxName, false, false, 5);
-
-            hBoxName.PackStart(new Label("Назва:"), false, false, 5);
-            hBoxName.PackStart(Назва, false, false, 5);
+            CreateField(vBox, "Назва:", Назва);
 
             //НазваПовна
-            HBox hBoxDesc = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxDesc, false, false, 5);
-
-            hBoxDesc.PackStart(new Label("Повна назва:") { Valign = Align.Start }, false, false, 5);
-
-            ScrolledWindow scrollTextView = new ScrolledWindow() { ShadowType = ShadowType.In, WidthRequest = 500, HeightRequest = 60 };
-            scrollTextView.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
-            scrollTextView.Add(НазваПовна);
-
-            hBoxDesc.PackStart(scrollTextView, false, false, 5);
+            CreateFieldView(vBox, "Повна назва:", НазваПовна, 500, 60);
 
             //Родич
-            HBox hBoxParent = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxParent, false, false, 5);
-
-            hBoxParent.PackStart(Родич, false, false, 5);
+            CreateField(vBox, null, Родич);
 
             //Артикул
-            HBox hBoxArtykul = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxArtykul, false, false, 5);
-
-            hBoxArtykul.PackStart(new Label("Артикул:"), false, false, 5);
-            hBoxArtykul.PackStart(Артикул, false, false, 5);
+            CreateField(vBox, "Артикул:", Артикул);
 
             //Тип
-            HBox hBoxType = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxType, false, false, 5);
-
             foreach (var field in ПсевдонімиПерелічення.ТипиНоменклатури_List())
                 ТипНоменклатури.Append(field.Value.ToString(), field.Name);
 
-            hBoxType.PackStart(new Label("Тип:"), false, false, 5);
-            hBoxType.PackStart(ТипНоменклатури, false, false, 5);
+            CreateField(vBox, "Тип:", ТипНоменклатури);
 
             //ОдиницяВиміру
-            HBox hBoxOdynyca = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxOdynyca, false, false, 5);
-
-            hBoxOdynyca.PackStart(ОдиницяВиміру, false, false, 5);
+            CreateField(vBox, null, ОдиницяВиміру);
 
             //ВидНоменклатури
-            HBox hBoxVidNumeklatury = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxVidNumeklatury, false, false, 5);
-
-            hBoxVidNumeklatury.PackStart(ВидНоменклатури, false, false, 5);
+            CreateField(vBox, null, ВидНоменклатури);
 
             //Виробник
-            HBox hBoxVirobnyk = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxVirobnyk, false, false, 5);
-
-            hBoxVirobnyk.PackStart(Виробник, false, false, 5);
+            CreateField(vBox, null, Виробник);
 
             //Опис
-            HBox hBoxOpys = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxOpys, false, false, 5);
-
-            hBoxOpys.PackStart(new Label("Опис:") { Valign = Align.Start }, false, false, 5);
-
-            ScrolledWindow scrollTextViewOpys = new ScrolledWindow() { ShadowType = ShadowType.In, WidthRequest = 500, HeightRequest = 200 };
-            scrollTextViewOpys.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
-            scrollTextViewOpys.Add(Опис);
-
-            hBoxOpys.PackStart(scrollTextViewOpys, false, false, 5);
+            CreateFieldView(vBox, "Опис:", Опис, 500, 200);
 
             //ОсновнаКартинкаФайл
-            HBox hBoxDefPicture = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxDefPicture, false, false, 5);
-
-            hBoxDefPicture.PackStart(ОсновнаКартинкаФайл, false, false, 5);
-
-            //Файли Заголовок
-            HBox hBoxFilesInfo = new HBox();
-
-            hBoxFilesInfo.PackStart(new Label("Файли:"), false, false, 5);
-            vBox.PackStart(hBoxFilesInfo, false, false, 5);
+            CreateField(vBox, null, ОсновнаКартинкаФайл);
 
             //Файли
-            HBox hBoxFiles = new HBox();
-            vBox.PackStart(hBoxFiles, false, false, 5);
-
-            hBoxFiles.PackStart(Файли, true, true, 5);
+            CreateTablePart(vBox, "Файли:", Файли);
         }
 
         #region Присвоєння / зчитування значень

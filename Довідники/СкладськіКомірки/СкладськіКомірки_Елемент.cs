@@ -52,44 +52,27 @@ namespace StorageAndTrade
             HPanedTop.Pack1(vBox, false, false);
 
             //Назва
-            HBox hBoxName = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxName, false, false, 5);
-
-            hBoxName.PackStart(new Label("Назва:"), false, false, 5);
-            hBoxName.PackStart(Назва, false, false, 5);
+            CreateField(vBox, "Назва:", Назва);
 
             //СкладськеПриміщення
-            HBox hBoxSkaldPrem = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxSkaldPrem, false, false, 5);
-
-            hBoxSkaldPrem.PackStart(СкладськеПриміщення, false, false, 5);
+            CreateField(vBox, null, СкладськеПриміщення);
 
             //Родич
-            HBox hBoxParent = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxParent, false, false, 5);
-
             Родич.BeforeClickOpenFunc = () =>
             {
                 Родич.СкладПриміщенняВласник = СкладськеПриміщення.Pointer;
             };
 
-            hBoxParent.PackStart(Родич, false, false, 5);
+            CreateField(vBox, null, Родич);
 
             //ТипСкладськоїКомірки
-            HBox hBoxTypeCell = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxTypeCell, false, false, 5);
-
             foreach (var field in ПсевдонімиПерелічення.ТипиСкладськихКомірок_List())
                 ТипСкладськоїКомірки.Append(field.Value.ToString(), field.Name);
 
-            hBoxTypeCell.PackStart(new Label("Тип комірки:"), false, false, 5);
-            hBoxTypeCell.PackStart(ТипСкладськоїКомірки, false, false, 5);
+            CreateField(vBox, "Тип комірки:", ТипСкладськоїКомірки);
 
-            // Типорозмір
-            HBox hBoxType = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxType, false, false, 5);
-
-            hBoxType.PackStart(Типорозмір, false, false, 5);
+            //Типорозмір
+            CreateField(vBox, null, Типорозмір);
         }
 
         protected override void CreatePack2()

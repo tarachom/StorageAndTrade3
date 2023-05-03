@@ -51,25 +51,13 @@ namespace StorageAndTrade
             HPanedTop.Pack1(vBox, false, false);
 
             //Назва
-            HBox hBoxName = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxName, false, false, 5);
-
-            hBoxName.PackStart(new Label("Коротка назва:"), false, false, 5);
-            hBoxName.PackStart(Назва, false, false, 5);
+            CreateField(vBox, "Коротка назва:", Назва);
 
             //Повна Назва
-            HBox hBoxFullName = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxFullName, false, false, 5);
-
-            hBoxFullName.PackStart(new Label("Повна назва:"), false, false, 5);
-            hBoxFullName.PackStart(ПовнаНазва, false, false, 5);
+            CreateField(vBox, "Повна назва:", ПовнаНазва);
 
             //Назва En
-            HBox hBoxNameEn = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxNameEn, false, false, 5);
-
-            hBoxNameEn.PackStart(new Label("Назва англ:"), false, false, 5);
-            hBoxNameEn.PackStart(НазваГоловноїУстановиАнг, false, false, 5);
+            CreateField(vBox, "Назва англ:", НазваГоловноїУстановиАнг);
         }
 
         protected override void CreatePack2()
@@ -83,32 +71,16 @@ namespace StorageAndTrade
 
             {
                 //Код
-                HBox hBoxCode = new HBox() { Halign = Align.End };
-                vBoxContainer1.PackStart(hBoxCode, false, false, 5);
-
-                hBoxCode.PackStart(new Label("Код:"), false, false, 5);
-                hBoxCode.PackStart(Код, false, false, 5);
+                CreateField(vBoxContainer1, "Код:", Код);
 
                 //КодМФО
-                HBox hBoxCodeMFO = new HBox() { Halign = Align.End };
-                vBoxContainer1.PackStart(hBoxCodeMFO, false, false, 5);
-
-                hBoxCodeMFO.PackStart(new Label("Код МФО:"), false, false, 5);
-                hBoxCodeMFO.PackStart(КодМФО, false, false, 5);
+                CreateField(vBoxContainer1, "Код МФО:", КодМФО);
 
                 //УнікальнийКодБанку
-                HBox hBoxUniqueCode = new HBox() { Halign = Align.End };
-                vBoxContainer1.PackStart(hBoxUniqueCode, false, false, 5);
-
-                hBoxUniqueCode.PackStart(new Label("Унікальний код:"), false, false, 5);
-                hBoxUniqueCode.PackStart(УнікальнийКодБанку, false, false, 5);
+                CreateField(vBoxContainer1, "Унікальний код:", УнікальнийКодБанку);
 
                 //КодЄДРПОУ
-                HBox hBoxCodeEDRPUO = new HBox() { Halign = Align.End };
-                vBoxContainer1.PackStart(hBoxCodeEDRPUO, false, false, 5);
-
-                hBoxCodeEDRPUO.PackStart(new Label("Код ЄДРПОУ:"), false, false, 5);
-                hBoxCodeEDRPUO.PackStart(КодЄДРПОУ, false, false, 5);
+                CreateField(vBoxContainer1, "Код ЄДРПОУ:", КодЄДРПОУ);
             }
         }
 

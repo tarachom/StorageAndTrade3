@@ -56,30 +56,16 @@ namespace StorageAndTrade
             HPanedTop.Pack1(vBox, false, false);
 
             //Назва
-            HBox hBoxName = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxName, false, false, 5);
-
-            hBoxName.PackStart(new Label("Назва:"), false, false, 5);
-            hBoxName.PackStart(Назва, false, false, 5);
+            CreateField(vBox, "Назва:", Назва);
 
             //Тип
-            HBox hBoxTypeDoc = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxTypeDoc, false, false, 5);
-
-            hBoxTypeDoc.PackStart(new Label("Тип документу:"), false, false, 5);
-            hBoxTypeDoc.PackStart(ТипДокументу, false, false, 5);
+            CreateField(vBox, "Тип документу:", ТипДокументу);
 
             //ПоступленняТоварівТаПослуг
-            HBox hBoxПоступленняТоварівТаПослуг = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxПоступленняТоварівТаПослуг, false, false, 5);
-
-            hBoxПоступленняТоварівТаПослуг.PackStart(ПоступленняТоварівТаПослуг, false, false, 5);
+            CreateField(vBox, null, ПоступленняТоварівТаПослуг);
 
             //ВведенняЗалишків
-            HBox hBoxВведенняЗалишків = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxВведенняЗалишків, false, false, 5);
-
-            hBoxВведенняЗалишків.PackStart(ВведенняЗалишків, false, false, 5);
+            CreateField(vBox, null, ВведенняЗалишків);
         }
 
         protected override void CreatePack2()

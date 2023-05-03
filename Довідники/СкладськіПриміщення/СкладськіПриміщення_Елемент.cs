@@ -45,27 +45,16 @@ namespace StorageAndTrade
             HPanedTop.Pack1(vBox, false, false);
 
             //Склад
-            HBox hBoxSkald = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxSkald, false, false, 5);
-
-            hBoxSkald.PackStart(Склад, false, false, 5);
+            CreateField(vBox, null, Склад);
 
             //Назва
-            HBox hBoxName = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxName, false, false, 5);
-
-            hBoxName.PackStart(new Label("Назва:"), false, false, 5);
-            hBoxName.PackStart(Назва, false, false, 5);
+            CreateField(vBox, "Назва:", Назва);
 
             //НалаштуванняАдресногоЗберігання
-            HBox hBoxAdressSave = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxAdressSave, false, false, 5);
-
             foreach (var field in ПсевдонімиПерелічення.НалаштуванняАдресногоЗберігання_List())
                 Налаштування.Append(field.Value.ToString(), field.Name);
 
-            hBoxAdressSave.PackStart(new Label("Адресне зберігання:"), false, false, 5);
-            hBoxAdressSave.PackStart(Налаштування, false, false, 5);
+            CreateField(vBox, "Адресне зберігання:", Налаштування);
         }
 
         #region Присвоєння / зчитування значень

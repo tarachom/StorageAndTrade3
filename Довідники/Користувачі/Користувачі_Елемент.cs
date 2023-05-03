@@ -33,7 +33,7 @@ namespace StorageAndTrade
 
         Entry Код = new Entry() { WidthRequest = 100 };
         Entry Назва = new Entry() { WidthRequest = 500 };
-        ФізичніОсоби_PointerControl ФізичнаОсоба = new ФізичніОсоби_PointerControl();
+        ФізичніОсоби_PointerControl ФізичнаОсоба = new ФізичніОсоби_PointerControl() { Caption = "Фізична особа:" };
         TextView Коментар = new TextView();
 
         public Користувачі_Елемент() : base() { }
@@ -44,36 +44,16 @@ namespace StorageAndTrade
             HPanedTop.Pack1(vBox, false, false);
 
             //Код
-            HBox hBoxCode = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxCode, false, false, 5);
-
-            hBoxCode.PackStart(new Label("Код:"), false, false, 5);
-            hBoxCode.PackStart(Код, false, false, 5);
+            CreateField(vBox, "Код:", Код);
 
             //Назва
-            HBox hBoxName = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxName, false, false, 5);
-
-            hBoxName.PackStart(new Label("Назва:"), false, false, 5);
-            hBoxName.PackStart(Назва, false, false, 5);
+            CreateField(vBox, "Назва:", Назва);
 
             //ФізичнаОсоба
-            HBox hBoxFizOsoba = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxFizOsoba, false, false, 5);
-
-            hBoxFizOsoba.PackStart(ФізичнаОсоба, false, false, 5);
+            CreateField(vBox, null, ФізичнаОсоба);
 
             //Коментар
-            HBox hBoxComment = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxComment, false, false, 5);
-
-            hBoxComment.PackStart(new Label("Коментар:") { Valign = Align.Start }, false, false, 5);
-
-            ScrolledWindow scrollTextViewComment = new ScrolledWindow() { ShadowType = ShadowType.In, WidthRequest = 500, HeightRequest = 200 };
-            scrollTextViewComment.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
-            scrollTextViewComment.Add(Коментар);
-
-            hBoxComment.PackStart(scrollTextViewComment, false, false, 5);
+            CreateFieldView(vBox, "Коментар:", Коментар, 500, 200);
         }
 
         #region Присвоєння / зчитування значень

@@ -50,47 +50,22 @@ namespace StorageAndTrade
             HPanedTop.Pack1(vBox, false, false);
 
             //Код
-            HBox hBoxCode = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxCode, false, false, 5);
-
-            hBoxCode.PackStart(new Label("Код:"), false, false, 5);
-            hBoxCode.PackStart(Код, false, false, 5);
+            CreateField(vBox, "Код:", Код);
 
             //Назва
-            HBox hBoxName = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxName, false, false, 5);
-
-            hBoxName.PackStart(new Label("Назва:"), false, false, 5);
-            hBoxName.PackStart(Назва, false, false, 5);
+            CreateField(vBox, "Назва:", Назва);
 
             //КореспондуючийРахунок
-            HBox hBoxKorRahunok = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxKorRahunok, false, false, 5);
-
-            hBoxKorRahunok.PackStart(new Label("Кореспондентський рахунок:"), false, false, 5);
-            hBoxKorRahunok.PackStart(КореспондуючийРахунок, false, false, 5);
+            CreateField(vBox, "Кореспондентський рахунок:", КореспондуючийРахунок);
 
             //ВидРухуКоштів
-            HBox hBoxVidRuhu = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxVidRuhu, false, false, 5);
-
             foreach (var field in ПсевдонімиПерелічення.ВидиРухуКоштів_List())
                 ВидРухуКоштів.Append(field.Value.ToString(), field.Name);
 
-            hBoxVidRuhu.PackStart(new Label("Вид руху коштів:"), false, false, 5);
-            hBoxVidRuhu.PackStart(ВидРухуКоштів, false, false, 5);
+            CreateField(vBox, "Вид руху коштів:", ВидРухуКоштів);
 
             //Опис
-            HBox hBoxOpys = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxOpys, false, false, 5);
-
-            hBoxOpys.PackStart(new Label("Опис:") { Valign = Align.Start }, false, false, 5);
-
-            ScrolledWindow scrollTextViewOpys = new ScrolledWindow() { ShadowType = ShadowType.In, WidthRequest = 500, HeightRequest = 200 };
-            scrollTextViewOpys.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
-            scrollTextViewOpys.Add(Опис);
-
-            hBoxOpys.PackStart(scrollTextViewOpys, false, false, 5);
+            CreateFieldView(vBox, "Опис:", Опис, 500, 200);
         }
 
         #region Присвоєння / зчитування значень

@@ -53,50 +53,28 @@ namespace StorageAndTrade
             HPanedTop.Pack1(vBox, false, false);
 
             //Код
-            HBox hBoxCode = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxCode, false, false, 5);
-
-            hBoxCode.PackStart(new Label("Код:"), false, false, 5);
-            hBoxCode.PackStart(Код, false, false, 5);
+            CreateField(vBox, "Код:", Код);
 
             //Назва
-            HBox hBoxName = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxName, false, false, 5);
-
-            hBoxName.PackStart(new Label("Назва:"), false, false, 5);
-            hBoxName.PackStart(Назва, false, false, 5);
+            CreateField(vBox, "Назва:", Назва);
 
             //Родич
-            HBox hBoxParent = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxParent, false, false, 5);
-
-            hBoxParent.PackStart(Родич, false, false, 5);
+            CreateField(vBox, null, Родич);
 
             //ВидЦін
-            HBox hBoxVidCen = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxVidCen, false, false, 5);
-
-            hBoxVidCen.PackStart(ВидЦін, false, false, 5);
+            CreateField(vBox, null, ВидЦін);
 
             //Тип складу
-            HBox hBoxType = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxType, false, false, 5);
-
             foreach (var field in ПсевдонімиПерелічення.ТипиСкладів_List())
                 ТипСкладу.Append(field.Value.ToString(), field.Name);
 
-            hBoxType.PackStart(new Label("Тип складу:"), false, false, 5);
-            hBoxType.PackStart(ТипСкладу, false, false, 5);
+            CreateField(vBox, "Тип складу:", ТипСкладу);
 
             //НалаштуванняАдресногоЗберігання
-            HBox hBoxAdressSave = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxAdressSave, false, false, 5);
-
             foreach (var field in ПсевдонімиПерелічення.НалаштуванняАдресногоЗберігання_List())
                 Налаштування.Append(field.Value.ToString(), field.Name);
 
-            hBoxAdressSave.PackStart(new Label("Адресне зберігання:"), false, false, 5);
-            hBoxAdressSave.PackStart(Налаштування, false, false, 5);
+            CreateField(vBox, "Адресне зберігання:", Налаштування);
         }
 
         protected override void CreatePack2()
@@ -104,13 +82,8 @@ namespace StorageAndTrade
             VBox vBox = new VBox();
             HPanedTop.Pack2(vBox, false, false);
 
-            HBox hBox = new HBox();
-            hBox.PackStart(new Label("Контакти:"), false, false, 5);
-            vBox.PackStart(hBox, false, false, 5);
-
-            HBox hBoxContakty = new HBox();
-            hBoxContakty.PackStart(Контакти, true, true, 5);
-            vBox.PackStart(hBoxContakty, false, false, 0);
+            //Контакти
+            CreateTablePart(vBox, "Контакти:", Контакти);
         }
 
         #region Присвоєння / зчитування значень

@@ -45,36 +45,16 @@ namespace StorageAndTrade
             HPanedTop.Pack1(vBox, false, false);
 
             //Код
-            HBox hBoxCode = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxCode, false, false, 5);
-
-            hBoxCode.PackStart(new Label("Код:"), false, false, 5);
-            hBoxCode.PackStart(Код, false, false, 5);
+            CreateField(vBox, "Код:", Код);
 
             //Номенклатура
-            HBox hBoxNomenklatura = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxNomenklatura, false, false, 5);
-
-            hBoxNomenklatura.PackStart(Номенклатура, false, false, 5);
+            CreateField(vBox, null, Номенклатура);
 
             //Назва
-            HBox hBoxName = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxName, false, false, 5);
-
-            hBoxName.PackStart(new Label("Назва:"), false, false, 5);
-            hBoxName.PackStart(Назва, false, false, 5);
+            CreateField(vBox, "Назва:", Назва);
 
             //НазваПовна
-            HBox hBoxDesc = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxDesc, false, false, 5);
-
-            hBoxDesc.PackStart(new Label("Повна назва:") { Valign = Align.Start }, false, false, 5);
-
-            ScrolledWindow scrollTextView = new ScrolledWindow() { ShadowType = ShadowType.In, WidthRequest = 500, HeightRequest = 100 };
-            scrollTextView.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
-            scrollTextView.Add(НазваПовна);
-
-            hBoxDesc.PackStart(scrollTextView, false, false, 5);
+            CreateFieldView(vBox, "Повна назва:", НазваПовна, 500, 100);
         }
 
         #region Присвоєння / зчитування значень

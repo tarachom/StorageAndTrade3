@@ -55,71 +55,31 @@ namespace StorageAndTrade
             HPanedTop.Pack1(vBox, false, false);
 
             //Код
-            HBox hBoxCode = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxCode, false, false, 5);
-
-            hBoxCode.PackStart(new Label("Код:"), false, false, 5);
-            hBoxCode.PackStart(Код, false, false, 5);
+            CreateField(vBox, "Код:", Код);
 
             //Назва
-            HBox hBoxName = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxName, false, false, 5);
-
-            hBoxName.PackStart(new Label("Назва:"), false, false, 5);
-            hBoxName.PackStart(Назва, false, false, 5);
+            CreateField(vBox, "Назва:", Назва);
 
             //НазваСкорочена
-            HBox hBoxSmallName = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxSmallName, false, false, 5);
-
-            hBoxSmallName.PackStart(new Label("Назва скорочена:"), false, false, 5);
-            hBoxSmallName.PackStart(НазваСкорочена, false, false, 5);
+            CreateField(vBox, "Назва скорочена:", НазваСкорочена);
 
             //НазваПовна
-            HBox hBoxDesc = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxDesc, false, false, 5);
-
-            hBoxDesc.PackStart(new Label("Повна назва:") { Valign = Align.Start }, false, false, 5);
-
-            ScrolledWindow scrollTextView = new ScrolledWindow() { ShadowType = ShadowType.In, WidthRequest = 500, HeightRequest = 100 };
-            scrollTextView.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
-            scrollTextView.Add(НазваПовна);
-
-            hBoxDesc.PackStart(scrollTextView, false, false, 5);
+            CreateFieldView(vBox, "Повна назва:", НазваПовна, 500, 100);
 
             //ДатаРеєстрації
-            HBox hBoxDateRegister = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxDateRegister, false, false, 5);
+            CreateField(vBox, "Дата реєстрації:", ДатаРеєстрації);
 
-            hBoxDateRegister.PackStart(new Label("Дата реєстрації:"), false, false, 5);
-            hBoxDateRegister.PackStart(ДатаРеєстрації, false, false, 5);
-
-            //ДатаРеєстрації
-            HBox hBoxCountryRegister = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxCountryRegister, false, false, 5);
-
-            hBoxCountryRegister.PackStart(new Label("Країна реєстрації:"), false, false, 5);
-            hBoxCountryRegister.PackStart(КраїнаРеєстрації, false, false, 5);
+            //КраїнаРеєстрації
+            CreateField(vBox, "Країна реєстрації:", КраїнаРеєстрації);
 
             //СвідоцтвоСеріяНомер
-            HBox hBoxSvidotstvo = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxSvidotstvo, false, false, 5);
-
-            hBoxSvidotstvo.PackStart(new Label("Свідоцтво серія номер:"), false, false, 5);
-            hBoxSvidotstvo.PackStart(СвідоцтвоСеріяНомер, false, false, 5);
+            CreateField(vBox, "Свідоцтво серія номер:", СвідоцтвоСеріяНомер);
 
             //СвідоцтвоДатаВидачі
-            HBox hBoxSvidotstvoData = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxSvidotstvoData, false, false, 5);
-
-            hBoxSvidotstvoData.PackStart(new Label("Свідоцтво дата видачі:"), false, false, 5);
-            hBoxSvidotstvoData.PackStart(СвідоцтвоДатаВидачі, false, false, 5);
+            CreateField(vBox, "Свідоцтво дата видачі:", СвідоцтвоДатаВидачі);
 
             //Холдинг
-            HBox hBoxHolding = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxHolding, false, false, 5);
-
-            hBoxHolding.PackStart(Холдинг, false, false, 3);
+            CreateField(vBox, null, Холдинг);
         }
 
         protected override void CreatePack2()
@@ -127,13 +87,8 @@ namespace StorageAndTrade
             VBox vBox = new VBox();
             HPanedTop.Pack2(vBox, false, false);
 
-            HBox hBox = new HBox();
-            hBox.PackStart(new Label("Контакти:"), false, false, 5);
-            vBox.PackStart(hBox, false, false, 5);
-
-            HBox hBoxContakty = new HBox();
-            hBoxContakty.PackStart(Контакти, true, true, 5);
-            vBox.PackStart(hBoxContakty, false, false, 0);
+            //Контакти
+            CreateTablePart(vBox, "Контакти:", Контакти);
         }
 
         #region Присвоєння / зчитування значень

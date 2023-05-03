@@ -44,33 +44,16 @@ namespace StorageAndTrade
             HPanedTop.Pack1(vBox, false, false);
 
             //Код
-            HBox hBoxCode = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxCode, false, false, 5);
-
-            hBoxCode.PackStart(new Label("Код:"), false, false, 5);
-            hBoxCode.PackStart(Код, false, false, 5);
+            CreateField(vBox, "Код:", Код);
 
             //Назва
-            HBox hBoxName = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxName, false, false, 5);
-
-            hBoxName.PackStart(new Label("Назва:"), false, false, 5);
-            hBoxName.PackStart(Назва, false, false, 5);
+            CreateField(vBox, "Назва:", Назва);
 
             //НазваПовна
-            HBox hBoxNameFull = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxNameFull, false, false, 5);
-
-            hBoxNameFull.PackStart(new Label("Назва повна:"), false, false, 5);
-            hBoxNameFull.PackStart(НазваПовна, false, false, 5);
+            CreateField(vBox, "Назва повна:", НазваПовна);
 
             //КількістьУпаковок
-            HBox hBoxKvoPack = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxKvoPack, false, false, 5);
-
-            hBoxKvoPack.PackStart(new Label("Кількість упаковок:"), false, false, 5);
-            hBoxKvoPack.PackStart(КількістьУпаковок, false, false, 5);
-
+            CreateField(vBox, "Кількість упаковок:", КількістьУпаковок);
         }
 
         #region Присвоєння / зчитування значень

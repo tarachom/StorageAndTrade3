@@ -49,46 +49,22 @@ namespace StorageAndTrade
             HPanedTop.Pack1(vBox, false, false);
 
             //Назва
-            HBox hBoxName = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxName, false, false, 5);
-
-            hBoxName.PackStart(new Label("Назва:"), false, false, 5);
-            hBoxName.PackStart(Назва, false, false, 5);
+            CreateField(vBox, "Назва:", Назва);
 
             //Висота
-            HBox hBoxVisota = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxVisota, false, false, 5);
-
-            hBoxVisota.PackStart(new Label("Висота:"), false, false, 5);
-            hBoxVisota.PackStart(Висота, false, false, 5);
+            CreateField(vBox, "Висота:", Висота);
 
             //Ширина
-            HBox hBoxShyryna = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxShyryna, false, false, 5);
-
-            hBoxShyryna.PackStart(new Label("Ширина:"), false, false, 5);
-            hBoxShyryna.PackStart(Ширина, false, false, 5);
+            CreateField(vBox, "Ширина:", Ширина);
 
             //Глибина
-            HBox hBoxGlybyna = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxGlybyna, false, false, 5);
-
-            hBoxGlybyna.PackStart(new Label("Глибина:"), false, false, 5);
-            hBoxGlybyna.PackStart(Глибина, false, false, 5);
+            CreateField(vBox, "Глибина:", Глибина);
 
             //Обєм
-            HBox hBoxObjem = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxObjem, false, false, 5);
-
-            hBoxObjem.PackStart(new Label("Обєм:"), false, false, 5);
-            hBoxObjem.PackStart(Обєм, false, false, 5);
+            CreateField(vBox, "Об'єм:", Обєм);
 
             //Вантажопідйомність
-            HBox hBoxVantaj = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxVantaj, false, false, 5);
-
-            hBoxVantaj.PackStart(new Label("Вантажопідйомність:"), false, false, 5);
-            hBoxVantaj.PackStart(Вантажопідйомність, false, false, 5);
+            CreateField(vBox, "Вантажопідйомність:", Вантажопідйомність);
         }
 
         #region Присвоєння / зчитування значень

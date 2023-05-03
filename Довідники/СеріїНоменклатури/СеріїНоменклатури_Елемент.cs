@@ -41,11 +41,7 @@ namespace StorageAndTrade
             HPanedTop.Pack1(vBox, false, false);
 
             //Номер
-            HBox hBoxNomer = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxNomer, false, false, 5);
-
-            hBoxNomer.PackStart(new Label("Номер:"), false, false, 5);
-            hBoxNomer.PackStart(Номер, false, false, 5);
+            CreateField(vBox, "Номер:", Номер);
         }
 
         #region Присвоєння / зчитування значень
