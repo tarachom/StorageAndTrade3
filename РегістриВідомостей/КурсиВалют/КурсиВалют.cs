@@ -29,68 +29,29 @@ using StorageAndTrade_1_0.РегістриВідомостей;
 
 namespace StorageAndTrade
 {
-    class КурсиВалют : VBox
+    class КурсиВалют : РегістриЖурнал
     {
-        TreeView TreeViewGrid;
         public Валюти_PointerControl ВалютаВласник = new Валюти_PointerControl();
-        SearchControl2 ПошукПовнотекстовий = new SearchControl2();
 
-        public КурсиВалют(bool IsSelectPointer = false) : base()
+        public КурсиВалют() : base()
         {
-            BorderWidth = 0;
-
-            //Кнопки
-            HBox hBoxTop = new HBox();
-            PackStart(hBoxTop, false, false, 10);
-
-            //Пошук 2
-            hBoxTop.PackStart(ПошукПовнотекстовий, false, false, 2);
-            ПошукПовнотекстовий.Select = LoadRecords_OnSearch;
-            ПошукПовнотекстовий.Clear = LoadRecords;
-
-            CreateToolbar();
-
-            ScrolledWindow scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In };
-            scrollTree.SetPolicy(PolicyType.Never, PolicyType.Automatic);
-
-            TreeViewGrid = new TreeView(ТабличніСписки.КурсиВалют_Записи.Store);
+            TreeViewGrid.Model = ТабличніСписки.КурсиВалют_Записи.Store;
             ТабличніСписки.КурсиВалют_Записи.AddColumns(TreeViewGrid);
 
-            TreeViewGrid.Selection.Mode = SelectionMode.Multiple;
-            TreeViewGrid.ActivateOnSingleClick = true;
-            TreeViewGrid.ButtonPressEvent += OnButtonPressEvent;
-
-            scrollTree.Add(TreeViewGrid);
-
-            PackStart(scrollTree, true, true, 0);
-
-            ShowAll();
+            HBoxTop.PackStart(ВалютаВласник, false, false, 2);
+            ВалютаВласник.AfterSelectFunc = () =>
+            {
+                LoadRecords();
+            };
         }
 
-        void CreateToolbar()
+        public override void LoadRecords()
         {
-            Toolbar toolbar = new Toolbar();
-            PackStart(toolbar, false, false, 0);
+            if (ВалютаВласник.Pointer.UnigueID.IsEmpty())
+                return;
 
-            ToolButton addButton = new ToolButton(Stock.Add) { TooltipText = "Додати" };
-            addButton.Clicked += OnAddClick;
-            toolbar.Add(addButton);
+            ТабличніСписки.КурсиВалют_Записи.SelectPointerItem = SelectPointerItem;
 
-            ToolButton upButton = new ToolButton(Stock.Edit) { TooltipText = "Редагувати" };
-            upButton.Clicked += OnEditClick;
-            toolbar.Add(upButton);
-
-            ToolButton deleteButton = new ToolButton(Stock.Delete) { TooltipText = "Видалити" };
-            deleteButton.Clicked += OnDeleteClick;
-            toolbar.Add(deleteButton);
-
-            ToolButton refreshButton = new ToolButton(Stock.Refresh) { TooltipText = "Обновити" };
-            refreshButton.Clicked += OnRefreshClick;
-            toolbar.Add(refreshButton);
-        }
-
-        public void LoadRecords()
-        {
             ТабличніСписки.КурсиВалют_Записи.Where.Clear();
 
             if (!ВалютаВласник.Pointer.UnigueID.IsEmpty())
@@ -101,12 +62,17 @@ namespace StorageAndTrade
 
             ТабличніСписки.КурсиВалют_Записи.LoadRecords();
 
-            if (ТабличніСписки.КурсиВалют_Записи.CurrentPath != null)
+            if (ТабличніСписки.КурсиВалют_Записи.SelectPath != null)
+                TreeViewGrid.SetCursor(ТабличніСписки.КурсиВалют_Записи.SelectPath, TreeViewGrid.Columns[0], false);
+            else if (ТабличніСписки.КурсиВалют_Записи.CurrentPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.КурсиВалют_Записи.CurrentPath, TreeViewGrid.Columns[0], false);
         }
 
-        void LoadRecords_OnSearch(string searchText)
+        protected override void LoadRecords_OnSearch(string searchText)
         {
+            if (ВалютаВласник.Pointer.UnigueID.IsEmpty())
+                return;
+                
             searchText = searchText.ToLower().Trim();
 
             if (searchText.Length < 1)
@@ -134,7 +100,7 @@ namespace StorageAndTrade
             ТабличніСписки.КурсиВалют_Записи.LoadRecords();
         }
 
-        void OpenPageElement(bool IsNew, string uid = "")
+        protected override void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             if (IsNew)
             {
@@ -142,7 +108,7 @@ namespace StorageAndTrade
                 {
                     КурсиВалют_Елемент page = new КурсиВалют_Елемент
                     {
-                        PageList = this,
+                        CallBack_LoadRecords = CallBack_LoadRecords,
                         IsNew = true,
                         ВалютаДляНового = ВалютаВласник.Pointer
                     };
@@ -152,16 +118,16 @@ namespace StorageAndTrade
                     return page;
                 }, true);
             }
-            else
+            else if (unigueID != null)
             {
                 КурсиВалют_Objest КурсиВалют_Objest = new КурсиВалют_Objest();
-                if (КурсиВалют_Objest.Read(new UnigueID(uid)))
+                if (КурсиВалют_Objest.Read(unigueID))
                 {
                     Program.GeneralForm?.CreateNotebookPage($"{КурсиВалют_Objest.Курс}", () =>
                     {
                         КурсиВалют_Елемент page = new КурсиВалют_Елемент
                         {
-                            PageList = this,
+                            CallBack_LoadRecords = CallBack_LoadRecords,
                             IsNew = false,
                             КурсиВалют_Objest = КурсиВалют_Objest
                         };
@@ -176,77 +142,30 @@ namespace StorageAndTrade
             }
         }
 
-        #region TreeView
-
-        void OnButtonPressEvent(object? sender, ButtonPressEventArgs args)
+        protected override void Delete(UnigueID unigueID)
         {
-            if (args.Event.Type == Gdk.EventType.DoubleButtonPress && TreeViewGrid.Selection.CountSelectedRows() != 0)
-            {
-                TreeIter iter;
+            КурсиВалют_Objest КурсиВалют_Objest = new КурсиВалют_Objest();
+            if (КурсиВалют_Objest.Read(unigueID))
+                КурсиВалют_Objest.Delete();
+            else
+                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+        }
 
-                if (TreeViewGrid.Model.GetIter(out iter, TreeViewGrid.Selection.GetSelectedRows()[0]))
-                {
-                    string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
-                    OpenPageElement(false, uid);
-                }
+        protected override UnigueID? Copy(UnigueID unigueID)
+        {
+            КурсиВалют_Objest КурсиВалют_Objest = new КурсиВалют_Objest();
+            if (КурсиВалют_Objest.Read(unigueID))
+            {
+                КурсиВалют_Objest КурсиВалют_Objest_Новий = КурсиВалют_Objest.Copy();
+                КурсиВалют_Objest_Новий.Save();
+
+                return КурсиВалют_Objest_Новий.UnigueID;
+            }
+            else
+            {
+                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+                return null;
             }
         }
-
-        #endregion
-
-        #region ToolBar
-
-        void OnAddClick(object? sender, EventArgs args)
-        {
-            OpenPageElement(true);
-        }
-
-        void OnEditClick(object? sender, EventArgs args)
-        {
-            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
-            {
-                TreeIter iter;
-                if (TreeViewGrid.Model.GetIter(out iter, TreeViewGrid.Selection.GetSelectedRows()[0]))
-                {
-                    string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
-                    OpenPageElement(false, uid);
-                }
-            }
-        }
-
-        void OnRefreshClick(object? sender, EventArgs args)
-        {
-            LoadRecords();
-        }
-
-        void OnDeleteClick(object? sender, EventArgs args)
-        {
-            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
-            {
-                if (Message.Request(Program.GeneralForm, "Видалити?") == ResponseType.Yes)
-                {
-                    TreePath[] selectionRows = TreeViewGrid.Selection.GetSelectedRows();
-
-                    foreach (TreePath itemPath in selectionRows)
-                    {
-                        TreeIter iter;
-                        TreeViewGrid.Model.GetIter(out iter, itemPath);
-
-                        string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
-
-                        КурсиВалют_Objest КурсиВалют_Objest = new КурсиВалют_Objest();
-                        if (КурсиВалют_Objest.Read(new UnigueID(uid)))
-                            КурсиВалют_Objest.Delete();
-                        else
-                            Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                    }
-
-                    LoadRecords();
-                }
-            }
-        }
-
-        #endregion
-
     }
 }

@@ -27,21 +27,16 @@ using AccountingSoftware;
 
 namespace StorageAndTrade
 {
-    public abstract class ДовідникЖурнал : VBox
+    public abstract class РегістриЖурнал : VBox
     {
-        public UnigueID? SelectPointerItem { get; set; }
-        public UnigueID? DirectoryPointerItem { get; set; }
-        public System.Action<UnigueID>? CallBack_OnSelectPointer { get; set; }
+        public UnigueID? SelectPointerItem { get; set; }//?
 
         protected Toolbar ToolbarTop = new Toolbar();
         protected HBox HBoxTop = new HBox();
-        protected HPaned HPanedTable = new HPaned();
         protected TreeView TreeViewGrid = new TreeView();
         SearchControl2 ПошукПовнотекстовий = new SearchControl2();
 
-        protected string MessageRequestText { get; set; } = "Встановити або зняти помітку на видалення?";
-
-        public ДовідникЖурнал() : base()
+        public РегістриЖурнал() : base()
         {
             BorderWidth = 0;
 
@@ -67,9 +62,7 @@ namespace StorageAndTrade
             TreeViewGrid.KeyReleaseEvent += OnKeyReleaseEvent;
             scrollTree.Add(TreeViewGrid);
 
-            HPanedTable.Pack1(scrollTree, true, true);
-
-            PackStart(HPanedTable, true, true, 0);
+            PackStart(scrollTree, true, true, 0);
 
             ShowAll();
         }
@@ -105,9 +98,9 @@ namespace StorageAndTrade
         {
             Menu Menu = new Menu();
 
-            MenuItem setDeletionLabel = new MenuItem("Помітка на видалення");
-            setDeletionLabel.Activated += OnDeleteClick;
-            Menu.Append(setDeletionLabel);
+            MenuItem delete = new MenuItem("Видалити");
+            delete.Activated += OnDeleteClick;
+            Menu.Append(delete);
 
             Menu.ShowAll();
 
@@ -124,7 +117,7 @@ namespace StorageAndTrade
 
         protected virtual void OpenPageElement(bool IsNew, UnigueID? unigueID = null) { }
 
-        protected virtual void SetDeletionLabel(UnigueID unigueID) { }
+        protected virtual void Delete(UnigueID unigueID) { }
 
         protected virtual UnigueID? Copy(UnigueID unigueID) { return null; }
 
@@ -172,15 +165,7 @@ namespace StorageAndTrade
                 {
                     UnigueID unigueID = new UnigueID((string)TreeViewGrid.Model.GetValue(iter, 1));
 
-                    if (DirectoryPointerItem == null)
-                        OpenPageElement(false, unigueID);
-                    else
-                    {
-                        if (CallBack_OnSelectPointer != null)
-                            CallBack_OnSelectPointer.Invoke(unigueID);
-
-                        Program.GeneralForm?.CloseCurrentPageNotebook();
-                    }
+                    OpenPageElement(false, unigueID);
                 }
             }
         }
@@ -259,7 +244,7 @@ namespace StorageAndTrade
         {
             if (TreeViewGrid.Selection.CountSelectedRows() != 0)
             {
-                if (Message.Request(Program.GeneralForm, MessageRequestText) == ResponseType.Yes)
+                if (Message.Request(Program.GeneralForm, "Встановити або зняти помітку на видалення?") == ResponseType.Yes)
                 {
                     TreePath[] selectionRows = TreeViewGrid.Selection.GetSelectedRows();
 
@@ -270,7 +255,7 @@ namespace StorageAndTrade
 
                         UnigueID unigueID = new UnigueID((string)TreeViewGrid.Model.GetValue(iter, 1));
 
-                        SetDeletionLabel(unigueID);
+                        Delete(unigueID);
 
                         SelectPointerItem = unigueID;
                     }

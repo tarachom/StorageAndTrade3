@@ -69,6 +69,8 @@ namespace StorageAndTrade
 
             TreeViewGrid.Model = ТабличніСписки.Валюти_Записи.Store;
             ТабличніСписки.Валюти_Записи.AddColumns(TreeViewGrid);
+
+            MessageRequestText = "Встановити або зняти помітку на видалення?\n\nУВАГА!\nПри встановленні помітку на видалення, буде очищений регіст Курси Валют!";
         }
 
         #region Override

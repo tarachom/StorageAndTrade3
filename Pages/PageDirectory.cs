@@ -200,39 +200,6 @@ namespace StorageAndTrade
                 });
             }
 
-            Link.AddCaption(vLeft, "Адресне зберігання");
-            {
-                Link.AddLink(vLeft, $"{СкладськіПриміщення_Const.FULLNAME}", () =>
-                {
-                    Program.GeneralForm?.CreateNotebookPage($"{СкладськіПриміщення_Const.FULLNAME}", () =>
-                    {
-                        СкладськіПриміщення page = new СкладськіПриміщення();
-                        page.LoadRecords();
-                        return page;
-                    });
-                });
-
-                Link.AddLink(vLeft, $"{СкладськіКомірки_Const.FULLNAME}", () =>
-                {
-                    Program.GeneralForm?.CreateNotebookPage($"{СкладськіКомірки_Const.FULLNAME}", () =>
-                    {
-                        СкладськіКомірки page = new СкладськіКомірки();
-                        page.LoadRecords();
-                        return page;
-                    });
-                });
-
-                Link.AddLink(vLeft, $"{ТипорозміриКомірок_Const.FULLNAME}", () =>
-                {
-                    Program.GeneralForm?.CreateNotebookPage($"{ТипорозміриКомірок_Const.FULLNAME}", () =>
-                    {
-                        ТипорозміриКомірок page = new ТипорозміриКомірок();
-                        page.LoadRecords();
-                        return page;
-                    });
-                });
-            }
-
             Link.AddSeparator(hBoxList);
 
             VBox vRight = new VBox(false, 0);
@@ -351,6 +318,39 @@ namespace StorageAndTrade
                     Program.GeneralForm?.CreateNotebookPage($"{Блокнот_Const.FULLNAME}", () =>
                     {
                         Блокнот page = new Блокнот();
+                        page.LoadRecords();
+                        return page;
+                    });
+                });
+            }
+
+            Link.AddCaption(vRight, "Адресне зберігання");
+            {
+                Link.AddLink(vRight, $"{СкладськіПриміщення_Const.FULLNAME}", () =>
+                {
+                    Program.GeneralForm?.CreateNotebookPage($"{СкладськіПриміщення_Const.FULLNAME}", () =>
+                    {
+                        СкладськіПриміщення page = new СкладськіПриміщення();
+                        page.LoadRecords();
+                        return page;
+                    });
+                });
+
+                Link.AddLink(vRight, $"{СкладськіКомірки_Const.FULLNAME}", () =>
+                {
+                    Program.GeneralForm?.CreateNotebookPage($"{СкладськіКомірки_Const.FULLNAME}", () =>
+                    {
+                        СкладськіКомірки page = new СкладськіКомірки();
+                        page.LoadRecords();
+                        return page;
+                    });
+                });
+
+                Link.AddLink(vRight, $"{ТипорозміриКомірок_Const.FULLNAME}", () =>
+                {
+                    Program.GeneralForm?.CreateNotebookPage($"{ТипорозміриКомірок_Const.FULLNAME}", () =>
+                    {
+                        ТипорозміриКомірок page = new ТипорозміриКомірок();
                         page.LoadRecords();
                         return page;
                     });

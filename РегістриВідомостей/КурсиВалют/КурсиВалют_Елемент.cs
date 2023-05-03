@@ -28,12 +28,8 @@ using StorageAndTrade_1_0.РегістриВідомостей;
 
 namespace StorageAndTrade
 {
-    class КурсиВалют_Елемент : VBox
+    class КурсиВалют_Елемент : РегістриЕлемент
     {
-        public КурсиВалют? PageList { get; set; }
-
-        public bool IsNew { get; set; } = true;
-
         public КурсиВалют_Objest КурсиВалют_Objest { get; set; } = new КурсиВалют_Objest();
 
         public Валюти_Pointer ВалютаДляНового { get; set; } = new Валюти_Pointer();
@@ -43,75 +39,31 @@ namespace StorageAndTrade
         NumericControl Курс = new NumericControl();
         IntegerControl Кратність = new IntegerControl();
 
-        public КурсиВалют_Елемент() : base()
+        public КурсиВалют_Елемент() : base() { }
+
+        protected override void CreatePack1(VBox vBox)
         {
-            HBox hBox = new HBox();
-            PackStart(hBox, false, false, 10);
-
-            Button bSave = new Button("Зберегти");
-            bSave.Clicked += OnSaveClick;
-
-            hBox.PackStart(bSave, false, false, 10);
-
-            HPaned hPaned = new HPaned() { BorderWidth = 5, Position = 500 };
-
-            CreatePack1(hPaned);
-            CreatePack2(hPaned);
-
-            PackStart(hPaned, false, false, 5);
-
-            ShowAll();
-        }
-
-        void CreatePack1(HPaned hPaned)
-        {
-            VBox vBox = new VBox();
-
             //ДатаКурсу
-            HBox hBoxDateKurs = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxDateKurs, false, false, 5);
-
-            hBoxDateKurs.PackStart(new Label("Дата:"), false, false, 5);
-            hBoxDateKurs.PackStart(ДатаКурсу, false, false, 5);
+            CreateField(vBox, "Дата:", ДатаКурсу);
 
             //Валюта
-            HBox hBoxValuta = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxValuta, false, false, 5);
-
-            hBoxValuta.PackStart(Валюта, false, false, 5);
+            CreateField(vBox, null, Валюта);
 
             //Курс
-            HBox hBoxKurs = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxKurs, false, false, 5);
-
-            hBoxKurs.PackStart(new Label("Курс:"), false, false, 5);
-            hBoxKurs.PackStart(Курс, false, false, 5);
+            CreateField(vBox, "Курс:", Курс);
 
             //Кратність
-            HBox hBoxKrat = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxKrat, false, false, 5);
-
-            hBoxKrat.PackStart(new Label("Кратність:"), false, false, 5);
-            hBoxKrat.PackStart(Кратність, false, false, 5);
-
-            hPaned.Pack1(vBox, false, false);
-        }
-
-        void CreatePack2(HPaned hPaned)
-        {
-            VBox vBox = new VBox();
-
-
-
-            hPaned.Pack2(vBox, false, false);
+            CreateField(vBox, "Кратність:", Кратність);
         }
 
         #region Присвоєння / зчитування значень
 
-        public void SetValue()
+        public override void SetValue()
         {
             if (IsNew)
             {
+                КурсиВалют_Objest.New();
+
                 ДатаКурсу.Value = DateTime.Now;
                 КурсиВалют_Objest.Валюта = ВалютаДляНового;
                 КурсиВалют_Objest.Кратність = 1;
@@ -123,8 +75,11 @@ namespace StorageAndTrade
             Кратність.Value = КурсиВалют_Objest.Кратність;
         }
 
-        void GetValue()
+        protected override void GetValue()
         {
+            UnigueID = КурсиВалют_Objest.UnigueID;
+            Caption = ДатаКурсу.Value.ToString();
+
             КурсиВалют_Objest.Period = ДатаКурсу.Value;
             КурсиВалют_Objest.Валюта = Валюта.Pointer;
             КурсиВалют_Objest.Курс = Курс.Value;
@@ -133,23 +88,15 @@ namespace StorageAndTrade
 
         #endregion
 
-        void OnSaveClick(object? sender, EventArgs args)
+        protected override void Save()
         {
-            if (IsNew)
+            try
             {
-                КурсиВалют_Objest.New();
-                IsNew = false;
+                КурсиВалют_Objest.Save();
             }
-
-            GetValue();
-
-            КурсиВалют_Objest.Save();
-
-            Program.GeneralForm?.RenameCurrentPageNotebook($"{КурсиВалют_Objest.Курс}");
-
-            if (PageList != null)
+            catch (Exception ex)
             {
-                PageList.LoadRecords();
+                MsgError(ex);
             }
         }
     }

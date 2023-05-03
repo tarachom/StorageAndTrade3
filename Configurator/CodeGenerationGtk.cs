@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 02.05.2023 19:20:43
+ * Дата конфігурації: 03.05.2023 21:29:35
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон Gtk.xslt
@@ -92,7 +92,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Довідники.Організації_Select Організації_Select = new Довідники.Організації_Select();
             Організації_Select.QuerySelect.Field.AddRange(
@@ -196,7 +196,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Довідники.Організації_Select Організації_Select = new Довідники.Організації_Select();
             Організації_Select.QuerySelect.Field.AddRange(
@@ -311,7 +311,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Довідники.Номенклатура_Select Номенклатура_Select = new Довідники.Номенклатура_Select();
             Номенклатура_Select.QuerySelect.Field.AddRange(
@@ -426,7 +426,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Довідники.Номенклатура_Select Номенклатура_Select = new Довідники.Номенклатура_Select();
             Номенклатура_Select.QuerySelect.Field.AddRange(
@@ -535,7 +535,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Довідники.Виробники_Select Виробники_Select = new Довідники.Виробники_Select();
             Виробники_Select.QuerySelect.Field.AddRange(
@@ -639,7 +639,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Довідники.Виробники_Select Виробники_Select = new Довідники.Виробники_Select();
             Виробники_Select.QuerySelect.Field.AddRange(
@@ -748,7 +748,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Довідники.ВидиНоменклатури_Select ВидиНоменклатури_Select = new Довідники.ВидиНоменклатури_Select();
             ВидиНоменклатури_Select.QuerySelect.Field.AddRange(
@@ -849,7 +849,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Довідники.ВидиНоменклатури_Select ВидиНоменклатури_Select = new Довідники.ВидиНоменклатури_Select();
             ВидиНоменклатури_Select.QuerySelect.Field.AddRange(
@@ -956,7 +956,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Довідники.ПакуванняОдиниціВиміру_Select ПакуванняОдиниціВиміру_Select = new Довідники.ПакуванняОдиниціВиміру_Select();
             ПакуванняОдиниціВиміру_Select.QuerySelect.Field.AddRange(
@@ -1060,7 +1060,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Довідники.ПакуванняОдиниціВиміру_Select ПакуванняОдиниціВиміру_Select = new Довідники.ПакуванняОдиниціВиміру_Select();
             ПакуванняОдиниціВиміру_Select.QuerySelect.Field.AddRange(
@@ -1178,7 +1178,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Довідники.Валюти_Select Валюти_Select = new Довідники.Валюти_Select();
             Валюти_Select.QuerySelect.Field.AddRange(
@@ -1294,7 +1294,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Довідники.Валюти_Select Валюти_Select = new Довідники.Валюти_Select();
             Валюти_Select.QuerySelect.Field.AddRange(
@@ -1410,7 +1410,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Довідники.Контрагенти_Select Контрагенти_Select = new Довідники.Контрагенти_Select();
             Контрагенти_Select.QuerySelect.Field.AddRange(
@@ -1523,7 +1523,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Довідники.Контрагенти_Select Контрагенти_Select = new Довідники.Контрагенти_Select();
             Контрагенти_Select.QuerySelect.Field.AddRange(
@@ -1638,7 +1638,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Довідники.Склади_Select Склади_Select = new Довідники.Склади_Select();
             Склади_Select.QuerySelect.Field.AddRange(
@@ -1746,7 +1746,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Довідники.Склади_Select Склади_Select = new Довідники.Склади_Select();
             Склади_Select.QuerySelect.Field.AddRange(
@@ -1858,7 +1858,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Довідники.ВидиЦін_Select ВидиЦін_Select = new Довідники.ВидиЦін_Select();
             ВидиЦін_Select.QuerySelect.Field.AddRange(
@@ -1968,7 +1968,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Довідники.ВидиЦін_Select ВидиЦін_Select = new Довідники.ВидиЦін_Select();
             ВидиЦін_Select.QuerySelect.Field.AddRange(
@@ -2075,7 +2075,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Довідники.ВидиЦінПостачальників_Select ВидиЦінПостачальників_Select = new Довідники.ВидиЦінПостачальників_Select();
             ВидиЦінПостачальників_Select.QuerySelect.Field.AddRange(
@@ -2179,7 +2179,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Довідники.ВидиЦінПостачальників_Select ВидиЦінПостачальників_Select = new Довідники.ВидиЦінПостачальників_Select();
             ВидиЦінПостачальників_Select.QuerySelect.Field.AddRange(
@@ -2288,7 +2288,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Довідники.Користувачі_Select Користувачі_Select = new Довідники.Користувачі_Select();
             Користувачі_Select.QuerySelect.Field.AddRange(
@@ -2389,7 +2389,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Довідники.Користувачі_Select Користувачі_Select = new Довідники.Користувачі_Select();
             Користувачі_Select.QuerySelect.Field.AddRange(
@@ -2496,7 +2496,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Довідники.ФізичніОсоби_Select ФізичніОсоби_Select = new Довідники.ФізичніОсоби_Select();
             ФізичніОсоби_Select.QuerySelect.Field.AddRange(
@@ -2597,7 +2597,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Довідники.ФізичніОсоби_Select ФізичніОсоби_Select = new Довідники.ФізичніОсоби_Select();
             ФізичніОсоби_Select.QuerySelect.Field.AddRange(
@@ -2704,7 +2704,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Довідники.СтруктураПідприємства_Select СтруктураПідприємства_Select = new Довідники.СтруктураПідприємства_Select();
             СтруктураПідприємства_Select.QuerySelect.Field.AddRange(
@@ -2805,7 +2805,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Довідники.СтруктураПідприємства_Select СтруктураПідприємства_Select = new Довідники.СтруктураПідприємства_Select();
             СтруктураПідприємства_Select.QuerySelect.Field.AddRange(
@@ -2912,7 +2912,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Довідники.КраїниСвіту_Select КраїниСвіту_Select = new Довідники.КраїниСвіту_Select();
             КраїниСвіту_Select.QuerySelect.Field.AddRange(
@@ -3016,7 +3016,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Довідники.КраїниСвіту_Select КраїниСвіту_Select = new Довідники.КраїниСвіту_Select();
             КраїниСвіту_Select.QuerySelect.Field.AddRange(
@@ -3134,7 +3134,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Довідники.Файли_Select Файли_Select = new Довідники.Файли_Select();
             Файли_Select.QuerySelect.Field.AddRange(
@@ -3241,7 +3241,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Довідники.Файли_Select Файли_Select = new Довідники.Файли_Select();
             Файли_Select.QuerySelect.Field.AddRange(
@@ -3351,7 +3351,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Довідники.ХарактеристикиНоменклатури_Select ХарактеристикиНоменклатури_Select = new Довідники.ХарактеристикиНоменклатури_Select();
             ХарактеристикиНоменклатури_Select.QuerySelect.Field.AddRange(
@@ -3467,7 +3467,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Довідники.ХарактеристикиНоменклатури_Select ХарактеристикиНоменклатури_Select = new Довідники.ХарактеристикиНоменклатури_Select();
             ХарактеристикиНоменклатури_Select.QuerySelect.Field.AddRange(
@@ -3603,7 +3603,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Довідники.Каси_Select Каси_Select = new Довідники.Каси_Select();
             Каси_Select.QuerySelect.Field.AddRange(
@@ -3719,7 +3719,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Довідники.Каси_Select Каси_Select = new Довідники.Каси_Select();
             Каси_Select.QuerySelect.Field.AddRange(
@@ -3840,7 +3840,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Довідники.БанківськіРахункиОрганізацій_Select БанківськіРахункиОрганізацій_Select = new Довідники.БанківськіРахункиОрганізацій_Select();
             БанківськіРахункиОрганізацій_Select.QuerySelect.Field.AddRange(
@@ -3956,7 +3956,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Довідники.БанківськіРахункиОрганізацій_Select БанківськіРахункиОрганізацій_Select = new Довідники.БанківськіРахункиОрганізацій_Select();
             БанківськіРахункиОрганізацій_Select.QuerySelect.Field.AddRange(
@@ -4080,7 +4080,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Довідники.ДоговориКонтрагентів_Select ДоговориКонтрагентів_Select = new Довідники.ДоговориКонтрагентів_Select();
             ДоговориКонтрагентів_Select.QuerySelect.Field.AddRange(
@@ -4198,7 +4198,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Довідники.ДоговориКонтрагентів_Select ДоговориКонтрагентів_Select = new Довідники.ДоговориКонтрагентів_Select();
             ДоговориКонтрагентів_Select.QuerySelect.Field.AddRange(
@@ -4319,7 +4319,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Довідники.БанківськіРахункиКонтрагентів_Select БанківськіРахункиКонтрагентів_Select = new Довідники.БанківськіРахункиКонтрагентів_Select();
             БанківськіРахункиКонтрагентів_Select.QuerySelect.Field.AddRange(
@@ -4435,7 +4435,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Довідники.БанківськіРахункиКонтрагентів_Select БанківськіРахункиКонтрагентів_Select = new Довідники.БанківськіРахункиКонтрагентів_Select();
             БанківськіРахункиКонтрагентів_Select.QuerySelect.Field.AddRange(
@@ -4559,7 +4559,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Довідники.СтаттяРухуКоштів_Select СтаттяРухуКоштів_Select = new Довідники.СтаттяРухуКоштів_Select();
             СтаттяРухуКоштів_Select.QuerySelect.Field.AddRange(
@@ -4664,7 +4664,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Довідники.СтаттяРухуКоштів_Select СтаттяРухуКоштів_Select = new Довідники.СтаттяРухуКоштів_Select();
             СтаттяРухуКоштів_Select.QuerySelect.Field.AddRange(
@@ -4768,7 +4768,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Довідники.СеріїНоменклатури_Select СеріїНоменклатури_Select = new Довідники.СеріїНоменклатури_Select();
             СеріїНоменклатури_Select.QuerySelect.Field.AddRange(
@@ -4867,7 +4867,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Довідники.СеріїНоменклатури_Select СеріїНоменклатури_Select = new Довідники.СеріїНоменклатури_Select();
             СеріїНоменклатури_Select.QuerySelect.Field.AddRange(
@@ -4983,7 +4983,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Довідники.ПартіяТоварівКомпозит_Select ПартіяТоварівКомпозит_Select = new Довідники.ПартіяТоварівКомпозит_Select();
             ПартіяТоварівКомпозит_Select.QuerySelect.Field.AddRange(
@@ -5107,7 +5107,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Довідники.ПартіяТоварівКомпозит_Select ПартіяТоварівКомпозит_Select = new Довідники.ПартіяТоварівКомпозит_Select();
             ПартіяТоварівКомпозит_Select.QuerySelect.Field.AddRange(
@@ -5213,7 +5213,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Довідники.ВидиЗапасів_Select ВидиЗапасів_Select = new Довідники.ВидиЗапасів_Select();
             ВидиЗапасів_Select.QuerySelect.Field.AddRange(
@@ -5317,7 +5317,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Довідники.ВидиЗапасів_Select ВидиЗапасів_Select = new Довідники.ВидиЗапасів_Select();
             ВидиЗапасів_Select.QuerySelect.Field.AddRange(
@@ -5477,7 +5477,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Довідники.Банки_Select Банки_Select = new Довідники.Банки_Select();
             Банки_Select.QuerySelect.Field.AddRange(
@@ -5615,7 +5615,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Довідники.Банки_Select Банки_Select = new Довідники.Банки_Select();
             Банки_Select.QuerySelect.Field.AddRange(
@@ -5727,7 +5727,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Довідники.СкладськіПриміщення_Select СкладськіПриміщення_Select = new Довідники.СкладськіПриміщення_Select();
             СкладськіПриміщення_Select.QuerySelect.Field.AddRange(
@@ -5840,7 +5840,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Довідники.СкладськіПриміщення_Select СкладськіПриміщення_Select = new Довідники.СкладськіПриміщення_Select();
             СкладськіПриміщення_Select.QuerySelect.Field.AddRange(
@@ -5977,7 +5977,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Довідники.СкладськіКомірки_Select СкладськіКомірки_Select = new Довідники.СкладськіКомірки_Select();
             СкладськіКомірки_Select.QuerySelect.Field.AddRange(
@@ -6116,7 +6116,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Довідники.СкладськіКомірки_Select СкладськіКомірки_Select = new Довідники.СкладськіКомірки_Select();
             СкладськіКомірки_Select.QuerySelect.Field.AddRange(
@@ -6232,7 +6232,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Довідники.ОбластьЗберігання_Select ОбластьЗберігання_Select = new Довідники.ОбластьЗберігання_Select();
             ОбластьЗберігання_Select.QuerySelect.Field.AddRange(
@@ -6360,7 +6360,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Довідники.ТипорозміриКомірок_Select ТипорозміриКомірок_Select = new Довідники.ТипорозміриКомірок_Select();
             ТипорозміриКомірок_Select.QuerySelect.Field.AddRange(
@@ -6469,7 +6469,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Довідники.ТипорозміриКомірок_Select ТипорозміриКомірок_Select = new Довідники.ТипорозміриКомірок_Select();
             ТипорозміриКомірок_Select.QuerySelect.Field.AddRange(
@@ -6584,7 +6584,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Довідники.Блокнот_Select Блокнот_Select = new Довідники.Блокнот_Select();
             Блокнот_Select.QuerySelect.Field.AddRange(
@@ -6693,7 +6693,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Довідники.Блокнот_Select Блокнот_Select = new Довідники.Блокнот_Select();
             Блокнот_Select.QuerySelect.Field.AddRange(
@@ -6906,7 +6906,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Документи.ЗамовленняПостачальнику_Select ЗамовленняПостачальнику_Select = new Документи.ЗамовленняПостачальнику_Select();
             ЗамовленняПостачальнику_Select.QuerySelect.Field.AddRange(
@@ -7103,7 +7103,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Документи.ПоступленняТоварівТаПослуг_Select ПоступленняТоварівТаПослуг_Select = new Документи.ПоступленняТоварівТаПослуг_Select();
             ПоступленняТоварівТаПослуг_Select.QuerySelect.Field.AddRange(
@@ -7309,7 +7309,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Документи.ЗамовленняКлієнта_Select ЗамовленняКлієнта_Select = new Документи.ЗамовленняКлієнта_Select();
             ЗамовленняКлієнта_Select.QuerySelect.Field.AddRange(
@@ -7515,7 +7515,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Документи.РеалізаціяТоварівТаПослуг_Select РеалізаціяТоварівТаПослуг_Select = new Документи.РеалізаціяТоварівТаПослуг_Select();
             РеалізаціяТоварівТаПослуг_Select.QuerySelect.Field.AddRange(
@@ -7712,7 +7712,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Документи.ВстановленняЦінНоменклатури_Select ВстановленняЦінНоменклатури_Select = new Документи.ВстановленняЦінНоменклатури_Select();
             ВстановленняЦінНоменклатури_Select.QuerySelect.Field.AddRange(
@@ -7898,7 +7898,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Документи.ПрихіднийКасовийОрдер_Select ПрихіднийКасовийОрдер_Select = new Документи.ПрихіднийКасовийОрдер_Select();
             ПрихіднийКасовийОрдер_Select.QuerySelect.Field.AddRange(
@@ -8097,7 +8097,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Документи.РозхіднийКасовийОрдер_Select РозхіднийКасовийОрдер_Select = new Документи.РозхіднийКасовийОрдер_Select();
             РозхіднийКасовийОрдер_Select.QuerySelect.Field.AddRange(
@@ -8287,7 +8287,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Документи.ПереміщенняТоварів_Select ПереміщенняТоварів_Select = new Документи.ПереміщенняТоварів_Select();
             ПереміщенняТоварів_Select.QuerySelect.Field.AddRange(
@@ -8473,7 +8473,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Документи.ПоверненняТоварівПостачальнику_Select ПоверненняТоварівПостачальнику_Select = new Документи.ПоверненняТоварівПостачальнику_Select();
             ПоверненняТоварівПостачальнику_Select.QuerySelect.Field.AddRange(
@@ -8679,7 +8679,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Документи.ПоверненняТоварівВідКлієнта_Select ПоверненняТоварівВідКлієнта_Select = new Документи.ПоверненняТоварівВідКлієнта_Select();
             ПоверненняТоварівВідКлієнта_Select.QuerySelect.Field.AddRange(
@@ -8882,7 +8882,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Документи.АктВиконанихРобіт_Select АктВиконанихРобіт_Select = new Документи.АктВиконанихРобіт_Select();
             АктВиконанихРобіт_Select.QuerySelect.Field.AddRange(
@@ -9073,7 +9073,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Документи.ВведенняЗалишків_Select ВведенняЗалишків_Select = new Документи.ВведенняЗалишків_Select();
             ВведенняЗалишків_Select.QuerySelect.Field.AddRange(
@@ -9256,7 +9256,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Документи.НадлишкиТоварів_Select НадлишкиТоварів_Select = new Документи.НадлишкиТоварів_Select();
             НадлишкиТоварів_Select.QuerySelect.Field.AddRange(
@@ -9421,7 +9421,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Документи.ПересортицяТоварів_Select ПересортицяТоварів_Select = new Документи.ПересортицяТоварів_Select();
             ПересортицяТоварів_Select.QuerySelect.Field.AddRange(
@@ -9583,7 +9583,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Документи.ПерерахунокТоварів_Select ПерерахунокТоварів_Select = new Документи.ПерерахунокТоварів_Select();
             ПерерахунокТоварів_Select.QuerySelect.Field.AddRange(
@@ -9742,7 +9742,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Документи.ПсуванняТоварів_Select ПсуванняТоварів_Select = new Документи.ПсуванняТоварів_Select();
             ПсуванняТоварів_Select.QuerySelect.Field.AddRange(
@@ -9915,7 +9915,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Документи.ВнутрішнєСпоживанняТоварів_Select ВнутрішнєСпоживанняТоварів_Select = new Документи.ВнутрішнєСпоживанняТоварів_Select();
             ВнутрішнєСпоживанняТоварів_Select.QuerySelect.Field.AddRange(
@@ -10103,7 +10103,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Документи.РахунокФактура_Select РахунокФактура_Select = new Документи.РахунокФактура_Select();
             РахунокФактура_Select.QuerySelect.Field.AddRange(
@@ -10297,7 +10297,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Документи.РозміщенняТоварівНаСкладі_Select РозміщенняТоварівНаСкладі_Select = new Документи.РозміщенняТоварівНаСкладі_Select();
             РозміщенняТоварівНаСкладі_Select.QuerySelect.Field.AddRange(
@@ -10462,7 +10462,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Документи.ПереміщенняТоварівНаСкладі_Select ПереміщенняТоварівНаСкладі_Select = new Документи.ПереміщенняТоварівНаСкладі_Select();
             ПереміщенняТоварівНаСкладі_Select.QuerySelect.Field.AddRange(
@@ -10627,7 +10627,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Документи.ЗбіркаТоварівНаСкладі_Select ЗбіркаТоварівНаСкладі_Select = new Документи.ЗбіркаТоварівНаСкладі_Select();
             ЗбіркаТоварівНаСкладі_Select.QuerySelect.Field.AddRange(
@@ -10792,7 +10792,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Документи.РозміщенняНоменклатуриПоКоміркам_Select РозміщенняНоменклатуриПоКоміркам_Select = new Документи.РозміщенняНоменклатуриПоКоміркам_Select();
             РозміщенняНоменклатуриПоКоміркам_Select.QuerySelect.Field.AddRange(
@@ -11125,6 +11125,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
+            SelectPath = CurrentPath = null;
             List<string> allQuery = new List<string>();
             Dictionary<string, object> paramQuery = new Dictionary<string, object>();
 
@@ -12713,6 +12714,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
+            SelectPath = CurrentPath = null;
             List<string> allQuery = new List<string>();
             Dictionary<string, object> paramQuery = new Dictionary<string, object>();
 
@@ -13154,6 +13156,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
+            SelectPath = CurrentPath = null;
             List<string> allQuery = new List<string>();
             Dictionary<string, object> paramQuery = new Dictionary<string, object>();
 
@@ -13731,6 +13734,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
+            SelectPath = CurrentPath = null;
             List<string> allQuery = new List<string>();
             Dictionary<string, object> paramQuery = new Dictionary<string, object>();
 
@@ -14075,6 +14079,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
+            SelectPath = CurrentPath = null;
             List<string> allQuery = new List<string>();
             Dictionary<string, object> paramQuery = new Dictionary<string, object>();
 
@@ -14481,6 +14486,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static void LoadRecords()
         {
             Store.Clear();
+            SelectPath = CurrentPath = null;
             List<string> allQuery = new List<string>();
             Dictionary<string, object> paramQuery = new Dictionary<string, object>();
 
@@ -14802,14 +14808,14 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static TreePath? FirstPath;
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
-            FirstPath = null;
+            SelectPath = CurrentPath = null;
 
             РегістриВідомостей.ЦіниНоменклатури_RecordsSet ЦіниНоменклатури_RecordsSet = new РегістриВідомостей.ЦіниНоменклатури_RecordsSet();
 
@@ -14881,8 +14887,11 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
                 TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                 CurrentPath = Store.GetPath(CurrentIter);
 
-                if (FirstPath == null)
-                    FirstPath = CurrentPath;
+                if (SelectPointerItem != null)
+                {
+                    if (Record.ID == SelectPointerItem.ToString())
+                        SelectPath = CurrentPath;
+                }
             }
         }
     }
@@ -14930,14 +14939,14 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static TreePath? FirstPath;
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
-            FirstPath = null;
+            SelectPath = CurrentPath = null;
 
             РегістриВідомостей.КурсиВалют_RecordsSet КурсиВалют_RecordsSet = new РегістриВідомостей.КурсиВалют_RecordsSet();
 
@@ -14974,8 +14983,11 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
                 TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                 CurrentPath = Store.GetPath(CurrentIter);
 
-                if (FirstPath == null)
-                    FirstPath = CurrentPath;
+                if (SelectPointerItem != null)
+                {
+                    if (Record.ID == SelectPointerItem.ToString())
+                        SelectPath = CurrentPath;
+                }
             }
         }
     }
@@ -15026,14 +15038,14 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static TreePath? FirstPath;
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
-            FirstPath = null;
+            SelectPath = CurrentPath = null;
 
             РегістриВідомостей.ШтрихкодиНоменклатури_RecordsSet ШтрихкодиНоменклатури_RecordsSet = new РегістриВідомостей.ШтрихкодиНоменклатури_RecordsSet();
 
@@ -15087,8 +15099,11 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
                 TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                 CurrentPath = Store.GetPath(CurrentIter);
 
-                if (FirstPath == null)
-                    FirstPath = CurrentPath;
+                if (SelectPointerItem != null)
+                {
+                    if (Record.ID == SelectPointerItem.ToString())
+                        SelectPath = CurrentPath;
+                }
             }
         }
     }
