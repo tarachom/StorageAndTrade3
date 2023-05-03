@@ -35,8 +35,8 @@ namespace StorageAndTrade
         TreeStore TreeStore = new TreeStore(typeof(string), typeof(string));
 
         public System.Action? CallBack_RowActivated { get; set; }
-        public Номенклатура_Папки_Pointer? DirectoryPointerItem { get; set; }
-        public System.Action<Номенклатура_Папки_Pointer>? CallBack_OnSelectPointer { get; set; }
+        public UnigueID? DirectoryPointerItem { get; set; }
+        public System.Action<UnigueID>? CallBack_OnSelectPointer { get; set; }
         public Номенклатура_Папки_Pointer Parent_Pointer { get; set; } = new Номенклатура_Папки_Pointer();
 
         public string UidOpenFolder { get; set; } = "";
@@ -95,11 +95,19 @@ namespace StorageAndTrade
         public void LoadTree()
         {
             if (DirectoryPointerItem != null)
-                Parent_Pointer = DirectoryPointerItem;
+                Parent_Pointer = new Номенклатура_Папки_Pointer(DirectoryPointerItem);
 
             Номенклатура_Папки_Дерево_СпільніФункції.FillTree(TreeViewGrid, TreeStore, UidOpenFolder, Parent_Pointer);
 
             OnRowActivated(TreeViewGrid, new RowActivatedArgs());
+        }
+
+        void CallBack_LoadRecords(UnigueID? selectPointer)
+        {
+            if (selectPointer != null)
+                Parent_Pointer = new Номенклатура_Папки_Pointer(selectPointer);
+
+            LoadTree();
         }
 
         void OpenPageElement(bool IsNew, string uid = "")
@@ -110,7 +118,7 @@ namespace StorageAndTrade
                 {
                     Номенклатура_Папки_Елемент page = new Номенклатура_Папки_Елемент
                     {
-                        PageList = this,
+                        CallBack_LoadRecords = CallBack_LoadRecords,
                         IsNew = true,
                         РодичДляНового = Parent_Pointer
                     };
@@ -129,7 +137,7 @@ namespace StorageAndTrade
                     {
                         Номенклатура_Папки_Елемент page = new Номенклатура_Папки_Елемент
                         {
-                            PageList = this,
+                            CallBack_LoadRecords = CallBack_LoadRecords,
                             IsNew = false,
                             Номенклатура_Папки_Objest = Номенклатура_Папки_Objest
                         };
@@ -185,7 +193,7 @@ namespace StorageAndTrade
                     else
                     {
                         if (CallBack_OnSelectPointer != null)
-                            CallBack_OnSelectPointer.Invoke(new Номенклатура_Папки_Pointer(new UnigueID(uid)));
+                            CallBack_OnSelectPointer.Invoke(new UnigueID(uid));
 
                         Program.GeneralForm?.CloseCurrentPageNotebook();
                     }

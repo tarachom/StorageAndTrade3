@@ -354,6 +354,16 @@ namespace StorageAndTrade
         }
 
         /// <summary>
+        /// Обрізати імя для сторінки
+        /// </summary>
+        /// <param name="pageName"></param>
+        /// <returns></returns>
+        public string SubstringPageName(string pageName)
+        {
+            return (pageName.Length >= 33 ? pageName.Substring(0, 30) + "..." : pageName);
+        }
+
+        /// <summary>
         /// Заголовок сторінки блокноту
         /// </summary>
         /// <param name="caption">Заголовок</param>
@@ -364,7 +374,7 @@ namespace StorageAndTrade
         {
             HBox hBoxLabel = new HBox();
 
-            Label label = new Label { Text = caption, Expand = false, Halign = Align.Start };
+            Label label = new Label { Text = SubstringPageName(caption), TooltipText = caption, Expand = false, Halign = Align.Start };
             hBoxLabel.PackStart(label, false, false, 4);
 
             //Лінк закриття сторінки

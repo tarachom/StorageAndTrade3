@@ -32,33 +32,16 @@ using ТабличніСписки = StorageAndTrade_1_0.Довідники.Та
 
 namespace StorageAndTrade
 {
-    class Номенклатура : VBox
+    public class Номенклатура : ДовідникЖурнал
     {
-        public Номенклатура_Pointer? SelectPointerItem { get; set; }
-        public Номенклатура_Pointer? DirectoryPointerItem { get; set; }
-        public System.Action<Номенклатура_Pointer>? CallBack_OnSelectPointer { get; set; }
-
-        TreeView TreeViewGrid;
+        CheckButton checkButtonIsHierarchy = new CheckButton("Ієрархія папок") { Active = true };
         Номенклатура_Папки_Дерево ДеревоПапок;
-        CheckButton checkButtonIsHierarchy = new CheckButton("Враховувати ієрархію папок") { Active = true };
-        SearchControl2 ПошукПовнотекстовий = new SearchControl2();
 
         public Номенклатура() : base()
         {
-            BorderWidth = 0;
-
-            //Кнопки
-            HBox hBoxTop = new HBox();
-            PackStart(hBoxTop, false, false, 10);
-
             //Враховувати ієрархію папок
             checkButtonIsHierarchy.Clicked += OnCheckButtonIsHierarchyClicked;
-            hBoxTop.PackStart(checkButtonIsHierarchy, false, false, 10);
-
-            //Пошук 2
-            hBoxTop.PackStart(ПошукПовнотекстовий, false, false, 2);
-            ПошукПовнотекстовий.Select = LoadRecords_OnSearch;
-            ПошукПовнотекстовий.Clear = LoadRecords;
+            HBoxTop.PackStart(checkButtonIsHierarchy, false, false, 10);
 
             //Характеристики
             {
@@ -68,14 +51,14 @@ namespace StorageAndTrade
                     ХарактеристикиНоменклатури page = new ХарактеристикиНоменклатури();
 
                     if (SelectPointerItem != null)
-                        page.НоменклатураВласник.Pointer = SelectPointerItem;
+                        page.НоменклатураВласник.Pointer = new Номенклатура_Pointer(SelectPointerItem);
 
                     Program.GeneralForm?.CreateNotebookPage($"{ХарактеристикиНоменклатури_Const.FULLNAME}", () => { return page; });
 
                     page.LoadRecords();
                 };
 
-                hBoxTop.PackStart(linkButtonHar, false, false, 10);
+                HBoxTop.PackStart(linkButtonHar, false, false, 10);
             }
 
             //ШтрихКоди
@@ -86,110 +69,50 @@ namespace StorageAndTrade
                     ШтрихкодиНоменклатури page = new ШтрихкодиНоменклатури();
 
                     if (SelectPointerItem != null)
-                        page.НоменклатураВласник.Pointer = SelectPointerItem;
+                        page.НоменклатураВласник.Pointer = new Номенклатура_Pointer(SelectPointerItem);
 
                     Program.GeneralForm?.CreateNotebookPage($"{ШтрихкодиНоменклатури_Const.FULLNAME}", () => { return page; });
 
                     page.LoadRecords();
                 };
 
-                hBoxTop.PackStart(linkButtonShKody, false, false, 10);
+                HBoxTop.PackStart(linkButtonShKody, false, false, 10);
             }
 
-            CreateToolbar();
-
-            HPaned hPaned = new HPaned();
-
-            ScrolledWindow scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In };
-            scrollTree.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
-
-            TreeViewGrid = new TreeView(ТабличніСписки.Номенклатура_Записи.Store);
-            ТабличніСписки.Номенклатура_Записи.AddColumns(TreeViewGrid);
-
-            TreeViewGrid.Selection.Mode = SelectionMode.Multiple;
-            TreeViewGrid.ActivateOnSingleClick = true;
-            TreeViewGrid.RowActivated += OnRowActivated;
-            TreeViewGrid.ButtonPressEvent += OnButtonPressEvent;
-            TreeViewGrid.ButtonReleaseEvent += OnButtonReleaseEvent;
-            TreeViewGrid.KeyReleaseEvent += OnKeyReleaseEvent;
-
-            scrollTree.Add(TreeViewGrid);
-
-            hPaned.Pack1(scrollTree, true, true);
-
+            //Дерево папок cправа
             ДеревоПапок = new Номенклатура_Папки_Дерево() { WidthRequest = 500 };
-            ДеревоПапок.CallBack_RowActivated = LoadRecords;
-            hPaned.Pack2(ДеревоПапок, false, true);
+            ДеревоПапок.CallBack_RowActivated = LoadRecords_TreeCallBack;
+            HPanedTable.Pack2(ДеревоПапок, false, true);
 
-            PackStart(hPaned, true, true, 0);
-
-            ShowAll();
+            TreeViewGrid.Model = ТабличніСписки.Номенклатура_Записи.Store;
+            ТабличніСписки.Номенклатура_Записи.AddColumns(TreeViewGrid);
         }
 
-        void CreateToolbar()
-        {
-            Toolbar toolbar = new Toolbar();
-            PackStart(toolbar, false, false, 0);
+        #region Override
 
-            ToolButton addButton = new ToolButton(Stock.Add) { TooltipText = "Додати" };
-            addButton.Clicked += OnAddClick;
-            toolbar.Add(addButton);
-
-            ToolButton upButton = new ToolButton(Stock.Edit) { TooltipText = "Редагувати" };
-            upButton.Clicked += OnEditClick;
-            toolbar.Add(upButton);
-
-            ToolButton copyButton = new ToolButton(Stock.Copy) { TooltipText = "Копіювати" };
-            copyButton.Clicked += OnCopyClick;
-            toolbar.Add(copyButton);
-
-            ToolButton deleteButton = new ToolButton(Stock.Delete) { TooltipText = "Видалити" };
-            deleteButton.Clicked += OnDeleteClick;
-            toolbar.Add(deleteButton);
-
-            ToolButton refreshButton = new ToolButton(Stock.Refresh) { TooltipText = "Обновити" };
-            refreshButton.Clicked += OnRefreshClick;
-            toolbar.Add(refreshButton);
-        }
-
-        Menu PopUpContextMenu()
-        {
-            Menu Menu = new Menu();
-
-            MenuItem setDeletionLabel = new MenuItem("Помітка на видалення");
-            setDeletionLabel.Activated += OnDeleteClick;
-            Menu.Append(setDeletionLabel);
-
-            Menu.ShowAll();
-
-            return Menu;
-        }
-
-        public void LoadTree()
+        public override void LoadRecords()
         {
             if (DirectoryPointerItem != null || SelectPointerItem != null)
             {
-                string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
                 UnigueID unigueID = new UnigueID(UidSelect);
 
-                Номенклатура_Objest? номенклатура_Objest = new Номенклатура_Pointer(unigueID).GetDirectoryObject();
-                if (номенклатура_Objest != null)
-                    ДеревоПапок.Parent_Pointer = номенклатура_Objest.Папка;
+                Номенклатура_Objest? контрагенти_Objest = new Номенклатура_Pointer(unigueID).GetDirectoryObject();
+                if (контрагенти_Objest != null)
+                    ДеревоПапок.Parent_Pointer = контрагенти_Objest.Папка;
             }
 
             ДеревоПапок.LoadTree();
         }
 
-        public void LoadRecords()
+        void LoadRecords_TreeCallBack()
         {
             ТабличніСписки.Номенклатура_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.Номенклатура_Записи.DirectoryPointerItem = DirectoryPointerItem;
 
             ТабличніСписки.Номенклатура_Записи.Where.Clear();
             if (checkButtonIsHierarchy.Active)
-            {
                 ТабличніСписки.Номенклатура_Записи.Where.Add(new Where(Номенклатура_Const.Папка, Comparison.EQ, ДеревоПапок.Parent_Pointer.UnigueID.UGuid));
-            }
 
             ТабличніСписки.Номенклатура_Записи.LoadRecords();
 
@@ -199,7 +122,7 @@ namespace StorageAndTrade
             TreeViewGrid.GrabFocus();
         }
 
-        void LoadRecords_OnSearch(string searchText)
+        protected override void LoadRecords_OnSearch(string searchText)
         {
             searchText = searchText.ToLower().Trim();
 
@@ -222,11 +145,9 @@ namespace StorageAndTrade
 
             if (ТабличніСписки.Номенклатура_Записи.FirstPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.Номенклатура_Записи.FirstPath, TreeViewGrid.Columns[0], false);
-
-            TreeViewGrid.GrabFocus();
         }
 
-        void OpenPageElement(bool IsNew, string uid = "")
+        protected override void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             if (IsNew)
             {
@@ -234,9 +155,8 @@ namespace StorageAndTrade
                 {
                     Номенклатура_Елемент page = new Номенклатура_Елемент
                     {
-                        PageList = this,
-                        IsNew = true,
-                        РодичДляНового = ДеревоПапок.Parent_Pointer
+                        CallBack_LoadRecords = CallBack_LoadRecords,
+                        IsNew = true
                     };
 
                     page.SetValue();
@@ -244,16 +164,16 @@ namespace StorageAndTrade
                     return page;
                 }, true);
             }
-            else
+            else if (unigueID != null)
             {
                 Номенклатура_Objest Номенклатура_Objest = new Номенклатура_Objest();
-                if (Номенклатура_Objest.Read(new UnigueID(uid)))
+                if (Номенклатура_Objest.Read(unigueID))
                 {
                     Program.GeneralForm?.CreateNotebookPage($"{Номенклатура_Objest.Назва}", () =>
                     {
                         Номенклатура_Елемент page = new Номенклатура_Елемент
                         {
-                            PageList = this,
+                            CallBack_LoadRecords = CallBack_LoadRecords,
                             IsNew = false,
                             Номенклатура_Objest = Номенклатура_Objest,
                         };
@@ -268,189 +188,38 @@ namespace StorageAndTrade
             }
         }
 
-        #region TreeView
-
-        void OnRowActivated(object sender, RowActivatedArgs args)
+        protected override void SetDeletionLabel(UnigueID unigueID)
         {
-            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
+            Номенклатура_Objest Номенклатура_Objest = new Номенклатура_Objest();
+            if (Номенклатура_Objest.Read(unigueID))
+                Номенклатура_Objest.SetDeletionLabel(!Номенклатура_Objest.DeletionLabel);
+            else
+                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+        }
+
+        protected override UnigueID? Copy(UnigueID unigueID)
+        {
+            Номенклатура_Objest Номенклатура_Objest = new Номенклатура_Objest();
+            if (Номенклатура_Objest.Read(unigueID))
             {
-                TreeIter iter;
-                TreeViewGrid.Model.GetIter(out iter, TreeViewGrid.Selection.GetSelectedRows()[0]);
+                Номенклатура_Objest Номенклатура_Objest_Новий = Номенклатура_Objest.Copy(true);
+                Номенклатура_Objest_Новий.Save();
+                Номенклатура_Objest_Новий.Файли_TablePart.Save(false);
 
-                UnigueID unigueID = new UnigueID((string)TreeViewGrid.Model.GetValue(iter, 1));
-
-                SelectPointerItem = new StorageAndTrade_1_0.Довідники.Номенклатура_Pointer(unigueID);
+                return Номенклатура_Objest_Новий.UnigueID;
             }
-        }
-
-        void OnButtonReleaseEvent(object? sender, ButtonReleaseEventArgs args)
-        {
-            if (args.Event.Button == 3 && TreeViewGrid.Selection.CountSelectedRows() != 0)
-                PopUpContextMenu().Popup();
-        }
-
-        void OnButtonPressEvent(object? sender, ButtonPressEventArgs args)
-        {
-            if (args.Event.Type == Gdk.EventType.DoubleButtonPress && TreeViewGrid.Selection.CountSelectedRows() != 0)
+            else
             {
-                TreeIter iter;
-
-                if (TreeViewGrid.Model.GetIter(out iter, TreeViewGrid.Selection.GetSelectedRows()[0]))
-                {
-                    string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
-
-                    if (DirectoryPointerItem == null)
-                        OpenPageElement(false, uid);
-                    else
-                    {
-                        if (CallBack_OnSelectPointer != null)
-                            CallBack_OnSelectPointer.Invoke(new Номенклатура_Pointer(new UnigueID(uid)));
-
-                        Program.GeneralForm?.CloseCurrentPageNotebook();
-                    }
-                }
-            }
-        }
-
-        void OnKeyReleaseEvent(object? sender, KeyReleaseEventArgs args)
-        {
-            switch (args.Event.Key)
-            {
-                case Gdk.Key.Insert:
-                    {
-                        OpenPageElement(true);
-                        break;
-                    }
-                case Gdk.Key.F5:
-                    {
-                        LoadRecords();
-                        break;
-                    }
-                case Gdk.Key.KP_Enter:
-                case Gdk.Key.Return:
-                    {
-                        OnEditClick(null, new EventArgs());
-                        break;
-                    }
-                case Gdk.Key.End:
-                case Gdk.Key.Home:
-                case Gdk.Key.Up:
-                case Gdk.Key.Down:
-                case Gdk.Key.Prior:
-                case Gdk.Key.Next:
-                    {
-                        OnRowActivated(TreeViewGrid, new RowActivatedArgs());
-                        break;
-                    }
-                case Gdk.Key.Delete:
-                    {
-                        OnDeleteClick(TreeViewGrid, new EventArgs());
-                        break;
-                    }
+                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+                return null;
             }
         }
 
         #endregion
-
-        #region ToolBar
-
-        void OnAddClick(object? sender, EventArgs args)
-        {
-            OpenPageElement(true);
-        }
-
-        void OnEditClick(object? sender, EventArgs args)
-        {
-            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
-            {
-                TreePath[] selectionRows = TreeViewGrid.Selection.GetSelectedRows();
-
-                foreach (TreePath itemPath in selectionRows)
-                {
-                    TreeIter iter;
-                    if (TreeViewGrid.Model.GetIter(out iter, itemPath))
-                    {
-                        string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
-                        OpenPageElement(false, uid);
-                    }
-                }
-            }
-        }
-
-        void OnRefreshClick(object? sender, EventArgs args)
-        {
-            LoadRecords();
-        }
-
-        void OnDeleteClick(object? sender, EventArgs args)
-        {
-            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
-            {
-                if (Message.Request(Program.GeneralForm, "Встановити або зняти помітку на видалення?") == ResponseType.Yes)
-                {
-                    TreePath[] selectionRows = TreeViewGrid.Selection.GetSelectedRows();
-
-                    foreach (TreePath itemPath in selectionRows)
-                    {
-                        TreeIter iter;
-                        TreeViewGrid.Model.GetIter(out iter, itemPath);
-
-                        string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
-
-                        Номенклатура_Objest Номенклатура_Objest = new Номенклатура_Objest();
-                        if (Номенклатура_Objest.Read(new UnigueID(uid)))
-                            Номенклатура_Objest.SetDeletionLabel(!Номенклатура_Objest.DeletionLabel);
-                        else
-                            Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                    }
-
-                    LoadRecords();
-                }
-            }
-        }
-
-        void OnCopyClick(object? sender, EventArgs args)
-        {
-            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
-            {
-                if (Message.Request(Program.GeneralForm, "Копіювати?") == ResponseType.Yes)
-                {
-                    TreePath[] selectionRows = TreeViewGrid.Selection.GetSelectedRows();
-
-                    foreach (TreePath itemPath in selectionRows)
-                    {
-                        TreeIter iter;
-                        TreeViewGrid.Model.GetIter(out iter, itemPath);
-
-                        string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
-
-                        Номенклатура_Objest Номенклатура_Objest = new Номенклатура_Objest();
-                        if (Номенклатура_Objest.Read(new UnigueID(uid)))
-                        {
-                            Номенклатура_Objest Номенклатура_Objest_Новий = Номенклатура_Objest.Copy(true);
-                            Номенклатура_Objest_Новий.Save();
-                            Номенклатура_Objest_Новий.Файли_TablePart.Save(true);
-
-                            SelectPointerItem = Номенклатура_Objest_Новий.GetDirectoryPointer();
-                        }
-                        else
-                            Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                    }
-
-                    LoadRecords();
-                }
-            }
-        }
-
-        #endregion
-
-        #region Controls
 
         void OnCheckButtonIsHierarchyClicked(object? sender, EventArgs args)
         {
-            LoadTree();
+            LoadRecords();
         }
-
-        #endregion
     }
 }

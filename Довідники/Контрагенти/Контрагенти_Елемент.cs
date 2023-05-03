@@ -27,16 +27,10 @@ using StorageAndTrade_1_0.Довідники;
 
 namespace StorageAndTrade
 {
-    class Контрагенти_Елемент : VBox
+    class Контрагенти_Елемент : ДовідникЕлемент
     {
-        public Контрагенти? PageList { get; set; }
-        public System.Action<Контрагенти_Pointer>? CallBack_OnSelectPointer { get; set; }
-
-        public bool IsNew { get; set; } = true;
-
-        public Контрагенти_Папки_Pointer РодичДляНового { get; set; } = new Контрагенти_Папки_Pointer();
-
         public Контрагенти_Objest Контрагенти_Objest { get; set; } = new Контрагенти_Objest();
+        public Контрагенти_Папки_Pointer РодичДляНового { get; set; } = new Контрагенти_Папки_Pointer();
 
         #region Field
 
@@ -51,33 +45,12 @@ namespace StorageAndTrade
 
         #endregion
 
-        public Контрагенти_Елемент() : base()
-        {
-            HBox hBox = new HBox();
+        public Контрагенти_Елемент() : base() { }
 
-            Button bSaveAndClose = new Button("Зберегти та закрити");
-            bSaveAndClose.Clicked += (object? sender, EventArgs args) => { Save(true); };
-            hBox.PackStart(bSaveAndClose, false, false, 10);
-
-            Button bSave = new Button("Зберегти");
-            bSave.Clicked += (object? sender, EventArgs args) => { Save(); };
-            hBox.PackStart(bSave, false, false, 10);
-
-            PackStart(hBox, false, false, 10);
-
-            HPaned hPaned = new HPaned() { BorderWidth = 5, Position = 500 };
-
-            CreatePack1(hPaned);
-            CreatePack2(hPaned);
-
-            PackStart(hPaned, false, false, 5);
-
-            ShowAll();
-        }
-
-        void CreatePack1(HPaned hPaned)
+        protected override void CreatePack1()
         {
             VBox vBox = new VBox();
+            HPanedTop.Pack1(vBox, false, false);
 
             //Код
             HBox hBoxCode = new HBox() { Halign = Align.End };
@@ -129,13 +102,12 @@ namespace StorageAndTrade
             scrollTextViewOpys.Add(Опис);
 
             hBoxOpys.PackStart(scrollTextViewOpys, false, false, 5);
-
-            hPaned.Pack1(vBox, false, false);
         }
 
-        void CreatePack2(HPaned hPaned)
+        protected override void CreatePack2()
         {
             VBox vBox = new VBox();
+            HPanedTop.Pack2(vBox, false, false);
 
             //Контакти
             HBox hBoxContaktyInfo = new HBox();
@@ -156,13 +128,11 @@ namespace StorageAndTrade
             hBoxFiles.PackStart(Файли, true, true, 5);
 
             vBox.PackStart(hBoxFiles, false, false, 0);
-
-            hPaned.Pack2(vBox, false, false);
         }
 
         #region Присвоєння / зчитування значень
 
-        public void SetValue()
+        public override void SetValue()
         {
             if (IsNew)
             {
@@ -184,8 +154,11 @@ namespace StorageAndTrade
             Файли.LoadRecords();
         }
 
-        void GetValue()
+        protected override void GetValue()
         {
+            UnigueID = Контрагенти_Objest.UnigueID;
+            Caption = Назва.Text;
+
             Контрагенти_Objest.Код = Код.Text;
             Контрагенти_Objest.Назва = Назва.Text;
             Контрагенти_Objest.Папка = Родич.Pointer;
@@ -197,46 +170,19 @@ namespace StorageAndTrade
 
         #endregion
 
-        void Save(bool closePage = false)
+        protected override void Save()
         {
-            GetValue();
-
-            bool isSave = false;
-
             try
             {
-                isSave = Контрагенти_Objest.Save();
+                Контрагенти_Objest.Save();
             }
             catch (Exception ex)
             {
-                ФункціїДляПовідомлень.ДодатиПовідомленняПроПомилку(DateTime.Now, "Запис",
-                    Контрагенти_Objest.UnigueID.UGuid, "Довідники", Контрагенти_Objest.Назва, ex.Message);
-
-                ФункціїДляПовідомлень.ВідкритиТермінал();
-            }
-
-            if (!isSave)
-            {
-                Message.Info(Program.GeneralForm, "Не вдалось записати");
-                return;
+                MsgError(ex);
             }
 
             Контакти.SaveRecords();
             Файли.SaveRecords();
-
-            if (closePage)
-                Program.GeneralForm?.CloseCurrentPageNotebook();
-            else
-                Program.GeneralForm?.RenameCurrentPageNotebook($"{Контрагенти_Objest.Назва}");
-
-            if (CallBack_OnSelectPointer != null)
-                CallBack_OnSelectPointer.Invoke(Контрагенти_Objest.GetDirectoryPointer());
-
-            if (PageList != null)
-            {
-                PageList.SelectPointerItem = Контрагенти_Objest.GetDirectoryPointer();
-                PageList.LoadRecords();
-            }
         }
     }
 }

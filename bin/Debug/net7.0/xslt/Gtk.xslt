@@ -104,8 +104,8 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники.Т
 
         public static List&lt;Where&gt; Where { get; set; } = new List&lt;Where&gt;();
 
-        public static Довідники.<xsl:value-of select="$DirectoryName"/>_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.<xsl:value-of select="$DirectoryName"/>_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -229,7 +229,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники.Т
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -376,8 +376,8 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи.Т
             Інтерфейс.ДодатиВідбірПоПеріоду(Where, Документи.<xsl:value-of select="$DocumentName"/>_Const.ДатаДок, типПеріоду);
         }
 
-        public static Документи.<xsl:value-of select="$DocumentName"/>_Pointer? DocumentPointerItem { get; set; }
-        public static Документи.<xsl:value-of select="$DocumentName"/>_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DocumentPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -503,7 +503,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи.Т
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DocumentPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DocumentPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;

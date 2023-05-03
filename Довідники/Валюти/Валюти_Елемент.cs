@@ -27,13 +27,8 @@ using StorageAndTrade_1_0.Довідники;
 
 namespace StorageAndTrade
 {
-    class Валюти_Елемент : VBox
+    class Валюти_Елемент : ДовідникЕлемент
     {
-        public Валюти? PageList { get; set; }
-        public System.Action<Валюти_Pointer>? CallBack_OnSelectPointer { get; set; }
-
-        public bool IsNew { get; set; } = true;
-
         public Валюти_Objest Валюти_Objest { get; set; } = new Валюти_Objest();
 
         Entry Код = new Entry() { WidthRequest = 100 };
@@ -42,33 +37,12 @@ namespace StorageAndTrade
         Entry Код_R030 = new Entry() { WidthRequest = 500 };
         CheckButton ВиводитиКурсНаСтартову = new CheckButton("Виводити курс на стартову");
 
-        public Валюти_Елемент() : base()
-        {
-            HBox hBox = new HBox();
+        public Валюти_Елемент() : base() { }
 
-            Button bSaveAndClose = new Button("Зберегти та закрити");
-            bSaveAndClose.Clicked += (object? sender, EventArgs args) => { Save(true); };
-            hBox.PackStart(bSaveAndClose, false, false, 10);
-
-            Button bSave = new Button("Зберегти");
-            bSave.Clicked += (object? sender, EventArgs args) => { Save(); };
-            hBox.PackStart(bSave, false, false, 10);
-
-            PackStart(hBox, false, false, 10);
-
-            HPaned hPaned = new HPaned() { BorderWidth = 5, Position = 500 };
-
-            CreatePack1(hPaned);
-            CreatePack2(hPaned);
-
-            PackStart(hPaned, false, false, 5);
-
-            ShowAll();
-        }
-
-        void CreatePack1(HPaned hPaned)
+        protected override void CreatePack1()
         {
             VBox vBox = new VBox();
+            HPanedTop.Pack1(vBox, false, false);
 
             //Код
             HBox hBoxCode = new HBox() { Halign = Align.End };
@@ -103,22 +77,11 @@ namespace StorageAndTrade
             vBox.PackStart(hBoxVisibleCursOnStartPage, false, false, 5);
 
             hBoxVisibleCursOnStartPage.PackStart(ВиводитиКурсНаСтартову, false, false, 5);
-
-            hPaned.Pack1(vBox, false, false);
-        }
-
-        void CreatePack2(HPaned hPaned)
-        {
-            VBox vBox = new VBox();
-
-
-
-            hPaned.Pack2(vBox, false, false);
         }
 
         #region Присвоєння / зчитування значень
 
-        public void SetValue()
+        public override void SetValue()
         {
             if (IsNew)
                 Валюти_Objest.New();
@@ -130,8 +93,11 @@ namespace StorageAndTrade
             ВиводитиКурсНаСтартову.Active = Валюти_Objest.ВиводитиКурсНаСтартову;
         }
 
-        void GetValue()
+        protected override void GetValue()
         {
+            UnigueID = Валюти_Objest.UnigueID;
+            Caption = Назва.Text;
+
             Валюти_Objest.Код = Код.Text;
             Валюти_Objest.Назва = Назва.Text;
             Валюти_Objest.КороткаНазва = КороткаНазва.Text;
@@ -141,42 +107,15 @@ namespace StorageAndTrade
 
         #endregion
 
-        void Save(bool closePage = false)
+        protected override void Save()
         {
-            GetValue();
-
-            bool isSave = false;
-
             try
             {
-                isSave = Валюти_Objest.Save();
+                Валюти_Objest.Save();
             }
             catch (Exception ex)
             {
-                ФункціїДляПовідомлень.ДодатиПовідомленняПроПомилку(DateTime.Now, "Запис",
-                    Валюти_Objest.UnigueID.UGuid, "Довідники", Валюти_Objest.Назва, ex.Message);
-
-                ФункціїДляПовідомлень.ВідкритиТермінал();
-            }
-
-            if (!isSave)
-            {
-                Message.Info(Program.GeneralForm, "Не вдалось записати");
-                return;
-            }
-
-            if (closePage)
-                Program.GeneralForm?.CloseCurrentPageNotebook();
-            else
-                Program.GeneralForm?.RenameCurrentPageNotebook($"{Валюти_Objest.Назва}");
-
-            if (CallBack_OnSelectPointer != null)
-                CallBack_OnSelectPointer.Invoke(Валюти_Objest.GetDirectoryPointer());
-
-            if (PageList != null)
-            {
-                PageList.SelectPointerItem = Валюти_Objest.GetDirectoryPointer();
-                PageList.LoadRecords();
+                MsgError(ex);
             }
         }
     }

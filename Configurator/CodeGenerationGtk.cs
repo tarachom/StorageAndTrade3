@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 29.04.2023 15:18:29
+ * Дата конфігурації: 02.05.2023 19:20:43
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон Gtk.xslt
@@ -83,8 +83,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static Довідники.Організації_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.Організації_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -136,7 +136,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -187,8 +187,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static Довідники.Організації_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.Організації_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -240,7 +240,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -302,8 +302,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static Довідники.Номенклатура_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.Номенклатура_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -366,7 +366,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -417,8 +417,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static Довідники.Номенклатура_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.Номенклатура_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -470,7 +470,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -526,8 +526,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static Довідники.Виробники_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.Виробники_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -579,7 +579,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -630,8 +630,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static Довідники.Виробники_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.Виробники_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -683,7 +683,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -739,8 +739,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static Довідники.ВидиНоменклатури_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.ВидиНоменклатури_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -792,7 +792,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -840,8 +840,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static Довідники.ВидиНоменклатури_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.ВидиНоменклатури_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -891,7 +891,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -947,8 +947,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static Довідники.ПакуванняОдиниціВиміру_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.ПакуванняОдиниціВиміру_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -1000,7 +1000,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -1051,8 +1051,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static Довідники.ПакуванняОдиниціВиміру_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.ПакуванняОдиниціВиміру_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -1104,7 +1104,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -1169,8 +1169,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static Довідники.Валюти_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.Валюти_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -1228,7 +1228,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -1285,8 +1285,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static Довідники.Валюти_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.Валюти_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -1342,7 +1342,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -1401,8 +1401,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static Довідники.Контрагенти_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.Контрагенти_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -1463,7 +1463,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -1514,8 +1514,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static Довідники.Контрагенти_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.Контрагенти_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -1567,7 +1567,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -1629,8 +1629,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static Довідники.Склади_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.Склади_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -1686,7 +1686,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -1737,8 +1737,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static Довідники.Склади_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.Склади_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -1790,7 +1790,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -1849,8 +1849,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static Довідники.ВидиЦін_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.ВидиЦін_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -1911,7 +1911,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -1959,8 +1959,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static Довідники.ВидиЦін_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.ВидиЦін_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -2010,7 +2010,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -2066,8 +2066,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static Довідники.ВидиЦінПостачальників_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.ВидиЦінПостачальників_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -2119,7 +2119,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -2170,8 +2170,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static Довідники.ВидиЦінПостачальників_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.ВидиЦінПостачальників_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -2223,7 +2223,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -2279,8 +2279,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static Довідники.Користувачі_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.Користувачі_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -2332,7 +2332,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -2380,8 +2380,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static Довідники.Користувачі_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.Користувачі_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -2431,7 +2431,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -2487,8 +2487,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static Довідники.ФізичніОсоби_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.ФізичніОсоби_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -2540,7 +2540,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -2588,8 +2588,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static Довідники.ФізичніОсоби_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.ФізичніОсоби_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -2639,7 +2639,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -2695,8 +2695,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static Довідники.СтруктураПідприємства_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.СтруктураПідприємства_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -2748,7 +2748,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -2796,8 +2796,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static Довідники.СтруктураПідприємства_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.СтруктураПідприємства_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -2847,7 +2847,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -2903,8 +2903,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static Довідники.КраїниСвіту_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.КраїниСвіту_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -2956,7 +2956,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -3007,8 +3007,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static Довідники.КраїниСвіту_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.КраїниСвіту_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -3060,7 +3060,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -3125,8 +3125,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static Довідники.Файли_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.Файли_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -3184,7 +3184,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -3232,8 +3232,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static Довідники.Файли_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.Файли_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -3283,7 +3283,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -3342,8 +3342,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static Довідники.ХарактеристикиНоменклатури_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.ХарактеристикиНоменклатури_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -3404,7 +3404,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -3458,8 +3458,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static Довідники.ХарактеристикиНоменклатури_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.ХарактеристикиНоменклатури_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -3520,7 +3520,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -3594,8 +3594,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static Довідники.Каси_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.Каси_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -3656,7 +3656,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -3710,8 +3710,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static Довідники.Каси_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.Каси_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -3772,7 +3772,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -3831,8 +3831,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static Довідники.БанківськіРахункиОрганізацій_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.БанківськіРахункиОрганізацій_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -3893,7 +3893,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -3947,8 +3947,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static Довідники.БанківськіРахункиОрганізацій_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.БанківськіРахункиОрганізацій_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -4009,7 +4009,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -4071,8 +4071,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static Довідники.ДоговориКонтрагентів_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.ДоговориКонтрагентів_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -4135,7 +4135,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -4189,8 +4189,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static Довідники.ДоговориКонтрагентів_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.ДоговориКонтрагентів_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -4251,7 +4251,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -4310,8 +4310,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static Довідники.БанківськіРахункиКонтрагентів_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.БанківськіРахункиКонтрагентів_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -4372,7 +4372,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -4426,8 +4426,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static Довідники.БанківськіРахункиКонтрагентів_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.БанківськіРахункиКонтрагентів_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -4488,7 +4488,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -4550,8 +4550,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static Довідники.СтаттяРухуКоштів_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.СтаттяРухуКоштів_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -4607,7 +4607,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -4655,8 +4655,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static Довідники.СтаттяРухуКоштів_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.СтаттяРухуКоштів_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -4706,7 +4706,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -4759,8 +4759,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static Довідники.СеріїНоменклатури_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.СеріїНоменклатури_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -4810,7 +4810,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -4858,8 +4858,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static Довідники.СеріїНоменклатури_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.СеріїНоменклатури_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -4909,7 +4909,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -4974,8 +4974,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static Довідники.ПартіяТоварівКомпозит_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.ПартіяТоварівКомпозит_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -5047,7 +5047,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -5098,8 +5098,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static Довідники.ПартіяТоварівКомпозит_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.ПартіяТоварівКомпозит_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -5148,7 +5148,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -5204,8 +5204,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static Довідники.ВидиЗапасів_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.ВидиЗапасів_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -5257,7 +5257,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -5308,8 +5308,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static Довідники.ВидиЗапасів_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.ВидиЗапасів_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -5361,7 +5361,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -5468,8 +5468,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static Довідники.Банки_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.Банки_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -5555,7 +5555,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -5606,8 +5606,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static Довідники.Банки_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.Банки_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -5659,7 +5659,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -5718,8 +5718,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static Довідники.СкладськіПриміщення_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.СкладськіПриміщення_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -5780,7 +5780,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -5831,8 +5831,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static Довідники.СкладськіПриміщення_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.СкладськіПриміщення_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -5891,7 +5891,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -5968,8 +5968,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static Довідники.СкладськіКомірки_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.СкладськіКомірки_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -6056,7 +6056,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -6107,8 +6107,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static Довідники.СкладськіКомірки_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.СкладськіКомірки_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -6167,7 +6167,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -6223,8 +6223,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static Довідники.ОбластьЗберігання_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.ОбластьЗберігання_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -6283,7 +6283,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -6351,8 +6351,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static Довідники.ТипорозміриКомірок_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.ТипорозміриКомірок_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -6412,7 +6412,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -6460,8 +6460,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static Довідники.ТипорозміриКомірок_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.ТипорозміриКомірок_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -6511,7 +6511,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -6575,8 +6575,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static Довідники.Блокнот_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.Блокнот_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -6630,7 +6630,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -6684,8 +6684,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static Довідники.Блокнот_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.Блокнот_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -6739,7 +6739,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -6897,8 +6897,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Інтерфейс.ДодатиВідбірПоПеріоду(Where, Документи.ЗамовленняПостачальнику_Const.ДатаДок, типПеріоду);
         }
 
-        public static Документи.ЗамовленняПостачальнику_Pointer? DocumentPointerItem { get; set; }
-        public static Документи.ЗамовленняПостачальнику_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DocumentPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -7003,7 +7003,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DocumentPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DocumentPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -7094,8 +7094,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Інтерфейс.ДодатиВідбірПоПеріоду(Where, Документи.ПоступленняТоварівТаПослуг_Const.ДатаДок, типПеріоду);
         }
 
-        public static Документи.ПоступленняТоварівТаПослуг_Pointer? DocumentPointerItem { get; set; }
-        public static Документи.ПоступленняТоварівТаПослуг_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DocumentPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -7209,7 +7209,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DocumentPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DocumentPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -7300,8 +7300,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Інтерфейс.ДодатиВідбірПоПеріоду(Where, Документи.ЗамовленняКлієнта_Const.ДатаДок, типПеріоду);
         }
 
-        public static Документи.ЗамовленняКлієнта_Pointer? DocumentPointerItem { get; set; }
-        public static Документи.ЗамовленняКлієнта_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DocumentPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -7415,7 +7415,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DocumentPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DocumentPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -7506,8 +7506,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Інтерфейс.ДодатиВідбірПоПеріоду(Where, Документи.РеалізаціяТоварівТаПослуг_Const.ДатаДок, типПеріоду);
         }
 
-        public static Документи.РеалізаціяТоварівТаПослуг_Pointer? DocumentPointerItem { get; set; }
-        public static Документи.РеалізаціяТоварівТаПослуг_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DocumentPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -7621,7 +7621,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DocumentPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DocumentPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -7703,8 +7703,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Інтерфейс.ДодатиВідбірПоПеріоду(Where, Документи.ВстановленняЦінНоменклатури_Const.ДатаДок, типПеріоду);
         }
 
-        public static Документи.ВстановленняЦінНоменклатури_Pointer? DocumentPointerItem { get; set; }
-        public static Документи.ВстановленняЦінНоменклатури_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DocumentPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -7798,7 +7798,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DocumentPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DocumentPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -7889,8 +7889,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Інтерфейс.ДодатиВідбірПоПеріоду(Where, Документи.ПрихіднийКасовийОрдер_Const.ДатаДок, типПеріоду);
         }
 
-        public static Документи.ПрихіднийКасовийОрдер_Pointer? DocumentPointerItem { get; set; }
-        public static Документи.ПрихіднийКасовийОрдер_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DocumentPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -7997,7 +7997,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DocumentPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DocumentPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -8088,8 +8088,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Інтерфейс.ДодатиВідбірПоПеріоду(Where, Документи.РозхіднийКасовийОрдер_Const.ДатаДок, типПеріоду);
         }
 
-        public static Документи.РозхіднийКасовийОрдер_Pointer? DocumentPointerItem { get; set; }
-        public static Документи.РозхіднийКасовийОрдер_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DocumentPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -8196,7 +8196,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DocumentPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DocumentPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -8278,8 +8278,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Інтерфейс.ДодатиВідбірПоПеріоду(Where, Документи.ПереміщенняТоварів_Const.ДатаДок, типПеріоду);
         }
 
-        public static Документи.ПереміщенняТоварів_Pointer? DocumentPointerItem { get; set; }
-        public static Документи.ПереміщенняТоварів_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DocumentPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -8373,7 +8373,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DocumentPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DocumentPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -8464,8 +8464,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Інтерфейс.ДодатиВідбірПоПеріоду(Where, Документи.ПоверненняТоварівПостачальнику_Const.ДатаДок, типПеріоду);
         }
 
-        public static Документи.ПоверненняТоварівПостачальнику_Pointer? DocumentPointerItem { get; set; }
-        public static Документи.ПоверненняТоварівПостачальнику_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DocumentPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -8579,7 +8579,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DocumentPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DocumentPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -8670,8 +8670,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Інтерфейс.ДодатиВідбірПоПеріоду(Where, Документи.ПоверненняТоварівВідКлієнта_Const.ДатаДок, типПеріоду);
         }
 
-        public static Документи.ПоверненняТоварівВідКлієнта_Pointer? DocumentPointerItem { get; set; }
-        public static Документи.ПоверненняТоварівВідКлієнта_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DocumentPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -8785,7 +8785,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DocumentPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DocumentPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -8873,8 +8873,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Інтерфейс.ДодатиВідбірПоПеріоду(Where, Документи.АктВиконанихРобіт_Const.ДатаДок, типПеріоду);
         }
 
-        public static Документи.АктВиконанихРобіт_Pointer? DocumentPointerItem { get; set; }
-        public static Документи.АктВиконанихРобіт_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DocumentPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -8979,7 +8979,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DocumentPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DocumentPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -9064,8 +9064,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Інтерфейс.ДодатиВідбірПоПеріоду(Where, Документи.ВведенняЗалишків_Const.ДатаДок, типПеріоду);
         }
 
-        public static Документи.ВведенняЗалишків_Pointer? DocumentPointerItem { get; set; }
-        public static Документи.ВведенняЗалишків_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DocumentPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -9168,7 +9168,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DocumentPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DocumentPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -9247,8 +9247,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Інтерфейс.ДодатиВідбірПоПеріоду(Where, Документи.НадлишкиТоварів_Const.ДатаДок, типПеріоду);
         }
 
-        public static Документи.НадлишкиТоварів_Pointer? DocumentPointerItem { get; set; }
-        public static Документи.НадлишкиТоварів_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DocumentPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -9333,7 +9333,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DocumentPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DocumentPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -9412,8 +9412,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Інтерфейс.ДодатиВідбірПоПеріоду(Where, Документи.ПересортицяТоварів_Const.ДатаДок, типПеріоду);
         }
 
-        public static Документи.ПересортицяТоварів_Pointer? DocumentPointerItem { get; set; }
-        public static Документи.ПересортицяТоварів_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DocumentPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -9498,7 +9498,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DocumentPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DocumentPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -9574,8 +9574,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Інтерфейс.ДодатиВідбірПоПеріоду(Where, Документи.ПерерахунокТоварів_Const.ДатаДок, типПеріоду);
         }
 
-        public static Документи.ПерерахунокТоварів_Pointer? DocumentPointerItem { get; set; }
-        public static Документи.ПерерахунокТоварів_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DocumentPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -9651,7 +9651,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DocumentPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DocumentPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -9733,8 +9733,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Інтерфейс.ДодатиВідбірПоПеріоду(Where, Документи.ПсуванняТоварів_Const.ДатаДок, типПеріоду);
         }
 
-        public static Документи.ПсуванняТоварів_Pointer? DocumentPointerItem { get; set; }
-        public static Документи.ПсуванняТоварів_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DocumentPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -9821,7 +9821,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DocumentPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DocumentPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -9906,8 +9906,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Інтерфейс.ДодатиВідбірПоПеріоду(Where, Документи.ВнутрішнєСпоживанняТоварів_Const.ДатаДок, типПеріоду);
         }
 
-        public static Документи.ВнутрішнєСпоживанняТоварів_Pointer? DocumentPointerItem { get; set; }
-        public static Документи.ВнутрішнєСпоживанняТоварів_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DocumentPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -10003,7 +10003,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DocumentPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DocumentPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -10094,8 +10094,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Інтерфейс.ДодатиВідбірПоПеріоду(Where, Документи.РахунокФактура_Const.ДатаДок, типПеріоду);
         }
 
-        public static Документи.РахунокФактура_Pointer? DocumentPointerItem { get; set; }
-        public static Документи.РахунокФактура_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DocumentPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -10209,7 +10209,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DocumentPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DocumentPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -10288,8 +10288,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Інтерфейс.ДодатиВідбірПоПеріоду(Where, Документи.РозміщенняТоварівНаСкладі_Const.ДатаДок, типПеріоду);
         }
 
-        public static Документи.РозміщенняТоварівНаСкладі_Pointer? DocumentPointerItem { get; set; }
-        public static Документи.РозміщенняТоварівНаСкладі_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DocumentPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -10374,7 +10374,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DocumentPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DocumentPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -10453,8 +10453,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Інтерфейс.ДодатиВідбірПоПеріоду(Where, Документи.ПереміщенняТоварівНаСкладі_Const.ДатаДок, типПеріоду);
         }
 
-        public static Документи.ПереміщенняТоварівНаСкладі_Pointer? DocumentPointerItem { get; set; }
-        public static Документи.ПереміщенняТоварівНаСкладі_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DocumentPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -10539,7 +10539,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DocumentPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DocumentPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -10618,8 +10618,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Інтерфейс.ДодатиВідбірПоПеріоду(Where, Документи.ЗбіркаТоварівНаСкладі_Const.ДатаДок, типПеріоду);
         }
 
-        public static Документи.ЗбіркаТоварівНаСкладі_Pointer? DocumentPointerItem { get; set; }
-        public static Документи.ЗбіркаТоварівНаСкладі_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DocumentPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -10704,7 +10704,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DocumentPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DocumentPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
@@ -10783,8 +10783,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Інтерфейс.ДодатиВідбірПоПеріоду(Where, Документи.РозміщенняНоменклатуриПоКоміркам_Const.ДатаДок, типПеріоду);
         }
 
-        public static Документи.РозміщенняНоменклатуриПоКоміркам_Pointer? DocumentPointerItem { get; set; }
-        public static Документи.РозміщенняНоменклатуриПоКоміркам_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DocumentPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -10869,7 +10869,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DocumentPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DocumentPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;

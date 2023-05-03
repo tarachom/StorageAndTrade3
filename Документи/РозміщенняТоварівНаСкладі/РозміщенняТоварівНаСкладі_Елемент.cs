@@ -312,7 +312,7 @@ namespace StorageAndTrade
         {
             if (PageList != null)
             {
-                PageList.SelectPointerItem = РозміщенняТоварівНаСкладі_Objest.GetDocumentPointer();
+                PageList.SelectPointerItem = РозміщенняТоварівНаСкладі_Objest.UnigueID;
                 PageList.LoadRecords();
             }
         }

@@ -210,6 +210,14 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
             OnRowActivated(TreeViewGrid, new RowActivatedArgs());
         }
 
+        void CallBack_LoadRecords(UnigueID? selectPointer)
+        {
+            if (selectPointer != null)
+                Parent_Pointer = new Склади_Папки_Pointer(selectPointer);
+
+            LoadTree();
+        }
+
         void OpenPageElement(bool IsNew, string uid = "")
         {
             if (IsNew)
@@ -218,7 +226,7 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
                 {
                     Склади_Папки_Елемент page = new Склади_Папки_Елемент
                     {
-                        PageList = this,
+                        CallBack_LoadRecords = CallBack_LoadRecords,
                         IsNew = true,
                         РодичДляНового = Parent_Pointer
                     };
@@ -237,7 +245,7 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
                     {
                         Склади_Папки_Елемент page = new Склади_Папки_Елемент
                         {
-                            PageList = this,
+                            CallBack_LoadRecords = CallBack_LoadRecords,
                             IsNew = false,
                             Склади_Папки_Objest = Склади_Папки_Objest
                         };

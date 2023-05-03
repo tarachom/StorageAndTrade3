@@ -479,7 +479,7 @@ namespace StorageAndTrade
         {
             if (PageList != null)
             {
-                PageList.SelectPointerItem = ПрихіднийКасовийОрдер_Objest.GetDocumentPointer();
+                PageList.SelectPointerItem = ПрихіднийКасовийОрдер_Objest.UnigueID;
                 PageList.LoadRecords();
             }
         }

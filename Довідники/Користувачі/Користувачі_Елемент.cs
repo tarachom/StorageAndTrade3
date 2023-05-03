@@ -27,13 +27,8 @@ using StorageAndTrade_1_0.Довідники;
 
 namespace StorageAndTrade
 {
-    class Користувачі_Елемент : VBox
+    class Користувачі_Елемент : ДовідникЕлемент
     {
-        public Користувачі? PageList { get; set; }
-        public System.Action<Користувачі_Pointer>? CallBack_OnSelectPointer { get; set; }
-
-        public bool IsNew { get; set; } = true;
-
         public Користувачі_Objest Користувачі_Objest { get; set; } = new Користувачі_Objest();
 
         Entry Код = new Entry() { WidthRequest = 100 };
@@ -41,33 +36,12 @@ namespace StorageAndTrade
         ФізичніОсоби_PointerControl ФізичнаОсоба = new ФізичніОсоби_PointerControl();
         TextView Коментар = new TextView();
 
-        public Користувачі_Елемент() : base()
-        {
-            HBox hBox = new HBox();
+        public Користувачі_Елемент() : base() { }
 
-            Button bSaveAndClose = new Button("Зберегти та закрити");
-            bSaveAndClose.Clicked += (object? sender, EventArgs args) => { Save(true); };
-            hBox.PackStart(bSaveAndClose, false, false, 10);
-
-            Button bSave = new Button("Зберегти");
-            bSave.Clicked += (object? sender, EventArgs args) => { Save(); };
-            hBox.PackStart(bSave, false, false, 10);
-
-            PackStart(hBox, false, false, 10);
-
-            HPaned hPaned = new HPaned() { BorderWidth = 5, Position = 500 };
-
-            CreatePack1(hPaned);
-            CreatePack2(hPaned);
-
-            PackStart(hPaned, false, false, 5);
-
-            ShowAll();
-        }
-
-        void CreatePack1(HPaned hPaned)
+        protected override void CreatePack1()
         {
             VBox vBox = new VBox();
+            HPanedTop.Pack1(vBox, false, false);
 
             //Код
             HBox hBoxCode = new HBox() { Halign = Align.End };
@@ -100,34 +74,26 @@ namespace StorageAndTrade
             scrollTextViewComment.Add(Коментар);
 
             hBoxComment.PackStart(scrollTextViewComment, false, false, 5);
-
-            hPaned.Pack1(vBox, false, false);
-        }
-
-        void CreatePack2(HPaned hPaned)
-        {
-            VBox vBox = new VBox();
-
-
-
-            hPaned.Pack2(vBox, false, false);
         }
 
         #region Присвоєння / зчитування значень
 
-        public void SetValue()
+        public override void SetValue()
         {
             if (IsNew)
                 Користувачі_Objest.New();
-                
+
             Код.Text = Користувачі_Objest.Код;
             Назва.Text = Користувачі_Objest.Назва;
             ФізичнаОсоба.Pointer = Користувачі_Objest.ФізичнаОсоба;
             Коментар.Buffer.Text = Користувачі_Objest.Коментар;
         }
 
-        void GetValue()
+        protected override void GetValue()
         {
+            UnigueID = Користувачі_Objest.UnigueID;
+            Caption = Назва.Text;
+
             Користувачі_Objest.Код = Код.Text;
             Користувачі_Objest.Назва = Назва.Text;
             Користувачі_Objest.ФізичнаОсоба = ФізичнаОсоба.Pointer;
@@ -136,42 +102,15 @@ namespace StorageAndTrade
 
         #endregion
 
-        void Save(bool closePage = false)
+        protected override void Save()
         {
-            GetValue();
-
-            bool isSave = false;
-
             try
             {
-                isSave = Користувачі_Objest.Save();
+                Користувачі_Objest.Save();
             }
             catch (Exception ex)
             {
-                ФункціїДляПовідомлень.ДодатиПовідомленняПроПомилку(DateTime.Now, "Запис",
-                    Користувачі_Objest.UnigueID.UGuid, "Довідники", Користувачі_Objest.Назва, ex.Message);
-
-                ФункціїДляПовідомлень.ВідкритиТермінал();
-            }
-
-            if (!isSave)
-            {
-                Message.Info(Program.GeneralForm, "Не вдалось записати");
-                return;
-            }
-
-            if (closePage)
-                Program.GeneralForm?.CloseCurrentPageNotebook();
-            else
-                Program.GeneralForm?.RenameCurrentPageNotebook($"{Користувачі_Objest.Назва}");
-
-            if (CallBack_OnSelectPointer != null)
-                CallBack_OnSelectPointer.Invoke(Користувачі_Objest.GetDirectoryPointer());
-
-            if (PageList != null)
-            {
-                PageList.SelectPointerItem = Користувачі_Objest.GetDirectoryPointer();
-                PageList.LoadRecords();
+                MsgError(ex);
             }
         }
     }

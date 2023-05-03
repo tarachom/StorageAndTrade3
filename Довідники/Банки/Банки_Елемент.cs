@@ -27,13 +27,8 @@ using StorageAndTrade_1_0.Довідники;
 
 namespace StorageAndTrade
 {
-    class Банки_Елемент : VBox
+    class Банки_Елемент : ДовідникЕлемент
     {
-        public Банки? PageList { get; set; }
-        public System.Action<Банки_Pointer>? CallBack_OnSelectPointer { get; set; }
-
-        public bool IsNew { get; set; } = true;
-
         public Банки_Objest Банки_Objest { get; set; } = new Банки_Objest();
 
         Entry Код = new Entry() { WidthRequest = 100 };
@@ -41,122 +36,85 @@ namespace StorageAndTrade
         Entry УнікальнийКодБанку = new Entry() { WidthRequest = 100 };
         Entry КодЄДРПОУ = new Entry() { WidthRequest = 100 };
 
-        Entry Назва = new Entry();
-        Entry ПовнаНазва = new Entry();
-        Entry НазваГоловноїУстановиАнг = new Entry();
+        Entry Назва = new Entry() { WidthRequest = 700 };
+        Entry ПовнаНазва = new Entry() { WidthRequest = 700 };
+        Entry НазваГоловноїУстановиАнг = new Entry() { WidthRequest = 700 };
 
         public Банки_Елемент() : base()
         {
-            HBox hBox = new HBox();
-
-            Button bSaveAndClose = new Button("Зберегти та закрити");
-            bSaveAndClose.Clicked += (object? sender, EventArgs args) => { Save(true); };
-            hBox.PackStart(bSaveAndClose, false, false, 10);
-
-            Button bSave = new Button("Зберегти");
-            bSave.Clicked += (object? sender, EventArgs args) => { Save(); };
-            hBox.PackStart(bSave, false, false, 10);
-
-            PackStart(hBox, false, false, 10);
-
-            CreateTop();
-
-            CreatePack();
-
-            ShowAll();
+            HPanedTop.Position = 800;
         }
 
-        void CreateTop()
+        protected override void CreatePack1()
         {
             VBox vBox = new VBox();
+            HPanedTop.Pack1(vBox, false, false);
 
             //Назва
-            HBox hBoxName = new HBox();
-            vBox.PackStart(hBoxName, false, true, 5);
+            HBox hBoxName = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxName, false, false, 5);
 
             hBoxName.PackStart(new Label("Коротка назва:"), false, false, 5);
-            hBoxName.PackStart(Назва, true, true, 5);
+            hBoxName.PackStart(Назва, false, false, 5);
 
             //Повна Назва
-            HBox hBoxFullName = new HBox();
-            vBox.PackStart(hBoxFullName, false, true, 5);
+            HBox hBoxFullName = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxFullName, false, false, 5);
 
             hBoxFullName.PackStart(new Label("Повна назва:"), false, false, 5);
-            hBoxFullName.PackStart(ПовнаНазва, true, true, 5);
+            hBoxFullName.PackStart(ПовнаНазва, false, false, 5);
 
             //Назва En
-            HBox hBoxNameEn = new HBox();
-            vBox.PackStart(hBoxNameEn, false, true, 5);
+            HBox hBoxNameEn = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxNameEn, false, false, 5);
 
             hBoxNameEn.PackStart(new Label("Назва англ:"), false, false, 5);
-            hBoxNameEn.PackStart(НазваГоловноїУстановиАнг, true, true, 5);
-
-            PackStart(vBox, false, false, 0);
+            hBoxNameEn.PackStart(НазваГоловноїУстановиАнг, false, false, 5);
         }
 
-        void CreatePack()
+        protected override void CreatePack2()
         {
             VBox vBox = new VBox();
-
-            //Два блоки для полів -->
-            HBox hBoxContainer = new HBox();
-            vBox.PackStart(hBoxContainer, false, false, 0);
+            HPanedTop.Pack2(vBox, false, false);
 
             //Container1
-            VBox vBoxContainer1 = new VBox() { WidthRequest = 500 };
-            hBoxContainer.PackStart(vBoxContainer1, false, false, 5);
+            VBox vBoxContainer1 = new VBox() { WidthRequest = 300, Halign = Align.Start };
+            vBox.PackStart(vBoxContainer1, false, false, 0);
 
-            CreateContainer1(vBoxContainer1);
+            {
+                //Код
+                HBox hBoxCode = new HBox() { Halign = Align.End };
+                vBoxContainer1.PackStart(hBoxCode, false, false, 5);
 
-            //Container2
-            VBox vBoxContainer2 = new VBox() { WidthRequest = 500 };
-            hBoxContainer.PackStart(vBoxContainer2, false, false, 5);
+                hBoxCode.PackStart(new Label("Код:"), false, false, 5);
+                hBoxCode.PackStart(Код, false, false, 5);
 
-            CreateContainer2(vBoxContainer2);
-            // <--
+                //КодМФО
+                HBox hBoxCodeMFO = new HBox() { Halign = Align.End };
+                vBoxContainer1.PackStart(hBoxCodeMFO, false, false, 5);
 
-            PackStart(vBox, false, false, 0);
-        }
+                hBoxCodeMFO.PackStart(new Label("Код МФО:"), false, false, 5);
+                hBoxCodeMFO.PackStart(КодМФО, false, false, 5);
 
-        void CreateContainer1(VBox vBox)
-        {
+                //УнікальнийКодБанку
+                HBox hBoxUniqueCode = new HBox() { Halign = Align.End };
+                vBoxContainer1.PackStart(hBoxUniqueCode, false, false, 5);
 
-        }
+                hBoxUniqueCode.PackStart(new Label("Унікальний код:"), false, false, 5);
+                hBoxUniqueCode.PackStart(УнікальнийКодБанку, false, false, 5);
 
-        void CreateContainer2(VBox vBox)
-        {
-            //Код
-            HBox hBoxCode = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxCode, false, false, 5);
+                //КодЄДРПОУ
+                HBox hBoxCodeEDRPUO = new HBox() { Halign = Align.End };
+                vBoxContainer1.PackStart(hBoxCodeEDRPUO, false, false, 5);
 
-            hBoxCode.PackStart(new Label("Код:"), false, false, 5);
-            hBoxCode.PackStart(Код, false, false, 5);
-
-            //КодМФО
-            HBox hBoxCodeMFO = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxCodeMFO, false, false, 5);
-
-            hBoxCodeMFO.PackStart(new Label("Код МФО:"), false, false, 5);
-            hBoxCodeMFO.PackStart(КодМФО, false, false, 5);
-
-            //УнікальнийКодБанку
-            HBox hBoxUniqueCode = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxUniqueCode, false, false, 5);
-
-            hBoxUniqueCode.PackStart(new Label("Унікальний код:"), false, false, 5);
-            hBoxUniqueCode.PackStart(УнікальнийКодБанку, false, false, 5);
-
-            //КодЄДРПОУ
-            HBox hBoxCodeEDRPUO = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxCodeEDRPUO, false, false, 5);
-
-            hBoxCodeEDRPUO.PackStart(new Label("Код ЄДРПОУ:"), false, false, 5);
-            hBoxCodeEDRPUO.PackStart(КодЄДРПОУ, false, false, 5);
+                hBoxCodeEDRPUO.PackStart(new Label("Код ЄДРПОУ:"), false, false, 5);
+                hBoxCodeEDRPUO.PackStart(КодЄДРПОУ, false, false, 5);
+            }
         }
 
         #region Присвоєння / зчитування значень
 
-        public void SetValue()
+        public override void SetValue()
         {
             if (IsNew)
                 Банки_Objest.New();
@@ -170,50 +128,26 @@ namespace StorageAndTrade
             КодЄДРПОУ.Text = Банки_Objest.КодЄДРПОУ;
         }
 
-        void GetValue()
+        protected override void GetValue()
         {
+            UnigueID = Банки_Objest.UnigueID;
+            Caption = Назва.Text;
+
             Банки_Objest.Код = Код.Text;
             Банки_Objest.Назва = Назва.Text;
         }
 
         #endregion
 
-        void Save(bool closePage = false)
+        protected override void Save()
         {
-            GetValue();
-
-            bool isSave = false;
-
             try
             {
-                isSave = Банки_Objest.Save();
+                Банки_Objest.Save();
             }
             catch (Exception ex)
             {
-                ФункціїДляПовідомлень.ДодатиПовідомленняПроПомилку(DateTime.Now, "Запис",
-                    Банки_Objest.UnigueID.UGuid, "Довідники", Банки_Objest.Назва, ex.Message);
-
-                ФункціїДляПовідомлень.ВідкритиТермінал();
-            }
-
-            if (!isSave)
-            {
-                Message.Info(Program.GeneralForm, "Не вдалось записати");
-                return;
-            }
-
-            if (closePage)
-                Program.GeneralForm?.CloseCurrentPageNotebook();
-            else
-                Program.GeneralForm?.RenameCurrentPageNotebook($"{Банки_Objest.Назва}");
-
-            if (CallBack_OnSelectPointer != null)
-                CallBack_OnSelectPointer.Invoke(Банки_Objest.GetDirectoryPointer());
-
-            if (PageList != null)
-            {
-                PageList.SelectPointerItem = Банки_Objest.GetDirectoryPointer();
-                PageList.LoadRecords();
+                MsgError(ex);
             }
         }
     }

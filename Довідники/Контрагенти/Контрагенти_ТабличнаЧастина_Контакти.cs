@@ -140,14 +140,8 @@ namespace StorageAndTrade
 
                         //Тип
                         {
-                            record.Тип = ТипиКонтактноїІнформації.Адрес; //default
-
-                            foreach (var field in ПсевдонімиПерелічення.ТипиКонтактноїІнформації_Array())
-                                if (type == field.Name)
-                                {
-                                    record.Тип = field.Value;
-                                    break;
-                                }
+                            ТипиКонтактноїІнформації? result = ПсевдонімиПерелічення.ТипиКонтактноїІнформації_FindByName(type);
+                            record.Тип = (result != null ? (ТипиКонтактноїІнформації)result : ТипиКонтактноїІнформації.Адрес);
                         }
 
                         record.Значення = Store.GetValue(iter, (int)Columns.Значення)?.ToString() ?? "";
@@ -202,7 +196,7 @@ namespace StorageAndTrade
             {
                 ListStore storeTypeInfo = new ListStore(typeof(string), typeof(string));
 
-                foreach (var field in ПсевдонімиПерелічення.ТипиКонтактноїІнформації_Array())
+                foreach (var field in ПсевдонімиПерелічення.ТипиКонтактноїІнформації_List())
                     storeTypeInfo.AppendValues(field.Value.ToString(), field.Name);
 
                 CellRendererCombo TypeInfo = new CellRendererCombo() { Editable = true, Model = storeTypeInfo, TextColumn = 1 };

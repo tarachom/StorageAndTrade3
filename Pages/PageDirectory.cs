@@ -61,7 +61,7 @@ namespace StorageAndTrade
                     Program.GeneralForm?.CreateNotebookPage($"{Склади_Const.FULLNAME}", () =>
                     {
                         Склади page = new Склади();
-                        page.LoadTree();
+                        page.LoadRecords();
                         return page;
                     });
                 });
@@ -217,7 +217,7 @@ namespace StorageAndTrade
                     Program.GeneralForm?.CreateNotebookPage($"{СкладськіКомірки_Const.FULLNAME}", () =>
                     {
                         СкладськіКомірки page = new СкладськіКомірки();
-                        page.LoadTree();
+                        page.LoadRecords();
                         return page;
                     });
                 });
@@ -245,7 +245,7 @@ namespace StorageAndTrade
                     Program.GeneralForm?.CreateNotebookPage($"{Контрагенти_Const.FULLNAME}", () =>
                     {
                         Контрагенти page = new Контрагенти();
-                        page.LoadTree();
+                        page.LoadRecords();
                         return page;
                     });
                 });
@@ -278,7 +278,7 @@ namespace StorageAndTrade
                     Program.GeneralForm?.CreateNotebookPage($"{Номенклатура_Const.FULLNAME}", () =>
                     {
                         Номенклатура page = new Номенклатура();
-                        page.LoadTree();
+                        page.LoadRecords();
                         return page;
                     });
                 });

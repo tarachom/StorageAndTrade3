@@ -36,8 +36,8 @@ namespace StorageAndTrade
         TreeStore TreeStore = new TreeStore(typeof(string), typeof(string));
 
         public System.Action? CallBack_RowActivated { get; set; }
-        public Номенклатура_Папки_Pointer? DirectoryPointerItem { get; set; }
-        public System.Action<Номенклатура_Папки_Pointer>? CallBack_OnSelectPointer { get; set; }
+        public UnigueID? DirectoryPointerItem { get; set; }
+        public System.Action<UnigueID>? CallBack_OnSelectPointer { get; set; }
         public Номенклатура_Папки_Pointer Parent_Pointer { get; set; } = new Номенклатура_Папки_Pointer();
 
         public string UidOpenFolder { get; set; } = "";
@@ -89,7 +89,7 @@ namespace StorageAndTrade
                 linkClear.Clicked += (object? sender, EventArgs args) =>
                 {
                     if (CallBack_OnSelectPointer != null)
-                        CallBack_OnSelectPointer.Invoke(new Номенклатура_Папки_Pointer());
+                        CallBack_OnSelectPointer.Invoke(new UnigueID());
 
                     if (PopoverParent != null)
                         PopoverParent.Hide();
@@ -120,7 +120,7 @@ namespace StorageAndTrade
         public void LoadTree()
         {
             if (DirectoryPointerItem != null)
-                Parent_Pointer = DirectoryPointerItem;
+                Parent_Pointer = new Номенклатура_Папки_Pointer(DirectoryPointerItem);
 
             Номенклатура_Папки_Дерево_СпільніФункції.FillTree(TreeViewGrid, TreeStore, UidOpenFolder, Parent_Pointer);
         }
@@ -136,7 +136,7 @@ namespace StorageAndTrade
 
                 UnigueID unigueID = new UnigueID((string)TreeViewGrid.Model.GetValue(iter, 1));
 
-                DirectoryPointerItem = new Номенклатура_Папки_Pointer(unigueID);
+                DirectoryPointerItem = unigueID;
             }
         }
 
@@ -151,7 +151,7 @@ namespace StorageAndTrade
                     string uid = (string)TreeViewGrid.Model.GetValue(iter, 0);
 
                     if (CallBack_OnSelectPointer != null)
-                        CallBack_OnSelectPointer.Invoke(new Номенклатура_Папки_Pointer(new UnigueID(uid)));
+                        CallBack_OnSelectPointer.Invoke(new UnigueID(uid));
 
                     if (PopoverParent != null)
                         PopoverParent.Hide();

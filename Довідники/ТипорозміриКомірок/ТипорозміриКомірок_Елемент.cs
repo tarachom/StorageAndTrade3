@@ -27,13 +27,8 @@ using StorageAndTrade_1_0.Довідники;
 
 namespace StorageAndTrade
 {
-    class ТипорозміриКомірок_Елемент : VBox
+    class ТипорозміриКомірок_Елемент : ДовідникЕлемент
     {
-        public ТипорозміриКомірок? PageList { get; set; }
-        public System.Action<ТипорозміриКомірок_Pointer>? CallBack_OnSelectPointer { get; set; }
-
-        public bool IsNew { get; set; } = true;
-
         public ТипорозміриКомірок_Objest ТипорозміриКомірок_Objest { get; set; } = new ТипорозміриКомірок_Objest();
 
         Entry Назва = new Entry() { WidthRequest = 250 };
@@ -45,31 +40,13 @@ namespace StorageAndTrade
 
         public ТипорозміриКомірок_Елемент() : base()
         {
-            HBox hBox = new HBox();
-
-            Button bSaveAndClose = new Button("Зберегти та закрити");
-            bSaveAndClose.Clicked += (object? sender, EventArgs args) => { Save(true); };
-            hBox.PackStart(bSaveAndClose, false, false, 10);
-
-            Button bSave = new Button("Зберегти");
-            bSave.Clicked += (object? sender, EventArgs args) => { Save(); };
-            hBox.PackStart(bSave, false, false, 10);
-
-            PackStart(hBox, false, false, 10);
-
-            HPaned hPaned = new HPaned() { BorderWidth = 5, Position = 150 };
-
-            CreatePack1(hPaned);
-            CreatePack2(hPaned);
-
-            PackStart(hPaned, false, false, 5);
-
-            ShowAll();
+            HPanedTop.Position = 150;
         }
 
-        void CreatePack1(HPaned hPaned)
+        protected override void CreatePack1()
         {
             VBox vBox = new VBox();
+            HPanedTop.Pack1(vBox, false, false);
 
             //Назва
             HBox hBoxName = new HBox() { Halign = Align.End };
@@ -112,22 +89,11 @@ namespace StorageAndTrade
 
             hBoxVantaj.PackStart(new Label("Вантажопідйомність:"), false, false, 5);
             hBoxVantaj.PackStart(Вантажопідйомність, false, false, 5);
-
-            hPaned.Pack1(vBox, false, false);
-        }
-
-        void CreatePack2(HPaned hPaned)
-        {
-            VBox vBox = new VBox();
-
-
-
-            hPaned.Pack2(vBox, false, false);
         }
 
         #region Присвоєння / зчитування значень
 
-        public void SetValue()
+        public override void SetValue()
         {
             if (IsNew)
                 ТипорозміриКомірок_Objest.New();
@@ -140,8 +106,11 @@ namespace StorageAndTrade
             Вантажопідйомність.Text = ТипорозміриКомірок_Objest.Вантажопідйомність;
         }
 
-        void GetValue()
+        protected override void GetValue()
         {
+            UnigueID = ТипорозміриКомірок_Objest.UnigueID;
+            Caption = Назва.Text;
+
             ТипорозміриКомірок_Objest.Назва = Назва.Text;
             ТипорозміриКомірок_Objest.Висота = Висота.Text;
             ТипорозміриКомірок_Objest.Ширина = Ширина.Text;
@@ -152,42 +121,15 @@ namespace StorageAndTrade
 
         #endregion
 
-        void Save(bool closePage = false)
+        protected override void Save()
         {
-            GetValue();
-
-            bool isSave = false;
-
             try
             {
-                isSave = ТипорозміриКомірок_Objest.Save();
+                ТипорозміриКомірок_Objest.Save();
             }
             catch (Exception ex)
             {
-                ФункціїДляПовідомлень.ДодатиПовідомленняПроПомилку(DateTime.Now, "Запис",
-                    ТипорозміриКомірок_Objest.UnigueID.UGuid, "Довідники", ТипорозміриКомірок_Objest.Назва, ex.Message);
-
-                ФункціїДляПовідомлень.ВідкритиТермінал();
-            }
-
-            if (!isSave)
-            {
-                Message.Info(Program.GeneralForm, "Не вдалось записати");
-                return;
-            }
-
-            if (closePage)
-                Program.GeneralForm?.CloseCurrentPageNotebook();
-            else
-                Program.GeneralForm?.RenameCurrentPageNotebook($"{ТипорозміриКомірок_Objest.Назва}");
-
-            if (CallBack_OnSelectPointer != null)
-                CallBack_OnSelectPointer.Invoke(ТипорозміриКомірок_Objest.GetDirectoryPointer());
-
-            if (PageList != null)
-            {
-                PageList.SelectPointerItem = ТипорозміриКомірок_Objest.GetDirectoryPointer();
-                PageList.LoadRecords();
+                MsgError(ex);
             }
         }
     }

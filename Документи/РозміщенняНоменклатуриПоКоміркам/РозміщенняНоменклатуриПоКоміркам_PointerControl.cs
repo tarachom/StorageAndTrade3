@@ -21,6 +21,7 @@ limitations under the License.
 Сайт:     accounting.org.ua
 */
 
+using AccountingSoftware;
 using StorageAndTrade_1_0.Документи;
 
 namespace StorageAndTrade
@@ -57,12 +58,12 @@ namespace StorageAndTrade
 
         protected override void OpenSelect(object? sender, EventArgs args)
         {
-            РозміщенняНоменклатуриПоКоміркам page = new РозміщенняНоменклатуриПоКоміркам(true);
+            РозміщенняНоменклатуриПоКоміркам page = new РозміщенняНоменклатуриПоКоміркам();
 
-            page.DocumentPointerItem = Pointer;
-            page.CallBack_OnSelectPointer = (РозміщенняНоменклатуриПоКоміркам_Pointer selectPointer) =>
+            page.DocumentPointerItem = Pointer.UnigueID;
+            page.CallBack_OnSelectPointer = (UnigueID selectPointer) =>
             {
-                Pointer = selectPointer;
+                Pointer = new РозміщенняНоменклатуриПоКоміркам_Pointer(selectPointer);
             };
 
             Program.GeneralForm?.CreateNotebookPage($"Вибір - {РозміщенняНоменклатуриПоКоміркам_Const.FULLNAME}", () => { return page; }, true);

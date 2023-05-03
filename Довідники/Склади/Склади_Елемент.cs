@@ -24,20 +24,14 @@ limitations under the License.
 using Gtk;
 
 using StorageAndTrade_1_0.Довідники;
-using Перелічення = StorageAndTrade_1_0.Перелічення;
+using StorageAndTrade_1_0.Перелічення;
 
 namespace StorageAndTrade
 {
-    class Склади_Елемент : VBox
+    class Склади_Елемент : ДовідникЕлемент
     {
-        public Склади? PageList { get; set; }
-        public System.Action<Склади_Pointer>? CallBack_OnSelectPointer { get; set; }
-
-        public bool IsNew { get; set; } = true;
-
-        public Склади_Папки_Pointer РодичДляНового { get; set; } = new Склади_Папки_Pointer();
-
         public Склади_Objest Склади_Objest { get; set; } = new Склади_Objest();
+        public Склади_Папки_Pointer РодичДляНового { get; set; } = new Склади_Папки_Pointer();
 
         #region Field
 
@@ -46,38 +40,17 @@ namespace StorageAndTrade
         Склади_Папки_PointerControl Родич = new Склади_Папки_PointerControl() { Caption = "Папка:" };
         ComboBoxText ТипСкладу = new ComboBoxText();
         ВидиЦін_PointerControl ВидЦін = new ВидиЦін_PointerControl();
-        ComboBoxText НалаштуванняАдресногоЗберігання = new ComboBoxText();
+        ComboBoxText Налаштування = new ComboBoxText();
         Склади_ТабличнаЧастина_Контакти Контакти = new Склади_ТабличнаЧастина_Контакти();
 
         #endregion
 
-        public Склади_Елемент() : base()
-        {
-            HBox hBox = new HBox();
+        public Склади_Елемент() : base() { }
 
-            Button bSaveAndClose = new Button("Зберегти та закрити");
-            bSaveAndClose.Clicked += (object? sender, EventArgs args) => { Save(true); };
-            hBox.PackStart(bSaveAndClose, false, false, 10);
-
-            Button bSave = new Button("Зберегти");
-            bSave.Clicked += (object? sender, EventArgs args) => { Save(); };
-            hBox.PackStart(bSave, false, false, 10);
-
-            PackStart(hBox, false, false, 10);
-
-            HPaned hPaned = new HPaned() { BorderWidth = 5, Position = 500 };
-
-            CreatePack1(hPaned);
-            CreatePack2(hPaned);
-
-            PackStart(hPaned, false, false, 5);
-
-            ShowAll();
-        }
-
-        void CreatePack1(HPaned hPaned)
+        protected override void CreatePack1()
         {
             VBox vBox = new VBox();
+            HPanedTop.Pack1(vBox, false, false);
 
             //Код
             HBox hBoxCode = new HBox() { Halign = Align.End };
@@ -99,8 +72,6 @@ namespace StorageAndTrade
 
             hBoxParent.PackStart(Родич, false, false, 5);
 
-            hPaned.Pack1(vBox, false, false);
-
             //ВидЦін
             HBox hBoxVidCen = new HBox() { Halign = Align.End };
             vBox.PackStart(hBoxVidCen, false, false, 5);
@@ -111,7 +82,7 @@ namespace StorageAndTrade
             HBox hBoxType = new HBox() { Halign = Align.End };
             vBox.PackStart(hBoxType, false, false, 5);
 
-            foreach (var field in Перелічення.ПсевдонімиПерелічення.ТипиСкладів_Array())
+            foreach (var field in ПсевдонімиПерелічення.ТипиСкладів_List())
                 ТипСкладу.Append(field.Value.ToString(), field.Name);
 
             hBoxType.PackStart(new Label("Тип складу:"), false, false, 5);
@@ -121,18 +92,17 @@ namespace StorageAndTrade
             HBox hBoxAdressSave = new HBox() { Halign = Align.End };
             vBox.PackStart(hBoxAdressSave, false, false, 5);
 
-            foreach (var field in Перелічення.ПсевдонімиПерелічення.НалаштуванняАдресногоЗберігання_Array())
-                НалаштуванняАдресногоЗберігання.Append(field.Value.ToString(), field.Name);
+            foreach (var field in ПсевдонімиПерелічення.НалаштуванняАдресногоЗберігання_List())
+                Налаштування.Append(field.Value.ToString(), field.Name);
 
             hBoxAdressSave.PackStart(new Label("Адресне зберігання:"), false, false, 5);
-            hBoxAdressSave.PackStart(НалаштуванняАдресногоЗберігання, false, false, 5);
-
-            hPaned.Pack1(vBox, false, false);
+            hBoxAdressSave.PackStart(Налаштування, false, false, 5);
         }
 
-        void CreatePack2(HPaned hPaned)
+        protected override void CreatePack2()
         {
             VBox vBox = new VBox();
+            HPanedTop.Pack2(vBox, false, false);
 
             HBox hBox = new HBox();
             hBox.PackStart(new Label("Контакти:"), false, false, 5);
@@ -140,14 +110,12 @@ namespace StorageAndTrade
 
             HBox hBoxContakty = new HBox();
             hBoxContakty.PackStart(Контакти, true, true, 5);
-
             vBox.PackStart(hBoxContakty, false, false, 0);
-            hPaned.Pack2(vBox, false, false);
         }
 
         #region Присвоєння / зчитування значень
 
-        public void SetValue()
+        public override void SetValue()
         {
             if (IsNew)
             {
@@ -160,69 +128,45 @@ namespace StorageAndTrade
             Родич.Pointer = Склади_Objest.Папка;
             ВидЦін.Pointer = Склади_Objest.ВидЦін;
             ТипСкладу.ActiveId = Склади_Objest.ТипСкладу.ToString();
-            НалаштуванняАдресногоЗберігання.ActiveId = Склади_Objest.НалаштуванняАдресногоЗберігання.ToString();
+            Налаштування.ActiveId = Склади_Objest.НалаштуванняАдресногоЗберігання.ToString();
 
             if (ТипСкладу.Active == -1)
-                ТипСкладу.ActiveId = Перелічення.ТипиСкладів.Гуртовий.ToString();
+                ТипСкладу.ActiveId = ТипиСкладів.Гуртовий.ToString();
 
-            if (НалаштуванняАдресногоЗберігання.Active == -1)
-                НалаштуванняАдресногоЗберігання.ActiveId = Перелічення.НалаштуванняАдресногоЗберігання.НеВикористовувати.ToString();
+            if (Налаштування.Active == -1)
+                Налаштування.ActiveId = НалаштуванняАдресногоЗберігання.НеВикористовувати.ToString();
 
             Контакти.Склади_Objest = Склади_Objest;
             Контакти.LoadRecords();
         }
 
-        void GetValue()
+        protected override void GetValue()
         {
+            UnigueID = Склади_Objest.UnigueID;
+            Caption = Назва.Text;
+
             Склади_Objest.Код = Код.Text;
             Склади_Objest.Назва = Назва.Text;
             Склади_Objest.Папка = Родич.Pointer;
             Склади_Objest.ВидЦін = ВидЦін.Pointer;
-            Склади_Objest.ТипСкладу = Enum.Parse<Перелічення.ТипиСкладів>(ТипСкладу.ActiveId);
-            Склади_Objest.НалаштуванняАдресногоЗберігання = Enum.Parse<Перелічення.НалаштуванняАдресногоЗберігання>(НалаштуванняАдресногоЗберігання.ActiveId);
+            Склади_Objest.ТипСкладу = Enum.Parse<ТипиСкладів>(ТипСкладу.ActiveId);
+            Склади_Objest.НалаштуванняАдресногоЗберігання = Enum.Parse<НалаштуванняАдресногоЗберігання>(Налаштування.ActiveId);
         }
 
         #endregion
 
-        void Save(bool closePage = false)
+        protected override void Save()
         {
-            GetValue();
-
-            bool isSave = false;
-
             try
             {
-                isSave = Склади_Objest.Save();
+                Склади_Objest.Save();
             }
             catch (Exception ex)
             {
-                ФункціїДляПовідомлень.ДодатиПовідомленняПроПомилку(DateTime.Now, "Запис",
-                    Склади_Objest.UnigueID.UGuid, "Довідники", Склади_Objest.Назва, ex.Message);
-
-                ФункціїДляПовідомлень.ВідкритиТермінал();
-            }
-
-            if (!isSave)
-            {
-                Message.Info(Program.GeneralForm, "Не вдалось записати");
-                return;
+                MsgError(ex);
             }
 
             Контакти.SaveRecords();
-
-            if (closePage)
-                Program.GeneralForm?.CloseCurrentPageNotebook();
-            else
-                Program.GeneralForm?.RenameCurrentPageNotebook($"{Склади_Objest.Назва}");
-
-            if (CallBack_OnSelectPointer != null)
-                CallBack_OnSelectPointer.Invoke(Склади_Objest.GetDirectoryPointer());
-
-            if (PageList != null)
-            {
-                PageList.SelectPointerItem = Склади_Objest.GetDirectoryPointer();
-                PageList.LoadRecords();
-            }
         }
     }
 }

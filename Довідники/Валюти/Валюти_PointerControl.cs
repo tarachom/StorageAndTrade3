@@ -23,6 +23,7 @@ limitations under the License.
 
 using Gtk;
 
+using AccountingSoftware;
 using StorageAndTrade_1_0.Довідники;
 
 namespace StorageAndTrade
@@ -61,12 +62,10 @@ namespace StorageAndTrade
             if (BeforeClickOpenFunc != null)
                 BeforeClickOpenFunc.Invoke();
 
-            Валюти_ШвидкийВибір page = new Валюти_ШвидкийВибір() { PopoverParent = PopoverSmallSelect, DirectoryPointerItem = Pointer };
-
-            page.DirectoryPointerItem = Pointer;
-            page.CallBack_OnSelectPointer = (Валюти_Pointer selectPointer) =>
+            Валюти_ШвидкийВибір page = new Валюти_ШвидкийВибір() { PopoverParent = PopoverSmallSelect, DirectoryPointerItem = Pointer.UnigueID };
+            page.CallBack_OnSelectPointer = (UnigueID selectPointer) =>
             {
-                Pointer = selectPointer;
+                Pointer = new Валюти_Pointer(selectPointer);
 
                 if (AfterSelectFunc != null)
                     AfterSelectFunc.Invoke();

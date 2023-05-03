@@ -33,8 +33,8 @@ namespace StorageAndTrade
     class ДоговориКонтрагентів_ШвидкийВибір : VBox
     {
         public Popover? PopoverParent { get; set; }
-        public ДоговориКонтрагентів_Pointer? DirectoryPointerItem { get; set; }
-        public System.Action<ДоговориКонтрагентів_Pointer>? CallBack_OnSelectPointer { get; set; }
+        public UnigueID? DirectoryPointerItem { get; set; }
+        public System.Action<UnigueID>? CallBack_OnSelectPointer { get; set; }
 
         TreeView TreeViewGrid;
         public Контрагенти_PointerControl КонтрагентВласник = new Контрагенти_PointerControl() { WidthPresentation = 100 };
@@ -100,7 +100,7 @@ namespace StorageAndTrade
                 linkClear.Clicked += (object? sender, EventArgs args) =>
                 {
                     if (CallBack_OnSelectPointer != null)
-                        CallBack_OnSelectPointer.Invoke(new ДоговориКонтрагентів_Pointer());
+                        CallBack_OnSelectPointer.Invoke(new UnigueID());
 
                     if (PopoverParent != null)
                         PopoverParent.Hide();
@@ -180,7 +180,7 @@ namespace StorageAndTrade
 
                 UnigueID unigueID = new UnigueID((string)TreeViewGrid.Model.GetValue(iter, 1));
 
-                DirectoryPointerItem = new ДоговориКонтрагентів_Pointer(unigueID);
+                DirectoryPointerItem = unigueID;
             }
         }
 
@@ -195,7 +195,7 @@ namespace StorageAndTrade
                     string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
 
                     if (CallBack_OnSelectPointer != null)
-                        CallBack_OnSelectPointer.Invoke(new ДоговориКонтрагентів_Pointer(new UnigueID(uid)));
+                        CallBack_OnSelectPointer.Invoke(new UnigueID(uid));
 
                     if (PopoverParent != null)
                         PopoverParent.Hide();

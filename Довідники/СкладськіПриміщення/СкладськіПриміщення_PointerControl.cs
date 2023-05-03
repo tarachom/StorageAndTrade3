@@ -23,11 +23,12 @@ limitations under the License.
 
 using Gtk;
 
+using AccountingSoftware;
 using StorageAndTrade_1_0.Довідники;
 
 namespace StorageAndTrade
 {
-    class СкладськіПриміщення_PointerControl : PointerControl
+    public class СкладськіПриміщення_PointerControl : PointerControl
     {
         public СкладськіПриміщення_PointerControl()
         {
@@ -63,13 +64,11 @@ namespace StorageAndTrade
             if (BeforeClickOpenFunc != null)
                 BeforeClickOpenFunc.Invoke();
 
-            СкладськіПриміщення_ШвидкийВибір page = new СкладськіПриміщення_ШвидкийВибір() { PopoverParent = PopoverSmallSelect, DirectoryPointerItem = Pointer };
-
-            page.DirectoryPointerItem = Pointer;
+            СкладськіПриміщення_ШвидкийВибір page = new СкладськіПриміщення_ШвидкийВибір() { PopoverParent = PopoverSmallSelect, DirectoryPointerItem = Pointer.UnigueID };
             page.СкладВласник.Pointer = СкладВласник;
-            page.CallBack_OnSelectPointer = (СкладськіПриміщення_Pointer selectPointer) =>
+            page.CallBack_OnSelectPointer = (UnigueID selectPointer) =>
             {
-                Pointer = selectPointer;
+                Pointer = new СкладськіПриміщення_Pointer(selectPointer);
 
                 if (AfterSelectFunc != null)
                     AfterSelectFunc.Invoke();

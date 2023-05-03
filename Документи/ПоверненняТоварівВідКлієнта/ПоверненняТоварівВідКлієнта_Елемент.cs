@@ -421,7 +421,7 @@ namespace StorageAndTrade
         {
             if (PageList != null)
             {
-                PageList.SelectPointerItem = ПоверненняТоварівВідКлієнта_Objest.GetDocumentPointer();
+                PageList.SelectPointerItem = ПоверненняТоварівВідКлієнта_Objest.UnigueID;
                 PageList.LoadRecords();
             }
         }

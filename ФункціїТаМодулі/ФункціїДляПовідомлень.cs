@@ -34,7 +34,7 @@ namespace StorageAndTrade
 {
     class ФункціїДляПовідомлень
     {
-        public static void ДодатиПовідомленняПроПомилку(DateTime Дата, string НазваПроцесу, Guid Обєкт, string ТипОбєкту, string НазваОбєкту, string Повідомлення)
+        public static void ДодатиПовідомленняПроПомилку(DateTime Дата, string НазваПроцесу, Guid? Обєкт, string ТипОбєкту, string НазваОбєкту, string Повідомлення)
         {
             Системні.ПовідомленняТаПомилки_Помилки_TablePart повідомленняТаПомилки_Помилки_TablePart =
                 new Системні.ПовідомленняТаПомилки_Помилки_TablePart();
@@ -44,7 +44,7 @@ namespace StorageAndTrade
 
             record.Дата = DateTime.Now;
             record.НазваПроцесу = НазваПроцесу;
-            record.Обєкт = Обєкт;
+            record.Обєкт = (Обєкт != null ? (Guid)Обєкт : Guid.Empty);
             record.ТипОбєкту = ТипОбєкту;
             record.НазваОбєкту = НазваОбєкту;
             record.Повідомлення = Повідомлення;

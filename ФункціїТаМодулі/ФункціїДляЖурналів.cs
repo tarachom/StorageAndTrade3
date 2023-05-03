@@ -28,8 +28,9 @@ limitations under the License.
 */
 using Gtk;
 
+using System.Reflection;
+
 using AccountingSoftware;
-using StorageAndTrade_1_0.Документи;
 using StorageAndTrade_1_0.Перелічення;
 
 namespace StorageAndTrade
@@ -59,285 +60,49 @@ namespace StorageAndTrade
 
         public static void ВідкритиЖурналВідповідноДоВидуДокументу(string typeDoc, UnigueID unigueID, ТипПеріодуДляЖурналівДокументів periodWhere = 0)
         {
-            switch (typeDoc)
+            Assembly ExecutingAssembly = Assembly.GetExecutingAssembly();
+
+            //Простір імен програми
+            string NameSpacePage = "StorageAndTrade";
+
+            //Простір імен конфігурації
+            string NameSpaceConfig = "StorageAndTrade_1_0.Документи";
+
+            object? listPage;
+
+            try
             {
-                case "АктВиконанихРобіт":
-                    {
-                        АктВиконанихРобіт page = new АктВиконанихРобіт() { SelectPointerItem = new АктВиконанихРобіт_Pointer(unigueID) };
-                        Program.GeneralForm?.CreateNotebookPage($"{АктВиконанихРобіт_Const.FULLNAME}", () => { return page; }, true);
-
-                        if (periodWhere != 0)
-                        {
-                            page.PeriodWhere = periodWhere;
-                            page.SetValue();
-                        }
-                        else
-                            page.LoadRecords();
-
-                        break;
-                    }
-                case "ЗамовленняКлієнта":
-                    {
-                        ЗамовленняКлієнта page = new ЗамовленняКлієнта() { SelectPointerItem = new ЗамовленняКлієнта_Pointer(unigueID) };
-                        Program.GeneralForm?.CreateNotebookPage($"{ЗамовленняКлієнта_Const.FULLNAME}", () => { return page; }, true);
-
-                        if (periodWhere != 0)
-                        {
-                            page.PeriodWhere = periodWhere;
-                            page.SetValue();
-                        }
-                        else
-                            page.LoadRecords();
-
-                        break;
-                    }
-                case "РахунокФактура":
-                    {
-                        РахунокФактура page = new РахунокФактура() { SelectPointerItem = new РахунокФактура_Pointer(unigueID) };
-                        Program.GeneralForm?.CreateNotebookPage($"{РахунокФактура_Const.FULLNAME}", () => { return page; }, true);
-
-                        if (periodWhere != 0)
-                        {
-                            page.PeriodWhere = periodWhere;
-                            page.SetValue();
-                        }
-                        else
-                            page.LoadRecords();
-
-                        break;
-                    }
-                case "ЗамовленняПостачальнику":
-                    {
-                        ЗамовленняПостачальнику page = new ЗамовленняПостачальнику() { SelectPointerItem = new ЗамовленняПостачальнику_Pointer(unigueID) };
-                        Program.GeneralForm?.CreateNotebookPage($"{ЗамовленняПостачальнику_Const.FULLNAME}", () => { return page; }, true);
-
-                        if (periodWhere != 0)
-                        {
-                            page.PeriodWhere = periodWhere;
-                            page.SetValue();
-                        }
-                        else
-                            page.LoadRecords();
-
-                        break;
-                    }
-                case "РеалізаціяТоварівТаПослуг":
-                    {
-                        РеалізаціяТоварівТаПослуг page = new РеалізаціяТоварівТаПослуг() { SelectPointerItem = new РеалізаціяТоварівТаПослуг_Pointer(unigueID) };
-                        Program.GeneralForm?.CreateNotebookPage($"{РеалізаціяТоварівТаПослуг_Const.FULLNAME}", () => { return page; }, true);
-
-                        if (periodWhere != 0)
-                        {
-                            page.PeriodWhere = periodWhere;
-                            page.SetValue();
-                        }
-                        else
-                            page.LoadRecords();
-
-                        break;
-                    }
-                case "ПоступленняТоварівТаПослуг":
-                    {
-                        ПоступленняТоварівТаПослуг page = new ПоступленняТоварівТаПослуг() { SelectPointerItem = new ПоступленняТоварівТаПослуг_Pointer(unigueID) };
-                        Program.GeneralForm?.CreateNotebookPage($"{ПоступленняТоварівТаПослуг_Const.FULLNAME}", () => { return page; }, true);
-
-                        if (periodWhere != 0)
-                        {
-                            page.PeriodWhere = periodWhere;
-                            page.SetValue();
-                        }
-                        else
-                            page.LoadRecords();
-
-                        break;
-                    }
-                case "РозхіднийКасовийОрдер":
-                    {
-                        РозхіднийКасовийОрдер page = new РозхіднийКасовийОрдер() { SelectPointerItem = new РозхіднийКасовийОрдер_Pointer(unigueID) };
-                        Program.GeneralForm?.CreateNotebookPage($"{РозхіднийКасовийОрдер_Const.FULLNAME}", () => { return page; }, true);
-
-                        if (periodWhere != 0)
-                        {
-                            page.PeriodWhere = periodWhere;
-                            page.SetValue();
-                        }
-                        else
-                            page.LoadRecords();
-
-                        break;
-                    }
-                case "ПрихіднийКасовийОрдер":
-                    {
-                        ПрихіднийКасовийОрдер page = new ПрихіднийКасовийОрдер() { SelectPointerItem = new ПрихіднийКасовийОрдер_Pointer(unigueID) };
-                        Program.GeneralForm?.CreateNotebookPage($"{ПрихіднийКасовийОрдер_Const.FULLNAME}", () => { return page; }, true);
-
-                        if (periodWhere != 0)
-                        {
-                            page.PeriodWhere = periodWhere;
-                            page.SetValue();
-                        }
-                        else
-                            page.LoadRecords();
-
-                        break;
-                    }
-                case "ПереміщенняТоварів":
-                    {
-                        ПереміщенняТоварів page = new ПереміщенняТоварів() { SelectPointerItem = new ПереміщенняТоварів_Pointer(unigueID) };
-                        Program.GeneralForm?.CreateNotebookPage($"{ПереміщенняТоварів_Const.FULLNAME}", () => { return page; }, true);
-
-                        if (periodWhere != 0)
-                        {
-                            page.PeriodWhere = periodWhere;
-                            page.SetValue();
-                        }
-                        else
-                            page.LoadRecords();
-
-                        break;
-                    }
-                case "ПоверненняТоварівВідКлієнта":
-                    {
-                        ПоверненняТоварівВідКлієнта page = new ПоверненняТоварівВідКлієнта() { SelectPointerItem = new ПоверненняТоварівВідКлієнта_Pointer(unigueID) };
-                        Program.GeneralForm?.CreateNotebookPage($"{ПоверненняТоварівВідКлієнта_Const.FULLNAME}", () => { return page; }, true);
-
-                        if (periodWhere != 0)
-                        {
-                            page.PeriodWhere = periodWhere;
-                            page.SetValue();
-                        }
-                        else
-                            page.LoadRecords();
-
-                        break;
-                    }
-                case "ПоверненняТоварівПостачальнику":
-                    {
-                        ПоверненняТоварівПостачальнику page = new ПоверненняТоварівПостачальнику() { SelectPointerItem = new ПоверненняТоварівПостачальнику_Pointer(unigueID) };
-                        Program.GeneralForm?.CreateNotebookPage($"{ПоверненняТоварівПостачальнику_Const.FULLNAME}", () => { return page; }, true);
-
-                        if (periodWhere != 0)
-                        {
-                            page.PeriodWhere = periodWhere;
-                            page.SetValue();
-                        }
-                        else
-                            page.LoadRecords();
-
-                        break;
-                    }
-                case "ВнутрішнєСпоживанняТоварів":
-                    {
-                        ВнутрішнєСпоживанняТоварів page = new ВнутрішнєСпоживанняТоварів() { SelectPointerItem = new ВнутрішнєСпоживанняТоварів_Pointer(unigueID) };
-                        Program.GeneralForm?.CreateNotebookPage($"{ВнутрішнєСпоживанняТоварів_Const.FULLNAME}", () => { return page; }, true);
-
-                        if (periodWhere != 0)
-                        {
-                            page.PeriodWhere = periodWhere;
-                            page.SetValue();
-                        }
-                        else
-                            page.LoadRecords();
-
-                        break;
-                    }
-                case "ПсуванняТоварів":
-                    {
-                        ПсуванняТоварів page = new ПсуванняТоварів() { SelectPointerItem = new ПсуванняТоварів_Pointer(unigueID) };
-                        Program.GeneralForm?.CreateNotebookPage($"{ПсуванняТоварів_Const.FULLNAME}", () => { return page; }, true);
-
-                        if (periodWhere != 0)
-                        {
-                            page.PeriodWhere = periodWhere;
-                            page.SetValue();
-                        }
-                        else
-                            page.LoadRecords();
-
-                        break;
-                    }
-                case "ВведенняЗалишків":
-                    {
-                        ВведенняЗалишків page = new ВведенняЗалишків() { SelectPointerItem = new ВведенняЗалишків_Pointer(unigueID) };
-                        Program.GeneralForm?.CreateNotebookPage($"{ВведенняЗалишків_Const.FULLNAME}", () => { return page; }, true);
-
-                        if (periodWhere != 0)
-                        {
-                            page.PeriodWhere = periodWhere;
-                            page.SetValue();
-                        }
-                        else
-                            page.LoadRecords();
-
-                        break;
-                    }
-                case "ВстановленняЦінНоменклатури":
-                    {
-                        ВстановленняЦінНоменклатури page = new ВстановленняЦінНоменклатури() { SelectPointerItem = new ВстановленняЦінНоменклатури_Pointer(unigueID) };
-                        Program.GeneralForm?.CreateNotebookPage($"{ВстановленняЦінНоменклатури_Const.FULLNAME}", () => { return page; }, true);
-
-                        if (periodWhere != 0)
-                        {
-                            page.PeriodWhere = periodWhere;
-                            page.SetValue();
-                        }
-                        else
-                            page.LoadRecords();
-
-                        break;
-                    }
-                case "РозміщенняТоварівНаСкладі":
-                    {
-                        РозміщенняТоварівНаСкладі page = new РозміщенняТоварівНаСкладі() { SelectPointerItem = new РозміщенняТоварівНаСкладі_Pointer(unigueID) };
-                        Program.GeneralForm?.CreateNotebookPage($"{РозміщенняТоварівНаСкладі_Const.FULLNAME}", () => { return page; }, true);
-
-                        if (periodWhere != 0)
-                        {
-                            page.PeriodWhere = periodWhere;
-                            page.SetValue();
-                        }
-                        else
-                            page.LoadRecords();
-
-                        break;
-                    }
-                case "ЗбіркаТоварівНаСкладі":
-                    {
-                        ЗбіркаТоварівНаСкладі page = new ЗбіркаТоварівНаСкладі() { SelectPointerItem = new ЗбіркаТоварівНаСкладі_Pointer(unigueID) };
-                        Program.GeneralForm?.CreateNotebookPage($"{ЗбіркаТоварівНаСкладі_Const.FULLNAME}", () => { return page; }, true);
-
-                        if (periodWhere != 0)
-                        {
-                            page.PeriodWhere = periodWhere;
-                            page.SetValue();
-                        }
-                        else
-                            page.LoadRecords();
-
-                        break;
-                    }
-                case "ПереміщенняТоварівНаСкладі":
-                    {
-                        ПереміщенняТоварівНаСкладі page = new ПереміщенняТоварівНаСкладі() { SelectPointerItem = new ПереміщенняТоварівНаСкладі_Pointer(unigueID) };
-                        Program.GeneralForm?.CreateNotebookPage($"{ПереміщенняТоварівНаСкладі_Const.FULLNAME}", () => { return page; }, true);
-
-                        if (periodWhere != 0)
-                        {
-                            page.PeriodWhere = periodWhere;
-                            page.SetValue();
-                        }
-                        else
-                            page.LoadRecords();
-
-                        break;
-                    }
-                default:
-                    {
-                        Message.Info(null, "Для даного типу документу не оприділений журнал документів");
-                        break;
-                    }
+                listPage = ExecutingAssembly.CreateInstance($"{NameSpacePage}.{typeDoc}");
+            }
+            catch (Exception ex)
+            {
+                Message.Error(Program.GeneralForm, ex.Message);
+                return;
             }
 
+            if (listPage != null)
+            {
+                //Документ який потрібно виділити в списку
+                listPage.GetType().GetProperty("SelectPointerItem")?.SetValue(listPage, unigueID);
+
+                //Заголовок журналу з константи конфігурації
+                string listName = "Список документів";
+                {
+                    Type? documentConst = Type.GetType($"{NameSpaceConfig}.{typeDoc}_Const");
+                    if (documentConst != null)
+                        listName = documentConst.GetField("FULLNAME")?.GetValue(null)?.ToString() ?? listName;
+                }
+
+                Program.GeneralForm?.CreateNotebookPage(listName, () => { return (Widget)listPage; }, true);
+
+                if (periodWhere != 0)
+                {
+                    listPage.GetType().GetProperty("PeriodWhere")?.SetValue(listPage, periodWhere);
+                    listPage.GetType().InvokeMember("SetValue", BindingFlags.InvokeMethod, null, listPage, null);
+                }
+                else
+                    listPage.GetType().InvokeMember("LoadRecords", BindingFlags.InvokeMethod, null, listPage, null);
+            }
         }
     }
 }

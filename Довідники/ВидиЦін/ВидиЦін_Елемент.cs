@@ -27,46 +27,20 @@ using StorageAndTrade_1_0.Довідники;
 
 namespace StorageAndTrade
 {
-    class ВидиЦін_Елемент : VBox
+    class ВидиЦін_Елемент : ДовідникЕлемент
     {
-        public ВидиЦін? PageList { get; set; }
-        public System.Action<ВидиЦін_Pointer>? CallBack_OnSelectPointer { get; set; }
-
-        public bool IsNew { get; set; } = true;
-
         public ВидиЦін_Objest ВидиЦін_Objest { get; set; } = new ВидиЦін_Objest();
 
         Entry Код = new Entry() { WidthRequest = 100 };
         Entry Назва = new Entry() { WidthRequest = 500 };
         Валюти_PointerControl Валюта = new Валюти_PointerControl();
 
-        public ВидиЦін_Елемент() : base()
-        {
-            HBox hBox = new HBox();
+        public ВидиЦін_Елемент() : base() { }
 
-            Button bSaveAndClose = new Button("Зберегти та закрити");
-            bSaveAndClose.Clicked += (object? sender, EventArgs args) => { Save(true); };
-            hBox.PackStart(bSaveAndClose, false, false, 10);
-
-            Button bSave = new Button("Зберегти");
-            bSave.Clicked += (object? sender, EventArgs args) => { Save(); };
-            hBox.PackStart(bSave, false, false, 10);
-
-            PackStart(hBox, false, false, 10);
-
-            HPaned hPaned = new HPaned() { BorderWidth = 5, Position = 500 };
-
-            CreatePack1(hPaned);
-            CreatePack2(hPaned);
-
-            PackStart(hPaned, false, false, 5);
-
-            ShowAll();
-        }
-
-        void CreatePack1(HPaned hPaned)
+        protected override void CreatePack1()
         {
             VBox vBox = new VBox();
+            HPanedTop.Pack1(vBox, false, false);
 
             //Код
             HBox hBoxCode = new HBox() { Halign = Align.End };
@@ -87,33 +61,25 @@ namespace StorageAndTrade
             vBox.PackStart(hBoxValuta, false, false, 5);
 
             hBoxValuta.PackStart(Валюта, false, false, 5);
-
-            hPaned.Pack1(vBox, false, false);
-        }
-
-        void CreatePack2(HPaned hPaned)
-        {
-            VBox vBox = new VBox();
-
-
-
-            hPaned.Pack2(vBox, false, false);
         }
 
         #region Присвоєння / зчитування значень
 
-        public void SetValue()
+        public override void SetValue()
         {
             if (IsNew)
                 ВидиЦін_Objest.New();
-                
+
             Код.Text = ВидиЦін_Objest.Код;
             Назва.Text = ВидиЦін_Objest.Назва;
             Валюта.Pointer = ВидиЦін_Objest.Валюта;
         }
 
-        void GetValue()
+        protected override void GetValue()
         {
+            UnigueID = ВидиЦін_Objest.UnigueID;
+            Caption = Назва.Text;
+
             ВидиЦін_Objest.Код = Код.Text;
             ВидиЦін_Objest.Назва = Назва.Text;
             ВидиЦін_Objest.Валюта = Валюта.Pointer;
@@ -121,42 +87,15 @@ namespace StorageAndTrade
 
         #endregion
 
-        void Save(bool closePage = false)
+        protected override void Save()
         {
-            GetValue();
-
-            bool isSave = false;
-
             try
             {
-                isSave = ВидиЦін_Objest.Save();
+                ВидиЦін_Objest.Save();
             }
             catch (Exception ex)
             {
-                ФункціїДляПовідомлень.ДодатиПовідомленняПроПомилку(DateTime.Now, "Запис",
-                    ВидиЦін_Objest.UnigueID.UGuid, "Довідники", ВидиЦін_Objest.Назва, ex.Message);
-
-                ФункціїДляПовідомлень.ВідкритиТермінал();
-            }
-
-            if (!isSave)
-            {
-                Message.Info(Program.GeneralForm, "Не вдалось записати");
-                return;
-            }
-
-            if (closePage)
-                Program.GeneralForm?.CloseCurrentPageNotebook();
-            else
-                Program.GeneralForm?.RenameCurrentPageNotebook($"{ВидиЦін_Objest.Назва}");
-
-            if (CallBack_OnSelectPointer != null)
-                CallBack_OnSelectPointer.Invoke(ВидиЦін_Objest.GetDirectoryPointer());
-
-            if (PageList != null)
-            {
-                PageList.SelectPointerItem = ВидиЦін_Objest.GetDirectoryPointer();
-                PageList.LoadRecords();
+                MsgError(ex);
             }
         }
     }

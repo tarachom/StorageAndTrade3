@@ -33,8 +33,8 @@ namespace StorageAndTrade
     class Виробники_ШвидкийВибір : VBox
     {
         public Popover? PopoverParent { get; set; }
-        public Виробники_Pointer? DirectoryPointerItem { get; set; }
-        public System.Action<Виробники_Pointer>? CallBack_OnSelectPointer { get; set; }
+        public UnigueID? DirectoryPointerItem { get; set; }
+        public System.Action<UnigueID>? CallBack_OnSelectPointer { get; set; }
 
         TreeView TreeViewGrid;
         SearchControl2 ПошукПовнотекстовий = new SearchControl2();
@@ -47,7 +47,7 @@ namespace StorageAndTrade
             HBox hBoxTop = new HBox();
             PackStart(hBoxTop, false, false, 5);
 
-            //Пошук 2
+            //Пошук
             hBoxTop.PackStart(ПошукПовнотекстовий, false, false, 0);
             ПошукПовнотекстовий.Select = LoadRecords_OnSearch;
             ПошукПовнотекстовий.Clear = LoadRecords;
@@ -90,7 +90,7 @@ namespace StorageAndTrade
                 linkClear.Clicked += (object? sender, EventArgs args) =>
                 {
                     if (CallBack_OnSelectPointer != null)
-                        CallBack_OnSelectPointer.Invoke(new Виробники_Pointer());
+                        CallBack_OnSelectPointer.Invoke(new UnigueID());
 
                     if (PopoverParent != null)
                         PopoverParent.Hide();
@@ -161,8 +161,7 @@ namespace StorageAndTrade
                 TreeViewGrid.Model.GetIter(out iter, TreeViewGrid.Selection.GetSelectedRows()[0]);
 
                 UnigueID unigueID = new UnigueID((string)TreeViewGrid.Model.GetValue(iter, 1));
-
-                DirectoryPointerItem = new Виробники_Pointer(unigueID);
+                DirectoryPointerItem = unigueID;
             }
         }
 
@@ -177,7 +176,7 @@ namespace StorageAndTrade
                     string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
 
                     if (CallBack_OnSelectPointer != null)
-                        CallBack_OnSelectPointer.Invoke(new Виробники_Pointer(new UnigueID(uid)));
+                        CallBack_OnSelectPointer.Invoke(new UnigueID(uid));
 
                     if (PopoverParent != null)
                         PopoverParent.Hide();

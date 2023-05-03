@@ -24,51 +24,25 @@ limitations under the License.
 using Gtk;
 
 using StorageAndTrade_1_0.Довідники;
-using Перелічення = StorageAndTrade_1_0.Перелічення;
+using StorageAndTrade_1_0.Перелічення;
 
 namespace StorageAndTrade
 {
-    class СкладськіПриміщення_Елемент : VBox
+    class СкладськіПриміщення_Елемент : ДовідникЕлемент
     {
-        public СкладськіПриміщення? PageList { get; set; }
-        public System.Action<СкладськіПриміщення_Pointer>? CallBack_OnSelectPointer { get; set; }
-
-        public bool IsNew { get; set; } = true;
-
         public СкладськіПриміщення_Objest СкладськіПриміщення_Objest { get; set; } = new СкладськіПриміщення_Objest();
         public Склади_Pointer СкладДляНового { get; set; } = new Склади_Pointer();
 
         Entry Назва = new Entry() { WidthRequest = 500 };
         Склади_PointerControl Склад = new Склади_PointerControl();
-        ComboBoxText НалаштуванняАдресногоЗберігання = new ComboBoxText();
+        ComboBoxText Налаштування = new ComboBoxText();
 
-        public СкладськіПриміщення_Елемент() : base()
-        {
-            HBox hBox = new HBox();
+        public СкладськіПриміщення_Елемент() : base() { }
 
-            Button bSaveAndClose = new Button("Зберегти та закрити");
-            bSaveAndClose.Clicked += (object? sender, EventArgs args) => { Save(true); };
-            hBox.PackStart(bSaveAndClose, false, false, 10);
-
-            Button bSave = new Button("Зберегти");
-            bSave.Clicked += (object? sender, EventArgs args) => { Save(); };
-            hBox.PackStart(bSave, false, false, 10);
-
-            PackStart(hBox, false, false, 10);
-
-            HPaned hPaned = new HPaned() { BorderWidth = 5, Position = 500 };
-
-            CreatePack1(hPaned);
-            CreatePack2(hPaned);
-
-            PackStart(hPaned, false, false, 5);
-
-            ShowAll();
-        }
-
-        void CreatePack1(HPaned hPaned)
+        protected override void CreatePack1()
         {
             VBox vBox = new VBox();
+            HPanedTop.Pack1(vBox, false, false);
 
             //Склад
             HBox hBoxSkald = new HBox() { Halign = Align.End };
@@ -83,29 +57,20 @@ namespace StorageAndTrade
             hBoxName.PackStart(new Label("Назва:"), false, false, 5);
             hBoxName.PackStart(Назва, false, false, 5);
 
-            hPaned.Pack1(vBox, false, false);
-
             //НалаштуванняАдресногоЗберігання
             HBox hBoxAdressSave = new HBox() { Halign = Align.End };
             vBox.PackStart(hBoxAdressSave, false, false, 5);
 
-            foreach (var field in Перелічення.ПсевдонімиПерелічення.НалаштуванняАдресногоЗберігання_Array())
-                НалаштуванняАдресногоЗберігання.Append(field.Value.ToString(), field.Name);
+            foreach (var field in ПсевдонімиПерелічення.НалаштуванняАдресногоЗберігання_List())
+                Налаштування.Append(field.Value.ToString(), field.Name);
 
             hBoxAdressSave.PackStart(new Label("Адресне зберігання:"), false, false, 5);
-            hBoxAdressSave.PackStart(НалаштуванняАдресногоЗберігання, false, false, 5);
-        }
-
-        void CreatePack2(HPaned hPaned)
-        {
-            VBox vBox = new VBox();
-
-            hPaned.Pack2(vBox, false, false);
+            hBoxAdressSave.PackStart(Налаштування, false, false, 5);
         }
 
         #region Присвоєння / зчитування значень
 
-        public void SetValue()
+        public override void SetValue()
         {
             if (IsNew)
             {
@@ -115,57 +80,33 @@ namespace StorageAndTrade
 
             Назва.Text = СкладськіПриміщення_Objest.Назва;
             Склад.Pointer = СкладськіПриміщення_Objest.Склад;
-            НалаштуванняАдресногоЗберігання.ActiveId = СкладськіПриміщення_Objest.НалаштуванняАдресногоЗберігання.ToString();
+            Налаштування.ActiveId = СкладськіПриміщення_Objest.НалаштуванняАдресногоЗберігання.ToString();
 
-            if (НалаштуванняАдресногоЗберігання.Active == -1)
-                НалаштуванняАдресногоЗберігання.ActiveId = Перелічення.НалаштуванняАдресногоЗберігання.НеВикористовувати.ToString();
+            if (Налаштування.Active == -1)
+                Налаштування.ActiveId = НалаштуванняАдресногоЗберігання.НеВикористовувати.ToString();
         }
 
-        void GetValue()
+        protected override void GetValue()
         {
+            UnigueID = СкладськіПриміщення_Objest.UnigueID;
+            Caption = Назва.Text;
+
             СкладськіПриміщення_Objest.Назва = Назва.Text;
             СкладськіПриміщення_Objest.Склад = Склад.Pointer;
-            СкладськіПриміщення_Objest.НалаштуванняАдресногоЗберігання = Enum.Parse<Перелічення.НалаштуванняАдресногоЗберігання>(НалаштуванняАдресногоЗберігання.ActiveId);
+            СкладськіПриміщення_Objest.НалаштуванняАдресногоЗберігання = Enum.Parse<НалаштуванняАдресногоЗберігання>(Налаштування.ActiveId);
         }
 
         #endregion
 
-        void Save(bool closePage = false)
+        protected override void Save()
         {
-            GetValue();
-
-            bool isSave = false;
-
             try
             {
-                isSave = СкладськіПриміщення_Objest.Save();
+                СкладськіПриміщення_Objest.Save();
             }
             catch (Exception ex)
             {
-                ФункціїДляПовідомлень.ДодатиПовідомленняПроПомилку(DateTime.Now, "Запис",
-                    СкладськіПриміщення_Objest.UnigueID.UGuid, "Довідники", СкладськіПриміщення_Objest.Назва, ex.Message);
-
-                ФункціїДляПовідомлень.ВідкритиТермінал();
-            }
-
-            if (!isSave)
-            {
-                Message.Info(Program.GeneralForm, "Не вдалось записати");
-                return;
-            }
-
-            if (closePage)
-                Program.GeneralForm?.CloseCurrentPageNotebook();
-            else
-                Program.GeneralForm?.RenameCurrentPageNotebook($"{СкладськіПриміщення_Objest.Назва}");
-
-            if (CallBack_OnSelectPointer != null)
-                CallBack_OnSelectPointer.Invoke(СкладськіПриміщення_Objest.GetDirectoryPointer());
-
-            if (PageList != null)
-            {
-                PageList.SelectPointerItem = СкладськіПриміщення_Objest.GetDirectoryPointer();
-                PageList.LoadRecords();
+                MsgError(ex);
             }
         }
     }

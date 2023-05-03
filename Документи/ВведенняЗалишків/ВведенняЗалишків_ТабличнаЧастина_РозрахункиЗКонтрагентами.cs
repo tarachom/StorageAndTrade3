@@ -25,16 +25,14 @@ using Gtk;
 
 using AccountingSoftware;
 
-using StorageAndTrade_1_0;
 using StorageAndTrade_1_0.Довідники;
 using StorageAndTrade_1_0.Документи;
 using StorageAndTrade_1_0.Перелічення;
 
 namespace StorageAndTrade
 {
-    class ВведенняЗалишків_ТабличнаЧастина_РозрахункиЗКонтрагентами : VBox
+    class ВведенняЗалишків_ТабличнаЧастина_РозрахункиЗКонтрагентами : ДокументТабличнаЧастина
     {
-        ScrolledWindow scrollTree;
         public ВведенняЗалишків_Objest? ВведенняЗалишків_Objest { get; set; }
 
         #region Записи
@@ -72,7 +70,7 @@ namespace StorageAndTrade
                 return new object[]
                 {
                     НомерРядка,
-                    ТипКонтрагента.ToString(),
+                    ПсевдонімиПерелічення.ТипиКонтрагентів_Alias(ТипКонтрагента),
                     Контрагент.Назва,
                     Валюта.Назва,
                     (float)Сума
@@ -84,8 +82,8 @@ namespace StorageAndTrade
                 return new Запис
                 {
                     ID = Guid.Empty,
-                    Контрагент = запис.Контрагент,
-                    Валюта = запис.Валюта,
+                    Контрагент = запис.Контрагент.Copy(),
+                    Валюта = запис.Валюта.Copy(),
                     Сума = запис.Сума,
                     ТипКонтрагента = запис.ТипКонтрагента
                 };
@@ -103,128 +101,44 @@ namespace StorageAndTrade
 
         #endregion
 
-        TreeView TreeViewGrid;
         Label ПідсумокСума = new Label() { Selectable = true };
 
         public ВведенняЗалишків_ТабличнаЧастина_РозрахункиЗКонтрагентами() : base()
         {
-            CreateToolbar();
-
-            scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In };
-            scrollTree.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
-
-            TreeViewGrid = new TreeView(Store);
+            TreeViewGrid.Model = Store;
             AddColumn();
-
-            TreeViewGrid.Selection.Mode = SelectionMode.Multiple;
-            TreeViewGrid.ActivateOnSingleClick = true;
-            TreeViewGrid.ButtonPressEvent += OnButtonPressEvent;
-            TreeViewGrid.KeyReleaseEvent += OnKeyReleaseEvent;
-
-            scrollTree.Add(TreeViewGrid);
-            PackStart(scrollTree, true, true, 0);
 
             CreateBottomBlock();
 
             Store.RowChanged += (object? sender, RowChangedArgs args) => { ОбчислитиПідсумки(); };
             Store.RowDeleted += (object? sender, RowDeletedArgs args) => { ОбчислитиПідсумки(); };
-
-            ShowAll();
         }
 
-        void OnButtonPressEvent(object sender, ButtonPressEventArgs args)
-        {
-            if (args.Event.Type == Gdk.EventType.DoubleButtonPress && TreeViewGrid.Selection.CountSelectedRows() != 0)
-            {
-                TreePath itemPath;
-                TreeViewColumn treeColumn;
+        #region Підсумки
 
-                TreeViewGrid.GetCursor(out itemPath, out treeColumn);
-
-                if (treeColumn.Data.ContainsKey("Column"))
-                {
-                    TreeIter iter;
-                    TreeViewGrid.Model.GetIter(out iter, itemPath);
-
-                    Gdk.Rectangle rectangleCell = TreeViewGrid.GetCellArea(itemPath, treeColumn);
-                    rectangleCell.Offset(-(int)scrollTree.Hadjustment.Value, rectangleCell.Height);
-
-                    Popover PopoverSmallSelect = new Popover(TreeViewGrid) { Position = PositionType.Bottom, BorderWidth = 2 };
-                    PopoverSmallSelect.PointingTo = rectangleCell;
-
-                    int rowNumber = int.Parse(itemPath.ToString());
-                    Запис запис = Записи[rowNumber];
-
-                    switch ((Columns)treeColumn.Data["Column"]!)
-                    {
-                        case Columns.Контрагент:
-                            {
-                                Контрагенти_ШвидкийВибір page = new Контрагенти_ШвидкийВибір() { PopoverParent = PopoverSmallSelect, DirectoryPointerItem = запис.Контрагент };
-                                page.CallBack_OnSelectPointer = (Контрагенти_Pointer selectPointer) =>
-                                {
-                                    запис.Контрагент = selectPointer;
-                                    Запис.ПісляЗміни_Контрагент(запис);
-
-                                    Store.SetValues(iter, запис.ToArray());
-                                };
-
-                                PopoverSmallSelect.Add(page);
-                                PopoverSmallSelect.ShowAll();
-
-                                page.LoadRecords();
-                                break;
-                            }
-                        case Columns.Валюта:
-                            {
-                                Валюти_ШвидкийВибір page = new Валюти_ШвидкийВибір() { PopoverParent = PopoverSmallSelect, DirectoryPointerItem = запис.Валюта };
-                                page.CallBack_OnSelectPointer = (Валюти_Pointer selectPointer) =>
-                                {
-                                    запис.Валюта = selectPointer;
-                                    Запис.ПісляЗміни_Валюта(запис);
-
-                                    Store.SetValues(iter, запис.ToArray());
-                                };
-
-                                PopoverSmallSelect.Add(page);
-                                PopoverSmallSelect.ShowAll();
-
-                                page.LoadRecords();
-                                break;
-                            }
-                    }
-                }
-            }
-        }
-
-        void CreateToolbar()
-        {
-            Toolbar toolbar = new Toolbar();
-            PackStart(toolbar, false, false, 0);
-
-            ToolButton upButton = new ToolButton(Stock.Add) { TooltipText = "Додати" };
-            upButton.Clicked += OnAddClick;
-            toolbar.Add(upButton);
-
-            ToolButton copyButton = new ToolButton(Stock.Copy) { TooltipText = "Копіювати" };
-            copyButton.Clicked += OnCopyClick;
-            toolbar.Add(copyButton);
-
-            ToolButton deleteButton = new ToolButton(Stock.Delete) { TooltipText = "Видалити" };
-            deleteButton.Clicked += OnDeleteClick;
-            toolbar.Add(deleteButton);
-        }
-
-        //Блок для підсумків
         void CreateBottomBlock()
         {
             HBox hBox = new HBox() { Halign = Align.Start };
             hBox.PackStart(new Label("<b>Підсумки</b> ") { UseMarkup = true }, false, false, 2);
             hBox.PackStart(ПідсумокСума, false, false, 2);
 
-            PackStart(hBox, false, false, 2);
+            base.PackStart(hBox, false, false, 2);
         }
 
-        public void LoadRecords()
+        void ОбчислитиПідсумки()
+        {
+            decimal Сума = 0;
+
+            foreach (Запис запис in Записи)
+                Сума += запис.Сума;
+
+            ПідсумокСума.Text = $"Сума: <b>{Сума}</b>";
+            ПідсумокСума.UseMarkup = true;
+        }
+
+        #endregion
+
+        public override void LoadRecords()
         {
             Store.Clear();
             Записи.Clear();
@@ -276,7 +190,7 @@ namespace StorageAndTrade
             }
         }
 
-        public void SaveRecords()
+        public override void SaveRecords()
         {
             if (ВведенняЗалишків_Objest != null)
             {
@@ -318,17 +232,6 @@ namespace StorageAndTrade
             return ключовіСлова;
         }
 
-        void ОбчислитиПідсумки()
-        {
-            decimal Сума = 0;
-
-            foreach (Запис запис in Записи)
-                Сума += запис.Сума;
-
-            ПідсумокСума.Text = $"Сума: <b>{Сума}</b>";
-            ПідсумокСума.UseMarkup = true;
-        }
-
         #region TreeView
 
         void AddColumn()
@@ -340,13 +243,8 @@ namespace StorageAndTrade
             {
                 ListStore storeTypeContragent = new ListStore(typeof(string), typeof(string));
 
-                if (Config.Kernel != null)
-                {
-                    ConfigurationEnums ТипиКонтрагентів = Config.Kernel.Conf.Enums["ТипиКонтрагентів"];
-
-                    foreach (ConfigurationEnumField field in ТипиКонтрагентів.Fields.Values)
-                        storeTypeContragent.AppendValues(field.Name, field.Desc);
-                }
+                foreach (NameValue<ТипиКонтрагентів> field in ПсевдонімиПерелічення.ТипиКонтрагентів_List())
+                    storeTypeContragent.AppendValues(field.Value.ToString(), field.Name);
 
                 CellRendererCombo TypeContragent = new CellRendererCombo() { Editable = true, Model = storeTypeContragent, TextColumn = 1 };
                 TypeContragent.Edited += TextChanged;
@@ -384,6 +282,70 @@ namespace StorageAndTrade
 
             //Колонка пустишка для заповнення вільного простору
             TreeViewGrid.AppendColumn(new TreeViewColumn());
+        }
+
+        protected override void ButtonSelect(TreeIter iter, int rowNumber, int colNumber, Popover popoverSmallSelect)
+        {
+            Запис запис = Записи[rowNumber];
+
+            switch ((Columns)colNumber)
+            {
+                case Columns.Контрагент:
+                    {
+                        Контрагенти_ШвидкийВибір page = new Контрагенти_ШвидкийВибір() { PopoverParent = popoverSmallSelect, DirectoryPointerItem = запис.Контрагент.UnigueID };
+                        page.CallBack_OnSelectPointer = (UnigueID selectPointer) =>
+                        {
+                            запис.Контрагент = new Контрагенти_Pointer(selectPointer);
+                            Запис.ПісляЗміни_Контрагент(запис);
+
+                            Store.SetValues(iter, запис.ToArray());
+                        };
+
+                        popoverSmallSelect.Add(page);
+                        popoverSmallSelect.ShowAll();
+
+                        page.LoadRecords();
+                        break;
+                    }
+                case Columns.Валюта:
+                    {
+                        Валюти_ШвидкийВибір page = new Валюти_ШвидкийВибір() { PopoverParent = popoverSmallSelect, DirectoryPointerItem = запис.Валюта.UnigueID };
+                        page.CallBack_OnSelectPointer = (UnigueID selectPointer) =>
+                        {
+                            запис.Валюта = new Валюти_Pointer(selectPointer);
+                            Запис.ПісляЗміни_Валюта(запис);
+
+                            Store.SetValues(iter, запис.ToArray());
+                        };
+
+                        popoverSmallSelect.Add(page);
+                        popoverSmallSelect.ShowAll();
+
+                        page.LoadRecords();
+                        break;
+                    }
+            }
+        }
+
+        protected override void ButtonPopupClear(TreeIter iter, int rowNumber, int colNumber)
+        {
+            Запис запис = Записи[rowNumber];
+
+            switch ((Columns)colNumber)
+            {
+                case Columns.Контрагент:
+                    {
+                        запис.Контрагент.Clear();
+                        break;
+                    }
+                case Columns.Валюта:
+                    {
+                        запис.Валюта.Clear();
+                        break;
+                    }
+            }
+
+            Store.SetValues(iter, запис.ToArray());
         }
 
         void NumericCellDataFunc(TreeViewColumn column, CellRenderer cell, ITreeModel model, TreeIter iter)
@@ -433,9 +395,9 @@ namespace StorageAndTrade
                         }
                     case Columns.ТипКонтрагента:
                         {
-                            ТипиКонтрагентів result;
-                            if (Enum.TryParse<ТипиКонтрагентів>(args.NewText, true, out result))
-                                запис.ТипКонтрагента = result;
+                            ТипиКонтрагентів? result = ПсевдонімиПерелічення.ТипиКонтрагентів_FindByName(args.NewText);
+                            if (result != null)
+                                запис.ТипКонтрагента = (ТипиКонтрагентів)result;
 
                             break;
                         }
@@ -445,28 +407,11 @@ namespace StorageAndTrade
             }
         }
 
-        void OnKeyReleaseEvent(object? sender, KeyReleaseEventArgs args)
-        {
-            switch (args.Event.Key)
-            {
-                case Gdk.Key.Insert:
-                    {
-                        OnAddClick(null, new EventArgs());
-                        break;
-                    }
-                case Gdk.Key.Delete:
-                    {
-                        OnDeleteClick(TreeViewGrid, new EventArgs());
-                        break;
-                    }
-            }
-        }
-
         #endregion
 
         #region ToolBar
 
-        void OnAddClick(object? sender, EventArgs args)
+        protected override void AddRecord()
         {
             Запис запис = new Запис();
             Записи.Add(запис);
@@ -475,47 +420,24 @@ namespace StorageAndTrade
             TreeViewGrid.SetCursor(Store.GetPath(iter), TreeViewGrid.Columns[0], false);
         }
 
-        void OnCopyClick(object? sender, EventArgs args)
+        protected override void CopyRecord(int rowNumber)
         {
-            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
-            {
-                TreePath[] selectionRows = TreeViewGrid.Selection.GetSelectedRows();
+            Запис запис = Записи[rowNumber];
 
-                foreach (TreePath itemPath in selectionRows)
-                {
-                    TreeIter iter;
-                    TreeViewGrid.Model.GetIter(out iter, itemPath);
+            Запис записНовий = Запис.Clone(запис);
 
-                    int rowNumber = int.Parse(itemPath.ToString());
-                    Запис запис = Записи[rowNumber];
+            Записи.Add(записНовий);
 
-                    Запис записНовий = Запис.Clone(запис);
-
-                    Записи.Add(записНовий);
-                    Store.AppendValues(записНовий.ToArray());
-                }
-            }
+            TreeIter iter = Store.AppendValues(записНовий.ToArray());
+            TreeViewGrid.SetCursor(Store.GetPath(iter), TreeViewGrid.Columns[0], false);
         }
 
-        void OnDeleteClick(object? sender, EventArgs args)
+        protected override void DeleteRecord(TreeIter iter, int rowNumber)
         {
-            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
-            {
-                TreePath[] selectionRows = TreeViewGrid.Selection.GetSelectedRows();
-                for (int i = selectionRows.Length - 1; i >= 0; i--)
-                {
-                    TreePath itemPath = selectionRows[i];
+            Запис запис = Записи[rowNumber];
 
-                    TreeIter iter;
-                    TreeViewGrid.Model.GetIter(out iter, itemPath);
-
-                    int rowNumber = int.Parse(itemPath.ToString());
-                    Запис запис = Записи[rowNumber];
-
-                    Записи.Remove(запис);
-                    Store.Remove(ref iter);
-                }
-            }
+            Записи.Remove(запис);
+            Store.Remove(ref iter);
         }
 
         #endregion

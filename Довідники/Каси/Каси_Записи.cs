@@ -78,15 +78,16 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static Довідники.Каси_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.Каси_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
         public static void LoadRecords()
         {
             Store.Clear();
-            SelectPath = null;
+            SelectPath = FirstPath = null;
 
             Довідники.Каси_Select Каси_Select = new Довідники.Каси_Select();
             Каси_Select.QuerySelect.Field.AddRange(
@@ -146,9 +147,12 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
 
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
+
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;

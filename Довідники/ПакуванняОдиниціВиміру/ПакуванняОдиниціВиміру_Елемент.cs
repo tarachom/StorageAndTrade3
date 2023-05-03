@@ -27,13 +27,8 @@ using StorageAndTrade_1_0.Довідники;
 
 namespace StorageAndTrade
 {
-    class ПакуванняОдиниціВиміру_Елемент : VBox
+    class ПакуванняОдиниціВиміру_Елемент : ДовідникЕлемент
     {
-        public ПакуванняОдиниціВиміру? PageList { get; set; }
-        public System.Action<ПакуванняОдиниціВиміру_Pointer>? CallBack_OnSelectPointer { get; set; }
-
-        public bool IsNew { get; set; } = true;
-
         public ПакуванняОдиниціВиміру_Objest ПакуванняОдиниціВиміру_Objest { get; set; } = new ПакуванняОдиниціВиміру_Objest();
 
         Entry Код = new Entry() { WidthRequest = 100 };
@@ -41,33 +36,12 @@ namespace StorageAndTrade
         Entry НазваПовна = new Entry() { WidthRequest = 500 };
         IntegerControl КількістьУпаковок = new IntegerControl();
 
-        public ПакуванняОдиниціВиміру_Елемент() : base()
-        {
-            HBox hBox = new HBox();
+        public ПакуванняОдиниціВиміру_Елемент() : base() { }
 
-            Button bSaveAndClose = new Button("Зберегти та закрити");
-            bSaveAndClose.Clicked += (object? sender, EventArgs args) => { Save(true); };
-            hBox.PackStart(bSaveAndClose, false, false, 10);
-
-            Button bSave = new Button("Зберегти");
-            bSave.Clicked += (object? sender, EventArgs args) => { Save(); };
-            hBox.PackStart(bSave, false, false, 10);
-
-            PackStart(hBox, false, false, 10);
-
-            HPaned hPaned = new HPaned() { BorderWidth = 5, Position = 500 };
-
-            CreatePack1(hPaned);
-            CreatePack2(hPaned);
-
-            PackStart(hPaned, false, false, 5);
-
-            ShowAll();
-        }
-
-        void CreatePack1(HPaned hPaned)
+        protected override void CreatePack1()
         {
             VBox vBox = new VBox();
+            HPanedTop.Pack1(vBox, false, false);
 
             //Код
             HBox hBoxCode = new HBox() { Halign = Align.End };
@@ -97,21 +71,11 @@ namespace StorageAndTrade
             hBoxKvoPack.PackStart(new Label("Кількість упаковок:"), false, false, 5);
             hBoxKvoPack.PackStart(КількістьУпаковок, false, false, 5);
 
-            hPaned.Pack1(vBox, false, false);
-        }
-
-        void CreatePack2(HPaned hPaned)
-        {
-            VBox vBox = new VBox();
-
-
-
-            hPaned.Pack2(vBox, false, false);
         }
 
         #region Присвоєння / зчитування значень
 
-        public void SetValue()
+        public override void SetValue()
         {
             if (IsNew)
             {
@@ -125,8 +89,11 @@ namespace StorageAndTrade
             КількістьУпаковок.Value = ПакуванняОдиниціВиміру_Objest.КількістьУпаковок;
         }
 
-        void GetValue()
+        protected override void GetValue()
         {
+            UnigueID = ПакуванняОдиниціВиміру_Objest.UnigueID;
+            Caption = Назва.Text;
+
             ПакуванняОдиниціВиміру_Objest.Код = Код.Text;
             ПакуванняОдиниціВиміру_Objest.Назва = Назва.Text;
             ПакуванняОдиниціВиміру_Objest.НазваПовна = НазваПовна.Text;
@@ -135,42 +102,15 @@ namespace StorageAndTrade
 
         #endregion
 
-        void Save(bool closePage = false)
+        protected override void Save()
         {
-            GetValue();
-
-            bool isSave = false;
-
             try
             {
-                isSave = ПакуванняОдиниціВиміру_Objest.Save();
+                ПакуванняОдиниціВиміру_Objest.Save();
             }
             catch (Exception ex)
             {
-                ФункціїДляПовідомлень.ДодатиПовідомленняПроПомилку(DateTime.Now, "Запис",
-                    ПакуванняОдиниціВиміру_Objest.UnigueID.UGuid, "Довідники", ПакуванняОдиниціВиміру_Objest.Назва, ex.Message);
-
-                ФункціїДляПовідомлень.ВідкритиТермінал();
-            }
-
-            if (!isSave)
-            {
-                Message.Info(Program.GeneralForm, "Не вдалось записати");
-                return;
-            }
-
-            if (closePage)
-                Program.GeneralForm?.CloseCurrentPageNotebook();
-            else
-                Program.GeneralForm?.RenameCurrentPageNotebook($"{ПакуванняОдиниціВиміру_Objest.Назва}");
-
-            if (CallBack_OnSelectPointer != null)
-                CallBack_OnSelectPointer.Invoke(ПакуванняОдиниціВиміру_Objest.GetDirectoryPointer());
-
-            if (PageList != null)
-            {
-                PageList.SelectPointerItem = ПакуванняОдиниціВиміру_Objest.GetDirectoryPointer();
-                PageList.LoadRecords();
+                MsgError(ex);
             }
         }
     }

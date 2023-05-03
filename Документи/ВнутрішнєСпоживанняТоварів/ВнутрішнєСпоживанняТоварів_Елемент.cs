@@ -338,7 +338,7 @@ namespace StorageAndTrade
         {
             if (PageList != null)
             {
-                PageList.SelectPointerItem = ВнутрішнєСпоживанняТоварів_Objest.GetDocumentPointer();
+                PageList.SelectPointerItem = ВнутрішнєСпоживанняТоварів_Objest.UnigueID;
                 PageList.LoadRecords();
             }
         }

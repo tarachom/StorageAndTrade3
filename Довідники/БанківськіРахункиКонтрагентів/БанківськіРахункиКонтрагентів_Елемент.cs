@@ -27,13 +27,8 @@ using StorageAndTrade_1_0.Довідники;
 
 namespace StorageAndTrade
 {
-    class БанківськіРахункиКонтрагентів_Елемент : VBox
+    class БанківськіРахункиКонтрагентів_Елемент : ДовідникЕлемент
     {
-        public БанківськіРахункиКонтрагентів? PageList { get; set; }
-        public System.Action<БанківськіРахункиКонтрагентів_Pointer>? CallBack_OnSelectPointer { get; set; }
-
-        public bool IsNew { get; set; } = true;
-
         public БанківськіРахункиКонтрагентів_Objest БанківськіРахункиКонтрагентів_Objest { get; set; } = new БанківськіРахункиКонтрагентів_Objest();
 
         Entry Код = new Entry() { WidthRequest = 100 };
@@ -41,33 +36,12 @@ namespace StorageAndTrade
         Валюти_PointerControl Валюта = new Валюти_PointerControl();
         Контрагенти_PointerControl Контрагент = new Контрагенти_PointerControl();
 
-        public БанківськіРахункиКонтрагентів_Елемент() : base()
-        {
-            HBox hBox = new HBox();
+        public БанківськіРахункиКонтрагентів_Елемент() : base() { }
 
-            Button bSaveAndClose = new Button("Зберегти та закрити");
-            bSaveAndClose.Clicked += (object? sender, EventArgs args) => { Save(true); };
-            hBox.PackStart(bSaveAndClose, false, false, 10);
-
-            Button bSave = new Button("Зберегти");
-            bSave.Clicked += (object? sender, EventArgs args) => { Save(); };
-            hBox.PackStart(bSave, false, false, 10);
-
-            PackStart(hBox, false, false, 10);
-
-            HPaned hPaned = new HPaned() { BorderWidth = 5, Position = 500 };
-
-            CreatePack1(hPaned);
-            CreatePack2(hPaned);
-
-            PackStart(hPaned, false, false, 5);
-
-            ShowAll();
-        }
-
-        void CreatePack1(HPaned hPaned)
+        protected override void CreatePack1()
         {
             VBox vBox = new VBox();
+            HPanedTop.Pack1(vBox, false, false);
 
             //Код
             HBox hBoxCode = new HBox() { Halign = Align.End };
@@ -94,34 +68,26 @@ namespace StorageAndTrade
             vBox.PackStart(hBoxContragent, false, false, 5);
 
             hBoxContragent.PackStart(Контрагент, false, false, 5);
-
-            hPaned.Pack1(vBox, false, false);
-        }
-
-        void CreatePack2(HPaned hPaned)
-        {
-            VBox vBox = new VBox();
-
-
-
-            hPaned.Pack2(vBox, false, false);
         }
 
         #region Присвоєння / зчитування значень
 
-        public void SetValue()
+        public override void SetValue()
         {
             if (IsNew)
                 БанківськіРахункиКонтрагентів_Objest.New();
-                
+
             Код.Text = БанківськіРахункиКонтрагентів_Objest.Код;
             Назва.Text = БанківськіРахункиКонтрагентів_Objest.Назва;
             Валюта.Pointer = БанківськіРахункиКонтрагентів_Objest.Валюта;
             Контрагент.Pointer = БанківськіРахункиКонтрагентів_Objest.Контрагент;
         }
 
-        void GetValue()
+        protected override void GetValue()
         {
+            UnigueID = БанківськіРахункиКонтрагентів_Objest.UnigueID;
+            Caption = Назва.Text;
+
             БанківськіРахункиКонтрагентів_Objest.Код = Код.Text;
             БанківськіРахункиКонтрагентів_Objest.Назва = Назва.Text;
             БанківськіРахункиКонтрагентів_Objest.Валюта = Валюта.Pointer;
@@ -130,42 +96,15 @@ namespace StorageAndTrade
 
         #endregion
 
-        void Save(bool closePage = false)
+        protected override void Save()
         {
-            GetValue();
-
-            bool isSave = false;
-
             try
             {
-                isSave = БанківськіРахункиКонтрагентів_Objest.Save();
+                БанківськіРахункиКонтрагентів_Objest.Save();
             }
             catch (Exception ex)
             {
-                ФункціїДляПовідомлень.ДодатиПовідомленняПроПомилку(DateTime.Now, "Запис",
-                    БанківськіРахункиКонтрагентів_Objest.UnigueID.UGuid, "Довідники", БанківськіРахункиКонтрагентів_Objest.Назва, ex.Message);
-
-                ФункціїДляПовідомлень.ВідкритиТермінал();
-            }
-
-            if (!isSave)
-            {
-                Message.Info(Program.GeneralForm, "Не вдалось записати");
-                return;
-            }
-
-            if (closePage)
-                Program.GeneralForm?.CloseCurrentPageNotebook();
-            else
-                Program.GeneralForm?.RenameCurrentPageNotebook($"{БанківськіРахункиКонтрагентів_Objest.Назва}");
-
-            if (CallBack_OnSelectPointer != null)
-                CallBack_OnSelectPointer.Invoke(БанківськіРахункиКонтрагентів_Objest.GetDirectoryPointer());
-
-            if (PageList != null)
-            {
-                PageList.SelectPointerItem = БанківськіРахункиКонтрагентів_Objest.GetDirectoryPointer();
-                PageList.LoadRecords();
+                MsgError(ex);
             }
         }
     }

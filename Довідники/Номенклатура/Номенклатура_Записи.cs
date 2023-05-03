@@ -87,8 +87,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static List<Where> Where { get; set; } = new List<Where>();
 
-        public static Довідники.Номенклатура_Pointer? DirectoryPointerItem { get; set; }
-        public static Довідники.Номенклатура_Pointer? SelectPointerItem { get; set; }
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -199,7 +199,7 @@ END)
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.UnigueID.ToString() : DirectoryPointerItem!.UnigueID.ToString();
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
 
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;

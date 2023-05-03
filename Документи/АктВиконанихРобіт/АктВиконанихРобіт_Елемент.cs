@@ -419,7 +419,7 @@ namespace StorageAndTrade
         {
             if (PageList != null)
             {
-                PageList.SelectPointerItem = АктВиконанихРобіт_Objest.GetDocumentPointer();
+                PageList.SelectPointerItem = АктВиконанихРобіт_Objest.UnigueID;
                 PageList.LoadRecords();
             }
         }

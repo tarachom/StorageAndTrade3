@@ -23,20 +23,13 @@ limitations under the License.
 
 using Gtk;
 
-using AccountingSoftware;
-using StorageAndTrade_1_0;
 using StorageAndTrade_1_0.Довідники;
-using Перелічення = StorageAndTrade_1_0.Перелічення;
+using StorageAndTrade_1_0.Перелічення;
 
 namespace StorageAndTrade
 {
-    class ДоговориКонтрагентів_Елемент : VBox
+    class ДоговориКонтрагентів_Елемент : ДовідникЕлемент
     {
-        public ДоговориКонтрагентів? PageList { get; set; }
-        public System.Action<ДоговориКонтрагентів_Pointer>? CallBack_OnSelectPointer { get; set; }
-
-        public bool IsNew { get; set; } = true;
-
         public ДоговориКонтрагентів_Objest ДоговориКонтрагентів_Objest { get; set; } = new ДоговориКонтрагентів_Objest();
 
         #region Fields
@@ -45,14 +38,14 @@ namespace StorageAndTrade
         Entry Назва = new Entry() { WidthRequest = 500 };
         DateTimeControl Дата = new DateTimeControl() { OnlyDate = true };
         Entry Номер = new Entry() { WidthRequest = 100 };
-        БанківськіРахункиОрганізацій_PointerControl БанківськийРахунок = new БанківськіРахункиОрганізацій_PointerControl();
-        БанківськіРахункиКонтрагентів_PointerControl БанківськийРахунокКонтрагента = new БанківськіРахункиКонтрагентів_PointerControl();
-        Валюти_PointerControl ВалютаВзаєморозрахунків = new Валюти_PointerControl();
+        БанківськіРахункиОрганізацій_PointerControl БанківськийРахунок = new БанківськіРахункиОрганізацій_PointerControl() { Caption = "Банківський рахунок:" };
+        БанківськіРахункиКонтрагентів_PointerControl БанківськийРахунокКонтрагента = new БанківськіРахункиКонтрагентів_PointerControl() { Caption = "Банківський рахунок:" };
+        Валюти_PointerControl ВалютаВзаєморозрахунків = new Валюти_PointerControl() { Caption = "Валюта:" };
         DateTimeControl ДатаПочаткуДії = new DateTimeControl() { OnlyDate = true };
         DateTimeControl ДатаЗакінченняДії = new DateTimeControl() { OnlyDate = true };
-        Організації_PointerControl Організація = new Організації_PointerControl();
-        Контрагенти_PointerControl Контрагент = new Контрагенти_PointerControl();
-        СтруктураПідприємства_PointerControl Підрозділ = new СтруктураПідприємства_PointerControl();
+        Організації_PointerControl Організація = new Організації_PointerControl() { Caption = "Організація:" };
+        Контрагенти_PointerControl Контрагент = new Контрагенти_PointerControl() { Caption = "Контрагент:" };
+        СтруктураПідприємства_PointerControl Підрозділ = new СтруктураПідприємства_PointerControl() { Caption = "Підрозділ:" };
         CheckButton Узгоджений = new CheckButton("Узгоджений");
         ComboBoxText Статус = new ComboBoxText();
         ComboBoxText ГосподарськаОперація = new ComboBoxText();
@@ -65,58 +58,34 @@ namespace StorageAndTrade
 
         public ДоговориКонтрагентів_Елемент() : base()
         {
-            HBox hBox = new HBox();
-
-            Button bSaveAndClose = new Button("Зберегти та закрити");
-            bSaveAndClose.Clicked += (object? sender, EventArgs args) => { Save(true); };
-            hBox.PackStart(bSaveAndClose, false, false, 10);
-
-            Button bSave = new Button("Зберегти");
-            bSave.Clicked += (object? sender, EventArgs args) => { Save(); };
-            hBox.PackStart(bSave, false, false, 10);
-
-            PackStart(hBox, false, false, 10);
-
             FillComboBoxes();
-
-            HPaned hPaned = new HPaned() { BorderWidth = 5, Position = 500 };
-
-            CreatePack1(hPaned);
-            CreatePack2(hPaned);
-
-            PackStart(hPaned, false, false, 5);
-
-            ShowAll();
         }
 
         void FillComboBoxes()
         {
-            if (Config.Kernel != null)
-            {
-                //1
-                foreach (ConfigurationEnumField field in Config.Kernel.Conf.Enums["ГосподарськіОперації"].Fields.Values)
-                    ГосподарськаОперація.Append(field.Name, field.Desc);
+            //1
+            foreach (var field in ПсевдонімиПерелічення.ГосподарськіОперації_List())
+                ГосподарськаОперація.Append(field.Value.ToString(), field.Name);
 
-                ГосподарськаОперація.ActiveId = Перелічення.ГосподарськіОперації.РеалізаціяКлієнту.ToString();
+            ГосподарськаОперація.ActiveId = ГосподарськіОперації.РеалізаціяКлієнту.ToString();
 
-                //2
-                foreach (ConfigurationEnumField field in Config.Kernel.Conf.Enums["СтатусиДоговорівКонтрагентів"].Fields.Values)
-                    Статус.Append(field.Name, field.Desc);
+            //2
+            foreach (var field in ПсевдонімиПерелічення.СтатусиДоговорівКонтрагентів_List())
+                Статус.Append(field.Value.ToString(), field.Name);
 
-                Статус.ActiveId = Перелічення.СтатусиДоговорівКонтрагентів.Діє.ToString();
+            Статус.ActiveId = СтатусиДоговорівКонтрагентів.Діє.ToString();
 
-                //3
-                foreach (ConfigurationEnumField field in Config.Kernel.Conf.Enums["ТипДоговорів"].Fields.Values)
-                    ТипДоговору.Append(field.Name, field.Desc);
+            //3
+            foreach (var field in ПсевдонімиПерелічення.ТипДоговорів_List())
+                ТипДоговору.Append(field.Value.ToString(), field.Name);
 
-                ТипДоговору.ActiveId = Перелічення.ТипДоговорів.ЗПокупцями.ToString();
-            }
+            ТипДоговору.ActiveId = ТипДоговорів.ЗПокупцями.ToString();
         }
 
-        void CreatePack1(HPaned hPaned)
+        protected override void CreatePack1()
         {
             VBox vBox = new VBox();
-            hPaned.Pack1(vBox, false, false);
+            HPanedTop.Pack1(vBox, false, false);
 
             //Код
             HBox hBoxCode = new HBox() { Halign = Align.End };
@@ -245,18 +214,9 @@ namespace StorageAndTrade
             hBoxComment.PackStart(Коментар, false, false, 5);
         }
 
-        void CreatePack2(HPaned hPaned)
-        {
-            VBox vBox = new VBox();
-
-
-
-            hPaned.Pack2(vBox, false, false);
-        }
-
         #region Присвоєння / зчитування значень
 
-        public void SetValue()
+        public override void SetValue()
         {
             if (IsNew)
                 ДоговориКонтрагентів_Objest.New();
@@ -274,16 +234,19 @@ namespace StorageAndTrade
             Контрагент.Pointer = ДоговориКонтрагентів_Objest.Контрагент;
             Підрозділ.Pointer = ДоговориКонтрагентів_Objest.Підрозділ;
             Узгоджений.Active = ДоговориКонтрагентів_Objest.Узгоджений;
-            Статус.ActiveId = ((Перелічення.СтатусиДоговорівКонтрагентів)ДоговориКонтрагентів_Objest.Статус).ToString();
-            ГосподарськаОперація.ActiveId = ((Перелічення.ГосподарськіОперації)ДоговориКонтрагентів_Objest.ГосподарськаОперація).ToString();
-            ТипДоговору.ActiveId = ((Перелічення.ТипДоговорів)ДоговориКонтрагентів_Objest.ТипДоговору).ToString();
+            Статус.ActiveId = ДоговориКонтрагентів_Objest.Статус.ToString();
+            ГосподарськаОперація.ActiveId = ДоговориКонтрагентів_Objest.ГосподарськаОперація.ToString();
+            ТипДоговору.ActiveId = ДоговориКонтрагентів_Objest.ТипДоговору.ToString();
             ДопустимаСумаЗаборгованості.Value = ДоговориКонтрагентів_Objest.ДопустимаСумаЗаборгованості;
             Сума.Value = ДоговориКонтрагентів_Objest.Сума;
             Коментар.Text = ДоговориКонтрагентів_Objest.Коментар;
         }
 
-        void GetValue()
+        protected override void GetValue()
         {
+            UnigueID = ДоговориКонтрагентів_Objest.UnigueID;
+            Caption = Назва.Text;
+
             ДоговориКонтрагентів_Objest.Код = Код.Text;
             ДоговориКонтрагентів_Objest.Назва = Назва.Text;
             ДоговориКонтрагентів_Objest.Дата = Дата.Value;
@@ -297,9 +260,9 @@ namespace StorageAndTrade
             ДоговориКонтрагентів_Objest.Контрагент = Контрагент.Pointer;
             ДоговориКонтрагентів_Objest.Підрозділ = Підрозділ.Pointer;
             ДоговориКонтрагентів_Objest.Узгоджений = Узгоджений.Active;
-            ДоговориКонтрагентів_Objest.Статус = Enum.Parse<Перелічення.СтатусиДоговорівКонтрагентів>(Статус.ActiveId);
-            ДоговориКонтрагентів_Objest.ГосподарськаОперація = Enum.Parse<Перелічення.ГосподарськіОперації>(ГосподарськаОперація.ActiveId);
-            ДоговориКонтрагентів_Objest.ТипДоговору = Enum.Parse<Перелічення.ТипДоговорів>(ТипДоговору.ActiveId);
+            ДоговориКонтрагентів_Objest.Статус = Enum.Parse<СтатусиДоговорівКонтрагентів>(Статус.ActiveId);
+            ДоговориКонтрагентів_Objest.ГосподарськаОперація = Enum.Parse<ГосподарськіОперації>(ГосподарськаОперація.ActiveId);
+            ДоговориКонтрагентів_Objest.ТипДоговору = Enum.Parse<ТипДоговорів>(ТипДоговору.ActiveId);
             ДоговориКонтрагентів_Objest.ДопустимаСумаЗаборгованості = ДопустимаСумаЗаборгованості.Value;
             ДоговориКонтрагентів_Objest.Сума = Сума.Value;
             ДоговориКонтрагентів_Objest.Коментар = Коментар.Text;
@@ -307,42 +270,15 @@ namespace StorageAndTrade
 
         #endregion
 
-        void Save(bool closePage = false)
+        protected override void Save()
         {
-            GetValue();
-
-            bool isSave = false;
-
             try
             {
-                isSave = ДоговориКонтрагентів_Objest.Save();
+                ДоговориКонтрагентів_Objest.Save();
             }
             catch (Exception ex)
             {
-                ФункціїДляПовідомлень.ДодатиПовідомленняПроПомилку(DateTime.Now, "Запис",
-                    ДоговориКонтрагентів_Objest.UnigueID.UGuid, "Довідники", ДоговориКонтрагентів_Objest.Назва, ex.Message);
-
-                ФункціїДляПовідомлень.ВідкритиТермінал();
-            }
-
-            if (!isSave)
-            {
-                Message.Info(Program.GeneralForm, "Не вдалось записати");
-                return;
-            }
-
-            if (closePage)
-                Program.GeneralForm?.CloseCurrentPageNotebook();
-            else
-                Program.GeneralForm?.RenameCurrentPageNotebook($"{ДоговориКонтрагентів_Objest.Назва}");
-
-            if (CallBack_OnSelectPointer != null)
-                CallBack_OnSelectPointer.Invoke(ДоговориКонтрагентів_Objest.GetDirectoryPointer());
-
-            if (PageList != null)
-            {
-                PageList.SelectPointerItem = ДоговориКонтрагентів_Objest.GetDirectoryPointer();
-                PageList.LoadRecords();
+                MsgError(ex);
             }
         }
     }

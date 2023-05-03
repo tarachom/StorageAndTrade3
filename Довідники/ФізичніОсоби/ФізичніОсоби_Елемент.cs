@@ -27,45 +27,19 @@ using StorageAndTrade_1_0.Довідники;
 
 namespace StorageAndTrade
 {
-    class ФізичніОсоби_Елемент : VBox
+    class ФізичніОсоби_Елемент : ДовідникЕлемент
     {
-        public ФізичніОсоби? PageList { get; set; }
-        public System.Action<ФізичніОсоби_Pointer>? CallBack_OnSelectPointer { get; set; }
-
-        public bool IsNew { get; set; } = true;
-
         public ФізичніОсоби_Objest ФізичніОсоби_Objest { get; set; } = new ФізичніОсоби_Objest();
 
         Entry Код = new Entry() { WidthRequest = 100 };
         Entry Назва = new Entry() { WidthRequest = 500 };
 
-        public ФізичніОсоби_Елемент() : base()
-        {
-            HBox hBox = new HBox();
+        public ФізичніОсоби_Елемент() : base() { }
 
-            Button bSaveAndClose = new Button("Зберегти та закрити");
-            bSaveAndClose.Clicked += (object? sender, EventArgs args) => { Save(true); };
-            hBox.PackStart(bSaveAndClose, false, false, 10);
-
-            Button bSave = new Button("Зберегти");
-            bSave.Clicked += (object? sender, EventArgs args) => { Save(); };
-            hBox.PackStart(bSave, false, false, 10);
-
-            PackStart(hBox, false, false, 10);
-
-            HPaned hPaned = new HPaned() { BorderWidth = 5, Position = 500 };
-
-            CreatePack1(hPaned);
-            CreatePack2(hPaned);
-
-            PackStart(hPaned, false, false, 5);
-
-            ShowAll();
-        }
-
-        void CreatePack1(HPaned hPaned)
+        protected override void CreatePack1()
         {
             VBox vBox = new VBox();
+            HPanedTop.Pack1(vBox, false, false);
 
             //Код
             HBox hBoxCode = new HBox() { Halign = Align.End };
@@ -80,22 +54,11 @@ namespace StorageAndTrade
 
             hBoxName.PackStart(new Label("Назва:"), false, false, 5);
             hBoxName.PackStart(Назва, false, false, 5);
-
-            hPaned.Pack1(vBox, false, false);
-        }
-
-        void CreatePack2(HPaned hPaned)
-        {
-            VBox vBox = new VBox();
-
-
-
-            hPaned.Pack2(vBox, false, false);
         }
 
         #region Присвоєння / зчитування значень
 
-        public void SetValue()
+        public override void SetValue()
         {
             if (IsNew)
                 ФізичніОсоби_Objest.New();
@@ -104,50 +67,26 @@ namespace StorageAndTrade
             Назва.Text = ФізичніОсоби_Objest.Назва;
         }
 
-        void GetValue()
+        protected override void GetValue()
         {
+            UnigueID = ФізичніОсоби_Objest.UnigueID;
+            Caption = Назва.Text;
+
             ФізичніОсоби_Objest.Код = Код.Text;
             ФізичніОсоби_Objest.Назва = Назва.Text;
         }
 
         #endregion
 
-        void Save(bool closePage = false)
+        protected override void Save()
         {
-            GetValue();
-
-            bool isSave = false;
-
             try
             {
-                isSave = ФізичніОсоби_Objest.Save();
+                ФізичніОсоби_Objest.Save();
             }
             catch (Exception ex)
             {
-                ФункціїДляПовідомлень.ДодатиПовідомленняПроПомилку(DateTime.Now, "Запис",
-                    ФізичніОсоби_Objest.UnigueID.UGuid, "Довідники", ФізичніОсоби_Objest.Назва, ex.Message);
-
-                ФункціїДляПовідомлень.ВідкритиТермінал();
-            }
-
-            if (!isSave)
-            {
-                Message.Info(Program.GeneralForm, "Не вдалось записати");
-                return;
-            }
-
-            if (closePage)
-                Program.GeneralForm?.CloseCurrentPageNotebook();
-            else
-                Program.GeneralForm?.RenameCurrentPageNotebook($"{ФізичніОсоби_Objest.Назва}");
-
-            if (CallBack_OnSelectPointer != null)
-                CallBack_OnSelectPointer.Invoke(ФізичніОсоби_Objest.GetDirectoryPointer());
-
-            if (PageList != null)
-            {
-                PageList.SelectPointerItem = ФізичніОсоби_Objest.GetDirectoryPointer();
-                PageList.LoadRecords();
+                MsgError(ex);
             }
         }
     }

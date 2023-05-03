@@ -53,7 +53,7 @@ namespace StorageAndTrade
                 case "Організація":
                 case "Організація_Назва":
                     {
-                        Організації page = new Організації() { SelectPointerItem = new Організації_Pointer(unigueID) };
+                        Організації page = new Організації() { SelectPointerItem = unigueID };
                         Program.GeneralForm?.CreateNotebookPage($"{Організації_Const.FULLNAME}", () => { return page; }, true);
                         page.LoadRecords();
 
@@ -62,15 +62,15 @@ namespace StorageAndTrade
                 case "Номенклатура":
                 case "Номенклатура_Назва":
                     {
-                        Номенклатура page = new Номенклатура() { SelectPointerItem = new Номенклатура_Pointer(unigueID) };
+                        Номенклатура page = new Номенклатура() { SelectPointerItem = unigueID };
                         Program.GeneralForm?.CreateNotebookPage($"{Номенклатура_Const.FULLNAME}", () => { return page; }, true);
-                        page.LoadTree();
+                        page.LoadRecords();
 
                         break;
                     }
                 case "ХарактеристикаНоменклатури_Назва":
                     {
-                        ХарактеристикиНоменклатури page = new ХарактеристикиНоменклатури() { SelectPointerItem = new ХарактеристикиНоменклатури_Pointer(unigueID) };
+                        ХарактеристикиНоменклатури page = new ХарактеристикиНоменклатури() { SelectPointerItem = unigueID };
                         Program.GeneralForm?.CreateNotebookPage($"{ХарактеристикиНоменклатури_Const.FULLNAME}", () => { return page; }, true);
                         page.LoadRecords();
 
@@ -78,7 +78,7 @@ namespace StorageAndTrade
                     }
                 case "Серія_Номер":
                     {
-                        СеріїНоменклатури page = new СеріїНоменклатури() { SelectPointerItem = new СеріїНоменклатури_Pointer(unigueID) };
+                        СеріїНоменклатури page = new СеріїНоменклатури() { SelectPointerItem =unigueID };
                         Program.GeneralForm?.CreateNotebookPage($"{СеріїНоменклатури_Const.FULLNAME}", () => { return page; }, true);
                         page.LoadRecords();
 
@@ -86,15 +86,15 @@ namespace StorageAndTrade
                     }
                 case "Контрагент_Назва":
                     {
-                        Контрагенти page = new Контрагенти() { SelectPointerItem = new Контрагенти_Pointer(unigueID) };
+                        Контрагенти page = new Контрагенти() { SelectPointerItem = unigueID };
                         Program.GeneralForm?.CreateNotebookPage($"{Контрагенти_Const.FULLNAME}", () => { return page; }, true);
-                        page.LoadTree();
+                        page.LoadRecords();
 
                         break;
                     }
                 case "Договір_Назва":
                     {
-                        ДоговориКонтрагентів page = new ДоговориКонтрагентів() { SelectPointerItem = new ДоговориКонтрагентів_Pointer(unigueID) };
+                        ДоговориКонтрагентів page = new ДоговориКонтрагентів() { SelectPointerItem = unigueID };
                         Program.GeneralForm?.CreateNotebookPage($"{ДоговориКонтрагентів_Const.FULLNAME}", () => { return page; }, true);
                         page.LoadRecords();
 
@@ -102,7 +102,7 @@ namespace StorageAndTrade
                     }
                 case "Валюта_Назва":
                     {
-                        Валюти page = new Валюти() { SelectPointerItem = new Валюти_Pointer(unigueID) };
+                        Валюти page = new Валюти() { SelectPointerItem = unigueID };
                         Program.GeneralForm?.CreateNotebookPage($"{Валюти_Const.FULLNAME}", () => { return page; }, true);
                         page.LoadRecords();
 
@@ -110,7 +110,7 @@ namespace StorageAndTrade
                     }
                 case "Каса_Назва":
                     {
-                        Каси page = new Каси() { SelectPointerItem = new Каси_Pointer(unigueID) };
+                        Каси page = new Каси() { SelectPointerItem = unigueID };
                         Program.GeneralForm?.CreateNotebookPage($"{Каси_Const.FULLNAME}", () => { return page; }, true);
                         page.LoadRecords();
 
@@ -118,15 +118,15 @@ namespace StorageAndTrade
                     }
                 case "Склад_Назва":
                     {
-                        Склади page = new Склади() { SelectPointerItem = new Склади_Pointer(unigueID) };
+                        Склади page = new Склади() { SelectPointerItem = unigueID };
                         Program.GeneralForm?.CreateNotebookPage($"{Склади_Const.FULLNAME}", () => { return page; }, true);
-                        page.LoadTree();
+                        page.LoadRecords();
 
                         break;
                     }
                 case "ПартіяТоварівКомпозит_Назва":
                     {
-                        ПартіяТоварівКомпозит page = new ПартіяТоварівКомпозит() { SelectPointerItem = new ПартіяТоварівКомпозит_Pointer(unigueID) };
+                        ПартіяТоварівКомпозит page = new ПартіяТоварівКомпозит() { SelectPointerItem = unigueID };
                         Program.GeneralForm?.CreateNotebookPage($"{ПартіяТоварівКомпозит_Const.FULLNAME}", () => { return page; }, true);
                         page.LoadRecords();
 
@@ -135,7 +135,7 @@ namespace StorageAndTrade
                 /* -> два документи в довідниках */
                 case "ЗамовленняКлієнта_Назва":
                     {
-                        ЗамовленняКлієнта page = new ЗамовленняКлієнта() { SelectPointerItem = new ЗамовленняКлієнта_Pointer(unigueID) };
+                        ЗамовленняКлієнта page = new ЗамовленняКлієнта() { SelectPointerItem = unigueID };
                         Program.GeneralForm?.CreateNotebookPage($"{ЗамовленняКлієнта_Const.FULLNAME}", () => { return page; }, true);
                         page.LoadRecords();
 
@@ -143,7 +143,7 @@ namespace StorageAndTrade
                     }
                 case "ЗамовленняПостачальнику_Назва":
                     {
-                        ЗамовленняПостачальнику page = new ЗамовленняПостачальнику() { SelectPointerItem = new ЗамовленняПостачальнику_Pointer(unigueID) };
+                        ЗамовленняПостачальнику page = new ЗамовленняПостачальнику() { SelectPointerItem = unigueID };
                         Program.GeneralForm?.CreateNotebookPage($"{ЗамовленняПостачальнику_Const.FULLNAME}", () => { return page; }, true);
                         page.LoadRecords();
 
@@ -152,7 +152,7 @@ namespace StorageAndTrade
                 /* <- два документи в довідниках */
                 case "Пакування_Назва":
                     {
-                        ПакуванняОдиниціВиміру page = new ПакуванняОдиниціВиміру() { SelectPointerItem = new ПакуванняОдиниціВиміру_Pointer(unigueID) };
+                        ПакуванняОдиниціВиміру page = new ПакуванняОдиниціВиміру() { SelectPointerItem = unigueID };
                         Program.GeneralForm?.CreateNotebookPage($"{ПакуванняОдиниціВиміру_Const.FULLNAME}", () => { return page; }, true);
                         page.LoadRecords();
 
@@ -160,15 +160,15 @@ namespace StorageAndTrade
                     }
                 case "Комірка_Назва":
                     {
-                        СкладськіКомірки page = new СкладськіКомірки() { SelectPointerItem = new СкладськіКомірки_Pointer(unigueID) };
+                        СкладськіКомірки page = new СкладськіКомірки() { SelectPointerItem = unigueID };
                         Program.GeneralForm?.CreateNotebookPage($"{СкладськіКомірки_Const.FULLNAME}", () => { return page; }, true);
-                        page.LoadTree();
+                        page.LoadRecords();
 
                         break;
                     }
                 case "Приміщення_Назва":
                     {
-                        СкладськіПриміщення page = new СкладськіПриміщення() { SelectPointerItem = new СкладськіПриміщення_Pointer(unigueID) };
+                        СкладськіПриміщення page = new СкладськіПриміщення() { SelectPointerItem = unigueID };
                         Program.GeneralForm?.CreateNotebookPage($"{СкладськіПриміщення_Const.FULLNAME}", () => { return page; }, true);
                         page.LoadRecords();
 

@@ -21,6 +21,7 @@ limitations under the License.
 Сайт:     accounting.org.ua
 */
 
+using AccountingSoftware;
 using StorageAndTrade_1_0.Довідники;
 
 namespace StorageAndTrade
@@ -56,10 +57,10 @@ namespace StorageAndTrade
         {
             ПартіяТоварівКомпозит page = new ПартіяТоварівКомпозит();
 
-            page.DirectoryPointerItem = Pointer;
-            page.CallBack_OnSelectPointer = (ПартіяТоварівКомпозит_Pointer selectPointer) =>
+            page.DirectoryPointerItem = Pointer.UnigueID;
+            page.CallBack_OnSelectPointer = (UnigueID selectPointer) =>
             {
-                Pointer = selectPointer;
+                Pointer = new ПартіяТоварівКомпозит_Pointer(selectPointer);
             };
 
             Program.GeneralForm?.CreateNotebookPage($"Вибір - {ПартіяТоварівКомпозит_Const.FULLNAME}", () => { return page; }, true);

@@ -27,16 +27,10 @@ using StorageAndTrade_1_0.Довідники;
 
 namespace StorageAndTrade
 {
-    class СкладськіКомірки_Папки_Елемент : VBox
+    class СкладськіКомірки_Папки_Елемент : ДовідникЕлемент
     {
-        public СкладськіКомірки_Папки_Дерево? PageList { get; set; }
-        public System.Action<СкладськіКомірки_Папки_Pointer>? CallBack_OnSelectPointer { get; set; }
-
-        public bool IsNew { get; set; } = true;
-
-        public СкладськіКомірки_Папки_Pointer РодичДляНового { get; set; } = new СкладськіКомірки_Папки_Pointer();
-
         public СкладськіКомірки_Папки_Objest СкладськіКомірки_Папки_Objest { get; set; } = new СкладськіКомірки_Папки_Objest();
+        public СкладськіКомірки_Папки_Pointer РодичДляНового { get; set; } = new СкладськіКомірки_Папки_Pointer();
         public СкладськіПриміщення_Pointer СкладськеПриміщенняДляНового { get; set; } = new СкладськіПриміщення_Pointer();
 
         Entry Код = new Entry() { WidthRequest = 100 };
@@ -44,33 +38,12 @@ namespace StorageAndTrade
         СкладськіКомірки_Папки_PointerControl Родич = new СкладськіКомірки_Папки_PointerControl();
         СкладськіПриміщення_PointerControl СкладськеПриміщення = new СкладськіПриміщення_PointerControl();
 
-        public СкладськіКомірки_Папки_Елемент() : base()
-        {
-            HBox hBox = new HBox();
+        public СкладськіКомірки_Папки_Елемент() : base() { }
 
-            Button bSaveAndClose = new Button("Зберегти та закрити");
-            bSaveAndClose.Clicked += (object? sender, EventArgs args) => { Save(true); };
-            hBox.PackStart(bSaveAndClose, false, false, 10);
-
-            Button bSave = new Button("Зберегти");
-            bSave.Clicked += (object? sender, EventArgs args) => { Save(); };
-            hBox.PackStart(bSave, false, false, 10);
-
-            PackStart(hBox, false, false, 10);
-
-            HPaned hPaned = new HPaned() { BorderWidth = 5, Position = 500 };
-
-            CreatePack1(hPaned);
-            CreatePack2(hPaned);
-
-            PackStart(hPaned, false, false, 5);
-
-            ShowAll();
-        }
-
-        void CreatePack1(HPaned hPaned)
+        protected override void CreatePack1()
         {
             VBox vBox = new VBox();
+            HPanedTop.Pack1(vBox, false, false);
 
             //Код
             HBox hBoxCode = new HBox() { Halign = Align.End };
@@ -97,22 +70,11 @@ namespace StorageAndTrade
             vBox.PackStart(hBoxParent, false, false, 5);
 
             hBoxParent.PackStart(Родич, false, false, 5);
-
-            hPaned.Pack1(vBox, false, false);
-        }
-
-        void CreatePack2(HPaned hPaned)
-        {
-            VBox vBox = new VBox();
-
-
-
-            hPaned.Pack2(vBox, false, false);
         }
 
         #region Присвоєння / зчитування значень
 
-        public void SetValue()
+        public override void SetValue()
         {
             if (IsNew)
             {
@@ -129,8 +91,11 @@ namespace StorageAndTrade
             СкладськеПриміщення.Pointer = СкладськіКомірки_Папки_Objest.Приміщення;
         }
 
-        void GetValue()
+        protected override void GetValue()
         {
+            UnigueID = СкладськіКомірки_Папки_Objest.UnigueID;
+            Caption = Назва.Text;
+
             СкладськіКомірки_Папки_Objest.Код = Код.Text;
             СкладськіКомірки_Папки_Objest.Назва = Назва.Text;
             СкладськіКомірки_Папки_Objest.Родич = Родич.Pointer;
@@ -139,42 +104,15 @@ namespace StorageAndTrade
 
         #endregion
 
-        void Save(bool closePage = false)
+        protected override void Save()
         {
-            GetValue();
-
-            bool isSave = false;
-
             try
             {
-                isSave = СкладськіКомірки_Папки_Objest.Save();
+                СкладськіКомірки_Папки_Objest.Save();
             }
             catch (Exception ex)
             {
-                ФункціїДляПовідомлень.ДодатиПовідомленняПроПомилку(DateTime.Now, "Запис",
-                    СкладськіКомірки_Папки_Objest.UnigueID.UGuid, "Довідники", СкладськіКомірки_Папки_Objest.Назва, ex.Message);
-
-                ФункціїДляПовідомлень.ВідкритиТермінал();
-            }
-
-            if (!isSave)
-            {
-                Message.Info(Program.GeneralForm, "Не вдалось записати");
-                return;
-            }
-
-            if (closePage)
-                Program.GeneralForm?.CloseCurrentPageNotebook();
-            else
-                Program.GeneralForm?.RenameCurrentPageNotebook($"{СкладськіКомірки_Папки_Objest.Назва}");
-
-            if (CallBack_OnSelectPointer != null)
-                CallBack_OnSelectPointer.Invoke(СкладськіКомірки_Папки_Objest.GetDirectoryPointer());
-
-            if (PageList != null)
-            {
-                PageList.Parent_Pointer = СкладськіКомірки_Папки_Objest.GetDirectoryPointer();
-                PageList.LoadTree();
+                MsgError(ex);
             }
         }
     }

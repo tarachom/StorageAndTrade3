@@ -27,13 +27,8 @@ using StorageAndTrade_1_0.Довідники;
 
 namespace StorageAndTrade
 {
-    class Організації_Елемент : VBox
+    class Організації_Елемент : ДовідникЕлемент
     {
-        public Організації? PageList { get; set; }
-        public System.Action<Організації_Pointer>? CallBack_OnSelectPointer { get; set; }
-
-        public bool IsNew { get; set; } = true;
-
         public Організації_Objest Організації_Objest { get; set; } = new Організації_Objest();
 
         #region Field
@@ -52,33 +47,12 @@ namespace StorageAndTrade
 
         #endregion
 
-        public Організації_Елемент() : base()
-        {
-            HBox hBox = new HBox();
+        public Організації_Елемент() : base() { }
 
-            Button bSaveAndClose = new Button("Зберегти та закрити");
-            bSaveAndClose.Clicked += (object? sender, EventArgs args) => { Save(true); };
-            hBox.PackStart(bSaveAndClose, false, false, 10);
-
-            Button bSave = new Button("Зберегти");
-            bSave.Clicked += (object? sender, EventArgs args) => { Save(); };
-            hBox.PackStart(bSave, false, false, 10);
-
-            PackStart(hBox, false, false, 10);
-
-            HPaned hPaned = new HPaned() { BorderWidth = 5, Position = 500 };
-
-            CreatePack1(hPaned);
-            CreatePack2(hPaned);
-
-            PackStart(hPaned, false, false, 5);
-
-            ShowAll();
-        }
-
-        void CreatePack1(HPaned hPaned)
+        protected override void CreatePack1()
         {
             VBox vBox = new VBox();
+            HPanedTop.Pack1(vBox, false, false);
 
             //Код
             HBox hBoxCode = new HBox() { Halign = Align.End };
@@ -141,8 +115,6 @@ namespace StorageAndTrade
             hBoxSvidotstvoData.PackStart(new Label("Свідоцтво дата видачі:"), false, false, 5);
             hBoxSvidotstvoData.PackStart(СвідоцтвоДатаВидачі, false, false, 5);
 
-            hPaned.Pack1(vBox, false, false);
-
             //Холдинг
             HBox hBoxHolding = new HBox() { Halign = Align.End };
             vBox.PackStart(hBoxHolding, false, false, 5);
@@ -150,25 +122,23 @@ namespace StorageAndTrade
             hBoxHolding.PackStart(Холдинг, false, false, 3);
         }
 
-        void CreatePack2(HPaned hPaned)
+        protected override void CreatePack2()
         {
             VBox vBox = new VBox();
+            HPanedTop.Pack2(vBox, false, false);
 
             HBox hBox = new HBox();
-
             hBox.PackStart(new Label("Контакти:"), false, false, 5);
             vBox.PackStart(hBox, false, false, 5);
 
             HBox hBoxContakty = new HBox();
             hBoxContakty.PackStart(Контакти, true, true, 5);
-
             vBox.PackStart(hBoxContakty, false, false, 0);
-            hPaned.Pack2(vBox, false, false);
         }
 
         #region Присвоєння / зчитування значень
 
-        public void SetValue()
+        public override void SetValue()
         {
             if (IsNew)
                 Організації_Objest.New();
@@ -187,8 +157,11 @@ namespace StorageAndTrade
             Контакти.LoadRecords();
         }
 
-        void GetValue()
+        protected override void GetValue()
         {
+            UnigueID = Організації_Objest.UnigueID;
+            Caption = Назва.Text;
+
             Організації_Objest.Код = Код.Text;
             Організації_Objest.Назва = Назва.Text;
             Організації_Objest.НазваСкорочена = НазваСкорочена.Text;
@@ -202,45 +175,18 @@ namespace StorageAndTrade
 
         #endregion
 
-        void Save(bool closePage = false)
+        protected override void Save()
         {
-            GetValue();
-
-            bool isSave = false;
-
             try
             {
-                isSave = Організації_Objest.Save();
+                Організації_Objest.Save();
             }
             catch (Exception ex)
             {
-                ФункціїДляПовідомлень.ДодатиПовідомленняПроПомилку(DateTime.Now, "Запис",
-                    Організації_Objest.UnigueID.UGuid, "Довідники", Організації_Objest.Назва, ex.Message);
-
-                ФункціїДляПовідомлень.ВідкритиТермінал();
-            }
-
-            if (!isSave)
-            {
-                Message.Info(Program.GeneralForm, "Не вдалось записати");
-                return;
+                MsgError(ex);
             }
 
             Контакти.SaveRecords();
-
-            if (closePage)
-                Program.GeneralForm?.CloseCurrentPageNotebook();
-            else
-                Program.GeneralForm?.RenameCurrentPageNotebook($"{Організації_Objest.Назва}");
-
-            if (CallBack_OnSelectPointer != null)
-                CallBack_OnSelectPointer.Invoke(Організації_Objest.GetDirectoryPointer());
-
-            if (PageList != null)
-            {
-                PageList.SelectPointerItem = Організації_Objest.GetDirectoryPointer();
-                PageList.LoadRecords();
-            }
         }
     }
 }

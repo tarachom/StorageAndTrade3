@@ -36,8 +36,8 @@ namespace StorageAndTrade
         TreeStore TreeStore = new TreeStore(typeof(string), typeof(string));
 
         public System.Action? CallBack_RowActivated { get; set; }
-        public Контрагенти_Папки_Pointer? DirectoryPointerItem { get; set; }
-        public System.Action<Контрагенти_Папки_Pointer>? CallBack_OnSelectPointer { get; set; }
+        public UnigueID? DirectoryPointerItem { get; set; }
+        public System.Action<UnigueID>? CallBack_OnSelectPointer { get; set; }
         public Контрагенти_Папки_Pointer Parent_Pointer { get; set; } = new Контрагенти_Папки_Pointer();
 
         public string UidOpenFolder { get; set; } = "";
@@ -184,7 +184,7 @@ ORDER BY level, {Контрагенти_Папки_Const.Назва} ASC
             TreeViewGrid.ExpandToPath(rootPath);
 
             if (DirectoryPointerItem != null)
-                Parent_Pointer = DirectoryPointerItem;
+                Parent_Pointer = new Контрагенти_Папки_Pointer(DirectoryPointerItem);
 
             if (Parent_Pointer.IsEmpty())
             {
@@ -209,6 +209,14 @@ ORDER BY level, {Контрагенти_Папки_Const.Назва} ASC
             OnRowActivated(TreeViewGrid, new RowActivatedArgs());
         }
 
+        void CallBack_LoadRecords(UnigueID? selectPointer)
+        {
+            if (selectPointer != null)
+                Parent_Pointer = new Контрагенти_Папки_Pointer(selectPointer);
+
+            LoadTree();
+        }
+
         void OpenPageElement(bool IsNew, string uid = "")
         {
             if (IsNew)
@@ -217,7 +225,7 @@ ORDER BY level, {Контрагенти_Папки_Const.Назва} ASC
                 {
                     Контрагенти_Папки_Елемент page = new Контрагенти_Папки_Елемент
                     {
-                        PageList = this,
+                        CallBack_LoadRecords = CallBack_LoadRecords,
                         IsNew = true,
                         РодичДляНового = Parent_Pointer
                     };
@@ -236,7 +244,7 @@ ORDER BY level, {Контрагенти_Папки_Const.Назва} ASC
                     {
                         Контрагенти_Папки_Елемент page = new Контрагенти_Папки_Елемент
                         {
-                            PageList = this,
+                            CallBack_LoadRecords = CallBack_LoadRecords,
                             IsNew = false,
                             Контрагенти_Папки_Objest = Контрагенти_Папки_Objest
                         };
@@ -298,7 +306,7 @@ ORDER BY level, {Контрагенти_Папки_Const.Назва} ASC
                     else
                     {
                         if (CallBack_OnSelectPointer != null)
-                            CallBack_OnSelectPointer.Invoke(new Контрагенти_Папки_Pointer(new UnigueID(uid)));
+                            CallBack_OnSelectPointer.Invoke(new UnigueID(uid));
 
                         Program.GeneralForm?.CloseCurrentPageNotebook();
                     }

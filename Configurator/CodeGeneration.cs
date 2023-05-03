@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 29.04.2023 15:18:29
+ * Дата конфігурації: 02.05.2023 19:20:43
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -253,7 +253,7 @@ namespace StorageAndTrade_1_0.Константи
         {
             get 
             {
-                return m_ОсновнаОрганізація_Const.GetNewDirectoryPointer();
+                return m_ОсновнаОрганізація_Const.Copy();
             }
             set
             {
@@ -267,7 +267,7 @@ namespace StorageAndTrade_1_0.Константи
         {
             get 
             {
-                return m_ОсновнийСклад_Const.GetNewDirectoryPointer();
+                return m_ОсновнийСклад_Const.Copy();
             }
             set
             {
@@ -281,7 +281,7 @@ namespace StorageAndTrade_1_0.Константи
         {
             get 
             {
-                return m_ОсновнаВалюта_Const.GetNewDirectoryPointer();
+                return m_ОсновнаВалюта_Const.Copy();
             }
             set
             {
@@ -295,7 +295,7 @@ namespace StorageAndTrade_1_0.Константи
         {
             get 
             {
-                return m_ОсновнийПостачальник_Const.GetNewDirectoryPointer();
+                return m_ОсновнийПостачальник_Const.Copy();
             }
             set
             {
@@ -309,7 +309,7 @@ namespace StorageAndTrade_1_0.Константи
         {
             get 
             {
-                return m_ОсновнийПокупець_Const.GetNewDirectoryPointer();
+                return m_ОсновнийПокупець_Const.Copy();
             }
             set
             {
@@ -323,7 +323,7 @@ namespace StorageAndTrade_1_0.Константи
         {
             get 
             {
-                return m_ОсновнаКаса_Const.GetNewDirectoryPointer();
+                return m_ОсновнаКаса_Const.Copy();
             }
             set
             {
@@ -337,7 +337,7 @@ namespace StorageAndTrade_1_0.Константи
         {
             get 
             {
-                return m_ОсновнаОдиницяПакування_Const.GetNewDirectoryPointer();
+                return m_ОсновнаОдиницяПакування_Const.Copy();
             }
             set
             {
@@ -351,7 +351,7 @@ namespace StorageAndTrade_1_0.Константи
         {
             get 
             {
-                return m_ОсновнийПідрозділ_Const.GetNewDirectoryPointer();
+                return m_ОсновнийПідрозділ_Const.Copy();
             }
             set
             {
@@ -365,7 +365,7 @@ namespace StorageAndTrade_1_0.Константи
         {
             get 
             {
-                return m_ОсновнийБанківськийРахунок_Const.GetNewDirectoryPointer();
+                return m_ОсновнийБанківськийРахунок_Const.Copy();
             }
             set
             {
@@ -379,7 +379,7 @@ namespace StorageAndTrade_1_0.Константи
         {
             get 
             {
-                return m_ОсновнийВидЦіни_Const.GetNewDirectoryPointer();
+                return m_ОсновнийВидЦіни_Const.Copy();
             }
             set
             {
@@ -393,7 +393,7 @@ namespace StorageAndTrade_1_0.Константи
         {
             get 
             {
-                return m_ОсновнийВидНоменклатури_Const.GetNewDirectoryPointer();
+                return m_ОсновнийВидНоменклатури_Const.Copy();
             }
             set
             {
@@ -407,7 +407,7 @@ namespace StorageAndTrade_1_0.Константи
         {
             get 
             {
-                return m_ОсновнийВидЦіниЗакупівлі_Const.GetNewDirectoryPointer();
+                return m_ОсновнийВидЦіниЗакупівлі_Const.Copy();
             }
             set
             {
@@ -2101,9 +2101,9 @@ namespace StorageAndTrade_1_0.Довідники
             return ОрганізаціїObjestItem.Read(base.UnigueID) ? ОрганізаціїObjestItem : null;
         }
 
-        public Організації_Pointer GetNewDirectoryPointer()
+        public Організації_Pointer Copy()
         {
-            return new Організації_Pointer(base.UnigueID);
+            return new Організації_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
         }
 
         public string Назва { get; set; } = "";
@@ -2134,6 +2134,12 @@ namespace StorageAndTrade_1_0.Довідники
         public UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.Організації");
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
         }
     }
     
@@ -2466,9 +2472,9 @@ namespace StorageAndTrade_1_0.Довідники
             return НоменклатураObjestItem.Read(base.UnigueID) ? НоменклатураObjestItem : null;
         }
 
-        public Номенклатура_Pointer GetNewDirectoryPointer()
+        public Номенклатура_Pointer Copy()
         {
-            return new Номенклатура_Pointer(base.UnigueID);
+            return new Номенклатура_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
         }
 
         public string Назва { get; set; } = "";
@@ -2499,6 +2505,12 @@ namespace StorageAndTrade_1_0.Довідники
         public UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.Номенклатура");
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
         }
     }
     
@@ -2743,9 +2755,9 @@ namespace StorageAndTrade_1_0.Довідники
             return ВиробникиObjestItem.Read(base.UnigueID) ? ВиробникиObjestItem : null;
         }
 
-        public Виробники_Pointer GetNewDirectoryPointer()
+        public Виробники_Pointer Copy()
         {
-            return new Виробники_Pointer(base.UnigueID);
+            return new Виробники_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
         }
 
         public string Назва { get; set; } = "";
@@ -2776,6 +2788,12 @@ namespace StorageAndTrade_1_0.Довідники
         public UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.Виробники");
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
         }
     }
     
@@ -2956,9 +2974,9 @@ namespace StorageAndTrade_1_0.Довідники
             return ВидиНоменклатуриObjestItem.Read(base.UnigueID) ? ВидиНоменклатуриObjestItem : null;
         }
 
-        public ВидиНоменклатури_Pointer GetNewDirectoryPointer()
+        public ВидиНоменклатури_Pointer Copy()
         {
-            return new ВидиНоменклатури_Pointer(base.UnigueID);
+            return new ВидиНоменклатури_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
         }
 
         public string Назва { get; set; } = "";
@@ -2989,6 +3007,12 @@ namespace StorageAndTrade_1_0.Довідники
         public UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.ВидиНоменклатури");
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
         }
     }
     
@@ -3163,9 +3187,9 @@ namespace StorageAndTrade_1_0.Довідники
             return ПакуванняОдиниціВиміруObjestItem.Read(base.UnigueID) ? ПакуванняОдиниціВиміруObjestItem : null;
         }
 
-        public ПакуванняОдиниціВиміру_Pointer GetNewDirectoryPointer()
+        public ПакуванняОдиниціВиміру_Pointer Copy()
         {
-            return new ПакуванняОдиниціВиміру_Pointer(base.UnigueID);
+            return new ПакуванняОдиниціВиміру_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
         }
 
         public string Назва { get; set; } = "";
@@ -3196,6 +3220,12 @@ namespace StorageAndTrade_1_0.Довідники
         public UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.ПакуванняОдиниціВиміру");
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
         }
     }
     
@@ -3376,9 +3406,9 @@ namespace StorageAndTrade_1_0.Довідники
             return ВалютиObjestItem.Read(base.UnigueID) ? ВалютиObjestItem : null;
         }
 
-        public Валюти_Pointer GetNewDirectoryPointer()
+        public Валюти_Pointer Copy()
         {
-            return new Валюти_Pointer(base.UnigueID);
+            return new Валюти_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
         }
 
         public string Назва { get; set; } = "";
@@ -3409,6 +3439,12 @@ namespace StorageAndTrade_1_0.Довідники
         public UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.Валюти");
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
         }
     }
     
@@ -3617,9 +3653,9 @@ namespace StorageAndTrade_1_0.Довідники
             return КонтрагентиObjestItem.Read(base.UnigueID) ? КонтрагентиObjestItem : null;
         }
 
-        public Контрагенти_Pointer GetNewDirectoryPointer()
+        public Контрагенти_Pointer Copy()
         {
-            return new Контрагенти_Pointer(base.UnigueID);
+            return new Контрагенти_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
         }
 
         public string Назва { get; set; } = "";
@@ -3650,6 +3686,12 @@ namespace StorageAndTrade_1_0.Довідники
         public UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.Контрагенти");
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
         }
     }
     
@@ -4042,9 +4084,9 @@ namespace StorageAndTrade_1_0.Довідники
             return СкладиObjestItem.Read(base.UnigueID) ? СкладиObjestItem : null;
         }
 
-        public Склади_Pointer GetNewDirectoryPointer()
+        public Склади_Pointer Copy()
         {
-            return new Склади_Pointer(base.UnigueID);
+            return new Склади_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
         }
 
         public string Назва { get; set; } = "";
@@ -4075,6 +4117,12 @@ namespace StorageAndTrade_1_0.Довідники
         public UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.Склади");
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
         }
     }
     
@@ -4349,9 +4397,9 @@ namespace StorageAndTrade_1_0.Довідники
             return ВидиЦінObjestItem.Read(base.UnigueID) ? ВидиЦінObjestItem : null;
         }
 
-        public ВидиЦін_Pointer GetNewDirectoryPointer()
+        public ВидиЦін_Pointer Copy()
         {
-            return new ВидиЦін_Pointer(base.UnigueID);
+            return new ВидиЦін_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
         }
 
         public string Назва { get; set; } = "";
@@ -4382,6 +4430,12 @@ namespace StorageAndTrade_1_0.Довідники
         public UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.ВидиЦін");
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
         }
     }
     
@@ -4550,9 +4604,9 @@ namespace StorageAndTrade_1_0.Довідники
             return ВидиЦінПостачальниківObjestItem.Read(base.UnigueID) ? ВидиЦінПостачальниківObjestItem : null;
         }
 
-        public ВидиЦінПостачальників_Pointer GetNewDirectoryPointer()
+        public ВидиЦінПостачальників_Pointer Copy()
         {
-            return new ВидиЦінПостачальників_Pointer(base.UnigueID);
+            return new ВидиЦінПостачальників_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
         }
 
         public string Назва { get; set; } = "";
@@ -4583,6 +4637,12 @@ namespace StorageAndTrade_1_0.Довідники
         public UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.ВидиЦінПостачальників");
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
         }
     }
     
@@ -4773,9 +4833,9 @@ namespace StorageAndTrade_1_0.Довідники
             return КористувачіObjestItem.Read(base.UnigueID) ? КористувачіObjestItem : null;
         }
 
-        public Користувачі_Pointer GetNewDirectoryPointer()
+        public Користувачі_Pointer Copy()
         {
-            return new Користувачі_Pointer(base.UnigueID);
+            return new Користувачі_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
         }
 
         public string Назва { get; set; } = "";
@@ -4806,6 +4866,12 @@ namespace StorageAndTrade_1_0.Довідники
         public UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.Користувачі");
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
         }
     }
     
@@ -5098,9 +5164,9 @@ namespace StorageAndTrade_1_0.Довідники
             return ФізичніОсобиObjestItem.Read(base.UnigueID) ? ФізичніОсобиObjestItem : null;
         }
 
-        public ФізичніОсоби_Pointer GetNewDirectoryPointer()
+        public ФізичніОсоби_Pointer Copy()
         {
-            return new ФізичніОсоби_Pointer(base.UnigueID);
+            return new ФізичніОсоби_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
         }
 
         public string Назва { get; set; } = "";
@@ -5131,6 +5197,12 @@ namespace StorageAndTrade_1_0.Довідники
         public UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.ФізичніОсоби");
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
         }
     }
     
@@ -5401,9 +5473,9 @@ namespace StorageAndTrade_1_0.Довідники
             return СтруктураПідприємстваObjestItem.Read(base.UnigueID) ? СтруктураПідприємстваObjestItem : null;
         }
 
-        public СтруктураПідприємства_Pointer GetNewDirectoryPointer()
+        public СтруктураПідприємства_Pointer Copy()
         {
-            return new СтруктураПідприємства_Pointer(base.UnigueID);
+            return new СтруктураПідприємства_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
         }
 
         public string Назва { get; set; } = "";
@@ -5434,6 +5506,12 @@ namespace StorageAndTrade_1_0.Довідники
         public UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.СтруктураПідприємства");
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
         }
     }
     
@@ -5596,9 +5674,9 @@ namespace StorageAndTrade_1_0.Довідники
             return КраїниСвітуObjestItem.Read(base.UnigueID) ? КраїниСвітуObjestItem : null;
         }
 
-        public КраїниСвіту_Pointer GetNewDirectoryPointer()
+        public КраїниСвіту_Pointer Copy()
         {
-            return new КраїниСвіту_Pointer(base.UnigueID);
+            return new КраїниСвіту_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
         }
 
         public string Назва { get; set; } = "";
@@ -5629,6 +5707,12 @@ namespace StorageAndTrade_1_0.Довідники
         public UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.КраїниСвіту");
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
         }
     }
     
@@ -5815,9 +5899,9 @@ namespace StorageAndTrade_1_0.Довідники
             return ФайлиObjestItem.Read(base.UnigueID) ? ФайлиObjestItem : null;
         }
 
-        public Файли_Pointer GetNewDirectoryPointer()
+        public Файли_Pointer Copy()
         {
-            return new Файли_Pointer(base.UnigueID);
+            return new Файли_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
         }
 
         public string Назва { get; set; } = "";
@@ -5848,6 +5932,12 @@ namespace StorageAndTrade_1_0.Довідники
         public UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.Файли");
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
         }
     }
     
@@ -6022,9 +6112,9 @@ namespace StorageAndTrade_1_0.Довідники
             return ХарактеристикиНоменклатуриObjestItem.Read(base.UnigueID) ? ХарактеристикиНоменклатуриObjestItem : null;
         }
 
-        public ХарактеристикиНоменклатури_Pointer GetNewDirectoryPointer()
+        public ХарактеристикиНоменклатури_Pointer Copy()
         {
-            return new ХарактеристикиНоменклатури_Pointer(base.UnigueID);
+            return new ХарактеристикиНоменклатури_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
         }
 
         public string Назва { get; set; } = "";
@@ -6055,6 +6145,12 @@ namespace StorageAndTrade_1_0.Довідники
         public UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.ХарактеристикиНоменклатури");
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
         }
     }
     
@@ -6223,9 +6319,9 @@ namespace StorageAndTrade_1_0.Довідники
             return Номенклатура_ПапкиObjestItem.Read(base.UnigueID) ? Номенклатура_ПапкиObjestItem : null;
         }
 
-        public Номенклатура_Папки_Pointer GetNewDirectoryPointer()
+        public Номенклатура_Папки_Pointer Copy()
         {
-            return new Номенклатура_Папки_Pointer(base.UnigueID);
+            return new Номенклатура_Папки_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
         }
 
         public string Назва { get; set; } = "";
@@ -6256,6 +6352,12 @@ namespace StorageAndTrade_1_0.Довідники
         public UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.Номенклатура_Папки");
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
         }
     }
     
@@ -6424,9 +6526,9 @@ namespace StorageAndTrade_1_0.Довідники
             return Контрагенти_ПапкиObjestItem.Read(base.UnigueID) ? Контрагенти_ПапкиObjestItem : null;
         }
 
-        public Контрагенти_Папки_Pointer GetNewDirectoryPointer()
+        public Контрагенти_Папки_Pointer Copy()
         {
-            return new Контрагенти_Папки_Pointer(base.UnigueID);
+            return new Контрагенти_Папки_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
         }
 
         public string Назва { get; set; } = "";
@@ -6457,6 +6559,12 @@ namespace StorageAndTrade_1_0.Довідники
         public UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.Контрагенти_Папки");
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
         }
     }
     
@@ -6625,9 +6733,9 @@ namespace StorageAndTrade_1_0.Довідники
             return Склади_ПапкиObjestItem.Read(base.UnigueID) ? Склади_ПапкиObjestItem : null;
         }
 
-        public Склади_Папки_Pointer GetNewDirectoryPointer()
+        public Склади_Папки_Pointer Copy()
         {
-            return new Склади_Папки_Pointer(base.UnigueID);
+            return new Склади_Папки_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
         }
 
         public string Назва { get; set; } = "";
@@ -6658,6 +6766,12 @@ namespace StorageAndTrade_1_0.Довідники
         public UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.Склади_Папки");
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
         }
     }
     
@@ -6832,9 +6946,9 @@ namespace StorageAndTrade_1_0.Довідники
             return КасиObjestItem.Read(base.UnigueID) ? КасиObjestItem : null;
         }
 
-        public Каси_Pointer GetNewDirectoryPointer()
+        public Каси_Pointer Copy()
         {
-            return new Каси_Pointer(base.UnigueID);
+            return new Каси_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
         }
 
         public string Назва { get; set; } = "";
@@ -6865,6 +6979,12 @@ namespace StorageAndTrade_1_0.Довідники
         public UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.Каси");
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
         }
     }
     
@@ -7093,9 +7213,9 @@ namespace StorageAndTrade_1_0.Довідники
             return БанківськіРахункиОрганізаційObjestItem.Read(base.UnigueID) ? БанківськіРахункиОрганізаційObjestItem : null;
         }
 
-        public БанківськіРахункиОрганізацій_Pointer GetNewDirectoryPointer()
+        public БанківськіРахункиОрганізацій_Pointer Copy()
         {
-            return new БанківськіРахункиОрганізацій_Pointer(base.UnigueID);
+            return new БанківськіРахункиОрганізацій_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
         }
 
         public string Назва { get; set; } = "";
@@ -7126,6 +7246,12 @@ namespace StorageAndTrade_1_0.Довідники
         public UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.БанківськіРахункиОрганізацій");
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
         }
     }
     
@@ -7396,9 +7522,9 @@ namespace StorageAndTrade_1_0.Довідники
             return ДоговориКонтрагентівObjestItem.Read(base.UnigueID) ? ДоговориКонтрагентівObjestItem : null;
         }
 
-        public ДоговориКонтрагентів_Pointer GetNewDirectoryPointer()
+        public ДоговориКонтрагентів_Pointer Copy()
         {
-            return new ДоговориКонтрагентів_Pointer(base.UnigueID);
+            return new ДоговориКонтрагентів_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
         }
 
         public string Назва { get; set; } = "";
@@ -7429,6 +7555,12 @@ namespace StorageAndTrade_1_0.Довідники
         public UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.ДоговориКонтрагентів");
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
         }
     }
     
@@ -7669,9 +7801,9 @@ namespace StorageAndTrade_1_0.Довідники
             return БанківськіРахункиКонтрагентівObjestItem.Read(base.UnigueID) ? БанківськіРахункиКонтрагентівObjestItem : null;
         }
 
-        public БанківськіРахункиКонтрагентів_Pointer GetNewDirectoryPointer()
+        public БанківськіРахункиКонтрагентів_Pointer Copy()
         {
-            return new БанківськіРахункиКонтрагентів_Pointer(base.UnigueID);
+            return new БанківськіРахункиКонтрагентів_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
         }
 
         public string Назва { get; set; } = "";
@@ -7702,6 +7834,12 @@ namespace StorageAndTrade_1_0.Довідники
         public UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.БанківськіРахункиКонтрагентів");
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
         }
     }
     
@@ -7892,9 +8030,9 @@ namespace StorageAndTrade_1_0.Довідники
             return СтаттяРухуКоштівObjestItem.Read(base.UnigueID) ? СтаттяРухуКоштівObjestItem : null;
         }
 
-        public СтаттяРухуКоштів_Pointer GetNewDirectoryPointer()
+        public СтаттяРухуКоштів_Pointer Copy()
         {
-            return new СтаттяРухуКоштів_Pointer(base.UnigueID);
+            return new СтаттяРухуКоштів_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
         }
 
         public string Назва { get; set; } = "";
@@ -7925,6 +8063,12 @@ namespace StorageAndTrade_1_0.Довідники
         public UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.СтаттяРухуКоштів");
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
         }
     }
     
@@ -8171,9 +8315,9 @@ namespace StorageAndTrade_1_0.Довідники
             return СеріїНоменклатуриObjestItem.Read(base.UnigueID) ? СеріїНоменклатуриObjestItem : null;
         }
 
-        public СеріїНоменклатури_Pointer GetNewDirectoryPointer()
+        public СеріїНоменклатури_Pointer Copy()
         {
-            return new СеріїНоменклатури_Pointer(base.UnigueID);
+            return new СеріїНоменклатури_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
         }
 
         public string Назва { get; set; } = "";
@@ -8204,6 +8348,12 @@ namespace StorageAndTrade_1_0.Довідники
         public UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.СеріїНоменклатури");
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
         }
     }
     
@@ -8390,9 +8540,9 @@ namespace StorageAndTrade_1_0.Довідники
             return ПартіяТоварівКомпозитObjestItem.Read(base.UnigueID) ? ПартіяТоварівКомпозитObjestItem : null;
         }
 
-        public ПартіяТоварівКомпозит_Pointer GetNewDirectoryPointer()
+        public ПартіяТоварівКомпозит_Pointer Copy()
         {
-            return new ПартіяТоварівКомпозит_Pointer(base.UnigueID);
+            return new ПартіяТоварівКомпозит_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
         }
 
         public string Назва { get; set; } = "";
@@ -8423,6 +8573,12 @@ namespace StorageAndTrade_1_0.Довідники
         public UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.ПартіяТоварівКомпозит");
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
         }
     }
     
@@ -8615,9 +8771,9 @@ namespace StorageAndTrade_1_0.Довідники
             return ВидиЗапасівObjestItem.Read(base.UnigueID) ? ВидиЗапасівObjestItem : null;
         }
 
-        public ВидиЗапасів_Pointer GetNewDirectoryPointer()
+        public ВидиЗапасів_Pointer Copy()
         {
-            return new ВидиЗапасів_Pointer(base.UnigueID);
+            return new ВидиЗапасів_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
         }
 
         public string Назва { get; set; } = "";
@@ -8648,6 +8804,12 @@ namespace StorageAndTrade_1_0.Довідники
         public UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.ВидиЗапасів");
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
         }
     }
     
@@ -8966,9 +9128,9 @@ namespace StorageAndTrade_1_0.Довідники
             return БанкиObjestItem.Read(base.UnigueID) ? БанкиObjestItem : null;
         }
 
-        public Банки_Pointer GetNewDirectoryPointer()
+        public Банки_Pointer Copy()
         {
-            return new Банки_Pointer(base.UnigueID);
+            return new Банки_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
         }
 
         public string Назва { get; set; } = "";
@@ -8999,6 +9161,12 @@ namespace StorageAndTrade_1_0.Довідники
         public UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.Банки");
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
         }
     }
     
@@ -9167,9 +9335,9 @@ namespace StorageAndTrade_1_0.Довідники
             return СкладськіПриміщенняObjestItem.Read(base.UnigueID) ? СкладськіПриміщенняObjestItem : null;
         }
 
-        public СкладськіПриміщення_Pointer GetNewDirectoryPointer()
+        public СкладськіПриміщення_Pointer Copy()
         {
-            return new СкладськіПриміщення_Pointer(base.UnigueID);
+            return new СкладськіПриміщення_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
         }
 
         public string Назва { get; set; } = "";
@@ -9200,6 +9368,12 @@ namespace StorageAndTrade_1_0.Довідники
         public UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.СкладськіПриміщення");
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
         }
     }
     
@@ -9410,9 +9584,9 @@ namespace StorageAndTrade_1_0.Довідники
             return СкладськіКоміркиObjestItem.Read(base.UnigueID) ? СкладськіКоміркиObjestItem : null;
         }
 
-        public СкладськіКомірки_Pointer GetNewDirectoryPointer()
+        public СкладськіКомірки_Pointer Copy()
         {
-            return new СкладськіКомірки_Pointer(base.UnigueID);
+            return new СкладськіКомірки_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
         }
 
         public string Назва { get; set; } = "";
@@ -9443,6 +9617,12 @@ namespace StorageAndTrade_1_0.Довідники
         public UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.СкладськіКомірки");
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
         }
     }
     
@@ -9609,9 +9789,9 @@ namespace StorageAndTrade_1_0.Довідники
             return ОбластьЗберіганняObjestItem.Read(base.UnigueID) ? ОбластьЗберіганняObjestItem : null;
         }
 
-        public ОбластьЗберігання_Pointer GetNewDirectoryPointer()
+        public ОбластьЗберігання_Pointer Copy()
         {
-            return new ОбластьЗберігання_Pointer(base.UnigueID);
+            return new ОбластьЗберігання_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
         }
 
         public string Назва { get; set; } = "";
@@ -9641,6 +9821,12 @@ namespace StorageAndTrade_1_0.Довідники
         public UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.ОбластьЗберігання");
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
         }
     }
     
@@ -9827,9 +10013,9 @@ namespace StorageAndTrade_1_0.Довідники
             return ТипорозміриКомірокObjestItem.Read(base.UnigueID) ? ТипорозміриКомірокObjestItem : null;
         }
 
-        public ТипорозміриКомірок_Pointer GetNewDirectoryPointer()
+        public ТипорозміриКомірок_Pointer Copy()
         {
-            return new ТипорозміриКомірок_Pointer(base.UnigueID);
+            return new ТипорозміриКомірок_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
         }
 
         public string Назва { get; set; } = "";
@@ -9860,6 +10046,12 @@ namespace StorageAndTrade_1_0.Довідники
         public UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.ТипорозміриКомірок");
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
         }
     }
     
@@ -10034,9 +10226,9 @@ namespace StorageAndTrade_1_0.Довідники
             return СкладськіКомірки_ПапкиObjestItem.Read(base.UnigueID) ? СкладськіКомірки_ПапкиObjestItem : null;
         }
 
-        public СкладськіКомірки_Папки_Pointer GetNewDirectoryPointer()
+        public СкладськіКомірки_Папки_Pointer Copy()
         {
-            return new СкладськіКомірки_Папки_Pointer(base.UnigueID);
+            return new СкладськіКомірки_Папки_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
         }
 
         public string Назва { get; set; } = "";
@@ -10067,6 +10259,12 @@ namespace StorageAndTrade_1_0.Довідники
         public UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.СкладськіКомірки_Папки");
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
         }
     }
     
@@ -10247,9 +10445,9 @@ namespace StorageAndTrade_1_0.Довідники
             return БлокнотObjestItem.Read(base.UnigueID) ? БлокнотObjestItem : null;
         }
 
-        public Блокнот_Pointer GetNewDirectoryPointer()
+        public Блокнот_Pointer Copy()
         {
-            return new Блокнот_Pointer(base.UnigueID);
+            return new Блокнот_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
         }
 
         public string Назва { get; set; } = "";
@@ -10280,6 +10478,12 @@ namespace StorageAndTrade_1_0.Довідники
         public UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, "Довідники.Блокнот");
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
         }
     }
     
@@ -10571,21 +10775,42 @@ namespace StorageAndTrade_1_0.Перелічення
             }
         }
 
-        public static NameValue<ТипиКонтактноїІнформації>[] ТипиКонтактноїІнформації_Array()
+        public static ТипиКонтактноїІнформації? ТипиКонтактноїІнформації_FindByName(string name)
         {
-            NameValue<ТипиКонтактноїІнформації>[] value = new NameValue<ТипиКонтактноїІнформації>[6];
+            switch (name)
+            {
+                
+                case "Адрес": return ТипиКонтактноїІнформації.Адрес;
+                
+                case "Телефон": return ТипиКонтактноїІнформації.Телефон;
+                
+                case "Електронна пошта": return ТипиКонтактноїІнформації.ЕлектроннаПошта;
+                
+                case "Сайт": return ТипиКонтактноїІнформації.Сайт;
+                
+                case "Skype": return ТипиКонтактноїІнформації.Skype;
+                
+                case "Інше": return ТипиКонтактноїІнформації.Інше;
+                
+                default: return null;
+            }
+        }
+
+        public static List<NameValue<ТипиКонтактноїІнформації>> ТипиКонтактноїІнформації_List()
+        {
+            List<NameValue<ТипиКонтактноїІнформації>> value = new List<NameValue<ТипиКонтактноїІнформації>>();
             
-            value[0] = new NameValue<ТипиКонтактноїІнформації>("Адрес", ТипиКонтактноїІнформації.Адрес);
+            value.Add(new NameValue<ТипиКонтактноїІнформації>("Адрес", ТипиКонтактноїІнформації.Адрес));
             
-            value[1] = new NameValue<ТипиКонтактноїІнформації>("Телефон", ТипиКонтактноїІнформації.Телефон);
+            value.Add(new NameValue<ТипиКонтактноїІнформації>("Телефон", ТипиКонтактноїІнформації.Телефон));
             
-            value[2] = new NameValue<ТипиКонтактноїІнформації>("Електронна пошта", ТипиКонтактноїІнформації.ЕлектроннаПошта);
+            value.Add(new NameValue<ТипиКонтактноїІнформації>("Електронна пошта", ТипиКонтактноїІнформації.ЕлектроннаПошта));
             
-            value[3] = new NameValue<ТипиКонтактноїІнформації>("Сайт", ТипиКонтактноїІнформації.Сайт);
+            value.Add(new NameValue<ТипиКонтактноїІнформації>("Сайт", ТипиКонтактноїІнформації.Сайт));
             
-            value[4] = new NameValue<ТипиКонтактноїІнформації>("Skype", ТипиКонтактноїІнформації.Skype);
+            value.Add(new NameValue<ТипиКонтактноїІнформації>("Skype", ТипиКонтактноїІнформації.Skype));
             
-            value[5] = new NameValue<ТипиКонтактноїІнформації>("Інше", ТипиКонтактноїІнформації.Інше);
+            value.Add(new NameValue<ТипиКонтактноїІнформації>("Інше", ТипиКонтактноїІнформації.Інше));
             
             return value;
         }
@@ -10611,19 +10836,38 @@ namespace StorageAndTrade_1_0.Перелічення
             }
         }
 
-        public static NameValue<ТипиНоменклатури>[] ТипиНоменклатури_Array()
+        public static ТипиНоменклатури? ТипиНоменклатури_FindByName(string name)
         {
-            NameValue<ТипиНоменклатури>[] value = new NameValue<ТипиНоменклатури>[5];
+            switch (name)
+            {
+                
+                case "Товар": return ТипиНоменклатури.Товар;
+                
+                case "Послуга": return ТипиНоменклатури.Послуга;
+                
+                case "Робота": return ТипиНоменклатури.Робота;
+                
+                case "Тара": return ТипиНоменклатури.Тара;
+                
+                case "Набір": return ТипиНоменклатури.Набір;
+                
+                default: return null;
+            }
+        }
+
+        public static List<NameValue<ТипиНоменклатури>> ТипиНоменклатури_List()
+        {
+            List<NameValue<ТипиНоменклатури>> value = new List<NameValue<ТипиНоменклатури>>();
             
-            value[0] = new NameValue<ТипиНоменклатури>("Товар", ТипиНоменклатури.Товар);
+            value.Add(new NameValue<ТипиНоменклатури>("Товар", ТипиНоменклатури.Товар));
             
-            value[1] = new NameValue<ТипиНоменклатури>("Послуга", ТипиНоменклатури.Послуга);
+            value.Add(new NameValue<ТипиНоменклатури>("Послуга", ТипиНоменклатури.Послуга));
             
-            value[2] = new NameValue<ТипиНоменклатури>("Робота", ТипиНоменклатури.Робота);
+            value.Add(new NameValue<ТипиНоменклатури>("Робота", ТипиНоменклатури.Робота));
             
-            value[3] = new NameValue<ТипиНоменклатури>("Тара", ТипиНоменклатури.Тара);
+            value.Add(new NameValue<ТипиНоменклатури>("Тара", ТипиНоменклатури.Тара));
             
-            value[4] = new NameValue<ТипиНоменклатури>("Набір", ТипиНоменклатури.Набір);
+            value.Add(new NameValue<ТипиНоменклатури>("Набір", ТипиНоменклатури.Набір));
             
             return value;
         }
@@ -10643,13 +10887,26 @@ namespace StorageAndTrade_1_0.Перелічення
             }
         }
 
-        public static NameValue<ТипиСкладів>[] ТипиСкладів_Array()
+        public static ТипиСкладів? ТипиСкладів_FindByName(string name)
         {
-            NameValue<ТипиСкладів>[] value = new NameValue<ТипиСкладів>[2];
+            switch (name)
+            {
+                
+                case "Гуртовий": return ТипиСкладів.Гуртовий;
+                
+                case "Роздрібний": return ТипиСкладів.Роздрібний;
+                
+                default: return null;
+            }
+        }
+
+        public static List<NameValue<ТипиСкладів>> ТипиСкладів_List()
+        {
+            List<NameValue<ТипиСкладів>> value = new List<NameValue<ТипиСкладів>>();
             
-            value[0] = new NameValue<ТипиСкладів>("Гуртовий", ТипиСкладів.Гуртовий);
+            value.Add(new NameValue<ТипиСкладів>("Гуртовий", ТипиСкладів.Гуртовий));
             
-            value[1] = new NameValue<ТипиСкладів>("Роздрібний", ТипиСкладів.Роздрібний);
+            value.Add(new NameValue<ТипиСкладів>("Роздрібний", ТипиСкладів.Роздрібний));
             
             return value;
         }
@@ -10669,13 +10926,26 @@ namespace StorageAndTrade_1_0.Перелічення
             }
         }
 
-        public static NameValue<СтатьФізичноїОсоби>[] СтатьФізичноїОсоби_Array()
+        public static СтатьФізичноїОсоби? СтатьФізичноїОсоби_FindByName(string name)
         {
-            NameValue<СтатьФізичноїОсоби>[] value = new NameValue<СтатьФізичноїОсоби>[2];
+            switch (name)
+            {
+                
+                case "Чоловік": return СтатьФізичноїОсоби.Чоловік;
+                
+                case "Жінка": return СтатьФізичноїОсоби.Жінка;
+                
+                default: return null;
+            }
+        }
+
+        public static List<NameValue<СтатьФізичноїОсоби>> СтатьФізичноїОсоби_List()
+        {
+            List<NameValue<СтатьФізичноїОсоби>> value = new List<NameValue<СтатьФізичноїОсоби>>();
             
-            value[0] = new NameValue<СтатьФізичноїОсоби>("Чоловік", СтатьФізичноїОсоби.Чоловік);
+            value.Add(new NameValue<СтатьФізичноїОсоби>("Чоловік", СтатьФізичноїОсоби.Чоловік));
             
-            value[1] = new NameValue<СтатьФізичноїОсоби>("Жінка", СтатьФізичноїОсоби.Жінка);
+            value.Add(new NameValue<СтатьФізичноїОсоби>("Жінка", СтатьФізичноїОсоби.Жінка));
             
             return value;
         }
@@ -10697,15 +10967,30 @@ namespace StorageAndTrade_1_0.Перелічення
             }
         }
 
-        public static NameValue<СтатусиДоговорівКонтрагентів>[] СтатусиДоговорівКонтрагентів_Array()
+        public static СтатусиДоговорівКонтрагентів? СтатусиДоговорівКонтрагентів_FindByName(string name)
         {
-            NameValue<СтатусиДоговорівКонтрагентів>[] value = new NameValue<СтатусиДоговорівКонтрагентів>[3];
+            switch (name)
+            {
+                
+                case "Не узгоджений": return СтатусиДоговорівКонтрагентів.НеУзгоджений;
+                
+                case "Діє": return СтатусиДоговорівКонтрагентів.Діє;
+                
+                case "Закритий": return СтатусиДоговорівКонтрагентів.Закритий;
+                
+                default: return null;
+            }
+        }
+
+        public static List<NameValue<СтатусиДоговорівКонтрагентів>> СтатусиДоговорівКонтрагентів_List()
+        {
+            List<NameValue<СтатусиДоговорівКонтрагентів>> value = new List<NameValue<СтатусиДоговорівКонтрагентів>>();
             
-            value[0] = new NameValue<СтатусиДоговорівКонтрагентів>("Не узгоджений", СтатусиДоговорівКонтрагентів.НеУзгоджений);
+            value.Add(new NameValue<СтатусиДоговорівКонтрагентів>("Не узгоджений", СтатусиДоговорівКонтрагентів.НеУзгоджений));
             
-            value[1] = new NameValue<СтатусиДоговорівКонтрагентів>("Діє", СтатусиДоговорівКонтрагентів.Діє);
+            value.Add(new NameValue<СтатусиДоговорівКонтрагентів>("Діє", СтатусиДоговорівКонтрагентів.Діє));
             
-            value[2] = new NameValue<СтатусиДоговорівКонтрагентів>("Закритий", СтатусиДоговорівКонтрагентів.Закритий);
+            value.Add(new NameValue<СтатусиДоговорівКонтрагентів>("Закритий", СтатусиДоговорівКонтрагентів.Закритий));
             
             return value;
         }
@@ -10771,59 +11056,118 @@ namespace StorageAndTrade_1_0.Перелічення
             }
         }
 
-        public static NameValue<ГосподарськіОперації>[] ГосподарськіОперації_Array()
+        public static ГосподарськіОперації? ГосподарськіОперації_FindByName(string name)
         {
-            NameValue<ГосподарськіОперації>[] value = new NameValue<ГосподарськіОперації>[25];
+            switch (name)
+            {
+                
+                case "Замовлення в постачальника": return ГосподарськіОперації.ЗамовленняВПостачальника;
+                
+                case "Оплата постачальнику": return ГосподарськіОперації.ОплатаПостачальнику;
+                
+                case "Оприбуткування товарів": return ГосподарськіОперації.ОприбуткуванняТоварів;
+                
+                case "Переміщення товарів": return ГосподарськіОперації.ПереміщенняТоварів;
+                
+                case "Надходження послуг": return ГосподарськіОперації.НадходженняПослуг;
+                
+                case "Інше надходження товарів": return ГосподарськіОперації.ІншеНадходженняТоварів;
+                
+                case "Інші доходи": return ГосподарськіОперації.ІншіДоходи;
+                
+                case "Інші витрати": return ГосподарськіОперації.ІншіВитрати;
+                
+                case "Реалізація клієнту": return ГосподарськіОперації.РеалізаціяКлієнту;
+                
+                case "Списання товарів": return ГосподарськіОперації.СписанняТоварів;
+                
+                case "Поступлення оплати від клієнта": return ГосподарськіОперації.ПоступленняОплатиВідКлієнта;
+                
+                case "Поступлення коштів з іншої каси": return ГосподарськіОперації.ПоступленняКоштівЗІншоїКаси;
+                
+                case "Поступлення коштів з банку": return ГосподарськіОперації.ПоступленняКоштівЗБанку;
+                
+                case "Повернення коштів від постачальника": return ГосподарськіОперації.ПоверненняКоштівВідПостачальника;
+                
+                case "Повернення коштів постачальнику": return ГосподарськіОперації.ПоверненняКоштівПостачальнику;
+                
+                case "Здача коштів в банк": return ГосподарськіОперації.ЗдачаКоштівВБанк;
+                
+                case "Повернення оплати клієнту": return ГосподарськіОперації.ПоверненняОплатиКлієнту;
+                
+                case "Видача коштів в іншу касу": return ГосподарськіОперації.ВидачаКоштівВІншуКасу;
+                
+                case "Закупівля в постачальника": return ГосподарськіОперації.ЗакупівляВПостачальника;
+                
+                case "Планування по замовленням постачальнику": return ГосподарськіОперації.ПлануванняПоЗамовленнямПостачальнику;
+                
+                case "Планування по замовленням клієнта": return ГосподарськіОперації.ПлануванняПоЗамовленнямКлієнта;
+                
+                case "Повернення товарів від клієнта": return ГосподарськіОперації.ПоверненняТоварівВідКлієнта;
+                
+                case "Повернення товарів постачальнику": return ГосподарськіОперації.ПоверненняТоварівПостачальнику;
+                
+                case "Введення залишків": return ГосподарськіОперації.ВведенняЗалишків;
+                
+                case "Внутрішнє споживання товарів": return ГосподарськіОперації.ВнутрішнєСпоживанняТоварів;
+                
+                default: return null;
+            }
+        }
+
+        public static List<NameValue<ГосподарськіОперації>> ГосподарськіОперації_List()
+        {
+            List<NameValue<ГосподарськіОперації>> value = new List<NameValue<ГосподарськіОперації>>();
             
-            value[0] = new NameValue<ГосподарськіОперації>("Замовлення в постачальника", ГосподарськіОперації.ЗамовленняВПостачальника);
+            value.Add(new NameValue<ГосподарськіОперації>("Замовлення в постачальника", ГосподарськіОперації.ЗамовленняВПостачальника));
             
-            value[1] = new NameValue<ГосподарськіОперації>("Оплата постачальнику", ГосподарськіОперації.ОплатаПостачальнику);
+            value.Add(new NameValue<ГосподарськіОперації>("Оплата постачальнику", ГосподарськіОперації.ОплатаПостачальнику));
             
-            value[2] = new NameValue<ГосподарськіОперації>("Оприбуткування товарів", ГосподарськіОперації.ОприбуткуванняТоварів);
+            value.Add(new NameValue<ГосподарськіОперації>("Оприбуткування товарів", ГосподарськіОперації.ОприбуткуванняТоварів));
             
-            value[3] = new NameValue<ГосподарськіОперації>("Переміщення товарів", ГосподарськіОперації.ПереміщенняТоварів);
+            value.Add(new NameValue<ГосподарськіОперації>("Переміщення товарів", ГосподарськіОперації.ПереміщенняТоварів));
             
-            value[4] = new NameValue<ГосподарськіОперації>("Надходження послуг", ГосподарськіОперації.НадходженняПослуг);
+            value.Add(new NameValue<ГосподарськіОперації>("Надходження послуг", ГосподарськіОперації.НадходженняПослуг));
             
-            value[5] = new NameValue<ГосподарськіОперації>("Інше надходження товарів", ГосподарськіОперації.ІншеНадходженняТоварів);
+            value.Add(new NameValue<ГосподарськіОперації>("Інше надходження товарів", ГосподарськіОперації.ІншеНадходженняТоварів));
             
-            value[6] = new NameValue<ГосподарськіОперації>("Інші доходи", ГосподарськіОперації.ІншіДоходи);
+            value.Add(new NameValue<ГосподарськіОперації>("Інші доходи", ГосподарськіОперації.ІншіДоходи));
             
-            value[7] = new NameValue<ГосподарськіОперації>("Інші витрати", ГосподарськіОперації.ІншіВитрати);
+            value.Add(new NameValue<ГосподарськіОперації>("Інші витрати", ГосподарськіОперації.ІншіВитрати));
             
-            value[8] = new NameValue<ГосподарськіОперації>("Реалізація клієнту", ГосподарськіОперації.РеалізаціяКлієнту);
+            value.Add(new NameValue<ГосподарськіОперації>("Реалізація клієнту", ГосподарськіОперації.РеалізаціяКлієнту));
             
-            value[9] = new NameValue<ГосподарськіОперації>("Списання товарів", ГосподарськіОперації.СписанняТоварів);
+            value.Add(new NameValue<ГосподарськіОперації>("Списання товарів", ГосподарськіОперації.СписанняТоварів));
             
-            value[10] = new NameValue<ГосподарськіОперації>("Поступлення оплати від клієнта", ГосподарськіОперації.ПоступленняОплатиВідКлієнта);
+            value.Add(new NameValue<ГосподарськіОперації>("Поступлення оплати від клієнта", ГосподарськіОперації.ПоступленняОплатиВідКлієнта));
             
-            value[11] = new NameValue<ГосподарськіОперації>("Поступлення коштів з іншої каси", ГосподарськіОперації.ПоступленняКоштівЗІншоїКаси);
+            value.Add(new NameValue<ГосподарськіОперації>("Поступлення коштів з іншої каси", ГосподарськіОперації.ПоступленняКоштівЗІншоїКаси));
             
-            value[12] = new NameValue<ГосподарськіОперації>("Поступлення коштів з банку", ГосподарськіОперації.ПоступленняКоштівЗБанку);
+            value.Add(new NameValue<ГосподарськіОперації>("Поступлення коштів з банку", ГосподарськіОперації.ПоступленняКоштівЗБанку));
             
-            value[13] = new NameValue<ГосподарськіОперації>("Повернення коштів від постачальника", ГосподарськіОперації.ПоверненняКоштівВідПостачальника);
+            value.Add(new NameValue<ГосподарськіОперації>("Повернення коштів від постачальника", ГосподарськіОперації.ПоверненняКоштівВідПостачальника));
             
-            value[14] = new NameValue<ГосподарськіОперації>("Повернення коштів постачальнику", ГосподарськіОперації.ПоверненняКоштівПостачальнику);
+            value.Add(new NameValue<ГосподарськіОперації>("Повернення коштів постачальнику", ГосподарськіОперації.ПоверненняКоштівПостачальнику));
             
-            value[15] = new NameValue<ГосподарськіОперації>("Здача коштів в банк", ГосподарськіОперації.ЗдачаКоштівВБанк);
+            value.Add(new NameValue<ГосподарськіОперації>("Здача коштів в банк", ГосподарськіОперації.ЗдачаКоштівВБанк));
             
-            value[16] = new NameValue<ГосподарськіОперації>("Повернення оплати клієнту", ГосподарськіОперації.ПоверненняОплатиКлієнту);
+            value.Add(new NameValue<ГосподарськіОперації>("Повернення оплати клієнту", ГосподарськіОперації.ПоверненняОплатиКлієнту));
             
-            value[17] = new NameValue<ГосподарськіОперації>("Видача коштів в іншу касу", ГосподарськіОперації.ВидачаКоштівВІншуКасу);
+            value.Add(new NameValue<ГосподарськіОперації>("Видача коштів в іншу касу", ГосподарськіОперації.ВидачаКоштівВІншуКасу));
             
-            value[18] = new NameValue<ГосподарськіОперації>("Закупівля в постачальника", ГосподарськіОперації.ЗакупівляВПостачальника);
+            value.Add(new NameValue<ГосподарськіОперації>("Закупівля в постачальника", ГосподарськіОперації.ЗакупівляВПостачальника));
             
-            value[19] = new NameValue<ГосподарськіОперації>("Планування по замовленням постачальнику", ГосподарськіОперації.ПлануванняПоЗамовленнямПостачальнику);
+            value.Add(new NameValue<ГосподарськіОперації>("Планування по замовленням постачальнику", ГосподарськіОперації.ПлануванняПоЗамовленнямПостачальнику));
             
-            value[20] = new NameValue<ГосподарськіОперації>("Планування по замовленням клієнта", ГосподарськіОперації.ПлануванняПоЗамовленнямКлієнта);
+            value.Add(new NameValue<ГосподарськіОперації>("Планування по замовленням клієнта", ГосподарськіОперації.ПлануванняПоЗамовленнямКлієнта));
             
-            value[21] = new NameValue<ГосподарськіОперації>("Повернення товарів від клієнта", ГосподарськіОперації.ПоверненняТоварівВідКлієнта);
+            value.Add(new NameValue<ГосподарськіОперації>("Повернення товарів від клієнта", ГосподарськіОперації.ПоверненняТоварівВідКлієнта));
             
-            value[22] = new NameValue<ГосподарськіОперації>("Повернення товарів постачальнику", ГосподарськіОперації.ПоверненняТоварівПостачальнику);
+            value.Add(new NameValue<ГосподарськіОперації>("Повернення товарів постачальнику", ГосподарськіОперації.ПоверненняТоварівПостачальнику));
             
-            value[23] = new NameValue<ГосподарськіОперації>("Введення залишків", ГосподарськіОперації.ВведенняЗалишків);
+            value.Add(new NameValue<ГосподарськіОперації>("Введення залишків", ГосподарськіОперації.ВведенняЗалишків));
             
-            value[24] = new NameValue<ГосподарськіОперації>("Внутрішнє споживання товарів", ГосподарськіОперації.ВнутрішнєСпоживанняТоварів);
+            value.Add(new NameValue<ГосподарськіОперації>("Внутрішнє споживання товарів", ГосподарськіОперації.ВнутрішнєСпоживанняТоварів));
             
             return value;
         }
@@ -10843,13 +11187,26 @@ namespace StorageAndTrade_1_0.Перелічення
             }
         }
 
-        public static NameValue<ТипДоговорів>[] ТипДоговорів_Array()
+        public static ТипДоговорів? ТипДоговорів_FindByName(string name)
         {
-            NameValue<ТипДоговорів>[] value = new NameValue<ТипДоговорів>[2];
+            switch (name)
+            {
+                
+                case "З покупцями": return ТипДоговорів.ЗПокупцями;
+                
+                case "З постачальниками": return ТипДоговорів.ЗПостачальниками;
+                
+                default: return null;
+            }
+        }
+
+        public static List<NameValue<ТипДоговорів>> ТипДоговорів_List()
+        {
+            List<NameValue<ТипДоговорів>> value = new List<NameValue<ТипДоговорів>>();
             
-            value[0] = new NameValue<ТипДоговорів>("З покупцями", ТипДоговорів.ЗПокупцями);
+            value.Add(new NameValue<ТипДоговорів>("З покупцями", ТипДоговорів.ЗПокупцями));
             
-            value[1] = new NameValue<ТипДоговорів>("З постачальниками", ТипДоговорів.ЗПостачальниками);
+            value.Add(new NameValue<ТипДоговорів>("З постачальниками", ТипДоговорів.ЗПостачальниками));
             
             return value;
         }
@@ -10875,19 +11232,38 @@ namespace StorageAndTrade_1_0.Перелічення
             }
         }
 
-        public static NameValue<СпособиДоставки>[] СпособиДоставки_Array()
+        public static СпособиДоставки? СпособиДоставки_FindByName(string name)
         {
-            NameValue<СпособиДоставки>[] value = new NameValue<СпособиДоставки>[5];
+            switch (name)
+            {
+                
+                case "Самовивіз": return СпособиДоставки.Самовивіз;
+                
+                case "До клієнта": return СпособиДоставки.ДоКлієнта;
+                
+                case "Силами перевізника": return СпособиДоставки.СиламиПеревізника;
+                
+                case "Нашими силами": return СпособиДоставки.НашимиСиламиЗАдресиВідправника;
+                
+                case "Поручення експедитору": return СпособиДоставки.ПорученняЕкспедитору;
+                
+                default: return null;
+            }
+        }
+
+        public static List<NameValue<СпособиДоставки>> СпособиДоставки_List()
+        {
+            List<NameValue<СпособиДоставки>> value = new List<NameValue<СпособиДоставки>>();
             
-            value[0] = new NameValue<СпособиДоставки>("Самовивіз", СпособиДоставки.Самовивіз);
+            value.Add(new NameValue<СпособиДоставки>("Самовивіз", СпособиДоставки.Самовивіз));
             
-            value[1] = new NameValue<СпособиДоставки>("До клієнта", СпособиДоставки.ДоКлієнта);
+            value.Add(new NameValue<СпособиДоставки>("До клієнта", СпособиДоставки.ДоКлієнта));
             
-            value[2] = new NameValue<СпособиДоставки>("Силами перевізника", СпособиДоставки.СиламиПеревізника);
+            value.Add(new NameValue<СпособиДоставки>("Силами перевізника", СпособиДоставки.СиламиПеревізника));
             
-            value[3] = new NameValue<СпособиДоставки>("Нашими силами", СпособиДоставки.НашимиСиламиЗАдресиВідправника);
+            value.Add(new NameValue<СпособиДоставки>("Нашими силами", СпособиДоставки.НашимиСиламиЗАдресиВідправника));
             
-            value[4] = new NameValue<СпособиДоставки>("Поручення експедитору", СпособиДоставки.ПорученняЕкспедитору);
+            value.Add(new NameValue<СпособиДоставки>("Поручення експедитору", СпособиДоставки.ПорученняЕкспедитору));
             
             return value;
         }
@@ -10909,15 +11285,30 @@ namespace StorageAndTrade_1_0.Перелічення
             }
         }
 
-        public static NameValue<ФормаОплати>[] ФормаОплати_Array()
+        public static ФормаОплати? ФормаОплати_FindByName(string name)
         {
-            NameValue<ФормаОплати>[] value = new NameValue<ФормаОплати>[3];
+            switch (name)
+            {
+                
+                case "Готівка": return ФормаОплати.Готівка;
+                
+                case "Безготівка": return ФормаОплати.Безготівка;
+                
+                case "Взаєморозрахунок": return ФормаОплати.Взаєморозрахунок;
+                
+                default: return null;
+            }
+        }
+
+        public static List<NameValue<ФормаОплати>> ФормаОплати_List()
+        {
+            List<NameValue<ФормаОплати>> value = new List<NameValue<ФормаОплати>>();
             
-            value[0] = new NameValue<ФормаОплати>("Готівка", ФормаОплати.Готівка);
+            value.Add(new NameValue<ФормаОплати>("Готівка", ФормаОплати.Готівка));
             
-            value[1] = new NameValue<ФормаОплати>("Безготівка", ФормаОплати.Безготівка);
+            value.Add(new NameValue<ФормаОплати>("Безготівка", ФормаОплати.Безготівка));
             
-            value[2] = new NameValue<ФормаОплати>("Взаєморозрахунок", ФормаОплати.Взаєморозрахунок);
+            value.Add(new NameValue<ФормаОплати>("Взаєморозрахунок", ФормаОплати.Взаєморозрахунок));
             
             return value;
         }
@@ -10941,17 +11332,34 @@ namespace StorageAndTrade_1_0.Перелічення
             }
         }
 
-        public static NameValue<СтатусиЗамовленьКлієнтів>[] СтатусиЗамовленьКлієнтів_Array()
+        public static СтатусиЗамовленьКлієнтів? СтатусиЗамовленьКлієнтів_FindByName(string name)
         {
-            NameValue<СтатусиЗамовленьКлієнтів>[] value = new NameValue<СтатусиЗамовленьКлієнтів>[4];
+            switch (name)
+            {
+                
+                case "НеУзгоджений": return СтатусиЗамовленьКлієнтів.НеУзгоджений;
+                
+                case "ДоЗабезпечення": return СтатусиЗамовленьКлієнтів.ДоЗабезпечення;
+                
+                case "ДоВідгрузки": return СтатусиЗамовленьКлієнтів.ДоВідгрузки;
+                
+                case "Закритий": return СтатусиЗамовленьКлієнтів.Закритий;
+                
+                default: return null;
+            }
+        }
+
+        public static List<NameValue<СтатусиЗамовленьКлієнтів>> СтатусиЗамовленьКлієнтів_List()
+        {
+            List<NameValue<СтатусиЗамовленьКлієнтів>> value = new List<NameValue<СтатусиЗамовленьКлієнтів>>();
             
-            value[0] = new NameValue<СтатусиЗамовленьКлієнтів>("НеУзгоджений", СтатусиЗамовленьКлієнтів.НеУзгоджений);
+            value.Add(new NameValue<СтатусиЗамовленьКлієнтів>("НеУзгоджений", СтатусиЗамовленьКлієнтів.НеУзгоджений));
             
-            value[1] = new NameValue<СтатусиЗамовленьКлієнтів>("ДоЗабезпечення", СтатусиЗамовленьКлієнтів.ДоЗабезпечення);
+            value.Add(new NameValue<СтатусиЗамовленьКлієнтів>("ДоЗабезпечення", СтатусиЗамовленьКлієнтів.ДоЗабезпечення));
             
-            value[2] = new NameValue<СтатусиЗамовленьКлієнтів>("ДоВідгрузки", СтатусиЗамовленьКлієнтів.ДоВідгрузки);
+            value.Add(new NameValue<СтатусиЗамовленьКлієнтів>("ДоВідгрузки", СтатусиЗамовленьКлієнтів.ДоВідгрузки));
             
-            value[3] = new NameValue<СтатусиЗамовленьКлієнтів>("Закритий", СтатусиЗамовленьКлієнтів.Закритий);
+            value.Add(new NameValue<СтатусиЗамовленьКлієнтів>("Закритий", СтатусиЗамовленьКлієнтів.Закритий));
             
             return value;
         }
@@ -10973,15 +11381,30 @@ namespace StorageAndTrade_1_0.Перелічення
             }
         }
 
-        public static NameValue<СтатусиРеалізаціїТоварівТаПослуг>[] СтатусиРеалізаціїТоварівТаПослуг_Array()
+        public static СтатусиРеалізаціїТоварівТаПослуг? СтатусиРеалізаціїТоварівТаПослуг_FindByName(string name)
         {
-            NameValue<СтатусиРеалізаціїТоварівТаПослуг>[] value = new NameValue<СтатусиРеалізаціїТоварівТаПослуг>[3];
+            switch (name)
+            {
+                
+                case "ДоОплати": return СтатусиРеалізаціїТоварівТаПослуг.ДоОплати;
+                
+                case "ВДорозі": return СтатусиРеалізаціїТоварівТаПослуг.ВДорозі;
+                
+                case "Відгружено": return СтатусиРеалізаціїТоварівТаПослуг.Відгружено;
+                
+                default: return null;
+            }
+        }
+
+        public static List<NameValue<СтатусиРеалізаціїТоварівТаПослуг>> СтатусиРеалізаціїТоварівТаПослуг_List()
+        {
+            List<NameValue<СтатусиРеалізаціїТоварівТаПослуг>> value = new List<NameValue<СтатусиРеалізаціїТоварівТаПослуг>>();
             
-            value[0] = new NameValue<СтатусиРеалізаціїТоварівТаПослуг>("ДоОплати", СтатусиРеалізаціїТоварівТаПослуг.ДоОплати);
+            value.Add(new NameValue<СтатусиРеалізаціїТоварівТаПослуг>("ДоОплати", СтатусиРеалізаціїТоварівТаПослуг.ДоОплати));
             
-            value[1] = new NameValue<СтатусиРеалізаціїТоварівТаПослуг>("ВДорозі", СтатусиРеалізаціїТоварівТаПослуг.ВДорозі);
+            value.Add(new NameValue<СтатусиРеалізаціїТоварівТаПослуг>("ВДорозі", СтатусиРеалізаціїТоварівТаПослуг.ВДорозі));
             
-            value[2] = new NameValue<СтатусиРеалізаціїТоварівТаПослуг>("Відгружено", СтатусиРеалізаціїТоварівТаПослуг.Відгружено);
+            value.Add(new NameValue<СтатусиРеалізаціїТоварівТаПослуг>("Відгружено", СтатусиРеалізаціїТоварівТаПослуг.Відгружено));
             
             return value;
         }
@@ -11003,15 +11426,30 @@ namespace StorageAndTrade_1_0.Перелічення
             }
         }
 
-        public static NameValue<ВидиРухуКоштів>[] ВидиРухуКоштів_Array()
+        public static ВидиРухуКоштів? ВидиРухуКоштів_FindByName(string name)
         {
-            NameValue<ВидиРухуКоштів>[] value = new NameValue<ВидиРухуКоштів>[3];
+            switch (name)
+            {
+                
+                case "Оплата праці": return ВидиРухуКоштів.ОплатаПраці;
+                
+                case "Податок на прибуток": return ВидиРухуКоштів.ПодатокНаПрибуток;
+                
+                case "Оплата оборотних активів": return ВидиРухуКоштів.ОплатаОборотнихАктивів;
+                
+                default: return null;
+            }
+        }
+
+        public static List<NameValue<ВидиРухуКоштів>> ВидиРухуКоштів_List()
+        {
+            List<NameValue<ВидиРухуКоштів>> value = new List<NameValue<ВидиРухуКоштів>>();
             
-            value[0] = new NameValue<ВидиРухуКоштів>("Оплата праці", ВидиРухуКоштів.ОплатаПраці);
+            value.Add(new NameValue<ВидиРухуКоштів>("Оплата праці", ВидиРухуКоштів.ОплатаПраці));
             
-            value[1] = new NameValue<ВидиРухуКоштів>("Податок на прибуток", ВидиРухуКоштів.ПодатокНаПрибуток);
+            value.Add(new NameValue<ВидиРухуКоштів>("Податок на прибуток", ВидиРухуКоштів.ПодатокНаПрибуток));
             
-            value[2] = new NameValue<ВидиРухуКоштів>("Оплата оборотних активів", ВидиРухуКоштів.ОплатаОборотнихАктивів);
+            value.Add(new NameValue<ВидиРухуКоштів>("Оплата оборотних активів", ВидиРухуКоштів.ОплатаОборотнихАктивів));
             
             return value;
         }
@@ -11031,13 +11469,26 @@ namespace StorageAndTrade_1_0.Перелічення
             }
         }
 
-        public static NameValue<СтатусиПереміщенняТоварів>[] СтатусиПереміщенняТоварів_Array()
+        public static СтатусиПереміщенняТоварів? СтатусиПереміщенняТоварів_FindByName(string name)
         {
-            NameValue<СтатусиПереміщенняТоварів>[] value = new NameValue<СтатусиПереміщенняТоварів>[2];
+            switch (name)
+            {
+                
+                case "Відгружено": return СтатусиПереміщенняТоварів.Відгружено;
+                
+                case "Принято": return СтатусиПереміщенняТоварів.Принято;
+                
+                default: return null;
+            }
+        }
+
+        public static List<NameValue<СтатусиПереміщенняТоварів>> СтатусиПереміщенняТоварів_List()
+        {
+            List<NameValue<СтатусиПереміщенняТоварів>> value = new List<NameValue<СтатусиПереміщенняТоварів>>();
             
-            value[0] = new NameValue<СтатусиПереміщенняТоварів>("Відгружено", СтатусиПереміщенняТоварів.Відгружено);
+            value.Add(new NameValue<СтатусиПереміщенняТоварів>("Відгружено", СтатусиПереміщенняТоварів.Відгружено));
             
-            value[1] = new NameValue<СтатусиПереміщенняТоварів>("Принято", СтатусиПереміщенняТоварів.Принято);
+            value.Add(new NameValue<СтатусиПереміщенняТоварів>("Принято", СтатусиПереміщенняТоварів.Принято));
             
             return value;
         }
@@ -11061,17 +11512,34 @@ namespace StorageAndTrade_1_0.Перелічення
             }
         }
 
-        public static NameValue<СтатусиЗамовленьПостачальникам>[] СтатусиЗамовленьПостачальникам_Array()
+        public static СтатусиЗамовленьПостачальникам? СтатусиЗамовленьПостачальникам_FindByName(string name)
         {
-            NameValue<СтатусиЗамовленьПостачальникам>[] value = new NameValue<СтатусиЗамовленьПостачальникам>[4];
+            switch (name)
+            {
+                
+                case "НеУзгоджений": return СтатусиЗамовленьПостачальникам.НеУзгоджений;
+                
+                case "Узгоджений": return СтатусиЗамовленьПостачальникам.Узгоджений;
+                
+                case "Підтверджений": return СтатусиЗамовленьПостачальникам.Підтверджений;
+                
+                case "Закритий": return СтатусиЗамовленьПостачальникам.Закритий;
+                
+                default: return null;
+            }
+        }
+
+        public static List<NameValue<СтатусиЗамовленьПостачальникам>> СтатусиЗамовленьПостачальникам_List()
+        {
+            List<NameValue<СтатусиЗамовленьПостачальникам>> value = new List<NameValue<СтатусиЗамовленьПостачальникам>>();
             
-            value[0] = new NameValue<СтатусиЗамовленьПостачальникам>("НеУзгоджений", СтатусиЗамовленьПостачальникам.НеУзгоджений);
+            value.Add(new NameValue<СтатусиЗамовленьПостачальникам>("НеУзгоджений", СтатусиЗамовленьПостачальникам.НеУзгоджений));
             
-            value[1] = new NameValue<СтатусиЗамовленьПостачальникам>("Узгоджений", СтатусиЗамовленьПостачальникам.Узгоджений);
+            value.Add(new NameValue<СтатусиЗамовленьПостачальникам>("Узгоджений", СтатусиЗамовленьПостачальникам.Узгоджений));
             
-            value[2] = new NameValue<СтатусиЗамовленьПостачальникам>("Підтверджений", СтатусиЗамовленьПостачальникам.Підтверджений);
+            value.Add(new NameValue<СтатусиЗамовленьПостачальникам>("Підтверджений", СтатусиЗамовленьПостачальникам.Підтверджений));
             
-            value[3] = new NameValue<СтатусиЗамовленьПостачальникам>("Закритий", СтатусиЗамовленьПостачальникам.Закритий);
+            value.Add(new NameValue<СтатусиЗамовленьПостачальникам>("Закритий", СтатусиЗамовленьПостачальникам.Закритий));
             
             return value;
         }
@@ -11091,13 +11559,26 @@ namespace StorageAndTrade_1_0.Перелічення
             }
         }
 
-        public static NameValue<ТипДокументуПартіяТоварівКомпозит>[] ТипДокументуПартіяТоварівКомпозит_Array()
+        public static ТипДокументуПартіяТоварівКомпозит? ТипДокументуПартіяТоварівКомпозит_FindByName(string name)
         {
-            NameValue<ТипДокументуПартіяТоварівКомпозит>[] value = new NameValue<ТипДокументуПартіяТоварівКомпозит>[2];
+            switch (name)
+            {
+                
+                case "Поступлення товарів та послуг": return ТипДокументуПартіяТоварівКомпозит.ПоступленняТоварівТаПослуг;
+                
+                case "Введення залишків": return ТипДокументуПартіяТоварівКомпозит.ВведенняЗалишків;
+                
+                default: return null;
+            }
+        }
+
+        public static List<NameValue<ТипДокументуПартіяТоварівКомпозит>> ТипДокументуПартіяТоварівКомпозит_List()
+        {
+            List<NameValue<ТипДокументуПартіяТоварівКомпозит>> value = new List<NameValue<ТипДокументуПартіяТоварівКомпозит>>();
             
-            value[0] = new NameValue<ТипДокументуПартіяТоварівКомпозит>("Поступлення товарів та послуг", ТипДокументуПартіяТоварівКомпозит.ПоступленняТоварівТаПослуг);
+            value.Add(new NameValue<ТипДокументуПартіяТоварівКомпозит>("Поступлення товарів та послуг", ТипДокументуПартіяТоварівКомпозит.ПоступленняТоварівТаПослуг));
             
-            value[1] = new NameValue<ТипДокументуПартіяТоварівКомпозит>("Введення залишків", ТипДокументуПартіяТоварівКомпозит.ВведенняЗалишків);
+            value.Add(new NameValue<ТипДокументуПартіяТоварівКомпозит>("Введення залишків", ТипДокументуПартіяТоварівКомпозит.ВведенняЗалишків));
             
             return value;
         }
@@ -11117,13 +11598,26 @@ namespace StorageAndTrade_1_0.Перелічення
             }
         }
 
-        public static NameValue<ТипЗапасів>[] ТипЗапасів_Array()
+        public static ТипЗапасів? ТипЗапасів_FindByName(string name)
         {
-            NameValue<ТипЗапасів>[] value = new NameValue<ТипЗапасів>[2];
+            switch (name)
+            {
+                
+                case "Товар": return ТипЗапасів.Товар;
+                
+                case "Послуга": return ТипЗапасів.Послуга;
+                
+                default: return null;
+            }
+        }
+
+        public static List<NameValue<ТипЗапасів>> ТипЗапасів_List()
+        {
+            List<NameValue<ТипЗапасів>> value = new List<NameValue<ТипЗапасів>>();
             
-            value[0] = new NameValue<ТипЗапасів>("Товар", ТипЗапасів.Товар);
+            value.Add(new NameValue<ТипЗапасів>("Товар", ТипЗапасів.Товар));
             
-            value[1] = new NameValue<ТипЗапасів>("Послуга", ТипЗапасів.Послуга);
+            value.Add(new NameValue<ТипЗапасів>("Послуга", ТипЗапасів.Послуга));
             
             return value;
         }
@@ -11145,15 +11639,30 @@ namespace StorageAndTrade_1_0.Перелічення
             }
         }
 
-        public static NameValue<ТипДокументуПродажіДокументКомпозит>[] ТипДокументуПродажіДокументКомпозит_Array()
+        public static ТипДокументуПродажіДокументКомпозит? ТипДокументуПродажіДокументКомпозит_FindByName(string name)
         {
-            NameValue<ТипДокументуПродажіДокументКомпозит>[] value = new NameValue<ТипДокументуПродажіДокументКомпозит>[3];
+            switch (name)
+            {
+                
+                case "ЗамовленняКлієнта": return ТипДокументуПродажіДокументКомпозит.ЗамовленняКлієнта;
+                
+                case "АктВиконанихРобіт": return ТипДокументуПродажіДокументКомпозит.АктВиконанихРобіт;
+                
+                case "РеалізаціяТоварівТаПослуг": return ТипДокументуПродажіДокументКомпозит.РеалізаціяТоварівТаПослуг;
+                
+                default: return null;
+            }
+        }
+
+        public static List<NameValue<ТипДокументуПродажіДокументКомпозит>> ТипДокументуПродажіДокументКомпозит_List()
+        {
+            List<NameValue<ТипДокументуПродажіДокументКомпозит>> value = new List<NameValue<ТипДокументуПродажіДокументКомпозит>>();
             
-            value[0] = new NameValue<ТипДокументуПродажіДокументКомпозит>("ЗамовленняКлієнта", ТипДокументуПродажіДокументКомпозит.ЗамовленняКлієнта);
+            value.Add(new NameValue<ТипДокументуПродажіДокументКомпозит>("ЗамовленняКлієнта", ТипДокументуПродажіДокументКомпозит.ЗамовленняКлієнта));
             
-            value[1] = new NameValue<ТипДокументуПродажіДокументКомпозит>("АктВиконанихРобіт", ТипДокументуПродажіДокументКомпозит.АктВиконанихРобіт);
+            value.Add(new NameValue<ТипДокументуПродажіДокументКомпозит>("АктВиконанихРобіт", ТипДокументуПродажіДокументКомпозит.АктВиконанихРобіт));
             
-            value[2] = new NameValue<ТипДокументуПродажіДокументКомпозит>("РеалізаціяТоварівТаПослуг", ТипДокументуПродажіДокументКомпозит.РеалізаціяТоварівТаПослуг);
+            value.Add(new NameValue<ТипДокументуПродажіДокументКомпозит>("РеалізаціяТоварівТаПослуг", ТипДокументуПродажіДокументКомпозит.РеалізаціяТоварівТаПослуг));
             
             return value;
         }
@@ -11185,25 +11694,50 @@ namespace StorageAndTrade_1_0.Перелічення
             }
         }
 
-        public static NameValue<ТипПеріодуДляЖурналівДокументів>[] ТипПеріодуДляЖурналівДокументів_Array()
+        public static ТипПеріодуДляЖурналівДокументів? ТипПеріодуДляЖурналівДокументів_FindByName(string name)
         {
-            NameValue<ТипПеріодуДляЖурналівДокументів>[] value = new NameValue<ТипПеріодуДляЖурналівДокументів>[8];
+            switch (name)
+            {
+                
+                case "Весь період": return ТипПеріодуДляЖурналівДокументів.ВесьПеріод;
+                
+                case "Рік (з початку року)": return ТипПеріодуДляЖурналівДокументів.ЗПочаткуРоку;
+                
+                case "Квартал (три місяці)": return ТипПеріодуДляЖурналівДокументів.Квартал;
+                
+                case "Два місяці (з 1 числа)": return ТипПеріодуДляЖурналівДокументів.ЗМинулогоМісяця;
+                
+                case "Місяць": return ТипПеріодуДляЖурналівДокументів.Місяць;
+                
+                case "Місяць (з 1 числа)": return ТипПеріодуДляЖурналівДокументів.ЗПочаткуМісяця;
+                
+                case "Тиждень": return ТипПеріодуДляЖурналівДокументів.ЗПочаткуТижня;
+                
+                case "День": return ТипПеріодуДляЖурналівДокументів.ПоточнийДень;
+                
+                default: return null;
+            }
+        }
+
+        public static List<NameValue<ТипПеріодуДляЖурналівДокументів>> ТипПеріодуДляЖурналівДокументів_List()
+        {
+            List<NameValue<ТипПеріодуДляЖурналівДокументів>> value = new List<NameValue<ТипПеріодуДляЖурналівДокументів>>();
             
-            value[0] = new NameValue<ТипПеріодуДляЖурналівДокументів>("Весь період", ТипПеріодуДляЖурналівДокументів.ВесьПеріод);
+            value.Add(new NameValue<ТипПеріодуДляЖурналівДокументів>("Весь період", ТипПеріодуДляЖурналівДокументів.ВесьПеріод));
             
-            value[1] = new NameValue<ТипПеріодуДляЖурналівДокументів>("Рік (з початку року)", ТипПеріодуДляЖурналівДокументів.ЗПочаткуРоку);
+            value.Add(new NameValue<ТипПеріодуДляЖурналівДокументів>("Рік (з початку року)", ТипПеріодуДляЖурналівДокументів.ЗПочаткуРоку));
             
-            value[2] = new NameValue<ТипПеріодуДляЖурналівДокументів>("Квартал (три місяці)", ТипПеріодуДляЖурналівДокументів.Квартал);
+            value.Add(new NameValue<ТипПеріодуДляЖурналівДокументів>("Квартал (три місяці)", ТипПеріодуДляЖурналівДокументів.Квартал));
             
-            value[3] = new NameValue<ТипПеріодуДляЖурналівДокументів>("Два місяці (з 1 числа)", ТипПеріодуДляЖурналівДокументів.ЗМинулогоМісяця);
+            value.Add(new NameValue<ТипПеріодуДляЖурналівДокументів>("Два місяці (з 1 числа)", ТипПеріодуДляЖурналівДокументів.ЗМинулогоМісяця));
             
-            value[4] = new NameValue<ТипПеріодуДляЖурналівДокументів>("Місяць", ТипПеріодуДляЖурналівДокументів.Місяць);
+            value.Add(new NameValue<ТипПеріодуДляЖурналівДокументів>("Місяць", ТипПеріодуДляЖурналівДокументів.Місяць));
             
-            value[5] = new NameValue<ТипПеріодуДляЖурналівДокументів>("Місяць (з 1 числа)", ТипПеріодуДляЖурналівДокументів.ЗПочаткуМісяця);
+            value.Add(new NameValue<ТипПеріодуДляЖурналівДокументів>("Місяць (з 1 числа)", ТипПеріодуДляЖурналівДокументів.ЗПочаткуМісяця));
             
-            value[6] = new NameValue<ТипПеріодуДляЖурналівДокументів>("Тиждень", ТипПеріодуДляЖурналівДокументів.ЗПочаткуТижня);
+            value.Add(new NameValue<ТипПеріодуДляЖурналівДокументів>("Тиждень", ТипПеріодуДляЖурналівДокументів.ЗПочаткуТижня));
             
-            value[7] = new NameValue<ТипПеріодуДляЖурналівДокументів>("День", ТипПеріодуДляЖурналівДокументів.ПоточнийДень);
+            value.Add(new NameValue<ТипПеріодуДляЖурналівДокументів>("День", ТипПеріодуДляЖурналівДокументів.ПоточнийДень));
             
             return value;
         }
@@ -11223,13 +11757,26 @@ namespace StorageAndTrade_1_0.Перелічення
             }
         }
 
-        public static NameValue<МетодиСписанняПартій>[] МетодиСписанняПартій_Array()
+        public static МетодиСписанняПартій? МетодиСписанняПартій_FindByName(string name)
         {
-            NameValue<МетодиСписанняПартій>[] value = new NameValue<МетодиСписанняПартій>[2];
+            switch (name)
+            {
+                
+                case "FIFO (спочатку списуються партії які прийшли першими)": return МетодиСписанняПартій.FIFO;
+                
+                case "LIFO (спочатку списуються партії які прийшли останніми)": return МетодиСписанняПартій.LIFO;
+                
+                default: return null;
+            }
+        }
+
+        public static List<NameValue<МетодиСписанняПартій>> МетодиСписанняПартій_List()
+        {
+            List<NameValue<МетодиСписанняПартій>> value = new List<NameValue<МетодиСписанняПартій>>();
             
-            value[0] = new NameValue<МетодиСписанняПартій>("FIFO (спочатку списуються партії які прийшли першими)", МетодиСписанняПартій.FIFO);
+            value.Add(new NameValue<МетодиСписанняПартій>("FIFO (спочатку списуються партії які прийшли першими)", МетодиСписанняПартій.FIFO));
             
-            value[1] = new NameValue<МетодиСписанняПартій>("LIFO (спочатку списуються партії які прийшли останніми)", МетодиСписанняПартій.LIFO);
+            value.Add(new NameValue<МетодиСписанняПартій>("LIFO (спочатку списуються партії які прийшли останніми)", МетодиСписанняПартій.LIFO));
             
             return value;
         }
@@ -11249,13 +11796,26 @@ namespace StorageAndTrade_1_0.Перелічення
             }
         }
 
-        public static NameValue<ТипиКонтрагентів>[] ТипиКонтрагентів_Array()
+        public static ТипиКонтрагентів? ТипиКонтрагентів_FindByName(string name)
         {
-            NameValue<ТипиКонтрагентів>[] value = new NameValue<ТипиКонтрагентів>[2];
+            switch (name)
+            {
+                
+                case "Постачальник": return ТипиКонтрагентів.Постачальник;
+                
+                case "Клієнт": return ТипиКонтрагентів.Клієнт;
+                
+                default: return null;
+            }
+        }
+
+        public static List<NameValue<ТипиКонтрагентів>> ТипиКонтрагентів_List()
+        {
+            List<NameValue<ТипиКонтрагентів>> value = new List<NameValue<ТипиКонтрагентів>>();
             
-            value[0] = new NameValue<ТипиКонтрагентів>("Постачальник", ТипиКонтрагентів.Постачальник);
+            value.Add(new NameValue<ТипиКонтрагентів>("Постачальник", ТипиКонтрагентів.Постачальник));
             
-            value[1] = new NameValue<ТипиКонтрагентів>("Клієнт", ТипиКонтрагентів.Клієнт);
+            value.Add(new NameValue<ТипиКонтрагентів>("Клієнт", ТипиКонтрагентів.Клієнт));
             
             return value;
         }
@@ -11275,13 +11835,26 @@ namespace StorageAndTrade_1_0.Перелічення
             }
         }
 
-        public static NameValue<НалаштуванняАдресногоЗберігання>[] НалаштуванняАдресногоЗберігання_Array()
+        public static НалаштуванняАдресногоЗберігання? НалаштуванняАдресногоЗберігання_FindByName(string name)
         {
-            NameValue<НалаштуванняАдресногоЗберігання>[] value = new NameValue<НалаштуванняАдресногоЗберігання>[2];
+            switch (name)
+            {
+                
+                case "Не використовувати": return НалаштуванняАдресногоЗберігання.НеВикористовувати;
+                
+                case "Комірка": return НалаштуванняАдресногоЗберігання.Комірка;
+                
+                default: return null;
+            }
+        }
+
+        public static List<NameValue<НалаштуванняАдресногоЗберігання>> НалаштуванняАдресногоЗберігання_List()
+        {
+            List<NameValue<НалаштуванняАдресногоЗберігання>> value = new List<NameValue<НалаштуванняАдресногоЗберігання>>();
             
-            value[0] = new NameValue<НалаштуванняАдресногоЗберігання>("Не використовувати", НалаштуванняАдресногоЗберігання.НеВикористовувати);
+            value.Add(new NameValue<НалаштуванняАдресногоЗберігання>("Не використовувати", НалаштуванняАдресногоЗберігання.НеВикористовувати));
             
-            value[1] = new NameValue<НалаштуванняАдресногоЗберігання>("Комірка", НалаштуванняАдресногоЗберігання.Комірка);
+            value.Add(new NameValue<НалаштуванняАдресногоЗберігання>("Комірка", НалаштуванняАдресногоЗберігання.Комірка));
             
             return value;
         }
@@ -11303,15 +11876,30 @@ namespace StorageAndTrade_1_0.Перелічення
             }
         }
 
-        public static NameValue<ТипиСкладськихКомірок>[] ТипиСкладськихКомірок_Array()
+        public static ТипиСкладськихКомірок? ТипиСкладськихКомірок_FindByName(string name)
         {
-            NameValue<ТипиСкладськихКомірок>[] value = new NameValue<ТипиСкладськихКомірок>[3];
+            switch (name)
+            {
+                
+                case "Приймання": return ТипиСкладськихКомірок.Приймання;
+                
+                case "Відвантаження": return ТипиСкладськихКомірок.Відвантаження;
+                
+                case "Зберігання": return ТипиСкладськихКомірок.Зберігання;
+                
+                default: return null;
+            }
+        }
+
+        public static List<NameValue<ТипиСкладськихКомірок>> ТипиСкладськихКомірок_List()
+        {
+            List<NameValue<ТипиСкладськихКомірок>> value = new List<NameValue<ТипиСкладськихКомірок>>();
             
-            value[0] = new NameValue<ТипиСкладськихКомірок>("Приймання", ТипиСкладськихКомірок.Приймання);
+            value.Add(new NameValue<ТипиСкладськихКомірок>("Приймання", ТипиСкладськихКомірок.Приймання));
             
-            value[1] = new NameValue<ТипиСкладськихКомірок>("Відвантаження", ТипиСкладськихКомірок.Відвантаження);
+            value.Add(new NameValue<ТипиСкладськихКомірок>("Відвантаження", ТипиСкладськихКомірок.Відвантаження));
             
-            value[2] = new NameValue<ТипиСкладськихКомірок>("Зберігання", ТипиСкладськихКомірок.Зберігання);
+            value.Add(new NameValue<ТипиСкладськихКомірок>("Зберігання", ТипиСкладськихКомірок.Зберігання));
             
             return value;
         }
@@ -11963,9 +12551,9 @@ namespace StorageAndTrade_1_0.Документи
             base.BaseDeletionLabel(label);
         }
 
-        public ЗамовленняПостачальнику_Pointer GetNewDocumentPointer()
+        public ЗамовленняПостачальнику_Pointer Copy()
         {
-            return new ЗамовленняПостачальнику_Pointer(base.UnigueID);
+            return new ЗамовленняПостачальнику_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
         }
 
         public ЗамовленняПостачальнику_Pointer GetEmptyPointer()
@@ -11990,6 +12578,12 @@ namespace StorageAndTrade_1_0.Документи
             }
             
             return ЗамовленняПостачальникуObjestItem;
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
         }
     }
 
@@ -12866,9 +13460,9 @@ namespace StorageAndTrade_1_0.Документи
             base.BaseDeletionLabel(label);
         }
 
-        public ПоступленняТоварівТаПослуг_Pointer GetNewDocumentPointer()
+        public ПоступленняТоварівТаПослуг_Pointer Copy()
         {
-            return new ПоступленняТоварівТаПослуг_Pointer(base.UnigueID);
+            return new ПоступленняТоварівТаПослуг_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
         }
 
         public ПоступленняТоварівТаПослуг_Pointer GetEmptyPointer()
@@ -12893,6 +13487,12 @@ namespace StorageAndTrade_1_0.Документи
             }
             
             return ПоступленняТоварівТаПослугObjestItem;
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
         }
     }
 
@@ -13715,9 +14315,9 @@ namespace StorageAndTrade_1_0.Документи
             base.BaseDeletionLabel(label);
         }
 
-        public ЗамовленняКлієнта_Pointer GetNewDocumentPointer()
+        public ЗамовленняКлієнта_Pointer Copy()
         {
-            return new ЗамовленняКлієнта_Pointer(base.UnigueID);
+            return new ЗамовленняКлієнта_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
         }
 
         public ЗамовленняКлієнта_Pointer GetEmptyPointer()
@@ -13742,6 +14342,12 @@ namespace StorageAndTrade_1_0.Документи
             }
             
             return ЗамовленняКлієнтаObjestItem;
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
         }
     }
 
@@ -14610,9 +15216,9 @@ namespace StorageAndTrade_1_0.Документи
             base.BaseDeletionLabel(label);
         }
 
-        public РеалізаціяТоварівТаПослуг_Pointer GetNewDocumentPointer()
+        public РеалізаціяТоварівТаПослуг_Pointer Copy()
         {
-            return new РеалізаціяТоварівТаПослуг_Pointer(base.UnigueID);
+            return new РеалізаціяТоварівТаПослуг_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
         }
 
         public РеалізаціяТоварівТаПослуг_Pointer GetEmptyPointer()
@@ -14637,6 +15243,12 @@ namespace StorageAndTrade_1_0.Документи
             }
             
             return РеалізаціяТоварівТаПослугObjestItem;
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
         }
     }
 
@@ -15157,9 +15769,9 @@ namespace StorageAndTrade_1_0.Документи
             base.BaseDeletionLabel(label);
         }
 
-        public ВстановленняЦінНоменклатури_Pointer GetNewDocumentPointer()
+        public ВстановленняЦінНоменклатури_Pointer Copy()
         {
-            return new ВстановленняЦінНоменклатури_Pointer(base.UnigueID);
+            return new ВстановленняЦінНоменклатури_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
         }
 
         public ВстановленняЦінНоменклатури_Pointer GetEmptyPointer()
@@ -15184,6 +15796,12 @@ namespace StorageAndTrade_1_0.Документи
             }
             
             return ВстановленняЦінНоменклатуриObjestItem;
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
         }
     }
 
@@ -15786,9 +16404,9 @@ namespace StorageAndTrade_1_0.Документи
             base.BaseDeletionLabel(label);
         }
 
-        public ПрихіднийКасовийОрдер_Pointer GetNewDocumentPointer()
+        public ПрихіднийКасовийОрдер_Pointer Copy()
         {
-            return new ПрихіднийКасовийОрдер_Pointer(base.UnigueID);
+            return new ПрихіднийКасовийОрдер_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
         }
 
         public ПрихіднийКасовийОрдер_Pointer GetEmptyPointer()
@@ -15813,6 +16431,12 @@ namespace StorageAndTrade_1_0.Документи
             }
             
             return ПрихіднийКасовийОрдерObjestItem;
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
         }
     }
 
@@ -16447,9 +17071,9 @@ namespace StorageAndTrade_1_0.Документи
             base.BaseDeletionLabel(label);
         }
 
-        public РозхіднийКасовийОрдер_Pointer GetNewDocumentPointer()
+        public РозхіднийКасовийОрдер_Pointer Copy()
         {
-            return new РозхіднийКасовийОрдер_Pointer(base.UnigueID);
+            return new РозхіднийКасовийОрдер_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
         }
 
         public РозхіднийКасовийОрдер_Pointer GetEmptyPointer()
@@ -16474,6 +17098,12 @@ namespace StorageAndTrade_1_0.Документи
             }
             
             return РозхіднийКасовийОрдерObjestItem;
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
         }
     }
 
@@ -17136,9 +17766,9 @@ namespace StorageAndTrade_1_0.Документи
             base.BaseDeletionLabel(label);
         }
 
-        public ПереміщенняТоварів_Pointer GetNewDocumentPointer()
+        public ПереміщенняТоварів_Pointer Copy()
         {
-            return new ПереміщенняТоварів_Pointer(base.UnigueID);
+            return new ПереміщенняТоварів_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
         }
 
         public ПереміщенняТоварів_Pointer GetEmptyPointer()
@@ -17163,6 +17793,12 @@ namespace StorageAndTrade_1_0.Документи
             }
             
             return ПереміщенняТоварівObjestItem;
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
         }
     }
 
@@ -17867,9 +18503,9 @@ namespace StorageAndTrade_1_0.Документи
             base.BaseDeletionLabel(label);
         }
 
-        public ПоверненняТоварівПостачальнику_Pointer GetNewDocumentPointer()
+        public ПоверненняТоварівПостачальнику_Pointer Copy()
         {
-            return new ПоверненняТоварівПостачальнику_Pointer(base.UnigueID);
+            return new ПоверненняТоварівПостачальнику_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
         }
 
         public ПоверненняТоварівПостачальнику_Pointer GetEmptyPointer()
@@ -17894,6 +18530,12 @@ namespace StorageAndTrade_1_0.Документи
             }
             
             return ПоверненняТоварівПостачальникуObjestItem;
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
         }
     }
 
@@ -18560,9 +19202,9 @@ namespace StorageAndTrade_1_0.Документи
             base.BaseDeletionLabel(label);
         }
 
-        public ПоверненняТоварівВідКлієнта_Pointer GetNewDocumentPointer()
+        public ПоверненняТоварівВідКлієнта_Pointer Copy()
         {
-            return new ПоверненняТоварівВідКлієнта_Pointer(base.UnigueID);
+            return new ПоверненняТоварівВідКлієнта_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
         }
 
         public ПоверненняТоварівВідКлієнта_Pointer GetEmptyPointer()
@@ -18587,6 +19229,12 @@ namespace StorageAndTrade_1_0.Документи
             }
             
             return ПоверненняТоварівВідКлієнтаObjestItem;
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
         }
     }
 
@@ -19197,9 +19845,9 @@ namespace StorageAndTrade_1_0.Документи
             base.BaseDeletionLabel(label);
         }
 
-        public АктВиконанихРобіт_Pointer GetNewDocumentPointer()
+        public АктВиконанихРобіт_Pointer Copy()
         {
-            return new АктВиконанихРобіт_Pointer(base.UnigueID);
+            return new АктВиконанихРобіт_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
         }
 
         public АктВиконанихРобіт_Pointer GetEmptyPointer()
@@ -19224,6 +19872,12 @@ namespace StorageAndTrade_1_0.Документи
             }
             
             return АктВиконанихРобітObjestItem;
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
         }
     }
 
@@ -19915,9 +20569,9 @@ namespace StorageAndTrade_1_0.Документи
             base.BaseDeletionLabel(label);
         }
 
-        public ВведенняЗалишків_Pointer GetNewDocumentPointer()
+        public ВведенняЗалишків_Pointer Copy()
         {
-            return new ВведенняЗалишків_Pointer(base.UnigueID);
+            return new ВведенняЗалишків_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
         }
 
         public ВведенняЗалишків_Pointer GetEmptyPointer()
@@ -19942,6 +20596,12 @@ namespace StorageAndTrade_1_0.Документи
             }
             
             return ВведенняЗалишківObjestItem;
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
         }
     }
 
@@ -20695,9 +21355,9 @@ namespace StorageAndTrade_1_0.Документи
             base.BaseDeletionLabel(label);
         }
 
-        public НадлишкиТоварів_Pointer GetNewDocumentPointer()
+        public НадлишкиТоварів_Pointer Copy()
         {
-            return new НадлишкиТоварів_Pointer(base.UnigueID);
+            return new НадлишкиТоварів_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
         }
 
         public НадлишкиТоварів_Pointer GetEmptyPointer()
@@ -20722,6 +21382,12 @@ namespace StorageAndTrade_1_0.Документи
             }
             
             return НадлишкиТоварівObjestItem;
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
         }
     }
 
@@ -21193,9 +21859,9 @@ namespace StorageAndTrade_1_0.Документи
             base.BaseDeletionLabel(label);
         }
 
-        public ПересортицяТоварів_Pointer GetNewDocumentPointer()
+        public ПересортицяТоварів_Pointer Copy()
         {
-            return new ПересортицяТоварів_Pointer(base.UnigueID);
+            return new ПересортицяТоварів_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
         }
 
         public ПересортицяТоварів_Pointer GetEmptyPointer()
@@ -21220,6 +21886,12 @@ namespace StorageAndTrade_1_0.Документи
             }
             
             return ПересортицяТоварівObjestItem;
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
         }
     }
 
@@ -21677,9 +22349,9 @@ namespace StorageAndTrade_1_0.Документи
             base.BaseDeletionLabel(label);
         }
 
-        public ПерерахунокТоварів_Pointer GetNewDocumentPointer()
+        public ПерерахунокТоварів_Pointer Copy()
         {
-            return new ПерерахунокТоварів_Pointer(base.UnigueID);
+            return new ПерерахунокТоварів_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
         }
 
         public ПерерахунокТоварів_Pointer GetEmptyPointer()
@@ -21704,6 +22376,12 @@ namespace StorageAndTrade_1_0.Документи
             }
             
             return ПерерахунокТоварівObjestItem;
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
         }
     }
 
@@ -22254,9 +22932,9 @@ namespace StorageAndTrade_1_0.Документи
             base.BaseDeletionLabel(label);
         }
 
-        public ПсуванняТоварів_Pointer GetNewDocumentPointer()
+        public ПсуванняТоварів_Pointer Copy()
         {
-            return new ПсуванняТоварів_Pointer(base.UnigueID);
+            return new ПсуванняТоварів_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
         }
 
         public ПсуванняТоварів_Pointer GetEmptyPointer()
@@ -22281,6 +22959,12 @@ namespace StorageAndTrade_1_0.Документи
             }
             
             return ПсуванняТоварівObjestItem;
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
         }
     }
 
@@ -22859,9 +23543,9 @@ namespace StorageAndTrade_1_0.Документи
             base.BaseDeletionLabel(label);
         }
 
-        public ВнутрішнєСпоживанняТоварів_Pointer GetNewDocumentPointer()
+        public ВнутрішнєСпоживанняТоварів_Pointer Copy()
         {
-            return new ВнутрішнєСпоживанняТоварів_Pointer(base.UnigueID);
+            return new ВнутрішнєСпоживанняТоварів_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
         }
 
         public ВнутрішнєСпоживанняТоварів_Pointer GetEmptyPointer()
@@ -22886,6 +23570,12 @@ namespace StorageAndTrade_1_0.Документи
             }
             
             return ВнутрішнєСпоживанняТоварівObjestItem;
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
         }
     }
 
@@ -23570,9 +24260,9 @@ namespace StorageAndTrade_1_0.Документи
             base.BaseDeletionLabel(label);
         }
 
-        public РахунокФактура_Pointer GetNewDocumentPointer()
+        public РахунокФактура_Pointer Copy()
         {
-            return new РахунокФактура_Pointer(base.UnigueID);
+            return new РахунокФактура_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
         }
 
         public РахунокФактура_Pointer GetEmptyPointer()
@@ -23597,6 +24287,12 @@ namespace StorageAndTrade_1_0.Документи
             }
             
             return РахунокФактураObjestItem;
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
         }
     }
 
@@ -24141,9 +24837,9 @@ namespace StorageAndTrade_1_0.Документи
             base.BaseDeletionLabel(label);
         }
 
-        public РозміщенняТоварівНаСкладі_Pointer GetNewDocumentPointer()
+        public РозміщенняТоварівНаСкладі_Pointer Copy()
         {
-            return new РозміщенняТоварівНаСкладі_Pointer(base.UnigueID);
+            return new РозміщенняТоварівНаСкладі_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
         }
 
         public РозміщенняТоварівНаСкладі_Pointer GetEmptyPointer()
@@ -24168,6 +24864,12 @@ namespace StorageAndTrade_1_0.Документи
             }
             
             return РозміщенняТоварівНаСкладіObjestItem;
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
         }
     }
 
@@ -24694,9 +25396,9 @@ namespace StorageAndTrade_1_0.Документи
             base.BaseDeletionLabel(label);
         }
 
-        public ПереміщенняТоварівНаСкладі_Pointer GetNewDocumentPointer()
+        public ПереміщенняТоварівНаСкладі_Pointer Copy()
         {
-            return new ПереміщенняТоварівНаСкладі_Pointer(base.UnigueID);
+            return new ПереміщенняТоварівНаСкладі_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
         }
 
         public ПереміщенняТоварівНаСкладі_Pointer GetEmptyPointer()
@@ -24721,6 +25423,12 @@ namespace StorageAndTrade_1_0.Документи
             }
             
             return ПереміщенняТоварівНаСкладіObjestItem;
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
         }
     }
 
@@ -25257,9 +25965,9 @@ namespace StorageAndTrade_1_0.Документи
             base.BaseDeletionLabel(label);
         }
 
-        public ЗбіркаТоварівНаСкладі_Pointer GetNewDocumentPointer()
+        public ЗбіркаТоварівНаСкладі_Pointer Copy()
         {
-            return new ЗбіркаТоварівНаСкладі_Pointer(base.UnigueID);
+            return new ЗбіркаТоварівНаСкладі_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
         }
 
         public ЗбіркаТоварівНаСкладі_Pointer GetEmptyPointer()
@@ -25284,6 +25992,12 @@ namespace StorageAndTrade_1_0.Документи
             }
             
             return ЗбіркаТоварівНаСкладіObjestItem;
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
         }
     }
 
@@ -25774,9 +26488,9 @@ namespace StorageAndTrade_1_0.Документи
             base.BaseDeletionLabel(label);
         }
 
-        public РозміщенняНоменклатуриПоКоміркам_Pointer GetNewDocumentPointer()
+        public РозміщенняНоменклатуриПоКоміркам_Pointer Copy()
         {
-            return new РозміщенняНоменклатуриПоКоміркам_Pointer(base.UnigueID);
+            return new РозміщенняНоменклатуриПоКоміркам_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
         }
 
         public РозміщенняНоменклатуриПоКоміркам_Pointer GetEmptyPointer()
@@ -25801,6 +26515,12 @@ namespace StorageAndTrade_1_0.Документи
             }
             
             return РозміщенняНоменклатуриПоКоміркамObjestItem;
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
         }
     }
 

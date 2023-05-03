@@ -225,6 +225,14 @@ ORDER BY level ASC
             OnRowActivated(TreeViewGrid, new RowActivatedArgs());
         }
 
+        void CallBack_LoadRecords(UnigueID? selectPointer)
+        {
+            if (selectPointer != null)
+                Parent_Pointer = new СкладськіКомірки_Папки_Pointer(selectPointer);
+
+            LoadTree();
+        }
+
         void OpenPageElement(bool IsNew, string uid = "")
         {
             if (IsNew)
@@ -233,7 +241,7 @@ ORDER BY level ASC
                 {
                     СкладськіКомірки_Папки_Елемент page = new СкладськіКомірки_Папки_Елемент
                     {
-                        PageList = this,
+                        CallBack_LoadRecords = CallBack_LoadRecords,
                         IsNew = true,
                         РодичДляНового = Parent_Pointer,
                         СкладськеПриміщенняДляНового = СкладПриміщенняВласник
@@ -253,7 +261,7 @@ ORDER BY level ASC
                     {
                         СкладськіКомірки_Папки_Елемент page = new СкладськіКомірки_Папки_Елемент
                         {
-                            PageList = this,
+                            CallBack_LoadRecords = CallBack_LoadRecords,
                             IsNew = false,
                             СкладськіКомірки_Папки_Objest = СкладськіКомірки_Папки_Objest
                         };

@@ -23,11 +23,13 @@ limitations under the License.
 
 using Gtk;
 
+using AccountingSoftware;
+
 using StorageAndTrade_1_0.Довідники;
 
 namespace StorageAndTrade
 {
-    class Номенклатура_PointerControl : PointerControl
+    public class Номенклатура_PointerControl : PointerControl
     {
         public Номенклатура_PointerControl()
         {
@@ -61,12 +63,10 @@ namespace StorageAndTrade
             if (BeforeClickOpenFunc != null)
                 BeforeClickOpenFunc.Invoke();
 
-            Номенклатура_ШвидкийВибір page = new Номенклатура_ШвидкийВибір() { PopoverParent = PopoverSmallSelect, DirectoryPointerItem = Pointer };
-
-            page.DirectoryPointerItem = Pointer;
-            page.CallBack_OnSelectPointer = (Номенклатура_Pointer selectPointer) =>
+            Номенклатура_ШвидкийВибір page = new Номенклатура_ШвидкийВибір() { PopoverParent = PopoverSmallSelect, DirectoryPointerItem = Pointer.UnigueID };
+            page.CallBack_OnSelectPointer = (UnigueID selectPointer) =>
             {
-                Pointer = selectPointer;
+                Pointer = new Номенклатура_Pointer(selectPointer);
 
                 if (AfterSelectFunc != null)
                     AfterSelectFunc.Invoke();

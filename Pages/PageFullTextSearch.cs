@@ -97,7 +97,7 @@ namespace StorageAndTrade
 
             HBox hBoxRowType = new HBox();
             vBoxMessage.PackStart(hBoxRowType, false, false, 3);
-            hBoxRowType.PackStart(new Label("<small>" + Обєкт.PointerName + ": " + Обєкт.Type + "</small>") { UseMarkup = true, Selectable = true }, false, false, 12);
+            hBoxRowType.PackStart(new Label("<small>" + Обєкт.PointerName + ": " + Обєкт.TypeCaption + "</small>") { UseMarkup = true, Selectable = true }, false, false, 12);
             hBoxRowType.PackStart(new Label("<small>Додано: " + row["dateadd"].ToString() + "</small>") { UseMarkup = true, Selectable = true }, false, false, 12);
 
             HBox hBoxRowControl = new HBox();

@@ -27,13 +27,8 @@ using StorageAndTrade_1_0.Довідники;
 
 namespace StorageAndTrade
 {
-    class ХарактеристикиНоменклатури_Елемент : VBox
+    class ХарактеристикиНоменклатури_Елемент : ДовідникЕлемент
     {
-        public ХарактеристикиНоменклатури? PageList { get; set; }
-        public System.Action<ХарактеристикиНоменклатури_Pointer>? CallBack_OnSelectPointer { get; set; }
-
-        public bool IsNew { get; set; } = true;
-
         public ХарактеристикиНоменклатури_Objest ХарактеристикиНоменклатури_Objest { get; set; } = new ХарактеристикиНоменклатури_Objest();
         public Номенклатура_Pointer НоменклатураДляНового { get; set; } = new Номенклатура_Pointer();
 
@@ -42,33 +37,12 @@ namespace StorageAndTrade
         TextView НазваПовна = new TextView();
         Номенклатура_PointerControl Номенклатура = new Номенклатура_PointerControl();
 
-        public ХарактеристикиНоменклатури_Елемент() : base()
-        {
-            HBox hBox = new HBox();
+        public ХарактеристикиНоменклатури_Елемент() : base() { }
 
-            Button bSaveAndClose = new Button("Зберегти та закрити");
-            bSaveAndClose.Clicked += (object? sender, EventArgs args) => { Save(true); };
-            hBox.PackStart(bSaveAndClose, false, false, 10);
-
-            Button bSave = new Button("Зберегти");
-            bSave.Clicked += (object? sender, EventArgs args) => { Save(); };
-            hBox.PackStart(bSave, false, false, 10);
-
-            PackStart(hBox, false, false, 10);
-
-            HPaned hPaned = new HPaned() { BorderWidth = 5, Position = 500 };
-
-            CreatePack1(hPaned);
-            CreatePack2(hPaned);
-
-            PackStart(hPaned, false, false, 5);
-
-            ShowAll();
-        }
-
-        void CreatePack1(HPaned hPaned)
+        protected override void CreatePack1()
         {
             VBox vBox = new VBox();
+            HPanedTop.Pack1(vBox, false, false);
 
             //Код
             HBox hBoxCode = new HBox() { Halign = Align.End };
@@ -101,20 +75,11 @@ namespace StorageAndTrade
             scrollTextView.Add(НазваПовна);
 
             hBoxDesc.PackStart(scrollTextView, false, false, 5);
-
-            hPaned.Pack1(vBox, false, false);
-        }
-
-        void CreatePack2(HPaned hPaned)
-        {
-            VBox vBox = new VBox();
-
-            hPaned.Pack2(vBox, false, false);
         }
 
         #region Присвоєння / зчитування значень
 
-        public void SetValue()
+        public override void SetValue()
         {
             if (IsNew)
             {
@@ -128,8 +93,11 @@ namespace StorageAndTrade
             Номенклатура.Pointer = ХарактеристикиНоменклатури_Objest.Номенклатура;
         }
 
-        void GetValue()
+        protected override void GetValue()
         {
+            UnigueID = ХарактеристикиНоменклатури_Objest.UnigueID;
+            Caption = Назва.Text;
+
             ХарактеристикиНоменклатури_Objest.Код = Код.Text;
             ХарактеристикиНоменклатури_Objest.Назва = Назва.Text;
             ХарактеристикиНоменклатури_Objest.НазваПовна = НазваПовна.Buffer.Text;
@@ -138,42 +106,15 @@ namespace StorageAndTrade
 
         #endregion
 
-        void Save(bool closePage = false)
+        protected override void Save()
         {
-            GetValue();
-
-            bool isSave = false;
-
             try
             {
-                isSave = ХарактеристикиНоменклатури_Objest.Save();
+                ХарактеристикиНоменклатури_Objest.Save();
             }
             catch (Exception ex)
             {
-                ФункціїДляПовідомлень.ДодатиПовідомленняПроПомилку(DateTime.Now, "Запис",
-                    ХарактеристикиНоменклатури_Objest.UnigueID.UGuid, "Довідники", ХарактеристикиНоменклатури_Objest.Назва, ex.Message);
-
-                ФункціїДляПовідомлень.ВідкритиТермінал();
-            }
-
-            if (!isSave)
-            {
-                Message.Info(Program.GeneralForm, "Не вдалось записати");
-                return;
-            }
-
-            if (closePage)
-                Program.GeneralForm?.CloseCurrentPageNotebook();
-            else
-                Program.GeneralForm?.RenameCurrentPageNotebook($"{ХарактеристикиНоменклатури_Objest.Назва}");
-
-            if (CallBack_OnSelectPointer != null)
-                CallBack_OnSelectPointer.Invoke(ХарактеристикиНоменклатури_Objest.GetDirectoryPointer());
-
-            if (PageList != null)
-            {
-                PageList.SelectPointerItem = ХарактеристикиНоменклатури_Objest.GetDirectoryPointer();
-                PageList.LoadRecords();
+                MsgError(ex);
             }
         }
     }

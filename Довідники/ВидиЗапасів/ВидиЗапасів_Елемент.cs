@@ -27,45 +27,19 @@ using StorageAndTrade_1_0.Довідники;
 
 namespace StorageAndTrade
 {
-    class ВидиЗапасів_Елемент : VBox
+    class ВидиЗапасів_Елемент : ДовідникЕлемент
     {
-        public ВидиЗапасів? PageList { get; set; }
-        public System.Action<ВидиЗапасів_Pointer>? CallBack_OnSelectPointer { get; set; }
-
-        public bool IsNew { get; set; } = true;
-
         public ВидиЗапасів_Objest ВидиЗапасів_Objest { get; set; } = new ВидиЗапасів_Objest();
 
         Entry Код = new Entry() { WidthRequest = 100 };
         Entry Назва = new Entry() { WidthRequest = 500 };
 
-        public ВидиЗапасів_Елемент() : base()
-        {
-            HBox hBox = new HBox();
+        public ВидиЗапасів_Елемент() : base() { }
 
-            Button bSaveAndClose = new Button("Зберегти та закрити");
-            bSaveAndClose.Clicked += (object? sender, EventArgs args) => { Save(true); };
-            hBox.PackStart(bSaveAndClose, false, false, 10);
-
-            Button bSave = new Button("Зберегти");
-            bSave.Clicked += (object? sender, EventArgs args) => { Save(); };
-            hBox.PackStart(bSave, false, false, 10);
-
-            PackStart(hBox, false, false, 10);
-
-            HPaned hPaned = new HPaned() { BorderWidth = 5, Position = 500 };
-
-            CreatePack1(hPaned);
-            CreatePack2(hPaned);
-
-            PackStart(hPaned, false, false, 5);
-
-            ShowAll();
-        }
-
-        void CreatePack1(HPaned hPaned)
+        protected override void CreatePack1()
         {
             VBox vBox = new VBox();
+            HPanedTop.Pack1(vBox, false, false);
 
             //Код
             HBox hBoxCode = new HBox() { Halign = Align.End };
@@ -80,22 +54,11 @@ namespace StorageAndTrade
 
             hBoxName.PackStart(new Label("Назва:"), false, false, 5);
             hBoxName.PackStart(Назва, false, false, 5);
-
-            hPaned.Pack1(vBox, false, false);
-        }
-
-        void CreatePack2(HPaned hPaned)
-        {
-            VBox vBox = new VBox();
-
-
-
-            hPaned.Pack2(vBox, false, false);
         }
 
         #region Присвоєння / зчитування значень
 
-        public void SetValue()
+        public override void SetValue()
         {
             if (IsNew)
                 ВидиЗапасів_Objest.New();
@@ -104,50 +67,26 @@ namespace StorageAndTrade
             Назва.Text = ВидиЗапасів_Objest.Назва;
         }
 
-        void GetValue()
+        protected override void GetValue()
         {
+            UnigueID = ВидиЗапасів_Objest.UnigueID;
+            Caption = Назва.Text;
+
             ВидиЗапасів_Objest.Код = Код.Text;
             ВидиЗапасів_Objest.Назва = Назва.Text;
         }
 
         #endregion
 
-        void Save(bool closePage = false)
+        protected override void Save()
         {
-            GetValue();
-
-            bool isSave = false;
-
             try
             {
-                isSave = ВидиЗапасів_Objest.Save();
+                ВидиЗапасів_Objest.Save();
             }
             catch (Exception ex)
             {
-                ФункціїДляПовідомлень.ДодатиПовідомленняПроПомилку(DateTime.Now, "Запис",
-                    ВидиЗапасів_Objest.UnigueID.UGuid, "Довідники", ВидиЗапасів_Objest.Назва, ex.Message);
-
-                ФункціїДляПовідомлень.ВідкритиТермінал();
-            }
-
-            if (!isSave)
-            {
-                Message.Info(Program.GeneralForm, "Не вдалось записати");
-                return;
-            }
-
-            if (closePage)
-                Program.GeneralForm?.CloseCurrentPageNotebook();
-            else
-                Program.GeneralForm?.RenameCurrentPageNotebook($"{ВидиЗапасів_Objest.Назва}");
-
-            if (CallBack_OnSelectPointer != null)
-                CallBack_OnSelectPointer.Invoke(ВидиЗапасів_Objest.GetDirectoryPointer());
-
-            if (PageList != null)
-            {
-                PageList.SelectPointerItem = ВидиЗапасів_Objest.GetDirectoryPointer();
-                PageList.LoadRecords();
+                MsgError(ex);
             }
         }
     }

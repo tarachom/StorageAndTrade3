@@ -23,21 +23,13 @@ limitations under the License.
 
 using Gtk;
 
-using AccountingSoftware;
-
-using StorageAndTrade_1_0;
 using StorageAndTrade_1_0.Довідники;
-using Перелічення = StorageAndTrade_1_0.Перелічення;
+using StorageAndTrade_1_0.Перелічення;
 
 namespace StorageAndTrade
 {
-    class СтаттяРухуКоштів_Елемент : VBox
+    class СтаттяРухуКоштів_Елемент : ДовідникЕлемент
     {
-        public СтаттяРухуКоштів? PageList { get; set; }
-        public System.Action<СтаттяРухуКоштів_Pointer>? CallBack_OnSelectPointer { get; set; }
-
-        public bool IsNew { get; set; } = true;
-
         public СтаттяРухуКоштів_Objest СтаттяРухуКоштів_Objest { get; set; } = new СтаттяРухуКоштів_Objest();
 
         #region Fields
@@ -50,33 +42,12 @@ namespace StorageAndTrade
 
         #endregion
 
-        public СтаттяРухуКоштів_Елемент() : base()
-        {
-            HBox hBox = new HBox();
+        public СтаттяРухуКоштів_Елемент() : base() { }
 
-            Button bSaveAndClose = new Button("Зберегти та закрити");
-            bSaveAndClose.Clicked += (object? sender, EventArgs args) => { Save(true); };
-            hBox.PackStart(bSaveAndClose, false, false, 10);
-
-            Button bSave = new Button("Зберегти");
-            bSave.Clicked += (object? sender, EventArgs args) => { Save(); };
-            hBox.PackStart(bSave, false, false, 10);
-
-            PackStart(hBox, false, false, 10);
-
-            HPaned hPaned = new HPaned() { BorderWidth = 5, Position = 500 };
-
-            CreatePack1(hPaned);
-            CreatePack2(hPaned);
-
-            PackStart(hPaned, false, false, 5);
-
-            ShowAll();
-        }
-
-        void CreatePack1(HPaned hPaned)
+        protected override void CreatePack1()
         {
             VBox vBox = new VBox();
+            HPanedTop.Pack1(vBox, false, false);
 
             //Код
             HBox hBoxCode = new HBox() { Halign = Align.End };
@@ -103,13 +74,11 @@ namespace StorageAndTrade
             HBox hBoxVidRuhu = new HBox() { Halign = Align.End };
             vBox.PackStart(hBoxVidRuhu, false, false, 5);
 
-            foreach (ConfigurationEnumField field in Config.Kernel!.Conf.Enums["ВидиРухуКоштів"].Fields.Values)
-                ВидРухуКоштів.Append(field.Name, field.Desc);
+            foreach (var field in ПсевдонімиПерелічення.ВидиРухуКоштів_List())
+                ВидРухуКоштів.Append(field.Value.ToString(), field.Name);
 
             hBoxVidRuhu.PackStart(new Label("Вид руху коштів:"), false, false, 5);
             hBoxVidRuhu.PackStart(ВидРухуКоштів, false, false, 5);
-
-            hPaned.Pack1(vBox, false, false);
 
             //Опис
             HBox hBoxOpys = new HBox() { Halign = Align.End };
@@ -124,23 +93,14 @@ namespace StorageAndTrade
             hBoxOpys.PackStart(scrollTextViewOpys, false, false, 5);
         }
 
-        void CreatePack2(HPaned hPaned)
-        {
-            VBox vBox = new VBox();
-
-
-
-            hPaned.Pack2(vBox, false, false);
-        }
-
         #region Присвоєння / зчитування значень
 
-        public void SetValue()
+        public override void SetValue()
         {
             if (IsNew)
             {
                 СтаттяРухуКоштів_Objest.New();
-                СтаттяРухуКоштів_Objest.ВидРухуКоштів = Перелічення.ВидиРухуКоштів.ОплатаОборотнихАктивів;
+                СтаттяРухуКоштів_Objest.ВидРухуКоштів = ВидиРухуКоштів.ОплатаОборотнихАктивів;
             }
 
             Код.Text = СтаттяРухуКоштів_Objest.Код;
@@ -150,53 +110,29 @@ namespace StorageAndTrade
             Опис.Buffer.Text = СтаттяРухуКоштів_Objest.Опис;
         }
 
-        void GetValue()
+        protected override void GetValue()
         {
+            UnigueID = СтаттяРухуКоштів_Objest.UnigueID;
+            Caption = Назва.Text;
+
             СтаттяРухуКоштів_Objest.Код = Код.Text;
             СтаттяРухуКоштів_Objest.Назва = Назва.Text;
             СтаттяРухуКоштів_Objest.КореспондуючийРахунок = КореспондуючийРахунок.Text;
-            СтаттяРухуКоштів_Objest.ВидРухуКоштів = Enum.Parse<Перелічення.ВидиРухуКоштів>(ВидРухуКоштів.ActiveId);
+            СтаттяРухуКоштів_Objest.ВидРухуКоштів = Enum.Parse<ВидиРухуКоштів>(ВидРухуКоштів.ActiveId);
             СтаттяРухуКоштів_Objest.Опис = Опис.Buffer.Text;
         }
 
         #endregion
 
-        void Save(bool closePage = false)
+        protected override void Save()
         {
-            GetValue();
-
-            bool isSave = false;
-
             try
             {
-                isSave = СтаттяРухуКоштів_Objest.Save();
+                СтаттяРухуКоштів_Objest.Save();
             }
             catch (Exception ex)
             {
-                ФункціїДляПовідомлень.ДодатиПовідомленняПроПомилку(DateTime.Now, "Запис",
-                    СтаттяРухуКоштів_Objest.UnigueID.UGuid, "Довідники", СтаттяРухуКоштів_Objest.Назва, ex.Message);
-
-                ФункціїДляПовідомлень.ВідкритиТермінал();
-            }
-
-            if (!isSave)
-            {
-                Message.Info(Program.GeneralForm, "Не вдалось записати");
-                return;
-            }
-
-            if (closePage)
-                Program.GeneralForm?.CloseCurrentPageNotebook();
-            else
-                Program.GeneralForm?.RenameCurrentPageNotebook($"{СтаттяРухуКоштів_Objest.Назва}");
-
-            if (CallBack_OnSelectPointer != null)
-                CallBack_OnSelectPointer.Invoke(СтаттяРухуКоштів_Objest.GetDirectoryPointer());
-
-            if (PageList != null)
-            {
-                PageList.SelectPointerItem = СтаттяРухуКоштів_Objest.GetDirectoryPointer();
-                PageList.LoadRecords();
+                MsgError(ex);
             }
         }
     }

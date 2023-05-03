@@ -23,21 +23,13 @@ limitations under the License.
 
 using Gtk;
 
-using AccountingSoftware;
-
-using StorageAndTrade_1_0;
 using StorageAndTrade_1_0.Довідники;
-using Перелічення = StorageAndTrade_1_0.Перелічення;
+using StorageAndTrade_1_0.Перелічення;
 
 namespace StorageAndTrade
 {
-    class ПартіяТоварівКомпозит_Елемент : VBox
+    class ПартіяТоварівКомпозит_Елемент : ДовідникЕлемент
     {
-        public ПартіяТоварівКомпозит? PageList { get; set; }
-        public System.Action<ПартіяТоварівКомпозит_Pointer>? CallBack_OnSelectPointer { get; set; }
-
-        public bool IsNew { get; set; } = true;
-
         public ПартіяТоварівКомпозит_Objest ПартіяТоварівКомпозит_Objest { get; set; } = new ПартіяТоварівКомпозит_Objest();
 
         Entry Назва = new Entry() { WidthRequest = 500 };
@@ -47,33 +39,21 @@ namespace StorageAndTrade
 
         public ПартіяТоварівКомпозит_Елемент() : base()
         {
-            HBox hBox = new HBox();
-
-            Button bSaveAndClose = new Button("Зберегти та закрити");
-            bSaveAndClose.Clicked += (object? sender, EventArgs args) => { Save(true); };
-            hBox.PackStart(bSaveAndClose, false, false, 10);
-
-            Button bSave = new Button("Зберегти");
-            bSave.Clicked += (object? sender, EventArgs args) => { Save(); };
-            hBox.PackStart(bSave, false, false, 10);
-
-            PackStart(hBox, false, false, 10);
-
-            HPaned hPaned = new HPaned() { BorderWidth = 5, Position = 500 };
-
             FillComboBoxes();
-
-            CreatePack1(hPaned);
-            CreatePack2(hPaned);
-
-            PackStart(hPaned, false, false, 5);
-
-            ShowAll();
         }
 
-        void CreatePack1(HPaned hPaned)
+        void FillComboBoxes()
+        {
+            foreach (var field in ПсевдонімиПерелічення.ТипДокументуПартіяТоварівКомпозит_List())
+                ТипДокументу.Append(field.Value.ToString(), field.Name);
+
+            ТипДокументу.ActiveId = ТипДокументуПартіяТоварівКомпозит.ПоступленняТоварівТаПослуг.ToString();
+        }
+
+        protected override void CreatePack1()
         {
             VBox vBox = new VBox();
+            HPanedTop.Pack1(vBox, false, false);
 
             //Назва
             HBox hBoxName = new HBox() { Halign = Align.End };
@@ -100,37 +80,22 @@ namespace StorageAndTrade
             vBox.PackStart(hBoxВведенняЗалишків, false, false, 5);
 
             hBoxВведенняЗалишків.PackStart(ВведенняЗалишків, false, false, 5);
-
-            hPaned.Pack1(vBox, false, false);
         }
 
-        void CreatePack2(HPaned hPaned)
+        protected override void CreatePack2()
         {
             VBox vBox = new VBox();
+            HPanedTop.Pack2(vBox, false, false);
 
             HBox hBoxInfo = new HBox() { Halign = Align.Start };
             vBox.PackStart(hBoxInfo, false, false, 5);
 
             hBoxInfo.PackStart(new Label("Редагувати дозволено тільки назву"), false, false, 5);
-
-
-            hPaned.Pack2(vBox, false, false);
-        }
-
-        void FillComboBoxes()
-        {
-            if (Config.Kernel != null)
-            {
-                foreach (ConfigurationEnumField field in Config.Kernel.Conf.Enums["ТипДокументуПартіяТоварівКомпозит"].Fields.Values)
-                    ТипДокументу.Append(field.Name, field.Desc);
-
-                ТипДокументу.ActiveId = Перелічення.ТипДокументуПартіяТоварівКомпозит.ПоступленняТоварівТаПослуг.ToString();
-            }
         }
 
         #region Присвоєння / зчитування значень
 
-        public void SetValue()
+        public override void SetValue()
         {
             if (IsNew)
                 ПартіяТоварівКомпозит_Objest.New();
@@ -141,8 +106,11 @@ namespace StorageAndTrade
             ВведенняЗалишків.Pointer = ПартіяТоварівКомпозит_Objest.ВведенняЗалишків;
         }
 
-        void GetValue()
+        protected override void GetValue()
         {
+            UnigueID = ПартіяТоварівКомпозит_Objest.UnigueID;
+            Caption = Назва.Text;
+
             ПартіяТоварівКомпозит_Objest.Назва = Назва.Text;
 
             /*
@@ -157,42 +125,15 @@ namespace StorageAndTrade
 
         #endregion
 
-        void Save(bool closePage = false)
+        protected override void Save()
         {
-            GetValue();
-
-            bool isSave = false;
-
             try
             {
-                isSave = ПартіяТоварівКомпозит_Objest.Save();
+                ПартіяТоварівКомпозит_Objest.Save();
             }
             catch (Exception ex)
             {
-                ФункціїДляПовідомлень.ДодатиПовідомленняПроПомилку(DateTime.Now, "Запис",
-                    ПартіяТоварівКомпозит_Objest.UnigueID.UGuid, "Довідники", ПартіяТоварівКомпозит_Objest.Назва, ex.Message);
-
-                ФункціїДляПовідомлень.ВідкритиТермінал();
-            }
-
-            if (!isSave)
-            {
-                Message.Info(Program.GeneralForm, "Не вдалось записати");
-                return;
-            }
-
-            if (closePage)
-                Program.GeneralForm?.CloseCurrentPageNotebook();
-            else
-                Program.GeneralForm?.RenameCurrentPageNotebook($"{ПартіяТоварівКомпозит_Objest.Назва}");
-
-            if (CallBack_OnSelectPointer != null)
-                CallBack_OnSelectPointer.Invoke(ПартіяТоварівКомпозит_Objest.GetDirectoryPointer());
-
-            if (PageList != null)
-            {
-                PageList.SelectPointerItem = ПартіяТоварівКомпозит_Objest.GetDirectoryPointer();
-                PageList.LoadRecords();
+                MsgError(ex);
             }
         }
     }

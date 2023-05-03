@@ -34,8 +34,8 @@ namespace StorageAndTrade
     class ТипорозміриКомірок_ШвидкийВибір : VBox
     {
         public Popover? PopoverParent { get; set; }
-        public ТипорозміриКомірок_Pointer? DirectoryPointerItem { get; set; }
-        public System.Action<ТипорозміриКомірок_Pointer>? CallBack_OnSelectPointer { get; set; }
+        public UnigueID? DirectoryPointerItem { get; set; }
+        public System.Action<UnigueID>? CallBack_OnSelectPointer { get; set; }
 
         TreeView TreeViewGrid;
         SearchControl2 ПошукПовнотекстовий = new SearchControl2();
@@ -91,7 +91,7 @@ namespace StorageAndTrade
                 linkClear.Clicked += (object? sender, EventArgs args) =>
                 {
                     if (CallBack_OnSelectPointer != null)
-                        CallBack_OnSelectPointer.Invoke(new ТипорозміриКомірок_Pointer());
+                        CallBack_OnSelectPointer.Invoke(new UnigueID());
 
                     if (PopoverParent != null)
                         PopoverParent.Hide();
@@ -159,7 +159,7 @@ namespace StorageAndTrade
 
                 UnigueID unigueID = new UnigueID((string)TreeViewGrid.Model.GetValue(iter, 1));
 
-                DirectoryPointerItem = new ТипорозміриКомірок_Pointer(unigueID);
+                DirectoryPointerItem = unigueID;
             }
         }
 
@@ -174,7 +174,7 @@ namespace StorageAndTrade
                     string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
 
                     if (CallBack_OnSelectPointer != null)
-                        CallBack_OnSelectPointer.Invoke(new ТипорозміриКомірок_Pointer(new UnigueID(uid)));
+                        CallBack_OnSelectPointer.Invoke(new UnigueID(uid));
 
                     if (PopoverParent != null)
                         PopoverParent.Hide();

@@ -25,7 +25,7 @@ using Gtk;
 
 namespace StorageAndTrade
 {
-    abstract class PointerControl : HBox
+    public abstract class PointerControl : HBox
     {
         Label labelCaption = new Label();
         Entry entryText = new Entry() { IsEditable = false };

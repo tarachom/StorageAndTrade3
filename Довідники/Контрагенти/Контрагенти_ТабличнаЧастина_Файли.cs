@@ -129,10 +129,10 @@ namespace StorageAndTrade
                                 {
                                     Файли page = new Файли();
 
-                                    page.DirectoryPointerItem = запис.Файл;
-                                    page.CallBack_OnSelectPointer = (Файли_Pointer selectPointer) =>
+                                    page.DirectoryPointerItem = запис.Файл.UnigueID;
+                                    page.CallBack_OnSelectPointer = (UnigueID selectPointer) =>
                                     {
-                                        запис.Файл = selectPointer;
+                                        запис.Файл = new Файли_Pointer(selectPointer);
                                         Запис.ПісляЗміни_Файл(запис);
                                         Store.SetValues(iter, запис.ToArray());
                                     };

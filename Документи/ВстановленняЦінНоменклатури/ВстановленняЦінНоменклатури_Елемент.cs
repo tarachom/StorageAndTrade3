@@ -292,7 +292,7 @@ namespace StorageAndTrade
         {
             if (PageList != null)
             {
-                PageList.SelectPointerItem = ВстановленняЦінНоменклатури_Objest.GetDocumentPointer();
+                PageList.SelectPointerItem = ВстановленняЦінНоменклатури_Objest.UnigueID;
                 PageList.LoadRecords();
             }
         }

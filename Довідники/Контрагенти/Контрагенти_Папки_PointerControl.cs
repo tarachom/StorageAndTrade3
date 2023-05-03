@@ -21,6 +21,7 @@ limitations under the License.
 Сайт:     accounting.org.ua
 */
 
+using AccountingSoftware;
 using StorageAndTrade_1_0.Довідники;
 
 namespace StorageAndTrade
@@ -58,11 +59,11 @@ namespace StorageAndTrade
         {
             Контрагенти_Папки_Дерево page = new Контрагенти_Папки_Дерево();
 
-            page.DirectoryPointerItem = Pointer;
+            page.DirectoryPointerItem = Pointer.UnigueID;
             page.UidOpenFolder = UidOpenFolder;
-            page.CallBack_OnSelectPointer = (Контрагенти_Папки_Pointer selectPointer) =>
+            page.CallBack_OnSelectPointer = (UnigueID selectPointer) =>
             {
-                Pointer = selectPointer;
+                Pointer = new Контрагенти_Папки_Pointer(selectPointer);
             };
 
             Program.GeneralForm?.CreateNotebookPage($"Вибір - {Контрагенти_Папки_Const.FULLNAME}", () => { return page; }, true);

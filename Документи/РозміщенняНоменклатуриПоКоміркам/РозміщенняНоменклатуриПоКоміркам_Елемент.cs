@@ -297,7 +297,7 @@ namespace StorageAndTrade
         {
             if (PageList != null)
             {
-                PageList.SelectPointerItem = РозміщенняНоменклатуриПоКоміркам_Objest.GetDocumentPointer();
+                PageList.SelectPointerItem = РозміщенняНоменклатуриПоКоміркам_Objest.UnigueID;
                 PageList.LoadRecords();
             }
         }

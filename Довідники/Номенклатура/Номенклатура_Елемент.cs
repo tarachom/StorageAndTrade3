@@ -25,19 +25,14 @@ using Gtk;
 
 using StorageAndTrade_1_0.Константи;
 using StorageAndTrade_1_0.Довідники;
-using Перелічення = StorageAndTrade_1_0.Перелічення;
+using StorageAndTrade_1_0.Перелічення;
 
 namespace StorageAndTrade
 {
-    class Номенклатура_Елемент : VBox
+    class Номенклатура_Елемент : ДовідникЕлемент
     {
-        public Номенклатура? PageList { get; set; }
-        public System.Action<Номенклатура_Pointer>? CallBack_OnSelectPointer { get; set; }
-
-        public bool IsNew { get; set; } = true;
-
-        public Номенклатура_Папки_Pointer РодичДляНового { get; set; } = new Номенклатура_Папки_Pointer();
         public Номенклатура_Objest Номенклатура_Objest { get; set; } = new Номенклатура_Objest();
+        public Номенклатура_Папки_Pointer РодичДляНового { get; set; } = new Номенклатура_Папки_Pointer();
 
         #region Fields
 
@@ -56,33 +51,12 @@ namespace StorageAndTrade
 
         #endregion
 
-        public Номенклатура_Елемент() : base()
-        {
-            HBox hBox = new HBox();
+        public Номенклатура_Елемент() : base() { }
 
-            Button bSaveAndClose = new Button("Зберегти та закрити");
-            bSaveAndClose.Clicked += (object? sender, EventArgs args) => { Save(true); };
-            hBox.PackStart(bSaveAndClose, false, false, 10);
-
-            Button bSave = new Button("Зберегти");
-            bSave.Clicked += (object? sender, EventArgs args) => { Save(); };
-            hBox.PackStart(bSave, false, false, 10);
-
-            PackStart(hBox, false, false, 10);
-
-            HPaned hPaned = new HPaned() { BorderWidth = 5, Position = 500 };
-
-            CreatePack1(hPaned);
-            CreatePack2(hPaned);
-
-            PackStart(hPaned, false, false, 5);
-
-            ShowAll();
-        }
-
-        void CreatePack1(HPaned hPaned)
+        protected override void CreatePack1()
         {
             VBox vBox = new VBox();
+            HPanedTop.Pack1(vBox, false, false);
 
             //Код
             HBox hBoxCode = new HBox() { Halign = Align.End };
@@ -127,7 +101,7 @@ namespace StorageAndTrade
             HBox hBoxType = new HBox() { Halign = Align.End };
             vBox.PackStart(hBoxType, false, false, 5);
 
-            foreach (var field in Перелічення.ПсевдонімиПерелічення.ТипиНоменклатури_Array())
+            foreach (var field in ПсевдонімиПерелічення.ТипиНоменклатури_List())
                 ТипНоменклатури.Append(field.Value.ToString(), field.Name);
 
             hBoxType.PackStart(new Label("Тип:"), false, false, 5);
@@ -180,27 +154,17 @@ namespace StorageAndTrade
             vBox.PackStart(hBoxFiles, false, false, 5);
 
             hBoxFiles.PackStart(Файли, true, true, 5);
-
-            hPaned.Pack1(vBox, false, false);
-        }
-
-        void CreatePack2(HPaned hPaned)
-        {
-            VBox vBox = new VBox();
-
-
-            hPaned.Pack2(vBox, false, false);
         }
 
         #region Присвоєння / зчитування значень
 
-        public void SetValue()
+        public override void SetValue()
         {
             if (IsNew)
             {
                 Номенклатура_Objest.New();
                 Номенклатура_Objest.Папка = РодичДляНового;
-                Номенклатура_Objest.ТипНоменклатури = Перелічення.ТипиНоменклатури.Товар;
+                Номенклатура_Objest.ТипНоменклатури = ТипиНоменклатури.Товар;
                 Номенклатура_Objest.ОдиницяВиміру = ЗначенняЗаЗамовчуванням.ОсновнаОдиницяПакування_Const;
                 Номенклатура_Objest.ВидНоменклатури = ЗначенняЗаЗамовчуванням.ОсновнийВидНоменклатури_Const;
             }
@@ -218,18 +182,21 @@ namespace StorageAndTrade
             ОсновнаКартинкаФайл.Pointer = Номенклатура_Objest.ОсновнаКартинкаФайл;
 
             if (ТипНоменклатури.Active == -1)
-                ТипНоменклатури.ActiveId = Перелічення.ТипиНоменклатури.Товар.ToString();
+                ТипНоменклатури.ActiveId = ТипиНоменклатури.Товар.ToString();
 
             Файли.Номенклатура_Objest = Номенклатура_Objest;
             Файли.LoadRecords();
         }
 
-        void GetValue()
+        protected override void GetValue()
         {
+            UnigueID = Номенклатура_Objest.UnigueID;
+            Caption = Назва.Text;
+
             Номенклатура_Objest.Код = Код.Text;
             Номенклатура_Objest.Назва = Назва.Text;
             Номенклатура_Objest.Артикул = Артикул.Text;
-            Номенклатура_Objest.ТипНоменклатури = Enum.Parse<Перелічення.ТипиНоменклатури>(ТипНоменклатури.ActiveId);
+            Номенклатура_Objest.ТипНоменклатури = Enum.Parse<ТипиНоменклатури>(ТипНоменклатури.ActiveId);
             Номенклатура_Objest.ВидНоменклатури = ВидНоменклатури.Pointer;
             Номенклатура_Objest.Папка = Родич.Pointer;
             Номенклатура_Objest.НазваПовна = НазваПовна.Buffer.Text;
@@ -241,45 +208,18 @@ namespace StorageAndTrade
 
         #endregion
 
-        void Save(bool closePage = false)
+        protected override void Save()
         {
-            GetValue();
-
-            bool isSave = false;
-
             try
             {
-                isSave = Номенклатура_Objest.Save();
+                Номенклатура_Objest.Save();
             }
             catch (Exception ex)
             {
-                ФункціїДляПовідомлень.ДодатиПовідомленняПроПомилку(DateTime.Now, "Запис",
-                    Номенклатура_Objest.UnigueID.UGuid, "Довідники", Номенклатура_Objest.Назва, ex.Message);
-
-                ФункціїДляПовідомлень.ВідкритиТермінал();
-            }
-
-            if (!isSave)
-            {
-                Message.Info(Program.GeneralForm, "Не вдалось записати");
-                return;
+                MsgError(ex);
             }
 
             Файли.SaveRecords();
-
-            if (closePage)
-                Program.GeneralForm?.CloseCurrentPageNotebook();
-            else
-                Program.GeneralForm?.RenameCurrentPageNotebook($"{Номенклатура_Objest.Назва}");
-
-            if (CallBack_OnSelectPointer != null)
-                CallBack_OnSelectPointer.Invoke(Номенклатура_Objest.GetDirectoryPointer());
-
-            if (PageList != null)
-            {
-                PageList.SelectPointerItem = Номенклатура_Objest.GetDirectoryPointer();
-                PageList.LoadRecords();
-            }
         }
     }
 }

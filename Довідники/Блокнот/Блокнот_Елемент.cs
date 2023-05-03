@@ -27,13 +27,8 @@ using StorageAndTrade_1_0.Довідники;
 
 namespace StorageAndTrade
 {
-    class Блокнот_Елемент : VBox
+    class Блокнот_Елемент : ДовідникЕлемент
     {
-        public Блокнот? PageList { get; set; }
-        public System.Action<Блокнот_Pointer>? CallBack_OnSelectPointer { get; set; }
-
-        public bool IsNew { get; set; } = true;
-
         public Блокнот_Objest Блокнот_Objest { get; set; } = new Блокнот_Objest();
 
         Entry Код = new Entry() { WidthRequest = 100 };
@@ -42,34 +37,12 @@ namespace StorageAndTrade
         TextView Опис = new TextView();
         Entry Лінк = new Entry() { WidthRequest = 800 };
 
-        public Блокнот_Елемент() : base()
-        {
-            HBox hBox = new HBox();
+        public Блокнот_Елемент() : base() { }
 
-            Button bSaveAndClose = new Button("Зберегти та закрити");
-            bSaveAndClose.Clicked += (object? sender, EventArgs args) => { Save(true); };
-            hBox.PackStart(bSaveAndClose, false, false, 10);
-
-            Button bSave = new Button("Зберегти");
-            bSave.Clicked += (object? sender, EventArgs args) => { Save(); };
-            hBox.PackStart(bSave, false, false, 10);
-
-            PackStart(hBox, false, false, 10);
-
-            HPaned hPaned = new HPaned() { BorderWidth = 5, Position = 800 };
-
-            CreatePack1(hPaned);
-            CreatePack2(hPaned);
-
-            PackStart(hPaned, false, false, 5);
-
-            ShowAll();
-        }
-
-        void CreatePack1(HPaned hPaned)
+        protected override void CreatePack1()
         {
             VBox vBox = new VBox();
-            hPaned.Pack1(vBox, false, false);
+            HPanedTop.Pack1(vBox, false, false);
 
             //Код + ДатаЗапису
             HBox hBoxCode = new HBox() { Halign = Align.End };
@@ -106,18 +79,9 @@ namespace StorageAndTrade
             hBoxLink.PackStart(Лінк, false, false, 5);
         }
 
-        void CreatePack2(HPaned hPaned)
-        {
-            VBox vBox = new VBox();
-
-
-
-            hPaned.Pack2(vBox, false, false);
-        }
-
         #region Присвоєння / зчитування значень
 
-        public void SetValue()
+        public override void SetValue()
         {
             if (IsNew)
                 Блокнот_Objest.New();
@@ -129,8 +93,11 @@ namespace StorageAndTrade
             Лінк.Text = Блокнот_Objest.Лінк;
         }
 
-        void GetValue()
+        protected override void GetValue()
         {
+            UnigueID = Блокнот_Objest.UnigueID;
+            Caption = Назва.Text;
+
             Блокнот_Objest.Код = Код.Text;
             Блокнот_Objest.Назва = Назва.Text;
             Блокнот_Objest.ДатаЗапису = ДатаЗапису.Value;
@@ -140,42 +107,15 @@ namespace StorageAndTrade
 
         #endregion
 
-        void Save(bool closePage = false)
+        protected override void Save()
         {
-            GetValue();
-
-            bool isSave = false;
-
             try
             {
-                isSave = Блокнот_Objest.Save();
+                Блокнот_Objest.Save();
             }
             catch (Exception ex)
             {
-                ФункціїДляПовідомлень.ДодатиПовідомленняПроПомилку(DateTime.Now, "Запис",
-                    Блокнот_Objest.UnigueID.UGuid, "Довідники", Блокнот_Objest.Назва, ex.Message);
-
-                ФункціїДляПовідомлень.ВідкритиТермінал();
-            }
-
-            if (!isSave)
-            {
-                Message.Info(Program.GeneralForm, "Не вдалось записати");
-                return;
-            }
-
-            if (closePage)
-                Program.GeneralForm?.CloseCurrentPageNotebook();
-            else
-                Program.GeneralForm?.RenameCurrentPageNotebook($"{Блокнот_Objest.Назва}");
-
-            if (CallBack_OnSelectPointer != null)
-                CallBack_OnSelectPointer.Invoke(Блокнот_Objest.GetDirectoryPointer());
-
-            if (PageList != null)
-            {
-                PageList.SelectPointerItem = Блокнот_Objest.GetDirectoryPointer();
-                PageList.LoadRecords();
+                MsgError(ex);
             }
         }
     }

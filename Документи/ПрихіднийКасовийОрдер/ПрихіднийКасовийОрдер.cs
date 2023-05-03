@@ -27,202 +27,21 @@ using AccountingSoftware;
 
 using ТабличніСписки = StorageAndTrade_1_0.Документи.ТабличніСписки;
 using StorageAndTrade_1_0.Документи;
-using Константи = StorageAndTrade_1_0.Константи;
-using Перелічення = StorageAndTrade_1_0.Перелічення;
+using StorageAndTrade_1_0.Перелічення;
 
 namespace StorageAndTrade
 {
-    class ПрихіднийКасовийОрдер : VBox
+    public class ПрихіднийКасовийОрдер : ДокументЖурнал
     {
-        public ПрихіднийКасовийОрдер_Pointer? SelectPointerItem { get; set; }
-        public ПрихіднийКасовийОрдер_Pointer? DocumentPointerItem { get; set; }
-        public System.Action<ПрихіднийКасовийОрдер_Pointer>? CallBack_OnSelectPointer { get; set; }
-        public Перелічення.ТипПеріодуДляЖурналівДокументів PeriodWhere { get; set; } = 0;
-
-        TreeView TreeViewGrid;
-        ComboBoxText ComboBoxPeriodWhere = new ComboBoxText();
-        SearchControl2 ПошукПовнотекстовий = new SearchControl2();
-
-        public ПрихіднийКасовийОрдер(bool IsSelectPointer = false) : base()
+        public ПрихіднийКасовийОрдер() : base()
         {
-            BorderWidth = 0;
-
-            //Кнопки
-            HBox hBoxButton = new HBox();
-            PackStart(hBoxButton, false, false, 10);
-
-            //Як форма відкрита для вибору
-            if (IsSelectPointer)
-            {
-                Button bEmptyPointer = new Button("Вибрати пустий елемент");
-                bEmptyPointer.Clicked += (object? sender, EventArgs args) =>
-                {
-                    if (CallBack_OnSelectPointer != null)
-                        CallBack_OnSelectPointer.Invoke(new ПрихіднийКасовийОрдер_Pointer());
-
-                    Program.GeneralForm?.CloseCurrentPageNotebook();
-                };
-
-                hBoxButton.PackStart(bEmptyPointer, false, false, 10);
-            }
-
-            //Відбір по періоду
-            hBoxButton.PackStart(new Label("Період:"), false, false, 5);
-
-            ComboBoxPeriodWhere = ТабличніСписки.Інтерфейс.СписокВідбірПоПеріоду();
-            ComboBoxPeriodWhere.Changed += OnComboBoxPeriodWhereChanged;
-
-            hBoxButton.PackStart(ComboBoxPeriodWhere, false, false, 0);
-
-            //Пошук 2
-            hBoxButton.PackStart(ПошукПовнотекстовий, false, false, 2);
-            ПошукПовнотекстовий.Select = LoadRecords_OnSearch;
-            ПошукПовнотекстовий.Clear = () => { OnComboBoxPeriodWhereChanged(null, new EventArgs()); };
-
-            CreateToolbar();
-
-            ScrolledWindow scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In };
-            scrollTree.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
-
-            TreeViewGrid = new TreeView(ТабличніСписки.ПрихіднийКасовийОрдер_Записи.Store);
+            TreeViewGrid.Model = ТабличніСписки.ПрихіднийКасовийОрдер_Записи.Store;
             ТабличніСписки.ПрихіднийКасовийОрдер_Записи.AddColumns(TreeViewGrid);
-
-            TreeViewGrid.Selection.Mode = SelectionMode.Multiple;
-            TreeViewGrid.ActivateOnSingleClick = true;
-            TreeViewGrid.RowActivated += OnRowActivated;
-            TreeViewGrid.ButtonPressEvent += OnButtonPressEvent;
-            TreeViewGrid.ButtonReleaseEvent += OnButtonReleaseEvent;
-            TreeViewGrid.KeyReleaseEvent += OnKeyReleaseEvent;
-            scrollTree.Add(TreeViewGrid);
-
-            PackStart(scrollTree, true, true, 0);
-
-            ShowAll();
         }
 
-        #region Toolbar & Menu
+        #region Override
 
-        void CreateToolbar()
-        {
-            Toolbar toolbar = new Toolbar();
-            PackStart(toolbar, false, false, 0);
-
-            ToolButton addButton = new ToolButton(Stock.Add) { TooltipText = "Додати" };
-            addButton.Clicked += OnAddClick;
-            toolbar.Add(addButton);
-
-            ToolButton upButton = new ToolButton(Stock.Edit) { TooltipText = "Редагувати" };
-            upButton.Clicked += OnEditClick;
-            toolbar.Add(upButton);
-
-            ToolButton copyButton = new ToolButton(Stock.Copy) { TooltipText = "Копіювати" };
-            copyButton.Clicked += OnCopyClick;
-            toolbar.Add(copyButton);
-
-            ToolButton deleteButton = new ToolButton(Stock.Delete) { TooltipText = "Видалити" };
-            deleteButton.Clicked += OnDeleteClick;
-            toolbar.Add(deleteButton);
-
-            ToolButton refreshButton = new ToolButton(Stock.Refresh) { TooltipText = "Обновити" };
-            refreshButton.Clicked += OnRefreshClick;
-            toolbar.Add(refreshButton);
-
-            //Separator
-            ToolItem toolItemSeparator = new ToolItem();
-            toolItemSeparator.Add(new Separator(Orientation.Horizontal));
-            toolbar.Add(toolItemSeparator);
-
-            MenuToolButton provodkyButton = new MenuToolButton(Stock.Find) { Label = "Проводки", IsImportant = true };
-            provodkyButton.Clicked += OnReportSpendTheDocumentClick;
-            provodkyButton.Menu = ToolbarProvodkySubMenu();
-            toolbar.Add(provodkyButton);
-
-            MenuToolButton printingButton = new MenuToolButton(Stock.Print) { TooltipText = "Друк" };
-            printingButton.Clicked += OnPrintingClick;
-            printingButton.Menu = ToolbarPrintingSubMenu();
-            toolbar.Add(printingButton);
-
-            MenuToolButton exportButton = new MenuToolButton(Stock.Convert) { Label = "Експорт", IsImportant = true };
-            exportButton.Clicked += OnExportClick;
-            exportButton.Menu = ToolbarExportSubMenu();
-            toolbar.Add(exportButton);
-        }
-
-        Menu ToolbarProvodkySubMenu()
-        {
-            Menu Menu = new Menu();
-
-            MenuItem spendTheDocumentButton = new MenuItem("Провести документ");
-            spendTheDocumentButton.Activated += OnSpendTheDocument;
-            Menu.Append(spendTheDocumentButton);
-
-            MenuItem clearSpendButton = new MenuItem("Відмінити проведення");
-            clearSpendButton.Activated += OnClearSpend;
-            Menu.Append(clearSpendButton);
-
-            Menu.ShowAll();
-
-            return Menu;
-        }
-
-        Menu PopUpContextMenu()
-        {
-            Menu Menu = new Menu();
-
-            MenuItem spendTheDocumentButton = new MenuItem("Провести документ");
-            spendTheDocumentButton.Activated += OnSpendTheDocument;
-            Menu.Append(spendTheDocumentButton);
-
-            MenuItem clearSpendButton = new MenuItem("Відмінити проведення");
-            clearSpendButton.Activated += OnClearSpend;
-            Menu.Append(clearSpendButton);
-
-            MenuItem setDeletionLabel = new MenuItem("Помітка на видалення");
-            setDeletionLabel.Activated += OnDeleteClick;
-            Menu.Append(setDeletionLabel);
-
-            Menu.ShowAll();
-
-            return Menu;
-        }
-
-        Menu ToolbarPrintingSubMenu()
-        {
-            Menu Menu = new Menu();
-
-            MenuItem printButton = new MenuItem("Документ");
-            printButton.Activated += OnPrintingInvoiceClick;
-            Menu.Append(printButton);
-
-            Menu.ShowAll();
-
-            return Menu;
-        }
-
-        Menu ToolbarExportSubMenu()
-        {
-            Menu Menu = new Menu();
-
-            MenuItem exportXMLButton = new MenuItem("Формат XML");
-            exportXMLButton.Activated += OnExportXMLClick;
-            Menu.Append(exportXMLButton);
-
-            Menu.ShowAll();
-
-            return Menu;
-        }
-
-        #endregion
-
-        public void SetValue()
-        {
-            if (PeriodWhere != 0)
-                ComboBoxPeriodWhere.ActiveId = PeriodWhere.ToString();
-            else if ((int)Константи.ЖурналиДокументів.ОсновнийТипПеріоду_Const != 0)
-                ComboBoxPeriodWhere.ActiveId = Константи.ЖурналиДокументів.ОсновнийТипПеріоду_Const.ToString();
-        }
-
-        public void LoadRecords()
+        public override void LoadRecords()
         {
             ТабличніСписки.ПрихіднийКасовийОрдер_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.ПрихіднийКасовийОрдер_Записи.DocumentPointerItem = DocumentPointerItem;
@@ -237,7 +56,7 @@ namespace StorageAndTrade
             TreeViewGrid.GrabFocus();
         }
 
-        void LoadRecords_OnSearch(string searchText)
+        protected override void LoadRecords_OnSearch(string searchText)
         {
             searchText = searchText.ToLower().Trim();
 
@@ -260,248 +79,82 @@ namespace StorageAndTrade
             TreeViewGrid.GrabFocus();
         }
 
-        void OpenPageElement(bool IsNew, string uid = "")
+        protected override void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             if (IsNew)
             {
-                ПрихіднийКасовийОрдер_Елемент page = new ПрихіднийКасовийОрдер_Елемент
-                {
-                    PageList = this,
-                    IsNew = true
-                };
-
-                Program.GeneralForm?.CreateNotebookPage($"{ПрихіднийКасовийОрдер_Const.FULLNAME} *", () => { return page; }, true);
-
-                page.SetValue();
-            }
-            else
-            {
-                ПрихіднийКасовийОрдер_Objest ПрихіднийКасовийОрдер_Objest = new ПрихіднийКасовийОрдер_Objest();
-                if (ПрихіднийКасовийОрдер_Objest.Read(new UnigueID(uid)))
+                Program.GeneralForm?.CreateNotebookPage($"{ПрихіднийКасовийОрдер_Const.FULLNAME} *", () =>
                 {
                     ПрихіднийКасовийОрдер_Елемент page = new ПрихіднийКасовийОрдер_Елемент
                     {
                         PageList = this,
-                        IsNew = false,
-                        ПрихіднийКасовийОрдер_Objest = ПрихіднийКасовийОрдер_Objest,
+                        IsNew = true
                     };
 
-                    Program.GeneralForm?.CreateNotebookPage($"{ПрихіднийКасовийОрдер_Objest.Назва}", () => { return page; }, true);
-
                     page.SetValue();
+
+                    return page;
+                }, true);
+            }
+            else if (unigueID != null)
+            {
+                ПрихіднийКасовийОрдер_Objest ПрихіднийКасовийОрдер_Objest = new ПрихіднийКасовийОрдер_Objest();
+                if (ПрихіднийКасовийОрдер_Objest.Read(unigueID))
+                {
+                    Program.GeneralForm?.CreateNotebookPage($"{ПрихіднийКасовийОрдер_Objest.Назва}", () =>
+                    {
+                        ПрихіднийКасовийОрдер_Елемент page = new ПрихіднийКасовийОрдер_Елемент
+                        {
+                            PageList = this,
+                            IsNew = false,
+                            ПрихіднийКасовийОрдер_Objest = ПрихіднийКасовийОрдер_Objest,
+                        };
+
+                        page.SetValue();
+
+                        return page;
+                    }, true);
                 }
                 else
                     Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
             }
         }
 
-        #region  TreeView
-
-        void OnRowActivated(object sender, RowActivatedArgs args)
+        protected override void SetDeletionLabel(UnigueID unigueID)
         {
-            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
+            ПрихіднийКасовийОрдер_Objest ПрихіднийКасовийОрдер_Objest = new ПрихіднийКасовийОрдер_Objest();
+            if (ПрихіднийКасовийОрдер_Objest.Read(unigueID))
+                ПрихіднийКасовийОрдер_Objest.SetDeletionLabel(!ПрихіднийКасовийОрдер_Objest.DeletionLabel);
+            else
+                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+        }
+
+        protected override UnigueID? Copy(UnigueID unigueID)
+        {
+            ПрихіднийКасовийОрдер_Objest ПрихіднийКасовийОрдер_Objest = new ПрихіднийКасовийОрдер_Objest();
+            if (ПрихіднийКасовийОрдер_Objest.Read(unigueID))
             {
-                TreeIter iter;
-                TreeViewGrid.Model.GetIter(out iter, TreeViewGrid.Selection.GetSelectedRows()[0]);
+                ПрихіднийКасовийОрдер_Objest ПрихіднийКасовийОрдер_Objest_Новий = ПрихіднийКасовийОрдер_Objest.Copy(true);
+                ПрихіднийКасовийОрдер_Objest_Новий.Save();
 
-                UnigueID unigueID = new UnigueID((string)TreeViewGrid.Model.GetValue(iter, 1));
-
-                SelectPointerItem = new ПрихіднийКасовийОрдер_Pointer(unigueID);
+                return ПрихіднийКасовийОрдер_Objest_Новий.UnigueID;
+            }
+            else
+            {
+                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+                return null;
             }
         }
 
-        void OnButtonReleaseEvent(object? sender, ButtonReleaseEventArgs args)
+        protected override void PeriodWhereChanged()
         {
-            if (args.Event.Button == 3 && TreeViewGrid.Selection.CountSelectedRows() != 0)
-                PopUpContextMenu().Popup();
-        }
-
-        void OnButtonPressEvent(object? sender, ButtonPressEventArgs args)
-        {
-            if (args.Event.Type == Gdk.EventType.DoubleButtonPress && TreeViewGrid.Selection.CountSelectedRows() != 0)
-            {
-                TreeIter iter;
-
-                if (TreeViewGrid.Model.GetIter(out iter, TreeViewGrid.Selection.GetSelectedRows()[0]))
-                {
-                    string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
-
-                    if (DocumentPointerItem == null)
-                        OpenPageElement(false, uid);
-                    else
-                    {
-                        if (CallBack_OnSelectPointer != null)
-                            CallBack_OnSelectPointer.Invoke(new ПрихіднийКасовийОрдер_Pointer(new UnigueID(uid)));
-
-                        Program.GeneralForm?.CloseCurrentPageNotebook();
-                    }
-                }
-            }
-        }
-
-        void OnKeyReleaseEvent(object? sender, KeyReleaseEventArgs args)
-        {
-            switch (args.Event.Key)
-            {
-                case Gdk.Key.Insert:
-                    {
-                        OpenPageElement(true);
-                        break;
-                    }
-                case Gdk.Key.F5:
-                    {
-                        LoadRecords();
-                        break;
-                    }
-                case Gdk.Key.KP_Enter:
-                case Gdk.Key.Return:
-                    {
-                        OnEditClick(null, new EventArgs());
-                        break;
-                    }
-                case Gdk.Key.End:
-                case Gdk.Key.Home:
-                case Gdk.Key.Up:
-                case Gdk.Key.Down:
-                case Gdk.Key.Prior:
-                case Gdk.Key.Next:
-                    {
-                        OnRowActivated(TreeViewGrid, new RowActivatedArgs());
-                        break;
-                    }
-                case Gdk.Key.Delete:
-                    {
-                        OnDeleteClick(TreeViewGrid, new EventArgs());
-                        break;
-                    }
-            }
-        }
-
-        #endregion
-
-        #region ToolBar
-
-        void OnAddClick(object? sender, EventArgs args)
-        {
-            OpenPageElement(true);
-        }
-
-        void OnEditClick(object? sender, EventArgs args)
-        {
-            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
-            {
-                TreePath[] selectionRows = TreeViewGrid.Selection.GetSelectedRows();
-
-                foreach (TreePath itemPath in selectionRows)
-                {
-                    TreeIter iter;
-                    if (TreeViewGrid.Model.GetIter(out iter, itemPath))
-                    {
-                        string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
-                        OpenPageElement(false, uid);
-                    }
-                }
-            }
-        }
-
-        void OnRefreshClick(object? sender, EventArgs args)
-        {
+            ТабличніСписки.ПрихіднийКасовийОрдер_Записи.ДодатиВідбірПоПеріоду(Enum.Parse<ТипПеріодуДляЖурналівДокументів>(ComboBoxPeriodWhere.ActiveId));
             LoadRecords();
         }
 
-        void OnDeleteClick(object? sender, EventArgs args)
+        protected override void SpendTheDocument(UnigueID unigueID, bool spendDoc)
         {
-            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
-            {
-                if (Message.Request(Program.GeneralForm, "Встановити або зняти помітку на видалення?") == ResponseType.Yes)
-                {
-                    TreePath[] selectionRows = TreeViewGrid.Selection.GetSelectedRows();
-
-                    foreach (TreePath itemPath in selectionRows)
-                    {
-                        TreeIter iter;
-                        TreeViewGrid.Model.GetIter(out iter, itemPath);
-
-                        string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
-
-                        ПрихіднийКасовийОрдер_Objest ПрихіднийКасовийОрдер_Objest = new ПрихіднийКасовийОрдер_Objest();
-                        if (ПрихіднийКасовийОрдер_Objest.Read(new UnigueID(uid)))
-                        {
-                            ПрихіднийКасовийОрдер_Objest.SetDeletionLabel(!ПрихіднийКасовийОрдер_Objest.DeletionLabel);
-
-                            SelectPointerItem = ПрихіднийКасовийОрдер_Objest.GetDocumentPointer();
-                        }
-                        else
-                            Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                    }
-
-                    LoadRecords();
-                }
-            }
-        }
-
-        void OnCopyClick(object? sender, EventArgs args)
-        {
-            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
-            {
-                if (Message.Request(Program.GeneralForm, "Копіювати?") == ResponseType.Yes)
-                {
-                    TreePath[] selectionRows = TreeViewGrid.Selection.GetSelectedRows();
-
-                    foreach (TreePath itemPath in selectionRows)
-                    {
-                        TreeIter iter;
-                        TreeViewGrid.Model.GetIter(out iter, itemPath);
-
-                        string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
-
-                        ПрихіднийКасовийОрдер_Objest ПрихіднийКасовийОрдер_Objest = new ПрихіднийКасовийОрдер_Objest();
-                        if (ПрихіднийКасовийОрдер_Objest.Read(new UnigueID(uid)))
-                        {
-                            ПрихіднийКасовийОрдер_Objest ПрихіднийКасовийОрдер_Objest_Новий = ПрихіднийКасовийОрдер_Objest.Copy(true);
-                            ПрихіднийКасовийОрдер_Objest_Новий.Save();
-
-                            SelectPointerItem = ПрихіднийКасовийОрдер_Objest_Новий.GetDocumentPointer();
-                        }
-                        else
-                            Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                    }
-
-                    LoadRecords();
-                }
-            }
-        }
-
-        void OnComboBoxPeriodWhereChanged(object? sender, EventArgs args)
-        {
-            ТабличніСписки.ПрихіднийКасовийОрдер_Записи.ДодатиВідбірПоПеріоду(Enum.Parse<Перелічення.ТипПеріодуДляЖурналівДокументів>(ComboBoxPeriodWhere.ActiveId));
-            LoadRecords();
-        }
-
-        void OnReportSpendTheDocumentClick(object? sender, EventArgs args)
-        {
-            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
-            {
-                TreeIter iter;
-                if (TreeViewGrid.Model.GetIter(out iter, TreeViewGrid.Selection.GetSelectedRows()[0]))
-                {
-                    string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
-
-                    Program.GeneralForm?.CreateNotebookPage($"Проводки", () =>
-                    {
-                        Звіт_РухДокументівПоРегістрах page = new Звіт_РухДокументівПоРегістрах();
-
-                        page.CreateReport(new ПрихіднийКасовийОрдер_Pointer(new UnigueID(uid)));
-
-                        return page;
-                    });
-                }
-            }
-        }
-
-        void SpendTheDocument(string uid, bool spendDoc)
-        {
-            ПрихіднийКасовийОрдер_Pointer ПрихіднийКасовийОрдер_Pointer = new ПрихіднийКасовийОрдер_Pointer(new UnigueID(uid));
+            ПрихіднийКасовийОрдер_Pointer ПрихіднийКасовийОрдер_Pointer = new ПрихіднийКасовийОрдер_Pointer(unigueID);
             ПрихіднийКасовийОрдер_Objest? ПрихіднийКасовийОрдер_Objest = ПрихіднийКасовийОрдер_Pointer.GetDocumentObject(true);
             if (ПрихіднийКасовийОрдер_Objest == null) return;
 
@@ -512,96 +165,23 @@ namespace StorageAndTrade
             }
             else
                 ПрихіднийКасовийОрдер_Objest.ClearSpendTheDocument();
-
-            SelectPointerItem = ПрихіднийКасовийОрдер_Pointer;
         }
 
-        //
-        // Проведення або очищення проводок для вибраних документів
-        //
-
-        void SpendTheDocumentOrClear(bool spend)
+        protected override DocumentPointer? ReportSpendTheDocument(UnigueID unigueID)
         {
-            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
-            {
-                TreePath[] selectionRows = TreeViewGrid.Selection.GetSelectedRows();
-
-                foreach (TreePath itemPath in selectionRows)
-                {
-                    TreeIter iter;
-                    TreeViewGrid.Model.GetIter(out iter, itemPath);
-
-                    string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
-                    SpendTheDocument(uid, spend);
-                }
-
-                LoadRecords();
-            }
+            return new ПрихіднийКасовийОрдер_Pointer(unigueID);
         }
 
-        void OnSpendTheDocument(object? sender, EventArgs args)
+        protected override void ExportXML(UnigueID unigueID)
         {
-            SpendTheDocumentOrClear(true);
+            string pathToSave = System.IO.Path.Combine(AppContext.BaseDirectory, $"{ПрихіднийКасовийОрдер_Const.FULLNAME}_{unigueID}.xml");
+            ПрихіднийКасовийОрдер_Export.ToXmlFile(new ПрихіднийКасовийОрдер_Pointer(unigueID), pathToSave);
         }
 
-        void OnClearSpend(object? sender, EventArgs args)
-        {
-            SpendTheDocumentOrClear(false);
-        }
+        #endregion
 
-        //
-        // Export
-        //
+        #region ToolBar
 
-        void OnExportClick(object? sender, EventArgs arg)
-        {
-            if (sender != null)
-            {
-                MenuToolButton menuToolButton = (MenuToolButton)sender;
-                Menu Menu = (Menu)menuToolButton.Menu;
-                Menu.Popup();
-            }
-        }
-
-        void OnExportXMLClick(object? sender, EventArgs arg)
-        {
-            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
-            {
-                TreePath[] selectionRows = TreeViewGrid.Selection.GetSelectedRows();
-
-                foreach (TreePath itemPath in selectionRows)
-                {
-                    TreeIter iter;
-                    TreeViewGrid.Model.GetIter(out iter, itemPath);
-
-                    string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
-
-                    string pathToSave = System.IO.Path.Combine(AppContext.BaseDirectory, $"ПрихіднийКасовийОрдер{uid}.xml");
-                    ПрихіднийКасовийОрдер_Export.ToXmlFile(new ПрихіднийКасовийОрдер_Pointer(new UnigueID(uid)), pathToSave);
-                }
-
-                LoadRecords();
-            }
-        }
-
-        //
-        // Друк
-        //
-
-        void OnPrintingClick(object? sender, EventArgs arg)
-        {
-            if (sender != null)
-            {
-                MenuToolButton menuToolButton = (MenuToolButton)sender;
-                Menu Menu = (Menu)menuToolButton.Menu;
-                Menu.Popup();
-            }
-        }
-
-        void OnPrintingInvoiceClick(object? sender, EventArgs arg)
-        {
-
-        }
 
         #endregion
     }

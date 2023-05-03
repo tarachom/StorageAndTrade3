@@ -23,10 +23,10 @@ limitations under the License.
 
 using Gtk;
 
+using System.Reflection;
+
 using AccountingSoftware;
 using StorageAndTrade_1_0;
-using StorageAndTrade_1_0.Довідники;
-using StorageAndTrade_1_0.Документи;
 
 namespace StorageAndTrade
 {
@@ -51,25 +51,44 @@ namespace StorageAndTrade
                 pointer = value;
 
                 if (pointer != null)
-                    Presentation = Functions.GetBasisObjectPresentation(pointer, out PointerName, out Type);
+                    Presentation = Functions.GetBasisObjectPresentation(pointer, out PointerName, out TypeCaption);
                 else
-                    Presentation = PointerName = Type = "";
+                    Presentation = PointerName = TypeCaption = "";
             }
         }
 
+        /// <summary>
+        /// Документи або Довідники
+        /// </summary>
         public string PointerName = "";
-        public string Type = "";
+
+        /// <summary>
+        /// Назва обєкту як в конфігурації
+        /// </summary>
+        public string TypeCaption = "";
+
+        /// <summary>
+        /// Функція формує назву
+        /// </summary>
+        string GetBasisName()
+        {
+            return !String.IsNullOrEmpty(PointerName) ? PointerName + "." + TypeCaption : "";
+        }
 
         protected override void OpenSelect(object? sender, EventArgs args)
         {
             if (String.IsNullOrEmpty(PointerName))
             {
+                //
+                // Вибір типу
+                //
+
                 Popover PopoverSmallSelect = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
 
                 System.Action<string, string> CallBackAction = (string p, string t) =>
                 {
                     PointerName = p;
-                    Type = t;
+                    TypeCaption = t;
 
                     PopoverSmallSelect.Hide();
                 };
@@ -77,56 +96,59 @@ namespace StorageAndTrade
                 PopoverSmallSelect.Add(ВибірТипуДаних(CallBackAction));
                 PopoverSmallSelect.ShowAll();
             }
-
-            if (PointerName == "Документи")
+            else if (PointerName == "Документи" || PointerName == "Довідники")
             {
-                switch (Type)
+                Assembly ExecutingAssembly = Assembly.GetExecutingAssembly();
+
+                //Простір імен програми
+                string NameSpacePage = "StorageAndTrade";
+
+                //Простір імен конфігурації
+                string NameSpaceConfig = $"StorageAndTrade_1_0.{PointerName}";
+
+                object? listPage;
+
+                try
                 {
-                    case "ПоступленняТоварівТаПослуг":
-                        {
-                            ПоступленняТоварівТаПослуг page = new ПоступленняТоварівТаПослуг(true);
-
-                            page.DocumentPointerItem = new ПоступленняТоварівТаПослуг_Pointer(pointer.Uuid);
-                            page.CallBack_OnSelectPointer = (ПоступленняТоварівТаПослуг_Pointer selectPointer) =>
-                            {
-                                Pointer = selectPointer.GetBasis();
-                            };
-
-                            Program.GeneralForm?.CreateNotebookPage($"Вибір - {ПоступленняТоварівТаПослуг_Const.FULLNAME}", () => { return page; }, true);
-                            page.LoadRecords();
-
-                            break;
-                        }
-                    default:
-                        {
-                            Message.Info(Program.GeneralForm, $"Для документу '{Type}' не оприділена сторінка вибору");
-                            break;
-                        }
+                    listPage = ExecutingAssembly.CreateInstance($"{NameSpacePage}.{TypeCaption}");
                 }
-            }
-            else if (PointerName == "Довідники")
-            {
-                switch (Type)
+                catch (Exception ex)
                 {
-                    case "Валюти":
-                        {
-                            Валюти page = new Валюти();
-                            page.DirectoryPointerItem = new Валюти_Pointer(pointer.Uuid);
-                            page.CallBack_OnSelectPointer = (Валюти_Pointer selectPointer) =>
-                            {
-                                Pointer = selectPointer.GetBasis();
-                            };
+                    Message.Error(Program.GeneralForm, ex.Message);
+                    return;
+                }
 
-                            Program.GeneralForm?.CreateNotebookPage("Вибір - Валюти", () => { return page; }, true);
-                            page.LoadRecords();
+                if (listPage != null)
+                {
+                    //Елемент який потрібно виділити в списку
+                    listPage.GetType().GetProperty("SelectPointerItem")?.SetValue(listPage, pointer.UnigueID());
 
-                            break;
-                        }
-                    default:
-                        {
-                            Message.Info(Program.GeneralForm, $"Для довідника '{Type}' не оприділена сторінка вибору");
-                            break;
-                        }
+                    //Елемент для вибору
+                    if (PointerName == "Документи")
+                        listPage.GetType().GetProperty("DocumentPointerItem")?.SetValue(listPage, pointer.UnigueID());
+                    else
+                        listPage.GetType().GetProperty("DirectoryPointerItem")?.SetValue(listPage, pointer.UnigueID());
+
+                    //Функція зворотнього виклику при виборі
+                    listPage.GetType().GetProperty("CallBack_OnSelectPointer")?.SetValue(listPage, (UnigueID selectPointer) =>
+                    {
+                        Pointer = new UuidAndText(selectPointer.UGuid, GetBasisName());
+                    });
+
+                    //Заголовок журналу з константи конфігурації
+                    string listName = "Список";
+                    {
+                        Type? documentConst = Type.GetType($"{NameSpaceConfig}.{TypeCaption}_Const");
+                        if (documentConst != null)
+                            listName = documentConst.GetField("FULLNAME")?.GetValue(null)?.ToString() ?? listName;
+                    }
+
+                    Program.GeneralForm?.CreateNotebookPage(listName, () => { return (Widget)listPage; }, true);
+
+                    if (PointerName == "Документи")
+                        listPage.GetType().InvokeMember("SetValue", BindingFlags.InvokeMethod, null, listPage, null);
+                    else
+                        listPage.GetType().InvokeMember("LoadRecords", BindingFlags.InvokeMethod, null, listPage, null);
                 }
             }
         }

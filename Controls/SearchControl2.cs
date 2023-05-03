@@ -54,8 +54,6 @@ namespace StorageAndTrade
 
         void OnClear(object? sender, EventArgs args)
         {
-            entrySearch.Text = "";
-
             if (Clear != null)
                 Clear.Invoke();
         }
