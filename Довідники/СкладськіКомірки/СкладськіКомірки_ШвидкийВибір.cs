@@ -45,10 +45,13 @@ namespace StorageAndTrade
                 LinkButton linkPage = new LinkButton($" {СкладськіКомірки_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
                 linkPage.Clicked += (object? sender, EventArgs args) =>
                 {
-                    СкладськіКомірки page = new СкладськіКомірки();
-                    page.DirectoryPointerItem = DirectoryPointerItem;
+                    СкладськіКомірки page = new СкладськіКомірки()
+                    {
+                        DirectoryPointerItem = DirectoryPointerItem,
+                        CallBack_OnSelectPointer = CallBack_OnSelectPointer
+                    };
+
                     page.СкладПриміщенняВласник.Pointer = СкладПриміщенняВласник.Pointer;
-                    page.CallBack_OnSelectPointer = CallBack_OnSelectPointer;
 
                     Program.GeneralForm?.CreateNotebookPage($"Вибір - {СкладськіКомірки_Const.FULLNAME}", () => { return page; }, true);
 
@@ -63,7 +66,11 @@ namespace StorageAndTrade
                 LinkButton linkNew = new LinkButton("Новий");
                 linkNew.Clicked += (object? sender, EventArgs args) =>
                 {
-                    СкладськіКомірки_Елемент page = new СкладськіКомірки_Елемент { IsNew = true, CallBack_OnSelectPointer = CallBack_OnSelectPointer };
+                    СкладськіКомірки_Елемент page = new СкладськіКомірки_Елемент
+                    {
+                        IsNew = true,
+                        CallBack_OnSelectPointer = CallBack_OnSelectPointer
+                    };
 
                     Program.GeneralForm?.CreateNotebookPage($"{СкладськіКомірки_Const.FULLNAME} *", () => { return page; }, true);
 
@@ -83,6 +90,7 @@ namespace StorageAndTrade
             };
 
             //Очистка
+            /*
             {
                 LinkButton linkClear = new LinkButton(" Очистити") { Image = new Image(AppContext.BaseDirectory + "images/clean.png"), AlwaysShowImage = true };
                 linkClear.Clicked += (object? sender, EventArgs args) =>
@@ -96,6 +104,7 @@ namespace StorageAndTrade
 
                 HBoxTop.PackEnd(linkClear, false, false, 10);
             }
+            */
         }
 
         public override void LoadRecords()

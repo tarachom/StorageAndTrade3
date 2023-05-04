@@ -45,10 +45,12 @@ namespace StorageAndTrade
                 LinkButton linkPage = new LinkButton($" {Номенклатура_Папки_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
                 linkPage.Clicked += (object? sender, EventArgs args) =>
                 {
-                    Номенклатура_Папки_Дерево page = new Номенклатура_Папки_Дерево();
-                    page.DirectoryPointerItem = DirectoryPointerItem;
-                    page.CallBack_OnSelectPointer = CallBack_OnSelectPointer;
-                    page.UidOpenFolder = UidOpenFolder;
+                    Номенклатура_Папки_Дерево page = new Номенклатура_Папки_Дерево()
+                    {
+                        DirectoryPointerItem = DirectoryPointerItem,
+                        CallBack_OnSelectPointer = CallBack_OnSelectPointer,
+                        UidOpenFolder = UidOpenFolder
+                    };
 
                     Program.GeneralForm?.CreateNotebookPage($"Вибір - {Номенклатура_Папки_Const.FULLNAME}", () => { return page; }, true);
 
@@ -63,7 +65,11 @@ namespace StorageAndTrade
                 LinkButton linkNew = new LinkButton("Новий");
                 linkNew.Clicked += (object? sender, EventArgs args) =>
                 {
-                    Номенклатура_Папки_Елемент page = new Номенклатура_Папки_Елемент { IsNew = true, CallBack_OnSelectPointer = CallBack_OnSelectPointer };
+                    Номенклатура_Папки_Елемент page = new Номенклатура_Папки_Елемент
+                    {
+                        IsNew = true,
+                        CallBack_OnSelectPointer = CallBack_OnSelectPointer
+                    };
 
                     Program.GeneralForm?.CreateNotebookPage($"{Номенклатура_Папки_Const.FULLNAME} *", () => { return page; }, true);
 
@@ -74,6 +80,7 @@ namespace StorageAndTrade
             }
 
             //Очистка
+            /*
             {
                 LinkButton linkClear = new LinkButton(" Очистити") { Image = new Image(AppContext.BaseDirectory + "images/clean.png"), AlwaysShowImage = true };
                 linkClear.Clicked += (object? sender, EventArgs args) =>
@@ -87,6 +94,7 @@ namespace StorageAndTrade
 
                 HBoxTop.PackEnd(linkClear, false, false, 10);
             }
+            */
         }
 
         public void LoadTree()

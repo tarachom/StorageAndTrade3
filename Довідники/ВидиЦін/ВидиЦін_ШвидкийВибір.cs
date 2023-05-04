@@ -42,9 +42,11 @@ namespace StorageAndTrade
                 LinkButton linkPage = new LinkButton($" {ВидиЦін_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
                 linkPage.Clicked += (object? sender, EventArgs args) =>
                 {
-                    ВидиЦін page = new ВидиЦін();
-                    page.DirectoryPointerItem = DirectoryPointerItem;
-                    page.CallBack_OnSelectPointer = CallBack_OnSelectPointer;
+                    ВидиЦін page = new ВидиЦін()
+                    {
+                        DirectoryPointerItem = DirectoryPointerItem,
+                        CallBack_OnSelectPointer = CallBack_OnSelectPointer
+                    };
 
                     Program.GeneralForm?.CreateNotebookPage($"Вибір - {ВидиЦін_Const.FULLNAME}", () => { return page; }, true);
 
@@ -59,7 +61,11 @@ namespace StorageAndTrade
                 LinkButton linkNew = new LinkButton("Новий");
                 linkNew.Clicked += (object? sender, EventArgs args) =>
                 {
-                    ВидиЦін_Елемент page = new ВидиЦін_Елемент { IsNew = true, CallBack_OnSelectPointer = CallBack_OnSelectPointer };
+                    ВидиЦін_Елемент page = new ВидиЦін_Елемент
+                    {
+                        IsNew = true,
+                        CallBack_OnSelectPointer = CallBack_OnSelectPointer
+                    };
 
                     Program.GeneralForm?.CreateNotebookPage($"{ВидиЦін_Const.FULLNAME} *", () => { return page; }, true);
 
@@ -70,6 +76,7 @@ namespace StorageAndTrade
             }
 
             //Очистка
+            /*
             {
                 LinkButton linkClear = new LinkButton(" Очистити") { Image = new Image(AppContext.BaseDirectory + "images/clean.png"), AlwaysShowImage = true };
                 linkClear.Clicked += (object? sender, EventArgs args) =>
@@ -83,6 +90,7 @@ namespace StorageAndTrade
 
                 HBoxTop.PackEnd(linkClear, false, false, 10);
             }
+            */
         }
 
         public override void LoadRecords()

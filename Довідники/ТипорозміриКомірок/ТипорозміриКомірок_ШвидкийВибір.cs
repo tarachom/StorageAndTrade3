@@ -43,9 +43,11 @@ namespace StorageAndTrade
                 LinkButton linkPage = new LinkButton($" {ТипорозміриКомірок_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
                 linkPage.Clicked += (object? sender, EventArgs args) =>
                 {
-                    ТипорозміриКомірок page = new ТипорозміриКомірок();
-                    page.DirectoryPointerItem = DirectoryPointerItem;
-                    page.CallBack_OnSelectPointer = CallBack_OnSelectPointer;
+                    ТипорозміриКомірок page = new ТипорозміриКомірок()
+                    {
+                        DirectoryPointerItem = DirectoryPointerItem,
+                        CallBack_OnSelectPointer = CallBack_OnSelectPointer
+                    };
 
                     Program.GeneralForm?.CreateNotebookPage($"Вибір - {ТипорозміриКомірок_Const.FULLNAME}", () => { return page; }, true);
 
@@ -60,7 +62,11 @@ namespace StorageAndTrade
                 LinkButton linkNew = new LinkButton("Новий");
                 linkNew.Clicked += (object? sender, EventArgs args) =>
                 {
-                    ТипорозміриКомірок_Елемент page = new ТипорозміриКомірок_Елемент { IsNew = true, CallBack_OnSelectPointer = CallBack_OnSelectPointer };
+                    ТипорозміриКомірок_Елемент page = new ТипорозміриКомірок_Елемент
+                    {
+                        IsNew = true,
+                        CallBack_OnSelectPointer = CallBack_OnSelectPointer
+                    };
 
                     Program.GeneralForm?.CreateNotebookPage($"{ТипорозміриКомірок_Const.FULLNAME} *", () => { return page; }, true);
 
@@ -71,6 +77,7 @@ namespace StorageAndTrade
             }
 
             //Очистка
+            /*
             {
                 LinkButton linkClear = new LinkButton(" Очистити") { Image = new Image(AppContext.BaseDirectory + "images/clean.png"), AlwaysShowImage = true };
                 linkClear.Clicked += (object? sender, EventArgs args) =>
@@ -84,6 +91,7 @@ namespace StorageAndTrade
 
                 HBoxTop.PackEnd(linkClear, false, false, 10);
             }
+            */
         }
 
         public override void LoadRecords()

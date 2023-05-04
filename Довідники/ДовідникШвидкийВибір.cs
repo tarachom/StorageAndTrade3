@@ -29,15 +29,30 @@ namespace StorageAndTrade
 {
     public abstract class ДовідникШвидкийВибір : VBox
     {
+        /// <summary>
+        /// Вспливаюче вікно
+        /// </summary>
         public Popover? PopoverParent { get; set; }
+
+        /// <summary>
+        /// Елемент для вибору
+        /// </summary>
         public UnigueID? DirectoryPointerItem { get; set; }
+
+        /// <summary>
+        /// Функція вибору
+        /// </summary>
         public System.Action<UnigueID>? CallBack_OnSelectPointer { get; set; }
 
+        /// <summary>
+        /// Верхній горизонтальний блок
+        /// </summary>
         protected HBox HBoxTop = new HBox();
+
         protected TreeView TreeViewGrid = new TreeView();
         protected SearchControl2 Пошук = new SearchControl2();
 
-        public ДовідникШвидкийВибір(bool visibleSearch = true) : base()
+        public ДовідникШвидкийВибір(bool visibleSearch = true, int width = 600, int height = 300) : base()
         {
             BorderWidth = 0;
 
@@ -51,7 +66,7 @@ namespace StorageAndTrade
                 Пошук.Clear = LoadRecords;
             }
 
-            ScrolledWindow scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In, WidthRequest = 600, HeightRequest = 300 };
+            ScrolledWindow scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In, WidthRequest = width, HeightRequest = height };
             scrollTree.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
 
             TreeViewGrid.Selection.Mode = SelectionMode.Multiple;
@@ -95,10 +110,10 @@ namespace StorageAndTrade
 
                 if (TreeViewGrid.Model.GetIter(out iter, TreeViewGrid.Selection.GetSelectedRows()[0]))
                 {
-                    string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
+                    DirectoryPointerItem = new UnigueID((string)TreeViewGrid.Model.GetValue(iter, 1));
 
                     if (CallBack_OnSelectPointer != null)
-                        CallBack_OnSelectPointer.Invoke(new UnigueID(uid));
+                        CallBack_OnSelectPointer.Invoke(DirectoryPointerItem);
 
                     if (PopoverParent != null)
                         PopoverParent.Hide();

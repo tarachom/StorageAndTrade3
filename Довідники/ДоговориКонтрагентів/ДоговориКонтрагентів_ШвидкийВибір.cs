@@ -44,10 +44,13 @@ namespace StorageAndTrade
                 LinkButton linkPage = new LinkButton($" {ДоговориКонтрагентів_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
                 linkPage.Clicked += (object? sender, EventArgs args) =>
                 {
-                    ДоговориКонтрагентів page = new ДоговориКонтрагентів();
-                    page.DirectoryPointerItem = DirectoryPointerItem;
+                    ДоговориКонтрагентів page = new ДоговориКонтрагентів()
+                    {
+                        DirectoryPointerItem = DirectoryPointerItem,
+                        CallBack_OnSelectPointer = CallBack_OnSelectPointer
+                    };
+
                     page.КонтрагентВласник.Pointer = КонтрагентВласник.Pointer;
-                    page.CallBack_OnSelectPointer = CallBack_OnSelectPointer;
 
                     Program.GeneralForm?.CreateNotebookPage($"Вибір - {ДоговориКонтрагентів_Const.FULLNAME}", () => { return page; }, true);
 
@@ -62,7 +65,11 @@ namespace StorageAndTrade
                 LinkButton linkNew = new LinkButton("Новий");
                 linkNew.Clicked += (object? sender, EventArgs args) =>
                 {
-                    ДоговориКонтрагентів_Елемент page = new ДоговориКонтрагентів_Елемент { IsNew = true, CallBack_OnSelectPointer = CallBack_OnSelectPointer };
+                    ДоговориКонтрагентів_Елемент page = new ДоговориКонтрагентів_Елемент
+                    {
+                        IsNew = true,
+                        CallBack_OnSelectPointer = CallBack_OnSelectPointer
+                    };
 
                     Program.GeneralForm?.CreateNotebookPage($"{ДоговориКонтрагентів_Const.FULLNAME} *", () => { return page; }, true);
 
@@ -82,6 +89,7 @@ namespace StorageAndTrade
             };
 
             //Очистка
+            /*
             {
                 LinkButton linkClear = new LinkButton(" Очистити") { Image = new Image(AppContext.BaseDirectory + "images/clean.png"), AlwaysShowImage = true };
                 linkClear.Clicked += (object? sender, EventArgs args) =>
@@ -95,6 +103,7 @@ namespace StorageAndTrade
 
                 HBoxTop.PackEnd(linkClear, false, false, 10);
             }
+            */
         }
 
         public override void LoadRecords()

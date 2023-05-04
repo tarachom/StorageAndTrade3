@@ -44,10 +44,13 @@ namespace StorageAndTrade
                 LinkButton linkPage = new LinkButton($" {ХарактеристикиНоменклатури_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
                 linkPage.Clicked += (object? sender, EventArgs args) =>
                 {
-                    ХарактеристикиНоменклатури page = new ХарактеристикиНоменклатури();
-                    page.DirectoryPointerItem = DirectoryPointerItem;
+                    ХарактеристикиНоменклатури page = new ХарактеристикиНоменклатури()
+                    {
+                        DirectoryPointerItem = DirectoryPointerItem,
+                        CallBack_OnSelectPointer = CallBack_OnSelectPointer
+                    };
+
                     page.НоменклатураВласник.Pointer = НоменклатураВласник.Pointer;
-                    page.CallBack_OnSelectPointer = CallBack_OnSelectPointer;
 
                     Program.GeneralForm?.CreateNotebookPage($"Вибір - {ХарактеристикиНоменклатури_Const.FULLNAME}", () => { return page; }, true);
 
@@ -87,6 +90,7 @@ namespace StorageAndTrade
             };
 
             //Очистка
+            /*
             {
                 LinkButton linkClear = new LinkButton(" Очистити") { Image = new Image(AppContext.BaseDirectory + "images/clean.png"), AlwaysShowImage = true };
                 linkClear.Clicked += (object? sender, EventArgs args) =>
@@ -100,6 +104,7 @@ namespace StorageAndTrade
 
                 HBoxTop.PackEnd(linkClear, false, false, 0);
             }
+            */
         }
 
         public override void LoadRecords()
