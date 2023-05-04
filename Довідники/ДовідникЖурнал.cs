@@ -46,7 +46,6 @@ namespace StorageAndTrade
             BorderWidth = 0;
 
             //Кнопки
-            HBoxTop = new HBox();
             PackStart(HBoxTop, false, false, 10);
 
             //Пошук

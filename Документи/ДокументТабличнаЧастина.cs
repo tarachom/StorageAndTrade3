@@ -97,15 +97,19 @@ namespace StorageAndTrade
                     TreeIter iter;
                     TreeViewGrid.Model.GetIter(out iter, itemPath);
 
+                    //Швидкий вибір
                     Gdk.Rectangle rectangleCell = TreeViewGrid.GetCellArea(itemPath, treeColumn);
                     rectangleCell.Offset(-(int)scrollTree.Hadjustment.Value, rectangleCell.Height);
-
-                    Popover PopoverSmallSelect = new Popover(TreeViewGrid) { Position = PositionType.Bottom, BorderWidth = 2 };
-                    PopoverSmallSelect.PointingTo = rectangleCell;
+                    Popover popoverSmallSelect = new Popover(TreeViewGrid)
+                    {
+                        PointingTo = rectangleCell,
+                        Position = PositionType.Bottom,
+                        BorderWidth = 2
+                    };
 
                     int rowNumber = int.Parse(itemPath.ToString());
 
-                    ButtonSelect(iter, rowNumber, (int)treeColumn.Data["Column"]!, PopoverSmallSelect);
+                    ButtonSelect(iter, rowNumber, (int)treeColumn.Data["Column"]!, popoverSmallSelect);
                 }
             }
         }

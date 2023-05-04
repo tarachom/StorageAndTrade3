@@ -31,7 +31,7 @@ using Gtk;
 
 namespace StorageAndTrade
 {
-    class SearchControl2 : HBox
+    public class SearchControl2 : HBox
     {
         SearchEntry entrySearch = new SearchEntry() { WidthRequest = 200 };
 

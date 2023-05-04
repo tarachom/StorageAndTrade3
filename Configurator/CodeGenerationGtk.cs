@@ -394,7 +394,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID
+            return new object[] { new Gdk.Pixbuf(Image), ID  
             /* */ , Код, Назва };
         }
 

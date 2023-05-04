@@ -32,7 +32,6 @@ namespace StorageAndTrade
     class Номенклатура_Папки_Дерево : VBox
     {
         TreeView TreeViewGrid;
-        TreeStore TreeStore = new TreeStore(typeof(string), typeof(string));
 
         public System.Action? CallBack_RowActivated { get; set; }
         public UnigueID? DirectoryPointerItem { get; set; }
@@ -57,7 +56,7 @@ namespace StorageAndTrade
             TreeViewGrid.ActivateOnSingleClick = true;
             TreeViewGrid.RowActivated += OnRowActivated;
             TreeViewGrid.ButtonPressEvent += OnButtonPressEvent;
-            TreeViewGrid.Model = TreeStore;
+            TreeViewGrid.Model = Номенклатура_Папки_Дерево_СпільніФункції.Store; ;
 
             scrollTree.Add(TreeViewGrid);
 
@@ -97,7 +96,7 @@ namespace StorageAndTrade
             if (DirectoryPointerItem != null)
                 Parent_Pointer = new Номенклатура_Папки_Pointer(DirectoryPointerItem);
 
-            Номенклатура_Папки_Дерево_СпільніФункції.FillTree(TreeViewGrid, TreeStore, UidOpenFolder, Parent_Pointer);
+            Номенклатура_Папки_Дерево_СпільніФункції.FillTree(TreeViewGrid, UidOpenFolder, Parent_Pointer);
 
             OnRowActivated(TreeViewGrid, new RowActivatedArgs());
         }
@@ -161,7 +160,7 @@ namespace StorageAndTrade
                 TreeIter iter;
                 TreeViewGrid.Model.GetIter(out iter, TreeViewGrid.Selection.GetSelectedRows()[0]);
 
-                UnigueID unigueID = new UnigueID((string)TreeViewGrid.Model.GetValue(iter, 0));
+                UnigueID unigueID = new UnigueID((string)TreeViewGrid.Model.GetValue(iter, (int)Номенклатура_Папки_Дерево_СпільніФункції.Columns.ID));
 
                 if (!unigueID.IsEmpty())
                     Parent_Pointer = new Номенклатура_Папки_Pointer(unigueID);
@@ -181,7 +180,7 @@ namespace StorageAndTrade
 
                 if (TreeViewGrid.Model.GetIter(out iter, TreeViewGrid.Selection.GetSelectedRows()[0]))
                 {
-                    string uid = (string)TreeViewGrid.Model.GetValue(iter, 0);
+                    string uid = (string)TreeViewGrid.Model.GetValue(iter, (int)Номенклатура_Папки_Дерево_СпільніФункції.Columns.ID);
 
                     if (DirectoryPointerItem == null)
                     {
@@ -217,7 +216,7 @@ namespace StorageAndTrade
                 TreeIter iter;
                 if (TreeViewGrid.Model.GetIter(out iter, TreeViewGrid.Selection.GetSelectedRows()[0]))
                 {
-                    string uid = (string)TreeViewGrid.Model.GetValue(iter, 0);
+                    string uid = (string)TreeViewGrid.Model.GetValue(iter, (int)Номенклатура_Папки_Дерево_СпільніФункції.Columns.ID);
 
                     if (new UnigueID(uid).IsEmpty())
                         return;
@@ -241,7 +240,7 @@ namespace StorageAndTrade
                 TreeIter iter;
                 TreeViewGrid.Model.GetIter(out iter, selectionRow);
 
-                UnigueID unigueID = new UnigueID((string)TreeViewGrid.Model.GetValue(iter, 0));
+                UnigueID unigueID = new UnigueID((string)TreeViewGrid.Model.GetValue(iter, (int)Номенклатура_Папки_Дерево_СпільніФункції.Columns.ID));
 
                 if (unigueID.IsEmpty())
                     return;
@@ -268,7 +267,7 @@ namespace StorageAndTrade
                 TreeIter iter;
                 TreeViewGrid.Model.GetIter(out iter, selectionRow);
 
-                UnigueID unigueID = new UnigueID((string)TreeViewGrid.Model.GetValue(iter, 0));
+                UnigueID unigueID = new UnigueID((string)TreeViewGrid.Model.GetValue(iter, (int)Номенклатура_Папки_Дерево_СпільніФункції.Columns.ID));
 
                 if (unigueID.IsEmpty())
                     return;

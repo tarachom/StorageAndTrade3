@@ -244,7 +244,8 @@ namespace StorageAndTrade
             {
                 case Columns.БанківськийРахунок:
                     {
-                        БанківськіРахункиОрганізацій_ШвидкийВибір page = new БанківськіРахункиОрганізацій_ШвидкийВибір() { PopoverParent = popoverSmallSelect, DirectoryPointerItem = запис.БанківськийРахунок.UnigueID };
+                        БанківськіРахункиОрганізацій_ШвидкийВибір page = new БанківськіРахункиОрганізацій_ШвидкийВибір() 
+                        { PopoverParent = popoverSmallSelect, DirectoryPointerItem = запис.БанківськийРахунок.UnigueID };
                         page.CallBack_OnSelectPointer = (UnigueID selectPointer) =>
                         {
                             запис.БанківськийРахунок = new БанківськіРахункиОрганізацій_Pointer(selectPointer);

@@ -30,17 +30,40 @@ namespace StorageAndTrade
 {
     class Номенклатура_Папки_Дерево_СпільніФункції
     {
-        public static void AddColumns(TreeView TreeViewGrid)
+        public enum Columns
         {
-            TreeViewGrid.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 0) { Visible = false });
-            TreeViewGrid.AppendColumn(new TreeViewColumn("Папки", new CellRendererText(), "text", 1));
+            Image,
+            ID,
+            Name
         }
 
-        public static void FillTree(TreeView TreeViewGrid, TreeStore TreeStore, string UidOpenFolder, Номенклатура_Папки_Pointer Parent_Pointer)
+        static string Image
         {
-            TreeStore.Clear();
+            get
+            {
+                return AppContext.BaseDirectory + "images/fdoc.png";
+            }
+        }
 
-            TreeIter rootIter = TreeStore.AppendValues(Guid.Empty.ToString(), $" {Номенклатура_Const.FULLNAME} ");
+        public static TreeStore Store = new TreeStore
+        (
+            typeof(Gdk.Pixbuf),
+            typeof(string),
+            typeof(string)
+        );
+
+        public static void AddColumns(TreeView TreeViewGrid)
+        {
+            TreeViewGrid.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Xalign = 0 }, "pixbuf", Columns.Image));
+            TreeViewGrid.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", Columns.ID) { Visible = false });
+            TreeViewGrid.AppendColumn(new TreeViewColumn("Папки", new CellRendererText(), "text", Columns.Name));
+        }
+
+        public static void FillTree(TreeView TreeViewGrid, string UidOpenFolder, Номенклатура_Папки_Pointer Parent_Pointer)
+        {
+            Store.Clear();
+
+            TreeIter rootIter = Store.AppendValues(new Gdk.Pixbuf(Image), Guid.Empty.ToString(), $" {Номенклатура_Const.FULLNAME} ");
 
             #region SQL
 
@@ -111,14 +134,14 @@ ORDER BY level, {Номенклатура_Папки_Const.Назва} ASC
 
                     if (level == 1)
                     {
-                        TreeIter Iter = TreeStore.AppendValues(rootIter, uid, fieldName);
+                        TreeIter Iter = Store.AppendValues(rootIter, new Gdk.Pixbuf(Image), uid, fieldName);
                         NodeDictionary.Add(uid, Iter);
                     }
                     else
                     {
                         TreeIter parentIter = NodeDictionary[fieldParent];
 
-                        TreeIter Iter = TreeStore.AppendValues(parentIter, uid, fieldName);
+                        TreeIter Iter = Store.AppendValues(parentIter, new Gdk.Pixbuf(Image), uid, fieldName);
                         NodeDictionary.Add(uid, Iter);
                     }
                 }

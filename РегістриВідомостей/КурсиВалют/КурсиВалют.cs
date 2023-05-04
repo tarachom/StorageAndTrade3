@@ -41,6 +41,7 @@ namespace StorageAndTrade
             HBoxTop.PackStart(ВалютаВласник, false, false, 2);
             ВалютаВласник.AfterSelectFunc = () =>
             {
+                SelectPointerItem?.Clear();
                 LoadRecords();
             };
         }

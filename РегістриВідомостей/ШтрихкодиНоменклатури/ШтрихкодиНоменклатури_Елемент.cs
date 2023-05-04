@@ -28,89 +28,47 @@ using StorageAndTrade_1_0.РегістриВідомостей;
 
 namespace StorageAndTrade
 {
-    class ШтрихкодиНоменклатури_Елемент : VBox
+    class ШтрихкодиНоменклатури_Елемент : РегістриЕлемент
     {
-        public ШтрихкодиНоменклатури? PageList { get; set; }
-
-        public bool IsNew { get; set; } = true;
-
         public ШтрихкодиНоменклатури_Objest ШтрихкодиНоменклатури_Objest { get; set; } = new ШтрихкодиНоменклатури_Objest();
 
         public Номенклатура_Pointer НоменклатураДляНового { get; set; } = new Номенклатура_Pointer();
         public ХарактеристикиНоменклатури_Pointer ХарактеристикаДляНового { get; set; } = new ХарактеристикиНоменклатури_Pointer();
 
+        DateTimeControl ДатаШтрихкоду = new DateTimeControl();
         Entry Штрихкод = new Entry() { WidthRequest = 500 };
         Номенклатура_PointerControl Номенклатура = new Номенклатура_PointerControl();
         ХарактеристикиНоменклатури_PointerControl ХарактеристикаНоменклатури = new ХарактеристикиНоменклатури_PointerControl();
         ПакуванняОдиниціВиміру_PointerControl ПакуванняОдиниціВиміру = new ПакуванняОдиниціВиміру_PointerControl();
 
-        public ШтрихкодиНоменклатури_Елемент() : base()
+        public ШтрихкодиНоменклатури_Елемент() : base() { }
+
+        protected override void CreatePack1(VBox vBox)
         {
-            HBox hBox = new HBox();
-            PackStart(hBox, false, false, 10);
-
-            Button bSave = new Button("Зберегти");
-            bSave.Clicked += OnSaveClick;
-
-            hBox.PackStart(bSave, false, false, 10);
-
-            HPaned hPaned = new HPaned() { BorderWidth = 5, Position = 500 };
-
-            CreatePack1(hPaned);
-            CreatePack2(hPaned);
-
-            PackStart(hPaned, false, false, 5);
-
-            ShowAll();
-        }
-
-        void CreatePack1(HPaned hPaned)
-        {
-            VBox vBox = new VBox();
+            //ДатаШтрихкоду
+            CreateField(vBox, "Дата:", ДатаШтрихкоду);
 
             //Штрихкод
-            HBox hBoxShKod = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxShKod, false, false, 5);
-
-            hBoxShKod.PackStart(new Label("Штрихкод:"), false, false, 5);
-            hBoxShKod.PackStart(Штрихкод, false, false, 5);
+            CreateField(vBox, "Штрихкод:", Штрихкод);
 
             //Номенклатура
-            HBox hBoxNomenklatura = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxNomenklatura, false, false, 5);
-
-            hBoxNomenklatura.PackStart(Номенклатура, false, false, 5);
+            CreateField(vBox, null, Номенклатура);
 
             //ХарактеристикаНоменклатури
-            HBox hBoHarakteristyka = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoHarakteristyka, false, false, 5);
-
-            hBoHarakteristyka.PackStart(ХарактеристикаНоменклатури, false, false, 5);
+            CreateField(vBox, null, ХарактеристикаНоменклатури);
 
             //ПакуванняОдиниціВиміру
-            HBox hBoxPak = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxPak, false, false, 5);
-
-            hBoxPak.PackStart(ПакуванняОдиниціВиміру, false, false, 5);
-
-            hPaned.Pack1(vBox, false, false);
-        }
-
-        void CreatePack2(HPaned hPaned)
-        {
-            VBox vBox = new VBox();
-
-
-
-            hPaned.Pack2(vBox, false, false);
+            CreateField(vBox, null, ПакуванняОдиниціВиміру);
         }
 
         #region Присвоєння / зчитування значень
 
-        public void SetValue()
+        public override void SetValue()
         {
             if (IsNew)
             {
+                ШтрихкодиНоменклатури_Objest.New();
+
                 ШтрихкодиНоменклатури_Objest.Номенклатура = НоменклатураДляНового;
 
                 if (!НоменклатураДляНового.IsEmpty())
@@ -123,14 +81,19 @@ namespace StorageAndTrade
                 ШтрихкодиНоменклатури_Objest.ХарактеристикаНоменклатури = ХарактеристикаДляНового;
             }
 
+            ДатаШтрихкоду.Value = ШтрихкодиНоменклатури_Objest.Period;
             Штрихкод.Text = ШтрихкодиНоменклатури_Objest.Штрихкод;
             Номенклатура.Pointer = ШтрихкодиНоменклатури_Objest.Номенклатура;
             ХарактеристикаНоменклатури.Pointer = ШтрихкодиНоменклатури_Objest.ХарактеристикаНоменклатури;
             ПакуванняОдиниціВиміру.Pointer = ШтрихкодиНоменклатури_Objest.Пакування;
         }
 
-        void GetValue()
+        protected override void GetValue()
         {
+            UnigueID = ШтрихкодиНоменклатури_Objest.UnigueID;
+            Caption = Штрихкод.Text;
+
+            ШтрихкодиНоменклатури_Objest.Period = ДатаШтрихкоду.Value;
             ШтрихкодиНоменклатури_Objest.Штрихкод = Штрихкод.Text;
             ШтрихкодиНоменклатури_Objest.Номенклатура = Номенклатура.Pointer;
             ШтрихкодиНоменклатури_Objest.ХарактеристикаНоменклатури = ХарактеристикаНоменклатури.Pointer;
@@ -139,23 +102,15 @@ namespace StorageAndTrade
 
         #endregion
 
-        void OnSaveClick(object? sender, EventArgs args)
+        protected override void Save()
         {
-            if (IsNew)
+            try
             {
-                ШтрихкодиНоменклатури_Objest.New();
-                IsNew = false;
+                ШтрихкодиНоменклатури_Objest.Save();
             }
-
-            GetValue();
-
-            ШтрихкодиНоменклатури_Objest.Save();
-
-            Program.GeneralForm?.RenameCurrentPageNotebook($"{ШтрихкодиНоменклатури_Objest.Штрихкод}");
-
-            if (PageList != null)
+            catch (Exception ex)
             {
-                PageList.LoadRecords();
+                MsgError(ex);
             }
         }
     }

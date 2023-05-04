@@ -34,7 +34,7 @@ using ТабличніСписки = StorageAndTrade_1_0.Документи.Та
 
 namespace StorageAndTrade
 {
-    abstract class Журнал : VBox
+    public abstract class Журнал : VBox
     {
         public UnigueID? SelectPointerItem { get; set; }
 

@@ -49,7 +49,6 @@ namespace StorageAndTrade
             BorderWidth = 0;
 
             //Кнопки
-            HBoxTop = new HBox();
             PackStart(HBoxTop, false, false, 10);
 
             //Відбір по періоду

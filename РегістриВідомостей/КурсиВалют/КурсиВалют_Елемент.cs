@@ -64,7 +64,6 @@ namespace StorageAndTrade
             {
                 КурсиВалют_Objest.New();
 
-                ДатаКурсу.Value = DateTime.Now;
                 КурсиВалют_Objest.Валюта = ВалютаДляНового;
                 КурсиВалют_Objest.Кратність = 1;
             }

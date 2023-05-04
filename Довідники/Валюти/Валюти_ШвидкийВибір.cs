@@ -31,27 +31,12 @@ using ТабличніСписки = StorageAndTrade_1_0.Довідники.Та
 
 namespace StorageAndTrade
 {
-    class Валюти_ШвидкийВибір : VBox
+    class Валюти_ШвидкийВибір : ДовідникШвидкийВибір
     {
-        public Popover? PopoverParent { get; set; }
-        public UnigueID? DirectoryPointerItem { get; set; }
-        public System.Action<UnigueID>? CallBack_OnSelectPointer { get; set; }
-
-        TreeView TreeViewGrid;
-        SearchControl2 ПошукПовнотекстовий = new SearchControl2();
-
-        public Валюти_ШвидкийВибір(bool IsSelectPointer = false) : base()
+        public Валюти_ШвидкийВибір() : base()
         {
-            BorderWidth = 0;
-
-            //Зверху
-            HBox hBoxTop = new HBox();
-            PackStart(hBoxTop, false, false, 5);
-
-            //Пошук 2
-            hBoxTop.PackStart(ПошукПовнотекстовий, false, false, 0);
-            ПошукПовнотекстовий.Select = LoadRecords_OnSearch;
-            ПошукПовнотекстовий.Clear = LoadRecords;
+            TreeViewGrid.Model = ТабличніСписки.Валюти_ЗаписиШвидкийВибір.Store;
+            ТабличніСписки.Валюти_ЗаписиШвидкийВибір.AddColumns(TreeViewGrid);
 
             //Сторінка
             {
@@ -67,7 +52,7 @@ namespace StorageAndTrade
                     page.LoadRecords();
                 };
 
-                hBoxTop.PackStart(linkPage, false, false, 10);
+                HBoxTop.PackStart(linkPage, false, false, 10);
             }
 
             //Новий
@@ -82,7 +67,7 @@ namespace StorageAndTrade
                     page.SetValue();
                 };
 
-                hBoxTop.PackStart(linkNew, false, false, 0);
+                HBoxTop.PackStart(linkNew, false, false, 0);
             }
 
             //Очистка
@@ -97,28 +82,11 @@ namespace StorageAndTrade
                         PopoverParent.Hide();
                 };
 
-                hBoxTop.PackEnd(linkClear, false, false, 10);
+                HBoxTop.PackEnd(linkClear, false, false, 10);
             }
-
-            ScrolledWindow scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In, WidthRequest = 600, HeightRequest = 300 };
-            scrollTree.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
-
-            TreeViewGrid = new TreeView(ТабличніСписки.Валюти_ЗаписиШвидкийВибір.Store);
-            ТабличніСписки.Валюти_ЗаписиШвидкийВибір.AddColumns(TreeViewGrid);
-
-            TreeViewGrid.Selection.Mode = SelectionMode.Multiple;
-            TreeViewGrid.ActivateOnSingleClick = true;
-            TreeViewGrid.RowActivated += OnRowActivated;
-            TreeViewGrid.ButtonPressEvent += OnButtonPressEvent;
-
-            scrollTree.Add(TreeViewGrid);
-
-            PackStart(scrollTree, true, true, 0);
-
-            ShowAll();
         }
 
-        public void LoadRecords()
+        public override void LoadRecords()
         {
             ТабличніСписки.Валюти_ЗаписиШвидкийВибір.DirectoryPointerItem = DirectoryPointerItem;
 
@@ -130,7 +98,7 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.Валюти_ЗаписиШвидкийВибір.SelectPath, TreeViewGrid.Columns[0], false);
         }
 
-        void LoadRecords_OnSearch(string searchText)
+        protected override void LoadRecords_OnSearch(string searchText)
         {
             searchText = searchText.ToLower().Trim();
 
@@ -159,41 +127,5 @@ namespace StorageAndTrade
 
             ТабличніСписки.Валюти_ЗаписиШвидкийВибір.LoadRecords();
         }
-
-        #region TreeView
-
-        void OnRowActivated(object sender, RowActivatedArgs args)
-        {
-            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
-            {
-                TreeIter iter;
-                TreeViewGrid.Model.GetIter(out iter, TreeViewGrid.Selection.GetSelectedRows()[0]);
-
-                UnigueID unigueID = new UnigueID((string)TreeViewGrid.Model.GetValue(iter, 1));
-
-                DirectoryPointerItem = unigueID;
-            }
-        }
-
-        void OnButtonPressEvent(object? sender, ButtonPressEventArgs args)
-        {
-            if (args.Event.Type == Gdk.EventType.DoubleButtonPress && TreeViewGrid.Selection.CountSelectedRows() != 0)
-            {
-                TreeIter iter;
-
-                if (TreeViewGrid.Model.GetIter(out iter, TreeViewGrid.Selection.GetSelectedRows()[0]))
-                {
-                    string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
-
-                    if (CallBack_OnSelectPointer != null)
-                        CallBack_OnSelectPointer.Invoke(new UnigueID(uid));
-
-                    if (PopoverParent != null)
-                        PopoverParent.Hide();
-                }
-            }
-        }
-
-        #endregion
     }
 }

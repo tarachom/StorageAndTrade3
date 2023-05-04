@@ -1,0 +1,111 @@
+/*
+Copyright (C) 2019-2023 TARAKHOMYN YURIY IVANOVYCH
+All rights reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
+/*
+Автор:    Тарахомин Юрій Іванович
+Адреса:   Україна, м. Львів
+Сайт:     accounting.org.ua
+*/
+
+using Gtk;
+
+using AccountingSoftware;
+
+namespace StorageAndTrade
+{
+    public abstract class ДовідникШвидкийВибір : VBox
+    {
+        public Popover? PopoverParent { get; set; }
+        public UnigueID? DirectoryPointerItem { get; set; }
+        public System.Action<UnigueID>? CallBack_OnSelectPointer { get; set; }
+
+        protected HBox HBoxTop = new HBox();
+        protected TreeView TreeViewGrid = new TreeView();
+        protected SearchControl2 Пошук = new SearchControl2();
+
+        public ДовідникШвидкийВибір(bool visibleSearch = true) : base()
+        {
+            BorderWidth = 0;
+
+            PackStart(HBoxTop, false, false, 5);
+
+            if (visibleSearch)
+            {
+                //Пошук 2
+                HBoxTop.PackStart(Пошук, false, false, 0);
+                Пошук.Select = LoadRecords_OnSearch;
+                Пошук.Clear = LoadRecords;
+            }
+
+            ScrolledWindow scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In, WidthRequest = 600, HeightRequest = 300 };
+            scrollTree.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
+
+            TreeViewGrid.Selection.Mode = SelectionMode.Multiple;
+            TreeViewGrid.ActivateOnSingleClick = true;
+            TreeViewGrid.RowActivated += OnRowActivated;
+            TreeViewGrid.ButtonPressEvent += OnButtonPressEvent;
+
+            scrollTree.Add(TreeViewGrid);
+
+            PackStart(scrollTree, true, true, 0);
+
+            ShowAll();
+        }
+
+        #region Virtual Function
+
+        public virtual void LoadRecords() { }
+
+        protected virtual void LoadRecords_OnSearch(string searchText) { }
+
+        #endregion
+
+        #region  TreeView
+
+        void OnRowActivated(object sender, RowActivatedArgs args)
+        {
+            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
+            {
+                TreeIter iter;
+                TreeViewGrid.Model.GetIter(out iter, TreeViewGrid.Selection.GetSelectedRows()[0]);
+
+                DirectoryPointerItem = new UnigueID((string)TreeViewGrid.Model.GetValue(iter, 1));
+            }
+        }
+
+        void OnButtonPressEvent(object? sender, ButtonPressEventArgs args)
+        {
+            if (args.Event.Type == Gdk.EventType.DoubleButtonPress && TreeViewGrid.Selection.CountSelectedRows() != 0)
+            {
+                TreeIter iter;
+
+                if (TreeViewGrid.Model.GetIter(out iter, TreeViewGrid.Selection.GetSelectedRows()[0]))
+                {
+                    string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
+
+                    if (CallBack_OnSelectPointer != null)
+                        CallBack_OnSelectPointer.Invoke(new UnigueID(uid));
+
+                    if (PopoverParent != null)
+                        PopoverParent.Hide();
+                }
+            }
+        }
+
+        #endregion
+    }
+}
