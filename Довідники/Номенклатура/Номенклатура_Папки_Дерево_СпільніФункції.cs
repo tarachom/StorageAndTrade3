@@ -41,7 +41,7 @@ namespace StorageAndTrade
         {
             get
             {
-                return AppContext.BaseDirectory + "images/fdoc.png";
+                return AppContext.BaseDirectory + "images/folder.png";
             }
         }
 
