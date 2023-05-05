@@ -84,7 +84,7 @@ namespace StorageAndTrade
             СкладВласник.Caption = "Склад:";
             СкладВласник.AfterSelectFunc = () =>
             {
-                DirectoryPointerItem?.Clear();
+                //DirectoryPointerItem?.Clear();
                 LoadRecords();
             };
 

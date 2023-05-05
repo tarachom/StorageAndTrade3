@@ -39,7 +39,7 @@ namespace StorageAndTrade
         Entry Назва = new Entry() { WidthRequest = 500 };
         Склади_Папки_PointerControl Родич = new Склади_Папки_PointerControl() { Caption = "Папка:" };
         ComboBoxText ТипСкладу = new ComboBoxText();
-        ВидиЦін_PointerControl ВидЦін = new ВидиЦін_PointerControl();
+        ВидиЦін_PointerControl ВидЦін = new ВидиЦін_PointerControl() { Caption = "Вид цін:" };
         ComboBoxText Налаштування = new ComboBoxText();
         Склади_ТабличнаЧастина_Контакти Контакти = new Склади_ТабличнаЧастина_Контакти();
 

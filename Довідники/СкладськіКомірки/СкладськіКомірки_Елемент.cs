@@ -35,14 +35,14 @@ namespace StorageAndTrade
         public СкладськіКомірки_Папки_Pointer РодичДляНового { get; set; } = new СкладськіКомірки_Папки_Pointer();
 
         Entry Назва = new Entry() { WidthRequest = 500 };
-        СкладськіПриміщення_PointerControl СкладськеПриміщення = new СкладськіПриміщення_PointerControl();
+        СкладськіПриміщення_PointerControl СкладськеПриміщення = new СкладськіПриміщення_PointerControl() { Caption = "Приміщення:" };
         СкладськіКомірки_Папки_PointerControl Родич = new СкладськіКомірки_Папки_PointerControl() { Caption = "Папка:" };
         Entry Лінія = new Entry() { WidthRequest = 200 };
         Entry Стелаж = new Entry() { WidthRequest = 200 };
         Entry Позиція = new Entry() { WidthRequest = 200 };
         Entry Ярус = new Entry() { WidthRequest = 200 };
         ComboBoxText ТипСкладськоїКомірки = new ComboBoxText();
-        ТипорозміриКомірок_PointerControl Типорозмір = new ТипорозміриКомірок_PointerControl();
+        ТипорозміриКомірок_PointerControl Типорозмір = new ТипорозміриКомірок_PointerControl() { Caption = "Типорозмір:" };
 
         public СкладськіКомірки_Елемент() : base() { }
 

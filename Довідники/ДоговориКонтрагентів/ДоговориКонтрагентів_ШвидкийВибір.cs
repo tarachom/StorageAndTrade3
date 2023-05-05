@@ -84,7 +84,7 @@ namespace StorageAndTrade
             КонтрагентВласник.Caption = "Контрагент:";
             КонтрагентВласник.AfterSelectFunc = () =>
             {
-                DirectoryPointerItem?.Clear();
+                //DirectoryPointerItem?.Clear();
                 LoadRecords();
             };
 

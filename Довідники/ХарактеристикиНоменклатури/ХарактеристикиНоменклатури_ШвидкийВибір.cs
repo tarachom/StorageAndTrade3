@@ -85,7 +85,7 @@ namespace StorageAndTrade
             НоменклатураВласник.Caption = $"{Номенклатура_Const.FULLNAME}:";
             НоменклатураВласник.AfterSelectFunc = () =>
             {
-                DirectoryPointerItem?.Clear();
+                //DirectoryPointerItem?.Clear();
                 LoadRecords();
             };
 

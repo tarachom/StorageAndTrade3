@@ -34,7 +34,7 @@ namespace StorageAndTrade
         public Склади_Pointer СкладДляНового { get; set; } = new Склади_Pointer();
 
         Entry Назва = new Entry() { WidthRequest = 500 };
-        Склади_PointerControl Склад = new Склади_PointerControl();
+        Склади_PointerControl Склад = new Склади_PointerControl() { Caption = "Склад:" };
         ComboBoxText Налаштування = new ComboBoxText();
 
         public СкладськіПриміщення_Елемент() : base() { }
