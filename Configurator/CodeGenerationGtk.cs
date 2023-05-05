@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 05.05.2023 19:28:01
+ * Дата конфігурації: 05.05.2023 20:17:13
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон Gtk.xslt
@@ -3597,7 +3597,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void AddColumns(TreeView treeView)
         {
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
-            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false  });
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 2));
         }
 

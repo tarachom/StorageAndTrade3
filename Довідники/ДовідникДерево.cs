@@ -203,6 +203,7 @@ namespace StorageAndTrade
             }
         }
 
+        /*
         void OnKeyReleaseEvent(object? sender, KeyReleaseEventArgs args)
         {
             switch (args.Event.Key)
@@ -240,6 +241,7 @@ namespace StorageAndTrade
                     }
             }
         }
+        */
 
         #endregion
 
