@@ -20,7 +20,9 @@ limitations under the License.
 Адреса:   Україна, м. Львів
 Сайт:     accounting.org.ua
 */
+using Gtk;
 
+using AccountingSoftware;
 using StorageAndTrade_1_0.Довідники;
 
 namespace StorageAndTrade
@@ -34,7 +36,7 @@ namespace StorageAndTrade
             Caption = $"{Склади_Папки_Const.FULLNAME}:";
         }
 
-        public string UidOpenFolder { get; set; } = "";
+        public UnigueID? OpenFolder { get; set; }
 
         Склади_Папки_Pointer pointer;
         public Склади_Папки_Pointer Pointer
@@ -56,16 +58,23 @@ namespace StorageAndTrade
 
         protected override void OpenSelect(object? sender, EventArgs args)
         {
-            Склади_Папки_Дерево page = new Склади_Папки_Дерево();
+            Popover PopoverSmallSelect = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
 
-            page.DirectoryPointerItem = Pointer;
-            page.UidOpenFolder = UidOpenFolder;
-            page.CallBack_OnSelectPointer = (Склади_Папки_Pointer selectPointer) =>
+            if (BeforeClickOpenFunc != null)
+                BeforeClickOpenFunc.Invoke();
+
+            Склади_Папки_Дерево_ШвидкийВибір page = new Склади_Папки_Дерево_ШвидкийВибір()
+            { PopoverParent = PopoverSmallSelect, OpenFolder = OpenFolder, DirectoryPointerItem = Pointer.UnigueID };
+            page.CallBack_OnSelectPointer = (UnigueID selectPointer) =>
             {
-                Pointer = selectPointer;
+                Pointer = new Склади_Папки_Pointer(selectPointer);
+
+                if (AfterSelectFunc != null)
+                    AfterSelectFunc.Invoke();
             };
 
-            Program.GeneralForm?.CreateNotebookPage($"Вибір - {Склади_Папки_Const.FULLNAME}", () => { return page; }, true);
+            PopoverSmallSelect.Add(page);
+            PopoverSmallSelect.ShowAll();
 
             page.LoadTree();
         }

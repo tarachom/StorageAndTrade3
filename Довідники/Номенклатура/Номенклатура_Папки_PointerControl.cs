@@ -37,7 +37,7 @@ namespace StorageAndTrade
             Caption = $"{Номенклатура_Папки_Const.FULLNAME}:";
         }
 
-        public string UidOpenFolder { get; set; } = "";
+        public UnigueID? OpenFolder { get; set; }
 
         Номенклатура_Папки_Pointer pointer;
         public Номенклатура_Папки_Pointer Pointer
@@ -65,7 +65,7 @@ namespace StorageAndTrade
                 BeforeClickOpenFunc.Invoke();
 
             Номенклатура_Папки_Дерево_ШвидкийВибір page = new Номенклатура_Папки_Дерево_ШвидкийВибір()
-            { PopoverParent = PopoverSmallSelect, UidOpenFolder = UidOpenFolder, DirectoryPointerItem = Pointer.UnigueID };
+            { PopoverParent = PopoverSmallSelect, OpenFolder = OpenFolder, DirectoryPointerItem = Pointer.UnigueID };
             page.CallBack_OnSelectPointer = (UnigueID selectPointer) =>
             {
                 Pointer = new Номенклатура_Папки_Pointer(selectPointer);

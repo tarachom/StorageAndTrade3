@@ -21,6 +21,8 @@ limitations under the License.
 Сайт:     accounting.org.ua
 */
 
+using Gtk;
+
 using AccountingSoftware;
 using StorageAndTrade_1_0.Довідники;
 
@@ -35,7 +37,7 @@ namespace StorageAndTrade
             Caption = $"{Контрагенти_Папки_Const.FULLNAME}:";
         }
 
-        public string UidOpenFolder { get; set; } = "";
+        public UnigueID? OpenFolder { get; set; }
 
         Контрагенти_Папки_Pointer pointer;
         public Контрагенти_Папки_Pointer Pointer
@@ -57,16 +59,23 @@ namespace StorageAndTrade
 
         protected override void OpenSelect(object? sender, EventArgs args)
         {
-            Контрагенти_Папки_Дерево page = new Контрагенти_Папки_Дерево();
+            Popover PopoverSmallSelect = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
 
-            page.DirectoryPointerItem = Pointer.UnigueID;
-            page.UidOpenFolder = UidOpenFolder;
+            if (BeforeClickOpenFunc != null)
+                BeforeClickOpenFunc.Invoke();
+
+            Контрагенти_Папки_Дерево_ШвидкийВибір page = new Контрагенти_Папки_Дерево_ШвидкийВибір()
+            { PopoverParent = PopoverSmallSelect, OpenFolder = OpenFolder, DirectoryPointerItem = Pointer.UnigueID };
             page.CallBack_OnSelectPointer = (UnigueID selectPointer) =>
             {
                 Pointer = new Контрагенти_Папки_Pointer(selectPointer);
+
+                if (AfterSelectFunc != null)
+                    AfterSelectFunc.Invoke();
             };
 
-            Program.GeneralForm?.CreateNotebookPage($"Вибір - {Контрагенти_Папки_Const.FULLNAME}", () => { return page; }, true);
+            PopoverSmallSelect.Add(page);
+            PopoverSmallSelect.ShowAll();
 
             page.LoadTree();
         }

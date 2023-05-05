@@ -60,7 +60,7 @@ namespace StorageAndTrade
                 Контрагенти_Папки_Objest.Родич = РодичДляНового;
             }
             else
-                Родич.UidOpenFolder = Контрагенти_Папки_Objest.UnigueID.ToString();
+                Родич.OpenFolder = Контрагенти_Папки_Objest.UnigueID;
 
             Код.Text = Контрагенти_Папки_Objest.Код;
             Назва.Text = Контрагенти_Папки_Objest.Назва;

@@ -26,90 +26,35 @@ using Gtk;
 using AccountingSoftware;
 
 using StorageAndTrade_1_0.Довідники;
+using ТабличніСписки = StorageAndTrade_1_0.Довідники.ТабличніСписки;
 
 namespace StorageAndTrade
 {
-    class Номенклатура_Папки_Дерево : VBox
+    class Номенклатура_Папки_Дерево : ДовідникДерево
     {
-        TreeView TreeViewGrid;
-
-        public System.Action? CallBack_RowActivated { get; set; }
-        public UnigueID? DirectoryPointerItem { get; set; }
-        public System.Action<UnigueID>? CallBack_OnSelectPointer { get; set; }
-        public Номенклатура_Папки_Pointer Parent_Pointer { get; set; } = new Номенклатура_Папки_Pointer();
-
-        public string UidOpenFolder { get; set; } = "";
-
         public Номенклатура_Папки_Дерево() : base()
         {
-            BorderWidth = 0;
-
-            CreateToolbar();
-
-            ScrolledWindow scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In };
-            scrollTree.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
-
-            TreeViewGrid = new TreeView();
-            Номенклатура_Папки_Дерево_СпільніФункції.AddColumns(TreeViewGrid);
-
-            TreeViewGrid.Selection.Mode = SelectionMode.Single;
-            TreeViewGrid.ActivateOnSingleClick = true;
-            TreeViewGrid.RowActivated += OnRowActivated;
-            TreeViewGrid.ButtonPressEvent += OnButtonPressEvent;
-            TreeViewGrid.Model = Номенклатура_Папки_Дерево_СпільніФункції.Store; ;
-
-            scrollTree.Add(TreeViewGrid);
-
-            PackStart(scrollTree, true, true, 0);
-
-            ShowAll();
+            TreeViewGrid.Model = ТабличніСписки.Номенклатура_Папки_Записи.Store;
+            ТабличніСписки.Номенклатура_Папки_Записи.AddColumns(TreeViewGrid);
         }
 
-        void CreateToolbar()
+        public override void LoadTree()
         {
-            Toolbar toolbar = new Toolbar();
-            PackStart(toolbar, false, false, 0);
+            ТабличніСписки.Номенклатура_Папки_Записи.LoadTree(OpenFolder, DirectoryPointerItem);
 
-            ToolButton addButton = new ToolButton(Stock.Add) { TooltipText = "Додати" };
-            addButton.Clicked += OnAddClick;
-            toolbar.Add(addButton);
+            TreeViewGrid.ExpandToPath(ТабличніСписки.Номенклатура_Папки_Записи.RootPath);
+            TreeViewGrid.SetCursor(ТабличніСписки.Номенклатура_Папки_Записи.RootPath, TreeViewGrid.Columns[0], false);
 
-            ToolButton upButton = new ToolButton(Stock.Edit) { TooltipText = "Редагувати" };
-            upButton.Clicked += OnEditClick;
-            toolbar.Add(upButton);
+            if (ТабличніСписки.Номенклатура_Папки_Записи.SelectPath != null)
+            {
+                TreeViewGrid.ExpandToPath(ТабличніСписки.Номенклатура_Папки_Записи.SelectPath);
+                TreeViewGrid.SetCursor(ТабличніСписки.Номенклатура_Папки_Записи.SelectPath, TreeViewGrid.Columns[0], false);
+            }
 
-            ToolButton copyButton = new ToolButton(Stock.Copy) { TooltipText = "Копіювати" };
-            copyButton.Clicked += OnCopyClick;
-            toolbar.Add(copyButton);
-
-            ToolButton deleteButton = new ToolButton(Stock.Delete) { TooltipText = "Видалити" };
-            deleteButton.Clicked += OnDeleteClick;
-            toolbar.Add(deleteButton);
-
-            ToolButton refreshButton = new ToolButton(Stock.Refresh) { TooltipText = "Обновити" };
-            refreshButton.Clicked += OnRefreshClick;
-            toolbar.Add(refreshButton);
+            RowActivated();
         }
 
-        public void LoadTree()
-        {
-            if (DirectoryPointerItem != null)
-                Parent_Pointer = new Номенклатура_Папки_Pointer(DirectoryPointerItem);
-
-            Номенклатура_Папки_Дерево_СпільніФункції.FillTree(TreeViewGrid, UidOpenFolder, Parent_Pointer);
-
-            OnRowActivated(TreeViewGrid, new RowActivatedArgs());
-        }
-
-        void CallBack_LoadRecords(UnigueID? selectPointer)
-        {
-            if (selectPointer != null)
-                Parent_Pointer = new Номенклатура_Папки_Pointer(selectPointer);
-
-            LoadTree();
-        }
-
-        void OpenPageElement(bool IsNew, string uid = "")
+        protected override void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             if (IsNew)
             {
@@ -117,9 +62,9 @@ namespace StorageAndTrade
                 {
                     Номенклатура_Папки_Елемент page = new Номенклатура_Папки_Елемент
                     {
-                        CallBack_LoadRecords = CallBack_LoadRecords,
+                        CallBack_LoadRecords = CallBack_LoadTree,
                         IsNew = true,
-                        РодичДляНового = Parent_Pointer
+                        РодичДляНового = new Номенклатура_Папки_Pointer(DirectoryPointerItem ?? new UnigueID())
                     };
 
                     page.SetValue();
@@ -127,16 +72,16 @@ namespace StorageAndTrade
                     return page;
                 }, true);
             }
-            else
+            else if (unigueID != null)
             {
                 Номенклатура_Папки_Objest Номенклатура_Папки_Objest = new Номенклатура_Папки_Objest();
-                if (Номенклатура_Папки_Objest.Read(new UnigueID(uid)))
+                if (Номенклатура_Папки_Objest.Read(unigueID))
                 {
                     Program.GeneralForm?.CreateNotebookPage($"{Номенклатура_Папки_Objest.Назва}", () =>
                     {
                         Номенклатура_Папки_Елемент page = new Номенклатура_Папки_Елемент
                         {
-                            CallBack_LoadRecords = CallBack_LoadRecords,
+                            CallBack_LoadRecords = CallBack_LoadTree,
                             IsNew = false,
                             Номенклатура_Папки_Objest = Номенклатура_Папки_Objest
                         };
@@ -151,142 +96,32 @@ namespace StorageAndTrade
             }
         }
 
-        #region TreeView
-
-        void OnRowActivated(object sender, RowActivatedArgs args)
-        {
-            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
-            {
-                TreeIter iter;
-                TreeViewGrid.Model.GetIter(out iter, TreeViewGrid.Selection.GetSelectedRows()[0]);
-
-                UnigueID unigueID = new UnigueID((string)TreeViewGrid.Model.GetValue(iter, (int)Номенклатура_Папки_Дерево_СпільніФункції.Columns.ID));
-
-                if (!unigueID.IsEmpty())
-                    Parent_Pointer = new Номенклатура_Папки_Pointer(unigueID);
-                else
-                    Parent_Pointer = new Номенклатура_Папки_Pointer();
-
-                if (CallBack_RowActivated != null)
-                    CallBack_RowActivated.Invoke();
-            }
-        }
-
-        void OnButtonPressEvent(object? sender, ButtonPressEventArgs args)
-        {
-            if (args.Event.Type == Gdk.EventType.DoubleButtonPress && TreeViewGrid.Selection.CountSelectedRows() != 0)
-            {
-                TreeIter iter;
-
-                if (TreeViewGrid.Model.GetIter(out iter, TreeViewGrid.Selection.GetSelectedRows()[0]))
-                {
-                    string uid = (string)TreeViewGrid.Model.GetValue(iter, (int)Номенклатура_Папки_Дерево_СпільніФункції.Columns.ID);
-
-                    if (DirectoryPointerItem == null)
-                    {
-                        if (new UnigueID(uid).IsEmpty())
-                            return;
-
-                        OpenPageElement(false, uid);
-                    }
-                    else
-                    {
-                        if (CallBack_OnSelectPointer != null)
-                            CallBack_OnSelectPointer.Invoke(new UnigueID(uid));
-
-                        Program.GeneralForm?.CloseCurrentPageNotebook();
-                    }
-                }
-            }
-        }
-
-        #endregion
 
         #region ToolBar
 
-        void OnAddClick(object? sender, EventArgs args)
+        protected override void SetDeletionLabel(UnigueID unigueID)
         {
-            OpenPageElement(true);
+            Номенклатура_Папки_Objest Номенклатура_Папки_Objest = new Номенклатура_Папки_Objest();
+            if (Номенклатура_Папки_Objest.Read(unigueID))
+                Номенклатура_Папки_Objest.SetDeletionLabel(!Номенклатура_Папки_Objest.DeletionLabel);
+            else
+                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
         }
 
-        void OnEditClick(object? sender, EventArgs args)
+        protected override UnigueID? Copy(UnigueID unigueID)
         {
-            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
+            Номенклатура_Папки_Objest Номенклатура_Папки_Objest = new Номенклатура_Папки_Objest();
+            if (Номенклатура_Папки_Objest.Read(unigueID))
             {
-                TreeIter iter;
-                if (TreeViewGrid.Model.GetIter(out iter, TreeViewGrid.Selection.GetSelectedRows()[0]))
-                {
-                    string uid = (string)TreeViewGrid.Model.GetValue(iter, (int)Номенклатура_Папки_Дерево_СпільніФункції.Columns.ID);
+                Номенклатура_Папки_Objest Номенклатура_Папки_Objest_Новий = Номенклатура_Папки_Objest.Copy(true);
+                Номенклатура_Папки_Objest_Новий.Save();
 
-                    if (new UnigueID(uid).IsEmpty())
-                        return;
-
-                    OpenPageElement(false, uid);
-                }
+                return Номенклатура_Папки_Objest_Новий.UnigueID;
             }
-        }
-
-        void OnRefreshClick(object? sender, EventArgs args)
-        {
-            LoadTree();
-        }
-
-        void OnDeleteClick(object? sender, EventArgs args)
-        {
-            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
+            else
             {
-                TreePath selectionRow = TreeViewGrid.Selection.GetSelectedRows()[0];
-
-                TreeIter iter;
-                TreeViewGrid.Model.GetIter(out iter, selectionRow);
-
-                UnigueID unigueID = new UnigueID((string)TreeViewGrid.Model.GetValue(iter, (int)Номенклатура_Папки_Дерево_СпільніФункції.Columns.ID));
-
-                if (unigueID.IsEmpty())
-                    return;
-
-                if (Message.Request(Program.GeneralForm, "Встановити або зняти помітку на видалення?") == ResponseType.Yes)
-                {
-                    Номенклатура_Папки_Objest Номенклатура_Папки_Objest = new Номенклатура_Папки_Objest();
-                    if (Номенклатура_Папки_Objest.Read(unigueID))
-                        Номенклатура_Папки_Objest.SetDeletionLabel(!Номенклатура_Папки_Objest.DeletionLabel);
-                    else
-                        Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-
-                    LoadTree();
-                }
-            }
-        }
-
-        void OnCopyClick(object? sender, EventArgs args)
-        {
-            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
-            {
-                TreePath selectionRow = TreeViewGrid.Selection.GetSelectedRows()[0];
-
-                TreeIter iter;
-                TreeViewGrid.Model.GetIter(out iter, selectionRow);
-
-                UnigueID unigueID = new UnigueID((string)TreeViewGrid.Model.GetValue(iter, (int)Номенклатура_Папки_Дерево_СпільніФункції.Columns.ID));
-
-                if (unigueID.IsEmpty())
-                    return;
-
-                if (Message.Request(Program.GeneralForm, "Копіювати?") == ResponseType.Yes)
-                {
-                    Номенклатура_Папки_Objest Номенклатура_Папки_Objest = new Номенклатура_Папки_Objest();
-                    if (Номенклатура_Папки_Objest.Read(unigueID))
-                    {
-                        Номенклатура_Папки_Objest Номенклатура_Папки_Objest_Новий = Номенклатура_Папки_Objest.Copy(true);
-                        Номенклатура_Папки_Objest_Новий.Save();
-
-                        Parent_Pointer = Номенклатура_Папки_Objest_Новий.GetDirectoryPointer();
-                    }
-                    else
-                        Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-
-                    LoadTree();
-                }
+                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+                return null;
             }
         }
 

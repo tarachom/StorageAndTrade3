@@ -30,28 +30,28 @@ using ТабличніСписки = StorageAndTrade_1_0.Довідники.Та
 
 namespace StorageAndTrade
 {
-    class Номенклатура_Папки_Дерево_ШвидкийВибір : ДовідникШвидкийВибір
+    class Контрагенти_Папки_Дерево_ШвидкийВибір : ДовідникШвидкийВибір
     {
         public UnigueID? OpenFolder { get; set; }
 
-        public Номенклатура_Папки_Дерево_ШвидкийВибір() : base(false)
+        public Контрагенти_Папки_Дерево_ШвидкийВибір() : base(false)
         {
-            TreeViewGrid.Model = ТабличніСписки.Номенклатура_Папки_ЗаписиШвидкийВибір.Store;
-            ТабличніСписки.Номенклатура_Папки_ЗаписиШвидкийВибір.AddColumns(TreeViewGrid);
+            TreeViewGrid.Model = ТабличніСписки.Контрагенти_Папки_ЗаписиШвидкийВибір.Store;
+            ТабличніСписки.Контрагенти_Папки_ЗаписиШвидкийВибір.AddColumns(TreeViewGrid);
 
             //Сторінка
             {
-                LinkButton linkPage = new LinkButton($" {Номенклатура_Папки_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
+                LinkButton linkPage = new LinkButton($" {Контрагенти_Папки_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
                 linkPage.Clicked += (object? sender, EventArgs args) =>
                 {
-                    Номенклатура_Папки_Дерево page = new Номенклатура_Папки_Дерево()
+                    Контрагенти_Папки_Дерево page = new Контрагенти_Папки_Дерево()
                     {
                         DirectoryPointerItem = DirectoryPointerItem,
                         CallBack_OnSelectPointer = CallBack_OnSelectPointer,
                         OpenFolder = OpenFolder
                     };
 
-                    Program.GeneralForm?.CreateNotebookPage($"Вибір - {Номенклатура_Папки_Const.FULLNAME}", () => { return page; }, true);
+                    Program.GeneralForm?.CreateNotebookPage($"Вибір - {Контрагенти_Папки_Const.FULLNAME}", () => { return page; }, true);
 
                     page.LoadTree();
                 };
@@ -64,13 +64,13 @@ namespace StorageAndTrade
                 LinkButton linkNew = new LinkButton("Новий");
                 linkNew.Clicked += (object? sender, EventArgs args) =>
                 {
-                    Номенклатура_Папки_Елемент page = new Номенклатура_Папки_Елемент
+                    Контрагенти_Папки_Елемент page = new Контрагенти_Папки_Елемент
                     {
                         IsNew = true,
                         CallBack_OnSelectPointer = CallBack_OnSelectPointer
                     };
 
-                    Program.GeneralForm?.CreateNotebookPage($"{Номенклатура_Папки_Const.FULLNAME} *", () => { return page; }, true);
+                    Program.GeneralForm?.CreateNotebookPage($"{Контрагенти_Папки_Const.FULLNAME} *", () => { return page; }, true);
 
                     page.SetValue();
                 };
@@ -98,15 +98,15 @@ namespace StorageAndTrade
 
         public void LoadTree()
         {
-            ТабличніСписки.Номенклатура_Папки_ЗаписиШвидкийВибір.LoadTree(OpenFolder, DirectoryPointerItem);
+            ТабличніСписки.Контрагенти_Папки_ЗаписиШвидкийВибір.LoadTree(OpenFolder, DirectoryPointerItem);
 
-            TreeViewGrid.ExpandToPath(ТабличніСписки.Номенклатура_Папки_ЗаписиШвидкийВибір.RootPath);
-            TreeViewGrid.SetCursor(ТабличніСписки.Номенклатура_Папки_ЗаписиШвидкийВибір.RootPath, TreeViewGrid.Columns[0], false);
+            TreeViewGrid.ExpandToPath(ТабличніСписки.Контрагенти_Папки_ЗаписиШвидкийВибір.RootPath);
+            TreeViewGrid.SetCursor(ТабличніСписки.Контрагенти_Папки_ЗаписиШвидкийВибір.RootPath, TreeViewGrid.Columns[0], false);
 
-            if (ТабличніСписки.Номенклатура_Папки_ЗаписиШвидкийВибір.SelectPath != null)
+            if (ТабличніСписки.Контрагенти_Папки_ЗаписиШвидкийВибір.SelectPath != null)
             {
-                TreeViewGrid.ExpandToPath(ТабличніСписки.Номенклатура_Папки_ЗаписиШвидкийВибір.SelectPath);
-                TreeViewGrid.SetCursor(ТабличніСписки.Номенклатура_Папки_ЗаписиШвидкийВибір.SelectPath, TreeViewGrid.Columns[0], false);
+                TreeViewGrid.ExpandToPath(ТабличніСписки.Контрагенти_Папки_ЗаписиШвидкийВибір.SelectPath);
+                TreeViewGrid.SetCursor(ТабличніСписки.Контрагенти_Папки_ЗаписиШвидкийВибір.SelectPath, TreeViewGrid.Columns[0], false);
             }
         }
     }

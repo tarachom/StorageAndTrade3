@@ -1827,6 +1827,8 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВі�
         public <xsl:value-of select="$RegisterName"/>_Objest Copy()
         {
             <xsl:value-of select="$RegisterName"/>_Objest copy = new <xsl:value-of select="$RegisterName"/>_Objest();
+            copy.Period = Period; /* Базове поле */
+            
             <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
               <xsl:text>copy.</xsl:text><xsl:value-of select="Name"/><xsl:text> = </xsl:text><xsl:value-of select="Name"/>;
             </xsl:for-each>

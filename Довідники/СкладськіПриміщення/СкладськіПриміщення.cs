@@ -74,6 +74,12 @@ namespace StorageAndTrade
 
             ТабличніСписки.СкладськіПриміщення_Записи.Where.Clear();
 
+            if (!СкладВласник.Pointer.UnigueID.IsEmpty())
+            {
+                ТабличніСписки.СкладськіПриміщення_Записи.Where.Add(
+                    new Where(СкладськіПриміщення_Const.Склад, Comparison.EQ, СкладВласник.Pointer.UnigueID.UGuid));
+            }
+
             ТабличніСписки.СкладськіПриміщення_Записи.LoadRecords();
 
             if (ТабличніСписки.СкладськіПриміщення_Записи.SelectPath != null)

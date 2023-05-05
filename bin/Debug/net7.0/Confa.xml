@@ -5,7 +5,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>03.05.2023 21:29:35</DateTimeSave>
+  <DateTimeSave>05.05.2023 19:28:01</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -1118,6 +1118,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>Записи</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -1145,6 +1146,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -1334,6 +1336,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>ЗаписиПрототип</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -1388,6 +1391,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -1453,6 +1457,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>Записи</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -1480,6 +1485,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -1577,6 +1583,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>Записи</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -1604,6 +1611,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -1679,6 +1687,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>Записи</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -1706,6 +1715,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -1799,6 +1809,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>Записи</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -1856,6 +1867,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -2092,6 +2104,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>Записи</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -2137,6 +2150,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -2350,6 +2364,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>Записи</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -2395,6 +2410,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -2471,6 +2487,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>Записи</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -2516,6 +2533,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -2582,6 +2600,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>Записи</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -2609,6 +2628,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -2777,6 +2797,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>Записи</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -2804,6 +2825,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -2963,6 +2985,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>Записи</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -2990,6 +3013,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -3056,6 +3080,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>Записи</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -3083,6 +3108,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -3138,6 +3164,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>Записи</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -3165,6 +3192,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -3270,6 +3298,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>Записи</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -3327,6 +3356,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -3403,6 +3433,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>Записи</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -3448,6 +3479,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -3537,7 +3569,22 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
         </Field>
       </Fields>
       <TabularParts />
-      <TabularLists />
+      <TabularLists>
+        <TabularList>
+          <Name>Записи</Name>
+          <Desc>
+          </Desc>
+          <IsTree>1</IsTree>
+          <Fields />
+        </TabularList>
+        <TabularList>
+          <Name>ЗаписиШвидкийВибір</Name>
+          <Desc>
+          </Desc>
+          <IsTree>1</IsTree>
+          <Fields />
+        </TabularList>
+      </TabularLists>
       <TriggerFunctions>
         <New>Номенклатура_Папки_Triggers.New</New>
         <Copying>Номенклатура_Папки_Triggers.Copying</Copying>
@@ -3585,7 +3632,22 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
         </Field>
       </Fields>
       <TabularParts />
-      <TabularLists />
+      <TabularLists>
+        <TabularList>
+          <Name>Записи</Name>
+          <Desc>
+          </Desc>
+          <IsTree>1</IsTree>
+          <Fields />
+        </TabularList>
+        <TabularList>
+          <Name>ЗаписиШвидкийВибір</Name>
+          <Desc>
+          </Desc>
+          <IsTree>1</IsTree>
+          <Fields />
+        </TabularList>
+      </TabularLists>
       <TriggerFunctions>
         <New>Контрагенти_Папки_Triggers.New</New>
         <Copying>Контрагенти_Папки_Triggers.Copying</Copying>
@@ -3633,7 +3695,22 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
         </Field>
       </Fields>
       <TabularParts />
-      <TabularLists />
+      <TabularLists>
+        <TabularList>
+          <Name>Записи</Name>
+          <Desc>
+          </Desc>
+          <IsTree>1</IsTree>
+          <Fields />
+        </TabularList>
+        <TabularList>
+          <Name>ЗаписиШвидкийВибір</Name>
+          <Desc>
+          </Desc>
+          <IsTree>1</IsTree>
+          <Fields />
+        </TabularList>
+      </TabularLists>
       <TriggerFunctions>
         <New>Склади_Папки_Triggers.New</New>
         <Copying>Склади_Папки_Triggers.Copying</Copying>
@@ -3697,6 +3774,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>ЗаписиПрототип</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -3742,6 +3820,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -3938,6 +4017,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>Записи</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -3983,6 +4063,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -4255,6 +4336,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>Записи</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -4309,6 +4391,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -4523,6 +4606,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>Записи</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -4568,6 +4652,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -4701,6 +4786,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>Записи</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -4747,6 +4833,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -4814,6 +4901,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>Записи</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Номер</Name>
@@ -4831,6 +4919,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Номер</Name>
@@ -4930,6 +5019,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>Записи</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -5002,6 +5092,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -5124,6 +5215,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>Записи</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -5151,6 +5243,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -5477,6 +5570,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>Записи</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -5674,6 +5768,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -5755,6 +5850,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>Записи</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -5799,6 +5895,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -5959,6 +6056,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>Записи</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -6079,6 +6177,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -6167,6 +6266,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>Записи</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -6287,6 +6387,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>Записи</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -6354,6 +6455,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -6427,7 +6529,22 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
         </Field>
       </Fields>
       <TabularParts />
-      <TabularLists />
+      <TabularLists>
+        <TabularList>
+          <Name>Записи</Name>
+          <Desc>
+          </Desc>
+          <IsTree>1</IsTree>
+          <Fields />
+        </TabularList>
+        <TabularList>
+          <Name>ЗаписиШвидкийВибір</Name>
+          <Desc>
+          </Desc>
+          <IsTree>1</IsTree>
+          <Fields />
+        </TabularList>
+      </TabularLists>
       <TriggerFunctions>
         <New>СкладськіКомірки_Папки_Triggers.New</New>
         <Copying>СкладськіКомірки_Папки_Triggers.Copying</Copying>
@@ -6499,6 +6616,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>Записи</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -6536,6 +6654,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -7001,6 +7120,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>Записи</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -7663,6 +7783,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>Записи</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -8289,6 +8410,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>Записи</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -8970,6 +9092,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>Записи</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -9328,6 +9451,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>Записи</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -9729,6 +9853,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>Записи</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -10200,6 +10325,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>Записи</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -10692,6 +10818,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>Записи</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -11187,6 +11314,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>Записи</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -11697,6 +11825,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>Записи</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -12140,6 +12269,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>Записи</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -12677,6 +12807,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>Записи</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -13008,6 +13139,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>Записи</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -13304,6 +13436,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>Записи</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -13597,6 +13730,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>Записи</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -13941,6 +14075,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>Записи</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -14321,6 +14456,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>Записи</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -14806,6 +14942,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>Записи</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -15195,6 +15332,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>Записи</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -15519,6 +15657,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>Записи</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -15844,6 +15983,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>Записи</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -16125,6 +16265,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>Записи</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -23345,6 +23486,7 @@ SQL тип  непотрібно вказувати
           <Name>Записи</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Номенклатура</Name>
@@ -23500,6 +23642,7 @@ SQL тип  непотрібно вказувати
           <Name>Записи</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Валюта</Name>
@@ -23604,6 +23747,7 @@ SQL тип  непотрібно вказувати
           <Name>Записи</Name>
           <Desc>
           </Desc>
+          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Штрихкод</Name>

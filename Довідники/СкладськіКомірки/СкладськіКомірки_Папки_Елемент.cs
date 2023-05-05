@@ -66,7 +66,7 @@ namespace StorageAndTrade
                 СкладськіКомірки_Папки_Objest.Приміщення = СкладськеПриміщенняДляНового;
             }
             else
-                Родич.UidOpenFolder = СкладськіКомірки_Папки_Objest.UnigueID.ToString();
+                Родич.OpenFolder = СкладськіКомірки_Папки_Objest.UnigueID;
 
             Код.Text = СкладськіКомірки_Папки_Objest.Код;
             Назва.Text = СкладськіКомірки_Папки_Objest.Назва;

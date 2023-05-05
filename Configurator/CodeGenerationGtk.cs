@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 03.05.2023 21:29:35
+ * Дата конфігурації: 05.05.2023 19:28:01
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон Gtk.xslt
@@ -42,6 +42,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
     #region DIRECTORY "Організації"
     
       
+    /* ТАБЛИЦЯ */
     public class Організації_Записи
     {
         string Image 
@@ -146,6 +147,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         }
     }
 	    
+    /* ТАБЛИЦЯ */
     public class Організації_ЗаписиШвидкийВибір
     {
         string Image 
@@ -255,6 +257,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
     #region DIRECTORY "Номенклатура"
     
       
+    /* ТАБЛИЦЯ */
     public class Номенклатура_ЗаписиПрототип
     {
         string Image 
@@ -376,6 +379,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         }
     }
 	    
+    /* ТАБЛИЦЯ */
     public class Номенклатура_ЗаписиШвидкийВибір
     {
         string Image 
@@ -394,7 +398,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID  
+            return new object[] { new Gdk.Pixbuf(Image), ID
             /* */ , Код, Назва };
         }
 
@@ -485,6 +489,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
     #region DIRECTORY "Виробники"
     
       
+    /* ТАБЛИЦЯ */
     public class Виробники_Записи
     {
         string Image 
@@ -589,6 +594,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         }
     }
 	    
+    /* ТАБЛИЦЯ */
     public class Виробники_ЗаписиШвидкийВибір
     {
         string Image 
@@ -698,6 +704,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
     #region DIRECTORY "ВидиНоменклатури"
     
       
+    /* ТАБЛИЦЯ */
     public class ВидиНоменклатури_Записи
     {
         string Image 
@@ -802,6 +809,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         }
     }
 	    
+    /* ТАБЛИЦЯ */
     public class ВидиНоменклатури_ЗаписиШвидкийВибір
     {
         string Image 
@@ -906,6 +914,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
     #region DIRECTORY "ПакуванняОдиниціВиміру"
     
       
+    /* ТАБЛИЦЯ */
     public class ПакуванняОдиниціВиміру_Записи
     {
         string Image 
@@ -1010,6 +1019,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         }
     }
 	    
+    /* ТАБЛИЦЯ */
     public class ПакуванняОдиниціВиміру_ЗаписиШвидкийВибір
     {
         string Image 
@@ -1119,6 +1129,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
     #region DIRECTORY "Валюти"
     
       
+    /* ТАБЛИЦЯ */
     public class Валюти_Записи
     {
         string Image 
@@ -1238,6 +1249,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         }
     }
 	    
+    /* ТАБЛИЦЯ */
     public class Валюти_ЗаписиШвидкийВибір
     {
         string Image 
@@ -1357,6 +1369,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
     #region DIRECTORY "Контрагенти"
     
       
+    /* ТАБЛИЦЯ */
     public class Контрагенти_Записи
     {
         string Image 
@@ -1473,6 +1486,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         }
     }
 	    
+    /* ТАБЛИЦЯ */
     public class Контрагенти_ЗаписиШвидкийВибір
     {
         string Image 
@@ -1582,6 +1596,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
     #region DIRECTORY "Склади"
     
       
+    /* ТАБЛИЦЯ */
     public class Склади_Записи
     {
         string Image 
@@ -1696,6 +1711,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         }
     }
 	    
+    /* ТАБЛИЦЯ */
     public class Склади_ЗаписиШвидкийВибір
     {
         string Image 
@@ -1805,6 +1821,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
     #region DIRECTORY "ВидиЦін"
     
       
+    /* ТАБЛИЦЯ */
     public class ВидиЦін_Записи
     {
         string Image 
@@ -1921,6 +1938,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         }
     }
 	    
+    /* ТАБЛИЦЯ */
     public class ВидиЦін_ЗаписиШвидкийВибір
     {
         string Image 
@@ -2025,6 +2043,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
     #region DIRECTORY "ВидиЦінПостачальників"
     
       
+    /* ТАБЛИЦЯ */
     public class ВидиЦінПостачальників_Записи
     {
         string Image 
@@ -2129,6 +2148,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         }
     }
 	    
+    /* ТАБЛИЦЯ */
     public class ВидиЦінПостачальників_ЗаписиШвидкийВибір
     {
         string Image 
@@ -2238,6 +2258,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
     #region DIRECTORY "Користувачі"
     
       
+    /* ТАБЛИЦЯ */
     public class Користувачі_Записи
     {
         string Image 
@@ -2342,6 +2363,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         }
     }
 	    
+    /* ТАБЛИЦЯ */
     public class Користувачі_ЗаписиШвидкийВибір
     {
         string Image 
@@ -2446,6 +2468,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
     #region DIRECTORY "ФізичніОсоби"
     
       
+    /* ТАБЛИЦЯ */
     public class ФізичніОсоби_Записи
     {
         string Image 
@@ -2550,6 +2573,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         }
     }
 	    
+    /* ТАБЛИЦЯ */
     public class ФізичніОсоби_ЗаписиШвидкийВибір
     {
         string Image 
@@ -2654,6 +2678,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
     #region DIRECTORY "СтруктураПідприємства"
     
       
+    /* ТАБЛИЦЯ */
     public class СтруктураПідприємства_Записи
     {
         string Image 
@@ -2758,6 +2783,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         }
     }
 	    
+    /* ТАБЛИЦЯ */
     public class СтруктураПідприємства_ЗаписиШвидкийВибір
     {
         string Image 
@@ -2862,6 +2888,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
     #region DIRECTORY "КраїниСвіту"
     
       
+    /* ТАБЛИЦЯ */
     public class КраїниСвіту_Записи
     {
         string Image 
@@ -2966,6 +2993,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         }
     }
 	    
+    /* ТАБЛИЦЯ */
     public class КраїниСвіту_ЗаписиШвидкийВибір
     {
         string Image 
@@ -3075,6 +3103,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
     #region DIRECTORY "Файли"
     
       
+    /* ТАБЛИЦЯ */
     public class Файли_Записи
     {
         string Image 
@@ -3194,6 +3223,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         }
     }
 	    
+    /* ТАБЛИЦЯ */
     public class Файли_ЗаписиШвидкийВибір
     {
         string Image 
@@ -3298,6 +3328,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
     #region DIRECTORY "ХарактеристикиНоменклатури"
     
       
+    /* ТАБЛИЦЯ */
     public class ХарактеристикиНоменклатури_Записи
     {
         string Image 
@@ -3414,6 +3445,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         }
     }
 	    
+    /* ТАБЛИЦЯ */
     public class ХарактеристикиНоменклатури_ЗаписиШвидкийВибір
     {
         string Image 
@@ -3535,21 +3567,850 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
     #region DIRECTORY "Номенклатура_Папки"
     
       
+    /* ДЕРЕВО */
+    public class Номенклатура_Папки_Записи
+    {
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc.png" : "folder.png");
+            }
+        }
+
+        bool DeletionLabel = false;
+        string ID = "";
+        string Назва = "";
+
+        Array ToArray()
+        {
+            return new object[] { new Gdk.Pixbuf(Image), ID, Назва };
+        }
+
+        public static TreeStore Store = new TreeStore
+        (
+            typeof(Gdk.Pixbuf) /* Image */, 
+            typeof(string)     /* ID */, 
+            typeof(string)     /* Назва */
+        );
+
+        public static void AddColumns(TreeView treeView)
+        {
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 2));
+        }
+
+        public static TreePath? RootPath;
+        public static TreePath? SelectPath;
+
+        public static void LoadTree(UnigueID? OpenFolder, UnigueID? selectPointer)
+        {
+            Store.Clear();
+            RootPath = SelectPath = null;
+
+            Номенклатура_Папки_Записи rootRecord = new Номенклатура_Папки_Записи
+            {
+                ID = Guid.Empty.ToString(),
+                Назва = " Дерево "
+            };
+
+            TreeIter rootIter = Store.AppendValues(rootRecord.ToArray());
+            RootPath = Store.GetPath(rootIter);
+
+            #region SQL
+
+            string query = $@"
+WITH RECURSIVE r AS (
+    SELECT 
+        uid, 
+        {Номенклатура_Папки_Const.Назва}, 
+        {Номенклатура_Папки_Const.Родич}, 
+        1 AS level,
+        deletion_label
+    FROM {Номенклатура_Папки_Const.TABLE}
+    WHERE {Номенклатура_Папки_Const.Родич} = '{Guid.Empty}'";
+
+            if (OpenFolder != null)
+                query += $" AND uid != '{OpenFolder}'";
+
+            query += $@"
+    UNION ALL
+    SELECT 
+        {Номенклатура_Папки_Const.TABLE}.uid, 
+        {Номенклатура_Папки_Const.TABLE}.{Номенклатура_Папки_Const.Назва}, 
+        {Номенклатура_Папки_Const.TABLE}.{Номенклатура_Папки_Const.Родич}, 
+        r.level + 1 AS level,
+        {Номенклатура_Папки_Const.TABLE}.deletion_label 
+    FROM {Номенклатура_Папки_Const.TABLE}
+        JOIN r ON {Номенклатура_Папки_Const.TABLE}.{Номенклатура_Папки_Const.Родич} = r.uid";
+
+            if (OpenFolder != null)
+                query += $@"
+    WHERE {Номенклатура_Папки_Const.TABLE}.uid != '{OpenFolder}'";
+
+            query += $@"
+)
+SELECT 
+    uid, 
+    {Номенклатура_Папки_Const.Назва}, 
+    {Номенклатура_Папки_Const.Родич}, 
+    level,
+    deletion_label
+FROM r
+ORDER BY level, {Номенклатура_Папки_Const.Назва} ASC
+";
+
+            #endregion
+
+            string[] columnsName;
+            List<object[]>? listRow = null;
+
+            Config.Kernel?.DataBase.SelectRequest(query, null, out columnsName, out listRow);
+
+            Dictionary<string, TreeIter> nodeDictionary = new Dictionary<string, TreeIter>();
+
+            if (listRow != null)
+                foreach (object[] row in listRow)
+                {
+                    string uid = row[0]?.ToString() ?? Guid.Empty.ToString();
+                    string fieldName = (row[1]?.ToString() ?? "");
+                    string fieldParent = row[2]?.ToString() ?? Guid.Empty.ToString();
+                    int level = (int)row[3];
+                    bool deletionLabel = (bool)row[4];
+
+                    Номенклатура_Папки_Записи record = new Номенклатура_Папки_Записи
+                    {
+                        DeletionLabel = deletionLabel,
+                        ID = uid,
+                        Назва = fieldName
+                    };
+                    
+                    TreeIter Iter;
+
+                    if (level == 1)
+                        Iter = Store.AppendValues(rootIter, record.ToArray());
+                    else
+                    {
+                        TreeIter parentIter = nodeDictionary[fieldParent];
+                        Iter = Store.AppendValues(parentIter, record.ToArray());
+                    }
+
+                    nodeDictionary.Add(uid, Iter);
+
+                    if (selectPointer != null)
+                        if (uid == selectPointer.ToString())
+                            SelectPath = Store.GetPath(Iter);
+                }
+        }
+    }
+      
+    /* ДЕРЕВО */
+    public class Номенклатура_Папки_ЗаписиШвидкийВибір
+    {
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc.png" : "folder.png");
+            }
+        }
+
+        bool DeletionLabel = false;
+        string ID = "";
+        string Назва = "";
+
+        Array ToArray()
+        {
+            return new object[] { new Gdk.Pixbuf(Image), ID, Назва };
+        }
+
+        public static TreeStore Store = new TreeStore
+        (
+            typeof(Gdk.Pixbuf) /* Image */, 
+            typeof(string)     /* ID */, 
+            typeof(string)     /* Назва */
+        );
+
+        public static void AddColumns(TreeView treeView)
+        {
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 2));
+        }
+
+        public static TreePath? RootPath;
+        public static TreePath? SelectPath;
+
+        public static void LoadTree(UnigueID? OpenFolder, UnigueID? selectPointer)
+        {
+            Store.Clear();
+            RootPath = SelectPath = null;
+
+            Номенклатура_Папки_ЗаписиШвидкийВибір rootRecord = new Номенклатура_Папки_ЗаписиШвидкийВибір
+            {
+                ID = Guid.Empty.ToString(),
+                Назва = " Дерево "
+            };
+
+            TreeIter rootIter = Store.AppendValues(rootRecord.ToArray());
+            RootPath = Store.GetPath(rootIter);
+
+            #region SQL
+
+            string query = $@"
+WITH RECURSIVE r AS (
+    SELECT 
+        uid, 
+        {Номенклатура_Папки_Const.Назва}, 
+        {Номенклатура_Папки_Const.Родич}, 
+        1 AS level,
+        deletion_label
+    FROM {Номенклатура_Папки_Const.TABLE}
+    WHERE {Номенклатура_Папки_Const.Родич} = '{Guid.Empty}'";
+
+            if (OpenFolder != null)
+                query += $" AND uid != '{OpenFolder}'";
+
+            query += $@"
+    UNION ALL
+    SELECT 
+        {Номенклатура_Папки_Const.TABLE}.uid, 
+        {Номенклатура_Папки_Const.TABLE}.{Номенклатура_Папки_Const.Назва}, 
+        {Номенклатура_Папки_Const.TABLE}.{Номенклатура_Папки_Const.Родич}, 
+        r.level + 1 AS level,
+        {Номенклатура_Папки_Const.TABLE}.deletion_label 
+    FROM {Номенклатура_Папки_Const.TABLE}
+        JOIN r ON {Номенклатура_Папки_Const.TABLE}.{Номенклатура_Папки_Const.Родич} = r.uid";
+
+            if (OpenFolder != null)
+                query += $@"
+    WHERE {Номенклатура_Папки_Const.TABLE}.uid != '{OpenFolder}'";
+
+            query += $@"
+)
+SELECT 
+    uid, 
+    {Номенклатура_Папки_Const.Назва}, 
+    {Номенклатура_Папки_Const.Родич}, 
+    level,
+    deletion_label
+FROM r
+ORDER BY level, {Номенклатура_Папки_Const.Назва} ASC
+";
+
+            #endregion
+
+            string[] columnsName;
+            List<object[]>? listRow = null;
+
+            Config.Kernel?.DataBase.SelectRequest(query, null, out columnsName, out listRow);
+
+            Dictionary<string, TreeIter> nodeDictionary = new Dictionary<string, TreeIter>();
+
+            if (listRow != null)
+                foreach (object[] row in listRow)
+                {
+                    string uid = row[0]?.ToString() ?? Guid.Empty.ToString();
+                    string fieldName = (row[1]?.ToString() ?? "");
+                    string fieldParent = row[2]?.ToString() ?? Guid.Empty.ToString();
+                    int level = (int)row[3];
+                    bool deletionLabel = (bool)row[4];
+
+                    Номенклатура_Папки_ЗаписиШвидкийВибір record = new Номенклатура_Папки_ЗаписиШвидкийВибір
+                    {
+                        DeletionLabel = deletionLabel,
+                        ID = uid,
+                        Назва = fieldName
+                    };
+                    
+                    TreeIter Iter;
+
+                    if (level == 1)
+                        Iter = Store.AppendValues(rootIter, record.ToArray());
+                    else
+                    {
+                        TreeIter parentIter = nodeDictionary[fieldParent];
+                        Iter = Store.AppendValues(parentIter, record.ToArray());
+                    }
+
+                    nodeDictionary.Add(uid, Iter);
+
+                    if (selectPointer != null)
+                        if (uid == selectPointer.ToString())
+                            SelectPath = Store.GetPath(Iter);
+                }
+        }
+    }
+      
     #endregion
     
     #region DIRECTORY "Контрагенти_Папки"
     
+      
+    /* ДЕРЕВО */
+    public class Контрагенти_Папки_Записи
+    {
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc.png" : "folder.png");
+            }
+        }
+
+        bool DeletionLabel = false;
+        string ID = "";
+        string Назва = "";
+
+        Array ToArray()
+        {
+            return new object[] { new Gdk.Pixbuf(Image), ID, Назва };
+        }
+
+        public static TreeStore Store = new TreeStore
+        (
+            typeof(Gdk.Pixbuf) /* Image */, 
+            typeof(string)     /* ID */, 
+            typeof(string)     /* Назва */
+        );
+
+        public static void AddColumns(TreeView treeView)
+        {
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 2));
+        }
+
+        public static TreePath? RootPath;
+        public static TreePath? SelectPath;
+
+        public static void LoadTree(UnigueID? OpenFolder, UnigueID? selectPointer)
+        {
+            Store.Clear();
+            RootPath = SelectPath = null;
+
+            Контрагенти_Папки_Записи rootRecord = new Контрагенти_Папки_Записи
+            {
+                ID = Guid.Empty.ToString(),
+                Назва = " Дерево "
+            };
+
+            TreeIter rootIter = Store.AppendValues(rootRecord.ToArray());
+            RootPath = Store.GetPath(rootIter);
+
+            #region SQL
+
+            string query = $@"
+WITH RECURSIVE r AS (
+    SELECT 
+        uid, 
+        {Контрагенти_Папки_Const.Назва}, 
+        {Контрагенти_Папки_Const.Родич}, 
+        1 AS level,
+        deletion_label
+    FROM {Контрагенти_Папки_Const.TABLE}
+    WHERE {Контрагенти_Папки_Const.Родич} = '{Guid.Empty}'";
+
+            if (OpenFolder != null)
+                query += $" AND uid != '{OpenFolder}'";
+
+            query += $@"
+    UNION ALL
+    SELECT 
+        {Контрагенти_Папки_Const.TABLE}.uid, 
+        {Контрагенти_Папки_Const.TABLE}.{Контрагенти_Папки_Const.Назва}, 
+        {Контрагенти_Папки_Const.TABLE}.{Контрагенти_Папки_Const.Родич}, 
+        r.level + 1 AS level,
+        {Контрагенти_Папки_Const.TABLE}.deletion_label 
+    FROM {Контрагенти_Папки_Const.TABLE}
+        JOIN r ON {Контрагенти_Папки_Const.TABLE}.{Контрагенти_Папки_Const.Родич} = r.uid";
+
+            if (OpenFolder != null)
+                query += $@"
+    WHERE {Контрагенти_Папки_Const.TABLE}.uid != '{OpenFolder}'";
+
+            query += $@"
+)
+SELECT 
+    uid, 
+    {Контрагенти_Папки_Const.Назва}, 
+    {Контрагенти_Папки_Const.Родич}, 
+    level,
+    deletion_label
+FROM r
+ORDER BY level, {Контрагенти_Папки_Const.Назва} ASC
+";
+
+            #endregion
+
+            string[] columnsName;
+            List<object[]>? listRow = null;
+
+            Config.Kernel?.DataBase.SelectRequest(query, null, out columnsName, out listRow);
+
+            Dictionary<string, TreeIter> nodeDictionary = new Dictionary<string, TreeIter>();
+
+            if (listRow != null)
+                foreach (object[] row in listRow)
+                {
+                    string uid = row[0]?.ToString() ?? Guid.Empty.ToString();
+                    string fieldName = (row[1]?.ToString() ?? "");
+                    string fieldParent = row[2]?.ToString() ?? Guid.Empty.ToString();
+                    int level = (int)row[3];
+                    bool deletionLabel = (bool)row[4];
+
+                    Контрагенти_Папки_Записи record = new Контрагенти_Папки_Записи
+                    {
+                        DeletionLabel = deletionLabel,
+                        ID = uid,
+                        Назва = fieldName
+                    };
+                    
+                    TreeIter Iter;
+
+                    if (level == 1)
+                        Iter = Store.AppendValues(rootIter, record.ToArray());
+                    else
+                    {
+                        TreeIter parentIter = nodeDictionary[fieldParent];
+                        Iter = Store.AppendValues(parentIter, record.ToArray());
+                    }
+
+                    nodeDictionary.Add(uid, Iter);
+
+                    if (selectPointer != null)
+                        if (uid == selectPointer.ToString())
+                            SelectPath = Store.GetPath(Iter);
+                }
+        }
+    }
+      
+    /* ДЕРЕВО */
+    public class Контрагенти_Папки_ЗаписиШвидкийВибір
+    {
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc.png" : "folder.png");
+            }
+        }
+
+        bool DeletionLabel = false;
+        string ID = "";
+        string Назва = "";
+
+        Array ToArray()
+        {
+            return new object[] { new Gdk.Pixbuf(Image), ID, Назва };
+        }
+
+        public static TreeStore Store = new TreeStore
+        (
+            typeof(Gdk.Pixbuf) /* Image */, 
+            typeof(string)     /* ID */, 
+            typeof(string)     /* Назва */
+        );
+
+        public static void AddColumns(TreeView treeView)
+        {
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 2));
+        }
+
+        public static TreePath? RootPath;
+        public static TreePath? SelectPath;
+
+        public static void LoadTree(UnigueID? OpenFolder, UnigueID? selectPointer)
+        {
+            Store.Clear();
+            RootPath = SelectPath = null;
+
+            Контрагенти_Папки_ЗаписиШвидкийВибір rootRecord = new Контрагенти_Папки_ЗаписиШвидкийВибір
+            {
+                ID = Guid.Empty.ToString(),
+                Назва = " Дерево "
+            };
+
+            TreeIter rootIter = Store.AppendValues(rootRecord.ToArray());
+            RootPath = Store.GetPath(rootIter);
+
+            #region SQL
+
+            string query = $@"
+WITH RECURSIVE r AS (
+    SELECT 
+        uid, 
+        {Контрагенти_Папки_Const.Назва}, 
+        {Контрагенти_Папки_Const.Родич}, 
+        1 AS level,
+        deletion_label
+    FROM {Контрагенти_Папки_Const.TABLE}
+    WHERE {Контрагенти_Папки_Const.Родич} = '{Guid.Empty}'";
+
+            if (OpenFolder != null)
+                query += $" AND uid != '{OpenFolder}'";
+
+            query += $@"
+    UNION ALL
+    SELECT 
+        {Контрагенти_Папки_Const.TABLE}.uid, 
+        {Контрагенти_Папки_Const.TABLE}.{Контрагенти_Папки_Const.Назва}, 
+        {Контрагенти_Папки_Const.TABLE}.{Контрагенти_Папки_Const.Родич}, 
+        r.level + 1 AS level,
+        {Контрагенти_Папки_Const.TABLE}.deletion_label 
+    FROM {Контрагенти_Папки_Const.TABLE}
+        JOIN r ON {Контрагенти_Папки_Const.TABLE}.{Контрагенти_Папки_Const.Родич} = r.uid";
+
+            if (OpenFolder != null)
+                query += $@"
+    WHERE {Контрагенти_Папки_Const.TABLE}.uid != '{OpenFolder}'";
+
+            query += $@"
+)
+SELECT 
+    uid, 
+    {Контрагенти_Папки_Const.Назва}, 
+    {Контрагенти_Папки_Const.Родич}, 
+    level,
+    deletion_label
+FROM r
+ORDER BY level, {Контрагенти_Папки_Const.Назва} ASC
+";
+
+            #endregion
+
+            string[] columnsName;
+            List<object[]>? listRow = null;
+
+            Config.Kernel?.DataBase.SelectRequest(query, null, out columnsName, out listRow);
+
+            Dictionary<string, TreeIter> nodeDictionary = new Dictionary<string, TreeIter>();
+
+            if (listRow != null)
+                foreach (object[] row in listRow)
+                {
+                    string uid = row[0]?.ToString() ?? Guid.Empty.ToString();
+                    string fieldName = (row[1]?.ToString() ?? "");
+                    string fieldParent = row[2]?.ToString() ?? Guid.Empty.ToString();
+                    int level = (int)row[3];
+                    bool deletionLabel = (bool)row[4];
+
+                    Контрагенти_Папки_ЗаписиШвидкийВибір record = new Контрагенти_Папки_ЗаписиШвидкийВибір
+                    {
+                        DeletionLabel = deletionLabel,
+                        ID = uid,
+                        Назва = fieldName
+                    };
+                    
+                    TreeIter Iter;
+
+                    if (level == 1)
+                        Iter = Store.AppendValues(rootIter, record.ToArray());
+                    else
+                    {
+                        TreeIter parentIter = nodeDictionary[fieldParent];
+                        Iter = Store.AppendValues(parentIter, record.ToArray());
+                    }
+
+                    nodeDictionary.Add(uid, Iter);
+
+                    if (selectPointer != null)
+                        if (uid == selectPointer.ToString())
+                            SelectPath = Store.GetPath(Iter);
+                }
+        }
+    }
       
     #endregion
     
     #region DIRECTORY "Склади_Папки"
     
       
+    /* ДЕРЕВО */
+    public class Склади_Папки_Записи
+    {
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc.png" : "folder.png");
+            }
+        }
+
+        bool DeletionLabel = false;
+        string ID = "";
+        string Назва = "";
+
+        Array ToArray()
+        {
+            return new object[] { new Gdk.Pixbuf(Image), ID, Назва };
+        }
+
+        public static TreeStore Store = new TreeStore
+        (
+            typeof(Gdk.Pixbuf) /* Image */, 
+            typeof(string)     /* ID */, 
+            typeof(string)     /* Назва */
+        );
+
+        public static void AddColumns(TreeView treeView)
+        {
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 2));
+        }
+
+        public static TreePath? RootPath;
+        public static TreePath? SelectPath;
+
+        public static void LoadTree(UnigueID? OpenFolder, UnigueID? selectPointer)
+        {
+            Store.Clear();
+            RootPath = SelectPath = null;
+
+            Склади_Папки_Записи rootRecord = new Склади_Папки_Записи
+            {
+                ID = Guid.Empty.ToString(),
+                Назва = " Дерево "
+            };
+
+            TreeIter rootIter = Store.AppendValues(rootRecord.ToArray());
+            RootPath = Store.GetPath(rootIter);
+
+            #region SQL
+
+            string query = $@"
+WITH RECURSIVE r AS (
+    SELECT 
+        uid, 
+        {Склади_Папки_Const.Назва}, 
+        {Склади_Папки_Const.Родич}, 
+        1 AS level,
+        deletion_label
+    FROM {Склади_Папки_Const.TABLE}
+    WHERE {Склади_Папки_Const.Родич} = '{Guid.Empty}'";
+
+            if (OpenFolder != null)
+                query += $" AND uid != '{OpenFolder}'";
+
+            query += $@"
+    UNION ALL
+    SELECT 
+        {Склади_Папки_Const.TABLE}.uid, 
+        {Склади_Папки_Const.TABLE}.{Склади_Папки_Const.Назва}, 
+        {Склади_Папки_Const.TABLE}.{Склади_Папки_Const.Родич}, 
+        r.level + 1 AS level,
+        {Склади_Папки_Const.TABLE}.deletion_label 
+    FROM {Склади_Папки_Const.TABLE}
+        JOIN r ON {Склади_Папки_Const.TABLE}.{Склади_Папки_Const.Родич} = r.uid";
+
+            if (OpenFolder != null)
+                query += $@"
+    WHERE {Склади_Папки_Const.TABLE}.uid != '{OpenFolder}'";
+
+            query += $@"
+)
+SELECT 
+    uid, 
+    {Склади_Папки_Const.Назва}, 
+    {Склади_Папки_Const.Родич}, 
+    level,
+    deletion_label
+FROM r
+ORDER BY level, {Склади_Папки_Const.Назва} ASC
+";
+
+            #endregion
+
+            string[] columnsName;
+            List<object[]>? listRow = null;
+
+            Config.Kernel?.DataBase.SelectRequest(query, null, out columnsName, out listRow);
+
+            Dictionary<string, TreeIter> nodeDictionary = new Dictionary<string, TreeIter>();
+
+            if (listRow != null)
+                foreach (object[] row in listRow)
+                {
+                    string uid = row[0]?.ToString() ?? Guid.Empty.ToString();
+                    string fieldName = (row[1]?.ToString() ?? "");
+                    string fieldParent = row[2]?.ToString() ?? Guid.Empty.ToString();
+                    int level = (int)row[3];
+                    bool deletionLabel = (bool)row[4];
+
+                    Склади_Папки_Записи record = new Склади_Папки_Записи
+                    {
+                        DeletionLabel = deletionLabel,
+                        ID = uid,
+                        Назва = fieldName
+                    };
+                    
+                    TreeIter Iter;
+
+                    if (level == 1)
+                        Iter = Store.AppendValues(rootIter, record.ToArray());
+                    else
+                    {
+                        TreeIter parentIter = nodeDictionary[fieldParent];
+                        Iter = Store.AppendValues(parentIter, record.ToArray());
+                    }
+
+                    nodeDictionary.Add(uid, Iter);
+
+                    if (selectPointer != null)
+                        if (uid == selectPointer.ToString())
+                            SelectPath = Store.GetPath(Iter);
+                }
+        }
+    }
+      
+    /* ДЕРЕВО */
+    public class Склади_Папки_ЗаписиШвидкийВибір
+    {
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc.png" : "folder.png");
+            }
+        }
+
+        bool DeletionLabel = false;
+        string ID = "";
+        string Назва = "";
+
+        Array ToArray()
+        {
+            return new object[] { new Gdk.Pixbuf(Image), ID, Назва };
+        }
+
+        public static TreeStore Store = new TreeStore
+        (
+            typeof(Gdk.Pixbuf) /* Image */, 
+            typeof(string)     /* ID */, 
+            typeof(string)     /* Назва */
+        );
+
+        public static void AddColumns(TreeView treeView)
+        {
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 2));
+        }
+
+        public static TreePath? RootPath;
+        public static TreePath? SelectPath;
+
+        public static void LoadTree(UnigueID? OpenFolder, UnigueID? selectPointer)
+        {
+            Store.Clear();
+            RootPath = SelectPath = null;
+
+            Склади_Папки_ЗаписиШвидкийВибір rootRecord = new Склади_Папки_ЗаписиШвидкийВибір
+            {
+                ID = Guid.Empty.ToString(),
+                Назва = " Дерево "
+            };
+
+            TreeIter rootIter = Store.AppendValues(rootRecord.ToArray());
+            RootPath = Store.GetPath(rootIter);
+
+            #region SQL
+
+            string query = $@"
+WITH RECURSIVE r AS (
+    SELECT 
+        uid, 
+        {Склади_Папки_Const.Назва}, 
+        {Склади_Папки_Const.Родич}, 
+        1 AS level,
+        deletion_label
+    FROM {Склади_Папки_Const.TABLE}
+    WHERE {Склади_Папки_Const.Родич} = '{Guid.Empty}'";
+
+            if (OpenFolder != null)
+                query += $" AND uid != '{OpenFolder}'";
+
+            query += $@"
+    UNION ALL
+    SELECT 
+        {Склади_Папки_Const.TABLE}.uid, 
+        {Склади_Папки_Const.TABLE}.{Склади_Папки_Const.Назва}, 
+        {Склади_Папки_Const.TABLE}.{Склади_Папки_Const.Родич}, 
+        r.level + 1 AS level,
+        {Склади_Папки_Const.TABLE}.deletion_label 
+    FROM {Склади_Папки_Const.TABLE}
+        JOIN r ON {Склади_Папки_Const.TABLE}.{Склади_Папки_Const.Родич} = r.uid";
+
+            if (OpenFolder != null)
+                query += $@"
+    WHERE {Склади_Папки_Const.TABLE}.uid != '{OpenFolder}'";
+
+            query += $@"
+)
+SELECT 
+    uid, 
+    {Склади_Папки_Const.Назва}, 
+    {Склади_Папки_Const.Родич}, 
+    level,
+    deletion_label
+FROM r
+ORDER BY level, {Склади_Папки_Const.Назва} ASC
+";
+
+            #endregion
+
+            string[] columnsName;
+            List<object[]>? listRow = null;
+
+            Config.Kernel?.DataBase.SelectRequest(query, null, out columnsName, out listRow);
+
+            Dictionary<string, TreeIter> nodeDictionary = new Dictionary<string, TreeIter>();
+
+            if (listRow != null)
+                foreach (object[] row in listRow)
+                {
+                    string uid = row[0]?.ToString() ?? Guid.Empty.ToString();
+                    string fieldName = (row[1]?.ToString() ?? "");
+                    string fieldParent = row[2]?.ToString() ?? Guid.Empty.ToString();
+                    int level = (int)row[3];
+                    bool deletionLabel = (bool)row[4];
+
+                    Склади_Папки_ЗаписиШвидкийВибір record = new Склади_Папки_ЗаписиШвидкийВибір
+                    {
+                        DeletionLabel = deletionLabel,
+                        ID = uid,
+                        Назва = fieldName
+                    };
+                    
+                    TreeIter Iter;
+
+                    if (level == 1)
+                        Iter = Store.AppendValues(rootIter, record.ToArray());
+                    else
+                    {
+                        TreeIter parentIter = nodeDictionary[fieldParent];
+                        Iter = Store.AppendValues(parentIter, record.ToArray());
+                    }
+
+                    nodeDictionary.Add(uid, Iter);
+
+                    if (selectPointer != null)
+                        if (uid == selectPointer.ToString())
+                            SelectPath = Store.GetPath(Iter);
+                }
+        }
+    }
+      
     #endregion
     
     #region DIRECTORY "Каси"
     
       
+    /* ТАБЛИЦЯ */
     public class Каси_ЗаписиПрототип
     {
         string Image 
@@ -3666,6 +4527,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         }
     }
 	    
+    /* ТАБЛИЦЯ */
     public class Каси_ЗаписиШвидкийВибір
     {
         string Image 
@@ -3787,6 +4649,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
     #region DIRECTORY "БанківськіРахункиОрганізацій"
     
       
+    /* ТАБЛИЦЯ */
     public class БанківськіРахункиОрганізацій_Записи
     {
         string Image 
@@ -3903,6 +4766,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         }
     }
 	    
+    /* ТАБЛИЦЯ */
     public class БанківськіРахункиОрганізацій_ЗаписиШвидкийВибір
     {
         string Image 
@@ -4024,6 +4888,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
     #region DIRECTORY "ДоговориКонтрагентів"
     
       
+    /* ТАБЛИЦЯ */
     public class ДоговориКонтрагентів_Записи
     {
         string Image 
@@ -4145,6 +5010,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         }
     }
 	    
+    /* ТАБЛИЦЯ */
     public class ДоговориКонтрагентів_ЗаписиШвидкийВибір
     {
         string Image 
@@ -4266,6 +5132,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
     #region DIRECTORY "БанківськіРахункиКонтрагентів"
     
       
+    /* ТАБЛИЦЯ */
     public class БанківськіРахункиКонтрагентів_Записи
     {
         string Image 
@@ -4382,6 +5249,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         }
     }
 	    
+    /* ТАБЛИЦЯ */
     public class БанківськіРахункиКонтрагентів_ЗаписиШвидкийВибір
     {
         string Image 
@@ -4503,6 +5371,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
     #region DIRECTORY "СтаттяРухуКоштів"
     
       
+    /* ТАБЛИЦЯ */
     public class СтаттяРухуКоштів_Записи
     {
         string Image 
@@ -4617,6 +5486,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         }
     }
 	    
+    /* ТАБЛИЦЯ */
     public class СтаттяРухуКоштів_ЗаписиШвидкийВибір
     {
         string Image 
@@ -4721,6 +5591,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
     #region DIRECTORY "СеріїНоменклатури"
     
       
+    /* ТАБЛИЦЯ */
     public class СеріїНоменклатури_Записи
     {
         string Image 
@@ -4820,6 +5691,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         }
     }
 	    
+    /* ТАБЛИЦЯ */
     public class СеріїНоменклатури_ЗаписиШвидкийВибір
     {
         string Image 
@@ -4924,6 +5796,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
     #region DIRECTORY "ПартіяТоварівКомпозит"
     
       
+    /* ТАБЛИЦЯ */
     public class ПартіяТоварівКомпозит_Записи
     {
         string Image 
@@ -5057,6 +5930,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         }
     }
 	    
+    /* ТАБЛИЦЯ */
     public class ПартіяТоварівКомпозит_ЗаписиШвидкийВибір
     {
         string Image 
@@ -5163,6 +6037,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
     #region DIRECTORY "ВидиЗапасів"
     
       
+    /* ТАБЛИЦЯ */
     public class ВидиЗапасів_Записи
     {
         string Image 
@@ -5267,6 +6142,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         }
     }
 	    
+    /* ТАБЛИЦЯ */
     public class ВидиЗапасів_ЗаписиШвидкийВибір
     {
         string Image 
@@ -5376,6 +6252,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
     #region DIRECTORY "Банки"
     
       
+    /* ТАБЛИЦЯ */
     public class Банки_Записи
     {
         string Image 
@@ -5565,6 +6442,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         }
     }
 	    
+    /* ТАБЛИЦЯ */
     public class Банки_ЗаписиШвидкийВибір
     {
         string Image 
@@ -5674,6 +6552,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
     #region DIRECTORY "СкладськіПриміщення"
     
       
+    /* ТАБЛИЦЯ */
     public class СкладськіПриміщення_Записи
     {
         string Image 
@@ -5790,6 +6669,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         }
     }
 	    
+    /* ТАБЛИЦЯ */
     public class СкладськіПриміщення_ЗаписиШвидкийВибір
     {
         string Image 
@@ -5906,6 +6786,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
     #region DIRECTORY "СкладськіКомірки"
     
       
+    /* ТАБЛИЦЯ */
     public class СкладськіКомірки_Записи
     {
         string Image 
@@ -6066,6 +6947,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         }
     }
 	    
+    /* ТАБЛИЦЯ */
     public class СкладськіКомірки_ЗаписиШвидкийВибір
     {
         string Image 
@@ -6182,6 +7064,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
     #region DIRECTORY "ОбластьЗберігання"
     
       
+    /* ТАБЛИЦЯ */
     public class ОбластьЗберігання_Записи
     {
         string Image 
@@ -6298,6 +7181,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
     #region DIRECTORY "ТипорозміриКомірок"
     
       
+    /* ТАБЛИЦЯ */
     public class ТипорозміриКомірок_Записи
     {
         string Image 
@@ -6422,6 +7306,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         }
     }
 	    
+    /* ТАБЛИЦЯ */
     public class ТипорозміриКомірок_ЗаписиШвидкийВибір
     {
         string Image 
@@ -6526,11 +7411,288 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
     #region DIRECTORY "СкладськіКомірки_Папки"
     
       
+    /* ДЕРЕВО */
+    public class СкладськіКомірки_Папки_Записи
+    {
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc.png" : "folder.png");
+            }
+        }
+
+        bool DeletionLabel = false;
+        string ID = "";
+        string Назва = "";
+
+        Array ToArray()
+        {
+            return new object[] { new Gdk.Pixbuf(Image), ID, Назва };
+        }
+
+        public static TreeStore Store = new TreeStore
+        (
+            typeof(Gdk.Pixbuf) /* Image */, 
+            typeof(string)     /* ID */, 
+            typeof(string)     /* Назва */
+        );
+
+        public static void AddColumns(TreeView treeView)
+        {
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 2));
+        }
+
+        public static TreePath? RootPath;
+        public static TreePath? SelectPath;
+
+        public static void LoadTree(UnigueID? OpenFolder, UnigueID? selectPointer)
+        {
+            Store.Clear();
+            RootPath = SelectPath = null;
+
+            СкладськіКомірки_Папки_Записи rootRecord = new СкладськіКомірки_Папки_Записи
+            {
+                ID = Guid.Empty.ToString(),
+                Назва = " Дерево "
+            };
+
+            TreeIter rootIter = Store.AppendValues(rootRecord.ToArray());
+            RootPath = Store.GetPath(rootIter);
+
+            #region SQL
+
+            string query = $@"
+WITH RECURSIVE r AS (
+    SELECT 
+        uid, 
+        {СкладськіКомірки_Папки_Const.Назва}, 
+        {СкладськіКомірки_Папки_Const.Родич}, 
+        1 AS level,
+        deletion_label
+    FROM {СкладськіКомірки_Папки_Const.TABLE}
+    WHERE {СкладськіКомірки_Папки_Const.Родич} = '{Guid.Empty}'";
+
+            if (OpenFolder != null)
+                query += $" AND uid != '{OpenFolder}'";
+
+            query += $@"
+    UNION ALL
+    SELECT 
+        {СкладськіКомірки_Папки_Const.TABLE}.uid, 
+        {СкладськіКомірки_Папки_Const.TABLE}.{СкладськіКомірки_Папки_Const.Назва}, 
+        {СкладськіКомірки_Папки_Const.TABLE}.{СкладськіКомірки_Папки_Const.Родич}, 
+        r.level + 1 AS level,
+        {СкладськіКомірки_Папки_Const.TABLE}.deletion_label 
+    FROM {СкладськіКомірки_Папки_Const.TABLE}
+        JOIN r ON {СкладськіКомірки_Папки_Const.TABLE}.{СкладськіКомірки_Папки_Const.Родич} = r.uid";
+
+            if (OpenFolder != null)
+                query += $@"
+    WHERE {СкладськіКомірки_Папки_Const.TABLE}.uid != '{OpenFolder}'";
+
+            query += $@"
+)
+SELECT 
+    uid, 
+    {СкладськіКомірки_Папки_Const.Назва}, 
+    {СкладськіКомірки_Папки_Const.Родич}, 
+    level,
+    deletion_label
+FROM r
+ORDER BY level, {СкладськіКомірки_Папки_Const.Назва} ASC
+";
+
+            #endregion
+
+            string[] columnsName;
+            List<object[]>? listRow = null;
+
+            Config.Kernel?.DataBase.SelectRequest(query, null, out columnsName, out listRow);
+
+            Dictionary<string, TreeIter> nodeDictionary = new Dictionary<string, TreeIter>();
+
+            if (listRow != null)
+                foreach (object[] row in listRow)
+                {
+                    string uid = row[0]?.ToString() ?? Guid.Empty.ToString();
+                    string fieldName = (row[1]?.ToString() ?? "");
+                    string fieldParent = row[2]?.ToString() ?? Guid.Empty.ToString();
+                    int level = (int)row[3];
+                    bool deletionLabel = (bool)row[4];
+
+                    СкладськіКомірки_Папки_Записи record = new СкладськіКомірки_Папки_Записи
+                    {
+                        DeletionLabel = deletionLabel,
+                        ID = uid,
+                        Назва = fieldName
+                    };
+                    
+                    TreeIter Iter;
+
+                    if (level == 1)
+                        Iter = Store.AppendValues(rootIter, record.ToArray());
+                    else
+                    {
+                        TreeIter parentIter = nodeDictionary[fieldParent];
+                        Iter = Store.AppendValues(parentIter, record.ToArray());
+                    }
+
+                    nodeDictionary.Add(uid, Iter);
+
+                    if (selectPointer != null)
+                        if (uid == selectPointer.ToString())
+                            SelectPath = Store.GetPath(Iter);
+                }
+        }
+    }
+      
+    /* ДЕРЕВО */
+    public class СкладськіКомірки_Папки_ЗаписиШвидкийВибір
+    {
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc.png" : "folder.png");
+            }
+        }
+
+        bool DeletionLabel = false;
+        string ID = "";
+        string Назва = "";
+
+        Array ToArray()
+        {
+            return new object[] { new Gdk.Pixbuf(Image), ID, Назва };
+        }
+
+        public static TreeStore Store = new TreeStore
+        (
+            typeof(Gdk.Pixbuf) /* Image */, 
+            typeof(string)     /* ID */, 
+            typeof(string)     /* Назва */
+        );
+
+        public static void AddColumns(TreeView treeView)
+        {
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 2));
+        }
+
+        public static TreePath? RootPath;
+        public static TreePath? SelectPath;
+
+        public static void LoadTree(UnigueID? OpenFolder, UnigueID? selectPointer)
+        {
+            Store.Clear();
+            RootPath = SelectPath = null;
+
+            СкладськіКомірки_Папки_ЗаписиШвидкийВибір rootRecord = new СкладськіКомірки_Папки_ЗаписиШвидкийВибір
+            {
+                ID = Guid.Empty.ToString(),
+                Назва = " Дерево "
+            };
+
+            TreeIter rootIter = Store.AppendValues(rootRecord.ToArray());
+            RootPath = Store.GetPath(rootIter);
+
+            #region SQL
+
+            string query = $@"
+WITH RECURSIVE r AS (
+    SELECT 
+        uid, 
+        {СкладськіКомірки_Папки_Const.Назва}, 
+        {СкладськіКомірки_Папки_Const.Родич}, 
+        1 AS level,
+        deletion_label
+    FROM {СкладськіКомірки_Папки_Const.TABLE}
+    WHERE {СкладськіКомірки_Папки_Const.Родич} = '{Guid.Empty}'";
+
+            if (OpenFolder != null)
+                query += $" AND uid != '{OpenFolder}'";
+
+            query += $@"
+    UNION ALL
+    SELECT 
+        {СкладськіКомірки_Папки_Const.TABLE}.uid, 
+        {СкладськіКомірки_Папки_Const.TABLE}.{СкладськіКомірки_Папки_Const.Назва}, 
+        {СкладськіКомірки_Папки_Const.TABLE}.{СкладськіКомірки_Папки_Const.Родич}, 
+        r.level + 1 AS level,
+        {СкладськіКомірки_Папки_Const.TABLE}.deletion_label 
+    FROM {СкладськіКомірки_Папки_Const.TABLE}
+        JOIN r ON {СкладськіКомірки_Папки_Const.TABLE}.{СкладськіКомірки_Папки_Const.Родич} = r.uid";
+
+            if (OpenFolder != null)
+                query += $@"
+    WHERE {СкладськіКомірки_Папки_Const.TABLE}.uid != '{OpenFolder}'";
+
+            query += $@"
+)
+SELECT 
+    uid, 
+    {СкладськіКомірки_Папки_Const.Назва}, 
+    {СкладськіКомірки_Папки_Const.Родич}, 
+    level,
+    deletion_label
+FROM r
+ORDER BY level, {СкладськіКомірки_Папки_Const.Назва} ASC
+";
+
+            #endregion
+
+            string[] columnsName;
+            List<object[]>? listRow = null;
+
+            Config.Kernel?.DataBase.SelectRequest(query, null, out columnsName, out listRow);
+
+            Dictionary<string, TreeIter> nodeDictionary = new Dictionary<string, TreeIter>();
+
+            if (listRow != null)
+                foreach (object[] row in listRow)
+                {
+                    string uid = row[0]?.ToString() ?? Guid.Empty.ToString();
+                    string fieldName = (row[1]?.ToString() ?? "");
+                    string fieldParent = row[2]?.ToString() ?? Guid.Empty.ToString();
+                    int level = (int)row[3];
+                    bool deletionLabel = (bool)row[4];
+
+                    СкладськіКомірки_Папки_ЗаписиШвидкийВибір record = new СкладськіКомірки_Папки_ЗаписиШвидкийВибір
+                    {
+                        DeletionLabel = deletionLabel,
+                        ID = uid,
+                        Назва = fieldName
+                    };
+                    
+                    TreeIter Iter;
+
+                    if (level == 1)
+                        Iter = Store.AppendValues(rootIter, record.ToArray());
+                    else
+                    {
+                        TreeIter parentIter = nodeDictionary[fieldParent];
+                        Iter = Store.AppendValues(parentIter, record.ToArray());
+                    }
+
+                    nodeDictionary.Add(uid, Iter);
+
+                    if (selectPointer != null)
+                        if (uid == selectPointer.ToString())
+                            SelectPath = Store.GetPath(Iter);
+                }
+        }
+    }
+      
     #endregion
     
     #region DIRECTORY "Блокнот"
     
       
+    /* ТАБЛИЦЯ */
     public class Блокнот_Записи
     {
         string Image 
@@ -6640,6 +7802,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         }
     }
 	    
+    /* ТАБЛИЦЯ */
     public class Блокнот_ЗаписиШвидкийВибір
     {
         string Image 

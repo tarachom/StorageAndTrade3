@@ -73,12 +73,11 @@ namespace StorageAndTrade
         {
             if (DirectoryPointerItem != null || SelectPointerItem != null)
             {
-                string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-                UnigueID unigueID = new UnigueID(UidSelect);
+                UnigueID? unigueID = SelectPointerItem != null ? SelectPointerItem : DirectoryPointerItem;
 
-                Склади_Objest? контрагенти_Objest = new Склади_Pointer(unigueID).GetDirectoryObject();
+                Склади_Objest? контрагенти_Objest = new Склади_Pointer(unigueID ?? new UnigueID()).GetDirectoryObject();
                 if (контрагенти_Objest != null)
-                    ДеревоПапок.Parent_Pointer = контрагенти_Objest.Папка;
+                    ДеревоПапок.DirectoryPointerItem = контрагенти_Objest.Папка.UnigueID;
             }
 
             ДеревоПапок.LoadTree();
@@ -90,8 +89,10 @@ namespace StorageAndTrade
             ТабличніСписки.Склади_Записи.DirectoryPointerItem = DirectoryPointerItem;
 
             ТабличніСписки.Склади_Записи.Where.Clear();
+
             if (checkButtonIsHierarchy.Active)
-                ТабличніСписки.Склади_Записи.Where.Add(new Where(Склади_Const.Папка, Comparison.EQ, ДеревоПапок.Parent_Pointer.UnigueID.UGuid));
+                ТабличніСписки.Склади_Записи.Where.Add(new Where(Склади_Const.Папка, Comparison.EQ,
+                    ДеревоПапок.DirectoryPointerItem?.UGuid ?? new UnigueID().UGuid));
 
             ТабличніСписки.Склади_Записи.LoadRecords();
 
