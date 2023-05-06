@@ -74,6 +74,7 @@ namespace StorageAndTrade
                     ДеревоПапок.DirectoryPointerItem = контрагенти_Objest.Папка.UnigueID;
             }
 
+            ДеревоПапок.СкладПриміщенняВласник = СкладПриміщенняВласник.Pointer;
             ДеревоПапок.LoadTree();
         }
 
@@ -132,7 +133,9 @@ namespace StorageAndTrade
                     СкладськіКомірки_Елемент page = new СкладськіКомірки_Елемент
                     {
                         CallBack_LoadRecords = CallBack_LoadRecords,
-                        IsNew = true
+                        IsNew = true,
+                        РодичДляНового = new СкладськіКомірки_Папки_Pointer(ДеревоПапок.DirectoryPointerItem ?? new UnigueID()),
+                        СкладськеПриміщенняДляНового = СкладПриміщенняВласник.Pointer
                     };
 
                     page.SetValue();

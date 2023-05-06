@@ -279,10 +279,20 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники.Т
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 2));
         }
 
+        /* Шлях до корінної вітки */
         public static TreePath? RootPath;
+
+        /* Шлях який спозиціонований у функції LoadTree - параметр selectPointer */
         public static TreePath? SelectPath;
 
-        public static void LoadTree(UnigueID? OpenFolder, UnigueID? selectPointer)
+        /*
+        openFolder - відкрита папка, яку потрібно ВИКЛЮЧИТИ з вибірки. 
+                     Також будуть виключені всі папки які входять в дану папку
+        selectPointer - елемент на який потрібно спозиціонуватися
+        owner - Власник (якщо таке поле є в табличному списку)
+        */
+        public static void LoadTree(UnigueID? openFolder, UnigueID? selectPointer
+        <xsl:if test="count(Fields/Field[Name = 'Власник']) = 1">, UnigueID? owner</xsl:if>)
         {
             Store.Clear();
             RootPath = SelectPath = null;
@@ -309,8 +319,14 @@ WITH RECURSIVE r AS (
     FROM {<xsl:value-of select="$DirectoryName"/>_Const.TABLE}
     WHERE {<xsl:value-of select="$DirectoryName"/>_Const.Родич} = '{Guid.Empty}'";
 
-            if (OpenFolder != null)
-                query += $" AND uid != '{OpenFolder}'";
+        <!-- Якщо є поле Власник у табличному списку -->
+        <xsl:if test="count(Fields/Field[Name = 'Власник']) = 1">
+            if (owner != null) query += $@"
+        AND {<xsl:value-of select="$DirectoryName"/>_Const.Власник} = '{owner}'";
+        </xsl:if>
+
+            if (openFolder != null) query += $@"
+        AND uid != '{openFolder}'";
 
             query += $@"
     UNION ALL
@@ -323,9 +339,14 @@ WITH RECURSIVE r AS (
     FROM {<xsl:value-of select="$DirectoryName"/>_Const.TABLE}
         JOIN r ON {<xsl:value-of select="$DirectoryName"/>_Const.TABLE}.{<xsl:value-of select="$DirectoryName"/>_Const.Родич} = r.uid";
 
-            if (OpenFolder != null)
-                query += $@"
-    WHERE {<xsl:value-of select="$DirectoryName"/>_Const.TABLE}.uid != '{OpenFolder}'";
+        <!-- Якщо є поле Власник у табличному списку -->
+        <xsl:if test="count(Fields/Field[Name = 'Власник']) = 1">
+            if (owner != null) query += $@"
+        AND {<xsl:value-of select="$DirectoryName"/>_Const.Власник} = '{owner}'";
+        </xsl:if>
+
+            if (openFolder != null) query += $@"
+    WHERE {<xsl:value-of select="$DirectoryName"/>_Const.TABLE}.uid != '{openFolder}'";
 
             query += $@"
 )

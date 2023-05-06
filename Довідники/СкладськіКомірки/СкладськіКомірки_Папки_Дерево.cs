@@ -33,7 +33,7 @@ namespace StorageAndTrade
     class СкладськіКомірки_Папки_Дерево : ДовідникДерево
     {
         public СкладськіПриміщення_Pointer СкладПриміщенняВласник = new СкладськіПриміщення_Pointer();
-        
+
         public СкладськіКомірки_Папки_Дерево() : base()
         {
             TreeViewGrid.Model = ТабличніСписки.СкладськіКомірки_Папки_Записи.Store;
@@ -42,7 +42,7 @@ namespace StorageAndTrade
 
         public override void LoadTree()
         {
-            ТабличніСписки.СкладськіКомірки_Папки_Записи.LoadTree(OpenFolder, DirectoryPointerItem);
+            ТабличніСписки.СкладськіКомірки_Папки_Записи.LoadTree(OpenFolder, DirectoryPointerItem, СкладПриміщенняВласник.UnigueID);
 
             TreeViewGrid.ExpandToPath(ТабличніСписки.СкладськіКомірки_Папки_Записи.RootPath);
             TreeViewGrid.SetCursor(ТабличніСписки.СкладськіКомірки_Папки_Записи.RootPath, TreeViewGrid.Columns[0], false);
@@ -66,7 +66,8 @@ namespace StorageAndTrade
                     {
                         CallBack_LoadRecords = CallBack_LoadTree,
                         IsNew = true,
-                        РодичДляНового = new СкладськіКомірки_Папки_Pointer(DirectoryPointerItem ?? new UnigueID())
+                        РодичДляНового = new СкладськіКомірки_Папки_Pointer(DirectoryPointerItem ?? new UnigueID()),
+                        СкладськеПриміщенняДляНового = СкладПриміщенняВласник
                     };
 
                     page.SetValue();

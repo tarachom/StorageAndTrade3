@@ -99,7 +99,7 @@ namespace StorageAndTrade
 
         public void LoadTree()
         {
-            ТабличніСписки.СкладськіКомірки_Папки_ЗаписиШвидкийВибір.LoadTree(OpenFolder, DirectoryPointerItem);
+            ТабличніСписки.СкладськіКомірки_Папки_ЗаписиШвидкийВибір.LoadTree(OpenFolder, DirectoryPointerItem, СкладПриміщенняВласник.UnigueID);
 
             TreeViewGrid.ExpandToPath(ТабличніСписки.СкладськіКомірки_Папки_ЗаписиШвидкийВибір.RootPath);
             TreeViewGrid.SetCursor(ТабличніСписки.СкладськіКомірки_Папки_ЗаписиШвидкийВибір.RootPath, TreeViewGrid.Columns[0], false);

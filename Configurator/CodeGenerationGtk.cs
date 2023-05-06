@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 05.05.2023 20:17:13
+ * Дата конфігурації: 06.05.2023 12:43:53
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон Gtk.xslt
@@ -3597,14 +3597,24 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static void AddColumns(TreeView treeView)
         {
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
-            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false  });
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 2));
         }
 
+        /* Шлях до корінної вітки */
         public static TreePath? RootPath;
+
+        /* Шлях який спозиціонований у функції LoadTree - параметр selectPointer */
         public static TreePath? SelectPath;
 
-        public static void LoadTree(UnigueID? OpenFolder, UnigueID? selectPointer)
+        /*
+        openFolder - відкрита папка, яку потрібно ВИКЛЮЧИТИ з вибірки. 
+                     Також будуть виключені всі папки які входять в дану папку
+        selectPointer - елемент на який потрібно спозиціонуватися
+        owner - Власник (якщо таке поле є в табличному списку)
+        */
+        public static void LoadTree(UnigueID? openFolder, UnigueID? selectPointer
+        )
         {
             Store.Clear();
             RootPath = SelectPath = null;
@@ -3631,8 +3641,10 @@ WITH RECURSIVE r AS (
     FROM {Номенклатура_Папки_Const.TABLE}
     WHERE {Номенклатура_Папки_Const.Родич} = '{Guid.Empty}'";
 
-            if (OpenFolder != null)
-                query += $" AND uid != '{OpenFolder}'";
+        
+
+            if (openFolder != null) query += $@"
+        AND uid != '{openFolder}'";
 
             query += $@"
     UNION ALL
@@ -3645,9 +3657,10 @@ WITH RECURSIVE r AS (
     FROM {Номенклатура_Папки_Const.TABLE}
         JOIN r ON {Номенклатура_Папки_Const.TABLE}.{Номенклатура_Папки_Const.Родич} = r.uid";
 
-            if (OpenFolder != null)
-                query += $@"
-    WHERE {Номенклатура_Папки_Const.TABLE}.uid != '{OpenFolder}'";
+        
+
+            if (openFolder != null) query += $@"
+    WHERE {Номенклатура_Папки_Const.TABLE}.uid != '{openFolder}'";
 
             query += $@"
 )
@@ -3739,10 +3752,20 @@ ORDER BY level, {Номенклатура_Папки_Const.Назва} ASC
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 2));
         }
 
+        /* Шлях до корінної вітки */
         public static TreePath? RootPath;
+
+        /* Шлях який спозиціонований у функції LoadTree - параметр selectPointer */
         public static TreePath? SelectPath;
 
-        public static void LoadTree(UnigueID? OpenFolder, UnigueID? selectPointer)
+        /*
+        openFolder - відкрита папка, яку потрібно ВИКЛЮЧИТИ з вибірки. 
+                     Також будуть виключені всі папки які входять в дану папку
+        selectPointer - елемент на який потрібно спозиціонуватися
+        owner - Власник (якщо таке поле є в табличному списку)
+        */
+        public static void LoadTree(UnigueID? openFolder, UnigueID? selectPointer
+        )
         {
             Store.Clear();
             RootPath = SelectPath = null;
@@ -3769,8 +3792,10 @@ WITH RECURSIVE r AS (
     FROM {Номенклатура_Папки_Const.TABLE}
     WHERE {Номенклатура_Папки_Const.Родич} = '{Guid.Empty}'";
 
-            if (OpenFolder != null)
-                query += $" AND uid != '{OpenFolder}'";
+        
+
+            if (openFolder != null) query += $@"
+        AND uid != '{openFolder}'";
 
             query += $@"
     UNION ALL
@@ -3783,9 +3808,10 @@ WITH RECURSIVE r AS (
     FROM {Номенклатура_Папки_Const.TABLE}
         JOIN r ON {Номенклатура_Папки_Const.TABLE}.{Номенклатура_Папки_Const.Родич} = r.uid";
 
-            if (OpenFolder != null)
-                query += $@"
-    WHERE {Номенклатура_Папки_Const.TABLE}.uid != '{OpenFolder}'";
+        
+
+            if (openFolder != null) query += $@"
+    WHERE {Номенклатура_Папки_Const.TABLE}.uid != '{openFolder}'";
 
             query += $@"
 )
@@ -3882,10 +3908,20 @@ ORDER BY level, {Номенклатура_Папки_Const.Назва} ASC
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 2));
         }
 
+        /* Шлях до корінної вітки */
         public static TreePath? RootPath;
+
+        /* Шлях який спозиціонований у функції LoadTree - параметр selectPointer */
         public static TreePath? SelectPath;
 
-        public static void LoadTree(UnigueID? OpenFolder, UnigueID? selectPointer)
+        /*
+        openFolder - відкрита папка, яку потрібно ВИКЛЮЧИТИ з вибірки. 
+                     Також будуть виключені всі папки які входять в дану папку
+        selectPointer - елемент на який потрібно спозиціонуватися
+        owner - Власник (якщо таке поле є в табличному списку)
+        */
+        public static void LoadTree(UnigueID? openFolder, UnigueID? selectPointer
+        )
         {
             Store.Clear();
             RootPath = SelectPath = null;
@@ -3912,8 +3948,10 @@ WITH RECURSIVE r AS (
     FROM {Контрагенти_Папки_Const.TABLE}
     WHERE {Контрагенти_Папки_Const.Родич} = '{Guid.Empty}'";
 
-            if (OpenFolder != null)
-                query += $" AND uid != '{OpenFolder}'";
+        
+
+            if (openFolder != null) query += $@"
+        AND uid != '{openFolder}'";
 
             query += $@"
     UNION ALL
@@ -3926,9 +3964,10 @@ WITH RECURSIVE r AS (
     FROM {Контрагенти_Папки_Const.TABLE}
         JOIN r ON {Контрагенти_Папки_Const.TABLE}.{Контрагенти_Папки_Const.Родич} = r.uid";
 
-            if (OpenFolder != null)
-                query += $@"
-    WHERE {Контрагенти_Папки_Const.TABLE}.uid != '{OpenFolder}'";
+        
+
+            if (openFolder != null) query += $@"
+    WHERE {Контрагенти_Папки_Const.TABLE}.uid != '{openFolder}'";
 
             query += $@"
 )
@@ -4020,10 +4059,20 @@ ORDER BY level, {Контрагенти_Папки_Const.Назва} ASC
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 2));
         }
 
+        /* Шлях до корінної вітки */
         public static TreePath? RootPath;
+
+        /* Шлях який спозиціонований у функції LoadTree - параметр selectPointer */
         public static TreePath? SelectPath;
 
-        public static void LoadTree(UnigueID? OpenFolder, UnigueID? selectPointer)
+        /*
+        openFolder - відкрита папка, яку потрібно ВИКЛЮЧИТИ з вибірки. 
+                     Також будуть виключені всі папки які входять в дану папку
+        selectPointer - елемент на який потрібно спозиціонуватися
+        owner - Власник (якщо таке поле є в табличному списку)
+        */
+        public static void LoadTree(UnigueID? openFolder, UnigueID? selectPointer
+        )
         {
             Store.Clear();
             RootPath = SelectPath = null;
@@ -4050,8 +4099,10 @@ WITH RECURSIVE r AS (
     FROM {Контрагенти_Папки_Const.TABLE}
     WHERE {Контрагенти_Папки_Const.Родич} = '{Guid.Empty}'";
 
-            if (OpenFolder != null)
-                query += $" AND uid != '{OpenFolder}'";
+        
+
+            if (openFolder != null) query += $@"
+        AND uid != '{openFolder}'";
 
             query += $@"
     UNION ALL
@@ -4064,9 +4115,10 @@ WITH RECURSIVE r AS (
     FROM {Контрагенти_Папки_Const.TABLE}
         JOIN r ON {Контрагенти_Папки_Const.TABLE}.{Контрагенти_Папки_Const.Родич} = r.uid";
 
-            if (OpenFolder != null)
-                query += $@"
-    WHERE {Контрагенти_Папки_Const.TABLE}.uid != '{OpenFolder}'";
+        
+
+            if (openFolder != null) query += $@"
+    WHERE {Контрагенти_Папки_Const.TABLE}.uid != '{openFolder}'";
 
             query += $@"
 )
@@ -4163,10 +4215,20 @@ ORDER BY level, {Контрагенти_Папки_Const.Назва} ASC
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 2));
         }
 
+        /* Шлях до корінної вітки */
         public static TreePath? RootPath;
+
+        /* Шлях який спозиціонований у функції LoadTree - параметр selectPointer */
         public static TreePath? SelectPath;
 
-        public static void LoadTree(UnigueID? OpenFolder, UnigueID? selectPointer)
+        /*
+        openFolder - відкрита папка, яку потрібно ВИКЛЮЧИТИ з вибірки. 
+                     Також будуть виключені всі папки які входять в дану папку
+        selectPointer - елемент на який потрібно спозиціонуватися
+        owner - Власник (якщо таке поле є в табличному списку)
+        */
+        public static void LoadTree(UnigueID? openFolder, UnigueID? selectPointer
+        )
         {
             Store.Clear();
             RootPath = SelectPath = null;
@@ -4193,8 +4255,10 @@ WITH RECURSIVE r AS (
     FROM {Склади_Папки_Const.TABLE}
     WHERE {Склади_Папки_Const.Родич} = '{Guid.Empty}'";
 
-            if (OpenFolder != null)
-                query += $" AND uid != '{OpenFolder}'";
+        
+
+            if (openFolder != null) query += $@"
+        AND uid != '{openFolder}'";
 
             query += $@"
     UNION ALL
@@ -4207,9 +4271,10 @@ WITH RECURSIVE r AS (
     FROM {Склади_Папки_Const.TABLE}
         JOIN r ON {Склади_Папки_Const.TABLE}.{Склади_Папки_Const.Родич} = r.uid";
 
-            if (OpenFolder != null)
-                query += $@"
-    WHERE {Склади_Папки_Const.TABLE}.uid != '{OpenFolder}'";
+        
+
+            if (openFolder != null) query += $@"
+    WHERE {Склади_Папки_Const.TABLE}.uid != '{openFolder}'";
 
             query += $@"
 )
@@ -4301,10 +4366,20 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 2));
         }
 
+        /* Шлях до корінної вітки */
         public static TreePath? RootPath;
+
+        /* Шлях який спозиціонований у функції LoadTree - параметр selectPointer */
         public static TreePath? SelectPath;
 
-        public static void LoadTree(UnigueID? OpenFolder, UnigueID? selectPointer)
+        /*
+        openFolder - відкрита папка, яку потрібно ВИКЛЮЧИТИ з вибірки. 
+                     Також будуть виключені всі папки які входять в дану папку
+        selectPointer - елемент на який потрібно спозиціонуватися
+        owner - Власник (якщо таке поле є в табличному списку)
+        */
+        public static void LoadTree(UnigueID? openFolder, UnigueID? selectPointer
+        )
         {
             Store.Clear();
             RootPath = SelectPath = null;
@@ -4331,8 +4406,10 @@ WITH RECURSIVE r AS (
     FROM {Склади_Папки_Const.TABLE}
     WHERE {Склади_Папки_Const.Родич} = '{Guid.Empty}'";
 
-            if (OpenFolder != null)
-                query += $" AND uid != '{OpenFolder}'";
+        
+
+            if (openFolder != null) query += $@"
+        AND uid != '{openFolder}'";
 
             query += $@"
     UNION ALL
@@ -4345,9 +4422,10 @@ WITH RECURSIVE r AS (
     FROM {Склади_Папки_Const.TABLE}
         JOIN r ON {Склади_Папки_Const.TABLE}.{Склади_Папки_Const.Родич} = r.uid";
 
-            if (OpenFolder != null)
-                query += $@"
-    WHERE {Склади_Папки_Const.TABLE}.uid != '{OpenFolder}'";
+        
+
+            if (openFolder != null) query += $@"
+    WHERE {Склади_Папки_Const.TABLE}.uid != '{openFolder}'";
 
             query += $@"
 )
@@ -7445,10 +7523,20 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 2));
         }
 
+        /* Шлях до корінної вітки */
         public static TreePath? RootPath;
+
+        /* Шлях який спозиціонований у функції LoadTree - параметр selectPointer */
         public static TreePath? SelectPath;
 
-        public static void LoadTree(UnigueID? OpenFolder, UnigueID? selectPointer)
+        /*
+        openFolder - відкрита папка, яку потрібно ВИКЛЮЧИТИ з вибірки. 
+                     Також будуть виключені всі папки які входять в дану папку
+        selectPointer - елемент на який потрібно спозиціонуватися
+        owner - Власник (якщо таке поле є в табличному списку)
+        */
+        public static void LoadTree(UnigueID? openFolder, UnigueID? selectPointer
+        , UnigueID? owner)
         {
             Store.Clear();
             RootPath = SelectPath = null;
@@ -7475,8 +7563,13 @@ WITH RECURSIVE r AS (
     FROM {СкладськіКомірки_Папки_Const.TABLE}
     WHERE {СкладськіКомірки_Папки_Const.Родич} = '{Guid.Empty}'";
 
-            if (OpenFolder != null)
-                query += $" AND uid != '{OpenFolder}'";
+        
+            if (owner != null && !owner.IsEmpty()) query += $@"
+        AND {СкладськіКомірки_Папки_Const.Власник} = '{owner}'";
+        
+
+            if (openFolder != null) query += $@"
+        AND uid != '{openFolder}'";
 
             query += $@"
     UNION ALL
@@ -7489,9 +7582,13 @@ WITH RECURSIVE r AS (
     FROM {СкладськіКомірки_Папки_Const.TABLE}
         JOIN r ON {СкладськіКомірки_Папки_Const.TABLE}.{СкладськіКомірки_Папки_Const.Родич} = r.uid";
 
-            if (OpenFolder != null)
-                query += $@"
-    WHERE {СкладськіКомірки_Папки_Const.TABLE}.uid != '{OpenFolder}'";
+        
+            if (owner != null && !owner.IsEmpty()) query += $@"
+        AND {СкладськіКомірки_Папки_Const.Власник} = '{owner}'";
+        
+
+            if (openFolder != null) query += $@"
+    WHERE {СкладськіКомірки_Папки_Const.TABLE}.uid != '{openFolder}'";
 
             query += $@"
 )
@@ -7583,10 +7680,20 @@ ORDER BY level, {СкладськіКомірки_Папки_Const.Назва} A
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 2));
         }
 
+        /* Шлях до корінної вітки */
         public static TreePath? RootPath;
+
+        /* Шлях який спозиціонований у функції LoadTree - параметр selectPointer */
         public static TreePath? SelectPath;
 
-        public static void LoadTree(UnigueID? OpenFolder, UnigueID? selectPointer)
+        /*
+        openFolder - відкрита папка, яку потрібно ВИКЛЮЧИТИ з вибірки. 
+                     Також будуть виключені всі папки які входять в дану папку
+        selectPointer - елемент на який потрібно спозиціонуватися
+        owner - Власник (якщо таке поле є в табличному списку)
+        */
+        public static void LoadTree(UnigueID? openFolder, UnigueID? selectPointer
+        , UnigueID? owner)
         {
             Store.Clear();
             RootPath = SelectPath = null;
@@ -7613,8 +7720,13 @@ WITH RECURSIVE r AS (
     FROM {СкладськіКомірки_Папки_Const.TABLE}
     WHERE {СкладськіКомірки_Папки_Const.Родич} = '{Guid.Empty}'";
 
-            if (OpenFolder != null)
-                query += $" AND uid != '{OpenFolder}'";
+        
+            if (owner != null && !owner.IsEmpty()) query += $@"
+        AND {СкладськіКомірки_Папки_Const.Власник} = '{owner}'";
+        
+
+            if (openFolder != null) query += $@"
+        AND uid != '{openFolder}'";
 
             query += $@"
     UNION ALL
@@ -7627,9 +7739,13 @@ WITH RECURSIVE r AS (
     FROM {СкладськіКомірки_Папки_Const.TABLE}
         JOIN r ON {СкладськіКомірки_Папки_Const.TABLE}.{СкладськіКомірки_Папки_Const.Родич} = r.uid";
 
-            if (OpenFolder != null)
-                query += $@"
-    WHERE {СкладськіКомірки_Папки_Const.TABLE}.uid != '{OpenFolder}'";
+        
+            if (owner != null && !owner.IsEmpty()) query += $@"
+        AND {СкладськіКомірки_Папки_Const.Власник} = '{owner}'";
+        
+
+            if (openFolder != null) query += $@"
+    WHERE {СкладськіКомірки_Папки_Const.TABLE}.uid != '{openFolder}'";
 
             query += $@"
 )

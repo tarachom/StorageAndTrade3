@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 05.05.2023 20:17:13
+ * Дата конфігурації: 06.05.2023 12:43:53
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -10097,7 +10097,7 @@ namespace StorageAndTrade_1_0.Довідники
         public const string Назва = "col_j1";
         public const string Код = "col_j2";
         public const string Родич = "col_j3";
-        public const string Приміщення = "col_a1";
+        public const string Власник = "col_a1";
     }
 
     public class СкладськіКомірки_Папки_Objest : DirectoryObject
@@ -10108,7 +10108,7 @@ namespace StorageAndTrade_1_0.Довідники
             Назва = "";
             Код = "";
             Родич = new Довідники.СкладськіКомірки_Папки_Pointer();
-            Приміщення = new Довідники.СкладськіПриміщення_Pointer();
+            Власник = new Довідники.СкладськіПриміщення_Pointer();
             
         }
         
@@ -10126,7 +10126,7 @@ namespace StorageAndTrade_1_0.Довідники
                 Назва = base.FieldValue["col_j1"]?.ToString() ?? "";
                 Код = base.FieldValue["col_j2"]?.ToString() ?? "";
                 Родич = new Довідники.СкладськіКомірки_Папки_Pointer(base.FieldValue["col_j3"]);
-                Приміщення = new Довідники.СкладськіПриміщення_Pointer(base.FieldValue["col_a1"]);
+                Власник = new Довідники.СкладськіПриміщення_Pointer(base.FieldValue["col_a1"]);
                 
                 BaseClear();
                 return true;
@@ -10141,7 +10141,7 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_j1"] = Назва;
             base.FieldValue["col_j2"] = Код;
             base.FieldValue["col_j3"] = Родич.UnigueID.UGuid;
-            base.FieldValue["col_a1"] = Приміщення.UnigueID.UGuid;
+            base.FieldValue["col_a1"] = Власник.UnigueID.UGuid;
             
             bool result = BaseSave();
             if (result)
@@ -10158,7 +10158,7 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Назва = Назва;
             copy.Код = Код;
             copy.Родич = Родич;
-            copy.Приміщення = Приміщення;
+            copy.Власник = Власник;
             
             
             if (copyTableParts)
@@ -10203,7 +10203,7 @@ namespace StorageAndTrade_1_0.Довідники
         public string Назва { get; set; }
         public string Код { get; set; }
         public Довідники.СкладськіКомірки_Папки_Pointer Родич { get; set; }
-        public Довідники.СкладськіПриміщення_Pointer Приміщення { get; set; }
+        public Довідники.СкладськіПриміщення_Pointer Власник { get; set; }
         
     }
 

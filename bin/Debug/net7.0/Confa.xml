@@ -5,7 +5,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>05.05.2023 20:17:13</DateTimeSave>
+  <DateTimeSave>06.05.2023 12:43:53</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -6517,7 +6517,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsFullTextSearch>0</IsFullTextSearch>
         </Field>
         <Field>
-          <Name>Приміщення</Name>
+          <Name>Власник</Name>
           <NameInTable>col_a1</NameInTable>
           <Type>pointer</Type>
           <Pointer>Довідники.СкладськіПриміщення</Pointer>
@@ -6535,14 +6535,52 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Desc>
           </Desc>
           <IsTree>1</IsTree>
-          <Fields />
+          <Fields>
+            <Field>
+              <Name>Власник</Name>
+              <Caption>Власник</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.СкладськіПриміщення</Pointer>
+              <Join>
+                <table>Довідники.СкладськіПриміщення_Const.TABLE</table>
+                <field>Власник</field>
+                <alias>join_tab_1</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_1</table>
+                <field>Довідники.СкладськіПриміщення_Const.Назва</field>
+              </FieldAndAlias>
+            </Field>
+          </Fields>
         </TabularList>
         <TabularList>
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
           <IsTree>1</IsTree>
-          <Fields />
+          <Fields>
+            <Field>
+              <Name>Власник</Name>
+              <Caption>Власник</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.СкладськіПриміщення</Pointer>
+              <Join>
+                <table>Довідники.СкладськіПриміщення_Const.TABLE</table>
+                <field>Власник</field>
+                <alias>join_tab_1</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_1</table>
+                <field>Довідники.СкладськіПриміщення_Const.Назва</field>
+              </FieldAndAlias>
+            </Field>
+          </Fields>
         </TabularList>
       </TabularLists>
       <TriggerFunctions>
