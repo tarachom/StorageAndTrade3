@@ -321,7 +321,7 @@ WITH RECURSIVE r AS (
 
         <!-- Якщо є поле Власник у табличному списку -->
         <xsl:if test="count(Fields/Field[Name = 'Власник']) = 1">
-            if (owner != null) query += $@"
+            if (owner != null &amp;&amp; !owner.IsEmpty()) query += $@"
         AND {<xsl:value-of select="$DirectoryName"/>_Const.Власник} = '{owner}'";
         </xsl:if>
 
@@ -341,7 +341,7 @@ WITH RECURSIVE r AS (
 
         <!-- Якщо є поле Власник у табличному списку -->
         <xsl:if test="count(Fields/Field[Name = 'Власник']) = 1">
-            if (owner != null) query += $@"
+            if (owner != null &amp;&amp; !owner.IsEmpty()) query += $@"
         AND {<xsl:value-of select="$DirectoryName"/>_Const.Власник} = '{owner}'";
         </xsl:if>
 

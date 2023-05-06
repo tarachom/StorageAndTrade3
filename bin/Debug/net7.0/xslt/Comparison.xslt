@@ -27,9 +27,9 @@ limitations under the License.
   <xsl:output method="xml" indent="yes" />
 
   <xsl:template name="FieldsControl">
-	<xsl:param name="TableName" />
+    <xsl:param name="TableName" />
     <xsl:param name="InfoSchemaFieldList" />
-	<xsl:param name="InfoSchemaIndexList" />
+    <xsl:param name="InfoSchemaIndexList" />
     <xsl:param name="ConfigurationFieldList" />
 
     <xsl:for-each select="$ConfigurationFieldList">
