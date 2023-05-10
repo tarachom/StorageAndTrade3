@@ -88,7 +88,7 @@ namespace StorageAndTrade
 
         void CreateMessage(Dictionary<string, object> row)
         {
-            Basis_PointerControl Обєкт = new Basis_PointerControl() { Caption = "" };
+            CompositePointerControl Обєкт = new CompositePointerControl() { Caption = "" };
             Обєкт.Pointer = (UuidAndText)row["obj"];
 
             HBox hBoxRowInfo = new HBox();

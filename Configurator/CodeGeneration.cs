@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 06.05.2023 12:43:53
+ * Дата конфігурації: 08.05.2023 19:27:47
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -64,7 +64,7 @@ namespace StorageAndTrade_1_0
           В @pointer - повертає групу (Документи або Довідники)
             @type - повертає назву типу
         */
-        public static string GetBasisObjectPresentation(UuidAndText uuidAndText, out string pointer, out string type)
+        public static string CompositePointerPresentation(UuidAndText uuidAndText, out string pointer, out string type)
         {
             pointer = type = "";
 
@@ -204,6 +204,8 @@ namespace StorageAndTrade_1_0
                         case "СкладськіКомірки_Папки": return new Довідники.СкладськіКомірки_Папки_Pointer(uuidAndText.Uuid).GetPresentation();
                         
                         case "Блокнот": return new Довідники.Блокнот_Pointer(uuidAndText.Uuid).GetPresentation();
+                        
+                        case "test": return new Довідники.test_Pointer(uuidAndText.Uuid).GetPresentation();
                         
                     }
                     
@@ -10312,18 +10314,20 @@ namespace StorageAndTrade_1_0.Довідники
         public const string ДатаЗапису = "col_a3";
         public const string Опис = "col_a4";
         public const string Лінк = "col_a5";
+        public const string test = "col_a6";
     }
 
     public class Блокнот_Objest : DirectoryObject
     {
         public Блокнот_Objest() : base(Config.Kernel!, "tab_a41",
-             new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5" }) 
+             new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6" }) 
         {
             Код = "";
             Назва = "";
             ДатаЗапису = DateTime.MinValue;
             Опис = "";
             Лінк = "";
+            test = new Довідники.test_Pointer();
             
         }
         
@@ -10343,6 +10347,7 @@ namespace StorageAndTrade_1_0.Довідники
                 ДатаЗапису = (base.FieldValue["col_a3"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["col_a3"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
                 Опис = base.FieldValue["col_a4"]?.ToString() ?? "";
                 Лінк = base.FieldValue["col_a5"]?.ToString() ?? "";
+                test = new Довідники.test_Pointer(base.FieldValue["col_a6"]);
                 
                 BaseClear();
                 return true;
@@ -10359,6 +10364,7 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_a3"] = ДатаЗапису;
             base.FieldValue["col_a4"] = Опис;
             base.FieldValue["col_a5"] = Лінк;
+            base.FieldValue["col_a6"] = test.UnigueID.UGuid;
             
             bool result = BaseSave();
             if (result)
@@ -10377,6 +10383,7 @@ namespace StorageAndTrade_1_0.Довідники
             copy.ДатаЗапису = ДатаЗапису;
             copy.Опис = Опис;
             copy.Лінк = Лінк;
+            copy.test = test;
             
             
             if (copyTableParts)
@@ -10423,6 +10430,7 @@ namespace StorageAndTrade_1_0.Довідники
         public DateTime ДатаЗапису { get; set; }
         public string Опис { get; set; }
         public string Лінк { get; set; }
+        public Довідники.test_Pointer test { get; set; }
         
     }
 
@@ -10511,6 +10519,312 @@ namespace StorageAndTrade_1_0.Довідники
             List<Блокнот_Pointer> directoryPointerList = new List<Блокнот_Pointer>();
             foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(name, value, limit, offset)) 
                 directoryPointerList.Add(new Блокнот_Pointer(directoryPointer.UnigueID));
+            return directoryPointerList;
+        }
+    }
+    
+      
+   
+    #endregion
+    
+    #region DIRECTORY "test"
+    public static class test_Const
+    {
+        public const string FULLNAME = "test";
+        public const string TABLE = "tab_a62";
+        public const string DELETION_LABEL = "deletion_label";
+        
+        public const string Код = "col_a1";
+        public const string Назва = "col_a2";
+        public const string one = "col_a3";
+        public const string too = "col_a4";
+        public const string thee = "col_a5";
+        public const string dfgdfg = "col_a6";
+        public const string sdefsd = "col_a7";
+        public const string gfwsdg = "col_a8";
+        public const string sdsd = "col_a9";
+        public const string sdfgsd = "col_b1";
+        public const string sdfsdfs = "col_b2";
+        public const string sdfsd = "col_b3";
+        public const string sdfsdfssd = "col_b4";
+        public const string sdfgsdfsd = "col_b5";
+        public const string sdfsdfsd = "col_b6";
+        public const string xdfgfdsgsd = "col_b7";
+        public const string ggggg = "col_b8";
+        public const string sdgfsdgfsdgsdg = "col_b9";
+        public const string wertwetwetwe = "col_c1";
+        public const string fdgsdgsdgsd = "col_c2";
+    }
+
+    public class test_Objest : DirectoryObject
+    {
+        public test_Objest() : base(Config.Kernel!, "tab_a62",
+             new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b1", "col_b2", "col_b3", "col_b4", "col_b5", "col_b6", "col_b7", "col_b8", "col_b9", "col_c1", "col_c2" }) 
+        {
+            Код = "";
+            Назва = "";
+            one = "";
+            too = 0;
+            thee = 0;
+            dfgdfg = false;
+            sdefsd = DateTime.MinValue;
+            gfwsdg = DateTime.MinValue;
+            sdsd = DateTime.MinValue.TimeOfDay;
+            sdfgsd = new UuidAndText();
+            sdfsdfs = new Guid();
+            sdfsd = new byte[] { };
+            sdfsdfssd = new string[] { };
+            sdfgsdfsd = new int[] { };
+            sdfsdfsd = new decimal[] { };
+            xdfgfdsgsd = false;
+            ggggg = new Довідники.Номенклатура_Pointer();
+            sdgfsdgfsdgsdg = 0;
+            wertwetwetwe = new Guid();
+            fdgsdgsdgsd = 0;
+            
+        }
+        
+        public void New()
+        {
+            BaseNew();
+            
+        }
+
+        public bool Read(UnigueID uid)
+        {
+            if (BaseRead(uid))
+            {
+                Код = base.FieldValue["col_a1"]?.ToString() ?? "";
+                Назва = base.FieldValue["col_a2"]?.ToString() ?? "";
+                one = base.FieldValue["col_a3"]?.ToString() ?? "";
+                too = (base.FieldValue["col_a4"] != DBNull.Value) ? (int)base.FieldValue["col_a4"] : 0;
+                thee = (base.FieldValue["col_a5"] != DBNull.Value) ? (decimal)base.FieldValue["col_a5"] : 0;
+                dfgdfg = (base.FieldValue["col_a6"] != DBNull.Value) ? bool.Parse(base.FieldValue["col_a6"]?.ToString() ?? "False") : false;
+                sdefsd = (base.FieldValue["col_a7"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["col_a7"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                gfwsdg = (base.FieldValue["col_a8"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["col_a8"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                sdsd = (base.FieldValue["col_a9"] != DBNull.Value) ? TimeSpan.Parse(base.FieldValue["col_a9"]?.ToString() ?? DateTime.MinValue.TimeOfDay.ToString()) : DateTime.MinValue.TimeOfDay;
+                sdfgsd = (base.FieldValue["col_b1"] != DBNull.Value) ? (UuidAndText)base.FieldValue["col_b1"] : new UuidAndText();
+                sdfsdfs = (base.FieldValue["col_b2"] != DBNull.Value) ? Guid.Parse(base.FieldValue["col_b2"]?.ToString() ?? Guid.Empty.ToString()) : Guid.Empty;
+                sdfsd = (base.FieldValue["col_b3"] != DBNull.Value) ? (byte[])base.FieldValue["col_b3"] : new byte[] { };
+                sdfsdfssd = (base.FieldValue["col_b4"] != DBNull.Value) ? (string[])base.FieldValue["col_b4"] : new string[] { };
+                sdfgsdfsd = (base.FieldValue["col_b5"] != DBNull.Value) ? (int[])base.FieldValue["col_b5"] : new int[] { };
+                sdfsdfsd = (base.FieldValue["col_b6"] != DBNull.Value) ? (decimal[])base.FieldValue["col_b6"] : new decimal[] { };
+                xdfgfdsgsd = (base.FieldValue["col_b7"] != DBNull.Value) ? bool.Parse(base.FieldValue["col_b7"]?.ToString() ?? "False") : false;
+                ggggg = new Довідники.Номенклатура_Pointer(base.FieldValue["col_b8"]);
+                sdgfsdgfsdgsdg = (base.FieldValue["col_b9"] != DBNull.Value) ? (Перелічення.ТипиСкладів)base.FieldValue["col_b9"] : 0;
+                wertwetwetwe = (base.FieldValue["col_c1"] != DBNull.Value) ? Guid.Parse(base.FieldValue["col_c1"]?.ToString() ?? Guid.Empty.ToString()) : Guid.Empty;
+                fdgsdgsdgsd = (base.FieldValue["col_c2"] != DBNull.Value) ? (Перелічення.ГосподарськіОперації)base.FieldValue["col_c2"] : 0;
+                
+                BaseClear();
+                return true;
+            }
+            else
+                return false;
+        }
+        
+        public bool Save()
+        {
+            base.FieldValue["col_a1"] = Код;
+            base.FieldValue["col_a2"] = Назва;
+            base.FieldValue["col_a3"] = one;
+            base.FieldValue["col_a4"] = too;
+            base.FieldValue["col_a5"] = thee;
+            base.FieldValue["col_a6"] = dfgdfg;
+            base.FieldValue["col_a7"] = sdefsd;
+            base.FieldValue["col_a8"] = gfwsdg;
+            base.FieldValue["col_a9"] = sdsd;
+            base.FieldValue["col_b1"] = sdfgsd;
+            base.FieldValue["col_b2"] = sdfsdfs;
+            base.FieldValue["col_b3"] = sdfsd;
+            base.FieldValue["col_b4"] = sdfsdfssd;
+            base.FieldValue["col_b5"] = sdfgsdfsd;
+            base.FieldValue["col_b6"] = sdfsdfsd;
+            base.FieldValue["col_b7"] = xdfgfdsgsd;
+            base.FieldValue["col_b8"] = ggggg.UnigueID.UGuid;
+            base.FieldValue["col_b9"] = (int)sdgfsdgfsdgsdg;
+            base.FieldValue["col_c1"] = wertwetwetwe;
+            base.FieldValue["col_c2"] = (int)fdgsdgsdgsd;
+            
+            bool result = BaseSave();
+            if (result)
+            {
+                
+                BaseWriteFullTextSearch(GetBasis(), new string[] {  });
+            }
+            return result;
+        }
+
+        public test_Objest Copy(bool copyTableParts = false)
+        {
+            test_Objest copy = new test_Objest();
+            copy.Код = Код;
+            copy.Назва = Назва;
+            copy.one = one;
+            copy.too = too;
+            copy.thee = thee;
+            copy.dfgdfg = dfgdfg;
+            copy.sdefsd = sdefsd;
+            copy.gfwsdg = gfwsdg;
+            copy.sdsd = sdsd;
+            copy.sdfgsd = sdfgsd;
+            copy.sdfsdfs = sdfsdfs;
+            copy.sdfsd = sdfsd;
+            copy.sdfsdfssd = sdfsdfssd;
+            copy.sdfgsdfsd = sdfgsdfsd;
+            copy.sdfsdfsd = sdfsdfsd;
+            copy.xdfgfdsgsd = xdfgfdsgsd;
+            copy.ggggg = ggggg;
+            copy.sdgfsdgfsdgsdg = sdgfsdgfsdgsdg;
+            copy.wertwetwetwe = wertwetwetwe;
+            copy.fdgsdgsdgsd = fdgsdgsdgsd;
+            
+            
+            if (copyTableParts)
+            {
+            
+            }
+
+            copy.New();
+            
+            return copy;
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            
+            base.BaseDeletionLabel(label);
+        }
+
+        public void Delete()
+        {
+            
+            base.BaseDelete(new string[] {  });
+        }
+        
+        public test_Pointer GetDirectoryPointer()
+        {
+            return new test_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.test");
+        }
+
+        public string GetPresentation()
+        {
+            return base.BasePresentation(
+                new string[] { "col_a2" }
+            );
+        }
+        
+        public string Код { get; set; }
+        public string Назва { get; set; }
+        public string one { get; set; }
+        public int too { get; set; }
+        public decimal thee { get; set; }
+        public bool dfgdfg { get; set; }
+        public DateTime sdefsd { get; set; }
+        public DateTime gfwsdg { get; set; }
+        public TimeSpan sdsd { get; set; }
+        public UuidAndText sdfgsd { get; set; }
+        public Guid sdfsdfs { get; set; }
+        public byte[] sdfsd { get; set; }
+        public string[] sdfsdfssd { get; set; }
+        public int[] sdfgsdfsd { get; set; }
+        public decimal[] sdfsdfsd { get; set; }
+        public bool xdfgfdsgsd { get; set; }
+        public Довідники.Номенклатура_Pointer ggggg { get; set; }
+        public Перелічення.ТипиСкладів sdgfsdgfsdgsdg { get; set; }
+        public Guid wertwetwetwe { get; set; }
+        public Перелічення.ГосподарськіОперації fdgsdgsdgsd { get; set; }
+        
+    }
+
+    public class test_Pointer : DirectoryPointer
+    {
+        public test_Pointer(object? uid = null) : base(Config.Kernel!, "tab_a62")
+        {
+            base.Init(new UnigueID(uid), null);
+        }
+        
+        public test_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel!, "tab_a62")
+        {
+            base.Init(uid, fields);
+        }
+        
+        public test_Objest? GetDirectoryObject()
+        {
+            if (this.IsEmpty()) return null;
+            test_Objest testObjestItem = new test_Objest();
+            return testObjestItem.Read(base.UnigueID) ? testObjestItem : null;
+        }
+
+        public test_Pointer Copy()
+        {
+            return new test_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+        }
+
+        public string Назва { get; set; } = "";
+
+        public string GetPresentation()
+        {
+            return Назва = base.BasePresentation(
+                new string[] { "col_a2" }
+            );
+        }
+
+        public void SetDeletionLabel(bool label = true)
+        {
+            test_Objest? obj = GetDirectoryObject();
+            if (obj != null)
+            {
+                
+                base.BaseDeletionLabel(label);
+            }
+        }
+		
+        public test_Pointer GetEmptyPointer()
+        {
+            return new test_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, "Довідники.test");
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
+        }
+    }
+    
+    public class test_Select : DirectorySelect
+    {
+        public test_Select() : base(Config.Kernel!, "tab_a62") { }        
+        public bool Select() { return base.BaseSelect(); }
+        
+        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        
+        public bool MoveNext() { if (MoveToPosition()) { Current = new test_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
+
+        public test_Pointer? Current { get; private set; }
+        
+        public test_Pointer FindByField(string name, object value)
+        {
+            test_Pointer itemPointer = new test_Pointer();
+            DirectoryPointer directoryPointer = base.BaseFindByField(name, value);
+            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
+            return itemPointer;
+        }
+        
+        public List<test_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<test_Pointer> directoryPointerList = new List<test_Pointer>();
+            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(name, value, limit, offset)) 
+                directoryPointerList.Add(new test_Pointer(directoryPointer.UnigueID));
             return directoryPointerList;
         }
     }

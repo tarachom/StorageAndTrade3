@@ -47,11 +47,37 @@ namespace StorageAndTrade
         ВидиНоменклатури_PointerControl ВидНоменклатури = new ВидиНоменклатури_PointerControl() { Caption = "Вид:", WidthPresentation = 300 };
         ПакуванняОдиниціВиміру_PointerControl ОдиницяВиміру = new ПакуванняОдиниціВиміру_PointerControl() { Caption = "Пакування:", WidthPresentation = 300 };
         Файли_PointerControl ОсновнаКартинкаФайл = new Файли_PointerControl() { Caption = "Основна картинка:", WidthPresentation = 300 };
+
         Номенклатура_ТабличнаЧастина_Файли Файли = new Номенклатура_ТабличнаЧастина_Файли();
+
+        //Попередній перегляд картинки
+        ScrolledWindow scrollImageView = new ScrolledWindow() { ShadowType = ShadowType.In };
 
         #endregion
 
-        public Номенклатура_Елемент() : base() { }
+        public Номенклатура_Елемент() : base()
+        {
+            ОсновнаКартинкаФайл.AfterSelectFunc = () =>
+            {
+                foreach (Widget item in scrollImageView.Children)
+                    scrollImageView.Remove(item);
+
+                if (!ОсновнаКартинкаФайл.Pointer.IsEmpty())
+                {
+                    Файли_Objest? Файл = ОсновнаКартинкаФайл.Pointer.GetDirectoryObject();
+                    if (Файл != null)
+                    {
+                        try
+                        {
+                            scrollImageView.Add(new Image(new Gdk.Pixbuf(Файл.БінарніДані)) { Halign = Align.Start, Valign = Align.Start });
+                        }
+                        catch { }
+                    }
+                }
+
+                scrollImageView.ShowAll();
+            };
+        }
 
         protected override void CreatePack1(VBox vBox)
         {
@@ -95,6 +121,18 @@ namespace StorageAndTrade
             CreateTablePart(vBox, "Файли:", Файли);
         }
 
+        protected override void CreatePack2(VBox vBox)
+        {
+            //Картинка
+            {
+                HBox hBox = new HBox() { Halign = Halign };
+                vBox.PackStart(hBox, true, true, 5);
+
+                scrollImageView.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
+                hBox.PackStart(scrollImageView, true, true, 5);
+            }
+        }
+
         #region Присвоєння / зчитування значень
 
         public override void SetValue()
@@ -125,6 +163,9 @@ namespace StorageAndTrade
 
             Файли.Номенклатура_Objest = Номенклатура_Objest;
             Файли.LoadRecords();
+
+            if (ОсновнаКартинкаФайл.AfterSelectFunc != null)
+                ОсновнаКартинкаФайл.AfterSelectFunc.Invoke();
         }
 
         protected override void GetValue()

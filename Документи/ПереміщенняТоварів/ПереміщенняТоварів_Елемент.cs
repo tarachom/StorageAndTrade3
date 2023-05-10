@@ -56,7 +56,7 @@ namespace StorageAndTrade
         TimeControl ЧасДоставкиЗ = new TimeControl();
         TimeControl ЧасДоставкиДо = new TimeControl();
         Entry Коментар = new Entry() { WidthRequest = 920 };
-        Basis_PointerControl Основа = new Basis_PointerControl();
+        CompositePointerControl Основа = new CompositePointerControl();
 
         ПереміщенняТоварів_ТабличнаЧастина_Товари Товари = new ПереміщенняТоварів_ТабличнаЧастина_Товари();
 

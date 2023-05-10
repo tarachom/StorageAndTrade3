@@ -21,9 +21,15 @@ limitations under the License.
 Сайт:     accounting.org.ua
 */
 
+
+
+/*     файл:     Блокнот_Елемент.cs     */
+
 using Gtk;
 
 using StorageAndTrade_1_0.Довідники;
+using StorageAndTrade_1_0.Документи;
+using StorageAndTrade_1_0.Перелічення;
 
 namespace StorageAndTrade
 {
@@ -31,28 +37,50 @@ namespace StorageAndTrade
     {
         public Блокнот_Objest Блокнот_Objest { get; set; } = new Блокнот_Objest();
 
-        Entry Код = new Entry() { WidthRequest = 100 };
-        Entry Назва = new Entry() { WidthRequest = 800 };
-        DateTimeControl ДатаЗапису = new DateTimeControl();
-        TextView Опис = new TextView();
-        Entry Лінк = new Entry() { WidthRequest = 800 };
+        #region Fields
 
-        public Блокнот_Елемент() : base() { }
+        Entry Код = new Entry() { WidthRequest = 500 };
+
+        Entry Назва = new Entry() { WidthRequest = 500 };
+
+        DateTimeControl ДатаЗапису = new DateTimeControl();
+
+        TextView Опис = new TextView() { WidthRequest = 500 };
+
+        Entry Лінк = new Entry() { WidthRequest = 500 };
+        test_PointerControl test = new test_PointerControl() { Caption = "test", WidthPresentation = 300 };
+
+        #endregion
+
+        #region TabularParts
+
+        #endregion
+
+        public Блокнот_Елемент() : base()
+        {
+
+        }
 
         protected override void CreatePack1(VBox vBox)
         {
-            //Код + ДатаЗапису
-            HBox hBox = CreateField(vBox, "Код:", Код);
-            CreateField(hBox, "Дата запису:", ДатаЗапису);
 
-            //Назва
+            CreateField(vBox, "Код:", Код);
+
             CreateField(vBox, "Назва:", Назва);
 
-            //Опис
+            CreateField(vBox, "ДатаЗапису:", ДатаЗапису);
+
             CreateFieldView(vBox, "Опис:", Опис, 800, 500);
 
-            //Лінк
             CreateField(vBox, "Лінк:", Лінк);
+
+            CreateField(vBox, null, test);
+
+        }
+
+        protected override void CreatePack2(VBox vBox)
+        {
+
         }
 
         #region Присвоєння / зчитування значень
@@ -65,8 +93,10 @@ namespace StorageAndTrade
             Код.Text = Блокнот_Objest.Код;
             Назва.Text = Блокнот_Objest.Назва;
             ДатаЗапису.Value = Блокнот_Objest.ДатаЗапису;
-            Опис.Buffer.Text = Блокнот_Objest.Опис;
+            Опис.Buffer. Text = Блокнот_Objest.Опис;
             Лінк.Text = Блокнот_Objest.Лінк;
+            test.Pointer = Блокнот_Objest.test;
+
         }
 
         protected override void GetValue()
@@ -79,6 +109,8 @@ namespace StorageAndTrade
             Блокнот_Objest.ДатаЗапису = ДатаЗапису.Value;
             Блокнот_Objest.Опис = Опис.Buffer.Text;
             Блокнот_Objest.Лінк = Лінк.Text;
+            Блокнот_Objest.test = test.Pointer;
+
         }
 
         #endregion
@@ -93,6 +125,8 @@ namespace StorageAndTrade
             {
                 MsgError(ex);
             }
+
+
         }
     }
 }

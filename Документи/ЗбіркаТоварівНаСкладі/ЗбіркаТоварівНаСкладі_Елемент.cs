@@ -46,7 +46,7 @@ namespace StorageAndTrade
         Користувачі_PointerControl Автор = new Користувачі_PointerControl();
         Entry Коментар = new Entry() { WidthRequest = 920 };
         РеалізаціяТоварівТаПослуг_PointerControl ДокументРеалізації = new РеалізаціяТоварівТаПослуг_PointerControl() { Caption = "Документ реалізації:" };
-        Basis_PointerControl Основа = new Basis_PointerControl();
+        CompositePointerControl Основа = new CompositePointerControl();
 
         ЗбіркаТоварівНаСкладі_ТабличнаЧастина_Товари Товари = new ЗбіркаТоварівНаСкладі_ТабличнаЧастина_Товари();
 

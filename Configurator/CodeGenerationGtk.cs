@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 06.05.2023 12:43:53
+ * Дата конфігурації: 08.05.2023 19:27:47
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон Gtk.xslt
@@ -3182,7 +3182,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
             
               /* ORDER */
-              Файли_Select.QuerySelect.Order.Add(Довідники.Файли_Const.Назва, SelectOrder.ASC);
+              Файли_Select.QuerySelect.Order.Add(Довідники.Файли_Const.ДатаСтворення, SelectOrder.ASC);
             
 
             /* SELECT */
@@ -3284,9 +3284,6 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             /* Where */
             Файли_Select.QuerySelect.Where = Where;
 
-            
-              /* ORDER */
-              Файли_Select.QuerySelect.Order.Add(Довідники.Файли_Const.Назва, SelectOrder.ASC);
             
 
             /* SELECT */
@@ -8007,6 +8004,215 @@ ORDER BY level, {СкладськіКомірки_Папки_Const.Назва} A
                         Код = cur.Fields?[Блокнот_Const.Код]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[Блокнот_Const.Назва]?.ToString() ?? "", /**/
                         ДатаЗапису = cur.Fields?[Блокнот_Const.ДатаЗапису]?.ToString() ?? "" /**/
+                        
+                    };
+
+                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                    CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
+
+                    if (DirectoryPointerItem != null || SelectPointerItem != null)
+                    {
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
+
+                        if (Record.ID == UidSelect)
+                            SelectPath = CurrentPath;
+                    }
+                }
+            }
+        }
+    }
+	    
+    #endregion
+    
+    #region DIRECTORY "test"
+    
+      
+    /* ТАБЛИЦЯ */
+    public class test_Записи
+    {
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
+        string ID = "";
+        
+        string Код = "";
+        string Назва = "";
+
+        Array ToArray()
+        {
+            return new object[] { new Gdk.Pixbuf(Image), ID
+            /* */ , Код, Назва };
+        }
+
+        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */
+            , typeof(string) /* Код */
+            , typeof(string) /* Назва */
+            );
+
+        public static void AddColumns(TreeView treeView)
+        {
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
+            /* */
+            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Код*/
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Назва*/
+            
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
+        }
+
+        public static List<Where> Where { get; set; } = new List<Where>();
+
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
+        public static TreePath? SelectPath;
+        public static TreePath? CurrentPath;
+
+        public static void LoadRecords()
+        {
+            Store.Clear();
+            FirstPath = SelectPath = CurrentPath = null;
+
+            Довідники.test_Select test_Select = new Довідники.test_Select();
+            test_Select.QuerySelect.Field.AddRange(
+                new string[]
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.test_Const.Код /* 1 */
+                    , Довідники.test_Const.Назва /* 2 */
+                    
+                });
+
+            /* Where */
+            test_Select.QuerySelect.Where = Where;
+
+            
+
+            /* SELECT */
+            test_Select.Select();
+            while (test_Select.MoveNext())
+            {
+                Довідники.test_Pointer? cur = test_Select.Current;
+
+                if (cur != null)
+                {
+                    test_Записи Record = new test_Записи
+                    {
+                        ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
+                        Код = cur.Fields?[test_Const.Код]?.ToString() ?? "", /**/
+                        Назва = cur.Fields?[test_Const.Назва]?.ToString() ?? "" /**/
+                        
+                    };
+
+                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                    CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
+
+                    if (DirectoryPointerItem != null || SelectPointerItem != null)
+                    {
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
+
+                        if (Record.ID == UidSelect)
+                            SelectPath = CurrentPath;
+                    }
+                }
+            }
+        }
+    }
+	    
+    /* ТАБЛИЦЯ */
+    public class test_ЗаписиШвидкийВибір
+    {
+        string Image 
+        {
+            get
+            {
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
+            }
+        }
+
+        bool DeletionLabel = false;
+        string ID = "";
+        
+        string Код = "";
+        string Назва = "";
+
+        Array ToArray()
+        {
+            return new object[] { new Gdk.Pixbuf(Image), ID
+            /* */ , Код, Назва };
+        }
+
+        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */
+            , typeof(string) /* Код */
+            , typeof(string) /* Назва */
+            );
+
+        public static void AddColumns(TreeView treeView)
+        {
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
+            /* */
+            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Код*/
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Назва*/
+            
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
+        }
+
+        public static List<Where> Where { get; set; } = new List<Where>();
+
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
+        public static TreePath? SelectPath;
+        public static TreePath? CurrentPath;
+
+        public static void LoadRecords()
+        {
+            Store.Clear();
+            FirstPath = SelectPath = CurrentPath = null;
+
+            Довідники.test_Select test_Select = new Довідники.test_Select();
+            test_Select.QuerySelect.Field.AddRange(
+                new string[]
+                { "deletion_label" /*Помітка на видалення*/
+                    , Довідники.test_Const.Код /* 1 */
+                    , Довідники.test_Const.Назва /* 2 */
+                    
+                });
+
+            /* Where */
+            test_Select.QuerySelect.Where = Where;
+
+            
+
+            /* SELECT */
+            test_Select.Select();
+            while (test_Select.MoveNext())
+            {
+                Довідники.test_Pointer? cur = test_Select.Current;
+
+                if (cur != null)
+                {
+                    test_ЗаписиШвидкийВибір Record = new test_ЗаписиШвидкийВибір
+                    {
+                        ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
+                        Код = cur.Fields?[test_Const.Код]?.ToString() ?? "", /**/
+                        Назва = cur.Fields?[test_Const.Назва]?.ToString() ?? "" /**/
                         
                     };
 

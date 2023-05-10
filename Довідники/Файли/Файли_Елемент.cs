@@ -34,6 +34,16 @@ namespace StorageAndTrade
         Entry Код = new Entry() { WidthRequest = 100 };
         Entry Назва = new Entry() { WidthRequest = 500 };
 
+        Label НазваФайлу = new Label() { Selectable = true };
+        Label Розмір = new Label() { Selectable = true };
+        Label ДатаСтворення = new Label() { Selectable = true };
+
+
+        //Шлях до вибраного файлу
+        string SelectFileName = "";
+
+        Label labelFileName = new Label() { Wrap = true, Selectable = true };
+
         public Файли_Елемент() : base() { }
 
         protected override void CreatePack1(VBox vBox)
@@ -43,6 +53,107 @@ namespace StorageAndTrade
 
             //Назва
             CreateField(vBox, "Назва:", Назва);
+
+            //НазваФайлу
+            CreateField(vBox, "Назва файлу:", НазваФайлу);
+
+            //Розмір
+            CreateField(vBox, "Розмір (KB):", Розмір);
+
+            //ДатаСтворення
+            CreateField(vBox, "Дата cтворення:", ДатаСтворення);
+        }
+
+        protected override void CreatePack2(VBox vBox)
+        {
+            //Загрузити файл
+            {
+                HBox hBox = new HBox() { Halign = Align.Start };
+                vBox.PackStart(hBox, false, false, 5);
+
+                Button bSelectFile = new Button("Вибрати файл");
+                bSelectFile.Clicked += SelectFile;
+                hBox.PackStart(bSelectFile, false, false, 10);
+
+                hBox.PackStart(labelFileName, false, false, 10);
+            }
+
+            //Вигрузити файл
+            {
+                HBox hBox = new HBox() { Halign = Align.Start };
+                vBox.PackStart(hBox, false, false, 5);
+
+                Button bSaveFile = new Button("Зберегти файл");
+                bSaveFile.Clicked += SaveFile;
+                hBox.PackStart(bSaveFile, false, false, 10);
+            }
+        }
+
+        void SelectFile(object? sender, EventArgs args)
+        {
+            SelectFileName = "";
+
+            FileChooserDialog fc = new FileChooserDialog("Виберіть файл для загрузки", Program.GeneralForm,
+                FileChooserAction.Open, "Закрити", ResponseType.Cancel, "Вибрати", ResponseType.Accept);
+
+            fc.Filter = new FileFilter();
+            fc.Filter.AddPattern("*.*");
+
+            if (fc.Run() == (int)ResponseType.Accept)
+                SelectFileName = fc.Filename;
+
+            fc.Dispose();
+            fc.Destroy();
+
+            labelFileName.Text = SelectFileName;
+
+            if (!String.IsNullOrEmpty(SelectFileName) && File.Exists(SelectFileName))
+            {
+                FileInfo fi = new FileInfo(SelectFileName);
+
+                if (String.IsNullOrEmpty(Назва.Text))
+                    Назва.Text = fi.Name;
+
+                НазваФайлу.Text = fi.Name;
+                Розмір.Text = Math.Round((decimal)(fi.Length / 1024)).ToString() + " KB";
+                ДатаСтворення.Text = DateTime.Now.ToString();
+            }
+        }
+
+        void SaveFile(object? sender, EventArgs args)
+        {
+            if (String.IsNullOrEmpty(Файли_Objest.НазваФайлу) || Файли_Objest.БінарніДані.Length == 0)
+                return;
+
+            string fullPath = "";
+
+            FileChooserDialog fc = new FileChooserDialog("Виберіть каталог для збереження файлу: " + Файли_Objest.НазваФайлу, Program.GeneralForm,
+                FileChooserAction.SelectFolder, "Закрити", ResponseType.Cancel, "Вибрати", ResponseType.Accept);
+
+            if (fc.Run() == (int)ResponseType.Accept)
+            {
+                if (!String.IsNullOrEmpty(fc.CurrentFolder))
+                    fullPath = System.IO.Path.Combine(fc.CurrentFolder, Файли_Objest.НазваФайлу);
+            }
+
+            fc.Dispose();
+            fc.Destroy();
+
+            if (!String.IsNullOrEmpty(fullPath))
+            {
+                if (File.Exists(fullPath) && Message.Request(Program.GeneralForm, "Файл '" + Файли_Objest.НазваФайлу + "' уже існує. Перезаписати?") == ResponseType.No)
+                    return;
+
+                try
+                {
+                    File.WriteAllBytes(fullPath, Файли_Objest.БінарніДані);
+                    Message.Info(Program.GeneralForm, "Файл збережений!\n\nШлях: " + fullPath);
+                }
+                catch (Exception ex)
+                {
+                    Message.Error(Program.GeneralForm, "Помилка збереження файлу! \n" + ex.Message);
+                }
+            }
         }
 
         #region Присвоєння / зчитування значень
@@ -54,15 +165,45 @@ namespace StorageAndTrade
 
             Код.Text = Файли_Objest.Код;
             Назва.Text = Файли_Objest.Назва;
+
+            НазваФайлу.Text = Файли_Objest.НазваФайлу;
+            Розмір.Text = Файли_Objest.Розмір;
+            ДатаСтворення.Text = Файли_Objest.ДатаСтворення.ToString();
+
+            SelectFileName = "";
+            labelFileName.Text = "";
         }
 
         protected override void GetValue()
         {
             UnigueID = Файли_Objest.UnigueID;
-            Caption = Назва.Text;
 
             Файли_Objest.Код = Код.Text;
             Файли_Objest.Назва = Назва.Text;
+
+            if (!String.IsNullOrEmpty(SelectFileName) && File.Exists(SelectFileName))
+            {
+                try
+                {
+                    Файли_Objest.БінарніДані = File.ReadAllBytes(SelectFileName);
+                }
+                catch (Exception ex)
+                {
+                    Message.Error(Program.GeneralForm, "Помилка завантаження файлу! \n" + ex.Message);
+                    return;
+                }
+
+                FileInfo fi = new FileInfo(SelectFileName);
+
+                if (String.IsNullOrEmpty(Файли_Objest.Назва))
+                    Файли_Objest.Назва = fi.Name;
+
+                Файли_Objest.НазваФайлу = fi.Name;
+                Файли_Objest.Розмір = Math.Round((decimal)(Файли_Objest.БінарніДані.Length / 1024)).ToString() + " KB";
+                Файли_Objest.ДатаСтворення = DateTime.Now;
+            }
+
+            Caption = Назва.Text;
         }
 
         #endregion
@@ -77,6 +218,9 @@ namespace StorageAndTrade
             {
                 MsgError(ex);
             }
+
+            //Перечитати
+            SetValue();
         }
     }
 }

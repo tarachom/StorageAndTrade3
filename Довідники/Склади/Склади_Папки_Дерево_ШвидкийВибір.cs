@@ -77,23 +77,6 @@ namespace StorageAndTrade
 
                 HBoxTop.PackStart(linkNew, false, false, 0);
             }
-
-            //Очистка
-            /*
-            {
-                LinkButton linkClear = new LinkButton(" Очистити") { Image = new Image(AppContext.BaseDirectory + "images/clean.png"), AlwaysShowImage = true };
-                linkClear.Clicked += (object? sender, EventArgs args) =>
-                {
-                    if (CallBack_OnSelectPointer != null)
-                        CallBack_OnSelectPointer.Invoke(new UnigueID());
-
-                    if (PopoverParent != null)
-                        PopoverParent.Hide();
-                };
-
-                HBoxTop.PackEnd(linkClear, false, false, 10);
-            }
-            */
         }
 
         public void LoadTree()

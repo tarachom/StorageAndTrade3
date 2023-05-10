@@ -80,6 +80,9 @@ namespace StorageAndTrade
         protected override void OnClear(object? sender, EventArgs args)
         {
             Pointer = new Файли_Pointer();
+
+            if (AfterSelectFunc != null)
+                AfterSelectFunc.Invoke();
         }
     }
 }

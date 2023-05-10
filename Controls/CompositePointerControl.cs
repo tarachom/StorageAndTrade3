@@ -30,9 +30,9 @@ using StorageAndTrade_1_0;
 
 namespace StorageAndTrade
 {
-    class Basis_PointerControl : PointerControl
+    class CompositePointerControl : PointerControl
     {
-        public Basis_PointerControl()
+        public CompositePointerControl()
         {
             pointer = new UuidAndText();
             WidthPresentation = 300;
@@ -51,7 +51,7 @@ namespace StorageAndTrade
                 pointer = value;
 
                 if (pointer != null)
-                    Presentation = Functions.GetBasisObjectPresentation(pointer, out PointerName, out TypeCaption);
+                    Presentation = Functions.CompositePointerPresentation(pointer, out PointerName, out TypeCaption);
                 else
                     Presentation = PointerName = TypeCaption = "";
             }

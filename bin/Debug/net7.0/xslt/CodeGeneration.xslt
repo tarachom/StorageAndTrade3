@@ -365,7 +365,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
           В @pointer - повертає групу (Документи або Довідники)
             @type - повертає назву типу
         */
-        public static string GetBasisObjectPresentation(UuidAndText uuidAndText, out string pointer, out string type)
+        public static string CompositePointerPresentation(UuidAndText uuidAndText, out string pointer, out string type)
         {
             pointer = type = "";
 

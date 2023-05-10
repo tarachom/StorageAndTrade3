@@ -36,33 +36,36 @@ namespace StorageAndTrade
 
         enum Columns
         {
+            Image,
             UID,
             Основний,
-            ФайлНазва
+            Файл
         }
 
         ListStore Store = new ListStore(
-            typeof(string), //UID
-            typeof(bool),   //Основний
-            typeof(string)  //ФайлНазва
+            typeof(Gdk.Pixbuf), /* Image */
+            typeof(string),     //UID
+            typeof(bool),       //Основний
+            typeof(string)      //ФайлНазва
         );
 
         List<Запис> Записи = new List<Запис>();
 
         private class Запис
         {
+            public string Image { get; set; } = AppContext.BaseDirectory + "images/doc.png";
             public Guid ID { get; set; } = Guid.Empty;
             public Файли_Pointer Файл { get; set; } = new Файли_Pointer();
-            public string ФайлНазва { get; set; } = "";
             public bool Основний { get; set; } = false;
 
             public object[] ToArray()
             {
                 return new object[]
                 {
+                    new Gdk.Pixbuf(Image),
                     ID.ToString(),
                     Основний,
-                    ФайлНазва
+                    Файл.Назва
                 };
             }
 
@@ -71,15 +74,14 @@ namespace StorageAndTrade
                 return new Запис
                 {
                     ID = Guid.Empty,
-                    Файл = запис.Файл,
-                    ФайлНазва = запис.ФайлНазва,
+                    Файл = запис.Файл.Copy(),
                     Основний = запис.Основний
                 };
             }
 
             public static void ПісляЗміни_Файл(Запис запис)
             {
-                запис.ФайлНазва = запис.Файл.GetPresentation();
+                запис.Файл.GetPresentation();
             }
         }
 
@@ -127,7 +129,7 @@ namespace StorageAndTrade
 
                     switch ((Columns)treeColumn.Data["Column"]!)
                     {
-                        case Columns.ФайлНазва:
+                        case Columns.Файл:
                             {
                                 Program.GeneralForm?.CreateNotebookPage("Вибір - Довідник: Файли", () =>
                                 {
@@ -189,11 +191,12 @@ namespace StorageAndTrade
 
                 foreach (Номенклатура_Файли_TablePart.Record record in Номенклатура_Objest.Файли_TablePart.Records)
                 {
+                    record.Файл.Назва = join[record.UID.ToString()]["file_name"];
+
                     Запис запис = new Запис
                     {
                         ID = record.UID,
                         Файл = record.Файл,
-                        ФайлНазва = join[record.UID.ToString()]["file_name"],
                         Основний = record.Основний
                     };
 
@@ -227,6 +230,8 @@ namespace StorageAndTrade
 
         void AddColumn()
         {
+            TreeViewGrid.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
+
             //Основний
             CellRendererToggle Основний = new CellRendererToggle() { };
             Основний.Toggled += Edited;
@@ -235,10 +240,10 @@ namespace StorageAndTrade
             TreeViewGrid.AppendColumn(new TreeViewColumn("Основний", Основний, "active", (int)Columns.Основний));
 
             //ФайлНазва
-            TreeViewColumn ФайлНазва = new TreeViewColumn("Файл", new CellRendererText(), "text", (int)Columns.ФайлНазва) { MinWidth = 300, Resizable = true };
-            ФайлНазва.Data.Add("Column", Columns.ФайлНазва);
+            TreeViewColumn Файл = new TreeViewColumn("Файл", new CellRendererText(), "text", (int)Columns.Файл) { MinWidth = 300, Resizable = true };
+            Файл.Data.Add("Column", Columns.Файл);
 
-            TreeViewGrid.AppendColumn(ФайлНазва);
+            TreeViewGrid.AppendColumn(Файл);
         }
 
         void Edited(object sender, ToggledArgs args)
