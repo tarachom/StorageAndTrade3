@@ -41,6 +41,7 @@ namespace StorageAndTrade
         protected TreeView TreeViewGrid = new TreeView();
         protected ComboBoxText ComboBoxPeriodWhere = new ComboBoxText();
         protected ToolButton? TypeDocToolButton; //Список документів
+        protected ScrolledWindow ScrollTree = new ScrolledWindow() { ShadowType = ShadowType.In };
 
         #region Динамічне створення обєктів
 
@@ -66,8 +67,7 @@ namespace StorageAndTrade
 
             CreateToolbar();
 
-            ScrolledWindow scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In };
-            scrollTree.SetPolicy(PolicyType.Never, PolicyType.Automatic);
+            ScrollTree.SetPolicy(PolicyType.Never, PolicyType.Automatic);
 
             TreeViewGrid.Selection.Mode = SelectionMode.Multiple;
             TreeViewGrid.ActivateOnSingleClick = true;
@@ -76,9 +76,9 @@ namespace StorageAndTrade
             TreeViewGrid.ButtonReleaseEvent += OnButtonReleaseEvent;
             TreeViewGrid.KeyReleaseEvent += OnKeyReleaseEvent;
 
-            scrollTree.Add(TreeViewGrid);
+            ScrollTree.Add(TreeViewGrid);
 
-            PackStart(scrollTree, true, true, 0);
+            PackStart(ScrollTree, true, true, 0);
 
             ShowAll();
         }

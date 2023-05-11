@@ -322,16 +322,6 @@ namespace StorageAndTrade
                         return page;
                     });
                 });
-                
-                Link.AddLink(vRight, $"{test_Const.FULLNAME}", () =>
-                {
-                    Program.GeneralForm?.CreateNotebookPage($"{test_Const.FULLNAME}", () =>
-                    {
-                        test page = new test();
-                        page.LoadRecords();
-                        return page;
-                    });
-                });
             }
 
             Link.AddCaption(vRight, "Адресне зберігання");

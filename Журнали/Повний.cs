@@ -34,18 +34,41 @@ namespace StorageAndTrade
         {
             TreeViewGrid.Model = ТабличніСписки.Журнали_Повний.Store;
             ТабличніСписки.Журнали_Повний.AddColumns(TreeViewGrid);
+
+            // ТабличніСписки.Журнали_Повний.Limit = 50;
+            // ТабличніСписки.Журнали_Повний.Offset = 0;
+
+            // ScrollTree.Vadjustment.ValueChanged += (object? sender, EventArgs args) =>
+            // {
+            //     Console.WriteLine(
+            //     ScrollTree.Vadjustment.Value + " - " +
+            //     ScrollTree.Vadjustment.Upper + " - " +
+            //     (ScrollTree.Vadjustment.Upper - ScrollTree.Vadjustment.PageSize) + " - " +
+            //     ScrollTree.Vadjustment.PageSize);
+
+            //     if (ScrollTree.Vadjustment.Upper - ScrollTree.Vadjustment.PageSize == ScrollTree.Vadjustment.Value)
+            //     {
+            //         ТабличніСписки.Журнали_Повний.Offset += 50;
+            //         ТабличніСписки.Журнали_Повний.LoadRecords();
+            //     }
+            // };
+
         }
 
         public override void LoadRecords()
         {
             ТабличніСписки.Журнали_Повний.SelectPointerItem = SelectPointerItem;
 
+            // ТабличніСписки.Журнали_Повний.Store.Clear();
+            // ТабличніСписки.Журнали_Повний.Limit = 50;
+            // ТабличніСписки.Журнали_Повний.Offset = 0;
+            
             ТабличніСписки.Журнали_Повний.LoadRecords();
 
-            if (ТабличніСписки.Журнали_Повний.SelectPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.Журнали_Повний.SelectPath, TreeViewGrid.Columns[0], false);
-            else if (ТабличніСписки.Журнали_Повний.CurrentPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.Журнали_Повний.CurrentPath, TreeViewGrid.Columns[0], false);
+            // if (ТабличніСписки.Журнали_Повний.SelectPath != null)
+            //     TreeViewGrid.SetCursor(ТабличніСписки.Журнали_Повний.SelectPath, TreeViewGrid.Columns[0], false);
+            // else if (ТабличніСписки.Журнали_Повний.CurrentPath != null)
+            //     TreeViewGrid.SetCursor(ТабличніСписки.Журнали_Повний.CurrentPath, TreeViewGrid.Columns[0], false);
 
             TreeViewGrid.GrabFocus();
         }

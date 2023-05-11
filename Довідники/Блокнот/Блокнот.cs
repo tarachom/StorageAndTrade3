@@ -83,7 +83,7 @@ namespace StorageAndTrade
             {
                 Program.GeneralForm?.CreateNotebookPage($"{Блокнот_Const.FULLNAME} *", () =>
                 {
-                    test_Елемент page = new test_Елемент
+                    Блокнот_Елемент page = new Блокнот_Елемент
                     {
                         CallBack_LoadRecords = CallBack_LoadRecords,
                         IsNew = true

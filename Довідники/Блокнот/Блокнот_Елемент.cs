@@ -21,15 +21,9 @@ limitations under the License.
 Сайт:     accounting.org.ua
 */
 
-
-
-/*     файл:     Блокнот_Елемент.cs     */
-
 using Gtk;
 
 using StorageAndTrade_1_0.Довідники;
-using StorageAndTrade_1_0.Документи;
-using StorageAndTrade_1_0.Перелічення;
 
 namespace StorageAndTrade
 {
@@ -48,7 +42,6 @@ namespace StorageAndTrade
         TextView Опис = new TextView() { WidthRequest = 500 };
 
         Entry Лінк = new Entry() { WidthRequest = 500 };
-        test_PointerControl test = new test_PointerControl() { Caption = "test", WidthPresentation = 300 };
 
         #endregion
 
@@ -74,8 +67,6 @@ namespace StorageAndTrade
 
             CreateField(vBox, "Лінк:", Лінк);
 
-            CreateField(vBox, null, test);
-
         }
 
         protected override void CreatePack2(VBox vBox)
@@ -95,8 +86,6 @@ namespace StorageAndTrade
             ДатаЗапису.Value = Блокнот_Objest.ДатаЗапису;
             Опис.Buffer. Text = Блокнот_Objest.Опис;
             Лінк.Text = Блокнот_Objest.Лінк;
-            test.Pointer = Блокнот_Objest.test;
-
         }
 
         protected override void GetValue()
@@ -109,8 +98,6 @@ namespace StorageAndTrade
             Блокнот_Objest.ДатаЗапису = ДатаЗапису.Value;
             Блокнот_Objest.Опис = Опис.Buffer.Text;
             Блокнот_Objest.Лінк = Лінк.Text;
-            Блокнот_Objest.test = test.Pointer;
-
         }
 
         #endregion
