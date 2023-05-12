@@ -106,7 +106,7 @@ namespace StorageAndTrade
                         type = vyd;
 
                     if (pointer == "Документи")
-                        ФункціїДляЖурналів.ВідкритиЖурналВідповідноДоВидуДокументу(type, new UnigueID(uid));
+                        ФункціїДляДокументів.ВідкритиДокументВідповідноДоВиду(type, new UnigueID(uid));
                     else if (pointer == "Довідники")
                         ФункціїДляДовідників.ВідкритиДовідникВідповідноДоВиду(type, unigueID);
                 }

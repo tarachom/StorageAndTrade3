@@ -29,6 +29,9 @@ limitations under the License.
 
 using Gtk;
 
+using AccountingSoftware;
+
+using StorageAndTrade_1_0;
 using StorageAndTrade_1_0.Документи;
 
 namespace StorageAndTrade
@@ -37,6 +40,43 @@ namespace StorageAndTrade
     {
         public PageDocuments() : base()
         {
+            //Всі Документи
+            {
+                HBox hBoxAll = new HBox(false, 0);
+                PackStart(hBoxAll, false, false, 10);
+
+                Expander expanderAll = new Expander("Всі документи");
+                hBoxAll.PackStart(expanderAll, false, false, 5);
+
+                VBox vBoxAll = new VBox(false, 0);
+                expanderAll.Add(vBoxAll);
+
+                vBoxAll.PackStart(new Label("Документи"), false, false, 2);
+
+                ListBox listBox = new ListBox();
+                listBox.ButtonPressEvent += (object? sender, ButtonPressEventArgs args) =>
+                {
+                    if (args.Event.Type == Gdk.EventType.DoubleButtonPress && listBox.SelectedRows.Length != 0)
+                        ФункціїДляДокументів.ВідкритиДокументВідповідноДоВиду(listBox.SelectedRows[0].Name, new UnigueID(), 0, false);
+                };
+
+                ScrolledWindow scrollList = new ScrolledWindow() { WidthRequest = 300, HeightRequest = 300, ShadowType = ShadowType.In };
+                scrollList.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
+                scrollList.Add(listBox);
+
+                vBoxAll.PackStart(scrollList, false, false, 2);
+
+                foreach (KeyValuePair<string, ConfigurationDocuments> documents in Config.Kernel!.Conf.Documents)
+                {
+                    string title = String.IsNullOrEmpty(documents.Value.FullName) ? documents.Value.Name : documents.Value.FullName;
+
+                    ListBoxRow row = new ListBoxRow() { Name = documents.Key };
+                    row.Add(new Label(title) { Halign = Align.Start });
+
+                    listBox.Add(row);
+                }
+            }
+
             //Список
             HBox hBoxList = new HBox(false, 0);
 

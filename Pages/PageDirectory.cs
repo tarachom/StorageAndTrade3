@@ -30,6 +30,9 @@ limitations under the License.
 
 using Gtk;
 
+using AccountingSoftware;
+
+using StorageAndTrade_1_0;
 using StorageAndTrade_1_0.Довідники;
 
 namespace StorageAndTrade
@@ -38,8 +41,46 @@ namespace StorageAndTrade
     {
         public PageDirectory() : base()
         {
+            //Всі Довідники
+            {
+                HBox hBoxAll = new HBox(false, 0);
+                PackStart(hBoxAll, false, false, 10);
+
+                Expander expanderAll = new Expander("Всі довідники");
+                hBoxAll.PackStart(expanderAll, false, false, 5);
+
+                VBox vBoxAll = new VBox(false, 0);
+                expanderAll.Add(vBoxAll);
+
+                vBoxAll.PackStart(new Label("Довідники"), false, false, 2);
+
+                ListBox listBox = new ListBox();
+                listBox.ButtonPressEvent += (object? sender, ButtonPressEventArgs args) =>
+                {
+                    if (args.Event.Type == Gdk.EventType.DoubleButtonPress && listBox.SelectedRows.Length != 0)
+                        ФункціїДляДовідників.ВідкритиДовідникВідповідноДоВиду(listBox.SelectedRows[0].Name, null, false);
+                };
+
+                ScrolledWindow scrollList = new ScrolledWindow() { WidthRequest = 300, HeightRequest = 300, ShadowType = ShadowType.In };
+                scrollList.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
+                scrollList.Add(listBox);
+
+                vBoxAll.PackStart(scrollList, false, false, 2);
+
+                foreach (KeyValuePair<string, ConfigurationDirectories> directories in Config.Kernel!.Conf.Directories)
+                {
+                    string title = String.IsNullOrEmpty(directories.Value.FullName) ? directories.Value.Name : directories.Value.FullName;
+
+                    ListBoxRow row = new ListBoxRow() { Name = directories.Key };
+                    row.Add(new Label(title) { Halign = Align.Start });
+
+                    listBox.Add(row);
+                }
+            }
+
             //Список
             HBox hBoxList = new HBox(false, 0);
+            PackStart(hBoxList, false, false, 10);
 
             VBox vLeft = new VBox(false, 0);
             hBoxList.PackStart(vLeft, false, false, 5);
@@ -357,8 +398,9 @@ namespace StorageAndTrade
                 });
             }
 
-            PackStart(hBoxList, false, false, 10);
             ShowAll();
         }
+
+
     }
 }

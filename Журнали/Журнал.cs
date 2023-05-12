@@ -225,7 +225,7 @@ namespace StorageAndTrade
                     string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
                     string typeDoc = (string)TreeViewGrid.Model.GetValue(iter, 2);
 
-                    ФункціїДляЖурналів.ВідкритиЖурналВідповідноДоВидуДокументу(typeDoc, new UnigueID(uid),
+                    ФункціїДляДокументів.ВідкритиДокументВідповідноДоВиду(typeDoc, new UnigueID(uid),
                         Enum.Parse<Перелічення.ТипПеріодуДляЖурналівДокументів>(ComboBoxPeriodWhere.ActiveId));
                 }
             }
