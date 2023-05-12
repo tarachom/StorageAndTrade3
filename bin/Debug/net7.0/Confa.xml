@@ -5,7 +5,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>11.05.2023 18:33:52</DateTimeSave>
+  <DateTimeSave>11.05.2023 20:03:48</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -154,6 +154,7 @@ https://accounting.org.ua/storage_and_trade.html</Desc>
                   </Desc>
                   <IsIndex>0</IsIndex>
                   <IsFullTextSearch>0</IsFullTextSearch>
+                  <Multiline>0</Multiline>
                 </Field>
                 <Field>
                   <Name>Обєкт</Name>
@@ -163,6 +164,7 @@ https://accounting.org.ua/storage_and_trade.html</Desc>
                   </Desc>
                   <IsIndex>0</IsIndex>
                   <IsFullTextSearch>0</IsFullTextSearch>
+                  <Multiline>0</Multiline>
                 </Field>
                 <Field>
                   <Name>Користувач</Name>
@@ -172,6 +174,7 @@ https://accounting.org.ua/storage_and_trade.html</Desc>
                   </Desc>
                   <IsIndex>0</IsIndex>
                   <IsFullTextSearch>0</IsFullTextSearch>
+                  <Multiline>0</Multiline>
                 </Field>
               </Fields>
             </TablePart>
@@ -196,6 +199,7 @@ https://accounting.org.ua/storage_and_trade.html</Desc>
                   </Desc>
                   <IsIndex>0</IsIndex>
                   <IsFullTextSearch>0</IsFullTextSearch>
+                  <Multiline>0</Multiline>
                 </Field>
                 <Field>
                   <Name>Дата</Name>
@@ -214,6 +218,7 @@ https://accounting.org.ua/storage_and_trade.html</Desc>
                   </Desc>
                   <IsIndex>0</IsIndex>
                   <IsFullTextSearch>0</IsFullTextSearch>
+                  <Multiline>0</Multiline>
                 </Field>
                 <Field>
                   <Name>Виконано</Name>
@@ -240,6 +245,7 @@ https://accounting.org.ua/storage_and_trade.html</Desc>
                   </Desc>
                   <IsIndex>0</IsIndex>
                   <IsFullTextSearch>0</IsFullTextSearch>
+                  <Multiline>0</Multiline>
                 </Field>
               </Fields>
             </TablePart>
@@ -282,6 +288,7 @@ https://accounting.org.ua/storage_and_trade.html</Desc>
                   </Desc>
                   <IsIndex>0</IsIndex>
                   <IsFullTextSearch>0</IsFullTextSearch>
+                  <Multiline>0</Multiline>
                 </Field>
                 <Field>
                   <Name>ДатаБлокування</Name>
@@ -334,6 +341,7 @@ https://accounting.org.ua/storage_and_trade.html</Desc>
                   <Desc>Проведення, запис, видалення і т.д</Desc>
                   <IsIndex>0</IsIndex>
                   <IsFullTextSearch>0</IsFullTextSearch>
+                  <Multiline>0</Multiline>
                 </Field>
                 <Field>
                   <Name>Обєкт</Name>
@@ -351,6 +359,7 @@ https://accounting.org.ua/storage_and_trade.html</Desc>
                   <Desc>Так як задано в конфігураторі</Desc>
                   <IsIndex>0</IsIndex>
                   <IsFullTextSearch>0</IsFullTextSearch>
+                  <Multiline>0</Multiline>
                 </Field>
                 <Field>
                   <Name>НазваОбєкту</Name>
@@ -360,6 +369,7 @@ https://accounting.org.ua/storage_and_trade.html</Desc>
                   </Desc>
                   <IsIndex>0</IsIndex>
                   <IsFullTextSearch>0</IsFullTextSearch>
+                  <Multiline>0</Multiline>
                 </Field>
                 <Field>
                   <Name>Повідомлення</Name>
@@ -369,6 +379,7 @@ https://accounting.org.ua/storage_and_trade.html</Desc>
                   </Desc>
                   <IsIndex>0</IsIndex>
                   <IsFullTextSearch>0</IsFullTextSearch>
+                  <Multiline>0</Multiline>
                 </Field>
               </Fields>
             </TablePart>
@@ -869,6 +880,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
                   </Desc>
                   <IsIndex>0</IsIndex>
                   <IsFullTextSearch>0</IsFullTextSearch>
+                  <Multiline>0</Multiline>
                 </Field>
                 <Field>
                   <Name>Посилання</Name>
@@ -878,6 +890,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
                   </Desc>
                   <IsIndex>0</IsIndex>
                   <IsFullTextSearch>0</IsFullTextSearch>
+                  <Multiline>0</Multiline>
                 </Field>
                 <Field>
                   <Name>Повідомлення</Name>
@@ -887,6 +900,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
                   </Desc>
                   <IsIndex>0</IsIndex>
                   <IsFullTextSearch>0</IsFullTextSearch>
+                  <Multiline>0</Multiline>
                 </Field>
               </Fields>
             </TablePart>
@@ -949,6 +963,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Код</Name>
@@ -958,6 +973,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>НазваПовна</Name>
@@ -967,6 +983,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>НазваСкорочена</Name>
@@ -977,6 +994,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>ДатаРеєстрації</Name>
@@ -997,6 +1015,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>СвідоцтвоСеріяНомер</Name>
@@ -1007,6 +1026,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>СвідоцтвоДатаВидачі</Name>
@@ -1017,6 +1037,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Холдинг</Name>
@@ -1055,6 +1076,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               </Desc>
               <IsIndex>0</IsIndex>
               <IsFullTextSearch>1</IsFullTextSearch>
+              <Multiline>0</Multiline>
             </Field>
             <Field>
               <Name>ЕлектроннаПошта</Name>
@@ -1064,6 +1086,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               </Desc>
               <IsIndex>0</IsIndex>
               <IsFullTextSearch>1</IsFullTextSearch>
+              <Multiline>0</Multiline>
             </Field>
             <Field>
               <Name>Країна</Name>
@@ -1073,6 +1096,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               </Desc>
               <IsIndex>0</IsIndex>
               <IsFullTextSearch>1</IsFullTextSearch>
+              <Multiline>0</Multiline>
             </Field>
             <Field>
               <Name>Область</Name>
@@ -1082,6 +1106,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               </Desc>
               <IsIndex>0</IsIndex>
               <IsFullTextSearch>1</IsFullTextSearch>
+              <Multiline>0</Multiline>
             </Field>
             <Field>
               <Name>Район</Name>
@@ -1091,6 +1116,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               </Desc>
               <IsIndex>0</IsIndex>
               <IsFullTextSearch>1</IsFullTextSearch>
+              <Multiline>0</Multiline>
             </Field>
             <Field>
               <Name>Місто</Name>
@@ -1100,6 +1126,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               </Desc>
               <IsIndex>0</IsIndex>
               <IsFullTextSearch>1</IsFullTextSearch>
+              <Multiline>0</Multiline>
             </Field>
             <Field>
               <Name>Значення</Name>
@@ -1109,6 +1136,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               </Desc>
               <IsIndex>0</IsIndex>
               <IsFullTextSearch>1</IsFullTextSearch>
+              <Multiline>0</Multiline>
             </Field>
           </Fields>
         </TablePart>
@@ -1195,6 +1223,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Код</Name>
@@ -1204,6 +1233,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>НазваПовна</Name>
@@ -1214,6 +1244,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Опис</Name>
@@ -1224,6 +1255,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>1</Multiline>
         </Field>
         <Field>
           <Name>Артикул</Name>
@@ -1234,6 +1266,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>ТипНоменклатури</Name>
@@ -1440,6 +1473,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Код</Name>
@@ -1449,6 +1483,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
       </Fields>
       <TabularParts />
@@ -1534,6 +1569,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Код</Name>
@@ -1543,6 +1579,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Опис</Name>
@@ -1553,6 +1590,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>ТипНоменклатури</Name>
@@ -1650,6 +1688,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Код</Name>
@@ -1659,6 +1698,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>НазваПовна</Name>
@@ -1669,6 +1709,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>КількістьУпаковок</Name>
@@ -1764,6 +1805,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>КороткаНазва</Name>
@@ -1774,6 +1816,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>1</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Код</Name>
@@ -1783,6 +1826,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Код_R030</Name>
@@ -1792,6 +1836,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>1</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>ВиводитиКурсНаСтартову</Name>
@@ -1936,6 +1981,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Код</Name>
@@ -1945,6 +1991,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>НазваПовна</Name>
@@ -1955,6 +2002,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>РеєстраційнийНомер</Name>
@@ -1965,6 +2013,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Папка</Name>
@@ -1986,6 +2035,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>КлючовіСловаДляПошуку</Name>
@@ -1996,6 +2046,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
       </Fields>
       <TabularParts>
@@ -2023,6 +2074,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               </Desc>
               <IsIndex>0</IsIndex>
               <IsFullTextSearch>0</IsFullTextSearch>
+              <Multiline>0</Multiline>
             </Field>
             <Field>
               <Name>ЕлектроннаПошта</Name>
@@ -2032,6 +2084,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               </Desc>
               <IsIndex>0</IsIndex>
               <IsFullTextSearch>0</IsFullTextSearch>
+              <Multiline>0</Multiline>
             </Field>
             <Field>
               <Name>Країна</Name>
@@ -2041,6 +2094,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               </Desc>
               <IsIndex>0</IsIndex>
               <IsFullTextSearch>0</IsFullTextSearch>
+              <Multiline>0</Multiline>
             </Field>
             <Field>
               <Name>Область</Name>
@@ -2050,6 +2104,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               </Desc>
               <IsIndex>0</IsIndex>
               <IsFullTextSearch>0</IsFullTextSearch>
+              <Multiline>0</Multiline>
             </Field>
             <Field>
               <Name>Район</Name>
@@ -2059,6 +2114,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               </Desc>
               <IsIndex>0</IsIndex>
               <IsFullTextSearch>0</IsFullTextSearch>
+              <Multiline>0</Multiline>
             </Field>
             <Field>
               <Name>Місто</Name>
@@ -2068,6 +2124,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               </Desc>
               <IsIndex>0</IsIndex>
               <IsFullTextSearch>0</IsFullTextSearch>
+              <Multiline>0</Multiline>
             </Field>
             <Field>
               <Name>Значення</Name>
@@ -2077,6 +2134,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               </Desc>
               <IsIndex>0</IsIndex>
               <IsFullTextSearch>0</IsFullTextSearch>
+              <Multiline>0</Multiline>
             </Field>
           </Fields>
         </TablePart>
@@ -2199,6 +2257,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Код</Name>
@@ -2208,6 +2267,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>ТипСкладу</Name>
@@ -2301,6 +2361,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               </Desc>
               <IsIndex>0</IsIndex>
               <IsFullTextSearch>0</IsFullTextSearch>
+              <Multiline>0</Multiline>
             </Field>
             <Field>
               <Name>ЕлектроннаПошта</Name>
@@ -2310,6 +2371,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               </Desc>
               <IsIndex>0</IsIndex>
               <IsFullTextSearch>0</IsFullTextSearch>
+              <Multiline>0</Multiline>
             </Field>
             <Field>
               <Name>Країна</Name>
@@ -2319,6 +2381,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               </Desc>
               <IsIndex>0</IsIndex>
               <IsFullTextSearch>0</IsFullTextSearch>
+              <Multiline>0</Multiline>
             </Field>
             <Field>
               <Name>Область</Name>
@@ -2328,6 +2391,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               </Desc>
               <IsIndex>0</IsIndex>
               <IsFullTextSearch>0</IsFullTextSearch>
+              <Multiline>0</Multiline>
             </Field>
             <Field>
               <Name>Район</Name>
@@ -2337,6 +2401,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               </Desc>
               <IsIndex>0</IsIndex>
               <IsFullTextSearch>0</IsFullTextSearch>
+              <Multiline>0</Multiline>
             </Field>
             <Field>
               <Name>Місто</Name>
@@ -2346,6 +2411,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               </Desc>
               <IsIndex>0</IsIndex>
               <IsFullTextSearch>0</IsFullTextSearch>
+              <Multiline>0</Multiline>
             </Field>
             <Field>
               <Name>Значення</Name>
@@ -2355,6 +2421,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               </Desc>
               <IsIndex>0</IsIndex>
               <IsFullTextSearch>0</IsFullTextSearch>
+              <Multiline>0</Multiline>
             </Field>
           </Fields>
         </TablePart>
@@ -2459,6 +2526,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Код</Name>
@@ -2468,6 +2536,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Валюта</Name>
@@ -2572,6 +2641,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Код</Name>
@@ -2581,6 +2651,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Валюта</Name>
@@ -2677,6 +2748,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Код</Name>
@@ -2686,6 +2758,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>ФізичнаОсоба</Name>
@@ -2707,12 +2780,13 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>КодВСпеціальнійТаблиці</Name>
           <NameInTable>col_a2</NameInTable>
           <Type>any_pointer</Type>
-          <Desc>Код користувача який авторизувався із спеціальної таблиці Users </Desc>
+          <Desc>Код користувача який авторизувався із спеціальної таблиці Users</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>1</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
@@ -2743,6 +2817,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               </Desc>
               <IsIndex>0</IsIndex>
               <IsFullTextSearch>0</IsFullTextSearch>
+              <Multiline>0</Multiline>
             </Field>
             <Field>
               <Name>ЕлектроннаПошта</Name>
@@ -2752,6 +2827,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               </Desc>
               <IsIndex>0</IsIndex>
               <IsFullTextSearch>0</IsFullTextSearch>
+              <Multiline>0</Multiline>
             </Field>
             <Field>
               <Name>Країна</Name>
@@ -2761,6 +2837,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               </Desc>
               <IsIndex>0</IsIndex>
               <IsFullTextSearch>0</IsFullTextSearch>
+              <Multiline>0</Multiline>
             </Field>
             <Field>
               <Name>Область</Name>
@@ -2770,6 +2847,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               </Desc>
               <IsIndex>0</IsIndex>
               <IsFullTextSearch>0</IsFullTextSearch>
+              <Multiline>0</Multiline>
             </Field>
             <Field>
               <Name>Район</Name>
@@ -2779,6 +2857,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               </Desc>
               <IsIndex>0</IsIndex>
               <IsFullTextSearch>0</IsFullTextSearch>
+              <Multiline>0</Multiline>
             </Field>
             <Field>
               <Name>Місто</Name>
@@ -2788,6 +2867,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               </Desc>
               <IsIndex>0</IsIndex>
               <IsFullTextSearch>0</IsFullTextSearch>
+              <Multiline>0</Multiline>
             </Field>
           </Fields>
         </TablePart>
@@ -2864,6 +2944,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Код</Name>
@@ -2873,6 +2954,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>ДатаНародження</Name>
@@ -2904,6 +2986,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
       </Fields>
       <TabularParts>
@@ -2931,6 +3014,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               </Desc>
               <IsIndex>0</IsIndex>
               <IsFullTextSearch>0</IsFullTextSearch>
+              <Multiline>0</Multiline>
             </Field>
             <Field>
               <Name>ЕлектроннаПошта</Name>
@@ -2940,6 +3024,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               </Desc>
               <IsIndex>0</IsIndex>
               <IsFullTextSearch>0</IsFullTextSearch>
+              <Multiline>0</Multiline>
             </Field>
             <Field>
               <Name>Країна</Name>
@@ -2949,6 +3034,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               </Desc>
               <IsIndex>0</IsIndex>
               <IsFullTextSearch>0</IsFullTextSearch>
+              <Multiline>0</Multiline>
             </Field>
             <Field>
               <Name>Область</Name>
@@ -2958,6 +3044,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               </Desc>
               <IsIndex>0</IsIndex>
               <IsFullTextSearch>0</IsFullTextSearch>
+              <Multiline>0</Multiline>
             </Field>
             <Field>
               <Name>Район</Name>
@@ -2967,6 +3054,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               </Desc>
               <IsIndex>0</IsIndex>
               <IsFullTextSearch>0</IsFullTextSearch>
+              <Multiline>0</Multiline>
             </Field>
             <Field>
               <Name>Місто</Name>
@@ -2976,6 +3064,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               </Desc>
               <IsIndex>0</IsIndex>
               <IsFullTextSearch>0</IsFullTextSearch>
+              <Multiline>0</Multiline>
             </Field>
           </Fields>
         </TablePart>
@@ -3052,6 +3141,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Код</Name>
@@ -3061,6 +3151,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Керівник</Name>
@@ -3147,6 +3238,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Код</Name>
@@ -3156,6 +3248,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
       </Fields>
       <TabularParts />
@@ -3241,6 +3334,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Назва</Name>
@@ -3250,6 +3344,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>НазваФайлу</Name>
@@ -3260,6 +3355,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>БінарніДані</Name>
@@ -3280,6 +3376,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>ДатаСтворення</Name>
@@ -3395,6 +3492,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Код</Name>
@@ -3404,6 +3502,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>НазваПовна</Name>
@@ -3414,6 +3513,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Номенклатура</Name>
@@ -3546,6 +3646,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Код</Name>
@@ -3555,6 +3656,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Родич</Name>
@@ -3609,6 +3711,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Код</Name>
@@ -3618,6 +3721,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Родич</Name>
@@ -3672,6 +3776,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Код</Name>
@@ -3681,6 +3786,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Родич</Name>
@@ -3735,6 +3841,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Код</Name>
@@ -3744,6 +3851,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Валюта</Name>
@@ -3887,6 +3995,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Код</Name>
@@ -3896,6 +4005,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Валюта</Name>
@@ -3917,6 +4027,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Підрозділ</Name>
@@ -3938,6 +4049,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>НомерРахунку</Name>
@@ -3948,6 +4060,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>АдресаБанку</Name>
@@ -3958,6 +4071,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>МістоБанку</Name>
@@ -3968,6 +4082,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>КореспонденськийРахунокБанку</Name>
@@ -3978,6 +4093,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>ТелефониБанку</Name>
@@ -3988,6 +4104,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Закритий</Name>
@@ -4131,6 +4248,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Код</Name>
@@ -4140,6 +4258,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>БанківськийРахунок</Name>
@@ -4235,6 +4354,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Підрозділ</Name>
@@ -4298,6 +4418,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>ДопустимаСумаЗаборгованості</Name>
@@ -4328,6 +4449,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
       </Fields>
       <TabularParts />
@@ -4457,6 +4579,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Код</Name>
@@ -4466,6 +4589,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>НомерРахунку</Name>
@@ -4476,6 +4600,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Банк</Name>
@@ -4486,6 +4611,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>БанкДляРозрахунків</Name>
@@ -4496,6 +4622,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>ТекстКореспондента</Name>
@@ -4506,6 +4633,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>ТекстПризначення</Name>
@@ -4516,6 +4644,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Валюта</Name>
@@ -4537,6 +4666,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>КорРахунокБанку</Name>
@@ -4547,6 +4677,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>МістоБанку</Name>
@@ -4557,6 +4688,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>АдресаБанку</Name>
@@ -4567,6 +4699,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>ТелефониБанку</Name>
@@ -4577,6 +4710,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Закрито</Name>
@@ -4719,6 +4853,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Код</Name>
@@ -4728,6 +4863,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>КореспондуючийРахунок</Name>
@@ -4738,6 +4874,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>ВидРухуКоштів</Name>
@@ -4759,6 +4896,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
       </Fields>
       <TabularParts>
@@ -4874,6 +5012,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>1</IsPresentation>
           <IsIndex>1</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Коментар</Name>
@@ -4883,6 +5022,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>ДатаСтворення</Name>
@@ -4959,6 +5099,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Дата</Name>
@@ -5142,6 +5283,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Організація</Name>
@@ -5207,6 +5349,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
       </Fields>
       <TabularParts />
@@ -5293,6 +5436,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Назва</Name>
@@ -5302,6 +5446,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>ТипНаселеногоПункту</Name>
@@ -5312,6 +5457,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>КодМФО</Name>
@@ -5322,6 +5468,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>НазваГоловноїУстановиАнг</Name>
@@ -5332,6 +5479,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>КодЄДРПОУ</Name>
@@ -5342,6 +5490,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>ПовнаНазва</Name>
@@ -5352,6 +5501,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>УнікальнийКодБанку</Name>
@@ -5362,6 +5512,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>КодОбластіОпераційноїДіяльності</Name>
@@ -5372,6 +5523,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>НазваОбластіОпераційноїДіяльності</Name>
@@ -5382,6 +5534,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>КодОбластіЗгідноСтатуту</Name>
@@ -5392,6 +5545,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>НазваОбластіЗгідноСтатуту</Name>
@@ -5402,6 +5556,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>ПоштовийІндекс</Name>
@@ -5412,6 +5567,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>НазваНаселеногоПункту</Name>
@@ -5422,6 +5578,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Адреса</Name>
@@ -5432,6 +5589,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>КодТелефонногоЗвязку</Name>
@@ -5442,6 +5600,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>НомерТелефону</Name>
@@ -5452,6 +5611,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>ЧисловийКодСтануУстанови</Name>
@@ -5462,6 +5622,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>НазваСтануУстанови</Name>
@@ -5472,6 +5633,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>ДатаЗміниСтану</Name>
@@ -5482,6 +5644,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>ДатаВідкриттяУстанови</Name>
@@ -5492,6 +5655,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>ДатаЗакриттяУстанови</Name>
@@ -5502,6 +5666,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>КодНБУ</Name>
@@ -5512,6 +5677,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>НомерЛіцензії</Name>
@@ -5522,6 +5688,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>ДатаЛіцензії</Name>
@@ -5532,6 +5699,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>КодСтатусу</Name>
@@ -5542,6 +5710,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Статус</Name>
@@ -5552,6 +5721,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>ДатаЗапису</Name>
@@ -5562,6 +5732,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
       </Fields>
       <TabularParts />
@@ -5820,6 +5991,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>НалаштуванняАдресногоЗберігання</Name>
@@ -5965,13 +6137,14 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>ОбластьЗберігання</Name>
           <NameInTable>col_a3</NameInTable>
           <Type>pointer</Type>
           <Pointer>Довідники.ОбластьЗберігання</Pointer>
-          <Desc>Не використовується </Desc>
+          <Desc>Не використовується</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
@@ -5985,6 +6158,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Позиція</Name>
@@ -5995,6 +6169,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Приміщення</Name>
@@ -6016,6 +6191,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Ярус</Name>
@@ -6026,6 +6202,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>ТипСкладськоїКомірки</Name>
@@ -6237,6 +6414,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Опис</Name>
@@ -6247,6 +6425,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Приміщення</Name>
@@ -6330,6 +6509,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Назва</Name>
@@ -6339,6 +6519,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Глибина</Name>
@@ -6349,6 +6530,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Вантажопідйомність</Name>
@@ -6359,6 +6541,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Обєм</Name>
@@ -6369,6 +6552,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Ширина</Name>
@@ -6379,6 +6563,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
       </Fields>
       <TabularParts />
@@ -6495,6 +6680,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Код</Name>
@@ -6504,6 +6690,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Родич</Name>
@@ -6607,6 +6794,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Назва</Name>
@@ -6616,6 +6804,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>ДатаЗапису</Name>
@@ -6636,6 +6825,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Лінк</Name>
@@ -6646,6 +6836,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
       </Fields>
       <TabularParts />
@@ -6755,6 +6946,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>НомерДок</Name>
@@ -6765,6 +6957,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>1</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>ДатаДок</Name>
@@ -6904,6 +7097,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>ПовернутиТару</Name>
@@ -6955,6 +7149,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>ГосподарськаОперація</Name>
@@ -7018,6 +7213,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>КлючовіСловаДляПошуку</Name>
@@ -7028,6 +7224,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
       </Fields>
       <TabularParts>
@@ -7336,6 +7533,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>НомерДок</Name>
@@ -7346,6 +7544,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>1</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>ДатаДок</Name>
@@ -7484,6 +7683,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>ДатаВхідногоДокументу</Name>
@@ -7661,6 +7861,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>КлючовіСловаДляПошуку</Name>
@@ -7670,6 +7871,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
       </Fields>
       <TabularParts>
@@ -8022,6 +8224,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>НомерДок</Name>
@@ -8032,6 +8235,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>1</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>ДатаДок</Name>
@@ -8201,6 +8405,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>ГосподарськаОперація</Name>
@@ -8306,6 +8511,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Менеджер</Name>
@@ -8327,6 +8533,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
       </Fields>
       <TabularParts>
@@ -8645,6 +8852,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>НомерДок</Name>
@@ -8655,6 +8863,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>1</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>ДатаДок</Name>
@@ -8949,6 +9158,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Менеджер</Name>
@@ -8970,6 +9180,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
       </Fields>
       <TabularParts>
@@ -9330,6 +9541,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>НомерДок</Name>
@@ -9340,6 +9552,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>1</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>ДатаДок</Name>
@@ -9393,6 +9606,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Автор</Name>
@@ -9414,6 +9628,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
       </Fields>
       <TabularParts>
@@ -9637,6 +9852,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>НомерДок</Name>
@@ -9647,6 +9863,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>1</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>ДатаДок</Name>
@@ -9796,6 +10013,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Автор</Name>
@@ -9817,6 +10035,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
       </Fields>
       <TabularParts>
@@ -9843,6 +10062,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               </Desc>
               <IsIndex>0</IsIndex>
               <IsFullTextSearch>0</IsFullTextSearch>
+              <Multiline>0</Multiline>
             </Field>
             <Field>
               <Name>Сума</Name>
@@ -10080,6 +10300,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>НомерДок</Name>
@@ -10090,6 +10311,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>1</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>ДатаДок</Name>
@@ -10259,6 +10481,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Автор</Name>
@@ -10280,6 +10503,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
       </Fields>
       <TabularParts>
@@ -10306,6 +10530,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               </Desc>
               <IsIndex>0</IsIndex>
               <IsFullTextSearch>0</IsFullTextSearch>
+              <Multiline>0</Multiline>
             </Field>
             <Field>
               <Name>Сума</Name>
@@ -10344,6 +10569,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               </Desc>
               <IsIndex>0</IsIndex>
               <IsFullTextSearch>0</IsFullTextSearch>
+              <Multiline>0</Multiline>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -10551,6 +10777,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>НомерДок</Name>
@@ -10561,6 +10788,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>1</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>ДатаДок</Name>
@@ -10702,6 +10930,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>ЧасДоставкиЗ</Name>
@@ -10732,6 +10961,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Автор</Name>
@@ -10763,6 +10993,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
       </Fields>
       <TabularParts>
@@ -11008,6 +11239,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>НомерДок</Name>
@@ -11018,6 +11250,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>1</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>ДатаДок</Name>
@@ -11158,6 +11391,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>ЧасДоставкиЗ</Name>
@@ -11208,6 +11442,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Автор</Name>
@@ -11240,6 +11475,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
       </Fields>
       <TabularParts>
@@ -11552,6 +11788,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>НомерДок</Name>
@@ -11562,6 +11799,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>1</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>ДатаДок</Name>
@@ -11680,6 +11918,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Контрагент</Name>
@@ -11721,6 +11960,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Автор</Name>
@@ -11742,6 +11982,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
       </Fields>
       <TabularParts>
@@ -11844,6 +12085,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               </Desc>
               <IsIndex>0</IsIndex>
               <IsFullTextSearch>0</IsFullTextSearch>
+              <Multiline>0</Multiline>
             </Field>
             <Field>
               <Name>ДокументРеалізації</Name>
@@ -12063,6 +12305,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>НомерДок</Name>
@@ -12073,6 +12316,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>1</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>ДатаДок</Name>
@@ -12202,6 +12446,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Автор</Name>
@@ -12234,6 +12479,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
       </Fields>
       <TabularParts>
@@ -12486,6 +12732,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>НомерДок</Name>
@@ -12496,6 +12743,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>1</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>ДатаДок</Name>
@@ -12593,6 +12841,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Автор</Name>
@@ -12614,6 +12863,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
       </Fields>
       <TabularParts>
@@ -13062,6 +13312,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>НомерДок</Name>
@@ -13072,6 +13323,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>1</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>ДатаДок</Name>
@@ -13092,6 +13344,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Автор</Name>
@@ -13113,6 +13366,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
       </Fields>
       <TabularParts>
@@ -13315,6 +13569,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>НомерДок</Name>
@@ -13325,6 +13580,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>1</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>ДатаДок</Name>
@@ -13389,6 +13645,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Автор</Name>
@@ -13410,6 +13667,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
       </Fields>
       <TabularParts>
@@ -13612,6 +13870,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>НомерДок</Name>
@@ -13622,6 +13881,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>1</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>ДатаДок</Name>
@@ -13664,6 +13924,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Автор</Name>
@@ -13685,6 +13946,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
       </Fields>
       <TabularParts>
@@ -13888,6 +14150,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>НомерДок</Name>
@@ -13898,6 +14161,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>1</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>ДатаДок</Name>
@@ -13951,6 +14215,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>СумаДокументу</Name>
@@ -13971,6 +14236,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Автор</Name>
@@ -13992,6 +14258,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Основа</Name>
@@ -14257,6 +14524,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>НомерДок</Name>
@@ -14267,6 +14535,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>1</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>ДатаДок</Name>
@@ -14373,6 +14642,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>КлючовіСловаДляПошуку</Name>
@@ -14383,6 +14653,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
       </Fields>
       <TabularParts>
@@ -14655,6 +14926,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>НомерДок</Name>
@@ -14665,6 +14937,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>1</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>ДатаДок</Name>
@@ -14838,6 +15111,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Менеджер</Name>
@@ -14859,6 +15133,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
       </Fields>
       <TabularParts>
@@ -15174,6 +15449,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>ДатаДок</Name>
@@ -15192,6 +15468,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>1</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Коментар</Name>
@@ -15201,6 +15478,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Основа</Name>
@@ -15276,6 +15554,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
       </Fields>
       <TabularParts>
@@ -15500,6 +15779,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>ДатаДок</Name>
@@ -15518,6 +15798,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>1</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Коментар</Name>
@@ -15527,6 +15808,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Основа</Name>
@@ -15591,6 +15873,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
       </Fields>
       <TabularParts>
@@ -15825,6 +16108,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>ДатаДок</Name>
@@ -15843,6 +16127,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>1</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Коментар</Name>
@@ -15852,6 +16137,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Основа</Name>
@@ -15927,6 +16213,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
       </Fields>
       <TabularParts>
@@ -16153,6 +16440,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>НомерДок</Name>
@@ -16163,6 +16451,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>1</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>ДатаДок</Name>
@@ -16205,6 +16494,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
         <Field>
           <Name>Автор</Name>
@@ -16247,6 +16537,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
         </Field>
       </Fields>
       <TabularParts>
@@ -23740,6 +24031,7 @@ SQL тип  непотрібно вказувати
             </Desc>
             <IsIndex>1</IsIndex>
             <IsFullTextSearch>0</IsFullTextSearch>
+            <Multiline>0</Multiline>
           </Field>
         </Fields>
       </DimensionFields>

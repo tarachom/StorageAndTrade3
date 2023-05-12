@@ -95,13 +95,8 @@ namespace StorageAndTrade
 
                 Program.GeneralForm?.CreateNotebookPage(listName, () => { return (Widget)listPage; }, true);
 
-                if (periodWhere != 0)
-                {
-                    listPage.GetType().GetProperty("PeriodWhere")?.SetValue(listPage, periodWhere);
-                    listPage.GetType().InvokeMember("SetValue", BindingFlags.InvokeMethod, null, listPage, null);
-                }
-                else
-                    listPage.GetType().InvokeMember("LoadRecords", BindingFlags.InvokeMethod, null, listPage, null);
+                listPage.GetType().GetProperty("PeriodWhere")?.SetValue(listPage, (periodWhere != 0 ? periodWhere : ТипПеріодуДляЖурналівДокументів.ВесьПеріод));
+                listPage.GetType().InvokeMember("SetValue", BindingFlags.InvokeMethod, null, listPage, null);
             }
         }
     }

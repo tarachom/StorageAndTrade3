@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 11.05.2023 18:33:52
+ * Дата конфігурації: 11.05.2023 20:03:48
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -431,13 +431,13 @@ namespace StorageAndTrade_1_0.Константи
             
             if (IsSelect)
             {
-                m_ЖурналРеєстрації_Const = fieldValue["col_a8"]?.ToString() ?? "";
-                m_ФоновіЗадачі_Const = fieldValue["col_a9"]?.ToString() ?? "";
-                m_ЗупинитиФоновіЗадачі_Const = (fieldValue["col_g6"] != DBNull.Value) ? bool.Parse(fieldValue["col_g6"]?.ToString() ?? "False") : false;
-                m_ЗаблокованіОбєкти_Const = fieldValue["col_g7"]?.ToString() ?? "";
-                m_ПовідомленняТаПомилки_Const = fieldValue["col_h8"]?.ToString() ?? "";
-                m_ВестиОблікПоСеріяхНоменклатури_Const = (fieldValue["col_h9"] != DBNull.Value) ? bool.Parse(fieldValue["col_h9"]?.ToString() ?? "False") : false;
-                m_ВестиОблікПоХарактеристикахНоменклатури_Const = (fieldValue["col_i1"] != DBNull.Value) ? bool.Parse(fieldValue["col_i1"]?.ToString() ?? "False") : false;
+                m_ЖурналРеєстрації_Const = fieldValue["col_a8"].ToString() ?? "";
+                m_ФоновіЗадачі_Const = fieldValue["col_a9"].ToString() ?? "";
+                m_ЗупинитиФоновіЗадачі_Const = (fieldValue["col_g6"] != DBNull.Value) ? (bool)fieldValue["col_g6"] : false;
+                m_ЗаблокованіОбєкти_Const = fieldValue["col_g7"].ToString() ?? "";
+                m_ПовідомленняТаПомилки_Const = fieldValue["col_h8"].ToString() ?? "";
+                m_ВестиОблікПоСеріяхНоменклатури_Const = (fieldValue["col_h9"] != DBNull.Value) ? (bool)fieldValue["col_h9"] : false;
+                m_ВестиОблікПоХарактеристикахНоменклатури_Const = (fieldValue["col_i1"] != DBNull.Value) ? (bool)fieldValue["col_i1"] : false;
                 
             }
 			      
@@ -569,10 +569,10 @@ namespace StorageAndTrade_1_0.Константи
                     Record record = new Record();
                     record.UID = (Guid)fieldValue["uid"];
                     
-                    record.Дата = (fieldValue["col_a7"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a7"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
-                    record.Коментар = fieldValue["col_a8"]?.ToString() ?? "";
-                    record.Обєкт = fieldValue["col_a1"]?.ToString() ?? "";
-                    record.Користувач = fieldValue["col_a2"]?.ToString() ?? "";
+                    record.Дата = (fieldValue["col_a7"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a7"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                    record.Коментар = fieldValue["col_a8"].ToString() ?? "";
+                    record.Обєкт = fieldValue["col_a1"].ToString() ?? "";
+                    record.Користувач = fieldValue["col_a2"].ToString() ?? "";
                     
                     Records.Add(record);
                 }
@@ -646,12 +646,12 @@ namespace StorageAndTrade_1_0.Константи
                     Record record = new Record();
                     record.UID = (Guid)fieldValue["uid"];
                     
-                    record.Назва = fieldValue["col_a2"]?.ToString() ?? "";
-                    record.Дата = (fieldValue["col_a1"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a1"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
-                    record.Ключ = fieldValue["col_a5"]?.ToString() ?? "";
-                    record.Виконано = (fieldValue["col_a3"] != DBNull.Value) ? bool.Parse(fieldValue["col_a3"]?.ToString() ?? "False") : false;
-                    record.Заблоковано = (fieldValue["col_a4"] != DBNull.Value) ? bool.Parse(fieldValue["col_a4"]?.ToString() ?? "False") : false;
-                    record.Результат = fieldValue["col_a6"]?.ToString() ?? "";
+                    record.Назва = fieldValue["col_a2"].ToString() ?? "";
+                    record.Дата = (fieldValue["col_a1"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a1"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                    record.Ключ = fieldValue["col_a5"].ToString() ?? "";
+                    record.Виконано = (fieldValue["col_a3"] != DBNull.Value) ? (bool)fieldValue["col_a3"] : false;
+                    record.Заблоковано = (fieldValue["col_a4"] != DBNull.Value) ? (bool)fieldValue["col_a4"] : false;
+                    record.Результат = fieldValue["col_a6"].ToString() ?? "";
                     
                     Records.Add(record);
                 }
@@ -727,10 +727,10 @@ namespace StorageAndTrade_1_0.Константи
                     Record record = new Record();
                     record.UID = (Guid)fieldValue["uid"];
                     
-                    record.Обєкт = (fieldValue["col_a1"] != DBNull.Value) ? Guid.Parse(fieldValue["col_a1"]?.ToString() ?? Guid.Empty.ToString()) : Guid.Empty;
-                    record.Користувач = fieldValue["col_a2"]?.ToString() ?? "";
-                    record.ДатаБлокування = (fieldValue["col_a3"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a3"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
-                    record.ДатаПідтвердженняБлокування = (fieldValue["col_a4"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a4"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                    record.Обєкт = (fieldValue["col_a1"] != DBNull.Value) ? (Guid)fieldValue["col_a1"] : Guid.Empty;
+                    record.Користувач = fieldValue["col_a2"].ToString() ?? "";
+                    record.ДатаБлокування = (fieldValue["col_a3"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a3"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                    record.ДатаПідтвердженняБлокування = (fieldValue["col_a4"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a4"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
                     
                     Records.Add(record);
                 }
@@ -804,12 +804,12 @@ namespace StorageAndTrade_1_0.Константи
                     Record record = new Record();
                     record.UID = (Guid)fieldValue["uid"];
                     
-                    record.Дата = (fieldValue["col_a2"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a2"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
-                    record.НазваПроцесу = fieldValue["col_a5"]?.ToString() ?? "";
-                    record.Обєкт = (fieldValue["col_a1"] != DBNull.Value) ? Guid.Parse(fieldValue["col_a1"]?.ToString() ?? Guid.Empty.ToString()) : Guid.Empty;
-                    record.ТипОбєкту = fieldValue["col_a6"]?.ToString() ?? "";
-                    record.НазваОбєкту = fieldValue["col_a4"]?.ToString() ?? "";
-                    record.Повідомлення = fieldValue["col_a3"]?.ToString() ?? "";
+                    record.Дата = (fieldValue["col_a2"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a2"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                    record.НазваПроцесу = fieldValue["col_a5"].ToString() ?? "";
+                    record.Обєкт = (fieldValue["col_a1"] != DBNull.Value) ? (Guid)fieldValue["col_a1"] : Guid.Empty;
+                    record.ТипОбєкту = fieldValue["col_a6"].ToString() ?? "";
+                    record.НазваОбєкту = fieldValue["col_a4"].ToString() ?? "";
+                    record.Повідомлення = fieldValue["col_a3"].ToString() ?? "";
                     
                     Records.Add(record);
                 }
@@ -1737,9 +1737,9 @@ namespace StorageAndTrade_1_0.Константи
             
             if (IsSelect)
             {
-                m_ЗавантаженняКурсівВалют_Const = fieldValue["col_h5"]?.ToString() ?? "";
-                m_АвтоматичноЗавантажуватиКурсиВалютПриЗапуску_Const = (fieldValue["col_b6"] != DBNull.Value) ? bool.Parse(fieldValue["col_b6"]?.ToString() ?? "False") : false;
-                m_ЗавантаженняСпискуБанків_Const = fieldValue["col_g3"]?.ToString() ?? "";
+                m_ЗавантаженняКурсівВалют_Const = fieldValue["col_h5"].ToString() ?? "";
+                m_АвтоматичноЗавантажуватиКурсиВалютПриЗапуску_Const = (fieldValue["col_b6"] != DBNull.Value) ? (bool)fieldValue["col_b6"] : false;
+                m_ЗавантаженняСпискуБанків_Const = fieldValue["col_g3"].ToString() ?? "";
                 
             }
 			      
@@ -1815,10 +1815,10 @@ namespace StorageAndTrade_1_0.Константи
                     Record record = new Record();
                     record.UID = (Guid)fieldValue["uid"];
                     
-                    record.Дата = (fieldValue["col_a1"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a1"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
-                    record.Стан = fieldValue["col_a2"]?.ToString() ?? "";
-                    record.Посилання = fieldValue["col_a3"]?.ToString() ?? "";
-                    record.Повідомлення = fieldValue["col_a4"]?.ToString() ?? "";
+                    record.Дата = (fieldValue["col_a1"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a1"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                    record.Стан = fieldValue["col_a2"].ToString() ?? "";
+                    record.Посилання = fieldValue["col_a3"].ToString() ?? "";
+                    record.Повідомлення = fieldValue["col_a4"].ToString() ?? "";
                     
                     Records.Add(record);
                 }
@@ -1878,8 +1878,8 @@ namespace StorageAndTrade_1_0.Константи
             
             if (IsSelect)
             {
-                m_ПрограмаЗаповненаПочатковимиДаними_Const = (fieldValue["col_h7"] != DBNull.Value) ? bool.Parse(fieldValue["col_h7"]?.ToString() ?? "False") : false;
-                m_ВідкриватиРобочийСтіл_Const = (fieldValue["col_h6"] != DBNull.Value) ? bool.Parse(fieldValue["col_h6"]?.ToString() ?? "False") : false;
+                m_ПрограмаЗаповненаПочатковимиДаними_Const = (fieldValue["col_h7"] != DBNull.Value) ? (bool)fieldValue["col_h7"] : false;
+                m_ВідкриватиРобочийСтіл_Const = (fieldValue["col_h6"] != DBNull.Value) ? (bool)fieldValue["col_h6"] : false;
                 
             }
 			      
@@ -1971,14 +1971,14 @@ namespace StorageAndTrade_1_0.Довідники
         {
             if (BaseRead(uid))
             {
-                Назва = base.FieldValue["col_a1"]?.ToString() ?? "";
-                Код = base.FieldValue["col_a2"]?.ToString() ?? "";
-                НазваПовна = base.FieldValue["col_a3"]?.ToString() ?? "";
-                НазваСкорочена = base.FieldValue["col_a4"]?.ToString() ?? "";
-                ДатаРеєстрації = (base.FieldValue["col_a5"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["col_a5"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
-                КраїнаРеєстрації = base.FieldValue["col_a6"]?.ToString() ?? "";
-                СвідоцтвоСеріяНомер = base.FieldValue["col_a7"]?.ToString() ?? "";
-                СвідоцтвоДатаВидачі = base.FieldValue["col_a8"]?.ToString() ?? "";
+                Назва = base.FieldValue["col_a1"].ToString() ?? "";
+                Код = base.FieldValue["col_a2"].ToString() ?? "";
+                НазваПовна = base.FieldValue["col_a3"].ToString() ?? "";
+                НазваСкорочена = base.FieldValue["col_a4"].ToString() ?? "";
+                ДатаРеєстрації = (base.FieldValue["col_a5"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["col_a5"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                КраїнаРеєстрації = base.FieldValue["col_a6"].ToString() ?? "";
+                СвідоцтвоСеріяНомер = base.FieldValue["col_a7"].ToString() ?? "";
+                СвідоцтвоДатаВидачі = base.FieldValue["col_a8"].ToString() ?? "";
                 Холдинг = new Довідники.Організації_Pointer(base.FieldValue["col_a9"]);
                 
                 BaseClear();
@@ -2208,13 +2208,13 @@ namespace StorageAndTrade_1_0.Довідники
                 record.UID = (Guid)fieldValue["uid"];
                 
                 record.Тип = (fieldValue["col_a9"] != DBNull.Value) ? (Перелічення.ТипиКонтактноїІнформації)fieldValue["col_a9"] : 0;
-                record.Телефон = fieldValue["col_a4"]?.ToString() ?? "";
-                record.ЕлектроннаПошта = fieldValue["col_a5"]?.ToString() ?? "";
-                record.Країна = fieldValue["col_a1"]?.ToString() ?? "";
-                record.Область = fieldValue["col_a6"]?.ToString() ?? "";
-                record.Район = fieldValue["col_a2"]?.ToString() ?? "";
-                record.Місто = fieldValue["col_a3"]?.ToString() ?? "";
-                record.Значення = fieldValue["col_a8"]?.ToString() ?? "";
+                record.Телефон = fieldValue["col_a4"].ToString() ?? "";
+                record.ЕлектроннаПошта = fieldValue["col_a5"].ToString() ?? "";
+                record.Країна = fieldValue["col_a1"].ToString() ?? "";
+                record.Область = fieldValue["col_a6"].ToString() ?? "";
+                record.Район = fieldValue["col_a2"].ToString() ?? "";
+                record.Місто = fieldValue["col_a3"].ToString() ?? "";
+                record.Значення = fieldValue["col_a8"].ToString() ?? "";
                 
                 Records.Add(record);
             }
@@ -2334,11 +2334,11 @@ namespace StorageAndTrade_1_0.Довідники
         {
             if (BaseRead(uid))
             {
-                Назва = base.FieldValue["col_b1"]?.ToString() ?? "";
-                Код = base.FieldValue["col_b2"]?.ToString() ?? "";
-                НазваПовна = base.FieldValue["col_b4"]?.ToString() ?? "";
-                Опис = base.FieldValue["col_a1"]?.ToString() ?? "";
-                Артикул = base.FieldValue["col_b3"]?.ToString() ?? "";
+                Назва = base.FieldValue["col_b1"].ToString() ?? "";
+                Код = base.FieldValue["col_b2"].ToString() ?? "";
+                НазваПовна = base.FieldValue["col_b4"].ToString() ?? "";
+                Опис = base.FieldValue["col_a1"].ToString() ?? "";
+                Артикул = base.FieldValue["col_b3"].ToString() ?? "";
                 ТипНоменклатури = (base.FieldValue["col_b5"] != DBNull.Value) ? (Перелічення.ТипиНоменклатури)base.FieldValue["col_b5"] : 0;
                 Виробник = new Довідники.Виробники_Pointer(base.FieldValue["col_a2"]);
                 ВидНоменклатури = new Довідники.ВидиНоменклатури_Pointer(base.FieldValue["col_a3"]);
@@ -2573,7 +2573,7 @@ namespace StorageAndTrade_1_0.Довідники
                 record.UID = (Guid)fieldValue["uid"];
                 
                 record.Файл = new Довідники.Файли_Pointer(fieldValue["col_a1"]);
-                record.Основний = (fieldValue["col_a3"] != DBNull.Value) ? bool.Parse(fieldValue["col_a3"]?.ToString() ?? "False") : false;
+                record.Основний = (fieldValue["col_a3"] != DBNull.Value) ? (bool)fieldValue["col_a3"] : false;
                 
                 Records.Add(record);
             }
@@ -2660,8 +2660,8 @@ namespace StorageAndTrade_1_0.Довідники
         {
             if (BaseRead(uid))
             {
-                Назва = base.FieldValue["col_b6"]?.ToString() ?? "";
-                Код = base.FieldValue["col_b7"]?.ToString() ?? "";
+                Назва = base.FieldValue["col_b6"].ToString() ?? "";
+                Код = base.FieldValue["col_b7"].ToString() ?? "";
                 
                 BaseClear();
                 return true;
@@ -2867,9 +2867,9 @@ namespace StorageAndTrade_1_0.Довідники
         {
             if (BaseRead(uid))
             {
-                Назва = base.FieldValue["col_b8"]?.ToString() ?? "";
-                Код = base.FieldValue["col_b9"]?.ToString() ?? "";
-                Опис = base.FieldValue["col_a2"]?.ToString() ?? "";
+                Назва = base.FieldValue["col_b8"].ToString() ?? "";
+                Код = base.FieldValue["col_b9"].ToString() ?? "";
+                Опис = base.FieldValue["col_a2"].ToString() ?? "";
                 ТипНоменклатури = (base.FieldValue["col_a1"] != DBNull.Value) ? (Перелічення.ТипиНоменклатури)base.FieldValue["col_a1"] : 0;
                 ОдиницяВиміру = new Довідники.ПакуванняОдиниціВиміру_Pointer(base.FieldValue["col_a4"]);
                 
@@ -3084,9 +3084,9 @@ namespace StorageAndTrade_1_0.Довідники
         {
             if (BaseRead(uid))
             {
-                Назва = base.FieldValue["col_c1"]?.ToString() ?? "";
-                Код = base.FieldValue["col_c2"]?.ToString() ?? "";
-                НазваПовна = base.FieldValue["col_c3"]?.ToString() ?? "";
+                Назва = base.FieldValue["col_c1"].ToString() ?? "";
+                Код = base.FieldValue["col_c2"].ToString() ?? "";
+                НазваПовна = base.FieldValue["col_c3"].ToString() ?? "";
                 КількістьУпаковок = (base.FieldValue["col_c4"] != DBNull.Value) ? (int)base.FieldValue["col_c4"] : 0;
                 
                 BaseClear();
@@ -3299,11 +3299,11 @@ namespace StorageAndTrade_1_0.Довідники
         {
             if (BaseRead(uid))
             {
-                Назва = base.FieldValue["col_c5"]?.ToString() ?? "";
-                КороткаНазва = base.FieldValue["col_a2"]?.ToString() ?? "";
-                Код = base.FieldValue["col_c6"]?.ToString() ?? "";
-                Код_R030 = base.FieldValue["col_a1"]?.ToString() ?? "";
-                ВиводитиКурсНаСтартову = (base.FieldValue["col_a3"] != DBNull.Value) ? bool.Parse(base.FieldValue["col_a3"]?.ToString() ?? "False") : false;
+                Назва = base.FieldValue["col_c5"].ToString() ?? "";
+                КороткаНазва = base.FieldValue["col_a2"].ToString() ?? "";
+                Код = base.FieldValue["col_c6"].ToString() ?? "";
+                Код_R030 = base.FieldValue["col_a1"].ToString() ?? "";
+                ВиводитиКурсНаСтартову = (base.FieldValue["col_a3"] != DBNull.Value) ? (bool)base.FieldValue["col_a3"] : false;
                 
                 BaseClear();
                 return true;
@@ -3526,13 +3526,13 @@ namespace StorageAndTrade_1_0.Довідники
         {
             if (BaseRead(uid))
             {
-                Назва = base.FieldValue["col_c7"]?.ToString() ?? "";
-                Код = base.FieldValue["col_c8"]?.ToString() ?? "";
-                НазваПовна = base.FieldValue["col_c9"]?.ToString() ?? "";
-                РеєстраційнийНомер = base.FieldValue["col_d1"]?.ToString() ?? "";
+                Назва = base.FieldValue["col_c7"].ToString() ?? "";
+                Код = base.FieldValue["col_c8"].ToString() ?? "";
+                НазваПовна = base.FieldValue["col_c9"].ToString() ?? "";
+                РеєстраційнийНомер = base.FieldValue["col_d1"].ToString() ?? "";
                 Папка = new Довідники.Контрагенти_Папки_Pointer(base.FieldValue["col_a1"]);
-                Опис = base.FieldValue["col_a2"]?.ToString() ?? "";
-                КлючовіСловаДляПошуку = base.FieldValue["col_a3"]?.ToString() ?? "";
+                Опис = base.FieldValue["col_a2"].ToString() ?? "";
+                КлючовіСловаДляПошуку = base.FieldValue["col_a3"].ToString() ?? "";
                 
                 BaseClear();
                 return true;
@@ -3760,13 +3760,13 @@ namespace StorageAndTrade_1_0.Довідники
                 record.UID = (Guid)fieldValue["uid"];
                 
                 record.Тип = (fieldValue["col_d2"] != DBNull.Value) ? (Перелічення.ТипиКонтактноїІнформації)fieldValue["col_d2"] : 0;
-                record.Телефон = fieldValue["col_d8"]?.ToString() ?? "";
-                record.ЕлектроннаПошта = fieldValue["col_d7"]?.ToString() ?? "";
-                record.Країна = fieldValue["col_d3"]?.ToString() ?? "";
-                record.Область = fieldValue["col_d5"]?.ToString() ?? "";
-                record.Район = fieldValue["col_d4"]?.ToString() ?? "";
-                record.Місто = fieldValue["col_d6"]?.ToString() ?? "";
-                record.Значення = fieldValue["col_a1"]?.ToString() ?? "";
+                record.Телефон = fieldValue["col_d8"].ToString() ?? "";
+                record.ЕлектроннаПошта = fieldValue["col_d7"].ToString() ?? "";
+                record.Країна = fieldValue["col_d3"].ToString() ?? "";
+                record.Область = fieldValue["col_d5"].ToString() ?? "";
+                record.Район = fieldValue["col_d4"].ToString() ?? "";
+                record.Місто = fieldValue["col_d6"].ToString() ?? "";
+                record.Значення = fieldValue["col_a1"].ToString() ?? "";
                 
                 Records.Add(record);
             }
@@ -3958,8 +3958,8 @@ namespace StorageAndTrade_1_0.Довідники
         {
             if (BaseRead(uid))
             {
-                Назва = base.FieldValue["col_d9"]?.ToString() ?? "";
-                Код = base.FieldValue["col_e1"]?.ToString() ?? "";
+                Назва = base.FieldValue["col_d9"].ToString() ?? "";
+                Код = base.FieldValue["col_e1"].ToString() ?? "";
                 ТипСкладу = (base.FieldValue["col_a1"] != DBNull.Value) ? (Перелічення.ТипиСкладів)base.FieldValue["col_a1"] : 0;
                 Відповідальний = new Довідники.ФізичніОсоби_Pointer(base.FieldValue["col_a2"]);
                 ВидЦін = new Довідники.ВидиЦін_Pointer(base.FieldValue["col_a3"]);
@@ -4191,13 +4191,13 @@ namespace StorageAndTrade_1_0.Довідники
                 record.UID = (Guid)fieldValue["uid"];
                 
                 record.Тип = (fieldValue["col_e2"] != DBNull.Value) ? (Перелічення.ТипиКонтактноїІнформації)fieldValue["col_e2"] : 0;
-                record.Телефон = fieldValue["col_e8"]?.ToString() ?? "";
-                record.ЕлектроннаПошта = fieldValue["col_e7"]?.ToString() ?? "";
-                record.Країна = fieldValue["col_e3"]?.ToString() ?? "";
-                record.Область = fieldValue["col_e5"]?.ToString() ?? "";
-                record.Район = fieldValue["col_e4"]?.ToString() ?? "";
-                record.Місто = fieldValue["col_e6"]?.ToString() ?? "";
-                record.Значення = fieldValue["col_a1"]?.ToString() ?? "";
+                record.Телефон = fieldValue["col_e8"].ToString() ?? "";
+                record.ЕлектроннаПошта = fieldValue["col_e7"].ToString() ?? "";
+                record.Країна = fieldValue["col_e3"].ToString() ?? "";
+                record.Область = fieldValue["col_e5"].ToString() ?? "";
+                record.Район = fieldValue["col_e4"].ToString() ?? "";
+                record.Місто = fieldValue["col_e6"].ToString() ?? "";
+                record.Значення = fieldValue["col_a1"].ToString() ?? "";
                 
                 Records.Add(record);
             }
@@ -4298,8 +4298,8 @@ namespace StorageAndTrade_1_0.Довідники
         {
             if (BaseRead(uid))
             {
-                Назва = base.FieldValue["col_e9"]?.ToString() ?? "";
-                Код = base.FieldValue["col_f1"]?.ToString() ?? "";
+                Назва = base.FieldValue["col_e9"].ToString() ?? "";
+                Код = base.FieldValue["col_f1"].ToString() ?? "";
                 Валюта = new Довідники.Валюти_Pointer(base.FieldValue["col_f2"]);
                 
                 BaseClear();
@@ -4505,8 +4505,8 @@ namespace StorageAndTrade_1_0.Довідники
         {
             if (BaseRead(uid))
             {
-                Назва = base.FieldValue["col_f3"]?.ToString() ?? "";
-                Код = base.FieldValue["col_f4"]?.ToString() ?? "";
+                Назва = base.FieldValue["col_f3"].ToString() ?? "";
+                Код = base.FieldValue["col_f4"].ToString() ?? "";
                 Валюта = new Довідники.Валюти_Pointer(base.FieldValue["col_f5"]);
                 
                 BaseClear();
@@ -4719,11 +4719,11 @@ namespace StorageAndTrade_1_0.Довідники
         {
             if (BaseRead(uid))
             {
-                Назва = base.FieldValue["col_f6"]?.ToString() ?? "";
-                Код = base.FieldValue["col_f7"]?.ToString() ?? "";
+                Назва = base.FieldValue["col_f6"].ToString() ?? "";
+                Код = base.FieldValue["col_f7"].ToString() ?? "";
                 ФізичнаОсоба = new Довідники.ФізичніОсоби_Pointer(base.FieldValue["col_a1"]);
-                Коментар = base.FieldValue["col_g6"]?.ToString() ?? "";
-                КодВСпеціальнійТаблиці = (base.FieldValue["col_a2"] != DBNull.Value) ? Guid.Parse(base.FieldValue["col_a2"]?.ToString() ?? Guid.Empty.ToString()) : Guid.Empty;
+                Коментар = base.FieldValue["col_g6"].ToString() ?? "";
+                КодВСпеціальнійТаблиці = (base.FieldValue["col_a2"] != DBNull.Value) ? (Guid)base.FieldValue["col_a2"] : Guid.Empty;
                 
                 BaseClear();
                 return true;
@@ -4939,12 +4939,12 @@ namespace StorageAndTrade_1_0.Довідники
                 record.UID = (Guid)fieldValue["uid"];
                 
                 record.Тип = (fieldValue["col_f8"] != DBNull.Value) ? (Перелічення.ТипиКонтактноїІнформації)fieldValue["col_f8"] : 0;
-                record.Телефон = fieldValue["col_g5"]?.ToString() ?? "";
-                record.ЕлектроннаПошта = fieldValue["col_g4"]?.ToString() ?? "";
-                record.Країна = fieldValue["col_f9"]?.ToString() ?? "";
-                record.Область = fieldValue["col_g1"]?.ToString() ?? "";
-                record.Район = fieldValue["col_g2"]?.ToString() ?? "";
-                record.Місто = fieldValue["col_g3"]?.ToString() ?? "";
+                record.Телефон = fieldValue["col_g5"].ToString() ?? "";
+                record.ЕлектроннаПошта = fieldValue["col_g4"].ToString() ?? "";
+                record.Країна = fieldValue["col_f9"].ToString() ?? "";
+                record.Область = fieldValue["col_g1"].ToString() ?? "";
+                record.Район = fieldValue["col_g2"].ToString() ?? "";
+                record.Місто = fieldValue["col_g3"].ToString() ?? "";
                 
                 Records.Add(record);
             }
@@ -5050,11 +5050,11 @@ namespace StorageAndTrade_1_0.Довідники
         {
             if (BaseRead(uid))
             {
-                Назва = base.FieldValue["col_g7"]?.ToString() ?? "";
-                Код = base.FieldValue["col_g8"]?.ToString() ?? "";
-                ДатаНародження = (base.FieldValue["col_g9"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["col_g9"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                Назва = base.FieldValue["col_g7"].ToString() ?? "";
+                Код = base.FieldValue["col_g8"].ToString() ?? "";
+                ДатаНародження = (base.FieldValue["col_g9"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["col_g9"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
                 Стать = (base.FieldValue["col_a1"] != DBNull.Value) ? (Перелічення.СтатьФізичноїОсоби)base.FieldValue["col_a1"] : 0;
-                ІПН = base.FieldValue["col_a2"]?.ToString() ?? "";
+                ІПН = base.FieldValue["col_a2"].ToString() ?? "";
                 
                 BaseClear();
                 return true;
@@ -5270,12 +5270,12 @@ namespace StorageAndTrade_1_0.Довідники
                 record.UID = (Guid)fieldValue["uid"];
                 
                 record.Тип = (fieldValue["col_h1"] != DBNull.Value) ? (Перелічення.ТипиКонтактноїІнформації)fieldValue["col_h1"] : 0;
-                record.Телефон = fieldValue["col_h7"]?.ToString() ?? "";
-                record.ЕлектроннаПошта = fieldValue["col_h6"]?.ToString() ?? "";
-                record.Країна = fieldValue["col_h2"]?.ToString() ?? "";
-                record.Область = fieldValue["col_h3"]?.ToString() ?? "";
-                record.Район = fieldValue["col_h4"]?.ToString() ?? "";
-                record.Місто = fieldValue["col_h5"]?.ToString() ?? "";
+                record.Телефон = fieldValue["col_h7"].ToString() ?? "";
+                record.ЕлектроннаПошта = fieldValue["col_h6"].ToString() ?? "";
+                record.Країна = fieldValue["col_h2"].ToString() ?? "";
+                record.Область = fieldValue["col_h3"].ToString() ?? "";
+                record.Район = fieldValue["col_h4"].ToString() ?? "";
+                record.Місто = fieldValue["col_h5"].ToString() ?? "";
                 
                 Records.Add(record);
             }
@@ -5374,8 +5374,8 @@ namespace StorageAndTrade_1_0.Довідники
         {
             if (BaseRead(uid))
             {
-                Назва = base.FieldValue["col_h8"]?.ToString() ?? "";
-                Код = base.FieldValue["col_h9"]?.ToString() ?? "";
+                Назва = base.FieldValue["col_h8"].ToString() ?? "";
+                Код = base.FieldValue["col_h9"].ToString() ?? "";
                 Керівник = new Довідники.ФізичніОсоби_Pointer(base.FieldValue["col_i1"]);
                 
                 BaseClear();
@@ -5579,8 +5579,8 @@ namespace StorageAndTrade_1_0.Довідники
         {
             if (BaseRead(uid))
             {
-                Назва = base.FieldValue["col_i2"]?.ToString() ?? "";
-                Код = base.FieldValue["col_i3"]?.ToString() ?? "";
+                Назва = base.FieldValue["col_i2"].ToString() ?? "";
+                Код = base.FieldValue["col_i3"].ToString() ?? "";
                 
                 BaseClear();
                 return true;
@@ -5788,12 +5788,12 @@ namespace StorageAndTrade_1_0.Довідники
         {
             if (BaseRead(uid))
             {
-                Код = base.FieldValue["col_i6"]?.ToString() ?? "";
-                Назва = base.FieldValue["col_i5"]?.ToString() ?? "";
-                НазваФайлу = base.FieldValue["col_a2"]?.ToString() ?? "";
+                Код = base.FieldValue["col_i6"].ToString() ?? "";
+                Назва = base.FieldValue["col_i5"].ToString() ?? "";
+                НазваФайлу = base.FieldValue["col_a2"].ToString() ?? "";
                 БінарніДані = (base.FieldValue["col_a1"] != DBNull.Value) ? (byte[])base.FieldValue["col_a1"] : new byte[] { };
-                Розмір = base.FieldValue["col_a3"]?.ToString() ?? "";
-                ДатаСтворення = (base.FieldValue["col_a4"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["col_a4"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                Розмір = base.FieldValue["col_a3"].ToString() ?? "";
+                ДатаСтворення = (base.FieldValue["col_a4"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["col_a4"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
                 
                 BaseClear();
                 return true;
@@ -6009,9 +6009,9 @@ namespace StorageAndTrade_1_0.Довідники
         {
             if (BaseRead(uid))
             {
-                Назва = base.FieldValue["col_i7"]?.ToString() ?? "";
-                Код = base.FieldValue["col_i8"]?.ToString() ?? "";
-                НазваПовна = base.FieldValue["col_i9"]?.ToString() ?? "";
+                Назва = base.FieldValue["col_i7"].ToString() ?? "";
+                Код = base.FieldValue["col_i8"].ToString() ?? "";
+                НазваПовна = base.FieldValue["col_i9"].ToString() ?? "";
                 Номенклатура = new Довідники.Номенклатура_Pointer(base.FieldValue["col_a1"]);
                 
                 BaseClear();
@@ -6220,8 +6220,8 @@ namespace StorageAndTrade_1_0.Довідники
         {
             if (BaseRead(uid))
             {
-                Назва = base.FieldValue["col_j1"]?.ToString() ?? "";
-                Код = base.FieldValue["col_j2"]?.ToString() ?? "";
+                Назва = base.FieldValue["col_j1"].ToString() ?? "";
+                Код = base.FieldValue["col_j2"].ToString() ?? "";
                 Родич = new Довідники.Номенклатура_Папки_Pointer(base.FieldValue["col_j3"]);
                 
                 BaseClear();
@@ -6427,8 +6427,8 @@ namespace StorageAndTrade_1_0.Довідники
         {
             if (BaseRead(uid))
             {
-                Назва = base.FieldValue["col_j4"]?.ToString() ?? "";
-                Код = base.FieldValue["col_j5"]?.ToString() ?? "";
+                Назва = base.FieldValue["col_j4"].ToString() ?? "";
+                Код = base.FieldValue["col_j5"].ToString() ?? "";
                 Родич = new Довідники.Контрагенти_Папки_Pointer(base.FieldValue["col_j6"]);
                 
                 BaseClear();
@@ -6634,8 +6634,8 @@ namespace StorageAndTrade_1_0.Довідники
         {
             if (BaseRead(uid))
             {
-                Назва = base.FieldValue["col_j7"]?.ToString() ?? "";
-                Код = base.FieldValue["col_j8"]?.ToString() ?? "";
+                Назва = base.FieldValue["col_j7"].ToString() ?? "";
+                Код = base.FieldValue["col_j8"].ToString() ?? "";
                 Родич = new Довідники.Склади_Папки_Pointer(base.FieldValue["col_a1"]);
                 
                 BaseClear();
@@ -6843,8 +6843,8 @@ namespace StorageAndTrade_1_0.Довідники
         {
             if (BaseRead(uid))
             {
-                Назва = base.FieldValue["col_k8"]?.ToString() ?? "";
-                Код = base.FieldValue["col_k9"]?.ToString() ?? "";
+                Назва = base.FieldValue["col_k8"].ToString() ?? "";
+                Код = base.FieldValue["col_k9"].ToString() ?? "";
                 Валюта = new Довідники.Валюти_Pointer(base.FieldValue["col_a2"]);
                 Підрозділ = new Довідники.СтруктураПідприємства_Pointer(base.FieldValue["col_a1"]);
                 
@@ -7074,18 +7074,18 @@ namespace StorageAndTrade_1_0.Довідники
         {
             if (BaseRead(uid))
             {
-                Назва = base.FieldValue["col_l1"]?.ToString() ?? "";
-                Код = base.FieldValue["col_l2"]?.ToString() ?? "";
+                Назва = base.FieldValue["col_l1"].ToString() ?? "";
+                Код = base.FieldValue["col_l2"].ToString() ?? "";
                 Валюта = new Довідники.Валюти_Pointer(base.FieldValue["col_l3"]);
-                Банк = base.FieldValue["col_l4"]?.ToString() ?? "";
+                Банк = base.FieldValue["col_l4"].ToString() ?? "";
                 Підрозділ = new Довідники.СтруктураПідприємства_Pointer(base.FieldValue["col_l5"]);
-                НазваБанку = base.FieldValue["col_l6"]?.ToString() ?? "";
-                НомерРахунку = base.FieldValue["col_l7"]?.ToString() ?? "";
-                АдресаБанку = base.FieldValue["col_l8"]?.ToString() ?? "";
-                МістоБанку = base.FieldValue["col_l9"]?.ToString() ?? "";
-                КореспонденськийРахунокБанку = base.FieldValue["col_n1"]?.ToString() ?? "";
-                ТелефониБанку = base.FieldValue["col_n2"]?.ToString() ?? "";
-                Закритий = (base.FieldValue["col_n3"] != DBNull.Value) ? bool.Parse(base.FieldValue["col_n3"]?.ToString() ?? "False") : false;
+                НазваБанку = base.FieldValue["col_l6"].ToString() ?? "";
+                НомерРахунку = base.FieldValue["col_l7"].ToString() ?? "";
+                АдресаБанку = base.FieldValue["col_l8"].ToString() ?? "";
+                МістоБанку = base.FieldValue["col_l9"].ToString() ?? "";
+                КореспонденськийРахунокБанку = base.FieldValue["col_n1"].ToString() ?? "";
+                ТелефониБанку = base.FieldValue["col_n2"].ToString() ?? "";
+                Закритий = (base.FieldValue["col_n3"] != DBNull.Value) ? (bool)base.FieldValue["col_n3"] : false;
                 Організація = new Довідники.Організації_Pointer(base.FieldValue["col_a1"]);
                 
                 BaseClear();
@@ -7355,26 +7355,26 @@ namespace StorageAndTrade_1_0.Довідники
         {
             if (BaseRead(uid))
             {
-                Назва = base.FieldValue["col_n4"]?.ToString() ?? "";
-                Код = base.FieldValue["col_n5"]?.ToString() ?? "";
+                Назва = base.FieldValue["col_n4"].ToString() ?? "";
+                Код = base.FieldValue["col_n5"].ToString() ?? "";
                 БанківськийРахунок = new Довідники.БанківськіРахункиОрганізацій_Pointer(base.FieldValue["col_n6"]);
                 БанківськийРахунокКонтрагента = new Довідники.БанківськіРахункиКонтрагентів_Pointer(base.FieldValue["col_a1"]);
                 ВалютаВзаєморозрахунків = new Довідники.Валюти_Pointer(base.FieldValue["col_a2"]);
-                ДатаПочаткуДії = (base.FieldValue["col_a4"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["col_a4"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
-                ДатаЗакінченняДії = (base.FieldValue["col_a5"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["col_a5"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                ДатаПочаткуДії = (base.FieldValue["col_a4"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["col_a4"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                ДатаЗакінченняДії = (base.FieldValue["col_a5"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["col_a5"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
                 Організація = new Довідники.Організації_Pointer(base.FieldValue["col_a6"]);
                 Контрагент = new Довідники.Контрагенти_Pointer(base.FieldValue["col_a7"]);
-                Дата = (base.FieldValue["col_a8"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["col_a8"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
-                Номер = base.FieldValue["col_a9"]?.ToString() ?? "";
+                Дата = (base.FieldValue["col_a8"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["col_a8"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                Номер = base.FieldValue["col_a9"].ToString() ?? "";
                 Підрозділ = new Довідники.СтруктураПідприємства_Pointer(base.FieldValue["col_b1"]);
-                Узгоджений = (base.FieldValue["col_b2"] != DBNull.Value) ? bool.Parse(base.FieldValue["col_b2"]?.ToString() ?? "False") : false;
+                Узгоджений = (base.FieldValue["col_b2"] != DBNull.Value) ? (bool)base.FieldValue["col_b2"] : false;
                 Статус = (base.FieldValue["col_b3"] != DBNull.Value) ? (Перелічення.СтатусиДоговорівКонтрагентів)base.FieldValue["col_b3"] : 0;
                 ГосподарськаОперація = (base.FieldValue["col_b4"] != DBNull.Value) ? (Перелічення.ГосподарськіОперації)base.FieldValue["col_b4"] : 0;
                 ТипДоговору = (base.FieldValue["col_b5"] != DBNull.Value) ? (Перелічення.ТипДоговорів)base.FieldValue["col_b5"] : 0;
-                ТипДоговоруПредставлення = base.FieldValue["col_b8"]?.ToString() ?? "";
+                ТипДоговоруПредставлення = base.FieldValue["col_b8"].ToString() ?? "";
                 ДопустимаСумаЗаборгованості = (base.FieldValue["col_b6"] != DBNull.Value) ? (decimal)base.FieldValue["col_b6"] : 0;
                 Сума = (base.FieldValue["col_b7"] != DBNull.Value) ? (decimal)base.FieldValue["col_b7"] : 0;
-                Коментар = base.FieldValue["col_a3"]?.ToString() ?? "";
+                Коментар = base.FieldValue["col_a3"].ToString() ?? "";
                 
                 BaseClear();
                 return true;
@@ -7654,20 +7654,20 @@ namespace StorageAndTrade_1_0.Довідники
         {
             if (BaseRead(uid))
             {
-                Назва = base.FieldValue["col_n7"]?.ToString() ?? "";
-                Код = base.FieldValue["col_n8"]?.ToString() ?? "";
-                НомерРахунку = base.FieldValue["col_n9"]?.ToString() ?? "";
-                Банк = base.FieldValue["col_m1"]?.ToString() ?? "";
-                БанкДляРозрахунків = base.FieldValue["col_m2"]?.ToString() ?? "";
-                ТекстКореспондента = base.FieldValue["col_m3"]?.ToString() ?? "";
-                ТекстПризначення = base.FieldValue["col_m4"]?.ToString() ?? "";
+                Назва = base.FieldValue["col_n7"].ToString() ?? "";
+                Код = base.FieldValue["col_n8"].ToString() ?? "";
+                НомерРахунку = base.FieldValue["col_n9"].ToString() ?? "";
+                Банк = base.FieldValue["col_m1"].ToString() ?? "";
+                БанкДляРозрахунків = base.FieldValue["col_m2"].ToString() ?? "";
+                ТекстКореспондента = base.FieldValue["col_m3"].ToString() ?? "";
+                ТекстПризначення = base.FieldValue["col_m4"].ToString() ?? "";
                 Валюта = new Довідники.Валюти_Pointer(base.FieldValue["col_m5"]);
-                НазваБанку = base.FieldValue["col_m6"]?.ToString() ?? "";
-                КорРахунокБанку = base.FieldValue["col_m7"]?.ToString() ?? "";
-                МістоБанку = base.FieldValue["col_m8"]?.ToString() ?? "";
-                АдресаБанку = base.FieldValue["col_m9"]?.ToString() ?? "";
-                ТелефониБанку = base.FieldValue["col_o1"]?.ToString() ?? "";
-                Закрито = (base.FieldValue["col_o2"] != DBNull.Value) ? bool.Parse(base.FieldValue["col_o2"]?.ToString() ?? "False") : false;
+                НазваБанку = base.FieldValue["col_m6"].ToString() ?? "";
+                КорРахунокБанку = base.FieldValue["col_m7"].ToString() ?? "";
+                МістоБанку = base.FieldValue["col_m8"].ToString() ?? "";
+                АдресаБанку = base.FieldValue["col_m9"].ToString() ?? "";
+                ТелефониБанку = base.FieldValue["col_o1"].ToString() ?? "";
+                Закрито = (base.FieldValue["col_o2"] != DBNull.Value) ? (bool)base.FieldValue["col_o2"] : false;
                 Контрагент = new Довідники.Контрагенти_Pointer(base.FieldValue["col_o3"]);
                 
                 BaseClear();
@@ -7916,11 +7916,11 @@ namespace StorageAndTrade_1_0.Довідники
         {
             if (BaseRead(uid))
             {
-                Назва = base.FieldValue["col_i7"]?.ToString() ?? "";
-                Код = base.FieldValue["col_i8"]?.ToString() ?? "";
-                КореспондуючийРахунок = base.FieldValue["col_i9"]?.ToString() ?? "";
+                Назва = base.FieldValue["col_i7"].ToString() ?? "";
+                Код = base.FieldValue["col_i8"].ToString() ?? "";
+                КореспондуючийРахунок = base.FieldValue["col_i9"].ToString() ?? "";
                 ВидРухуКоштів = (base.FieldValue["col_j2"] != DBNull.Value) ? (Перелічення.ВидиРухуКоштів)base.FieldValue["col_j2"] : 0;
-                Опис = base.FieldValue["col_j1"]?.ToString() ?? "";
+                Опис = base.FieldValue["col_j1"].ToString() ?? "";
                 
                 BaseClear();
                 return true;
@@ -8216,9 +8216,9 @@ namespace StorageAndTrade_1_0.Довідники
         {
             if (BaseRead(uid))
             {
-                Номер = base.FieldValue["col_a3"]?.ToString() ?? "";
-                Коментар = base.FieldValue["col_a1"]?.ToString() ?? "";
-                ДатаСтворення = (base.FieldValue["col_a2"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["col_a2"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                Номер = base.FieldValue["col_a3"].ToString() ?? "";
+                Коментар = base.FieldValue["col_a1"].ToString() ?? "";
+                ДатаСтворення = (base.FieldValue["col_a2"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["col_a2"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
                 
                 BaseClear();
                 return true;
@@ -8429,10 +8429,10 @@ namespace StorageAndTrade_1_0.Довідники
         {
             if (BaseRead(uid))
             {
-                Назва = base.FieldValue["col_a1"]?.ToString() ?? "";
-                Дата = (base.FieldValue["col_a2"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["col_a2"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                Назва = base.FieldValue["col_a1"].ToString() ?? "";
+                Дата = (base.FieldValue["col_a2"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["col_a2"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
                 ТипДокументу = (base.FieldValue["col_a3"] != DBNull.Value) ? (Перелічення.ТипДокументуПартіяТоварівКомпозит)base.FieldValue["col_a3"] : 0;
-                ДокументКлюч = (base.FieldValue["col_a6"] != DBNull.Value) ? Guid.Parse(base.FieldValue["col_a6"]?.ToString() ?? Guid.Empty.ToString()) : Guid.Empty;
+                ДокументКлюч = (base.FieldValue["col_a6"] != DBNull.Value) ? (Guid)base.FieldValue["col_a6"] : Guid.Empty;
                 ПоступленняТоварівТаПослуг = new Документи.ПоступленняТоварівТаПослуг_Pointer(base.FieldValue["col_a4"]);
                 ВведенняЗалишків = new Документи.ВведенняЗалишків_Pointer(base.FieldValue["col_a5"]);
                 
@@ -8656,13 +8656,13 @@ namespace StorageAndTrade_1_0.Довідники
         {
             if (BaseRead(uid))
             {
-                Назва = base.FieldValue["col_a5"]?.ToString() ?? "";
+                Назва = base.FieldValue["col_a5"].ToString() ?? "";
                 Організація = new Довідники.Організації_Pointer(base.FieldValue["col_b3"]);
                 ТипЗапасів = (base.FieldValue["col_a7"] != DBNull.Value) ? (Перелічення.ТипЗапасів)base.FieldValue["col_a7"] : 0;
                 Валюта = new Довідники.Валюти_Pointer(base.FieldValue["col_a9"]);
                 Контрагент = new Довідники.Контрагенти_Pointer(base.FieldValue["col_b1"]);
                 Договір = new Довідники.ДоговориКонтрагентів_Pointer(base.FieldValue["col_b2"]);
-                Код = base.FieldValue["col_a1"]?.ToString() ?? "";
+                Код = base.FieldValue["col_a1"].ToString() ?? "";
                 
                 BaseClear();
                 return true;
@@ -8929,34 +8929,34 @@ namespace StorageAndTrade_1_0.Довідники
         {
             if (BaseRead(uid))
             {
-                Код = base.FieldValue["col_a1"]?.ToString() ?? "";
-                Назва = base.FieldValue["col_a2"]?.ToString() ?? "";
-                ТипНаселеногоПункту = base.FieldValue["col_b4"]?.ToString() ?? "";
-                КодМФО = base.FieldValue["col_a3"]?.ToString() ?? "";
-                НазваГоловноїУстановиАнг = base.FieldValue["col_a4"]?.ToString() ?? "";
-                КодЄДРПОУ = base.FieldValue["col_a5"]?.ToString() ?? "";
-                ПовнаНазва = base.FieldValue["col_a6"]?.ToString() ?? "";
-                УнікальнийКодБанку = base.FieldValue["col_a7"]?.ToString() ?? "";
-                КодОбластіОпераційноїДіяльності = base.FieldValue["col_a8"]?.ToString() ?? "";
-                НазваОбластіОпераційноїДіяльності = base.FieldValue["col_a9"]?.ToString() ?? "";
-                КодОбластіЗгідноСтатуту = base.FieldValue["col_b1"]?.ToString() ?? "";
-                НазваОбластіЗгідноСтатуту = base.FieldValue["col_b2"]?.ToString() ?? "";
-                ПоштовийІндекс = base.FieldValue["col_b3"]?.ToString() ?? "";
-                НазваНаселеногоПункту = base.FieldValue["col_b5"]?.ToString() ?? "";
-                Адреса = base.FieldValue["col_b6"]?.ToString() ?? "";
-                КодТелефонногоЗвязку = base.FieldValue["col_b7"]?.ToString() ?? "";
-                НомерТелефону = base.FieldValue["col_b8"]?.ToString() ?? "";
-                ЧисловийКодСтануУстанови = base.FieldValue["col_b9"]?.ToString() ?? "";
-                НазваСтануУстанови = base.FieldValue["col_c1"]?.ToString() ?? "";
-                ДатаЗміниСтану = base.FieldValue["col_c2"]?.ToString() ?? "";
-                ДатаВідкриттяУстанови = base.FieldValue["col_c3"]?.ToString() ?? "";
-                ДатаЗакриттяУстанови = base.FieldValue["col_c4"]?.ToString() ?? "";
-                КодНБУ = base.FieldValue["col_c5"]?.ToString() ?? "";
-                НомерЛіцензії = base.FieldValue["col_c6"]?.ToString() ?? "";
-                ДатаЛіцензії = base.FieldValue["col_c7"]?.ToString() ?? "";
-                КодСтатусу = base.FieldValue["col_c8"]?.ToString() ?? "";
-                Статус = base.FieldValue["col_c9"]?.ToString() ?? "";
-                ДатаЗапису = base.FieldValue["col_d1"]?.ToString() ?? "";
+                Код = base.FieldValue["col_a1"].ToString() ?? "";
+                Назва = base.FieldValue["col_a2"].ToString() ?? "";
+                ТипНаселеногоПункту = base.FieldValue["col_b4"].ToString() ?? "";
+                КодМФО = base.FieldValue["col_a3"].ToString() ?? "";
+                НазваГоловноїУстановиАнг = base.FieldValue["col_a4"].ToString() ?? "";
+                КодЄДРПОУ = base.FieldValue["col_a5"].ToString() ?? "";
+                ПовнаНазва = base.FieldValue["col_a6"].ToString() ?? "";
+                УнікальнийКодБанку = base.FieldValue["col_a7"].ToString() ?? "";
+                КодОбластіОпераційноїДіяльності = base.FieldValue["col_a8"].ToString() ?? "";
+                НазваОбластіОпераційноїДіяльності = base.FieldValue["col_a9"].ToString() ?? "";
+                КодОбластіЗгідноСтатуту = base.FieldValue["col_b1"].ToString() ?? "";
+                НазваОбластіЗгідноСтатуту = base.FieldValue["col_b2"].ToString() ?? "";
+                ПоштовийІндекс = base.FieldValue["col_b3"].ToString() ?? "";
+                НазваНаселеногоПункту = base.FieldValue["col_b5"].ToString() ?? "";
+                Адреса = base.FieldValue["col_b6"].ToString() ?? "";
+                КодТелефонногоЗвязку = base.FieldValue["col_b7"].ToString() ?? "";
+                НомерТелефону = base.FieldValue["col_b8"].ToString() ?? "";
+                ЧисловийКодСтануУстанови = base.FieldValue["col_b9"].ToString() ?? "";
+                НазваСтануУстанови = base.FieldValue["col_c1"].ToString() ?? "";
+                ДатаЗміниСтану = base.FieldValue["col_c2"].ToString() ?? "";
+                ДатаВідкриттяУстанови = base.FieldValue["col_c3"].ToString() ?? "";
+                ДатаЗакриттяУстанови = base.FieldValue["col_c4"].ToString() ?? "";
+                КодНБУ = base.FieldValue["col_c5"].ToString() ?? "";
+                НомерЛіцензії = base.FieldValue["col_c6"].ToString() ?? "";
+                ДатаЛіцензії = base.FieldValue["col_c7"].ToString() ?? "";
+                КодСтатусу = base.FieldValue["col_c8"].ToString() ?? "";
+                Статус = base.FieldValue["col_c9"].ToString() ?? "";
+                ДатаЗапису = base.FieldValue["col_d1"].ToString() ?? "";
                 
                 BaseClear();
                 return true;
@@ -9236,7 +9236,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             if (BaseRead(uid))
             {
-                Назва = base.FieldValue["col_a2"]?.ToString() ?? "";
+                Назва = base.FieldValue["col_a2"].ToString() ?? "";
                 НалаштуванняАдресногоЗберігання = (base.FieldValue["col_a3"] != DBNull.Value) ? (Перелічення.НалаштуванняАдресногоЗберігання)base.FieldValue["col_a3"] : 0;
                 Склад = new Довідники.Склади_Pointer(base.FieldValue["col_a1"]);
                 
@@ -9458,13 +9458,13 @@ namespace StorageAndTrade_1_0.Довідники
             if (BaseRead(uid))
             {
                 Папка = new Довідники.СкладськіКомірки_Папки_Pointer(base.FieldValue["col_a1"]);
-                Назва = base.FieldValue["col_a2"]?.ToString() ?? "";
+                Назва = base.FieldValue["col_a2"].ToString() ?? "";
                 ОбластьЗберігання = new Довідники.ОбластьЗберігання_Pointer(base.FieldValue["col_a3"]);
-                Лінія = base.FieldValue["col_a4"]?.ToString() ?? "";
-                Позиція = base.FieldValue["col_a5"]?.ToString() ?? "";
+                Лінія = base.FieldValue["col_a4"].ToString() ?? "";
+                Позиція = base.FieldValue["col_a5"].ToString() ?? "";
                 Приміщення = new Довідники.СкладськіПриміщення_Pointer(base.FieldValue["col_a6"]);
-                Стелаж = base.FieldValue["col_a7"]?.ToString() ?? "";
-                Ярус = base.FieldValue["col_a8"]?.ToString() ?? "";
+                Стелаж = base.FieldValue["col_a7"].ToString() ?? "";
+                Ярус = base.FieldValue["col_a8"].ToString() ?? "";
                 ТипСкладськоїКомірки = (base.FieldValue["col_a9"] != DBNull.Value) ? (Перелічення.ТипиСкладськихКомірок)base.FieldValue["col_a9"] : 0;
                 Типорозмір = new Довідники.ТипорозміриКомірок_Pointer(base.FieldValue["col_b1"]);
                 
@@ -9691,8 +9691,8 @@ namespace StorageAndTrade_1_0.Довідники
         {
             if (BaseRead(uid))
             {
-                Назва = base.FieldValue["col_a2"]?.ToString() ?? "";
-                Опис = base.FieldValue["col_a3"]?.ToString() ?? "";
+                Назва = base.FieldValue["col_a2"].ToString() ?? "";
+                Опис = base.FieldValue["col_a3"].ToString() ?? "";
                 Приміщення = new Довідники.СкладськіПриміщення_Pointer(base.FieldValue["col_a4"]);
                 
                 BaseClear();
@@ -9902,12 +9902,12 @@ namespace StorageAndTrade_1_0.Довідники
         {
             if (BaseRead(uid))
             {
-                Висота = base.FieldValue["col_a1"]?.ToString() ?? "";
-                Назва = base.FieldValue["col_a2"]?.ToString() ?? "";
-                Глибина = base.FieldValue["col_a3"]?.ToString() ?? "";
-                Вантажопідйомність = base.FieldValue["col_a4"]?.ToString() ?? "";
-                Обєм = base.FieldValue["col_a5"]?.ToString() ?? "";
-                Ширина = base.FieldValue["col_a6"]?.ToString() ?? "";
+                Висота = base.FieldValue["col_a1"].ToString() ?? "";
+                Назва = base.FieldValue["col_a2"].ToString() ?? "";
+                Глибина = base.FieldValue["col_a3"].ToString() ?? "";
+                Вантажопідйомність = base.FieldValue["col_a4"].ToString() ?? "";
+                Обєм = base.FieldValue["col_a5"].ToString() ?? "";
+                Ширина = base.FieldValue["col_a6"].ToString() ?? "";
                 
                 BaseClear();
                 return true;
@@ -10123,8 +10123,8 @@ namespace StorageAndTrade_1_0.Довідники
         {
             if (BaseRead(uid))
             {
-                Назва = base.FieldValue["col_j1"]?.ToString() ?? "";
-                Код = base.FieldValue["col_j2"]?.ToString() ?? "";
+                Назва = base.FieldValue["col_j1"].ToString() ?? "";
+                Код = base.FieldValue["col_j2"].ToString() ?? "";
                 Родич = new Довідники.СкладськіКомірки_Папки_Pointer(base.FieldValue["col_j3"]);
                 Власник = new Довідники.СкладськіПриміщення_Pointer(base.FieldValue["col_a1"]);
                 
@@ -10338,11 +10338,11 @@ namespace StorageAndTrade_1_0.Довідники
         {
             if (BaseRead(uid))
             {
-                Код = base.FieldValue["col_a1"]?.ToString() ?? "";
-                Назва = base.FieldValue["col_a2"]?.ToString() ?? "";
-                ДатаЗапису = (base.FieldValue["col_a3"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["col_a3"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
-                Опис = base.FieldValue["col_a4"]?.ToString() ?? "";
-                Лінк = base.FieldValue["col_a5"]?.ToString() ?? "";
+                Код = base.FieldValue["col_a1"].ToString() ?? "";
+                Назва = base.FieldValue["col_a2"].ToString() ?? "";
+                ДатаЗапису = (base.FieldValue["col_a3"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["col_a3"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                Опис = base.FieldValue["col_a4"].ToString() ?? "";
+                Лінк = base.FieldValue["col_a5"].ToString() ?? "";
                 
                 BaseClear();
                 return true;
@@ -12310,9 +12310,9 @@ namespace StorageAndTrade_1_0.Документи
         {
             if (BaseRead(uid))
             {
-                Назва = base.FieldValue["docname"]?.ToString() ?? "";
-                НомерДок = base.FieldValue["docnomer"]?.ToString() ?? "";
-                ДатаДок = (base.FieldValue["docdate"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["docdate"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                Назва = base.FieldValue["docname"].ToString() ?? "";
+                НомерДок = base.FieldValue["docnomer"].ToString() ?? "";
+                ДатаДок = (base.FieldValue["docdate"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["docdate"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
                 Контрагент = new Довідники.Контрагенти_Pointer(base.FieldValue["col_k2"]);
                 Організація = new Довідники.Організації_Pointer(base.FieldValue["col_k3"]);
                 Склад = new Довідники.Склади_Pointer(base.FieldValue["col_k4"]);
@@ -12323,20 +12323,20 @@ namespace StorageAndTrade_1_0.Документи
                 Підрозділ = new Довідники.СтруктураПідприємства_Pointer(base.FieldValue["col_a3"]);
                 Договір = new Довідники.ДоговориКонтрагентів_Pointer(base.FieldValue["col_a4"]);
                 Автор = new Довідники.Користувачі_Pointer(base.FieldValue["col_a5"]);
-                ДатаПоступлення = (base.FieldValue["col_a7"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["col_a7"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
-                АдресаДоставкиДляПостачальника = base.FieldValue["col_a8"]?.ToString() ?? "";
-                ПовернутиТару = (base.FieldValue["col_a9"] != DBNull.Value) ? bool.Parse(base.FieldValue["col_a9"]?.ToString() ?? "False") : false;
+                ДатаПоступлення = (base.FieldValue["col_a7"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["col_a7"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                АдресаДоставкиДляПостачальника = base.FieldValue["col_a8"].ToString() ?? "";
+                ПовернутиТару = (base.FieldValue["col_a9"] != DBNull.Value) ? (bool)base.FieldValue["col_a9"] : false;
                 СпосібДоставки = (base.FieldValue["col_b1"] != DBNull.Value) ? (Перелічення.СпособиДоставки)base.FieldValue["col_b1"] : 0;
                 ЧасДоставкиЗ = (base.FieldValue["col_b2"] != DBNull.Value) ? TimeSpan.Parse(base.FieldValue["col_b2"]?.ToString() ?? DateTime.MinValue.TimeOfDay.ToString()) : DateTime.MinValue.TimeOfDay;
                 ЧасДоставкиДо = (base.FieldValue["col_b3"] != DBNull.Value) ? TimeSpan.Parse(base.FieldValue["col_b3"]?.ToString() ?? DateTime.MinValue.TimeOfDay.ToString()) : DateTime.MinValue.TimeOfDay;
-                АдресаДоставки = base.FieldValue["col_b4"]?.ToString() ?? "";
+                АдресаДоставки = base.FieldValue["col_b4"].ToString() ?? "";
                 ГосподарськаОперація = (base.FieldValue["col_a6"] != DBNull.Value) ? (Перелічення.ГосподарськіОперації)base.FieldValue["col_a6"] : 0;
                 Статус = (base.FieldValue["col_b5"] != DBNull.Value) ? (Перелічення.СтатусиЗамовленьПостачальникам)base.FieldValue["col_b5"] : 0;
                 ФормаОплати = (base.FieldValue["col_b6"] != DBNull.Value) ? (Перелічення.ФормаОплати)base.FieldValue["col_b6"] : 0;
                 Менеджер = new Довідники.Користувачі_Pointer(base.FieldValue["col_b7"]);
                 Основа = (base.FieldValue["col_b8"] != DBNull.Value) ? (UuidAndText)base.FieldValue["col_b8"] : new UuidAndText();
-                Коментар = base.FieldValue["col_a2"]?.ToString() ?? "";
-                КлючовіСловаДляПошуку = base.FieldValue["col_b9"]?.ToString() ?? "";
+                Коментар = base.FieldValue["col_a2"].ToString() ?? "";
+                КлючовіСловаДляПошуку = base.FieldValue["col_b9"].ToString() ?? "";
                 
                 BaseClear();
                 return true;
@@ -12646,7 +12646,7 @@ namespace StorageAndTrade_1_0.Документи
                 record.Пакування = new Довідники.ПакуванняОдиниціВиміру_Pointer(fieldValue["col_a2"]);
                 record.КількістьУпаковок = (fieldValue["col_a3"] != DBNull.Value) ? (int)fieldValue["col_a3"] : 0;
                 record.Кількість = (fieldValue["col_a4"] != DBNull.Value) ? (decimal)fieldValue["col_a4"] : 0;
-                record.ДатаПоступлення = (fieldValue["col_a5"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a5"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                record.ДатаПоступлення = (fieldValue["col_a5"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a5"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
                 record.Ціна = (fieldValue["col_a6"] != DBNull.Value) ? (decimal)fieldValue["col_a6"] : 0;
                 record.Сума = (fieldValue["col_a7"] != DBNull.Value) ? (decimal)fieldValue["col_a7"] : 0;
                 record.Скидка = (fieldValue["col_a8"] != DBNull.Value) ? (decimal)fieldValue["col_a8"] : 0;
@@ -13195,9 +13195,9 @@ namespace StorageAndTrade_1_0.Документи
         {
             if (BaseRead(uid))
             {
-                Назва = base.FieldValue["docname"]?.ToString() ?? "";
-                НомерДок = base.FieldValue["docnomer"]?.ToString() ?? "";
-                ДатаДок = (base.FieldValue["docdate"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["docdate"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                Назва = base.FieldValue["docname"].ToString() ?? "";
+                НомерДок = base.FieldValue["docnomer"].ToString() ?? "";
+                ДатаДок = (base.FieldValue["docdate"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["docdate"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
                 Валюта = new Довідники.Валюти_Pointer(base.FieldValue["col_a3"]);
                 ГосподарськаОперація = (base.FieldValue["col_a4"] != DBNull.Value) ? (Перелічення.ГосподарськіОперації)base.FieldValue["col_a4"] : 0;
                 Підрозділ = new Довідники.СтруктураПідприємства_Pointer(base.FieldValue["col_a5"]);
@@ -13205,17 +13205,17 @@ namespace StorageAndTrade_1_0.Документи
                 Контрагент = new Довідники.Контрагенти_Pointer(base.FieldValue["col_a7"]);
                 СумаДокументу = (base.FieldValue["col_a8"] != DBNull.Value) ? (decimal)base.FieldValue["col_a8"] : 0;
                 ЗамовленняПостачальнику = new Документи.ЗамовленняПостачальнику_Pointer(base.FieldValue["col_a9"]);
-                ДатаОплати = (base.FieldValue["col_b2"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["col_b2"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                ДатаОплати = (base.FieldValue["col_b2"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["col_b2"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
                 ФормаОплати = (base.FieldValue["col_b3"] != DBNull.Value) ? (Перелічення.ФормаОплати)base.FieldValue["col_b3"] : 0;
-                Узгоджений = (base.FieldValue["col_b4"] != DBNull.Value) ? bool.Parse(base.FieldValue["col_b4"]?.ToString() ?? "False") : false;
+                Узгоджений = (base.FieldValue["col_b4"] != DBNull.Value) ? (bool)base.FieldValue["col_b4"] : false;
                 БанківськийРахунокОрганізації = new Довідники.БанківськіРахункиОрганізацій_Pointer(base.FieldValue["col_b5"]);
-                НомерВхідногоДокументу = base.FieldValue["col_b6"]?.ToString() ?? "";
-                ДатаВхідногоДокументу = (base.FieldValue["col_b7"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["col_b7"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                НомерВхідногоДокументу = base.FieldValue["col_b6"].ToString() ?? "";
+                ДатаВхідногоДокументу = (base.FieldValue["col_b7"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["col_b7"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
                 БанківськийРахунокКонтрагента = new Довідники.БанківськіРахункиКонтрагентів_Pointer(base.FieldValue["col_b8"]);
                 Договір = new Довідники.ДоговориКонтрагентів_Pointer(base.FieldValue["col_b9"]);
                 Автор = new Довідники.Користувачі_Pointer(base.FieldValue["col_c1"]);
-                ПовернутиТару = (base.FieldValue["col_c2"] != DBNull.Value) ? bool.Parse(base.FieldValue["col_c2"]?.ToString() ?? "False") : false;
-                ДатаПоверненняТари = (base.FieldValue["col_c3"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["col_c3"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                ПовернутиТару = (base.FieldValue["col_c2"] != DBNull.Value) ? (bool)base.FieldValue["col_c2"] : false;
+                ДатаПоверненняТари = (base.FieldValue["col_c3"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["col_c3"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
                 СпосібДоставки = (base.FieldValue["col_c4"] != DBNull.Value) ? (Перелічення.СпособиДоставки)base.FieldValue["col_c4"] : 0;
                 Організація = new Довідники.Організації_Pointer(base.FieldValue["col_c5"]);
                 Курс = (base.FieldValue["col_c6"] != DBNull.Value) ? (decimal)base.FieldValue["col_c6"] : 0;
@@ -13226,8 +13226,8 @@ namespace StorageAndTrade_1_0.Документи
                 СтаттяРухуКоштів = new Довідники.СтаттяРухуКоштів_Pointer(base.FieldValue["col_d2"]);
                 Каса = new Довідники.Каси_Pointer(base.FieldValue["col_d3"]);
                 Основа = (base.FieldValue["col_a1"] != DBNull.Value) ? (UuidAndText)base.FieldValue["col_a1"] : new UuidAndText();
-                Коментар = base.FieldValue["col_b1"]?.ToString() ?? "";
-                КлючовіСловаДляПошуку = base.FieldValue["col_a2"]?.ToString() ?? "";
+                Коментар = base.FieldValue["col_b1"].ToString() ?? "";
+                КлючовіСловаДляПошуку = base.FieldValue["col_a2"].ToString() ?? "";
                 
                 BaseClear();
                 return true;
@@ -14062,24 +14062,24 @@ namespace StorageAndTrade_1_0.Документи
         {
             if (BaseRead(uid))
             {
-                Назва = base.FieldValue["docname"]?.ToString() ?? "";
-                НомерДок = base.FieldValue["docnomer"]?.ToString() ?? "";
-                ДатаДок = (base.FieldValue["docdate"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["docdate"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                Назва = base.FieldValue["docname"].ToString() ?? "";
+                НомерДок = base.FieldValue["docnomer"].ToString() ?? "";
+                ДатаДок = (base.FieldValue["docdate"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["docdate"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
                 Контрагент = new Довідники.Контрагенти_Pointer(base.FieldValue["col_b4"]);
                 Організація = new Довідники.Організації_Pointer(base.FieldValue["col_b5"]);
                 Валюта = new Довідники.Валюти_Pointer(base.FieldValue["col_b6"]);
                 СумаДокументу = (base.FieldValue["col_b7"] != DBNull.Value) ? (decimal)base.FieldValue["col_b7"] : 0;
                 Склад = new Довідники.Склади_Pointer(base.FieldValue["col_b8"]);
                 Статус = (base.FieldValue["col_a1"] != DBNull.Value) ? (Перелічення.СтатусиЗамовленьКлієнтів)base.FieldValue["col_a1"] : 0;
-                Узгоджений = (base.FieldValue["col_a2"] != DBNull.Value) ? bool.Parse(base.FieldValue["col_a2"]?.ToString() ?? "False") : false;
+                Узгоджений = (base.FieldValue["col_a2"] != DBNull.Value) ? (bool)base.FieldValue["col_a2"] : false;
                 ФормаОплати = (base.FieldValue["col_a3"] != DBNull.Value) ? (Перелічення.ФормаОплати)base.FieldValue["col_a3"] : 0;
                 БанківськийРахунок = new Довідники.БанківськіРахункиОрганізацій_Pointer(base.FieldValue["col_a4"]);
                 БанківськийРахунокКонтрагента = new Довідники.БанківськіРахункиКонтрагентів_Pointer(base.FieldValue["col_a5"]);
                 Каса = new Довідники.Каси_Pointer(base.FieldValue["col_a6"]);
                 СумаАвансуДоЗабезпечення = (base.FieldValue["col_a7"] != DBNull.Value) ? (decimal)base.FieldValue["col_a7"] : 0;
                 СумаПередоплатиДоВідгрузки = (base.FieldValue["col_a8"] != DBNull.Value) ? (decimal)base.FieldValue["col_a8"] : 0;
-                ДатаВідгрузки = (base.FieldValue["col_b1"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["col_b1"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
-                АдресаДоставки = base.FieldValue["col_a9"]?.ToString() ?? "";
+                ДатаВідгрузки = (base.FieldValue["col_b1"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["col_b1"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                АдресаДоставки = base.FieldValue["col_a9"].ToString() ?? "";
                 ГосподарськаОперація = (base.FieldValue["col_b9"] != DBNull.Value) ? (Перелічення.ГосподарськіОперації)base.FieldValue["col_b9"] : 0;
                 Договір = new Довідники.ДоговориКонтрагентів_Pointer(base.FieldValue["col_c2"]);
                 Підрозділ = new Довідники.СтруктураПідприємства_Pointer(base.FieldValue["col_c3"]);
@@ -14087,11 +14087,11 @@ namespace StorageAndTrade_1_0.Документи
                 СпосібДоставки = (base.FieldValue["col_c5"] != DBNull.Value) ? (Перелічення.СпособиДоставки)base.FieldValue["col_c5"] : 0;
                 ЧасДоставкиЗ = (base.FieldValue["col_c6"] != DBNull.Value) ? TimeSpan.Parse(base.FieldValue["col_c6"]?.ToString() ?? DateTime.MinValue.TimeOfDay.ToString()) : DateTime.MinValue.TimeOfDay;
                 ЧасДоставкиДо = (base.FieldValue["col_c7"] != DBNull.Value) ? TimeSpan.Parse(base.FieldValue["col_c7"]?.ToString() ?? DateTime.MinValue.TimeOfDay.ToString()) : DateTime.MinValue.TimeOfDay;
-                ПовернутиТару = (base.FieldValue["col_c8"] != DBNull.Value) ? bool.Parse(base.FieldValue["col_c8"]?.ToString() ?? "False") : false;
-                ДатаПоверненняТари = (base.FieldValue["col_c9"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["col_c9"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
-                Коментар = base.FieldValue["col_c1"]?.ToString() ?? "";
+                ПовернутиТару = (base.FieldValue["col_c8"] != DBNull.Value) ? (bool)base.FieldValue["col_c8"] : false;
+                ДатаПоверненняТари = (base.FieldValue["col_c9"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["col_c9"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                Коментар = base.FieldValue["col_c1"].ToString() ?? "";
                 Менеджер = new Довідники.Користувачі_Pointer(base.FieldValue["col_b2"]);
-                КлючовіСловаДляПошуку = base.FieldValue["col_b3"]?.ToString() ?? "";
+                КлючовіСловаДляПошуку = base.FieldValue["col_b3"].ToString() ?? "";
                 
                 BaseClear();
                 return true;
@@ -14955,14 +14955,14 @@ namespace StorageAndTrade_1_0.Документи
         {
             if (BaseRead(uid))
             {
-                Назва = base.FieldValue["docname"]?.ToString() ?? "";
-                НомерДок = base.FieldValue["docnomer"]?.ToString() ?? "";
-                ДатаДок = (base.FieldValue["docdate"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["docdate"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                Назва = base.FieldValue["docname"].ToString() ?? "";
+                НомерДок = base.FieldValue["docnomer"].ToString() ?? "";
+                ДатаДок = (base.FieldValue["docdate"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["docdate"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
                 Організація = new Довідники.Організації_Pointer(base.FieldValue["col_a1"]);
                 Валюта = new Довідники.Валюти_Pointer(base.FieldValue["col_a2"]);
                 БанківськийРахунокОрганізації = new Довідники.БанківськіРахункиОрганізацій_Pointer(base.FieldValue["col_a3"]);
                 БанківськийРахунокКонтрагента = new Довідники.БанківськіРахункиКонтрагентів_Pointer(base.FieldValue["col_a4"]);
-                ДатаОплати = (base.FieldValue["col_a5"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["col_a5"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                ДатаОплати = (base.FieldValue["col_a5"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["col_a5"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
                 ЗамовленняКлієнта = new Документи.ЗамовленняКлієнта_Pointer(base.FieldValue["col_a6"]);
                 Контрагент = new Довідники.Контрагенти_Pointer(base.FieldValue["col_a7"]);
                 СумаДокументу = (base.FieldValue["col_a8"] != DBNull.Value) ? (decimal)base.FieldValue["col_a8"] : 0;
@@ -14980,13 +14980,13 @@ namespace StorageAndTrade_1_0.Документи
                 СпосібДоставки = (base.FieldValue["col_c3"] != DBNull.Value) ? (Перелічення.СпособиДоставки)base.FieldValue["col_c3"] : 0;
                 ЧасДоставкиЗ = (base.FieldValue["col_c4"] != DBNull.Value) ? TimeSpan.Parse(base.FieldValue["col_c4"]?.ToString() ?? DateTime.MinValue.TimeOfDay.ToString()) : DateTime.MinValue.TimeOfDay;
                 ЧасДоставкиДо = (base.FieldValue["col_c5"] != DBNull.Value) ? TimeSpan.Parse(base.FieldValue["col_c5"]?.ToString() ?? DateTime.MinValue.TimeOfDay.ToString()) : DateTime.MinValue.TimeOfDay;
-                ПовернутиТару = (base.FieldValue["col_c6"] != DBNull.Value) ? bool.Parse(base.FieldValue["col_c6"]?.ToString() ?? "False") : false;
-                ДатаПоверненняТари = (base.FieldValue["col_c7"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["col_c7"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                ПовернутиТару = (base.FieldValue["col_c6"] != DBNull.Value) ? (bool)base.FieldValue["col_c6"] : false;
+                ДатаПоверненняТари = (base.FieldValue["col_c7"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["col_c7"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
                 Курс = (base.FieldValue["col_c8"] != DBNull.Value) ? (decimal)base.FieldValue["col_c8"] : 0;
                 Кратність = (base.FieldValue["col_d2"] != DBNull.Value) ? (int)base.FieldValue["col_d2"] : 0;
-                Коментар = base.FieldValue["col_b2"]?.ToString() ?? "";
+                Коментар = base.FieldValue["col_b2"].ToString() ?? "";
                 Менеджер = new Довідники.Користувачі_Pointer(base.FieldValue["col_c9"]);
-                КлючовіСловаДляПошуку = base.FieldValue["col_d1"]?.ToString() ?? "";
+                КлючовіСловаДляПошуку = base.FieldValue["col_d1"].ToString() ?? "";
                 
                 BaseClear();
                 return true;
@@ -15600,15 +15600,15 @@ namespace StorageAndTrade_1_0.Документи
         {
             if (BaseRead(uid))
             {
-                Назва = base.FieldValue["docname"]?.ToString() ?? "";
-                НомерДок = base.FieldValue["docnomer"]?.ToString() ?? "";
-                ДатаДок = (base.FieldValue["docdate"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["docdate"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                Назва = base.FieldValue["docname"].ToString() ?? "";
+                НомерДок = base.FieldValue["docnomer"].ToString() ?? "";
+                ДатаДок = (base.FieldValue["docdate"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["docdate"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
                 Організація = new Довідники.Організації_Pointer(base.FieldValue["col_a2"]);
                 Валюта = new Довідники.Валюти_Pointer(base.FieldValue["col_a1"]);
                 ВидЦіни = new Довідники.ВидиЦін_Pointer(base.FieldValue["col_a3"]);
-                Коментар = base.FieldValue["col_g9"]?.ToString() ?? "";
+                Коментар = base.FieldValue["col_g9"].ToString() ?? "";
                 Автор = new Довідники.Користувачі_Pointer(base.FieldValue["col_a4"]);
-                КлючовіСловаДляПошуку = base.FieldValue["col_a5"]?.ToString() ?? "";
+                КлючовіСловаДляПошуку = base.FieldValue["col_a5"].ToString() ?? "";
                 
                 BaseClear();
                 return true;
@@ -16199,9 +16199,9 @@ namespace StorageAndTrade_1_0.Документи
         {
             if (BaseRead(uid))
             {
-                Назва = base.FieldValue["docname"]?.ToString() ?? "";
-                НомерДок = base.FieldValue["docnomer"]?.ToString() ?? "";
-                ДатаДок = (base.FieldValue["docdate"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["docdate"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                Назва = base.FieldValue["docname"].ToString() ?? "";
+                НомерДок = base.FieldValue["docnomer"].ToString() ?? "";
+                ДатаДок = (base.FieldValue["docdate"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["docdate"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
                 Організація = new Довідники.Організації_Pointer(base.FieldValue["col_h8"]);
                 Каса = new Довідники.Каси_Pointer(base.FieldValue["col_h9"]);
                 СумаДокументу = (base.FieldValue["col_i1"] != DBNull.Value) ? (decimal)base.FieldValue["col_i1"] : 0;
@@ -16214,9 +16214,9 @@ namespace StorageAndTrade_1_0.Документи
                 СтаттяРухуКоштів = new Довідники.СтаттяРухуКоштів_Pointer(base.FieldValue["col_a1"]);
                 КасаВідправник = new Довідники.Каси_Pointer(base.FieldValue["col_a2"]);
                 Курс = (base.FieldValue["col_a4"] != DBNull.Value) ? (decimal)base.FieldValue["col_a4"] : 0;
-                Коментар = base.FieldValue["col_a3"]?.ToString() ?? "";
+                Коментар = base.FieldValue["col_a3"].ToString() ?? "";
                 Автор = new Довідники.Користувачі_Pointer(base.FieldValue["col_a5"]);
-                КлючовіСловаДляПошуку = base.FieldValue["col_a7"]?.ToString() ?? "";
+                КлючовіСловаДляПошуку = base.FieldValue["col_a7"].ToString() ?? "";
                 
                 BaseClear();
                 return true;
@@ -16488,7 +16488,7 @@ namespace StorageAndTrade_1_0.Документи
                 record.UID = (Guid)fieldValue["uid"];
                 
                 record.НомерРядка = (fieldValue["col_a1"] != DBNull.Value) ? (int)fieldValue["col_a1"] : 0;
-                record.Замовлення = fieldValue["col_j4"]?.ToString() ?? "";
+                record.Замовлення = fieldValue["col_j4"].ToString() ?? "";
                 record.Сума = (fieldValue["col_j5"] != DBNull.Value) ? (decimal)fieldValue["col_j5"] : 0;
                 record.Підрозділ = new Довідники.СтруктураПідприємства_Pointer(fieldValue["col_j6"]);
                 record.ВалютаВзаєморозрахунків = new Довідники.Валюти_Pointer(fieldValue["col_j7"]);
@@ -16858,9 +16858,9 @@ namespace StorageAndTrade_1_0.Документи
         {
             if (BaseRead(uid))
             {
-                Назва = base.FieldValue["docname"]?.ToString() ?? "";
-                НомерДок = base.FieldValue["docnomer"]?.ToString() ?? "";
-                ДатаДок = (base.FieldValue["docdate"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["docdate"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                Назва = base.FieldValue["docname"].ToString() ?? "";
+                НомерДок = base.FieldValue["docnomer"].ToString() ?? "";
+                ДатаДок = (base.FieldValue["docdate"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["docdate"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
                 Організація = new Довідники.Організації_Pointer(base.FieldValue["col_k2"]);
                 Каса = new Довідники.Каси_Pointer(base.FieldValue["col_k3"]);
                 СумаДокументу = (base.FieldValue["col_a3"] != DBNull.Value) ? (decimal)base.FieldValue["col_a3"] : 0;
@@ -16875,9 +16875,9 @@ namespace StorageAndTrade_1_0.Документи
                 КасаОтримувач = new Довідники.Каси_Pointer(base.FieldValue["col_k6"]);
                 Курс = (base.FieldValue["col_a2"] != DBNull.Value) ? (decimal)base.FieldValue["col_a2"] : 0;
                 Основа = (base.FieldValue["col_a1"] != DBNull.Value) ? (UuidAndText)base.FieldValue["col_a1"] : new UuidAndText();
-                Коментар = base.FieldValue["col_l1"]?.ToString() ?? "";
+                Коментар = base.FieldValue["col_l1"].ToString() ?? "";
                 Автор = new Довідники.Користувачі_Pointer(base.FieldValue["col_a6"]);
-                КлючовіСловаДляПошуку = base.FieldValue["col_a7"]?.ToString() ?? "";
+                КлючовіСловаДляПошуку = base.FieldValue["col_a7"].ToString() ?? "";
                 
                 BaseClear();
                 return true;
@@ -17156,11 +17156,11 @@ namespace StorageAndTrade_1_0.Документи
                 record.UID = (Guid)fieldValue["uid"];
                 
                 record.НомерРядка = (fieldValue["col_a1"] != DBNull.Value) ? (int)fieldValue["col_a1"] : 0;
-                record.Замовлення = fieldValue["col_l4"]?.ToString() ?? "";
+                record.Замовлення = fieldValue["col_l4"].ToString() ?? "";
                 record.Сума = (fieldValue["col_l5"] != DBNull.Value) ? (decimal)fieldValue["col_l5"] : 0;
                 record.ВалютаВзаєморозрахунків = new Довідники.Валюти_Pointer(fieldValue["col_l6"]);
                 record.Підрозділ = new Довідники.СтруктураПідприємства_Pointer(fieldValue["col_l7"]);
-                record.Коментар = fieldValue["col_l8"]?.ToString() ?? "";
+                record.Коментар = fieldValue["col_l8"].ToString() ?? "";
                 record.Організація = new Довідники.Організації_Pointer(fieldValue["col_l9"]);
                 
                 Records.Add(record);
@@ -17549,9 +17549,9 @@ namespace StorageAndTrade_1_0.Документи
         {
             if (BaseRead(uid))
             {
-                Назва = base.FieldValue["docname"]?.ToString() ?? "";
-                НомерДок = base.FieldValue["docnomer"]?.ToString() ?? "";
-                ДатаДок = (base.FieldValue["docdate"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["docdate"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                Назва = base.FieldValue["docname"].ToString() ?? "";
+                НомерДок = base.FieldValue["docnomer"].ToString() ?? "";
+                ДатаДок = (base.FieldValue["docdate"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["docdate"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
                 Організація = new Довідники.Організації_Pointer(base.FieldValue["col_a3"]);
                 БанківськийРахунокОрганізації = new Довідники.БанківськіРахункиОрганізацій_Pointer(base.FieldValue["col_a4"]);
                 ВидЦіни = new Довідники.ВидиЦін_Pointer(base.FieldValue["col_a5"]);
@@ -17563,13 +17563,13 @@ namespace StorageAndTrade_1_0.Документи
                 Статус = (base.FieldValue["col_b3"] != DBNull.Value) ? (Перелічення.СтатусиПереміщенняТоварів)base.FieldValue["col_b3"] : 0;
                 ГосподарськаОперація = (base.FieldValue["col_b4"] != DBNull.Value) ? (Перелічення.ГосподарськіОперації)base.FieldValue["col_b4"] : 0;
                 СпосібДоставки = (base.FieldValue["col_b5"] != DBNull.Value) ? (Перелічення.СпособиДоставки)base.FieldValue["col_b5"] : 0;
-                АдресДоставки = base.FieldValue["col_b6"]?.ToString() ?? "";
+                АдресДоставки = base.FieldValue["col_b6"].ToString() ?? "";
                 ЧасДоставкиЗ = (base.FieldValue["col_b7"] != DBNull.Value) ? TimeSpan.Parse(base.FieldValue["col_b7"]?.ToString() ?? DateTime.MinValue.TimeOfDay.ToString()) : DateTime.MinValue.TimeOfDay;
                 ЧасДоставкиДо = (base.FieldValue["col_b8"] != DBNull.Value) ? TimeSpan.Parse(base.FieldValue["col_b8"]?.ToString() ?? DateTime.MinValue.TimeOfDay.ToString()) : DateTime.MinValue.TimeOfDay;
-                Коментар = base.FieldValue["col_a6"]?.ToString() ?? "";
+                Коментар = base.FieldValue["col_a6"].ToString() ?? "";
                 Автор = new Довідники.Користувачі_Pointer(base.FieldValue["col_a1"]);
                 Основа = (base.FieldValue["col_a2"] != DBNull.Value) ? (UuidAndText)base.FieldValue["col_a2"] : new UuidAndText();
-                КлючовіСловаДляПошуку = base.FieldValue["col_b9"]?.ToString() ?? "";
+                КлючовіСловаДляПошуку = base.FieldValue["col_b9"].ToString() ?? "";
                 
                 BaseClear();
                 return true;
@@ -18278,9 +18278,9 @@ namespace StorageAndTrade_1_0.Документи
         {
             if (BaseRead(uid))
             {
-                Назва = base.FieldValue["docname"]?.ToString() ?? "";
-                НомерДок = base.FieldValue["docnomer"]?.ToString() ?? "";
-                ДатаДок = (base.FieldValue["docdate"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["docdate"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                Назва = base.FieldValue["docname"].ToString() ?? "";
+                НомерДок = base.FieldValue["docnomer"].ToString() ?? "";
+                ДатаДок = (base.FieldValue["docdate"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["docdate"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
                 Організація = new Довідники.Організації_Pointer(base.FieldValue["col_c2"]);
                 Контрагент = new Довідники.Контрагенти_Pointer(base.FieldValue["col_c3"]);
                 Підрозділ = new Довідники.СтруктураПідприємства_Pointer(base.FieldValue["col_c4"]);
@@ -18292,15 +18292,15 @@ namespace StorageAndTrade_1_0.Документи
                 БанківськийРахунокКонтрагента = new Довідники.БанківськіРахункиКонтрагентів_Pointer(base.FieldValue["col_d2"]);
                 Договір = new Довідники.ДоговориКонтрагентів_Pointer(base.FieldValue["col_d3"]);
                 СпосібДоставки = (base.FieldValue["col_d4"] != DBNull.Value) ? (Перелічення.СпособиДоставки)base.FieldValue["col_d4"] : 0;
-                АдресДоставки = base.FieldValue["col_d5"]?.ToString() ?? "";
+                АдресДоставки = base.FieldValue["col_d5"].ToString() ?? "";
                 ЧасДоставкиЗ = (base.FieldValue["col_d6"] != DBNull.Value) ? TimeSpan.Parse(base.FieldValue["col_d6"]?.ToString() ?? DateTime.MinValue.TimeOfDay.ToString()) : DateTime.MinValue.TimeOfDay;
                 ЧасДоставкиДо = (base.FieldValue["col_d7"] != DBNull.Value) ? TimeSpan.Parse(base.FieldValue["col_d7"]?.ToString() ?? DateTime.MinValue.TimeOfDay.ToString()) : DateTime.MinValue.TimeOfDay;
                 Каса = new Довідники.Каси_Pointer(base.FieldValue["col_a1"]);
                 Основа = (base.FieldValue["col_a2"] != DBNull.Value) ? (UuidAndText)base.FieldValue["col_a2"] : new UuidAndText();
-                Коментар = base.FieldValue["col_c8"]?.ToString() ?? "";
+                Коментар = base.FieldValue["col_c8"].ToString() ?? "";
                 Автор = new Довідники.Користувачі_Pointer(base.FieldValue["col_a3"]);
                 Менеджер = new Довідники.Користувачі_Pointer(base.FieldValue["col_a4"]);
-                КлючовіСловаДляПошуку = base.FieldValue["col_a5"]?.ToString() ?? "";
+                КлючовіСловаДляПошуку = base.FieldValue["col_a5"].ToString() ?? "";
                 
                 BaseClear();
                 return true;
@@ -18993,9 +18993,9 @@ namespace StorageAndTrade_1_0.Документи
         {
             if (BaseRead(uid))
             {
-                Назва = base.FieldValue["docname"]?.ToString() ?? "";
-                НомерДок = base.FieldValue["docnomer"]?.ToString() ?? "";
-                ДатаДок = (base.FieldValue["docdate"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["docdate"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                Назва = base.FieldValue["docname"].ToString() ?? "";
+                НомерДок = base.FieldValue["docnomer"].ToString() ?? "";
+                ДатаДок = (base.FieldValue["docdate"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["docdate"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
                 Організація = new Довідники.Організації_Pointer(base.FieldValue["col_e8"]);
                 Валюта = new Довідники.Валюти_Pointer(base.FieldValue["col_e9"]);
                 СумаДокументу = (base.FieldValue["col_f1"] != DBNull.Value) ? (decimal)base.FieldValue["col_f1"] : 0;
@@ -19005,13 +19005,13 @@ namespace StorageAndTrade_1_0.Документи
                 ДокументПродажу = new Документи.РеалізаціяТоварівТаПослуг_Pointer(base.FieldValue["col_f7"]);
                 ГосподарськаОперація = (base.FieldValue["col_f8"] != DBNull.Value) ? (Перелічення.ГосподарськіОперації)base.FieldValue["col_f8"] : 0;
                 Договір = new Довідники.ДоговориКонтрагентів_Pointer(base.FieldValue["col_f9"]);
-                ПричинаПовернення = base.FieldValue["col_g1"]?.ToString() ?? "";
+                ПричинаПовернення = base.FieldValue["col_g1"].ToString() ?? "";
                 Контрагент = new Довідники.Контрагенти_Pointer(base.FieldValue["col_g2"]);
                 Каса = new Довідники.Каси_Pointer(base.FieldValue["col_a1"]);
                 Основа = (base.FieldValue["col_a2"] != DBNull.Value) ? (UuidAndText)base.FieldValue["col_a2"] : new UuidAndText();
-                Коментар = base.FieldValue["col_f6"]?.ToString() ?? "";
+                Коментар = base.FieldValue["col_f6"].ToString() ?? "";
                 Автор = new Довідники.Користувачі_Pointer(base.FieldValue["col_a3"]);
-                КлючовіСловаДляПошуку = base.FieldValue["col_a4"]?.ToString() ?? "";
+                КлючовіСловаДляПошуку = base.FieldValue["col_a4"].ToString() ?? "";
                 
                 BaseClear();
                 return true;
@@ -19299,7 +19299,7 @@ namespace StorageAndTrade_1_0.Документи
                 record.Кількість = (fieldValue["col_g7"] != DBNull.Value) ? (decimal)fieldValue["col_g7"] : 0;
                 record.Ціна = (fieldValue["col_g8"] != DBNull.Value) ? (decimal)fieldValue["col_g8"] : 0;
                 record.Сума = (fieldValue["col_g9"] != DBNull.Value) ? (decimal)fieldValue["col_g9"] : 0;
-                record.Штрихкод = fieldValue["col_h1"]?.ToString() ?? "";
+                record.Штрихкод = fieldValue["col_h1"].ToString() ?? "";
                 record.ДокументРеалізації = new Документи.РеалізаціяТоварівТаПослуг_Pointer(fieldValue["col_a2"]);
                 
                 Records.Add(record);
@@ -19644,9 +19644,9 @@ namespace StorageAndTrade_1_0.Документи
         {
             if (BaseRead(uid))
             {
-                Назва = base.FieldValue["docname"]?.ToString() ?? "";
-                НомерДок = base.FieldValue["docnomer"]?.ToString() ?? "";
-                ДатаДок = (base.FieldValue["docdate"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["docdate"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                Назва = base.FieldValue["docname"].ToString() ?? "";
+                НомерДок = base.FieldValue["docnomer"].ToString() ?? "";
+                ДатаДок = (base.FieldValue["docdate"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["docdate"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
                 Валюта = new Довідники.Валюти_Pointer(base.FieldValue["col_b2"]);
                 ЗамовленняКлієнта = new Документи.ЗамовленняКлієнта_Pointer(base.FieldValue["col_b3"]);
                 Каса = new Довідники.Каси_Pointer(base.FieldValue["col_b4"]);
@@ -19657,10 +19657,10 @@ namespace StorageAndTrade_1_0.Документи
                 ФормаОплати = (base.FieldValue["col_a3"] != DBNull.Value) ? (Перелічення.ФормаОплати)base.FieldValue["col_a3"] : 0;
                 Договір = new Довідники.ДоговориКонтрагентів_Pointer(base.FieldValue["col_a4"]);
                 ГосподарськаОперація = (base.FieldValue["col_a6"] != DBNull.Value) ? (Перелічення.ГосподарськіОперації)base.FieldValue["col_a6"] : 0;
-                Коментар = base.FieldValue["col_a1"]?.ToString() ?? "";
+                Коментар = base.FieldValue["col_a1"].ToString() ?? "";
                 Автор = new Довідники.Користувачі_Pointer(base.FieldValue["col_a7"]);
                 Менеджер = new Довідники.Користувачі_Pointer(base.FieldValue["col_a8"]);
-                КлючовіСловаДляПошуку = base.FieldValue["col_a9"]?.ToString() ?? "";
+                КлючовіСловаДляПошуку = base.FieldValue["col_a9"].ToString() ?? "";
                 
                 BaseClear();
                 return true;
@@ -20369,9 +20369,9 @@ namespace StorageAndTrade_1_0.Документи
         {
             if (BaseRead(uid))
             {
-                Назва = base.FieldValue["docname"]?.ToString() ?? "";
-                НомерДок = base.FieldValue["docnomer"]?.ToString() ?? "";
-                ДатаДок = (base.FieldValue["docdate"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["docdate"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                Назва = base.FieldValue["docname"].ToString() ?? "";
+                НомерДок = base.FieldValue["docnomer"].ToString() ?? "";
+                ДатаДок = (base.FieldValue["docdate"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["docdate"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
                 Організація = new Довідники.Організації_Pointer(base.FieldValue["col_c8"]);
                 Підрозділ = new Довідники.СтруктураПідприємства_Pointer(base.FieldValue["col_d5"]);
                 Склад = new Довідники.Склади_Pointer(base.FieldValue["col_c9"]);
@@ -20379,9 +20379,9 @@ namespace StorageAndTrade_1_0.Документи
                 Контрагент = new Довідники.Контрагенти_Pointer(base.FieldValue["col_d3"]);
                 Договір = new Довідники.ДоговориКонтрагентів_Pointer(base.FieldValue["col_d4"]);
                 ГосподарськаОперація = (base.FieldValue["col_a1"] != DBNull.Value) ? (Перелічення.ГосподарськіОперації)base.FieldValue["col_a1"] : 0;
-                Коментар = base.FieldValue["col_d1"]?.ToString() ?? "";
+                Коментар = base.FieldValue["col_d1"].ToString() ?? "";
                 Автор = new Довідники.Користувачі_Pointer(base.FieldValue["col_a3"]);
-                КлючовіСловаДляПошуку = base.FieldValue["col_a2"]?.ToString() ?? "";
+                КлючовіСловаДляПошуку = base.FieldValue["col_a2"].ToString() ?? "";
                 
                 BaseClear();
                 return true;
@@ -21198,12 +21198,12 @@ namespace StorageAndTrade_1_0.Документи
                 Підрозділ = new Довідники.СтруктураПідприємства_Pointer(base.FieldValue["col_f7"]);
                 Склад = new Довідники.Склади_Pointer(base.FieldValue["col_f8"]);
                 ВидЦіни = new Довідники.ВидиЦін_Pointer(base.FieldValue["col_f9"]);
-                Коментар = base.FieldValue["col_g1"]?.ToString() ?? "";
-                НомерДок = base.FieldValue["docnomer"]?.ToString() ?? "";
-                ДатаДок = (base.FieldValue["docdate"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["docdate"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
-                Назва = base.FieldValue["docname"]?.ToString() ?? "";
+                Коментар = base.FieldValue["col_g1"].ToString() ?? "";
+                НомерДок = base.FieldValue["docnomer"].ToString() ?? "";
+                ДатаДок = (base.FieldValue["docdate"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["docdate"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                Назва = base.FieldValue["docname"].ToString() ?? "";
                 Автор = new Довідники.Користувачі_Pointer(base.FieldValue["col_a1"]);
-                КлючовіСловаДляПошуку = base.FieldValue["col_a2"]?.ToString() ?? "";
+                КлючовіСловаДляПошуку = base.FieldValue["col_a2"].ToString() ?? "";
                 
                 BaseClear();
                 return true;
@@ -21698,16 +21698,16 @@ namespace StorageAndTrade_1_0.Документи
         {
             if (BaseRead(uid))
             {
-                Назва = base.FieldValue["docname"]?.ToString() ?? "";
-                НомерДок = base.FieldValue["docnomer"]?.ToString() ?? "";
-                ДатаДок = (base.FieldValue["docdate"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["docdate"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                Назва = base.FieldValue["docname"].ToString() ?? "";
+                НомерДок = base.FieldValue["docnomer"].ToString() ?? "";
+                ДатаДок = (base.FieldValue["docdate"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["docdate"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
                 Організація = new Довідники.Організації_Pointer(base.FieldValue["col_h2"]);
                 Підрозділ = new Довідники.СтруктураПідприємства_Pointer(base.FieldValue["col_h3"]);
                 Склад = new Довідники.Склади_Pointer(base.FieldValue["col_h4"]);
                 ВидЦіни = new Довідники.ВидиЦін_Pointer(base.FieldValue["col_h5"]);
-                Коментар = base.FieldValue["col_h6"]?.ToString() ?? "";
+                Коментар = base.FieldValue["col_h6"].ToString() ?? "";
                 Автор = new Довідники.Користувачі_Pointer(base.FieldValue["col_a1"]);
-                КлючовіСловаДляПошуку = base.FieldValue["col_a2"]?.ToString() ?? "";
+                КлючовіСловаДляПошуку = base.FieldValue["col_a2"].ToString() ?? "";
                 
                 BaseClear();
                 return true;
@@ -22196,14 +22196,14 @@ namespace StorageAndTrade_1_0.Документи
         {
             if (BaseRead(uid))
             {
-                Назва = base.FieldValue["docname"]?.ToString() ?? "";
-                НомерДок = base.FieldValue["docnomer"]?.ToString() ?? "";
-                ДатаДок = (base.FieldValue["docdate"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["docdate"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                Назва = base.FieldValue["docname"].ToString() ?? "";
+                НомерДок = base.FieldValue["docnomer"].ToString() ?? "";
+                ДатаДок = (base.FieldValue["docdate"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["docdate"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
                 Склад = new Довідники.Склади_Pointer(base.FieldValue["col_i6"]);
                 Відповідальний = new Довідники.ФізичніОсоби_Pointer(base.FieldValue["col_i7"]);
-                Коментар = base.FieldValue["col_i5"]?.ToString() ?? "";
+                Коментар = base.FieldValue["col_i5"].ToString() ?? "";
                 Автор = new Довідники.Користувачі_Pointer(base.FieldValue["col_a1"]);
-                КлючовіСловаДляПошуку = base.FieldValue["col_a2"]?.ToString() ?? "";
+                КлючовіСловаДляПошуку = base.FieldValue["col_a2"].ToString() ?? "";
                 
                 BaseClear();
                 return true;
@@ -22751,17 +22751,17 @@ namespace StorageAndTrade_1_0.Документи
         {
             if (BaseRead(uid))
             {
-                Назва = base.FieldValue["docname"]?.ToString() ?? "";
-                НомерДок = base.FieldValue["docnomer"]?.ToString() ?? "";
-                ДатаДок = (base.FieldValue["docdate"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["docdate"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                Назва = base.FieldValue["docname"].ToString() ?? "";
+                НомерДок = base.FieldValue["docnomer"].ToString() ?? "";
+                ДатаДок = (base.FieldValue["docdate"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["docdate"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
                 Організація = new Довідники.Організації_Pointer(base.FieldValue["col_a6"]);
                 Підрозділ = new Довідники.СтруктураПідприємства_Pointer(base.FieldValue["col_a7"]);
                 Склад = new Довідники.Склади_Pointer(base.FieldValue["col_a4"]);
-                Причина = base.FieldValue["col_a8"]?.ToString() ?? "";
+                Причина = base.FieldValue["col_a8"].ToString() ?? "";
                 СумаДокументу = (base.FieldValue["col_a1"] != DBNull.Value) ? (decimal)base.FieldValue["col_a1"] : 0;
-                Коментар = base.FieldValue["col_a5"]?.ToString() ?? "";
+                Коментар = base.FieldValue["col_a5"].ToString() ?? "";
                 Автор = new Довідники.Користувачі_Pointer(base.FieldValue["col_a2"]);
-                КлючовіСловаДляПошуку = base.FieldValue["col_a3"]?.ToString() ?? "";
+                КлючовіСловаДляПошуку = base.FieldValue["col_a3"].ToString() ?? "";
                 Основа = (base.FieldValue["col_b2"] != DBNull.Value) ? (UuidAndText)base.FieldValue["col_b2"] : new UuidAndText();
                 
                 BaseClear();
@@ -23358,9 +23358,9 @@ namespace StorageAndTrade_1_0.Документи
         {
             if (BaseRead(uid))
             {
-                Назва = base.FieldValue["docname"]?.ToString() ?? "";
-                НомерДок = base.FieldValue["docnomer"]?.ToString() ?? "";
-                ДатаДок = (base.FieldValue["docdate"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["docdate"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                Назва = base.FieldValue["docname"].ToString() ?? "";
+                НомерДок = base.FieldValue["docnomer"].ToString() ?? "";
+                ДатаДок = (base.FieldValue["docdate"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["docdate"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
                 Організація = new Довідники.Організації_Pointer(base.FieldValue["col_a1"]);
                 Склад = new Довідники.Склади_Pointer(base.FieldValue["col_b1"]);
                 Валюта = new Довідники.Валюти_Pointer(base.FieldValue["col_a2"]);
@@ -23369,8 +23369,8 @@ namespace StorageAndTrade_1_0.Документи
                 Основа = (base.FieldValue["col_b7"] != DBNull.Value) ? (UuidAndText)base.FieldValue["col_b7"] : new UuidAndText();
                 Автор = new Довідники.Користувачі_Pointer(base.FieldValue["col_b9"]);
                 ГосподарськаОперація = (base.FieldValue["col_b4"] != DBNull.Value) ? (Перелічення.ГосподарськіОперації)base.FieldValue["col_b4"] : 0;
-                Коментар = base.FieldValue["col_b2"]?.ToString() ?? "";
-                КлючовіСловаДляПошуку = base.FieldValue["col_a3"]?.ToString() ?? "";
+                Коментар = base.FieldValue["col_b2"].ToString() ?? "";
+                КлючовіСловаДляПошуку = base.FieldValue["col_a3"].ToString() ?? "";
                 
                 BaseClear();
                 return true;
@@ -24047,9 +24047,9 @@ namespace StorageAndTrade_1_0.Документи
         {
             if (BaseRead(uid))
             {
-                Назва = base.FieldValue["docname"]?.ToString() ?? "";
-                НомерДок = base.FieldValue["docnomer"]?.ToString() ?? "";
-                ДатаДок = (base.FieldValue["docdate"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["docdate"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                Назва = base.FieldValue["docname"].ToString() ?? "";
+                НомерДок = base.FieldValue["docnomer"].ToString() ?? "";
+                ДатаДок = (base.FieldValue["docdate"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["docdate"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
                 Контрагент = new Довідники.Контрагенти_Pointer(base.FieldValue["col_b4"]);
                 Організація = new Довідники.Організації_Pointer(base.FieldValue["col_b5"]);
                 Валюта = new Довідники.Валюти_Pointer(base.FieldValue["col_b6"]);
@@ -24064,9 +24064,9 @@ namespace StorageAndTrade_1_0.Документи
                 Договір = new Довідники.ДоговориКонтрагентів_Pointer(base.FieldValue["col_c2"]);
                 Підрозділ = new Довідники.СтруктураПідприємства_Pointer(base.FieldValue["col_c3"]);
                 Автор = new Довідники.Користувачі_Pointer(base.FieldValue["col_c4"]);
-                Коментар = base.FieldValue["col_c1"]?.ToString() ?? "";
+                Коментар = base.FieldValue["col_c1"].ToString() ?? "";
                 Менеджер = new Довідники.Користувачі_Pointer(base.FieldValue["col_a2"]);
-                КлючовіСловаДляПошуку = base.FieldValue["col_a7"]?.ToString() ?? "";
+                КлючовіСловаДляПошуку = base.FieldValue["col_a7"].ToString() ?? "";
                 
                 BaseClear();
                 return true;
@@ -24660,17 +24660,17 @@ namespace StorageAndTrade_1_0.Документи
         {
             if (BaseRead(uid))
             {
-                Назва = base.FieldValue["docname"]?.ToString() ?? "";
-                ДатаДок = (base.FieldValue["docdate"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["docdate"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
-                НомерДок = base.FieldValue["docnomer"]?.ToString() ?? "";
-                Коментар = base.FieldValue["col_a1"]?.ToString() ?? "";
+                Назва = base.FieldValue["docname"].ToString() ?? "";
+                ДатаДок = (base.FieldValue["docdate"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["docdate"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                НомерДок = base.FieldValue["docnomer"].ToString() ?? "";
+                Коментар = base.FieldValue["col_a1"].ToString() ?? "";
                 Основа = (base.FieldValue["col_a2"] != DBNull.Value) ? (UuidAndText)base.FieldValue["col_a2"] : new UuidAndText();
                 Склад = new Довідники.Склади_Pointer(base.FieldValue["col_a3"]);
                 Автор = new Довідники.Користувачі_Pointer(base.FieldValue["col_a4"]);
                 Організація = new Довідники.Організації_Pointer(base.FieldValue["col_a5"]);
                 Підрозділ = new Довідники.СтруктураПідприємства_Pointer(base.FieldValue["col_a6"]);
                 ДокументПоступлення = new Документи.ПоступленняТоварівТаПослуг_Pointer(base.FieldValue["col_a7"]);
-                КлючовіСловаДляПошуку = base.FieldValue["col_a8"]?.ToString() ?? "";
+                КлючовіСловаДляПошуку = base.FieldValue["col_a8"].ToString() ?? "";
                 
                 BaseClear();
                 return true;
@@ -25223,16 +25223,16 @@ namespace StorageAndTrade_1_0.Документи
         {
             if (BaseRead(uid))
             {
-                Назва = base.FieldValue["docname"]?.ToString() ?? "";
-                ДатаДок = (base.FieldValue["docdate"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["docdate"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
-                НомерДок = base.FieldValue["docnomer"]?.ToString() ?? "";
-                Коментар = base.FieldValue["col_a1"]?.ToString() ?? "";
+                Назва = base.FieldValue["docname"].ToString() ?? "";
+                ДатаДок = (base.FieldValue["docdate"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["docdate"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                НомерДок = base.FieldValue["docnomer"].ToString() ?? "";
+                Коментар = base.FieldValue["col_a1"].ToString() ?? "";
                 Основа = (base.FieldValue["col_a2"] != DBNull.Value) ? (UuidAndText)base.FieldValue["col_a2"] : new UuidAndText();
                 Склад = new Довідники.Склади_Pointer(base.FieldValue["col_a3"]);
                 Автор = new Довідники.Користувачі_Pointer(base.FieldValue["col_a4"]);
                 Організація = new Довідники.Організації_Pointer(base.FieldValue["col_a5"]);
                 Підрозділ = new Довідники.СтруктураПідприємства_Pointer(base.FieldValue["col_a6"]);
-                КлючовіСловаДляПошуку = base.FieldValue["col_a7"]?.ToString() ?? "";
+                КлючовіСловаДляПошуку = base.FieldValue["col_a7"].ToString() ?? "";
                 
                 BaseClear();
                 return true;
@@ -25788,17 +25788,17 @@ namespace StorageAndTrade_1_0.Документи
         {
             if (BaseRead(uid))
             {
-                Назва = base.FieldValue["docname"]?.ToString() ?? "";
-                ДатаДок = (base.FieldValue["docdate"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["docdate"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
-                НомерДок = base.FieldValue["docnomer"]?.ToString() ?? "";
-                Коментар = base.FieldValue["col_a1"]?.ToString() ?? "";
+                Назва = base.FieldValue["docname"].ToString() ?? "";
+                ДатаДок = (base.FieldValue["docdate"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["docdate"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                НомерДок = base.FieldValue["docnomer"].ToString() ?? "";
+                Коментар = base.FieldValue["col_a1"].ToString() ?? "";
                 Основа = (base.FieldValue["col_a2"] != DBNull.Value) ? (UuidAndText)base.FieldValue["col_a2"] : new UuidAndText();
                 Склад = new Довідники.Склади_Pointer(base.FieldValue["col_a3"]);
                 Автор = new Довідники.Користувачі_Pointer(base.FieldValue["col_a4"]);
                 Організація = new Довідники.Організації_Pointer(base.FieldValue["col_a5"]);
                 Підрозділ = new Довідники.СтруктураПідприємства_Pointer(base.FieldValue["col_a6"]);
                 ДокументРеалізації = new Документи.РеалізаціяТоварівТаПослуг_Pointer(base.FieldValue["col_a7"]);
-                КлючовіСловаДляПошуку = base.FieldValue["col_a8"]?.ToString() ?? "";
+                КлючовіСловаДляПошуку = base.FieldValue["col_a8"].ToString() ?? "";
                 
                 BaseClear();
                 return true;
@@ -26315,16 +26315,16 @@ namespace StorageAndTrade_1_0.Документи
         {
             if (BaseRead(uid))
             {
-                Назва = base.FieldValue["docname"]?.ToString() ?? "";
-                НомерДок = base.FieldValue["docnomer"]?.ToString() ?? "";
-                ДатаДок = (base.FieldValue["docdate"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["docdate"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                Назва = base.FieldValue["docname"].ToString() ?? "";
+                НомерДок = base.FieldValue["docnomer"].ToString() ?? "";
+                ДатаДок = (base.FieldValue["docdate"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["docdate"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
                 Організація = new Довідники.Організації_Pointer(base.FieldValue["col_a2"]);
                 Склад = new Довідники.Склади_Pointer(base.FieldValue["col_a1"]);
-                Коментар = base.FieldValue["col_g9"]?.ToString() ?? "";
+                Коментар = base.FieldValue["col_g9"].ToString() ?? "";
                 Автор = new Довідники.Користувачі_Pointer(base.FieldValue["col_a4"]);
                 Підрозділ = new Довідники.СтруктураПідприємства_Pointer(base.FieldValue["col_a3"]);
                 Основа = (base.FieldValue["col_a5"] != DBNull.Value) ? (UuidAndText)base.FieldValue["col_a5"] : new UuidAndText();
-                КлючовіСловаДляПошуку = base.FieldValue["col_a6"]?.ToString() ?? "";
+                КлючовіСловаДляПошуку = base.FieldValue["col_a6"].ToString() ?? "";
                 
                 BaseClear();
                 return true;
@@ -27012,7 +27012,7 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
                 record.UID = (Guid)fieldValue["uid"];
                 record.Period = DateTime.Parse(fieldValue["period"]?.ToString() ?? DateTime.MinValue.ToString());
                 record.Owner = (Guid)fieldValue["owner"];
-                record.Штрихкод = fieldValue["col_a1"]?.ToString() ?? "";
+                record.Штрихкод = fieldValue["col_a1"].ToString() ?? "";
                 record.Номенклатура = new Довідники.Номенклатура_Pointer(fieldValue["col_a2"]);
                 record.ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer(fieldValue["col_a3"]);
                 record.Пакування = new Довідники.ПакуванняОдиниціВиміру_Pointer(fieldValue["col_a4"]);
@@ -27072,7 +27072,7 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
         {
             if (BaseRead(uid))
             {
-                Штрихкод = base.FieldValue["col_a1"]?.ToString() ?? "";
+                Штрихкод = base.FieldValue["col_a1"].ToString() ?? "";
                 Номенклатура = new Довідники.Номенклатура_Pointer(base.FieldValue["col_a2"]);
                 ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer(base.FieldValue["col_a3"]);
                 Пакування = new Довідники.ПакуванняОдиниціВиміру_Pointer(base.FieldValue["col_a4"]);
@@ -27781,7 +27781,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 Record record = new Record();
                 record.UID = (Guid)fieldValue["uid"];
                 
-                record.Період = (fieldValue["col_a1"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a1"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                record.Період = (fieldValue["col_a1"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a1"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
                 record.Номенклатура = new Довідники.Номенклатура_Pointer(fieldValue["col_a2"]);
                 record.ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer(fieldValue["col_a3"]);
                 record.Склад = new Довідники.Склади_Pointer(fieldValue["col_a4"]);
@@ -27872,7 +27872,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 Record record = new Record();
                 record.UID = (Guid)fieldValue["uid"];
                 
-                record.Період = (fieldValue["col_a1"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a1"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                record.Період = (fieldValue["col_a1"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a1"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
                 record.Номенклатура = new Довідники.Номенклатура_Pointer(fieldValue["col_a2"]);
                 record.ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer(fieldValue["col_a3"]);
                 record.Склад = new Довідники.Склади_Pointer(fieldValue["col_a4"]);
@@ -28150,7 +28150,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 Record record = new Record();
                 record.UID = (Guid)fieldValue["uid"];
                 
-                record.Період = (fieldValue["col_a1"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a1"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                record.Період = (fieldValue["col_a1"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a1"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
                 record.ЗамовленняКлієнта = new Документи.ЗамовленняКлієнта_Pointer(fieldValue["col_a2"]);
                 record.Номенклатура = new Довідники.Номенклатура_Pointer(fieldValue["col_a3"]);
                 record.ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer(fieldValue["col_a4"]);
@@ -28318,7 +28318,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 Record record = new Record();
                 record.UID = (Guid)fieldValue["uid"];
                 
-                record.Період = (fieldValue["col_a1"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a1"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                record.Період = (fieldValue["col_a1"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a1"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
                 record.Валюта = new Довідники.Валюти_Pointer(fieldValue["col_a2"]);
                 record.Контрагент = new Довідники.Контрагенти_Pointer(fieldValue["col_a3"]);
                 record.Сума = (fieldValue["col_a4"] != DBNull.Value) ? (decimal)fieldValue["col_a4"] : 0;
@@ -28395,7 +28395,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 Record record = new Record();
                 record.UID = (Guid)fieldValue["uid"];
                 
-                record.Період = (fieldValue["col_a1"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a1"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                record.Період = (fieldValue["col_a1"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a1"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
                 record.Валюта = new Довідники.Валюти_Pointer(fieldValue["col_a2"]);
                 record.Контрагент = new Довідники.Контрагенти_Pointer(fieldValue["col_a3"]);
                 record.СумаПрихід = (fieldValue["col_a4"] != DBNull.Value) ? (decimal)fieldValue["col_a4"] : 0;
@@ -28590,7 +28590,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 Record record = new Record();
                 record.UID = (Guid)fieldValue["uid"];
                 
-                record.Період = (fieldValue["col_a1"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a1"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                record.Період = (fieldValue["col_a1"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a1"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
                 record.Організація = new Довідники.Організації_Pointer(fieldValue["col_a2"]);
                 record.Склад = new Довідники.Склади_Pointer(fieldValue["col_a3"]);
                 record.Контрагент = new Довідники.Контрагенти_Pointer(fieldValue["col_a4"]);
@@ -28704,7 +28704,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 record.ВНаявності = (fieldValue["col_a8"] != DBNull.Value) ? (decimal)fieldValue["col_a8"] : 0;
                 record.ВРезервіЗіСкладу = (fieldValue["col_b1"] != DBNull.Value) ? (decimal)fieldValue["col_b1"] : 0;
                 record.ВРезервіПідЗамовлення = (fieldValue["col_b2"] != DBNull.Value) ? (decimal)fieldValue["col_b2"] : 0;
-                record.ДокументРезерву = (fieldValue["col_a1"] != DBNull.Value) ? Guid.Parse(fieldValue["col_a1"]?.ToString() ?? Guid.Empty.ToString()) : Guid.Empty;
+                record.ДокументРезерву = (fieldValue["col_a1"] != DBNull.Value) ? (Guid)fieldValue["col_a1"] : Guid.Empty;
                 
                 Records.Add(record);
             }
@@ -28786,7 +28786,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 Record record = new Record();
                 record.UID = (Guid)fieldValue["uid"];
                 
-                record.Період = (fieldValue["col_a1"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a1"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                record.Період = (fieldValue["col_a1"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a1"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
                 record.Номенклатура = new Довідники.Номенклатура_Pointer(fieldValue["col_a2"]);
                 record.ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer(fieldValue["col_a3"]);
                 record.Склад = new Довідники.Склади_Pointer(fieldValue["col_a4"]);
@@ -28964,7 +28964,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 Record record = new Record();
                 record.UID = (Guid)fieldValue["uid"];
                 
-                record.Період = (fieldValue["col_a1"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a1"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                record.Період = (fieldValue["col_a1"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a1"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
                 record.ЗамовленняПостачальнику = new Документи.ЗамовленняПостачальнику_Pointer(fieldValue["col_a2"]);
                 record.Номенклатура = new Довідники.Номенклатура_Pointer(fieldValue["col_a3"]);
                 record.ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer(fieldValue["col_a4"]);
@@ -29129,7 +29129,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 Record record = new Record();
                 record.UID = (Guid)fieldValue["uid"];
                 
-                record.Період = (fieldValue["col_a1"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a1"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                record.Період = (fieldValue["col_a1"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a1"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
                 record.Контрагент = new Довідники.Контрагенти_Pointer(fieldValue["col_a2"]);
                 record.Валюта = new Довідники.Валюти_Pointer(fieldValue["col_a3"]);
                 record.Сума = (fieldValue["col_a4"] != DBNull.Value) ? (decimal)fieldValue["col_a4"] : 0;
@@ -29206,7 +29206,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 Record record = new Record();
                 record.UID = (Guid)fieldValue["uid"];
                 
-                record.Період = (fieldValue["col_a1"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a1"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                record.Період = (fieldValue["col_a1"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a1"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
                 record.Контрагент = new Довідники.Контрагенти_Pointer(fieldValue["col_a2"]);
                 record.Валюта = new Довідники.Валюти_Pointer(fieldValue["col_a3"]);
                 record.СумаПрихід = (fieldValue["col_a4"] != DBNull.Value) ? (decimal)fieldValue["col_a4"] : 0;
@@ -29376,7 +29376,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 Record record = new Record();
                 record.UID = (Guid)fieldValue["uid"];
                 
-                record.Період = (fieldValue["col_a1"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a1"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                record.Період = (fieldValue["col_a1"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a1"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
                 record.Організація = new Довідники.Організації_Pointer(fieldValue["col_a2"]);
                 record.Каса = new Довідники.Каси_Pointer(fieldValue["col_a3"]);
                 record.Валюта = new Довідники.Валюти_Pointer(fieldValue["col_a4"]);
@@ -29457,7 +29457,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 Record record = new Record();
                 record.UID = (Guid)fieldValue["uid"];
                 
-                record.Період = (fieldValue["col_a1"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a1"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                record.Період = (fieldValue["col_a1"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a1"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
                 record.Організація = new Довідники.Організації_Pointer(fieldValue["col_a2"]);
                 record.Каса = new Довідники.Каси_Pointer(fieldValue["col_a3"]);
                 record.Валюта = new Довідники.Валюти_Pointer(fieldValue["col_a4"]);
@@ -29734,7 +29734,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 Record record = new Record();
                 record.UID = (Guid)fieldValue["uid"];
                 
-                record.Період = (fieldValue["col_a1"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a1"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                record.Період = (fieldValue["col_a1"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a1"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
                 record.Організація = new Довідники.Організації_Pointer(fieldValue["col_a2"]);
                 record.ПартіяТоварівКомпозит = new Довідники.ПартіяТоварівКомпозит_Pointer(fieldValue["col_a3"]);
                 record.Номенклатура = new Довідники.Номенклатура_Pointer(fieldValue["col_a4"]);
@@ -29837,7 +29837,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 Record record = new Record();
                 record.UID = (Guid)fieldValue["uid"];
                 
-                record.Період = (fieldValue["col_a1"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a1"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                record.Період = (fieldValue["col_a1"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a1"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
                 record.Організація = new Довідники.Організації_Pointer(fieldValue["col_a2"]);
                 record.ПартіяТоварівКомпозит = new Довідники.ПартіяТоварівКомпозит_Pointer(fieldValue["col_a3"]);
                 record.Номенклатура = new Довідники.Номенклатура_Pointer(fieldValue["col_a4"]);
@@ -30061,7 +30061,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 Record record = new Record();
                 record.UID = (Guid)fieldValue["uid"];
                 
-                record.Період = (fieldValue["col_a1"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a1"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                record.Період = (fieldValue["col_a1"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a1"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
                 record.Організація = new Довідники.Організації_Pointer(fieldValue["col_a2"]);
                 record.Склад = new Довідники.Склади_Pointer(fieldValue["col_a3"]);
                 record.Контрагент = new Довідники.Контрагенти_Pointer(fieldValue["col_a4"]);
@@ -30258,7 +30258,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 Record record = new Record();
                 record.UID = (Guid)fieldValue["uid"];
                 
-                record.Період = (fieldValue["col_a1"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a1"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                record.Період = (fieldValue["col_a1"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a1"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
                 record.Номенклатура = new Довідники.Номенклатура_Pointer(fieldValue["col_a2"]);
                 record.ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer(fieldValue["col_a3"]);
                 record.Пакування = new Довідники.ПакуванняОдиниціВиміру_Pointer(fieldValue["col_a4"]);
@@ -30351,7 +30351,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 Record record = new Record();
                 record.UID = (Guid)fieldValue["uid"];
                 
-                record.Період = (fieldValue["col_a1"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a1"]?.ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                record.Період = (fieldValue["col_a1"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a1"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
                 record.Номенклатура = new Довідники.Номенклатура_Pointer(fieldValue["col_a2"]);
                 record.ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer(fieldValue["col_a3"]);
                 record.Пакування = new Довідники.ПакуванняОдиниціВиміру_Pointer(fieldValue["col_a4"]);
