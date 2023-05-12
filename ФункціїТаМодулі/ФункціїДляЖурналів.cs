@@ -26,18 +26,60 @@ limitations under the License.
 Функції для журналів
 
 */
+
 using Gtk;
 
-
+using System.Reflection;
 
 using AccountingSoftware;
-using StorageAndTrade_1_0.Перелічення;
+
+using Перелічення = StorageAndTrade_1_0.Перелічення;
 
 namespace StorageAndTrade
 {
     class ФункціїДляЖурналів
     {
-        public static void ВідкритиСписокДокументів(Widget relative_to, Dictionary<string, string> allowDocument, ТипПеріодуДляЖурналівДокументів periodWhere = 0)
+        /// <summary>
+        /// Функція відкриває журнал
+        /// </summary>
+        /// <param name="typeDoc">Тип</param>
+        /// <param name="unigueID">Елемент для позиціювання</param>
+        /// <param name="periodWhere">Період</param>
+        /// <param name="insertPage">Вставити сторінку</param>
+        public static void ВідкритиЖурналВідповідноДоВиду(string typeJournal, UnigueID? unigueID, Перелічення.ТипПеріодуДляЖурналівДокументів periodWhere = 0, bool insertPage = true)
+        {
+            Assembly ExecutingAssembly = Assembly.GetExecutingAssembly();
+
+            //Простір імен програми
+            string NameSpacePage = "StorageAndTrade";
+
+            object? listPage;
+
+            try
+            {
+                listPage = ExecutingAssembly.CreateInstance($"{NameSpacePage}.Журнал_{typeJournal}");
+            }
+            catch (Exception ex)
+            {
+                Message.Error(Program.GeneralForm, ex.Message);
+                return;
+            }
+
+            if (listPage != null)
+            {
+                //Документ який потрібно виділити в списку
+                listPage.GetType().GetProperty("SelectPointerItem")?.SetValue(listPage, unigueID);
+
+                Program.GeneralForm?.CreateNotebookPage(typeJournal, () => { return (Widget)listPage; }, insertPage);
+
+                if (periodWhere != 0)
+                    listPage.GetType().GetProperty("PeriodWhere")?.SetValue(listPage, periodWhere);
+
+                listPage.GetType().InvokeMember("SetValue", BindingFlags.InvokeMethod, null, listPage, null);
+            }
+        }
+
+        public static void ВідкритиСписокДокументів(Widget relative_to, Dictionary<string, string> allowDocument, Перелічення.ТипПеріодуДляЖурналівДокументів periodWhere = 0)
         {
             VBox vBox = new VBox();
 

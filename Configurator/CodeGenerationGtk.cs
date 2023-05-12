@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 12.05.2023 16:48:21
+ * Дата конфігурації: 12.05.2023 19:35:47
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон Gtk.xslt
@@ -12408,7 +12408,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             List<string> allQuery = new List<string>();
             Dictionary<string, object> paramQuery = new Dictionary<string, object>();
 
-            
+          
               {
                   Query query = new Query(Документи.ЗамовленняПостачальнику_Const.TABLE);
 
@@ -13817,7 +13817,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             string unionAllQuery = string.Join("\nUNION\n", allQuery);
 
             unionAllQuery += "\nORDER BY Дата";
-
+          
             string[] columnsName;
             List<Dictionary<string, object>> listRow;
 
@@ -13863,6 +13863,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                         SelectPath = CurrentPath;
                 }
             }
+          
         }
     }
     #endregion
@@ -13997,7 +13998,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             List<string> allQuery = new List<string>();
             Dictionary<string, object> paramQuery = new Dictionary<string, object>();
 
-            
+          
               {
                   Query query = new Query(Документи.ЗамовленняПостачальнику_Const.TABLE);
 
@@ -14245,7 +14246,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             string unionAllQuery = string.Join("\nUNION\n", allQuery);
 
             unionAllQuery += "\nORDER BY Дата";
-
+          
             string[] columnsName;
             List<Dictionary<string, object>> listRow;
 
@@ -14291,6 +14292,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                         SelectPath = CurrentPath;
                 }
             }
+          
         }
     }
     #endregion
@@ -14439,7 +14441,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             List<string> allQuery = new List<string>();
             Dictionary<string, object> paramQuery = new Dictionary<string, object>();
 
-            
+          
               {
                   Query query = new Query(Документи.ЗамовленняКлієнта_Const.TABLE);
 
@@ -14844,7 +14846,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             string unionAllQuery = string.Join("\nUNION\n", allQuery);
 
             unionAllQuery += "\nORDER BY Дата";
-
+          
             string[] columnsName;
             List<Dictionary<string, object>> listRow;
 
@@ -14890,6 +14892,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                         SelectPath = CurrentPath;
                 }
             }
+          
         }
     }
     #endregion
@@ -15017,7 +15020,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             List<string> allQuery = new List<string>();
             Dictionary<string, object> paramQuery = new Dictionary<string, object>();
 
-            
+          
               {
                   Query query = new Query(Документи.ПрихіднийКасовийОрдер_Const.TABLE);
 
@@ -15184,7 +15187,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             string unionAllQuery = string.Join("\nUNION\n", allQuery);
 
             unionAllQuery += "\nORDER BY Дата";
-
+          
             string[] columnsName;
             List<Dictionary<string, object>> listRow;
 
@@ -15230,6 +15233,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                         SelectPath = CurrentPath;
                 }
             }
+          
         }
     }
     #endregion
@@ -15362,7 +15366,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             List<string> allQuery = new List<string>();
             Dictionary<string, object> paramQuery = new Dictionary<string, object>();
 
-            
+          
               {
                   Query query = new Query(Документи.ПереміщенняТоварів_Const.TABLE);
 
@@ -15600,7 +15604,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             string unionAllQuery = string.Join("\nUNION\n", allQuery);
 
             unionAllQuery += "\nORDER BY Дата";
-
+          
             string[] columnsName;
             List<Dictionary<string, object>> listRow;
 
@@ -15640,6 +15644,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                         SelectPath = CurrentPath;
                 }
             }
+          
         }
     }
     #endregion
@@ -15769,7 +15774,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             List<string> allQuery = new List<string>();
             Dictionary<string, object> paramQuery = new Dictionary<string, object>();
 
-            
+          
               {
                   Query query = new Query(Документи.РозміщенняТоварівНаСкладі_Const.TABLE);
 
@@ -15990,7 +15995,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             string unionAllQuery = string.Join("\nUNION\n", allQuery);
 
             unionAllQuery += "\nORDER BY Дата";
-
+          
             string[] columnsName;
             List<Dictionary<string, object>> listRow;
 
@@ -16028,6 +16033,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                         SelectPath = CurrentPath;
                 }
             }
+          
         }
     }
     #endregion
