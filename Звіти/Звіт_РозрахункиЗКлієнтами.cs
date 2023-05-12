@@ -299,6 +299,10 @@ ORDER BY Контрагент_Назва
             КолонкиДаних.Add("Контрагент_Назва", "Контрагент");
             КолонкиДаних.Add("Валюта_Назва", "Валюта");
 
+            Dictionary<string, string> ТипиДаних = new Dictionary<string, string>();
+            ТипиДаних.Add("Контрагент_Назва", new Контрагенти_Pointer().GetBasis().Text);
+            ТипиДаних.Add("Валюта_Назва", new Валюти_Pointer().GetBasis().Text);
+
             Dictionary<string, float> ПозиціяТекстуВКолонці = new Dictionary<string, float>();
             ПозиціяТекстуВКолонці.Add("Сума", 1);
 
@@ -318,7 +322,7 @@ ORDER BY Контрагент_Назва
             TreeView treeView = new TreeView(listStore);
             treeView.ButtonPressEvent += ФункціїДляЗвітів.OpenPageDirectoryOrDocument;
 
-            ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних, ПозиціяТекстуВКолонці, ФункціяДляКолонки);
+            ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних, ТипиДаних, ПозиціяТекстуВКолонці, ФункціяДляКолонки);
             ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, columnsName, listRow);
 
             ФункціїДляЗвітів.CreateReportNotebookPage(reportNotebook, "Залишки", ВідобразитиФільтр("Залишки", Фільтр), treeView, Залишки, Фільтр, refreshPage);
@@ -492,6 +496,10 @@ ORDER BY Контрагент_Назва, Валюта_Назва
             КолонкиДаних.Add("Контрагент_Назва", "Контрагент");
             КолонкиДаних.Add("Валюта_Назва", "Валюта");
 
+            Dictionary<string, string> ТипиДаних = new Dictionary<string, string>();
+            ТипиДаних.Add("Контрагент_Назва", new Контрагенти_Pointer().GetBasis().Text);
+            ТипиДаних.Add("Валюта_Назва", new Валюти_Pointer().GetBasis().Text);
+
             Dictionary<string, float> ПозиціяТекстуВКолонці = new Dictionary<string, float>();
             ПозиціяТекстуВКолонці.Add("ПочатковийЗалишок", 1);
             ПозиціяТекстуВКолонці.Add("Прихід", 1);
@@ -519,7 +527,7 @@ ORDER BY Контрагент_Назва, Валюта_Назва
             TreeView treeView = new TreeView(listStore);
             treeView.ButtonPressEvent += ФункціїДляЗвітів.OpenPageDirectoryOrDocument;
 
-            ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних, ПозиціяТекстуВКолонці, ФункціяДляКолонки);
+            ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних, ТипиДаних, ПозиціяТекстуВКолонці, ФункціяДляКолонки);
             ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, columnsName, listRow);
 
             ФункціїДляЗвітів.CreateReportNotebookPage(reportNotebook, "Залишки та обороти", ВідобразитиФільтр("ЗалишкиТаОбороти", Фільтр), treeView, ЗалишкиТаОбороти, Фільтр, refreshPage);
@@ -666,6 +674,11 @@ ORDER BY period ASC
             КолонкиДаних.Add("Контрагент_Назва", "Контрагент");
             КолонкиДаних.Add("Валюта_Назва", "Валюта");
 
+            Dictionary<string, string> ТипиДаних = new Dictionary<string, string>();
+            ТипиДаних.Add("Документ", "Документ.*");
+            ТипиДаних.Add("Контрагент_Назва", new Контрагенти_Pointer().GetBasis().Text);
+            ТипиДаних.Add("Валюта_Назва", new Валюти_Pointer().GetBasis().Text);
+
             Dictionary<string, float> ПозиціяТекстуВКолонці = new Dictionary<string, float>();
             ПозиціяТекстуВКолонці.Add("income", 0.5f);
             ПозиціяТекстуВКолонці.Add("Сума", 1);
@@ -688,7 +701,7 @@ ORDER BY period ASC
             TreeView treeView = new TreeView(listStore);
             treeView.ButtonPressEvent += ФункціїДляЗвітів.OpenPageDirectoryOrDocument;
 
-            ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних, ПозиціяТекстуВКолонці, ФункціяДляКолонки);
+            ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних, ТипиДаних, ПозиціяТекстуВКолонці, ФункціяДляКолонки);
             ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, columnsName, listRow);
 
             ФункціїДляЗвітів.CreateReportNotebookPage(reportNotebook, "Документи", ВідобразитиФільтр("Документи", Фільтр), treeView, Документи, Фільтр, refreshPage);

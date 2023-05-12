@@ -20,11 +20,9 @@ limitations under the License.
 Адреса:   Україна, м. Львів
 Сайт:     accounting.org.ua
 */
+using Gtk;
 
-/*
- 
-
-*/
+using System.Reflection;
 
 using AccountingSoftware;
 
@@ -34,8 +32,6 @@ using StorageAndTrade_1_0.Довідники;
 using Перелічення = StorageAndTrade_1_0.Перелічення;
 using Константи = StorageAndTrade_1_0.Константи;
 
-using StorageAndTrade_1_0.Документи;
-
 namespace StorageAndTrade
 {
     /// <summary>
@@ -43,137 +39,50 @@ namespace StorageAndTrade
     /// </summary>
     class ФункціїДляДовідників
     {
-        /*
-        !!! Функція перенесена із звіту і потребує доробки
-        */
+
+        /// <summary>
+        /// Функція відкриває список довідника і позиціонує на вибраний елемент
+        /// </summary>
+        /// <param name="typeDir">Тип</param>
+        /// <param name="unigueID">Елемент для позиціонування</param>
         public static void ВідкритиДовідникВідповідноДоВиду(string typeDir, UnigueID unigueID)
         {
-            switch (typeDir)
+            Assembly ExecutingAssembly = Assembly.GetExecutingAssembly();
+
+            //Простір імен програми
+            string NameSpacePage = "StorageAndTrade";
+
+            //Простір імен конфігурації
+            string NameSpaceConfig = "StorageAndTrade_1_0.Довідники";
+
+            object? listPage;
+
+            try
             {
-                case "Організація":
-                case "Організація_Назва":
-                    {
-                        Організації page = new Організації() { SelectPointerItem = unigueID };
-                        Program.GeneralForm?.CreateNotebookPage($"{Організації_Const.FULLNAME}", () => { return page; }, true);
-                        page.LoadRecords();
+                listPage = ExecutingAssembly.CreateInstance($"{NameSpacePage}.{typeDir}");
+            }
+            catch (Exception ex)
+            {
+                Message.Error(Program.GeneralForm, ex.Message);
+                return;
+            }
 
-                        break;
-                    }
-                case "Номенклатура":
-                case "Номенклатура_Назва":
-                    {
-                        Номенклатура page = new Номенклатура() { SelectPointerItem = unigueID };
-                        Program.GeneralForm?.CreateNotebookPage($"{Номенклатура_Const.FULLNAME}", () => { return page; }, true);
-                        page.LoadRecords();
+            if (listPage != null)
+            {
+                //Довідник який потрібно виділити в списку
+                listPage.GetType().GetProperty("SelectPointerItem")?.SetValue(listPage, unigueID);
 
-                        break;
-                    }
-                case "ХарактеристикаНоменклатури_Назва":
-                    {
-                        ХарактеристикиНоменклатури page = new ХарактеристикиНоменклатури() { SelectPointerItem = unigueID };
-                        Program.GeneralForm?.CreateNotebookPage($"{ХарактеристикиНоменклатури_Const.FULLNAME}", () => { return page; }, true);
-                        page.LoadRecords();
+                //Заголовок журналу з константи конфігурації
+                string listName = "Список документів";
+                {
+                    Type? documentConst = Type.GetType($"{NameSpaceConfig}.{typeDir}_Const");
+                    if (documentConst != null)
+                        listName = documentConst.GetField("FULLNAME")?.GetValue(null)?.ToString() ?? listName;
+                }
 
-                        break;
-                    }
-                case "Серія_Номер":
-                    {
-                        СеріїНоменклатури page = new СеріїНоменклатури() { SelectPointerItem =unigueID };
-                        Program.GeneralForm?.CreateNotebookPage($"{СеріїНоменклатури_Const.FULLNAME}", () => { return page; }, true);
-                        page.LoadRecords();
+                Program.GeneralForm?.CreateNotebookPage(listName, () => { return (Widget)listPage; }, true);
 
-                        break;
-                    }
-                case "Контрагент_Назва":
-                    {
-                        Контрагенти page = new Контрагенти() { SelectPointerItem = unigueID };
-                        Program.GeneralForm?.CreateNotebookPage($"{Контрагенти_Const.FULLNAME}", () => { return page; }, true);
-                        page.LoadRecords();
-
-                        break;
-                    }
-                case "Договір_Назва":
-                    {
-                        ДоговориКонтрагентів page = new ДоговориКонтрагентів() { SelectPointerItem = unigueID };
-                        Program.GeneralForm?.CreateNotebookPage($"{ДоговориКонтрагентів_Const.FULLNAME}", () => { return page; }, true);
-                        page.LoadRecords();
-
-                        break;
-                    }
-                case "Валюта_Назва":
-                    {
-                        Валюти page = new Валюти() { SelectPointerItem = unigueID };
-                        Program.GeneralForm?.CreateNotebookPage($"{Валюти_Const.FULLNAME}", () => { return page; }, true);
-                        page.LoadRecords();
-
-                        break;
-                    }
-                case "Каса_Назва":
-                    {
-                        Каси page = new Каси() { SelectPointerItem = unigueID };
-                        Program.GeneralForm?.CreateNotebookPage($"{Каси_Const.FULLNAME}", () => { return page; }, true);
-                        page.LoadRecords();
-
-                        break;
-                    }
-                case "Склад_Назва":
-                    {
-                        Склади page = new Склади() { SelectPointerItem = unigueID };
-                        Program.GeneralForm?.CreateNotebookPage($"{Склади_Const.FULLNAME}", () => { return page; }, true);
-                        page.LoadRecords();
-
-                        break;
-                    }
-                case "ПартіяТоварівКомпозит_Назва":
-                    {
-                        ПартіяТоварівКомпозит page = new ПартіяТоварівКомпозит() { SelectPointerItem = unigueID };
-                        Program.GeneralForm?.CreateNotebookPage($"{ПартіяТоварівКомпозит_Const.FULLNAME}", () => { return page; }, true);
-                        page.LoadRecords();
-
-                        break;
-                    }
-                /* -> два документи в довідниках */
-                case "ЗамовленняКлієнта_Назва":
-                    {
-                        ЗамовленняКлієнта page = new ЗамовленняКлієнта() { SelectPointerItem = unigueID };
-                        Program.GeneralForm?.CreateNotebookPage($"{ЗамовленняКлієнта_Const.FULLNAME}", () => { return page; }, true);
-                        page.LoadRecords();
-
-                        break;
-                    }
-                case "ЗамовленняПостачальнику_Назва":
-                    {
-                        ЗамовленняПостачальнику page = new ЗамовленняПостачальнику() { SelectPointerItem = unigueID };
-                        Program.GeneralForm?.CreateNotebookPage($"{ЗамовленняПостачальнику_Const.FULLNAME}", () => { return page; }, true);
-                        page.LoadRecords();
-
-                        break;
-                    }
-                /* <- два документи в довідниках */
-                case "Пакування_Назва":
-                    {
-                        ПакуванняОдиниціВиміру page = new ПакуванняОдиниціВиміру() { SelectPointerItem = unigueID };
-                        Program.GeneralForm?.CreateNotebookPage($"{ПакуванняОдиниціВиміру_Const.FULLNAME}", () => { return page; }, true);
-                        page.LoadRecords();
-
-                        break;
-                    }
-                case "Комірка_Назва":
-                    {
-                        СкладськіКомірки page = new СкладськіКомірки() { SelectPointerItem = unigueID };
-                        Program.GeneralForm?.CreateNotebookPage($"{СкладськіКомірки_Const.FULLNAME}", () => { return page; }, true);
-                        page.LoadRecords();
-
-                        break;
-                    }
-                case "Приміщення_Назва":
-                    {
-                        СкладськіПриміщення page = new СкладськіПриміщення() { SelectPointerItem = unigueID };
-                        Program.GeneralForm?.CreateNotebookPage($"{СкладськіПриміщення_Const.FULLNAME}", () => { return page; }, true);
-                        page.LoadRecords();
-
-                        break;
-                    }
+                listPage.GetType().InvokeMember("LoadRecords", BindingFlags.InvokeMethod, null, listPage, null);
             }
         }
 

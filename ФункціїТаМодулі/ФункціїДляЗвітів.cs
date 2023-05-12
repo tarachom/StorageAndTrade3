@@ -50,27 +50,34 @@ namespace StorageAndTrade
                     //  @Name це назва колонки 
                     //  @Value - номер колонки з даними
                     //
-                    NameValue<int> valueDataColumn = (NameValue<int>)treeColumn.Data["Column"]!;
-                    string valueCell = treeView.Model.GetValue(iter, valueDataColumn.Value).ToString()!;
+
+                    //Два ключі Column і ColumnDataNum йдуть в парі
+                    string columnName = treeColumn.Data["Column"]?.ToString() ?? "";
+                    int columnDataNum = int.Parse(treeColumn.Data["ColumnDataNum"]?.ToString() ?? "0");
+
+                    //Тип даних (Документи.*, Документи.<Назва>, Довідники.*, Довідники.<Назва>)
+                    string columnDataType = treeColumn.Data["ColumnDataType"]?.ToString() ?? "";
+
+                    string valueDataCell = treeView.Model.GetValue(iter, columnDataNum).ToString()!;
 
                     //
-                    //Вміст колонки може бути двох видів:
+                    //Вміст колонки даних може бути двох видів:
                     // 1. Guid
-                    // 2. Guid:ВидДокументу
+                    // 2. Guid:Вид (Документу або Довідника)
                     // 
 
-                    string uid, uid_text = "";
-                    if (valueCell.IndexOf(":") != -1)
+                    string uid, vyd = "";
+                    if (valueDataCell.IndexOf(":") != -1)
                     {
-                        // 2. Guid:ВидДокументу
-                        string[] uid_and_text = valueCell.Split(":", StringSplitOptions.None);
+                        // 2. Guid:Вид
+                        string[] uid_and_text = valueDataCell.Split(":");
                         uid = uid_and_text[0];
-                        uid_text = uid_and_text[1];
+                        vyd = uid_and_text[1];
                     }
                     else
                     {
                         // 1. Guid
-                        uid = valueCell;
+                        uid = valueDataCell;
                     }
 
                     Guid guid;
@@ -81,14 +88,27 @@ namespace StorageAndTrade
                     if (unigueID.IsEmpty())
                         return;
 
-                    if (valueDataColumn.Name == "Документ")
+                    //
+                    //Тип даних (Документи.*, Документи.<Назва>, Довідники.*, Довідники.<Назва>)
+                    //
+
+                    string pointer, type = "";
+                    if (columnDataType.IndexOf(".") != -1)
                     {
-                        ФункціїДляЖурналів.ВідкритиЖурналВідповідноДоВидуДокументу(uid_text, new UnigueID(uid));
+                        string[] pointer_and_type = columnDataType.Split(".");
+                        pointer = pointer_and_type[0];
+                        type = pointer_and_type[1];
                     }
                     else
-                    {
-                        ФункціїДляДовідників.ВідкритиДовідникВідповідноДоВиду(valueDataColumn.Name, unigueID);
-                    }
+                        return;
+
+                    if ((type == "" || type == "*") && vyd != "")
+                        type = vyd;
+
+                    if (pointer == "Документи")
+                        ФункціїДляЖурналів.ВідкритиЖурналВідповідноДоВидуДокументу(type, new UnigueID(uid));
+                    else if (pointer == "Довідники")
+                        ФункціїДляДовідників.ВідкритиДовідникВідповідноДоВиду(type, unigueID);
                 }
             }
         }
@@ -112,6 +132,7 @@ namespace StorageAndTrade
             string[] columnsName,
             Dictionary<string, string> visibleColumns,
             Dictionary<string, string>? dataColumns = null,
+            Dictionary<string, string>? typeDataColumns = null,
             Dictionary<string, float>? xalignColumns = null,
             Dictionary<string, TreeCellDataFunc>? columnCellDataFunc = null)
         {
@@ -120,16 +141,18 @@ namespace StorageAndTrade
                 string columnName = columnsName[i];
 
                 //Видимість колонки
-                bool isVisibleColumn = visibleColumns.ContainsKey(columnName);
+                bool visible = visibleColumns.ContainsKey(columnName);
+
+                //Назва колонки
+                string title = visible ? visibleColumns[columnName] : columnName;
 
                 //Позиція тексту в колонці (0 .. 1)
-                float xalign = xalignColumns != null ? (xalignColumns.ContainsKey(columnName) ? xalignColumns[columnName] : 0) : 0;
+                float xalign = visible ? (xalignColumns != null && xalignColumns.ContainsKey(columnName) ? xalignColumns[columnName] : 0) : 0;
 
                 CellRendererText cellRendererText = new CellRendererText() { Xalign = xalign };
-
-                TreeViewColumn treeColumn = new TreeViewColumn(isVisibleColumn ? visibleColumns[columnName] : columnName, cellRendererText, "text", i)
+                TreeViewColumn treeColumn = new TreeViewColumn(title, cellRendererText, "text", i)
                 {
-                    Visible = isVisibleColumn,
+                    Visible = visible,
                     Alignment = xalign,
                     Resizable = true,
                     MinWidth = 20
@@ -139,13 +162,18 @@ namespace StorageAndTrade
                 // Привязка колонки з даними до видимої колонки
                 //
 
-                if (dataColumns != null && dataColumns.ContainsKey(columnName))
+                if (visible && (dataColumns != null && dataColumns.ContainsKey(columnName)))
                 {
                     string dataColumName = dataColumns[columnName];
                     for (int j = 0; j < columnsName.Length; j++)
                         if (dataColumName == columnsName[j])
                         {
-                            treeColumn.Data.Add("Column", new NameValue<int>(columnName, j));
+                            treeColumn.Data.Add("Column", columnName);
+                            treeColumn.Data.Add("ColumnDataNum", j);
+
+                            //Тип колонки з даними
+                            if (typeDataColumns != null && typeDataColumns.ContainsKey(columnName))
+                                treeColumn.Data.Add("ColumnDataType", typeDataColumns[columnName]);
                             break;
                         }
                 }
@@ -154,7 +182,7 @@ namespace StorageAndTrade
                 //Функція обробки ячейки для видимої колонки
                 //
 
-                if (columnCellDataFunc != null && isVisibleColumn && columnCellDataFunc.ContainsKey(columnName))
+                if (visible && columnCellDataFunc != null && columnCellDataFunc.ContainsKey(columnName))
                 {
                     treeColumn.Data.Add("CellDataFunc", columnName);
                     treeColumn.SetCellDataFunc(cellRendererText, columnCellDataFunc[columnName]);

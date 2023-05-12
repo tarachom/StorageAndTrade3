@@ -442,6 +442,14 @@ ORDER BY Організація_Назва, ПартіяТоварівКомпо
             if (Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const) КолонкиДаних.Add("Серія_Номер", "Серія");
             КолонкиДаних.Add("Склад_Назва", "Склад");
 
+            Dictionary<string, string> ТипиДаних = new Dictionary<string, string>();
+            ТипиДаних.Add("Організація_Назва", new Організації_Pointer().GetBasis().Text);
+            ТипиДаних.Add("ПартіяТоварівКомпозит_Назва", new ПартіяТоварівКомпозит_Pointer().GetBasis().Text);
+            ТипиДаних.Add("Номенклатура_Назва", new Номенклатура_Pointer().GetBasis().Text);
+            ТипиДаних.Add("ХарактеристикаНоменклатури_Назва", new ХарактеристикиНоменклатури_Pointer().GetBasis().Text);
+            ТипиДаних.Add("Серія_Номер", new СеріїНоменклатури_Pointer().GetBasis().Text);
+            ТипиДаних.Add("Склад_Назва", new Склади_Pointer().GetBasis().Text);
+
             Dictionary<string, float> ПозиціяТекстуВКолонці = new Dictionary<string, float>();
             ПозиціяТекстуВКолонці.Add("Рядок", 0.1f);
             ПозиціяТекстуВКолонці.Add("Кількість", 1);
@@ -465,7 +473,7 @@ ORDER BY Організація_Назва, ПартіяТоварівКомпо
             TreeView treeView = new TreeView(listStore);
             treeView.ButtonPressEvent += ФункціїДляЗвітів.OpenPageDirectoryOrDocument;
 
-            ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних, ПозиціяТекстуВКолонці, ФункціяДляКолонки);
+            ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних, ТипиДаних, ПозиціяТекстуВКолонці, ФункціяДляКолонки);
             ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, columnsName, listRow);
 
             ФункціїДляЗвітів.CreateReportNotebookPage(reportNotebook, "Залишки", ВідобразитиФільтр("Залишки", Фільтр), treeView, Залишки, Фільтр, refreshPage);
@@ -786,6 +794,12 @@ ORDER BY Організація_Назва, ПартіяТоварівКомпо
             if (Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const) КолонкиДаних.Add("Серія_Номер", "Серія");
             КолонкиДаних.Add("Склад_Назва", "Склад");
 
+            Dictionary<string, string> ТипиДаних = new Dictionary<string, string>();
+            ТипиДаних.Add("Номенклатура_Назва", new Номенклатура_Pointer().GetBasis().Text);
+            ТипиДаних.Add("ХарактеристикаНоменклатури_Назва", new ХарактеристикиНоменклатури_Pointer().GetBasis().Text);
+            ТипиДаних.Add("Серія_Номер", new СеріїНоменклатури_Pointer().GetBasis().Text);
+            ТипиДаних.Add("Склад_Назва", new Склади_Pointer().GetBasis().Text);
+
             Dictionary<string, float> ПозиціяТекстуВКолонці = new Dictionary<string, float>();
             ПозиціяТекстуВКолонці.Add("Рядок", 0.1f);
             ПозиціяТекстуВКолонці.Add("КількістьПочатковийЗалишок", 1);
@@ -823,7 +837,7 @@ ORDER BY Організація_Назва, ПартіяТоварівКомпо
             TreeView treeView = new TreeView(listStore);
             treeView.ButtonPressEvent += ФункціїДляЗвітів.OpenPageDirectoryOrDocument;
 
-            ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних, ПозиціяТекстуВКолонці, ФункціяДляКолонки);
+            ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних, ТипиДаних, ПозиціяТекстуВКолонці, ФункціяДляКолонки);
             ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, columnsName, listRow);
 
             ФункціїДляЗвітів.CreateReportNotebookPage(reportNotebook, "Залишки та обороти", ВідобразитиФільтр("ЗалишкиТаОбороти", Фільтр), treeView, ЗалишкиТаОбороти, Фільтр, refreshPage);
@@ -1072,6 +1086,15 @@ ORDER BY period ASC, Організація_Назва,
             if (Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const) КолонкиДаних.Add("Серія_Номер", "Серія");
             КолонкиДаних.Add("Склад_Назва", "Склад");
 
+            Dictionary<string, string> ТипиДаних = new Dictionary<string, string>();
+            ТипиДаних.Add("Документ", "Документи.*");
+            ТипиДаних.Add("Організація_Назва", new Організації_Pointer().GetBasis().Text);
+            ТипиДаних.Add("ПартіяТоварівКомпозит_Назва", new ПартіяТоварівКомпозит_Pointer().GetBasis().Text);
+            ТипиДаних.Add("Номенклатура_Назва", new Номенклатура_Pointer().GetBasis().Text);
+            ТипиДаних.Add("ХарактеристикаНоменклатури_Назва", new ХарактеристикиНоменклатури_Pointer().GetBasis().Text);
+            ТипиДаних.Add("Серія_Номер", new СеріїНоменклатури_Pointer().GetBasis().Text);
+            ТипиДаних.Add("Склад_Назва", new Склади_Pointer().GetBasis().Text);
+
             Dictionary<string, float> ПозиціяТекстуВКолонці = new Dictionary<string, float>();
             ПозиціяТекстуВКолонці.Add("income", 0.5f);
             ПозиціяТекстуВКолонці.Add("Рядок", 0.1f);
@@ -1098,7 +1121,7 @@ ORDER BY period ASC, Організація_Назва,
             TreeView treeView = new TreeView(listStore);
             treeView.ButtonPressEvent += ФункціїДляЗвітів.OpenPageDirectoryOrDocument;
 
-            ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних, ПозиціяТекстуВКолонці, ФункціяДляКолонки);
+            ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних, ТипиДаних, ПозиціяТекстуВКолонці, ФункціяДляКолонки);
             ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, columnsName, listRow);
 
             ФункціїДляЗвітів.CreateReportNotebookPage(reportNotebook, "Документи", ВідобразитиФільтр("Документи", Фільтр), treeView, Документи, Фільтр, refreshPage);
@@ -1123,7 +1146,7 @@ ORDER BY period ASC, Організація_Назва,
                             float result;
                             if (float.TryParse(cellText.Text, out result))
                                 cellText.Foreground = (result >= 0) ? "green" : "red";
-                                
+
                             break;
                         }
                 }

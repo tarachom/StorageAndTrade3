@@ -62,6 +62,18 @@ namespace StorageAndTrade
             return columns;
         }
 
+        public static Dictionary<string, string> ТовариНаСкладах_ТипиДаних()
+        {
+            Dictionary<string, string> columns = new Dictionary<string, string>();
+
+            columns.Add("Номенклатура_Назва", new Номенклатура_Pointer().GetBasis().Text);
+            columns.Add("ХарактеристикаНоменклатури_Назва", new ХарактеристикиНоменклатури_Pointer().GetBasis().Text);
+            columns.Add("Серія_Номер", new СеріїНоменклатури_Pointer().GetBasis().Text);
+            columns.Add("Склад_Назва", new Склади_Pointer().GetBasis().Text);
+
+            return columns;
+        }
+
         public static Dictionary<string, float> ТовариНаСкладах_ПозиціяТекстуВКолонці()
         {
             Dictionary<string, float> columns = new Dictionary<string, float>();
@@ -154,6 +166,20 @@ ORDER BY Номенклатура_Назва
             return columns;
         }
 
+        public static Dictionary<string, string> ПартіїТоварів_ТипиДаних()
+        {
+            Dictionary<string, string> columns = new Dictionary<string, string>();
+
+            columns.Add("Організація_Назва", new Організації_Pointer().GetBasis().Text);
+            columns.Add("ПартіяТоварівКомпозит_Назва", new ПартіяТоварівКомпозит_Pointer().GetBasis().Text);
+            columns.Add("Номенклатура_Назва", new Номенклатура_Pointer().GetBasis().Text);
+            columns.Add("ХарактеристикаНоменклатури_Назва", new ХарактеристикиНоменклатури_Pointer().GetBasis().Text);
+            columns.Add("Серія_Номер", new СеріїНоменклатури_Pointer().GetBasis().Text);
+            columns.Add("Склад_Назва", new Склади_Pointer().GetBasis().Text);
+
+            return columns;
+        }
+
         public static Dictionary<string, float> ПартіїТоварів_ПозиціяТекстуВКолонці()
         {
             Dictionary<string, float> columns = new Dictionary<string, float>();
@@ -226,70 +252,70 @@ ORDER BY Організація_Назва
         #endregion
 
         #region РухТоварів
-/*
-        public static Dictionary<string, string> РухТоварів_ВидиміКолонки()
-        {
-            Dictionary<string, string> columns = new Dictionary<string, string>();
+        /*
+                public static Dictionary<string, string> РухТоварів_ВидиміКолонки()
+                {
+                    Dictionary<string, string> columns = new Dictionary<string, string>();
 
-            columns.Add("income", "Рух");
-            columns.Add("period", "Період");
-            columns.Add("Номенклатура_Назва", "Номенклатура");
-            if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const) columns.Add("ХарактеристикаНоменклатури_Назва", "Характеристика");
-            columns.Add("Склад_Назва", "Склад");
-            columns.Add("Кількість", "Кількість");
+                    columns.Add("income", "Рух");
+                    columns.Add("period", "Період");
+                    columns.Add("Номенклатура_Назва", "Номенклатура");
+                    if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const) columns.Add("ХарактеристикаНоменклатури_Назва", "Характеристика");
+                    columns.Add("Склад_Назва", "Склад");
+                    columns.Add("Кількість", "Кількість");
 
-            return columns;
-        }
+                    return columns;
+                }
 
-        public static Dictionary<string, string> РухТоварів_КолонкиДаних()
-        {
-            Dictionary<string, string> columns = new Dictionary<string, string>();
+                public static Dictionary<string, string> РухТоварів_КолонкиДаних()
+                {
+                    Dictionary<string, string> columns = new Dictionary<string, string>();
 
-            columns.Add("Номенклатура_Назва", "Номенклатура");
-            if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const) columns.Add("ХарактеристикаНоменклатури_Назва", "ХарактеристикаНоменклатури");
-            columns.Add("Склад_Назва", "Склад");
+                    columns.Add("Номенклатура_Назва", "Номенклатура");
+                    if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const) columns.Add("ХарактеристикаНоменклатури_Назва", "ХарактеристикаНоменклатури");
+                    columns.Add("Склад_Назва", "Склад");
 
-            return columns;
-        }
+                    return columns;
+                }
 
-        public static Dictionary<string, float> РухТоварів_ПозиціяТекстуВКолонці()
-        {
-            Dictionary<string, float> columns = new Dictionary<string, float>();
+                public static Dictionary<string, float> РухТоварів_ПозиціяТекстуВКолонці()
+                {
+                    Dictionary<string, float> columns = new Dictionary<string, float>();
 
-            columns.Add("income", 0.5f);
-            columns.Add("Кількість", 1);
+                    columns.Add("income", 0.5f);
+                    columns.Add("Кількість", 1);
 
-            return columns;
-        }
+                    return columns;
+                }
 
-        public static string РухТоварів_Запит = $@"
-SELECT 
-    (CASE WHEN Рег_РухТоварів.income = true THEN '+' ELSE '-' END) AS income,
-    Рег_РухТоварів.period, 
-    Рег_РухТоварів.{РухТоварів_Const.Номенклатура} AS Номенклатура, 
-    Довідник_Номенклатура.{Номенклатура_Const.Назва} AS Номенклатура_Назва, 
-    Рег_РухТоварів.{РухТоварів_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
-    Довідник_ХарактеристикиНоменклатури.{ХарактеристикиНоменклатури_Const.Назва} AS ХарактеристикаНоменклатури_Назва, 
-    Рег_РухТоварів.{РухТоварів_Const.Склад} AS Склад,
-    Довідник_Склади.{Склади_Const.Назва} AS Склад_Назва,
-    Рег_РухТоварів.{РухТоварів_Const.Кількість} AS Кількість
-FROM 
-    {РухТоварів_Const.TABLE} AS Рег_РухТоварів
+                public static string РухТоварів_Запит = $@"
+        SELECT 
+            (CASE WHEN Рег_РухТоварів.income = true THEN '+' ELSE '-' END) AS income,
+            Рег_РухТоварів.period, 
+            Рег_РухТоварів.{РухТоварів_Const.Номенклатура} AS Номенклатура, 
+            Довідник_Номенклатура.{Номенклатура_Const.Назва} AS Номенклатура_Назва, 
+            Рег_РухТоварів.{РухТоварів_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
+            Довідник_ХарактеристикиНоменклатури.{ХарактеристикиНоменклатури_Const.Назва} AS ХарактеристикаНоменклатури_Назва, 
+            Рег_РухТоварів.{РухТоварів_Const.Склад} AS Склад,
+            Довідник_Склади.{Склади_Const.Назва} AS Склад_Назва,
+            Рег_РухТоварів.{РухТоварів_Const.Кількість} AS Кількість
+        FROM 
+            {РухТоварів_Const.TABLE} AS Рег_РухТоварів
 
-    LEFT JOIN {Номенклатура_Const.TABLE} AS Довідник_Номенклатура ON Довідник_Номенклатура.uid = 
-        Рег_РухТоварів.{РухТоварів_Const.Номенклатура}
+            LEFT JOIN {Номенклатура_Const.TABLE} AS Довідник_Номенклатура ON Довідник_Номенклатура.uid = 
+                Рег_РухТоварів.{РухТоварів_Const.Номенклатура}
 
-    LEFT JOIN {ХарактеристикиНоменклатури_Const.TABLE} AS Довідник_ХарактеристикиНоменклатури ON Довідник_ХарактеристикиНоменклатури.uid = 
-        Рег_РухТоварів.{РухТоварів_Const.ХарактеристикаНоменклатури}
+            LEFT JOIN {ХарактеристикиНоменклатури_Const.TABLE} AS Довідник_ХарактеристикиНоменклатури ON Довідник_ХарактеристикиНоменклатури.uid = 
+                Рег_РухТоварів.{РухТоварів_Const.ХарактеристикаНоменклатури}
 
-    LEFT JOIN {Склади_Const.TABLE} AS Довідник_Склади ON Довідник_Склади.uid = 
-       Рег_РухТоварів.{РухТоварів_Const.Склад}
-WHERE
-    Рег_РухТоварів.Owner = @ДокументВказівник
-ORDER BY Номенклатура_Назва
-";
+            LEFT JOIN {Склади_Const.TABLE} AS Довідник_Склади ON Довідник_Склади.uid = 
+               Рег_РухТоварів.{РухТоварів_Const.Склад}
+        WHERE
+            Рег_РухТоварів.Owner = @ДокументВказівник
+        ORDER BY Номенклатура_Назва
+        ";
 
-*/
+        */
         #endregion
 
         #region ЗамовленняКлієнтів
@@ -318,6 +344,18 @@ ORDER BY Номенклатура_Назва
             columns.Add("Номенклатура_Назва", "Номенклатура");
             if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const) columns.Add("ХарактеристикаНоменклатури_Назва", "ХарактеристикаНоменклатури");
             columns.Add("Склад_Назва", "Склад");
+
+            return columns;
+        }
+
+        public static Dictionary<string, string> ЗамовленняКлієнтів_ТипиДаних()
+        {
+            Dictionary<string, string> columns = new Dictionary<string, string>();
+
+            columns.Add("ЗамовленняКлієнта_Назва", new ЗамовленняКлієнта_Pointer().GetBasis().Text);
+            columns.Add("Номенклатура_Назва", new Номенклатура_Pointer().GetBasis().Text);
+            columns.Add("ХарактеристикаНоменклатури_Назва", new ХарактеристикиНоменклатури_Pointer().GetBasis().Text);
+            columns.Add("Склад_Назва", new Склади_Pointer().GetBasis().Text);
 
             return columns;
         }
@@ -403,6 +441,16 @@ ORDER BY Номенклатура_Назва
             return columns;
         }
 
+        public static Dictionary<string, string> РозрахункиЗКлієнтами_ТипиДаних()
+        {
+            Dictionary<string, string> columns = new Dictionary<string, string>();
+
+            columns.Add("Контрагент_Назва", new Контрагенти_Pointer().GetBasis().Text);
+            columns.Add("Валюта_Назва", new Валюти_Pointer().GetBasis().Text);
+
+            return columns;
+        }
+
         public static Dictionary<string, float> РозрахункиЗКлієнтами_ПозиціяТекстуВКолонці()
         {
             Dictionary<string, float> columns = new Dictionary<string, float>();
@@ -474,6 +522,17 @@ WHERE
             return columns;
         }
 
+        public static Dictionary<string, string> ВільніЗалишки_ТипиДаних()
+        {
+            Dictionary<string, string> columns = new Dictionary<string, string>();
+
+            columns.Add("Номенклатура_Назва", new Номенклатура_Pointer().GetBasis().Text);
+            columns.Add("ХарактеристикаНоменклатури_Назва", new ХарактеристикиНоменклатури_Pointer().GetBasis().Text);
+            columns.Add("Склад_Назва", new Склади_Pointer().GetBasis().Text);
+
+            return columns;
+        }
+
         public static Dictionary<string, float> ВільніЗалишки_ПозиціяТекстуВКолонці()
         {
             Dictionary<string, float> columns = new Dictionary<string, float>();
@@ -496,7 +555,7 @@ WHERE
 
             return columns;
         }
-        
+
         public static string ВільніЗалишки_Запит = $@"
 SELECT 
     (CASE WHEN Рег_ВільніЗалишки.income = true THEN '+' ELSE '-' END) AS income, 
@@ -553,6 +612,18 @@ ORDER BY Номенклатура_Назва
             columns.Add("Номенклатура_Назва", "Номенклатура");
             if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const) columns.Add("ХарактеристикаНоменклатури_Назва", "ХарактеристикаНоменклатури");
             columns.Add("Склад_Назва", "Склад");
+
+            return columns;
+        }
+
+        public static Dictionary<string, string> ЗамовленняПостачальникам_ТипиДаних()
+        {
+            Dictionary<string, string> columns = new Dictionary<string, string>();
+
+            columns.Add("ЗамовленняПостачальнику_Назва", new ЗамовленняПостачальнику_Pointer().GetBasis().Text);
+            columns.Add("Номенклатура_Назва", new Номенклатура_Pointer().GetBasis().Text);
+            columns.Add("ХарактеристикаНоменклатури_Назва", new ХарактеристикиНоменклатури_Pointer().GetBasis().Text);
+            columns.Add("Склад_Назва", new Склади_Pointer().GetBasis().Text);
 
             return columns;
         }
@@ -635,6 +706,16 @@ ORDER BY Номенклатура_Назва
             return columns;
         }
 
+        public static Dictionary<string, string> РозрахункиЗПостачальниками_ТипиДаних()
+        {
+            Dictionary<string, string> columns = new Dictionary<string, string>();
+
+            columns.Add("Контрагент_Назва", new Контрагенти_Pointer().GetBasis().Text);
+            columns.Add("Валюта_Назва", new Валюти_Pointer().GetBasis().Text);
+
+            return columns;
+        }
+
         public static Dictionary<string, float> РозрахункиЗПостачальниками_ПозиціяТекстуВКолонці()
         {
             Dictionary<string, float> columns = new Dictionary<string, float>();
@@ -678,72 +759,72 @@ WHERE
         #endregion
 
         #region ТовариДоПоступлення
-/*
-        public static Dictionary<string, string> ТовариДоПоступлення_ВидиміКолонки()
-        {
-            Dictionary<string, string> columns = new Dictionary<string, string>();
+        /*
+                public static Dictionary<string, string> ТовариДоПоступлення_ВидиміКолонки()
+                {
+                    Dictionary<string, string> columns = new Dictionary<string, string>();
 
-            columns.Add("income", "Рух");
-            columns.Add("period", "Період");
-            columns.Add("Номенклатура_Назва", "Номенклатура");
-            if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const) columns.Add("ХарактеристикаНоменклатури_Назва", "Характеристика");
-            columns.Add("Склад_Назва", "Склад");
-            columns.Add("ВНаявності", "В наявності");
-            columns.Add("ДоПоступлення", "До поступлення");
+                    columns.Add("income", "Рух");
+                    columns.Add("period", "Період");
+                    columns.Add("Номенклатура_Назва", "Номенклатура");
+                    if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const) columns.Add("ХарактеристикаНоменклатури_Назва", "Характеристика");
+                    columns.Add("Склад_Назва", "Склад");
+                    columns.Add("ВНаявності", "В наявності");
+                    columns.Add("ДоПоступлення", "До поступлення");
 
-            return columns;
-        }
+                    return columns;
+                }
 
-        public static Dictionary<string, string> ТовариДоПоступлення_КолонкиДаних()
-        {
-            Dictionary<string, string> columns = new Dictionary<string, string>();
+                public static Dictionary<string, string> ТовариДоПоступлення_КолонкиДаних()
+                {
+                    Dictionary<string, string> columns = new Dictionary<string, string>();
 
-            columns.Add("Номенклатура_Назва", "Номенклатура");
-            if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const) columns.Add("ХарактеристикаНоменклатури_Назва", "Характеристика");
-            columns.Add("Склад_Назва", "Склад");
+                    columns.Add("Номенклатура_Назва", "Номенклатура");
+                    if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const) columns.Add("ХарактеристикаНоменклатури_Назва", "Характеристика");
+                    columns.Add("Склад_Назва", "Склад");
 
-            return columns;
-        }
+                    return columns;
+                }
 
-        public static Dictionary<string, float> ТовариДоПоступлення_ПозиціяТекстуВКолонці()
-        {
-            Dictionary<string, float> columns = new Dictionary<string, float>();
+                public static Dictionary<string, float> ТовариДоПоступлення_ПозиціяТекстуВКолонці()
+                {
+                    Dictionary<string, float> columns = new Dictionary<string, float>();
 
-            columns.Add("income", 0.5f);
-            columns.Add("ВНаявності", 1);
-            columns.Add("ДоПоступлення", 1);
+                    columns.Add("income", 0.5f);
+                    columns.Add("ВНаявності", 1);
+                    columns.Add("ДоПоступлення", 1);
 
-            return columns;
-        }
+                    return columns;
+                }
 
-        public static string ТовариДоПоступлення_Запит = $@"
-SELECT 
-    (CASE WHEN Рег_ТовариДоПоступлення.income = true THEN '+' ELSE '-' END) AS income,
-    Рег_ТовариДоПоступлення.period,
-    Рег_ТовариДоПоступлення.{ТовариДоПоступлення_Const.Номенклатура} AS Номенклатура, 
-    Довідник_Номенклатура.{Номенклатура_Const.Назва} AS Номенклатура_Назва, 
-    Рег_ТовариДоПоступлення.{ТовариДоПоступлення_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
-    Довідник_ХарактеристикиНоменклатури.{ХарактеристикиНоменклатури_Const.Назва} AS ХарактеристикаНоменклатури_Назва, 
-    Рег_ТовариДоПоступлення.{ТовариДоПоступлення_Const.Склад} AS Склад,
-    Довідник_Склади.{Склади_Const.Назва} AS Склад_Назва,
-    Рег_ТовариДоПоступлення.{ТовариДоПоступлення_Const.ДоПоступлення} AS ДоПоступлення
-FROM 
-    {ТовариДоПоступлення_Const.TABLE} AS Рег_ТовариДоПоступлення
+                public static string ТовариДоПоступлення_Запит = $@"
+        SELECT 
+            (CASE WHEN Рег_ТовариДоПоступлення.income = true THEN '+' ELSE '-' END) AS income,
+            Рег_ТовариДоПоступлення.period,
+            Рег_ТовариДоПоступлення.{ТовариДоПоступлення_Const.Номенклатура} AS Номенклатура, 
+            Довідник_Номенклатура.{Номенклатура_Const.Назва} AS Номенклатура_Назва, 
+            Рег_ТовариДоПоступлення.{ТовариДоПоступлення_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
+            Довідник_ХарактеристикиНоменклатури.{ХарактеристикиНоменклатури_Const.Назва} AS ХарактеристикаНоменклатури_Назва, 
+            Рег_ТовариДоПоступлення.{ТовариДоПоступлення_Const.Склад} AS Склад,
+            Довідник_Склади.{Склади_Const.Назва} AS Склад_Назва,
+            Рег_ТовариДоПоступлення.{ТовариДоПоступлення_Const.ДоПоступлення} AS ДоПоступлення
+        FROM 
+            {ТовариДоПоступлення_Const.TABLE} AS Рег_ТовариДоПоступлення
 
-    LEFT JOIN {Номенклатура_Const.TABLE} AS Довідник_Номенклатура ON Довідник_Номенклатура.uid = 
-        Рег_ТовариДоПоступлення.{ТовариДоПоступлення_Const.Номенклатура}
+            LEFT JOIN {Номенклатура_Const.TABLE} AS Довідник_Номенклатура ON Довідник_Номенклатура.uid = 
+                Рег_ТовариДоПоступлення.{ТовариДоПоступлення_Const.Номенклатура}
 
-    LEFT JOIN {ХарактеристикиНоменклатури_Const.TABLE} AS Довідник_ХарактеристикиНоменклатури ON Довідник_ХарактеристикиНоменклатури.uid = 
-        Рег_ТовариДоПоступлення.{ТовариДоПоступлення_Const.ХарактеристикаНоменклатури}
+            LEFT JOIN {ХарактеристикиНоменклатури_Const.TABLE} AS Довідник_ХарактеристикиНоменклатури ON Довідник_ХарактеристикиНоменклатури.uid = 
+                Рег_ТовариДоПоступлення.{ТовариДоПоступлення_Const.ХарактеристикаНоменклатури}
 
-    LEFT JOIN {Склади_Const.TABLE} AS Довідник_Склади ON Довідник_Склади.uid = 
-       Рег_ТовариДоПоступлення.{ТовариДоПоступлення_Const.Склад}
-WHERE
-    Рег_ТовариДоПоступлення.Owner = @ДокументВказівник
-ORDER BY Номенклатура_Назва
-";
+            LEFT JOIN {Склади_Const.TABLE} AS Довідник_Склади ON Довідник_Склади.uid = 
+               Рег_ТовариДоПоступлення.{ТовариДоПоступлення_Const.Склад}
+        WHERE
+            Рег_ТовариДоПоступлення.Owner = @ДокументВказівник
+        ORDER BY Номенклатура_Назва
+        ";
 
-*/
+        */
         #endregion
 
         #region РухКоштів
@@ -769,6 +850,17 @@ ORDER BY Номенклатура_Назва
             columns.Add("Організація_Назва", "Організація");
             columns.Add("Каса_Назва", "Каса");
             columns.Add("Валюта_Назва", "Валюта");
+
+            return columns;
+        }
+
+        public static Dictionary<string, string> РухКоштів_ТипиДаних()
+        {
+            Dictionary<string, string> columns = new Dictionary<string, string>();
+
+            columns.Add("Організація_Назва", new Організації_Pointer().GetBasis().Text);
+            columns.Add("Каса_Назва", new Каси_Pointer().GetBasis().Text);
+            columns.Add("Валюта_Назва", new Валюти_Pointer().GetBasis().Text);
 
             return columns;
         }
@@ -855,6 +947,20 @@ ORDER BY Організація_Назва
             return columns;
         }
 
+        public static Dictionary<string, string> Закупівлі_ТипиДаних()
+        {
+            Dictionary<string, string> columns = new Dictionary<string, string>();
+
+            columns.Add("Організація_Назва", new Організації_Pointer().GetBasis().Text);
+            columns.Add("Склад_Назва", new Склади_Pointer().GetBasis().Text);
+            columns.Add("Контрагент_Назва", new Контрагенти_Pointer().GetBasis().Text);
+            columns.Add("Договір_Назва", new ДоговориКонтрагентів_Pointer().GetBasis().Text);
+            columns.Add("Номенклатура_Назва", new Номенклатура_Pointer().GetBasis().Text);
+            columns.Add("ХарактеристикаНоменклатури_Назва", new ХарактеристикиНоменклатури_Pointer().GetBasis().Text);
+
+            return columns;
+        }
+
         public static Dictionary<string, float> Закупівлі_ПозиціяТекстуВКолонці()
         {
             Dictionary<string, float> columns = new Dictionary<string, float>();
@@ -873,7 +979,7 @@ ORDER BY Організація_Назва
             columns.Add("Кількість", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла);
             columns.Add("Сума", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла);
             columns.Add("Собівартість", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла);
-            
+
             return columns;
         }
 
@@ -952,6 +1058,20 @@ WHERE
             columns.Add("Договір_Назва", "Договір");
             columns.Add("Номенклатура_Назва", "Номенклатура");
             if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const) columns.Add("ХарактеристикаНоменклатури_Назва", "Характеристика");
+
+            return columns;
+        }
+
+        public static Dictionary<string, string> Продажі_ТипиДаних()
+        {
+            Dictionary<string, string> columns = new Dictionary<string, string>();
+
+            columns.Add("Організація_Назва", new Організації_Pointer().GetBasis().Text);
+            columns.Add("Склад_Назва", new Склади_Pointer().GetBasis().Text);
+            columns.Add("Контрагент_Назва", new Контрагенти_Pointer().GetBasis().Text);
+            columns.Add("Договір_Назва", new ДоговориКонтрагентів_Pointer().GetBasis().Text);
+            columns.Add("Номенклатура_Назва", new Номенклатура_Pointer().GetBasis().Text);
+            columns.Add("ХарактеристикаНоменклатури_Назва", new ХарактеристикиНоменклатури_Pointer().GetBasis().Text);
 
             return columns;
         }
@@ -1052,6 +1172,19 @@ WHERE
             columns.Add("Пакування_Назва", "Пакування");
             columns.Add("Комірка_Назва", "Комірка");
             if (Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const) columns.Add("Серія_Номер", "Серія");
+
+            return columns;
+        }
+
+        public static Dictionary<string, string> ТовариВКомірках_ТипиДаних()
+        {
+            Dictionary<string, string> columns = new Dictionary<string, string>();
+
+            columns.Add("Номенклатура_Назва", new Номенклатура_Pointer().GetBasis().Text);
+            columns.Add("ХарактеристикаНоменклатури_Назва", new ХарактеристикиНоменклатури_Pointer().GetBasis().Text);
+            columns.Add("Пакування_Назва", new ПакуванняОдиниціВиміру_Pointer().GetBasis().Text);
+            columns.Add("Комірка_Назва", new СкладськіКомірки_Pointer().GetBasis().Text);
+            columns.Add("Серія_Номер", new СеріїНоменклатури_Pointer().GetBasis().Text);
 
             return columns;
         }
