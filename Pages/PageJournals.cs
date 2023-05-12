@@ -56,7 +56,7 @@ namespace StorageAndTrade
                 listBox.ButtonPressEvent += (object? sender, ButtonPressEventArgs args) =>
                 {
                     if (args.Event.Type == Gdk.EventType.DoubleButtonPress && listBox.SelectedRows.Length != 0)
-                        ФункціїДляЖурналів.ВідкритиЖурналВідповідноДоВиду(listBox.SelectedRows[0].Name, null,0, false);
+                        ФункціїДляЖурналів.ВідкритиЖурналВідповідноДоВиду(listBox.SelectedRows[0].Name, null, 0, false);
                 };
 
                 ScrolledWindow scrollList = new ScrolledWindow() { WidthRequest = 300, HeightRequest = 300, ShadowType = ShadowType.In };
@@ -78,27 +78,44 @@ namespace StorageAndTrade
 
             //Список
             HBox hBoxList = new HBox(false, 0);
+            PackStart(hBoxList, false, false, 10);
 
             VBox vLeft = new VBox(false, 0);
             hBoxList.PackStart(vLeft, false, false, 5);
 
-            AddLink(vLeft, "Повний (всі документи)", Повний);
-            AddLink(vLeft, "Продажі", Продажі);
-            AddLink(vLeft, "Закупівлі", Закупівлі);
-            AddLink(vLeft, "Каса", Каса);
-            AddLink(vLeft, "Склад", Склад);
-            AddLink(vLeft, "Адресне зберігання на складах", АдреснеЗберігання);
+            Link.AddLink(vLeft, "Повний (всі документи)", () =>
+            {
+                Журнал_Повний page = new Журнал_Повний();
+                Program.GeneralForm?.CreateNotebookPage("Повний", () => { return page; });
+                page.SetValue();
+            });
 
-            PackStart(hBoxList, false, false, 10);
+            Link.AddLink(vLeft, "Продажі", () =>
+            {
+                PageJournals.Продажі(null, new EventArgs());
+            });
+
+            Link.AddLink(vLeft, "Закупівлі", () =>
+            {
+                PageJournals.Закупівлі(null, new EventArgs());
+            });
+
+            Link.AddLink(vLeft, "Каса", () =>
+            {
+                PageJournals.Каса(null, new EventArgs());
+            });
+
+            Link.AddLink(vLeft, "Склад", () =>
+            {
+                PageJournals.Склад(null, new EventArgs());
+            });
+
+            Link.AddLink(vLeft, "Адресне зберігання на складах", () =>
+            {
+                PageJournals.АдреснеЗберігання(null, new EventArgs());
+            });
 
             ShowAll();
-        }
-
-        void Повний(object? sender, EventArgs args)
-        {
-            Журнал_Повний page = new Журнал_Повний();
-            Program.GeneralForm?.CreateNotebookPage("Повний", () => { return page; });
-            page.SetValue();
         }
 
         public static void Продажі(object? sender, EventArgs args)
@@ -115,17 +132,17 @@ namespace StorageAndTrade
             page.SetValue();
         }
 
-        public static void Склад(object? sender, EventArgs args)
-        {
-            Журнал_Склад page = new Журнал_Склад();
-            Program.GeneralForm?.CreateNotebookPage("Склад", () => { return page; });
-            page.SetValue();
-        }
-
         public static void Каса(object? sender, EventArgs args)
         {
             Журнал_Каса page = new Журнал_Каса();
             Program.GeneralForm?.CreateNotebookPage("Каса", () => { return page; });
+            page.SetValue();
+        }
+
+        public static void Склад(object? sender, EventArgs args)
+        {
+            Журнал_Склад page = new Журнал_Склад();
+            Program.GeneralForm?.CreateNotebookPage("Склад", () => { return page; });
             page.SetValue();
         }
 
@@ -134,15 +151,6 @@ namespace StorageAndTrade
             Журнал_АдреснеЗберігання page = new Журнал_АдреснеЗберігання();
             Program.GeneralForm?.CreateNotebookPage("Адресне зберігання", () => { return page; });
             page.SetValue();
-        }
-
-        void AddLink(VBox vbox, string uri, EventHandler? clickAction = null)
-        {
-            LinkButton lb = new LinkButton(uri, " " + uri) { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
-            vbox.PackStart(lb, false, false, 0);
-
-            if (clickAction != null)
-                lb.Clicked += clickAction;
         }
     }
 }
