@@ -170,9 +170,6 @@ namespace StorageAndTrade
 
         protected override void GetValue()
         {
-            UnigueID = Номенклатура_Objest.UnigueID;
-            Caption = Назва.Text;
-
             Номенклатура_Objest.Код = Код.Text;
             Номенклатура_Objest.Назва = Назва.Text;
             Номенклатура_Objest.Артикул = Артикул.Text;
@@ -200,6 +197,9 @@ namespace StorageAndTrade
             }
 
             Файли.SaveRecords();
+
+            UnigueID = Номенклатура_Objest.UnigueID;
+            Caption = Назва.Text;
         }
     }
 }

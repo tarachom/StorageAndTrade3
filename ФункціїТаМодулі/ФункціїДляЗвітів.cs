@@ -295,11 +295,11 @@ namespace StorageAndTrade
                 {
                     if (onRefreshAction != null)
                     {
-                        Program.GeneralForm!.NotebookCurrentPageToCode(notebook, codePage);
+                        Program.GeneralForm!.CurrentNotebookPageToCode(notebook, codePage);
 
                         onRefreshAction.Invoke(refreshParam, true);
 
-                        Program.GeneralForm!.NotebookCloseTabToCode(notebook, codePage);
+                        Program.GeneralForm!.CloseNotebookPageToCode(notebook, codePage);
                     }
                 }
             );

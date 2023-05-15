@@ -87,14 +87,14 @@ namespace StorageAndTrade
                 {
                     РозхіднийКасовийОрдер_Елемент page = new РозхіднийКасовийОрдер_Елемент
                     {
-                        PageList = this,
+                        CallBack_LoadRecords = CallBack_LoadRecords,
                         IsNew = true
                     };
 
                     page.SetValue();
 
                     return page;
-                }, true);
+                });
             }
             else if (unigueID != null)
             {
@@ -105,7 +105,7 @@ namespace StorageAndTrade
                     {
                         РозхіднийКасовийОрдер_Елемент page = new РозхіднийКасовийОрдер_Елемент
                         {
-                            PageList = this,
+                            CallBack_LoadRecords = CallBack_LoadRecords,
                             IsNew = false,
                             РозхіднийКасовийОрдер_Objest = РозхіднийКасовийОрдер_Objest,
                         };
@@ -113,7 +113,7 @@ namespace StorageAndTrade
                         page.SetValue();
 
                         return page;
-                    }, true);
+                    });
                 }
                 else
                     Message.Error(Program.GeneralForm, "Не вдалось прочитати!");

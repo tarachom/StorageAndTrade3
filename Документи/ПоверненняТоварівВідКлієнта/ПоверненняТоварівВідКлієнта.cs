@@ -87,14 +87,14 @@ namespace StorageAndTrade
                 {
                     ПоверненняТоварівВідКлієнта_Елемент page = new ПоверненняТоварівВідКлієнта_Елемент
                     {
-                        PageList = this,
+                        CallBack_LoadRecords = CallBack_LoadRecords,
                         IsNew = true
                     };
 
                     page.SetValue();
 
                     return page;
-                }, true);
+                });
             }
             else if (unigueID != null)
             {
@@ -105,7 +105,7 @@ namespace StorageAndTrade
                     {
                         ПоверненняТоварівВідКлієнта_Елемент page = new ПоверненняТоварівВідКлієнта_Елемент
                         {
-                            PageList = this,
+                            CallBack_LoadRecords = CallBack_LoadRecords,
                             IsNew = false,
                             ПоверненняТоварівВідКлієнта_Objest = ПоверненняТоварівВідКлієнта_Objest,
                         };
@@ -113,7 +113,7 @@ namespace StorageAndTrade
                         page.SetValue();
 
                         return page;
-                    }, true);
+                    });
                 }
                 else
                     Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
@@ -183,7 +183,7 @@ namespace StorageAndTrade
 
         #region ToolBar
 
-  
+
         #endregion
     }
 }

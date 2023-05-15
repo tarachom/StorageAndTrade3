@@ -176,8 +176,6 @@ namespace StorageAndTrade
 
         protected override void GetValue()
         {
-            UnigueID = Файли_Objest.UnigueID;
-
             Файли_Objest.Код = Код.Text;
             Файли_Objest.Назва = Назва.Text;
 
@@ -202,8 +200,6 @@ namespace StorageAndTrade
                 Файли_Objest.Розмір = Math.Round((decimal)(Файли_Objest.БінарніДані.Length / 1024)).ToString() + " KB";
                 Файли_Objest.ДатаСтворення = DateTime.Now;
             }
-
-            Caption = Назва.Text;
         }
 
         #endregion
@@ -221,6 +217,9 @@ namespace StorageAndTrade
 
             //Перечитати
             SetValue();
+
+            UnigueID = Файли_Objest.UnigueID;
+            Caption = Назва.Text;
         }
     }
 }

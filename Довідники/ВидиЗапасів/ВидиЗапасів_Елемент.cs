@@ -58,9 +58,6 @@ namespace StorageAndTrade
 
         protected override void GetValue()
         {
-            UnigueID = ВидиЗапасів_Objest.UnigueID;
-            Caption = Назва.Text;
-
             ВидиЗапасів_Objest.Код = Код.Text;
             ВидиЗапасів_Objest.Назва = Назва.Text;
         }
@@ -77,6 +74,9 @@ namespace StorageAndTrade
             {
                 MsgError(ex);
             }
+
+            UnigueID = ВидиЗапасів_Objest.UnigueID;
+            Caption = Назва.Text;
         }
     }
 }

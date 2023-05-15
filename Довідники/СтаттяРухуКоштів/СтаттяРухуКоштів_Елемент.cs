@@ -84,9 +84,6 @@ namespace StorageAndTrade
 
         protected override void GetValue()
         {
-            UnigueID = СтаттяРухуКоштів_Objest.UnigueID;
-            Caption = Назва.Text;
-
             СтаттяРухуКоштів_Objest.Код = Код.Text;
             СтаттяРухуКоштів_Objest.Назва = Назва.Text;
             СтаттяРухуКоштів_Objest.КореспондуючийРахунок = КореспондуючийРахунок.Text;
@@ -106,6 +103,9 @@ namespace StorageAndTrade
             {
                 MsgError(ex);
             }
+
+            UnigueID = СтаттяРухуКоштів_Objest.UnigueID;
+            Caption = Назва.Text;
         }
     }
 }

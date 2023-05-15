@@ -333,34 +333,41 @@ namespace StorageAndTrade
 
         #endregion
 
-        #region Notebook Page
+        #region Блокнот
 
         /// <summary>
-        /// Закрити поточну сторінку блокноту
+        /// Створити сторінку в блокноті.
+        /// Код сторінки задається в назву віджета - widget.Name = codePage;
         /// </summary>
-        public void CloseCurrentPageNotebook()
+        /// <param name="tabName">Назва сторінки</param>
+        /// <param name="pageWidget">Віджет для сторінки</param>
+        /// <param name="insertPage">Вставити сторінку перед поточною</param>
+        public void CreateNotebookPage(string tabName, System.Func<Widget>? pageWidget, bool insertPage = false)
         {
-            topNotebook.RemovePage(topNotebook.CurrentPage);
-        }
+            int numPage;
+            string codePage = Guid.NewGuid().ToString();
 
-        /// <summary>
-        /// Перейменувати поточну сторінку блокноту
-        /// </summary>
-        /// <param name="name">Назва</param>
-        public void RenameCurrentPageNotebook(string name)
-        {
-            HBox hBoxLabel = CreateLabelPageWidget(name, topNotebook.CurrentPageWidget.Name, topNotebook);
-            topNotebook.SetTabLabel(topNotebook.CurrentPageWidget, hBoxLabel);
-        }
+            ScrolledWindow scroll = new ScrolledWindow() { ShadowType = ShadowType.In, Name = codePage };
+            scroll.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
 
-        /// <summary>
-        /// Обрізати імя для сторінки
-        /// </summary>
-        /// <param name="pageName"></param>
-        /// <returns></returns>
-        public string SubstringPageName(string pageName)
-        {
-            return (pageName.Length >= 33 ? pageName.Substring(0, 30) + "..." : pageName);
+            HBox hBoxLabel = CreateLabelPageWidget(tabName, codePage, topNotebook);
+
+            if (insertPage)
+                numPage = topNotebook.InsertPage(scroll, hBoxLabel, topNotebook.CurrentPage);
+            else
+                numPage = topNotebook.AppendPage(scroll, hBoxLabel);
+
+            if (pageWidget != null)
+            {
+                Widget widget = (Widget)pageWidget.Invoke();
+                scroll.Add(widget);
+
+                widget.Name = codePage;
+            }
+
+            topNotebook.ShowAll();
+            topNotebook.CurrentPage = numPage;
+            topNotebook.GrabFocus();
         }
 
         /// <summary>
@@ -388,7 +395,7 @@ namespace StorageAndTrade
 
             lbClose.Clicked += (object? sender, EventArgs args) =>
             {
-                NotebookCloseTabToCode(notebook, ((Widget)sender!).Name);
+                CloseNotebookPageToCode(notebook, ((Widget)sender!).Name);
             };
 
             hBoxLabel.PackEnd(lbClose, false, false, 0);
@@ -402,7 +409,7 @@ namespace StorageAndTrade
         /// </summary>
         /// <param name="notebook">Блокнот</param>
         /// <param name="codePage">Код</param>
-        public void NotebookCloseTabToCode(Notebook notebook, string codePage)
+        public void CloseNotebookPageToCode(Notebook notebook, string codePage)
         {
             notebook.Foreach(
                 (Widget wg) =>
@@ -413,11 +420,37 @@ namespace StorageAndTrade
         }
 
         /// <summary>
+        /// Закрити сторінку блокноту
+        /// </summary>
+        /// <param name="codePage">Код</param>
+        public void CloseNotebookPageToCode(string codePage)
+        {
+            CloseNotebookPageToCode(topNotebook, codePage);
+        }
+
+        /// <summary>
+        /// Перейменувати сторінку по коду
+        /// </summary>
+        /// <param name="name">Нова назва</param>
+        /// <param name="codePage">Код</param>
+        public void RenameNotebookPageToCode(string name, string codePage)
+        {
+            HBox hBoxLabel = CreateLabelPageWidget(name, codePage, topNotebook);
+
+            topNotebook.Foreach(
+                (Widget wg) =>
+                {
+                    if (wg.Name == codePage)
+                        topNotebook.SetTabLabel(wg, hBoxLabel);
+                });
+        }
+
+        /// <summary>
         /// Встановлення поточної сторінки по коду
         /// </summary>
         /// <param name="notebook">Блокнот</param>
         /// <param name="codePage">Код</param>
-        public void NotebookCurrentPageToCode(Notebook notebook, string codePage)
+        public void CurrentNotebookPageToCode(Notebook notebook, string codePage)
         {
             int counter = 0;
 
@@ -432,32 +465,13 @@ namespace StorageAndTrade
         }
 
         /// <summary>
-        /// Створити сторінку в блокноті
+        /// Обрізати імя для сторінки
         /// </summary>
-        /// <param name="tabName">Назва сторінки</param>
-        /// <param name="pageWidget">Віджет для сторінки</param>
-        /// <param name="insertPage">Вставити сторінку перед поточною</param>
-        public void CreateNotebookPage(string tabName, System.Func<Widget>? pageWidget, bool insertPage = false)
+        /// <param name="pageName"></param>
+        /// <returns></returns>
+        public string SubstringPageName(string pageName)
         {
-            int numPage;
-            string codePage = Guid.NewGuid().ToString();
-
-            ScrolledWindow scroll = new ScrolledWindow() { ShadowType = ShadowType.In, Name = codePage };
-            scroll.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
-
-            HBox hBoxLabel = CreateLabelPageWidget(tabName, codePage, topNotebook);
-
-            if (insertPage)
-                numPage = topNotebook.InsertPage(scroll, hBoxLabel, topNotebook.CurrentPage);
-            else
-                numPage = topNotebook.AppendPage(scroll, hBoxLabel);
-
-            if (pageWidget != null)
-                scroll.Add((Widget)pageWidget.Invoke());
-
-            topNotebook.ShowAll();
-            topNotebook.CurrentPage = numPage;
-            topNotebook.GrabFocus();
+            return (pageName.Length >= 33 ? pageName.Substring(0, 30) + "..." : pageName);
         }
 
         #endregion

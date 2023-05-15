@@ -64,6 +64,7 @@ namespace StorageAndTrade
             TreeViewGrid.ButtonPressEvent += OnButtonPressEvent;
             TreeViewGrid.ButtonReleaseEvent += OnButtonReleaseEvent;
             TreeViewGrid.KeyReleaseEvent += OnKeyReleaseEvent;
+            //TreeViewGrid.KeyPressEvent += OnKeyPressEvent;
             scrollTree.Add(TreeViewGrid);
 
             HPanedTable.Pack1(scrollTree, true, true);
@@ -178,7 +179,7 @@ namespace StorageAndTrade
                         if (CallBack_OnSelectPointer != null)
                             CallBack_OnSelectPointer.Invoke(unigueID);
 
-                        Program.GeneralForm?.CloseCurrentPageNotebook();
+                        Program.GeneralForm?.CloseNotebookPageToCode(this.Name);
                     }
                 }
             }
@@ -186,41 +187,69 @@ namespace StorageAndTrade
 
         void OnKeyReleaseEvent(object? sender, KeyReleaseEventArgs args)
         {
-            switch (args.Event.Key)
+            /*
+            if (args.Event.State == (Gdk.ModifierType.ControlMask | Gdk.ModifierType.Mod2Mask))
             {
-                case Gdk.Key.Insert:
-                    {
-                        OpenPageElement(true);
-                        break;
-                    }
-                case Gdk.Key.F5:
-                    {
-                        LoadRecords();
-                        break;
-                    }
-                case Gdk.Key.KP_Enter:
-                case Gdk.Key.Return:
-                    {
-                        OnEditClick(null, new EventArgs());
-                        break;
-                    }
-                case Gdk.Key.End:
-                case Gdk.Key.Home:
-                case Gdk.Key.Up:
-                case Gdk.Key.Down:
-                case Gdk.Key.Prior:
-                case Gdk.Key.Next:
-                    {
-                        OnRowActivated(TreeViewGrid, new RowActivatedArgs());
-                        break;
-                    }
-                case Gdk.Key.Delete:
-                    {
-                        OnDeleteClick(TreeViewGrid, new EventArgs());
-                        break;
-                    }
+                switch (args.Event.Key)
+                {
+                    case Gdk.Key.Return:
+                        {
+                            Console.WriteLine(1);
+                            break;
+                        }
+                }
             }
+            else
+            */
+                switch (args.Event.Key)
+                {
+                    case Gdk.Key.Insert:
+                        {
+                            OpenPageElement(true);
+                            break;
+                        }
+                    case Gdk.Key.F5:
+                        {
+                            LoadRecords();
+                            break;
+                        }
+                    case Gdk.Key.KP_Enter:
+                    case Gdk.Key.Return:
+                        {
+                            OnEditClick(null, new EventArgs());
+                            break;
+                        }
+                    case Gdk.Key.End:
+                    case Gdk.Key.Home:
+                    case Gdk.Key.Up:
+                    case Gdk.Key.Down:
+                    case Gdk.Key.Prior:
+                    case Gdk.Key.Next:
+                        {
+                            OnRowActivated(TreeViewGrid, new RowActivatedArgs());
+                            break;
+                        }
+                    case Gdk.Key.Delete:
+                        {
+                            OnDeleteClick(TreeViewGrid, new EventArgs());
+                            break;
+                        }
+                }
         }
+
+        // void OnKeyPressEvent(object? sender, KeyPressEventArgs args)
+        // {
+            // Console.WriteLine(args.Event.State);
+            // Console.WriteLine(Gdk.ModifierType.ControlMask);
+            // Console.WriteLine(Gdk.ModifierType.Mod2Mask);
+            // Console.WriteLine(Gdk.ModifierType.ControlMask | Gdk.ModifierType.Mod2Mask);
+            // Console.WriteLine(args.Event.Key);
+
+            // if (args.Event.State == (Gdk.ModifierType.ControlMask | Gdk.ModifierType.Mod2Mask) && args.Event.Key == Gdk.Key.Return)
+            // {
+            //     Console.WriteLine(1);
+            // }
+        //}
 
         #endregion
 

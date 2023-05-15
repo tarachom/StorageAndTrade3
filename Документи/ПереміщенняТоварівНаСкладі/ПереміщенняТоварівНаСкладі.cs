@@ -87,14 +87,14 @@ namespace StorageAndTrade
                 {
                     ПереміщенняТоварівНаСкладі_Елемент page = new ПереміщенняТоварівНаСкладі_Елемент
                     {
-                        PageList = this,
+                        CallBack_LoadRecords = CallBack_LoadRecords,
                         IsNew = true
                     };
 
                     page.SetValue();
 
                     return page;
-                }, true);
+                });
             }
             else if (unigueID != null)
             {
@@ -105,7 +105,7 @@ namespace StorageAndTrade
                     {
                         ПереміщенняТоварівНаСкладі_Елемент page = new ПереміщенняТоварівНаСкладі_Елемент
                         {
-                            PageList = this,
+                            CallBack_LoadRecords = CallBack_LoadRecords,
                             IsNew = false,
                             ПереміщенняТоварівНаСкладі_Objest = ПереміщенняТоварівНаСкладі_Objest,
                         };
@@ -113,7 +113,7 @@ namespace StorageAndTrade
                         page.SetValue();
 
                         return page;
-                    }, true);
+                    });
                 }
                 else
                     Message.Error(Program.GeneralForm, "Не вдалось прочитати!");

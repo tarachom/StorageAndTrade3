@@ -226,6 +226,12 @@ namespace StorageAndTrade
 
         protected virtual UnigueID? Copy(UnigueID unigueID) { return null; }
 
+        public virtual void CallBack_LoadRecords(UnigueID? selectPointer)
+        {
+            SelectPointerItem = selectPointer;
+            LoadRecords();
+        }
+        
         protected virtual void PeriodWhereChanged() { }
 
         protected virtual void SpendTheDocument(UnigueID unigueID, bool spendDoc) { }
@@ -279,7 +285,7 @@ namespace StorageAndTrade
                         if (CallBack_OnSelectPointer != null)
                             CallBack_OnSelectPointer.Invoke(unigueID);
 
-                        Program.GeneralForm?.CloseCurrentPageNotebook();
+                        Program.GeneralForm?.CloseNotebookPageToCode(this.Name);
                     }
                 }
             }

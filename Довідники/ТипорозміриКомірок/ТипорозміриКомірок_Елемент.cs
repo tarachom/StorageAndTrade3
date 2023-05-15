@@ -81,9 +81,6 @@ namespace StorageAndTrade
 
         protected override void GetValue()
         {
-            UnigueID = ТипорозміриКомірок_Objest.UnigueID;
-            Caption = Назва.Text;
-
             ТипорозміриКомірок_Objest.Назва = Назва.Text;
             ТипорозміриКомірок_Objest.Висота = Висота.Text;
             ТипорозміриКомірок_Objest.Ширина = Ширина.Text;
@@ -104,6 +101,9 @@ namespace StorageAndTrade
             {
                 MsgError(ex);
             }
+
+            UnigueID = ТипорозміриКомірок_Objest.UnigueID;
+            Caption = Назва.Text;
         }
     }
 }

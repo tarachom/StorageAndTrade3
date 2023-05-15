@@ -68,9 +68,6 @@ namespace StorageAndTrade
 
         protected override void GetValue()
         {
-            UnigueID = БанківськіРахункиКонтрагентів_Objest.UnigueID;
-            Caption = Назва.Text;
-
             БанківськіРахункиКонтрагентів_Objest.Код = Код.Text;
             БанківськіРахункиКонтрагентів_Objest.Назва = Назва.Text;
             БанківськіРахункиКонтрагентів_Objest.Валюта = Валюта.Pointer;
@@ -89,6 +86,9 @@ namespace StorageAndTrade
             {
                 MsgError(ex);
             }
+
+            UnigueID = БанківськіРахункиКонтрагентів_Objest.UnigueID;
+            Caption = Назва.Text;
         }
     }
 }

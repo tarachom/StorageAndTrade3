@@ -17,59 +17,32 @@ namespace StorageAndTrade
         #region Fields
 
         Entry Код = new Entry() { WidthRequest = 500 };
-
         Entry Назва = new Entry() { WidthRequest = 500 };
-
         Entry ТипНаселеногоПункту = new Entry() { WidthRequest = 500 };
-
         Entry КодМФО = new Entry() { WidthRequest = 500 };
-
         Entry НазваГоловноїУстановиАнг = new Entry() { WidthRequest = 500 };
-
         Entry КодЄДРПОУ = new Entry() { WidthRequest = 500 };
-
         Entry ПовнаНазва = new Entry() { WidthRequest = 500 };
-
         Entry УнікальнийКодБанку = new Entry() { WidthRequest = 500 };
-
         Entry КодОбластіОпераційноїДіяльності = new Entry() { WidthRequest = 500 };
-
         Entry НазваОбластіОпераційноїДіяльності = new Entry() { WidthRequest = 500 };
-
         Entry КодОбластіЗгідноСтатуту = new Entry() { WidthRequest = 500 };
-
         Entry НазваОбластіЗгідноСтатуту = new Entry() { WidthRequest = 500 };
-
         Entry ПоштовийІндекс = new Entry() { WidthRequest = 500 };
-
         Entry НазваНаселеногоПункту = new Entry() { WidthRequest = 500 };
-
         Entry Адреса = new Entry() { WidthRequest = 500 };
-
         Entry КодТелефонногоЗвязку = new Entry() { WidthRequest = 500 };
-
         Entry НомерТелефону = new Entry() { WidthRequest = 500 };
-
         Entry ЧисловийКодСтануУстанови = new Entry() { WidthRequest = 500 };
-
         Entry НазваСтануУстанови = new Entry() { WidthRequest = 500 };
-
         Entry ДатаЗміниСтану = new Entry() { WidthRequest = 500 };
-
         Entry ДатаВідкриттяУстанови = new Entry() { WidthRequest = 500 };
-
         Entry ДатаЗакриттяУстанови = new Entry() { WidthRequest = 500 };
-
         Entry КодНБУ = new Entry() { WidthRequest = 500 };
-
         Entry НомерЛіцензії = new Entry() { WidthRequest = 500 };
-
         Entry ДатаЛіцензії = new Entry() { WidthRequest = 500 };
-
         Entry КодСтатусу = new Entry() { WidthRequest = 500 };
-
         Entry Статус = new Entry() { WidthRequest = 500 };
-
         Entry ДатаЗапису = new Entry() { WidthRequest = 500 };
 
         #endregion
@@ -189,9 +162,6 @@ namespace StorageAndTrade
 
         protected override void GetValue()
         {
-            UnigueID = Банки_Objest.UnigueID;
-            Caption = Назва.Text;
-
             Банки_Objest.Код = Код.Text;
             Банки_Objest.Назва = Назва.Text;
             Банки_Objest.ТипНаселеногоПункту = ТипНаселеногоПункту.Text;
@@ -236,7 +206,8 @@ namespace StorageAndTrade
                 MsgError(ex);
             }
 
-
+            UnigueID = Банки_Objest.UnigueID;
+            Caption = Назва.Text;
         }
     }
 }

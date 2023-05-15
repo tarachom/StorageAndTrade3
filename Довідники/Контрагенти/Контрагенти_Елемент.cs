@@ -103,9 +103,6 @@ namespace StorageAndTrade
 
         protected override void GetValue()
         {
-            UnigueID = Контрагенти_Objest.UnigueID;
-            Caption = Назва.Text;
-
             Контрагенти_Objest.Код = Код.Text;
             Контрагенти_Objest.Назва = Назва.Text;
             Контрагенти_Objest.Папка = Родич.Pointer;
@@ -130,6 +127,9 @@ namespace StorageAndTrade
 
             Контакти.SaveRecords();
             Файли.SaveRecords();
+
+            UnigueID = Контрагенти_Objest.UnigueID;
+            Caption = Назва.Text;
         }
     }
 }

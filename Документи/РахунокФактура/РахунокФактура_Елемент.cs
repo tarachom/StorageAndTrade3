@@ -33,12 +33,8 @@ using Перелічення = StorageAndTrade_1_0.Перелічення;
 
 namespace StorageAndTrade
 {
-    class РахунокФактура_Елемент : VBox
+    class РахунокФактура_Елемент : ДокументЕлемент
     {
-        public РахунокФактура? PageList { get; set; }
-
-        public bool IsNew { get; set; } = true;
-
         public РахунокФактура_Objest РахунокФактура_Objest { get; set; } = new РахунокФактура_Objest();
 
         #region Fields
@@ -66,44 +62,14 @@ namespace StorageAndTrade
 
         public РахунокФактура_Елемент() : base()
         {
-            HBox hBox = new HBox();
+            CreateDocName(РахунокФактура_Const.FULLNAME, НомерДок, ДатаДок);
 
-            Button bSaveAndSpend = new Button("Провести та закрити");
-            bSaveAndSpend.Clicked += OnSaveAndSpendClick;
+            CreateField(HBoxComment, "Коментар:", Коментар);
 
-            hBox.PackStart(bSaveAndSpend, false, false, 10);
-
-            Button bSave = new Button("Зберегти без проведення");
-            bSave.Clicked += OnSaveClick;
-
-            hBox.PackStart(bSave, false, false, 10);
-
-            //Проводки
-            LinkButton linkButtonProvodky = new LinkButton("Проводки") { Halign = Align.Start };
-            linkButtonProvodky.Clicked += (object? sender, EventArgs args) =>
-            {
-                Program.GeneralForm?.CreateNotebookPage($"Проводки", () =>
-                {
-                    Звіт_РухДокументівПоРегістрах page = new Звіт_РухДокументівПоРегістрах();
-                    page.CreateReport(РахунокФактура_Objest.GetDocumentPointer());
-                    return page;
-                });
-            };
-
-            hBox.PackStart(linkButtonProvodky, false, false, 10);
-
-            PackStart(hBox, false, false, 10);
-
-            HPaned hPaned = new HPaned() { Orientation = Orientation.Vertical, BorderWidth = 5 };
+            NotebookTablePart.InsertPage(Товари, new Label("Товари"), 0);
+            NotebookTablePart.CurrentPage = 0;
 
             FillComboBoxes();
-
-            CreatePack1(hPaned);
-            CreatePack2(hPaned);
-
-            PackStart(hPaned, true, true, 0);
-
-            ShowAll();
         }
 
         void FillComboBoxes()
@@ -120,67 +86,20 @@ namespace StorageAndTrade
                 ГосподарськаОперація.Active = 0;
 
                 //2
-                foreach (ConfigurationEnumField field in Config.Kernel.Conf.Enums["ФормаОплати"].Fields.Values)
-                    ФормаОплати.Append(field.Name, field.Desc);
+                foreach (var field in Перелічення.ПсевдонімиПерелічення.ФормаОплати_List())
+                    ФормаОплати.Append(field.Value.ToString(), field.Name);
 
                 ФормаОплати.ActiveId = Перелічення.ФормаОплати.Готівка.ToString();
             }
         }
 
-        void CreatePack1(HPaned hPaned)
-        {
-            VBox vBox = new VBox();
-            hPaned.Pack1(vBox, false, false);
-
-            //НомерДок ДатаДок
-            HBox hBoxNumberDataDoc = new HBox() { Halign = Align.Start };
-            vBox.PackStart(hBoxNumberDataDoc, false, false, 5);
-
-            hBoxNumberDataDoc.PackStart(new Label($"{РахунокФактура_Const.FULLNAME} №:"), false, false, 5);
-            hBoxNumberDataDoc.PackStart(НомерДок, false, false, 5);
-            hBoxNumberDataDoc.PackStart(new Label("від:"), false, false, 5);
-            hBoxNumberDataDoc.PackStart(ДатаДок, false, false, 5);
-
-            //Два блоки для полів -->
-            HBox hBoxContainer = new HBox();
-
-            Expander expanderHead = new Expander("Реквізити шапки") { Expanded = true };
-            expanderHead.Add(hBoxContainer);
-
-            vBox.PackStart(expanderHead, false, false, 5);
-
-            //Container1
-            VBox vBoxContainer1 = new VBox() { WidthRequest = 500 };
-            hBoxContainer.PackStart(vBoxContainer1, false, false, 5);
-
-            CreateContainer1(vBoxContainer1);
-
-            //Container2
-            VBox vBoxContainer2 = new VBox() { WidthRequest = 500 };
-            hBoxContainer.PackStart(vBoxContainer2, false, false, 5);
-
-            CreateContainer2(vBoxContainer2);
-            // <--
-
-            //Коментар
-            HBox hBoxComment = new HBox() { Halign = Align.Start };
-            vBox.PackStart(hBoxComment, false, false, 5);
-
-            hBoxComment.PackStart(new Label("Коментар: "), false, false, 5);
-            hBoxComment.PackStart(Коментар, false, false, 5);
-        }
-
-        void CreateContainer1(VBox vBox)
+        protected override void CreateContainer1(VBox vBox)
         {
             //Організація
-            HBox hBoxOrganization = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxOrganization, false, false, 5);
-
-            hBoxOrganization.PackStart(Організація, false, false, 5);
+            CreateField(vBox, null, Організація);
 
             //Контрагент
-            HBox hBoxKontragent = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxKontragent, false, false, 5);
+            CreateField(vBox, null, Контрагент);
 
             Контрагент.AfterSelectFunc = () =>
             {
@@ -214,119 +133,57 @@ namespace StorageAndTrade
                 }
             };
 
-            hBoxKontragent.PackStart(Контрагент, false, false, 5);
-
             //Договір
-            HBox hBoxDogovir = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxDogovir, false, false, 5);
+            CreateField(vBox, null, Договір);
 
             Договір.BeforeClickOpenFunc = () =>
             {
                 Договір.КонтрагентВласник = Контрагент.Pointer;
             };
-
-            hBoxDogovir.PackStart(Договір, false, false, 5);
         }
 
-        void CreateContainer2(VBox vBox)
+        protected override void CreateContainer2(VBox vBox)
         {
             //Каса
-            HBox hBoxKasa = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxKasa, false, false, 5);
-
-            hBoxKasa.PackStart(Каса, false, false, 5);
+            CreateField(vBox, null, Каса);
 
             //Валюта
-            HBox hBoxValuta = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxValuta, false, false, 5);
-
-            hBoxValuta.PackStart(Валюта, false, false, 5);
+            CreateField(vBox, null, Валюта);
 
             //Склад
-            HBox hBoxSklad = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxSklad, false, false, 5);
-
-            hBoxSklad.PackStart(Склад, false, false, 5);
+            CreateField(vBox, null, Склад);
         }
 
-        void CreateContainer3(VBox vBox)
+        protected override void CreateContainer3(VBox vBox)
         {
             //ГосподарськаОперація
-            HBox hBoxOperation = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxOperation, false, false, 5);
-
-            hBoxOperation.PackStart(new Label("Господарська операція: "), false, false, 0);
-            hBoxOperation.PackStart(ГосподарськаОперація, false, false, 5);
+            CreateField(vBox, "Господарська операція:", ГосподарськаОперація);
 
             //Підрозділ
-            HBox hBoxPidrozdil = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxPidrozdil, false, false, 5);
-
-            hBoxPidrozdil.PackStart(Підрозділ, false, false, 5);
+            CreateField(vBox, null, Підрозділ);
 
             //Автор
-            HBox hBoxAutor = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxAutor, false, false, 5);
-
-            hBoxAutor.PackStart(Автор, false, false, 5);
+            CreateField(vBox, null, Автор);
 
             //Менеджер
-            HBox hBoxMenedjer = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxMenedjer, false, false, 5);
-
-            hBoxMenedjer.PackStart(Менеджер, false, false, 5);
+            CreateField(vBox, null, Менеджер);
         }
 
-        void CreateContainer4(VBox vBox)
+        protected override void CreateContainer4(VBox vBox)
         {
             //ФормаОплати
-            HBox hBoxFormaOplaty = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxFormaOplaty, false, false, 5);
-
-            hBoxFormaOplaty.PackStart(new Label("Форма оплати: "), false, false, 0);
-            hBoxFormaOplaty.PackStart(ФормаОплати, false, false, 5);
+            CreateField(vBox, "Форма оплати:", ФормаОплати);
 
             //БанківськийрахунокКонтрагента
-            HBox hBoxBankRahunokKontragenta = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxBankRahunokKontragenta, false, false, 5);
-
-            hBoxBankRahunokKontragenta.PackStart(БанківськийРахунокКонтрагента, false, false, 5);
+            CreateField(vBox, null, БанківськийРахунокКонтрагента);
 
             //БанківськийрахунокОрганізації
-            HBox hBoxBankRahunokOrganization = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxBankRahunokOrganization, false, false, 5);
-
-            hBoxBankRahunokOrganization.PackStart(БанківськийРахунок, false, false, 5);
-        }
-
-        void CreatePack2(HPaned hPaned)
-        {
-            Notebook notebook = new Notebook() { Scrollable = true, EnablePopup = true, BorderWidth = 0, ShowBorder = false };
-            notebook.TabPos = PositionType.Top;
-            notebook.AppendPage(Товари, new Label("Товари"));
-
-            VBox vBox = new VBox();
-            notebook.AppendPage(vBox, new Label("Додаткові реквізити"));
-
-            HBox hBoxContainer = new HBox();
-            vBox.PackStart(hBoxContainer, false, false, 5);
-
-            VBox vBoxContainer1 = new VBox() { WidthRequest = 500 };
-            hBoxContainer.PackStart(vBoxContainer1, false, false, 5);
-
-            CreateContainer3(vBoxContainer1);
-
-            VBox vBoxContainer2 = new VBox() { WidthRequest = 500 };
-            hBoxContainer.PackStart(vBoxContainer2, false, false, 5);
-
-            CreateContainer4(vBoxContainer2);
-
-            hPaned.Pack2(notebook, true, false);
+            CreateField(vBox, null, БанківськийРахунок);
         }
 
         #region Присвоєння / зчитування значень
 
-        public void SetValue()
+        public override void SetValue()
         {
             if (IsNew)
             {
@@ -369,7 +226,7 @@ namespace StorageAndTrade
             }
         }
 
-        void GetValue()
+        protected override void GetValue()
         {
             РахунокФактура_Objest.НомерДок = НомерДок.Text;
             РахунокФактура_Objest.ДатаДок = ДатаДок.Value;
@@ -392,19 +249,15 @@ namespace StorageAndTrade
             РахунокФактура_Objest.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку() + Товари.КлючовіСловаДляПошуку();
         }
 
-        #endregion
-
         string КлючовіСловаДляПошуку()
         {
             return $"\n{Організація.Pointer.Назва} {Валюта.Pointer.Назва} {Каса.Pointer.Назва} {Склад.Pointer.Назва} {Контрагент.Pointer.Назва} ";
         }
 
-        #region Save & Spend
+        #endregion
 
-        bool Save()
+        protected override bool Save()
         {
-            GetValue();
-
             bool isSave = false;
 
             try
@@ -413,73 +266,36 @@ namespace StorageAndTrade
             }
             catch (Exception ex)
             {
-                ФункціїДляПовідомлень.ДодатиПовідомленняПроПомилку(DateTime.Now, "Запис",
-                    РахунокФактура_Objest.UnigueID.UGuid, "Документ", РахунокФактура_Objest.Назва, ex.Message);
-
-                ФункціїДляПовідомлень.ВідкритиТермінал();
-            }
-
-            if (!isSave)
-            {
-                Message.Info(Program.GeneralForm, "Не вдалось записати документ");
+                MsgError(ex);
                 return false;
             }
 
-            Товари.SaveRecords();
+            if (isSave)
+                Товари.SaveRecords();
 
-            Program.GeneralForm?.RenameCurrentPageNotebook($"{РахунокФактура_Objest.Назва}");
+            UnigueID = РахунокФактура_Objest.UnigueID;
+            Caption = РахунокФактура_Objest.Назва;
 
-            return true;
+            return isSave;
         }
 
-        void SpendTheDocument(bool spendDoc)
+        protected override bool SpendTheDocument(bool spendDoc)
         {
             if (spendDoc)
             {
-                if (!РахунокФактура_Objest.SpendTheDocument(РахунокФактура_Objest.ДатаДок))
+                bool isSpend = РахунокФактура_Objest.SpendTheDocument(РахунокФактура_Objest.ДатаДок);
+
+                if (!isSpend)
                     ФункціїДляПовідомлень.ВідкритиТермінал();
+
+                return isSpend;
             }
             else
-                РахунокФактура_Objest.ClearSpendTheDocument();
-        }
-
-        void ReloadList()
-        {
-            if (PageList != null)
             {
-                PageList.SelectPointerItem = РахунокФактура_Objest.UnigueID;
-                PageList.LoadRecords();
+                РахунокФактура_Objest.ClearSpendTheDocument();
+
+                return true;
             }
         }
-
-        void OnSaveAndSpendClick(object? sender, EventArgs args)
-        {
-            //Зберегти
-            bool isSave = Save();
-
-            //Провести
-            if (isSave)
-                SpendTheDocument(true);
-
-            //Закрити сторінку
-            if (isSave && РахунокФактура_Objest.Spend)
-                Program.GeneralForm?.CloseCurrentPageNotebook();
-
-            ReloadList();
-        }
-
-        void OnSaveClick(object? sender, EventArgs args)
-        {
-            //Зберегти
-            bool isSave = Save();
-
-            //Очистити проводки
-            if (isSave)
-                SpendTheDocument(false);
-
-            ReloadList();
-        }
-
-        #endregion
     }
 }

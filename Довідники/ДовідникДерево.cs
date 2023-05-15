@@ -197,7 +197,7 @@ namespace StorageAndTrade
                         if (CallBack_OnSelectPointer != null)
                             CallBack_OnSelectPointer.Invoke(unigueID);
 
-                        Program.GeneralForm?.CloseCurrentPageNotebook();
+                        Program.GeneralForm?.CloseNotebookPageToCode(this.Name);
                     }
                 }
             }

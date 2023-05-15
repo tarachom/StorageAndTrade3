@@ -88,9 +88,6 @@ namespace StorageAndTrade
 
         protected override void GetValue()
         {
-            UnigueID = ПартіяТоварівКомпозит_Objest.UnigueID;
-            Caption = Назва.Text;
-
             ПартіяТоварівКомпозит_Objest.Назва = Назва.Text;
 
             /*
@@ -115,6 +112,9 @@ namespace StorageAndTrade
             {
                 MsgError(ex);
             }
+
+            UnigueID = ПартіяТоварівКомпозит_Objest.UnigueID;
+            Caption = Назва.Text;
         }
     }
 }

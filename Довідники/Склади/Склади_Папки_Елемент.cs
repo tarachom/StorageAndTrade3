@@ -69,9 +69,6 @@ namespace StorageAndTrade
 
         protected override void GetValue()
         {
-            UnigueID = Склади_Папки_Objest.UnigueID;
-            Caption = Назва.Text;
-
             Склади_Папки_Objest.Код = Код.Text;
             Склади_Папки_Objest.Назва = Назва.Text;
             Склади_Папки_Objest.Родич = Родич.Pointer;
@@ -89,6 +86,9 @@ namespace StorageAndTrade
             {
                 MsgError(ex);
             }
+
+            UnigueID = Склади_Папки_Objest.UnigueID;
+            Caption = Назва.Text;
         }
     }
 }

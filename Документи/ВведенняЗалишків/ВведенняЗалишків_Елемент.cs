@@ -33,13 +33,10 @@ using Перелічення = StorageAndTrade_1_0.Перелічення;
 
 namespace StorageAndTrade
 {
-    class ВведенняЗалишків_Елемент : VBox
+    class ВведенняЗалишків_Елемент : ДокументЕлемент
     {
-        public ВведенняЗалишків? PageList { get; set; }
-
-        public bool IsNew { get; set; } = true;
-
         public ВведенняЗалишків_Objest ВведенняЗалишків_Objest { get; set; } = new ВведенняЗалишків_Objest();
+
         #region Fields
 
         Entry НомерДок = new Entry() { WidthRequest = 100 };
@@ -63,44 +60,18 @@ namespace StorageAndTrade
 
         public ВведенняЗалишків_Елемент() : base()
         {
-            HBox hBox = new HBox();
+            CreateDocName(ВведенняЗалишків_Const.FULLNAME, НомерДок, ДатаДок);
 
-            Button bSaveAndSpend = new Button("Провести та закрити");
-            bSaveAndSpend.Clicked += OnSaveAndSpendClick;
+            CreateField(HBoxComment, "Коментар:", Коментар);
 
-            hBox.PackStart(bSaveAndSpend, false, false, 10);
+            NotebookTablePart.InsertPage(Товари, new Label("Товари"), 0);
+            NotebookTablePart.InsertPage(Каси, new Label("Каси"), 1);
+            NotebookTablePart.InsertPage(БанківськіРахунки, new Label("Банківські рахунки"), 2);
+            NotebookTablePart.InsertPage(РозрахункиЗКонтрагентами, new Label("Розрахунки з контрагентами"), 3);
 
-            Button bSave = new Button("Зберегти без проведення");
-            bSave.Clicked += OnSaveClick;
-
-            hBox.PackStart(bSave, false, false, 10);
-
-            //Проводки
-            LinkButton linkButtonProvodky = new LinkButton("Проводки") { Halign = Align.Start };
-            linkButtonProvodky.Clicked += (object? sender, EventArgs args) =>
-            {
-                Program.GeneralForm?.CreateNotebookPage($"Проводки", () =>
-                {
-                    Звіт_РухДокументівПоРегістрах page = new Звіт_РухДокументівПоРегістрах();
-                    page.CreateReport(ВведенняЗалишків_Objest.GetDocumentPointer());
-                    return page;
-                });
-            };
-
-            hBox.PackStart(linkButtonProvodky, false, false, 10);
-
-            PackStart(hBox, false, false, 10);
-
-            HPaned hPaned = new HPaned() { Orientation = Orientation.Vertical, BorderWidth = 5 };
+            NotebookTablePart.CurrentPage = 0;
 
             FillComboBoxes();
-
-            CreatePack1(hPaned);
-            CreatePack2(hPaned);
-
-            PackStart(hPaned, true, true, 0);
-
-            ShowAll();
         }
 
         void FillComboBoxes()
@@ -118,60 +89,13 @@ namespace StorageAndTrade
             }
         }
 
-        void CreatePack1(HPaned hPaned)
-        {
-            VBox vBox = new VBox();
-            hPaned.Pack1(vBox, false, false);
-
-            //НомерДок ДатаДок
-            HBox hBoxNumberDataDoc = new HBox() { Halign = Align.Start };
-            vBox.PackStart(hBoxNumberDataDoc, false, false, 5);
-
-            hBoxNumberDataDoc.PackStart(new Label($"{ВведенняЗалишків_Const.FULLNAME} №:"), false, false, 5);
-            hBoxNumberDataDoc.PackStart(НомерДок, false, false, 5);
-            hBoxNumberDataDoc.PackStart(new Label("від:"), false, false, 5);
-            hBoxNumberDataDoc.PackStart(ДатаДок, false, false, 5);
-
-            //Два блоки для полів -->
-            HBox hBoxContainer = new HBox();
-
-            Expander expanderHead = new Expander("Реквізити шапки") { Expanded = true };
-            expanderHead.Add(hBoxContainer);
-
-            vBox.PackStart(expanderHead, false, false, 5);
-
-            //Container1
-            VBox vBoxContainer1 = new VBox() { WidthRequest = 500 };
-            hBoxContainer.PackStart(vBoxContainer1, false, false, 5);
-
-            CreateContainer1(vBoxContainer1);
-
-            //Container2
-            VBox vBoxContainer2 = new VBox() { WidthRequest = 500 };
-            hBoxContainer.PackStart(vBoxContainer2, false, false, 5);
-
-            CreateContainer2(vBoxContainer2);
-            // <--
-
-            //Коментар
-            HBox hBoxComment = new HBox() { Halign = Align.Start };
-            vBox.PackStart(hBoxComment, false, false, 5);
-
-            hBoxComment.PackStart(new Label("Коментар: "), false, false, 5);
-            hBoxComment.PackStart(Коментар, false, false, 5);
-        }
-
-        void CreateContainer1(VBox vBox)
+        protected override void CreateContainer1(VBox vBox)
         {
             //Організація
-            HBox hBoxOrganization = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxOrganization, false, false, 5);
-
-            hBoxOrganization.PackStart(Організація, false, false, 5);
+            CreateField(vBox, null, Організація);
 
             //Контрагент
-            HBox hBoxKontragent = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxKontragent, false, false, 5);
+            CreateField(vBox, null, Контрагент);
 
             Контрагент.AfterSelectFunc = () =>
             {
@@ -205,93 +129,44 @@ namespace StorageAndTrade
                 }
             };
 
-            hBoxKontragent.PackStart(Контрагент, false, false, 5);
-
             //Договір
-            HBox hBoxDogovir = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxDogovir, false, false, 5);
+            CreateField(vBox, null, Договір);
 
             Договір.BeforeClickOpenFunc = () =>
             {
                 Договір.КонтрагентВласник = Контрагент.Pointer;
             };
-
-            hBoxDogovir.PackStart(Договір, false, false, 5);
         }
 
-        void CreateContainer2(VBox vBox)
+        protected override void CreateContainer2(VBox vBox)
         {
             //Склад
-            HBox hBoxSklad = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxSklad, false, false, 5);
-
-            hBoxSklad.PackStart(Склад, false, false, 5);
+            CreateField(vBox, null, Склад);
 
             //Валюта
-            HBox hBoxValuta = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxValuta, false, false, 5);
-
-            hBoxValuta.PackStart(Валюта, false, false, 5);
+            CreateField(vBox, null, Валюта);
         }
 
-        void CreateContainer3(VBox vBox)
+        protected override void CreateContainer3(VBox vBox)
         {
             //ГосподарськаОперація
-            HBox hBoxOperation = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxOperation, false, false, 5);
-
-            hBoxOperation.PackStart(new Label("Господарська операція: "), false, false, 0);
-            hBoxOperation.PackStart(ГосподарськаОперація, false, false, 5);
+            CreateField(vBox, "Господарська операція:", ГосподарськаОперація);
 
             //Підрозділ
-            HBox hBoxPidrozdil = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxPidrozdil, false, false, 5);
-
-            hBoxPidrozdil.PackStart(Підрозділ, false, false, 5);
+            CreateField(vBox, null, Підрозділ);
 
             //Автор
-            HBox hBoxAutor = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxAutor, false, false, 5);
-
-            hBoxAutor.PackStart(Автор, false, false, 5);
+            CreateField(vBox, null, Автор);
         }
 
-        void CreateContainer4(VBox vBox)
+        protected override void CreateContainer4(VBox vBox)
         {
 
-        }
-
-        void CreatePack2(HPaned hPaned)
-        {
-            Notebook notebook = new Notebook() { Scrollable = true, EnablePopup = true, BorderWidth = 0, ShowBorder = false };
-            notebook.TabPos = PositionType.Top;
-            notebook.AppendPage(Товари, new Label("Товари"));
-            notebook.AppendPage(Каси, new Label("Каси"));
-            notebook.AppendPage(БанківськіРахунки, new Label("Банківські рахунки"));
-            notebook.AppendPage(РозрахункиЗКонтрагентами, new Label("Розрахунки з контрагентами"));
-
-            VBox vBox = new VBox();
-            notebook.AppendPage(vBox, new Label("Додаткові реквізити"));
-
-            HBox hBoxContainer = new HBox();
-            vBox.PackStart(hBoxContainer, false, false, 5);
-
-            VBox vBoxContainer1 = new VBox() { WidthRequest = 500 };
-            hBoxContainer.PackStart(vBoxContainer1, false, false, 5);
-
-            CreateContainer3(vBoxContainer1);
-
-            VBox vBoxContainer2 = new VBox() { WidthRequest = 500 };
-            hBoxContainer.PackStart(vBoxContainer2, false, false, 5);
-
-            CreateContainer4(vBoxContainer2);
-
-            hPaned.Pack2(notebook, true, false);
         }
 
         #region Присвоєння / зчитування значень
 
-        public void SetValue()
+        public override void SetValue()
         {
             if (IsNew)
             {
@@ -335,7 +210,7 @@ namespace StorageAndTrade
             РозрахункиЗКонтрагентами.LoadRecords();
         }
 
-        void GetValue()
+        protected override void GetValue()
         {
             ВведенняЗалишків_Objest.НомерДок = НомерДок.Text;
             ВведенняЗалишків_Objest.ДатаДок = ДатаДок.Value;
@@ -357,19 +232,15 @@ namespace StorageAndTrade
                 РозрахункиЗКонтрагентами.КлючовіСловаДляПошуку();
         }
 
-        #endregion
-
         string КлючовіСловаДляПошуку()
         {
             return $"\n{Організація.Pointer.Назва} {Валюта.Pointer.Назва} {Склад.Pointer.Назва} {Контрагент.Pointer.Назва} ";
         }
 
-        #region Save & Spend
+        #endregion
 
-        bool Save()
+        protected override bool Save()
         {
-            GetValue();
-
             bool isSave = false;
 
             try
@@ -378,76 +249,36 @@ namespace StorageAndTrade
             }
             catch (Exception ex)
             {
-                ФункціїДляПовідомлень.ДодатиПовідомленняПроПомилку(DateTime.Now, "Запис",
-                    ВведенняЗалишків_Objest.UnigueID.UGuid, "Документ", ВведенняЗалишків_Objest.Назва, ex.Message);
-
-                ФункціїДляПовідомлень.ВідкритиТермінал();
-            }
-
-            if (!isSave)
-            {
-                Message.Info(Program.GeneralForm, "Не вдалось записати документ");
+                MsgError(ex);
                 return false;
             }
 
-            Товари.SaveRecords();
-            Каси.SaveRecords();
-            БанківськіРахунки.SaveRecords();
-            РозрахункиЗКонтрагентами.SaveRecords();
+            if (isSave)
+                Товари.SaveRecords();
 
-            Program.GeneralForm?.RenameCurrentPageNotebook($"{ВведенняЗалишків_Objest.Назва}");
+            UnigueID = ВведенняЗалишків_Objest.UnigueID;
+            Caption = ВведенняЗалишків_Objest.Назва;
 
-            return true;
+            return isSave;
         }
 
-        void SpendTheDocument(bool spendDoc)
+        protected override bool SpendTheDocument(bool spendDoc)
         {
             if (spendDoc)
             {
-                if (!ВведенняЗалишків_Objest.SpendTheDocument(ВведенняЗалишків_Objest.ДатаДок))
+                bool isSpend = ВведенняЗалишків_Objest.SpendTheDocument(ВведенняЗалишків_Objest.ДатаДок);
+
+                if (!isSpend)
                     ФункціїДляПовідомлень.ВідкритиТермінал();
+
+                return isSpend;
             }
             else
-                ВведенняЗалишків_Objest.ClearSpendTheDocument();
-        }
-
-        void ReloadList()
-        {
-            if (PageList != null)
             {
-                PageList.SelectPointerItem = ВведенняЗалишків_Objest.UnigueID;
-                PageList.LoadRecords();
+                ВведенняЗалишків_Objest.ClearSpendTheDocument();
+
+                return true;
             }
         }
-
-        void OnSaveAndSpendClick(object? sender, EventArgs args)
-        {
-            //Зберегти
-            bool isSave = Save();
-
-            //Провести
-            if (isSave)
-                SpendTheDocument(true);
-
-            //Закрити сторінку
-            if (isSave && ВведенняЗалишків_Objest.Spend)
-                Program.GeneralForm?.CloseCurrentPageNotebook();
-
-            ReloadList();
-        }
-
-        void OnSaveClick(object? sender, EventArgs args)
-        {
-            //Зберегти
-            bool isSave = Save();
-
-            //Очистити проводки
-            if (isSave)
-                SpendTheDocument(false);
-
-            ReloadList();
-        }
-
-        #endregion
     }
 }

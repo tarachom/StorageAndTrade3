@@ -87,7 +87,7 @@ namespace StorageAndTrade
                 {
                     ЗамовленняКлієнта_Елемент page = new ЗамовленняКлієнта_Елемент
                     {
-                        PageList = this,
+                        CallBack_LoadRecords = CallBack_LoadRecords,
                         IsNew = true
                     };
 
@@ -105,7 +105,7 @@ namespace StorageAndTrade
                     {
                         ЗамовленняКлієнта_Елемент page = new ЗамовленняКлієнта_Елемент
                         {
-                            PageList = this,
+                            CallBack_LoadRecords = CallBack_LoadRecords,
                             IsNew = false,
                             ЗамовленняКлієнта_Objest = ЗамовленняКлієнта_Objest,
                         };

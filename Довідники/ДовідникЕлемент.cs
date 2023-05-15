@@ -210,9 +210,9 @@ namespace StorageAndTrade
                 CallBack_LoadRecords.Invoke(UnigueID);
 
             if (closePage)
-                Program.GeneralForm?.CloseCurrentPageNotebook();
+                Program.GeneralForm?.CloseNotebookPageToCode(this.Name);
             else
-                Program.GeneralForm?.RenameCurrentPageNotebook(Caption);
+                Program.GeneralForm?.RenameNotebookPageToCode(Caption, this.Name);
         }
 
         /// <summary>

@@ -172,9 +172,6 @@ namespace StorageAndTrade
 
         protected override void GetValue()
         {
-            UnigueID = ДоговориКонтрагентів_Objest.UnigueID;
-            Caption = Назва.Text;
-
             ДоговориКонтрагентів_Objest.Код = Код.Text;
             ДоговориКонтрагентів_Objest.Назва = Назва.Text;
             ДоговориКонтрагентів_Objest.Дата = Дата.Value;
@@ -208,6 +205,9 @@ namespace StorageAndTrade
             {
                 MsgError(ex);
             }
+
+            UnigueID = ДоговориКонтрагентів_Objest.UnigueID;
+            Caption = Назва.Text;
         }
     }
 }

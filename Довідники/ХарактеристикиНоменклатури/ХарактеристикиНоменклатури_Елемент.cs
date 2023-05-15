@@ -72,9 +72,6 @@ namespace StorageAndTrade
 
         protected override void GetValue()
         {
-            UnigueID = ХарактеристикиНоменклатури_Objest.UnigueID;
-            Caption = Назва.Text;
-
             ХарактеристикиНоменклатури_Objest.Код = Код.Text;
             ХарактеристикиНоменклатури_Objest.Назва = Назва.Text;
             ХарактеристикиНоменклатури_Objest.НазваПовна = НазваПовна.Buffer.Text;
@@ -93,6 +90,9 @@ namespace StorageAndTrade
             {
                 MsgError(ex);
             }
+
+            UnigueID = ХарактеристикиНоменклатури_Objest.UnigueID;
+            Caption = Назва.Text;
         }
     }
 }

@@ -84,15 +84,12 @@ namespace StorageAndTrade
             Код.Text = Блокнот_Objest.Код;
             Назва.Text = Блокнот_Objest.Назва;
             ДатаЗапису.Value = Блокнот_Objest.ДатаЗапису;
-            Опис.Buffer. Text = Блокнот_Objest.Опис;
+            Опис.Buffer.Text = Блокнот_Objest.Опис;
             Лінк.Text = Блокнот_Objest.Лінк;
         }
 
         protected override void GetValue()
         {
-            UnigueID = Блокнот_Objest.UnigueID;
-            Caption = Назва.Text;
-
             Блокнот_Objest.Код = Код.Text;
             Блокнот_Objest.Назва = Назва.Text;
             Блокнот_Objest.ДатаЗапису = ДатаЗапису.Value;
@@ -113,7 +110,8 @@ namespace StorageAndTrade
                 MsgError(ex);
             }
 
-
+            UnigueID = Блокнот_Objest.UnigueID;
+            Caption = Назва.Text;
         }
     }
 }

@@ -71,9 +71,6 @@ namespace StorageAndTrade
 
         protected override void GetValue()
         {
-            UnigueID = ПакуванняОдиниціВиміру_Objest.UnigueID;
-            Caption = Назва.Text;
-
             ПакуванняОдиниціВиміру_Objest.Код = Код.Text;
             ПакуванняОдиниціВиміру_Objest.Назва = Назва.Text;
             ПакуванняОдиниціВиміру_Objest.НазваПовна = НазваПовна.Text;
@@ -92,6 +89,9 @@ namespace StorageAndTrade
             {
                 MsgError(ex);
             }
+
+            UnigueID = ПакуванняОдиниціВиміру_Objest.UnigueID;
+            Caption = Назва.Text;
         }
     }
 }

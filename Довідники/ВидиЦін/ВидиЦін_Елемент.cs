@@ -63,9 +63,6 @@ namespace StorageAndTrade
 
         protected override void GetValue()
         {
-            UnigueID = ВидиЦін_Objest.UnigueID;
-            Caption = Назва.Text;
-
             ВидиЦін_Objest.Код = Код.Text;
             ВидиЦін_Objest.Назва = Назва.Text;
             ВидиЦін_Objest.Валюта = Валюта.Pointer;
@@ -83,6 +80,9 @@ namespace StorageAndTrade
             {
                 MsgError(ex);
             }
+
+            UnigueID = ВидиЦін_Objest.UnigueID;
+            Caption = Назва.Text;
         }
     }
 }

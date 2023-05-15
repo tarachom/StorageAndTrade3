@@ -74,9 +74,6 @@ namespace StorageAndTrade
 
         protected override void GetValue()
         {
-            UnigueID = СкладськіПриміщення_Objest.UnigueID;
-            Caption = Назва.Text;
-
             СкладськіПриміщення_Objest.Назва = Назва.Text;
             СкладськіПриміщення_Objest.Склад = Склад.Pointer;
             СкладськіПриміщення_Objest.НалаштуванняАдресногоЗберігання = Enum.Parse<НалаштуванняАдресногоЗберігання>(Налаштування.ActiveId);
@@ -94,6 +91,9 @@ namespace StorageAndTrade
             {
                 MsgError(ex);
             }
+
+            UnigueID = СкладськіПриміщення_Objest.UnigueID;
+            Caption = Назва.Text;
         }
     }
 }
