@@ -254,8 +254,13 @@ namespace StorageAndTrade
             }
 
             if (isSave)
+            {
                 Товари.SaveRecords();
-
+                Каси.SaveRecords();
+                БанківськіРахунки.SaveRecords();
+                РозрахункиЗКонтрагентами.SaveRecords();
+            }
+                
             UnigueID = ВведенняЗалишків_Objest.UnigueID;
             Caption = ВведенняЗалишків_Objest.Назва;
 
