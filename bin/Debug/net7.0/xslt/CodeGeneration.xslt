@@ -61,24 +61,19 @@ limitations under the License.
         <xsl:value-of select="Pointer"/>
         <xsl:text>_Pointer</xsl:text>
       </xsl:when>
-      <!--
-      <xsl:when test="Type = 'empty_pointer'">
-        <xsl:text>EmptyPointer</xsl:text>
-      </xsl:when>
-      -->
-	  <xsl:when test="Type = 'any_pointer'">
+      <xsl:when test="Type = 'any_pointer'">
         <xsl:text>Guid</xsl:text>
-      </xsl:when>
-	  <xsl:when test="Type = 'composite_pointer'">
+        </xsl:when>
+      <xsl:when test="Type = 'composite_pointer'">
         <xsl:text>UuidAndText</xsl:text>
       </xsl:when>
       <xsl:when test="Type = 'enum'">
         <xsl:value-of select="Pointer"/>
       </xsl:when>
-	  <xsl:when test="Type = 'bytea'">
-	    <xsl:text>byte[]</xsl:text>
-      </xsl:when>
-    </xsl:choose>    
+      <xsl:when test="Type = 'bytea'">
+        <xsl:text>byte[]</xsl:text>
+        </xsl:when>
+      </xsl:choose>    
   </xsl:template>
   
   <!-- Для конструкторів. Значення поля по замовчуванню відповідно до типу -->
@@ -116,24 +111,19 @@ limitations under the License.
         <xsl:value-of select="Pointer"/>
         <xsl:text>_Pointer()</xsl:text>
       </xsl:when>
-      <!--
-      <xsl:when test="Type = 'empty_pointer'">
-        <xsl:text>new EmptyPointer()</xsl:text>
-      </xsl:when>
-      -->
-	  <xsl:when test="Type = 'any_pointer'">
+      <xsl:when test="Type = 'any_pointer'">
         <xsl:text>new Guid()</xsl:text>
-      </xsl:when>
-	  <xsl:when test="Type = 'composite_pointer'">
+        </xsl:when>
+      <xsl:when test="Type = 'composite_pointer'">
         <xsl:text>new UuidAndText()</xsl:text>
       </xsl:when>
       <xsl:when test="Type = 'enum'">
         <xsl:text>0</xsl:text>
       </xsl:when>
-	  <xsl:when test="Type = 'bytea'">
-	    <xsl:text>new byte[] { }</xsl:text>
-      </xsl:when>
-    </xsl:choose>
+      <xsl:when test="Type = 'bytea'">
+        <xsl:text>new byte[] { }</xsl:text>
+        </xsl:when>
+      </xsl:choose>
   </xsl:template>
 
   <!-- Для параметрів функцій. Значення параметра по замовчуванню відповідно до типу -->
@@ -169,21 +159,16 @@ limitations under the License.
       <xsl:when test="Type = 'pointer'">
         <xsl:text>null</xsl:text>
       </xsl:when>
-      <!--
-      <xsl:when test="Type = 'empty_pointer'">
-        <xsl:text>null</xsl:text>
-      </xsl:when>
-      -->
-	  <xsl:when test="Type = 'any_pointer'">
+      <xsl:when test="Type = 'any_pointer'">
         <xsl:text>Guid.Empty</xsl:text>
-      </xsl:when>
-	  <xsl:when test="Type = 'composite_pointer'">
+        </xsl:when>
+      <xsl:when test="Type = 'composite_pointer'">
         <xsl:text>null</xsl:text>
       </xsl:when>
       <xsl:when test="Type = 'enum'">
         <xsl:text>0</xsl:text>
       </xsl:when>
-	  <xsl:when test="Type = 'bytea'">
+	    <xsl:when test="Type = 'bytea'">
         <xsl:text>null</xsl:text>
       </xsl:when>
     </xsl:choose>
@@ -195,7 +180,7 @@ limitations under the License.
      
      <xsl:choose>
         <xsl:when test="Type = 'string'">
-          <xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"]?.ToString() ?? ""</xsl:text>
+          <xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"].ToString() ?? ""</xsl:text>
         </xsl:when>
         <xsl:when test="Type = 'string[]'">
           <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
@@ -224,7 +209,7 @@ limitations under the License.
         </xsl:when>
         <xsl:when test="Type = 'boolean'">
           <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
-          <xsl:text>bool.Parse(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"]?.ToString() ?? "False")</xsl:text>
+          <xsl:text>(bool)</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"]</xsl:text>
           <xsl:text> : false</xsl:text>
         </xsl:when>
         <xsl:when test="Type = 'time'">
@@ -234,25 +219,20 @@ limitations under the License.
         </xsl:when>
         <xsl:when test="Type = 'date' or Type = 'datetime'">
           <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
-          <xsl:text>DateTime.Parse(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"]?.ToString() ?? DateTime.MinValue.ToString())</xsl:text>
+          <xsl:text>DateTime.Parse(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"].ToString() ?? DateTime.MinValue.ToString())</xsl:text>
           <xsl:text> : DateTime.MinValue</xsl:text>
         </xsl:when>
         <xsl:when test="Type = 'pointer'">
           <xsl:text>new </xsl:text><xsl:value-of select="Pointer"/>
           <xsl:text>_Pointer(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"])</xsl:text>
         </xsl:when>
-        <!--
-        <xsl:when test="Type = 'empty_pointer'">
-          <xsl:text>new EmptyPointer()</xsl:text>
-        </xsl:when>
-        -->
-		<xsl:when test="Type = 'any_pointer'">
-		  <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
-          <xsl:text>Guid.Parse(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"]?.ToString() ?? Guid.Empty.ToString())</xsl:text>
+        <xsl:when test="Type = 'any_pointer'">
+          <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
+          <xsl:text>(Guid)</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"]</xsl:text>
           <xsl:text> : Guid.Empty</xsl:text>
         </xsl:when>
-		<xsl:when test="Type = 'composite_pointer'">
-		  <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
+        <xsl:when test="Type = 'composite_pointer'">
+		    <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
           <xsl:text>(UuidAndText)</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"]</xsl:text>
           <xsl:text> : new UuidAndText()</xsl:text>
         </xsl:when>
@@ -262,7 +242,7 @@ limitations under the License.
           <xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"]</xsl:text>
           <xsl:text> : 0</xsl:text>
         </xsl:when>
-		<xsl:when test="Type = 'bytea'">
+		    <xsl:when test="Type = 'bytea'">
           <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
           <xsl:text>(byte[])</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"]</xsl:text>
           <xsl:text> : new byte[] { }</xsl:text>
@@ -1644,12 +1624,14 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Журнали
             if (Current == null)
                 return null;
 
+            <xsl:if test="count(Configuration/Documents/Document) &lt; 0">
             switch (Current.TypeDocument)
             {
                 <xsl:for-each select="Configuration/Documents/Document">
                     <xsl:text>case </xsl:text>"<xsl:value-of select="Name"/>": return new Документи.<xsl:value-of select="Name"/>_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
                 </xsl:for-each>
             }
+            </xsl:if>
 			
 			      return null;
         }

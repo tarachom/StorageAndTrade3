@@ -789,6 +789,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи.Т
             List&lt;string&gt; allQuery = new List&lt;string&gt;();
             Dictionary&lt;string, object&gt; paramQuery = new Dictionary&lt;string, object&gt;();
 
+          <xsl:if test="count(TabularLists/TabularList) != 0">
             <xsl:for-each select="TabularLists/TabularList">
               <xsl:variable name="DocumentName" select="Name"/>
               <xsl:variable name="Table" select="Table"/>
@@ -859,7 +860,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи.Т
                 </xsl:for-each>
                 <xsl:text>";</xsl:text>
             </xsl:if>
-
+          
             string[] columnsName;
             List&lt;Dictionary&lt;string, object&gt;&gt; listRow;
 
@@ -885,6 +886,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи.Т
                         SelectPath = CurrentPath;
                 }
             }
+          </xsl:if>
         }
     }
     #endregion
