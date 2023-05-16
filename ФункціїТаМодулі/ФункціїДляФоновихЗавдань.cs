@@ -125,7 +125,7 @@ LIMIT 1
                 return null;
         }
 
-        public static List<Dictionary<string, object>> ОтриматиКурсиВалютДляСтартовоїСторінки(int КількістьЗаписів = 50)
+        public static List<Dictionary<string, object>> ОтриматиКурсиВалютДляСтартовоїСторінки()
         {
             string query = @$"
 WITH Валюти AS
