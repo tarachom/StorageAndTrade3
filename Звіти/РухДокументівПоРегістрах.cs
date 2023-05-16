@@ -66,10 +66,10 @@ namespace StorageAndTrade
         {
             Dictionary<string, string> columns = new Dictionary<string, string>();
 
-            columns.Add("Номенклатура_Назва", new Номенклатура_Pointer().GetBasis().Text);
-            columns.Add("ХарактеристикаНоменклатури_Назва", new ХарактеристикиНоменклатури_Pointer().GetBasis().Text);
-            columns.Add("Серія_Номер", new СеріїНоменклатури_Pointer().GetBasis().Text);
-            columns.Add("Склад_Назва", new Склади_Pointer().GetBasis().Text);
+            columns.Add("Номенклатура_Назва", Номенклатура_Const.POINTER);
+            columns.Add("ХарактеристикаНоменклатури_Назва", ХарактеристикиНоменклатури_Const.POINTER);
+            columns.Add("Серія_Номер", СеріїНоменклатури_Const.POINTER);
+            columns.Add("Склад_Назва", Склади_Const.POINTER);
 
             return columns;
         }
@@ -170,12 +170,12 @@ ORDER BY Номенклатура_Назва
         {
             Dictionary<string, string> columns = new Dictionary<string, string>();
 
-            columns.Add("Організація_Назва", new Організації_Pointer().GetBasis().Text);
-            columns.Add("ПартіяТоварівКомпозит_Назва", new ПартіяТоварівКомпозит_Pointer().GetBasis().Text);
-            columns.Add("Номенклатура_Назва", new Номенклатура_Pointer().GetBasis().Text);
-            columns.Add("ХарактеристикаНоменклатури_Назва", new ХарактеристикиНоменклатури_Pointer().GetBasis().Text);
-            columns.Add("Серія_Номер", new СеріїНоменклатури_Pointer().GetBasis().Text);
-            columns.Add("Склад_Назва", new Склади_Pointer().GetBasis().Text);
+            columns.Add("Організація_Назва", Організації_Const.POINTER);
+            columns.Add("ПартіяТоварівКомпозит_Назва", ПартіяТоварівКомпозит_Const.POINTER);
+            columns.Add("Номенклатура_Назва", Номенклатура_Const.POINTER);
+            columns.Add("ХарактеристикаНоменклатури_Назва", ХарактеристикиНоменклатури_Const.POINTER);
+            columns.Add("Серія_Номер", СеріїНоменклатури_Const.POINTER);
+            columns.Add("Склад_Назва", Склади_Const.POINTER);
 
             return columns;
         }
@@ -352,10 +352,10 @@ ORDER BY Організація_Назва
         {
             Dictionary<string, string> columns = new Dictionary<string, string>();
 
-            columns.Add("ЗамовленняКлієнта_Назва", new ЗамовленняКлієнта_Pointer().GetBasis().Text);
-            columns.Add("Номенклатура_Назва", new Номенклатура_Pointer().GetBasis().Text);
-            columns.Add("ХарактеристикаНоменклатури_Назва", new ХарактеристикиНоменклатури_Pointer().GetBasis().Text);
-            columns.Add("Склад_Назва", new Склади_Pointer().GetBasis().Text);
+            columns.Add("ЗамовленняКлієнта_Назва", ЗамовленняКлієнта_Const.POINTER);
+            columns.Add("Номенклатура_Назва", Номенклатура_Const.POINTER);
+            columns.Add("ХарактеристикаНоменклатури_Назва", ХарактеристикиНоменклатури_Const.POINTER);
+            columns.Add("Склад_Назва", Склади_Const.POINTER);
 
             return columns;
         }
@@ -445,8 +445,8 @@ ORDER BY Номенклатура_Назва
         {
             Dictionary<string, string> columns = new Dictionary<string, string>();
 
-            columns.Add("Контрагент_Назва", new Контрагенти_Pointer().GetBasis().Text);
-            columns.Add("Валюта_Назва", new Валюти_Pointer().GetBasis().Text);
+            columns.Add("Контрагент_Назва", Контрагенти_Const.POINTER);
+            columns.Add("Валюта_Назва", Валюти_Const.POINTER);
 
             return columns;
         }
@@ -526,9 +526,9 @@ WHERE
         {
             Dictionary<string, string> columns = new Dictionary<string, string>();
 
-            columns.Add("Номенклатура_Назва", new Номенклатура_Pointer().GetBasis().Text);
-            columns.Add("ХарактеристикаНоменклатури_Назва", new ХарактеристикиНоменклатури_Pointer().GetBasis().Text);
-            columns.Add("Склад_Назва", new Склади_Pointer().GetBasis().Text);
+            columns.Add("Номенклатура_Назва", Номенклатура_Const.POINTER);
+            columns.Add("ХарактеристикаНоменклатури_Назва", ХарактеристикиНоменклатури_Const.POINTER);
+            columns.Add("Склад_Назва", Склади_Const.POINTER);
 
             return columns;
         }
@@ -620,10 +620,10 @@ ORDER BY Номенклатура_Назва
         {
             Dictionary<string, string> columns = new Dictionary<string, string>();
 
-            columns.Add("ЗамовленняПостачальнику_Назва", new ЗамовленняПостачальнику_Pointer().GetBasis().Text);
-            columns.Add("Номенклатура_Назва", new Номенклатура_Pointer().GetBasis().Text);
-            columns.Add("ХарактеристикаНоменклатури_Назва", new ХарактеристикиНоменклатури_Pointer().GetBasis().Text);
-            columns.Add("Склад_Назва", new Склади_Pointer().GetBasis().Text);
+            columns.Add("ЗамовленняПостачальнику_Назва", ЗамовленняПостачальнику_Const.POINTER);
+            columns.Add("Номенклатура_Назва", Номенклатура_Const.POINTER);
+            columns.Add("ХарактеристикаНоменклатури_Назва", ХарактеристикиНоменклатури_Const.POINTER);
+            columns.Add("Склад_Назва", Склади_Const.POINTER);
 
             return columns;
         }
@@ -710,8 +710,8 @@ ORDER BY Номенклатура_Назва
         {
             Dictionary<string, string> columns = new Dictionary<string, string>();
 
-            columns.Add("Контрагент_Назва", new Контрагенти_Pointer().GetBasis().Text);
-            columns.Add("Валюта_Назва", new Валюти_Pointer().GetBasis().Text);
+            columns.Add("Контрагент_Назва", Контрагенти_Const.POINTER);
+            columns.Add("Валюта_Назва", Валюти_Const.POINTER);
 
             return columns;
         }
@@ -858,9 +858,9 @@ WHERE
         {
             Dictionary<string, string> columns = new Dictionary<string, string>();
 
-            columns.Add("Організація_Назва", new Організації_Pointer().GetBasis().Text);
-            columns.Add("Каса_Назва", new Каси_Pointer().GetBasis().Text);
-            columns.Add("Валюта_Назва", new Валюти_Pointer().GetBasis().Text);
+            columns.Add("Організація_Назва", Організації_Const.POINTER);
+            columns.Add("Каса_Назва", Каси_Const.POINTER);
+            columns.Add("Валюта_Назва", Валюти_Const.POINTER);
 
             return columns;
         }
@@ -951,12 +951,12 @@ ORDER BY Організація_Назва
         {
             Dictionary<string, string> columns = new Dictionary<string, string>();
 
-            columns.Add("Організація_Назва", new Організації_Pointer().GetBasis().Text);
-            columns.Add("Склад_Назва", new Склади_Pointer().GetBasis().Text);
-            columns.Add("Контрагент_Назва", new Контрагенти_Pointer().GetBasis().Text);
-            columns.Add("Договір_Назва", new ДоговориКонтрагентів_Pointer().GetBasis().Text);
-            columns.Add("Номенклатура_Назва", new Номенклатура_Pointer().GetBasis().Text);
-            columns.Add("ХарактеристикаНоменклатури_Назва", new ХарактеристикиНоменклатури_Pointer().GetBasis().Text);
+            columns.Add("Організація_Назва", Організації_Const.POINTER);
+            columns.Add("Склад_Назва", Склади_Const.POINTER);
+            columns.Add("Контрагент_Назва", Контрагенти_Const.POINTER);
+            columns.Add("Договір_Назва", ДоговориКонтрагентів_Const.POINTER);
+            columns.Add("Номенклатура_Назва", Номенклатура_Const.POINTER);
+            columns.Add("ХарактеристикаНоменклатури_Назва", ХарактеристикиНоменклатури_Const.POINTER);
 
             return columns;
         }
@@ -1066,12 +1066,12 @@ WHERE
         {
             Dictionary<string, string> columns = new Dictionary<string, string>();
 
-            columns.Add("Організація_Назва", new Організації_Pointer().GetBasis().Text);
-            columns.Add("Склад_Назва", new Склади_Pointer().GetBasis().Text);
-            columns.Add("Контрагент_Назва", new Контрагенти_Pointer().GetBasis().Text);
-            columns.Add("Договір_Назва", new ДоговориКонтрагентів_Pointer().GetBasis().Text);
-            columns.Add("Номенклатура_Назва", new Номенклатура_Pointer().GetBasis().Text);
-            columns.Add("ХарактеристикаНоменклатури_Назва", new ХарактеристикиНоменклатури_Pointer().GetBasis().Text);
+            columns.Add("Організація_Назва", Організації_Const.POINTER);
+            columns.Add("Склад_Назва", Склади_Const.POINTER);
+            columns.Add("Контрагент_Назва", Контрагенти_Const.POINTER);
+            columns.Add("Договір_Назва", ДоговориКонтрагентів_Const.POINTER);
+            columns.Add("Номенклатура_Назва", Номенклатура_Const.POINTER);
+            columns.Add("ХарактеристикаНоменклатури_Назва", ХарактеристикиНоменклатури_Const.POINTER);
 
             return columns;
         }
@@ -1180,11 +1180,11 @@ WHERE
         {
             Dictionary<string, string> columns = new Dictionary<string, string>();
 
-            columns.Add("Номенклатура_Назва", new Номенклатура_Pointer().GetBasis().Text);
-            columns.Add("ХарактеристикаНоменклатури_Назва", new ХарактеристикиНоменклатури_Pointer().GetBasis().Text);
-            columns.Add("Пакування_Назва", new ПакуванняОдиниціВиміру_Pointer().GetBasis().Text);
-            columns.Add("Комірка_Назва", new СкладськіКомірки_Pointer().GetBasis().Text);
-            columns.Add("Серія_Номер", new СеріїНоменклатури_Pointer().GetBasis().Text);
+            columns.Add("Номенклатура_Назва", Номенклатура_Const.POINTER);
+            columns.Add("ХарактеристикаНоменклатури_Назва", ХарактеристикиНоменклатури_Const.POINTER);
+            columns.Add("Пакування_Назва", ПакуванняОдиниціВиміру_Const.POINTER);
+            columns.Add("Комірка_Назва", СкладськіКомірки_Const.POINTER);
+            columns.Add("Серія_Номер", СеріїНоменклатури_Const.POINTER);
 
             return columns;
         }

@@ -367,9 +367,9 @@ ORDER BY Номенклатура_Назва
             КолонкиДаних.Add("Склад_Назва", "Склад");
 
             Dictionary<string, string> ТипиДаних = new Dictionary<string, string>();
-            ТипиДаних.Add("Номенклатура_Назва", new Номенклатура_Pointer().GetBasis().Text);
-            ТипиДаних.Add("ХарактеристикаНоменклатури_Назва", new ХарактеристикиНоменклатури_Pointer().GetBasis().Text);
-            ТипиДаних.Add("Склад_Назва", new Склади_Pointer().GetBasis().Text);
+            ТипиДаних.Add("Номенклатура_Назва", Номенклатура_Const.POINTER);
+            ТипиДаних.Add("ХарактеристикаНоменклатури_Назва", ХарактеристикиНоменклатури_Const.POINTER);
+            ТипиДаних.Add("Склад_Назва", Склади_Const.POINTER);
 
             Dictionary<string, float> ПозиціяТекстуВКолонці = new Dictionary<string, float>();
             ПозиціяТекстуВКолонці.Add("ВНаявності", 1);
@@ -595,9 +595,9 @@ ORDER BY period ASC
 
             Dictionary<string, string> ТипиДаних = new Dictionary<string, string>();
             ТипиДаних.Add("Документ", "Документи.*");
-            ТипиДаних.Add("Номенклатура_Назва", new Номенклатура_Pointer().GetBasis().Text);
-            ТипиДаних.Add("ХарактеристикаНоменклатури_Назва", new ХарактеристикиНоменклатури_Pointer().GetBasis().Text);
-            ТипиДаних.Add("Склад_Назва", new Склади_Pointer().GetBasis().Text);
+            ТипиДаних.Add("Номенклатура_Назва", Номенклатура_Const.POINTER);
+            ТипиДаних.Add("ХарактеристикаНоменклатури_Назва", ХарактеристикиНоменклатури_Const.POINTER);
+            ТипиДаних.Add("Склад_Назва", Склади_Const.POINTER);
 
             Dictionary<string, float> ПозиціяТекстуВКолонці = new Dictionary<string, float>();
             ПозиціяТекстуВКолонці.Add("income", 0.5f);

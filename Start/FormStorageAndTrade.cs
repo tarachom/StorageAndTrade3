@@ -89,7 +89,6 @@ namespace StorageAndTrade
             {
                 Користувачі_Objest НовийКористувач = new Користувачі_Objest();
                 НовийКористувач.New();
-                НовийКористувач.Код = (++НумераціяДовідників.Користувачі_Const).ToString("D6");
                 НовийКористувач.КодВСпеціальнійТаблиці = Config.Kernel!.User;
                 НовийКористувач.Назва = Config.Kernel!.DataBase.SpetialTableUsersGetFullName(KernelUser);
                 НовийКористувач.Save();

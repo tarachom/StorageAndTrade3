@@ -291,9 +291,9 @@ ORDER BY Організація_Назва, Каса_Назва, Валюта_Н
             КолонкиДаних.Add("Валюта_Назва", "Валюта");
 
             Dictionary<string, string> ТипиДаних = new Dictionary<string, string>();
-            ТипиДаних.Add("Організація_Назва", new Організації_Pointer().GetBasis().Text);
-            ТипиДаних.Add("Каса_Назва", new Каси_Pointer().GetBasis().Text);
-            ТипиДаних.Add("Валюта_Назва", new Валюти_Pointer().GetBasis().Text);
+            ТипиДаних.Add("Організація_Назва", Організації_Const.POINTER);
+            ТипиДаних.Add("Каса_Назва", Каси_Const.POINTER);
+            ТипиДаних.Add("Валюта_Назва", Валюти_Const.POINTER);
 
             Dictionary<string, float> ПозиціяТекстуВКолонці = new Dictionary<string, float>();
             ПозиціяТекстуВКолонці.Add("Сума", 1);
@@ -489,9 +489,9 @@ ORDER BY Організація_Назва, Каса_Назва, Валюта_Н
             КолонкиДаних.Add("Валюта_Назва", "Валюта");
 
             Dictionary<string, string> ТипиДаних = new Dictionary<string, string>();
-            ТипиДаних.Add("Організація_Назва", new Організації_Pointer().GetBasis().Text);
-            ТипиДаних.Add("Каса_Назва", new Каси_Pointer().GetBasis().Text);
-            ТипиДаних.Add("Валюта_Назва", new Валюти_Pointer().GetBasis().Text);
+            ТипиДаних.Add("Організація_Назва", Організації_Const.POINTER);
+            ТипиДаних.Add("Каса_Назва", Каси_Const.POINTER);
+            ТипиДаних.Add("Валюта_Назва", Валюти_Const.POINTER);
 
             Dictionary<string, float> ПозиціяТекстуВКолонці = new Dictionary<string, float>();
             ПозиціяТекстуВКолонці.Add("ПочатковийЗалишок", 1);
@@ -659,9 +659,9 @@ ORDER BY period ASC
 
             Dictionary<string, string> ТипиДаних = new Dictionary<string, string>();
             ТипиДаних.Add("Документ", "Документи.*");
-            ТипиДаних.Add("Організація_Назва", new Організації_Pointer().GetBasis().Text);
-            ТипиДаних.Add("Каса_Назва", new Каси_Pointer().GetBasis().Text);
-            ТипиДаних.Add("Валюта_Назва", new Валюти_Pointer().GetBasis().Text);
+            ТипиДаних.Add("Організація_Назва", Організації_Const.POINTER);
+            ТипиДаних.Add("Каса_Назва", Каси_Const.POINTER);
+            ТипиДаних.Add("Валюта_Назва", Валюти_Const.POINTER);
 
             Dictionary<string, float> ПозиціяТекстуВКолонці = new Dictionary<string, float>();
             ПозиціяТекстуВКолонці.Add("income", 0.5f);

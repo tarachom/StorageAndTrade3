@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 15.05.2023 16:56:03
+ * Дата конфігурації: 16.05.2023 14:05:05
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -1925,8 +1925,9 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "Організації"
     public static class Організації_Const
     {
-        public const string FULLNAME = "Організації";
         public const string TABLE = "tab_a01";
+        public const string POINTER = "Довідники.Організації";
+        public const string FULLNAME = "Організації";
         public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "col_a1";
@@ -2023,7 +2024,6 @@ namespace StorageAndTrade_1_0.Довідники
             copy.СвідоцтвоДатаВидачі = СвідоцтвоДатаВидачі;
             copy.Холдинг = Холдинг;
             
-            
             if (copyTableParts)
             {
             
@@ -2032,6 +2032,7 @@ namespace StorageAndTrade_1_0.Довідники
                 copy.Контакти_TablePart.Records = Контакти_TablePart.Copy();
             
             }
+            
 
             copy.New();
             Організації_Triggers.Copying(copy, this);
@@ -2057,7 +2058,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.Організації");
+            return new UuidAndText(UnigueID.UGuid, Організації_Const.POINTER);
         }
 
         public string GetPresentation()
@@ -2133,7 +2134,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.Організації");
+            return new UuidAndText(UnigueID.UGuid, Організації_Const.POINTER);
         }
 
         public void Clear()
@@ -2284,8 +2285,9 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "Номенклатура"
     public static class Номенклатура_Const
     {
-        public const string FULLNAME = "Номенклатура";
         public const string TABLE = "tab_a03";
+        public const string POINTER = "Довідники.Номенклатура";
+        public const string FULLNAME = "Номенклатура";
         public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "col_b1";
@@ -2392,7 +2394,6 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Папка = Папка;
             copy.ОсновнаКартинкаФайл = ОсновнаКартинкаФайл;
             
-            
             if (copyTableParts)
             {
             
@@ -2401,6 +2402,7 @@ namespace StorageAndTrade_1_0.Довідники
                 copy.Файли_TablePart.Records = Файли_TablePart.Copy();
             
             }
+            
 
             copy.New();
             Номенклатура_Triggers.Copying(copy, this);
@@ -2426,7 +2428,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.Номенклатура");
+            return new UuidAndText(UnigueID.UGuid, Номенклатура_Const.POINTER);
         }
 
         public string GetPresentation()
@@ -2504,7 +2506,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.Номенклатура");
+            return new UuidAndText(UnigueID.UGuid, Номенклатура_Const.POINTER);
         }
 
         public void Clear()
@@ -2631,8 +2633,9 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "Виробники"
     public static class Виробники_Const
     {
-        public const string FULLNAME = "Виробники";
         public const string TABLE = "tab_a04";
+        public const string POINTER = "Довідники.Виробники";
+        public const string FULLNAME = "Виробники";
         public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "col_b6";
@@ -2691,11 +2694,6 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Назва = Назва;
             copy.Код = Код;
             
-            
-            if (copyTableParts)
-            {
-            
-            }
 
             copy.New();
             Виробники_Triggers.Copying(copy, this);
@@ -2721,7 +2719,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.Виробники");
+            return new UuidAndText(UnigueID.UGuid, Виробники_Const.POINTER);
         }
 
         public string GetPresentation()
@@ -2787,7 +2785,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.Виробники");
+            return new UuidAndText(UnigueID.UGuid, Виробники_Const.POINTER);
         }
 
         public void Clear()
@@ -2832,8 +2830,9 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "ВидиНоменклатури"
     public static class ВидиНоменклатури_Const
     {
-        public const string FULLNAME = "Види номенклатури";
         public const string TABLE = "tab_a05";
+        public const string POINTER = "Довідники.ВидиНоменклатури";
+        public const string FULLNAME = "Види номенклатури";
         public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "col_b8";
@@ -2907,11 +2906,6 @@ namespace StorageAndTrade_1_0.Довідники
             copy.ТипНоменклатури = ТипНоменклатури;
             copy.ОдиницяВиміру = ОдиницяВиміру;
             
-            
-            if (copyTableParts)
-            {
-            
-            }
 
             copy.New();
             ВидиНоменклатури_Triggers.Copying(copy, this);
@@ -2937,7 +2931,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.ВидиНоменклатури");
+            return new UuidAndText(UnigueID.UGuid, ВидиНоменклатури_Const.POINTER);
         }
 
         public string GetPresentation()
@@ -3006,7 +3000,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.ВидиНоменклатури");
+            return new UuidAndText(UnigueID.UGuid, ВидиНоменклатури_Const.POINTER);
         }
 
         public void Clear()
@@ -3051,8 +3045,9 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "ПакуванняОдиниціВиміру"
     public static class ПакуванняОдиниціВиміру_Const
     {
-        public const string FULLNAME = "Одиниці виміру";
         public const string TABLE = "tab_a06";
+        public const string POINTER = "Довідники.ПакуванняОдиниціВиміру";
+        public const string FULLNAME = "Одиниці виміру";
         public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "col_c1";
@@ -3121,11 +3116,6 @@ namespace StorageAndTrade_1_0.Довідники
             copy.НазваПовна = НазваПовна;
             copy.КількістьУпаковок = КількістьУпаковок;
             
-            
-            if (copyTableParts)
-            {
-            
-            }
 
             copy.New();
             ПакуванняОдиниціВиміру_Triggers.Copying(copy, this);
@@ -3151,7 +3141,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.ПакуванняОдиниціВиміру");
+            return new UuidAndText(UnigueID.UGuid, ПакуванняОдиниціВиміру_Const.POINTER);
         }
 
         public string GetPresentation()
@@ -3219,7 +3209,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.ПакуванняОдиниціВиміру");
+            return new UuidAndText(UnigueID.UGuid, ПакуванняОдиниціВиміру_Const.POINTER);
         }
 
         public void Clear()
@@ -3264,8 +3254,9 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "Валюти"
     public static class Валюти_Const
     {
-        public const string FULLNAME = "Валюти";
         public const string TABLE = "tab_a07";
+        public const string POINTER = "Довідники.Валюти";
+        public const string FULLNAME = "Валюти";
         public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "col_c5";
@@ -3339,11 +3330,6 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Код_R030 = Код_R030;
             copy.ВиводитиКурсНаСтартову = ВиводитиКурсНаСтартову;
             
-            
-            if (copyTableParts)
-            {
-            
-            }
 
             copy.New();
             Валюти_Triggers.Copying(copy, this);
@@ -3369,7 +3355,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.Валюти");
+            return new UuidAndText(UnigueID.UGuid, Валюти_Const.POINTER);
         }
 
         public string GetPresentation()
@@ -3438,7 +3424,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.Валюти");
+            return new UuidAndText(UnigueID.UGuid, Валюти_Const.POINTER);
         }
 
         public void Clear()
@@ -3483,8 +3469,9 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "Контрагенти"
     public static class Контрагенти_Const
     {
-        public const string FULLNAME = "Контрагенти";
         public const string TABLE = "tab_a08";
+        public const string POINTER = "Довідники.Контрагенти";
+        public const string FULLNAME = "Контрагенти";
         public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "col_c7";
@@ -3572,7 +3559,6 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Опис = Опис;
             copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
-            
             if (copyTableParts)
             {
             
@@ -3585,6 +3571,7 @@ namespace StorageAndTrade_1_0.Довідники
                 copy.Файли_TablePart.Records = Файли_TablePart.Copy();
             
             }
+            
 
             copy.New();
             Контрагенти_Triggers.Copying(copy, this);
@@ -3610,7 +3597,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.Контрагенти");
+            return new UuidAndText(UnigueID.UGuid, Контрагенти_Const.POINTER);
         }
 
         public string GetPresentation()
@@ -3685,7 +3672,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.Контрагенти");
+            return new UuidAndText(UnigueID.UGuid, Контрагенти_Const.POINTER);
         }
 
         public void Clear()
@@ -3914,8 +3901,9 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "Склади"
     public static class Склади_Const
     {
-        public const string FULLNAME = "Склади";
         public const string TABLE = "tab_a10";
+        public const string POINTER = "Довідники.Склади";
+        public const string FULLNAME = "Склади";
         public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "col_d9";
@@ -4007,7 +3995,6 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Папка = Папка;
             copy.НалаштуванняАдресногоЗберігання = НалаштуванняАдресногоЗберігання;
             
-            
             if (copyTableParts)
             {
             
@@ -4016,6 +4003,7 @@ namespace StorageAndTrade_1_0.Довідники
                 copy.Контакти_TablePart.Records = Контакти_TablePart.Copy();
             
             }
+            
 
             copy.New();
             Склади_Triggers.Copying(copy, this);
@@ -4041,7 +4029,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.Склади");
+            return new UuidAndText(UnigueID.UGuid, Склади_Const.POINTER);
         }
 
         public string GetPresentation()
@@ -4116,7 +4104,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.Склади");
+            return new UuidAndText(UnigueID.UGuid, Склади_Const.POINTER);
         }
 
         public void Clear()
@@ -4267,8 +4255,9 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "ВидиЦін"
     public static class ВидиЦін_Const
     {
-        public const string FULLNAME = "Види цін";
         public const string TABLE = "tab_a12";
+        public const string POINTER = "Довідники.ВидиЦін";
+        public const string FULLNAME = "Види цін";
         public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "col_e9";
@@ -4332,11 +4321,6 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Код = Код;
             copy.Валюта = Валюта;
             
-            
-            if (copyTableParts)
-            {
-            
-            }
 
             copy.New();
             ВидиЦін_Triggers.Copying(copy, this);
@@ -4362,7 +4346,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.ВидиЦін");
+            return new UuidAndText(UnigueID.UGuid, ВидиЦін_Const.POINTER);
         }
 
         public string GetPresentation()
@@ -4429,7 +4413,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.ВидиЦін");
+            return new UuidAndText(UnigueID.UGuid, ВидиЦін_Const.POINTER);
         }
 
         public void Clear()
@@ -4474,8 +4458,9 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "ВидиЦінПостачальників"
     public static class ВидиЦінПостачальників_Const
     {
-        public const string FULLNAME = "Види цін постачальників";
         public const string TABLE = "tab_a13";
+        public const string POINTER = "Довідники.ВидиЦінПостачальників";
+        public const string FULLNAME = "Види цін постачальників";
         public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "col_f3";
@@ -4539,11 +4524,6 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Код = Код;
             copy.Валюта = Валюта;
             
-            
-            if (copyTableParts)
-            {
-            
-            }
 
             copy.New();
             ВидиЦінПостачальників_Triggers.Copying(copy, this);
@@ -4569,7 +4549,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.ВидиЦінПостачальників");
+            return new UuidAndText(UnigueID.UGuid, ВидиЦінПостачальників_Const.POINTER);
         }
 
         public string GetPresentation()
@@ -4636,7 +4616,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.ВидиЦінПостачальників");
+            return new UuidAndText(UnigueID.UGuid, ВидиЦінПостачальників_Const.POINTER);
         }
 
         public void Clear()
@@ -4681,8 +4661,9 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "Користувачі"
     public static class Користувачі_Const
     {
-        public const string FULLNAME = "Користувачі";
         public const string TABLE = "tab_a14";
+        public const string POINTER = "Довідники.Користувачі";
+        public const string FULLNAME = "Користувачі";
         public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "col_f6";
@@ -4759,7 +4740,6 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Коментар = Коментар;
             copy.КодВСпеціальнійТаблиці = КодВСпеціальнійТаблиці;
             
-            
             if (copyTableParts)
             {
             
@@ -4768,6 +4748,7 @@ namespace StorageAndTrade_1_0.Довідники
                 copy.Контакти_TablePart.Records = Контакти_TablePart.Copy();
             
             }
+            
 
             copy.New();
             Користувачі_Triggers.Copying(copy, this);
@@ -4793,7 +4774,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.Користувачі");
+            return new UuidAndText(UnigueID.UGuid, Користувачі_Const.POINTER);
         }
 
         public string GetPresentation()
@@ -4865,7 +4846,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.Користувачі");
+            return new UuidAndText(UnigueID.UGuid, Користувачі_Const.POINTER);
         }
 
         public void Clear()
@@ -5012,8 +4993,9 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "ФізичніОсоби"
     public static class ФізичніОсоби_Const
     {
-        public const string FULLNAME = "Фізичні особи";
         public const string TABLE = "tab_a16";
+        public const string POINTER = "Довідники.ФізичніОсоби";
+        public const string FULLNAME = "Фізичні особи";
         public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "col_g7";
@@ -5090,7 +5072,6 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Стать = Стать;
             copy.ІПН = ІПН;
             
-            
             if (copyTableParts)
             {
             
@@ -5099,6 +5080,7 @@ namespace StorageAndTrade_1_0.Довідники
                 copy.Контакти_TablePart.Records = Контакти_TablePart.Copy();
             
             }
+            
 
             copy.New();
             ФізичніОсоби_Triggers.Copying(copy, this);
@@ -5124,7 +5106,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.ФізичніОсоби");
+            return new UuidAndText(UnigueID.UGuid, ФізичніОсоби_Const.POINTER);
         }
 
         public string GetPresentation()
@@ -5196,7 +5178,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.ФізичніОсоби");
+            return new UuidAndText(UnigueID.UGuid, ФізичніОсоби_Const.POINTER);
         }
 
         public void Clear()
@@ -5343,8 +5325,9 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "СтруктураПідприємства"
     public static class СтруктураПідприємства_Const
     {
-        public const string FULLNAME = "Структура підприємства";
         public const string TABLE = "tab_a18";
+        public const string POINTER = "Довідники.СтруктураПідприємства";
+        public const string FULLNAME = "Структура підприємства";
         public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "col_h8";
@@ -5408,11 +5391,6 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Код = Код;
             copy.Керівник = Керівник;
             
-            
-            if (copyTableParts)
-            {
-            
-            }
 
             copy.New();
             СтруктураПідприємства_Triggers.Copying(copy, this);
@@ -5438,7 +5416,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.СтруктураПідприємства");
+            return new UuidAndText(UnigueID.UGuid, СтруктураПідприємства_Const.POINTER);
         }
 
         public string GetPresentation()
@@ -5505,7 +5483,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.СтруктураПідприємства");
+            return new UuidAndText(UnigueID.UGuid, СтруктураПідприємства_Const.POINTER);
         }
 
         public void Clear()
@@ -5550,8 +5528,9 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "КраїниСвіту"
     public static class КраїниСвіту_Const
     {
-        public const string FULLNAME = "Країни світу";
         public const string TABLE = "tab_a19";
+        public const string POINTER = "Довідники.КраїниСвіту";
+        public const string FULLNAME = "Країни світу";
         public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "col_i2";
@@ -5610,11 +5589,6 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Назва = Назва;
             copy.Код = Код;
             
-            
-            if (copyTableParts)
-            {
-            
-            }
 
             copy.New();
             КраїниСвіту_Triggers.Copying(copy, this);
@@ -5640,7 +5614,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.КраїниСвіту");
+            return new UuidAndText(UnigueID.UGuid, КраїниСвіту_Const.POINTER);
         }
 
         public string GetPresentation()
@@ -5706,7 +5680,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.КраїниСвіту");
+            return new UuidAndText(UnigueID.UGuid, КраїниСвіту_Const.POINTER);
         }
 
         public void Clear()
@@ -5751,8 +5725,9 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "Файли"
     public static class Файли_Const
     {
-        public const string FULLNAME = "Файли";
         public const string TABLE = "tab_a20";
+        public const string POINTER = "Довідники.Файли";
+        public const string FULLNAME = "Файли";
         public const string DELETION_LABEL = "deletion_label";
         
         public const string Код = "col_i6";
@@ -5831,11 +5806,6 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Розмір = Розмір;
             copy.ДатаСтворення = ДатаСтворення;
             
-            
-            if (copyTableParts)
-            {
-            
-            }
 
             copy.New();
             Файли_Triggers.Copying(copy, this);
@@ -5861,7 +5831,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.Файли");
+            return new UuidAndText(UnigueID.UGuid, Файли_Const.POINTER);
         }
 
         public string GetPresentation()
@@ -5931,7 +5901,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.Файли");
+            return new UuidAndText(UnigueID.UGuid, Файли_Const.POINTER);
         }
 
         public void Clear()
@@ -5976,8 +5946,9 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "ХарактеристикиНоменклатури"
     public static class ХарактеристикиНоменклатури_Const
     {
-        public const string FULLNAME = "Характеристики";
         public const string TABLE = "tab_a21";
+        public const string POINTER = "Довідники.ХарактеристикиНоменклатури";
+        public const string FULLNAME = "Характеристики";
         public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "col_i7";
@@ -6046,11 +6017,6 @@ namespace StorageAndTrade_1_0.Довідники
             copy.НазваПовна = НазваПовна;
             copy.Номенклатура = Номенклатура;
             
-            
-            if (copyTableParts)
-            {
-            
-            }
 
             copy.New();
             ХарактеристикиНоменклатури_Triggers.Copying(copy, this);
@@ -6076,7 +6042,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.ХарактеристикиНоменклатури");
+            return new UuidAndText(UnigueID.UGuid, ХарактеристикиНоменклатури_Const.POINTER);
         }
 
         public string GetPresentation()
@@ -6144,7 +6110,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.ХарактеристикиНоменклатури");
+            return new UuidAndText(UnigueID.UGuid, ХарактеристикиНоменклатури_Const.POINTER);
         }
 
         public void Clear()
@@ -6189,8 +6155,9 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "Номенклатура_Папки"
     public static class Номенклатура_Папки_Const
     {
-        public const string FULLNAME = "Номенклатура папки";
         public const string TABLE = "tab_a22";
+        public const string POINTER = "Довідники.Номенклатура_Папки";
+        public const string FULLNAME = "Номенклатура папки";
         public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "col_j1";
@@ -6254,11 +6221,6 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Код = Код;
             copy.Родич = Родич;
             
-            
-            if (copyTableParts)
-            {
-            
-            }
 
             copy.New();
             Номенклатура_Папки_Triggers.Copying(copy, this);
@@ -6284,7 +6246,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.Номенклатура_Папки");
+            return new UuidAndText(UnigueID.UGuid, Номенклатура_Папки_Const.POINTER);
         }
 
         public string GetPresentation()
@@ -6351,7 +6313,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.Номенклатура_Папки");
+            return new UuidAndText(UnigueID.UGuid, Номенклатура_Папки_Const.POINTER);
         }
 
         public void Clear()
@@ -6396,8 +6358,9 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "Контрагенти_Папки"
     public static class Контрагенти_Папки_Const
     {
-        public const string FULLNAME = "Контрагенти папки";
         public const string TABLE = "tab_a23";
+        public const string POINTER = "Довідники.Контрагенти_Папки";
+        public const string FULLNAME = "Контрагенти папки";
         public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "col_j4";
@@ -6461,11 +6424,6 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Код = Код;
             copy.Родич = Родич;
             
-            
-            if (copyTableParts)
-            {
-            
-            }
 
             copy.New();
             Контрагенти_Папки_Triggers.Copying(copy, this);
@@ -6491,7 +6449,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.Контрагенти_Папки");
+            return new UuidAndText(UnigueID.UGuid, Контрагенти_Папки_Const.POINTER);
         }
 
         public string GetPresentation()
@@ -6558,7 +6516,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.Контрагенти_Папки");
+            return new UuidAndText(UnigueID.UGuid, Контрагенти_Папки_Const.POINTER);
         }
 
         public void Clear()
@@ -6603,8 +6561,9 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "Склади_Папки"
     public static class Склади_Папки_Const
     {
-        public const string FULLNAME = "Склади папки";
         public const string TABLE = "tab_a24";
+        public const string POINTER = "Довідники.Склади_Папки";
+        public const string FULLNAME = "Склади папки";
         public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "col_j7";
@@ -6668,11 +6627,6 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Код = Код;
             copy.Родич = Родич;
             
-            
-            if (copyTableParts)
-            {
-            
-            }
 
             copy.New();
             Склади_Папки_Triggers.Copying(copy, this);
@@ -6698,7 +6652,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.Склади_Папки");
+            return new UuidAndText(UnigueID.UGuid, Склади_Папки_Const.POINTER);
         }
 
         public string GetPresentation()
@@ -6765,7 +6719,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.Склади_Папки");
+            return new UuidAndText(UnigueID.UGuid, Склади_Папки_Const.POINTER);
         }
 
         public void Clear()
@@ -6810,8 +6764,9 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "Каси"
     public static class Каси_Const
     {
-        public const string FULLNAME = "Каси";
         public const string TABLE = "tab_a26";
+        public const string POINTER = "Довідники.Каси";
+        public const string FULLNAME = "Каси";
         public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "col_k8";
@@ -6880,11 +6835,6 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Валюта = Валюта;
             copy.Підрозділ = Підрозділ;
             
-            
-            if (copyTableParts)
-            {
-            
-            }
 
             copy.New();
             Каси_Triggers.Copying(copy, this);
@@ -6910,7 +6860,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.Каси");
+            return new UuidAndText(UnigueID.UGuid, Каси_Const.POINTER);
         }
 
         public string GetPresentation()
@@ -6978,7 +6928,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.Каси");
+            return new UuidAndText(UnigueID.UGuid, Каси_Const.POINTER);
         }
 
         public void Clear()
@@ -7023,8 +6973,9 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "БанківськіРахункиОрганізацій"
     public static class БанківськіРахункиОрганізацій_Const
     {
-        public const string FULLNAME = "Банківські рахунки організацій";
         public const string TABLE = "tab_a27";
+        public const string POINTER = "Довідники.БанківськіРахункиОрганізацій";
+        public const string FULLNAME = "Банківські рахунки організацій";
         public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "col_l1";
@@ -7138,11 +7089,6 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Закритий = Закритий;
             copy.Організація = Організація;
             
-            
-            if (copyTableParts)
-            {
-            
-            }
 
             copy.New();
             БанківськіРахункиОрганізацій_Triggers.Copying(copy, this);
@@ -7168,7 +7114,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.БанківськіРахункиОрганізацій");
+            return new UuidAndText(UnigueID.UGuid, БанківськіРахункиОрганізацій_Const.POINTER);
         }
 
         public string GetPresentation()
@@ -7245,7 +7191,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.БанківськіРахункиОрганізацій");
+            return new UuidAndText(UnigueID.UGuid, БанківськіРахункиОрганізацій_Const.POINTER);
         }
 
         public void Clear()
@@ -7290,8 +7236,9 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "ДоговориКонтрагентів"
     public static class ДоговориКонтрагентів_Const
     {
-        public const string FULLNAME = "Договори";
         public const string TABLE = "tab_a28";
+        public const string POINTER = "Довідники.ДоговориКонтрагентів";
+        public const string FULLNAME = "Договори";
         public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "col_n4";
@@ -7440,11 +7387,6 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Сума = Сума;
             copy.Коментар = Коментар;
             
-            
-            if (copyTableParts)
-            {
-            
-            }
 
             copy.New();
             ДоговориКонтрагентів_Triggers.Copying(copy, this);
@@ -7470,7 +7412,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.ДоговориКонтрагентів");
+            return new UuidAndText(UnigueID.UGuid, ДоговориКонтрагентів_Const.POINTER);
         }
 
         public string GetPresentation()
@@ -7554,7 +7496,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.ДоговориКонтрагентів");
+            return new UuidAndText(UnigueID.UGuid, ДоговориКонтрагентів_Const.POINTER);
         }
 
         public void Clear()
@@ -7599,8 +7541,9 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "БанківськіРахункиКонтрагентів"
     public static class БанківськіРахункиКонтрагентів_Const
     {
-        public const string FULLNAME = "Банківські рахунки контрагентів";
         public const string TABLE = "tab_a29";
+        public const string POINTER = "Довідники.БанківськіРахункиКонтрагентів";
+        public const string FULLNAME = "Банківські рахунки контрагентів";
         public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "col_n7";
@@ -7724,11 +7667,6 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Закрито = Закрито;
             copy.Контрагент = Контрагент;
             
-            
-            if (copyTableParts)
-            {
-            
-            }
 
             copy.New();
             БанківськіРахункиКонтрагентів_Triggers.Copying(copy, this);
@@ -7754,7 +7692,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.БанківськіРахункиКонтрагентів");
+            return new UuidAndText(UnigueID.UGuid, БанківськіРахункиКонтрагентів_Const.POINTER);
         }
 
         public string GetPresentation()
@@ -7833,7 +7771,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.БанківськіРахункиКонтрагентів");
+            return new UuidAndText(UnigueID.UGuid, БанківськіРахункиКонтрагентів_Const.POINTER);
         }
 
         public void Clear()
@@ -7878,8 +7816,9 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "СтаттяРухуКоштів"
     public static class СтаттяРухуКоштів_Const
     {
-        public const string FULLNAME = "Стаття руху коштів";
         public const string TABLE = "tab_a45";
+        public const string POINTER = "Довідники.СтаттяРухуКоштів";
+        public const string FULLNAME = "Стаття руху коштів";
         public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "col_i7";
@@ -7956,7 +7895,6 @@ namespace StorageAndTrade_1_0.Довідники
             copy.ВидРухуКоштів = ВидРухуКоштів;
             copy.Опис = Опис;
             
-            
             if (copyTableParts)
             {
             
@@ -7965,6 +7903,7 @@ namespace StorageAndTrade_1_0.Довідники
                 copy.ГосподарськіОперації_TablePart.Records = ГосподарськіОперації_TablePart.Copy();
             
             }
+            
 
             copy.New();
             СтаттяРухуКоштів_Triggers.Copying(copy, this);
@@ -7990,7 +7929,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.СтаттяРухуКоштів");
+            return new UuidAndText(UnigueID.UGuid, СтаттяРухуКоштів_Const.POINTER);
         }
 
         public string GetPresentation()
@@ -8062,7 +8001,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.СтаттяРухуКоштів");
+            return new UuidAndText(UnigueID.UGuid, СтаттяРухуКоштів_Const.POINTER);
         }
 
         public void Clear()
@@ -8185,8 +8124,9 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "СеріїНоменклатури"
     public static class СеріїНоменклатури_Const
     {
-        public const string FULLNAME = "Серії";
         public const string TABLE = "tab_b02";
+        public const string POINTER = "Довідники.СеріїНоменклатури";
+        public const string FULLNAME = "Серії";
         public const string DELETION_LABEL = "deletion_label";
         
         public const string Номер = "col_a3";
@@ -8250,11 +8190,6 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Коментар = Коментар;
             copy.ДатаСтворення = ДатаСтворення;
             
-            
-            if (copyTableParts)
-            {
-            
-            }
 
             copy.New();
             СеріїНоменклатури_Triggers.Copying(copy, this);
@@ -8280,7 +8215,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.СеріїНоменклатури");
+            return new UuidAndText(UnigueID.UGuid, СеріїНоменклатури_Const.POINTER);
         }
 
         public string GetPresentation()
@@ -8347,7 +8282,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.СеріїНоменклатури");
+            return new UuidAndText(UnigueID.UGuid, СеріїНоменклатури_Const.POINTER);
         }
 
         public void Clear()
@@ -8392,8 +8327,9 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "ПартіяТоварівКомпозит"
     public static class ПартіяТоварівКомпозит_Const
     {
-        public const string FULLNAME = "Партія товарів";
         public const string TABLE = "tab_b06";
+        public const string POINTER = "Довідники.ПартіяТоварівКомпозит";
+        public const string FULLNAME = "Партія товарів";
         public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "col_a1";
@@ -8472,11 +8408,6 @@ namespace StorageAndTrade_1_0.Довідники
             copy.ПоступленняТоварівТаПослуг = ПоступленняТоварівТаПослуг;
             copy.ВведенняЗалишків = ВведенняЗалишків;
             
-            
-            if (copyTableParts)
-            {
-            
-            }
 
             copy.New();
             ПартіяТоварівКомпозит_Triggers.Copying(copy, this);
@@ -8502,7 +8433,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.ПартіяТоварівКомпозит");
+            return new UuidAndText(UnigueID.UGuid, ПартіяТоварівКомпозит_Const.POINTER);
         }
 
         public string GetPresentation()
@@ -8572,7 +8503,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.ПартіяТоварівКомпозит");
+            return new UuidAndText(UnigueID.UGuid, ПартіяТоварівКомпозит_Const.POINTER);
         }
 
         public void Clear()
@@ -8617,8 +8548,9 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "ВидиЗапасів"
     public static class ВидиЗапасів_Const
     {
-        public const string FULLNAME = "Види запасів";
         public const string TABLE = "tab_b13";
+        public const string POINTER = "Довідники.ВидиЗапасів";
+        public const string FULLNAME = "Види запасів";
         public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "col_a5";
@@ -8702,11 +8634,6 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Договір = Договір;
             copy.Код = Код;
             
-            
-            if (copyTableParts)
-            {
-            
-            }
 
             copy.New();
             ВидиЗапасів_Triggers.Copying(copy, this);
@@ -8732,7 +8659,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.ВидиЗапасів");
+            return new UuidAndText(UnigueID.UGuid, ВидиЗапасів_Const.POINTER);
         }
 
         public string GetPresentation()
@@ -8803,7 +8730,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.ВидиЗапасів");
+            return new UuidAndText(UnigueID.UGuid, ВидиЗапасів_Const.POINTER);
         }
 
         public void Clear()
@@ -8848,8 +8775,9 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "Банки"
     public static class Банки_Const
     {
-        public const string FULLNAME = "Банки";
         public const string TABLE = "tab_a39";
+        public const string POINTER = "Довідники.Банки";
+        public const string FULLNAME = "Банки";
         public const string DELETION_LABEL = "deletion_label";
         
         public const string Код = "col_a1";
@@ -9038,11 +8966,6 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Статус = Статус;
             copy.ДатаЗапису = ДатаЗапису;
             
-            
-            if (copyTableParts)
-            {
-            
-            }
 
             copy.New();
             Банки_Triggers.Copying(copy, this);
@@ -9068,7 +8991,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.Банки");
+            return new UuidAndText(UnigueID.UGuid, Банки_Const.POINTER);
         }
 
         public string GetPresentation()
@@ -9160,7 +9083,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.Банки");
+            return new UuidAndText(UnigueID.UGuid, Банки_Const.POINTER);
         }
 
         public void Clear()
@@ -9205,8 +9128,9 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "СкладськіПриміщення"
     public static class СкладськіПриміщення_Const
     {
-        public const string FULLNAME = "Складські приміщення";
         public const string TABLE = "tab_a71";
+        public const string POINTER = "Довідники.СкладськіПриміщення";
+        public const string FULLNAME = "Складські приміщення";
         public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "col_a2";
@@ -9270,11 +9194,6 @@ namespace StorageAndTrade_1_0.Довідники
             copy.НалаштуванняАдресногоЗберігання = НалаштуванняАдресногоЗберігання;
             copy.Склад = Склад;
             
-            
-            if (copyTableParts)
-            {
-            
-            }
 
             copy.New();
             СкладськіПриміщення_Triggers.Copying(copy, this);
@@ -9300,7 +9219,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.СкладськіПриміщення");
+            return new UuidAndText(UnigueID.UGuid, СкладськіПриміщення_Const.POINTER);
         }
 
         public string GetPresentation()
@@ -9367,7 +9286,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.СкладськіПриміщення");
+            return new UuidAndText(UnigueID.UGuid, СкладськіПриміщення_Const.POINTER);
         }
 
         public void Clear()
@@ -9412,8 +9331,9 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "СкладськіКомірки"
     public static class СкладськіКомірки_Const
     {
-        public const string FULLNAME = "Складські комірки";
         public const string TABLE = "tab_a72";
+        public const string POINTER = "Довідники.СкладськіКомірки";
+        public const string FULLNAME = "Складські комірки";
         public const string DELETION_LABEL = "deletion_label";
         
         public const string Папка = "col_a1";
@@ -9512,11 +9432,6 @@ namespace StorageAndTrade_1_0.Довідники
             copy.ТипСкладськоїКомірки = ТипСкладськоїКомірки;
             copy.Типорозмір = Типорозмір;
             
-            
-            if (copyTableParts)
-            {
-            
-            }
 
             copy.New();
             СкладськіКомірки_Triggers.Copying(copy, this);
@@ -9542,7 +9457,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.СкладськіКомірки");
+            return new UuidAndText(UnigueID.UGuid, СкладськіКомірки_Const.POINTER);
         }
 
         public string GetPresentation()
@@ -9616,7 +9531,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.СкладськіКомірки");
+            return new UuidAndText(UnigueID.UGuid, СкладськіКомірки_Const.POINTER);
         }
 
         public void Clear()
@@ -9661,8 +9576,9 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "ОбластьЗберігання"
     public static class ОбластьЗберігання_Const
     {
-        public const string FULLNAME = "Область зберігання";
         public const string TABLE = "tab_a73";
+        public const string POINTER = "Довідники.ОбластьЗберігання";
+        public const string FULLNAME = "Область зберігання";
         public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "col_a2";
@@ -9724,11 +9640,6 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Опис = Опис;
             copy.Приміщення = Приміщення;
             
-            
-            if (copyTableParts)
-            {
-            
-            }
 
             copy.New();
             
@@ -9754,7 +9665,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.ОбластьЗберігання");
+            return new UuidAndText(UnigueID.UGuid, ОбластьЗберігання_Const.POINTER);
         }
 
         public string GetPresentation()
@@ -9820,7 +9731,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.ОбластьЗберігання");
+            return new UuidAndText(UnigueID.UGuid, ОбластьЗберігання_Const.POINTER);
         }
 
         public void Clear()
@@ -9865,8 +9776,9 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "ТипорозміриКомірок"
     public static class ТипорозміриКомірок_Const
     {
-        public const string FULLNAME = "Типорозміри комірок";
         public const string TABLE = "tab_a75";
+        public const string POINTER = "Довідники.ТипорозміриКомірок";
+        public const string FULLNAME = "Типорозміри комірок";
         public const string DELETION_LABEL = "deletion_label";
         
         public const string Висота = "col_a1";
@@ -9945,11 +9857,6 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Обєм = Обєм;
             copy.Ширина = Ширина;
             
-            
-            if (copyTableParts)
-            {
-            
-            }
 
             copy.New();
             ТипорозміриКомірок_Triggers.Copying(copy, this);
@@ -9975,7 +9882,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.ТипорозміриКомірок");
+            return new UuidAndText(UnigueID.UGuid, ТипорозміриКомірок_Const.POINTER);
         }
 
         public string GetPresentation()
@@ -10045,7 +9952,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.ТипорозміриКомірок");
+            return new UuidAndText(UnigueID.UGuid, ТипорозміриКомірок_Const.POINTER);
         }
 
         public void Clear()
@@ -10090,8 +9997,9 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "СкладськіКомірки_Папки"
     public static class СкладськіКомірки_Папки_Const
     {
-        public const string FULLNAME = "Складські комірки папки";
         public const string TABLE = "tab_a76";
+        public const string POINTER = "Довідники.СкладськіКомірки_Папки";
+        public const string FULLNAME = "Складські комірки папки";
         public const string DELETION_LABEL = "deletion_label";
         
         public const string Назва = "col_j1";
@@ -10160,11 +10068,6 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Родич = Родич;
             copy.Власник = Власник;
             
-            
-            if (copyTableParts)
-            {
-            
-            }
 
             copy.New();
             СкладськіКомірки_Папки_Triggers.Copying(copy, this);
@@ -10190,7 +10093,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.СкладськіКомірки_Папки");
+            return new UuidAndText(UnigueID.UGuid, СкладськіКомірки_Папки_Const.POINTER);
         }
 
         public string GetPresentation()
@@ -10258,7 +10161,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.СкладськіКомірки_Папки");
+            return new UuidAndText(UnigueID.UGuid, СкладськіКомірки_Папки_Const.POINTER);
         }
 
         public void Clear()
@@ -10303,8 +10206,9 @@ namespace StorageAndTrade_1_0.Довідники
     #region DIRECTORY "Блокнот"
     public static class Блокнот_Const
     {
-        public const string FULLNAME = "Блокнот";
         public const string TABLE = "tab_a41";
+        public const string POINTER = "Довідники.Блокнот";
+        public const string FULLNAME = "Блокнот";
         public const string DELETION_LABEL = "deletion_label";
         
         public const string Код = "col_a1";
@@ -10378,11 +10282,6 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Опис = Опис;
             copy.Лінк = Лінк;
             
-            
-            if (copyTableParts)
-            {
-            
-            }
 
             copy.New();
             Блокнот_Triggers.Copying(copy, this);
@@ -10408,7 +10307,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.Блокнот");
+            return new UuidAndText(UnigueID.UGuid, Блокнот_Const.POINTER);
         }
 
         public string GetPresentation()
@@ -10477,7 +10376,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.Блокнот");
+            return new UuidAndText(UnigueID.UGuid, Блокнот_Const.POINTER);
         }
 
         public void Clear()
@@ -11914,8 +11813,9 @@ namespace StorageAndTrade_1_0.Документи
     #region DOCUMENT "ЗамовленняПостачальнику"
     public static class ЗамовленняПостачальнику_Const
     {
-        public const string FULLNAME = "Замовлення постачальнику";
         public const string TABLE = "tab_a25";
+        public const string POINTER = "Документи.ЗамовленняПостачальнику";
+        public const string FULLNAME = "Замовлення постачальнику";
         public const string DELETION_LABEL = "deletion_label";
         
         
@@ -12431,7 +12331,6 @@ namespace StorageAndTrade_1_0.Документи
             copy.Коментар = Коментар;
             copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
-
             if (copyTableParts)
             {
             
@@ -12440,6 +12339,7 @@ namespace StorageAndTrade_1_0.Документи
                 copy.Товари_TablePart.Records = Товари_TablePart.Copy();
             
             }
+            
 
             copy.New();
             ЗамовленняПостачальнику_Triggers.Copying(copy, this);
@@ -12467,7 +12367,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Документи.ЗамовленняПостачальнику");
+            return new UuidAndText(UnigueID.UGuid, ЗамовленняПостачальнику_Const.POINTER);
         }
         
         public string Назва { get; set; }
@@ -12563,7 +12463,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Документи.ЗамовленняПостачальнику");
+            return new UuidAndText(UnigueID.UGuid, ЗамовленняПостачальнику_Const.POINTER);
         }
 
         public ЗамовленняПостачальнику_Objest? GetDocumentObject(bool readAllTablePart = false)
@@ -12729,8 +12629,9 @@ namespace StorageAndTrade_1_0.Документи
     #region DOCUMENT "ПоступленняТоварівТаПослуг"
     public static class ПоступленняТоварівТаПослуг_Const
     {
-        public const string FULLNAME = "Поступлення товарів та послуг";
         public const string TABLE = "tab_a32";
+        public const string POINTER = "Документи.ПоступленняТоварівТаПослуг";
+        public const string FULLNAME = "Поступлення товарів та послуг";
         public const string DELETION_LABEL = "deletion_label";
         
         
@@ -13334,7 +13235,6 @@ namespace StorageAndTrade_1_0.Документи
             copy.Коментар = Коментар;
             copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
-
             if (copyTableParts)
             {
             
@@ -13343,6 +13243,7 @@ namespace StorageAndTrade_1_0.Документи
                 copy.Товари_TablePart.Records = Товари_TablePart.Copy();
             
             }
+            
 
             copy.New();
             ПоступленняТоварівТаПослуг_Triggers.Copying(copy, this);
@@ -13370,7 +13271,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Документи.ПоступленняТоварівТаПослуг");
+            return new UuidAndText(UnigueID.UGuid, ПоступленняТоварівТаПослуг_Const.POINTER);
         }
         
         public string Назва { get; set; }
@@ -13472,7 +13373,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Документи.ПоступленняТоварівТаПослуг");
+            return new UuidAndText(UnigueID.UGuid, ПоступленняТоварівТаПослуг_Const.POINTER);
         }
 
         public ПоступленняТоварівТаПослуг_Objest? GetDocumentObject(bool readAllTablePart = false)
@@ -13646,8 +13547,9 @@ namespace StorageAndTrade_1_0.Документи
     #region DOCUMENT "ЗамовленняКлієнта"
     public static class ЗамовленняКлієнта_Const
     {
-        public const string FULLNAME = "Замовлення клієнта";
         public const string TABLE = "tab_a34";
+        public const string POINTER = "Документи.ЗамовленняКлієнта";
+        public const string FULLNAME = "Замовлення клієнта";
         public const string DELETION_LABEL = "deletion_label";
         
         
@@ -14192,7 +14094,6 @@ namespace StorageAndTrade_1_0.Документи
             copy.Менеджер = Менеджер;
             copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
-
             if (copyTableParts)
             {
             
@@ -14201,6 +14102,7 @@ namespace StorageAndTrade_1_0.Документи
                 copy.Товари_TablePart.Records = Товари_TablePart.Copy();
             
             }
+            
 
             copy.New();
             ЗамовленняКлієнта_Triggers.Copying(copy, this);
@@ -14228,7 +14130,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Документи.ЗамовленняКлієнта");
+            return new UuidAndText(UnigueID.UGuid, ЗамовленняКлієнта_Const.POINTER);
         }
         
         public string Назва { get; set; }
@@ -14327,7 +14229,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Документи.ЗамовленняКлієнта");
+            return new UuidAndText(UnigueID.UGuid, ЗамовленняКлієнта_Const.POINTER);
         }
 
         public ЗамовленняКлієнта_Objest? GetDocumentObject(bool readAllTablePart = false)
@@ -14489,8 +14391,9 @@ namespace StorageAndTrade_1_0.Документи
     #region DOCUMENT "РеалізаціяТоварівТаПослуг"
     public static class РеалізаціяТоварівТаПослуг_Const
     {
-        public const string FULLNAME = "Реалізація товарів та послуг";
         public const string TABLE = "tab_a36";
+        public const string POINTER = "Документи.РеалізаціяТоварівТаПослуг";
+        public const string FULLNAME = "Реалізація товарів та послуг";
         public const string DELETION_LABEL = "deletion_label";
         
         
@@ -15091,7 +14994,6 @@ namespace StorageAndTrade_1_0.Документи
             copy.Менеджер = Менеджер;
             copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
-
             if (copyTableParts)
             {
             
@@ -15100,6 +15002,7 @@ namespace StorageAndTrade_1_0.Документи
                 copy.Товари_TablePart.Records = Товари_TablePart.Copy();
             
             }
+            
 
             copy.New();
             РеалізаціяТоварівТаПослуг_Triggers.Copying(copy, this);
@@ -15127,7 +15030,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Документи.РеалізаціяТоварівТаПослуг");
+            return new UuidAndText(UnigueID.UGuid, РеалізаціяТоварівТаПослуг_Const.POINTER);
         }
         
         public string Назва { get; set; }
@@ -15228,7 +15131,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Документи.РеалізаціяТоварівТаПослуг");
+            return new UuidAndText(UnigueID.UGuid, РеалізаціяТоварівТаПослуг_Const.POINTER);
         }
 
         public РеалізаціяТоварівТаПослуг_Objest? GetDocumentObject(bool readAllTablePart = false)
@@ -15406,8 +15309,9 @@ namespace StorageAndTrade_1_0.Документи
     #region DOCUMENT "ВстановленняЦінНоменклатури"
     public static class ВстановленняЦінНоменклатури_Const
     {
-        public const string FULLNAME = "Встановлення цін номенклатури";
         public const string TABLE = "tab_a42";
+        public const string POINTER = "Документи.ВстановленняЦінНоменклатури";
+        public const string FULLNAME = "Встановлення цін номенклатури";
         public const string DELETION_LABEL = "deletion_label";
         
         
@@ -15667,7 +15571,6 @@ namespace StorageAndTrade_1_0.Документи
             copy.Автор = Автор;
             copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
-
             if (copyTableParts)
             {
             
@@ -15676,6 +15579,7 @@ namespace StorageAndTrade_1_0.Документи
                 copy.Товари_TablePart.Records = Товари_TablePart.Copy();
             
             }
+            
 
             copy.New();
             ВстановленняЦінНоменклатури_Triggers.Copying(copy, this);
@@ -15703,7 +15607,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Документи.ВстановленняЦінНоменклатури");
+            return new UuidAndText(UnigueID.UGuid, ВстановленняЦінНоменклатури_Const.POINTER);
         }
         
         public string Назва { get; set; }
@@ -15781,7 +15685,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Документи.ВстановленняЦінНоменклатури");
+            return new UuidAndText(UnigueID.UGuid, ВстановленняЦінНоменклатури_Const.POINTER);
         }
 
         public ВстановленняЦінНоменклатури_Objest? GetDocumentObject(bool readAllTablePart = false)
@@ -15923,8 +15827,9 @@ namespace StorageAndTrade_1_0.Документи
     #region DOCUMENT "ПрихіднийКасовийОрдер"
     public static class ПрихіднийКасовийОрдер_Const
     {
-        public const string FULLNAME = "Прихідний касовий ордер";
         public const string TABLE = "tab_a44";
+        public const string POINTER = "Документи.ПрихіднийКасовийОрдер";
+        public const string FULLNAME = "Прихідний касовий ордер";
         public const string DELETION_LABEL = "deletion_label";
         
         
@@ -16293,7 +16198,6 @@ namespace StorageAndTrade_1_0.Документи
             copy.Автор = Автор;
             copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
-
             if (copyTableParts)
             {
             
@@ -16302,6 +16206,7 @@ namespace StorageAndTrade_1_0.Документи
                 copy.РозшифруванняПлатежу_TablePart.Records = РозшифруванняПлатежу_TablePart.Copy();
             
             }
+            
 
             copy.New();
             ПрихіднийКасовийОрдер_Triggers.Copying(copy, this);
@@ -16329,7 +16234,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Документи.ПрихіднийКасовийОрдер");
+            return new UuidAndText(UnigueID.UGuid, ПрихіднийКасовийОрдер_Const.POINTER);
         }
         
         public string Назва { get; set; }
@@ -16416,7 +16321,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Документи.ПрихіднийКасовийОрдер");
+            return new UuidAndText(UnigueID.UGuid, ПрихіднийКасовийОрдер_Const.POINTER);
         }
 
         public ПрихіднийКасовийОрдер_Objest? GetDocumentObject(bool readAllTablePart = false)
@@ -16558,8 +16463,9 @@ namespace StorageAndTrade_1_0.Документи
     #region DOCUMENT "РозхіднийКасовийОрдер"
     public static class РозхіднийКасовийОрдер_Const
     {
-        public const string FULLNAME = "Розхідний касовий ордер";
         public const string TABLE = "tab_a48";
+        public const string POINTER = "Документи.РозхіднийКасовийОрдер";
+        public const string FULLNAME = "Розхідний касовий ордер";
         public const string DELETION_LABEL = "deletion_label";
         
         
@@ -16958,7 +16864,6 @@ namespace StorageAndTrade_1_0.Документи
             copy.Автор = Автор;
             copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
-
             if (copyTableParts)
             {
             
@@ -16967,6 +16872,7 @@ namespace StorageAndTrade_1_0.Документи
                 copy.РозшифруванняПлатежу_TablePart.Records = РозшифруванняПлатежу_TablePart.Copy();
             
             }
+            
 
             copy.New();
             РозхіднийКасовийОрдер_Triggers.Copying(copy, this);
@@ -16994,7 +16900,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Документи.РозхіднийКасовийОрдер");
+            return new UuidAndText(UnigueID.UGuid, РозхіднийКасовийОрдер_Const.POINTER);
         }
         
         public string Назва { get; set; }
@@ -17083,7 +16989,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Документи.РозхіднийКасовийОрдер");
+            return new UuidAndText(UnigueID.UGuid, РозхіднийКасовийОрдер_Const.POINTER);
         }
 
         public РозхіднийКасовийОрдер_Objest? GetDocumentObject(bool readAllTablePart = false)
@@ -17229,8 +17135,9 @@ namespace StorageAndTrade_1_0.Документи
     #region DOCUMENT "ПереміщенняТоварів"
     public static class ПереміщенняТоварів_Const
     {
-        public const string FULLNAME = "Переміщення товарів";
         public const string TABLE = "tab_a31";
+        public const string POINTER = "Документи.ПереміщенняТоварів";
+        public const string FULLNAME = "Переміщення товарів";
         public const string DELETION_LABEL = "deletion_label";
         
         
@@ -17652,7 +17559,6 @@ namespace StorageAndTrade_1_0.Документи
             copy.Основа = Основа;
             copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
-
             if (copyTableParts)
             {
             
@@ -17661,6 +17567,7 @@ namespace StorageAndTrade_1_0.Документи
                 copy.Товари_TablePart.Records = Товари_TablePart.Copy();
             
             }
+            
 
             copy.New();
             ПереміщенняТоварів_Triggers.Copying(copy, this);
@@ -17688,7 +17595,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Документи.ПереміщенняТоварів");
+            return new UuidAndText(UnigueID.UGuid, ПереміщенняТоварів_Const.POINTER);
         }
         
         public string Назва { get; set; }
@@ -17778,7 +17685,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Документи.ПереміщенняТоварів");
+            return new UuidAndText(UnigueID.UGuid, ПереміщенняТоварів_Const.POINTER);
         }
 
         public ПереміщенняТоварів_Objest? GetDocumentObject(bool readAllTablePart = false)
@@ -17928,8 +17835,9 @@ namespace StorageAndTrade_1_0.Документи
     #region DOCUMENT "ПоверненняТоварівПостачальнику"
     public static class ПоверненняТоварівПостачальнику_Const
     {
-        public const string FULLNAME = "Повернення товарів постачальнику";
         public const string TABLE = "tab_a51";
+        public const string POINTER = "Документи.ПоверненняТоварівПостачальнику";
+        public const string FULLNAME = "Повернення товарів постачальнику";
         public const string DELETION_LABEL = "deletion_label";
         
         
@@ -18387,7 +18295,6 @@ namespace StorageAndTrade_1_0.Документи
             copy.Менеджер = Менеджер;
             copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
-
             if (copyTableParts)
             {
             
@@ -18396,6 +18303,7 @@ namespace StorageAndTrade_1_0.Документи
                 copy.Товари_TablePart.Records = Товари_TablePart.Copy();
             
             }
+            
 
             copy.New();
             ПоверненняТоварівПостачальнику_Triggers.Copying(copy, this);
@@ -18423,7 +18331,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Документи.ПоверненняТоварівПостачальнику");
+            return new UuidAndText(UnigueID.UGuid, ПоверненняТоварівПостачальнику_Const.POINTER);
         }
         
         public string Назва { get; set; }
@@ -18515,7 +18423,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Документи.ПоверненняТоварівПостачальнику");
+            return new UuidAndText(UnigueID.UGuid, ПоверненняТоварівПостачальнику_Const.POINTER);
         }
 
         public ПоверненняТоварівПостачальнику_Objest? GetDocumentObject(bool readAllTablePart = false)
@@ -18673,8 +18581,9 @@ namespace StorageAndTrade_1_0.Документи
     #region DOCUMENT "ПоверненняТоварівВідКлієнта"
     public static class ПоверненняТоварівВідКлієнта_Const
     {
-        public const string FULLNAME = "Повернення товарів від клієнта";
         public const string TABLE = "tab_a53";
+        public const string POINTER = "Документи.ПоверненняТоварівВідКлієнта";
+        public const string FULLNAME = "Повернення товарів від клієнта";
         public const string DELETION_LABEL = "deletion_label";
         
         
@@ -19090,7 +18999,6 @@ namespace StorageAndTrade_1_0.Документи
             copy.Автор = Автор;
             copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
-
             if (copyTableParts)
             {
             
@@ -19099,6 +19007,7 @@ namespace StorageAndTrade_1_0.Документи
                 copy.Товари_TablePart.Records = Товари_TablePart.Copy();
             
             }
+            
 
             copy.New();
             ПоверненняТоварівВідКлієнта_Triggers.Copying(copy, this);
@@ -19126,7 +19035,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Документи.ПоверненняТоварівВідКлієнта");
+            return new UuidAndText(UnigueID.UGuid, ПоверненняТоварівВідКлієнта_Const.POINTER);
         }
         
         public string Назва { get; set; }
@@ -19214,7 +19123,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Документи.ПоверненняТоварівВідКлієнта");
+            return new UuidAndText(UnigueID.UGuid, ПоверненняТоварівВідКлієнта_Const.POINTER);
         }
 
         public ПоверненняТоварівВідКлієнта_Objest? GetDocumentObject(bool readAllTablePart = false)
@@ -19376,8 +19285,9 @@ namespace StorageAndTrade_1_0.Документи
     #region DOCUMENT "АктВиконанихРобіт"
     public static class АктВиконанихРобіт_Const
     {
-        public const string FULLNAME = "Акт виконаних робіт";
         public const string TABLE = "tab_a81";
+        public const string POINTER = "Документи.АктВиконанихРобіт";
+        public const string FULLNAME = "Акт виконаних робіт";
         public const string DELETION_LABEL = "deletion_label";
         
         
@@ -19735,7 +19645,6 @@ namespace StorageAndTrade_1_0.Документи
             copy.Менеджер = Менеджер;
             copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
-
             if (copyTableParts)
             {
             
@@ -19744,6 +19653,7 @@ namespace StorageAndTrade_1_0.Документи
                 copy.Послуги_TablePart.Records = Послуги_TablePart.Copy();
             
             }
+            
 
             copy.New();
             АктВиконанихРобіт_Triggers.Copying(copy, this);
@@ -19771,7 +19681,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Документи.АктВиконанихРобіт");
+            return new UuidAndText(UnigueID.UGuid, АктВиконанихРобіт_Const.POINTER);
         }
         
         public string Назва { get; set; }
@@ -19857,7 +19767,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Документи.АктВиконанихРобіт");
+            return new UuidAndText(UnigueID.UGuid, АктВиконанихРобіт_Const.POINTER);
         }
 
         public АктВиконанихРобіт_Objest? GetDocumentObject(bool readAllTablePart = false)
@@ -19999,8 +19909,9 @@ namespace StorageAndTrade_1_0.Документи
     #region DOCUMENT "ВведенняЗалишків"
     public static class ВведенняЗалишків_Const
     {
-        public const string FULLNAME = "Введення залишків";
         public const string TABLE = "tab_a83";
+        public const string POINTER = "Документи.ВведенняЗалишків";
+        public const string FULLNAME = "Введення залишків";
         public const string DELETION_LABEL = "deletion_label";
         
         
@@ -20448,7 +20359,6 @@ namespace StorageAndTrade_1_0.Документи
             copy.Автор = Автор;
             copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
-
             if (copyTableParts)
             {
             
@@ -20469,6 +20379,7 @@ namespace StorageAndTrade_1_0.Документи
                 copy.РозрахункиЗКонтрагентами_TablePart.Records = РозрахункиЗКонтрагентами_TablePart.Copy();
             
             }
+            
 
             copy.New();
             ВведенняЗалишків_Triggers.Copying(copy, this);
@@ -20496,7 +20407,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Документи.ВведенняЗалишків");
+            return new UuidAndText(UnigueID.UGuid, ВведенняЗалишків_Const.POINTER);
         }
         
         public string Назва { get; set; }
@@ -20581,7 +20492,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Документи.ВведенняЗалишків");
+            return new UuidAndText(UnigueID.UGuid, ВведенняЗалишків_Const.POINTER);
         }
 
         public ВведенняЗалишків_Objest? GetDocumentObject(bool readAllTablePart = false)
@@ -21001,8 +20912,9 @@ namespace StorageAndTrade_1_0.Документи
     #region DOCUMENT "НадлишкиТоварів"
     public static class НадлишкиТоварів_Const
     {
-        public const string FULLNAME = "Надлишки товарів";
         public const string TABLE = "tab_a88";
+        public const string POINTER = "Документи.НадлишкиТоварів";
+        public const string FULLNAME = "Надлишки товарів";
         public const string DELETION_LABEL = "deletion_label";
         
         
@@ -21261,7 +21173,6 @@ namespace StorageAndTrade_1_0.Документи
             copy.Автор = Автор;
             copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
-
             if (copyTableParts)
             {
             
@@ -21270,6 +21181,7 @@ namespace StorageAndTrade_1_0.Документи
                 copy.Товари_TablePart.Records = Товари_TablePart.Copy();
             
             }
+            
 
             copy.New();
             
@@ -21297,7 +21209,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Документи.НадлишкиТоварів");
+            return new UuidAndText(UnigueID.UGuid, НадлишкиТоварів_Const.POINTER);
         }
         
         public Довідники.Організації_Pointer Організація { get; set; }
@@ -21367,7 +21279,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Документи.НадлишкиТоварів");
+            return new UuidAndText(UnigueID.UGuid, НадлишкиТоварів_Const.POINTER);
         }
 
         public НадлишкиТоварів_Objest? GetDocumentObject(bool readAllTablePart = false)
@@ -21505,8 +21417,9 @@ namespace StorageAndTrade_1_0.Документи
     #region DOCUMENT "ПересортицяТоварів"
     public static class ПересортицяТоварів_Const
     {
-        public const string FULLNAME = "Пересортиця товарів";
         public const string TABLE = "tab_a90";
+        public const string POINTER = "Документи.ПересортицяТоварів";
+        public const string FULLNAME = "Пересортиця товарів";
         public const string DELETION_LABEL = "deletion_label";
         
         
@@ -21765,7 +21678,6 @@ namespace StorageAndTrade_1_0.Документи
             copy.Автор = Автор;
             copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
-
             if (copyTableParts)
             {
             
@@ -21774,6 +21686,7 @@ namespace StorageAndTrade_1_0.Документи
                 copy.Товари_TablePart.Records = Товари_TablePart.Copy();
             
             }
+            
 
             copy.New();
             
@@ -21801,7 +21714,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Документи.ПересортицяТоварів");
+            return new UuidAndText(UnigueID.UGuid, ПересортицяТоварів_Const.POINTER);
         }
         
         public string Назва { get; set; }
@@ -21871,7 +21784,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Документи.ПересортицяТоварів");
+            return new UuidAndText(UnigueID.UGuid, ПересортицяТоварів_Const.POINTER);
         }
 
         public ПересортицяТоварів_Objest? GetDocumentObject(bool readAllTablePart = false)
@@ -22009,8 +21922,9 @@ namespace StorageAndTrade_1_0.Документи
     #region DOCUMENT "ПерерахунокТоварів"
     public static class ПерерахунокТоварів_Const
     {
-        public const string FULLNAME = "Перерахунок товарів";
         public const string TABLE = "tab_a92";
+        public const string POINTER = "Документи.ПерерахунокТоварів";
+        public const string FULLNAME = "Перерахунок товарів";
         public const string DELETION_LABEL = "deletion_label";
         
         
@@ -22257,7 +22171,6 @@ namespace StorageAndTrade_1_0.Документи
             copy.Автор = Автор;
             copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
-
             if (copyTableParts)
             {
             
@@ -22266,6 +22179,7 @@ namespace StorageAndTrade_1_0.Документи
                 copy.Товари_TablePart.Records = Товари_TablePart.Copy();
             
             }
+            
 
             copy.New();
             
@@ -22293,7 +22207,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Документи.ПерерахунокТоварів");
+            return new UuidAndText(UnigueID.UGuid, ПерерахунокТоварів_Const.POINTER);
         }
         
         public string Назва { get; set; }
@@ -22361,7 +22275,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Документи.ПерерахунокТоварів");
+            return new UuidAndText(UnigueID.UGuid, ПерерахунокТоварів_Const.POINTER);
         }
 
         public ПерерахунокТоварів_Objest? GetDocumentObject(bool readAllTablePart = false)
@@ -22507,8 +22421,9 @@ namespace StorageAndTrade_1_0.Документи
     #region DOCUMENT "ПсуванняТоварів"
     public static class ПсуванняТоварів_Const
     {
-        public const string FULLNAME = "Псування товарів";
         public const string TABLE = "tab_a94";
+        public const string POINTER = "Документи.ПсуванняТоварів";
+        public const string FULLNAME = "Псування товарів";
         public const string DELETION_LABEL = "deletion_label";
         
         
@@ -22827,7 +22742,6 @@ namespace StorageAndTrade_1_0.Документи
             copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             copy.Основа = Основа;
             
-
             if (copyTableParts)
             {
             
@@ -22836,6 +22750,7 @@ namespace StorageAndTrade_1_0.Документи
                 copy.Товари_TablePart.Records = Товари_TablePart.Copy();
             
             }
+            
 
             copy.New();
             ПсуванняТоварів_Triggers.Copying(copy, this);
@@ -22863,7 +22778,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Документи.ПсуванняТоварів");
+            return new UuidAndText(UnigueID.UGuid, ПсуванняТоварів_Const.POINTER);
         }
         
         public string Назва { get; set; }
@@ -22944,7 +22859,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Документи.ПсуванняТоварів");
+            return new UuidAndText(UnigueID.UGuid, ПсуванняТоварів_Const.POINTER);
         }
 
         public ПсуванняТоварів_Objest? GetDocumentObject(bool readAllTablePart = false)
@@ -23102,8 +23017,9 @@ namespace StorageAndTrade_1_0.Документи
     #region DOCUMENT "ВнутрішнєСпоживанняТоварів"
     public static class ВнутрішнєСпоживанняТоварів_Const
     {
-        public const string FULLNAME = "Внутрішнє споживання товарів";
         public const string TABLE = "tab_b07";
+        public const string POINTER = "Документи.ВнутрішнєСпоживанняТоварів";
+        public const string FULLNAME = "Внутрішнє споживання товарів";
         public const string DELETION_LABEL = "deletion_label";
         
         
@@ -23437,7 +23353,6 @@ namespace StorageAndTrade_1_0.Документи
             copy.Коментар = Коментар;
             copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
-
             if (copyTableParts)
             {
             
@@ -23446,6 +23361,7 @@ namespace StorageAndTrade_1_0.Документи
                 copy.Товари_TablePart.Records = Товари_TablePart.Copy();
             
             }
+            
 
             copy.New();
             ВнутрішнєСпоживанняТоварів_Triggers.Copying(copy, this);
@@ -23473,7 +23389,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Документи.ВнутрішнєСпоживанняТоварів");
+            return new UuidAndText(UnigueID.UGuid, ВнутрішнєСпоживанняТоварів_Const.POINTER);
         }
         
         public string Назва { get; set; }
@@ -23555,7 +23471,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Документи.ВнутрішнєСпоживанняТоварів");
+            return new UuidAndText(UnigueID.UGuid, ВнутрішнєСпоживанняТоварів_Const.POINTER);
         }
 
         public ВнутрішнєСпоживанняТоварів_Objest? GetDocumentObject(bool readAllTablePart = false)
@@ -23713,8 +23629,9 @@ namespace StorageAndTrade_1_0.Документи
     #region DOCUMENT "РахунокФактура"
     public static class РахунокФактура_Const
     {
-        public const string FULLNAME = "Рахунок фактура";
         public const string TABLE = "tab_b10";
+        public const string POINTER = "Документи.РахунокФактура";
+        public const string FULLNAME = "Рахунок фактура";
         public const string DELETION_LABEL = "deletion_label";
         
         
@@ -24147,7 +24064,6 @@ namespace StorageAndTrade_1_0.Документи
             copy.Менеджер = Менеджер;
             copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
-
             if (copyTableParts)
             {
             
@@ -24156,6 +24072,7 @@ namespace StorageAndTrade_1_0.Документи
                 copy.Товари_TablePart.Records = Товари_TablePart.Copy();
             
             }
+            
 
             copy.New();
             РахунокФактура_Triggers.Copying(copy, this);
@@ -24183,7 +24100,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Документи.РахунокФактура");
+            return new UuidAndText(UnigueID.UGuid, РахунокФактура_Const.POINTER);
         }
         
         public string Назва { get; set; }
@@ -24272,7 +24189,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Документи.РахунокФактура");
+            return new UuidAndText(UnigueID.UGuid, РахунокФактура_Const.POINTER);
         }
 
         public РахунокФактура_Objest? GetDocumentObject(bool readAllTablePart = false)
@@ -24434,8 +24351,9 @@ namespace StorageAndTrade_1_0.Документи
     #region DOCUMENT "РозміщенняТоварівНаСкладі"
     public static class РозміщенняТоварівНаСкладі_Const
     {
-        public const string FULLNAME = "Розміщення товарів на складі";
         public const string TABLE = "tab_a64";
+        public const string POINTER = "Документи.РозміщенняТоварівНаСкладі";
+        public const string FULLNAME = "Розміщення товарів на складі";
         public const string DELETION_LABEL = "deletion_label";
         
         
@@ -24733,7 +24651,6 @@ namespace StorageAndTrade_1_0.Документи
             copy.ДокументПоступлення = ДокументПоступлення;
             copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
-
             if (copyTableParts)
             {
             
@@ -24742,6 +24659,7 @@ namespace StorageAndTrade_1_0.Документи
                 copy.Товари_TablePart.Records = Товари_TablePart.Copy();
             
             }
+            
 
             copy.New();
             РозміщенняТоварівНаСкладі_Triggers.Copying(copy, this);
@@ -24769,7 +24687,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Документи.РозміщенняТоварівНаСкладі");
+            return new UuidAndText(UnigueID.UGuid, РозміщенняТоварівНаСкладі_Const.POINTER);
         }
         
         public string Назва { get; set; }
@@ -24849,7 +24767,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Документи.РозміщенняТоварівНаСкладі");
+            return new UuidAndText(UnigueID.UGuid, РозміщенняТоварівНаСкладі_Const.POINTER);
         }
 
         public РозміщенняТоварівНаСкладі_Objest? GetDocumentObject(bool readAllTablePart = false)
@@ -24999,8 +24917,9 @@ namespace StorageAndTrade_1_0.Документи
     #region DOCUMENT "ПереміщенняТоварівНаСкладі"
     public static class ПереміщенняТоварівНаСкладі_Const
     {
-        public const string FULLNAME = "Переміщення товарів на складі";
         public const string TABLE = "tab_b09";
+        public const string POINTER = "Документи.ПереміщенняТоварівНаСкладі";
+        public const string FULLNAME = "Переміщення товарів на складі";
         public const string DELETION_LABEL = "deletion_label";
         
         
@@ -25293,7 +25212,6 @@ namespace StorageAndTrade_1_0.Документи
             copy.Підрозділ = Підрозділ;
             copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
-
             if (copyTableParts)
             {
             
@@ -25302,6 +25220,7 @@ namespace StorageAndTrade_1_0.Документи
                 copy.Товари_TablePart.Records = Товари_TablePart.Copy();
             
             }
+            
 
             copy.New();
             ПереміщенняТоварівНаСкладі_Triggers.Copying(copy, this);
@@ -25329,7 +25248,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Документи.ПереміщенняТоварівНаСкладі");
+            return new UuidAndText(UnigueID.UGuid, ПереміщенняТоварівНаСкладі_Const.POINTER);
         }
         
         public string Назва { get; set; }
@@ -25408,7 +25327,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Документи.ПереміщенняТоварівНаСкладі");
+            return new UuidAndText(UnigueID.UGuid, ПереміщенняТоварівНаСкладі_Const.POINTER);
         }
 
         public ПереміщенняТоварівНаСкладі_Objest? GetDocumentObject(bool readAllTablePart = false)
@@ -25562,8 +25481,9 @@ namespace StorageAndTrade_1_0.Документи
     #region DOCUMENT "ЗбіркаТоварівНаСкладі"
     public static class ЗбіркаТоварівНаСкладі_Const
     {
-        public const string FULLNAME = "Збірка товарів на складі";
         public const string TABLE = "tab_b27";
+        public const string POINTER = "Документи.ЗбіркаТоварівНаСкладі";
+        public const string FULLNAME = "Збірка товарів на складі";
         public const string DELETION_LABEL = "deletion_label";
         
         
@@ -25861,7 +25781,6 @@ namespace StorageAndTrade_1_0.Документи
             copy.ДокументРеалізації = ДокументРеалізації;
             copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
-
             if (copyTableParts)
             {
             
@@ -25870,6 +25789,7 @@ namespace StorageAndTrade_1_0.Документи
                 copy.Товари_TablePart.Records = Товари_TablePart.Copy();
             
             }
+            
 
             copy.New();
             ЗбіркаТоварівНаСкладі_Triggers.Copying(copy, this);
@@ -25897,7 +25817,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Документи.ЗбіркаТоварівНаСкладі");
+            return new UuidAndText(UnigueID.UGuid, ЗбіркаТоварівНаСкладі_Const.POINTER);
         }
         
         public string Назва { get; set; }
@@ -25977,7 +25897,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Документи.ЗбіркаТоварівНаСкладі");
+            return new UuidAndText(UnigueID.UGuid, ЗбіркаТоварівНаСкладі_Const.POINTER);
         }
 
         public ЗбіркаТоварівНаСкладі_Objest? GetDocumentObject(bool readAllTablePart = false)
@@ -26127,8 +26047,9 @@ namespace StorageAndTrade_1_0.Документи
     #region DOCUMENT "РозміщенняНоменклатуриПоКоміркам"
     public static class РозміщенняНоменклатуриПоКоміркам_Const
     {
-        public const string FULLNAME = "Розміщення номенклатури по коміркам";
         public const string TABLE = "tab_b29";
+        public const string POINTER = "Документи.РозміщенняНоменклатуриПоКоміркам";
+        public const string FULLNAME = "Розміщення номенклатури по коміркам";
         public const string DELETION_LABEL = "deletion_label";
         
         
@@ -26385,7 +26306,6 @@ namespace StorageAndTrade_1_0.Документи
             copy.Основа = Основа;
             copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
             
-
             if (copyTableParts)
             {
             
@@ -26394,6 +26314,7 @@ namespace StorageAndTrade_1_0.Документи
                 copy.Товари_TablePart.Records = Товари_TablePart.Copy();
             
             }
+            
 
             copy.New();
             РозміщенняНоменклатуриПоКоміркам_Triggers.Copying(copy, this);
@@ -26421,7 +26342,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Документи.РозміщенняНоменклатуриПоКоміркам");
+            return new UuidAndText(UnigueID.UGuid, РозміщенняНоменклатуриПоКоміркам_Const.POINTER);
         }
         
         public string Назва { get; set; }
@@ -26500,7 +26421,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Документи.РозміщенняНоменклатуриПоКоміркам");
+            return new UuidAndText(UnigueID.UGuid, РозміщенняНоменклатуриПоКоміркам_Const.POINTER);
         }
 
         public РозміщенняНоменклатуриПоКоміркам_Objest? GetDocumentObject(bool readAllTablePart = false)

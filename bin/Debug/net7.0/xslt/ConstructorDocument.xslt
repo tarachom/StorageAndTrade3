@@ -320,12 +320,14 @@ namespace StorageAndTrade
                 return false;
             }
 
+            <xsl:if test="count($TabularParts) != 0">
             if (isSave)
             {
                 <xsl:for-each select="$TabularParts">
                     <xsl:value-of select="Name"/>.SaveRecords();
                 </xsl:for-each>
             }
+            </xsl:if>
 
             UnigueID = <xsl:value-of select="$DocumentName"/>_Objest.UnigueID;
             Caption = <xsl:value-of select="$DocumentName"/>_Objest.Назва;

@@ -326,8 +326,8 @@ ORDER BY Контрагент_Назва
             КолонкиДаних.Add("Валюта_Назва", "Валюта");
 
             Dictionary<string, string> ТипиДаних = new Dictionary<string, string>();
-            ТипиДаних.Add("Контрагент_Назва", new Контрагенти_Pointer().GetBasis().Text);
-            ТипиДаних.Add("Валюта_Назва", new Валюти_Pointer().GetBasis().Text);
+            ТипиДаних.Add("Контрагент_Назва", Контрагенти_Const.POINTER);
+            ТипиДаних.Add("Валюта_Назва", Валюти_Const.POINTER);
 
             Dictionary<string, float> ПозиціяТекстуВКолонці = new Dictionary<string, float>();
             ПозиціяТекстуВКолонці.Add("Сума", 1);
@@ -563,8 +563,8 @@ ORDER BY Контрагент_Назва, Валюта_Назва
             КолонкиДаних.Add("Валюта_Назва", "Валюта");
 
             Dictionary<string, string> ТипиДаних = new Dictionary<string, string>();
-            ТипиДаних.Add("Контрагент_Назва", new Контрагенти_Pointer().GetBasis().Text);
-            ТипиДаних.Add("Валюта_Назва", new Валюти_Pointer().GetBasis().Text);
+            ТипиДаних.Add("Контрагент_Назва", Контрагенти_Const.POINTER);
+            ТипиДаних.Add("Валюта_Назва", Валюти_Const.POINTER);
 
             Dictionary<string, float> ПозиціяТекстуВКолонці = new Dictionary<string, float>();
             ПозиціяТекстуВКолонці.Add("ПочатковийЗалишок", 1);
@@ -784,8 +784,8 @@ ORDER BY period ASC
 
             Dictionary<string, string> ТипиДаних = new Dictionary<string, string>();
             ТипиДаних.Add("Документ", "Документи.*");
-            ТипиДаних.Add("Контрагент_Назва", new Контрагенти_Pointer().GetBasis().Text);
-            ТипиДаних.Add("Валюта_Назва", new Валюти_Pointer().GetBasis().Text);
+            ТипиДаних.Add("Контрагент_Назва", Контрагенти_Const.POINTER);
+            ТипиДаних.Add("Валюта_Назва", Валюти_Const.POINTER);
 
             Dictionary<string, float> ПозиціяТекстуВКолонці = new Dictionary<string, float>();
             ПозиціяТекстуВКолонці.Add("income", 0.5f);

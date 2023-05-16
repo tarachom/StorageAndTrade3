@@ -34,7 +34,7 @@ limitations under the License.
         <xsl:choose>
 
             <xsl:when test="$File = 'TablePart'">
-                <xsl:call-template name="DirectoryElement" />
+                <xsl:call-template name="TablePart" />
             </xsl:when>
             
         </xsl:choose>
@@ -47,7 +47,7 @@ limitations under the License.
         <xsl:variable name="Fields" select="TablePart/Fields/Field"/>
 
 /*
-        <xsl:value-of select="$DirectoryName"/>_ТабличнаЧастина_<xsl:value-of select="$TablePartName"/>.cs
+        _ТабличнаЧастина_<xsl:value-of select="$TablePartName"/>.cs
         Таблична Частина
 */
 

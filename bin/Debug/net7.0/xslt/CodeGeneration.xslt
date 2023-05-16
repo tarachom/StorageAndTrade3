@@ -591,8 +591,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
     #region DIRECTORY "<xsl:value-of select="$DirectoryName"/>"
     public static class <xsl:value-of select="$DirectoryName"/>_Const
     {
-        public const string FULLNAME = "<xsl:value-of select="normalize-space(FullName)"/>";
         public const string TABLE = "<xsl:value-of select="Table"/>";
+        public const string POINTER = "Довідники.<xsl:value-of select="$DirectoryName"/>";
+        public const string FULLNAME = "<xsl:value-of select="normalize-space(FullName)"/>";
         public const string DELETION_LABEL = "deletion_label";
         <xsl:for-each select="Fields/Field">
         public const string <xsl:value-of select="Name"/> = "<xsl:value-of select="NameInTable"/>";</xsl:for-each>
@@ -690,6 +691,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
               <xsl:text>copy.</xsl:text><xsl:value-of select="Name"/><xsl:text> = </xsl:text><xsl:value-of select="Name"/>;
             </xsl:for-each>
             
+            <xsl:if test="count(TabularParts/TablePart) != 0">
             if (copyTableParts)
             {
             <xsl:for-each select="TabularParts/TablePart">
@@ -699,6 +701,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
                 copy.<xsl:value-of select="$TablePartName"/>.Records = <xsl:value-of select="$TablePartName"/>.Copy();
             </xsl:for-each>
             }
+            </xsl:if>
 
             copy.New();
             <xsl:if test="normalize-space(TriggerFunctions/Copying) != ''">
@@ -736,7 +739,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.<xsl:value-of select="$DirectoryName"/>");
+            return new UuidAndText(UnigueID.UGuid, <xsl:value-of select="$DirectoryName"/>_Const.POINTER);
         }
 
         public string GetPresentation()
@@ -827,7 +830,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Довідники.<xsl:value-of select="$DirectoryName"/>");
+            return new UuidAndText(UnigueID.UGuid, <xsl:value-of select="$DirectoryName"/>_Const.POINTER);
         }
 
         public void Clear()
@@ -1079,8 +1082,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
     #region DOCUMENT "<xsl:value-of select="$DocumentName"/>"
     public static class <xsl:value-of select="$DocumentName"/>_Const
     {
-        public const string FULLNAME = "<xsl:value-of select="normalize-space(FullName)"/>";
         public const string TABLE = "<xsl:value-of select="Table"/>";
+        public const string POINTER = "Документи.<xsl:value-of select="$DocumentName"/>";
+        public const string FULLNAME = "<xsl:value-of select="normalize-space(FullName)"/>";
         public const string DELETION_LABEL = "deletion_label";
         
         <xsl:for-each select="Fields/Field">
@@ -1304,6 +1308,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
               <xsl:text>copy.</xsl:text><xsl:value-of select="Name"/><xsl:text> = </xsl:text><xsl:value-of select="Name"/>;
             </xsl:for-each>
 
+            <xsl:if test="count(TabularParts/TablePart) != 0">
             if (copyTableParts)
             {
             <xsl:for-each select="TabularParts/TablePart">
@@ -1313,6 +1318,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
                 copy.<xsl:value-of select="$TablePartName"/>.Records = <xsl:value-of select="$TablePartName"/>.Copy();
             </xsl:for-each>
             }
+            </xsl:if>
 
             copy.New();
             <xsl:if test="normalize-space(TriggerFunctions/Copying) != ''">
@@ -1352,7 +1358,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Документи.<xsl:value-of select="$DocumentName"/>");
+            return new UuidAndText(UnigueID.UGuid, <xsl:value-of select="$DocumentName"/>_Const.POINTER);
         }
         
         <xsl:for-each select="Fields/Field">
@@ -1444,7 +1450,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
 
         public UuidAndText GetBasis()
         {
-            return new UuidAndText(UnigueID.UGuid, "Документи.<xsl:value-of select="$DocumentName"/>");
+            return new UuidAndText(UnigueID.UGuid, <xsl:value-of select="$DocumentName"/>_Const.POINTER);
         }
 
         public <xsl:value-of select="$DocumentName"/>_Objest? GetDocumentObject(bool readAllTablePart = false)
