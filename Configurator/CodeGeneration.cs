@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 16.05.2023 14:05:05
+ * Дата конфігурації: 16.05.2023 20:42:06
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -26569,8 +26569,34 @@ namespace StorageAndTrade_1_0.Журнали
                 return null;
 
             
-			
-			      return null;
+            switch (Current.TypeDocument)
+            {
+                case "ЗамовленняПостачальнику": return new Документи.ЗамовленняПостачальнику_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "ПоступленняТоварівТаПослуг": return new Документи.ПоступленняТоварівТаПослуг_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "ЗамовленняКлієнта": return new Документи.ЗамовленняКлієнта_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "РеалізаціяТоварівТаПослуг": return new Документи.РеалізаціяТоварівТаПослуг_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "ВстановленняЦінНоменклатури": return new Документи.ВстановленняЦінНоменклатури_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "ПрихіднийКасовийОрдер": return new Документи.ПрихіднийКасовийОрдер_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "РозхіднийКасовийОрдер": return new Документи.РозхіднийКасовийОрдер_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "ПереміщенняТоварів": return new Документи.ПереміщенняТоварів_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "ПоверненняТоварівПостачальнику": return new Документи.ПоверненняТоварівПостачальнику_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "ПоверненняТоварівВідКлієнта": return new Документи.ПоверненняТоварівВідКлієнта_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "АктВиконанихРобіт": return new Документи.АктВиконанихРобіт_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "ВведенняЗалишків": return new Документи.ВведенняЗалишків_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "НадлишкиТоварів": return new Документи.НадлишкиТоварів_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "ПересортицяТоварів": return new Документи.ПересортицяТоварів_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "ПерерахунокТоварів": return new Документи.ПерерахунокТоварів_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "ПсуванняТоварів": return new Документи.ПсуванняТоварів_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "ВнутрішнєСпоживанняТоварів": return new Документи.ВнутрішнєСпоживанняТоварів_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "РахунокФактура": return new Документи.РахунокФактура_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "РозміщенняТоварівНаСкладі": return new Документи.РозміщенняТоварівНаСкладі_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "ПереміщенняТоварівНаСкладі": return new Документи.ПереміщенняТоварівНаСкладі_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "ЗбіркаТоварівНаСкладі": return new Документи.ЗбіркаТоварівНаСкладі_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "РозміщенняНоменклатуриПоКоміркам": return new Документи.РозміщенняНоменклатуриПоКоміркам_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                
+                default: return null;
+            }
+            
         }
     }
     #endregion
