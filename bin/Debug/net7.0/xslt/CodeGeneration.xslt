@@ -1630,7 +1630,6 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Журнали
             if (Current == null)
                 return null;
 
-            <xsl:if test="count(Configuration/Documents/Document) != 0">
             switch (Current.TypeDocument)
             {
                 <xsl:for-each select="Configuration/Documents/Document">
@@ -1638,7 +1637,6 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Журнали
                 </xsl:for-each>
                 default: return null;
             }
-            </xsl:if>
         }
     }
     #endregion
