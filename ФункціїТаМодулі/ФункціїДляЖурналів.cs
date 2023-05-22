@@ -85,7 +85,7 @@ namespace StorageAndTrade
 
             foreach (KeyValuePair<string, string> typeDoc in allowDocument)
             {
-                LinkButton lb = new LinkButton(typeDoc.Value, " " + typeDoc.Value) { Halign = Align.Start };
+                LinkButton lb = new LinkButton(typeDoc.Value, typeDoc.Value) { Halign = Align.Start };
                 vBox.PackStart(lb, false, false, 0);
 
                 lb.Clicked += (object? sender, EventArgs args) =>
