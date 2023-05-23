@@ -1110,7 +1110,7 @@ WHERE
     {
         public static void New(СеріїНоменклатури_Objest ДовідникОбєкт)
         {
-
+            ДовідникОбєкт.ДатаСтворення = DateTime.Now;
         }
 
         public static void Copying(СеріїНоменклатури_Objest ДовідникОбєкт, СеріїНоменклатури_Objest Основа)

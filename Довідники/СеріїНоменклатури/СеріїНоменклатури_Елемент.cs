@@ -32,6 +32,8 @@ namespace StorageAndTrade
         public СеріїНоменклатури_Objest СеріїНоменклатури_Objest { get; set; } = new СеріїНоменклатури_Objest();
 
         Entry Номер = new Entry() { WidthRequest = 500 };
+        Entry Коментар = new Entry() { WidthRequest = 500 };
+        DateTimeControl ДатаСтворення = new DateTimeControl();
 
         public СеріїНоменклатури_Елемент() : base() { }
 
@@ -39,6 +41,12 @@ namespace StorageAndTrade
         {
             //Номер
             CreateField(vBox, "Номер:", Номер);
+
+            //Коментар
+            CreateField(vBox, "Коментар:", Коментар);
+
+            //ДатаСтворення
+            CreateField(vBox, "Cтворений:", ДатаСтворення);
         }
 
         #region Присвоєння / зчитування значень
@@ -49,11 +57,15 @@ namespace StorageAndTrade
                 СеріїНоменклатури_Objest.New();
 
             Номер.Text = СеріїНоменклатури_Objest.Номер;
+            Коментар.Text = СеріїНоменклатури_Objest.Коментар;
+            ДатаСтворення.Value = СеріїНоменклатури_Objest.ДатаСтворення;
         }
 
         protected override void GetValue()
         {
             СеріїНоменклатури_Objest.Номер = Номер.Text;
+            СеріїНоменклатури_Objest.Коментар = Коментар.Text;
+            СеріїНоменклатури_Objest.ДатаСтворення = ДатаСтворення.Value;
         }
 
         #endregion
