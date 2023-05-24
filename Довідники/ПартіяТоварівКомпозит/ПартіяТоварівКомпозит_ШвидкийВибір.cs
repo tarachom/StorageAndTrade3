@@ -26,12 +26,15 @@ using Gtk;
 using AccountingSoftware;
 
 using StorageAndTrade_1_0.Довідники;
+using StorageAndTrade_1_0.РегістриНакопичення;
 using ТабличніСписки = StorageAndTrade_1_0.Довідники.ТабличніСписки;
 
 namespace StorageAndTrade
 {
     class ПартіяТоварівКомпозит_ШвидкийВибір : ДовідникШвидкийВибір
     {
+        public Номенклатура_PointerControl НоменклатураВідбір = new Номенклатура_PointerControl() { WidthPresentation = 100 };
+
         public ПартіяТоварівКомпозит_ШвидкийВибір() : base()
         {
             TreeViewGrid.Model = ТабличніСписки.ПартіяТоварівКомпозит_ЗаписиШвидкийВибір.Store;
@@ -56,22 +59,13 @@ namespace StorageAndTrade
                 HBoxTop.PackStart(linkPage, false, false, 10);
             }
 
-            //Очистка
-            /*
+            //Відбір
+            HBoxTop.PackStart(НоменклатураВідбір, false, false, 2);
+            НоменклатураВідбір.Caption = $"{Номенклатура_Const.FULLNAME}:";
+            НоменклатураВідбір.AfterSelectFunc = () =>
             {
-                LinkButton linkClear = new LinkButton(" Очистити") { Image = new Image(AppContext.BaseDirectory + "images/clean.png"), AlwaysShowImage = true };
-                linkClear.Clicked += (object? sender, EventArgs args) =>
-                {
-                    if (CallBack_OnSelectPointer != null)
-                        CallBack_OnSelectPointer.Invoke(new UnigueID());
-
-                    if (PopoverParent != null)
-                        PopoverParent.Hide();
-                };
-
-                HBoxTop.PackEnd(linkClear, false, false, 10);
-            }
-            */
+                LoadRecords();
+            };
         }
 
         public override void LoadRecords()
@@ -79,6 +73,21 @@ namespace StorageAndTrade
             ТабличніСписки.ПартіяТоварівКомпозит_ЗаписиШвидкийВибір.DirectoryPointerItem = DirectoryPointerItem;
 
             ТабличніСписки.ПартіяТоварівКомпозит_ЗаписиШвидкийВибір.Where.Clear();
+
+            if (!НоменклатураВідбір.Pointer.IsEmpty())
+            {
+                ТабличніСписки.ПартіяТоварівКомпозит_ЗаписиШвидкийВибір.Where.Add(
+                    new Where("uid", Comparison.IN,
+                        @$"
+    SELECT DISTINCT
+        ПартіїТоварів_Підсумки.{ПартіїТоварів_Підсумки_TablePart.ПартіяТоварівКомпозит}
+    FROM {ПартіїТоварів_Підсумки_TablePart.TABLE} AS ПартіїТоварів_Підсумки
+    WHERE
+        ПартіїТоварів_Підсумки.{ПартіїТоварів_Підсумки_TablePart.Номенклатура} = '{НоменклатураВідбір.Pointer.UnigueID}' AND
+        ПартіїТоварів_Підсумки.{ПартіїТоварів_Підсумки_TablePart.Кількість} > 0 
+", true)
+                );
+            }
 
             ТабличніСписки.ПартіяТоварівКомпозит_ЗаписиШвидкийВибір.LoadRecords();
 

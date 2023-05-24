@@ -425,6 +425,7 @@ namespace StorageAndTrade
                 case Columns.Партія:
                     {
                         ПартіяТоварівКомпозит_ШвидкийВибір page = new ПартіяТоварівКомпозит_ШвидкийВибір() { PopoverParent = popoverSmallSelect, DirectoryPointerItem = запис.Партія.UnigueID };
+                        page.НоменклатураВідбір.Pointer = запис.Номенклатура;
                         page.CallBack_OnSelectPointer = (UnigueID selectPointer) =>
                         {
                             запис.Партія = new ПартіяТоварівКомпозит_Pointer(selectPointer);

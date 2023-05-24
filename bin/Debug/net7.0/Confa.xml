@@ -5,7 +5,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>16.05.2023 20:42:06</DateTimeSave>
+  <DateTimeSave>24.05.2023 22:17:29</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -5167,7 +5167,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <Caption>Назва</Caption>
               <Size>0</Size>
               <SortNum>0</SortNum>
-              <SortField>True</SortField>
+              <SortField>False</SortField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -5177,7 +5177,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <Caption>Дата</Caption>
               <Size>0</Size>
               <SortNum>0</SortNum>
-              <SortField>False</SortField>
+              <SortField>True</SortField>
               <Type>datetime</Type>
               <Pointer>
               </Pointer>
@@ -5250,7 +5250,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <Caption>Дата</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-              <SortField>False</SortField>
+              <SortField>True</SortField>
               <Type>datetime</Type>
               <Pointer>
               </Pointer>
@@ -26691,13 +26691,12 @@ HAVING
     </RegisterAccumulation>
     <RegisterAccumulation>
       <Name>ПартіїТоварів</Name>
-      <FullName>
-      </FullName>
+      <FullName>ПартіїТоварів</FullName>
       <Table>tab_a79</Table>
       <Type>Residues</Type>
       <Desc>
       </Desc>
-      <NoSummary>1</NoSummary>
+      <NoSummary>0</NoSummary>
       <DimensionFields>
         <Fields>
           <Field>
@@ -27058,6 +27057,82 @@ HAVING
             </Field>
           </Fields>
         </TablePart>
+        <TablePart>
+          <Name>Підсумки</Name>
+          <Table>tab_a62</Table>
+          <Desc>Віртуальна таблиця</Desc>
+          <Fields>
+            <Field>
+              <Name>Організація</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Організації</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+            </Field>
+            <Field>
+              <Name>ПартіяТоварівКомпозит</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ПартіяТоварівКомпозит</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+            </Field>
+            <Field>
+              <Name>Номенклатура</Name>
+              <NameInTable>col_a3</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Номенклатура</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+            </Field>
+            <Field>
+              <Name>ХарактеристикаНоменклатури</Name>
+              <NameInTable>col_a4</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+            </Field>
+            <Field>
+              <Name>Серія</Name>
+              <NameInTable>col_a5</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.СеріїНоменклатури</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+            </Field>
+            <Field>
+              <Name>Склад</Name>
+              <NameInTable>col_a6</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Склади</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+            </Field>
+            <Field>
+              <Name>Кількість</Name>
+              <NameInTable>col_a8</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+            </Field>
+          </Fields>
+        </TablePart>
       </TabularParts>
       <QueryBlockList>
         <QueryBlock>
@@ -27220,6 +27295,52 @@ HAVING
     SUM(CASE WHEN ПартіїТоварів.income = true THEN 
         ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE 
         -ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} END) != 0 
+
+
+
+
+</Query>
+        </QueryBlock>
+        <QueryBlock>
+          <Name>Підсумки</Name>
+          <FinalCalculation>1</FinalCalculation>
+          <Query position="0" key="DELETE">
+DELETE FROM {ПартіїТоварів_Підсумки_TablePart.TABLE}
+</Query>
+          <Query position="1" key="SELECT">
+INSERT INTO {ПартіїТоварів_Підсумки_TablePart.TABLE} 
+(
+    uid,
+    {ПартіїТоварів_Підсумки_TablePart.Організація},
+    {ПартіїТоварів_Підсумки_TablePart.ПартіяТоварівКомпозит},
+    {ПартіїТоварів_Підсумки_TablePart.Номенклатура},
+    {ПартіїТоварів_Підсумки_TablePart.ХарактеристикаНоменклатури},
+    {ПартіїТоварів_Підсумки_TablePart.Серія},
+    {ПартіїТоварів_Підсумки_TablePart.Склад},
+    {ПартіїТоварів_Підсумки_TablePart.Кількість}
+)
+SELECT
+    uuid_generate_v4(),
+    ПартіїТоварів.{ПартіїТоварів_Залишки_TablePart.Організація} AS Організація,
+    ПартіїТоварів.{ПартіїТоварів_Залишки_TablePart.ПартіяТоварівКомпозит} AS ПартіяТоварівКомпозит,
+    ПартіїТоварів.{ПартіїТоварів_Залишки_TablePart.Номенклатура} AS Номенклатура,
+    ПартіїТоварів.{ПартіїТоварів_Залишки_TablePart.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
+    ПартіїТоварів.{ПартіїТоварів_Залишки_TablePart.Серія} AS Серія,
+    ПартіїТоварів.{ПартіїТоварів_Залишки_TablePart.Склад} AS Склад,
+
+    /* Кількість */
+    SUM(ПартіїТоварів.{ПартіїТоварів_Залишки_TablePart.Кількість}) AS Кількість
+
+FROM
+    {ПартіїТоварів_Залишки_TablePart.TABLE} AS ПартіїТоварів
+
+GROUP BY
+Організація, ПартіяТоварівКомпозит, Номенклатура, ХарактеристикаНоменклатури, Серія, Склад
+
+HAVING
+
+    /* Кількість */
+    SUM(ПартіїТоварів.{ПартіїТоварів_Залишки_TablePart.Кількість}) != 0 
 
 
 

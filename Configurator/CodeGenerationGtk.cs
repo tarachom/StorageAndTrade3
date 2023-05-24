@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 16.05.2023 20:42:06
+ * Дата конфігурації: 24.05.2023 22:17:29
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон Gtk.xslt
@@ -5951,7 +5951,7 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
 
             
               /* ORDER */
-              ПартіяТоварівКомпозит_Select.QuerySelect.Order.Add(Довідники.ПартіяТоварівКомпозит_Const.Назва, SelectOrder.ASC);
+              ПартіяТоварівКомпозит_Select.QuerySelect.Order.Add(Довідники.ПартіяТоварівКомпозит_Const.Дата, SelectOrder.ASC);
             
                 /* Join Table */
                 ПартіяТоварівКомпозит_Select.QuerySelect.Joins.Add(
@@ -6073,6 +6073,9 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
             /* Where */
             ПартіяТоварівКомпозит_Select.QuerySelect.Where = Where;
 
+            
+              /* ORDER */
+              ПартіяТоварівКомпозит_Select.QuerySelect.Order.Add(Довідники.ПартіяТоварівКомпозит_Const.Дата, SelectOrder.ASC);
             
 
             /* SELECT */
