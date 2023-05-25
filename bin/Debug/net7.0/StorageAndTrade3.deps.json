@@ -92,15 +92,14 @@
           }
         }
       },
-      "Npgsql/7.0.0": {
+      "Npgsql/7.0.4": {
         "dependencies": {
-          "Microsoft.Extensions.Logging.Abstractions": "6.0.0",
-          "System.Runtime.CompilerServices.Unsafe": "6.0.0"
+          "Microsoft.Extensions.Logging.Abstractions": "6.0.0"
         },
         "runtime": {
           "lib/net7.0/Npgsql.dll": {
-            "assemblyVersion": "7.0.0.0",
-            "fileVersion": "7.0.0.0"
+            "assemblyVersion": "7.0.4.0",
+            "fileVersion": "7.0.4.0"
           }
         }
       },
@@ -116,10 +115,9 @@
           }
         }
       },
-      "System.Runtime.CompilerServices.Unsafe/6.0.0": {},
       "AccountingSoftware/1.0.0": {
         "dependencies": {
-          "Npgsql": "7.0.0"
+          "Npgsql": "7.0.4"
         },
         "runtime": {
           "AccountingSoftware.dll": {}
@@ -191,12 +189,12 @@
       "path": "microsoft.extensions.logging.abstractions/6.0.0",
       "hashPath": "microsoft.extensions.logging.abstractions.6.0.0.nupkg.sha512"
     },
-    "Npgsql/7.0.0": {
+    "Npgsql/7.0.4": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-tOBFksJZ2MiEz8xtDUgS5IG19jVO3nSP15QDYWiiGpXHe0PsLoQBts2Sg3hHKrrLTuw+AjsJz9iKvvGNHyKDIg==",
-      "path": "npgsql/7.0.0",
-      "hashPath": "npgsql.7.0.0.nupkg.sha512"
+      "sha512": "sha512-7UVPYy2RP0ci04PED1tc9ZCaTw/DfSdSkLiGEFCAvwMwsgA/bAluj1liNzP1IpN0MFofnOF0cm1zJfmbEuCehg==",
+      "path": "npgsql/7.0.4",
+      "hashPath": "npgsql.7.0.4.nupkg.sha512"
     },
     "PangoSharp/3.24.24.38": {
       "type": "package",
@@ -204,13 +202,6 @@
       "sha512": "sha512-NpTRGMOJvxJwRIEXV0hyAnFt26mLYwGu70TLCZecXwWgdQx87HWsAUWgzjL8atdExquebSBumKP6cZjkEAQuaA==",
       "path": "pangosharp/3.24.24.38",
       "hashPath": "pangosharp.3.24.24.38.nupkg.sha512"
-    },
-    "System.Runtime.CompilerServices.Unsafe/6.0.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-/iUeP3tq1S0XdNNoMz5C9twLSrM/TH+qElHkXWaPvuNOt+99G75NrV0OS2EqHx5wMN7popYjpc8oTjC1y16DLg==",
-      "path": "system.runtime.compilerservices.unsafe/6.0.0",
-      "hashPath": "system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
     },
     "AccountingSoftware/1.0.0": {
       "type": "project",
