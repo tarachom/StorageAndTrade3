@@ -17,9 +17,9 @@
   </Configuration>
   <Configuration Select="False">
     <Key>1f01f0e7-dadf-4745-a411-f189ef414e2a</Key>
-    <Name>postgresql-125678-0.cloudclusters.net</Name>
-    <Server>postgresql-125678-0.cloudclusters.net</Server>
-    <Port>17374</Port>
+    <Name>postgresql-127573-0.cloudclusters.net</Name>
+    <Server>postgresql-127573-0.cloudclusters.net</Server>
+    <Port>16542</Port>
     <Login>admin</Login>
     <Password>12345678</Password>
     <BaseName>storage_and_trade</BaseName>
