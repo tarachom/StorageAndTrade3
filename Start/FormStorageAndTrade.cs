@@ -52,15 +52,11 @@ namespace StorageAndTrade
             if (File.Exists(Program.IcoFileName))
                 SetDefaultIconFromFile(Program.IcoFileName);
 
-            HeaderBar headerBar = new HeaderBar();
-            headerBar.ShowCloseButton = true;
-            headerBar.Title = "\"Зберігання та Торгівля\" для України";
-            headerBar.Subtitle = "Облік складу, торгівлі та фінансів";
+            HeaderBar headerBar = new HeaderBar() { Title = "\"Зберігання та Торгівля\" для України", Subtitle = "Облік складу, торгівлі та фінансів", ShowCloseButton = true };
             Titlebar = headerBar;
 
             //Повнотекстовий пошук
-            Button buttonFind = new Button();
-            buttonFind.Add(new Image(AppContext.BaseDirectory + "images/find.png"));
+            Button buttonFind = new Button() { { new Image(AppContext.BaseDirectory + "images/find.png") } };
             buttonFind.Clicked += OnButtonFindClicked;
             headerBar.PackEnd(buttonFind);
 
@@ -231,8 +227,7 @@ namespace StorageAndTrade
 
         void CreateLeftMenu(HBox hbox)
         {
-            VBox vbox = new VBox();
-            vbox.BorderWidth = 0;
+            VBox vbox = new VBox() { BorderWidth = 0 };
 
             ScrolledWindow scrolLeftMenu = new ScrolledWindow() { ShadowType = ShadowType.In, WidthRequest = 170 };
             scrolLeftMenu.SetPolicy(PolicyType.Never, PolicyType.Never);
@@ -470,7 +465,7 @@ namespace StorageAndTrade
         /// <returns></returns>
         public string SubstringPageName(string pageName)
         {
-            return (pageName.Length >= 33 ? pageName.Substring(0, 30) + "..." : pageName);
+            return pageName.Length >= 33 ? pageName.Substring(0, 30) + "..." : pageName;
         }
 
         #endregion

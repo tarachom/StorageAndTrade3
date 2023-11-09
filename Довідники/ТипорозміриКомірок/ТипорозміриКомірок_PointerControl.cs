@@ -62,13 +62,17 @@ namespace StorageAndTrade
             if (BeforeClickOpenFunc != null)
                 BeforeClickOpenFunc.Invoke();
 
-            ТипорозміриКомірок_ШвидкийВибір page = new ТипорозміриКомірок_ШвидкийВибір() { PopoverParent = PopoverSmallSelect, DirectoryPointerItem = Pointer.UnigueID };
-            page.CallBack_OnSelectPointer = (UnigueID selectPointer) =>
+            ТипорозміриКомірок_ШвидкийВибір page = new ТипорозміриКомірок_ШвидкийВибір
             {
-                Pointer = new ТипорозміриКомірок_Pointer(selectPointer);
+                PopoverParent = PopoverSmallSelect,
+                DirectoryPointerItem = Pointer.UnigueID,
+                CallBack_OnSelectPointer = (UnigueID selectPointer) =>
+                {
+                    Pointer = new ТипорозміриКомірок_Pointer(selectPointer);
 
-                if (AfterSelectFunc != null)
-                    AfterSelectFunc.Invoke();
+                    if (AfterSelectFunc != null)
+                        AfterSelectFunc.Invoke();
+                }
             };
 
             PopoverSmallSelect.Add(page);

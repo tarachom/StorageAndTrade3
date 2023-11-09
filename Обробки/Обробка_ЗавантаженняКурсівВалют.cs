@@ -111,7 +111,7 @@ namespace StorageAndTrade
 
             string link = Константи.ЗавантаженняДанихІзСайтів.ЗавантаженняКурсівВалют_Const;
 
-            if (String.IsNullOrEmpty(link))
+            if (string.IsNullOrEmpty(link))
             {
                 //За замовчуванням
                 link = "https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange";
@@ -194,9 +194,11 @@ WHERE
     date_trunc('day', КурсиВалют.period::timestamp) = date_trunc('day', @ДатаКурсу::timestamp)
 LIMIT 1
 ";
-                    Dictionary<string, object> paramQuery = new Dictionary<string, object>();
-                    paramQuery.Add("Валюта", валюти_Pointer.UnigueID.UGuid);
-                    paramQuery.Add("ДатаКурсу", ДатаКурсу);
+                    Dictionary<string, object> paramQuery = new Dictionary<string, object>
+                    {
+                        { "Валюта", валюти_Pointer.UnigueID.UGuid },
+                        { "ДатаКурсу", ДатаКурсу }
+                    };
 
                     string[] columnsName;
                     List<Dictionary<string, object>> listRow;
@@ -205,12 +207,14 @@ LIMIT 1
 
                     if (listRow.Count == 0)
                     {
-                        КурсиВалют_Objest курсиВалют_Objest = new КурсиВалют_Objest();
+                        КурсиВалют_Objest курсиВалют_Objest = new КурсиВалют_Objest
+                        {
+                            Period = ДатаКурсу,
+                            Валюта = валюти_Pointer,
+                            Кратність = 1,
+                            Курс = Курс
+                        };
                         курсиВалют_Objest.New();
-                        курсиВалют_Objest.Period = ДатаКурсу;
-                        курсиВалют_Objest.Валюта = валюти_Pointer;
-                        курсиВалют_Objest.Кратність = 1;
-                        курсиВалют_Objest.Курс = Курс;
                         курсиВалют_Objest.Save();
 
                         CreateMessage(TypeMessage.Ok, $"Додано новий курс валюти: {НазваВалюти} - курс {Курс}");

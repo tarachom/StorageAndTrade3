@@ -58,12 +58,13 @@ namespace StorageAndTrade
 
         protected override void OpenSelect(object? sender, EventArgs args)
         {
-            РозміщенняНоменклатуриПоКоміркам page = new РозміщенняНоменклатуриПоКоміркам();
-
-            page.DocumentPointerItem = Pointer.UnigueID;
-            page.CallBack_OnSelectPointer = (UnigueID selectPointer) =>
+            РозміщенняНоменклатуриПоКоміркам page = new РозміщенняНоменклатуриПоКоміркам
             {
-                Pointer = new РозміщенняНоменклатуриПоКоміркам_Pointer(selectPointer);
+                DocumentPointerItem = Pointer.UnigueID,
+                CallBack_OnSelectPointer = (UnigueID selectPointer) =>
+                {
+                    Pointer = new РозміщенняНоменклатуриПоКоміркам_Pointer(selectPointer);
+                }
             };
 
             Program.GeneralForm?.CreateNotebookPage($"Вибір - {РозміщенняНоменклатуриПоКоміркам_Const.FULLNAME}", () => { return page; }, true);

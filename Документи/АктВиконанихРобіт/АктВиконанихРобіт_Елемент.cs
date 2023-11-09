@@ -190,8 +190,8 @@ namespace StorageAndTrade
             Каса.Pointer = АктВиконанихРобіт_Objest.Каса;
             Контрагент.Pointer = АктВиконанихРобіт_Objest.Контрагент;
             Договір.Pointer = АктВиконанихРобіт_Objest.Договір;
-            ГосподарськаОперація.ActiveId = ((Перелічення.ГосподарськіОперації)АктВиконанихРобіт_Objest.ГосподарськаОперація).ToString();
-            ФормаОплати.ActiveId = ((Перелічення.ФормаОплати)АктВиконанихРобіт_Objest.ФормаОплати).ToString();
+            ГосподарськаОперація.ActiveId = АктВиконанихРобіт_Objest.ГосподарськаОперація.ToString();
+            ФормаОплати.ActiveId = АктВиконанихРобіт_Objest.ФормаОплати.ToString();
             Коментар.Text = АктВиконанихРобіт_Objest.Коментар;
             Підрозділ.Pointer = АктВиконанихРобіт_Objest.Підрозділ;
             Автор.Pointer = АктВиконанихРобіт_Objest.Автор;
@@ -239,8 +239,8 @@ namespace StorageAndTrade
 
         protected override bool Save()
         {
-            bool isSave = false;
-
+            bool isSave;
+            
             try
             {
                 isSave = АктВиконанихРобіт_Objest.Save();

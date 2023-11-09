@@ -145,8 +145,12 @@ namespace StorageAndTrade
                             Gdk.Rectangle rectangleCell = TreeViewGrid.GetCellArea(itemPath, treeColumn);
                             rectangleCell.Offset(-(int)scrollTree.Hadjustment.Value, rectangleCell.Height);
 
-                            Popover PopoverSmallSelect = new Popover(TreeViewGrid) { Position = PositionType.Bottom, BorderWidth = 2 };
-                            PopoverSmallSelect.PointingTo = rectangleCell;
+                            Popover PopoverSmallSelect = new Popover(TreeViewGrid)
+                            {
+                                Position = PositionType.Bottom,
+                                BorderWidth = 2,
+                                PointingTo = rectangleCell
+                            };
 
                             ButtonSelect(iter, rowNumber, (int)treeColumn.Data["Column"]!, PopoverSmallSelect);
                         };

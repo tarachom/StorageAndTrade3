@@ -90,8 +90,7 @@ namespace StorageAndTrade
 
         void OnOpenPopover(object? sender, EventArgs args)
         {
-            Popover popoverCalendar = new Popover(bOpenPopover);
-            popoverCalendar.BorderWidth = 5;
+            Popover popoverCalendar = new Popover(bOpenPopover) { BorderWidth = 5 };
 
             VBox vBox = new VBox();
 

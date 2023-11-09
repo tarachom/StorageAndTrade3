@@ -52,8 +52,11 @@ namespace StorageAndTrade
             };
 
             //Дерево папок зправа
-            ДеревоПапок = new СкладськіКомірки_Папки_Дерево() { WidthRequest = 500 };
-            ДеревоПапок.CallBack_RowActivated = LoadRecords_TreeCallBack;
+            ДеревоПапок = new СкладськіКомірки_Папки_Дерево
+            {
+                WidthRequest = 500,
+                CallBack_RowActivated = LoadRecords_TreeCallBack
+            };
             HPanedTable.Pack2(ДеревоПапок, false, true);
 
             TreeViewGrid.Model = ТабличніСписки.СкладськіКомірки_Записи.Store;

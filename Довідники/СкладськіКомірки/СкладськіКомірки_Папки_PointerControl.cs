@@ -66,20 +66,19 @@ namespace StorageAndTrade
             if (BeforeClickOpenFunc != null)
                 BeforeClickOpenFunc.Invoke();
 
-            СкладськіКомірки_Папки_Дерево_ШвидкийВибір page = new СкладськіКомірки_Папки_Дерево_ШвидкийВибір()
+            СкладськіКомірки_Папки_Дерево_ШвидкийВибір page = new СкладськіКомірки_Папки_Дерево_ШвидкийВибір
             {
                 PopoverParent = PopoverSmallSelect,
                 OpenFolder = OpenFolder,
                 DirectoryPointerItem = Pointer.UnigueID,
-                СкладПриміщенняВласник = СкладПриміщенняВласник
-            };
-            
-            page.CallBack_OnSelectPointer = (UnigueID selectPointer) =>
-            {
-                Pointer = new СкладськіКомірки_Папки_Pointer(selectPointer);
+                СкладПриміщенняВласник = СкладПриміщенняВласник,
+                CallBack_OnSelectPointer = (UnigueID selectPointer) =>
+                {
+                    Pointer = new СкладськіКомірки_Папки_Pointer(selectPointer);
 
-                if (AfterSelectFunc != null)
-                    AfterSelectFunc.Invoke();
+                    if (AfterSelectFunc != null)
+                        AfterSelectFunc.Invoke();
+                }
             };
 
             PopoverSmallSelect.Add(page);

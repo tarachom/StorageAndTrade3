@@ -62,13 +62,17 @@ namespace StorageAndTrade
             if (BeforeClickOpenFunc != null)
                 BeforeClickOpenFunc.Invoke();
 
-            СеріїНоменклатури_ШвидкийВибір page = new СеріїНоменклатури_ШвидкийВибір() { PopoverParent = PopoverSmallSelect, DirectoryPointerItem = Pointer.UnigueID };
-            page.CallBack_OnSelectPointer = (UnigueID selectPointer) =>
+            СеріїНоменклатури_ШвидкийВибір page = new СеріїНоменклатури_ШвидкийВибір
             {
-                Pointer = new СеріїНоменклатури_Pointer(selectPointer);
+                PopoverParent = PopoverSmallSelect,
+                DirectoryPointerItem = Pointer.UnigueID,
+                CallBack_OnSelectPointer = (UnigueID selectPointer) =>
+                {
+                    Pointer = new СеріїНоменклатури_Pointer(selectPointer);
 
-                if (AfterSelectFunc != null)
-                    AfterSelectFunc.Invoke();
+                    if (AfterSelectFunc != null)
+                        AfterSelectFunc.Invoke();
+                }
             };
 
             PopoverSmallSelect.Add(page);

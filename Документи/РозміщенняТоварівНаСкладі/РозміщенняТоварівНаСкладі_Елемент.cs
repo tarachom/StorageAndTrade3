@@ -146,8 +146,8 @@ namespace StorageAndTrade
 
         protected override bool Save()
         {
-            bool isSave = false;
-
+            bool isSave;
+            
             try
             {
                 isSave = РозміщенняТоварівНаСкладі_Objest.Save();

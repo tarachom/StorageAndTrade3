@@ -110,14 +110,12 @@ namespace StorageAndTrade
 
         void OnOpenCalendar(object? sender, EventArgs args)
         {
-            Popover popoverCalendar = new Popover(bOpenCalendar);
-            popoverCalendar.BorderWidth = 5;
+            Popover popoverCalendar = new Popover(bOpenCalendar) { BorderWidth = 5 };
 
             VBox vBox = new VBox();
 
             //Calendar
-            Calendar calendar = new Calendar();
-            calendar.Date = Value;
+            Calendar calendar = new Calendar() { Date = Value };
 
             calendar.DaySelected += (object? sender, EventArgs args) =>
             {

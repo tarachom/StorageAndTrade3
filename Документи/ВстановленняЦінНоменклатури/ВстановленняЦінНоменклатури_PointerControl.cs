@@ -58,12 +58,13 @@ namespace StorageAndTrade
 
         protected override void OpenSelect(object? sender, EventArgs args)
         {
-            ВстановленняЦінНоменклатури page = new ВстановленняЦінНоменклатури();
-
-            page.DocumentPointerItem = Pointer.UnigueID;
-            page.CallBack_OnSelectPointer = (UnigueID selectPointer) =>
+            ВстановленняЦінНоменклатури page = new ВстановленняЦінНоменклатури
             {
-                Pointer = new ВстановленняЦінНоменклатури_Pointer(selectPointer);
+                DocumentPointerItem = Pointer.UnigueID,
+                CallBack_OnSelectPointer = (UnigueID selectPointer) =>
+                {
+                    Pointer = new ВстановленняЦінНоменклатури_Pointer(selectPointer);
+                }
             };
 
             Program.GeneralForm?.CreateNotebookPage($"Вибір - {ВстановленняЦінНоменклатури_Const.FULLNAME}", () => { return page; }, true);

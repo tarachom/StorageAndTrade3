@@ -5,7 +5,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>25.05.2023 22:31:26</DateTimeSave>
+  <DateTimeSave>09.11.2023 17:38:11</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -24173,7 +24173,34 @@ SQL тип  непотрібно вказувати
       <PropertyFields>
         <Fields />
       </PropertyFields>
-      <TabularLists />
+      <TabularLists>
+        <TabularList>
+          <Name>Записи</Name>
+          <Desc>
+          </Desc>
+          <IsTree>0</IsTree>
+          <Fields>
+            <Field>
+              <Name>Файл</Name>
+              <Caption>Файл</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Файли</Pointer>
+              <Join>
+                <table>Довідники.Файли_Const.TABLE</table>
+                <field>Файл</field>
+                <alias>join_tab_1</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_1</table>
+                <field>Довідники.Файли_Const.Назва</field>
+              </FieldAndAlias>
+            </Field>
+          </Fields>
+        </TabularList>
+      </TabularLists>
     </RegisterInformation>
     <RegisterInformation>
       <Name>РозміщенняНоменклатуриПоКоміркамНаСкладі</Name>
@@ -26763,7 +26790,7 @@ HAVING
             <Name>Рядок</Name>
             <NameInTable>col_a6</NameInTable>
             <Type>integer</Type>
-            <Desc>Унікальний ідентифікатор рядочку в табличній частині 
+            <Desc>Номер рядочку в табличній частині 
 документу поступлення партії</Desc>
             <IsIndex>1</IsIndex>
             <IsFullTextSearch>0</IsFullTextSearch>

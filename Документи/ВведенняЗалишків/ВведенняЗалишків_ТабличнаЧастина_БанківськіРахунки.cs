@@ -176,12 +176,13 @@ namespace StorageAndTrade
 
                 foreach (Запис запис in Записи)
                 {
-                    ВведенняЗалишків_БанківськіРахунки_TablePart.Record record = new ВведенняЗалишків_БанківськіРахунки_TablePart.Record();
-
-                    record.UID = запис.ID;
-                    record.НомерРядка = ++sequenceNumber;
-                    record.БанківськийРахунок = запис.БанківськийРахунок;
-                    record.Сума = запис.Сума;
+                    ВведенняЗалишків_БанківськіРахунки_TablePart.Record record = new ВведенняЗалишків_БанківськіРахунки_TablePart.Record()
+                    {
+                        UID = запис.ID,
+                        НомерРядка = ++sequenceNumber,
+                        БанківськийРахунок = запис.БанківськийРахунок,
+                        Сума = запис.Сума
+                    };
 
                     ВведенняЗалишків_Objest.БанківськіРахунки_TablePart.Records.Add(record);
                 }
@@ -244,7 +245,7 @@ namespace StorageAndTrade
             {
                 case Columns.БанківськийРахунок:
                     {
-                        БанківськіРахункиОрганізацій_ШвидкийВибір page = new БанківськіРахункиОрганізацій_ШвидкийВибір() 
+                        БанківськіРахункиОрганізацій_ШвидкийВибір page = new БанківськіРахункиОрганізацій_ШвидкийВибір()
                         { PopoverParent = popoverSmallSelect, DirectoryPointerItem = запис.БанківськийРахунок.UnigueID };
                         page.CallBack_OnSelectPointer = (UnigueID selectPointer) =>
                         {

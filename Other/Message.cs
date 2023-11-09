@@ -35,8 +35,7 @@ namespace StorageAndTrade
     {
         public static void Info(Window? pwin, string message)
         {
-            MessageDialog md = new MessageDialog(pwin, DialogFlags.DestroyWithParent, MessageType.Info, ButtonsType.Ok, message);
-            md.WindowPosition = WindowPosition.Center;
+            MessageDialog md = new MessageDialog(pwin, DialogFlags.DestroyWithParent, MessageType.Info, ButtonsType.Ok, message) { WindowPosition = WindowPosition.Center };
             md.Run();
             md.Dispose();
             md.Destroy();
@@ -44,8 +43,7 @@ namespace StorageAndTrade
 
         public static void Error(Window? pwin, string message)
         {
-            MessageDialog md = new MessageDialog(pwin, DialogFlags.DestroyWithParent, MessageType.Warning, ButtonsType.Close, message);
-            md.WindowPosition = WindowPosition.Center;
+            MessageDialog md = new MessageDialog(pwin, DialogFlags.DestroyWithParent, MessageType.Warning, ButtonsType.Close, message) { WindowPosition = WindowPosition.Center };
             md.Run();
             md.Dispose();
             md.Destroy();

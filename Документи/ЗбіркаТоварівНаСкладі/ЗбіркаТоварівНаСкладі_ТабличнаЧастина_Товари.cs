@@ -153,8 +153,10 @@ namespace StorageAndTrade
             AddColumn();
 
             //Separator
-            ToolItem toolItemSeparator = new ToolItem();
-            toolItemSeparator.Add(new Separator(Orientation.Horizontal));
+            ToolItem toolItemSeparator = new ToolItem
+            {
+                new Separator(Orientation.Horizontal)
+            };
             ToolbarTop.Add(toolItemSeparator);
 
             ToolButton fillButton = new ToolButton(Stock.Convert) { Label = "Розприділити", IsImportant = true };
@@ -252,17 +254,18 @@ namespace StorageAndTrade
 
                 foreach (Запис запис in Записи)
                 {
-                    ЗбіркаТоварівНаСкладі_Товари_TablePart.Record record = new ЗбіркаТоварівНаСкладі_Товари_TablePart.Record();
-
-                    record.UID = запис.ID;
-                    record.НомерРядка = ++sequenceNumber;
-                    record.Номенклатура = запис.Номенклатура;
-                    record.ХарактеристикаНоменклатури = запис.Характеристика;
-                    record.Серія = запис.Серія;
-                    record.КількістьУпаковок = запис.КількістьУпаковок;
-                    record.Пакування = запис.Пакування;
-                    record.Кількість = запис.Кількість;
-                    record.Комірка = запис.Комірка;
+                    ЗбіркаТоварівНаСкладі_Товари_TablePart.Record record = new ЗбіркаТоварівНаСкладі_Товари_TablePart.Record
+                    {
+                        UID = запис.ID,
+                        НомерРядка = ++sequenceNumber,
+                        Номенклатура = запис.Номенклатура,
+                        ХарактеристикаНоменклатури = запис.Характеристика,
+                        Серія = запис.Серія,
+                        КількістьУпаковок = запис.КількістьУпаковок,
+                        Пакування = запис.Пакування,
+                        Кількість = запис.Кількість,
+                        Комірка = запис.Комірка
+                    };
 
                     ЗбіркаТоварівНаСкладі_Objest.Товари_TablePart.Records.Add(record);
                 }
@@ -626,11 +629,13 @@ HAVING
     SUM(ТовариВКомірках.{ТовариВКомірках_Залишки_TablePart.ВНаявності}) > 0 
 ";
 
-                Dictionary<string, object> paramQuery = new Dictionary<string, object>();
-                paramQuery.Add("Номенклатура", запис.Номенклатура.UnigueID.UGuid);
-                paramQuery.Add("ХарактеристикаНоменклатури", запис.Характеристика.UnigueID.UGuid);
-                paramQuery.Add("Пакування", запис.Пакування.UnigueID.UGuid);
-                paramQuery.Add("Серія", запис.Серія.UnigueID.UGuid);
+                Dictionary<string, object> paramQuery = new Dictionary<string, object>
+                {
+                    { "Номенклатура", запис.Номенклатура.UnigueID.UGuid },
+                    { "ХарактеристикаНоменклатури", запис.Характеристика.UnigueID.UGuid },
+                    { "Пакування", запис.Пакування.UnigueID.UGuid },
+                    { "Серія", запис.Серія.UnigueID.UGuid }
+                };
 
                 bool єЗміниВЗаписі = false;
 

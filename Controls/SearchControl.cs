@@ -105,8 +105,10 @@ namespace StorageAndTrade
         {
             Store.Clear();
 
-            Dictionary<string, object> paramQuery = new Dictionary<string, object>();
-            paramQuery.Add("like_param", "%" + findText.ToLower().Trim() + "%");
+            Dictionary<string, object> paramQuery = new Dictionary<string, object>()
+            {
+                { "like_param", "%" + findText.ToLower().Trim() + "%" }
+            };
 
             string[] columnsName;
             List<Dictionary<string, object>>? listRow = null;

@@ -83,11 +83,7 @@ namespace StorageAndTrade
             //Власник
             HBoxTop.PackStart(НоменклатураВласник, false, false, 2);
             НоменклатураВласник.Caption = $"{Номенклатура_Const.FULLNAME}:";
-            НоменклатураВласник.AfterSelectFunc = () =>
-            {
-                //DirectoryPointerItem?.Clear();
-                LoadRecords();
-            };
+            НоменклатураВласник.AfterSelectFunc = LoadRecords;
         }
 
         public override void LoadRecords()

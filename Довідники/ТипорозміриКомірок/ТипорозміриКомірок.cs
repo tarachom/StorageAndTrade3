@@ -21,8 +21,6 @@ limitations under the License.
 Сайт:     accounting.org.ua
 */
 
-using Gtk;
-
 using AccountingSoftware;
 
 using StorageAndTrade_1_0.Довідники;

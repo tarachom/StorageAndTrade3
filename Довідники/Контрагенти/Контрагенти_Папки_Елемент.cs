@@ -78,6 +78,9 @@ namespace StorageAndTrade
 
         protected override void Save()
         {
+            UnigueID = Контрагенти_Папки_Objest.UnigueID;
+            Caption = Назва.Text;
+
             try
             {
                 Контрагенти_Папки_Objest.Save();
@@ -85,10 +88,7 @@ namespace StorageAndTrade
             catch (Exception ex)
             {
                 MsgError(ex);
-            }
-
-            UnigueID = Контрагенти_Папки_Objest.UnigueID;
-            Caption = Назва.Text;
+            }            
         }
     }
 }

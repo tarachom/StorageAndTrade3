@@ -104,8 +104,7 @@ namespace StorageAndTrade
             toolbar.Add(deleteButton);
 
             //Separator
-            ToolItem toolItemSeparator = new ToolItem();
-            toolItemSeparator.Add(new Separator(Orientation.Horizontal));
+            ToolItem toolItemSeparator = new ToolItem { new Separator(Orientation.Horizontal) };
             toolbar.Add(toolItemSeparator);
 
             TypeDocToolButton = new ToolButton(Stock.Index) { Label = "Документи", IsImportant = true };
@@ -174,7 +173,7 @@ namespace StorageAndTrade
         {
             if (PeriodWhere != 0)
                 ComboBoxPeriodWhere.ActiveId = PeriodWhere.ToString();
-            else if ((int)Константи.ЖурналиДокументів.ОсновнийТипПеріоду_Const != 0)
+            else if (Константи.ЖурналиДокументів.ОсновнийТипПеріоду_Const != 0)
                 ComboBoxPeriodWhere.ActiveId = Константи.ЖурналиДокументів.ОсновнийТипПеріоду_Const.ToString();
         }
 

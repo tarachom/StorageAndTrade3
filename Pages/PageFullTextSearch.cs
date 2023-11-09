@@ -88,8 +88,11 @@ namespace StorageAndTrade
 
         void CreateMessage(Dictionary<string, object> row)
         {
-            CompositePointerControl Обєкт = new CompositePointerControl() { Caption = "" };
-            Обєкт.Pointer = (UuidAndText)row["obj"];
+            CompositePointerControl Обєкт = new CompositePointerControl
+            {
+                Caption = "",
+                Pointer = (UuidAndText)row["obj"]
+            };
 
             HBox hBoxRowInfo = new HBox();
             vBoxMessage.PackStart(hBoxRowInfo, false, false, 3);

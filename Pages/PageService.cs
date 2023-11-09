@@ -247,8 +247,10 @@ namespace StorageAndTrade
 
             if (listDependencies.Count > 0)
             {
-                Dictionary<string, object> paramQuery = new Dictionary<string, object>();
-                paramQuery.Add("uid", uid);
+                Dictionary<string, object> paramQuery = new Dictionary<string, object>
+                {
+                    { "uid", uid }
+                };
 
                 //Обробка залежностей
                 foreach (ConfigurationDependencies dependence in listDependencies)

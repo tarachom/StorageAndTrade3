@@ -3,10 +3,7 @@
 /*     файл:     Банки_Елемент.cs     */
 
 using Gtk;
-
 using StorageAndTrade_1_0.Довідники;
-using StorageAndTrade_1_0.Документи;
-using StorageAndTrade_1_0.Перелічення;
 
 namespace StorageAndTrade
 {

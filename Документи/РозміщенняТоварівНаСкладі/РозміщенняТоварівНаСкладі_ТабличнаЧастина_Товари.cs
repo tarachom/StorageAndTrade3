@@ -147,17 +147,16 @@ namespace StorageAndTrade
 
         #endregion
 
-        Label ПідсумокСума = new Label() { Selectable = true };
-        Label ПідсумокСкидка = new Label() { Selectable = true };
-
         public РозміщенняТоварівНаСкладі_ТабличнаЧастина_Товари() : base()
         {
             TreeViewGrid.Model = Store;
             AddColumn();
 
             //Separator
-            ToolItem toolItemSeparator = new ToolItem();
-            toolItemSeparator.Add(new Separator(Orientation.Horizontal));
+            ToolItem toolItemSeparator = new ToolItem
+            {
+                new Separator(Orientation.Horizontal)
+            };
             ToolbarTop.Add(toolItemSeparator);
 
             //
@@ -255,17 +254,18 @@ namespace StorageAndTrade
 
                 foreach (Запис запис in Записи)
                 {
-                    РозміщенняТоварівНаСкладі_Товари_TablePart.Record record = new РозміщенняТоварівНаСкладі_Товари_TablePart.Record();
-
-                    record.UID = запис.ID;
-                    record.НомерРядка = ++sequenceNumber;
-                    record.Номенклатура = запис.Номенклатура;
-                    record.ХарактеристикаНоменклатури = запис.Характеристика;
-                    record.Серія = запис.Серія;
-                    record.КількістьУпаковок = запис.КількістьУпаковок;
-                    record.Пакування = запис.Пакування;
-                    record.Кількість = запис.Кількість;
-                    record.Комірка = запис.Комірка;
+                    РозміщенняТоварівНаСкладі_Товари_TablePart.Record record = new РозміщенняТоварівНаСкладі_Товари_TablePart.Record
+                    {
+                        UID = запис.ID,
+                        НомерРядка = ++sequenceNumber,
+                        Номенклатура = запис.Номенклатура,
+                        ХарактеристикаНоменклатури = запис.Характеристика,
+                        Серія = запис.Серія,
+                        КількістьУпаковок = запис.КількістьУпаковок,
+                        Пакування = запис.Пакування,
+                        Кількість = запис.Кількість,
+                        Комірка = запис.Комірка
+                    };
 
                     РозміщенняТоварівНаСкладі_Objest.Товари_TablePart.Records.Add(record);
                 }

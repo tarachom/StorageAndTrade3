@@ -185,7 +185,7 @@ namespace StorageAndTrade
             Склад.Pointer = ВведенняЗалишків_Objest.Склад;
             Контрагент.Pointer = ВведенняЗалишків_Objest.Контрагент;
             Договір.Pointer = ВведенняЗалишків_Objest.Договір;
-            ГосподарськаОперація.ActiveId = ((Перелічення.ГосподарськіОперації)ВведенняЗалишків_Objest.ГосподарськаОперація).ToString();
+            ГосподарськаОперація.ActiveId = ВведенняЗалишків_Objest.ГосподарськаОперація.ToString();
             Коментар.Text = ВведенняЗалишків_Objest.Коментар;
             Підрозділ.Pointer = ВведенняЗалишків_Objest.Підрозділ;
             Автор.Pointer = ВведенняЗалишків_Objest.Автор;
@@ -241,8 +241,8 @@ namespace StorageAndTrade
 
         protected override bool Save()
         {
-            bool isSave = false;
-
+            bool isSave;
+            
             try
             {
                 isSave = ВведенняЗалишків_Objest.Save();

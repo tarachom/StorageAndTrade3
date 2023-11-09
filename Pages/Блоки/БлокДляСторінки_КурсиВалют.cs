@@ -111,8 +111,10 @@ namespace StorageAndTrade
 
         void OnDownloadCurs(object? sender, EventArgs args)
         {
-            Обробка_ЗавантаженняКурсівВалют page = new Обробка_ЗавантаженняКурсівВалют();
-            page.CallBack_EndBackgroundWork = StartDesktop;
+            Обробка_ЗавантаженняКурсівВалют page = new Обробка_ЗавантаженняКурсівВалют
+            {
+                CallBack_EndBackgroundWork = StartDesktop
+            };
 
             Program.GeneralForm?.CreateNotebookPage("Завантаження курсів валют НБУ", () => { return page; });
 
@@ -151,8 +153,10 @@ namespace StorageAndTrade
             if (Константи.ЗавантаженняДанихІзСайтів.АвтоматичноЗавантажуватиКурсиВалютПриЗапуску_Const)
             {
                 //Завантаження кожного разу при запуску
-                Обробка_ЗавантаженняКурсівВалют page = new Обробка_ЗавантаженняКурсівВалют();
-                page.CallBack_EndBackgroundWork = StartDesktop;
+                Обробка_ЗавантаженняКурсівВалют page = new Обробка_ЗавантаженняКурсівВалют
+                {
+                    CallBack_EndBackgroundWork = StartDesktop
+                };
 
                 page.OnDownload(null, new EventArgs());
 

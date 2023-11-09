@@ -131,7 +131,7 @@ namespace StorageAndTrade
             Організація.Pointer = ВнутрішнєСпоживанняТоварів_Objest.Організація;
             Валюта.Pointer = ВнутрішнєСпоживанняТоварів_Objest.Валюта;
             Склад.Pointer = ВнутрішнєСпоживанняТоварів_Objest.Склад;
-            ГосподарськаОперація.ActiveId = ((Перелічення.ГосподарськіОперації)ВнутрішнєСпоживанняТоварів_Objest.ГосподарськаОперація).ToString();
+            ГосподарськаОперація.ActiveId = ВнутрішнєСпоживанняТоварів_Objest.ГосподарськаОперація.ToString();
             Коментар.Text = ВнутрішнєСпоживанняТоварів_Objest.Коментар;
             Підрозділ.Pointer = ВнутрішнєСпоживанняТоварів_Objest.Підрозділ;
             Автор.Pointer = ВнутрішнєСпоживанняТоварів_Objest.Автор;
@@ -168,8 +168,8 @@ namespace StorageAndTrade
 
         protected override bool Save()
         {
-            bool isSave = false;
-
+            bool isSave;
+            
             try
             {
                 isSave = ВнутрішнєСпоживанняТоварів_Objest.Save();

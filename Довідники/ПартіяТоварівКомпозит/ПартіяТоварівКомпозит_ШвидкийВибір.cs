@@ -62,10 +62,7 @@ namespace StorageAndTrade
             //Відбір
             HBoxTop.PackStart(НоменклатураВідбір, false, false, 2);
             НоменклатураВідбір.Caption = $"{Номенклатура_Const.FULLNAME}:";
-            НоменклатураВідбір.AfterSelectFunc = () =>
-            {
-                LoadRecords();
-            };
+            НоменклатураВідбір.AfterSelectFunc = LoadRecords;
         }
 
         public override void LoadRecords()

@@ -44,7 +44,7 @@ namespace StorageAndTrade
 
             record.Дата = DateTime.Now;
             record.НазваПроцесу = НазваПроцесу;
-            record.Обєкт = (Обєкт != null ? (Guid)Обєкт : Guid.Empty);
+            record.Обєкт = Обєкт != null ? (Guid)Обєкт : Guid.Empty;
             record.ТипОбєкту = ТипОбєкту;
             record.НазваОбєкту = НазваОбєкту;
             record.Повідомлення = Повідомлення;

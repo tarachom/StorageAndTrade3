@@ -131,8 +131,10 @@ namespace StorageAndTrade
             AddColumn();
 
             //Доповнення ToolbarTop новими функціями
-            ToolItem toolItemSeparator = new ToolItem();
-            toolItemSeparator.Add(new Separator(Orientation.Horizontal));
+            ToolItem toolItemSeparator = new ToolItem
+            {
+                new Separator(Orientation.Horizontal)
+            };
             ToolbarTop.Add(toolItemSeparator);
 
             ToolButton fillDirectoryButton = new ToolButton(Stock.Add) { Label = "Заповнити товарами", IsImportant = true };
@@ -221,15 +223,16 @@ namespace StorageAndTrade
 
                 foreach (Запис запис in Записи)
                 {
-                    ВстановленняЦінНоменклатури_Товари_TablePart.Record record = new ВстановленняЦінНоменклатури_Товари_TablePart.Record();
-
-                    record.UID = запис.ID;
-                    record.НомерРядка = ++sequenceNumber;
-                    record.Номенклатура = запис.Номенклатура;
-                    record.ХарактеристикаНоменклатури = запис.Характеристика;
-                    record.Пакування = запис.Пакування;
-                    record.ВидЦіни = запис.ВидЦіни;
-                    record.Ціна = запис.Ціна;
+                    ВстановленняЦінНоменклатури_Товари_TablePart.Record record = new ВстановленняЦінНоменклатури_Товари_TablePart.Record
+                    {
+                        UID = запис.ID,
+                        НомерРядка = ++sequenceNumber,
+                        Номенклатура = запис.Номенклатура,
+                        ХарактеристикаНоменклатури = запис.Характеристика,
+                        Пакування = запис.Пакування,
+                        ВидЦіни = запис.ВидЦіни,
+                        Ціна = запис.Ціна
+                    };
 
                     ВстановленняЦінНоменклатури_Objest.Товари_TablePart.Records.Add(record);
                 }
@@ -542,9 +545,11 @@ ORDER BY Номенклатура_Назва, Пакування_Назва
 
             if (ВстановленняЦінНоменклатури_Objest != null)
             {
-                Dictionary<string, object> paramQuery = new Dictionary<string, object>();
-                paramQuery.Add("valuta", ВстановленняЦінНоменклатури_Objest.Валюта.UnigueID.UGuid);
-                paramQuery.Add("vid_cen", ВстановленняЦінНоменклатури_Objest.ВидЦіни.UnigueID.UGuid);
+                Dictionary<string, object> paramQuery = new Dictionary<string, object>
+                {
+                    { "valuta", ВстановленняЦінНоменклатури_Objest.Валюта.UnigueID.UGuid },
+                    { "vid_cen", ВстановленняЦінНоменклатури_Objest.ВидЦіни.UnigueID.UGuid }
+                };
 
                 string[] columnsName;
                 List<Dictionary<string, object>> listRow;
@@ -562,7 +567,7 @@ ORDER BY Номенклатура_Назва, Пакування_Назва
                         Характеристика = new ХарактеристикиНоменклатури_Pointer(),
                         Пакування = new ПакуванняОдиниціВиміру_Pointer(row["Пакування"]),
                         ВидЦіни = ВстановленняЦінНоменклатури_Objest.ВидЦіни,
-                        Ціна = (row["Ціна"] != DBNull.Value ? (decimal)row["Ціна"] : 0)
+                        Ціна = row["Ціна"] != DBNull.Value ? (decimal)row["Ціна"] : 0
                     };
 
                     запис.Номенклатура.Назва = row["Номенклатура_Назва"].ToString() ?? "";
@@ -648,9 +653,11 @@ ORDER BY
 
             if (ВстановленняЦінНоменклатури_Objest != null)
             {
-                Dictionary<string, object> paramQuery = new Dictionary<string, object>();
-                paramQuery.Add("valuta", ВстановленняЦінНоменклатури_Objest.Валюта.UnigueID.UGuid);
-                paramQuery.Add("vid_cen", ВстановленняЦінНоменклатури_Objest.ВидЦіни.UnigueID.UGuid);
+                Dictionary<string, object> paramQuery = new Dictionary<string, object>
+                {
+                    { "valuta", ВстановленняЦінНоменклатури_Objest.Валюта.UnigueID.UGuid },
+                    { "vid_cen", ВстановленняЦінНоменклатури_Objest.ВидЦіни.UnigueID.UGuid }
+                };
 
                 string[] columnsName;
                 List<Dictionary<string, object>> listRow;

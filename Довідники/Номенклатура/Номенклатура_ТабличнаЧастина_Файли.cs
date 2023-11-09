@@ -133,14 +133,15 @@ namespace StorageAndTrade
                             {
                                 Program.GeneralForm?.CreateNotebookPage("Вибір - Довідник: Файли", () =>
                                 {
-                                    Файли page = new Файли();
-
-                                    page.DirectoryPointerItem = запис.Файл.UnigueID;
-                                    page.CallBack_OnSelectPointer = (UnigueID selectPointer) =>
+                                    Файли page = new Файли
                                     {
-                                        запис.Файл = new Файли_Pointer(selectPointer);
-                                        Запис.ПісляЗміни_Файл(запис);
-                                        Store.SetValues(iter, запис.ToArray());
+                                        DirectoryPointerItem = запис.Файл.UnigueID,
+                                        CallBack_OnSelectPointer = (UnigueID selectPointer) =>
+                                        {
+                                            запис.Файл = new Файли_Pointer(selectPointer);
+                                            Запис.ПісляЗміни_Файл(запис);
+                                            Store.SetValues(iter, запис.ToArray());
+                                        }
                                     };
 
                                     page.LoadRecords();
@@ -214,12 +215,14 @@ namespace StorageAndTrade
 
                 foreach (Запис запис in Записи)
                 {
-                    Номенклатура_Файли_TablePart.Record record = new Номенклатура_Файли_TablePart.Record();
-                    Номенклатура_Objest.Файли_TablePart.Records.Add(record);
+                    Номенклатура_Файли_TablePart.Record record = new Номенклатура_Файли_TablePart.Record
+                    {
+                        UID = запис.ID,
+                        Файл = запис.Файл,
+                        Основний = запис.Основний
+                    };
 
-                    record.UID = запис.ID;
-                    record.Файл = запис.Файл;
-                    record.Основний = запис.Основний;
+                    Номенклатура_Objest.Файли_TablePart.Records.Add(record);
                 }
 
                 Номенклатура_Objest.Файли_TablePart.Save(true);

@@ -116,8 +116,7 @@ namespace StorageAndTrade
                     if ((int)Константи.ЖурналиДокументів.ОсновнийТипПеріоду_Const == 0)
                         Константи.ЖурналиДокументів.ОсновнийТипПеріоду_Const = Перелічення.ТипПеріодуДляЖурналівДокументів.ВесьПеріод;
 
-                    Program.GeneralForm = new FormStorageAndTrade();
-                    Program.GeneralForm.OpenConfigurationParam = ConfigurationParamCollection.GetConfigurationParam(selectedRows[0].Name);
+                    Program.GeneralForm = new FormStorageAndTrade() { OpenConfigurationParam = ConfigurationParamCollection.GetConfigurationParam(selectedRows[0].Name) };
                     Program.GeneralForm.Show();
 
                     //Присвоєння користувача
@@ -136,7 +135,7 @@ namespace StorageAndTrade
                 {
                     Message.Error(this, @"Error: Відсутня таблиця tab_constants. Потрібно відкрити Конфігуратор і зберегти конфігурацію -  
                     (Меню: Конфігурація/Зберегти конфігурацію - дальше Збереження змін. Крок 1, Збереження змін. Крок 2)");
-                    
+
                     return;
                 }
             }

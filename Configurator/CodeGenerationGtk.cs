@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 24.05.2023 22:17:29
+ * Дата конфігурації: 09.11.2023 17:38:11
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон Gtk.xslt
@@ -16401,6 +16401,89 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
     #region REGISTER "ФайлиДокументів"
     
       
+    public class ФайлиДокументів_Записи
+    {
+        string Image = AppContext.BaseDirectory + "images/doc.png";
+        string ID = "";
+        string Період = "";
+        
+        string Файл = "";
+
+        Array ToArray()
+        {
+            return new object[] { new Gdk.Pixbuf(Image), ID, Період
+            /* */ , Файл };
+        }
+
+        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(string) /* Період */
+            , typeof(string) /* Файл */
+            );
+
+        public static void AddColumns(TreeView treeView)
+        {
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 0 } */
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
+            treeView.AppendColumn(new TreeViewColumn("Період", new CellRendererText(), "text", 2));
+            /* */
+            treeView.AppendColumn(new TreeViewColumn("Файл", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Файл*/
+            
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
+        }
+
+        public static List<Where> Where { get; set; } = new List<Where>();
+
+        public static UnigueID? SelectPointerItem { get; set; }
+        public static TreePath? SelectPath;
+        public static TreePath? CurrentPath;
+
+        public static void LoadRecords()
+        {
+            Store.Clear();
+            SelectPath = CurrentPath = null;
+
+            РегістриВідомостей.ФайлиДокументів_RecordsSet ФайлиДокументів_RecordsSet = new РегістриВідомостей.ФайлиДокументів_RecordsSet();
+
+            /* Where */
+            ФайлиДокументів_RecordsSet.QuerySelect.Where = Where;
+
+            /* DEFAULT ORDER */
+            ФайлиДокументів_RecordsSet.QuerySelect.Order.Add("period", SelectOrder.ASC);
+
+            
+                /* Join Table */
+                ФайлиДокументів_RecordsSet.QuerySelect.Joins.Add(
+                    new Join(Довідники.Файли_Const.TABLE, РегістриВідомостей.ФайлиДокументів_Const.Файл, ФайлиДокументів_RecordsSet.QuerySelect.Table, "join_tab_1"));
+                
+                  /* Field */
+                  ФайлиДокументів_RecordsSet.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_1." + Довідники.Файли_Const.Назва, "join_tab_1_field_1"));
+                  
+
+            /* Read */
+            ФайлиДокументів_RecordsSet.Read();
+            foreach (ФайлиДокументів_RecordsSet.Record record in ФайлиДокументів_RecordsSet.Records)
+            {
+                ФайлиДокументів_Записи Record = new ФайлиДокументів_Записи
+                {
+                    ID = record.UID.ToString(),
+                    Період = record.Period.ToString(),
+                    Файл = ФайлиДокументів_RecordsSet.JoinValue[record.UID.ToString()]["join_tab_1_field_1"].ToString() ?? "" /**/
+                    
+                };
+
+                TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                CurrentPath = Store.GetPath(CurrentIter);
+
+                if (SelectPointerItem != null)
+                {
+                    if (Record.ID == SelectPointerItem.ToString())
+                        SelectPath = CurrentPath;
+                }
+            }
+        }
+    }
+	    
     #endregion
     
     #region REGISTER "РозміщенняНоменклатуриПоКоміркамНаСкладі"

@@ -176,12 +176,13 @@ namespace StorageAndTrade
 
                 foreach (Запис запис in Записи)
                 {
-                    ВведенняЗалишків_Каси_TablePart.Record record = new ВведенняЗалишків_Каси_TablePart.Record();
-
-                    record.UID = запис.ID;
-                    record.НомерРядка = ++sequenceNumber;
-                    record.Каса = запис.Каса;
-                    record.Сума = запис.Сума;
+                    ВведенняЗалишків_Каси_TablePart.Record record = new ВведенняЗалишків_Каси_TablePart.Record()
+                    {
+                        UID = запис.ID,
+                        НомерРядка = ++sequenceNumber,
+                        Каса = запис.Каса,
+                        Сума = запис.Сума
+                    };
 
                     ВведенняЗалишків_Objest.Каси_TablePart.Records.Add(record);
                 }

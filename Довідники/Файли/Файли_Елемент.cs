@@ -94,9 +94,8 @@ namespace StorageAndTrade
             SelectFileName = "";
 
             FileChooserDialog fc = new FileChooserDialog("Виберіть файл для загрузки", Program.GeneralForm,
-                FileChooserAction.Open, "Закрити", ResponseType.Cancel, "Вибрати", ResponseType.Accept);
-
-            fc.Filter = new FileFilter();
+                FileChooserAction.Open, "Закрити", ResponseType.Cancel, "Вибрати", ResponseType.Accept) { Filter = new FileFilter() };
+                
             fc.Filter.AddPattern("*.*");
 
             if (fc.Run() == (int)ResponseType.Accept)
@@ -107,11 +106,11 @@ namespace StorageAndTrade
 
             labelFileName.Text = SelectFileName;
 
-            if (!String.IsNullOrEmpty(SelectFileName) && File.Exists(SelectFileName))
+            if (!string.IsNullOrEmpty(SelectFileName) && File.Exists(SelectFileName))
             {
                 FileInfo fi = new FileInfo(SelectFileName);
 
-                if (String.IsNullOrEmpty(Назва.Text))
+                if (string.IsNullOrEmpty(Назва.Text))
                     Назва.Text = fi.Name;
 
                 НазваФайлу.Text = fi.Name;
@@ -122,7 +121,7 @@ namespace StorageAndTrade
 
         void SaveFile(object? sender, EventArgs args)
         {
-            if (String.IsNullOrEmpty(Файли_Objest.НазваФайлу) || Файли_Objest.БінарніДані.Length == 0)
+            if (string.IsNullOrEmpty(Файли_Objest.НазваФайлу) || Файли_Objest.БінарніДані.Length == 0)
                 return;
 
             string fullPath = "";
@@ -132,7 +131,7 @@ namespace StorageAndTrade
 
             if (fc.Run() == (int)ResponseType.Accept)
             {
-                if (!String.IsNullOrEmpty(fc.CurrentFolder))
+                if (!string.IsNullOrEmpty(fc.CurrentFolder))
                     fullPath = System.IO.Path.Combine(fc.CurrentFolder, Файли_Objest.НазваФайлу);
             }
 
@@ -179,7 +178,7 @@ namespace StorageAndTrade
             Файли_Objest.Код = Код.Text;
             Файли_Objest.Назва = Назва.Text;
 
-            if (!String.IsNullOrEmpty(SelectFileName) && File.Exists(SelectFileName))
+            if (!string.IsNullOrEmpty(SelectFileName) && File.Exists(SelectFileName))
             {
                 try
                 {
@@ -193,7 +192,7 @@ namespace StorageAndTrade
 
                 FileInfo fi = new FileInfo(SelectFileName);
 
-                if (String.IsNullOrEmpty(Файли_Objest.Назва))
+                if (string.IsNullOrEmpty(Файли_Objest.Назва))
                     Файли_Objest.Назва = fi.Name;
 
                 Файли_Objest.НазваФайлу = fi.Name;

@@ -129,14 +129,15 @@ namespace StorageAndTrade
                             {
                                 Program.GeneralForm?.CreateNotebookPage("Вибір - Довідник: Файли", () =>
                                 {
-                                    Файли page = new Файли();
-
-                                    page.DirectoryPointerItem = запис.Файл.UnigueID;
-                                    page.CallBack_OnSelectPointer = (UnigueID selectPointer) =>
+                                    Файли page = new Файли
                                     {
-                                        запис.Файл = new Файли_Pointer(selectPointer);
-                                        Запис.ПісляЗміни_Файл(запис);
-                                        Store.SetValues(iter, запис.ToArray());
+                                        DirectoryPointerItem = запис.Файл.UnigueID,
+                                        CallBack_OnSelectPointer = (UnigueID selectPointer) =>
+                                        {
+                                            запис.Файл = new Файли_Pointer(selectPointer);
+                                            Запис.ПісляЗміни_Файл(запис);
+                                            Store.SetValues(iter, запис.ToArray());
+                                        }
                                     };
 
                                     page.LoadRecords();

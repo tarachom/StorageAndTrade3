@@ -195,13 +195,14 @@ namespace StorageAndTrade
 
                 foreach (Запис запис in Записи)
                 {
-                    РозміщенняНоменклатуриПоКоміркам_Товари_TablePart.Record record = new РозміщенняНоменклатуриПоКоміркам_Товари_TablePart.Record();
-
-                    record.UID = запис.ID;
-                    record.НомерРядка = ++sequenceNumber;
-                    record.Номенклатура = запис.Номенклатура;
-                    record.Пакування = запис.Пакування;
-                    record.Комірка = запис.Комірка;
+                    РозміщенняНоменклатуриПоКоміркам_Товари_TablePart.Record record = new РозміщенняНоменклатуриПоКоміркам_Товари_TablePart.Record
+                    {
+                        UID = запис.ID,
+                        НомерРядка = ++sequenceNumber,
+                        Номенклатура = запис.Номенклатура,
+                        Пакування = запис.Пакування,
+                        Комірка = запис.Комірка
+                    };
 
                     РозміщенняНоменклатуриПоКоміркам_Objest.Товари_TablePart.Records.Add(record);
                 }

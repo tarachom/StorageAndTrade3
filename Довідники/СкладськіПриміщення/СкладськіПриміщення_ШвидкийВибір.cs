@@ -82,28 +82,7 @@ namespace StorageAndTrade
             //Власник
             HBoxTop.PackStart(СкладВласник, false, false, 2);
             СкладВласник.Caption = "Склад:";
-            СкладВласник.AfterSelectFunc = () =>
-            {
-                //DirectoryPointerItem?.Clear();
-                LoadRecords();
-            };
-
-            //Очистка
-            /*
-            {
-                LinkButton linkClear = new LinkButton(" Очистити") { Image = new Image(AppContext.BaseDirectory + "images/clean.png"), AlwaysShowImage = true };
-                linkClear.Clicked += (object? sender, EventArgs args) =>
-                {
-                    if (CallBack_OnSelectPointer != null)
-                        CallBack_OnSelectPointer.Invoke(new UnigueID());
-
-                    if (PopoverParent != null)
-                        PopoverParent.Hide();
-                };
-
-                HBoxTop.PackEnd(linkClear, false, false, 10);
-            }
-            */
+            СкладВласник.AfterSelectFunc = LoadRecords;
         }
 
         public override void LoadRecords()

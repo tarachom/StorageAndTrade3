@@ -58,12 +58,13 @@ namespace StorageAndTrade
 
         protected override void OpenSelect(object? sender, EventArgs args)
         {
-            ПрихіднийКасовийОрдер page = new ПрихіднийКасовийОрдер();
-
-            page.DocumentPointerItem = Pointer.UnigueID;
-            page.CallBack_OnSelectPointer = (UnigueID selectPointer) =>
+            ПрихіднийКасовийОрдер page = new ПрихіднийКасовийОрдер
             {
-                Pointer = new ПрихіднийКасовийОрдер_Pointer(selectPointer);
+                DocumentPointerItem = Pointer.UnigueID,
+                CallBack_OnSelectPointer = (UnigueID selectPointer) =>
+                {
+                    Pointer = new ПрихіднийКасовийОрдер_Pointer(selectPointer);
+                }
             };
 
             Program.GeneralForm?.CreateNotebookPage($"Вибір - {ПрихіднийКасовийОрдер_Const.FULLNAME}", () => { return page; }, true);

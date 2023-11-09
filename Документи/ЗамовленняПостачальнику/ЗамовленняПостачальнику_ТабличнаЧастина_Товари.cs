@@ -24,12 +24,9 @@ limitations under the License.
 using Gtk;
 
 using AccountingSoftware;
-
-using StorageAndTrade_1_0;
 using Константи = StorageAndTrade_1_0.Константи;
 using StorageAndTrade_1_0.Довідники;
 using StorageAndTrade_1_0.Документи;
-using StorageAndTrade_1_0.РегістриВідомостей;
 
 namespace StorageAndTrade
 {
@@ -283,19 +280,20 @@ namespace StorageAndTrade
 
                 foreach (Запис запис in Записи)
                 {
-                    ЗамовленняПостачальнику_Товари_TablePart.Record record = new ЗамовленняПостачальнику_Товари_TablePart.Record();
-
-                    record.UID = запис.ID;
-                    record.НомерРядка = ++sequenceNumber;
-                    record.Номенклатура = запис.Номенклатура;
-                    record.ХарактеристикаНоменклатури = запис.Характеристика;
-                    record.КількістьУпаковок = запис.КількістьУпаковок;
-                    record.Пакування = запис.Пакування;
-                    record.Кількість = запис.Кількість;
-                    record.Ціна = запис.Ціна;
-                    record.Сума = запис.Сума;
-                    record.Скидка = запис.Скидка;
-                    record.Склад = запис.Склад;
+                    ЗамовленняПостачальнику_Товари_TablePart.Record record = new ЗамовленняПостачальнику_Товари_TablePart.Record
+                    {
+                        UID = запис.ID,
+                        НомерРядка = ++sequenceNumber,
+                        Номенклатура = запис.Номенклатура,
+                        ХарактеристикаНоменклатури = запис.Характеристика,
+                        КількістьУпаковок = запис.КількістьУпаковок,
+                        Пакування = запис.Пакування,
+                        Кількість = запис.Кількість,
+                        Ціна = запис.Ціна,
+                        Сума = запис.Сума,
+                        Скидка = запис.Скидка,
+                        Склад = запис.Склад
+                    };
 
                     ЗамовленняПостачальнику_Objest.Товари_TablePart.Records.Add(record);
                 }

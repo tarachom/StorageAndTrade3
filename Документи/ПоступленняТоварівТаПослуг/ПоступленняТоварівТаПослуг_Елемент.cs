@@ -337,8 +337,8 @@ namespace StorageAndTrade
 
         protected override bool Save()
         {
-            bool isSave = false;
-
+            bool isSave;
+            
             try
             {
                 isSave = ПоступленняТоварівТаПослуг_Objest.Save();

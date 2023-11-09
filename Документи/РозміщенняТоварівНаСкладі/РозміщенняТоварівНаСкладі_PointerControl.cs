@@ -58,12 +58,13 @@ namespace StorageAndTrade
 
         protected override void OpenSelect(object? sender, EventArgs args)
         {
-            РозміщенняТоварівНаСкладі page = new РозміщенняТоварівНаСкладі();
-
-            page.DocumentPointerItem = Pointer.UnigueID;
-            page.CallBack_OnSelectPointer = (UnigueID selectPointer) =>
+            РозміщенняТоварівНаСкладі page = new РозміщенняТоварівНаСкладі
             {
-                Pointer = new РозміщенняТоварівНаСкладі_Pointer(selectPointer);
+                DocumentPointerItem = Pointer.UnigueID,
+                CallBack_OnSelectPointer = (UnigueID selectPointer) =>
+                {
+                    Pointer = new РозміщенняТоварівНаСкладі_Pointer(selectPointer);
+                }
             };
 
             Program.GeneralForm?.CreateNotebookPage($"Вибір - {РозміщенняТоварівНаСкладі_Const.FULLNAME}", () => { return page; }, true);

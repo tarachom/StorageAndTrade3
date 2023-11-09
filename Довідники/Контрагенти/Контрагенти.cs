@@ -61,8 +61,11 @@ namespace StorageAndTrade
             }
 
             //Дерево папок зправа
-            ДеревоПапок = new Контрагенти_Папки_Дерево() { WidthRequest = 500 };
-            ДеревоПапок.CallBack_RowActivated = LoadRecords_TreeCallBack;
+            ДеревоПапок = new Контрагенти_Папки_Дерево
+            {
+                WidthRequest = 500,
+                CallBack_RowActivated = LoadRecords_TreeCallBack
+            };
             HPanedTable.Pack2(ДеревоПапок, false, true);
 
             TreeViewGrid.Model = ТабличніСписки.Контрагенти_Записи.Store;
@@ -138,7 +141,8 @@ namespace StorageAndTrade
                     Контрагенти_Елемент page = new Контрагенти_Елемент
                     {
                         CallBack_LoadRecords = CallBack_LoadRecords,
-                        IsNew = true
+                        IsNew = true,
+                        РодичДляНового = new Контрагенти_Папки_Pointer(ДеревоПапок.DirectoryPointerItem ?? new UnigueID())
                     };
 
                     page.SetValue();

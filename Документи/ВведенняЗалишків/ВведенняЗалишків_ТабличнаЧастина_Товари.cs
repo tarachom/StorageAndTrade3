@@ -266,18 +266,19 @@ namespace StorageAndTrade
 
                 foreach (Запис запис in Записи)
                 {
-                    ВведенняЗалишків_Товари_TablePart.Record record = new ВведенняЗалишків_Товари_TablePart.Record();
-
-                    record.UID = запис.ID;
-                    record.НомерРядка = ++sequenceNumber;
-                    record.Номенклатура = запис.Номенклатура;
-                    record.ХарактеристикаНоменклатури = запис.Характеристика;
-                    record.Серія = запис.Серія;
-                    record.КількістьУпаковок = запис.КількістьУпаковок;
-                    record.Пакування = запис.Пакування;
-                    record.Кількість = запис.Кількість;
-                    record.Ціна = запис.Ціна;
-                    record.Сума = запис.Сума;
+                    ВведенняЗалишків_Товари_TablePart.Record record = new ВведенняЗалишків_Товари_TablePart.Record()
+                    {
+                        UID = запис.ID,
+                        НомерРядка = ++sequenceNumber,
+                        Номенклатура = запис.Номенклатура,
+                        ХарактеристикаНоменклатури = запис.Характеристика,
+                        Серія = запис.Серія,
+                        КількістьУпаковок = запис.КількістьУпаковок,
+                        Пакування = запис.Пакування,
+                        Кількість = запис.Кількість,
+                        Ціна = запис.Ціна,
+                        Сума = запис.Сума
+                    };
 
                     ВведенняЗалишків_Objest.Товари_TablePart.Records.Add(record);
                 }
@@ -319,8 +320,12 @@ namespace StorageAndTrade
 
             //Характеристика
             {
-                TreeViewColumn Характеристика = new TreeViewColumn("Характеристика", new CellRendererText(), "text", (int)Columns.Характеристика) { Resizable = true, MinWidth = 200 };
-                Характеристика.Visible = Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const;
+                TreeViewColumn Характеристика = new TreeViewColumn("Характеристика", new CellRendererText(), "text", (int)Columns.Характеристика)
+                {
+                    Resizable = true,
+                    MinWidth = 200,
+                    Visible = Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const
+                };
                 Характеристика.Data.Add("Column", Columns.Характеристика);
 
                 TreeViewGrid.AppendColumn(Характеристика);
@@ -328,8 +333,12 @@ namespace StorageAndTrade
 
             //Серія
             {
-                TreeViewColumn Серія = new TreeViewColumn("Серія", new CellRendererText(), "text", (int)Columns.Серія) { Resizable = true, MinWidth = 200 };
-                Серія.Visible = Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const;
+                TreeViewColumn Серія = new TreeViewColumn("Серія", new CellRendererText(), "text", (int)Columns.Серія)
+                {
+                    Resizable = true,
+                    MinWidth = 200,
+                    Visible = Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const
+                };
                 Серія.Data.Add("Column", Columns.Серія);
 
                 TreeViewGrid.AppendColumn(Серія);

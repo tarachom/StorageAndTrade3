@@ -68,7 +68,7 @@ namespace StorageAndTrade
 
                 foreach (KeyValuePair<string, ConfigurationDocuments> documents in Config.Kernel!.Conf.Documents)
                 {
-                    string title = String.IsNullOrEmpty(documents.Value.FullName) ? documents.Value.Name : documents.Value.FullName;
+                    string title = string.IsNullOrEmpty(documents.Value.FullName) ? documents.Value.Name : documents.Value.FullName;
 
                     ListBoxRow row = new ListBoxRow() { Name = documents.Key };
                     row.Add(new Label(title) { Halign = Align.Start });

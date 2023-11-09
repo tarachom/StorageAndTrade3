@@ -69,7 +69,7 @@ namespace StorageAndTrade
 
                 foreach (KeyValuePair<string, ConfigurationDirectories> directories in Config.Kernel!.Conf.Directories)
                 {
-                    string title = String.IsNullOrEmpty(directories.Value.FullName) ? directories.Value.Name : directories.Value.FullName;
+                    string title = string.IsNullOrEmpty(directories.Value.FullName) ? directories.Value.Name : directories.Value.FullName;
 
                     ListBoxRow row = new ListBoxRow() { Name = directories.Key };
                     row.Add(new Label(title) { Halign = Align.Start });

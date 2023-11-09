@@ -85,7 +85,7 @@ namespace StorageAndTrade
         {
             if (PeriodWhere != 0)
                 ComboBoxPeriodWhere.ActiveId = PeriodWhere.ToString();
-            else if ((int)Константи.ЖурналиДокументів.ОсновнийТипПеріоду_Const != 0)
+            else if (Константи.ЖурналиДокументів.ОсновнийТипПеріоду_Const != 0)
                 ComboBoxPeriodWhere.ActiveId = Константи.ЖурналиДокументів.ОсновнийТипПеріоду_Const.ToString();
         }
 
@@ -116,8 +116,10 @@ namespace StorageAndTrade
             ToolbarTop.Add(refreshButton);
 
             //Separator
-            ToolItem toolItemSeparator = new ToolItem();
-            toolItemSeparator.Add(new Separator(Orientation.Horizontal));
+            ToolItem toolItemSeparator = new ToolItem
+            {
+                new Separator(Orientation.Horizontal)
+            };
             ToolbarTop.Add(toolItemSeparator);
 
             MenuToolButton provodkyButton = new MenuToolButton(Stock.Find) { Label = "Проводки", IsImportant = true };
@@ -129,19 +131,19 @@ namespace StorageAndTrade
             if (menuItem != null)
             {
                 MenuToolButton naOsnoviButton = new MenuToolButton(Stock.New) { Label = "Ввести на основі", IsImportant = true };
-                naOsnoviButton.Clicked += (object? sender, EventArgs arg) => { ((Menu)((MenuToolButton)(MenuToolButton)sender!).Menu).Popup(); };
+                naOsnoviButton.Clicked += (object? sender, EventArgs arg) => { ((Menu)((MenuToolButton)sender!).Menu).Popup(); };
                 naOsnoviButton.Menu = menuItem;
                 ToolbarTop.Add(naOsnoviButton);
             }
 
             MenuToolButton printingButton = new MenuToolButton(Stock.Print) { TooltipText = "Друк" };
-            printingButton.Clicked += (object? sender, EventArgs arg) => { ((Menu)((MenuToolButton)(MenuToolButton)sender!).Menu).Popup(); };
+            printingButton.Clicked += (object? sender, EventArgs arg) => { ((Menu)((MenuToolButton)sender!).Menu).Popup(); };
             printingButton.Menu = ToolbarPrintingSubMenu();
             ToolbarTop.Add(printingButton);
 
             //Експорт
             MenuToolButton exportButton = new MenuToolButton(Stock.Convert) { Label = "Експорт", IsImportant = true };
-            exportButton.Clicked += (object? sender, EventArgs arg) => { ((Menu)((MenuToolButton)(MenuToolButton)sender!).Menu).Popup(); };
+            exportButton.Clicked += (object? sender, EventArgs arg) => { ((Menu)((MenuToolButton)sender!).Menu).Popup(); };
             exportButton.Menu = ToolbarExportSubMenu();
             ToolbarTop.Add(exportButton);
         }

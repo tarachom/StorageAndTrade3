@@ -100,7 +100,7 @@ namespace StorageAndTrade
 
             string link = Константи.ЗавантаженняДанихІзСайтів.ЗавантаженняСпискуБанків_Const;
 
-            if (String.IsNullOrEmpty(link))
+            if (string.IsNullOrEmpty(link))
             {
                 //За замовчуванням
                 link = "https://bank.gov.ua/NBU_BankInfo/get_data_branch_glbank";

@@ -124,7 +124,7 @@ namespace StorageAndTrade
             Документи.ВведенняЗалишків_Objest? ДокументВведенняЗалишків)
         {
             Довідники.ПартіяТоварівКомпозит_Select партіяТоварівКомпозитВибірка = new Довідники.ПартіяТоварівКомпозит_Select();
-            Довідники.ПартіяТоварівКомпозит_Pointer ПартіяТоварівКомпозит = 
+            Довідники.ПартіяТоварівКомпозит_Pointer ПартіяТоварівКомпозит =
                 партіяТоварівКомпозитВибірка.FindByField(Довідники.ПартіяТоварівКомпозит_Const.ДокументКлюч, ДокументКлюч);
 
             Довідники.ПартіяТоварівКомпозит_Objest партіяТоварівКомпозитНовий = new Довідники.ПартіяТоварівКомпозит_Objest();
@@ -214,9 +214,11 @@ WHERE
 ORDER BY КурсиВалют.period DESC
 LIMIT 1
 ";
-            Dictionary<string, object> paramQuery = new Dictionary<string, object>();
-            paramQuery.Add("valuta", Валюта.UnigueID.UGuid);
-            paramQuery.Add("date_curs", new DateTime(ДатаКурсу.Year, ДатаКурсу.Month, ДатаКурсу.Day, 23, 59, 59));
+            Dictionary<string, object> paramQuery = new Dictionary<string, object>()
+            {
+                { "valuta", Валюта.UnigueID.UGuid },
+                { "date_curs", new DateTime(ДатаКурсу.Year, ДатаКурсу.Month, ДатаКурсу.Day, 23, 59, 59) }
+            };
 
             string[] columnsName;
             List<Dictionary<string, object>> listRow;

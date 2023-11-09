@@ -78,8 +78,7 @@ namespace StorageAndTrade
 
             CreateFilters();
 
-            reportNotebook = new Notebook() { Scrollable = true, EnablePopup = true, BorderWidth = 0, ShowBorder = false };
-            reportNotebook.TabPos = PositionType.Top;
+            reportNotebook = new Notebook() { Scrollable = true, EnablePopup = true, BorderWidth = 0, ShowBorder = false, TabPos = PositionType.Top };
             PackStart(reportNotebook, true, true, 0);
 
             ShowAll();
@@ -366,20 +365,26 @@ ORDER BY Номенклатура_Назва
             if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const) КолонкиДаних.Add("ХарактеристикаНоменклатури_Назва", "ХарактеристикаНоменклатури");
             КолонкиДаних.Add("Склад_Назва", "Склад");
 
-            Dictionary<string, string> ТипиДаних = new Dictionary<string, string>();
-            ТипиДаних.Add("Номенклатура_Назва", Номенклатура_Const.POINTER);
-            ТипиДаних.Add("ХарактеристикаНоменклатури_Назва", ХарактеристикиНоменклатури_Const.POINTER);
-            ТипиДаних.Add("Склад_Назва", Склади_Const.POINTER);
+            Dictionary<string, string> ТипиДаних = new Dictionary<string, string>
+            {
+                { "Номенклатура_Назва", Номенклатура_Const.POINTER },
+                { "ХарактеристикаНоменклатури_Назва", ХарактеристикиНоменклатури_Const.POINTER },
+                { "Склад_Назва", Склади_Const.POINTER }
+            };
 
-            Dictionary<string, float> ПозиціяТекстуВКолонці = new Dictionary<string, float>();
-            ПозиціяТекстуВКолонці.Add("ВНаявності", 1);
-            ПозиціяТекстуВКолонці.Add("ВРезервіЗіСкладу", 1);
-            ПозиціяТекстуВКолонці.Add("ВРезервіПідЗамовлення", 1);
+            Dictionary<string, float> ПозиціяТекстуВКолонці = new Dictionary<string, float>
+            {
+                { "ВНаявності", 1 },
+                { "ВРезервіЗіСкладу", 1 },
+                { "ВРезервіПідЗамовлення", 1 }
+            };
 
-            Dictionary<string, TreeCellDataFunc> ФункціяДляКолонки = new Dictionary<string, TreeCellDataFunc>();
-            ФункціяДляКолонки.Add("ВНаявності", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним);
-            ФункціяДляКолонки.Add("ВРезервіЗіСкладу", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним);
-            ФункціяДляКолонки.Add("ВРезервіПідЗамовлення", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним);
+            Dictionary<string, TreeCellDataFunc> ФункціяДляКолонки = new Dictionary<string, TreeCellDataFunc>
+            {
+                { "ВНаявності", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним },
+                { "ВРезервіЗіСкладу", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним },
+                { "ВРезервіПідЗамовлення", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним }
+            };
 
             Dictionary<string, object> paramQuery = new Dictionary<string, object>();
 
@@ -593,26 +598,34 @@ ORDER BY period ASC
             if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const) КолонкиДаних.Add("ХарактеристикаНоменклатури_Назва", "ХарактеристикаНоменклатури");
             КолонкиДаних.Add("Склад_Назва", "Склад");
 
-            Dictionary<string, string> ТипиДаних = new Dictionary<string, string>();
-            ТипиДаних.Add("Документ", "Документи.*");
-            ТипиДаних.Add("Номенклатура_Назва", Номенклатура_Const.POINTER);
-            ТипиДаних.Add("ХарактеристикаНоменклатури_Назва", ХарактеристикиНоменклатури_Const.POINTER);
-            ТипиДаних.Add("Склад_Назва", Склади_Const.POINTER);
+            Dictionary<string, string> ТипиДаних = new Dictionary<string, string>
+            {
+                { "Документ", "Документи.*" },
+                { "Номенклатура_Назва", Номенклатура_Const.POINTER },
+                { "ХарактеристикаНоменклатури_Назва", ХарактеристикиНоменклатури_Const.POINTER },
+                { "Склад_Назва", Склади_Const.POINTER }
+            };
 
-            Dictionary<string, float> ПозиціяТекстуВКолонці = new Dictionary<string, float>();
-            ПозиціяТекстуВКолонці.Add("income", 0.5f);
-            ПозиціяТекстуВКолонці.Add("ВНаявності", 1);
-            ПозиціяТекстуВКолонці.Add("ВРезервіЗіСкладу", 1);
-            ПозиціяТекстуВКолонці.Add("ВРезервіПідЗамовлення", 1);
+            Dictionary<string, float> ПозиціяТекстуВКолонці = new Dictionary<string, float>
+            {
+                { "income", 0.5f },
+                { "ВНаявності", 1 },
+                { "ВРезервіЗіСкладу", 1 },
+                { "ВРезервіПідЗамовлення", 1 }
+            };
 
-            Dictionary<string, TreeCellDataFunc> ФункціяДляКолонки = new Dictionary<string, TreeCellDataFunc>();
-            ФункціяДляКолонки.Add("ВНаявності", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним);
-            ФункціяДляКолонки.Add("ВРезервіЗіСкладу", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним);
-            ФункціяДляКолонки.Add("ВРезервіПідЗамовлення", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним);
+            Dictionary<string, TreeCellDataFunc> ФункціяДляКолонки = new Dictionary<string, TreeCellDataFunc>
+            {
+                { "ВНаявності", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним },
+                { "ВРезервіЗіСкладу", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним },
+                { "ВРезервіПідЗамовлення", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним }
+            };
 
-            Dictionary<string, object> paramQuery = new Dictionary<string, object>();
-            paramQuery.Add("ПочатокПеріоду", Фільтр.ДатаПочатокПеріоду);
-            paramQuery.Add("КінецьПеріоду", Фільтр.ДатаКінецьПеріоду);
+            Dictionary<string, object> paramQuery = new Dictionary<string, object>
+            {
+                { "ПочатокПеріоду", Фільтр.ДатаПочатокПеріоду },
+                { "КінецьПеріоду", Фільтр.ДатаКінецьПеріоду }
+            };
 
             string[] columnsName;
             List<Dictionary<string, object>> listRow;

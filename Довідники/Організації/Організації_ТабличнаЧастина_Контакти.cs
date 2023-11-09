@@ -133,7 +133,7 @@ namespace StorageAndTrade
 
                         string uid = (string)Store.GetValue(iter, (int)Columns.UID);
 
-                        if (!String.IsNullOrEmpty(uid))
+                        if (!string.IsNullOrEmpty(uid))
                             record.UID = Guid.Parse(uid);
 
                         string type = (string)Store.GetValue(iter, (int)Columns.Тип);
@@ -141,7 +141,7 @@ namespace StorageAndTrade
                         //Тип
                         {
                             ТипиКонтактноїІнформації? result = ПсевдонімиПерелічення.ТипиКонтактноїІнформації_FindByName(type);
-                            record.Тип = (result != null ? (ТипиКонтактноїІнформації)result : ТипиКонтактноїІнформації.Адрес);
+                            record.Тип = result != null ? (ТипиКонтактноїІнформації)result : ТипиКонтактноїІнформації.Адрес;
                         }
 
                         record.Значення = Store.GetValue(iter, (int)Columns.Значення)?.ToString() ?? "";

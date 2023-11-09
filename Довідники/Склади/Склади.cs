@@ -59,8 +59,11 @@ namespace StorageAndTrade
             HBoxTop.PackStart(linkButtonHar, false, false, 10);
 
             //Дерево папок зправа
-            ДеревоПапок = new Склади_Папки_Дерево() { WidthRequest = 500 };
-            ДеревоПапок.CallBack_RowActivated = LoadRecords_TreeCallBack;
+            ДеревоПапок = new Склади_Папки_Дерево
+            {
+                WidthRequest = 500,
+                CallBack_RowActivated = LoadRecords_TreeCallBack
+            };
             HPanedTable.Pack2(ДеревоПапок, false, true);
 
             TreeViewGrid.Model = ТабличніСписки.Склади_Записи.Store;
@@ -136,7 +139,8 @@ namespace StorageAndTrade
                     Склади_Елемент page = new Склади_Елемент
                     {
                         CallBack_LoadRecords = CallBack_LoadRecords,
-                        IsNew = true
+                        IsNew = true,
+                        РодичДляНового = new Склади_Папки_Pointer(ДеревоПапок.DirectoryPointerItem ?? new UnigueID())
                     };
 
                     page.SetValue();

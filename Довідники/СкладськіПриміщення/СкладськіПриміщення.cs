@@ -40,10 +40,7 @@ namespace StorageAndTrade
             //Власник
             HBoxTop.PackStart(СкладВласник, false, false, 2);
             СкладВласник.Caption = "Склад:";
-            СкладВласник.AfterSelectFunc = () =>
-            {
-                LoadRecords();
-            };
+            СкладВласник.AfterSelectFunc = LoadRecords;
 
             //Складські комірки
             LinkButton linkButtonHar = new LinkButton($" {СкладськіКомірки_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
