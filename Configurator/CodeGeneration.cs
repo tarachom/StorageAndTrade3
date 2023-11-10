@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 10.11.2023 21:58:44
+ * Дата конфігурації: 10.11.2023 22:34:39
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -580,12 +580,12 @@ namespace StorageAndTrade_1_0.Константи
                 base.BaseClear();
             }
         
-            public void Save(bool clear_all_before_save /*= true*/) 
+            public async ValueTask Save(bool clear_all_before_save /*= true*/) 
             {
-                base.BaseBeginTransaction();
+                await base.BaseBeginTransaction();
                 
                 if (clear_all_before_save)
-                    base.BaseDelete();
+                    await base.BaseDelete();
 
                 foreach (Record record in Records)
                 {
@@ -596,15 +596,15 @@ namespace StorageAndTrade_1_0.Константи
                     fieldValue.Add("col_a1", record.Обєкт);
                     fieldValue.Add("col_a2", record.Користувач);
                     
-                    record.UID = base.BaseSave(record.UID, fieldValue);
+                    record.UID = await base.BaseSave(record.UID, fieldValue);
                 }
                 
-                base.BaseCommitTransaction();
+                await base.BaseCommitTransaction();
             }
         
-            public void Delete()
+            public async ValueTask Delete()
             {
-                base.BaseDelete();
+                await base.BaseDelete();
             }
             
             public class Record : ConstantsTablePartRecord
@@ -659,12 +659,12 @@ namespace StorageAndTrade_1_0.Константи
                 base.BaseClear();
             }
         
-            public void Save(bool clear_all_before_save /*= true*/) 
+            public async ValueTask Save(bool clear_all_before_save /*= true*/) 
             {
-                base.BaseBeginTransaction();
+                await base.BaseBeginTransaction();
                 
                 if (clear_all_before_save)
-                    base.BaseDelete();
+                    await base.BaseDelete();
 
                 foreach (Record record in Records)
                 {
@@ -677,15 +677,15 @@ namespace StorageAndTrade_1_0.Константи
                     fieldValue.Add("col_a4", record.Заблоковано);
                     fieldValue.Add("col_a6", record.Результат);
                     
-                    record.UID = base.BaseSave(record.UID, fieldValue);
+                    record.UID = await base.BaseSave(record.UID, fieldValue);
                 }
                 
-                base.BaseCommitTransaction();
+                await base.BaseCommitTransaction();
             }
         
-            public void Delete()
+            public async ValueTask Delete()
             {
-                base.BaseDelete();
+                await base.BaseDelete();
             }
             
             public class Record : ConstantsTablePartRecord
@@ -738,12 +738,12 @@ namespace StorageAndTrade_1_0.Константи
                 base.BaseClear();
             }
         
-            public void Save(bool clear_all_before_save /*= true*/) 
+            public async ValueTask Save(bool clear_all_before_save /*= true*/) 
             {
-                base.BaseBeginTransaction();
+                await base.BaseBeginTransaction();
                 
                 if (clear_all_before_save)
-                    base.BaseDelete();
+                    await base.BaseDelete();
 
                 foreach (Record record in Records)
                 {
@@ -754,15 +754,15 @@ namespace StorageAndTrade_1_0.Константи
                     fieldValue.Add("col_a3", record.ДатаБлокування);
                     fieldValue.Add("col_a4", record.ДатаПідтвердженняБлокування);
                     
-                    record.UID = base.BaseSave(record.UID, fieldValue);
+                    record.UID = await base.BaseSave(record.UID, fieldValue);
                 }
                 
-                base.BaseCommitTransaction();
+                await base.BaseCommitTransaction();
             }
         
-            public void Delete()
+            public async ValueTask Delete()
             {
-                base.BaseDelete();
+                await base.BaseDelete();
             }
             
             public class Record : ConstantsTablePartRecord
@@ -817,12 +817,12 @@ namespace StorageAndTrade_1_0.Константи
                 base.BaseClear();
             }
         
-            public void Save(bool clear_all_before_save /*= true*/) 
+            public async ValueTask Save(bool clear_all_before_save /*= true*/) 
             {
-                base.BaseBeginTransaction();
+                await base.BaseBeginTransaction();
                 
                 if (clear_all_before_save)
-                    base.BaseDelete();
+                    await base.BaseDelete();
 
                 foreach (Record record in Records)
                 {
@@ -835,15 +835,15 @@ namespace StorageAndTrade_1_0.Константи
                     fieldValue.Add("col_a4", record.НазваОбєкту);
                     fieldValue.Add("col_a3", record.Повідомлення);
                     
-                    record.UID = base.BaseSave(record.UID, fieldValue);
+                    record.UID = await base.BaseSave(record.UID, fieldValue);
                 }
                 
-                base.BaseCommitTransaction();
+                await base.BaseCommitTransaction();
             }
         
-            public void Delete()
+            public async ValueTask Delete()
             {
-                base.BaseDelete();
+                await base.BaseDelete();
             }
             
             public class Record : ConstantsTablePartRecord
@@ -1826,12 +1826,12 @@ namespace StorageAndTrade_1_0.Константи
                 base.BaseClear();
             }
         
-            public void Save(bool clear_all_before_save /*= true*/) 
+            public async ValueTask Save(bool clear_all_before_save /*= true*/) 
             {
-                base.BaseBeginTransaction();
+                await base.BaseBeginTransaction();
                 
                 if (clear_all_before_save)
-                    base.BaseDelete();
+                    await base.BaseDelete();
 
                 foreach (Record record in Records)
                 {
@@ -1842,15 +1842,15 @@ namespace StorageAndTrade_1_0.Константи
                     fieldValue.Add("col_a3", record.Посилання);
                     fieldValue.Add("col_a4", record.Повідомлення);
                     
-                    record.UID = base.BaseSave(record.UID, fieldValue);
+                    record.UID = await base.BaseSave(record.UID, fieldValue);
                 }
                 
-                base.BaseCommitTransaction();
+                await base.BaseCommitTransaction();
             }
         
-            public void Delete()
+            public async ValueTask Delete()
             {
-                base.BaseDelete();
+                await base.BaseDelete();
             }
             
             public class Record : ConstantsTablePartRecord
@@ -1989,7 +1989,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public async Task<bool> Save()
+        public async ValueTask<bool> Save()
         {
             Організації_Triggers.BeforeSave(this);
             base.FieldValue["col_a1"] = Назва;
@@ -2355,7 +2355,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public async Task<bool> Save()
+        public async ValueTask<bool> Save()
         {
             Номенклатура_Triggers.BeforeSave(this);
             base.FieldValue["col_b1"] = Назва;
@@ -2673,7 +2673,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public async Task<bool> Save()
+        public async ValueTask<bool> Save()
         {
             Виробники_Triggers.BeforeSave(this);
             base.FieldValue["col_b6"] = Назва;
@@ -2879,7 +2879,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public async Task<bool> Save()
+        public async ValueTask<bool> Save()
         {
             ВидиНоменклатури_Triggers.BeforeSave(this);
             base.FieldValue["col_b8"] = Назва;
@@ -3091,7 +3091,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public async Task<bool> Save()
+        public async ValueTask<bool> Save()
         {
             ПакуванняОдиниціВиміру_Triggers.BeforeSave(this);
             base.FieldValue["col_c1"] = Назва;
@@ -3303,7 +3303,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public async Task<bool> Save()
+        public async ValueTask<bool> Save()
         {
             Валюти_Triggers.BeforeSave(this);
             base.FieldValue["col_c5"] = Назва;
@@ -3528,7 +3528,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public async Task<bool> Save()
+        public async ValueTask<bool> Save()
         {
             Контрагенти_Triggers.BeforeSave(this);
             base.FieldValue["col_c7"] = Назва;
@@ -3962,7 +3962,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public async Task<bool> Save()
+        public async ValueTask<bool> Save()
         {
             Склади_Triggers.BeforeSave(this);
             base.FieldValue["col_d9"] = Назва;
@@ -4298,7 +4298,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public async Task<bool> Save()
+        public async ValueTask<bool> Save()
         {
             ВидиЦін_Triggers.BeforeSave(this);
             base.FieldValue["col_e9"] = Назва;
@@ -4501,7 +4501,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public async Task<bool> Save()
+        public async ValueTask<bool> Save()
         {
             ВидиЦінПостачальників_Triggers.BeforeSave(this);
             base.FieldValue["col_f3"] = Назва;
@@ -4713,7 +4713,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public async Task<bool> Save()
+        public async ValueTask<bool> Save()
         {
             Користувачі_Triggers.BeforeSave(this);
             base.FieldValue["col_f6"] = Назва;
@@ -5045,7 +5045,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public async Task<bool> Save()
+        public async ValueTask<bool> Save()
         {
             ФізичніОсоби_Triggers.BeforeSave(this);
             base.FieldValue["col_g7"] = Назва;
@@ -5368,7 +5368,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public async Task<bool> Save()
+        public async ValueTask<bool> Save()
         {
             СтруктураПідприємства_Triggers.BeforeSave(this);
             base.FieldValue["col_h8"] = Назва;
@@ -5568,7 +5568,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public async Task<bool> Save()
+        public async ValueTask<bool> Save()
         {
             КраїниСвіту_Triggers.BeforeSave(this);
             base.FieldValue["col_i2"] = Назва;
@@ -5777,7 +5777,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public async Task<bool> Save()
+        public async ValueTask<bool> Save()
         {
             Файли_Triggers.BeforeSave(this);
             base.FieldValue["col_i6"] = Код;
@@ -5992,7 +5992,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public async Task<bool> Save()
+        public async ValueTask<bool> Save()
         {
             ХарактеристикиНоменклатури_Triggers.BeforeSave(this);
             base.FieldValue["col_i7"] = Назва;
@@ -6198,7 +6198,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public async Task<bool> Save()
+        public async ValueTask<bool> Save()
         {
             Номенклатура_Папки_Triggers.BeforeSave(this);
             base.FieldValue["col_j1"] = Назва;
@@ -6401,7 +6401,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public async Task<bool> Save()
+        public async ValueTask<bool> Save()
         {
             Контрагенти_Папки_Triggers.BeforeSave(this);
             base.FieldValue["col_j4"] = Назва;
@@ -6604,7 +6604,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public async Task<bool> Save()
+        public async ValueTask<bool> Save()
         {
             Склади_Папки_Triggers.BeforeSave(this);
             base.FieldValue["col_j7"] = Назва;
@@ -6810,7 +6810,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public async Task<bool> Save()
+        public async ValueTask<bool> Save()
         {
             Каси_Triggers.BeforeSave(this);
             base.FieldValue["col_k8"] = Назва;
@@ -7046,7 +7046,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public async Task<bool> Save()
+        public async ValueTask<bool> Save()
         {
             БанківськіРахункиОрганізацій_Triggers.BeforeSave(this);
             base.FieldValue["col_l1"] = Назва;
@@ -7330,7 +7330,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public async Task<bool> Save()
+        public async ValueTask<bool> Save()
         {
             ДоговориКонтрагентів_Triggers.BeforeSave(this);
             base.FieldValue["col_n4"] = Назва;
@@ -7620,7 +7620,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public async Task<bool> Save()
+        public async ValueTask<bool> Save()
         {
             БанківськіРахункиКонтрагентів_Triggers.BeforeSave(this);
             base.FieldValue["col_n7"] = Назва;
@@ -7868,7 +7868,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public async Task<bool> Save()
+        public async ValueTask<bool> Save()
         {
             СтаттяРухуКоштів_Triggers.BeforeSave(this);
             base.FieldValue["col_i7"] = Назва;
@@ -8167,7 +8167,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public async Task<bool> Save()
+        public async ValueTask<bool> Save()
         {
             СеріїНоменклатури_Triggers.BeforeSave(this);
             base.FieldValue["col_a3"] = Номер;
@@ -8379,7 +8379,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public async Task<bool> Save()
+        public async ValueTask<bool> Save()
         {
             ПартіяТоварівКомпозит_Triggers.BeforeSave(this);
             base.FieldValue["col_a1"] = Назва;
@@ -8603,7 +8603,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public async Task<bool> Save()
+        public async ValueTask<bool> Save()
         {
             ВидиЗапасів_Triggers.BeforeSave(this);
             base.FieldValue["col_a5"] = Назва;
@@ -8893,7 +8893,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public async Task<bool> Save()
+        public async ValueTask<bool> Save()
         {
             Банки_Triggers.BeforeSave(this);
             base.FieldValue["col_a1"] = Код;
@@ -9171,7 +9171,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public async Task<bool> Save()
+        public async ValueTask<bool> Save()
         {
             СкладськіПриміщення_Triggers.BeforeSave(this);
             base.FieldValue["col_a2"] = Назва;
@@ -9395,7 +9395,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public async Task<bool> Save()
+        public async ValueTask<bool> Save()
         {
             СкладськіКомірки_Triggers.BeforeSave(this);
             base.FieldValue["col_a1"] = Папка.UnigueID.UGuid;
@@ -9618,7 +9618,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public async Task<bool> Save()
+        public async ValueTask<bool> Save()
         {
             base.FieldValue["col_a2"] = Назва;
             base.FieldValue["col_a3"] = Опис;
@@ -9828,7 +9828,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public async Task<bool> Save()
+        public async ValueTask<bool> Save()
         {
             ТипорозміриКомірок_Triggers.BeforeSave(this);
             base.FieldValue["col_a1"] = Висота;
@@ -10043,7 +10043,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public async Task<bool> Save()
+        public async ValueTask<bool> Save()
         {
             СкладськіКомірки_Папки_Triggers.BeforeSave(this);
             base.FieldValue["col_j1"] = Назва;
@@ -10255,7 +10255,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public async Task<bool> Save()
+        public async ValueTask<bool> Save()
         {
             Блокнот_Triggers.BeforeSave(this);
             base.FieldValue["col_a1"] = Код;

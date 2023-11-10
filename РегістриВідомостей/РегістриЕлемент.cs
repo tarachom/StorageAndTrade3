@@ -195,9 +195,9 @@ namespace StorageAndTrade
         /// Записати повідомлення про помилку і вивести меседж
         /// </summary>
         /// <param name="ex">Помилка</param>
-        protected void MsgError(Exception ex)
+        protected async void MsgError(Exception ex)
         {
-            ФункціїДляПовідомлень.ДодатиПовідомленняПроПомилку(DateTime.Now, "Запис", UnigueID?.UGuid, "Регістри Відомостей", Caption, ex.Message);
+            await ФункціїДляПовідомлень.ДодатиПовідомленняПроПомилку(DateTime.Now, "Запис", UnigueID?.UGuid, "Регістри Відомостей", Caption, ex.Message);
             ФункціїДляПовідомлень.ВідкритиТермінал();
 
             Message.Info(Program.GeneralForm, "Не вдалось записати");

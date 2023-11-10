@@ -529,12 +529,12 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Константи
                 base.BaseClear();
             }
         
-            public void Save(bool clear_all_before_save /*= true*/) 
+            public async ValueTask Save(bool clear_all_before_save /*= true*/) 
             {
-                base.BaseBeginTransaction();
+                await base.BaseBeginTransaction();
                 
                 if (clear_all_before_save)
-                    base.BaseDelete();
+                    await base.BaseDelete();
 
                 foreach (Record record in Records)
                 {
@@ -554,15 +554,15 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Константи
                         </xsl:choose>
                         <xsl:text>)</xsl:text>;
                     </xsl:for-each>
-                    record.UID = base.BaseSave(record.UID, fieldValue);
+                    record.UID = await base.BaseSave(record.UID, fieldValue);
                 }
                 
-                base.BaseCommitTransaction();
+                await base.BaseCommitTransaction();
             }
         
-            public void Delete()
+            public async ValueTask Delete()
             {
-                base.BaseDelete();
+                await base.BaseDelete();
             }
             
             public class Record : ConstantsTablePartRecord
@@ -651,7 +651,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
                 return false;
         }
         
-        public async Task&lt;bool&gt; Save()
+        public async ValueTask&lt;bool&gt; Save()
         {
             <xsl:if test="normalize-space(TriggerFunctions/BeforeSave) != ''">
                 <xsl:value-of select="TriggerFunctions/BeforeSave"/><xsl:text>(this)</xsl:text>;

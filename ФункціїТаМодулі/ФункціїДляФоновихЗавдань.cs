@@ -35,7 +35,7 @@ namespace StorageAndTrade
 {
     class ФункціїДляФоновихЗавдань
     {
-        public static void ДодатиЗаписВІсторіюЗавантаженняКурсуВалют(string Стан, string Посилання, string Повідомлення = "")
+        public static async ValueTask ДодатиЗаписВІсторіюЗавантаженняКурсуВалют(string Стан, string Посилання, string Повідомлення = "")
         {
             Константи.ЗавантаженняДанихІзСайтів.ЗавантаженняКурсівВалют_Історія_TablePart завантаженняКурсівВалют_Історія_TablePart =
                 new Константи.ЗавантаженняДанихІзСайтів.ЗавантаженняКурсівВалют_Історія_TablePart();
@@ -50,7 +50,7 @@ namespace StorageAndTrade
                 };
 
             завантаженняКурсівВалют_Історія_TablePart.Records.Add(record);
-            завантаженняКурсівВалют_Історія_TablePart.Save(false);
+            await завантаженняКурсівВалют_Історія_TablePart.Save(false);
         }
 
         public static void ОчиститиІсторіюЗавантаженняКурсуВалют(bool clear_all = false)
