@@ -377,7 +377,7 @@ LIMIT 1
             }
         }
 
-        public override void SaveRecords()
+        public override async ValueTask SaveRecords()
         {
             if (ПоступленняТоварівТаПослуг_Objest != null)
             {
@@ -408,7 +408,7 @@ LIMIT 1
                     ПоступленняТоварівТаПослуг_Objest.Товари_TablePart.Records.Add(record);
                 }
 
-                ПоступленняТоварівТаПослуг_Objest.Товари_TablePart.Save(true);
+                await ПоступленняТоварівТаПослуг_Objest.Товари_TablePart.Save(true);
 
                 LoadRecords();
             }

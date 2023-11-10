@@ -226,7 +226,7 @@ namespace StorageAndTrade
             }
         }
 
-        public override void SaveRecords()
+        public override async ValueTask SaveRecords()
         {
             if (ПереміщенняТоварів_Objest != null)
             {
@@ -252,7 +252,7 @@ namespace StorageAndTrade
                     ПереміщенняТоварів_Objest.Товари_TablePart.Records.Add(record);
                 }
 
-                ПереміщенняТоварів_Objest.Товари_TablePart.Save(true);
+                await ПереміщенняТоварів_Objest.Товари_TablePart.Save(true);
 
                 LoadRecords();
             }
@@ -346,7 +346,7 @@ namespace StorageAndTrade
             //Колонка пустишка для заповнення вільного простору
             TreeViewGrid.AppendColumn(new TreeViewColumn());
         }
-        
+
         protected override void ButtonSelect(TreeIter iter, int rowNumber, int colNumber, Popover popoverSmallSelect)
         {
             Запис запис = Записи[rowNumber];

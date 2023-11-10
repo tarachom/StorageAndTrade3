@@ -207,7 +207,7 @@ namespace StorageAndTrade
             }
         }
 
-        public void SaveRecords()
+        public async ValueTask SaveRecords()
         {
             if (Номенклатура_Objest != null)
             {
@@ -225,7 +225,7 @@ namespace StorageAndTrade
                     Номенклатура_Objest.Файли_TablePart.Records.Add(record);
                 }
 
-                Номенклатура_Objest.Файли_TablePart.Save(true);
+                await Номенклатура_Objest.Файли_TablePart.Save(true);
             }
         }
 

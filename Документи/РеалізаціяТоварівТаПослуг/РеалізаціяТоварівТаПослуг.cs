@@ -120,23 +120,23 @@ namespace StorageAndTrade
             }
         }
 
-        protected override void SetDeletionLabel(UnigueID unigueID)
+        protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             РеалізаціяТоварівТаПослуг_Objest РеалізаціяТоварівТаПослуг_Objest = new РеалізаціяТоварівТаПослуг_Objest();
             if (РеалізаціяТоварівТаПослуг_Objest.Read(unigueID))
-                РеалізаціяТоварівТаПослуг_Objest.SetDeletionLabel(!РеалізаціяТоварівТаПослуг_Objest.DeletionLabel);
+                await РеалізаціяТоварівТаПослуг_Objest.SetDeletionLabel(!РеалізаціяТоварівТаПослуг_Objest.DeletionLabel);
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
         }
 
-        protected override UnigueID? Copy(UnigueID unigueID)
+        protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
             РеалізаціяТоварівТаПослуг_Objest РеалізаціяТоварівТаПослуг_Objest = new РеалізаціяТоварівТаПослуг_Objest();
             if (РеалізаціяТоварівТаПослуг_Objest.Read(unigueID))
             {
                 РеалізаціяТоварівТаПослуг_Objest РеалізаціяТоварівТаПослуг_Objest_Новий = РеалізаціяТоварівТаПослуг_Objest.Copy(true);
-                РеалізаціяТоварівТаПослуг_Objest_Новий.Save();
-                РеалізаціяТоварівТаПослуг_Objest_Новий.Товари_TablePart.Save(true);
+                await РеалізаціяТоварівТаПослуг_Objest_Новий.Save();
+                await РеалізаціяТоварівТаПослуг_Objest_Новий.Товари_TablePart.Save(true);
 
                 return РеалізаціяТоварівТаПослуг_Objest_Новий.UnigueID;
             }
@@ -153,7 +153,7 @@ namespace StorageAndTrade
             LoadRecords();
         }
 
-        protected override void SpendTheDocument(UnigueID unigueID, bool spendDoc)
+        protected override async ValueTask SpendTheDocument(UnigueID unigueID, bool spendDoc)
         {
             РеалізаціяТоварівТаПослуг_Pointer РеалізаціяТоварівТаПослуг_Pointer = new РеалізаціяТоварівТаПослуг_Pointer(unigueID);
             РеалізаціяТоварівТаПослуг_Objest? РеалізаціяТоварівТаПослуг_Objest = РеалізаціяТоварівТаПослуг_Pointer.GetDocumentObject(true);
@@ -161,11 +161,11 @@ namespace StorageAndTrade
 
             if (spendDoc)
             {
-                if (!РеалізаціяТоварівТаПослуг_Objest.SpendTheDocument(РеалізаціяТоварівТаПослуг_Objest.ДатаДок))
+                if (!await РеалізаціяТоварівТаПослуг_Objest.SpendTheDocument(РеалізаціяТоварівТаПослуг_Objest.ДатаДок))
                     ФункціїДляПовідомлень.ВідкритиТермінал();
             }
             else
-                РеалізаціяТоварівТаПослуг_Objest.ClearSpendTheDocument();
+                await РеалізаціяТоварівТаПослуг_Objest.ClearSpendTheDocument();
         }
 
         protected override DocumentPointer? ReportSpendTheDocument(UnigueID unigueID)
@@ -210,7 +210,7 @@ namespace StorageAndTrade
             return Menu;
         }
 
-        void OnNewDocNaOsnovi_ПрихіднийКасовийОрдер(object? sender, EventArgs args)
+        async void OnNewDocNaOsnovi_ПрихіднийКасовийОрдер(object? sender, EventArgs args)
         {
             if (TreeViewGrid.Selection.CountSelectedRows() != 0)
             {
@@ -242,7 +242,7 @@ namespace StorageAndTrade
                     прихіднийКасовийОрдер_Новий.СумаДокументу = реалізаціяТоварівТаПослуг_Objest.СумаДокументу;
                     прихіднийКасовийОрдер_Новий.Основа = реалізаціяТоварівТаПослуг_Objest.GetBasis();
 
-                    if (прихіднийКасовийОрдер_Новий.Save())
+                    if (await прихіднийКасовийОрдер_Новий.Save())
                     {
                         Program.GeneralForm?.CreateNotebookPage($"{прихіднийКасовийОрдер_Новий.Назва}", () =>
                         {
@@ -261,7 +261,7 @@ namespace StorageAndTrade
             }
         }
 
-        void OnNewDocNaOsnovi_ПоверненняТоварівВідКлієнта(object? sender, EventArgs args)
+        async void OnNewDocNaOsnovi_ПоверненняТоварівВідКлієнта(object? sender, EventArgs args)
         {
             if (TreeViewGrid.Selection.CountSelectedRows() != 0)
             {
@@ -293,7 +293,7 @@ namespace StorageAndTrade
                     поверненняТоварівВідКлієнта_Objest.СумаДокументу = реалізаціяТоварівТаПослуг_Objest.СумаДокументу;
                     поверненняТоварівВідКлієнта_Objest.Основа = реалізаціяТоварівТаПослуг_Objest.GetBasis();
 
-                    if (поверненняТоварівВідКлієнта_Objest.Save())
+                    if (await поверненняТоварівВідКлієнта_Objest.Save())
                     {
                         //Товари
                         foreach (РеалізаціяТоварівТаПослуг_Товари_TablePart.Record record_реалізаціяТоварівТаПослуг in реалізаціяТоварівТаПослуг_Objest.Товари_TablePart.Records)
@@ -312,7 +312,7 @@ namespace StorageAndTrade
                             record_повернення.ДокументРеалізації = реалізаціяТоварівТаПослуг_Objest.GetDocumentPointer();
                         }
 
-                        поверненняТоварівВідКлієнта_Objest.Товари_TablePart.Save(false);
+                        await поверненняТоварівВідКлієнта_Objest.Товари_TablePart.Save(false);
 
                         Program.GeneralForm?.CreateNotebookPage($"{поверненняТоварівВідКлієнта_Objest.Назва}", () =>
                         {
@@ -331,7 +331,7 @@ namespace StorageAndTrade
             }
         }
 
-        void OnNewDocNaOsnovi_ЗбіркаТоварівНаСкладі(object? sender, EventArgs args)
+        async void OnNewDocNaOsnovi_ЗбіркаТоварівНаСкладі(object? sender, EventArgs args)
         {
             if (TreeViewGrid.Selection.CountSelectedRows() != 0)
             {
@@ -359,7 +359,7 @@ namespace StorageAndTrade
                     збіркаТоварівНаСкладі_Objest.Основа = реалізаціяТоварівТаПослуг_Objest.GetBasis();
                     збіркаТоварівНаСкладі_Objest.ДокументРеалізації = реалізаціяТоварівТаПослуг_Pointer;
 
-                    if (збіркаТоварівНаСкладі_Objest.Save())
+                    if (await збіркаТоварівНаСкладі_Objest.Save())
                     {
                         //Товари
                         foreach (РеалізаціяТоварівТаПослуг_Товари_TablePart.Record record_реалізаціяТоварівТаПослуг in реалізаціяТоварівТаПослуг_Objest.Товари_TablePart.Records)
@@ -375,7 +375,7 @@ namespace StorageAndTrade
                             record.Кількість = record_реалізаціяТоварівТаПослуг.Кількість;
                         }
 
-                        збіркаТоварівНаСкладі_Objest.Товари_TablePart.Save(false);
+                        await збіркаТоварівНаСкладі_Objest.Товари_TablePart.Save(false);
 
                         Program.GeneralForm?.CreateNotebookPage($"{збіркаТоварівНаСкладі_Objest.Назва}", () =>
                         {

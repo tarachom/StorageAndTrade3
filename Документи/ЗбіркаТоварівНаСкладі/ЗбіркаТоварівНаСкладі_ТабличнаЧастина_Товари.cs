@@ -244,7 +244,7 @@ namespace StorageAndTrade
             }
         }
 
-        public override void SaveRecords()
+        public override async ValueTask SaveRecords()
         {
             if (ЗбіркаТоварівНаСкладі_Objest != null)
             {
@@ -270,7 +270,7 @@ namespace StorageAndTrade
                     ЗбіркаТоварівНаСкладі_Objest.Товари_TablePart.Records.Add(record);
                 }
 
-                ЗбіркаТоварівНаСкладі_Objest.Товари_TablePart.Save(true);
+                await ЗбіркаТоварівНаСкладі_Objest.Товари_TablePart.Save(true);
 
                 LoadRecords();
             }

@@ -270,7 +270,7 @@ namespace StorageAndTrade
             }
         }
 
-        public override void SaveRecords()
+        public override async ValueTask SaveRecords()
         {
             if (ЗамовленняПостачальнику_Objest != null)
             {
@@ -298,7 +298,7 @@ namespace StorageAndTrade
                     ЗамовленняПостачальнику_Objest.Товари_TablePart.Records.Add(record);
                 }
 
-                ЗамовленняПостачальнику_Objest.Товари_TablePart.Save(true);
+              await  ЗамовленняПостачальнику_Objest.Товари_TablePart.Save(true);
 
                 LoadRecords();
             }

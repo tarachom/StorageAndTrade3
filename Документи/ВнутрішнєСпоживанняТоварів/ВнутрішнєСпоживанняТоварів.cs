@@ -118,23 +118,23 @@ namespace StorageAndTrade
             }
         }
 
-        protected override void SetDeletionLabel(UnigueID unigueID)
+        protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             ВнутрішнєСпоживанняТоварів_Objest ВнутрішнєСпоживанняТоварів_Objest = new ВнутрішнєСпоживанняТоварів_Objest();
             if (ВнутрішнєСпоживанняТоварів_Objest.Read(unigueID))
-                ВнутрішнєСпоживанняТоварів_Objest.SetDeletionLabel(!ВнутрішнєСпоживанняТоварів_Objest.DeletionLabel);
+                await ВнутрішнєСпоживанняТоварів_Objest.SetDeletionLabel(!ВнутрішнєСпоживанняТоварів_Objest.DeletionLabel);
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
         }
 
-        protected override UnigueID? Copy(UnigueID unigueID)
+        protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
             ВнутрішнєСпоживанняТоварів_Objest ВнутрішнєСпоживанняТоварів_Objest = new ВнутрішнєСпоживанняТоварів_Objest();
             if (ВнутрішнєСпоживанняТоварів_Objest.Read(unigueID))
             {
                 ВнутрішнєСпоживанняТоварів_Objest ВнутрішнєСпоживанняТоварів_Objest_Новий = ВнутрішнєСпоживанняТоварів_Objest.Copy(true);
-                ВнутрішнєСпоживанняТоварів_Objest_Новий.Save();
-                ВнутрішнєСпоживанняТоварів_Objest_Новий.Товари_TablePart.Save(true);
+                await ВнутрішнєСпоживанняТоварів_Objest_Новий.Save();
+                await ВнутрішнєСпоживанняТоварів_Objest_Новий.Товари_TablePart.Save(true);
 
                 return ВнутрішнєСпоживанняТоварів_Objest_Новий.UnigueID;
             }
@@ -151,7 +151,7 @@ namespace StorageAndTrade
             LoadRecords();
         }
 
-        protected override void SpendTheDocument(UnigueID unigueID, bool spendDoc)
+        protected override async ValueTask SpendTheDocument(UnigueID unigueID, bool spendDoc)
         {
             ВнутрішнєСпоживанняТоварів_Pointer ВнутрішнєСпоживанняТоварів_Pointer = new ВнутрішнєСпоживанняТоварів_Pointer(unigueID);
             ВнутрішнєСпоживанняТоварів_Objest? ВнутрішнєСпоживанняТоварів_Objest = ВнутрішнєСпоживанняТоварів_Pointer.GetDocumentObject(true);
@@ -159,11 +159,11 @@ namespace StorageAndTrade
 
             if (spendDoc)
             {
-                if (!ВнутрішнєСпоживанняТоварів_Objest.SpendTheDocument(ВнутрішнєСпоживанняТоварів_Objest.ДатаДок))
+                if (!await ВнутрішнєСпоживанняТоварів_Objest.SpendTheDocument(ВнутрішнєСпоживанняТоварів_Objest.ДатаДок))
                     ФункціїДляПовідомлень.ВідкритиТермінал();
             }
             else
-                ВнутрішнєСпоживанняТоварів_Objest.ClearSpendTheDocument();
+                await ВнутрішнєСпоживанняТоварів_Objest.ClearSpendTheDocument();
         }
 
         protected override DocumentPointer? ReportSpendTheDocument(UnigueID unigueID)

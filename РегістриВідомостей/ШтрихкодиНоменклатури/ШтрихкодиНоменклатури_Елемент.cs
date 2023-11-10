@@ -102,11 +102,11 @@ namespace StorageAndTrade
 
         #endregion
 
-        protected override void Save()
+        protected override async void Save()
         {
             try
             {
-                ШтрихкодиНоменклатури_Objest.Save();
+                await ШтрихкодиНоменклатури_Objest.Save();
             }
             catch (Exception ex)
             {

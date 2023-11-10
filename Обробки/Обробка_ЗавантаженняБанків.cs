@@ -92,7 +92,7 @@ namespace StorageAndTrade
             thread.Start();
         }
 
-        void DownloadExCurr()
+        async void DownloadExCurr()
         {
             ButtonSensitive(false);
 
@@ -231,11 +231,11 @@ namespace StorageAndTrade
                         банки_Objest.Статус = Статус;
                         банки_Objest.ДатаЗапису = ДатаЗапису;
 
-                        банки_Objest.Save();
+                        await банки_Objest.Save();
 
                         //Зняти помітку на видалення
                         if (банки_Objest.DeletionLabel)
-                            банки_Objest.SetDeletionLabel(false);
+                            await банки_Objest.SetDeletionLabel(false);
                     }
                 }
             }

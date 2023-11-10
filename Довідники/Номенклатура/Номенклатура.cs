@@ -85,7 +85,7 @@ namespace StorageAndTrade
                 WidthRequest = 500,
                 CallBack_RowActivated = LoadRecords_TreeCallBack
             };
-            
+
             HPanedTable.Pack2(ДеревоПапок, false, true);
 
             TreeViewGrid.Model = ТабличніСписки.Номенклатура_Записи.Store;
@@ -194,23 +194,23 @@ namespace StorageAndTrade
             }
         }
 
-        protected override void SetDeletionLabel(UnigueID unigueID)
+        protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             Номенклатура_Objest Номенклатура_Objest = new Номенклатура_Objest();
             if (Номенклатура_Objest.Read(unigueID))
-                Номенклатура_Objest.SetDeletionLabel(!Номенклатура_Objest.DeletionLabel);
+                await Номенклатура_Objest.SetDeletionLabel(!Номенклатура_Objest.DeletionLabel);
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
         }
 
-        protected override UnigueID? Copy(UnigueID unigueID)
+        protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
             Номенклатура_Objest Номенклатура_Objest = new Номенклатура_Objest();
             if (Номенклатура_Objest.Read(unigueID))
             {
                 Номенклатура_Objest Номенклатура_Objest_Новий = Номенклатура_Objest.Copy(true);
-                Номенклатура_Objest_Новий.Save();
-                Номенклатура_Objest_Новий.Файли_TablePart.Save(false);
+                await Номенклатура_Objest_Новий.Save();
+                await Номенклатура_Objest_Новий.Файли_TablePart.Save(false);
 
                 return Номенклатура_Objest_Новий.UnigueID;
             }

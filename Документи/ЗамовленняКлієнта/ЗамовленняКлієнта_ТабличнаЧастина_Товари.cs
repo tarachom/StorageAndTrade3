@@ -343,7 +343,7 @@ LIMIT 1
             }
         }
 
-        public override void SaveRecords()
+        public override async ValueTask SaveRecords()
         {
             if (ЗамовленняКлієнта_Objest != null)
             {
@@ -372,7 +372,7 @@ LIMIT 1
                     ЗамовленняКлієнта_Objest.Товари_TablePart.Records.Add(record);
                 }
 
-                ЗамовленняКлієнта_Objest.Товари_TablePart.Save(true);
+                await ЗамовленняКлієнта_Objest.Товари_TablePart.Save(true);
 
                 LoadRecords();
             }

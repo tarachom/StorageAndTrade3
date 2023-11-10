@@ -199,7 +199,7 @@ namespace StorageAndTrade
             }
         }
 
-        public override void SaveRecords()
+        public override async ValueTask SaveRecords()
         {
             if (АктВиконанихРобіт_Objest != null)
             {
@@ -223,7 +223,7 @@ namespace StorageAndTrade
                     АктВиконанихРобіт_Objest.Послуги_TablePart.Records.Add(record);
                 }
 
-                АктВиконанихРобіт_Objest.Послуги_TablePart.Save(true);
+                await АктВиконанихРобіт_Objest.Послуги_TablePart.Save(true);
 
                 LoadRecords();
             }

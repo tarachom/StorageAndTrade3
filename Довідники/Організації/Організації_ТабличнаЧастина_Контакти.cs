@@ -118,7 +118,7 @@ namespace StorageAndTrade
             }
         }
 
-        public void SaveRecords()
+        public async ValueTask SaveRecords()
         {
             if (Організації_Objest != null)
             {
@@ -154,7 +154,7 @@ namespace StorageAndTrade
                     }
                     while (Store.IterNext(ref iter));
 
-                Організації_Objest.Контакти_TablePart.Save(true);
+                await Організації_Objest.Контакти_TablePart.Save(true);
             }
         }
 

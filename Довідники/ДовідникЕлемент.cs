@@ -197,17 +197,20 @@ namespace StorageAndTrade
         /// Функція обробки перед збереження та після збереження
         /// </summary>
         /// <param name="closePage"></param>
-        void BeforeAndAfterSave(bool closePage = false)
+        async void BeforeAndAfterSave(bool closePage = false)
         {
             GetValue();
 
-            Save();
+            await Save();
 
             if (CallBack_OnSelectPointer != null && UnigueID != null)
                 CallBack_OnSelectPointer.Invoke(UnigueID);
 
             if (CallBack_LoadRecords != null)
+            {
+                Console.WriteLine( "1" + UnigueID);
                 CallBack_LoadRecords.Invoke(UnigueID);
+            }
 
             if (closePage)
                 Program.GeneralForm?.CloseNotebookPageToCode(this.Name);
@@ -218,7 +221,7 @@ namespace StorageAndTrade
         /// <summary>
         /// Збереження
         /// </summary>
-        protected virtual void Save() { }
+        protected virtual async ValueTask Save() { }
 
         /// <summary>
         /// Записати повідомлення про помилку і вивести меседж

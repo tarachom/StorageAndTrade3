@@ -213,7 +213,7 @@ namespace StorageAndTrade
             }
         }
 
-        public override void SaveRecords()
+        public override async ValueTask SaveRecords()
         {
             if (ВстановленняЦінНоменклатури_Objest != null)
             {
@@ -237,7 +237,7 @@ namespace StorageAndTrade
                     ВстановленняЦінНоменклатури_Objest.Товари_TablePart.Records.Add(record);
                 }
 
-                ВстановленняЦінНоменклатури_Objest.Товари_TablePart.Save(true);
+                await ВстановленняЦінНоменклатури_Objest.Товари_TablePart.Save(true);
 
                 LoadRecords();
             }

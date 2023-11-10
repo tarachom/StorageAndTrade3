@@ -87,11 +87,11 @@ namespace StorageAndTrade
 
         #endregion
 
-        protected override void Save()
+        protected override async void Save()
         {
             try
             {
-                КурсиВалют_Objest.Save();
+                await КурсиВалют_Objest.Save();
             }
             catch (Exception ex)
             {

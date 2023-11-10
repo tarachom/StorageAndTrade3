@@ -119,18 +119,18 @@ namespace StorageAndTrade
 
         #endregion
 
-        protected override void Save()
+        protected override async ValueTask Save()
         {
             try
             {
-                Склади_Objest.Save();
+                await Склади_Objest.Save();
             }
             catch (Exception ex)
             {
                 MsgError(ex);
             }
 
-            Контакти.SaveRecords();
+            await Контакти.SaveRecords();
 
             UnigueID = Склади_Objest.UnigueID;
             Caption = Назва.Text;

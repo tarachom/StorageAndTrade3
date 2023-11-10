@@ -118,22 +118,22 @@ namespace StorageAndTrade
             }
         }
 
-        protected override void SetDeletionLabel(UnigueID unigueID)
+        protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             БанківськіРахункиКонтрагентів_Objest БанківськіРахункиКонтрагентів_Objest = new БанківськіРахункиКонтрагентів_Objest();
             if (БанківськіРахункиКонтрагентів_Objest.Read(unigueID))
-                БанківськіРахункиКонтрагентів_Objest.SetDeletionLabel(!БанківськіРахункиКонтрагентів_Objest.DeletionLabel);
+                await БанківськіРахункиКонтрагентів_Objest.SetDeletionLabel(!БанківськіРахункиКонтрагентів_Objest.DeletionLabel);
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
         }
 
-        protected override UnigueID? Copy(UnigueID unigueID)
+        protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
             БанківськіРахункиКонтрагентів_Objest БанківськіРахункиКонтрагентів_Objest = new БанківськіРахункиКонтрагентів_Objest();
             if (БанківськіРахункиКонтрагентів_Objest.Read(unigueID))
             {
                 БанківськіРахункиКонтрагентів_Objest БанківськіРахункиКонтрагентів_Objest_Новий = БанківськіРахункиКонтрагентів_Objest.Copy(true);
-                БанківськіРахункиКонтрагентів_Objest_Новий.Save();
+                await БанківськіРахункиКонтрагентів_Objest_Новий.Save();
 
                 return БанківськіРахункиКонтрагентів_Objest_Новий.UnigueID;
             }

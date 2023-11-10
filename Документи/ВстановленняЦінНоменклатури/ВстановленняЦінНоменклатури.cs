@@ -118,23 +118,23 @@ namespace StorageAndTrade
             }
         }
 
-        protected override void SetDeletionLabel(UnigueID unigueID)
+        protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             ВстановленняЦінНоменклатури_Objest ВстановленняЦінНоменклатури_Objest = new ВстановленняЦінНоменклатури_Objest();
             if (ВстановленняЦінНоменклатури_Objest.Read(unigueID))
-                ВстановленняЦінНоменклатури_Objest.SetDeletionLabel(!ВстановленняЦінНоменклатури_Objest.DeletionLabel);
+                await ВстановленняЦінНоменклатури_Objest.SetDeletionLabel(!ВстановленняЦінНоменклатури_Objest.DeletionLabel);
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
         }
 
-        protected override UnigueID? Copy(UnigueID unigueID)
+        protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
             ВстановленняЦінНоменклатури_Objest ВстановленняЦінНоменклатури_Objest = new ВстановленняЦінНоменклатури_Objest();
             if (ВстановленняЦінНоменклатури_Objest.Read(unigueID))
             {
                 ВстановленняЦінНоменклатури_Objest ВстановленняЦінНоменклатури_Objest_Новий = ВстановленняЦінНоменклатури_Objest.Copy(true);
-                ВстановленняЦінНоменклатури_Objest_Новий.Save();
-                ВстановленняЦінНоменклатури_Objest_Новий.Товари_TablePart.Save(true);
+                await ВстановленняЦінНоменклатури_Objest_Новий.Save();
+                await ВстановленняЦінНоменклатури_Objest_Новий.Товари_TablePart.Save(true);
 
                 return ВстановленняЦінНоменклатури_Objest_Новий.UnigueID;
             }
@@ -151,7 +151,7 @@ namespace StorageAndTrade
             LoadRecords();
         }
 
-        protected override void SpendTheDocument(UnigueID unigueID, bool spendDoc)
+        protected override async ValueTask SpendTheDocument(UnigueID unigueID, bool spendDoc)
         {
             ВстановленняЦінНоменклатури_Pointer ВстановленняЦінНоменклатури_Pointer = new ВстановленняЦінНоменклатури_Pointer(unigueID);
             ВстановленняЦінНоменклатури_Objest? ВстановленняЦінНоменклатури_Objest = ВстановленняЦінНоменклатури_Pointer.GetDocumentObject(true);
@@ -159,11 +159,11 @@ namespace StorageAndTrade
 
             if (spendDoc)
             {
-                if (!ВстановленняЦінНоменклатури_Objest.SpendTheDocument(ВстановленняЦінНоменклатури_Objest.ДатаДок))
+                if (!await ВстановленняЦінНоменклатури_Objest.SpendTheDocument(ВстановленняЦінНоменклатури_Objest.ДатаДок))
                     ФункціїДляПовідомлень.ВідкритиТермінал();
             }
             else
-                ВстановленняЦінНоменклатури_Objest.ClearSpendTheDocument();
+                await ВстановленняЦінНоменклатури_Objest.ClearSpendTheDocument();
         }
 
         protected override DocumentPointer? ReportSpendTheDocument(UnigueID unigueID)

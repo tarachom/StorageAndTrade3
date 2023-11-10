@@ -118,23 +118,23 @@ namespace StorageAndTrade
             }
         }
 
-        protected override void SetDeletionLabel(UnigueID unigueID)
+        protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             РозміщенняТоварівНаСкладі_Objest РозміщенняТоварівНаСкладі_Objest = new РозміщенняТоварівНаСкладі_Objest();
             if (РозміщенняТоварівНаСкладі_Objest.Read(unigueID))
-                РозміщенняТоварівНаСкладі_Objest.SetDeletionLabel(!РозміщенняТоварівНаСкладі_Objest.DeletionLabel);
+                await РозміщенняТоварівНаСкладі_Objest.SetDeletionLabel(!РозміщенняТоварівНаСкладі_Objest.DeletionLabel);
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
         }
 
-        protected override UnigueID? Copy(UnigueID unigueID)
+        protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
             РозміщенняТоварівНаСкладі_Objest РозміщенняТоварівНаСкладі_Objest = new РозміщенняТоварівНаСкладі_Objest();
             if (РозміщенняТоварівНаСкладі_Objest.Read(unigueID))
             {
                 РозміщенняТоварівНаСкладі_Objest РозміщенняТоварівНаСкладі_Objest_Новий = РозміщенняТоварівНаСкладі_Objest.Copy(true);
-                РозміщенняТоварівНаСкладі_Objest_Новий.Save();
-                РозміщенняТоварівНаСкладі_Objest_Новий.Товари_TablePart.Save(true);
+                await РозміщенняТоварівНаСкладі_Objest_Новий.Save();
+                await РозміщенняТоварівНаСкладі_Objest_Новий.Товари_TablePart.Save(true);
 
                 return РозміщенняТоварівНаСкладі_Objest_Новий.UnigueID;
             }
@@ -151,7 +151,7 @@ namespace StorageAndTrade
             LoadRecords();
         }
 
-        protected override void SpendTheDocument(UnigueID unigueID, bool spendDoc)
+        protected override async ValueTask SpendTheDocument(UnigueID unigueID, bool spendDoc)
         {
             РозміщенняТоварівНаСкладі_Pointer РозміщенняТоварівНаСкладі_Pointer = new РозміщенняТоварівНаСкладі_Pointer(unigueID);
             РозміщенняТоварівНаСкладі_Objest? РозміщенняТоварівНаСкладі_Objest = РозміщенняТоварівНаСкладі_Pointer.GetDocumentObject(true);
@@ -159,11 +159,11 @@ namespace StorageAndTrade
 
             if (spendDoc)
             {
-                if (!РозміщенняТоварівНаСкладі_Objest.SpendTheDocument(РозміщенняТоварівНаСкладі_Objest.ДатаДок))
+                if (!await РозміщенняТоварівНаСкладі_Objest.SpendTheDocument(РозміщенняТоварівНаСкладі_Objest.ДатаДок))
                     ФункціїДляПовідомлень.ВідкритиТермінал();
             }
             else
-                РозміщенняТоварівНаСкладі_Objest.ClearSpendTheDocument();
+                await РозміщенняТоварівНаСкладі_Objest.ClearSpendTheDocument();
         }
 
         protected override DocumentPointer? ReportSpendTheDocument(UnigueID unigueID)

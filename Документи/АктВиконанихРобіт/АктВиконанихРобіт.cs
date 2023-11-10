@@ -120,23 +120,23 @@ namespace StorageAndTrade
             }
         }
 
-        protected override void SetDeletionLabel(UnigueID unigueID)
+        protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             АктВиконанихРобіт_Objest АктВиконанихРобіт_Objest = new АктВиконанихРобіт_Objest();
             if (АктВиконанихРобіт_Objest.Read(unigueID))
-                АктВиконанихРобіт_Objest.SetDeletionLabel(!АктВиконанихРобіт_Objest.DeletionLabel);
+                await АктВиконанихРобіт_Objest.SetDeletionLabel(!АктВиконанихРобіт_Objest.DeletionLabel);
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
         }
 
-        protected override UnigueID? Copy(UnigueID unigueID)
+        protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
             АктВиконанихРобіт_Objest АктВиконанихРобіт_Objest = new АктВиконанихРобіт_Objest();
             if (АктВиконанихРобіт_Objest.Read(unigueID))
             {
                 АктВиконанихРобіт_Objest АктВиконанихРобіт_Objest_Новий = АктВиконанихРобіт_Objest.Copy(true);
-                АктВиконанихРобіт_Objest_Новий.Save();
-                АктВиконанихРобіт_Objest_Новий.Послуги_TablePart.Save(true);
+                await АктВиконанихРобіт_Objest_Новий.Save();
+                await АктВиконанихРобіт_Objest_Новий.Послуги_TablePart.Save(true);
 
                 return АктВиконанихРобіт_Objest_Новий.UnigueID;
             }
@@ -153,7 +153,7 @@ namespace StorageAndTrade
             LoadRecords();
         }
 
-        protected override void SpendTheDocument(UnigueID unigueID, bool spendDoc)
+        protected override async ValueTask SpendTheDocument(UnigueID unigueID, bool spendDoc)
         {
             АктВиконанихРобіт_Pointer АктВиконанихРобіт_Pointer = new АктВиконанихРобіт_Pointer(unigueID);
             АктВиконанихРобіт_Objest? АктВиконанихРобіт_Objest = АктВиконанихРобіт_Pointer.GetDocumentObject(true);
@@ -161,11 +161,11 @@ namespace StorageAndTrade
 
             if (spendDoc)
             {
-                if (!АктВиконанихРобіт_Objest.SpendTheDocument(АктВиконанихРобіт_Objest.ДатаДок))
+                if (!await АктВиконанихРобіт_Objest.SpendTheDocument(АктВиконанихРобіт_Objest.ДатаДок))
                     ФункціїДляПовідомлень.ВідкритиТермінал();
             }
             else
-                АктВиконанихРобіт_Objest.ClearSpendTheDocument();
+                await АктВиконанихРобіт_Objest.ClearSpendTheDocument();
         }
 
         protected override DocumentPointer? ReportSpendTheDocument(UnigueID unigueID)
@@ -196,7 +196,7 @@ namespace StorageAndTrade
             return Menu;
         }
 
-        void OnNewDocNaOsnovi_KasovyiOrder(object? sender, EventArgs args)
+        async void OnNewDocNaOsnovi_KasovyiOrder(object? sender, EventArgs args)
         {
             if (TreeViewGrid.Selection.CountSelectedRows() != 0)
             {
@@ -227,7 +227,7 @@ namespace StorageAndTrade
                     прихіднийКасовийОрдер_Новий.Основа = актВиконанихРобіт_Objest.GetBasis();
                     прихіднийКасовийОрдер_Новий.СумаДокументу = актВиконанихРобіт_Objest.СумаДокументу;
 
-                    if (прихіднийКасовийОрдер_Новий.Save())
+                    if (await прихіднийКасовийОрдер_Новий.Save())
                     {
                         Program.GeneralForm?.CreateNotebookPage($"{прихіднийКасовийОрдер_Новий.Назва}", () =>
                         {

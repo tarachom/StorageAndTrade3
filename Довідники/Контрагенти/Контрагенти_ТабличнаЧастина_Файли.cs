@@ -202,7 +202,7 @@ namespace StorageAndTrade
             }
         }
 
-        public void SaveRecords()
+        public async ValueTask SaveRecords()
         {
             if (Контрагенти_Objest != null)
             {
@@ -217,7 +217,7 @@ namespace StorageAndTrade
                     record.Файл = запис.Файл;
                 }
 
-                Контрагенти_Objest.Файли_TablePart.Save(true);
+                await Контрагенти_Objest.Файли_TablePart.Save(true);
             }
         }
 

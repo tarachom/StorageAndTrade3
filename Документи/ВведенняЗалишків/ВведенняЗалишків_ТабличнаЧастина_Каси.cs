@@ -166,7 +166,7 @@ namespace StorageAndTrade
             }
         }
 
-        public override void SaveRecords()
+        public override async ValueTask SaveRecords()
         {
             if (ВведенняЗалишків_Objest != null)
             {
@@ -187,7 +187,7 @@ namespace StorageAndTrade
                     ВведенняЗалишків_Objest.Каси_TablePart.Records.Add(record);
                 }
 
-                ВведенняЗалишків_Objest.Каси_TablePart.Save(true);
+                await ВведенняЗалишків_Objest.Каси_TablePart.Save(true);
 
                 LoadRecords();
             }

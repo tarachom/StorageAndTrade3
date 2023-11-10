@@ -203,11 +203,11 @@ namespace StorageAndTrade
 
         #endregion
 
-        protected override void Save()
+        protected override async ValueTask Save()
         {
             try
             {
-                Файли_Objest.Save();
+                await Файли_Objest.Save();
             }
             catch (Exception ex)
             {

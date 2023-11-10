@@ -185,7 +185,7 @@ namespace StorageAndTrade
             }
         }
 
-        public override void SaveRecords()
+        public override async ValueTask SaveRecords()
         {
             if (РозміщенняНоменклатуриПоКоміркам_Objest != null)
             {
@@ -207,7 +207,7 @@ namespace StorageAndTrade
                     РозміщенняНоменклатуриПоКоміркам_Objest.Товари_TablePart.Records.Add(record);
                 }
 
-                РозміщенняНоменклатуриПоКоміркам_Objest.Товари_TablePart.Save(true);
+                await РозміщенняНоменклатуриПоКоміркам_Objest.Товари_TablePart.Save(true);
 
                 LoadRecords();
             }

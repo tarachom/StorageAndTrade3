@@ -137,7 +137,7 @@ namespace StorageAndTrade
 
         protected virtual void SetDeletionLabel(UnigueID unigueID) { }
 
-        protected virtual UnigueID? Copy(UnigueID unigueID) { return null; }
+        protected virtual async Task<UnigueID?> Copy(UnigueID unigueID) { return null; }
 
         #endregion
 
@@ -299,7 +299,7 @@ namespace StorageAndTrade
             }
         }
 
-        void OnCopyClick(object? sender, EventArgs args)
+        async void OnCopyClick(object? sender, EventArgs args)
         {
             if (TreeViewGrid.Selection.CountSelectedRows() != 0)
             {
@@ -315,7 +315,7 @@ namespace StorageAndTrade
                     if (unigueID.IsEmpty())
                         return;
 
-                    UnigueID? newUnigueID = Copy(unigueID);
+                    UnigueID? newUnigueID = await Copy(unigueID);
 
                     if (newUnigueID != null)
                         DirectoryPointerItem = newUnigueID;

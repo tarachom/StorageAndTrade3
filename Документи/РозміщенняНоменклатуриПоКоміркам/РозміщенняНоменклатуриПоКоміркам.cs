@@ -118,23 +118,23 @@ namespace StorageAndTrade
             }
         }
 
-        protected override void SetDeletionLabel(UnigueID unigueID)
+        protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             РозміщенняНоменклатуриПоКоміркам_Objest РозміщенняНоменклатуриПоКоміркам_Objest = new РозміщенняНоменклатуриПоКоміркам_Objest();
             if (РозміщенняНоменклатуриПоКоміркам_Objest.Read(unigueID))
-                РозміщенняНоменклатуриПоКоміркам_Objest.SetDeletionLabel(!РозміщенняНоменклатуриПоКоміркам_Objest.DeletionLabel);
+                await РозміщенняНоменклатуриПоКоміркам_Objest.SetDeletionLabel(!РозміщенняНоменклатуриПоКоміркам_Objest.DeletionLabel);
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
         }
 
-        protected override UnigueID? Copy(UnigueID unigueID)
+        protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
             РозміщенняНоменклатуриПоКоміркам_Objest РозміщенняНоменклатуриПоКоміркам_Objest = new РозміщенняНоменклатуриПоКоміркам_Objest();
             if (РозміщенняНоменклатуриПоКоміркам_Objest.Read(unigueID))
             {
                 РозміщенняНоменклатуриПоКоміркам_Objest РозміщенняНоменклатуриПоКоміркам_Objest_Новий = РозміщенняНоменклатуриПоКоміркам_Objest.Copy(true);
-                РозміщенняНоменклатуриПоКоміркам_Objest_Новий.Save();
-                РозміщенняНоменклатуриПоКоміркам_Objest_Новий.Товари_TablePart.Save(true);
+                await РозміщенняНоменклатуриПоКоміркам_Objest_Новий.Save();
+                await РозміщенняНоменклатуриПоКоміркам_Objest_Новий.Товари_TablePart.Save(true);
 
                 return РозміщенняНоменклатуриПоКоміркам_Objest_Новий.UnigueID;
             }
@@ -151,7 +151,7 @@ namespace StorageAndTrade
             LoadRecords();
         }
 
-        protected override void SpendTheDocument(UnigueID unigueID, bool spendDoc)
+        protected override async ValueTask SpendTheDocument(UnigueID unigueID, bool spendDoc)
         {
             РозміщенняНоменклатуриПоКоміркам_Pointer РозміщенняНоменклатуриПоКоміркам_Pointer = new РозміщенняНоменклатуриПоКоміркам_Pointer(unigueID);
             РозміщенняНоменклатуриПоКоміркам_Objest? РозміщенняНоменклатуриПоКоміркам_Objest = РозміщенняНоменклатуриПоКоміркам_Pointer.GetDocumentObject(true);
@@ -159,11 +159,11 @@ namespace StorageAndTrade
 
             if (spendDoc)
             {
-                if (!РозміщенняНоменклатуриПоКоміркам_Objest.SpendTheDocument(РозміщенняНоменклатуриПоКоміркам_Objest.ДатаДок))
+                if (!await РозміщенняНоменклатуриПоКоміркам_Objest.SpendTheDocument(РозміщенняНоменклатуриПоКоміркам_Objest.ДатаДок))
                     ФункціїДляПовідомлень.ВідкритиТермінал();
             }
             else
-                РозміщенняНоменклатуриПоКоміркам_Objest.ClearSpendTheDocument();
+                await РозміщенняНоменклатуриПоКоміркам_Objest.ClearSpendTheDocument();
         }
 
         protected override DocumentPointer? ReportSpendTheDocument(UnigueID unigueID)

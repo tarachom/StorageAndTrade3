@@ -272,7 +272,7 @@ namespace StorageAndTrade
             }
         }
 
-        public override void SaveRecords()
+        public override async ValueTask SaveRecords()
         {
             if (ВнутрішнєСпоживанняТоварів_Objest != null)
             {
@@ -300,7 +300,7 @@ namespace StorageAndTrade
                     ВнутрішнєСпоживанняТоварів_Objest.Товари_TablePart.Records.Add(record);
                 }
 
-                ВнутрішнєСпоживанняТоварів_Objest.Товари_TablePart.Save(true);
+                await ВнутрішнєСпоживанняТоварів_Objest.Товари_TablePart.Save(true);
 
                 LoadRecords();
             }

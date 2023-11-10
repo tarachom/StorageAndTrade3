@@ -103,7 +103,7 @@ namespace StorageAndTrade
             thread.Start();
         }
 
-        void DownloadExCurr()
+        async void DownloadExCurr()
         {
             ButtonSensitive(false);
 
@@ -177,7 +177,7 @@ namespace StorageAndTrade
                         валюти_Objest.Назва = НазваВалюти;
                         валюти_Objest.Код_R030 = Код_R030;
                         валюти_Objest.КороткаНазва = Коротко;
-                        валюти_Objest.Save();
+                        await валюти_Objest.Save();
 
                         валюти_Pointer = валюти_Objest.GetDirectoryPointer();
 
@@ -215,7 +215,7 @@ LIMIT 1
                             Курс = Курс
                         };
                         курсиВалют_Objest.New();
-                        курсиВалют_Objest.Save();
+                        await курсиВалют_Objest.Save();
 
                         CreateMessage(TypeMessage.Ok, $"Додано новий курс валюти: {НазваВалюти} - курс {Курс}");
                     }
@@ -227,7 +227,7 @@ LIMIT 1
                         if (курсиВалют_Objest.Read(new UnigueID(Рядок["uid"])))
                         {
                             курсиВалют_Objest.Курс = Курс;
-                            курсиВалют_Objest.Save();
+                            await курсиВалют_Objest.Save();
 
                             CreateMessage(TypeMessage.Ok, $"Перезаписано курс валюти: {НазваВалюти} - курс {Курс}");
                         }

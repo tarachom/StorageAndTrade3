@@ -33,6 +33,8 @@ namespace StorageAndTrade
 
         ComboBoxText comboBoxAllUsers = new ComboBoxText() { WidthRequest = 200 };
         Entry passwordUser = new Entry() { WidthRequest = 200 };
+        Button bLogIn = new Button("Авторизація") { Sensitive = false };
+        Button bCancel = new Button("Відмінити");
 
         public FormLogIn() : base("Авторизація")
         {
@@ -56,10 +58,7 @@ namespace StorageAndTrade
             passwordUser.KeyReleaseEvent += OnKeyReleaseEvent;
             vBox.PackStart(hBoxPassword, false, false, 5);
 
-            Button bLogIn = new Button("Авторизація");
             bLogIn.Clicked += OnLogIn;
-
-            Button bCancel = new Button("Відмінити");
             bCancel.Clicked += OnCancel;
 
             HBox hBoxButton = new HBox();
@@ -71,24 +70,25 @@ namespace StorageAndTrade
             ShowAll();
         }
 
-        public void SetValue()
+        public async void SetValue()
         {
             if (Config.Kernel != null)
             {
-                Dictionary<string, string> allUsers = Config.Kernel.DataBase.SpetialTableUsersShortSelect();
+                Dictionary<string, string> allUsers = await Config.Kernel.DataBase.SpetialTableUsersShortSelect();
 
                 foreach (KeyValuePair<string, string> user in allUsers)
                     comboBoxAllUsers.Append(user.Key, user.Value);
 
                 comboBoxAllUsers.Active = 0;
+                bLogIn.Sensitive = true;
             }
         }
 
-        void OnLogIn(object? sender, EventArgs args)
+        async void OnLogIn(object? sender, EventArgs args)
         {
             if (Config.Kernel != null)
             {
-                if (Config.Kernel.UserLogIn(comboBoxAllUsers.ActiveId, passwordUser.Text))
+                if (await Config.Kernel.UserLogIn(comboBoxAllUsers.ActiveId, passwordUser.Text))
                 {
                     ModalResult = ResponseType.Ok;
                     ThisClose();

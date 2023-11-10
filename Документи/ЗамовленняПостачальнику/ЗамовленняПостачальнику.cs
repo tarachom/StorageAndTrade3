@@ -120,23 +120,23 @@ namespace StorageAndTrade
             }
         }
 
-        protected override void SetDeletionLabel(UnigueID unigueID)
+        protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             ЗамовленняПостачальнику_Objest ЗамовленняПостачальнику_Objest = new ЗамовленняПостачальнику_Objest();
             if (ЗамовленняПостачальнику_Objest.Read(unigueID))
-                ЗамовленняПостачальнику_Objest.SetDeletionLabel(!ЗамовленняПостачальнику_Objest.DeletionLabel);
+                await ЗамовленняПостачальнику_Objest.SetDeletionLabel(!ЗамовленняПостачальнику_Objest.DeletionLabel);
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
         }
 
-        protected override UnigueID? Copy(UnigueID unigueID)
+        protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
             ЗамовленняПостачальнику_Objest ЗамовленняПостачальнику_Objest = new ЗамовленняПостачальнику_Objest();
             if (ЗамовленняПостачальнику_Objest.Read(unigueID))
             {
                 ЗамовленняПостачальнику_Objest ЗамовленняПостачальнику_Objest_Новий = ЗамовленняПостачальнику_Objest.Copy(true);
-                ЗамовленняПостачальнику_Objest_Новий.Save();
-                ЗамовленняПостачальнику_Objest_Новий.Товари_TablePart.Save(true);
+                await ЗамовленняПостачальнику_Objest_Новий.Save();
+                await ЗамовленняПостачальнику_Objest_Новий.Товари_TablePart.Save(true);
 
                 return ЗамовленняПостачальнику_Objest_Новий.UnigueID;
             }
@@ -153,7 +153,7 @@ namespace StorageAndTrade
             LoadRecords();
         }
 
-        protected override void SpendTheDocument(UnigueID unigueID, bool spendDoc)
+        protected override async ValueTask SpendTheDocument(UnigueID unigueID, bool spendDoc)
         {
             ЗамовленняПостачальнику_Pointer ЗамовленняПостачальнику_Pointer = new ЗамовленняПостачальнику_Pointer(unigueID);
             ЗамовленняПостачальнику_Objest? ЗамовленняПостачальнику_Objest = ЗамовленняПостачальнику_Pointer.GetDocumentObject(true);
@@ -161,11 +161,11 @@ namespace StorageAndTrade
 
             if (spendDoc)
             {
-                if (!ЗамовленняПостачальнику_Objest.SpendTheDocument(ЗамовленняПостачальнику_Objest.ДатаДок))
+                if (!await ЗамовленняПостачальнику_Objest.SpendTheDocument(ЗамовленняПостачальнику_Objest.ДатаДок))
                     ФункціїДляПовідомлень.ВідкритиТермінал();
             }
             else
-                ЗамовленняПостачальнику_Objest.ClearSpendTheDocument();
+                await ЗамовленняПостачальнику_Objest.ClearSpendTheDocument();
         }
 
         protected override DocumentPointer? ReportSpendTheDocument(UnigueID unigueID)
@@ -200,7 +200,7 @@ namespace StorageAndTrade
             return Menu;
         }
 
-        void OnNewDocNaOsnovi_PryhydnaNakladna(object? sender, EventArgs args)
+        async void OnNewDocNaOsnovi_PryhydnaNakladna(object? sender, EventArgs args)
         {
             if (TreeViewGrid.Selection.CountSelectedRows() != 0)
             {
@@ -234,7 +234,7 @@ namespace StorageAndTrade
                     поступленняТоварівТаПослуг_Новий.ЗамовленняПостачальнику = замовленняПостачальнику_Objest.GetDocumentPointer();
                     поступленняТоварівТаПослуг_Новий.Основа = замовленняПостачальнику_Objest.GetBasis();
 
-                    if (поступленняТоварівТаПослуг_Новий.Save())
+                    if (await поступленняТоварівТаПослуг_Новий.Save())
                     {
                         //Товари
                         foreach (ЗамовленняПостачальнику_Товари_TablePart.Record record_замовлення in замовленняПостачальнику_Objest.Товари_TablePart.Records)
@@ -254,7 +254,7 @@ namespace StorageAndTrade
                             record_поступлення.Склад = замовленняПостачальнику_Objest.Склад;
                         }
 
-                        поступленняТоварівТаПослуг_Новий.Товари_TablePart.Save(false);
+                        await поступленняТоварівТаПослуг_Новий.Товари_TablePart.Save(false);
 
                         Program.GeneralForm?.CreateNotebookPage($"{поступленняТоварівТаПослуг_Новий.Назва}", () =>
                         {
@@ -273,7 +273,7 @@ namespace StorageAndTrade
             }
         }
 
-        void OnNewDocNaOsnovi_KasovyiOrder(object? sender, EventArgs args)
+        async void OnNewDocNaOsnovi_KasovyiOrder(object? sender, EventArgs args)
         {
             if (TreeViewGrid.Selection.CountSelectedRows() != 0)
             {
@@ -304,7 +304,7 @@ namespace StorageAndTrade
                     розхіднийКасовийОрдер_Новий.СумаДокументу = замовленняПостачальнику_Objest.СумаДокументу;
                     розхіднийКасовийОрдер_Новий.Основа = замовленняПостачальнику_Objest.GetBasis();
 
-                    if (розхіднийКасовийОрдер_Новий.Save())
+                    if (await розхіднийКасовийОрдер_Новий.Save())
                     {
                         Program.GeneralForm?.CreateNotebookPage($"{розхіднийКасовийОрдер_Новий.Назва}", () =>
                         {

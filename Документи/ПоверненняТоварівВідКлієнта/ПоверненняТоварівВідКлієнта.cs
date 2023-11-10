@@ -118,23 +118,23 @@ namespace StorageAndTrade
             }
         }
 
-        protected override void SetDeletionLabel(UnigueID unigueID)
+        protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             ПоверненняТоварівВідКлієнта_Objest ПоверненняТоварівВідКлієнта_Objest = new ПоверненняТоварівВідКлієнта_Objest();
             if (ПоверненняТоварівВідКлієнта_Objest.Read(unigueID))
-                ПоверненняТоварівВідКлієнта_Objest.SetDeletionLabel(!ПоверненняТоварівВідКлієнта_Objest.DeletionLabel);
+                await ПоверненняТоварівВідКлієнта_Objest.SetDeletionLabel(!ПоверненняТоварівВідКлієнта_Objest.DeletionLabel);
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
         }
 
-        protected override UnigueID? Copy(UnigueID unigueID)
+        protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
             ПоверненняТоварівВідКлієнта_Objest ПоверненняТоварівВідКлієнта_Objest = new ПоверненняТоварівВідКлієнта_Objest();
             if (ПоверненняТоварівВідКлієнта_Objest.Read(unigueID))
             {
                 ПоверненняТоварівВідКлієнта_Objest ПоверненняТоварівВідКлієнта_Objest_Новий = ПоверненняТоварівВідКлієнта_Objest.Copy(true);
-                ПоверненняТоварівВідКлієнта_Objest_Новий.Save();
-                ПоверненняТоварівВідКлієнта_Objest_Новий.Товари_TablePart.Save(true);
+                await ПоверненняТоварівВідКлієнта_Objest_Новий.Save();
+                await ПоверненняТоварівВідКлієнта_Objest_Новий.Товари_TablePart.Save(true);
 
                 return ПоверненняТоварівВідКлієнта_Objest_Новий.UnigueID;
             }
@@ -151,7 +151,7 @@ namespace StorageAndTrade
             LoadRecords();
         }
 
-        protected override void SpendTheDocument(UnigueID unigueID, bool spendDoc)
+        protected override async ValueTask SpendTheDocument(UnigueID unigueID, bool spendDoc)
         {
             ПоверненняТоварівВідКлієнта_Pointer ПоверненняТоварівВідКлієнта_Pointer = new ПоверненняТоварівВідКлієнта_Pointer(unigueID);
             ПоверненняТоварівВідКлієнта_Objest? ПоверненняТоварівВідКлієнта_Objest = ПоверненняТоварівВідКлієнта_Pointer.GetDocumentObject(true);
@@ -159,11 +159,11 @@ namespace StorageAndTrade
 
             if (spendDoc)
             {
-                if (!ПоверненняТоварівВідКлієнта_Objest.SpendTheDocument(ПоверненняТоварівВідКлієнта_Objest.ДатаДок))
+                if (!await ПоверненняТоварівВідКлієнта_Objest.SpendTheDocument(ПоверненняТоварівВідКлієнта_Objest.ДатаДок))
                     ФункціїДляПовідомлень.ВідкритиТермінал();
             }
             else
-                ПоверненняТоварівВідКлієнта_Objest.ClearSpendTheDocument();
+                await ПоверненняТоварівВідКлієнта_Objest.ClearSpendTheDocument();
         }
 
         protected override DocumentPointer? ReportSpendTheDocument(UnigueID unigueID)

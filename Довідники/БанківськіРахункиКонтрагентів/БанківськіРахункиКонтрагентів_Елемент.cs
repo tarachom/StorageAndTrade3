@@ -76,11 +76,11 @@ namespace StorageAndTrade
 
         #endregion
 
-        protected override void Save()
+        protected override async ValueTask Save()
         {
             try
             {
-                БанківськіРахункиКонтрагентів_Objest.Save();
+                await БанківськіРахункиКонтрагентів_Objest.Save();
             }
             catch (Exception ex)
             {

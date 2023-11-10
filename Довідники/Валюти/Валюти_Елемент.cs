@@ -82,11 +82,11 @@ namespace StorageAndTrade
 
         #endregion
 
-        protected override void Save()
+        protected override async ValueTask Save()
         {
             try
             {
-                Валюти_Objest.Save();
+                await Валюти_Objest.Save();
             }
             catch (Exception ex)
             {

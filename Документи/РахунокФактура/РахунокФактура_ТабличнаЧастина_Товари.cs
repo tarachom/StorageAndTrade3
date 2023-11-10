@@ -343,7 +343,7 @@ LIMIT 1
             }
         }
 
-        public override void SaveRecords()
+        public override async ValueTask SaveRecords()
         {
             if (РахунокФактура_Objest != null)
             {
@@ -372,7 +372,7 @@ LIMIT 1
                     РахунокФактура_Objest.Товари_TablePart.Records.Add(record);
                 }
 
-                РахунокФактура_Objest.Товари_TablePart.Save(true);
+                await РахунокФактура_Objest.Товари_TablePart.Save(true);
 
                 LoadRecords();
             }

@@ -64,11 +64,11 @@ namespace StorageAndTrade
 
         #endregion
 
-        protected override void Save()
+        protected override async ValueTask Save()
         {
             try
             {
-                СтруктураПідприємства_Objest.Save();
+                await СтруктураПідприємства_Objest.Save();
             }
             catch (Exception ex)
             {

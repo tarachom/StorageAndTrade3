@@ -651,7 +651,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
                 return false;
         }
         
-        public bool Save()
+        public async Task&lt;bool&gt; Save()
         {
             <xsl:if test="normalize-space(TriggerFunctions/BeforeSave) != ''">
                 <xsl:value-of select="TriggerFunctions/BeforeSave"/><xsl:text>(this)</xsl:text>;
@@ -668,7 +668,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
                 </xsl:when>
               </xsl:choose>;
             </xsl:for-each>
-            bool result = BaseSave();
+            bool result = await BaseSave();
             if (result)
             {
                 <xsl:if test="normalize-space(TriggerFunctions/AfterSave) != ''">
@@ -710,20 +710,20 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
             return copy;
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             <xsl:if test="normalize-space(TriggerFunctions/SetDeletionLabel) != ''">
                 <xsl:value-of select="TriggerFunctions/SetDeletionLabel"/><xsl:text>(this, label);</xsl:text>      
             </xsl:if>
-            base.BaseDeletionLabel(label);
+            await base.BaseDeletionLabel(label);
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
             <xsl:if test="normalize-space(TriggerFunctions/BeforeDelete) != ''">
                 <xsl:value-of select="TriggerFunctions/BeforeDelete"/><xsl:text>(this);</xsl:text>      
             </xsl:if>
-            base.BaseDelete(<xsl:text>new string[] { </xsl:text>
+            await base.BaseDelete(<xsl:text>new string[] { </xsl:text>
             <xsl:for-each select="TabularParts/TablePart">
                <xsl:if test="position() != 1">
                  <xsl:text>, </xsl:text>
@@ -811,7 +811,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
             );
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             <xsl:value-of select="$DirectoryName"/>_Objest? obj = GetDirectoryObject();
             if (obj != null)
@@ -819,7 +819,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
                 <xsl:if test="normalize-space(TriggerFunctions/SetDeletionLabel) != ''">
                     <xsl:value-of select="TriggerFunctions/SetDeletionLabel"/><xsl:text>(obj, label)</xsl:text>;
                 </xsl:if>
-                base.BaseDeletionLabel(label);
+                await base.BaseDeletionLabel(label);
             }
         }
 		
@@ -919,12 +919,12 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
             base.BaseClear();
         }
         
-        public void Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
-            base.BaseBeginTransaction();
+            await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
-                base.BaseDelete(Owner.UnigueID);
+                await base.BaseDelete(Owner.UnigueID);
             
             foreach (Record record in Records)
             {
@@ -944,15 +944,15 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
                     </xsl:choose>
                     <xsl:text>)</xsl:text>;
                 </xsl:for-each>
-                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
                 
-            base.BaseCommitTransaction();
+            await base.BaseCommitTransaction();
         }
         
-        public void Delete()
+        public async ValueTask Delete()
         {
-            base.BaseDelete(Owner.UnigueID);
+            await base.BaseDelete(Owner.UnigueID);
         }
 
         public List&lt;Record&gt; Copy()
@@ -1242,7 +1242,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
                 return false;
         }
         
-        public bool Save()
+        public async Task&lt;bool&gt; Save()
         {
             <xsl:if test="normalize-space(TriggerFunctions/BeforeSave) != ''">
                 <xsl:value-of select="TriggerFunctions/BeforeSave"/><xsl:text>(this)</xsl:text>;
@@ -1259,7 +1259,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
                 </xsl:when>
               </xsl:choose>;
             </xsl:for-each>
-            bool result = BaseSave();
+            bool result = await BaseSave();
             
             if (result)
             {
@@ -1277,28 +1277,28 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
             return result;
         }
 
-        public bool SpendTheDocument(DateTime spendDate)
+        public async ValueTask&lt;bool&gt; SpendTheDocument(DateTime spendDate)
         {
             <xsl:choose>
                 <xsl:when test="normalize-space(SpendFunctions/Spend) != ''">
-                <xsl:text>bool rezult = </xsl:text><xsl:value-of select="SpendFunctions/Spend"/><xsl:text>(this)</xsl:text>;
-                <xsl:text>BaseSpend(rezult, spendDate)</xsl:text>;
+                <xsl:text>bool rezult = await </xsl:text><xsl:value-of select="SpendFunctions/Spend"/><xsl:text>(this)</xsl:text>;
+                <xsl:text>await BaseSpend(rezult, spendDate)</xsl:text>;
                 <xsl:text>return rezult;</xsl:text>
                 </xsl:when>
                 <xsl:otherwise>
-                <xsl:text>BaseSpend(false, DateTime.MinValue)</xsl:text>;
+                <xsl:text>await BaseSpend(false, DateTime.MinValue)</xsl:text>;
                 <xsl:text>return false;</xsl:text>
                 </xsl:otherwise>
             </xsl:choose>
         }
 
-        public void ClearSpendTheDocument()
+        public async ValueTask ClearSpendTheDocument()
         {
             <xsl:if test="normalize-space(SpendFunctions/ClearSpend) != ''">
-                <xsl:value-of select="SpendFunctions/ClearSpend"/>
+                await <xsl:value-of select="SpendFunctions/ClearSpend"/>
               <xsl:text>(this)</xsl:text>;
             </xsl:if>
-            <xsl:text>BaseSpend(false, DateTime.MinValue);</xsl:text>
+            <xsl:text>await BaseSpend(false, DateTime.MinValue);</xsl:text>
         }
 
         public <xsl:value-of select="$DocumentName"/>_Objest Copy(bool copyTableParts = false)
@@ -1327,22 +1327,22 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
             return copy;
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             <xsl:if test="normalize-space(TriggerFunctions/SetDeletionLabel) != ''">
                 <xsl:value-of select="TriggerFunctions/SetDeletionLabel"/><xsl:text>(this, label);</xsl:text>      
             </xsl:if>
-            ClearSpendTheDocument();
-            base.BaseDeletionLabel(label);
+            await ClearSpendTheDocument();
+            await base.BaseDeletionLabel(label);
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
             <xsl:if test="normalize-space(TriggerFunctions/BeforeDelete) != ''">
                 <xsl:value-of select="TriggerFunctions/BeforeDelete"/><xsl:text>(this);</xsl:text>      
             </xsl:if>
-            ClearSpendTheDocument();
-            base.BaseDelete(<xsl:text>new string[] { </xsl:text>
+            await ClearSpendTheDocument();
+            await base.BaseDelete(<xsl:text>new string[] { </xsl:text>
             <xsl:for-each select="TabularParts/TablePart">
               <xsl:if test="position() != 1">
                 <xsl:text>, </xsl:text>
@@ -1405,19 +1405,19 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
             );
         }
 
-        public bool SpendTheDocument(DateTime spendDate)
+        public async ValueTask&lt;bool&gt; SpendTheDocument(DateTime spendDate)
         {
             <xsl:value-of select="$DocumentName"/>_Objest? obj = GetDocumentObject();
-            return (obj != null ? obj.SpendTheDocument(spendDate) : false);
+            return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
         }
 
-        public void ClearSpendTheDocument()
+        public async ValueTask ClearSpendTheDocument()
         {
             <xsl:value-of select="$DocumentName"/>_Objest? obj = GetDocumentObject();
-            if (obj != null) obj.ClearSpendTheDocument();
+            if (obj != null) await obj.ClearSpendTheDocument();
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             <xsl:if test="normalize-space(TriggerFunctions/SetDeletionLabel) != '' or normalize-space(SpendFunctions/ClearSpend) != ''">
                 <xsl:value-of select="$DocumentName"/>_Objest? obj = GetDocumentObject();
@@ -1429,13 +1429,13 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
                 <xsl:if test="normalize-space(SpendFunctions/ClearSpend) != ''">
                 if (label)
                 {
-                    <xsl:value-of select="SpendFunctions/ClearSpend"/>
+                    await <xsl:value-of select="SpendFunctions/ClearSpend"/>
                     <xsl:text>(obj)</xsl:text>;
-                    <xsl:text>BaseSpend(false, DateTime.MinValue)</xsl:text>;
+                    <xsl:text>await BaseSpend(false, DateTime.MinValue)</xsl:text>;
                 }
                 </xsl:if>
             </xsl:if>
-            base.BaseDeletionLabel(label);
+            await base.BaseDeletionLabel(label);
         }
 
         public <xsl:value-of select="$DocumentName"/>_Pointer Copy()
@@ -1539,12 +1539,12 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
             base.BaseClear();
         }
         
-        public void Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
-            base.BaseBeginTransaction();
+            await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
-                base.BaseDelete(Owner.UnigueID);
+                await base.BaseDelete(Owner.UnigueID);
 
             foreach (Record record in Records)
             {
@@ -1564,15 +1564,15 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
                     </xsl:choose>
                     <xsl:text>)</xsl:text>;
                 </xsl:for-each>
-                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
-                
-            base.BaseCommitTransaction();
+            
+            await base.BaseCommitTransaction();
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
-            base.BaseDelete(Owner.UnigueID);
+            await base.BaseDelete(Owner.UnigueID);
         }
 
         public List&lt;Record&gt; Copy()
@@ -1712,10 +1712,10 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВі�
             base.BaseClear();
         }
         
-        public void Save(DateTime period, Guid owner)
+        public async ValueTask Save(DateTime period, Guid owner)
         {
-            base.BaseBeginTransaction();
-            base.BaseDelete(owner);
+            await base.BaseBeginTransaction();
+            await base.BaseDelete(owner);
             foreach (Record record in Records)
             {
                 record.Period = period;
@@ -1733,14 +1733,14 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВі�
                     </xsl:if>
                     <xsl:text>)</xsl:text>;
                 </xsl:for-each>
-                record.UID = base.BaseSave(record.UID, period, owner, fieldValue);
+                record.UID = await base.BaseSave(record.UID, period, owner, fieldValue);
             }
-            base.BaseCommitTransaction();
+            await base.BaseCommitTransaction();
         }
         
-        public void Delete(Guid owner)
+        public async ValueTask Delete(Guid owner)
         {
-            base.BaseDelete(owner);
+            await base.BaseDelete(owner);
         }
 
         public class Record : RegisterInformationRecord
@@ -1792,7 +1792,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВі�
                 return false;
         }
         
-        public void Save()
+        public async ValueTask Save()
         {
             <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
               <xsl:text>base.FieldValue["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"] = </xsl:text>
@@ -1806,7 +1806,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВі�
                 </xsl:when>
               </xsl:choose>;
             </xsl:for-each>
-            BaseSave();
+            await BaseSave();
         }
 
         public <xsl:value-of select="$RegisterName"/>_Objest Copy()
@@ -1821,9 +1821,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВі�
             return copy;
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
-			      base.BaseDelete();
+			      await base.BaseDelete();
         }
 
         <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
@@ -1850,8 +1850,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриНа�
         }
 
         /* Функція для обчислення віртуальних таблиць  */
-        public static void Execute(DateTime period, string regAccumName)
+        public static async void Execute(DateTime period, string regAccumName)
         {
+            if (Config.Kernel == null) return;
             <xsl:variable name="QueryAllCountCalculation" select="count(Configuration/RegistersAccumulation/RegisterAccumulation/QueryBlockList/QueryBlock[FinalCalculation = '0']/Query)"/>
             <xsl:if test="$QueryAllCountCalculation != 0">
             Dictionary&lt;string, object&gt; paramQuery = new Dictionary&lt;string, object&gt;();
@@ -1864,15 +1865,15 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриНа�
                 <xsl:if test="$QueryCount != 0">
                 case "<xsl:value-of select="Name"/>":
                 {
-                    byte transactionID = Config.Kernel!.DataBase.BeginTransaction();
+                    byte transactionID = await Config.Kernel.DataBase.BeginTransaction();
                     <xsl:for-each select="QueryBlockList/QueryBlock[FinalCalculation = '0']">
                     /* QueryBlock: <xsl:value-of select="Name"/> */
                         <xsl:for-each select="Query">
                             <xsl:sort select="@position" data-type="number" order="ascending" />
-                    Config.Kernel!.DataBase.ExecuteSQL($@"<xsl:value-of select="normalize-space(.)"/>", paramQuery, transactionID);
+                    await Config.Kernel.DataBase.ExecuteSQL($@"<xsl:value-of select="normalize-space(.)"/>", paramQuery, transactionID);
                         </xsl:for-each>
                     </xsl:for-each>
-                    Config.Kernel!.DataBase.CommitTransaction(transactionID);
+                    await Config.Kernel.DataBase.CommitTransaction(transactionID);
                     break;
                 }
                 </xsl:if>
@@ -1884,8 +1885,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриНа�
         }
 
         /* Функція для обчислення підсумкових віртуальних таблиць */
-        public static void ExecuteFinalCalculation(List&lt;string&gt; regAccumNameList)
+        public static async void ExecuteFinalCalculation(List&lt;string&gt; regAccumNameList)
         {
+            if (Config.Kernel == null) return;
             <xsl:variable name="QueryAllCountFinalCalculation" select="count(Configuration/RegistersAccumulation/RegisterAccumulation/QueryBlockList/QueryBlock[FinalCalculation = '1']/Query)"/>
             <xsl:if test="$QueryAllCountFinalCalculation != 0">
             foreach (string regAccumName in regAccumNameList)
@@ -1896,15 +1898,15 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриНа�
                     <xsl:if test="$QueryCount != 0">
                     case "<xsl:value-of select="Name"/>":
                     {
-                        byte transactionID = Config.Kernel!.DataBase.BeginTransaction();
+                        byte transactionID = await Config.Kernel.DataBase.BeginTransaction();
                         <xsl:for-each select="QueryBlockList/QueryBlock[FinalCalculation = '1']">
                         /* QueryBlock: <xsl:value-of select="Name"/> */
                             <xsl:for-each select="Query">
                                 <xsl:sort select="@position" data-type="number" order="ascending" />
-                        Config.Kernel!.DataBase.ExecuteSQL($@"<xsl:value-of select="normalize-space(.)"/>", null, transactionID);
+                        await Config.Kernel.DataBase.ExecuteSQL($@"<xsl:value-of select="normalize-space(.)"/>", null, transactionID);
                             </xsl:for-each>
                         </xsl:for-each>
-                        Config.Kernel!.DataBase.CommitTransaction(transactionID);
+                        await Config.Kernel.DataBase.CommitTransaction(transactionID);
                         break;
                     }
                     </xsl:if>
@@ -1985,11 +1987,11 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриНа�
             base.BaseClear();
         }
         
-        public void Save(DateTime period, Guid owner) 
+        public async ValueTask Save(DateTime period, Guid owner) 
         {
-            base.BaseBeginTransaction();
-            base.BaseSelectPeriodForOwner(owner, period);
-            base.BaseDelete(owner);
+            await base.BaseBeginTransaction();
+            await base.BaseSelectPeriodForOwner(owner, period);
+            await base.BaseDelete(owner);
             foreach (Record record in Records)
             {
                 record.Period = period;
@@ -2007,16 +2009,16 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриНа�
                     </xsl:if>
                     <xsl:text>)</xsl:text>;
                 </xsl:for-each>
-                record.UID = base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
+                record.UID = await base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
             }
-            base.BaseTrigerAdd(period, owner);
-            base.BaseCommitTransaction();
+            await base.BaseTrigerAdd(period, owner);
+            await base.BaseCommitTransaction();
         }
 
-        public void Delete(Guid owner)
+        public async ValueTask Delete(Guid owner)
         {
-            base.BaseSelectPeriodForOwner(owner);
-            base.BaseDelete(owner);
+            await base.BaseSelectPeriodForOwner(owner);
+            await base.BaseDelete(owner);
         }
         
         public class Record : RegisterAccumulationRecord

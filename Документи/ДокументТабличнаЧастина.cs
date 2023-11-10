@@ -69,7 +69,7 @@ namespace StorageAndTrade
 
         public virtual void LoadRecords() { }
 
-        public virtual void SaveRecords() { }
+        public virtual async ValueTask SaveRecords() { }
 
         protected virtual void ButtonSelect(TreeIter iter, int rowNumber, int colNumber, Popover popoverSmallSelect) { }
 

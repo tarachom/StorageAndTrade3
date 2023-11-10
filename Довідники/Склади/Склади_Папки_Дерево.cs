@@ -97,22 +97,22 @@ namespace StorageAndTrade
 
         #region ToolBar
 
-        protected override void SetDeletionLabel(UnigueID unigueID)
+        protected override async void SetDeletionLabel(UnigueID unigueID)
         {
             Склади_Папки_Objest Склади_Папки_Objest = new Склади_Папки_Objest();
             if (Склади_Папки_Objest.Read(unigueID))
-                Склади_Папки_Objest.SetDeletionLabel(!Склади_Папки_Objest.DeletionLabel);
+                await Склади_Папки_Objest.SetDeletionLabel(!Склади_Папки_Objest.DeletionLabel);
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
         }
 
-        protected override UnigueID? Copy(UnigueID unigueID)
+        protected override async Task<UnigueID?> Copy(UnigueID unigueID)
         {
             Склади_Папки_Objest Склади_Папки_Objest = new Склади_Папки_Objest();
             if (Склади_Папки_Objest.Read(unigueID))
             {
                 Склади_Папки_Objest Склади_Папки_Objest_Новий = Склади_Папки_Objest.Copy(true);
-                Склади_Папки_Objest_Новий.Save();
+                await Склади_Папки_Objest_Новий.Save();
 
                 return Склади_Папки_Objest_Новий.UnigueID;
             }

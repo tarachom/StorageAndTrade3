@@ -195,11 +195,11 @@ namespace StorageAndTrade
 
         #endregion
 
-        protected override void Save()
+        protected override async ValueTask Save()
         {
             try
             {
-                ДоговориКонтрагентів_Objest.Save();
+                await ДоговориКонтрагентів_Objest.Save();
             }
             catch (Exception ex)
             {

@@ -224,19 +224,19 @@ namespace StorageAndTrade
 
         protected virtual void OpenPageElement(bool IsNew, UnigueID? unigueID = null) { }
 
-        protected virtual void SetDeletionLabel(UnigueID unigueID) { }
+        protected virtual async ValueTask SetDeletionLabel(UnigueID unigueID) { }
 
-        protected virtual UnigueID? Copy(UnigueID unigueID) { return null; }
+        protected virtual async ValueTask<UnigueID?> Copy(UnigueID unigueID) { return null; }
 
         public virtual void CallBack_LoadRecords(UnigueID? selectPointer)
         {
             SelectPointerItem = selectPointer;
             LoadRecords();
         }
-        
+
         protected virtual void PeriodWhereChanged() { }
 
-        protected virtual void SpendTheDocument(UnigueID unigueID, bool spendDoc) { }
+        protected virtual async ValueTask SpendTheDocument(UnigueID unigueID, bool spendDoc) { }
 
         protected virtual DocumentPointer? ReportSpendTheDocument(UnigueID unigueID) { return null; }
 
@@ -363,7 +363,7 @@ namespace StorageAndTrade
             LoadRecords();
         }
 
-        void OnDeleteClick(object? sender, EventArgs args)
+        async void OnDeleteClick(object? sender, EventArgs args)
         {
             if (TreeViewGrid.Selection.CountSelectedRows() != 0)
             {
@@ -378,7 +378,7 @@ namespace StorageAndTrade
 
                         UnigueID unigueID = new UnigueID((string)TreeViewGrid.Model.GetValue(iter, 1));
 
-                        SetDeletionLabel(unigueID);
+                        await SetDeletionLabel(unigueID);
 
                         SelectPointerItem = unigueID;
                     }
@@ -388,7 +388,7 @@ namespace StorageAndTrade
             }
         }
 
-        void OnCopyClick(object? sender, EventArgs args)
+        async void OnCopyClick(object? sender, EventArgs args)
         {
             if (TreeViewGrid.Selection.CountSelectedRows() != 0)
             {
@@ -403,7 +403,7 @@ namespace StorageAndTrade
 
                         UnigueID unigueID = new UnigueID((string)TreeViewGrid.Model.GetValue(iter, 1));
 
-                        UnigueID? newUnigueID = Copy(unigueID);
+                        UnigueID? newUnigueID = await Copy(unigueID);
 
                         if (newUnigueID != null)
                             SelectPointerItem = newUnigueID;
@@ -441,7 +441,7 @@ namespace StorageAndTrade
             }
         }
 
-        void SpendTheDocumentOrClear(bool spend)
+        async void SpendTheDocumentOrClear(bool spend)
         {
             if (TreeViewGrid.Selection.CountSelectedRows() != 0)
             {
@@ -454,7 +454,7 @@ namespace StorageAndTrade
 
                     UnigueID unigueID = new UnigueID((string)TreeViewGrid.Model.GetValue(iter, 1));
 
-                    SpendTheDocument(unigueID, spend);
+                    await SpendTheDocument(unigueID, spend);
 
                     SelectPointerItem = unigueID;
                 }

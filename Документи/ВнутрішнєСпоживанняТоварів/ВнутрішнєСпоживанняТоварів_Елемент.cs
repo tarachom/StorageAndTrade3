@@ -166,13 +166,14 @@ namespace StorageAndTrade
 
         #endregion
 
-        protected override bool Save()
+        protected override async ValueTask<bool> Save()
         {
             bool isSave;
-            
+
             try
             {
-                isSave = ВнутрішнєСпоживанняТоварів_Objest.Save();
+                isSave = await ВнутрішнєСпоживанняТоварів_Objest.Save();
+                Console.WriteLine("Save v " + isSave);
             }
             catch (Exception ex)
             {
@@ -181,7 +182,7 @@ namespace StorageAndTrade
             }
 
             if (isSave)
-                Товари.SaveRecords();
+                await Товари.SaveRecords();
 
             UnigueID = ВнутрішнєСпоживанняТоварів_Objest.UnigueID;
             Caption = ВнутрішнєСпоживанняТоварів_Objest.Назва;
@@ -189,11 +190,12 @@ namespace StorageAndTrade
             return isSave;
         }
 
-        protected override bool SpendTheDocument(bool spendDoc)
+        protected override async ValueTask<bool> SpendTheDocument(bool spendDoc)
         {
             if (spendDoc)
             {
-                bool isSpend = ВнутрішнєСпоживанняТоварів_Objest.SpendTheDocument(ВнутрішнєСпоживанняТоварів_Objest.ДатаДок);
+                bool isSpend = await ВнутрішнєСпоживанняТоварів_Objest.SpendTheDocument(ВнутрішнєСпоживанняТоварів_Objest.ДатаДок);
+                Console.WriteLine("SpendTheDocument v " + isSpend);
 
                 if (!isSpend)
                     ФункціїДляПовідомлень.ВідкритиТермінал();
@@ -202,8 +204,7 @@ namespace StorageAndTrade
             }
             else
             {
-                ВнутрішнєСпоживанняТоварів_Objest.ClearSpendTheDocument();
-
+                await ВнутрішнєСпоживанняТоварів_Objest.ClearSpendTheDocument();
                 return true;
             }
         }

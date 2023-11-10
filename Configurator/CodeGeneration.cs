@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 09.11.2023 17:38:11
+ * Дата конфігурації: 10.11.2023 21:58:44
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -1989,7 +1989,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public bool Save()
+        public async Task<bool> Save()
         {
             Організації_Triggers.BeforeSave(this);
             base.FieldValue["col_a1"] = Назва;
@@ -2002,7 +2002,7 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_a8"] = СвідоцтвоДатаВидачі;
             base.FieldValue["col_a9"] = Холдинг.UnigueID.UGuid;
             
-            bool result = BaseSave();
+            bool result = await BaseSave();
             if (result)
             {
                 Організації_Triggers.AfterSave(this);
@@ -2039,16 +2039,16 @@ namespace StorageAndTrade_1_0.Довідники
             return copy;
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             Організації_Triggers.SetDeletionLabel(this, label);
-            base.BaseDeletionLabel(label);
+            await base.BaseDeletionLabel(label);
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
             Організації_Triggers.BeforeDelete(this);
-            base.BaseDelete(new string[] { "tab_a02" });
+            await base.BaseDelete(new string[] { "tab_a02" });
         }
         
         public Організації_Pointer GetDirectoryPointer()
@@ -2116,14 +2116,14 @@ namespace StorageAndTrade_1_0.Довідники
             );
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             Організації_Objest? obj = GetDirectoryObject();
             if (obj != null)
             {
                 Організації_Triggers.SetDeletionLabel(obj, label);
                 
-                base.BaseDeletionLabel(label);
+                await base.BaseDeletionLabel(label);
             }
         }
 		
@@ -2223,12 +2223,12 @@ namespace StorageAndTrade_1_0.Довідники
             base.BaseClear();
         }
         
-        public void Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
-            base.BaseBeginTransaction();
+            await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
-                base.BaseDelete(Owner.UnigueID);
+                await base.BaseDelete(Owner.UnigueID);
             
             foreach (Record record in Records)
             {
@@ -2243,15 +2243,15 @@ namespace StorageAndTrade_1_0.Довідники
                 fieldValue.Add("col_a3", record.Місто);
                 fieldValue.Add("col_a8", record.Значення);
                 
-                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
                 
-            base.BaseCommitTransaction();
+            await base.BaseCommitTransaction();
         }
         
-        public void Delete()
+        public async ValueTask Delete()
         {
-            base.BaseDelete(Owner.UnigueID);
+            await base.BaseDelete(Owner.UnigueID);
         }
 
         public List<Record> Copy()
@@ -2355,7 +2355,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public bool Save()
+        public async Task<bool> Save()
         {
             Номенклатура_Triggers.BeforeSave(this);
             base.FieldValue["col_b1"] = Назва;
@@ -2370,7 +2370,7 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_a5"] = Папка.UnigueID.UGuid;
             base.FieldValue["col_a7"] = ОсновнаКартинкаФайл.UnigueID.UGuid;
             
-            bool result = BaseSave();
+            bool result = await BaseSave();
             if (result)
             {
                 Номенклатура_Triggers.AfterSave(this);
@@ -2409,16 +2409,16 @@ namespace StorageAndTrade_1_0.Довідники
             return copy;
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             Номенклатура_Triggers.SetDeletionLabel(this, label);
-            base.BaseDeletionLabel(label);
+            await base.BaseDeletionLabel(label);
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
             Номенклатура_Triggers.BeforeDelete(this);
-            base.BaseDelete(new string[] { "tab_b19" });
+            await base.BaseDelete(new string[] { "tab_b19" });
         }
         
         public Номенклатура_Pointer GetDirectoryPointer()
@@ -2488,14 +2488,14 @@ namespace StorageAndTrade_1_0.Довідники
             );
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             Номенклатура_Objest? obj = GetDirectoryObject();
             if (obj != null)
             {
                 Номенклатура_Triggers.SetDeletionLabel(obj, label);
                 
-                base.BaseDeletionLabel(label);
+                await base.BaseDeletionLabel(label);
             }
         }
 		
@@ -2583,12 +2583,12 @@ namespace StorageAndTrade_1_0.Довідники
             base.BaseClear();
         }
         
-        public void Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
-            base.BaseBeginTransaction();
+            await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
-                base.BaseDelete(Owner.UnigueID);
+                await base.BaseDelete(Owner.UnigueID);
             
             foreach (Record record in Records)
             {
@@ -2597,15 +2597,15 @@ namespace StorageAndTrade_1_0.Довідники
                 fieldValue.Add("col_a1", record.Файл.UnigueID.UGuid);
                 fieldValue.Add("col_a3", record.Основний);
                 
-                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
                 
-            base.BaseCommitTransaction();
+            await base.BaseCommitTransaction();
         }
         
-        public void Delete()
+        public async ValueTask Delete()
         {
-            base.BaseDelete(Owner.UnigueID);
+            await base.BaseDelete(Owner.UnigueID);
         }
 
         public List<Record> Copy()
@@ -2673,13 +2673,13 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public bool Save()
+        public async Task<bool> Save()
         {
             Виробники_Triggers.BeforeSave(this);
             base.FieldValue["col_b6"] = Назва;
             base.FieldValue["col_b7"] = Код;
             
-            bool result = BaseSave();
+            bool result = await BaseSave();
             if (result)
             {
                 Виробники_Triggers.AfterSave(this);
@@ -2700,16 +2700,16 @@ namespace StorageAndTrade_1_0.Довідники
             return copy;
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             Виробники_Triggers.SetDeletionLabel(this, label);
-            base.BaseDeletionLabel(label);
+            await base.BaseDeletionLabel(label);
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
             Виробники_Triggers.BeforeDelete(this);
-            base.BaseDelete(new string[] {  });
+            await base.BaseDelete(new string[] {  });
         }
         
         public Виробники_Pointer GetDirectoryPointer()
@@ -2767,14 +2767,14 @@ namespace StorageAndTrade_1_0.Довідники
             );
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             Виробники_Objest? obj = GetDirectoryObject();
             if (obj != null)
             {
                 Виробники_Triggers.SetDeletionLabel(obj, label);
                 
-                base.BaseDeletionLabel(label);
+                await base.BaseDeletionLabel(label);
             }
         }
 		
@@ -2879,7 +2879,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public bool Save()
+        public async Task<bool> Save()
         {
             ВидиНоменклатури_Triggers.BeforeSave(this);
             base.FieldValue["col_b8"] = Назва;
@@ -2888,7 +2888,7 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_a1"] = (int)ТипНоменклатури;
             base.FieldValue["col_a4"] = ОдиницяВиміру.UnigueID.UGuid;
             
-            bool result = BaseSave();
+            bool result = await BaseSave();
             if (result)
             {
                 ВидиНоменклатури_Triggers.AfterSave(this);
@@ -2912,16 +2912,16 @@ namespace StorageAndTrade_1_0.Довідники
             return copy;
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             ВидиНоменклатури_Triggers.SetDeletionLabel(this, label);
-            base.BaseDeletionLabel(label);
+            await base.BaseDeletionLabel(label);
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
             ВидиНоменклатури_Triggers.BeforeDelete(this);
-            base.BaseDelete(new string[] {  });
+            await base.BaseDelete(new string[] {  });
         }
         
         public ВидиНоменклатури_Pointer GetDirectoryPointer()
@@ -2982,14 +2982,14 @@ namespace StorageAndTrade_1_0.Довідники
             );
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             ВидиНоменклатури_Objest? obj = GetDirectoryObject();
             if (obj != null)
             {
                 ВидиНоменклатури_Triggers.SetDeletionLabel(obj, label);
                 
-                base.BaseDeletionLabel(label);
+                await base.BaseDeletionLabel(label);
             }
         }
 		
@@ -3091,7 +3091,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public bool Save()
+        public async Task<bool> Save()
         {
             ПакуванняОдиниціВиміру_Triggers.BeforeSave(this);
             base.FieldValue["col_c1"] = Назва;
@@ -3099,7 +3099,7 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_c3"] = НазваПовна;
             base.FieldValue["col_c4"] = КількістьУпаковок;
             
-            bool result = BaseSave();
+            bool result = await BaseSave();
             if (result)
             {
                 ПакуванняОдиниціВиміру_Triggers.AfterSave(this);
@@ -3122,16 +3122,16 @@ namespace StorageAndTrade_1_0.Довідники
             return copy;
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             ПакуванняОдиниціВиміру_Triggers.SetDeletionLabel(this, label);
-            base.BaseDeletionLabel(label);
+            await base.BaseDeletionLabel(label);
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
             ПакуванняОдиниціВиміру_Triggers.BeforeDelete(this);
-            base.BaseDelete(new string[] {  });
+            await base.BaseDelete(new string[] {  });
         }
         
         public ПакуванняОдиниціВиміру_Pointer GetDirectoryPointer()
@@ -3191,14 +3191,14 @@ namespace StorageAndTrade_1_0.Довідники
             );
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             ПакуванняОдиниціВиміру_Objest? obj = GetDirectoryObject();
             if (obj != null)
             {
                 ПакуванняОдиниціВиміру_Triggers.SetDeletionLabel(obj, label);
                 
-                base.BaseDeletionLabel(label);
+                await base.BaseDeletionLabel(label);
             }
         }
 		
@@ -3303,7 +3303,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public bool Save()
+        public async Task<bool> Save()
         {
             Валюти_Triggers.BeforeSave(this);
             base.FieldValue["col_c5"] = Назва;
@@ -3312,7 +3312,7 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_a1"] = Код_R030;
             base.FieldValue["col_a3"] = ВиводитиКурсНаСтартову;
             
-            bool result = BaseSave();
+            bool result = await BaseSave();
             if (result)
             {
                 Валюти_Triggers.AfterSave(this);
@@ -3336,16 +3336,16 @@ namespace StorageAndTrade_1_0.Довідники
             return copy;
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             Валюти_Triggers.SetDeletionLabel(this, label);
-            base.BaseDeletionLabel(label);
+            await base.BaseDeletionLabel(label);
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
             Валюти_Triggers.BeforeDelete(this);
-            base.BaseDelete(new string[] {  });
+            await base.BaseDelete(new string[] {  });
         }
         
         public Валюти_Pointer GetDirectoryPointer()
@@ -3406,14 +3406,14 @@ namespace StorageAndTrade_1_0.Довідники
             );
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             Валюти_Objest? obj = GetDirectoryObject();
             if (obj != null)
             {
                 Валюти_Triggers.SetDeletionLabel(obj, label);
                 
-                base.BaseDeletionLabel(label);
+                await base.BaseDeletionLabel(label);
             }
         }
 		
@@ -3528,7 +3528,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public bool Save()
+        public async Task<bool> Save()
         {
             Контрагенти_Triggers.BeforeSave(this);
             base.FieldValue["col_c7"] = Назва;
@@ -3539,7 +3539,7 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_a2"] = Опис;
             base.FieldValue["col_a3"] = КлючовіСловаДляПошуку;
             
-            bool result = BaseSave();
+            bool result = await BaseSave();
             if (result)
             {
                 Контрагенти_Triggers.AfterSave(this);
@@ -3578,16 +3578,16 @@ namespace StorageAndTrade_1_0.Довідники
             return copy;
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             Контрагенти_Triggers.SetDeletionLabel(this, label);
-            base.BaseDeletionLabel(label);
+            await base.BaseDeletionLabel(label);
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
             Контрагенти_Triggers.BeforeDelete(this);
-            base.BaseDelete(new string[] { "tab_a09", "tab_b20" });
+            await base.BaseDelete(new string[] { "tab_a09", "tab_b20" });
         }
         
         public Контрагенти_Pointer GetDirectoryPointer()
@@ -3654,14 +3654,14 @@ namespace StorageAndTrade_1_0.Довідники
             );
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             Контрагенти_Objest? obj = GetDirectoryObject();
             if (obj != null)
             {
                 Контрагенти_Triggers.SetDeletionLabel(obj, label);
                 
-                base.BaseDeletionLabel(label);
+                await base.BaseDeletionLabel(label);
             }
         }
 		
@@ -3761,12 +3761,12 @@ namespace StorageAndTrade_1_0.Довідники
             base.BaseClear();
         }
         
-        public void Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
-            base.BaseBeginTransaction();
+            await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
-                base.BaseDelete(Owner.UnigueID);
+                await base.BaseDelete(Owner.UnigueID);
             
             foreach (Record record in Records)
             {
@@ -3781,15 +3781,15 @@ namespace StorageAndTrade_1_0.Довідники
                 fieldValue.Add("col_d6", record.Місто);
                 fieldValue.Add("col_a1", record.Значення);
                 
-                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
                 
-            base.BaseCommitTransaction();
+            await base.BaseCommitTransaction();
         }
         
-        public void Delete()
+        public async ValueTask Delete()
         {
-            base.BaseDelete(Owner.UnigueID);
+            await base.BaseDelete(Owner.UnigueID);
         }
 
         public List<Record> Copy()
@@ -3853,12 +3853,12 @@ namespace StorageAndTrade_1_0.Довідники
             base.BaseClear();
         }
         
-        public void Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
-            base.BaseBeginTransaction();
+            await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
-                base.BaseDelete(Owner.UnigueID);
+                await base.BaseDelete(Owner.UnigueID);
             
             foreach (Record record in Records)
             {
@@ -3866,15 +3866,15 @@ namespace StorageAndTrade_1_0.Довідники
 
                 fieldValue.Add("col_a1", record.Файл.UnigueID.UGuid);
                 
-                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
                 
-            base.BaseCommitTransaction();
+            await base.BaseCommitTransaction();
         }
         
-        public void Delete()
+        public async ValueTask Delete()
         {
-            base.BaseDelete(Owner.UnigueID);
+            await base.BaseDelete(Owner.UnigueID);
         }
 
         public List<Record> Copy()
@@ -3962,7 +3962,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public bool Save()
+        public async Task<bool> Save()
         {
             Склади_Triggers.BeforeSave(this);
             base.FieldValue["col_d9"] = Назва;
@@ -3974,7 +3974,7 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_a5"] = Папка.UnigueID.UGuid;
             base.FieldValue["col_a6"] = (int)НалаштуванняАдресногоЗберігання;
             
-            bool result = BaseSave();
+            bool result = await BaseSave();
             if (result)
             {
                 Склади_Triggers.AfterSave(this);
@@ -4010,16 +4010,16 @@ namespace StorageAndTrade_1_0.Довідники
             return copy;
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             Склади_Triggers.SetDeletionLabel(this, label);
-            base.BaseDeletionLabel(label);
+            await base.BaseDeletionLabel(label);
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
             Склади_Triggers.BeforeDelete(this);
-            base.BaseDelete(new string[] { "tab_a11" });
+            await base.BaseDelete(new string[] { "tab_a11" });
         }
         
         public Склади_Pointer GetDirectoryPointer()
@@ -4086,14 +4086,14 @@ namespace StorageAndTrade_1_0.Довідники
             );
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             Склади_Objest? obj = GetDirectoryObject();
             if (obj != null)
             {
                 Склади_Triggers.SetDeletionLabel(obj, label);
                 
-                base.BaseDeletionLabel(label);
+                await base.BaseDeletionLabel(label);
             }
         }
 		
@@ -4193,12 +4193,12 @@ namespace StorageAndTrade_1_0.Довідники
             base.BaseClear();
         }
         
-        public void Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
-            base.BaseBeginTransaction();
+            await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
-                base.BaseDelete(Owner.UnigueID);
+                await base.BaseDelete(Owner.UnigueID);
             
             foreach (Record record in Records)
             {
@@ -4213,15 +4213,15 @@ namespace StorageAndTrade_1_0.Довідники
                 fieldValue.Add("col_e6", record.Місто);
                 fieldValue.Add("col_a1", record.Значення);
                 
-                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
                 
-            base.BaseCommitTransaction();
+            await base.BaseCommitTransaction();
         }
         
-        public void Delete()
+        public async ValueTask Delete()
         {
-            base.BaseDelete(Owner.UnigueID);
+            await base.BaseDelete(Owner.UnigueID);
         }
 
         public List<Record> Copy()
@@ -4298,14 +4298,14 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public bool Save()
+        public async Task<bool> Save()
         {
             ВидиЦін_Triggers.BeforeSave(this);
             base.FieldValue["col_e9"] = Назва;
             base.FieldValue["col_f1"] = Код;
             base.FieldValue["col_f2"] = Валюта.UnigueID.UGuid;
             
-            bool result = BaseSave();
+            bool result = await BaseSave();
             if (result)
             {
                 ВидиЦін_Triggers.AfterSave(this);
@@ -4327,16 +4327,16 @@ namespace StorageAndTrade_1_0.Довідники
             return copy;
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             ВидиЦін_Triggers.SetDeletionLabel(this, label);
-            base.BaseDeletionLabel(label);
+            await base.BaseDeletionLabel(label);
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
             ВидиЦін_Triggers.BeforeDelete(this);
-            base.BaseDelete(new string[] {  });
+            await base.BaseDelete(new string[] {  });
         }
         
         public ВидиЦін_Pointer GetDirectoryPointer()
@@ -4395,14 +4395,14 @@ namespace StorageAndTrade_1_0.Довідники
             );
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             ВидиЦін_Objest? obj = GetDirectoryObject();
             if (obj != null)
             {
                 ВидиЦін_Triggers.SetDeletionLabel(obj, label);
                 
-                base.BaseDeletionLabel(label);
+                await base.BaseDeletionLabel(label);
             }
         }
 		
@@ -4501,14 +4501,14 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public bool Save()
+        public async Task<bool> Save()
         {
             ВидиЦінПостачальників_Triggers.BeforeSave(this);
             base.FieldValue["col_f3"] = Назва;
             base.FieldValue["col_f4"] = Код;
             base.FieldValue["col_f5"] = Валюта.UnigueID.UGuid;
             
-            bool result = BaseSave();
+            bool result = await BaseSave();
             if (result)
             {
                 ВидиЦінПостачальників_Triggers.AfterSave(this);
@@ -4530,16 +4530,16 @@ namespace StorageAndTrade_1_0.Довідники
             return copy;
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             ВидиЦінПостачальників_Triggers.SetDeletionLabel(this, label);
-            base.BaseDeletionLabel(label);
+            await base.BaseDeletionLabel(label);
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
             ВидиЦінПостачальників_Triggers.BeforeDelete(this);
-            base.BaseDelete(new string[] {  });
+            await base.BaseDelete(new string[] {  });
         }
         
         public ВидиЦінПостачальників_Pointer GetDirectoryPointer()
@@ -4598,14 +4598,14 @@ namespace StorageAndTrade_1_0.Довідники
             );
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             ВидиЦінПостачальників_Objest? obj = GetDirectoryObject();
             if (obj != null)
             {
                 ВидиЦінПостачальників_Triggers.SetDeletionLabel(obj, label);
                 
-                base.BaseDeletionLabel(label);
+                await base.BaseDeletionLabel(label);
             }
         }
 		
@@ -4713,7 +4713,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public bool Save()
+        public async Task<bool> Save()
         {
             Користувачі_Triggers.BeforeSave(this);
             base.FieldValue["col_f6"] = Назва;
@@ -4722,7 +4722,7 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_g6"] = Коментар;
             base.FieldValue["col_a2"] = КодВСпеціальнійТаблиці;
             
-            bool result = BaseSave();
+            bool result = await BaseSave();
             if (result)
             {
                 Користувачі_Triggers.AfterSave(this);
@@ -4755,16 +4755,16 @@ namespace StorageAndTrade_1_0.Довідники
             return copy;
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             Користувачі_Triggers.SetDeletionLabel(this, label);
-            base.BaseDeletionLabel(label);
+            await base.BaseDeletionLabel(label);
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
             Користувачі_Triggers.BeforeDelete(this);
-            base.BaseDelete(new string[] { "tab_a15" });
+            await base.BaseDelete(new string[] { "tab_a15" });
         }
         
         public Користувачі_Pointer GetDirectoryPointer()
@@ -4828,14 +4828,14 @@ namespace StorageAndTrade_1_0.Довідники
             );
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             Користувачі_Objest? obj = GetDirectoryObject();
             if (obj != null)
             {
                 Користувачі_Triggers.SetDeletionLabel(obj, label);
                 
-                base.BaseDeletionLabel(label);
+                await base.BaseDeletionLabel(label);
             }
         }
 		
@@ -4933,12 +4933,12 @@ namespace StorageAndTrade_1_0.Довідники
             base.BaseClear();
         }
         
-        public void Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
-            base.BaseBeginTransaction();
+            await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
-                base.BaseDelete(Owner.UnigueID);
+                await base.BaseDelete(Owner.UnigueID);
             
             foreach (Record record in Records)
             {
@@ -4952,15 +4952,15 @@ namespace StorageAndTrade_1_0.Довідники
                 fieldValue.Add("col_g2", record.Район);
                 fieldValue.Add("col_g3", record.Місто);
                 
-                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
                 
-            base.BaseCommitTransaction();
+            await base.BaseCommitTransaction();
         }
         
-        public void Delete()
+        public async ValueTask Delete()
         {
-            base.BaseDelete(Owner.UnigueID);
+            await base.BaseDelete(Owner.UnigueID);
         }
 
         public List<Record> Copy()
@@ -5045,7 +5045,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public bool Save()
+        public async Task<bool> Save()
         {
             ФізичніОсоби_Triggers.BeforeSave(this);
             base.FieldValue["col_g7"] = Назва;
@@ -5054,7 +5054,7 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_a1"] = (int)Стать;
             base.FieldValue["col_a2"] = ІПН;
             
-            bool result = BaseSave();
+            bool result = await BaseSave();
             if (result)
             {
                 ФізичніОсоби_Triggers.AfterSave(this);
@@ -5087,16 +5087,16 @@ namespace StorageAndTrade_1_0.Довідники
             return copy;
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             ФізичніОсоби_Triggers.SetDeletionLabel(this, label);
-            base.BaseDeletionLabel(label);
+            await base.BaseDeletionLabel(label);
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
             ФізичніОсоби_Triggers.BeforeDelete(this);
-            base.BaseDelete(new string[] { "tab_a17" });
+            await base.BaseDelete(new string[] { "tab_a17" });
         }
         
         public ФізичніОсоби_Pointer GetDirectoryPointer()
@@ -5160,14 +5160,14 @@ namespace StorageAndTrade_1_0.Довідники
             );
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             ФізичніОсоби_Objest? obj = GetDirectoryObject();
             if (obj != null)
             {
                 ФізичніОсоби_Triggers.SetDeletionLabel(obj, label);
                 
-                base.BaseDeletionLabel(label);
+                await base.BaseDeletionLabel(label);
             }
         }
 		
@@ -5265,12 +5265,12 @@ namespace StorageAndTrade_1_0.Довідники
             base.BaseClear();
         }
         
-        public void Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
-            base.BaseBeginTransaction();
+            await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
-                base.BaseDelete(Owner.UnigueID);
+                await base.BaseDelete(Owner.UnigueID);
             
             foreach (Record record in Records)
             {
@@ -5284,15 +5284,15 @@ namespace StorageAndTrade_1_0.Довідники
                 fieldValue.Add("col_h4", record.Район);
                 fieldValue.Add("col_h5", record.Місто);
                 
-                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
                 
-            base.BaseCommitTransaction();
+            await base.BaseCommitTransaction();
         }
         
-        public void Delete()
+        public async ValueTask Delete()
         {
-            base.BaseDelete(Owner.UnigueID);
+            await base.BaseDelete(Owner.UnigueID);
         }
 
         public List<Record> Copy()
@@ -5368,14 +5368,14 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public bool Save()
+        public async Task<bool> Save()
         {
             СтруктураПідприємства_Triggers.BeforeSave(this);
             base.FieldValue["col_h8"] = Назва;
             base.FieldValue["col_h9"] = Код;
             base.FieldValue["col_i1"] = Керівник.UnigueID.UGuid;
             
-            bool result = BaseSave();
+            bool result = await BaseSave();
             if (result)
             {
                 СтруктураПідприємства_Triggers.AfterSave(this);
@@ -5397,16 +5397,16 @@ namespace StorageAndTrade_1_0.Довідники
             return copy;
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             СтруктураПідприємства_Triggers.SetDeletionLabel(this, label);
-            base.BaseDeletionLabel(label);
+            await base.BaseDeletionLabel(label);
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
             СтруктураПідприємства_Triggers.BeforeDelete(this);
-            base.BaseDelete(new string[] {  });
+            await base.BaseDelete(new string[] {  });
         }
         
         public СтруктураПідприємства_Pointer GetDirectoryPointer()
@@ -5465,14 +5465,14 @@ namespace StorageAndTrade_1_0.Довідники
             );
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             СтруктураПідприємства_Objest? obj = GetDirectoryObject();
             if (obj != null)
             {
                 СтруктураПідприємства_Triggers.SetDeletionLabel(obj, label);
                 
-                base.BaseDeletionLabel(label);
+                await base.BaseDeletionLabel(label);
             }
         }
 		
@@ -5568,13 +5568,13 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public bool Save()
+        public async Task<bool> Save()
         {
             КраїниСвіту_Triggers.BeforeSave(this);
             base.FieldValue["col_i2"] = Назва;
             base.FieldValue["col_i3"] = Код;
             
-            bool result = BaseSave();
+            bool result = await BaseSave();
             if (result)
             {
                 КраїниСвіту_Triggers.AfterSave(this);
@@ -5595,16 +5595,16 @@ namespace StorageAndTrade_1_0.Довідники
             return copy;
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             КраїниСвіту_Triggers.SetDeletionLabel(this, label);
-            base.BaseDeletionLabel(label);
+            await base.BaseDeletionLabel(label);
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
             КраїниСвіту_Triggers.BeforeDelete(this);
-            base.BaseDelete(new string[] {  });
+            await base.BaseDelete(new string[] {  });
         }
         
         public КраїниСвіту_Pointer GetDirectoryPointer()
@@ -5662,14 +5662,14 @@ namespace StorageAndTrade_1_0.Довідники
             );
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             КраїниСвіту_Objest? obj = GetDirectoryObject();
             if (obj != null)
             {
                 КраїниСвіту_Triggers.SetDeletionLabel(obj, label);
                 
-                base.BaseDeletionLabel(label);
+                await base.BaseDeletionLabel(label);
             }
         }
 		
@@ -5777,7 +5777,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public bool Save()
+        public async Task<bool> Save()
         {
             Файли_Triggers.BeforeSave(this);
             base.FieldValue["col_i6"] = Код;
@@ -5787,7 +5787,7 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_a3"] = Розмір;
             base.FieldValue["col_a4"] = ДатаСтворення;
             
-            bool result = BaseSave();
+            bool result = await BaseSave();
             if (result)
             {
                 Файли_Triggers.AfterSave(this);
@@ -5812,16 +5812,16 @@ namespace StorageAndTrade_1_0.Довідники
             return copy;
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             Файли_Triggers.SetDeletionLabel(this, label);
-            base.BaseDeletionLabel(label);
+            await base.BaseDeletionLabel(label);
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
             Файли_Triggers.BeforeDelete(this);
-            base.BaseDelete(new string[] {  });
+            await base.BaseDelete(new string[] {  });
         }
         
         public Файли_Pointer GetDirectoryPointer()
@@ -5883,14 +5883,14 @@ namespace StorageAndTrade_1_0.Довідники
             );
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             Файли_Objest? obj = GetDirectoryObject();
             if (obj != null)
             {
                 Файли_Triggers.SetDeletionLabel(obj, label);
                 
-                base.BaseDeletionLabel(label);
+                await base.BaseDeletionLabel(label);
             }
         }
 		
@@ -5992,7 +5992,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public bool Save()
+        public async Task<bool> Save()
         {
             ХарактеристикиНоменклатури_Triggers.BeforeSave(this);
             base.FieldValue["col_i7"] = Назва;
@@ -6000,7 +6000,7 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_i9"] = НазваПовна;
             base.FieldValue["col_a1"] = Номенклатура.UnigueID.UGuid;
             
-            bool result = BaseSave();
+            bool result = await BaseSave();
             if (result)
             {
                 ХарактеристикиНоменклатури_Triggers.AfterSave(this);
@@ -6023,16 +6023,16 @@ namespace StorageAndTrade_1_0.Довідники
             return copy;
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             ХарактеристикиНоменклатури_Triggers.SetDeletionLabel(this, label);
-            base.BaseDeletionLabel(label);
+            await base.BaseDeletionLabel(label);
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
             ХарактеристикиНоменклатури_Triggers.BeforeDelete(this);
-            base.BaseDelete(new string[] {  });
+            await base.BaseDelete(new string[] {  });
         }
         
         public ХарактеристикиНоменклатури_Pointer GetDirectoryPointer()
@@ -6092,14 +6092,14 @@ namespace StorageAndTrade_1_0.Довідники
             );
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             ХарактеристикиНоменклатури_Objest? obj = GetDirectoryObject();
             if (obj != null)
             {
                 ХарактеристикиНоменклатури_Triggers.SetDeletionLabel(obj, label);
                 
-                base.BaseDeletionLabel(label);
+                await base.BaseDeletionLabel(label);
             }
         }
 		
@@ -6198,14 +6198,14 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public bool Save()
+        public async Task<bool> Save()
         {
             Номенклатура_Папки_Triggers.BeforeSave(this);
             base.FieldValue["col_j1"] = Назва;
             base.FieldValue["col_j2"] = Код;
             base.FieldValue["col_j3"] = Родич.UnigueID.UGuid;
             
-            bool result = BaseSave();
+            bool result = await BaseSave();
             if (result)
             {
                 Номенклатура_Папки_Triggers.AfterSave(this);
@@ -6227,16 +6227,16 @@ namespace StorageAndTrade_1_0.Довідники
             return copy;
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             Номенклатура_Папки_Triggers.SetDeletionLabel(this, label);
-            base.BaseDeletionLabel(label);
+            await base.BaseDeletionLabel(label);
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
             Номенклатура_Папки_Triggers.BeforeDelete(this);
-            base.BaseDelete(new string[] {  });
+            await base.BaseDelete(new string[] {  });
         }
         
         public Номенклатура_Папки_Pointer GetDirectoryPointer()
@@ -6295,14 +6295,14 @@ namespace StorageAndTrade_1_0.Довідники
             );
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             Номенклатура_Папки_Objest? obj = GetDirectoryObject();
             if (obj != null)
             {
                 Номенклатура_Папки_Triggers.SetDeletionLabel(obj, label);
                 
-                base.BaseDeletionLabel(label);
+                await base.BaseDeletionLabel(label);
             }
         }
 		
@@ -6401,14 +6401,14 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public bool Save()
+        public async Task<bool> Save()
         {
             Контрагенти_Папки_Triggers.BeforeSave(this);
             base.FieldValue["col_j4"] = Назва;
             base.FieldValue["col_j5"] = Код;
             base.FieldValue["col_j6"] = Родич.UnigueID.UGuid;
             
-            bool result = BaseSave();
+            bool result = await BaseSave();
             if (result)
             {
                 Контрагенти_Папки_Triggers.AfterSave(this);
@@ -6430,16 +6430,16 @@ namespace StorageAndTrade_1_0.Довідники
             return copy;
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             Контрагенти_Папки_Triggers.SetDeletionLabel(this, label);
-            base.BaseDeletionLabel(label);
+            await base.BaseDeletionLabel(label);
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
             Контрагенти_Папки_Triggers.BeforeDelete(this);
-            base.BaseDelete(new string[] {  });
+            await base.BaseDelete(new string[] {  });
         }
         
         public Контрагенти_Папки_Pointer GetDirectoryPointer()
@@ -6498,14 +6498,14 @@ namespace StorageAndTrade_1_0.Довідники
             );
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             Контрагенти_Папки_Objest? obj = GetDirectoryObject();
             if (obj != null)
             {
                 Контрагенти_Папки_Triggers.SetDeletionLabel(obj, label);
                 
-                base.BaseDeletionLabel(label);
+                await base.BaseDeletionLabel(label);
             }
         }
 		
@@ -6604,14 +6604,14 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public bool Save()
+        public async Task<bool> Save()
         {
             Склади_Папки_Triggers.BeforeSave(this);
             base.FieldValue["col_j7"] = Назва;
             base.FieldValue["col_j8"] = Код;
             base.FieldValue["col_a1"] = Родич.UnigueID.UGuid;
             
-            bool result = BaseSave();
+            bool result = await BaseSave();
             if (result)
             {
                 Склади_Папки_Triggers.AfterSave(this);
@@ -6633,16 +6633,16 @@ namespace StorageAndTrade_1_0.Довідники
             return copy;
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             Склади_Папки_Triggers.SetDeletionLabel(this, label);
-            base.BaseDeletionLabel(label);
+            await base.BaseDeletionLabel(label);
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
             Склади_Папки_Triggers.BeforeDelete(this);
-            base.BaseDelete(new string[] {  });
+            await base.BaseDelete(new string[] {  });
         }
         
         public Склади_Папки_Pointer GetDirectoryPointer()
@@ -6701,14 +6701,14 @@ namespace StorageAndTrade_1_0.Довідники
             );
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             Склади_Папки_Objest? obj = GetDirectoryObject();
             if (obj != null)
             {
                 Склади_Папки_Triggers.SetDeletionLabel(obj, label);
                 
-                base.BaseDeletionLabel(label);
+                await base.BaseDeletionLabel(label);
             }
         }
 		
@@ -6810,7 +6810,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public bool Save()
+        public async Task<bool> Save()
         {
             Каси_Triggers.BeforeSave(this);
             base.FieldValue["col_k8"] = Назва;
@@ -6818,7 +6818,7 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_a2"] = Валюта.UnigueID.UGuid;
             base.FieldValue["col_a1"] = Підрозділ.UnigueID.UGuid;
             
-            bool result = BaseSave();
+            bool result = await BaseSave();
             if (result)
             {
                 Каси_Triggers.AfterSave(this);
@@ -6841,16 +6841,16 @@ namespace StorageAndTrade_1_0.Довідники
             return copy;
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             Каси_Triggers.SetDeletionLabel(this, label);
-            base.BaseDeletionLabel(label);
+            await base.BaseDeletionLabel(label);
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
             Каси_Triggers.BeforeDelete(this);
-            base.BaseDelete(new string[] {  });
+            await base.BaseDelete(new string[] {  });
         }
         
         public Каси_Pointer GetDirectoryPointer()
@@ -6910,14 +6910,14 @@ namespace StorageAndTrade_1_0.Довідники
             );
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             Каси_Objest? obj = GetDirectoryObject();
             if (obj != null)
             {
                 Каси_Triggers.SetDeletionLabel(obj, label);
                 
-                base.BaseDeletionLabel(label);
+                await base.BaseDeletionLabel(label);
             }
         }
 		
@@ -7046,7 +7046,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public bool Save()
+        public async Task<bool> Save()
         {
             БанківськіРахункиОрганізацій_Triggers.BeforeSave(this);
             base.FieldValue["col_l1"] = Назва;
@@ -7063,7 +7063,7 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_n3"] = Закритий;
             base.FieldValue["col_a1"] = Організація.UnigueID.UGuid;
             
-            bool result = BaseSave();
+            bool result = await BaseSave();
             if (result)
             {
                 БанківськіРахункиОрганізацій_Triggers.AfterSave(this);
@@ -7095,16 +7095,16 @@ namespace StorageAndTrade_1_0.Довідники
             return copy;
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             БанківськіРахункиОрганізацій_Triggers.SetDeletionLabel(this, label);
-            base.BaseDeletionLabel(label);
+            await base.BaseDeletionLabel(label);
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
             БанківськіРахункиОрганізацій_Triggers.BeforeDelete(this);
-            base.BaseDelete(new string[] {  });
+            await base.BaseDelete(new string[] {  });
         }
         
         public БанківськіРахункиОрганізацій_Pointer GetDirectoryPointer()
@@ -7173,14 +7173,14 @@ namespace StorageAndTrade_1_0.Довідники
             );
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             БанківськіРахункиОрганізацій_Objest? obj = GetDirectoryObject();
             if (obj != null)
             {
                 БанківськіРахункиОрганізацій_Triggers.SetDeletionLabel(obj, label);
                 
-                base.BaseDeletionLabel(label);
+                await base.BaseDeletionLabel(label);
             }
         }
 		
@@ -7330,7 +7330,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public bool Save()
+        public async Task<bool> Save()
         {
             ДоговориКонтрагентів_Triggers.BeforeSave(this);
             base.FieldValue["col_n4"] = Назва;
@@ -7354,7 +7354,7 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_b7"] = Сума;
             base.FieldValue["col_a3"] = Коментар;
             
-            bool result = BaseSave();
+            bool result = await BaseSave();
             if (result)
             {
                 ДоговориКонтрагентів_Triggers.AfterSave(this);
@@ -7393,16 +7393,16 @@ namespace StorageAndTrade_1_0.Довідники
             return copy;
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             ДоговориКонтрагентів_Triggers.SetDeletionLabel(this, label);
-            base.BaseDeletionLabel(label);
+            await base.BaseDeletionLabel(label);
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
             ДоговориКонтрагентів_Triggers.BeforeDelete(this);
-            base.BaseDelete(new string[] {  });
+            await base.BaseDelete(new string[] {  });
         }
         
         public ДоговориКонтрагентів_Pointer GetDirectoryPointer()
@@ -7478,14 +7478,14 @@ namespace StorageAndTrade_1_0.Довідники
             );
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             ДоговориКонтрагентів_Objest? obj = GetDirectoryObject();
             if (obj != null)
             {
                 ДоговориКонтрагентів_Triggers.SetDeletionLabel(obj, label);
                 
-                base.BaseDeletionLabel(label);
+                await base.BaseDeletionLabel(label);
             }
         }
 		
@@ -7620,7 +7620,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public bool Save()
+        public async Task<bool> Save()
         {
             БанківськіРахункиКонтрагентів_Triggers.BeforeSave(this);
             base.FieldValue["col_n7"] = Назва;
@@ -7639,7 +7639,7 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_o2"] = Закрито;
             base.FieldValue["col_o3"] = Контрагент.UnigueID.UGuid;
             
-            bool result = BaseSave();
+            bool result = await BaseSave();
             if (result)
             {
                 БанківськіРахункиКонтрагентів_Triggers.AfterSave(this);
@@ -7673,16 +7673,16 @@ namespace StorageAndTrade_1_0.Довідники
             return copy;
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             БанківськіРахункиКонтрагентів_Triggers.SetDeletionLabel(this, label);
-            base.BaseDeletionLabel(label);
+            await base.BaseDeletionLabel(label);
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
             БанківськіРахункиКонтрагентів_Triggers.BeforeDelete(this);
-            base.BaseDelete(new string[] {  });
+            await base.BaseDelete(new string[] {  });
         }
         
         public БанківськіРахункиКонтрагентів_Pointer GetDirectoryPointer()
@@ -7753,14 +7753,14 @@ namespace StorageAndTrade_1_0.Довідники
             );
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             БанківськіРахункиКонтрагентів_Objest? obj = GetDirectoryObject();
             if (obj != null)
             {
                 БанківськіРахункиКонтрагентів_Triggers.SetDeletionLabel(obj, label);
                 
-                base.BaseDeletionLabel(label);
+                await base.BaseDeletionLabel(label);
             }
         }
 		
@@ -7868,7 +7868,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public bool Save()
+        public async Task<bool> Save()
         {
             СтаттяРухуКоштів_Triggers.BeforeSave(this);
             base.FieldValue["col_i7"] = Назва;
@@ -7877,7 +7877,7 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_j2"] = (int)ВидРухуКоштів;
             base.FieldValue["col_j1"] = Опис;
             
-            bool result = BaseSave();
+            bool result = await BaseSave();
             if (result)
             {
                 СтаттяРухуКоштів_Triggers.AfterSave(this);
@@ -7910,16 +7910,16 @@ namespace StorageAndTrade_1_0.Довідники
             return copy;
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             СтаттяРухуКоштів_Triggers.SetDeletionLabel(this, label);
-            base.BaseDeletionLabel(label);
+            await base.BaseDeletionLabel(label);
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
             СтаттяРухуКоштів_Triggers.BeforeDelete(this);
-            base.BaseDelete(new string[] { "tab_a46" });
+            await base.BaseDelete(new string[] { "tab_a46" });
         }
         
         public СтаттяРухуКоштів_Pointer GetDirectoryPointer()
@@ -7983,14 +7983,14 @@ namespace StorageAndTrade_1_0.Довідники
             );
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             СтаттяРухуКоштів_Objest? obj = GetDirectoryObject();
             if (obj != null)
             {
                 СтаттяРухуКоштів_Triggers.SetDeletionLabel(obj, label);
                 
-                base.BaseDeletionLabel(label);
+                await base.BaseDeletionLabel(label);
             }
         }
 		
@@ -8076,12 +8076,12 @@ namespace StorageAndTrade_1_0.Довідники
             base.BaseClear();
         }
         
-        public void Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
-            base.BaseBeginTransaction();
+            await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
-                base.BaseDelete(Owner.UnigueID);
+                await base.BaseDelete(Owner.UnigueID);
             
             foreach (Record record in Records)
             {
@@ -8089,15 +8089,15 @@ namespace StorageAndTrade_1_0.Довідники
 
                 fieldValue.Add("col_j3", (int)record.ГосподарськаОперація);
                 
-                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
                 
-            base.BaseCommitTransaction();
+            await base.BaseCommitTransaction();
         }
         
-        public void Delete()
+        public async ValueTask Delete()
         {
-            base.BaseDelete(Owner.UnigueID);
+            await base.BaseDelete(Owner.UnigueID);
         }
 
         public List<Record> Copy()
@@ -8167,14 +8167,14 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public bool Save()
+        public async Task<bool> Save()
         {
             СеріїНоменклатури_Triggers.BeforeSave(this);
             base.FieldValue["col_a3"] = Номер;
             base.FieldValue["col_a1"] = Коментар;
             base.FieldValue["col_a2"] = ДатаСтворення;
             
-            bool result = BaseSave();
+            bool result = await BaseSave();
             if (result)
             {
                 СеріїНоменклатури_Triggers.AfterSave(this);
@@ -8196,16 +8196,16 @@ namespace StorageAndTrade_1_0.Довідники
             return copy;
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             СеріїНоменклатури_Triggers.SetDeletionLabel(this, label);
-            base.BaseDeletionLabel(label);
+            await base.BaseDeletionLabel(label);
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
             СеріїНоменклатури_Triggers.BeforeDelete(this);
-            base.BaseDelete(new string[] {  });
+            await base.BaseDelete(new string[] {  });
         }
         
         public СеріїНоменклатури_Pointer GetDirectoryPointer()
@@ -8264,14 +8264,14 @@ namespace StorageAndTrade_1_0.Довідники
             );
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             СеріїНоменклатури_Objest? obj = GetDirectoryObject();
             if (obj != null)
             {
                 СеріїНоменклатури_Triggers.SetDeletionLabel(obj, label);
                 
-                base.BaseDeletionLabel(label);
+                await base.BaseDeletionLabel(label);
             }
         }
 		
@@ -8379,7 +8379,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public bool Save()
+        public async Task<bool> Save()
         {
             ПартіяТоварівКомпозит_Triggers.BeforeSave(this);
             base.FieldValue["col_a1"] = Назва;
@@ -8389,7 +8389,7 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_a4"] = ПоступленняТоварівТаПослуг.UnigueID.UGuid;
             base.FieldValue["col_a5"] = ВведенняЗалишків.UnigueID.UGuid;
             
-            bool result = BaseSave();
+            bool result = await BaseSave();
             if (result)
             {
                 ПартіяТоварівКомпозит_Triggers.AfterSave(this);
@@ -8414,16 +8414,16 @@ namespace StorageAndTrade_1_0.Довідники
             return copy;
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             ПартіяТоварівКомпозит_Triggers.SetDeletionLabel(this, label);
-            base.BaseDeletionLabel(label);
+            await base.BaseDeletionLabel(label);
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
             ПартіяТоварівКомпозит_Triggers.BeforeDelete(this);
-            base.BaseDelete(new string[] {  });
+            await base.BaseDelete(new string[] {  });
         }
         
         public ПартіяТоварівКомпозит_Pointer GetDirectoryPointer()
@@ -8485,14 +8485,14 @@ namespace StorageAndTrade_1_0.Довідники
             );
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             ПартіяТоварівКомпозит_Objest? obj = GetDirectoryObject();
             if (obj != null)
             {
                 ПартіяТоварівКомпозит_Triggers.SetDeletionLabel(obj, label);
                 
-                base.BaseDeletionLabel(label);
+                await base.BaseDeletionLabel(label);
             }
         }
 		
@@ -8603,7 +8603,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public bool Save()
+        public async Task<bool> Save()
         {
             ВидиЗапасів_Triggers.BeforeSave(this);
             base.FieldValue["col_a5"] = Назва;
@@ -8614,7 +8614,7 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_b2"] = Договір.UnigueID.UGuid;
             base.FieldValue["col_a1"] = Код;
             
-            bool result = BaseSave();
+            bool result = await BaseSave();
             if (result)
             {
                 ВидиЗапасів_Triggers.AfterSave(this);
@@ -8640,16 +8640,16 @@ namespace StorageAndTrade_1_0.Довідники
             return copy;
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             ВидиЗапасів_Triggers.SetDeletionLabel(this, label);
-            base.BaseDeletionLabel(label);
+            await base.BaseDeletionLabel(label);
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
             ВидиЗапасів_Triggers.BeforeDelete(this);
-            base.BaseDelete(new string[] {  });
+            await base.BaseDelete(new string[] {  });
         }
         
         public ВидиЗапасів_Pointer GetDirectoryPointer()
@@ -8712,14 +8712,14 @@ namespace StorageAndTrade_1_0.Довідники
             );
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             ВидиЗапасів_Objest? obj = GetDirectoryObject();
             if (obj != null)
             {
                 ВидиЗапасів_Triggers.SetDeletionLabel(obj, label);
                 
-                base.BaseDeletionLabel(label);
+                await base.BaseDeletionLabel(label);
             }
         }
 		
@@ -8893,7 +8893,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public bool Save()
+        public async Task<bool> Save()
         {
             Банки_Triggers.BeforeSave(this);
             base.FieldValue["col_a1"] = Код;
@@ -8925,7 +8925,7 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_c9"] = Статус;
             base.FieldValue["col_d1"] = ДатаЗапису;
             
-            bool result = BaseSave();
+            bool result = await BaseSave();
             if (result)
             {
                 Банки_Triggers.AfterSave(this);
@@ -8972,16 +8972,16 @@ namespace StorageAndTrade_1_0.Довідники
             return copy;
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             Банки_Triggers.SetDeletionLabel(this, label);
-            base.BaseDeletionLabel(label);
+            await base.BaseDeletionLabel(label);
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
             Банки_Triggers.BeforeDelete(this);
-            base.BaseDelete(new string[] {  });
+            await base.BaseDelete(new string[] {  });
         }
         
         public Банки_Pointer GetDirectoryPointer()
@@ -9065,14 +9065,14 @@ namespace StorageAndTrade_1_0.Довідники
             );
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             Банки_Objest? obj = GetDirectoryObject();
             if (obj != null)
             {
                 Банки_Triggers.SetDeletionLabel(obj, label);
                 
-                base.BaseDeletionLabel(label);
+                await base.BaseDeletionLabel(label);
             }
         }
 		
@@ -9171,14 +9171,14 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public bool Save()
+        public async Task<bool> Save()
         {
             СкладськіПриміщення_Triggers.BeforeSave(this);
             base.FieldValue["col_a2"] = Назва;
             base.FieldValue["col_a3"] = (int)НалаштуванняАдресногоЗберігання;
             base.FieldValue["col_a1"] = Склад.UnigueID.UGuid;
             
-            bool result = BaseSave();
+            bool result = await BaseSave();
             if (result)
             {
                 СкладськіПриміщення_Triggers.AfterSave(this);
@@ -9200,16 +9200,16 @@ namespace StorageAndTrade_1_0.Довідники
             return copy;
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             СкладськіПриміщення_Triggers.SetDeletionLabel(this, label);
-            base.BaseDeletionLabel(label);
+            await base.BaseDeletionLabel(label);
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
             СкладськіПриміщення_Triggers.BeforeDelete(this);
-            base.BaseDelete(new string[] {  });
+            await base.BaseDelete(new string[] {  });
         }
         
         public СкладськіПриміщення_Pointer GetDirectoryPointer()
@@ -9268,14 +9268,14 @@ namespace StorageAndTrade_1_0.Довідники
             );
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             СкладськіПриміщення_Objest? obj = GetDirectoryObject();
             if (obj != null)
             {
                 СкладськіПриміщення_Triggers.SetDeletionLabel(obj, label);
                 
-                base.BaseDeletionLabel(label);
+                await base.BaseDeletionLabel(label);
             }
         }
 		
@@ -9395,7 +9395,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public bool Save()
+        public async Task<bool> Save()
         {
             СкладськіКомірки_Triggers.BeforeSave(this);
             base.FieldValue["col_a1"] = Папка.UnigueID.UGuid;
@@ -9409,7 +9409,7 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_a9"] = (int)ТипСкладськоїКомірки;
             base.FieldValue["col_b1"] = Типорозмір.UnigueID.UGuid;
             
-            bool result = BaseSave();
+            bool result = await BaseSave();
             if (result)
             {
                 СкладськіКомірки_Triggers.AfterSave(this);
@@ -9438,16 +9438,16 @@ namespace StorageAndTrade_1_0.Довідники
             return copy;
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             СкладськіКомірки_Triggers.SetDeletionLabel(this, label);
-            base.BaseDeletionLabel(label);
+            await base.BaseDeletionLabel(label);
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
             СкладськіКомірки_Triggers.BeforeDelete(this);
-            base.BaseDelete(new string[] {  });
+            await base.BaseDelete(new string[] {  });
         }
         
         public СкладськіКомірки_Pointer GetDirectoryPointer()
@@ -9513,14 +9513,14 @@ namespace StorageAndTrade_1_0.Довідники
             );
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             СкладськіКомірки_Objest? obj = GetDirectoryObject();
             if (obj != null)
             {
                 СкладськіКомірки_Triggers.SetDeletionLabel(obj, label);
                 
-                base.BaseDeletionLabel(label);
+                await base.BaseDeletionLabel(label);
             }
         }
 		
@@ -9618,13 +9618,13 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public bool Save()
+        public async Task<bool> Save()
         {
             base.FieldValue["col_a2"] = Назва;
             base.FieldValue["col_a3"] = Опис;
             base.FieldValue["col_a4"] = Приміщення.UnigueID.UGuid;
             
-            bool result = BaseSave();
+            bool result = await BaseSave();
             if (result)
             {
                 
@@ -9646,16 +9646,16 @@ namespace StorageAndTrade_1_0.Довідники
             return copy;
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             
-            base.BaseDeletionLabel(label);
+            await base.BaseDeletionLabel(label);
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
             
-            base.BaseDelete(new string[] {  });
+            await base.BaseDelete(new string[] {  });
         }
         
         public ОбластьЗберігання_Pointer GetDirectoryPointer()
@@ -9714,13 +9714,13 @@ namespace StorageAndTrade_1_0.Довідники
             );
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             ОбластьЗберігання_Objest? obj = GetDirectoryObject();
             if (obj != null)
             {
                 
-                base.BaseDeletionLabel(label);
+                await base.BaseDeletionLabel(label);
             }
         }
 		
@@ -9828,7 +9828,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public bool Save()
+        public async Task<bool> Save()
         {
             ТипорозміриКомірок_Triggers.BeforeSave(this);
             base.FieldValue["col_a1"] = Висота;
@@ -9838,7 +9838,7 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_a5"] = Обєм;
             base.FieldValue["col_a6"] = Ширина;
             
-            bool result = BaseSave();
+            bool result = await BaseSave();
             if (result)
             {
                 ТипорозміриКомірок_Triggers.AfterSave(this);
@@ -9863,16 +9863,16 @@ namespace StorageAndTrade_1_0.Довідники
             return copy;
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             ТипорозміриКомірок_Triggers.SetDeletionLabel(this, label);
-            base.BaseDeletionLabel(label);
+            await base.BaseDeletionLabel(label);
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
             ТипорозміриКомірок_Triggers.BeforeDelete(this);
-            base.BaseDelete(new string[] {  });
+            await base.BaseDelete(new string[] {  });
         }
         
         public ТипорозміриКомірок_Pointer GetDirectoryPointer()
@@ -9934,14 +9934,14 @@ namespace StorageAndTrade_1_0.Довідники
             );
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             ТипорозміриКомірок_Objest? obj = GetDirectoryObject();
             if (obj != null)
             {
                 ТипорозміриКомірок_Triggers.SetDeletionLabel(obj, label);
                 
-                base.BaseDeletionLabel(label);
+                await base.BaseDeletionLabel(label);
             }
         }
 		
@@ -10043,7 +10043,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public bool Save()
+        public async Task<bool> Save()
         {
             СкладськіКомірки_Папки_Triggers.BeforeSave(this);
             base.FieldValue["col_j1"] = Назва;
@@ -10051,7 +10051,7 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_j3"] = Родич.UnigueID.UGuid;
             base.FieldValue["col_a1"] = Власник.UnigueID.UGuid;
             
-            bool result = BaseSave();
+            bool result = await BaseSave();
             if (result)
             {
                 СкладськіКомірки_Папки_Triggers.AfterSave(this);
@@ -10074,16 +10074,16 @@ namespace StorageAndTrade_1_0.Довідники
             return copy;
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             СкладськіКомірки_Папки_Triggers.SetDeletionLabel(this, label);
-            base.BaseDeletionLabel(label);
+            await base.BaseDeletionLabel(label);
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
             СкладськіКомірки_Папки_Triggers.BeforeDelete(this);
-            base.BaseDelete(new string[] {  });
+            await base.BaseDelete(new string[] {  });
         }
         
         public СкладськіКомірки_Папки_Pointer GetDirectoryPointer()
@@ -10143,14 +10143,14 @@ namespace StorageAndTrade_1_0.Довідники
             );
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             СкладськіКомірки_Папки_Objest? obj = GetDirectoryObject();
             if (obj != null)
             {
                 СкладськіКомірки_Папки_Triggers.SetDeletionLabel(obj, label);
                 
-                base.BaseDeletionLabel(label);
+                await base.BaseDeletionLabel(label);
             }
         }
 		
@@ -10255,7 +10255,7 @@ namespace StorageAndTrade_1_0.Довідники
                 return false;
         }
         
-        public bool Save()
+        public async Task<bool> Save()
         {
             Блокнот_Triggers.BeforeSave(this);
             base.FieldValue["col_a1"] = Код;
@@ -10264,7 +10264,7 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_a4"] = Опис;
             base.FieldValue["col_a5"] = Лінк;
             
-            bool result = BaseSave();
+            bool result = await BaseSave();
             if (result)
             {
                 Блокнот_Triggers.AfterSave(this);
@@ -10288,16 +10288,16 @@ namespace StorageAndTrade_1_0.Довідники
             return copy;
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             Блокнот_Triggers.SetDeletionLabel(this, label);
-            base.BaseDeletionLabel(label);
+            await base.BaseDeletionLabel(label);
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
             Блокнот_Triggers.BeforeDelete(this);
-            base.BaseDelete(new string[] {  });
+            await base.BaseDelete(new string[] {  });
         }
         
         public Блокнот_Pointer GetDirectoryPointer()
@@ -10358,14 +10358,14 @@ namespace StorageAndTrade_1_0.Довідники
             );
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             Блокнот_Objest? obj = GetDirectoryObject();
             if (obj != null)
             {
                 Блокнот_Triggers.SetDeletionLabel(obj, label);
                 
-                base.BaseDeletionLabel(label);
+                await base.BaseDeletionLabel(label);
             }
         }
 		
@@ -12245,7 +12245,7 @@ namespace StorageAndTrade_1_0.Документи
                 return false;
         }
         
-        public bool Save()
+        public async Task<bool> Save()
         {
             ЗамовленняПостачальнику_Triggers.BeforeSave(this);
             base.FieldValue["docname"] = Назва;
@@ -12276,7 +12276,7 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a2"] = Коментар;
             base.FieldValue["col_b9"] = КлючовіСловаДляПошуку;
             
-            bool result = BaseSave();
+            bool result = await BaseSave();
             
             if (result)
             {
@@ -12287,17 +12287,18 @@ namespace StorageAndTrade_1_0.Документи
             return result;
         }
 
-        public bool SpendTheDocument(DateTime spendDate)
+        public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            bool rezult = ЗамовленняПостачальнику_SpendTheDocument.Spend(this);
-                BaseSpend(rezult, spendDate);
+            bool rezult = await ЗамовленняПостачальнику_SpendTheDocument.Spend(this);
+                await BaseSpend(rezult, spendDate);
                 return rezult;
         }
 
-        public void ClearSpendTheDocument()
+        public async ValueTask ClearSpendTheDocument()
         {
-            ЗамовленняПостачальнику_SpendTheDocument.ClearSpend(this);
-            BaseSpend(false, DateTime.MinValue);
+            
+                await ЗамовленняПостачальнику_SpendTheDocument.ClearSpend(this);
+            await BaseSpend(false, DateTime.MinValue);
         }
 
         public ЗамовленняПостачальнику_Objest Copy(bool copyTableParts = false)
@@ -12346,18 +12347,18 @@ namespace StorageAndTrade_1_0.Документи
             return copy;
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             ЗамовленняПостачальнику_Triggers.SetDeletionLabel(this, label);
-            ClearSpendTheDocument();
-            base.BaseDeletionLabel(label);
+            await ClearSpendTheDocument();
+            await base.BaseDeletionLabel(label);
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
             ЗамовленняПостачальнику_Triggers.BeforeDelete(this);
-            ClearSpendTheDocument();
-            base.BaseDelete(new string[] { "tab_a30" });
+            await ClearSpendTheDocument();
+            await base.BaseDelete(new string[] { "tab_a30" });
         }
         
         public ЗамовленняПостачальнику_Pointer GetDocumentPointer()
@@ -12424,19 +12425,19 @@ namespace StorageAndTrade_1_0.Документи
             );
         }
 
-        public bool SpendTheDocument(DateTime spendDate)
+        public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             ЗамовленняПостачальнику_Objest? obj = GetDocumentObject();
-            return (obj != null ? obj.SpendTheDocument(spendDate) : false);
+            return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
         }
 
-        public void ClearSpendTheDocument()
+        public async ValueTask ClearSpendTheDocument()
         {
             ЗамовленняПостачальнику_Objest? obj = GetDocumentObject();
-            if (obj != null) obj.ClearSpendTheDocument();
+            if (obj != null) await obj.ClearSpendTheDocument();
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             ЗамовленняПостачальнику_Objest? obj = GetDocumentObject();
                 if (obj == null) return;
@@ -12444,11 +12445,11 @@ namespace StorageAndTrade_1_0.Документи
                 
                 if (label)
                 {
-                    ЗамовленняПостачальнику_SpendTheDocument.ClearSpend(obj);
-                    BaseSpend(false, DateTime.MinValue);
+                    await ЗамовленняПостачальнику_SpendTheDocument.ClearSpend(obj);
+                    await BaseSpend(false, DateTime.MinValue);
                 }
                 
-            base.BaseDeletionLabel(label);
+            await base.BaseDeletionLabel(label);
         }
 
         public ЗамовленняПостачальнику_Pointer Copy()
@@ -12559,12 +12560,12 @@ namespace StorageAndTrade_1_0.Документи
             base.BaseClear();
         }
         
-        public void Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
-            base.BaseBeginTransaction();
+            await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
-                base.BaseDelete(Owner.UnigueID);
+                await base.BaseDelete(Owner.UnigueID);
 
             foreach (Record record in Records)
             {
@@ -12583,15 +12584,15 @@ namespace StorageAndTrade_1_0.Документи
                 fieldValue.Add("col_a9", record.Склад.UnigueID.UGuid);
                 fieldValue.Add("col_b1", record.Підрозділ.UnigueID.UGuid);
                 
-                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
-                
-            base.BaseCommitTransaction();
+            
+            await base.BaseCommitTransaction();
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
-            base.BaseDelete(Owner.UnigueID);
+            await base.BaseDelete(Owner.UnigueID);
         }
 
         public List<Record> Copy()
@@ -13137,7 +13138,7 @@ namespace StorageAndTrade_1_0.Документи
                 return false;
         }
         
-        public bool Save()
+        public async Task<bool> Save()
         {
             ПоступленняТоварівТаПослуг_Triggers.BeforeSave(this);
             base.FieldValue["docname"] = Назва;
@@ -13174,7 +13175,7 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_b1"] = Коментар;
             base.FieldValue["col_a2"] = КлючовіСловаДляПошуку;
             
-            bool result = BaseSave();
+            bool result = await BaseSave();
             
             if (result)
             {
@@ -13185,17 +13186,18 @@ namespace StorageAndTrade_1_0.Документи
             return result;
         }
 
-        public bool SpendTheDocument(DateTime spendDate)
+        public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            bool rezult = ПоступленняТоварівТаПослуг_SpendTheDocument.Spend(this);
-                BaseSpend(rezult, spendDate);
+            bool rezult = await ПоступленняТоварівТаПослуг_SpendTheDocument.Spend(this);
+                await BaseSpend(rezult, spendDate);
                 return rezult;
         }
 
-        public void ClearSpendTheDocument()
+        public async ValueTask ClearSpendTheDocument()
         {
-            ПоступленняТоварівТаПослуг_SpendTheDocument.ClearSpend(this);
-            BaseSpend(false, DateTime.MinValue);
+            
+                await ПоступленняТоварівТаПослуг_SpendTheDocument.ClearSpend(this);
+            await BaseSpend(false, DateTime.MinValue);
         }
 
         public ПоступленняТоварівТаПослуг_Objest Copy(bool copyTableParts = false)
@@ -13250,18 +13252,18 @@ namespace StorageAndTrade_1_0.Документи
             return copy;
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             ПоступленняТоварівТаПослуг_Triggers.SetDeletionLabel(this, label);
-            ClearSpendTheDocument();
-            base.BaseDeletionLabel(label);
+            await ClearSpendTheDocument();
+            await base.BaseDeletionLabel(label);
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
             ПоступленняТоварівТаПослуг_Triggers.BeforeDelete(this);
-            ClearSpendTheDocument();
-            base.BaseDelete(new string[] { "tab_a33" });
+            await ClearSpendTheDocument();
+            await base.BaseDelete(new string[] { "tab_a33" });
         }
         
         public ПоступленняТоварівТаПослуг_Pointer GetDocumentPointer()
@@ -13334,19 +13336,19 @@ namespace StorageAndTrade_1_0.Документи
             );
         }
 
-        public bool SpendTheDocument(DateTime spendDate)
+        public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             ПоступленняТоварівТаПослуг_Objest? obj = GetDocumentObject();
-            return (obj != null ? obj.SpendTheDocument(spendDate) : false);
+            return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
         }
 
-        public void ClearSpendTheDocument()
+        public async ValueTask ClearSpendTheDocument()
         {
             ПоступленняТоварівТаПослуг_Objest? obj = GetDocumentObject();
-            if (obj != null) obj.ClearSpendTheDocument();
+            if (obj != null) await obj.ClearSpendTheDocument();
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             ПоступленняТоварівТаПослуг_Objest? obj = GetDocumentObject();
                 if (obj == null) return;
@@ -13354,11 +13356,11 @@ namespace StorageAndTrade_1_0.Документи
                 
                 if (label)
                 {
-                    ПоступленняТоварівТаПослуг_SpendTheDocument.ClearSpend(obj);
-                    BaseSpend(false, DateTime.MinValue);
+                    await ПоступленняТоварівТаПослуг_SpendTheDocument.ClearSpend(obj);
+                    await BaseSpend(false, DateTime.MinValue);
                 }
                 
-            base.BaseDeletionLabel(label);
+            await base.BaseDeletionLabel(label);
         }
 
         public ПоступленняТоварівТаПослуг_Pointer Copy()
@@ -13473,12 +13475,12 @@ namespace StorageAndTrade_1_0.Документи
             base.BaseClear();
         }
         
-        public void Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
-            base.BaseBeginTransaction();
+            await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
-                base.BaseDelete(Owner.UnigueID);
+                await base.BaseDelete(Owner.UnigueID);
 
             foreach (Record record in Records)
             {
@@ -13499,15 +13501,15 @@ namespace StorageAndTrade_1_0.Документи
                 fieldValue.Add("col_b2", record.Підрозділ.UnigueID.UGuid);
                 fieldValue.Add("col_b5", record.ВидЦіни.UnigueID.UGuid);
                 
-                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
-                
-            base.BaseCommitTransaction();
+            
+            await base.BaseCommitTransaction();
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
-            base.BaseDelete(Owner.UnigueID);
+            await base.BaseDelete(Owner.UnigueID);
         }
 
         public List<Record> Copy()
@@ -14002,7 +14004,7 @@ namespace StorageAndTrade_1_0.Документи
                 return false;
         }
         
-        public bool Save()
+        public async Task<bool> Save()
         {
             ЗамовленняКлієнта_Triggers.BeforeSave(this);
             base.FieldValue["docname"] = Назва;
@@ -14036,7 +14038,7 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_b2"] = Менеджер.UnigueID.UGuid;
             base.FieldValue["col_b3"] = КлючовіСловаДляПошуку;
             
-            bool result = BaseSave();
+            bool result = await BaseSave();
             
             if (result)
             {
@@ -14047,17 +14049,18 @@ namespace StorageAndTrade_1_0.Документи
             return result;
         }
 
-        public bool SpendTheDocument(DateTime spendDate)
+        public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            bool rezult = ЗамовленняКлієнта_SpendTheDocument.Spend(this);
-                BaseSpend(rezult, spendDate);
+            bool rezult = await ЗамовленняКлієнта_SpendTheDocument.Spend(this);
+                await BaseSpend(rezult, spendDate);
                 return rezult;
         }
 
-        public void ClearSpendTheDocument()
+        public async ValueTask ClearSpendTheDocument()
         {
-            ЗамовленняКлієнта_SpendTheDocument.ClearSpend(this);
-            BaseSpend(false, DateTime.MinValue);
+            
+                await ЗамовленняКлієнта_SpendTheDocument.ClearSpend(this);
+            await BaseSpend(false, DateTime.MinValue);
         }
 
         public ЗамовленняКлієнта_Objest Copy(bool copyTableParts = false)
@@ -14109,18 +14112,18 @@ namespace StorageAndTrade_1_0.Документи
             return copy;
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             ЗамовленняКлієнта_Triggers.SetDeletionLabel(this, label);
-            ClearSpendTheDocument();
-            base.BaseDeletionLabel(label);
+            await ClearSpendTheDocument();
+            await base.BaseDeletionLabel(label);
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
             ЗамовленняКлієнта_Triggers.BeforeDelete(this);
-            ClearSpendTheDocument();
-            base.BaseDelete(new string[] { "tab_a35" });
+            await ClearSpendTheDocument();
+            await base.BaseDelete(new string[] { "tab_a35" });
         }
         
         public ЗамовленняКлієнта_Pointer GetDocumentPointer()
@@ -14190,19 +14193,19 @@ namespace StorageAndTrade_1_0.Документи
             );
         }
 
-        public bool SpendTheDocument(DateTime spendDate)
+        public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             ЗамовленняКлієнта_Objest? obj = GetDocumentObject();
-            return (obj != null ? obj.SpendTheDocument(spendDate) : false);
+            return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
         }
 
-        public void ClearSpendTheDocument()
+        public async ValueTask ClearSpendTheDocument()
         {
             ЗамовленняКлієнта_Objest? obj = GetDocumentObject();
-            if (obj != null) obj.ClearSpendTheDocument();
+            if (obj != null) await obj.ClearSpendTheDocument();
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             ЗамовленняКлієнта_Objest? obj = GetDocumentObject();
                 if (obj == null) return;
@@ -14210,11 +14213,11 @@ namespace StorageAndTrade_1_0.Документи
                 
                 if (label)
                 {
-                    ЗамовленняКлієнта_SpendTheDocument.ClearSpend(obj);
-                    BaseSpend(false, DateTime.MinValue);
+                    await ЗамовленняКлієнта_SpendTheDocument.ClearSpend(obj);
+                    await BaseSpend(false, DateTime.MinValue);
                 }
                 
-            base.BaseDeletionLabel(label);
+            await base.BaseDeletionLabel(label);
         }
 
         public ЗамовленняКлієнта_Pointer Copy()
@@ -14323,12 +14326,12 @@ namespace StorageAndTrade_1_0.Документи
             base.BaseClear();
         }
         
-        public void Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
-            base.BaseBeginTransaction();
+            await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
-                base.BaseDelete(Owner.UnigueID);
+                await base.BaseDelete(Owner.UnigueID);
 
             foreach (Record record in Records)
             {
@@ -14346,15 +14349,15 @@ namespace StorageAndTrade_1_0.Документи
                 fieldValue.Add("col_c8", record.Скидка);
                 fieldValue.Add("col_a1", record.Склад.UnigueID.UGuid);
                 
-                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
-                
-            base.BaseCommitTransaction();
+            
+            await base.BaseCommitTransaction();
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
-            base.BaseDelete(Owner.UnigueID);
+            await base.BaseDelete(Owner.UnigueID);
         }
 
         public List<Record> Copy()
@@ -14898,7 +14901,7 @@ namespace StorageAndTrade_1_0.Документи
                 return false;
         }
         
-        public bool Save()
+        public async Task<bool> Save()
         {
             РеалізаціяТоварівТаПослуг_Triggers.BeforeSave(this);
             base.FieldValue["docname"] = Назва;
@@ -14934,7 +14937,7 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_c9"] = Менеджер.UnigueID.UGuid;
             base.FieldValue["col_d1"] = КлючовіСловаДляПошуку;
             
-            bool result = BaseSave();
+            bool result = await BaseSave();
             
             if (result)
             {
@@ -14945,17 +14948,18 @@ namespace StorageAndTrade_1_0.Документи
             return result;
         }
 
-        public bool SpendTheDocument(DateTime spendDate)
+        public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            bool rezult = РеалізаціяТоварівТаПослуг_SpendTheDocument.Spend(this);
-                BaseSpend(rezult, spendDate);
+            bool rezult = await РеалізаціяТоварівТаПослуг_SpendTheDocument.Spend(this);
+                await BaseSpend(rezult, spendDate);
                 return rezult;
         }
 
-        public void ClearSpendTheDocument()
+        public async ValueTask ClearSpendTheDocument()
         {
-            РеалізаціяТоварівТаПослуг_SpendTheDocument.ClearSpend(this);
-            BaseSpend(false, DateTime.MinValue);
+            
+                await РеалізаціяТоварівТаПослуг_SpendTheDocument.ClearSpend(this);
+            await BaseSpend(false, DateTime.MinValue);
         }
 
         public РеалізаціяТоварівТаПослуг_Objest Copy(bool copyTableParts = false)
@@ -15009,18 +15013,18 @@ namespace StorageAndTrade_1_0.Документи
             return copy;
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             РеалізаціяТоварівТаПослуг_Triggers.SetDeletionLabel(this, label);
-            ClearSpendTheDocument();
-            base.BaseDeletionLabel(label);
+            await ClearSpendTheDocument();
+            await base.BaseDeletionLabel(label);
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
             РеалізаціяТоварівТаПослуг_Triggers.BeforeDelete(this);
-            ClearSpendTheDocument();
-            base.BaseDelete(new string[] { "tab_a37" });
+            await ClearSpendTheDocument();
+            await base.BaseDelete(new string[] { "tab_a37" });
         }
         
         public РеалізаціяТоварівТаПослуг_Pointer GetDocumentPointer()
@@ -15092,19 +15096,19 @@ namespace StorageAndTrade_1_0.Документи
             );
         }
 
-        public bool SpendTheDocument(DateTime spendDate)
+        public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             РеалізаціяТоварівТаПослуг_Objest? obj = GetDocumentObject();
-            return (obj != null ? obj.SpendTheDocument(spendDate) : false);
+            return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
         }
 
-        public void ClearSpendTheDocument()
+        public async ValueTask ClearSpendTheDocument()
         {
             РеалізаціяТоварівТаПослуг_Objest? obj = GetDocumentObject();
-            if (obj != null) obj.ClearSpendTheDocument();
+            if (obj != null) await obj.ClearSpendTheDocument();
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             РеалізаціяТоварівТаПослуг_Objest? obj = GetDocumentObject();
                 if (obj == null) return;
@@ -15112,11 +15116,11 @@ namespace StorageAndTrade_1_0.Документи
                 
                 if (label)
                 {
-                    РеалізаціяТоварівТаПослуг_SpendTheDocument.ClearSpend(obj);
-                    BaseSpend(false, DateTime.MinValue);
+                    await РеалізаціяТоварівТаПослуг_SpendTheDocument.ClearSpend(obj);
+                    await BaseSpend(false, DateTime.MinValue);
                 }
                 
-            base.BaseDeletionLabel(label);
+            await base.BaseDeletionLabel(label);
         }
 
         public РеалізаціяТоварівТаПослуг_Pointer Copy()
@@ -15233,12 +15237,12 @@ namespace StorageAndTrade_1_0.Документи
             base.BaseClear();
         }
         
-        public void Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
-            base.BaseBeginTransaction();
+            await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
-                base.BaseDelete(Owner.UnigueID);
+                await base.BaseDelete(Owner.UnigueID);
 
             foreach (Record record in Records)
             {
@@ -15260,15 +15264,15 @@ namespace StorageAndTrade_1_0.Документи
                 fieldValue.Add("col_e3", record.Скидка);
                 fieldValue.Add("col_a4", record.Партія.UnigueID.UGuid);
                 
-                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
-                
-            base.BaseCommitTransaction();
+            
+            await base.BaseCommitTransaction();
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
-            base.BaseDelete(Owner.UnigueID);
+            await base.BaseDelete(Owner.UnigueID);
         }
 
         public List<Record> Copy()
@@ -15521,7 +15525,7 @@ namespace StorageAndTrade_1_0.Документи
                 return false;
         }
         
-        public bool Save()
+        public async Task<bool> Save()
         {
             ВстановленняЦінНоменклатури_Triggers.BeforeSave(this);
             base.FieldValue["docname"] = Назва;
@@ -15534,7 +15538,7 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a4"] = Автор.UnigueID.UGuid;
             base.FieldValue["col_a5"] = КлючовіСловаДляПошуку;
             
-            bool result = BaseSave();
+            bool result = await BaseSave();
             
             if (result)
             {
@@ -15545,17 +15549,18 @@ namespace StorageAndTrade_1_0.Документи
             return result;
         }
 
-        public bool SpendTheDocument(DateTime spendDate)
+        public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            bool rezult = ВстановленняЦінНоменклатури_SpendTheDocument.Spend(this);
-                BaseSpend(rezult, spendDate);
+            bool rezult = await ВстановленняЦінНоменклатури_SpendTheDocument.Spend(this);
+                await BaseSpend(rezult, spendDate);
                 return rezult;
         }
 
-        public void ClearSpendTheDocument()
+        public async ValueTask ClearSpendTheDocument()
         {
-            ВстановленняЦінНоменклатури_SpendTheDocument.ClearSpend(this);
-            BaseSpend(false, DateTime.MinValue);
+            
+                await ВстановленняЦінНоменклатури_SpendTheDocument.ClearSpend(this);
+            await BaseSpend(false, DateTime.MinValue);
         }
 
         public ВстановленняЦінНоменклатури_Objest Copy(bool copyTableParts = false)
@@ -15586,18 +15591,18 @@ namespace StorageAndTrade_1_0.Документи
             return copy;
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             ВстановленняЦінНоменклатури_Triggers.SetDeletionLabel(this, label);
-            ClearSpendTheDocument();
-            base.BaseDeletionLabel(label);
+            await ClearSpendTheDocument();
+            await base.BaseDeletionLabel(label);
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
             ВстановленняЦінНоменклатури_Triggers.BeforeDelete(this);
-            ClearSpendTheDocument();
-            base.BaseDelete(new string[] { "tab_a43" });
+            await ClearSpendTheDocument();
+            await base.BaseDelete(new string[] { "tab_a43" });
         }
         
         public ВстановленняЦінНоменклатури_Pointer GetDocumentPointer()
@@ -15646,19 +15651,19 @@ namespace StorageAndTrade_1_0.Документи
             );
         }
 
-        public bool SpendTheDocument(DateTime spendDate)
+        public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             ВстановленняЦінНоменклатури_Objest? obj = GetDocumentObject();
-            return (obj != null ? obj.SpendTheDocument(spendDate) : false);
+            return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
         }
 
-        public void ClearSpendTheDocument()
+        public async ValueTask ClearSpendTheDocument()
         {
             ВстановленняЦінНоменклатури_Objest? obj = GetDocumentObject();
-            if (obj != null) obj.ClearSpendTheDocument();
+            if (obj != null) await obj.ClearSpendTheDocument();
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             ВстановленняЦінНоменклатури_Objest? obj = GetDocumentObject();
                 if (obj == null) return;
@@ -15666,11 +15671,11 @@ namespace StorageAndTrade_1_0.Документи
                 
                 if (label)
                 {
-                    ВстановленняЦінНоменклатури_SpendTheDocument.ClearSpend(obj);
-                    BaseSpend(false, DateTime.MinValue);
+                    await ВстановленняЦінНоменклатури_SpendTheDocument.ClearSpend(obj);
+                    await BaseSpend(false, DateTime.MinValue);
                 }
                 
-            base.BaseDeletionLabel(label);
+            await base.BaseDeletionLabel(label);
         }
 
         public ВстановленняЦінНоменклатури_Pointer Copy()
@@ -15769,12 +15774,12 @@ namespace StorageAndTrade_1_0.Документи
             base.BaseClear();
         }
         
-        public void Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
-            base.BaseBeginTransaction();
+            await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
-                base.BaseDelete(Owner.UnigueID);
+                await base.BaseDelete(Owner.UnigueID);
 
             foreach (Record record in Records)
             {
@@ -15787,15 +15792,15 @@ namespace StorageAndTrade_1_0.Документи
                 fieldValue.Add("col_h4", record.ВидЦіни.UnigueID.UGuid);
                 fieldValue.Add("col_h5", record.Ціна);
                 
-                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
-                
-            base.BaseCommitTransaction();
+            
+            await base.BaseCommitTransaction();
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
-            base.BaseDelete(Owner.UnigueID);
+            await base.BaseDelete(Owner.UnigueID);
         }
 
         public List<Record> Copy()
@@ -16130,7 +16135,7 @@ namespace StorageAndTrade_1_0.Документи
                 return false;
         }
         
-        public bool Save()
+        public async Task<bool> Save()
         {
             ПрихіднийКасовийОрдер_Triggers.BeforeSave(this);
             base.FieldValue["docname"] = Назва;
@@ -16152,7 +16157,7 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a5"] = Автор.UnigueID.UGuid;
             base.FieldValue["col_a7"] = КлючовіСловаДляПошуку;
             
-            bool result = BaseSave();
+            bool result = await BaseSave();
             
             if (result)
             {
@@ -16163,17 +16168,18 @@ namespace StorageAndTrade_1_0.Документи
             return result;
         }
 
-        public bool SpendTheDocument(DateTime spendDate)
+        public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            bool rezult = ПрихіднийКасовийОрдер_SpendTheDocument.Spend(this);
-                BaseSpend(rezult, spendDate);
+            bool rezult = await ПрихіднийКасовийОрдер_SpendTheDocument.Spend(this);
+                await BaseSpend(rezult, spendDate);
                 return rezult;
         }
 
-        public void ClearSpendTheDocument()
+        public async ValueTask ClearSpendTheDocument()
         {
-            ПрихіднийКасовийОрдер_SpendTheDocument.ClearSpend(this);
-            BaseSpend(false, DateTime.MinValue);
+            
+                await ПрихіднийКасовийОрдер_SpendTheDocument.ClearSpend(this);
+            await BaseSpend(false, DateTime.MinValue);
         }
 
         public ПрихіднийКасовийОрдер_Objest Copy(bool copyTableParts = false)
@@ -16213,18 +16219,18 @@ namespace StorageAndTrade_1_0.Документи
             return copy;
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             ПрихіднийКасовийОрдер_Triggers.SetDeletionLabel(this, label);
-            ClearSpendTheDocument();
-            base.BaseDeletionLabel(label);
+            await ClearSpendTheDocument();
+            await base.BaseDeletionLabel(label);
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
             ПрихіднийКасовийОрдер_Triggers.BeforeDelete(this);
-            ClearSpendTheDocument();
-            base.BaseDelete(new string[] { "tab_a47" });
+            await ClearSpendTheDocument();
+            await base.BaseDelete(new string[] { "tab_a47" });
         }
         
         public ПрихіднийКасовийОрдер_Pointer GetDocumentPointer()
@@ -16282,19 +16288,19 @@ namespace StorageAndTrade_1_0.Документи
             );
         }
 
-        public bool SpendTheDocument(DateTime spendDate)
+        public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             ПрихіднийКасовийОрдер_Objest? obj = GetDocumentObject();
-            return (obj != null ? obj.SpendTheDocument(spendDate) : false);
+            return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
         }
 
-        public void ClearSpendTheDocument()
+        public async ValueTask ClearSpendTheDocument()
         {
             ПрихіднийКасовийОрдер_Objest? obj = GetDocumentObject();
-            if (obj != null) obj.ClearSpendTheDocument();
+            if (obj != null) await obj.ClearSpendTheDocument();
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             ПрихіднийКасовийОрдер_Objest? obj = GetDocumentObject();
                 if (obj == null) return;
@@ -16302,11 +16308,11 @@ namespace StorageAndTrade_1_0.Документи
                 
                 if (label)
                 {
-                    ПрихіднийКасовийОрдер_SpendTheDocument.ClearSpend(obj);
-                    BaseSpend(false, DateTime.MinValue);
+                    await ПрихіднийКасовийОрдер_SpendTheDocument.ClearSpend(obj);
+                    await BaseSpend(false, DateTime.MinValue);
                 }
                 
-            base.BaseDeletionLabel(label);
+            await base.BaseDeletionLabel(label);
         }
 
         public ПрихіднийКасовийОрдер_Pointer Copy()
@@ -16405,12 +16411,12 @@ namespace StorageAndTrade_1_0.Документи
             base.BaseClear();
         }
         
-        public void Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
-            base.BaseBeginTransaction();
+            await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
-                base.BaseDelete(Owner.UnigueID);
+                await base.BaseDelete(Owner.UnigueID);
 
             foreach (Record record in Records)
             {
@@ -16423,15 +16429,15 @@ namespace StorageAndTrade_1_0.Документи
                 fieldValue.Add("col_j7", record.ВалютаВзаєморозрахунків.UnigueID.UGuid);
                 fieldValue.Add("col_j8", record.Організація.UnigueID.UGuid);
                 
-                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
-                
-            base.BaseCommitTransaction();
+            
+            await base.BaseCommitTransaction();
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
-            base.BaseDelete(Owner.UnigueID);
+            await base.BaseDelete(Owner.UnigueID);
         }
 
         public List<Record> Copy()
@@ -16792,7 +16798,7 @@ namespace StorageAndTrade_1_0.Документи
                 return false;
         }
         
-        public bool Save()
+        public async Task<bool> Save()
         {
             РозхіднийКасовийОрдер_Triggers.BeforeSave(this);
             base.FieldValue["docname"] = Назва;
@@ -16816,7 +16822,7 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a6"] = Автор.UnigueID.UGuid;
             base.FieldValue["col_a7"] = КлючовіСловаДляПошуку;
             
-            bool result = BaseSave();
+            bool result = await BaseSave();
             
             if (result)
             {
@@ -16827,17 +16833,18 @@ namespace StorageAndTrade_1_0.Документи
             return result;
         }
 
-        public bool SpendTheDocument(DateTime spendDate)
+        public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            bool rezult = РозхіднийКасовийОрдер_SpendTheDocument.Spend(this);
-                BaseSpend(rezult, spendDate);
+            bool rezult = await РозхіднийКасовийОрдер_SpendTheDocument.Spend(this);
+                await BaseSpend(rezult, spendDate);
                 return rezult;
         }
 
-        public void ClearSpendTheDocument()
+        public async ValueTask ClearSpendTheDocument()
         {
-            РозхіднийКасовийОрдер_SpendTheDocument.ClearSpend(this);
-            BaseSpend(false, DateTime.MinValue);
+            
+                await РозхіднийКасовийОрдер_SpendTheDocument.ClearSpend(this);
+            await BaseSpend(false, DateTime.MinValue);
         }
 
         public РозхіднийКасовийОрдер_Objest Copy(bool copyTableParts = false)
@@ -16879,18 +16886,18 @@ namespace StorageAndTrade_1_0.Документи
             return copy;
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             РозхіднийКасовийОрдер_Triggers.SetDeletionLabel(this, label);
-            ClearSpendTheDocument();
-            base.BaseDeletionLabel(label);
+            await ClearSpendTheDocument();
+            await base.BaseDeletionLabel(label);
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
             РозхіднийКасовийОрдер_Triggers.BeforeDelete(this);
-            ClearSpendTheDocument();
-            base.BaseDelete(new string[] { "tab_a49" });
+            await ClearSpendTheDocument();
+            await base.BaseDelete(new string[] { "tab_a49" });
         }
         
         public РозхіднийКасовийОрдер_Pointer GetDocumentPointer()
@@ -16950,19 +16957,19 @@ namespace StorageAndTrade_1_0.Документи
             );
         }
 
-        public bool SpendTheDocument(DateTime spendDate)
+        public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             РозхіднийКасовийОрдер_Objest? obj = GetDocumentObject();
-            return (obj != null ? obj.SpendTheDocument(spendDate) : false);
+            return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
         }
 
-        public void ClearSpendTheDocument()
+        public async ValueTask ClearSpendTheDocument()
         {
             РозхіднийКасовийОрдер_Objest? obj = GetDocumentObject();
-            if (obj != null) obj.ClearSpendTheDocument();
+            if (obj != null) await obj.ClearSpendTheDocument();
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             РозхіднийКасовийОрдер_Objest? obj = GetDocumentObject();
                 if (obj == null) return;
@@ -16970,11 +16977,11 @@ namespace StorageAndTrade_1_0.Документи
                 
                 if (label)
                 {
-                    РозхіднийКасовийОрдер_SpendTheDocument.ClearSpend(obj);
-                    BaseSpend(false, DateTime.MinValue);
+                    await РозхіднийКасовийОрдер_SpendTheDocument.ClearSpend(obj);
+                    await BaseSpend(false, DateTime.MinValue);
                 }
                 
-            base.BaseDeletionLabel(label);
+            await base.BaseDeletionLabel(label);
         }
 
         public РозхіднийКасовийОрдер_Pointer Copy()
@@ -17075,12 +17082,12 @@ namespace StorageAndTrade_1_0.Документи
             base.BaseClear();
         }
         
-        public void Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
-            base.BaseBeginTransaction();
+            await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
-                base.BaseDelete(Owner.UnigueID);
+                await base.BaseDelete(Owner.UnigueID);
 
             foreach (Record record in Records)
             {
@@ -17094,15 +17101,15 @@ namespace StorageAndTrade_1_0.Документи
                 fieldValue.Add("col_l8", record.Коментар);
                 fieldValue.Add("col_l9", record.Організація.UnigueID.UGuid);
                 
-                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
-                
-            base.BaseCommitTransaction();
+            
+            await base.BaseCommitTransaction();
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
-            base.BaseDelete(Owner.UnigueID);
+            await base.BaseDelete(Owner.UnigueID);
         }
 
         public List<Record> Copy()
@@ -17485,7 +17492,7 @@ namespace StorageAndTrade_1_0.Документи
                 return false;
         }
         
-        public bool Save()
+        public async Task<bool> Save()
         {
             ПереміщенняТоварів_Triggers.BeforeSave(this);
             base.FieldValue["docname"] = Назва;
@@ -17510,7 +17517,7 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a2"] = Основа;
             base.FieldValue["col_b9"] = КлючовіСловаДляПошуку;
             
-            bool result = BaseSave();
+            bool result = await BaseSave();
             
             if (result)
             {
@@ -17521,17 +17528,18 @@ namespace StorageAndTrade_1_0.Документи
             return result;
         }
 
-        public bool SpendTheDocument(DateTime spendDate)
+        public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            bool rezult = ПереміщенняТоварів_SpendTheDocument.Spend(this);
-                BaseSpend(rezult, spendDate);
+            bool rezult = await ПереміщенняТоварів_SpendTheDocument.Spend(this);
+                await BaseSpend(rezult, spendDate);
                 return rezult;
         }
 
-        public void ClearSpendTheDocument()
+        public async ValueTask ClearSpendTheDocument()
         {
-            ПереміщенняТоварів_SpendTheDocument.ClearSpend(this);
-            BaseSpend(false, DateTime.MinValue);
+            
+                await ПереміщенняТоварів_SpendTheDocument.ClearSpend(this);
+            await BaseSpend(false, DateTime.MinValue);
         }
 
         public ПереміщенняТоварів_Objest Copy(bool copyTableParts = false)
@@ -17574,18 +17582,18 @@ namespace StorageAndTrade_1_0.Документи
             return copy;
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             ПереміщенняТоварів_Triggers.SetDeletionLabel(this, label);
-            ClearSpendTheDocument();
-            base.BaseDeletionLabel(label);
+            await ClearSpendTheDocument();
+            await base.BaseDeletionLabel(label);
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
             ПереміщенняТоварів_Triggers.BeforeDelete(this);
-            ClearSpendTheDocument();
-            base.BaseDelete(new string[] { "tab_a50" });
+            await ClearSpendTheDocument();
+            await base.BaseDelete(new string[] { "tab_a50" });
         }
         
         public ПереміщенняТоварів_Pointer GetDocumentPointer()
@@ -17646,19 +17654,19 @@ namespace StorageAndTrade_1_0.Документи
             );
         }
 
-        public bool SpendTheDocument(DateTime spendDate)
+        public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             ПереміщенняТоварів_Objest? obj = GetDocumentObject();
-            return (obj != null ? obj.SpendTheDocument(spendDate) : false);
+            return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
         }
 
-        public void ClearSpendTheDocument()
+        public async ValueTask ClearSpendTheDocument()
         {
             ПереміщенняТоварів_Objest? obj = GetDocumentObject();
-            if (obj != null) obj.ClearSpendTheDocument();
+            if (obj != null) await obj.ClearSpendTheDocument();
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             ПереміщенняТоварів_Objest? obj = GetDocumentObject();
                 if (obj == null) return;
@@ -17666,11 +17674,11 @@ namespace StorageAndTrade_1_0.Документи
                 
                 if (label)
                 {
-                    ПереміщенняТоварів_SpendTheDocument.ClearSpend(obj);
-                    BaseSpend(false, DateTime.MinValue);
+                    await ПереміщенняТоварів_SpendTheDocument.ClearSpend(obj);
+                    await BaseSpend(false, DateTime.MinValue);
                 }
                 
-            base.BaseDeletionLabel(label);
+            await base.BaseDeletionLabel(label);
         }
 
         public ПереміщенняТоварів_Pointer Copy()
@@ -17773,12 +17781,12 @@ namespace StorageAndTrade_1_0.Документи
             base.BaseClear();
         }
         
-        public void Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
-            base.BaseBeginTransaction();
+            await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
-                base.BaseDelete(Owner.UnigueID);
+                await base.BaseDelete(Owner.UnigueID);
 
             foreach (Record record in Records)
             {
@@ -17793,15 +17801,15 @@ namespace StorageAndTrade_1_0.Документи
                 fieldValue.Add("col_b7", record.Кількість);
                 fieldValue.Add("col_a2", record.Партія.UnigueID.UGuid);
                 
-                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
-                
-            base.BaseCommitTransaction();
+            
+            await base.BaseCommitTransaction();
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
-            base.BaseDelete(Owner.UnigueID);
+            await base.BaseDelete(Owner.UnigueID);
         }
 
         public List<Record> Copy()
@@ -18217,7 +18225,7 @@ namespace StorageAndTrade_1_0.Документи
                 return false;
         }
         
-        public bool Save()
+        public async Task<bool> Save()
         {
             ПоверненняТоварівПостачальнику_Triggers.BeforeSave(this);
             base.FieldValue["docname"] = Назва;
@@ -18244,7 +18252,7 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a4"] = Менеджер.UnigueID.UGuid;
             base.FieldValue["col_a5"] = КлючовіСловаДляПошуку;
             
-            bool result = BaseSave();
+            bool result = await BaseSave();
             
             if (result)
             {
@@ -18255,17 +18263,18 @@ namespace StorageAndTrade_1_0.Документи
             return result;
         }
 
-        public bool SpendTheDocument(DateTime spendDate)
+        public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            bool rezult = ПоверненняТоварівПостачальнику_SpendTheDocument.Spend(this);
-                BaseSpend(rezult, spendDate);
+            bool rezult = await ПоверненняТоварівПостачальнику_SpendTheDocument.Spend(this);
+                await BaseSpend(rezult, spendDate);
                 return rezult;
         }
 
-        public void ClearSpendTheDocument()
+        public async ValueTask ClearSpendTheDocument()
         {
-            ПоверненняТоварівПостачальнику_SpendTheDocument.ClearSpend(this);
-            BaseSpend(false, DateTime.MinValue);
+            
+                await ПоверненняТоварівПостачальнику_SpendTheDocument.ClearSpend(this);
+            await BaseSpend(false, DateTime.MinValue);
         }
 
         public ПоверненняТоварівПостачальнику_Objest Copy(bool copyTableParts = false)
@@ -18310,18 +18319,18 @@ namespace StorageAndTrade_1_0.Документи
             return copy;
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             ПоверненняТоварівПостачальнику_Triggers.SetDeletionLabel(this, label);
-            ClearSpendTheDocument();
-            base.BaseDeletionLabel(label);
+            await ClearSpendTheDocument();
+            await base.BaseDeletionLabel(label);
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
             ПоверненняТоварівПостачальнику_Triggers.BeforeDelete(this);
-            ClearSpendTheDocument();
-            base.BaseDelete(new string[] { "tab_a52" });
+            await ClearSpendTheDocument();
+            await base.BaseDelete(new string[] { "tab_a52" });
         }
         
         public ПоверненняТоварівПостачальнику_Pointer GetDocumentPointer()
@@ -18384,19 +18393,19 @@ namespace StorageAndTrade_1_0.Документи
             );
         }
 
-        public bool SpendTheDocument(DateTime spendDate)
+        public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             ПоверненняТоварівПостачальнику_Objest? obj = GetDocumentObject();
-            return (obj != null ? obj.SpendTheDocument(spendDate) : false);
+            return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
         }
 
-        public void ClearSpendTheDocument()
+        public async ValueTask ClearSpendTheDocument()
         {
             ПоверненняТоварівПостачальнику_Objest? obj = GetDocumentObject();
-            if (obj != null) obj.ClearSpendTheDocument();
+            if (obj != null) await obj.ClearSpendTheDocument();
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             ПоверненняТоварівПостачальнику_Objest? obj = GetDocumentObject();
                 if (obj == null) return;
@@ -18404,11 +18413,11 @@ namespace StorageAndTrade_1_0.Документи
                 
                 if (label)
                 {
-                    ПоверненняТоварівПостачальнику_SpendTheDocument.ClearSpend(obj);
-                    BaseSpend(false, DateTime.MinValue);
+                    await ПоверненняТоварівПостачальнику_SpendTheDocument.ClearSpend(obj);
+                    await BaseSpend(false, DateTime.MinValue);
                 }
                 
-            base.BaseDeletionLabel(label);
+            await base.BaseDeletionLabel(label);
         }
 
         public ПоверненняТоварівПостачальнику_Pointer Copy()
@@ -18515,12 +18524,12 @@ namespace StorageAndTrade_1_0.Документи
             base.BaseClear();
         }
         
-        public void Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
-            base.BaseBeginTransaction();
+            await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
-                base.BaseDelete(Owner.UnigueID);
+                await base.BaseDelete(Owner.UnigueID);
 
             foreach (Record record in Records)
             {
@@ -18537,15 +18546,15 @@ namespace StorageAndTrade_1_0.Документи
                 fieldValue.Add("col_e5", record.Сума);
                 fieldValue.Add("col_a2", record.ДокументПоступлення.UnigueID.UGuid);
                 
-                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
-                
-            base.BaseCommitTransaction();
+            
+            await base.BaseCommitTransaction();
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
-            base.BaseDelete(Owner.UnigueID);
+            await base.BaseDelete(Owner.UnigueID);
         }
 
         public List<Record> Copy()
@@ -18929,7 +18938,7 @@ namespace StorageAndTrade_1_0.Документи
                 return false;
         }
         
-        public bool Save()
+        public async Task<bool> Save()
         {
             ПоверненняТоварівВідКлієнта_Triggers.BeforeSave(this);
             base.FieldValue["docname"] = Назва;
@@ -18952,7 +18961,7 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a3"] = Автор.UnigueID.UGuid;
             base.FieldValue["col_a4"] = КлючовіСловаДляПошуку;
             
-            bool result = BaseSave();
+            bool result = await BaseSave();
             
             if (result)
             {
@@ -18963,17 +18972,18 @@ namespace StorageAndTrade_1_0.Документи
             return result;
         }
 
-        public bool SpendTheDocument(DateTime spendDate)
+        public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            bool rezult = ПоверненняТоварівВідКлієнта_SpendTheDocument.Spend(this);
-                BaseSpend(rezult, spendDate);
+            bool rezult = await ПоверненняТоварівВідКлієнта_SpendTheDocument.Spend(this);
+                await BaseSpend(rezult, spendDate);
                 return rezult;
         }
 
-        public void ClearSpendTheDocument()
+        public async ValueTask ClearSpendTheDocument()
         {
-            ПоверненняТоварівВідКлієнта_SpendTheDocument.ClearSpend(this);
-            BaseSpend(false, DateTime.MinValue);
+            
+                await ПоверненняТоварівВідКлієнта_SpendTheDocument.ClearSpend(this);
+            await BaseSpend(false, DateTime.MinValue);
         }
 
         public ПоверненняТоварівВідКлієнта_Objest Copy(bool copyTableParts = false)
@@ -19014,18 +19024,18 @@ namespace StorageAndTrade_1_0.Документи
             return copy;
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             ПоверненняТоварівВідКлієнта_Triggers.SetDeletionLabel(this, label);
-            ClearSpendTheDocument();
-            base.BaseDeletionLabel(label);
+            await ClearSpendTheDocument();
+            await base.BaseDeletionLabel(label);
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
             ПоверненняТоварівВідКлієнта_Triggers.BeforeDelete(this);
-            ClearSpendTheDocument();
-            base.BaseDelete(new string[] { "tab_a54" });
+            await ClearSpendTheDocument();
+            await base.BaseDelete(new string[] { "tab_a54" });
         }
         
         public ПоверненняТоварівВідКлієнта_Pointer GetDocumentPointer()
@@ -19084,19 +19094,19 @@ namespace StorageAndTrade_1_0.Документи
             );
         }
 
-        public bool SpendTheDocument(DateTime spendDate)
+        public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             ПоверненняТоварівВідКлієнта_Objest? obj = GetDocumentObject();
-            return (obj != null ? obj.SpendTheDocument(spendDate) : false);
+            return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
         }
 
-        public void ClearSpendTheDocument()
+        public async ValueTask ClearSpendTheDocument()
         {
             ПоверненняТоварівВідКлієнта_Objest? obj = GetDocumentObject();
-            if (obj != null) obj.ClearSpendTheDocument();
+            if (obj != null) await obj.ClearSpendTheDocument();
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             ПоверненняТоварівВідКлієнта_Objest? obj = GetDocumentObject();
                 if (obj == null) return;
@@ -19104,11 +19114,11 @@ namespace StorageAndTrade_1_0.Документи
                 
                 if (label)
                 {
-                    ПоверненняТоварівВідКлієнта_SpendTheDocument.ClearSpend(obj);
-                    BaseSpend(false, DateTime.MinValue);
+                    await ПоверненняТоварівВідКлієнта_SpendTheDocument.ClearSpend(obj);
+                    await BaseSpend(false, DateTime.MinValue);
                 }
                 
-            base.BaseDeletionLabel(label);
+            await base.BaseDeletionLabel(label);
         }
 
         public ПоверненняТоварівВідКлієнта_Pointer Copy()
@@ -19217,12 +19227,12 @@ namespace StorageAndTrade_1_0.Документи
             base.BaseClear();
         }
         
-        public void Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
-            base.BaseBeginTransaction();
+            await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
-                base.BaseDelete(Owner.UnigueID);
+                await base.BaseDelete(Owner.UnigueID);
 
             foreach (Record record in Records)
             {
@@ -19240,15 +19250,15 @@ namespace StorageAndTrade_1_0.Документи
                 fieldValue.Add("col_h1", record.Штрихкод);
                 fieldValue.Add("col_a2", record.ДокументРеалізації.UnigueID.UGuid);
                 
-                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
-                
-            base.BaseCommitTransaction();
+            
+            await base.BaseCommitTransaction();
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
-            base.BaseDelete(Owner.UnigueID);
+            await base.BaseDelete(Owner.UnigueID);
         }
 
         public List<Record> Copy()
@@ -19579,7 +19589,7 @@ namespace StorageAndTrade_1_0.Документи
                 return false;
         }
         
-        public bool Save()
+        public async Task<bool> Save()
         {
             АктВиконанихРобіт_Triggers.BeforeSave(this);
             base.FieldValue["docname"] = Назва;
@@ -19600,7 +19610,7 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a8"] = Менеджер.UnigueID.UGuid;
             base.FieldValue["col_a9"] = КлючовіСловаДляПошуку;
             
-            bool result = BaseSave();
+            bool result = await BaseSave();
             
             if (result)
             {
@@ -19611,17 +19621,18 @@ namespace StorageAndTrade_1_0.Документи
             return result;
         }
 
-        public bool SpendTheDocument(DateTime spendDate)
+        public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            bool rezult = АктВиконанихРобіт_SpendTheDocument.Spend(this);
-                BaseSpend(rezult, spendDate);
+            bool rezult = await АктВиконанихРобіт_SpendTheDocument.Spend(this);
+                await BaseSpend(rezult, spendDate);
                 return rezult;
         }
 
-        public void ClearSpendTheDocument()
+        public async ValueTask ClearSpendTheDocument()
         {
-            АктВиконанихРобіт_SpendTheDocument.ClearSpend(this);
-            BaseSpend(false, DateTime.MinValue);
+            
+                await АктВиконанихРобіт_SpendTheDocument.ClearSpend(this);
+            await BaseSpend(false, DateTime.MinValue);
         }
 
         public АктВиконанихРобіт_Objest Copy(bool copyTableParts = false)
@@ -19660,18 +19671,18 @@ namespace StorageAndTrade_1_0.Документи
             return copy;
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             АктВиконанихРобіт_Triggers.SetDeletionLabel(this, label);
-            ClearSpendTheDocument();
-            base.BaseDeletionLabel(label);
+            await ClearSpendTheDocument();
+            await base.BaseDeletionLabel(label);
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
             АктВиконанихРобіт_Triggers.BeforeDelete(this);
-            ClearSpendTheDocument();
-            base.BaseDelete(new string[] { "tab_a82" });
+            await ClearSpendTheDocument();
+            await base.BaseDelete(new string[] { "tab_a82" });
         }
         
         public АктВиконанихРобіт_Pointer GetDocumentPointer()
@@ -19728,19 +19739,19 @@ namespace StorageAndTrade_1_0.Документи
             );
         }
 
-        public bool SpendTheDocument(DateTime spendDate)
+        public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             АктВиконанихРобіт_Objest? obj = GetDocumentObject();
-            return (obj != null ? obj.SpendTheDocument(spendDate) : false);
+            return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
         }
 
-        public void ClearSpendTheDocument()
+        public async ValueTask ClearSpendTheDocument()
         {
             АктВиконанихРобіт_Objest? obj = GetDocumentObject();
-            if (obj != null) obj.ClearSpendTheDocument();
+            if (obj != null) await obj.ClearSpendTheDocument();
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             АктВиконанихРобіт_Objest? obj = GetDocumentObject();
                 if (obj == null) return;
@@ -19748,11 +19759,11 @@ namespace StorageAndTrade_1_0.Документи
                 
                 if (label)
                 {
-                    АктВиконанихРобіт_SpendTheDocument.ClearSpend(obj);
-                    BaseSpend(false, DateTime.MinValue);
+                    await АктВиконанихРобіт_SpendTheDocument.ClearSpend(obj);
+                    await BaseSpend(false, DateTime.MinValue);
                 }
                 
-            base.BaseDeletionLabel(label);
+            await base.BaseDeletionLabel(label);
         }
 
         public АктВиконанихРобіт_Pointer Copy()
@@ -19851,12 +19862,12 @@ namespace StorageAndTrade_1_0.Документи
             base.BaseClear();
         }
         
-        public void Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
-            base.BaseBeginTransaction();
+            await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
-                base.BaseDelete(Owner.UnigueID);
+                await base.BaseDelete(Owner.UnigueID);
 
             foreach (Record record in Records)
             {
@@ -19869,15 +19880,15 @@ namespace StorageAndTrade_1_0.Документи
                 fieldValue.Add("col_c3", record.Ціна);
                 fieldValue.Add("col_c2", record.Сума);
                 
-                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
-                
-            base.BaseCommitTransaction();
+            
+            await base.BaseCommitTransaction();
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
-            base.BaseDelete(Owner.UnigueID);
+            await base.BaseDelete(Owner.UnigueID);
         }
 
         public List<Record> Copy()
@@ -20301,7 +20312,7 @@ namespace StorageAndTrade_1_0.Документи
                 return false;
         }
         
-        public bool Save()
+        public async Task<bool> Save()
         {
             ВведенняЗалишків_Triggers.BeforeSave(this);
             base.FieldValue["docname"] = Назва;
@@ -20318,7 +20329,7 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a3"] = Автор.UnigueID.UGuid;
             base.FieldValue["col_a2"] = КлючовіСловаДляПошуку;
             
-            bool result = BaseSave();
+            bool result = await BaseSave();
             
             if (result)
             {
@@ -20329,17 +20340,18 @@ namespace StorageAndTrade_1_0.Документи
             return result;
         }
 
-        public bool SpendTheDocument(DateTime spendDate)
+        public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            bool rezult = ВведенняЗалишків_SpendTheDocument.Spend(this);
-                BaseSpend(rezult, spendDate);
+            bool rezult = await ВведенняЗалишків_SpendTheDocument.Spend(this);
+                await BaseSpend(rezult, spendDate);
                 return rezult;
         }
 
-        public void ClearSpendTheDocument()
+        public async ValueTask ClearSpendTheDocument()
         {
-            ВведенняЗалишків_SpendTheDocument.ClearSpend(this);
-            BaseSpend(false, DateTime.MinValue);
+            
+                await ВведенняЗалишків_SpendTheDocument.ClearSpend(this);
+            await BaseSpend(false, DateTime.MinValue);
         }
 
         public ВведенняЗалишків_Objest Copy(bool copyTableParts = false)
@@ -20386,18 +20398,18 @@ namespace StorageAndTrade_1_0.Документи
             return copy;
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             ВведенняЗалишків_Triggers.SetDeletionLabel(this, label);
-            ClearSpendTheDocument();
-            base.BaseDeletionLabel(label);
+            await ClearSpendTheDocument();
+            await base.BaseDeletionLabel(label);
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
             ВведенняЗалишків_Triggers.BeforeDelete(this);
-            ClearSpendTheDocument();
-            base.BaseDelete(new string[] { "tab_a84", "tab_a85", "tab_a86", "tab_a87" });
+            await ClearSpendTheDocument();
+            await base.BaseDelete(new string[] { "tab_a84", "tab_a85", "tab_a86", "tab_a87" });
         }
         
         public ВведенняЗалишків_Pointer GetDocumentPointer()
@@ -20453,19 +20465,19 @@ namespace StorageAndTrade_1_0.Документи
             );
         }
 
-        public bool SpendTheDocument(DateTime spendDate)
+        public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             ВведенняЗалишків_Objest? obj = GetDocumentObject();
-            return (obj != null ? obj.SpendTheDocument(spendDate) : false);
+            return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
         }
 
-        public void ClearSpendTheDocument()
+        public async ValueTask ClearSpendTheDocument()
         {
             ВведенняЗалишків_Objest? obj = GetDocumentObject();
-            if (obj != null) obj.ClearSpendTheDocument();
+            if (obj != null) await obj.ClearSpendTheDocument();
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             ВведенняЗалишків_Objest? obj = GetDocumentObject();
                 if (obj == null) return;
@@ -20473,11 +20485,11 @@ namespace StorageAndTrade_1_0.Документи
                 
                 if (label)
                 {
-                    ВведенняЗалишків_SpendTheDocument.ClearSpend(obj);
-                    BaseSpend(false, DateTime.MinValue);
+                    await ВведенняЗалишків_SpendTheDocument.ClearSpend(obj);
+                    await BaseSpend(false, DateTime.MinValue);
                 }
                 
-            base.BaseDeletionLabel(label);
+            await base.BaseDeletionLabel(label);
         }
 
         public ВведенняЗалишків_Pointer Copy()
@@ -20582,12 +20594,12 @@ namespace StorageAndTrade_1_0.Документи
             base.BaseClear();
         }
         
-        public void Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
-            base.BaseBeginTransaction();
+            await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
-                base.BaseDelete(Owner.UnigueID);
+                await base.BaseDelete(Owner.UnigueID);
 
             foreach (Record record in Records)
             {
@@ -20603,15 +20615,15 @@ namespace StorageAndTrade_1_0.Документи
                 fieldValue.Add("col_e2", record.Ціна);
                 fieldValue.Add("col_e3", record.Сума);
                 
-                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
-                
-            base.BaseCommitTransaction();
+            
+            await base.BaseCommitTransaction();
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
-            base.BaseDelete(Owner.UnigueID);
+            await base.BaseDelete(Owner.UnigueID);
         }
 
         public List<Record> Copy()
@@ -20680,12 +20692,12 @@ namespace StorageAndTrade_1_0.Документи
             base.BaseClear();
         }
         
-        public void Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
-            base.BaseBeginTransaction();
+            await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
-                base.BaseDelete(Owner.UnigueID);
+                await base.BaseDelete(Owner.UnigueID);
 
             foreach (Record record in Records)
             {
@@ -20695,15 +20707,15 @@ namespace StorageAndTrade_1_0.Документи
                 fieldValue.Add("col_e5", record.Каса.UnigueID.UGuid);
                 fieldValue.Add("col_e6", record.Сума);
                 
-                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
-                
-            base.BaseCommitTransaction();
+            
+            await base.BaseCommitTransaction();
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
-            base.BaseDelete(Owner.UnigueID);
+            await base.BaseDelete(Owner.UnigueID);
         }
 
         public List<Record> Copy()
@@ -20766,12 +20778,12 @@ namespace StorageAndTrade_1_0.Документи
             base.BaseClear();
         }
         
-        public void Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
-            base.BaseBeginTransaction();
+            await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
-                base.BaseDelete(Owner.UnigueID);
+                await base.BaseDelete(Owner.UnigueID);
 
             foreach (Record record in Records)
             {
@@ -20781,15 +20793,15 @@ namespace StorageAndTrade_1_0.Документи
                 fieldValue.Add("col_e7", record.БанківськийРахунок.UnigueID.UGuid);
                 fieldValue.Add("col_e8", record.Сума);
                 
-                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
-                
-            base.BaseCommitTransaction();
+            
+            await base.BaseCommitTransaction();
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
-            base.BaseDelete(Owner.UnigueID);
+            await base.BaseDelete(Owner.UnigueID);
         }
 
         public List<Record> Copy()
@@ -20856,12 +20868,12 @@ namespace StorageAndTrade_1_0.Документи
             base.BaseClear();
         }
         
-        public void Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
-            base.BaseBeginTransaction();
+            await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
-                base.BaseDelete(Owner.UnigueID);
+                await base.BaseDelete(Owner.UnigueID);
 
             foreach (Record record in Records)
             {
@@ -20873,15 +20885,15 @@ namespace StorageAndTrade_1_0.Документи
                 fieldValue.Add("col_f2", record.Сума);
                 fieldValue.Add("col_a2", (int)record.ТипКонтрагента);
                 
-                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
-                
-            base.BaseCommitTransaction();
+            
+            await base.BaseCommitTransaction();
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
-            base.BaseDelete(Owner.UnigueID);
+            await base.BaseDelete(Owner.UnigueID);
         }
 
         public List<Record> Copy()
@@ -21124,7 +21136,7 @@ namespace StorageAndTrade_1_0.Документи
                 return false;
         }
         
-        public bool Save()
+        public async Task<bool> Save()
         {
             base.FieldValue["col_f6"] = Організація.UnigueID.UGuid;
             base.FieldValue["col_f7"] = Підрозділ.UnigueID.UGuid;
@@ -21137,7 +21149,7 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a1"] = Автор.UnigueID.UGuid;
             base.FieldValue["col_a2"] = КлючовіСловаДляПошуку;
             
-            bool result = BaseSave();
+            bool result = await BaseSave();
             
             if (result)
             {
@@ -21148,15 +21160,15 @@ namespace StorageAndTrade_1_0.Документи
             return result;
         }
 
-        public bool SpendTheDocument(DateTime spendDate)
+        public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            BaseSpend(false, DateTime.MinValue);
+            await BaseSpend(false, DateTime.MinValue);
                 return false;
         }
 
-        public void ClearSpendTheDocument()
+        public async ValueTask ClearSpendTheDocument()
         {
-            BaseSpend(false, DateTime.MinValue);
+            await BaseSpend(false, DateTime.MinValue);
         }
 
         public НадлишкиТоварів_Objest Copy(bool copyTableParts = false)
@@ -21188,18 +21200,18 @@ namespace StorageAndTrade_1_0.Документи
             return copy;
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             
-            ClearSpendTheDocument();
-            base.BaseDeletionLabel(label);
+            await ClearSpendTheDocument();
+            await base.BaseDeletionLabel(label);
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
             
-            ClearSpendTheDocument();
-            base.BaseDelete(new string[] { "tab_a89" });
+            await ClearSpendTheDocument();
+            await base.BaseDelete(new string[] { "tab_a89" });
         }
         
         public НадлишкиТоварів_Pointer GetDocumentPointer()
@@ -21249,22 +21261,22 @@ namespace StorageAndTrade_1_0.Документи
             );
         }
 
-        public bool SpendTheDocument(DateTime spendDate)
+        public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             НадлишкиТоварів_Objest? obj = GetDocumentObject();
-            return (obj != null ? obj.SpendTheDocument(spendDate) : false);
+            return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
         }
 
-        public void ClearSpendTheDocument()
+        public async ValueTask ClearSpendTheDocument()
         {
             НадлишкиТоварів_Objest? obj = GetDocumentObject();
-            if (obj != null) obj.ClearSpendTheDocument();
+            if (obj != null) await obj.ClearSpendTheDocument();
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             
-            base.BaseDeletionLabel(label);
+            await base.BaseDeletionLabel(label);
         }
 
         public НадлишкиТоварів_Pointer Copy()
@@ -21361,12 +21373,12 @@ namespace StorageAndTrade_1_0.Документи
             base.BaseClear();
         }
         
-        public void Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
-            base.BaseBeginTransaction();
+            await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
-                base.BaseDelete(Owner.UnigueID);
+                await base.BaseDelete(Owner.UnigueID);
 
             foreach (Record record in Records)
             {
@@ -21378,15 +21390,15 @@ namespace StorageAndTrade_1_0.Документи
                 fieldValue.Add("col_g5", record.Ціна);
                 fieldValue.Add("col_g6", record.Сума);
                 
-                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
-                
-            base.BaseCommitTransaction();
+            
+            await base.BaseCommitTransaction();
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
-            base.BaseDelete(Owner.UnigueID);
+            await base.BaseDelete(Owner.UnigueID);
         }
 
         public List<Record> Copy()
@@ -21629,7 +21641,7 @@ namespace StorageAndTrade_1_0.Документи
                 return false;
         }
         
-        public bool Save()
+        public async Task<bool> Save()
         {
             base.FieldValue["docname"] = Назва;
             base.FieldValue["docnomer"] = НомерДок;
@@ -21642,7 +21654,7 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a1"] = Автор.UnigueID.UGuid;
             base.FieldValue["col_a2"] = КлючовіСловаДляПошуку;
             
-            bool result = BaseSave();
+            bool result = await BaseSave();
             
             if (result)
             {
@@ -21653,15 +21665,15 @@ namespace StorageAndTrade_1_0.Документи
             return result;
         }
 
-        public bool SpendTheDocument(DateTime spendDate)
+        public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            BaseSpend(false, DateTime.MinValue);
+            await BaseSpend(false, DateTime.MinValue);
                 return false;
         }
 
-        public void ClearSpendTheDocument()
+        public async ValueTask ClearSpendTheDocument()
         {
-            BaseSpend(false, DateTime.MinValue);
+            await BaseSpend(false, DateTime.MinValue);
         }
 
         public ПересортицяТоварів_Objest Copy(bool copyTableParts = false)
@@ -21693,18 +21705,18 @@ namespace StorageAndTrade_1_0.Документи
             return copy;
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             
-            ClearSpendTheDocument();
-            base.BaseDeletionLabel(label);
+            await ClearSpendTheDocument();
+            await base.BaseDeletionLabel(label);
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
             
-            ClearSpendTheDocument();
-            base.BaseDelete(new string[] { "tab_a91" });
+            await ClearSpendTheDocument();
+            await base.BaseDelete(new string[] { "tab_a91" });
         }
         
         public ПересортицяТоварів_Pointer GetDocumentPointer()
@@ -21754,22 +21766,22 @@ namespace StorageAndTrade_1_0.Документи
             );
         }
 
-        public bool SpendTheDocument(DateTime spendDate)
+        public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             ПересортицяТоварів_Objest? obj = GetDocumentObject();
-            return (obj != null ? obj.SpendTheDocument(spendDate) : false);
+            return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
         }
 
-        public void ClearSpendTheDocument()
+        public async ValueTask ClearSpendTheDocument()
         {
             ПересортицяТоварів_Objest? obj = GetDocumentObject();
-            if (obj != null) obj.ClearSpendTheDocument();
+            if (obj != null) await obj.ClearSpendTheDocument();
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             
-            base.BaseDeletionLabel(label);
+            await base.BaseDeletionLabel(label);
         }
 
         public ПересортицяТоварів_Pointer Copy()
@@ -21866,12 +21878,12 @@ namespace StorageAndTrade_1_0.Документи
             base.BaseClear();
         }
         
-        public void Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
-            base.BaseBeginTransaction();
+            await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
-                base.BaseDelete(Owner.UnigueID);
+                await base.BaseDelete(Owner.UnigueID);
 
             foreach (Record record in Records)
             {
@@ -21883,15 +21895,15 @@ namespace StorageAndTrade_1_0.Документи
                 fieldValue.Add("col_i1", record.Кількість);
                 fieldValue.Add("col_h9", record.Ціна);
                 
-                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
-                
-            base.BaseCommitTransaction();
+            
+            await base.BaseCommitTransaction();
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
-            base.BaseDelete(Owner.UnigueID);
+            await base.BaseDelete(Owner.UnigueID);
         }
 
         public List<Record> Copy()
@@ -22126,7 +22138,7 @@ namespace StorageAndTrade_1_0.Документи
                 return false;
         }
         
-        public bool Save()
+        public async Task<bool> Save()
         {
             base.FieldValue["docname"] = Назва;
             base.FieldValue["docnomer"] = НомерДок;
@@ -22137,7 +22149,7 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a1"] = Автор.UnigueID.UGuid;
             base.FieldValue["col_a2"] = КлючовіСловаДляПошуку;
             
-            bool result = BaseSave();
+            bool result = await BaseSave();
             
             if (result)
             {
@@ -22148,15 +22160,15 @@ namespace StorageAndTrade_1_0.Документи
             return result;
         }
 
-        public bool SpendTheDocument(DateTime spendDate)
+        public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            BaseSpend(false, DateTime.MinValue);
+            await BaseSpend(false, DateTime.MinValue);
                 return false;
         }
 
-        public void ClearSpendTheDocument()
+        public async ValueTask ClearSpendTheDocument()
         {
-            BaseSpend(false, DateTime.MinValue);
+            await BaseSpend(false, DateTime.MinValue);
         }
 
         public ПерерахунокТоварів_Objest Copy(bool copyTableParts = false)
@@ -22186,18 +22198,18 @@ namespace StorageAndTrade_1_0.Документи
             return copy;
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             
-            ClearSpendTheDocument();
-            base.BaseDeletionLabel(label);
+            await ClearSpendTheDocument();
+            await base.BaseDeletionLabel(label);
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
             
-            ClearSpendTheDocument();
-            base.BaseDelete(new string[] { "tab_a93" });
+            await ClearSpendTheDocument();
+            await base.BaseDelete(new string[] { "tab_a93" });
         }
         
         public ПерерахунокТоварів_Pointer GetDocumentPointer()
@@ -22245,22 +22257,22 @@ namespace StorageAndTrade_1_0.Документи
             );
         }
 
-        public bool SpendTheDocument(DateTime spendDate)
+        public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             ПерерахунокТоварів_Objest? obj = GetDocumentObject();
-            return (obj != null ? obj.SpendTheDocument(spendDate) : false);
+            return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
         }
 
-        public void ClearSpendTheDocument()
+        public async ValueTask ClearSpendTheDocument()
         {
             ПерерахунокТоварів_Objest? obj = GetDocumentObject();
-            if (obj != null) obj.ClearSpendTheDocument();
+            if (obj != null) await obj.ClearSpendTheDocument();
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             
-            base.BaseDeletionLabel(label);
+            await base.BaseDeletionLabel(label);
         }
 
         public ПерерахунокТоварів_Pointer Copy()
@@ -22361,12 +22373,12 @@ namespace StorageAndTrade_1_0.Документи
             base.BaseClear();
         }
         
-        public void Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
-            base.BaseBeginTransaction();
+            await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
-                base.BaseDelete(Owner.UnigueID);
+                await base.BaseDelete(Owner.UnigueID);
 
             foreach (Record record in Records)
             {
@@ -22380,15 +22392,15 @@ namespace StorageAndTrade_1_0.Документи
                 fieldValue.Add("col_j5", record.Пакування.UnigueID.UGuid);
                 fieldValue.Add("col_j6", record.ХарактеристикаНоменклатури.UnigueID.UGuid);
                 
-                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
-                
-            base.BaseCommitTransaction();
+            
+            await base.BaseCommitTransaction();
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
-            base.BaseDelete(Owner.UnigueID);
+            await base.BaseDelete(Owner.UnigueID);
         }
 
         public List<Record> Copy()
@@ -22686,7 +22698,7 @@ namespace StorageAndTrade_1_0.Документи
                 return false;
         }
         
-        public bool Save()
+        public async Task<bool> Save()
         {
             ПсуванняТоварів_Triggers.BeforeSave(this);
             base.FieldValue["docname"] = Назва;
@@ -22702,7 +22714,7 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a3"] = КлючовіСловаДляПошуку;
             base.FieldValue["col_b2"] = Основа;
             
-            bool result = BaseSave();
+            bool result = await BaseSave();
             
             if (result)
             {
@@ -22713,17 +22725,18 @@ namespace StorageAndTrade_1_0.Документи
             return result;
         }
 
-        public bool SpendTheDocument(DateTime spendDate)
+        public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            bool rezult = ПсуванняТоварів_SpendTheDocument.Spend(this);
-                BaseSpend(rezult, spendDate);
+            bool rezult = await ПсуванняТоварів_SpendTheDocument.Spend(this);
+                await BaseSpend(rezult, spendDate);
                 return rezult;
         }
 
-        public void ClearSpendTheDocument()
+        public async ValueTask ClearSpendTheDocument()
         {
-            ПсуванняТоварів_SpendTheDocument.ClearSpend(this);
-            BaseSpend(false, DateTime.MinValue);
+            
+                await ПсуванняТоварів_SpendTheDocument.ClearSpend(this);
+            await BaseSpend(false, DateTime.MinValue);
         }
 
         public ПсуванняТоварів_Objest Copy(bool copyTableParts = false)
@@ -22757,18 +22770,18 @@ namespace StorageAndTrade_1_0.Документи
             return copy;
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             ПсуванняТоварів_Triggers.SetDeletionLabel(this, label);
-            ClearSpendTheDocument();
-            base.BaseDeletionLabel(label);
+            await ClearSpendTheDocument();
+            await base.BaseDeletionLabel(label);
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
             ПсуванняТоварів_Triggers.BeforeDelete(this);
-            ClearSpendTheDocument();
-            base.BaseDelete(new string[] { "tab_a95" });
+            await ClearSpendTheDocument();
+            await base.BaseDelete(new string[] { "tab_a95" });
         }
         
         public ПсуванняТоварів_Pointer GetDocumentPointer()
@@ -22820,19 +22833,19 @@ namespace StorageAndTrade_1_0.Документи
             );
         }
 
-        public bool SpendTheDocument(DateTime spendDate)
+        public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             ПсуванняТоварів_Objest? obj = GetDocumentObject();
-            return (obj != null ? obj.SpendTheDocument(spendDate) : false);
+            return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
         }
 
-        public void ClearSpendTheDocument()
+        public async ValueTask ClearSpendTheDocument()
         {
             ПсуванняТоварів_Objest? obj = GetDocumentObject();
-            if (obj != null) obj.ClearSpendTheDocument();
+            if (obj != null) await obj.ClearSpendTheDocument();
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             ПсуванняТоварів_Objest? obj = GetDocumentObject();
                 if (obj == null) return;
@@ -22840,11 +22853,11 @@ namespace StorageAndTrade_1_0.Документи
                 
                 if (label)
                 {
-                    ПсуванняТоварів_SpendTheDocument.ClearSpend(obj);
-                    BaseSpend(false, DateTime.MinValue);
+                    await ПсуванняТоварів_SpendTheDocument.ClearSpend(obj);
+                    await BaseSpend(false, DateTime.MinValue);
                 }
                 
-            base.BaseDeletionLabel(label);
+            await base.BaseDeletionLabel(label);
         }
 
         public ПсуванняТоварів_Pointer Copy()
@@ -22951,12 +22964,12 @@ namespace StorageAndTrade_1_0.Документи
             base.BaseClear();
         }
         
-        public void Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
-            base.BaseBeginTransaction();
+            await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
-                base.BaseDelete(Owner.UnigueID);
+                await base.BaseDelete(Owner.UnigueID);
 
             foreach (Record record in Records)
             {
@@ -22973,15 +22986,15 @@ namespace StorageAndTrade_1_0.Документи
                 fieldValue.Add("col_a2", record.Сума);
                 fieldValue.Add("col_a6", record.Партія.UnigueID.UGuid);
                 
-                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
-                
-            base.BaseCommitTransaction();
+            
+            await base.BaseCommitTransaction();
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
-            base.BaseDelete(Owner.UnigueID);
+            await base.BaseDelete(Owner.UnigueID);
         }
 
         public List<Record> Copy()
@@ -23295,7 +23308,7 @@ namespace StorageAndTrade_1_0.Документи
                 return false;
         }
         
-        public bool Save()
+        public async Task<bool> Save()
         {
             ВнутрішнєСпоживанняТоварів_Triggers.BeforeSave(this);
             base.FieldValue["docname"] = Назва;
@@ -23312,7 +23325,7 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_b2"] = Коментар;
             base.FieldValue["col_a3"] = КлючовіСловаДляПошуку;
             
-            bool result = BaseSave();
+            bool result = await BaseSave();
             
             if (result)
             {
@@ -23323,17 +23336,18 @@ namespace StorageAndTrade_1_0.Документи
             return result;
         }
 
-        public bool SpendTheDocument(DateTime spendDate)
+        public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            bool rezult = ВнутрішнєСпоживанняТоварів_SpendTheDocument.Spend(this);
-                BaseSpend(rezult, spendDate);
+            bool rezult = await ВнутрішнєСпоживанняТоварів_SpendTheDocument.Spend(this);
+                await BaseSpend(rezult, spendDate);
                 return rezult;
         }
 
-        public void ClearSpendTheDocument()
+        public async ValueTask ClearSpendTheDocument()
         {
-            ВнутрішнєСпоживанняТоварів_SpendTheDocument.ClearSpend(this);
-            BaseSpend(false, DateTime.MinValue);
+            
+                await ВнутрішнєСпоживанняТоварів_SpendTheDocument.ClearSpend(this);
+            await BaseSpend(false, DateTime.MinValue);
         }
 
         public ВнутрішнєСпоживанняТоварів_Objest Copy(bool copyTableParts = false)
@@ -23368,18 +23382,18 @@ namespace StorageAndTrade_1_0.Документи
             return copy;
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             ВнутрішнєСпоживанняТоварів_Triggers.SetDeletionLabel(this, label);
-            ClearSpendTheDocument();
-            base.BaseDeletionLabel(label);
+            await ClearSpendTheDocument();
+            await base.BaseDeletionLabel(label);
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
             ВнутрішнєСпоживанняТоварів_Triggers.BeforeDelete(this);
-            ClearSpendTheDocument();
-            base.BaseDelete(new string[] { "tab_b08" });
+            await ClearSpendTheDocument();
+            await base.BaseDelete(new string[] { "tab_b08" });
         }
         
         public ВнутрішнєСпоживанняТоварів_Pointer GetDocumentPointer()
@@ -23432,19 +23446,19 @@ namespace StorageAndTrade_1_0.Документи
             );
         }
 
-        public bool SpendTheDocument(DateTime spendDate)
+        public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             ВнутрішнєСпоживанняТоварів_Objest? obj = GetDocumentObject();
-            return (obj != null ? obj.SpendTheDocument(spendDate) : false);
+            return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
         }
 
-        public void ClearSpendTheDocument()
+        public async ValueTask ClearSpendTheDocument()
         {
             ВнутрішнєСпоживанняТоварів_Objest? obj = GetDocumentObject();
-            if (obj != null) obj.ClearSpendTheDocument();
+            if (obj != null) await obj.ClearSpendTheDocument();
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             ВнутрішнєСпоживанняТоварів_Objest? obj = GetDocumentObject();
                 if (obj == null) return;
@@ -23452,11 +23466,11 @@ namespace StorageAndTrade_1_0.Документи
                 
                 if (label)
                 {
-                    ВнутрішнєСпоживанняТоварів_SpendTheDocument.ClearSpend(obj);
-                    BaseSpend(false, DateTime.MinValue);
+                    await ВнутрішнєСпоживанняТоварів_SpendTheDocument.ClearSpend(obj);
+                    await BaseSpend(false, DateTime.MinValue);
                 }
                 
-            base.BaseDeletionLabel(label);
+            await base.BaseDeletionLabel(label);
         }
 
         public ВнутрішнєСпоживанняТоварів_Pointer Copy()
@@ -23563,12 +23577,12 @@ namespace StorageAndTrade_1_0.Документи
             base.BaseClear();
         }
         
-        public void Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
-            base.BaseBeginTransaction();
+            await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
-                base.BaseDelete(Owner.UnigueID);
+                await base.BaseDelete(Owner.UnigueID);
 
             foreach (Record record in Records)
             {
@@ -23585,15 +23599,15 @@ namespace StorageAndTrade_1_0.Документи
                 fieldValue.Add("col_d9", record.Сума);
                 fieldValue.Add("col_a3", record.Партія.UnigueID.UGuid);
                 
-                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
-                
-            base.BaseCommitTransaction();
+            
+            await base.BaseCommitTransaction();
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
-            base.BaseDelete(Owner.UnigueID);
+            await base.BaseDelete(Owner.UnigueID);
         }
 
         public List<Record> Copy()
@@ -23992,7 +24006,7 @@ namespace StorageAndTrade_1_0.Документи
                 return false;
         }
         
-        public bool Save()
+        public async Task<bool> Save()
         {
             РахунокФактура_Triggers.BeforeSave(this);
             base.FieldValue["docname"] = Назва;
@@ -24016,7 +24030,7 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a2"] = Менеджер.UnigueID.UGuid;
             base.FieldValue["col_a7"] = КлючовіСловаДляПошуку;
             
-            bool result = BaseSave();
+            bool result = await BaseSave();
             
             if (result)
             {
@@ -24027,17 +24041,18 @@ namespace StorageAndTrade_1_0.Документи
             return result;
         }
 
-        public bool SpendTheDocument(DateTime spendDate)
+        public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            bool rezult = РахунокФактура_SpendTheDocument.Spend(this);
-                BaseSpend(rezult, spendDate);
+            bool rezult = await РахунокФактура_SpendTheDocument.Spend(this);
+                await BaseSpend(rezult, spendDate);
                 return rezult;
         }
 
-        public void ClearSpendTheDocument()
+        public async ValueTask ClearSpendTheDocument()
         {
-            РахунокФактура_SpendTheDocument.ClearSpend(this);
-            BaseSpend(false, DateTime.MinValue);
+            
+                await РахунокФактура_SpendTheDocument.ClearSpend(this);
+            await BaseSpend(false, DateTime.MinValue);
         }
 
         public РахунокФактура_Objest Copy(bool copyTableParts = false)
@@ -24079,18 +24094,18 @@ namespace StorageAndTrade_1_0.Документи
             return copy;
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             РахунокФактура_Triggers.SetDeletionLabel(this, label);
-            ClearSpendTheDocument();
-            base.BaseDeletionLabel(label);
+            await ClearSpendTheDocument();
+            await base.BaseDeletionLabel(label);
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
             РахунокФактура_Triggers.BeforeDelete(this);
-            ClearSpendTheDocument();
-            base.BaseDelete(new string[] { "tab_b11" });
+            await ClearSpendTheDocument();
+            await base.BaseDelete(new string[] { "tab_b11" });
         }
         
         public РахунокФактура_Pointer GetDocumentPointer()
@@ -24150,19 +24165,19 @@ namespace StorageAndTrade_1_0.Документи
             );
         }
 
-        public bool SpendTheDocument(DateTime spendDate)
+        public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             РахунокФактура_Objest? obj = GetDocumentObject();
-            return (obj != null ? obj.SpendTheDocument(spendDate) : false);
+            return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
         }
 
-        public void ClearSpendTheDocument()
+        public async ValueTask ClearSpendTheDocument()
         {
             РахунокФактура_Objest? obj = GetDocumentObject();
-            if (obj != null) obj.ClearSpendTheDocument();
+            if (obj != null) await obj.ClearSpendTheDocument();
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             РахунокФактура_Objest? obj = GetDocumentObject();
                 if (obj == null) return;
@@ -24170,11 +24185,11 @@ namespace StorageAndTrade_1_0.Документи
                 
                 if (label)
                 {
-                    РахунокФактура_SpendTheDocument.ClearSpend(obj);
-                    BaseSpend(false, DateTime.MinValue);
+                    await РахунокФактура_SpendTheDocument.ClearSpend(obj);
+                    await BaseSpend(false, DateTime.MinValue);
                 }
                 
-            base.BaseDeletionLabel(label);
+            await base.BaseDeletionLabel(label);
         }
 
         public РахунокФактура_Pointer Copy()
@@ -24283,12 +24298,12 @@ namespace StorageAndTrade_1_0.Документи
             base.BaseClear();
         }
         
-        public void Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
-            base.BaseBeginTransaction();
+            await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
-                base.BaseDelete(Owner.UnigueID);
+                await base.BaseDelete(Owner.UnigueID);
 
             foreach (Record record in Records)
             {
@@ -24306,15 +24321,15 @@ namespace StorageAndTrade_1_0.Документи
                 fieldValue.Add("col_c8", record.Скидка);
                 fieldValue.Add("col_a1", record.Склад.UnigueID.UGuid);
                 
-                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
-                
-            base.BaseCommitTransaction();
+            
+            await base.BaseCommitTransaction();
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
-            base.BaseDelete(Owner.UnigueID);
+            await base.BaseDelete(Owner.UnigueID);
         }
 
         public List<Record> Copy()
@@ -24597,7 +24612,7 @@ namespace StorageAndTrade_1_0.Документи
                 return false;
         }
         
-        public bool Save()
+        public async Task<bool> Save()
         {
             РозміщенняТоварівНаСкладі_Triggers.BeforeSave(this);
             base.FieldValue["docname"] = Назва;
@@ -24612,7 +24627,7 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a7"] = ДокументПоступлення.UnigueID.UGuid;
             base.FieldValue["col_a8"] = КлючовіСловаДляПошуку;
             
-            bool result = BaseSave();
+            bool result = await BaseSave();
             
             if (result)
             {
@@ -24623,17 +24638,18 @@ namespace StorageAndTrade_1_0.Документи
             return result;
         }
 
-        public bool SpendTheDocument(DateTime spendDate)
+        public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            bool rezult = РозміщенняТоварівНаСкладі_SpendTheDocument.Spend(this);
-                BaseSpend(rezult, spendDate);
+            bool rezult = await РозміщенняТоварівНаСкладі_SpendTheDocument.Spend(this);
+                await BaseSpend(rezult, spendDate);
                 return rezult;
         }
 
-        public void ClearSpendTheDocument()
+        public async ValueTask ClearSpendTheDocument()
         {
-            РозміщенняТоварівНаСкладі_SpendTheDocument.ClearSpend(this);
-            BaseSpend(false, DateTime.MinValue);
+            
+                await РозміщенняТоварівНаСкладі_SpendTheDocument.ClearSpend(this);
+            await BaseSpend(false, DateTime.MinValue);
         }
 
         public РозміщенняТоварівНаСкладі_Objest Copy(bool copyTableParts = false)
@@ -24666,18 +24682,18 @@ namespace StorageAndTrade_1_0.Документи
             return copy;
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             РозміщенняТоварівНаСкладі_Triggers.SetDeletionLabel(this, label);
-            ClearSpendTheDocument();
-            base.BaseDeletionLabel(label);
+            await ClearSpendTheDocument();
+            await base.BaseDeletionLabel(label);
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
             РозміщенняТоварівНаСкладі_Triggers.BeforeDelete(this);
-            ClearSpendTheDocument();
-            base.BaseDelete(new string[] { "tab_a68" });
+            await ClearSpendTheDocument();
+            await base.BaseDelete(new string[] { "tab_a68" });
         }
         
         public РозміщенняТоварівНаСкладі_Pointer GetDocumentPointer()
@@ -24728,19 +24744,19 @@ namespace StorageAndTrade_1_0.Документи
             );
         }
 
-        public bool SpendTheDocument(DateTime spendDate)
+        public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             РозміщенняТоварівНаСкладі_Objest? obj = GetDocumentObject();
-            return (obj != null ? obj.SpendTheDocument(spendDate) : false);
+            return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
         }
 
-        public void ClearSpendTheDocument()
+        public async ValueTask ClearSpendTheDocument()
         {
             РозміщенняТоварівНаСкладі_Objest? obj = GetDocumentObject();
-            if (obj != null) obj.ClearSpendTheDocument();
+            if (obj != null) await obj.ClearSpendTheDocument();
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             РозміщенняТоварівНаСкладі_Objest? obj = GetDocumentObject();
                 if (obj == null) return;
@@ -24748,11 +24764,11 @@ namespace StorageAndTrade_1_0.Документи
                 
                 if (label)
                 {
-                    РозміщенняТоварівНаСкладі_SpendTheDocument.ClearSpend(obj);
-                    BaseSpend(false, DateTime.MinValue);
+                    await РозміщенняТоварівНаСкладі_SpendTheDocument.ClearSpend(obj);
+                    await BaseSpend(false, DateTime.MinValue);
                 }
                 
-            base.BaseDeletionLabel(label);
+            await base.BaseDeletionLabel(label);
         }
 
         public РозміщенняТоварівНаСкладі_Pointer Copy()
@@ -24855,12 +24871,12 @@ namespace StorageAndTrade_1_0.Документи
             base.BaseClear();
         }
         
-        public void Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
-            base.BaseBeginTransaction();
+            await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
-                base.BaseDelete(Owner.UnigueID);
+                await base.BaseDelete(Owner.UnigueID);
 
             foreach (Record record in Records)
             {
@@ -24875,15 +24891,15 @@ namespace StorageAndTrade_1_0.Документи
                 fieldValue.Add("col_a7", record.Кількість);
                 fieldValue.Add("col_a8", record.Комірка.UnigueID.UGuid);
                 
-                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
-                
-            base.BaseCommitTransaction();
+            
+            await base.BaseCommitTransaction();
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
-            base.BaseDelete(Owner.UnigueID);
+            await base.BaseDelete(Owner.UnigueID);
         }
 
         public List<Record> Copy()
@@ -25160,7 +25176,7 @@ namespace StorageAndTrade_1_0.Документи
                 return false;
         }
         
-        public bool Save()
+        public async Task<bool> Save()
         {
             ПереміщенняТоварівНаСкладі_Triggers.BeforeSave(this);
             base.FieldValue["docname"] = Назва;
@@ -25174,7 +25190,7 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a6"] = Підрозділ.UnigueID.UGuid;
             base.FieldValue["col_a7"] = КлючовіСловаДляПошуку;
             
-            bool result = BaseSave();
+            bool result = await BaseSave();
             
             if (result)
             {
@@ -25185,17 +25201,18 @@ namespace StorageAndTrade_1_0.Документи
             return result;
         }
 
-        public bool SpendTheDocument(DateTime spendDate)
+        public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            bool rezult = ПереміщенняТоварівНаСкладі_SpendTheDocument.Spend(this);
-                BaseSpend(rezult, spendDate);
+            bool rezult = await ПереміщенняТоварівНаСкладі_SpendTheDocument.Spend(this);
+                await BaseSpend(rezult, spendDate);
                 return rezult;
         }
 
-        public void ClearSpendTheDocument()
+        public async ValueTask ClearSpendTheDocument()
         {
-            ПереміщенняТоварівНаСкладі_SpendTheDocument.ClearSpend(this);
-            BaseSpend(false, DateTime.MinValue);
+            
+                await ПереміщенняТоварівНаСкладі_SpendTheDocument.ClearSpend(this);
+            await BaseSpend(false, DateTime.MinValue);
         }
 
         public ПереміщенняТоварівНаСкладі_Objest Copy(bool copyTableParts = false)
@@ -25227,18 +25244,18 @@ namespace StorageAndTrade_1_0.Документи
             return copy;
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             ПереміщенняТоварівНаСкладі_Triggers.SetDeletionLabel(this, label);
-            ClearSpendTheDocument();
-            base.BaseDeletionLabel(label);
+            await ClearSpendTheDocument();
+            await base.BaseDeletionLabel(label);
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
             ПереміщенняТоварівНаСкладі_Triggers.BeforeDelete(this);
-            ClearSpendTheDocument();
-            base.BaseDelete(new string[] { "tab_b26" });
+            await ClearSpendTheDocument();
+            await base.BaseDelete(new string[] { "tab_b26" });
         }
         
         public ПереміщенняТоварівНаСкладі_Pointer GetDocumentPointer()
@@ -25288,19 +25305,19 @@ namespace StorageAndTrade_1_0.Документи
             );
         }
 
-        public bool SpendTheDocument(DateTime spendDate)
+        public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             ПереміщенняТоварівНаСкладі_Objest? obj = GetDocumentObject();
-            return (obj != null ? obj.SpendTheDocument(spendDate) : false);
+            return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
         }
 
-        public void ClearSpendTheDocument()
+        public async ValueTask ClearSpendTheDocument()
         {
             ПереміщенняТоварівНаСкладі_Objest? obj = GetDocumentObject();
-            if (obj != null) obj.ClearSpendTheDocument();
+            if (obj != null) await obj.ClearSpendTheDocument();
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             ПереміщенняТоварівНаСкладі_Objest? obj = GetDocumentObject();
                 if (obj == null) return;
@@ -25308,11 +25325,11 @@ namespace StorageAndTrade_1_0.Документи
                 
                 if (label)
                 {
-                    ПереміщенняТоварівНаСкладі_SpendTheDocument.ClearSpend(obj);
-                    BaseSpend(false, DateTime.MinValue);
+                    await ПереміщенняТоварівНаСкладі_SpendTheDocument.ClearSpend(obj);
+                    await BaseSpend(false, DateTime.MinValue);
                 }
                 
-            base.BaseDeletionLabel(label);
+            await base.BaseDeletionLabel(label);
         }
 
         public ПереміщенняТоварівНаСкладі_Pointer Copy()
@@ -25417,12 +25434,12 @@ namespace StorageAndTrade_1_0.Документи
             base.BaseClear();
         }
         
-        public void Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
-            base.BaseBeginTransaction();
+            await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
-                base.BaseDelete(Owner.UnigueID);
+                await base.BaseDelete(Owner.UnigueID);
 
             foreach (Record record in Records)
             {
@@ -25438,15 +25455,15 @@ namespace StorageAndTrade_1_0.Документи
                 fieldValue.Add("col_a8", record.КоміркаВідправник.UnigueID.UGuid);
                 fieldValue.Add("col_a9", record.КоміркаОтримувач.UnigueID.UGuid);
                 
-                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
-                
-            base.BaseCommitTransaction();
+            
+            await base.BaseCommitTransaction();
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
-            base.BaseDelete(Owner.UnigueID);
+            await base.BaseDelete(Owner.UnigueID);
         }
 
         public List<Record> Copy()
@@ -25727,7 +25744,7 @@ namespace StorageAndTrade_1_0.Документи
                 return false;
         }
         
-        public bool Save()
+        public async Task<bool> Save()
         {
             ЗбіркаТоварівНаСкладі_Triggers.BeforeSave(this);
             base.FieldValue["docname"] = Назва;
@@ -25742,7 +25759,7 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a7"] = ДокументРеалізації.UnigueID.UGuid;
             base.FieldValue["col_a8"] = КлючовіСловаДляПошуку;
             
-            bool result = BaseSave();
+            bool result = await BaseSave();
             
             if (result)
             {
@@ -25753,17 +25770,18 @@ namespace StorageAndTrade_1_0.Документи
             return result;
         }
 
-        public bool SpendTheDocument(DateTime spendDate)
+        public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            bool rezult = ЗбіркаТоварівНаСкладі_SpendTheDocument.Spend(this);
-                BaseSpend(rezult, spendDate);
+            bool rezult = await ЗбіркаТоварівНаСкладі_SpendTheDocument.Spend(this);
+                await BaseSpend(rezult, spendDate);
                 return rezult;
         }
 
-        public void ClearSpendTheDocument()
+        public async ValueTask ClearSpendTheDocument()
         {
-            ЗбіркаТоварівНаСкладі_SpendTheDocument.ClearSpend(this);
-            BaseSpend(false, DateTime.MinValue);
+            
+                await ЗбіркаТоварівНаСкладі_SpendTheDocument.ClearSpend(this);
+            await BaseSpend(false, DateTime.MinValue);
         }
 
         public ЗбіркаТоварівНаСкладі_Objest Copy(bool copyTableParts = false)
@@ -25796,18 +25814,18 @@ namespace StorageAndTrade_1_0.Документи
             return copy;
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             ЗбіркаТоварівНаСкладі_Triggers.SetDeletionLabel(this, label);
-            ClearSpendTheDocument();
-            base.BaseDeletionLabel(label);
+            await ClearSpendTheDocument();
+            await base.BaseDeletionLabel(label);
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
             ЗбіркаТоварівНаСкладі_Triggers.BeforeDelete(this);
-            ClearSpendTheDocument();
-            base.BaseDelete(new string[] { "tab_b28" });
+            await ClearSpendTheDocument();
+            await base.BaseDelete(new string[] { "tab_b28" });
         }
         
         public ЗбіркаТоварівНаСкладі_Pointer GetDocumentPointer()
@@ -25858,19 +25876,19 @@ namespace StorageAndTrade_1_0.Документи
             );
         }
 
-        public bool SpendTheDocument(DateTime spendDate)
+        public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             ЗбіркаТоварівНаСкладі_Objest? obj = GetDocumentObject();
-            return (obj != null ? obj.SpendTheDocument(spendDate) : false);
+            return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
         }
 
-        public void ClearSpendTheDocument()
+        public async ValueTask ClearSpendTheDocument()
         {
             ЗбіркаТоварівНаСкладі_Objest? obj = GetDocumentObject();
-            if (obj != null) obj.ClearSpendTheDocument();
+            if (obj != null) await obj.ClearSpendTheDocument();
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             ЗбіркаТоварівНаСкладі_Objest? obj = GetDocumentObject();
                 if (obj == null) return;
@@ -25878,11 +25896,11 @@ namespace StorageAndTrade_1_0.Документи
                 
                 if (label)
                 {
-                    ЗбіркаТоварівНаСкладі_SpendTheDocument.ClearSpend(obj);
-                    BaseSpend(false, DateTime.MinValue);
+                    await ЗбіркаТоварівНаСкладі_SpendTheDocument.ClearSpend(obj);
+                    await BaseSpend(false, DateTime.MinValue);
                 }
                 
-            base.BaseDeletionLabel(label);
+            await base.BaseDeletionLabel(label);
         }
 
         public ЗбіркаТоварівНаСкладі_Pointer Copy()
@@ -25985,12 +26003,12 @@ namespace StorageAndTrade_1_0.Документи
             base.BaseClear();
         }
         
-        public void Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
-            base.BaseBeginTransaction();
+            await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
-                base.BaseDelete(Owner.UnigueID);
+                await base.BaseDelete(Owner.UnigueID);
 
             foreach (Record record in Records)
             {
@@ -26005,15 +26023,15 @@ namespace StorageAndTrade_1_0.Документи
                 fieldValue.Add("col_a7", record.Кількість);
                 fieldValue.Add("col_a8", record.Комірка.UnigueID.UGuid);
                 
-                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
-                
-            base.BaseCommitTransaction();
+            
+            await base.BaseCommitTransaction();
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
-            base.BaseDelete(Owner.UnigueID);
+            await base.BaseDelete(Owner.UnigueID);
         }
 
         public List<Record> Copy()
@@ -26254,7 +26272,7 @@ namespace StorageAndTrade_1_0.Документи
                 return false;
         }
         
-        public bool Save()
+        public async Task<bool> Save()
         {
             РозміщенняНоменклатуриПоКоміркам_Triggers.BeforeSave(this);
             base.FieldValue["docname"] = Назва;
@@ -26268,7 +26286,7 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_a5"] = Основа;
             base.FieldValue["col_a6"] = КлючовіСловаДляПошуку;
             
-            bool result = BaseSave();
+            bool result = await BaseSave();
             
             if (result)
             {
@@ -26279,17 +26297,18 @@ namespace StorageAndTrade_1_0.Документи
             return result;
         }
 
-        public bool SpendTheDocument(DateTime spendDate)
+        public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            bool rezult = РозміщенняНоменклатуриПоКоміркам_SpendTheDocument.Spend(this);
-                BaseSpend(rezult, spendDate);
+            bool rezult = await РозміщенняНоменклатуриПоКоміркам_SpendTheDocument.Spend(this);
+                await BaseSpend(rezult, spendDate);
                 return rezult;
         }
 
-        public void ClearSpendTheDocument()
+        public async ValueTask ClearSpendTheDocument()
         {
-            РозміщенняНоменклатуриПоКоміркам_SpendTheDocument.ClearSpend(this);
-            BaseSpend(false, DateTime.MinValue);
+            
+                await РозміщенняНоменклатуриПоКоміркам_SpendTheDocument.ClearSpend(this);
+            await BaseSpend(false, DateTime.MinValue);
         }
 
         public РозміщенняНоменклатуриПоКоміркам_Objest Copy(bool copyTableParts = false)
@@ -26321,18 +26340,18 @@ namespace StorageAndTrade_1_0.Документи
             return copy;
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             РозміщенняНоменклатуриПоКоміркам_Triggers.SetDeletionLabel(this, label);
-            ClearSpendTheDocument();
-            base.BaseDeletionLabel(label);
+            await ClearSpendTheDocument();
+            await base.BaseDeletionLabel(label);
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
             РозміщенняНоменклатуриПоКоміркам_Triggers.BeforeDelete(this);
-            ClearSpendTheDocument();
-            base.BaseDelete(new string[] { "tab_b32" });
+            await ClearSpendTheDocument();
+            await base.BaseDelete(new string[] { "tab_b32" });
         }
         
         public РозміщенняНоменклатуриПоКоміркам_Pointer GetDocumentPointer()
@@ -26382,19 +26401,19 @@ namespace StorageAndTrade_1_0.Документи
             );
         }
 
-        public bool SpendTheDocument(DateTime spendDate)
+        public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             РозміщенняНоменклатуриПоКоміркам_Objest? obj = GetDocumentObject();
-            return (obj != null ? obj.SpendTheDocument(spendDate) : false);
+            return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
         }
 
-        public void ClearSpendTheDocument()
+        public async ValueTask ClearSpendTheDocument()
         {
             РозміщенняНоменклатуриПоКоміркам_Objest? obj = GetDocumentObject();
-            if (obj != null) obj.ClearSpendTheDocument();
+            if (obj != null) await obj.ClearSpendTheDocument();
         }
 
-        public void SetDeletionLabel(bool label = true)
+        public async ValueTask SetDeletionLabel(bool label = true)
         {
             РозміщенняНоменклатуриПоКоміркам_Objest? obj = GetDocumentObject();
                 if (obj == null) return;
@@ -26402,11 +26421,11 @@ namespace StorageAndTrade_1_0.Документи
                 
                 if (label)
                 {
-                    РозміщенняНоменклатуриПоКоміркам_SpendTheDocument.ClearSpend(obj);
-                    BaseSpend(false, DateTime.MinValue);
+                    await РозміщенняНоменклатуриПоКоміркам_SpendTheDocument.ClearSpend(obj);
+                    await BaseSpend(false, DateTime.MinValue);
                 }
                 
-            base.BaseDeletionLabel(label);
+            await base.BaseDeletionLabel(label);
         }
 
         public РозміщенняНоменклатуриПоКоміркам_Pointer Copy()
@@ -26501,12 +26520,12 @@ namespace StorageAndTrade_1_0.Документи
             base.BaseClear();
         }
         
-        public void Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
-            base.BaseBeginTransaction();
+            await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
-                base.BaseDelete(Owner.UnigueID);
+                await base.BaseDelete(Owner.UnigueID);
 
             foreach (Record record in Records)
             {
@@ -26517,15 +26536,15 @@ namespace StorageAndTrade_1_0.Документи
                 fieldValue.Add("col_a2", record.Комірка.UnigueID.UGuid);
                 fieldValue.Add("col_h3", record.Пакування.UnigueID.UGuid);
                 
-                record.UID = base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
-                
-            base.BaseCommitTransaction();
+            
+            await base.BaseCommitTransaction();
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
-            base.BaseDelete(Owner.UnigueID);
+            await base.BaseDelete(Owner.UnigueID);
         }
 
         public List<Record> Copy()
@@ -26651,10 +26670,10 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
             base.BaseClear();
         }
         
-        public void Save(DateTime period, Guid owner)
+        public async ValueTask Save(DateTime period, Guid owner)
         {
-            base.BaseBeginTransaction();
-            base.BaseDelete(owner);
+            await base.BaseBeginTransaction();
+            await base.BaseDelete(owner);
             foreach (Record record in Records)
             {
                 record.Period = period;
@@ -26667,14 +26686,14 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
                 fieldValue.Add("col_f9", record.Пакування.UnigueID.UGuid);
                 fieldValue.Add("col_g2", record.Валюта.UnigueID.UGuid);
                 
-                record.UID = base.BaseSave(record.UID, period, owner, fieldValue);
+                record.UID = await base.BaseSave(record.UID, period, owner, fieldValue);
             }
-            base.BaseCommitTransaction();
+            await base.BaseCommitTransaction();
         }
         
-        public void Delete(Guid owner)
+        public async ValueTask Delete(Guid owner)
         {
-            base.BaseDelete(owner);
+            await base.BaseDelete(owner);
         }
 
         public class Record : RegisterInformationRecord
@@ -26721,7 +26740,7 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
                 return false;
         }
         
-        public void Save()
+        public async ValueTask Save()
         {
             base.FieldValue["col_f5"] = Номенклатура.UnigueID.UGuid;
             base.FieldValue["col_f6"] = ХарактеристикаНоменклатури.UnigueID.UGuid;
@@ -26730,7 +26749,7 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
             base.FieldValue["col_f9"] = Пакування.UnigueID.UGuid;
             base.FieldValue["col_g2"] = Валюта.UnigueID.UGuid;
             
-            BaseSave();
+            await BaseSave();
         }
 
         public ЦіниНоменклатури_Objest Copy()
@@ -26749,9 +26768,9 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
             return copy;
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
-			      base.BaseDelete();
+			      await base.BaseDelete();
         }
 
         public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
@@ -26806,10 +26825,10 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
             base.BaseClear();
         }
         
-        public void Save(DateTime period, Guid owner)
+        public async ValueTask Save(DateTime period, Guid owner)
         {
-            base.BaseBeginTransaction();
-            base.BaseDelete(owner);
+            await base.BaseBeginTransaction();
+            await base.BaseDelete(owner);
             foreach (Record record in Records)
             {
                 record.Period = period;
@@ -26819,14 +26838,14 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
                 fieldValue.Add("col_a2", record.Курс);
                 fieldValue.Add("col_a3", record.Кратність);
                 
-                record.UID = base.BaseSave(record.UID, period, owner, fieldValue);
+                record.UID = await base.BaseSave(record.UID, period, owner, fieldValue);
             }
-            base.BaseCommitTransaction();
+            await base.BaseCommitTransaction();
         }
         
-        public void Delete(Guid owner)
+        public async ValueTask Delete(Guid owner)
         {
-            base.BaseDelete(owner);
+            await base.BaseDelete(owner);
         }
 
         public class Record : RegisterInformationRecord
@@ -26864,13 +26883,13 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
                 return false;
         }
         
-        public void Save()
+        public async ValueTask Save()
         {
             base.FieldValue["col_a1"] = Валюта.UnigueID.UGuid;
             base.FieldValue["col_a2"] = Курс;
             base.FieldValue["col_a3"] = Кратність;
             
-            BaseSave();
+            await BaseSave();
         }
 
         public КурсиВалют_Objest Copy()
@@ -26886,9 +26905,9 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
             return copy;
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
-			      base.BaseDelete();
+			      await base.BaseDelete();
         }
 
         public Довідники.Валюти_Pointer Валюта { get; set; }
@@ -26942,10 +26961,10 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
             base.BaseClear();
         }
         
-        public void Save(DateTime period, Guid owner)
+        public async ValueTask Save(DateTime period, Guid owner)
         {
-            base.BaseBeginTransaction();
-            base.BaseDelete(owner);
+            await base.BaseBeginTransaction();
+            await base.BaseDelete(owner);
             foreach (Record record in Records)
             {
                 record.Period = period;
@@ -26956,14 +26975,14 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
                 fieldValue.Add("col_a3", record.ХарактеристикаНоменклатури.UnigueID.UGuid);
                 fieldValue.Add("col_a4", record.Пакування.UnigueID.UGuid);
                 
-                record.UID = base.BaseSave(record.UID, period, owner, fieldValue);
+                record.UID = await base.BaseSave(record.UID, period, owner, fieldValue);
             }
-            base.BaseCommitTransaction();
+            await base.BaseCommitTransaction();
         }
         
-        public void Delete(Guid owner)
+        public async ValueTask Delete(Guid owner)
         {
-            base.BaseDelete(owner);
+            await base.BaseDelete(owner);
         }
 
         public class Record : RegisterInformationRecord
@@ -27004,14 +27023,14 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
                 return false;
         }
         
-        public void Save()
+        public async ValueTask Save()
         {
             base.FieldValue["col_a1"] = Штрихкод;
             base.FieldValue["col_a2"] = Номенклатура.UnigueID.UGuid;
             base.FieldValue["col_a3"] = ХарактеристикаНоменклатури.UnigueID.UGuid;
             base.FieldValue["col_a4"] = Пакування.UnigueID.UGuid;
             
-            BaseSave();
+            await BaseSave();
         }
 
         public ШтрихкодиНоменклатури_Objest Copy()
@@ -27028,9 +27047,9 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
             return copy;
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
-			      base.BaseDelete();
+			      await base.BaseDelete();
         }
 
         public string Штрихкод { get; set; }
@@ -27079,10 +27098,10 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
             base.BaseClear();
         }
         
-        public void Save(DateTime period, Guid owner)
+        public async ValueTask Save(DateTime period, Guid owner)
         {
-            base.BaseBeginTransaction();
-            base.BaseDelete(owner);
+            await base.BaseBeginTransaction();
+            await base.BaseDelete(owner);
             foreach (Record record in Records)
             {
                 record.Period = period;
@@ -27090,14 +27109,14 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>();
                 fieldValue.Add("col_a1", record.Файл.UnigueID.UGuid);
                 
-                record.UID = base.BaseSave(record.UID, period, owner, fieldValue);
+                record.UID = await base.BaseSave(record.UID, period, owner, fieldValue);
             }
-            base.BaseCommitTransaction();
+            await base.BaseCommitTransaction();
         }
         
-        public void Delete(Guid owner)
+        public async ValueTask Delete(Guid owner)
         {
-            base.BaseDelete(owner);
+            await base.BaseDelete(owner);
         }
 
         public class Record : RegisterInformationRecord
@@ -27129,11 +27148,11 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
                 return false;
         }
         
-        public void Save()
+        public async ValueTask Save()
         {
             base.FieldValue["col_a1"] = Файл.UnigueID.UGuid;
             
-            BaseSave();
+            await BaseSave();
         }
 
         public ФайлиДокументів_Objest Copy()
@@ -27147,9 +27166,9 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
             return copy;
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
-			      base.BaseDelete();
+			      await base.BaseDelete();
         }
 
         public Довідники.Файли_Pointer Файл { get; set; }
@@ -27201,10 +27220,10 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
             base.BaseClear();
         }
         
-        public void Save(DateTime period, Guid owner)
+        public async ValueTask Save(DateTime period, Guid owner)
         {
-            base.BaseBeginTransaction();
-            base.BaseDelete(owner);
+            await base.BaseBeginTransaction();
+            await base.BaseDelete(owner);
             foreach (Record record in Records)
             {
                 record.Period = period;
@@ -27215,14 +27234,14 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
                 fieldValue.Add("col_a3", record.Приміщення.UnigueID.UGuid);
                 fieldValue.Add("col_a4", record.Комірка.UnigueID.UGuid);
                 
-                record.UID = base.BaseSave(record.UID, period, owner, fieldValue);
+                record.UID = await base.BaseSave(record.UID, period, owner, fieldValue);
             }
-            base.BaseCommitTransaction();
+            await base.BaseCommitTransaction();
         }
         
-        public void Delete(Guid owner)
+        public async ValueTask Delete(Guid owner)
         {
-            base.BaseDelete(owner);
+            await base.BaseDelete(owner);
         }
 
         public class Record : RegisterInformationRecord
@@ -27263,14 +27282,14 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
                 return false;
         }
         
-        public void Save()
+        public async ValueTask Save()
         {
             base.FieldValue["col_a1"] = Номенклатура.UnigueID.UGuid;
             base.FieldValue["col_a2"] = Склад.UnigueID.UGuid;
             base.FieldValue["col_a3"] = Приміщення.UnigueID.UGuid;
             base.FieldValue["col_a4"] = Комірка.UnigueID.UGuid;
             
-            BaseSave();
+            await BaseSave();
         }
 
         public РозміщенняНоменклатуриПоКоміркамНаСкладі_Objest Copy()
@@ -27287,9 +27306,9 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
             return copy;
         }
 
-        public void Delete()
+        public async ValueTask Delete()
         {
-			      base.BaseDelete();
+			      await base.BaseDelete();
         }
 
         public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
@@ -27314,8 +27333,9 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         }
 
         /* Функція для обчислення віртуальних таблиць  */
-        public static void Execute(DateTime period, string regAccumName)
+        public static async void Execute(DateTime period, string regAccumName)
         {
+            if (Config.Kernel == null) return;
             
             Dictionary<string, object> paramQuery = new Dictionary<string, object>();
             paramQuery.Add("ПеріодДеньВідбір", period);
@@ -27325,191 +27345,191 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             
                 case "ТовариНаСкладах":
                 {
-                    byte transactionID = Config.Kernel!.DataBase.BeginTransaction();
+                    byte transactionID = await Config.Kernel.DataBase.BeginTransaction();
                     
                     /* QueryBlock: Залишки */
                         
-                    Config.Kernel!.DataBase.ExecuteSQL($@"DELETE FROM {ТовариНаСкладах_Залишки_TablePart.TABLE} WHERE {ТовариНаСкладах_Залишки_TablePart.TABLE}.{ТовариНаСкладах_Залишки_TablePart.Період} = @ПеріодДеньВідбір", paramQuery, transactionID);
+                    await Config.Kernel.DataBase.ExecuteSQL($@"DELETE FROM {ТовариНаСкладах_Залишки_TablePart.TABLE} WHERE {ТовариНаСкладах_Залишки_TablePart.TABLE}.{ТовариНаСкладах_Залишки_TablePart.Період} = @ПеріодДеньВідбір", paramQuery, transactionID);
                         
-                    Config.Kernel!.DataBase.ExecuteSQL($@"INSERT INTO {ТовариНаСкладах_Залишки_TablePart.TABLE} ( uid, {ТовариНаСкладах_Залишки_TablePart.Період}, {ТовариНаСкладах_Залишки_TablePart.Номенклатура}, {ТовариНаСкладах_Залишки_TablePart.ХарактеристикаНоменклатури}, {ТовариНаСкладах_Залишки_TablePart.Склад}, {ТовариНаСкладах_Залишки_TablePart.Серія}, {ТовариНаСкладах_Залишки_TablePart.ВНаявності}, {ТовариНаСкладах_Залишки_TablePart.ДоВідвантаження} ) SELECT uuid_generate_v4(), date_trunc('day', ТовариНаСкладах.period::timestamp) AS Період, ТовариНаСкладах.{ТовариНаСкладах_Const.Номенклатура} AS Номенклатура, ТовариНаСкладах.{ТовариНаСкладах_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури, ТовариНаСкладах.{ТовариНаСкладах_Const.Склад} AS Склад, ТовариНаСкладах.{ТовариНаСкладах_Const.Серія} AS Серія, /* ВНаявності */ SUM(CASE WHEN ТовариНаСкладах.income = true THEN ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE -ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} END) AS ВНаявності, /* ДоВідвантаження */ SUM(CASE WHEN ТовариНаСкладах.income = true THEN ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE -ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} END) AS ДоВідвантаження FROM {ТовариНаСкладах_Const.TABLE} AS ТовариНаСкладах WHERE date_trunc('day', ТовариНаСкладах.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, Номенклатура, ХарактеристикаНоменклатури, Склад, Серія HAVING /* ВНаявності */ SUM(CASE WHEN ТовариНаСкладах.income = true THEN ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE -ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} END) != 0 OR /* ДоВідвантаження */ SUM(CASE WHEN ТовариНаСкладах.income = true THEN ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE -ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} END) != 0", paramQuery, transactionID);
+                    await Config.Kernel.DataBase.ExecuteSQL($@"INSERT INTO {ТовариНаСкладах_Залишки_TablePart.TABLE} ( uid, {ТовариНаСкладах_Залишки_TablePart.Період}, {ТовариНаСкладах_Залишки_TablePart.Номенклатура}, {ТовариНаСкладах_Залишки_TablePart.ХарактеристикаНоменклатури}, {ТовариНаСкладах_Залишки_TablePart.Склад}, {ТовариНаСкладах_Залишки_TablePart.Серія}, {ТовариНаСкладах_Залишки_TablePart.ВНаявності}, {ТовариНаСкладах_Залишки_TablePart.ДоВідвантаження} ) SELECT uuid_generate_v4(), date_trunc('day', ТовариНаСкладах.period::timestamp) AS Період, ТовариНаСкладах.{ТовариНаСкладах_Const.Номенклатура} AS Номенклатура, ТовариНаСкладах.{ТовариНаСкладах_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури, ТовариНаСкладах.{ТовариНаСкладах_Const.Склад} AS Склад, ТовариНаСкладах.{ТовариНаСкладах_Const.Серія} AS Серія, /* ВНаявності */ SUM(CASE WHEN ТовариНаСкладах.income = true THEN ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE -ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} END) AS ВНаявності, /* ДоВідвантаження */ SUM(CASE WHEN ТовариНаСкладах.income = true THEN ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE -ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} END) AS ДоВідвантаження FROM {ТовариНаСкладах_Const.TABLE} AS ТовариНаСкладах WHERE date_trunc('day', ТовариНаСкладах.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, Номенклатура, ХарактеристикаНоменклатури, Склад, Серія HAVING /* ВНаявності */ SUM(CASE WHEN ТовариНаСкладах.income = true THEN ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE -ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} END) != 0 OR /* ДоВідвантаження */ SUM(CASE WHEN ТовариНаСкладах.income = true THEN ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE -ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} END) != 0", paramQuery, transactionID);
                         
                     /* QueryBlock: ЗалишкиТаОбороти */
                         
-                    Config.Kernel!.DataBase.ExecuteSQL($@"DELETE FROM {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.TABLE} WHERE {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.TABLE}.{ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.Період} = @ПеріодДеньВідбір", paramQuery, transactionID);
+                    await Config.Kernel.DataBase.ExecuteSQL($@"DELETE FROM {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.TABLE} WHERE {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.TABLE}.{ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.Період} = @ПеріодДеньВідбір", paramQuery, transactionID);
                         
-                    Config.Kernel!.DataBase.ExecuteSQL($@"INSERT INTO {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.TABLE} ( uid, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.Період}, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.Номенклатура}, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.ХарактеристикаНоменклатури}, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.Склад}, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.Серія}, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.ВНаявностіПрихід}, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.ВНаявностіРозхід}, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.ВНаявностіЗалишок}, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.ДоВідвантаженняПрихід}, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.ДоВідвантаженняРозхід}, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.ДоВідвантаженняЗалишок} ) SELECT uuid_generate_v4(), date_trunc('day', ТовариНаСкладах.period::timestamp) AS Період, ТовариНаСкладах.{ТовариНаСкладах_Const.Номенклатура} AS Номенклатура, ТовариНаСкладах.{ТовариНаСкладах_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури, ТовариНаСкладах.{ТовариНаСкладах_Const.Склад} AS Склад, ТовариНаСкладах.{ТовариНаСкладах_Const.Серія} AS Серія, /* ВНаявності */ SUM(CASE WHEN ТовариНаСкладах.income = true THEN ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE 0 END) AS ВНаявностіПрихід, SUM(CASE WHEN ТовариНаСкладах.income = false THEN ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE 0 END) AS ВНаявностіРозхід, SUM(CASE WHEN ТовариНаСкладах.income = true THEN ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE -ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} END) AS ВНаявностіЗалишок, /* ДоВідвантаження */ SUM(CASE WHEN ТовариНаСкладах.income = true THEN ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE 0 END) AS ДоВідвантаженняПрихід, SUM(CASE WHEN ТовариНаСкладах.income = false THEN ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE 0 END) AS ДоВідвантаженняРозхід, SUM(CASE WHEN ТовариНаСкладах.income = true THEN ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE -ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} END) AS ДоВідвантаженняЗалишок FROM {ТовариНаСкладах_Const.TABLE} AS ТовариНаСкладах WHERE date_trunc('day', ТовариНаСкладах.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, Номенклатура, ХарактеристикаНоменклатури, Склад, Серія HAVING /* ВНаявності */ SUM(CASE WHEN ТовариНаСкладах.income = true THEN ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE 0 END) != 0 OR SUM(CASE WHEN ТовариНаСкладах.income = false THEN ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE 0 END) != 0 OR SUM(CASE WHEN ТовариНаСкладах.income = true THEN ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE -ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} END) != 0 OR /* ДоВідвантаження */ SUM(CASE WHEN ТовариНаСкладах.income = true THEN ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE 0 END) != 0 OR SUM(CASE WHEN ТовариНаСкладах.income = false THEN ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE 0 END) != 0 OR SUM(CASE WHEN ТовариНаСкладах.income = true THEN ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE -ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} END) != 0", paramQuery, transactionID);
+                    await Config.Kernel.DataBase.ExecuteSQL($@"INSERT INTO {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.TABLE} ( uid, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.Період}, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.Номенклатура}, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.ХарактеристикаНоменклатури}, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.Склад}, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.Серія}, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.ВНаявностіПрихід}, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.ВНаявностіРозхід}, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.ВНаявностіЗалишок}, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.ДоВідвантаженняПрихід}, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.ДоВідвантаженняРозхід}, {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.ДоВідвантаженняЗалишок} ) SELECT uuid_generate_v4(), date_trunc('day', ТовариНаСкладах.period::timestamp) AS Період, ТовариНаСкладах.{ТовариНаСкладах_Const.Номенклатура} AS Номенклатура, ТовариНаСкладах.{ТовариНаСкладах_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури, ТовариНаСкладах.{ТовариНаСкладах_Const.Склад} AS Склад, ТовариНаСкладах.{ТовариНаСкладах_Const.Серія} AS Серія, /* ВНаявності */ SUM(CASE WHEN ТовариНаСкладах.income = true THEN ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE 0 END) AS ВНаявностіПрихід, SUM(CASE WHEN ТовариНаСкладах.income = false THEN ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE 0 END) AS ВНаявностіРозхід, SUM(CASE WHEN ТовариНаСкладах.income = true THEN ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE -ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} END) AS ВНаявностіЗалишок, /* ДоВідвантаження */ SUM(CASE WHEN ТовариНаСкладах.income = true THEN ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE 0 END) AS ДоВідвантаженняПрихід, SUM(CASE WHEN ТовариНаСкладах.income = false THEN ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE 0 END) AS ДоВідвантаженняРозхід, SUM(CASE WHEN ТовариНаСкладах.income = true THEN ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE -ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} END) AS ДоВідвантаженняЗалишок FROM {ТовариНаСкладах_Const.TABLE} AS ТовариНаСкладах WHERE date_trunc('day', ТовариНаСкладах.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, Номенклатура, ХарактеристикаНоменклатури, Склад, Серія HAVING /* ВНаявності */ SUM(CASE WHEN ТовариНаСкладах.income = true THEN ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE 0 END) != 0 OR SUM(CASE WHEN ТовариНаСкладах.income = false THEN ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE 0 END) != 0 OR SUM(CASE WHEN ТовариНаСкладах.income = true THEN ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} ELSE -ТовариНаСкладах.{ТовариНаСкладах_Const.ВНаявності} END) != 0 OR /* ДоВідвантаження */ SUM(CASE WHEN ТовариНаСкладах.income = true THEN ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE 0 END) != 0 OR SUM(CASE WHEN ТовариНаСкладах.income = false THEN ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE 0 END) != 0 OR SUM(CASE WHEN ТовариНаСкладах.income = true THEN ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} ELSE -ТовариНаСкладах.{ТовариНаСкладах_Const.ДоВідвантаження} END) != 0", paramQuery, transactionID);
                         
-                    Config.Kernel!.DataBase.CommitTransaction(transactionID);
+                    await Config.Kernel.DataBase.CommitTransaction(transactionID);
                     break;
                 }
                 
                 case "ЗамовленняКлієнтів":
                 {
-                    byte transactionID = Config.Kernel!.DataBase.BeginTransaction();
+                    byte transactionID = await Config.Kernel.DataBase.BeginTransaction();
                     
                     /* QueryBlock: Залишки */
                         
-                    Config.Kernel!.DataBase.ExecuteSQL($@"DELETE FROM {ЗамовленняКлієнтів_Залишки_TablePart.TABLE} WHERE {ЗамовленняКлієнтів_Залишки_TablePart.TABLE}.{ЗамовленняКлієнтів_Залишки_TablePart.Період} = @ПеріодДеньВідбір", paramQuery, transactionID);
+                    await Config.Kernel.DataBase.ExecuteSQL($@"DELETE FROM {ЗамовленняКлієнтів_Залишки_TablePart.TABLE} WHERE {ЗамовленняКлієнтів_Залишки_TablePart.TABLE}.{ЗамовленняКлієнтів_Залишки_TablePart.Період} = @ПеріодДеньВідбір", paramQuery, transactionID);
                         
-                    Config.Kernel!.DataBase.ExecuteSQL($@"INSERT INTO {ЗамовленняКлієнтів_Залишки_TablePart.TABLE} ( uid, {ЗамовленняКлієнтів_Залишки_TablePart.Період}, {ЗамовленняКлієнтів_Залишки_TablePart.ЗамовленняКлієнта}, {ЗамовленняКлієнтів_Залишки_TablePart.Номенклатура}, {ЗамовленняКлієнтів_Залишки_TablePart.ХарактеристикаНоменклатури}, {ЗамовленняКлієнтів_Залишки_TablePart.Склад}, {ЗамовленняКлієнтів_Залишки_TablePart.Замовлено}, {ЗамовленняКлієнтів_Залишки_TablePart.Сума} ) SELECT uuid_generate_v4(), date_trunc('day', ЗамовленняКлієнтів.period::timestamp) AS Період, ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.ЗамовленняКлієнта} AS ЗамовленняКлієнта, ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Номенклатура} AS Номенклатура, ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури, ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Склад} AS Склад, /* Замовлено */ SUM(CASE WHEN ЗамовленняКлієнтів.income = true THEN ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Замовлено} ELSE -ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Замовлено} END) AS Замовлено, /* Сума */ SUM(CASE WHEN ЗамовленняКлієнтів.income = true THEN ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Сума} ELSE -ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Сума} END) AS Сума FROM {ЗамовленняКлієнтів_Const.TABLE} AS ЗамовленняКлієнтів WHERE date_trunc('day', ЗамовленняКлієнтів.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, ЗамовленняКлієнта, Номенклатура, ХарактеристикаНоменклатури, Склад HAVING /* Замовлено */ SUM(CASE WHEN ЗамовленняКлієнтів.income = true THEN ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Замовлено} ELSE -ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Замовлено} END) != 0 OR /* Сума */ SUM(CASE WHEN ЗамовленняКлієнтів.income = true THEN ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Сума} ELSE -ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Сума} END) != 0", paramQuery, transactionID);
+                    await Config.Kernel.DataBase.ExecuteSQL($@"INSERT INTO {ЗамовленняКлієнтів_Залишки_TablePart.TABLE} ( uid, {ЗамовленняКлієнтів_Залишки_TablePart.Період}, {ЗамовленняКлієнтів_Залишки_TablePart.ЗамовленняКлієнта}, {ЗамовленняКлієнтів_Залишки_TablePart.Номенклатура}, {ЗамовленняКлієнтів_Залишки_TablePart.ХарактеристикаНоменклатури}, {ЗамовленняКлієнтів_Залишки_TablePart.Склад}, {ЗамовленняКлієнтів_Залишки_TablePart.Замовлено}, {ЗамовленняКлієнтів_Залишки_TablePart.Сума} ) SELECT uuid_generate_v4(), date_trunc('day', ЗамовленняКлієнтів.period::timestamp) AS Період, ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.ЗамовленняКлієнта} AS ЗамовленняКлієнта, ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Номенклатура} AS Номенклатура, ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури, ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Склад} AS Склад, /* Замовлено */ SUM(CASE WHEN ЗамовленняКлієнтів.income = true THEN ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Замовлено} ELSE -ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Замовлено} END) AS Замовлено, /* Сума */ SUM(CASE WHEN ЗамовленняКлієнтів.income = true THEN ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Сума} ELSE -ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Сума} END) AS Сума FROM {ЗамовленняКлієнтів_Const.TABLE} AS ЗамовленняКлієнтів WHERE date_trunc('day', ЗамовленняКлієнтів.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, ЗамовленняКлієнта, Номенклатура, ХарактеристикаНоменклатури, Склад HAVING /* Замовлено */ SUM(CASE WHEN ЗамовленняКлієнтів.income = true THEN ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Замовлено} ELSE -ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Замовлено} END) != 0 OR /* Сума */ SUM(CASE WHEN ЗамовленняКлієнтів.income = true THEN ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Сума} ELSE -ЗамовленняКлієнтів.{ЗамовленняКлієнтів_Const.Сума} END) != 0", paramQuery, transactionID);
                         
-                    Config.Kernel!.DataBase.CommitTransaction(transactionID);
+                    await Config.Kernel.DataBase.CommitTransaction(transactionID);
                     break;
                 }
                 
                 case "РозрахункиЗКлієнтами":
                 {
-                    byte transactionID = Config.Kernel!.DataBase.BeginTransaction();
+                    byte transactionID = await Config.Kernel.DataBase.BeginTransaction();
                     
                     /* QueryBlock: Залишки */
                         
-                    Config.Kernel!.DataBase.ExecuteSQL($@"DELETE FROM {РозрахункиЗКлієнтами_Залишки_TablePart.TABLE} WHERE {РозрахункиЗКлієнтами_Залишки_TablePart.TABLE}.{РозрахункиЗКлієнтами_Залишки_TablePart.Період} = @ПеріодДеньВідбір", paramQuery, transactionID);
+                    await Config.Kernel.DataBase.ExecuteSQL($@"DELETE FROM {РозрахункиЗКлієнтами_Залишки_TablePart.TABLE} WHERE {РозрахункиЗКлієнтами_Залишки_TablePart.TABLE}.{РозрахункиЗКлієнтами_Залишки_TablePart.Період} = @ПеріодДеньВідбір", paramQuery, transactionID);
                         
-                    Config.Kernel!.DataBase.ExecuteSQL($@"INSERT INTO {РозрахункиЗКлієнтами_Залишки_TablePart.TABLE} ( uid, {РозрахункиЗКлієнтами_Залишки_TablePart.Період}, {РозрахункиЗКлієнтами_Залишки_TablePart.Валюта}, {РозрахункиЗКлієнтами_Залишки_TablePart.Контрагент}, {РозрахункиЗКлієнтами_Залишки_TablePart.Сума} ) SELECT uuid_generate_v4(), date_trunc('day', РозрахункиЗКлієнтами.period::timestamp) AS Період, РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Валюта} AS Валюта, РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Контрагент} AS Контрагент, /* Сума */ SUM(CASE WHEN РозрахункиЗКлієнтами.income = true THEN РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} ELSE -РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} END) AS Сума FROM {РозрахункиЗКлієнтами_Const.TABLE} AS РозрахункиЗКлієнтами WHERE date_trunc('day', РозрахункиЗКлієнтами.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, Валюта, Контрагент HAVING /* Сума */ SUM(CASE WHEN РозрахункиЗКлієнтами.income = true THEN РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} ELSE -РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} END) != 0", paramQuery, transactionID);
+                    await Config.Kernel.DataBase.ExecuteSQL($@"INSERT INTO {РозрахункиЗКлієнтами_Залишки_TablePart.TABLE} ( uid, {РозрахункиЗКлієнтами_Залишки_TablePart.Період}, {РозрахункиЗКлієнтами_Залишки_TablePart.Валюта}, {РозрахункиЗКлієнтами_Залишки_TablePart.Контрагент}, {РозрахункиЗКлієнтами_Залишки_TablePart.Сума} ) SELECT uuid_generate_v4(), date_trunc('day', РозрахункиЗКлієнтами.period::timestamp) AS Період, РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Валюта} AS Валюта, РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Контрагент} AS Контрагент, /* Сума */ SUM(CASE WHEN РозрахункиЗКлієнтами.income = true THEN РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} ELSE -РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} END) AS Сума FROM {РозрахункиЗКлієнтами_Const.TABLE} AS РозрахункиЗКлієнтами WHERE date_trunc('day', РозрахункиЗКлієнтами.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, Валюта, Контрагент HAVING /* Сума */ SUM(CASE WHEN РозрахункиЗКлієнтами.income = true THEN РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} ELSE -РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} END) != 0", paramQuery, transactionID);
                         
                     /* QueryBlock: ЗалишкиТаОбороти */
                         
-                    Config.Kernel!.DataBase.ExecuteSQL($@"DELETE FROM {РозрахункиЗКлієнтами_ЗалишкиТаОбороти_TablePart.TABLE} WHERE {РозрахункиЗКлієнтами_ЗалишкиТаОбороти_TablePart.TABLE}.{РозрахункиЗКлієнтами_ЗалишкиТаОбороти_TablePart.Період} = @ПеріодДеньВідбір", paramQuery, transactionID);
+                    await Config.Kernel.DataBase.ExecuteSQL($@"DELETE FROM {РозрахункиЗКлієнтами_ЗалишкиТаОбороти_TablePart.TABLE} WHERE {РозрахункиЗКлієнтами_ЗалишкиТаОбороти_TablePart.TABLE}.{РозрахункиЗКлієнтами_ЗалишкиТаОбороти_TablePart.Період} = @ПеріодДеньВідбір", paramQuery, transactionID);
                         
-                    Config.Kernel!.DataBase.ExecuteSQL($@"INSERT INTO {РозрахункиЗКлієнтами_ЗалишкиТаОбороти_TablePart.TABLE} ( uid, {РозрахункиЗКлієнтами_ЗалишкиТаОбороти_TablePart.Період}, {РозрахункиЗКлієнтами_ЗалишкиТаОбороти_TablePart.Валюта}, {РозрахункиЗКлієнтами_ЗалишкиТаОбороти_TablePart.Контрагент}, {РозрахункиЗКлієнтами_ЗалишкиТаОбороти_TablePart.СумаПрихід}, {РозрахункиЗКлієнтами_ЗалишкиТаОбороти_TablePart.СумаРозхід}, {РозрахункиЗКлієнтами_ЗалишкиТаОбороти_TablePart.СумаЗалишок} ) SELECT uuid_generate_v4(), date_trunc('day', РозрахункиЗКлієнтами.period::timestamp) AS Період, РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Валюта} AS Валюта, РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Контрагент} AS Контрагент, /* Сума */ SUM(CASE WHEN РозрахункиЗКлієнтами.income = true THEN РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} ELSE 0 END) AS СумаПрихід, SUM(CASE WHEN РозрахункиЗКлієнтами.income = false THEN РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} ELSE 0 END) AS СумаРозхід, SUM(CASE WHEN РозрахункиЗКлієнтами.income = true THEN РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} ELSE -РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} END) AS СумаЗалишок FROM {РозрахункиЗКлієнтами_Const.TABLE} AS РозрахункиЗКлієнтами WHERE date_trunc('day', РозрахункиЗКлієнтами.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, Валюта, Контрагент HAVING /* Сума */ SUM(CASE WHEN РозрахункиЗКлієнтами.income = true THEN РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} ELSE 0 END) != 0 OR SUM(CASE WHEN РозрахункиЗКлієнтами.income = false THEN РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} ELSE 0 END) != 0 OR SUM(CASE WHEN РозрахункиЗКлієнтами.income = true THEN РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} ELSE -РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} END) != 0", paramQuery, transactionID);
+                    await Config.Kernel.DataBase.ExecuteSQL($@"INSERT INTO {РозрахункиЗКлієнтами_ЗалишкиТаОбороти_TablePart.TABLE} ( uid, {РозрахункиЗКлієнтами_ЗалишкиТаОбороти_TablePart.Період}, {РозрахункиЗКлієнтами_ЗалишкиТаОбороти_TablePart.Валюта}, {РозрахункиЗКлієнтами_ЗалишкиТаОбороти_TablePart.Контрагент}, {РозрахункиЗКлієнтами_ЗалишкиТаОбороти_TablePart.СумаПрихід}, {РозрахункиЗКлієнтами_ЗалишкиТаОбороти_TablePart.СумаРозхід}, {РозрахункиЗКлієнтами_ЗалишкиТаОбороти_TablePart.СумаЗалишок} ) SELECT uuid_generate_v4(), date_trunc('day', РозрахункиЗКлієнтами.period::timestamp) AS Період, РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Валюта} AS Валюта, РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Контрагент} AS Контрагент, /* Сума */ SUM(CASE WHEN РозрахункиЗКлієнтами.income = true THEN РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} ELSE 0 END) AS СумаПрихід, SUM(CASE WHEN РозрахункиЗКлієнтами.income = false THEN РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} ELSE 0 END) AS СумаРозхід, SUM(CASE WHEN РозрахункиЗКлієнтами.income = true THEN РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} ELSE -РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} END) AS СумаЗалишок FROM {РозрахункиЗКлієнтами_Const.TABLE} AS РозрахункиЗКлієнтами WHERE date_trunc('day', РозрахункиЗКлієнтами.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, Валюта, Контрагент HAVING /* Сума */ SUM(CASE WHEN РозрахункиЗКлієнтами.income = true THEN РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} ELSE 0 END) != 0 OR SUM(CASE WHEN РозрахункиЗКлієнтами.income = false THEN РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} ELSE 0 END) != 0 OR SUM(CASE WHEN РозрахункиЗКлієнтами.income = true THEN РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} ELSE -РозрахункиЗКлієнтами.{РозрахункиЗКлієнтами_Const.Сума} END) != 0", paramQuery, transactionID);
                         
-                    Config.Kernel!.DataBase.CommitTransaction(transactionID);
+                    await Config.Kernel.DataBase.CommitTransaction(transactionID);
                     break;
                 }
                 
                 case "Закупівлі":
                 {
-                    byte transactionID = Config.Kernel!.DataBase.BeginTransaction();
+                    byte transactionID = await Config.Kernel.DataBase.BeginTransaction();
                     
                     /* QueryBlock: Обороти */
                         
-                    Config.Kernel!.DataBase.ExecuteSQL($@"DELETE FROM {Закупівлі_Обороти_TablePart.TABLE} WHERE {Закупівлі_Обороти_TablePart.TABLE}.{Закупівлі_Обороти_TablePart.Період} = @ПеріодДеньВідбір", paramQuery, transactionID);
+                    await Config.Kernel.DataBase.ExecuteSQL($@"DELETE FROM {Закупівлі_Обороти_TablePart.TABLE} WHERE {Закупівлі_Обороти_TablePart.TABLE}.{Закупівлі_Обороти_TablePart.Період} = @ПеріодДеньВідбір", paramQuery, transactionID);
                         
-                    Config.Kernel!.DataBase.ExecuteSQL($@"INSERT INTO {Закупівлі_Обороти_TablePart.TABLE} ( uid, {Закупівлі_Обороти_TablePart.Період}, {Закупівлі_Обороти_TablePart.Організація}, {Закупівлі_Обороти_TablePart.Склад}, {Закупівлі_Обороти_TablePart.Контрагент}, {Закупівлі_Обороти_TablePart.Договір}, {Закупівлі_Обороти_TablePart.Номенклатура}, {Закупівлі_Обороти_TablePart.ХарактеристикаНоменклатури}, {Закупівлі_Обороти_TablePart.Кількість}, {Закупівлі_Обороти_TablePart.Сума}, {Закупівлі_Обороти_TablePart.Собівартість} ) SELECT uuid_generate_v4(), date_trunc('day', Закупівлі.period::timestamp) AS Період, Закупівлі.{Закупівлі_Const.Організація} AS Організація, Закупівлі.{Закупівлі_Const.Склад} AS Склад, Закупівлі.{Закупівлі_Const.Контрагент} AS Контрагент, Закупівлі.{Закупівлі_Const.Договір} AS Договір, Закупівлі.{Закупівлі_Const.Номенклатура} AS Номенклатура, Закупівлі.{Закупівлі_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури, SUM(Закупівлі.{Закупівлі_Const.Кількість}) AS Кількість, SUM(Закупівлі.{Закупівлі_Const.Сума}) AS Сума, Закупівлі.{Закупівлі_Const.Собівартість} AS Собівартість FROM {Закупівлі_Const.TABLE} AS Закупівлі WHERE date_trunc('day', Закупівлі.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, Організація, Склад, Контрагент, Договір, Номенклатура, ХарактеристикаНоменклатури, Собівартість HAVING SUM(Закупівлі.{Закупівлі_Const.Кількість}) != 0 OR SUM(Закупівлі.{Закупівлі_Const.Сума}) != 0", paramQuery, transactionID);
+                    await Config.Kernel.DataBase.ExecuteSQL($@"INSERT INTO {Закупівлі_Обороти_TablePart.TABLE} ( uid, {Закупівлі_Обороти_TablePart.Період}, {Закупівлі_Обороти_TablePart.Організація}, {Закупівлі_Обороти_TablePart.Склад}, {Закупівлі_Обороти_TablePart.Контрагент}, {Закупівлі_Обороти_TablePart.Договір}, {Закупівлі_Обороти_TablePart.Номенклатура}, {Закупівлі_Обороти_TablePart.ХарактеристикаНоменклатури}, {Закупівлі_Обороти_TablePart.Кількість}, {Закупівлі_Обороти_TablePart.Сума}, {Закупівлі_Обороти_TablePart.Собівартість} ) SELECT uuid_generate_v4(), date_trunc('day', Закупівлі.period::timestamp) AS Період, Закупівлі.{Закупівлі_Const.Організація} AS Організація, Закупівлі.{Закупівлі_Const.Склад} AS Склад, Закупівлі.{Закупівлі_Const.Контрагент} AS Контрагент, Закупівлі.{Закупівлі_Const.Договір} AS Договір, Закупівлі.{Закупівлі_Const.Номенклатура} AS Номенклатура, Закупівлі.{Закупівлі_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури, SUM(Закупівлі.{Закупівлі_Const.Кількість}) AS Кількість, SUM(Закупівлі.{Закупівлі_Const.Сума}) AS Сума, Закупівлі.{Закупівлі_Const.Собівартість} AS Собівартість FROM {Закупівлі_Const.TABLE} AS Закупівлі WHERE date_trunc('day', Закупівлі.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, Організація, Склад, Контрагент, Договір, Номенклатура, ХарактеристикаНоменклатури, Собівартість HAVING SUM(Закупівлі.{Закупівлі_Const.Кількість}) != 0 OR SUM(Закупівлі.{Закупівлі_Const.Сума}) != 0", paramQuery, transactionID);
                         
-                    Config.Kernel!.DataBase.CommitTransaction(transactionID);
+                    await Config.Kernel.DataBase.CommitTransaction(transactionID);
                     break;
                 }
                 
                 case "ВільніЗалишки":
                 {
-                    byte transactionID = Config.Kernel!.DataBase.BeginTransaction();
+                    byte transactionID = await Config.Kernel.DataBase.BeginTransaction();
                     
                     /* QueryBlock: Залишки */
                         
-                    Config.Kernel!.DataBase.ExecuteSQL($@"DELETE FROM {ВільніЗалишки_Залишки_TablePart.TABLE} WHERE {ВільніЗалишки_Залишки_TablePart.TABLE}.{ВільніЗалишки_Залишки_TablePart.Період} = @ПеріодДеньВідбір", paramQuery, transactionID);
+                    await Config.Kernel.DataBase.ExecuteSQL($@"DELETE FROM {ВільніЗалишки_Залишки_TablePart.TABLE} WHERE {ВільніЗалишки_Залишки_TablePart.TABLE}.{ВільніЗалишки_Залишки_TablePart.Період} = @ПеріодДеньВідбір", paramQuery, transactionID);
                         
-                    Config.Kernel!.DataBase.ExecuteSQL($@"INSERT INTO {ВільніЗалишки_Залишки_TablePart.TABLE} ( uid, {ВільніЗалишки_Залишки_TablePart.Період}, {ВільніЗалишки_Залишки_TablePart.Номенклатура}, {ВільніЗалишки_Залишки_TablePart.ХарактеристикаНоменклатури}, {ВільніЗалишки_Залишки_TablePart.Склад}, {ВільніЗалишки_Залишки_TablePart.ВНаявності}, {ВільніЗалишки_Залишки_TablePart.ВРезервіЗіСкладу}, {ВільніЗалишки_Залишки_TablePart.ВРезервіПідЗамовлення} ) SELECT uuid_generate_v4(), date_trunc('day', ВільніЗалишки.period::timestamp) AS Період, ВільніЗалишки.{ВільніЗалишки_Const.Номенклатура} AS Номенклатура, ВільніЗалишки.{ВільніЗалишки_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури, ВільніЗалишки.{ВільніЗалишки_Const.Склад} AS Склад, /* ВНаявності */ SUM(CASE WHEN ВільніЗалишки.income = true THEN ВільніЗалишки.{ВільніЗалишки_Const.ВНаявності} ELSE -ВільніЗалишки.{ВільніЗалишки_Const.ВНаявності} END) AS ВНаявності, /* ВРезервіЗіСкладу */ SUM(CASE WHEN ВільніЗалишки.income = true THEN ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіЗіСкладу} ELSE -ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіЗіСкладу} END) AS ВРезервіЗіСкладу, /* ВРезервіПідЗамовлення */ SUM(CASE WHEN ВільніЗалишки.income = true THEN ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіПідЗамовлення} ELSE -ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіПідЗамовлення} END) AS ВРезервіПідЗамовлення FROM {ВільніЗалишки_Const.TABLE} AS ВільніЗалишки WHERE date_trunc('day', ВільніЗалишки.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, Номенклатура, ХарактеристикаНоменклатури, Склад HAVING /* ВНаявності */ SUM(CASE WHEN ВільніЗалишки.income = true THEN ВільніЗалишки.{ВільніЗалишки_Const.ВНаявності} ELSE -ВільніЗалишки.{ВільніЗалишки_Const.ВНаявності} END) != 0 OR /* ВРезервіЗіСкладу */ SUM(CASE WHEN ВільніЗалишки.income = true THEN ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіЗіСкладу} ELSE -ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіЗіСкладу} END) != 0 OR /* ВРезервіПідЗамовлення */ SUM(CASE WHEN ВільніЗалишки.income = true THEN ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіПідЗамовлення} ELSE -ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіПідЗамовлення} END) != 0", paramQuery, transactionID);
+                    await Config.Kernel.DataBase.ExecuteSQL($@"INSERT INTO {ВільніЗалишки_Залишки_TablePart.TABLE} ( uid, {ВільніЗалишки_Залишки_TablePart.Період}, {ВільніЗалишки_Залишки_TablePart.Номенклатура}, {ВільніЗалишки_Залишки_TablePart.ХарактеристикаНоменклатури}, {ВільніЗалишки_Залишки_TablePart.Склад}, {ВільніЗалишки_Залишки_TablePart.ВНаявності}, {ВільніЗалишки_Залишки_TablePart.ВРезервіЗіСкладу}, {ВільніЗалишки_Залишки_TablePart.ВРезервіПідЗамовлення} ) SELECT uuid_generate_v4(), date_trunc('day', ВільніЗалишки.period::timestamp) AS Період, ВільніЗалишки.{ВільніЗалишки_Const.Номенклатура} AS Номенклатура, ВільніЗалишки.{ВільніЗалишки_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури, ВільніЗалишки.{ВільніЗалишки_Const.Склад} AS Склад, /* ВНаявності */ SUM(CASE WHEN ВільніЗалишки.income = true THEN ВільніЗалишки.{ВільніЗалишки_Const.ВНаявності} ELSE -ВільніЗалишки.{ВільніЗалишки_Const.ВНаявності} END) AS ВНаявності, /* ВРезервіЗіСкладу */ SUM(CASE WHEN ВільніЗалишки.income = true THEN ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіЗіСкладу} ELSE -ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіЗіСкладу} END) AS ВРезервіЗіСкладу, /* ВРезервіПідЗамовлення */ SUM(CASE WHEN ВільніЗалишки.income = true THEN ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіПідЗамовлення} ELSE -ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіПідЗамовлення} END) AS ВРезервіПідЗамовлення FROM {ВільніЗалишки_Const.TABLE} AS ВільніЗалишки WHERE date_trunc('day', ВільніЗалишки.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, Номенклатура, ХарактеристикаНоменклатури, Склад HAVING /* ВНаявності */ SUM(CASE WHEN ВільніЗалишки.income = true THEN ВільніЗалишки.{ВільніЗалишки_Const.ВНаявності} ELSE -ВільніЗалишки.{ВільніЗалишки_Const.ВНаявності} END) != 0 OR /* ВРезервіЗіСкладу */ SUM(CASE WHEN ВільніЗалишки.income = true THEN ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіЗіСкладу} ELSE -ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіЗіСкладу} END) != 0 OR /* ВРезервіПідЗамовлення */ SUM(CASE WHEN ВільніЗалишки.income = true THEN ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіПідЗамовлення} ELSE -ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіПідЗамовлення} END) != 0", paramQuery, transactionID);
                         
-                    Config.Kernel!.DataBase.CommitTransaction(transactionID);
+                    await Config.Kernel.DataBase.CommitTransaction(transactionID);
                     break;
                 }
                 
                 case "ЗамовленняПостачальникам":
                 {
-                    byte transactionID = Config.Kernel!.DataBase.BeginTransaction();
+                    byte transactionID = await Config.Kernel.DataBase.BeginTransaction();
                     
                     /* QueryBlock: Залишки */
                         
-                    Config.Kernel!.DataBase.ExecuteSQL($@"DELETE FROM {ЗамовленняПостачальникам_Залишки_TablePart.TABLE} WHERE {ЗамовленняПостачальникам_Залишки_TablePart.TABLE}.{ЗамовленняПостачальникам_Залишки_TablePart.Період} = @ПеріодДеньВідбір", paramQuery, transactionID);
+                    await Config.Kernel.DataBase.ExecuteSQL($@"DELETE FROM {ЗамовленняПостачальникам_Залишки_TablePart.TABLE} WHERE {ЗамовленняПостачальникам_Залишки_TablePart.TABLE}.{ЗамовленняПостачальникам_Залишки_TablePart.Період} = @ПеріодДеньВідбір", paramQuery, transactionID);
                         
-                    Config.Kernel!.DataBase.ExecuteSQL($@"INSERT INTO {ЗамовленняПостачальникам_Залишки_TablePart.TABLE} ( uid, {ЗамовленняПостачальникам_Залишки_TablePart.Період}, {ЗамовленняПостачальникам_Залишки_TablePart.ЗамовленняПостачальнику}, {ЗамовленняПостачальникам_Залишки_TablePart.Номенклатура}, {ЗамовленняПостачальникам_Залишки_TablePart.ХарактеристикаНоменклатури}, {ЗамовленняПостачальникам_Залишки_TablePart.Склад}, {ЗамовленняПостачальникам_Залишки_TablePart.Замовлено} ) SELECT uuid_generate_v4(), date_trunc('day', ЗамовленняПостачальникам.period::timestamp) AS Період, ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.ЗамовленняПостачальнику} AS ЗамовленняПостачальнику, ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Номенклатура} AS Номенклатура, ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури, ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Склад} AS Склад, /* Замовлено */ SUM(CASE WHEN ЗамовленняПостачальникам.income = true THEN ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Замовлено} ELSE -ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Замовлено} END) AS Замовлено FROM {ЗамовленняПостачальникам_Const.TABLE} AS ЗамовленняПостачальникам WHERE date_trunc('day', ЗамовленняПостачальникам.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, ЗамовленняПостачальнику, Номенклатура, ХарактеристикаНоменклатури, Склад HAVING /* Замовлено */ SUM(CASE WHEN ЗамовленняПостачальникам.income = true THEN ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Замовлено} ELSE -ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Замовлено} END) != 0", paramQuery, transactionID);
+                    await Config.Kernel.DataBase.ExecuteSQL($@"INSERT INTO {ЗамовленняПостачальникам_Залишки_TablePart.TABLE} ( uid, {ЗамовленняПостачальникам_Залишки_TablePart.Період}, {ЗамовленняПостачальникам_Залишки_TablePart.ЗамовленняПостачальнику}, {ЗамовленняПостачальникам_Залишки_TablePart.Номенклатура}, {ЗамовленняПостачальникам_Залишки_TablePart.ХарактеристикаНоменклатури}, {ЗамовленняПостачальникам_Залишки_TablePart.Склад}, {ЗамовленняПостачальникам_Залишки_TablePart.Замовлено} ) SELECT uuid_generate_v4(), date_trunc('day', ЗамовленняПостачальникам.period::timestamp) AS Період, ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.ЗамовленняПостачальнику} AS ЗамовленняПостачальнику, ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Номенклатура} AS Номенклатура, ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури, ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Склад} AS Склад, /* Замовлено */ SUM(CASE WHEN ЗамовленняПостачальникам.income = true THEN ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Замовлено} ELSE -ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Замовлено} END) AS Замовлено FROM {ЗамовленняПостачальникам_Const.TABLE} AS ЗамовленняПостачальникам WHERE date_trunc('day', ЗамовленняПостачальникам.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, ЗамовленняПостачальнику, Номенклатура, ХарактеристикаНоменклатури, Склад HAVING /* Замовлено */ SUM(CASE WHEN ЗамовленняПостачальникам.income = true THEN ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Замовлено} ELSE -ЗамовленняПостачальникам.{ЗамовленняПостачальникам_Const.Замовлено} END) != 0", paramQuery, transactionID);
                         
-                    Config.Kernel!.DataBase.CommitTransaction(transactionID);
+                    await Config.Kernel.DataBase.CommitTransaction(transactionID);
                     break;
                 }
                 
                 case "РозрахункиЗПостачальниками":
                 {
-                    byte transactionID = Config.Kernel!.DataBase.BeginTransaction();
+                    byte transactionID = await Config.Kernel.DataBase.BeginTransaction();
                     
                     /* QueryBlock: Залишки */
                         
-                    Config.Kernel!.DataBase.ExecuteSQL($@"DELETE FROM {РозрахункиЗПостачальниками_Залишки_TablePart.TABLE} WHERE {РозрахункиЗПостачальниками_Залишки_TablePart.TABLE}.{РозрахункиЗПостачальниками_Залишки_TablePart.Період} = @ПеріодДеньВідбір", paramQuery, transactionID);
+                    await Config.Kernel.DataBase.ExecuteSQL($@"DELETE FROM {РозрахункиЗПостачальниками_Залишки_TablePart.TABLE} WHERE {РозрахункиЗПостачальниками_Залишки_TablePart.TABLE}.{РозрахункиЗПостачальниками_Залишки_TablePart.Період} = @ПеріодДеньВідбір", paramQuery, transactionID);
                         
-                    Config.Kernel!.DataBase.ExecuteSQL($@"INSERT INTO {РозрахункиЗПостачальниками_Залишки_TablePart.TABLE} ( uid, {РозрахункиЗПостачальниками_Залишки_TablePart.Період}, {РозрахункиЗПостачальниками_Залишки_TablePart.Контрагент}, {РозрахункиЗПостачальниками_Залишки_TablePart.Валюта}, {РозрахункиЗПостачальниками_Залишки_TablePart.Сума} ) SELECT uuid_generate_v4(), date_trunc('day', РозрахункиЗПостачальниками.period::timestamp) AS Період, РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Контрагент} AS Контрагент, РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Валюта} AS Валюта, /* Сума */ SUM(CASE WHEN РозрахункиЗПостачальниками.income = true THEN РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} ELSE -РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} END) AS Сума FROM {РозрахункиЗПостачальниками_Const.TABLE} AS РозрахункиЗПостачальниками WHERE date_trunc('day', РозрахункиЗПостачальниками.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, Контрагент, Валюта HAVING /* Сума */ SUM(CASE WHEN РозрахункиЗПостачальниками.income = true THEN РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} ELSE -РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} END) != 0", paramQuery, transactionID);
+                    await Config.Kernel.DataBase.ExecuteSQL($@"INSERT INTO {РозрахункиЗПостачальниками_Залишки_TablePart.TABLE} ( uid, {РозрахункиЗПостачальниками_Залишки_TablePart.Період}, {РозрахункиЗПостачальниками_Залишки_TablePart.Контрагент}, {РозрахункиЗПостачальниками_Залишки_TablePart.Валюта}, {РозрахункиЗПостачальниками_Залишки_TablePart.Сума} ) SELECT uuid_generate_v4(), date_trunc('day', РозрахункиЗПостачальниками.period::timestamp) AS Період, РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Контрагент} AS Контрагент, РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Валюта} AS Валюта, /* Сума */ SUM(CASE WHEN РозрахункиЗПостачальниками.income = true THEN РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} ELSE -РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} END) AS Сума FROM {РозрахункиЗПостачальниками_Const.TABLE} AS РозрахункиЗПостачальниками WHERE date_trunc('day', РозрахункиЗПостачальниками.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, Контрагент, Валюта HAVING /* Сума */ SUM(CASE WHEN РозрахункиЗПостачальниками.income = true THEN РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} ELSE -РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} END) != 0", paramQuery, transactionID);
                         
                     /* QueryBlock: ЗалишкиТаОбороти */
                         
-                    Config.Kernel!.DataBase.ExecuteSQL($@"DELETE FROM {РозрахункиЗПостачальниками_ЗалишкиТаОбороти_TablePart.TABLE} WHERE {РозрахункиЗПостачальниками_ЗалишкиТаОбороти_TablePart.TABLE}.{РозрахункиЗПостачальниками_ЗалишкиТаОбороти_TablePart.Період} = @ПеріодДеньВідбір", paramQuery, transactionID);
+                    await Config.Kernel.DataBase.ExecuteSQL($@"DELETE FROM {РозрахункиЗПостачальниками_ЗалишкиТаОбороти_TablePart.TABLE} WHERE {РозрахункиЗПостачальниками_ЗалишкиТаОбороти_TablePart.TABLE}.{РозрахункиЗПостачальниками_ЗалишкиТаОбороти_TablePart.Період} = @ПеріодДеньВідбір", paramQuery, transactionID);
                         
-                    Config.Kernel!.DataBase.ExecuteSQL($@"INSERT INTO {РозрахункиЗПостачальниками_ЗалишкиТаОбороти_TablePart.TABLE} ( uid, {РозрахункиЗПостачальниками_ЗалишкиТаОбороти_TablePart.Період}, {РозрахункиЗПостачальниками_ЗалишкиТаОбороти_TablePart.Контрагент}, {РозрахункиЗПостачальниками_ЗалишкиТаОбороти_TablePart.Валюта}, {РозрахункиЗПостачальниками_ЗалишкиТаОбороти_TablePart.СумаПрихід}, {РозрахункиЗПостачальниками_ЗалишкиТаОбороти_TablePart.СумаРозхід}, {РозрахункиЗПостачальниками_ЗалишкиТаОбороти_TablePart.СумаЗалишок} ) SELECT uuid_generate_v4(), date_trunc('day', РозрахункиЗПостачальниками.period::timestamp) AS Період, РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Контрагент} AS Контрагент, РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Валюта} AS Валюта, /* Сума */ SUM(CASE WHEN РозрахункиЗПостачальниками.income = true THEN РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} ELSE 0 END) AS СумаПрихід, SUM(CASE WHEN РозрахункиЗПостачальниками.income = false THEN РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} ELSE 0 END) AS СумаРозхід, SUM(CASE WHEN РозрахункиЗПостачальниками.income = true THEN РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} ELSE -РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} END) AS СумаЗалишок FROM {РозрахункиЗПостачальниками_Const.TABLE} AS РозрахункиЗПостачальниками WHERE date_trunc('day', РозрахункиЗПостачальниками.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, Контрагент, Валюта HAVING /* Сума */ SUM(CASE WHEN РозрахункиЗПостачальниками.income = true THEN РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} ELSE 0 END) != 0 OR SUM(CASE WHEN РозрахункиЗПостачальниками.income = false THEN РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} ELSE 0 END) != 0 OR SUM(CASE WHEN РозрахункиЗПостачальниками.income = true THEN РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} ELSE -РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} END) != 0", paramQuery, transactionID);
+                    await Config.Kernel.DataBase.ExecuteSQL($@"INSERT INTO {РозрахункиЗПостачальниками_ЗалишкиТаОбороти_TablePart.TABLE} ( uid, {РозрахункиЗПостачальниками_ЗалишкиТаОбороти_TablePart.Період}, {РозрахункиЗПостачальниками_ЗалишкиТаОбороти_TablePart.Контрагент}, {РозрахункиЗПостачальниками_ЗалишкиТаОбороти_TablePart.Валюта}, {РозрахункиЗПостачальниками_ЗалишкиТаОбороти_TablePart.СумаПрихід}, {РозрахункиЗПостачальниками_ЗалишкиТаОбороти_TablePart.СумаРозхід}, {РозрахункиЗПостачальниками_ЗалишкиТаОбороти_TablePart.СумаЗалишок} ) SELECT uuid_generate_v4(), date_trunc('day', РозрахункиЗПостачальниками.period::timestamp) AS Період, РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Контрагент} AS Контрагент, РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Валюта} AS Валюта, /* Сума */ SUM(CASE WHEN РозрахункиЗПостачальниками.income = true THEN РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} ELSE 0 END) AS СумаПрихід, SUM(CASE WHEN РозрахункиЗПостачальниками.income = false THEN РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} ELSE 0 END) AS СумаРозхід, SUM(CASE WHEN РозрахункиЗПостачальниками.income = true THEN РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} ELSE -РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} END) AS СумаЗалишок FROM {РозрахункиЗПостачальниками_Const.TABLE} AS РозрахункиЗПостачальниками WHERE date_trunc('day', РозрахункиЗПостачальниками.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, Контрагент, Валюта HAVING /* Сума */ SUM(CASE WHEN РозрахункиЗПостачальниками.income = true THEN РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} ELSE 0 END) != 0 OR SUM(CASE WHEN РозрахункиЗПостачальниками.income = false THEN РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} ELSE 0 END) != 0 OR SUM(CASE WHEN РозрахункиЗПостачальниками.income = true THEN РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} ELSE -РозрахункиЗПостачальниками.{РозрахункиЗПостачальниками_Const.Сума} END) != 0", paramQuery, transactionID);
                         
-                    Config.Kernel!.DataBase.CommitTransaction(transactionID);
+                    await Config.Kernel.DataBase.CommitTransaction(transactionID);
                     break;
                 }
                 
                 case "РухКоштів":
                 {
-                    byte transactionID = Config.Kernel!.DataBase.BeginTransaction();
+                    byte transactionID = await Config.Kernel.DataBase.BeginTransaction();
                     
                     /* QueryBlock: Залишки */
                         
-                    Config.Kernel!.DataBase.ExecuteSQL($@"DELETE FROM {РухКоштів_Залишки_TablePart.TABLE} WHERE {РухКоштів_Залишки_TablePart.TABLE}.{РухКоштів_Залишки_TablePart.Період} = @ПеріодДеньВідбір", paramQuery, transactionID);
+                    await Config.Kernel.DataBase.ExecuteSQL($@"DELETE FROM {РухКоштів_Залишки_TablePart.TABLE} WHERE {РухКоштів_Залишки_TablePart.TABLE}.{РухКоштів_Залишки_TablePart.Період} = @ПеріодДеньВідбір", paramQuery, transactionID);
                         
-                    Config.Kernel!.DataBase.ExecuteSQL($@"INSERT INTO {РухКоштів_Залишки_TablePart.TABLE} ( uid, {РухКоштів_Залишки_TablePart.Період}, {РухКоштів_Залишки_TablePart.Організація}, {РухКоштів_Залишки_TablePart.Каса}, {РухКоштів_Залишки_TablePart.Валюта}, {РухКоштів_Залишки_TablePart.Сума} ) SELECT uuid_generate_v4(), date_trunc('day', РухКоштів.period::timestamp) AS Період, РухКоштів.{РухКоштів_Const.Організація} AS Організація, РухКоштів.{РухКоштів_Const.Каса} AS Каса, РухКоштів.{РухКоштів_Const.Валюта} AS Валюта, /* Сума */ SUM(CASE WHEN РухКоштів.income = true THEN РухКоштів.{РухКоштів_Const.Сума} ELSE -РухКоштів.{РухКоштів_Const.Сума} END) AS Сума FROM {РухКоштів_Const.TABLE} AS РухКоштів WHERE date_trunc('day', РухКоштів.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, Організація, Каса, Валюта HAVING /* Сума */ SUM(CASE WHEN РухКоштів.income = true THEN РухКоштів.{РухКоштів_Const.Сума} ELSE -РухКоштів.{РухКоштів_Const.Сума} END) != 0", paramQuery, transactionID);
+                    await Config.Kernel.DataBase.ExecuteSQL($@"INSERT INTO {РухКоштів_Залишки_TablePart.TABLE} ( uid, {РухКоштів_Залишки_TablePart.Період}, {РухКоштів_Залишки_TablePart.Організація}, {РухКоштів_Залишки_TablePart.Каса}, {РухКоштів_Залишки_TablePart.Валюта}, {РухКоштів_Залишки_TablePart.Сума} ) SELECT uuid_generate_v4(), date_trunc('day', РухКоштів.period::timestamp) AS Період, РухКоштів.{РухКоштів_Const.Організація} AS Організація, РухКоштів.{РухКоштів_Const.Каса} AS Каса, РухКоштів.{РухКоштів_Const.Валюта} AS Валюта, /* Сума */ SUM(CASE WHEN РухКоштів.income = true THEN РухКоштів.{РухКоштів_Const.Сума} ELSE -РухКоштів.{РухКоштів_Const.Сума} END) AS Сума FROM {РухКоштів_Const.TABLE} AS РухКоштів WHERE date_trunc('day', РухКоштів.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, Організація, Каса, Валюта HAVING /* Сума */ SUM(CASE WHEN РухКоштів.income = true THEN РухКоштів.{РухКоштів_Const.Сума} ELSE -РухКоштів.{РухКоштів_Const.Сума} END) != 0", paramQuery, transactionID);
                         
                     /* QueryBlock: ЗалишкиТаОбороти */
                         
-                    Config.Kernel!.DataBase.ExecuteSQL($@"DELETE FROM {РухКоштів_ЗалишкиТаОбороти_TablePart.TABLE} WHERE {РухКоштів_ЗалишкиТаОбороти_TablePart.TABLE}.{РухКоштів_ЗалишкиТаОбороти_TablePart.Період} = @ПеріодДеньВідбір", paramQuery, transactionID);
+                    await Config.Kernel.DataBase.ExecuteSQL($@"DELETE FROM {РухКоштів_ЗалишкиТаОбороти_TablePart.TABLE} WHERE {РухКоштів_ЗалишкиТаОбороти_TablePart.TABLE}.{РухКоштів_ЗалишкиТаОбороти_TablePart.Період} = @ПеріодДеньВідбір", paramQuery, transactionID);
                         
-                    Config.Kernel!.DataBase.ExecuteSQL($@"INSERT INTO {РухКоштів_ЗалишкиТаОбороти_TablePart.TABLE} ( uid, {РухКоштів_ЗалишкиТаОбороти_TablePart.Період}, {РухКоштів_ЗалишкиТаОбороти_TablePart.Організація}, {РухКоштів_ЗалишкиТаОбороти_TablePart.Каса}, {РухКоштів_ЗалишкиТаОбороти_TablePart.Валюта}, {РухКоштів_ЗалишкиТаОбороти_TablePart.СумаПрихід}, {РухКоштів_ЗалишкиТаОбороти_TablePart.СумаРозхід}, {РухКоштів_ЗалишкиТаОбороти_TablePart.СумаЗалишок} ) SELECT uuid_generate_v4(), date_trunc('day', РухКоштів.period::timestamp) AS Період, РухКоштів.{РухКоштів_Const.Організація} AS Організація, РухКоштів.{РухКоштів_Const.Каса} AS Каса, РухКоштів.{РухКоштів_Const.Валюта} AS Валюта, /* Сума */ SUM(CASE WHEN РухКоштів.income = true THEN РухКоштів.{РухКоштів_Const.Сума} ELSE 0 END) AS СумаПрихід, SUM(CASE WHEN РухКоштів.income = false THEN РухКоштів.{РухКоштів_Const.Сума} ELSE 0 END) AS СумаРозхід, SUM(CASE WHEN РухКоштів.income = true THEN РухКоштів.{РухКоштів_Const.Сума} ELSE -РухКоштів.{РухКоштів_Const.Сума} END) AS СумаЗалишок FROM {РухКоштів_Const.TABLE} AS РухКоштів WHERE date_trunc('day', РухКоштів.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, Організація, Каса, Валюта HAVING /* Сума */ SUM(CASE WHEN РухКоштів.income = true THEN РухКоштів.{РухКоштів_Const.Сума} ELSE 0 END) != 0 OR SUM(CASE WHEN РухКоштів.income = false THEN РухКоштів.{РухКоштів_Const.Сума} ELSE 0 END) != 0 OR SUM(CASE WHEN РухКоштів.income = true THEN РухКоштів.{РухКоштів_Const.Сума} ELSE -РухКоштів.{РухКоштів_Const.Сума} END) != 0", paramQuery, transactionID);
+                    await Config.Kernel.DataBase.ExecuteSQL($@"INSERT INTO {РухКоштів_ЗалишкиТаОбороти_TablePart.TABLE} ( uid, {РухКоштів_ЗалишкиТаОбороти_TablePart.Період}, {РухКоштів_ЗалишкиТаОбороти_TablePart.Організація}, {РухКоштів_ЗалишкиТаОбороти_TablePart.Каса}, {РухКоштів_ЗалишкиТаОбороти_TablePart.Валюта}, {РухКоштів_ЗалишкиТаОбороти_TablePart.СумаПрихід}, {РухКоштів_ЗалишкиТаОбороти_TablePart.СумаРозхід}, {РухКоштів_ЗалишкиТаОбороти_TablePart.СумаЗалишок} ) SELECT uuid_generate_v4(), date_trunc('day', РухКоштів.period::timestamp) AS Період, РухКоштів.{РухКоштів_Const.Організація} AS Організація, РухКоштів.{РухКоштів_Const.Каса} AS Каса, РухКоштів.{РухКоштів_Const.Валюта} AS Валюта, /* Сума */ SUM(CASE WHEN РухКоштів.income = true THEN РухКоштів.{РухКоштів_Const.Сума} ELSE 0 END) AS СумаПрихід, SUM(CASE WHEN РухКоштів.income = false THEN РухКоштів.{РухКоштів_Const.Сума} ELSE 0 END) AS СумаРозхід, SUM(CASE WHEN РухКоштів.income = true THEN РухКоштів.{РухКоштів_Const.Сума} ELSE -РухКоштів.{РухКоштів_Const.Сума} END) AS СумаЗалишок FROM {РухКоштів_Const.TABLE} AS РухКоштів WHERE date_trunc('day', РухКоштів.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, Організація, Каса, Валюта HAVING /* Сума */ SUM(CASE WHEN РухКоштів.income = true THEN РухКоштів.{РухКоштів_Const.Сума} ELSE 0 END) != 0 OR SUM(CASE WHEN РухКоштів.income = false THEN РухКоштів.{РухКоштів_Const.Сума} ELSE 0 END) != 0 OR SUM(CASE WHEN РухКоштів.income = true THEN РухКоштів.{РухКоштів_Const.Сума} ELSE -РухКоштів.{РухКоштів_Const.Сума} END) != 0", paramQuery, transactionID);
                         
-                    Config.Kernel!.DataBase.CommitTransaction(transactionID);
+                    await Config.Kernel.DataBase.CommitTransaction(transactionID);
                     break;
                 }
                 
                 case "ПартіїТоварів":
                 {
-                    byte transactionID = Config.Kernel!.DataBase.BeginTransaction();
+                    byte transactionID = await Config.Kernel.DataBase.BeginTransaction();
                     
                     /* QueryBlock: Залишки */
                         
-                    Config.Kernel!.DataBase.ExecuteSQL($@"DELETE FROM {ПартіїТоварів_Залишки_TablePart.TABLE} WHERE {ПартіїТоварів_Залишки_TablePart.TABLE}.{ПартіїТоварів_Залишки_TablePart.Період} = @ПеріодДеньВідбір", paramQuery, transactionID);
+                    await Config.Kernel.DataBase.ExecuteSQL($@"DELETE FROM {ПартіїТоварів_Залишки_TablePart.TABLE} WHERE {ПартіїТоварів_Залишки_TablePart.TABLE}.{ПартіїТоварів_Залишки_TablePart.Період} = @ПеріодДеньВідбір", paramQuery, transactionID);
                         
-                    Config.Kernel!.DataBase.ExecuteSQL($@"INSERT INTO {ПартіїТоварів_Залишки_TablePart.TABLE} ( uid, {ПартіїТоварів_Залишки_TablePart.Період}, {ПартіїТоварів_Залишки_TablePart.Організація}, {ПартіїТоварів_Залишки_TablePart.ПартіяТоварівКомпозит}, {ПартіїТоварів_Залишки_TablePart.Номенклатура}, {ПартіїТоварів_Залишки_TablePart.ХарактеристикаНоменклатури}, {ПартіїТоварів_Залишки_TablePart.Серія}, {ПартіїТоварів_Залишки_TablePart.Склад}, {ПартіїТоварів_Залишки_TablePart.Рядок}, {ПартіїТоварів_Залишки_TablePart.Кількість}, {ПартіїТоварів_Залишки_TablePart.Собівартість} ) SELECT uuid_generate_v4(), date_trunc('day', ПартіїТоварів.period::timestamp) AS Період, ПартіїТоварів.{ПартіїТоварів_Const.Організація} AS Організація, ПартіїТоварів.{ПартіїТоварів_Const.ПартіяТоварівКомпозит} AS ПартіяТоварівКомпозит, ПартіїТоварів.{ПартіїТоварів_Const.Номенклатура} AS Номенклатура, ПартіїТоварів.{ПартіїТоварів_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури, ПартіїТоварів.{ПартіїТоварів_Const.Серія} AS Серія, ПартіїТоварів.{ПартіїТоварів_Const.Склад} AS Склад, ПартіїТоварів.{ПартіїТоварів_Const.Рядок} AS Рядок, /* Кількість */ SUM(CASE WHEN ПартіїТоварів.income = true THEN ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE -ПартіїТоварів.{ПартіїТоварів_Const.Кількість} END) AS Кількість, /* Собівартість */ SUM(CASE WHEN ПартіїТоварів.income = true THEN ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE -ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} END) AS Собівартість FROM {ПартіїТоварів_Const.TABLE} AS ПартіїТоварів WHERE date_trunc('day', ПартіїТоварів.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, Організація, ПартіяТоварівКомпозит, Номенклатура, ХарактеристикаНоменклатури, Серія, Склад, Рядок HAVING /* Кількість */ SUM(CASE WHEN ПартіїТоварів.income = true THEN ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE -ПартіїТоварів.{ПартіїТоварів_Const.Кількість} END) != 0 OR /* Собівартість */ SUM(CASE WHEN ПартіїТоварів.income = true THEN ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE -ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} END) != 0", paramQuery, transactionID);
+                    await Config.Kernel.DataBase.ExecuteSQL($@"INSERT INTO {ПартіїТоварів_Залишки_TablePart.TABLE} ( uid, {ПартіїТоварів_Залишки_TablePart.Період}, {ПартіїТоварів_Залишки_TablePart.Організація}, {ПартіїТоварів_Залишки_TablePart.ПартіяТоварівКомпозит}, {ПартіїТоварів_Залишки_TablePart.Номенклатура}, {ПартіїТоварів_Залишки_TablePart.ХарактеристикаНоменклатури}, {ПартіїТоварів_Залишки_TablePart.Серія}, {ПартіїТоварів_Залишки_TablePart.Склад}, {ПартіїТоварів_Залишки_TablePart.Рядок}, {ПартіїТоварів_Залишки_TablePart.Кількість}, {ПартіїТоварів_Залишки_TablePart.Собівартість} ) SELECT uuid_generate_v4(), date_trunc('day', ПартіїТоварів.period::timestamp) AS Період, ПартіїТоварів.{ПартіїТоварів_Const.Організація} AS Організація, ПартіїТоварів.{ПартіїТоварів_Const.ПартіяТоварівКомпозит} AS ПартіяТоварівКомпозит, ПартіїТоварів.{ПартіїТоварів_Const.Номенклатура} AS Номенклатура, ПартіїТоварів.{ПартіїТоварів_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури, ПартіїТоварів.{ПартіїТоварів_Const.Серія} AS Серія, ПартіїТоварів.{ПартіїТоварів_Const.Склад} AS Склад, ПартіїТоварів.{ПартіїТоварів_Const.Рядок} AS Рядок, /* Кількість */ SUM(CASE WHEN ПартіїТоварів.income = true THEN ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE -ПартіїТоварів.{ПартіїТоварів_Const.Кількість} END) AS Кількість, /* Собівартість */ SUM(CASE WHEN ПартіїТоварів.income = true THEN ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE -ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} END) AS Собівартість FROM {ПартіїТоварів_Const.TABLE} AS ПартіїТоварів WHERE date_trunc('day', ПартіїТоварів.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, Організація, ПартіяТоварівКомпозит, Номенклатура, ХарактеристикаНоменклатури, Серія, Склад, Рядок HAVING /* Кількість */ SUM(CASE WHEN ПартіїТоварів.income = true THEN ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE -ПартіїТоварів.{ПартіїТоварів_Const.Кількість} END) != 0 OR /* Собівартість */ SUM(CASE WHEN ПартіїТоварів.income = true THEN ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE -ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} END) != 0", paramQuery, transactionID);
                         
                     /* QueryBlock: ЗалишкиТаОбороти */
                         
-                    Config.Kernel!.DataBase.ExecuteSQL($@"DELETE FROM {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.TABLE} WHERE {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.TABLE}.{ПартіїТоварів_ЗалишкиТаОбороти_TablePart.Період} = @ПеріодДеньВідбір", paramQuery, transactionID);
+                    await Config.Kernel.DataBase.ExecuteSQL($@"DELETE FROM {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.TABLE} WHERE {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.TABLE}.{ПартіїТоварів_ЗалишкиТаОбороти_TablePart.Період} = @ПеріодДеньВідбір", paramQuery, transactionID);
                         
-                    Config.Kernel!.DataBase.ExecuteSQL($@"INSERT INTO {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.TABLE} ( uid, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.Період}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.Організація}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.ПартіяТоварівКомпозит}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.Номенклатура}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.ХарактеристикаНоменклатури}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.Серія}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.Склад}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.Рядок}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.КількістьПрихід}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.КількістьРозхід}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.КількістьЗалишок}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.СобівартістьПрихід}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.СобівартістьРозхід}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.СобівартістьЗалишок} ) SELECT uuid_generate_v4(), date_trunc('day', ПартіїТоварів.period::timestamp) AS Період, ПартіїТоварів.{ПартіїТоварів_Const.Організація} AS Організація, ПартіїТоварів.{ПартіїТоварів_Const.ПартіяТоварівКомпозит} AS ПартіяТоварівКомпозит, ПартіїТоварів.{ПартіїТоварів_Const.Номенклатура} AS Номенклатура, ПартіїТоварів.{ПартіїТоварів_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури, ПартіїТоварів.{ПартіїТоварів_Const.Серія} AS Серія, ПартіїТоварів.{ПартіїТоварів_Const.Склад} AS Склад, ПартіїТоварів.{ПартіїТоварів_Const.Рядок} AS Рядок, /* Кількість */ SUM(CASE WHEN ПартіїТоварів.income = true THEN ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE 0 END) AS КількістьПрихід, SUM(CASE WHEN ПартіїТоварів.income = false THEN ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE 0 END) AS КількістьРозхід, SUM(CASE WHEN ПартіїТоварів.income = true THEN ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE -ПартіїТоварів.{ПартіїТоварів_Const.Кількість} END) AS КількістьЗалишок, /* Собівартість */ SUM(CASE WHEN ПартіїТоварів.income = true THEN ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE 0 END) AS СобівартістьПрихід, SUM(CASE WHEN ПартіїТоварів.income = false THEN ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE 0 END) AS СобівартістьРозхід, SUM(CASE WHEN ПартіїТоварів.income = true THEN ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE -ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} END) AS СобівартістьЗалишок FROM {ПартіїТоварів_Const.TABLE} AS ПартіїТоварів WHERE date_trunc('day', ПартіїТоварів.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, Організація, ПартіяТоварівКомпозит, Номенклатура, ХарактеристикаНоменклатури, Серія, Склад, Рядок HAVING /* Кількість */ SUM(CASE WHEN ПартіїТоварів.income = true THEN ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE 0 END) != 0 OR SUM(CASE WHEN ПартіїТоварів.income = false THEN ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE 0 END) != 0 OR SUM(CASE WHEN ПартіїТоварів.income = true THEN ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE -ПартіїТоварів.{ПартіїТоварів_Const.Кількість} END) != 0 OR /* Собівартість */ SUM(CASE WHEN ПартіїТоварів.income = true THEN ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE 0 END) != 0 OR SUM(CASE WHEN ПартіїТоварів.income = false THEN ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE 0 END) != 0 OR SUM(CASE WHEN ПартіїТоварів.income = true THEN ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE -ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} END) != 0", paramQuery, transactionID);
+                    await Config.Kernel.DataBase.ExecuteSQL($@"INSERT INTO {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.TABLE} ( uid, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.Період}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.Організація}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.ПартіяТоварівКомпозит}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.Номенклатура}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.ХарактеристикаНоменклатури}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.Серія}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.Склад}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.Рядок}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.КількістьПрихід}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.КількістьРозхід}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.КількістьЗалишок}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.СобівартістьПрихід}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.СобівартістьРозхід}, {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.СобівартістьЗалишок} ) SELECT uuid_generate_v4(), date_trunc('day', ПартіїТоварів.period::timestamp) AS Період, ПартіїТоварів.{ПартіїТоварів_Const.Організація} AS Організація, ПартіїТоварів.{ПартіїТоварів_Const.ПартіяТоварівКомпозит} AS ПартіяТоварівКомпозит, ПартіїТоварів.{ПартіїТоварів_Const.Номенклатура} AS Номенклатура, ПартіїТоварів.{ПартіїТоварів_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури, ПартіїТоварів.{ПартіїТоварів_Const.Серія} AS Серія, ПартіїТоварів.{ПартіїТоварів_Const.Склад} AS Склад, ПартіїТоварів.{ПартіїТоварів_Const.Рядок} AS Рядок, /* Кількість */ SUM(CASE WHEN ПартіїТоварів.income = true THEN ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE 0 END) AS КількістьПрихід, SUM(CASE WHEN ПартіїТоварів.income = false THEN ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE 0 END) AS КількістьРозхід, SUM(CASE WHEN ПартіїТоварів.income = true THEN ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE -ПартіїТоварів.{ПартіїТоварів_Const.Кількість} END) AS КількістьЗалишок, /* Собівартість */ SUM(CASE WHEN ПартіїТоварів.income = true THEN ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE 0 END) AS СобівартістьПрихід, SUM(CASE WHEN ПартіїТоварів.income = false THEN ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE 0 END) AS СобівартістьРозхід, SUM(CASE WHEN ПартіїТоварів.income = true THEN ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE -ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} END) AS СобівартістьЗалишок FROM {ПартіїТоварів_Const.TABLE} AS ПартіїТоварів WHERE date_trunc('day', ПартіїТоварів.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, Організація, ПартіяТоварівКомпозит, Номенклатура, ХарактеристикаНоменклатури, Серія, Склад, Рядок HAVING /* Кількість */ SUM(CASE WHEN ПартіїТоварів.income = true THEN ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE 0 END) != 0 OR SUM(CASE WHEN ПартіїТоварів.income = false THEN ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE 0 END) != 0 OR SUM(CASE WHEN ПартіїТоварів.income = true THEN ПартіїТоварів.{ПартіїТоварів_Const.Кількість} ELSE -ПартіїТоварів.{ПартіїТоварів_Const.Кількість} END) != 0 OR /* Собівартість */ SUM(CASE WHEN ПартіїТоварів.income = true THEN ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE 0 END) != 0 OR SUM(CASE WHEN ПартіїТоварів.income = false THEN ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE 0 END) != 0 OR SUM(CASE WHEN ПартіїТоварів.income = true THEN ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} ELSE -ПартіїТоварів.{ПартіїТоварів_Const.Собівартість} END) != 0", paramQuery, transactionID);
                         
-                    Config.Kernel!.DataBase.CommitTransaction(transactionID);
+                    await Config.Kernel.DataBase.CommitTransaction(transactionID);
                     break;
                 }
                 
                 case "Продажі":
                 {
-                    byte transactionID = Config.Kernel!.DataBase.BeginTransaction();
+                    byte transactionID = await Config.Kernel.DataBase.BeginTransaction();
                     
                     /* QueryBlock: Обороти */
                         
-                    Config.Kernel!.DataBase.ExecuteSQL($@"DELETE FROM {Продажі_Обороти_TablePart.TABLE} WHERE {Продажі_Обороти_TablePart.TABLE}.{Продажі_Обороти_TablePart.Період} = @ПеріодДеньВідбір", paramQuery, transactionID);
+                    await Config.Kernel.DataBase.ExecuteSQL($@"DELETE FROM {Продажі_Обороти_TablePart.TABLE} WHERE {Продажі_Обороти_TablePart.TABLE}.{Продажі_Обороти_TablePart.Період} = @ПеріодДеньВідбір", paramQuery, transactionID);
                         
-                    Config.Kernel!.DataBase.ExecuteSQL($@"INSERT INTO {Продажі_Обороти_TablePart.TABLE} ( uid, {Продажі_Обороти_TablePart.Період}, {Продажі_Обороти_TablePart.Організація}, {Продажі_Обороти_TablePart.Склад}, {Продажі_Обороти_TablePart.Контрагент}, {Продажі_Обороти_TablePart.Договір}, {Продажі_Обороти_TablePart.Номенклатура}, {Продажі_Обороти_TablePart.ХарактеристикаНоменклатури}, {Продажі_Обороти_TablePart.Кількість}, {Продажі_Обороти_TablePart.Сума}, {Продажі_Обороти_TablePart.Дохід}, {Продажі_Обороти_TablePart.Собівартість} ) SELECT uuid_generate_v4(), date_trunc('day', Продажі.period::timestamp) AS Період, Продажі.{Продажі_Const.Організація} AS Організація, Продажі.{Продажі_Const.Склад} AS Склад, Продажі.{Продажі_Const.Контрагент} AS Контрагент, Продажі.{Продажі_Const.Договір} AS Договір, Продажі.{Продажі_Const.Номенклатура} AS Номенклатура, Продажі.{Продажі_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури, SUM(Продажі.{Продажі_Const.Кількість}) AS Кількість, SUM(Продажі.{Продажі_Const.Сума}) AS Сума, SUM(Продажі.{Продажі_Const.Дохід}) AS Дохід, Продажі.{Продажі_Const.Собівартість} AS Собівартість FROM {Продажі_Const.TABLE} AS Продажі WHERE date_trunc('day', Продажі.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, Організація, Склад, Контрагент, Договір, Номенклатура, ХарактеристикаНоменклатури, Собівартість HAVING SUM(Продажі.{Продажі_Const.Кількість}) != 0 OR SUM(Продажі.{Продажі_Const.Сума}) != 0 OR SUM(Продажі.{Продажі_Const.Дохід}) != 0", paramQuery, transactionID);
+                    await Config.Kernel.DataBase.ExecuteSQL($@"INSERT INTO {Продажі_Обороти_TablePart.TABLE} ( uid, {Продажі_Обороти_TablePart.Період}, {Продажі_Обороти_TablePart.Організація}, {Продажі_Обороти_TablePart.Склад}, {Продажі_Обороти_TablePart.Контрагент}, {Продажі_Обороти_TablePart.Договір}, {Продажі_Обороти_TablePart.Номенклатура}, {Продажі_Обороти_TablePart.ХарактеристикаНоменклатури}, {Продажі_Обороти_TablePart.Кількість}, {Продажі_Обороти_TablePart.Сума}, {Продажі_Обороти_TablePart.Дохід}, {Продажі_Обороти_TablePart.Собівартість} ) SELECT uuid_generate_v4(), date_trunc('day', Продажі.period::timestamp) AS Період, Продажі.{Продажі_Const.Організація} AS Організація, Продажі.{Продажі_Const.Склад} AS Склад, Продажі.{Продажі_Const.Контрагент} AS Контрагент, Продажі.{Продажі_Const.Договір} AS Договір, Продажі.{Продажі_Const.Номенклатура} AS Номенклатура, Продажі.{Продажі_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури, SUM(Продажі.{Продажі_Const.Кількість}) AS Кількість, SUM(Продажі.{Продажі_Const.Сума}) AS Сума, SUM(Продажі.{Продажі_Const.Дохід}) AS Дохід, Продажі.{Продажі_Const.Собівартість} AS Собівартість FROM {Продажі_Const.TABLE} AS Продажі WHERE date_trunc('day', Продажі.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, Організація, Склад, Контрагент, Договір, Номенклатура, ХарактеристикаНоменклатури, Собівартість HAVING SUM(Продажі.{Продажі_Const.Кількість}) != 0 OR SUM(Продажі.{Продажі_Const.Сума}) != 0 OR SUM(Продажі.{Продажі_Const.Дохід}) != 0", paramQuery, transactionID);
                         
-                    Config.Kernel!.DataBase.CommitTransaction(transactionID);
+                    await Config.Kernel.DataBase.CommitTransaction(transactionID);
                     break;
                 }
                 
                 case "ТовариВКомірках":
                 {
-                    byte transactionID = Config.Kernel!.DataBase.BeginTransaction();
+                    byte transactionID = await Config.Kernel.DataBase.BeginTransaction();
                     
                     /* QueryBlock: ЗалишкиТаОбороти */
                         
-                    Config.Kernel!.DataBase.ExecuteSQL($@"DELETE FROM {ТовариВКомірках_ЗалишкиТаОбороти_TablePart.TABLE} WHERE {ТовариВКомірках_ЗалишкиТаОбороти_TablePart.TABLE}.{ТовариВКомірках_ЗалишкиТаОбороти_TablePart.Період} = @ПеріодДеньВідбір", paramQuery, transactionID);
+                    await Config.Kernel.DataBase.ExecuteSQL($@"DELETE FROM {ТовариВКомірках_ЗалишкиТаОбороти_TablePart.TABLE} WHERE {ТовариВКомірках_ЗалишкиТаОбороти_TablePart.TABLE}.{ТовариВКомірках_ЗалишкиТаОбороти_TablePart.Період} = @ПеріодДеньВідбір", paramQuery, transactionID);
                         
-                    Config.Kernel!.DataBase.ExecuteSQL($@"INSERT INTO {ТовариВКомірках_ЗалишкиТаОбороти_TablePart.TABLE} ( uid, {ТовариВКомірках_ЗалишкиТаОбороти_TablePart.Період}, {ТовариВКомірках_ЗалишкиТаОбороти_TablePart.Номенклатура}, {ТовариВКомірках_ЗалишкиТаОбороти_TablePart.ХарактеристикаНоменклатури}, {ТовариВКомірках_ЗалишкиТаОбороти_TablePart.Пакування}, {ТовариВКомірках_ЗалишкиТаОбороти_TablePart.Комірка}, {ТовариВКомірках_ЗалишкиТаОбороти_TablePart.Серія}, {ТовариВКомірках_ЗалишкиТаОбороти_TablePart.ВНаявностіПрихід}, {ТовариВКомірках_ЗалишкиТаОбороти_TablePart.ВНаявностіРозхід}, {ТовариВКомірках_ЗалишкиТаОбороти_TablePart.ВНаявностіЗалишок} ) SELECT uuid_generate_v4(), date_trunc('day', ТовариВКомірках.period::timestamp) AS Період, ТовариВКомірках.{ТовариВКомірках_Const.Номенклатура} AS Номенклатура, ТовариВКомірках.{ТовариВКомірках_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури, ТовариВКомірках.{ТовариВКомірках_Const.Пакування} AS Пакування, ТовариВКомірках.{ТовариВКомірках_Const.Комірка} AS Комірка, ТовариВКомірках.{ТовариВКомірках_Const.Серія} AS Серія, /* ВНаявності */ SUM(CASE WHEN ТовариВКомірках.income = true THEN ТовариВКомірках.{ТовариВКомірках_Const.ВНаявності} ELSE 0 END) AS ВНаявностіПрихід, SUM(CASE WHEN ТовариВКомірках.income = false THEN ТовариВКомірках.{ТовариВКомірках_Const.ВНаявності} ELSE 0 END) AS ВНаявностіРозхід, SUM(CASE WHEN ТовариВКомірках.income = true THEN ТовариВКомірках.{ТовариВКомірках_Const.ВНаявності} ELSE -ТовариВКомірках.{ТовариВКомірках_Const.ВНаявності} END) AS ВНаявностіЗалишок FROM {ТовариВКомірках_Const.TABLE} AS ТовариВКомірках WHERE date_trunc('day', ТовариВКомірках.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, Номенклатура, ХарактеристикаНоменклатури, Пакування, Комірка, Серія HAVING /* ВНаявності */ SUM(CASE WHEN ТовариВКомірках.income = true THEN ТовариВКомірках.{ТовариВКомірках_Const.ВНаявності} ELSE 0 END) != 0 OR SUM(CASE WHEN ТовариВКомірках.income = false THEN ТовариВКомірках.{ТовариВКомірках_Const.ВНаявності} ELSE 0 END) != 0 OR SUM(CASE WHEN ТовариВКомірках.income = true THEN ТовариВКомірках.{ТовариВКомірках_Const.ВНаявності} ELSE -ТовариВКомірках.{ТовариВКомірках_Const.ВНаявності} END) != 0", paramQuery, transactionID);
+                    await Config.Kernel.DataBase.ExecuteSQL($@"INSERT INTO {ТовариВКомірках_ЗалишкиТаОбороти_TablePart.TABLE} ( uid, {ТовариВКомірках_ЗалишкиТаОбороти_TablePart.Період}, {ТовариВКомірках_ЗалишкиТаОбороти_TablePart.Номенклатура}, {ТовариВКомірках_ЗалишкиТаОбороти_TablePart.ХарактеристикаНоменклатури}, {ТовариВКомірках_ЗалишкиТаОбороти_TablePart.Пакування}, {ТовариВКомірках_ЗалишкиТаОбороти_TablePart.Комірка}, {ТовариВКомірках_ЗалишкиТаОбороти_TablePart.Серія}, {ТовариВКомірках_ЗалишкиТаОбороти_TablePart.ВНаявностіПрихід}, {ТовариВКомірках_ЗалишкиТаОбороти_TablePart.ВНаявностіРозхід}, {ТовариВКомірках_ЗалишкиТаОбороти_TablePart.ВНаявностіЗалишок} ) SELECT uuid_generate_v4(), date_trunc('day', ТовариВКомірках.period::timestamp) AS Період, ТовариВКомірках.{ТовариВКомірках_Const.Номенклатура} AS Номенклатура, ТовариВКомірках.{ТовариВКомірках_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури, ТовариВКомірках.{ТовариВКомірках_Const.Пакування} AS Пакування, ТовариВКомірках.{ТовариВКомірках_Const.Комірка} AS Комірка, ТовариВКомірках.{ТовариВКомірках_Const.Серія} AS Серія, /* ВНаявності */ SUM(CASE WHEN ТовариВКомірках.income = true THEN ТовариВКомірках.{ТовариВКомірках_Const.ВНаявності} ELSE 0 END) AS ВНаявностіПрихід, SUM(CASE WHEN ТовариВКомірках.income = false THEN ТовариВКомірках.{ТовариВКомірках_Const.ВНаявності} ELSE 0 END) AS ВНаявностіРозхід, SUM(CASE WHEN ТовариВКомірках.income = true THEN ТовариВКомірках.{ТовариВКомірках_Const.ВНаявності} ELSE -ТовариВКомірках.{ТовариВКомірках_Const.ВНаявності} END) AS ВНаявностіЗалишок FROM {ТовариВКомірках_Const.TABLE} AS ТовариВКомірках WHERE date_trunc('day', ТовариВКомірках.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, Номенклатура, ХарактеристикаНоменклатури, Пакування, Комірка, Серія HAVING /* ВНаявності */ SUM(CASE WHEN ТовариВКомірках.income = true THEN ТовариВКомірках.{ТовариВКомірках_Const.ВНаявності} ELSE 0 END) != 0 OR SUM(CASE WHEN ТовариВКомірках.income = false THEN ТовариВКомірках.{ТовариВКомірках_Const.ВНаявності} ELSE 0 END) != 0 OR SUM(CASE WHEN ТовариВКомірках.income = true THEN ТовариВКомірках.{ТовариВКомірках_Const.ВНаявності} ELSE -ТовариВКомірках.{ТовариВКомірках_Const.ВНаявності} END) != 0", paramQuery, transactionID);
                         
                     /* QueryBlock: Залишки */
                         
-                    Config.Kernel!.DataBase.ExecuteSQL($@"DELETE FROM {ТовариВКомірках_Залишки_TablePart.TABLE} WHERE {ТовариВКомірках_Залишки_TablePart.TABLE}.{ТовариВКомірках_Залишки_TablePart.Період} = @ПеріодДеньВідбір", paramQuery, transactionID);
+                    await Config.Kernel.DataBase.ExecuteSQL($@"DELETE FROM {ТовариВКомірках_Залишки_TablePart.TABLE} WHERE {ТовариВКомірках_Залишки_TablePart.TABLE}.{ТовариВКомірках_Залишки_TablePart.Період} = @ПеріодДеньВідбір", paramQuery, transactionID);
                         
-                    Config.Kernel!.DataBase.ExecuteSQL($@"INSERT INTO {ТовариВКомірках_Залишки_TablePart.TABLE} ( uid, {ТовариВКомірках_Залишки_TablePart.Період}, {ТовариВКомірках_Залишки_TablePart.Номенклатура}, {ТовариВКомірках_Залишки_TablePart.ХарактеристикаНоменклатури}, {ТовариВКомірках_Залишки_TablePart.Пакування}, {ТовариВКомірках_Залишки_TablePart.Комірка}, {ТовариВКомірках_Залишки_TablePart.Серія}, {ТовариВКомірках_Залишки_TablePart.ВНаявності} ) SELECT uuid_generate_v4(), date_trunc('day', ТовариВКомірках.period::timestamp) AS Період, ТовариВКомірках.{ТовариВКомірках_Const.Номенклатура} AS Номенклатура, ТовариВКомірках.{ТовариВКомірках_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури, ТовариВКомірках.{ТовариВКомірках_Const.Пакування} AS Пакування, ТовариВКомірках.{ТовариВКомірках_Const.Комірка} AS Комірка, ТовариВКомірках.{ТовариВКомірках_Const.Серія} AS Серія, /* ВНаявності */ SUM(CASE WHEN ТовариВКомірках.income = true THEN ТовариВКомірках.{ТовариВКомірках_Const.ВНаявності} ELSE -ТовариВКомірках.{ТовариВКомірках_Const.ВНаявності} END) AS ВНаявності FROM {ТовариВКомірках_Const.TABLE} AS ТовариВКомірках WHERE date_trunc('day', ТовариВКомірках.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, Номенклатура, ХарактеристикаНоменклатури, Пакування, Комірка, Серія HAVING /* ВНаявності */ SUM(CASE WHEN ТовариВКомірках.income = true THEN ТовариВКомірках.{ТовариВКомірках_Const.ВНаявності} ELSE -ТовариВКомірках.{ТовариВКомірках_Const.ВНаявності} END) != 0", paramQuery, transactionID);
+                    await Config.Kernel.DataBase.ExecuteSQL($@"INSERT INTO {ТовариВКомірках_Залишки_TablePart.TABLE} ( uid, {ТовариВКомірках_Залишки_TablePart.Період}, {ТовариВКомірках_Залишки_TablePart.Номенклатура}, {ТовариВКомірках_Залишки_TablePart.ХарактеристикаНоменклатури}, {ТовариВКомірках_Залишки_TablePart.Пакування}, {ТовариВКомірках_Залишки_TablePart.Комірка}, {ТовариВКомірках_Залишки_TablePart.Серія}, {ТовариВКомірках_Залишки_TablePart.ВНаявності} ) SELECT uuid_generate_v4(), date_trunc('day', ТовариВКомірках.period::timestamp) AS Період, ТовариВКомірках.{ТовариВКомірках_Const.Номенклатура} AS Номенклатура, ТовариВКомірках.{ТовариВКомірках_Const.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури, ТовариВКомірках.{ТовариВКомірках_Const.Пакування} AS Пакування, ТовариВКомірках.{ТовариВКомірках_Const.Комірка} AS Комірка, ТовариВКомірках.{ТовариВКомірках_Const.Серія} AS Серія, /* ВНаявності */ SUM(CASE WHEN ТовариВКомірках.income = true THEN ТовариВКомірках.{ТовариВКомірках_Const.ВНаявності} ELSE -ТовариВКомірках.{ТовариВКомірках_Const.ВНаявності} END) AS ВНаявності FROM {ТовариВКомірках_Const.TABLE} AS ТовариВКомірках WHERE date_trunc('day', ТовариВКомірках.period::timestamp) = @ПеріодДеньВідбір GROUP BY Період, Номенклатура, ХарактеристикаНоменклатури, Пакування, Комірка, Серія HAVING /* ВНаявності */ SUM(CASE WHEN ТовариВКомірках.income = true THEN ТовариВКомірках.{ТовариВКомірках_Const.ВНаявності} ELSE -ТовариВКомірках.{ТовариВКомірках_Const.ВНаявності} END) != 0", paramQuery, transactionID);
                         
-                    Config.Kernel!.DataBase.CommitTransaction(transactionID);
+                    await Config.Kernel.DataBase.CommitTransaction(transactionID);
                     break;
                 }
                 
@@ -27520,8 +27540,9 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         }
 
         /* Функція для обчислення підсумкових віртуальних таблиць */
-        public static void ExecuteFinalCalculation(List<string> regAccumNameList)
+        public static async void ExecuteFinalCalculation(List<string> regAccumNameList)
         {
+            if (Config.Kernel == null) return;
             
             foreach (string regAccumName in regAccumNameList)
                 switch(regAccumName)
@@ -27529,57 +27550,57 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                     case "ТовариНаСкладах":
                     {
-                        byte transactionID = Config.Kernel!.DataBase.BeginTransaction();
+                        byte transactionID = await Config.Kernel.DataBase.BeginTransaction();
                         
                         /* QueryBlock: Підсумки */
                             
-                        Config.Kernel!.DataBase.ExecuteSQL($@"DELETE FROM {ТовариНаСкладах_Підсумки_TablePart.TABLE}", null, transactionID);
+                        await Config.Kernel.DataBase.ExecuteSQL($@"DELETE FROM {ТовариНаСкладах_Підсумки_TablePart.TABLE}", null, transactionID);
                             
-                        Config.Kernel!.DataBase.ExecuteSQL($@"INSERT INTO {ТовариНаСкладах_Підсумки_TablePart.TABLE} ( uid, {ТовариНаСкладах_Підсумки_TablePart.Номенклатура}, {ТовариНаСкладах_Підсумки_TablePart.ХарактеристикаНоменклатури}, {ТовариНаСкладах_Підсумки_TablePart.Склад}, {ТовариНаСкладах_Підсумки_TablePart.Серія}, {ТовариНаСкладах_Підсумки_TablePart.ВНаявності}, {ТовариНаСкладах_Підсумки_TablePart.ДоВідвантаження} ) SELECT uuid_generate_v4(), ТовариНаСкладах.{ТовариНаСкладах_Залишки_TablePart.Номенклатура} AS Номенклатура, ТовариНаСкладах.{ТовариНаСкладах_Залишки_TablePart.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури, ТовариНаСкладах.{ТовариНаСкладах_Залишки_TablePart.Склад} AS Склад, ТовариНаСкладах.{ТовариНаСкладах_Залишки_TablePart.Серія} AS Серія, /* ВНаявності */ SUM(ТовариНаСкладах.{ТовариНаСкладах_Залишки_TablePart.ВНаявності}) AS ВНаявності, /* ДоВідвантаження */ SUM(ТовариНаСкладах.{ТовариНаСкладах_Залишки_TablePart.ДоВідвантаження}) AS ДоВідвантаження FROM {ТовариНаСкладах_Залишки_TablePart.TABLE} AS ТовариНаСкладах GROUP BY Номенклатура, ХарактеристикаНоменклатури, Склад, Серія HAVING /* ВНаявності */ SUM(ТовариНаСкладах.{ТовариНаСкладах_Залишки_TablePart.ВНаявності}) != 0 OR /* ДоВідвантаження */ SUM(ТовариНаСкладах.{ТовариНаСкладах_Залишки_TablePart.ДоВідвантаження}) != 0", null, transactionID);
+                        await Config.Kernel.DataBase.ExecuteSQL($@"INSERT INTO {ТовариНаСкладах_Підсумки_TablePart.TABLE} ( uid, {ТовариНаСкладах_Підсумки_TablePart.Номенклатура}, {ТовариНаСкладах_Підсумки_TablePart.ХарактеристикаНоменклатури}, {ТовариНаСкладах_Підсумки_TablePart.Склад}, {ТовариНаСкладах_Підсумки_TablePart.Серія}, {ТовариНаСкладах_Підсумки_TablePart.ВНаявності}, {ТовариНаСкладах_Підсумки_TablePart.ДоВідвантаження} ) SELECT uuid_generate_v4(), ТовариНаСкладах.{ТовариНаСкладах_Залишки_TablePart.Номенклатура} AS Номенклатура, ТовариНаСкладах.{ТовариНаСкладах_Залишки_TablePart.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури, ТовариНаСкладах.{ТовариНаСкладах_Залишки_TablePart.Склад} AS Склад, ТовариНаСкладах.{ТовариНаСкладах_Залишки_TablePart.Серія} AS Серія, /* ВНаявності */ SUM(ТовариНаСкладах.{ТовариНаСкладах_Залишки_TablePart.ВНаявності}) AS ВНаявності, /* ДоВідвантаження */ SUM(ТовариНаСкладах.{ТовариНаСкладах_Залишки_TablePart.ДоВідвантаження}) AS ДоВідвантаження FROM {ТовариНаСкладах_Залишки_TablePart.TABLE} AS ТовариНаСкладах GROUP BY Номенклатура, ХарактеристикаНоменклатури, Склад, Серія HAVING /* ВНаявності */ SUM(ТовариНаСкладах.{ТовариНаСкладах_Залишки_TablePart.ВНаявності}) != 0 OR /* ДоВідвантаження */ SUM(ТовариНаСкладах.{ТовариНаСкладах_Залишки_TablePart.ДоВідвантаження}) != 0", null, transactionID);
                             
-                        Config.Kernel!.DataBase.CommitTransaction(transactionID);
+                        await Config.Kernel.DataBase.CommitTransaction(transactionID);
                         break;
                     }
                     
                     case "РухКоштів":
                     {
-                        byte transactionID = Config.Kernel!.DataBase.BeginTransaction();
+                        byte transactionID = await Config.Kernel.DataBase.BeginTransaction();
                         
                         /* QueryBlock: Підсумки */
                             
-                        Config.Kernel!.DataBase.ExecuteSQL($@"DELETE FROM {РухКоштів_Підсумки_TablePart.TABLE}", null, transactionID);
+                        await Config.Kernel.DataBase.ExecuteSQL($@"DELETE FROM {РухКоштів_Підсумки_TablePart.TABLE}", null, transactionID);
                             
-                        Config.Kernel!.DataBase.ExecuteSQL($@"INSERT INTO {РухКоштів_Підсумки_TablePart.TABLE} ( uid, {РухКоштів_Підсумки_TablePart.Організація}, {РухКоштів_Підсумки_TablePart.Каса}, {РухКоштів_Підсумки_TablePart.Валюта}, {РухКоштів_Підсумки_TablePart.Сума} ) SELECT uuid_generate_v4(), РухКоштів.{РухКоштів_Залишки_TablePart.Організація} AS Організація, РухКоштів.{РухКоштів_Залишки_TablePart.Каса} AS Каса, РухКоштів.{РухКоштів_Залишки_TablePart.Валюта} AS Валюта, /* Сума */ SUM(РухКоштів.{РухКоштів_Залишки_TablePart.Сума}) AS Сума FROM {РухКоштів_Залишки_TablePart.TABLE} AS РухКоштів GROUP BY Організація, Каса, Валюта HAVING /* Сума */ SUM(РухКоштів.{РухКоштів_Залишки_TablePart.Сума}) != 0", null, transactionID);
+                        await Config.Kernel.DataBase.ExecuteSQL($@"INSERT INTO {РухКоштів_Підсумки_TablePart.TABLE} ( uid, {РухКоштів_Підсумки_TablePart.Організація}, {РухКоштів_Підсумки_TablePart.Каса}, {РухКоштів_Підсумки_TablePart.Валюта}, {РухКоштів_Підсумки_TablePart.Сума} ) SELECT uuid_generate_v4(), РухКоштів.{РухКоштів_Залишки_TablePart.Організація} AS Організація, РухКоштів.{РухКоштів_Залишки_TablePart.Каса} AS Каса, РухКоштів.{РухКоштів_Залишки_TablePart.Валюта} AS Валюта, /* Сума */ SUM(РухКоштів.{РухКоштів_Залишки_TablePart.Сума}) AS Сума FROM {РухКоштів_Залишки_TablePart.TABLE} AS РухКоштів GROUP BY Організація, Каса, Валюта HAVING /* Сума */ SUM(РухКоштів.{РухКоштів_Залишки_TablePart.Сума}) != 0", null, transactionID);
                             
-                        Config.Kernel!.DataBase.CommitTransaction(transactionID);
+                        await Config.Kernel.DataBase.CommitTransaction(transactionID);
                         break;
                     }
                     
                     case "ПартіїТоварів":
                     {
-                        byte transactionID = Config.Kernel!.DataBase.BeginTransaction();
+                        byte transactionID = await Config.Kernel.DataBase.BeginTransaction();
                         
                         /* QueryBlock: Підсумки */
                             
-                        Config.Kernel!.DataBase.ExecuteSQL($@"DELETE FROM {ПартіїТоварів_Підсумки_TablePart.TABLE}", null, transactionID);
+                        await Config.Kernel.DataBase.ExecuteSQL($@"DELETE FROM {ПартіїТоварів_Підсумки_TablePart.TABLE}", null, transactionID);
                             
-                        Config.Kernel!.DataBase.ExecuteSQL($@"INSERT INTO {ПартіїТоварів_Підсумки_TablePart.TABLE} ( uid, {ПартіїТоварів_Підсумки_TablePart.Організація}, {ПартіїТоварів_Підсумки_TablePart.ПартіяТоварівКомпозит}, {ПартіїТоварів_Підсумки_TablePart.Номенклатура}, {ПартіїТоварів_Підсумки_TablePart.ХарактеристикаНоменклатури}, {ПартіїТоварів_Підсумки_TablePart.Серія}, {ПартіїТоварів_Підсумки_TablePart.Склад}, {ПартіїТоварів_Підсумки_TablePart.Кількість} ) SELECT uuid_generate_v4(), ПартіїТоварів.{ПартіїТоварів_Залишки_TablePart.Організація} AS Організація, ПартіїТоварів.{ПартіїТоварів_Залишки_TablePart.ПартіяТоварівКомпозит} AS ПартіяТоварівКомпозит, ПартіїТоварів.{ПартіїТоварів_Залишки_TablePart.Номенклатура} AS Номенклатура, ПартіїТоварів.{ПартіїТоварів_Залишки_TablePart.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури, ПартіїТоварів.{ПартіїТоварів_Залишки_TablePart.Серія} AS Серія, ПартіїТоварів.{ПартіїТоварів_Залишки_TablePart.Склад} AS Склад, /* Кількість */ SUM(ПартіїТоварів.{ПартіїТоварів_Залишки_TablePart.Кількість}) AS Кількість FROM {ПартіїТоварів_Залишки_TablePart.TABLE} AS ПартіїТоварів GROUP BY Організація, ПартіяТоварівКомпозит, Номенклатура, ХарактеристикаНоменклатури, Серія, Склад HAVING /* Кількість */ SUM(ПартіїТоварів.{ПартіїТоварів_Залишки_TablePart.Кількість}) != 0", null, transactionID);
+                        await Config.Kernel.DataBase.ExecuteSQL($@"INSERT INTO {ПартіїТоварів_Підсумки_TablePart.TABLE} ( uid, {ПартіїТоварів_Підсумки_TablePart.Організація}, {ПартіїТоварів_Підсумки_TablePart.ПартіяТоварівКомпозит}, {ПартіїТоварів_Підсумки_TablePart.Номенклатура}, {ПартіїТоварів_Підсумки_TablePart.ХарактеристикаНоменклатури}, {ПартіїТоварів_Підсумки_TablePart.Серія}, {ПартіїТоварів_Підсумки_TablePart.Склад}, {ПартіїТоварів_Підсумки_TablePart.Кількість} ) SELECT uuid_generate_v4(), ПартіїТоварів.{ПартіїТоварів_Залишки_TablePart.Організація} AS Організація, ПартіїТоварів.{ПартіїТоварів_Залишки_TablePart.ПартіяТоварівКомпозит} AS ПартіяТоварівКомпозит, ПартіїТоварів.{ПартіїТоварів_Залишки_TablePart.Номенклатура} AS Номенклатура, ПартіїТоварів.{ПартіїТоварів_Залишки_TablePart.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури, ПартіїТоварів.{ПартіїТоварів_Залишки_TablePart.Серія} AS Серія, ПартіїТоварів.{ПартіїТоварів_Залишки_TablePart.Склад} AS Склад, /* Кількість */ SUM(ПартіїТоварів.{ПартіїТоварів_Залишки_TablePart.Кількість}) AS Кількість FROM {ПартіїТоварів_Залишки_TablePart.TABLE} AS ПартіїТоварів GROUP BY Організація, ПартіяТоварівКомпозит, Номенклатура, ХарактеристикаНоменклатури, Серія, Склад HAVING /* Кількість */ SUM(ПартіїТоварів.{ПартіїТоварів_Залишки_TablePart.Кількість}) != 0", null, transactionID);
                             
-                        Config.Kernel!.DataBase.CommitTransaction(transactionID);
+                        await Config.Kernel.DataBase.CommitTransaction(transactionID);
                         break;
                     }
                     
                     case "ТовариВКомірках":
                     {
-                        byte transactionID = Config.Kernel!.DataBase.BeginTransaction();
+                        byte transactionID = await Config.Kernel.DataBase.BeginTransaction();
                         
                         /* QueryBlock: Підсумки */
                             
-                        Config.Kernel!.DataBase.ExecuteSQL($@"DELETE FROM {ТовариВКомірках_Підсумки_TablePart.TABLE}", null, transactionID);
+                        await Config.Kernel.DataBase.ExecuteSQL($@"DELETE FROM {ТовариВКомірках_Підсумки_TablePart.TABLE}", null, transactionID);
                             
-                        Config.Kernel!.DataBase.ExecuteSQL($@"INSERT INTO {ТовариВКомірках_Підсумки_TablePart.TABLE} ( uid, {ТовариВКомірках_Підсумки_TablePart.Номенклатура}, {ТовариВКомірках_Підсумки_TablePart.ХарактеристикаНоменклатури}, {ТовариВКомірках_Підсумки_TablePart.Пакування}, {ТовариВКомірках_Підсумки_TablePart.Комірка}, {ТовариВКомірках_Підсумки_TablePart.Серія}, {ТовариВКомірках_Підсумки_TablePart.ВНаявності} ) SELECT uuid_generate_v4(), ТовариВКомірках.{ТовариВКомірках_Залишки_TablePart.Номенклатура} AS Номенклатура, ТовариВКомірках.{ТовариВКомірках_Залишки_TablePart.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури, ТовариВКомірках.{ТовариВКомірках_Залишки_TablePart.Пакування} AS Пакування, ТовариВКомірках.{ТовариВКомірках_Залишки_TablePart.Комірка} AS Комірка, ТовариВКомірках.{ТовариВКомірках_Залишки_TablePart.Серія} AS Серія, /* ВНаявності */ SUM(ТовариВКомірках.{ТовариВКомірках_Залишки_TablePart.ВНаявності}) AS ВНаявності FROM {ТовариВКомірках_Залишки_TablePart.TABLE} AS ТовариВКомірках GROUP BY Номенклатура, ХарактеристикаНоменклатури, Пакування, Комірка, Серія HAVING /* ВНаявності */ SUM(ТовариВКомірках.{ТовариВКомірках_Залишки_TablePart.ВНаявності}) != 0", null, transactionID);
+                        await Config.Kernel.DataBase.ExecuteSQL($@"INSERT INTO {ТовариВКомірках_Підсумки_TablePart.TABLE} ( uid, {ТовариВКомірках_Підсумки_TablePart.Номенклатура}, {ТовариВКомірках_Підсумки_TablePart.ХарактеристикаНоменклатури}, {ТовариВКомірках_Підсумки_TablePart.Пакування}, {ТовариВКомірках_Підсумки_TablePart.Комірка}, {ТовариВКомірках_Підсумки_TablePart.Серія}, {ТовариВКомірках_Підсумки_TablePart.ВНаявності} ) SELECT uuid_generate_v4(), ТовариВКомірках.{ТовариВКомірках_Залишки_TablePart.Номенклатура} AS Номенклатура, ТовариВКомірках.{ТовариВКомірках_Залишки_TablePart.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури, ТовариВКомірках.{ТовариВКомірках_Залишки_TablePart.Пакування} AS Пакування, ТовариВКомірках.{ТовариВКомірках_Залишки_TablePart.Комірка} AS Комірка, ТовариВКомірках.{ТовариВКомірках_Залишки_TablePart.Серія} AS Серія, /* ВНаявності */ SUM(ТовариВКомірках.{ТовариВКомірках_Залишки_TablePart.ВНаявності}) AS ВНаявності FROM {ТовариВКомірках_Залишки_TablePart.TABLE} AS ТовариВКомірках GROUP BY Номенклатура, ХарактеристикаНоменклатури, Пакування, Комірка, Серія HAVING /* ВНаявності */ SUM(ТовариВКомірках.{ТовариВКомірках_Залишки_TablePart.ВНаявності}) != 0", null, transactionID);
                             
-                        Config.Kernel!.DataBase.CommitTransaction(transactionID);
+                        await Config.Kernel.DataBase.CommitTransaction(transactionID);
                         break;
                     }
                     
@@ -27643,11 +27664,11 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             base.BaseClear();
         }
         
-        public void Save(DateTime period, Guid owner) 
+        public async ValueTask Save(DateTime period, Guid owner) 
         {
-            base.BaseBeginTransaction();
-            base.BaseSelectPeriodForOwner(owner, period);
-            base.BaseDelete(owner);
+            await base.BaseBeginTransaction();
+            await base.BaseSelectPeriodForOwner(owner, period);
+            await base.BaseDelete(owner);
             foreach (Record record in Records)
             {
                 record.Period = period;
@@ -27660,16 +27681,16 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_e7", record.ВНаявності);
                 fieldValue.Add("col_e8", record.ДоВідвантаження);
                 
-                record.UID = base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
+                record.UID = await base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
             }
-            base.BaseTrigerAdd(period, owner);
-            base.BaseCommitTransaction();
+            await base.BaseTrigerAdd(period, owner);
+            await base.BaseCommitTransaction();
         }
 
-        public void Delete(Guid owner)
+        public async ValueTask Delete(Guid owner)
         {
-            base.BaseSelectPeriodForOwner(owner);
-            base.BaseDelete(owner);
+            await base.BaseSelectPeriodForOwner(owner);
+            await base.BaseDelete(owner);
         }
         
         public class Record : RegisterAccumulationRecord
@@ -28012,11 +28033,11 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             base.BaseClear();
         }
         
-        public void Save(DateTime period, Guid owner) 
+        public async ValueTask Save(DateTime period, Guid owner) 
         {
-            base.BaseBeginTransaction();
-            base.BaseSelectPeriodForOwner(owner, period);
-            base.BaseDelete(owner);
+            await base.BaseBeginTransaction();
+            await base.BaseSelectPeriodForOwner(owner, period);
+            await base.BaseDelete(owner);
             foreach (Record record in Records)
             {
                 record.Period = period;
@@ -28029,16 +28050,16 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_a5", record.Замовлено);
                 fieldValue.Add("col_a6", record.Сума);
                 
-                record.UID = base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
+                record.UID = await base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
             }
-            base.BaseTrigerAdd(period, owner);
-            base.BaseCommitTransaction();
+            await base.BaseTrigerAdd(period, owner);
+            await base.BaseCommitTransaction();
         }
 
-        public void Delete(Guid owner)
+        public async ValueTask Delete(Guid owner)
         {
-            base.BaseSelectPeriodForOwner(owner);
-            base.BaseDelete(owner);
+            await base.BaseSelectPeriodForOwner(owner);
+            await base.BaseDelete(owner);
         }
         
         public class Record : RegisterAccumulationRecord
@@ -28189,11 +28210,11 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             base.BaseClear();
         }
         
-        public void Save(DateTime period, Guid owner) 
+        public async ValueTask Save(DateTime period, Guid owner) 
         {
-            base.BaseBeginTransaction();
-            base.BaseSelectPeriodForOwner(owner, period);
-            base.BaseDelete(owner);
+            await base.BaseBeginTransaction();
+            await base.BaseSelectPeriodForOwner(owner, period);
+            await base.BaseDelete(owner);
             foreach (Record record in Records)
             {
                 record.Period = period;
@@ -28203,16 +28224,16 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_a5", record.Контрагент.UnigueID.UGuid);
                 fieldValue.Add("col_a4", record.Сума);
                 
-                record.UID = base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
+                record.UID = await base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
             }
-            base.BaseTrigerAdd(period, owner);
-            base.BaseCommitTransaction();
+            await base.BaseTrigerAdd(period, owner);
+            await base.BaseCommitTransaction();
         }
 
-        public void Delete(Guid owner)
+        public async ValueTask Delete(Guid owner)
         {
-            base.BaseSelectPeriodForOwner(owner);
-            base.BaseDelete(owner);
+            await base.BaseSelectPeriodForOwner(owner);
+            await base.BaseDelete(owner);
         }
         
         public class Record : RegisterAccumulationRecord
@@ -28443,11 +28464,11 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             base.BaseClear();
         }
         
-        public void Save(DateTime period, Guid owner) 
+        public async ValueTask Save(DateTime period, Guid owner) 
         {
-            base.BaseBeginTransaction();
-            base.BaseSelectPeriodForOwner(owner, period);
-            base.BaseDelete(owner);
+            await base.BaseBeginTransaction();
+            await base.BaseSelectPeriodForOwner(owner, period);
+            await base.BaseDelete(owner);
             foreach (Record record in Records)
             {
                 record.Period = period;
@@ -28463,16 +28484,16 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_b1", record.Сума);
                 fieldValue.Add("col_a3", record.Собівартість);
                 
-                record.UID = base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
+                record.UID = await base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
             }
-            base.BaseTrigerAdd(period, owner);
-            base.BaseCommitTransaction();
+            await base.BaseTrigerAdd(period, owner);
+            await base.BaseCommitTransaction();
         }
 
-        public void Delete(Guid owner)
+        public async ValueTask Delete(Guid owner)
         {
-            base.BaseSelectPeriodForOwner(owner);
-            base.BaseDelete(owner);
+            await base.BaseSelectPeriodForOwner(owner);
+            await base.BaseDelete(owner);
         }
         
         public class Record : RegisterAccumulationRecord
@@ -28646,11 +28667,11 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             base.BaseClear();
         }
         
-        public void Save(DateTime period, Guid owner) 
+        public async ValueTask Save(DateTime period, Guid owner) 
         {
-            base.BaseBeginTransaction();
-            base.BaseSelectPeriodForOwner(owner, period);
-            base.BaseDelete(owner);
+            await base.BaseBeginTransaction();
+            await base.BaseSelectPeriodForOwner(owner, period);
+            await base.BaseDelete(owner);
             foreach (Record record in Records)
             {
                 record.Period = period;
@@ -28664,16 +28685,16 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_b2", record.ВРезервіПідЗамовлення);
                 fieldValue.Add("col_a1", record.ДокументРезерву);
                 
-                record.UID = base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
+                record.UID = await base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
             }
-            base.BaseTrigerAdd(period, owner);
-            base.BaseCommitTransaction();
+            await base.BaseTrigerAdd(period, owner);
+            await base.BaseCommitTransaction();
         }
 
-        public void Delete(Guid owner)
+        public async ValueTask Delete(Guid owner)
         {
-            base.BaseSelectPeriodForOwner(owner);
-            base.BaseDelete(owner);
+            await base.BaseSelectPeriodForOwner(owner);
+            await base.BaseDelete(owner);
         }
         
         public class Record : RegisterAccumulationRecord
@@ -28829,11 +28850,11 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             base.BaseClear();
         }
         
-        public void Save(DateTime period, Guid owner) 
+        public async ValueTask Save(DateTime period, Guid owner) 
         {
-            base.BaseBeginTransaction();
-            base.BaseSelectPeriodForOwner(owner, period);
-            base.BaseDelete(owner);
+            await base.BaseBeginTransaction();
+            await base.BaseSelectPeriodForOwner(owner, period);
+            await base.BaseDelete(owner);
             foreach (Record record in Records)
             {
                 record.Period = period;
@@ -28845,16 +28866,16 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_a4", record.Склад.UnigueID.UGuid);
                 fieldValue.Add("col_a5", record.Замовлено);
                 
-                record.UID = base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
+                record.UID = await base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
             }
-            base.BaseTrigerAdd(period, owner);
-            base.BaseCommitTransaction();
+            await base.BaseTrigerAdd(period, owner);
+            await base.BaseCommitTransaction();
         }
 
-        public void Delete(Guid owner)
+        public async ValueTask Delete(Guid owner)
         {
-            base.BaseSelectPeriodForOwner(owner);
-            base.BaseDelete(owner);
+            await base.BaseSelectPeriodForOwner(owner);
+            await base.BaseDelete(owner);
         }
         
         public class Record : RegisterAccumulationRecord
@@ -29000,11 +29021,11 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             base.BaseClear();
         }
         
-        public void Save(DateTime period, Guid owner) 
+        public async ValueTask Save(DateTime period, Guid owner) 
         {
-            base.BaseBeginTransaction();
-            base.BaseSelectPeriodForOwner(owner, period);
-            base.BaseDelete(owner);
+            await base.BaseBeginTransaction();
+            await base.BaseSelectPeriodForOwner(owner, period);
+            await base.BaseDelete(owner);
             foreach (Record record in Records)
             {
                 record.Period = period;
@@ -29014,16 +29035,16 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_a7", record.Валюта.UnigueID.UGuid);
                 fieldValue.Add("col_a8", record.Сума);
                 
-                record.UID = base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
+                record.UID = await base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
             }
-            base.BaseTrigerAdd(period, owner);
-            base.BaseCommitTransaction();
+            await base.BaseTrigerAdd(period, owner);
+            await base.BaseCommitTransaction();
         }
 
-        public void Delete(Guid owner)
+        public async ValueTask Delete(Guid owner)
         {
-            base.BaseSelectPeriodForOwner(owner);
-            base.BaseDelete(owner);
+            await base.BaseSelectPeriodForOwner(owner);
+            await base.BaseDelete(owner);
         }
         
         public class Record : RegisterAccumulationRecord
@@ -29244,11 +29265,11 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             base.BaseClear();
         }
         
-        public void Save(DateTime period, Guid owner) 
+        public async ValueTask Save(DateTime period, Guid owner) 
         {
-            base.BaseBeginTransaction();
-            base.BaseSelectPeriodForOwner(owner, period);
-            base.BaseDelete(owner);
+            await base.BaseBeginTransaction();
+            await base.BaseSelectPeriodForOwner(owner, period);
+            await base.BaseDelete(owner);
             foreach (Record record in Records)
             {
                 record.Period = period;
@@ -29259,16 +29280,16 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_a3", record.Валюта.UnigueID.UGuid);
                 fieldValue.Add("col_a4", record.Сума);
                 
-                record.UID = base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
+                record.UID = await base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
             }
-            base.BaseTrigerAdd(period, owner);
-            base.BaseCommitTransaction();
+            await base.BaseTrigerAdd(period, owner);
+            await base.BaseCommitTransaction();
         }
 
-        public void Delete(Guid owner)
+        public async ValueTask Delete(Guid owner)
         {
-            base.BaseSelectPeriodForOwner(owner);
-            base.BaseDelete(owner);
+            await base.BaseSelectPeriodForOwner(owner);
+            await base.BaseDelete(owner);
         }
         
         public class Record : RegisterAccumulationRecord
@@ -29585,11 +29606,11 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             base.BaseClear();
         }
         
-        public void Save(DateTime period, Guid owner) 
+        public async ValueTask Save(DateTime period, Guid owner) 
         {
-            base.BaseBeginTransaction();
-            base.BaseSelectPeriodForOwner(owner, period);
-            base.BaseDelete(owner);
+            await base.BaseBeginTransaction();
+            await base.BaseSelectPeriodForOwner(owner, period);
+            await base.BaseDelete(owner);
             foreach (Record record in Records)
             {
                 record.Period = period;
@@ -29606,16 +29627,16 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_a4", record.Собівартість);
                 fieldValue.Add("col_b5", record.СписанаСобівартість);
                 
-                record.UID = base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
+                record.UID = await base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
             }
-            base.BaseTrigerAdd(period, owner);
-            base.BaseCommitTransaction();
+            await base.BaseTrigerAdd(period, owner);
+            await base.BaseCommitTransaction();
         }
 
-        public void Delete(Guid owner)
+        public async ValueTask Delete(Guid owner)
         {
-            base.BaseSelectPeriodForOwner(owner);
-            base.BaseDelete(owner);
+            await base.BaseSelectPeriodForOwner(owner);
+            await base.BaseDelete(owner);
         }
         
         public class Record : RegisterAccumulationRecord
@@ -29998,11 +30019,11 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             base.BaseClear();
         }
         
-        public void Save(DateTime period, Guid owner) 
+        public async ValueTask Save(DateTime period, Guid owner) 
         {
-            base.BaseBeginTransaction();
-            base.BaseSelectPeriodForOwner(owner, period);
-            base.BaseDelete(owner);
+            await base.BaseBeginTransaction();
+            await base.BaseSelectPeriodForOwner(owner, period);
+            await base.BaseDelete(owner);
             foreach (Record record in Records)
             {
                 record.Period = period;
@@ -30019,16 +30040,16 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_a4", record.Дохід);
                 fieldValue.Add("col_a3", record.Собівартість);
                 
-                record.UID = base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
+                record.UID = await base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
             }
-            base.BaseTrigerAdd(period, owner);
-            base.BaseCommitTransaction();
+            await base.BaseTrigerAdd(period, owner);
+            await base.BaseCommitTransaction();
         }
 
-        public void Delete(Guid owner)
+        public async ValueTask Delete(Guid owner)
         {
-            base.BaseSelectPeriodForOwner(owner);
-            base.BaseDelete(owner);
+            await base.BaseSelectPeriodForOwner(owner);
+            await base.BaseDelete(owner);
         }
         
         public class Record : RegisterAccumulationRecord
@@ -30205,11 +30226,11 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             base.BaseClear();
         }
         
-        public void Save(DateTime period, Guid owner) 
+        public async ValueTask Save(DateTime period, Guid owner) 
         {
-            base.BaseBeginTransaction();
-            base.BaseSelectPeriodForOwner(owner, period);
-            base.BaseDelete(owner);
+            await base.BaseBeginTransaction();
+            await base.BaseSelectPeriodForOwner(owner, period);
+            await base.BaseDelete(owner);
             foreach (Record record in Records)
             {
                 record.Period = period;
@@ -30222,16 +30243,16 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_a5", record.Серія.UnigueID.UGuid);
                 fieldValue.Add("col_a6", record.ВНаявності);
                 
-                record.UID = base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
+                record.UID = await base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
             }
-            base.BaseTrigerAdd(period, owner);
-            base.BaseCommitTransaction();
+            await base.BaseTrigerAdd(period, owner);
+            await base.BaseCommitTransaction();
         }
 
-        public void Delete(Guid owner)
+        public async ValueTask Delete(Guid owner)
         {
-            base.BaseSelectPeriodForOwner(owner);
-            base.BaseDelete(owner);
+            await base.BaseSelectPeriodForOwner(owner);
+            await base.BaseDelete(owner);
         }
         
         public class Record : RegisterAccumulationRecord

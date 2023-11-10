@@ -124,14 +124,16 @@ namespace StorageAndTrade
 
         protected virtual void OpenPageElement(bool IsNew, UnigueID? unigueID = null) { }
 
-        protected virtual void SetDeletionLabel(UnigueID unigueID) { }
+        protected virtual async ValueTask SetDeletionLabel(UnigueID unigueID) { }
 
-        protected virtual UnigueID? Copy(UnigueID unigueID) { return null; }
+        protected virtual async ValueTask<UnigueID?> Copy(UnigueID unigueID) { return null; }
 
         public virtual void CallBack_LoadRecords(UnigueID? selectPointer)
         {
             SelectPointerItem = selectPointer;
             LoadRecords();
+
+            Console.WriteLine(selectPointer);
         }
 
         #endregion
@@ -201,54 +203,54 @@ namespace StorageAndTrade
             }
             else
             */
-                switch (args.Event.Key)
-                {
-                    case Gdk.Key.Insert:
-                        {
-                            OpenPageElement(true);
-                            break;
-                        }
-                    case Gdk.Key.F5:
-                        {
-                            LoadRecords();
-                            break;
-                        }
-                    case Gdk.Key.KP_Enter:
-                    case Gdk.Key.Return:
-                        {
-                            OnEditClick(null, new EventArgs());
-                            break;
-                        }
-                    case Gdk.Key.End:
-                    case Gdk.Key.Home:
-                    case Gdk.Key.Up:
-                    case Gdk.Key.Down:
-                    case Gdk.Key.Prior:
-                    case Gdk.Key.Next:
-                        {
-                            OnRowActivated(TreeViewGrid, new RowActivatedArgs());
-                            break;
-                        }
-                    case Gdk.Key.Delete:
-                        {
-                            OnDeleteClick(TreeViewGrid, new EventArgs());
-                            break;
-                        }
-                }
+            switch (args.Event.Key)
+            {
+                case Gdk.Key.Insert:
+                    {
+                        OpenPageElement(true);
+                        break;
+                    }
+                case Gdk.Key.F5:
+                    {
+                        LoadRecords();
+                        break;
+                    }
+                case Gdk.Key.KP_Enter:
+                case Gdk.Key.Return:
+                    {
+                        OnEditClick(null, new EventArgs());
+                        break;
+                    }
+                case Gdk.Key.End:
+                case Gdk.Key.Home:
+                case Gdk.Key.Up:
+                case Gdk.Key.Down:
+                case Gdk.Key.Prior:
+                case Gdk.Key.Next:
+                    {
+                        OnRowActivated(TreeViewGrid, new RowActivatedArgs());
+                        break;
+                    }
+                case Gdk.Key.Delete:
+                    {
+                        OnDeleteClick(TreeViewGrid, new EventArgs());
+                        break;
+                    }
+            }
         }
 
         // void OnKeyPressEvent(object? sender, KeyPressEventArgs args)
         // {
-            // Console.WriteLine(args.Event.State);
-            // Console.WriteLine(Gdk.ModifierType.ControlMask);
-            // Console.WriteLine(Gdk.ModifierType.Mod2Mask);
-            // Console.WriteLine(Gdk.ModifierType.ControlMask | Gdk.ModifierType.Mod2Mask);
-            // Console.WriteLine(args.Event.Key);
+        // Console.WriteLine(args.Event.State);
+        // Console.WriteLine(Gdk.ModifierType.ControlMask);
+        // Console.WriteLine(Gdk.ModifierType.Mod2Mask);
+        // Console.WriteLine(Gdk.ModifierType.ControlMask | Gdk.ModifierType.Mod2Mask);
+        // Console.WriteLine(args.Event.Key);
 
-            // if (args.Event.State == (Gdk.ModifierType.ControlMask | Gdk.ModifierType.Mod2Mask) && args.Event.Key == Gdk.Key.Return)
-            // {
-            //     Console.WriteLine(1);
-            // }
+        // if (args.Event.State == (Gdk.ModifierType.ControlMask | Gdk.ModifierType.Mod2Mask) && args.Event.Key == Gdk.Key.Return)
+        // {
+        //     Console.WriteLine(1);
+        // }
         //}
 
         #endregion
@@ -283,7 +285,7 @@ namespace StorageAndTrade
             LoadRecords();
         }
 
-        void OnDeleteClick(object? sender, EventArgs args)
+        async void OnDeleteClick(object? sender, EventArgs args)
         {
             if (TreeViewGrid.Selection.CountSelectedRows() != 0)
             {
@@ -298,7 +300,7 @@ namespace StorageAndTrade
 
                         UnigueID unigueID = new UnigueID((string)TreeViewGrid.Model.GetValue(iter, 1));
 
-                        SetDeletionLabel(unigueID);
+                        await SetDeletionLabel(unigueID);
 
                         SelectPointerItem = unigueID;
                     }
@@ -308,7 +310,7 @@ namespace StorageAndTrade
             }
         }
 
-        void OnCopyClick(object? sender, EventArgs args)
+        async void OnCopyClick(object? sender, EventArgs args)
         {
             if (TreeViewGrid.Selection.CountSelectedRows() != 0)
             {
@@ -323,7 +325,7 @@ namespace StorageAndTrade
 
                         UnigueID unigueID = new UnigueID((string)TreeViewGrid.Model.GetValue(iter, 1));
 
-                        UnigueID? newUnigueID = Copy(unigueID);
+                        UnigueID? newUnigueID = await Copy(unigueID);
 
                         if (newUnigueID != null)
                             SelectPointerItem = newUnigueID;

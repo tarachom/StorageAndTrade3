@@ -102,7 +102,7 @@ namespace StorageAndTrade
             thread.Start();
         }
 
-        void Filling()
+        async void Filling()
         {
             ButtonSensitive(false);
 
@@ -150,7 +150,7 @@ namespace StorageAndTrade
                                     ВиводитиКурсНаСтартову = ВиводитиКурсНаСтартову == "1"
                                 };
                                 валюти_Objest.New();
-                                валюти_Objest.Save();
+                                await валюти_Objest.Save();
 
                                 if (ЗначенняЗаЗамовчуванням == "1")
                                     Константи.ЗначенняЗаЗамовчуванням.ОсновнаВалюта_Const = валюти_Objest.GetDirectoryPointer();
@@ -186,7 +186,7 @@ namespace StorageAndTrade
                             {
                                 Організації_Objest організації_Objest = new Організації_Objest { Назва = Назва };
                                 організації_Objest.New();
-                                організації_Objest.Save();
+                                await організації_Objest.Save();
 
                                 if (ЗначенняЗаЗамовчуванням == "1")
                                     Константи.ЗначенняЗаЗамовчуванням.ОсновнаОрганізація_Const = організації_Objest.GetDirectoryPointer();
@@ -226,8 +226,9 @@ namespace StorageAndTrade
                                     Назва = Назва,
                                     Валюта = new Валюти_Select().FindByField(Валюти_Const.Назва, Валюта)
                                 };
+
                                 обєкт.New();
-                                обєкт.Save();
+                                await обєкт.Save();
 
                                 if (ЗначенняЗаЗамовчуванням == "1")
                                     Константи.ЗначенняЗаЗамовчуванням.ОсновнаКаса_Const = обєкт.GetDirectoryPointer();
@@ -269,7 +270,7 @@ namespace StorageAndTrade
                                     КількістьУпаковок = 1
                                 };
                                 обєкт.New();
-                                обєкт.Save();
+                                await обєкт.Save();
 
                                 if (ЗначенняЗаЗамовчуванням == "1")
                                     Константи.ЗначенняЗаЗамовчуванням.ОсновнаОдиницяПакування_Const = обєкт.GetDirectoryPointer();
@@ -314,7 +315,7 @@ namespace StorageAndTrade
                                     ТипНоменклатури = ТипНоменклатури
                                 };
                                 обєкт.New();
-                                обєкт.Save();
+                                await обєкт.Save();
 
                                 if (ЗначенняЗаЗамовчуванням == "1")
                                     Константи.ЗначенняЗаЗамовчуванням.ОсновнийВидНоменклатури_Const = обєкт.GetDirectoryPointer();
@@ -355,7 +356,7 @@ namespace StorageAndTrade
                                     Валюта = new Валюти_Select().FindByField(Валюти_Const.Назва, Валюта)
                                 };
                                 обєкт.New();
-                                обєкт.Save();
+                                await обєкт.Save();
 
                                 if (ЗначенняЗаЗамовчуванням == "1")
                                     Константи.ЗначенняЗаЗамовчуванням.ОсновнийВидЦіни_Const = обєкт.GetDirectoryPointer();
@@ -394,7 +395,7 @@ namespace StorageAndTrade
                             {
                                 Склади_Objest склади_Objest = new Склади_Objest { Назва = Назва };
                                 склади_Objest.New();
-                                склади_Objest.Save();
+                                await склади_Objest.Save();
 
                                 if (ЗначенняЗаЗамовчуванням == "1")
                                     Константи.ЗначенняЗаЗамовчуванням.ОсновнийСклад_Const = склади_Objest.GetDirectoryPointer();
@@ -430,7 +431,7 @@ namespace StorageAndTrade
                             {
                                 Контрагенти_Objest контрагенти_Objest = new Контрагенти_Objest { Назва = Назва };
                                 контрагенти_Objest.New();
-                                контрагенти_Objest.Save();
+                                await контрагенти_Objest.Save();
 
                                 if (ЗначенняЗаЗамовчуванням == "1")
                                     Константи.ЗначенняЗаЗамовчуванням.ОсновнийПокупець_Const = контрагенти_Objest.GetDirectoryPointer();
@@ -468,7 +469,7 @@ namespace StorageAndTrade
                             {
                                 Контрагенти_Папки_Objest контрагенти_Папки_Objest = new Контрагенти_Папки_Objest { Назва = Назва };
                                 контрагенти_Папки_Objest.New();
-                                контрагенти_Папки_Objest.Save();
+                                await контрагенти_Папки_Objest.Save();
 
                                 CreateMessage(TypeMessage.Ok, $"Додано новий елемент довідника {name}: {Назва}");
                             }
@@ -500,7 +501,7 @@ namespace StorageAndTrade
                             {
                                 Номенклатура_Папки_Objest номенклатура_Папки_Objest = new Номенклатура_Папки_Objest { Назва = Назва };
                                 номенклатура_Папки_Objest.New();
-                                номенклатура_Папки_Objest.Save();
+                                await номенклатура_Папки_Objest.Save();
 
                                 CreateMessage(TypeMessage.Ok, $"Додано новий елемент довідника {name}: {Назва}");
                             }
@@ -545,7 +546,7 @@ namespace StorageAndTrade
                                     ОдиницяВиміру = new ПакуванняОдиниціВиміру_Select().FindByField(ПакуванняОдиниціВиміру_Const.Назва, ПакуванняОдиниціВиміру)
                                 };
                                 обєкт.New();
-                                обєкт.Save();
+                                await обєкт.Save();
 
                                 CreateMessage(TypeMessage.Ok, $"Додано новий елемент довідника {name}: {Назва}");
                             }

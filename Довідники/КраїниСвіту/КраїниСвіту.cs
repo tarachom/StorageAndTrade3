@@ -116,22 +116,22 @@ namespace StorageAndTrade
             }
         }
 
-        protected override void SetDeletionLabel(UnigueID unigueID)
+        protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             КраїниСвіту_Objest КраїниСвіту_Objest = new КраїниСвіту_Objest();
             if (КраїниСвіту_Objest.Read(unigueID))
-                КраїниСвіту_Objest.SetDeletionLabel(!КраїниСвіту_Objest.DeletionLabel);
+                await КраїниСвіту_Objest.SetDeletionLabel(!КраїниСвіту_Objest.DeletionLabel);
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
         }
 
-        protected override UnigueID? Copy(UnigueID unigueID)
+        protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
             КраїниСвіту_Objest КраїниСвіту_Objest = new КраїниСвіту_Objest();
             if (КраїниСвіту_Objest.Read(unigueID))
             {
                 КраїниСвіту_Objest КраїниСвіту_Objest_Новий = КраїниСвіту_Objest.Copy(true);
-                КраїниСвіту_Objest_Новий.Save();
+                await КраїниСвіту_Objest_Новий.Save();
 
                 return КраїниСвіту_Objest_Новий.UnigueID;
             }

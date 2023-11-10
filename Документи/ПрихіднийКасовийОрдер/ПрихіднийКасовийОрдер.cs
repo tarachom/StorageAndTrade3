@@ -118,22 +118,22 @@ namespace StorageAndTrade
             }
         }
 
-        protected override void SetDeletionLabel(UnigueID unigueID)
+        protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             ПрихіднийКасовийОрдер_Objest ПрихіднийКасовийОрдер_Objest = new ПрихіднийКасовийОрдер_Objest();
             if (ПрихіднийКасовийОрдер_Objest.Read(unigueID))
-                ПрихіднийКасовийОрдер_Objest.SetDeletionLabel(!ПрихіднийКасовийОрдер_Objest.DeletionLabel);
+                await ПрихіднийКасовийОрдер_Objest.SetDeletionLabel(!ПрихіднийКасовийОрдер_Objest.DeletionLabel);
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
         }
 
-        protected override UnigueID? Copy(UnigueID unigueID)
+        protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
             ПрихіднийКасовийОрдер_Objest ПрихіднийКасовийОрдер_Objest = new ПрихіднийКасовийОрдер_Objest();
             if (ПрихіднийКасовийОрдер_Objest.Read(unigueID))
             {
                 ПрихіднийКасовийОрдер_Objest ПрихіднийКасовийОрдер_Objest_Новий = ПрихіднийКасовийОрдер_Objest.Copy(true);
-                ПрихіднийКасовийОрдер_Objest_Новий.Save();
+                await ПрихіднийКасовийОрдер_Objest_Новий.Save();
 
                 return ПрихіднийКасовийОрдер_Objest_Новий.UnigueID;
             }
@@ -150,7 +150,7 @@ namespace StorageAndTrade
             LoadRecords();
         }
 
-        protected override void SpendTheDocument(UnigueID unigueID, bool spendDoc)
+        protected override async ValueTask SpendTheDocument(UnigueID unigueID, bool spendDoc)
         {
             ПрихіднийКасовийОрдер_Pointer ПрихіднийКасовийОрдер_Pointer = new ПрихіднийКасовийОрдер_Pointer(unigueID);
             ПрихіднийКасовийОрдер_Objest? ПрихіднийКасовийОрдер_Objest = ПрихіднийКасовийОрдер_Pointer.GetDocumentObject(true);
@@ -158,11 +158,11 @@ namespace StorageAndTrade
 
             if (spendDoc)
             {
-                if (!ПрихіднийКасовийОрдер_Objest.SpendTheDocument(ПрихіднийКасовийОрдер_Objest.ДатаДок))
+                if (!await ПрихіднийКасовийОрдер_Objest.SpendTheDocument(ПрихіднийКасовийОрдер_Objest.ДатаДок))
                     ФункціїДляПовідомлень.ВідкритиТермінал();
             }
             else
-                ПрихіднийКасовийОрдер_Objest.ClearSpendTheDocument();
+                await ПрихіднийКасовийОрдер_Objest.ClearSpendTheDocument();
         }
 
         protected override DocumentPointer? ReportSpendTheDocument(UnigueID unigueID)

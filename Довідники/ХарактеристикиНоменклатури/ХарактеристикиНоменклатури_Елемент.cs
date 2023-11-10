@@ -80,11 +80,11 @@ namespace StorageAndTrade
 
         #endregion
 
-        protected override void Save()
+        protected override async ValueTask Save()
         {
             try
             {
-                ХарактеристикиНоменклатури_Objest.Save();
+                await ХарактеристикиНоменклатури_Objest.Save();
             }
             catch (Exception ex)
             {

@@ -79,11 +79,11 @@ namespace StorageAndTrade
 
         #endregion
 
-        protected override void Save()
+        protected override async ValueTask Save()
         {
             try
             {
-                ПакуванняОдиниціВиміру_Objest.Save();
+                await ПакуванняОдиниціВиміру_Objest.Save();
             }
             catch (Exception ex)
             {

@@ -99,11 +99,11 @@ namespace StorageAndTrade
 
         #endregion
 
-        protected override void Save()
+        protected override async ValueTask Save()
         {
             try
             {
-                Блокнот_Objest.Save();
+                await Блокнот_Objest.Save();
             }
             catch (Exception ex)
             {

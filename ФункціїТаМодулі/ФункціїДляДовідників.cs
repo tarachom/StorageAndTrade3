@@ -88,7 +88,7 @@ namespace StorageAndTrade
         /// Функція створює договори для контрагента
         /// </summary>
         /// <param name="Контрагент">Контрагент</param>
-        public static void СтворитиДоговориКонтрагентаЗаЗамовчуванням(Довідники.Контрагенти_Pointer Контрагент)
+        public static async void СтворитиДоговориКонтрагентаЗаЗамовчуванням(Довідники.Контрагенти_Pointer Контрагент)
         {
             if (Контрагент.IsEmpty())
                 return;
@@ -117,7 +117,7 @@ namespace StorageAndTrade
                 НовийДоговір.Код = (++Константи.НумераціяДовідників.Контрагенти_Const).ToString("D6");
                 НовийДоговір.ТипДоговору = Перелічення.ТипДоговорів.ЗПокупцями;
                 НовийДоговір.ГосподарськаОперація = Перелічення.ГосподарськіОперації.ПоступленняОплатиВідКлієнта;
-                НовийДоговір.Save();
+                await НовийДоговір.Save();
             }
 
             //Відбір по типу договору
@@ -129,7 +129,7 @@ namespace StorageAndTrade
                 НовийДоговір.Код = (++Константи.НумераціяДовідників.Контрагенти_Const).ToString("D6");
                 НовийДоговір.ТипДоговору = Перелічення.ТипДоговорів.ЗПостачальниками;
                 НовийДоговір.ГосподарськаОперація = Перелічення.ГосподарськіОперації.ОплатаПостачальнику;
-                НовийДоговір.Save();
+                await НовийДоговір.Save();
             }
         }
 
@@ -137,7 +137,7 @@ namespace StorageAndTrade
         /// Функція повертає вказівник на серійний номер, або створює новий
         /// </summary>
         /// <returns>Вказівник на елемент довідника СеріїНоменклатури</returns>
-        public static Довідники.СеріїНоменклатури_Pointer ОтриматиВказівникНаСеріюНоменклатури(string СерійнийНомер)
+        public static async Task<Довідники.СеріїНоменклатури_Pointer> ОтриматиВказівникНаСеріюНоменклатури(string СерійнийНомер)
         {
             СерійнийНомер = СерійнийНомер.Trim();
 
@@ -152,7 +152,7 @@ namespace StorageAndTrade
                 серіїНоменклатури_Objest.New();
                 серіїНоменклатури_Objest.Номер = СерійнийНомер;
                 серіїНоменклатури_Objest.ДатаСтворення = DateTime.Now;
-                серіїНоменклатури_Objest.Save();
+                await серіїНоменклатури_Objest.Save();
 
                 return серіїНоменклатури_Objest.GetDirectoryPointer();
             }
@@ -163,7 +163,7 @@ namespace StorageAndTrade
         /// </summary>
         /// <param name="PathToFile">Шлях до файлу</param>
         /// <returns></returns>
-        public static Довідники.Файли_Pointer ЗавантажитиФайл(string PathToFile)
+        public static async Task<Довідники.Файли_Pointer> ЗавантажитиФайл(string PathToFile)
         {
             FileInfo fileInfo = new FileInfo(PathToFile);
 
@@ -175,7 +175,7 @@ namespace StorageAndTrade
             файли_Objest.Розмір = Math.Round((decimal)(fileInfo.Length / 1024)).ToString() + " KB";
             файли_Objest.ДатаСтворення = DateTime.Now;
             файли_Objest.БінарніДані = File.ReadAllBytes(PathToFile);
-            файли_Objest.Save();
+            await файли_Objest.Save();
 
             return файли_Objest.GetDirectoryPointer();
         }

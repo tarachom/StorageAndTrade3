@@ -74,7 +74,7 @@ namespace StorageAndTrade
             ShowAll();
         }
 
-        public void SetCurrentUser()
+        public async void SetCurrentUser()
         {
             KernelUser = Config.Kernel!.User;
             KernelSession = Config.Kernel!.Session;
@@ -83,11 +83,14 @@ namespace StorageAndTrade
 
             if (ЗнайденийКористувач.IsEmpty())
             {
-                Користувачі_Objest НовийКористувач = new Користувачі_Objest();
+                Користувачі_Objest НовийКористувач = new Користувачі_Objest
+                {
+                    КодВСпеціальнійТаблиці = Config.Kernel!.User,
+                    Назва = await Config.Kernel.DataBase.SpetialTableUsersGetFullName(KernelUser)
+                };
+
                 НовийКористувач.New();
-                НовийКористувач.КодВСпеціальнійТаблиці = Config.Kernel!.User;
-                НовийКористувач.Назва = Config.Kernel!.DataBase.SpetialTableUsersGetFullName(KernelUser);
-                НовийКористувач.Save();
+                await НовийКористувач.Save();
 
                 Program.Користувач = НовийКористувач.GetDirectoryPointer();
             }
@@ -174,7 +177,7 @@ namespace StorageAndTrade
 
         */
 
-        void CalculationVirtualBalances()
+        async void CalculationVirtualBalances()
         {
             int counter = 0;
 
@@ -193,11 +196,11 @@ namespace StorageAndTrade
                     //провести всі документ, а тоді вже розраховувати регістри
                     if (!Системні.ЗупинитиФоновіЗадачі_Const)
                     {
-                        //Виконання обчислень
-                        Config.Kernel!.DataBase.SpetialTableRegAccumTrigerExecute(
-                            KernelSession,
-                            VirtualTablesСalculation.Execute,
-                            VirtualTablesСalculation.ExecuteFinalCalculation);
+                        if (Config.Kernel != null)
+                            //Виконання обчислень
+                            await Config.Kernel.DataBase.SpetialTableRegAccumTrigerExecute(KernelSession,
+                                 VirtualTablesСalculation.Execute,
+                                 VirtualTablesСalculation.ExecuteFinalCalculation);
                     }
 
                     counter = 0;
@@ -210,12 +213,12 @@ namespace StorageAndTrade
             }
 
             //Закрити поточну сесію
-            Config.Kernel!.DataBase.SpetialTableActiveUsersCloseSession(KernelSession);
+            await Config.Kernel!.DataBase.SpetialTableActiveUsersCloseSession(KernelSession);
         }
 
-        void UpdateSession()
+        async void UpdateSession()
         {
-            if (!Config.Kernel!.DataBase.SpetialTableActiveUsersUpdateSession(KernelSession))
+            if (!await Config.Kernel!.DataBase.SpetialTableActiveUsersUpdateSession(KernelSession))
             {
                 // Log Off
             }

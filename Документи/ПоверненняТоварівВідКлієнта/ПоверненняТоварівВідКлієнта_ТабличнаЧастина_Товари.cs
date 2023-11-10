@@ -273,7 +273,7 @@ namespace StorageAndTrade
             }
         }
 
-        public override void SaveRecords()
+        public override async ValueTask SaveRecords()
         {
             if (ПоверненняТоварівВідКлієнта_Objest != null)
             {
@@ -301,7 +301,7 @@ namespace StorageAndTrade
                     ПоверненняТоварівВідКлієнта_Objest.Товари_TablePart.Records.Add(record);
                 }
 
-                ПоверненняТоварівВідКлієнта_Objest.Товари_TablePart.Save(true);
+                await ПоверненняТоварівВідКлієнта_Objest.Товари_TablePart.Save(true);
 
                 LoadRecords();
             }

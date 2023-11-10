@@ -71,7 +71,7 @@ namespace StorageAndTrade
         {
             if (ВалютаВласник.Pointer.UnigueID.IsEmpty())
                 return;
-                
+
             searchText = searchText.ToLower().Trim();
 
             if (searchText.Length < 1)
@@ -141,22 +141,22 @@ namespace StorageAndTrade
             }
         }
 
-        protected override void Delete(UnigueID unigueID)
+        protected override async void Delete(UnigueID unigueID)
         {
             КурсиВалют_Objest КурсиВалют_Objest = new КурсиВалют_Objest();
             if (КурсиВалют_Objest.Read(unigueID))
-                КурсиВалют_Objest.Delete();
+                await КурсиВалют_Objest.Delete();
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
         }
 
-        protected override UnigueID? Copy(UnigueID unigueID)
+        protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
             КурсиВалют_Objest КурсиВалют_Objest = new КурсиВалют_Objest();
             if (КурсиВалют_Objest.Read(unigueID))
             {
                 КурсиВалют_Objest КурсиВалют_Objest_Новий = КурсиВалют_Objest.Copy();
-                КурсиВалют_Objest_Новий.Save();
+                await КурсиВалют_Objest_Новий.Save();
 
                 return КурсиВалют_Objest_Новий.UnigueID;
             }

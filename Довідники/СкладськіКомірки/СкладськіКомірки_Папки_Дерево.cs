@@ -100,22 +100,22 @@ namespace StorageAndTrade
 
         #region ToolBar
 
-        protected override void SetDeletionLabel(UnigueID unigueID)
+        protected override async void SetDeletionLabel(UnigueID unigueID)
         {
             СкладськіКомірки_Папки_Objest СкладськіКомірки_Папки_Objest = new СкладськіКомірки_Папки_Objest();
             if (СкладськіКомірки_Папки_Objest.Read(unigueID))
-                СкладськіКомірки_Папки_Objest.SetDeletionLabel(!СкладськіКомірки_Папки_Objest.DeletionLabel);
+                await СкладськіКомірки_Папки_Objest.SetDeletionLabel(!СкладськіКомірки_Папки_Objest.DeletionLabel);
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
         }
 
-        protected override UnigueID? Copy(UnigueID unigueID)
+        protected override async Task<UnigueID?> Copy(UnigueID unigueID)
         {
             СкладськіКомірки_Папки_Objest СкладськіКомірки_Папки_Objest = new СкладськіКомірки_Папки_Objest();
             if (СкладськіКомірки_Папки_Objest.Read(unigueID))
             {
                 СкладськіКомірки_Папки_Objest СкладськіКомірки_Папки_Objest_Новий = СкладськіКомірки_Папки_Objest.Copy(true);
-                СкладськіКомірки_Папки_Objest_Новий.Save();
+                await СкладськіКомірки_Папки_Objest_Новий.Save();
 
                 return СкладськіКомірки_Папки_Objest_Новий.UnigueID;
             }

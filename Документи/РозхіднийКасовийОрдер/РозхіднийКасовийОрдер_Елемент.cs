@@ -289,13 +289,13 @@ namespace StorageAndTrade
             }
         }
 
-        protected override bool Save()
+        protected override async ValueTask<bool> Save()
         {
             bool isSave;
             
             try
             {
-                isSave = РозхіднийКасовийОрдер_Objest.Save();
+                isSave = await РозхіднийКасовийОрдер_Objest.Save();
             }
             catch (Exception ex)
             {
@@ -309,11 +309,11 @@ namespace StorageAndTrade
             return isSave;
         }
 
-        protected override bool SpendTheDocument(bool spendDoc)
+        protected override async ValueTask<bool> SpendTheDocument(bool spendDoc)
         {
             if (spendDoc)
             {
-                bool isSpend = РозхіднийКасовийОрдер_Objest.SpendTheDocument(РозхіднийКасовийОрдер_Objest.ДатаДок);
+                bool isSpend = await РозхіднийКасовийОрдер_Objest.SpendTheDocument(РозхіднийКасовийОрдер_Objest.ДатаДок);
 
                 if (!isSpend)
                     ФункціїДляПовідомлень.ВідкритиТермінал();
@@ -322,7 +322,7 @@ namespace StorageAndTrade
             }
             else
             {
-                РозхіднийКасовийОрдер_Objest.ClearSpendTheDocument();
+                await РозхіднийКасовийОрдер_Objest.ClearSpendTheDocument();
 
                 return true;
             }

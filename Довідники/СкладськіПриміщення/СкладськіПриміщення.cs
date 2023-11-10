@@ -147,22 +147,22 @@ namespace StorageAndTrade
             }
         }
 
-        protected override void SetDeletionLabel(UnigueID unigueID)
+        protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             СкладськіПриміщення_Objest СкладськіПриміщення_Objest = new СкладськіПриміщення_Objest();
             if (СкладськіПриміщення_Objest.Read(unigueID))
-                СкладськіПриміщення_Objest.SetDeletionLabel(!СкладськіПриміщення_Objest.DeletionLabel);
+                await СкладськіПриміщення_Objest.SetDeletionLabel(!СкладськіПриміщення_Objest.DeletionLabel);
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
         }
 
-        protected override UnigueID? Copy(UnigueID unigueID)
+        protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
             СкладськіПриміщення_Objest СкладськіПриміщення_Objest = new СкладськіПриміщення_Objest();
             if (СкладськіПриміщення_Objest.Read(unigueID))
             {
                 СкладськіПриміщення_Objest СкладськіПриміщення_Objest_Новий = СкладськіПриміщення_Objest.Copy(true);
-                СкладськіПриміщення_Objest_Новий.Save();
+                await СкладськіПриміщення_Objest_Новий.Save();
 
                 return СкладськіПриміщення_Objest_Новий.UnigueID;
             }

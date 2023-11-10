@@ -118,26 +118,26 @@ namespace StorageAndTrade
             }
         }
 
-        protected override void SetDeletionLabel(UnigueID unigueID)
+        protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             ВведенняЗалишків_Objest ВведенняЗалишків_Objest = new ВведенняЗалишків_Objest();
             if (ВведенняЗалишків_Objest.Read(unigueID))
-                ВведенняЗалишків_Objest.SetDeletionLabel(!ВведенняЗалишків_Objest.DeletionLabel);
+                await ВведенняЗалишків_Objest.SetDeletionLabel(!ВведенняЗалишків_Objest.DeletionLabel);
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
         }
 
-        protected override UnigueID? Copy(UnigueID unigueID)
+        protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
             ВведенняЗалишків_Objest ВведенняЗалишків_Objest = new ВведенняЗалишків_Objest();
             if (ВведенняЗалишків_Objest.Read(unigueID))
             {
                 ВведенняЗалишків_Objest ВведенняЗалишків_Objest_Новий = ВведенняЗалишків_Objest.Copy(true);
-                ВведенняЗалишків_Objest_Новий.Save();
-                ВведенняЗалишків_Objest_Новий.Товари_TablePart.Save(true);
-                ВведенняЗалишків_Objest_Новий.Каси_TablePart.Save(true);
-                ВведенняЗалишків_Objest_Новий.БанківськіРахунки_TablePart.Save(true);
-                ВведенняЗалишків_Objest_Новий.РозрахункиЗКонтрагентами_TablePart.Save(true);
+                await ВведенняЗалишків_Objest_Новий.Save();
+                await ВведенняЗалишків_Objest_Новий.Товари_TablePart.Save(true);
+                await ВведенняЗалишків_Objest_Новий.Каси_TablePart.Save(true);
+                await ВведенняЗалишків_Objest_Новий.БанківськіРахунки_TablePart.Save(true);
+                await ВведенняЗалишків_Objest_Новий.РозрахункиЗКонтрагентами_TablePart.Save(true);
 
                 return ВведенняЗалишків_Objest_Новий.UnigueID;
             }
@@ -154,7 +154,7 @@ namespace StorageAndTrade
             LoadRecords();
         }
 
-        protected override void SpendTheDocument(UnigueID unigueID, bool spendDoc)
+        protected override async ValueTask SpendTheDocument(UnigueID unigueID, bool spendDoc)
         {
             ВведенняЗалишків_Pointer ВведенняЗалишків_Pointer = new ВведенняЗалишків_Pointer(unigueID);
             ВведенняЗалишків_Objest? ВведенняЗалишків_Objest = ВведенняЗалишків_Pointer.GetDocumentObject(true);
@@ -162,11 +162,11 @@ namespace StorageAndTrade
 
             if (spendDoc)
             {
-                if (!ВведенняЗалишків_Objest.SpendTheDocument(ВведенняЗалишків_Objest.ДатаДок))
+                if (!await ВведенняЗалишків_Objest.SpendTheDocument(ВведенняЗалишків_Objest.ДатаДок))
                     ФункціїДляПовідомлень.ВідкритиТермінал();
             }
             else
-                ВведенняЗалишків_Objest.ClearSpendTheDocument();
+                await ВведенняЗалишків_Objest.ClearSpendTheDocument();
         }
 
         protected override DocumentPointer? ReportSpendTheDocument(UnigueID unigueID)

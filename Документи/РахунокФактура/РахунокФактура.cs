@@ -120,23 +120,23 @@ namespace StorageAndTrade
             }
         }
 
-        protected override void SetDeletionLabel(UnigueID unigueID)
+        protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             РахунокФактура_Objest РахунокФактура_Objest = new РахунокФактура_Objest();
             if (РахунокФактура_Objest.Read(unigueID))
-                РахунокФактура_Objest.SetDeletionLabel(!РахунокФактура_Objest.DeletionLabel);
+                await РахунокФактура_Objest.SetDeletionLabel(!РахунокФактура_Objest.DeletionLabel);
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
         }
 
-        protected override UnigueID? Copy(UnigueID unigueID)
+        protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
             РахунокФактура_Objest РахунокФактура_Objest = new РахунокФактура_Objest();
             if (РахунокФактура_Objest.Read(unigueID))
             {
                 РахунокФактура_Objest РахунокФактура_Objest_Новий = РахунокФактура_Objest.Copy(true);
-                РахунокФактура_Objest_Новий.Save();
-                РахунокФактура_Objest_Новий.Товари_TablePart.Save(true);
+                await РахунокФактура_Objest_Новий.Save();
+                await РахунокФактура_Objest_Новий.Товари_TablePart.Save(true);
 
                 return РахунокФактура_Objest_Новий.UnigueID;
             }
@@ -153,7 +153,7 @@ namespace StorageAndTrade
             LoadRecords();
         }
 
-        protected override void SpendTheDocument(UnigueID unigueID, bool spendDoc)
+        protected override async ValueTask SpendTheDocument(UnigueID unigueID, bool spendDoc)
         {
             РахунокФактура_Pointer РахунокФактура_Pointer = new РахунокФактура_Pointer(unigueID);
             РахунокФактура_Objest? РахунокФактура_Objest = РахунокФактура_Pointer.GetDocumentObject(true);
@@ -161,11 +161,11 @@ namespace StorageAndTrade
 
             if (spendDoc)
             {
-                if (!РахунокФактура_Objest.SpendTheDocument(РахунокФактура_Objest.ДатаДок))
+                if (!await РахунокФактура_Objest.SpendTheDocument(РахунокФактура_Objest.ДатаДок))
                     ФункціїДляПовідомлень.ВідкритиТермінал();
             }
             else
-                РахунокФактура_Objest.ClearSpendTheDocument();
+                await РахунокФактура_Objest.ClearSpendTheDocument();
         }
 
         protected override DocumentPointer? ReportSpendTheDocument(UnigueID unigueID)
@@ -200,7 +200,7 @@ namespace StorageAndTrade
             return Menu;
         }
 
-        void OnNewDocNaOsnovi_RoshidnaNakladna(object? sender, EventArgs args)
+        async void OnNewDocNaOsnovi_RoshidnaNakladna(object? sender, EventArgs args)
         {
             if (TreeViewGrid.Selection.CountSelectedRows() != 0)
             {
@@ -233,7 +233,7 @@ namespace StorageAndTrade
                     реалізаціяТоварівТаПослуг_Новий.Статус = СтатусиРеалізаціїТоварівТаПослуг.ДоОплати;
                     реалізаціяТоварівТаПослуг_Новий.ФормаОплати = рахунокФактура_Objest.ФормаОплати;
                     реалізаціяТоварівТаПослуг_Новий.Основа = рахунокФактура_Objest.GetBasis();
-                    реалізаціяТоварівТаПослуг_Новий.Save();
+                    await реалізаціяТоварівТаПослуг_Новий.Save();
 
                     //Товари
                     foreach (РахунокФактура_Товари_TablePart.Record record_замовлення in рахунокФактура_Objest.Товари_TablePart.Records)
@@ -254,7 +254,7 @@ namespace StorageAndTrade
                         record_реалізація.ВидЦіни = record_замовлення.ВидЦіни;
                     }
 
-                    реалізаціяТоварівТаПослуг_Новий.Товари_TablePart.Save(false);
+                    await реалізаціяТоварівТаПослуг_Новий.Товари_TablePart.Save(false);
 
                     Program.GeneralForm?.CreateNotebookPage($"{реалізаціяТоварівТаПослуг_Новий.Назва}", () =>
                     {
@@ -272,7 +272,7 @@ namespace StorageAndTrade
             }
         }
 
-        void OnNewDocNaOsnovi_SamovlenjaPostachalnyku(object? sender, EventArgs args)
+        async void OnNewDocNaOsnovi_SamovlenjaPostachalnyku(object? sender, EventArgs args)
         {
             if (TreeViewGrid.Selection.CountSelectedRows() != 0)
             {
@@ -306,7 +306,7 @@ namespace StorageAndTrade
                     замовленняПостачальнику_Новий.ФормаОплати = рахунокФактура_Objest.ФормаОплати;
                     замовленняПостачальнику_Новий.Основа = рахунокФактура_Objest.GetBasis();
 
-                    if (замовленняПостачальнику_Новий.Save())
+                    if (await замовленняПостачальнику_Новий.Save())
                     {
                         //Товари
                         foreach (РахунокФактура_Товари_TablePart.Record record_замовлення in рахунокФактура_Objest.Товари_TablePart.Records)
@@ -325,7 +325,7 @@ namespace StorageAndTrade
                             record_замовленняПостачальнику.Склад = рахунокФактура_Objest.Склад;
                         }
 
-                        замовленняПостачальнику_Новий.Товари_TablePart.Save(false);
+                        await замовленняПостачальнику_Новий.Товари_TablePart.Save(false);
 
                         Program.GeneralForm?.CreateNotebookPage($"{замовленняПостачальнику_Новий.Назва}", () =>
                         {

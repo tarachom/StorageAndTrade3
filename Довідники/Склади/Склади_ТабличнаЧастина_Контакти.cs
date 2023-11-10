@@ -118,7 +118,7 @@ namespace StorageAndTrade
             }
         }
 
-        public void SaveRecords()
+        public async ValueTask SaveRecords()
         {
             if (Склади_Objest != null)
             {
@@ -154,7 +154,7 @@ namespace StorageAndTrade
                     }
                     while (Store.IterNext(ref iter));
 
-                Склади_Objest.Контакти_TablePart.Save(true);
+                await Склади_Objest.Контакти_TablePart.Save(true);
             }
         }
 

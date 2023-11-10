@@ -116,22 +116,22 @@ namespace StorageAndTrade
             }
         }
 
-        protected override void SetDeletionLabel(UnigueID unigueID)
+        protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             Виробники_Objest Виробники_Objest = new Виробники_Objest();
             if (Виробники_Objest.Read(unigueID))
-                Виробники_Objest.SetDeletionLabel(!Виробники_Objest.DeletionLabel);
+                await Виробники_Objest.SetDeletionLabel(!Виробники_Objest.DeletionLabel);
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
         }
 
-        protected override UnigueID? Copy(UnigueID unigueID)
+        protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
             Виробники_Objest Виробники_Objest = new Виробники_Objest();
             if (Виробники_Objest.Read(unigueID))
             {
                 Виробники_Objest Виробники_Objest_Новий = Виробники_Objest.Copy(true);
-                Виробники_Objest_Новий.Save();
+                await Виробники_Objest_Новий.Save();
 
                 return Виробники_Objest_Новий.UnigueID;
             }

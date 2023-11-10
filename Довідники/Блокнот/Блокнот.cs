@@ -116,22 +116,22 @@ namespace StorageAndTrade
             }
         }
 
-        protected override void SetDeletionLabel(UnigueID unigueID)
+        protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             Блокнот_Objest Блокнот_Objest = new Блокнот_Objest();
             if (Блокнот_Objest.Read(unigueID))
-                Блокнот_Objest.SetDeletionLabel(!Блокнот_Objest.DeletionLabel);
+                await Блокнот_Objest.SetDeletionLabel(!Блокнот_Objest.DeletionLabel);
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
         }
 
-        protected override UnigueID? Copy(UnigueID unigueID)
+        protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
             Блокнот_Objest Блокнот_Objest = new Блокнот_Objest();
             if (Блокнот_Objest.Read(unigueID))
             {
                 Блокнот_Objest Блокнот_Objest_Новий = Блокнот_Objest.Copy(true);
-                Блокнот_Objest_Новий.Save();
+                await Блокнот_Objest_Новий.Save();
 
                 return Блокнот_Objest_Новий.UnigueID;
             }
