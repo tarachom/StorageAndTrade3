@@ -65,14 +65,14 @@ namespace StorageAndTrade
 
         #region Override
 
-        public override void LoadRecords()
+        public override async void LoadRecords()
         {
             if (DirectoryPointerItem != null || SelectPointerItem != null)
             {
                 string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
                 UnigueID unigueID = new UnigueID(UidSelect);
 
-                СкладськіКомірки_Objest? контрагенти_Objest = new СкладськіКомірки_Pointer(unigueID).GetDirectoryObject();
+                СкладськіКомірки_Objest? контрагенти_Objest = await new СкладськіКомірки_Pointer(unigueID).GetDirectoryObject();
                 if (контрагенти_Objest != null)
                     ДеревоПапок.DirectoryPointerItem = контрагенти_Objest.Папка.UnigueID;
             }
@@ -127,7 +127,7 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.СкладськіКомірки_Записи.FirstPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             if (IsNew)
             {
@@ -149,7 +149,7 @@ namespace StorageAndTrade
             else if (unigueID != null)
             {
                 СкладськіКомірки_Objest СкладськіКомірки_Objest = new СкладськіКомірки_Objest();
-                if (СкладськіКомірки_Objest.Read(unigueID))
+                if (await СкладськіКомірки_Objest.Read(unigueID))
                 {
                     Program.GeneralForm?.CreateNotebookPage($"{СкладськіКомірки_Objest.Назва}", () =>
                     {
@@ -173,7 +173,7 @@ namespace StorageAndTrade
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             СкладськіКомірки_Objest СкладськіКомірки_Objest = new СкладськіКомірки_Objest();
-            if (СкладськіКомірки_Objest.Read(unigueID))
+            if (await СкладськіКомірки_Objest.Read(unigueID))
                 await СкладськіКомірки_Objest.SetDeletionLabel(!СкладськіКомірки_Objest.DeletionLabel);
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
@@ -182,7 +182,7 @@ namespace StorageAndTrade
         protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
             СкладськіКомірки_Objest СкладськіКомірки_Objest = new СкладськіКомірки_Objest();
-            if (СкладськіКомірки_Objest.Read(unigueID))
+            if (await СкладськіКомірки_Objest.Read(unigueID))
             {
                 СкладськіКомірки_Objest СкладськіКомірки_Objest_Новий = СкладськіКомірки_Objest.Copy(true);
                 await СкладськіКомірки_Objest_Новий.Save();

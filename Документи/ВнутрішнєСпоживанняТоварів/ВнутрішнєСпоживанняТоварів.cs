@@ -77,7 +77,7 @@ namespace StorageAndTrade
             TreeViewGrid.GrabFocus();
         }
 
-        protected override void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             if (IsNew)
             {
@@ -97,7 +97,7 @@ namespace StorageAndTrade
             else if (unigueID != null)
             {
                 ВнутрішнєСпоживанняТоварів_Objest ВнутрішнєСпоживанняТоварів_Objest = new ВнутрішнєСпоживанняТоварів_Objest();
-                if (ВнутрішнєСпоживанняТоварів_Objest.Read(unigueID))
+                if (await ВнутрішнєСпоживанняТоварів_Objest.Read(unigueID))
                 {
                     Program.GeneralForm?.CreateNotebookPage($"{ВнутрішнєСпоживанняТоварів_Objest.Назва}", () =>
                     {
@@ -121,7 +121,7 @@ namespace StorageAndTrade
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             ВнутрішнєСпоживанняТоварів_Objest ВнутрішнєСпоживанняТоварів_Objest = new ВнутрішнєСпоживанняТоварів_Objest();
-            if (ВнутрішнєСпоживанняТоварів_Objest.Read(unigueID))
+            if (await ВнутрішнєСпоживанняТоварів_Objest.Read(unigueID))
                 await ВнутрішнєСпоживанняТоварів_Objest.SetDeletionLabel(!ВнутрішнєСпоживанняТоварів_Objest.DeletionLabel);
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
@@ -130,7 +130,7 @@ namespace StorageAndTrade
         protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
             ВнутрішнєСпоживанняТоварів_Objest ВнутрішнєСпоживанняТоварів_Objest = new ВнутрішнєСпоживанняТоварів_Objest();
-            if (ВнутрішнєСпоживанняТоварів_Objest.Read(unigueID))
+            if (await ВнутрішнєСпоживанняТоварів_Objest.Read(unigueID))
             {
                 ВнутрішнєСпоживанняТоварів_Objest ВнутрішнєСпоживанняТоварів_Objest_Новий = ВнутрішнєСпоживанняТоварів_Objest.Copy(true);
                 await ВнутрішнєСпоживанняТоварів_Objest_Новий.Save();
@@ -154,7 +154,7 @@ namespace StorageAndTrade
         protected override async ValueTask SpendTheDocument(UnigueID unigueID, bool spendDoc)
         {
             ВнутрішнєСпоживанняТоварів_Pointer ВнутрішнєСпоживанняТоварів_Pointer = new ВнутрішнєСпоживанняТоварів_Pointer(unigueID);
-            ВнутрішнєСпоживанняТоварів_Objest? ВнутрішнєСпоживанняТоварів_Objest = ВнутрішнєСпоживанняТоварів_Pointer.GetDocumentObject(true);
+            ВнутрішнєСпоживанняТоварів_Objest? ВнутрішнєСпоживанняТоварів_Objest = await ВнутрішнєСпоживанняТоварів_Pointer.GetDocumentObject(true);
             if (ВнутрішнєСпоживанняТоварів_Objest == null) return;
 
             if (spendDoc)
@@ -171,10 +171,10 @@ namespace StorageAndTrade
             return new ВнутрішнєСпоживанняТоварів_Pointer(unigueID);
         }
 
-        protected override void ExportXML(UnigueID unigueID)
+        protected override async void ExportXML(UnigueID unigueID)
         {
             string pathToSave = System.IO.Path.Combine(AppContext.BaseDirectory, $"{ВнутрішнєСпоживанняТоварів_Const.FULLNAME}_{unigueID}.xml");
-            ВнутрішнєСпоживанняТоварів_Export.ToXmlFile(new ВнутрішнєСпоживанняТоварів_Pointer(unigueID), pathToSave);
+            await ВнутрішнєСпоживанняТоварів_Export.ToXmlFile(new ВнутрішнєСпоживанняТоварів_Pointer(unigueID), pathToSave);
         }
 
         #endregion

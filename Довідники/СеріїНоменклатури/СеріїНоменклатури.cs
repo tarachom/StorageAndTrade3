@@ -75,7 +75,7 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.СеріїНоменклатури_Записи.FirstPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             if (IsNew)
             {
@@ -95,7 +95,7 @@ namespace StorageAndTrade
             else if (unigueID != null)
             {
                 СеріїНоменклатури_Objest СеріїНоменклатури_Objest = new СеріїНоменклатури_Objest();
-                if (СеріїНоменклатури_Objest.Read(unigueID))
+                if (await СеріїНоменклатури_Objest.Read(unigueID))
                 {
                     Program.GeneralForm?.CreateNotebookPage($"{СеріїНоменклатури_Objest.Номер}", () =>
                     {
@@ -119,7 +119,7 @@ namespace StorageAndTrade
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             СеріїНоменклатури_Objest СеріїНоменклатури_Objest = new СеріїНоменклатури_Objest();
-            if (СеріїНоменклатури_Objest.Read(unigueID))
+            if (await СеріїНоменклатури_Objest.Read(unigueID))
                 await СеріїНоменклатури_Objest.SetDeletionLabel(!СеріїНоменклатури_Objest.DeletionLabel);
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
@@ -128,7 +128,7 @@ namespace StorageAndTrade
         protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
             СеріїНоменклатури_Objest СеріїНоменклатури_Objest = new СеріїНоменклатури_Objest();
-            if (СеріїНоменклатури_Objest.Read(unigueID))
+            if (await СеріїНоменклатури_Objest.Read(unigueID))
             {
                 СеріїНоменклатури_Objest СеріїНоменклатури_Objest_Новий = СеріїНоменклатури_Objest.Copy(true);
                 await СеріїНоменклатури_Objest_Новий.Save();

@@ -94,13 +94,13 @@ namespace StorageAndTrade
 
         #region Override
 
-        public override void LoadRecords()
+        public override async void LoadRecords()
         {
             if (DirectoryPointerItem != null || SelectPointerItem != null)
             {
                 UnigueID? unigueID = SelectPointerItem != null ? SelectPointerItem : DirectoryPointerItem;
 
-                Номенклатура_Objest? номенклатура_Objest = new Номенклатура_Pointer(unigueID ?? new UnigueID()).GetDirectoryObject();
+                Номенклатура_Objest? номенклатура_Objest = await new Номенклатура_Pointer(unigueID ?? new UnigueID()).GetDirectoryObject();
                 if (номенклатура_Objest != null)
                     ДеревоПапок.DirectoryPointerItem = номенклатура_Objest.Папка.UnigueID;
             }
@@ -152,7 +152,7 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.Номенклатура_Записи.FirstPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             if (IsNew)
             {
@@ -173,7 +173,7 @@ namespace StorageAndTrade
             else if (unigueID != null)
             {
                 Номенклатура_Objest Номенклатура_Objest = new Номенклатура_Objest();
-                if (Номенклатура_Objest.Read(unigueID))
+                if (await Номенклатура_Objest.Read(unigueID))
                 {
                     Program.GeneralForm?.CreateNotebookPage($"{Номенклатура_Objest.Назва}", () =>
                     {
@@ -197,7 +197,7 @@ namespace StorageAndTrade
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             Номенклатура_Objest Номенклатура_Objest = new Номенклатура_Objest();
-            if (Номенклатура_Objest.Read(unigueID))
+            if (await Номенклатура_Objest.Read(unigueID))
                 await Номенклатура_Objest.SetDeletionLabel(!Номенклатура_Objest.DeletionLabel);
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
@@ -206,7 +206,7 @@ namespace StorageAndTrade
         protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
             Номенклатура_Objest Номенклатура_Objest = new Номенклатура_Objest();
-            if (Номенклатура_Objest.Read(unigueID))
+            if (await Номенклатура_Objest.Read(unigueID))
             {
                 Номенклатура_Objest Номенклатура_Objest_Новий = Номенклатура_Objest.Copy(true);
                 await Номенклатура_Objest_Новий.Save();

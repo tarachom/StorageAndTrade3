@@ -77,7 +77,7 @@ namespace StorageAndTrade
             TreeViewGrid.GrabFocus();
         }
 
-        protected override void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             if (IsNew)
             {
@@ -97,7 +97,7 @@ namespace StorageAndTrade
             else if (unigueID != null)
             {
                 ЗбіркаТоварівНаСкладі_Objest ЗбіркаТоварівНаСкладі_Objest = new ЗбіркаТоварівНаСкладі_Objest();
-                if (ЗбіркаТоварівНаСкладі_Objest.Read(unigueID))
+                if (await ЗбіркаТоварівНаСкладі_Objest.Read(unigueID))
                 {
                     Program.GeneralForm?.CreateNotebookPage($"{ЗбіркаТоварівНаСкладі_Objest.Назва}", () =>
                     {
@@ -121,7 +121,7 @@ namespace StorageAndTrade
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             ЗбіркаТоварівНаСкладі_Objest ЗбіркаТоварівНаСкладі_Objest = new ЗбіркаТоварівНаСкладі_Objest();
-            if (ЗбіркаТоварівНаСкладі_Objest.Read(unigueID))
+            if (await ЗбіркаТоварівНаСкладі_Objest.Read(unigueID))
                 await ЗбіркаТоварівНаСкладі_Objest.SetDeletionLabel(!ЗбіркаТоварівНаСкладі_Objest.DeletionLabel);
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
@@ -130,7 +130,7 @@ namespace StorageAndTrade
         protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
             ЗбіркаТоварівНаСкладі_Objest ЗбіркаТоварівНаСкладі_Objest = new ЗбіркаТоварівНаСкладі_Objest();
-            if (ЗбіркаТоварівНаСкладі_Objest.Read(unigueID))
+            if (await ЗбіркаТоварівНаСкладі_Objest.Read(unigueID))
             {
                 ЗбіркаТоварівНаСкладі_Objest ЗбіркаТоварівНаСкладі_Objest_Новий = ЗбіркаТоварівНаСкладі_Objest.Copy(true);
                 await ЗбіркаТоварівНаСкладі_Objest_Новий.Save();
@@ -154,7 +154,7 @@ namespace StorageAndTrade
         protected override async ValueTask SpendTheDocument(UnigueID unigueID, bool spendDoc)
         {
             ЗбіркаТоварівНаСкладі_Pointer ЗбіркаТоварівНаСкладі_Pointer = new ЗбіркаТоварівНаСкладі_Pointer(unigueID);
-            ЗбіркаТоварівНаСкладі_Objest? ЗбіркаТоварівНаСкладі_Objest = ЗбіркаТоварівНаСкладі_Pointer.GetDocumentObject(true);
+            ЗбіркаТоварівНаСкладі_Objest? ЗбіркаТоварівНаСкладі_Objest = await ЗбіркаТоварівНаСкладі_Pointer.GetDocumentObject(true);
             if (ЗбіркаТоварівНаСкладі_Objest == null) return;
 
             if (spendDoc)
@@ -171,10 +171,10 @@ namespace StorageAndTrade
             return new ЗбіркаТоварівНаСкладі_Pointer(unigueID);
         }
 
-        protected override void ExportXML(UnigueID unigueID)
+        protected override async void ExportXML(UnigueID unigueID)
         {
             string pathToSave = System.IO.Path.Combine(AppContext.BaseDirectory, $"{ЗбіркаТоварівНаСкладі_Const.FULLNAME}_{unigueID}.xml");
-            ЗбіркаТоварівНаСкладі_Export.ToXmlFile(new ЗбіркаТоварівНаСкладі_Pointer(unigueID), pathToSave);
+            await ЗбіркаТоварівНаСкладі_Export.ToXmlFile(new ЗбіркаТоварівНаСкладі_Pointer(unigueID), pathToSave);
         }
 
         #endregion

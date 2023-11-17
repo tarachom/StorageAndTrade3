@@ -75,7 +75,7 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.ВидиНоменклатури_Записи.FirstPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             if (IsNew)
             {
@@ -95,7 +95,7 @@ namespace StorageAndTrade
             else if (unigueID != null)
             {
                 ВидиНоменклатури_Objest ВидиНоменклатури_Objest = new ВидиНоменклатури_Objest();
-                if (ВидиНоменклатури_Objest.Read(unigueID))
+                if (await ВидиНоменклатури_Objest.Read(unigueID))
                 {
                     Program.GeneralForm?.CreateNotebookPage($"{ВидиНоменклатури_Objest.Назва}", () =>
                     {
@@ -119,7 +119,7 @@ namespace StorageAndTrade
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             ВидиНоменклатури_Objest ВидиНоменклатури_Objest = new ВидиНоменклатури_Objest();
-            if (ВидиНоменклатури_Objest.Read(unigueID))
+            if (await ВидиНоменклатури_Objest.Read(unigueID))
                 await ВидиНоменклатури_Objest.SetDeletionLabel(!ВидиНоменклатури_Objest.DeletionLabel);
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
@@ -128,7 +128,7 @@ namespace StorageAndTrade
         protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
             ВидиНоменклатури_Objest ВидиНоменклатури_Objest = new ВидиНоменклатури_Objest();
-            if (ВидиНоменклатури_Objest.Read(unigueID))
+            if (await ВидиНоменклатури_Objest.Read(unigueID))
             {
                 ВидиНоменклатури_Objest ВидиНоменклатури_Objest_Новий = ВидиНоменклатури_Objest.Copy(true);
                 await ВидиНоменклатури_Objest_Новий.Save();

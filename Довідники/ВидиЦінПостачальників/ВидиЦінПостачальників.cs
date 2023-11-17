@@ -73,7 +73,7 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.ВидиЦінПостачальників_Записи.FirstPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             if (IsNew)
             {
@@ -93,7 +93,7 @@ namespace StorageAndTrade
             else if (unigueID != null)
             {
                 ВидиЦінПостачальників_Objest ВидиЦінПостачальників_Objest = new ВидиЦінПостачальників_Objest();
-                if (ВидиЦінПостачальників_Objest.Read(unigueID))
+                if (await ВидиЦінПостачальників_Objest.Read(unigueID))
                 {
                     Program.GeneralForm?.CreateNotebookPage($"{ВидиЦінПостачальників_Objest.Назва}", () =>
                     {
@@ -117,7 +117,7 @@ namespace StorageAndTrade
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             ВидиЦінПостачальників_Objest ВидиЦінПостачальників_Objest = new ВидиЦінПостачальників_Objest();
-            if (ВидиЦінПостачальників_Objest.Read(unigueID))
+            if (await ВидиЦінПостачальників_Objest.Read(unigueID))
                 await ВидиЦінПостачальників_Objest.SetDeletionLabel(!ВидиЦінПостачальників_Objest.DeletionLabel);
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
@@ -126,7 +126,7 @@ namespace StorageAndTrade
         protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
             ВидиЦінПостачальників_Objest ВидиЦінПостачальників_Objest = new ВидиЦінПостачальників_Objest();
-            if (ВидиЦінПостачальників_Objest.Read(unigueID))
+            if (await ВидиЦінПостачальників_Objest.Read(unigueID))
             {
                 ВидиЦінПостачальників_Objest ВидиЦінПостачальників_Objest_Новий = ВидиЦінПостачальників_Objest.Copy(true);
                 await ВидиЦінПостачальників_Objest_Новий.Save();

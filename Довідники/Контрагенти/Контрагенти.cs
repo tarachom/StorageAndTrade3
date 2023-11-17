@@ -74,13 +74,13 @@ namespace StorageAndTrade
 
         #region Override
 
-        public override void LoadRecords()
+        public override async void LoadRecords()
         {
             if (DirectoryPointerItem != null || SelectPointerItem != null)
             {
                 UnigueID? unigueID = SelectPointerItem != null ? SelectPointerItem : DirectoryPointerItem;
 
-                Контрагенти_Objest? контрагенти_Objest = new Контрагенти_Pointer(unigueID ?? new UnigueID()).GetDirectoryObject();
+                Контрагенти_Objest? контрагенти_Objest = await new Контрагенти_Pointer(unigueID ?? new UnigueID()).GetDirectoryObject();
                 if (контрагенти_Objest != null)
                     ДеревоПапок.DirectoryPointerItem = контрагенти_Objest.Папка.UnigueID;
             }
@@ -132,7 +132,7 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.Контрагенти_Записи.FirstPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             if (IsNew)
             {
@@ -153,7 +153,7 @@ namespace StorageAndTrade
             else if (unigueID != null)
             {
                 Контрагенти_Objest Контрагенти_Objest = new Контрагенти_Objest();
-                if (Контрагенти_Objest.Read(unigueID))
+                if (await Контрагенти_Objest.Read(unigueID))
                 {
                     Program.GeneralForm?.CreateNotebookPage($"{Контрагенти_Objest.Назва}", () =>
                     {
@@ -177,7 +177,7 @@ namespace StorageAndTrade
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             Контрагенти_Objest Контрагенти_Objest = new Контрагенти_Objest();
-            if (Контрагенти_Objest.Read(unigueID))
+            if (await Контрагенти_Objest.Read(unigueID))
                 await Контрагенти_Objest.SetDeletionLabel(!Контрагенти_Objest.DeletionLabel);
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
@@ -186,7 +186,7 @@ namespace StorageAndTrade
         protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
             Контрагенти_Objest Контрагенти_Objest = new Контрагенти_Objest();
-            if (Контрагенти_Objest.Read(unigueID))
+            if (await Контрагенти_Objest.Read(unigueID))
             {
                 Контрагенти_Objest Контрагенти_Objest_Новий = Контрагенти_Objest.Copy(true);
                 await Контрагенти_Objest_Новий.Save();

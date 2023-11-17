@@ -79,7 +79,7 @@ namespace StorageAndTrade
             TreeViewGrid.GrabFocus();
         }
 
-        protected override void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             if (IsNew)
             {
@@ -99,7 +99,7 @@ namespace StorageAndTrade
             else if (unigueID != null)
             {
                 РахунокФактура_Objest РахунокФактура_Objest = new РахунокФактура_Objest();
-                if (РахунокФактура_Objest.Read(unigueID))
+                if (await РахунокФактура_Objest.Read(unigueID))
                 {
                     Program.GeneralForm?.CreateNotebookPage($"{РахунокФактура_Objest.Назва}", () =>
                     {
@@ -123,7 +123,7 @@ namespace StorageAndTrade
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             РахунокФактура_Objest РахунокФактура_Objest = new РахунокФактура_Objest();
-            if (РахунокФактура_Objest.Read(unigueID))
+            if (await РахунокФактура_Objest.Read(unigueID))
                 await РахунокФактура_Objest.SetDeletionLabel(!РахунокФактура_Objest.DeletionLabel);
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
@@ -132,7 +132,7 @@ namespace StorageAndTrade
         protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
             РахунокФактура_Objest РахунокФактура_Objest = new РахунокФактура_Objest();
-            if (РахунокФактура_Objest.Read(unigueID))
+            if (await РахунокФактура_Objest.Read(unigueID))
             {
                 РахунокФактура_Objest РахунокФактура_Objest_Новий = РахунокФактура_Objest.Copy(true);
                 await РахунокФактура_Objest_Новий.Save();
@@ -156,7 +156,7 @@ namespace StorageAndTrade
         protected override async ValueTask SpendTheDocument(UnigueID unigueID, bool spendDoc)
         {
             РахунокФактура_Pointer РахунокФактура_Pointer = new РахунокФактура_Pointer(unigueID);
-            РахунокФактура_Objest? РахунокФактура_Objest = РахунокФактура_Pointer.GetDocumentObject(true);
+            РахунокФактура_Objest? РахунокФактура_Objest = await РахунокФактура_Pointer.GetDocumentObject(true);
             if (РахунокФактура_Objest == null) return;
 
             if (spendDoc)
@@ -173,10 +173,10 @@ namespace StorageAndTrade
             return new РахунокФактура_Pointer(unigueID);
         }
 
-        protected override void ExportXML(UnigueID unigueID)
+        protected override async void ExportXML(UnigueID unigueID)
         {
             string pathToSave = System.IO.Path.Combine(AppContext.BaseDirectory, $"{РахунокФактура_Const.FULLNAME}_{unigueID}.xml");
-            РахунокФактура_Export.ToXmlFile(new РахунокФактура_Pointer(unigueID), pathToSave);
+            await РахунокФактура_Export.ToXmlFile(new РахунокФактура_Pointer(unigueID), pathToSave);
         }
 
         #endregion
@@ -214,7 +214,7 @@ namespace StorageAndTrade
                     string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
 
                     РахунокФактура_Pointer РахунокФактура_Pointer = new РахунокФактура_Pointer(new UnigueID(uid));
-                    РахунокФактура_Objest? рахунокФактура_Objest = РахунокФактура_Pointer.GetDocumentObject(true);
+                    РахунокФактура_Objest? рахунокФактура_Objest = await РахунокФактура_Pointer.GetDocumentObject(true);
                     if (рахунокФактура_Objest == null) continue;
 
                     //
@@ -286,7 +286,7 @@ namespace StorageAndTrade
                     string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
 
                     РахунокФактура_Pointer рахунокФактура_Pointer = new РахунокФактура_Pointer(new UnigueID(uid));
-                    РахунокФактура_Objest? рахунокФактура_Objest = рахунокФактура_Pointer.GetDocumentObject(true);
+                    РахунокФактура_Objest? рахунокФактура_Objest = await рахунокФактура_Pointer.GetDocumentObject(true);
                     if (рахунокФактура_Objest == null) continue;
 
                     //

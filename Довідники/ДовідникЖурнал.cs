@@ -124,9 +124,9 @@ namespace StorageAndTrade
 
         protected virtual void OpenPageElement(bool IsNew, UnigueID? unigueID = null) { }
 
-        protected virtual async ValueTask SetDeletionLabel(UnigueID unigueID) { }
+        protected virtual ValueTask SetDeletionLabel(UnigueID unigueID) { return new ValueTask(); }
 
-        protected virtual async ValueTask<UnigueID?> Copy(UnigueID unigueID) { return null; }
+        protected virtual ValueTask<UnigueID?> Copy(UnigueID unigueID) { return new ValueTask<UnigueID?>(); }
 
         public virtual void CallBack_LoadRecords(UnigueID? selectPointer)
         {

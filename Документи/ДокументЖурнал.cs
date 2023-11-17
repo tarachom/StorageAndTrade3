@@ -224,9 +224,9 @@ namespace StorageAndTrade
 
         protected virtual void OpenPageElement(bool IsNew, UnigueID? unigueID = null) { }
 
-        protected virtual async ValueTask SetDeletionLabel(UnigueID unigueID) { }
+        protected virtual ValueTask SetDeletionLabel(UnigueID unigueID) { return new ValueTask(); }
 
-        protected virtual async ValueTask<UnigueID?> Copy(UnigueID unigueID) { return null; }
+        protected virtual ValueTask<UnigueID?> Copy(UnigueID unigueID) { return new ValueTask<UnigueID?>(); }
 
         public virtual void CallBack_LoadRecords(UnigueID? selectPointer)
         {
@@ -236,7 +236,7 @@ namespace StorageAndTrade
 
         protected virtual void PeriodWhereChanged() { }
 
-        protected virtual async ValueTask SpendTheDocument(UnigueID unigueID, bool spendDoc) { }
+        protected virtual ValueTask SpendTheDocument(UnigueID unigueID, bool spendDoc) { return new ValueTask(); }
 
         protected virtual DocumentPointer? ReportSpendTheDocument(UnigueID unigueID) { return null; }
 

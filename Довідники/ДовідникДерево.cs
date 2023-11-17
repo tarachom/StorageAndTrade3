@@ -137,7 +137,7 @@ namespace StorageAndTrade
 
         protected virtual void SetDeletionLabel(UnigueID unigueID) { }
 
-        protected virtual async Task<UnigueID?> Copy(UnigueID unigueID) { return null; }
+        protected virtual ValueTask<UnigueID?> Copy(UnigueID unigueID) { return new ValueTask<UnigueID?>(); }
 
         #endregion
 

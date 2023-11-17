@@ -77,7 +77,7 @@ namespace StorageAndTrade
             TreeViewGrid.GrabFocus();
         }
 
-        protected override void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             if (IsNew)
             {
@@ -97,7 +97,7 @@ namespace StorageAndTrade
             else if (unigueID != null)
             {
                 ПереміщенняТоварівНаСкладі_Objest ПереміщенняТоварівНаСкладі_Objest = new ПереміщенняТоварівНаСкладі_Objest();
-                if (ПереміщенняТоварівНаСкладі_Objest.Read(unigueID))
+                if (await ПереміщенняТоварівНаСкладі_Objest.Read(unigueID))
                 {
                     Program.GeneralForm?.CreateNotebookPage($"{ПереміщенняТоварівНаСкладі_Objest.Назва}", () =>
                     {
@@ -121,7 +121,7 @@ namespace StorageAndTrade
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             ПереміщенняТоварівНаСкладі_Objest ПереміщенняТоварівНаСкладі_Objest = new ПереміщенняТоварівНаСкладі_Objest();
-            if (ПереміщенняТоварівНаСкладі_Objest.Read(unigueID))
+            if (await ПереміщенняТоварівНаСкладі_Objest.Read(unigueID))
                 await ПереміщенняТоварівНаСкладі_Objest.SetDeletionLabel(!ПереміщенняТоварівНаСкладі_Objest.DeletionLabel);
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
@@ -130,7 +130,7 @@ namespace StorageAndTrade
         protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
             ПереміщенняТоварівНаСкладі_Objest ПереміщенняТоварівНаСкладі_Objest = new ПереміщенняТоварівНаСкладі_Objest();
-            if (ПереміщенняТоварівНаСкладі_Objest.Read(unigueID))
+            if (await ПереміщенняТоварівНаСкладі_Objest.Read(unigueID))
             {
                 ПереміщенняТоварівНаСкладі_Objest ПереміщенняТоварівНаСкладі_Objest_Новий = ПереміщенняТоварівНаСкладі_Objest.Copy(true);
                 await ПереміщенняТоварівНаСкладі_Objest_Новий.Save();
@@ -154,7 +154,7 @@ namespace StorageAndTrade
         protected override async ValueTask SpendTheDocument(UnigueID unigueID, bool spendDoc)
         {
             ПереміщенняТоварівНаСкладі_Pointer ПереміщенняТоварівНаСкладі_Pointer = new ПереміщенняТоварівНаСкладі_Pointer(unigueID);
-            ПереміщенняТоварівНаСкладі_Objest? ПереміщенняТоварівНаСкладі_Objest = ПереміщенняТоварівНаСкладі_Pointer.GetDocumentObject(true);
+            ПереміщенняТоварівНаСкладі_Objest? ПереміщенняТоварівНаСкладі_Objest = await ПереміщенняТоварівНаСкладі_Pointer.GetDocumentObject(true);
             if (ПереміщенняТоварівНаСкладі_Objest == null) return;
 
             if (spendDoc)
@@ -171,10 +171,10 @@ namespace StorageAndTrade
             return new ПереміщенняТоварівНаСкладі_Pointer(unigueID);
         }
 
-        protected override void ExportXML(UnigueID unigueID)
+        protected override async void ExportXML(UnigueID unigueID)
         {
             string pathToSave = System.IO.Path.Combine(AppContext.BaseDirectory, $"{ПереміщенняТоварівНаСкладі_Const.FULLNAME}_{unigueID}.xml");
-            ПереміщенняТоварівНаСкладі_Export.ToXmlFile(new ПереміщенняТоварівНаСкладі_Pointer(unigueID), pathToSave);
+            await ПереміщенняТоварівНаСкладі_Export.ToXmlFile(new ПереміщенняТоварівНаСкладі_Pointer(unigueID), pathToSave);
         }
 
         #endregion

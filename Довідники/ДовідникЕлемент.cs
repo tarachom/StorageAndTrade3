@@ -221,7 +221,7 @@ namespace StorageAndTrade
         /// <summary>
         /// Збереження
         /// </summary>
-        protected virtual async ValueTask Save() { }
+        protected virtual ValueTask Save() { return new ValueTask(); }
 
         /// <summary>
         /// Записати повідомлення про помилку і вивести меседж

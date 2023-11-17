@@ -75,7 +75,7 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.ВидиЗапасів_Записи.FirstPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             if (IsNew)
             {
@@ -95,7 +95,7 @@ namespace StorageAndTrade
             else if (unigueID != null)
             {
                 ВидиЗапасів_Objest ВидиЗапасів_Objest = new ВидиЗапасів_Objest();
-                if (ВидиЗапасів_Objest.Read(unigueID))
+                if (await ВидиЗапасів_Objest.Read(unigueID))
                 {
                     Program.GeneralForm?.CreateNotebookPage($"{ВидиЗапасів_Objest.Назва}", () =>
                     {
@@ -119,7 +119,7 @@ namespace StorageAndTrade
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             ВидиЗапасів_Objest ВидиЗапасів_Objest = new ВидиЗапасів_Objest();
-            if (ВидиЗапасів_Objest.Read(unigueID))
+            if (await ВидиЗапасів_Objest.Read(unigueID))
                 await ВидиЗапасів_Objest.SetDeletionLabel(!ВидиЗапасів_Objest.DeletionLabel);
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
@@ -128,7 +128,7 @@ namespace StorageAndTrade
         protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
             ВидиЗапасів_Objest ВидиЗапасів_Objest = new ВидиЗапасів_Objest();
-            if (ВидиЗапасів_Objest.Read(unigueID))
+            if (await ВидиЗапасів_Objest.Read(unigueID))
             {
                 ВидиЗапасів_Objest ВидиЗапасів_Objest_Новий = ВидиЗапасів_Objest.Copy(true);
                 await ВидиЗапасів_Objest_Новий.Save();

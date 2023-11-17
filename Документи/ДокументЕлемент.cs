@@ -263,7 +263,7 @@ namespace StorageAndTrade
             GetValue();
 
             bool isSave = await Save();
-            
+
             bool isSpend = await SpendTheDocument(isSave && spendDoc ? true : false);
 
             if (CallBack_OnSelectPointer != null && UnigueID != null)
@@ -281,21 +281,21 @@ namespace StorageAndTrade
         /// <summary>
         /// Збереження
         /// </summary>
-        protected virtual async ValueTask<bool> Save() { return false; }
+        protected virtual ValueTask<bool> Save() { return new ValueTask<bool>(); }
 
         /// <summary>
         /// Проведення
         /// </summary>
         /// <param name="spendDoc">Провести</param>
-        protected virtual async ValueTask<bool> SpendTheDocument(bool spendDoc) { return false; }
+        protected virtual ValueTask<bool> SpendTheDocument(bool spendDoc) { return new ValueTask<bool>(); }
 
         /// <summary>
         /// Записати повідомлення про помилку і вивести меседж
         /// </summary>
         /// <param name="ex">Помилка</param>
-        protected void MsgError(Exception ex)
+        protected async void MsgError(Exception ex)
         {
-            ФункціїДляПовідомлень.ДодатиПовідомленняПроПомилку(DateTime.Now, "Запис", UnigueID?.UGuid, "Документи", Caption, ex.Message + "\n" + ex.StackTrace + "\n" + ex.Source);
+            await ФункціїДляПовідомлень.ДодатиПовідомленняПроПомилку(DateTime.Now, "Запис", UnigueID?.UGuid, "Документи", Caption, ex.Message + "\n" + ex.StackTrace + "\n" + ex.Source);
             ФункціїДляПовідомлень.ВідкритиТермінал();
 
             Message.Info(Program.GeneralForm, "Не вдалось записати");

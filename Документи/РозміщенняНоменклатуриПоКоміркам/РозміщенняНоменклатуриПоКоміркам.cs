@@ -77,7 +77,7 @@ namespace StorageAndTrade
             TreeViewGrid.GrabFocus();
         }
 
-        protected override void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             if (IsNew)
             {
@@ -97,7 +97,7 @@ namespace StorageAndTrade
             else if (unigueID != null)
             {
                 РозміщенняНоменклатуриПоКоміркам_Objest РозміщенняНоменклатуриПоКоміркам_Objest = new РозміщенняНоменклатуриПоКоміркам_Objest();
-                if (РозміщенняНоменклатуриПоКоміркам_Objest.Read(unigueID))
+                if (await РозміщенняНоменклатуриПоКоміркам_Objest.Read(unigueID))
                 {
                     Program.GeneralForm?.CreateNotebookPage($"{РозміщенняНоменклатуриПоКоміркам_Objest.Назва}", () =>
                     {
@@ -121,7 +121,7 @@ namespace StorageAndTrade
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             РозміщенняНоменклатуриПоКоміркам_Objest РозміщенняНоменклатуриПоКоміркам_Objest = new РозміщенняНоменклатуриПоКоміркам_Objest();
-            if (РозміщенняНоменклатуриПоКоміркам_Objest.Read(unigueID))
+            if (await РозміщенняНоменклатуриПоКоміркам_Objest.Read(unigueID))
                 await РозміщенняНоменклатуриПоКоміркам_Objest.SetDeletionLabel(!РозміщенняНоменклатуриПоКоміркам_Objest.DeletionLabel);
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
@@ -130,7 +130,7 @@ namespace StorageAndTrade
         protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
             РозміщенняНоменклатуриПоКоміркам_Objest РозміщенняНоменклатуриПоКоміркам_Objest = new РозміщенняНоменклатуриПоКоміркам_Objest();
-            if (РозміщенняНоменклатуриПоКоміркам_Objest.Read(unigueID))
+            if (await РозміщенняНоменклатуриПоКоміркам_Objest.Read(unigueID))
             {
                 РозміщенняНоменклатуриПоКоміркам_Objest РозміщенняНоменклатуриПоКоміркам_Objest_Новий = РозміщенняНоменклатуриПоКоміркам_Objest.Copy(true);
                 await РозміщенняНоменклатуриПоКоміркам_Objest_Новий.Save();
@@ -154,7 +154,7 @@ namespace StorageAndTrade
         protected override async ValueTask SpendTheDocument(UnigueID unigueID, bool spendDoc)
         {
             РозміщенняНоменклатуриПоКоміркам_Pointer РозміщенняНоменклатуриПоКоміркам_Pointer = new РозміщенняНоменклатуриПоКоміркам_Pointer(unigueID);
-            РозміщенняНоменклатуриПоКоміркам_Objest? РозміщенняНоменклатуриПоКоміркам_Objest = РозміщенняНоменклатуриПоКоміркам_Pointer.GetDocumentObject(true);
+            РозміщенняНоменклатуриПоКоміркам_Objest? РозміщенняНоменклатуриПоКоміркам_Objest = await РозміщенняНоменклатуриПоКоміркам_Pointer.GetDocumentObject(true);
             if (РозміщенняНоменклатуриПоКоміркам_Objest == null) return;
 
             if (spendDoc)
@@ -171,10 +171,10 @@ namespace StorageAndTrade
             return new РозміщенняНоменклатуриПоКоміркам_Pointer(unigueID);
         }
 
-        protected override void ExportXML(UnigueID unigueID)
+        protected override async void ExportXML(UnigueID unigueID)
         {
             string pathToSave = System.IO.Path.Combine(AppContext.BaseDirectory, $"{РозміщенняНоменклатуриПоКоміркам_Const.FULLNAME}_{unigueID}.xml");
-            РозміщенняНоменклатуриПоКоміркам_Export.ToXmlFile(new РозміщенняНоменклатуриПоКоміркам_Pointer(unigueID), pathToSave);
+            await РозміщенняНоменклатуриПоКоміркам_Export.ToXmlFile(new РозміщенняНоменклатуриПоКоміркам_Pointer(unigueID), pathToSave);
         }
 
         #endregion

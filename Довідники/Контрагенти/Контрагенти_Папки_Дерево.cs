@@ -52,7 +52,7 @@ namespace StorageAndTrade
             RowActivated();
         }
 
-        protected override void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             if (IsNew)
             {
@@ -73,7 +73,7 @@ namespace StorageAndTrade
             else if (unigueID != null)
             {
                 Контрагенти_Папки_Objest Контрагенти_Папки_Objest = new Контрагенти_Папки_Objest();
-                if (Контрагенти_Папки_Objest.Read(unigueID))
+                if (await Контрагенти_Папки_Objest.Read(unigueID))
                 {
                     Program.GeneralForm?.CreateNotebookPage($"{Контрагенти_Папки_Objest.Назва}", () =>
                     {
@@ -100,16 +100,16 @@ namespace StorageAndTrade
         protected override async void SetDeletionLabel(UnigueID unigueID)
         {
             Контрагенти_Папки_Objest Контрагенти_Папки_Objest = new Контрагенти_Папки_Objest();
-            if (Контрагенти_Папки_Objest.Read(unigueID))
+            if (await Контрагенти_Папки_Objest.Read(unigueID))
                 await Контрагенти_Папки_Objest.SetDeletionLabel(!Контрагенти_Папки_Objest.DeletionLabel);
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
         }
 
-        protected override async Task<UnigueID?> Copy(UnigueID unigueID)
+        protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
             Контрагенти_Папки_Objest Контрагенти_Папки_Objest = new Контрагенти_Папки_Objest();
-            if (Контрагенти_Папки_Objest.Read(unigueID))
+            if (await Контрагенти_Папки_Objest.Read(unigueID))
             {
                 Контрагенти_Папки_Objest Контрагенти_Папки_Objest_Новий = Контрагенти_Папки_Objest.Copy(true);
                 await Контрагенти_Папки_Objest_Новий.Save();

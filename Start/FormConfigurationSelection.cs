@@ -46,7 +46,7 @@ namespace StorageAndTrade
         /// <summary>
         /// Переоприділення процедури Open() для кнопки "Відкрити"
         /// </summary>
-        public override void Open()
+        public override async void Open()
         {
             ListBoxRow[] selectedRows = listBox.SelectedRows;
 
@@ -62,22 +62,21 @@ namespace StorageAndTrade
 
                 string PathToConfXML = System.IO.Path.Combine(AppContext.BaseDirectory, "Confa.xml");
 
-                Exception exception;
-
                 Конфа.Config.Kernel = new Kernel();
 
                 //Підключення до бази даних та завантаження конфігурації
-                bool flagOpen = Конфа.Config.Kernel.Open(
+                bool result = await Конфа.Config.Kernel.Open(
                     PathToConfXML,
                     OpenConfigurationParam.DataBaseServer,
                     OpenConfigurationParam.DataBaseLogin,
                     OpenConfigurationParam.DataBasePassword,
                     OpenConfigurationParam.DataBasePort,
-                    OpenConfigurationParam.DataBaseBaseName, out exception);
+                    OpenConfigurationParam.DataBaseBaseName
+                );
 
-                if (!flagOpen)
+                if (!result)
                 {
-                    Message.Error(this, "Error: " + exception.Message);
+                    Message.Error(this, "Error: " + Конфа.Config.Kernel.Exception?.Message);
                     return;
                 }
 
@@ -110,7 +109,7 @@ namespace StorageAndTrade
 
                 if (Конфа.Config.Kernel.DataBase.IfExistsTable("tab_constants"))
                 {
-                    Конфа.Config.ReadAllConstants();
+                    await Конфа.Config.ReadAllConstants();
 
                     //Значення констант за замовчуванням
                     if ((int)Константи.ЖурналиДокументів.ОсновнийТипПеріоду_Const == 0)

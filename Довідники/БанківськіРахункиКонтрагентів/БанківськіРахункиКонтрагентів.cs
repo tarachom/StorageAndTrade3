@@ -77,7 +77,7 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.БанківськіРахункиКонтрагентів_Записи.FirstPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             if (IsNew)
             {
@@ -97,7 +97,7 @@ namespace StorageAndTrade
             else if (unigueID != null)
             {
                 БанківськіРахункиКонтрагентів_Objest БанківськіРахункиКонтрагентів_Objest = new БанківськіРахункиКонтрагентів_Objest();
-                if (БанківськіРахункиКонтрагентів_Objest.Read(unigueID))
+                if (await БанківськіРахункиКонтрагентів_Objest.Read(unigueID))
                 {
                     Program.GeneralForm?.CreateNotebookPage($"{БанківськіРахункиКонтрагентів_Objest.Назва}", () =>
                     {
@@ -121,7 +121,7 @@ namespace StorageAndTrade
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             БанківськіРахункиКонтрагентів_Objest БанківськіРахункиКонтрагентів_Objest = new БанківськіРахункиКонтрагентів_Objest();
-            if (БанківськіРахункиКонтрагентів_Objest.Read(unigueID))
+            if (await БанківськіРахункиКонтрагентів_Objest.Read(unigueID))
                 await БанківськіРахункиКонтрагентів_Objest.SetDeletionLabel(!БанківськіРахункиКонтрагентів_Objest.DeletionLabel);
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
@@ -130,7 +130,7 @@ namespace StorageAndTrade
         protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
             БанківськіРахункиКонтрагентів_Objest БанківськіРахункиКонтрагентів_Objest = new БанківськіРахункиКонтрагентів_Objest();
-            if (БанківськіРахункиКонтрагентів_Objest.Read(unigueID))
+            if (await БанківськіРахункиКонтрагентів_Objest.Read(unigueID))
             {
                 БанківськіРахункиКонтрагентів_Objest БанківськіРахункиКонтрагентів_Objest_Новий = БанківськіРахункиКонтрагентів_Objest.Copy(true);
                 await БанківськіРахункиКонтрагентів_Objest_Новий.Save();

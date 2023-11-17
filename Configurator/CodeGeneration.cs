@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 10.11.2023 22:34:39
+ * Дата конфігурації: 17.11.2023 23:20:41
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -42,16 +42,16 @@ namespace StorageAndTrade_1_0
     {
         public static Kernel? Kernel { get; set; }
 		
-        public static void ReadAllConstants()
+        public static async ValueTask ReadAllConstants()
         {
-            Константи.ЗначенняЗаЗамовчуванням.ReadAll();
-            Константи.Системні.ReadAll();
-            Константи.НумераціяДокументів.ReadAll();
-            Константи.НумераціяДовідників.ReadAll();
-            Константи.ЖурналиДокументів.ReadAll();
-            Константи.ПартіїТоварів.ReadAll();
-            Константи.ЗавантаженняДанихІзСайтів.ReadAll();
-            Константи.ПриЗапускуПрограми.ReadAll();
+            await Константи.ЗначенняЗаЗамовчуванням.ReadAll();
+            await Константи.Системні.ReadAll();
+            await Константи.НумераціяДокументів.ReadAll();
+            await Константи.НумераціяДовідників.ReadAll();
+            await Константи.ЖурналиДокументів.ReadAll();
+            await Константи.ПартіїТоварів.ReadAll();
+            await Константи.ЗавантаженняДанихІзСайтів.ReadAll();
+            await Константи.ПриЗапускуПрограми.ReadAll();
             
         }
     }
@@ -221,11 +221,11 @@ namespace StorageAndTrade_1_0.Константи
 	  #region CONSTANTS BLOCK "ЗначенняЗаЗамовчуванням"
     public static class ЗначенняЗаЗамовчуванням
     {
-        public static void ReadAll()
+        public static async ValueTask ReadAll()
         {
             
             Dictionary<string, object> fieldValue = new Dictionary<string, object>();
-            bool IsSelect = Config.Kernel!.DataBase.SelectAllConstants("tab_constants",
+            bool IsSelect = await Config.Kernel!.DataBase.SelectAllConstants("tab_constants",
                  new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_g4", "col_g5", "col_g9", "col_i2", "col_c3" }, fieldValue);
             
             if (IsSelect)
@@ -422,11 +422,11 @@ namespace StorageAndTrade_1_0.Константи
 	  #region CONSTANTS BLOCK "Системні"
     public static class Системні
     {
-        public static void ReadAll()
+        public static async ValueTask ReadAll()
         {
             
             Dictionary<string, object> fieldValue = new Dictionary<string, object>();
-            bool IsSelect = Config.Kernel!.DataBase.SelectAllConstants("tab_constants",
+            bool IsSelect = await Config.Kernel!.DataBase.SelectAllConstants("tab_constants",
                  new string[] { "col_a8", "col_a9", "col_g6", "col_g7", "col_h8", "col_h9", "col_i1" }, fieldValue);
             
             if (IsSelect)
@@ -559,10 +559,10 @@ namespace StorageAndTrade_1_0.Константи
             public const string Користувач = "col_a2";
             public List<Record> Records { get; set; }
         
-            public void Read()
+            public async ValueTask Read()
             {
                 Records.Clear();
-                base.BaseRead();
+                await base.BaseRead();
 
                 foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
                 {
@@ -636,10 +636,10 @@ namespace StorageAndTrade_1_0.Константи
             public const string Результат = "col_a6";
             public List<Record> Records { get; set; }
         
-            public void Read()
+            public async ValueTask Read()
             {
                 Records.Clear();
-                base.BaseRead();
+                await base.BaseRead();
 
                 foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
                 {
@@ -717,10 +717,10 @@ namespace StorageAndTrade_1_0.Константи
             public const string ДатаПідтвердженняБлокування = "col_a4";
             public List<Record> Records { get; set; }
         
-            public void Read()
+            public async ValueTask Read()
             {
                 Records.Clear();
-                base.BaseRead();
+                await base.BaseRead();
 
                 foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
                 {
@@ -794,10 +794,10 @@ namespace StorageAndTrade_1_0.Константи
             public const string Повідомлення = "col_a3";
             public List<Record> Records { get; set; }
         
-            public void Read()
+            public async ValueTask Read()
             {
                 Records.Clear();
-                base.BaseRead();
+                await base.BaseRead();
 
                 foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
                 {
@@ -864,11 +864,11 @@ namespace StorageAndTrade_1_0.Константи
 	  #region CONSTANTS BLOCK "НумераціяДокументів"
     public static class НумераціяДокументів
     {
-        public static void ReadAll()
+        public static async ValueTask ReadAll()
         {
             
             Dictionary<string, object> fieldValue = new Dictionary<string, object>();
-            bool IsSelect = Config.Kernel!.DataBase.SelectAllConstants("tab_constants",
+            bool IsSelect = await Config.Kernel!.DataBase.SelectAllConstants("tab_constants",
                  new string[] { "col_b7", "col_b9", "col_c1", "col_c2", "col_c4", "col_c5", "col_c6", "col_c7", "col_c8", "col_c9", "col_f6", "col_f7", "col_f8", "col_f9", "col_g1", "col_g2", "col_h1", "col_h2", "col_b2", "col_b3", "col_b4", "col_b5" }, fieldValue);
             
             if (IsSelect)
@@ -1215,11 +1215,11 @@ namespace StorageAndTrade_1_0.Константи
 	  #region CONSTANTS BLOCK "НумераціяДовідників"
     public static class НумераціяДовідників
     {
-        public static void ReadAll()
+        public static async ValueTask ReadAll()
         {
             
             Dictionary<string, object> fieldValue = new Dictionary<string, object>();
-            bool IsSelect = Config.Kernel!.DataBase.SelectAllConstants("tab_constants",
+            bool IsSelect = await Config.Kernel!.DataBase.SelectAllConstants("tab_constants",
                  new string[] { "col_b8", "col_d1", "col_d2", "col_d3", "col_d4", "col_d5", "col_d6", "col_d7", "col_d8", "col_d9", "col_e1", "col_e2", "col_e3", "col_e4", "col_e5", "col_e6", "col_e7", "col_e8", "col_e9", "col_f1", "col_f2", "col_f3", "col_f4", "col_f5", "col_b1", "col_g8", "col_i3", "col_i4" }, fieldValue);
             
             if (IsSelect)
@@ -1656,11 +1656,11 @@ namespace StorageAndTrade_1_0.Константи
 	  #region CONSTANTS BLOCK "ЖурналиДокументів"
     public static class ЖурналиДокументів
     {
-        public static void ReadAll()
+        public static async ValueTask ReadAll()
         {
             
             Dictionary<string, object> fieldValue = new Dictionary<string, object>();
-            bool IsSelect = Config.Kernel!.DataBase.SelectAllConstants("tab_constants",
+            bool IsSelect = await Config.Kernel!.DataBase.SelectAllConstants("tab_constants",
                  new string[] { "col_h3" }, fieldValue);
             
             if (IsSelect)
@@ -1692,11 +1692,11 @@ namespace StorageAndTrade_1_0.Константи
 	  #region CONSTANTS BLOCK "ПартіїТоварів"
     public static class ПартіїТоварів
     {
-        public static void ReadAll()
+        public static async ValueTask ReadAll()
         {
             
             Dictionary<string, object> fieldValue = new Dictionary<string, object>();
-            bool IsSelect = Config.Kernel!.DataBase.SelectAllConstants("tab_constants",
+            bool IsSelect = await Config.Kernel!.DataBase.SelectAllConstants("tab_constants",
                  new string[] { "col_h4" }, fieldValue);
             
             if (IsSelect)
@@ -1728,11 +1728,11 @@ namespace StorageAndTrade_1_0.Константи
 	  #region CONSTANTS BLOCK "ЗавантаженняДанихІзСайтів"
     public static class ЗавантаженняДанихІзСайтів
     {
-        public static void ReadAll()
+        public static async ValueTask ReadAll()
         {
             
             Dictionary<string, object> fieldValue = new Dictionary<string, object>();
-            bool IsSelect = Config.Kernel!.DataBase.SelectAllConstants("tab_constants",
+            bool IsSelect = await Config.Kernel!.DataBase.SelectAllConstants("tab_constants",
                  new string[] { "col_h5", "col_b6", "col_g3" }, fieldValue);
             
             if (IsSelect)
@@ -1805,10 +1805,10 @@ namespace StorageAndTrade_1_0.Константи
             public const string Повідомлення = "col_a4";
             public List<Record> Records { get; set; }
         
-            public void Read()
+            public async ValueTask Read()
             {
                 Records.Clear();
-                base.BaseRead();
+                await base.BaseRead();
 
                 foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
                 {
@@ -1869,11 +1869,11 @@ namespace StorageAndTrade_1_0.Константи
 	  #region CONSTANTS BLOCK "ПриЗапускуПрограми"
     public static class ПриЗапускуПрограми
     {
-        public static void ReadAll()
+        public static async ValueTask ReadAll()
         {
             
             Dictionary<string, object> fieldValue = new Dictionary<string, object>();
-            bool IsSelect = Config.Kernel!.DataBase.SelectAllConstants("tab_constants",
+            bool IsSelect = await Config.Kernel!.DataBase.SelectAllConstants("tab_constants",
                  new string[] { "col_h7", "col_h6" }, fieldValue);
             
             if (IsSelect)
@@ -1968,9 +1968,9 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
 
-        public bool Read(UnigueID uid)
+        public async ValueTask<bool> Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 Назва = base.FieldValue["col_a1"].ToString() ?? "";
                 Код = base.FieldValue["col_a2"].ToString() ?? "";
@@ -2095,11 +2095,11 @@ namespace StorageAndTrade_1_0.Довідники
             base.Init(uid, fields);
         }
         
-        public Організації_Objest? GetDirectoryObject()
+        public async ValueTask<Організації_Objest?> GetDirectoryObject()
         {
             if (this.IsEmpty()) return null;
             Організації_Objest ОрганізаціїObjestItem = new Організації_Objest();
-            return ОрганізаціїObjestItem.Read(base.UnigueID) ? ОрганізаціїObjestItem : null;
+            return await ОрганізаціїObjestItem.Read(base.UnigueID) ? ОрганізаціїObjestItem : null;
         }
 
         public Організації_Pointer Copy()
@@ -2118,7 +2118,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            Організації_Objest? obj = GetDirectoryObject();
+            Організації_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
                 Організації_Triggers.SetDeletionLabel(obj, label);
@@ -2332,9 +2332,9 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
 
-        public bool Read(UnigueID uid)
+        public async ValueTask<bool> Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 Назва = base.FieldValue["col_b1"].ToString() ?? "";
                 Код = base.FieldValue["col_b2"].ToString() ?? "";
@@ -2467,11 +2467,11 @@ namespace StorageAndTrade_1_0.Довідники
             base.Init(uid, fields);
         }
         
-        public Номенклатура_Objest? GetDirectoryObject()
+        public async ValueTask<Номенклатура_Objest?> GetDirectoryObject()
         {
             if (this.IsEmpty()) return null;
             Номенклатура_Objest НоменклатураObjestItem = new Номенклатура_Objest();
-            return НоменклатураObjestItem.Read(base.UnigueID) ? НоменклатураObjestItem : null;
+            return await НоменклатураObjestItem.Read(base.UnigueID) ? НоменклатураObjestItem : null;
         }
 
         public Номенклатура_Pointer Copy()
@@ -2490,7 +2490,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            Номенклатура_Objest? obj = GetDirectoryObject();
+            Номенклатура_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
                 Номенклатура_Triggers.SetDeletionLabel(obj, label);
@@ -2659,9 +2659,9 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
 
-        public bool Read(UnigueID uid)
+        public async ValueTask<bool> Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 Назва = base.FieldValue["col_b6"].ToString() ?? "";
                 Код = base.FieldValue["col_b7"].ToString() ?? "";
@@ -2746,11 +2746,11 @@ namespace StorageAndTrade_1_0.Довідники
             base.Init(uid, fields);
         }
         
-        public Виробники_Objest? GetDirectoryObject()
+        public async ValueTask<Виробники_Objest?> GetDirectoryObject()
         {
             if (this.IsEmpty()) return null;
             Виробники_Objest ВиробникиObjestItem = new Виробники_Objest();
-            return ВиробникиObjestItem.Read(base.UnigueID) ? ВиробникиObjestItem : null;
+            return await ВиробникиObjestItem.Read(base.UnigueID) ? ВиробникиObjestItem : null;
         }
 
         public Виробники_Pointer Copy()
@@ -2769,7 +2769,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            Виробники_Objest? obj = GetDirectoryObject();
+            Виробники_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
                 Виробники_Triggers.SetDeletionLabel(obj, label);
@@ -2862,9 +2862,9 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
 
-        public bool Read(UnigueID uid)
+        public async ValueTask<bool> Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 Назва = base.FieldValue["col_b8"].ToString() ?? "";
                 Код = base.FieldValue["col_b9"].ToString() ?? "";
@@ -2961,11 +2961,11 @@ namespace StorageAndTrade_1_0.Довідники
             base.Init(uid, fields);
         }
         
-        public ВидиНоменклатури_Objest? GetDirectoryObject()
+        public async ValueTask<ВидиНоменклатури_Objest?> GetDirectoryObject()
         {
             if (this.IsEmpty()) return null;
             ВидиНоменклатури_Objest ВидиНоменклатуриObjestItem = new ВидиНоменклатури_Objest();
-            return ВидиНоменклатуриObjestItem.Read(base.UnigueID) ? ВидиНоменклатуриObjestItem : null;
+            return await ВидиНоменклатуриObjestItem.Read(base.UnigueID) ? ВидиНоменклатуриObjestItem : null;
         }
 
         public ВидиНоменклатури_Pointer Copy()
@@ -2984,7 +2984,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ВидиНоменклатури_Objest? obj = GetDirectoryObject();
+            ВидиНоменклатури_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
                 ВидиНоменклатури_Triggers.SetDeletionLabel(obj, label);
@@ -3075,9 +3075,9 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
 
-        public bool Read(UnigueID uid)
+        public async ValueTask<bool> Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 Назва = base.FieldValue["col_c1"].ToString() ?? "";
                 Код = base.FieldValue["col_c2"].ToString() ?? "";
@@ -3170,11 +3170,11 @@ namespace StorageAndTrade_1_0.Довідники
             base.Init(uid, fields);
         }
         
-        public ПакуванняОдиниціВиміру_Objest? GetDirectoryObject()
+        public async ValueTask<ПакуванняОдиниціВиміру_Objest?> GetDirectoryObject()
         {
             if (this.IsEmpty()) return null;
             ПакуванняОдиниціВиміру_Objest ПакуванняОдиниціВиміруObjestItem = new ПакуванняОдиниціВиміру_Objest();
-            return ПакуванняОдиниціВиміруObjestItem.Read(base.UnigueID) ? ПакуванняОдиниціВиміруObjestItem : null;
+            return await ПакуванняОдиниціВиміруObjestItem.Read(base.UnigueID) ? ПакуванняОдиниціВиміруObjestItem : null;
         }
 
         public ПакуванняОдиниціВиміру_Pointer Copy()
@@ -3193,7 +3193,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ПакуванняОдиниціВиміру_Objest? obj = GetDirectoryObject();
+            ПакуванняОдиниціВиміру_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
                 ПакуванняОдиниціВиміру_Triggers.SetDeletionLabel(obj, label);
@@ -3286,9 +3286,9 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
 
-        public bool Read(UnigueID uid)
+        public async ValueTask<bool> Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 Назва = base.FieldValue["col_c5"].ToString() ?? "";
                 КороткаНазва = base.FieldValue["col_a2"].ToString() ?? "";
@@ -3385,11 +3385,11 @@ namespace StorageAndTrade_1_0.Довідники
             base.Init(uid, fields);
         }
         
-        public Валюти_Objest? GetDirectoryObject()
+        public async ValueTask<Валюти_Objest?> GetDirectoryObject()
         {
             if (this.IsEmpty()) return null;
             Валюти_Objest ВалютиObjestItem = new Валюти_Objest();
-            return ВалютиObjestItem.Read(base.UnigueID) ? ВалютиObjestItem : null;
+            return await ВалютиObjestItem.Read(base.UnigueID) ? ВалютиObjestItem : null;
         }
 
         public Валюти_Pointer Copy()
@@ -3408,7 +3408,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            Валюти_Objest? obj = GetDirectoryObject();
+            Валюти_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
                 Валюти_Triggers.SetDeletionLabel(obj, label);
@@ -3509,9 +3509,9 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
 
-        public bool Read(UnigueID uid)
+        public async ValueTask<bool> Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 Назва = base.FieldValue["col_c7"].ToString() ?? "";
                 Код = base.FieldValue["col_c8"].ToString() ?? "";
@@ -3633,11 +3633,11 @@ namespace StorageAndTrade_1_0.Довідники
             base.Init(uid, fields);
         }
         
-        public Контрагенти_Objest? GetDirectoryObject()
+        public async ValueTask<Контрагенти_Objest?> GetDirectoryObject()
         {
             if (this.IsEmpty()) return null;
             Контрагенти_Objest КонтрагентиObjestItem = new Контрагенти_Objest();
-            return КонтрагентиObjestItem.Read(base.UnigueID) ? КонтрагентиObjestItem : null;
+            return await КонтрагентиObjestItem.Read(base.UnigueID) ? КонтрагентиObjestItem : null;
         }
 
         public Контрагенти_Pointer Copy()
@@ -3656,7 +3656,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            Контрагенти_Objest? obj = GetDirectoryObject();
+            Контрагенти_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
                 Контрагенти_Triggers.SetDeletionLabel(obj, label);
@@ -3942,9 +3942,9 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
 
-        public bool Read(UnigueID uid)
+        public async ValueTask<bool> Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 Назва = base.FieldValue["col_d9"].ToString() ?? "";
                 Код = base.FieldValue["col_e1"].ToString() ?? "";
@@ -4065,11 +4065,11 @@ namespace StorageAndTrade_1_0.Довідники
             base.Init(uid, fields);
         }
         
-        public Склади_Objest? GetDirectoryObject()
+        public async ValueTask<Склади_Objest?> GetDirectoryObject()
         {
             if (this.IsEmpty()) return null;
             Склади_Objest СкладиObjestItem = new Склади_Objest();
-            return СкладиObjestItem.Read(base.UnigueID) ? СкладиObjestItem : null;
+            return await СкладиObjestItem.Read(base.UnigueID) ? СкладиObjestItem : null;
         }
 
         public Склади_Pointer Copy()
@@ -4088,7 +4088,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            Склади_Objest? obj = GetDirectoryObject();
+            Склади_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
                 Склади_Triggers.SetDeletionLabel(obj, label);
@@ -4283,9 +4283,9 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
 
-        public bool Read(UnigueID uid)
+        public async ValueTask<bool> Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 Назва = base.FieldValue["col_e9"].ToString() ?? "";
                 Код = base.FieldValue["col_f1"].ToString() ?? "";
@@ -4374,11 +4374,11 @@ namespace StorageAndTrade_1_0.Довідники
             base.Init(uid, fields);
         }
         
-        public ВидиЦін_Objest? GetDirectoryObject()
+        public async ValueTask<ВидиЦін_Objest?> GetDirectoryObject()
         {
             if (this.IsEmpty()) return null;
             ВидиЦін_Objest ВидиЦінObjestItem = new ВидиЦін_Objest();
-            return ВидиЦінObjestItem.Read(base.UnigueID) ? ВидиЦінObjestItem : null;
+            return await ВидиЦінObjestItem.Read(base.UnigueID) ? ВидиЦінObjestItem : null;
         }
 
         public ВидиЦін_Pointer Copy()
@@ -4397,7 +4397,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ВидиЦін_Objest? obj = GetDirectoryObject();
+            ВидиЦін_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
                 ВидиЦін_Triggers.SetDeletionLabel(obj, label);
@@ -4486,9 +4486,9 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
 
-        public bool Read(UnigueID uid)
+        public async ValueTask<bool> Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 Назва = base.FieldValue["col_f3"].ToString() ?? "";
                 Код = base.FieldValue["col_f4"].ToString() ?? "";
@@ -4577,11 +4577,11 @@ namespace StorageAndTrade_1_0.Довідники
             base.Init(uid, fields);
         }
         
-        public ВидиЦінПостачальників_Objest? GetDirectoryObject()
+        public async ValueTask<ВидиЦінПостачальників_Objest?> GetDirectoryObject()
         {
             if (this.IsEmpty()) return null;
             ВидиЦінПостачальників_Objest ВидиЦінПостачальниківObjestItem = new ВидиЦінПостачальників_Objest();
-            return ВидиЦінПостачальниківObjestItem.Read(base.UnigueID) ? ВидиЦінПостачальниківObjestItem : null;
+            return await ВидиЦінПостачальниківObjestItem.Read(base.UnigueID) ? ВидиЦінПостачальниківObjestItem : null;
         }
 
         public ВидиЦінПостачальників_Pointer Copy()
@@ -4600,7 +4600,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ВидиЦінПостачальників_Objest? obj = GetDirectoryObject();
+            ВидиЦінПостачальників_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
                 ВидиЦінПостачальників_Triggers.SetDeletionLabel(obj, label);
@@ -4696,9 +4696,9 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
 
-        public bool Read(UnigueID uid)
+        public async ValueTask<bool> Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 Назва = base.FieldValue["col_f6"].ToString() ?? "";
                 Код = base.FieldValue["col_f7"].ToString() ?? "";
@@ -4807,11 +4807,11 @@ namespace StorageAndTrade_1_0.Довідники
             base.Init(uid, fields);
         }
         
-        public Користувачі_Objest? GetDirectoryObject()
+        public async ValueTask<Користувачі_Objest?> GetDirectoryObject()
         {
             if (this.IsEmpty()) return null;
             Користувачі_Objest КористувачіObjestItem = new Користувачі_Objest();
-            return КористувачіObjestItem.Read(base.UnigueID) ? КористувачіObjestItem : null;
+            return await КористувачіObjestItem.Read(base.UnigueID) ? КористувачіObjestItem : null;
         }
 
         public Користувачі_Pointer Copy()
@@ -4830,7 +4830,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            Користувачі_Objest? obj = GetDirectoryObject();
+            Користувачі_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
                 Користувачі_Triggers.SetDeletionLabel(obj, label);
@@ -5028,9 +5028,9 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
 
-        public bool Read(UnigueID uid)
+        public async ValueTask<bool> Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 Назва = base.FieldValue["col_g7"].ToString() ?? "";
                 Код = base.FieldValue["col_g8"].ToString() ?? "";
@@ -5139,11 +5139,11 @@ namespace StorageAndTrade_1_0.Довідники
             base.Init(uid, fields);
         }
         
-        public ФізичніОсоби_Objest? GetDirectoryObject()
+        public async ValueTask<ФізичніОсоби_Objest?> GetDirectoryObject()
         {
             if (this.IsEmpty()) return null;
             ФізичніОсоби_Objest ФізичніОсобиObjestItem = new ФізичніОсоби_Objest();
-            return ФізичніОсобиObjestItem.Read(base.UnigueID) ? ФізичніОсобиObjestItem : null;
+            return await ФізичніОсобиObjestItem.Read(base.UnigueID) ? ФізичніОсобиObjestItem : null;
         }
 
         public ФізичніОсоби_Pointer Copy()
@@ -5162,7 +5162,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ФізичніОсоби_Objest? obj = GetDirectoryObject();
+            ФізичніОсоби_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
                 ФізичніОсоби_Triggers.SetDeletionLabel(obj, label);
@@ -5353,9 +5353,9 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
 
-        public bool Read(UnigueID uid)
+        public async ValueTask<bool> Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 Назва = base.FieldValue["col_h8"].ToString() ?? "";
                 Код = base.FieldValue["col_h9"].ToString() ?? "";
@@ -5444,11 +5444,11 @@ namespace StorageAndTrade_1_0.Довідники
             base.Init(uid, fields);
         }
         
-        public СтруктураПідприємства_Objest? GetDirectoryObject()
+        public async ValueTask<СтруктураПідприємства_Objest?> GetDirectoryObject()
         {
             if (this.IsEmpty()) return null;
             СтруктураПідприємства_Objest СтруктураПідприємстваObjestItem = new СтруктураПідприємства_Objest();
-            return СтруктураПідприємстваObjestItem.Read(base.UnigueID) ? СтруктураПідприємстваObjestItem : null;
+            return await СтруктураПідприємстваObjestItem.Read(base.UnigueID) ? СтруктураПідприємстваObjestItem : null;
         }
 
         public СтруктураПідприємства_Pointer Copy()
@@ -5467,7 +5467,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            СтруктураПідприємства_Objest? obj = GetDirectoryObject();
+            СтруктураПідприємства_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
                 СтруктураПідприємства_Triggers.SetDeletionLabel(obj, label);
@@ -5554,9 +5554,9 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
 
-        public bool Read(UnigueID uid)
+        public async ValueTask<bool> Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 Назва = base.FieldValue["col_i2"].ToString() ?? "";
                 Код = base.FieldValue["col_i3"].ToString() ?? "";
@@ -5641,11 +5641,11 @@ namespace StorageAndTrade_1_0.Довідники
             base.Init(uid, fields);
         }
         
-        public КраїниСвіту_Objest? GetDirectoryObject()
+        public async ValueTask<КраїниСвіту_Objest?> GetDirectoryObject()
         {
             if (this.IsEmpty()) return null;
             КраїниСвіту_Objest КраїниСвітуObjestItem = new КраїниСвіту_Objest();
-            return КраїниСвітуObjestItem.Read(base.UnigueID) ? КраїниСвітуObjestItem : null;
+            return await КраїниСвітуObjestItem.Read(base.UnigueID) ? КраїниСвітуObjestItem : null;
         }
 
         public КраїниСвіту_Pointer Copy()
@@ -5664,7 +5664,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            КраїниСвіту_Objest? obj = GetDirectoryObject();
+            КраїниСвіту_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
                 КраїниСвіту_Triggers.SetDeletionLabel(obj, label);
@@ -5759,9 +5759,9 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
 
-        public bool Read(UnigueID uid)
+        public async ValueTask<bool> Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 Код = base.FieldValue["col_i6"].ToString() ?? "";
                 Назва = base.FieldValue["col_i5"].ToString() ?? "";
@@ -5862,11 +5862,11 @@ namespace StorageAndTrade_1_0.Довідники
             base.Init(uid, fields);
         }
         
-        public Файли_Objest? GetDirectoryObject()
+        public async ValueTask<Файли_Objest?> GetDirectoryObject()
         {
             if (this.IsEmpty()) return null;
             Файли_Objest ФайлиObjestItem = new Файли_Objest();
-            return ФайлиObjestItem.Read(base.UnigueID) ? ФайлиObjestItem : null;
+            return await ФайлиObjestItem.Read(base.UnigueID) ? ФайлиObjestItem : null;
         }
 
         public Файли_Pointer Copy()
@@ -5885,7 +5885,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            Файли_Objest? obj = GetDirectoryObject();
+            Файли_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
                 Файли_Triggers.SetDeletionLabel(obj, label);
@@ -5976,9 +5976,9 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
 
-        public bool Read(UnigueID uid)
+        public async ValueTask<bool> Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 Назва = base.FieldValue["col_i7"].ToString() ?? "";
                 Код = base.FieldValue["col_i8"].ToString() ?? "";
@@ -6071,11 +6071,11 @@ namespace StorageAndTrade_1_0.Довідники
             base.Init(uid, fields);
         }
         
-        public ХарактеристикиНоменклатури_Objest? GetDirectoryObject()
+        public async ValueTask<ХарактеристикиНоменклатури_Objest?> GetDirectoryObject()
         {
             if (this.IsEmpty()) return null;
             ХарактеристикиНоменклатури_Objest ХарактеристикиНоменклатуриObjestItem = new ХарактеристикиНоменклатури_Objest();
-            return ХарактеристикиНоменклатуриObjestItem.Read(base.UnigueID) ? ХарактеристикиНоменклатуриObjestItem : null;
+            return await ХарактеристикиНоменклатуриObjestItem.Read(base.UnigueID) ? ХарактеристикиНоменклатуриObjestItem : null;
         }
 
         public ХарактеристикиНоменклатури_Pointer Copy()
@@ -6094,7 +6094,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ХарактеристикиНоменклатури_Objest? obj = GetDirectoryObject();
+            ХарактеристикиНоменклатури_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
                 ХарактеристикиНоменклатури_Triggers.SetDeletionLabel(obj, label);
@@ -6183,9 +6183,9 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
 
-        public bool Read(UnigueID uid)
+        public async ValueTask<bool> Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 Назва = base.FieldValue["col_j1"].ToString() ?? "";
                 Код = base.FieldValue["col_j2"].ToString() ?? "";
@@ -6274,11 +6274,11 @@ namespace StorageAndTrade_1_0.Довідники
             base.Init(uid, fields);
         }
         
-        public Номенклатура_Папки_Objest? GetDirectoryObject()
+        public async ValueTask<Номенклатура_Папки_Objest?> GetDirectoryObject()
         {
             if (this.IsEmpty()) return null;
             Номенклатура_Папки_Objest Номенклатура_ПапкиObjestItem = new Номенклатура_Папки_Objest();
-            return Номенклатура_ПапкиObjestItem.Read(base.UnigueID) ? Номенклатура_ПапкиObjestItem : null;
+            return await Номенклатура_ПапкиObjestItem.Read(base.UnigueID) ? Номенклатура_ПапкиObjestItem : null;
         }
 
         public Номенклатура_Папки_Pointer Copy()
@@ -6297,7 +6297,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            Номенклатура_Папки_Objest? obj = GetDirectoryObject();
+            Номенклатура_Папки_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
                 Номенклатура_Папки_Triggers.SetDeletionLabel(obj, label);
@@ -6386,9 +6386,9 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
 
-        public bool Read(UnigueID uid)
+        public async ValueTask<bool> Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 Назва = base.FieldValue["col_j4"].ToString() ?? "";
                 Код = base.FieldValue["col_j5"].ToString() ?? "";
@@ -6477,11 +6477,11 @@ namespace StorageAndTrade_1_0.Довідники
             base.Init(uid, fields);
         }
         
-        public Контрагенти_Папки_Objest? GetDirectoryObject()
+        public async ValueTask<Контрагенти_Папки_Objest?> GetDirectoryObject()
         {
             if (this.IsEmpty()) return null;
             Контрагенти_Папки_Objest Контрагенти_ПапкиObjestItem = new Контрагенти_Папки_Objest();
-            return Контрагенти_ПапкиObjestItem.Read(base.UnigueID) ? Контрагенти_ПапкиObjestItem : null;
+            return await Контрагенти_ПапкиObjestItem.Read(base.UnigueID) ? Контрагенти_ПапкиObjestItem : null;
         }
 
         public Контрагенти_Папки_Pointer Copy()
@@ -6500,7 +6500,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            Контрагенти_Папки_Objest? obj = GetDirectoryObject();
+            Контрагенти_Папки_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
                 Контрагенти_Папки_Triggers.SetDeletionLabel(obj, label);
@@ -6589,9 +6589,9 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
 
-        public bool Read(UnigueID uid)
+        public async ValueTask<bool> Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 Назва = base.FieldValue["col_j7"].ToString() ?? "";
                 Код = base.FieldValue["col_j8"].ToString() ?? "";
@@ -6680,11 +6680,11 @@ namespace StorageAndTrade_1_0.Довідники
             base.Init(uid, fields);
         }
         
-        public Склади_Папки_Objest? GetDirectoryObject()
+        public async ValueTask<Склади_Папки_Objest?> GetDirectoryObject()
         {
             if (this.IsEmpty()) return null;
             Склади_Папки_Objest Склади_ПапкиObjestItem = new Склади_Папки_Objest();
-            return Склади_ПапкиObjestItem.Read(base.UnigueID) ? Склади_ПапкиObjestItem : null;
+            return await Склади_ПапкиObjestItem.Read(base.UnigueID) ? Склади_ПапкиObjestItem : null;
         }
 
         public Склади_Папки_Pointer Copy()
@@ -6703,7 +6703,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            Склади_Папки_Objest? obj = GetDirectoryObject();
+            Склади_Папки_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
                 Склади_Папки_Triggers.SetDeletionLabel(obj, label);
@@ -6794,9 +6794,9 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
 
-        public bool Read(UnigueID uid)
+        public async ValueTask<bool> Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 Назва = base.FieldValue["col_k8"].ToString() ?? "";
                 Код = base.FieldValue["col_k9"].ToString() ?? "";
@@ -6889,11 +6889,11 @@ namespace StorageAndTrade_1_0.Довідники
             base.Init(uid, fields);
         }
         
-        public Каси_Objest? GetDirectoryObject()
+        public async ValueTask<Каси_Objest?> GetDirectoryObject()
         {
             if (this.IsEmpty()) return null;
             Каси_Objest КасиObjestItem = new Каси_Objest();
-            return КасиObjestItem.Read(base.UnigueID) ? КасиObjestItem : null;
+            return await КасиObjestItem.Read(base.UnigueID) ? КасиObjestItem : null;
         }
 
         public Каси_Pointer Copy()
@@ -6912,7 +6912,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            Каси_Objest? obj = GetDirectoryObject();
+            Каси_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
                 Каси_Triggers.SetDeletionLabel(obj, label);
@@ -7021,9 +7021,9 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
 
-        public bool Read(UnigueID uid)
+        public async ValueTask<bool> Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 Назва = base.FieldValue["col_l1"].ToString() ?? "";
                 Код = base.FieldValue["col_l2"].ToString() ?? "";
@@ -7152,11 +7152,11 @@ namespace StorageAndTrade_1_0.Довідники
             base.Init(uid, fields);
         }
         
-        public БанківськіРахункиОрганізацій_Objest? GetDirectoryObject()
+        public async ValueTask<БанківськіРахункиОрганізацій_Objest?> GetDirectoryObject()
         {
             if (this.IsEmpty()) return null;
             БанківськіРахункиОрганізацій_Objest БанківськіРахункиОрганізаційObjestItem = new БанківськіРахункиОрганізацій_Objest();
-            return БанківськіРахункиОрганізаційObjestItem.Read(base.UnigueID) ? БанківськіРахункиОрганізаційObjestItem : null;
+            return await БанківськіРахункиОрганізаційObjestItem.Read(base.UnigueID) ? БанківськіРахункиОрганізаційObjestItem : null;
         }
 
         public БанківськіРахункиОрганізацій_Pointer Copy()
@@ -7175,7 +7175,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            БанківськіРахункиОрганізацій_Objest? obj = GetDirectoryObject();
+            БанківськіРахункиОрганізацій_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
                 БанківськіРахункиОрганізацій_Triggers.SetDeletionLabel(obj, label);
@@ -7298,9 +7298,9 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
 
-        public bool Read(UnigueID uid)
+        public async ValueTask<bool> Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 Назва = base.FieldValue["col_n4"].ToString() ?? "";
                 Код = base.FieldValue["col_n5"].ToString() ?? "";
@@ -7457,11 +7457,11 @@ namespace StorageAndTrade_1_0.Довідники
             base.Init(uid, fields);
         }
         
-        public ДоговориКонтрагентів_Objest? GetDirectoryObject()
+        public async ValueTask<ДоговориКонтрагентів_Objest?> GetDirectoryObject()
         {
             if (this.IsEmpty()) return null;
             ДоговориКонтрагентів_Objest ДоговориКонтрагентівObjestItem = new ДоговориКонтрагентів_Objest();
-            return ДоговориКонтрагентівObjestItem.Read(base.UnigueID) ? ДоговориКонтрагентівObjestItem : null;
+            return await ДоговориКонтрагентівObjestItem.Read(base.UnigueID) ? ДоговориКонтрагентівObjestItem : null;
         }
 
         public ДоговориКонтрагентів_Pointer Copy()
@@ -7480,7 +7480,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ДоговориКонтрагентів_Objest? obj = GetDirectoryObject();
+            ДоговориКонтрагентів_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
                 ДоговориКонтрагентів_Triggers.SetDeletionLabel(obj, label);
@@ -7593,9 +7593,9 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
 
-        public bool Read(UnigueID uid)
+        public async ValueTask<bool> Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 Назва = base.FieldValue["col_n7"].ToString() ?? "";
                 Код = base.FieldValue["col_n8"].ToString() ?? "";
@@ -7732,11 +7732,11 @@ namespace StorageAndTrade_1_0.Довідники
             base.Init(uid, fields);
         }
         
-        public БанківськіРахункиКонтрагентів_Objest? GetDirectoryObject()
+        public async ValueTask<БанківськіРахункиКонтрагентів_Objest?> GetDirectoryObject()
         {
             if (this.IsEmpty()) return null;
             БанківськіРахункиКонтрагентів_Objest БанківськіРахункиКонтрагентівObjestItem = new БанківськіРахункиКонтрагентів_Objest();
-            return БанківськіРахункиКонтрагентівObjestItem.Read(base.UnigueID) ? БанківськіРахункиКонтрагентівObjestItem : null;
+            return await БанківськіРахункиКонтрагентівObjestItem.Read(base.UnigueID) ? БанківськіРахункиКонтрагентівObjestItem : null;
         }
 
         public БанківськіРахункиКонтрагентів_Pointer Copy()
@@ -7755,7 +7755,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            БанківськіРахункиКонтрагентів_Objest? obj = GetDirectoryObject();
+            БанківськіРахункиКонтрагентів_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
                 БанківськіРахункиКонтрагентів_Triggers.SetDeletionLabel(obj, label);
@@ -7851,9 +7851,9 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
 
-        public bool Read(UnigueID uid)
+        public async ValueTask<bool> Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 Назва = base.FieldValue["col_i7"].ToString() ?? "";
                 Код = base.FieldValue["col_i8"].ToString() ?? "";
@@ -7962,11 +7962,11 @@ namespace StorageAndTrade_1_0.Довідники
             base.Init(uid, fields);
         }
         
-        public СтаттяРухуКоштів_Objest? GetDirectoryObject()
+        public async ValueTask<СтаттяРухуКоштів_Objest?> GetDirectoryObject()
         {
             if (this.IsEmpty()) return null;
             СтаттяРухуКоштів_Objest СтаттяРухуКоштівObjestItem = new СтаттяРухуКоштів_Objest();
-            return СтаттяРухуКоштівObjestItem.Read(base.UnigueID) ? СтаттяРухуКоштівObjestItem : null;
+            return await СтаттяРухуКоштівObjestItem.Read(base.UnigueID) ? СтаттяРухуКоштівObjestItem : null;
         }
 
         public СтаттяРухуКоштів_Pointer Copy()
@@ -7985,7 +7985,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            СтаттяРухуКоштів_Objest? obj = GetDirectoryObject();
+            СтаттяРухуКоштів_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
                 СтаттяРухуКоштів_Triggers.SetDeletionLabel(obj, label);
@@ -8152,9 +8152,9 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
 
-        public bool Read(UnigueID uid)
+        public async ValueTask<bool> Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 Номер = base.FieldValue["col_a3"].ToString() ?? "";
                 Коментар = base.FieldValue["col_a1"].ToString() ?? "";
@@ -8243,11 +8243,11 @@ namespace StorageAndTrade_1_0.Довідники
             base.Init(uid, fields);
         }
         
-        public СеріїНоменклатури_Objest? GetDirectoryObject()
+        public async ValueTask<СеріїНоменклатури_Objest?> GetDirectoryObject()
         {
             if (this.IsEmpty()) return null;
             СеріїНоменклатури_Objest СеріїНоменклатуриObjestItem = new СеріїНоменклатури_Objest();
-            return СеріїНоменклатуриObjestItem.Read(base.UnigueID) ? СеріїНоменклатуриObjestItem : null;
+            return await СеріїНоменклатуриObjestItem.Read(base.UnigueID) ? СеріїНоменклатуриObjestItem : null;
         }
 
         public СеріїНоменклатури_Pointer Copy()
@@ -8266,7 +8266,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            СеріїНоменклатури_Objest? obj = GetDirectoryObject();
+            СеріїНоменклатури_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
                 СеріїНоменклатури_Triggers.SetDeletionLabel(obj, label);
@@ -8361,9 +8361,9 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
 
-        public bool Read(UnigueID uid)
+        public async ValueTask<bool> Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 Назва = base.FieldValue["col_a1"].ToString() ?? "";
                 Дата = (base.FieldValue["col_a2"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["col_a2"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
@@ -8464,11 +8464,11 @@ namespace StorageAndTrade_1_0.Довідники
             base.Init(uid, fields);
         }
         
-        public ПартіяТоварівКомпозит_Objest? GetDirectoryObject()
+        public async ValueTask<ПартіяТоварівКомпозит_Objest?> GetDirectoryObject()
         {
             if (this.IsEmpty()) return null;
             ПартіяТоварівКомпозит_Objest ПартіяТоварівКомпозитObjestItem = new ПартіяТоварівКомпозит_Objest();
-            return ПартіяТоварівКомпозитObjestItem.Read(base.UnigueID) ? ПартіяТоварівКомпозитObjestItem : null;
+            return await ПартіяТоварівКомпозитObjestItem.Read(base.UnigueID) ? ПартіяТоварівКомпозитObjestItem : null;
         }
 
         public ПартіяТоварівКомпозит_Pointer Copy()
@@ -8487,7 +8487,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ПартіяТоварівКомпозит_Objest? obj = GetDirectoryObject();
+            ПартіяТоварівКомпозит_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
                 ПартіяТоварівКомпозит_Triggers.SetDeletionLabel(obj, label);
@@ -8584,9 +8584,9 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
 
-        public bool Read(UnigueID uid)
+        public async ValueTask<bool> Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 Назва = base.FieldValue["col_a5"].ToString() ?? "";
                 Організація = new Довідники.Організації_Pointer(base.FieldValue["col_b3"]);
@@ -8691,11 +8691,11 @@ namespace StorageAndTrade_1_0.Довідники
             base.Init(uid, fields);
         }
         
-        public ВидиЗапасів_Objest? GetDirectoryObject()
+        public async ValueTask<ВидиЗапасів_Objest?> GetDirectoryObject()
         {
             if (this.IsEmpty()) return null;
             ВидиЗапасів_Objest ВидиЗапасівObjestItem = new ВидиЗапасів_Objest();
-            return ВидиЗапасівObjestItem.Read(base.UnigueID) ? ВидиЗапасівObjestItem : null;
+            return await ВидиЗапасівObjestItem.Read(base.UnigueID) ? ВидиЗапасівObjestItem : null;
         }
 
         public ВидиЗапасів_Pointer Copy()
@@ -8714,7 +8714,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ВидиЗапасів_Objest? obj = GetDirectoryObject();
+            ВидиЗапасів_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
                 ВидиЗапасів_Triggers.SetDeletionLabel(obj, label);
@@ -8853,9 +8853,9 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
 
-        public bool Read(UnigueID uid)
+        public async ValueTask<bool> Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 Код = base.FieldValue["col_a1"].ToString() ?? "";
                 Назва = base.FieldValue["col_a2"].ToString() ?? "";
@@ -9044,11 +9044,11 @@ namespace StorageAndTrade_1_0.Довідники
             base.Init(uid, fields);
         }
         
-        public Банки_Objest? GetDirectoryObject()
+        public async ValueTask<Банки_Objest?> GetDirectoryObject()
         {
             if (this.IsEmpty()) return null;
             Банки_Objest БанкиObjestItem = new Банки_Objest();
-            return БанкиObjestItem.Read(base.UnigueID) ? БанкиObjestItem : null;
+            return await БанкиObjestItem.Read(base.UnigueID) ? БанкиObjestItem : null;
         }
 
         public Банки_Pointer Copy()
@@ -9067,7 +9067,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            Банки_Objest? obj = GetDirectoryObject();
+            Банки_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
                 Банки_Triggers.SetDeletionLabel(obj, label);
@@ -9156,9 +9156,9 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
 
-        public bool Read(UnigueID uid)
+        public async ValueTask<bool> Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 Назва = base.FieldValue["col_a2"].ToString() ?? "";
                 НалаштуванняАдресногоЗберігання = (base.FieldValue["col_a3"] != DBNull.Value) ? (Перелічення.НалаштуванняАдресногоЗберігання)base.FieldValue["col_a3"] : 0;
@@ -9247,11 +9247,11 @@ namespace StorageAndTrade_1_0.Довідники
             base.Init(uid, fields);
         }
         
-        public СкладськіПриміщення_Objest? GetDirectoryObject()
+        public async ValueTask<СкладськіПриміщення_Objest?> GetDirectoryObject()
         {
             if (this.IsEmpty()) return null;
             СкладськіПриміщення_Objest СкладськіПриміщенняObjestItem = new СкладськіПриміщення_Objest();
-            return СкладськіПриміщенняObjestItem.Read(base.UnigueID) ? СкладськіПриміщенняObjestItem : null;
+            return await СкладськіПриміщенняObjestItem.Read(base.UnigueID) ? СкладськіПриміщенняObjestItem : null;
         }
 
         public СкладськіПриміщення_Pointer Copy()
@@ -9270,7 +9270,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            СкладськіПриміщення_Objest? obj = GetDirectoryObject();
+            СкладськіПриміщення_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
                 СкладськіПриміщення_Triggers.SetDeletionLabel(obj, label);
@@ -9373,9 +9373,9 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
 
-        public bool Read(UnigueID uid)
+        public async ValueTask<bool> Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 Папка = new Довідники.СкладськіКомірки_Папки_Pointer(base.FieldValue["col_a1"]);
                 Назва = base.FieldValue["col_a2"].ToString() ?? "";
@@ -9492,11 +9492,11 @@ namespace StorageAndTrade_1_0.Довідники
             base.Init(uid, fields);
         }
         
-        public СкладськіКомірки_Objest? GetDirectoryObject()
+        public async ValueTask<СкладськіКомірки_Objest?> GetDirectoryObject()
         {
             if (this.IsEmpty()) return null;
             СкладськіКомірки_Objest СкладськіКоміркиObjestItem = new СкладськіКомірки_Objest();
-            return СкладськіКоміркиObjestItem.Read(base.UnigueID) ? СкладськіКоміркиObjestItem : null;
+            return await СкладськіКоміркиObjestItem.Read(base.UnigueID) ? СкладськіКоміркиObjestItem : null;
         }
 
         public СкладськіКомірки_Pointer Copy()
@@ -9515,7 +9515,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            СкладськіКомірки_Objest? obj = GetDirectoryObject();
+            СкладськіКомірки_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
                 СкладськіКомірки_Triggers.SetDeletionLabel(obj, label);
@@ -9603,9 +9603,9 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
 
-        public bool Read(UnigueID uid)
+        public async ValueTask<bool> Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 Назва = base.FieldValue["col_a2"].ToString() ?? "";
                 Опис = base.FieldValue["col_a3"].ToString() ?? "";
@@ -9693,11 +9693,11 @@ namespace StorageAndTrade_1_0.Довідники
             base.Init(uid, fields);
         }
         
-        public ОбластьЗберігання_Objest? GetDirectoryObject()
+        public async ValueTask<ОбластьЗберігання_Objest?> GetDirectoryObject()
         {
             if (this.IsEmpty()) return null;
             ОбластьЗберігання_Objest ОбластьЗберіганняObjestItem = new ОбластьЗберігання_Objest();
-            return ОбластьЗберіганняObjestItem.Read(base.UnigueID) ? ОбластьЗберіганняObjestItem : null;
+            return await ОбластьЗберіганняObjestItem.Read(base.UnigueID) ? ОбластьЗберіганняObjestItem : null;
         }
 
         public ОбластьЗберігання_Pointer Copy()
@@ -9716,7 +9716,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ОбластьЗберігання_Objest? obj = GetDirectoryObject();
+            ОбластьЗберігання_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
                 
@@ -9810,9 +9810,9 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
 
-        public bool Read(UnigueID uid)
+        public async ValueTask<bool> Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 Висота = base.FieldValue["col_a1"].ToString() ?? "";
                 Назва = base.FieldValue["col_a2"].ToString() ?? "";
@@ -9913,11 +9913,11 @@ namespace StorageAndTrade_1_0.Довідники
             base.Init(uid, fields);
         }
         
-        public ТипорозміриКомірок_Objest? GetDirectoryObject()
+        public async ValueTask<ТипорозміриКомірок_Objest?> GetDirectoryObject()
         {
             if (this.IsEmpty()) return null;
             ТипорозміриКомірок_Objest ТипорозміриКомірокObjestItem = new ТипорозміриКомірок_Objest();
-            return ТипорозміриКомірокObjestItem.Read(base.UnigueID) ? ТипорозміриКомірокObjestItem : null;
+            return await ТипорозміриКомірокObjestItem.Read(base.UnigueID) ? ТипорозміриКомірокObjestItem : null;
         }
 
         public ТипорозміриКомірок_Pointer Copy()
@@ -9936,7 +9936,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ТипорозміриКомірок_Objest? obj = GetDirectoryObject();
+            ТипорозміриКомірок_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
                 ТипорозміриКомірок_Triggers.SetDeletionLabel(obj, label);
@@ -10027,9 +10027,9 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
 
-        public bool Read(UnigueID uid)
+        public async ValueTask<bool> Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 Назва = base.FieldValue["col_j1"].ToString() ?? "";
                 Код = base.FieldValue["col_j2"].ToString() ?? "";
@@ -10122,11 +10122,11 @@ namespace StorageAndTrade_1_0.Довідники
             base.Init(uid, fields);
         }
         
-        public СкладськіКомірки_Папки_Objest? GetDirectoryObject()
+        public async ValueTask<СкладськіКомірки_Папки_Objest?> GetDirectoryObject()
         {
             if (this.IsEmpty()) return null;
             СкладськіКомірки_Папки_Objest СкладськіКомірки_ПапкиObjestItem = new СкладськіКомірки_Папки_Objest();
-            return СкладськіКомірки_ПапкиObjestItem.Read(base.UnigueID) ? СкладськіКомірки_ПапкиObjestItem : null;
+            return await СкладськіКомірки_ПапкиObjestItem.Read(base.UnigueID) ? СкладськіКомірки_ПапкиObjestItem : null;
         }
 
         public СкладськіКомірки_Папки_Pointer Copy()
@@ -10145,7 +10145,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            СкладськіКомірки_Папки_Objest? obj = GetDirectoryObject();
+            СкладськіКомірки_Папки_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
                 СкладськіКомірки_Папки_Triggers.SetDeletionLabel(obj, label);
@@ -10238,9 +10238,9 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
 
-        public bool Read(UnigueID uid)
+        public async ValueTask<bool> Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 Код = base.FieldValue["col_a1"].ToString() ?? "";
                 Назва = base.FieldValue["col_a2"].ToString() ?? "";
@@ -10337,11 +10337,11 @@ namespace StorageAndTrade_1_0.Довідники
             base.Init(uid, fields);
         }
         
-        public Блокнот_Objest? GetDirectoryObject()
+        public async ValueTask<Блокнот_Objest?> GetDirectoryObject()
         {
             if (this.IsEmpty()) return null;
             Блокнот_Objest БлокнотObjestItem = new Блокнот_Objest();
-            return БлокнотObjestItem.Read(base.UnigueID) ? БлокнотObjestItem : null;
+            return await БлокнотObjestItem.Read(base.UnigueID) ? БлокнотObjestItem : null;
         }
 
         public Блокнот_Pointer Copy()
@@ -10360,7 +10360,7 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            Блокнот_Objest? obj = GetDirectoryObject();
+            Блокнот_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
                 Блокнот_Triggers.SetDeletionLabel(obj, label);
@@ -11850,9 +11850,9 @@ namespace StorageAndTrade_1_0.Документи
 
     public static class ЗамовленняПостачальнику_Export
     {
-        public static void ToXmlFile(ЗамовленняПостачальнику_Pointer ЗамовленняПостачальнику, string pathToSave)
+        public static async ValueTask ToXmlFile(ЗамовленняПостачальнику_Pointer ЗамовленняПостачальнику, string pathToSave)
         {
-            ЗамовленняПостачальнику_Objest? obj = ЗамовленняПостачальнику.GetDocumentObject(true);
+            ЗамовленняПостачальнику_Objest? obj = await ЗамовленняПостачальнику.GetDocumentObject(true);
             if (obj == null) return;
 
             XmlWriter xmlWriter = XmlWriter.Create(pathToSave, new XmlWriterSettings() { Indent = true, Encoding = System.Text.Encoding.UTF8 });
@@ -12206,9 +12206,9 @@ namespace StorageAndTrade_1_0.Документи
             
         }
 
-        public bool Read(UnigueID uid)
+        public async ValueTask<bool> Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 Назва = base.FieldValue["docname"].ToString() ?? "";
                 НомерДок = base.FieldValue["docnomer"].ToString() ?? "";
@@ -12427,19 +12427,19 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            ЗамовленняПостачальнику_Objest? obj = GetDocumentObject();
+            ЗамовленняПостачальнику_Objest? obj = await GetDocumentObject();
             return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
         }
 
         public async ValueTask ClearSpendTheDocument()
         {
-            ЗамовленняПостачальнику_Objest? obj = GetDocumentObject();
+            ЗамовленняПостачальнику_Objest? obj = await GetDocumentObject();
             if (obj != null) await obj.ClearSpendTheDocument();
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ЗамовленняПостачальнику_Objest? obj = GetDocumentObject();
+            ЗамовленняПостачальнику_Objest? obj = await GetDocumentObject();
                 if (obj == null) return;
                 ЗамовленняПостачальнику_Triggers.SetDeletionLabel(obj, label);
                 
@@ -12467,11 +12467,11 @@ namespace StorageAndTrade_1_0.Документи
             return new UuidAndText(UnigueID.UGuid, ЗамовленняПостачальнику_Const.POINTER);
         }
 
-        public ЗамовленняПостачальнику_Objest? GetDocumentObject(bool readAllTablePart = false)
+        public async ValueTask<ЗамовленняПостачальнику_Objest?> GetDocumentObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
             ЗамовленняПостачальнику_Objest ЗамовленняПостачальникуObjestItem = new ЗамовленняПостачальнику_Objest();
-            if (!ЗамовленняПостачальникуObjestItem.Read(base.UnigueID)) return null;
+            if (!await ЗамовленняПостачальникуObjestItem.Read(base.UnigueID)) return null;
             
             if (readAllTablePart)
             {   
@@ -12673,9 +12673,9 @@ namespace StorageAndTrade_1_0.Документи
 
     public static class ПоступленняТоварівТаПослуг_Export
     {
-        public static void ToXmlFile(ПоступленняТоварівТаПослуг_Pointer ПоступленняТоварівТаПослуг, string pathToSave)
+        public static async ValueTask ToXmlFile(ПоступленняТоварівТаПослуг_Pointer ПоступленняТоварівТаПослуг, string pathToSave)
         {
-            ПоступленняТоварівТаПослуг_Objest? obj = ПоступленняТоварівТаПослуг.GetDocumentObject(true);
+            ПоступленняТоварівТаПослуг_Objest? obj = await ПоступленняТоварівТаПослуг.GetDocumentObject(true);
             if (obj == null) return;
 
             XmlWriter xmlWriter = XmlWriter.Create(pathToSave, new XmlWriterSettings() { Indent = true, Encoding = System.Text.Encoding.UTF8 });
@@ -13093,9 +13093,9 @@ namespace StorageAndTrade_1_0.Документи
             
         }
 
-        public bool Read(UnigueID uid)
+        public async ValueTask<bool> Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 Назва = base.FieldValue["docname"].ToString() ?? "";
                 НомерДок = base.FieldValue["docnomer"].ToString() ?? "";
@@ -13338,19 +13338,19 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            ПоступленняТоварівТаПослуг_Objest? obj = GetDocumentObject();
+            ПоступленняТоварівТаПослуг_Objest? obj = await GetDocumentObject();
             return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
         }
 
         public async ValueTask ClearSpendTheDocument()
         {
-            ПоступленняТоварівТаПослуг_Objest? obj = GetDocumentObject();
+            ПоступленняТоварівТаПослуг_Objest? obj = await GetDocumentObject();
             if (obj != null) await obj.ClearSpendTheDocument();
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ПоступленняТоварівТаПослуг_Objest? obj = GetDocumentObject();
+            ПоступленняТоварівТаПослуг_Objest? obj = await GetDocumentObject();
                 if (obj == null) return;
                 ПоступленняТоварівТаПослуг_Triggers.SetDeletionLabel(obj, label);
                 
@@ -13378,11 +13378,11 @@ namespace StorageAndTrade_1_0.Документи
             return new UuidAndText(UnigueID.UGuid, ПоступленняТоварівТаПослуг_Const.POINTER);
         }
 
-        public ПоступленняТоварівТаПослуг_Objest? GetDocumentObject(bool readAllTablePart = false)
+        public async ValueTask<ПоступленняТоварівТаПослуг_Objest?> GetDocumentObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
             ПоступленняТоварівТаПослуг_Objest ПоступленняТоварівТаПослугObjestItem = new ПоступленняТоварівТаПослуг_Objest();
-            if (!ПоступленняТоварівТаПослугObjestItem.Read(base.UnigueID)) return null;
+            if (!await ПоступленняТоварівТаПослугObjestItem.Read(base.UnigueID)) return null;
             
             if (readAllTablePart)
             {   
@@ -13589,9 +13589,9 @@ namespace StorageAndTrade_1_0.Документи
 
     public static class ЗамовленняКлієнта_Export
     {
-        public static void ToXmlFile(ЗамовленняКлієнта_Pointer ЗамовленняКлієнта, string pathToSave)
+        public static async ValueTask ToXmlFile(ЗамовленняКлієнта_Pointer ЗамовленняКлієнта, string pathToSave)
         {
-            ЗамовленняКлієнта_Objest? obj = ЗамовленняКлієнта.GetDocumentObject(true);
+            ЗамовленняКлієнта_Objest? obj = await ЗамовленняКлієнта.GetDocumentObject(true);
             if (obj == null) return;
 
             XmlWriter xmlWriter = XmlWriter.Create(pathToSave, new XmlWriterSettings() { Indent = true, Encoding = System.Text.Encoding.UTF8 });
@@ -13962,9 +13962,9 @@ namespace StorageAndTrade_1_0.Документи
             
         }
 
-        public bool Read(UnigueID uid)
+        public async ValueTask<bool> Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 Назва = base.FieldValue["docname"].ToString() ?? "";
                 НомерДок = base.FieldValue["docnomer"].ToString() ?? "";
@@ -14195,19 +14195,19 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            ЗамовленняКлієнта_Objest? obj = GetDocumentObject();
+            ЗамовленняКлієнта_Objest? obj = await GetDocumentObject();
             return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
         }
 
         public async ValueTask ClearSpendTheDocument()
         {
-            ЗамовленняКлієнта_Objest? obj = GetDocumentObject();
+            ЗамовленняКлієнта_Objest? obj = await GetDocumentObject();
             if (obj != null) await obj.ClearSpendTheDocument();
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ЗамовленняКлієнта_Objest? obj = GetDocumentObject();
+            ЗамовленняКлієнта_Objest? obj = await GetDocumentObject();
                 if (obj == null) return;
                 ЗамовленняКлієнта_Triggers.SetDeletionLabel(obj, label);
                 
@@ -14235,11 +14235,11 @@ namespace StorageAndTrade_1_0.Документи
             return new UuidAndText(UnigueID.UGuid, ЗамовленняКлієнта_Const.POINTER);
         }
 
-        public ЗамовленняКлієнта_Objest? GetDocumentObject(bool readAllTablePart = false)
+        public async ValueTask<ЗамовленняКлієнта_Objest?> GetDocumentObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
             ЗамовленняКлієнта_Objest ЗамовленняКлієнтаObjestItem = new ЗамовленняКлієнта_Objest();
-            if (!ЗамовленняКлієнтаObjestItem.Read(base.UnigueID)) return null;
+            if (!await ЗамовленняКлієнтаObjestItem.Read(base.UnigueID)) return null;
             
             if (readAllTablePart)
             {   
@@ -14436,9 +14436,9 @@ namespace StorageAndTrade_1_0.Документи
 
     public static class РеалізаціяТоварівТаПослуг_Export
     {
-        public static void ToXmlFile(РеалізаціяТоварівТаПослуг_Pointer РеалізаціяТоварівТаПослуг, string pathToSave)
+        public static async ValueTask ToXmlFile(РеалізаціяТоварівТаПослуг_Pointer РеалізаціяТоварівТаПослуг, string pathToSave)
         {
-            РеалізаціяТоварівТаПослуг_Objest? obj = РеалізаціяТоварівТаПослуг.GetDocumentObject(true);
+            РеалізаціяТоварівТаПослуг_Objest? obj = await РеалізаціяТоварівТаПослуг.GetDocumentObject(true);
             if (obj == null) return;
 
             XmlWriter xmlWriter = XmlWriter.Create(pathToSave, new XmlWriterSettings() { Indent = true, Encoding = System.Text.Encoding.UTF8 });
@@ -14857,9 +14857,9 @@ namespace StorageAndTrade_1_0.Документи
             
         }
 
-        public bool Read(UnigueID uid)
+        public async ValueTask<bool> Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 Назва = base.FieldValue["docname"].ToString() ?? "";
                 НомерДок = base.FieldValue["docnomer"].ToString() ?? "";
@@ -15098,19 +15098,19 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            РеалізаціяТоварівТаПослуг_Objest? obj = GetDocumentObject();
+            РеалізаціяТоварівТаПослуг_Objest? obj = await GetDocumentObject();
             return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
         }
 
         public async ValueTask ClearSpendTheDocument()
         {
-            РеалізаціяТоварівТаПослуг_Objest? obj = GetDocumentObject();
+            РеалізаціяТоварівТаПослуг_Objest? obj = await GetDocumentObject();
             if (obj != null) await obj.ClearSpendTheDocument();
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            РеалізаціяТоварівТаПослуг_Objest? obj = GetDocumentObject();
+            РеалізаціяТоварівТаПослуг_Objest? obj = await GetDocumentObject();
                 if (obj == null) return;
                 РеалізаціяТоварівТаПослуг_Triggers.SetDeletionLabel(obj, label);
                 
@@ -15138,11 +15138,11 @@ namespace StorageAndTrade_1_0.Документи
             return new UuidAndText(UnigueID.UGuid, РеалізаціяТоварівТаПослуг_Const.POINTER);
         }
 
-        public РеалізаціяТоварівТаПослуг_Objest? GetDocumentObject(bool readAllTablePart = false)
+        public async ValueTask<РеалізаціяТоварівТаПослуг_Objest?> GetDocumentObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
             РеалізаціяТоварівТаПослуг_Objest РеалізаціяТоварівТаПослугObjestItem = new РеалізаціяТоварівТаПослуг_Objest();
-            if (!РеалізаціяТоварівТаПослугObjestItem.Read(base.UnigueID)) return null;
+            if (!await РеалізаціяТоварівТаПослугObjestItem.Read(base.UnigueID)) return null;
             
             if (readAllTablePart)
             {   
@@ -15332,9 +15332,9 @@ namespace StorageAndTrade_1_0.Документи
 
     public static class ВстановленняЦінНоменклатури_Export
     {
-        public static void ToXmlFile(ВстановленняЦінНоменклатури_Pointer ВстановленняЦінНоменклатури, string pathToSave)
+        public static async ValueTask ToXmlFile(ВстановленняЦінНоменклатури_Pointer ВстановленняЦінНоменклатури, string pathToSave)
         {
-            ВстановленняЦінНоменклатури_Objest? obj = ВстановленняЦінНоменклатури.GetDocumentObject(true);
+            ВстановленняЦінНоменклатури_Objest? obj = await ВстановленняЦінНоменклатури.GetDocumentObject(true);
             if (obj == null) return;
 
             XmlWriter xmlWriter = XmlWriter.Create(pathToSave, new XmlWriterSettings() { Indent = true, Encoding = System.Text.Encoding.UTF8 });
@@ -15504,9 +15504,9 @@ namespace StorageAndTrade_1_0.Документи
             
         }
 
-        public bool Read(UnigueID uid)
+        public async ValueTask<bool> Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 Назва = base.FieldValue["docname"].ToString() ?? "";
                 НомерДок = base.FieldValue["docnomer"].ToString() ?? "";
@@ -15653,19 +15653,19 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            ВстановленняЦінНоменклатури_Objest? obj = GetDocumentObject();
+            ВстановленняЦінНоменклатури_Objest? obj = await GetDocumentObject();
             return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
         }
 
         public async ValueTask ClearSpendTheDocument()
         {
-            ВстановленняЦінНоменклатури_Objest? obj = GetDocumentObject();
+            ВстановленняЦінНоменклатури_Objest? obj = await GetDocumentObject();
             if (obj != null) await obj.ClearSpendTheDocument();
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ВстановленняЦінНоменклатури_Objest? obj = GetDocumentObject();
+            ВстановленняЦінНоменклатури_Objest? obj = await GetDocumentObject();
                 if (obj == null) return;
                 ВстановленняЦінНоменклатури_Triggers.SetDeletionLabel(obj, label);
                 
@@ -15693,11 +15693,11 @@ namespace StorageAndTrade_1_0.Документи
             return new UuidAndText(UnigueID.UGuid, ВстановленняЦінНоменклатури_Const.POINTER);
         }
 
-        public ВстановленняЦінНоменклатури_Objest? GetDocumentObject(bool readAllTablePart = false)
+        public async ValueTask<ВстановленняЦінНоменклатури_Objest?> GetDocumentObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
             ВстановленняЦінНоменклатури_Objest ВстановленняЦінНоменклатуриObjestItem = new ВстановленняЦінНоменклатури_Objest();
-            if (!ВстановленняЦінНоменклатуриObjestItem.Read(base.UnigueID)) return null;
+            if (!await ВстановленняЦінНоменклатуриObjestItem.Read(base.UnigueID)) return null;
             
             if (readAllTablePart)
             {   
@@ -15860,9 +15860,9 @@ namespace StorageAndTrade_1_0.Документи
 
     public static class ПрихіднийКасовийОрдер_Export
     {
-        public static void ToXmlFile(ПрихіднийКасовийОрдер_Pointer ПрихіднийКасовийОрдер, string pathToSave)
+        public static async ValueTask ToXmlFile(ПрихіднийКасовийОрдер_Pointer ПрихіднийКасовийОрдер, string pathToSave)
         {
-            ПрихіднийКасовийОрдер_Objest? obj = ПрихіднийКасовийОрдер.GetDocumentObject(true);
+            ПрихіднийКасовийОрдер_Objest? obj = await ПрихіднийКасовийОрдер.GetDocumentObject(true);
             if (obj == null) return;
 
             XmlWriter xmlWriter = XmlWriter.Create(pathToSave, new XmlWriterSettings() { Indent = true, Encoding = System.Text.Encoding.UTF8 });
@@ -16105,9 +16105,9 @@ namespace StorageAndTrade_1_0.Документи
             
         }
 
-        public bool Read(UnigueID uid)
+        public async ValueTask<bool> Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 Назва = base.FieldValue["docname"].ToString() ?? "";
                 НомерДок = base.FieldValue["docnomer"].ToString() ?? "";
@@ -16290,19 +16290,19 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            ПрихіднийКасовийОрдер_Objest? obj = GetDocumentObject();
+            ПрихіднийКасовийОрдер_Objest? obj = await GetDocumentObject();
             return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
         }
 
         public async ValueTask ClearSpendTheDocument()
         {
-            ПрихіднийКасовийОрдер_Objest? obj = GetDocumentObject();
+            ПрихіднийКасовийОрдер_Objest? obj = await GetDocumentObject();
             if (obj != null) await obj.ClearSpendTheDocument();
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ПрихіднийКасовийОрдер_Objest? obj = GetDocumentObject();
+            ПрихіднийКасовийОрдер_Objest? obj = await GetDocumentObject();
                 if (obj == null) return;
                 ПрихіднийКасовийОрдер_Triggers.SetDeletionLabel(obj, label);
                 
@@ -16330,11 +16330,11 @@ namespace StorageAndTrade_1_0.Документи
             return new UuidAndText(UnigueID.UGuid, ПрихіднийКасовийОрдер_Const.POINTER);
         }
 
-        public ПрихіднийКасовийОрдер_Objest? GetDocumentObject(bool readAllTablePart = false)
+        public async ValueTask<ПрихіднийКасовийОрдер_Objest?> GetDocumentObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
             ПрихіднийКасовийОрдер_Objest ПрихіднийКасовийОрдерObjestItem = new ПрихіднийКасовийОрдер_Objest();
-            if (!ПрихіднийКасовийОрдерObjestItem.Read(base.UnigueID)) return null;
+            if (!await ПрихіднийКасовийОрдерObjestItem.Read(base.UnigueID)) return null;
             
             if (readAllTablePart)
             {   
@@ -16499,9 +16499,9 @@ namespace StorageAndTrade_1_0.Документи
 
     public static class РозхіднийКасовийОрдер_Export
     {
-        public static void ToXmlFile(РозхіднийКасовийОрдер_Pointer РозхіднийКасовийОрдер, string pathToSave)
+        public static async ValueTask ToXmlFile(РозхіднийКасовийОрдер_Pointer РозхіднийКасовийОрдер, string pathToSave)
         {
-            РозхіднийКасовийОрдер_Objest? obj = РозхіднийКасовийОрдер.GetDocumentObject(true);
+            РозхіднийКасовийОрдер_Objest? obj = await РозхіднийКасовийОрдер.GetDocumentObject(true);
             if (obj == null) return;
 
             XmlWriter xmlWriter = XmlWriter.Create(pathToSave, new XmlWriterSettings() { Indent = true, Encoding = System.Text.Encoding.UTF8 });
@@ -16766,9 +16766,9 @@ namespace StorageAndTrade_1_0.Документи
             
         }
 
-        public bool Read(UnigueID uid)
+        public async ValueTask<bool> Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 Назва = base.FieldValue["docname"].ToString() ?? "";
                 НомерДок = base.FieldValue["docnomer"].ToString() ?? "";
@@ -16959,19 +16959,19 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            РозхіднийКасовийОрдер_Objest? obj = GetDocumentObject();
+            РозхіднийКасовийОрдер_Objest? obj = await GetDocumentObject();
             return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
         }
 
         public async ValueTask ClearSpendTheDocument()
         {
-            РозхіднийКасовийОрдер_Objest? obj = GetDocumentObject();
+            РозхіднийКасовийОрдер_Objest? obj = await GetDocumentObject();
             if (obj != null) await obj.ClearSpendTheDocument();
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            РозхіднийКасовийОрдер_Objest? obj = GetDocumentObject();
+            РозхіднийКасовийОрдер_Objest? obj = await GetDocumentObject();
                 if (obj == null) return;
                 РозхіднийКасовийОрдер_Triggers.SetDeletionLabel(obj, label);
                 
@@ -16999,11 +16999,11 @@ namespace StorageAndTrade_1_0.Документи
             return new UuidAndText(UnigueID.UGuid, РозхіднийКасовийОрдер_Const.POINTER);
         }
 
-        public РозхіднийКасовийОрдер_Objest? GetDocumentObject(bool readAllTablePart = false)
+        public async ValueTask<РозхіднийКасовийОрдер_Objest?> GetDocumentObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
             РозхіднийКасовийОрдер_Objest РозхіднийКасовийОрдерObjestItem = new РозхіднийКасовийОрдер_Objest();
-            if (!РозхіднийКасовийОрдерObjestItem.Read(base.UnigueID)) return null;
+            if (!await РозхіднийКасовийОрдерObjestItem.Read(base.UnigueID)) return null;
             
             if (readAllTablePart)
             {   
@@ -17173,9 +17173,9 @@ namespace StorageAndTrade_1_0.Документи
 
     public static class ПереміщенняТоварів_Export
     {
-        public static void ToXmlFile(ПереміщенняТоварів_Pointer ПереміщенняТоварів, string pathToSave)
+        public static async ValueTask ToXmlFile(ПереміщенняТоварів_Pointer ПереміщенняТоварів, string pathToSave)
         {
-            ПереміщенняТоварів_Objest? obj = ПереміщенняТоварів.GetDocumentObject(true);
+            ПереміщенняТоварів_Objest? obj = await ПереміщенняТоварів.GetDocumentObject(true);
             if (obj == null) return;
 
             XmlWriter xmlWriter = XmlWriter.Create(pathToSave, new XmlWriterSettings() { Indent = true, Encoding = System.Text.Encoding.UTF8 });
@@ -17459,9 +17459,9 @@ namespace StorageAndTrade_1_0.Документи
             
         }
 
-        public bool Read(UnigueID uid)
+        public async ValueTask<bool> Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 Назва = base.FieldValue["docname"].ToString() ?? "";
                 НомерДок = base.FieldValue["docnomer"].ToString() ?? "";
@@ -17656,19 +17656,19 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            ПереміщенняТоварів_Objest? obj = GetDocumentObject();
+            ПереміщенняТоварів_Objest? obj = await GetDocumentObject();
             return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
         }
 
         public async ValueTask ClearSpendTheDocument()
         {
-            ПереміщенняТоварів_Objest? obj = GetDocumentObject();
+            ПереміщенняТоварів_Objest? obj = await GetDocumentObject();
             if (obj != null) await obj.ClearSpendTheDocument();
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ПереміщенняТоварів_Objest? obj = GetDocumentObject();
+            ПереміщенняТоварів_Objest? obj = await GetDocumentObject();
                 if (obj == null) return;
                 ПереміщенняТоварів_Triggers.SetDeletionLabel(obj, label);
                 
@@ -17696,11 +17696,11 @@ namespace StorageAndTrade_1_0.Документи
             return new UuidAndText(UnigueID.UGuid, ПереміщенняТоварів_Const.POINTER);
         }
 
-        public ПереміщенняТоварів_Objest? GetDocumentObject(bool readAllTablePart = false)
+        public async ValueTask<ПереміщенняТоварів_Objest?> GetDocumentObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
             ПереміщенняТоварів_Objest ПереміщенняТоварівObjestItem = new ПереміщенняТоварів_Objest();
-            if (!ПереміщенняТоварівObjestItem.Read(base.UnigueID)) return null;
+            if (!await ПереміщенняТоварівObjestItem.Read(base.UnigueID)) return null;
             
             if (readAllTablePart)
             {   
@@ -17876,9 +17876,9 @@ namespace StorageAndTrade_1_0.Документи
 
     public static class ПоверненняТоварівПостачальнику_Export
     {
-        public static void ToXmlFile(ПоверненняТоварівПостачальнику_Pointer ПоверненняТоварівПостачальнику, string pathToSave)
+        public static async ValueTask ToXmlFile(ПоверненняТоварівПостачальнику_Pointer ПоверненняТоварівПостачальнику, string pathToSave)
         {
-            ПоверненняТоварівПостачальнику_Objest? obj = ПоверненняТоварівПостачальнику.GetDocumentObject(true);
+            ПоверненняТоварівПостачальнику_Objest? obj = await ПоверненняТоварівПостачальнику.GetDocumentObject(true);
             if (obj == null) return;
 
             XmlWriter xmlWriter = XmlWriter.Create(pathToSave, new XmlWriterSettings() { Indent = true, Encoding = System.Text.Encoding.UTF8 });
@@ -18190,9 +18190,9 @@ namespace StorageAndTrade_1_0.Документи
             
         }
 
-        public bool Read(UnigueID uid)
+        public async ValueTask<bool> Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 Назва = base.FieldValue["docname"].ToString() ?? "";
                 НомерДок = base.FieldValue["docnomer"].ToString() ?? "";
@@ -18395,19 +18395,19 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            ПоверненняТоварівПостачальнику_Objest? obj = GetDocumentObject();
+            ПоверненняТоварівПостачальнику_Objest? obj = await GetDocumentObject();
             return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
         }
 
         public async ValueTask ClearSpendTheDocument()
         {
-            ПоверненняТоварівПостачальнику_Objest? obj = GetDocumentObject();
+            ПоверненняТоварівПостачальнику_Objest? obj = await GetDocumentObject();
             if (obj != null) await obj.ClearSpendTheDocument();
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ПоверненняТоварівПостачальнику_Objest? obj = GetDocumentObject();
+            ПоверненняТоварівПостачальнику_Objest? obj = await GetDocumentObject();
                 if (obj == null) return;
                 ПоверненняТоварівПостачальнику_Triggers.SetDeletionLabel(obj, label);
                 
@@ -18435,11 +18435,11 @@ namespace StorageAndTrade_1_0.Документи
             return new UuidAndText(UnigueID.UGuid, ПоверненняТоварівПостачальнику_Const.POINTER);
         }
 
-        public ПоверненняТоварівПостачальнику_Objest? GetDocumentObject(bool readAllTablePart = false)
+        public async ValueTask<ПоверненняТоварівПостачальнику_Objest?> GetDocumentObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
             ПоверненняТоварівПостачальнику_Objest ПоверненняТоварівПостачальникуObjestItem = new ПоверненняТоварівПостачальнику_Objest();
-            if (!ПоверненняТоварівПостачальникуObjestItem.Read(base.UnigueID)) return null;
+            if (!await ПоверненняТоварівПостачальникуObjestItem.Read(base.UnigueID)) return null;
             
             if (readAllTablePart)
             {   
@@ -18619,9 +18619,9 @@ namespace StorageAndTrade_1_0.Документи
 
     public static class ПоверненняТоварівВідКлієнта_Export
     {
-        public static void ToXmlFile(ПоверненняТоварівВідКлієнта_Pointer ПоверненняТоварівВідКлієнта, string pathToSave)
+        public static async ValueTask ToXmlFile(ПоверненняТоварівВідКлієнта_Pointer ПоверненняТоварівВідКлієнта, string pathToSave)
         {
-            ПоверненняТоварівВідКлієнта_Objest? obj = ПоверненняТоварівВідКлієнта.GetDocumentObject(true);
+            ПоверненняТоварівВідКлієнта_Objest? obj = await ПоверненняТоварівВідКлієнта.GetDocumentObject(true);
             if (obj == null) return;
 
             XmlWriter xmlWriter = XmlWriter.Create(pathToSave, new XmlWriterSettings() { Indent = true, Encoding = System.Text.Encoding.UTF8 });
@@ -18907,9 +18907,9 @@ namespace StorageAndTrade_1_0.Документи
             
         }
 
-        public bool Read(UnigueID uid)
+        public async ValueTask<bool> Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 Назва = base.FieldValue["docname"].ToString() ?? "";
                 НомерДок = base.FieldValue["docnomer"].ToString() ?? "";
@@ -19096,19 +19096,19 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            ПоверненняТоварівВідКлієнта_Objest? obj = GetDocumentObject();
+            ПоверненняТоварівВідКлієнта_Objest? obj = await GetDocumentObject();
             return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
         }
 
         public async ValueTask ClearSpendTheDocument()
         {
-            ПоверненняТоварівВідКлієнта_Objest? obj = GetDocumentObject();
+            ПоверненняТоварівВідКлієнта_Objest? obj = await GetDocumentObject();
             if (obj != null) await obj.ClearSpendTheDocument();
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ПоверненняТоварівВідКлієнта_Objest? obj = GetDocumentObject();
+            ПоверненняТоварівВідКлієнта_Objest? obj = await GetDocumentObject();
                 if (obj == null) return;
                 ПоверненняТоварівВідКлієнта_Triggers.SetDeletionLabel(obj, label);
                 
@@ -19136,11 +19136,11 @@ namespace StorageAndTrade_1_0.Документи
             return new UuidAndText(UnigueID.UGuid, ПоверненняТоварівВідКлієнта_Const.POINTER);
         }
 
-        public ПоверненняТоварівВідКлієнта_Objest? GetDocumentObject(bool readAllTablePart = false)
+        public async ValueTask<ПоверненняТоварівВідКлієнта_Objest?> GetDocumentObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
             ПоверненняТоварівВідКлієнта_Objest ПоверненняТоварівВідКлієнтаObjestItem = new ПоверненняТоварівВідКлієнта_Objest();
-            if (!ПоверненняТоварівВідКлієнтаObjestItem.Read(base.UnigueID)) return null;
+            if (!await ПоверненняТоварівВідКлієнтаObjestItem.Read(base.UnigueID)) return null;
             
             if (readAllTablePart)
             {   
@@ -19322,9 +19322,9 @@ namespace StorageAndTrade_1_0.Документи
 
     public static class АктВиконанихРобіт_Export
     {
-        public static void ToXmlFile(АктВиконанихРобіт_Pointer АктВиконанихРобіт, string pathToSave)
+        public static async ValueTask ToXmlFile(АктВиконанихРобіт_Pointer АктВиконанихРобіт, string pathToSave)
         {
-            АктВиконанихРобіт_Objest? obj = АктВиконанихРобіт.GetDocumentObject(true);
+            АктВиконанихРобіт_Objest? obj = await АктВиконанихРобіт.GetDocumentObject(true);
             if (obj == null) return;
 
             XmlWriter xmlWriter = XmlWriter.Create(pathToSave, new XmlWriterSettings() { Indent = true, Encoding = System.Text.Encoding.UTF8 });
@@ -19560,9 +19560,9 @@ namespace StorageAndTrade_1_0.Документи
             
         }
 
-        public bool Read(UnigueID uid)
+        public async ValueTask<bool> Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 Назва = base.FieldValue["docname"].ToString() ?? "";
                 НомерДок = base.FieldValue["docnomer"].ToString() ?? "";
@@ -19741,19 +19741,19 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            АктВиконанихРобіт_Objest? obj = GetDocumentObject();
+            АктВиконанихРобіт_Objest? obj = await GetDocumentObject();
             return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
         }
 
         public async ValueTask ClearSpendTheDocument()
         {
-            АктВиконанихРобіт_Objest? obj = GetDocumentObject();
+            АктВиконанихРобіт_Objest? obj = await GetDocumentObject();
             if (obj != null) await obj.ClearSpendTheDocument();
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            АктВиконанихРобіт_Objest? obj = GetDocumentObject();
+            АктВиконанихРобіт_Objest? obj = await GetDocumentObject();
                 if (obj == null) return;
                 АктВиконанихРобіт_Triggers.SetDeletionLabel(obj, label);
                 
@@ -19781,11 +19781,11 @@ namespace StorageAndTrade_1_0.Документи
             return new UuidAndText(UnigueID.UGuid, АктВиконанихРобіт_Const.POINTER);
         }
 
-        public АктВиконанихРобіт_Objest? GetDocumentObject(bool readAllTablePart = false)
+        public async ValueTask<АктВиконанихРобіт_Objest?> GetDocumentObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
             АктВиконанихРобіт_Objest АктВиконанихРобітObjestItem = new АктВиконанихРобіт_Objest();
-            if (!АктВиконанихРобітObjestItem.Read(base.UnigueID)) return null;
+            if (!await АктВиконанихРобітObjestItem.Read(base.UnigueID)) return null;
             
             if (readAllTablePart)
             {   
@@ -19943,9 +19943,9 @@ namespace StorageAndTrade_1_0.Документи
 
     public static class ВведенняЗалишків_Export
     {
-        public static void ToXmlFile(ВведенняЗалишків_Pointer ВведенняЗалишків, string pathToSave)
+        public static async ValueTask ToXmlFile(ВведенняЗалишків_Pointer ВведенняЗалишків, string pathToSave)
         {
-            ВведенняЗалишків_Objest? obj = ВведенняЗалишків.GetDocumentObject(true);
+            ВведенняЗалишків_Objest? obj = await ВведенняЗалишків.GetDocumentObject(true);
             if (obj == null) return;
 
             XmlWriter xmlWriter = XmlWriter.Create(pathToSave, new XmlWriterSettings() { Indent = true, Encoding = System.Text.Encoding.UTF8 });
@@ -20287,9 +20287,9 @@ namespace StorageAndTrade_1_0.Документи
             
         }
 
-        public bool Read(UnigueID uid)
+        public async ValueTask<bool> Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 Назва = base.FieldValue["docname"].ToString() ?? "";
                 НомерДок = base.FieldValue["docnomer"].ToString() ?? "";
@@ -20467,19 +20467,19 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            ВведенняЗалишків_Objest? obj = GetDocumentObject();
+            ВведенняЗалишків_Objest? obj = await GetDocumentObject();
             return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
         }
 
         public async ValueTask ClearSpendTheDocument()
         {
-            ВведенняЗалишків_Objest? obj = GetDocumentObject();
+            ВведенняЗалишків_Objest? obj = await GetDocumentObject();
             if (obj != null) await obj.ClearSpendTheDocument();
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ВведенняЗалишків_Objest? obj = GetDocumentObject();
+            ВведенняЗалишків_Objest? obj = await GetDocumentObject();
                 if (obj == null) return;
                 ВведенняЗалишків_Triggers.SetDeletionLabel(obj, label);
                 
@@ -20507,11 +20507,11 @@ namespace StorageAndTrade_1_0.Документи
             return new UuidAndText(UnigueID.UGuid, ВведенняЗалишків_Const.POINTER);
         }
 
-        public ВведенняЗалишків_Objest? GetDocumentObject(bool readAllTablePart = false)
+        public async ValueTask<ВведенняЗалишків_Objest?> GetDocumentObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
             ВведенняЗалишків_Objest ВведенняЗалишківObjestItem = new ВведенняЗалишків_Objest();
-            if (!ВведенняЗалишківObjestItem.Read(base.UnigueID)) return null;
+            if (!await ВведенняЗалишківObjestItem.Read(base.UnigueID)) return null;
             
             if (readAllTablePart)
             {   
@@ -20944,9 +20944,9 @@ namespace StorageAndTrade_1_0.Документи
 
     public static class НадлишкиТоварів_Export
     {
-        public static void ToXmlFile(НадлишкиТоварів_Pointer НадлишкиТоварів, string pathToSave)
+        public static async ValueTask ToXmlFile(НадлишкиТоварів_Pointer НадлишкиТоварів, string pathToSave)
         {
-            НадлишкиТоварів_Objest? obj = НадлишкиТоварів.GetDocumentObject(true);
+            НадлишкиТоварів_Objest? obj = await НадлишкиТоварів.GetDocumentObject(true);
             if (obj == null) return;
 
             XmlWriter xmlWriter = XmlWriter.Create(pathToSave, new XmlWriterSettings() { Indent = true, Encoding = System.Text.Encoding.UTF8 });
@@ -21114,9 +21114,9 @@ namespace StorageAndTrade_1_0.Документи
             
         }
 
-        public bool Read(UnigueID uid)
+        public async ValueTask<bool> Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 Організація = new Довідники.Організації_Pointer(base.FieldValue["col_f6"]);
                 Підрозділ = new Довідники.СтруктураПідприємства_Pointer(base.FieldValue["col_f7"]);
@@ -21263,13 +21263,13 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            НадлишкиТоварів_Objest? obj = GetDocumentObject();
+            НадлишкиТоварів_Objest? obj = await GetDocumentObject();
             return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
         }
 
         public async ValueTask ClearSpendTheDocument()
         {
-            НадлишкиТоварів_Objest? obj = GetDocumentObject();
+            НадлишкиТоварів_Objest? obj = await GetDocumentObject();
             if (obj != null) await obj.ClearSpendTheDocument();
         }
 
@@ -21294,11 +21294,11 @@ namespace StorageAndTrade_1_0.Документи
             return new UuidAndText(UnigueID.UGuid, НадлишкиТоварів_Const.POINTER);
         }
 
-        public НадлишкиТоварів_Objest? GetDocumentObject(bool readAllTablePart = false)
+        public async ValueTask<НадлишкиТоварів_Objest?> GetDocumentObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
             НадлишкиТоварів_Objest НадлишкиТоварівObjestItem = new НадлишкиТоварів_Objest();
-            if (!НадлишкиТоварівObjestItem.Read(base.UnigueID)) return null;
+            if (!await НадлишкиТоварівObjestItem.Read(base.UnigueID)) return null;
             
             if (readAllTablePart)
             {   
@@ -21449,9 +21449,9 @@ namespace StorageAndTrade_1_0.Документи
 
     public static class ПересортицяТоварів_Export
     {
-        public static void ToXmlFile(ПересортицяТоварів_Pointer ПересортицяТоварів, string pathToSave)
+        public static async ValueTask ToXmlFile(ПересортицяТоварів_Pointer ПересортицяТоварів, string pathToSave)
         {
-            ПересортицяТоварів_Objest? obj = ПересортицяТоварів.GetDocumentObject(true);
+            ПересортицяТоварів_Objest? obj = await ПересортицяТоварів.GetDocumentObject(true);
             if (obj == null) return;
 
             XmlWriter xmlWriter = XmlWriter.Create(pathToSave, new XmlWriterSettings() { Indent = true, Encoding = System.Text.Encoding.UTF8 });
@@ -21619,9 +21619,9 @@ namespace StorageAndTrade_1_0.Документи
             
         }
 
-        public bool Read(UnigueID uid)
+        public async ValueTask<bool> Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 Назва = base.FieldValue["docname"].ToString() ?? "";
                 НомерДок = base.FieldValue["docnomer"].ToString() ?? "";
@@ -21768,13 +21768,13 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            ПересортицяТоварів_Objest? obj = GetDocumentObject();
+            ПересортицяТоварів_Objest? obj = await GetDocumentObject();
             return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
         }
 
         public async ValueTask ClearSpendTheDocument()
         {
-            ПересортицяТоварів_Objest? obj = GetDocumentObject();
+            ПересортицяТоварів_Objest? obj = await GetDocumentObject();
             if (obj != null) await obj.ClearSpendTheDocument();
         }
 
@@ -21799,11 +21799,11 @@ namespace StorageAndTrade_1_0.Документи
             return new UuidAndText(UnigueID.UGuid, ПересортицяТоварів_Const.POINTER);
         }
 
-        public ПересортицяТоварів_Objest? GetDocumentObject(bool readAllTablePart = false)
+        public async ValueTask<ПересортицяТоварів_Objest?> GetDocumentObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
             ПересортицяТоварів_Objest ПересортицяТоварівObjestItem = new ПересортицяТоварів_Objest();
-            if (!ПересортицяТоварівObjestItem.Read(base.UnigueID)) return null;
+            if (!await ПересортицяТоварівObjestItem.Read(base.UnigueID)) return null;
             
             if (readAllTablePart)
             {   
@@ -21952,9 +21952,9 @@ namespace StorageAndTrade_1_0.Документи
 
     public static class ПерерахунокТоварів_Export
     {
-        public static void ToXmlFile(ПерерахунокТоварів_Pointer ПерерахунокТоварів, string pathToSave)
+        public static async ValueTask ToXmlFile(ПерерахунокТоварів_Pointer ПерерахунокТоварів, string pathToSave)
         {
-            ПерерахунокТоварів_Objest? obj = ПерерахунокТоварів.GetDocumentObject(true);
+            ПерерахунокТоварів_Objest? obj = await ПерерахунокТоварів.GetDocumentObject(true);
             if (obj == null) return;
 
             XmlWriter xmlWriter = XmlWriter.Create(pathToSave, new XmlWriterSettings() { Indent = true, Encoding = System.Text.Encoding.UTF8 });
@@ -22118,9 +22118,9 @@ namespace StorageAndTrade_1_0.Документи
             
         }
 
-        public bool Read(UnigueID uid)
+        public async ValueTask<bool> Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 Назва = base.FieldValue["docname"].ToString() ?? "";
                 НомерДок = base.FieldValue["docnomer"].ToString() ?? "";
@@ -22259,13 +22259,13 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            ПерерахунокТоварів_Objest? obj = GetDocumentObject();
+            ПерерахунокТоварів_Objest? obj = await GetDocumentObject();
             return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
         }
 
         public async ValueTask ClearSpendTheDocument()
         {
-            ПерерахунокТоварів_Objest? obj = GetDocumentObject();
+            ПерерахунокТоварів_Objest? obj = await GetDocumentObject();
             if (obj != null) await obj.ClearSpendTheDocument();
         }
 
@@ -22290,11 +22290,11 @@ namespace StorageAndTrade_1_0.Документи
             return new UuidAndText(UnigueID.UGuid, ПерерахунокТоварів_Const.POINTER);
         }
 
-        public ПерерахунокТоварів_Objest? GetDocumentObject(bool readAllTablePart = false)
+        public async ValueTask<ПерерахунокТоварів_Objest?> GetDocumentObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
             ПерерахунокТоварів_Objest ПерерахунокТоварівObjestItem = new ПерерахунокТоварів_Objest();
-            if (!ПерерахунокТоварівObjestItem.Read(base.UnigueID)) return null;
+            if (!await ПерерахунокТоварівObjestItem.Read(base.UnigueID)) return null;
             
             if (readAllTablePart)
             {   
@@ -22455,9 +22455,9 @@ namespace StorageAndTrade_1_0.Документи
 
     public static class ПсуванняТоварів_Export
     {
-        public static void ToXmlFile(ПсуванняТоварів_Pointer ПсуванняТоварів, string pathToSave)
+        public static async ValueTask ToXmlFile(ПсуванняТоварів_Pointer ПсуванняТоварів, string pathToSave)
         {
-            ПсуванняТоварів_Objest? obj = ПсуванняТоварів.GetDocumentObject(true);
+            ПсуванняТоварів_Objest? obj = await ПсуванняТоварів.GetDocumentObject(true);
             if (obj == null) return;
 
             XmlWriter xmlWriter = XmlWriter.Create(pathToSave, new XmlWriterSettings() { Indent = true, Encoding = System.Text.Encoding.UTF8 });
@@ -22674,9 +22674,9 @@ namespace StorageAndTrade_1_0.Документи
             
         }
 
-        public bool Read(UnigueID uid)
+        public async ValueTask<bool> Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 Назва = base.FieldValue["docname"].ToString() ?? "";
                 НомерДок = base.FieldValue["docnomer"].ToString() ?? "";
@@ -22835,19 +22835,19 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            ПсуванняТоварів_Objest? obj = GetDocumentObject();
+            ПсуванняТоварів_Objest? obj = await GetDocumentObject();
             return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
         }
 
         public async ValueTask ClearSpendTheDocument()
         {
-            ПсуванняТоварів_Objest? obj = GetDocumentObject();
+            ПсуванняТоварів_Objest? obj = await GetDocumentObject();
             if (obj != null) await obj.ClearSpendTheDocument();
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ПсуванняТоварів_Objest? obj = GetDocumentObject();
+            ПсуванняТоварів_Objest? obj = await GetDocumentObject();
                 if (obj == null) return;
                 ПсуванняТоварів_Triggers.SetDeletionLabel(obj, label);
                 
@@ -22875,11 +22875,11 @@ namespace StorageAndTrade_1_0.Документи
             return new UuidAndText(UnigueID.UGuid, ПсуванняТоварів_Const.POINTER);
         }
 
-        public ПсуванняТоварів_Objest? GetDocumentObject(bool readAllTablePart = false)
+        public async ValueTask<ПсуванняТоварів_Objest?> GetDocumentObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
             ПсуванняТоварів_Objest ПсуванняТоварівObjestItem = new ПсуванняТоварів_Objest();
-            if (!ПсуванняТоварівObjestItem.Read(base.UnigueID)) return null;
+            if (!await ПсуванняТоварівObjestItem.Read(base.UnigueID)) return null;
             
             if (readAllTablePart)
             {   
@@ -23053,9 +23053,9 @@ namespace StorageAndTrade_1_0.Документи
 
     public static class ВнутрішнєСпоживанняТоварів_Export
     {
-        public static void ToXmlFile(ВнутрішнєСпоживанняТоварів_Pointer ВнутрішнєСпоживанняТоварів, string pathToSave)
+        public static async ValueTask ToXmlFile(ВнутрішнєСпоживанняТоварів_Pointer ВнутрішнєСпоживанняТоварів, string pathToSave)
         {
-            ВнутрішнєСпоживанняТоварів_Objest? obj = ВнутрішнєСпоживанняТоварів.GetDocumentObject(true);
+            ВнутрішнєСпоживанняТоварів_Objest? obj = await ВнутрішнєСпоживанняТоварів.GetDocumentObject(true);
             if (obj == null) return;
 
             XmlWriter xmlWriter = XmlWriter.Create(pathToSave, new XmlWriterSettings() { Indent = true, Encoding = System.Text.Encoding.UTF8 });
@@ -23283,9 +23283,9 @@ namespace StorageAndTrade_1_0.Документи
             
         }
 
-        public bool Read(UnigueID uid)
+        public async ValueTask<bool> Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 Назва = base.FieldValue["docname"].ToString() ?? "";
                 НомерДок = base.FieldValue["docnomer"].ToString() ?? "";
@@ -23448,19 +23448,19 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            ВнутрішнєСпоживанняТоварів_Objest? obj = GetDocumentObject();
+            ВнутрішнєСпоживанняТоварів_Objest? obj = await GetDocumentObject();
             return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
         }
 
         public async ValueTask ClearSpendTheDocument()
         {
-            ВнутрішнєСпоживанняТоварів_Objest? obj = GetDocumentObject();
+            ВнутрішнєСпоживанняТоварів_Objest? obj = await GetDocumentObject();
             if (obj != null) await obj.ClearSpendTheDocument();
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ВнутрішнєСпоживанняТоварів_Objest? obj = GetDocumentObject();
+            ВнутрішнєСпоживанняТоварів_Objest? obj = await GetDocumentObject();
                 if (obj == null) return;
                 ВнутрішнєСпоживанняТоварів_Triggers.SetDeletionLabel(obj, label);
                 
@@ -23488,11 +23488,11 @@ namespace StorageAndTrade_1_0.Документи
             return new UuidAndText(UnigueID.UGuid, ВнутрішнєСпоживанняТоварів_Const.POINTER);
         }
 
-        public ВнутрішнєСпоживанняТоварів_Objest? GetDocumentObject(bool readAllTablePart = false)
+        public async ValueTask<ВнутрішнєСпоживанняТоварів_Objest?> GetDocumentObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
             ВнутрішнєСпоживанняТоварів_Objest ВнутрішнєСпоживанняТоварівObjestItem = new ВнутрішнєСпоживанняТоварів_Objest();
-            if (!ВнутрішнєСпоживанняТоварівObjestItem.Read(base.UnigueID)) return null;
+            if (!await ВнутрішнєСпоживанняТоварівObjestItem.Read(base.UnigueID)) return null;
             
             if (readAllTablePart)
             {   
@@ -23673,9 +23673,9 @@ namespace StorageAndTrade_1_0.Документи
 
     public static class РахунокФактура_Export
     {
-        public static void ToXmlFile(РахунокФактура_Pointer РахунокФактура, string pathToSave)
+        public static async ValueTask ToXmlFile(РахунокФактура_Pointer РахунокФактура, string pathToSave)
         {
-            РахунокФактура_Objest? obj = РахунокФактура.GetDocumentObject(true);
+            РахунокФактура_Objest? obj = await РахунокФактура.GetDocumentObject(true);
             if (obj == null) return;
 
             XmlWriter xmlWriter = XmlWriter.Create(pathToSave, new XmlWriterSettings() { Indent = true, Encoding = System.Text.Encoding.UTF8 });
@@ -23974,9 +23974,9 @@ namespace StorageAndTrade_1_0.Документи
             
         }
 
-        public bool Read(UnigueID uid)
+        public async ValueTask<bool> Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 Назва = base.FieldValue["docname"].ToString() ?? "";
                 НомерДок = base.FieldValue["docnomer"].ToString() ?? "";
@@ -24167,19 +24167,19 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            РахунокФактура_Objest? obj = GetDocumentObject();
+            РахунокФактура_Objest? obj = await GetDocumentObject();
             return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
         }
 
         public async ValueTask ClearSpendTheDocument()
         {
-            РахунокФактура_Objest? obj = GetDocumentObject();
+            РахунокФактура_Objest? obj = await GetDocumentObject();
             if (obj != null) await obj.ClearSpendTheDocument();
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            РахунокФактура_Objest? obj = GetDocumentObject();
+            РахунокФактура_Objest? obj = await GetDocumentObject();
                 if (obj == null) return;
                 РахунокФактура_Triggers.SetDeletionLabel(obj, label);
                 
@@ -24207,11 +24207,11 @@ namespace StorageAndTrade_1_0.Документи
             return new UuidAndText(UnigueID.UGuid, РахунокФактура_Const.POINTER);
         }
 
-        public РахунокФактура_Objest? GetDocumentObject(bool readAllTablePart = false)
+        public async ValueTask<РахунокФактура_Objest?> GetDocumentObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
             РахунокФактура_Objest РахунокФактураObjestItem = new РахунокФактура_Objest();
-            if (!РахунокФактураObjestItem.Read(base.UnigueID)) return null;
+            if (!await РахунокФактураObjestItem.Read(base.UnigueID)) return null;
             
             if (readAllTablePart)
             {   
@@ -24387,9 +24387,9 @@ namespace StorageAndTrade_1_0.Документи
 
     public static class РозміщенняТоварівНаСкладі_Export
     {
-        public static void ToXmlFile(РозміщенняТоварівНаСкладі_Pointer РозміщенняТоварівНаСкладі, string pathToSave)
+        public static async ValueTask ToXmlFile(РозміщенняТоварівНаСкладі_Pointer РозміщенняТоварівНаСкладі, string pathToSave)
         {
-            РозміщенняТоварівНаСкладі_Objest? obj = РозміщенняТоварівНаСкладі.GetDocumentObject(true);
+            РозміщенняТоварівНаСкладі_Objest? obj = await РозміщенняТоварівНаСкладі.GetDocumentObject(true);
             if (obj == null) return;
 
             XmlWriter xmlWriter = XmlWriter.Create(pathToSave, new XmlWriterSettings() { Indent = true, Encoding = System.Text.Encoding.UTF8 });
@@ -24589,9 +24589,9 @@ namespace StorageAndTrade_1_0.Документи
             
         }
 
-        public bool Read(UnigueID uid)
+        public async ValueTask<bool> Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 Назва = base.FieldValue["docname"].ToString() ?? "";
                 ДатаДок = (base.FieldValue["docdate"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["docdate"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
@@ -24746,19 +24746,19 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            РозміщенняТоварівНаСкладі_Objest? obj = GetDocumentObject();
+            РозміщенняТоварівНаСкладі_Objest? obj = await GetDocumentObject();
             return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
         }
 
         public async ValueTask ClearSpendTheDocument()
         {
-            РозміщенняТоварівНаСкладі_Objest? obj = GetDocumentObject();
+            РозміщенняТоварівНаСкладі_Objest? obj = await GetDocumentObject();
             if (obj != null) await obj.ClearSpendTheDocument();
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            РозміщенняТоварівНаСкладі_Objest? obj = GetDocumentObject();
+            РозміщенняТоварівНаСкладі_Objest? obj = await GetDocumentObject();
                 if (obj == null) return;
                 РозміщенняТоварівНаСкладі_Triggers.SetDeletionLabel(obj, label);
                 
@@ -24786,11 +24786,11 @@ namespace StorageAndTrade_1_0.Документи
             return new UuidAndText(UnigueID.UGuid, РозміщенняТоварівНаСкладі_Const.POINTER);
         }
 
-        public РозміщенняТоварівНаСкладі_Objest? GetDocumentObject(bool readAllTablePart = false)
+        public async ValueTask<РозміщенняТоварівНаСкладі_Objest?> GetDocumentObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
             РозміщенняТоварівНаСкладі_Objest РозміщенняТоварівНаСкладіObjestItem = new РозміщенняТоварівНаСкладі_Objest();
-            if (!РозміщенняТоварівНаСкладіObjestItem.Read(base.UnigueID)) return null;
+            if (!await РозміщенняТоварівНаСкладіObjestItem.Read(base.UnigueID)) return null;
             
             if (readAllTablePart)
             {   
@@ -24953,9 +24953,9 @@ namespace StorageAndTrade_1_0.Документи
 
     public static class ПереміщенняТоварівНаСкладі_Export
     {
-        public static void ToXmlFile(ПереміщенняТоварівНаСкладі_Pointer ПереміщенняТоварівНаСкладі, string pathToSave)
+        public static async ValueTask ToXmlFile(ПереміщенняТоварівНаСкладі_Pointer ПереміщенняТоварівНаСкладі, string pathToSave)
         {
-            ПереміщенняТоварівНаСкладі_Objest? obj = ПереміщенняТоварівНаСкладі.GetDocumentObject(true);
+            ПереміщенняТоварівНаСкладі_Objest? obj = await ПереміщенняТоварівНаСкладі.GetDocumentObject(true);
             if (obj == null) return;
 
             XmlWriter xmlWriter = XmlWriter.Create(pathToSave, new XmlWriterSettings() { Indent = true, Encoding = System.Text.Encoding.UTF8 });
@@ -25154,9 +25154,9 @@ namespace StorageAndTrade_1_0.Документи
             
         }
 
-        public bool Read(UnigueID uid)
+        public async ValueTask<bool> Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 Назва = base.FieldValue["docname"].ToString() ?? "";
                 ДатаДок = (base.FieldValue["docdate"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["docdate"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
@@ -25307,19 +25307,19 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            ПереміщенняТоварівНаСкладі_Objest? obj = GetDocumentObject();
+            ПереміщенняТоварівНаСкладі_Objest? obj = await GetDocumentObject();
             return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
         }
 
         public async ValueTask ClearSpendTheDocument()
         {
-            ПереміщенняТоварівНаСкладі_Objest? obj = GetDocumentObject();
+            ПереміщенняТоварівНаСкладі_Objest? obj = await GetDocumentObject();
             if (obj != null) await obj.ClearSpendTheDocument();
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ПереміщенняТоварівНаСкладі_Objest? obj = GetDocumentObject();
+            ПереміщенняТоварівНаСкладі_Objest? obj = await GetDocumentObject();
                 if (obj == null) return;
                 ПереміщенняТоварівНаСкладі_Triggers.SetDeletionLabel(obj, label);
                 
@@ -25347,11 +25347,11 @@ namespace StorageAndTrade_1_0.Документи
             return new UuidAndText(UnigueID.UGuid, ПереміщенняТоварівНаСкладі_Const.POINTER);
         }
 
-        public ПереміщенняТоварівНаСкладі_Objest? GetDocumentObject(bool readAllTablePart = false)
+        public async ValueTask<ПереміщенняТоварівНаСкладі_Objest?> GetDocumentObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
             ПереміщенняТоварівНаСкладі_Objest ПереміщенняТоварівНаСкладіObjestItem = new ПереміщенняТоварівНаСкладі_Objest();
-            if (!ПереміщенняТоварівНаСкладіObjestItem.Read(base.UnigueID)) return null;
+            if (!await ПереміщенняТоварівНаСкладіObjestItem.Read(base.UnigueID)) return null;
             
             if (readAllTablePart)
             {   
@@ -25519,9 +25519,9 @@ namespace StorageAndTrade_1_0.Документи
 
     public static class ЗбіркаТоварівНаСкладі_Export
     {
-        public static void ToXmlFile(ЗбіркаТоварівНаСкладі_Pointer ЗбіркаТоварівНаСкладі, string pathToSave)
+        public static async ValueTask ToXmlFile(ЗбіркаТоварівНаСкладі_Pointer ЗбіркаТоварівНаСкладі, string pathToSave)
         {
-            ЗбіркаТоварівНаСкладі_Objest? obj = ЗбіркаТоварівНаСкладі.GetDocumentObject(true);
+            ЗбіркаТоварівНаСкладі_Objest? obj = await ЗбіркаТоварівНаСкладі.GetDocumentObject(true);
             if (obj == null) return;
 
             XmlWriter xmlWriter = XmlWriter.Create(pathToSave, new XmlWriterSettings() { Indent = true, Encoding = System.Text.Encoding.UTF8 });
@@ -25721,9 +25721,9 @@ namespace StorageAndTrade_1_0.Документи
             
         }
 
-        public bool Read(UnigueID uid)
+        public async ValueTask<bool> Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 Назва = base.FieldValue["docname"].ToString() ?? "";
                 ДатаДок = (base.FieldValue["docdate"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["docdate"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
@@ -25878,19 +25878,19 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            ЗбіркаТоварівНаСкладі_Objest? obj = GetDocumentObject();
+            ЗбіркаТоварівНаСкладі_Objest? obj = await GetDocumentObject();
             return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
         }
 
         public async ValueTask ClearSpendTheDocument()
         {
-            ЗбіркаТоварівНаСкладі_Objest? obj = GetDocumentObject();
+            ЗбіркаТоварівНаСкладі_Objest? obj = await GetDocumentObject();
             if (obj != null) await obj.ClearSpendTheDocument();
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ЗбіркаТоварівНаСкладі_Objest? obj = GetDocumentObject();
+            ЗбіркаТоварівНаСкладі_Objest? obj = await GetDocumentObject();
                 if (obj == null) return;
                 ЗбіркаТоварівНаСкладі_Triggers.SetDeletionLabel(obj, label);
                 
@@ -25918,11 +25918,11 @@ namespace StorageAndTrade_1_0.Документи
             return new UuidAndText(UnigueID.UGuid, ЗбіркаТоварівНаСкладі_Const.POINTER);
         }
 
-        public ЗбіркаТоварівНаСкладі_Objest? GetDocumentObject(bool readAllTablePart = false)
+        public async ValueTask<ЗбіркаТоварівНаСкладі_Objest?> GetDocumentObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
             ЗбіркаТоварівНаСкладі_Objest ЗбіркаТоварівНаСкладіObjestItem = new ЗбіркаТоварівНаСкладі_Objest();
-            if (!ЗбіркаТоварівНаСкладіObjestItem.Read(base.UnigueID)) return null;
+            if (!await ЗбіркаТоварівНаСкладіObjestItem.Read(base.UnigueID)) return null;
             
             if (readAllTablePart)
             {   
@@ -26085,9 +26085,9 @@ namespace StorageAndTrade_1_0.Документи
 
     public static class РозміщенняНоменклатуриПоКоміркам_Export
     {
-        public static void ToXmlFile(РозміщенняНоменклатуриПоКоміркам_Pointer РозміщенняНоменклатуриПоКоміркам, string pathToSave)
+        public static async ValueTask ToXmlFile(РозміщенняНоменклатуриПоКоміркам_Pointer РозміщенняНоменклатуриПоКоміркам, string pathToSave)
         {
-            РозміщенняНоменклатуриПоКоміркам_Objest? obj = РозміщенняНоменклатуриПоКоміркам.GetDocumentObject(true);
+            РозміщенняНоменклатуриПоКоміркам_Objest? obj = await РозміщенняНоменклатуриПоКоміркам.GetDocumentObject(true);
             if (obj == null) return;
 
             XmlWriter xmlWriter = XmlWriter.Create(pathToSave, new XmlWriterSettings() { Indent = true, Encoding = System.Text.Encoding.UTF8 });
@@ -26250,9 +26250,9 @@ namespace StorageAndTrade_1_0.Документи
             
         }
 
-        public bool Read(UnigueID uid)
+        public async ValueTask<bool> Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 Назва = base.FieldValue["docname"].ToString() ?? "";
                 НомерДок = base.FieldValue["docnomer"].ToString() ?? "";
@@ -26403,19 +26403,19 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            РозміщенняНоменклатуриПоКоміркам_Objest? obj = GetDocumentObject();
+            РозміщенняНоменклатуриПоКоміркам_Objest? obj = await GetDocumentObject();
             return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
         }
 
         public async ValueTask ClearSpendTheDocument()
         {
-            РозміщенняНоменклатуриПоКоміркам_Objest? obj = GetDocumentObject();
+            РозміщенняНоменклатуриПоКоміркам_Objest? obj = await GetDocumentObject();
             if (obj != null) await obj.ClearSpendTheDocument();
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            РозміщенняНоменклатуриПоКоміркам_Objest? obj = GetDocumentObject();
+            РозміщенняНоменклатуриПоКоміркам_Objest? obj = await GetDocumentObject();
                 if (obj == null) return;
                 РозміщенняНоменклатуриПоКоміркам_Triggers.SetDeletionLabel(obj, label);
                 
@@ -26443,11 +26443,11 @@ namespace StorageAndTrade_1_0.Документи
             return new UuidAndText(UnigueID.UGuid, РозміщенняНоменклатуриПоКоміркам_Const.POINTER);
         }
 
-        public РозміщенняНоменклатуриПоКоміркам_Objest? GetDocumentObject(bool readAllTablePart = false)
+        public async ValueTask<РозміщенняНоменклатуриПоКоміркам_Objest?> GetDocumentObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
             РозміщенняНоменклатуриПоКоміркам_Objest РозміщенняНоменклатуриПоКоміркамObjestItem = new РозміщенняНоменклатуриПоКоміркам_Objest();
-            if (!РозміщенняНоменклатуриПоКоміркамObjestItem.Read(base.UnigueID)) return null;
+            if (!await РозміщенняНоменклатуриПоКоміркамObjestItem.Read(base.UnigueID)) return null;
             
             if (readAllTablePart)
             {   
@@ -26582,35 +26582,35 @@ namespace StorageAndTrade_1_0.Журнали
              new string[] { "tab_a25", "tab_a32", "tab_a34", "tab_a36", "tab_a42", "tab_a44", "tab_a48", "tab_a31", "tab_a51", "tab_a53", "tab_a81", "tab_a83", "tab_a88", "tab_a90", "tab_a92", "tab_a94", "tab_b07", "tab_b10", "tab_a64", "tab_b09", "tab_b27", "tab_b29"},
 			       new string[] { "ЗамовленняПостачальнику", "ПоступленняТоварівТаПослуг", "ЗамовленняКлієнта", "РеалізаціяТоварівТаПослуг", "ВстановленняЦінНоменклатури", "ПрихіднийКасовийОрдер", "РозхіднийКасовийОрдер", "ПереміщенняТоварів", "ПоверненняТоварівПостачальнику", "ПоверненняТоварівВідКлієнта", "АктВиконанихРобіт", "ВведенняЗалишків", "НадлишкиТоварів", "ПересортицяТоварів", "ПерерахунокТоварів", "ПсуванняТоварів", "ВнутрішнєСпоживанняТоварів", "РахунокФактура", "РозміщенняТоварівНаСкладі", "ПереміщенняТоварівНаСкладі", "ЗбіркаТоварівНаСкладі", "РозміщенняНоменклатуриПоКоміркам"}) { }
 
-        public DocumentObject? GetDocumentObject(bool readAllTablePart = true)
+        public async ValueTask<DocumentObject?> GetDocumentObject(bool readAllTablePart = true)
         {
             if (Current == null)
                 return null;
 
             switch (Current.TypeDocument)
             {
-                case "ЗамовленняПостачальнику": return new Документи.ЗамовленняПостачальнику_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-                case "ПоступленняТоварівТаПослуг": return new Документи.ПоступленняТоварівТаПослуг_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-                case "ЗамовленняКлієнта": return new Документи.ЗамовленняКлієнта_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-                case "РеалізаціяТоварівТаПослуг": return new Документи.РеалізаціяТоварівТаПослуг_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-                case "ВстановленняЦінНоменклатури": return new Документи.ВстановленняЦінНоменклатури_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-                case "ПрихіднийКасовийОрдер": return new Документи.ПрихіднийКасовийОрдер_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-                case "РозхіднийКасовийОрдер": return new Документи.РозхіднийКасовийОрдер_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-                case "ПереміщенняТоварів": return new Документи.ПереміщенняТоварів_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-                case "ПоверненняТоварівПостачальнику": return new Документи.ПоверненняТоварівПостачальнику_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-                case "ПоверненняТоварівВідКлієнта": return new Документи.ПоверненняТоварівВідКлієнта_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-                case "АктВиконанихРобіт": return new Документи.АктВиконанихРобіт_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-                case "ВведенняЗалишків": return new Документи.ВведенняЗалишків_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-                case "НадлишкиТоварів": return new Документи.НадлишкиТоварів_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-                case "ПересортицяТоварів": return new Документи.ПересортицяТоварів_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-                case "ПерерахунокТоварів": return new Документи.ПерерахунокТоварів_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-                case "ПсуванняТоварів": return new Документи.ПсуванняТоварів_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-                case "ВнутрішнєСпоживанняТоварів": return new Документи.ВнутрішнєСпоживанняТоварів_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-                case "РахунокФактура": return new Документи.РахунокФактура_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-                case "РозміщенняТоварівНаСкладі": return new Документи.РозміщенняТоварівНаСкладі_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-                case "ПереміщенняТоварівНаСкладі": return new Документи.ПереміщенняТоварівНаСкладі_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-                case "ЗбіркаТоварівНаСкладі": return new Документи.ЗбіркаТоварівНаСкладі_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-                case "РозміщенняНоменклатуриПоКоміркам": return new Документи.РозміщенняНоменклатуриПоКоміркам_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "ЗамовленняПостачальнику": return await new Документи.ЗамовленняПостачальнику_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "ПоступленняТоварівТаПослуг": return await new Документи.ПоступленняТоварівТаПослуг_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "ЗамовленняКлієнта": return await new Документи.ЗамовленняКлієнта_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "РеалізаціяТоварівТаПослуг": return await new Документи.РеалізаціяТоварівТаПослуг_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "ВстановленняЦінНоменклатури": return await new Документи.ВстановленняЦінНоменклатури_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "ПрихіднийКасовийОрдер": return await new Документи.ПрихіднийКасовийОрдер_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "РозхіднийКасовийОрдер": return await new Документи.РозхіднийКасовийОрдер_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "ПереміщенняТоварів": return await new Документи.ПереміщенняТоварів_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "ПоверненняТоварівПостачальнику": return await new Документи.ПоверненняТоварівПостачальнику_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "ПоверненняТоварівВідКлієнта": return await new Документи.ПоверненняТоварівВідКлієнта_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "АктВиконанихРобіт": return await new Документи.АктВиконанихРобіт_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "ВведенняЗалишків": return await new Документи.ВведенняЗалишків_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "НадлишкиТоварів": return await new Документи.НадлишкиТоварів_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "ПересортицяТоварів": return await new Документи.ПересортицяТоварів_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "ПерерахунокТоварів": return await new Документи.ПерерахунокТоварів_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "ПсуванняТоварів": return await new Документи.ПсуванняТоварів_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "ВнутрішнєСпоживанняТоварів": return await new Документи.ВнутрішнєСпоживанняТоварів_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "РахунокФактура": return await new Документи.РахунокФактура_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "РозміщенняТоварівНаСкладі": return await new Документи.РозміщенняТоварівНаСкладі_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "ПереміщенняТоварівНаСкладі": return await new Документи.ПереміщенняТоварівНаСкладі_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "ЗбіркаТоварівНаСкладі": return await new Документи.ЗбіркаТоварівНаСкладі_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "РозміщенняНоменклатуриПоКоміркам": return await new Документи.РозміщенняНоменклатуриПоКоміркам_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
                 
                 default: return null;
             }
@@ -27337,8 +27337,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         {
             if (Config.Kernel == null) return;
             
-            Dictionary<string, object> paramQuery = new Dictionary<string, object>();
-            paramQuery.Add("ПеріодДеньВідбір", period);
+            Dictionary<string, object> paramQuery = new Dictionary<string, object>{ { "ПеріодДеньВідбір", period } };
 
             switch(regAccumName)
             {

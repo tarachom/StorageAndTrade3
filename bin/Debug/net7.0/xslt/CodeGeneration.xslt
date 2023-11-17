@@ -329,10 +329,10 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
     {
         public static Kernel? Kernel { get; set; }
 		
-        public static void ReadAllConstants()
+        public static async ValueTask ReadAllConstants()
         {
             <xsl:for-each select="Configuration/ConstantsBlocks/ConstantsBlock">
-                   <xsl:text>Константи.</xsl:text><xsl:value-of select="Name"/>.ReadAll();
+                  <xsl:text>await Константи.</xsl:text><xsl:value-of select="Name"/>.ReadAll();
             </xsl:for-each>
         }
     }
@@ -404,12 +404,12 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Константи
 	  #region CONSTANTS BLOCK "<xsl:value-of select="Name"/>"
     public static class <xsl:value-of select="Name"/>
     {
-        public static void ReadAll()
+        public static async ValueTask ReadAll()
         {
             <xsl:variable name="Constants" select="Constants/Constant" />
 		        <xsl:if test="count($Constants) &gt; 0">
             Dictionary&lt;string, object&gt; fieldValue = new Dictionary&lt;string, object&gt;();
-            bool IsSelect = Config.Kernel!.DataBase.SelectAllConstants("tab_constants",
+            bool IsSelect = await Config.Kernel!.DataBase.SelectAllConstants("tab_constants",
                  <xsl:text>new string[] { </xsl:text>
                  <xsl:for-each select="$Constants">
                    <xsl:if test="position() != 1">
@@ -505,10 +505,10 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Константи
             public const string <xsl:value-of select="Name"/> = "<xsl:value-of select="NameInTable"/>";</xsl:for-each>
             public List&lt;Record&gt; Records { get; set; }
         
-            public void Read()
+            public async ValueTask Read()
             {
                 Records.Clear();
-                base.BaseRead();
+                await base.BaseRead();
 
                 foreach (Dictionary&lt;string, object&gt; fieldValue in base.FieldValueList) 
                 {
@@ -633,9 +633,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
             </xsl:if>
         }
 
-        public bool Read(UnigueID uid)
+        public async ValueTask&lt;bool&gt; Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 <xsl:for-each select="Fields/Field">
                   <xsl:value-of select="Name"/>
@@ -784,11 +784,11 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
             base.Init(uid, fields);
         }
         
-        public <xsl:value-of select="$DirectoryName"/>_Objest? GetDirectoryObject()
+        public async ValueTask&lt;<xsl:value-of select="$DirectoryName"/>_Objest?&gt; GetDirectoryObject()
         {
             if (this.IsEmpty()) return null;
             <xsl:value-of select="$DirectoryName"/>_Objest <xsl:value-of select="$DirectoryName"/>ObjestItem = new <xsl:value-of select="$DirectoryName"/>_Objest();
-            return <xsl:value-of select="$DirectoryName"/>ObjestItem.Read(base.UnigueID) ? <xsl:value-of select="$DirectoryName"/>ObjestItem : null;
+            return await <xsl:value-of select="$DirectoryName"/>ObjestItem.Read(base.UnigueID) ? <xsl:value-of select="$DirectoryName"/>ObjestItem : null;
         }
 
         public <xsl:value-of select="$DirectoryName"/>_Pointer Copy()
@@ -813,7 +813,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            <xsl:value-of select="$DirectoryName"/>_Objest? obj = GetDirectoryObject();
+            <xsl:value-of select="$DirectoryName"/>_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
                 <xsl:if test="normalize-space(TriggerFunctions/SetDeletionLabel) != ''">
@@ -1093,9 +1093,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
 
     public static class <xsl:value-of select="$DocumentName"/>_Export
     {
-        public static void ToXmlFile(<xsl:value-of select="$DocumentName"/>_Pointer <xsl:value-of select="$DocumentName"/>, string pathToSave)
+        public static async ValueTask ToXmlFile(<xsl:value-of select="$DocumentName"/>_Pointer <xsl:value-of select="$DocumentName"/>, string pathToSave)
         {
-            <xsl:value-of select="$DocumentName"/>_Objest? obj = <xsl:value-of select="$DocumentName"/>.GetDocumentObject(true);
+            <xsl:value-of select="$DocumentName"/>_Objest? obj = await <xsl:value-of select="$DocumentName"/>.GetDocumentObject(true);
             if (obj == null) return;
 
             XmlWriter xmlWriter = XmlWriter.Create(pathToSave, new XmlWriterSettings() { Indent = true, Encoding = System.Text.Encoding.UTF8 });
@@ -1224,9 +1224,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
             </xsl:if>
         }
 
-        public bool Read(UnigueID uid)
+        public async ValueTask&lt;bool&gt; Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 <xsl:for-each select="Fields/Field">
                   <xsl:value-of select="Name"/>
@@ -1407,20 +1407,20 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
 
         public async ValueTask&lt;bool&gt; SpendTheDocument(DateTime spendDate)
         {
-            <xsl:value-of select="$DocumentName"/>_Objest? obj = GetDocumentObject();
+            <xsl:value-of select="$DocumentName"/>_Objest? obj = await GetDocumentObject();
             return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
         }
 
         public async ValueTask ClearSpendTheDocument()
         {
-            <xsl:value-of select="$DocumentName"/>_Objest? obj = GetDocumentObject();
+            <xsl:value-of select="$DocumentName"/>_Objest? obj = await GetDocumentObject();
             if (obj != null) await obj.ClearSpendTheDocument();
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             <xsl:if test="normalize-space(TriggerFunctions/SetDeletionLabel) != '' or normalize-space(SpendFunctions/ClearSpend) != ''">
-                <xsl:value-of select="$DocumentName"/>_Objest? obj = GetDocumentObject();
+                <xsl:value-of select="$DocumentName"/>_Objest? obj = await GetDocumentObject();
                 if (obj == null) return;
                 <xsl:if test="normalize-space(TriggerFunctions/SetDeletionLabel) != ''">
                     <xsl:value-of select="TriggerFunctions/SetDeletionLabel"/>
@@ -1453,11 +1453,11 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
             return new UuidAndText(UnigueID.UGuid, <xsl:value-of select="$DocumentName"/>_Const.POINTER);
         }
 
-        public <xsl:value-of select="$DocumentName"/>_Objest? GetDocumentObject(bool readAllTablePart = false)
+        public async ValueTask&lt;<xsl:value-of select="$DocumentName"/>_Objest?&gt; GetDocumentObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
             <xsl:value-of select="$DocumentName"/>_Objest <xsl:value-of select="$DocumentName"/>ObjestItem = new <xsl:value-of select="$DocumentName"/>_Objest();
-            if (!<xsl:value-of select="$DocumentName"/>ObjestItem.Read(base.UnigueID)) return null;
+            if (!await <xsl:value-of select="$DocumentName"/>ObjestItem.Read(base.UnigueID)) return null;
             <xsl:if test="count(TabularParts/TablePart) != 0">
             if (readAllTablePart)
             {   
@@ -1625,7 +1625,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Журнали
                <xsl:text>"</xsl:text><xsl:value-of select="Name"/><xsl:text>"</xsl:text>
              </xsl:for-each>}) { }
 
-        public DocumentObject? GetDocumentObject(bool readAllTablePart = true)
+        public async ValueTask&lt;DocumentObject?&gt; GetDocumentObject(bool readAllTablePart = true)
         {
             if (Current == null)
                 return null;
@@ -1633,7 +1633,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Журнали
             switch (Current.TypeDocument)
             {
                 <xsl:for-each select="Configuration/Documents/Document">
-                    <xsl:text>case </xsl:text>"<xsl:value-of select="Name"/>": return new Документи.<xsl:value-of select="Name"/>_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                    <xsl:text>case </xsl:text>"<xsl:value-of select="Name"/>": return await new Документи.<xsl:value-of select="Name"/>_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
                 </xsl:for-each>
                 default: return null;
             }
@@ -1855,8 +1855,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриНа�
             if (Config.Kernel == null) return;
             <xsl:variable name="QueryAllCountCalculation" select="count(Configuration/RegistersAccumulation/RegisterAccumulation/QueryBlockList/QueryBlock[FinalCalculation = '0']/Query)"/>
             <xsl:if test="$QueryAllCountCalculation != 0">
-            Dictionary&lt;string, object&gt; paramQuery = new Dictionary&lt;string, object&gt;();
-            paramQuery.Add("ПеріодДеньВідбір", period);
+            Dictionary&lt;string, object&gt; paramQuery = new Dictionary&lt;string, object&gt;{ { "ПеріодДеньВідбір", period } };
 
             switch(regAccumName)
             {

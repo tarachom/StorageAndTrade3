@@ -93,7 +93,7 @@ namespace StorageAndTrade
             //Контрагент
             CreateField(vBox, null, Контрагент);
 
-            Контрагент.AfterSelectFunc = () =>
+            Контрагент.AfterSelectFunc = async () =>
             {
                 if (Договір.Pointer.IsEmpty())
                 {
@@ -113,7 +113,7 @@ namespace StorageAndTrade
                         //Перевірити чи змінився контрагент
                         //
 
-                        ДоговориКонтрагентів_Objest? договориКонтрагентів_Objest = Договір.Pointer.GetDirectoryObject();
+                        ДоговориКонтрагентів_Objest? договориКонтрагентів_Objest = await Договір.Pointer.GetDirectoryObject();
 
                         if (договориКонтрагентів_Objest != null)
                             if (договориКонтрагентів_Objest.Контрагент != Контрагент.Pointer)

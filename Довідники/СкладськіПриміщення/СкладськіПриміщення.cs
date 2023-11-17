@@ -106,7 +106,7 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.СкладськіПриміщення_Записи.FirstPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             if (IsNew)
             {
@@ -126,7 +126,7 @@ namespace StorageAndTrade
             else if (unigueID != null)
             {
                 СкладськіПриміщення_Objest СкладськіПриміщення_Objest = new СкладськіПриміщення_Objest();
-                if (СкладськіПриміщення_Objest.Read(unigueID))
+                if (await СкладськіПриміщення_Objest.Read(unigueID))
                 {
                     Program.GeneralForm?.CreateNotebookPage($"{СкладськіПриміщення_Objest.Назва}", () =>
                     {
@@ -150,7 +150,7 @@ namespace StorageAndTrade
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             СкладськіПриміщення_Objest СкладськіПриміщення_Objest = new СкладськіПриміщення_Objest();
-            if (СкладськіПриміщення_Objest.Read(unigueID))
+            if (await СкладськіПриміщення_Objest.Read(unigueID))
                 await СкладськіПриміщення_Objest.SetDeletionLabel(!СкладськіПриміщення_Objest.DeletionLabel);
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
@@ -159,7 +159,7 @@ namespace StorageAndTrade
         protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
             СкладськіПриміщення_Objest СкладськіПриміщення_Objest = new СкладськіПриміщення_Objest();
-            if (СкладськіПриміщення_Objest.Read(unigueID))
+            if (await СкладськіПриміщення_Objest.Read(unigueID))
             {
                 СкладськіПриміщення_Objest СкладськіПриміщення_Objest_Новий = СкладськіПриміщення_Objest.Copy(true);
                 await СкладськіПриміщення_Objest_Новий.Save();

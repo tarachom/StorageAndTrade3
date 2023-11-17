@@ -86,11 +86,11 @@ namespace StorageAndTrade
                 };
             }
 
-            public static void ПісляЗміни_Номенклатура(Запис запис)
+            public static async void ПісляЗміни_Номенклатура(Запис запис)
             {
                 запис.Номенклатура.GetPresentation();
 
-                Номенклатура_Objest? номенклатура_Objest = запис.Номенклатура.GetDirectoryObject();
+                Номенклатура_Objest? номенклатура_Objest = await запис.Номенклатура.GetDirectoryObject();
                 if (номенклатура_Objest != null && !номенклатура_Objest.ОдиницяВиміру.IsEmpty())
                 {
                     запис.Пакування = номенклатура_Objest.ОдиницяВиміру;

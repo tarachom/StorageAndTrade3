@@ -114,7 +114,7 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.ХарактеристикиНоменклатури_Записи.FirstPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             if (IsNew)
             {
@@ -134,7 +134,7 @@ namespace StorageAndTrade
             else if (unigueID != null)
             {
                 ХарактеристикиНоменклатури_Objest ХарактеристикиНоменклатури_Objest = new ХарактеристикиНоменклатури_Objest();
-                if (ХарактеристикиНоменклатури_Objest.Read(unigueID))
+                if (await ХарактеристикиНоменклатури_Objest.Read(unigueID))
                 {
                     Program.GeneralForm?.CreateNotebookPage($"{ХарактеристикиНоменклатури_Objest.Назва}", () =>
                     {
@@ -158,7 +158,7 @@ namespace StorageAndTrade
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             ХарактеристикиНоменклатури_Objest ХарактеристикиНоменклатури_Objest = new ХарактеристикиНоменклатури_Objest();
-            if (ХарактеристикиНоменклатури_Objest.Read(unigueID))
+            if (await ХарактеристикиНоменклатури_Objest.Read(unigueID))
                 await ХарактеристикиНоменклатури_Objest.SetDeletionLabel(!ХарактеристикиНоменклатури_Objest.DeletionLabel);
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
@@ -167,7 +167,7 @@ namespace StorageAndTrade
         protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
             ХарактеристикиНоменклатури_Objest ХарактеристикиНоменклатури_Objest = new ХарактеристикиНоменклатури_Objest();
-            if (ХарактеристикиНоменклатури_Objest.Read(unigueID))
+            if (await ХарактеристикиНоменклатури_Objest.Read(unigueID))
             {
                 ХарактеристикиНоменклатури_Objest ХарактеристикиНоменклатури_Objest_Новий = ХарактеристикиНоменклатури_Objest.Copy(true);
                 await ХарактеристикиНоменклатури_Objest_Новий.Save();

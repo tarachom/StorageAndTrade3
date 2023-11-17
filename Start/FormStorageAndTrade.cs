@@ -196,9 +196,9 @@ namespace StorageAndTrade
                     //провести всі документ, а тоді вже розраховувати регістри
                     if (!Системні.ЗупинитиФоновіЗадачі_Const)
                     {
-                        if (Config.Kernel != null)
+                        //if (Config.Kernel != null)
                             //Виконання обчислень
-                            await Config.Kernel.DataBase.SpetialTableRegAccumTrigerExecute(KernelSession,
+                            await Config.Kernel!.DataBase.SpetialTableRegAccumTrigerExecute(KernelSession,
                                  VirtualTablesСalculation.Execute,
                                  VirtualTablesСalculation.ExecuteFinalCalculation);
                     }

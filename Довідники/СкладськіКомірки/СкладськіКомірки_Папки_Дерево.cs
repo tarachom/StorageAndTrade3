@@ -54,7 +54,7 @@ namespace StorageAndTrade
             RowActivated();
         }
 
-        protected override void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             if (IsNew)
             {
@@ -76,7 +76,7 @@ namespace StorageAndTrade
             else if (unigueID != null)
             {
                 СкладськіКомірки_Папки_Objest СкладськіКомірки_Папки_Objest = new СкладськіКомірки_Папки_Objest();
-                if (СкладськіКомірки_Папки_Objest.Read(unigueID))
+                if (await СкладськіКомірки_Папки_Objest.Read(unigueID))
                 {
                     Program.GeneralForm?.CreateNotebookPage($"{СкладськіКомірки_Папки_Objest.Назва}", () =>
                     {
@@ -103,16 +103,16 @@ namespace StorageAndTrade
         protected override async void SetDeletionLabel(UnigueID unigueID)
         {
             СкладськіКомірки_Папки_Objest СкладськіКомірки_Папки_Objest = new СкладськіКомірки_Папки_Objest();
-            if (СкладськіКомірки_Папки_Objest.Read(unigueID))
+            if (await СкладськіКомірки_Папки_Objest.Read(unigueID))
                 await СкладськіКомірки_Папки_Objest.SetDeletionLabel(!СкладськіКомірки_Папки_Objest.DeletionLabel);
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
         }
 
-        protected override async Task<UnigueID?> Copy(UnigueID unigueID)
+        protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
             СкладськіКомірки_Папки_Objest СкладськіКомірки_Папки_Objest = new СкладськіКомірки_Папки_Objest();
-            if (СкладськіКомірки_Папки_Objest.Read(unigueID))
+            if (await СкладськіКомірки_Папки_Objest.Read(unigueID))
             {
                 СкладськіКомірки_Папки_Objest СкладськіКомірки_Папки_Objest_Новий = СкладськіКомірки_Папки_Objest.Copy(true);
                 await СкладськіКомірки_Папки_Objest_Новий.Save();

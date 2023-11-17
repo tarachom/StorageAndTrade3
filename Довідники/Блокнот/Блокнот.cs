@@ -75,7 +75,7 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.Блокнот_Записи.FirstPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             if (IsNew)
             {
@@ -95,7 +95,7 @@ namespace StorageAndTrade
             else if (unigueID != null)
             {
                 Блокнот_Objest Блокнот_Objest = new Блокнот_Objest();
-                if (Блокнот_Objest.Read(unigueID))
+                if (await Блокнот_Objest.Read(unigueID))
                 {
                     Program.GeneralForm?.CreateNotebookPage($"{Блокнот_Objest.Назва}", () =>
                     {
@@ -119,7 +119,7 @@ namespace StorageAndTrade
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             Блокнот_Objest Блокнот_Objest = new Блокнот_Objest();
-            if (Блокнот_Objest.Read(unigueID))
+            if (await Блокнот_Objest.Read(unigueID))
                 await Блокнот_Objest.SetDeletionLabel(!Блокнот_Objest.DeletionLabel);
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
@@ -128,7 +128,7 @@ namespace StorageAndTrade
         protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
             Блокнот_Objest Блокнот_Objest = new Блокнот_Objest();
-            if (Блокнот_Objest.Read(unigueID))
+            if (await Блокнот_Objest.Read(unigueID))
             {
                 Блокнот_Objest Блокнот_Objest_Новий = Блокнот_Objest.Copy(true);
                 await Блокнот_Objest_Новий.Save();

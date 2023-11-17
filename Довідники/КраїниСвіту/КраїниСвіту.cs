@@ -75,7 +75,7 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.КраїниСвіту_Записи.FirstPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             if (IsNew)
             {
@@ -95,7 +95,7 @@ namespace StorageAndTrade
             else if (unigueID != null)
             {
                 КраїниСвіту_Objest КраїниСвіту_Objest = new КраїниСвіту_Objest();
-                if (КраїниСвіту_Objest.Read(unigueID))
+                if (await КраїниСвіту_Objest.Read(unigueID))
                 {
                     Program.GeneralForm?.CreateNotebookPage($"{КраїниСвіту_Objest.Назва}", () =>
                     {
@@ -119,7 +119,7 @@ namespace StorageAndTrade
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             КраїниСвіту_Objest КраїниСвіту_Objest = new КраїниСвіту_Objest();
-            if (КраїниСвіту_Objest.Read(unigueID))
+            if (await КраїниСвіту_Objest.Read(unigueID))
                 await КраїниСвіту_Objest.SetDeletionLabel(!КраїниСвіту_Objest.DeletionLabel);
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
@@ -128,7 +128,7 @@ namespace StorageAndTrade
         protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
             КраїниСвіту_Objest КраїниСвіту_Objest = new КраїниСвіту_Objest();
-            if (КраїниСвіту_Objest.Read(unigueID))
+            if (await КраїниСвіту_Objest.Read(unigueID))
             {
                 КраїниСвіту_Objest КраїниСвіту_Objest_Новий = КраїниСвіту_Objest.Copy(true);
                 await КраїниСвіту_Objest_Новий.Save();

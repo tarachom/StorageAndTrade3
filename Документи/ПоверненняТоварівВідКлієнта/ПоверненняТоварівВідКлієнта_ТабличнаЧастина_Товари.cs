@@ -114,11 +114,11 @@ namespace StorageAndTrade
                 };
             }
 
-            public static void ПісляЗміни_Номенклатура(Запис запис)
+            public static async void ПісляЗміни_Номенклатура(Запис запис)
             {
                 запис.Номенклатура.GetPresentation();
 
-                Номенклатура_Objest? номенклатура_Objest = запис.Номенклатура.GetDirectoryObject();
+                Номенклатура_Objest? номенклатура_Objest = await запис.Номенклатура.GetDirectoryObject();
                 if (номенклатура_Objest != null && !номенклатура_Objest.ОдиницяВиміру.IsEmpty())
                 {
                     запис.Пакування = номенклатура_Objest.ОдиницяВиміру;
@@ -127,7 +127,7 @@ namespace StorageAndTrade
 
                 if (!запис.Пакування.IsEmpty())
                 {
-                    ПакуванняОдиниціВиміру_Objest? пакуванняОдиниціВиміру_Objest = запис.Пакування.GetDirectoryObject();
+                    ПакуванняОдиниціВиміру_Objest? пакуванняОдиниціВиміру_Objest = await запис.Пакування.GetDirectoryObject();
                     if (пакуванняОдиниціВиміру_Objest != null)
                         запис.КількістьУпаковок = пакуванняОдиниціВиміру_Objest.КількістьУпаковок;
                     else

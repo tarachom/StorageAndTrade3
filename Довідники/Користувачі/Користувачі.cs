@@ -75,7 +75,7 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.Користувачі_Записи.FirstPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             if (IsNew)
             {
@@ -95,7 +95,7 @@ namespace StorageAndTrade
             else if (unigueID != null)
             {
                 Користувачі_Objest Користувачі_Objest = new Користувачі_Objest();
-                if (Користувачі_Objest.Read(unigueID))
+                if (await Користувачі_Objest.Read(unigueID))
                 {
                     Program.GeneralForm?.CreateNotebookPage($"{Користувачі_Objest.Назва}", () =>
                     {
@@ -119,7 +119,7 @@ namespace StorageAndTrade
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             Користувачі_Objest Користувачі_Objest = new Користувачі_Objest();
-            if (Користувачі_Objest.Read(unigueID))
+            if (await Користувачі_Objest.Read(unigueID))
                 await Користувачі_Objest.SetDeletionLabel(!Користувачі_Objest.DeletionLabel);
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
@@ -128,7 +128,7 @@ namespace StorageAndTrade
         protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
             Користувачі_Objest Користувачі_Objest = new Користувачі_Objest();
-            if (Користувачі_Objest.Read(unigueID))
+            if (await Користувачі_Objest.Read(unigueID))
             {
                 Користувачі_Objest Користувачі_Objest_Новий = Користувачі_Objest.Copy(true);
                 await Користувачі_Objest_Новий.Save();

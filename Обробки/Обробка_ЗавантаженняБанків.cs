@@ -152,7 +152,7 @@ namespace StorageAndTrade
 
                     string КодМФО = current.SelectSingleNode("GLMFO")?.Value ?? "";
 
-                    if (String.IsNullOrEmpty(КодМФО))
+                    if (string.IsNullOrEmpty(КодМФО))
                     {
                         CreateMessage(TypeMessage.Error, "Відсутній КодМФО");
                         break;
@@ -198,7 +198,7 @@ namespace StorageAndTrade
                     }
                     else
                     {
-                        банки_Objest = банки_Pointer.GetDirectoryObject();
+                        банки_Objest = await банки_Pointer.GetDirectoryObject();
                         CreateMessage(TypeMessage.Info, $"Знайдено банк {Назва} з кодом МФО: {КодМФО}");
                     }
 

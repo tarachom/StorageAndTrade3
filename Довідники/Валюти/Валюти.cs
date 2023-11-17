@@ -111,7 +111,7 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.Валюти_Записи.FirstPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             if (IsNew)
             {
@@ -131,7 +131,7 @@ namespace StorageAndTrade
             else if (unigueID != null)
             {
                 Валюти_Objest Валюти_Objest = new Валюти_Objest();
-                if (Валюти_Objest.Read(unigueID))
+                if (await Валюти_Objest.Read(unigueID))
                 {
                     Program.GeneralForm?.CreateNotebookPage($"{Валюти_Objest.Назва}", () =>
                     {
@@ -155,7 +155,7 @@ namespace StorageAndTrade
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             Валюти_Objest Валюти_Objest = new Валюти_Objest();
-            if (Валюти_Objest.Read(unigueID))
+            if (await Валюти_Objest.Read(unigueID))
                 await Валюти_Objest.SetDeletionLabel(!Валюти_Objest.DeletionLabel);
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
@@ -164,7 +164,7 @@ namespace StorageAndTrade
         protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
             Валюти_Objest Валюти_Objest = new Валюти_Objest();
-            if (Валюти_Objest.Read(unigueID))
+            if (await Валюти_Objest.Read(unigueID))
             {
                 Валюти_Objest Валюти_Objest_Новий = Валюти_Objest.Copy(true);
                 await Валюти_Objest_Новий.Save();

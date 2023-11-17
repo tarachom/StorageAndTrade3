@@ -75,7 +75,7 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.Файли_Записи.FirstPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             if (IsNew)
             {
@@ -95,7 +95,7 @@ namespace StorageAndTrade
             else if (unigueID != null)
             {
                 Файли_Objest Файли_Objest = new Файли_Objest();
-                if (Файли_Objest.Read(unigueID))
+                if (await Файли_Objest.Read(unigueID))
                 {
                     Program.GeneralForm?.CreateNotebookPage($"{Файли_Objest.Назва}", () =>
                     {
@@ -119,7 +119,7 @@ namespace StorageAndTrade
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             Файли_Objest Файли_Objest = new Файли_Objest();
-            if (Файли_Objest.Read(unigueID))
+            if (await Файли_Objest.Read(unigueID))
                 await Файли_Objest.SetDeletionLabel(!Файли_Objest.DeletionLabel);
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
@@ -128,7 +128,7 @@ namespace StorageAndTrade
         protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
             Файли_Objest Файли_Objest = new Файли_Objest();
-            if (Файли_Objest.Read(unigueID))
+            if (await Файли_Objest.Read(unigueID))
             {
                 Файли_Objest Файли_Objest_Новий = Файли_Objest.Copy(true);
                 await Файли_Objest_Новий.Save();

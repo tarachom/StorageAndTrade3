@@ -158,7 +158,7 @@ namespace StorageAndTrade
             thread.Start();
         }
 
-        void SpendTheDocument()
+        async void SpendTheDocument()
         {
             ФункціїДляПовідомлень.ОчиститиПовідомлення();
 
@@ -179,7 +179,7 @@ namespace StorageAndTrade
                 //Обробляються тільки не помічені на видалення і проведені
                 if (!journalSelect.Current.DeletionLabel && journalSelect.Current.Spend)
                 {
-                    DocumentObject? doc = journalSelect.GetDocumentObject(true);
+                    DocumentObject? doc = await journalSelect.GetDocumentObject(true);
                     if (doc != null)
                     {
                         //Для документу викликається функція проведення
@@ -300,7 +300,7 @@ namespace StorageAndTrade
             return allCountDependencies;
         }
 
-        void ClearDeletionLabel()
+        async void ClearDeletionLabel()
         {
             ButtonSensitive(false);
 
@@ -340,17 +340,27 @@ namespace StorageAndTrade
                             if (directoryObject != null)
                             {
                                 object? objRead = directoryObject.GetType().InvokeMember("Read", BindingFlags.InvokeMethod, null, directoryObject, new object[] { unigueID });
-                                if (objRead != null ? (bool)objRead : false)
+                                if (objRead != null)
                                 {
-                                    object? objName = directoryObject.GetType().InvokeMember("GetPresentation", BindingFlags.InvokeMethod, null, directoryObject, null);
-                                    if (objName != null)
-                                        name = (string)objName;
+                                    //????
+                                    var valueTask = ValueTask<bool>(objRead);
+                                    await valueTask;
 
-                                    long allCountDependencies = SearchDependencies(listDependencies, unigueID.UGuid, name);
-                                    if (allCountDependencies == 0)
+                                    PropertyInfo? resultProperty = valueTask.GetType().GetProperty("Result");
+                                    object? result = resultProperty?.GetValue(valueTask);
+
+                                    if (result != null ? (bool)result : false)
                                     {
-                                        directoryObject.GetType().InvokeMember("Delete", BindingFlags.InvokeMethod, null, directoryObject, null);
-                                        CreateMessage(TypeMessage.Ok, " --> Видалено: " + name + " [" + unigueID.ToString() + "]");
+                                        object? objName = directoryObject.GetType().InvokeMember("GetPresentation", BindingFlags.InvokeMethod, null, directoryObject, null);
+                                        if (objName != null)
+                                            name = (string)objName;
+
+                                        long allCountDependencies = SearchDependencies(listDependencies, unigueID.UGuid, name);
+                                        if (allCountDependencies == 0)
+                                        {
+                                            directoryObject.GetType().InvokeMember("Delete", BindingFlags.InvokeMethod, null, directoryObject, null);
+                                            CreateMessage(TypeMessage.Ok, " --> Видалено: " + name + " [" + unigueID.ToString() + "]");
+                                        }
                                     }
                                 }
                             }
@@ -416,6 +426,11 @@ namespace StorageAndTrade
 
             Thread.Sleep(1000);
             CreateMessage(TypeMessage.None, "\n\n\n");
+        }
+
+        private ValueTask ValueTask<T>(object objRead)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

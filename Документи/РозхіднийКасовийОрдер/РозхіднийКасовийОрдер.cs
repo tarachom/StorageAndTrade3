@@ -77,7 +77,7 @@ namespace StorageAndTrade
             TreeViewGrid.GrabFocus();
         }
 
-        protected override void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             if (IsNew)
             {
@@ -97,7 +97,7 @@ namespace StorageAndTrade
             else if (unigueID != null)
             {
                 РозхіднийКасовийОрдер_Objest РозхіднийКасовийОрдер_Objest = new РозхіднийКасовийОрдер_Objest();
-                if (РозхіднийКасовийОрдер_Objest.Read(unigueID))
+                if (await РозхіднийКасовийОрдер_Objest.Read(unigueID))
                 {
                     Program.GeneralForm?.CreateNotebookPage($"{РозхіднийКасовийОрдер_Objest.Назва}", () =>
                     {
@@ -121,7 +121,7 @@ namespace StorageAndTrade
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             РозхіднийКасовийОрдер_Objest РозхіднийКасовийОрдер_Objest = new РозхіднийКасовийОрдер_Objest();
-            if (РозхіднийКасовийОрдер_Objest.Read(unigueID))
+            if (await РозхіднийКасовийОрдер_Objest.Read(unigueID))
                 await РозхіднийКасовийОрдер_Objest.SetDeletionLabel(!РозхіднийКасовийОрдер_Objest.DeletionLabel);
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
@@ -130,7 +130,7 @@ namespace StorageAndTrade
         protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
             РозхіднийКасовийОрдер_Objest РозхіднийКасовийОрдер_Objest = new РозхіднийКасовийОрдер_Objest();
-            if (РозхіднийКасовийОрдер_Objest.Read(unigueID))
+            if (await РозхіднийКасовийОрдер_Objest.Read(unigueID))
             {
                 РозхіднийКасовийОрдер_Objest РозхіднийКасовийОрдер_Objest_Новий = РозхіднийКасовийОрдер_Objest.Copy(true);
                 await РозхіднийКасовийОрдер_Objest_Новий.Save();
@@ -153,7 +153,7 @@ namespace StorageAndTrade
         protected override async ValueTask SpendTheDocument(UnigueID unigueID, bool spendDoc)
         {
             РозхіднийКасовийОрдер_Pointer РозхіднийКасовийОрдер_Pointer = new РозхіднийКасовийОрдер_Pointer(unigueID);
-            РозхіднийКасовийОрдер_Objest? РозхіднийКасовийОрдер_Objest = РозхіднийКасовийОрдер_Pointer.GetDocumentObject(true);
+            РозхіднийКасовийОрдер_Objest? РозхіднийКасовийОрдер_Objest = await РозхіднийКасовийОрдер_Pointer.GetDocumentObject(true);
             if (РозхіднийКасовийОрдер_Objest == null) return;
 
             if (spendDoc)
@@ -170,10 +170,10 @@ namespace StorageAndTrade
             return new РозхіднийКасовийОрдер_Pointer(unigueID);
         }
 
-        protected override void ExportXML(UnigueID unigueID)
+        protected override async void ExportXML(UnigueID unigueID)
         {
             string pathToSave = System.IO.Path.Combine(AppContext.BaseDirectory, $"{РозхіднийКасовийОрдер_Const.FULLNAME}_{unigueID}.xml");
-            РозхіднийКасовийОрдер_Export.ToXmlFile(new РозхіднийКасовийОрдер_Pointer(unigueID), pathToSave);
+            await РозхіднийКасовийОрдер_Export.ToXmlFile(new РозхіднийКасовийОрдер_Pointer(unigueID), pathToSave);
         }
 
         #endregion

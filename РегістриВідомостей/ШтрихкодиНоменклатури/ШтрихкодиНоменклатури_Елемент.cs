@@ -63,7 +63,7 @@ namespace StorageAndTrade
 
         #region Присвоєння / зчитування значень
 
-        public override void SetValue()
+        public override async void SetValue()
         {
             if (IsNew)
             {
@@ -73,7 +73,7 @@ namespace StorageAndTrade
 
                 if (!НоменклатураДляНового.IsEmpty())
                 {
-                    Номенклатура_Objest? Номенклатура_Objest = НоменклатураДляНового.GetDirectoryObject();
+                    Номенклатура_Objest? Номенклатура_Objest = await НоменклатураДляНового.GetDirectoryObject();
                     if (Номенклатура_Objest != null)
                         ШтрихкодиНоменклатури_Objest.Пакування = Номенклатура_Objest.ОдиницяВиміру;
                 }

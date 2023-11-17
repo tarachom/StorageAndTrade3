@@ -75,7 +75,7 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.ТипорозміриКомірок_Записи.FirstPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             if (IsNew)
             {
@@ -95,7 +95,7 @@ namespace StorageAndTrade
             else if (unigueID != null)
             {
                 ТипорозміриКомірок_Objest ТипорозміриКомірок_Objest = new ТипорозміриКомірок_Objest();
-                if (ТипорозміриКомірок_Objest.Read(unigueID))
+                if (await ТипорозміриКомірок_Objest.Read(unigueID))
                 {
                     Program.GeneralForm?.CreateNotebookPage($"{ТипорозміриКомірок_Objest.Назва}", () =>
                     {
@@ -119,7 +119,7 @@ namespace StorageAndTrade
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             ТипорозміриКомірок_Objest ТипорозміриКомірок_Objest = new ТипорозміриКомірок_Objest();
-            if (ТипорозміриКомірок_Objest.Read(unigueID))
+            if (await ТипорозміриКомірок_Objest.Read(unigueID))
                 await ТипорозміриКомірок_Objest.SetDeletionLabel(!ТипорозміриКомірок_Objest.DeletionLabel);
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
@@ -128,7 +128,7 @@ namespace StorageAndTrade
         protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
             ТипорозміриКомірок_Objest ТипорозміриКомірок_Objest = new ТипорозміриКомірок_Objest();
-            if (ТипорозміриКомірок_Objest.Read(unigueID))
+            if (await ТипорозміриКомірок_Objest.Read(unigueID))
             {
                 ТипорозміриКомірок_Objest ТипорозміриКомірок_Objest_Новий = ТипорозміриКомірок_Objest.Copy(true);
                 await ТипорозміриКомірок_Objest_Новий.Save();

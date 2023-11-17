@@ -57,14 +57,14 @@ namespace StorageAndTrade
 
         public Номенклатура_Елемент() : base()
         {
-            ОсновнаКартинкаФайл.AfterSelectFunc = () =>
+            ОсновнаКартинкаФайл.AfterSelectFunc = async () =>
             {
                 foreach (Widget item in scrollImageView.Children)
                     scrollImageView.Remove(item);
 
                 if (!ОсновнаКартинкаФайл.Pointer.IsEmpty())
                 {
-                    Файли_Objest? Файл = ОсновнаКартинкаФайл.Pointer.GetDirectoryObject();
+                    Файли_Objest? Файл = await ОсновнаКартинкаФайл.Pointer.GetDirectoryObject();
                     if (Файл != null)
                     {
                         try

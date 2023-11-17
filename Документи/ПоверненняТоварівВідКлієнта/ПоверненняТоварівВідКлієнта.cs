@@ -77,7 +77,7 @@ namespace StorageAndTrade
             TreeViewGrid.GrabFocus();
         }
 
-        protected override void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             if (IsNew)
             {
@@ -97,7 +97,7 @@ namespace StorageAndTrade
             else if (unigueID != null)
             {
                 ПоверненняТоварівВідКлієнта_Objest ПоверненняТоварівВідКлієнта_Objest = new ПоверненняТоварівВідКлієнта_Objest();
-                if (ПоверненняТоварівВідКлієнта_Objest.Read(unigueID))
+                if (await ПоверненняТоварівВідКлієнта_Objest.Read(unigueID))
                 {
                     Program.GeneralForm?.CreateNotebookPage($"{ПоверненняТоварівВідКлієнта_Objest.Назва}", () =>
                     {
@@ -121,7 +121,7 @@ namespace StorageAndTrade
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             ПоверненняТоварівВідКлієнта_Objest ПоверненняТоварівВідКлієнта_Objest = new ПоверненняТоварівВідКлієнта_Objest();
-            if (ПоверненняТоварівВідКлієнта_Objest.Read(unigueID))
+            if (await ПоверненняТоварівВідКлієнта_Objest.Read(unigueID))
                 await ПоверненняТоварівВідКлієнта_Objest.SetDeletionLabel(!ПоверненняТоварівВідКлієнта_Objest.DeletionLabel);
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
@@ -130,7 +130,7 @@ namespace StorageAndTrade
         protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
             ПоверненняТоварівВідКлієнта_Objest ПоверненняТоварівВідКлієнта_Objest = new ПоверненняТоварівВідКлієнта_Objest();
-            if (ПоверненняТоварівВідКлієнта_Objest.Read(unigueID))
+            if (await ПоверненняТоварівВідКлієнта_Objest.Read(unigueID))
             {
                 ПоверненняТоварівВідКлієнта_Objest ПоверненняТоварівВідКлієнта_Objest_Новий = ПоверненняТоварівВідКлієнта_Objest.Copy(true);
                 await ПоверненняТоварівВідКлієнта_Objest_Новий.Save();
@@ -154,7 +154,7 @@ namespace StorageAndTrade
         protected override async ValueTask SpendTheDocument(UnigueID unigueID, bool spendDoc)
         {
             ПоверненняТоварівВідКлієнта_Pointer ПоверненняТоварівВідКлієнта_Pointer = new ПоверненняТоварівВідКлієнта_Pointer(unigueID);
-            ПоверненняТоварівВідКлієнта_Objest? ПоверненняТоварівВідКлієнта_Objest = ПоверненняТоварівВідКлієнта_Pointer.GetDocumentObject(true);
+            ПоверненняТоварівВідКлієнта_Objest? ПоверненняТоварівВідКлієнта_Objest = await ПоверненняТоварівВідКлієнта_Pointer.GetDocumentObject(true);
             if (ПоверненняТоварівВідКлієнта_Objest == null) return;
 
             if (spendDoc)
@@ -171,10 +171,10 @@ namespace StorageAndTrade
             return new ПоверненняТоварівВідКлієнта_Pointer(unigueID);
         }
 
-        protected override void ExportXML(UnigueID unigueID)
+        protected override async void ExportXML(UnigueID unigueID)
         {
             string pathToSave = System.IO.Path.Combine(AppContext.BaseDirectory, $"{ПоверненняТоварівВідКлієнта_Const.FULLNAME}_{unigueID}.xml");
-            ПоверненняТоварівВідКлієнта_Export.ToXmlFile(new ПоверненняТоварівВідКлієнта_Pointer(unigueID), pathToSave);
+            await ПоверненняТоварівВідКлієнта_Export.ToXmlFile(new ПоверненняТоварівВідКлієнта_Pointer(unigueID), pathToSave);
         }
 
         #endregion

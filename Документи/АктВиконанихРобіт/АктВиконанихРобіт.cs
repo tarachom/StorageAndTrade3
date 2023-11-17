@@ -79,7 +79,7 @@ namespace StorageAndTrade
             TreeViewGrid.GrabFocus();
         }
 
-        protected override void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             if (IsNew)
             {
@@ -99,7 +99,7 @@ namespace StorageAndTrade
             else if (unigueID != null)
             {
                 АктВиконанихРобіт_Objest АктВиконанихРобіт_Objest = new АктВиконанихРобіт_Objest();
-                if (АктВиконанихРобіт_Objest.Read(unigueID))
+                if (await АктВиконанихРобіт_Objest.Read(unigueID))
                 {
                     Program.GeneralForm?.CreateNotebookPage($"{АктВиконанихРобіт_Objest.Назва}", () =>
                     {
@@ -123,7 +123,7 @@ namespace StorageAndTrade
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             АктВиконанихРобіт_Objest АктВиконанихРобіт_Objest = new АктВиконанихРобіт_Objest();
-            if (АктВиконанихРобіт_Objest.Read(unigueID))
+            if (await АктВиконанихРобіт_Objest.Read(unigueID))
                 await АктВиконанихРобіт_Objest.SetDeletionLabel(!АктВиконанихРобіт_Objest.DeletionLabel);
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
@@ -132,7 +132,7 @@ namespace StorageAndTrade
         protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
             АктВиконанихРобіт_Objest АктВиконанихРобіт_Objest = new АктВиконанихРобіт_Objest();
-            if (АктВиконанихРобіт_Objest.Read(unigueID))
+            if (await АктВиконанихРобіт_Objest.Read(unigueID))
             {
                 АктВиконанихРобіт_Objest АктВиконанихРобіт_Objest_Новий = АктВиконанихРобіт_Objest.Copy(true);
                 await АктВиконанихРобіт_Objest_Новий.Save();
@@ -156,7 +156,7 @@ namespace StorageAndTrade
         protected override async ValueTask SpendTheDocument(UnigueID unigueID, bool spendDoc)
         {
             АктВиконанихРобіт_Pointer АктВиконанихРобіт_Pointer = new АктВиконанихРобіт_Pointer(unigueID);
-            АктВиконанихРобіт_Objest? АктВиконанихРобіт_Objest = АктВиконанихРобіт_Pointer.GetDocumentObject(true);
+            АктВиконанихРобіт_Objest? АктВиконанихРобіт_Objest = await АктВиконанихРобіт_Pointer.GetDocumentObject(true);
             if (АктВиконанихРобіт_Objest == null) return;
 
             if (spendDoc)
@@ -173,10 +173,10 @@ namespace StorageAndTrade
             return new АктВиконанихРобіт_Pointer(unigueID);
         }
 
-        protected override void ExportXML(UnigueID unigueID)
+        protected override async void ExportXML(UnigueID unigueID)
         {
             string pathToSave = System.IO.Path.Combine(AppContext.BaseDirectory, $"{АктВиконанихРобіт_Const.FULLNAME}_{unigueID}.xml");
-            АктВиконанихРобіт_Export.ToXmlFile(new АктВиконанихРобіт_Pointer(unigueID), pathToSave);
+            await АктВиконанихРобіт_Export.ToXmlFile(new АктВиконанихРобіт_Pointer(unigueID), pathToSave);
         }
 
         #endregion
@@ -210,7 +210,7 @@ namespace StorageAndTrade
                     string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
 
                     АктВиконанихРобіт_Pointer актВиконанихРобіт_Pointer = new АктВиконанихРобіт_Pointer(new UnigueID(uid));
-                    АктВиконанихРобіт_Objest? актВиконанихРобіт_Objest = актВиконанихРобіт_Pointer.GetDocumentObject(false);
+                    АктВиконанихРобіт_Objest? актВиконанихРобіт_Objest = await актВиконанихРобіт_Pointer.GetDocumentObject(false);
                     if (актВиконанихРобіт_Objest == null) continue;
 
                     //

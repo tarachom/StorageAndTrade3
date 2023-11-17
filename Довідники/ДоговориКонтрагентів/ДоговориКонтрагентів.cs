@@ -97,7 +97,7 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.ДоговориКонтрагентів_Записи.FirstPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             if (IsNew)
             {
@@ -117,7 +117,7 @@ namespace StorageAndTrade
             else if (unigueID != null)
             {
                 ДоговориКонтрагентів_Objest ДоговориКонтрагентів_Objest = new ДоговориКонтрагентів_Objest();
-                if (ДоговориКонтрагентів_Objest.Read(unigueID))
+                if (await ДоговориКонтрагентів_Objest.Read(unigueID))
                 {
                     Program.GeneralForm?.CreateNotebookPage($"{ДоговориКонтрагентів_Objest.Назва}", () =>
                     {
@@ -141,7 +141,7 @@ namespace StorageAndTrade
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             ДоговориКонтрагентів_Objest ДоговориКонтрагентів_Objest = new ДоговориКонтрагентів_Objest();
-            if (ДоговориКонтрагентів_Objest.Read(unigueID))
+            if (await ДоговориКонтрагентів_Objest.Read(unigueID))
                 await ДоговориКонтрагентів_Objest.SetDeletionLabel(!ДоговориКонтрагентів_Objest.DeletionLabel);
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
@@ -150,7 +150,7 @@ namespace StorageAndTrade
         protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
             ДоговориКонтрагентів_Objest ДоговориКонтрагентів_Objest = new ДоговориКонтрагентів_Objest();
-            if (ДоговориКонтрагентів_Objest.Read(unigueID))
+            if (await ДоговориКонтрагентів_Objest.Read(unigueID))
             {
                 ДоговориКонтрагентів_Objest ДоговориКонтрагентів_Objest_Новий = ДоговориКонтрагентів_Objest.Copy(true);
                 await ДоговориКонтрагентів_Objest_Новий.Save();

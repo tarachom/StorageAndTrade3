@@ -79,7 +79,7 @@ namespace StorageAndTrade
             TreeViewGrid.GrabFocus();
         }
 
-        protected override void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             if (IsNew)
             {
@@ -99,7 +99,7 @@ namespace StorageAndTrade
             else if (unigueID != null)
             {
                 ЗамовленняПостачальнику_Objest ЗамовленняПостачальнику_Objest = new ЗамовленняПостачальнику_Objest();
-                if (ЗамовленняПостачальнику_Objest.Read(unigueID))
+                if (await ЗамовленняПостачальнику_Objest.Read(unigueID))
                 {
                     Program.GeneralForm?.CreateNotebookPage($"{ЗамовленняПостачальнику_Objest.Назва}", () =>
                     {
@@ -123,7 +123,7 @@ namespace StorageAndTrade
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             ЗамовленняПостачальнику_Objest ЗамовленняПостачальнику_Objest = new ЗамовленняПостачальнику_Objest();
-            if (ЗамовленняПостачальнику_Objest.Read(unigueID))
+            if (await ЗамовленняПостачальнику_Objest.Read(unigueID))
                 await ЗамовленняПостачальнику_Objest.SetDeletionLabel(!ЗамовленняПостачальнику_Objest.DeletionLabel);
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
@@ -132,7 +132,7 @@ namespace StorageAndTrade
         protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
             ЗамовленняПостачальнику_Objest ЗамовленняПостачальнику_Objest = new ЗамовленняПостачальнику_Objest();
-            if (ЗамовленняПостачальнику_Objest.Read(unigueID))
+            if (await ЗамовленняПостачальнику_Objest.Read(unigueID))
             {
                 ЗамовленняПостачальнику_Objest ЗамовленняПостачальнику_Objest_Новий = ЗамовленняПостачальнику_Objest.Copy(true);
                 await ЗамовленняПостачальнику_Objest_Новий.Save();
@@ -156,7 +156,7 @@ namespace StorageAndTrade
         protected override async ValueTask SpendTheDocument(UnigueID unigueID, bool spendDoc)
         {
             ЗамовленняПостачальнику_Pointer ЗамовленняПостачальнику_Pointer = new ЗамовленняПостачальнику_Pointer(unigueID);
-            ЗамовленняПостачальнику_Objest? ЗамовленняПостачальнику_Objest = ЗамовленняПостачальнику_Pointer.GetDocumentObject(true);
+            ЗамовленняПостачальнику_Objest? ЗамовленняПостачальнику_Objest = await ЗамовленняПостачальнику_Pointer.GetDocumentObject(true);
             if (ЗамовленняПостачальнику_Objest == null) return;
 
             if (spendDoc)
@@ -173,10 +173,10 @@ namespace StorageAndTrade
             return new ЗамовленняПостачальнику_Pointer(unigueID);
         }
 
-        protected override void ExportXML(UnigueID unigueID)
+        protected override async void ExportXML(UnigueID unigueID)
         {
             string pathToSave = System.IO.Path.Combine(AppContext.BaseDirectory, $"{ЗамовленняПостачальнику_Const.FULLNAME}_{unigueID}.xml");
-            ЗамовленняПостачальнику_Export.ToXmlFile(new ЗамовленняПостачальнику_Pointer(unigueID), pathToSave);
+            await ЗамовленняПостачальнику_Export.ToXmlFile(new ЗамовленняПостачальнику_Pointer(unigueID), pathToSave);
         }
 
         #endregion
@@ -214,7 +214,7 @@ namespace StorageAndTrade
                     string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
 
                     ЗамовленняПостачальнику_Pointer замовленняПостачальнику_Pointer = new ЗамовленняПостачальнику_Pointer(new UnigueID(uid));
-                    ЗамовленняПостачальнику_Objest? замовленняПостачальнику_Objest = замовленняПостачальнику_Pointer.GetDocumentObject(true);
+                    ЗамовленняПостачальнику_Objest? замовленняПостачальнику_Objest = await замовленняПостачальнику_Pointer.GetDocumentObject(true);
                     if (замовленняПостачальнику_Objest == null) continue;
 
                     //
@@ -287,7 +287,7 @@ namespace StorageAndTrade
                     string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
 
                     ЗамовленняПостачальнику_Pointer замовленняПостачальнику_Pointer = new ЗамовленняПостачальнику_Pointer(new UnigueID(uid));
-                    ЗамовленняПостачальнику_Objest? замовленняПостачальнику_Objest = замовленняПостачальнику_Pointer.GetDocumentObject(true);
+                    ЗамовленняПостачальнику_Objest? замовленняПостачальнику_Objest = await замовленняПостачальнику_Pointer.GetDocumentObject(true);
                     if (замовленняПостачальнику_Objest == null) continue;
 
                     //

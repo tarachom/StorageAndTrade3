@@ -79,7 +79,7 @@ namespace StorageAndTrade
             TreeViewGrid.GrabFocus();
         }
 
-        protected override void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             if (IsNew)
             {
@@ -99,7 +99,7 @@ namespace StorageAndTrade
             else if (unigueID != null)
             {
                 РеалізаціяТоварівТаПослуг_Objest РеалізаціяТоварівТаПослуг_Objest = new РеалізаціяТоварівТаПослуг_Objest();
-                if (РеалізаціяТоварівТаПослуг_Objest.Read(unigueID))
+                if (await РеалізаціяТоварівТаПослуг_Objest.Read(unigueID))
                 {
                     Program.GeneralForm?.CreateNotebookPage($"{РеалізаціяТоварівТаПослуг_Objest.Назва}", () =>
                     {
@@ -123,7 +123,7 @@ namespace StorageAndTrade
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             РеалізаціяТоварівТаПослуг_Objest РеалізаціяТоварівТаПослуг_Objest = new РеалізаціяТоварівТаПослуг_Objest();
-            if (РеалізаціяТоварівТаПослуг_Objest.Read(unigueID))
+            if (await РеалізаціяТоварівТаПослуг_Objest.Read(unigueID))
                 await РеалізаціяТоварівТаПослуг_Objest.SetDeletionLabel(!РеалізаціяТоварівТаПослуг_Objest.DeletionLabel);
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
@@ -132,7 +132,7 @@ namespace StorageAndTrade
         protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
             РеалізаціяТоварівТаПослуг_Objest РеалізаціяТоварівТаПослуг_Objest = new РеалізаціяТоварівТаПослуг_Objest();
-            if (РеалізаціяТоварівТаПослуг_Objest.Read(unigueID))
+            if (await РеалізаціяТоварівТаПослуг_Objest.Read(unigueID))
             {
                 РеалізаціяТоварівТаПослуг_Objest РеалізаціяТоварівТаПослуг_Objest_Новий = РеалізаціяТоварівТаПослуг_Objest.Copy(true);
                 await РеалізаціяТоварівТаПослуг_Objest_Новий.Save();
@@ -156,7 +156,7 @@ namespace StorageAndTrade
         protected override async ValueTask SpendTheDocument(UnigueID unigueID, bool spendDoc)
         {
             РеалізаціяТоварівТаПослуг_Pointer РеалізаціяТоварівТаПослуг_Pointer = new РеалізаціяТоварівТаПослуг_Pointer(unigueID);
-            РеалізаціяТоварівТаПослуг_Objest? РеалізаціяТоварівТаПослуг_Objest = РеалізаціяТоварівТаПослуг_Pointer.GetDocumentObject(true);
+            РеалізаціяТоварівТаПослуг_Objest? РеалізаціяТоварівТаПослуг_Objest = await РеалізаціяТоварівТаПослуг_Pointer.GetDocumentObject(true);
             if (РеалізаціяТоварівТаПослуг_Objest == null) return;
 
             if (spendDoc)
@@ -173,10 +173,10 @@ namespace StorageAndTrade
             return new РеалізаціяТоварівТаПослуг_Pointer(unigueID);
         }
 
-        protected override void ExportXML(UnigueID unigueID)
+        protected override async void ExportXML(UnigueID unigueID)
         {
             string pathToSave = System.IO.Path.Combine(AppContext.BaseDirectory, $"{РеалізаціяТоварівТаПослуг_Const.FULLNAME}_{unigueID}.xml");
-            РеалізаціяТоварівТаПослуг_Export.ToXmlFile(new РеалізаціяТоварівТаПослуг_Pointer(unigueID), pathToSave);
+            await РеалізаціяТоварівТаПослуг_Export.ToXmlFile(new РеалізаціяТоварівТаПослуг_Pointer(unigueID), pathToSave);
         }
 
         #endregion
@@ -224,7 +224,7 @@ namespace StorageAndTrade
                     string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
 
                     РеалізаціяТоварівТаПослуг_Pointer реалізаціяТоварівТаПослуг_Pointer = new РеалізаціяТоварівТаПослуг_Pointer(new UnigueID(uid));
-                    РеалізаціяТоварівТаПослуг_Objest? реалізаціяТоварівТаПослуг_Objest = реалізаціяТоварівТаПослуг_Pointer.GetDocumentObject(false);
+                    РеалізаціяТоварівТаПослуг_Objest? реалізаціяТоварівТаПослуг_Objest = await реалізаціяТоварівТаПослуг_Pointer.GetDocumentObject(false);
                     if (реалізаціяТоварівТаПослуг_Objest == null) continue;
 
                     //
@@ -275,7 +275,7 @@ namespace StorageAndTrade
                     string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
 
                     РеалізаціяТоварівТаПослуг_Pointer реалізаціяТоварівТаПослуг_Pointer = new РеалізаціяТоварівТаПослуг_Pointer(new UnigueID(uid));
-                    РеалізаціяТоварівТаПослуг_Objest? реалізаціяТоварівТаПослуг_Objest = реалізаціяТоварівТаПослуг_Pointer.GetDocumentObject(true);
+                    РеалізаціяТоварівТаПослуг_Objest? реалізаціяТоварівТаПослуг_Objest = await реалізаціяТоварівТаПослуг_Pointer.GetDocumentObject(true);
                     if (реалізаціяТоварівТаПослуг_Objest == null) continue;
 
                     //
@@ -345,7 +345,7 @@ namespace StorageAndTrade
                     string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
 
                     РеалізаціяТоварівТаПослуг_Pointer реалізаціяТоварівТаПослуг_Pointer = new РеалізаціяТоварівТаПослуг_Pointer(new UnigueID(uid));
-                    РеалізаціяТоварівТаПослуг_Objest? реалізаціяТоварівТаПослуг_Objest = реалізаціяТоварівТаПослуг_Pointer.GetDocumentObject(true);
+                    РеалізаціяТоварівТаПослуг_Objest? реалізаціяТоварівТаПослуг_Objest = await реалізаціяТоварівТаПослуг_Pointer.GetDocumentObject(true);
                     if (реалізаціяТоварівТаПослуг_Objest == null) continue;
 
                     //

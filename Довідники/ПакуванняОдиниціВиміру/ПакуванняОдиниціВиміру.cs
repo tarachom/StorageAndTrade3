@@ -75,7 +75,7 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.ПакуванняОдиниціВиміру_Записи.FirstPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             if (IsNew)
             {
@@ -95,7 +95,7 @@ namespace StorageAndTrade
             else if (unigueID != null)
             {
                 ПакуванняОдиниціВиміру_Objest ПакуванняОдиниціВиміру_Objest = new ПакуванняОдиниціВиміру_Objest();
-                if (ПакуванняОдиниціВиміру_Objest.Read(unigueID))
+                if (await ПакуванняОдиниціВиміру_Objest.Read(unigueID))
                 {
                     Program.GeneralForm?.CreateNotebookPage($"{ПакуванняОдиниціВиміру_Objest.Назва}", () =>
                     {
@@ -119,7 +119,7 @@ namespace StorageAndTrade
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             ПакуванняОдиниціВиміру_Objest ПакуванняОдиниціВиміру_Objest = new ПакуванняОдиниціВиміру_Objest();
-            if (ПакуванняОдиниціВиміру_Objest.Read(unigueID))
+            if (await ПакуванняОдиниціВиміру_Objest.Read(unigueID))
                 await ПакуванняОдиниціВиміру_Objest.SetDeletionLabel(!ПакуванняОдиниціВиміру_Objest.DeletionLabel);
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
@@ -128,7 +128,7 @@ namespace StorageAndTrade
         protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
             ПакуванняОдиниціВиміру_Objest ПакуванняОдиниціВиміру_Objest = new ПакуванняОдиниціВиміру_Objest();
-            if (ПакуванняОдиниціВиміру_Objest.Read(unigueID))
+            if (await ПакуванняОдиниціВиміру_Objest.Read(unigueID))
             {
                 ПакуванняОдиниціВиміру_Objest ПакуванняОдиниціВиміру_Objest_Новий = ПакуванняОдиниціВиміру_Objest.Copy(true);
                 await ПакуванняОдиниціВиміру_Objest_Новий.Save();
