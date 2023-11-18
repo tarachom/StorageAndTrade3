@@ -28,8 +28,12 @@ namespace StorageAndTrade
 {
     class ПартіяТоварівКомпозит_PointerControl : PointerControl
     {
+        event EventHandler<ПартіяТоварівКомпозит_Pointer>? PointerChanged;
+
         public ПартіяТоварівКомпозит_PointerControl()
         {
+            PointerChanged += OnPointerChanged;
+
             pointer = new ПартіяТоварівКомпозит_Pointer();
             WidthPresentation = 300;
             Caption = $"{ПартіяТоварівКомпозит_Const.FULLNAME}:";
@@ -45,15 +49,16 @@ namespace StorageAndTrade
             set
             {
                 pointer = value;
-
-                if (pointer != null)
-                    Presentation = pointer.GetPresentation();
-                else
-                    Presentation = "";
+                PointerChanged?.Invoke(this, pointer);
             }
         }
 
-        protected override void OpenSelect(object? sender, EventArgs args)
+        protected async void OnPointerChanged(object? sender, ПартіяТоварівКомпозит_Pointer pointer)
+        {
+            Presentation = pointer != null ? await pointer.GetPresentation() : "";
+        }
+
+        protected override async void OpenSelect(object? sender, EventArgs args)
         {
             ПартіяТоварівКомпозит page = new ПартіяТоварівКомпозит
             {
@@ -66,7 +71,7 @@ namespace StorageAndTrade
 
             Program.GeneralForm?.CreateNotebookPage($"Вибір - {ПартіяТоварівКомпозит_Const.FULLNAME}", () => { return page; }, true);
 
-            page.LoadRecords();
+            await page.LoadRecords();
         }
 
         protected override void OnClear(object? sender, EventArgs args)

@@ -92,7 +92,8 @@ namespace StorageAndTrade
                     Program.GeneralForm?.CreateNotebookPage($"{Організації_Const.FULLNAME}", () =>
                     {
                         Організації page = new Організації();
-                        page.LoadRecords();
+                        System.Action asyncFunc = async () => { await page.LoadRecords(); };
+                        asyncFunc.Invoke();
                         return page;
                     });
                 });
@@ -102,7 +103,8 @@ namespace StorageAndTrade
                     Program.GeneralForm?.CreateNotebookPage($"{Склади_Const.FULLNAME}", () =>
                     {
                         Склади page = new Склади();
-                        page.LoadRecords();
+                        System.Action asyncFunc = async () => { await page.LoadRecords(); };
+                        asyncFunc.Invoke();
                         return page;
                     });
                 });
@@ -112,7 +114,8 @@ namespace StorageAndTrade
                     Program.GeneralForm?.CreateNotebookPage($"{Валюти_Const.FULLNAME}", () =>
                     {
                         Валюти page = new Валюти();
-                        page.LoadRecords();
+                        System.Action asyncFunc = async () => { await page.LoadRecords(); };
+                        asyncFunc.Invoke();
                         return page;
                     });
                 });
@@ -122,7 +125,8 @@ namespace StorageAndTrade
                     Program.GeneralForm?.CreateNotebookPage($"{Каси_Const.FULLNAME}", () =>
                     {
                         Каси page = new Каси();
-                        page.LoadRecords();
+                        System.Action asyncFunc = async () => { await page.LoadRecords(); };
+                        asyncFunc.Invoke();
                         return page;
                     });
                 });
@@ -132,7 +136,8 @@ namespace StorageAndTrade
                     Program.GeneralForm?.CreateNotebookPage($"{ВидиЦін_Const.FULLNAME}", () =>
                     {
                         ВидиЦін page = new ВидиЦін();
-                        page.LoadRecords();
+                        System.Action asyncFunc = async () => { await page.LoadRecords(); };
+                        asyncFunc.Invoke();
                         return page;
                     });
                 });
@@ -142,7 +147,8 @@ namespace StorageAndTrade
                     Program.GeneralForm?.CreateNotebookPage($"{ВидиЦінПостачальників_Const.FULLNAME}", () =>
                     {
                         ВидиЦінПостачальників page = new ВидиЦінПостачальників();
-                        page.LoadRecords();
+                        System.Action asyncFunc = async () => { await page.LoadRecords(); };
+                        asyncFunc.Invoke();
                         return page;
                     });
                 });
@@ -152,7 +158,8 @@ namespace StorageAndTrade
                     Program.GeneralForm?.CreateNotebookPage($"{БанківськіРахункиОрганізацій_Const.FULLNAME}", () =>
                     {
                         БанківськіРахункиОрганізацій page = new БанківськіРахункиОрганізацій();
-                        page.LoadRecords();
+                        System.Action asyncFunc = async () => { await page.LoadRecords(); };
+                        asyncFunc.Invoke();
                         return page;
                     });
                 });
@@ -162,7 +169,8 @@ namespace StorageAndTrade
                     Program.GeneralForm?.CreateNotebookPage($"{СтруктураПідприємства_Const.FULLNAME}", () =>
                     {
                         СтруктураПідприємства page = new СтруктураПідприємства();
-                        page.LoadRecords();
+                        System.Action asyncFunc = async () => { await page.LoadRecords(); };
+                        asyncFunc.Invoke();
                         return page;
                     });
                 });
@@ -175,7 +183,8 @@ namespace StorageAndTrade
                     Program.GeneralForm?.CreateNotebookPage($"{Банки_Const.FULLNAME}", () =>
                     {
                         Банки page = new Банки();
-                        page.LoadRecords();
+                        System.Action asyncFunc = async () => { await page.LoadRecords(); };
+                        asyncFunc.Invoke();
                         return page;
                     });
                 });
@@ -185,7 +194,8 @@ namespace StorageAndTrade
                     Program.GeneralForm?.CreateNotebookPage($"{Користувачі_Const.FULLNAME}", () =>
                     {
                         Користувачі page = new Користувачі();
-                        page.LoadRecords();
+                        System.Action asyncFunc = async () => { await page.LoadRecords(); };
+                        asyncFunc.Invoke();
                         return page;
                     });
                 });
@@ -195,7 +205,8 @@ namespace StorageAndTrade
                     Program.GeneralForm?.CreateNotebookPage($"{ФізичніОсоби_Const.FULLNAME}", () =>
                     {
                         ФізичніОсоби page = new ФізичніОсоби();
-                        page.LoadRecords();
+                        System.Action asyncFunc = async () => { await page.LoadRecords(); };
+                        asyncFunc.Invoke();
                         return page;
                     });
                 });
@@ -205,7 +216,8 @@ namespace StorageAndTrade
                     Program.GeneralForm?.CreateNotebookPage($"{Файли_Const.FULLNAME}", () =>
                     {
                         Файли page = new Файли();
-                        page.LoadRecords();
+                        System.Action asyncFunc = async () => { await page.LoadRecords(); };
+                        asyncFunc.Invoke();
                         return page;
                     });
                 });
@@ -215,7 +227,8 @@ namespace StorageAndTrade
                     Program.GeneralForm?.CreateNotebookPage($"{СтаттяРухуКоштів_Const.FULLNAME}", () =>
                     {
                         СтаттяРухуКоштів page = new СтаттяРухуКоштів();
-                        page.LoadRecords();
+                        System.Action asyncFunc = async () => { await page.LoadRecords(); };
+                        asyncFunc.Invoke();
                         return page;
                     });
                 });
@@ -225,7 +238,8 @@ namespace StorageAndTrade
                     Program.GeneralForm?.CreateNotebookPage($"{ВидиЗапасів_Const.FULLNAME}", () =>
                     {
                         ВидиЗапасів page = new ВидиЗапасів();
-                        page.LoadRecords();
+                        System.Action asyncFunc = async () => { await page.LoadRecords(); };
+                        asyncFunc.Invoke();
                         return page;
                     });
                 });
@@ -235,7 +249,8 @@ namespace StorageAndTrade
                     Program.GeneralForm?.CreateNotebookPage($"{КраїниСвіту_Const.FULLNAME}", () =>
                     {
                         КраїниСвіту page = new КраїниСвіту();
-                        page.LoadRecords();
+                        System.Action asyncFunc = async () => { await page.LoadRecords(); };
+                        asyncFunc.Invoke();
                         return page;
                     });
                 });
@@ -253,7 +268,8 @@ namespace StorageAndTrade
                     Program.GeneralForm?.CreateNotebookPage($"{Контрагенти_Const.FULLNAME}", () =>
                     {
                         Контрагенти page = new Контрагенти();
-                        page.LoadRecords();
+                        System.Action asyncFunc = async () => { await page.LoadRecords(); };
+                        asyncFunc.Invoke();
                         return page;
                     });
                 });
@@ -263,7 +279,8 @@ namespace StorageAndTrade
                     Program.GeneralForm?.CreateNotebookPage($"{ДоговориКонтрагентів_Const.FULLNAME}", () =>
                     {
                         ДоговориКонтрагентів page = new ДоговориКонтрагентів();
-                        page.LoadRecords();
+                        System.Action asyncFunc = async () => { await page.LoadRecords(); };
+                        asyncFunc.Invoke();
                         return page;
                     });
                 });
@@ -273,7 +290,8 @@ namespace StorageAndTrade
                     Program.GeneralForm?.CreateNotebookPage($"{БанківськіРахункиКонтрагентів_Const.FULLNAME}", () =>
                     {
                         БанківськіРахункиКонтрагентів page = new БанківськіРахункиКонтрагентів();
-                        page.LoadRecords();
+                        System.Action asyncFunc = async () => { await page.LoadRecords(); };
+                        asyncFunc.Invoke();
                         return page;
                     });
                 });
@@ -286,7 +304,8 @@ namespace StorageAndTrade
                     Program.GeneralForm?.CreateNotebookPage($"{Номенклатура_Const.FULLNAME}", () =>
                     {
                         Номенклатура page = new Номенклатура();
-                        page.LoadRecords();
+                        System.Action asyncFunc = async () => { await page.LoadRecords(); };
+                        asyncFunc.Invoke();
                         return page;
                     });
                 });
@@ -296,7 +315,8 @@ namespace StorageAndTrade
                     Program.GeneralForm?.CreateNotebookPage($"{ХарактеристикиНоменклатури_Const.FULLNAME}", () =>
                     {
                         ХарактеристикиНоменклатури page = new ХарактеристикиНоменклатури();
-                        page.LoadRecords();
+                        System.Action asyncFunc = async () => { await page.LoadRecords(); };
+                        asyncFunc.Invoke();
                         return page;
                     });
                 });
@@ -306,7 +326,8 @@ namespace StorageAndTrade
                     Program.GeneralForm?.CreateNotebookPage($"{ПакуванняОдиниціВиміру_Const.FULLNAME}", () =>
                     {
                         ПакуванняОдиниціВиміру page = new ПакуванняОдиниціВиміру();
-                        page.LoadRecords();
+                        System.Action asyncFunc = async () => { await page.LoadRecords(); };
+                        asyncFunc.Invoke();
                         return page;
                     });
                 });
@@ -316,7 +337,8 @@ namespace StorageAndTrade
                     Program.GeneralForm?.CreateNotebookPage($"{ВидиНоменклатури_Const.FULLNAME}", () =>
                     {
                         ВидиНоменклатури page = new ВидиНоменклатури();
-                        page.LoadRecords();
+                        System.Action asyncFunc = async () => { await page.LoadRecords(); };
+                        asyncFunc.Invoke();
                         return page;
                     });
                 });
@@ -326,7 +348,8 @@ namespace StorageAndTrade
                     Program.GeneralForm?.CreateNotebookPage($"{ПартіяТоварівКомпозит_Const.FULLNAME}", () =>
                     {
                         ПартіяТоварівКомпозит page = new ПартіяТоварівКомпозит();
-                        page.LoadRecords();
+                        System.Action asyncFunc = async () => { await page.LoadRecords(); };
+                        asyncFunc.Invoke();
                         return page;
                     });
                 });
@@ -336,7 +359,8 @@ namespace StorageAndTrade
                     Program.GeneralForm?.CreateNotebookPage($"{СеріїНоменклатури_Const.FULLNAME}", () =>
                     {
                         СеріїНоменклатури page = new СеріїНоменклатури();
-                        page.LoadRecords();
+                        System.Action asyncFunc = async () => { await page.LoadRecords(); };
+                        asyncFunc.Invoke();
                         return page;
                     });
                 });
@@ -346,7 +370,8 @@ namespace StorageAndTrade
                     Program.GeneralForm?.CreateNotebookPage($"{Виробники_Const.FULLNAME}", () =>
                     {
                         Виробники page = new Виробники();
-                        page.LoadRecords();
+                        System.Action asyncFunc = async () => { await page.LoadRecords(); };
+                        asyncFunc.Invoke();
                         return page;
                     });
                 });
@@ -359,7 +384,8 @@ namespace StorageAndTrade
                     Program.GeneralForm?.CreateNotebookPage($"{Блокнот_Const.FULLNAME}", () =>
                     {
                         Блокнот page = new Блокнот();
-                        page.LoadRecords();
+                        System.Action asyncFunc = async () => { await page.LoadRecords(); };
+                        asyncFunc.Invoke();
                         return page;
                     });
                 });
@@ -372,7 +398,8 @@ namespace StorageAndTrade
                     Program.GeneralForm?.CreateNotebookPage($"{СкладськіПриміщення_Const.FULLNAME}", () =>
                     {
                         СкладськіПриміщення page = new СкладськіПриміщення();
-                        page.LoadRecords();
+                        System.Action asyncFunc = async () => { await page.LoadRecords(); };
+                        asyncFunc.Invoke();
                         return page;
                     });
                 });
@@ -382,7 +409,8 @@ namespace StorageAndTrade
                     Program.GeneralForm?.CreateNotebookPage($"{СкладськіКомірки_Const.FULLNAME}", () =>
                     {
                         СкладськіКомірки page = new СкладськіКомірки();
-                        page.LoadRecords();
+                        System.Action asyncFunc = async () => { await page.LoadRecords(); };
+                        asyncFunc.Invoke();
                         return page;
                     });
                 });
@@ -392,7 +420,8 @@ namespace StorageAndTrade
                     Program.GeneralForm?.CreateNotebookPage($"{ТипорозміриКомірок_Const.FULLNAME}", () =>
                     {
                         ТипорозміриКомірок page = new ТипорозміриКомірок();
-                        page.LoadRecords();
+                        System.Action asyncFunc = async () => { await page.LoadRecords(); };
+                        asyncFunc.Invoke();
                         return page;
                     });
                 });

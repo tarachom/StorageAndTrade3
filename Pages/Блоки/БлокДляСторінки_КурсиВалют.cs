@@ -101,7 +101,8 @@ namespace StorageAndTrade
                 Program.GeneralForm?.CreateNotebookPage($"{Валюти_Const.FULLNAME}", () =>
                 {
                     Валюти page = new Валюти();
-                    page.LoadRecords();
+                    System.Action asyncFunc = async () => { await page.LoadRecords(); };
+                    asyncFunc.Invoke();
                     return page;
                 });
             });

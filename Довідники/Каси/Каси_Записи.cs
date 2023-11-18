@@ -84,7 +84,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
-        public static void LoadRecords()
+        public static async ValueTask LoadRecords()
         {
             Store.Clear();
             SelectPath = FirstPath = null;
@@ -127,7 +127,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 ", "salishok"));
 
             /* SELECT */
-            Каси_Select.Select();
+            await Каси_Select.Select();
             while (Каси_Select.MoveNext())
             {
                 Довідники.Каси_Pointer? cur = Каси_Select.Current;

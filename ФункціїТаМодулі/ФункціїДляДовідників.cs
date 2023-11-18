@@ -111,7 +111,7 @@ namespace StorageAndTrade
             ВибіркаДоговорівКонтрагента.QuerySelect.Where.Add(
                 new Where(Comparison.AND, Довідники.ДоговориКонтрагентів_Const.ТипДоговору, Comparison.EQ, (int)Перелічення.ТипДоговорів.ЗПокупцями));
 
-            if (!ВибіркаДоговорівКонтрагента.Select())
+            if (!await ВибіркаДоговорівКонтрагента.Select())
             {
                 НовийДоговір.New();
                 НовийДоговір.Код = (++Константи.НумераціяДовідників.Контрагенти_Const).ToString("D6");
@@ -123,7 +123,7 @@ namespace StorageAndTrade
             //Відбір по типу договору
             ВибіркаДоговорівКонтрагента.QuerySelect.Where[1].Value = (int)Перелічення.ТипДоговорів.ЗПостачальниками;
 
-            if (!ВибіркаДоговорівКонтрагента.Select())
+            if (!await ВибіркаДоговорівКонтрагента.Select())
             {
                 НовийДоговір.New();
                 НовийДоговір.Код = (++Константи.НумераціяДовідників.Контрагенти_Const).ToString("D6");
@@ -144,7 +144,7 @@ namespace StorageAndTrade
             Довідники.СеріїНоменклатури_Select серіїНоменклатури_Select = new Довідники.СеріїНоменклатури_Select();
             серіїНоменклатури_Select.QuerySelect.Where.Add(new Where(Довідники.СеріїНоменклатури_Const.Номер, Comparison.EQ, СерійнийНомер));
 
-            if (серіїНоменклатури_Select.SelectSingle())
+            if (await серіїНоменклатури_Select.SelectSingle())
                 return серіїНоменклатури_Select.Current!;
             else
             {

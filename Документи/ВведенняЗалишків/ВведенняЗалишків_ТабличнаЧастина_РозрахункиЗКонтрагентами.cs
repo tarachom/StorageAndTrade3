@@ -89,13 +89,13 @@ namespace StorageAndTrade
                 };
             }
 
-            public static void ПісляЗміни_Контрагент(Запис запис)
+            public static async void ПісляЗміни_Контрагент(Запис запис)
             {
-                запис.Контрагент.GetPresentation();
+                await запис.Контрагент.GetPresentation();
             }
-            public static void ПісляЗміни_Валюта(Запис запис)
+            public static async void ПісляЗміни_Валюта(Запис запис)
             {
-                запис.Валюта.GetPresentation();
+                await запис.Валюта.GetPresentation();
             }
         }
 
@@ -285,7 +285,7 @@ namespace StorageAndTrade
             TreeViewGrid.AppendColumn(new TreeViewColumn());
         }
 
-        protected override void ButtonSelect(TreeIter iter, int rowNumber, int colNumber, Popover popoverSmallSelect)
+        protected override async void ButtonSelect(TreeIter iter, int rowNumber, int colNumber, Popover popoverSmallSelect)
         {
             Запис запис = Записи[rowNumber];
 
@@ -305,7 +305,7 @@ namespace StorageAndTrade
                         popoverSmallSelect.Add(page);
                         popoverSmallSelect.ShowAll();
 
-                        page.LoadRecords();
+                        await page.LoadRecords();
                         break;
                     }
                 case Columns.Валюта:
@@ -322,7 +322,7 @@ namespace StorageAndTrade
                         popoverSmallSelect.Add(page);
                         popoverSmallSelect.ShowAll();
 
-                        page.LoadRecords();
+                        await page.LoadRecords();
                         break;
                     }
             }

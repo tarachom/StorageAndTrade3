@@ -75,14 +75,14 @@ namespace StorageAndTrade
 
         #region Override
 
-        public override void LoadRecords()
+        public override async ValueTask LoadRecords()
         {
             ТабличніСписки.Валюти_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.Валюти_Записи.DirectoryPointerItem = DirectoryPointerItem;
 
             ТабличніСписки.Валюти_Записи.Where.Clear();
 
-            ТабличніСписки.Валюти_Записи.LoadRecords();
+            await ТабличніСписки.Валюти_Записи.LoadRecords();
 
             if (ТабличніСписки.Валюти_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.Валюти_Записи.SelectPath, TreeViewGrid.Columns[0], false);
@@ -90,7 +90,7 @@ namespace StorageAndTrade
             TreeViewGrid.GrabFocus();
         }
 
-        protected override void LoadRecords_OnSearch(string searchText)
+        protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
             searchText = searchText.ToLower().Trim();
 
@@ -105,7 +105,7 @@ namespace StorageAndTrade
             ТабличніСписки.Валюти_Записи.Where.Add(
                 new Where(Валюти_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
-            ТабличніСписки.Валюти_Записи.LoadRecords();
+            await ТабличніСписки.Валюти_Записи.LoadRecords();
 
             if (ТабличніСписки.Валюти_Записи.FirstPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.Валюти_Записи.FirstPath, TreeViewGrid.Columns[0], false);

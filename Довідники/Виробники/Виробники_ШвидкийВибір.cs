@@ -40,7 +40,7 @@ namespace StorageAndTrade
             //Сторінка
             {
                 LinkButton linkPage = new LinkButton($" {Виробники_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
-                linkPage.Clicked += (object? sender, EventArgs args) =>
+                linkPage.Clicked += async (object? sender, EventArgs args) =>
                 {
                     Виробники page = new Виробники()
                     {
@@ -50,7 +50,7 @@ namespace StorageAndTrade
 
                     Program.GeneralForm?.CreateNotebookPage($"Вибір - {Виробники_Const.FULLNAME}", () => { return page; }, true);
 
-                    page.LoadRecords();
+                    await page.LoadRecords();
                 };
 
                 HBoxTop.PackStart(linkPage, false, false, 10);
@@ -76,19 +76,19 @@ namespace StorageAndTrade
             }
         }
 
-        public override void LoadRecords()
+        public override async ValueTask LoadRecords()
         {
             ТабличніСписки.Виробники_ЗаписиШвидкийВибір.DirectoryPointerItem = DirectoryPointerItem;
 
             ТабличніСписки.Виробники_ЗаписиШвидкийВибір.Where.Clear();
 
-            ТабличніСписки.Виробники_ЗаписиШвидкийВибір.LoadRecords();
+            await ТабличніСписки.Виробники_ЗаписиШвидкийВибір.LoadRecords();
 
             if (ТабличніСписки.Виробники_ЗаписиШвидкийВибір.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.Виробники_ЗаписиШвидкийВибір.SelectPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override void LoadRecords_OnSearch(string searchText)
+        protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
             searchText = searchText.ToLower().Trim();
 
@@ -107,7 +107,7 @@ namespace StorageAndTrade
             ТабличніСписки.Виробники_ЗаписиШвидкийВибір.Where.Add(
                 new Where(Comparison.OR, Виробники_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
-            ТабличніСписки.Виробники_ЗаписиШвидкийВибір.LoadRecords();
+            await ТабличніСписки.Виробники_ЗаписиШвидкийВибір.LoadRecords();
         }
     }
 }

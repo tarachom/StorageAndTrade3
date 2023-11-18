@@ -28,8 +28,12 @@ namespace StorageAndTrade
 {
     class РозміщенняТоварівНаСкладі_PointerControl : PointerControl
     {
+        event EventHandler<РозміщенняТоварівНаСкладі_Pointer>? PointerChanged;
+
         public РозміщенняТоварівНаСкладі_PointerControl()
         {
+            PointerChanged += OnPointerChanged;
+
             pointer = new РозміщенняТоварівНаСкладі_Pointer();
             WidthPresentation = 300;
             Caption = $"{РозміщенняТоварівНаСкладі_Const.FULLNAME}:";
@@ -45,12 +49,13 @@ namespace StorageAndTrade
             set
             {
                 pointer = value;
-
-                if (pointer != null)
-                    Presentation = pointer.GetPresentation();
-                else
-                    Presentation = "";
+                PointerChanged?.Invoke(this, pointer);
             }
+        }
+
+        protected async void OnPointerChanged(object? sender, РозміщенняТоварівНаСкладі_Pointer pointer)
+        {
+            Presentation = pointer != null ? await pointer.GetPresentation() : "";
         }
 
         //Відбір по періоду в журналі

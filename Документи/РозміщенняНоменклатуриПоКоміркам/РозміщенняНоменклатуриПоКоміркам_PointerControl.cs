@@ -28,8 +28,12 @@ namespace StorageAndTrade
 {
     class РозміщенняНоменклатуриПоКоміркам_PointerControl : PointerControl
     {
+        event EventHandler<РозміщенняНоменклатуриПоКоміркам_Pointer>? PointerChanged;
+
         public РозміщенняНоменклатуриПоКоміркам_PointerControl()
         {
+            PointerChanged += OnPointerChanged;
+
             pointer = new РозміщенняНоменклатуриПоКоміркам_Pointer();
             WidthPresentation = 300;
             Caption = $"{РозміщенняНоменклатуриПоКоміркам_Const.FULLNAME}";
@@ -45,12 +49,13 @@ namespace StorageAndTrade
             set
             {
                 pointer = value;
-
-                if (pointer != null)
-                    Presentation = pointer.GetPresentation();
-                else
-                    Presentation = "";
+                PointerChanged?.Invoke(this, pointer);
             }
+        }
+
+        protected async void OnPointerChanged(object? sender, РозміщенняНоменклатуриПоКоміркам_Pointer pointer)
+        {
+            Presentation = pointer != null ? await pointer.GetPresentation() : "";
         }
 
         //Відбір по періоду в журналі

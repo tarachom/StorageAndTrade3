@@ -30,8 +30,12 @@ namespace StorageAndTrade
 {
     class СкладськіКомірки_PointerControl : PointerControl
     {
+        event EventHandler<СкладськіКомірки_Pointer>? PointerChanged;
+
         public СкладськіКомірки_PointerControl()
         {
+            PointerChanged += OnPointerChanged;
+
             pointer = new СкладськіКомірки_Pointer();
             WidthPresentation = 300;
             Caption = $"{СкладськіКомірки_Const.FULLNAME}:";
@@ -47,17 +51,18 @@ namespace StorageAndTrade
             set
             {
                 pointer = value;
-
-                if (pointer != null)
-                    Presentation = pointer.GetPresentation();
-                else
-                    Presentation = "";
+                PointerChanged?.Invoke(this, pointer);
             }
+        }
+
+        protected async void OnPointerChanged(object? sender, СкладськіКомірки_Pointer pointer)
+        {
+            Presentation = pointer != null ? await pointer.GetPresentation() : "";
         }
 
         public СкладськіПриміщення_Pointer СкладПриміщенняВласник = new СкладськіПриміщення_Pointer();
 
-        protected override void OpenSelect(object? sender, EventArgs args)
+        protected override async void OpenSelect(object? sender, EventArgs args)
         {
             Popover PopoverSmallSelect = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
 
@@ -77,7 +82,7 @@ namespace StorageAndTrade
             PopoverSmallSelect.Add(page);
             PopoverSmallSelect.ShowAll();
 
-            page.LoadRecords();
+            await page.LoadRecords();
         }
 
         protected override void OnClear(object? sender, EventArgs args)

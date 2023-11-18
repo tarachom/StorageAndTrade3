@@ -39,14 +39,14 @@ namespace StorageAndTrade
 
         #region Override
 
-        public override void LoadRecords()
+        public override async ValueTask LoadRecords()
         {
             ТабличніСписки.КраїниСвіту_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.КраїниСвіту_Записи.DirectoryPointerItem = DirectoryPointerItem;
 
             ТабличніСписки.КраїниСвіту_Записи.Where.Clear();
 
-            ТабличніСписки.КраїниСвіту_Записи.LoadRecords();
+            await ТабличніСписки.КраїниСвіту_Записи.LoadRecords();
 
             if (ТабличніСписки.КраїниСвіту_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.КраїниСвіту_Записи.SelectPath, TreeViewGrid.Columns[0], false);
@@ -54,7 +54,7 @@ namespace StorageAndTrade
             TreeViewGrid.GrabFocus();
         }
 
-        protected override void LoadRecords_OnSearch(string searchText)
+        protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
             searchText = searchText.ToLower().Trim();
 
@@ -69,7 +69,7 @@ namespace StorageAndTrade
             ТабличніСписки.КраїниСвіту_Записи.Where.Add(
                 new Where(КраїниСвіту_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
-            ТабличніСписки.КраїниСвіту_Записи.LoadRecords();
+            await ТабличніСписки.КраїниСвіту_Записи.LoadRecords();
 
             if (ТабличніСписки.КраїниСвіту_Записи.FirstPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.КраїниСвіту_Записи.FirstPath, TreeViewGrid.Columns[0], false);

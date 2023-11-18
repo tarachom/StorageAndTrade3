@@ -45,7 +45,7 @@ namespace StorageAndTrade
             //Договори
             {
                 LinkButton linkButton = new LinkButton($" {ДоговориКонтрагентів_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
-                linkButton.Clicked += (object? sender, EventArgs args) =>
+                linkButton.Clicked += async (object? sender, EventArgs args) =>
                 {
                     ДоговориКонтрагентів page = new ДоговориКонтрагентів();
 
@@ -54,7 +54,7 @@ namespace StorageAndTrade
 
                     Program.GeneralForm?.CreateNotebookPage($"{ДоговориКонтрагентів_Const.FULLNAME}", () => { return page; });
 
-                    page.LoadRecords();
+                    await page.LoadRecords();
                 };
 
                 HBoxTop.PackStart(linkButton, false, false, 10);
@@ -74,7 +74,7 @@ namespace StorageAndTrade
 
         #region Override
 
-        public override async void LoadRecords()
+        public override async ValueTask LoadRecords()
         {
             if (DirectoryPointerItem != null || SelectPointerItem != null)
             {
@@ -88,7 +88,7 @@ namespace StorageAndTrade
             ДеревоПапок.LoadTree();
         }
 
-        void LoadRecords_TreeCallBack()
+        async void LoadRecords_TreeCallBack()
         {
             ТабличніСписки.Контрагенти_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.Контрагенти_Записи.DirectoryPointerItem = DirectoryPointerItem;
@@ -99,7 +99,7 @@ namespace StorageAndTrade
                 ТабличніСписки.Контрагенти_Записи.Where.Add(new Where(Контрагенти_Const.Папка, Comparison.EQ,
                     ДеревоПапок.DirectoryPointerItem?.UGuid ?? new UnigueID().UGuid));
 
-            ТабличніСписки.Контрагенти_Записи.LoadRecords();
+            await ТабличніСписки.Контрагенти_Записи.LoadRecords();
 
             if (ТабличніСписки.Контрагенти_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.Контрагенти_Записи.SelectPath, TreeViewGrid.Columns[0], false);
@@ -107,7 +107,7 @@ namespace StorageAndTrade
             TreeViewGrid.GrabFocus();
         }
 
-        protected override void LoadRecords_OnSearch(string searchText)
+        protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
             searchText = searchText.ToLower().Trim();
 
@@ -126,7 +126,7 @@ namespace StorageAndTrade
             ТабличніСписки.Контрагенти_Записи.Where.Add(
                 new Where(Comparison.OR, Контрагенти_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
-            ТабличніСписки.Контрагенти_Записи.LoadRecords();
+            await ТабличніСписки.Контрагенти_Записи.LoadRecords();
 
             if (ТабличніСписки.Контрагенти_Записи.FirstPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.Контрагенти_Записи.FirstPath, TreeViewGrid.Columns[0], false);
@@ -203,9 +203,9 @@ namespace StorageAndTrade
 
         #endregion
 
-        void OnCheckButtonIsHierarchyClicked(object? sender, EventArgs args)
+        async void OnCheckButtonIsHierarchyClicked(object? sender, EventArgs args)
         {
-            LoadRecords();
+            await LoadRecords();
         }
     }
 }

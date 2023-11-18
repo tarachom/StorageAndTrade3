@@ -100,7 +100,7 @@ namespace StorageAndTrade
 
             public static async void ПісляЗміни_Номенклатура(Запис запис)
             {
-                запис.Номенклатура.GetPresentation();
+                await запис.Номенклатура.GetPresentation();
 
                 Номенклатура_Objest? номенклатура_Objest = await запис.Номенклатура.GetDirectoryObject();
                 if (номенклатура_Objest != null && !номенклатура_Objest.ОдиницяВиміру.IsEmpty())
@@ -109,17 +109,17 @@ namespace StorageAndTrade
                     Запис.ПісляЗміни_Пакування(запис);
                 }
             }
-            public static void ПісляЗміни_Характеристика(Запис запис)
+            public static async void ПісляЗміни_Характеристика(Запис запис)
             {
-                запис.Характеристика.GetPresentation();
+                await запис.Характеристика.GetPresentation();
             }
-            public static void ПісляЗміни_Пакування(Запис запис)
+            public static async void ПісляЗміни_Пакування(Запис запис)
             {
-                запис.Пакування.GetPresentation();
+                await запис.Пакування.GetPresentation();
             }
-            public static void ПісляЗміни_ВидЦіни(Запис запис)
+            public static async void ПісляЗміни_ВидЦіни(Запис запис)
             {
-                запис.ВидЦіни.GetPresentation();
+                await запис.ВидЦіни.GetPresentation();
             }
         }
 
@@ -312,7 +312,7 @@ namespace StorageAndTrade
             TreeViewGrid.AppendColumn(new TreeViewColumn());
         }
 
-        protected override void ButtonSelect(TreeIter iter, int rowNumber, int colNumber, Popover popoverSmallSelect)
+        protected override async void ButtonSelect(TreeIter iter, int rowNumber, int colNumber, Popover popoverSmallSelect)
         {
             Запис запис = Записи[rowNumber];
 
@@ -332,7 +332,7 @@ namespace StorageAndTrade
                         popoverSmallSelect.Add(page);
                         popoverSmallSelect.ShowAll();
 
-                        page.LoadRecords();
+                        await page.LoadRecords();
                         break;
                     }
                 case Columns.Характеристика:
@@ -351,7 +351,7 @@ namespace StorageAndTrade
                         popoverSmallSelect.Add(page);
                         popoverSmallSelect.ShowAll();
 
-                        page.LoadRecords();
+                        await page.LoadRecords();
                         break;
                     }
                 case Columns.Пакування:
@@ -368,7 +368,7 @@ namespace StorageAndTrade
                         popoverSmallSelect.Add(page);
                         popoverSmallSelect.ShowAll();
 
-                        page.LoadRecords();
+                        await page.LoadRecords();
                         break;
                     }
                 case Columns.ВидЦіни:
@@ -385,7 +385,7 @@ namespace StorageAndTrade
                         popoverSmallSelect.Add(page);
                         popoverSmallSelect.ShowAll();
 
-                        page.LoadRecords();
+                        await page.LoadRecords();
                         break;
                     }
             }
@@ -506,7 +506,7 @@ namespace StorageAndTrade
             Store.Remove(ref iter);
         }
 
-        void OnFillDirectory(object? sender, EventArgs args)
+        async void OnFillDirectory(object? sender, EventArgs args)
         {
             if (ОбновитиЗначенняДокумента != null)
                 ОбновитиЗначенняДокумента.Invoke();
@@ -556,7 +556,7 @@ ORDER BY Номенклатура_Назва, Пакування_Назва
 
                 Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listRow);
 
-                string ВидЦіниНазва = ВстановленняЦінНоменклатури_Objest.ВидЦіни.GetPresentation();
+                string ВидЦіниНазва = await ВстановленняЦінНоменклатури_Objest.ВидЦіни.GetPresentation();
 
                 foreach (Dictionary<string, object> row in listRow)
                 {

@@ -22,6 +22,7 @@ limitations under the License.
 */
 
 using AccountingSoftware;
+using GLib;
 using StorageAndTrade_1_0.Довідники;
 using ТабличніСписки = StorageAndTrade_1_0.Довідники.ТабличніСписки;
 
@@ -37,14 +38,14 @@ namespace StorageAndTrade
 
         #region Override
 
-        public override void LoadRecords()
+        public override async ValueTask LoadRecords()
         {
             ТабличніСписки.ВидиЦінПостачальників_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.ВидиЦінПостачальників_Записи.DirectoryPointerItem = DirectoryPointerItem;
 
             ТабличніСписки.ВидиЦінПостачальників_Записи.Where.Clear();
 
-            ТабличніСписки.ВидиЦінПостачальників_Записи.LoadRecords();
+            await ТабличніСписки.ВидиЦінПостачальників_Записи.LoadRecords();
 
             if (ТабличніСписки.ВидиЦінПостачальників_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.ВидиЦінПостачальників_Записи.SelectPath, TreeViewGrid.Columns[0], false);
@@ -52,7 +53,7 @@ namespace StorageAndTrade
             TreeViewGrid.GrabFocus();
         }
 
-        protected override void LoadRecords_OnSearch(string searchText)
+        protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
             searchText = searchText.ToLower().Trim();
 
@@ -67,7 +68,7 @@ namespace StorageAndTrade
             ТабличніСписки.ВидиЦінПостачальників_Записи.Where.Add(
                 new Where(ВидиЦінПостачальників_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
-            ТабличніСписки.ВидиЦінПостачальників_Записи.LoadRecords();
+            await ТабличніСписки.ВидиЦінПостачальників_Записи.LoadRecords();
 
             if (ТабличніСписки.ВидиЦінПостачальників_Записи.FirstPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.ВидиЦінПостачальників_Записи.FirstPath, TreeViewGrid.Columns[0], false);

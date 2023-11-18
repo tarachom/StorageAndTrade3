@@ -40,7 +40,7 @@ namespace StorageAndTrade
             //Сторінка
             {
                 LinkButton linkPage = new LinkButton($" {ВидиЦінПостачальників_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
-                linkPage.Clicked += (object? sender, EventArgs args) =>
+                linkPage.Clicked += async (object? sender, EventArgs args) =>
                 {
                     ВидиЦінПостачальників page = new ВидиЦінПостачальників()
                     {
@@ -50,7 +50,7 @@ namespace StorageAndTrade
 
                     Program.GeneralForm?.CreateNotebookPage($"Вибір - {ВидиЦінПостачальників_Const.FULLNAME}", () => { return page; }, true);
 
-                    page.LoadRecords();
+                    await page.LoadRecords();
                 };
 
                 HBoxTop.PackStart(linkPage, false, false, 10);
@@ -76,19 +76,19 @@ namespace StorageAndTrade
             }
         }
 
-        public override void LoadRecords()
+        public override async ValueTask LoadRecords()
         {
             ТабличніСписки.ВидиЦінПостачальників_ЗаписиШвидкийВибір.DirectoryPointerItem = DirectoryPointerItem;
 
             ТабличніСписки.ВидиЦінПостачальників_ЗаписиШвидкийВибір.Where.Clear();
 
-            ТабличніСписки.ВидиЦінПостачальників_ЗаписиШвидкийВибір.LoadRecords();
+            await ТабличніСписки.ВидиЦінПостачальників_ЗаписиШвидкийВибір.LoadRecords();
 
             if (ТабличніСписки.ВидиЦінПостачальників_ЗаписиШвидкийВибір.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.ВидиЦінПостачальників_ЗаписиШвидкийВибір.SelectPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override void LoadRecords_OnSearch(string searchText)
+        protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
             searchText = searchText.ToLower().Trim();
 
@@ -103,7 +103,7 @@ namespace StorageAndTrade
             ТабличніСписки.ВидиЦінПостачальників_ЗаписиШвидкийВибір.Where.Add(
                 new Where(ВидиЦінПостачальників_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
-            ТабличніСписки.ВидиЦінПостачальників_ЗаписиШвидкийВибір.LoadRecords();
+            await ТабличніСписки.ВидиЦінПостачальників_ЗаписиШвидкийВибір.LoadRecords();
         }
     }
 }

@@ -112,7 +112,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники.Т
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
-        public static void LoadRecords()
+        public static async ValueTask LoadRecords()
         {
             Store.Clear();
             FirstPath = SelectPath = CurrentPath = null;
@@ -154,7 +154,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники.Т
             </xsl:for-each>
 
             /* SELECT */
-            <xsl:value-of select="$DirectoryName"/>_Select.Select();
+            await <xsl:value-of select="$DirectoryName"/>_Select.Select();
             while (<xsl:value-of select="$DirectoryName"/>_Select.MoveNext())
             {
                 Довідники.<xsl:value-of select="$DirectoryName"/>_Pointer? cur = <xsl:value-of select="$DirectoryName"/>_Select.Current;

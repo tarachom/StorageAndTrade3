@@ -39,14 +39,14 @@ namespace StorageAndTrade
 
         #region Override
 
-        public override void LoadRecords()
+        public override async ValueTask LoadRecords()
         {
             ТабличніСписки.СеріїНоменклатури_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.СеріїНоменклатури_Записи.DirectoryPointerItem = DirectoryPointerItem;
 
             ТабличніСписки.СеріїНоменклатури_Записи.Where.Clear();
 
-            ТабличніСписки.СеріїНоменклатури_Записи.LoadRecords();
+            await ТабличніСписки.СеріїНоменклатури_Записи.LoadRecords();
 
             if (ТабличніСписки.СеріїНоменклатури_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.СеріїНоменклатури_Записи.SelectPath, TreeViewGrid.Columns[0], false);
@@ -54,7 +54,7 @@ namespace StorageAndTrade
             TreeViewGrid.GrabFocus();
         }
 
-        protected override void LoadRecords_OnSearch(string searchText)
+        protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
             searchText = searchText.ToLower().Trim();
 
@@ -69,7 +69,7 @@ namespace StorageAndTrade
             ТабличніСписки.СеріїНоменклатури_Записи.Where.Add(
                 new Where(СеріїНоменклатури_Const.Номер, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
-            ТабличніСписки.СеріїНоменклатури_Записи.LoadRecords();
+            await ТабличніСписки.СеріїНоменклатури_Записи.LoadRecords();
 
             if (ТабличніСписки.СеріїНоменклатури_Записи.FirstPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.СеріїНоменклатури_Записи.FirstPath, TreeViewGrid.Columns[0], false);

@@ -30,8 +30,12 @@ namespace StorageAndTrade
 {
     class БанківськіРахункиКонтрагентів_PointerControl : PointerControl
     {
+        event EventHandler<БанківськіРахункиКонтрагентів_Pointer>? PointerChanged;
+
         public БанківськіРахункиКонтрагентів_PointerControl()
         {
+            PointerChanged += OnPointerChanged;
+
             pointer = new БанківськіРахункиКонтрагентів_Pointer();
             WidthPresentation = 300;
             Caption = $"{БанківськіРахункиКонтрагентів_Const.FULLNAME}:";
@@ -47,15 +51,16 @@ namespace StorageAndTrade
             set
             {
                 pointer = value;
-
-                if (pointer != null)
-                    Presentation = pointer.GetPresentation();
-                else
-                    Presentation = "";
+                PointerChanged?.Invoke(this, pointer);
             }
         }
 
-        protected override void OpenSelect(object? sender, EventArgs args)
+        protected async void OnPointerChanged(object? sender, БанківськіРахункиКонтрагентів_Pointer pointer)
+        {
+            Presentation = pointer != null ? await pointer.GetPresentation() : "";
+        }
+
+        protected override async void OpenSelect(object? sender, EventArgs args)
         {
             Popover PopoverSmallSelect = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
 
@@ -74,7 +79,7 @@ namespace StorageAndTrade
             PopoverSmallSelect.Add(page);
             PopoverSmallSelect.ShowAll();
 
-            page.LoadRecords();
+            await page.LoadRecords();
         }
 
         protected override void OnClear(object? sender, EventArgs args)

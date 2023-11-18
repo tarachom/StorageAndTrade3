@@ -28,8 +28,12 @@ namespace StorageAndTrade
 {
     class АктВиконанихРобіт_PointerControl : PointerControl
     {
+        event EventHandler<АктВиконанихРобіт_Pointer>? PointerChanged;
+
         public АктВиконанихРобіт_PointerControl()
         {
+            PointerChanged += OnPointerChanged;
+
             pointer = new АктВиконанихРобіт_Pointer();
             WidthPresentation = 300;
             Caption = $"{АктВиконанихРобіт_Const.FULLNAME}:";
@@ -45,12 +49,13 @@ namespace StorageAndTrade
             set
             {
                 pointer = value;
-
-                if (pointer != null)
-                    Presentation = pointer.GetPresentation();
-                else
-                    Presentation = "";
+                PointerChanged?.Invoke(this, pointer);
             }
+        }
+        
+        protected async void OnPointerChanged(object? sender, АктВиконанихРобіт_Pointer pointer)
+        {
+            Presentation = pointer != null ? await pointer.GetPresentation() : "";
         }
 
         protected override void OpenSelect(object? sender, EventArgs args)

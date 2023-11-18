@@ -339,61 +339,67 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
 
     public class Functions
     {
+        public record CompositePointerPresentation_Record
+        {
+            public string result = "";
+            public string pointer = "";
+            public string type = "";
+        }
         /*
           Функція для типу який задається користувачем.
           Повертає презентацію для uuidAndText.
           В @pointer - повертає групу (Документи або Довідники)
             @type - повертає назву типу
         */
-        public static string CompositePointerPresentation(UuidAndText uuidAndText, out string pointer, out string type)
+        public static async ValueTask&lt;CompositePointerPresentation_Record&gt; CompositePointerPresentation(UuidAndText uuidAndText)
         {
-            pointer = type = "";
+            CompositePointerPresentation_Record record = new();
 
             if (uuidAndText.IsEmpty() || String.IsNullOrEmpty(uuidAndText.Text) || uuidAndText.Text.IndexOf(".") == -1)
-                return "";
+                return record;
 
             string[] pointer_and_type = uuidAndText.Text.Split(".", StringSplitOptions.None);
 
             if (pointer_and_type.Length == 2)
             {
-                pointer = pointer_and_type[0];
-                type = pointer_and_type[1];
+                record.pointer = pointer_and_type[0];
+                record.type = pointer_and_type[1];
 
-                if (pointer == "Документи")
+                if (record.pointer == "Документи")
                 {
                     <xsl:variable name="DocCount" select="count(Configuration/Documents/Document)"/>
                     <xsl:if test="$DocCount != 0">
-                    switch (type)
+                    switch (record.type)
                     {
                         <xsl:for-each select="Configuration/Documents/Document">
                             <xsl:variable name="DocumentName" select="Name"/>
-                        case "<xsl:value-of select="$DocumentName"/>": return new Документи.<xsl:value-of select="$DocumentName"/>_Pointer(uuidAndText.Uuid).GetPresentation();
+                        case "<xsl:value-of select="$DocumentName"/>": record.result = await new Документи.<xsl:value-of select="$DocumentName"/>_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
                         </xsl:for-each>
                     }
                     </xsl:if>
                     <xsl:if test="$DocCount = 0">
-                    return "";
+                    return record;
                     </xsl:if>
                 }
-                else if (pointer == "Довідники")
+                else if (record.pointer == "Довідники")
                 {
                     <xsl:variable name="DirCount" select="count(Configuration/Directories/Directory)"/>
                     <xsl:if test="$DirCount != 0">
-                    switch (type)
+                    switch (record.type)
                     {
                         <xsl:for-each select="Configuration/Directories/Directory">
                             <xsl:variable name="DirectoryName" select="Name"/>
-                        case "<xsl:value-of select="$DirectoryName"/>": return new Довідники.<xsl:value-of select="$DirectoryName"/>_Pointer(uuidAndText.Uuid).GetPresentation();
+                        case "<xsl:value-of select="$DirectoryName"/>": record.result = await new Довідники.<xsl:value-of select="$DirectoryName"/>_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
                         </xsl:for-each>
                     }
                     </xsl:if>
                     <xsl:if test="$DirCount = 0">
-                    return "";
+                    return record;
                     </xsl:if>
                 }
             }
 
-            return "";
+            return record;
         }
     }
 }
@@ -713,7 +719,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             <xsl:if test="normalize-space(TriggerFunctions/SetDeletionLabel) != ''">
-                <xsl:value-of select="TriggerFunctions/SetDeletionLabel"/><xsl:text>(this, label);</xsl:text>      
+                await <xsl:value-of select="TriggerFunctions/SetDeletionLabel"/><xsl:text>(this, label);</xsl:text>      
             </xsl:if>
             await base.BaseDeletionLabel(label);
         }
@@ -721,7 +727,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
         public async ValueTask Delete()
         {
             <xsl:if test="normalize-space(TriggerFunctions/BeforeDelete) != ''">
-                <xsl:value-of select="TriggerFunctions/BeforeDelete"/><xsl:text>(this);</xsl:text>      
+                await <xsl:value-of select="TriggerFunctions/BeforeDelete"/><xsl:text>(this);</xsl:text>      
             </xsl:if>
             await base.BaseDelete(<xsl:text>new string[] { </xsl:text>
             <xsl:for-each select="TabularParts/TablePart">
@@ -742,9 +748,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
             return new UuidAndText(UnigueID.UGuid, <xsl:value-of select="$DirectoryName"/>_Const.POINTER);
         }
 
-        public string GetPresentation()
+        public async ValueTask&lt;string&gt; GetPresentation()
         {
-            return base.BasePresentation(
+            return await base.BasePresentation(
                 <xsl:text>new string[] { </xsl:text>
                 <xsl:for-each select="Fields/Field[IsPresentation=1]">
                   <xsl:if test="position() != 1">
@@ -798,9 +804,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
 
         public string Назва { get; set; } = "";
 
-        public string GetPresentation()
+        public async ValueTask&lt;string&gt; GetPresentation()
         {
-            return Назва = base.BasePresentation(
+            return Назва = await base.BasePresentation(
                 <xsl:text>new string[] { </xsl:text>
                 <xsl:for-each select="Fields/Field[IsPresentation=1]">
                   <xsl:if test="position() != 1">
@@ -817,7 +823,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
             if (obj != null)
             {
                 <xsl:if test="normalize-space(TriggerFunctions/SetDeletionLabel) != ''">
-                    <xsl:value-of select="TriggerFunctions/SetDeletionLabel"/><xsl:text>(obj, label)</xsl:text>;
+                    await <xsl:value-of select="TriggerFunctions/SetDeletionLabel"/><xsl:text>(obj, label)</xsl:text>;
                 </xsl:if>
                 await base.BaseDeletionLabel(label);
             }
@@ -843,26 +849,26 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
     public class <xsl:value-of select="$DirectoryName"/>_Select : DirectorySelect
     {
         public <xsl:value-of select="$DirectoryName"/>_Select() : base(Config.Kernel!, "<xsl:value-of select="Table"/>") { }        
-        public bool Select() { return base.BaseSelect(); }
+        public async ValueTask&lt;bool&gt; Select() { return await base.BaseSelect(); }
         
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public async ValueTask&lt;bool&gt; SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
         public bool MoveNext() { if (MoveToPosition()) { Current = new <xsl:value-of select="$DirectoryName"/>_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public <xsl:value-of select="$DirectoryName"/>_Pointer? Current { get; private set; }
         
-        public <xsl:value-of select="$DirectoryName"/>_Pointer FindByField(string name, object value)
+        public async ValueTask&lt;<xsl:value-of select="$DirectoryName"/>_Pointer&gt; FindByField(string name, object value)
         {
             <xsl:value-of select="$DirectoryName"/>_Pointer itemPointer = new <xsl:value-of select="$DirectoryName"/>_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(name, value);
+            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
         }
         
-        public List&lt;<xsl:value-of select="$DirectoryName"/>_Pointer&gt; FindListByField(string name, object value, int limit = 0, int offset = 0)
+        public async ValueTask&lt;List&lt;<xsl:value-of select="$DirectoryName"/>_Pointer&gt;&gt; FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
             List&lt;<xsl:value-of select="$DirectoryName"/>_Pointer&gt; directoryPointerList = new List&lt;<xsl:value-of select="$DirectoryName"/>_Pointer&gt;();
-            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(name, value, limit, offset)) 
+            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
                 directoryPointerList.Add(new <xsl:value-of select="$DirectoryName"/>_Pointer(directoryPointer.UnigueID));
             return directoryPointerList;
         }
@@ -1112,7 +1118,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
                   <xsl:when test="$groupPointer = 'Довідники' or $groupPointer = 'Документи'">
                     xmlWriter.WriteAttributeString("pointer", "<xsl:value-of select="Pointer"/>");
                     xmlWriter.WriteAttributeString("uid", obj.<xsl:value-of select="Name"/>.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.<xsl:value-of select="Name"/>.GetPresentation());
+                    xmlWriter.WriteString(await obj.<xsl:value-of select="Name"/>.GetPresentation());
                   </xsl:when>
                 </xsl:choose>
               </xsl:when>
@@ -1158,7 +1164,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
                               <xsl:when test="$groupPointer = 'Довідники' or $groupPointer = 'Документи'">
                                 xmlWriter.WriteAttributeString("pointer", "<xsl:value-of select="Pointer"/>");
                                 xmlWriter.WriteAttributeString("uid", record.<xsl:value-of select="Name"/>.UnigueID.ToString());
-                                xmlWriter.WriteString(record.<xsl:value-of select="Name"/>.GetPresentation());
+                                xmlWriter.WriteString(await record.<xsl:value-of select="Name"/>.GetPresentation());
                               </xsl:when>
                             </xsl:choose>
                           </xsl:when>
@@ -1392,9 +1398,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
 
         public string Назва { get; set; } = "";
 
-        public string GetPresentation()
+        public async ValueTask&lt;string&gt; GetPresentation()
         {
-            return Назва = base.BasePresentation(
+            return Назва = await base.BasePresentation(
               <xsl:text>new string[] { </xsl:text>
               <xsl:for-each select="Fields/Field[IsPresentation=1]">
                 <xsl:if test="position() != 1">

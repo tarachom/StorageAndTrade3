@@ -79,7 +79,7 @@ namespace StorageAndTrade
             KernelUser = Config.Kernel!.User;
             KernelSession = Config.Kernel!.Session;
 
-            Користувачі_Pointer ЗнайденийКористувач = new Користувачі_Select().FindByField(Користувачі_Const.КодВСпеціальнійТаблиці, KernelUser);
+            Користувачі_Pointer ЗнайденийКористувач = await new Користувачі_Select().FindByField(Користувачі_Const.КодВСпеціальнійТаблиці, KernelUser);
 
             if (ЗнайденийКористувач.IsEmpty())
             {
@@ -197,10 +197,10 @@ namespace StorageAndTrade
                     if (!Системні.ЗупинитиФоновіЗадачі_Const)
                     {
                         //if (Config.Kernel != null)
-                            //Виконання обчислень
-                            await Config.Kernel!.DataBase.SpetialTableRegAccumTrigerExecute(KernelSession,
-                                 VirtualTablesСalculation.Execute,
-                                 VirtualTablesСalculation.ExecuteFinalCalculation);
+                        //Виконання обчислень
+                        await Config.Kernel!.DataBase.SpetialTableRegAccumTrigerExecute(KernelSession,
+                             VirtualTablesСalculation.Execute,
+                             VirtualTablesСalculation.ExecuteFinalCalculation);
                     }
 
                     counter = 0;
@@ -356,7 +356,7 @@ namespace StorageAndTrade
 
             if (pageWidget != null)
             {
-                Widget widget = (Widget)pageWidget.Invoke();
+                Widget widget = pageWidget.Invoke();
                 scroll.Add(widget);
 
                 widget.Name = codePage;

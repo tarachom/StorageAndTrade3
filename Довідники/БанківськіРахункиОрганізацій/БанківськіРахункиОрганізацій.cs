@@ -39,14 +39,14 @@ namespace StorageAndTrade
 
         #region Override
 
-        public override void LoadRecords()
+        public override async ValueTask LoadRecords()
         {
             ТабличніСписки.БанківськіРахункиОрганізацій_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.БанківськіРахункиОрганізацій_Записи.DirectoryPointerItem = DirectoryPointerItem;
 
             ТабличніСписки.БанківськіРахункиОрганізацій_Записи.Where.Clear();
 
-            ТабличніСписки.БанківськіРахункиОрганізацій_Записи.LoadRecords();
+            await ТабличніСписки.БанківськіРахункиОрганізацій_Записи.LoadRecords();
 
             if (ТабличніСписки.БанківськіРахункиОрганізацій_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.БанківськіРахункиОрганізацій_Записи.SelectPath, TreeViewGrid.Columns[0], false);
@@ -54,7 +54,7 @@ namespace StorageAndTrade
             TreeViewGrid.GrabFocus();
         }
 
-        protected override void LoadRecords_OnSearch(string searchText)
+        protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
             searchText = searchText.ToLower().Trim();
 
@@ -69,7 +69,7 @@ namespace StorageAndTrade
             ТабличніСписки.БанківськіРахункиОрганізацій_Записи.Where.Add(
                 new Where(БанківськіРахункиОрганізацій_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
-            ТабличніСписки.БанківськіРахункиОрганізацій_Записи.LoadRecords();
+            await ТабличніСписки.БанківськіРахункиОрганізацій_Записи.LoadRecords();
 
             if (ТабличніСписки.БанківськіРахункиОрганізацій_Записи.FirstPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.БанківськіРахункиОрганізацій_Записи.FirstPath, TreeViewGrid.Columns[0], false);

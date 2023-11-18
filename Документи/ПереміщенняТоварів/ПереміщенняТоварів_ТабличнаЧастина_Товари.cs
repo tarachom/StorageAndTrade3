@@ -106,7 +106,7 @@ namespace StorageAndTrade
 
             public static async void ПісляЗміни_Номенклатура(Запис запис)
             {
-                запис.Номенклатура.GetPresentation();
+                await запис.Номенклатура.GetPresentation();
 
                 Номенклатура_Objest? номенклатура_Objest = await запис.Номенклатура.GetDirectoryObject();
                 if (номенклатура_Objest != null && !номенклатура_Objest.ОдиницяВиміру.IsEmpty())
@@ -124,21 +124,21 @@ namespace StorageAndTrade
                         запис.КількістьУпаковок = 1;
                 }
             }
-            public static void ПісляЗміни_Характеристика(Запис запис)
+            public static async void ПісляЗміни_Характеристика(Запис запис)
             {
-                запис.Характеристика.GetPresentation();
+                await запис.Характеристика.GetPresentation();
             }
-            public static void ПісляЗміни_Серія(Запис запис)
+            public static async void ПісляЗміни_Серія(Запис запис)
             {
-                запис.Серія.GetPresentation();
+                await запис.Серія.GetPresentation();
             }
-            public static void ПісляЗміни_Пакування(Запис запис)
+            public static async void ПісляЗміни_Пакування(Запис запис)
             {
-                запис.Пакування.GetPresentation();
+                await запис.Пакування.GetPresentation();
             }
-            public static void ПісляЗміни_Партія(Запис запис)
+            public static async void ПісляЗміни_Партія(Запис запис)
             {
-                запис.Партія.GetPresentation();
+                await запис.Партія.GetPresentation();
             }
         }
 
@@ -347,7 +347,7 @@ namespace StorageAndTrade
             TreeViewGrid.AppendColumn(new TreeViewColumn());
         }
 
-        protected override void ButtonSelect(TreeIter iter, int rowNumber, int colNumber, Popover popoverSmallSelect)
+        protected override async void ButtonSelect(TreeIter iter, int rowNumber, int colNumber, Popover popoverSmallSelect)
         {
             Запис запис = Записи[rowNumber];
 
@@ -367,7 +367,7 @@ namespace StorageAndTrade
                         popoverSmallSelect.Add(page);
                         popoverSmallSelect.ShowAll();
 
-                        page.LoadRecords();
+                        await page.LoadRecords();
                         break;
                     }
                 case Columns.Характеристика:
@@ -386,7 +386,7 @@ namespace StorageAndTrade
                         popoverSmallSelect.Add(page);
                         popoverSmallSelect.ShowAll();
 
-                        page.LoadRecords();
+                        await page.LoadRecords();
                         break;
                     }
                 case Columns.Серія:
@@ -403,7 +403,7 @@ namespace StorageAndTrade
                         popoverSmallSelect.Add(page);
                         popoverSmallSelect.ShowAll();
 
-                        page.LoadRecords();
+                        await page.LoadRecords();
                         break;
                     }
                 case Columns.Пакування:
@@ -420,7 +420,7 @@ namespace StorageAndTrade
                         popoverSmallSelect.Add(page);
                         popoverSmallSelect.ShowAll();
 
-                        page.LoadRecords();
+                        await page.LoadRecords();
                         break;
                     }
                 case Columns.Партія:
@@ -438,7 +438,7 @@ namespace StorageAndTrade
                         popoverSmallSelect.Add(page);
                         popoverSmallSelect.ShowAll();
 
-                        page.LoadRecords();
+                        await page.LoadRecords();
                         break;
                     }
             }

@@ -46,9 +46,9 @@ namespace StorageAndTrade
             //Власник
             HBoxTop.PackStart(СкладПриміщенняВласник, false, false, 2);
             СкладПриміщенняВласник.Caption = "Приміщення:";
-            СкладПриміщенняВласник.AfterSelectFunc = () =>
+            СкладПриміщенняВласник.AfterSelectFunc = async () =>
             {
-                LoadRecords();
+                await LoadRecords();
             };
 
             //Дерево папок зправа
@@ -65,7 +65,7 @@ namespace StorageAndTrade
 
         #region Override
 
-        public override async void LoadRecords()
+        public override async ValueTask LoadRecords()
         {
             if (DirectoryPointerItem != null || SelectPointerItem != null)
             {
@@ -81,7 +81,7 @@ namespace StorageAndTrade
             ДеревоПапок.LoadTree();
         }
 
-        void LoadRecords_TreeCallBack()
+        async void LoadRecords_TreeCallBack()
         {
             ТабличніСписки.СкладськіКомірки_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.СкладськіКомірки_Записи.DirectoryPointerItem = DirectoryPointerItem;
@@ -98,7 +98,7 @@ namespace StorageAndTrade
                     new Where(Comparison.AND, СкладськіКомірки_Const.Приміщення, Comparison.EQ, СкладПриміщенняВласник.Pointer.UnigueID.UGuid));
             }
 
-            ТабличніСписки.СкладськіКомірки_Записи.LoadRecords();
+            await ТабличніСписки.СкладськіКомірки_Записи.LoadRecords();
 
             if (ТабличніСписки.СкладськіКомірки_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.СкладськіКомірки_Записи.SelectPath, TreeViewGrid.Columns[0], false);
@@ -106,7 +106,7 @@ namespace StorageAndTrade
             TreeViewGrid.GrabFocus();
         }
 
-        protected override void LoadRecords_OnSearch(string searchText)
+        protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
             searchText = searchText.ToLower().Trim();
 
@@ -121,7 +121,7 @@ namespace StorageAndTrade
             ТабличніСписки.СкладськіКомірки_Записи.Where.Add(
                 new Where(Comparison.OR, СкладськіКомірки_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
-            ТабличніСписки.СкладськіКомірки_Записи.LoadRecords();
+            await ТабличніСписки.СкладськіКомірки_Записи.LoadRecords();
 
             if (ТабличніСписки.СкладськіКомірки_Записи.FirstPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.СкладськіКомірки_Записи.FirstPath, TreeViewGrid.Columns[0], false);
@@ -198,9 +198,9 @@ namespace StorageAndTrade
 
         #endregion
 
-        void OnCheckButtonIsHierarchyClicked(object? sender, EventArgs args)
+        async void OnCheckButtonIsHierarchyClicked(object? sender, EventArgs args)
         {
-            LoadRecords();
+            await LoadRecords();
         }
     }
 }

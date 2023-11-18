@@ -128,7 +128,7 @@ namespace StorageAndTrade
             }
             public static async void ПісляЗміни_Номенклатура(Запис запис)
             {
-                запис.Номенклатура.GetPresentation();
+                await запис.Номенклатура.GetPresentation();
 
                 Номенклатура_Objest? номенклатура_Objest = await запис.Номенклатура.GetDirectoryObject();
                 if (номенклатура_Objest != null && !номенклатура_Objest.ОдиницяВиміру.IsEmpty())
@@ -146,21 +146,21 @@ namespace StorageAndTrade
                         запис.КількістьУпаковок = 1;
                 }
             }
-            public static void ПісляЗміни_Характеристика(Запис запис)
+            public static async void ПісляЗміни_Характеристика(Запис запис)
             {
-                запис.Характеристика.GetPresentation();
+                await запис.Характеристика.GetPresentation();
             }
-            public static void ПісляЗміни_Пакування(Запис запис)
+            public static async void ПісляЗміни_Пакування(Запис запис)
             {
-                запис.Пакування.GetPresentation();
+                await запис.Пакування.GetPresentation();
             }
-            public static void ПісляЗміни_ВидЦіни(Запис запис)
+            public static async void ПісляЗміни_ВидЦіни(Запис запис)
             {
-                запис.ВидЦіни.GetPresentation();
+                await запис.ВидЦіни.GetPresentation();
             }
-            public static void ПісляЗміни_Склад(Запис запис)
+            public static async void ПісляЗміни_Склад(Запис запис)
             {
-                запис.Склад.GetPresentation();
+                await запис.Склад.GetPresentation();
             }
             public static void ПісляЗміни_КількістьАбоЦіна(Запис запис)
             {
@@ -509,7 +509,7 @@ LIMIT 1
             TreeViewGrid.AppendColumn(new TreeViewColumn());
         }
 
-        protected override void ButtonSelect(TreeIter iter, int rowNumber, int colNumber, Popover popoverSmallSelect)
+        protected override async void ButtonSelect(TreeIter iter, int rowNumber, int colNumber, Popover popoverSmallSelect)
         {
             Запис запис = Записи[rowNumber];
 
@@ -530,7 +530,7 @@ LIMIT 1
                         popoverSmallSelect.Add(page);
                         popoverSmallSelect.ShowAll();
 
-                        page.LoadRecords();
+                        await page.LoadRecords();
                         break;
                     }
                 case Columns.Характеристика:
@@ -550,7 +550,7 @@ LIMIT 1
                         popoverSmallSelect.Add(page);
                         popoverSmallSelect.ShowAll();
 
-                        page.LoadRecords();
+                        await page.LoadRecords();
                         break;
                     }
                 case Columns.Пакування:
@@ -567,7 +567,7 @@ LIMIT 1
                         popoverSmallSelect.Add(page);
                         popoverSmallSelect.ShowAll();
 
-                        page.LoadRecords();
+                        await page.LoadRecords();
                         break;
                     }
                 case Columns.ВидЦіни:
@@ -585,7 +585,7 @@ LIMIT 1
                         popoverSmallSelect.Add(page);
                         popoverSmallSelect.ShowAll();
 
-                        page.LoadRecords();
+                        await page.LoadRecords();
                         break;
                     }
                 case Columns.Склад:
@@ -602,7 +602,7 @@ LIMIT 1
                         popoverSmallSelect.Add(page);
                         popoverSmallSelect.ShowAll();
 
-                        page.LoadRecords();
+                        await page.LoadRecords();
                         break;
                     }
             }

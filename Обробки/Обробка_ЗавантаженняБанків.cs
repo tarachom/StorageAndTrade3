@@ -134,7 +134,7 @@ namespace StorageAndTrade
 
                 //Помітка всіх елементів на видалення
                 банки_Select.QuerySelect.Where.Add(new Where(Банки_Const.DELETION_LABEL, Comparison.NOT, true));
-                if (банки_Select.Select())
+                if (await банки_Select.Select())
                     while (банки_Select.MoveNext())
                         банки_Select.Current?.SetDeletionLabel();
 
@@ -185,7 +185,7 @@ namespace StorageAndTrade
                     string Статус = current.SelectSingleNode("N_PR_LIC")?.Value ?? "";
                     string ДатаЗапису = current.SelectSingleNode("DT_LIC")?.Value ?? "";
 
-                    Банки_Pointer банки_Pointer = банки_Select.FindByField(Банки_Const.КодМФО, КодМФО);
+                    Банки_Pointer банки_Pointer = await банки_Select.FindByField(Банки_Const.КодМФО, КодМФО);
                     Банки_Objest? банки_Objest;
 
                     if (банки_Pointer.IsEmpty())

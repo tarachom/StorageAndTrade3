@@ -75,9 +75,9 @@ namespace StorageAndTrade
                 };
             }
 
-            public static void ПісляЗміни_Файл(Запис запис)
+            public static async void ПісляЗміни_Файл(Запис запис)
             {
-                запис.Файл.GetPresentation();
+                await запис.Файл.GetPresentation();
             }
         }
 
@@ -106,7 +106,7 @@ namespace StorageAndTrade
             ShowAll();
         }
 
-        void OnButtonPressEvent(object sender, ButtonPressEventArgs args)
+        async void OnButtonPressEvent(object sender, ButtonPressEventArgs args)
         {
             if (args.Event.Type == Gdk.EventType.DoubleButtonPress)
             {
@@ -127,24 +127,20 @@ namespace StorageAndTrade
                     {
                         case Columns.Файл:
                             {
-                                Program.GeneralForm?.CreateNotebookPage("Вибір - Довідник: Файли", () =>
+                                Файли page = new Файли
                                 {
-                                    Файли page = new Файли
+                                    DirectoryPointerItem = запис.Файл.UnigueID,
+                                    CallBack_OnSelectPointer = (UnigueID selectPointer) =>
                                     {
-                                        DirectoryPointerItem = запис.Файл.UnigueID,
-                                        CallBack_OnSelectPointer = (UnigueID selectPointer) =>
-                                        {
-                                            запис.Файл = new Файли_Pointer(selectPointer);
-                                            Запис.ПісляЗміни_Файл(запис);
-                                            Store.SetValues(iter, запис.ToArray());
-                                        }
-                                    };
+                                        запис.Файл = new Файли_Pointer(selectPointer);
+                                        Запис.ПісляЗміни_Файл(запис);
+                                        Store.SetValues(iter, запис.ToArray());
+                                    }
+                                };
 
-                                    page.LoadRecords();
+                                await page.LoadRecords();
 
-                                    return page;
-                                }, true);
-
+                                Program.GeneralForm?.CreateNotebookPage("Вибір - Довідник: Файли", () => { return page; }, true);
                                 break;
                             }
                     }

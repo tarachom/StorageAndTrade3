@@ -43,7 +43,7 @@ namespace StorageAndTrade
             //Сторінка
             {
                 LinkButton linkPage = new LinkButton($" {СкладськіКомірки_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
-                linkPage.Clicked += (object? sender, EventArgs args) =>
+                linkPage.Clicked += async (object? sender, EventArgs args) =>
                 {
                     СкладськіКомірки page = new СкладськіКомірки()
                     {
@@ -55,7 +55,7 @@ namespace StorageAndTrade
 
                     Program.GeneralForm?.CreateNotebookPage($"Вибір - {СкладськіКомірки_Const.FULLNAME}", () => { return page; }, true);
 
-                    page.LoadRecords();
+                    await page.LoadRecords();
                 };
 
                 HBoxTop.PackStart(linkPage, false, false, 10);
@@ -83,14 +83,14 @@ namespace StorageAndTrade
             //Власник
             HBoxTop.PackStart(СкладПриміщенняВласник, false, false, 2);
             СкладПриміщенняВласник.Caption = $"{СкладськіПриміщення_Const.FULLNAME}:";
-            СкладПриміщенняВласник.AfterSelectFunc = () =>
+            СкладПриміщенняВласник.AfterSelectFunc = async () =>
             {
                 DirectoryPointerItem?.Clear();
-                LoadRecords();
+                await LoadRecords();
             };
         }
 
-        public override void LoadRecords()
+        public override async ValueTask LoadRecords()
         {
             ТабличніСписки.СкладськіКомірки_ЗаписиШвидкийВибір.DirectoryPointerItem = DirectoryPointerItem;
 
@@ -102,13 +102,13 @@ namespace StorageAndTrade
                     new Where(СкладськіКомірки_Const.Приміщення, Comparison.EQ, СкладПриміщенняВласник.Pointer.UnigueID.UGuid));
             }
 
-            ТабличніСписки.СкладськіКомірки_ЗаписиШвидкийВибір.LoadRecords();
+            await ТабличніСписки.СкладськіКомірки_ЗаписиШвидкийВибір.LoadRecords();
 
             if (ТабличніСписки.СкладськіКомірки_ЗаписиШвидкийВибір.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.СкладськіКомірки_ЗаписиШвидкийВибір.SelectPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override void LoadRecords_OnSearch(string searchText)
+        protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
             searchText = searchText.ToLower().Trim();
 
@@ -129,7 +129,7 @@ namespace StorageAndTrade
             ТабличніСписки.СкладськіКомірки_ЗаписиШвидкийВибір.Where.Add(
                 new Where(СкладськіКомірки_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
-            ТабличніСписки.СкладськіКомірки_ЗаписиШвидкийВибір.LoadRecords();
+            await ТабличніСписки.СкладськіКомірки_ЗаписиШвидкийВибір.LoadRecords();
         }
     }
 }

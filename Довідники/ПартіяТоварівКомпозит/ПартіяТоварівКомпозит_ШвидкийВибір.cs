@@ -43,7 +43,7 @@ namespace StorageAndTrade
             //Сторінка
             {
                 LinkButton linkPage = new LinkButton($" {ПартіяТоварівКомпозит_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
-                linkPage.Clicked += (object? sender, EventArgs args) =>
+                linkPage.Clicked += async (object? sender, EventArgs args) =>
                 {
                     ПартіяТоварівКомпозит page = new ПартіяТоварівКомпозит()
                     {
@@ -53,7 +53,7 @@ namespace StorageAndTrade
 
                     Program.GeneralForm?.CreateNotebookPage($"Вибір - {ПартіяТоварівКомпозит_Const.FULLNAME}", () => { return page; }, true);
 
-                    page.LoadRecords();
+                    await page.LoadRecords();
                 };
 
                 HBoxTop.PackStart(linkPage, false, false, 10);
@@ -62,10 +62,10 @@ namespace StorageAndTrade
             //Відбір
             HBoxTop.PackStart(НоменклатураВідбір, false, false, 2);
             НоменклатураВідбір.Caption = $"{Номенклатура_Const.FULLNAME}:";
-            НоменклатураВідбір.AfterSelectFunc = LoadRecords;
+            НоменклатураВідбір.AfterSelectFunc = async () => { await LoadRecords(); };
         }
 
-        public override void LoadRecords()
+        public override async ValueTask LoadRecords()
         {
             ТабличніСписки.ПартіяТоварівКомпозит_ЗаписиШвидкийВибір.DirectoryPointerItem = DirectoryPointerItem;
 
@@ -96,13 +96,13 @@ WHERE
                 ТабличніСписки.ПартіяТоварівКомпозит_ЗаписиШвидкийВибір.Where.Add(new Where("uid", Comparison.IN, query, true));
             }
 
-            ТабличніСписки.ПартіяТоварівКомпозит_ЗаписиШвидкийВибір.LoadRecords();
+            await ТабличніСписки.ПартіяТоварівКомпозит_ЗаписиШвидкийВибір.LoadRecords();
 
             if (ТабличніСписки.ПартіяТоварівКомпозит_ЗаписиШвидкийВибір.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.ПартіяТоварівКомпозит_ЗаписиШвидкийВибір.SelectPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override void LoadRecords_OnSearch(string searchText)
+        protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
             searchText = searchText.ToLower().Trim();
 
@@ -117,7 +117,7 @@ WHERE
             ТабличніСписки.ПартіяТоварівКомпозит_ЗаписиШвидкийВибір.Where.Add(
                 new Where(Comparison.OR, ПартіяТоварівКомпозит_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
-            ТабличніСписки.ПартіяТоварівКомпозит_ЗаписиШвидкийВибір.LoadRecords();
+            await ТабличніСписки.ПартіяТоварівКомпозит_ЗаписиШвидкийВибір.LoadRecords();
         }
     }
 }

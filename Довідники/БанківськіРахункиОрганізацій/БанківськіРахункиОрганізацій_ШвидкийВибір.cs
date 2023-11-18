@@ -41,7 +41,7 @@ namespace StorageAndTrade
             //Сторінка
             {
                 LinkButton linkPage = new LinkButton($" {БанківськіРахункиОрганізацій_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
-                linkPage.Clicked += (object? sender, EventArgs args) =>
+                linkPage.Clicked += async (object? sender, EventArgs args) =>
                 {
                     БанківськіРахункиОрганізацій page = new БанківськіРахункиОрганізацій()
                     {
@@ -51,7 +51,7 @@ namespace StorageAndTrade
 
                     Program.GeneralForm?.CreateNotebookPage($"Вибір - {БанківськіРахункиОрганізацій_Const.FULLNAME}", () => { return page; }, true);
 
-                    page.LoadRecords();
+                    await page.LoadRecords();
                 };
 
                 HBoxTop.PackStart(linkPage, false, false, 10);
@@ -77,19 +77,19 @@ namespace StorageAndTrade
             }
         }
 
-        public override void LoadRecords()
+        public override async ValueTask LoadRecords()
         {
             ТабличніСписки.БанківськіРахункиОрганізацій_ЗаписиШвидкийВибір.DirectoryPointerItem = DirectoryPointerItem;
 
             ТабличніСписки.БанківськіРахункиОрганізацій_ЗаписиШвидкийВибір.Where.Clear();
 
-            ТабличніСписки.БанківськіРахункиОрганізацій_ЗаписиШвидкийВибір.LoadRecords();
+            await ТабличніСписки.БанківськіРахункиОрганізацій_ЗаписиШвидкийВибір.LoadRecords();
 
             if (ТабличніСписки.БанківськіРахункиОрганізацій_ЗаписиШвидкийВибір.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.БанківськіРахункиОрганізацій_ЗаписиШвидкийВибір.SelectPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override void LoadRecords_OnSearch(string searchText)
+        protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
             searchText = searchText.ToLower().Trim();
 
@@ -108,7 +108,7 @@ namespace StorageAndTrade
             ТабличніСписки.БанківськіРахункиОрганізацій_ЗаписиШвидкийВибір.Where.Add(
                 new Where(Comparison.OR, БанківськіРахункиОрганізацій_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
-            ТабличніСписки.БанківськіРахункиОрганізацій_ЗаписиШвидкийВибір.LoadRecords();
+            await ТабличніСписки.БанківськіРахункиОрганізацій_ЗаписиШвидкийВибір.LoadRecords();
         }
     }
 }

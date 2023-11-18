@@ -42,7 +42,7 @@ namespace StorageAndTrade
             //Сторінка
             {
                 LinkButton linkPage = new LinkButton($" {ХарактеристикиНоменклатури_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
-                linkPage.Clicked += (object? sender, EventArgs args) =>
+                linkPage.Clicked += async (object? sender, EventArgs args) =>
                 {
                     ХарактеристикиНоменклатури page = new ХарактеристикиНоменклатури()
                     {
@@ -54,7 +54,7 @@ namespace StorageAndTrade
 
                     Program.GeneralForm?.CreateNotebookPage($"Вибір - {ХарактеристикиНоменклатури_Const.FULLNAME}", () => { return page; }, true);
 
-                    page.LoadRecords();
+                    await page.LoadRecords();
                 };
 
                 HBoxTop.PackStart(linkPage, false, false, 10);
@@ -83,10 +83,10 @@ namespace StorageAndTrade
             //Власник
             HBoxTop.PackStart(НоменклатураВласник, false, false, 2);
             НоменклатураВласник.Caption = $"{Номенклатура_Const.FULLNAME}:";
-            НоменклатураВласник.AfterSelectFunc = LoadRecords;
+            НоменклатураВласник.AfterSelectFunc = async () => { await LoadRecords(); };
         }
 
-        public override void LoadRecords()
+        public override async ValueTask LoadRecords()
         {
             ТабличніСписки.ХарактеристикиНоменклатури_ЗаписиШвидкийВибір.DirectoryPointerItem = DirectoryPointerItem;
 
@@ -98,13 +98,13 @@ namespace StorageAndTrade
                     new Where(ХарактеристикиНоменклатури_Const.Номенклатура, Comparison.EQ, НоменклатураВласник.Pointer.UnigueID.UGuid));
             }
 
-            ТабличніСписки.ХарактеристикиНоменклатури_ЗаписиШвидкийВибір.LoadRecords();
+            await ТабличніСписки.ХарактеристикиНоменклатури_ЗаписиШвидкийВибір.LoadRecords();
 
             if (ТабличніСписки.ХарактеристикиНоменклатури_ЗаписиШвидкийВибір.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.ХарактеристикиНоменклатури_ЗаписиШвидкийВибір.SelectPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override void LoadRecords_OnSearch(string searchText)
+        protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
             searchText = searchText.ToLower().Trim();
 
@@ -125,7 +125,7 @@ namespace StorageAndTrade
             ТабличніСписки.ХарактеристикиНоменклатури_ЗаписиШвидкийВибір.Where.Add(
                 new Where(Comparison.AND, ХарактеристикиНоменклатури_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
-            ТабличніСписки.ХарактеристикиНоменклатури_ЗаписиШвидкийВибір.LoadRecords();
+            await ТабличніСписки.ХарактеристикиНоменклатури_ЗаписиШвидкийВибір.LoadRecords();
         }
     }
 }

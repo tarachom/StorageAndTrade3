@@ -93,7 +93,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
-        public static void LoadRecords()
+        public static async ValueTask LoadRecords()
         {
             Store.Clear();
             SelectPath = FirstPath = null;
@@ -172,7 +172,7 @@ END)
 ", "salishok_v_komirkach"));
 
             /* SELECT */
-            Номенклатура_Select.Select();
+            await Номенклатура_Select.Select();
             while (Номенклатура_Select.MoveNext())
             {
                 Довідники.Номенклатура_Pointer? cur = Номенклатура_Select.Current;

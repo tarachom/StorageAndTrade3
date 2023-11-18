@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 17.11.2023 23:20:41
+ * Дата конфігурації: 18.11.2023 19:12:45
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -58,159 +58,165 @@ namespace StorageAndTrade_1_0
 
     public class Functions
     {
+        public record CompositePointerPresentation_Record
+        {
+            public string result = "";
+            public string pointer = "";
+            public string type = "";
+        }
         /*
           Функція для типу який задається користувачем.
           Повертає презентацію для uuidAndText.
           В @pointer - повертає групу (Документи або Довідники)
             @type - повертає назву типу
         */
-        public static string CompositePointerPresentation(UuidAndText uuidAndText, out string pointer, out string type)
+        public static async ValueTask<CompositePointerPresentation_Record> CompositePointerPresentation(UuidAndText uuidAndText)
         {
-            pointer = type = "";
+            CompositePointerPresentation_Record record = new();
 
             if (uuidAndText.IsEmpty() || String.IsNullOrEmpty(uuidAndText.Text) || uuidAndText.Text.IndexOf(".") == -1)
-                return "";
+                return record;
 
             string[] pointer_and_type = uuidAndText.Text.Split(".", StringSplitOptions.None);
 
             if (pointer_and_type.Length == 2)
             {
-                pointer = pointer_and_type[0];
-                type = pointer_and_type[1];
+                record.pointer = pointer_and_type[0];
+                record.type = pointer_and_type[1];
 
-                if (pointer == "Документи")
+                if (record.pointer == "Документи")
                 {
                     
-                    switch (type)
+                    switch (record.type)
                     {
                         
-                        case "ЗамовленняПостачальнику": return new Документи.ЗамовленняПостачальнику_Pointer(uuidAndText.Uuid).GetPresentation();
+                        case "ЗамовленняПостачальнику": record.result = await new Документи.ЗамовленняПостачальнику_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
                         
-                        case "ПоступленняТоварівТаПослуг": return new Документи.ПоступленняТоварівТаПослуг_Pointer(uuidAndText.Uuid).GetPresentation();
+                        case "ПоступленняТоварівТаПослуг": record.result = await new Документи.ПоступленняТоварівТаПослуг_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
                         
-                        case "ЗамовленняКлієнта": return new Документи.ЗамовленняКлієнта_Pointer(uuidAndText.Uuid).GetPresentation();
+                        case "ЗамовленняКлієнта": record.result = await new Документи.ЗамовленняКлієнта_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
                         
-                        case "РеалізаціяТоварівТаПослуг": return new Документи.РеалізаціяТоварівТаПослуг_Pointer(uuidAndText.Uuid).GetPresentation();
+                        case "РеалізаціяТоварівТаПослуг": record.result = await new Документи.РеалізаціяТоварівТаПослуг_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
                         
-                        case "ВстановленняЦінНоменклатури": return new Документи.ВстановленняЦінНоменклатури_Pointer(uuidAndText.Uuid).GetPresentation();
+                        case "ВстановленняЦінНоменклатури": record.result = await new Документи.ВстановленняЦінНоменклатури_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
                         
-                        case "ПрихіднийКасовийОрдер": return new Документи.ПрихіднийКасовийОрдер_Pointer(uuidAndText.Uuid).GetPresentation();
+                        case "ПрихіднийКасовийОрдер": record.result = await new Документи.ПрихіднийКасовийОрдер_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
                         
-                        case "РозхіднийКасовийОрдер": return new Документи.РозхіднийКасовийОрдер_Pointer(uuidAndText.Uuid).GetPresentation();
+                        case "РозхіднийКасовийОрдер": record.result = await new Документи.РозхіднийКасовийОрдер_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
                         
-                        case "ПереміщенняТоварів": return new Документи.ПереміщенняТоварів_Pointer(uuidAndText.Uuid).GetPresentation();
+                        case "ПереміщенняТоварів": record.result = await new Документи.ПереміщенняТоварів_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
                         
-                        case "ПоверненняТоварівПостачальнику": return new Документи.ПоверненняТоварівПостачальнику_Pointer(uuidAndText.Uuid).GetPresentation();
+                        case "ПоверненняТоварівПостачальнику": record.result = await new Документи.ПоверненняТоварівПостачальнику_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
                         
-                        case "ПоверненняТоварівВідКлієнта": return new Документи.ПоверненняТоварівВідКлієнта_Pointer(uuidAndText.Uuid).GetPresentation();
+                        case "ПоверненняТоварівВідКлієнта": record.result = await new Документи.ПоверненняТоварівВідКлієнта_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
                         
-                        case "АктВиконанихРобіт": return new Документи.АктВиконанихРобіт_Pointer(uuidAndText.Uuid).GetPresentation();
+                        case "АктВиконанихРобіт": record.result = await new Документи.АктВиконанихРобіт_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
                         
-                        case "ВведенняЗалишків": return new Документи.ВведенняЗалишків_Pointer(uuidAndText.Uuid).GetPresentation();
+                        case "ВведенняЗалишків": record.result = await new Документи.ВведенняЗалишків_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
                         
-                        case "НадлишкиТоварів": return new Документи.НадлишкиТоварів_Pointer(uuidAndText.Uuid).GetPresentation();
+                        case "НадлишкиТоварів": record.result = await new Документи.НадлишкиТоварів_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
                         
-                        case "ПересортицяТоварів": return new Документи.ПересортицяТоварів_Pointer(uuidAndText.Uuid).GetPresentation();
+                        case "ПересортицяТоварів": record.result = await new Документи.ПересортицяТоварів_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
                         
-                        case "ПерерахунокТоварів": return new Документи.ПерерахунокТоварів_Pointer(uuidAndText.Uuid).GetPresentation();
+                        case "ПерерахунокТоварів": record.result = await new Документи.ПерерахунокТоварів_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
                         
-                        case "ПсуванняТоварів": return new Документи.ПсуванняТоварів_Pointer(uuidAndText.Uuid).GetPresentation();
+                        case "ПсуванняТоварів": record.result = await new Документи.ПсуванняТоварів_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
                         
-                        case "ВнутрішнєСпоживанняТоварів": return new Документи.ВнутрішнєСпоживанняТоварів_Pointer(uuidAndText.Uuid).GetPresentation();
+                        case "ВнутрішнєСпоживанняТоварів": record.result = await new Документи.ВнутрішнєСпоживанняТоварів_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
                         
-                        case "РахунокФактура": return new Документи.РахунокФактура_Pointer(uuidAndText.Uuid).GetPresentation();
+                        case "РахунокФактура": record.result = await new Документи.РахунокФактура_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
                         
-                        case "РозміщенняТоварівНаСкладі": return new Документи.РозміщенняТоварівНаСкладі_Pointer(uuidAndText.Uuid).GetPresentation();
+                        case "РозміщенняТоварівНаСкладі": record.result = await new Документи.РозміщенняТоварівНаСкладі_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
                         
-                        case "ПереміщенняТоварівНаСкладі": return new Документи.ПереміщенняТоварівНаСкладі_Pointer(uuidAndText.Uuid).GetPresentation();
+                        case "ПереміщенняТоварівНаСкладі": record.result = await new Документи.ПереміщенняТоварівНаСкладі_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
                         
-                        case "ЗбіркаТоварівНаСкладі": return new Документи.ЗбіркаТоварівНаСкладі_Pointer(uuidAndText.Uuid).GetPresentation();
+                        case "ЗбіркаТоварівНаСкладі": record.result = await new Документи.ЗбіркаТоварівНаСкладі_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
                         
-                        case "РозміщенняНоменклатуриПоКоміркам": return new Документи.РозміщенняНоменклатуриПоКоміркам_Pointer(uuidAndText.Uuid).GetPresentation();
+                        case "РозміщенняНоменклатуриПоКоміркам": record.result = await new Документи.РозміщенняНоменклатуриПоКоміркам_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
                         
                     }
                     
                 }
-                else if (pointer == "Довідники")
+                else if (record.pointer == "Довідники")
                 {
                     
-                    switch (type)
+                    switch (record.type)
                     {
                         
-                        case "Організації": return new Довідники.Організації_Pointer(uuidAndText.Uuid).GetPresentation();
+                        case "Організації": record.result = await new Довідники.Організації_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
                         
-                        case "Номенклатура": return new Довідники.Номенклатура_Pointer(uuidAndText.Uuid).GetPresentation();
+                        case "Номенклатура": record.result = await new Довідники.Номенклатура_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
                         
-                        case "Виробники": return new Довідники.Виробники_Pointer(uuidAndText.Uuid).GetPresentation();
+                        case "Виробники": record.result = await new Довідники.Виробники_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
                         
-                        case "ВидиНоменклатури": return new Довідники.ВидиНоменклатури_Pointer(uuidAndText.Uuid).GetPresentation();
+                        case "ВидиНоменклатури": record.result = await new Довідники.ВидиНоменклатури_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
                         
-                        case "ПакуванняОдиниціВиміру": return new Довідники.ПакуванняОдиниціВиміру_Pointer(uuidAndText.Uuid).GetPresentation();
+                        case "ПакуванняОдиниціВиміру": record.result = await new Довідники.ПакуванняОдиниціВиміру_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
                         
-                        case "Валюти": return new Довідники.Валюти_Pointer(uuidAndText.Uuid).GetPresentation();
+                        case "Валюти": record.result = await new Довідники.Валюти_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
                         
-                        case "Контрагенти": return new Довідники.Контрагенти_Pointer(uuidAndText.Uuid).GetPresentation();
+                        case "Контрагенти": record.result = await new Довідники.Контрагенти_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
                         
-                        case "Склади": return new Довідники.Склади_Pointer(uuidAndText.Uuid).GetPresentation();
+                        case "Склади": record.result = await new Довідники.Склади_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
                         
-                        case "ВидиЦін": return new Довідники.ВидиЦін_Pointer(uuidAndText.Uuid).GetPresentation();
+                        case "ВидиЦін": record.result = await new Довідники.ВидиЦін_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
                         
-                        case "ВидиЦінПостачальників": return new Довідники.ВидиЦінПостачальників_Pointer(uuidAndText.Uuid).GetPresentation();
+                        case "ВидиЦінПостачальників": record.result = await new Довідники.ВидиЦінПостачальників_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
                         
-                        case "Користувачі": return new Довідники.Користувачі_Pointer(uuidAndText.Uuid).GetPresentation();
+                        case "Користувачі": record.result = await new Довідники.Користувачі_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
                         
-                        case "ФізичніОсоби": return new Довідники.ФізичніОсоби_Pointer(uuidAndText.Uuid).GetPresentation();
+                        case "ФізичніОсоби": record.result = await new Довідники.ФізичніОсоби_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
                         
-                        case "СтруктураПідприємства": return new Довідники.СтруктураПідприємства_Pointer(uuidAndText.Uuid).GetPresentation();
+                        case "СтруктураПідприємства": record.result = await new Довідники.СтруктураПідприємства_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
                         
-                        case "КраїниСвіту": return new Довідники.КраїниСвіту_Pointer(uuidAndText.Uuid).GetPresentation();
+                        case "КраїниСвіту": record.result = await new Довідники.КраїниСвіту_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
                         
-                        case "Файли": return new Довідники.Файли_Pointer(uuidAndText.Uuid).GetPresentation();
+                        case "Файли": record.result = await new Довідники.Файли_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
                         
-                        case "ХарактеристикиНоменклатури": return new Довідники.ХарактеристикиНоменклатури_Pointer(uuidAndText.Uuid).GetPresentation();
+                        case "ХарактеристикиНоменклатури": record.result = await new Довідники.ХарактеристикиНоменклатури_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
                         
-                        case "Номенклатура_Папки": return new Довідники.Номенклатура_Папки_Pointer(uuidAndText.Uuid).GetPresentation();
+                        case "Номенклатура_Папки": record.result = await new Довідники.Номенклатура_Папки_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
                         
-                        case "Контрагенти_Папки": return new Довідники.Контрагенти_Папки_Pointer(uuidAndText.Uuid).GetPresentation();
+                        case "Контрагенти_Папки": record.result = await new Довідники.Контрагенти_Папки_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
                         
-                        case "Склади_Папки": return new Довідники.Склади_Папки_Pointer(uuidAndText.Uuid).GetPresentation();
+                        case "Склади_Папки": record.result = await new Довідники.Склади_Папки_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
                         
-                        case "Каси": return new Довідники.Каси_Pointer(uuidAndText.Uuid).GetPresentation();
+                        case "Каси": record.result = await new Довідники.Каси_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
                         
-                        case "БанківськіРахункиОрганізацій": return new Довідники.БанківськіРахункиОрганізацій_Pointer(uuidAndText.Uuid).GetPresentation();
+                        case "БанківськіРахункиОрганізацій": record.result = await new Довідники.БанківськіРахункиОрганізацій_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
                         
-                        case "ДоговориКонтрагентів": return new Довідники.ДоговориКонтрагентів_Pointer(uuidAndText.Uuid).GetPresentation();
+                        case "ДоговориКонтрагентів": record.result = await new Довідники.ДоговориКонтрагентів_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
                         
-                        case "БанківськіРахункиКонтрагентів": return new Довідники.БанківськіРахункиКонтрагентів_Pointer(uuidAndText.Uuid).GetPresentation();
+                        case "БанківськіРахункиКонтрагентів": record.result = await new Довідники.БанківськіРахункиКонтрагентів_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
                         
-                        case "СтаттяРухуКоштів": return new Довідники.СтаттяРухуКоштів_Pointer(uuidAndText.Uuid).GetPresentation();
+                        case "СтаттяРухуКоштів": record.result = await new Довідники.СтаттяРухуКоштів_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
                         
-                        case "СеріїНоменклатури": return new Довідники.СеріїНоменклатури_Pointer(uuidAndText.Uuid).GetPresentation();
+                        case "СеріїНоменклатури": record.result = await new Довідники.СеріїНоменклатури_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
                         
-                        case "ПартіяТоварівКомпозит": return new Довідники.ПартіяТоварівКомпозит_Pointer(uuidAndText.Uuid).GetPresentation();
+                        case "ПартіяТоварівКомпозит": record.result = await new Довідники.ПартіяТоварівКомпозит_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
                         
-                        case "ВидиЗапасів": return new Довідники.ВидиЗапасів_Pointer(uuidAndText.Uuid).GetPresentation();
+                        case "ВидиЗапасів": record.result = await new Довідники.ВидиЗапасів_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
                         
-                        case "Банки": return new Довідники.Банки_Pointer(uuidAndText.Uuid).GetPresentation();
+                        case "Банки": record.result = await new Довідники.Банки_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
                         
-                        case "СкладськіПриміщення": return new Довідники.СкладськіПриміщення_Pointer(uuidAndText.Uuid).GetPresentation();
+                        case "СкладськіПриміщення": record.result = await new Довідники.СкладськіПриміщення_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
                         
-                        case "СкладськіКомірки": return new Довідники.СкладськіКомірки_Pointer(uuidAndText.Uuid).GetPresentation();
+                        case "СкладськіКомірки": record.result = await new Довідники.СкладськіКомірки_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
                         
-                        case "ОбластьЗберігання": return new Довідники.ОбластьЗберігання_Pointer(uuidAndText.Uuid).GetPresentation();
+                        case "ОбластьЗберігання": record.result = await new Довідники.ОбластьЗберігання_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
                         
-                        case "ТипорозміриКомірок": return new Довідники.ТипорозміриКомірок_Pointer(uuidAndText.Uuid).GetPresentation();
+                        case "ТипорозміриКомірок": record.result = await new Довідники.ТипорозміриКомірок_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
                         
-                        case "СкладськіКомірки_Папки": return new Довідники.СкладськіКомірки_Папки_Pointer(uuidAndText.Uuid).GetPresentation();
+                        case "СкладськіКомірки_Папки": record.result = await new Довідники.СкладськіКомірки_Папки_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
                         
-                        case "Блокнот": return new Довідники.Блокнот_Pointer(uuidAndText.Uuid).GetPresentation();
+                        case "Блокнот": record.result = await new Довідники.Блокнот_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
                         
                     }
                     
                 }
             }
 
-            return "";
+            return record;
         }
     }
 }
@@ -2041,13 +2047,15 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            Організації_Triggers.SetDeletionLabel(this, label);
+            
+                await Організації_Triggers.SetDeletionLabel(this, label);
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
-            Організації_Triggers.BeforeDelete(this);
+            
+                await Організації_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] { "tab_a02" });
         }
         
@@ -2061,9 +2069,9 @@ namespace StorageAndTrade_1_0.Довідники
             return new UuidAndText(UnigueID.UGuid, Організації_Const.POINTER);
         }
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return base.BasePresentation(
+            return await base.BasePresentation(
                 new string[] { "col_a1" }
             );
         }
@@ -2109,9 +2117,9 @@ namespace StorageAndTrade_1_0.Довідники
 
         public string Назва { get; set; } = "";
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return Назва = base.BasePresentation(
+            return Назва = await base.BasePresentation(
                 new string[] { "col_a1" }
             );
         }
@@ -2121,7 +2129,8 @@ namespace StorageAndTrade_1_0.Довідники
             Організації_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
-                Організації_Triggers.SetDeletionLabel(obj, label);
+                
+                    await Організації_Triggers.SetDeletionLabel(obj, label);
                 
                 await base.BaseDeletionLabel(label);
             }
@@ -2147,26 +2156,26 @@ namespace StorageAndTrade_1_0.Довідники
     public class Організації_Select : DirectorySelect
     {
         public Організації_Select() : base(Config.Kernel!, "tab_a01") { }        
-        public bool Select() { return base.BaseSelect(); }
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
         public bool MoveNext() { if (MoveToPosition()) { Current = new Організації_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public Організації_Pointer? Current { get; private set; }
         
-        public Організації_Pointer FindByField(string name, object value)
+        public async ValueTask<Організації_Pointer> FindByField(string name, object value)
         {
             Організації_Pointer itemPointer = new Організації_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(name, value);
+            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
         }
         
-        public List<Організації_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        public async ValueTask<List<Організації_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
             List<Організації_Pointer> directoryPointerList = new List<Організації_Pointer>();
-            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(name, value, limit, offset)) 
+            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
                 directoryPointerList.Add(new Організації_Pointer(directoryPointer.UnigueID));
             return directoryPointerList;
         }
@@ -2411,13 +2420,15 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            Номенклатура_Triggers.SetDeletionLabel(this, label);
+            
+                await Номенклатура_Triggers.SetDeletionLabel(this, label);
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
-            Номенклатура_Triggers.BeforeDelete(this);
+            
+                await Номенклатура_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] { "tab_b19" });
         }
         
@@ -2431,9 +2442,9 @@ namespace StorageAndTrade_1_0.Довідники
             return new UuidAndText(UnigueID.UGuid, Номенклатура_Const.POINTER);
         }
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return base.BasePresentation(
+            return await base.BasePresentation(
                 new string[] { "col_b1" }
             );
         }
@@ -2481,9 +2492,9 @@ namespace StorageAndTrade_1_0.Довідники
 
         public string Назва { get; set; } = "";
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return Назва = base.BasePresentation(
+            return Назва = await base.BasePresentation(
                 new string[] { "col_b1" }
             );
         }
@@ -2493,7 +2504,8 @@ namespace StorageAndTrade_1_0.Довідники
             Номенклатура_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
-                Номенклатура_Triggers.SetDeletionLabel(obj, label);
+                
+                    await Номенклатура_Triggers.SetDeletionLabel(obj, label);
                 
                 await base.BaseDeletionLabel(label);
             }
@@ -2519,26 +2531,26 @@ namespace StorageAndTrade_1_0.Довідники
     public class Номенклатура_Select : DirectorySelect
     {
         public Номенклатура_Select() : base(Config.Kernel!, "tab_a03") { }        
-        public bool Select() { return base.BaseSelect(); }
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
         public bool MoveNext() { if (MoveToPosition()) { Current = new Номенклатура_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public Номенклатура_Pointer? Current { get; private set; }
         
-        public Номенклатура_Pointer FindByField(string name, object value)
+        public async ValueTask<Номенклатура_Pointer> FindByField(string name, object value)
         {
             Номенклатура_Pointer itemPointer = new Номенклатура_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(name, value);
+            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
         }
         
-        public List<Номенклатура_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        public async ValueTask<List<Номенклатура_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
             List<Номенклатура_Pointer> directoryPointerList = new List<Номенклатура_Pointer>();
-            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(name, value, limit, offset)) 
+            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
                 directoryPointerList.Add(new Номенклатура_Pointer(directoryPointer.UnigueID));
             return directoryPointerList;
         }
@@ -2702,13 +2714,15 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            Виробники_Triggers.SetDeletionLabel(this, label);
+            
+                await Виробники_Triggers.SetDeletionLabel(this, label);
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
-            Виробники_Triggers.BeforeDelete(this);
+            
+                await Виробники_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] {  });
         }
         
@@ -2722,9 +2736,9 @@ namespace StorageAndTrade_1_0.Довідники
             return new UuidAndText(UnigueID.UGuid, Виробники_Const.POINTER);
         }
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return base.BasePresentation(
+            return await base.BasePresentation(
                 new string[] { "col_b6" }
             );
         }
@@ -2760,9 +2774,9 @@ namespace StorageAndTrade_1_0.Довідники
 
         public string Назва { get; set; } = "";
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return Назва = base.BasePresentation(
+            return Назва = await base.BasePresentation(
                 new string[] { "col_b6" }
             );
         }
@@ -2772,7 +2786,8 @@ namespace StorageAndTrade_1_0.Довідники
             Виробники_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
-                Виробники_Triggers.SetDeletionLabel(obj, label);
+                
+                    await Виробники_Triggers.SetDeletionLabel(obj, label);
                 
                 await base.BaseDeletionLabel(label);
             }
@@ -2798,26 +2813,26 @@ namespace StorageAndTrade_1_0.Довідники
     public class Виробники_Select : DirectorySelect
     {
         public Виробники_Select() : base(Config.Kernel!, "tab_a04") { }        
-        public bool Select() { return base.BaseSelect(); }
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
         public bool MoveNext() { if (MoveToPosition()) { Current = new Виробники_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public Виробники_Pointer? Current { get; private set; }
         
-        public Виробники_Pointer FindByField(string name, object value)
+        public async ValueTask<Виробники_Pointer> FindByField(string name, object value)
         {
             Виробники_Pointer itemPointer = new Виробники_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(name, value);
+            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
         }
         
-        public List<Виробники_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        public async ValueTask<List<Виробники_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
             List<Виробники_Pointer> directoryPointerList = new List<Виробники_Pointer>();
-            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(name, value, limit, offset)) 
+            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
                 directoryPointerList.Add(new Виробники_Pointer(directoryPointer.UnigueID));
             return directoryPointerList;
         }
@@ -2914,13 +2929,15 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ВидиНоменклатури_Triggers.SetDeletionLabel(this, label);
+            
+                await ВидиНоменклатури_Triggers.SetDeletionLabel(this, label);
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
-            ВидиНоменклатури_Triggers.BeforeDelete(this);
+            
+                await ВидиНоменклатури_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] {  });
         }
         
@@ -2934,9 +2951,9 @@ namespace StorageAndTrade_1_0.Довідники
             return new UuidAndText(UnigueID.UGuid, ВидиНоменклатури_Const.POINTER);
         }
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return base.BasePresentation(
+            return await base.BasePresentation(
                 new string[] { "col_b8" }
             );
         }
@@ -2975,9 +2992,9 @@ namespace StorageAndTrade_1_0.Довідники
 
         public string Назва { get; set; } = "";
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return Назва = base.BasePresentation(
+            return Назва = await base.BasePresentation(
                 new string[] { "col_b8" }
             );
         }
@@ -2987,7 +3004,8 @@ namespace StorageAndTrade_1_0.Довідники
             ВидиНоменклатури_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
-                ВидиНоменклатури_Triggers.SetDeletionLabel(obj, label);
+                
+                    await ВидиНоменклатури_Triggers.SetDeletionLabel(obj, label);
                 
                 await base.BaseDeletionLabel(label);
             }
@@ -3013,26 +3031,26 @@ namespace StorageAndTrade_1_0.Довідники
     public class ВидиНоменклатури_Select : DirectorySelect
     {
         public ВидиНоменклатури_Select() : base(Config.Kernel!, "tab_a05") { }        
-        public bool Select() { return base.BaseSelect(); }
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
         public bool MoveNext() { if (MoveToPosition()) { Current = new ВидиНоменклатури_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public ВидиНоменклатури_Pointer? Current { get; private set; }
         
-        public ВидиНоменклатури_Pointer FindByField(string name, object value)
+        public async ValueTask<ВидиНоменклатури_Pointer> FindByField(string name, object value)
         {
             ВидиНоменклатури_Pointer itemPointer = new ВидиНоменклатури_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(name, value);
+            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
         }
         
-        public List<ВидиНоменклатури_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        public async ValueTask<List<ВидиНоменклатури_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
             List<ВидиНоменклатури_Pointer> directoryPointerList = new List<ВидиНоменклатури_Pointer>();
-            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(name, value, limit, offset)) 
+            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
                 directoryPointerList.Add(new ВидиНоменклатури_Pointer(directoryPointer.UnigueID));
             return directoryPointerList;
         }
@@ -3124,13 +3142,15 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ПакуванняОдиниціВиміру_Triggers.SetDeletionLabel(this, label);
+            
+                await ПакуванняОдиниціВиміру_Triggers.SetDeletionLabel(this, label);
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
-            ПакуванняОдиниціВиміру_Triggers.BeforeDelete(this);
+            
+                await ПакуванняОдиниціВиміру_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] {  });
         }
         
@@ -3144,9 +3164,9 @@ namespace StorageAndTrade_1_0.Довідники
             return new UuidAndText(UnigueID.UGuid, ПакуванняОдиниціВиміру_Const.POINTER);
         }
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return base.BasePresentation(
+            return await base.BasePresentation(
                 new string[] { "col_c1" }
             );
         }
@@ -3184,9 +3204,9 @@ namespace StorageAndTrade_1_0.Довідники
 
         public string Назва { get; set; } = "";
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return Назва = base.BasePresentation(
+            return Назва = await base.BasePresentation(
                 new string[] { "col_c1" }
             );
         }
@@ -3196,7 +3216,8 @@ namespace StorageAndTrade_1_0.Довідники
             ПакуванняОдиниціВиміру_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
-                ПакуванняОдиниціВиміру_Triggers.SetDeletionLabel(obj, label);
+                
+                    await ПакуванняОдиниціВиміру_Triggers.SetDeletionLabel(obj, label);
                 
                 await base.BaseDeletionLabel(label);
             }
@@ -3222,26 +3243,26 @@ namespace StorageAndTrade_1_0.Довідники
     public class ПакуванняОдиниціВиміру_Select : DirectorySelect
     {
         public ПакуванняОдиниціВиміру_Select() : base(Config.Kernel!, "tab_a06") { }        
-        public bool Select() { return base.BaseSelect(); }
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
         public bool MoveNext() { if (MoveToPosition()) { Current = new ПакуванняОдиниціВиміру_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public ПакуванняОдиниціВиміру_Pointer? Current { get; private set; }
         
-        public ПакуванняОдиниціВиміру_Pointer FindByField(string name, object value)
+        public async ValueTask<ПакуванняОдиниціВиміру_Pointer> FindByField(string name, object value)
         {
             ПакуванняОдиниціВиміру_Pointer itemPointer = new ПакуванняОдиниціВиміру_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(name, value);
+            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
         }
         
-        public List<ПакуванняОдиниціВиміру_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        public async ValueTask<List<ПакуванняОдиниціВиміру_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
             List<ПакуванняОдиниціВиміру_Pointer> directoryPointerList = new List<ПакуванняОдиниціВиміру_Pointer>();
-            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(name, value, limit, offset)) 
+            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
                 directoryPointerList.Add(new ПакуванняОдиниціВиміру_Pointer(directoryPointer.UnigueID));
             return directoryPointerList;
         }
@@ -3338,13 +3359,15 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            Валюти_Triggers.SetDeletionLabel(this, label);
+            
+                await Валюти_Triggers.SetDeletionLabel(this, label);
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
-            Валюти_Triggers.BeforeDelete(this);
+            
+                await Валюти_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] {  });
         }
         
@@ -3358,9 +3381,9 @@ namespace StorageAndTrade_1_0.Довідники
             return new UuidAndText(UnigueID.UGuid, Валюти_Const.POINTER);
         }
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return base.BasePresentation(
+            return await base.BasePresentation(
                 new string[] { "col_c5" }
             );
         }
@@ -3399,9 +3422,9 @@ namespace StorageAndTrade_1_0.Довідники
 
         public string Назва { get; set; } = "";
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return Назва = base.BasePresentation(
+            return Назва = await base.BasePresentation(
                 new string[] { "col_c5" }
             );
         }
@@ -3411,7 +3434,8 @@ namespace StorageAndTrade_1_0.Довідники
             Валюти_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
-                Валюти_Triggers.SetDeletionLabel(obj, label);
+                
+                    await Валюти_Triggers.SetDeletionLabel(obj, label);
                 
                 await base.BaseDeletionLabel(label);
             }
@@ -3437,26 +3461,26 @@ namespace StorageAndTrade_1_0.Довідники
     public class Валюти_Select : DirectorySelect
     {
         public Валюти_Select() : base(Config.Kernel!, "tab_a07") { }        
-        public bool Select() { return base.BaseSelect(); }
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
         public bool MoveNext() { if (MoveToPosition()) { Current = new Валюти_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public Валюти_Pointer? Current { get; private set; }
         
-        public Валюти_Pointer FindByField(string name, object value)
+        public async ValueTask<Валюти_Pointer> FindByField(string name, object value)
         {
             Валюти_Pointer itemPointer = new Валюти_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(name, value);
+            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
         }
         
-        public List<Валюти_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        public async ValueTask<List<Валюти_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
             List<Валюти_Pointer> directoryPointerList = new List<Валюти_Pointer>();
-            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(name, value, limit, offset)) 
+            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
                 directoryPointerList.Add(new Валюти_Pointer(directoryPointer.UnigueID));
             return directoryPointerList;
         }
@@ -3580,13 +3604,15 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            Контрагенти_Triggers.SetDeletionLabel(this, label);
+            
+                await Контрагенти_Triggers.SetDeletionLabel(this, label);
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
-            Контрагенти_Triggers.BeforeDelete(this);
+            
+                await Контрагенти_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] { "tab_a09", "tab_b20" });
         }
         
@@ -3600,9 +3626,9 @@ namespace StorageAndTrade_1_0.Довідники
             return new UuidAndText(UnigueID.UGuid, Контрагенти_Const.POINTER);
         }
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return base.BasePresentation(
+            return await base.BasePresentation(
                 new string[] { "col_c7" }
             );
         }
@@ -3647,9 +3673,9 @@ namespace StorageAndTrade_1_0.Довідники
 
         public string Назва { get; set; } = "";
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return Назва = base.BasePresentation(
+            return Назва = await base.BasePresentation(
                 new string[] { "col_c7" }
             );
         }
@@ -3659,7 +3685,8 @@ namespace StorageAndTrade_1_0.Довідники
             Контрагенти_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
-                Контрагенти_Triggers.SetDeletionLabel(obj, label);
+                
+                    await Контрагенти_Triggers.SetDeletionLabel(obj, label);
                 
                 await base.BaseDeletionLabel(label);
             }
@@ -3685,26 +3712,26 @@ namespace StorageAndTrade_1_0.Довідники
     public class Контрагенти_Select : DirectorySelect
     {
         public Контрагенти_Select() : base(Config.Kernel!, "tab_a08") { }        
-        public bool Select() { return base.BaseSelect(); }
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
         public bool MoveNext() { if (MoveToPosition()) { Current = new Контрагенти_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public Контрагенти_Pointer? Current { get; private set; }
         
-        public Контрагенти_Pointer FindByField(string name, object value)
+        public async ValueTask<Контрагенти_Pointer> FindByField(string name, object value)
         {
             Контрагенти_Pointer itemPointer = new Контрагенти_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(name, value);
+            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
         }
         
-        public List<Контрагенти_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        public async ValueTask<List<Контрагенти_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
             List<Контрагенти_Pointer> directoryPointerList = new List<Контрагенти_Pointer>();
-            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(name, value, limit, offset)) 
+            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
                 directoryPointerList.Add(new Контрагенти_Pointer(directoryPointer.UnigueID));
             return directoryPointerList;
         }
@@ -4012,13 +4039,15 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            Склади_Triggers.SetDeletionLabel(this, label);
+            
+                await Склади_Triggers.SetDeletionLabel(this, label);
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
-            Склади_Triggers.BeforeDelete(this);
+            
+                await Склади_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] { "tab_a11" });
         }
         
@@ -4032,9 +4061,9 @@ namespace StorageAndTrade_1_0.Довідники
             return new UuidAndText(UnigueID.UGuid, Склади_Const.POINTER);
         }
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return base.BasePresentation(
+            return await base.BasePresentation(
                 new string[] { "col_d9" }
             );
         }
@@ -4079,9 +4108,9 @@ namespace StorageAndTrade_1_0.Довідники
 
         public string Назва { get; set; } = "";
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return Назва = base.BasePresentation(
+            return Назва = await base.BasePresentation(
                 new string[] { "col_d9" }
             );
         }
@@ -4091,7 +4120,8 @@ namespace StorageAndTrade_1_0.Довідники
             Склади_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
-                Склади_Triggers.SetDeletionLabel(obj, label);
+                
+                    await Склади_Triggers.SetDeletionLabel(obj, label);
                 
                 await base.BaseDeletionLabel(label);
             }
@@ -4117,26 +4147,26 @@ namespace StorageAndTrade_1_0.Довідники
     public class Склади_Select : DirectorySelect
     {
         public Склади_Select() : base(Config.Kernel!, "tab_a10") { }        
-        public bool Select() { return base.BaseSelect(); }
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
         public bool MoveNext() { if (MoveToPosition()) { Current = new Склади_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public Склади_Pointer? Current { get; private set; }
         
-        public Склади_Pointer FindByField(string name, object value)
+        public async ValueTask<Склади_Pointer> FindByField(string name, object value)
         {
             Склади_Pointer itemPointer = new Склади_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(name, value);
+            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
         }
         
-        public List<Склади_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        public async ValueTask<List<Склади_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
             List<Склади_Pointer> directoryPointerList = new List<Склади_Pointer>();
-            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(name, value, limit, offset)) 
+            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
                 directoryPointerList.Add(new Склади_Pointer(directoryPointer.UnigueID));
             return directoryPointerList;
         }
@@ -4329,13 +4359,15 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ВидиЦін_Triggers.SetDeletionLabel(this, label);
+            
+                await ВидиЦін_Triggers.SetDeletionLabel(this, label);
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
-            ВидиЦін_Triggers.BeforeDelete(this);
+            
+                await ВидиЦін_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] {  });
         }
         
@@ -4349,9 +4381,9 @@ namespace StorageAndTrade_1_0.Довідники
             return new UuidAndText(UnigueID.UGuid, ВидиЦін_Const.POINTER);
         }
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return base.BasePresentation(
+            return await base.BasePresentation(
                 new string[] { "col_e9" }
             );
         }
@@ -4388,9 +4420,9 @@ namespace StorageAndTrade_1_0.Довідники
 
         public string Назва { get; set; } = "";
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return Назва = base.BasePresentation(
+            return Назва = await base.BasePresentation(
                 new string[] { "col_e9" }
             );
         }
@@ -4400,7 +4432,8 @@ namespace StorageAndTrade_1_0.Довідники
             ВидиЦін_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
-                ВидиЦін_Triggers.SetDeletionLabel(obj, label);
+                
+                    await ВидиЦін_Triggers.SetDeletionLabel(obj, label);
                 
                 await base.BaseDeletionLabel(label);
             }
@@ -4426,26 +4459,26 @@ namespace StorageAndTrade_1_0.Довідники
     public class ВидиЦін_Select : DirectorySelect
     {
         public ВидиЦін_Select() : base(Config.Kernel!, "tab_a12") { }        
-        public bool Select() { return base.BaseSelect(); }
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
         public bool MoveNext() { if (MoveToPosition()) { Current = new ВидиЦін_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public ВидиЦін_Pointer? Current { get; private set; }
         
-        public ВидиЦін_Pointer FindByField(string name, object value)
+        public async ValueTask<ВидиЦін_Pointer> FindByField(string name, object value)
         {
             ВидиЦін_Pointer itemPointer = new ВидиЦін_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(name, value);
+            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
         }
         
-        public List<ВидиЦін_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        public async ValueTask<List<ВидиЦін_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
             List<ВидиЦін_Pointer> directoryPointerList = new List<ВидиЦін_Pointer>();
-            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(name, value, limit, offset)) 
+            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
                 directoryPointerList.Add(new ВидиЦін_Pointer(directoryPointer.UnigueID));
             return directoryPointerList;
         }
@@ -4532,13 +4565,15 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ВидиЦінПостачальників_Triggers.SetDeletionLabel(this, label);
+            
+                await ВидиЦінПостачальників_Triggers.SetDeletionLabel(this, label);
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
-            ВидиЦінПостачальників_Triggers.BeforeDelete(this);
+            
+                await ВидиЦінПостачальників_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] {  });
         }
         
@@ -4552,9 +4587,9 @@ namespace StorageAndTrade_1_0.Довідники
             return new UuidAndText(UnigueID.UGuid, ВидиЦінПостачальників_Const.POINTER);
         }
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return base.BasePresentation(
+            return await base.BasePresentation(
                 new string[] { "col_f3" }
             );
         }
@@ -4591,9 +4626,9 @@ namespace StorageAndTrade_1_0.Довідники
 
         public string Назва { get; set; } = "";
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return Назва = base.BasePresentation(
+            return Назва = await base.BasePresentation(
                 new string[] { "col_f3" }
             );
         }
@@ -4603,7 +4638,8 @@ namespace StorageAndTrade_1_0.Довідники
             ВидиЦінПостачальників_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
-                ВидиЦінПостачальників_Triggers.SetDeletionLabel(obj, label);
+                
+                    await ВидиЦінПостачальників_Triggers.SetDeletionLabel(obj, label);
                 
                 await base.BaseDeletionLabel(label);
             }
@@ -4629,26 +4665,26 @@ namespace StorageAndTrade_1_0.Довідники
     public class ВидиЦінПостачальників_Select : DirectorySelect
     {
         public ВидиЦінПостачальників_Select() : base(Config.Kernel!, "tab_a13") { }        
-        public bool Select() { return base.BaseSelect(); }
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
         public bool MoveNext() { if (MoveToPosition()) { Current = new ВидиЦінПостачальників_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public ВидиЦінПостачальників_Pointer? Current { get; private set; }
         
-        public ВидиЦінПостачальників_Pointer FindByField(string name, object value)
+        public async ValueTask<ВидиЦінПостачальників_Pointer> FindByField(string name, object value)
         {
             ВидиЦінПостачальників_Pointer itemPointer = new ВидиЦінПостачальників_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(name, value);
+            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
         }
         
-        public List<ВидиЦінПостачальників_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        public async ValueTask<List<ВидиЦінПостачальників_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
             List<ВидиЦінПостачальників_Pointer> directoryPointerList = new List<ВидиЦінПостачальників_Pointer>();
-            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(name, value, limit, offset)) 
+            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
                 directoryPointerList.Add(new ВидиЦінПостачальників_Pointer(directoryPointer.UnigueID));
             return directoryPointerList;
         }
@@ -4757,13 +4793,15 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            Користувачі_Triggers.SetDeletionLabel(this, label);
+            
+                await Користувачі_Triggers.SetDeletionLabel(this, label);
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
-            Користувачі_Triggers.BeforeDelete(this);
+            
+                await Користувачі_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] { "tab_a15" });
         }
         
@@ -4777,9 +4815,9 @@ namespace StorageAndTrade_1_0.Довідники
             return new UuidAndText(UnigueID.UGuid, Користувачі_Const.POINTER);
         }
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return base.BasePresentation(
+            return await base.BasePresentation(
                 new string[] { "col_f6" }
             );
         }
@@ -4821,9 +4859,9 @@ namespace StorageAndTrade_1_0.Довідники
 
         public string Назва { get; set; } = "";
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return Назва = base.BasePresentation(
+            return Назва = await base.BasePresentation(
                 new string[] { "col_f6" }
             );
         }
@@ -4833,7 +4871,8 @@ namespace StorageAndTrade_1_0.Довідники
             Користувачі_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
-                Користувачі_Triggers.SetDeletionLabel(obj, label);
+                
+                    await Користувачі_Triggers.SetDeletionLabel(obj, label);
                 
                 await base.BaseDeletionLabel(label);
             }
@@ -4859,26 +4898,26 @@ namespace StorageAndTrade_1_0.Довідники
     public class Користувачі_Select : DirectorySelect
     {
         public Користувачі_Select() : base(Config.Kernel!, "tab_a14") { }        
-        public bool Select() { return base.BaseSelect(); }
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
         public bool MoveNext() { if (MoveToPosition()) { Current = new Користувачі_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public Користувачі_Pointer? Current { get; private set; }
         
-        public Користувачі_Pointer FindByField(string name, object value)
+        public async ValueTask<Користувачі_Pointer> FindByField(string name, object value)
         {
             Користувачі_Pointer itemPointer = new Користувачі_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(name, value);
+            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
         }
         
-        public List<Користувачі_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        public async ValueTask<List<Користувачі_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
             List<Користувачі_Pointer> directoryPointerList = new List<Користувачі_Pointer>();
-            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(name, value, limit, offset)) 
+            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
                 directoryPointerList.Add(new Користувачі_Pointer(directoryPointer.UnigueID));
             return directoryPointerList;
         }
@@ -5089,13 +5128,15 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ФізичніОсоби_Triggers.SetDeletionLabel(this, label);
+            
+                await ФізичніОсоби_Triggers.SetDeletionLabel(this, label);
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
-            ФізичніОсоби_Triggers.BeforeDelete(this);
+            
+                await ФізичніОсоби_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] { "tab_a17" });
         }
         
@@ -5109,9 +5150,9 @@ namespace StorageAndTrade_1_0.Довідники
             return new UuidAndText(UnigueID.UGuid, ФізичніОсоби_Const.POINTER);
         }
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return base.BasePresentation(
+            return await base.BasePresentation(
                 new string[] { "col_g7" }
             );
         }
@@ -5153,9 +5194,9 @@ namespace StorageAndTrade_1_0.Довідники
 
         public string Назва { get; set; } = "";
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return Назва = base.BasePresentation(
+            return Назва = await base.BasePresentation(
                 new string[] { "col_g7" }
             );
         }
@@ -5165,7 +5206,8 @@ namespace StorageAndTrade_1_0.Довідники
             ФізичніОсоби_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
-                ФізичніОсоби_Triggers.SetDeletionLabel(obj, label);
+                
+                    await ФізичніОсоби_Triggers.SetDeletionLabel(obj, label);
                 
                 await base.BaseDeletionLabel(label);
             }
@@ -5191,26 +5233,26 @@ namespace StorageAndTrade_1_0.Довідники
     public class ФізичніОсоби_Select : DirectorySelect
     {
         public ФізичніОсоби_Select() : base(Config.Kernel!, "tab_a16") { }        
-        public bool Select() { return base.BaseSelect(); }
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
         public bool MoveNext() { if (MoveToPosition()) { Current = new ФізичніОсоби_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public ФізичніОсоби_Pointer? Current { get; private set; }
         
-        public ФізичніОсоби_Pointer FindByField(string name, object value)
+        public async ValueTask<ФізичніОсоби_Pointer> FindByField(string name, object value)
         {
             ФізичніОсоби_Pointer itemPointer = new ФізичніОсоби_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(name, value);
+            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
         }
         
-        public List<ФізичніОсоби_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        public async ValueTask<List<ФізичніОсоби_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
             List<ФізичніОсоби_Pointer> directoryPointerList = new List<ФізичніОсоби_Pointer>();
-            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(name, value, limit, offset)) 
+            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
                 directoryPointerList.Add(new ФізичніОсоби_Pointer(directoryPointer.UnigueID));
             return directoryPointerList;
         }
@@ -5399,13 +5441,15 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            СтруктураПідприємства_Triggers.SetDeletionLabel(this, label);
+            
+                await СтруктураПідприємства_Triggers.SetDeletionLabel(this, label);
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
-            СтруктураПідприємства_Triggers.BeforeDelete(this);
+            
+                await СтруктураПідприємства_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] {  });
         }
         
@@ -5419,9 +5463,9 @@ namespace StorageAndTrade_1_0.Довідники
             return new UuidAndText(UnigueID.UGuid, СтруктураПідприємства_Const.POINTER);
         }
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return base.BasePresentation(
+            return await base.BasePresentation(
                 new string[] { "col_h8" }
             );
         }
@@ -5458,9 +5502,9 @@ namespace StorageAndTrade_1_0.Довідники
 
         public string Назва { get; set; } = "";
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return Назва = base.BasePresentation(
+            return Назва = await base.BasePresentation(
                 new string[] { "col_h8" }
             );
         }
@@ -5470,7 +5514,8 @@ namespace StorageAndTrade_1_0.Довідники
             СтруктураПідприємства_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
-                СтруктураПідприємства_Triggers.SetDeletionLabel(obj, label);
+                
+                    await СтруктураПідприємства_Triggers.SetDeletionLabel(obj, label);
                 
                 await base.BaseDeletionLabel(label);
             }
@@ -5496,26 +5541,26 @@ namespace StorageAndTrade_1_0.Довідники
     public class СтруктураПідприємства_Select : DirectorySelect
     {
         public СтруктураПідприємства_Select() : base(Config.Kernel!, "tab_a18") { }        
-        public bool Select() { return base.BaseSelect(); }
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
         public bool MoveNext() { if (MoveToPosition()) { Current = new СтруктураПідприємства_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public СтруктураПідприємства_Pointer? Current { get; private set; }
         
-        public СтруктураПідприємства_Pointer FindByField(string name, object value)
+        public async ValueTask<СтруктураПідприємства_Pointer> FindByField(string name, object value)
         {
             СтруктураПідприємства_Pointer itemPointer = new СтруктураПідприємства_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(name, value);
+            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
         }
         
-        public List<СтруктураПідприємства_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        public async ValueTask<List<СтруктураПідприємства_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
             List<СтруктураПідприємства_Pointer> directoryPointerList = new List<СтруктураПідприємства_Pointer>();
-            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(name, value, limit, offset)) 
+            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
                 directoryPointerList.Add(new СтруктураПідприємства_Pointer(directoryPointer.UnigueID));
             return directoryPointerList;
         }
@@ -5597,13 +5642,15 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            КраїниСвіту_Triggers.SetDeletionLabel(this, label);
+            
+                await КраїниСвіту_Triggers.SetDeletionLabel(this, label);
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
-            КраїниСвіту_Triggers.BeforeDelete(this);
+            
+                await КраїниСвіту_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] {  });
         }
         
@@ -5617,9 +5664,9 @@ namespace StorageAndTrade_1_0.Довідники
             return new UuidAndText(UnigueID.UGuid, КраїниСвіту_Const.POINTER);
         }
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return base.BasePresentation(
+            return await base.BasePresentation(
                 new string[] { "col_i2" }
             );
         }
@@ -5655,9 +5702,9 @@ namespace StorageAndTrade_1_0.Довідники
 
         public string Назва { get; set; } = "";
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return Назва = base.BasePresentation(
+            return Назва = await base.BasePresentation(
                 new string[] { "col_i2" }
             );
         }
@@ -5667,7 +5714,8 @@ namespace StorageAndTrade_1_0.Довідники
             КраїниСвіту_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
-                КраїниСвіту_Triggers.SetDeletionLabel(obj, label);
+                
+                    await КраїниСвіту_Triggers.SetDeletionLabel(obj, label);
                 
                 await base.BaseDeletionLabel(label);
             }
@@ -5693,26 +5741,26 @@ namespace StorageAndTrade_1_0.Довідники
     public class КраїниСвіту_Select : DirectorySelect
     {
         public КраїниСвіту_Select() : base(Config.Kernel!, "tab_a19") { }        
-        public bool Select() { return base.BaseSelect(); }
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
         public bool MoveNext() { if (MoveToPosition()) { Current = new КраїниСвіту_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public КраїниСвіту_Pointer? Current { get; private set; }
         
-        public КраїниСвіту_Pointer FindByField(string name, object value)
+        public async ValueTask<КраїниСвіту_Pointer> FindByField(string name, object value)
         {
             КраїниСвіту_Pointer itemPointer = new КраїниСвіту_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(name, value);
+            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
         }
         
-        public List<КраїниСвіту_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        public async ValueTask<List<КраїниСвіту_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
             List<КраїниСвіту_Pointer> directoryPointerList = new List<КраїниСвіту_Pointer>();
-            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(name, value, limit, offset)) 
+            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
                 directoryPointerList.Add(new КраїниСвіту_Pointer(directoryPointer.UnigueID));
             return directoryPointerList;
         }
@@ -5814,13 +5862,15 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            Файли_Triggers.SetDeletionLabel(this, label);
+            
+                await Файли_Triggers.SetDeletionLabel(this, label);
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
-            Файли_Triggers.BeforeDelete(this);
+            
+                await Файли_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] {  });
         }
         
@@ -5834,9 +5884,9 @@ namespace StorageAndTrade_1_0.Довідники
             return new UuidAndText(UnigueID.UGuid, Файли_Const.POINTER);
         }
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return base.BasePresentation(
+            return await base.BasePresentation(
                 new string[] { "col_i5" }
             );
         }
@@ -5876,9 +5926,9 @@ namespace StorageAndTrade_1_0.Довідники
 
         public string Назва { get; set; } = "";
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return Назва = base.BasePresentation(
+            return Назва = await base.BasePresentation(
                 new string[] { "col_i5" }
             );
         }
@@ -5888,7 +5938,8 @@ namespace StorageAndTrade_1_0.Довідники
             Файли_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
-                Файли_Triggers.SetDeletionLabel(obj, label);
+                
+                    await Файли_Triggers.SetDeletionLabel(obj, label);
                 
                 await base.BaseDeletionLabel(label);
             }
@@ -5914,26 +5965,26 @@ namespace StorageAndTrade_1_0.Довідники
     public class Файли_Select : DirectorySelect
     {
         public Файли_Select() : base(Config.Kernel!, "tab_a20") { }        
-        public bool Select() { return base.BaseSelect(); }
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
         public bool MoveNext() { if (MoveToPosition()) { Current = new Файли_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public Файли_Pointer? Current { get; private set; }
         
-        public Файли_Pointer FindByField(string name, object value)
+        public async ValueTask<Файли_Pointer> FindByField(string name, object value)
         {
             Файли_Pointer itemPointer = new Файли_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(name, value);
+            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
         }
         
-        public List<Файли_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        public async ValueTask<List<Файли_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
             List<Файли_Pointer> directoryPointerList = new List<Файли_Pointer>();
-            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(name, value, limit, offset)) 
+            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
                 directoryPointerList.Add(new Файли_Pointer(directoryPointer.UnigueID));
             return directoryPointerList;
         }
@@ -6025,13 +6076,15 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ХарактеристикиНоменклатури_Triggers.SetDeletionLabel(this, label);
+            
+                await ХарактеристикиНоменклатури_Triggers.SetDeletionLabel(this, label);
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
-            ХарактеристикиНоменклатури_Triggers.BeforeDelete(this);
+            
+                await ХарактеристикиНоменклатури_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] {  });
         }
         
@@ -6045,9 +6098,9 @@ namespace StorageAndTrade_1_0.Довідники
             return new UuidAndText(UnigueID.UGuid, ХарактеристикиНоменклатури_Const.POINTER);
         }
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return base.BasePresentation(
+            return await base.BasePresentation(
                 new string[] { "col_i7" }
             );
         }
@@ -6085,9 +6138,9 @@ namespace StorageAndTrade_1_0.Довідники
 
         public string Назва { get; set; } = "";
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return Назва = base.BasePresentation(
+            return Назва = await base.BasePresentation(
                 new string[] { "col_i7" }
             );
         }
@@ -6097,7 +6150,8 @@ namespace StorageAndTrade_1_0.Довідники
             ХарактеристикиНоменклатури_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
-                ХарактеристикиНоменклатури_Triggers.SetDeletionLabel(obj, label);
+                
+                    await ХарактеристикиНоменклатури_Triggers.SetDeletionLabel(obj, label);
                 
                 await base.BaseDeletionLabel(label);
             }
@@ -6123,26 +6177,26 @@ namespace StorageAndTrade_1_0.Довідники
     public class ХарактеристикиНоменклатури_Select : DirectorySelect
     {
         public ХарактеристикиНоменклатури_Select() : base(Config.Kernel!, "tab_a21") { }        
-        public bool Select() { return base.BaseSelect(); }
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
         public bool MoveNext() { if (MoveToPosition()) { Current = new ХарактеристикиНоменклатури_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public ХарактеристикиНоменклатури_Pointer? Current { get; private set; }
         
-        public ХарактеристикиНоменклатури_Pointer FindByField(string name, object value)
+        public async ValueTask<ХарактеристикиНоменклатури_Pointer> FindByField(string name, object value)
         {
             ХарактеристикиНоменклатури_Pointer itemPointer = new ХарактеристикиНоменклатури_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(name, value);
+            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
         }
         
-        public List<ХарактеристикиНоменклатури_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        public async ValueTask<List<ХарактеристикиНоменклатури_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
             List<ХарактеристикиНоменклатури_Pointer> directoryPointerList = new List<ХарактеристикиНоменклатури_Pointer>();
-            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(name, value, limit, offset)) 
+            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
                 directoryPointerList.Add(new ХарактеристикиНоменклатури_Pointer(directoryPointer.UnigueID));
             return directoryPointerList;
         }
@@ -6229,13 +6283,15 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            Номенклатура_Папки_Triggers.SetDeletionLabel(this, label);
+            
+                await Номенклатура_Папки_Triggers.SetDeletionLabel(this, label);
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
-            Номенклатура_Папки_Triggers.BeforeDelete(this);
+            
+                await Номенклатура_Папки_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] {  });
         }
         
@@ -6249,9 +6305,9 @@ namespace StorageAndTrade_1_0.Довідники
             return new UuidAndText(UnigueID.UGuid, Номенклатура_Папки_Const.POINTER);
         }
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return base.BasePresentation(
+            return await base.BasePresentation(
                 new string[] { "col_j1" }
             );
         }
@@ -6288,9 +6344,9 @@ namespace StorageAndTrade_1_0.Довідники
 
         public string Назва { get; set; } = "";
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return Назва = base.BasePresentation(
+            return Назва = await base.BasePresentation(
                 new string[] { "col_j1" }
             );
         }
@@ -6300,7 +6356,8 @@ namespace StorageAndTrade_1_0.Довідники
             Номенклатура_Папки_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
-                Номенклатура_Папки_Triggers.SetDeletionLabel(obj, label);
+                
+                    await Номенклатура_Папки_Triggers.SetDeletionLabel(obj, label);
                 
                 await base.BaseDeletionLabel(label);
             }
@@ -6326,26 +6383,26 @@ namespace StorageAndTrade_1_0.Довідники
     public class Номенклатура_Папки_Select : DirectorySelect
     {
         public Номенклатура_Папки_Select() : base(Config.Kernel!, "tab_a22") { }        
-        public bool Select() { return base.BaseSelect(); }
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
         public bool MoveNext() { if (MoveToPosition()) { Current = new Номенклатура_Папки_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public Номенклатура_Папки_Pointer? Current { get; private set; }
         
-        public Номенклатура_Папки_Pointer FindByField(string name, object value)
+        public async ValueTask<Номенклатура_Папки_Pointer> FindByField(string name, object value)
         {
             Номенклатура_Папки_Pointer itemPointer = new Номенклатура_Папки_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(name, value);
+            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
         }
         
-        public List<Номенклатура_Папки_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        public async ValueTask<List<Номенклатура_Папки_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
             List<Номенклатура_Папки_Pointer> directoryPointerList = new List<Номенклатура_Папки_Pointer>();
-            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(name, value, limit, offset)) 
+            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
                 directoryPointerList.Add(new Номенклатура_Папки_Pointer(directoryPointer.UnigueID));
             return directoryPointerList;
         }
@@ -6432,13 +6489,15 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            Контрагенти_Папки_Triggers.SetDeletionLabel(this, label);
+            
+                await Контрагенти_Папки_Triggers.SetDeletionLabel(this, label);
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
-            Контрагенти_Папки_Triggers.BeforeDelete(this);
+            
+                await Контрагенти_Папки_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] {  });
         }
         
@@ -6452,9 +6511,9 @@ namespace StorageAndTrade_1_0.Довідники
             return new UuidAndText(UnigueID.UGuid, Контрагенти_Папки_Const.POINTER);
         }
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return base.BasePresentation(
+            return await base.BasePresentation(
                 new string[] { "col_j4" }
             );
         }
@@ -6491,9 +6550,9 @@ namespace StorageAndTrade_1_0.Довідники
 
         public string Назва { get; set; } = "";
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return Назва = base.BasePresentation(
+            return Назва = await base.BasePresentation(
                 new string[] { "col_j4" }
             );
         }
@@ -6503,7 +6562,8 @@ namespace StorageAndTrade_1_0.Довідники
             Контрагенти_Папки_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
-                Контрагенти_Папки_Triggers.SetDeletionLabel(obj, label);
+                
+                    await Контрагенти_Папки_Triggers.SetDeletionLabel(obj, label);
                 
                 await base.BaseDeletionLabel(label);
             }
@@ -6529,26 +6589,26 @@ namespace StorageAndTrade_1_0.Довідники
     public class Контрагенти_Папки_Select : DirectorySelect
     {
         public Контрагенти_Папки_Select() : base(Config.Kernel!, "tab_a23") { }        
-        public bool Select() { return base.BaseSelect(); }
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
         public bool MoveNext() { if (MoveToPosition()) { Current = new Контрагенти_Папки_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public Контрагенти_Папки_Pointer? Current { get; private set; }
         
-        public Контрагенти_Папки_Pointer FindByField(string name, object value)
+        public async ValueTask<Контрагенти_Папки_Pointer> FindByField(string name, object value)
         {
             Контрагенти_Папки_Pointer itemPointer = new Контрагенти_Папки_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(name, value);
+            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
         }
         
-        public List<Контрагенти_Папки_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        public async ValueTask<List<Контрагенти_Папки_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
             List<Контрагенти_Папки_Pointer> directoryPointerList = new List<Контрагенти_Папки_Pointer>();
-            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(name, value, limit, offset)) 
+            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
                 directoryPointerList.Add(new Контрагенти_Папки_Pointer(directoryPointer.UnigueID));
             return directoryPointerList;
         }
@@ -6635,13 +6695,15 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            Склади_Папки_Triggers.SetDeletionLabel(this, label);
+            
+                await Склади_Папки_Triggers.SetDeletionLabel(this, label);
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
-            Склади_Папки_Triggers.BeforeDelete(this);
+            
+                await Склади_Папки_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] {  });
         }
         
@@ -6655,9 +6717,9 @@ namespace StorageAndTrade_1_0.Довідники
             return new UuidAndText(UnigueID.UGuid, Склади_Папки_Const.POINTER);
         }
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return base.BasePresentation(
+            return await base.BasePresentation(
                 new string[] { "col_j7" }
             );
         }
@@ -6694,9 +6756,9 @@ namespace StorageAndTrade_1_0.Довідники
 
         public string Назва { get; set; } = "";
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return Назва = base.BasePresentation(
+            return Назва = await base.BasePresentation(
                 new string[] { "col_j7" }
             );
         }
@@ -6706,7 +6768,8 @@ namespace StorageAndTrade_1_0.Довідники
             Склади_Папки_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
-                Склади_Папки_Triggers.SetDeletionLabel(obj, label);
+                
+                    await Склади_Папки_Triggers.SetDeletionLabel(obj, label);
                 
                 await base.BaseDeletionLabel(label);
             }
@@ -6732,26 +6795,26 @@ namespace StorageAndTrade_1_0.Довідники
     public class Склади_Папки_Select : DirectorySelect
     {
         public Склади_Папки_Select() : base(Config.Kernel!, "tab_a24") { }        
-        public bool Select() { return base.BaseSelect(); }
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
         public bool MoveNext() { if (MoveToPosition()) { Current = new Склади_Папки_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public Склади_Папки_Pointer? Current { get; private set; }
         
-        public Склади_Папки_Pointer FindByField(string name, object value)
+        public async ValueTask<Склади_Папки_Pointer> FindByField(string name, object value)
         {
             Склади_Папки_Pointer itemPointer = new Склади_Папки_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(name, value);
+            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
         }
         
-        public List<Склади_Папки_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        public async ValueTask<List<Склади_Папки_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
             List<Склади_Папки_Pointer> directoryPointerList = new List<Склади_Папки_Pointer>();
-            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(name, value, limit, offset)) 
+            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
                 directoryPointerList.Add(new Склади_Папки_Pointer(directoryPointer.UnigueID));
             return directoryPointerList;
         }
@@ -6843,13 +6906,15 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            Каси_Triggers.SetDeletionLabel(this, label);
+            
+                await Каси_Triggers.SetDeletionLabel(this, label);
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
-            Каси_Triggers.BeforeDelete(this);
+            
+                await Каси_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] {  });
         }
         
@@ -6863,9 +6928,9 @@ namespace StorageAndTrade_1_0.Довідники
             return new UuidAndText(UnigueID.UGuid, Каси_Const.POINTER);
         }
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return base.BasePresentation(
+            return await base.BasePresentation(
                 new string[] { "col_k8" }
             );
         }
@@ -6903,9 +6968,9 @@ namespace StorageAndTrade_1_0.Довідники
 
         public string Назва { get; set; } = "";
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return Назва = base.BasePresentation(
+            return Назва = await base.BasePresentation(
                 new string[] { "col_k8" }
             );
         }
@@ -6915,7 +6980,8 @@ namespace StorageAndTrade_1_0.Довідники
             Каси_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
-                Каси_Triggers.SetDeletionLabel(obj, label);
+                
+                    await Каси_Triggers.SetDeletionLabel(obj, label);
                 
                 await base.BaseDeletionLabel(label);
             }
@@ -6941,26 +7007,26 @@ namespace StorageAndTrade_1_0.Довідники
     public class Каси_Select : DirectorySelect
     {
         public Каси_Select() : base(Config.Kernel!, "tab_a26") { }        
-        public bool Select() { return base.BaseSelect(); }
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
         public bool MoveNext() { if (MoveToPosition()) { Current = new Каси_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public Каси_Pointer? Current { get; private set; }
         
-        public Каси_Pointer FindByField(string name, object value)
+        public async ValueTask<Каси_Pointer> FindByField(string name, object value)
         {
             Каси_Pointer itemPointer = new Каси_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(name, value);
+            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
         }
         
-        public List<Каси_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        public async ValueTask<List<Каси_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
             List<Каси_Pointer> directoryPointerList = new List<Каси_Pointer>();
-            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(name, value, limit, offset)) 
+            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
                 directoryPointerList.Add(new Каси_Pointer(directoryPointer.UnigueID));
             return directoryPointerList;
         }
@@ -7097,13 +7163,15 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            БанківськіРахункиОрганізацій_Triggers.SetDeletionLabel(this, label);
+            
+                await БанківськіРахункиОрганізацій_Triggers.SetDeletionLabel(this, label);
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
-            БанківськіРахункиОрганізацій_Triggers.BeforeDelete(this);
+            
+                await БанківськіРахункиОрганізацій_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] {  });
         }
         
@@ -7117,9 +7185,9 @@ namespace StorageAndTrade_1_0.Довідники
             return new UuidAndText(UnigueID.UGuid, БанківськіРахункиОрганізацій_Const.POINTER);
         }
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return base.BasePresentation(
+            return await base.BasePresentation(
                 new string[] { "col_l1" }
             );
         }
@@ -7166,9 +7234,9 @@ namespace StorageAndTrade_1_0.Довідники
 
         public string Назва { get; set; } = "";
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return Назва = base.BasePresentation(
+            return Назва = await base.BasePresentation(
                 new string[] { "col_l1" }
             );
         }
@@ -7178,7 +7246,8 @@ namespace StorageAndTrade_1_0.Довідники
             БанківськіРахункиОрганізацій_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
-                БанківськіРахункиОрганізацій_Triggers.SetDeletionLabel(obj, label);
+                
+                    await БанківськіРахункиОрганізацій_Triggers.SetDeletionLabel(obj, label);
                 
                 await base.BaseDeletionLabel(label);
             }
@@ -7204,26 +7273,26 @@ namespace StorageAndTrade_1_0.Довідники
     public class БанківськіРахункиОрганізацій_Select : DirectorySelect
     {
         public БанківськіРахункиОрганізацій_Select() : base(Config.Kernel!, "tab_a27") { }        
-        public bool Select() { return base.BaseSelect(); }
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
         public bool MoveNext() { if (MoveToPosition()) { Current = new БанківськіРахункиОрганізацій_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public БанківськіРахункиОрганізацій_Pointer? Current { get; private set; }
         
-        public БанківськіРахункиОрганізацій_Pointer FindByField(string name, object value)
+        public async ValueTask<БанківськіРахункиОрганізацій_Pointer> FindByField(string name, object value)
         {
             БанківськіРахункиОрганізацій_Pointer itemPointer = new БанківськіРахункиОрганізацій_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(name, value);
+            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
         }
         
-        public List<БанківськіРахункиОрганізацій_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        public async ValueTask<List<БанківськіРахункиОрганізацій_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
             List<БанківськіРахункиОрганізацій_Pointer> directoryPointerList = new List<БанківськіРахункиОрганізацій_Pointer>();
-            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(name, value, limit, offset)) 
+            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
                 directoryPointerList.Add(new БанківськіРахункиОрганізацій_Pointer(directoryPointer.UnigueID));
             return directoryPointerList;
         }
@@ -7395,13 +7464,15 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ДоговориКонтрагентів_Triggers.SetDeletionLabel(this, label);
+            
+                await ДоговориКонтрагентів_Triggers.SetDeletionLabel(this, label);
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
-            ДоговориКонтрагентів_Triggers.BeforeDelete(this);
+            
+                await ДоговориКонтрагентів_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] {  });
         }
         
@@ -7415,9 +7486,9 @@ namespace StorageAndTrade_1_0.Довідники
             return new UuidAndText(UnigueID.UGuid, ДоговориКонтрагентів_Const.POINTER);
         }
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return base.BasePresentation(
+            return await base.BasePresentation(
                 new string[] { "col_n4", "col_b8" }
             );
         }
@@ -7471,9 +7542,9 @@ namespace StorageAndTrade_1_0.Довідники
 
         public string Назва { get; set; } = "";
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return Назва = base.BasePresentation(
+            return Назва = await base.BasePresentation(
                 new string[] { "col_n4", "col_b8" }
             );
         }
@@ -7483,7 +7554,8 @@ namespace StorageAndTrade_1_0.Довідники
             ДоговориКонтрагентів_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
-                ДоговориКонтрагентів_Triggers.SetDeletionLabel(obj, label);
+                
+                    await ДоговориКонтрагентів_Triggers.SetDeletionLabel(obj, label);
                 
                 await base.BaseDeletionLabel(label);
             }
@@ -7509,26 +7581,26 @@ namespace StorageAndTrade_1_0.Довідники
     public class ДоговориКонтрагентів_Select : DirectorySelect
     {
         public ДоговориКонтрагентів_Select() : base(Config.Kernel!, "tab_a28") { }        
-        public bool Select() { return base.BaseSelect(); }
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
         public bool MoveNext() { if (MoveToPosition()) { Current = new ДоговориКонтрагентів_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public ДоговориКонтрагентів_Pointer? Current { get; private set; }
         
-        public ДоговориКонтрагентів_Pointer FindByField(string name, object value)
+        public async ValueTask<ДоговориКонтрагентів_Pointer> FindByField(string name, object value)
         {
             ДоговориКонтрагентів_Pointer itemPointer = new ДоговориКонтрагентів_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(name, value);
+            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
         }
         
-        public List<ДоговориКонтрагентів_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        public async ValueTask<List<ДоговориКонтрагентів_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
             List<ДоговориКонтрагентів_Pointer> directoryPointerList = new List<ДоговориКонтрагентів_Pointer>();
-            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(name, value, limit, offset)) 
+            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
                 directoryPointerList.Add(new ДоговориКонтрагентів_Pointer(directoryPointer.UnigueID));
             return directoryPointerList;
         }
@@ -7675,13 +7747,15 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            БанківськіРахункиКонтрагентів_Triggers.SetDeletionLabel(this, label);
+            
+                await БанківськіРахункиКонтрагентів_Triggers.SetDeletionLabel(this, label);
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
-            БанківськіРахункиКонтрагентів_Triggers.BeforeDelete(this);
+            
+                await БанківськіРахункиКонтрагентів_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] {  });
         }
         
@@ -7695,9 +7769,9 @@ namespace StorageAndTrade_1_0.Довідники
             return new UuidAndText(UnigueID.UGuid, БанківськіРахункиКонтрагентів_Const.POINTER);
         }
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return base.BasePresentation(
+            return await base.BasePresentation(
                 new string[] { "col_n7" }
             );
         }
@@ -7746,9 +7820,9 @@ namespace StorageAndTrade_1_0.Довідники
 
         public string Назва { get; set; } = "";
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return Назва = base.BasePresentation(
+            return Назва = await base.BasePresentation(
                 new string[] { "col_n7" }
             );
         }
@@ -7758,7 +7832,8 @@ namespace StorageAndTrade_1_0.Довідники
             БанківськіРахункиКонтрагентів_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
-                БанківськіРахункиКонтрагентів_Triggers.SetDeletionLabel(obj, label);
+                
+                    await БанківськіРахункиКонтрагентів_Triggers.SetDeletionLabel(obj, label);
                 
                 await base.BaseDeletionLabel(label);
             }
@@ -7784,26 +7859,26 @@ namespace StorageAndTrade_1_0.Довідники
     public class БанківськіРахункиКонтрагентів_Select : DirectorySelect
     {
         public БанківськіРахункиКонтрагентів_Select() : base(Config.Kernel!, "tab_a29") { }        
-        public bool Select() { return base.BaseSelect(); }
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
         public bool MoveNext() { if (MoveToPosition()) { Current = new БанківськіРахункиКонтрагентів_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public БанківськіРахункиКонтрагентів_Pointer? Current { get; private set; }
         
-        public БанківськіРахункиКонтрагентів_Pointer FindByField(string name, object value)
+        public async ValueTask<БанківськіРахункиКонтрагентів_Pointer> FindByField(string name, object value)
         {
             БанківськіРахункиКонтрагентів_Pointer itemPointer = new БанківськіРахункиКонтрагентів_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(name, value);
+            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
         }
         
-        public List<БанківськіРахункиКонтрагентів_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        public async ValueTask<List<БанківськіРахункиКонтрагентів_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
             List<БанківськіРахункиКонтрагентів_Pointer> directoryPointerList = new List<БанківськіРахункиКонтрагентів_Pointer>();
-            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(name, value, limit, offset)) 
+            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
                 directoryPointerList.Add(new БанківськіРахункиКонтрагентів_Pointer(directoryPointer.UnigueID));
             return directoryPointerList;
         }
@@ -7912,13 +7987,15 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            СтаттяРухуКоштів_Triggers.SetDeletionLabel(this, label);
+            
+                await СтаттяРухуКоштів_Triggers.SetDeletionLabel(this, label);
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
-            СтаттяРухуКоштів_Triggers.BeforeDelete(this);
+            
+                await СтаттяРухуКоштів_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] { "tab_a46" });
         }
         
@@ -7932,9 +8009,9 @@ namespace StorageAndTrade_1_0.Довідники
             return new UuidAndText(UnigueID.UGuid, СтаттяРухуКоштів_Const.POINTER);
         }
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return base.BasePresentation(
+            return await base.BasePresentation(
                 new string[] { "col_i7" }
             );
         }
@@ -7976,9 +8053,9 @@ namespace StorageAndTrade_1_0.Довідники
 
         public string Назва { get; set; } = "";
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return Назва = base.BasePresentation(
+            return Назва = await base.BasePresentation(
                 new string[] { "col_i7" }
             );
         }
@@ -7988,7 +8065,8 @@ namespace StorageAndTrade_1_0.Довідники
             СтаттяРухуКоштів_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
-                СтаттяРухуКоштів_Triggers.SetDeletionLabel(obj, label);
+                
+                    await СтаттяРухуКоштів_Triggers.SetDeletionLabel(obj, label);
                 
                 await base.BaseDeletionLabel(label);
             }
@@ -8014,26 +8092,26 @@ namespace StorageAndTrade_1_0.Довідники
     public class СтаттяРухуКоштів_Select : DirectorySelect
     {
         public СтаттяРухуКоштів_Select() : base(Config.Kernel!, "tab_a45") { }        
-        public bool Select() { return base.BaseSelect(); }
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
         public bool MoveNext() { if (MoveToPosition()) { Current = new СтаттяРухуКоштів_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public СтаттяРухуКоштів_Pointer? Current { get; private set; }
         
-        public СтаттяРухуКоштів_Pointer FindByField(string name, object value)
+        public async ValueTask<СтаттяРухуКоштів_Pointer> FindByField(string name, object value)
         {
             СтаттяРухуКоштів_Pointer itemPointer = new СтаттяРухуКоштів_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(name, value);
+            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
         }
         
-        public List<СтаттяРухуКоштів_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        public async ValueTask<List<СтаттяРухуКоштів_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
             List<СтаттяРухуКоштів_Pointer> directoryPointerList = new List<СтаттяРухуКоштів_Pointer>();
-            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(name, value, limit, offset)) 
+            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
                 directoryPointerList.Add(new СтаттяРухуКоштів_Pointer(directoryPointer.UnigueID));
             return directoryPointerList;
         }
@@ -8198,13 +8276,15 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            СеріїНоменклатури_Triggers.SetDeletionLabel(this, label);
+            
+                await СеріїНоменклатури_Triggers.SetDeletionLabel(this, label);
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
-            СеріїНоменклатури_Triggers.BeforeDelete(this);
+            
+                await СеріїНоменклатури_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] {  });
         }
         
@@ -8218,9 +8298,9 @@ namespace StorageAndTrade_1_0.Довідники
             return new UuidAndText(UnigueID.UGuid, СеріїНоменклатури_Const.POINTER);
         }
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return base.BasePresentation(
+            return await base.BasePresentation(
                 new string[] { "col_a3" }
             );
         }
@@ -8257,9 +8337,9 @@ namespace StorageAndTrade_1_0.Довідники
 
         public string Назва { get; set; } = "";
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return Назва = base.BasePresentation(
+            return Назва = await base.BasePresentation(
                 new string[] { "col_a3" }
             );
         }
@@ -8269,7 +8349,8 @@ namespace StorageAndTrade_1_0.Довідники
             СеріїНоменклатури_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
-                СеріїНоменклатури_Triggers.SetDeletionLabel(obj, label);
+                
+                    await СеріїНоменклатури_Triggers.SetDeletionLabel(obj, label);
                 
                 await base.BaseDeletionLabel(label);
             }
@@ -8295,26 +8376,26 @@ namespace StorageAndTrade_1_0.Довідники
     public class СеріїНоменклатури_Select : DirectorySelect
     {
         public СеріїНоменклатури_Select() : base(Config.Kernel!, "tab_b02") { }        
-        public bool Select() { return base.BaseSelect(); }
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
         public bool MoveNext() { if (MoveToPosition()) { Current = new СеріїНоменклатури_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public СеріїНоменклатури_Pointer? Current { get; private set; }
         
-        public СеріїНоменклатури_Pointer FindByField(string name, object value)
+        public async ValueTask<СеріїНоменклатури_Pointer> FindByField(string name, object value)
         {
             СеріїНоменклатури_Pointer itemPointer = new СеріїНоменклатури_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(name, value);
+            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
         }
         
-        public List<СеріїНоменклатури_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        public async ValueTask<List<СеріїНоменклатури_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
             List<СеріїНоменклатури_Pointer> directoryPointerList = new List<СеріїНоменклатури_Pointer>();
-            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(name, value, limit, offset)) 
+            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
                 directoryPointerList.Add(new СеріїНоменклатури_Pointer(directoryPointer.UnigueID));
             return directoryPointerList;
         }
@@ -8416,13 +8497,15 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ПартіяТоварівКомпозит_Triggers.SetDeletionLabel(this, label);
+            
+                await ПартіяТоварівКомпозит_Triggers.SetDeletionLabel(this, label);
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
-            ПартіяТоварівКомпозит_Triggers.BeforeDelete(this);
+            
+                await ПартіяТоварівКомпозит_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] {  });
         }
         
@@ -8436,9 +8519,9 @@ namespace StorageAndTrade_1_0.Довідники
             return new UuidAndText(UnigueID.UGuid, ПартіяТоварівКомпозит_Const.POINTER);
         }
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return base.BasePresentation(
+            return await base.BasePresentation(
                 new string[] { "col_a1" }
             );
         }
@@ -8478,9 +8561,9 @@ namespace StorageAndTrade_1_0.Довідники
 
         public string Назва { get; set; } = "";
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return Назва = base.BasePresentation(
+            return Назва = await base.BasePresentation(
                 new string[] { "col_a1" }
             );
         }
@@ -8490,7 +8573,8 @@ namespace StorageAndTrade_1_0.Довідники
             ПартіяТоварівКомпозит_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
-                ПартіяТоварівКомпозит_Triggers.SetDeletionLabel(obj, label);
+                
+                    await ПартіяТоварівКомпозит_Triggers.SetDeletionLabel(obj, label);
                 
                 await base.BaseDeletionLabel(label);
             }
@@ -8516,26 +8600,26 @@ namespace StorageAndTrade_1_0.Довідники
     public class ПартіяТоварівКомпозит_Select : DirectorySelect
     {
         public ПартіяТоварівКомпозит_Select() : base(Config.Kernel!, "tab_b06") { }        
-        public bool Select() { return base.BaseSelect(); }
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
         public bool MoveNext() { if (MoveToPosition()) { Current = new ПартіяТоварівКомпозит_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public ПартіяТоварівКомпозит_Pointer? Current { get; private set; }
         
-        public ПартіяТоварівКомпозит_Pointer FindByField(string name, object value)
+        public async ValueTask<ПартіяТоварівКомпозит_Pointer> FindByField(string name, object value)
         {
             ПартіяТоварівКомпозит_Pointer itemPointer = new ПартіяТоварівКомпозит_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(name, value);
+            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
         }
         
-        public List<ПартіяТоварівКомпозит_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        public async ValueTask<List<ПартіяТоварівКомпозит_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
             List<ПартіяТоварівКомпозит_Pointer> directoryPointerList = new List<ПартіяТоварівКомпозит_Pointer>();
-            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(name, value, limit, offset)) 
+            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
                 directoryPointerList.Add(new ПартіяТоварівКомпозит_Pointer(directoryPointer.UnigueID));
             return directoryPointerList;
         }
@@ -8642,13 +8726,15 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ВидиЗапасів_Triggers.SetDeletionLabel(this, label);
+            
+                await ВидиЗапасів_Triggers.SetDeletionLabel(this, label);
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
-            ВидиЗапасів_Triggers.BeforeDelete(this);
+            
+                await ВидиЗапасів_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] {  });
         }
         
@@ -8662,9 +8748,9 @@ namespace StorageAndTrade_1_0.Довідники
             return new UuidAndText(UnigueID.UGuid, ВидиЗапасів_Const.POINTER);
         }
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return base.BasePresentation(
+            return await base.BasePresentation(
                 new string[] { "col_a5" }
             );
         }
@@ -8705,9 +8791,9 @@ namespace StorageAndTrade_1_0.Довідники
 
         public string Назва { get; set; } = "";
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return Назва = base.BasePresentation(
+            return Назва = await base.BasePresentation(
                 new string[] { "col_a5" }
             );
         }
@@ -8717,7 +8803,8 @@ namespace StorageAndTrade_1_0.Довідники
             ВидиЗапасів_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
-                ВидиЗапасів_Triggers.SetDeletionLabel(obj, label);
+                
+                    await ВидиЗапасів_Triggers.SetDeletionLabel(obj, label);
                 
                 await base.BaseDeletionLabel(label);
             }
@@ -8743,26 +8830,26 @@ namespace StorageAndTrade_1_0.Довідники
     public class ВидиЗапасів_Select : DirectorySelect
     {
         public ВидиЗапасів_Select() : base(Config.Kernel!, "tab_b13") { }        
-        public bool Select() { return base.BaseSelect(); }
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
         public bool MoveNext() { if (MoveToPosition()) { Current = new ВидиЗапасів_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public ВидиЗапасів_Pointer? Current { get; private set; }
         
-        public ВидиЗапасів_Pointer FindByField(string name, object value)
+        public async ValueTask<ВидиЗапасів_Pointer> FindByField(string name, object value)
         {
             ВидиЗапасів_Pointer itemPointer = new ВидиЗапасів_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(name, value);
+            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
         }
         
-        public List<ВидиЗапасів_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        public async ValueTask<List<ВидиЗапасів_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
             List<ВидиЗапасів_Pointer> directoryPointerList = new List<ВидиЗапасів_Pointer>();
-            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(name, value, limit, offset)) 
+            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
                 directoryPointerList.Add(new ВидиЗапасів_Pointer(directoryPointer.UnigueID));
             return directoryPointerList;
         }
@@ -8974,13 +9061,15 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            Банки_Triggers.SetDeletionLabel(this, label);
+            
+                await Банки_Triggers.SetDeletionLabel(this, label);
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
-            Банки_Triggers.BeforeDelete(this);
+            
+                await Банки_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] {  });
         }
         
@@ -8994,9 +9083,9 @@ namespace StorageAndTrade_1_0.Довідники
             return new UuidAndText(UnigueID.UGuid, Банки_Const.POINTER);
         }
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return base.BasePresentation(
+            return await base.BasePresentation(
                 new string[] { "col_a2" }
             );
         }
@@ -9058,9 +9147,9 @@ namespace StorageAndTrade_1_0.Довідники
 
         public string Назва { get; set; } = "";
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return Назва = base.BasePresentation(
+            return Назва = await base.BasePresentation(
                 new string[] { "col_a2" }
             );
         }
@@ -9070,7 +9159,8 @@ namespace StorageAndTrade_1_0.Довідники
             Банки_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
-                Банки_Triggers.SetDeletionLabel(obj, label);
+                
+                    await Банки_Triggers.SetDeletionLabel(obj, label);
                 
                 await base.BaseDeletionLabel(label);
             }
@@ -9096,26 +9186,26 @@ namespace StorageAndTrade_1_0.Довідники
     public class Банки_Select : DirectorySelect
     {
         public Банки_Select() : base(Config.Kernel!, "tab_a39") { }        
-        public bool Select() { return base.BaseSelect(); }
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
         public bool MoveNext() { if (MoveToPosition()) { Current = new Банки_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public Банки_Pointer? Current { get; private set; }
         
-        public Банки_Pointer FindByField(string name, object value)
+        public async ValueTask<Банки_Pointer> FindByField(string name, object value)
         {
             Банки_Pointer itemPointer = new Банки_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(name, value);
+            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
         }
         
-        public List<Банки_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        public async ValueTask<List<Банки_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
             List<Банки_Pointer> directoryPointerList = new List<Банки_Pointer>();
-            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(name, value, limit, offset)) 
+            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
                 directoryPointerList.Add(new Банки_Pointer(directoryPointer.UnigueID));
             return directoryPointerList;
         }
@@ -9202,13 +9292,15 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            СкладськіПриміщення_Triggers.SetDeletionLabel(this, label);
+            
+                await СкладськіПриміщення_Triggers.SetDeletionLabel(this, label);
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
-            СкладськіПриміщення_Triggers.BeforeDelete(this);
+            
+                await СкладськіПриміщення_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] {  });
         }
         
@@ -9222,9 +9314,9 @@ namespace StorageAndTrade_1_0.Довідники
             return new UuidAndText(UnigueID.UGuid, СкладськіПриміщення_Const.POINTER);
         }
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return base.BasePresentation(
+            return await base.BasePresentation(
                 new string[] { "col_a2" }
             );
         }
@@ -9261,9 +9353,9 @@ namespace StorageAndTrade_1_0.Довідники
 
         public string Назва { get; set; } = "";
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return Назва = base.BasePresentation(
+            return Назва = await base.BasePresentation(
                 new string[] { "col_a2" }
             );
         }
@@ -9273,7 +9365,8 @@ namespace StorageAndTrade_1_0.Довідники
             СкладськіПриміщення_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
-                СкладськіПриміщення_Triggers.SetDeletionLabel(obj, label);
+                
+                    await СкладськіПриміщення_Triggers.SetDeletionLabel(obj, label);
                 
                 await base.BaseDeletionLabel(label);
             }
@@ -9299,26 +9392,26 @@ namespace StorageAndTrade_1_0.Довідники
     public class СкладськіПриміщення_Select : DirectorySelect
     {
         public СкладськіПриміщення_Select() : base(Config.Kernel!, "tab_a71") { }        
-        public bool Select() { return base.BaseSelect(); }
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
         public bool MoveNext() { if (MoveToPosition()) { Current = new СкладськіПриміщення_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public СкладськіПриміщення_Pointer? Current { get; private set; }
         
-        public СкладськіПриміщення_Pointer FindByField(string name, object value)
+        public async ValueTask<СкладськіПриміщення_Pointer> FindByField(string name, object value)
         {
             СкладськіПриміщення_Pointer itemPointer = new СкладськіПриміщення_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(name, value);
+            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
         }
         
-        public List<СкладськіПриміщення_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        public async ValueTask<List<СкладськіПриміщення_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
             List<СкладськіПриміщення_Pointer> directoryPointerList = new List<СкладськіПриміщення_Pointer>();
-            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(name, value, limit, offset)) 
+            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
                 directoryPointerList.Add(new СкладськіПриміщення_Pointer(directoryPointer.UnigueID));
             return directoryPointerList;
         }
@@ -9440,13 +9533,15 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            СкладськіКомірки_Triggers.SetDeletionLabel(this, label);
+            
+                await СкладськіКомірки_Triggers.SetDeletionLabel(this, label);
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
-            СкладськіКомірки_Triggers.BeforeDelete(this);
+            
+                await СкладськіКомірки_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] {  });
         }
         
@@ -9460,9 +9555,9 @@ namespace StorageAndTrade_1_0.Довідники
             return new UuidAndText(UnigueID.UGuid, СкладськіКомірки_Const.POINTER);
         }
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return base.BasePresentation(
+            return await base.BasePresentation(
                 new string[] { "col_a2" }
             );
         }
@@ -9506,9 +9601,9 @@ namespace StorageAndTrade_1_0.Довідники
 
         public string Назва { get; set; } = "";
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return Назва = base.BasePresentation(
+            return Назва = await base.BasePresentation(
                 new string[] { "col_a2" }
             );
         }
@@ -9518,7 +9613,8 @@ namespace StorageAndTrade_1_0.Довідники
             СкладськіКомірки_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
-                СкладськіКомірки_Triggers.SetDeletionLabel(obj, label);
+                
+                    await СкладськіКомірки_Triggers.SetDeletionLabel(obj, label);
                 
                 await base.BaseDeletionLabel(label);
             }
@@ -9544,26 +9640,26 @@ namespace StorageAndTrade_1_0.Довідники
     public class СкладськіКомірки_Select : DirectorySelect
     {
         public СкладськіКомірки_Select() : base(Config.Kernel!, "tab_a72") { }        
-        public bool Select() { return base.BaseSelect(); }
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
         public bool MoveNext() { if (MoveToPosition()) { Current = new СкладськіКомірки_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public СкладськіКомірки_Pointer? Current { get; private set; }
         
-        public СкладськіКомірки_Pointer FindByField(string name, object value)
+        public async ValueTask<СкладськіКомірки_Pointer> FindByField(string name, object value)
         {
             СкладськіКомірки_Pointer itemPointer = new СкладськіКомірки_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(name, value);
+            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
         }
         
-        public List<СкладськіКомірки_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        public async ValueTask<List<СкладськіКомірки_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
             List<СкладськіКомірки_Pointer> directoryPointerList = new List<СкладськіКомірки_Pointer>();
-            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(name, value, limit, offset)) 
+            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
                 directoryPointerList.Add(new СкладськіКомірки_Pointer(directoryPointer.UnigueID));
             return directoryPointerList;
         }
@@ -9668,9 +9764,9 @@ namespace StorageAndTrade_1_0.Довідники
             return new UuidAndText(UnigueID.UGuid, ОбластьЗберігання_Const.POINTER);
         }
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return base.BasePresentation(
+            return await base.BasePresentation(
                 new string[] { "col_a2" }
             );
         }
@@ -9707,9 +9803,9 @@ namespace StorageAndTrade_1_0.Довідники
 
         public string Назва { get; set; } = "";
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return Назва = base.BasePresentation(
+            return Назва = await base.BasePresentation(
                 new string[] { "col_a2" }
             );
         }
@@ -9744,26 +9840,26 @@ namespace StorageAndTrade_1_0.Довідники
     public class ОбластьЗберігання_Select : DirectorySelect
     {
         public ОбластьЗберігання_Select() : base(Config.Kernel!, "tab_a73") { }        
-        public bool Select() { return base.BaseSelect(); }
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
         public bool MoveNext() { if (MoveToPosition()) { Current = new ОбластьЗберігання_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public ОбластьЗберігання_Pointer? Current { get; private set; }
         
-        public ОбластьЗберігання_Pointer FindByField(string name, object value)
+        public async ValueTask<ОбластьЗберігання_Pointer> FindByField(string name, object value)
         {
             ОбластьЗберігання_Pointer itemPointer = new ОбластьЗберігання_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(name, value);
+            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
         }
         
-        public List<ОбластьЗберігання_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        public async ValueTask<List<ОбластьЗберігання_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
             List<ОбластьЗберігання_Pointer> directoryPointerList = new List<ОбластьЗберігання_Pointer>();
-            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(name, value, limit, offset)) 
+            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
                 directoryPointerList.Add(new ОбластьЗберігання_Pointer(directoryPointer.UnigueID));
             return directoryPointerList;
         }
@@ -9865,13 +9961,15 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ТипорозміриКомірок_Triggers.SetDeletionLabel(this, label);
+            
+                await ТипорозміриКомірок_Triggers.SetDeletionLabel(this, label);
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
-            ТипорозміриКомірок_Triggers.BeforeDelete(this);
+            
+                await ТипорозміриКомірок_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] {  });
         }
         
@@ -9885,9 +9983,9 @@ namespace StorageAndTrade_1_0.Довідники
             return new UuidAndText(UnigueID.UGuid, ТипорозміриКомірок_Const.POINTER);
         }
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return base.BasePresentation(
+            return await base.BasePresentation(
                 new string[] { "col_a2" }
             );
         }
@@ -9927,9 +10025,9 @@ namespace StorageAndTrade_1_0.Довідники
 
         public string Назва { get; set; } = "";
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return Назва = base.BasePresentation(
+            return Назва = await base.BasePresentation(
                 new string[] { "col_a2" }
             );
         }
@@ -9939,7 +10037,8 @@ namespace StorageAndTrade_1_0.Довідники
             ТипорозміриКомірок_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
-                ТипорозміриКомірок_Triggers.SetDeletionLabel(obj, label);
+                
+                    await ТипорозміриКомірок_Triggers.SetDeletionLabel(obj, label);
                 
                 await base.BaseDeletionLabel(label);
             }
@@ -9965,26 +10064,26 @@ namespace StorageAndTrade_1_0.Довідники
     public class ТипорозміриКомірок_Select : DirectorySelect
     {
         public ТипорозміриКомірок_Select() : base(Config.Kernel!, "tab_a75") { }        
-        public bool Select() { return base.BaseSelect(); }
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
         public bool MoveNext() { if (MoveToPosition()) { Current = new ТипорозміриКомірок_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public ТипорозміриКомірок_Pointer? Current { get; private set; }
         
-        public ТипорозміриКомірок_Pointer FindByField(string name, object value)
+        public async ValueTask<ТипорозміриКомірок_Pointer> FindByField(string name, object value)
         {
             ТипорозміриКомірок_Pointer itemPointer = new ТипорозміриКомірок_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(name, value);
+            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
         }
         
-        public List<ТипорозміриКомірок_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        public async ValueTask<List<ТипорозміриКомірок_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
             List<ТипорозміриКомірок_Pointer> directoryPointerList = new List<ТипорозміриКомірок_Pointer>();
-            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(name, value, limit, offset)) 
+            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
                 directoryPointerList.Add(new ТипорозміриКомірок_Pointer(directoryPointer.UnigueID));
             return directoryPointerList;
         }
@@ -10076,13 +10175,15 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            СкладськіКомірки_Папки_Triggers.SetDeletionLabel(this, label);
+            
+                await СкладськіКомірки_Папки_Triggers.SetDeletionLabel(this, label);
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
-            СкладськіКомірки_Папки_Triggers.BeforeDelete(this);
+            
+                await СкладськіКомірки_Папки_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] {  });
         }
         
@@ -10096,9 +10197,9 @@ namespace StorageAndTrade_1_0.Довідники
             return new UuidAndText(UnigueID.UGuid, СкладськіКомірки_Папки_Const.POINTER);
         }
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return base.BasePresentation(
+            return await base.BasePresentation(
                 new string[] { "col_j1" }
             );
         }
@@ -10136,9 +10237,9 @@ namespace StorageAndTrade_1_0.Довідники
 
         public string Назва { get; set; } = "";
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return Назва = base.BasePresentation(
+            return Назва = await base.BasePresentation(
                 new string[] { "col_j1" }
             );
         }
@@ -10148,7 +10249,8 @@ namespace StorageAndTrade_1_0.Довідники
             СкладськіКомірки_Папки_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
-                СкладськіКомірки_Папки_Triggers.SetDeletionLabel(obj, label);
+                
+                    await СкладськіКомірки_Папки_Triggers.SetDeletionLabel(obj, label);
                 
                 await base.BaseDeletionLabel(label);
             }
@@ -10174,26 +10276,26 @@ namespace StorageAndTrade_1_0.Довідники
     public class СкладськіКомірки_Папки_Select : DirectorySelect
     {
         public СкладськіКомірки_Папки_Select() : base(Config.Kernel!, "tab_a76") { }        
-        public bool Select() { return base.BaseSelect(); }
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
         public bool MoveNext() { if (MoveToPosition()) { Current = new СкладськіКомірки_Папки_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public СкладськіКомірки_Папки_Pointer? Current { get; private set; }
         
-        public СкладськіКомірки_Папки_Pointer FindByField(string name, object value)
+        public async ValueTask<СкладськіКомірки_Папки_Pointer> FindByField(string name, object value)
         {
             СкладськіКомірки_Папки_Pointer itemPointer = new СкладськіКомірки_Папки_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(name, value);
+            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
         }
         
-        public List<СкладськіКомірки_Папки_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        public async ValueTask<List<СкладськіКомірки_Папки_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
             List<СкладськіКомірки_Папки_Pointer> directoryPointerList = new List<СкладськіКомірки_Папки_Pointer>();
-            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(name, value, limit, offset)) 
+            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
                 directoryPointerList.Add(new СкладськіКомірки_Папки_Pointer(directoryPointer.UnigueID));
             return directoryPointerList;
         }
@@ -10290,13 +10392,15 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            Блокнот_Triggers.SetDeletionLabel(this, label);
+            
+                await Блокнот_Triggers.SetDeletionLabel(this, label);
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
-            Блокнот_Triggers.BeforeDelete(this);
+            
+                await Блокнот_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] {  });
         }
         
@@ -10310,9 +10414,9 @@ namespace StorageAndTrade_1_0.Довідники
             return new UuidAndText(UnigueID.UGuid, Блокнот_Const.POINTER);
         }
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return base.BasePresentation(
+            return await base.BasePresentation(
                 new string[] { "col_a2" }
             );
         }
@@ -10351,9 +10455,9 @@ namespace StorageAndTrade_1_0.Довідники
 
         public string Назва { get; set; } = "";
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return Назва = base.BasePresentation(
+            return Назва = await base.BasePresentation(
                 new string[] { "col_a2" }
             );
         }
@@ -10363,7 +10467,8 @@ namespace StorageAndTrade_1_0.Довідники
             Блокнот_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
-                Блокнот_Triggers.SetDeletionLabel(obj, label);
+                
+                    await Блокнот_Triggers.SetDeletionLabel(obj, label);
                 
                 await base.BaseDeletionLabel(label);
             }
@@ -10389,26 +10494,26 @@ namespace StorageAndTrade_1_0.Довідники
     public class Блокнот_Select : DirectorySelect
     {
         public Блокнот_Select() : base(Config.Kernel!, "tab_a41") { }        
-        public bool Select() { return base.BaseSelect(); }
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
         public bool MoveNext() { if (MoveToPosition()) { Current = new Блокнот_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public Блокнот_Pointer? Current { get; private set; }
         
-        public Блокнот_Pointer FindByField(string name, object value)
+        public async ValueTask<Блокнот_Pointer> FindByField(string name, object value)
         {
             Блокнот_Pointer itemPointer = new Блокнот_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(name, value);
+            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
         }
         
-        public List<Блокнот_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        public async ValueTask<List<Блокнот_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
             List<Блокнот_Pointer> directoryPointerList = new List<Блокнот_Pointer>();
-            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(name, value, limit, offset)) 
+            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
                 directoryPointerList.Add(new Блокнот_Pointer(directoryPointer.UnigueID));
             return directoryPointerList;
         }
@@ -11883,7 +11988,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Контрагенти");
                     xmlWriter.WriteAttributeString("uid", obj.Контрагент.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Контрагент.GetPresentation());
+                    xmlWriter.WriteString(await obj.Контрагент.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Контрагент
             xmlWriter.WriteStartElement("Організація");
@@ -11891,7 +11996,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Організації");
                     xmlWriter.WriteAttributeString("uid", obj.Організація.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Організація.GetPresentation());
+                    xmlWriter.WriteString(await obj.Організація.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Організація
             xmlWriter.WriteStartElement("Склад");
@@ -11899,7 +12004,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Склади");
                     xmlWriter.WriteAttributeString("uid", obj.Склад.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Склад.GetPresentation());
+                    xmlWriter.WriteString(await obj.Склад.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Склад
             xmlWriter.WriteStartElement("Валюта");
@@ -11907,7 +12012,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Валюти");
                     xmlWriter.WriteAttributeString("uid", obj.Валюта.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Валюта.GetPresentation());
+                    xmlWriter.WriteString(await obj.Валюта.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Валюта
             xmlWriter.WriteStartElement("СумаДокументу");
@@ -11921,7 +12026,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Каси");
                     xmlWriter.WriteAttributeString("uid", obj.Каса.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Каса.GetPresentation());
+                    xmlWriter.WriteString(await obj.Каса.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Каса
             xmlWriter.WriteStartElement("БанківськийРахунок");
@@ -11929,7 +12034,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.БанківськіРахункиОрганізацій");
                     xmlWriter.WriteAttributeString("uid", obj.БанківськийРахунок.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.БанківськийРахунок.GetPresentation());
+                    xmlWriter.WriteString(await obj.БанківськийРахунок.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //БанківськийРахунок
             xmlWriter.WriteStartElement("Підрозділ");
@@ -11937,7 +12042,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.СтруктураПідприємства");
                     xmlWriter.WriteAttributeString("uid", obj.Підрозділ.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Підрозділ.GetPresentation());
+                    xmlWriter.WriteString(await obj.Підрозділ.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Підрозділ
             xmlWriter.WriteStartElement("Договір");
@@ -11945,7 +12050,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.ДоговориКонтрагентів");
                     xmlWriter.WriteAttributeString("uid", obj.Договір.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Договір.GetPresentation());
+                    xmlWriter.WriteString(await obj.Договір.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Договір
             xmlWriter.WriteStartElement("Автор");
@@ -11953,7 +12058,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
                     xmlWriter.WriteAttributeString("uid", obj.Автор.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Автор.GetPresentation());
+                    xmlWriter.WriteString(await obj.Автор.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Автор
             xmlWriter.WriteStartElement("ДатаПоступлення");
@@ -12029,7 +12134,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
                     xmlWriter.WriteAttributeString("uid", obj.Менеджер.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Менеджер.GetPresentation());
+                    xmlWriter.WriteString(await obj.Менеджер.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Менеджер
             xmlWriter.WriteStartElement("Основа");
@@ -12076,7 +12181,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.Номенклатура");
                                 xmlWriter.WriteAttributeString("uid", record.Номенклатура.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Номенклатура.GetPresentation());
+                                xmlWriter.WriteString(await record.Номенклатура.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Номенклатура
                         xmlWriter.WriteStartElement("ХарактеристикаНоменклатури");
@@ -12084,7 +12189,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.ХарактеристикиНоменклатури");
                                 xmlWriter.WriteAttributeString("uid", record.ХарактеристикаНоменклатури.UnigueID.ToString());
-                                xmlWriter.WriteString(record.ХарактеристикаНоменклатури.GetPresentation());
+                                xmlWriter.WriteString(await record.ХарактеристикаНоменклатури.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //ХарактеристикаНоменклатури
                         xmlWriter.WriteStartElement("Пакування");
@@ -12092,7 +12197,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.ПакуванняОдиниціВиміру");
                                 xmlWriter.WriteAttributeString("uid", record.Пакування.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Пакування.GetPresentation());
+                                xmlWriter.WriteString(await record.Пакування.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Пакування
                         xmlWriter.WriteStartElement("КількістьУпаковок");
@@ -12136,7 +12241,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.Склади");
                                 xmlWriter.WriteAttributeString("uid", record.Склад.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Склад.GetPresentation());
+                                xmlWriter.WriteString(await record.Склад.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Склад
                         xmlWriter.WriteStartElement("Підрозділ");
@@ -12144,7 +12249,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.СтруктураПідприємства");
                                 xmlWriter.WriteAttributeString("uid", record.Підрозділ.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Підрозділ.GetPresentation());
+                                xmlWriter.WriteString(await record.Підрозділ.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Підрозділ
                         xmlWriter.WriteEndElement(); //row
@@ -12418,9 +12523,9 @@ namespace StorageAndTrade_1_0.Документи
 
         public string Назва { get; set; } = "";
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return Назва = base.BasePresentation(
+            return Назва = await base.BasePresentation(
               new string[] { "docname" }
             );
         }
@@ -12706,7 +12811,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Валюти");
                     xmlWriter.WriteAttributeString("uid", obj.Валюта.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Валюта.GetPresentation());
+                    xmlWriter.WriteString(await obj.Валюта.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Валюта
             xmlWriter.WriteStartElement("ГосподарськаОперація");
@@ -12722,7 +12827,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.СтруктураПідприємства");
                     xmlWriter.WriteAttributeString("uid", obj.Підрозділ.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Підрозділ.GetPresentation());
+                    xmlWriter.WriteString(await obj.Підрозділ.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Підрозділ
             xmlWriter.WriteStartElement("Склад");
@@ -12730,7 +12835,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Склади");
                     xmlWriter.WriteAttributeString("uid", obj.Склад.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Склад.GetPresentation());
+                    xmlWriter.WriteString(await obj.Склад.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Склад
             xmlWriter.WriteStartElement("Контрагент");
@@ -12738,7 +12843,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Контрагенти");
                     xmlWriter.WriteAttributeString("uid", obj.Контрагент.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Контрагент.GetPresentation());
+                    xmlWriter.WriteString(await obj.Контрагент.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Контрагент
             xmlWriter.WriteStartElement("СумаДокументу");
@@ -12752,7 +12857,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Документи.ЗамовленняПостачальнику");
                     xmlWriter.WriteAttributeString("uid", obj.ЗамовленняПостачальнику.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.ЗамовленняПостачальнику.GetPresentation());
+                    xmlWriter.WriteString(await obj.ЗамовленняПостачальнику.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //ЗамовленняПостачальнику
             xmlWriter.WriteStartElement("ДатаОплати");
@@ -12780,7 +12885,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.БанківськіРахункиОрганізацій");
                     xmlWriter.WriteAttributeString("uid", obj.БанківськийРахунокОрганізації.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.БанківськийРахунокОрганізації.GetPresentation());
+                    xmlWriter.WriteString(await obj.БанківськийРахунокОрганізації.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //БанківськийРахунокОрганізації
             xmlWriter.WriteStartElement("НомерВхідногоДокументу");
@@ -12800,7 +12905,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.БанківськіРахункиКонтрагентів");
                     xmlWriter.WriteAttributeString("uid", obj.БанківськийРахунокКонтрагента.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.БанківськийРахунокКонтрагента.GetPresentation());
+                    xmlWriter.WriteString(await obj.БанківськийРахунокКонтрагента.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //БанківськийРахунокКонтрагента
             xmlWriter.WriteStartElement("Договір");
@@ -12808,7 +12913,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.ДоговориКонтрагентів");
                     xmlWriter.WriteAttributeString("uid", obj.Договір.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Договір.GetPresentation());
+                    xmlWriter.WriteString(await obj.Договір.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Договір
             xmlWriter.WriteStartElement("Автор");
@@ -12816,7 +12921,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
                     xmlWriter.WriteAttributeString("uid", obj.Автор.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Автор.GetPresentation());
+                    xmlWriter.WriteString(await obj.Автор.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Автор
             xmlWriter.WriteStartElement("ПовернутиТару");
@@ -12844,7 +12949,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Організації");
                     xmlWriter.WriteAttributeString("uid", obj.Організація.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Організація.GetPresentation());
+                    xmlWriter.WriteString(await obj.Організація.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Організація
             xmlWriter.WriteStartElement("Курс");
@@ -12876,7 +12981,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
                     xmlWriter.WriteAttributeString("uid", obj.Менеджер.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Менеджер.GetPresentation());
+                    xmlWriter.WriteString(await obj.Менеджер.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Менеджер
             xmlWriter.WriteStartElement("СтаттяРухуКоштів");
@@ -12884,7 +12989,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.СтаттяРухуКоштів");
                     xmlWriter.WriteAttributeString("uid", obj.СтаттяРухуКоштів.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.СтаттяРухуКоштів.GetPresentation());
+                    xmlWriter.WriteString(await obj.СтаттяРухуКоштів.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //СтаттяРухуКоштів
             xmlWriter.WriteStartElement("Каса");
@@ -12892,7 +12997,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Каси");
                     xmlWriter.WriteAttributeString("uid", obj.Каса.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Каса.GetPresentation());
+                    xmlWriter.WriteString(await obj.Каса.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Каса
             xmlWriter.WriteStartElement("Основа");
@@ -12939,7 +13044,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.Номенклатура");
                                 xmlWriter.WriteAttributeString("uid", record.Номенклатура.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Номенклатура.GetPresentation());
+                                xmlWriter.WriteString(await record.Номенклатура.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Номенклатура
                         xmlWriter.WriteStartElement("ХарактеристикаНоменклатури");
@@ -12947,7 +13052,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.ХарактеристикиНоменклатури");
                                 xmlWriter.WriteAttributeString("uid", record.ХарактеристикаНоменклатури.UnigueID.ToString());
-                                xmlWriter.WriteString(record.ХарактеристикаНоменклатури.GetPresentation());
+                                xmlWriter.WriteString(await record.ХарактеристикаНоменклатури.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //ХарактеристикаНоменклатури
                         xmlWriter.WriteStartElement("Серія");
@@ -12955,7 +13060,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.СеріїНоменклатури");
                                 xmlWriter.WriteAttributeString("uid", record.Серія.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Серія.GetPresentation());
+                                xmlWriter.WriteString(await record.Серія.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Серія
                         xmlWriter.WriteStartElement("Пакування");
@@ -12963,7 +13068,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.ПакуванняОдиниціВиміру");
                                 xmlWriter.WriteAttributeString("uid", record.Пакування.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Пакування.GetPresentation());
+                                xmlWriter.WriteString(await record.Пакування.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Пакування
                         xmlWriter.WriteStartElement("КількістьУпаковок");
@@ -12995,7 +13100,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.Склади");
                                 xmlWriter.WriteAttributeString("uid", record.Склад.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Склад.GetPresentation());
+                                xmlWriter.WriteString(await record.Склад.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Склад
                         xmlWriter.WriteStartElement("ЗамовленняПостачальнику");
@@ -13003,7 +13108,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Документи.ЗамовленняПостачальнику");
                                 xmlWriter.WriteAttributeString("uid", record.ЗамовленняПостачальнику.UnigueID.ToString());
-                                xmlWriter.WriteString(record.ЗамовленняПостачальнику.GetPresentation());
+                                xmlWriter.WriteString(await record.ЗамовленняПостачальнику.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //ЗамовленняПостачальнику
                         xmlWriter.WriteStartElement("Скидка");
@@ -13017,7 +13122,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.СтруктураПідприємства");
                                 xmlWriter.WriteAttributeString("uid", record.Підрозділ.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Підрозділ.GetPresentation());
+                                xmlWriter.WriteString(await record.Підрозділ.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Підрозділ
                         xmlWriter.WriteStartElement("ВидЦіни");
@@ -13025,7 +13130,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.ВидиЦін");
                                 xmlWriter.WriteAttributeString("uid", record.ВидЦіни.UnigueID.ToString());
-                                xmlWriter.WriteString(record.ВидЦіни.GetPresentation());
+                                xmlWriter.WriteString(await record.ВидЦіни.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //ВидЦіни
                         xmlWriter.WriteEndElement(); //row
@@ -13329,9 +13434,9 @@ namespace StorageAndTrade_1_0.Документи
 
         public string Назва { get; set; } = "";
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return Назва = base.BasePresentation(
+            return Назва = await base.BasePresentation(
               new string[] { "docname" }
             );
         }
@@ -13622,7 +13727,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Контрагенти");
                     xmlWriter.WriteAttributeString("uid", obj.Контрагент.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Контрагент.GetPresentation());
+                    xmlWriter.WriteString(await obj.Контрагент.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Контрагент
             xmlWriter.WriteStartElement("Організація");
@@ -13630,7 +13735,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Організації");
                     xmlWriter.WriteAttributeString("uid", obj.Організація.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Організація.GetPresentation());
+                    xmlWriter.WriteString(await obj.Організація.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Організація
             xmlWriter.WriteStartElement("Валюта");
@@ -13638,7 +13743,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Валюти");
                     xmlWriter.WriteAttributeString("uid", obj.Валюта.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Валюта.GetPresentation());
+                    xmlWriter.WriteString(await obj.Валюта.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Валюта
             xmlWriter.WriteStartElement("СумаДокументу");
@@ -13652,7 +13757,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Склади");
                     xmlWriter.WriteAttributeString("uid", obj.Склад.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Склад.GetPresentation());
+                    xmlWriter.WriteString(await obj.Склад.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Склад
             xmlWriter.WriteStartElement("Статус");
@@ -13682,7 +13787,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.БанківськіРахункиОрганізацій");
                     xmlWriter.WriteAttributeString("uid", obj.БанківськийРахунок.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.БанківськийРахунок.GetPresentation());
+                    xmlWriter.WriteString(await obj.БанківськийРахунок.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //БанківськийРахунок
             xmlWriter.WriteStartElement("БанківськийРахунокКонтрагента");
@@ -13690,7 +13795,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.БанківськіРахункиКонтрагентів");
                     xmlWriter.WriteAttributeString("uid", obj.БанківськийРахунокКонтрагента.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.БанківськийРахунокКонтрагента.GetPresentation());
+                    xmlWriter.WriteString(await obj.БанківськийРахунокКонтрагента.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //БанківськийРахунокКонтрагента
             xmlWriter.WriteStartElement("Каса");
@@ -13698,7 +13803,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Каси");
                     xmlWriter.WriteAttributeString("uid", obj.Каса.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Каса.GetPresentation());
+                    xmlWriter.WriteString(await obj.Каса.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Каса
             xmlWriter.WriteStartElement("СумаАвансуДоЗабезпечення");
@@ -13738,7 +13843,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.ДоговориКонтрагентів");
                     xmlWriter.WriteAttributeString("uid", obj.Договір.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Договір.GetPresentation());
+                    xmlWriter.WriteString(await obj.Договір.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Договір
             xmlWriter.WriteStartElement("Підрозділ");
@@ -13746,7 +13851,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.СтруктураПідприємства");
                     xmlWriter.WriteAttributeString("uid", obj.Підрозділ.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Підрозділ.GetPresentation());
+                    xmlWriter.WriteString(await obj.Підрозділ.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Підрозділ
             xmlWriter.WriteStartElement("Автор");
@@ -13754,7 +13859,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
                     xmlWriter.WriteAttributeString("uid", obj.Автор.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Автор.GetPresentation());
+                    xmlWriter.WriteString(await obj.Автор.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Автор
             xmlWriter.WriteStartElement("СпосібДоставки");
@@ -13800,7 +13905,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
                     xmlWriter.WriteAttributeString("uid", obj.Менеджер.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Менеджер.GetPresentation());
+                    xmlWriter.WriteString(await obj.Менеджер.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Менеджер
             xmlWriter.WriteStartElement("КлючовіСловаДляПошуку");
@@ -13835,7 +13940,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.Номенклатура");
                                 xmlWriter.WriteAttributeString("uid", record.Номенклатура.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Номенклатура.GetPresentation());
+                                xmlWriter.WriteString(await record.Номенклатура.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Номенклатура
                         xmlWriter.WriteStartElement("ХарактеристикаНоменклатури");
@@ -13843,7 +13948,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.ХарактеристикиНоменклатури");
                                 xmlWriter.WriteAttributeString("uid", record.ХарактеристикаНоменклатури.UnigueID.ToString());
-                                xmlWriter.WriteString(record.ХарактеристикаНоменклатури.GetPresentation());
+                                xmlWriter.WriteString(await record.ХарактеристикаНоменклатури.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //ХарактеристикаНоменклатури
                         xmlWriter.WriteStartElement("Пакування");
@@ -13851,7 +13956,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.ПакуванняОдиниціВиміру");
                                 xmlWriter.WriteAttributeString("uid", record.Пакування.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Пакування.GetPresentation());
+                                xmlWriter.WriteString(await record.Пакування.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Пакування
                         xmlWriter.WriteStartElement("КількістьУпаковок");
@@ -13871,7 +13976,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.ВидиЦін");
                                 xmlWriter.WriteAttributeString("uid", record.ВидЦіни.UnigueID.ToString());
-                                xmlWriter.WriteString(record.ВидЦіни.GetPresentation());
+                                xmlWriter.WriteString(await record.ВидЦіни.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //ВидЦіни
                         xmlWriter.WriteStartElement("Ціна");
@@ -13897,7 +14002,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.Склади");
                                 xmlWriter.WriteAttributeString("uid", record.Склад.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Склад.GetPresentation());
+                                xmlWriter.WriteString(await record.Склад.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Склад
                         xmlWriter.WriteEndElement(); //row
@@ -14186,9 +14291,9 @@ namespace StorageAndTrade_1_0.Документи
 
         public string Назва { get; set; } = "";
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return Назва = base.BasePresentation(
+            return Назва = await base.BasePresentation(
               new string[] { "docname" }
             );
         }
@@ -14469,7 +14574,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Організації");
                     xmlWriter.WriteAttributeString("uid", obj.Організація.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Організація.GetPresentation());
+                    xmlWriter.WriteString(await obj.Організація.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Організація
             xmlWriter.WriteStartElement("Валюта");
@@ -14477,7 +14582,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Валюти");
                     xmlWriter.WriteAttributeString("uid", obj.Валюта.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Валюта.GetPresentation());
+                    xmlWriter.WriteString(await obj.Валюта.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Валюта
             xmlWriter.WriteStartElement("БанківськийРахунокОрганізації");
@@ -14485,7 +14590,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.БанківськіРахункиОрганізацій");
                     xmlWriter.WriteAttributeString("uid", obj.БанківськийРахунокОрганізації.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.БанківськийРахунокОрганізації.GetPresentation());
+                    xmlWriter.WriteString(await obj.БанківськийРахунокОрганізації.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //БанківськийРахунокОрганізації
             xmlWriter.WriteStartElement("БанківськийРахунокКонтрагента");
@@ -14493,7 +14598,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.БанківськіРахункиКонтрагентів");
                     xmlWriter.WriteAttributeString("uid", obj.БанківськийРахунокКонтрагента.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.БанківськийРахунокКонтрагента.GetPresentation());
+                    xmlWriter.WriteString(await obj.БанківськийРахунокКонтрагента.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //БанківськийРахунокКонтрагента
             xmlWriter.WriteStartElement("ДатаОплати");
@@ -14507,7 +14612,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Документи.ЗамовленняКлієнта");
                     xmlWriter.WriteAttributeString("uid", obj.ЗамовленняКлієнта.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.ЗамовленняКлієнта.GetPresentation());
+                    xmlWriter.WriteString(await obj.ЗамовленняКлієнта.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //ЗамовленняКлієнта
             xmlWriter.WriteStartElement("Контрагент");
@@ -14515,7 +14620,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Контрагенти");
                     xmlWriter.WriteAttributeString("uid", obj.Контрагент.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Контрагент.GetPresentation());
+                    xmlWriter.WriteString(await obj.Контрагент.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Контрагент
             xmlWriter.WriteStartElement("СумаДокументу");
@@ -14529,7 +14634,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.СтруктураПідприємства");
                     xmlWriter.WriteAttributeString("uid", obj.Підрозділ.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Підрозділ.GetPresentation());
+                    xmlWriter.WriteString(await obj.Підрозділ.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Підрозділ
             xmlWriter.WriteStartElement("Склад");
@@ -14537,7 +14642,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Склади");
                     xmlWriter.WriteAttributeString("uid", obj.Склад.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Склад.GetPresentation());
+                    xmlWriter.WriteString(await obj.Склад.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Склад
             xmlWriter.WriteStartElement("ФормаОплати");
@@ -14561,7 +14666,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Каси");
                     xmlWriter.WriteAttributeString("uid", obj.Каса.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Каса.GetPresentation());
+                    xmlWriter.WriteString(await obj.Каса.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Каса
             xmlWriter.WriteStartElement("Договір");
@@ -14569,7 +14674,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.ДоговориКонтрагентів");
                     xmlWriter.WriteAttributeString("uid", obj.Договір.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Договір.GetPresentation());
+                    xmlWriter.WriteString(await obj.Договір.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Договір
             xmlWriter.WriteStartElement("Основа");
@@ -14591,7 +14696,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
                     xmlWriter.WriteAttributeString("uid", obj.Автор.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Автор.GetPresentation());
+                    xmlWriter.WriteString(await obj.Автор.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Автор
             xmlWriter.WriteStartElement("СумаПередоплати");
@@ -14661,7 +14766,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
                     xmlWriter.WriteAttributeString("uid", obj.Менеджер.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Менеджер.GetPresentation());
+                    xmlWriter.WriteString(await obj.Менеджер.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Менеджер
             xmlWriter.WriteStartElement("КлючовіСловаДляПошуку");
@@ -14696,7 +14801,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.Номенклатура");
                                 xmlWriter.WriteAttributeString("uid", record.Номенклатура.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Номенклатура.GetPresentation());
+                                xmlWriter.WriteString(await record.Номенклатура.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Номенклатура
                         xmlWriter.WriteStartElement("ХарактеристикаНоменклатури");
@@ -14704,7 +14809,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.ХарактеристикиНоменклатури");
                                 xmlWriter.WriteAttributeString("uid", record.ХарактеристикаНоменклатури.UnigueID.ToString());
-                                xmlWriter.WriteString(record.ХарактеристикаНоменклатури.GetPresentation());
+                                xmlWriter.WriteString(await record.ХарактеристикаНоменклатури.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //ХарактеристикаНоменклатури
                         xmlWriter.WriteStartElement("Серія");
@@ -14712,7 +14817,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.СеріїНоменклатури");
                                 xmlWriter.WriteAttributeString("uid", record.Серія.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Серія.GetPresentation());
+                                xmlWriter.WriteString(await record.Серія.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Серія
                         xmlWriter.WriteStartElement("Пакування");
@@ -14720,7 +14825,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.ПакуванняОдиниціВиміру");
                                 xmlWriter.WriteAttributeString("uid", record.Пакування.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Пакування.GetPresentation());
+                                xmlWriter.WriteString(await record.Пакування.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Пакування
                         xmlWriter.WriteStartElement("КількістьУпаковок");
@@ -14740,7 +14845,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.ВидиЦін");
                                 xmlWriter.WriteAttributeString("uid", record.ВидЦіни.UnigueID.ToString());
-                                xmlWriter.WriteString(record.ВидЦіни.GetPresentation());
+                                xmlWriter.WriteString(await record.ВидЦіни.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //ВидЦіни
                         xmlWriter.WriteStartElement("Ціна");
@@ -14760,7 +14865,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.Склади");
                                 xmlWriter.WriteAttributeString("uid", record.Склад.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Склад.GetPresentation());
+                                xmlWriter.WriteString(await record.Склад.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Склад
                         xmlWriter.WriteStartElement("ЗамовленняКлієнта");
@@ -14768,7 +14873,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Документи.ЗамовленняКлієнта");
                                 xmlWriter.WriteAttributeString("uid", record.ЗамовленняКлієнта.UnigueID.ToString());
-                                xmlWriter.WriteString(record.ЗамовленняКлієнта.GetPresentation());
+                                xmlWriter.WriteString(await record.ЗамовленняКлієнта.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //ЗамовленняКлієнта
                         xmlWriter.WriteStartElement("РахунокФактура");
@@ -14776,7 +14881,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Документи.РахунокФактура");
                                 xmlWriter.WriteAttributeString("uid", record.РахунокФактура.UnigueID.ToString());
-                                xmlWriter.WriteString(record.РахунокФактура.GetPresentation());
+                                xmlWriter.WriteString(await record.РахунокФактура.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //РахунокФактура
                         xmlWriter.WriteStartElement("Скидка");
@@ -14790,7 +14895,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.ПартіяТоварівКомпозит");
                                 xmlWriter.WriteAttributeString("uid", record.Партія.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Партія.GetPresentation());
+                                xmlWriter.WriteString(await record.Партія.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Партія
                         xmlWriter.WriteEndElement(); //row
@@ -15089,9 +15194,9 @@ namespace StorageAndTrade_1_0.Документи
 
         public string Назва { get; set; } = "";
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return Назва = base.BasePresentation(
+            return Назва = await base.BasePresentation(
               new string[] { "docname" }
             );
         }
@@ -15365,7 +15470,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Організації");
                     xmlWriter.WriteAttributeString("uid", obj.Організація.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Організація.GetPresentation());
+                    xmlWriter.WriteString(await obj.Організація.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Організація
             xmlWriter.WriteStartElement("Валюта");
@@ -15373,7 +15478,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Валюти");
                     xmlWriter.WriteAttributeString("uid", obj.Валюта.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Валюта.GetPresentation());
+                    xmlWriter.WriteString(await obj.Валюта.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Валюта
             xmlWriter.WriteStartElement("ВидЦіни");
@@ -15381,7 +15486,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.ВидиЦін");
                     xmlWriter.WriteAttributeString("uid", obj.ВидЦіни.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.ВидЦіни.GetPresentation());
+                    xmlWriter.WriteString(await obj.ВидЦіни.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //ВидЦіни
             xmlWriter.WriteStartElement("Коментар");
@@ -15395,7 +15500,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
                     xmlWriter.WriteAttributeString("uid", obj.Автор.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Автор.GetPresentation());
+                    xmlWriter.WriteString(await obj.Автор.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Автор
             xmlWriter.WriteStartElement("КлючовіСловаДляПошуку");
@@ -15430,7 +15535,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.Номенклатура");
                                 xmlWriter.WriteAttributeString("uid", record.Номенклатура.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Номенклатура.GetPresentation());
+                                xmlWriter.WriteString(await record.Номенклатура.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Номенклатура
                         xmlWriter.WriteStartElement("ХарактеристикаНоменклатури");
@@ -15438,7 +15543,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.ХарактеристикиНоменклатури");
                                 xmlWriter.WriteAttributeString("uid", record.ХарактеристикаНоменклатури.UnigueID.ToString());
-                                xmlWriter.WriteString(record.ХарактеристикаНоменклатури.GetPresentation());
+                                xmlWriter.WriteString(await record.ХарактеристикаНоменклатури.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //ХарактеристикаНоменклатури
                         xmlWriter.WriteStartElement("Пакування");
@@ -15446,7 +15551,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.ПакуванняОдиниціВиміру");
                                 xmlWriter.WriteAttributeString("uid", record.Пакування.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Пакування.GetPresentation());
+                                xmlWriter.WriteString(await record.Пакування.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Пакування
                         xmlWriter.WriteStartElement("ВидЦіни");
@@ -15454,7 +15559,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.ВидиЦін");
                                 xmlWriter.WriteAttributeString("uid", record.ВидЦіни.UnigueID.ToString());
-                                xmlWriter.WriteString(record.ВидЦіни.GetPresentation());
+                                xmlWriter.WriteString(await record.ВидЦіни.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //ВидЦіни
                         xmlWriter.WriteStartElement("Ціна");
@@ -15644,9 +15749,9 @@ namespace StorageAndTrade_1_0.Документи
 
         public string Назва { get; set; } = "";
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return Назва = base.BasePresentation(
+            return Назва = await base.BasePresentation(
               new string[] { "docname" }
             );
         }
@@ -15893,7 +15998,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Організації");
                     xmlWriter.WriteAttributeString("uid", obj.Організація.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Організація.GetPresentation());
+                    xmlWriter.WriteString(await obj.Організація.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Організація
             xmlWriter.WriteStartElement("Каса");
@@ -15901,7 +16006,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Каси");
                     xmlWriter.WriteAttributeString("uid", obj.Каса.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Каса.GetPresentation());
+                    xmlWriter.WriteString(await obj.Каса.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Каса
             xmlWriter.WriteStartElement("СумаДокументу");
@@ -15929,7 +16034,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Контрагенти");
                     xmlWriter.WriteAttributeString("uid", obj.Контрагент.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Контрагент.GetPresentation());
+                    xmlWriter.WriteString(await obj.Контрагент.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Контрагент
             xmlWriter.WriteStartElement("Договір");
@@ -15937,7 +16042,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.ДоговориКонтрагентів");
                     xmlWriter.WriteAttributeString("uid", obj.Договір.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Договір.GetPresentation());
+                    xmlWriter.WriteString(await obj.Договір.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Договір
             xmlWriter.WriteStartElement("БанківськийРахунок");
@@ -15945,7 +16050,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.БанківськіРахункиОрганізацій");
                     xmlWriter.WriteAttributeString("uid", obj.БанківськийРахунок.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.БанківськийРахунок.GetPresentation());
+                    xmlWriter.WriteString(await obj.БанківськийРахунок.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //БанківськийРахунок
             xmlWriter.WriteStartElement("Валюта");
@@ -15953,7 +16058,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Валюти");
                     xmlWriter.WriteAttributeString("uid", obj.Валюта.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Валюта.GetPresentation());
+                    xmlWriter.WriteString(await obj.Валюта.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Валюта
             xmlWriter.WriteStartElement("СтаттяРухуКоштів");
@@ -15961,7 +16066,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.СтаттяРухуКоштів");
                     xmlWriter.WriteAttributeString("uid", obj.СтаттяРухуКоштів.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.СтаттяРухуКоштів.GetPresentation());
+                    xmlWriter.WriteString(await obj.СтаттяРухуКоштів.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //СтаттяРухуКоштів
             xmlWriter.WriteStartElement("КасаВідправник");
@@ -15969,7 +16074,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Каси");
                     xmlWriter.WriteAttributeString("uid", obj.КасаВідправник.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.КасаВідправник.GetPresentation());
+                    xmlWriter.WriteString(await obj.КасаВідправник.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //КасаВідправник
             xmlWriter.WriteStartElement("Курс");
@@ -15989,7 +16094,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
                     xmlWriter.WriteAttributeString("uid", obj.Автор.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Автор.GetPresentation());
+                    xmlWriter.WriteString(await obj.Автор.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Автор
             xmlWriter.WriteStartElement("КлючовіСловаДляПошуку");
@@ -16036,7 +16141,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.СтруктураПідприємства");
                                 xmlWriter.WriteAttributeString("uid", record.Підрозділ.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Підрозділ.GetPresentation());
+                                xmlWriter.WriteString(await record.Підрозділ.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Підрозділ
                         xmlWriter.WriteStartElement("ВалютаВзаєморозрахунків");
@@ -16044,7 +16149,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.Валюти");
                                 xmlWriter.WriteAttributeString("uid", record.ВалютаВзаєморозрахунків.UnigueID.ToString());
-                                xmlWriter.WriteString(record.ВалютаВзаєморозрахунків.GetPresentation());
+                                xmlWriter.WriteString(await record.ВалютаВзаєморозрахунків.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //ВалютаВзаєморозрахунків
                         xmlWriter.WriteStartElement("Організація");
@@ -16052,7 +16157,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.Організації");
                                 xmlWriter.WriteAttributeString("uid", record.Організація.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Організація.GetPresentation());
+                                xmlWriter.WriteString(await record.Організація.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Організація
                         xmlWriter.WriteEndElement(); //row
@@ -16281,9 +16386,9 @@ namespace StorageAndTrade_1_0.Документи
 
         public string Назва { get; set; } = "";
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return Назва = base.BasePresentation(
+            return Назва = await base.BasePresentation(
               new string[] { "docname" }
             );
         }
@@ -16532,7 +16637,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Організації");
                     xmlWriter.WriteAttributeString("uid", obj.Організація.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Організація.GetPresentation());
+                    xmlWriter.WriteString(await obj.Організація.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Організація
             xmlWriter.WriteStartElement("Каса");
@@ -16540,7 +16645,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Каси");
                     xmlWriter.WriteAttributeString("uid", obj.Каса.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Каса.GetPresentation());
+                    xmlWriter.WriteString(await obj.Каса.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Каса
             xmlWriter.WriteStartElement("СумаДокументу");
@@ -16568,7 +16673,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Організації");
                     xmlWriter.WriteAttributeString("uid", obj.ОрганізаціяОтримувач.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.ОрганізаціяОтримувач.GetPresentation());
+                    xmlWriter.WriteString(await obj.ОрганізаціяОтримувач.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //ОрганізаціяОтримувач
             xmlWriter.WriteStartElement("Контрагент");
@@ -16576,7 +16681,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Контрагенти");
                     xmlWriter.WriteAttributeString("uid", obj.Контрагент.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Контрагент.GetPresentation());
+                    xmlWriter.WriteString(await obj.Контрагент.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Контрагент
             xmlWriter.WriteStartElement("Договір");
@@ -16584,7 +16689,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.ДоговориКонтрагентів");
                     xmlWriter.WriteAttributeString("uid", obj.Договір.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Договір.GetPresentation());
+                    xmlWriter.WriteString(await obj.Договір.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Договір
             xmlWriter.WriteStartElement("БанківськийРахунок");
@@ -16592,7 +16697,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.БанківськіРахункиОрганізацій");
                     xmlWriter.WriteAttributeString("uid", obj.БанківськийРахунок.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.БанківськийРахунок.GetPresentation());
+                    xmlWriter.WriteString(await obj.БанківськийРахунок.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //БанківськийРахунок
             xmlWriter.WriteStartElement("Валюта");
@@ -16600,7 +16705,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Валюти");
                     xmlWriter.WriteAttributeString("uid", obj.Валюта.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Валюта.GetPresentation());
+                    xmlWriter.WriteString(await obj.Валюта.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Валюта
             xmlWriter.WriteStartElement("СтаттяРухуКоштів");
@@ -16608,7 +16713,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.СтаттяРухуКоштів");
                     xmlWriter.WriteAttributeString("uid", obj.СтаттяРухуКоштів.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.СтаттяРухуКоштів.GetPresentation());
+                    xmlWriter.WriteString(await obj.СтаттяРухуКоштів.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //СтаттяРухуКоштів
             xmlWriter.WriteStartElement("КасаОтримувач");
@@ -16616,7 +16721,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Каси");
                     xmlWriter.WriteAttributeString("uid", obj.КасаОтримувач.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.КасаОтримувач.GetPresentation());
+                    xmlWriter.WriteString(await obj.КасаОтримувач.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //КасаОтримувач
             xmlWriter.WriteStartElement("Курс");
@@ -16642,7 +16747,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
                     xmlWriter.WriteAttributeString("uid", obj.Автор.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Автор.GetPresentation());
+                    xmlWriter.WriteString(await obj.Автор.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Автор
             xmlWriter.WriteStartElement("КлючовіСловаДляПошуку");
@@ -16689,7 +16794,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.Валюти");
                                 xmlWriter.WriteAttributeString("uid", record.ВалютаВзаєморозрахунків.UnigueID.ToString());
-                                xmlWriter.WriteString(record.ВалютаВзаєморозрахунків.GetPresentation());
+                                xmlWriter.WriteString(await record.ВалютаВзаєморозрахунків.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //ВалютаВзаєморозрахунків
                         xmlWriter.WriteStartElement("Підрозділ");
@@ -16697,7 +16802,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.СтруктураПідприємства");
                                 xmlWriter.WriteAttributeString("uid", record.Підрозділ.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Підрозділ.GetPresentation());
+                                xmlWriter.WriteString(await record.Підрозділ.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Підрозділ
                         xmlWriter.WriteStartElement("Коментар");
@@ -16711,7 +16816,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.Організації");
                                 xmlWriter.WriteAttributeString("uid", record.Організація.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Організація.GetPresentation());
+                                xmlWriter.WriteString(await record.Організація.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Організація
                         xmlWriter.WriteEndElement(); //row
@@ -16950,9 +17055,9 @@ namespace StorageAndTrade_1_0.Документи
 
         public string Назва { get; set; } = "";
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return Назва = base.BasePresentation(
+            return Назва = await base.BasePresentation(
               new string[] { "docname" }
             );
         }
@@ -17206,7 +17311,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Організації");
                     xmlWriter.WriteAttributeString("uid", obj.Організація.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Організація.GetPresentation());
+                    xmlWriter.WriteString(await obj.Організація.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Організація
             xmlWriter.WriteStartElement("БанківськийРахунокОрганізації");
@@ -17214,7 +17319,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.БанківськіРахункиОрганізацій");
                     xmlWriter.WriteAttributeString("uid", obj.БанківськийРахунокОрганізації.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.БанківськийРахунокОрганізації.GetPresentation());
+                    xmlWriter.WriteString(await obj.БанківськийРахунокОрганізації.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //БанківськийРахунокОрганізації
             xmlWriter.WriteStartElement("ВидЦіни");
@@ -17222,7 +17327,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.ВидиЦін");
                     xmlWriter.WriteAttributeString("uid", obj.ВидЦіни.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.ВидЦіни.GetPresentation());
+                    xmlWriter.WriteString(await obj.ВидЦіни.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //ВидЦіни
             xmlWriter.WriteStartElement("ОрганізаціяОтримувач");
@@ -17230,7 +17335,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Організації");
                     xmlWriter.WriteAttributeString("uid", obj.ОрганізаціяОтримувач.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.ОрганізаціяОтримувач.GetPresentation());
+                    xmlWriter.WriteString(await obj.ОрганізаціяОтримувач.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //ОрганізаціяОтримувач
             xmlWriter.WriteStartElement("Відповідальний");
@@ -17238,7 +17343,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
                     xmlWriter.WriteAttributeString("uid", obj.Відповідальний.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Відповідальний.GetPresentation());
+                    xmlWriter.WriteString(await obj.Відповідальний.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Відповідальний
             xmlWriter.WriteStartElement("Підрозділ");
@@ -17246,7 +17351,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.СтруктураПідприємства");
                     xmlWriter.WriteAttributeString("uid", obj.Підрозділ.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Підрозділ.GetPresentation());
+                    xmlWriter.WriteString(await obj.Підрозділ.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Підрозділ
             xmlWriter.WriteStartElement("СкладВідправник");
@@ -17254,7 +17359,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Склади");
                     xmlWriter.WriteAttributeString("uid", obj.СкладВідправник.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.СкладВідправник.GetPresentation());
+                    xmlWriter.WriteString(await obj.СкладВідправник.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //СкладВідправник
             xmlWriter.WriteStartElement("СкладОтримувач");
@@ -17262,7 +17367,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Склади");
                     xmlWriter.WriteAttributeString("uid", obj.СкладОтримувач.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.СкладОтримувач.GetPresentation());
+                    xmlWriter.WriteString(await obj.СкладОтримувач.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //СкладОтримувач
             xmlWriter.WriteStartElement("Статус");
@@ -17318,7 +17423,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
                     xmlWriter.WriteAttributeString("uid", obj.Автор.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Автор.GetPresentation());
+                    xmlWriter.WriteString(await obj.Автор.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Автор
             xmlWriter.WriteStartElement("Основа");
@@ -17359,7 +17464,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.Номенклатура");
                                 xmlWriter.WriteAttributeString("uid", record.Номенклатура.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Номенклатура.GetPresentation());
+                                xmlWriter.WriteString(await record.Номенклатура.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Номенклатура
                         xmlWriter.WriteStartElement("ХарактеристикаНоменклатури");
@@ -17367,7 +17472,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.ХарактеристикиНоменклатури");
                                 xmlWriter.WriteAttributeString("uid", record.ХарактеристикаНоменклатури.UnigueID.ToString());
-                                xmlWriter.WriteString(record.ХарактеристикаНоменклатури.GetPresentation());
+                                xmlWriter.WriteString(await record.ХарактеристикаНоменклатури.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //ХарактеристикаНоменклатури
                         xmlWriter.WriteStartElement("Серія");
@@ -17375,7 +17480,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.СеріїНоменклатури");
                                 xmlWriter.WriteAttributeString("uid", record.Серія.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Серія.GetPresentation());
+                                xmlWriter.WriteString(await record.Серія.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Серія
                         xmlWriter.WriteStartElement("Пакування");
@@ -17383,7 +17488,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.ПакуванняОдиниціВиміру");
                                 xmlWriter.WriteAttributeString("uid", record.Пакування.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Пакування.GetPresentation());
+                                xmlWriter.WriteString(await record.Пакування.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Пакування
                         xmlWriter.WriteStartElement("КількістьУпаковок");
@@ -17403,7 +17508,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.ПартіяТоварівКомпозит");
                                 xmlWriter.WriteAttributeString("uid", record.Партія.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Партія.GetPresentation());
+                                xmlWriter.WriteString(await record.Партія.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Партія
                         xmlWriter.WriteEndElement(); //row
@@ -17647,9 +17752,9 @@ namespace StorageAndTrade_1_0.Документи
 
         public string Назва { get; set; } = "";
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return Назва = base.BasePresentation(
+            return Назва = await base.BasePresentation(
               new string[] { "docname" }
             );
         }
@@ -17909,7 +18014,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Організації");
                     xmlWriter.WriteAttributeString("uid", obj.Організація.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Організація.GetPresentation());
+                    xmlWriter.WriteString(await obj.Організація.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Організація
             xmlWriter.WriteStartElement("Контрагент");
@@ -17917,7 +18022,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Контрагенти");
                     xmlWriter.WriteAttributeString("uid", obj.Контрагент.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Контрагент.GetPresentation());
+                    xmlWriter.WriteString(await obj.Контрагент.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Контрагент
             xmlWriter.WriteStartElement("Підрозділ");
@@ -17925,7 +18030,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.СтруктураПідприємства");
                     xmlWriter.WriteAttributeString("uid", obj.Підрозділ.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Підрозділ.GetPresentation());
+                    xmlWriter.WriteString(await obj.Підрозділ.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Підрозділ
             xmlWriter.WriteStartElement("Валюта");
@@ -17933,7 +18038,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Валюти");
                     xmlWriter.WriteAttributeString("uid", obj.Валюта.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Валюта.GetPresentation());
+                    xmlWriter.WriteString(await obj.Валюта.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Валюта
             xmlWriter.WriteStartElement("Склад");
@@ -17941,7 +18046,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Склади");
                     xmlWriter.WriteAttributeString("uid", obj.Склад.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Склад.GetPresentation());
+                    xmlWriter.WriteString(await obj.Склад.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Склад
             xmlWriter.WriteStartElement("СумаДокументу");
@@ -17963,7 +18068,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.БанківськіРахункиОрганізацій");
                     xmlWriter.WriteAttributeString("uid", obj.БанківськийРахунокОрганізації.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.БанківськийРахунокОрганізації.GetPresentation());
+                    xmlWriter.WriteString(await obj.БанківськийРахунокОрганізації.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //БанківськийРахунокОрганізації
             xmlWriter.WriteStartElement("БанківськийРахунокКонтрагента");
@@ -17971,7 +18076,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.БанківськіРахункиКонтрагентів");
                     xmlWriter.WriteAttributeString("uid", obj.БанківськийРахунокКонтрагента.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.БанківськийРахунокКонтрагента.GetPresentation());
+                    xmlWriter.WriteString(await obj.БанківськийРахунокКонтрагента.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //БанківськийРахунокКонтрагента
             xmlWriter.WriteStartElement("Договір");
@@ -17979,7 +18084,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.ДоговориКонтрагентів");
                     xmlWriter.WriteAttributeString("uid", obj.Договір.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Договір.GetPresentation());
+                    xmlWriter.WriteString(await obj.Договір.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Договір
             xmlWriter.WriteStartElement("СпосібДоставки");
@@ -18013,7 +18118,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Каси");
                     xmlWriter.WriteAttributeString("uid", obj.Каса.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Каса.GetPresentation());
+                    xmlWriter.WriteString(await obj.Каса.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Каса
             xmlWriter.WriteStartElement("Основа");
@@ -18033,7 +18138,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
                     xmlWriter.WriteAttributeString("uid", obj.Автор.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Автор.GetPresentation());
+                    xmlWriter.WriteString(await obj.Автор.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Автор
             xmlWriter.WriteStartElement("Менеджер");
@@ -18041,7 +18146,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
                     xmlWriter.WriteAttributeString("uid", obj.Менеджер.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Менеджер.GetPresentation());
+                    xmlWriter.WriteString(await obj.Менеджер.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Менеджер
             xmlWriter.WriteStartElement("КлючовіСловаДляПошуку");
@@ -18076,7 +18181,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.Номенклатура");
                                 xmlWriter.WriteAttributeString("uid", record.Номенклатура.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Номенклатура.GetPresentation());
+                                xmlWriter.WriteString(await record.Номенклатура.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Номенклатура
                         xmlWriter.WriteStartElement("ХарактеристикаНоменклатури");
@@ -18084,7 +18189,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.ХарактеристикиНоменклатури");
                                 xmlWriter.WriteAttributeString("uid", record.ХарактеристикаНоменклатури.UnigueID.ToString());
-                                xmlWriter.WriteString(record.ХарактеристикаНоменклатури.GetPresentation());
+                                xmlWriter.WriteString(await record.ХарактеристикаНоменклатури.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //ХарактеристикаНоменклатури
                         xmlWriter.WriteStartElement("Серія");
@@ -18092,7 +18197,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.СеріїНоменклатури");
                                 xmlWriter.WriteAttributeString("uid", record.Серія.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Серія.GetPresentation());
+                                xmlWriter.WriteString(await record.Серія.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Серія
                         xmlWriter.WriteStartElement("Пакування");
@@ -18100,7 +18205,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.ПакуванняОдиниціВиміру");
                                 xmlWriter.WriteAttributeString("uid", record.Пакування.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Пакування.GetPresentation());
+                                xmlWriter.WriteString(await record.Пакування.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Пакування
                         xmlWriter.WriteStartElement("КількістьУпаковок");
@@ -18132,7 +18237,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Документи.ПоступленняТоварівТаПослуг");
                                 xmlWriter.WriteAttributeString("uid", record.ДокументПоступлення.UnigueID.ToString());
-                                xmlWriter.WriteString(record.ДокументПоступлення.GetPresentation());
+                                xmlWriter.WriteString(await record.ДокументПоступлення.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //ДокументПоступлення
                         xmlWriter.WriteEndElement(); //row
@@ -18386,9 +18491,9 @@ namespace StorageAndTrade_1_0.Документи
 
         public string Назва { get; set; } = "";
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return Назва = base.BasePresentation(
+            return Назва = await base.BasePresentation(
               new string[] { "docname" }
             );
         }
@@ -18652,7 +18757,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Організації");
                     xmlWriter.WriteAttributeString("uid", obj.Організація.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Організація.GetPresentation());
+                    xmlWriter.WriteString(await obj.Організація.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Організація
             xmlWriter.WriteStartElement("Валюта");
@@ -18660,7 +18765,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Валюти");
                     xmlWriter.WriteAttributeString("uid", obj.Валюта.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Валюта.GetPresentation());
+                    xmlWriter.WriteString(await obj.Валюта.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Валюта
             xmlWriter.WriteStartElement("СумаДокументу");
@@ -18674,7 +18779,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Склади");
                     xmlWriter.WriteAttributeString("uid", obj.Склад.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Склад.GetPresentation());
+                    xmlWriter.WriteString(await obj.Склад.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Склад
             xmlWriter.WriteStartElement("Підрозділ");
@@ -18682,7 +18787,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.СтруктураПідприємства");
                     xmlWriter.WriteAttributeString("uid", obj.Підрозділ.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Підрозділ.GetPresentation());
+                    xmlWriter.WriteString(await obj.Підрозділ.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Підрозділ
             xmlWriter.WriteStartElement("Менеджер");
@@ -18690,7 +18795,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
                     xmlWriter.WriteAttributeString("uid", obj.Менеджер.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Менеджер.GetPresentation());
+                    xmlWriter.WriteString(await obj.Менеджер.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Менеджер
             xmlWriter.WriteStartElement("ДокументПродажу");
@@ -18698,7 +18803,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Документи.РеалізаціяТоварівТаПослуг");
                     xmlWriter.WriteAttributeString("uid", obj.ДокументПродажу.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.ДокументПродажу.GetPresentation());
+                    xmlWriter.WriteString(await obj.ДокументПродажу.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //ДокументПродажу
             xmlWriter.WriteStartElement("ГосподарськаОперація");
@@ -18714,7 +18819,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.ДоговориКонтрагентів");
                     xmlWriter.WriteAttributeString("uid", obj.Договір.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Договір.GetPresentation());
+                    xmlWriter.WriteString(await obj.Договір.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Договір
             xmlWriter.WriteStartElement("ПричинаПовернення");
@@ -18728,7 +18833,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Контрагенти");
                     xmlWriter.WriteAttributeString("uid", obj.Контрагент.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Контрагент.GetPresentation());
+                    xmlWriter.WriteString(await obj.Контрагент.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Контрагент
             xmlWriter.WriteStartElement("Каса");
@@ -18736,7 +18841,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Каси");
                     xmlWriter.WriteAttributeString("uid", obj.Каса.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Каса.GetPresentation());
+                    xmlWriter.WriteString(await obj.Каса.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Каса
             xmlWriter.WriteStartElement("Основа");
@@ -18756,7 +18861,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
                     xmlWriter.WriteAttributeString("uid", obj.Автор.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Автор.GetPresentation());
+                    xmlWriter.WriteString(await obj.Автор.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Автор
             xmlWriter.WriteStartElement("КлючовіСловаДляПошуку");
@@ -18791,7 +18896,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.Номенклатура");
                                 xmlWriter.WriteAttributeString("uid", record.Номенклатура.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Номенклатура.GetPresentation());
+                                xmlWriter.WriteString(await record.Номенклатура.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Номенклатура
                         xmlWriter.WriteStartElement("ХарактеристикаНоменклатури");
@@ -18799,7 +18904,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.ХарактеристикиНоменклатури");
                                 xmlWriter.WriteAttributeString("uid", record.ХарактеристикаНоменклатури.UnigueID.ToString());
-                                xmlWriter.WriteString(record.ХарактеристикаНоменклатури.GetPresentation());
+                                xmlWriter.WriteString(await record.ХарактеристикаНоменклатури.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //ХарактеристикаНоменклатури
                         xmlWriter.WriteStartElement("Серія");
@@ -18807,7 +18912,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.СеріїНоменклатури");
                                 xmlWriter.WriteAttributeString("uid", record.Серія.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Серія.GetPresentation());
+                                xmlWriter.WriteString(await record.Серія.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Серія
                         xmlWriter.WriteStartElement("Пакування");
@@ -18815,7 +18920,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.ПакуванняОдиниціВиміру");
                                 xmlWriter.WriteAttributeString("uid", record.Пакування.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Пакування.GetPresentation());
+                                xmlWriter.WriteString(await record.Пакування.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Пакування
                         xmlWriter.WriteStartElement("КількістьУпаковок");
@@ -18853,7 +18958,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Документи.РеалізаціяТоварівТаПослуг");
                                 xmlWriter.WriteAttributeString("uid", record.ДокументРеалізації.UnigueID.ToString());
-                                xmlWriter.WriteString(record.ДокументРеалізації.GetPresentation());
+                                xmlWriter.WriteString(await record.ДокументРеалізації.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //ДокументРеалізації
                         xmlWriter.WriteEndElement(); //row
@@ -19087,9 +19192,9 @@ namespace StorageAndTrade_1_0.Документи
 
         public string Назва { get; set; } = "";
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return Назва = base.BasePresentation(
+            return Назва = await base.BasePresentation(
               new string[] { "docname" }
             );
         }
@@ -19355,7 +19460,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Валюти");
                     xmlWriter.WriteAttributeString("uid", obj.Валюта.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Валюта.GetPresentation());
+                    xmlWriter.WriteString(await obj.Валюта.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Валюта
             xmlWriter.WriteStartElement("ЗамовленняКлієнта");
@@ -19363,7 +19468,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Документи.ЗамовленняКлієнта");
                     xmlWriter.WriteAttributeString("uid", obj.ЗамовленняКлієнта.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.ЗамовленняКлієнта.GetPresentation());
+                    xmlWriter.WriteString(await obj.ЗамовленняКлієнта.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //ЗамовленняКлієнта
             xmlWriter.WriteStartElement("Каса");
@@ -19371,7 +19476,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Каси");
                     xmlWriter.WriteAttributeString("uid", obj.Каса.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Каса.GetPresentation());
+                    xmlWriter.WriteString(await obj.Каса.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Каса
             xmlWriter.WriteStartElement("Контрагент");
@@ -19379,7 +19484,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Контрагенти");
                     xmlWriter.WriteAttributeString("uid", obj.Контрагент.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Контрагент.GetPresentation());
+                    xmlWriter.WriteString(await obj.Контрагент.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Контрагент
             xmlWriter.WriteStartElement("Організація");
@@ -19387,7 +19492,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Організації");
                     xmlWriter.WriteAttributeString("uid", obj.Організація.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Організація.GetPresentation());
+                    xmlWriter.WriteString(await obj.Організація.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Організація
             xmlWriter.WriteStartElement("Підрозділ");
@@ -19395,7 +19500,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.СтруктураПідприємства");
                     xmlWriter.WriteAttributeString("uid", obj.Підрозділ.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Підрозділ.GetPresentation());
+                    xmlWriter.WriteString(await obj.Підрозділ.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Підрозділ
             xmlWriter.WriteStartElement("СумаДокументу");
@@ -19417,7 +19522,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.ДоговориКонтрагентів");
                     xmlWriter.WriteAttributeString("uid", obj.Договір.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Договір.GetPresentation());
+                    xmlWriter.WriteString(await obj.Договір.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Договір
             xmlWriter.WriteStartElement("ГосподарськаОперація");
@@ -19439,7 +19544,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
                     xmlWriter.WriteAttributeString("uid", obj.Автор.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Автор.GetPresentation());
+                    xmlWriter.WriteString(await obj.Автор.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Автор
             xmlWriter.WriteStartElement("Менеджер");
@@ -19447,7 +19552,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
                     xmlWriter.WriteAttributeString("uid", obj.Менеджер.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Менеджер.GetPresentation());
+                    xmlWriter.WriteString(await obj.Менеджер.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Менеджер
             xmlWriter.WriteStartElement("КлючовіСловаДляПошуку");
@@ -19482,7 +19587,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.Номенклатура");
                                 xmlWriter.WriteAttributeString("uid", record.Номенклатура.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Номенклатура.GetPresentation());
+                                xmlWriter.WriteString(await record.Номенклатура.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Номенклатура
                         xmlWriter.WriteStartElement("ХарактеристикаНоменклатури");
@@ -19490,7 +19595,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.ХарактеристикиНоменклатури");
                                 xmlWriter.WriteAttributeString("uid", record.ХарактеристикаНоменклатури.UnigueID.ToString());
-                                xmlWriter.WriteString(record.ХарактеристикаНоменклатури.GetPresentation());
+                                xmlWriter.WriteString(await record.ХарактеристикаНоменклатури.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //ХарактеристикаНоменклатури
                         xmlWriter.WriteStartElement("Кількість");
@@ -19732,9 +19837,9 @@ namespace StorageAndTrade_1_0.Документи
 
         public string Назва { get; set; } = "";
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return Назва = base.BasePresentation(
+            return Назва = await base.BasePresentation(
               new string[] { "docname" }
             );
         }
@@ -19976,7 +20081,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Організації");
                     xmlWriter.WriteAttributeString("uid", obj.Організація.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Організація.GetPresentation());
+                    xmlWriter.WriteString(await obj.Організація.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Організація
             xmlWriter.WriteStartElement("Підрозділ");
@@ -19984,7 +20089,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.СтруктураПідприємства");
                     xmlWriter.WriteAttributeString("uid", obj.Підрозділ.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Підрозділ.GetPresentation());
+                    xmlWriter.WriteString(await obj.Підрозділ.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Підрозділ
             xmlWriter.WriteStartElement("Склад");
@@ -19992,7 +20097,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Склади");
                     xmlWriter.WriteAttributeString("uid", obj.Склад.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Склад.GetPresentation());
+                    xmlWriter.WriteString(await obj.Склад.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Склад
             xmlWriter.WriteStartElement("Валюта");
@@ -20000,7 +20105,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Валюти");
                     xmlWriter.WriteAttributeString("uid", obj.Валюта.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Валюта.GetPresentation());
+                    xmlWriter.WriteString(await obj.Валюта.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Валюта
             xmlWriter.WriteStartElement("Контрагент");
@@ -20008,7 +20113,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Контрагенти");
                     xmlWriter.WriteAttributeString("uid", obj.Контрагент.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Контрагент.GetPresentation());
+                    xmlWriter.WriteString(await obj.Контрагент.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Контрагент
             xmlWriter.WriteStartElement("Договір");
@@ -20016,7 +20121,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.ДоговориКонтрагентів");
                     xmlWriter.WriteAttributeString("uid", obj.Договір.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Договір.GetPresentation());
+                    xmlWriter.WriteString(await obj.Договір.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Договір
             xmlWriter.WriteStartElement("ГосподарськаОперація");
@@ -20038,7 +20143,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
                     xmlWriter.WriteAttributeString("uid", obj.Автор.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Автор.GetPresentation());
+                    xmlWriter.WriteString(await obj.Автор.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Автор
             xmlWriter.WriteStartElement("КлючовіСловаДляПошуку");
@@ -20073,7 +20178,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.Номенклатура");
                                 xmlWriter.WriteAttributeString("uid", record.Номенклатура.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Номенклатура.GetPresentation());
+                                xmlWriter.WriteString(await record.Номенклатура.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Номенклатура
                         xmlWriter.WriteStartElement("ХарактеристикаНоменклатури");
@@ -20081,7 +20186,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.ХарактеристикиНоменклатури");
                                 xmlWriter.WriteAttributeString("uid", record.ХарактеристикаНоменклатури.UnigueID.ToString());
-                                xmlWriter.WriteString(record.ХарактеристикаНоменклатури.GetPresentation());
+                                xmlWriter.WriteString(await record.ХарактеристикаНоменклатури.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //ХарактеристикаНоменклатури
                         xmlWriter.WriteStartElement("Серія");
@@ -20089,7 +20194,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.СеріїНоменклатури");
                                 xmlWriter.WriteAttributeString("uid", record.Серія.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Серія.GetPresentation());
+                                xmlWriter.WriteString(await record.Серія.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Серія
                         xmlWriter.WriteStartElement("Пакування");
@@ -20097,7 +20202,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.ПакуванняОдиниціВиміру");
                                 xmlWriter.WriteAttributeString("uid", record.Пакування.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Пакування.GetPresentation());
+                                xmlWriter.WriteString(await record.Пакування.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Пакування
                         xmlWriter.WriteStartElement("КількістьУпаковок");
@@ -20148,7 +20253,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.Каси");
                                 xmlWriter.WriteAttributeString("uid", record.Каса.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Каса.GetPresentation());
+                                xmlWriter.WriteString(await record.Каса.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Каса
                         xmlWriter.WriteStartElement("Сума");
@@ -20181,7 +20286,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.БанківськіРахункиОрганізацій");
                                 xmlWriter.WriteAttributeString("uid", record.БанківськийРахунок.UnigueID.ToString());
-                                xmlWriter.WriteString(record.БанківськийРахунок.GetPresentation());
+                                xmlWriter.WriteString(await record.БанківськийРахунок.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //БанківськийРахунок
                         xmlWriter.WriteStartElement("Сума");
@@ -20214,7 +20319,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.Контрагенти");
                                 xmlWriter.WriteAttributeString("uid", record.Контрагент.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Контрагент.GetPresentation());
+                                xmlWriter.WriteString(await record.Контрагент.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Контрагент
                         xmlWriter.WriteStartElement("Валюта");
@@ -20222,7 +20327,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.Валюти");
                                 xmlWriter.WriteAttributeString("uid", record.Валюта.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Валюта.GetPresentation());
+                                xmlWriter.WriteString(await record.Валюта.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Валюта
                         xmlWriter.WriteStartElement("Сума");
@@ -20458,9 +20563,9 @@ namespace StorageAndTrade_1_0.Документи
 
         public string Назва { get; set; } = "";
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return Назва = base.BasePresentation(
+            return Назва = await base.BasePresentation(
               new string[] { "docname" }
             );
         }
@@ -20959,7 +21064,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Організації");
                     xmlWriter.WriteAttributeString("uid", obj.Організація.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Організація.GetPresentation());
+                    xmlWriter.WriteString(await obj.Організація.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Організація
             xmlWriter.WriteStartElement("Підрозділ");
@@ -20967,7 +21072,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.СтруктураПідприємства");
                     xmlWriter.WriteAttributeString("uid", obj.Підрозділ.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Підрозділ.GetPresentation());
+                    xmlWriter.WriteString(await obj.Підрозділ.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Підрозділ
             xmlWriter.WriteStartElement("Склад");
@@ -20975,7 +21080,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Склади");
                     xmlWriter.WriteAttributeString("uid", obj.Склад.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Склад.GetPresentation());
+                    xmlWriter.WriteString(await obj.Склад.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Склад
             xmlWriter.WriteStartElement("ВидЦіни");
@@ -20983,7 +21088,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.ВидиЦін");
                     xmlWriter.WriteAttributeString("uid", obj.ВидЦіни.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.ВидЦіни.GetPresentation());
+                    xmlWriter.WriteString(await obj.ВидЦіни.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //ВидЦіни
             xmlWriter.WriteStartElement("Коментар");
@@ -21015,7 +21120,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
                     xmlWriter.WriteAttributeString("uid", obj.Автор.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Автор.GetPresentation());
+                    xmlWriter.WriteString(await obj.Автор.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Автор
             xmlWriter.WriteStartElement("КлючовіСловаДляПошуку");
@@ -21044,7 +21149,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.Номенклатура");
                                 xmlWriter.WriteAttributeString("uid", record.Номенклатура.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Номенклатура.GetPresentation());
+                                xmlWriter.WriteString(await record.Номенклатура.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Номенклатура
                         xmlWriter.WriteStartElement("ХарактеристикаНоменклатури");
@@ -21052,7 +21157,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.ХарактеристикиНоменклатури");
                                 xmlWriter.WriteAttributeString("uid", record.ХарактеристикаНоменклатури.UnigueID.ToString());
-                                xmlWriter.WriteString(record.ХарактеристикаНоменклатури.GetPresentation());
+                                xmlWriter.WriteString(await record.ХарактеристикаНоменклатури.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //ХарактеристикаНоменклатури
                         xmlWriter.WriteStartElement("Кількість");
@@ -21254,9 +21359,9 @@ namespace StorageAndTrade_1_0.Документи
 
         public string Назва { get; set; } = "";
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return Назва = base.BasePresentation(
+            return Назва = await base.BasePresentation(
               new string[] { "docname" }
             );
         }
@@ -21482,7 +21587,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Організації");
                     xmlWriter.WriteAttributeString("uid", obj.Організація.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Організація.GetPresentation());
+                    xmlWriter.WriteString(await obj.Організація.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Організація
             xmlWriter.WriteStartElement("Підрозділ");
@@ -21490,7 +21595,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.СтруктураПідприємства");
                     xmlWriter.WriteAttributeString("uid", obj.Підрозділ.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Підрозділ.GetPresentation());
+                    xmlWriter.WriteString(await obj.Підрозділ.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Підрозділ
             xmlWriter.WriteStartElement("Склад");
@@ -21498,7 +21603,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Склади");
                     xmlWriter.WriteAttributeString("uid", obj.Склад.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Склад.GetPresentation());
+                    xmlWriter.WriteString(await obj.Склад.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Склад
             xmlWriter.WriteStartElement("ВидЦіни");
@@ -21506,7 +21611,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.ВидиЦін");
                     xmlWriter.WriteAttributeString("uid", obj.ВидЦіни.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.ВидЦіни.GetPresentation());
+                    xmlWriter.WriteString(await obj.ВидЦіни.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //ВидЦіни
             xmlWriter.WriteStartElement("Коментар");
@@ -21520,7 +21625,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
                     xmlWriter.WriteAttributeString("uid", obj.Автор.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Автор.GetPresentation());
+                    xmlWriter.WriteString(await obj.Автор.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Автор
             xmlWriter.WriteStartElement("КлючовіСловаДляПошуку");
@@ -21555,7 +21660,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.Номенклатура");
                                 xmlWriter.WriteAttributeString("uid", record.Номенклатура.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Номенклатура.GetPresentation());
+                                xmlWriter.WriteString(await record.Номенклатура.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Номенклатура
                         xmlWriter.WriteStartElement("ХарактеристикаНоменклатури");
@@ -21563,7 +21668,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.ХарактеристикиНоменклатури");
                                 xmlWriter.WriteAttributeString("uid", record.ХарактеристикаНоменклатури.UnigueID.ToString());
-                                xmlWriter.WriteString(record.ХарактеристикаНоменклатури.GetPresentation());
+                                xmlWriter.WriteString(await record.ХарактеристикаНоменклатури.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //ХарактеристикаНоменклатури
                         xmlWriter.WriteStartElement("Кількість");
@@ -21759,9 +21864,9 @@ namespace StorageAndTrade_1_0.Документи
 
         public string Назва { get; set; } = "";
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return Назва = base.BasePresentation(
+            return Назва = await base.BasePresentation(
               new string[] { "docname" }
             );
         }
@@ -21985,7 +22090,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Склади");
                     xmlWriter.WriteAttributeString("uid", obj.Склад.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Склад.GetPresentation());
+                    xmlWriter.WriteString(await obj.Склад.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Склад
             xmlWriter.WriteStartElement("Відповідальний");
@@ -21993,7 +22098,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.ФізичніОсоби");
                     xmlWriter.WriteAttributeString("uid", obj.Відповідальний.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Відповідальний.GetPresentation());
+                    xmlWriter.WriteString(await obj.Відповідальний.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Відповідальний
             xmlWriter.WriteStartElement("Коментар");
@@ -22007,7 +22112,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
                     xmlWriter.WriteAttributeString("uid", obj.Автор.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Автор.GetPresentation());
+                    xmlWriter.WriteString(await obj.Автор.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Автор
             xmlWriter.WriteStartElement("КлючовіСловаДляПошуку");
@@ -22060,7 +22165,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.Номенклатура");
                                 xmlWriter.WriteAttributeString("uid", record.Номенклатура.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Номенклатура.GetPresentation());
+                                xmlWriter.WriteString(await record.Номенклатура.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Номенклатура
                         xmlWriter.WriteStartElement("Пакування");
@@ -22068,7 +22173,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.ПакуванняОдиниціВиміру");
                                 xmlWriter.WriteAttributeString("uid", record.Пакування.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Пакування.GetPresentation());
+                                xmlWriter.WriteString(await record.Пакування.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Пакування
                         xmlWriter.WriteStartElement("ХарактеристикаНоменклатури");
@@ -22076,7 +22181,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.ХарактеристикиНоменклатури");
                                 xmlWriter.WriteAttributeString("uid", record.ХарактеристикаНоменклатури.UnigueID.ToString());
-                                xmlWriter.WriteString(record.ХарактеристикаНоменклатури.GetPresentation());
+                                xmlWriter.WriteString(await record.ХарактеристикаНоменклатури.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //ХарактеристикаНоменклатури
                         xmlWriter.WriteEndElement(); //row
@@ -22250,9 +22355,9 @@ namespace StorageAndTrade_1_0.Документи
 
         public string Назва { get; set; } = "";
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return Назва = base.BasePresentation(
+            return Назва = await base.BasePresentation(
               new string[] { "docname" }
             );
         }
@@ -22488,7 +22593,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Організації");
                     xmlWriter.WriteAttributeString("uid", obj.Організація.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Організація.GetPresentation());
+                    xmlWriter.WriteString(await obj.Організація.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Організація
             xmlWriter.WriteStartElement("Підрозділ");
@@ -22496,7 +22601,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.СтруктураПідприємства");
                     xmlWriter.WriteAttributeString("uid", obj.Підрозділ.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Підрозділ.GetPresentation());
+                    xmlWriter.WriteString(await obj.Підрозділ.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Підрозділ
             xmlWriter.WriteStartElement("Склад");
@@ -22504,7 +22609,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Склади");
                     xmlWriter.WriteAttributeString("uid", obj.Склад.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Склад.GetPresentation());
+                    xmlWriter.WriteString(await obj.Склад.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Склад
             xmlWriter.WriteStartElement("Причина");
@@ -22530,7 +22635,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
                     xmlWriter.WriteAttributeString("uid", obj.Автор.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Автор.GetPresentation());
+                    xmlWriter.WriteString(await obj.Автор.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Автор
             xmlWriter.WriteStartElement("КлючовіСловаДляПошуку");
@@ -22571,7 +22676,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.Номенклатура");
                                 xmlWriter.WriteAttributeString("uid", record.Номенклатура.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Номенклатура.GetPresentation());
+                                xmlWriter.WriteString(await record.Номенклатура.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Номенклатура
                         xmlWriter.WriteStartElement("ХарактеристикаНоменклатури");
@@ -22579,7 +22684,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.ХарактеристикиНоменклатури");
                                 xmlWriter.WriteAttributeString("uid", record.ХарактеристикаНоменклатури.UnigueID.ToString());
-                                xmlWriter.WriteString(record.ХарактеристикаНоменклатури.GetPresentation());
+                                xmlWriter.WriteString(await record.ХарактеристикаНоменклатури.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //ХарактеристикаНоменклатури
                         xmlWriter.WriteStartElement("Серія");
@@ -22587,7 +22692,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.СеріїНоменклатури");
                                 xmlWriter.WriteAttributeString("uid", record.Серія.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Серія.GetPresentation());
+                                xmlWriter.WriteString(await record.Серія.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Серія
                         xmlWriter.WriteStartElement("Пакування");
@@ -22595,7 +22700,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.ПакуванняОдиниціВиміру");
                                 xmlWriter.WriteAttributeString("uid", record.Пакування.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Пакування.GetPresentation());
+                                xmlWriter.WriteString(await record.Пакування.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Пакування
                         xmlWriter.WriteStartElement("КількістьУпаковок");
@@ -22627,7 +22732,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.ПартіяТоварівКомпозит");
                                 xmlWriter.WriteAttributeString("uid", record.Партія.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Партія.GetPresentation());
+                                xmlWriter.WriteString(await record.Партія.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Партія
                         xmlWriter.WriteEndElement(); //row
@@ -22826,9 +22931,9 @@ namespace StorageAndTrade_1_0.Документи
 
         public string Назва { get; set; } = "";
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return Назва = base.BasePresentation(
+            return Назва = await base.BasePresentation(
               new string[] { "docname" }
             );
         }
@@ -23086,7 +23191,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Організації");
                     xmlWriter.WriteAttributeString("uid", obj.Організація.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Організація.GetPresentation());
+                    xmlWriter.WriteString(await obj.Організація.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Організація
             xmlWriter.WriteStartElement("Склад");
@@ -23094,7 +23199,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Склади");
                     xmlWriter.WriteAttributeString("uid", obj.Склад.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Склад.GetPresentation());
+                    xmlWriter.WriteString(await obj.Склад.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Склад
             xmlWriter.WriteStartElement("Валюта");
@@ -23102,7 +23207,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Валюти");
                     xmlWriter.WriteAttributeString("uid", obj.Валюта.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Валюта.GetPresentation());
+                    xmlWriter.WriteString(await obj.Валюта.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Валюта
             xmlWriter.WriteStartElement("Підрозділ");
@@ -23110,7 +23215,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.СтруктураПідприємства");
                     xmlWriter.WriteAttributeString("uid", obj.Підрозділ.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Підрозділ.GetPresentation());
+                    xmlWriter.WriteString(await obj.Підрозділ.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Підрозділ
             xmlWriter.WriteStartElement("СумаДокументу");
@@ -23130,7 +23235,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
                     xmlWriter.WriteAttributeString("uid", obj.Автор.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Автор.GetPresentation());
+                    xmlWriter.WriteString(await obj.Автор.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Автор
             xmlWriter.WriteStartElement("ГосподарськаОперація");
@@ -23179,7 +23284,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.Номенклатура");
                                 xmlWriter.WriteAttributeString("uid", record.Номенклатура.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Номенклатура.GetPresentation());
+                                xmlWriter.WriteString(await record.Номенклатура.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Номенклатура
                         xmlWriter.WriteStartElement("ХарактеристикаНоменклатури");
@@ -23187,7 +23292,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.ХарактеристикиНоменклатури");
                                 xmlWriter.WriteAttributeString("uid", record.ХарактеристикаНоменклатури.UnigueID.ToString());
-                                xmlWriter.WriteString(record.ХарактеристикаНоменклатури.GetPresentation());
+                                xmlWriter.WriteString(await record.ХарактеристикаНоменклатури.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //ХарактеристикаНоменклатури
                         xmlWriter.WriteStartElement("Серія");
@@ -23195,7 +23300,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.СеріїНоменклатури");
                                 xmlWriter.WriteAttributeString("uid", record.Серія.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Серія.GetPresentation());
+                                xmlWriter.WriteString(await record.Серія.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Серія
                         xmlWriter.WriteStartElement("Пакування");
@@ -23203,7 +23308,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.ПакуванняОдиниціВиміру");
                                 xmlWriter.WriteAttributeString("uid", record.Пакування.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Пакування.GetPresentation());
+                                xmlWriter.WriteString(await record.Пакування.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Пакування
                         xmlWriter.WriteStartElement("КількістьУпаковок");
@@ -23235,7 +23340,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.ПартіяТоварівКомпозит");
                                 xmlWriter.WriteAttributeString("uid", record.Партія.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Партія.GetPresentation());
+                                xmlWriter.WriteString(await record.Партія.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Партія
                         xmlWriter.WriteEndElement(); //row
@@ -23439,9 +23544,9 @@ namespace StorageAndTrade_1_0.Документи
 
         public string Назва { get; set; } = "";
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return Назва = base.BasePresentation(
+            return Назва = await base.BasePresentation(
               new string[] { "docname" }
             );
         }
@@ -23706,7 +23811,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Контрагенти");
                     xmlWriter.WriteAttributeString("uid", obj.Контрагент.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Контрагент.GetPresentation());
+                    xmlWriter.WriteString(await obj.Контрагент.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Контрагент
             xmlWriter.WriteStartElement("Організація");
@@ -23714,7 +23819,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Організації");
                     xmlWriter.WriteAttributeString("uid", obj.Організація.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Організація.GetPresentation());
+                    xmlWriter.WriteString(await obj.Організація.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Організація
             xmlWriter.WriteStartElement("Валюта");
@@ -23722,7 +23827,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Валюти");
                     xmlWriter.WriteAttributeString("uid", obj.Валюта.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Валюта.GetPresentation());
+                    xmlWriter.WriteString(await obj.Валюта.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Валюта
             xmlWriter.WriteStartElement("СумаДокументу");
@@ -23736,7 +23841,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Склади");
                     xmlWriter.WriteAttributeString("uid", obj.Склад.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Склад.GetPresentation());
+                    xmlWriter.WriteString(await obj.Склад.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Склад
             xmlWriter.WriteStartElement("Статус");
@@ -23760,7 +23865,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.БанківськіРахункиОрганізацій");
                     xmlWriter.WriteAttributeString("uid", obj.БанківськийРахунок.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.БанківськийРахунок.GetPresentation());
+                    xmlWriter.WriteString(await obj.БанківськийРахунок.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //БанківськийРахунок
             xmlWriter.WriteStartElement("БанківськийРахунокКонтрагента");
@@ -23768,7 +23873,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.БанківськіРахункиКонтрагентів");
                     xmlWriter.WriteAttributeString("uid", obj.БанківськийРахунокКонтрагента.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.БанківськийРахунокКонтрагента.GetPresentation());
+                    xmlWriter.WriteString(await obj.БанківськийРахунокКонтрагента.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //БанківськийРахунокКонтрагента
             xmlWriter.WriteStartElement("Каса");
@@ -23776,7 +23881,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Каси");
                     xmlWriter.WriteAttributeString("uid", obj.Каса.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Каса.GetPresentation());
+                    xmlWriter.WriteString(await obj.Каса.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Каса
             xmlWriter.WriteStartElement("ГосподарськаОперація");
@@ -23792,7 +23897,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.ДоговориКонтрагентів");
                     xmlWriter.WriteAttributeString("uid", obj.Договір.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Договір.GetPresentation());
+                    xmlWriter.WriteString(await obj.Договір.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Договір
             xmlWriter.WriteStartElement("Підрозділ");
@@ -23800,7 +23905,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.СтруктураПідприємства");
                     xmlWriter.WriteAttributeString("uid", obj.Підрозділ.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Підрозділ.GetPresentation());
+                    xmlWriter.WriteString(await obj.Підрозділ.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Підрозділ
             xmlWriter.WriteStartElement("Автор");
@@ -23808,7 +23913,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
                     xmlWriter.WriteAttributeString("uid", obj.Автор.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Автор.GetPresentation());
+                    xmlWriter.WriteString(await obj.Автор.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Автор
             xmlWriter.WriteStartElement("Коментар");
@@ -23822,7 +23927,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
                     xmlWriter.WriteAttributeString("uid", obj.Менеджер.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Менеджер.GetPresentation());
+                    xmlWriter.WriteString(await obj.Менеджер.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Менеджер
             xmlWriter.WriteStartElement("КлючовіСловаДляПошуку");
@@ -23857,7 +23962,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.Номенклатура");
                                 xmlWriter.WriteAttributeString("uid", record.Номенклатура.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Номенклатура.GetPresentation());
+                                xmlWriter.WriteString(await record.Номенклатура.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Номенклатура
                         xmlWriter.WriteStartElement("ХарактеристикаНоменклатури");
@@ -23865,7 +23970,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.ХарактеристикиНоменклатури");
                                 xmlWriter.WriteAttributeString("uid", record.ХарактеристикаНоменклатури.UnigueID.ToString());
-                                xmlWriter.WriteString(record.ХарактеристикаНоменклатури.GetPresentation());
+                                xmlWriter.WriteString(await record.ХарактеристикаНоменклатури.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //ХарактеристикаНоменклатури
                         xmlWriter.WriteStartElement("Пакування");
@@ -23873,7 +23978,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.ПакуванняОдиниціВиміру");
                                 xmlWriter.WriteAttributeString("uid", record.Пакування.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Пакування.GetPresentation());
+                                xmlWriter.WriteString(await record.Пакування.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Пакування
                         xmlWriter.WriteStartElement("КількістьУпаковок");
@@ -23893,7 +23998,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.ВидиЦін");
                                 xmlWriter.WriteAttributeString("uid", record.ВидЦіни.UnigueID.ToString());
-                                xmlWriter.WriteString(record.ВидЦіни.GetPresentation());
+                                xmlWriter.WriteString(await record.ВидЦіни.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //ВидЦіни
                         xmlWriter.WriteStartElement("Ціна");
@@ -23919,7 +24024,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.Склади");
                                 xmlWriter.WriteAttributeString("uid", record.Склад.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Склад.GetPresentation());
+                                xmlWriter.WriteString(await record.Склад.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Склад
                         xmlWriter.WriteEndElement(); //row
@@ -24158,9 +24263,9 @@ namespace StorageAndTrade_1_0.Документи
 
         public string Назва { get; set; } = "";
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return Назва = base.BasePresentation(
+            return Назва = await base.BasePresentation(
               new string[] { "docname" }
             );
         }
@@ -24432,7 +24537,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Склади");
                     xmlWriter.WriteAttributeString("uid", obj.Склад.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Склад.GetPresentation());
+                    xmlWriter.WriteString(await obj.Склад.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Склад
             xmlWriter.WriteStartElement("Автор");
@@ -24440,7 +24545,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
                     xmlWriter.WriteAttributeString("uid", obj.Автор.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Автор.GetPresentation());
+                    xmlWriter.WriteString(await obj.Автор.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Автор
             xmlWriter.WriteStartElement("Організація");
@@ -24448,7 +24553,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Організації");
                     xmlWriter.WriteAttributeString("uid", obj.Організація.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Організація.GetPresentation());
+                    xmlWriter.WriteString(await obj.Організація.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Організація
             xmlWriter.WriteStartElement("Підрозділ");
@@ -24456,7 +24561,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.СтруктураПідприємства");
                     xmlWriter.WriteAttributeString("uid", obj.Підрозділ.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Підрозділ.GetPresentation());
+                    xmlWriter.WriteString(await obj.Підрозділ.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Підрозділ
             xmlWriter.WriteStartElement("ДокументПоступлення");
@@ -24464,7 +24569,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Документи.ПоступленняТоварівТаПослуг");
                     xmlWriter.WriteAttributeString("uid", obj.ДокументПоступлення.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.ДокументПоступлення.GetPresentation());
+                    xmlWriter.WriteString(await obj.ДокументПоступлення.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //ДокументПоступлення
             xmlWriter.WriteStartElement("КлючовіСловаДляПошуку");
@@ -24499,7 +24604,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.Номенклатура");
                                 xmlWriter.WriteAttributeString("uid", record.Номенклатура.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Номенклатура.GetPresentation());
+                                xmlWriter.WriteString(await record.Номенклатура.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Номенклатура
                         xmlWriter.WriteStartElement("ХарактеристикаНоменклатури");
@@ -24507,7 +24612,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.ХарактеристикиНоменклатури");
                                 xmlWriter.WriteAttributeString("uid", record.ХарактеристикаНоменклатури.UnigueID.ToString());
-                                xmlWriter.WriteString(record.ХарактеристикаНоменклатури.GetPresentation());
+                                xmlWriter.WriteString(await record.ХарактеристикаНоменклатури.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //ХарактеристикаНоменклатури
                         xmlWriter.WriteStartElement("Серія");
@@ -24515,7 +24620,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.СеріїНоменклатури");
                                 xmlWriter.WriteAttributeString("uid", record.Серія.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Серія.GetPresentation());
+                                xmlWriter.WriteString(await record.Серія.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Серія
                         xmlWriter.WriteStartElement("Пакування");
@@ -24523,7 +24628,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.ПакуванняОдиниціВиміру");
                                 xmlWriter.WriteAttributeString("uid", record.Пакування.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Пакування.GetPresentation());
+                                xmlWriter.WriteString(await record.Пакування.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Пакування
                         xmlWriter.WriteStartElement("КількістьУпаковок");
@@ -24543,7 +24648,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.СкладськіКомірки");
                                 xmlWriter.WriteAttributeString("uid", record.Комірка.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Комірка.GetPresentation());
+                                xmlWriter.WriteString(await record.Комірка.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Комірка
                         xmlWriter.WriteEndElement(); //row
@@ -24737,9 +24842,9 @@ namespace StorageAndTrade_1_0.Документи
 
         public string Назва { get; set; } = "";
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return Назва = base.BasePresentation(
+            return Назва = await base.BasePresentation(
               new string[] { "docname" }
             );
         }
@@ -24998,7 +25103,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Склади");
                     xmlWriter.WriteAttributeString("uid", obj.Склад.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Склад.GetPresentation());
+                    xmlWriter.WriteString(await obj.Склад.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Склад
             xmlWriter.WriteStartElement("Автор");
@@ -25006,7 +25111,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
                     xmlWriter.WriteAttributeString("uid", obj.Автор.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Автор.GetPresentation());
+                    xmlWriter.WriteString(await obj.Автор.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Автор
             xmlWriter.WriteStartElement("Організація");
@@ -25014,7 +25119,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Організації");
                     xmlWriter.WriteAttributeString("uid", obj.Організація.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Організація.GetPresentation());
+                    xmlWriter.WriteString(await obj.Організація.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Організація
             xmlWriter.WriteStartElement("Підрозділ");
@@ -25022,7 +25127,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.СтруктураПідприємства");
                     xmlWriter.WriteAttributeString("uid", obj.Підрозділ.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Підрозділ.GetPresentation());
+                    xmlWriter.WriteString(await obj.Підрозділ.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Підрозділ
             xmlWriter.WriteStartElement("КлючовіСловаДляПошуку");
@@ -25057,7 +25162,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.Номенклатура");
                                 xmlWriter.WriteAttributeString("uid", record.Номенклатура.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Номенклатура.GetPresentation());
+                                xmlWriter.WriteString(await record.Номенклатура.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Номенклатура
                         xmlWriter.WriteStartElement("ХарактеристикаНоменклатури");
@@ -25065,7 +25170,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.ХарактеристикиНоменклатури");
                                 xmlWriter.WriteAttributeString("uid", record.ХарактеристикаНоменклатури.UnigueID.ToString());
-                                xmlWriter.WriteString(record.ХарактеристикаНоменклатури.GetPresentation());
+                                xmlWriter.WriteString(await record.ХарактеристикаНоменклатури.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //ХарактеристикаНоменклатури
                         xmlWriter.WriteStartElement("Серія");
@@ -25073,7 +25178,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.СеріїНоменклатури");
                                 xmlWriter.WriteAttributeString("uid", record.Серія.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Серія.GetPresentation());
+                                xmlWriter.WriteString(await record.Серія.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Серія
                         xmlWriter.WriteStartElement("Пакування");
@@ -25081,7 +25186,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.ПакуванняОдиниціВиміру");
                                 xmlWriter.WriteAttributeString("uid", record.Пакування.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Пакування.GetPresentation());
+                                xmlWriter.WriteString(await record.Пакування.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Пакування
                         xmlWriter.WriteStartElement("КількістьУпаковок");
@@ -25101,7 +25206,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.СкладськіКомірки");
                                 xmlWriter.WriteAttributeString("uid", record.КоміркаВідправник.UnigueID.ToString());
-                                xmlWriter.WriteString(record.КоміркаВідправник.GetPresentation());
+                                xmlWriter.WriteString(await record.КоміркаВідправник.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //КоміркаВідправник
                         xmlWriter.WriteStartElement("КоміркаОтримувач");
@@ -25109,7 +25214,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.СкладськіКомірки");
                                 xmlWriter.WriteAttributeString("uid", record.КоміркаОтримувач.UnigueID.ToString());
-                                xmlWriter.WriteString(record.КоміркаОтримувач.GetPresentation());
+                                xmlWriter.WriteString(await record.КоміркаОтримувач.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //КоміркаОтримувач
                         xmlWriter.WriteEndElement(); //row
@@ -25298,9 +25403,9 @@ namespace StorageAndTrade_1_0.Документи
 
         public string Назва { get; set; } = "";
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return Назва = base.BasePresentation(
+            return Назва = await base.BasePresentation(
               new string[] { "docname" }
             );
         }
@@ -25564,7 +25669,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Склади");
                     xmlWriter.WriteAttributeString("uid", obj.Склад.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Склад.GetPresentation());
+                    xmlWriter.WriteString(await obj.Склад.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Склад
             xmlWriter.WriteStartElement("Автор");
@@ -25572,7 +25677,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
                     xmlWriter.WriteAttributeString("uid", obj.Автор.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Автор.GetPresentation());
+                    xmlWriter.WriteString(await obj.Автор.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Автор
             xmlWriter.WriteStartElement("Організація");
@@ -25580,7 +25685,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Організації");
                     xmlWriter.WriteAttributeString("uid", obj.Організація.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Організація.GetPresentation());
+                    xmlWriter.WriteString(await obj.Організація.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Організація
             xmlWriter.WriteStartElement("Підрозділ");
@@ -25588,7 +25693,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.СтруктураПідприємства");
                     xmlWriter.WriteAttributeString("uid", obj.Підрозділ.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Підрозділ.GetPresentation());
+                    xmlWriter.WriteString(await obj.Підрозділ.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Підрозділ
             xmlWriter.WriteStartElement("ДокументРеалізації");
@@ -25596,7 +25701,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Документи.РеалізаціяТоварівТаПослуг");
                     xmlWriter.WriteAttributeString("uid", obj.ДокументРеалізації.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.ДокументРеалізації.GetPresentation());
+                    xmlWriter.WriteString(await obj.ДокументРеалізації.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //ДокументРеалізації
             xmlWriter.WriteStartElement("КлючовіСловаДляПошуку");
@@ -25631,7 +25736,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.Номенклатура");
                                 xmlWriter.WriteAttributeString("uid", record.Номенклатура.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Номенклатура.GetPresentation());
+                                xmlWriter.WriteString(await record.Номенклатура.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Номенклатура
                         xmlWriter.WriteStartElement("ХарактеристикаНоменклатури");
@@ -25639,7 +25744,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.ХарактеристикиНоменклатури");
                                 xmlWriter.WriteAttributeString("uid", record.ХарактеристикаНоменклатури.UnigueID.ToString());
-                                xmlWriter.WriteString(record.ХарактеристикаНоменклатури.GetPresentation());
+                                xmlWriter.WriteString(await record.ХарактеристикаНоменклатури.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //ХарактеристикаНоменклатури
                         xmlWriter.WriteStartElement("Серія");
@@ -25647,7 +25752,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.СеріїНоменклатури");
                                 xmlWriter.WriteAttributeString("uid", record.Серія.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Серія.GetPresentation());
+                                xmlWriter.WriteString(await record.Серія.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Серія
                         xmlWriter.WriteStartElement("Пакування");
@@ -25655,7 +25760,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.ПакуванняОдиниціВиміру");
                                 xmlWriter.WriteAttributeString("uid", record.Пакування.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Пакування.GetPresentation());
+                                xmlWriter.WriteString(await record.Пакування.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Пакування
                         xmlWriter.WriteStartElement("КількістьУпаковок");
@@ -25675,7 +25780,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.СкладськіКомірки");
                                 xmlWriter.WriteAttributeString("uid", record.Комірка.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Комірка.GetPresentation());
+                                xmlWriter.WriteString(await record.Комірка.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Комірка
                         xmlWriter.WriteEndElement(); //row
@@ -25869,9 +25974,9 @@ namespace StorageAndTrade_1_0.Документи
 
         public string Назва { get; set; } = "";
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return Назва = base.BasePresentation(
+            return Назва = await base.BasePresentation(
               new string[] { "docname" }
             );
         }
@@ -26118,7 +26223,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Організації");
                     xmlWriter.WriteAttributeString("uid", obj.Організація.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Організація.GetPresentation());
+                    xmlWriter.WriteString(await obj.Організація.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Організація
             xmlWriter.WriteStartElement("Склад");
@@ -26126,7 +26231,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Склади");
                     xmlWriter.WriteAttributeString("uid", obj.Склад.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Склад.GetPresentation());
+                    xmlWriter.WriteString(await obj.Склад.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Склад
             xmlWriter.WriteStartElement("Коментар");
@@ -26140,7 +26245,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
                     xmlWriter.WriteAttributeString("uid", obj.Автор.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Автор.GetPresentation());
+                    xmlWriter.WriteString(await obj.Автор.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Автор
             xmlWriter.WriteStartElement("Підрозділ");
@@ -26148,7 +26253,7 @@ namespace StorageAndTrade_1_0.Документи
             
                     xmlWriter.WriteAttributeString("pointer", "Довідники.СтруктураПідприємства");
                     xmlWriter.WriteAttributeString("uid", obj.Підрозділ.UnigueID.ToString());
-                    xmlWriter.WriteString(obj.Підрозділ.GetPresentation());
+                    xmlWriter.WriteString(await obj.Підрозділ.GetPresentation());
                   
             xmlWriter.WriteEndElement(); //Підрозділ
             xmlWriter.WriteStartElement("Основа");
@@ -26189,7 +26294,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.Номенклатура");
                                 xmlWriter.WriteAttributeString("uid", record.Номенклатура.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Номенклатура.GetPresentation());
+                                xmlWriter.WriteString(await record.Номенклатура.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Номенклатура
                         xmlWriter.WriteStartElement("Комірка");
@@ -26197,7 +26302,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.СкладськіКомірки");
                                 xmlWriter.WriteAttributeString("uid", record.Комірка.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Комірка.GetPresentation());
+                                xmlWriter.WriteString(await record.Комірка.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Комірка
                         xmlWriter.WriteStartElement("Пакування");
@@ -26205,7 +26310,7 @@ namespace StorageAndTrade_1_0.Документи
                         
                                 xmlWriter.WriteAttributeString("pointer", "Довідники.ПакуванняОдиниціВиміру");
                                 xmlWriter.WriteAttributeString("uid", record.Пакування.UnigueID.ToString());
-                                xmlWriter.WriteString(record.Пакування.GetPresentation());
+                                xmlWriter.WriteString(await record.Пакування.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //Пакування
                         xmlWriter.WriteEndElement(); //row
@@ -26394,9 +26499,9 @@ namespace StorageAndTrade_1_0.Документи
 
         public string Назва { get; set; } = "";
 
-        public string GetPresentation()
+        public async ValueTask<string> GetPresentation()
         {
-            return Назва = base.BasePresentation(
+            return Назва = await base.BasePresentation(
               new string[] { "docname" }
             );
         }

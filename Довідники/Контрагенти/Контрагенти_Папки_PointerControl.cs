@@ -30,8 +30,12 @@ namespace StorageAndTrade
 {
     class Контрагенти_Папки_PointerControl : PointerControl
     {
+        event EventHandler<Контрагенти_Папки_Pointer>? PointerChanged;
+
         public Контрагенти_Папки_PointerControl()
         {
+            PointerChanged += OnPointerChanged;
+
             pointer = new Контрагенти_Папки_Pointer();
             WidthPresentation = 300;
             Caption = $"{Контрагенти_Папки_Const.FULLNAME}:";
@@ -49,12 +53,13 @@ namespace StorageAndTrade
             set
             {
                 pointer = value;
-
-                if (pointer != null)
-                    Presentation = pointer.GetPresentation();
-                else
-                    Presentation = "";
+                PointerChanged?.Invoke(this, pointer);
             }
+        }
+
+        protected async void OnPointerChanged(object? sender, Контрагенти_Папки_Pointer pointer)
+        {
+            Presentation = pointer != null ? await pointer.GetPresentation() : "";
         }
 
         protected override void OpenSelect(object? sender, EventArgs args)

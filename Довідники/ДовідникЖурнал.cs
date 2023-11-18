@@ -49,8 +49,8 @@ namespace StorageAndTrade
             PackStart(HBoxTop, false, false, 10);
 
             //Пошук
-            ПошукПовнотекстовий.Select = LoadRecords_OnSearch;
-            ПошукПовнотекстовий.Clear = LoadRecords;
+            ПошукПовнотекстовий.Select = async (string x) => { await LoadRecords_OnSearch(x); };
+            ПошукПовнотекстовий.Clear = async () => { await LoadRecords(); };
             HBoxTop.PackStart(ПошукПовнотекстовий, false, false, 2);
 
             CreateToolbar();
@@ -118,9 +118,9 @@ namespace StorageAndTrade
 
         #region Virtual Function
 
-        public virtual void LoadRecords() { }
+        public virtual ValueTask LoadRecords() { return new ValueTask(); }
 
-        protected virtual void LoadRecords_OnSearch(string searchText) { }
+        protected virtual ValueTask LoadRecords_OnSearch(string searchText) { return new ValueTask(); }
 
         protected virtual void OpenPageElement(bool IsNew, UnigueID? unigueID = null) { }
 
@@ -128,10 +128,10 @@ namespace StorageAndTrade
 
         protected virtual ValueTask<UnigueID?> Copy(UnigueID unigueID) { return new ValueTask<UnigueID?>(); }
 
-        public virtual void CallBack_LoadRecords(UnigueID? selectPointer)
+        public virtual async void CallBack_LoadRecords(UnigueID? selectPointer)
         {
             SelectPointerItem = selectPointer;
-            LoadRecords();
+            await LoadRecords();
 
             Console.WriteLine(selectPointer);
         }
@@ -187,7 +187,7 @@ namespace StorageAndTrade
             }
         }
 
-        void OnKeyReleaseEvent(object? sender, KeyReleaseEventArgs args)
+        async void OnKeyReleaseEvent(object? sender, KeyReleaseEventArgs args)
         {
             /*
             if (args.Event.State == (Gdk.ModifierType.ControlMask | Gdk.ModifierType.Mod2Mask))
@@ -212,7 +212,7 @@ namespace StorageAndTrade
                     }
                 case Gdk.Key.F5:
                     {
-                        LoadRecords();
+                        await LoadRecords();
                         break;
                     }
                 case Gdk.Key.KP_Enter:
@@ -280,9 +280,9 @@ namespace StorageAndTrade
             }
         }
 
-        void OnRefreshClick(object? sender, EventArgs args)
+        async void OnRefreshClick(object? sender, EventArgs args)
         {
-            LoadRecords();
+            await LoadRecords();
         }
 
         async void OnDeleteClick(object? sender, EventArgs args)
@@ -305,7 +305,7 @@ namespace StorageAndTrade
                         SelectPointerItem = unigueID;
                     }
 
-                    LoadRecords();
+                    await LoadRecords();
                 }
             }
         }
@@ -331,7 +331,7 @@ namespace StorageAndTrade
                             SelectPointerItem = newUnigueID;
                     }
 
-                    LoadRecords();
+                    await LoadRecords();
                 }
             }
         }

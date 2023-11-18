@@ -41,7 +41,7 @@ namespace StorageAndTrade
             //Сторінка
             {
                 LinkButton linkPage = new LinkButton($" {Номенклатура_Const.FULLNAME}") { Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
-                linkPage.Clicked += (object? sender, EventArgs args) =>
+                linkPage.Clicked += async (object? sender, EventArgs args) =>
                 {
                     Номенклатура page = new Номенклатура()
                     {
@@ -51,7 +51,7 @@ namespace StorageAndTrade
 
                     Program.GeneralForm?.CreateNotebookPage($"Вибір - {Номенклатура_Const.FULLNAME}", () => { return page; }, true);
 
-                    page.LoadRecords();
+                    await page.LoadRecords();
                 };
 
                 HBoxTop.PackStart(linkPage, false, false, 0);
@@ -69,7 +69,7 @@ namespace StorageAndTrade
                     };
 
                     Program.GeneralForm?.CreateNotebookPage($"{Номенклатура_Const.FULLNAME} *", () => { return page; }, true);
-                    
+
                     page.SetValue();
 
                     page.Назва.Text = Пошук.Text;
@@ -79,19 +79,19 @@ namespace StorageAndTrade
             }
         }
 
-        public override void LoadRecords()
+        public override async ValueTask LoadRecords()
         {
             ТабличніСписки.Номенклатура_ЗаписиШвидкийВибір.DirectoryPointerItem = DirectoryPointerItem;
 
             ТабличніСписки.Номенклатура_ЗаписиШвидкийВибір.Where.Clear();
 
-            ТабличніСписки.Номенклатура_ЗаписиШвидкийВибір.LoadRecords();
+            await ТабличніСписки.Номенклатура_ЗаписиШвидкийВибір.LoadRecords();
 
             if (ТабличніСписки.Номенклатура_ЗаписиШвидкийВибір.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.Номенклатура_ЗаписиШвидкийВибір.SelectPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override void LoadRecords_OnSearch(string searchText)
+        protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
             searchText = searchText.ToLower().Trim();
 
@@ -110,7 +110,7 @@ namespace StorageAndTrade
             ТабличніСписки.Номенклатура_ЗаписиШвидкийВибір.Where.Add(
                 new Where(Comparison.OR, Номенклатура_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
-            ТабличніСписки.Номенклатура_ЗаписиШвидкийВибір.LoadRecords();
+            await ТабличніСписки.Номенклатура_ЗаписиШвидкийВибір.LoadRecords();
         }
     }
 }

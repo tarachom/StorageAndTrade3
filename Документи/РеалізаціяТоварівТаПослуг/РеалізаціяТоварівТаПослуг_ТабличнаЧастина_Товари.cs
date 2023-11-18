@@ -148,7 +148,7 @@ namespace StorageAndTrade
             }
             public static async void ПісляЗміни_Номенклатура(Запис запис)
             {
-                запис.Номенклатура.GetPresentation();
+                await запис.Номенклатура.GetPresentation();
 
                 Номенклатура_Objest? номенклатура_Objest = await запис.Номенклатура.GetDirectoryObject();
                 if (номенклатура_Objest != null && !номенклатура_Objest.ОдиницяВиміру.IsEmpty())
@@ -166,37 +166,37 @@ namespace StorageAndTrade
                         запис.КількістьУпаковок = 1;
                 }
             }
-            public static void ПісляЗміни_Характеристика(Запис запис)
+            public static async void ПісляЗміни_Характеристика(Запис запис)
             {
-                запис.Характеристика.GetPresentation();
+                await запис.Характеристика.GetPresentation();
             }
-            public static void ПісляЗміни_Серія(Запис запис)
+            public static async void ПісляЗміни_Серія(Запис запис)
             {
-                запис.Серія.GetPresentation();
+                await запис.Серія.GetPresentation();
             }
-            public static void ПісляЗміни_Пакування(Запис запис)
+            public static async void ПісляЗміни_Пакування(Запис запис)
             {
-                запис.Пакування.GetPresentation();
+                await запис.Пакування.GetPresentation();
             }
-            public static void ПісляЗміни_ВидЦіни(Запис запис)
+            public static async void ПісляЗміни_ВидЦіни(Запис запис)
             {
-                запис.ВидЦіни.GetPresentation();
+                await запис.ВидЦіни.GetPresentation();
             }
-            public static void ПісляЗміни_ЗамовленняКлієнта(Запис запис)
+            public static async void ПісляЗміни_ЗамовленняКлієнта(Запис запис)
             {
-                запис.ЗамовленняКлієнта.GetPresentation();
+                await запис.ЗамовленняКлієнта.GetPresentation();
             }
-            public static void ПісляЗміни_РахункуФактури(Запис запис)
+            public static async void ПісляЗміни_РахункуФактури(Запис запис)
             {
-                запис.РахунокФактура.GetPresentation();
+                await запис.РахунокФактура.GetPresentation();
             }
-            public static void ПісляЗміни_Склад(Запис запис)
+            public static async void ПісляЗміни_Склад(Запис запис)
             {
-                запис.Склад.GetPresentation();
+                await запис.Склад.GetPresentation();
             }
-            public static void ПісляЗміни_Партія(Запис запис)
+            public static async void ПісляЗміни_Партія(Запис запис)
             {
-                запис.Партія.GetPresentation();
+                await запис.Партія.GetPresentation();
             }
             public static void ПісляЗміни_КількістьАбоЦіна(Запис запис)
             {
@@ -614,7 +614,7 @@ LIMIT 1
             TreeViewGrid.AppendColumn(new TreeViewColumn());
         }
 
-        protected override void ButtonSelect(TreeIter iter, int rowNumber, int colNumber, Popover popoverSmallSelect)
+        protected override async void ButtonSelect(TreeIter iter, int rowNumber, int colNumber, Popover popoverSmallSelect)
         {
             Запис запис = Записи[rowNumber];
 
@@ -635,7 +635,7 @@ LIMIT 1
                         popoverSmallSelect.Add(page);
                         popoverSmallSelect.ShowAll();
 
-                        page.LoadRecords();
+                        await page.LoadRecords();
                         break;
                     }
                 case Columns.Характеристика:
@@ -655,7 +655,7 @@ LIMIT 1
                         popoverSmallSelect.Add(page);
                         popoverSmallSelect.ShowAll();
 
-                        page.LoadRecords();
+                        await page.LoadRecords();
                         break;
                     }
                 case Columns.Серія:
@@ -672,7 +672,7 @@ LIMIT 1
                         popoverSmallSelect.Add(page);
                         popoverSmallSelect.ShowAll();
 
-                        page.LoadRecords();
+                        await page.LoadRecords();
                         break;
                     }
                 case Columns.Пакування:
@@ -689,7 +689,7 @@ LIMIT 1
                         popoverSmallSelect.Add(page);
                         popoverSmallSelect.ShowAll();
 
-                        page.LoadRecords();
+                        await page.LoadRecords();
                         break;
                     }
                 case Columns.ВидЦіни:
@@ -707,7 +707,7 @@ LIMIT 1
                         popoverSmallSelect.Add(page);
                         popoverSmallSelect.ShowAll();
 
-                        page.LoadRecords();
+                        await page.LoadRecords();
                         break;
                     }
                 case Columns.ЗамовленняКлієнта:
@@ -760,7 +760,7 @@ LIMIT 1
                         popoverSmallSelect.Add(page);
                         popoverSmallSelect.ShowAll();
 
-                        page.LoadRecords();
+                        await page.LoadRecords();
                         break;
                     }
                 case Columns.Партія:
@@ -778,7 +778,7 @@ LIMIT 1
                         popoverSmallSelect.Add(page);
                         popoverSmallSelect.ShowAll();
 
-                        page.LoadRecords();
+                        await page.LoadRecords();
                         break;
                     }
             }

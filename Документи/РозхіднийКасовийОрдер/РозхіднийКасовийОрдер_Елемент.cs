@@ -107,7 +107,7 @@ namespace StorageAndTrade
                 if (Договір.Pointer.IsEmpty())
                 {
                     ДоговориКонтрагентів_Pointer? договірКонтрагента =
-                    ФункціїДляДокументів.ОсновнийДоговірДляКонтрагента(Контрагент.Pointer, Перелічення.ТипДоговорів.ЗПостачальниками);
+                    await ФункціїДляДокументів.ОсновнийДоговірДляКонтрагента(Контрагент.Pointer, Перелічення.ТипДоговорів.ЗПостачальниками);
 
                     if (договірКонтрагента != null)
                         Договір.Pointer = договірКонтрагента;
@@ -292,7 +292,7 @@ namespace StorageAndTrade
         protected override async ValueTask<bool> Save()
         {
             bool isSave;
-            
+
             try
             {
                 isSave = await РозхіднийКасовийОрдер_Objest.Save();

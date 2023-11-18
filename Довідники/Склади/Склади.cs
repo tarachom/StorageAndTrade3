@@ -44,7 +44,7 @@ namespace StorageAndTrade
 
             //Склади приміщення
             LinkButton linkButtonHar = new LinkButton($" {СкладськіПриміщення_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
-            linkButtonHar.Clicked += (object? sender, EventArgs args) =>
+            linkButtonHar.Clicked += async (object? sender, EventArgs args) =>
             {
                 СкладськіПриміщення page = new СкладськіПриміщення();
 
@@ -53,7 +53,7 @@ namespace StorageAndTrade
 
                 Program.GeneralForm?.CreateNotebookPage($"{СкладськіПриміщення_Const.FULLNAME}", () => { return page; });
 
-                page.LoadRecords();
+                await page.LoadRecords();
             };
 
             HBoxTop.PackStart(linkButtonHar, false, false, 10);
@@ -72,7 +72,7 @@ namespace StorageAndTrade
 
         #region Override
 
-        public override async void LoadRecords()
+        public override async ValueTask LoadRecords()
         {
             if (DirectoryPointerItem != null || SelectPointerItem != null)
             {
@@ -86,7 +86,7 @@ namespace StorageAndTrade
             ДеревоПапок.LoadTree();
         }
 
-        void LoadRecords_TreeCallBack()
+        async void LoadRecords_TreeCallBack()
         {
             ТабличніСписки.Склади_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.Склади_Записи.DirectoryPointerItem = DirectoryPointerItem;
@@ -97,7 +97,7 @@ namespace StorageAndTrade
                 ТабличніСписки.Склади_Записи.Where.Add(new Where(Склади_Const.Папка, Comparison.EQ,
                     ДеревоПапок.DirectoryPointerItem?.UGuid ?? new UnigueID().UGuid));
 
-            ТабличніСписки.Склади_Записи.LoadRecords();
+            await ТабличніСписки.Склади_Записи.LoadRecords();
 
             if (ТабличніСписки.Склади_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.Склади_Записи.SelectPath, TreeViewGrid.Columns[0], false);
@@ -105,7 +105,7 @@ namespace StorageAndTrade
             TreeViewGrid.GrabFocus();
         }
 
-        protected override void LoadRecords_OnSearch(string searchText)
+        protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
             searchText = searchText.ToLower().Trim();
 
@@ -124,7 +124,7 @@ namespace StorageAndTrade
             ТабличніСписки.Склади_Записи.Where.Add(
                 new Where(Comparison.OR, Склади_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
-            ТабличніСписки.Склади_Записи.LoadRecords();
+            await ТабличніСписки.Склади_Записи.LoadRecords();
 
             if (ТабличніСписки.Склади_Записи.FirstPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.Склади_Записи.FirstPath, TreeViewGrid.Columns[0], false);
@@ -201,9 +201,9 @@ namespace StorageAndTrade
 
         #endregion
 
-        void OnCheckButtonIsHierarchyClicked(object? sender, EventArgs args)
+        async void OnCheckButtonIsHierarchyClicked(object? sender, EventArgs args)
         {
-            LoadRecords();
+            await LoadRecords();
         }
     }
 }

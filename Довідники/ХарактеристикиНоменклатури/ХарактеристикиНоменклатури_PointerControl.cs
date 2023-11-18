@@ -30,8 +30,12 @@ namespace StorageAndTrade
 {
     class ХарактеристикиНоменклатури_PointerControl : PointerControl
     {
+        event EventHandler<ХарактеристикиНоменклатури_Pointer>? PointerChanged;
+
         public ХарактеристикиНоменклатури_PointerControl()
         {
+            PointerChanged += OnPointerChanged;
+
             pointer = new ХарактеристикиНоменклатури_Pointer();
             WidthPresentation = 300;
             Caption = $"{ХарактеристикиНоменклатури_Const.FULLNAME}:";
@@ -47,17 +51,18 @@ namespace StorageAndTrade
             set
             {
                 pointer = value;
-
-                if (pointer != null)
-                    Presentation = pointer.GetPresentation();
-                else
-                    Presentation = "";
+                PointerChanged?.Invoke(this, pointer);
             }
+        }
+
+        protected async void OnPointerChanged(object? sender, ХарактеристикиНоменклатури_Pointer pointer)
+        {
+            Presentation = pointer != null ? await pointer.GetPresentation() : "";
         }
 
         public Номенклатура_Pointer НоменклатураВласник { get; set; } = new Номенклатура_Pointer();
 
-        protected override void OpenSelect(object? sender, EventArgs args)
+        protected override async void OpenSelect(object? sender, EventArgs args)
         {
             Popover PopoverSmallSelect = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
 
@@ -77,7 +82,7 @@ namespace StorageAndTrade
             PopoverSmallSelect.Add(page);
             PopoverSmallSelect.ShowAll();
 
-            page.LoadRecords();
+            await page.LoadRecords();
         }
 
         protected override void OnClear(object? sender, EventArgs args)

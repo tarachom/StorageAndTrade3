@@ -51,7 +51,12 @@ namespace StorageAndTrade
                 pointer = value;
 
                 if (pointer != null)
-                    Presentation = Functions.CompositePointerPresentation(pointer, out PointerName, out TypeCaption);
+                {
+                    // var asyncFunc = async () => { await Functions.CompositePointerPresentation(pointer); };
+                    // var r = asyncFunc.Invoke();
+                    // Console.WriteLine(r);
+                }
+                    //Presentation = ;
                 else
                     Presentation = PointerName = TypeCaption = "";
             }

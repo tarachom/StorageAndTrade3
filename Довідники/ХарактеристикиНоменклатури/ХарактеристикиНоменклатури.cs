@@ -41,9 +41,10 @@ namespace StorageAndTrade
             //Власник
             HBoxTop.PackStart(НоменклатураВласник, false, false, 2);
             НоменклатураВласник.Caption = $"{Номенклатура_Const.FULLNAME}:";
-            НоменклатураВласник.AfterSelectFunc = () =>
+            НоменклатураВласник.AfterSelectFunc = async () =>
             {
-                LoadRecords();
+                await
+                 LoadRecords();
             };
 
             //ШтрихКоди
@@ -72,7 +73,7 @@ namespace StorageAndTrade
 
         #region Override
 
-        public override void LoadRecords()
+        public override async ValueTask LoadRecords()
         {
             ТабличніСписки.ХарактеристикиНоменклатури_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.ХарактеристикиНоменклатури_Записи.DirectoryPointerItem = DirectoryPointerItem;
@@ -85,7 +86,7 @@ namespace StorageAndTrade
                     new Where(ХарактеристикиНоменклатури_Const.Номенклатура, Comparison.EQ, НоменклатураВласник.Pointer.UnigueID.UGuid));
             }
 
-            ТабличніСписки.ХарактеристикиНоменклатури_Записи.LoadRecords();
+            await ТабличніСписки.ХарактеристикиНоменклатури_Записи.LoadRecords();
 
             if (ТабличніСписки.ХарактеристикиНоменклатури_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.ХарактеристикиНоменклатури_Записи.SelectPath, TreeViewGrid.Columns[0], false);
@@ -93,7 +94,7 @@ namespace StorageAndTrade
             TreeViewGrid.GrabFocus();
         }
 
-        protected override void LoadRecords_OnSearch(string searchText)
+        protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
             searchText = searchText.ToLower().Trim();
 
@@ -108,7 +109,7 @@ namespace StorageAndTrade
             ТабличніСписки.ХарактеристикиНоменклатури_Записи.Where.Add(
                 new Where(ХарактеристикиНоменклатури_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
-            ТабличніСписки.ХарактеристикиНоменклатури_Записи.LoadRecords();
+            await ТабличніСписки.ХарактеристикиНоменклатури_Записи.LoadRecords();
 
             if (ТабличніСписки.ХарактеристикиНоменклатури_Записи.FirstPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.ХарактеристикиНоменклатури_Записи.FirstPath, TreeViewGrid.Columns[0], false);

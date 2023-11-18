@@ -62,8 +62,8 @@ namespace StorageAndTrade
             {
                 //Пошук 2
                 HBoxTop.PackStart(Пошук, false, false, 0);
-                Пошук.Select = LoadRecords_OnSearch;
-                Пошук.Clear = LoadRecords;
+                Пошук.Select = async (string x) => { await LoadRecords_OnSearch(x); };
+                Пошук.Clear = async () => { await LoadRecords(); };
             }
 
             ScrolledWindow scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In, WidthRequest = width, HeightRequest = height };
@@ -83,9 +83,9 @@ namespace StorageAndTrade
 
         #region Virtual Function
 
-        public virtual void LoadRecords() { }
+        public virtual ValueTask LoadRecords() { return new ValueTask(); }
 
-        protected virtual void LoadRecords_OnSearch(string searchText) { }
+        protected virtual ValueTask LoadRecords_OnSearch(string searchText) { return new ValueTask(); }
 
         #endregion
 

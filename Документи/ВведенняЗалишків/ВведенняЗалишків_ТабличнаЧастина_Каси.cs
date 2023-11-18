@@ -78,9 +78,9 @@ namespace StorageAndTrade
                 };
             }
 
-            public static void ПісляЗміни_Каса(Запис запис)
+            public static async void ПісляЗміни_Каса(Запис запис)
             {
-                запис.Каса.GetPresentation();
+                await запис.Каса.GetPresentation();
             }
         }
 
@@ -237,7 +237,7 @@ namespace StorageAndTrade
             TreeViewGrid.AppendColumn(new TreeViewColumn());
         }
 
-        protected override void ButtonSelect(TreeIter iter, int rowNumber, int colNumber, Popover popoverSmallSelect)
+        protected override async void ButtonSelect(TreeIter iter, int rowNumber, int colNumber, Popover popoverSmallSelect)
         {
             Запис запис = Записи[rowNumber];
 
@@ -257,7 +257,7 @@ namespace StorageAndTrade
                         popoverSmallSelect.Add(page);
                         popoverSmallSelect.ShowAll();
 
-                        page.LoadRecords();
+                        await page.LoadRecords();
                         break;
                     }
             }

@@ -169,7 +169,7 @@ namespace StorageAndTrade
                         ПоточнаДатаКурсу = ДатаКурсу;
                     }
 
-                    Валюти_Pointer валюти_Pointer = валюти_Select.FindByField(Валюти_Const.Код_R030, Код_R030);
+                    Валюти_Pointer валюти_Pointer = await валюти_Select.FindByField(Валюти_Const.Код_R030, Код_R030);
                     if (валюти_Pointer.IsEmpty())
                     {
                         Валюти_Objest валюти_Objest = new Валюти_Objest();

@@ -38,9 +38,9 @@ namespace StorageAndTrade
             //Власник
             HBoxTop.PackStart(КонтрагентВласник, false, false, 2);
             КонтрагентВласник.Caption = $"{Контрагенти_Const.FULLNAME}:";
-            КонтрагентВласник.AfterSelectFunc = () =>
+            КонтрагентВласник.AfterSelectFunc = async () =>
             {
-                LoadRecords();
+                await LoadRecords();
             };
 
             TreeViewGrid.Model = ТабличніСписки.ДоговориКонтрагентів_Записи.Store;
@@ -49,7 +49,7 @@ namespace StorageAndTrade
 
         #region Override
 
-        public override void LoadRecords()
+        public override async ValueTask LoadRecords()
         {
             ТабличніСписки.ДоговориКонтрагентів_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.ДоговориКонтрагентів_Записи.DirectoryPointerItem = DirectoryPointerItem;
@@ -62,7 +62,7 @@ namespace StorageAndTrade
                     new Where(ДоговориКонтрагентів_Const.Контрагент, Comparison.EQ, КонтрагентВласник.Pointer.UnigueID.UGuid));
             }
 
-            ТабличніСписки.ДоговориКонтрагентів_Записи.LoadRecords();
+            await ТабличніСписки.ДоговориКонтрагентів_Записи.LoadRecords();
 
             if (ТабличніСписки.ДоговориКонтрагентів_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.ДоговориКонтрагентів_Записи.SelectPath, TreeViewGrid.Columns[0], false);
@@ -70,7 +70,7 @@ namespace StorageAndTrade
             TreeViewGrid.GrabFocus();
         }
 
-        protected override void LoadRecords_OnSearch(string searchText)
+        protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
             searchText = searchText.ToLower().Trim();
 
@@ -91,7 +91,7 @@ namespace StorageAndTrade
             ТабличніСписки.ДоговориКонтрагентів_Записи.Where.Add(
                 new Where(Comparison.AND, ДоговориКонтрагентів_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
-            ТабличніСписки.ДоговориКонтрагентів_Записи.LoadRecords();
+            await ТабличніСписки.ДоговориКонтрагентів_Записи.LoadRecords();
 
             if (ТабличніСписки.ДоговориКонтрагентів_Записи.FirstPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.ДоговориКонтрагентів_Записи.FirstPath, TreeViewGrid.Columns[0], false);

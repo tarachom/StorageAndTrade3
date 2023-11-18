@@ -139,7 +139,7 @@ namespace StorageAndTrade
                             string Коротко = currentNode?.SelectSingleNode("Коротко")?.Value ?? "";
                             string ВиводитиКурсНаСтартову = currentNode?.SelectSingleNode("ВиводитиКурсНаСтартову")?.Value ?? "";
 
-                            Валюти_Pointer валюти_Pointer = валюти_Select.FindByField(Валюти_Const.Код_R030, Код_R030);
+                            Валюти_Pointer валюти_Pointer = await валюти_Select.FindByField(Валюти_Const.Код_R030, Код_R030);
                             if (валюти_Pointer.IsEmpty())
                             {
                                 Валюти_Objest валюти_Objest = new Валюти_Objest
@@ -181,7 +181,7 @@ namespace StorageAndTrade
                             string ЗначенняЗаЗамовчуванням = currentNode?.GetAttribute("ЗначенняЗаЗамовчуванням", "") ?? "";
                             string Назва = currentNode?.SelectSingleNode("Назва")?.Value ?? "";
 
-                            Організації_Pointer організації_Pointer = організації_Select.FindByField(Організації_Const.Назва, Назва);
+                            Організації_Pointer організації_Pointer = await організації_Select.FindByField(Організації_Const.Назва, Назва);
                             if (організації_Pointer.IsEmpty())
                             {
                                 Організації_Objest організації_Objest = new Організації_Objest { Назва = Назва };
@@ -218,13 +218,13 @@ namespace StorageAndTrade
                             string Назва = currentNode?.SelectSingleNode("Назва")?.Value ?? "";
                             string Валюта = currentNode?.SelectSingleNode("Валюта")?.Value ?? "";
 
-                            Каси_Pointer вказівник = вибірка.FindByField(Каси_Const.Назва, Назва);
+                            Каси_Pointer вказівник = await вибірка.FindByField(Каси_Const.Назва, Назва);
                             if (вказівник.IsEmpty())
                             {
                                 Каси_Objest обєкт = new Каси_Objest
                                 {
                                     Назва = Назва,
-                                    Валюта = new Валюти_Select().FindByField(Валюти_Const.Назва, Валюта)
+                                    Валюта = await new Валюти_Select().FindByField(Валюти_Const.Назва, Валюта)
                                 };
 
                                 обєкт.New();
@@ -260,7 +260,7 @@ namespace StorageAndTrade
                             string Назва = currentNode?.SelectSingleNode("Назва")?.Value ?? "";
                             string НазваПовна = currentNode?.SelectSingleNode("НазваПовна")?.Value ?? "";
 
-                            ПакуванняОдиниціВиміру_Pointer вказівник = вибірка.FindByField(ПакуванняОдиниціВиміру_Const.Назва, Назва);
+                            ПакуванняОдиниціВиміру_Pointer вказівник = await вибірка.FindByField(ПакуванняОдиниціВиміру_Const.Назва, Назва);
                             if (вказівник.IsEmpty())
                             {
                                 ПакуванняОдиниціВиміру_Objest обєкт = new ПакуванняОдиниціВиміру_Objest
@@ -306,7 +306,7 @@ namespace StorageAndTrade
                             if (!Enum.TryParse<Перелічення.ТипиНоменклатури>(ТипНоменклатуриТекст, true, out ТипНоменклатури))
                                 ТипНоменклатури = Перелічення.ТипиНоменклатури.Товар;
 
-                            ВидиНоменклатури_Pointer вказівник = вибірка.FindByField(ВидиНоменклатури_Const.Назва, Назва);
+                            ВидиНоменклатури_Pointer вказівник = await вибірка.FindByField(ВидиНоменклатури_Const.Назва, Назва);
                             if (вказівник.IsEmpty())
                             {
                                 ВидиНоменклатури_Objest обєкт = new ВидиНоменклатури_Objest
@@ -347,13 +347,13 @@ namespace StorageAndTrade
                             string Назва = currentNode?.SelectSingleNode("Назва")?.Value ?? "";
                             string Валюта = currentNode?.SelectSingleNode("Валюта")?.Value ?? "";
 
-                            ВидиЦін_Pointer вказівник = вибірка.FindByField(ВидиЦін_Const.Назва, Назва);
+                            ВидиЦін_Pointer вказівник = await вибірка.FindByField(ВидиЦін_Const.Назва, Назва);
                             if (вказівник.IsEmpty())
                             {
                                 ВидиЦін_Objest обєкт = new ВидиЦін_Objest
                                 {
                                     Назва = Назва,
-                                    Валюта = new Валюти_Select().FindByField(Валюти_Const.Назва, Валюта)
+                                    Валюта = await new Валюти_Select().FindByField(Валюти_Const.Назва, Валюта)
                                 };
                                 обєкт.New();
                                 await обєкт.Save();
@@ -390,7 +390,7 @@ namespace StorageAndTrade
                             string ЗначенняЗаЗамовчуванням = currentNode?.GetAttribute("ЗначенняЗаЗамовчуванням", "") ?? "";
                             string Назва = currentNode?.SelectSingleNode("Назва")?.Value ?? "";
 
-                            Склади_Pointer склади_Pointer = склади_Select.FindByField(Склади_Const.Назва, Назва);
+                            Склади_Pointer склади_Pointer = await склади_Select.FindByField(Склади_Const.Назва, Назва);
                             if (склади_Pointer.IsEmpty())
                             {
                                 Склади_Objest склади_Objest = new Склади_Objest { Назва = Назва };
@@ -426,7 +426,7 @@ namespace StorageAndTrade
                             string ЗначенняЗаЗамовчуванням = currentNode?.GetAttribute("ЗначенняЗаЗамовчуванням", "") ?? "";
                             string Назва = currentNode?.SelectSingleNode("Назва")?.Value ?? "";
 
-                            Контрагенти_Pointer контрагенти_Pointer = контрагенти_Select.FindByField(Контрагенти_Const.Назва, Назва);
+                            Контрагенти_Pointer контрагенти_Pointer = await контрагенти_Select.FindByField(Контрагенти_Const.Назва, Назва);
                             if (контрагенти_Pointer.IsEmpty())
                             {
                                 Контрагенти_Objest контрагенти_Objest = new Контрагенти_Objest { Назва = Назва };
@@ -464,7 +464,7 @@ namespace StorageAndTrade
 
                             string Назва = currentNode?.SelectSingleNode("Назва")?.Value ?? "";
 
-                            Контрагенти_Папки_Pointer контрагенти_Папки_Pointer = контрагенти_Папки_Select.FindByField(Контрагенти_Папки_Const.Назва, Назва);
+                            Контрагенти_Папки_Pointer контрагенти_Папки_Pointer = await контрагенти_Папки_Select.FindByField(Контрагенти_Папки_Const.Назва, Назва);
                             if (контрагенти_Папки_Pointer.IsEmpty())
                             {
                                 Контрагенти_Папки_Objest контрагенти_Папки_Objest = new Контрагенти_Папки_Objest { Назва = Назва };
@@ -496,7 +496,7 @@ namespace StorageAndTrade
 
                             string Назва = currentNode?.SelectSingleNode("Назва")?.Value ?? "";
 
-                            Номенклатура_Папки_Pointer номенклатура_Папки_Pointer = номенклатура_Папки_Select.FindByField(Номенклатура_Папки_Const.Назва, Назва);
+                            Номенклатура_Папки_Pointer номенклатура_Папки_Pointer = await номенклатура_Папки_Select.FindByField(Номенклатура_Папки_Const.Назва, Назва);
                             if (номенклатура_Папки_Pointer.IsEmpty())
                             {
                                 Номенклатура_Папки_Objest номенклатура_Папки_Objest = new Номенклатура_Папки_Objest { Назва = Назва };
@@ -535,15 +535,15 @@ namespace StorageAndTrade
                             if (!Enum.TryParse<Перелічення.ТипиНоменклатури>(ТипНоменклатуриТекст, true, out ТипНоменклатури))
                                 ТипНоменклатури = Перелічення.ТипиНоменклатури.Товар;
 
-                            Номенклатура_Pointer вказівник = вибірка.FindByField(Номенклатура_Const.Назва, Назва);
+                            Номенклатура_Pointer вказівник = await вибірка.FindByField(Номенклатура_Const.Назва, Назва);
                             if (вказівник.IsEmpty())
                             {
                                 Номенклатура_Objest обєкт = new Номенклатура_Objest
                                 {
                                     Назва = Назва,
-                                    ВидНоменклатури = new ВидиНоменклатури_Select().FindByField(ВидиНоменклатури_Const.Назва, ВидНоменклатури),
+                                    ВидНоменклатури = await new ВидиНоменклатури_Select().FindByField(ВидиНоменклатури_Const.Назва, ВидНоменклатури),
                                     ТипНоменклатури = ТипНоменклатури,
-                                    ОдиницяВиміру = new ПакуванняОдиниціВиміру_Select().FindByField(ПакуванняОдиниціВиміру_Const.Назва, ПакуванняОдиниціВиміру)
+                                    ОдиницяВиміру = await new ПакуванняОдиниціВиміру_Select().FindByField(ПакуванняОдиниціВиміру_Const.Назва, ПакуванняОдиниціВиміру)
                                 };
                                 обєкт.New();
                                 await обєкт.Save();

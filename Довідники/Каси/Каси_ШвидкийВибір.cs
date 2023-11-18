@@ -41,7 +41,7 @@ namespace StorageAndTrade
             //Сторінка
             {
                 LinkButton linkPage = new LinkButton($" {Каси_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
-                linkPage.Clicked += (object? sender, EventArgs args) =>
+                linkPage.Clicked += async (object? sender, EventArgs args) =>
                 {
                     Каси page = new Каси()
                     {
@@ -51,7 +51,7 @@ namespace StorageAndTrade
 
                     Program.GeneralForm?.CreateNotebookPage($"Вибір - {Каси_Const.FULLNAME}", () => { return page; }, true);
 
-                    page.LoadRecords();
+                    await page.LoadRecords();
                 };
 
                 HBoxTop.PackStart(linkPage, false, false, 10);
@@ -77,19 +77,19 @@ namespace StorageAndTrade
             }
         }
 
-        public override void LoadRecords()
+        public override async ValueTask LoadRecords()
         {
             ТабличніСписки.Каси_ЗаписиШвидкийВибір.DirectoryPointerItem = DirectoryPointerItem;
 
             ТабличніСписки.Каси_ЗаписиШвидкийВибір.Where.Clear();
 
-            ТабличніСписки.Каси_ЗаписиШвидкийВибір.LoadRecords();
+            await ТабличніСписки.Каси_ЗаписиШвидкийВибір.LoadRecords();
 
             if (ТабличніСписки.Каси_ЗаписиШвидкийВибір.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.Каси_ЗаписиШвидкийВибір.SelectPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override void LoadRecords_OnSearch(string searchText)
+        protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
             searchText = searchText.ToLower().Trim();
 
@@ -108,7 +108,7 @@ namespace StorageAndTrade
             ТабличніСписки.Каси_ЗаписиШвидкийВибір.Where.Add(
                 new Where(Comparison.OR, Каси_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
-            ТабличніСписки.Каси_ЗаписиШвидкийВибір.LoadRecords();
+            await ТабличніСписки.Каси_ЗаписиШвидкийВибір.LoadRecords();
         }
     }
 }
