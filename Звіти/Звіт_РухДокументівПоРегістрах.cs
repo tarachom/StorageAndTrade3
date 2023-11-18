@@ -39,8 +39,10 @@ namespace StorageAndTrade
         {
             List<string> allowRegisterAccumulation = Config.Kernel!.Conf.Documents[ДокументВказівник.TypeDocument].AllowRegisterAccumulation;
 
-            Dictionary<string, object> paramQuery = new Dictionary<string, object>();
-            paramQuery.Add("ДокументВказівник", ДокументВказівник.UnigueID.UGuid);
+            Dictionary<string, object> paramQuery = new Dictionary<string, object>
+            {
+                { "ДокументВказівник", ДокументВказівник.UnigueID.UGuid }
+            };
 
             foreach (string regAccumName in allowRegisterAccumulation)
             {

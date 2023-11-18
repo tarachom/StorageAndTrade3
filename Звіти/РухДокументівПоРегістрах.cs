@@ -36,61 +36,70 @@ namespace StorageAndTrade
 
         public static Dictionary<string, string> ТовариНаСкладах_ВидиміКолонки()
         {
-            Dictionary<string, string> columns = new Dictionary<string, string>();
-
-            columns.Add("income", "Рух");
-            columns.Add("period", "Період");
-            columns.Add("Номенклатура_Назва", "Номенклатура");
-            if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const) columns.Add("ХарактеристикаНоменклатури_Назва", "Характеристика");
-            if (Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const) columns.Add("Серія_Номер", "Серія");
-            columns.Add("Склад_Назва", "Склад");
-            columns.Add("ВНаявності", "В наявності");
-            columns.Add("ДоВідвантаження", "До відвантаження");
+            Dictionary<string, string> columns = new Dictionary<string, string>
+            {
+                { "income", "Рух" },
+                { "period", "Період" },
+                { "Номенклатура_Назва", "Номенклатура" },
+                { "Склад_Назва", "Склад" },
+                { "ВНаявності", "В наявності" },
+                { "ДоВідвантаження", "До відвантаження" }
+            };
+            if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const)
+                columns.Add("ХарактеристикаНоменклатури_Назва", "Характеристика");
+            if (Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const)
+                columns.Add("Серія_Номер", "Серія");
 
             return columns;
         }
 
         public static Dictionary<string, string> ТовариНаСкладах_КолонкиДаних()
         {
-            Dictionary<string, string> columns = new Dictionary<string, string>();
-
-            columns.Add("Номенклатура_Назва", "Номенклатура");
-            if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const) columns.Add("ХарактеристикаНоменклатури_Назва", "Характеристика");
-            if (Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const) columns.Add("Серія_Номер", "Серія");
-            columns.Add("Склад_Назва", "Склад");
+            Dictionary<string, string> columns = new Dictionary<string, string>
+            {
+                { "Номенклатура_Назва", "Номенклатура" },
+                { "Склад_Назва", "Склад" }
+            };
+            if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const)
+                columns.Add("ХарактеристикаНоменклатури_Назва", "Характеристика");
+            if (Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const)
+                columns.Add("Серія_Номер", "Серія");
 
             return columns;
         }
 
         public static Dictionary<string, string> ТовариНаСкладах_ТипиДаних()
         {
-            Dictionary<string, string> columns = new Dictionary<string, string>();
-
-            columns.Add("Номенклатура_Назва", Номенклатура_Const.POINTER);
-            columns.Add("ХарактеристикаНоменклатури_Назва", ХарактеристикиНоменклатури_Const.POINTER);
-            columns.Add("Серія_Номер", СеріїНоменклатури_Const.POINTER);
-            columns.Add("Склад_Назва", Склади_Const.POINTER);
+            Dictionary<string, string> columns = new Dictionary<string, string>
+            {
+                { "Номенклатура_Назва", Номенклатура_Const.POINTER },
+                { "ХарактеристикаНоменклатури_Назва", ХарактеристикиНоменклатури_Const.POINTER },
+                { "Серія_Номер", СеріїНоменклатури_Const.POINTER },
+                { "Склад_Назва", Склади_Const.POINTER }
+            };
 
             return columns;
         }
 
         public static Dictionary<string, float> ТовариНаСкладах_ПозиціяТекстуВКолонці()
         {
-            Dictionary<string, float> columns = new Dictionary<string, float>();
-
-            columns.Add("income", 0.5f);
-            columns.Add("ВНаявності", 1);
-            columns.Add("ДоВідвантаження", 1);
+            Dictionary<string, float> columns = new Dictionary<string, float>
+            {
+                { "income", 0.5f },
+                { "ВНаявності", 1 },
+                { "ДоВідвантаження", 1 }
+            };
 
             return columns;
         }
 
         public static Dictionary<string, TreeCellDataFunc> ТовариНаСкладах_ФункціяДляКолонки()
         {
-            Dictionary<string, TreeCellDataFunc> columns = new Dictionary<string, TreeCellDataFunc>();
-
-            columns.Add("ВНаявності", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла);
-            columns.Add("ДоВідвантаження", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла);
+            Dictionary<string, TreeCellDataFunc> columns = new Dictionary<string, TreeCellDataFunc>
+            {
+                { "ВНаявності", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла },
+                { "ДоВідвантаження", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла }
+            };
 
             return columns;
         }
@@ -134,72 +143,81 @@ ORDER BY Номенклатура_Назва
 
         public static Dictionary<string, string> ПартіїТоварів_ВидиміКолонки()
         {
-            Dictionary<string, string> columns = new Dictionary<string, string>();
-
-            columns.Add("income", "Рух");
-            columns.Add("period", "Період");
-            columns.Add("Організація_Назва", "Організація");
-            columns.Add("ПартіяТоварівКомпозит_Назва", "Партія");
-            columns.Add("Номенклатура_Назва", "Номенклатура");
-            if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const) columns.Add("ХарактеристикаНоменклатури_Назва", "Характеристика");
-            if (Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const) columns.Add("Серія_Номер", "Серія");
-            columns.Add("Склад_Назва", "Склад");
-            columns.Add("Рядок", "Рядок");
-            columns.Add("Кількість", "Кількість");
-            columns.Add("Собівартість", "Собівартість");
-            columns.Add("СписанаСобівартість", "Списана cобівартість");
+            Dictionary<string, string> columns = new Dictionary<string, string>
+            {
+                { "income", "Рух" },
+                { "period", "Період" },
+                { "Організація_Назва", "Організація" },
+                { "ПартіяТоварівКомпозит_Назва", "Партія" },
+                { "Номенклатура_Назва", "Номенклатура" },
+                { "Склад_Назва", "Склад" },
+                { "Рядок", "Рядок" },
+                { "Кількість", "Кількість" },
+                { "Собівартість", "Собівартість" },
+                { "СписанаСобівартість", "Списана cобівартість" }
+            };
+            if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const)
+                columns.Add("ХарактеристикаНоменклатури_Назва", "Характеристика");
+            if (Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const)
+                columns.Add("Серія_Номер", "Серія");
 
             return columns;
         }
 
         public static Dictionary<string, string> ПартіїТоварів_КолонкиДаних()
         {
-            Dictionary<string, string> columns = new Dictionary<string, string>();
-
-            columns.Add("Організація_Назва", "Організація");
-            columns.Add("ПартіяТоварівКомпозит_Назва", "ПартіяТоварівКомпозит");
-            columns.Add("Номенклатура_Назва", "Номенклатура");
-            if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const) columns.Add("ХарактеристикаНоменклатури_Назва", "ХарактеристикаНоменклатури");
-            if (Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const) columns.Add("Серія_Номер", "Серія");
-            columns.Add("Склад_Назва", "Склад");
+            Dictionary<string, string> columns = new Dictionary<string, string>
+            {
+                { "Організація_Назва", "Організація" },
+                { "ПартіяТоварівКомпозит_Назва", "ПартіяТоварівКомпозит" },
+                { "Номенклатура_Назва", "Номенклатура" },
+                { "Склад_Назва", "Склад" }
+            };
+            if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const)
+                columns.Add("ХарактеристикаНоменклатури_Назва", "ХарактеристикаНоменклатури");
+            if (Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const)
+                columns.Add("Серія_Номер", "Серія");
 
             return columns;
         }
 
         public static Dictionary<string, string> ПартіїТоварів_ТипиДаних()
         {
-            Dictionary<string, string> columns = new Dictionary<string, string>();
-
-            columns.Add("Організація_Назва", Організації_Const.POINTER);
-            columns.Add("ПартіяТоварівКомпозит_Назва", ПартіяТоварівКомпозит_Const.POINTER);
-            columns.Add("Номенклатура_Назва", Номенклатура_Const.POINTER);
-            columns.Add("ХарактеристикаНоменклатури_Назва", ХарактеристикиНоменклатури_Const.POINTER);
-            columns.Add("Серія_Номер", СеріїНоменклатури_Const.POINTER);
-            columns.Add("Склад_Назва", Склади_Const.POINTER);
+            Dictionary<string, string> columns = new Dictionary<string, string>
+            {
+                { "Організація_Назва", Організації_Const.POINTER },
+                { "ПартіяТоварівКомпозит_Назва", ПартіяТоварівКомпозит_Const.POINTER },
+                { "Номенклатура_Назва", Номенклатура_Const.POINTER },
+                { "ХарактеристикаНоменклатури_Назва", ХарактеристикиНоменклатури_Const.POINTER },
+                { "Серія_Номер", СеріїНоменклатури_Const.POINTER },
+                { "Склад_Назва", Склади_Const.POINTER }
+            };
 
             return columns;
         }
 
         public static Dictionary<string, float> ПартіїТоварів_ПозиціяТекстуВКолонці()
         {
-            Dictionary<string, float> columns = new Dictionary<string, float>();
-
-            columns.Add("income", 0.5f);
-            columns.Add("Рядок", 0.1f);
-            columns.Add("Кількість", 1);
-            columns.Add("Собівартість", 1);
-            columns.Add("СписанаСобівартість", 1);
+            Dictionary<string, float> columns = new Dictionary<string, float>
+            {
+                { "income", 0.5f },
+                { "Рядок", 0.1f },
+                { "Кількість", 1 },
+                { "Собівартість", 1 },
+                { "СписанаСобівартість", 1 }
+            };
 
             return columns;
         }
 
         public static Dictionary<string, TreeCellDataFunc> ПартіїТоварів_ФункціяДляКолонки()
         {
-            Dictionary<string, TreeCellDataFunc> columns = new Dictionary<string, TreeCellDataFunc>();
-
-            columns.Add("Кількість", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла);
-            columns.Add("Собівартість", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла);
-            columns.Add("СписанаСобівартість", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла);
+            Dictionary<string, TreeCellDataFunc> columns = new Dictionary<string, TreeCellDataFunc>
+            {
+                { "Кількість", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла },
+                { "Собівартість", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла },
+                { "СписанаСобівартість", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла }
+            };
 
             return columns;
         }
@@ -322,61 +340,68 @@ ORDER BY Організація_Назва
 
         public static Dictionary<string, string> ЗамовленняКлієнтів_ВидиміКолонки()
         {
-            Dictionary<string, string> columns = new Dictionary<string, string>();
-
-            columns.Add("income", "Рух");
-            columns.Add("period", "Період");
-            columns.Add("ЗамовленняКлієнта_Назва", "Замовлення");
-            columns.Add("Номенклатура_Назва", "Номенклатура");
-            if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const) columns.Add("ХарактеристикаНоменклатури_Назва", "Характеристика");
-            columns.Add("Склад_Назва", "Склад");
-            columns.Add("Замовлено", "Замовлено");
-            columns.Add("Сума", "Сума");
+            Dictionary<string, string> columns = new Dictionary<string, string>
+            {
+                { "income", "Рух" },
+                { "period", "Період" },
+                { "ЗамовленняКлієнта_Назва", "Замовлення" },
+                { "Номенклатура_Назва", "Номенклатура" },
+                { "Склад_Назва", "Склад" },
+                { "Замовлено", "Замовлено" },
+                { "Сума", "Сума" }
+            };
+            if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const)
+                columns.Add("ХарактеристикаНоменклатури_Назва", "Характеристика");
 
             return columns;
         }
 
         public static Dictionary<string, string> ЗамовленняКлієнтів_КолонкиДаних()
         {
-            Dictionary<string, string> columns = new Dictionary<string, string>();
-
-            columns.Add("ЗамовленняКлієнта_Назва", "ЗамовленняКлієнта");
-            columns.Add("Номенклатура_Назва", "Номенклатура");
+            Dictionary<string, string> columns = new Dictionary<string, string>
+            {
+                { "ЗамовленняКлієнта_Назва", "ЗамовленняКлієнта" },
+                { "Номенклатура_Назва", "Номенклатура" },
+                { "Склад_Назва", "Склад" }
+            };
             if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const) columns.Add("ХарактеристикаНоменклатури_Назва", "ХарактеристикаНоменклатури");
-            columns.Add("Склад_Назва", "Склад");
+
 
             return columns;
         }
 
         public static Dictionary<string, string> ЗамовленняКлієнтів_ТипиДаних()
         {
-            Dictionary<string, string> columns = new Dictionary<string, string>();
-
-            columns.Add("ЗамовленняКлієнта_Назва", ЗамовленняКлієнта_Const.POINTER);
-            columns.Add("Номенклатура_Назва", Номенклатура_Const.POINTER);
-            columns.Add("ХарактеристикаНоменклатури_Назва", ХарактеристикиНоменклатури_Const.POINTER);
-            columns.Add("Склад_Назва", Склади_Const.POINTER);
+            Dictionary<string, string> columns = new Dictionary<string, string>
+            {
+                { "ЗамовленняКлієнта_Назва", ЗамовленняКлієнта_Const.POINTER },
+                { "Номенклатура_Назва", Номенклатура_Const.POINTER },
+                { "ХарактеристикаНоменклатури_Назва", ХарактеристикиНоменклатури_Const.POINTER },
+                { "Склад_Назва", Склади_Const.POINTER }
+            };
 
             return columns;
         }
 
         public static Dictionary<string, float> ЗамовленняКлієнтів_ПозиціяТекстуВКолонці()
         {
-            Dictionary<string, float> columns = new Dictionary<string, float>();
-
-            columns.Add("income", 0.5f);
-            columns.Add("Замовлено", 1);
-            columns.Add("Сума", 1);
+            Dictionary<string, float> columns = new Dictionary<string, float>
+            {
+                { "income", 0.5f },
+                { "Замовлено", 1 },
+                { "Сума", 1 }
+            };
 
             return columns;
         }
 
         public static Dictionary<string, TreeCellDataFunc> ЗамовленняКлієнтів_ФункціяДляКолонки()
         {
-            Dictionary<string, TreeCellDataFunc> columns = new Dictionary<string, TreeCellDataFunc>();
-
-            columns.Add("Замовлено", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла);
-            columns.Add("Сума", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла);
+            Dictionary<string, TreeCellDataFunc> columns = new Dictionary<string, TreeCellDataFunc>
+            {
+                { "Замовлено", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла },
+                { "Сума", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла }
+            };
 
             return columns;
         }
@@ -420,52 +445,57 @@ ORDER BY Номенклатура_Назва
 
         public static Dictionary<string, string> РозрахункиЗКлієнтами_ВидиміКолонки()
         {
-            Dictionary<string, string> columns = new Dictionary<string, string>();
-
-            columns.Add("income", "Рух");
-            columns.Add("period", "Період");
-            columns.Add("Контрагент_Назва", "Контрагент");
-            columns.Add("Валюта_Назва", "Валюта");
-            columns.Add("Сума", "Сума");
+            Dictionary<string, string> columns = new Dictionary<string, string>
+            {
+                { "income", "Рух" },
+                { "period", "Період" },
+                { "Контрагент_Назва", "Контрагент" },
+                { "Валюта_Назва", "Валюта" },
+                { "Сума", "Сума" }
+            };
 
             return columns;
         }
 
         public static Dictionary<string, string> РозрахункиЗКлієнтами_КолонкиДаних()
         {
-            Dictionary<string, string> columns = new Dictionary<string, string>();
-
-            columns.Add("Контрагент_Назва", "Контрагент");
-            columns.Add("Валюта_Назва", "Валюта");
+            Dictionary<string, string> columns = new Dictionary<string, string>
+            {
+                { "Контрагент_Назва", "Контрагент" },
+                { "Валюта_Назва", "Валюта" }
+            };
 
             return columns;
         }
 
         public static Dictionary<string, string> РозрахункиЗКлієнтами_ТипиДаних()
         {
-            Dictionary<string, string> columns = new Dictionary<string, string>();
-
-            columns.Add("Контрагент_Назва", Контрагенти_Const.POINTER);
-            columns.Add("Валюта_Назва", Валюти_Const.POINTER);
+            Dictionary<string, string> columns = new Dictionary<string, string>
+            {
+                { "Контрагент_Назва", Контрагенти_Const.POINTER },
+                { "Валюта_Назва", Валюти_Const.POINTER }
+            };
 
             return columns;
         }
 
         public static Dictionary<string, float> РозрахункиЗКлієнтами_ПозиціяТекстуВКолонці()
         {
-            Dictionary<string, float> columns = new Dictionary<string, float>();
-
-            columns.Add("income", 0.5f);
-            columns.Add("Сума", 1);
+            Dictionary<string, float> columns = new Dictionary<string, float>
+            {
+                { "income", 0.5f },
+                { "Сума", 1 }
+            };
 
             return columns;
         }
 
         public static Dictionary<string, TreeCellDataFunc> РозрахункиЗКлієнтами_ФункціяДляКолонки()
         {
-            Dictionary<string, TreeCellDataFunc> columns = new Dictionary<string, TreeCellDataFunc>();
-
-            columns.Add("Сума", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла);
+            Dictionary<string, TreeCellDataFunc> columns = new Dictionary<string, TreeCellDataFunc>
+            {
+                { "Сума", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла }
+            };
 
             return columns;
         }
@@ -497,61 +527,68 @@ WHERE
 
         public static Dictionary<string, string> ВільніЗалишки_ВидиміКолонки()
         {
-            Dictionary<string, string> columns = new Dictionary<string, string>();
-
-            columns.Add("income", "Рух");
-            columns.Add("period", "Період");
-            columns.Add("Номенклатура_Назва", "Номенклатура");
-            if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const) columns.Add("ХарактеристикаНоменклатури_Назва", "Характеристика");
-            columns.Add("Склад_Назва", "Склад");
-            columns.Add("ВНаявності", "В наявності");
-            columns.Add("ВРезервіЗіСкладу", "В резерві зі складу");
-            columns.Add("ВРезервіПідЗамовлення", "В резерві під замовлення");
+            Dictionary<string, string> columns = new Dictionary<string, string>
+            {
+                { "income", "Рух" },
+                { "period", "Період" },
+                { "Номенклатура_Назва", "Номенклатура" },
+                { "Склад_Назва", "Склад" },
+                { "ВНаявності", "В наявності" },
+                { "ВРезервіЗіСкладу", "В резерві зі складу" },
+                { "ВРезервіПідЗамовлення", "В резерві під замовлення" }
+            };
+            if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const)
+                columns.Add("ХарактеристикаНоменклатури_Назва", "Характеристика");
 
             return columns;
         }
 
         public static Dictionary<string, string> ВільніЗалишки_КолонкиДаних()
         {
-            Dictionary<string, string> columns = new Dictionary<string, string>();
-
-            columns.Add("Номенклатура_Назва", "Номенклатура");
-            if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const) columns.Add("ХарактеристикаНоменклатури_Назва", "Характеристика");
-            columns.Add("Склад_Назва", "Склад");
+            Dictionary<string, string> columns = new Dictionary<string, string>
+            {
+                { "Номенклатура_Назва", "Номенклатура" },
+                { "Склад_Назва", "Склад" }
+            };
+            if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const)
+                columns.Add("ХарактеристикаНоменклатури_Назва", "Характеристика");
 
             return columns;
         }
 
         public static Dictionary<string, string> ВільніЗалишки_ТипиДаних()
         {
-            Dictionary<string, string> columns = new Dictionary<string, string>();
-
-            columns.Add("Номенклатура_Назва", Номенклатура_Const.POINTER);
-            columns.Add("ХарактеристикаНоменклатури_Назва", ХарактеристикиНоменклатури_Const.POINTER);
-            columns.Add("Склад_Назва", Склади_Const.POINTER);
+            Dictionary<string, string> columns = new Dictionary<string, string>
+            {
+                { "Номенклатура_Назва", Номенклатура_Const.POINTER },
+                { "ХарактеристикаНоменклатури_Назва", ХарактеристикиНоменклатури_Const.POINTER },
+                { "Склад_Назва", Склади_Const.POINTER }
+            };
 
             return columns;
         }
 
         public static Dictionary<string, float> ВільніЗалишки_ПозиціяТекстуВКолонці()
         {
-            Dictionary<string, float> columns = new Dictionary<string, float>();
-
-            columns.Add("income", 0.5f);
-            columns.Add("ВНаявності", 1);
-            columns.Add("ВРезервіЗіСкладу", 1);
-            columns.Add("ВРезервіПідЗамовлення", 1);
+            Dictionary<string, float> columns = new Dictionary<string, float>
+            {
+                { "income", 0.5f },
+                { "ВНаявності", 1 },
+                { "ВРезервіЗіСкладу", 1 },
+                { "ВРезервіПідЗамовлення", 1 }
+            };
 
             return columns;
         }
 
         public static Dictionary<string, TreeCellDataFunc> ВільніЗалишки_ФункціяДляКолонки()
         {
-            Dictionary<string, TreeCellDataFunc> columns = new Dictionary<string, TreeCellDataFunc>();
-
-            columns.Add("ВНаявності", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла);
-            columns.Add("ВРезервіЗіСкладу", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла);
-            columns.Add("ВРезервіПідЗамовлення", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла);
+            Dictionary<string, TreeCellDataFunc> columns = new Dictionary<string, TreeCellDataFunc>
+            {
+                { "ВНаявності", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла },
+                { "ВРезервіЗіСкладу", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла },
+                { "ВРезервіПідЗамовлення", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла }
+            };
 
             return columns;
         }
@@ -591,58 +628,65 @@ ORDER BY Номенклатура_Назва
 
         public static Dictionary<string, string> ЗамовленняПостачальникам_ВидиміКолонки()
         {
-            Dictionary<string, string> columns = new Dictionary<string, string>();
-
-            columns.Add("income", "Рух");
-            columns.Add("period", "Період");
-            columns.Add("ЗамовленняПостачальнику_Назва", "Замовлення");
-            columns.Add("Номенклатура_Назва", "Номенклатура");
-            if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const) columns.Add("ХарактеристикаНоменклатури_Назва", "Характеристика");
-            columns.Add("Склад_Назва", "Склад");
-            columns.Add("Замовлено", "Замовлено");
+            Dictionary<string, string> columns = new Dictionary<string, string>
+            {
+                { "income", "Рух" },
+                { "period", "Період" },
+                { "ЗамовленняПостачальнику_Назва", "Замовлення" },
+                { "Номенклатура_Назва", "Номенклатура" },
+                { "Склад_Назва", "Склад" },
+                { "Замовлено", "Замовлено" }
+            };
+            if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const)
+                columns.Add("ХарактеристикаНоменклатури_Назва", "Характеристика");
 
             return columns;
         }
 
         public static Dictionary<string, string> ЗамовленняПостачальникам_КолонкиДаних()
         {
-            Dictionary<string, string> columns = new Dictionary<string, string>();
-
-            columns.Add("ЗамовленняПостачальнику_Назва", "ЗамовленняПостачальнику");
-            columns.Add("Номенклатура_Назва", "Номенклатура");
-            if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const) columns.Add("ХарактеристикаНоменклатури_Назва", "ХарактеристикаНоменклатури");
-            columns.Add("Склад_Назва", "Склад");
+            Dictionary<string, string> columns = new Dictionary<string, string>
+            {
+                { "ЗамовленняПостачальнику_Назва", "ЗамовленняПостачальнику" },
+                { "Номенклатура_Назва", "Номенклатура" },
+                { "Склад_Назва", "Склад" }
+            };
+            if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const)
+                columns.Add("ХарактеристикаНоменклатури_Назва", "ХарактеристикаНоменклатури");
 
             return columns;
         }
 
         public static Dictionary<string, string> ЗамовленняПостачальникам_ТипиДаних()
         {
-            Dictionary<string, string> columns = new Dictionary<string, string>();
-
-            columns.Add("ЗамовленняПостачальнику_Назва", ЗамовленняПостачальнику_Const.POINTER);
-            columns.Add("Номенклатура_Назва", Номенклатура_Const.POINTER);
-            columns.Add("ХарактеристикаНоменклатури_Назва", ХарактеристикиНоменклатури_Const.POINTER);
-            columns.Add("Склад_Назва", Склади_Const.POINTER);
+            Dictionary<string, string> columns = new Dictionary<string, string>
+            {
+                { "ЗамовленняПостачальнику_Назва", ЗамовленняПостачальнику_Const.POINTER },
+                { "Номенклатура_Назва", Номенклатура_Const.POINTER },
+                { "ХарактеристикаНоменклатури_Назва", ХарактеристикиНоменклатури_Const.POINTER },
+                { "Склад_Назва", Склади_Const.POINTER }
+            };
 
             return columns;
         }
 
         public static Dictionary<string, float> ЗамовленняПостачальникам_ПозиціяТекстуВКолонці()
         {
-            Dictionary<string, float> columns = new Dictionary<string, float>();
-
-            columns.Add("income", 0.5f);
-            columns.Add("Замовлено", 1);
+            Dictionary<string, float> columns = new Dictionary<string, float>
+            {
+                { "income", 0.5f },
+                { "Замовлено", 1 }
+            };
 
             return columns;
         }
 
         public static Dictionary<string, TreeCellDataFunc> ЗамовленняПостачальникам_ФункціяДляКолонки()
         {
-            Dictionary<string, TreeCellDataFunc> columns = new Dictionary<string, TreeCellDataFunc>();
-
-            columns.Add("Замовлено", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла);
+            Dictionary<string, TreeCellDataFunc> columns = new Dictionary<string, TreeCellDataFunc>
+            {
+                { "Замовлено", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла }
+            };
 
             return columns;
         }
@@ -685,52 +729,57 @@ ORDER BY Номенклатура_Назва
 
         public static Dictionary<string, string> РозрахункиЗПостачальниками_ВидиміКолонки()
         {
-            Dictionary<string, string> columns = new Dictionary<string, string>();
-
-            columns.Add("income", "Рух");
-            columns.Add("period", "Період");
-            columns.Add("Контрагент_Назва", "Контрагент");
-            columns.Add("Валюта_Назва", "Валюта");
-            columns.Add("Сума", "Сума");
+            Dictionary<string, string> columns = new Dictionary<string, string>
+            {
+                { "income", "Рух" },
+                { "period", "Період" },
+                { "Контрагент_Назва", "Контрагент" },
+                { "Валюта_Назва", "Валюта" },
+                { "Сума", "Сума" }
+            };
 
             return columns;
         }
 
         public static Dictionary<string, string> РозрахункиЗПостачальниками_КолонкиДаних()
         {
-            Dictionary<string, string> columns = new Dictionary<string, string>();
-
-            columns.Add("Контрагент_Назва", "Контрагент");
-            columns.Add("Валюта_Назва", "Валюта");
+            Dictionary<string, string> columns = new Dictionary<string, string>
+            {
+                { "Контрагент_Назва", "Контрагент" },
+                { "Валюта_Назва", "Валюта" }
+            };
 
             return columns;
         }
 
         public static Dictionary<string, string> РозрахункиЗПостачальниками_ТипиДаних()
         {
-            Dictionary<string, string> columns = new Dictionary<string, string>();
-
-            columns.Add("Контрагент_Назва", Контрагенти_Const.POINTER);
-            columns.Add("Валюта_Назва", Валюти_Const.POINTER);
+            Dictionary<string, string> columns = new Dictionary<string, string>
+            {
+                { "Контрагент_Назва", Контрагенти_Const.POINTER },
+                { "Валюта_Назва", Валюти_Const.POINTER }
+            };
 
             return columns;
         }
 
         public static Dictionary<string, float> РозрахункиЗПостачальниками_ПозиціяТекстуВКолонці()
         {
-            Dictionary<string, float> columns = new Dictionary<string, float>();
-
-            columns.Add("income", 0.5f);
-            columns.Add("Сума", 1);
+            Dictionary<string, float> columns = new Dictionary<string, float>
+            {
+                { "income", 0.5f },
+                { "Сума", 1 }
+            };
 
             return columns;
         }
 
         public static Dictionary<string, TreeCellDataFunc> РозрахункиЗПостачальниками_ФункціяДляКолонки()
         {
-            Dictionary<string, TreeCellDataFunc> columns = new Dictionary<string, TreeCellDataFunc>();
-
-            columns.Add("Сума", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла);
+            Dictionary<string, TreeCellDataFunc> columns = new Dictionary<string, TreeCellDataFunc>
+            {
+                { "Сума", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла }
+            };
 
             return columns;
         }
@@ -831,55 +880,60 @@ WHERE
 
         public static Dictionary<string, string> РухКоштів_ВидиміКолонки()
         {
-            Dictionary<string, string> columns = new Dictionary<string, string>();
-
-            columns.Add("income", "Рух");
-            columns.Add("period", "Період");
-            columns.Add("Організація_Назва", "Організація");
-            columns.Add("Каса_Назва", "Каса");
-            columns.Add("Валюта_Назва", "Валюта");
-            columns.Add("Сума", "Сума");
+            Dictionary<string, string> columns = new Dictionary<string, string>
+            {
+                { "income", "Рух" },
+                { "period", "Період" },
+                { "Організація_Назва", "Організація" },
+                { "Каса_Назва", "Каса" },
+                { "Валюта_Назва", "Валюта" },
+                { "Сума", "Сума" }
+            };
 
             return columns;
         }
 
         public static Dictionary<string, string> РухКоштів_КолонкиДаних()
         {
-            Dictionary<string, string> columns = new Dictionary<string, string>();
-
-            columns.Add("Організація_Назва", "Організація");
-            columns.Add("Каса_Назва", "Каса");
-            columns.Add("Валюта_Назва", "Валюта");
+            Dictionary<string, string> columns = new Dictionary<string, string>
+            {
+                { "Організація_Назва", "Організація" },
+                { "Каса_Назва", "Каса" },
+                { "Валюта_Назва", "Валюта" }
+            };
 
             return columns;
         }
 
         public static Dictionary<string, string> РухКоштів_ТипиДаних()
         {
-            Dictionary<string, string> columns = new Dictionary<string, string>();
-
-            columns.Add("Організація_Назва", Організації_Const.POINTER);
-            columns.Add("Каса_Назва", Каси_Const.POINTER);
-            columns.Add("Валюта_Назва", Валюти_Const.POINTER);
+            Dictionary<string, string> columns = new Dictionary<string, string>
+            {
+                { "Організація_Назва", Організації_Const.POINTER },
+                { "Каса_Назва", Каси_Const.POINTER },
+                { "Валюта_Назва", Валюти_Const.POINTER }
+            };
 
             return columns;
         }
 
         public static Dictionary<string, float> РухКоштів_ПозиціяТекстуВКолонці()
         {
-            Dictionary<string, float> columns = new Dictionary<string, float>();
-
-            columns.Add("income", 0.5f);
-            columns.Add("Сума", 1);
+            Dictionary<string, float> columns = new Dictionary<string, float>
+            {
+                { "income", 0.5f },
+                { "Сума", 1 }
+            };
 
             return columns;
         }
 
         public static Dictionary<string, TreeCellDataFunc> РухКоштів_ФункціяДляКолонки()
         {
-            Dictionary<string, TreeCellDataFunc> columns = new Dictionary<string, TreeCellDataFunc>();
-
-            columns.Add("Сума", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла);
+            Dictionary<string, TreeCellDataFunc> columns = new Dictionary<string, TreeCellDataFunc>
+            {
+                { "Сума", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла }
+            };
 
             return columns;
         }
@@ -917,68 +971,75 @@ ORDER BY Організація_Назва
 
         public static Dictionary<string, string> Закупівлі_ВидиміКолонки()
         {
-            Dictionary<string, string> columns = new Dictionary<string, string>();
-
-            columns.Add("period", "Період");
-            columns.Add("Організація_Назва", "Організація");
-            columns.Add("Склад_Назва", "Склад");
-            columns.Add("Контрагент_Назва", "Контрагент");
-            columns.Add("Договір_Назва", "Договір");
-            columns.Add("Номенклатура_Назва", "Номенклатура");
-            if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const) columns.Add("ХарактеристикаНоменклатури_Назва", "Характеристика");
-            columns.Add("Кількість", "Кількість");
-            columns.Add("Сума", "Сума");
-            columns.Add("Собівартість", "Собівартість");
+            Dictionary<string, string> columns = new Dictionary<string, string>
+            {
+                { "period", "Період" },
+                { "Організація_Назва", "Організація" },
+                { "Склад_Назва", "Склад" },
+                { "Контрагент_Назва", "Контрагент" },
+                { "Договір_Назва", "Договір" },
+                { "Номенклатура_Назва", "Номенклатура" },
+                { "Кількість", "Кількість" },
+                { "Сума", "Сума" },
+                { "Собівартість", "Собівартість" }
+            };
+            if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const)
+                columns.Add("ХарактеристикаНоменклатури_Назва", "Характеристика");
 
             return columns;
         }
 
         public static Dictionary<string, string> Закупівлі_КолонкиДаних()
         {
-            Dictionary<string, string> columns = new Dictionary<string, string>();
-
-            columns.Add("Організація_Назва", "Організація");
-            columns.Add("Склад_Назва", "Склад");
-            columns.Add("Контрагент_Назва", "Контрагент");
-            columns.Add("Договір_Назва", "Договір");
-            columns.Add("Номенклатура_Назва", "Номенклатура");
-            if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const) columns.Add("ХарактеристикаНоменклатури_Назва", "Характеристика");
+            Dictionary<string, string> columns = new Dictionary<string, string>
+            {
+                { "Організація_Назва", "Організація" },
+                { "Склад_Назва", "Склад" },
+                { "Контрагент_Назва", "Контрагент" },
+                { "Договір_Назва", "Договір" },
+                { "Номенклатура_Назва", "Номенклатура" }
+            };
+            if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const)
+                columns.Add("ХарактеристикаНоменклатури_Назва", "Характеристика");
 
             return columns;
         }
 
         public static Dictionary<string, string> Закупівлі_ТипиДаних()
         {
-            Dictionary<string, string> columns = new Dictionary<string, string>();
-
-            columns.Add("Організація_Назва", Організації_Const.POINTER);
-            columns.Add("Склад_Назва", Склади_Const.POINTER);
-            columns.Add("Контрагент_Назва", Контрагенти_Const.POINTER);
-            columns.Add("Договір_Назва", ДоговориКонтрагентів_Const.POINTER);
-            columns.Add("Номенклатура_Назва", Номенклатура_Const.POINTER);
-            columns.Add("ХарактеристикаНоменклатури_Назва", ХарактеристикиНоменклатури_Const.POINTER);
+            Dictionary<string, string> columns = new Dictionary<string, string>
+            {
+                { "Організація_Назва", Організації_Const.POINTER },
+                { "Склад_Назва", Склади_Const.POINTER },
+                { "Контрагент_Назва", Контрагенти_Const.POINTER },
+                { "Договір_Назва", ДоговориКонтрагентів_Const.POINTER },
+                { "Номенклатура_Назва", Номенклатура_Const.POINTER },
+                { "ХарактеристикаНоменклатури_Назва", ХарактеристикиНоменклатури_Const.POINTER }
+            };
 
             return columns;
         }
 
         public static Dictionary<string, float> Закупівлі_ПозиціяТекстуВКолонці()
         {
-            Dictionary<string, float> columns = new Dictionary<string, float>();
-
-            columns.Add("Кількість", 1);
-            columns.Add("Сума", 1);
-            columns.Add("Собівартість", 1);
+            Dictionary<string, float> columns = new Dictionary<string, float>
+            {
+                { "Кількість", 1 },
+                { "Сума", 1 },
+                { "Собівартість", 1 }
+            };
 
             return columns;
         }
 
         public static Dictionary<string, TreeCellDataFunc> Закупівлі_ФункціяДляКолонки()
         {
-            Dictionary<string, TreeCellDataFunc> columns = new Dictionary<string, TreeCellDataFunc>();
-
-            columns.Add("Кількість", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла);
-            columns.Add("Сума", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла);
-            columns.Add("Собівартість", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла);
+            Dictionary<string, TreeCellDataFunc> columns = new Dictionary<string, TreeCellDataFunc>
+            {
+                { "Кількість", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла },
+                { "Сума", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла },
+                { "Собівартість", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла }
+            };
 
             return columns;
         }
@@ -1031,71 +1092,78 @@ WHERE
 
         public static Dictionary<string, string> Продажі_ВидиміКолонки()
         {
-            Dictionary<string, string> columns = new Dictionary<string, string>();
-
-            columns.Add("period", "Період");
-            columns.Add("Організація_Назва", "Організація");
-            columns.Add("Склад_Назва", "Склад");
-            columns.Add("Контрагент_Назва", "Контрагент");
-            columns.Add("Договір_Назва", "Договір");
-            columns.Add("Номенклатура_Назва", "Номенклатура");
-            if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const) columns.Add("ХарактеристикаНоменклатури_Назва", "Характеристика");
-            columns.Add("Кількість", "Кількість");
-            columns.Add("Сума", "Сума");
-            columns.Add("Дохід", "Дохід");
-            columns.Add("Собівартість", "Собівартість");
+            Dictionary<string, string> columns = new Dictionary<string, string>
+            {
+                { "period", "Період" },
+                { "Організація_Назва", "Організація" },
+                { "Склад_Назва", "Склад" },
+                { "Контрагент_Назва", "Контрагент" },
+                { "Договір_Назва", "Договір" },
+                { "Номенклатура_Назва", "Номенклатура" },
+                { "Кількість", "Кількість" },
+                { "Сума", "Сума" },
+                { "Дохід", "Дохід" },
+                { "Собівартість", "Собівартість" }
+            };
+            if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const)
+                columns.Add("ХарактеристикаНоменклатури_Назва", "Характеристика");
 
             return columns;
         }
 
         public static Dictionary<string, string> Продажі_КолонкиДаних()
         {
-            Dictionary<string, string> columns = new Dictionary<string, string>();
-
-            columns.Add("Організація_Назва", "Організація");
-            columns.Add("Склад_Назва", "Склад");
-            columns.Add("Контрагент_Назва", "Контрагент");
-            columns.Add("Договір_Назва", "Договір");
-            columns.Add("Номенклатура_Назва", "Номенклатура");
-            if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const) columns.Add("ХарактеристикаНоменклатури_Назва", "Характеристика");
+            Dictionary<string, string> columns = new Dictionary<string, string>
+            {
+                { "Організація_Назва", "Організація" },
+                { "Склад_Назва", "Склад" },
+                { "Контрагент_Назва", "Контрагент" },
+                { "Договір_Назва", "Договір" },
+                { "Номенклатура_Назва", "Номенклатура" }
+            };
+            if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const)
+                columns.Add("ХарактеристикаНоменклатури_Назва", "Характеристика");
 
             return columns;
         }
 
         public static Dictionary<string, string> Продажі_ТипиДаних()
         {
-            Dictionary<string, string> columns = new Dictionary<string, string>();
-
-            columns.Add("Організація_Назва", Організації_Const.POINTER);
-            columns.Add("Склад_Назва", Склади_Const.POINTER);
-            columns.Add("Контрагент_Назва", Контрагенти_Const.POINTER);
-            columns.Add("Договір_Назва", ДоговориКонтрагентів_Const.POINTER);
-            columns.Add("Номенклатура_Назва", Номенклатура_Const.POINTER);
-            columns.Add("ХарактеристикаНоменклатури_Назва", ХарактеристикиНоменклатури_Const.POINTER);
+            Dictionary<string, string> columns = new Dictionary<string, string>
+            {
+                { "Організація_Назва", Організації_Const.POINTER },
+                { "Склад_Назва", Склади_Const.POINTER },
+                { "Контрагент_Назва", Контрагенти_Const.POINTER },
+                { "Договір_Назва", ДоговориКонтрагентів_Const.POINTER },
+                { "Номенклатура_Назва", Номенклатура_Const.POINTER },
+                { "ХарактеристикаНоменклатури_Назва", ХарактеристикиНоменклатури_Const.POINTER }
+            };
 
             return columns;
         }
 
         public static Dictionary<string, float> Продажі_ПозиціяТекстуВКолонці()
         {
-            Dictionary<string, float> columns = new Dictionary<string, float>();
-
-            columns.Add("Кількість", 1);
-            columns.Add("Сума", 1);
-            columns.Add("Дохід", 1);
-            columns.Add("Собівартість", 1);
+            Dictionary<string, float> columns = new Dictionary<string, float>
+            {
+                { "Кількість", 1 },
+                { "Сума", 1 },
+                { "Дохід", 1 },
+                { "Собівартість", 1 }
+            };
 
             return columns;
         }
 
         public static Dictionary<string, TreeCellDataFunc> Продажі_ФункціяДляКолонки()
         {
-            Dictionary<string, TreeCellDataFunc> columns = new Dictionary<string, TreeCellDataFunc>();
-
-            columns.Add("Кількість", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла);
-            columns.Add("Сума", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла);
-            columns.Add("Дохід", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла);
-            columns.Add("Собівартість", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла);
+            Dictionary<string, TreeCellDataFunc> columns = new Dictionary<string, TreeCellDataFunc>
+            {
+                { "Кількість", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла },
+                { "Сума", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла },
+                { "Дохід", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла },
+                { "Собівартість", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла }
+            };
 
             return columns;
         }
@@ -1149,61 +1217,70 @@ WHERE
 
         public static Dictionary<string, string> ТовариВКомірках_ВидиміКолонки()
         {
-            Dictionary<string, string> columns = new Dictionary<string, string>();
-
-            columns.Add("income", "Рух");
-            columns.Add("period", "Період");
-            columns.Add("Номенклатура_Назва", "Номенклатура");
-            if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const) columns.Add("ХарактеристикаНоменклатури_Назва", "Характеристика");
-            columns.Add("Пакування_Назва", "Пакування");
-            columns.Add("Комірка_Назва", "Комірка");
-            if (Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const) columns.Add("Серія_Номер", "Серія");
-            columns.Add("ВНаявності", "ВНаявності");
+            Dictionary<string, string> columns = new Dictionary<string, string>
+            {
+                { "income", "Рух" },
+                { "period", "Період" },
+                { "Номенклатура_Назва", "Номенклатура" },
+                { "Пакування_Назва", "Пакування" },
+                { "Комірка_Назва", "Комірка" },
+                { "ВНаявності", "ВНаявності" }
+            };
+            if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const)
+                columns.Add("ХарактеристикаНоменклатури_Назва", "Характеристика");
+            if (Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const)
+                columns.Add("Серія_Номер", "Серія");
 
             return columns;
         }
 
         public static Dictionary<string, string> ТовариВКомірках_КолонкиДаних()
         {
-            Dictionary<string, string> columns = new Dictionary<string, string>();
-
-            columns.Add("Номенклатура_Назва", "Номенклатура");
-            if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const) columns.Add("ХарактеристикаНоменклатури_Назва", "ХарактеристикаНоменклатури");
-            columns.Add("Пакування_Назва", "Пакування");
-            columns.Add("Комірка_Назва", "Комірка");
-            if (Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const) columns.Add("Серія_Номер", "Серія");
+            Dictionary<string, string> columns = new Dictionary<string, string>
+            {
+                { "Номенклатура_Назва", "Номенклатура" },
+                { "Пакування_Назва", "Пакування" },
+                { "Комірка_Назва", "Комірка" }
+            };
+            if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const)
+                columns.Add("ХарактеристикаНоменклатури_Назва", "ХарактеристикаНоменклатури");
+            if (Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const)
+                columns.Add("Серія_Номер", "Серія");
 
             return columns;
         }
 
         public static Dictionary<string, string> ТовариВКомірках_ТипиДаних()
         {
-            Dictionary<string, string> columns = new Dictionary<string, string>();
-
-            columns.Add("Номенклатура_Назва", Номенклатура_Const.POINTER);
-            columns.Add("ХарактеристикаНоменклатури_Назва", ХарактеристикиНоменклатури_Const.POINTER);
-            columns.Add("Пакування_Назва", ПакуванняОдиниціВиміру_Const.POINTER);
-            columns.Add("Комірка_Назва", СкладськіКомірки_Const.POINTER);
-            columns.Add("Серія_Номер", СеріїНоменклатури_Const.POINTER);
+            Dictionary<string, string> columns = new Dictionary<string, string>
+            {
+                { "Номенклатура_Назва", Номенклатура_Const.POINTER },
+                { "ХарактеристикаНоменклатури_Назва", ХарактеристикиНоменклатури_Const.POINTER },
+                { "Пакування_Назва", ПакуванняОдиниціВиміру_Const.POINTER },
+                { "Комірка_Назва", СкладськіКомірки_Const.POINTER },
+                { "Серія_Номер", СеріїНоменклатури_Const.POINTER }
+            };
 
             return columns;
         }
 
         public static Dictionary<string, float> ТовариВКомірках_ПозиціяТекстуВКолонці()
         {
-            Dictionary<string, float> columns = new Dictionary<string, float>();
-
-            columns.Add("income", 0.5f);
-            columns.Add("ВНаявності", 1);
+            Dictionary<string, float> columns = new Dictionary<string, float>
+            {
+                { "income", 0.5f },
+                { "ВНаявності", 1 }
+            };
 
             return columns;
         }
 
         public static Dictionary<string, TreeCellDataFunc> ТовариВКомірках_ФункціяДляКолонки()
         {
-            Dictionary<string, TreeCellDataFunc> columns = new Dictionary<string, TreeCellDataFunc>();
-
-            columns.Add("ВНаявності", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла);
+            Dictionary<string, TreeCellDataFunc> columns = new Dictionary<string, TreeCellDataFunc>
+            {
+                { "ВНаявності", ФункціїДляЗвітів.ФункціяДляКолонкиБазоваДляЧисла }
+            };
 
             return columns;
         }

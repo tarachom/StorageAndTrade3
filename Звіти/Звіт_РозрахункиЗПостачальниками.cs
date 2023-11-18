@@ -156,7 +156,7 @@ namespace StorageAndTrade
             };
         }
 
-        HBox ВідобразитиФільтр(string typeReport, ПараметриФільтр Фільтр)
+        async ValueTask<HBox> ВідобразитиФільтр(string typeReport, ПараметриФільтр Фільтр)
         {
             HBox hBoxCaption = new HBox();
 
@@ -180,13 +180,13 @@ namespace StorageAndTrade
             }
 
             if (!Фільтр.Контрагент.IsEmpty())
-                text += "Контрагент: <b>" + Фільтр.Контрагент.GetPresentation() + "</b>; ";
+                text += "Контрагент: <b>" + await Фільтр.Контрагент.GetPresentation() + "</b>; ";
 
             if (!Фільтр.Контрагент_Папка.IsEmpty())
-                text += "Контрагент папка: <b>" + Фільтр.Контрагент_Папка.GetPresentation() + "</b>; ";
+                text += "Контрагент папка: <b>" + await Фільтр.Контрагент_Папка.GetPresentation() + "</b>; ";
 
             if (!Фільтр.Валюта.IsEmpty())
-                text += "Валюта: <b>" + Фільтр.Валюта.GetPresentation() + "</b>; ";
+                text += "Валюта: <b>" + await Фільтр.Валюта.GetPresentation() + "</b>; ";
 
             hBoxCaption.PackStart(new Label(text) { Wrap = true, UseMarkup = true }, false, false, 2);
 
@@ -208,7 +208,7 @@ namespace StorageAndTrade
             Документи(СформуватиФільтр());
         }
 
-        void Залишки(object? Параметри, bool refreshPage = false)
+        async void Залишки(object? Параметри, bool refreshPage = false)
         {
             ПараметриФільтр Фільтр = Параметри != null ? (ПараметриФільтр)Параметри : new ПараметриФільтр();
 
@@ -290,24 +290,34 @@ ORDER BY Контрагент_Назва
 
             #endregion
 
-            Dictionary<string, string> ВидиміКолонки = new Dictionary<string, string>();
-            ВидиміКолонки.Add("Контрагент_Назва", "Контрагент");
-            ВидиміКолонки.Add("Валюта_Назва", "Валюта");
-            ВидиміКолонки.Add("Сума", "Сума");
+            Dictionary<string, string> ВидиміКолонки = new Dictionary<string, string>
+            {
+                { "Контрагент_Назва", "Контрагент" },
+                { "Валюта_Назва", "Валюта" },
+                { "Сума", "Сума" }
+            };
 
-            Dictionary<string, string> КолонкиДаних = new Dictionary<string, string>();
-            КолонкиДаних.Add("Контрагент_Назва", "Контрагент");
-            КолонкиДаних.Add("Валюта_Назва", "Валюта");
+            Dictionary<string, string> КолонкиДаних = new Dictionary<string, string>
+            {
+                { "Контрагент_Назва", "Контрагент" },
+                { "Валюта_Назва", "Валюта" }
+            };
 
-            Dictionary<string, string> ТипиДаних = new Dictionary<string, string>();
-            ТипиДаних.Add("Контрагент_Назва", Контрагенти_Const.POINTER);
-            ТипиДаних.Add("Валюта_Назва", Валюти_Const.POINTER);
+            Dictionary<string, string> ТипиДаних = new Dictionary<string, string>
+            {
+                { "Контрагент_Назва", Контрагенти_Const.POINTER },
+                { "Валюта_Назва", Валюти_Const.POINTER }
+            };
 
-            Dictionary<string, float> ПозиціяТекстуВКолонці = new Dictionary<string, float>();
-            ПозиціяТекстуВКолонці.Add("Сума", 1);
+            Dictionary<string, float> ПозиціяТекстуВКолонці = new Dictionary<string, float>
+            {
+                { "Сума", 1 }
+            };
 
-            Dictionary<string, TreeCellDataFunc> ФункціяДляКолонки = new Dictionary<string, TreeCellDataFunc>();
-            ФункціяДляКолонки.Add("Сума", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним);
+            Dictionary<string, TreeCellDataFunc> ФункціяДляКолонки = new Dictionary<string, TreeCellDataFunc>
+            {
+                { "Сума", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним }
+            };
 
             Dictionary<string, object> paramQuery = new Dictionary<string, object>();
 
@@ -325,10 +335,10 @@ ORDER BY Контрагент_Назва
             ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних, ТипиДаних, ПозиціяТекстуВКолонці, ФункціяДляКолонки);
             ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, columnsName, listRow);
 
-            ФункціїДляЗвітів.CreateReportNotebookPage(reportNotebook, "Залишки", ВідобразитиФільтр("Залишки", Фільтр), treeView, Залишки, Фільтр, refreshPage);
+            ФункціїДляЗвітів.CreateReportNotebookPage(reportNotebook, "Залишки", await ВідобразитиФільтр("Залишки", Фільтр), treeView, Залишки, Фільтр, refreshPage);
         }
 
-        void ЗалишкиТаОбороти(object? Параметри, bool refreshPage = false)
+        async void ЗалишкиТаОбороти(object? Параметри, bool refreshPage = false)
         {
             ПараметриФільтр Фільтр = Параметри != null ? (ПараметриФільтр)Параметри : new ПараметриФільтр();
 
@@ -484,37 +494,49 @@ ORDER BY Контрагент_Назва, Валюта_Назва
 
             #endregion
 
-            Dictionary<string, string> ВидиміКолонки = new Dictionary<string, string>();
-            ВидиміКолонки.Add("Контрагент_Назва", "Контрагент");
-            ВидиміКолонки.Add("Валюта_Назва", "Валюта");
-            ВидиміКолонки.Add("ПочатковийЗалишок", "На початок");
-            ВидиміКолонки.Add("Прихід", "Прихід");
-            ВидиміКолонки.Add("Розхід", "Розхід");
-            ВидиміКолонки.Add("КінцевийЗалишок", "На кінець");
+            Dictionary<string, string> ВидиміКолонки = new Dictionary<string, string>
+            {
+                { "Контрагент_Назва", "Контрагент" },
+                { "Валюта_Назва", "Валюта" },
+                { "ПочатковийЗалишок", "На початок" },
+                { "Прихід", "Прихід" },
+                { "Розхід", "Розхід" },
+                { "КінцевийЗалишок", "На кінець" }
+            };
 
-            Dictionary<string, string> КолонкиДаних = new Dictionary<string, string>();
-            КолонкиДаних.Add("Контрагент_Назва", "Контрагент");
-            КолонкиДаних.Add("Валюта_Назва", "Валюта");
+            Dictionary<string, string> КолонкиДаних = new Dictionary<string, string>
+            {
+                { "Контрагент_Назва", "Контрагент" },
+                { "Валюта_Назва", "Валюта" }
+            };
 
-            Dictionary<string, string> ТипиДаних = new Dictionary<string, string>();
-            ТипиДаних.Add("Контрагент_Назва", Контрагенти_Const.POINTER);
-            ТипиДаних.Add("Валюта_Назва", Валюти_Const.POINTER);
+            Dictionary<string, string> ТипиДаних = new Dictionary<string, string>
+            {
+                { "Контрагент_Назва", Контрагенти_Const.POINTER },
+                { "Валюта_Назва", Валюти_Const.POINTER }
+            };
 
-            Dictionary<string, float> ПозиціяТекстуВКолонці = new Dictionary<string, float>();
-            ПозиціяТекстуВКолонці.Add("ПочатковийЗалишок", 1);
-            ПозиціяТекстуВКолонці.Add("Прихід", 1);
-            ПозиціяТекстуВКолонці.Add("Розхід", 1);
-            ПозиціяТекстуВКолонці.Add("КінцевийЗалишок", 1);
+            Dictionary<string, float> ПозиціяТекстуВКолонці = new Dictionary<string, float>
+            {
+                { "ПочатковийЗалишок", 1 },
+                { "Прихід", 1 },
+                { "Розхід", 1 },
+                { "КінцевийЗалишок", 1 }
+            };
 
-            Dictionary<string, TreeCellDataFunc> ФункціяДляКолонки = new Dictionary<string, TreeCellDataFunc>();
-            ФункціяДляКолонки.Add("ПочатковийЗалишок", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним);
-            ФункціяДляКолонки.Add("Прихід", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним);
-            ФункціяДляКолонки.Add("Розхід", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним);
-            ФункціяДляКолонки.Add("КінцевийЗалишок", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним);
+            Dictionary<string, TreeCellDataFunc> ФункціяДляКолонки = new Dictionary<string, TreeCellDataFunc>
+            {
+                { "ПочатковийЗалишок", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним },
+                { "Прихід", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним },
+                { "Розхід", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним },
+                { "КінцевийЗалишок", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним }
+            };
 
-            Dictionary<string, object> paramQuery = new Dictionary<string, object>();
-            paramQuery.Add("ПочатокПеріоду", Фільтр.ДатаПочатокПеріоду);
-            paramQuery.Add("КінецьПеріоду", Фільтр.ДатаКінецьПеріоду);
+            Dictionary<string, object> paramQuery = new Dictionary<string, object>
+            {
+                { "ПочатокПеріоду", Фільтр.ДатаПочатокПеріоду },
+                { "КінецьПеріоду", Фільтр.ДатаКінецьПеріоду }
+            };
 
             string[] columnsName;
             List<Dictionary<string, object>> listRow;
@@ -530,10 +552,10 @@ ORDER BY Контрагент_Назва, Валюта_Назва
             ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних, ТипиДаних, ПозиціяТекстуВКолонці, ФункціяДляКолонки);
             ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, columnsName, listRow);
 
-            ФункціїДляЗвітів.CreateReportNotebookPage(reportNotebook, "Залишки та обороти", ВідобразитиФільтр("ЗалишкиТаОбороти", Фільтр), treeView, ЗалишкиТаОбороти, Фільтр, refreshPage);
+            ФункціїДляЗвітів.CreateReportNotebookPage(reportNotebook, "Залишки та обороти", await ВідобразитиФільтр("ЗалишкиТаОбороти", Фільтр), treeView, ЗалишкиТаОбороти, Фільтр, refreshPage);
         }
 
-        void Документи(object? Параметри, bool refreshPage = false)
+        async void Документи(object? Параметри, bool refreshPage = false)
         {
             ПараметриФільтр Фільтр = Параметри != null ? (ПараметриФільтр)Параметри : new ПараметриФільтр();
 
@@ -662,33 +684,45 @@ ORDER BY period ASC
 
             #endregion
 
-            Dictionary<string, string> ВидиміКолонки = new Dictionary<string, string>();
-            ВидиміКолонки.Add("income", "Рух");
-            ВидиміКолонки.Add("Документ", "Документ");
-            ВидиміКолонки.Add("Контрагент_Назва", "Контрагент");
-            ВидиміКолонки.Add("Валюта_Назва", "Валюта");
-            ВидиміКолонки.Add("Сума", "Сума");
+            Dictionary<string, string> ВидиміКолонки = new Dictionary<string, string>
+            {
+                { "income", "Рух" },
+                { "Документ", "Документ" },
+                { "Контрагент_Назва", "Контрагент" },
+                { "Валюта_Назва", "Валюта" },
+                { "Сума", "Сума" }
+            };
 
-            Dictionary<string, string> КолонкиДаних = new Dictionary<string, string>();
-            КолонкиДаних.Add("Документ", "uid_and_text");
-            КолонкиДаних.Add("Контрагент_Назва", "Контрагент");
-            КолонкиДаних.Add("Валюта_Назва", "Валюта");
+            Dictionary<string, string> КолонкиДаних = new Dictionary<string, string>
+            {
+                { "Документ", "uid_and_text" },
+                { "Контрагент_Назва", "Контрагент" },
+                { "Валюта_Назва", "Валюта" }
+            };
 
-            Dictionary<string, string> ТипиДаних = new Dictionary<string, string>();
-            ТипиДаних.Add("Документ", "Документи.*");
-            ТипиДаних.Add("Контрагент_Назва", Контрагенти_Const.POINTER);
-            ТипиДаних.Add("Валюта_Назва", Валюти_Const.POINTER);
+            Dictionary<string, string> ТипиДаних = new Dictionary<string, string>
+            {
+                { "Документ", "Документи.*" },
+                { "Контрагент_Назва", Контрагенти_Const.POINTER },
+                { "Валюта_Назва", Валюти_Const.POINTER }
+            };
 
-            Dictionary<string, float> ПозиціяТекстуВКолонці = new Dictionary<string, float>();
-            ПозиціяТекстуВКолонці.Add("income", 0.5f);
-            ПозиціяТекстуВКолонці.Add("Сума", 1);
+            Dictionary<string, float> ПозиціяТекстуВКолонці = new Dictionary<string, float>
+            {
+                { "income", 0.5f },
+                { "Сума", 1 }
+            };
 
-            Dictionary<string, TreeCellDataFunc> ФункціяДляКолонки = new Dictionary<string, TreeCellDataFunc>();
-            ФункціяДляКолонки.Add("Сума", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним);
+            Dictionary<string, TreeCellDataFunc> ФункціяДляКолонки = new Dictionary<string, TreeCellDataFunc>
+            {
+                { "Сума", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним }
+            };
 
-            Dictionary<string, object> paramQuery = new Dictionary<string, object>();
-            paramQuery.Add("ПочатокПеріоду", Фільтр.ДатаПочатокПеріоду);
-            paramQuery.Add("КінецьПеріоду", Фільтр.ДатаКінецьПеріоду);
+            Dictionary<string, object> paramQuery = new Dictionary<string, object>
+            {
+                { "ПочатокПеріоду", Фільтр.ДатаПочатокПеріоду },
+                { "КінецьПеріоду", Фільтр.ДатаКінецьПеріоду }
+            };
 
             string[] columnsName;
             List<Dictionary<string, object>> listRow;
@@ -704,7 +738,7 @@ ORDER BY period ASC
             ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних, ТипиДаних, ПозиціяТекстуВКолонці, ФункціяДляКолонки);
             ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, columnsName, listRow);
 
-            ФункціїДляЗвітів.CreateReportNotebookPage(reportNotebook, "Документи", ВідобразитиФільтр("Документи", Фільтр), treeView, Документи, Фільтр, refreshPage);
+            ФункціїДляЗвітів.CreateReportNotebookPage(reportNotebook, "Документи", await ВідобразитиФільтр("Документи", Фільтр), treeView, Документи, Фільтр, refreshPage);
         }
 
 

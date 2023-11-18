@@ -189,7 +189,7 @@ namespace StorageAndTrade
             };
         }
 
-        HBox ВідобразитиФільтр(string typeReport, ПараметриФільтр Фільтр)
+        async ValueTask<HBox> ВідобразитиФільтр(string typeReport, ПараметриФільтр Фільтр)
         {
             HBox hBoxCaption = new HBox();
 
@@ -213,22 +213,22 @@ namespace StorageAndTrade
             }
 
             if (!Фільтр.Номенклатура.IsEmpty())
-                text += "Номенклатура: <b>" + Фільтр.Номенклатура.GetPresentation() + "</b>; ";
+                text += "Номенклатура: <b>" + await Фільтр.Номенклатура.GetPresentation() + "</b>; ";
 
             if (!Фільтр.Номенклатура_Папка.IsEmpty())
-                text += "Номенклатура папка: <b>" + Фільтр.Номенклатура_Папка.GetPresentation() + "</b>; ";
+                text += "Номенклатура папка: <b>" + await Фільтр.Номенклатура_Папка.GetPresentation() + "</b>; ";
 
             if (!Фільтр.ХарактеристикиНоменклатури.IsEmpty())
-                text += "Характеристика: <b>" + Фільтр.ХарактеристикиНоменклатури.GetPresentation() + "</b>; ";
+                text += "Характеристика: <b>" + await Фільтр.ХарактеристикиНоменклатури.GetPresentation() + "</b>; ";
 
             if (!Фільтр.Склад.IsEmpty())
-                text += "Склад: <b>" + Фільтр.Склад.GetPresentation() + "</b>; ";
+                text += "Склад: <b>" + await Фільтр.Склад.GetPresentation() + "</b>; ";
 
             if (!Фільтр.Склад_Папка.IsEmpty())
-                text += "Склад папка: <b>" + Фільтр.Склад_Папка.GetPresentation() + "</b>; ";
+                text += "Склад папка: <b>" + await Фільтр.Склад_Папка.GetPresentation() + "</b>; ";
 
             if (!Фільтр.Серія.IsEmpty())
-                text += "Серія: <b>" + Фільтр.Серія.GetPresentation() + "</b>; ";
+                text += "Серія: <b>" + await Фільтр.Серія.GetPresentation() + "</b>; ";
 
             hBoxCaption.PackStart(new Label(text) { Wrap = true, UseMarkup = true }, false, false, 2);
 
@@ -250,7 +250,7 @@ namespace StorageAndTrade
             Документи(СформуватиФільтр());
         }
 
-        void Залишки(object? Параметри, bool refreshPage = false)
+        async void Залишки(object? Параметри, bool refreshPage = false)
         {
             ПараметриФільтр Фільтр = Параметри != null ? (ПараметриФільтр)Параметри : new ПараметриФільтр();
 
@@ -426,10 +426,10 @@ ORDER BY Номенклатура_Назва
             ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних, ТипиДаних, ПозиціяТекстуВКолонці, ФункціяДляКолонки);
             ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, columnsName, listRow);
 
-            ФункціїДляЗвітів.CreateReportNotebookPage(reportNotebook, "Залишки", ВідобразитиФільтр("Залишки", Фільтр), treeView, Залишки, Фільтр, refreshPage);
+            ФункціїДляЗвітів.CreateReportNotebookPage(reportNotebook, "Залишки", await ВідобразитиФільтр("Залишки", Фільтр), treeView, Залишки, Фільтр, refreshPage);
         }
 
-        void ЗалишкиТаОбороти(object? Параметри, bool refreshPage = false)
+        async void ЗалишкиТаОбороти(object? Параметри, bool refreshPage = false)
         {
             ПараметриФільтр Фільтр = Параметри != null ? (ПараметриФільтр)Параметри : new ПараметриФільтр();
 
@@ -702,10 +702,10 @@ ORDER BY Номенклатура_Назва, ХарактеристикаНом
             ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних, ТипиДаних, ПозиціяТекстуВКолонці, ФункціяДляКолонки);
             ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, columnsName, listRow);
 
-            ФункціїДляЗвітів.CreateReportNotebookPage(reportNotebook, "Залишки та обороти", ВідобразитиФільтр("ЗалишкиТаОбороти", Фільтр), treeView, ЗалишкиТаОбороти, Фільтр, refreshPage);
+            ФункціїДляЗвітів.CreateReportNotebookPage(reportNotebook, "Залишки та обороти", await ВідобразитиФільтр("ЗалишкиТаОбороти", Фільтр), treeView, ЗалишкиТаОбороти, Фільтр, refreshPage);
         }
 
-        void Документи(object? Параметри, bool refreshPage = false)
+        async void Документи(object? Параметри, bool refreshPage = false)
         {
             ПараметриФільтр Фільтр = Параметри != null ? (ПараметриФільтр)Параметри : new ПараметриФільтр();
 
@@ -941,7 +941,7 @@ ORDER BY period ASC
             ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних, ТипиДаних, ПозиціяТекстуВКолонці, ФункціяДляКолонки);
             ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, columnsName, listRow);
 
-            ФункціїДляЗвітів.CreateReportNotebookPage(reportNotebook, "Документи", ВідобразитиФільтр("Документи", Фільтр), treeView, Документи, Фільтр, refreshPage);
+            ФункціїДляЗвітів.CreateReportNotebookPage(reportNotebook, "Документи", await ВідобразитиФільтр("Документи", Фільтр), treeView, Документи, Фільтр, refreshPage);
         }
 
 
