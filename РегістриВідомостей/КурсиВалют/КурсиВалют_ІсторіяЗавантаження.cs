@@ -50,15 +50,17 @@ namespace StorageAndTrade
             ShowAll();
         }
 
-        public void LoadRecords()
+        public async void LoadRecords()
         {
             foreach (Widget Child in vBoxMessage.Children)
                 vBoxMessage.Remove(Child);
 
-            List<Dictionary<string, object>> listRow = ФункціїДляФоновихЗавдань.ОтриматиЗаписиЗІсторіїЗавантаженняКурсуВалют();
+            var recordResult = await ФункціїДляФоновихЗавдань.ОтриматиЗаписиЗІсторіїЗавантаженняКурсуВалют();
 
-            foreach (Dictionary<string, object> row in listRow)
+            foreach (Dictionary<string, object> row in recordResult.ListRow)
                 CreateMessage(row);
+
+            vBoxMessage.ShowAll();
         }
 
         void CreateMessage(Dictionary<string, object> row)
@@ -75,9 +77,9 @@ namespace StorageAndTrade
             vBoxMessage.PackStart(new Separator(Orientation.Horizontal), false, false, 5);
         }
 
-        void OnClear(object? sender, EventArgs args)
+        async void OnClear(object? sender, EventArgs args)
         {
-            ФункціїДляФоновихЗавдань.ОчиститиІсторіюЗавантаженняКурсуВалют(true);
+            await ФункціїДляФоновихЗавдань.ОчиститиІсторіюЗавантаженняКурсуВалют(true);
             LoadRecords();
         }
 

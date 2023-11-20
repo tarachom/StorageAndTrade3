@@ -30,6 +30,7 @@ using Конфа = StorageAndTrade_1_0;
 using Константи = StorageAndTrade_1_0.Константи;
 using StorageAndTrade_1_0.Довідники;
 using StorageAndTrade_1_0.РегістриВідомостей;
+using AccountingSoftware;
 
 namespace StorageAndTrade
 {
@@ -53,7 +54,7 @@ namespace StorageAndTrade
             await завантаженняКурсівВалют_Історія_TablePart.Save(false);
         }
 
-        public static void ОчиститиІсторіюЗавантаженняКурсуВалют(bool clear_all = false)
+        public static async ValueTask ОчиститиІсторіюЗавантаженняКурсуВалют(bool clear_all = false)
         {
             string query = @$"
 DELETE FROM {Константи.ЗавантаженняДанихІзСайтів.ЗавантаженняКурсівВалют_Історія_TablePart.TABLE}
@@ -71,13 +72,13 @@ WHERE {Константи.ЗавантаженняДанихІзСайтів.З�
                 { "Дата", DateTime.Now.AddDays(-7) }
             };
 
-            Конфа.Config.Kernel!.DataBase.ExecuteSQL(query, paramQuery);
+            await Конфа.Config.Kernel!.DataBase.ExecuteSQL(query, paramQuery);
         }
 
-        public static List<Dictionary<string, object>> ОтриматиЗаписиЗІсторіїЗавантаженняКурсуВалют(int КількістьЗаписів = 50)
+        public static async ValueTask<SelectRequestAsync_Record> ОтриматиЗаписиЗІсторіїЗавантаженняКурсуВалют(int КількістьЗаписів = 50)
         {
             //Очищення
-            ОчиститиІсторіюЗавантаженняКурсуВалют();
+            await ОчиститиІсторіюЗавантаженняКурсуВалют();
 
             //Вибірка
             string query = @$"
@@ -91,18 +92,10 @@ FROM
 ORDER BY Дата DESC
 LIMIT {КількістьЗаписів}
 ";
-
-            Dictionary<string, object> paramQuery = new Dictionary<string, object>();
-
-            string[] columnsName;
-            List<Dictionary<string, object>> listRow;
-
-            Конфа.Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listRow);
-
-            return listRow;
+            return await Конфа.Config.Kernel!.DataBase.SelectRequestAsync(query);
         }
 
-        public static DateTime? ОтриматиДатуОстанньогоЗавантаженняКурсуВалют()
+        public static async ValueTask<DateTime?> ОтриматиДатуОстанньогоЗавантаженняКурсуВалют()
         {
             string query = @$"
 SELECT
@@ -112,23 +105,19 @@ FROM
 ORDER BY Дата DESC
 LIMIT 1
 ";
-            Dictionary<string, object> paramQuery = new Dictionary<string, object>();
 
-            string[] columnsName;
-            List<Dictionary<string, object>> listRow;
+            var recordResult = await Конфа.Config.Kernel!.DataBase.SelectRequestAsync(query);
 
-            Конфа.Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listRow);
-
-            if (listRow.Count == 1)
+            if (recordResult.Result)
             {
-                Dictionary<string, object> Рядок = listRow[0];
+                Dictionary<string, object> Рядок = recordResult.ListRow[0];
                 return DateTime.Parse(Рядок["Дата"]?.ToString() ?? DateTime.MinValue.ToString());
             }
             else
                 return null;
         }
 
-        public static List<Dictionary<string, object>> ОтриматиКурсиВалютДляСтартовоїСторінки()
+        public static async ValueTask<SelectRequestAsync_Record> ОтриматиКурсиВалютДляСтартовоїСторінки()
         {
             string query = @$"
 WITH Валюти AS
@@ -155,16 +144,9 @@ SELECT
         LIMIT 1
     ) AS Курс
 FROM
-    Валюти
-";
-            Dictionary<string, object> paramQuery = new Dictionary<string, object>();
+    Валюти";
 
-            string[] columnsName;
-            List<Dictionary<string, object>> listRow;
-
-            Конфа.Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listRow);
-
-            return listRow;
+            return await Конфа.Config.Kernel!.DataBase.SelectRequestAsync(query);
         }
     }
 }

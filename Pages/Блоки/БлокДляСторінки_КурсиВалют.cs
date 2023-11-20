@@ -125,17 +125,17 @@ namespace StorageAndTrade
         /// <summary>
         /// Інтерфейс стартової сторінки
         /// </summary>
-        public void StartDesktop()
+        public async void StartDesktop()
         {
-            DateTime? ДатуОстанньогоЗавантаження = ФункціїДляФоновихЗавдань.ОтриматиДатуОстанньогоЗавантаженняКурсуВалют();
+            DateTime? ДатуОстанньогоЗавантаження = await ФункціїДляФоновихЗавдань.ОтриматиДатуОстанньогоЗавантаженняКурсуВалют();
             lbDateLastDownload.Text = "Оновлення: " + (ДатуОстанньогоЗавантаження != null ? ДатуОстанньогоЗавантаження.ToString() : "...");
 
             foreach (Widget child in vBoxCursyValut.Children)
                 vBoxCursyValut.Remove(child);
 
-            List<Dictionary<string, object>> ListRow = ФункціїДляФоновихЗавдань.ОтриматиКурсиВалютДляСтартовоїСторінки();
+            var recordResult = await ФункціїДляФоновихЗавдань.ОтриматиКурсиВалютДляСтартовоїСторінки();
 
-            foreach (Dictionary<string, object> Row in ListRow)
+            foreach (Dictionary<string, object> Row in recordResult.ListRow)
             {
                 HBox hBoxItemValuta = new HBox();
                 hBoxItemValuta.PackStart(new Label(Row["ВалютаНазва"].ToString()), false, false, 0);
@@ -154,10 +154,7 @@ namespace StorageAndTrade
             if (Константи.ЗавантаженняДанихІзСайтів.АвтоматичноЗавантажуватиКурсиВалютПриЗапуску_Const)
             {
                 //Завантаження кожного разу при запуску
-                Обробка_ЗавантаженняКурсівВалют page = new Обробка_ЗавантаженняКурсівВалют
-                {
-                    CallBack_EndBackgroundWork = StartDesktop
-                };
+                Обробка_ЗавантаженняКурсівВалют page = new Обробка_ЗавантаженняКурсівВалют { CallBack_EndBackgroundWork = StartDesktop };
 
                 page.OnDownload(null, new EventArgs());
 
