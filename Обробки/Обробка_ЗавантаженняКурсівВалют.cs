@@ -224,7 +224,7 @@ LIMIT 1
                         Dictionary<string, object> Рядок = listRow[0];
 
                         КурсиВалют_Objest курсиВалют_Objest = new КурсиВалют_Objest();
-                        if (курсиВалют_Objest.Read(new UnigueID(Рядок["uid"])))
+                        if (await курсиВалют_Objest.Read(new UnigueID(Рядок["uid"])))
                         {
                             курсиВалют_Objest.Курс = Курс;
                             await курсиВалют_Objest.Save();

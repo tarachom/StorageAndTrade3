@@ -171,11 +171,11 @@ namespace StorageAndTrade
         /// Функція обробки перед збереження та після збереження
         /// </summary>
         /// <param name="closePage"></param>
-        void BeforeAndAfterSave(bool closePage = false)
+        async void BeforeAndAfterSave(bool closePage = false)
         {
             GetValue();
 
-            Save();
+            await Save();
 
             if (CallBack_LoadRecords != null)
                 CallBack_LoadRecords.Invoke(UnigueID);
@@ -189,7 +189,7 @@ namespace StorageAndTrade
         /// <summary>
         /// Збереження
         /// </summary>
-        protected virtual void Save() { }
+        protected virtual ValueTask Save() { return new ValueTask(); }
 
         /// <summary>
         /// Записати повідомлення про помилку і вивести меседж

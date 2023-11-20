@@ -782,7 +782,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи.Т
         public static TreePath? CurrentPath;
 
         // Завантаження даних
-        public static void LoadRecords()
+        public static async ValueTask LoadRecords() 
         {
             Store.Clear();
             SelectPath = CurrentPath = null;
@@ -861,12 +861,12 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи.Т
                 <xsl:text>";</xsl:text>
             </xsl:if>
           
-            string[] columnsName;
-            List&lt;Dictionary&lt;string, object&gt;&gt; listRow;
+            //string[] columnsName;
+            //List&lt;Dictionary&lt;string, object&gt;&gt; listRow;
 
-            Config.Kernel!.DataBase.SelectRequest(unionAllQuery, paramQuery, out columnsName, out listRow);
+            var recordResult = await Config.Kernel!.DataBase.SelectRequestAsync(unionAllQuery, paramQuery);
 
-            foreach (Dictionary&lt;string, object&gt; row in listRow)
+            foreach (Dictionary&lt;string, object&gt; row in recordResult.ListRow)
             {
                 Журнали_<xsl:value-of select="$JournalName"/> record = new Журнали_<xsl:value-of select="$JournalName"/>();
                 record.ID = row["uid"]?.ToString() ?? "";
@@ -952,7 +952,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВі�
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
-        public static void LoadRecords()
+        public static async ValueTask LoadRecords()
         {
             Store.Clear();
             SelectPath = CurrentPath = null;
@@ -986,7 +986,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВі�
             </xsl:for-each>
 
             /* Read */
-            <xsl:value-of select="$RegisterName"/>_RecordsSet.Read();
+            await <xsl:value-of select="$RegisterName"/>_RecordsSet.Read();
             foreach (<xsl:value-of select="$RegisterName"/>_RecordsSet.Record record in <xsl:value-of select="$RegisterName"/>_RecordsSet.Records)
             {
                 <xsl:value-of select="$RegisterName"/>_<xsl:value-of select="$TabularListName"/> Record = new <xsl:value-of select="$RegisterName"/>_<xsl:value-of select="$TabularListName"/>

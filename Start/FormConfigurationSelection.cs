@@ -104,7 +104,7 @@ namespace StorageAndTrade
                 return;
             }
 
-            if (Конфа.Config.Kernel.DataBase.IfExistsTable("tab_constants"))
+            if (await Конфа.Config.Kernel.DataBase.IfExistsTable("tab_constants"))
             {
                 await Конфа.Config.ReadAllConstants();
 

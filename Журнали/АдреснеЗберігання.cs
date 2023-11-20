@@ -36,11 +36,11 @@ namespace StorageAndTrade
             ТабличніСписки.Журнали_АдреснеЗберігання.AddColumns(TreeViewGrid);
         }
 
-        public override void LoadRecords()
+        public override async void LoadRecords()
         {
             ТабличніСписки.Журнали_АдреснеЗберігання.SelectPointerItem = SelectPointerItem;
 
-            ТабличніСписки.Журнали_АдреснеЗберігання.LoadRecords();
+            await ТабличніСписки.Журнали_АдреснеЗберігання.LoadRecords();
 
             if (ТабличніСписки.Журнали_АдреснеЗберігання.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.Журнали_АдреснеЗберігання.SelectPath, TreeViewGrid.Columns[0], false);

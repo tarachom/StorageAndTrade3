@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 20.11.2023 17:18:15
+ * Дата конфігурації: 20.11.2023 20:37:16
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон Gtk.xslt
@@ -12404,7 +12404,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static TreePath? CurrentPath;
 
         // Завантаження даних
-        public static void LoadRecords()
+        public static async ValueTask LoadRecords() 
         {
             Store.Clear();
             SelectPath = CurrentPath = null;
@@ -13821,12 +13821,12 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
             unionAllQuery += "\nORDER BY Дата";
           
-            string[] columnsName;
-            List<Dictionary<string, object>> listRow;
+            //string[] columnsName;
+            //List<Dictionary<string, object>> listRow;
 
-            Config.Kernel!.DataBase.SelectRequest(unionAllQuery, paramQuery, out columnsName, out listRow);
+            var recordResult = await Config.Kernel!.DataBase.SelectRequestAsync(unionAllQuery, paramQuery);
 
-            foreach (Dictionary<string, object> row in listRow)
+            foreach (Dictionary<string, object> row in recordResult.ListRow)
             {
                 Журнали_Повний record = new Журнали_Повний();
                 record.ID = row["uid"]?.ToString() ?? "";
@@ -13994,7 +13994,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static TreePath? CurrentPath;
 
         // Завантаження даних
-        public static void LoadRecords()
+        public static async ValueTask LoadRecords() 
         {
             Store.Clear();
             SelectPath = CurrentPath = null;
@@ -14250,12 +14250,12 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
             unionAllQuery += "\nORDER BY Дата";
           
-            string[] columnsName;
-            List<Dictionary<string, object>> listRow;
+            //string[] columnsName;
+            //List<Dictionary<string, object>> listRow;
 
-            Config.Kernel!.DataBase.SelectRequest(unionAllQuery, paramQuery, out columnsName, out listRow);
+            var recordResult = await Config.Kernel!.DataBase.SelectRequestAsync(unionAllQuery, paramQuery);
 
-            foreach (Dictionary<string, object> row in listRow)
+            foreach (Dictionary<string, object> row in recordResult.ListRow)
             {
                 Журнали_Закупівлі record = new Журнали_Закупівлі();
                 record.ID = row["uid"]?.ToString() ?? "";
@@ -14437,7 +14437,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static TreePath? CurrentPath;
 
         // Завантаження даних
-        public static void LoadRecords()
+        public static async ValueTask LoadRecords() 
         {
             Store.Clear();
             SelectPath = CurrentPath = null;
@@ -14850,12 +14850,12 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
             unionAllQuery += "\nORDER BY Дата";
           
-            string[] columnsName;
-            List<Dictionary<string, object>> listRow;
+            //string[] columnsName;
+            //List<Dictionary<string, object>> listRow;
 
-            Config.Kernel!.DataBase.SelectRequest(unionAllQuery, paramQuery, out columnsName, out listRow);
+            var recordResult = await Config.Kernel!.DataBase.SelectRequestAsync(unionAllQuery, paramQuery);
 
-            foreach (Dictionary<string, object> row in listRow)
+            foreach (Dictionary<string, object> row in recordResult.ListRow)
             {
                 Журнали_Продажі record = new Журнали_Продажі();
                 record.ID = row["uid"]?.ToString() ?? "";
@@ -15016,7 +15016,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static TreePath? CurrentPath;
 
         // Завантаження даних
-        public static void LoadRecords()
+        public static async ValueTask LoadRecords() 
         {
             Store.Clear();
             SelectPath = CurrentPath = null;
@@ -15191,12 +15191,12 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
             unionAllQuery += "\nORDER BY Дата";
           
-            string[] columnsName;
-            List<Dictionary<string, object>> listRow;
+            //string[] columnsName;
+            //List<Dictionary<string, object>> listRow;
 
-            Config.Kernel!.DataBase.SelectRequest(unionAllQuery, paramQuery, out columnsName, out listRow);
+            var recordResult = await Config.Kernel!.DataBase.SelectRequestAsync(unionAllQuery, paramQuery);
 
-            foreach (Dictionary<string, object> row in listRow)
+            foreach (Dictionary<string, object> row in recordResult.ListRow)
             {
                 Журнали_Каса record = new Журнали_Каса();
                 record.ID = row["uid"]?.ToString() ?? "";
@@ -15362,7 +15362,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static TreePath? CurrentPath;
 
         // Завантаження даних
-        public static void LoadRecords()
+        public static async ValueTask LoadRecords() 
         {
             Store.Clear();
             SelectPath = CurrentPath = null;
@@ -15608,12 +15608,12 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
             unionAllQuery += "\nORDER BY Дата";
           
-            string[] columnsName;
-            List<Dictionary<string, object>> listRow;
+            //string[] columnsName;
+            //List<Dictionary<string, object>> listRow;
 
-            Config.Kernel!.DataBase.SelectRequest(unionAllQuery, paramQuery, out columnsName, out listRow);
+            var recordResult = await Config.Kernel!.DataBase.SelectRequestAsync(unionAllQuery, paramQuery);
 
-            foreach (Dictionary<string, object> row in listRow)
+            foreach (Dictionary<string, object> row in recordResult.ListRow)
             {
                 Журнали_Склад record = new Журнали_Склад();
                 record.ID = row["uid"]?.ToString() ?? "";
@@ -15770,7 +15770,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static TreePath? CurrentPath;
 
         // Завантаження даних
-        public static void LoadRecords()
+        public static async ValueTask LoadRecords() 
         {
             Store.Clear();
             SelectPath = CurrentPath = null;
@@ -15999,12 +15999,12 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
             unionAllQuery += "\nORDER BY Дата";
           
-            string[] columnsName;
-            List<Dictionary<string, object>> listRow;
+            //string[] columnsName;
+            //List<Dictionary<string, object>> listRow;
 
-            Config.Kernel!.DataBase.SelectRequest(unionAllQuery, paramQuery, out columnsName, out listRow);
+            var recordResult = await Config.Kernel!.DataBase.SelectRequestAsync(unionAllQuery, paramQuery);
 
-            foreach (Dictionary<string, object> row in listRow)
+            foreach (Dictionary<string, object> row in recordResult.ListRow)
             {
                 Журнали_АдреснеЗберігання record = new Журнали_АдреснеЗберігання();
                 record.ID = row["uid"]?.ToString() ?? "";
@@ -16100,7 +16100,7 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
-        public static void LoadRecords()
+        public static async ValueTask LoadRecords()
         {
             Store.Clear();
             SelectPath = CurrentPath = null;
@@ -16156,7 +16156,7 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
                   
 
             /* Read */
-            ЦіниНоменклатури_RecordsSet.Read();
+            await ЦіниНоменклатури_RecordsSet.Read();
             foreach (ЦіниНоменклатури_RecordsSet.Record record in ЦіниНоменклатури_RecordsSet.Records)
             {
                 ЦіниНоменклатури_Записи Record = new ЦіниНоменклатури_Записи
@@ -16231,7 +16231,7 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
-        public static void LoadRecords()
+        public static async ValueTask LoadRecords()
         {
             Store.Clear();
             SelectPath = CurrentPath = null;
@@ -16255,7 +16255,7 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
                   
 
             /* Read */
-            КурсиВалют_RecordsSet.Read();
+            await КурсиВалют_RecordsSet.Read();
             foreach (КурсиВалют_RecordsSet.Record record in КурсиВалют_RecordsSet.Records)
             {
                 КурсиВалют_Записи Record = new КурсиВалют_Записи
@@ -16330,7 +16330,7 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
-        public static void LoadRecords()
+        public static async ValueTask LoadRecords()
         {
             Store.Clear();
             SelectPath = CurrentPath = null;
@@ -16370,7 +16370,7 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
                   
 
             /* Read */
-            ШтрихкодиНоменклатури_RecordsSet.Read();
+            await ШтрихкодиНоменклатури_RecordsSet.Read();
             foreach (ШтрихкодиНоменклатури_RecordsSet.Record record in ШтрихкодиНоменклатури_RecordsSet.Records)
             {
                 ШтрихкодиНоменклатури_Записи Record = new ШтрихкодиНоменклатури_Записи
@@ -16437,7 +16437,7 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
-        public static void LoadRecords()
+        public static async ValueTask LoadRecords()
         {
             Store.Clear();
             SelectPath = CurrentPath = null;
@@ -16461,7 +16461,7 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
                   
 
             /* Read */
-            ФайлиДокументів_RecordsSet.Read();
+            await ФайлиДокументів_RecordsSet.Read();
             foreach (ФайлиДокументів_RecordsSet.Record record in ФайлиДокументів_RecordsSet.Records)
             {
                 ФайлиДокументів_Записи Record = new ФайлиДокументів_Записи

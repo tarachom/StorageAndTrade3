@@ -78,7 +78,7 @@ namespace StorageAndTrade
                 };
             }
 
-            public static async void ПісляЗміни_Каса(Запис запис)
+            public static async ValueTask ПісляЗміни_Каса(Запис запис)
             {
                 await запис.Каса.GetPresentation();
             }
@@ -246,10 +246,10 @@ namespace StorageAndTrade
                 case Columns.Каса:
                     {
                         Каси_ШвидкийВибір page = new Каси_ШвидкийВибір() { PopoverParent = popoverSmallSelect, DirectoryPointerItem = запис.Каса.UnigueID };
-                        page.CallBack_OnSelectPointer = (UnigueID selectPointer) =>
+                        page.CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
                         {
                             запис.Каса = new Каси_Pointer(selectPointer);
-                            Запис.ПісляЗміни_Каса(запис);
+                            await Запис.ПісляЗміни_Каса(запис);
 
                             Store.SetValues(iter, запис.ToArray());
                         };

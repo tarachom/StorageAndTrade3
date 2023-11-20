@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 20.11.2023 17:18:15
+ * Дата конфігурації: 20.11.2023 20:37:16
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -2012,7 +2012,7 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 Організації_Triggers.AfterSave(this);
-                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НазваПовна, НазваСкорочена, КраїнаРеєстрації, СвідоцтвоСеріяНомер, СвідоцтвоДатаВидачі });
+                await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НазваПовна, НазваСкорочена, КраїнаРеєстрації, СвідоцтвоСеріяНомер, СвідоцтвоДатаВидачі });
             }
             return result;
         }
@@ -2385,7 +2385,7 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 Номенклатура_Triggers.AfterSave(this);
-                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НазваПовна, Опис, Артикул });
+                await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НазваПовна, Опис, Артикул });
             }
             return result;
         }
@@ -2699,7 +2699,7 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 Виробники_Triggers.AfterSave(this);
-                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
+                await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
             }
             return result;
         }
@@ -2913,7 +2913,7 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 ВидиНоменклатури_Triggers.AfterSave(this);
-                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, Опис });
+                await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, Опис });
             }
             return result;
         }
@@ -3129,7 +3129,7 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 ПакуванняОдиниціВиміру_Triggers.AfterSave(this);
-                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НазваПовна });
+                await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НазваПовна });
             }
             return result;
         }
@@ -3347,7 +3347,7 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 Валюти_Triggers.AfterSave(this);
-                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, КороткаНазва, Код_R030 });
+                await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, КороткаНазва, Код_R030 });
             }
             return result;
         }
@@ -3579,7 +3579,7 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 Контрагенти_Triggers.AfterSave(this);
-                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НазваПовна, РеєстраційнийНомер, Опис, КлючовіСловаДляПошуку });
+                await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НазваПовна, РеєстраційнийНомер, Опис, КлючовіСловаДляПошуку });
             }
             return result;
         }
@@ -4019,7 +4019,7 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 Склади_Triggers.AfterSave(this);
-                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
+                await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
             }
             return result;
         }
@@ -4355,7 +4355,7 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 ВидиЦін_Triggers.AfterSave(this);
-                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
+                await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
             }
             return result;
         }
@@ -4563,7 +4563,7 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 ВидиЦінПостачальників_Triggers.AfterSave(this);
-                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
+                await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
             }
             return result;
         }
@@ -4782,7 +4782,7 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 Користувачі_Triggers.AfterSave(this);
-                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, Коментар });
+                await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, Коментар });
             }
             return result;
         }
@@ -5119,7 +5119,7 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 ФізичніОсоби_Triggers.AfterSave(this);
-                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, ІПН });
+                await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, ІПН });
             }
             return result;
         }
@@ -5445,7 +5445,7 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 СтруктураПідприємства_Triggers.AfterSave(this);
-                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
+                await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
             }
             return result;
         }
@@ -5649,7 +5649,7 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 КраїниСвіту_Triggers.AfterSave(this);
-                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
+                await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
             }
             return result;
         }
@@ -5867,7 +5867,7 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 Файли_Triggers.AfterSave(this);
-                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НазваФайлу });
+                await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НазваФайлу });
             }
             return result;
         }
@@ -6085,7 +6085,7 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 ХарактеристикиНоменклатури_Triggers.AfterSave(this);
-                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НазваПовна });
+                await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НазваПовна });
             }
             return result;
         }
@@ -6295,7 +6295,7 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 Номенклатура_Папки_Triggers.AfterSave(this);
-                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
+                await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
             }
             return result;
         }
@@ -6503,7 +6503,7 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 Контрагенти_Папки_Triggers.AfterSave(this);
-                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
+                await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
             }
             return result;
         }
@@ -6711,7 +6711,7 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 Склади_Папки_Triggers.AfterSave(this);
-                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
+                await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
             }
             return result;
         }
@@ -6923,7 +6923,7 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 Каси_Triggers.AfterSave(this);
-                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
+                await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
             }
             return result;
         }
@@ -7173,7 +7173,7 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 БанківськіРахункиОрганізацій_Triggers.AfterSave(this);
-                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, Банк, НазваБанку, НомерРахунку, АдресаБанку, МістоБанку, ТелефониБанку });
+                await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, Банк, НазваБанку, НомерРахунку, АдресаБанку, МістоБанку, ТелефониБанку });
             }
             return result;
         }
@@ -7469,7 +7469,7 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 ДоговориКонтрагентів_Triggers.AfterSave(this);
-                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, Коментар });
+                await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, Коментар });
             }
             return result;
         }
@@ -7759,7 +7759,7 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 БанківськіРахункиКонтрагентів_Triggers.AfterSave(this);
-                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НазваБанку, КорРахунокБанку, МістоБанку, АдресаБанку, ТелефониБанку });
+                await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НазваБанку, КорРахунокБанку, МістоБанку, АдресаБанку, ТелефониБанку });
             }
             return result;
         }
@@ -8002,7 +8002,7 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 СтаттяРухуКоштів_Triggers.AfterSave(this);
-                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, Опис });
+                await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, Опис });
             }
             return result;
         }
@@ -8304,7 +8304,7 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 СеріїНоменклатури_Triggers.AfterSave(this);
-                BaseWriteFullTextSearch(GetBasis(), new string[] { Номер, Коментар });
+                await BaseWriteFullTextSearch(GetBasis(), new string[] { Номер, Коментар });
             }
             return result;
         }
@@ -8524,7 +8524,7 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 ПартіяТоварівКомпозит_Triggers.AfterSave(this);
-                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
+                await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
             }
             return result;
         }
@@ -8754,7 +8754,7 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 ВидиЗапасів_Triggers.AfterSave(this);
-                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
+                await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
             }
             return result;
         }
@@ -9070,7 +9070,7 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 Банки_Triggers.AfterSave(this);
-                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, КодМФО, КодЄДРПОУ, НазваНаселеногоПункту, Адреса });
+                await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, КодМФО, КодЄДРПОУ, НазваНаселеногоПункту, Адреса });
             }
             return result;
         }
@@ -9328,7 +9328,7 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 СкладськіПриміщення_Triggers.AfterSave(this);
-                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
+                await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
             }
             return result;
         }
@@ -9564,7 +9564,7 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 СкладськіКомірки_Triggers.AfterSave(this);
-                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
+                await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
             }
             return result;
         }
@@ -9784,7 +9784,7 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 
-                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
+                await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
             }
             return result;
         }
@@ -9999,7 +9999,7 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 ТипорозміриКомірок_Triggers.AfterSave(this);
-                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
+                await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
             }
             return result;
         }
@@ -10217,7 +10217,7 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 СкладськіКомірки_Папки_Triggers.AfterSave(this);
-                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
+                await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
             }
             return result;
         }
@@ -10435,7 +10435,7 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 Блокнот_Triggers.AfterSave(this);
-                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, Опис });
+                await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, Опис });
             }
             return result;
         }
@@ -12453,7 +12453,7 @@ namespace StorageAndTrade_1_0.Документи
             if (result)
             {
                 ЗамовленняПостачальнику_Triggers.AfterSave(this);
-                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
+                await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
             }
 
             return result;
@@ -13355,7 +13355,7 @@ namespace StorageAndTrade_1_0.Документи
             if (result)
             {
                 ПоступленняТоварівТаПослуг_Triggers.AfterSave(this);
-                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
+                await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
             }
 
             return result;
@@ -14221,7 +14221,7 @@ namespace StorageAndTrade_1_0.Документи
             if (result)
             {
                 ЗамовленняКлієнта_Triggers.AfterSave(this);
-                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
+                await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
             }
 
             return result;
@@ -15123,7 +15123,7 @@ namespace StorageAndTrade_1_0.Документи
             if (result)
             {
                 РеалізаціяТоварівТаПослуг_Triggers.AfterSave(this);
-                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
+                await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
             }
 
             return result;
@@ -15727,7 +15727,7 @@ namespace StorageAndTrade_1_0.Документи
             if (result)
             {
                 ВстановленняЦінНоменклатури_Triggers.AfterSave(this);
-                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
+                await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
             }
 
             return result;
@@ -16349,7 +16349,7 @@ namespace StorageAndTrade_1_0.Документи
             if (result)
             {
                 ПрихіднийКасовийОрдер_Triggers.AfterSave(this);
-                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
+                await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
             }
 
             return result;
@@ -17017,7 +17017,7 @@ namespace StorageAndTrade_1_0.Документи
             if (result)
             {
                 РозхіднийКасовийОрдер_Triggers.AfterSave(this);
-                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, КлючовіСловаДляПошуку });
+                await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, КлючовіСловаДляПошуку });
             }
 
             return result;
@@ -17715,7 +17715,7 @@ namespace StorageAndTrade_1_0.Документи
             if (result)
             {
                 ПереміщенняТоварів_Triggers.AfterSave(this);
-                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
+                await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
             }
 
             return result;
@@ -18453,7 +18453,7 @@ namespace StorageAndTrade_1_0.Документи
             if (result)
             {
                 ПоверненняТоварівПостачальнику_Triggers.AfterSave(this);
-                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
+                await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
             }
 
             return result;
@@ -19165,7 +19165,7 @@ namespace StorageAndTrade_1_0.Документи
             if (result)
             {
                 ПоверненняТоварівВідКлієнта_Triggers.AfterSave(this);
-                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
+                await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
             }
 
             return result;
@@ -19817,7 +19817,7 @@ namespace StorageAndTrade_1_0.Документи
             if (result)
             {
                 АктВиконанихРобіт_Triggers.AfterSave(this);
-                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
+                await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
             }
 
             return result;
@@ -20539,7 +20539,7 @@ namespace StorageAndTrade_1_0.Документи
             if (result)
             {
                 ВведенняЗалишків_Triggers.AfterSave(this);
-                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
+                await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
             }
 
             return result;
@@ -21365,7 +21365,7 @@ namespace StorageAndTrade_1_0.Документи
             if (result)
             {
                 
-                BaseWriteFullTextSearch(GetBasis(), new string[] { КлючовіСловаДляПошуку });
+                await BaseWriteFullTextSearch(GetBasis(), new string[] { КлючовіСловаДляПошуку });
             }
 
             return result;
@@ -21872,7 +21872,7 @@ namespace StorageAndTrade_1_0.Документи
             if (result)
             {
                 
-                BaseWriteFullTextSearch(GetBasis(), new string[] { КлючовіСловаДляПошуку });
+                await BaseWriteFullTextSearch(GetBasis(), new string[] { КлючовіСловаДляПошуку });
             }
 
             return result;
@@ -22369,7 +22369,7 @@ namespace StorageAndTrade_1_0.Документи
             if (result)
             {
                 
-                BaseWriteFullTextSearch(GetBasis(), new string[] { КлючовіСловаДляПошуку });
+                await BaseWriteFullTextSearch(GetBasis(), new string[] { КлючовіСловаДляПошуку });
             }
 
             return result;
@@ -22936,7 +22936,7 @@ namespace StorageAndTrade_1_0.Документи
             if (result)
             {
                 ПсуванняТоварів_Triggers.AfterSave(this);
-                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, Причина, Коментар, КлючовіСловаДляПошуку });
+                await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, Причина, Коментар, КлючовіСловаДляПошуку });
             }
 
             return result;
@@ -23550,7 +23550,7 @@ namespace StorageAndTrade_1_0.Документи
             if (result)
             {
                 ВнутрішнєСпоживанняТоварів_Triggers.AfterSave(this);
-                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
+                await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
             }
 
             return result;
@@ -24258,7 +24258,7 @@ namespace StorageAndTrade_1_0.Документи
             if (result)
             {
                 РахунокФактура_Triggers.AfterSave(this);
-                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
+                await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
             }
 
             return result;
@@ -24858,7 +24858,7 @@ namespace StorageAndTrade_1_0.Документи
             if (result)
             {
                 РозміщенняТоварівНаСкладі_Triggers.AfterSave(this);
-                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
+                await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
             }
 
             return result;
@@ -25424,7 +25424,7 @@ namespace StorageAndTrade_1_0.Документи
             if (result)
             {
                 ПереміщенняТоварівНаСкладі_Triggers.AfterSave(this);
-                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
+                await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
             }
 
             return result;
@@ -25996,7 +25996,7 @@ namespace StorageAndTrade_1_0.Документи
             if (result)
             {
                 ЗбіркаТоварівНаСкладі_Triggers.AfterSave(this);
-                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
+                await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
             }
 
             return result;
@@ -26526,7 +26526,7 @@ namespace StorageAndTrade_1_0.Документи
             if (result)
             {
                 РозміщенняНоменклатуриПоКоміркам_Triggers.AfterSave(this);
-                BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
+                await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
             }
 
             return result;
@@ -26885,10 +26885,10 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
 		
         public List<Record> Records { get; set; }
         
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead();
+            await base.BaseRead();
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
                 Record record = new Record();
@@ -26960,9 +26960,9 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
             
         }
         
-        public bool Read(UnigueID uid)
+        public async ValueTask<bool> Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 Номенклатура = new Довідники.Номенклатура_Pointer(base.FieldValue["col_f5"]);
                 ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer(base.FieldValue["col_f6"]);
@@ -27043,10 +27043,10 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
 		
         public List<Record> Records { get; set; }
         
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead();
+            await base.BaseRead();
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
                 Record record = new Record();
@@ -27106,9 +27106,9 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
             
         }
         
-        public bool Read(UnigueID uid)
+        public async ValueTask<bool> Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 Валюта = new Довідники.Валюти_Pointer(base.FieldValue["col_a1"]);
                 Курс = (base.FieldValue["col_a2"] != DBNull.Value) ? (decimal)base.FieldValue["col_a2"] : 0;
@@ -27178,10 +27178,10 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
 		
         public List<Record> Records { get; set; }
         
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead();
+            await base.BaseRead();
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
                 Record record = new Record();
@@ -27245,9 +27245,9 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
             
         }
         
-        public bool Read(UnigueID uid)
+        public async ValueTask<bool> Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 Штрихкод = base.FieldValue["col_a1"].ToString() ?? "";
                 Номенклатура = new Довідники.Номенклатура_Pointer(base.FieldValue["col_a2"]);
@@ -27318,10 +27318,10 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
 		
         public List<Record> Records { get; set; }
         
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead();
+            await base.BaseRead();
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
                 Record record = new Record();
@@ -27373,9 +27373,9 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
             
         }
         
-        public bool Read(UnigueID uid)
+        public async ValueTask<bool> Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 Файл = new Довідники.Файли_Pointer(base.FieldValue["col_a1"]);
                 
@@ -27437,10 +27437,10 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
 		
         public List<Record> Records { get; set; }
         
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead();
+            await base.BaseRead();
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
                 Record record = new Record();
@@ -27504,9 +27504,9 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
             
         }
         
-        public bool Read(UnigueID uid)
+        public async ValueTask<bool> Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 Номенклатура = new Довідники.Номенклатура_Pointer(base.FieldValue["col_a1"]);
                 Склад = new Довідники.Склади_Pointer(base.FieldValue["col_a2"]);
@@ -27875,11 +27875,11 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
 		
         public List<Record> Records { get; set; }
         
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
             
-            base.BaseRead();
+            await base.BaseRead();
             
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -27963,10 +27963,10 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public const string ДоВідвантаження = "col_a7";
         public List<Record> Records { get; set; }
     
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead();
+            await base.BaseRead();
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -27987,12 +27987,12 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             base.BaseClear();
         }
     
-        public void Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
-            base.BaseBeginTransaction();
+            await base.BaseBeginTransaction();
             
             if (clear_all_before_save)
-                base.BaseDelete();
+                await base.BaseDelete();
 
             foreach (Record record in Records)
             {
@@ -28006,15 +28006,15 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_a6", record.ВНаявності);
                 fieldValue.Add("col_a7", record.ДоВідвантаження);
                 
-                record.UID = base.BaseSave(record.UID, fieldValue);
+                record.UID = await base.BaseSave(record.UID, fieldValue);
             }
             
-            base.BaseCommitTransaction();
+            await base.BaseCommitTransaction();
         }
     
-        public void Delete()
+        public async ValueTask Delete()
         {
-            base.BaseDelete();
+            await base.BaseDelete();
         }
         
         public class Record : RegisterAccumulationTablePartRecord
@@ -28054,10 +28054,10 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public const string ДоВідвантаженняЗалишок = "col_b2";
         public List<Record> Records { get; set; }
     
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead();
+            await base.BaseRead();
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -28082,12 +28082,12 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             base.BaseClear();
         }
     
-        public void Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
-            base.BaseBeginTransaction();
+            await base.BaseBeginTransaction();
             
             if (clear_all_before_save)
-                base.BaseDelete();
+                await base.BaseDelete();
 
             foreach (Record record in Records)
             {
@@ -28105,15 +28105,15 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_b1", record.ДоВідвантаженняРозхід);
                 fieldValue.Add("col_b2", record.ДоВідвантаженняЗалишок);
                 
-                record.UID = base.BaseSave(record.UID, fieldValue);
+                record.UID = await base.BaseSave(record.UID, fieldValue);
             }
             
-            base.BaseCommitTransaction();
+            await base.BaseCommitTransaction();
         }
     
-        public void Delete()
+        public async ValueTask Delete()
         {
-            base.BaseDelete();
+            await base.BaseDelete();
         }
         
         public class Record : RegisterAccumulationTablePartRecord
@@ -28152,10 +28152,10 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public const string ДоВідвантаження = "col_a6";
         public List<Record> Records { get; set; }
     
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead();
+            await base.BaseRead();
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -28175,12 +28175,12 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             base.BaseClear();
         }
     
-        public void Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
-            base.BaseBeginTransaction();
+            await base.BaseBeginTransaction();
             
             if (clear_all_before_save)
-                base.BaseDelete();
+                await base.BaseDelete();
 
             foreach (Record record in Records)
             {
@@ -28193,15 +28193,15 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_a5", record.ВНаявності);
                 fieldValue.Add("col_a6", record.ДоВідвантаження);
                 
-                record.UID = base.BaseSave(record.UID, fieldValue);
+                record.UID = await base.BaseSave(record.UID, fieldValue);
             }
             
-            base.BaseCommitTransaction();
+            await base.BaseCommitTransaction();
         }
     
-        public void Delete()
+        public async ValueTask Delete()
         {
-            base.BaseDelete();
+            await base.BaseDelete();
         }
         
         public class Record : RegisterAccumulationTablePartRecord
@@ -28244,11 +28244,11 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
 		
         public List<Record> Records { get; set; }
         
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
             
-            base.BaseRead();
+            await base.BaseRead();
             
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -28332,10 +28332,10 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public const string Сума = "col_a7";
         public List<Record> Records { get; set; }
     
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead();
+            await base.BaseRead();
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -28356,12 +28356,12 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             base.BaseClear();
         }
     
-        public void Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
-            base.BaseBeginTransaction();
+            await base.BaseBeginTransaction();
             
             if (clear_all_before_save)
-                base.BaseDelete();
+                await base.BaseDelete();
 
             foreach (Record record in Records)
             {
@@ -28375,15 +28375,15 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_a6", record.Замовлено);
                 fieldValue.Add("col_a7", record.Сума);
                 
-                record.UID = base.BaseSave(record.UID, fieldValue);
+                record.UID = await base.BaseSave(record.UID, fieldValue);
             }
             
-            base.BaseCommitTransaction();
+            await base.BaseCommitTransaction();
         }
     
-        public void Delete()
+        public async ValueTask Delete()
         {
-            base.BaseDelete();
+            await base.BaseDelete();
         }
         
         public class Record : RegisterAccumulationTablePartRecord
@@ -28424,11 +28424,11 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
 		
         public List<Record> Records { get; set; }
         
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
             
-            base.BaseRead();
+            await base.BaseRead();
             
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -28500,10 +28500,10 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public const string Сума = "col_a4";
         public List<Record> Records { get; set; }
     
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead();
+            await base.BaseRead();
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -28521,12 +28521,12 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             base.BaseClear();
         }
     
-        public void Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
-            base.BaseBeginTransaction();
+            await base.BaseBeginTransaction();
             
             if (clear_all_before_save)
-                base.BaseDelete();
+                await base.BaseDelete();
 
             foreach (Record record in Records)
             {
@@ -28537,15 +28537,15 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_a3", record.Контрагент.UnigueID.UGuid);
                 fieldValue.Add("col_a4", record.Сума);
                 
-                record.UID = base.BaseSave(record.UID, fieldValue);
+                record.UID = await base.BaseSave(record.UID, fieldValue);
             }
             
-            base.BaseCommitTransaction();
+            await base.BaseCommitTransaction();
         }
     
-        public void Delete()
+        public async ValueTask Delete()
         {
-            base.BaseDelete();
+            await base.BaseDelete();
         }
         
         public class Record : RegisterAccumulationTablePartRecord
@@ -28577,10 +28577,10 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public const string СумаЗалишок = "col_a6";
         public List<Record> Records { get; set; }
     
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead();
+            await base.BaseRead();
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -28600,12 +28600,12 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             base.BaseClear();
         }
     
-        public void Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
-            base.BaseBeginTransaction();
+            await base.BaseBeginTransaction();
             
             if (clear_all_before_save)
-                base.BaseDelete();
+                await base.BaseDelete();
 
             foreach (Record record in Records)
             {
@@ -28618,15 +28618,15 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_a5", record.СумаРозхід);
                 fieldValue.Add("col_a6", record.СумаЗалишок);
                 
-                record.UID = base.BaseSave(record.UID, fieldValue);
+                record.UID = await base.BaseSave(record.UID, fieldValue);
             }
             
-            base.BaseCommitTransaction();
+            await base.BaseCommitTransaction();
         }
     
-        public void Delete()
+        public async ValueTask Delete()
         {
-            base.BaseDelete();
+            await base.BaseDelete();
         }
         
         public class Record : RegisterAccumulationTablePartRecord
@@ -28672,11 +28672,11 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
 		
         public List<Record> Records { get; set; }
         
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
             
-            base.BaseRead();
+            await base.BaseRead();
             
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -28772,10 +28772,10 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public const string Собівартість = "col_b1";
         public List<Record> Records { get; set; }
     
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead();
+            await base.BaseRead();
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -28799,12 +28799,12 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             base.BaseClear();
         }
     
-        public void Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
-            base.BaseBeginTransaction();
+            await base.BaseBeginTransaction();
             
             if (clear_all_before_save)
-                base.BaseDelete();
+                await base.BaseDelete();
 
             foreach (Record record in Records)
             {
@@ -28821,15 +28821,15 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_a9", record.Сума);
                 fieldValue.Add("col_b1", record.Собівартість);
                 
-                record.UID = base.BaseSave(record.UID, fieldValue);
+                record.UID = await base.BaseSave(record.UID, fieldValue);
             }
             
-            base.BaseCommitTransaction();
+            await base.BaseCommitTransaction();
         }
     
-        public void Delete()
+        public async ValueTask Delete()
         {
-            base.BaseDelete();
+            await base.BaseDelete();
         }
         
         public class Record : RegisterAccumulationTablePartRecord
@@ -28877,11 +28877,11 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
 		
         public List<Record> Records { get; set; }
         
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
             
-            base.BaseRead();
+            await base.BaseRead();
             
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -28968,10 +28968,10 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public const string ВРезервіПідЗамовлення = "col_a7";
         public List<Record> Records { get; set; }
     
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead();
+            await base.BaseRead();
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -28992,12 +28992,12 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             base.BaseClear();
         }
     
-        public void Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
-            base.BaseBeginTransaction();
+            await base.BaseBeginTransaction();
             
             if (clear_all_before_save)
-                base.BaseDelete();
+                await base.BaseDelete();
 
             foreach (Record record in Records)
             {
@@ -29011,15 +29011,15 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_a6", record.ВРезервіЗіСкладу);
                 fieldValue.Add("col_a7", record.ВРезервіПідЗамовлення);
                 
-                record.UID = base.BaseSave(record.UID, fieldValue);
+                record.UID = await base.BaseSave(record.UID, fieldValue);
             }
             
-            base.BaseCommitTransaction();
+            await base.BaseCommitTransaction();
         }
     
-        public void Delete()
+        public async ValueTask Delete()
         {
-            base.BaseDelete();
+            await base.BaseDelete();
         }
         
         public class Record : RegisterAccumulationTablePartRecord
@@ -29062,11 +29062,11 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
 		
         public List<Record> Records { get; set; }
         
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
             
-            base.BaseRead();
+            await base.BaseRead();
             
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -29146,10 +29146,10 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public const string Замовлено = "col_a6";
         public List<Record> Records { get; set; }
     
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead();
+            await base.BaseRead();
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -29169,12 +29169,12 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             base.BaseClear();
         }
     
-        public void Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
-            base.BaseBeginTransaction();
+            await base.BaseBeginTransaction();
             
             if (clear_all_before_save)
-                base.BaseDelete();
+                await base.BaseDelete();
 
             foreach (Record record in Records)
             {
@@ -29187,15 +29187,15 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_a5", record.Склад.UnigueID.UGuid);
                 fieldValue.Add("col_a6", record.Замовлено);
                 
-                record.UID = base.BaseSave(record.UID, fieldValue);
+                record.UID = await base.BaseSave(record.UID, fieldValue);
             }
             
-            base.BaseCommitTransaction();
+            await base.BaseCommitTransaction();
         }
     
-        public void Delete()
+        public async ValueTask Delete()
         {
-            base.BaseDelete();
+            await base.BaseDelete();
         }
         
         public class Record : RegisterAccumulationTablePartRecord
@@ -29235,11 +29235,11 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
 		
         public List<Record> Records { get; set; }
         
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
             
-            base.BaseRead();
+            await base.BaseRead();
             
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -29311,10 +29311,10 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public const string Сума = "col_a4";
         public List<Record> Records { get; set; }
     
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead();
+            await base.BaseRead();
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -29332,12 +29332,12 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             base.BaseClear();
         }
     
-        public void Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
-            base.BaseBeginTransaction();
+            await base.BaseBeginTransaction();
             
             if (clear_all_before_save)
-                base.BaseDelete();
+                await base.BaseDelete();
 
             foreach (Record record in Records)
             {
@@ -29348,15 +29348,15 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_a3", record.Валюта.UnigueID.UGuid);
                 fieldValue.Add("col_a4", record.Сума);
                 
-                record.UID = base.BaseSave(record.UID, fieldValue);
+                record.UID = await base.BaseSave(record.UID, fieldValue);
             }
             
-            base.BaseCommitTransaction();
+            await base.BaseCommitTransaction();
         }
     
-        public void Delete()
+        public async ValueTask Delete()
         {
-            base.BaseDelete();
+            await base.BaseDelete();
         }
         
         public class Record : RegisterAccumulationTablePartRecord
@@ -29388,10 +29388,10 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public const string СумаЗалишок = "col_a6";
         public List<Record> Records { get; set; }
     
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead();
+            await base.BaseRead();
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -29411,12 +29411,12 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             base.BaseClear();
         }
     
-        public void Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
-            base.BaseBeginTransaction();
+            await base.BaseBeginTransaction();
             
             if (clear_all_before_save)
-                base.BaseDelete();
+                await base.BaseDelete();
 
             foreach (Record record in Records)
             {
@@ -29429,15 +29429,15 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_a5", record.СумаРозхід);
                 fieldValue.Add("col_a6", record.СумаЗалишок);
                 
-                record.UID = base.BaseSave(record.UID, fieldValue);
+                record.UID = await base.BaseSave(record.UID, fieldValue);
             }
             
-            base.BaseCommitTransaction();
+            await base.BaseCommitTransaction();
         }
     
-        public void Delete()
+        public async ValueTask Delete()
         {
-            base.BaseDelete();
+            await base.BaseDelete();
         }
         
         public class Record : RegisterAccumulationTablePartRecord
@@ -29478,11 +29478,11 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
 		
         public List<Record> Records { get; set; }
         
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
             
-            base.BaseRead();
+            await base.BaseRead();
             
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -29558,10 +29558,10 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public const string Сума = "col_a5";
         public List<Record> Records { get; set; }
     
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead();
+            await base.BaseRead();
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -29580,12 +29580,12 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             base.BaseClear();
         }
     
-        public void Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
-            base.BaseBeginTransaction();
+            await base.BaseBeginTransaction();
             
             if (clear_all_before_save)
-                base.BaseDelete();
+                await base.BaseDelete();
 
             foreach (Record record in Records)
             {
@@ -29597,15 +29597,15 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_a4", record.Валюта.UnigueID.UGuid);
                 fieldValue.Add("col_a5", record.Сума);
                 
-                record.UID = base.BaseSave(record.UID, fieldValue);
+                record.UID = await base.BaseSave(record.UID, fieldValue);
             }
             
-            base.BaseCommitTransaction();
+            await base.BaseCommitTransaction();
         }
     
-        public void Delete()
+        public async ValueTask Delete()
         {
-            base.BaseDelete();
+            await base.BaseDelete();
         }
         
         public class Record : RegisterAccumulationTablePartRecord
@@ -29639,10 +29639,10 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public const string СумаЗалишок = "col_a7";
         public List<Record> Records { get; set; }
     
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead();
+            await base.BaseRead();
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -29663,12 +29663,12 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             base.BaseClear();
         }
     
-        public void Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
-            base.BaseBeginTransaction();
+            await base.BaseBeginTransaction();
             
             if (clear_all_before_save)
-                base.BaseDelete();
+                await base.BaseDelete();
 
             foreach (Record record in Records)
             {
@@ -29682,15 +29682,15 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_a6", record.СумаРозхід);
                 fieldValue.Add("col_a7", record.СумаЗалишок);
                 
-                record.UID = base.BaseSave(record.UID, fieldValue);
+                record.UID = await base.BaseSave(record.UID, fieldValue);
             }
             
-            base.BaseCommitTransaction();
+            await base.BaseCommitTransaction();
         }
     
-        public void Delete()
+        public async ValueTask Delete()
         {
-            base.BaseDelete();
+            await base.BaseDelete();
         }
         
         public class Record : RegisterAccumulationTablePartRecord
@@ -29723,10 +29723,10 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public const string Сума = "col_a4";
         public List<Record> Records { get; set; }
     
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead();
+            await base.BaseRead();
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -29744,12 +29744,12 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             base.BaseClear();
         }
     
-        public void Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
-            base.BaseBeginTransaction();
+            await base.BaseBeginTransaction();
             
             if (clear_all_before_save)
-                base.BaseDelete();
+                await base.BaseDelete();
 
             foreach (Record record in Records)
             {
@@ -29760,15 +29760,15 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_a3", record.Валюта.UnigueID.UGuid);
                 fieldValue.Add("col_a4", record.Сума);
                 
-                record.UID = base.BaseSave(record.UID, fieldValue);
+                record.UID = await base.BaseSave(record.UID, fieldValue);
             }
             
-            base.BaseCommitTransaction();
+            await base.BaseCommitTransaction();
         }
     
-        public void Delete()
+        public async ValueTask Delete()
         {
-            base.BaseDelete();
+            await base.BaseDelete();
         }
         
         public class Record : RegisterAccumulationTablePartRecord
@@ -29813,11 +29813,11 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
 		
         public List<Record> Records { get; set; }
         
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
             
-            base.BaseRead();
+            await base.BaseRead();
             
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -29916,10 +29916,10 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public const string Собівартість = "col_a9";
         public List<Record> Records { get; set; }
     
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead();
+            await base.BaseRead();
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -29943,12 +29943,12 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             base.BaseClear();
         }
     
-        public void Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
-            base.BaseBeginTransaction();
+            await base.BaseBeginTransaction();
             
             if (clear_all_before_save)
-                base.BaseDelete();
+                await base.BaseDelete();
 
             foreach (Record record in Records)
             {
@@ -29965,15 +29965,15 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_a8", record.Кількість);
                 fieldValue.Add("col_a9", record.Собівартість);
                 
-                record.UID = base.BaseSave(record.UID, fieldValue);
+                record.UID = await base.BaseSave(record.UID, fieldValue);
             }
             
-            base.BaseCommitTransaction();
+            await base.BaseCommitTransaction();
         }
     
-        public void Delete()
+        public async ValueTask Delete()
         {
-            base.BaseDelete();
+            await base.BaseDelete();
         }
         
         public class Record : RegisterAccumulationTablePartRecord
@@ -30019,10 +30019,10 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public const string СобівартістьЗалишок = "col_b4";
         public List<Record> Records { get; set; }
     
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead();
+            await base.BaseRead();
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -30050,12 +30050,12 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             base.BaseClear();
         }
     
-        public void Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
-            base.BaseBeginTransaction();
+            await base.BaseBeginTransaction();
             
             if (clear_all_before_save)
-                base.BaseDelete();
+                await base.BaseDelete();
 
             foreach (Record record in Records)
             {
@@ -30076,15 +30076,15 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_b3", record.СобівартістьРозхід);
                 fieldValue.Add("col_b4", record.СобівартістьЗалишок);
                 
-                record.UID = base.BaseSave(record.UID, fieldValue);
+                record.UID = await base.BaseSave(record.UID, fieldValue);
             }
             
-            base.BaseCommitTransaction();
+            await base.BaseCommitTransaction();
         }
     
-        public void Delete()
+        public async ValueTask Delete()
         {
-            base.BaseDelete();
+            await base.BaseDelete();
         }
         
         public class Record : RegisterAccumulationTablePartRecord
@@ -30127,10 +30127,10 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public const string Кількість = "col_a8";
         public List<Record> Records { get; set; }
     
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead();
+            await base.BaseRead();
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -30151,12 +30151,12 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             base.BaseClear();
         }
     
-        public void Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
-            base.BaseBeginTransaction();
+            await base.BaseBeginTransaction();
             
             if (clear_all_before_save)
-                base.BaseDelete();
+                await base.BaseDelete();
 
             foreach (Record record in Records)
             {
@@ -30170,15 +30170,15 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_a6", record.Склад.UnigueID.UGuid);
                 fieldValue.Add("col_a8", record.Кількість);
                 
-                record.UID = base.BaseSave(record.UID, fieldValue);
+                record.UID = await base.BaseSave(record.UID, fieldValue);
             }
             
-            base.BaseCommitTransaction();
+            await base.BaseCommitTransaction();
         }
     
-        public void Delete()
+        public async ValueTask Delete()
         {
-            base.BaseDelete();
+            await base.BaseDelete();
         }
         
         public class Record : RegisterAccumulationTablePartRecord
@@ -30226,11 +30226,11 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
 		
         public List<Record> Records { get; set; }
         
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
             
-            base.BaseRead();
+            await base.BaseRead();
             
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -30330,10 +30330,10 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public const string Собівартість = "col_b2";
         public List<Record> Records { get; set; }
     
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead();
+            await base.BaseRead();
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -30358,12 +30358,12 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             base.BaseClear();
         }
     
-        public void Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
-            base.BaseBeginTransaction();
+            await base.BaseBeginTransaction();
             
             if (clear_all_before_save)
-                base.BaseDelete();
+                await base.BaseDelete();
 
             foreach (Record record in Records)
             {
@@ -30381,15 +30381,15 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_b1", record.Дохід);
                 fieldValue.Add("col_b2", record.Собівартість);
                 
-                record.UID = base.BaseSave(record.UID, fieldValue);
+                record.UID = await base.BaseSave(record.UID, fieldValue);
             }
             
-            base.BaseCommitTransaction();
+            await base.BaseCommitTransaction();
         }
     
-        public void Delete()
+        public async ValueTask Delete()
         {
-            base.BaseDelete();
+            await base.BaseDelete();
         }
         
         public class Record : RegisterAccumulationTablePartRecord
@@ -30437,11 +30437,11 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
 		
         public List<Record> Records { get; set; }
         
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
             
-            base.BaseRead();
+            await base.BaseRead();
             
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -30527,10 +30527,10 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public const string ВНаявностіЗалишок = "col_a9";
         public List<Record> Records { get; set; }
     
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead();
+            await base.BaseRead();
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -30553,12 +30553,12 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             base.BaseClear();
         }
     
-        public void Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
-            base.BaseBeginTransaction();
+            await base.BaseBeginTransaction();
             
             if (clear_all_before_save)
-                base.BaseDelete();
+                await base.BaseDelete();
 
             foreach (Record record in Records)
             {
@@ -30574,15 +30574,15 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_a8", record.ВНаявностіРозхід);
                 fieldValue.Add("col_a9", record.ВНаявностіЗалишок);
                 
-                record.UID = base.BaseSave(record.UID, fieldValue);
+                record.UID = await base.BaseSave(record.UID, fieldValue);
             }
             
-            base.BaseCommitTransaction();
+            await base.BaseCommitTransaction();
         }
     
-        public void Delete()
+        public async ValueTask Delete()
         {
-            base.BaseDelete();
+            await base.BaseDelete();
         }
         
         public class Record : RegisterAccumulationTablePartRecord
@@ -30620,10 +30620,10 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public const string ВНаявності = "col_a7";
         public List<Record> Records { get; set; }
     
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead();
+            await base.BaseRead();
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -30644,12 +30644,12 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             base.BaseClear();
         }
     
-        public void Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
-            base.BaseBeginTransaction();
+            await base.BaseBeginTransaction();
             
             if (clear_all_before_save)
-                base.BaseDelete();
+                await base.BaseDelete();
 
             foreach (Record record in Records)
             {
@@ -30663,15 +30663,15 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_a6", record.Серія.UnigueID.UGuid);
                 fieldValue.Add("col_a7", record.ВНаявності);
                 
-                record.UID = base.BaseSave(record.UID, fieldValue);
+                record.UID = await base.BaseSave(record.UID, fieldValue);
             }
             
-            base.BaseCommitTransaction();
+            await base.BaseCommitTransaction();
         }
     
-        public void Delete()
+        public async ValueTask Delete()
         {
-            base.BaseDelete();
+            await base.BaseDelete();
         }
         
         public class Record : RegisterAccumulationTablePartRecord
@@ -30706,10 +30706,10 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public const string ВНаявності = "col_a6";
         public List<Record> Records { get; set; }
     
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead();
+            await base.BaseRead();
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -30729,12 +30729,12 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             base.BaseClear();
         }
     
-        public void Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
-            base.BaseBeginTransaction();
+            await base.BaseBeginTransaction();
             
             if (clear_all_before_save)
-                base.BaseDelete();
+                await base.BaseDelete();
 
             foreach (Record record in Records)
             {
@@ -30747,15 +30747,15 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 fieldValue.Add("col_a5", record.Серія.UnigueID.UGuid);
                 fieldValue.Add("col_a6", record.ВНаявності);
                 
-                record.UID = base.BaseSave(record.UID, fieldValue);
+                record.UID = await base.BaseSave(record.UID, fieldValue);
             }
             
-            base.BaseCommitTransaction();
+            await base.BaseCommitTransaction();
         }
     
-        public void Delete()
+        public async ValueTask Delete()
         {
-            base.BaseDelete();
+            await base.BaseDelete();
         }
         
         public class Record : RegisterAccumulationTablePartRecord

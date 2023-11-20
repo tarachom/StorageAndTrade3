@@ -36,11 +36,11 @@ namespace StorageAndTrade
             ТабличніСписки.Журнали_Склад.AddColumns(TreeViewGrid);
         }
 
-        public override void LoadRecords()
+        public override async void LoadRecords()
         {
             ТабличніСписки.Журнали_Склад.SelectPointerItem = SelectPointerItem;
 
-            ТабличніСписки.Журнали_Склад.LoadRecords();
+            await ТабличніСписки.Журнали_Склад.LoadRecords();
 
             if (ТабличніСписки.Журнали_Склад.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.Журнали_Склад.SelectPath, TreeViewGrid.Columns[0], false);

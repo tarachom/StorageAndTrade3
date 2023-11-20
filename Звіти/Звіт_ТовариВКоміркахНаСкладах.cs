@@ -90,8 +90,7 @@ namespace StorageAndTrade
 
             CreateFilters();
 
-            reportNotebook = new Notebook() { Scrollable = true, EnablePopup = true, BorderWidth = 0, ShowBorder = false };
-            reportNotebook.TabPos = PositionType.Top;
+            reportNotebook = new Notebook() { Scrollable = true, EnablePopup = true, BorderWidth = 0, ShowBorder = false, TabPos = PositionType.Top };
             PackStart(reportNotebook, true, true, 0);
 
             ShowAll();
@@ -509,21 +508,16 @@ ORDER BY Номенклатура_Назва
                 { "ВНаявності", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним }
             };
 
-            Dictionary<string, object> paramQuery = new Dictionary<string, object>();
-
-            string[] columnsName;
-            List<Dictionary<string, object>> listRow;
-
-            Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listRow);
+            var recordResult = await Config.Kernel!.DataBase.SelectRequestAsync(query);
 
             ListStore listStore;
-            ФункціїДляЗвітів.СтворитиМодельДаних(out listStore, columnsName);
+            ФункціїДляЗвітів.СтворитиМодельДаних(out listStore, recordResult.ColumnsName);
 
             TreeView treeView = new TreeView(listStore);
             treeView.ButtonPressEvent += ФункціїДляЗвітів.OpenPageDirectoryOrDocument;
 
-            ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних, ТипиДаних, ПозиціяТекстуВКолонці, ФункціяДляКолонки);
-            ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, columnsName, listRow);
+            ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, recordResult.ColumnsName, ВидиміКолонки, КолонкиДаних, ТипиДаних, ПозиціяТекстуВКолонці, ФункціяДляКолонки);
+            ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, recordResult.ColumnsName, recordResult.ListRow);
 
             ФункціїДляЗвітів.CreateReportNotebookPage(reportNotebook, "Залишки", await ВідобразитиФільтр("Залишки", Фільтр), treeView, Залишки, Фільтр, refreshPage);
         }
@@ -865,19 +859,16 @@ ORDER BY
                 { "КінецьПеріоду", Фільтр.ДатаКінецьПеріоду }
             };
 
-            string[] columnsName;
-            List<Dictionary<string, object>> listRow;
-
-            Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listRow);
+            var recordResult = await Config.Kernel!.DataBase.SelectRequestAsync(query, paramQuery);
 
             ListStore listStore;
-            ФункціїДляЗвітів.СтворитиМодельДаних(out listStore, columnsName);
+            ФункціїДляЗвітів.СтворитиМодельДаних(out listStore, recordResult.ColumnsName);
 
             TreeView treeView = new TreeView(listStore);
             treeView.ButtonPressEvent += ФункціїДляЗвітів.OpenPageDirectoryOrDocument;
 
-            ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних, ТипиДаних, ПозиціяТекстуВКолонці, ФункціяДляКолонки);
-            ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, columnsName, listRow);
+            ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, recordResult.ColumnsName, ВидиміКолонки, КолонкиДаних, ТипиДаних, ПозиціяТекстуВКолонці, ФункціяДляКолонки);
+            ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, recordResult.ColumnsName, recordResult.ListRow);
 
             ФункціїДляЗвітів.CreateReportNotebookPage(reportNotebook, "Залишки та обороти", await ВідобразитиФільтр("ЗалишкиТаОбороти", Фільтр), treeView, ЗалишкиТаОбороти, Фільтр, refreshPage);
         }
@@ -1173,19 +1164,16 @@ ORDER BY period ASC
                 { "КінецьПеріоду", Фільтр.ДатаКінецьПеріоду }
             };
 
-            string[] columnsName;
-            List<Dictionary<string, object>> listRow;
-
-            Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listRow);
+            var recordResult = await Config.Kernel!.DataBase.SelectRequestAsync(query, paramQuery);
 
             ListStore listStore;
-            ФункціїДляЗвітів.СтворитиМодельДаних(out listStore, columnsName);
+            ФункціїДляЗвітів.СтворитиМодельДаних(out listStore, recordResult.ColumnsName);
 
             TreeView treeView = new TreeView(listStore);
             treeView.ButtonPressEvent += ФункціїДляЗвітів.OpenPageDirectoryOrDocument;
 
-            ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних, ТипиДаних, ПозиціяТекстуВКолонці, ФункціяДляКолонки);
-            ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, columnsName, listRow);
+            ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, recordResult.ColumnsName, ВидиміКолонки, КолонкиДаних, ТипиДаних, ПозиціяТекстуВКолонці, ФункціяДляКолонки);
+            ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, recordResult.ColumnsName, recordResult.ListRow);
 
             ФункціїДляЗвітів.CreateReportNotebookPage(reportNotebook, "Документи", await ВідобразитиФільтр("Документи", Фільтр), treeView, Документи, Фільтр, refreshPage);
         }

@@ -89,11 +89,11 @@ namespace StorageAndTrade
                 };
             }
 
-            public static async void ПісляЗміни_Контрагент(Запис запис)
+            public static async ValueTask ПісляЗміни_Контрагент(Запис запис)
             {
                 await запис.Контрагент.GetPresentation();
             }
-            public static async void ПісляЗміни_Валюта(Запис запис)
+            public static async ValueTask ПісляЗміни_Валюта(Запис запис)
             {
                 await запис.Валюта.GetPresentation();
             }
@@ -294,10 +294,10 @@ namespace StorageAndTrade
                 case Columns.Контрагент:
                     {
                         Контрагенти_ШвидкийВибір page = new Контрагенти_ШвидкийВибір() { PopoverParent = popoverSmallSelect, DirectoryPointerItem = запис.Контрагент.UnigueID };
-                        page.CallBack_OnSelectPointer = (UnigueID selectPointer) =>
+                        page.CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
                         {
                             запис.Контрагент = new Контрагенти_Pointer(selectPointer);
-                            Запис.ПісляЗміни_Контрагент(запис);
+                            await Запис.ПісляЗміни_Контрагент(запис);
 
                             Store.SetValues(iter, запис.ToArray());
                         };
@@ -311,10 +311,10 @@ namespace StorageAndTrade
                 case Columns.Валюта:
                     {
                         Валюти_ШвидкийВибір page = new Валюти_ШвидкийВибір() { PopoverParent = popoverSmallSelect, DirectoryPointerItem = запис.Валюта.UnigueID };
-                        page.CallBack_OnSelectPointer = (UnigueID selectPointer) =>
+                        page.CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
                         {
                             запис.Валюта = new Валюти_Pointer(selectPointer);
-                            Запис.ПісляЗміни_Валюта(запис);
+                            await Запис.ПісляЗміни_Валюта(запис);
 
                             Store.SetValues(iter, запис.ToArray());
                         };

@@ -55,15 +55,15 @@ namespace StorageAndTrade
 
         }
 
-        public override void LoadRecords()
+        public override async void LoadRecords()
         {
             ТабличніСписки.Журнали_Повний.SelectPointerItem = SelectPointerItem;
 
             // ТабличніСписки.Журнали_Повний.Store.Clear();
             // ТабличніСписки.Журнали_Повний.Limit = 50;
             // ТабличніСписки.Журнали_Повний.Offset = 0;
-            
-            ТабличніСписки.Журнали_Повний.LoadRecords();
+
+            await ТабличніСписки.Журнали_Повний.LoadRecords();
 
             if (ТабличніСписки.Журнали_Повний.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.Журнали_Повний.SelectPath, TreeViewGrid.Columns[0], false);

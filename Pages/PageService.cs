@@ -160,7 +160,7 @@ namespace StorageAndTrade
 
         async void SpendTheDocument()
         {
-            ФункціїДляПовідомлень.ОчиститиПовідомлення();
+            await ФункціїДляПовідомлень.ОчиститиПовідомлення();
 
             ButtonSensitive(false);
 
@@ -170,7 +170,7 @@ namespace StorageAndTrade
             Журнали.Journal_Select journalSelect = new Журнали.Journal_Select();
 
             // Вибірка всіх документів. Встановлюється максимальний період
-            journalSelect.Select(DateTime.Parse("01.01.2000 00:00:00"), DateTime.Now);
+            await journalSelect.Select(DateTime.Parse("01.01.2000 00:00:00"), DateTime.Now);
             while (journalSelect.MoveNext())
             {
                 if (CancellationTokenPageService!.IsCancellationRequested)
@@ -199,10 +199,10 @@ namespace StorageAndTrade
                             ФункціїДляПовідомлень.ВідкритиТермінал();
 
                             //Додатково вивід у помилок у це вікно
-                            List<Dictionary<string, object>> listRow = ФункціїДляПовідомлень.ПрочитатиПовідомленняПроПомилку();
+                            SelectRequestAsync_Record record = await ФункціїДляПовідомлень.ПрочитатиПовідомленняПроПомилку();
 
                             string msg = "";
-                            foreach (Dictionary<string, object> row in listRow)
+                            foreach (Dictionary<string, object> row in record.ListRow)
                                 msg += row["Повідомлення"].ToString();
 
                             CreateMessage(TypeMessage.Error, msg);

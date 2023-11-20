@@ -102,7 +102,7 @@ namespace StorageAndTrade
 
         #endregion
 
-        protected override async void Save()
+        protected override async ValueTask Save()
         {
             try
             {
@@ -112,6 +112,8 @@ namespace StorageAndTrade
             {
                 MsgError(ex);
             }
+
+            UnigueID = ШтрихкодиНоменклатури_Objest.UnigueID;
         }
     }
 }

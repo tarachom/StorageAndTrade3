@@ -60,7 +60,7 @@ namespace StorageAndTrade
             };
         }
 
-        public override void LoadRecords()
+        public override async void LoadRecords()
         {
             ТабличніСписки.ШтрихкодиНоменклатури_Записи.SelectPointerItem = SelectPointerItem;
 
@@ -78,7 +78,7 @@ namespace StorageAndTrade
                     new Where(Comparison.AND, ШтрихкодиНоменклатури_Const.ХарактеристикаНоменклатури, Comparison.EQ, ХарактеристикиНоменклатуриВласник.Pointer.UnigueID.UGuid));
             }
 
-            ТабличніСписки.ШтрихкодиНоменклатури_Записи.LoadRecords();
+            await ТабличніСписки.ШтрихкодиНоменклатури_Записи.LoadRecords();
 
             if (ТабличніСписки.ШтрихкодиНоменклатури_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.ШтрихкодиНоменклатури_Записи.SelectPath, TreeViewGrid.Columns[0], false);
@@ -86,7 +86,7 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.ШтрихкодиНоменклатури_Записи.CurrentPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override void LoadRecords_OnSearch(string searchText)
+        protected override async void LoadRecords_OnSearch(string searchText)
         {
             searchText = searchText.ToLower().Trim();
 
@@ -112,10 +112,10 @@ namespace StorageAndTrade
             //Штрихкод
             ТабличніСписки.ШтрихкодиНоменклатури_Записи.Where.Add(new Where(Comparison.AND, ШтрихкодиНоменклатури_Const.Штрихкод, Comparison.LIKE, searchText));
 
-            ТабличніСписки.ШтрихкодиНоменклатури_Записи.LoadRecords();
+            await ТабличніСписки.ШтрихкодиНоменклатури_Записи.LoadRecords();
         }
 
-        protected override void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             if (IsNew)
             {
@@ -137,7 +137,7 @@ namespace StorageAndTrade
             else if (unigueID != null)
             {
                 ШтрихкодиНоменклатури_Objest ШтрихкодиНоменклатури_Objest = new ШтрихкодиНоменклатури_Objest();
-                if (ШтрихкодиНоменклатури_Objest.Read(unigueID))
+                if (await ШтрихкодиНоменклатури_Objest.Read(unigueID))
                 {
                     Program.GeneralForm?.CreateNotebookPage($"{ШтрихкодиНоменклатури_Objest.Штрихкод}", () =>
                     {
@@ -161,7 +161,7 @@ namespace StorageAndTrade
         protected override async void Delete(UnigueID unigueID)
         {
             ШтрихкодиНоменклатури_Objest ШтрихкодиНоменклатури_Objest = new ШтрихкодиНоменклатури_Objest();
-            if (ШтрихкодиНоменклатури_Objest.Read(unigueID))
+            if (await ШтрихкодиНоменклатури_Objest.Read(unigueID))
                 await ШтрихкодиНоменклатури_Objest.Delete();
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
@@ -170,7 +170,7 @@ namespace StorageAndTrade
         protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
             ШтрихкодиНоменклатури_Objest ШтрихкодиНоменклатури_Objest = new ШтрихкодиНоменклатури_Objest();
-            if (ШтрихкодиНоменклатури_Objest.Read(unigueID))
+            if (await ШтрихкодиНоменклатури_Objest.Read(unigueID))
             {
                 ШтрихкодиНоменклатури_Objest ШтрихкодиНоменклатури_Objest_Новий = ШтрихкодиНоменклатури_Objest.Copy();
                 await ШтрихкодиНоменклатури_Objest_Новий.Save();

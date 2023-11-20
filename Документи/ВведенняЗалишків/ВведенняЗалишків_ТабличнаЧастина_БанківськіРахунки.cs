@@ -78,7 +78,7 @@ namespace StorageAndTrade
                 };
             }
 
-            public static async void ПісляЗміни_БанківськийРахунок(Запис запис)
+            public static async ValueTask ПісляЗміни_БанківськийРахунок(Запис запис)
             {
                 await запис.БанківськийРахунок.GetPresentation();
             }
@@ -247,10 +247,10 @@ namespace StorageAndTrade
                     {
                         БанківськіРахункиОрганізацій_ШвидкийВибір page = new БанківськіРахункиОрганізацій_ШвидкийВибір()
                         { PopoverParent = popoverSmallSelect, DirectoryPointerItem = запис.БанківськийРахунок.UnigueID };
-                        page.CallBack_OnSelectPointer = (UnigueID selectPointer) =>
+                        page.CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
                         {
                             запис.БанківськийРахунок = new БанківськіРахункиОрганізацій_Pointer(selectPointer);
-                            Запис.ПісляЗміни_БанківськийРахунок(запис);
+                            await Запис.ПісляЗміни_БанківськийРахунок(запис);
 
                             Store.SetValues(iter, запис.ToArray());
                         };

@@ -86,8 +86,7 @@ namespace StorageAndTrade
 
             CreateFilters();
 
-            reportNotebook = new Notebook() { Scrollable = true, EnablePopup = true, BorderWidth = 0, ShowBorder = false };
-            reportNotebook.TabPos = PositionType.Top;
+            reportNotebook = new Notebook() { Scrollable = true, EnablePopup = true, BorderWidth = 0, ShowBorder = false, TabPos = PositionType.Top };
             PackStart(reportNotebook, true, true, 0);
 
             ShowAll();
@@ -385,46 +384,57 @@ ORDER BY Номенклатура_Назва
 ";
             #endregion
 
-            Dictionary<string, string> ВидиміКолонки = new Dictionary<string, string>();
-            ВидиміКолонки.Add("Номенклатура_Назва", "Номенклатура");
-            if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const) ВидиміКолонки.Add("ХарактеристикаНоменклатури_Назва", "Характеристика");
-            ВидиміКолонки.Add("Склад_Назва", "Склад");
-            if (Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const) ВидиміКолонки.Add("Серія_Номер", "Серія");
-            ВидиміКолонки.Add("ВНаявності", "В наявності");
+            Dictionary<string, string> ВидиміКолонки = new Dictionary<string, string>
+            {
+                { "Номенклатура_Назва", "Номенклатура" },
+                { "Склад_Назва", "Склад" },
+                { "ВНаявності", "В наявності" }
+            };
+            if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const)
+                ВидиміКолонки.Add("ХарактеристикаНоменклатури_Назва", "Характеристика");
+            if (Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const)
+                ВидиміКолонки.Add("Серія_Номер", "Серія");
 
-            Dictionary<string, string> КолонкиДаних = new Dictionary<string, string>();
-            КолонкиДаних.Add("Номенклатура_Назва", "Номенклатура");
-            if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const) КолонкиДаних.Add("ХарактеристикаНоменклатури_Назва", "ХарактеристикаНоменклатури");
-            if (Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const) КолонкиДаних.Add("Серія_Номер", "Серія");
-            КолонкиДаних.Add("Склад_Назва", "Склад");
+            Dictionary<string, string> КолонкиДаних = new Dictionary<string, string>
+            {
+                { "Номенклатура_Назва", "Номенклатура" },
+                { "Склад_Назва", "Склад" }
+            };
+            if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const)
+                КолонкиДаних.Add("ХарактеристикаНоменклатури_Назва", "ХарактеристикаНоменклатури");
+            if (Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const)
+                КолонкиДаних.Add("Серія_Номер", "Серія");
 
-            Dictionary<string, string> ТипиДаних = new Dictionary<string, string>();
-            ТипиДаних.Add("Номенклатура_Назва", Номенклатура_Const.POINTER);
-            ТипиДаних.Add("ХарактеристикаНоменклатури_Назва", ХарактеристикиНоменклатури_Const.POINTER);
-            ТипиДаних.Add("Серія_Номер", СеріїНоменклатури_Const.POINTER);
-            ТипиДаних.Add("Склад_Назва", Склади_Const.POINTER);
+            Dictionary<string, string> ТипиДаних = new Dictionary<string, string>
+            {
+                { "Номенклатура_Назва", Номенклатура_Const.POINTER },
+                { "ХарактеристикаНоменклатури_Назва", ХарактеристикиНоменклатури_Const.POINTER },
+                { "Серія_Номер", СеріїНоменклатури_Const.POINTER },
+                { "Склад_Назва", Склади_Const.POINTER }
+            };
 
-            Dictionary<string, float> ПозиціяТекстуВКолонці = new Dictionary<string, float>();
-            ПозиціяТекстуВКолонці.Add("ВНаявності", 1);
+            Dictionary<string, float> ПозиціяТекстуВКолонці = new Dictionary<string, float>
+            {
+                { "ВНаявності", 1 }
+            };
 
-            Dictionary<string, TreeCellDataFunc> ФункціяДляКолонки = new Dictionary<string, TreeCellDataFunc>();
-            ФункціяДляКолонки.Add("ВНаявності", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним);
+            Dictionary<string, TreeCellDataFunc> ФункціяДляКолонки = new Dictionary<string, TreeCellDataFunc>
+            {
+                { "ВНаявності", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним }
+            };
 
             Dictionary<string, object> paramQuery = new Dictionary<string, object>();
 
-            string[] columnsName;
-            List<Dictionary<string, object>> listRow;
-
-            Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listRow);
+            var recordResult = await Config.Kernel!.DataBase.SelectRequestAsync(query, paramQuery);
 
             ListStore listStore;
-            ФункціїДляЗвітів.СтворитиМодельДаних(out listStore, columnsName);
+            ФункціїДляЗвітів.СтворитиМодельДаних(out listStore, recordResult.ColumnsName);
 
             TreeView treeView = new TreeView(listStore);
             treeView.ButtonPressEvent += ФункціїДляЗвітів.OpenPageDirectoryOrDocument;
 
-            ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних, ТипиДаних, ПозиціяТекстуВКолонці, ФункціяДляКолонки);
-            ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, columnsName, listRow);
+            ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, recordResult.ColumnsName, ВидиміКолонки, КолонкиДаних, ТипиДаних, ПозиціяТекстуВКолонці, ФункціяДляКолонки);
+            ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, recordResult.ColumnsName, recordResult.ListRow);
 
             ФункціїДляЗвітів.CreateReportNotebookPage(reportNotebook, "Залишки", await ВідобразитиФільтр("Залишки", Фільтр), treeView, Залишки, Фільтр, refreshPage);
         }
@@ -650,57 +660,70 @@ ORDER BY Номенклатура_Назва, ХарактеристикаНом
 
             #endregion
 
-            Dictionary<string, string> ВидиміКолонки = new Dictionary<string, string>();
-            ВидиміКолонки.Add("Номенклатура_Назва", "Номенклатура");
-            if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const) ВидиміКолонки.Add("ХарактеристикаНоменклатури_Назва", "Характеристика");
-            ВидиміКолонки.Add("Склад_Назва", "Склад");
-            if (Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const) ВидиміКолонки.Add("Серія_Номер", "Серія");
-            ВидиміКолонки.Add("ПочатковийЗалишок", "На початок");
-            ВидиміКолонки.Add("Прихід", "Прихід");
-            ВидиміКолонки.Add("Розхід", "Розхід");
-            ВидиміКолонки.Add("КінцевийЗалишок", "На кінець");
+            Dictionary<string, string> ВидиміКолонки = new Dictionary<string, string>
+            {
+                { "Номенклатура_Назва", "Номенклатура" },
+                { "Склад_Назва", "Склад" },
+                { "ПочатковийЗалишок", "На початок" },
+                { "Прихід", "Прихід" },
+                { "Розхід", "Розхід" },
+                { "КінцевийЗалишок", "На кінець" }
+            };
+            if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const)
+                ВидиміКолонки.Add("ХарактеристикаНоменклатури_Назва", "Характеристика");
+            if (Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const)
+                ВидиміКолонки.Add("Серія_Номер", "Серія");
 
-            Dictionary<string, string> КолонкиДаних = new Dictionary<string, string>();
-            КолонкиДаних.Add("Номенклатура_Назва", "Номенклатура");
-            if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const) КолонкиДаних.Add("ХарактеристикаНоменклатури_Назва", "ХарактеристикаНоменклатури");
-            КолонкиДаних.Add("Склад_Назва", "Склад");
-            if (Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const) КолонкиДаних.Add("Серія_Номер", "Серія");
+            Dictionary<string, string> КолонкиДаних = new Dictionary<string, string>
+            {
+                { "Номенклатура_Назва", "Номенклатура" },
+                { "Склад_Назва", "Склад" }
+            };
+            if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const)
+                КолонкиДаних.Add("ХарактеристикаНоменклатури_Назва", "ХарактеристикаНоменклатури");
+            if (Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const)
+                КолонкиДаних.Add("Серія_Номер", "Серія");
 
-            Dictionary<string, string> ТипиДаних = new Dictionary<string, string>();
-            ТипиДаних.Add("Номенклатура_Назва", Номенклатура_Const.POINTER);
-            ТипиДаних.Add("ХарактеристикаНоменклатури_Назва", ХарактеристикиНоменклатури_Const.POINTER);
-            ТипиДаних.Add("Серія_Номер", СеріїНоменклатури_Const.POINTER);
-            ТипиДаних.Add("Склад_Назва", Склади_Const.POINTER);
+            Dictionary<string, string> ТипиДаних = new Dictionary<string, string>
+            {
+                { "Номенклатура_Назва", Номенклатура_Const.POINTER },
+                { "ХарактеристикаНоменклатури_Назва", ХарактеристикиНоменклатури_Const.POINTER },
+                { "Серія_Номер", СеріїНоменклатури_Const.POINTER },
+                { "Склад_Назва", Склади_Const.POINTER }
+            };
 
-            Dictionary<string, float> ПозиціяТекстуВКолонці = new Dictionary<string, float>();
-            ПозиціяТекстуВКолонці.Add("ПочатковийЗалишок", 1);
-            ПозиціяТекстуВКолонці.Add("Прихід", 1);
-            ПозиціяТекстуВКолонці.Add("Розхід", 1);
-            ПозиціяТекстуВКолонці.Add("КінцевийЗалишок", 1);
+            Dictionary<string, float> ПозиціяТекстуВКолонці = new Dictionary<string, float>
+            {
+                { "ПочатковийЗалишок", 1 },
+                { "Прихід", 1 },
+                { "Розхід", 1 },
+                { "КінцевийЗалишок", 1 }
+            };
 
-            Dictionary<string, TreeCellDataFunc> ФункціяДляКолонки = new Dictionary<string, TreeCellDataFunc>();
-            ФункціяДляКолонки.Add("ПочатковийЗалишок", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним);
-            ФункціяДляКолонки.Add("Прихід", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним);
-            ФункціяДляКолонки.Add("Розхід", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним);
-            ФункціяДляКолонки.Add("КінцевийЗалишок", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним);
+            Dictionary<string, TreeCellDataFunc> ФункціяДляКолонки = new Dictionary<string, TreeCellDataFunc>
+            {
+                { "ПочатковийЗалишок", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним },
+                { "Прихід", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним },
+                { "Розхід", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним },
+                { "КінцевийЗалишок", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним }
+            };
 
-            Dictionary<string, object> paramQuery = new Dictionary<string, object>();
-            paramQuery.Add("ПочатокПеріоду", Фільтр.ДатаПочатокПеріоду);
-            paramQuery.Add("КінецьПеріоду", Фільтр.ДатаКінецьПеріоду);
+            Dictionary<string, object> paramQuery = new Dictionary<string, object>
+            {
+                { "ПочатокПеріоду", Фільтр.ДатаПочатокПеріоду },
+                { "КінецьПеріоду", Фільтр.ДатаКінецьПеріоду }
+            };
 
-            string[] columnsName;
-            List<Dictionary<string, object>> listRow;
-
-            Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listRow);
+            var recordResult = await Config.Kernel!.DataBase.SelectRequestAsync(query, paramQuery);
 
             ListStore listStore;
-            ФункціїДляЗвітів.СтворитиМодельДаних(out listStore, columnsName);
+            ФункціїДляЗвітів.СтворитиМодельДаних(out listStore, recordResult.ColumnsName);
 
             TreeView treeView = new TreeView(listStore);
             treeView.ButtonPressEvent += ФункціїДляЗвітів.OpenPageDirectoryOrDocument;
 
-            ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних, ТипиДаних, ПозиціяТекстуВКолонці, ФункціяДляКолонки);
-            ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, columnsName, listRow);
+            ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, recordResult.ColumnsName, ВидиміКолонки, КолонкиДаних, ТипиДаних, ПозиціяТекстуВКолонці, ФункціяДляКолонки);
+            ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, recordResult.ColumnsName, recordResult.ListRow);
 
             ФункціїДляЗвітів.CreateReportNotebookPage(reportNotebook, "Залишки та обороти", await ВідобразитиФільтр("ЗалишкиТаОбороти", Фільтр), treeView, ЗалишкиТаОбороти, Фільтр, refreshPage);
         }
@@ -893,53 +916,66 @@ ORDER BY period ASC
 
             #endregion
 
-            Dictionary<string, string> ВидиміКолонки = new Dictionary<string, string>();
-            ВидиміКолонки.Add("income", "Рух");
-            ВидиміКолонки.Add("Документ", "Документ");
-            ВидиміКолонки.Add("Номенклатура_Назва", "Номенклатура");
-            if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const) ВидиміКолонки.Add("ХарактеристикаНоменклатури_Назва", "Характеристика");
-            ВидиміКолонки.Add("Склад_Назва", "Склад");
-            if (Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const) ВидиміКолонки.Add("Серія_Номер", "Серія");
-            ВидиміКолонки.Add("ВНаявності", "В наявності");
+            Dictionary<string, string> ВидиміКолонки = new Dictionary<string, string>
+            {
+                { "income", "Рух" },
+                { "Документ", "Документ" },
+                { "Номенклатура_Назва", "Номенклатура" },
+                { "Склад_Назва", "Склад" },
+                { "ВНаявності", "В наявності" }
+            };
+            if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const)
+                ВидиміКолонки.Add("ХарактеристикаНоменклатури_Назва", "Характеристика");
+            if (Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const)
+                ВидиміКолонки.Add("Серія_Номер", "Серія");
 
-            Dictionary<string, string> КолонкиДаних = new Dictionary<string, string>();
-            КолонкиДаних.Add("Документ", "uid_and_text");
-            КолонкиДаних.Add("Номенклатура_Назва", "Номенклатура");
-            if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const) КолонкиДаних.Add("ХарактеристикаНоменклатури_Назва", "ХарактеристикаНоменклатури");
-            if (Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const) КолонкиДаних.Add("Серія_Номер", "Серія");
-            КолонкиДаних.Add("Склад_Назва", "Склад");
+            Dictionary<string, string> КолонкиДаних = new Dictionary<string, string>
+            {
+                { "Документ", "uid_and_text" },
+                { "Номенклатура_Назва", "Номенклатура" },
+                { "Склад_Назва", "Склад" }
+            };
+            if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const)
+                КолонкиДаних.Add("ХарактеристикаНоменклатури_Назва", "ХарактеристикаНоменклатури");
+            if (Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const)
+                КолонкиДаних.Add("Серія_Номер", "Серія");
 
-            Dictionary<string, string> ТипиДаних = new Dictionary<string, string>();
-            ТипиДаних.Add("Документ", "Документи.*");
-            ТипиДаних.Add("Номенклатура_Назва", Номенклатура_Const.POINTER);
-            ТипиДаних.Add("ХарактеристикаНоменклатури_Назва", ХарактеристикиНоменклатури_Const.POINTER);
-            ТипиДаних.Add("Серія_Номер", СеріїНоменклатури_Const.POINTER);
-            ТипиДаних.Add("Склад_Назва", Склади_Const.POINTER);
+            Dictionary<string, string> ТипиДаних = new Dictionary<string, string>
+            {
+                { "Документ", "Документи.*" },
+                { "Номенклатура_Назва", Номенклатура_Const.POINTER },
+                { "ХарактеристикаНоменклатури_Назва", ХарактеристикиНоменклатури_Const.POINTER },
+                { "Серія_Номер", СеріїНоменклатури_Const.POINTER },
+                { "Склад_Назва", Склади_Const.POINTER }
+            };
 
-            Dictionary<string, float> ПозиціяТекстуВКолонці = new Dictionary<string, float>();
-            ПозиціяТекстуВКолонці.Add("income", 0.5f);
-            ПозиціяТекстуВКолонці.Add("ВНаявності", 1);
+            Dictionary<string, float> ПозиціяТекстуВКолонці = new Dictionary<string, float>
+            {
+                { "income", 0.5f },
+                { "ВНаявності", 1 }
+            };
 
-            Dictionary<string, TreeCellDataFunc> ФункціяДляКолонки = new Dictionary<string, TreeCellDataFunc>();
-            ФункціяДляКолонки.Add("ВНаявності", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним);
+            Dictionary<string, TreeCellDataFunc> ФункціяДляКолонки = new Dictionary<string, TreeCellDataFunc>
+            {
+                { "ВНаявності", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним }
+            };
 
-            Dictionary<string, object> paramQuery = new Dictionary<string, object>();
-            paramQuery.Add("ПочатокПеріоду", Фільтр.ДатаПочатокПеріоду);
-            paramQuery.Add("КінецьПеріоду", Фільтр.ДатаКінецьПеріоду);
+            Dictionary<string, object> paramQuery = new Dictionary<string, object>
+            {
+                { "ПочатокПеріоду", Фільтр.ДатаПочатокПеріоду },
+                { "КінецьПеріоду", Фільтр.ДатаКінецьПеріоду }
+            };
 
-            string[] columnsName;
-            List<Dictionary<string, object>> listRow;
-
-            Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listRow);
+            var recordResult = await Config.Kernel!.DataBase.SelectRequestAsync(query, paramQuery);
 
             ListStore listStore;
-            ФункціїДляЗвітів.СтворитиМодельДаних(out listStore, columnsName);
+            ФункціїДляЗвітів.СтворитиМодельДаних(out listStore, recordResult.ColumnsName);
 
             TreeView treeView = new TreeView(listStore);
             treeView.ButtonPressEvent += ФункціїДляЗвітів.OpenPageDirectoryOrDocument;
 
-            ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, columnsName, ВидиміКолонки, КолонкиДаних, ТипиДаних, ПозиціяТекстуВКолонці, ФункціяДляКолонки);
-            ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, columnsName, listRow);
+            ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, recordResult.ColumnsName, ВидиміКолонки, КолонкиДаних, ТипиДаних, ПозиціяТекстуВКолонці, ФункціяДляКолонки);
+            ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, recordResult.ColumnsName, recordResult.ListRow);
 
             ФункціїДляЗвітів.CreateReportNotebookPage(reportNotebook, "Документи", await ВідобразитиФільтр("Документи", Фільтр), treeView, Документи, Фільтр, refreshPage);
         }

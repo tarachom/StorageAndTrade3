@@ -44,7 +44,7 @@ namespace StorageAndTrade
             };
         }
 
-        public override void LoadRecords()
+        public override async void LoadRecords()
         {
             if (ВалютаВласник.Pointer.UnigueID.IsEmpty())
                 return;
@@ -59,7 +59,7 @@ namespace StorageAndTrade
                     new Where(КурсиВалют_Const.Валюта, Comparison.EQ, ВалютаВласник.Pointer.UnigueID.UGuid));
             }
 
-            ТабличніСписки.КурсиВалют_Записи.LoadRecords();
+            await ТабличніСписки.КурсиВалют_Записи.LoadRecords();
 
             if (ТабличніСписки.КурсиВалют_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.КурсиВалют_Записи.SelectPath, TreeViewGrid.Columns[0], false);
@@ -67,7 +67,7 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.КурсиВалют_Записи.CurrentPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override void LoadRecords_OnSearch(string searchText)
+        protected override async void LoadRecords_OnSearch(string searchText)
         {
             if (ВалютаВласник.Pointer.UnigueID.IsEmpty())
                 return;
@@ -96,10 +96,10 @@ namespace StorageAndTrade
                 }
             );
 
-            ТабличніСписки.КурсиВалют_Записи.LoadRecords();
+            await ТабличніСписки.КурсиВалют_Записи.LoadRecords();
         }
 
-        protected override void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             if (IsNew)
             {
@@ -120,7 +120,7 @@ namespace StorageAndTrade
             else if (unigueID != null)
             {
                 КурсиВалют_Objest КурсиВалют_Objest = new КурсиВалют_Objest();
-                if (КурсиВалют_Objest.Read(unigueID))
+                if (await КурсиВалют_Objest.Read(unigueID))
                 {
                     Program.GeneralForm?.CreateNotebookPage($"{КурсиВалют_Objest.Курс}", () =>
                     {
@@ -144,7 +144,7 @@ namespace StorageAndTrade
         protected override async void Delete(UnigueID unigueID)
         {
             КурсиВалют_Objest КурсиВалют_Objest = new КурсиВалют_Objest();
-            if (КурсиВалют_Objest.Read(unigueID))
+            if (await КурсиВалют_Objest.Read(unigueID))
                 await КурсиВалют_Objest.Delete();
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
@@ -153,7 +153,7 @@ namespace StorageAndTrade
         protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
             КурсиВалют_Objest КурсиВалют_Objest = new КурсиВалют_Objest();
-            if (КурсиВалют_Objest.Read(unigueID))
+            if (await КурсиВалют_Objest.Read(unigueID))
             {
                 КурсиВалют_Objest КурсиВалют_Objest_Новий = КурсиВалют_Objest.Copy();
                 await КурсиВалют_Objest_Новий.Save();

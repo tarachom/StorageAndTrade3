@@ -22,6 +22,7 @@ limitations under the License.
 */
 
 using Gtk;
+using AccountingSoftware;
 
 namespace StorageAndTrade
 {
@@ -49,15 +50,17 @@ namespace StorageAndTrade
             ShowAll();
         }
 
-        public void LoadRecords()
+        public async ValueTask LoadRecords()
         {
             foreach (Widget Child in vBoxMessage.Children)
                 vBoxMessage.Remove(Child);
 
-            List<Dictionary<string, object>> listRow = ФункціїДляПовідомлень.ПрочитатиПовідомленняПроПомилку();
+            SelectRequestAsync_Record record = await ФункціїДляПовідомлень.ПрочитатиПовідомленняПроПомилку();
 
-            foreach (Dictionary<string, object> row in listRow)
+            foreach (Dictionary<string, object> row in record.ListRow)
                 CreateMessage(row);
+
+            vBoxMessage.ShowAll();
         }
 
         void CreateMessage(Dictionary<string, object> row)
@@ -86,10 +89,10 @@ namespace StorageAndTrade
             vBoxMessage.PackStart(new Separator(Orientation.Horizontal), false, false, 5);
         }
 
-        void OnClear(object? sender, EventArgs args)
+        async void OnClear(object? sender, EventArgs args)
         {
-            ФункціїДляПовідомлень.ОчиститиПовідомлення();
-            LoadRecords();
+            await ФункціїДляПовідомлень.ОчиститиПовідомлення();
+            await LoadRecords();
         }
 
     }

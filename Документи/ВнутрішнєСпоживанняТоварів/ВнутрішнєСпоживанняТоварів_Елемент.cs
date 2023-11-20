@@ -194,7 +194,6 @@ namespace StorageAndTrade
             if (spendDoc)
             {
                 bool isSpend = await ВнутрішнєСпоживанняТоварів_Objest.SpendTheDocument(ВнутрішнєСпоживанняТоварів_Objest.ДатаДок);
-                Console.WriteLine("SpendTheDocument v " + isSpend);
 
                 if (!isSpend)
                     ФункціїДляПовідомлень.ВідкритиТермінал();

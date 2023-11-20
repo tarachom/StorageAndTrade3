@@ -680,7 +680,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
                 <xsl:if test="normalize-space(TriggerFunctions/AfterSave) != ''">
                     <xsl:value-of select="TriggerFunctions/AfterSave"/><xsl:text>(this);</xsl:text>      
                 </xsl:if>
-                BaseWriteFullTextSearch(GetBasis(), new string[] { <xsl:for-each select="Fields/Field[IsFullTextSearch = '1' and Type = 'string']">
+                await BaseWriteFullTextSearch(GetBasis(), new string[] { <xsl:for-each select="Fields/Field[IsFullTextSearch = '1' and Type = 'string']">
                   <xsl:if test="position() != 1">
                     <xsl:text>, </xsl:text>
                   </xsl:if>
@@ -1280,7 +1280,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
                 <xsl:if test="normalize-space(TriggerFunctions/AfterSave) != ''">
                     <xsl:value-of select="TriggerFunctions/AfterSave"/><xsl:text>(this);</xsl:text>      
                 </xsl:if>
-                BaseWriteFullTextSearch(GetBasis(), new string[] { <xsl:for-each select="Fields/Field[IsFullTextSearch = '1' and Type = 'string']">
+                await BaseWriteFullTextSearch(GetBasis(), new string[] { <xsl:for-each select="Fields/Field[IsFullTextSearch = '1' and Type = 'string']">
                   <xsl:if test="position() != 1">
                     <xsl:text>, </xsl:text>
                   </xsl:if>
@@ -1710,10 +1710,10 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВі�
 		
         public List&lt;Record&gt; Records { get; set; }
         
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead();
+            await base.BaseRead();
             foreach (Dictionary&lt;string, object&gt; fieldValue in base.FieldValueList) 
             {
                 Record record = new Record();
@@ -1796,9 +1796,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВі�
             </xsl:for-each>
         }
         
-        public bool Read(UnigueID uid)
+        public async ValueTask&lt;bool&gt; Read(UnigueID uid)
         {
-            if (BaseRead(uid))
+            if (await BaseRead(uid))
             {
                 <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
                   <xsl:value-of select="Name"/>
@@ -1981,11 +1981,11 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриНа�
 		
         public List&lt;Record&gt; Records { get; set; }
         
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
             
-            base.BaseRead();
+            await base.BaseRead();
             
             foreach (Dictionary&lt;string, object&gt; fieldValue in base.FieldValueList) 
             {
@@ -2079,10 +2079,10 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриНа�
         public const string <xsl:value-of select="Name"/> = "<xsl:value-of select="NameInTable"/>";</xsl:for-each>
         public List&lt;Record&gt; Records { get; set; }
     
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead();
+            await base.BaseRead();
 
             foreach (Dictionary&lt;string, object&gt; fieldValue in base.FieldValueList) 
             {
@@ -2103,12 +2103,12 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриНа�
             base.BaseClear();
         }
     
-        public void Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
-            base.BaseBeginTransaction();
+            await base.BaseBeginTransaction();
             
             if (clear_all_before_save)
-                base.BaseDelete();
+                await base.BaseDelete();
 
             foreach (Record record in Records)
             {
@@ -2128,15 +2128,15 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриНа�
                     </xsl:choose>
                     <xsl:text>)</xsl:text>;
                 </xsl:for-each>
-                record.UID = base.BaseSave(record.UID, fieldValue);
+                record.UID = await base.BaseSave(record.UID, fieldValue);
             }
             
-            base.BaseCommitTransaction();
+            await base.BaseCommitTransaction();
         }
     
-        public void Delete()
+        public async ValueTask Delete()
         {
-            base.BaseDelete();
+            await base.BaseDelete();
         }
         
         public class Record : RegisterAccumulationTablePartRecord
