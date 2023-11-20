@@ -46,98 +46,95 @@ namespace StorageAndTrade
         /// <summary>
         /// Переоприділення процедури Open() для кнопки "Відкрити"
         /// </summary>
-        public override async void Open()
+        public override async ValueTask Open()
         {
             ListBoxRow[] selectedRows = listBox.SelectedRows;
+            if (selectedRows.Length == 0) return;
 
-            if (selectedRows.Length != 0)
+            ConfigurationParam? OpenConfigurationParam = ConfigurationParamCollection.GetConfigurationParam(selectedRows[0].Name);
+            if (OpenConfigurationParam == null) return;
+
+            ConfigurationParamCollection.SelectConfigurationParam(selectedRows[0].Name);
+            ConfigurationParamCollection.SaveConfigurationParamFromXML(ConfigurationParamCollection.PathToXML);
+
+            string PathToConfXML = System.IO.Path.Combine(AppContext.BaseDirectory, "Confa.xml");
+
+            Конфа.Config.Kernel = new Kernel();
+
+            //Підключення до бази даних та завантаження конфігурації
+            bool result = await Конфа.Config.Kernel.Open(
+                PathToConfXML,
+                OpenConfigurationParam.DataBaseServer,
+                OpenConfigurationParam.DataBaseLogin,
+                OpenConfigurationParam.DataBasePassword,
+                OpenConfigurationParam.DataBasePort,
+                OpenConfigurationParam.DataBaseBaseName
+            );
+
+            if (!result)
             {
-                ConfigurationParam? OpenConfigurationParam = ConfigurationParamCollection.GetConfigurationParam(selectedRows[0].Name);
+                Message.Error(this, "Error: " + Конфа.Config.Kernel.Exception?.Message);
+                return;
+            }
 
-                if (OpenConfigurationParam == null)
-                    return;
+            //
+            // Авторизація
+            //
 
-                ConfigurationParamCollection.SelectConfigurationParam(selectedRows[0].Name);
-                ConfigurationParamCollection.SaveConfigurationParamFromXML(ConfigurationParamCollection.PathToXML);
+            ResponseType ModalResult = ResponseType.None;
 
-                string PathToConfXML = System.IO.Path.Combine(AppContext.BaseDirectory, "Confa.xml");
+            using (FormLogIn windowFormLogIn = new FormLogIn())
+            {
+                windowFormLogIn.TransientFor = this;
+                windowFormLogIn.Modal = true;
+                windowFormLogIn.Resizable = false;
+                await windowFormLogIn.SetValue();
+                windowFormLogIn.Show();
 
-                Конфа.Config.Kernel = new Kernel();
-
-                //Підключення до бази даних та завантаження конфігурації
-                bool result = await Конфа.Config.Kernel.Open(
-                    PathToConfXML,
-                    OpenConfigurationParam.DataBaseServer,
-                    OpenConfigurationParam.DataBaseLogin,
-                    OpenConfigurationParam.DataBasePassword,
-                    OpenConfigurationParam.DataBasePort,
-                    OpenConfigurationParam.DataBaseBaseName
-                );
-
-                if (!result)
+                while (ModalResult == ResponseType.None)
                 {
-                    Message.Error(this, "Error: " + Конфа.Config.Kernel.Exception?.Message);
-                    return;
-                }
-
-                //
-                // Авторизація
-                //
-
-                ResponseType ModalResult = ResponseType.None;
-
-                using (FormLogIn windowFormLogIn = new FormLogIn())
-                {
-                    windowFormLogIn.TransientFor = this;
-                    windowFormLogIn.Modal = true;
-                    windowFormLogIn.Resizable = false;
-                    windowFormLogIn.SetValue();
-                    windowFormLogIn.Show();
-
-                    while (ModalResult == ResponseType.None)
-                    {
-                        ModalResult = windowFormLogIn.ModalResult;
-                        Application.RunIteration(true);
-                    }
-                }
-
-                if (ModalResult == ResponseType.Cancel)
-                {
-                    Конфа.Config.Kernel.Close();
-                    return;
-                }
-
-                if (Конфа.Config.Kernel.DataBase.IfExistsTable("tab_constants"))
-                {
-                    await Конфа.Config.ReadAllConstants();
-
-                    //Значення констант за замовчуванням
-                    if ((int)Константи.ЖурналиДокументів.ОсновнийТипПеріоду_Const == 0)
-                        Константи.ЖурналиДокументів.ОсновнийТипПеріоду_Const = Перелічення.ТипПеріодуДляЖурналівДокументів.ВесьПеріод;
-
-                    Program.GeneralForm = new FormStorageAndTrade() { OpenConfigurationParam = ConfigurationParamCollection.GetConfigurationParam(selectedRows[0].Name) };
-                    Program.GeneralForm.Show();
-
-                    //Присвоєння користувача
-                    Program.GeneralForm.SetCurrentUser();
-
-                    //Запуск фонових задач
-                    Program.GeneralForm.StartBackgroundTask();
-
-                    //Відкрити перші сторінки
-                    Program.GeneralForm.OpenFirstPages();
-
-                    //Сховати форму вибору
-                    this.Hide();
-                }
-                else
-                {
-                    Message.Error(this, @"Error: Відсутня таблиця tab_constants. Потрібно відкрити Конфігуратор і зберегти конфігурацію -  
-                    (Меню: Конфігурація/Зберегти конфігурацію - дальше Збереження змін. Крок 1, Збереження змін. Крок 2)");
-
-                    return;
+                    ModalResult = windowFormLogIn.ModalResult;
+                    Application.RunIteration(true);
                 }
             }
+
+            if (ModalResult == ResponseType.Cancel)
+            {
+                Конфа.Config.Kernel.Close();
+                return;
+            }
+
+            if (Конфа.Config.Kernel.DataBase.IfExistsTable("tab_constants"))
+            {
+                await Конфа.Config.ReadAllConstants();
+
+                //Значення констант за замовчуванням
+                if ((int)Константи.ЖурналиДокументів.ОсновнийТипПеріоду_Const == 0)
+                    Константи.ЖурналиДокументів.ОсновнийТипПеріоду_Const = Перелічення.ТипПеріодуДляЖурналівДокументів.ВесьПеріод;
+
+                Program.GeneralForm = new FormStorageAndTrade() { OpenConfigurationParam = OpenConfigurationParam };
+                Program.GeneralForm.Show();
+
+                //Присвоєння користувача
+                Program.GeneralForm.SetCurrentUser();
+
+                //Запуск фонових задач
+                Program.GeneralForm.StartBackgroundTask();
+
+                //Відкрити перші сторінки
+                Program.GeneralForm.OpenFirstPages();
+
+                //Сховати форму вибору
+                Hide();
+            }
+            else
+            {
+                Message.Error(this, @"Error: Відсутня таблиця tab_constants. Потрібно відкрити Конфігуратор і зберегти конфігурацію -  
+                    (Меню: Конфігурація/Зберегти конфігурацію - дальше Збереження змін. Крок 1, Збереження змін. Крок 2)");
+
+                return;
+            }
+
         }
     }
 }

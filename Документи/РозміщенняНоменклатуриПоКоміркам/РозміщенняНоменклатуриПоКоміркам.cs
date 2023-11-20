@@ -50,8 +50,6 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.РозміщенняНоменклатуриПоКоміркам_Записи.SelectPath, TreeViewGrid.Columns[0], false);
             else if (ТабличніСписки.РозміщенняНоменклатуриПоКоміркам_Записи.CurrentPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.РозміщенняНоменклатуриПоКоміркам_Записи.CurrentPath, TreeViewGrid.Columns[0], false);
-
-            TreeViewGrid.GrabFocus();
         }
 
         protected override void LoadRecords_OnSearch(string searchText)
@@ -73,8 +71,6 @@ namespace StorageAndTrade
 
             if (ТабличніСписки.РозміщенняНоменклатуриПоКоміркам_Записи.FirstPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.РозміщенняНоменклатуриПоКоміркам_Записи.FirstPath, TreeViewGrid.Columns[0], false);
-
-            TreeViewGrid.GrabFocus();
         }
 
         protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)

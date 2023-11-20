@@ -70,7 +70,7 @@ namespace StorageAndTrade
             ShowAll();
         }
 
-        public async void SetValue()
+        public async ValueTask SetValue()
         {
             if (Config.Kernel != null)
             {

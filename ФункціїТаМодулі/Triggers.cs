@@ -63,12 +63,12 @@ namespace StorageAndTrade_1_0.Довідники
 
         public static async ValueTask SetDeletionLabel(Організації_Objest ДовідникОбєкт, bool label)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask BeforeDelete(Організації_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -170,12 +170,12 @@ WHERE
 
         public static async ValueTask SetDeletionLabel(Виробники_Objest ДовідникОбєкт, bool label)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask BeforeDelete(Виробники_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -203,12 +203,12 @@ WHERE
 
         public static async ValueTask SetDeletionLabel(ВидиНоменклатури_Objest ДовідникОбєкт, bool label)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask BeforeDelete(ВидиНоменклатури_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -236,12 +236,12 @@ WHERE
 
         public static async ValueTask SetDeletionLabel(ПакуванняОдиниціВиміру_Objest ДовідникОбєкт, bool label)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask BeforeDelete(ПакуванняОдиниціВиміру_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -338,7 +338,7 @@ WHERE
 
         public static async ValueTask BeforeDelete(Контрагенти_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -366,12 +366,12 @@ WHERE
 
         public static async ValueTask SetDeletionLabel(Склади_Objest ДовідникОбєкт, bool label)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask BeforeDelete(Склади_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -399,12 +399,12 @@ WHERE
 
         public static async ValueTask SetDeletionLabel(ВидиЦін_Objest ДовідникОбєкт, bool label)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask BeforeDelete(ВидиЦін_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -432,12 +432,12 @@ WHERE
 
         public static async ValueTask SetDeletionLabel(ВидиЦінПостачальників_Objest ДовідникОбєкт, bool label)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask BeforeDelete(ВидиЦінПостачальників_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -465,12 +465,12 @@ WHERE
 
         public static async ValueTask SetDeletionLabel(Користувачі_Objest ДовідникОбєкт, bool label)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask BeforeDelete(Користувачі_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -498,12 +498,12 @@ WHERE
 
         public static async ValueTask SetDeletionLabel(ФізичніОсоби_Objest ДовідникОбєкт, bool label)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask BeforeDelete(ФізичніОсоби_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -531,12 +531,12 @@ WHERE
 
         public static async ValueTask SetDeletionLabel(СтруктураПідприємства_Objest ДовідникОбєкт, bool label)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask BeforeDelete(СтруктураПідприємства_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -564,12 +564,12 @@ WHERE
 
         public static async ValueTask SetDeletionLabel(КраїниСвіту_Objest ДовідникОбєкт, bool label)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask BeforeDelete(КраїниСвіту_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -597,12 +597,12 @@ WHERE
 
         public static async ValueTask SetDeletionLabel(Файли_Objest ДовідникОбєкт, bool label)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask BeforeDelete(Файли_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -630,12 +630,12 @@ WHERE
 
         public static async ValueTask SetDeletionLabel(ХарактеристикиНоменклатури_Objest ДовідникОбєкт, bool label)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask BeforeDelete(ХарактеристикиНоменклатури_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -982,12 +982,12 @@ WHERE
 
         public static async ValueTask SetDeletionLabel(Каси_Objest ДовідникОбєкт, bool label)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask BeforeDelete(Каси_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -1015,12 +1015,12 @@ WHERE
 
         public static async ValueTask SetDeletionLabel(БанківськіРахункиОрганізацій_Objest ДовідникОбєкт, bool label)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask BeforeDelete(БанківськіРахункиОрганізацій_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -1051,12 +1051,12 @@ WHERE
 
         public static async ValueTask SetDeletionLabel(ДоговориКонтрагентів_Objest ДовідникОбєкт, bool label)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask BeforeDelete(ДоговориКонтрагентів_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -1084,12 +1084,12 @@ WHERE
 
         public static async ValueTask SetDeletionLabel(БанківськіРахункиКонтрагентів_Objest ДовідникОбєкт, bool label)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask BeforeDelete(БанківськіРахункиКонтрагентів_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -1117,12 +1117,12 @@ WHERE
 
         public static async ValueTask SetDeletionLabel(СтаттяРухуКоштів_Objest ДовідникОбєкт, bool label)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask BeforeDelete(СтаттяРухуКоштів_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -1159,12 +1159,12 @@ WHERE
 
         public static async ValueTask SetDeletionLabel(СеріїНоменклатури_Objest ДовідникОбєкт, bool label)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask BeforeDelete(СеріїНоменклатури_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -1192,12 +1192,12 @@ WHERE
 
         public static async ValueTask SetDeletionLabel(ПартіяТоварівКомпозит_Objest ДовідникОбєкт, bool label)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask BeforeDelete(ПартіяТоварівКомпозит_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -1225,12 +1225,12 @@ WHERE
 
         public static async ValueTask SetDeletionLabel(ВидиЗапасів_Objest ДовідникОбєкт, bool label)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask BeforeDelete(ВидиЗапасів_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -1258,12 +1258,12 @@ WHERE
 
         public static async ValueTask SetDeletionLabel(Банки_Objest ДовідникОбєкт, bool label)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask BeforeDelete(Банки_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -1291,12 +1291,12 @@ WHERE
 
         public static async ValueTask SetDeletionLabel(СкладськіПриміщення_Objest ДовідникОбєкт, bool label)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask BeforeDelete(СкладськіПриміщення_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -1324,12 +1324,12 @@ WHERE
 
         public static async ValueTask SetDeletionLabel(СкладськіКомірки_Objest ДовідникОбєкт, bool label)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask BeforeDelete(СкладськіКомірки_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -1357,12 +1357,12 @@ WHERE
 
         public static async ValueTask SetDeletionLabel(ТипорозміриКомірок_Objest ДовідникОбєкт, bool label)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask BeforeDelete(ТипорозміриКомірок_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -1495,12 +1495,12 @@ WHERE
 
         public static async ValueTask SetDeletionLabel(Блокнот_Objest ДовідникОбєкт, bool label)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask BeforeDelete(Блокнот_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
     }
 

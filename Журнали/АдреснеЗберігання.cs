@@ -46,8 +46,6 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.Журнали_АдреснеЗберігання.SelectPath, TreeViewGrid.Columns[0], false);
             else if (ТабличніСписки.Журнали_АдреснеЗберігання.CurrentPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.Журнали_АдреснеЗберігання.CurrentPath, TreeViewGrid.Columns[0], false);
-
-            TreeViewGrid.GrabFocus();
         }
 
         public override void OpenTypeListDocs(Widget relative_to)

@@ -50,8 +50,6 @@ namespace StorageAndTrade
 
             if (ТабличніСписки.Користувачі_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.Користувачі_Записи.SelectPath, TreeViewGrid.Columns[0], false);
-
-            TreeViewGrid.GrabFocus();
         }
 
         protected override async ValueTask LoadRecords_OnSearch(string searchText)
