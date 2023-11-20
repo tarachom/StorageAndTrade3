@@ -264,7 +264,7 @@ LIMIT 1
 
         #endregion
 
-        public override void LoadRecords()
+        public override async ValueTask LoadRecords()
         {
             Store.Clear();
             Записи.Clear();
@@ -307,7 +307,7 @@ LIMIT 1
                 //ORDER
                 querySelect.Order.Add(РахунокФактура_Товари_TablePart.НомерРядка, SelectOrder.ASC);
 
-                РахунокФактура_Objest.Товари_TablePart.Read();
+                await РахунокФактура_Objest.Товари_TablePart.Read();
 
                 Dictionary<string, Dictionary<string, string>> JoinValue = РахунокФактура_Objest.Товари_TablePart.JoinValue;
 
@@ -374,7 +374,7 @@ LIMIT 1
 
                 await РахунокФактура_Objest.Товари_TablePart.Save(true);
 
-                LoadRecords();
+                await LoadRecords();
             }
         }
 

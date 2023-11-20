@@ -582,7 +582,7 @@ FROM
 
                 ЗамовленняКлієнтів_RecordsSet замовленняКлієнтів_RecordsSet = new ЗамовленняКлієнтів_RecordsSet();
 
-                ДокументОбєкт.Товари_TablePart.Read();
+                await ДокументОбєкт.Товари_TablePart.Read();
 
                 foreach (ЗамовленняКлієнта_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
                 {

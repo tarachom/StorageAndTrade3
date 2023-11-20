@@ -236,7 +236,7 @@ namespace StorageAndTrade
 
         #region Присвоєння / зчитування значень
 
-        public override void SetValue()
+        public override async void SetValue()
         {
             if (IsNew)
             {
@@ -282,7 +282,7 @@ namespace StorageAndTrade
 
             //Таблична частина
             Товари.ПоступленняТоварівТаПослуг_Objest = ПоступленняТоварівТаПослуг_Objest;
-            Товари.LoadRecords();
+            await Товари.LoadRecords();
 
             if (IsNew)
             {

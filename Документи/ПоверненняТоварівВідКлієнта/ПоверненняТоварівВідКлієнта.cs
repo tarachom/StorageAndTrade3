@@ -39,12 +39,12 @@ namespace StorageAndTrade
 
         #region Override
 
-        public override void LoadRecords()
+        public override async void LoadRecords()
         {
             ТабличніСписки.ПоверненняТоварівВідКлієнта_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.ПоверненняТоварівВідКлієнта_Записи.DocumentPointerItem = DocumentPointerItem;
 
-            ТабличніСписки.ПоверненняТоварівВідКлієнта_Записи.LoadRecords();
+            await ТабличніСписки.ПоверненняТоварівВідКлієнта_Записи.LoadRecords();
 
             if (ТабличніСписки.ПоверненняТоварівВідКлієнта_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.ПоверненняТоварівВідКлієнта_Записи.SelectPath, TreeViewGrid.Columns[0], false);
@@ -52,7 +52,7 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.ПоверненняТоварівВідКлієнта_Записи.CurrentPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override void LoadRecords_OnSearch(string searchText)
+        protected override async void LoadRecords_OnSearch(string searchText)
         {
             searchText = searchText.ToLower().Trim();
 
@@ -67,7 +67,7 @@ namespace StorageAndTrade
             ТабличніСписки.ПоверненняТоварівВідКлієнта_Записи.Where.Add(
                 new Where(ПоверненняТоварівВідКлієнта_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
-            ТабличніСписки.ПоверненняТоварівВідКлієнта_Записи.LoadRecords();
+            await ТабличніСписки.ПоверненняТоварівВідКлієнта_Записи.LoadRecords();
 
             if (ТабличніСписки.ПоверненняТоварівВідКлієнта_Записи.FirstPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.ПоверненняТоварівВідКлієнта_Записи.FirstPath, TreeViewGrid.Columns[0], false);
@@ -128,7 +128,7 @@ namespace StorageAndTrade
             ПоверненняТоварівВідКлієнта_Objest ПоверненняТоварівВідКлієнта_Objest = new ПоверненняТоварівВідКлієнта_Objest();
             if (await ПоверненняТоварівВідКлієнта_Objest.Read(unigueID))
             {
-                ПоверненняТоварівВідКлієнта_Objest ПоверненняТоварівВідКлієнта_Objest_Новий = ПоверненняТоварівВідКлієнта_Objest.Copy(true);
+                ПоверненняТоварівВідКлієнта_Objest ПоверненняТоварівВідКлієнта_Objest_Новий = await ПоверненняТоварівВідКлієнта_Objest.Copy(true);
                 await ПоверненняТоварівВідКлієнта_Objest_Новий.Save();
                 await ПоверненняТоварівВідКлієнта_Objest_Новий.Товари_TablePart.Save(true);
 

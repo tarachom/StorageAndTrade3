@@ -39,12 +39,12 @@ namespace StorageAndTrade
 
         #region Override
 
-        public override void LoadRecords()
+        public override async void LoadRecords()
         {
             ТабличніСписки.ВнутрішнєСпоживанняТоварів_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.ВнутрішнєСпоживанняТоварів_Записи.DocumentPointerItem = DocumentPointerItem;
 
-            ТабличніСписки.ВнутрішнєСпоживанняТоварів_Записи.LoadRecords();
+            await ТабличніСписки.ВнутрішнєСпоживанняТоварів_Записи.LoadRecords();
 
             if (ТабличніСписки.ВнутрішнєСпоживанняТоварів_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.ВнутрішнєСпоживанняТоварів_Записи.SelectPath, TreeViewGrid.Columns[0], false);
@@ -54,7 +54,7 @@ namespace StorageAndTrade
 
         }
 
-        protected override void LoadRecords_OnSearch(string searchText)
+        protected override async void LoadRecords_OnSearch(string searchText)
         {
             searchText = searchText.ToLower().Trim();
 
@@ -69,7 +69,7 @@ namespace StorageAndTrade
             ТабличніСписки.ВнутрішнєСпоживанняТоварів_Записи.Where.Add(
                 new Where(ВнутрішнєСпоживанняТоварів_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
-            ТабличніСписки.ВнутрішнєСпоживанняТоварів_Записи.LoadRecords();
+            await ТабличніСписки.ВнутрішнєСпоживанняТоварів_Записи.LoadRecords();
 
             if (ТабличніСписки.ВнутрішнєСпоживанняТоварів_Записи.FirstPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.ВнутрішнєСпоживанняТоварів_Записи.FirstPath, TreeViewGrid.Columns[0], false);
@@ -130,7 +130,7 @@ namespace StorageAndTrade
             ВнутрішнєСпоживанняТоварів_Objest ВнутрішнєСпоживанняТоварів_Objest = new ВнутрішнєСпоживанняТоварів_Objest();
             if (await ВнутрішнєСпоживанняТоварів_Objest.Read(unigueID))
             {
-                ВнутрішнєСпоживанняТоварів_Objest ВнутрішнєСпоживанняТоварів_Objest_Новий = ВнутрішнєСпоживанняТоварів_Objest.Copy(true);
+                ВнутрішнєСпоживанняТоварів_Objest ВнутрішнєСпоживанняТоварів_Objest_Новий = await ВнутрішнєСпоживанняТоварів_Objest.Copy(true);
                 await ВнутрішнєСпоживанняТоварів_Objest_Новий.Save();
                 await ВнутрішнєСпоживанняТоварів_Objest_Новий.Товари_TablePart.Save(true);
 

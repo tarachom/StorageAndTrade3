@@ -39,12 +39,12 @@ namespace StorageAndTrade
 
         #region Override
 
-        public override void LoadRecords()
+        public override async void LoadRecords()
         {
             ТабличніСписки.ВстановленняЦінНоменклатури_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.ВстановленняЦінНоменклатури_Записи.DocumentPointerItem = DocumentPointerItem;
 
-            ТабличніСписки.ВстановленняЦінНоменклатури_Записи.LoadRecords();
+            await ТабличніСписки.ВстановленняЦінНоменклатури_Записи.LoadRecords();
 
             if (ТабличніСписки.ВстановленняЦінНоменклатури_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.ВстановленняЦінНоменклатури_Записи.SelectPath, TreeViewGrid.Columns[0], false);
@@ -52,7 +52,7 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.ВстановленняЦінНоменклатури_Записи.CurrentPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override void LoadRecords_OnSearch(string searchText)
+        protected override async void LoadRecords_OnSearch(string searchText)
         {
             searchText = searchText.ToLower().Trim();
 
@@ -67,7 +67,7 @@ namespace StorageAndTrade
             ТабличніСписки.ВстановленняЦінНоменклатури_Записи.Where.Add(
                 new Where(ВстановленняЦінНоменклатури_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
-            ТабличніСписки.ВстановленняЦінНоменклатури_Записи.LoadRecords();
+            await ТабличніСписки.ВстановленняЦінНоменклатури_Записи.LoadRecords();
 
             if (ТабличніСписки.ВстановленняЦінНоменклатури_Записи.FirstPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.ВстановленняЦінНоменклатури_Записи.FirstPath, TreeViewGrid.Columns[0], false);
@@ -128,7 +128,7 @@ namespace StorageAndTrade
             ВстановленняЦінНоменклатури_Objest ВстановленняЦінНоменклатури_Objest = new ВстановленняЦінНоменклатури_Objest();
             if (await ВстановленняЦінНоменклатури_Objest.Read(unigueID))
             {
-                ВстановленняЦінНоменклатури_Objest ВстановленняЦінНоменклатури_Objest_Новий = ВстановленняЦінНоменклатури_Objest.Copy(true);
+                ВстановленняЦінНоменклатури_Objest ВстановленняЦінНоменклатури_Objest_Новий = await ВстановленняЦінНоменклатури_Objest.Copy(true);
                 await ВстановленняЦінНоменклатури_Objest_Новий.Save();
                 await ВстановленняЦінНоменклатури_Objest_Новий.Товари_TablePart.Save(true);
 

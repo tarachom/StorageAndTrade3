@@ -1315,7 +1315,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
             <xsl:text>await BaseSpend(false, DateTime.MinValue);</xsl:text>
         }
 
-        public <xsl:value-of select="$DocumentName"/>_Objest Copy(bool copyTableParts = false)
+        public async ValueTask&lt;<xsl:value-of select="$DocumentName"/>_Objest&gt; Copy(bool copyTableParts = false)
         {
             <xsl:value-of select="$DocumentName"/>_Objest copy = new <xsl:value-of select="$DocumentName"/>_Objest();
             <xsl:for-each select="Fields/Field">
@@ -1328,7 +1328,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
             <xsl:for-each select="TabularParts/TablePart">
                 <xsl:variable name="TablePartName" select="concat(Name, '_TablePart')"/>
                 //<xsl:value-of select="Name"/> - Таблична частина
-                <xsl:value-of select="$TablePartName"/>.Read();
+                await <xsl:value-of select="$TablePartName"/>.Read();
                 copy.<xsl:value-of select="$TablePartName"/>.Records = <xsl:value-of select="$TablePartName"/>.Copy();
             </xsl:for-each>
             }
@@ -1336,9 +1336,17 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
 
             copy.New();
             <xsl:if test="normalize-space(TriggerFunctions/Copying) != ''">
-                <xsl:value-of select="TriggerFunctions/Copying"/><xsl:text>(copy, this);</xsl:text>      
+                await <xsl:value-of select="TriggerFunctions/Copying"/><xsl:text>(copy, this);</xsl:text>      
             </xsl:if>
+            
+            <xsl:choose>
+                <xsl:when test="count(TabularParts/TablePart) = 0 and normalize-space(TriggerFunctions/Copying) = ''">
+            return await ValueTask.FromResult&lt;<xsl:value-of select="$DocumentName"/>_Objest&gt;(copy);
+                </xsl:when>
+                <xsl:otherwise>
             return copy;
+                </xsl:otherwise>
+            </xsl:choose>
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -1476,7 +1484,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
             if (readAllTablePart)
             {   
                 <xsl:for-each select="TabularParts/TablePart">
-                <xsl:value-of select="$DocumentName"/>ObjestItem.<xsl:value-of select="concat(Name, '_TablePart')"/>.Read();</xsl:for-each>
+                await <xsl:value-of select="$DocumentName"/>ObjestItem.<xsl:value-of select="concat(Name, '_TablePart')"/>.Read();</xsl:for-each>
             }
             </xsl:if>
             return <xsl:value-of select="$DocumentName"/>ObjestItem;
@@ -1493,9 +1501,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
     {		
         public <xsl:value-of select="$DocumentName"/>_Select() : base(Config.Kernel!, "<xsl:value-of select="Table"/>") { }
         
-        public bool Select() { return base.BaseSelect(); }
+        public async ValueTask&lt;bool&gt; Select() { return await base.BaseSelect(); }
         
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public async ValueTask&lt;bool&gt; SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
         public bool MoveNext() { if (MoveToPosition()) { Current = new <xsl:value-of select="$DocumentName"/>_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields); return true; } else { Current = null; return false; } }
         
@@ -1529,10 +1537,10 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
         
         public List&lt;Record&gt; Records { get; set; }
         
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead(Owner.UnigueID);
+            await base.BaseRead(Owner.UnigueID);
 
             foreach (Dictionary&lt;string, object&gt; fieldValue in base.FieldValueList) 
             {

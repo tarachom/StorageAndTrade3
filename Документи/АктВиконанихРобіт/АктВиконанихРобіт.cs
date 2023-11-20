@@ -41,12 +41,12 @@ namespace StorageAndTrade
 
         #region Override
 
-        public override void LoadRecords()
+        public override async void LoadRecords()
         {
             ТабличніСписки.АктВиконанихРобіт_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.АктВиконанихРобіт_Записи.DocumentPointerItem = DocumentPointerItem;
 
-            ТабличніСписки.АктВиконанихРобіт_Записи.LoadRecords();
+            await ТабличніСписки.АктВиконанихРобіт_Записи.LoadRecords();
 
             if (ТабличніСписки.АктВиконанихРобіт_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.АктВиконанихРобіт_Записи.SelectPath, TreeViewGrid.Columns[0], false);
@@ -54,7 +54,7 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.АктВиконанихРобіт_Записи.CurrentPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override void LoadRecords_OnSearch(string searchText)
+        protected override async void LoadRecords_OnSearch(string searchText)
         {
             searchText = searchText.ToLower().Trim();
 
@@ -69,7 +69,7 @@ namespace StorageAndTrade
             ТабличніСписки.АктВиконанихРобіт_Записи.Where.Add(
                 new Where(АктВиконанихРобіт_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
-            ТабличніСписки.АктВиконанихРобіт_Записи.LoadRecords();
+            await ТабличніСписки.АктВиконанихРобіт_Записи.LoadRecords();
 
             if (ТабличніСписки.АктВиконанихРобіт_Записи.FirstPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.АктВиконанихРобіт_Записи.FirstPath, TreeViewGrid.Columns[0], false);
@@ -130,7 +130,7 @@ namespace StorageAndTrade
             АктВиконанихРобіт_Objest АктВиконанихРобіт_Objest = new АктВиконанихРобіт_Objest();
             if (await АктВиконанихРобіт_Objest.Read(unigueID))
             {
-                АктВиконанихРобіт_Objest АктВиконанихРобіт_Objest_Новий = АктВиконанихРобіт_Objest.Copy(true);
+                АктВиконанихРобіт_Objest АктВиконанихРобіт_Objest_Новий = await АктВиконанихРобіт_Objest.Copy(true);
                 await АктВиконанихРобіт_Objest_Новий.Save();
                 await АктВиконанихРобіт_Objest_Новий.Послуги_TablePart.Save(true);
 

@@ -39,12 +39,12 @@ namespace StorageAndTrade
 
         #region Override
 
-        public override void LoadRecords()
+        public override async void LoadRecords()
         {
             ТабличніСписки.ВведенняЗалишків_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.ВведенняЗалишків_Записи.DocumentPointerItem = DocumentPointerItem;
 
-            ТабличніСписки.ВведенняЗалишків_Записи.LoadRecords();
+            await ТабличніСписки.ВведенняЗалишків_Записи.LoadRecords();
 
             if (ТабличніСписки.ВведенняЗалишків_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.ВведенняЗалишків_Записи.SelectPath, TreeViewGrid.Columns[0], false);
@@ -52,7 +52,7 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.ВведенняЗалишків_Записи.CurrentPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override void LoadRecords_OnSearch(string searchText)
+        protected override async void LoadRecords_OnSearch(string searchText)
         {
             searchText = searchText.ToLower().Trim();
 
@@ -67,7 +67,7 @@ namespace StorageAndTrade
             ТабличніСписки.ВведенняЗалишків_Записи.Where.Add(
                 new Where(ВведенняЗалишків_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
-            ТабличніСписки.ВведенняЗалишків_Записи.LoadRecords();
+            await ТабличніСписки.ВведенняЗалишків_Записи.LoadRecords();
 
             if (ТабличніСписки.ВведенняЗалишків_Записи.FirstPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.ВведенняЗалишків_Записи.FirstPath, TreeViewGrid.Columns[0], false);
@@ -128,7 +128,7 @@ namespace StorageAndTrade
             ВведенняЗалишків_Objest ВведенняЗалишків_Objest = new ВведенняЗалишків_Objest();
             if (await ВведенняЗалишків_Objest.Read(unigueID))
             {
-                ВведенняЗалишків_Objest ВведенняЗалишків_Objest_Новий = ВведенняЗалишків_Objest.Copy(true);
+                ВведенняЗалишків_Objest ВведенняЗалишків_Objest_Новий = await ВведенняЗалишків_Objest.Copy(true);
                 await ВведенняЗалишків_Objest_Новий.Save();
                 await ВведенняЗалишків_Objest_Новий.Товари_TablePart.Save(true);
                 await ВведенняЗалишків_Objest_Новий.Каси_TablePart.Save(true);

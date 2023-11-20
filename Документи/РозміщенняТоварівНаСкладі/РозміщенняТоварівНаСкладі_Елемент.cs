@@ -92,7 +92,7 @@ namespace StorageAndTrade
 
         #region Присвоєння / зчитування значень
 
-        public override void SetValue()
+        public override async void SetValue()
         {
             if (IsNew)
             {
@@ -119,7 +119,7 @@ namespace StorageAndTrade
                 РозміщенняТоварівНаСкладі_Objest.Склад = Склад.Pointer;
             };
 
-            Товари.LoadRecords();
+            await Товари.LoadRecords();
         }
 
         protected override void GetValue()

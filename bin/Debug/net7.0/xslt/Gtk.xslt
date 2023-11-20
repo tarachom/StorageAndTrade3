@@ -547,7 +547,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи.Т
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
-        public static void LoadRecords()
+        public static async ValueTask LoadRecords()
         {
             Store.Clear();
             FirstPath = SelectPath = CurrentPath = null;
@@ -590,7 +590,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи.Т
             </xsl:for-each>
 
             /* SELECT */
-            <xsl:value-of select="$DocumentName"/>_Select.Select();
+            await <xsl:value-of select="$DocumentName"/>_Select.Select();
             while (<xsl:value-of select="$DocumentName"/>_Select.MoveNext())
             {
                 Документи.<xsl:value-of select="$DocumentName"/>_Pointer? cur = <xsl:value-of select="$DocumentName"/>_Select.Current;

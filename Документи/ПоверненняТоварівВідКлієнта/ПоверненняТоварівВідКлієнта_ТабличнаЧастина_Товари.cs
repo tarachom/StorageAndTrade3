@@ -195,7 +195,7 @@ namespace StorageAndTrade
 
         #endregion
 
-        public override void LoadRecords()
+        public override async ValueTask LoadRecords()
         {
             Store.Clear();
             Записи.Clear();
@@ -238,7 +238,7 @@ namespace StorageAndTrade
                 //ORDER
                 querySelect.Order.Add(ПоверненняТоварівВідКлієнта_Товари_TablePart.НомерРядка, SelectOrder.ASC);
 
-                ПоверненняТоварівВідКлієнта_Objest.Товари_TablePart.Read();
+                await ПоверненняТоварівВідКлієнта_Objest.Товари_TablePart.Read();
 
                 Dictionary<string, Dictionary<string, string>> JoinValue = ПоверненняТоварівВідКлієнта_Objest.Товари_TablePart.JoinValue;
 
@@ -303,7 +303,7 @@ namespace StorageAndTrade
 
                 await ПоверненняТоварівВідКлієнта_Objest.Товари_TablePart.Save(true);
 
-                LoadRecords();
+                await LoadRecords();
             }
         }
 

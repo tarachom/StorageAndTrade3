@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 20.11.2023 16:10:18
+ * Дата конфігурації: 20.11.2023 17:18:15
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон Gtk.xslt
@@ -8185,7 +8185,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
-        public static void LoadRecords()
+        public static async ValueTask LoadRecords()
         {
             Store.Clear();
             FirstPath = SelectPath = CurrentPath = null;
@@ -8252,7 +8252,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   
 
             /* SELECT */
-            ЗамовленняПостачальнику_Select.Select();
+            await ЗамовленняПостачальнику_Select.Select();
             while (ЗамовленняПостачальнику_Select.MoveNext())
             {
                 Документи.ЗамовленняПостачальнику_Pointer? cur = ЗамовленняПостачальнику_Select.Current;
@@ -8382,7 +8382,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
-        public static void LoadRecords()
+        public static async ValueTask LoadRecords()
         {
             Store.Clear();
             FirstPath = SelectPath = CurrentPath = null;
@@ -8457,7 +8457,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   
 
             /* SELECT */
-            ПоступленняТоварівТаПослуг_Select.Select();
+            await ПоступленняТоварівТаПослуг_Select.Select();
             while (ПоступленняТоварівТаПослуг_Select.MoveNext())
             {
                 Документи.ПоступленняТоварівТаПослуг_Pointer? cur = ПоступленняТоварівТаПослуг_Select.Current;
@@ -8588,7 +8588,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
-        public static void LoadRecords()
+        public static async ValueTask LoadRecords()
         {
             Store.Clear();
             FirstPath = SelectPath = CurrentPath = null;
@@ -8663,7 +8663,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   
 
             /* SELECT */
-            ЗамовленняКлієнта_Select.Select();
+            await ЗамовленняКлієнта_Select.Select();
             while (ЗамовленняКлієнта_Select.MoveNext())
             {
                 Документи.ЗамовленняКлієнта_Pointer? cur = ЗамовленняКлієнта_Select.Current;
@@ -8794,7 +8794,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
-        public static void LoadRecords()
+        public static async ValueTask LoadRecords()
         {
             Store.Clear();
             FirstPath = SelectPath = CurrentPath = null;
@@ -8869,7 +8869,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   
 
             /* SELECT */
-            РеалізаціяТоварівТаПослуг_Select.Select();
+            await РеалізаціяТоварівТаПослуг_Select.Select();
             while (РеалізаціяТоварівТаПослуг_Select.MoveNext())
             {
                 Документи.РеалізаціяТоварівТаПослуг_Pointer? cur = РеалізаціяТоварівТаПослуг_Select.Current;
@@ -8991,7 +8991,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
-        public static void LoadRecords()
+        public static async ValueTask LoadRecords()
         {
             Store.Clear();
             FirstPath = SelectPath = CurrentPath = null;
@@ -9049,7 +9049,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   
 
             /* SELECT */
-            ВстановленняЦінНоменклатури_Select.Select();
+            await ВстановленняЦінНоменклатури_Select.Select();
             while (ВстановленняЦінНоменклатури_Select.MoveNext())
             {
                 Документи.ВстановленняЦінНоменклатури_Pointer? cur = ВстановленняЦінНоменклатури_Select.Current;
@@ -9177,7 +9177,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
-        public static void LoadRecords()
+        public static async ValueTask LoadRecords()
         {
             Store.Clear();
             FirstPath = SelectPath = CurrentPath = null;
@@ -9245,7 +9245,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   
 
             /* SELECT */
-            ПрихіднийКасовийОрдер_Select.Select();
+            await ПрихіднийКасовийОрдер_Select.Select();
             while (ПрихіднийКасовийОрдер_Select.MoveNext())
             {
                 Документи.ПрихіднийКасовийОрдер_Pointer? cur = ПрихіднийКасовийОрдер_Select.Current;
@@ -9376,7 +9376,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
-        public static void LoadRecords()
+        public static async ValueTask LoadRecords()
         {
             Store.Clear();
             FirstPath = SelectPath = CurrentPath = null;
@@ -9444,7 +9444,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   
 
             /* SELECT */
-            РозхіднийКасовийОрдер_Select.Select();
+            await РозхіднийКасовийОрдер_Select.Select();
             while (РозхіднийКасовийОрдер_Select.MoveNext())
             {
                 Документи.РозхіднийКасовийОрдер_Pointer? cur = РозхіднийКасовийОрдер_Select.Current;
@@ -9566,7 +9566,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
-        public static void LoadRecords()
+        public static async ValueTask LoadRecords()
         {
             Store.Clear();
             FirstPath = SelectPath = CurrentPath = null;
@@ -9624,7 +9624,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   
 
             /* SELECT */
-            ПереміщенняТоварів_Select.Select();
+            await ПереміщенняТоварів_Select.Select();
             while (ПереміщенняТоварів_Select.MoveNext())
             {
                 Документи.ПереміщенняТоварів_Pointer? cur = ПереміщенняТоварів_Select.Current;
@@ -9752,7 +9752,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
-        public static void LoadRecords()
+        public static async ValueTask LoadRecords()
         {
             Store.Clear();
             FirstPath = SelectPath = CurrentPath = null;
@@ -9827,7 +9827,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   
 
             /* SELECT */
-            ПоверненняТоварівПостачальнику_Select.Select();
+            await ПоверненняТоварівПостачальнику_Select.Select();
             while (ПоверненняТоварівПостачальнику_Select.MoveNext())
             {
                 Документи.ПоверненняТоварівПостачальнику_Pointer? cur = ПоверненняТоварівПостачальнику_Select.Current;
@@ -9958,7 +9958,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
-        public static void LoadRecords()
+        public static async ValueTask LoadRecords()
         {
             Store.Clear();
             FirstPath = SelectPath = CurrentPath = null;
@@ -10033,7 +10033,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   
 
             /* SELECT */
-            ПоверненняТоварівВідКлієнта_Select.Select();
+            await ПоверненняТоварівВідКлієнта_Select.Select();
             while (ПоверненняТоварівВідКлієнта_Select.MoveNext())
             {
                 Документи.ПоверненняТоварівВідКлієнта_Pointer? cur = ПоверненняТоварівВідКлієнта_Select.Current;
@@ -10161,7 +10161,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
-        public static void LoadRecords()
+        public static async ValueTask LoadRecords()
         {
             Store.Clear();
             FirstPath = SelectPath = CurrentPath = null;
@@ -10228,7 +10228,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   
 
             /* SELECT */
-            АктВиконанихРобіт_Select.Select();
+            await АктВиконанихРобіт_Select.Select();
             while (АктВиконанихРобіт_Select.MoveNext())
             {
                 Документи.АктВиконанихРобіт_Pointer? cur = АктВиконанихРобіт_Select.Current;
@@ -10352,7 +10352,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
-        public static void LoadRecords()
+        public static async ValueTask LoadRecords()
         {
             Store.Clear();
             FirstPath = SelectPath = CurrentPath = null;
@@ -10418,7 +10418,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   
 
             /* SELECT */
-            ВведенняЗалишків_Select.Select();
+            await ВведенняЗалишків_Select.Select();
             while (ВведенняЗалишків_Select.MoveNext())
             {
                 Документи.ВведенняЗалишків_Pointer? cur = ВведенняЗалишків_Select.Current;
@@ -10535,7 +10535,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
-        public static void LoadRecords()
+        public static async ValueTask LoadRecords()
         {
             Store.Clear();
             FirstPath = SelectPath = CurrentPath = null;
@@ -10585,7 +10585,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   
 
             /* SELECT */
-            НадлишкиТоварів_Select.Select();
+            await НадлишкиТоварів_Select.Select();
             while (НадлишкиТоварів_Select.MoveNext())
             {
                 Документи.НадлишкиТоварів_Pointer? cur = НадлишкиТоварів_Select.Current;
@@ -10700,7 +10700,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
-        public static void LoadRecords()
+        public static async ValueTask LoadRecords()
         {
             Store.Clear();
             FirstPath = SelectPath = CurrentPath = null;
@@ -10750,7 +10750,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   
 
             /* SELECT */
-            ПересортицяТоварів_Select.Select();
+            await ПересортицяТоварів_Select.Select();
             while (ПересортицяТоварів_Select.MoveNext())
             {
                 Документи.ПересортицяТоварів_Pointer? cur = ПересортицяТоварів_Select.Current;
@@ -10862,7 +10862,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
-        public static void LoadRecords()
+        public static async ValueTask LoadRecords()
         {
             Store.Clear();
             FirstPath = SelectPath = CurrentPath = null;
@@ -10904,7 +10904,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   
 
             /* SELECT */
-            ПерерахунокТоварів_Select.Select();
+            await ПерерахунокТоварів_Select.Select();
             while (ПерерахунокТоварів_Select.MoveNext())
             {
                 Документи.ПерерахунокТоварів_Pointer? cur = ПерерахунокТоварів_Select.Current;
@@ -11021,7 +11021,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
-        public static void LoadRecords()
+        public static async ValueTask LoadRecords()
         {
             Store.Clear();
             FirstPath = SelectPath = CurrentPath = null;
@@ -11072,7 +11072,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   
 
             /* SELECT */
-            ПсуванняТоварів_Select.Select();
+            await ПсуванняТоварів_Select.Select();
             while (ПсуванняТоварів_Select.MoveNext())
             {
                 Документи.ПсуванняТоварів_Pointer? cur = ПсуванняТоварів_Select.Current;
@@ -11194,7 +11194,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
-        public static void LoadRecords()
+        public static async ValueTask LoadRecords()
         {
             Store.Clear();
             FirstPath = SelectPath = CurrentPath = null;
@@ -11253,7 +11253,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   
 
             /* SELECT */
-            ВнутрішнєСпоживанняТоварів_Select.Select();
+            await ВнутрішнєСпоживанняТоварів_Select.Select();
             while (ВнутрішнєСпоживанняТоварів_Select.MoveNext())
             {
                 Документи.ВнутрішнєСпоживанняТоварів_Pointer? cur = ВнутрішнєСпоживанняТоварів_Select.Current;
@@ -11382,7 +11382,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
-        public static void LoadRecords()
+        public static async ValueTask LoadRecords()
         {
             Store.Clear();
             FirstPath = SelectPath = CurrentPath = null;
@@ -11457,7 +11457,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   
 
             /* SELECT */
-            РахунокФактура_Select.Select();
+            await РахунокФактура_Select.Select();
             while (РахунокФактура_Select.MoveNext())
             {
                 Документи.РахунокФактура_Pointer? cur = РахунокФактура_Select.Current;
@@ -11576,7 +11576,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
-        public static void LoadRecords()
+        public static async ValueTask LoadRecords()
         {
             Store.Clear();
             FirstPath = SelectPath = CurrentPath = null;
@@ -11626,7 +11626,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   
 
             /* SELECT */
-            РозміщенняТоварівНаСкладі_Select.Select();
+            await РозміщенняТоварівНаСкладі_Select.Select();
             while (РозміщенняТоварівНаСкладі_Select.MoveNext())
             {
                 Документи.РозміщенняТоварівНаСкладі_Pointer? cur = РозміщенняТоварівНаСкладі_Select.Current;
@@ -11741,7 +11741,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
-        public static void LoadRecords()
+        public static async ValueTask LoadRecords()
         {
             Store.Clear();
             FirstPath = SelectPath = CurrentPath = null;
@@ -11791,7 +11791,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   
 
             /* SELECT */
-            ПереміщенняТоварівНаСкладі_Select.Select();
+            await ПереміщенняТоварівНаСкладі_Select.Select();
             while (ПереміщенняТоварівНаСкладі_Select.MoveNext())
             {
                 Документи.ПереміщенняТоварівНаСкладі_Pointer? cur = ПереміщенняТоварівНаСкладі_Select.Current;
@@ -11906,7 +11906,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
-        public static void LoadRecords()
+        public static async ValueTask LoadRecords()
         {
             Store.Clear();
             FirstPath = SelectPath = CurrentPath = null;
@@ -11956,7 +11956,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   
 
             /* SELECT */
-            ЗбіркаТоварівНаСкладі_Select.Select();
+            await ЗбіркаТоварівНаСкладі_Select.Select();
             while (ЗбіркаТоварівНаСкладі_Select.MoveNext())
             {
                 Документи.ЗбіркаТоварівНаСкладі_Pointer? cur = ЗбіркаТоварівНаСкладі_Select.Current;
@@ -12071,7 +12071,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
-        public static void LoadRecords()
+        public static async ValueTask LoadRecords()
         {
             Store.Clear();
             FirstPath = SelectPath = CurrentPath = null;
@@ -12121,7 +12121,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   
 
             /* SELECT */
-            РозміщенняНоменклатуриПоКоміркам_Select.Select();
+            await РозміщенняНоменклатуриПоКоміркам_Select.Select();
             while (РозміщенняНоменклатуриПоКоміркам_Select.MoveNext())
             {
                 Документи.РозміщенняНоменклатуриПоКоміркам_Pointer? cur = РозміщенняНоменклатуриПоКоміркам_Select.Current;

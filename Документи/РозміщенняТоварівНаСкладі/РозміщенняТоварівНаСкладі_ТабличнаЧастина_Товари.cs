@@ -168,7 +168,7 @@ namespace StorageAndTrade
             ToolbarTop.Add(fillButton);
         }
 
-        public override void LoadRecords()
+        public override async ValueTask LoadRecords()
         {
             Store.Clear();
             Записи.Clear();
@@ -211,7 +211,7 @@ namespace StorageAndTrade
                 //ORDER
                 querySelect.Order.Add(РозміщенняТоварівНаСкладі_Товари_TablePart.НомерРядка, SelectOrder.ASC);
 
-                РозміщенняТоварівНаСкладі_Objest.Товари_TablePart.Read();
+                await РозміщенняТоварівНаСкладі_Objest.Товари_TablePart.Read();
 
                 Dictionary<string, Dictionary<string, string>> JoinValue = РозміщенняТоварівНаСкладі_Objest.Товари_TablePart.JoinValue;
 
@@ -272,7 +272,7 @@ namespace StorageAndTrade
 
                 await РозміщенняТоварівНаСкладі_Objest.Товари_TablePart.Save(true);
 
-                LoadRecords();
+                await LoadRecords();
             }
         }
 

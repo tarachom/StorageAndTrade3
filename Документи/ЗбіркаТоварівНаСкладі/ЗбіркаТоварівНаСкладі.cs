@@ -39,12 +39,12 @@ namespace StorageAndTrade
 
         #region Override
 
-        public override void LoadRecords()
+        public override async void LoadRecords()
         {
             ТабличніСписки.ЗбіркаТоварівНаСкладі_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.ЗбіркаТоварівНаСкладі_Записи.DocumentPointerItem = DocumentPointerItem;
 
-            ТабличніСписки.ЗбіркаТоварівНаСкладі_Записи.LoadRecords();
+            await ТабличніСписки.ЗбіркаТоварівНаСкладі_Записи.LoadRecords();
 
             if (ТабличніСписки.ЗбіркаТоварівНаСкладі_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.ЗбіркаТоварівНаСкладі_Записи.SelectPath, TreeViewGrid.Columns[0], false);
@@ -52,7 +52,7 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.ЗбіркаТоварівНаСкладі_Записи.CurrentPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override void LoadRecords_OnSearch(string searchText)
+        protected override async void LoadRecords_OnSearch(string searchText)
         {
             searchText = searchText.ToLower().Trim();
 
@@ -67,7 +67,7 @@ namespace StorageAndTrade
             ТабличніСписки.ЗбіркаТоварівНаСкладі_Записи.Where.Add(
                 new Where(ЗбіркаТоварівНаСкладі_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
-            ТабличніСписки.ЗбіркаТоварівНаСкладі_Записи.LoadRecords();
+            await ТабличніСписки.ЗбіркаТоварівНаСкладі_Записи.LoadRecords();
 
             if (ТабличніСписки.ЗбіркаТоварівНаСкладі_Записи.FirstPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.ЗбіркаТоварівНаСкладі_Записи.FirstPath, TreeViewGrid.Columns[0], false);
@@ -128,7 +128,7 @@ namespace StorageAndTrade
             ЗбіркаТоварівНаСкладі_Objest ЗбіркаТоварівНаСкладі_Objest = new ЗбіркаТоварівНаСкладі_Objest();
             if (await ЗбіркаТоварівНаСкладі_Objest.Read(unigueID))
             {
-                ЗбіркаТоварівНаСкладі_Objest ЗбіркаТоварівНаСкладі_Objest_Новий = ЗбіркаТоварівНаСкладі_Objest.Copy(true);
+                ЗбіркаТоварівНаСкладі_Objest ЗбіркаТоварівНаСкладі_Objest_Новий = await ЗбіркаТоварівНаСкладі_Objest.Copy(true);
                 await ЗбіркаТоварівНаСкладі_Objest_Новий.Save();
                 await ЗбіркаТоварівНаСкладі_Objest_Новий.Товари_TablePart.Save(true);
 

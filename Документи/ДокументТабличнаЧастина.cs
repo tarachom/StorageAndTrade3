@@ -67,7 +67,7 @@ namespace StorageAndTrade
             ToolbarTop.Add(deleteButton);
         }
 
-        public virtual void LoadRecords() { }
+        public virtual ValueTask LoadRecords() { return new ValueTask(); }
 
         public virtual ValueTask SaveRecords() { return new ValueTask(); }
 

@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 20.11.2023 16:10:18
+ * Дата конфігурації: 20.11.2023 17:18:15
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -12473,7 +12473,7 @@ namespace StorageAndTrade_1_0.Документи
             await BaseSpend(false, DateTime.MinValue);
         }
 
-        public ЗамовленняПостачальнику_Objest Copy(bool copyTableParts = false)
+        public async ValueTask<ЗамовленняПостачальнику_Objest> Copy(bool copyTableParts = false)
         {
             ЗамовленняПостачальнику_Objest copy = new ЗамовленняПостачальнику_Objest();
             copy.Назва = Назва;
@@ -12508,15 +12508,17 @@ namespace StorageAndTrade_1_0.Документи
             {
             
                 //Товари - Таблична частина
-                Товари_TablePart.Read();
+                await Товари_TablePart.Read();
                 copy.Товари_TablePart.Records = Товари_TablePart.Copy();
             
             }
             
 
             copy.New();
-            ЗамовленняПостачальнику_Triggers.Copying(copy, this);
+            
+                await ЗамовленняПостачальнику_Triggers.Copying(copy, this);
             return copy;
+                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -12647,7 +12649,8 @@ namespace StorageAndTrade_1_0.Документи
             
             if (readAllTablePart)
             {   
-                ЗамовленняПостачальникуObjestItem.Товари_TablePart.Read();
+                
+                await ЗамовленняПостачальникуObjestItem.Товари_TablePart.Read();
             }
             
             return ЗамовленняПостачальникуObjestItem;
@@ -12664,9 +12667,9 @@ namespace StorageAndTrade_1_0.Документи
     {		
         public ЗамовленняПостачальнику_Select() : base(Config.Kernel!, "tab_a25") { }
         
-        public bool Select() { return base.BaseSelect(); }
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
         public bool MoveNext() { if (MoveToPosition()) { Current = new ЗамовленняПостачальнику_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields); return true; } else { Current = null; return false; } }
         
@@ -12703,10 +12706,10 @@ namespace StorageAndTrade_1_0.Документи
         
         public List<Record> Records { get; set; }
         
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead(Owner.UnigueID);
+            await base.BaseRead(Owner.UnigueID);
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -13372,7 +13375,7 @@ namespace StorageAndTrade_1_0.Документи
             await BaseSpend(false, DateTime.MinValue);
         }
 
-        public ПоступленняТоварівТаПослуг_Objest Copy(bool copyTableParts = false)
+        public async ValueTask<ПоступленняТоварівТаПослуг_Objest> Copy(bool copyTableParts = false)
         {
             ПоступленняТоварівТаПослуг_Objest copy = new ПоступленняТоварівТаПослуг_Objest();
             copy.Назва = Назва;
@@ -13413,15 +13416,17 @@ namespace StorageAndTrade_1_0.Документи
             {
             
                 //Товари - Таблична частина
-                Товари_TablePart.Read();
+                await Товари_TablePart.Read();
                 copy.Товари_TablePart.Records = Товари_TablePart.Copy();
             
             }
             
 
             copy.New();
-            ПоступленняТоварівТаПослуг_Triggers.Copying(copy, this);
+            
+                await ПоступленняТоварівТаПослуг_Triggers.Copying(copy, this);
             return copy;
+                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -13558,7 +13563,8 @@ namespace StorageAndTrade_1_0.Документи
             
             if (readAllTablePart)
             {   
-                ПоступленняТоварівТаПослугObjestItem.Товари_TablePart.Read();
+                
+                await ПоступленняТоварівТаПослугObjestItem.Товари_TablePart.Read();
             }
             
             return ПоступленняТоварівТаПослугObjestItem;
@@ -13575,9 +13581,9 @@ namespace StorageAndTrade_1_0.Документи
     {		
         public ПоступленняТоварівТаПослуг_Select() : base(Config.Kernel!, "tab_a32") { }
         
-        public bool Select() { return base.BaseSelect(); }
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
         public bool MoveNext() { if (MoveToPosition()) { Current = new ПоступленняТоварівТаПослуг_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields); return true; } else { Current = null; return false; } }
         
@@ -13616,10 +13622,10 @@ namespace StorageAndTrade_1_0.Документи
         
         public List<Record> Records { get; set; }
         
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead(Owner.UnigueID);
+            await base.BaseRead(Owner.UnigueID);
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -14235,7 +14241,7 @@ namespace StorageAndTrade_1_0.Документи
             await BaseSpend(false, DateTime.MinValue);
         }
 
-        public ЗамовленняКлієнта_Objest Copy(bool copyTableParts = false)
+        public async ValueTask<ЗамовленняКлієнта_Objest> Copy(bool copyTableParts = false)
         {
             ЗамовленняКлієнта_Objest copy = new ЗамовленняКлієнта_Objest();
             copy.Назва = Назва;
@@ -14273,15 +14279,17 @@ namespace StorageAndTrade_1_0.Документи
             {
             
                 //Товари - Таблична частина
-                Товари_TablePart.Read();
+                await Товари_TablePart.Read();
                 copy.Товари_TablePart.Records = Товари_TablePart.Copy();
             
             }
             
 
             copy.New();
-            ЗамовленняКлієнта_Triggers.Copying(copy, this);
+            
+                await ЗамовленняКлієнта_Triggers.Copying(copy, this);
             return copy;
+                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -14415,7 +14423,8 @@ namespace StorageAndTrade_1_0.Документи
             
             if (readAllTablePart)
             {   
-                ЗамовленняКлієнтаObjestItem.Товари_TablePart.Read();
+                
+                await ЗамовленняКлієнтаObjestItem.Товари_TablePart.Read();
             }
             
             return ЗамовленняКлієнтаObjestItem;
@@ -14432,9 +14441,9 @@ namespace StorageAndTrade_1_0.Документи
     {		
         public ЗамовленняКлієнта_Select() : base(Config.Kernel!, "tab_a34") { }
         
-        public bool Select() { return base.BaseSelect(); }
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
         public bool MoveNext() { if (MoveToPosition()) { Current = new ЗамовленняКлієнта_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields); return true; } else { Current = null; return false; } }
         
@@ -14470,10 +14479,10 @@ namespace StorageAndTrade_1_0.Документи
         
         public List<Record> Records { get; set; }
         
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead(Owner.UnigueID);
+            await base.BaseRead(Owner.UnigueID);
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -15134,7 +15143,7 @@ namespace StorageAndTrade_1_0.Документи
             await BaseSpend(false, DateTime.MinValue);
         }
 
-        public РеалізаціяТоварівТаПослуг_Objest Copy(bool copyTableParts = false)
+        public async ValueTask<РеалізаціяТоварівТаПослуг_Objest> Copy(bool copyTableParts = false)
         {
             РеалізаціяТоварівТаПослуг_Objest copy = new РеалізаціяТоварівТаПослуг_Objest();
             copy.Назва = Назва;
@@ -15174,15 +15183,17 @@ namespace StorageAndTrade_1_0.Документи
             {
             
                 //Товари - Таблична частина
-                Товари_TablePart.Read();
+                await Товари_TablePart.Read();
                 copy.Товари_TablePart.Records = Товари_TablePart.Copy();
             
             }
             
 
             copy.New();
-            РеалізаціяТоварівТаПослуг_Triggers.Copying(copy, this);
+            
+                await РеалізаціяТоварівТаПослуг_Triggers.Copying(copy, this);
             return copy;
+                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -15318,7 +15329,8 @@ namespace StorageAndTrade_1_0.Документи
             
             if (readAllTablePart)
             {   
-                РеалізаціяТоварівТаПослугObjestItem.Товари_TablePart.Read();
+                
+                await РеалізаціяТоварівТаПослугObjestItem.Товари_TablePart.Read();
             }
             
             return РеалізаціяТоварівТаПослугObjestItem;
@@ -15335,9 +15347,9 @@ namespace StorageAndTrade_1_0.Документи
     {		
         public РеалізаціяТоварівТаПослуг_Select() : base(Config.Kernel!, "tab_a36") { }
         
-        public bool Select() { return base.BaseSelect(); }
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
         public bool MoveNext() { if (MoveToPosition()) { Current = new РеалізаціяТоварівТаПослуг_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields); return true; } else { Current = null; return false; } }
         
@@ -15377,10 +15389,10 @@ namespace StorageAndTrade_1_0.Документи
         
         public List<Record> Records { get; set; }
         
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead(Owner.UnigueID);
+            await base.BaseRead(Owner.UnigueID);
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -15735,7 +15747,7 @@ namespace StorageAndTrade_1_0.Документи
             await BaseSpend(false, DateTime.MinValue);
         }
 
-        public ВстановленняЦінНоменклатури_Objest Copy(bool copyTableParts = false)
+        public async ValueTask<ВстановленняЦінНоменклатури_Objest> Copy(bool copyTableParts = false)
         {
             ВстановленняЦінНоменклатури_Objest copy = new ВстановленняЦінНоменклатури_Objest();
             copy.Назва = Назва;
@@ -15752,15 +15764,17 @@ namespace StorageAndTrade_1_0.Документи
             {
             
                 //Товари - Таблична частина
-                Товари_TablePart.Read();
+                await Товари_TablePart.Read();
                 copy.Товари_TablePart.Records = Товари_TablePart.Copy();
             
             }
             
 
             copy.New();
-            ВстановленняЦінНоменклатури_Triggers.Copying(copy, this);
+            
+                await ВстановленняЦінНоменклатури_Triggers.Copying(copy, this);
             return copy;
+                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -15873,7 +15887,8 @@ namespace StorageAndTrade_1_0.Документи
             
             if (readAllTablePart)
             {   
-                ВстановленняЦінНоменклатуриObjestItem.Товари_TablePart.Read();
+                
+                await ВстановленняЦінНоменклатуриObjestItem.Товари_TablePart.Read();
             }
             
             return ВстановленняЦінНоменклатуриObjestItem;
@@ -15890,9 +15905,9 @@ namespace StorageAndTrade_1_0.Документи
     {		
         public ВстановленняЦінНоменклатури_Select() : base(Config.Kernel!, "tab_a42") { }
         
-        public bool Select() { return base.BaseSelect(); }
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
         public bool MoveNext() { if (MoveToPosition()) { Current = new ВстановленняЦінНоменклатури_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields); return true; } else { Current = null; return false; } }
         
@@ -15923,10 +15938,10 @@ namespace StorageAndTrade_1_0.Документи
         
         public List<Record> Records { get; set; }
         
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead(Owner.UnigueID);
+            await base.BaseRead(Owner.UnigueID);
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -16354,7 +16369,7 @@ namespace StorageAndTrade_1_0.Документи
             await BaseSpend(false, DateTime.MinValue);
         }
 
-        public ПрихіднийКасовийОрдер_Objest Copy(bool copyTableParts = false)
+        public async ValueTask<ПрихіднийКасовийОрдер_Objest> Copy(bool copyTableParts = false)
         {
             ПрихіднийКасовийОрдер_Objest copy = new ПрихіднийКасовийОрдер_Objest();
             copy.Назва = Назва;
@@ -16380,15 +16395,17 @@ namespace StorageAndTrade_1_0.Документи
             {
             
                 //РозшифруванняПлатежу - Таблична частина
-                РозшифруванняПлатежу_TablePart.Read();
+                await РозшифруванняПлатежу_TablePart.Read();
                 copy.РозшифруванняПлатежу_TablePart.Records = РозшифруванняПлатежу_TablePart.Copy();
             
             }
             
 
             copy.New();
-            ПрихіднийКасовийОрдер_Triggers.Copying(copy, this);
+            
+                await ПрихіднийКасовийОрдер_Triggers.Copying(copy, this);
             return copy;
+                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -16510,7 +16527,8 @@ namespace StorageAndTrade_1_0.Документи
             
             if (readAllTablePart)
             {   
-                ПрихіднийКасовийОрдерObjestItem.РозшифруванняПлатежу_TablePart.Read();
+                
+                await ПрихіднийКасовийОрдерObjestItem.РозшифруванняПлатежу_TablePart.Read();
             }
             
             return ПрихіднийКасовийОрдерObjestItem;
@@ -16527,9 +16545,9 @@ namespace StorageAndTrade_1_0.Документи
     {		
         public ПрихіднийКасовийОрдер_Select() : base(Config.Kernel!, "tab_a44") { }
         
-        public bool Select() { return base.BaseSelect(); }
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
         public bool MoveNext() { if (MoveToPosition()) { Current = new ПрихіднийКасовийОрдер_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields); return true; } else { Current = null; return false; } }
         
@@ -16560,10 +16578,10 @@ namespace StorageAndTrade_1_0.Документи
         
         public List<Record> Records { get; set; }
         
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead(Owner.UnigueID);
+            await base.BaseRead(Owner.UnigueID);
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -17019,7 +17037,7 @@ namespace StorageAndTrade_1_0.Документи
             await BaseSpend(false, DateTime.MinValue);
         }
 
-        public РозхіднийКасовийОрдер_Objest Copy(bool copyTableParts = false)
+        public async ValueTask<РозхіднийКасовийОрдер_Objest> Copy(bool copyTableParts = false)
         {
             РозхіднийКасовийОрдер_Objest copy = new РозхіднийКасовийОрдер_Objest();
             copy.Назва = Назва;
@@ -17047,15 +17065,17 @@ namespace StorageAndTrade_1_0.Документи
             {
             
                 //РозшифруванняПлатежу - Таблична частина
-                РозшифруванняПлатежу_TablePart.Read();
+                await РозшифруванняПлатежу_TablePart.Read();
                 copy.РозшифруванняПлатежу_TablePart.Records = РозшифруванняПлатежу_TablePart.Copy();
             
             }
             
 
             copy.New();
-            РозхіднийКасовийОрдер_Triggers.Copying(copy, this);
+            
+                await РозхіднийКасовийОрдер_Triggers.Copying(copy, this);
             return copy;
+                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -17179,7 +17199,8 @@ namespace StorageAndTrade_1_0.Документи
             
             if (readAllTablePart)
             {   
-                РозхіднийКасовийОрдерObjestItem.РозшифруванняПлатежу_TablePart.Read();
+                
+                await РозхіднийКасовийОрдерObjestItem.РозшифруванняПлатежу_TablePart.Read();
             }
             
             return РозхіднийКасовийОрдерObjestItem;
@@ -17196,9 +17217,9 @@ namespace StorageAndTrade_1_0.Документи
     {		
         public РозхіднийКасовийОрдер_Select() : base(Config.Kernel!, "tab_a48") { }
         
-        public bool Select() { return base.BaseSelect(); }
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
         public bool MoveNext() { if (MoveToPosition()) { Current = new РозхіднийКасовийОрдер_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields); return true; } else { Current = null; return false; } }
         
@@ -17230,10 +17251,10 @@ namespace StorageAndTrade_1_0.Документи
         
         public List<Record> Records { get; set; }
         
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead(Owner.UnigueID);
+            await base.BaseRead(Owner.UnigueID);
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -17714,7 +17735,7 @@ namespace StorageAndTrade_1_0.Документи
             await BaseSpend(false, DateTime.MinValue);
         }
 
-        public ПереміщенняТоварів_Objest Copy(bool copyTableParts = false)
+        public async ValueTask<ПереміщенняТоварів_Objest> Copy(bool copyTableParts = false)
         {
             ПереміщенняТоварів_Objest copy = new ПереміщенняТоварів_Objest();
             copy.Назва = Назва;
@@ -17743,15 +17764,17 @@ namespace StorageAndTrade_1_0.Документи
             {
             
                 //Товари - Таблична частина
-                Товари_TablePart.Read();
+                await Товари_TablePart.Read();
                 copy.Товари_TablePart.Records = Товари_TablePart.Copy();
             
             }
             
 
             copy.New();
-            ПереміщенняТоварів_Triggers.Copying(copy, this);
+            
+                await ПереміщенняТоварів_Triggers.Copying(copy, this);
             return copy;
+                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -17876,7 +17899,8 @@ namespace StorageAndTrade_1_0.Документи
             
             if (readAllTablePart)
             {   
-                ПереміщенняТоварівObjestItem.Товари_TablePart.Read();
+                
+                await ПереміщенняТоварівObjestItem.Товари_TablePart.Read();
             }
             
             return ПереміщенняТоварівObjestItem;
@@ -17893,9 +17917,9 @@ namespace StorageAndTrade_1_0.Документи
     {		
         public ПереміщенняТоварів_Select() : base(Config.Kernel!, "tab_a31") { }
         
-        public bool Select() { return base.BaseSelect(); }
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
         public bool MoveNext() { if (MoveToPosition()) { Current = new ПереміщенняТоварів_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields); return true; } else { Current = null; return false; } }
         
@@ -17928,10 +17952,10 @@ namespace StorageAndTrade_1_0.Документи
         
         public List<Record> Records { get; set; }
         
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead(Owner.UnigueID);
+            await base.BaseRead(Owner.UnigueID);
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -18449,7 +18473,7 @@ namespace StorageAndTrade_1_0.Документи
             await BaseSpend(false, DateTime.MinValue);
         }
 
-        public ПоверненняТоварівПостачальнику_Objest Copy(bool copyTableParts = false)
+        public async ValueTask<ПоверненняТоварівПостачальнику_Objest> Copy(bool copyTableParts = false)
         {
             ПоверненняТоварівПостачальнику_Objest copy = new ПоверненняТоварівПостачальнику_Objest();
             copy.Назва = Назва;
@@ -18480,15 +18504,17 @@ namespace StorageAndTrade_1_0.Документи
             {
             
                 //Товари - Таблична частина
-                Товари_TablePart.Read();
+                await Товари_TablePart.Read();
                 copy.Товари_TablePart.Records = Товари_TablePart.Copy();
             
             }
             
 
             copy.New();
-            ПоверненняТоварівПостачальнику_Triggers.Copying(copy, this);
+            
+                await ПоверненняТоварівПостачальнику_Triggers.Copying(copy, this);
             return copy;
+                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -18615,7 +18641,8 @@ namespace StorageAndTrade_1_0.Документи
             
             if (readAllTablePart)
             {   
-                ПоверненняТоварівПостачальникуObjestItem.Товари_TablePart.Read();
+                
+                await ПоверненняТоварівПостачальникуObjestItem.Товари_TablePart.Read();
             }
             
             return ПоверненняТоварівПостачальникуObjestItem;
@@ -18632,9 +18659,9 @@ namespace StorageAndTrade_1_0.Документи
     {		
         public ПоверненняТоварівПостачальнику_Select() : base(Config.Kernel!, "tab_a51") { }
         
-        public bool Select() { return base.BaseSelect(); }
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
         public bool MoveNext() { if (MoveToPosition()) { Current = new ПоверненняТоварівПостачальнику_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields); return true; } else { Current = null; return false; } }
         
@@ -18669,10 +18696,10 @@ namespace StorageAndTrade_1_0.Документи
         
         public List<Record> Records { get; set; }
         
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead(Owner.UnigueID);
+            await base.BaseRead(Owner.UnigueID);
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -19158,7 +19185,7 @@ namespace StorageAndTrade_1_0.Документи
             await BaseSpend(false, DateTime.MinValue);
         }
 
-        public ПоверненняТоварівВідКлієнта_Objest Copy(bool copyTableParts = false)
+        public async ValueTask<ПоверненняТоварівВідКлієнта_Objest> Copy(bool copyTableParts = false)
         {
             ПоверненняТоварівВідКлієнта_Objest copy = new ПоверненняТоварівВідКлієнта_Objest();
             copy.Назва = Назва;
@@ -19185,15 +19212,17 @@ namespace StorageAndTrade_1_0.Документи
             {
             
                 //Товари - Таблична частина
-                Товари_TablePart.Read();
+                await Товари_TablePart.Read();
                 copy.Товари_TablePart.Records = Товари_TablePart.Copy();
             
             }
             
 
             copy.New();
-            ПоверненняТоварівВідКлієнта_Triggers.Copying(copy, this);
+            
+                await ПоверненняТоварівВідКлієнта_Triggers.Copying(copy, this);
             return copy;
+                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -19316,7 +19345,8 @@ namespace StorageAndTrade_1_0.Документи
             
             if (readAllTablePart)
             {   
-                ПоверненняТоварівВідКлієнтаObjestItem.Товари_TablePart.Read();
+                
+                await ПоверненняТоварівВідКлієнтаObjestItem.Товари_TablePart.Read();
             }
             
             return ПоверненняТоварівВідКлієнтаObjestItem;
@@ -19333,9 +19363,9 @@ namespace StorageAndTrade_1_0.Документи
     {		
         public ПоверненняТоварівВідКлієнта_Select() : base(Config.Kernel!, "tab_a53") { }
         
-        public bool Select() { return base.BaseSelect(); }
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
         public bool MoveNext() { if (MoveToPosition()) { Current = new ПоверненняТоварівВідКлієнта_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields); return true; } else { Current = null; return false; } }
         
@@ -19371,10 +19401,10 @@ namespace StorageAndTrade_1_0.Документи
         
         public List<Record> Records { get; set; }
         
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead(Owner.UnigueID);
+            await base.BaseRead(Owner.UnigueID);
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -19807,7 +19837,7 @@ namespace StorageAndTrade_1_0.Документи
             await BaseSpend(false, DateTime.MinValue);
         }
 
-        public АктВиконанихРобіт_Objest Copy(bool copyTableParts = false)
+        public async ValueTask<АктВиконанихРобіт_Objest> Copy(bool copyTableParts = false)
         {
             АктВиконанихРобіт_Objest copy = new АктВиконанихРобіт_Objest();
             copy.Назва = Назва;
@@ -19832,15 +19862,17 @@ namespace StorageAndTrade_1_0.Документи
             {
             
                 //Послуги - Таблична частина
-                Послуги_TablePart.Read();
+                await Послуги_TablePart.Read();
                 copy.Послуги_TablePart.Records = Послуги_TablePart.Copy();
             
             }
             
 
             copy.New();
-            АктВиконанихРобіт_Triggers.Copying(copy, this);
+            
+                await АктВиконанихРобіт_Triggers.Copying(copy, this);
             return copy;
+                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -19961,7 +19993,8 @@ namespace StorageAndTrade_1_0.Документи
             
             if (readAllTablePart)
             {   
-                АктВиконанихРобітObjestItem.Послуги_TablePart.Read();
+                
+                await АктВиконанихРобітObjestItem.Послуги_TablePart.Read();
             }
             
             return АктВиконанихРобітObjestItem;
@@ -19978,9 +20011,9 @@ namespace StorageAndTrade_1_0.Документи
     {		
         public АктВиконанихРобіт_Select() : base(Config.Kernel!, "tab_a81") { }
         
-        public bool Select() { return base.BaseSelect(); }
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
         public bool MoveNext() { if (MoveToPosition()) { Current = new АктВиконанихРобіт_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields); return true; } else { Current = null; return false; } }
         
@@ -20011,10 +20044,10 @@ namespace StorageAndTrade_1_0.Документи
         
         public List<Record> Records { get; set; }
         
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead(Owner.UnigueID);
+            await base.BaseRead(Owner.UnigueID);
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -20526,7 +20559,7 @@ namespace StorageAndTrade_1_0.Документи
             await BaseSpend(false, DateTime.MinValue);
         }
 
-        public ВведенняЗалишків_Objest Copy(bool copyTableParts = false)
+        public async ValueTask<ВведенняЗалишків_Objest> Copy(bool copyTableParts = false)
         {
             ВведенняЗалишків_Objest copy = new ВведенняЗалишків_Objest();
             copy.Назва = Назва;
@@ -20547,27 +20580,29 @@ namespace StorageAndTrade_1_0.Документи
             {
             
                 //Товари - Таблична частина
-                Товари_TablePart.Read();
+                await Товари_TablePart.Read();
                 copy.Товари_TablePart.Records = Товари_TablePart.Copy();
             
                 //Каси - Таблична частина
-                Каси_TablePart.Read();
+                await Каси_TablePart.Read();
                 copy.Каси_TablePart.Records = Каси_TablePart.Copy();
             
                 //БанківськіРахунки - Таблична частина
-                БанківськіРахунки_TablePart.Read();
+                await БанківськіРахунки_TablePart.Read();
                 copy.БанківськіРахунки_TablePart.Records = БанківськіРахунки_TablePart.Copy();
             
                 //РозрахункиЗКонтрагентами - Таблична частина
-                РозрахункиЗКонтрагентами_TablePart.Read();
+                await РозрахункиЗКонтрагентами_TablePart.Read();
                 copy.РозрахункиЗКонтрагентами_TablePart.Records = РозрахункиЗКонтрагентами_TablePart.Copy();
             
             }
             
 
             copy.New();
-            ВведенняЗалишків_Triggers.Copying(copy, this);
+            
+                await ВведенняЗалишків_Triggers.Copying(copy, this);
             return copy;
+                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -20687,7 +20722,11 @@ namespace StorageAndTrade_1_0.Документи
             
             if (readAllTablePart)
             {   
-                ВведенняЗалишківObjestItem.Товари_TablePart.Read();ВведенняЗалишківObjestItem.Каси_TablePart.Read();ВведенняЗалишківObjestItem.БанківськіРахунки_TablePart.Read();ВведенняЗалишківObjestItem.РозрахункиЗКонтрагентами_TablePart.Read();
+                
+                await ВведенняЗалишківObjestItem.Товари_TablePart.Read();
+                await ВведенняЗалишківObjestItem.Каси_TablePart.Read();
+                await ВведенняЗалишківObjestItem.БанківськіРахунки_TablePart.Read();
+                await ВведенняЗалишківObjestItem.РозрахункиЗКонтрагентами_TablePart.Read();
             }
             
             return ВведенняЗалишківObjestItem;
@@ -20704,9 +20743,9 @@ namespace StorageAndTrade_1_0.Документи
     {		
         public ВведенняЗалишків_Select() : base(Config.Kernel!, "tab_a83") { }
         
-        public bool Select() { return base.BaseSelect(); }
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
         public bool MoveNext() { if (MoveToPosition()) { Current = new ВведенняЗалишків_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields); return true; } else { Current = null; return false; } }
         
@@ -20740,10 +20779,10 @@ namespace StorageAndTrade_1_0.Документи
         
         public List<Record> Records { get; set; }
         
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead(Owner.UnigueID);
+            await base.BaseRead(Owner.UnigueID);
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -20844,10 +20883,10 @@ namespace StorageAndTrade_1_0.Документи
         
         public List<Record> Records { get; set; }
         
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead(Owner.UnigueID);
+            await base.BaseRead(Owner.UnigueID);
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -20930,10 +20969,10 @@ namespace StorageAndTrade_1_0.Документи
         
         public List<Record> Records { get; set; }
         
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead(Owner.UnigueID);
+            await base.BaseRead(Owner.UnigueID);
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -21018,10 +21057,10 @@ namespace StorageAndTrade_1_0.Документи
         
         public List<Record> Records { get; set; }
         
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead(Owner.UnigueID);
+            await base.BaseRead(Owner.UnigueID);
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -21343,7 +21382,7 @@ namespace StorageAndTrade_1_0.Документи
             await BaseSpend(false, DateTime.MinValue);
         }
 
-        public НадлишкиТоварів_Objest Copy(bool copyTableParts = false)
+        public async ValueTask<НадлишкиТоварів_Objest> Copy(bool copyTableParts = false)
         {
             НадлишкиТоварів_Objest copy = new НадлишкиТоварів_Objest();
             copy.Організація = Організація;
@@ -21361,7 +21400,7 @@ namespace StorageAndTrade_1_0.Документи
             {
             
                 //Товари - Таблична частина
-                Товари_TablePart.Read();
+                await Товари_TablePart.Read();
                 copy.Товари_TablePart.Records = Товари_TablePart.Copy();
             
             }
@@ -21370,6 +21409,7 @@ namespace StorageAndTrade_1_0.Документи
             copy.New();
             
             return copy;
+                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -21474,7 +21514,8 @@ namespace StorageAndTrade_1_0.Документи
             
             if (readAllTablePart)
             {   
-                НадлишкиТоварівObjestItem.Товари_TablePart.Read();
+                
+                await НадлишкиТоварівObjestItem.Товари_TablePart.Read();
             }
             
             return НадлишкиТоварівObjestItem;
@@ -21491,9 +21532,9 @@ namespace StorageAndTrade_1_0.Документи
     {		
         public НадлишкиТоварів_Select() : base(Config.Kernel!, "tab_a88") { }
         
-        public bool Select() { return base.BaseSelect(); }
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
         public bool MoveNext() { if (MoveToPosition()) { Current = new НадлишкиТоварів_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields); return true; } else { Current = null; return false; } }
         
@@ -21523,10 +21564,10 @@ namespace StorageAndTrade_1_0.Документи
         
         public List<Record> Records { get; set; }
         
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead(Owner.UnigueID);
+            await base.BaseRead(Owner.UnigueID);
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -21848,7 +21889,7 @@ namespace StorageAndTrade_1_0.Документи
             await BaseSpend(false, DateTime.MinValue);
         }
 
-        public ПересортицяТоварів_Objest Copy(bool copyTableParts = false)
+        public async ValueTask<ПересортицяТоварів_Objest> Copy(bool copyTableParts = false)
         {
             ПересортицяТоварів_Objest copy = new ПересортицяТоварів_Objest();
             copy.Назва = Назва;
@@ -21866,7 +21907,7 @@ namespace StorageAndTrade_1_0.Документи
             {
             
                 //Товари - Таблична частина
-                Товари_TablePart.Read();
+                await Товари_TablePart.Read();
                 copy.Товари_TablePart.Records = Товари_TablePart.Copy();
             
             }
@@ -21875,6 +21916,7 @@ namespace StorageAndTrade_1_0.Документи
             copy.New();
             
             return copy;
+                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -21979,7 +22021,8 @@ namespace StorageAndTrade_1_0.Документи
             
             if (readAllTablePart)
             {   
-                ПересортицяТоварівObjestItem.Товари_TablePart.Read();
+                
+                await ПересортицяТоварівObjestItem.Товари_TablePart.Read();
             }
             
             return ПересортицяТоварівObjestItem;
@@ -21996,9 +22039,9 @@ namespace StorageAndTrade_1_0.Документи
     {		
         public ПересортицяТоварів_Select() : base(Config.Kernel!, "tab_a90") { }
         
-        public bool Select() { return base.BaseSelect(); }
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
         public bool MoveNext() { if (MoveToPosition()) { Current = new ПересортицяТоварів_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields); return true; } else { Current = null; return false; } }
         
@@ -22028,10 +22071,10 @@ namespace StorageAndTrade_1_0.Документи
         
         public List<Record> Records { get; set; }
         
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead(Owner.UnigueID);
+            await base.BaseRead(Owner.UnigueID);
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -22343,7 +22386,7 @@ namespace StorageAndTrade_1_0.Документи
             await BaseSpend(false, DateTime.MinValue);
         }
 
-        public ПерерахунокТоварів_Objest Copy(bool copyTableParts = false)
+        public async ValueTask<ПерерахунокТоварів_Objest> Copy(bool copyTableParts = false)
         {
             ПерерахунокТоварів_Objest copy = new ПерерахунокТоварів_Objest();
             copy.Назва = Назва;
@@ -22359,7 +22402,7 @@ namespace StorageAndTrade_1_0.Документи
             {
             
                 //Товари - Таблична частина
-                Товари_TablePart.Read();
+                await Товари_TablePart.Read();
                 copy.Товари_TablePart.Records = Товари_TablePart.Copy();
             
             }
@@ -22368,6 +22411,7 @@ namespace StorageAndTrade_1_0.Документи
             copy.New();
             
             return copy;
+                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -22470,7 +22514,8 @@ namespace StorageAndTrade_1_0.Документи
             
             if (readAllTablePart)
             {   
-                ПерерахунокТоварівObjestItem.Товари_TablePart.Read();
+                
+                await ПерерахунокТоварівObjestItem.Товари_TablePart.Read();
             }
             
             return ПерерахунокТоварівObjestItem;
@@ -22487,9 +22532,9 @@ namespace StorageAndTrade_1_0.Документи
     {		
         public ПерерахунокТоварів_Select() : base(Config.Kernel!, "tab_a92") { }
         
-        public bool Select() { return base.BaseSelect(); }
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
         public bool MoveNext() { if (MoveToPosition()) { Current = new ПерерахунокТоварів_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields); return true; } else { Current = null; return false; } }
         
@@ -22521,10 +22566,10 @@ namespace StorageAndTrade_1_0.Документи
         
         public List<Record> Records { get; set; }
         
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead(Owner.UnigueID);
+            await base.BaseRead(Owner.UnigueID);
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -22911,7 +22956,7 @@ namespace StorageAndTrade_1_0.Документи
             await BaseSpend(false, DateTime.MinValue);
         }
 
-        public ПсуванняТоварів_Objest Copy(bool copyTableParts = false)
+        public async ValueTask<ПсуванняТоварів_Objest> Copy(bool copyTableParts = false)
         {
             ПсуванняТоварів_Objest copy = new ПсуванняТоварів_Objest();
             copy.Назва = Назва;
@@ -22931,15 +22976,17 @@ namespace StorageAndTrade_1_0.Документи
             {
             
                 //Товари - Таблична частина
-                Товари_TablePart.Read();
+                await Товари_TablePart.Read();
                 copy.Товари_TablePart.Records = Товари_TablePart.Copy();
             
             }
             
 
             copy.New();
-            ПсуванняТоварів_Triggers.Copying(copy, this);
+            
+                await ПсуванняТоварів_Triggers.Copying(copy, this);
             return copy;
+                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -23055,7 +23102,8 @@ namespace StorageAndTrade_1_0.Документи
             
             if (readAllTablePart)
             {   
-                ПсуванняТоварівObjestItem.Товари_TablePart.Read();
+                
+                await ПсуванняТоварівObjestItem.Товари_TablePart.Read();
             }
             
             return ПсуванняТоварівObjestItem;
@@ -23072,9 +23120,9 @@ namespace StorageAndTrade_1_0.Документи
     {		
         public ПсуванняТоварів_Select() : base(Config.Kernel!, "tab_a94") { }
         
-        public bool Select() { return base.BaseSelect(); }
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
         public bool MoveNext() { if (MoveToPosition()) { Current = new ПсуванняТоварів_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields); return true; } else { Current = null; return false; } }
         
@@ -23109,10 +23157,10 @@ namespace StorageAndTrade_1_0.Документи
         
         public List<Record> Records { get; set; }
         
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead(Owner.UnigueID);
+            await base.BaseRead(Owner.UnigueID);
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -23522,7 +23570,7 @@ namespace StorageAndTrade_1_0.Документи
             await BaseSpend(false, DateTime.MinValue);
         }
 
-        public ВнутрішнєСпоживанняТоварів_Objest Copy(bool copyTableParts = false)
+        public async ValueTask<ВнутрішнєСпоживанняТоварів_Objest> Copy(bool copyTableParts = false)
         {
             ВнутрішнєСпоживанняТоварів_Objest copy = new ВнутрішнєСпоживанняТоварів_Objest();
             copy.Назва = Назва;
@@ -23543,15 +23591,17 @@ namespace StorageAndTrade_1_0.Документи
             {
             
                 //Товари - Таблична частина
-                Товари_TablePart.Read();
+                await Товари_TablePart.Read();
                 copy.Товари_TablePart.Records = Товари_TablePart.Copy();
             
             }
             
 
             copy.New();
-            ВнутрішнєСпоживанняТоварів_Triggers.Copying(copy, this);
+            
+                await ВнутрішнєСпоживанняТоварів_Triggers.Copying(copy, this);
             return copy;
+                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -23668,7 +23718,8 @@ namespace StorageAndTrade_1_0.Документи
             
             if (readAllTablePart)
             {   
-                ВнутрішнєСпоживанняТоварівObjestItem.Товари_TablePart.Read();
+                
+                await ВнутрішнєСпоживанняТоварівObjestItem.Товари_TablePart.Read();
             }
             
             return ВнутрішнєСпоживанняТоварівObjestItem;
@@ -23685,9 +23736,9 @@ namespace StorageAndTrade_1_0.Документи
     {		
         public ВнутрішнєСпоживанняТоварів_Select() : base(Config.Kernel!, "tab_b07") { }
         
-        public bool Select() { return base.BaseSelect(); }
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
         public bool MoveNext() { if (MoveToPosition()) { Current = new ВнутрішнєСпоживанняТоварів_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields); return true; } else { Current = null; return false; } }
         
@@ -23722,10 +23773,10 @@ namespace StorageAndTrade_1_0.Документи
         
         public List<Record> Records { get; set; }
         
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead(Owner.UnigueID);
+            await base.BaseRead(Owner.UnigueID);
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -24227,7 +24278,7 @@ namespace StorageAndTrade_1_0.Документи
             await BaseSpend(false, DateTime.MinValue);
         }
 
-        public РахунокФактура_Objest Copy(bool copyTableParts = false)
+        public async ValueTask<РахунокФактура_Objest> Copy(bool copyTableParts = false)
         {
             РахунокФактура_Objest copy = new РахунокФактура_Objest();
             copy.Назва = Назва;
@@ -24255,15 +24306,17 @@ namespace StorageAndTrade_1_0.Документи
             {
             
                 //Товари - Таблична частина
-                Товари_TablePart.Read();
+                await Товари_TablePart.Read();
                 copy.Товари_TablePart.Records = Товари_TablePart.Copy();
             
             }
             
 
             copy.New();
-            РахунокФактура_Triggers.Copying(copy, this);
+            
+                await РахунокФактура_Triggers.Copying(copy, this);
             return copy;
+                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -24387,7 +24440,8 @@ namespace StorageAndTrade_1_0.Документи
             
             if (readAllTablePart)
             {   
-                РахунокФактураObjestItem.Товари_TablePart.Read();
+                
+                await РахунокФактураObjestItem.Товари_TablePart.Read();
             }
             
             return РахунокФактураObjestItem;
@@ -24404,9 +24458,9 @@ namespace StorageAndTrade_1_0.Документи
     {		
         public РахунокФактура_Select() : base(Config.Kernel!, "tab_b10") { }
         
-        public bool Select() { return base.BaseSelect(); }
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
         public bool MoveNext() { if (MoveToPosition()) { Current = new РахунокФактура_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields); return true; } else { Current = null; return false; } }
         
@@ -24442,10 +24496,10 @@ namespace StorageAndTrade_1_0.Документи
         
         public List<Record> Records { get; set; }
         
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead(Owner.UnigueID);
+            await base.BaseRead(Owner.UnigueID);
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -24824,7 +24878,7 @@ namespace StorageAndTrade_1_0.Документи
             await BaseSpend(false, DateTime.MinValue);
         }
 
-        public РозміщенняТоварівНаСкладі_Objest Copy(bool copyTableParts = false)
+        public async ValueTask<РозміщенняТоварівНаСкладі_Objest> Copy(bool copyTableParts = false)
         {
             РозміщенняТоварівНаСкладі_Objest copy = new РозміщенняТоварівНаСкладі_Objest();
             copy.Назва = Назва;
@@ -24843,15 +24897,17 @@ namespace StorageAndTrade_1_0.Документи
             {
             
                 //Товари - Таблична частина
-                Товари_TablePart.Read();
+                await Товари_TablePart.Read();
                 copy.Товари_TablePart.Records = Товари_TablePart.Copy();
             
             }
             
 
             copy.New();
-            РозміщенняТоварівНаСкладі_Triggers.Copying(copy, this);
+            
+                await РозміщенняТоварівНаСкладі_Triggers.Copying(copy, this);
             return copy;
+                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -24966,7 +25022,8 @@ namespace StorageAndTrade_1_0.Документи
             
             if (readAllTablePart)
             {   
-                РозміщенняТоварівНаСкладіObjestItem.Товари_TablePart.Read();
+                
+                await РозміщенняТоварівНаСкладіObjestItem.Товари_TablePart.Read();
             }
             
             return РозміщенняТоварівНаСкладіObjestItem;
@@ -24983,9 +25040,9 @@ namespace StorageAndTrade_1_0.Документи
     {		
         public РозміщенняТоварівНаСкладі_Select() : base(Config.Kernel!, "tab_a64") { }
         
-        public bool Select() { return base.BaseSelect(); }
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
         public bool MoveNext() { if (MoveToPosition()) { Current = new РозміщенняТоварівНаСкладі_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields); return true; } else { Current = null; return false; } }
         
@@ -25018,10 +25075,10 @@ namespace StorageAndTrade_1_0.Документи
         
         public List<Record> Records { get; set; }
         
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead(Owner.UnigueID);
+            await base.BaseRead(Owner.UnigueID);
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -25387,7 +25444,7 @@ namespace StorageAndTrade_1_0.Документи
             await BaseSpend(false, DateTime.MinValue);
         }
 
-        public ПереміщенняТоварівНаСкладі_Objest Copy(bool copyTableParts = false)
+        public async ValueTask<ПереміщенняТоварівНаСкладі_Objest> Copy(bool copyTableParts = false)
         {
             ПереміщенняТоварівНаСкладі_Objest copy = new ПереміщенняТоварівНаСкладі_Objest();
             copy.Назва = Назва;
@@ -25405,15 +25462,17 @@ namespace StorageAndTrade_1_0.Документи
             {
             
                 //Товари - Таблична частина
-                Товари_TablePart.Read();
+                await Товари_TablePart.Read();
                 copy.Товари_TablePart.Records = Товари_TablePart.Copy();
             
             }
             
 
             copy.New();
-            ПереміщенняТоварівНаСкладі_Triggers.Copying(copy, this);
+            
+                await ПереміщенняТоварівНаСкладі_Triggers.Copying(copy, this);
             return copy;
+                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -25527,7 +25586,8 @@ namespace StorageAndTrade_1_0.Документи
             
             if (readAllTablePart)
             {   
-                ПереміщенняТоварівНаСкладіObjestItem.Товари_TablePart.Read();
+                
+                await ПереміщенняТоварівНаСкладіObjestItem.Товари_TablePart.Read();
             }
             
             return ПереміщенняТоварівНаСкладіObjestItem;
@@ -25544,9 +25604,9 @@ namespace StorageAndTrade_1_0.Документи
     {		
         public ПереміщенняТоварівНаСкладі_Select() : base(Config.Kernel!, "tab_b09") { }
         
-        public bool Select() { return base.BaseSelect(); }
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
         public bool MoveNext() { if (MoveToPosition()) { Current = new ПереміщенняТоварівНаСкладі_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields); return true; } else { Current = null; return false; } }
         
@@ -25580,10 +25640,10 @@ namespace StorageAndTrade_1_0.Документи
         
         public List<Record> Records { get; set; }
         
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead(Owner.UnigueID);
+            await base.BaseRead(Owner.UnigueID);
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -25956,7 +26016,7 @@ namespace StorageAndTrade_1_0.Документи
             await BaseSpend(false, DateTime.MinValue);
         }
 
-        public ЗбіркаТоварівНаСкладі_Objest Copy(bool copyTableParts = false)
+        public async ValueTask<ЗбіркаТоварівНаСкладі_Objest> Copy(bool copyTableParts = false)
         {
             ЗбіркаТоварівНаСкладі_Objest copy = new ЗбіркаТоварівНаСкладі_Objest();
             copy.Назва = Назва;
@@ -25975,15 +26035,17 @@ namespace StorageAndTrade_1_0.Документи
             {
             
                 //Товари - Таблична частина
-                Товари_TablePart.Read();
+                await Товари_TablePart.Read();
                 copy.Товари_TablePart.Records = Товари_TablePart.Copy();
             
             }
             
 
             copy.New();
-            ЗбіркаТоварівНаСкладі_Triggers.Copying(copy, this);
+            
+                await ЗбіркаТоварівНаСкладі_Triggers.Copying(copy, this);
             return copy;
+                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -26098,7 +26160,8 @@ namespace StorageAndTrade_1_0.Документи
             
             if (readAllTablePart)
             {   
-                ЗбіркаТоварівНаСкладіObjestItem.Товари_TablePart.Read();
+                
+                await ЗбіркаТоварівНаСкладіObjestItem.Товари_TablePart.Read();
             }
             
             return ЗбіркаТоварівНаСкладіObjestItem;
@@ -26115,9 +26178,9 @@ namespace StorageAndTrade_1_0.Документи
     {		
         public ЗбіркаТоварівНаСкладі_Select() : base(Config.Kernel!, "tab_b27") { }
         
-        public bool Select() { return base.BaseSelect(); }
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
         public bool MoveNext() { if (MoveToPosition()) { Current = new ЗбіркаТоварівНаСкладі_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields); return true; } else { Current = null; return false; } }
         
@@ -26150,10 +26213,10 @@ namespace StorageAndTrade_1_0.Документи
         
         public List<Record> Records { get; set; }
         
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead(Owner.UnigueID);
+            await base.BaseRead(Owner.UnigueID);
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -26483,7 +26546,7 @@ namespace StorageAndTrade_1_0.Документи
             await BaseSpend(false, DateTime.MinValue);
         }
 
-        public РозміщенняНоменклатуриПоКоміркам_Objest Copy(bool copyTableParts = false)
+        public async ValueTask<РозміщенняНоменклатуриПоКоміркам_Objest> Copy(bool copyTableParts = false)
         {
             РозміщенняНоменклатуриПоКоміркам_Objest copy = new РозміщенняНоменклатуриПоКоміркам_Objest();
             copy.Назва = Назва;
@@ -26501,15 +26564,17 @@ namespace StorageAndTrade_1_0.Документи
             {
             
                 //Товари - Таблична частина
-                Товари_TablePart.Read();
+                await Товари_TablePart.Read();
                 copy.Товари_TablePart.Records = Товари_TablePart.Copy();
             
             }
             
 
             copy.New();
-            РозміщенняНоменклатуриПоКоміркам_Triggers.Copying(copy, this);
+            
+                await РозміщенняНоменклатуриПоКоміркам_Triggers.Copying(copy, this);
             return copy;
+                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -26623,7 +26688,8 @@ namespace StorageAndTrade_1_0.Документи
             
             if (readAllTablePart)
             {   
-                РозміщенняНоменклатуриПоКоміркамObjestItem.Товари_TablePart.Read();
+                
+                await РозміщенняНоменклатуриПоКоміркамObjestItem.Товари_TablePart.Read();
             }
             
             return РозміщенняНоменклатуриПоКоміркамObjestItem;
@@ -26640,9 +26706,9 @@ namespace StorageAndTrade_1_0.Документи
     {		
         public РозміщенняНоменклатуриПоКоміркам_Select() : base(Config.Kernel!, "tab_b29") { }
         
-        public bool Select() { return base.BaseSelect(); }
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
         public bool MoveNext() { if (MoveToPosition()) { Current = new РозміщенняНоменклатуриПоКоміркам_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields); return true; } else { Current = null; return false; } }
         
@@ -26671,10 +26737,10 @@ namespace StorageAndTrade_1_0.Документи
         
         public List<Record> Records { get; set; }
         
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead(Owner.UnigueID);
+            await base.BaseRead(Owner.UnigueID);
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {

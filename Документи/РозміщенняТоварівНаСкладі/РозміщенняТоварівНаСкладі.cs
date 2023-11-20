@@ -39,12 +39,12 @@ namespace StorageAndTrade
 
         #region Override
 
-        public override void LoadRecords()
+        public override async void LoadRecords()
         {
             ТабличніСписки.РозміщенняТоварівНаСкладі_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.РозміщенняТоварівНаСкладі_Записи.DocumentPointerItem = DocumentPointerItem;
 
-            ТабличніСписки.РозміщенняТоварівНаСкладі_Записи.LoadRecords();
+            await ТабличніСписки.РозміщенняТоварівНаСкладі_Записи.LoadRecords();
 
             if (ТабличніСписки.РозміщенняТоварівНаСкладі_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.РозміщенняТоварівНаСкладі_Записи.SelectPath, TreeViewGrid.Columns[0], false);
@@ -52,7 +52,7 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.РозміщенняТоварівНаСкладі_Записи.CurrentPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override void LoadRecords_OnSearch(string searchText)
+        protected override async void LoadRecords_OnSearch(string searchText)
         {
             searchText = searchText.ToLower().Trim();
 
@@ -67,7 +67,7 @@ namespace StorageAndTrade
             ТабличніСписки.РозміщенняТоварівНаСкладі_Записи.Where.Add(
                 new Where(РозміщенняТоварівНаСкладі_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
-            ТабличніСписки.РозміщенняТоварівНаСкладі_Записи.LoadRecords();
+            await ТабличніСписки.РозміщенняТоварівНаСкладі_Записи.LoadRecords();
 
             if (ТабличніСписки.РозміщенняТоварівНаСкладі_Записи.FirstPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.РозміщенняТоварівНаСкладі_Записи.FirstPath, TreeViewGrid.Columns[0], false);
@@ -128,7 +128,7 @@ namespace StorageAndTrade
             РозміщенняТоварівНаСкладі_Objest РозміщенняТоварівНаСкладі_Objest = new РозміщенняТоварівНаСкладі_Objest();
             if (await РозміщенняТоварівНаСкладі_Objest.Read(unigueID))
             {
-                РозміщенняТоварівНаСкладі_Objest РозміщенняТоварівНаСкладі_Objest_Новий = РозміщенняТоварівНаСкладі_Objest.Copy(true);
+                РозміщенняТоварівНаСкладі_Objest РозміщенняТоварівНаСкладі_Objest_Новий = await РозміщенняТоварівНаСкладі_Objest.Copy(true);
                 await РозміщенняТоварівНаСкладі_Objest_Новий.Save();
                 await РозміщенняТоварівНаСкладі_Objest_Новий.Товари_TablePart.Save(true);
 

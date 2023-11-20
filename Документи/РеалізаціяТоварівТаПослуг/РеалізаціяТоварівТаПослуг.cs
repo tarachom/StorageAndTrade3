@@ -41,12 +41,12 @@ namespace StorageAndTrade
 
         #region Override
 
-        public override void LoadRecords()
+        public override async void LoadRecords()
         {
             ТабличніСписки.РеалізаціяТоварівТаПослуг_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.РеалізаціяТоварівТаПослуг_Записи.DocumentPointerItem = DocumentPointerItem;
 
-            ТабличніСписки.РеалізаціяТоварівТаПослуг_Записи.LoadRecords();
+            await ТабличніСписки.РеалізаціяТоварівТаПослуг_Записи.LoadRecords();
 
             if (ТабличніСписки.РеалізаціяТоварівТаПослуг_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.РеалізаціяТоварівТаПослуг_Записи.SelectPath, TreeViewGrid.Columns[0], false);
@@ -54,7 +54,7 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.РеалізаціяТоварівТаПослуг_Записи.CurrentPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override void LoadRecords_OnSearch(string searchText)
+        protected override async void LoadRecords_OnSearch(string searchText)
         {
             searchText = searchText.ToLower().Trim();
 
@@ -69,7 +69,7 @@ namespace StorageAndTrade
             ТабличніСписки.РеалізаціяТоварівТаПослуг_Записи.Where.Add(
                 new Where(РеалізаціяТоварівТаПослуг_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
-            ТабличніСписки.РеалізаціяТоварівТаПослуг_Записи.LoadRecords();
+            await ТабличніСписки.РеалізаціяТоварівТаПослуг_Записи.LoadRecords();
 
             if (ТабличніСписки.РеалізаціяТоварівТаПослуг_Записи.FirstPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.РеалізаціяТоварівТаПослуг_Записи.FirstPath, TreeViewGrid.Columns[0], false);
@@ -130,7 +130,7 @@ namespace StorageAndTrade
             РеалізаціяТоварівТаПослуг_Objest РеалізаціяТоварівТаПослуг_Objest = new РеалізаціяТоварівТаПослуг_Objest();
             if (await РеалізаціяТоварівТаПослуг_Objest.Read(unigueID))
             {
-                РеалізаціяТоварівТаПослуг_Objest РеалізаціяТоварівТаПослуг_Objest_Новий = РеалізаціяТоварівТаПослуг_Objest.Copy(true);
+                РеалізаціяТоварівТаПослуг_Objest РеалізаціяТоварівТаПослуг_Objest_Новий = await РеалізаціяТоварівТаПослуг_Objest.Copy(true);
                 await РеалізаціяТоварівТаПослуг_Objest_Новий.Save();
                 await РеалізаціяТоварівТаПослуг_Objest_Новий.Товари_TablePart.Save(true);
 

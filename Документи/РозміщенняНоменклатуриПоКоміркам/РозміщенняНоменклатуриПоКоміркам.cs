@@ -39,12 +39,12 @@ namespace StorageAndTrade
 
         #region Override
 
-        public override void LoadRecords()
+        public override async void LoadRecords()
         {
             ТабличніСписки.РозміщенняНоменклатуриПоКоміркам_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.РозміщенняНоменклатуриПоКоміркам_Записи.DocumentPointerItem = DocumentPointerItem;
 
-            ТабличніСписки.РозміщенняНоменклатуриПоКоміркам_Записи.LoadRecords();
+            await ТабличніСписки.РозміщенняНоменклатуриПоКоміркам_Записи.LoadRecords();
 
             if (ТабличніСписки.РозміщенняНоменклатуриПоКоміркам_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.РозміщенняНоменклатуриПоКоміркам_Записи.SelectPath, TreeViewGrid.Columns[0], false);
@@ -52,7 +52,7 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.РозміщенняНоменклатуриПоКоміркам_Записи.CurrentPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override void LoadRecords_OnSearch(string searchText)
+        protected override async void LoadRecords_OnSearch(string searchText)
         {
             searchText = searchText.ToLower().Trim();
 
@@ -67,7 +67,7 @@ namespace StorageAndTrade
             ТабличніСписки.РозміщенняНоменклатуриПоКоміркам_Записи.Where.Add(
                 new Where(РозміщенняНоменклатуриПоКоміркам_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
-            ТабличніСписки.РозміщенняНоменклатуриПоКоміркам_Записи.LoadRecords();
+            await ТабличніСписки.РозміщенняНоменклатуриПоКоміркам_Записи.LoadRecords();
 
             if (ТабличніСписки.РозміщенняНоменклатуриПоКоміркам_Записи.FirstPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.РозміщенняНоменклатуриПоКоміркам_Записи.FirstPath, TreeViewGrid.Columns[0], false);
@@ -128,7 +128,7 @@ namespace StorageAndTrade
             РозміщенняНоменклатуриПоКоміркам_Objest РозміщенняНоменклатуриПоКоміркам_Objest = new РозміщенняНоменклатуриПоКоміркам_Objest();
             if (await РозміщенняНоменклатуриПоКоміркам_Objest.Read(unigueID))
             {
-                РозміщенняНоменклатуриПоКоміркам_Objest РозміщенняНоменклатуриПоКоміркам_Objest_Новий = РозміщенняНоменклатуриПоКоміркам_Objest.Copy(true);
+                РозміщенняНоменклатуриПоКоміркам_Objest РозміщенняНоменклатуриПоКоміркам_Objest_Новий = await РозміщенняНоменклатуриПоКоміркам_Objest.Copy(true);
                 await РозміщенняНоменклатуриПоКоміркам_Objest_Новий.Save();
                 await РозміщенняНоменклатуриПоКоміркам_Objest_Новий.Товари_TablePart.Save(true);
 

@@ -39,12 +39,12 @@ namespace StorageAndTrade
 
         #region Override
 
-        public override void LoadRecords()
+        public override async void LoadRecords()
         {
             ТабличніСписки.ПрихіднийКасовийОрдер_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.ПрихіднийКасовийОрдер_Записи.DocumentPointerItem = DocumentPointerItem;
 
-            ТабличніСписки.ПрихіднийКасовийОрдер_Записи.LoadRecords();
+            await ТабличніСписки.ПрихіднийКасовийОрдер_Записи.LoadRecords();
 
             if (ТабличніСписки.ПрихіднийКасовийОрдер_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.ПрихіднийКасовийОрдер_Записи.SelectPath, TreeViewGrid.Columns[0], false);
@@ -52,7 +52,7 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.ПрихіднийКасовийОрдер_Записи.CurrentPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override void LoadRecords_OnSearch(string searchText)
+        protected override async void LoadRecords_OnSearch(string searchText)
         {
             searchText = searchText.ToLower().Trim();
 
@@ -67,7 +67,7 @@ namespace StorageAndTrade
             ТабличніСписки.ПрихіднийКасовийОрдер_Записи.Where.Add(
                 new Where(ПрихіднийКасовийОрдер_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
-            ТабличніСписки.ПрихіднийКасовийОрдер_Записи.LoadRecords();
+            await ТабличніСписки.ПрихіднийКасовийОрдер_Записи.LoadRecords();
 
             if (ТабличніСписки.ПрихіднийКасовийОрдер_Записи.FirstPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.ПрихіднийКасовийОрдер_Записи.FirstPath, TreeViewGrid.Columns[0], false);
@@ -128,7 +128,7 @@ namespace StorageAndTrade
             ПрихіднийКасовийОрдер_Objest ПрихіднийКасовийОрдер_Objest = new ПрихіднийКасовийОрдер_Objest();
             if (await ПрихіднийКасовийОрдер_Objest.Read(unigueID))
             {
-                ПрихіднийКасовийОрдер_Objest ПрихіднийКасовийОрдер_Objest_Новий = ПрихіднийКасовийОрдер_Objest.Copy(true);
+                ПрихіднийКасовийОрдер_Objest ПрихіднийКасовийОрдер_Objest_Новий = await ПрихіднийКасовийОрдер_Objest.Copy(true);
                 await ПрихіднийКасовийОрдер_Objest_Новий.Save();
 
                 return ПрихіднийКасовийОрдер_Objest_Новий.UnigueID;

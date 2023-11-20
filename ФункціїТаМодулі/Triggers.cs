@@ -1582,9 +1582,11 @@ namespace StorageAndTrade_1_0.Документи
             ДокументОбєкт.Менеджер = Program.Користувач;
         }
 
-        public static void Copying(ЗамовленняПостачальнику_Objest ДокументОбєкт, ЗамовленняПостачальнику_Objest Основа)
+        public static async ValueTask Copying(ЗамовленняПостачальнику_Objest ДокументОбєкт, ЗамовленняПостачальнику_Objest Основа)
         {
             ДокументОбєкт.Коментар = "Копія: " + Основа.Назва;
+
+            await ValueTask.FromResult(true);
         }
 
         public static void BeforeSave(ЗамовленняПостачальнику_Objest ДокументОбєкт)
@@ -1618,9 +1620,11 @@ namespace StorageAndTrade_1_0.Документи
             ДокументОбєкт.Менеджер = Program.Користувач;
         }
 
-        public static void Copying(ПоступленняТоварівТаПослуг_Objest ДокументОбєкт, ПоступленняТоварівТаПослуг_Objest Основа)
+        public static async ValueTask Copying(ПоступленняТоварівТаПослуг_Objest ДокументОбєкт, ПоступленняТоварівТаПослуг_Objest Основа)
         {
             ДокументОбєкт.Коментар = "Копія: " + Основа.Назва;
+
+            await ValueTask.FromResult(true);
         }
 
         public static void BeforeSave(ПоступленняТоварівТаПослуг_Objest ДокументОбєкт)
@@ -1669,9 +1673,11 @@ namespace StorageAndTrade_1_0.Документи
             ДокументОбєкт.Менеджер = Program.Користувач;
         }
 
-        public static void Copying(ЗамовленняКлієнта_Objest ДокументОбєкт, ЗамовленняКлієнта_Objest Основа)
+        public static async ValueTask Copying(ЗамовленняКлієнта_Objest ДокументОбєкт, ЗамовленняКлієнта_Objest Основа)
         {
             ДокументОбєкт.Коментар = "Копія: " + Основа.Назва;
+
+            await ValueTask.FromResult(true);
         }
 
         public static void BeforeSave(ЗамовленняКлієнта_Objest ДокументОбєкт)
@@ -1705,9 +1711,11 @@ namespace StorageAndTrade_1_0.Документи
             ДокументОбєкт.Менеджер = Program.Користувач;
         }
 
-        public static void Copying(РеалізаціяТоварівТаПослуг_Objest ДокументОбєкт, РеалізаціяТоварівТаПослуг_Objest Основа)
+        public static async ValueTask Copying(РеалізаціяТоварівТаПослуг_Objest ДокументОбєкт, РеалізаціяТоварівТаПослуг_Objest Основа)
         {
             ДокументОбєкт.Коментар = "Копія: " + Основа.Назва;
+
+            await ValueTask.FromResult(true);
         }
 
         public static void BeforeSave(РеалізаціяТоварівТаПослуг_Objest ДокументОбєкт)
@@ -1740,9 +1748,11 @@ namespace StorageAndTrade_1_0.Документи
             ДокументОбєкт.Автор = Program.Користувач;
         }
 
-        public static void Copying(ВстановленняЦінНоменклатури_Objest ДокументОбєкт, ВстановленняЦінНоменклатури_Objest Основа)
+        public static async ValueTask Copying(ВстановленняЦінНоменклатури_Objest ДокументОбєкт, ВстановленняЦінНоменклатури_Objest Основа)
         {
             ДокументОбєкт.Коментар = "Копія: " + Основа.Назва;
+
+            await ValueTask.FromResult(true);
         }
 
         public static void BeforeSave(ВстановленняЦінНоменклатури_Objest ДокументОбєкт)
@@ -1775,9 +1785,11 @@ namespace StorageAndTrade_1_0.Документи
             ДокументОбєкт.Автор = Program.Користувач;
         }
 
-        public static void Copying(ПрихіднийКасовийОрдер_Objest ДокументОбєкт, ПрихіднийКасовийОрдер_Objest Основа)
+        public static async ValueTask Copying(ПрихіднийКасовийОрдер_Objest ДокументОбєкт, ПрихіднийКасовийОрдер_Objest Основа)
         {
             ДокументОбєкт.Коментар = "Копія: " + Основа.Назва;
+
+            await ValueTask.FromResult(true);
         }
 
         public static void BeforeSave(ПрихіднийКасовийОрдер_Objest ДокументОбєкт)
@@ -1810,9 +1822,11 @@ namespace StorageAndTrade_1_0.Документи
             ДокументОбєкт.Автор = Program.Користувач;
         }
 
-        public static void Copying(РозхіднийКасовийОрдер_Objest ДокументОбєкт, РозхіднийКасовийОрдер_Objest Основа)
+        public static async ValueTask Copying(РозхіднийКасовийОрдер_Objest ДокументОбєкт, РозхіднийКасовийОрдер_Objest Основа)
         {
             ДокументОбєкт.Коментар = "Копія: " + Основа.Назва;
+
+            await ValueTask.FromResult(true);
         }
 
         public static void BeforeSave(РозхіднийКасовийОрдер_Objest ДокументОбєкт)
@@ -1835,7 +1849,7 @@ namespace StorageAndTrade_1_0.Документи
 
         }
     }
-
+    
     class ПереміщенняТоварів_Triggers
     {
         public static void New(ПереміщенняТоварів_Objest ДокументОбєкт)
@@ -1845,9 +1859,11 @@ namespace StorageAndTrade_1_0.Документи
             ДокументОбєкт.Автор = Program.Користувач;
         }
 
-        public static void Copying(ПереміщенняТоварів_Objest ДокументОбєкт, ПереміщенняТоварів_Objest Основа)
+        public static async ValueTask Copying(ПереміщенняТоварів_Objest ДокументОбєкт, ПереміщенняТоварів_Objest Основа)
         {
             ДокументОбєкт.Коментар = "Копія: " + Основа.Назва;
+
+            await ValueTask.FromResult(true);
         }
 
         public static void BeforeSave(ПереміщенняТоварів_Objest ДокументОбєкт)
@@ -1881,9 +1897,11 @@ namespace StorageAndTrade_1_0.Документи
             ДокументОбєкт.Менеджер = Program.Користувач;
         }
 
-        public static void Copying(ПоверненняТоварівПостачальнику_Objest ДокументОбєкт, ПоверненняТоварівПостачальнику_Objest Основа)
+        public static async ValueTask Copying(ПоверненняТоварівПостачальнику_Objest ДокументОбєкт, ПоверненняТоварівПостачальнику_Objest Основа)
         {
             ДокументОбєкт.Коментар = "Копія: " + Основа.Назва;
+
+            await ValueTask.FromResult(true);
         }
 
         public static void BeforeSave(ПоверненняТоварівПостачальнику_Objest ДокументОбєкт)
@@ -1917,9 +1935,11 @@ namespace StorageAndTrade_1_0.Документи
             ДокументОбєкт.Менеджер = Program.Користувач;
         }
 
-        public static void Copying(ПоверненняТоварівВідКлієнта_Objest ДокументОбєкт, ПоверненняТоварівВідКлієнта_Objest Основа)
+        public static async ValueTask Copying(ПоверненняТоварівВідКлієнта_Objest ДокументОбєкт, ПоверненняТоварівВідКлієнта_Objest Основа)
         {
             ДокументОбєкт.Коментар = "Копія: " + Основа.Назва;
+
+            await ValueTask.FromResult(true);
         }
 
         public static void BeforeSave(ПоверненняТоварівВідКлієнта_Objest ДокументОбєкт)
@@ -1953,9 +1973,11 @@ namespace StorageAndTrade_1_0.Документи
             ДокументОбєкт.Менеджер = Program.Користувач;
         }
 
-        public static void Copying(АктВиконанихРобіт_Objest ДокументОбєкт, АктВиконанихРобіт_Objest Основа)
+        public static async ValueTask Copying(АктВиконанихРобіт_Objest ДокументОбєкт, АктВиконанихРобіт_Objest Основа)
         {
             ДокументОбєкт.Коментар = "Копія: " + Основа.Назва;
+
+            await ValueTask.FromResult(true);
         }
 
         public static void BeforeSave(АктВиконанихРобіт_Objest ДокументОбєкт)
@@ -1988,9 +2010,11 @@ namespace StorageAndTrade_1_0.Документи
             ДокументОбєкт.Автор = Program.Користувач;
         }
 
-        public static void Copying(ВведенняЗалишків_Objest ДокументОбєкт, ВведенняЗалишків_Objest Основа)
+        public static async ValueTask Copying(ВведенняЗалишків_Objest ДокументОбєкт, ВведенняЗалишків_Objest Основа)
         {
             ДокументОбєкт.Коментар = "Копія: " + Основа.Назва;
+
+            await ValueTask.FromResult(true);
         }
 
         public static void BeforeSave(ВведенняЗалишків_Objest ДокументОбєкт)
@@ -2038,9 +2062,11 @@ namespace StorageAndTrade_1_0.Документи
             ДокументОбєкт.Автор = Program.Користувач;
         }
 
-        public static void Copying(ПсуванняТоварів_Objest ДокументОбєкт, ПсуванняТоварів_Objest Основа)
+        public static async ValueTask Copying(ПсуванняТоварів_Objest ДокументОбєкт, ПсуванняТоварів_Objest Основа)
         {
             ДокументОбєкт.Коментар = "Копія: " + Основа.Назва;
+
+            await ValueTask.FromResult(true);
         }
 
         public static void BeforeSave(ПсуванняТоварів_Objest ДокументОбєкт)
@@ -2073,9 +2099,11 @@ namespace StorageAndTrade_1_0.Документи
             ДокументОбєкт.Автор = Program.Користувач;
         }
 
-        public static void Copying(ВнутрішнєСпоживанняТоварів_Objest ДокументОбєкт, ВнутрішнєСпоживанняТоварів_Objest Основа)
+        public static async ValueTask Copying(ВнутрішнєСпоживанняТоварів_Objest ДокументОбєкт, ВнутрішнєСпоживанняТоварів_Objest Основа)
         {
             ДокументОбєкт.Коментар = "Копія: " + Основа.Назва;
+
+            await ValueTask.FromResult(true);
         }
 
         public static void BeforeSave(ВнутрішнєСпоживанняТоварів_Objest ДокументОбєкт)
@@ -2109,9 +2137,11 @@ namespace StorageAndTrade_1_0.Документи
             ДокументОбєкт.Менеджер = Program.Користувач;
         }
 
-        public static void Copying(РахунокФактура_Objest ДокументОбєкт, РахунокФактура_Objest Основа)
+        public static async ValueTask Copying(РахунокФактура_Objest ДокументОбєкт, РахунокФактура_Objest Основа)
         {
             ДокументОбєкт.Коментар = "Копія: " + Основа.Назва;
+
+            await ValueTask.FromResult(true);
         }
 
         public static void BeforeSave(РахунокФактура_Objest ДокументОбєкт)
@@ -2144,9 +2174,11 @@ namespace StorageAndTrade_1_0.Документи
             ДокументОбєкт.Автор = Program.Користувач;
         }
 
-        public static void Copying(РозміщенняТоварівНаСкладі_Objest ДокументОбєкт, РозміщенняТоварівНаСкладі_Objest Основа)
+        public static async ValueTask Copying(РозміщенняТоварівНаСкладі_Objest ДокументОбєкт, РозміщенняТоварівНаСкладі_Objest Основа)
         {
             ДокументОбєкт.Коментар = "Копія: " + Основа.Назва;
+
+            await ValueTask.FromResult(true);
         }
 
         public static void BeforeSave(РозміщенняТоварівНаСкладі_Objest ДокументОбєкт)
@@ -2179,9 +2211,11 @@ namespace StorageAndTrade_1_0.Документи
             ДокументОбєкт.Автор = Program.Користувач;
         }
 
-        public static void Copying(ПереміщенняТоварівНаСкладі_Objest ДокументОбєкт, ПереміщенняТоварівНаСкладі_Objest Основа)
+        public static async ValueTask Copying(ПереміщенняТоварівНаСкладі_Objest ДокументОбєкт, ПереміщенняТоварівНаСкладі_Objest Основа)
         {
             ДокументОбєкт.Коментар = "Копія: " + Основа.Назва;
+
+            await ValueTask.FromResult(true);
         }
 
         public static void BeforeSave(ПереміщенняТоварівНаСкладі_Objest ДокументОбєкт)
@@ -2214,9 +2248,11 @@ namespace StorageAndTrade_1_0.Документи
             ДокументОбєкт.Автор = Program.Користувач;
         }
 
-        public static void Copying(ЗбіркаТоварівНаСкладі_Objest ДокументОбєкт, ЗбіркаТоварівНаСкладі_Objest Основа)
+        public static async ValueTask Copying(ЗбіркаТоварівНаСкладі_Objest ДокументОбєкт, ЗбіркаТоварівНаСкладі_Objest Основа)
         {
             ДокументОбєкт.Коментар = "Копія: " + Основа.Назва;
+
+            await ValueTask.FromResult(true);
         }
 
         public static void BeforeSave(ЗбіркаТоварівНаСкладі_Objest ДокументОбєкт)
@@ -2249,9 +2285,11 @@ namespace StorageAndTrade_1_0.Документи
             ДокументОбєкт.Автор = Program.Користувач;
         }
 
-        public static void Copying(РозміщенняНоменклатуриПоКоміркам_Objest ДокументОбєкт, РозміщенняНоменклатуриПоКоміркам_Objest Основа)
+        public static async ValueTask Copying(РозміщенняНоменклатуриПоКоміркам_Objest ДокументОбєкт, РозміщенняНоменклатуриПоКоміркам_Objest Основа)
         {
             ДокументОбєкт.Коментар = "Копія: " + Основа.Назва;
+
+            await ValueTask.FromResult(true);
         }
 
         public static void BeforeSave(РозміщенняНоменклатуриПоКоміркам_Objest ДокументОбєкт)

@@ -166,7 +166,7 @@ namespace StorageAndTrade
 
         #region Присвоєння / зчитування значень
 
-        public override void SetValue()
+        public override async void SetValue()
         {
             if (IsNew)
             {
@@ -198,16 +198,16 @@ namespace StorageAndTrade
             }
 
             Товари.ВведенняЗалишків_Objest = ВведенняЗалишків_Objest;
-            Товари.LoadRecords();
+            await Товари.LoadRecords();
 
             Каси.ВведенняЗалишків_Objest = ВведенняЗалишків_Objest;
-            Каси.LoadRecords();
+            await Каси.LoadRecords();
 
             БанківськіРахунки.ВведенняЗалишків_Objest = ВведенняЗалишків_Objest;
-            БанківськіРахунки.LoadRecords();
+            await БанківськіРахунки.LoadRecords();
 
             РозрахункиЗКонтрагентами.ВведенняЗалишків_Objest = ВведенняЗалишків_Objest;
-            РозрахункиЗКонтрагентами.LoadRecords();
+            await РозрахункиЗКонтрагентами.LoadRecords();
         }
 
         protected override void GetValue()

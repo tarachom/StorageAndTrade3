@@ -41,12 +41,12 @@ namespace StorageAndTrade
 
         #region Override
 
-        public override void LoadRecords()
+        public override async void LoadRecords()
         {
             ТабличніСписки.ЗамовленняКлієнта_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.ЗамовленняКлієнта_Записи.DocumentPointerItem = DocumentPointerItem;
 
-            ТабличніСписки.ЗамовленняКлієнта_Записи.LoadRecords();
+            await ТабличніСписки.ЗамовленняКлієнта_Записи.LoadRecords();
 
             if (ТабличніСписки.ЗамовленняКлієнта_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.ЗамовленняКлієнта_Записи.SelectPath, TreeViewGrid.Columns[0], false);
@@ -54,7 +54,7 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.ЗамовленняКлієнта_Записи.CurrentPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override void LoadRecords_OnSearch(string searchText)
+        protected override async void LoadRecords_OnSearch(string searchText)
         {
             searchText = searchText.ToLower().Trim();
 
@@ -69,7 +69,7 @@ namespace StorageAndTrade
             ТабличніСписки.ЗамовленняКлієнта_Записи.Where.Add(
                 new Where(ЗамовленняКлієнта_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
-            ТабличніСписки.ЗамовленняКлієнта_Записи.LoadRecords();
+            await ТабличніСписки.ЗамовленняКлієнта_Записи.LoadRecords();
 
             if (ТабличніСписки.ЗамовленняКлієнта_Записи.FirstPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.ЗамовленняКлієнта_Записи.FirstPath, TreeViewGrid.Columns[0], false);
@@ -130,7 +130,7 @@ namespace StorageAndTrade
             ЗамовленняКлієнта_Objest ЗамовленняКлієнта_Objest = new ЗамовленняКлієнта_Objest();
             if (await ЗамовленняКлієнта_Objest.Read(unigueID))
             {
-                ЗамовленняКлієнта_Objest ЗамовленняКлієнта_Objest_Новий = ЗамовленняКлієнта_Objest.Copy(true);
+                ЗамовленняКлієнта_Objest ЗамовленняКлієнта_Objest_Новий = await ЗамовленняКлієнта_Objest.Copy(true);
                 await ЗамовленняКлієнта_Objest_Новий.Save();
                 await ЗамовленняКлієнта_Objest_Новий.Товари_TablePart.Save(true);
 

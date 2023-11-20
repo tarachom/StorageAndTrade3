@@ -41,12 +41,12 @@ namespace StorageAndTrade
 
         #region Override
 
-        public override void LoadRecords()
+        public override async void LoadRecords()
         {
             ТабличніСписки.ПоступленняТоварівТаПослуг_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.ПоступленняТоварівТаПослуг_Записи.DocumentPointerItem = DocumentPointerItem;
 
-            ТабличніСписки.ПоступленняТоварівТаПослуг_Записи.LoadRecords();
+            await ТабличніСписки.ПоступленняТоварівТаПослуг_Записи.LoadRecords();
 
             if (ТабличніСписки.ПоступленняТоварівТаПослуг_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.ПоступленняТоварівТаПослуг_Записи.SelectPath, TreeViewGrid.Columns[0], false);
@@ -54,7 +54,7 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.ПоступленняТоварівТаПослуг_Записи.CurrentPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override void LoadRecords_OnSearch(string searchText)
+        protected override async void LoadRecords_OnSearch(string searchText)
         {
             searchText = searchText.ToLower().Trim();
 
@@ -69,7 +69,7 @@ namespace StorageAndTrade
             ТабличніСписки.ПоступленняТоварівТаПослуг_Записи.Where.Add(
                 new Where(ПоступленняТоварівТаПослуг_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
-            ТабличніСписки.ПоступленняТоварівТаПослуг_Записи.LoadRecords();
+            await ТабличніСписки.ПоступленняТоварівТаПослуг_Записи.LoadRecords();
 
             if (ТабличніСписки.ПоступленняТоварівТаПослуг_Записи.FirstPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.ПоступленняТоварівТаПослуг_Записи.FirstPath, TreeViewGrid.Columns[0], false);
@@ -130,7 +130,7 @@ namespace StorageAndTrade
             ПоступленняТоварівТаПослуг_Objest ПоступленняТоварівТаПослуг_Objest = new ПоступленняТоварівТаПослуг_Objest();
             if (await ПоступленняТоварівТаПослуг_Objest.Read(unigueID))
             {
-                ПоступленняТоварівТаПослуг_Objest ПоступленняТоварівТаПослуг_Objest_Новий = ПоступленняТоварівТаПослуг_Objest.Copy(true);
+                ПоступленняТоварівТаПослуг_Objest ПоступленняТоварівТаПослуг_Objest_Новий = await ПоступленняТоварівТаПослуг_Objest.Copy(true);
                 await ПоступленняТоварівТаПослуг_Objest_Новий.Save();
                 await ПоступленняТоварівТаПослуг_Objest_Новий.Товари_TablePart.Save(true);
 

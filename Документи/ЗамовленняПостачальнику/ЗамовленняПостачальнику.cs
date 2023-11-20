@@ -41,12 +41,12 @@ namespace StorageAndTrade
 
         #region Override
 
-        public override void LoadRecords()
+        public override async void LoadRecords()
         {
             ТабличніСписки.ЗамовленняПостачальнику_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.ЗамовленняПостачальнику_Записи.DocumentPointerItem = DocumentPointerItem;
 
-            ТабличніСписки.ЗамовленняПостачальнику_Записи.LoadRecords();
+            await ТабличніСписки.ЗамовленняПостачальнику_Записи.LoadRecords();
 
             if (ТабличніСписки.ЗамовленняПостачальнику_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.ЗамовленняПостачальнику_Записи.SelectPath, TreeViewGrid.Columns[0], false);
@@ -54,7 +54,7 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.ЗамовленняПостачальнику_Записи.CurrentPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override void LoadRecords_OnSearch(string searchText)
+        protected override async void LoadRecords_OnSearch(string searchText)
         {
             searchText = searchText.ToLower().Trim();
 
@@ -69,7 +69,7 @@ namespace StorageAndTrade
             ТабличніСписки.ЗамовленняПостачальнику_Записи.Where.Add(
                 new Where(ЗамовленняПостачальнику_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
-            ТабличніСписки.ЗамовленняПостачальнику_Записи.LoadRecords();
+            await ТабличніСписки.ЗамовленняПостачальнику_Записи.LoadRecords();
 
             if (ТабличніСписки.ЗамовленняПостачальнику_Записи.FirstPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.ЗамовленняПостачальнику_Записи.FirstPath, TreeViewGrid.Columns[0], false);
@@ -130,7 +130,7 @@ namespace StorageAndTrade
             ЗамовленняПостачальнику_Objest ЗамовленняПостачальнику_Objest = new ЗамовленняПостачальнику_Objest();
             if (await ЗамовленняПостачальнику_Objest.Read(unigueID))
             {
-                ЗамовленняПостачальнику_Objest ЗамовленняПостачальнику_Objest_Новий = ЗамовленняПостачальнику_Objest.Copy(true);
+                ЗамовленняПостачальнику_Objest ЗамовленняПостачальнику_Objest_Новий = await ЗамовленняПостачальнику_Objest.Copy(true);
                 await ЗамовленняПостачальнику_Objest_Новий.Save();
                 await ЗамовленняПостачальнику_Objest_Новий.Товари_TablePart.Save(true);
 

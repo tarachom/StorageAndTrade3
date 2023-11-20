@@ -39,12 +39,12 @@ namespace StorageAndTrade
 
         #region Override
 
-        public override void LoadRecords()
+        public override async void LoadRecords()
         {
             ТабличніСписки.ПсуванняТоварів_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.ПсуванняТоварів_Записи.DocumentPointerItem = DocumentPointerItem;
 
-            ТабличніСписки.ПсуванняТоварів_Записи.LoadRecords();
+            await ТабличніСписки.ПсуванняТоварів_Записи.LoadRecords();
 
             if (ТабличніСписки.ПсуванняТоварів_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.ПсуванняТоварів_Записи.SelectPath, TreeViewGrid.Columns[0], false);
@@ -52,7 +52,7 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.ПсуванняТоварів_Записи.CurrentPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override void LoadRecords_OnSearch(string searchText)
+        protected override async void LoadRecords_OnSearch(string searchText)
         {
             searchText = searchText.ToLower().Trim();
 
@@ -67,7 +67,7 @@ namespace StorageAndTrade
             ТабличніСписки.ПсуванняТоварів_Записи.Where.Add(
                 new Where(ПсуванняТоварів_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
-            ТабличніСписки.ПсуванняТоварів_Записи.LoadRecords();
+            await ТабличніСписки.ПсуванняТоварів_Записи.LoadRecords();
 
             if (ТабличніСписки.ПсуванняТоварів_Записи.FirstPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.ПсуванняТоварів_Записи.FirstPath, TreeViewGrid.Columns[0], false);
@@ -128,7 +128,7 @@ namespace StorageAndTrade
             ПсуванняТоварів_Objest ПсуванняТоварів_Objest = new ПсуванняТоварів_Objest();
             if (await ПсуванняТоварів_Objest.Read(unigueID))
             {
-                ПсуванняТоварів_Objest ПсуванняТоварів_Objest_Новий = ПсуванняТоварів_Objest.Copy(true);
+                ПсуванняТоварів_Objest ПсуванняТоварів_Objest_Новий = await ПсуванняТоварів_Objest.Copy(true);
                 await ПсуванняТоварів_Objest_Новий.Save();
                 await ПсуванняТоварів_Objest_Новий.Товари_TablePart.Save(true);
 
