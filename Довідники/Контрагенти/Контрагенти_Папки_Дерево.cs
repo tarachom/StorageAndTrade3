@@ -111,7 +111,7 @@ namespace StorageAndTrade
             Контрагенти_Папки_Objest Контрагенти_Папки_Objest = new Контрагенти_Папки_Objest();
             if (await Контрагенти_Папки_Objest.Read(unigueID))
             {
-                Контрагенти_Папки_Objest Контрагенти_Папки_Objest_Новий = Контрагенти_Папки_Objest.Copy(true);
+                Контрагенти_Папки_Objest Контрагенти_Папки_Objest_Новий = await Контрагенти_Папки_Objest.Copy(true);
                 await Контрагенти_Папки_Objest_Новий.Save();
 
                 return Контрагенти_Папки_Objest_Новий.UnigueID;

@@ -144,7 +144,7 @@ namespace StorageAndTrade
             Банки_Objest Банки_Objest = new Банки_Objest();
             if (await Банки_Objest.Read(unigueID))
             {
-                Банки_Objest Банки_Objest_Новий = Банки_Objest.Copy(true);
+                Банки_Objest Банки_Objest_Новий = await Банки_Objest.Copy(true);
                 await Банки_Objest_Новий.Save();
 
                 return Банки_Objest_Новий.UnigueID;

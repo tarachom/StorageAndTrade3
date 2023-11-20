@@ -93,13 +93,13 @@ namespace StorageAndTrade
             toolbar.Add(deleteButton);
         }
 
-        public void LoadRecords()
+        public async void LoadRecords()
         {
             Store.Clear();
 
             if (Організації_Objest != null)
             {
-                Організації_Objest.Контакти_TablePart.Read();
+                await Організації_Objest.Контакти_TablePart.Read();
 
                 foreach (Організації_Контакти_TablePart.Record record in Організації_Objest.Контакти_TablePart.Records)
                 {

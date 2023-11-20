@@ -186,7 +186,7 @@ namespace StorageAndTrade
             Контрагенти_Objest Контрагенти_Objest = new Контрагенти_Objest();
             if (await Контрагенти_Objest.Read(unigueID))
             {
-                Контрагенти_Objest Контрагенти_Objest_Новий = Контрагенти_Objest.Copy(true);
+                Контрагенти_Objest Контрагенти_Objest_Новий = await Контрагенти_Objest.Copy(true);
                 await Контрагенти_Objest_Новий.Save();
                 await Контрагенти_Objest_Новий.Контакти_TablePart.Save(false);
 

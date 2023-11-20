@@ -128,7 +128,7 @@ namespace StorageAndTrade
             КраїниСвіту_Objest КраїниСвіту_Objest = new КраїниСвіту_Objest();
             if (await КраїниСвіту_Objest.Read(unigueID))
             {
-                КраїниСвіту_Objest КраїниСвіту_Objest_Новий = КраїниСвіту_Objest.Copy(true);
+                КраїниСвіту_Objest КраїниСвіту_Objest_Новий = await КраїниСвіту_Objest.Copy(true);
                 await КраїниСвіту_Objest_Новий.Save();
 
                 return КраїниСвіту_Objest_Новий.UnigueID;

@@ -128,7 +128,7 @@ namespace StorageAndTrade
             ТипорозміриКомірок_Objest ТипорозміриКомірок_Objest = new ТипорозміриКомірок_Objest();
             if (await ТипорозміриКомірок_Objest.Read(unigueID))
             {
-                ТипорозміриКомірок_Objest ТипорозміриКомірок_Objest_Новий = ТипорозміриКомірок_Objest.Copy(true);
+                ТипорозміриКомірок_Objest ТипорозміриКомірок_Objest_Новий = await ТипорозміриКомірок_Objest.Copy(true);
                 await ТипорозміриКомірок_Objest_Новий.Save();
 
                 return ТипорозміриКомірок_Objest_Новий.UnigueID;

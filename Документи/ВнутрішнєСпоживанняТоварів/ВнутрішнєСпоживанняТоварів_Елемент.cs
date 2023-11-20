@@ -173,7 +173,6 @@ namespace StorageAndTrade
             try
             {
                 isSave = await ВнутрішнєСпоживанняТоварів_Objest.Save();
-                Console.WriteLine("Save v " + isSave);
             }
             catch (Exception ex)
             {

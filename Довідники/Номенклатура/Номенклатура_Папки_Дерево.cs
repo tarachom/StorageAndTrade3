@@ -111,7 +111,7 @@ namespace StorageAndTrade
             Номенклатура_Папки_Objest Номенклатура_Папки_Objest = new Номенклатура_Папки_Objest();
             if (await Номенклатура_Папки_Objest.Read(unigueID))
             {
-                Номенклатура_Папки_Objest Номенклатура_Папки_Objest_Новий = Номенклатура_Папки_Objest.Copy(true);
+                Номенклатура_Папки_Objest Номенклатура_Папки_Objest_Новий = await Номенклатура_Папки_Objest.Copy(true);
                 await Номенклатура_Папки_Objest_Новий.Save();
 
                 return Номенклатура_Папки_Objest_Новий.UnigueID;

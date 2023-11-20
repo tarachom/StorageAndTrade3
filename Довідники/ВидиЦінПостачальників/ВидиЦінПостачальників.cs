@@ -127,7 +127,7 @@ namespace StorageAndTrade
             ВидиЦінПостачальників_Objest ВидиЦінПостачальників_Objest = new ВидиЦінПостачальників_Objest();
             if (await ВидиЦінПостачальників_Objest.Read(unigueID))
             {
-                ВидиЦінПостачальників_Objest ВидиЦінПостачальників_Objest_Новий = ВидиЦінПостачальників_Objest.Copy(true);
+                ВидиЦінПостачальників_Objest ВидиЦінПостачальників_Objest_Новий = await ВидиЦінПостачальників_Objest.Copy(true);
                 await ВидиЦінПостачальників_Objest_Новий.Save();
 
                 return ВидиЦінПостачальників_Objest_Новий.UnigueID;

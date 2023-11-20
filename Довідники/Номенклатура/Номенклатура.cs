@@ -207,7 +207,7 @@ namespace StorageAndTrade
             Номенклатура_Objest Номенклатура_Objest = new Номенклатура_Objest();
             if (await Номенклатура_Objest.Read(unigueID))
             {
-                Номенклатура_Objest Номенклатура_Objest_Новий = Номенклатура_Objest.Copy(true);
+                Номенклатура_Objest Номенклатура_Objest_Новий = await Номенклатура_Objest.Copy(true);
                 await Номенклатура_Objest_Новий.Save();
                 await Номенклатура_Objest_Новий.Файли_TablePart.Save(false);
 

@@ -128,7 +128,7 @@ namespace StorageAndTrade
             ВидиЗапасів_Objest ВидиЗапасів_Objest = new ВидиЗапасів_Objest();
             if (await ВидиЗапасів_Objest.Read(unigueID))
             {
-                ВидиЗапасів_Objest ВидиЗапасів_Objest_Новий = ВидиЗапасів_Objest.Copy(true);
+                ВидиЗапасів_Objest ВидиЗапасів_Objest_Новий = await ВидиЗапасів_Objest.Copy(true);
                 await ВидиЗапасів_Objest_Новий.Save();
 
                 return ВидиЗапасів_Objest_Новий.UnigueID;

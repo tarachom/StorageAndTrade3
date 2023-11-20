@@ -690,7 +690,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
             return result;
         }
 
-        public <xsl:value-of select="$DirectoryName"/>_Objest Copy(bool copyTableParts = false)
+        public async ValueTask&lt;<xsl:value-of select="$DirectoryName"/>_Objest&gt; Copy(bool copyTableParts = false)
         {
             <xsl:value-of select="$DirectoryName"/>_Objest copy = new <xsl:value-of select="$DirectoryName"/>_Objest();
             <xsl:for-each select="Fields/Field">
@@ -703,7 +703,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
             <xsl:for-each select="TabularParts/TablePart">
                 <xsl:variable name="TablePartName" select="concat(Name, '_TablePart')"/>
                 //<xsl:value-of select="Name"/> - Таблична частина
-                <xsl:value-of select="$TablePartName"/>.Read();
+                await <xsl:value-of select="$TablePartName"/>.Read();
                 copy.<xsl:value-of select="$TablePartName"/>.Records = <xsl:value-of select="$TablePartName"/>.Copy();
             </xsl:for-each>
             }
@@ -711,9 +711,17 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
 
             copy.New();
             <xsl:if test="normalize-space(TriggerFunctions/Copying) != ''">
-                <xsl:value-of select="TriggerFunctions/Copying"/><xsl:text>(copy, this);</xsl:text>      
+                await <xsl:value-of select="TriggerFunctions/Copying"/><xsl:text>(copy, this);</xsl:text>      
             </xsl:if>
+
+            <xsl:choose>
+                <xsl:when test="count(TabularParts/TablePart) = 0 and normalize-space(TriggerFunctions/Copying) = ''">
+            return await ValueTask.FromResult&lt;<xsl:value-of select="$DirectoryName"/>_Objest&gt;(copy);
+                </xsl:when>
+                <xsl:otherwise>
             return copy;
+                </xsl:otherwise>
+            </xsl:choose>
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -901,10 +909,10 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
         
         public List&lt;Record&gt; Records { get; set; }
         
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead(Owner.UnigueID);
+            await base.BaseRead(Owner.UnigueID);
 
             foreach (Dictionary&lt;string, object&gt; fieldValue in base.FieldValueList) 
             {

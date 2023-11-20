@@ -128,7 +128,7 @@ namespace StorageAndTrade
             СтруктураПідприємства_Objest СтруктураПідприємства_Objest = new СтруктураПідприємства_Objest();
             if (await СтруктураПідприємства_Objest.Read(unigueID))
             {
-                СтруктураПідприємства_Objest СтруктураПідприємства_Objest_Новий = СтруктураПідприємства_Objest.Copy(true);
+                СтруктураПідприємства_Objest СтруктураПідприємства_Objest_Новий = await СтруктураПідприємства_Objest.Copy(true);
                 await СтруктураПідприємства_Objest_Новий.Save();
 
                 return СтруктураПідприємства_Objest_Новий.UnigueID;

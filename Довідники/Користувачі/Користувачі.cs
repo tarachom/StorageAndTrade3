@@ -128,7 +128,7 @@ namespace StorageAndTrade
             Користувачі_Objest Користувачі_Objest = new Користувачі_Objest();
             if (await Користувачі_Objest.Read(unigueID))
             {
-                Користувачі_Objest Користувачі_Objest_Новий = Користувачі_Objest.Copy(true);
+                Користувачі_Objest Користувачі_Objest_Новий = await Користувачі_Objest.Copy(true);
                 await Користувачі_Objest_Новий.Save();
 
                 return Користувачі_Objest_Новий.UnigueID;

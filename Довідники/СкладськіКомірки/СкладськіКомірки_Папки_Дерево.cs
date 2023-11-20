@@ -114,7 +114,7 @@ namespace StorageAndTrade
             СкладськіКомірки_Папки_Objest СкладськіКомірки_Папки_Objest = new СкладськіКомірки_Папки_Objest();
             if (await СкладськіКомірки_Папки_Objest.Read(unigueID))
             {
-                СкладськіКомірки_Папки_Objest СкладськіКомірки_Папки_Objest_Новий = СкладськіКомірки_Папки_Objest.Copy(true);
+                СкладськіКомірки_Папки_Objest СкладськіКомірки_Папки_Objest_Новий = await СкладськіКомірки_Папки_Objest.Copy(true);
                 await СкладськіКомірки_Папки_Objest_Новий.Save();
 
                 return СкладськіКомірки_Папки_Objest_Новий.UnigueID;

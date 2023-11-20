@@ -128,7 +128,7 @@ namespace StorageAndTrade
             Файли_Objest Файли_Objest = new Файли_Objest();
             if (await Файли_Objest.Read(unigueID))
             {
-                Файли_Objest Файли_Objest_Новий = Файли_Objest.Copy(true);
+                Файли_Objest Файли_Objest_Новий = await Файли_Objest.Copy(true);
                 await Файли_Objest_Новий.Save();
 
                 return Файли_Objest_Новий.UnigueID;

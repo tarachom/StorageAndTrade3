@@ -128,7 +128,7 @@ namespace StorageAndTrade
             СеріїНоменклатури_Objest СеріїНоменклатури_Objest = new СеріїНоменклатури_Objest();
             if (await СеріїНоменклатури_Objest.Read(unigueID))
             {
-                СеріїНоменклатури_Objest СеріїНоменклатури_Objest_Новий = СеріїНоменклатури_Objest.Copy(true);
+                СеріїНоменклатури_Objest СеріїНоменклатури_Objest_Новий = await СеріїНоменклатури_Objest.Copy(true);
                 await СеріїНоменклатури_Objest_Новий.Save();
 
                 return СеріїНоменклатури_Objest_Новий.UnigueID;

@@ -128,7 +128,7 @@ namespace StorageAndTrade
             Організації_Objest Організації_Objest = new Організації_Objest();
             if (await Організації_Objest.Read(unigueID))
             {
-                Організації_Objest Організації_Objest_Новий = Організації_Objest.Copy(true);
+                Організації_Objest Організації_Objest_Новий = await Організації_Objest.Copy(true);
                 await Організації_Objest_Новий.Save();
                 await Організації_Objest_Новий.Контакти_TablePart.Save(false);
 

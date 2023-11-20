@@ -111,7 +111,7 @@ namespace StorageAndTrade
             Склади_Папки_Objest Склади_Папки_Objest = new Склади_Папки_Objest();
             if (await Склади_Папки_Objest.Read(unigueID))
             {
-                Склади_Папки_Objest Склади_Папки_Objest_Новий = Склади_Папки_Objest.Copy(true);
+                Склади_Папки_Objest Склади_Папки_Objest_Новий = await Склади_Папки_Objest.Copy(true);
                 await Склади_Папки_Objest_Новий.Save();
 
                 return Склади_Папки_Objest_Новий.UnigueID;

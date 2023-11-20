@@ -128,7 +128,7 @@ namespace StorageAndTrade
             ПакуванняОдиниціВиміру_Objest ПакуванняОдиниціВиміру_Objest = new ПакуванняОдиниціВиміру_Objest();
             if (await ПакуванняОдиниціВиміру_Objest.Read(unigueID))
             {
-                ПакуванняОдиниціВиміру_Objest ПакуванняОдиниціВиміру_Objest_Новий = ПакуванняОдиниціВиміру_Objest.Copy(true);
+                ПакуванняОдиниціВиміру_Objest ПакуванняОдиниціВиміру_Objest_Новий = await ПакуванняОдиниціВиміру_Objest.Copy(true);
                 await ПакуванняОдиниціВиміру_Objest_Новий.Save();
 
                 return ПакуванняОдиниціВиміру_Objest_Новий.UnigueID;

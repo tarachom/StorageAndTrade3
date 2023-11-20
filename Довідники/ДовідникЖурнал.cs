@@ -132,8 +132,6 @@ namespace StorageAndTrade
         {
             SelectPointerItem = selectPointer;
             await LoadRecords();
-
-            Console.WriteLine(selectPointer);
         }
 
         #endregion

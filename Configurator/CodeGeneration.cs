@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 18.11.2023 19:12:45
+ * Дата конфігурації: 20.11.2023 16:10:18
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -2017,7 +2017,7 @@ namespace StorageAndTrade_1_0.Довідники
             return result;
         }
 
-        public Організації_Objest Copy(bool copyTableParts = false)
+        public async ValueTask<Організації_Objest> Copy(bool copyTableParts = false)
         {
             Організації_Objest copy = new Організації_Objest();
             copy.Назва = Назва;
@@ -2034,15 +2034,17 @@ namespace StorageAndTrade_1_0.Довідники
             {
             
                 //Контакти - Таблична частина
-                Контакти_TablePart.Read();
+                await Контакти_TablePart.Read();
                 copy.Контакти_TablePart.Records = Контакти_TablePart.Copy();
             
             }
             
 
             copy.New();
-            Організації_Triggers.Copying(copy, this);
+            
+                await Організації_Triggers.Copying(copy, this);
             return copy;
+                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -2207,10 +2209,10 @@ namespace StorageAndTrade_1_0.Довідники
         
         public List<Record> Records { get; set; }
         
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead(Owner.UnigueID);
+            await base.BaseRead(Owner.UnigueID);
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -2388,7 +2390,7 @@ namespace StorageAndTrade_1_0.Довідники
             return result;
         }
 
-        public Номенклатура_Objest Copy(bool copyTableParts = false)
+        public async ValueTask<Номенклатура_Objest> Copy(bool copyTableParts = false)
         {
             Номенклатура_Objest copy = new Номенклатура_Objest();
             copy.Назва = Назва;
@@ -2407,15 +2409,17 @@ namespace StorageAndTrade_1_0.Довідники
             {
             
                 //Файли - Таблична частина
-                Файли_TablePart.Read();
+                await Файли_TablePart.Read();
                 copy.Файли_TablePart.Records = Файли_TablePart.Copy();
             
             }
             
 
             copy.New();
-            Номенклатура_Triggers.Copying(copy, this);
+            
+                await Номенклатура_Triggers.Copying(copy, this);
             return copy;
+                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -2576,10 +2580,10 @@ namespace StorageAndTrade_1_0.Довідники
         
         public List<Record> Records { get; set; }
         
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead(Owner.UnigueID);
+            await base.BaseRead(Owner.UnigueID);
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -2700,7 +2704,7 @@ namespace StorageAndTrade_1_0.Довідники
             return result;
         }
 
-        public Виробники_Objest Copy(bool copyTableParts = false)
+        public async ValueTask<Виробники_Objest> Copy(bool copyTableParts = false)
         {
             Виробники_Objest copy = new Виробники_Objest();
             copy.Назва = Назва;
@@ -2708,8 +2712,10 @@ namespace StorageAndTrade_1_0.Довідники
             
 
             copy.New();
-            Виробники_Triggers.Copying(copy, this);
+            
+                await Виробники_Triggers.Copying(copy, this);
             return copy;
+                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -2912,7 +2918,7 @@ namespace StorageAndTrade_1_0.Довідники
             return result;
         }
 
-        public ВидиНоменклатури_Objest Copy(bool copyTableParts = false)
+        public async ValueTask<ВидиНоменклатури_Objest> Copy(bool copyTableParts = false)
         {
             ВидиНоменклатури_Objest copy = new ВидиНоменклатури_Objest();
             copy.Назва = Назва;
@@ -2923,8 +2929,10 @@ namespace StorageAndTrade_1_0.Довідники
             
 
             copy.New();
-            ВидиНоменклатури_Triggers.Copying(copy, this);
+            
+                await ВидиНоменклатури_Triggers.Copying(copy, this);
             return copy;
+                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -3126,7 +3134,7 @@ namespace StorageAndTrade_1_0.Довідники
             return result;
         }
 
-        public ПакуванняОдиниціВиміру_Objest Copy(bool copyTableParts = false)
+        public async ValueTask<ПакуванняОдиниціВиміру_Objest> Copy(bool copyTableParts = false)
         {
             ПакуванняОдиниціВиміру_Objest copy = new ПакуванняОдиниціВиміру_Objest();
             copy.Назва = Назва;
@@ -3136,8 +3144,10 @@ namespace StorageAndTrade_1_0.Довідники
             
 
             copy.New();
-            ПакуванняОдиниціВиміру_Triggers.Copying(copy, this);
+            
+                await ПакуванняОдиниціВиміру_Triggers.Copying(copy, this);
             return copy;
+                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -3342,7 +3352,7 @@ namespace StorageAndTrade_1_0.Довідники
             return result;
         }
 
-        public Валюти_Objest Copy(bool copyTableParts = false)
+        public async ValueTask<Валюти_Objest> Copy(bool copyTableParts = false)
         {
             Валюти_Objest copy = new Валюти_Objest();
             copy.Назва = Назва;
@@ -3353,8 +3363,10 @@ namespace StorageAndTrade_1_0.Довідники
             
 
             copy.New();
-            Валюти_Triggers.Copying(copy, this);
+            
+                await Валюти_Triggers.Copying(copy, this);
             return copy;
+                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -3572,7 +3584,7 @@ namespace StorageAndTrade_1_0.Довідники
             return result;
         }
 
-        public Контрагенти_Objest Copy(bool copyTableParts = false)
+        public async ValueTask<Контрагенти_Objest> Copy(bool copyTableParts = false)
         {
             Контрагенти_Objest copy = new Контрагенти_Objest();
             copy.Назва = Назва;
@@ -3587,19 +3599,21 @@ namespace StorageAndTrade_1_0.Довідники
             {
             
                 //Контакти - Таблична частина
-                Контакти_TablePart.Read();
+                await Контакти_TablePart.Read();
                 copy.Контакти_TablePart.Records = Контакти_TablePart.Copy();
             
                 //Файли - Таблична частина
-                Файли_TablePart.Read();
+                await Файли_TablePart.Read();
                 copy.Файли_TablePart.Records = Файли_TablePart.Copy();
             
             }
             
 
             copy.New();
-            Контрагенти_Triggers.Copying(copy, this);
+            
+                await Контрагенти_Triggers.Copying(copy, this);
             return copy;
+                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -3763,10 +3777,10 @@ namespace StorageAndTrade_1_0.Довідники
         
         public List<Record> Records { get; set; }
         
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead(Owner.UnigueID);
+            await base.BaseRead(Owner.UnigueID);
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -3862,10 +3876,10 @@ namespace StorageAndTrade_1_0.Довідники
         
         public List<Record> Records { get; set; }
         
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead(Owner.UnigueID);
+            await base.BaseRead(Owner.UnigueID);
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -4010,7 +4024,7 @@ namespace StorageAndTrade_1_0.Довідники
             return result;
         }
 
-        public Склади_Objest Copy(bool copyTableParts = false)
+        public async ValueTask<Склади_Objest> Copy(bool copyTableParts = false)
         {
             Склади_Objest copy = new Склади_Objest();
             copy.Назва = Назва;
@@ -4026,15 +4040,17 @@ namespace StorageAndTrade_1_0.Довідники
             {
             
                 //Контакти - Таблична частина
-                Контакти_TablePart.Read();
+                await Контакти_TablePart.Read();
                 copy.Контакти_TablePart.Records = Контакти_TablePart.Copy();
             
             }
             
 
             copy.New();
-            Склади_Triggers.Copying(copy, this);
+            
+                await Склади_Triggers.Copying(copy, this);
             return copy;
+                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -4198,10 +4214,10 @@ namespace StorageAndTrade_1_0.Довідники
         
         public List<Record> Records { get; set; }
         
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead(Owner.UnigueID);
+            await base.BaseRead(Owner.UnigueID);
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -4344,7 +4360,7 @@ namespace StorageAndTrade_1_0.Довідники
             return result;
         }
 
-        public ВидиЦін_Objest Copy(bool copyTableParts = false)
+        public async ValueTask<ВидиЦін_Objest> Copy(bool copyTableParts = false)
         {
             ВидиЦін_Objest copy = new ВидиЦін_Objest();
             copy.Назва = Назва;
@@ -4353,8 +4369,10 @@ namespace StorageAndTrade_1_0.Довідники
             
 
             copy.New();
-            ВидиЦін_Triggers.Copying(copy, this);
+            
+                await ВидиЦін_Triggers.Copying(copy, this);
             return copy;
+                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -4550,7 +4568,7 @@ namespace StorageAndTrade_1_0.Довідники
             return result;
         }
 
-        public ВидиЦінПостачальників_Objest Copy(bool copyTableParts = false)
+        public async ValueTask<ВидиЦінПостачальників_Objest> Copy(bool copyTableParts = false)
         {
             ВидиЦінПостачальників_Objest copy = new ВидиЦінПостачальників_Objest();
             copy.Назва = Назва;
@@ -4559,8 +4577,10 @@ namespace StorageAndTrade_1_0.Довідники
             
 
             copy.New();
-            ВидиЦінПостачальників_Triggers.Copying(copy, this);
+            
+                await ВидиЦінПостачальників_Triggers.Copying(copy, this);
             return copy;
+                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -4767,7 +4787,7 @@ namespace StorageAndTrade_1_0.Довідники
             return result;
         }
 
-        public Користувачі_Objest Copy(bool copyTableParts = false)
+        public async ValueTask<Користувачі_Objest> Copy(bool copyTableParts = false)
         {
             Користувачі_Objest copy = new Користувачі_Objest();
             copy.Назва = Назва;
@@ -4780,15 +4800,17 @@ namespace StorageAndTrade_1_0.Довідники
             {
             
                 //Контакти - Таблична частина
-                Контакти_TablePart.Read();
+                await Контакти_TablePart.Read();
                 copy.Контакти_TablePart.Records = Контакти_TablePart.Copy();
             
             }
             
 
             copy.New();
-            Користувачі_Triggers.Copying(copy, this);
+            
+                await Користувачі_Triggers.Copying(copy, this);
             return copy;
+                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -4948,10 +4970,10 @@ namespace StorageAndTrade_1_0.Довідники
         
         public List<Record> Records { get; set; }
         
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead(Owner.UnigueID);
+            await base.BaseRead(Owner.UnigueID);
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -5102,7 +5124,7 @@ namespace StorageAndTrade_1_0.Довідники
             return result;
         }
 
-        public ФізичніОсоби_Objest Copy(bool copyTableParts = false)
+        public async ValueTask<ФізичніОсоби_Objest> Copy(bool copyTableParts = false)
         {
             ФізичніОсоби_Objest copy = new ФізичніОсоби_Objest();
             copy.Назва = Назва;
@@ -5115,15 +5137,17 @@ namespace StorageAndTrade_1_0.Довідники
             {
             
                 //Контакти - Таблична частина
-                Контакти_TablePart.Read();
+                await Контакти_TablePart.Read();
                 copy.Контакти_TablePart.Records = Контакти_TablePart.Copy();
             
             }
             
 
             copy.New();
-            ФізичніОсоби_Triggers.Copying(copy, this);
+            
+                await ФізичніОсоби_Triggers.Copying(copy, this);
             return copy;
+                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -5283,10 +5307,10 @@ namespace StorageAndTrade_1_0.Довідники
         
         public List<Record> Records { get; set; }
         
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead(Owner.UnigueID);
+            await base.BaseRead(Owner.UnigueID);
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -5426,7 +5450,7 @@ namespace StorageAndTrade_1_0.Довідники
             return result;
         }
 
-        public СтруктураПідприємства_Objest Copy(bool copyTableParts = false)
+        public async ValueTask<СтруктураПідприємства_Objest> Copy(bool copyTableParts = false)
         {
             СтруктураПідприємства_Objest copy = new СтруктураПідприємства_Objest();
             copy.Назва = Назва;
@@ -5435,8 +5459,10 @@ namespace StorageAndTrade_1_0.Довідники
             
 
             copy.New();
-            СтруктураПідприємства_Triggers.Copying(copy, this);
+            
+                await СтруктураПідприємства_Triggers.Copying(copy, this);
             return copy;
+                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -5628,7 +5654,7 @@ namespace StorageAndTrade_1_0.Довідники
             return result;
         }
 
-        public КраїниСвіту_Objest Copy(bool copyTableParts = false)
+        public async ValueTask<КраїниСвіту_Objest> Copy(bool copyTableParts = false)
         {
             КраїниСвіту_Objest copy = new КраїниСвіту_Objest();
             copy.Назва = Назва;
@@ -5636,8 +5662,10 @@ namespace StorageAndTrade_1_0.Довідники
             
 
             copy.New();
-            КраїниСвіту_Triggers.Copying(copy, this);
+            
+                await КраїниСвіту_Triggers.Copying(copy, this);
             return copy;
+                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -5844,7 +5872,7 @@ namespace StorageAndTrade_1_0.Довідники
             return result;
         }
 
-        public Файли_Objest Copy(bool copyTableParts = false)
+        public async ValueTask<Файли_Objest> Copy(bool copyTableParts = false)
         {
             Файли_Objest copy = new Файли_Objest();
             copy.Код = Код;
@@ -5856,8 +5884,10 @@ namespace StorageAndTrade_1_0.Довідники
             
 
             copy.New();
-            Файли_Triggers.Copying(copy, this);
+            
+                await Файли_Triggers.Copying(copy, this);
             return copy;
+                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -6060,7 +6090,7 @@ namespace StorageAndTrade_1_0.Довідники
             return result;
         }
 
-        public ХарактеристикиНоменклатури_Objest Copy(bool copyTableParts = false)
+        public async ValueTask<ХарактеристикиНоменклатури_Objest> Copy(bool copyTableParts = false)
         {
             ХарактеристикиНоменклатури_Objest copy = new ХарактеристикиНоменклатури_Objest();
             copy.Назва = Назва;
@@ -6070,8 +6100,10 @@ namespace StorageAndTrade_1_0.Довідники
             
 
             copy.New();
-            ХарактеристикиНоменклатури_Triggers.Copying(copy, this);
+            
+                await ХарактеристикиНоменклатури_Triggers.Copying(copy, this);
             return copy;
+                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -6268,7 +6300,7 @@ namespace StorageAndTrade_1_0.Довідники
             return result;
         }
 
-        public Номенклатура_Папки_Objest Copy(bool copyTableParts = false)
+        public async ValueTask<Номенклатура_Папки_Objest> Copy(bool copyTableParts = false)
         {
             Номенклатура_Папки_Objest copy = new Номенклатура_Папки_Objest();
             copy.Назва = Назва;
@@ -6277,8 +6309,10 @@ namespace StorageAndTrade_1_0.Довідники
             
 
             copy.New();
-            Номенклатура_Папки_Triggers.Copying(copy, this);
+            
+                await Номенклатура_Папки_Triggers.Copying(copy, this);
             return copy;
+                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -6474,7 +6508,7 @@ namespace StorageAndTrade_1_0.Довідники
             return result;
         }
 
-        public Контрагенти_Папки_Objest Copy(bool copyTableParts = false)
+        public async ValueTask<Контрагенти_Папки_Objest> Copy(bool copyTableParts = false)
         {
             Контрагенти_Папки_Objest copy = new Контрагенти_Папки_Objest();
             copy.Назва = Назва;
@@ -6483,8 +6517,10 @@ namespace StorageAndTrade_1_0.Довідники
             
 
             copy.New();
-            Контрагенти_Папки_Triggers.Copying(copy, this);
+            
+                await Контрагенти_Папки_Triggers.Copying(copy, this);
             return copy;
+                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -6680,7 +6716,7 @@ namespace StorageAndTrade_1_0.Довідники
             return result;
         }
 
-        public Склади_Папки_Objest Copy(bool copyTableParts = false)
+        public async ValueTask<Склади_Папки_Objest> Copy(bool copyTableParts = false)
         {
             Склади_Папки_Objest copy = new Склади_Папки_Objest();
             copy.Назва = Назва;
@@ -6689,8 +6725,10 @@ namespace StorageAndTrade_1_0.Довідники
             
 
             copy.New();
-            Склади_Папки_Triggers.Copying(copy, this);
+            
+                await Склади_Папки_Triggers.Copying(copy, this);
             return copy;
+                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -6890,7 +6928,7 @@ namespace StorageAndTrade_1_0.Довідники
             return result;
         }
 
-        public Каси_Objest Copy(bool copyTableParts = false)
+        public async ValueTask<Каси_Objest> Copy(bool copyTableParts = false)
         {
             Каси_Objest copy = new Каси_Objest();
             copy.Назва = Назва;
@@ -6900,8 +6938,10 @@ namespace StorageAndTrade_1_0.Довідники
             
 
             copy.New();
-            Каси_Triggers.Copying(copy, this);
+            
+                await Каси_Triggers.Copying(copy, this);
             return copy;
+                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -7138,7 +7178,7 @@ namespace StorageAndTrade_1_0.Довідники
             return result;
         }
 
-        public БанківськіРахункиОрганізацій_Objest Copy(bool copyTableParts = false)
+        public async ValueTask<БанківськіРахункиОрганізацій_Objest> Copy(bool copyTableParts = false)
         {
             БанківськіРахункиОрганізацій_Objest copy = new БанківськіРахункиОрганізацій_Objest();
             copy.Назва = Назва;
@@ -7157,8 +7197,10 @@ namespace StorageAndTrade_1_0.Довідники
             
 
             copy.New();
-            БанківськіРахункиОрганізацій_Triggers.Copying(copy, this);
+            
+                await БанківськіРахункиОрганізацій_Triggers.Copying(copy, this);
             return copy;
+                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -7432,7 +7474,7 @@ namespace StorageAndTrade_1_0.Довідники
             return result;
         }
 
-        public ДоговориКонтрагентів_Objest Copy(bool copyTableParts = false)
+        public async ValueTask<ДоговориКонтрагентів_Objest> Copy(bool copyTableParts = false)
         {
             ДоговориКонтрагентів_Objest copy = new ДоговориКонтрагентів_Objest();
             copy.Назва = Назва;
@@ -7458,8 +7500,10 @@ namespace StorageAndTrade_1_0.Довідники
             
 
             copy.New();
-            ДоговориКонтрагентів_Triggers.Copying(copy, this);
+            
+                await ДоговориКонтрагентів_Triggers.Copying(copy, this);
             return copy;
+                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -7720,7 +7764,7 @@ namespace StorageAndTrade_1_0.Довідники
             return result;
         }
 
-        public БанківськіРахункиКонтрагентів_Objest Copy(bool copyTableParts = false)
+        public async ValueTask<БанківськіРахункиКонтрагентів_Objest> Copy(bool copyTableParts = false)
         {
             БанківськіРахункиКонтрагентів_Objest copy = new БанківськіРахункиКонтрагентів_Objest();
             copy.Назва = Назва;
@@ -7741,8 +7785,10 @@ namespace StorageAndTrade_1_0.Довідники
             
 
             copy.New();
-            БанківськіРахункиКонтрагентів_Triggers.Copying(copy, this);
+            
+                await БанківськіРахункиКонтрагентів_Triggers.Copying(copy, this);
             return copy;
+                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -7961,7 +8007,7 @@ namespace StorageAndTrade_1_0.Довідники
             return result;
         }
 
-        public СтаттяРухуКоштів_Objest Copy(bool copyTableParts = false)
+        public async ValueTask<СтаттяРухуКоштів_Objest> Copy(bool copyTableParts = false)
         {
             СтаттяРухуКоштів_Objest copy = new СтаттяРухуКоштів_Objest();
             copy.Назва = Назва;
@@ -7974,15 +8020,17 @@ namespace StorageAndTrade_1_0.Довідники
             {
             
                 //ГосподарськіОперації - Таблична частина
-                ГосподарськіОперації_TablePart.Read();
+                await ГосподарськіОперації_TablePart.Read();
                 copy.ГосподарськіОперації_TablePart.Records = ГосподарськіОперації_TablePart.Copy();
             
             }
             
 
             copy.New();
-            СтаттяРухуКоштів_Triggers.Copying(copy, this);
+            
+                await СтаттяРухуКоштів_Triggers.Copying(copy, this);
             return copy;
+                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -8136,10 +8184,10 @@ namespace StorageAndTrade_1_0.Довідники
         
         public List<Record> Records { get; set; }
         
-        public void Read()
+        public async ValueTask Read()
         {
             Records.Clear();
-            base.BaseRead(Owner.UnigueID);
+            await base.BaseRead(Owner.UnigueID);
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -8261,7 +8309,7 @@ namespace StorageAndTrade_1_0.Довідники
             return result;
         }
 
-        public СеріїНоменклатури_Objest Copy(bool copyTableParts = false)
+        public async ValueTask<СеріїНоменклатури_Objest> Copy(bool copyTableParts = false)
         {
             СеріїНоменклатури_Objest copy = new СеріїНоменклатури_Objest();
             copy.Номер = Номер;
@@ -8270,8 +8318,10 @@ namespace StorageAndTrade_1_0.Довідники
             
 
             copy.New();
-            СеріїНоменклатури_Triggers.Copying(copy, this);
+            
+                await СеріїНоменклатури_Triggers.Copying(copy, this);
             return copy;
+                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -8479,7 +8529,7 @@ namespace StorageAndTrade_1_0.Довідники
             return result;
         }
 
-        public ПартіяТоварівКомпозит_Objest Copy(bool copyTableParts = false)
+        public async ValueTask<ПартіяТоварівКомпозит_Objest> Copy(bool copyTableParts = false)
         {
             ПартіяТоварівКомпозит_Objest copy = new ПартіяТоварівКомпозит_Objest();
             copy.Назва = Назва;
@@ -8491,8 +8541,10 @@ namespace StorageAndTrade_1_0.Довідники
             
 
             copy.New();
-            ПартіяТоварівКомпозит_Triggers.Copying(copy, this);
+            
+                await ПартіяТоварівКомпозит_Triggers.Copying(copy, this);
             return copy;
+                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -8707,7 +8759,7 @@ namespace StorageAndTrade_1_0.Довідники
             return result;
         }
 
-        public ВидиЗапасів_Objest Copy(bool copyTableParts = false)
+        public async ValueTask<ВидиЗапасів_Objest> Copy(bool copyTableParts = false)
         {
             ВидиЗапасів_Objest copy = new ВидиЗапасів_Objest();
             copy.Назва = Назва;
@@ -8720,8 +8772,10 @@ namespace StorageAndTrade_1_0.Довідники
             
 
             copy.New();
-            ВидиЗапасів_Triggers.Copying(copy, this);
+            
+                await ВидиЗапасів_Triggers.Copying(copy, this);
             return copy;
+                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -9021,7 +9075,7 @@ namespace StorageAndTrade_1_0.Довідники
             return result;
         }
 
-        public Банки_Objest Copy(bool copyTableParts = false)
+        public async ValueTask<Банки_Objest> Copy(bool copyTableParts = false)
         {
             Банки_Objest copy = new Банки_Objest();
             copy.Код = Код;
@@ -9055,8 +9109,10 @@ namespace StorageAndTrade_1_0.Довідники
             
 
             copy.New();
-            Банки_Triggers.Copying(copy, this);
+            
+                await Банки_Triggers.Copying(copy, this);
             return copy;
+                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -9277,7 +9333,7 @@ namespace StorageAndTrade_1_0.Довідники
             return result;
         }
 
-        public СкладськіПриміщення_Objest Copy(bool copyTableParts = false)
+        public async ValueTask<СкладськіПриміщення_Objest> Copy(bool copyTableParts = false)
         {
             СкладськіПриміщення_Objest copy = new СкладськіПриміщення_Objest();
             copy.Назва = Назва;
@@ -9286,8 +9342,10 @@ namespace StorageAndTrade_1_0.Довідники
             
 
             copy.New();
-            СкладськіПриміщення_Triggers.Copying(copy, this);
+            
+                await СкладськіПриміщення_Triggers.Copying(copy, this);
             return copy;
+                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -9511,7 +9569,7 @@ namespace StorageAndTrade_1_0.Довідники
             return result;
         }
 
-        public СкладськіКомірки_Objest Copy(bool copyTableParts = false)
+        public async ValueTask<СкладськіКомірки_Objest> Copy(bool copyTableParts = false)
         {
             СкладськіКомірки_Objest copy = new СкладськіКомірки_Objest();
             copy.Папка = Папка;
@@ -9527,8 +9585,10 @@ namespace StorageAndTrade_1_0.Довідники
             
 
             copy.New();
-            СкладськіКомірки_Triggers.Copying(copy, this);
+            
+                await СкладськіКомірки_Triggers.Copying(copy, this);
             return copy;
+                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -9729,7 +9789,7 @@ namespace StorageAndTrade_1_0.Довідники
             return result;
         }
 
-        public ОбластьЗберігання_Objest Copy(bool copyTableParts = false)
+        public async ValueTask<ОбластьЗберігання_Objest> Copy(bool copyTableParts = false)
         {
             ОбластьЗберігання_Objest copy = new ОбластьЗберігання_Objest();
             copy.Назва = Назва;
@@ -9739,7 +9799,8 @@ namespace StorageAndTrade_1_0.Довідники
 
             copy.New();
             
-            return copy;
+            return await ValueTask.FromResult<ОбластьЗберігання_Objest>(copy);
+                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -9943,7 +10004,7 @@ namespace StorageAndTrade_1_0.Довідники
             return result;
         }
 
-        public ТипорозміриКомірок_Objest Copy(bool copyTableParts = false)
+        public async ValueTask<ТипорозміриКомірок_Objest> Copy(bool copyTableParts = false)
         {
             ТипорозміриКомірок_Objest copy = new ТипорозміриКомірок_Objest();
             copy.Висота = Висота;
@@ -9955,8 +10016,10 @@ namespace StorageAndTrade_1_0.Довідники
             
 
             copy.New();
-            ТипорозміриКомірок_Triggers.Copying(copy, this);
+            
+                await ТипорозміриКомірок_Triggers.Copying(copy, this);
             return copy;
+                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -10159,7 +10222,7 @@ namespace StorageAndTrade_1_0.Довідники
             return result;
         }
 
-        public СкладськіКомірки_Папки_Objest Copy(bool copyTableParts = false)
+        public async ValueTask<СкладськіКомірки_Папки_Objest> Copy(bool copyTableParts = false)
         {
             СкладськіКомірки_Папки_Objest copy = new СкладськіКомірки_Папки_Objest();
             copy.Назва = Назва;
@@ -10169,8 +10232,10 @@ namespace StorageAndTrade_1_0.Довідники
             
 
             copy.New();
-            СкладськіКомірки_Папки_Triggers.Copying(copy, this);
+            
+                await СкладськіКомірки_Папки_Triggers.Copying(copy, this);
             return copy;
+                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -10375,7 +10440,7 @@ namespace StorageAndTrade_1_0.Довідники
             return result;
         }
 
-        public Блокнот_Objest Copy(bool copyTableParts = false)
+        public async ValueTask<Блокнот_Objest> Copy(bool copyTableParts = false)
         {
             Блокнот_Objest copy = new Блокнот_Objest();
             copy.Код = Код;
@@ -10386,8 +10451,10 @@ namespace StorageAndTrade_1_0.Довідники
             
 
             copy.New();
-            Блокнот_Triggers.Copying(copy, this);
+            
+                await Блокнот_Triggers.Copying(copy, this);
             return copy;
+                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)

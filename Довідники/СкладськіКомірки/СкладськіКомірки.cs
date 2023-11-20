@@ -182,7 +182,7 @@ namespace StorageAndTrade
             СкладськіКомірки_Objest СкладськіКомірки_Objest = new СкладськіКомірки_Objest();
             if (await СкладськіКомірки_Objest.Read(unigueID))
             {
-                СкладськіКомірки_Objest СкладськіКомірки_Objest_Новий = СкладськіКомірки_Objest.Copy(true);
+                СкладськіКомірки_Objest СкладськіКомірки_Objest_Новий = await СкладськіКомірки_Objest.Copy(true);
                 await СкладськіКомірки_Objest_Новий.Save();
 
                 return СкладськіКомірки_Objest_Новий.UnigueID;

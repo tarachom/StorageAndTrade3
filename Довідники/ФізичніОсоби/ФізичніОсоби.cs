@@ -128,7 +128,7 @@ namespace StorageAndTrade
             ФізичніОсоби_Objest ФізичніОсоби_Objest = new ФізичніОсоби_Objest();
             if (await ФізичніОсоби_Objest.Read(unigueID))
             {
-                ФізичніОсоби_Objest ФізичніОсоби_Objest_Новий = ФізичніОсоби_Objest.Copy(true);
+                ФізичніОсоби_Objest ФізичніОсоби_Objest_Новий = await ФізичніОсоби_Objest.Copy(true);
                 await ФізичніОсоби_Objest_Новий.Save();
 
                 return ФізичніОсоби_Objest_Новий.UnigueID;

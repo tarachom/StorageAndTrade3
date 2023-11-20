@@ -128,7 +128,7 @@ namespace StorageAndTrade
             Каси_Objest Каси_Objest = new Каси_Objest();
             if (await Каси_Objest.Read(unigueID))
             {
-                Каси_Objest Каси_Objest_Новий = Каси_Objest.Copy(true);
+                Каси_Objest Каси_Objest_Новий = await Каси_Objest.Copy(true);
                 await Каси_Objest_Новий.Save();
 
                 return Каси_Objest_Новий.UnigueID;

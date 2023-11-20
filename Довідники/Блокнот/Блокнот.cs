@@ -128,7 +128,7 @@ namespace StorageAndTrade
             Блокнот_Objest Блокнот_Objest = new Блокнот_Objest();
             if (await Блокнот_Objest.Read(unigueID))
             {
-                Блокнот_Objest Блокнот_Objest_Новий = Блокнот_Objest.Copy(true);
+                Блокнот_Objest Блокнот_Objest_Новий = await Блокнот_Objest.Copy(true);
                 await Блокнот_Objest_Новий.Save();
 
                 return Блокнот_Objest_Новий.UnigueID;

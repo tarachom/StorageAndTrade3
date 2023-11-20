@@ -128,7 +128,7 @@ namespace StorageAndTrade
             СтаттяРухуКоштів_Objest СтаттяРухуКоштів_Objest = new СтаттяРухуКоштів_Objest();
             if (await СтаттяРухуКоштів_Objest.Read(unigueID))
             {
-                СтаттяРухуКоштів_Objest СтаттяРухуКоштів_Objest_Новий = СтаттяРухуКоштів_Objest.Copy(true);
+                СтаттяРухуКоштів_Objest СтаттяРухуКоштів_Objest_Новий = await СтаттяРухуКоштів_Objest.Copy(true);
                 await СтаттяРухуКоштів_Objest_Новий.Save();
 
                 return СтаттяРухуКоштів_Objest_Новий.UnigueID;

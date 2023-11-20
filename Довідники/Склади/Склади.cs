@@ -184,7 +184,7 @@ namespace StorageAndTrade
             Склади_Objest Склади_Objest = new Склади_Objest();
             if (await Склади_Objest.Read(unigueID))
             {
-                Склади_Objest Склади_Objest_Новий = Склади_Objest.Copy(true);
+                Склади_Objest Склади_Objest_Новий = await Склади_Objest.Copy(true);
                 await Склади_Objest_Новий.Save();
                 await Склади_Objest_Новий.Контакти_TablePart.Save(false);
 

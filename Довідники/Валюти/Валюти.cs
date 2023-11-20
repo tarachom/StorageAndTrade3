@@ -164,7 +164,7 @@ namespace StorageAndTrade
             Валюти_Objest Валюти_Objest = new Валюти_Objest();
             if (await Валюти_Objest.Read(unigueID))
             {
-                Валюти_Objest Валюти_Objest_Новий = Валюти_Objest.Copy(true);
+                Валюти_Objest Валюти_Objest_Новий = await Валюти_Objest.Copy(true);
                 await Валюти_Objest_Новий.Save();
 
                 return Валюти_Objest_Новий.UnigueID;

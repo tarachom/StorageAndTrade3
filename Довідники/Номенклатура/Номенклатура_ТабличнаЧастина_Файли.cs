@@ -79,7 +79,7 @@ namespace StorageAndTrade
                 };
             }
 
-            public static async void ПісляЗміни_Файл(Запис запис)
+            public static async ValueTask ПісляЗміни_Файл(Запис запис)
             {
                 await запис.Файл.GetPresentation();
             }
@@ -134,10 +134,10 @@ namespace StorageAndTrade
                                 Файли page = new Файли
                                 {
                                     DirectoryPointerItem = запис.Файл.UnigueID,
-                                    CallBack_OnSelectPointer = (UnigueID selectPointer) =>
+                                    CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
                                     {
                                         запис.Файл = new Файли_Pointer(selectPointer);
-                                        Запис.ПісляЗміни_Файл(запис);
+                                        await Запис.ПісляЗміни_Файл(запис);
                                         Store.SetValues(iter, запис.ToArray());
                                     }
                                 };
@@ -166,7 +166,7 @@ namespace StorageAndTrade
             toolbar.Add(deleteButton);
         }
 
-        public void LoadRecords()
+        public async void LoadRecords()
         {
             Store.Clear();
             Записи.Clear();
@@ -182,7 +182,7 @@ namespace StorageAndTrade
                 querySelect.Joins.Add(
                     new Join(Файли_Const.TABLE, Номенклатура_Файли_TablePart.Файл, querySelect.Table));
 
-                Номенклатура_Objest.Файли_TablePart.Read();
+                await Номенклатура_Objest.Файли_TablePart.Read();
 
                 Dictionary<string, Dictionary<string, string>> join = Номенклатура_Objest.Файли_TablePart.JoinValue;
 

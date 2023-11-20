@@ -46,9 +46,11 @@ namespace StorageAndTrade_1_0.Довідники
             ДовідникОбєкт.Код = (++НумераціяДовідників.Організації_Const).ToString("D6");
         }
 
-        public static void Copying(Організації_Objest ДовідникОбєкт, Організації_Objest Основа)
+        public static async ValueTask Copying(Організації_Objest ДовідникОбєкт, Організації_Objest Основа)
         {
             ДовідникОбєкт.Назва += " - Копія";
+
+            await ValueTask.FromResult(true);
         }
 
         public static void BeforeSave(Організації_Objest ДовідникОбєкт)
@@ -79,9 +81,11 @@ namespace StorageAndTrade_1_0.Довідники
             ДовідникОбєкт.Код = (++НумераціяДовідників.Номенклатура_Const).ToString("D6");
         }
 
-        public static void Copying(Номенклатура_Objest ДовідникОбєкт, Номенклатура_Objest Основа)
+        public static async ValueTask Copying(Номенклатура_Objest ДовідникОбєкт, Номенклатура_Objest Основа)
         {
             ДовідникОбєкт.Назва += " - Копія";
+
+            await ValueTask.FromResult(true);
         }
 
         public static void BeforeSave(Номенклатура_Objest ДовідникОбєкт)
@@ -153,9 +157,11 @@ WHERE
             ДовідникОбєкт.Код = (++НумераціяДовідників.Виробники_Const).ToString("D6");
         }
 
-        public static void Copying(Виробники_Objest ДовідникОбєкт, Виробники_Objest Основа)
+        public static async ValueTask Copying(Виробники_Objest ДовідникОбєкт, Виробники_Objest Основа)
         {
             ДовідникОбєкт.Назва += " - Копія";
+
+            await ValueTask.FromResult(true);
         }
 
         public static void BeforeSave(Виробники_Objest ДовідникОбєкт)
@@ -186,9 +192,11 @@ WHERE
             ДовідникОбєкт.Код = (++НумераціяДовідників.ВидиНоменклатури_Const).ToString("D6");
         }
 
-        public static void Copying(ВидиНоменклатури_Objest ДовідникОбєкт, ВидиНоменклатури_Objest Основа)
+        public static async ValueTask Copying(ВидиНоменклатури_Objest ДовідникОбєкт, ВидиНоменклатури_Objest Основа)
         {
             ДовідникОбєкт.Назва += " - Копія";
+
+            await ValueTask.FromResult(true);
         }
 
         public static void BeforeSave(ВидиНоменклатури_Objest ДовідникОбєкт)
@@ -219,9 +227,11 @@ WHERE
             ДовідникОбєкт.Код = (++НумераціяДовідників.ПакуванняОдиниціВиміру_Const).ToString("D6");
         }
 
-        public static void Copying(ПакуванняОдиниціВиміру_Objest ДовідникОбєкт, ПакуванняОдиниціВиміру_Objest Основа)
+        public static async ValueTask Copying(ПакуванняОдиниціВиміру_Objest ДовідникОбєкт, ПакуванняОдиниціВиміру_Objest Основа)
         {
             ДовідникОбєкт.Назва += " - Копія";
+
+            await ValueTask.FromResult(true);
         }
 
         public static void BeforeSave(ПакуванняОдиниціВиміру_Objest ДовідникОбєкт)
@@ -252,9 +262,11 @@ WHERE
             ДовідникОбєкт.Код = (++НумераціяДовідників.Валюти_Const).ToString("D6");
         }
 
-        public static void Copying(Валюти_Objest ДовідникОбєкт, Валюти_Objest Основа)
+        public static async ValueTask Copying(Валюти_Objest ДовідникОбєкт, Валюти_Objest Основа)
         {
             ДовідникОбєкт.Назва += " - Копія";
+
+            await ValueTask.FromResult(true);
         }
 
         public static void BeforeSave(Валюти_Objest ДовідникОбєкт)
@@ -301,9 +313,11 @@ WHERE
             ДовідникОбєкт.Код = (++НумераціяДовідників.Контрагенти_Const).ToString("D6");
         }
 
-        public static void Copying(Контрагенти_Objest ДовідникОбєкт, Контрагенти_Objest Основа)
+        public static async ValueTask Copying(Контрагенти_Objest ДовідникОбєкт, Контрагенти_Objest Основа)
         {
             ДовідникОбєкт.Назва += " - Копія";
+
+            await ValueTask.FromResult(true);
         }
 
         public static void BeforeSave(Контрагенти_Objest ДовідникОбєкт)
@@ -349,9 +363,11 @@ WHERE
             ДовідникОбєкт.Код = (++НумераціяДовідників.Склади_Const).ToString("D6");
         }
 
-        public static void Copying(Склади_Objest ДовідникОбєкт, Склади_Objest Основа)
+        public static async ValueTask Copying(Склади_Objest ДовідникОбєкт, Склади_Objest Основа)
         {
             ДовідникОбєкт.Назва += " - Копія";
+
+            await ValueTask.FromResult(true);
         }
 
         public static void BeforeSave(Склади_Objest ДовідникОбєкт)
@@ -382,9 +398,11 @@ WHERE
             ДовідникОбєкт.Код = (++НумераціяДовідників.ВидиЦін_Const).ToString("D6");
         }
 
-        public static void Copying(ВидиЦін_Objest ДовідникОбєкт, ВидиЦін_Objest Основа)
+        public static async ValueTask Copying(ВидиЦін_Objest ДовідникОбєкт, ВидиЦін_Objest Основа)
         {
             ДовідникОбєкт.Назва += " - Копія";
+
+            await ValueTask.FromResult(true);
         }
 
         public static void BeforeSave(ВидиЦін_Objest ДовідникОбєкт)
@@ -415,9 +433,11 @@ WHERE
             ДовідникОбєкт.Код = (++НумераціяДовідників.ВидиЦінПостачальників_Const).ToString("D6");
         }
 
-        public static void Copying(ВидиЦінПостачальників_Objest ДовідникОбєкт, ВидиЦінПостачальників_Objest Основа)
+        public static async ValueTask Copying(ВидиЦінПостачальників_Objest ДовідникОбєкт, ВидиЦінПостачальників_Objest Основа)
         {
             ДовідникОбєкт.Назва += " - Копія";
+
+            await ValueTask.FromResult(true);
         }
 
         public static void BeforeSave(ВидиЦінПостачальників_Objest ДовідникОбєкт)
@@ -448,9 +468,11 @@ WHERE
             ДовідникОбєкт.Код = (++НумераціяДовідників.Користувачі_Const).ToString("D6");
         }
 
-        public static void Copying(Користувачі_Objest ДовідникОбєкт, Користувачі_Objest Основа)
+        public static async ValueTask Copying(Користувачі_Objest ДовідникОбєкт, Користувачі_Objest Основа)
         {
             ДовідникОбєкт.Назва += " - Копія";
+
+            await ValueTask.FromResult(true);
         }
 
         public static void BeforeSave(Користувачі_Objest ДовідникОбєкт)
@@ -481,9 +503,11 @@ WHERE
             ДовідникОбєкт.Код = (++НумераціяДовідників.ФізичніОсоби_Const).ToString("D6");
         }
 
-        public static void Copying(ФізичніОсоби_Objest ДовідникОбєкт, ФізичніОсоби_Objest Основа)
+        public static async ValueTask Copying(ФізичніОсоби_Objest ДовідникОбєкт, ФізичніОсоби_Objest Основа)
         {
             ДовідникОбєкт.Назва += " - Копія";
+
+            await ValueTask.FromResult(true);
         }
 
         public static void BeforeSave(ФізичніОсоби_Objest ДовідникОбєкт)
@@ -514,9 +538,11 @@ WHERE
             ДовідникОбєкт.Код = (++НумераціяДовідників.СтруктураПідприємства_Const).ToString("D6");
         }
 
-        public static void Copying(СтруктураПідприємства_Objest ДовідникОбєкт, СтруктураПідприємства_Objest Основа)
+        public static async ValueTask Copying(СтруктураПідприємства_Objest ДовідникОбєкт, СтруктураПідприємства_Objest Основа)
         {
             ДовідникОбєкт.Назва += " - Копія";
+
+            await ValueTask.FromResult(true);
         }
 
         public static void BeforeSave(СтруктураПідприємства_Objest ДовідникОбєкт)
@@ -547,9 +573,11 @@ WHERE
             ДовідникОбєкт.Код = (++НумераціяДовідників.КраїниСвіту_Const).ToString("D6");
         }
 
-        public static void Copying(КраїниСвіту_Objest ДовідникОбєкт, КраїниСвіту_Objest Основа)
+        public static async ValueTask Copying(КраїниСвіту_Objest ДовідникОбєкт, КраїниСвіту_Objest Основа)
         {
             ДовідникОбєкт.Назва += " - Копія";
+
+            await ValueTask.FromResult(true);
         }
 
         public static void BeforeSave(КраїниСвіту_Objest ДовідникОбєкт)
@@ -580,9 +608,11 @@ WHERE
             ДовідникОбєкт.Код = (++НумераціяДовідників.Файли_Const).ToString("D6");
         }
 
-        public static void Copying(Файли_Objest ДовідникОбєкт, Файли_Objest Основа)
+        public static async ValueTask Copying(Файли_Objest ДовідникОбєкт, Файли_Objest Основа)
         {
             ДовідникОбєкт.Назва += " - Копія";
+
+            await ValueTask.FromResult(true);
         }
 
         public static void BeforeSave(Файли_Objest ДовідникОбєкт)
@@ -613,9 +643,11 @@ WHERE
             ДовідникОбєкт.Код = (++НумераціяДовідників.ХарактеристикиНоменклатури_Const).ToString("D6");
         }
 
-        public static void Copying(ХарактеристикиНоменклатури_Objest ДовідникОбєкт, ХарактеристикиНоменклатури_Objest Основа)
+        public static async ValueTask Copying(ХарактеристикиНоменклатури_Objest ДовідникОбєкт, ХарактеристикиНоменклатури_Objest Основа)
         {
             ДовідникОбєкт.Назва += " - Копія";
+
+            await ValueTask.FromResult(true);
         }
 
         public static void BeforeSave(ХарактеристикиНоменклатури_Objest ДовідникОбєкт)
@@ -646,9 +678,11 @@ WHERE
             ДовідникОбєкт.Код = (++НумераціяДовідників.Номенклатура_Папки_Const).ToString("D6");
         }
 
-        public static void Copying(Номенклатура_Папки_Objest ДовідникОбєкт, Номенклатура_Папки_Objest Основа)
+        public static async ValueTask Copying(Номенклатура_Папки_Objest ДовідникОбєкт, Номенклатура_Папки_Objest Основа)
         {
             ДовідникОбєкт.Назва += " - Копія";
+
+            await ValueTask.FromResult(true);
         }
 
         public static void BeforeSave(Номенклатура_Папки_Objest ДовідникОбєкт)
@@ -751,9 +785,11 @@ WHERE
             ДовідникОбєкт.Код = (++НумераціяДовідників.Контрагенти_Папки_Const).ToString("D6");
         }
 
-        public static void Copying(Контрагенти_Папки_Objest ДовідникОбєкт, Контрагенти_Папки_Objest Основа)
+        public static async ValueTask Copying(Контрагенти_Папки_Objest ДовідникОбєкт, Контрагенти_Папки_Objest Основа)
         {
             ДовідникОбєкт.Назва += " - Копія";
+
+            await ValueTask.FromResult(true);
         }
 
         public static void BeforeSave(Контрагенти_Папки_Objest ДовідникОбєкт)
@@ -860,9 +896,11 @@ WHERE
             ДовідникОбєкт.Код = (++НумераціяДовідників.Склади_Папки_Const).ToString("D6");
         }
 
-        public static void Copying(Склади_Папки_Objest ДовідникОбєкт, Склади_Папки_Objest Основа)
+        public static async ValueTask Copying(Склади_Папки_Objest ДовідникОбєкт, Склади_Папки_Objest Основа)
         {
             ДовідникОбєкт.Назва += " - Копія";
+
+            await ValueTask.FromResult(true);
         }
 
         public static void BeforeSave(Склади_Папки_Objest ДовідникОбєкт)
@@ -965,9 +1003,11 @@ WHERE
             ДовідникОбєкт.Код = (++НумераціяДовідників.Каси_Const).ToString("D6");
         }
 
-        public static void Copying(Каси_Objest ДовідникОбєкт, Каси_Objest Основа)
+        public static async ValueTask Copying(Каси_Objest ДовідникОбєкт, Каси_Objest Основа)
         {
             ДовідникОбєкт.Назва += " - Копія";
+
+            await ValueTask.FromResult(true);
         }
 
         public static void BeforeSave(Каси_Objest ДовідникОбєкт)
@@ -998,9 +1038,11 @@ WHERE
             ДовідникОбєкт.Код = (++НумераціяДовідників.БанківськіРахункиОрганізацій_Const).ToString("D6");
         }
 
-        public static void Copying(БанківськіРахункиОрганізацій_Objest ДовідникОбєкт, БанківськіРахункиОрганізацій_Objest Основа)
+        public static async ValueTask Copying(БанківськіРахункиОрганізацій_Objest ДовідникОбєкт, БанківськіРахункиОрганізацій_Objest Основа)
         {
             ДовідникОбєкт.Назва += " - Копія";
+
+            await ValueTask.FromResult(true);
         }
 
         public static void BeforeSave(БанківськіРахункиОрганізацій_Objest ДовідникОбєкт)
@@ -1031,9 +1073,11 @@ WHERE
             ДовідникОбєкт.Код = (++НумераціяДовідників.ДоговориКонтрагентів_Const).ToString("D6");
         }
 
-        public static void Copying(ДоговориКонтрагентів_Objest ДовідникОбєкт, ДоговориКонтрагентів_Objest Основа)
+        public static async ValueTask Copying(ДоговориКонтрагентів_Objest ДовідникОбєкт, ДоговориКонтрагентів_Objest Основа)
         {
             ДовідникОбєкт.Назва += " - Копія";
+
+            await ValueTask.FromResult(true);
         }
 
         public static void BeforeSave(ДоговориКонтрагентів_Objest ДовідникОбєкт)
@@ -1067,9 +1111,11 @@ WHERE
             ДовідникОбєкт.Код = (++НумераціяДовідників.БанківськіРахункиКонтрагентів_Const).ToString("D6");
         }
 
-        public static void Copying(БанківськіРахункиКонтрагентів_Objest ДовідникОбєкт, БанківськіРахункиКонтрагентів_Objest Основа)
+        public static async ValueTask Copying(БанківськіРахункиКонтрагентів_Objest ДовідникОбєкт, БанківськіРахункиКонтрагентів_Objest Основа)
         {
             ДовідникОбєкт.Назва += " - Копія";
+
+            await ValueTask.FromResult(true);
         }
 
         public static void BeforeSave(БанківськіРахункиКонтрагентів_Objest ДовідникОбєкт)
@@ -1100,9 +1146,11 @@ WHERE
             ДовідникОбєкт.Код = (++НумераціяДовідників.СтаттяРухуКоштів_Const).ToString("D6");
         }
 
-        public static void Copying(СтаттяРухуКоштів_Objest ДовідникОбєкт, СтаттяРухуКоштів_Objest Основа)
+        public static async ValueTask Copying(СтаттяРухуКоштів_Objest ДовідникОбєкт, СтаттяРухуКоштів_Objest Основа)
         {
             ДовідникОбєкт.Назва += " - Копія";
+
+            await ValueTask.FromResult(true);
         }
 
         public static void BeforeSave(СтаттяРухуКоштів_Objest ДовідникОбєкт)
@@ -1133,10 +1181,12 @@ WHERE
             ДовідникОбєкт.ДатаСтворення = DateTime.Now;
         }
 
-        public static void Copying(СеріїНоменклатури_Objest ДовідникОбєкт, СеріїНоменклатури_Objest Основа)
+        public static async ValueTask Copying(СеріїНоменклатури_Objest ДовідникОбєкт, СеріїНоменклатури_Objest Основа)
         {
             ДовідникОбєкт.Номер = Guid.NewGuid().ToString();
             ДовідникОбєкт.Коментар = "Копія - " + Основа.Номер;
+
+            await ValueTask.FromResult(true);
         }
 
         public static async void BeforeSave(СеріїНоменклатури_Objest ДовідникОбєкт)
@@ -1175,9 +1225,9 @@ WHERE
 
         }
 
-        public static void Copying(ПартіяТоварівКомпозит_Objest ДовідникОбєкт, ПартіяТоварівКомпозит_Objest Основа)
+        public static async ValueTask Copying(ПартіяТоварівКомпозит_Objest ДовідникОбєкт, ПартіяТоварівКомпозит_Objest Основа)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static void BeforeSave(ПартіяТоварівКомпозит_Objest ДовідникОбєкт)
@@ -1208,9 +1258,11 @@ WHERE
             ДовідникОбєкт.Код = (++НумераціяДовідників.ВидиЗапасів_Const).ToString("D6");
         }
 
-        public static void Copying(ВидиЗапасів_Objest ДовідникОбєкт, ВидиЗапасів_Objest Основа)
+        public static async ValueTask Copying(ВидиЗапасів_Objest ДовідникОбєкт, ВидиЗапасів_Objest Основа)
         {
             ДовідникОбєкт.Назва += " - Копія";
+
+            await ValueTask.FromResult(true);
         }
 
         public static void BeforeSave(ВидиЗапасів_Objest ДовідникОбєкт)
@@ -1241,9 +1293,11 @@ WHERE
             ДовідникОбєкт.Код = (++НумераціяДовідників.Банки_Const).ToString("D6");
         }
 
-        public static void Copying(Банки_Objest ДовідникОбєкт, Банки_Objest Основа)
+        public static async ValueTask Copying(Банки_Objest ДовідникОбєкт, Банки_Objest Основа)
         {
             ДовідникОбєкт.Назва += " - Копія";
+
+            await ValueTask.FromResult(true);
         }
 
         public static void BeforeSave(Банки_Objest ДовідникОбєкт)
@@ -1274,9 +1328,11 @@ WHERE
 
         }
 
-        public static void Copying(СкладськіПриміщення_Objest ДовідникОбєкт, СкладськіПриміщення_Objest Основа)
+        public static async ValueTask Copying(СкладськіПриміщення_Objest ДовідникОбєкт, СкладськіПриміщення_Objest Основа)
         {
             ДовідникОбєкт.Назва += " - Копія";
+
+            await ValueTask.FromResult(true);
         }
 
         public static void BeforeSave(СкладськіПриміщення_Objest ДовідникОбєкт)
@@ -1307,9 +1363,11 @@ WHERE
 
         }
 
-        public static void Copying(СкладськіКомірки_Objest ДовідникОбєкт, СкладськіКомірки_Objest Основа)
+        public static async ValueTask Copying(СкладськіКомірки_Objest ДовідникОбєкт, СкладськіКомірки_Objest Основа)
         {
             ДовідникОбєкт.Назва += " - Копія";
+
+            await ValueTask.FromResult(true);
         }
 
         public static void BeforeSave(СкладськіКомірки_Objest ДовідникОбєкт)
@@ -1340,9 +1398,11 @@ WHERE
 
         }
 
-        public static void Copying(ТипорозміриКомірок_Objest ДовідникОбєкт, ТипорозміриКомірок_Objest Основа)
+        public static async ValueTask Copying(ТипорозміриКомірок_Objest ДовідникОбєкт, ТипорозміриКомірок_Objest Основа)
         {
             ДовідникОбєкт.Назва += " - Копія";
+
+            await ValueTask.FromResult(true);
         }
 
         public static void BeforeSave(ТипорозміриКомірок_Objest ДовідникОбєкт)
@@ -1373,9 +1433,11 @@ WHERE
             ДовідникОбєкт.Код = (++НумераціяДовідників.СкладськіКомірки_Папки_Const).ToString("D6");
         }
 
-        public static void Copying(СкладськіКомірки_Папки_Objest ДовідникОбєкт, СкладськіКомірки_Папки_Objest Основа)
+        public static async ValueTask Copying(СкладськіКомірки_Папки_Objest ДовідникОбєкт, СкладськіКомірки_Папки_Objest Основа)
         {
             ДовідникОбєкт.Назва += " - Копія";
+
+            await ValueTask.FromResult(true);
         }
 
         public static void BeforeSave(СкладськіКомірки_Папки_Objest ДовідникОбєкт)
@@ -1478,9 +1540,11 @@ WHERE
             ДовідникОбєкт.ДатаЗапису = DateTime.Now;
         }
 
-        public static void Copying(Блокнот_Objest ДовідникОбєкт, Блокнот_Objest Основа)
+        public static async ValueTask Copying(Блокнот_Objest ДовідникОбєкт, Блокнот_Objest Основа)
         {
             ДовідникОбєкт.Назва += " - Копія";
+
+            await ValueTask.FromResult(true);
         }
 
         public static void BeforeSave(Блокнот_Objest ДовідникОбєкт)

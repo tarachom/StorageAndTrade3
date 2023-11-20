@@ -150,7 +150,7 @@ namespace StorageAndTrade
             ДоговориКонтрагентів_Objest ДоговориКонтрагентів_Objest = new ДоговориКонтрагентів_Objest();
             if (await ДоговориКонтрагентів_Objest.Read(unigueID))
             {
-                ДоговориКонтрагентів_Objest ДоговориКонтрагентів_Objest_Новий = ДоговориКонтрагентів_Objest.Copy(true);
+                ДоговориКонтрагентів_Objest ДоговориКонтрагентів_Objest_Новий = await ДоговориКонтрагентів_Objest.Copy(true);
                 await ДоговориКонтрагентів_Objest_Новий.Save();
 
                 return ДоговориКонтрагентів_Objest_Новий.UnigueID;

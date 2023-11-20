@@ -159,7 +159,7 @@ namespace StorageAndTrade
             СкладськіПриміщення_Objest СкладськіПриміщення_Objest = new СкладськіПриміщення_Objest();
             if (await СкладськіПриміщення_Objest.Read(unigueID))
             {
-                СкладськіПриміщення_Objest СкладськіПриміщення_Objest_Новий = СкладськіПриміщення_Objest.Copy(true);
+                СкладськіПриміщення_Objest СкладськіПриміщення_Objest_Новий = await СкладськіПриміщення_Objest.Copy(true);
                 await СкладськіПриміщення_Objest_Новий.Save();
 
                 return СкладськіПриміщення_Objest_Новий.UnigueID;

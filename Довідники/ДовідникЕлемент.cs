@@ -207,10 +207,7 @@ namespace StorageAndTrade
                 CallBack_OnSelectPointer.Invoke(UnigueID);
 
             if (CallBack_LoadRecords != null)
-            {
-                Console.WriteLine( "1" + UnigueID);
                 CallBack_LoadRecords.Invoke(UnigueID);
-            }
 
             if (closePage)
                 Program.GeneralForm?.CloseNotebookPageToCode(this.Name);

@@ -128,7 +128,7 @@ namespace StorageAndTrade
             ВидиНоменклатури_Objest ВидиНоменклатури_Objest = new ВидиНоменклатури_Objest();
             if (await ВидиНоменклатури_Objest.Read(unigueID))
             {
-                ВидиНоменклатури_Objest ВидиНоменклатури_Objest_Новий = ВидиНоменклатури_Objest.Copy(true);
+                ВидиНоменклатури_Objest ВидиНоменклатури_Objest_Новий = await ВидиНоменклатури_Objest.Copy(true);
                 await ВидиНоменклатури_Objest_Новий.Save();
 
                 return ВидиНоменклатури_Objest_Новий.UnigueID;

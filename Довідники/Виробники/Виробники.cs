@@ -128,7 +128,7 @@ namespace StorageAndTrade
             Виробники_Objest Виробники_Objest = new Виробники_Objest();
             if (await Виробники_Objest.Read(unigueID))
             {
-                Виробники_Objest Виробники_Objest_Новий = Виробники_Objest.Copy(true);
+                Виробники_Objest Виробники_Objest_Новий = await Виробники_Objest.Copy(true);
                 await Виробники_Objest_Новий.Save();
 
                 return Виробники_Objest_Новий.UnigueID;

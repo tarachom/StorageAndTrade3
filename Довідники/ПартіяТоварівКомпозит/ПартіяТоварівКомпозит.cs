@@ -128,7 +128,7 @@ namespace StorageAndTrade
             ПартіяТоварівКомпозит_Objest ПартіяТоварівКомпозит_Objest = new ПартіяТоварівКомпозит_Objest();
             if (await ПартіяТоварівКомпозит_Objest.Read(unigueID))
             {
-                ПартіяТоварівКомпозит_Objest ПартіяТоварівКомпозит_Objest_Новий = ПартіяТоварівКомпозит_Objest.Copy(true);
+                ПартіяТоварівКомпозит_Objest ПартіяТоварівКомпозит_Objest_Новий = await ПартіяТоварівКомпозит_Objest.Copy(true);
                 await ПартіяТоварівКомпозит_Objest_Новий.Save();
 
                 return ПартіяТоварівКомпозит_Objest_Новий.UnigueID;
