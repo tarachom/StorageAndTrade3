@@ -141,7 +141,7 @@ namespace StorageAndTrade
             }
         }
 
-        protected override async void Delete(UnigueID unigueID)
+        protected override async ValueTask Delete(UnigueID unigueID)
         {
             КурсиВалют_Objest КурсиВалют_Objest = new КурсиВалют_Objest();
             if (await КурсиВалют_Objest.Read(unigueID))

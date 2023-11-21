@@ -656,6 +656,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
             else
                 return false;
         }
+
+        /* синхронна функція для Read(UnigueID uid) */
+        public bool ReadSync(UnigueID uid) { return Task.Run&lt;bool&gt;(async () =&gt; { return await Read(uid); }).Result; }
         
         public async ValueTask&lt;bool&gt; Save()
         {
@@ -745,6 +748,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
                <xsl:text>"</xsl:text><xsl:value-of select="Table"/><xsl:text>"</xsl:text>
             </xsl:for-each> });
         }
+
+        /* синхронна функція для Delete() */
+        public void DeleteSync() { Task.Run(async () =&gt; { await Delete(); }); }
         
         public <xsl:value-of select="$DirectoryName"/>_Pointer GetDirectoryPointer()
         {
@@ -768,6 +774,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
                 </xsl:for-each> }
             );
         }
+        
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run&lt;string&gt;(async () =&gt; { return await GetPresentation(); }).Result; }
         
         <xsl:for-each select="Fields/Field">
           <xsl:text>public </xsl:text>
@@ -824,6 +833,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
                 </xsl:for-each> }
             );
         }
+
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run&lt;string&gt;(async () =&gt; { return await GetPresentation(); }).Result; }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
@@ -1255,6 +1267,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
             else
                 return false;
         }
+
+        /* синхронна функція для Read(UnigueID uid) */
+        public bool ReadSync(UnigueID uid) { return Task.Run&lt;bool&gt;(async () =&gt; { return await Read(uid); }).Result; }
         
         public async Task&lt;bool&gt; Save()
         {
@@ -1306,6 +1321,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
             </xsl:choose>
         }
 
+        /* синхронна функція для SpendTheDocument() */
+        public bool SpendTheDocumentSync(DateTime spendDate) { return Task.Run&lt;bool&gt;(async () =&gt; { return await SpendTheDocument(spendDate); }).Result; }
+
         public async ValueTask ClearSpendTheDocument()
         {
             <xsl:if test="normalize-space(SpendFunctions/ClearSpend) != ''">
@@ -1314,6 +1332,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
             </xsl:if>
             <xsl:text>await BaseSpend(false, DateTime.MinValue);</xsl:text>
         }
+
+        /* синхронна функція для ClearSpendTheDocument() */
+        public void ClearSpendTheDocumentSync() { Task.Run(async () =&gt; { await ClearSpendTheDocument(); }); }
 
         public async ValueTask&lt;<xsl:value-of select="$DocumentName"/>_Objest&gt; Copy(bool copyTableParts = false)
         {
@@ -1372,6 +1393,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
               <xsl:text>"</xsl:text><xsl:value-of select="Table"/><xsl:text>"</xsl:text>
             </xsl:for-each> });
         }
+
+        /* синхронна функція для Delete() */
+        public void DeleteSync() { Task.Run(async () =&gt; { await Delete(); }); }
         
         public <xsl:value-of select="$DocumentName"/>_Pointer GetDocumentPointer()
         {
@@ -1426,6 +1450,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
               </xsl:for-each> }
             );
         }
+
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run&lt;string&gt;(async () =&gt; { return await GetPresentation(); }).Result; }
 
         public async ValueTask&lt;bool&gt; SpendTheDocument(DateTime spendDate)
         {
@@ -1872,7 +1899,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриНа�
         }
 
         /* Функція для обчислення віртуальних таблиць  */
-        public static async void Execute(DateTime period, string regAccumName)
+        public static async ValueTask Execute(DateTime period, string regAccumName)
         {
             if (Config.Kernel == null) return;
             <xsl:variable name="QueryAllCountCalculation" select="count(Configuration/RegistersAccumulation/RegisterAccumulation/QueryBlockList/QueryBlock[FinalCalculation = '0']/Query)"/>
@@ -1906,7 +1933,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриНа�
         }
 
         /* Функція для обчислення підсумкових віртуальних таблиць */
-        public static async void ExecuteFinalCalculation(List&lt;string&gt; regAccumNameList)
+        public static async ValueTask ExecuteFinalCalculation(List&lt;string&gt; regAccumNameList)
         {
             if (Config.Kernel == null) return;
             <xsl:variable name="QueryAllCountFinalCalculation" select="count(Configuration/RegistersAccumulation/RegisterAccumulation/QueryBlockList/QueryBlock[FinalCalculation = '1']/Query)"/>

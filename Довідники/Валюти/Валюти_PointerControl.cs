@@ -30,12 +30,8 @@ namespace StorageAndTrade
 {
     class Валюти_PointerControl : PointerControl
     {
-        event EventHandler<Валюти_Pointer>? PointerChanged;
-
         public Валюти_PointerControl()
         {
-            PointerChanged += OnPointerChanged;
-
             pointer = new Валюти_Pointer();
             WidthPresentation = 300;
             Caption = $"{Валюти_Const.FULLNAME}:";
@@ -51,13 +47,8 @@ namespace StorageAndTrade
             set
             {
                 pointer = value;
-                PointerChanged?.Invoke(this, pointer);
+                Presentation = pointer != null ? Task.Run(async () => { return await pointer.GetPresentation(); }).Result : "";
             }
-        }
-
-        protected async void OnPointerChanged(object? sender, Валюти_Pointer pointer)
-        {
-            Presentation = pointer != null ? await pointer.GetPresentation() : "";
         }
 
         protected override async void OpenSelect(object? sender, EventArgs args)

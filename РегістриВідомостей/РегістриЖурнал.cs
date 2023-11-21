@@ -117,7 +117,7 @@ namespace StorageAndTrade
 
         protected virtual void OpenPageElement(bool IsNew, UnigueID? unigueID = null) { }
 
-        protected virtual void Delete(UnigueID unigueID) { }
+        protected virtual ValueTask Delete(UnigueID unigueID) { return new ValueTask(); }
 
         protected virtual ValueTask<UnigueID?> Copy(UnigueID unigueID) { return new ValueTask<UnigueID?>(); }
 
@@ -240,7 +240,7 @@ namespace StorageAndTrade
             LoadRecords();
         }
 
-        void OnDeleteClick(object? sender, EventArgs args)
+        async void OnDeleteClick(object? sender, EventArgs args)
         {
             if (TreeViewGrid.Selection.CountSelectedRows() != 0)
             {
@@ -255,7 +255,7 @@ namespace StorageAndTrade
 
                         UnigueID unigueID = new UnigueID((string)TreeViewGrid.Model.GetValue(iter, 1));
 
-                        Delete(unigueID);
+                        await Delete(unigueID);
 
                         SelectPointerItem = unigueID;
                     }

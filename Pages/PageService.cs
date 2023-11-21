@@ -183,7 +183,7 @@ namespace StorageAndTrade
                     if (doc != null)
                     {
                         //Для документу викликається функція проведення
-                        object? obj = doc.GetType().InvokeMember("SpendTheDocument",
+                        object? obj = doc.GetType().InvokeMember("SpendTheDocumentSync",
                              BindingFlags.InvokeMethod, null, doc, new object[] { journalSelect.Current.SpendDate });
 
                         if (obj != null ? (bool)obj : false)
@@ -287,7 +287,7 @@ namespace StorageAndTrade
                                 object? documentPointer = ExecutingAssembly.CreateInstance(documentPointerName, false, BindingFlags.CreateInstance, null, new object[] { unigueID, null! }, null, null);
                                 if (documentPointer != null)
                                 {
-                                    object? objPresentation = documentPointer.GetType().InvokeMember("GetPresentation", BindingFlags.InvokeMethod, null, documentPointer, null);
+                                    object? objPresentation = documentPointer.GetType().InvokeMember("GetPresentationSync", BindingFlags.InvokeMethod, null, documentPointer, null);
                                     if (objPresentation != null)
                                         CreateMessage(TypeMessage.None, (string)objPresentation + $" [{unigueID}]");
                                 }
@@ -302,120 +302,105 @@ namespace StorageAndTrade
 
         async void ClearDeletionLabel()
         {
+            if (Config.Kernel == null) return;
+
             ButtonSensitive(false);
 
-            if (Config.Kernel != null)
+            CreateMessage(TypeMessage.Info, "Обробка довідників:");
+
+            foreach (ConfigurationDirectories configurationDirectories in Config.Kernel.Conf.Directories.Values)
             {
-                CreateMessage(TypeMessage.Info, "Обробка довідників:");
+                if (CancellationTokenPageService!.IsCancellationRequested)
+                    break;
 
-                foreach (ConfigurationDirectories configurationDirectories in Config.Kernel.Conf.Directories.Values)
+                CreateMessage(TypeMessage.Info, " -> " + configurationDirectories.Name);
+
+                //Вибірка помічених на видалення
+                string query = @$"SELECT uid FROM {configurationDirectories.Table} WHERE deletion_label = true";
+
+                var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(query);
+
+                if (recordResult.ListRow.Count > 0)
                 {
-                    if (CancellationTokenPageService!.IsCancellationRequested)
-                        break;
+                    //Пошук залежностей
+                    List<ConfigurationDependencies> listDependencies = Config.Kernel.Conf.SearchDependencies("Довідники." + configurationDirectories.Name);
 
-                    CreateMessage(TypeMessage.Info, " -> " + configurationDirectories.Name);
+                    string directoryObjestName = $"StorageAndTrade_1_0.Довідники.{configurationDirectories.Name}_Objest";
 
-                    //Вибірка помічених на видалення
-                    string query = @$"SELECT uid FROM {configurationDirectories.Table} WHERE deletion_label = true";
-
-                    string[] columnsName;
-                    List<Dictionary<string, object>> listRow;
-                    Config.Kernel.DataBase.SelectRequest(query, null, out columnsName, out listRow);
-
-                    if (listRow.Count > 0)
+                    //Обробка довідників
+                    foreach (Dictionary<string, object> row in recordResult.ListRow)
                     {
-                        //Пошук залежностей
-                        List<ConfigurationDependencies> listDependencies = Config.Kernel.Conf.SearchDependencies("Довідники." + configurationDirectories.Name);
+                        UnigueID unigueID = new UnigueID(row["uid"]);
+                        string name = "";
 
-                        string directoryObjestName = $"StorageAndTrade_1_0.Довідники.{configurationDirectories.Name}_Objest";
-
-                        //Обробка довідників
-                        foreach (Dictionary<string, object> row in listRow)
+                        //Обєкт довідника
+                        object? directoryObject = ExecutingAssembly.CreateInstance(directoryObjestName);
+                        if (directoryObject != null)
                         {
-                            UnigueID unigueID = new UnigueID(row["uid"]);
-                            string name = "";
-
-                            //Обєкт довідника
-                            object? directoryObject = ExecutingAssembly.CreateInstance(directoryObjestName);
-                            if (directoryObject != null)
+                            object? objRead = directoryObject.GetType().InvokeMember("ReadSync", BindingFlags.InvokeMethod, null, directoryObject, new object[] { unigueID });
+                            if (objRead != null ? (bool)objRead : false)
                             {
-                                object? objRead = directoryObject.GetType().InvokeMember("Read", BindingFlags.InvokeMethod, null, directoryObject, new object[] { unigueID });
-                                if (objRead != null)
+                                object? objName = directoryObject.GetType().InvokeMember("GetPresentationSync", BindingFlags.InvokeMethod, null, directoryObject, null);
+                                if (objName != null)
+                                    name = (string)objName;
+
+                                long allCountDependencies = SearchDependencies(listDependencies, unigueID.UGuid, name);
+                                if (allCountDependencies == 0)
                                 {
-                                    //????
-                                    var valueTask = ValueTask<bool>(objRead);
-                                    await valueTask;
-
-                                    PropertyInfo? resultProperty = valueTask.GetType().GetProperty("Result");
-                                    object? result = resultProperty?.GetValue(valueTask);
-
-                                    if (result != null ? (bool)result : false)
-                                    {
-                                        object? objName = directoryObject.GetType().InvokeMember("GetPresentation", BindingFlags.InvokeMethod, null, directoryObject, null);
-                                        if (objName != null)
-                                            name = (string)objName;
-
-                                        long allCountDependencies = SearchDependencies(listDependencies, unigueID.UGuid, name);
-                                        if (allCountDependencies == 0)
-                                        {
-                                            directoryObject.GetType().InvokeMember("Delete", BindingFlags.InvokeMethod, null, directoryObject, null);
-                                            CreateMessage(TypeMessage.Ok, " --> Видалено: " + name + " [" + unigueID.ToString() + "]");
-                                        }
-                                    }
+                                    directoryObject.GetType().InvokeMember("DeleteSync", BindingFlags.InvokeMethod, null, directoryObject, null);
+                                    CreateMessage(TypeMessage.Ok, " --> Видалено: " + name + " [" + unigueID.ToString() + "]");
                                 }
                             }
-
                         }
                     }
+
                 }
+            }
 
-                CreateMessage(TypeMessage.None, "\n");
-                CreateMessage(TypeMessage.Info, "Обробка документів:");
+            CreateMessage(TypeMessage.None, "\n");
+            CreateMessage(TypeMessage.Info, "Обробка документів:");
 
-                foreach (ConfigurationDocuments configurationDocuments in Config.Kernel!.Conf.Documents.Values)
+            foreach (ConfigurationDocuments configurationDocuments in Config.Kernel!.Conf.Documents.Values)
+            {
+                if (CancellationTokenPageService!.IsCancellationRequested)
+                    break;
+
+                CreateMessage(TypeMessage.Info, " -> " + configurationDocuments.Name);
+
+                //Вибірка помічених на видалення
+                string query = @$"SELECT uid, docname FROM {configurationDocuments.Table} WHERE deletion_label = true";
+
+                var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(query);
+
+                if (recordResult.ListRow.Count > 0)
                 {
-                    if (CancellationTokenPageService!.IsCancellationRequested)
-                        break;
+                    //Пошук залежностей
+                    List<ConfigurationDependencies> listDependencies = Config.Kernel.Conf.SearchDependencies("Документи." + configurationDocuments.Name);
 
-                    CreateMessage(TypeMessage.Info, " -> " + configurationDocuments.Name);
+                    string DocumentObjestName = $"StorageAndTrade_1_0.Документи.{configurationDocuments.Name}_Objest";
 
-                    //Вибірка помічених на видалення
-                    string query = @$"SELECT uid, docname FROM {configurationDocuments.Table} WHERE deletion_label = true";
-
-                    string[] columnsName;
-                    List<Dictionary<string, object>> listRow;
-                    Config.Kernel.DataBase.SelectRequest(query, null, out columnsName, out listRow);
-
-                    if (listRow.Count > 0)
+                    //Обробка документів
+                    foreach (Dictionary<string, object> row in recordResult.ListRow)
                     {
-                        //Пошук залежностей
-                        List<ConfigurationDependencies> listDependencies = Config.Kernel.Conf.SearchDependencies("Документи." + configurationDocuments.Name);
+                        UnigueID unigueID = new UnigueID(row["uid"]);
+                        string name = (string)row["docname"];
 
-                        string DocumentObjestName = $"StorageAndTrade_1_0.Документи.{configurationDocuments.Name}_Objest";
-
-                        //Обробка документів
-                        foreach (Dictionary<string, object> row in listRow)
+                        object? documentObject = ExecutingAssembly.CreateInstance(DocumentObjestName);
+                        if (documentObject != null)
                         {
-                            UnigueID unigueID = new UnigueID(row["uid"]);
-                            string name = (string)row["docname"];
-
-                            object? documentObject = ExecutingAssembly.CreateInstance(DocumentObjestName);
-                            if (documentObject != null)
+                            object? objRead = documentObject.GetType().InvokeMember("ReadSync", BindingFlags.InvokeMethod, null, documentObject, new object[] { unigueID });
+                            if (objRead != null ? (bool)objRead : false)
                             {
-                                object? objRead = documentObject.GetType().InvokeMember("Read", BindingFlags.InvokeMethod, null, documentObject, new object[] { unigueID });
-                                if (objRead != null ? (bool)objRead : false)
+                                long allCountDependencies = SearchDependencies(listDependencies, unigueID.UGuid, name);
+                                if (allCountDependencies == 0)
                                 {
-                                    long allCountDependencies = SearchDependencies(listDependencies, unigueID.UGuid, name);
-                                    if (allCountDependencies == 0)
-                                    {
-                                        documentObject.GetType().InvokeMember("Delete", BindingFlags.InvokeMethod, null, documentObject, null);
-                                        CreateMessage(TypeMessage.Ok, " --> Видалено: " + name + " [" + unigueID.ToString() + "]");
-                                    }
+                                    documentObject.GetType().InvokeMember("DeleteSync", BindingFlags.InvokeMethod, null, documentObject, null);
+                                    CreateMessage(TypeMessage.Ok, " --> Видалено: " + name + " [" + unigueID.ToString() + "]");
                                 }
                             }
                         }
-
                     }
+
                 }
             }
 
@@ -426,11 +411,6 @@ namespace StorageAndTrade
 
             Thread.Sleep(1000);
             CreateMessage(TypeMessage.None, "\n\n\n");
-        }
-
-        private ValueTask ValueTask<T>(object objRead)
-        {
-            throw new NotImplementedException();
         }
 
         #endregion

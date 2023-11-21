@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 20.11.2023 20:37:16
+ * Дата конфігурації: 21.11.2023 18:00:58
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -1994,6 +1994,9 @@ namespace StorageAndTrade_1_0.Довідники
             else
                 return false;
         }
+
+        /* синхронна функція для Read(UnigueID uid) */
+        public bool ReadSync(UnigueID uid) { return Task.Run<bool>(async () => { return await Read(uid); }).Result; }
         
         public async ValueTask<bool> Save()
         {
@@ -2060,6 +2063,9 @@ namespace StorageAndTrade_1_0.Довідники
                 await Організації_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] { "tab_a02" });
         }
+
+        /* синхронна функція для Delete() */
+        public void DeleteSync() { Task.Run(async () => { await Delete(); }); }
         
         public Організації_Pointer GetDirectoryPointer()
         {
@@ -2077,6 +2083,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_a1" }
             );
         }
+        
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
         public string Назва { get; set; }
         public string Код { get; set; }
@@ -2125,6 +2134,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_a1" }
             );
         }
+
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
@@ -2365,6 +2377,9 @@ namespace StorageAndTrade_1_0.Довідники
             else
                 return false;
         }
+
+        /* синхронна функція для Read(UnigueID uid) */
+        public bool ReadSync(UnigueID uid) { return Task.Run<bool>(async () => { return await Read(uid); }).Result; }
         
         public async ValueTask<bool> Save()
         {
@@ -2435,6 +2450,9 @@ namespace StorageAndTrade_1_0.Довідники
                 await Номенклатура_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] { "tab_b19" });
         }
+
+        /* синхронна функція для Delete() */
+        public void DeleteSync() { Task.Run(async () => { await Delete(); }); }
         
         public Номенклатура_Pointer GetDirectoryPointer()
         {
@@ -2452,6 +2470,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_b1" }
             );
         }
+        
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
         public string Назва { get; set; }
         public string Код { get; set; }
@@ -2502,6 +2523,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_b1" }
             );
         }
+
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
@@ -2688,6 +2712,9 @@ namespace StorageAndTrade_1_0.Довідники
             else
                 return false;
         }
+
+        /* синхронна функція для Read(UnigueID uid) */
+        public bool ReadSync(UnigueID uid) { return Task.Run<bool>(async () => { return await Read(uid); }).Result; }
         
         public async ValueTask<bool> Save()
         {
@@ -2731,6 +2758,9 @@ namespace StorageAndTrade_1_0.Довідники
                 await Виробники_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] {  });
         }
+
+        /* синхронна функція для Delete() */
+        public void DeleteSync() { Task.Run(async () => { await Delete(); }); }
         
         public Виробники_Pointer GetDirectoryPointer()
         {
@@ -2748,6 +2778,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_b6" }
             );
         }
+        
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
         public string Назва { get; set; }
         public string Код { get; set; }
@@ -2786,6 +2819,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_b6" }
             );
         }
+
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
@@ -2899,6 +2935,9 @@ namespace StorageAndTrade_1_0.Довідники
             else
                 return false;
         }
+
+        /* синхронна функція для Read(UnigueID uid) */
+        public bool ReadSync(UnigueID uid) { return Task.Run<bool>(async () => { return await Read(uid); }).Result; }
         
         public async ValueTask<bool> Save()
         {
@@ -2948,6 +2987,9 @@ namespace StorageAndTrade_1_0.Довідники
                 await ВидиНоменклатури_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] {  });
         }
+
+        /* синхронна функція для Delete() */
+        public void DeleteSync() { Task.Run(async () => { await Delete(); }); }
         
         public ВидиНоменклатури_Pointer GetDirectoryPointer()
         {
@@ -2965,6 +3007,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_b8" }
             );
         }
+        
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
         public string Назва { get; set; }
         public string Код { get; set; }
@@ -3006,6 +3051,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_b8" }
             );
         }
+
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
@@ -3116,6 +3164,9 @@ namespace StorageAndTrade_1_0.Довідники
             else
                 return false;
         }
+
+        /* синхронна функція для Read(UnigueID uid) */
+        public bool ReadSync(UnigueID uid) { return Task.Run<bool>(async () => { return await Read(uid); }).Result; }
         
         public async ValueTask<bool> Save()
         {
@@ -3163,6 +3214,9 @@ namespace StorageAndTrade_1_0.Довідники
                 await ПакуванняОдиниціВиміру_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] {  });
         }
+
+        /* синхронна функція для Delete() */
+        public void DeleteSync() { Task.Run(async () => { await Delete(); }); }
         
         public ПакуванняОдиниціВиміру_Pointer GetDirectoryPointer()
         {
@@ -3180,6 +3234,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_c1" }
             );
         }
+        
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
         public string Назва { get; set; }
         public string Код { get; set; }
@@ -3220,6 +3277,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_c1" }
             );
         }
+
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
@@ -3333,6 +3393,9 @@ namespace StorageAndTrade_1_0.Довідники
             else
                 return false;
         }
+
+        /* синхронна функція для Read(UnigueID uid) */
+        public bool ReadSync(UnigueID uid) { return Task.Run<bool>(async () => { return await Read(uid); }).Result; }
         
         public async ValueTask<bool> Save()
         {
@@ -3382,6 +3445,9 @@ namespace StorageAndTrade_1_0.Довідники
                 await Валюти_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] {  });
         }
+
+        /* синхронна функція для Delete() */
+        public void DeleteSync() { Task.Run(async () => { await Delete(); }); }
         
         public Валюти_Pointer GetDirectoryPointer()
         {
@@ -3399,6 +3465,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_c5" }
             );
         }
+        
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
         public string Назва { get; set; }
         public string КороткаНазва { get; set; }
@@ -3440,6 +3509,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_c5" }
             );
         }
+
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
@@ -3563,6 +3635,9 @@ namespace StorageAndTrade_1_0.Довідники
             else
                 return false;
         }
+
+        /* синхронна функція для Read(UnigueID uid) */
+        public bool ReadSync(UnigueID uid) { return Task.Run<bool>(async () => { return await Read(uid); }).Result; }
         
         public async ValueTask<bool> Save()
         {
@@ -3629,6 +3704,9 @@ namespace StorageAndTrade_1_0.Довідники
                 await Контрагенти_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] { "tab_a09", "tab_b20" });
         }
+
+        /* синхронна функція для Delete() */
+        public void DeleteSync() { Task.Run(async () => { await Delete(); }); }
         
         public Контрагенти_Pointer GetDirectoryPointer()
         {
@@ -3646,6 +3724,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_c7" }
             );
         }
+        
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
         public string Назва { get; set; }
         public string Код { get; set; }
@@ -3693,6 +3774,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_c7" }
             );
         }
+
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
@@ -4002,6 +4086,9 @@ namespace StorageAndTrade_1_0.Довідники
             else
                 return false;
         }
+
+        /* синхронна функція для Read(UnigueID uid) */
+        public bool ReadSync(UnigueID uid) { return Task.Run<bool>(async () => { return await Read(uid); }).Result; }
         
         public async ValueTask<bool> Save()
         {
@@ -4066,6 +4153,9 @@ namespace StorageAndTrade_1_0.Довідники
                 await Склади_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] { "tab_a11" });
         }
+
+        /* синхронна функція для Delete() */
+        public void DeleteSync() { Task.Run(async () => { await Delete(); }); }
         
         public Склади_Pointer GetDirectoryPointer()
         {
@@ -4083,6 +4173,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_d9" }
             );
         }
+        
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
         public string Назва { get; set; }
         public string Код { get; set; }
@@ -4130,6 +4223,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_d9" }
             );
         }
+
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
@@ -4343,6 +4439,9 @@ namespace StorageAndTrade_1_0.Довідники
             else
                 return false;
         }
+
+        /* синхронна функція для Read(UnigueID uid) */
+        public bool ReadSync(UnigueID uid) { return Task.Run<bool>(async () => { return await Read(uid); }).Result; }
         
         public async ValueTask<bool> Save()
         {
@@ -4388,6 +4487,9 @@ namespace StorageAndTrade_1_0.Довідники
                 await ВидиЦін_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] {  });
         }
+
+        /* синхронна функція для Delete() */
+        public void DeleteSync() { Task.Run(async () => { await Delete(); }); }
         
         public ВидиЦін_Pointer GetDirectoryPointer()
         {
@@ -4405,6 +4507,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_e9" }
             );
         }
+        
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
         public string Назва { get; set; }
         public string Код { get; set; }
@@ -4444,6 +4549,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_e9" }
             );
         }
+
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
@@ -4551,6 +4659,9 @@ namespace StorageAndTrade_1_0.Довідники
             else
                 return false;
         }
+
+        /* синхронна функція для Read(UnigueID uid) */
+        public bool ReadSync(UnigueID uid) { return Task.Run<bool>(async () => { return await Read(uid); }).Result; }
         
         public async ValueTask<bool> Save()
         {
@@ -4596,6 +4707,9 @@ namespace StorageAndTrade_1_0.Довідники
                 await ВидиЦінПостачальників_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] {  });
         }
+
+        /* синхронна функція для Delete() */
+        public void DeleteSync() { Task.Run(async () => { await Delete(); }); }
         
         public ВидиЦінПостачальників_Pointer GetDirectoryPointer()
         {
@@ -4613,6 +4727,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_f3" }
             );
         }
+        
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
         public string Назва { get; set; }
         public string Код { get; set; }
@@ -4652,6 +4769,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_f3" }
             );
         }
+
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
@@ -4768,6 +4888,9 @@ namespace StorageAndTrade_1_0.Довідники
             else
                 return false;
         }
+
+        /* синхронна функція для Read(UnigueID uid) */
+        public bool ReadSync(UnigueID uid) { return Task.Run<bool>(async () => { return await Read(uid); }).Result; }
         
         public async ValueTask<bool> Save()
         {
@@ -4826,6 +4949,9 @@ namespace StorageAndTrade_1_0.Довідники
                 await Користувачі_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] { "tab_a15" });
         }
+
+        /* синхронна функція для Delete() */
+        public void DeleteSync() { Task.Run(async () => { await Delete(); }); }
         
         public Користувачі_Pointer GetDirectoryPointer()
         {
@@ -4843,6 +4969,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_f6" }
             );
         }
+        
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
         public string Назва { get; set; }
         public string Код { get; set; }
@@ -4887,6 +5016,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_f6" }
             );
         }
+
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
@@ -5105,6 +5237,9 @@ namespace StorageAndTrade_1_0.Довідники
             else
                 return false;
         }
+
+        /* синхронна функція для Read(UnigueID uid) */
+        public bool ReadSync(UnigueID uid) { return Task.Run<bool>(async () => { return await Read(uid); }).Result; }
         
         public async ValueTask<bool> Save()
         {
@@ -5163,6 +5298,9 @@ namespace StorageAndTrade_1_0.Довідники
                 await ФізичніОсоби_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] { "tab_a17" });
         }
+
+        /* синхронна функція для Delete() */
+        public void DeleteSync() { Task.Run(async () => { await Delete(); }); }
         
         public ФізичніОсоби_Pointer GetDirectoryPointer()
         {
@@ -5180,6 +5318,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_g7" }
             );
         }
+        
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
         public string Назва { get; set; }
         public string Код { get; set; }
@@ -5224,6 +5365,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_g7" }
             );
         }
+
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
@@ -5433,6 +5577,9 @@ namespace StorageAndTrade_1_0.Довідники
             else
                 return false;
         }
+
+        /* синхронна функція для Read(UnigueID uid) */
+        public bool ReadSync(UnigueID uid) { return Task.Run<bool>(async () => { return await Read(uid); }).Result; }
         
         public async ValueTask<bool> Save()
         {
@@ -5478,6 +5625,9 @@ namespace StorageAndTrade_1_0.Довідники
                 await СтруктураПідприємства_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] {  });
         }
+
+        /* синхронна функція для Delete() */
+        public void DeleteSync() { Task.Run(async () => { await Delete(); }); }
         
         public СтруктураПідприємства_Pointer GetDirectoryPointer()
         {
@@ -5495,6 +5645,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_h8" }
             );
         }
+        
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
         public string Назва { get; set; }
         public string Код { get; set; }
@@ -5534,6 +5687,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_h8" }
             );
         }
+
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
@@ -5638,6 +5794,9 @@ namespace StorageAndTrade_1_0.Довідники
             else
                 return false;
         }
+
+        /* синхронна функція для Read(UnigueID uid) */
+        public bool ReadSync(UnigueID uid) { return Task.Run<bool>(async () => { return await Read(uid); }).Result; }
         
         public async ValueTask<bool> Save()
         {
@@ -5681,6 +5840,9 @@ namespace StorageAndTrade_1_0.Довідники
                 await КраїниСвіту_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] {  });
         }
+
+        /* синхронна функція для Delete() */
+        public void DeleteSync() { Task.Run(async () => { await Delete(); }); }
         
         public КраїниСвіту_Pointer GetDirectoryPointer()
         {
@@ -5698,6 +5860,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_i2" }
             );
         }
+        
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
         public string Назва { get; set; }
         public string Код { get; set; }
@@ -5736,6 +5901,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_i2" }
             );
         }
+
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
@@ -5852,6 +6020,9 @@ namespace StorageAndTrade_1_0.Довідники
             else
                 return false;
         }
+
+        /* синхронна функція для Read(UnigueID uid) */
+        public bool ReadSync(UnigueID uid) { return Task.Run<bool>(async () => { return await Read(uid); }).Result; }
         
         public async ValueTask<bool> Save()
         {
@@ -5903,6 +6074,9 @@ namespace StorageAndTrade_1_0.Довідники
                 await Файли_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] {  });
         }
+
+        /* синхронна функція для Delete() */
+        public void DeleteSync() { Task.Run(async () => { await Delete(); }); }
         
         public Файли_Pointer GetDirectoryPointer()
         {
@@ -5920,6 +6094,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_i5" }
             );
         }
+        
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
         public string Код { get; set; }
         public string Назва { get; set; }
@@ -5962,6 +6139,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_i5" }
             );
         }
+
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
@@ -6072,6 +6252,9 @@ namespace StorageAndTrade_1_0.Довідники
             else
                 return false;
         }
+
+        /* синхронна функція для Read(UnigueID uid) */
+        public bool ReadSync(UnigueID uid) { return Task.Run<bool>(async () => { return await Read(uid); }).Result; }
         
         public async ValueTask<bool> Save()
         {
@@ -6119,6 +6302,9 @@ namespace StorageAndTrade_1_0.Довідники
                 await ХарактеристикиНоменклатури_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] {  });
         }
+
+        /* синхронна функція для Delete() */
+        public void DeleteSync() { Task.Run(async () => { await Delete(); }); }
         
         public ХарактеристикиНоменклатури_Pointer GetDirectoryPointer()
         {
@@ -6136,6 +6322,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_i7" }
             );
         }
+        
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
         public string Назва { get; set; }
         public string Код { get; set; }
@@ -6176,6 +6365,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_i7" }
             );
         }
+
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
@@ -6283,6 +6475,9 @@ namespace StorageAndTrade_1_0.Довідники
             else
                 return false;
         }
+
+        /* синхронна функція для Read(UnigueID uid) */
+        public bool ReadSync(UnigueID uid) { return Task.Run<bool>(async () => { return await Read(uid); }).Result; }
         
         public async ValueTask<bool> Save()
         {
@@ -6328,6 +6523,9 @@ namespace StorageAndTrade_1_0.Довідники
                 await Номенклатура_Папки_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] {  });
         }
+
+        /* синхронна функція для Delete() */
+        public void DeleteSync() { Task.Run(async () => { await Delete(); }); }
         
         public Номенклатура_Папки_Pointer GetDirectoryPointer()
         {
@@ -6345,6 +6543,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_j1" }
             );
         }
+        
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
         public string Назва { get; set; }
         public string Код { get; set; }
@@ -6384,6 +6585,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_j1" }
             );
         }
+
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
@@ -6491,6 +6695,9 @@ namespace StorageAndTrade_1_0.Довідники
             else
                 return false;
         }
+
+        /* синхронна функція для Read(UnigueID uid) */
+        public bool ReadSync(UnigueID uid) { return Task.Run<bool>(async () => { return await Read(uid); }).Result; }
         
         public async ValueTask<bool> Save()
         {
@@ -6536,6 +6743,9 @@ namespace StorageAndTrade_1_0.Довідники
                 await Контрагенти_Папки_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] {  });
         }
+
+        /* синхронна функція для Delete() */
+        public void DeleteSync() { Task.Run(async () => { await Delete(); }); }
         
         public Контрагенти_Папки_Pointer GetDirectoryPointer()
         {
@@ -6553,6 +6763,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_j4" }
             );
         }
+        
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
         public string Назва { get; set; }
         public string Код { get; set; }
@@ -6592,6 +6805,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_j4" }
             );
         }
+
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
@@ -6699,6 +6915,9 @@ namespace StorageAndTrade_1_0.Довідники
             else
                 return false;
         }
+
+        /* синхронна функція для Read(UnigueID uid) */
+        public bool ReadSync(UnigueID uid) { return Task.Run<bool>(async () => { return await Read(uid); }).Result; }
         
         public async ValueTask<bool> Save()
         {
@@ -6744,6 +6963,9 @@ namespace StorageAndTrade_1_0.Довідники
                 await Склади_Папки_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] {  });
         }
+
+        /* синхронна функція для Delete() */
+        public void DeleteSync() { Task.Run(async () => { await Delete(); }); }
         
         public Склади_Папки_Pointer GetDirectoryPointer()
         {
@@ -6761,6 +6983,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_j7" }
             );
         }
+        
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
         public string Назва { get; set; }
         public string Код { get; set; }
@@ -6800,6 +7025,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_j7" }
             );
         }
+
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
@@ -6910,6 +7138,9 @@ namespace StorageAndTrade_1_0.Довідники
             else
                 return false;
         }
+
+        /* синхронна функція для Read(UnigueID uid) */
+        public bool ReadSync(UnigueID uid) { return Task.Run<bool>(async () => { return await Read(uid); }).Result; }
         
         public async ValueTask<bool> Save()
         {
@@ -6957,6 +7188,9 @@ namespace StorageAndTrade_1_0.Довідники
                 await Каси_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] {  });
         }
+
+        /* синхронна функція для Delete() */
+        public void DeleteSync() { Task.Run(async () => { await Delete(); }); }
         
         public Каси_Pointer GetDirectoryPointer()
         {
@@ -6974,6 +7208,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_k8" }
             );
         }
+        
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
         public string Назва { get; set; }
         public string Код { get; set; }
@@ -7014,6 +7251,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_k8" }
             );
         }
+
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
@@ -7151,6 +7391,9 @@ namespace StorageAndTrade_1_0.Довідники
             else
                 return false;
         }
+
+        /* синхронна функція для Read(UnigueID uid) */
+        public bool ReadSync(UnigueID uid) { return Task.Run<bool>(async () => { return await Read(uid); }).Result; }
         
         public async ValueTask<bool> Save()
         {
@@ -7216,6 +7459,9 @@ namespace StorageAndTrade_1_0.Довідники
                 await БанківськіРахункиОрганізацій_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] {  });
         }
+
+        /* синхронна функція для Delete() */
+        public void DeleteSync() { Task.Run(async () => { await Delete(); }); }
         
         public БанківськіРахункиОрганізацій_Pointer GetDirectoryPointer()
         {
@@ -7233,6 +7479,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_l1" }
             );
         }
+        
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
         public string Назва { get; set; }
         public string Код { get; set; }
@@ -7282,6 +7531,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_l1" }
             );
         }
+
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
@@ -7440,6 +7692,9 @@ namespace StorageAndTrade_1_0.Довідники
             else
                 return false;
         }
+
+        /* синхронна функція для Read(UnigueID uid) */
+        public bool ReadSync(UnigueID uid) { return Task.Run<bool>(async () => { return await Read(uid); }).Result; }
         
         public async ValueTask<bool> Save()
         {
@@ -7519,6 +7774,9 @@ namespace StorageAndTrade_1_0.Довідники
                 await ДоговориКонтрагентів_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] {  });
         }
+
+        /* синхронна функція для Delete() */
+        public void DeleteSync() { Task.Run(async () => { await Delete(); }); }
         
         public ДоговориКонтрагентів_Pointer GetDirectoryPointer()
         {
@@ -7536,6 +7794,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_n4", "col_b8" }
             );
         }
+        
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
         public string Назва { get; set; }
         public string Код { get; set; }
@@ -7592,6 +7853,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_n4", "col_b8" }
             );
         }
+
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
@@ -7735,6 +7999,9 @@ namespace StorageAndTrade_1_0.Довідники
             else
                 return false;
         }
+
+        /* синхронна функція для Read(UnigueID uid) */
+        public bool ReadSync(UnigueID uid) { return Task.Run<bool>(async () => { return await Read(uid); }).Result; }
         
         public async ValueTask<bool> Save()
         {
@@ -7804,6 +8071,9 @@ namespace StorageAndTrade_1_0.Довідники
                 await БанківськіРахункиКонтрагентів_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] {  });
         }
+
+        /* синхронна функція для Delete() */
+        public void DeleteSync() { Task.Run(async () => { await Delete(); }); }
         
         public БанківськіРахункиКонтрагентів_Pointer GetDirectoryPointer()
         {
@@ -7821,6 +8091,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_n7" }
             );
         }
+        
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
         public string Назва { get; set; }
         public string Код { get; set; }
@@ -7872,6 +8145,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_n7" }
             );
         }
+
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
@@ -7988,6 +8264,9 @@ namespace StorageAndTrade_1_0.Довідники
             else
                 return false;
         }
+
+        /* синхронна функція для Read(UnigueID uid) */
+        public bool ReadSync(UnigueID uid) { return Task.Run<bool>(async () => { return await Read(uid); }).Result; }
         
         public async ValueTask<bool> Save()
         {
@@ -8046,6 +8325,9 @@ namespace StorageAndTrade_1_0.Довідники
                 await СтаттяРухуКоштів_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] { "tab_a46" });
         }
+
+        /* синхронна функція для Delete() */
+        public void DeleteSync() { Task.Run(async () => { await Delete(); }); }
         
         public СтаттяРухуКоштів_Pointer GetDirectoryPointer()
         {
@@ -8063,6 +8345,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_i7" }
             );
         }
+        
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
         public string Назва { get; set; }
         public string Код { get; set; }
@@ -8107,6 +8392,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_i7" }
             );
         }
+
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
@@ -8292,6 +8580,9 @@ namespace StorageAndTrade_1_0.Довідники
             else
                 return false;
         }
+
+        /* синхронна функція для Read(UnigueID uid) */
+        public bool ReadSync(UnigueID uid) { return Task.Run<bool>(async () => { return await Read(uid); }).Result; }
         
         public async ValueTask<bool> Save()
         {
@@ -8337,6 +8628,9 @@ namespace StorageAndTrade_1_0.Довідники
                 await СеріїНоменклатури_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] {  });
         }
+
+        /* синхронна функція для Delete() */
+        public void DeleteSync() { Task.Run(async () => { await Delete(); }); }
         
         public СеріїНоменклатури_Pointer GetDirectoryPointer()
         {
@@ -8354,6 +8648,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_a3" }
             );
         }
+        
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
         public string Номер { get; set; }
         public string Коментар { get; set; }
@@ -8393,6 +8690,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_a3" }
             );
         }
+
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
@@ -8509,6 +8809,9 @@ namespace StorageAndTrade_1_0.Довідники
             else
                 return false;
         }
+
+        /* синхронна функція для Read(UnigueID uid) */
+        public bool ReadSync(UnigueID uid) { return Task.Run<bool>(async () => { return await Read(uid); }).Result; }
         
         public async ValueTask<bool> Save()
         {
@@ -8560,6 +8863,9 @@ namespace StorageAndTrade_1_0.Довідники
                 await ПартіяТоварівКомпозит_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] {  });
         }
+
+        /* синхронна функція для Delete() */
+        public void DeleteSync() { Task.Run(async () => { await Delete(); }); }
         
         public ПартіяТоварівКомпозит_Pointer GetDirectoryPointer()
         {
@@ -8577,6 +8883,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_a1" }
             );
         }
+        
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
         public string Назва { get; set; }
         public DateTime Дата { get; set; }
@@ -8619,6 +8928,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_a1" }
             );
         }
+
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
@@ -8738,6 +9050,9 @@ namespace StorageAndTrade_1_0.Довідники
             else
                 return false;
         }
+
+        /* синхронна функція для Read(UnigueID uid) */
+        public bool ReadSync(UnigueID uid) { return Task.Run<bool>(async () => { return await Read(uid); }).Result; }
         
         public async ValueTask<bool> Save()
         {
@@ -8791,6 +9106,9 @@ namespace StorageAndTrade_1_0.Довідники
                 await ВидиЗапасів_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] {  });
         }
+
+        /* синхронна функція для Delete() */
+        public void DeleteSync() { Task.Run(async () => { await Delete(); }); }
         
         public ВидиЗапасів_Pointer GetDirectoryPointer()
         {
@@ -8808,6 +9126,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_a5" }
             );
         }
+        
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
         public string Назва { get; set; }
         public Довідники.Організації_Pointer Організація { get; set; }
@@ -8851,6 +9172,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_a5" }
             );
         }
+
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
@@ -9033,6 +9357,9 @@ namespace StorageAndTrade_1_0.Довідники
             else
                 return false;
         }
+
+        /* синхронна функція для Read(UnigueID uid) */
+        public bool ReadSync(UnigueID uid) { return Task.Run<bool>(async () => { return await Read(uid); }).Result; }
         
         public async ValueTask<bool> Save()
         {
@@ -9128,6 +9455,9 @@ namespace StorageAndTrade_1_0.Довідники
                 await Банки_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] {  });
         }
+
+        /* синхронна функція для Delete() */
+        public void DeleteSync() { Task.Run(async () => { await Delete(); }); }
         
         public Банки_Pointer GetDirectoryPointer()
         {
@@ -9145,6 +9475,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_a2" }
             );
         }
+        
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
         public string Код { get; set; }
         public string Назва { get; set; }
@@ -9209,6 +9542,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_a2" }
             );
         }
+
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
@@ -9316,6 +9652,9 @@ namespace StorageAndTrade_1_0.Довідники
             else
                 return false;
         }
+
+        /* синхронна функція для Read(UnigueID uid) */
+        public bool ReadSync(UnigueID uid) { return Task.Run<bool>(async () => { return await Read(uid); }).Result; }
         
         public async ValueTask<bool> Save()
         {
@@ -9361,6 +9700,9 @@ namespace StorageAndTrade_1_0.Довідники
                 await СкладськіПриміщення_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] {  });
         }
+
+        /* синхронна функція для Delete() */
+        public void DeleteSync() { Task.Run(async () => { await Delete(); }); }
         
         public СкладськіПриміщення_Pointer GetDirectoryPointer()
         {
@@ -9378,6 +9720,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_a2" }
             );
         }
+        
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
         public string Назва { get; set; }
         public Перелічення.НалаштуванняАдресногоЗберігання НалаштуванняАдресногоЗберігання { get; set; }
@@ -9417,6 +9762,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_a2" }
             );
         }
+
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
@@ -9545,6 +9893,9 @@ namespace StorageAndTrade_1_0.Довідники
             else
                 return false;
         }
+
+        /* синхронна функція для Read(UnigueID uid) */
+        public bool ReadSync(UnigueID uid) { return Task.Run<bool>(async () => { return await Read(uid); }).Result; }
         
         public async ValueTask<bool> Save()
         {
@@ -9604,6 +9955,9 @@ namespace StorageAndTrade_1_0.Довідники
                 await СкладськіКомірки_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] {  });
         }
+
+        /* синхронна функція для Delete() */
+        public void DeleteSync() { Task.Run(async () => { await Delete(); }); }
         
         public СкладськіКомірки_Pointer GetDirectoryPointer()
         {
@@ -9621,6 +9975,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_a2" }
             );
         }
+        
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
         public Довідники.СкладськіКомірки_Папки_Pointer Папка { get; set; }
         public string Назва { get; set; }
@@ -9667,6 +10024,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_a2" }
             );
         }
+
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
@@ -9773,6 +10133,9 @@ namespace StorageAndTrade_1_0.Довідники
             else
                 return false;
         }
+
+        /* синхронна функція для Read(UnigueID uid) */
+        public bool ReadSync(UnigueID uid) { return Task.Run<bool>(async () => { return await Read(uid); }).Result; }
         
         public async ValueTask<bool> Save()
         {
@@ -9814,6 +10177,9 @@ namespace StorageAndTrade_1_0.Довідники
             
             await base.BaseDelete(new string[] {  });
         }
+
+        /* синхронна функція для Delete() */
+        public void DeleteSync() { Task.Run(async () => { await Delete(); }); }
         
         public ОбластьЗберігання_Pointer GetDirectoryPointer()
         {
@@ -9831,6 +10197,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_a2" }
             );
         }
+        
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
         public string Назва { get; set; }
         public string Опис { get; set; }
@@ -9870,6 +10239,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_a2" }
             );
         }
+
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
@@ -9984,6 +10356,9 @@ namespace StorageAndTrade_1_0.Довідники
             else
                 return false;
         }
+
+        /* синхронна функція для Read(UnigueID uid) */
+        public bool ReadSync(UnigueID uid) { return Task.Run<bool>(async () => { return await Read(uid); }).Result; }
         
         public async ValueTask<bool> Save()
         {
@@ -10035,6 +10410,9 @@ namespace StorageAndTrade_1_0.Довідники
                 await ТипорозміриКомірок_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] {  });
         }
+
+        /* синхронна функція для Delete() */
+        public void DeleteSync() { Task.Run(async () => { await Delete(); }); }
         
         public ТипорозміриКомірок_Pointer GetDirectoryPointer()
         {
@@ -10052,6 +10430,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_a2" }
             );
         }
+        
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
         public string Висота { get; set; }
         public string Назва { get; set; }
@@ -10094,6 +10475,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_a2" }
             );
         }
+
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
@@ -10204,6 +10588,9 @@ namespace StorageAndTrade_1_0.Довідники
             else
                 return false;
         }
+
+        /* синхронна функція для Read(UnigueID uid) */
+        public bool ReadSync(UnigueID uid) { return Task.Run<bool>(async () => { return await Read(uid); }).Result; }
         
         public async ValueTask<bool> Save()
         {
@@ -10251,6 +10638,9 @@ namespace StorageAndTrade_1_0.Довідники
                 await СкладськіКомірки_Папки_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] {  });
         }
+
+        /* синхронна функція для Delete() */
+        public void DeleteSync() { Task.Run(async () => { await Delete(); }); }
         
         public СкладськіКомірки_Папки_Pointer GetDirectoryPointer()
         {
@@ -10268,6 +10658,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_j1" }
             );
         }
+        
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
         public string Назва { get; set; }
         public string Код { get; set; }
@@ -10308,6 +10701,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_j1" }
             );
         }
+
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
@@ -10421,6 +10817,9 @@ namespace StorageAndTrade_1_0.Довідники
             else
                 return false;
         }
+
+        /* синхронна функція для Read(UnigueID uid) */
+        public bool ReadSync(UnigueID uid) { return Task.Run<bool>(async () => { return await Read(uid); }).Result; }
         
         public async ValueTask<bool> Save()
         {
@@ -10470,6 +10869,9 @@ namespace StorageAndTrade_1_0.Довідники
                 await Блокнот_Triggers.BeforeDelete(this);
             await base.BaseDelete(new string[] {  });
         }
+
+        /* синхронна функція для Delete() */
+        public void DeleteSync() { Task.Run(async () => { await Delete(); }); }
         
         public Блокнот_Pointer GetDirectoryPointer()
         {
@@ -10487,6 +10889,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_a2" }
             );
         }
+        
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
         public string Код { get; set; }
         public string Назва { get; set; }
@@ -10528,6 +10933,9 @@ namespace StorageAndTrade_1_0.Довідники
                 new string[] { "col_a2" }
             );
         }
+
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
@@ -12416,6 +12824,9 @@ namespace StorageAndTrade_1_0.Документи
             else
                 return false;
         }
+
+        /* синхронна функція для Read(UnigueID uid) */
+        public bool ReadSync(UnigueID uid) { return Task.Run<bool>(async () => { return await Read(uid); }).Result; }
         
         public async Task<bool> Save()
         {
@@ -12466,12 +12877,18 @@ namespace StorageAndTrade_1_0.Документи
                 return rezult;
         }
 
+        /* синхронна функція для SpendTheDocument() */
+        public bool SpendTheDocumentSync(DateTime spendDate) { return Task.Run<bool>(async () => { return await SpendTheDocument(spendDate); }).Result; }
+
         public async ValueTask ClearSpendTheDocument()
         {
             
                 await ЗамовленняПостачальнику_SpendTheDocument.ClearSpend(this);
             await BaseSpend(false, DateTime.MinValue);
         }
+
+        /* синхронна функція для ClearSpendTheDocument() */
+        public void ClearSpendTheDocumentSync() { Task.Run(async () => { await ClearSpendTheDocument(); }); }
 
         public async ValueTask<ЗамовленняПостачальнику_Objest> Copy(bool copyTableParts = false)
         {
@@ -12534,6 +12951,9 @@ namespace StorageAndTrade_1_0.Документи
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_a30" });
         }
+
+        /* синхронна функція для Delete() */
+        public void DeleteSync() { Task.Run(async () => { await Delete(); }); }
         
         public ЗамовленняПостачальнику_Pointer GetDocumentPointer()
         {
@@ -12598,6 +13018,9 @@ namespace StorageAndTrade_1_0.Документи
               new string[] { "docname" }
             );
         }
+
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
@@ -13312,6 +13735,9 @@ namespace StorageAndTrade_1_0.Документи
             else
                 return false;
         }
+
+        /* синхронна функція для Read(UnigueID uid) */
+        public bool ReadSync(UnigueID uid) { return Task.Run<bool>(async () => { return await Read(uid); }).Result; }
         
         public async Task<bool> Save()
         {
@@ -13368,12 +13794,18 @@ namespace StorageAndTrade_1_0.Документи
                 return rezult;
         }
 
+        /* синхронна функція для SpendTheDocument() */
+        public bool SpendTheDocumentSync(DateTime spendDate) { return Task.Run<bool>(async () => { return await SpendTheDocument(spendDate); }).Result; }
+
         public async ValueTask ClearSpendTheDocument()
         {
             
                 await ПоступленняТоварівТаПослуг_SpendTheDocument.ClearSpend(this);
             await BaseSpend(false, DateTime.MinValue);
         }
+
+        /* синхронна функція для ClearSpendTheDocument() */
+        public void ClearSpendTheDocumentSync() { Task.Run(async () => { await ClearSpendTheDocument(); }); }
 
         public async ValueTask<ПоступленняТоварівТаПослуг_Objest> Copy(bool copyTableParts = false)
         {
@@ -13442,6 +13874,9 @@ namespace StorageAndTrade_1_0.Документи
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_a33" });
         }
+
+        /* синхронна функція для Delete() */
+        public void DeleteSync() { Task.Run(async () => { await Delete(); }); }
         
         public ПоступленняТоварівТаПослуг_Pointer GetDocumentPointer()
         {
@@ -13512,6 +13947,9 @@ namespace StorageAndTrade_1_0.Документи
               new string[] { "docname" }
             );
         }
+
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
@@ -14181,6 +14619,9 @@ namespace StorageAndTrade_1_0.Документи
             else
                 return false;
         }
+
+        /* синхронна функція для Read(UnigueID uid) */
+        public bool ReadSync(UnigueID uid) { return Task.Run<bool>(async () => { return await Read(uid); }).Result; }
         
         public async Task<bool> Save()
         {
@@ -14234,12 +14675,18 @@ namespace StorageAndTrade_1_0.Документи
                 return rezult;
         }
 
+        /* синхронна функція для SpendTheDocument() */
+        public bool SpendTheDocumentSync(DateTime spendDate) { return Task.Run<bool>(async () => { return await SpendTheDocument(spendDate); }).Result; }
+
         public async ValueTask ClearSpendTheDocument()
         {
             
                 await ЗамовленняКлієнта_SpendTheDocument.ClearSpend(this);
             await BaseSpend(false, DateTime.MinValue);
         }
+
+        /* синхронна функція для ClearSpendTheDocument() */
+        public void ClearSpendTheDocumentSync() { Task.Run(async () => { await ClearSpendTheDocument(); }); }
 
         public async ValueTask<ЗамовленняКлієнта_Objest> Copy(bool copyTableParts = false)
         {
@@ -14305,6 +14752,9 @@ namespace StorageAndTrade_1_0.Документи
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_a35" });
         }
+
+        /* синхронна функція для Delete() */
+        public void DeleteSync() { Task.Run(async () => { await Delete(); }); }
         
         public ЗамовленняКлієнта_Pointer GetDocumentPointer()
         {
@@ -14372,6 +14822,9 @@ namespace StorageAndTrade_1_0.Документи
               new string[] { "docname" }
             );
         }
+
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
@@ -15081,6 +15534,9 @@ namespace StorageAndTrade_1_0.Документи
             else
                 return false;
         }
+
+        /* синхронна функція для Read(UnigueID uid) */
+        public bool ReadSync(UnigueID uid) { return Task.Run<bool>(async () => { return await Read(uid); }).Result; }
         
         public async Task<bool> Save()
         {
@@ -15136,12 +15592,18 @@ namespace StorageAndTrade_1_0.Документи
                 return rezult;
         }
 
+        /* синхронна функція для SpendTheDocument() */
+        public bool SpendTheDocumentSync(DateTime spendDate) { return Task.Run<bool>(async () => { return await SpendTheDocument(spendDate); }).Result; }
+
         public async ValueTask ClearSpendTheDocument()
         {
             
                 await РеалізаціяТоварівТаПослуг_SpendTheDocument.ClearSpend(this);
             await BaseSpend(false, DateTime.MinValue);
         }
+
+        /* синхронна функція для ClearSpendTheDocument() */
+        public void ClearSpendTheDocumentSync() { Task.Run(async () => { await ClearSpendTheDocument(); }); }
 
         public async ValueTask<РеалізаціяТоварівТаПослуг_Objest> Copy(bool copyTableParts = false)
         {
@@ -15209,6 +15671,9 @@ namespace StorageAndTrade_1_0.Документи
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_a37" });
         }
+
+        /* синхронна функція для Delete() */
+        public void DeleteSync() { Task.Run(async () => { await Delete(); }); }
         
         public РеалізаціяТоварівТаПослуг_Pointer GetDocumentPointer()
         {
@@ -15278,6 +15743,9 @@ namespace StorageAndTrade_1_0.Документи
               new string[] { "docname" }
             );
         }
+
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
@@ -15708,6 +16176,9 @@ namespace StorageAndTrade_1_0.Документи
             else
                 return false;
         }
+
+        /* синхронна функція для Read(UnigueID uid) */
+        public bool ReadSync(UnigueID uid) { return Task.Run<bool>(async () => { return await Read(uid); }).Result; }
         
         public async Task<bool> Save()
         {
@@ -15740,12 +16211,18 @@ namespace StorageAndTrade_1_0.Документи
                 return rezult;
         }
 
+        /* синхронна функція для SpendTheDocument() */
+        public bool SpendTheDocumentSync(DateTime spendDate) { return Task.Run<bool>(async () => { return await SpendTheDocument(spendDate); }).Result; }
+
         public async ValueTask ClearSpendTheDocument()
         {
             
                 await ВстановленняЦінНоменклатури_SpendTheDocument.ClearSpend(this);
             await BaseSpend(false, DateTime.MinValue);
         }
+
+        /* синхронна функція для ClearSpendTheDocument() */
+        public void ClearSpendTheDocumentSync() { Task.Run(async () => { await ClearSpendTheDocument(); }); }
 
         public async ValueTask<ВстановленняЦінНоменклатури_Objest> Copy(bool copyTableParts = false)
         {
@@ -15790,6 +16267,9 @@ namespace StorageAndTrade_1_0.Документи
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_a43" });
         }
+
+        /* синхронна функція для Delete() */
+        public void DeleteSync() { Task.Run(async () => { await Delete(); }); }
         
         public ВстановленняЦінНоменклатури_Pointer GetDocumentPointer()
         {
@@ -15836,6 +16316,9 @@ namespace StorageAndTrade_1_0.Документи
               new string[] { "docname" }
             );
         }
+
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
@@ -16321,6 +16804,9 @@ namespace StorageAndTrade_1_0.Документи
             else
                 return false;
         }
+
+        /* синхронна функція для Read(UnigueID uid) */
+        public bool ReadSync(UnigueID uid) { return Task.Run<bool>(async () => { return await Read(uid); }).Result; }
         
         public async Task<bool> Save()
         {
@@ -16362,12 +16848,18 @@ namespace StorageAndTrade_1_0.Документи
                 return rezult;
         }
 
+        /* синхронна функція для SpendTheDocument() */
+        public bool SpendTheDocumentSync(DateTime spendDate) { return Task.Run<bool>(async () => { return await SpendTheDocument(spendDate); }).Result; }
+
         public async ValueTask ClearSpendTheDocument()
         {
             
                 await ПрихіднийКасовийОрдер_SpendTheDocument.ClearSpend(this);
             await BaseSpend(false, DateTime.MinValue);
         }
+
+        /* синхронна функція для ClearSpendTheDocument() */
+        public void ClearSpendTheDocumentSync() { Task.Run(async () => { await ClearSpendTheDocument(); }); }
 
         public async ValueTask<ПрихіднийКасовийОрдер_Objest> Copy(bool copyTableParts = false)
         {
@@ -16421,6 +16913,9 @@ namespace StorageAndTrade_1_0.Документи
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_a47" });
         }
+
+        /* синхронна функція для Delete() */
+        public void DeleteSync() { Task.Run(async () => { await Delete(); }); }
         
         public ПрихіднийКасовийОрдер_Pointer GetDocumentPointer()
         {
@@ -16476,6 +16971,9 @@ namespace StorageAndTrade_1_0.Документи
               new string[] { "docname" }
             );
         }
+
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
@@ -16987,6 +17485,9 @@ namespace StorageAndTrade_1_0.Документи
             else
                 return false;
         }
+
+        /* синхронна функція для Read(UnigueID uid) */
+        public bool ReadSync(UnigueID uid) { return Task.Run<bool>(async () => { return await Read(uid); }).Result; }
         
         public async Task<bool> Save()
         {
@@ -17030,12 +17531,18 @@ namespace StorageAndTrade_1_0.Документи
                 return rezult;
         }
 
+        /* синхронна функція для SpendTheDocument() */
+        public bool SpendTheDocumentSync(DateTime spendDate) { return Task.Run<bool>(async () => { return await SpendTheDocument(spendDate); }).Result; }
+
         public async ValueTask ClearSpendTheDocument()
         {
             
                 await РозхіднийКасовийОрдер_SpendTheDocument.ClearSpend(this);
             await BaseSpend(false, DateTime.MinValue);
         }
+
+        /* синхронна функція для ClearSpendTheDocument() */
+        public void ClearSpendTheDocumentSync() { Task.Run(async () => { await ClearSpendTheDocument(); }); }
 
         public async ValueTask<РозхіднийКасовийОрдер_Objest> Copy(bool copyTableParts = false)
         {
@@ -17091,6 +17598,9 @@ namespace StorageAndTrade_1_0.Документи
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_a49" });
         }
+
+        /* синхронна функція для Delete() */
+        public void DeleteSync() { Task.Run(async () => { await Delete(); }); }
         
         public РозхіднийКасовийОрдер_Pointer GetDocumentPointer()
         {
@@ -17148,6 +17658,9 @@ namespace StorageAndTrade_1_0.Документи
               new string[] { "docname" }
             );
         }
+
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
@@ -17684,6 +18197,9 @@ namespace StorageAndTrade_1_0.Документи
             else
                 return false;
         }
+
+        /* синхронна функція для Read(UnigueID uid) */
+        public bool ReadSync(UnigueID uid) { return Task.Run<bool>(async () => { return await Read(uid); }).Result; }
         
         public async Task<bool> Save()
         {
@@ -17728,12 +18244,18 @@ namespace StorageAndTrade_1_0.Документи
                 return rezult;
         }
 
+        /* синхронна функція для SpendTheDocument() */
+        public bool SpendTheDocumentSync(DateTime spendDate) { return Task.Run<bool>(async () => { return await SpendTheDocument(spendDate); }).Result; }
+
         public async ValueTask ClearSpendTheDocument()
         {
             
                 await ПереміщенняТоварів_SpendTheDocument.ClearSpend(this);
             await BaseSpend(false, DateTime.MinValue);
         }
+
+        /* синхронна функція для ClearSpendTheDocument() */
+        public void ClearSpendTheDocumentSync() { Task.Run(async () => { await ClearSpendTheDocument(); }); }
 
         public async ValueTask<ПереміщенняТоварів_Objest> Copy(bool copyTableParts = false)
         {
@@ -17790,6 +18312,9 @@ namespace StorageAndTrade_1_0.Документи
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_a50" });
         }
+
+        /* синхронна функція для Delete() */
+        public void DeleteSync() { Task.Run(async () => { await Delete(); }); }
         
         public ПереміщенняТоварів_Pointer GetDocumentPointer()
         {
@@ -17848,6 +18373,9 @@ namespace StorageAndTrade_1_0.Документи
               new string[] { "docname" }
             );
         }
+
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
@@ -18420,6 +18948,9 @@ namespace StorageAndTrade_1_0.Документи
             else
                 return false;
         }
+
+        /* синхронна функція для Read(UnigueID uid) */
+        public bool ReadSync(UnigueID uid) { return Task.Run<bool>(async () => { return await Read(uid); }).Result; }
         
         public async Task<bool> Save()
         {
@@ -18466,12 +18997,18 @@ namespace StorageAndTrade_1_0.Документи
                 return rezult;
         }
 
+        /* синхронна функція для SpendTheDocument() */
+        public bool SpendTheDocumentSync(DateTime spendDate) { return Task.Run<bool>(async () => { return await SpendTheDocument(spendDate); }).Result; }
+
         public async ValueTask ClearSpendTheDocument()
         {
             
                 await ПоверненняТоварівПостачальнику_SpendTheDocument.ClearSpend(this);
             await BaseSpend(false, DateTime.MinValue);
         }
+
+        /* синхронна функція для ClearSpendTheDocument() */
+        public void ClearSpendTheDocumentSync() { Task.Run(async () => { await ClearSpendTheDocument(); }); }
 
         public async ValueTask<ПоверненняТоварівПостачальнику_Objest> Copy(bool copyTableParts = false)
         {
@@ -18530,6 +19067,9 @@ namespace StorageAndTrade_1_0.Документи
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_a52" });
         }
+
+        /* синхронна функція для Delete() */
+        public void DeleteSync() { Task.Run(async () => { await Delete(); }); }
         
         public ПоверненняТоварівПостачальнику_Pointer GetDocumentPointer()
         {
@@ -18590,6 +19130,9 @@ namespace StorageAndTrade_1_0.Документи
               new string[] { "docname" }
             );
         }
+
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
@@ -19136,6 +19679,9 @@ namespace StorageAndTrade_1_0.Документи
             else
                 return false;
         }
+
+        /* синхронна функція для Read(UnigueID uid) */
+        public bool ReadSync(UnigueID uid) { return Task.Run<bool>(async () => { return await Read(uid); }).Result; }
         
         public async Task<bool> Save()
         {
@@ -19178,12 +19724,18 @@ namespace StorageAndTrade_1_0.Документи
                 return rezult;
         }
 
+        /* синхронна функція для SpendTheDocument() */
+        public bool SpendTheDocumentSync(DateTime spendDate) { return Task.Run<bool>(async () => { return await SpendTheDocument(spendDate); }).Result; }
+
         public async ValueTask ClearSpendTheDocument()
         {
             
                 await ПоверненняТоварівВідКлієнта_SpendTheDocument.ClearSpend(this);
             await BaseSpend(false, DateTime.MinValue);
         }
+
+        /* синхронна функція для ClearSpendTheDocument() */
+        public void ClearSpendTheDocumentSync() { Task.Run(async () => { await ClearSpendTheDocument(); }); }
 
         public async ValueTask<ПоверненняТоварівВідКлієнта_Objest> Copy(bool copyTableParts = false)
         {
@@ -19238,6 +19790,9 @@ namespace StorageAndTrade_1_0.Документи
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_a54" });
         }
+
+        /* синхронна функція для Delete() */
+        public void DeleteSync() { Task.Run(async () => { await Delete(); }); }
         
         public ПоверненняТоварівВідКлієнта_Pointer GetDocumentPointer()
         {
@@ -19294,6 +19849,9 @@ namespace StorageAndTrade_1_0.Документи
               new string[] { "docname" }
             );
         }
+
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
@@ -19790,6 +20348,9 @@ namespace StorageAndTrade_1_0.Документи
             else
                 return false;
         }
+
+        /* синхронна функція для Read(UnigueID uid) */
+        public bool ReadSync(UnigueID uid) { return Task.Run<bool>(async () => { return await Read(uid); }).Result; }
         
         public async Task<bool> Save()
         {
@@ -19830,12 +20391,18 @@ namespace StorageAndTrade_1_0.Документи
                 return rezult;
         }
 
+        /* синхронна функція для SpendTheDocument() */
+        public bool SpendTheDocumentSync(DateTime spendDate) { return Task.Run<bool>(async () => { return await SpendTheDocument(spendDate); }).Result; }
+
         public async ValueTask ClearSpendTheDocument()
         {
             
                 await АктВиконанихРобіт_SpendTheDocument.ClearSpend(this);
             await BaseSpend(false, DateTime.MinValue);
         }
+
+        /* синхронна функція для ClearSpendTheDocument() */
+        public void ClearSpendTheDocumentSync() { Task.Run(async () => { await ClearSpendTheDocument(); }); }
 
         public async ValueTask<АктВиконанихРобіт_Objest> Copy(bool copyTableParts = false)
         {
@@ -19888,6 +20455,9 @@ namespace StorageAndTrade_1_0.Документи
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_a82" });
         }
+
+        /* синхронна функція для Delete() */
+        public void DeleteSync() { Task.Run(async () => { await Delete(); }); }
         
         public АктВиконанихРобіт_Pointer GetDocumentPointer()
         {
@@ -19942,6 +20512,9 @@ namespace StorageAndTrade_1_0.Документи
               new string[] { "docname" }
             );
         }
+
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
@@ -20516,6 +21089,9 @@ namespace StorageAndTrade_1_0.Документи
             else
                 return false;
         }
+
+        /* синхронна функція для Read(UnigueID uid) */
+        public bool ReadSync(UnigueID uid) { return Task.Run<bool>(async () => { return await Read(uid); }).Result; }
         
         public async Task<bool> Save()
         {
@@ -20552,12 +21128,18 @@ namespace StorageAndTrade_1_0.Документи
                 return rezult;
         }
 
+        /* синхронна функція для SpendTheDocument() */
+        public bool SpendTheDocumentSync(DateTime spendDate) { return Task.Run<bool>(async () => { return await SpendTheDocument(spendDate); }).Result; }
+
         public async ValueTask ClearSpendTheDocument()
         {
             
                 await ВведенняЗалишків_SpendTheDocument.ClearSpend(this);
             await BaseSpend(false, DateTime.MinValue);
         }
+
+        /* синхронна функція для ClearSpendTheDocument() */
+        public void ClearSpendTheDocumentSync() { Task.Run(async () => { await ClearSpendTheDocument(); }); }
 
         public async ValueTask<ВведенняЗалишків_Objest> Copy(bool copyTableParts = false)
         {
@@ -20618,6 +21200,9 @@ namespace StorageAndTrade_1_0.Документи
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_a84", "tab_a85", "tab_a86", "tab_a87" });
         }
+
+        /* синхронна функція для Delete() */
+        public void DeleteSync() { Task.Run(async () => { await Delete(); }); }
         
         public ВведенняЗалишків_Pointer GetDocumentPointer()
         {
@@ -20671,6 +21256,9 @@ namespace StorageAndTrade_1_0.Документи
               new string[] { "docname" }
             );
         }
+
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
@@ -21346,6 +21934,9 @@ namespace StorageAndTrade_1_0.Документи
             else
                 return false;
         }
+
+        /* синхронна функція для Read(UnigueID uid) */
+        public bool ReadSync(UnigueID uid) { return Task.Run<bool>(async () => { return await Read(uid); }).Result; }
         
         public async Task<bool> Save()
         {
@@ -21377,10 +21968,16 @@ namespace StorageAndTrade_1_0.Документи
                 return false;
         }
 
+        /* синхронна функція для SpendTheDocument() */
+        public bool SpendTheDocumentSync(DateTime spendDate) { return Task.Run<bool>(async () => { return await SpendTheDocument(spendDate); }).Result; }
+
         public async ValueTask ClearSpendTheDocument()
         {
             await BaseSpend(false, DateTime.MinValue);
         }
+
+        /* синхронна функція для ClearSpendTheDocument() */
+        public void ClearSpendTheDocumentSync() { Task.Run(async () => { await ClearSpendTheDocument(); }); }
 
         public async ValueTask<НадлишкиТоварів_Objest> Copy(bool copyTableParts = false)
         {
@@ -21425,6 +22022,9 @@ namespace StorageAndTrade_1_0.Документи
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_a89" });
         }
+
+        /* синхронна функція для Delete() */
+        public void DeleteSync() { Task.Run(async () => { await Delete(); }); }
         
         public НадлишкиТоварів_Pointer GetDocumentPointer()
         {
@@ -21472,6 +22072,9 @@ namespace StorageAndTrade_1_0.Документи
               new string[] { "docname" }
             );
         }
+
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
@@ -21853,6 +22456,9 @@ namespace StorageAndTrade_1_0.Документи
             else
                 return false;
         }
+
+        /* синхронна функція для Read(UnigueID uid) */
+        public bool ReadSync(UnigueID uid) { return Task.Run<bool>(async () => { return await Read(uid); }).Result; }
         
         public async Task<bool> Save()
         {
@@ -21884,10 +22490,16 @@ namespace StorageAndTrade_1_0.Документи
                 return false;
         }
 
+        /* синхронна функція для SpendTheDocument() */
+        public bool SpendTheDocumentSync(DateTime spendDate) { return Task.Run<bool>(async () => { return await SpendTheDocument(spendDate); }).Result; }
+
         public async ValueTask ClearSpendTheDocument()
         {
             await BaseSpend(false, DateTime.MinValue);
         }
+
+        /* синхронна функція для ClearSpendTheDocument() */
+        public void ClearSpendTheDocumentSync() { Task.Run(async () => { await ClearSpendTheDocument(); }); }
 
         public async ValueTask<ПересортицяТоварів_Objest> Copy(bool copyTableParts = false)
         {
@@ -21932,6 +22544,9 @@ namespace StorageAndTrade_1_0.Документи
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_a91" });
         }
+
+        /* синхронна функція для Delete() */
+        public void DeleteSync() { Task.Run(async () => { await Delete(); }); }
         
         public ПересортицяТоварів_Pointer GetDocumentPointer()
         {
@@ -21979,6 +22594,9 @@ namespace StorageAndTrade_1_0.Документи
               new string[] { "docname" }
             );
         }
+
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
@@ -22352,6 +22970,9 @@ namespace StorageAndTrade_1_0.Документи
             else
                 return false;
         }
+
+        /* синхронна функція для Read(UnigueID uid) */
+        public bool ReadSync(UnigueID uid) { return Task.Run<bool>(async () => { return await Read(uid); }).Result; }
         
         public async Task<bool> Save()
         {
@@ -22381,10 +23002,16 @@ namespace StorageAndTrade_1_0.Документи
                 return false;
         }
 
+        /* синхронна функція для SpendTheDocument() */
+        public bool SpendTheDocumentSync(DateTime spendDate) { return Task.Run<bool>(async () => { return await SpendTheDocument(spendDate); }).Result; }
+
         public async ValueTask ClearSpendTheDocument()
         {
             await BaseSpend(false, DateTime.MinValue);
         }
+
+        /* синхронна функція для ClearSpendTheDocument() */
+        public void ClearSpendTheDocumentSync() { Task.Run(async () => { await ClearSpendTheDocument(); }); }
 
         public async ValueTask<ПерерахунокТоварів_Objest> Copy(bool copyTableParts = false)
         {
@@ -22427,6 +23054,9 @@ namespace StorageAndTrade_1_0.Документи
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_a93" });
         }
+
+        /* синхронна функція для Delete() */
+        public void DeleteSync() { Task.Run(async () => { await Delete(); }); }
         
         public ПерерахунокТоварів_Pointer GetDocumentPointer()
         {
@@ -22472,6 +23102,9 @@ namespace StorageAndTrade_1_0.Документи
               new string[] { "docname" }
             );
         }
+
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
@@ -22914,6 +23547,9 @@ namespace StorageAndTrade_1_0.Документи
             else
                 return false;
         }
+
+        /* синхронна функція для Read(UnigueID uid) */
+        public bool ReadSync(UnigueID uid) { return Task.Run<bool>(async () => { return await Read(uid); }).Result; }
         
         public async Task<bool> Save()
         {
@@ -22949,12 +23585,18 @@ namespace StorageAndTrade_1_0.Документи
                 return rezult;
         }
 
+        /* синхронна функція для SpendTheDocument() */
+        public bool SpendTheDocumentSync(DateTime spendDate) { return Task.Run<bool>(async () => { return await SpendTheDocument(spendDate); }).Result; }
+
         public async ValueTask ClearSpendTheDocument()
         {
             
                 await ПсуванняТоварів_SpendTheDocument.ClearSpend(this);
             await BaseSpend(false, DateTime.MinValue);
         }
+
+        /* синхронна функція для ClearSpendTheDocument() */
+        public void ClearSpendTheDocumentSync() { Task.Run(async () => { await ClearSpendTheDocument(); }); }
 
         public async ValueTask<ПсуванняТоварів_Objest> Copy(bool copyTableParts = false)
         {
@@ -23002,6 +23644,9 @@ namespace StorageAndTrade_1_0.Документи
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_a95" });
         }
+
+        /* синхронна функція для Delete() */
+        public void DeleteSync() { Task.Run(async () => { await Delete(); }); }
         
         public ПсуванняТоварів_Pointer GetDocumentPointer()
         {
@@ -23051,6 +23696,9 @@ namespace StorageAndTrade_1_0.Документи
               new string[] { "docname" }
             );
         }
+
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
@@ -23527,6 +24175,9 @@ namespace StorageAndTrade_1_0.Документи
             else
                 return false;
         }
+
+        /* синхронна функція для Read(UnigueID uid) */
+        public bool ReadSync(UnigueID uid) { return Task.Run<bool>(async () => { return await Read(uid); }).Result; }
         
         public async Task<bool> Save()
         {
@@ -23563,12 +24214,18 @@ namespace StorageAndTrade_1_0.Документи
                 return rezult;
         }
 
+        /* синхронна функція для SpendTheDocument() */
+        public bool SpendTheDocumentSync(DateTime spendDate) { return Task.Run<bool>(async () => { return await SpendTheDocument(spendDate); }).Result; }
+
         public async ValueTask ClearSpendTheDocument()
         {
             
                 await ВнутрішнєСпоживанняТоварів_SpendTheDocument.ClearSpend(this);
             await BaseSpend(false, DateTime.MinValue);
         }
+
+        /* синхронна функція для ClearSpendTheDocument() */
+        public void ClearSpendTheDocumentSync() { Task.Run(async () => { await ClearSpendTheDocument(); }); }
 
         public async ValueTask<ВнутрішнєСпоживанняТоварів_Objest> Copy(bool copyTableParts = false)
         {
@@ -23617,6 +24274,9 @@ namespace StorageAndTrade_1_0.Документи
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_b08" });
         }
+
+        /* синхронна функція для Delete() */
+        public void DeleteSync() { Task.Run(async () => { await Delete(); }); }
         
         public ВнутрішнєСпоживанняТоварів_Pointer GetDocumentPointer()
         {
@@ -23667,6 +24327,9 @@ namespace StorageAndTrade_1_0.Документи
               new string[] { "docname" }
             );
         }
+
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
@@ -24228,6 +24891,9 @@ namespace StorageAndTrade_1_0.Документи
             else
                 return false;
         }
+
+        /* синхронна функція для Read(UnigueID uid) */
+        public bool ReadSync(UnigueID uid) { return Task.Run<bool>(async () => { return await Read(uid); }).Result; }
         
         public async Task<bool> Save()
         {
@@ -24271,12 +24937,18 @@ namespace StorageAndTrade_1_0.Документи
                 return rezult;
         }
 
+        /* синхронна функція для SpendTheDocument() */
+        public bool SpendTheDocumentSync(DateTime spendDate) { return Task.Run<bool>(async () => { return await SpendTheDocument(spendDate); }).Result; }
+
         public async ValueTask ClearSpendTheDocument()
         {
             
                 await РахунокФактура_SpendTheDocument.ClearSpend(this);
             await BaseSpend(false, DateTime.MinValue);
         }
+
+        /* синхронна функція для ClearSpendTheDocument() */
+        public void ClearSpendTheDocumentSync() { Task.Run(async () => { await ClearSpendTheDocument(); }); }
 
         public async ValueTask<РахунокФактура_Objest> Copy(bool copyTableParts = false)
         {
@@ -24332,6 +25004,9 @@ namespace StorageAndTrade_1_0.Документи
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_b11" });
         }
+
+        /* синхронна функція для Delete() */
+        public void DeleteSync() { Task.Run(async () => { await Delete(); }); }
         
         public РахунокФактура_Pointer GetDocumentPointer()
         {
@@ -24389,6 +25064,9 @@ namespace StorageAndTrade_1_0.Документи
               new string[] { "docname" }
             );
         }
+
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
@@ -24837,6 +25515,9 @@ namespace StorageAndTrade_1_0.Документи
             else
                 return false;
         }
+
+        /* синхронна функція для Read(UnigueID uid) */
+        public bool ReadSync(UnigueID uid) { return Task.Run<bool>(async () => { return await Read(uid); }).Result; }
         
         public async Task<bool> Save()
         {
@@ -24871,12 +25552,18 @@ namespace StorageAndTrade_1_0.Документи
                 return rezult;
         }
 
+        /* синхронна функція для SpendTheDocument() */
+        public bool SpendTheDocumentSync(DateTime spendDate) { return Task.Run<bool>(async () => { return await SpendTheDocument(spendDate); }).Result; }
+
         public async ValueTask ClearSpendTheDocument()
         {
             
                 await РозміщенняТоварівНаСкладі_SpendTheDocument.ClearSpend(this);
             await BaseSpend(false, DateTime.MinValue);
         }
+
+        /* синхронна функція для ClearSpendTheDocument() */
+        public void ClearSpendTheDocumentSync() { Task.Run(async () => { await ClearSpendTheDocument(); }); }
 
         public async ValueTask<РозміщенняТоварівНаСкладі_Objest> Copy(bool copyTableParts = false)
         {
@@ -24923,6 +25610,9 @@ namespace StorageAndTrade_1_0.Документи
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_a68" });
         }
+
+        /* синхронна функція для Delete() */
+        public void DeleteSync() { Task.Run(async () => { await Delete(); }); }
         
         public РозміщенняТоварівНаСкладі_Pointer GetDocumentPointer()
         {
@@ -24971,6 +25661,9 @@ namespace StorageAndTrade_1_0.Документи
               new string[] { "docname" }
             );
         }
+
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
@@ -25404,6 +26097,9 @@ namespace StorageAndTrade_1_0.Документи
             else
                 return false;
         }
+
+        /* синхронна функція для Read(UnigueID uid) */
+        public bool ReadSync(UnigueID uid) { return Task.Run<bool>(async () => { return await Read(uid); }).Result; }
         
         public async Task<bool> Save()
         {
@@ -25437,12 +26133,18 @@ namespace StorageAndTrade_1_0.Документи
                 return rezult;
         }
 
+        /* синхронна функція для SpendTheDocument() */
+        public bool SpendTheDocumentSync(DateTime spendDate) { return Task.Run<bool>(async () => { return await SpendTheDocument(spendDate); }).Result; }
+
         public async ValueTask ClearSpendTheDocument()
         {
             
                 await ПереміщенняТоварівНаСкладі_SpendTheDocument.ClearSpend(this);
             await BaseSpend(false, DateTime.MinValue);
         }
+
+        /* синхронна функція для ClearSpendTheDocument() */
+        public void ClearSpendTheDocumentSync() { Task.Run(async () => { await ClearSpendTheDocument(); }); }
 
         public async ValueTask<ПереміщенняТоварівНаСкладі_Objest> Copy(bool copyTableParts = false)
         {
@@ -25488,6 +26190,9 @@ namespace StorageAndTrade_1_0.Документи
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_b26" });
         }
+
+        /* синхронна функція для Delete() */
+        public void DeleteSync() { Task.Run(async () => { await Delete(); }); }
         
         public ПереміщенняТоварівНаСкладі_Pointer GetDocumentPointer()
         {
@@ -25535,6 +26240,9 @@ namespace StorageAndTrade_1_0.Документи
               new string[] { "docname" }
             );
         }
+
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
@@ -25975,6 +26683,9 @@ namespace StorageAndTrade_1_0.Документи
             else
                 return false;
         }
+
+        /* синхронна функція для Read(UnigueID uid) */
+        public bool ReadSync(UnigueID uid) { return Task.Run<bool>(async () => { return await Read(uid); }).Result; }
         
         public async Task<bool> Save()
         {
@@ -26009,12 +26720,18 @@ namespace StorageAndTrade_1_0.Документи
                 return rezult;
         }
 
+        /* синхронна функція для SpendTheDocument() */
+        public bool SpendTheDocumentSync(DateTime spendDate) { return Task.Run<bool>(async () => { return await SpendTheDocument(spendDate); }).Result; }
+
         public async ValueTask ClearSpendTheDocument()
         {
             
                 await ЗбіркаТоварівНаСкладі_SpendTheDocument.ClearSpend(this);
             await BaseSpend(false, DateTime.MinValue);
         }
+
+        /* синхронна функція для ClearSpendTheDocument() */
+        public void ClearSpendTheDocumentSync() { Task.Run(async () => { await ClearSpendTheDocument(); }); }
 
         public async ValueTask<ЗбіркаТоварівНаСкладі_Objest> Copy(bool copyTableParts = false)
         {
@@ -26061,6 +26778,9 @@ namespace StorageAndTrade_1_0.Документи
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_b28" });
         }
+
+        /* синхронна функція для Delete() */
+        public void DeleteSync() { Task.Run(async () => { await Delete(); }); }
         
         public ЗбіркаТоварівНаСкладі_Pointer GetDocumentPointer()
         {
@@ -26109,6 +26829,9 @@ namespace StorageAndTrade_1_0.Документи
               new string[] { "docname" }
             );
         }
+
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
@@ -26506,6 +27229,9 @@ namespace StorageAndTrade_1_0.Документи
             else
                 return false;
         }
+
+        /* синхронна функція для Read(UnigueID uid) */
+        public bool ReadSync(UnigueID uid) { return Task.Run<bool>(async () => { return await Read(uid); }).Result; }
         
         public async Task<bool> Save()
         {
@@ -26539,12 +27265,18 @@ namespace StorageAndTrade_1_0.Документи
                 return rezult;
         }
 
+        /* синхронна функція для SpendTheDocument() */
+        public bool SpendTheDocumentSync(DateTime spendDate) { return Task.Run<bool>(async () => { return await SpendTheDocument(spendDate); }).Result; }
+
         public async ValueTask ClearSpendTheDocument()
         {
             
                 await РозміщенняНоменклатуриПоКоміркам_SpendTheDocument.ClearSpend(this);
             await BaseSpend(false, DateTime.MinValue);
         }
+
+        /* синхронна функція для ClearSpendTheDocument() */
+        public void ClearSpendTheDocumentSync() { Task.Run(async () => { await ClearSpendTheDocument(); }); }
 
         public async ValueTask<РозміщенняНоменклатуриПоКоміркам_Objest> Copy(bool copyTableParts = false)
         {
@@ -26590,6 +27322,9 @@ namespace StorageAndTrade_1_0.Документи
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_b32" });
         }
+
+        /* синхронна функція для Delete() */
+        public void DeleteSync() { Task.Run(async () => { await Delete(); }); }
         
         public РозміщенняНоменклатуриПоКоміркам_Pointer GetDocumentPointer()
         {
@@ -26637,6 +27372,9 @@ namespace StorageAndTrade_1_0.Документи
               new string[] { "docname" }
             );
         }
+
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
@@ -27571,7 +28309,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         }
 
         /* Функція для обчислення віртуальних таблиць  */
-        public static async void Execute(DateTime period, string regAccumName)
+        public static async ValueTask Execute(DateTime period, string regAccumName)
         {
             if (Config.Kernel == null) return;
             
@@ -27777,7 +28515,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         }
 
         /* Функція для обчислення підсумкових віртуальних таблиць */
-        public static async void ExecuteFinalCalculation(List<string> regAccumNameList)
+        public static async ValueTask ExecuteFinalCalculation(List<string> regAccumNameList)
         {
             if (Config.Kernel == null) return;
             

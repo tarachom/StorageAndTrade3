@@ -199,8 +199,7 @@ namespace StorageAndTrade
                         //if (Config.Kernel != null)
                         //Виконання обчислень
                         await Config.Kernel!.DataBase.SpetialTableRegAccumTrigerExecute(KernelSession,
-                             VirtualTablesСalculation.Execute,
-                             VirtualTablesСalculation.ExecuteFinalCalculation);
+                             VirtualTablesСalculation.Execute, VirtualTablesСalculation.ExecuteFinalCalculation);
                     }
 
                     counter = 0;

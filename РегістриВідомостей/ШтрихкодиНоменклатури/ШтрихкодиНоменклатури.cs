@@ -158,7 +158,7 @@ namespace StorageAndTrade
             }
         }
 
-        protected override async void Delete(UnigueID unigueID)
+        protected override async ValueTask Delete(UnigueID unigueID)
         {
             ШтрихкодиНоменклатури_Objest ШтрихкодиНоменклатури_Objest = new ШтрихкодиНоменклатури_Objest();
             if (await ШтрихкодиНоменклатури_Objest.Read(unigueID))

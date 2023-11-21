@@ -43,7 +43,7 @@ namespace StorageAndTrade
             Системні.ПовідомленняТаПомилки_Помилки_TablePart.Record record = new Системні.ПовідомленняТаПомилки_Помилки_TablePart.Record();
             повідомленняТаПомилки_Помилки_TablePart.Records.Add(record);
 
-            record.Дата = DateTime.Now;
+            record.Дата = Дата;
             record.НазваПроцесу = НазваПроцесу;
             record.Обєкт = Обєкт != null ? (Guid)Обєкт : Guid.Empty;
             record.ТипОбєкту = ТипОбєкту;
