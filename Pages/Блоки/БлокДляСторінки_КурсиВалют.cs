@@ -86,39 +86,33 @@ namespace StorageAndTrade
             HBox hBoxCursyValut = new HBox();
             PackStart(hBoxCursyValut, false, false, 5);
 
-            vBoxCursyValut = new VBox() { WidthRequest = 200 };
+            vBoxCursyValut = new VBox() { WidthRequest = 300 };
             hBoxCursyValut.PackStart(vBoxCursyValut, false, false, 5);
 
             //
-            // Ссилки на довідник
+            // Лінки на довідник
             //
 
-            VBox vBoxDirectory = new VBox(false, 0);
+            VBox vBoxDirectory = new VBox();
             PackStart(vBoxDirectory, false, false, 5);
 
-            Link.AddLink(vBoxDirectory, "Довідник - Валюти", () =>
+            HBox hBoxInfo = new HBox();
+            vBoxDirectory.PackStart(hBoxInfo, false, false, 5);
+
+            Link.AddLink(hBoxInfo, "Довідник - Валюти", async () =>
             {
-                Program.GeneralForm?.CreateNotebookPage($"{Валюти_Const.FULLNAME}", () =>
-                {
-                    Валюти page = new Валюти();
-                    System.Action asyncFunc = async () => { await page.LoadRecords(); };
-                    asyncFunc.Invoke();
-                    return page;
-                });
+                Валюти page = new Валюти();
+                Program.GeneralForm?.CreateNotebookPage($"{Валюти_Const.FULLNAME}", () => { return page; });
+                await page.LoadRecords();
             });
 
-            Link.AddLink(vBoxDirectory, "Історія завантажень", КурсиВалют_Історія);
+            Link.AddLink(hBoxInfo, "Історія завантажень", КурсиВалют_Історія);
         }
 
         void OnDownloadCurs(object? sender, EventArgs args)
         {
-            Обробка_ЗавантаженняКурсівВалют page = new Обробка_ЗавантаженняКурсівВалют
-            {
-                CallBack_EndBackgroundWork = StartDesktop
-            };
-
+            Обробка_ЗавантаженняКурсівВалют page = new Обробка_ЗавантаженняКурсівВалют { CallBack_EndBackgroundWork = StartDesktop };
             Program.GeneralForm?.CreateNotebookPage("Завантаження курсів валют НБУ", () => { return page; });
-
             page.OnDownload(null, new EventArgs());
         }
 
@@ -138,9 +132,9 @@ namespace StorageAndTrade
             foreach (Dictionary<string, object> Row in recordResult.ListRow)
             {
                 HBox hBoxItemValuta = new HBox();
-                hBoxItemValuta.PackStart(new Label(Row["ВалютаНазва"].ToString()), false, false, 0);
-                hBoxItemValuta.PackEnd(new Label(Row["Курс"].ToString()), false, false, 0);
-                vBoxCursyValut.PackStart(hBoxItemValuta, false, false, 5);
+                hBoxItemValuta.PackStart(new Label(Row["ВалютаНазва"].ToString()), false, false, 2);
+                hBoxItemValuta.PackEnd(new Label("<b>" + Row["Курс"].ToString() + "</b>") { UseMarkup = true }, false, false, 6);
+                vBoxCursyValut.PackStart(hBoxItemValuta, false, false, 4);
             }
 
             ShowAll();

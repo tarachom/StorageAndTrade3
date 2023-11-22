@@ -69,5 +69,17 @@ namespace StorageAndTrade
                     clickAction.Invoke();
                 };
         }
+
+        public static void AddLink(HBox hbox, string uri, System.Action? clickAction = null)
+        {
+            LinkButton lb = new LinkButton(uri, " " + uri) { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
+            hbox.PackStart(lb, false, false, 0);
+
+            if (clickAction != null)
+                lb.Clicked += (object? sender, EventArgs args) =>
+                {
+                    clickAction.Invoke();
+                };
+        }
     }
 }
