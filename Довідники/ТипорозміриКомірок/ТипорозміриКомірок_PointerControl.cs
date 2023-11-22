@@ -30,12 +30,8 @@ namespace StorageAndTrade
 {
     class ТипорозміриКомірок_PointerControl : PointerControl
     {
-        event EventHandler<ТипорозміриКомірок_Pointer>? PointerChanged;
-
         public ТипорозміриКомірок_PointerControl()
         {
-            PointerChanged += OnPointerChanged;
-
             pointer = new ТипорозміриКомірок_Pointer();
             WidthPresentation = 300;
             Caption = $"{ТипорозміриКомірок_Const.FULLNAME}:";
@@ -51,13 +47,8 @@ namespace StorageAndTrade
             set
             {
                 pointer = value;
-                PointerChanged?.Invoke(this, pointer);
+                Presentation = pointer != null ? Task.Run(async () => { return await pointer.GetPresentation(); }).Result : "";
             }
-        }
-
-        protected async void OnPointerChanged(object? sender, ТипорозміриКомірок_Pointer pointer)
-        {
-            Presentation = pointer != null ? await pointer.GetPresentation() : "";
         }
 
         protected override async void OpenSelect(object? sender, EventArgs args)

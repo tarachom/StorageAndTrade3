@@ -30,12 +30,8 @@ namespace StorageAndTrade
 {
     class СтруктураПідприємства_PointerControl : PointerControl
     {
-        event EventHandler<СтруктураПідприємства_Pointer>? PointerChanged;
-
         public СтруктураПідприємства_PointerControl()
         {
-            PointerChanged += OnPointerChanged;
-
             pointer = new СтруктураПідприємства_Pointer();
             WidthPresentation = 300;
             Caption = $"{СтруктураПідприємства_Const.FULLNAME}:";
@@ -51,13 +47,8 @@ namespace StorageAndTrade
             set
             {
                 pointer = value;
-                PointerChanged?.Invoke(this, pointer);
+                Presentation = pointer != null ? Task.Run(async () => { return await pointer.GetPresentation(); }).Result : "";
             }
-        }
-
-        protected async void OnPointerChanged(object? sender, СтруктураПідприємства_Pointer pointer)
-        {
-            Presentation = pointer != null ? await pointer.GetPresentation() : "";
         }
 
         protected override async void OpenSelect(object? sender, EventArgs args)

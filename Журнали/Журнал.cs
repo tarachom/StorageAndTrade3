@@ -146,7 +146,7 @@ namespace StorageAndTrade
             refreshButton.Activated += OnRefreshClick;
             Menu.Append(refreshButton);
 
-            MenuItem deleteButton = new MenuItem("Видалити");
+            MenuItem deleteButton = new MenuItem("Помітка на видалення");
             deleteButton.Activated += OnDeleteClick;
             Menu.Append(deleteButton);
 
@@ -314,14 +314,19 @@ namespace StorageAndTrade
 
                         UnigueID unigueID = new UnigueID(uid);
 
-                        object? documentObjest = ExecutingAssembly.CreateInstance($"{PrefixDocumentObject}.{typeDoc}_Objest");
-                        if (documentObjest != null)
+                        object? docObjest = ExecutingAssembly.CreateInstance($"{PrefixDocumentObject}.{typeDoc}_Objest");
+                        if (docObjest != null)
                         {
-                            object? readObj = documentObjest.GetType().InvokeMember("Read", BindingFlags.InvokeMethod, null, documentObjest, new object[] { unigueID });
+                            /*
+                            Використовується виклик асинхронних методів через синхронні які додатково згенеровані
+                            Тобто функція Read викликається через ReadSync, хотя можна викликати Read, 
+                            але є проблеми з отриманням результату, треба подумати
+                            */
+                            object? readObj = docObjest.GetType().InvokeMember("ReadSync", BindingFlags.InvokeMethod, null, docObjest, [unigueID]);
                             if (readObj != null && (bool)readObj)
                             {
-                                bool DeletionLabel = (bool)(documentObjest.GetType().GetProperty("DeletionLabel")?.GetValue(documentObjest) ?? false);
-                                documentObjest.GetType().InvokeMember("SetDeletionLabel", BindingFlags.InvokeMethod, null, documentObjest, new object[] { !DeletionLabel });
+                                bool DeletionLabel = (bool)(docObjest.GetType().GetProperty("DeletionLabel")?.GetValue(docObjest) ?? false);
+                                docObjest.GetType().InvokeMember("SetDeletionLabelSync", BindingFlags.InvokeMethod, null, docObjest, [!DeletionLabel]);
 
                                 SelectPointerItem = new UnigueID(uid);
                             }
@@ -347,7 +352,7 @@ namespace StorageAndTrade
 
                     UnigueID unigueID = new UnigueID(uid);
 
-                    object? documentPointer = ExecutingAssembly.CreateInstance($"{PrefixDocumentObject}.{typeDoc}_Pointer", false, BindingFlags.CreateInstance, null, new object[] { unigueID, null! }, null, null);
+                    object? documentPointer = ExecutingAssembly.CreateInstance($"{PrefixDocumentObject}.{typeDoc}_Pointer", false, BindingFlags.CreateInstance, null, [unigueID, null!], null, null);
                     if (documentPointer != null)
                     {
                         Program.GeneralForm?.CreateNotebookPage($"Проводки", () =>
@@ -370,25 +375,25 @@ namespace StorageAndTrade
         {
             UnigueID unigueID = new UnigueID(uid);
 
-            object? documentPointer = ExecutingAssembly.CreateInstance($"{PrefixDocumentObject}.{typeDoc}_Pointer", false, BindingFlags.CreateInstance, null, new object[] { unigueID, null! }, null, null);
-            if (documentPointer != null)
+            object? documentObjest = ExecutingAssembly.CreateInstance($"{PrefixDocumentObject}.{typeDoc}_Objest");
+            if (documentObjest != null)
             {
-                object? documentObjest = documentPointer.GetType().InvokeMember("GetDocumentObject", BindingFlags.InvokeMethod, null, documentPointer, new object[] { true });
-                if (documentObjest != null)
+                object? readObj = documentObjest.GetType().InvokeMember("ReadSync", BindingFlags.InvokeMethod, null, documentObjest, [unigueID, true]);
+                if (readObj != null && (bool)readObj)
                 {
                     if (spendDoc)
                     {
                         DateTime dateDoc = (DateTime)(documentObjest.GetType().GetProperty("ДатаДок")?.GetValue(documentObjest) ?? DateTime.MinValue);
 
-                        object? documentObjestSpend = documentObjest.GetType().InvokeMember("SpendTheDocument", BindingFlags.InvokeMethod, null, documentObjest, new object[] { dateDoc });
+                        object? documentObjestSpend = documentObjest.GetType().InvokeMember("SpendTheDocumentSync", BindingFlags.InvokeMethod, null, documentObjest, [dateDoc]);
                         if (documentObjestSpend != null && !(bool)documentObjestSpend)
                             ФункціїДляПовідомлень.ВідкритиТермінал();
                     }
                     else
-                        documentObjest.GetType().InvokeMember("ClearSpendTheDocument", BindingFlags.InvokeMethod, null, documentObjest, null);
-
-                    SelectPointerItem = new UnigueID(uid);
+                        documentObjest.GetType().InvokeMember("ClearSpendTheDocumentSync", BindingFlags.InvokeMethod, null, documentObjest, null);
                 }
+                else
+                    Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
             }
         }
 

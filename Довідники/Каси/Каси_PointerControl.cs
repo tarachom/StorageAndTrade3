@@ -30,12 +30,8 @@ namespace StorageAndTrade
 {
     class Каси_PointerControl : PointerControl
     {
-        event EventHandler<Каси_Pointer>? PointerChanged;
-
         public Каси_PointerControl()
         {
-            PointerChanged += OnPointerChanged;
-
             pointer = new Каси_Pointer();
             WidthPresentation = 300;
             Caption = $"{Каси_Const.FULLNAME}:";
@@ -51,13 +47,8 @@ namespace StorageAndTrade
             set
             {
                 pointer = value;
-                PointerChanged?.Invoke(this, pointer);
+                Presentation = pointer != null ? Task.Run(async () => { return await pointer.GetPresentation(); }).Result : "";
             }
-        }
-
-        protected async void OnPointerChanged(object? sender, Каси_Pointer pointer)
-        {
-            Presentation = pointer != null ? await pointer.GetPresentation() : "";
         }
 
         protected override async void OpenSelect(object? sender, EventArgs args)

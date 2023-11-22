@@ -28,12 +28,8 @@ namespace StorageAndTrade
 {
     class ВнутрішнєСпоживанняТоварів_PointerControl : PointerControl
     {
-        event EventHandler<ВнутрішнєСпоживанняТоварів_Pointer>? PointerChanged;
-
         public ВнутрішнєСпоживанняТоварів_PointerControl()
         {
-            PointerChanged += OnPointerChanged;
-
             pointer = new ВнутрішнєСпоживанняТоварів_Pointer();
             WidthPresentation = 300;
             Caption = $"{ВнутрішнєСпоживанняТоварів_Const.FULLNAME}:";
@@ -49,13 +45,8 @@ namespace StorageAndTrade
             set
             {
                 pointer = value;
-                PointerChanged?.Invoke(this, pointer);
+                Presentation = pointer != null ? Task.Run(async () => { return await pointer.GetPresentation(); }).Result : "";
             }
-        }
-
-        protected async void OnPointerChanged(object? sender, ВнутрішнєСпоживанняТоварів_Pointer pointer)
-        {
-            Presentation = pointer != null ? await pointer.GetPresentation() : "";
         }
 
         //Відбір по періоду в журналі

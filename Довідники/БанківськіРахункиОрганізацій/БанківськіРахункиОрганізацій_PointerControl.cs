@@ -30,12 +30,8 @@ namespace StorageAndTrade
 {
     class БанківськіРахункиОрганізацій_PointerControl : PointerControl
     {
-        event EventHandler<БанківськіРахункиОрганізацій_Pointer>? PointerChanged;
-
         public БанківськіРахункиОрганізацій_PointerControl()
         {
-            PointerChanged += OnPointerChanged;
-
             pointer = new БанківськіРахункиОрганізацій_Pointer();
             WidthPresentation = 300;
             Caption = $"{БанківськіРахункиОрганізацій_Const.FULLNAME}:";
@@ -51,13 +47,8 @@ namespace StorageAndTrade
             set
             {
                 pointer = value;
-                PointerChanged?.Invoke(this, pointer);
+                Presentation = pointer != null ? Task.Run(async () => { return await pointer.GetPresentation(); }).Result : "";
             }
-        }
-
-        protected async void OnPointerChanged(object? sender, БанківськіРахункиОрганізацій_Pointer pointer)
-        {
-            Presentation = pointer != null ? await pointer.GetPresentation() : "";
         }
 
         protected override async void OpenSelect(object? sender, EventArgs args)

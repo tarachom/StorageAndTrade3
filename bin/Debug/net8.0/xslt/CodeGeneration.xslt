@@ -750,7 +750,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
         }
 
         /* синхронна функція для Delete() */
-        public void DeleteSync() { Task.Run(async () =&gt; { await Delete(); }); }
+        public bool DeleteSync() { return Task.Run&lt;bool&gt;(async () =&gt; { await Delete(); return true; }).Result; } 
         
         public <xsl:value-of select="$DirectoryName"/>_Pointer GetDirectoryPointer()
         {
@@ -1250,7 +1250,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
             </xsl:if>
         }
 
-        public async ValueTask&lt;bool&gt; Read(UnigueID uid)
+        public async ValueTask&lt;bool&gt; Read(UnigueID uid, bool readAllTablePart = false)
         {
             if (await BaseRead(uid))
             {
@@ -1262,6 +1262,13 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
                   </xsl:call-template>;
                 </xsl:for-each>
                 BaseClear();
+                <xsl:if test="count(TabularParts/TablePart) != 0">
+                if (readAllTablePart)
+                {
+                    <xsl:for-each select="TabularParts/TablePart">
+                    await <xsl:value-of select="concat(Name, '_TablePart')"/>.Read();</xsl:for-each>
+                }
+                </xsl:if>
                 return true;
             }
             else
@@ -1269,7 +1276,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
         }
 
         /* синхронна функція для Read(UnigueID uid) */
-        public bool ReadSync(UnigueID uid) { return Task.Run&lt;bool&gt;(async () =&gt; { return await Read(uid); }).Result; }
+        public bool ReadSync(UnigueID uid, bool readAllTablePart = false) { return Task.Run&lt;bool&gt;(async () =&gt; { return await Read(uid, readAllTablePart); }).Result; }
         
         public async Task&lt;bool&gt; Save()
         {
@@ -1334,7 +1341,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
         }
 
         /* синхронна функція для ClearSpendTheDocument() */
-        public void ClearSpendTheDocumentSync() { Task.Run(async () =&gt; { await ClearSpendTheDocument(); }); }
+        public bool ClearSpendTheDocumentSync() { return Task.Run&lt;bool&gt;(async () =&gt; { await ClearSpendTheDocument(); return true; }).Result; } 
 
         public async ValueTask&lt;<xsl:value-of select="$DocumentName"/>_Objest&gt; Copy(bool copyTableParts = false)
         {
@@ -1379,6 +1386,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
             await base.BaseDeletionLabel(label);
         }
 
+        /* синхронна функція для SetDeletionLabel() */
+        public bool SetDeletionLabelSync(bool label = true) { return Task.Run&lt;bool&gt;(async () =&gt; { await SetDeletionLabel(label); return true; }).Result; }
+
         public async ValueTask Delete()
         {
             <xsl:if test="normalize-space(TriggerFunctions/BeforeDelete) != ''">
@@ -1395,7 +1405,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
         }
 
         /* синхронна функція для Delete() */
-        public void DeleteSync() { Task.Run(async () =&gt; { await Delete(); }); }
+        public bool DeleteSync() { return Task.Run&lt;bool&gt;(async () =&gt; { await Delete(); return true; }).Result; } 
         
         public <xsl:value-of select="$DocumentName"/>_Pointer GetDocumentPointer()
         {
@@ -1506,14 +1516,14 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
         {
             if (this.IsEmpty()) return null;
             <xsl:value-of select="$DocumentName"/>_Objest <xsl:value-of select="$DocumentName"/>ObjestItem = new <xsl:value-of select="$DocumentName"/>_Objest();
-            if (!await <xsl:value-of select="$DocumentName"/>ObjestItem.Read(base.UnigueID)) return null;
-            <xsl:if test="count(TabularParts/TablePart) != 0">
+            if (!await <xsl:value-of select="$DocumentName"/>ObjestItem.Read(base.UnigueID, readAllTablePart)) return null;
+            <!--<xsl:if test="count(TabularParts/TablePart) != 0">
             if (readAllTablePart)
             {   
                 <xsl:for-each select="TabularParts/TablePart">
                 await <xsl:value-of select="$DocumentName"/>ObjestItem.<xsl:value-of select="concat(Name, '_TablePart')"/>.Read();</xsl:for-each>
             }
-            </xsl:if>
+            </xsl:if>-->
             return <xsl:value-of select="$DocumentName"/>ObjestItem;
         }
 

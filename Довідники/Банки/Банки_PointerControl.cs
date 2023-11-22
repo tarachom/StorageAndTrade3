@@ -29,13 +29,9 @@ using StorageAndTrade_1_0.Довідники;
 namespace StorageAndTrade
 {
     class Банки_PointerControl : PointerControl
-    {
-        event EventHandler<Банки_Pointer>? PointerChanged;
-        
+    {        
         public Банки_PointerControl()
         {
-            PointerChanged += OnPointerChanged;
-
             pointer = new Банки_Pointer();
             WidthPresentation = 300;
             Caption = $"{Банки_Const.FULLNAME}:";
@@ -51,13 +47,8 @@ namespace StorageAndTrade
             set
             {
                 pointer = value;
-                PointerChanged?.Invoke(this, pointer);
+                Presentation = pointer != null ? Task.Run(async () => { return await pointer.GetPresentation(); }).Result : "";
             }
-        }
-
-        protected async void OnPointerChanged(object? sender, Банки_Pointer pointer)
-        {
-            Presentation = pointer != null ? await pointer.GetPresentation() : "";
         }
 
         protected override async void OpenSelect(object? sender, EventArgs args)

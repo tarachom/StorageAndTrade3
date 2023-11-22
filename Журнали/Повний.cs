@@ -21,6 +21,8 @@ limitations under the License.
 Сайт:     accounting.org.ua
 */
 
+using System.Runtime.CompilerServices;
+using GLib;
 using Gtk;
 
 using Перелічення = StorageAndTrade_1_0.Перелічення;

@@ -30,12 +30,8 @@ namespace StorageAndTrade
 {
     class ВидиНоменклатури_PointerControl : PointerControl
     {
-        event EventHandler<ВидиНоменклатури_Pointer>? PointerChanged;
-
         public ВидиНоменклатури_PointerControl()
         {
-            PointerChanged += OnPointerChanged;
-
             pointer = new ВидиНоменклатури_Pointer();
             WidthPresentation = 300;
             Caption = $"{ВидиНоменклатури_Const.FULLNAME}:";
@@ -51,13 +47,8 @@ namespace StorageAndTrade
             set
             {
                 pointer = value;
-                PointerChanged?.Invoke(this, pointer);
+                Presentation = pointer != null ? Task.Run(async () => { return await pointer.GetPresentation(); }).Result : "";
             }
-        }
-
-        protected async void OnPointerChanged(object? sender, ВидиНоменклатури_Pointer pointer)
-        {
-            Presentation = pointer != null ? await pointer.GetPresentation() : "";
         }
 
         protected override async void OpenSelect(object? sender, EventArgs args)

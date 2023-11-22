@@ -30,12 +30,8 @@ namespace StorageAndTrade
 {
     class ДоговориКонтрагентів_PointerControl : PointerControl
     {
-        event EventHandler<ДоговориКонтрагентів_Pointer>? PointerChanged;
-
         public ДоговориКонтрагентів_PointerControl()
         {
-            PointerChanged += OnPointerChanged;
-
             pointer = new ДоговориКонтрагентів_Pointer();
             WidthPresentation = 300;
             Caption = $"{ДоговориКонтрагентів_Const.FULLNAME}:";
@@ -51,13 +47,8 @@ namespace StorageAndTrade
             set
             {
                 pointer = value;
-                PointerChanged?.Invoke(this, pointer);
+                Presentation = pointer != null ? Task.Run(async () => { return await pointer.GetPresentation(); }).Result : "";
             }
-        }
-
-        protected async void OnPointerChanged(object? sender, ДоговориКонтрагентів_Pointer pointer)
-        {
-            Presentation = pointer != null ? await pointer.GetPresentation() : "";
         }
 
         public Контрагенти_Pointer КонтрагентВласник { get; set; } = new Контрагенти_Pointer();

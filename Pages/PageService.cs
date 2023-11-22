@@ -388,7 +388,7 @@ namespace StorageAndTrade
                         object? documentObject = ExecutingAssembly.CreateInstance(DocumentObjestName);
                         if (documentObject != null)
                         {
-                            object? objRead = documentObject.GetType().InvokeMember("ReadSync", BindingFlags.InvokeMethod, null, documentObject, new object[] { unigueID });
+                            object? objRead = documentObject.GetType().InvokeMember("ReadSync", BindingFlags.InvokeMethod, null, documentObject, [unigueID, false]);
                             if (objRead != null ? (bool)objRead : false)
                             {
                                 long allCountDependencies = SearchDependencies(listDependencies, unigueID.UGuid, name);

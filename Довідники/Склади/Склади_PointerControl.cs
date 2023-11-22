@@ -30,12 +30,8 @@ namespace StorageAndTrade
 {
     public class Склади_PointerControl : PointerControl
     {
-        event EventHandler<Склади_Pointer>? PointerChanged;
-
         public Склади_PointerControl()
         {
-            PointerChanged += OnPointerChanged;
-
             pointer = new Склади_Pointer();
             WidthPresentation = 300;
             Caption = $"{Склади_Const.FULLNAME}:";
@@ -51,13 +47,8 @@ namespace StorageAndTrade
             set
             {
                 pointer = value;
-                PointerChanged?.Invoke(this, pointer);
+                Presentation = pointer != null ? Task.Run(async () => { return await pointer.GetPresentation(); }).Result : "";
             }
-        }
-
-        protected async void OnPointerChanged(object? sender, Склади_Pointer pointer)
-        {
-            Presentation = pointer != null ? await pointer.GetPresentation() : "";
         }
 
         protected override async void OpenSelect(object? sender, EventArgs args)

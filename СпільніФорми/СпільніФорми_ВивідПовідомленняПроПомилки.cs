@@ -67,16 +67,12 @@ namespace StorageAndTrade
         {
             //Дата
             HBox hBoxDate = new HBox();
-
-            hBoxDate.PackStart(new Label(
-                row["Дата"].ToString() + "\t" + "[ " + row["НазваПроцесу"].ToString() + " ]\t" + row["НазваОбєкту"].ToString()), false, false, 5);
-
+            hBoxDate.PackStart(new Label(row["Дата"].ToString() + "\t" + "[ " + row["НазваПроцесу"].ToString() + " ]\t" + row["НазваОбєкту"].ToString()), false, false, 5);
             vBoxMessage.PackStart(hBoxDate, false, false, 5);
 
             HBox hBoxInfo = new HBox();
-            vBoxMessage.PackStart(hBoxInfo, false, false, 10);
-
             hBoxInfo.PackStart(new Image(AppContext.BaseDirectory + "images/error.png"), false, false, 25);
+            vBoxMessage.PackStart(hBoxInfo, false, false, 10);
 
             VBox vBoxInfo = new VBox();
             hBoxInfo.PackStart(vBoxInfo, false, false, 10);
@@ -85,6 +81,19 @@ namespace StorageAndTrade
             HBox hBoxMessage = new HBox();
             hBoxMessage.PackStart(new Label("-> " + row["Повідомлення"].ToString()) { Wrap = true }, false, false, 5);
             vBoxInfo.PackStart(hBoxMessage, false, false, 5);
+
+            //Для відкриття
+            {
+                CompositePointerControl Обєкт = new CompositePointerControl
+                {
+                    Pointer = new UuidAndText(new UnigueID(row["Обєкт"]).UGuid, row["ТипОбєкту"].ToString() ?? ""),
+                    Caption = ""
+                };
+
+                HBox hBoxObject = new HBox();
+                hBoxObject.PackStart(Обєкт, false, false, 0);
+                vBoxInfo.PackStart(hBoxObject, false, false, 0);
+            }
 
             vBoxMessage.PackStart(new Separator(Orientation.Horizontal), false, false, 5);
         }

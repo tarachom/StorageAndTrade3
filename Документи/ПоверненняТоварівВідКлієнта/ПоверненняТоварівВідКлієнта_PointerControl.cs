@@ -28,12 +28,8 @@ namespace StorageAndTrade
 {
     class ПоверненняТоварівВідКлієнта_PointerControl : PointerControl
     {
-        event EventHandler<ПоверненняТоварівВідКлієнта_Pointer>? PointerChanged;
-
         public ПоверненняТоварівВідКлієнта_PointerControl()
         {
-            PointerChanged += OnPointerChanged;
-
             pointer = new ПоверненняТоварівВідКлієнта_Pointer();
             WidthPresentation = 300;
             Caption = $"{ПоверненняТоварівВідКлієнта_Const.FULLNAME}:";
@@ -49,13 +45,8 @@ namespace StorageAndTrade
             set
             {
                 pointer = value;
-                PointerChanged?.Invoke(this, pointer);
+                Presentation = pointer != null ? Task.Run(async () => { return await pointer.GetPresentation(); }).Result : "";
             }
-        }
-
-        protected async void OnPointerChanged(object? sender, ПоверненняТоварівВідКлієнта_Pointer pointer)
-        {
-            Presentation = pointer != null ? await pointer.GetPresentation() : "";
         }
 
         //Відбір по періоду в журналі
