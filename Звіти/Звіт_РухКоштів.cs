@@ -79,8 +79,7 @@ namespace StorageAndTrade
 
             CreateFilters();
 
-            reportNotebook = new Notebook() { Scrollable = true, EnablePopup = true, BorderWidth = 0, ShowBorder = false };
-            reportNotebook.TabPos = PositionType.Top;
+            reportNotebook = new Notebook() { Scrollable = true, EnablePopup = true, BorderWidth = 0, ShowBorder = false, TabPos = PositionType.Top };
             PackStart(reportNotebook, true, true, 0);
 
             ShowAll();
