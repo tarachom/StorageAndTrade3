@@ -55,11 +55,11 @@ namespace StorageAndTrade
 
         #region Присвоєння / зчитування значень
 
-        public override void SetValue()
+        public override async void SetValue()
         {
             if (IsNew)
             {
-                ПакуванняОдиниціВиміру_Objest.New();
+                await ПакуванняОдиниціВиміру_Objest.New();
                 ПакуванняОдиниціВиміру_Objest.КількістьУпаковок = 1;
             }
 

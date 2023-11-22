@@ -135,11 +135,11 @@ namespace StorageAndTrade
 
         #region Присвоєння / зчитування значень
 
-        public override void SetValue()
+        public override async void SetValue()
         {
             if (IsNew)
             {
-                Номенклатура_Objest.New();
+                await Номенклатура_Objest.New();
                 Номенклатура_Objest.Папка = РодичДляНового;
                 Номенклатура_Objest.ТипНоменклатури = ТипиНоменклатури.Товар;
                 Номенклатура_Objest.ОдиницяВиміру = ЗначенняЗаЗамовчуванням.ОсновнаОдиницяПакування_Const;

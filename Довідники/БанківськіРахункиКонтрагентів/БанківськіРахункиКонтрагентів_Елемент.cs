@@ -55,10 +55,10 @@ namespace StorageAndTrade
 
         #region Присвоєння / зчитування значень
 
-        public override void SetValue()
+        public override async void SetValue()
         {
             if (IsNew)
-                БанківськіРахункиКонтрагентів_Objest.New();
+                await БанківськіРахункиКонтрагентів_Objest.New();
 
             Код.Text = БанківськіРахункиКонтрагентів_Objest.Код;
             Назва.Text = БанківськіРахункиКонтрагентів_Objest.Назва;

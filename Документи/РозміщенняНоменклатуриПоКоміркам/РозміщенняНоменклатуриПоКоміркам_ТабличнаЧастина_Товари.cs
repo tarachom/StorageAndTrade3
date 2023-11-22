@@ -86,7 +86,7 @@ namespace StorageAndTrade
                 };
             }
 
-            public static async void ПісляЗміни_Номенклатура(Запис запис)
+            public static async ValueTask ПісляЗміни_Номенклатура(Запис запис)
             {
                 await запис.Номенклатура.GetPresentation();
 
@@ -94,14 +94,14 @@ namespace StorageAndTrade
                 if (номенклатура_Objest != null && !номенклатура_Objest.ОдиницяВиміру.IsEmpty())
                 {
                     запис.Пакування = номенклатура_Objest.ОдиницяВиміру;
-                    Запис.ПісляЗміни_Пакування(запис);
+                    await Запис.ПісляЗміни_Пакування(запис);
                 }
             }
-            public static async void ПісляЗміни_Пакування(Запис запис)
+            public static async ValueTask ПісляЗміни_Пакування(Запис запис)
             {
                 await запис.Пакування.GetPresentation();
             }
-            public static async void ПісляЗміни_Комірка(Запис запис)
+            public static async ValueTask ПісляЗміни_Комірка(Запис запис)
             {
                 await запис.Комірка.GetPresentation();
             }
@@ -271,10 +271,10 @@ namespace StorageAndTrade
                 case Columns.Номенклатура:
                     {
                         Номенклатура_ШвидкийВибір page = new Номенклатура_ШвидкийВибір() { PopoverParent = popoverSmallSelect, DirectoryPointerItem = запис.Номенклатура.UnigueID };
-                        page.CallBack_OnSelectPointer = (UnigueID selectPointer) =>
+                        page.CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
                         {
                             запис.Номенклатура = new Номенклатура_Pointer(selectPointer);
-                            Запис.ПісляЗміни_Номенклатура(запис);
+                            await Запис.ПісляЗміни_Номенклатура(запис);
 
                             Store.SetValues(iter, запис.ToArray());
                         };
@@ -288,10 +288,10 @@ namespace StorageAndTrade
                 case Columns.Пакування:
                     {
                         ПакуванняОдиниціВиміру_ШвидкийВибір page = new ПакуванняОдиниціВиміру_ШвидкийВибір() { PopoverParent = popoverSmallSelect, DirectoryPointerItem = запис.Пакування.UnigueID };
-                        page.CallBack_OnSelectPointer = (UnigueID selectPointer) =>
+                        page.CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
                         {
                             запис.Пакування = new ПакуванняОдиниціВиміру_Pointer(selectPointer);
-                            Запис.ПісляЗміни_Пакування(запис);
+                            await Запис.ПісляЗміни_Пакування(запис);
 
                             Store.SetValues(iter, запис.ToArray());
                         };
@@ -305,10 +305,10 @@ namespace StorageAndTrade
                 case Columns.Комірка:
                     {
                         СкладськіКомірки_ШвидкийВибір page = new СкладськіКомірки_ШвидкийВибір() { PopoverParent = popoverSmallSelect, DirectoryPointerItem = запис.Комірка.UnigueID };
-                        page.CallBack_OnSelectPointer = (UnigueID selectPointer) =>
+                        page.CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
                         {
                             запис.Комірка = new СкладськіКомірки_Pointer(selectPointer);
-                            Запис.ПісляЗміни_Комірка(запис);
+                            await Запис.ПісляЗміни_Комірка(запис);
 
                             Store.SetValues(iter, запис.ToArray());
                         };

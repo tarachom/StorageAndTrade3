@@ -51,10 +51,10 @@ namespace StorageAndTrade
 
         #region Присвоєння / зчитування значень
 
-        public override void SetValue()
+        public override async void SetValue()
         {
             if (IsNew)
-                СеріїНоменклатури_Objest.New();
+                await СеріїНоменклатури_Objest.New();
 
             Номер.Text = СеріїНоменклатури_Objest.Номер;
             Коментар.Text = СеріїНоменклатури_Objest.Коментар;

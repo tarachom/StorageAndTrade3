@@ -56,11 +56,11 @@ namespace StorageAndTrade
 
         #region Присвоєння / зчитування значень
 
-        public override void SetValue()
+        public override async void SetValue()
         {
             if (IsNew)
             {
-                ХарактеристикиНоменклатури_Objest.New();
+                await ХарактеристикиНоменклатури_Objest.New();
                 ХарактеристикиНоменклатури_Objest.Номенклатура = НоменклатураДляНового;
             }
 

@@ -222,10 +222,10 @@ namespace StorageAndTrade
 
         #region Присвоєння / зчитування значень
 
-        public override void SetValue()
+        public override async void SetValue()
         {
             if (IsNew)
-                <xsl:value-of select="$DocumentName"/>_Objest.New();
+                await <xsl:value-of select="$DocumentName"/>_Objest.New();
 
             <!-- Крім скритого поля Назва яке формується перед збереженням -->
             <xsl:for-each select="$Fields[Name != 'Назва']">
@@ -265,7 +265,7 @@ namespace StorageAndTrade
             <xsl:for-each select="$TabularParts">
                 /* Таблична частина: <xsl:value-of select="Name"/> */
                 <xsl:value-of select="Name"/>.<xsl:value-of select="$DocumentName"/>_Objest = <xsl:value-of select="$DocumentName"/>_Objest;
-                <xsl:value-of select="Name"/>.LoadRecords();
+                await <xsl:value-of select="Name"/>.LoadRecords();
             </xsl:for-each>
         }
 
@@ -310,13 +310,13 @@ namespace StorageAndTrade
 
         #endregion
 
-        protected override bool Save()
+        protected override async ValueTask&lt;bool&gt; Save()
         {
-            bool isSave = false;
+            bool isSave;
 
             try
             {
-                isSave = <xsl:value-of select="$DocumentName"/>_Objest.Save();
+                isSave = await <xsl:value-of select="$DocumentName"/>_Objest.Save();
             }
             catch (Exception ex)
             {
@@ -328,7 +328,7 @@ namespace StorageAndTrade
             if (isSave)
             {
                 <xsl:for-each select="$TabularParts">
-                    <xsl:value-of select="Name"/>.SaveRecords();
+                    await <xsl:value-of select="Name"/>.SaveRecords();
                 </xsl:for-each>
             }
             </xsl:if>
@@ -339,11 +339,11 @@ namespace StorageAndTrade
             return isSave;
         }
 
-        protected override bool SpendTheDocument(bool spendDoc)
+        protected override async ValueTask&lt;bool&gt; SpendTheDocument(bool spendDoc)
         {
             if (spendDoc)
             {
-                bool isSpend = <xsl:value-of select="$DocumentName"/>_Objest.SpendTheDocument(<xsl:value-of select="$DocumentName"/>_Objest.ДатаДок);
+                bool isSpend = await <xsl:value-of select="$DocumentName"/>_Objest.SpendTheDocument(<xsl:value-of select="$DocumentName"/>_Objest.ДатаДок);
 
                 if (!isSpend)
                     ФункціїДляПовідомлень.ВідкритиТермінал();
@@ -352,7 +352,7 @@ namespace StorageAndTrade
             }
             else
             {
-                <xsl:value-of select="$DocumentName"/>_Objest.ClearSpendTheDocument();
+                await <xsl:value-of select="$DocumentName"/>_Objest.ClearSpendTheDocument();
                 
                 return true;
             }
@@ -397,12 +397,12 @@ namespace StorageAndTrade
 
         #region Override
 
-        public override void LoadRecords()
+        public override async void LoadRecords()
         {
             ТабличніСписки.<xsl:value-of select="$DocumentName"/>_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.<xsl:value-of select="$DocumentName"/>_Записи.DocumentPointerItem = DocumentPointerItem;
 
-            ТабличніСписки.<xsl:value-of select="$DocumentName"/>_Записи.LoadRecords();
+            await ТабличніСписки.<xsl:value-of select="$DocumentName"/>_Записи.LoadRecords();
 
             if (ТабличніСписки.<xsl:value-of select="$DocumentName"/>_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.<xsl:value-of select="$DocumentName"/>_Записи.SelectPath, TreeViewGrid.Columns[0], false);
@@ -412,7 +412,7 @@ namespace StorageAndTrade
             TreeViewGrid.GrabFocus();
         }
 
-        protected override void LoadRecords_OnSearch(string searchText)
+        protected override async void LoadRecords_OnSearch(string searchText)
         {
             searchText = searchText.ToLower().Trim();
 
@@ -427,7 +427,7 @@ namespace StorageAndTrade
             ТабличніСписки.<xsl:value-of select="$DocumentName"/>_Записи.Where.Add(
                 new Where(<xsl:value-of select="$DocumentName"/>_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
-            ТабличніСписки.<xsl:value-of select="$DocumentName"/>_Записи.LoadRecords();
+            await ТабличніСписки.<xsl:value-of select="$DocumentName"/>_Записи.LoadRecords();
 
             if (ТабличніСписки.<xsl:value-of select="$DocumentName"/>_Записи.FirstPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.<xsl:value-of select="$DocumentName"/>_Записи.FirstPath, TreeViewGrid.Columns[0], false);
@@ -435,7 +435,7 @@ namespace StorageAndTrade
             TreeViewGrid.GrabFocus();
         }
 
-        protected override void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             if (IsNew)
             {
@@ -455,7 +455,7 @@ namespace StorageAndTrade
             else if (unigueID != null)
             {
                 <xsl:value-of select="$DocumentName"/>_Objest <xsl:value-of select="$DocumentName"/>_Objest = new <xsl:value-of select="$DocumentName"/>_Objest();
-                if (<xsl:value-of select="$DocumentName"/>_Objest.Read(unigueID))
+                if (await <xsl:value-of select="$DocumentName"/>_Objest.Read(unigueID))
                 {
                     Program.GeneralForm?.CreateNotebookPage($"{<xsl:value-of select="$DocumentName"/>_Objest.Назва}", () =>
                     {
@@ -476,25 +476,25 @@ namespace StorageAndTrade
             }
         }
 
-        protected override void SetDeletionLabel(UnigueID unigueID)
+        protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             <xsl:value-of select="$DocumentName"/>_Objest <xsl:value-of select="$DocumentName"/>_Objest = new <xsl:value-of select="$DocumentName"/>_Objest();
-            if (<xsl:value-of select="$DocumentName"/>_Objest.Read(unigueID))
-                <xsl:value-of select="$DocumentName"/>_Objest.SetDeletionLabel(!<xsl:value-of select="$DocumentName"/>_Objest.DeletionLabel);
+            if (await <xsl:value-of select="$DocumentName"/>_Objest.Read(unigueID))
+                await <xsl:value-of select="$DocumentName"/>_Objest.SetDeletionLabel(!<xsl:value-of select="$DocumentName"/>_Objest.DeletionLabel);
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
         }
 
-        protected override UnigueID? Copy(UnigueID unigueID)
+        protected override async ValueTask&lt;UnigueID?&gt; Copy(UnigueID unigueID)
         {
             <xsl:value-of select="$DocumentName"/>_Objest <xsl:value-of select="$DocumentName"/>_Objest = new <xsl:value-of select="$DocumentName"/>_Objest();
-            if (<xsl:value-of select="$DocumentName"/>_Objest.Read(unigueID))
+            if (await <xsl:value-of select="$DocumentName"/>_Objest.Read(unigueID))
             {
-                <xsl:value-of select="$DocumentName"/>_Objest <xsl:value-of select="$DocumentName"/>_Objest_Новий = <xsl:value-of select="$DocumentName"/>_Objest.Copy(true);
-                <xsl:value-of select="$DocumentName"/>_Objest_Новий.Save();
+                <xsl:value-of select="$DocumentName"/>_Objest <xsl:value-of select="$DocumentName"/>_Objest_Новий = await <xsl:value-of select="$DocumentName"/>_Objest.Copy(true);
+                await <xsl:value-of select="$DocumentName"/>_Objest_Новий.Save();
                 <xsl:for-each select="$TabularParts">
                     /* Таблична частина: <xsl:value-of select="Name"/> */
-                    <xsl:value-of select="$DocumentName"/>_Objest_Новий.<xsl:value-of select="Name"/>_TablePart.Save(false);
+                    await <xsl:value-of select="$DocumentName"/>_Objest_Новий.<xsl:value-of select="Name"/>_TablePart.Save(false);
                 </xsl:for-each>
                 return <xsl:value-of select="$DocumentName"/>_Objest_Новий.UnigueID;
             }
@@ -511,19 +511,19 @@ namespace StorageAndTrade
             LoadRecords();
         }
 
-        protected override void SpendTheDocument(UnigueID unigueID, bool spendDoc)
+        protected override async ValueTask SpendTheDocument(UnigueID unigueID, bool spendDoc)
         {
             <xsl:value-of select="$DocumentName"/>_Pointer <xsl:value-of select="$DocumentName"/>_Pointer = new <xsl:value-of select="$DocumentName"/>_Pointer(unigueID);
-            <xsl:value-of select="$DocumentName"/>_Objest? <xsl:value-of select="$DocumentName"/>_Objest = <xsl:value-of select="$DocumentName"/>_Pointer.GetDocumentObject(true);
+            <xsl:value-of select="$DocumentName"/>_Objest? <xsl:value-of select="$DocumentName"/>_Objest = await <xsl:value-of select="$DocumentName"/>_Pointer.GetDocumentObject(true);
             if (<xsl:value-of select="$DocumentName"/>_Objest == null) return;
 
             if (spendDoc)
             {
-                if (!<xsl:value-of select="$DocumentName"/>_Objest.SpendTheDocument(<xsl:value-of select="$DocumentName"/>_Objest.ДатаДок))
+                if (!await <xsl:value-of select="$DocumentName"/>_Objest.SpendTheDocument(<xsl:value-of select="$DocumentName"/>_Objest.ДатаДок))
                     ФункціїДляПовідомлень.ВідкритиТермінал();
             }
             else
-                <xsl:value-of select="$DocumentName"/>_Objest.ClearSpendTheDocument();
+                await <xsl:value-of select="$DocumentName"/>_Objest.ClearSpendTheDocument();
         }
 
         protected override DocumentPointer? ReportSpendTheDocument(UnigueID unigueID)
@@ -531,10 +531,10 @@ namespace StorageAndTrade
             return new <xsl:value-of select="$DocumentName"/>_Pointer(unigueID);
         }
 
-        protected override void ExportXML(UnigueID unigueID)
+        protected override async void ExportXML(UnigueID unigueID)
         {
             string pathToSave = System.IO.Path.Combine(AppContext.BaseDirectory, $"{<xsl:value-of select="$DocumentName"/>_Const.FULLNAME}_{unigueID}.xml");
-            <xsl:value-of select="$DocumentName"/>_Export.ToXmlFile(new <xsl:value-of select="$DocumentName"/>_Pointer(unigueID), pathToSave);
+            await <xsl:value-of select="$DocumentName"/>_Export.ToXmlFile(new <xsl:value-of select="$DocumentName"/>_Pointer(unigueID), pathToSave);
         }
 
         #endregion
@@ -581,11 +581,7 @@ namespace StorageAndTrade
             set
             {
                 pointer = value;
-
-                if (pointer != null)
-                    Presentation = pointer.GetPresentation();
-                else
-                    Presentation = "";
+                Presentation = pointer != null ? Task.Run(async () =&gt; { return await pointer.GetPresentation(); }).Result : "";
             }
         }
 
@@ -594,12 +590,13 @@ namespace StorageAndTrade
 
         protected override void OpenSelect(object? sender, EventArgs args)
         {
-            <xsl:value-of select="$DocumentName"/> page = new <xsl:value-of select="$DocumentName"/>();
-
-            page.DocumentPointerItem = Pointer.UnigueID;
-            page.CallBack_OnSelectPointer = (UnigueID selectPointer) =&gt;
+            <xsl:value-of select="$DocumentName"/> page = new <xsl:value-of select="$DocumentName"/>
             {
-                Pointer = new <xsl:value-of select="$DocumentName"/>_Pointer(selectPointer);
+                DocumentPointerItem = Pointer.UnigueID,
+                CallBack_OnSelectPointer = (UnigueID selectPointer) =&gt;
+                {
+                    Pointer = new <xsl:value-of select="$DocumentName"/>_Pointer(selectPointer);
+                }
             };
 
             Program.GeneralForm?.CreateNotebookPage($"Вибір - {<xsl:value-of select="$DocumentName"/>_Const.FULLNAME}", () =&gt; { return page; }, true);

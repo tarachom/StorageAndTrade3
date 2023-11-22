@@ -5,7 +5,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>22.11.2023 13:55:21</DateTimeSave>
+  <DateTimeSave>22.11.2023 18:02:39</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -13948,6 +13948,28 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsFullTextSearch>1</IsFullTextSearch>
           <Multiline>0</Multiline>
         </Field>
+        <Field>
+          <Name>Організація</Name>
+          <NameInTable>col_a3</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Довідники.Організації</Pointer>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+          <IsFullTextSearch>0</IsFullTextSearch>
+        </Field>
+        <Field>
+          <Name>Підрозділ</Name>
+          <NameInTable>col_a4</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Довідники.СтруктураПідприємства</Pointer>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+          <IsFullTextSearch>0</IsFullTextSearch>
+        </Field>
       </Fields>
       <TabularParts>
         <TablePart>
@@ -14022,6 +14044,25 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <IsIndex>0</IsIndex>
               <IsFullTextSearch>0</IsFullTextSearch>
             </Field>
+            <Field>
+              <Name>НомерРядка</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>integer</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+            </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>string</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+              <Multiline>0</Multiline>
+            </Field>
           </Fields>
         </TablePart>
       </TabularParts>
@@ -14063,21 +14104,57 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               </Pointer>
             </Field>
             <Field>
+              <Name>Організація</Name>
+              <Caption>Організація</Caption>
+              <Size>0</Size>
+              <SortNum>4</SortNum>
+              <SortField>False</SortField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Організації</Pointer>
+              <Join>
+                <table>Довідники.Організації_Const.TABLE</table>
+                <field>Організація</field>
+                <alias>join_tab_1</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_1</table>
+                <field>Довідники.Організації_Const.Назва</field>
+              </FieldAndAlias>
+            </Field>
+            <Field>
               <Name>Склад</Name>
               <Caption>Склад</Caption>
               <Size>0</Size>
-              <SortNum>4</SortNum>
+              <SortNum>5</SortNum>
               <SortField>False</SortField>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
               <Join>
                 <table>Довідники.Склади_Const.TABLE</table>
                 <field>Склад</field>
-                <alias>join_tab_1</alias>
+                <alias>join_tab_2</alias>
               </Join>
               <FieldAndAlias>
-                <table>join_tab_1</table>
+                <table>join_tab_2</table>
                 <field>Довідники.Склади_Const.Назва</field>
+              </FieldAndAlias>
+            </Field>
+            <Field>
+              <Name>Відповідальний</Name>
+              <Caption>Відповідальний</Caption>
+              <Size>0</Size>
+              <SortNum>6</SortNum>
+              <SortField>False</SortField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ФізичніОсоби</Pointer>
+              <Join>
+                <table>Довідники.ФізичніОсоби_Const.TABLE</table>
+                <field>Відповідальний</field>
+                <alias>join_tab_3</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_3</table>
+                <field>Довідники.ФізичніОсоби_Const.Назва</field>
               </FieldAndAlias>
             </Field>
             <Field>
@@ -14091,10 +14168,10 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <Join>
                 <table>Довідники.Користувачі_Const.TABLE</table>
                 <field>Автор</field>
-                <alias>join_tab_2</alias>
+                <alias>join_tab_4</alias>
               </Join>
               <FieldAndAlias>
-                <table>join_tab_2</table>
+                <table>join_tab_4</table>
                 <field>Довідники.Користувачі_Const.Назва</field>
               </FieldAndAlias>
             </Field>
@@ -14113,24 +14190,16 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       </TabularLists>
       <AllowRegisterAccumulation />
       <TriggerFunctions>
-        <New>
-        </New>
-        <Copying>
-        </Copying>
-        <BeforeSave>
-        </BeforeSave>
-        <AfterSave>
-        </AfterSave>
-        <SetDeletionLabel>
-        </SetDeletionLabel>
-        <BeforeDelete>
-        </BeforeDelete>
+        <New>ПерерахунокТоварів_Triggers.New</New>
+        <Copying>ПерерахунокТоварів_Triggers.Copying</Copying>
+        <BeforeSave>ПерерахунокТоварів_Triggers.BeforeSave</BeforeSave>
+        <AfterSave>ПерерахунокТоварів_Triggers.AfterSave</AfterSave>
+        <SetDeletionLabel>ПерерахунокТоварів_Triggers.SetDeletionLabel</SetDeletionLabel>
+        <BeforeDelete>ПерерахунокТоварів_Triggers.BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <SpendFunctions>
-        <Spend>
-        </Spend>
-        <ClearSpend>
-        </ClearSpend>
+        <Spend>ПерерахунокТоварів_SpendTheDocument.Spend</Spend>
+        <ClearSpend>ПерерахунокТоварів_SpendTheDocument.ClearSpend</ClearSpend>
       </SpendFunctions>
     </Document>
     <Document>
@@ -17524,6 +17593,10 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <FullName>Введення залишків</FullName>
         </Item>
         <Item>
+          <Name>ПерерахунокТоварів</Name>
+          <FullName>Перерахунок товарів</FullName>
+        </Item>
+        <Item>
           <Name>ПсуванняТоварів</Name>
           <FullName>Псування товарів</FullName>
         </Item>
@@ -19609,54 +19682,90 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Fields>
             <Field>
               <Name>Назва</Name>
-              <DocField>
-              </DocField>
+              <DocField>Назва</DocField>
               <SqlType>
               </SqlType>
               <WherePeriod>0</WherePeriod>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
             </Field>
             <Field>
               <Name>Дата</Name>
-              <DocField>
-              </DocField>
+              <DocField>ДатаДок</DocField>
               <SqlType>
               </SqlType>
               <WherePeriod>1</WherePeriod>
+              <Type>datetime</Type>
+              <Pointer>
+              </Pointer>
             </Field>
             <Field>
               <Name>Номер</Name>
-              <DocField>
-              </DocField>
+              <DocField>НомерДок</DocField>
               <SqlType>
               </SqlType>
               <WherePeriod>0</WherePeriod>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
-              <DocField>
-              </DocField>
+              <DocField>Організація</DocField>
               <SqlType>
               </SqlType>
               <WherePeriod>0</WherePeriod>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Організації</Pointer>
+              <Join>
+                <table>Довідники.Організації_Const.TABLE</table>
+                <field>Організація</field>
+                <alias>join_tab_1</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_1</table>
+                <field>Довідники.Організації_Const.Назва</field>
+              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Контрагент</Name>
-              <DocField>
-              </DocField>
+              <DocField>Відповідальний</DocField>
               <SqlType>
               </SqlType>
               <WherePeriod>0</WherePeriod>
-            </Field>
-            <Field>
-              <Name>Каса</Name>
-              <DocField>
-              </DocField>
-              <SqlType>
-              </SqlType>
-              <WherePeriod>0</WherePeriod>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ФізичніОсоби</Pointer>
+              <Join>
+                <table>Довідники.ФізичніОсоби_Const.TABLE</table>
+                <field>Відповідальний</field>
+                <alias>join_tab_2</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_2</table>
+                <field>Довідники.ФізичніОсоби_Const.Назва</field>
+              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Склад</Name>
+              <DocField>Склад</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Склади</Pointer>
+              <Join>
+                <table>Довідники.Склади_Const.TABLE</table>
+                <field>Склад</field>
+                <alias>join_tab_3</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_3</table>
+                <field>Довідники.Склади_Const.Назва</field>
+              </FieldAndAlias>
+            </Field>
+            <Field>
+              <Name>Каса</Name>
               <DocField>
               </DocField>
               <SqlType>
@@ -19680,11 +19789,31 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
             </Field>
             <Field>
               <Name>Автор</Name>
-              <DocField>
-              </DocField>
+              <DocField>Автор</DocField>
               <SqlType>
               </SqlType>
               <WherePeriod>0</WherePeriod>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Користувачі</Pointer>
+              <Join>
+                <table>Довідники.Користувачі_Const.TABLE</table>
+                <field>Автор</field>
+                <alias>join_tab_4</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_4</table>
+                <field>Довідники.Користувачі_Const.Назва</field>
+              </FieldAndAlias>
+            </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <DocField>Коментар</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -22774,6 +22903,10 @@ SQL тип  непотрібно вказувати
           <FullName>Введення залишків</FullName>
         </Item>
         <Item>
+          <Name>ПерерахунокТоварів</Name>
+          <FullName>Перерахунок товарів</FullName>
+        </Item>
+        <Item>
           <Name>ПсуванняТоварів</Name>
           <FullName>Псування товарів</FullName>
         </Item>
@@ -23128,6 +23261,116 @@ SQL тип  непотрібно вказувати
           <Desc>
           </Desc>
           <Table>tab_a94</Table>
+          <Fields>
+            <Field>
+              <Name>Назва</Name>
+              <DocField>Назва</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>Дата</Name>
+              <DocField>ДатаДок</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>1</WherePeriod>
+              <Type>datetime</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>Номер</Name>
+              <DocField>НомерДок</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>Організація</Name>
+              <DocField>Організація</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Організації</Pointer>
+              <Join>
+                <table>Довідники.Організації_Const.TABLE</table>
+                <field>Організація</field>
+                <alias>join_tab_1</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_1</table>
+                <field>Довідники.Організації_Const.Назва</field>
+              </FieldAndAlias>
+            </Field>
+            <Field>
+              <Name>СкладВідправник</Name>
+              <DocField>Склад</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Склади</Pointer>
+              <Join>
+                <table>Довідники.Склади_Const.TABLE</table>
+                <field>Склад</field>
+                <alias>join_tab_2</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_2</table>
+                <field>Довідники.Склади_Const.Назва</field>
+              </FieldAndAlias>
+            </Field>
+            <Field>
+              <Name>СкладОтримувач</Name>
+              <DocField>
+              </DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+            </Field>
+            <Field>
+              <Name>Автор</Name>
+              <DocField>Автор</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Користувачі</Pointer>
+              <Join>
+                <table>Довідники.Користувачі_Const.TABLE</table>
+                <field>Автор</field>
+                <alias>join_tab_3</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_3</table>
+                <field>Довідники.Користувачі_Const.Назва</field>
+              </FieldAndAlias>
+            </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <DocField>Коментар</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+          </Fields>
+        </TabularList>
+        <TabularList>
+          <Name>ПерерахунокТоварів</Name>
+          <Desc>
+          </Desc>
+          <Table>tab_a92</Table>
           <Fields>
             <Field>
               <Name>Назва</Name>

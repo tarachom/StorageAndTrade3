@@ -173,7 +173,7 @@ namespace StorageAndTrade
                     if (валюти_Pointer.IsEmpty())
                     {
                         Валюти_Objest валюти_Objest = new Валюти_Objest();
-                        валюти_Objest.New();
+                        await валюти_Objest.New();
                         валюти_Objest.Назва = НазваВалюти;
                         валюти_Objest.Код_R030 = Код_R030;
                         валюти_Objest.КороткаНазва = Коротко;

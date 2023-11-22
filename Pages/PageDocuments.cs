@@ -206,6 +206,13 @@ namespace StorageAndTrade
                     Program.GeneralForm?.CreateNotebookPage($"{ПсуванняТоварів_Const.FULLNAME}", () => { return page; });
                     page.SetValue();
                 });
+
+                Link.AddLink(vRight, $"{ПерерахунокТоварів_Const.FULLNAME}", () =>
+                {
+                    ПерерахунокТоварів page = new ПерерахунокТоварів();
+                    Program.GeneralForm?.CreateNotebookPage($"{ПерерахунокТоварів_Const.FULLNAME}", () => { return page; });
+                    page.SetValue();
+                });
             }
 
             Link.AddCaption(vRight, "Адресне зберігання", PageJournals.АдреснеЗберігання);

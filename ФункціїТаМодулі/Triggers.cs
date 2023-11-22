@@ -41,9 +41,11 @@ namespace StorageAndTrade_1_0.Довідники
 {
     class Організації_Triggers
     {
-        public static void New(Організації_Objest ДовідникОбєкт)
+        public static async ValueTask New(Організації_Objest ДовідникОбєкт)
         {
             ДовідникОбєкт.Код = (++НумераціяДовідників.Організації_Const).ToString("D6");
+
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask Copying(Організації_Objest ДовідникОбєкт, Організації_Objest Основа)
@@ -76,9 +78,11 @@ namespace StorageAndTrade_1_0.Довідники
 
     class Номенклатура_Triggers
     {
-        public static void New(Номенклатура_Objest ДовідникОбєкт)
+        public static async ValueTask New(Номенклатура_Objest ДовідникОбєкт)
         {
             ДовідникОбєкт.Код = (++НумераціяДовідників.Номенклатура_Const).ToString("D6");
+
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask Copying(Номенклатура_Objest ДовідникОбєкт, Номенклатура_Objest Основа)
@@ -152,9 +156,11 @@ WHERE
 
     class Виробники_Triggers
     {
-        public static void New(Виробники_Objest ДовідникОбєкт)
+        public static async ValueTask New(Виробники_Objest ДовідникОбєкт)
         {
             ДовідникОбєкт.Код = (++НумераціяДовідників.Виробники_Const).ToString("D6");
+
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask Copying(Виробники_Objest ДовідникОбєкт, Виробники_Objest Основа)
@@ -187,9 +193,11 @@ WHERE
 
     class ВидиНоменклатури_Triggers
     {
-        public static void New(ВидиНоменклатури_Objest ДовідникОбєкт)
+        public static async ValueTask New(ВидиНоменклатури_Objest ДовідникОбєкт)
         {
             ДовідникОбєкт.Код = (++НумераціяДовідників.ВидиНоменклатури_Const).ToString("D6");
+
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask Copying(ВидиНоменклатури_Objest ДовідникОбєкт, ВидиНоменклатури_Objest Основа)
@@ -222,9 +230,11 @@ WHERE
 
     class ПакуванняОдиниціВиміру_Triggers
     {
-        public static void New(ПакуванняОдиниціВиміру_Objest ДовідникОбєкт)
+        public static async ValueTask New(ПакуванняОдиниціВиміру_Objest ДовідникОбєкт)
         {
             ДовідникОбєкт.Код = (++НумераціяДовідників.ПакуванняОдиниціВиміру_Const).ToString("D6");
+
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask Copying(ПакуванняОдиниціВиміру_Objest ДовідникОбєкт, ПакуванняОдиниціВиміру_Objest Основа)
@@ -257,9 +267,11 @@ WHERE
 
     class Валюти_Triggers
     {
-        public static void New(Валюти_Objest ДовідникОбєкт)
+        public static async ValueTask New(Валюти_Objest ДовідникОбєкт)
         {
             ДовідникОбєкт.Код = (++НумераціяДовідників.Валюти_Const).ToString("D6");
+
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask Copying(Валюти_Objest ДовідникОбєкт, Валюти_Objest Основа)
@@ -308,9 +320,11 @@ WHERE
 
     class Контрагенти_Triggers
     {
-        public static void New(Контрагенти_Objest ДовідникОбєкт)
+        public static async ValueTask New(Контрагенти_Objest ДовідникОбєкт)
         {
             ДовідникОбєкт.Код = (++НумераціяДовідників.Контрагенти_Const).ToString("D6");
+
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask Copying(Контрагенти_Objest ДовідникОбєкт, Контрагенти_Objest Основа)
@@ -358,9 +372,11 @@ WHERE
 
     class Склади_Triggers
     {
-        public static void New(Склади_Objest ДовідникОбєкт)
+        public static async ValueTask New(Склади_Objest ДовідникОбєкт)
         {
             ДовідникОбєкт.Код = (++НумераціяДовідників.Склади_Const).ToString("D6");
+
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask Copying(Склади_Objest ДовідникОбєкт, Склади_Objest Основа)
@@ -393,9 +409,11 @@ WHERE
 
     class ВидиЦін_Triggers
     {
-        public static void New(ВидиЦін_Objest ДовідникОбєкт)
+        public static async ValueTask New(ВидиЦін_Objest ДовідникОбєкт)
         {
             ДовідникОбєкт.Код = (++НумераціяДовідників.ВидиЦін_Const).ToString("D6");
+
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask Copying(ВидиЦін_Objest ДовідникОбєкт, ВидиЦін_Objest Основа)
@@ -428,9 +446,11 @@ WHERE
 
     class ВидиЦінПостачальників_Triggers
     {
-        public static void New(ВидиЦінПостачальників_Objest ДовідникОбєкт)
+        public static async ValueTask New(ВидиЦінПостачальників_Objest ДовідникОбєкт)
         {
             ДовідникОбєкт.Код = (++НумераціяДовідників.ВидиЦінПостачальників_Const).ToString("D6");
+
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask Copying(ВидиЦінПостачальників_Objest ДовідникОбєкт, ВидиЦінПостачальників_Objest Основа)
@@ -463,9 +483,11 @@ WHERE
 
     class Користувачі_Triggers
     {
-        public static void New(Користувачі_Objest ДовідникОбєкт)
+        public static async ValueTask New(Користувачі_Objest ДовідникОбєкт)
         {
             ДовідникОбєкт.Код = (++НумераціяДовідників.Користувачі_Const).ToString("D6");
+
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask Copying(Користувачі_Objest ДовідникОбєкт, Користувачі_Objest Основа)
@@ -498,9 +520,11 @@ WHERE
 
     class ФізичніОсоби_Triggers
     {
-        public static void New(ФізичніОсоби_Objest ДовідникОбєкт)
+        public static async ValueTask New(ФізичніОсоби_Objest ДовідникОбєкт)
         {
             ДовідникОбєкт.Код = (++НумераціяДовідників.ФізичніОсоби_Const).ToString("D6");
+
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask Copying(ФізичніОсоби_Objest ДовідникОбєкт, ФізичніОсоби_Objest Основа)
@@ -533,9 +557,11 @@ WHERE
 
     class СтруктураПідприємства_Triggers
     {
-        public static void New(СтруктураПідприємства_Objest ДовідникОбєкт)
+        public static async ValueTask New(СтруктураПідприємства_Objest ДовідникОбєкт)
         {
             ДовідникОбєкт.Код = (++НумераціяДовідників.СтруктураПідприємства_Const).ToString("D6");
+
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask Copying(СтруктураПідприємства_Objest ДовідникОбєкт, СтруктураПідприємства_Objest Основа)
@@ -568,9 +594,11 @@ WHERE
 
     class КраїниСвіту_Triggers
     {
-        public static void New(КраїниСвіту_Objest ДовідникОбєкт)
+        public static async ValueTask New(КраїниСвіту_Objest ДовідникОбєкт)
         {
             ДовідникОбєкт.Код = (++НумераціяДовідників.КраїниСвіту_Const).ToString("D6");
+
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask Copying(КраїниСвіту_Objest ДовідникОбєкт, КраїниСвіту_Objest Основа)
@@ -603,9 +631,11 @@ WHERE
 
     class Файли_Triggers
     {
-        public static void New(Файли_Objest ДовідникОбєкт)
+        public static async ValueTask New(Файли_Objest ДовідникОбєкт)
         {
             ДовідникОбєкт.Код = (++НумераціяДовідників.Файли_Const).ToString("D6");
+
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask Copying(Файли_Objest ДовідникОбєкт, Файли_Objest Основа)
@@ -638,9 +668,11 @@ WHERE
 
     class ХарактеристикиНоменклатури_Triggers
     {
-        public static void New(ХарактеристикиНоменклатури_Objest ДовідникОбєкт)
+        public static async ValueTask New(ХарактеристикиНоменклатури_Objest ДовідникОбєкт)
         {
             ДовідникОбєкт.Код = (++НумераціяДовідників.ХарактеристикиНоменклатури_Const).ToString("D6");
+
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask Copying(ХарактеристикиНоменклатури_Objest ДовідникОбєкт, ХарактеристикиНоменклатури_Objest Основа)
@@ -673,9 +705,11 @@ WHERE
 
     class Номенклатура_Папки_Triggers
     {
-        public static void New(Номенклатура_Папки_Objest ДовідникОбєкт)
+        public static async ValueTask New(Номенклатура_Папки_Objest ДовідникОбєкт)
         {
             ДовідникОбєкт.Код = (++НумераціяДовідників.Номенклатура_Папки_Const).ToString("D6");
+
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask Copying(Номенклатура_Папки_Objest ДовідникОбєкт, Номенклатура_Папки_Objest Основа)
@@ -780,9 +814,11 @@ WHERE
 
     class Контрагенти_Папки_Triggers
     {
-        public static void New(Контрагенти_Папки_Objest ДовідникОбєкт)
+        public static async ValueTask New(Контрагенти_Папки_Objest ДовідникОбєкт)
         {
             ДовідникОбєкт.Код = (++НумераціяДовідників.Контрагенти_Папки_Const).ToString("D6");
+
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask Copying(Контрагенти_Папки_Objest ДовідникОбєкт, Контрагенти_Папки_Objest Основа)
@@ -891,9 +927,11 @@ WHERE
 
     class Склади_Папки_Triggers
     {
-        public static void New(Склади_Папки_Objest ДовідникОбєкт)
+        public static async ValueTask New(Склади_Папки_Objest ДовідникОбєкт)
         {
             ДовідникОбєкт.Код = (++НумераціяДовідників.Склади_Папки_Const).ToString("D6");
+
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask Copying(Склади_Папки_Objest ДовідникОбєкт, Склади_Папки_Objest Основа)
@@ -998,9 +1036,11 @@ WHERE
 
     class Каси_Triggers
     {
-        public static void New(Каси_Objest ДовідникОбєкт)
+        public static async ValueTask New(Каси_Objest ДовідникОбєкт)
         {
             ДовідникОбєкт.Код = (++НумераціяДовідників.Каси_Const).ToString("D6");
+
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask Copying(Каси_Objest ДовідникОбєкт, Каси_Objest Основа)
@@ -1033,9 +1073,11 @@ WHERE
 
     class БанківськіРахункиОрганізацій_Triggers
     {
-        public static void New(БанківськіРахункиОрганізацій_Objest ДовідникОбєкт)
+        public static async ValueTask New(БанківськіРахункиОрганізацій_Objest ДовідникОбєкт)
         {
             ДовідникОбєкт.Код = (++НумераціяДовідників.БанківськіРахункиОрганізацій_Const).ToString("D6");
+
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask Copying(БанківськіРахункиОрганізацій_Objest ДовідникОбєкт, БанківськіРахункиОрганізацій_Objest Основа)
@@ -1068,9 +1110,11 @@ WHERE
 
     class ДоговориКонтрагентів_Triggers
     {
-        public static void New(ДоговориКонтрагентів_Objest ДовідникОбєкт)
+        public static async ValueTask New(ДоговориКонтрагентів_Objest ДовідникОбєкт)
         {
             ДовідникОбєкт.Код = (++НумераціяДовідників.ДоговориКонтрагентів_Const).ToString("D6");
+
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask Copying(ДоговориКонтрагентів_Objest ДовідникОбєкт, ДоговориКонтрагентів_Objest Основа)
@@ -1106,9 +1150,11 @@ WHERE
 
     class БанківськіРахункиКонтрагентів_Triggers
     {
-        public static void New(БанківськіРахункиКонтрагентів_Objest ДовідникОбєкт)
+        public static async ValueTask New(БанківськіРахункиКонтрагентів_Objest ДовідникОбєкт)
         {
             ДовідникОбєкт.Код = (++НумераціяДовідників.БанківськіРахункиКонтрагентів_Const).ToString("D6");
+
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask Copying(БанківськіРахункиКонтрагентів_Objest ДовідникОбєкт, БанківськіРахункиКонтрагентів_Objest Основа)
@@ -1141,9 +1187,11 @@ WHERE
 
     class СтаттяРухуКоштів_Triggers
     {
-        public static void New(СтаттяРухуКоштів_Objest ДовідникОбєкт)
+        public static async ValueTask New(СтаттяРухуКоштів_Objest ДовідникОбєкт)
         {
             ДовідникОбєкт.Код = (++НумераціяДовідників.СтаттяРухуКоштів_Const).ToString("D6");
+
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask Copying(СтаттяРухуКоштів_Objest ДовідникОбєкт, СтаттяРухуКоштів_Objest Основа)
@@ -1176,9 +1224,11 @@ WHERE
 
     class СеріїНоменклатури_Triggers
     {
-        public static void New(СеріїНоменклатури_Objest ДовідникОбєкт)
+        public static async ValueTask New(СеріїНоменклатури_Objest ДовідникОбєкт)
         {
             ДовідникОбєкт.ДатаСтворення = DateTime.Now;
+
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask Copying(СеріїНоменклатури_Objest ДовідникОбєкт, СеріїНоменклатури_Objest Основа)
@@ -1220,9 +1270,9 @@ WHERE
 
     class ПартіяТоварівКомпозит_Triggers
     {
-        public static void New(ПартіяТоварівКомпозит_Objest ДовідникОбєкт)
+        public static async ValueTask New(ПартіяТоварівКомпозит_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask Copying(ПартіяТоварівКомпозит_Objest ДовідникОбєкт, ПартіяТоварівКомпозит_Objest Основа)
@@ -1253,9 +1303,11 @@ WHERE
 
     class ВидиЗапасів_Triggers
     {
-        public static void New(ВидиЗапасів_Objest ДовідникОбєкт)
+        public static async ValueTask New(ВидиЗапасів_Objest ДовідникОбєкт)
         {
             ДовідникОбєкт.Код = (++НумераціяДовідників.ВидиЗапасів_Const).ToString("D6");
+
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask Copying(ВидиЗапасів_Objest ДовідникОбєкт, ВидиЗапасів_Objest Основа)
@@ -1288,9 +1340,11 @@ WHERE
 
     class Банки_Triggers
     {
-        public static void New(Банки_Objest ДовідникОбєкт)
+        public static async ValueTask New(Банки_Objest ДовідникОбєкт)
         {
             ДовідникОбєкт.Код = (++НумераціяДовідників.Банки_Const).ToString("D6");
+
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask Copying(Банки_Objest ДовідникОбєкт, Банки_Objest Основа)
@@ -1323,9 +1377,9 @@ WHERE
 
     class СкладськіПриміщення_Triggers
     {
-        public static void New(СкладськіПриміщення_Objest ДовідникОбєкт)
+        public static async ValueTask New(СкладськіПриміщення_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask Copying(СкладськіПриміщення_Objest ДовідникОбєкт, СкладськіПриміщення_Objest Основа)
@@ -1358,9 +1412,9 @@ WHERE
 
     class СкладськіКомірки_Triggers
     {
-        public static void New(СкладськіКомірки_Objest ДовідникОбєкт)
+        public static async ValueTask New(СкладськіКомірки_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask Copying(СкладськіКомірки_Objest ДовідникОбєкт, СкладськіКомірки_Objest Основа)
@@ -1393,9 +1447,9 @@ WHERE
 
     class ТипорозміриКомірок_Triggers
     {
-        public static void New(ТипорозміриКомірок_Objest ДовідникОбєкт)
+        public static async ValueTask New(ТипорозміриКомірок_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask Copying(ТипорозміриКомірок_Objest ДовідникОбєкт, ТипорозміриКомірок_Objest Основа)
@@ -1428,9 +1482,10 @@ WHERE
 
     class СкладськіКомірки_Папки_Triggers
     {
-        public static void New(СкладськіКомірки_Папки_Objest ДовідникОбєкт)
+        public static async ValueTask New(СкладськіКомірки_Папки_Objest ДовідникОбєкт)
         {
             ДовідникОбєкт.Код = (++НумераціяДовідників.СкладськіКомірки_Папки_Const).ToString("D6");
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask Copying(СкладськіКомірки_Папки_Objest ДовідникОбєкт, СкладськіКомірки_Папки_Objest Основа)
@@ -1534,10 +1589,12 @@ WHERE
 
     class Блокнот_Triggers
     {
-        public static void New(Блокнот_Objest ДовідникОбєкт)
+        public static async ValueTask New(Блокнот_Objest ДовідникОбєкт)
         {
             ДовідникОбєкт.Код = (++НумераціяДовідників.Блокнот_Const).ToString("D6");
             ДовідникОбєкт.ДатаЗапису = DateTime.Now;
+
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask Copying(Блокнот_Objest ДовідникОбєкт, Блокнот_Objest Основа)
@@ -1574,12 +1631,14 @@ namespace StorageAndTrade_1_0.Документи
 {
     class ЗамовленняПостачальнику_Triggers
     {
-        public static void New(ЗамовленняПостачальнику_Objest ДокументОбєкт)
+        public static async ValueTask New(ЗамовленняПостачальнику_Objest ДокументОбєкт)
         {
             ДокументОбєкт.НомерДок = (++НумераціяДокументів.ЗамовленняПостачальнику_Const).ToString("D8");
             ДокументОбєкт.ДатаДок = System.DateTime.Now;
             ДокументОбєкт.Автор = Program.Користувач;
             ДокументОбєкт.Менеджер = Program.Користувач;
+
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask Copying(ЗамовленняПостачальнику_Objest ДокументОбєкт, ЗамовленняПостачальнику_Objest Основа)
@@ -1612,12 +1671,14 @@ namespace StorageAndTrade_1_0.Документи
 
     class ПоступленняТоварівТаПослуг_Triggers
     {
-        public static void New(ПоступленняТоварівТаПослуг_Objest ДокументОбєкт)
+        public static async ValueTask New(ПоступленняТоварівТаПослуг_Objest ДокументОбєкт)
         {
             ДокументОбєкт.НомерДок = (++НумераціяДокументів.ПоступленняТоварівТаПослуг_Const).ToString("D8");
             ДокументОбєкт.ДатаДок = System.DateTime.Now;
             ДокументОбєкт.Автор = Program.Користувач;
             ДокументОбєкт.Менеджер = Program.Користувач;
+
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask Copying(ПоступленняТоварівТаПослуг_Objest ДокументОбєкт, ПоступленняТоварівТаПослуг_Objest Основа)
@@ -1665,12 +1726,14 @@ namespace StorageAndTrade_1_0.Документи
 
     class ЗамовленняКлієнта_Triggers
     {
-        public static void New(ЗамовленняКлієнта_Objest ДокументОбєкт)
+        public static async ValueTask New(ЗамовленняКлієнта_Objest ДокументОбєкт)
         {
             ДокументОбєкт.НомерДок = (++НумераціяДокументів.ЗамовленняКлієнта_Const).ToString("D8");
             ДокументОбєкт.ДатаДок = System.DateTime.Now;
             ДокументОбєкт.Автор = Program.Користувач;
             ДокументОбєкт.Менеджер = Program.Користувач;
+
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask Copying(ЗамовленняКлієнта_Objest ДокументОбєкт, ЗамовленняКлієнта_Objest Основа)
@@ -1703,12 +1766,14 @@ namespace StorageAndTrade_1_0.Документи
 
     class РеалізаціяТоварівТаПослуг_Triggers
     {
-        public static void New(РеалізаціяТоварівТаПослуг_Objest ДокументОбєкт)
+        public static async ValueTask New(РеалізаціяТоварівТаПослуг_Objest ДокументОбєкт)
         {
             ДокументОбєкт.НомерДок = (++НумераціяДокументів.РеалізаціяТоварівТаПослуг_Const).ToString("D8");
             ДокументОбєкт.ДатаДок = DateTime.Now;
             ДокументОбєкт.Автор = Program.Користувач;
             ДокументОбєкт.Менеджер = Program.Користувач;
+
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask Copying(РеалізаціяТоварівТаПослуг_Objest ДокументОбєкт, РеалізаціяТоварівТаПослуг_Objest Основа)
@@ -1741,11 +1806,13 @@ namespace StorageAndTrade_1_0.Документи
 
     class ВстановленняЦінНоменклатури_Triggers
     {
-        public static void New(ВстановленняЦінНоменклатури_Objest ДокументОбєкт)
+        public static async ValueTask New(ВстановленняЦінНоменклатури_Objest ДокументОбєкт)
         {
             ДокументОбєкт.НомерДок = (++НумераціяДокументів.ВстановленняЦінНоменклатури_Const).ToString("D8");
             ДокументОбєкт.ДатаДок = DateTime.Now;
             ДокументОбєкт.Автор = Program.Користувач;
+
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask Copying(ВстановленняЦінНоменклатури_Objest ДокументОбєкт, ВстановленняЦінНоменклатури_Objest Основа)
@@ -1778,11 +1845,13 @@ namespace StorageAndTrade_1_0.Документи
 
     class ПрихіднийКасовийОрдер_Triggers
     {
-        public static void New(ПрихіднийКасовийОрдер_Objest ДокументОбєкт)
+        public static async ValueTask New(ПрихіднийКасовийОрдер_Objest ДокументОбєкт)
         {
             ДокументОбєкт.НомерДок = (++НумераціяДокументів.ПрихіднийКасовийОрдер_Const).ToString("D8");
             ДокументОбєкт.ДатаДок = System.DateTime.Now;
             ДокументОбєкт.Автор = Program.Користувач;
+
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask Copying(ПрихіднийКасовийОрдер_Objest ДокументОбєкт, ПрихіднийКасовийОрдер_Objest Основа)
@@ -1815,11 +1884,13 @@ namespace StorageAndTrade_1_0.Документи
 
     class РозхіднийКасовийОрдер_Triggers
     {
-        public static void New(РозхіднийКасовийОрдер_Objest ДокументОбєкт)
+        public static async ValueTask New(РозхіднийКасовийОрдер_Objest ДокументОбєкт)
         {
             ДокументОбєкт.НомерДок = (++НумераціяДокументів.РозхіднийКасовийОрдер_Const).ToString("D8");
             ДокументОбєкт.ДатаДок = DateTime.Now;
             ДокументОбєкт.Автор = Program.Користувач;
+
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask Copying(РозхіднийКасовийОрдер_Objest ДокументОбєкт, РозхіднийКасовийОрдер_Objest Основа)
@@ -1849,14 +1920,16 @@ namespace StorageAndTrade_1_0.Документи
 
         }
     }
-    
+
     class ПереміщенняТоварів_Triggers
     {
-        public static void New(ПереміщенняТоварів_Objest ДокументОбєкт)
+        public static async ValueTask New(ПереміщенняТоварів_Objest ДокументОбєкт)
         {
             ДокументОбєкт.НомерДок = (++НумераціяДокументів.ПереміщенняТоварів_Const).ToString("D8");
             ДокументОбєкт.ДатаДок = DateTime.Now;
             ДокументОбєкт.Автор = Program.Користувач;
+
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask Copying(ПереміщенняТоварів_Objest ДокументОбєкт, ПереміщенняТоварів_Objest Основа)
@@ -1889,12 +1962,14 @@ namespace StorageAndTrade_1_0.Документи
 
     class ПоверненняТоварівПостачальнику_Triggers
     {
-        public static void New(ПоверненняТоварівПостачальнику_Objest ДокументОбєкт)
+        public static async ValueTask New(ПоверненняТоварівПостачальнику_Objest ДокументОбєкт)
         {
             ДокументОбєкт.НомерДок = (++НумераціяДокументів.ПоверненняТоварівПостачальнику_Const).ToString("D8");
             ДокументОбєкт.ДатаДок = DateTime.Now;
             ДокументОбєкт.Автор = Program.Користувач;
             ДокументОбєкт.Менеджер = Program.Користувач;
+
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask Copying(ПоверненняТоварівПостачальнику_Objest ДокументОбєкт, ПоверненняТоварівПостачальнику_Objest Основа)
@@ -1927,12 +2002,14 @@ namespace StorageAndTrade_1_0.Документи
 
     class ПоверненняТоварівВідКлієнта_Triggers
     {
-        public static void New(ПоверненняТоварівВідКлієнта_Objest ДокументОбєкт)
+        public static async ValueTask New(ПоверненняТоварівВідКлієнта_Objest ДокументОбєкт)
         {
             ДокументОбєкт.НомерДок = (++НумераціяДокументів.ПоверненняТоварівВідКлієнта_Const).ToString("D8");
             ДокументОбєкт.ДатаДок = DateTime.Now;
             ДокументОбєкт.Автор = Program.Користувач;
             ДокументОбєкт.Менеджер = Program.Користувач;
+
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask Copying(ПоверненняТоварівВідКлієнта_Objest ДокументОбєкт, ПоверненняТоварівВідКлієнта_Objest Основа)
@@ -1965,12 +2042,14 @@ namespace StorageAndTrade_1_0.Документи
 
     class АктВиконанихРобіт_Triggers
     {
-        public static void New(АктВиконанихРобіт_Objest ДокументОбєкт)
+        public static async ValueTask New(АктВиконанихРобіт_Objest ДокументОбєкт)
         {
             ДокументОбєкт.НомерДок = (++НумераціяДокументів.АктВиконанихРобіт_Const).ToString("D8");
             ДокументОбєкт.ДатаДок = DateTime.Now;
             ДокументОбєкт.Автор = Program.Користувач;
             ДокументОбєкт.Менеджер = Program.Користувач;
+
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask Copying(АктВиконанихРобіт_Objest ДокументОбєкт, АктВиконанихРобіт_Objest Основа)
@@ -2003,11 +2082,13 @@ namespace StorageAndTrade_1_0.Документи
 
     class ВведенняЗалишків_Triggers
     {
-        public static void New(ВведенняЗалишків_Objest ДокументОбєкт)
+        public static async ValueTask New(ВведенняЗалишків_Objest ДокументОбєкт)
         {
             ДокументОбєкт.НомерДок = (++НумераціяДокументів.ВведенняЗалишків_Const).ToString("D8");
             ДокументОбєкт.ДатаДок = DateTime.Now;
             ДокументОбєкт.Автор = Program.Користувач;
+
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask Copying(ВведенняЗалишків_Objest ДокументОбєкт, ВведенняЗалишків_Objest Основа)
@@ -2053,13 +2134,56 @@ namespace StorageAndTrade_1_0.Документи
         }
     }
 
+    class ПерерахунокТоварів_Triggers
+    {
+        public static async ValueTask New(ПерерахунокТоварів_Objest ДокументОбєкт)
+        {
+            ДокументОбєкт.НомерДок = (++НумераціяДокументів.ПерерахунокТоварів_Const).ToString("D8");
+            ДокументОбєкт.ДатаДок = DateTime.Now;
+            ДокументОбєкт.Автор = Program.Користувач;
+
+            //Відповідального можна отримати з Користувача
+            var Користувач_Обєкт = await Program.Користувач.GetDirectoryObject();
+            if (Користувач_Обєкт != null)
+                ДокументОбєкт.Відповідальний = Користувач_Обєкт.ФізичнаОсоба;
+        }
+
+        public static async ValueTask Copying(ПерерахунокТоварів_Objest ДокументОбєкт, ПерерахунокТоварів_Objest Основа)
+        {
+            ДокументОбєкт.Назва += " - Копія";
+            await ValueTask.FromResult(true);
+        }
+
+        public static void BeforeSave(ПерерахунокТоварів_Objest ДокументОбєкт)
+        {
+            ДокументОбєкт.Назва = $"{ПерерахунокТоварів_Const.FULLNAME} №{ДокументОбєкт.НомерДок} від {ДокументОбєкт.ДатаДок.ToShortDateString()}";
+        }
+
+        public static void AfterSave(ПерерахунокТоварів_Objest ДокументОбєкт)
+        {
+
+        }
+
+        public static void SetDeletionLabel(ПерерахунокТоварів_Objest ДокументОбєкт, bool label)
+        {
+
+        }
+
+        public static void BeforeDelete(ПерерахунокТоварів_Objest ДокументОбєкт)
+        {
+
+        }
+    }
+
     class ПсуванняТоварів_Triggers
     {
-        public static void New(ПсуванняТоварів_Objest ДокументОбєкт)
+        public static async ValueTask New(ПсуванняТоварів_Objest ДокументОбєкт)
         {
             ДокументОбєкт.НомерДок = (++НумераціяДокументів.ПсуванняТоварів_Const).ToString("D8");
             ДокументОбєкт.ДатаДок = DateTime.Now;
             ДокументОбєкт.Автор = Program.Користувач;
+
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask Copying(ПсуванняТоварів_Objest ДокументОбєкт, ПсуванняТоварів_Objest Основа)
@@ -2092,11 +2216,13 @@ namespace StorageAndTrade_1_0.Документи
 
     class ВнутрішнєСпоживанняТоварів_Triggers
     {
-        public static void New(ВнутрішнєСпоживанняТоварів_Objest ДокументОбєкт)
+        public static async ValueTask New(ВнутрішнєСпоживанняТоварів_Objest ДокументОбєкт)
         {
             ДокументОбєкт.НомерДок = (++НумераціяДокументів.ВнутрішнєСпоживанняТоварів_Const).ToString("D8");
             ДокументОбєкт.ДатаДок = DateTime.Now;
             ДокументОбєкт.Автор = Program.Користувач;
+
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask Copying(ВнутрішнєСпоживанняТоварів_Objest ДокументОбєкт, ВнутрішнєСпоживанняТоварів_Objest Основа)
@@ -2129,12 +2255,14 @@ namespace StorageAndTrade_1_0.Документи
 
     class РахунокФактура_Triggers
     {
-        public static void New(РахунокФактура_Objest ДокументОбєкт)
+        public static async ValueTask New(РахунокФактура_Objest ДокументОбєкт)
         {
             ДокументОбєкт.НомерДок = (++НумераціяДокументів.РахунокФактура_Const).ToString("D8");
             ДокументОбєкт.ДатаДок = DateTime.Now;
             ДокументОбєкт.Автор = Program.Користувач;
             ДокументОбєкт.Менеджер = Program.Користувач;
+
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask Copying(РахунокФактура_Objest ДокументОбєкт, РахунокФактура_Objest Основа)
@@ -2167,11 +2295,13 @@ namespace StorageAndTrade_1_0.Документи
 
     class РозміщенняТоварівНаСкладі_Triggers
     {
-        public static void New(РозміщенняТоварівНаСкладі_Objest ДокументОбєкт)
+        public static async ValueTask New(РозміщенняТоварівНаСкладі_Objest ДокументОбєкт)
         {
             ДокументОбєкт.НомерДок = (++НумераціяДокументів.РозміщенняТоварівНаСкладі_Const).ToString("D8");
             ДокументОбєкт.ДатаДок = DateTime.Now;
             ДокументОбєкт.Автор = Program.Користувач;
+
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask Copying(РозміщенняТоварівНаСкладі_Objest ДокументОбєкт, РозміщенняТоварівНаСкладі_Objest Основа)
@@ -2204,11 +2334,13 @@ namespace StorageAndTrade_1_0.Документи
 
     class ПереміщенняТоварівНаСкладі_Triggers
     {
-        public static void New(ПереміщенняТоварівНаСкладі_Objest ДокументОбєкт)
+        public static async ValueTask New(ПереміщенняТоварівНаСкладі_Objest ДокументОбєкт)
         {
             ДокументОбєкт.НомерДок = (++НумераціяДокументів.ПереміщенняТоварівНаСкладі_Const).ToString("D8");
             ДокументОбєкт.ДатаДок = DateTime.Now;
             ДокументОбєкт.Автор = Program.Користувач;
+
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask Copying(ПереміщенняТоварівНаСкладі_Objest ДокументОбєкт, ПереміщенняТоварівНаСкладі_Objest Основа)
@@ -2241,11 +2373,13 @@ namespace StorageAndTrade_1_0.Документи
 
     class ЗбіркаТоварівНаСкладі_Triggers
     {
-        public static void New(ЗбіркаТоварівНаСкладі_Objest ДокументОбєкт)
+        public static async ValueTask New(ЗбіркаТоварівНаСкладі_Objest ДокументОбєкт)
         {
             ДокументОбєкт.НомерДок = (++НумераціяДокументів.ЗбіркаТоварівНаСкладі_Const).ToString("D8");
             ДокументОбєкт.ДатаДок = DateTime.Now;
             ДокументОбєкт.Автор = Program.Користувач;
+
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask Copying(ЗбіркаТоварівНаСкладі_Objest ДокументОбєкт, ЗбіркаТоварівНаСкладі_Objest Основа)
@@ -2278,11 +2412,13 @@ namespace StorageAndTrade_1_0.Документи
 
     class РозміщенняНоменклатуриПоКоміркам_Triggers
     {
-        public static void New(РозміщенняНоменклатуриПоКоміркам_Objest ДокументОбєкт)
+        public static async ValueTask New(РозміщенняНоменклатуриПоКоміркам_Objest ДокументОбєкт)
         {
             ДокументОбєкт.НомерДок = (++НумераціяДокументів.РозміщенняНоменклатуриПоКоміркам_Const).ToString("D8");
             ДокументОбєкт.ДатаДок = DateTime.Now;
             ДокументОбєкт.Автор = Program.Користувач;
+
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask Copying(РозміщенняНоменклатуриПоКоміркам_Objest ДокументОбєкт, РозміщенняНоменклатуриПоКоміркам_Objest Основа)

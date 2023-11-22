@@ -322,7 +322,7 @@ namespace StorageAndTrade
                             Тобто функція Read викликається через ReadSync, хотя можна викликати Read, 
                             але є проблеми з отриманням результату, треба подумати
                             */
-                            object? readObj = docObjest.GetType().InvokeMember("ReadSync", BindingFlags.InvokeMethod, null, docObjest, [unigueID]);
+                            object? readObj = docObjest.GetType().InvokeMember("ReadSync", BindingFlags.InvokeMethod, null, docObjest, [unigueID, false]);
                             if (readObj != null && (bool)readObj)
                             {
                                 bool DeletionLabel = (bool)(docObjest.GetType().GetProperty("DeletionLabel")?.GetValue(docObjest) ?? false);

@@ -157,10 +157,10 @@ namespace StorageAndTrade
 
         #region Присвоєння / зчитування значень
 
-        public override void SetValue()
+        public override async void SetValue()
         {
             if (IsNew)
-                Файли_Objest.New();
+                await Файли_Objest.New();
 
             Код.Text = Файли_Objest.Код;
             Назва.Text = Файли_Objest.Назва;

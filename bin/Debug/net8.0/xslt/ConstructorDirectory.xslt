@@ -213,13 +213,13 @@ namespace StorageAndTrade
 
         #region Присвоєння / зчитування значень
 
-        public override void SetValue()
+        public override async void SetValue()
         {            
             <xsl:choose>
                 <xsl:when test="$IsTree = '1'">
                     if (IsNew)
                     {
-                        <xsl:value-of select="$DirectoryName"/>_Objest.New();
+                        await <xsl:value-of select="$DirectoryName"/>_Objest.New();
                         <xsl:value-of select="$DirectoryName"/>_Objest.Родич = РодичДляНового;
                     }
                     else
@@ -1021,7 +1021,7 @@ namespace StorageAndTrade
             set
             {
                 pointer = value;
-                Presentation = (pointer != null ? pointer.GetPresentation() : "");
+                Presentation = pointer != null ? Task.Run(async () =&gt; { return await pointer.GetPresentation(); }).Result : "";
             }
         }
 
@@ -1032,13 +1032,17 @@ namespace StorageAndTrade
             if (BeforeClickOpenFunc != null)
                 BeforeClickOpenFunc.Invoke();
 
-            <xsl:value-of select="$DirectoryName"/>_ШвидкийВибір page = new <xsl:value-of select="$DirectoryName"/>_ШвидкийВибір() { PopoverParent = PopoverSmallSelect, DirectoryPointerItem = Pointer.UnigueID };
-            page.CallBack_OnSelectPointer = (UnigueID selectPointer) =&gt;
-            {
-                Pointer = new <xsl:value-of select="$DirectoryName"/>_Pointer(selectPointer);
+            <xsl:value-of select="$DirectoryName"/>_ШвидкийВибір page = new <xsl:value-of select="$DirectoryName"/>_ШвидкийВибір() 
+            { 
+                PopoverParent = PopoverSmallSelect, 
+                DirectoryPointerItem = Pointer.UnigueID,
+                CallBack_OnSelectPointer = (UnigueID selectPointer) =&gt;
+                {
+                    Pointer = new <xsl:value-of select="$DirectoryName"/>_Pointer(selectPointer);
 
-                if (AfterSelectFunc != null)
-                    AfterSelectFunc.Invoke();
+                    if (AfterSelectFunc != null)
+                        AfterSelectFunc.Invoke();
+                }
             };
 
             PopoverSmallSelect.Add(page);

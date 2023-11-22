@@ -191,7 +191,7 @@ namespace StorageAndTrade
                     if (банки_Pointer.IsEmpty())
                     {
                         банки_Objest = new Банки_Objest();
-                        банки_Objest.New();
+                        await банки_Objest.New();
                         банки_Objest.КодМФО = КодМФО;
 
                         CreateMessage(TypeMessage.Ok, $"Додано новий елемент довідника Банки: {Назва}");

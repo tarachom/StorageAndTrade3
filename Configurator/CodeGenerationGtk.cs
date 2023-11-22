@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 22.11.2023 13:55:21
+ * Дата конфігурації: 22.11.2023 18:02:39
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон Gtk.xslt
@@ -10812,21 +10812,25 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         string Назва = "";
         string НомерДок = "";
         string ДатаДок = "";
+        string Організація = "";
         string Склад = "";
+        string Відповідальний = "";
         string Автор = "";
         string Коментар = "";
 
         Array ToArray()
         {
             return new object[] { new Gdk.Pixbuf(Image), ID, Spend /*Проведений документ*/
-            /* */ , Назва, НомерДок, ДатаДок, Склад, Автор, Коментар };
+            /* */ , Назва, НомерДок, ДатаДок, Організація, Склад, Відповідальний, Автор, Коментар };
         }
 
         public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(bool) /* Spend Проведений документ*/
             , typeof(string) /* Назва */
             , typeof(string) /* НомерДок */
             , typeof(string) /* ДатаДок */
+            , typeof(string) /* Організація */
             , typeof(string) /* Склад */
+            , typeof(string) /* Відповідальний */
             , typeof(string) /* Автор */
             , typeof(string) /* Коментар */
             );
@@ -10840,9 +10844,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true } ); /*Назва*/
             treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 4) { MinWidth = 20, Resizable = true } ); /*НомерДок*/
             treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 5) { MinWidth = 20, Resizable = true } ); /*ДатаДок*/
-            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 6) { MinWidth = 20, Resizable = true } ); /*Склад*/
-            treeView.AppendColumn(new TreeViewColumn("Автор", new CellRendererText() { Xpad = 4 }, "text", 7) { MinWidth = 20, Resizable = true } ); /*Автор*/
-            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 8) { MinWidth = 20, Resizable = true } ); /*Коментар*/
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 6) { MinWidth = 20, Resizable = true } ); /*Організація*/
+            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 7) { MinWidth = 20, Resizable = true } ); /*Склад*/
+            treeView.AppendColumn(new TreeViewColumn("Відповідальний", new CellRendererText() { Xpad = 4 }, "text", 8) { MinWidth = 20, Resizable = true } ); /*Відповідальний*/
+            treeView.AppendColumn(new TreeViewColumn("Автор", new CellRendererText() { Xpad = 4 }, "text", 9) { MinWidth = 20, Resizable = true } ); /*Автор*/
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 10) { MinWidth = 20, Resizable = true } ); /*Коментар*/
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
@@ -10888,19 +10894,35 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             
                 /* Join Table */
                 ПерерахунокТоварів_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Склади_Const.TABLE, Документи.ПерерахунокТоварів_Const.Склад, ПерерахунокТоварів_Select.QuerySelect.Table, "join_tab_1"));
+                    new Join(Довідники.Організації_Const.TABLE, Документи.ПерерахунокТоварів_Const.Організація, ПерерахунокТоварів_Select.QuerySelect.Table, "join_tab_1"));
                 
                   /* Field */
                   ПерерахунокТоварів_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>("join_tab_1." + Довідники.Склади_Const.Назва, "join_tab_1_field_1"));
+                    new NameValue<string>("join_tab_1." + Довідники.Організації_Const.Назва, "join_tab_1_field_1"));
                   
                 /* Join Table */
                 ПерерахунокТоварів_Select.QuerySelect.Joins.Add(
-                    new Join(Довідники.Користувачі_Const.TABLE, Документи.ПерерахунокТоварів_Const.Автор, ПерерахунокТоварів_Select.QuerySelect.Table, "join_tab_2"));
+                    new Join(Довідники.Склади_Const.TABLE, Документи.ПерерахунокТоварів_Const.Склад, ПерерахунокТоварів_Select.QuerySelect.Table, "join_tab_2"));
                 
                   /* Field */
                   ПерерахунокТоварів_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue<string>("join_tab_2." + Довідники.Користувачі_Const.Назва, "join_tab_2_field_1"));
+                    new NameValue<string>("join_tab_2." + Довідники.Склади_Const.Назва, "join_tab_2_field_1"));
+                  
+                /* Join Table */
+                ПерерахунокТоварів_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.ФізичніОсоби_Const.TABLE, Документи.ПерерахунокТоварів_Const.Відповідальний, ПерерахунокТоварів_Select.QuerySelect.Table, "join_tab_3"));
+                
+                  /* Field */
+                  ПерерахунокТоварів_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_3." + Довідники.ФізичніОсоби_Const.Назва, "join_tab_3_field_1"));
+                  
+                /* Join Table */
+                ПерерахунокТоварів_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Користувачі_Const.TABLE, Документи.ПерерахунокТоварів_Const.Автор, ПерерахунокТоварів_Select.QuerySelect.Table, "join_tab_4"));
+                
+                  /* Field */
+                  ПерерахунокТоварів_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_4." + Довідники.Користувачі_Const.Назва, "join_tab_4_field_1"));
                   
 
             /* SELECT */
@@ -10916,8 +10938,10 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                         ID = cur.UnigueID.ToString(),
                         Spend = (bool)cur.Fields?["spend"]!, /*Проведений документ*/
                         DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
-                        Склад = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
-                        Автор = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
+                        Організація = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
+                        Склад = cur.Fields?["join_tab_2_field_1"]?.ToString() ?? "", /**/
+                        Відповідальний = cur.Fields?["join_tab_3_field_1"]?.ToString() ?? "", /**/
+                        Автор = cur.Fields?["join_tab_4_field_1"]?.ToString() ?? "", /**/
                         Назва = cur.Fields?[ПерерахунокТоварів_Const.Назва]?.ToString() ?? "", /**/
                         НомерДок = cur.Fields?[ПерерахунокТоварів_Const.НомерДок]?.ToString() ?? "", /**/
                         ДатаДок = cur.Fields?[ПерерахунокТоварів_Const.ДатаДок]?.ToString() ?? "", /**/
@@ -12330,6 +12354,12 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               
             {
                 List<Where> where = new List<Where>();
+                Where.Add("ПерерахунокТоварів", where);
+                Інтерфейс.ДодатиВідбірПоПеріоду(where, ПерерахунокТоварів_Const.ДатаДок, типПеріоду);
+            }
+              
+            {
+                List<Where> where = new List<Where>();
                 Where.Add("ПсуванняТоварів", where);
                 Інтерфейс.ДодатиВідбірПоПеріоду(where, ПсуванняТоварів_Const.ДатаДок, типПеріоду);
             }
@@ -12388,6 +12418,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             allowDoc.Add("ПоверненняТоварівВідКлієнта", "Повернення товарів від клієнта");
             allowDoc.Add("АктВиконанихРобіт", "Акт виконаних робіт");
             allowDoc.Add("ВведенняЗалишків", "Введення залишків");
+            allowDoc.Add("ПерерахунокТоварів", "Перерахунок товарів");
             allowDoc.Add("ПсуванняТоварів", "Псування товарів");
             allowDoc.Add("ВнутрішнєСпоживанняТоварів", "Внутрішнє споживання товарів");
             allowDoc.Add("РахунокФактура", "Рахунок фактура");
@@ -13329,6 +13360,77 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                               
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.ВведенняЗалишків_Const.TABLE + "." + Документи.ВведенняЗалишків_Const.Коментар, "Коментар"));
+                            
+
+                  allQuery.Add(query.Construct());
+              }
+              
+              {
+                  Query query = new Query(Документи.ПерерахунокТоварів_Const.TABLE);
+
+                  // Встановлення відбору для даного типу документу
+                  if (Where.ContainsKey("ПерерахунокТоварів") && Where["ПерерахунокТоварів"].Count != 0) {
+                      query.Where = Where["ПерерахунокТоварів"];
+                      foreach(Where field in query.Where)
+                          paramQuery.Add(field.Alias, field.Value);
+                  }
+
+                  query.FieldAndAlias.Add(new NameValue<string>("'ПерерахунокТоварів'", "type"));
+                  query.Field.Add("deletion_label");
+                  query.Field.Add("spend");
+                  
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПерерахунокТоварів_Const.TABLE + "." + Документи.ПерерахунокТоварів_Const.Назва, "Назва"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПерерахунокТоварів_Const.TABLE + "." + Документи.ПерерахунокТоварів_Const.ДатаДок, "Дата"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПерерахунокТоварів_Const.TABLE + "." + Документи.ПерерахунокТоварів_Const.НомерДок, "Номер"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Організації_Const.TABLE, Документи.ПерерахунокТоварів_Const.Організація, query.Table, "join_tab_1"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_1." + Довідники.Організації_Const.Назва, "Організація"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.ФізичніОсоби_Const.TABLE, Документи.ПерерахунокТоварів_Const.Відповідальний, query.Table, "join_tab_2"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_2." + Довідники.ФізичніОсоби_Const.Назва, "Контрагент"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Склади_Const.TABLE, Документи.ПерерахунокТоварів_Const.Склад, query.Table, "join_tab_3"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_3." + Довідники.Склади_Const.Назва, "Склад"));
+                              
+                          /* Empty Field */
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Каса"));
+                        
+                          /* Empty Field */
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Валюта"));
+                        
+                          /* Empty Field */
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Сума"));
+                        
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Користувачі_Const.TABLE, Документи.ПерерахунокТоварів_Const.Автор, query.Table, "join_tab_4"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_4." + Довідники.Користувачі_Const.Назва, "Автор"));
+                              
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПерерахунокТоварів_Const.TABLE + "." + Документи.ПерерахунокТоварів_Const.Коментар, "Коментар"));
                             
 
                   allQuery.Add(query.Construct());
@@ -15333,6 +15435,12 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               
             {
                 List<Where> where = new List<Where>();
+                Where.Add("ПерерахунокТоварів", where);
+                Інтерфейс.ДодатиВідбірПоПеріоду(where, ПерерахунокТоварів_Const.ДатаДок, типПеріоду);
+            }
+              
+            {
+                List<Where> where = new List<Where>();
                 Where.Add("ПсуванняТоварів", where);
                 Інтерфейс.ДодатиВідбірПоПеріоду(where, ПсуванняТоварів_Const.ДатаДок, типПеріоду);
             }
@@ -15351,6 +15459,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             Dictionary<string, string> allowDoc = new Dictionary<string, string>();
             allowDoc.Add("ПереміщенняТоварів", "Переміщення товарів");
             allowDoc.Add("ВведенняЗалишків", "Введення залишків");
+            allowDoc.Add("ПерерахунокТоварів", "Перерахунок товарів");
             allowDoc.Add("ПсуванняТоварів", "Псування товарів");
             allowDoc.Add("ВнутрішнєСпоживанняТоварів", "Внутрішнє споживання товарів");
             
@@ -15598,6 +15707,63 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                               
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.ПсуванняТоварів_Const.TABLE + "." + Документи.ПсуванняТоварів_Const.Коментар, "Коментар"));
+                            
+
+                  allQuery.Add(query.Construct());
+              }
+              
+              {
+                  Query query = new Query(Документи.ПерерахунокТоварів_Const.TABLE);
+
+                  // Встановлення відбору для даного типу документу
+                  if (Where.ContainsKey("ПерерахунокТоварів") && Where["ПерерахунокТоварів"].Count != 0) {
+                      query.Where = Where["ПерерахунокТоварів"];
+                      foreach(Where field in query.Where)
+                          paramQuery.Add(field.Alias, field.Value);
+                  }
+
+                  query.FieldAndAlias.Add(new NameValue<string>("'ПерерахунокТоварів'", "type"));
+                  query.Field.Add("deletion_label");
+                  query.Field.Add("spend");
+                  
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПерерахунокТоварів_Const.TABLE + "." + Документи.ПерерахунокТоварів_Const.Назва, "Назва"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПерерахунокТоварів_Const.TABLE + "." + Документи.ПерерахунокТоварів_Const.ДатаДок, "Дата"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПерерахунокТоварів_Const.TABLE + "." + Документи.ПерерахунокТоварів_Const.НомерДок, "Номер"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Організації_Const.TABLE, Документи.ПерерахунокТоварів_Const.Організація, query.Table, "join_tab_1"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_1." + Довідники.Організації_Const.Назва, "Організація"));
+                              
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Склади_Const.TABLE, Документи.ПерерахунокТоварів_Const.Склад, query.Table, "join_tab_2"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_2." + Довідники.Склади_Const.Назва, "СкладВідправник"));
+                              
+                          /* Empty Field */
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "СкладОтримувач"));
+                        
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Користувачі_Const.TABLE, Документи.ПерерахунокТоварів_Const.Автор, query.Table, "join_tab_3"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_3." + Довідники.Користувачі_Const.Назва, "Автор"));
+                              
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.ПерерахунокТоварів_Const.TABLE + "." + Документи.ПерерахунокТоварів_Const.Коментар, "Коментар"));
                             
 
                   allQuery.Add(query.Construct());

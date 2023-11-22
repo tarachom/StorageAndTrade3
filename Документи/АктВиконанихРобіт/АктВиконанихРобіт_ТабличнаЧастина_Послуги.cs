@@ -93,11 +93,11 @@ namespace StorageAndTrade
                 };
             }
 
-            public static async void ПісляЗміни_Номенклатура(Запис запис)
+            public static async ValueTask ПісляЗміни_Номенклатура(Запис запис)
             {
                 await запис.Номенклатура.GetPresentation();
             }
-            public static async void ПісляЗміни_Характеристика(Запис запис)
+            public static async ValueTask ПісляЗміни_Характеристика(Запис запис)
             {
                 await запис.Характеристика.GetPresentation();
             }
@@ -322,10 +322,10 @@ namespace StorageAndTrade
                 case Columns.Номенклатура:
                     {
                         Номенклатура_ШвидкийВибір page = new Номенклатура_ШвидкийВибір() { PopoverParent = popoverSmallSelect, DirectoryPointerItem = запис.Номенклатура.UnigueID };
-                        page.CallBack_OnSelectPointer = (UnigueID selectPointer) =>
+                        page.CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
                         {
                             запис.Номенклатура = new Номенклатура_Pointer(selectPointer);
-                            Запис.ПісляЗміни_Номенклатура(запис);
+                            await Запис.ПісляЗміни_Номенклатура(запис);
 
                             Store.SetValues(iter, запис.ToArray());
                         };
@@ -341,10 +341,10 @@ namespace StorageAndTrade
                         ХарактеристикиНоменклатури_ШвидкийВибір page = new ХарактеристикиНоменклатури_ШвидкийВибір() { PopoverParent = popoverSmallSelect, DirectoryPointerItem = запис.Характеристика.UnigueID };
 
                         page.НоменклатураВласник.Pointer = запис.Номенклатура;
-                        page.CallBack_OnSelectPointer = (UnigueID selectPointer) =>
+                        page.CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
                         {
                             запис.Характеристика = new ХарактеристикиНоменклатури_Pointer(selectPointer);
-                            Запис.ПісляЗміни_Характеристика(запис);
+                            await Запис.ПісляЗміни_Характеристика(запис);
 
                             Store.SetValues(iter, запис.ToArray());
                         };

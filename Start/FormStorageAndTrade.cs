@@ -89,7 +89,7 @@ namespace StorageAndTrade
                     Назва = await Config.Kernel.DataBase.SpetialTableUsersGetFullName(KernelUser)
                 };
 
-                НовийКористувач.New();
+                await НовийКористувач.New();
                 await НовийКористувач.Save();
 
                 Program.Користувач = НовийКористувач.GetDirectoryPointer();

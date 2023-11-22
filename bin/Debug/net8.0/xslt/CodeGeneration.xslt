@@ -631,12 +631,17 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
             </xsl:for-each>
         }
         
-        public void New()
+        public async ValueTask New()
         {
             BaseNew();
-            <xsl:if test="normalize-space(TriggerFunctions/New) != ''">
-                <xsl:value-of select="TriggerFunctions/New"/><xsl:text>(this)</xsl:text>;
-            </xsl:if>
+            <xsl:choose>
+              <xsl:when test="normalize-space(TriggerFunctions/New) != ''">
+                await <xsl:value-of select="TriggerFunctions/New"/><xsl:text>(this)</xsl:text>;
+              </xsl:when>
+              <xsl:otherwise>
+                await ValueTask.FromResult(true);
+              </xsl:otherwise>
+            </xsl:choose>
         }
 
         public async ValueTask&lt;bool&gt; Read(UnigueID uid)
@@ -712,7 +717,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
             }
             </xsl:if>
 
-            copy.New();
+            await copy.New();
             <xsl:if test="normalize-space(TriggerFunctions/Copying) != ''">
                 await <xsl:value-of select="TriggerFunctions/Copying"/><xsl:text>(copy, this);</xsl:text>      
             </xsl:if>
@@ -1242,12 +1247,17 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
             </xsl:for-each>
         }
         
-        public void New()
+        public async ValueTask New()
         {
             BaseNew();
-            <xsl:if test="normalize-space(TriggerFunctions/New) != ''">
-                <xsl:value-of select="TriggerFunctions/New"/><xsl:text>(this)</xsl:text>;
-            </xsl:if>
+            <xsl:choose>
+              <xsl:when test="normalize-space(TriggerFunctions/New) != ''">
+                await <xsl:value-of select="TriggerFunctions/New"/><xsl:text>(this)</xsl:text>;
+              </xsl:when>
+              <xsl:otherwise>
+                await ValueTask.FromResult(true);
+              </xsl:otherwise>
+            </xsl:choose>
         }
 
         public async ValueTask&lt;bool&gt; Read(UnigueID uid, bool readAllTablePart = false)
@@ -1362,7 +1372,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
             }
             </xsl:if>
 
-            copy.New();
+            await copy.New();
             <xsl:if test="normalize-space(TriggerFunctions/Copying) != ''">
                 await <xsl:value-of select="TriggerFunctions/Copying"/><xsl:text>(copy, this);</xsl:text>      
             </xsl:if>

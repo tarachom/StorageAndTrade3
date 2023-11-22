@@ -79,11 +79,11 @@ namespace StorageAndTrade
 
         #region Присвоєння / зчитування значень
 
-        public override void SetValue()
+        public override async void SetValue()
         {
             if (IsNew)
             {
-                Контрагенти_Objest.New();
+                await Контрагенти_Objest.New();
                 Контрагенти_Objest.Папка = РодичДляНового;
             }
 

@@ -108,11 +108,11 @@ namespace StorageAndTrade
 
         #region Присвоєння / зчитування значень
 
-        public override void SetValue()
+        public override async void SetValue()
         {
             if (IsNew)
             {
-                СкладськіКомірки_Objest.New();
+                await СкладськіКомірки_Objest.New();
                 СкладськіКомірки_Objest.Приміщення = СкладськеПриміщенняДляНового;
                 СкладськіКомірки_Objest.Папка = РодичДляНового;
             }

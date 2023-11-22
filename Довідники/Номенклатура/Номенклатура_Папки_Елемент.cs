@@ -52,11 +52,11 @@ namespace StorageAndTrade
 
         #region Присвоєння / зчитування значень
 
-        public override void SetValue()
+        public override async void SetValue()
         {
             if (IsNew)
             {
-                Номенклатура_Папки_Objest.New();
+                await Номенклатура_Папки_Objest.New();
                 Номенклатура_Папки_Objest.Родич = РодичДляНового;
             }
             else

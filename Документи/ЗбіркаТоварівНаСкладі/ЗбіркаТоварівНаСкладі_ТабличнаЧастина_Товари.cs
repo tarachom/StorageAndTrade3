@@ -107,7 +107,7 @@ namespace StorageAndTrade
                 };
             }
 
-            public static async void ПісляЗміни_Номенклатура(Запис запис)
+            public static async ValueTask ПісляЗміни_Номенклатура(Запис запис)
             {
                 await запис.Номенклатура.GetPresentation();
 
@@ -115,7 +115,7 @@ namespace StorageAndTrade
                 if (номенклатура_Objest != null && !номенклатура_Objest.ОдиницяВиміру.IsEmpty())
                 {
                     запис.Пакування = номенклатура_Objest.ОдиницяВиміру;
-                    Запис.ПісляЗміни_Пакування(запис);
+                    await Запис.ПісляЗміни_Пакування(запис);
                 }
 
                 if (!запис.Пакування.IsEmpty())
@@ -127,19 +127,19 @@ namespace StorageAndTrade
                         запис.КількістьУпаковок = 1;
                 }
             }
-            public static async void ПісляЗміни_Характеристика(Запис запис)
+            public static async ValueTask ПісляЗміни_Характеристика(Запис запис)
             {
                 await запис.Характеристика.GetPresentation();
             }
-            public static async void ПісляЗміни_Серія(Запис запис)
+            public static async ValueTask ПісляЗміни_Серія(Запис запис)
             {
                 await запис.Серія.GetPresentation();
             }
-            public static async void ПісляЗміни_Пакування(Запис запис)
+            public static async ValueTask ПісляЗміни_Пакування(Запис запис)
             {
                 await запис.Пакування.GetPresentation();
             }
-            public static async void ПісляЗміни_Комірка(Запис запис)
+            public static async ValueTask ПісляЗміни_Комірка(Запис запис)
             {
                 await запис.Комірка.GetPresentation();
             }
@@ -373,10 +373,10 @@ namespace StorageAndTrade
                 case Columns.Номенклатура:
                     {
                         Номенклатура_ШвидкийВибір page = new Номенклатура_ШвидкийВибір() { PopoverParent = popoverSmallSelect, DirectoryPointerItem = запис.Номенклатура.UnigueID };
-                        page.CallBack_OnSelectPointer = (UnigueID selectPointer) =>
+                        page.CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
                         {
                             запис.Номенклатура = new Номенклатура_Pointer(selectPointer);
-                            Запис.ПісляЗміни_Номенклатура(запис);
+                            await Запис.ПісляЗміни_Номенклатура(запис);
 
                             if (ОбновитиЗначенняДокумента != null)
                                 ОбновитиЗначенняДокумента.Invoke();
@@ -395,10 +395,10 @@ namespace StorageAndTrade
                         ХарактеристикиНоменклатури_ШвидкийВибір page = new ХарактеристикиНоменклатури_ШвидкийВибір() { PopoverParent = popoverSmallSelect, DirectoryPointerItem = запис.Характеристика.UnigueID };
 
                         page.НоменклатураВласник.Pointer = запис.Номенклатура;
-                        page.CallBack_OnSelectPointer = (UnigueID selectPointer) =>
+                        page.CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
                         {
                             запис.Характеристика = new ХарактеристикиНоменклатури_Pointer(selectPointer);
-                            Запис.ПісляЗміни_Характеристика(запис);
+                            await Запис.ПісляЗміни_Характеристика(запис);
 
                             Store.SetValues(iter, запис.ToArray());
                         };
@@ -412,10 +412,10 @@ namespace StorageAndTrade
                 case Columns.Серія:
                     {
                         СеріїНоменклатури_ШвидкийВибір page = new СеріїНоменклатури_ШвидкийВибір() { PopoverParent = popoverSmallSelect, DirectoryPointerItem = запис.Серія.UnigueID };
-                        page.CallBack_OnSelectPointer = (UnigueID selectPointer) =>
+                        page.CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
                         {
                             запис.Серія = new СеріїНоменклатури_Pointer(selectPointer);
-                            Запис.ПісляЗміни_Серія(запис);
+                            await Запис.ПісляЗміни_Серія(запис);
 
                             Store.SetValues(iter, запис.ToArray());
                         };
@@ -429,10 +429,10 @@ namespace StorageAndTrade
                 case Columns.Пакування:
                     {
                         ПакуванняОдиниціВиміру_ШвидкийВибір page = new ПакуванняОдиниціВиміру_ШвидкийВибір() { PopoverParent = popoverSmallSelect, DirectoryPointerItem = запис.Пакування.UnigueID };
-                        page.CallBack_OnSelectPointer = (UnigueID selectPointer) =>
+                        page.CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
                         {
                             запис.Пакування = new ПакуванняОдиниціВиміру_Pointer(selectPointer);
-                            Запис.ПісляЗміни_Пакування(запис);
+                            await Запис.ПісляЗміни_Пакування(запис);
 
                             Store.SetValues(iter, запис.ToArray());
                         };
@@ -446,10 +446,10 @@ namespace StorageAndTrade
                 case Columns.Комірка:
                     {
                         СкладськіКомірки_ШвидкийВибір page = new СкладськіКомірки_ШвидкийВибір() { PopoverParent = popoverSmallSelect, DirectoryPointerItem = запис.Комірка.UnigueID };
-                        page.CallBack_OnSelectPointer = (UnigueID selectPointer) =>
+                        page.CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
                         {
                             запис.Комірка = new СкладськіКомірки_Pointer(selectPointer);
-                            Запис.ПісляЗміни_Комірка(запис);
+                            await Запис.ПісляЗміни_Комірка(запис);
 
                             Store.SetValues(iter, запис.ToArray());
                         };
@@ -602,7 +602,7 @@ namespace StorageAndTrade
 
         #region ОбробкаТабЧастини Товари
 
-        void РозприділитиПоКоміркахВідповідноДоЗалишків(object? sender, EventArgs args)
+        async void РозприділитиПоКоміркахВідповідноДоЗалишків(object? sender, EventArgs args)
         {
             List<Запис> НовіЗаписи = new List<Запис>();
 
@@ -654,7 +654,7 @@ HAVING
                         запис.Кількість = КількістьЯкуПотрібноРозприділити;
                         запис.Комірка = складськіКомірки_Pointer;
 
-                        Запис.ПісляЗміни_Комірка(запис);
+                        await Запис.ПісляЗміни_Комірка(запис);
 
                         єЗміниВЗаписі = true;
 
@@ -668,7 +668,7 @@ HAVING
                         записНовий.Кількість = ЗалишокВКомірці;
                         записНовий.Комірка = складськіКомірки_Pointer;
 
-                        Запис.ПісляЗміни_Комірка(записНовий);
+                        await Запис.ПісляЗміни_Комірка(записНовий);
 
                         КількістьЯкуПотрібноРозприділити -= ЗалишокВКомірці;
                     }
@@ -680,7 +680,7 @@ HAVING
                     запис.Кількість = КількістьЯкуПотрібноРозприділити;
                     запис.Комірка = new СкладськіКомірки_Pointer();
 
-                    Запис.ПісляЗміни_Комірка(запис);
+                    await Запис.ПісляЗміни_Комірка(запис);
 
                     єЗміниВЗаписі = true;
                 }

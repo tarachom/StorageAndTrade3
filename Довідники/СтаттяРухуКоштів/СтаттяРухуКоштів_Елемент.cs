@@ -67,11 +67,11 @@ namespace StorageAndTrade
 
         #region Присвоєння / зчитування значень
 
-        public override void SetValue()
+        public override async void SetValue()
         {
             if (IsNew)
             {
-                СтаттяРухуКоштів_Objest.New();
+                await СтаттяРухуКоштів_Objest.New();
                 СтаттяРухуКоштів_Objest.ВидРухуКоштів = ВидиРухуКоштів.ОплатаОборотнихАктивів;
             }
 

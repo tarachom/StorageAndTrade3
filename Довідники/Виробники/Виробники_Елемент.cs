@@ -47,10 +47,10 @@ namespace StorageAndTrade
 
         #region Присвоєння / зчитування значень
 
-        public override void SetValue()
+        public override async void SetValue()
         {
             if (IsNew)
-                Виробники_Objest.New();
+                await Виробники_Objest.New();
 
             Код.Text = Виробники_Objest.Код;
             Назва.Text = Виробники_Objest.Назва;

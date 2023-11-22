@@ -121,10 +121,10 @@ namespace StorageAndTrade
 
         #region Присвоєння / зчитування значень
 
-        public override void SetValue()
+        public override async void SetValue()
         {
             if (IsNew)
-                Банки_Objest.New();
+                await Банки_Objest.New();
 
             Код.Text = Банки_Objest.Код;
             Назва.Text = Банки_Objest.Назва;

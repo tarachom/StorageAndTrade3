@@ -3442,6 +3442,51 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
         }
     }
 
+    class ПерерахунокТоварів_SpendTheDocument
+    {
+        public static async ValueTask<bool> Spend(ПерерахунокТоварів_Objest ДокументОбєкт)
+        {
+            try
+            {
+                #region Підготовка
+
+                Dictionary<int, Номенклатура_Objest> СписокНоменклатури = new Dictionary<int, Номенклатура_Objest>(); //?
+                Dictionary<int, decimal> ЗалишокНоменклатури = new Dictionary<int, decimal>();
+                Dictionary<int, decimal> РезервНоменклатури = new Dictionary<int, decimal>();
+
+                foreach (ПерерахунокТоварів_Товари_TablePart.Record ТовариРядок in ДокументОбєкт.Товари_TablePart.Records)
+                {
+                    if (ТовариРядок.Номенклатура.IsEmpty())
+                        throw new Exception($"Рядок {ТовариРядок.НомерРядка}. Не заповнене поле Номенклатура");
+
+                    // if (!(ТовариРядок.Кількість > 0))
+                    //     throw new Exception($"Рядок {ТовариРядок.НомерРядка}. Кількість має бути більшою 0");
+
+                    СписокНоменклатури.Add(ТовариРядок.НомерРядка, (await ТовариРядок.Номенклатура.GetDirectoryObject())!);
+                }
+
+                #endregion
+                
+
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, ex.Message);
+                await ClearSpend(ДокументОбєкт);
+                return false;
+            }
+        }
+
+        public static async ValueTask ClearSpend(ПерерахунокТоварів_Objest ДокументОбєкт)
+        {
+            // код очищення проводок
+            await ValueTask.FromResult(true); //Заглушка
+        }
+    }
+
+
     #endregion
 
     #region Адресне розміщення на складі

@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 22.11.2023 13:55:21
+ * Дата конфігурації: 22.11.2023 18:02:39
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -1967,11 +1967,12 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
         
-        public void New()
+        public async ValueTask New()
         {
             BaseNew();
-            Організації_Triggers.New(this);
             
+                await Організації_Triggers.New(this);
+              
         }
 
         public async ValueTask<bool> Read(UnigueID uid)
@@ -2043,7 +2044,7 @@ namespace StorageAndTrade_1_0.Довідники
             }
             
 
-            copy.New();
+            await copy.New();
             
                 await Організації_Triggers.Copying(copy, this);
             return copy;
@@ -2348,11 +2349,12 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
         
-        public void New()
+        public async ValueTask New()
         {
             BaseNew();
-            Номенклатура_Triggers.New(this);
             
+                await Номенклатура_Triggers.New(this);
+              
         }
 
         public async ValueTask<bool> Read(UnigueID uid)
@@ -2430,7 +2432,7 @@ namespace StorageAndTrade_1_0.Довідники
             }
             
 
-            copy.New();
+            await copy.New();
             
                 await Номенклатура_Triggers.Copying(copy, this);
             return copy;
@@ -2692,11 +2694,12 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
         
-        public void New()
+        public async ValueTask New()
         {
             BaseNew();
-            Виробники_Triggers.New(this);
             
+                await Виробники_Triggers.New(this);
+              
         }
 
         public async ValueTask<bool> Read(UnigueID uid)
@@ -2738,7 +2741,7 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Код = Код;
             
 
-            copy.New();
+            await copy.New();
             
                 await Виробники_Triggers.Copying(copy, this);
             return copy;
@@ -2912,11 +2915,12 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
         
-        public void New()
+        public async ValueTask New()
         {
             BaseNew();
-            ВидиНоменклатури_Triggers.New(this);
             
+                await ВидиНоменклатури_Triggers.New(this);
+              
         }
 
         public async ValueTask<bool> Read(UnigueID uid)
@@ -2967,7 +2971,7 @@ namespace StorageAndTrade_1_0.Довідники
             copy.ОдиницяВиміру = ОдиницяВиміру;
             
 
-            copy.New();
+            await copy.New();
             
                 await ВидиНоменклатури_Triggers.Copying(copy, this);
             return copy;
@@ -3142,11 +3146,12 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
         
-        public void New()
+        public async ValueTask New()
         {
             BaseNew();
-            ПакуванняОдиниціВиміру_Triggers.New(this);
             
+                await ПакуванняОдиниціВиміру_Triggers.New(this);
+              
         }
 
         public async ValueTask<bool> Read(UnigueID uid)
@@ -3194,7 +3199,7 @@ namespace StorageAndTrade_1_0.Довідники
             copy.КількістьУпаковок = КількістьУпаковок;
             
 
-            copy.New();
+            await copy.New();
             
                 await ПакуванняОдиниціВиміру_Triggers.Copying(copy, this);
             return copy;
@@ -3370,11 +3375,12 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
         
-        public void New()
+        public async ValueTask New()
         {
             BaseNew();
-            Валюти_Triggers.New(this);
             
+                await Валюти_Triggers.New(this);
+              
         }
 
         public async ValueTask<bool> Read(UnigueID uid)
@@ -3425,7 +3431,7 @@ namespace StorageAndTrade_1_0.Довідники
             copy.ВиводитиКурсНаСтартову = ВиводитиКурсНаСтартову;
             
 
-            copy.New();
+            await copy.New();
             
                 await Валюти_Triggers.Copying(copy, this);
             return copy;
@@ -3610,11 +3616,12 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
         
-        public void New()
+        public async ValueTask New()
         {
             BaseNew();
-            Контрагенти_Triggers.New(this);
             
+                await Контрагенти_Triggers.New(this);
+              
         }
 
         public async ValueTask<bool> Read(UnigueID uid)
@@ -3684,7 +3691,7 @@ namespace StorageAndTrade_1_0.Довідники
             }
             
 
-            copy.New();
+            await copy.New();
             
                 await Контрагенти_Triggers.Copying(copy, this);
             return copy;
@@ -4060,11 +4067,12 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
         
-        public void New()
+        public async ValueTask New()
         {
             BaseNew();
-            Склади_Triggers.New(this);
             
+                await Склади_Triggers.New(this);
+              
         }
 
         public async ValueTask<bool> Read(UnigueID uid)
@@ -4133,7 +4141,7 @@ namespace StorageAndTrade_1_0.Довідники
             }
             
 
-            copy.New();
+            await copy.New();
             
                 await Склади_Triggers.Copying(copy, this);
             return copy;
@@ -4418,11 +4426,12 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
         
-        public void New()
+        public async ValueTask New()
         {
             BaseNew();
-            ВидиЦін_Triggers.New(this);
             
+                await ВидиЦін_Triggers.New(this);
+              
         }
 
         public async ValueTask<bool> Read(UnigueID uid)
@@ -4467,7 +4476,7 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Валюта = Валюта;
             
 
-            copy.New();
+            await copy.New();
             
                 await ВидиЦін_Triggers.Copying(copy, this);
             return copy;
@@ -4638,11 +4647,12 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
         
-        public void New()
+        public async ValueTask New()
         {
             BaseNew();
-            ВидиЦінПостачальників_Triggers.New(this);
             
+                await ВидиЦінПостачальників_Triggers.New(this);
+              
         }
 
         public async ValueTask<bool> Read(UnigueID uid)
@@ -4687,7 +4697,7 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Валюта = Валюта;
             
 
-            copy.New();
+            await copy.New();
             
                 await ВидиЦінПостачальників_Triggers.Copying(copy, this);
             return copy;
@@ -4865,11 +4875,12 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
         
-        public void New()
+        public async ValueTask New()
         {
             BaseNew();
-            Користувачі_Triggers.New(this);
             
+                await Користувачі_Triggers.New(this);
+              
         }
 
         public async ValueTask<bool> Read(UnigueID uid)
@@ -4929,7 +4940,7 @@ namespace StorageAndTrade_1_0.Довідники
             }
             
 
-            copy.New();
+            await copy.New();
             
                 await Користувачі_Triggers.Copying(copy, this);
             return copy;
@@ -5214,11 +5225,12 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
         
-        public void New()
+        public async ValueTask New()
         {
             BaseNew();
-            ФізичніОсоби_Triggers.New(this);
             
+                await ФізичніОсоби_Triggers.New(this);
+              
         }
 
         public async ValueTask<bool> Read(UnigueID uid)
@@ -5278,7 +5290,7 @@ namespace StorageAndTrade_1_0.Довідники
             }
             
 
-            copy.New();
+            await copy.New();
             
                 await ФізичніОсоби_Triggers.Copying(copy, this);
             return copy;
@@ -5556,11 +5568,12 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
         
-        public void New()
+        public async ValueTask New()
         {
             BaseNew();
-            СтруктураПідприємства_Triggers.New(this);
             
+                await СтруктураПідприємства_Triggers.New(this);
+              
         }
 
         public async ValueTask<bool> Read(UnigueID uid)
@@ -5605,7 +5618,7 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Керівник = Керівник;
             
 
-            copy.New();
+            await copy.New();
             
                 await СтруктураПідприємства_Triggers.Copying(copy, this);
             return copy;
@@ -5774,11 +5787,12 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
         
-        public void New()
+        public async ValueTask New()
         {
             BaseNew();
-            КраїниСвіту_Triggers.New(this);
             
+                await КраїниСвіту_Triggers.New(this);
+              
         }
 
         public async ValueTask<bool> Read(UnigueID uid)
@@ -5820,7 +5834,7 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Код = Код;
             
 
-            copy.New();
+            await copy.New();
             
                 await КраїниСвіту_Triggers.Copying(copy, this);
             return copy;
@@ -5996,11 +6010,12 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
         
-        public void New()
+        public async ValueTask New()
         {
             BaseNew();
-            Файли_Triggers.New(this);
             
+                await Файли_Triggers.New(this);
+              
         }
 
         public async ValueTask<bool> Read(UnigueID uid)
@@ -6054,7 +6069,7 @@ namespace StorageAndTrade_1_0.Довідники
             copy.ДатаСтворення = ДатаСтворення;
             
 
-            copy.New();
+            await copy.New();
             
                 await Файли_Triggers.Copying(copy, this);
             return copy;
@@ -6230,11 +6245,12 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
         
-        public void New()
+        public async ValueTask New()
         {
             BaseNew();
-            ХарактеристикиНоменклатури_Triggers.New(this);
             
+                await ХарактеристикиНоменклатури_Triggers.New(this);
+              
         }
 
         public async ValueTask<bool> Read(UnigueID uid)
@@ -6282,7 +6298,7 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Номенклатура = Номенклатура;
             
 
-            copy.New();
+            await copy.New();
             
                 await ХарактеристикиНоменклатури_Triggers.Copying(copy, this);
             return copy;
@@ -6454,11 +6470,12 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
         
-        public void New()
+        public async ValueTask New()
         {
             BaseNew();
-            Номенклатура_Папки_Triggers.New(this);
             
+                await Номенклатура_Папки_Triggers.New(this);
+              
         }
 
         public async ValueTask<bool> Read(UnigueID uid)
@@ -6503,7 +6520,7 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Родич = Родич;
             
 
-            copy.New();
+            await copy.New();
             
                 await Номенклатура_Папки_Triggers.Copying(copy, this);
             return copy;
@@ -6674,11 +6691,12 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
         
-        public void New()
+        public async ValueTask New()
         {
             BaseNew();
-            Контрагенти_Папки_Triggers.New(this);
             
+                await Контрагенти_Папки_Triggers.New(this);
+              
         }
 
         public async ValueTask<bool> Read(UnigueID uid)
@@ -6723,7 +6741,7 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Родич = Родич;
             
 
-            copy.New();
+            await copy.New();
             
                 await Контрагенти_Папки_Triggers.Copying(copy, this);
             return copy;
@@ -6894,11 +6912,12 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
         
-        public void New()
+        public async ValueTask New()
         {
             BaseNew();
-            Склади_Папки_Triggers.New(this);
             
+                await Склади_Папки_Triggers.New(this);
+              
         }
 
         public async ValueTask<bool> Read(UnigueID uid)
@@ -6943,7 +6962,7 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Родич = Родич;
             
 
-            copy.New();
+            await copy.New();
             
                 await Склади_Папки_Triggers.Copying(copy, this);
             return copy;
@@ -7116,11 +7135,12 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
         
-        public void New()
+        public async ValueTask New()
         {
             BaseNew();
-            Каси_Triggers.New(this);
             
+                await Каси_Triggers.New(this);
+              
         }
 
         public async ValueTask<bool> Read(UnigueID uid)
@@ -7168,7 +7188,7 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Підрозділ = Підрозділ;
             
 
-            copy.New();
+            await copy.New();
             
                 await Каси_Triggers.Copying(copy, this);
             return copy;
@@ -7360,11 +7380,12 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
         
-        public void New()
+        public async ValueTask New()
         {
             BaseNew();
-            БанківськіРахункиОрганізацій_Triggers.New(this);
             
+                await БанківськіРахункиОрганізацій_Triggers.New(this);
+              
         }
 
         public async ValueTask<bool> Read(UnigueID uid)
@@ -7439,7 +7460,7 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Організація = Організація;
             
 
-            copy.New();
+            await copy.New();
             
                 await БанківськіРахункиОрганізацій_Triggers.Copying(copy, this);
             return copy;
@@ -7654,11 +7675,12 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
         
-        public void New()
+        public async ValueTask New()
         {
             BaseNew();
-            ДоговориКонтрагентів_Triggers.New(this);
             
+                await ДоговориКонтрагентів_Triggers.New(this);
+              
         }
 
         public async ValueTask<bool> Read(UnigueID uid)
@@ -7754,7 +7776,7 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Коментар = Коментар;
             
 
-            copy.New();
+            await copy.New();
             
                 await ДоговориКонтрагентів_Triggers.Copying(copy, this);
             return copy;
@@ -7966,11 +7988,12 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
         
-        public void New()
+        public async ValueTask New()
         {
             BaseNew();
-            БанківськіРахункиКонтрагентів_Triggers.New(this);
             
+                await БанківськіРахункиКонтрагентів_Triggers.New(this);
+              
         }
 
         public async ValueTask<bool> Read(UnigueID uid)
@@ -8051,7 +8074,7 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Контрагент = Контрагент;
             
 
-            copy.New();
+            await copy.New();
             
                 await БанківськіРахункиКонтрагентів_Triggers.Copying(copy, this);
             return copy;
@@ -8241,11 +8264,12 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
         
-        public void New()
+        public async ValueTask New()
         {
             BaseNew();
-            СтаттяРухуКоштів_Triggers.New(this);
             
+                await СтаттяРухуКоштів_Triggers.New(this);
+              
         }
 
         public async ValueTask<bool> Read(UnigueID uid)
@@ -8305,7 +8329,7 @@ namespace StorageAndTrade_1_0.Довідники
             }
             
 
-            copy.New();
+            await copy.New();
             
                 await СтаттяРухуКоштів_Triggers.Copying(copy, this);
             return copy;
@@ -8559,11 +8583,12 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
         
-        public void New()
+        public async ValueTask New()
         {
             BaseNew();
-            СеріїНоменклатури_Triggers.New(this);
             
+                await СеріїНоменклатури_Triggers.New(this);
+              
         }
 
         public async ValueTask<bool> Read(UnigueID uid)
@@ -8608,7 +8633,7 @@ namespace StorageAndTrade_1_0.Довідники
             copy.ДатаСтворення = ДатаСтворення;
             
 
-            copy.New();
+            await copy.New();
             
                 await СеріїНоменклатури_Triggers.Copying(copy, this);
             return copy;
@@ -8785,11 +8810,12 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
         
-        public void New()
+        public async ValueTask New()
         {
             BaseNew();
-            ПартіяТоварівКомпозит_Triggers.New(this);
             
+                await ПартіяТоварівКомпозит_Triggers.New(this);
+              
         }
 
         public async ValueTask<bool> Read(UnigueID uid)
@@ -8843,7 +8869,7 @@ namespace StorageAndTrade_1_0.Довідники
             copy.ВведенняЗалишків = ВведенняЗалишків;
             
 
-            copy.New();
+            await copy.New();
             
                 await ПартіяТоварівКомпозит_Triggers.Copying(copy, this);
             return copy;
@@ -9025,11 +9051,12 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
         
-        public void New()
+        public async ValueTask New()
         {
             BaseNew();
-            ВидиЗапасів_Triggers.New(this);
             
+                await ВидиЗапасів_Triggers.New(this);
+              
         }
 
         public async ValueTask<bool> Read(UnigueID uid)
@@ -9086,7 +9113,7 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Код = Код;
             
 
-            copy.New();
+            await copy.New();
             
                 await ВидиЗапасів_Triggers.Copying(copy, this);
             return copy;
@@ -9311,11 +9338,12 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
         
-        public void New()
+        public async ValueTask New()
         {
             BaseNew();
-            Банки_Triggers.New(this);
             
+                await Банки_Triggers.New(this);
+              
         }
 
         public async ValueTask<bool> Read(UnigueID uid)
@@ -9435,7 +9463,7 @@ namespace StorageAndTrade_1_0.Довідники
             copy.ДатаЗапису = ДатаЗапису;
             
 
-            copy.New();
+            await copy.New();
             
                 await Банки_Triggers.Copying(copy, this);
             return copy;
@@ -9631,11 +9659,12 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
         
-        public void New()
+        public async ValueTask New()
         {
             BaseNew();
-            СкладськіПриміщення_Triggers.New(this);
             
+                await СкладськіПриміщення_Triggers.New(this);
+              
         }
 
         public async ValueTask<bool> Read(UnigueID uid)
@@ -9680,7 +9709,7 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Склад = Склад;
             
 
-            copy.New();
+            await copy.New();
             
                 await СкладськіПриміщення_Triggers.Copying(copy, this);
             return copy;
@@ -9865,11 +9894,12 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
         
-        public void New()
+        public async ValueTask New()
         {
             BaseNew();
-            СкладськіКомірки_Triggers.New(this);
             
+                await СкладськіКомірки_Triggers.New(this);
+              
         }
 
         public async ValueTask<bool> Read(UnigueID uid)
@@ -9935,7 +9965,7 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Типорозмір = Типорозмір;
             
 
-            copy.New();
+            await copy.New();
             
                 await СкладськіКомірки_Triggers.Copying(copy, this);
             return copy;
@@ -10113,10 +10143,12 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
         
-        public void New()
+        public async ValueTask New()
         {
             BaseNew();
             
+                await ValueTask.FromResult(true);
+              
         }
 
         public async ValueTask<bool> Read(UnigueID uid)
@@ -10160,7 +10192,7 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Приміщення = Приміщення;
             
 
-            copy.New();
+            await copy.New();
             
             return await ValueTask.FromResult<ОбластьЗберігання_Objest>(copy);
                 
@@ -10332,11 +10364,12 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
         
-        public void New()
+        public async ValueTask New()
         {
             BaseNew();
-            ТипорозміриКомірок_Triggers.New(this);
             
+                await ТипорозміриКомірок_Triggers.New(this);
+              
         }
 
         public async ValueTask<bool> Read(UnigueID uid)
@@ -10390,7 +10423,7 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Ширина = Ширина;
             
 
-            copy.New();
+            await copy.New();
             
                 await ТипорозміриКомірок_Triggers.Copying(copy, this);
             return copy;
@@ -10566,11 +10599,12 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
         
-        public void New()
+        public async ValueTask New()
         {
             BaseNew();
-            СкладськіКомірки_Папки_Triggers.New(this);
             
+                await СкладськіКомірки_Папки_Triggers.New(this);
+              
         }
 
         public async ValueTask<bool> Read(UnigueID uid)
@@ -10618,7 +10652,7 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Власник = Власник;
             
 
-            copy.New();
+            await copy.New();
             
                 await СкладськіКомірки_Папки_Triggers.Copying(copy, this);
             return copy;
@@ -10794,11 +10828,12 @@ namespace StorageAndTrade_1_0.Довідники
             
         }
         
-        public void New()
+        public async ValueTask New()
         {
             BaseNew();
-            Блокнот_Triggers.New(this);
             
+                await Блокнот_Triggers.New(this);
+              
         }
 
         public async ValueTask<bool> Read(UnigueID uid)
@@ -10849,7 +10884,7 @@ namespace StorageAndTrade_1_0.Довідники
             copy.Лінк = Лінк;
             
 
-            copy.New();
+            await copy.New();
             
                 await Блокнот_Triggers.Copying(copy, this);
             return copy;
@@ -12779,11 +12814,12 @@ namespace StorageAndTrade_1_0.Документи
             
         }
         
-        public void New()
+        public async ValueTask New()
         {
             BaseNew();
-            ЗамовленняПостачальнику_Triggers.New(this);
             
+                await ЗамовленняПостачальнику_Triggers.New(this);
+              
         }
 
         public async ValueTask<bool> Read(UnigueID uid, bool readAllTablePart = false)
@@ -12938,7 +12974,7 @@ namespace StorageAndTrade_1_0.Документи
             }
             
 
-            copy.New();
+            await copy.New();
             
                 await ЗамовленняПостачальнику_Triggers.Copying(copy, this);
             return copy;
@@ -13688,11 +13724,12 @@ namespace StorageAndTrade_1_0.Документи
             
         }
         
-        public void New()
+        public async ValueTask New()
         {
             BaseNew();
-            ПоступленняТоварівТаПослуг_Triggers.New(this);
             
+                await ПоступленняТоварівТаПослуг_Triggers.New(this);
+              
         }
 
         public async ValueTask<bool> Read(UnigueID uid, bool readAllTablePart = false)
@@ -13865,7 +13902,7 @@ namespace StorageAndTrade_1_0.Документи
             }
             
 
-            copy.New();
+            await copy.New();
             
                 await ПоступленняТоварівТаПослуг_Triggers.Copying(copy, this);
             return copy;
@@ -14579,11 +14616,12 @@ namespace StorageAndTrade_1_0.Документи
             
         }
         
-        public void New()
+        public async ValueTask New()
         {
             BaseNew();
-            ЗамовленняКлієнта_Triggers.New(this);
             
+                await ЗамовленняКлієнта_Triggers.New(this);
+              
         }
 
         public async ValueTask<bool> Read(UnigueID uid, bool readAllTablePart = false)
@@ -14747,7 +14785,7 @@ namespace StorageAndTrade_1_0.Документи
             }
             
 
-            copy.New();
+            await copy.New();
             
                 await ЗамовленняКлієнта_Triggers.Copying(copy, this);
             return copy;
@@ -15496,11 +15534,12 @@ namespace StorageAndTrade_1_0.Документи
             
         }
         
-        public void New()
+        public async ValueTask New()
         {
             BaseNew();
-            РеалізаціяТоварівТаПослуг_Triggers.New(this);
             
+                await РеалізаціяТоварівТаПослуг_Triggers.New(this);
+              
         }
 
         public async ValueTask<bool> Read(UnigueID uid, bool readAllTablePart = false)
@@ -15670,7 +15709,7 @@ namespace StorageAndTrade_1_0.Документи
             }
             
 
-            copy.New();
+            await copy.New();
             
                 await РеалізаціяТоварівТаПослуг_Triggers.Copying(copy, this);
             return copy;
@@ -16165,11 +16204,12 @@ namespace StorageAndTrade_1_0.Документи
             
         }
         
-        public void New()
+        public async ValueTask New()
         {
             BaseNew();
-            ВстановленняЦінНоменклатури_Triggers.New(this);
             
+                await ВстановленняЦінНоменклатури_Triggers.New(this);
+              
         }
 
         public async ValueTask<bool> Read(UnigueID uid, bool readAllTablePart = false)
@@ -16270,7 +16310,7 @@ namespace StorageAndTrade_1_0.Документи
             }
             
 
-            copy.New();
+            await copy.New();
             
                 await ВстановленняЦінНоменклатури_Triggers.Copying(copy, this);
             return copy;
@@ -16788,11 +16828,12 @@ namespace StorageAndTrade_1_0.Документи
             
         }
         
-        public void New()
+        public async ValueTask New()
         {
             BaseNew();
-            ПрихіднийКасовийОрдер_Triggers.New(this);
             
+                await ПрихіднийКасовийОрдер_Triggers.New(this);
+              
         }
 
         public async ValueTask<bool> Read(UnigueID uid, bool readAllTablePart = false)
@@ -16920,7 +16961,7 @@ namespace StorageAndTrade_1_0.Документи
             }
             
 
-            copy.New();
+            await copy.New();
             
                 await ПрихіднийКасовийОрдер_Triggers.Copying(copy, this);
             return copy;
@@ -17471,11 +17512,12 @@ namespace StorageAndTrade_1_0.Документи
             
         }
         
-        public void New()
+        public async ValueTask New()
         {
             BaseNew();
-            РозхіднийКасовийОрдер_Triggers.New(this);
             
+                await РозхіднийКасовийОрдер_Triggers.New(this);
+              
         }
 
         public async ValueTask<bool> Read(UnigueID uid, bool readAllTablePart = false)
@@ -17609,7 +17651,7 @@ namespace StorageAndTrade_1_0.Документи
             }
             
 
-            copy.New();
+            await copy.New();
             
                 await РозхіднийКасовийОрдер_Triggers.Copying(copy, this);
             return copy;
@@ -18186,11 +18228,12 @@ namespace StorageAndTrade_1_0.Документи
             
         }
         
-        public void New()
+        public async ValueTask New()
         {
             BaseNew();
-            ПереміщенняТоварів_Triggers.New(this);
             
+                await ПереміщенняТоварів_Triggers.New(this);
+              
         }
 
         public async ValueTask<bool> Read(UnigueID uid, bool readAllTablePart = false)
@@ -18327,7 +18370,7 @@ namespace StorageAndTrade_1_0.Документи
             }
             
 
-            copy.New();
+            await copy.New();
             
                 await ПереміщенняТоварів_Triggers.Copying(copy, this);
             return copy;
@@ -18939,11 +18982,12 @@ namespace StorageAndTrade_1_0.Документи
             
         }
         
-        public void New()
+        public async ValueTask New()
         {
             BaseNew();
-            ПоверненняТоварівПостачальнику_Triggers.New(this);
             
+                await ПоверненняТоварівПостачальнику_Triggers.New(this);
+              
         }
 
         public async ValueTask<bool> Read(UnigueID uid, bool readAllTablePart = false)
@@ -19086,7 +19130,7 @@ namespace StorageAndTrade_1_0.Документи
             }
             
 
-            copy.New();
+            await copy.New();
             
                 await ПоверненняТоварівПостачальнику_Triggers.Copying(copy, this);
             return copy;
@@ -19678,11 +19722,12 @@ namespace StorageAndTrade_1_0.Документи
             
         }
         
-        public void New()
+        public async ValueTask New()
         {
             BaseNew();
-            ПоверненняТоварівВідКлієнта_Triggers.New(this);
             
+                await ПоверненняТоварівВідКлієнта_Triggers.New(this);
+              
         }
 
         public async ValueTask<bool> Read(UnigueID uid, bool readAllTablePart = false)
@@ -19813,7 +19858,7 @@ namespace StorageAndTrade_1_0.Документи
             }
             
 
-            copy.New();
+            await copy.New();
             
                 await ПоверненняТоварівВідКлієнта_Triggers.Copying(copy, this);
             return copy;
@@ -20353,11 +20398,12 @@ namespace StorageAndTrade_1_0.Документи
             
         }
         
-        public void New()
+        public async ValueTask New()
         {
             BaseNew();
-            АктВиконанихРобіт_Triggers.New(this);
             
+                await АктВиконанихРобіт_Triggers.New(this);
+              
         }
 
         public async ValueTask<bool> Read(UnigueID uid, bool readAllTablePart = false)
@@ -20482,7 +20528,7 @@ namespace StorageAndTrade_1_0.Документи
             }
             
 
-            copy.New();
+            await copy.New();
             
                 await АктВиконанихРобіт_Triggers.Copying(copy, this);
             return copy;
@@ -21102,11 +21148,12 @@ namespace StorageAndTrade_1_0.Документи
             
         }
         
-        public void New()
+        public async ValueTask New()
         {
             BaseNew();
-            ВведенняЗалишків_Triggers.New(this);
             
+                await ВведенняЗалишків_Triggers.New(this);
+              
         }
 
         public async ValueTask<bool> Read(UnigueID uid, bool readAllTablePart = false)
@@ -21234,7 +21281,7 @@ namespace StorageAndTrade_1_0.Документи
             }
             
 
-            copy.New();
+            await copy.New();
             
                 await ВведенняЗалишків_Triggers.Copying(copy, this);
             return copy;
@@ -21955,10 +22002,12 @@ namespace StorageAndTrade_1_0.Документи
             
         }
         
-        public void New()
+        public async ValueTask New()
         {
             BaseNew();
             
+                await ValueTask.FromResult(true);
+              
         }
 
         public async ValueTask<bool> Read(UnigueID uid, bool readAllTablePart = false)
@@ -22058,7 +22107,7 @@ namespace StorageAndTrade_1_0.Документи
             }
             
 
-            copy.New();
+            await copy.New();
             
             return copy;
                 
@@ -22481,10 +22530,12 @@ namespace StorageAndTrade_1_0.Документи
             
         }
         
-        public void New()
+        public async ValueTask New()
         {
             BaseNew();
             
+                await ValueTask.FromResult(true);
+              
         }
 
         public async ValueTask<bool> Read(UnigueID uid, bool readAllTablePart = false)
@@ -22584,7 +22635,7 @@ namespace StorageAndTrade_1_0.Документи
             }
             
 
-            copy.New();
+            await copy.New();
             
             return copy;
                 
@@ -22837,6 +22888,8 @@ namespace StorageAndTrade_1_0.Документи
         public const string Коментар = "col_i5";
         public const string Автор = "col_a1";
         public const string КлючовіСловаДляПошуку = "col_a2";
+        public const string Організація = "col_a3";
+        public const string Підрозділ = "col_a4";
     }
 
     public static class ПерерахунокТоварів_Export
@@ -22905,6 +22958,22 @@ namespace StorageAndTrade_1_0.Документи
                 xmlWriter.WriteValue(obj.КлючовіСловаДляПошуку);
               
             xmlWriter.WriteEndElement(); //КлючовіСловаДляПошуку
+            xmlWriter.WriteStartElement("Організація");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Організації");
+                    xmlWriter.WriteAttributeString("uid", obj.Організація.UnigueID.ToString());
+                    xmlWriter.WriteString(await obj.Організація.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Організація
+            xmlWriter.WriteStartElement("Підрозділ");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.СтруктураПідприємства");
+                    xmlWriter.WriteAttributeString("uid", obj.Підрозділ.UnigueID.ToString());
+                    xmlWriter.WriteString(await obj.Підрозділ.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Підрозділ
 
                 /* 
                 Табличні частини
@@ -22968,6 +23037,18 @@ namespace StorageAndTrade_1_0.Документи
                                 xmlWriter.WriteString(await record.ХарактеристикаНоменклатури.GetPresentation());
                               
                         xmlWriter.WriteEndElement(); //ХарактеристикаНоменклатури
+                        xmlWriter.WriteStartElement("НомерРядка");
+                        xmlWriter.WriteAttributeString("type", "integer");
+                        
+                            xmlWriter.WriteValue(record.НомерРядка);
+                          
+                        xmlWriter.WriteEndElement(); //НомерРядка
+                        xmlWriter.WriteStartElement("Коментар");
+                        xmlWriter.WriteAttributeString("type", "string");
+                        
+                            xmlWriter.WriteValue(record.Коментар);
+                          
+                        xmlWriter.WriteEndElement(); //Коментар
                         xmlWriter.WriteEndElement(); //row
                     }
 
@@ -22985,7 +23066,7 @@ namespace StorageAndTrade_1_0.Документи
     public class ПерерахунокТоварів_Objest : DocumentObject
     {
         public ПерерахунокТоварів_Objest() : base(Config.Kernel!, "tab_a92", "ПерерахунокТоварів",
-             new string[] { "docname", "docnomer", "docdate", "col_i6", "col_i7", "col_i5", "col_a1", "col_a2" }) 
+             new string[] { "docname", "docnomer", "docdate", "col_i6", "col_i7", "col_i5", "col_a1", "col_a2", "col_a3", "col_a4" }) 
         {
             Назва = "";
             НомерДок = "";
@@ -22995,16 +23076,20 @@ namespace StorageAndTrade_1_0.Документи
             Коментар = "";
             Автор = new Довідники.Користувачі_Pointer();
             КлючовіСловаДляПошуку = "";
+            Організація = new Довідники.Організації_Pointer();
+            Підрозділ = new Довідники.СтруктураПідприємства_Pointer();
             
             //Табличні частини
             Товари_TablePart = new ПерерахунокТоварів_Товари_TablePart(this);
             
         }
         
-        public void New()
+        public async ValueTask New()
         {
             BaseNew();
             
+                await ПерерахунокТоварів_Triggers.New(this);
+              
         }
 
         public async ValueTask<bool> Read(UnigueID uid, bool readAllTablePart = false)
@@ -23019,6 +23104,8 @@ namespace StorageAndTrade_1_0.Документи
                 Коментар = base.FieldValue["col_i5"].ToString() ?? "";
                 Автор = new Довідники.Користувачі_Pointer(base.FieldValue["col_a1"]);
                 КлючовіСловаДляПошуку = base.FieldValue["col_a2"].ToString() ?? "";
+                Організація = new Довідники.Організації_Pointer(base.FieldValue["col_a3"]);
+                Підрозділ = new Довідники.СтруктураПідприємства_Pointer(base.FieldValue["col_a4"]);
                 
                 BaseClear();
                 
@@ -23039,6 +23126,7 @@ namespace StorageAndTrade_1_0.Документи
         
         public async Task<bool> Save()
         {
+            ПерерахунокТоварів_Triggers.BeforeSave(this);
             base.FieldValue["docname"] = Назва;
             base.FieldValue["docnomer"] = НомерДок;
             base.FieldValue["docdate"] = ДатаДок;
@@ -23047,12 +23135,14 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["col_i5"] = Коментар;
             base.FieldValue["col_a1"] = Автор.UnigueID.UGuid;
             base.FieldValue["col_a2"] = КлючовіСловаДляПошуку;
+            base.FieldValue["col_a3"] = Організація.UnigueID.UGuid;
+            base.FieldValue["col_a4"] = Підрозділ.UnigueID.UGuid;
             
             bool result = await BaseSave();
             
             if (result)
             {
-                
+                ПерерахунокТоварів_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), new string[] { КлючовіСловаДляПошуку });
             }
 
@@ -23061,8 +23151,9 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            await BaseSpend(false, DateTime.MinValue);
-                return false;
+            bool rezult = await ПерерахунокТоварів_SpendTheDocument.Spend(this);
+                await BaseSpend(rezult, spendDate);
+                return rezult;
         }
 
         /* синхронна функція для SpendTheDocument() */
@@ -23070,6 +23161,8 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask ClearSpendTheDocument()
         {
+            
+                await ПерерахунокТоварів_SpendTheDocument.ClearSpend(this);
             await BaseSpend(false, DateTime.MinValue);
         }
 
@@ -23087,6 +23180,8 @@ namespace StorageAndTrade_1_0.Документи
             copy.Коментар = Коментар;
             copy.Автор = Автор;
             copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
+            copy.Організація = Організація;
+            copy.Підрозділ = Підрозділ;
             
             if (copyTableParts)
             {
@@ -23098,15 +23193,16 @@ namespace StorageAndTrade_1_0.Документи
             }
             
 
-            copy.New();
+            await copy.New();
             
+                await ПерерахунокТоварів_Triggers.Copying(copy, this);
             return copy;
                 
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            
+            ПерерахунокТоварів_Triggers.SetDeletionLabel(this, label);
             await ClearSpendTheDocument();
             await base.BaseDeletionLabel(label);
         }
@@ -23116,7 +23212,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask Delete()
         {
-            
+            ПерерахунокТоварів_Triggers.BeforeDelete(this);
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_a93" });
         }
@@ -23142,6 +23238,8 @@ namespace StorageAndTrade_1_0.Документи
         public string Коментар { get; set; }
         public Довідники.Користувачі_Pointer Автор { get; set; }
         public string КлючовіСловаДляПошуку { get; set; }
+        public Довідники.Організації_Pointer Організація { get; set; }
+        public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; }
         
         //Табличні частини
         public ПерерахунокТоварів_Товари_TablePart Товари_TablePart { get; set; }
@@ -23186,7 +23284,16 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            
+            ПерерахунокТоварів_Objest? obj = await GetDocumentObject();
+                if (obj == null) return;
+                ПерерахунокТоварів_Triggers.SetDeletionLabel(obj, label);
+                
+                if (label)
+                {
+                    await ПерерахунокТоварів_SpendTheDocument.ClearSpend(obj);
+                    await BaseSpend(false, DateTime.MinValue);
+                }
+                
             await base.BaseDeletionLabel(label);
         }
 
@@ -23239,7 +23346,7 @@ namespace StorageAndTrade_1_0.Документи
     public class ПерерахунокТоварів_Товари_TablePart : DocumentTablePart
     {
         public ПерерахунокТоварів_Товари_TablePart(ПерерахунокТоварів_Objest owner) : base(Config.Kernel!, "tab_a93",
-             new string[] { "col_i8", "col_i9", "col_j1", "col_j3", "col_j4", "col_j5", "col_j6" }) 
+             new string[] { "col_i8", "col_i9", "col_j1", "col_j3", "col_j4", "col_j5", "col_j6", "col_a1", "col_a2" }) 
         {
             if (owner == null) throw new Exception("owner null");
             
@@ -23254,6 +23361,8 @@ namespace StorageAndTrade_1_0.Документи
         public const string Номенклатура = "col_j4";
         public const string Пакування = "col_j5";
         public const string ХарактеристикаНоменклатури = "col_j6";
+        public const string НомерРядка = "col_a1";
+        public const string Коментар = "col_a2";
 
         public ПерерахунокТоварів_Objest Owner { get; private set; }
         
@@ -23276,6 +23385,8 @@ namespace StorageAndTrade_1_0.Документи
                 record.Номенклатура = new Довідники.Номенклатура_Pointer(fieldValue["col_j4"]);
                 record.Пакування = new Довідники.ПакуванняОдиниціВиміру_Pointer(fieldValue["col_j5"]);
                 record.ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer(fieldValue["col_j6"]);
+                record.НомерРядка = (fieldValue["col_a1"] != DBNull.Value) ? (int)fieldValue["col_a1"] : 0;
+                record.Коментар = fieldValue["col_a2"].ToString() ?? "";
                 
                 Records.Add(record);
             }
@@ -23301,6 +23412,8 @@ namespace StorageAndTrade_1_0.Документи
                 fieldValue.Add("col_j4", record.Номенклатура.UnigueID.UGuid);
                 fieldValue.Add("col_j5", record.Пакування.UnigueID.UGuid);
                 fieldValue.Add("col_j6", record.ХарактеристикаНоменклатури.UnigueID.UGuid);
+                fieldValue.Add("col_a1", record.НомерРядка);
+                fieldValue.Add("col_a2", record.Коментар);
                 
                 record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
@@ -23333,6 +23446,8 @@ namespace StorageAndTrade_1_0.Документи
             public Довідники.Номенклатура_Pointer Номенклатура { get; set; } = new Довідники.Номенклатура_Pointer();
             public Довідники.ПакуванняОдиниціВиміру_Pointer Пакування { get; set; } = new Довідники.ПакуванняОдиниціВиміру_Pointer();
             public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; } = new Довідники.ХарактеристикиНоменклатури_Pointer();
+            public int НомерРядка { get; set; } = 0;
+            public string Коментар { get; set; } = "";
             
         }
     }
@@ -23577,11 +23692,12 @@ namespace StorageAndTrade_1_0.Документи
             
         }
         
-        public void New()
+        public async ValueTask New()
         {
             BaseNew();
-            ПсуванняТоварів_Triggers.New(this);
             
+                await ПсуванняТоварів_Triggers.New(this);
+              
         }
 
         public async ValueTask<bool> Read(UnigueID uid, bool readAllTablePart = false)
@@ -23691,7 +23807,7 @@ namespace StorageAndTrade_1_0.Документи
             }
             
 
-            copy.New();
+            await copy.New();
             
                 await ПсуванняТоварів_Triggers.Copying(copy, this);
             return copy;
@@ -24208,11 +24324,12 @@ namespace StorageAndTrade_1_0.Документи
             
         }
         
-        public void New()
+        public async ValueTask New()
         {
             BaseNew();
-            ВнутрішнєСпоживанняТоварів_Triggers.New(this);
             
+                await ВнутрішнєСпоживанняТоварів_Triggers.New(this);
+              
         }
 
         public async ValueTask<bool> Read(UnigueID uid, bool readAllTablePart = false)
@@ -24325,7 +24442,7 @@ namespace StorageAndTrade_1_0.Документи
             }
             
 
-            copy.New();
+            await copy.New();
             
                 await ВнутрішнєСпоживанняТоварів_Triggers.Copying(copy, this);
             return copy;
@@ -24921,11 +25038,12 @@ namespace StorageAndTrade_1_0.Документи
             
         }
         
-        public void New()
+        public async ValueTask New()
         {
             BaseNew();
-            РахунокФактура_Triggers.New(this);
             
+                await РахунокФактура_Triggers.New(this);
+              
         }
 
         public async ValueTask<bool> Read(UnigueID uid, bool readAllTablePart = false)
@@ -25059,7 +25177,7 @@ namespace StorageAndTrade_1_0.Документи
             }
             
 
-            copy.New();
+            await copy.New();
             
                 await РахунокФактура_Triggers.Copying(copy, this);
             return copy;
@@ -25558,11 +25676,12 @@ namespace StorageAndTrade_1_0.Документи
             
         }
         
-        public void New()
+        public async ValueTask New()
         {
             BaseNew();
-            РозміщенняТоварівНаСкладі_Triggers.New(this);
             
+                await РозміщенняТоварівНаСкладі_Triggers.New(this);
+              
         }
 
         public async ValueTask<bool> Read(UnigueID uid, bool readAllTablePart = false)
@@ -25669,7 +25788,7 @@ namespace StorageAndTrade_1_0.Документи
             }
             
 
-            copy.New();
+            await copy.New();
             
                 await РозміщенняТоварівНаСкладі_Triggers.Copying(copy, this);
             return copy;
@@ -26145,11 +26264,12 @@ namespace StorageAndTrade_1_0.Документи
             
         }
         
-        public void New()
+        public async ValueTask New()
         {
             BaseNew();
-            ПереміщенняТоварівНаСкладі_Triggers.New(this);
             
+                await ПереміщенняТоварівНаСкладі_Triggers.New(this);
+              
         }
 
         public async ValueTask<bool> Read(UnigueID uid, bool readAllTablePart = false)
@@ -26253,7 +26373,7 @@ namespace StorageAndTrade_1_0.Документи
             }
             
 
-            copy.New();
+            await copy.New();
             
                 await ПереміщенняТоварівНаСкладі_Triggers.Copying(copy, this);
             return copy;
@@ -26734,11 +26854,12 @@ namespace StorageAndTrade_1_0.Документи
             
         }
         
-        public void New()
+        public async ValueTask New()
         {
             BaseNew();
-            ЗбіркаТоварівНаСкладі_Triggers.New(this);
             
+                await ЗбіркаТоварівНаСкладі_Triggers.New(this);
+              
         }
 
         public async ValueTask<bool> Read(UnigueID uid, bool readAllTablePart = false)
@@ -26845,7 +26966,7 @@ namespace StorageAndTrade_1_0.Документи
             }
             
 
-            copy.New();
+            await copy.New();
             
                 await ЗбіркаТоварівНаСкладі_Triggers.Copying(copy, this);
             return copy;
@@ -27285,11 +27406,12 @@ namespace StorageAndTrade_1_0.Документи
             
         }
         
-        public void New()
+        public async ValueTask New()
         {
             BaseNew();
-            РозміщенняНоменклатуриПоКоміркам_Triggers.New(this);
             
+                await РозміщенняНоменклатуриПоКоміркам_Triggers.New(this);
+              
         }
 
         public async ValueTask<bool> Read(UnigueID uid, bool readAllTablePart = false)
@@ -27393,7 +27515,7 @@ namespace StorageAndTrade_1_0.Документи
             }
             
 
-            copy.New();
+            await copy.New();
             
                 await РозміщенняНоменклатуриПоКоміркам_Triggers.Copying(copy, this);
             return copy;

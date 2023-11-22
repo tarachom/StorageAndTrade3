@@ -149,7 +149,7 @@ namespace StorageAndTrade
                                     КороткаНазва = Коротко,
                                     ВиводитиКурсНаСтартову = ВиводитиКурсНаСтартову == "1"
                                 };
-                                валюти_Objest.New();
+                                await валюти_Objest.New();
                                 await валюти_Objest.Save();
 
                                 if (ЗначенняЗаЗамовчуванням == "1")
@@ -185,7 +185,7 @@ namespace StorageAndTrade
                             if (організації_Pointer.IsEmpty())
                             {
                                 Організації_Objest організації_Objest = new Організації_Objest { Назва = Назва };
-                                організації_Objest.New();
+                                await організації_Objest.New();
                                 await організації_Objest.Save();
 
                                 if (ЗначенняЗаЗамовчуванням == "1")
@@ -227,7 +227,7 @@ namespace StorageAndTrade
                                     Валюта = await new Валюти_Select().FindByField(Валюти_Const.Назва, Валюта)
                                 };
 
-                                обєкт.New();
+                                await обєкт.New();
                                 await обєкт.Save();
 
                                 if (ЗначенняЗаЗамовчуванням == "1")
@@ -269,7 +269,7 @@ namespace StorageAndTrade
                                     НазваПовна = НазваПовна,
                                     КількістьУпаковок = 1
                                 };
-                                обєкт.New();
+                                await обєкт.New();
                                 await обєкт.Save();
 
                                 if (ЗначенняЗаЗамовчуванням == "1")
@@ -314,7 +314,7 @@ namespace StorageAndTrade
                                     Назва = Назва,
                                     ТипНоменклатури = ТипНоменклатури
                                 };
-                                обєкт.New();
+                                await обєкт.New();
                                 await обєкт.Save();
 
                                 if (ЗначенняЗаЗамовчуванням == "1")
@@ -355,7 +355,7 @@ namespace StorageAndTrade
                                     Назва = Назва,
                                     Валюта = await new Валюти_Select().FindByField(Валюти_Const.Назва, Валюта)
                                 };
-                                обєкт.New();
+                                await обєкт.New();
                                 await обєкт.Save();
 
                                 if (ЗначенняЗаЗамовчуванням == "1")
@@ -394,7 +394,7 @@ namespace StorageAndTrade
                             if (склади_Pointer.IsEmpty())
                             {
                                 Склади_Objest склади_Objest = new Склади_Objest { Назва = Назва };
-                                склади_Objest.New();
+                                await склади_Objest.New();
                                 await склади_Objest.Save();
 
                                 if (ЗначенняЗаЗамовчуванням == "1")
@@ -430,7 +430,7 @@ namespace StorageAndTrade
                             if (контрагенти_Pointer.IsEmpty())
                             {
                                 Контрагенти_Objest контрагенти_Objest = new Контрагенти_Objest { Назва = Назва };
-                                контрагенти_Objest.New();
+                                await контрагенти_Objest.New();
                                 await контрагенти_Objest.Save();
 
                                 if (ЗначенняЗаЗамовчуванням == "1")
@@ -468,7 +468,7 @@ namespace StorageAndTrade
                             if (контрагенти_Папки_Pointer.IsEmpty())
                             {
                                 Контрагенти_Папки_Objest контрагенти_Папки_Objest = new Контрагенти_Папки_Objest { Назва = Назва };
-                                контрагенти_Папки_Objest.New();
+                                await контрагенти_Папки_Objest.New();
                                 await контрагенти_Папки_Objest.Save();
 
                                 CreateMessage(TypeMessage.Ok, $"Додано новий елемент довідника {name}: {Назва}");
@@ -500,7 +500,7 @@ namespace StorageAndTrade
                             if (номенклатура_Папки_Pointer.IsEmpty())
                             {
                                 Номенклатура_Папки_Objest номенклатура_Папки_Objest = new Номенклатура_Папки_Objest { Назва = Назва };
-                                номенклатура_Папки_Objest.New();
+                                await номенклатура_Папки_Objest.New();
                                 await номенклатура_Папки_Objest.Save();
 
                                 CreateMessage(TypeMessage.Ok, $"Додано новий елемент довідника {name}: {Назва}");
@@ -545,7 +545,7 @@ namespace StorageAndTrade
                                     ТипНоменклатури = ТипНоменклатури,
                                     ОдиницяВиміру = await new ПакуванняОдиниціВиміру_Select().FindByField(ПакуванняОдиниціВиміру_Const.Назва, ПакуванняОдиниціВиміру)
                                 };
-                                обєкт.New();
+                                await обєкт.New();
                                 await обєкт.Save();
 
                                 CreateMessage(TypeMessage.Ok, $"Додано новий елемент довідника {name}: {Назва}");
