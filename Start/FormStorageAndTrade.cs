@@ -34,7 +34,6 @@ namespace StorageAndTrade
     {
         public Configurator.ConfigurationParam? OpenConfigurationParam { get; set; }
         CancellationTokenSource? CancellationTokenBackgroundTask;
-
         Guid KernelUser { get; set; } = Guid.Empty;
         Guid KernelSession { get; set; } = Guid.Empty;
 
@@ -100,19 +99,15 @@ namespace StorageAndTrade
 
         public void OpenFirstPages()
         {
-            CreateNotebookPage("Стартова", () =>
-            {
-                PageHome page = new PageHome();
+            PageHome page = new PageHome();
+            CreateNotebookPage("Стартова", () => { return page; });
 
-                //Блок курсів валют
-                page.БлокКурсиВалют.StartDesktop();
-                page.БлокКурсиВалют.StartAutoWork();
+            //Блок курсів валют
+            page.БлокКурсиВалют.StartDesktop();
+            page.БлокКурсиВалют.StartAutoWork();
 
-                //Активні користувачі
-                page.АктивніКористувачі.AutoRefreshRun();
-
-                return page;
-            });
+            //Активні користувачі
+            page.АктивніКористувачі.AutoRefreshRun();
 
             //
             // Перевірка констант
@@ -154,10 +149,11 @@ namespace StorageAndTrade
 
         public void StartBackgroundTask()
         {
+            //Токен для зупинки процесу обчислення (для випадку коли буде потреба зупинити фонові обчислення)
             Program.ListCancellationToken.Add(CancellationTokenBackgroundTask = new CancellationTokenSource());
 
-            Thread ThreadBackgroundTask = new Thread(new ThreadStart(CalculationVirtualBalances));
-            ThreadBackgroundTask.Start();
+            //Обчислення віртуальних залишків по регістрах
+            CalculationVirtualBalances();
         }
 
         /*
@@ -179,40 +175,27 @@ namespace StorageAndTrade
 
         async void CalculationVirtualBalances()
         {
-            int counter = 0;
-
-            //Обновлення сесії
-            UpdateSession();
-
-            while (!CancellationTokenBackgroundTask!.IsCancellationRequested)
+            while (!CancellationTokenBackgroundTask?.IsCancellationRequested ?? false)
             {
-                //Раз на 5 сек
-                if (counter >= 5)
+                //Обновлення сесії
+                UpdateSession();
+
+                //Зупинка розрахунків використовується при масовому перепроведенні документів щоб
+                //провести всі документ, а тоді вже розраховувати регістри
+                if (!Системні.ЗупинитиФоновіЗадачі_Const)
                 {
-                    //Обновлення сесії
-                    UpdateSession();
-
-                    //Зупинка розрахунків використовується при масовому перепроведенні документів щоб
-                    //провести всі документ, а тоді вже розраховувати регістри
-                    if (!Системні.ЗупинитиФоновіЗадачі_Const)
-                    {
-                        //if (Config.Kernel != null)
-                        //Виконання обчислень
-                        await Config.Kernel!.DataBase.SpetialTableRegAccumTrigerExecute(KernelSession,
-                             VirtualTablesСalculation.Execute, VirtualTablesСalculation.ExecuteFinalCalculation);
-                    }
-
-                    counter = 0;
+                    //Виконання обчислень
+                    await Config.Kernel!.DataBase.SpetialTableRegAccumTrigerExecute(KernelSession,
+                         VirtualTablesСalculation.Execute, VirtualTablesСalculation.ExecuteFinalCalculation);
                 }
 
-                counter++;
-
-                //Затримка на 1 сек
-                Thread.Sleep(1000);
+                //Затримка на 5 сек
+                await Task.Delay(5000);
             }
 
             //Закрити поточну сесію
-            await Config.Kernel!.DataBase.SpetialTableActiveUsersCloseSession(KernelSession);
+            //await Config.Kernel!.DataBase.SpetialTableActiveUsersCloseSession(KernelSession);
+            //Console.WriteLine("CloseSession");
         }
 
         async void UpdateSession()

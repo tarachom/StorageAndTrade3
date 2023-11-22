@@ -41,7 +41,6 @@ namespace StorageAndTrade
     class PageService : VBox
     {
         Assembly ExecutingAssembly = Assembly.GetExecutingAssembly();
-
         CancellationTokenSource? CancellationTokenPageService;
 
         Button bSpendTheDocument;
@@ -72,7 +71,7 @@ namespace StorageAndTrade
             hBoxBotton.PackStart(bClearDeletionLabel, false, false, 10);
 
             bStop = new Button("Зупинити") { Sensitive = false };
-            bStop.Clicked += OnStopClick;
+            bStop.Clicked += (object? sender, EventArgs args) => { CancellationTokenPageService?.Cancel(); };
             hBoxBotton.PackStart(bStop, false, false, 10);
 
             PackStart(hBoxBotton, false, false, 10);
@@ -86,83 +85,20 @@ namespace StorageAndTrade
             ShowAll();
         }
 
-        void ButtonSensitive(bool sensitive)
-        {
-            Gtk.Application.Invoke
-            (
-                delegate
-                {
-                    bSpendTheDocument.Sensitive = sensitive;
-                    bClearDeletionLabel.Sensitive = sensitive;
-                    bStop.Sensitive = !sensitive;
-                }
-            );
-        }
-
-        void CreateMessage(TypeMessage typeMsg, string message)
-        {
-            Gtk.Application.Invoke
-            (
-                delegate
-                {
-                    HBox hBoxInfo = new HBox();
-                    vBoxMessage.PackStart(hBoxInfo, false, false, 2);
-
-                    switch (typeMsg)
-                    {
-                        case TypeMessage.Ok:
-                            {
-                                hBoxInfo.PackStart(new Image(AppContext.BaseDirectory + "images/16/ok.png"), false, false, 5);
-                                break;
-                            }
-                        case TypeMessage.Error:
-                            {
-                                hBoxInfo.PackStart(new Image(AppContext.BaseDirectory + "images/16/error.png"), false, false, 5);
-                                break;
-                            }
-                        case TypeMessage.Info:
-                            {
-                                hBoxInfo.PackStart(new Image(AppContext.BaseDirectory + "images/16/info.png"), false, false, 5);
-                                break;
-                            }
-                        case TypeMessage.None:
-                            {
-                                hBoxInfo.PackStart(new Label(""), false, false, 5);
-                                break;
-                            }
-                    }
-
-                    hBoxInfo.PackStart(new Label(message) { Wrap = true, Selectable = true }, false, false, 0);
-                    hBoxInfo.ShowAll();
-
-                    scrollMessage.Vadjustment.Value = scrollMessage.Vadjustment.Upper;
-                }
-            );
-        }
-
-        void ClearMessage()
-        {
-            foreach (Widget Child in vBoxMessage.Children)
-                vBoxMessage.Remove(Child);
-        }
-
         #region SpendTheDocument
 
-        void OnSpendTheDocument(object? sender, EventArgs args)
+        async void OnSpendTheDocument(object? sender, EventArgs args)
         {
-            ClearMessage();
-
-            Program.ListCancellationToken.Add(CancellationTokenPageService = new CancellationTokenSource());
-
-            Thread thread = new Thread(new ThreadStart(SpendTheDocument));
-            thread.Start();
+            CancellationTokenPageService = new CancellationTokenSource();
+            await SpendTheDocument();
         }
 
-        async void SpendTheDocument()
+        async ValueTask SpendTheDocument()
         {
-            await ФункціїДляПовідомлень.ОчиститиПовідомлення();
-
             ButtonSensitive(false);
+
+            ClearMessage();
+            await ФункціїДляПовідомлень.ОчиститиПовідомлення();
 
             int counterDocs = 0;
             Константи.Системні.ЗупинитиФоновіЗадачі_Const = true;
@@ -183,8 +119,7 @@ namespace StorageAndTrade
                     if (doc != null)
                     {
                         //Для документу викликається функція проведення
-                        object? obj = doc.GetType().InvokeMember("SpendTheDocumentSync",
-                             BindingFlags.InvokeMethod, null, doc, new object[] { journalSelect.Current.SpendDate });
+                        object? obj = doc.GetType().InvokeMember("SpendTheDocumentSync", BindingFlags.InvokeMethod, null, doc, [journalSelect.Current.SpendDate]);
 
                         if (obj != null ? (bool)obj : false)
                         {
@@ -216,95 +151,33 @@ namespace StorageAndTrade
                 }
             }
 
-            Program.RemoveCancellationToken(CancellationTokenPageService);
-
             Константи.Системні.ЗупинитиФоновіЗадачі_Const = false;
-            ButtonSensitive(true);
 
             CreateMessage(TypeMessage.None, "Готово!\n\n\n");
             CreateMessage(TypeMessage.Info, "Проведено документів: " + counterDocs);
-            Thread.Sleep(1000);
-            CreateMessage(TypeMessage.None, "\n\n\n");
+
+            await Task.Delay(1000);
+            CreateMessage(TypeMessage.None, "\n\n\n\n");
+
+            ButtonSensitive(true);
         }
 
         #endregion
 
         #region Clear DeletionLabel
 
-        void OnClearDeletionLabel(object? sender, EventArgs args)
+        async void OnClearDeletionLabel(object? sender, EventArgs args)
         {
-            ClearMessage();
-
-            Program.ListCancellationToken.Add(CancellationTokenPageService = new CancellationTokenSource());
-
-            Thread thread = new Thread(new ThreadStart(ClearDeletionLabel));
-            thread.Start();
+            CancellationTokenPageService = new CancellationTokenSource();
+            await ClearDeletionLabel();
         }
 
-        long SearchDependencies(List<ConfigurationDependencies> listDependencies, Guid uid, string name)
-        {
-            long allCountDependencies = 0;
-
-            if (listDependencies.Count > 0)
-            {
-                Dictionary<string, object> paramQuery = new Dictionary<string, object>
-                {
-                    { "uid", uid }
-                };
-
-                //Обробка залежностей
-                foreach (ConfigurationDependencies dependence in listDependencies)
-                {
-                    string query = "";
-
-                    if (dependence.ConfigurationGroupLevel == ConfigurationDependencies.GroupLevel.Object)
-                        query = $"SELECT uid FROM {dependence.Table} WHERE {dependence.Field} = @uid";
-                    else if (dependence.ConfigurationGroupLevel == ConfigurationDependencies.GroupLevel.TablePart)
-                        query = $"SELECT DISTINCT owner AS uid FROM {dependence.Table} WHERE {dependence.Field} = @uid";
-
-                    string[] columnsName;
-                    List<Dictionary<string, object>> listRow;
-                    Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listRow);
-
-                    if (listRow.Count > 0)
-                    {
-                        allCountDependencies += listRow.Count;
-
-                        CreateMessage(TypeMessage.Error, name);
-                        CreateMessage(TypeMessage.None, "використовується --> " + dependence.ConfigurationGroupName +
-                            ", \"" + dependence.ConfigurationObjectName + "\" " +
-                            (dependence.ConfigurationGroupLevel == ConfigurationDependencies.GroupLevel.TablePart ?
-                                ", таблична частина \"" + dependence.ConfigurationTablePartName + "\" " : "") +
-                            ", поле \"" + dependence.ConfigurationFieldName + "\"");
-
-                        foreach (Dictionary<string, object> row in listRow)
-                        {
-                            UnigueID unigueID = new UnigueID(row["uid"]);
-
-                            if (dependence.ConfigurationGroupName == "Довідники" || dependence.ConfigurationGroupName == "Документи")
-                            {
-                                string documentPointerName = $"StorageAndTrade_1_0.{dependence.ConfigurationGroupName}.{dependence.ConfigurationObjectName}_Pointer";
-                                object? documentPointer = ExecutingAssembly.CreateInstance(documentPointerName, false, BindingFlags.CreateInstance, null, new object[] { unigueID, null! }, null, null);
-                                if (documentPointer != null)
-                                {
-                                    object? objPresentation = documentPointer.GetType().InvokeMember("GetPresentationSync", BindingFlags.InvokeMethod, null, documentPointer, null);
-                                    if (objPresentation != null)
-                                        CreateMessage(TypeMessage.None, (string)objPresentation + $" [{unigueID}]");
-                                }
-                            }
-                        } //foreach
-                    } //if
-                } //foreach
-            } //if
-
-            return allCountDependencies;
-        }
-
-        async void ClearDeletionLabel()
+        async ValueTask ClearDeletionLabel()
         {
             if (Config.Kernel == null) return;
 
             ButtonSensitive(false);
+            ClearMessage();
 
             CreateMessage(TypeMessage.Info, "Обробка довідників:");
 
@@ -344,7 +217,7 @@ namespace StorageAndTrade
                                 if (objName != null)
                                     name = (string)objName;
 
-                                long allCountDependencies = SearchDependencies(listDependencies, unigueID.UGuid, name);
+                                long allCountDependencies = await SearchDependencies(listDependencies, unigueID.UGuid, name);
                                 if (allCountDependencies == 0)
                                 {
                                     directoryObject.GetType().InvokeMember("DeleteSync", BindingFlags.InvokeMethod, null, directoryObject, null);
@@ -391,7 +264,7 @@ namespace StorageAndTrade
                             object? objRead = documentObject.GetType().InvokeMember("ReadSync", BindingFlags.InvokeMethod, null, documentObject, [unigueID, false]);
                             if (objRead != null ? (bool)objRead : false)
                             {
-                                long allCountDependencies = SearchDependencies(listDependencies, unigueID.UGuid, name);
+                                long allCountDependencies = await SearchDependencies(listDependencies, unigueID.UGuid, name);
                                 if (allCountDependencies == 0)
                                 {
                                     documentObject.GetType().InvokeMember("DeleteSync", BindingFlags.InvokeMethod, null, documentObject, null);
@@ -404,21 +277,119 @@ namespace StorageAndTrade
                 }
             }
 
-            CreateMessage(TypeMessage.None, "Готово!\n\n\n");
+            CreateMessage(TypeMessage.None, "\n\n\nГотово!\n\n\n");
+
+            await Task.Delay(1000);
+            CreateMessage(TypeMessage.None, "\n\n\n\n");
+
             ButtonSensitive(true);
+        }
 
-            Program.RemoveCancellationToken(CancellationTokenPageService);
+        async ValueTask<long> SearchDependencies(List<ConfigurationDependencies> listDependencies, Guid uid, string name)
+        {
+            long allCountDependencies = 0;
 
-            Thread.Sleep(1000);
-            CreateMessage(TypeMessage.None, "\n\n\n");
+            if (listDependencies.Count > 0)
+            {
+                Dictionary<string, object> paramQuery = new Dictionary<string, object>
+                {
+                    { "uid", uid }
+                };
+
+                //Обробка залежностей
+                foreach (ConfigurationDependencies dependence in listDependencies)
+                {
+                    string query = "";
+
+                    if (dependence.ConfigurationGroupLevel == ConfigurationDependencies.GroupLevel.Object)
+                        query = $"SELECT uid FROM {dependence.Table} WHERE {dependence.Field} = @uid";
+                    else if (dependence.ConfigurationGroupLevel == ConfigurationDependencies.GroupLevel.TablePart)
+                        query = $"SELECT DISTINCT owner AS uid FROM {dependence.Table} WHERE {dependence.Field} = @uid";
+
+                    var recordResult = await Config.Kernel!.DataBase.SelectRequestAsync(query, paramQuery);
+
+                    if (recordResult.ListRow.Count > 0)
+                    {
+                        allCountDependencies += recordResult.ListRow.Count;
+
+                        CreateMessage(TypeMessage.Error, name);
+                        CreateMessage(TypeMessage.None, "використовується --> " + dependence.ConfigurationGroupName +
+                            ", \"" + dependence.ConfigurationObjectName + "\" " +
+                            (dependence.ConfigurationGroupLevel == ConfigurationDependencies.GroupLevel.TablePart ?
+                                ", таблична частина \"" + dependence.ConfigurationTablePartName + "\" " : "") +
+                            ", поле \"" + dependence.ConfigurationFieldName + "\"");
+
+                        foreach (Dictionary<string, object> row in recordResult.ListRow)
+                        {
+                            UnigueID unigueID = new UnigueID(row["uid"]);
+
+                            if (dependence.ConfigurationGroupName == "Довідники" || dependence.ConfigurationGroupName == "Документи")
+                            {
+                                string documentPointerName = $"StorageAndTrade_1_0.{dependence.ConfigurationGroupName}.{dependence.ConfigurationObjectName}_Pointer";
+                                object? documentPointer = ExecutingAssembly.CreateInstance(documentPointerName, false, BindingFlags.CreateInstance, null, [unigueID, null!], null, null);
+                                if (documentPointer != null)
+                                {
+                                    object? objPresentation = documentPointer.GetType().InvokeMember("GetPresentationSync", BindingFlags.InvokeMethod, null, documentPointer, null);
+                                    if (objPresentation != null)
+                                        CreateMessage(TypeMessage.None, (string)objPresentation + $" [{unigueID}]");
+                                }
+                            }
+                        } //foreach
+                    } //if
+                } //foreach
+            } //if
+
+            return allCountDependencies;
         }
 
         #endregion
 
-        void OnStopClick(object? sender, EventArgs args)
+        void ButtonSensitive(bool sensitive)
         {
-            CancellationTokenPageService?.Cancel();
-            Program.RemoveCancellationToken(CancellationTokenPageService);
+            bSpendTheDocument.Sensitive = sensitive;
+            bClearDeletionLabel.Sensitive = sensitive;
+            bStop.Sensitive = !sensitive;
+        }
+
+        void CreateMessage(TypeMessage typeMsg, string message)
+        {
+            HBox hBoxInfo = new HBox();
+            vBoxMessage.PackStart(hBoxInfo, false, false, 2);
+
+            switch (typeMsg)
+            {
+                case TypeMessage.Ok:
+                    {
+                        hBoxInfo.PackStart(new Image(AppContext.BaseDirectory + "images/16/ok.png"), false, false, 5);
+                        break;
+                    }
+                case TypeMessage.Error:
+                    {
+                        hBoxInfo.PackStart(new Image(AppContext.BaseDirectory + "images/16/error.png"), false, false, 5);
+                        break;
+                    }
+                case TypeMessage.Info:
+                    {
+                        hBoxInfo.PackStart(new Image(AppContext.BaseDirectory + "images/16/info.png"), false, false, 5);
+                        break;
+                    }
+                case TypeMessage.None:
+                    {
+                        hBoxInfo.PackStart(new Label(""), false, false, 5);
+                        break;
+                    }
+            }
+
+            hBoxInfo.PackStart(new Label(message) { Wrap = true, Selectable = true }, false, false, 0);
+            hBoxInfo.ShowAll();
+
+            scrollMessage.Vadjustment.Value = scrollMessage.Vadjustment.Upper;
+        }
+
+        void ClearMessage()
+        {
+            foreach (Widget Child in vBoxMessage.Children)
+                vBoxMessage.Remove(Child);
         }
     }
 }

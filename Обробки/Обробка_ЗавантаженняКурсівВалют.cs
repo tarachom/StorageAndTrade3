@@ -93,19 +93,16 @@ namespace StorageAndTrade
         /// </summary>
         public System.Action? CallBack_EndBackgroundWork { get; set; }
 
-        public void OnDownload(object? sender, EventArgs args)
+        public async void OnDownload(object? sender, EventArgs args)
         {
-            ClearMessage();
-
-            Program.ListCancellationToken.Add(CancellationTokenThread = new CancellationTokenSource());
-
-            Thread thread = new Thread(new ThreadStart(DownloadExCurr));
-            thread.Start();
+            CancellationTokenThread = new CancellationTokenSource();
+            await DownloadExCurr();
         }
 
-        async void DownloadExCurr()
+        async ValueTask DownloadExCurr()
         {
             ButtonSensitive(false);
+            ClearMessage();
 
             bool isOK = false;
 
@@ -235,73 +232,55 @@ LIMIT 1
                 }
             }
 
-            Program.RemoveCancellationToken(CancellationTokenThread);
-
             ButtonSensitive(true);
 
             if (CallBack_EndBackgroundWork != null)
-            {
-                Gtk.Application.Invoke
-                (
-                    delegate
-                    {
-                        CallBack_EndBackgroundWork.Invoke();
-                    }
-                );
-            }
+                CallBack_EndBackgroundWork.Invoke();
+
+            CreateMessage(TypeMessage.None, "\n\n\nГотово!\n\n\n");
+            await Task.Delay(1000);
+            CreateMessage(TypeMessage.None, "\n\n\n\n");
         }
 
         void ButtonSensitive(bool sensitive)
         {
-            Gtk.Application.Invoke
-            (
-                delegate
-                {
-                    bDownload.Sensitive = sensitive;
-                    bStop.Sensitive = !sensitive;
-                }
-            );
+            bDownload.Sensitive = sensitive;
+            bStop.Sensitive = !sensitive;
         }
 
         void CreateMessage(TypeMessage typeMsg, string message)
         {
-            Gtk.Application.Invoke
-            (
-                delegate
-                {
-                    HBox hBoxInfo = new HBox();
-                    vBoxMessage.PackStart(hBoxInfo, false, false, 2);
+            HBox hBoxInfo = new HBox();
+            vBoxMessage.PackStart(hBoxInfo, false, false, 2);
 
-                    switch (typeMsg)
+            switch (typeMsg)
+            {
+                case TypeMessage.Ok:
                     {
-                        case TypeMessage.Ok:
-                            {
-                                hBoxInfo.PackStart(new Image(AppContext.BaseDirectory + "images/16/ok.png"), false, false, 5);
-                                break;
-                            }
-                        case TypeMessage.Error:
-                            {
-                                hBoxInfo.PackStart(new Image(AppContext.BaseDirectory + "images/16/error.png"), false, false, 5);
-                                break;
-                            }
-                        case TypeMessage.Info:
-                            {
-                                hBoxInfo.PackStart(new Image(AppContext.BaseDirectory + "images/16/info.png"), false, false, 5);
-                                break;
-                            }
-                        case TypeMessage.None:
-                            {
-                                hBoxInfo.PackStart(new Label(""), false, false, 5);
-                                break;
-                            }
+                        hBoxInfo.PackStart(new Image(AppContext.BaseDirectory + "images/16/ok.png"), false, false, 5);
+                        break;
                     }
+                case TypeMessage.Error:
+                    {
+                        hBoxInfo.PackStart(new Image(AppContext.BaseDirectory + "images/16/error.png"), false, false, 5);
+                        break;
+                    }
+                case TypeMessage.Info:
+                    {
+                        hBoxInfo.PackStart(new Image(AppContext.BaseDirectory + "images/16/info.png"), false, false, 5);
+                        break;
+                    }
+                case TypeMessage.None:
+                    {
+                        hBoxInfo.PackStart(new Label(""), false, false, 5);
+                        break;
+                    }
+            }
 
-                    hBoxInfo.PackStart(new Label(message) { Wrap = true }, false, false, 0);
-                    hBoxInfo.ShowAll();
+            hBoxInfo.PackStart(new Label(message) { Wrap = true }, false, false, 0);
+            hBoxInfo.ShowAll();
 
-                    scrollMessage.Vadjustment.Value = scrollMessage.Vadjustment.Upper;
-                }
-            );
+            scrollMessage.Vadjustment.Value = scrollMessage.Vadjustment.Upper;
         }
 
         void ClearMessage()
@@ -313,7 +292,6 @@ LIMIT 1
         void OnStopClick(object? sender, EventArgs args)
         {
             CancellationTokenThread?.Cancel();
-            Program.RemoveCancellationToken(CancellationTokenThread);
         }
 
         void OnЗавантаженняНаВказануДату_Activated(object? sender, EventArgs args)

@@ -92,19 +92,16 @@ namespace StorageAndTrade
             ShowAll();
         }
 
-        void OnFilling(object? sender, EventArgs args)
+        async void OnFilling(object? sender, EventArgs args)
         {
-            ClearMessage();
-
-            Program.ListCancellationToken.Add(CancellationTokenThread = new CancellationTokenSource());
-
-            Thread thread = new Thread(new ThreadStart(Filling));
-            thread.Start();
+            CancellationTokenThread = new CancellationTokenSource();
+            await Filling();
         }
 
-        async void Filling()
+        async ValueTask Filling()
         {
             ButtonSensitive(false);
+            ClearMessage();
 
             string initialFillingXmlFilePath = System.IO.Path.Combine(AppContext.BaseDirectory, "template/InitialFilling.xml");
 
@@ -565,63 +562,50 @@ namespace StorageAndTrade
 
             ButtonSensitive(true);
 
-            CreateMessage(TypeMessage.None, "\nГотово\n");
-
-            Thread.Sleep(1000);
-            CreateMessage(TypeMessage.None, "\n\n\n");
+            CreateMessage(TypeMessage.None, "\n\n\nГотово\n\n\n");
+            await Task.Delay(1000);
+            CreateMessage(TypeMessage.None, "\n\n\n\n");
         }
 
         void ButtonSensitive(bool sensitive)
         {
-            Gtk.Application.Invoke
-            (
-                delegate
-                {
-                    bFilling.Sensitive = sensitive;
-                    bStop.Sensitive = !sensitive;
-                }
-            );
+            bFilling.Sensitive = sensitive;
+            bStop.Sensitive = !sensitive;
         }
 
         void CreateMessage(TypeMessage typeMsg, string message)
         {
-            Gtk.Application.Invoke
-            (
-                delegate
-                {
-                    HBox hBoxInfo = new HBox();
-                    vBoxMessage.PackStart(hBoxInfo, false, false, 2);
+            HBox hBoxInfo = new HBox();
+            vBoxMessage.PackStart(hBoxInfo, false, false, 2);
 
-                    switch (typeMsg)
+            switch (typeMsg)
+            {
+                case TypeMessage.Ok:
                     {
-                        case TypeMessage.Ok:
-                            {
-                                hBoxInfo.PackStart(new Image(AppContext.BaseDirectory + "images/16/ok.png"), false, false, 5);
-                                break;
-                            }
-                        case TypeMessage.Error:
-                            {
-                                hBoxInfo.PackStart(new Image(AppContext.BaseDirectory + "images/16/error.png"), false, false, 5);
-                                break;
-                            }
-                        case TypeMessage.Info:
-                            {
-                                hBoxInfo.PackStart(new Image(AppContext.BaseDirectory + "images/16/info.png"), false, false, 5);
-                                break;
-                            }
-                        case TypeMessage.None:
-                            {
-                                hBoxInfo.PackStart(new Label(""), false, false, 5);
-                                break;
-                            }
+                        hBoxInfo.PackStart(new Image(AppContext.BaseDirectory + "images/16/ok.png"), false, false, 5);
+                        break;
                     }
+                case TypeMessage.Error:
+                    {
+                        hBoxInfo.PackStart(new Image(AppContext.BaseDirectory + "images/16/error.png"), false, false, 5);
+                        break;
+                    }
+                case TypeMessage.Info:
+                    {
+                        hBoxInfo.PackStart(new Image(AppContext.BaseDirectory + "images/16/info.png"), false, false, 5);
+                        break;
+                    }
+                case TypeMessage.None:
+                    {
+                        hBoxInfo.PackStart(new Label(""), false, false, 5);
+                        break;
+                    }
+            }
 
-                    hBoxInfo.PackStart(new Label(message) { Wrap = true }, false, false, 0);
-                    hBoxInfo.ShowAll();
+            hBoxInfo.PackStart(new Label(message) { Wrap = true }, false, false, 0);
+            hBoxInfo.ShowAll();
 
-                    scrollMessage.Vadjustment.Value = scrollMessage.Vadjustment.Upper;
-                }
-            );
+            scrollMessage.Vadjustment.Value = scrollMessage.Vadjustment.Upper;
         }
 
         void ClearMessage()
@@ -633,7 +617,6 @@ namespace StorageAndTrade
         void OnStopClick(object? sender, EventArgs args)
         {
             CancellationTokenThread?.Cancel();
-            Program.RemoveCancellationToken(CancellationTokenThread);
         }
 
     }
