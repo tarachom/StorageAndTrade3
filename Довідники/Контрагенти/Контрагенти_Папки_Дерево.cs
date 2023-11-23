@@ -97,7 +97,7 @@ namespace StorageAndTrade
 
         #region ToolBar
 
-        protected override async void SetDeletionLabel(UnigueID unigueID)
+        protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             Контрагенти_Папки_Objest Контрагенти_Папки_Objest = new Контрагенти_Папки_Objest();
             if (await Контрагенти_Папки_Objest.Read(unigueID))

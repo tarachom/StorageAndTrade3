@@ -252,7 +252,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники.Т
         {
             get
             {
-                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc.png" : "folder.png");
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "folder_delete.png" : "folder.png");
             }
         }
 

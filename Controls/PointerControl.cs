@@ -27,8 +27,6 @@ namespace StorageAndTrade
 {
     public abstract class PointerControl : HBox
     {
-       
-
         Label labelCaption = new Label();
         Entry entryText = new Entry() { IsEditable = false };
 
@@ -83,8 +81,6 @@ namespace StorageAndTrade
                 entryText.WidthRequest = value;
             }
         }
-
-        //public System.Action? Select { get; set; }
 
         protected string Presentation
         {

@@ -151,7 +151,7 @@ namespace StorageAndTrade
 
         protected virtual void OpenPageElement(bool IsNew, UnigueID? unigueID = null) { }
 
-        protected virtual void SetDeletionLabel(UnigueID unigueID) { }
+        protected virtual ValueTask SetDeletionLabel(UnigueID unigueID) { return new ValueTask(); }
 
         protected virtual ValueTask<UnigueID?> Copy(UnigueID unigueID) { return new ValueTask<UnigueID?>(); }
 
@@ -289,7 +289,7 @@ namespace StorageAndTrade
             LoadTree();
         }
 
-        void OnDeleteClick(object? sender, EventArgs args)
+        async void OnDeleteClick(object? sender, EventArgs args)
         {
             if (TreeViewGrid.Selection.CountSelectedRows() != 0)
             {
@@ -305,7 +305,7 @@ namespace StorageAndTrade
                     if (unigueID.IsEmpty())
                         return;
 
-                    SetDeletionLabel(unigueID);
+                    await SetDeletionLabel(unigueID);
 
                     DirectoryPointerItem = unigueID;
 

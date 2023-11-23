@@ -302,9 +302,9 @@ namespace StorageAndTrade
                     string query = "";
 
                     if (dependence.ConfigurationGroupLevel == ConfigurationDependencies.GroupLevel.Object)
-                        query = $"SELECT uid FROM {dependence.Table} WHERE {dependence.Field} = @uid";
+                        query = $"SELECT uid FROM {dependence.Table} WHERE {dependence.Field} = @uid LIMIT 5";
                     else if (dependence.ConfigurationGroupLevel == ConfigurationDependencies.GroupLevel.TablePart)
-                        query = $"SELECT DISTINCT owner AS uid FROM {dependence.Table} WHERE {dependence.Field} = @uid";
+                        query = $"SELECT DISTINCT owner AS uid FROM {dependence.Table} WHERE {dependence.Field} = @uid LIMIT 5";
 
                     var recordResult = await Config.Kernel!.DataBase.SelectRequestAsync(query, paramQuery);
 
