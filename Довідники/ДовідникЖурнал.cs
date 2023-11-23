@@ -41,6 +41,8 @@ namespace StorageAndTrade
 
         protected string MessageRequestText { get; set; } = "Встановити або зняти помітку на видалення?";
 
+        //private readonly TargetEntry[] targets = [new TargetEntry("GTK_TREE_MODEL_ROW", TargetFlags.Widget, 0)];
+
         public ДовідникЖурнал() : base()
         {
             BorderWidth = 0;
@@ -65,6 +67,12 @@ namespace StorageAndTrade
             TreeViewGrid.ButtonReleaseEvent += OnButtonReleaseEvent;
             TreeViewGrid.KeyReleaseEvent += OnKeyReleaseEvent;
             //TreeViewGrid.KeyPressEvent += OnKeyPressEvent;
+            // TreeViewGrid.EnableModelDragSource(Gdk.ModifierType.ModifierMask, targets, /*Gdk.DragAction.Copy | */Gdk.DragAction.Move);
+            // TreeViewGrid.EnableModelDragDest(targets, /*Gdk.DragAction.Copy | */Gdk.DragAction.Move);
+
+            // TreeViewGrid.DragBegin += OnDragBegin;
+            // TreeViewGrid.DragEnd += OnDragEnd;
+
             scrollTree.Add(TreeViewGrid);
 
             HPanedTable.Pack1(scrollTree, true, true);
@@ -73,6 +81,15 @@ namespace StorageAndTrade
 
             ShowAll();
         }
+
+        // void OnDragBegin(object sender, DragBeginArgs args)
+        // {
+        //     Console.WriteLine("OnDragBegin");
+        // }
+        // void OnDragEnd(object sender, DragEndArgs args)
+        // {
+        //     Console.WriteLine("OnDragEnd");
+        // }
 
         #region Toolbar & Menu
 

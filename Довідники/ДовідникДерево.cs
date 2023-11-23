@@ -59,6 +59,7 @@ namespace StorageAndTrade
 
         protected Toolbar ToolbarTop = new Toolbar();
         protected TreeView TreeViewGrid = new TreeView();
+        //private readonly TargetEntry[] targets = [new TargetEntry("GTK_TREE_MODEL_ROW", TargetFlags.Widget, 0)];
 
         public ДовідникДерево() : base()
         {
@@ -74,12 +75,27 @@ namespace StorageAndTrade
             TreeViewGrid.RowActivated += OnRowActivated;
             TreeViewGrid.ButtonPressEvent += OnButtonPressEvent;
 
+            // TreeViewGrid.EnableModelDragSource(Gdk.ModifierType.ModifierMask, targets, /*Gdk.DragAction.Copy | */Gdk.DragAction.Move);
+            // TreeViewGrid.EnableModelDragDest(targets, /*Gdk.DragAction.Copy | */Gdk.DragAction.Move);
+
+            // TreeViewGrid.DragBegin += OnDragBegin;
+            // TreeViewGrid.DragEnd += OnDragEnd;
+
             scrollTree.Add(TreeViewGrid);
 
             PackStart(scrollTree, true, true, 0);
 
             ShowAll();
         }
+
+        // void OnDragBegin(object sender, DragBeginArgs args)
+        // {
+        //     Console.WriteLine("OnDragBegin");
+        // }
+        // void OnDragEnd(object sender, DragEndArgs args)
+        // {
+        //     Console.WriteLine("OnDragEnd");
+        // }
 
         #region Toolbar & Menu
 
