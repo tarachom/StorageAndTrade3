@@ -639,12 +639,9 @@ HAVING
 
                 bool єЗміниВЗаписі = false;
 
-                string[] columnsName;
-                List<Dictionary<string, object>> listRow;
+                var recordResult = await Config.Kernel!.DataBase.SelectRequestAsync(query, paramQuery);
 
-                Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listRow);
-
-                foreach (Dictionary<string, object> row in listRow)
+                foreach (Dictionary<string, object> row in recordResult.ListRow)
                 {
                     decimal ЗалишокВКомірці = (decimal)row["ВНаявності"];
                     СкладськіКомірки_Pointer складськіКомірки_Pointer = new СкладськіКомірки_Pointer(row["Комірка"]);

@@ -101,7 +101,7 @@ namespace StorageAndTrade
             Store.Clear();
         }
 
-        void Fill(string queryFind, string findText)
+        async void Fill(string queryFind, string findText)
         {
             Store.Clear();
 
@@ -110,15 +110,12 @@ namespace StorageAndTrade
                 { "like_param", "%" + findText.ToLower().Trim() + "%" }
             };
 
-            string[] columnsName;
-            List<Dictionary<string, object>>? listRow = null;
+            var recordResult = await Config.Kernel!.DataBase.SelectRequestAsync(queryFind, paramQuery);
 
-            Config.Kernel?.DataBase.SelectRequest(queryFind, paramQuery, out columnsName, out listRow);
-
-            if (listRow != null)
-                if (listRow.Count > 0)
+            if (recordResult.Result)
+                if (recordResult.ListRow.Count > 0)
                 {
-                    foreach (Dictionary<string, object> row in listRow)
+                    foreach (Dictionary<string, object> row in recordResult.ListRow)
                         Store.InsertWithValues(0, row["uid"].ToString(), row["Назва"].ToString());
                 }
         }

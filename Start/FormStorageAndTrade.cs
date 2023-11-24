@@ -125,12 +125,12 @@ namespace StorageAndTrade
             PageHome page = new PageHome();
             CreateNotebookPage("Стартова", () => { return page; });
 
+            //Активні користувачі
+            page.АктивніКористувачі.AutoRefreshRun();
+
             //Блок курсів валют
             page.БлокКурсиВалют.StartDesktop();
             page.БлокКурсиВалют.StartAutoWork();
-
-            //Активні користувачі
-            page.АктивніКористувачі.AutoRefreshRun();
 
             //
             // Перевірка констант
@@ -472,6 +472,33 @@ namespace StorageAndTrade
 
                     counter++;
                 });
+        }
+
+        /// <summary>
+        /// Блокування чи розблокування поточної сторінки по коду
+        /// </summary>
+        /// <param name="notebook">Блокнот</param>
+        /// <param name="codePage">Код</param>
+        /// <param name="sensitive">Значення</param>
+        public void SensitiveNotebookPageToCode(Notebook notebook, string codePage, bool sensitive)
+        {
+            notebook.Foreach(
+                (Widget wg) =>
+                {
+                    if (wg.Name == codePage)
+                        wg.Sensitive = sensitive;
+                });
+        }
+
+        /// <summary>
+        /// Блокування чи розблокування для основного блокноту
+        /// </summary>
+        /// <param name="notebook">Блокнот</param>
+        /// <param name="codePage">Код</param>
+        /// <param name="sensitive">Значення</param>
+        public void SensitiveNotebookPageToCode(string codePage, bool sensitive)
+        {
+            SensitiveNotebookPageToCode(topNotebook, codePage, sensitive);
         }
 
         /// <summary>

@@ -642,16 +642,11 @@ FROM
     register
 ";
 
-            Dictionary<string, object> paramQuery = new Dictionary<string, object>();
-
-            string[] columnsName;
-            List<Dictionary<string, object>> listRow;
-
-            Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listRow);
+            var recordResult = await Config.Kernel!.DataBase.SelectRequestAsync(query);
 
             Dictionary<Guid, Guid> НоменклатураТаКомірки = new Dictionary<Guid, Guid>();
 
-            foreach (Dictionary<string, object> row in listRow)
+            foreach (Dictionary<string, object> row in recordResult.ListRow)
                 НоменклатураТаКомірки.Add((Guid)row["Номенклатура"], (Guid)row["Комірка"]);
 
             int sequenceNumber = 0;

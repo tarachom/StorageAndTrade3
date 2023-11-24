@@ -440,7 +440,7 @@ namespace StorageAndTrade
             Store.Remove(ref iter);
         }
 
-        void OnFillDirectory(object? sender, EventArgs args)
+        async void OnFillDirectory(object? sender, EventArgs args)
         {
             string query = $@"
 SELECT
@@ -484,14 +484,9 @@ ORDER BY Номенклатура_Назва
 
             if (РозміщенняНоменклатуриПоКоміркам_Objest != null)
             {
-                Dictionary<string, object> paramQuery = new Dictionary<string, object>();
+                var recordResult = await Config.Kernel!.DataBase.SelectRequestAsync(query);
 
-                string[] columnsName;
-                List<Dictionary<string, object>> listRow;
-
-                Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listRow);
-
-                foreach (Dictionary<string, object> row in listRow)
+                foreach (Dictionary<string, object> row in recordResult.ListRow)
                 {
                     Запис запис = new Запис
                     {
@@ -511,7 +506,7 @@ ORDER BY Номенклатура_Назва
             }
         }
 
-        void OnFillRegister(object? sender, EventArgs args)
+        async void OnFillRegister(object? sender, EventArgs args)
         {
             string query = $@"
 WITH register AS
@@ -565,14 +560,9 @@ ORDER BY
 
             if (РозміщенняНоменклатуриПоКоміркам_Objest != null)
             {
-                Dictionary<string, object> paramQuery = new Dictionary<string, object>();
+                var recordResult = await Config.Kernel!.DataBase.SelectRequestAsync(query);
 
-                string[] columnsName;
-                List<Dictionary<string, object>> listRow;
-
-                Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listRow);
-
-                foreach (Dictionary<string, object> row in listRow)
+                foreach (Dictionary<string, object> row in recordResult.ListRow)
                 {
                     Запис запис = new Запис
                     {

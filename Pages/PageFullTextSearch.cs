@@ -62,22 +62,21 @@ namespace StorageAndTrade
             ShowAll();
         }
 
-        public void Find(string findtext, uint offset = 0)
+        public async void Find(string findtext, uint offset = 0)
         {
             entryFullTextSearch.Text = findtext;
 
             foreach (Widget Child in vBoxMessage.Children)
                 vBoxMessage.Remove(Child);
 
-            List<Dictionary<string, object>>? listRow = Config.Kernel!.DataBase.SpetialTableFullTextSearchSelect(findtext, offset);
-
-            if (listRow != null)
+            var recordResult = await Config.Kernel!.DataBase.SpetialTableFullTextSearchSelect(findtext, offset);
+            if (recordResult != null)
             {
-                count = listRow.Count;
+                count = recordResult.ListRow.Count;
 
                 CreatePagination();
 
-                foreach (Dictionary<string, object> row in listRow)
+                foreach (Dictionary<string, object> row in recordResult.ListRow)
                     CreateMessage(row);
 
                 CreatePagination();

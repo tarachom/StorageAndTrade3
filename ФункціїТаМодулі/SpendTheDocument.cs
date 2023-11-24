@@ -50,7 +50,7 @@ namespace StorageAndTrade_1_0.Документи
         /// <param name="OwnerDateDoc">Дата документу який проводиться</param>
         /// <param name="Кількість">Кількість яку потрібно списати</param>
         /// <returns>Іменований список</returns>
-        public static List<Dictionary<string, object>> ОтриматиСписокНаявнихПартій(
+        public static async ValueTask<List<Dictionary<string, object>>> ОтриматиСписокНаявнихПартій(
             Організації_Pointer Організація,
             Номенклатура_Pointer Номенклатура,
             ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури,
@@ -170,12 +170,9 @@ UNION ALL
                 { "period_end", OwnerDateDoc }, { "Кількість", Кількість }
             };
 
-            string[] columnsName;
-            List<Dictionary<string, object>> listNameRow;
+            var recordResult = await Config.Kernel!.DataBase.SelectRequestAsync(query, paramQuery);
 
-            Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listNameRow);
-
-            return listNameRow;
+            return recordResult.ListRow;
         }
 
         /// <summary>
@@ -188,7 +185,7 @@ UNION ALL
         /// <param name="Owner">UID Документу який проводиться</param>
         /// <param name="OwnerDateDoc">Дата документу який проводиться</param>
         /// <returns>Іменований список</returns>
-        public static List<Dictionary<string, object>> ОтриматиЗалишкиТоваруНаСкладі(
+        public static async ValueTask<List<Dictionary<string, object>>> ОтриматиЗалишкиТоваруНаСкладі(
             Номенклатура_Pointer Номенклатура, ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури,
             СеріїНоменклатури_Pointer Серія, Склади_Pointer Склад,
             UnigueID Owner, DateTime OwnerDateDoc)
@@ -224,12 +221,9 @@ FROM
                 { "period_end", OwnerDateDoc }
             };
 
-            string[] columnsName;
-            List<Dictionary<string, object>> listNameRow;
+            var recordResult = await Config.Kernel!.DataBase.SelectRequestAsync(query, paramQuery);
 
-            Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listNameRow);
-
-            return listNameRow;
+            return recordResult.ListRow;
         }
 
         /// <summary>
@@ -243,7 +237,7 @@ FROM
         /// <param name="Owner">UID Документу який проводиться</param>
         /// <param name="OwnerDateDoc">Дата документу який проводиться</param>
         /// <returns>Іменований список</returns>
-        public static List<Dictionary<string, object>> ОтриматиЗалишкиТоваруВКомірці(
+        public static async ValueTask<List<Dictionary<string, object>>> ОтриматиЗалишкиТоваруВКомірці(
             Номенклатура_Pointer Номенклатура, ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури,
             ПакуванняОдиниціВиміру_Pointer Пакування, СкладськіКомірки_Pointer Комірка,
             СеріїНоменклатури_Pointer Серія,
@@ -281,12 +275,9 @@ FROM
                 { "period_end", OwnerDateDoc }
             };
 
-            string[] columnsName;
-            List<Dictionary<string, object>> listNameRow;
+            var recordResult = await Config.Kernel!.DataBase.SelectRequestAsync(query, paramQuery);
 
-            Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listNameRow);
-
-            return listNameRow;
+            return recordResult.ListRow;
         }
 
         /// <summary>
@@ -298,7 +289,7 @@ FROM
         /// <param name="Owner">UID Документу який проводиться</param>
         /// <param name="OwnerDateDoc">Дата документу який проводиться</param>
         /// <returns>Іменований список</returns>
-        public static List<Dictionary<string, object>> ОтриматиРезервТоваруНаСкладі(
+        public static async ValueTask<List<Dictionary<string, object>>> ОтриматиРезервТоваруНаСкладі(
             Номенклатура_Pointer Номенклатура, ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури, Склади_Pointer Склад,
             UnigueID Owner, DateTime OwnerDateDoc)
         {
@@ -343,12 +334,9 @@ FROM
                 { "period_end", OwnerDateDoc }
             };
 
-            string[] columnsName;
-            List<Dictionary<string, object>> listNameRow;
+            var recordResult = await Config.Kernel!.DataBase.SelectRequestAsync(query, paramQuery);
 
-            Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listNameRow);
-
-            return listNameRow;
+            return recordResult.ListRow;
         }
 
         /// <summary>
@@ -359,7 +347,7 @@ FROM
         /// <param name="Склад">Склад</param>
         /// <param name="Owner">Документ</param>
         /// <returns>Іменований список</returns>
-        public static List<Dictionary<string, object>> ОтриматиРезервТоваруПоДокументу(
+        public static async ValueTask<List<Dictionary<string, object>>> ОтриматиРезервТоваруПоДокументу(
             Номенклатура_Pointer Номенклатура, ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури, Склади_Pointer Склад,
             UnigueID ДокументРезерву, UnigueID Owner, DateTime OwnerDateDoc)
         {
@@ -395,12 +383,9 @@ FROM
                 { "period_end", OwnerDateDoc }
             };
 
-            string[] columnsName;
-            List<Dictionary<string, object>> listNameRow;
+            var recordResult = await Config.Kernel!.DataBase.SelectRequestAsync(query, paramQuery);
 
-            Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listNameRow);
-
-            return listNameRow;
+            return recordResult.ListRow;
         }
 
         /// <summary>
@@ -413,7 +398,7 @@ FROM
         /// <param name="Owner">Документ</param>
         /// <param name="OwnerDateDoc">Дата документу</param>
         /// <returns></returns>
-        public static List<Dictionary<string, object>> ОтриматиЗамовленняКлієнтаДляТоваруПоДокументу(
+        public static async ValueTask<List<Dictionary<string, object>>> ОтриматиЗамовленняКлієнтаДляТоваруПоДокументу(
             Номенклатура_Pointer Номенклатура, ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури, Склади_Pointer Склад,
             UnigueID ЗамовленняКлієнта, UnigueID Owner, DateTime OwnerDateDoc)
         {
@@ -454,12 +439,9 @@ FROM
                 { "period_end", OwnerDateDoc }
             };
 
-            string[] columnsName;
-            List<Dictionary<string, object>> listNameRow;
+            var recordResult = await Config.Kernel!.DataBase.SelectRequestAsync(query, paramQuery);
 
-            Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listNameRow);
-
-            return listNameRow;
+            return recordResult.ListRow;
         }
 
         /// <summary>
@@ -472,7 +454,7 @@ FROM
         /// <param name="Owner">Документ</param>
         /// <param name="OwnerDateDoc">Дата документу</param>
         /// <returns></returns>
-        public static List<Dictionary<string, object>> ОтриматиЗамовленняПостачальникуДляТоваруПоДокументу(
+        public static async ValueTask<List<Dictionary<string, object>>> ОтриматиЗамовленняПостачальникуДляТоваруПоДокументу(
             Номенклатура_Pointer Номенклатура, ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури, Склади_Pointer Склад,
             UnigueID ЗамовленняПостачальнику, UnigueID Owner, DateTime OwnerDateDoc)
         {
@@ -508,12 +490,9 @@ FROM
                 { "period_end", OwnerDateDoc }
             };
 
-            string[] columnsName;
-            List<Dictionary<string, object>> listNameRow;
+            var recordResult = await Config.Kernel!.DataBase.SelectRequestAsync(query, paramQuery);
 
-            Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listNameRow);
-
-            return listNameRow;
+            return recordResult.ListRow;
         }
 
         /// <summary>
@@ -559,7 +538,7 @@ FROM
                         //Резерви та вільні залишки
                         //
 
-                        List<Dictionary<string, object>> Резерв = СпільніФункції.ОтриматиРезервТоваруНаСкладі(
+                        List<Dictionary<string, object>> Резерв = await СпільніФункції.ОтриматиРезервТоваруНаСкладі(
                             ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
                             !ТовариРядок.Склад.IsEmpty() ? ТовариРядок.Склад : ДокументОбєкт.Склад,
                             ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
@@ -699,7 +678,7 @@ FROM
                         //Резерви та вільні залишки
                         //
 
-                        List<Dictionary<string, object>> Резерв = СпільніФункції.ОтриматиРезервТоваруНаСкладі(
+                        List<Dictionary<string, object>> Резерв = await СпільніФункції.ОтриматиРезервТоваруНаСкладі(
                             ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
                             !ТовариРядок.Склад.IsEmpty() ? ТовариРядок.Склад : ДокументОбєкт.Склад,
                             ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
@@ -805,7 +784,7 @@ FROM
                         //Для товарів отримуємо залишки
                         //
 
-                        List<Dictionary<string, object>> Залишок_Список = СпільніФункції.ОтриматиЗалишкиТоваруНаСкладі(
+                        List<Dictionary<string, object>> Залишок_Список = await СпільніФункції.ОтриматиЗалишкиТоваруНаСкладі(
                             ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури, ТовариРядок.Серія,
                             !ТовариРядок.Склад.IsEmpty() ? ТовариРядок.Склад : ДокументОбєкт.Склад,
                             ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
@@ -824,7 +803,7 @@ FROM
                             // Рахуємо всі резерви
                             //
 
-                            List<Dictionary<string, object>> Резерв_Список = СпільніФункції.ОтриматиРезервТоваруНаСкладі(
+                            List<Dictionary<string, object>> Резерв_Список = await СпільніФункції.ОтриматиРезервТоваруНаСкладі(
                             ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
                             !ТовариРядок.Склад.IsEmpty() ? ТовариРядок.Склад : ДокументОбєкт.Склад,
                             ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
@@ -842,7 +821,7 @@ FROM
                                 // потрібно дізнатися скільки цей документ зарезервував товарів
                                 //
 
-                                List<Dictionary<string, object>> РезервЗамовленняКлієнта_Список = СпільніФункції.ОтриматиРезервТоваруПоДокументу(
+                                List<Dictionary<string, object>> РезервЗамовленняКлієнта_Список = await СпільніФункції.ОтриматиРезервТоваруПоДокументу(
                                     ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
                                     !ТовариРядок.Склад.IsEmpty() ? ТовариРядок.Склад : ДокументОбєкт.Склад,
                                     ТовариРядок.ЗамовленняКлієнта.UnigueID, ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
@@ -854,7 +833,7 @@ FROM
                                 // Перевірити замовлення
                                 //
 
-                                List<Dictionary<string, object>> Замовлення_Список = СпільніФункції.ОтриматиЗамовленняКлієнтаДляТоваруПоДокументу(
+                                List<Dictionary<string, object>> Замовлення_Список = await СпільніФункції.ОтриматиЗамовленняКлієнтаДляТоваруПоДокументу(
                                     ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
                                     !ТовариРядок.Склад.IsEmpty() ? ТовариРядок.Склад : ДокументОбєкт.Склад,
                                     ТовариРядок.ЗамовленняКлієнта.UnigueID, ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
@@ -884,7 +863,7 @@ FROM
                                 // потрібно дізнатися скільки цей документ зарезервував товарів
                                 //
 
-                                List<Dictionary<string, object>> РезервРахункуФактури_Список = СпільніФункції.ОтриматиРезервТоваруПоДокументу(
+                                List<Dictionary<string, object>> РезервРахункуФактури_Список = await СпільніФункції.ОтриматиРезервТоваруПоДокументу(
                                     ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
                                     !ТовариРядок.Склад.IsEmpty() ? ТовариРядок.Склад : ДокументОбєкт.Склад,
                                     ТовариРядок.РахунокФактура.UnigueID, ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
@@ -1087,7 +1066,7 @@ FROM
                 {
                     if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
                     {
-                        List<Dictionary<string, object>> listNameRow = СпільніФункції.ОтриматиСписокНаявнихПартій(
+                        List<Dictionary<string, object>> listNameRow = await СпільніФункції.ОтриматиСписокНаявнихПартій(
                             ДокументОбєкт.Організація, ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
                             ТовариРядок.Серія, ДокументОбєкт.Склад, ТовариРядок.Партія, ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок, ТовариРядок.Кількість);
 
@@ -1361,7 +1340,7 @@ FROM
                             // Перевірити замовлення
                             //
 
-                            List<Dictionary<string, object>> Замовлення_Список = СпільніФункції.ОтриматиЗамовленняПостачальникуДляТоваруПоДокументу(
+                            List<Dictionary<string, object>> Замовлення_Список = await СпільніФункції.ОтриматиЗамовленняПостачальникуДляТоваруПоДокументу(
                                 ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
                                 !ТовариРядок.Склад.IsEmpty() ? ТовариРядок.Склад : ДокументОбєкт.Склад,
                                 ТовариРядок.ЗамовленняПостачальнику.UnigueID, ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
@@ -1665,7 +1644,7 @@ FROM
 
     class ПоверненняТоварівВідКлієнта_SpendTheDocument
     {
-        private static List<Dictionary<string, object>> ОтриматиПартіїТоваруЗДокументуРеалізації(ПоверненняТоварівВідКлієнта_Objest ДокументОбєкт,
+        private static async ValueTask<List<Dictionary<string, object>>> ОтриматиПартіїТоваруЗДокументуРеалізації(ПоверненняТоварівВідКлієнта_Objest ДокументОбєкт,
             ПоверненняТоварівВідКлієнта_Товари_TablePart.Record ТовариРядок)
         {
             string query = $@"
@@ -1703,12 +1682,9 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                 { "Склад", ДокументОбєкт.Склад.UnigueID.UGuid }
             };
 
-            string[] columnsName;
-            List<Dictionary<string, object>> listNameRow;
+            var recordResult = await Config.Kernel!.DataBase.SelectRequestAsync(query, paramQuery);
 
-            Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listNameRow);
-
-            return listNameRow;
+            return recordResult.ListRow;
         }
 
         public static async ValueTask<bool> Spend(ПоверненняТоварівВідКлієнта_Objest ДокументОбєкт)
@@ -1794,7 +1770,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                 {
                     if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
                     {
-                        List<Dictionary<string, object>> listNameRow = ОтриматиПартіїТоваруЗДокументуРеалізації(ДокументОбєкт, ТовариРядок);
+                        List<Dictionary<string, object>> listNameRow = await ОтриматиПартіїТоваруЗДокументуРеалізації(ДокументОбєкт, ТовариРядок);
 
                         if (listNameRow.Count == 0)
                         {
@@ -1936,7 +1912,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
 
     class ПоверненняТоварівПостачальнику_SpendTheDocument
     {
-        private static List<Dictionary<string, object>> ОтриматиПартіїТоваруЗДокументуПоступлення(ПоверненняТоварівПостачальнику_Objest ДокументОбєкт,
+        private static async ValueTask<List<Dictionary<string, object>>> ОтриматиПартіїТоваруЗДокументуПоступлення(ПоверненняТоварівПостачальнику_Objest ДокументОбєкт,
             ПоверненняТоварівПостачальнику_Товари_TablePart.Record ТовариРядок)
         {
             string query = $@"
@@ -1973,12 +1949,9 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                 { "Склад", ДокументОбєкт.Склад.UnigueID.UGuid }
             };
 
-            string[] columnsName;
-            List<Dictionary<string, object>> listNameRow;
+            var recordResult = await Config.Kernel!.DataBase.SelectRequestAsync(query, paramQuery);
 
-            Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listNameRow);
-
-            return listNameRow;
+            return recordResult.ListRow;
         }
 
         public static async ValueTask<bool> Spend(ПоверненняТоварівПостачальнику_Objest ДокументОбєкт)
@@ -2037,7 +2010,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                 {
                     if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
                     {
-                        List<Dictionary<string, object>> listNameRow = ОтриматиПартіїТоваруЗДокументуПоступлення(ДокументОбєкт, ТовариРядок);
+                        List<Dictionary<string, object>> listNameRow = await ОтриматиПартіїТоваруЗДокументуПоступлення(ДокументОбєкт, ТовариРядок);
 
                         if (listNameRow.Count == 0)
                         {
@@ -2474,7 +2447,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                         //Для товарів отримуємо залишки
                         //
 
-                        List<Dictionary<string, object>> Залишок_Список = СпільніФункції.ОтриматиЗалишкиТоваруНаСкладі(
+                        List<Dictionary<string, object>> Залишок_Список = await СпільніФункції.ОтриматиЗалишкиТоваруНаСкладі(
                             ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури, ТовариРядок.Серія,
                             ДокументОбєкт.СкладВідправник, ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
 
@@ -2492,7 +2465,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                             // Рахуємо всі резерви
                             //
 
-                            List<Dictionary<string, object>> Резерв_Список = СпільніФункції.ОтриматиРезервТоваруНаСкладі(
+                            List<Dictionary<string, object>> Резерв_Список = await СпільніФункції.ОтриматиРезервТоваруНаСкладі(
                             ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
                             ДокументОбєкт.СкладВідправник, ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
 
@@ -2621,7 +2594,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                 {
                     if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
                     {
-                        List<Dictionary<string, object>> listNameRow = СпільніФункції.ОтриматиСписокНаявнихПартій(
+                        List<Dictionary<string, object>> listNameRow = await СпільніФункції.ОтриматиСписокНаявнихПартій(
                             ДокументОбєкт.Організація, ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
                             ТовариРядок.Серія, ДокументОбєкт.СкладВідправник, ТовариРядок.Партія, ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок, ТовариРядок.Кількість);
 
@@ -3020,7 +2993,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                         //Для товарів отримуємо залишки
                         //
 
-                        List<Dictionary<string, object>> Залишок_Список = СпільніФункції.ОтриматиЗалишкиТоваруНаСкладі(
+                        List<Dictionary<string, object>> Залишок_Список = await СпільніФункції.ОтриматиЗалишкиТоваруНаСкладі(
                             ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури, ТовариРядок.Серія,
                             ДокументОбєкт.Склад, ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
 
@@ -3038,7 +3011,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                             // Рахуємо всі резерви
                             //
 
-                            List<Dictionary<string, object>> Резерв_Список = СпільніФункції.ОтриматиРезервТоваруНаСкладі(
+                            List<Dictionary<string, object>> Резерв_Список = await СпільніФункції.ОтриматиРезервТоваруНаСкладі(
                             ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
                             ДокументОбєкт.Склад, ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
 
@@ -3126,7 +3099,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                 {
                     if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
                     {
-                        List<Dictionary<string, object>> listNameRow = СпільніФункції.ОтриматиСписокНаявнихПартій(
+                        List<Dictionary<string, object>> listNameRow = await СпільніФункції.ОтриматиСписокНаявнихПартій(
                             ДокументОбєкт.Організація, ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
                             ТовариРядок.Серія, ДокументОбєкт.Склад, ТовариРядок.Партія, ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок, ТовариРядок.Кількість);
 
@@ -3245,7 +3218,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                         //Для товарів отримуємо залишки
                         //
 
-                        List<Dictionary<string, object>> Залишок_Список = СпільніФункції.ОтриматиЗалишкиТоваруНаСкладі(
+                        List<Dictionary<string, object>> Залишок_Список = await СпільніФункції.ОтриматиЗалишкиТоваруНаСкладі(
                             ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури, ТовариРядок.Серія,
                             ДокументОбєкт.Склад, ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
 
@@ -3263,7 +3236,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                             // Рахуємо всі резерви
                             //
 
-                            List<Dictionary<string, object>> Резерв_Список = СпільніФункції.ОтриматиРезервТоваруНаСкладі(
+                            List<Dictionary<string, object>> Резерв_Список = await СпільніФункції.ОтриматиРезервТоваруНаСкладі(
                             ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
                             ДокументОбєкт.Склад, ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
 
@@ -3351,7 +3324,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                 {
                     if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
                     {
-                        List<Dictionary<string, object>> listNameRow = СпільніФункції.ОтриматиСписокНаявнихПартій(
+                        List<Dictionary<string, object>> listNameRow = await СпільніФункції.ОтриматиСписокНаявнихПартій(
                             ДокументОбєкт.Організація, ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
                             ТовариРядок.Серія, ДокументОбєкт.Склад, ТовариРядок.Партія, ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок, ТовариРядок.Кількість);
 
@@ -3466,7 +3439,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                 }
 
                 #endregion
-                
+
 
 
                 return true;
@@ -3485,7 +3458,6 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
             await ValueTask.FromResult(true); //Заглушка
         }
     }
-
 
     #endregion
 
@@ -3590,7 +3562,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                         //Для товарів отримуємо залишки
                         //
 
-                        List<Dictionary<string, object>> Залишок_Список = СпільніФункції.ОтриматиЗалишкиТоваруВКомірці(
+                        List<Dictionary<string, object>> Залишок_Список = await СпільніФункції.ОтриматиЗалишкиТоваруВКомірці(
                             ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури, ТовариРядок.Пакування,
                             ТовариРядок.КоміркаВідправник, ТовариРядок.Серія,
                             ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
@@ -3716,7 +3688,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                         //Для товарів отримуємо залишки
                         //
 
-                        List<Dictionary<string, object>> Залишок_Список = СпільніФункції.ОтриматиЗалишкиТоваруВКомірці(
+                        List<Dictionary<string, object>> Залишок_Список = await СпільніФункції.ОтриматиЗалишкиТоваруВКомірці(
                             ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури, ТовариРядок.Пакування,
                             ТовариРядок.Комірка, ТовариРядок.Серія,
                             ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);

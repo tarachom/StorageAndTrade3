@@ -197,12 +197,8 @@ LIMIT 1
                         { "ДатаКурсу", ДатаКурсу }
                     };
 
-                    string[] columnsName;
-                    List<Dictionary<string, object>> listRow;
-
-                    Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listRow);
-
-                    if (listRow.Count == 0)
+                    var recordResult = await Config.Kernel!.DataBase.SelectRequestAsync(query, paramQuery);
+                    if (!recordResult.Result)
                     {
                         КурсиВалют_Objest курсиВалют_Objest = new КурсиВалют_Objest
                         {
@@ -218,7 +214,7 @@ LIMIT 1
                     }
                     else
                     {
-                        Dictionary<string, object> Рядок = listRow[0];
+                        Dictionary<string, object> Рядок = recordResult.ListRow[0];
 
                         КурсиВалют_Objest курсиВалют_Objest = new КурсиВалют_Objest();
                         if (await курсиВалют_Objest.Read(new UnigueID(Рядок["uid"])))

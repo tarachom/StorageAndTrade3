@@ -551,14 +551,11 @@ ORDER BY Номенклатура_Назва, Пакування_Назва
                     { "vid_cen", ВстановленняЦінНоменклатури_Objest.ВидЦіни.UnigueID.UGuid }
                 };
 
-                string[] columnsName;
-                List<Dictionary<string, object>> listRow;
-
-                Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listRow);
+                var recordResult = await Config.Kernel!.DataBase.SelectRequestAsync(query, paramQuery);
 
                 string ВидЦіниНазва = await ВстановленняЦінНоменклатури_Objest.ВидЦіни.GetPresentation();
 
-                foreach (Dictionary<string, object> row in listRow)
+                foreach (Dictionary<string, object> row in recordResult.ListRow)
                 {
                     Запис запис = new Запис
                     {
@@ -580,7 +577,7 @@ ORDER BY Номенклатура_Назва, Пакування_Назва
             }
         }
 
-        void OnFillRegister(object? sender, EventArgs args)
+        async void OnFillRegister(object? sender, EventArgs args)
         {
             if (ОбновитиЗначенняДокумента != null)
                 ОбновитиЗначенняДокумента.Invoke();
@@ -659,12 +656,9 @@ ORDER BY
                     { "vid_cen", ВстановленняЦінНоменклатури_Objest.ВидЦіни.UnigueID.UGuid }
                 };
 
-                string[] columnsName;
-                List<Dictionary<string, object>> listRow;
+                var recordResult = await Config.Kernel!.DataBase.SelectRequestAsync(query, paramQuery);
 
-                Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listRow);
-
-                foreach (Dictionary<string, object> row in listRow)
+                foreach (Dictionary<string, object> row in recordResult.ListRow)
                 {
                     Запис запис = new Запис
                     {

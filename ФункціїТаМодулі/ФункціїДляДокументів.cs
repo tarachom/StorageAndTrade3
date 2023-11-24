@@ -198,7 +198,7 @@ namespace StorageAndTrade
         /// <param name="Валюта">Валюта</param>
         /// <param name="ДатаКурсу">Курс</param>
         /// <returns>Курс на дату (дата + час 23 59 59) або 0</returns>
-        public static decimal ПоточнийКурсВалюти(Довідники.Валюти_Pointer Валюта, DateTime ДатаКурсу)
+        public static async ValueTask<decimal> ПоточнийКурсВалюти(Довідники.Валюти_Pointer Валюта, DateTime ДатаКурсу)
         {
             if (Валюта.IsEmpty())
                 return 0;
@@ -220,14 +220,10 @@ LIMIT 1
                 { "date_curs", new DateTime(ДатаКурсу.Year, ДатаКурсу.Month, ДатаКурсу.Day, 23, 59, 59) }
             };
 
-            string[] columnsName;
-            List<Dictionary<string, object>> listRow;
-
-            Конфа.Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listRow);
-
-            if (listRow.Count == 1)
+            var recordResult = await Конфа.Config.Kernel!.DataBase.SelectRequestAsync(query, paramQuery);
+            if (recordResult.Result)
             {
-                Dictionary<string, object> Рядок = listRow[0];
+                Dictionary<string, object> Рядок = recordResult.ListRow[0];
                 return (decimal)Рядок["Курс"];
             }
             else

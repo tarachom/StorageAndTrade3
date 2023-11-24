@@ -83,35 +83,25 @@ namespace StorageAndTrade
         public void AutoRefreshRun()
         {
             CancellationTokenSourceItem = new CancellationTokenSource();
-
             LoadRecordsAsync();
         }
 
         public async void LoadRecordsAsync()
         {
-            int counter = 0;
-
             while (!CancellationTokenSourceItem!.IsCancellationRequested)
             {
-                if (counter == 0 || counter > 5)
-                {
-                    await LoadRecords();
-                    counter = 1;
-                }
+                await LoadRecords();
 
-                counter++;
-
-                //Затримка на 1 сек
-                await Task.Delay(1000);
+                //Затримка на 5 сек
+                await Task.Delay(5000);
             }
         }
 
         async ValueTask LoadRecords()
         {
-            Store.Clear();
-
             var recordResult = await Config.Kernel!.DataBase.SpetialTableActiveUsersSelect();
 
+            Store.Clear();
             foreach (Dictionary<string, object> record in recordResult.ListRow)
             {
                 Store.AppendValues(

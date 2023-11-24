@@ -166,7 +166,7 @@ namespace StorageAndTrade
             {
                 запис.Сума = запис.Кількість * запис.Ціна;
             }
-            public static void ОтриматиЦіну(Запис запис)
+            public static async ValueTask ОтриматиЦіну(Запис запис)
             {
                 if (запис.Номенклатура.IsEmpty())
                     return;
@@ -200,15 +200,9 @@ ORDER BY
     ЦіниНоменклатури.period DESC 
 LIMIT 1
 ";
-                Dictionary<string, object> paramQuery = new Dictionary<string, object>();
-
-                string[] columnsName;
-                List<Dictionary<string, object>> listRow;
-
-                Config.Kernel!.DataBase.SelectRequest(query, paramQuery, out columnsName, out listRow);
-
-                if (listRow.Count > 0)
-                    foreach (Dictionary<string, object> row in listRow)
+                var recordResult = await Config.Kernel!.DataBase.SelectRequestAsync(query);
+                if (recordResult.Result)
+                    foreach (Dictionary<string, object> row in recordResult.ListRow)
                     {
                         запис.Ціна = (decimal)row["Ціна"];
                         запис.Сума = запис.Кількість * запис.Ціна;
@@ -522,7 +516,7 @@ LIMIT 1
                         {
                             запис.Номенклатура = new Номенклатура_Pointer(selectPointer);
                             await Запис.ПісляЗміни_Номенклатура(запис);
-                            Запис.ОтриматиЦіну(запис);
+                            await Запис.ОтриматиЦіну(запис);
 
                             Store.SetValues(iter, запис.ToArray());
                         };
@@ -542,7 +536,7 @@ LIMIT 1
                         {
                             запис.Характеристика = new ХарактеристикиНоменклатури_Pointer(selectPointer);
                             await Запис.ПісляЗміни_Характеристика(запис);
-                            Запис.ОтриматиЦіну(запис);
+                            await Запис.ОтриматиЦіну(запис);
 
                             Store.SetValues(iter, запис.ToArray());
                         };
@@ -577,7 +571,7 @@ LIMIT 1
                         {
                             запис.ВидЦіни = new ВидиЦін_Pointer(selectPointer);
                             await Запис.ПісляЗміни_ВидЦіни(запис);
-                            Запис.ОтриматиЦіну(запис);
+                            await Запис.ОтриматиЦіну(запис);
 
                             Store.SetValues(iter, запис.ToArray());
                         };

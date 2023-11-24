@@ -194,6 +194,11 @@ namespace StorageAndTrade
         protected virtual void GetValue() { }
 
         /// <summary>
+        /// Збереження
+        /// </summary>
+        protected virtual ValueTask Save() { return new ValueTask(); }
+
+        /// <summary>
         /// Функція обробки перед збереження та після збереження
         /// </summary>
         /// <param name="closePage"></param>
@@ -201,7 +206,9 @@ namespace StorageAndTrade
         {
             GetValue();
 
+            Program.GeneralForm?.SensitiveNotebookPageToCode(this.Name, false);
             await Save();
+            Program.GeneralForm?.SensitiveNotebookPageToCode(this.Name, true);
 
             if (CallBack_OnSelectPointer != null && UnigueID != null)
                 CallBack_OnSelectPointer.Invoke(UnigueID);
@@ -214,11 +221,6 @@ namespace StorageAndTrade
             else
                 Program.GeneralForm?.RenameNotebookPageToCode(Caption, this.Name);
         }
-
-        /// <summary>
-        /// Збереження
-        /// </summary>
-        protected virtual ValueTask Save() { return new ValueTask(); }
 
         /// <summary>
         /// Записати повідомлення про помилку і вивести меседж

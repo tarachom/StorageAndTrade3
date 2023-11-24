@@ -393,6 +393,8 @@ namespace StorageAndTrade
 
         void GetValue()
         {
+            Program.GeneralForm?.SensitiveNotebookPageToCode(this.Name, false);
+
             //
             //Значення за замовчуванням
             //
@@ -431,6 +433,8 @@ namespace StorageAndTrade
 
             Константи.ЗавантаженняДанихІзСайтів.ЗавантаженняКурсівВалют_Const = ЗавантаженняДанихІзСайтів.Text;
             Константи.ЗавантаженняДанихІзСайтів.ЗавантаженняСпискуБанків_Const = ЗавантаженняСпискуБанківІзСайтів.Text;
+
+            Program.GeneralForm?.SensitiveNotebookPageToCode(this.Name, true);
         }
 
         void OnSaveClick(object? sender, EventArgs args)
