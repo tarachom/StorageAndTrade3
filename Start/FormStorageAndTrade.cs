@@ -40,6 +40,9 @@ namespace StorageAndTrade
         Notebook topNotebook = new Notebook() { Scrollable = true, EnablePopup = true, BorderWidth = 0, ShowBorder = false, TabPos = PositionType.Top };
         Statusbar statusBar = new Statusbar();
 
+        //Список для збереження історії послідовності відкриття вкладок
+        List<string> historyNotebookSwitchList = new List<string>();
+
         public FormStorageAndTrade() : base("")
         {
             SetDefaultSize(1200, 900);
@@ -51,7 +54,13 @@ namespace StorageAndTrade
             if (File.Exists(Program.IcoFileName))
                 SetDefaultIconFromFile(Program.IcoFileName);
 
-            HeaderBar headerBar = new HeaderBar() { Title = "\"Зберігання та Торгівля\" для України", Subtitle = "Облік складу, торгівлі та фінансів", ShowCloseButton = true };
+            HeaderBar headerBar = new HeaderBar()
+            {
+                Title = "\"Зберігання та Торгівля\" для України",
+                Subtitle = "Облік складу, торгівлі та фінансів",
+                ShowCloseButton = true
+            };
+
             Titlebar = headerBar;
 
             //Повнотекстовий пошук
@@ -68,9 +77,23 @@ namespace StorageAndTrade
             CreateLeftMenu(hBox);
 
             hBox.PackStart(topNotebook, true, true, 0);
+            topNotebook.SwitchPage += OnSwitchPageTopNotebook;
+
             vBox.PackStart(statusBar, false, false, 0);
 
             ShowAll();
+        }
+
+        //Переключення сторінок блокноту
+        void OnSwitchPageTopNotebook(object? sender, SwitchPageArgs args)
+        {
+            string currPageUID = args.Page.Name;
+
+            if (historyNotebookSwitchList.Contains(currPageUID))
+                historyNotebookSwitchList.Remove(currPageUID);
+
+            /* Поточна сторінка ставиться у кінець списку */
+            historyNotebookSwitchList.Add(currPageUID);
         }
 
         public async void SetCurrentUser()
@@ -150,7 +173,7 @@ namespace StorageAndTrade
         public void StartBackgroundTask()
         {
             //Токен для зупинки процесу обчислення (для випадку коли буде потреба зупинити фонові обчислення)
-            Program.ListCancellationToken.Add(CancellationTokenBackgroundTask = new CancellationTokenSource());
+            CancellationTokenBackgroundTask = new CancellationTokenSource();
 
             //Обчислення віртуальних залишків по регістрах
             CalculationVirtualBalances();
@@ -321,7 +344,7 @@ namespace StorageAndTrade
         /// <param name="tabName">Назва сторінки</param>
         /// <param name="pageWidget">Віджет для сторінки</param>
         /// <param name="insertPage">Вставити сторінку перед поточною</param>
-        public void CreateNotebookPage(string tabName, System.Func<Widget>? pageWidget, bool insertPage = false)
+        public void CreateNotebookPage(string tabName, Func<Widget>? pageWidget, bool insertPage = false)
         {
             int numPage;
             string codePage = Guid.NewGuid().ToString();
@@ -394,7 +417,15 @@ namespace StorageAndTrade
                 (Widget wg) =>
                 {
                     if (wg.Name == codePage)
+                    {
+                        if (historyNotebookSwitchList.Contains(codePage))
+                            historyNotebookSwitchList.Remove(codePage);
+
+                        if (historyNotebookSwitchList.Count > 0)
+                            CurrentNotebookPageToCode(topNotebook, historyNotebookSwitchList[historyNotebookSwitchList.Count - 1]);
+
                         notebook.DetachTab(wg);
+                    }
                 });
         }
 

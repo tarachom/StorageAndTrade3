@@ -557,9 +557,7 @@ namespace StorageAndTrade
                 CreateMessage(TypeMessage.Error, $"Не знайдений файл {initialFillingXmlFilePath}");
                 CreateMessage(TypeMessage.None, "Початкове заповнення перервано!");
             }
-
-            Program.RemoveCancellationToken(CancellationTokenThread);
-
+            
             ButtonSensitive(true);
 
             CreateMessage(TypeMessage.None, "\n\n\nГотово\n\n\n");

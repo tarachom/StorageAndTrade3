@@ -29,16 +29,26 @@ namespace StorageAndTrade
 {
     class Program
     {
+        #region Const
+
+        //Шлях до іконки
+        public static readonly string IcoFileName = AppContext.BaseDirectory + "images/form.ico";
+
+        #endregion
+
+        #region Global Var
+
         /// <summary>
-        /// Список токенів для управління потоками
-        /// При завершенні програми, всі потоки повинні також завершити свою роботу
+        /// Основна форма
         /// </summary>
-        public static List<CancellationTokenSource> ListCancellationToken = new List<CancellationTokenSource>();
+        public static FormStorageAndTrade? GeneralForm { get; set; }
 
         /// <summary>
         /// Авторизований користувач
         /// </summary>
         public static Користувачі_Pointer Користувач { get; set; } = new Користувачі_Pointer();
+
+        #endregion
 
         public static void Main()
         {
@@ -52,38 +62,7 @@ namespace StorageAndTrade
         /// </summary>
         public static void Quit()
         {
-            foreach (CancellationTokenSource cancellationTokenItem in ListCancellationToken)
-            {
-                try
-                {
-                    cancellationTokenItem.Cancel();
-                }
-                catch { }
-            }
-
             Application.Quit();
         }
-
-        /// <summary>
-        /// Видалення із списку ListCancellationToken використаного токена для завершення роботи потоку
-        /// </summary>
-        /// <param name="cancellationToken">Токен</param>
-        public static void RemoveCancellationToken(CancellationTokenSource? cancellationToken)
-        {
-            if (cancellationToken != null && ListCancellationToken.Contains(cancellationToken))
-                ListCancellationToken.Remove(cancellationToken);
-        }
-
-        /// <summary>
-        /// Основна форма
-        /// </summary>
-        public static FormStorageAndTrade? GeneralForm { get; set; }
-
-        #region Const
-
-        //Шлях до іконки
-        public static readonly string IcoFileName = AppContext.BaseDirectory + "images/form.ico";
-
-        #endregion
     }
 }
