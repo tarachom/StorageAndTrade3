@@ -58,12 +58,12 @@ namespace StorageAndTrade
 
             public object[] ToArray()
             {
-                return new object[]
-                {
+                return
+                [
                     new Gdk.Pixbuf(Image),
                     ID.ToString(),
                     Файл.Назва
-                };
+                ];
             }
 
             public static Запис Clone(Запис запис)

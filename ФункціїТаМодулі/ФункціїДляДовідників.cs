@@ -88,7 +88,7 @@ namespace StorageAndTrade
         /// Функція створює договори для контрагента
         /// </summary>
         /// <param name="Контрагент">Контрагент</param>
-        public static async void СтворитиДоговориКонтрагентаЗаЗамовчуванням(Довідники.Контрагенти_Pointer Контрагент)
+        public static async ValueTask СтворитиДоговориКонтрагентаЗаЗамовчуванням(Довідники.Контрагенти_Pointer Контрагент)
         {
             if (Контрагент.IsEmpty())
                 return;

@@ -32,7 +32,7 @@ namespace StorageAndTrade
         public Номенклатура_PointerControl НоменклатураВласник = new Номенклатура_PointerControl();
         public ХарактеристикиНоменклатури_PointerControl ХарактеристикиНоменклатуриВласник = new ХарактеристикиНоменклатури_PointerControl();
 
-        public ШтрихкодиНоменклатури(bool IsSelectPointer = false) : base()
+        public ШтрихкодиНоменклатури() : base()
         {
             TreeViewGrid.Model = ТабличніСписки.ШтрихкодиНоменклатури_Записи.Store;
             ТабличніСписки.ШтрихкодиНоменклатури_Записи.AddColumns(TreeViewGrid);

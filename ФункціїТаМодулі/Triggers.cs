@@ -55,14 +55,14 @@ namespace StorageAndTrade_1_0.Довідники
             await ValueTask.FromResult(true);
         }
 
-        public static void BeforeSave(Організації_Objest ДовідникОбєкт)
+        public static async ValueTask BeforeSave(Організації_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void AfterSave(Організації_Objest ДовідникОбєкт)
+        public static async ValueTask AfterSave(Організації_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask SetDeletionLabel(Організації_Objest ДовідникОбєкт, bool label)
@@ -92,14 +92,14 @@ namespace StorageAndTrade_1_0.Довідники
             await ValueTask.FromResult(true);
         }
 
-        public static void BeforeSave(Номенклатура_Objest ДовідникОбєкт)
+        public static async ValueTask BeforeSave(Номенклатура_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void AfterSave(Номенклатура_Objest ДовідникОбєкт)
+        public static async ValueTask AfterSave(Номенклатура_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask SetDeletionLabel(Номенклатура_Objest ДовідникОбєкт, bool label)
@@ -170,14 +170,14 @@ WHERE
             await ValueTask.FromResult(true);
         }
 
-        public static void BeforeSave(Виробники_Objest ДовідникОбєкт)
+        public static async ValueTask BeforeSave(Виробники_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void AfterSave(Виробники_Objest ДовідникОбєкт)
+        public static async ValueTask AfterSave(Виробники_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask SetDeletionLabel(Виробники_Objest ДовідникОбєкт, bool label)
@@ -207,14 +207,14 @@ WHERE
             await ValueTask.FromResult(true);
         }
 
-        public static void BeforeSave(ВидиНоменклатури_Objest ДовідникОбєкт)
+        public static async ValueTask BeforeSave(ВидиНоменклатури_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void AfterSave(ВидиНоменклатури_Objest ДовідникОбєкт)
+        public static async ValueTask AfterSave(ВидиНоменклатури_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask SetDeletionLabel(ВидиНоменклатури_Objest ДовідникОбєкт, bool label)
@@ -244,14 +244,14 @@ WHERE
             await ValueTask.FromResult(true);
         }
 
-        public static void BeforeSave(ПакуванняОдиниціВиміру_Objest ДовідникОбєкт)
+        public static async ValueTask BeforeSave(ПакуванняОдиниціВиміру_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void AfterSave(ПакуванняОдиниціВиміру_Objest ДовідникОбєкт)
+        public static async ValueTask AfterSave(ПакуванняОдиниціВиміру_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask SetDeletionLabel(ПакуванняОдиниціВиміру_Objest ДовідникОбєкт, bool label)
@@ -281,14 +281,14 @@ WHERE
             await ValueTask.FromResult(true);
         }
 
-        public static void BeforeSave(Валюти_Objest ДовідникОбєкт)
+        public static async ValueTask BeforeSave(Валюти_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void AfterSave(Валюти_Objest ДовідникОбєкт)
+        public static async ValueTask AfterSave(Валюти_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask SetDeletionLabel(Валюти_Objest ДовідникОбєкт, bool label)
@@ -334,14 +334,14 @@ WHERE
             await ValueTask.FromResult(true);
         }
 
-        public static void BeforeSave(Контрагенти_Objest ДовідникОбєкт)
+        public static async ValueTask BeforeSave(Контрагенти_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void AfterSave(Контрагенти_Objest ДовідникОбєкт)
+        public static async ValueTask AfterSave(Контрагенти_Objest ДовідникОбєкт)
         {
-            ФункціїДляДовідників.СтворитиДоговориКонтрагентаЗаЗамовчуванням(ДовідникОбєкт.GetDirectoryPointer());
+            await ФункціїДляДовідників.СтворитиДоговориКонтрагентаЗаЗамовчуванням(ДовідникОбєкт.GetDirectoryPointer());
         }
 
         public static async ValueTask SetDeletionLabel(Контрагенти_Objest ДовідникОбєкт, bool label)
@@ -386,14 +386,14 @@ WHERE
             await ValueTask.FromResult(true);
         }
 
-        public static void BeforeSave(Склади_Objest ДовідникОбєкт)
+        public static async ValueTask BeforeSave(Склади_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void AfterSave(Склади_Objest ДовідникОбєкт)
+        public static async ValueTask AfterSave(Склади_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask SetDeletionLabel(Склади_Objest ДовідникОбєкт, bool label)
@@ -423,14 +423,14 @@ WHERE
             await ValueTask.FromResult(true);
         }
 
-        public static void BeforeSave(ВидиЦін_Objest ДовідникОбєкт)
+        public static async ValueTask BeforeSave(ВидиЦін_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void AfterSave(ВидиЦін_Objest ДовідникОбєкт)
+        public static async ValueTask AfterSave(ВидиЦін_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask SetDeletionLabel(ВидиЦін_Objest ДовідникОбєкт, bool label)
@@ -460,14 +460,14 @@ WHERE
             await ValueTask.FromResult(true);
         }
 
-        public static void BeforeSave(ВидиЦінПостачальників_Objest ДовідникОбєкт)
+        public static async ValueTask BeforeSave(ВидиЦінПостачальників_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void AfterSave(ВидиЦінПостачальників_Objest ДовідникОбєкт)
+        public static async ValueTask AfterSave(ВидиЦінПостачальників_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask SetDeletionLabel(ВидиЦінПостачальників_Objest ДовідникОбєкт, bool label)
@@ -497,14 +497,14 @@ WHERE
             await ValueTask.FromResult(true);
         }
 
-        public static void BeforeSave(Користувачі_Objest ДовідникОбєкт)
+        public static async ValueTask BeforeSave(Користувачі_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void AfterSave(Користувачі_Objest ДовідникОбєкт)
+        public static async ValueTask AfterSave(Користувачі_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask SetDeletionLabel(Користувачі_Objest ДовідникОбєкт, bool label)
@@ -534,14 +534,14 @@ WHERE
             await ValueTask.FromResult(true);
         }
 
-        public static void BeforeSave(ФізичніОсоби_Objest ДовідникОбєкт)
+        public static async ValueTask BeforeSave(ФізичніОсоби_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void AfterSave(ФізичніОсоби_Objest ДовідникОбєкт)
+        public static async ValueTask AfterSave(ФізичніОсоби_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask SetDeletionLabel(ФізичніОсоби_Objest ДовідникОбєкт, bool label)
@@ -571,14 +571,14 @@ WHERE
             await ValueTask.FromResult(true);
         }
 
-        public static void BeforeSave(СтруктураПідприємства_Objest ДовідникОбєкт)
+        public static async ValueTask BeforeSave(СтруктураПідприємства_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void AfterSave(СтруктураПідприємства_Objest ДовідникОбєкт)
+        public static async ValueTask AfterSave(СтруктураПідприємства_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask SetDeletionLabel(СтруктураПідприємства_Objest ДовідникОбєкт, bool label)
@@ -608,14 +608,14 @@ WHERE
             await ValueTask.FromResult(true);
         }
 
-        public static void BeforeSave(КраїниСвіту_Objest ДовідникОбєкт)
+        public static async ValueTask BeforeSave(КраїниСвіту_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void AfterSave(КраїниСвіту_Objest ДовідникОбєкт)
+        public static async ValueTask AfterSave(КраїниСвіту_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask SetDeletionLabel(КраїниСвіту_Objest ДовідникОбєкт, bool label)
@@ -645,14 +645,14 @@ WHERE
             await ValueTask.FromResult(true);
         }
 
-        public static void BeforeSave(Файли_Objest ДовідникОбєкт)
+        public static async ValueTask BeforeSave(Файли_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void AfterSave(Файли_Objest ДовідникОбєкт)
+        public static async ValueTask AfterSave(Файли_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask SetDeletionLabel(Файли_Objest ДовідникОбєкт, bool label)
@@ -682,14 +682,14 @@ WHERE
             await ValueTask.FromResult(true);
         }
 
-        public static void BeforeSave(ХарактеристикиНоменклатури_Objest ДовідникОбєкт)
+        public static async ValueTask BeforeSave(ХарактеристикиНоменклатури_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void AfterSave(ХарактеристикиНоменклатури_Objest ДовідникОбєкт)
+        public static async ValueTask AfterSave(ХарактеристикиНоменклатури_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask SetDeletionLabel(ХарактеристикиНоменклатури_Objest ДовідникОбєкт, bool label)
@@ -719,14 +719,14 @@ WHERE
             await ValueTask.FromResult(true);
         }
 
-        public static void BeforeSave(Номенклатура_Папки_Objest ДовідникОбєкт)
+        public static async ValueTask BeforeSave(Номенклатура_Папки_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void AfterSave(Номенклатура_Папки_Objest ДовідникОбєкт)
+        public static async ValueTask AfterSave(Номенклатура_Папки_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask SetDeletionLabel(Номенклатура_Папки_Objest ДовідникОбєкт, bool label)
@@ -828,14 +828,14 @@ WHERE
             await ValueTask.FromResult(true);
         }
 
-        public static void BeforeSave(Контрагенти_Папки_Objest ДовідникОбєкт)
+        public static async ValueTask BeforeSave(Контрагенти_Папки_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void AfterSave(Контрагенти_Папки_Objest ДовідникОбєкт)
+        public static async ValueTask AfterSave(Контрагенти_Папки_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask SetDeletionLabel(Контрагенти_Папки_Objest ДовідникОбєкт, bool label)
@@ -941,14 +941,14 @@ WHERE
             await ValueTask.FromResult(true);
         }
 
-        public static void BeforeSave(Склади_Папки_Objest ДовідникОбєкт)
+        public static async ValueTask BeforeSave(Склади_Папки_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void AfterSave(Склади_Папки_Objest ДовідникОбєкт)
+        public static async ValueTask AfterSave(Склади_Папки_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask SetDeletionLabel(Склади_Папки_Objest ДовідникОбєкт, bool label)
@@ -1050,14 +1050,14 @@ WHERE
             await ValueTask.FromResult(true);
         }
 
-        public static void BeforeSave(Каси_Objest ДовідникОбєкт)
+        public static async ValueTask BeforeSave(Каси_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void AfterSave(Каси_Objest ДовідникОбєкт)
+        public static async ValueTask AfterSave(Каси_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask SetDeletionLabel(Каси_Objest ДовідникОбєкт, bool label)
@@ -1087,14 +1087,14 @@ WHERE
             await ValueTask.FromResult(true);
         }
 
-        public static void BeforeSave(БанківськіРахункиОрганізацій_Objest ДовідникОбєкт)
+        public static async ValueTask BeforeSave(БанківськіРахункиОрганізацій_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void AfterSave(БанківськіРахункиОрганізацій_Objest ДовідникОбєкт)
+        public static async ValueTask AfterSave(БанківськіРахункиОрганізацій_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask SetDeletionLabel(БанківськіРахункиОрганізацій_Objest ДовідникОбєкт, bool label)
@@ -1124,17 +1124,19 @@ WHERE
             await ValueTask.FromResult(true);
         }
 
-        public static void BeforeSave(ДоговориКонтрагентів_Objest ДовідникОбєкт)
+        public static async ValueTask BeforeSave(ДоговориКонтрагентів_Objest ДовідникОбєкт)
         {
             string НазваПереліченняЗКонфігурації =
                 Конфа.Config.Kernel!.Conf.Enums["ТипДоговорів"].Fields[ДовідникОбєкт.ТипДоговору.ToString()].Desc;
 
             ДовідникОбєкт.ТипДоговоруПредставлення = НазваПереліченняЗКонфігурації;
+
+            await ValueTask.FromResult(true);
         }
 
-        public static void AfterSave(ДоговориКонтрагентів_Objest ДовідникОбєкт)
+        public static async ValueTask AfterSave(ДоговориКонтрагентів_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask SetDeletionLabel(ДоговориКонтрагентів_Objest ДовідникОбєкт, bool label)
@@ -1164,14 +1166,14 @@ WHERE
             await ValueTask.FromResult(true);
         }
 
-        public static void BeforeSave(БанківськіРахункиКонтрагентів_Objest ДовідникОбєкт)
+        public static async ValueTask BeforeSave(БанківськіРахункиКонтрагентів_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void AfterSave(БанківськіРахункиКонтрагентів_Objest ДовідникОбєкт)
+        public static async ValueTask AfterSave(БанківськіРахункиКонтрагентів_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask SetDeletionLabel(БанківськіРахункиКонтрагентів_Objest ДовідникОбєкт, bool label)
@@ -1201,14 +1203,14 @@ WHERE
             await ValueTask.FromResult(true);
         }
 
-        public static void BeforeSave(СтаттяРухуКоштів_Objest ДовідникОбєкт)
+        public static async ValueTask BeforeSave(СтаттяРухуКоштів_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void AfterSave(СтаттяРухуКоштів_Objest ДовідникОбєкт)
+        public static async ValueTask AfterSave(СтаттяРухуКоштів_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask SetDeletionLabel(СтаттяРухуКоштів_Objest ДовідникОбєкт, bool label)
@@ -1239,7 +1241,7 @@ WHERE
             await ValueTask.FromResult(true);
         }
 
-        public static async void BeforeSave(СеріїНоменклатури_Objest ДовідникОбєкт)
+        public static async ValueTask BeforeSave(СеріїНоменклатури_Objest ДовідникОбєкт)
         {
             СеріїНоменклатури_Select серіїНоменклатури_Select = new СеріїНоменклатури_Select();
             серіїНоменклатури_Select.QuerySelect.Where.Add(new Where(СеріїНоменклатури_Const.Номер, Comparison.EQ, ДовідникОбєкт.Номер));
@@ -1252,9 +1254,9 @@ WHERE
             }
         }
 
-        public static void AfterSave(СеріїНоменклатури_Objest ДовідникОбєкт)
+        public static async ValueTask AfterSave(СеріїНоменклатури_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask SetDeletionLabel(СеріїНоменклатури_Objest ДовідникОбєкт, bool label)
@@ -1280,14 +1282,14 @@ WHERE
             await ValueTask.FromResult(true);
         }
 
-        public static void BeforeSave(ПартіяТоварівКомпозит_Objest ДовідникОбєкт)
+        public static async ValueTask BeforeSave(ПартіяТоварівКомпозит_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void AfterSave(ПартіяТоварівКомпозит_Objest ДовідникОбєкт)
+        public static async ValueTask AfterSave(ПартіяТоварівКомпозит_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask SetDeletionLabel(ПартіяТоварівКомпозит_Objest ДовідникОбєкт, bool label)
@@ -1317,14 +1319,14 @@ WHERE
             await ValueTask.FromResult(true);
         }
 
-        public static void BeforeSave(ВидиЗапасів_Objest ДовідникОбєкт)
+        public static async ValueTask BeforeSave(ВидиЗапасів_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void AfterSave(ВидиЗапасів_Objest ДовідникОбєкт)
+        public static async ValueTask AfterSave(ВидиЗапасів_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask SetDeletionLabel(ВидиЗапасів_Objest ДовідникОбєкт, bool label)
@@ -1354,14 +1356,14 @@ WHERE
             await ValueTask.FromResult(true);
         }
 
-        public static void BeforeSave(Банки_Objest ДовідникОбєкт)
+        public static async ValueTask BeforeSave(Банки_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void AfterSave(Банки_Objest ДовідникОбєкт)
+        public static async ValueTask AfterSave(Банки_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask SetDeletionLabel(Банки_Objest ДовідникОбєкт, bool label)
@@ -1389,14 +1391,14 @@ WHERE
             await ValueTask.FromResult(true);
         }
 
-        public static void BeforeSave(СкладськіПриміщення_Objest ДовідникОбєкт)
+        public static async ValueTask BeforeSave(СкладськіПриміщення_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void AfterSave(СкладськіПриміщення_Objest ДовідникОбєкт)
+        public static async ValueTask AfterSave(СкладськіПриміщення_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask SetDeletionLabel(СкладськіПриміщення_Objest ДовідникОбєкт, bool label)
@@ -1424,14 +1426,14 @@ WHERE
             await ValueTask.FromResult(true);
         }
 
-        public static void BeforeSave(СкладськіКомірки_Objest ДовідникОбєкт)
+        public static async ValueTask BeforeSave(СкладськіКомірки_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void AfterSave(СкладськіКомірки_Objest ДовідникОбєкт)
+        public static async ValueTask AfterSave(СкладськіКомірки_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask SetDeletionLabel(СкладськіКомірки_Objest ДовідникОбєкт, bool label)
@@ -1459,14 +1461,14 @@ WHERE
             await ValueTask.FromResult(true);
         }
 
-        public static void BeforeSave(ТипорозміриКомірок_Objest ДовідникОбєкт)
+        public static async ValueTask BeforeSave(ТипорозміриКомірок_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void AfterSave(ТипорозміриКомірок_Objest ДовідникОбєкт)
+        public static async ValueTask AfterSave(ТипорозміриКомірок_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask SetDeletionLabel(ТипорозміриКомірок_Objest ДовідникОбєкт, bool label)
@@ -1495,14 +1497,14 @@ WHERE
             await ValueTask.FromResult(true);
         }
 
-        public static void BeforeSave(СкладськіКомірки_Папки_Objest ДовідникОбєкт)
+        public static async ValueTask BeforeSave(СкладськіКомірки_Папки_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void AfterSave(СкладськіКомірки_Папки_Objest ДовідникОбєкт)
+        public static async ValueTask AfterSave(СкладськіКомірки_Папки_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask SetDeletionLabel(СкладськіКомірки_Папки_Objest ДовідникОбєкт, bool label)
@@ -1604,14 +1606,14 @@ WHERE
             await ValueTask.FromResult(true);
         }
 
-        public static void BeforeSave(Блокнот_Objest ДовідникОбєкт)
+        public static async ValueTask BeforeSave(Блокнот_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void AfterSave(Блокнот_Objest ДовідникОбєкт)
+        public static async ValueTask AfterSave(Блокнот_Objest ДовідникОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
         public static async ValueTask SetDeletionLabel(Блокнот_Objest ДовідникОбєкт, bool label)
@@ -1648,24 +1650,26 @@ namespace StorageAndTrade_1_0.Документи
             await ValueTask.FromResult(true);
         }
 
-        public static void BeforeSave(ЗамовленняПостачальнику_Objest ДокументОбєкт)
+        public static async ValueTask BeforeSave(ЗамовленняПостачальнику_Objest ДокументОбєкт)
         {
             ДокументОбєкт.Назва = $"{ЗамовленняПостачальнику_Const.FULLNAME} №{ДокументОбєкт.НомерДок} від {ДокументОбєкт.ДатаДок.ToShortDateString()}";
+
+            await ValueTask.FromResult(true);
         }
 
-        public static void AfterSave(ЗамовленняПостачальнику_Objest ДокументОбєкт)
+        public static async ValueTask AfterSave(ЗамовленняПостачальнику_Objest ДокументОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void SetDeletionLabel(ЗамовленняПостачальнику_Objest ДокументОбєкт, bool label)
+        public static async ValueTask SetDeletionLabel(ЗамовленняПостачальнику_Objest ДокументОбєкт, bool label)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void BeforeDelete(ЗамовленняПостачальнику_Objest ДокументОбєкт)
+        public static async ValueTask BeforeDelete(ЗамовленняПостачальнику_Objest ДокументОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -1688,17 +1692,19 @@ namespace StorageAndTrade_1_0.Документи
             await ValueTask.FromResult(true);
         }
 
-        public static void BeforeSave(ПоступленняТоварівТаПослуг_Objest ДокументОбєкт)
+        public static async ValueTask BeforeSave(ПоступленняТоварівТаПослуг_Objest ДокументОбєкт)
         {
             ДокументОбєкт.Назва = $"{ПоступленняТоварівТаПослуг_Const.FULLNAME} №{ДокументОбєкт.НомерДок} від {ДокументОбєкт.ДатаДок.ToShortDateString()}";
+
+            await ValueTask.FromResult(true);
         }
 
-        public static void AfterSave(ПоступленняТоварівТаПослуг_Objest ДокументОбєкт)
+        public static async ValueTask AfterSave(ПоступленняТоварівТаПослуг_Objest ДокументОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static async void SetDeletionLabel(ПоступленняТоварівТаПослуг_Objest ДокументОбєкт, bool label)
+        public static async ValueTask SetDeletionLabel(ПоступленняТоварівТаПослуг_Objest ДокументОбєкт, bool label)
         {
             // Помітка на виделення всіх партій
             if (label == true)
@@ -1718,9 +1724,9 @@ namespace StorageAndTrade_1_0.Документи
             }
         }
 
-        public static void BeforeDelete(ПоступленняТоварівТаПослуг_Objest ДокументОбєкт)
+        public static async ValueTask BeforeDelete(ПоступленняТоварівТаПослуг_Objest ДокументОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -1743,24 +1749,26 @@ namespace StorageAndTrade_1_0.Документи
             await ValueTask.FromResult(true);
         }
 
-        public static void BeforeSave(ЗамовленняКлієнта_Objest ДокументОбєкт)
+        public static async ValueTask BeforeSave(ЗамовленняКлієнта_Objest ДокументОбєкт)
         {
             ДокументОбєкт.Назва = $"{ЗамовленняКлієнта_Const.FULLNAME} №{ДокументОбєкт.НомерДок} від {ДокументОбєкт.ДатаДок.ToShortDateString()}";
+
+            await ValueTask.FromResult(true);
         }
 
-        public static void AfterSave(ЗамовленняКлієнта_Objest ДокументОбєкт)
+        public static async ValueTask AfterSave(ЗамовленняКлієнта_Objest ДокументОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void SetDeletionLabel(ЗамовленняКлієнта_Objest ДокументОбєкт, bool label)
+        public static async ValueTask SetDeletionLabel(ЗамовленняКлієнта_Objest ДокументОбєкт, bool label)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void BeforeDelete(ЗамовленняКлієнта_Objest ДокументОбєкт)
+        public static async ValueTask BeforeDelete(ЗамовленняКлієнта_Objest ДокументОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -1783,24 +1791,26 @@ namespace StorageAndTrade_1_0.Документи
             await ValueTask.FromResult(true);
         }
 
-        public static void BeforeSave(РеалізаціяТоварівТаПослуг_Objest ДокументОбєкт)
+        public static async ValueTask BeforeSave(РеалізаціяТоварівТаПослуг_Objest ДокументОбєкт)
         {
             ДокументОбєкт.Назва = $"{РеалізаціяТоварівТаПослуг_Const.FULLNAME} №{ДокументОбєкт.НомерДок} від {ДокументОбєкт.ДатаДок.ToShortDateString()}";
+
+            await ValueTask.FromResult(true);
         }
 
-        public static void AfterSave(РеалізаціяТоварівТаПослуг_Objest ДокументОбєкт)
+        public static async ValueTask AfterSave(РеалізаціяТоварівТаПослуг_Objest ДокументОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void SetDeletionLabel(РеалізаціяТоварівТаПослуг_Objest ДокументОбєкт, bool label)
+        public static async ValueTask SetDeletionLabel(РеалізаціяТоварівТаПослуг_Objest ДокументОбєкт, bool label)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void BeforeDelete(РеалізаціяТоварівТаПослуг_Objest ДокументОбєкт)
+        public static async ValueTask BeforeDelete(РеалізаціяТоварівТаПослуг_Objest ДокументОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -1822,24 +1832,26 @@ namespace StorageAndTrade_1_0.Документи
             await ValueTask.FromResult(true);
         }
 
-        public static void BeforeSave(ВстановленняЦінНоменклатури_Objest ДокументОбєкт)
+        public static async ValueTask BeforeSave(ВстановленняЦінНоменклатури_Objest ДокументОбєкт)
         {
             ДокументОбєкт.Назва = $"{ВстановленняЦінНоменклатури_Const.FULLNAME} №{ДокументОбєкт.НомерДок} від {ДокументОбєкт.ДатаДок.ToShortDateString()}";
+
+            await ValueTask.FromResult(true);
         }
 
-        public static void AfterSave(ВстановленняЦінНоменклатури_Objest ДокументОбєкт)
+        public static async ValueTask AfterSave(ВстановленняЦінНоменклатури_Objest ДокументОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void SetDeletionLabel(ВстановленняЦінНоменклатури_Objest ДокументОбєкт, bool label)
+        public static async ValueTask SetDeletionLabel(ВстановленняЦінНоменклатури_Objest ДокументОбєкт, bool label)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void BeforeDelete(ВстановленняЦінНоменклатури_Objest ДокументОбєкт)
+        public static async ValueTask BeforeDelete(ВстановленняЦінНоменклатури_Objest ДокументОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -1861,24 +1873,26 @@ namespace StorageAndTrade_1_0.Документи
             await ValueTask.FromResult(true);
         }
 
-        public static void BeforeSave(ПрихіднийКасовийОрдер_Objest ДокументОбєкт)
+        public static async ValueTask BeforeSave(ПрихіднийКасовийОрдер_Objest ДокументОбєкт)
         {
             ДокументОбєкт.Назва = $"{ПрихіднийКасовийОрдер_Const.FULLNAME} №{ДокументОбєкт.НомерДок} від {ДокументОбєкт.ДатаДок.ToShortDateString()}";
+
+            await ValueTask.FromResult(true);
         }
 
-        public static void AfterSave(ПрихіднийКасовийОрдер_Objest ДокументОбєкт)
+        public static async ValueTask AfterSave(ПрихіднийКасовийОрдер_Objest ДокументОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void SetDeletionLabel(ПрихіднийКасовийОрдер_Objest ДокументОбєкт, bool label)
+        public static async ValueTask SetDeletionLabel(ПрихіднийКасовийОрдер_Objest ДокументОбєкт, bool label)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void BeforeDelete(ПрихіднийКасовийОрдер_Objest ДокументОбєкт)
+        public static async ValueTask BeforeDelete(ПрихіднийКасовийОрдер_Objest ДокументОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -1900,24 +1914,26 @@ namespace StorageAndTrade_1_0.Документи
             await ValueTask.FromResult(true);
         }
 
-        public static void BeforeSave(РозхіднийКасовийОрдер_Objest ДокументОбєкт)
+        public static async ValueTask BeforeSave(РозхіднийКасовийОрдер_Objest ДокументОбєкт)
         {
             ДокументОбєкт.Назва = $"{РозхіднийКасовийОрдер_Const.FULLNAME} №{ДокументОбєкт.НомерДок} від {ДокументОбєкт.ДатаДок.ToShortDateString()}";
+
+            await ValueTask.FromResult(true);
         }
 
-        public static void AfterSave(РозхіднийКасовийОрдер_Objest ДокументОбєкт)
+        public static async ValueTask AfterSave(РозхіднийКасовийОрдер_Objest ДокументОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void SetDeletionLabel(РозхіднийКасовийОрдер_Objest ДокументОбєкт, bool label)
+        public static async ValueTask SetDeletionLabel(РозхіднийКасовийОрдер_Objest ДокументОбєкт, bool label)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void BeforeDelete(РозхіднийКасовийОрдер_Objest ДокументОбєкт)
+        public static async ValueTask BeforeDelete(РозхіднийКасовийОрдер_Objest ДокументОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -1939,24 +1955,26 @@ namespace StorageAndTrade_1_0.Документи
             await ValueTask.FromResult(true);
         }
 
-        public static void BeforeSave(ПереміщенняТоварів_Objest ДокументОбєкт)
+        public static async ValueTask BeforeSave(ПереміщенняТоварів_Objest ДокументОбєкт)
         {
             ДокументОбєкт.Назва = $"{ПереміщенняТоварів_Const.FULLNAME} №{ДокументОбєкт.НомерДок} від {ДокументОбєкт.ДатаДок.ToShortDateString()}";
+
+            await ValueTask.FromResult(true);
         }
 
-        public static void AfterSave(ПереміщенняТоварів_Objest ДокументОбєкт)
+        public static async ValueTask AfterSave(ПереміщенняТоварів_Objest ДокументОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void SetDeletionLabel(ПереміщенняТоварів_Objest ДокументОбєкт, bool label)
+        public static async ValueTask SetDeletionLabel(ПереміщенняТоварів_Objest ДокументОбєкт, bool label)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void BeforeDelete(ПереміщенняТоварів_Objest ДокументОбєкт)
+        public static async ValueTask BeforeDelete(ПереміщенняТоварів_Objest ДокументОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -1979,24 +1997,26 @@ namespace StorageAndTrade_1_0.Документи
             await ValueTask.FromResult(true);
         }
 
-        public static void BeforeSave(ПоверненняТоварівПостачальнику_Objest ДокументОбєкт)
+        public static async ValueTask BeforeSave(ПоверненняТоварівПостачальнику_Objest ДокументОбєкт)
         {
             ДокументОбєкт.Назва = $"{ПоверненняТоварівПостачальнику_Const.FULLNAME} №{ДокументОбєкт.НомерДок} від {ДокументОбєкт.ДатаДок.ToShortDateString()}";
+
+            await ValueTask.FromResult(true);
         }
 
-        public static void AfterSave(ПоверненняТоварівПостачальнику_Objest ДокументОбєкт)
+        public static async ValueTask AfterSave(ПоверненняТоварівПостачальнику_Objest ДокументОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void SetDeletionLabel(ПоверненняТоварівПостачальнику_Objest ДокументОбєкт, bool label)
+        public static async ValueTask SetDeletionLabel(ПоверненняТоварівПостачальнику_Objest ДокументОбєкт, bool label)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void BeforeDelete(ПоверненняТоварівПостачальнику_Objest ДокументОбєкт)
+        public static async ValueTask BeforeDelete(ПоверненняТоварівПостачальнику_Objest ДокументОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -2019,24 +2039,26 @@ namespace StorageAndTrade_1_0.Документи
             await ValueTask.FromResult(true);
         }
 
-        public static void BeforeSave(ПоверненняТоварівВідКлієнта_Objest ДокументОбєкт)
+        public static async ValueTask BeforeSave(ПоверненняТоварівВідКлієнта_Objest ДокументОбєкт)
         {
             ДокументОбєкт.Назва = $"{ПоверненняТоварівВідКлієнта_Const.FULLNAME} №{ДокументОбєкт.НомерДок} від {ДокументОбєкт.ДатаДок.ToShortDateString()}";
+
+            await ValueTask.FromResult(true);
         }
 
-        public static void AfterSave(ПоверненняТоварівВідКлієнта_Objest ДокументОбєкт)
+        public static async ValueTask AfterSave(ПоверненняТоварівВідКлієнта_Objest ДокументОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void SetDeletionLabel(ПоверненняТоварівВідКлієнта_Objest ДокументОбєкт, bool label)
+        public static async ValueTask SetDeletionLabel(ПоверненняТоварівВідКлієнта_Objest ДокументОбєкт, bool label)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void BeforeDelete(ПоверненняТоварівВідКлієнта_Objest ДокументОбєкт)
+        public static async ValueTask BeforeDelete(ПоверненняТоварівВідКлієнта_Objest ДокументОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -2059,24 +2081,26 @@ namespace StorageAndTrade_1_0.Документи
             await ValueTask.FromResult(true);
         }
 
-        public static void BeforeSave(АктВиконанихРобіт_Objest ДокументОбєкт)
+        public static async ValueTask BeforeSave(АктВиконанихРобіт_Objest ДокументОбєкт)
         {
             ДокументОбєкт.Назва = $"{АктВиконанихРобіт_Const.FULLNAME} №{ДокументОбєкт.НомерДок} від {ДокументОбєкт.ДатаДок.ToShortDateString()}";
+
+            await ValueTask.FromResult(true);
         }
 
-        public static void AfterSave(АктВиконанихРобіт_Objest ДокументОбєкт)
+        public static async ValueTask AfterSave(АктВиконанихРобіт_Objest ДокументОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void SetDeletionLabel(АктВиконанихРобіт_Objest ДокументОбєкт, bool label)
+        public static async ValueTask SetDeletionLabel(АктВиконанихРобіт_Objest ДокументОбєкт, bool label)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void BeforeDelete(АктВиконанихРобіт_Objest ДокументОбєкт)
+        public static async ValueTask BeforeDelete(АктВиконанихРобіт_Objest ДокументОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -2098,17 +2122,19 @@ namespace StorageAndTrade_1_0.Документи
             await ValueTask.FromResult(true);
         }
 
-        public static void BeforeSave(ВведенняЗалишків_Objest ДокументОбєкт)
+        public static async ValueTask BeforeSave(ВведенняЗалишків_Objest ДокументОбєкт)
         {
             ДокументОбєкт.Назва = $"{ВведенняЗалишків_Const.FULLNAME} №{ДокументОбєкт.НомерДок} від {ДокументОбєкт.ДатаДок.ToShortDateString()}";
+
+            await ValueTask.FromResult(true);
         }
 
-        public static void AfterSave(ВведенняЗалишків_Objest ДокументОбєкт)
+        public static async ValueTask AfterSave(ВведенняЗалишків_Objest ДокументОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static async void SetDeletionLabel(ВведенняЗалишків_Objest ДокументОбєкт, bool label)
+        public static async ValueTask SetDeletionLabel(ВведенняЗалишків_Objest ДокументОбєкт, bool label)
         {
             // Помітка на виделення всіх партій
             if (label == true)
@@ -2128,9 +2154,9 @@ namespace StorageAndTrade_1_0.Документи
             }
         }
 
-        public static void BeforeDelete(ВведенняЗалишків_Objest ДокументОбєкт)
+        public static async ValueTask BeforeDelete(ВведенняЗалишків_Objest ДокументОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -2154,24 +2180,26 @@ namespace StorageAndTrade_1_0.Документи
             await ValueTask.FromResult(true);
         }
 
-        public static void BeforeSave(ПерерахунокТоварів_Objest ДокументОбєкт)
+        public static async ValueTask BeforeSave(ПерерахунокТоварів_Objest ДокументОбєкт)
         {
             ДокументОбєкт.Назва = $"{ПерерахунокТоварів_Const.FULLNAME} №{ДокументОбєкт.НомерДок} від {ДокументОбєкт.ДатаДок.ToShortDateString()}";
+
+            await ValueTask.FromResult(true);
         }
 
-        public static void AfterSave(ПерерахунокТоварів_Objest ДокументОбєкт)
+        public static async ValueTask AfterSave(ПерерахунокТоварів_Objest ДокументОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void SetDeletionLabel(ПерерахунокТоварів_Objest ДокументОбєкт, bool label)
+        public static async ValueTask SetDeletionLabel(ПерерахунокТоварів_Objest ДокументОбєкт, bool label)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void BeforeDelete(ПерерахунокТоварів_Objest ДокументОбєкт)
+        public static async ValueTask BeforeDelete(ПерерахунокТоварів_Objest ДокументОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -2193,24 +2221,26 @@ namespace StorageAndTrade_1_0.Документи
             await ValueTask.FromResult(true);
         }
 
-        public static void BeforeSave(ПсуванняТоварів_Objest ДокументОбєкт)
+        public static async ValueTask BeforeSave(ПсуванняТоварів_Objest ДокументОбєкт)
         {
             ДокументОбєкт.Назва = $"{ПсуванняТоварів_Const.FULLNAME} №{ДокументОбєкт.НомерДок} від {ДокументОбєкт.ДатаДок.ToShortDateString()}";
+
+            await ValueTask.FromResult(true);
         }
 
-        public static void AfterSave(ПсуванняТоварів_Objest ДокументОбєкт)
+        public static async ValueTask AfterSave(ПсуванняТоварів_Objest ДокументОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void SetDeletionLabel(ПсуванняТоварів_Objest ДокументОбєкт, bool label)
+        public static async ValueTask SetDeletionLabel(ПсуванняТоварів_Objest ДокументОбєкт, bool label)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void BeforeDelete(ПсуванняТоварів_Objest ДокументОбєкт)
+        public static async ValueTask BeforeDelete(ПсуванняТоварів_Objest ДокументОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -2232,24 +2262,26 @@ namespace StorageAndTrade_1_0.Документи
             await ValueTask.FromResult(true);
         }
 
-        public static void BeforeSave(ВнутрішнєСпоживанняТоварів_Objest ДокументОбєкт)
+        public static async ValueTask BeforeSave(ВнутрішнєСпоживанняТоварів_Objest ДокументОбєкт)
         {
             ДокументОбєкт.Назва = $"{ВнутрішнєСпоживанняТоварів_Const.FULLNAME} №{ДокументОбєкт.НомерДок} від {ДокументОбєкт.ДатаДок.ToShortDateString()}";
+
+            await ValueTask.FromResult(true);
         }
 
-        public static void AfterSave(ВнутрішнєСпоживанняТоварів_Objest ДокументОбєкт)
+        public static async ValueTask AfterSave(ВнутрішнєСпоживанняТоварів_Objest ДокументОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void SetDeletionLabel(ВнутрішнєСпоживанняТоварів_Objest ДокументОбєкт, bool label)
+        public static async ValueTask SetDeletionLabel(ВнутрішнєСпоживанняТоварів_Objest ДокументОбєкт, bool label)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void BeforeDelete(ВнутрішнєСпоживанняТоварів_Objest ДокументОбєкт)
+        public static async ValueTask BeforeDelete(ВнутрішнєСпоживанняТоварів_Objest ДокументОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -2272,24 +2304,26 @@ namespace StorageAndTrade_1_0.Документи
             await ValueTask.FromResult(true);
         }
 
-        public static void BeforeSave(РахунокФактура_Objest ДокументОбєкт)
+        public static async ValueTask BeforeSave(РахунокФактура_Objest ДокументОбєкт)
         {
             ДокументОбєкт.Назва = $"{РахунокФактура_Const.FULLNAME} №{ДокументОбєкт.НомерДок} від {ДокументОбєкт.ДатаДок.ToShortDateString()}";
+
+            await ValueTask.FromResult(true);
         }
 
-        public static void AfterSave(РахунокФактура_Objest ДокументОбєкт)
+        public static async ValueTask AfterSave(РахунокФактура_Objest ДокументОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void SetDeletionLabel(РахунокФактура_Objest ДокументОбєкт, bool label)
+        public static async ValueTask SetDeletionLabel(РахунокФактура_Objest ДокументОбєкт, bool label)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void BeforeDelete(РахунокФактура_Objest ДокументОбєкт)
+        public static async ValueTask BeforeDelete(РахунокФактура_Objest ДокументОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -2311,24 +2345,26 @@ namespace StorageAndTrade_1_0.Документи
             await ValueTask.FromResult(true);
         }
 
-        public static void BeforeSave(РозміщенняТоварівНаСкладі_Objest ДокументОбєкт)
+        public static async ValueTask BeforeSave(РозміщенняТоварівНаСкладі_Objest ДокументОбєкт)
         {
             ДокументОбєкт.Назва = $"{РозміщенняТоварівНаСкладі_Const.FULLNAME} №{ДокументОбєкт.НомерДок} від {ДокументОбєкт.ДатаДок.ToShortDateString()}";
+
+            await ValueTask.FromResult(true);
         }
 
-        public static void AfterSave(РозміщенняТоварівНаСкладі_Objest ДокументОбєкт)
+        public static async ValueTask AfterSave(РозміщенняТоварівНаСкладі_Objest ДокументОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void SetDeletionLabel(РозміщенняТоварівНаСкладі_Objest ДокументОбєкт, bool label)
+        public static async ValueTask SetDeletionLabel(РозміщенняТоварівНаСкладі_Objest ДокументОбєкт, bool label)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void BeforeDelete(РозміщенняТоварівНаСкладі_Objest ДокументОбєкт)
+        public static async ValueTask BeforeDelete(РозміщенняТоварівНаСкладі_Objest ДокументОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -2350,24 +2386,26 @@ namespace StorageAndTrade_1_0.Документи
             await ValueTask.FromResult(true);
         }
 
-        public static void BeforeSave(ПереміщенняТоварівНаСкладі_Objest ДокументОбєкт)
+        public static async ValueTask BeforeSave(ПереміщенняТоварівНаСкладі_Objest ДокументОбєкт)
         {
             ДокументОбєкт.Назва = $"{ПереміщенняТоварівНаСкладі_Const.FULLNAME} №{ДокументОбєкт.НомерДок} від {ДокументОбєкт.ДатаДок.ToShortDateString()}";
+
+            await ValueTask.FromResult(true);
         }
 
-        public static void AfterSave(ПереміщенняТоварівНаСкладі_Objest ДокументОбєкт)
+        public static async ValueTask AfterSave(ПереміщенняТоварівНаСкладі_Objest ДокументОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void SetDeletionLabel(ПереміщенняТоварівНаСкладі_Objest ДокументОбєкт, bool label)
+        public static async ValueTask SetDeletionLabel(ПереміщенняТоварівНаСкладі_Objest ДокументОбєкт, bool label)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void BeforeDelete(ПереміщенняТоварівНаСкладі_Objest ДокументОбєкт)
+        public static async ValueTask BeforeDelete(ПереміщенняТоварівНаСкладі_Objest ДокументОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -2389,24 +2427,26 @@ namespace StorageAndTrade_1_0.Документи
             await ValueTask.FromResult(true);
         }
 
-        public static void BeforeSave(ЗбіркаТоварівНаСкладі_Objest ДокументОбєкт)
+        public static async ValueTask BeforeSave(ЗбіркаТоварівНаСкладі_Objest ДокументОбєкт)
         {
             ДокументОбєкт.Назва = $"{ЗбіркаТоварівНаСкладі_Const.FULLNAME} №{ДокументОбєкт.НомерДок} від {ДокументОбєкт.ДатаДок.ToShortDateString()}";
+
+            await ValueTask.FromResult(true);
         }
 
-        public static void AfterSave(ЗбіркаТоварівНаСкладі_Objest ДокументОбєкт)
+        public static async ValueTask AfterSave(ЗбіркаТоварівНаСкладі_Objest ДокументОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void SetDeletionLabel(ЗбіркаТоварівНаСкладі_Objest ДокументОбєкт, bool label)
+        public static async ValueTask SetDeletionLabel(ЗбіркаТоварівНаСкладі_Objest ДокументОбєкт, bool label)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void BeforeDelete(ЗбіркаТоварівНаСкладі_Objest ДокументОбєкт)
+        public static async ValueTask BeforeDelete(ЗбіркаТоварівНаСкладі_Objest ДокументОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -2428,24 +2468,26 @@ namespace StorageAndTrade_1_0.Документи
             await ValueTask.FromResult(true);
         }
 
-        public static void BeforeSave(РозміщенняНоменклатуриПоКоміркам_Objest ДокументОбєкт)
+        public static async ValueTask BeforeSave(РозміщенняНоменклатуриПоКоміркам_Objest ДокументОбєкт)
         {
             ДокументОбєкт.Назва = $"{РозміщенняНоменклатуриПоКоміркам_Const.FULLNAME} №{ДокументОбєкт.НомерДок} від {ДокументОбєкт.ДатаДок.ToShortDateString()}";
+
+            await ValueTask.FromResult(true);
         }
 
-        public static void AfterSave(РозміщенняНоменклатуриПоКоміркам_Objest ДокументОбєкт)
+        public static async ValueTask AfterSave(РозміщенняНоменклатуриПоКоміркам_Objest ДокументОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void SetDeletionLabel(РозміщенняНоменклатуриПоКоміркам_Objest ДокументОбєкт, bool label)
+        public static async ValueTask SetDeletionLabel(РозміщенняНоменклатуриПоКоміркам_Objest ДокументОбєкт, bool label)
         {
-
+            await ValueTask.FromResult(true);
         }
 
-        public static void BeforeDelete(РозміщенняНоменклатуриПоКоміркам_Objest ДокументОбєкт)
+        public static async ValueTask BeforeDelete(РозміщенняНоменклатуриПоКоміркам_Objest ДокументОбєкт)
         {
-
+            await ValueTask.FromResult(true);
         }
     }
 }
