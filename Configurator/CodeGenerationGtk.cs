@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 25.11.2023 15:53:25
+ * Дата конфігурації: 25.11.2023 20:56:54
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон Gtk.xslt
@@ -3574,7 +3574,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         {
             get
             {
-                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "folder_delete.png" : "folder.png");
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc.png" : "folder.png");
             }
         }
 
@@ -3725,7 +3725,7 @@ ORDER BY level, {Номенклатура_Папки_Const.Назва} ASC
         {
             get
             {
-                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "folder_delete.png" : "folder.png");
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc.png" : "folder.png");
             }
         }
 
@@ -3881,7 +3881,7 @@ ORDER BY level, {Номенклатура_Папки_Const.Назва} ASC
         {
             get
             {
-                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "folder_delete.png" : "folder.png");
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc.png" : "folder.png");
             }
         }
 
@@ -4032,7 +4032,7 @@ ORDER BY level, {Контрагенти_Папки_Const.Назва} ASC
         {
             get
             {
-                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "folder_delete.png" : "folder.png");
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc.png" : "folder.png");
             }
         }
 
@@ -4188,7 +4188,7 @@ ORDER BY level, {Контрагенти_Папки_Const.Назва} ASC
         {
             get
             {
-                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "folder_delete.png" : "folder.png");
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc.png" : "folder.png");
             }
         }
 
@@ -4339,7 +4339,7 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
         {
             get
             {
-                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "folder_delete.png" : "folder.png");
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc.png" : "folder.png");
             }
         }
 
@@ -7499,7 +7499,7 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
         {
             get
             {
-                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "folder_delete.png" : "folder.png");
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc.png" : "folder.png");
             }
         }
 
@@ -7656,7 +7656,7 @@ ORDER BY level, {СкладськіКомірки_Папки_Const.Назва} A
         {
             get
             {
-                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "folder_delete.png" : "folder.png");
+                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc.png" : "folder.png");
             }
         }
 
